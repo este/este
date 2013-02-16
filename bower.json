@@ -1,0 +1,12 @@
+{
+  "name": "este-boilerplate",
+  "version": "0.0.0",
+  "dependencies": {
+    "animate-css": "git://github.com/daneden/animate.css.git",
+    "closure-compiler": "http://closure-compiler.googlecode.com/files/compiler-latest.zip",
+    "closure-templates": "http://closure-templates.googlecode.com/files/closure-templates-for-javascript-latest.zip",
+    "este-library": "git://github.com/Steida/este-library.git",
+    "html5-boilerplate": "~4.1.0",
+    "normalize-css": "git://github.com/necolas/normalize.css.git"
+  }
+}

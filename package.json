@@ -1,0 +1,34 @@
+{
+  "name": "este",
+  "version": "0.0.1",
+  "description": "Este is development stack build on top of the many technologies",
+  "keywords": [
+    "Este",
+    "CoffeeScript",
+    "Google",
+    "Closure",
+    "Compiler",
+    "Stylus",
+    "Mocha",
+    "Soy"
+  ],
+  "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Steida/este.git"
+  },
+  "dependencies": {
+    "express": "*"
+  },
+  "devDependencies": {
+    "grunt": "git://github.com/gruntjs/grunt.git",
+    "grunt-contrib-stylus": "git://github.com/gruntjs/grunt-contrib-stylus.git",
+    "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git",
+    "grunt-contrib-coffee": "git://github.com/gruntjs/grunt-contrib-coffee.git",
+    "grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
+    "grunt-contrib-clean": "git://github.com/gruntjs/grunt-contrib-clean.git",
+    "grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
+    "grunt-este": "~0.0.1"
+  },
+  "license": "MIT"
+}
