@@ -27,8 +27,9 @@ Este is dev stack for web apps development with some unique features.
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
-  Run ```grunt```, open another cmd window and there run ```grunt command```.
-  Now development stack is running.
+  Run ```grunt```, then open another cmd window and there run ```grunt connect```.
+  Point your browser to `localhost:8000`.
+  Now development stack is ready.
 
 ## Usage
 
