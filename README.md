@@ -17,13 +17,18 @@ Este is dev stack for web apps development with some unique features.
   git clone https://github.com/Steida/este.git
   npm install
   bower install
-  grunt
   ```
+
+  Don't forget to install ```npm install grunt-cli -g```.
 
 #### For Windows Users
   - Install Java (latest), Python 2
   - Set environment variables for Python and Java
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
+
+## Getting Started
+  Run ```grunt```, open another cmd window and there run ```grunt command```.
+  Now development stack is running.
 
 ## Usage
 
