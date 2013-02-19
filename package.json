@@ -21,14 +21,14 @@
     "express": "*"
   },
   "devDependencies": {
-    "grunt": "git://github.com/gruntjs/grunt.git",
-    "grunt-contrib-stylus": "git://github.com/gruntjs/grunt-contrib-stylus.git",
-    "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git",
-    "grunt-contrib-coffee": "git://github.com/gruntjs/grunt-contrib-coffee.git",
-    "grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
-    "grunt-contrib-clean": "git://github.com/gruntjs/grunt-contrib-clean.git",
-    "grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
-    "grunt-este": "~0.0.1"
+    "grunt": "~0.4.0",
+    "grunt-contrib-stylus": "~0.4.0",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-contrib-coffee": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-connect": "~0.1.2",
+    "grunt-este": "~0.0.3"
   },
   "license": "MIT"
 }
