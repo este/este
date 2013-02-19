@@ -1,0 +1,18 @@
+{
+  "item left": {
+    "One item left.": "to translate: item left"
+  },
+  "items left": {
+    "Zero items left.": "to translate: items left",
+    "Two items left.": "to translate: items left",
+    "Few items left.": "to translate: items left",
+    "Many items left.": "to translate: items left",
+    "Other items left.": "to translate: items left"
+  },
+  "Thank you!": {
+    "Text shown in alert after click.": "!"
+  },
+  "to translate: {$action} on me": {
+    "text in some div calling to action": "to translate: to translate: {$action} on me"
+  }
+}

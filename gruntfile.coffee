@@ -1,28 +1,5 @@
 module.exports = (grunt) ->
 
-  ###
-    Start simple static server in another cmd window.
-      grunt connect
-
-    Start development. Compile all and start watching.
-      grunt run:app
-
-    Compiles code with closureBuilder.
-      grunt run:app --stage
-
-    Debug makes compiled code readable.
-      grunt run:app --stage=debug
-
-    Default task runs grunt run:app.
-      grunt
-      grunt --stage
-      grunt --stage=debug
-
-    No color means no friendly beeps too.
-      grunt --no-color
-
-  ###
-
   appDirs = [
     'bower_components/closure-library'
     'bower_components/closure-templates'
@@ -130,11 +107,20 @@ module.exports = (grunt) ->
           '--warning_level="VERBOSE"'
           '--define=goog.DEBUG=false'
         ]
+      
       app:
         options:
           root: appDirs
           outputFilePath: appCompiledOutputPath
           depsPath: appDepsPath
+      
+      appLocalized:
+        options:
+          root: appDirs
+          outputFilePath: appCompiledOutputPath
+          depsPath: appDepsPath
+          messagesPath: 'messages/app'
+          locales: ['cs', 'de']
 
     esteUnitTests:
       options:
@@ -147,6 +133,16 @@ module.exports = (grunt) ->
           'bower_components/este-library/**/*_test.js'
           'client/**/*_test.js'
         ]
+
+    esteExtractMessages:
+      app:
+        options:
+          root: [
+            'bower_components/este-library'
+            'client/app/js'
+          ]
+          messagesPath: 'messages/app'
+          languages: ['cs', 'de']
 
     connect:
       server:
