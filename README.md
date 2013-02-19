@@ -27,35 +27,41 @@ Este is dev stack for web apps development with some unique features.
 
 ## Usage
 
-  Start simple static server in another cmd window.
-  ```grunt connect```
-
-  Start development. Compile all and start watching.
+  Start development.
+  
   ```grunt run:app```
 
-  Compiles code with closureBuilder.
+  Start simple static server in another cmd window.
+
+  ```grunt connect```
+
+  Start development in stage mode. Compile code with Closure Compiler.
+  
   ```grunt run:app --stage```
 
   Debug makes compiled code readable.
+  
   ```grunt run:app --stage=debug```
 
-  Default task runs grunt run:app.
-  ```grunt```
-  ```grunt --stage```
-  ```grunt --stage=debug```
+  Default task is alias for run:app.
+  
+  ```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
 
   No color means no friendly beeps too.
+
   ```grunt --no-color```
 
   Extract messages.
+
   ```grunt esteExtractMessages```
 
-  Compile with localization.
+  Compile with localized messages.
+
   ```grunt esteBuilder:appLocalized```
 
   If you have Java 1.7+, enable fastCompilation option in gruntfile.coffee.
   It's huge speed improvement for Google Closure Compiler. From 13s to 3s in
-  my case.
+  my case for example.
 
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
