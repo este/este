@@ -71,7 +71,7 @@ module.exports = (grunt) ->
         options:
           depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
           # consider rename to outputFile
-          output_file: depsPath
+          outputFile: depsPath
           prefix: depsPrefix
           root: appDirs
 
