@@ -1,6 +1,6 @@
 # Este - robust, modular, comfortable
 
-Este is dev stack for web apps development with some unique features.
+Este is robust, modular and comfortable dev stack for web apps development with several unique features.
 
   - statically compiled CoffeeScript
   - Google Closure Tools
@@ -29,12 +29,12 @@ Este is dev stack for web apps development with some unique features.
 ## Getting Started
   Run ```grunt```, then open another cmd window and there run ```grunt connect```.
   Point your browser to `localhost:8000`.
-  Now development stack is ready.
+  Build something beautiful.
 
 ## Usage
 
   Start development.
-  
+
   ```grunt run:app```
 
   Start simple static server in another cmd window.
@@ -42,18 +42,18 @@ Este is dev stack for web apps development with some unique features.
   ```grunt connect```
 
   Start development in stage mode. Compile code with Closure Compiler.
-  
+
   ```grunt run:app --stage```
 
   Debug makes compiled code readable.
-  
+
   ```grunt run:app --stage=debug```
 
   Default task is alias for run:app.
-  
+
   ```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
 
-  Continuous integration mode. Without http server and files watchers.
+  Continuous integration mode. Without http server (not implemented yet) and files watchers.
 
   ```grunt --ci```
 
