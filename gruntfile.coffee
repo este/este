@@ -195,7 +195,8 @@ module.exports = (grunt) ->
     ]
     if grunt.option 'stage'
       tasks.push "esteBuilder:#{app}"
-    tasks.push 'esteWatch'
+    unless grunt.option 'ci'
+      tasks.push 'esteWatch'
 
     grunt.task.run tasks
 
