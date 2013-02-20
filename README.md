@@ -53,6 +53,10 @@ Este is dev stack for web apps development with some unique features.
   
   ```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
 
+  Continuous integration mode. Without http server and files watchers.
+
+  ```grunt --ci```
+
   No color means no friendly beeps too.
 
   ```grunt --no-color```
