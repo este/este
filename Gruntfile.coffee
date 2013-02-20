@@ -27,17 +27,16 @@ module.exports = (grunt) ->
     'client/app/js/**/*.soy'
   ]
 
-  appDepsPath =
-    'client/app/assets/deps.js'
-
   appCompiledOutputPath =
     'client/app/assets/app.js'
 
+  depsPath =
+    'bower_components/deps.js'
+
   # from closure base.js dir to app root dir
-  appDepsPrefix = '../../../../'
+  depsPrefix = '../../../../'
 
   grunt.initConfig
-    # pkg: grunt.file.readJSON('package.json')
 
     # same params as grunt-contrib-stylus
     esteStylus:
@@ -68,23 +67,13 @@ module.exports = (grunt) ->
         src: appTemplates
 
     esteDeps:
-      options:
-        depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
-      app:
+      all:
         options:
-          # TODO: consider make it global per projects
-          output_file: appDepsPath
-          prefix: appDepsPrefix
+          depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
+          # consider rename to outputFile
+          output_file: depsPath
+          prefix: depsPrefix
           root: appDirs
-      este:
-        options:
-          output_file: 'bower_components/este-library/deps.js'
-          prefix: '../../../../'
-          root: [
-            'bower_components/este-library'
-            'bower_components/closure-library'
-            'bower_components/closure-templates'
-          ]
 
     esteBuilder:
       options:
@@ -112,13 +101,13 @@ module.exports = (grunt) ->
         options:
           root: appDirs
           outputFilePath: appCompiledOutputPath
-          depsPath: appDepsPath
+          depsPath: depsPath
 
       appLocalized:
         options:
           root: appDirs
           outputFilePath: appCompiledOutputPath
-          depsPath: appDepsPath
+          depsPath: depsPath
           messagesPath: 'messages/app'
           locales: ['cs', 'de']
 
@@ -127,8 +116,8 @@ module.exports = (grunt) ->
         basePath: 'bower_components/closure-library/closure/goog/base.js'
       app:
         options:
-          depsPath: appDepsPath
-          prefix: appDepsPrefix
+          depsPath: depsPath
+          prefix: depsPrefix
         src: [
           'bower_components/este-library/**/*_test.js'
           'client/**/*_test.js'
@@ -159,12 +148,12 @@ module.exports = (grunt) ->
         js:
           files: appJsFiles
           tasks: if grunt.option('stage') then [
-            'esteDeps:app'
+            'esteDeps:all'
             'esteUnitTests:app'
             'esteBuilder:app'
           ]
           else [
-            'esteDeps:app'
+            'esteDeps:all'
             'esteUnitTests:app'
           ]
 
@@ -189,8 +178,7 @@ module.exports = (grunt) ->
       "esteStylus:#{app}"
       "esteCoffee:#{app}"
       "esteTemplates:#{app}"
-      "esteDeps:este"
-      "esteDeps:#{app}"
+      "esteDeps"
       "esteUnitTests:#{app}"
     ]
     if grunt.option 'stage'
