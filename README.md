@@ -15,6 +15,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 ## Install
   ```javascript
   git clone https://github.com/Steida/este.git
+  cd este
   npm install
   bower install
   ```
