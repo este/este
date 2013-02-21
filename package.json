@@ -22,13 +22,16 @@
   },
   "devDependencies": {
     "grunt": "~0.4.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-coffee": "~0.4.0",
+    "grunt-contrib-connect": "~0.1.2",
+    "grunt-contrib-jshint": "~0.1.1",
     "grunt-contrib-stylus": "~0.4.0",
     "grunt-contrib-watch": "~0.2.0",
-    "grunt-contrib-coffee": "~0.4.0",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-connect": "~0.1.2",
-    "grunt-este": "~0.0.3"
+    "grunt-este": "~0.0.5"
+  },
+  "scripts": {
+    "test": "grunt test --stage"
   },
   "license": "MIT"
 }
