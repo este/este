@@ -1,4 +1,4 @@
-# Este - robust, modular, comfortable
+# Este - robust, modular, comfortable [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este)
 
 Este is robust, modular and comfortable dev stack for web apps development with several unique features.
 
