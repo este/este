@@ -6,11 +6,11 @@
       "file_exclude_patterns": [
         // *.js we don't want to see because we have CoffeeScript
         "client/**/*.js",
-        "bower_components/**/*.js",
+        "bower_components/este-library/**/*.js",
 
         // *.css we don't want to see because we have Stylus
         "client/**/*.css",
-        "bower_components/**/*.css"
+        "bower_components/este-library/**/*.css"
       ]
     }
   ]
