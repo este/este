@@ -36,13 +36,17 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 
   Start development.
 
-  ```grunt run:app```
+  ```grunt run:app``` or just ```grunt```
+
+  Build project for continuous integration. No file watchers.
+
+  ```grunt build:app```
 
   Start simple static server in another cmd window.
 
   ```grunt connect```
 
-  Start development in stage mode. Compile code with Closure Compiler.
+  Start development in stage mode, code is compiled with Closure Compiler.
 
   ```grunt run:app --stage```
 
@@ -53,10 +57,6 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   Default task is alias for run:app.
 
   ```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
-
-  Continuous integration mode. Without http server (not implemented yet) and files watchers.
-
-  ```grunt --ci```
 
   No color means no friendly beeps too.
 

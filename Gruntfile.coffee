@@ -148,12 +148,12 @@ module.exports = (grunt) ->
         js:
           files: appJsFiles
           tasks: if grunt.option('stage') then [
-            'esteDeps:all'
+            'esteDeps'
             'esteUnitTests:app'
             'esteBuilder:app'
           ]
           else [
-            'esteDeps:all'
+            'esteDeps'
             'esteUnitTests:app'
           ]
 
@@ -173,7 +173,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-este'
 
-  grunt.registerTask 'run', 'To start development.', (app) ->
+  grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [
       "esteStylus:#{app}"
       "esteCoffee:#{app}"
@@ -183,9 +183,15 @@ module.exports = (grunt) ->
     ]
     if grunt.option 'stage'
       tasks.push "esteBuilder:#{app}"
-    unless grunt.option 'ci'
-      tasks.push 'esteWatch'
+    grunt.task.run tasks
 
+  grunt.registerTask 'run', 'Build app and run watchers.', (app) ->
+    tasks = [
+      "build:#{app}"
+      "esteWatch"
+    ]
     grunt.task.run tasks
 
   grunt.registerTask 'default', 'run:app'
+
+  grunt.registerTask 'test', 'build:app'
