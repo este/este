@@ -148,12 +148,12 @@ module.exports = (grunt) ->
         js:
           files: appJsFiles
           tasks: if grunt.option('stage') then [
-            'esteDeps'
+            'esteDeps:all'
             'esteUnitTests:app'
             'esteBuilder:app'
           ]
           else [
-            'esteDeps'
+            'esteDeps:all'
             'esteUnitTests:app'
           ]
 
@@ -188,7 +188,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'run', 'Build app and run watchers.', (app) ->
     tasks = [
       "build:#{app}"
-      "esteWatch"
+      "esteWatch:#{app}"
     ]
     grunt.task.run tasks
 
