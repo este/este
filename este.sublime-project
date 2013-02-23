@@ -4,13 +4,13 @@
     {
       "path": ".",
       "file_exclude_patterns": [
-        // *.js files we don't want to see because we have CoffeeScript
+        // hide all compiled files from este-library
         "bower_components/este-library/*.js",
-        "client/app/js/*.js",
-
-        // *.css files we don't want to see because we have Stylus
         "bower_components/este-library/*.css",
-        "client/app/css/*.css"
+
+        // hide all compiled files from client subdirs
+        "client/**/js/*.js",
+        "client/**/css/*.css"
       ]
     }
   ]
