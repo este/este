@@ -1,0 +1,17 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "file_exclude_patterns": [
+        // *.js files we don't want to see because we have CoffeeScript
+        "bower_components/este-library/*.js",
+        "client/app/js/*.js",
+
+        // *.css files we don't want to see because we have Stylus
+        "bower_components/este-library/*.css",
+        "client/app/css/*.css"
+      ]
+    }
+  ]
+}
