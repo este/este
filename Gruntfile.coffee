@@ -79,9 +79,9 @@ module.exports = (grunt) ->
       options:
         closureBuilderPath: 'bower_components/closure-library/closure/bin/build/closurebuilder.py'
         compilerPath: 'bower_components/closure-compiler/compiler.jar'
-        namespace: 'app.start'
         # needs Java 1.7+
         fastCompilation: false
+        depsPath: depsPath
         compilerFlags: if grunt.option('stage') == 'debug' then [
           '--output_wrapper="(function(){%output%})();"'
           '--compilation_level="ADVANCED_OPTIMIZATIONS"'
@@ -99,15 +99,15 @@ module.exports = (grunt) ->
 
       app:
         options:
+          namespace: 'app.start'
           root: appDirs
           outputFilePath: appCompiledOutputPath
-          depsPath: depsPath
 
       appLocalized:
         options:
+          namespace: 'app.start'
           root: appDirs
           outputFilePath: appCompiledOutputPath
-          depsPath: depsPath
           messagesPath: 'messages/app'
           locales: ['cs', 'de']
 
