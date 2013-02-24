@@ -70,7 +70,6 @@ module.exports = (grunt) ->
       all:
         options:
           depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
-          # consider rename to outputFile
           outputFile: depsPath
           prefix: depsPrefix
           root: appDirs
@@ -79,7 +78,7 @@ module.exports = (grunt) ->
       options:
         closureBuilderPath: 'bower_components/closure-library/closure/bin/build/closurebuilder.py'
         compilerPath: 'bower_components/closure-compiler/compiler.jar'
-        # needs Java 1.7+
+        # needs Java 1.7+, see http://goo.gl/iS3o6
         fastCompilation: false
         depsPath: depsPath
         compilerFlags: if grunt.option('stage') == 'debug' then [

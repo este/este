@@ -23,14 +23,19 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   Don't forget to install ```npm install grunt-cli -g```.
 
 #### For Windows Users
-  - Install Java (latest), Python 2
-  - Set environment variables for Python and Java
+  - install Java (latest), Python 2
+  - set environment variables for Python and Java
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
+#### Speed Up Google Closure Compiler
+  - ensure you have the latest Java installed
+  - enable esteBuilder fastCompilation option in Gruntfile.coffee
+
 ## Getting Started
-  Run ```grunt```, then open another cmd window and there run ```grunt connect```.
-  Point your browser to `localhost:8000`.
-  Build something beautiful.
+  - run ```grunt```
+  - open another cmd window, run ```grunt connect``` for simple web server
+  - point your browser to `localhost:8000`
+  - build something beautiful
 
 ## Usage
 
