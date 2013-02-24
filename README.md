@@ -80,7 +80,7 @@ my case for example.*
 
 Must-have Packages
 
-  - Package Control
+  - [Sublime Package Control](http://wbond.net/sublime_packages/package_control)
   - CoffeeScript
   - Stylus
   - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate)
