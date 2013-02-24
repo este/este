@@ -3,13 +3,14 @@
 Este is robust, modular and comfortable dev stack for web apps development with several unique features.
 
   - statically compiled CoffeeScript
-  - Google Closure Tools
+  - Google Closure Library
   - Mocha tests
   - Stylus styles
-  - Node.js server for development
-  - Este.js framework
+  - Soy templates
+  - Este library
     - MVC framework
     - quite a lot useful classes
+  - simple server for development
   - settings and snippets for Sublime Text
 
 ## Install
@@ -23,14 +24,14 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 Don't forget to install ```npm install grunt-cli -g```.
 
 #### For Windows Users
-  - install Java (latest), Python 2
+  - install Java, Python 2 (Python 3 does not work)
   - set environment variables for Python and Java
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
   - run ```grunt```
   - open another cmd window, run ```grunt connect``` for simple web server
-  - point your browser to `localhost:8000`
+  - point your browser to [localhost:8000](http://localhost:8000/)
   - build something beautiful
 
 ## Usage
@@ -82,15 +83,15 @@ Must-have Packages
   - Package Control
   - CoffeeScript
   - Stylus
-  - SoyTemplate (github.com/anvie/SoyTemplate)
+  - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate)
 
 Recommended Packages
 
-  - Open Related (github.com/vojtajina/sublime-OpenRelated)
+  - [github.com/vojtajina/sublime-OpenRelated](https://github.com/vojtajina/sublime-OpenRelated)
   - Clipboard History
   - JsFormat
 
-My Sublime Text settings and snippets are [here](https://github.com/Steida/Sublimetext-user-settings).
+My Sublime Text [settings and snippets](https://github.com/Steida/Sublimetext-user-settings).
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
 
 ## Stay Tuned
