@@ -20,16 +20,12 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   bower install
   ```
 
-  Don't forget to install ```npm install grunt-cli -g```.
+Don't forget to install ```npm install grunt-cli -g```.
 
 #### For Windows Users
   - install Java (latest), Python 2
   - set environment variables for Python and Java
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
-
-#### Speed Up Google Closure Compiler
-  - ensure you have the latest Java installed
-  - enable esteBuilder fastCompilation option in Gruntfile.coffee
 
 ## Getting Started
   - run ```grunt```
@@ -39,45 +35,45 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 
 ## Usage
 
-  Start development.
+Start development.
 
-  ```grunt run:app``` or just ```grunt```
+```grunt run:app``` or just ```grunt```
 
-  Build project for continuous integration. No file watchers.
+Build project for continuous integration. No file watchers.
 
-  ```grunt build:app```
+```grunt build:app```
 
-  Start simple static server in another cmd window.
+Start simple static server in another cmd window.
 
-  ```grunt connect```
+```grunt connect```
 
-  Start development in stage mode, code is compiled with Closure Compiler.
+Start development in stage mode, code is compiled with Closure Compiler.
 
-  ```grunt run:app --stage```
+```grunt run:app --stage```
 
-  Debug makes compiled code readable.
+Debug makes compiled code readable.
 
-  ```grunt run:app --stage=debug```
+```grunt run:app --stage=debug```
 
-  Default task is alias for run:app.
+Default task is alias for run:app.
 
-  ```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
+```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
 
-  No color means no friendly beeps too.
+No color means no friendly beeps too.
 
-  ```grunt --no-color```
+```grunt --no-color```
 
-  Extract messages.
+Extract messages.
 
-  ```grunt esteExtractMessages```
+```grunt esteExtractMessages```
 
-  Compile with localized messages.
+Compile with localized messages.
 
-  ```grunt esteBuilder:appLocalized```
+```grunt esteBuilder:appLocalized```
 
-  If you have Java 1.7+, enable fastCompilation option in gruntfile.coffee.
-  It's huge speed improvement for Google Closure Compiler. From 13s to 3s in
-  my case for example.
+*If you have Java 1.7+, enable fastCompilation option in gruntfile.coffee.
+It's huge speed improvement for Google Closure Compiler. From 13s to 3s in
+my case for example.*
 
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
@@ -96,6 +92,11 @@ Recommended Packages
 
 My Sublime Text settings and snippets are [here](https://github.com/Steida/Sublimetext-user-settings).
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
+
+## Stay Tuned
+  - [twitter.com/estejs](https://twitter.com/estejs)
+  - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
+  - [estejs.tumblr.com](http://estejs.tumblr.com)
 
 ## License
 Copyright (c) 2013 Daniel Steigerwald
