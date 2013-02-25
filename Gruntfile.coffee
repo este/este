@@ -38,6 +38,15 @@ module.exports = (grunt) ->
 
   grunt.initConfig
 
+    clean:
+      app:
+        src: [
+          'bower_components/este-library/**/*.js'
+          'bower_components/este-library/**/*.css'
+          'client/**/js/**/*.js'
+          'client/**/css/**/*.css'
+        ]
+
     # same params as grunt-contrib-stylus
     esteStylus:
       options:
@@ -174,6 +183,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [
+      "clean:#{app}"
       "esteStylus:#{app}"
       "esteCoffee:#{app}"
       "esteTemplates:#{app}"
