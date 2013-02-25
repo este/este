@@ -31,7 +31,7 @@ module.exports = (grunt) ->
     'client/app/assets/app.js'
 
   depsPath =
-    'bower_components/deps.js'
+    'client/deps.js'
 
   # from closure base.js dir to app root dir
   depsPrefix = '../../../../'
@@ -40,6 +40,8 @@ module.exports = (grunt) ->
 
     clean:
       app:
+        options:
+          force: true
         src: [
           'bower_components/este-library/**/*.js'
           'bower_components/este-library/**/*.css'
