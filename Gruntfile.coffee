@@ -175,6 +175,20 @@ module.exports = (grunt) ->
           files: appTemplates
           tasks: 'esteTemplates:app'
 
+    coffeelint:
+      options:
+        no_backticks:
+          level: 'ignore'
+        max_line_length:
+          level: 'ignore'
+      all:
+        files: [
+          expand: true
+          src: appCoffeeFiles
+          ext: '.js'
+        ]
+
+  grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-connect'
@@ -186,6 +200,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [
       "clean:#{app}"
+      "coffeelint"
       "esteStylus:#{app}"
       "esteCoffee:#{app}"
       "esteTemplates:#{app}"
