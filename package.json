@@ -21,15 +21,15 @@
     "express": "*"
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-coffee": "~0.4.0",
-    "grunt-contrib-connect": "~0.1.2",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-stylus": "~0.4.0",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-este": "~0.0.6",
-    "grunt-coffeelint": "0.0.6"
+    "grunt": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-stylus": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-este": "*",
+    "grunt-coffeelint": "*"
   },
   "scripts": {
     "test": "grunt test --stage"
