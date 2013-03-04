@@ -11,6 +11,8 @@ Este is robust, modular and comfortable dev stack for web apps development with 
     - MVC framework
     - quite a lot useful classes
   - simple server for development
+  - powerfull localization
+  - a lot of tasks for Grunt, file watching included
   - settings and snippets for Sublime Text
 
 ## Install
