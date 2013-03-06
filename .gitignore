@@ -1,7 +1,7 @@
 # http://git-scm.com/docs/gitignore
 
 .DS_Store
-este-boilerplate.sublime-workspace
+este.sublime-workspace
 
 bower_components/
 node_modules/
