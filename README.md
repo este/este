@@ -10,7 +10,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - Este library
     - MVC framework
     - quite a lot useful classes
-  - simple server for development
+  - Express app boilerplate
   - powerfull localization
   - a lot of tasks for Grunt, file watching included
   - settings and snippets for Sublime Text
