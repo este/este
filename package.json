@@ -2,6 +2,7 @@
   "name": "este",
   "version": "0.0.3",
   "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
+  "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
     "Este",
     "CoffeeScript",
@@ -12,27 +13,36 @@
     "Mocha",
     "Soy"
   ],
-  "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "repository": {
     "type": "git",
     "url": "https://github.com/Steida/este.git"
   },
   "dependencies": {
-    "express": "*"
+    "express": "3.x",
+    "jade": "*"
   },
   "devDependencies": {
     "grunt": "*",
+    "grunt-bg-shell": "*",
+    "grunt-coffeelint": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-coffee": "*",
-    "grunt-contrib-connect": "*",
+    "grunt-contrib-cssmin": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-stylus": "*",
     "grunt-contrib-watch": "*",
+    "grunt-develop": "*",
+    "grunt-env": "*",
     "grunt-este": "*",
-    "grunt-coffeelint": "*"
+    "grunt-release": "*",
+    "piping": "*"
   },
   "scripts": {
+    "start": "node server/app",
     "test": "grunt test --stage"
+  },
+  "engines": {
+    "node": "v0.8.x"
   },
   "license": "MIT"
 }

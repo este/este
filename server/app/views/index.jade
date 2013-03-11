@@ -1,0 +1,14 @@
+doctype 5
+head
+  meta(charset="utf-8")
+  title= title
+  include includes/assets
+body
+  h1 demos
+  ul
+    li: a(href="/bower_components/este-library/demos/index.html").
+      este demos
+    li: a(href="/bower_components/closure-library/closure/goog/demos/index.html").
+      closure demos
+  script
+    app.start({"someDataFromServer": 123});

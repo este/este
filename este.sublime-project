@@ -10,7 +10,10 @@
 
         // hide all compiled files from client subdirs
         "client/**/js/*.js",
-        "client/**/css/*.css"
+        "client/**/css/*.css",
+
+        // hide all compiled files from server subdirs
+        "server/*.js"
       ]
     }
   ]

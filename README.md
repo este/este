@@ -31,8 +31,7 @@ Don't forget to install ```npm install grunt-cli -g```.
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
-  - run ```grunt```
-  - open another cmd window, run ```grunt connect``` for simple web server
+  - run ```grunt```, or ```grunt --stage```
   - point your browser to [localhost:8000](http://localhost:8000/)
   - build something beautiful
 
@@ -42,13 +41,9 @@ Start development.
 
 ```grunt run:app``` or just ```grunt```
 
-Build project for continuous integration. No file watchers.
+Build project for continuous integration. No file watchers nor server.
 
 ```grunt build:app```
-
-Start simple static server in another cmd window.
-
-```grunt connect```
 
 Start development in stage mode, code is compiled with Closure Compiler.
 
@@ -97,9 +92,15 @@ My Sublime Text [settings and snippets](https://github.com/Steida/Sublimetext-us
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
 
 ## Stay Tuned
+
   - [twitter.com/estejs](https://twitter.com/estejs)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
   - [estejs.tumblr.com](http://estejs.tumblr.com)
+
+## Tips
+
+  - learn ```npm link``` and ```bower link```
+
 
 ## License
 Copyright (c) 2013 Daniel Steigerwald
