@@ -27,6 +27,8 @@ run = ->
       app.use '/bower_components', express.static 'bower_components'
     else
       app.use '/client', express.static 'client'
+      # because Este demos are uncompiled
+      app.use '/bower_components', express.static 'bower_components'
 
     app.use (req, res) ->
       res.status 400

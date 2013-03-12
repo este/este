@@ -1,6 +1,6 @@
 {
   "name": "este",
-  "version": "1.0.0",
+  "version": "1.0.0-11",
   "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
   "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
@@ -31,7 +31,6 @@
     "grunt-contrib-jshint": "*",
     "grunt-contrib-stylus": "*",
     "grunt-contrib-watch": "*",
-    "grunt-develop": "*",
     "grunt-env": "*",
     "grunt-este": "*",
     "grunt-release": "*",
@@ -44,5 +43,6 @@
   "engines": {
     "node": "v0.8.x"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "subdomain": "este"
 }
