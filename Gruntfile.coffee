@@ -218,6 +218,7 @@ module.exports = (grunt) ->
       app:
         cmd: 'node server/app'
 
+  grunt.loadNpmTasks 'grunt-bg-shell'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -228,7 +229,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-release'
-  grunt.loadNpmTasks 'grunt-bg-shell'
 
   grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [

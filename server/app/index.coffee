@@ -12,6 +12,7 @@ run = ->
     app.set 'title', 'github.com/Steida/este'
     app.set 'views', __dirname + '/views'
     app.set 'view engine', 'jade'
+    app.use express.compress()
     app.use express.favicon()
 
     if config.env.development
