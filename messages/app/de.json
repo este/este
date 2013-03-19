@@ -9,10 +9,52 @@
     "Many items left.": "to translate: items left",
     "Other items left.": "to translate: items left"
   },
-  "Thank you!": {
-    "Text shown in alert after click.": "!"
+  "Please enter only digits.": {
+    "Digits validator message.": "to translate: Please enter only digits."
   },
-  "to translate: {$action} on me": {
-    "text in some div calling to action": "to translate: to translate: {$action} on me"
+  "Please enter a valid email address.": {
+    "Email validator message.": "to translate: Please enter a valid email address."
+  },
+  "\\'{$value}\\' is not allowed.": {
+    "Exclusion validator message.": "to translate: \\'{$value}\\' is not allowed."
+  },
+  "Please enter a value in correct format.": {
+    "Format validator message.": "to translate: Please enter a value in correct format."
+  },
+  "Please enter one of these values: {$inclusion}.": {
+    "Inclusion validator message.": "to translate: Please enter one of these values: {$inclusion}."
+  },
+  "Please enter a value less than or equal to {$max}.": {
+    "Max validator message.": "to translate: Please enter a value less than or equal to {$max}."
+  },
+  "Please enter no more than {$maxLength} characters.": {
+    "MaxLength validator message.": "to translate: Please enter no more than {$maxLength} characters."
+  },
+  "Please enter a value greater than or equal to {$min}.": {
+    "Min validator message.": "to translate: Please enter a value greater than or equal to {$min}."
+  },
+  "Please enter at least {$minLength} characters.": {
+    "MinLength validator message.": "to translate: Please enter at least {$minLength} characters."
+  },
+  "Please enter a valid number.": {
+    "Number validator message.": "to translate: Please enter a valid number."
+  },
+  "Please enter a value between {$min} and {$max}.": {
+    "Range validator message.": "to translate: Please enter a value between {$min} and {$max}."
+  },
+  "Please enter a value between {$min} and {$max} characters long.": {
+    "RangeLength validator message.": "to translate: Please enter a value between {$min} and {$max} characters long."
+  },
+  "This field is required.": {
+    "Required validator message.": "to translate: This field is required."
+  },
+  "Please enter a valid URL.": {
+    "Url validator message.": "to translate: Please enter a valid URL."
+  },
+  "Thank you!": {
+    "Text shown in alert after click.": "to translate: Thank you!"
+  },
+  "{$action} on me": {
+    "text in some div calling to action": "to translate: {$action} on me"
   }
 }
