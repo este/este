@@ -1,23 +1,23 @@
-env = process.env.NODE_ENV || 'development'
-appName = 'Este'
+exports.appName = require('../../package').name
+
+exports.currentEnv = process.env.NODE_ENV || 'development'
+exports.env =
+  development: false
+  staging: false
+  production: false
+exports.env[exports.currentEnv] = true
+
 port = process.env.PORT || 8000
+exports.server =
+  port: port
+  apiKey: 'put-guid-here'
+  url: if exports.env.development
+    "http://localhost:#{port}/"
+  else
+    "http://#{process.env.SUBDOMAIN}.jit.su/"
 
-exports = module.exports =
-  appName: appName
-  server:
-    port: port
-    url: if process.env.SUBDOMAIN
-      "http://#{process.env.SUBDOMAIN}.jit.su/"
-    else
-      "http://localhost:#{port}/"
-  env:
-    development: false
-    staging: false
-    production: false
-  log:
-    __dirname + "/log/app_#{env}.log"
-  db:
-    url: "mongodb://localhost:27017/#{appName.toLowerCase()}_#{env}"
-
-exports.env[env] = true
-exports.currentEnv = env
+exports.db =
+  url: if exports.env.development
+    "mongodb://localhost/#{exports.appName.toLowerCase()}"
+  else
+    "mongodb://nodejitsu:e7846ccb0a17797a8dc85fd1e220f2b6@alex.mongohq.com:10088/nodejitsudb310160275"
