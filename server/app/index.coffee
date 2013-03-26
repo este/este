@@ -16,7 +16,7 @@ run = ->
     app.use express.favicon()
 
     if config.env.development
-      app.use express.logger 'dev'
+      # app.use express.logger 'dev'
       app.locals.pretty = true
 
     app.use express.bodyParser()
