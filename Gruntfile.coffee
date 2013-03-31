@@ -204,7 +204,7 @@ module.exports = (grunt) ->
         tag: true
         push: true
         pushTags: true
-        npm: false
+        npm: true
 
     env:
       development:
