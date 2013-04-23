@@ -1,6 +1,6 @@
 # Este - robust, modular, comfortable [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este)
 
-Este is robust, modular and comfortable dev stack for web apps development with several unique features.
+Este is robust, modular and comfortable dev stack for web apps development with several unique features. Closure and Este [demos](http://este.jit.su).
 
   - statically compiled CoffeeScript
   - Google Closure Library
@@ -16,14 +16,18 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - settings and snippets for Sublime Text
 
 ## Install
+  [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
+  ```npm install -g grunt-cli```
+  ```npm install -g bower```
+
+  Now, you can install Este:
+
   ```javascript
   git clone https://github.com/Steida/este.git
   cd este
   npm install
   bower install
   ```
-
-Don't forget to install ```npm install grunt-cli -g```.
 
 #### For Windows Users
   - install Java, Python 2 (Python 3 does not work)
