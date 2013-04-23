@@ -7,7 +7,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - Mocha tests
   - Stylus styles
   - Soy templates
-  - Este library
+  - [Este library](https://github.com/Steida/este-library)
     - MVC framework
     - quite a lot useful classes
   - Express app boilerplate
