@@ -17,10 +17,12 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 
 ## Install
   [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
-  ```npm install -g grunt-cli```
-  ```npm install -g bower```
+  ```javascript
+  npm install -g grunt-cli
+  npm install -g bower
+  ```
 
-  Now, you can install Este:
+  Now, you can install Este easily.
 
   ```javascript
   git clone https://github.com/Steida/este.git
