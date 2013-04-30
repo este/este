@@ -106,6 +106,7 @@ Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-su
 ## Tips
 
   - learn ```npm link``` and ```bower link```
+  - from time to time delete bower_components and node_component dirs, then run npm install and bower install, to update dev stack and its dependencies
 
 
 ## License
