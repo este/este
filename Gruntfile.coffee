@@ -8,6 +8,7 @@ module.exports = (grunt) ->
   coffeeScripts = [
     'bower_components/este-library/**/*.coffee'
     '!bower_components/este-library/Gruntfile.coffee'
+    '!bower_components/este-library/node_modules/**/*.*'
     'client/app/js/**/*.coffee'
     'server/**/*.coffee'
   ]
