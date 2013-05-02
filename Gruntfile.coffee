@@ -235,9 +235,9 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [
       "clean:#{app}"
-      "coffeelint"
       "esteStylus:#{app}"
       "esteCoffee:#{app}"
+      "coffeelint"
       "esteTemplates:#{app}"
       "esteDeps"
       "esteUnitTests:#{app}"
