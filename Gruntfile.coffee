@@ -93,8 +93,6 @@ module.exports = (grunt) ->
         closureBuilderPath: 'bower_components/closure-library/closure/bin/build/closurebuilder.py'
         compilerPath: 'bower_components/closure-compiler/compiler.jar'
         root: clientDirs
-        # needs Java 1.7+, see http://goo.gl/iS3o6
-        fastCompilation: false
         depsPath: clientDepsPath
         compilerFlags: if grunt.option('stage') == 'debug' then [
           '--output_wrapper="(function(){%output%})();"'
