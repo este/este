@@ -18,23 +18,23 @@
     "url": "https://github.com/Steida/este.git"
   },
   "dependencies": {
-    "express": "3.x",
-    "jade": "*"
+    "express": "~3.2.2",
+    "jade": "~0.30.0"
   },
   "devDependencies": {
-    "grunt": "*",
-    "grunt-bg-shell": "*",
-    "grunt-coffeelint": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-contrib-coffee": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-stylus": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-env": "*",
-    "grunt-este": "*",
-    "grunt-release": "*",
-    "piping": "*"
+    "grunt": "~0.4.1",
+    "grunt-bg-shell": "~2.0.1",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-stylus": "~0.5.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-env": "~0.4.0",
+    "grunt-este": "~0.3.2",
+    "grunt-release": "~0.3.3",
+    "piping": "~0.1.6"
   },
   "scripts": {
     "start": "node server/app",
