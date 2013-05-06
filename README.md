@@ -75,10 +75,6 @@ Compile with localized messages.
 
 ```grunt esteBuilder:appLocalized```
 
-*If you have Java 1.7+, enable fastCompilation option in gruntfile.coffee.
-It's huge speed improvement for Google Closure Compiler. From 13s to 3s in
-my case for example.*
-
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
 Must-have Packages
