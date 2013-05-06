@@ -30,7 +30,7 @@
     "grunt-contrib-cssmin": "~0.6.0",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-stylus": "~0.5.0",
-    "grunt-contrib-watch": "~0.4.0",
+    "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git",
     "grunt-env": "~0.4.0",
     "grunt-este": "git://github.com/Steida/grunt-este",
     "grunt-release": "~0.3.3",
