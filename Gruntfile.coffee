@@ -223,7 +223,7 @@ module.exports = (grunt) ->
       app:
         cmd: 'node server/app'
 
-    # remember, sudo ulimit -n 10480, see https://github.com/gruntjs/grunt-contrib-watch#how-do-i-fix-the-error-emfile-too-many-opened-file
+    # remember, sudo ulimit -n 2048, see https://github.com/gruntjs/grunt-contrib-watch#how-do-i-fix-the-error-emfile-too-many-opened-file
     watch:
       options:
         # nospawn option is must for livereload, also speeds up the reaction
