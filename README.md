@@ -12,9 +12,9 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - [Stylus](http://learnboost.github.io/stylus) styles
   - [Express](http://expressjs.com) app boilerplate
-  - internalization and strings localization
+  - powerful internalization and strings localization
   - driven by [Grunt](http://gruntjs.com), source files are recompiled on change
-  - snippets and settings for SublimeText
+  - snippets and settings for [SublimeText](http://www.sublimetext.com)
 
 ## Install
   [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
