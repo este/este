@@ -11,11 +11,11 @@ Este is robust, modular and comfortable dev stack for web apps development with 
     - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app) #unique
     - [some stuff]((https://github.com/Steida/este-library) #thingsIMadeForForMySelf
   - TDD and unit testing, [Mocha](http://visionmedia.github.io/mocha) #tryit
-  - [Stylus](http://learnboost.github.io/stylus/) styles #smart
-  - Express app boilerplate #simple
+  - [Stylus](http://learnboost.github.io/stylus) styles #smart
+  - [Express](http://expressjs.com) app boilerplate #simple
   - internalization and strings localization #productionReady
   - driven by [Grunt](http://gruntjs.com), source files are recompiled on change
-  - snippets and settings for Sublime Text #mine
+  - snippets and settings for SublimeText #mine
 
 ## Install
   [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
@@ -40,7 +40,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 
 ## Getting Started
   - run ```grunt```, or ```grunt --stage```
-  - point your browser to [localhost:8000](http://localhost:8000/)
+  - point your browser to [localhost:8000](http://localhost:8000)
   - build something beautiful
 
 ## Usage
