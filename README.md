@@ -1,19 +1,20 @@
 # Este - robust, modular, comfortable [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este)
 
-Este is robust, modular and comfortable dev stack for web apps development with several unique features. Closure and Este [demos](http://este.jit.su).
+Este is robust, modular and comfortable dev stack for web apps development with several unique features. [Demo](http://este.jit.su).
 
   - statically compiled CoffeeScript
-  - Google Closure Library
-  - Mocha tests
-  - Stylus styles
-  - Soy templates
+  - Google Closure Tools
   - [Este library](https://github.com/Steida/este-library)
-    - MVC framework
-    - quite a lot useful classes
-  - Express app boilerplate
-  - powerfull localization
-  - a lot of tasks for Grunt, file watching included
-  - settings and snippets for Sublime Text
+    - Este MVC framework
+    - other interesting stuff
+  - TDD ready, [Mocha](http://visionmedia.github.io/mocha)
+  - Stylus styles
+  - Soy templates (the most safe and fast JavaScript templates)
+  - simple Express app boilerplate
+  - powerfull internalization and strings localization
+  - driven by [Grunt](http://gruntjs.com)
+    - all sources are compiled on file change
+  - snippets and settings for Sublime Text
 
 ## Install
   [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
