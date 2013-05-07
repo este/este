@@ -9,7 +9,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
     - [Templates](https://developers.google.com/closure/templates) #safe #fast
   - Este library
     - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app) #unique
-    - [some stuff]((https://github.com/Steida/este-library) #thingIMadeForForMySelf
+    - [some stuff]((https://github.com/Steida/este-library) #thingsIMadeForForMySelf
   - TDD and unit testing, [Mocha](http://visionmedia.github.io/mocha) #tryit
   - [Stylus](http://learnboost.github.io/stylus/) styles #smart
   - Express app boilerplate #simple
