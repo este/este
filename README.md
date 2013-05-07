@@ -2,20 +2,19 @@
 
 Este is robust, modular and comfortable dev stack for web apps development with several unique features. [Demo](http://este.jit.su).
 
-  - statically compiled [CoffeeScript](http://coffeescript.org) #panacea
+  - statically compiled [CoffeeScript](http://coffeescript.org)
   - [Google Closure Tools](https://developers.google.com/closure)
-    - [Library](https://developers.google.com/closure/library) #robust
-    - [Compiler](https://developers.google.com/closure/compiler) #brilliant
-    - [Templates](https://developers.google.com/closure/templates) #safe #fast
-  - Este library
-    - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app) #unique
-    - [some stuff]((https://github.com/Steida/este-library) #thingsIMadeForForMySelf
-  - TDD and unit testing, [Mocha](http://visionmedia.github.io/mocha) #tryit
-  - [Stylus](http://learnboost.github.io/stylus) styles #smart
-  - [Express](http://expressjs.com) app boilerplate #simple
-  - internalization and strings localization #productionReady
+    - [Library](https://developers.google.com/closure/library)
+    - [Compiler](https://developers.google.com/closure/compiler)
+    - [Templates](https://developers.google.com/closure/templates)
+  - [Este library](https://github.com/Steida/este-library)
+    - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app)
+  - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
+  - [Stylus](http://learnboost.github.io/stylus) styles
+  - [Express](http://expressjs.com) app boilerplate
+  - internalization and strings localization
   - driven by [Grunt](http://gruntjs.com), source files are recompiled on change
-  - snippets and settings for SublimeText #mine
+  - snippets and settings for SublimeText
 
 ## Install
   [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
