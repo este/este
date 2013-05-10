@@ -14,6 +14,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - [Express](http://expressjs.com) app boilerplate
   - powerful internalization and strings localization
   - driven by [Grunt](http://gruntjs.com), source files are recompiled on change
+  - LiveReload on coffee, stylus, soy file change.
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
 
 ## Install
