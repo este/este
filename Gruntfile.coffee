@@ -131,14 +131,6 @@ module.exports = (grunt) ->
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
 
-      # Use this task to build all languages, /client/build/app_de.js etc.
-      # appLocalized:
-      #   options:
-      #     namespace: 'app.start'
-      #     outputFilePath: 'client/app/build/app.js'
-      #     messagesPath: 'messages/app'
-      #     locales: ['cs', 'de']
-
     esteUnitTests:
       options:
         depsPath: clientDepsPath
@@ -180,7 +172,7 @@ module.exports = (grunt) ->
         tag: true
         push: true
         pushTags: true
-        npm: true
+        npm: false
 
     env:
       development:
