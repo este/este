@@ -131,34 +131,13 @@ module.exports = (grunt) ->
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
 
-      # todomvc:
-      #   options:
-      #     namespace: 'este.demos.app.todomvc.start'
-      #     outputFilePath: 'client/app/build/app_todomvc.js'
-
-      # simple:
-      #   options:
-      #     namespace: 'este.demos.app.simple.start'
-      #     outputFilePath: 'client/app/build/app_simple.js'
-
-      # layout:
-      #   options:
-      #     namespace: 'este.demos.app.layout.start'
-      #     outputFilePath: 'client/app/build/app_layout.js'
-
+      # Use this task to build all languages, /client/build/app_de.js etc.
       # appLocalized:
       #   options:
       #     namespace: 'app.start'
       #     outputFilePath: 'client/app/build/app.js'
       #     messagesPath: 'messages/app'
       #     locales: ['cs', 'de']
-
-      # # Check all source files. Not 100% reliable yet, it can show invalid
-      # # warnings.
-      # all:
-      #   options:
-      #     namespace: '*'
-      #     outputFilePath: 'client/app/build/app.js'
 
     esteUnitTests:
       options:
