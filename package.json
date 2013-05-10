@@ -4,14 +4,14 @@
   "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
   "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
-    "Este",
-    "CoffeeScript",
-    "Google",
     "Closure",
+    "CoffeeScript",
     "Compiler",
-    "Stylus",
+    "Este",
+    "Google",
     "Mocha",
-    "Soy"
+    "Soy",
+    "Stylus"
   ],
   "repository": {
     "type": "git",
