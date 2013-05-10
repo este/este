@@ -25,13 +25,27 @@ module.exports = (grunt) ->
     'client/app/js'
   ]
 
-  clientJavaScripts = [
-    'bower_components/este-library/**/*.js'
-    'client/app/js/**/*.js'
-  ]
-
   clientDepsPath = 'client/deps.js'
   clientDepsPrefix = '../../../../'
+
+  jsWatchTasks = [
+    'esteDeps:all'
+    'esteUnitTests:app'
+  ]
+  if grunt.option 'stage'
+    jsWatchTasks.push 'esteBuilder:app'
+
+  grunt.loadNpmTasks 'grunt-bg-shell'
+  grunt.loadNpmTasks 'grunt-coffeelint'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-jshint'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-env'
+  grunt.loadNpmTasks 'grunt-este'
+  grunt.loadNpmTasks 'grunt-release'
 
   grunt.initConfig
     clean:
@@ -42,13 +56,13 @@ module.exports = (grunt) ->
           'bower_components/este-library/**/*.css'
           'bower_components/este-library/**/*.js'
           '!bower_components/este-library/node_modules/**/*.js'
+          'client/**/build/**.*'
           'client/**/css/**/*.css'
           'client/**/js/**/*.js'
           'server/**/*.js'
         ]
 
-    # same params as grunt-contrib-stylus
-    esteStylus:
+    stylus:
       options:
         'include css': true
         'compress': false
@@ -64,8 +78,7 @@ module.exports = (grunt) ->
         files:
           'client/app/build/app.css': 'client/app/css/app.css'
 
-    # same params as grunt-contrib-coffee
-    esteCoffee:
+    coffee:
       options:
         bare: true
       app:
@@ -75,24 +88,27 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
+    coffee2closure:
+      app:
+        files: [
+          expand: true
+          src: coffeeScripts
+          ext: '.js'
+        ]
+
     esteTemplates:
-      options:
-        soyToJsJarPath: 'bower_components/closure-templates/SoyToJsSrcCompiler.jar'
       app:
         src: soyTemplates
 
     esteDeps:
       all:
         options:
-          depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
           outputFile: clientDepsPath
           prefix: clientDepsPrefix
           root: clientDirs
 
     esteBuilder:
       options:
-        closureBuilderPath: 'bower_components/closure-library/closure/bin/build/closurebuilder.py'
-        compilerPath: 'bower_components/closure-compiler/compiler.jar'
         root: clientDirs
         depsPath: clientDepsPath
         compilerFlags: if grunt.option('stage') == 'debug' then [
@@ -115,12 +131,27 @@ module.exports = (grunt) ->
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
 
-      appLocalized:
-        options:
-          namespace: 'app.start'
-          outputFilePath: 'client/app/build/app.js'
-          messagesPath: 'messages/app'
-          locales: ['cs', 'de']
+      # todomvc:
+      #   options:
+      #     namespace: 'este.demos.app.todomvc.start'
+      #     outputFilePath: 'client/app/build/app_todomvc.js'
+
+      # simple:
+      #   options:
+      #     namespace: 'este.demos.app.simple.start'
+      #     outputFilePath: 'client/app/build/app_simple.js'
+
+      # layout:
+      #   options:
+      #     namespace: 'este.demos.app.layout.start'
+      #     outputFilePath: 'client/app/build/app_layout.js'
+
+      # appLocalized:
+      #   options:
+      #     namespace: 'app.start'
+      #     outputFilePath: 'client/app/build/app.js'
+      #     messagesPath: 'messages/app'
+      #     locales: ['cs', 'de']
 
       # # Check all source files. Not 100% reliable yet, it can show invalid
       # # warnings.
@@ -131,13 +162,12 @@ module.exports = (grunt) ->
 
     esteUnitTests:
       options:
-        basePath: 'bower_components/closure-library/closure/goog/base.js'
+        depsPath: clientDepsPath
+        prefix: clientDepsPrefix
       app:
-        options:
-          depsPath: clientDepsPath
-          prefix: clientDepsPrefix
         src: [
           'bower_components/este-library/**/*_test.js'
+          '!bower_components/este-library/node_modules/**/*.js'
           'client/**/*_test.js'
         ]
 
@@ -150,38 +180,6 @@ module.exports = (grunt) ->
           ]
           messagesPath: 'messages/app'
           languages: ['cs', 'de']
-
-    esteWatch:
-      app:
-        styl:
-          files: stylusStyles
-          tasks: if grunt.option('stage') then [
-            'esteStylus:app'
-            'cssmin:app'
-          ]
-          else [
-            'esteStylus:app'
-          ]
-
-        js:
-          files: clientJavaScripts
-          tasks: if grunt.option('stage') then [
-            'esteDeps:all'
-            'esteUnitTests:app'
-            'esteBuilder:app'
-          ]
-          else [
-            'esteDeps:all'
-            'esteUnitTests:app'
-          ]
-
-        coffee:
-          files: coffeeScripts
-          tasks: 'esteCoffee:app'
-
-        soy:
-          files: soyTemplates
-          tasks: 'esteTemplates:app'
 
     coffeelint:
       options:
@@ -219,23 +217,64 @@ module.exports = (grunt) ->
       app:
         cmd: 'node server/app'
 
-  grunt.loadNpmTasks 'grunt-bg-shell'
-  grunt.loadNpmTasks 'grunt-coffeelint'
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-contrib-cssmin'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
-  grunt.loadNpmTasks 'grunt-contrib-stylus'
-  grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-env'
-  grunt.loadNpmTasks 'grunt-este'
-  grunt.loadNpmTasks 'grunt-release'
+    # remember, sudo ulimit -n 10000 github.com/gruntjs/grunt-contrib-watch#how-do-i-fix-the-error-emfile-too-many-opened-file
+    watch:
+      options:
+        nospawn: true
+        livereload: true
+
+      stylus:
+        files: stylusStyles
+        tasks: if grunt.option('stage') then [
+          'stylus:app'
+          'cssmin:app'
+        ]
+        else [
+          'stylus:app'
+        ]
+
+      coffee:
+        files: coffeeScripts
+        tasks: [
+          'coffee:app'
+          'coffee2closure:app'
+        ].concat jsWatchTasks
+
+      soy:
+        files: soyTemplates
+        tasks: [
+          'esteTemplates:app'
+        ].concat jsWatchTasks
+
+  # ensure only changed files are compiled
+  grunt.event.on 'watch', (action, filepath) ->
+    fileExtension = filepath.split('.')[1]
+    switch fileExtension
+      when 'styl'
+        grunt.config ['stylus', 'app', 'files'], [
+          expand: true
+          src: filepath
+          ext: '.css'
+        ]
+      when 'coffee'
+        coffeeArgs = [
+          expand: true
+          src: filepath
+          ext: '.js'
+        ]
+        grunt.config ['coffee', 'app', 'files'], coffeeArgs
+        grunt.config ['coffee2closure', 'app', 'files'], coffeeArgs
+        grunt.config ['esteUnitTests', 'app', 'src'], filepath
+      when 'soy'
+        grunt.config ['esteTemplates', 'app'], filepath
+        grunt.config ['esteUnitTests', 'app', 'src'], filepath
 
   grunt.registerTask 'build', 'Build app.', (app) ->
     tasks = [
       "clean:#{app}"
-      "esteStylus:#{app}"
-      "esteCoffee:#{app}"
+      "stylus:#{app}"
+      "coffee:#{app}"
+      "coffee2closure:#{app}"
       "coffeelint"
       "esteTemplates:#{app}"
       "esteDeps"
@@ -251,7 +290,7 @@ module.exports = (grunt) ->
       "build:#{app}"
       if grunt.option 'stage' then 'env:stage' else 'env:development'
       "bgShell:#{app}"
-      "esteWatch:#{app}"
+      "watch"
     ]
     grunt.task.run tasks
 
