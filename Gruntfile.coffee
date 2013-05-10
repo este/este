@@ -97,23 +97,18 @@ module.exports = (grunt) ->
         ]
 
     esteTemplates:
-      options:
-        soyToJsJarPath: 'bower_components/closure-templates/SoyToJsSrcCompiler.jar'
       app:
         src: soyTemplates
 
     esteDeps:
       all:
         options:
-          depsWriterPath: 'bower_components/closure-library/closure/bin/build/depswriter.py'
           outputFile: clientDepsPath
           prefix: clientDepsPrefix
           root: clientDirs
 
     esteBuilder:
       options:
-        closureBuilderPath: 'bower_components/closure-library/closure/bin/build/closurebuilder.py'
-        compilerPath: 'bower_components/closure-compiler/compiler.jar'
         root: clientDirs
         depsPath: clientDepsPath
         compilerFlags: if grunt.option('stage') == 'debug' then [
@@ -167,11 +162,9 @@ module.exports = (grunt) ->
 
     esteUnitTests:
       options:
-        basePath: 'bower_components/closure-library/closure/goog/base.js'
+        depsPath: clientDepsPath
+        prefix: clientDepsPrefix
       app:
-        options:
-          depsPath: clientDepsPath
-          prefix: clientDepsPrefix
         src: [
           'bower_components/este-library/**/*_test.js'
           '!bower_components/este-library/node_modules/**/*.js'
@@ -224,13 +217,10 @@ module.exports = (grunt) ->
       app:
         cmd: 'node server/app'
 
-    # remember, sudo ulimit -n 10000, see https://github.com/gruntjs/grunt-contrib-watch#how-do-i-fix-the-error-emfile-too-many-opened-file
+    # remember, sudo ulimit -n 10000 github.com/gruntjs/grunt-contrib-watch#how-do-i-fix-the-error-emfile-too-many-opened-file
     watch:
       options:
-        # nospawn option is must for livereload, also speeds up the reaction
-        # time of the watch (usually 500ms faster for most).
         nospawn: true
-        # https://github.com/gruntjs/grunt-contrib-watch#live-reloading
         livereload: true
 
       stylus:
