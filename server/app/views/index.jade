@@ -15,6 +15,7 @@ body
       este demos
     li: a(href="/bower_components/closure-library/closure/goog/demos/index.html").
       closure demos
-  script(src="http://localhost:35729/livereload.js")
   script
     app.start({"someDataFromServer": 123});
+  if env == 'development'
+    script(src="http://localhost:35729/livereload.js")
