@@ -1,8 +1,7 @@
 .DS_Store
 este.sublime-workspace
 
-# Commented becauae Este demos are uncompiled, and we need that files for
-# este.jit.su nodejitsu hosted demo site.
+# commented because este.jit.su demos needs uncompiled sources
 # bower_components/
 bower_components/animate-css/
 bower_components/closure-compiler/
