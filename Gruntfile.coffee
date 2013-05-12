@@ -115,21 +115,49 @@ module.exports = (grunt) ->
           '--output_wrapper="(function(){%output%})();"'
           '--compilation_level="ADVANCED_OPTIMIZATIONS"'
           '--warning_level="VERBOSE"'
-          '--define=goog.DEBUG=true'
           '--debug=true'
           '--formatting="PRETTY_PRINT"'
+          '--define=goog.DEBUG=true'
         ]
         else [
           '--output_wrapper="(function(){%output%})();"'
           '--compilation_level="ADVANCED_OPTIMIZATIONS"'
           '--warning_level="VERBOSE"'
           '--define=goog.DEBUG=false'
+          # disable support for IE6/7, old Gecko, old Webkit
+          '--define=goog.net.XmlHttp.ASSUME_NATIVE_XHR=true'
+          '--define=goog.style.GET_BOUNDING_CLIENT_RECT_ALWAYS_EXISTS=true'
+          '--define=este.json.SUPPORTS_NATIVE_JSON=true'
         ]
 
       app:
         options:
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
+
+      # este.App demos compilation examples.
+      # todomvc:
+      #   options:
+      #     namespace: 'este.demos.app.todomvc.start'
+      #     outputFilePath: 'client/app/build/app_todomvc.js'
+
+      # simple:
+      #   options:
+      #     namespace: 'este.demos.app.simple.start'
+      #     outputFilePath: 'client/app/build/app_simple.js'
+
+      # layout:
+      #   options:
+      #     namespace: 'este.demos.app.layout.start'
+      #     outputFilePath: 'client/app/build/app_layout.js'
+
+      # Use this task to build all languages, /client/build/app_de.js etc.
+      # appLocalized:
+      #   options:
+      #     namespace: 'app.start'
+      #     outputFilePath: 'client/app/build/app.js'
+      #     messagesPath: 'messages/app'
+      #     locales: ['cs', 'de']
 
     esteUnitTests:
       options:
