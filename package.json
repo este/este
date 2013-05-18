@@ -30,15 +30,14 @@
     "grunt-contrib-cssmin": "~0.6.0",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-stylus": "~0.5.0",
-    "grunt-contrib-watch": "~0.4.2",
     "grunt-env": "~0.4.0",
-    "grunt-este": "~0.4.0",
+    "grunt-este": "~1.0.0",
     "grunt-release": "~0.3.3",
     "piping": "~0.1.6"
   },
   "scripts": {
     "start": "node server/app",
-    "test": "grunt test --stage"
+    "test": "grunt build --stage"
   },
   "engines": {
     "node": "v0.8.x"
