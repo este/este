@@ -45,29 +45,25 @@ Este is robust, modular and comfortable dev stack for web apps development with 
 
 ## Usage
 
-Start development.
+Start development. Build app then run development stack.
 
-```grunt run:app``` or just ```grunt```
+```grunt```
 
-Build project for continuous integration. No file watchers nor server.
+Start development in stage mode. Styles are minified and scripts compiled to be ready for production.
 
-```grunt build:app```
+```grunt --stage```
 
-Start development in stage mode, code is compiled with Closure Compiler.
+Build app. Useful for continuous integration.
 
-```grunt run:app --stage```
+```grunt build``` or ```grunt build --stage```
 
-Debug makes compiled code readable.
+Run development stack. Useful to skip building phase.
 
-```grunt run:app --stage=debug```
+```grunt run``` or ```grunt run --stage```
 
-Default task is alias for run:app.
+Debug makes Closure Compiled code readable.
 
-```grunt``` or ```grunt --stage``` or ```grunt --stage=debug```
-
-No color means no friendly beeps too.
-
-```grunt --no-color```
+```grunt build --stage=debug```
 
 Extract messages.
 
@@ -88,7 +84,6 @@ Must-have Packages
 
 Recommended Packages
 
-  - [github.com/vojtajina/sublime-OpenRelated](https://github.com/vojtajina/sublime-OpenRelated)
   - Clipboard History
   - JsFormat
 
@@ -105,7 +100,6 @@ Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-su
 
   - learn ```npm link``` and ```bower link```
   - from time to time delete bower_components and node_component dirs, then run npm install and bower install, to update dev stack and its dependencies
-
 
 ## License
 Copyright (c) 2013 Daniel Steigerwald
