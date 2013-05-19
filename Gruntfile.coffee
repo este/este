@@ -259,6 +259,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
+  grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-release'
 
   grunt.registerTask 'build', 'Build app.', (app = 'app') ->
