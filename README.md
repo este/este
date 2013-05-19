@@ -1,6 +1,6 @@
 # Este - robust, modular, comfortable [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este)
 
-Este is robust, modular and comfortable dev stack for web apps development with several unique features. [Demo](http://este.jit.su).
+Este is robust, modular and comfortable dev stack for web apps development with several unique features. [Demos](http://este.jit.su).
 
   - statically compiled [CoffeeScript](http://coffeescript.org)
   - [Google Closure Tools](https://developers.google.com/closure)
@@ -12,21 +12,20 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - [Stylus](http://learnboost.github.io/stylus) styles
   - [Express](http://expressjs.com) app boilerplate
-  - powerful internalization and strings localization
-  - driven by [Grunt](http://gruntjs.com), source files are recompiled on change
-  - LiveReload on coffee, stylus, soy file change.
+  - powerful internalization and localization
+  - driven by [Grunt](http://gruntjs.com)
+  - LiveReload included
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
 
 ## Install
-  [Node.js](http://nodejs.org) is required. Please, ensure you have also grunt-cli and bower modules installed.
-  ```javascript
+  [Node.js](http://nodejs.org) is required. Ensure you have grunt-cli and bower modules installed.
+  ```shell
   npm install -g grunt-cli
   npm install -g bower
   ```
 
-  Now, you can install Este easily.
-
-  ```javascript
+  Now, you can install Este.
+  ```shell
   git clone https://github.com/Steida/este.git
   cd este
   npm install
@@ -39,39 +38,41 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
-  - run ```grunt```, or ```grunt --stage```
+  - run ```grunt```
   - point your browser to [localhost:8000](http://localhost:8000)
   - build something beautiful
 
 ## Usage
+  
+  Start development. Build app, run development stack.
+  
+  ```
+  grunt
+  ```
+  
+  Start development in stage mode. Styles are minified and scripts compiled.
+  
+  ```grunt --stage```
+  
+  Build app. Useful for continuous integration.
+  
+  ```grunt build``` or ```grunt build --stage```
 
-Start development. Build app then run development stack.
+  Run development stack. Useful to skip building phase.
+  
+  ```grunt run``` or ```grunt run --stage```
 
-```grunt```
+  Debug makes Closure Compiled code readable.
+  
+  ```grunt build --stage=debug```
 
-Start development in stage mode. Styles are minified and scripts compiled to be ready for production.
+  Extract messages.
+  
+  ```grunt esteExtractMessages```
 
-```grunt --stage```
-
-Build app. Useful for continuous integration.
-
-```grunt build``` or ```grunt build --stage```
-
-Run development stack. Useful to skip building phase.
-
-```grunt run``` or ```grunt run --stage```
-
-Debug makes Closure Compiled code readable.
-
-```grunt build --stage=debug```
-
-Extract messages.
-
-```grunt esteExtractMessages```
-
-Compile with localized messages.
-
-```grunt esteBuilder:appLocalized```
+  Compile with localized messages.
+  
+  ```grunt esteBuilder:appLocalized```
 
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
@@ -81,9 +82,6 @@ Must-have Packages
   - CoffeeScript
   - Stylus
   - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate)
-
-Recommended Packages
-
   - Clipboard History
   - JsFormat
 
