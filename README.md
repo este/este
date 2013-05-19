@@ -43,35 +43,35 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - build something beautiful
 
 ## Usage
-  
+
   Start development. Build app, run development stack.
-  
+
   ```
   grunt
   ```
-  
+
   Start development in stage mode. Styles are minified and scripts compiled.
-  
+
   ```grunt --stage```
-  
+
   Build app. Useful for continuous integration.
-  
+
   ```grunt build``` or ```grunt build --stage```
 
   Run development stack. Useful to skip building phase.
-  
+
   ```grunt run``` or ```grunt run --stage```
 
   Debug makes Closure Compiled code readable.
-  
+
   ```grunt build --stage=debug```
 
   Extract messages.
-  
+
   ```grunt esteExtractMessages```
 
   Compile with localized messages.
-  
+
   ```grunt esteBuilder:appLocalized```
 
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
