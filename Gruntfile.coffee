@@ -120,6 +120,7 @@ module.exports = (grunt) ->
             flags = flags.concat [
               '--define=goog.DEBUG=false'
             ]
+          flags
 
       app:
         options:
