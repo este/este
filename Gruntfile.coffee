@@ -82,6 +82,18 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
+    coffeelint:
+      options:
+        no_backticks:
+          level: 'ignore'
+        max_line_length:
+          level: 'ignore'
+      all:
+        files: [
+          expand: true
+          src: coffeeScripts
+        ]
+
     esteTemplates:
       app:
         src: soyTemplates
@@ -154,18 +166,6 @@ module.exports = (grunt) ->
           ]
           messagesPath: 'messages/app'
           languages: ['en', 'cs']
-
-    coffeelint:
-      options:
-        no_backticks:
-          level: 'ignore'
-        max_line_length:
-          level: 'ignore'
-      all:
-        files: [
-          expand: true
-          src: coffeeScripts
-        ]
 
     release:
       options:
