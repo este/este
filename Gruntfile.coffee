@@ -1,27 +1,25 @@
 module.exports = (grunt) ->
 
   stylusStyles = [
-    'bower_components/este-library/**/*.styl'
+    'bower_components/este-library/este/**/*.styl'
     'client/app/css/**/*.styl'
   ]
 
   coffeeScripts = [
-    'bower_components/este-library/**/*.coffee'
-    '!bower_components/este-library/Gruntfile.coffee'
-    '!bower_components/este-library/node_modules/**/*.coffee'
+    'bower_components/este-library/este/**/*.coffee'
     'client/app/js/**/*.coffee'
     'server/**/*.coffee'
   ]
 
   soyTemplates = [
-    'bower_components/este-library/**/*.soy'
+    'bower_components/este-library/este/**/*.soy'
     'client/app/js/**/*.soy'
   ]
 
   clientDirs = [
     'bower_components/closure-library'
     'bower_components/closure-templates'
-    'bower_components/este-library'
+    'bower_components/este-library/este'
     'client/app/js'
   ]
 
@@ -38,12 +36,9 @@ module.exports = (grunt) ->
         options:
           force: true
         src: [
-          'bower_components/este-library/**/*.css'
-          'bower_components/este-library/**/*.js'
-          '!bower_components/este-library/node_modules/**/*.js'
+          'bower_components/este-library/este/**/*.{js,css}'
           'client/**/build/**.*'
-          'client/**/css/**/*.css'
-          'client/**/js/**/*.js'
+          'client/**/{js,css}/**/*.{js,css}'
           'server/**/*.js'
         ]
 
@@ -102,46 +97,34 @@ module.exports = (grunt) ->
       options:
         root: clientDirs
         depsPath: clientDepsPath
-        # TODO: make common params
-        compilerFlags: if grunt.option('stage') == 'debug' then [
-          '--output_wrapper="(function(){%output%})();"'
-          '--compilation_level="ADVANCED_OPTIMIZATIONS"'
-          '--warning_level="VERBOSE"'
-          '--debug=true'
-          '--formatting="PRETTY_PRINT"'
-          '--define=goog.DEBUG=true'
-        ]
-        else [
-          '--output_wrapper="(function(){%output%})();"'
-          '--compilation_level="ADVANCED_OPTIMIZATIONS"'
-          '--warning_level="VERBOSE"'
-          '--define=goog.DEBUG=false'
-          # disable support for IE6/7, old Gecko, old Webkit
-          '--define=goog.net.XmlHttp.ASSUME_NATIVE_XHR=true'
-          '--define=goog.style.GET_BOUNDING_CLIENT_RECT_ALWAYS_EXISTS=true'
-          '--define=este.json.SUPPORTS_NATIVE_JSON=true'
-        ]
+        compilerFlags: do ->
+          # you will love advanced compilation with verbose warning level
+          flags = [
+            '--output_wrapper="(function(){%output%})();"'
+            '--compilation_level="ADVANCED_OPTIMIZATIONS"'
+            '--warning_level="VERBOSE"'
+          ]
+          # remove code for ancient browsers (IE<8, very old Gecko/Webkit)
+          flags = flags.concat [
+            '--define=goog.net.XmlHttp.ASSUME_NATIVE_XHR=true'
+            '--define=este.json.SUPPORTS_NATIVE_JSON=true'
+            '--define=goog.style.GET_BOUNDING_CLIENT_RECT_ALWAYS_EXISTS=true'
+          ]
+          if grunt.option('stage') == 'debug'
+            flags = flags.concat [
+              '--debug=true'
+              '--formatting="PRETTY_PRINT"'
+              '--define=goog.DEBUG=true'
+            ]
+          else
+            flags = flags.concat [
+              '--define=goog.DEBUG=false'
+            ]
 
       app:
         options:
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
-
-      # este.App demos compilation examples.
-      # todomvc:
-      #   options:
-      #     namespace: 'este.demos.app.todomvc.start'
-      #     outputFilePath: 'client/app/build/app_todomvc.js'
-
-      # simple:
-      #   options:
-      #     namespace: 'este.demos.app.simple.start'
-      #     outputFilePath: 'client/app/build/app_simple.js'
-
-      # layout:
-      #   options:
-      #     namespace: 'este.demos.app.layout.start'
-      #     outputFilePath: 'client/app/build/app_layout.js'
 
       # Use this task to build all languages, /client/build/app_de.js etc.
       # appLocalized:
@@ -157,8 +140,7 @@ module.exports = (grunt) ->
         prefix: clientDepsPrefix
       app:
         src: [
-          'bower_components/este-library/**/*_test.js'
-          '!bower_components/este-library/node_modules/**/*.js'
+          'bower_components/este-library/este/**/*_test.js'
           'client/**/*_test.js'
         ]
 
@@ -166,11 +148,11 @@ module.exports = (grunt) ->
       app:
         options:
           root: [
-            'bower_components/este-library'
+            'bower_components/este-library/este'
             'client/app/js'
           ]
           messagesPath: 'messages/app'
-          languages: ['cs', 'de']
+          languages: ['en', 'cs']
 
     coffeelint:
       options:
@@ -212,8 +194,7 @@ module.exports = (grunt) ->
       options:
         dirs: [
           'bower_components/closure-library/**/'
-          'bower_components/este-library/**/'
-          '!bower_components/este-library/node_modules/**/'
+          'bower_components/este-library/este/**/'
           'client/**/{js,css}/**/'
         ]
 
