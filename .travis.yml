@@ -5,3 +5,9 @@ before_script:
   - npm install -g grunt-cli
   - npm install bower -g
   - bower install
+notifications:
+  webhooks:
+    urls:
+      - http://webhooks.nodejitsu.com/1/deploy
+    on_success: always
+    on_failure: never
