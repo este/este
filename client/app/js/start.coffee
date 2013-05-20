@@ -23,7 +23,8 @@ app.start = (data) ->
   html = app.templates.callToAction action: 'click'
 
   box = goog.dom.createDom 'div',
-    style: 'width: 250px; height: 80px; background-color: #ff8c55; padding: 1em'
+    style: 'width: 17em; height: 4em; background-color: #ff8c55; padding: 1em'
+    class: 'some-box'
     innerHTML: html
   document.body.appendChild box
 
