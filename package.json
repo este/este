@@ -34,6 +34,7 @@
     "grunt-este": "~2.0.0",
     "grunt-este-watch": "~0.0.3",
     "grunt-release": "~0.3.3",
+    "grunt-text-replace": "~0.3.2",
     "piping": "~0.1.6"
   },
   "scripts": {

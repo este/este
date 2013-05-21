@@ -31,6 +31,8 @@ module.exports = (grunt) ->
 
   grunt.initConfig
 
+    # build tasks
+
     clean:
       app:
         options:
@@ -58,11 +60,6 @@ module.exports = (grunt) ->
           src: 'client/app/css/app.styl'
           ext: '.css'
         ]
-
-    cssmin:
-      app:
-        files:
-          'client/app/build/app.css': 'client/app/css/app.css'
 
     coffee:
       options:
@@ -105,6 +102,34 @@ module.exports = (grunt) ->
           prefix: clientDepsPrefix
           root: clientDirs
 
+    esteUnitTests:
+      options:
+        depsPath: clientDepsPath
+        prefix: clientDepsPrefix
+      app:
+        src: [
+          'bower_components/este-library/este/**/*_test.js'
+          'client/**/*_test.js'
+        ]
+
+    # build --stage tasks, build for production
+
+    cssmin:
+      app:
+        files:
+          'client/app/build/app.css': 'client/app/css/app.css'
+
+    replace:
+      updateIndexEsteLibraryVersion:
+        src: 'server/app/views/index.jade'
+        overwrite: true
+        replacements: [
+          from: /\(v.+\)/g
+          to: ->
+            version = require('./bower_components/este-library/bower.json').version
+            "(v#{version})"
+        ]
+
     esteBuilder:
       options:
         root: clientDirs
@@ -139,7 +164,7 @@ module.exports = (grunt) ->
           namespace: 'app.start'
           outputFilePath: 'client/app/build/app.js'
 
-      # Use this task to build all languages, /client/build/app_de.js etc.
+      # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
       #   options:
       #     namespace: 'app.start'
@@ -147,35 +172,7 @@ module.exports = (grunt) ->
       #     messagesPath: 'messages/app'
       #     locales: ['cs', 'de']
 
-    esteUnitTests:
-      options:
-        depsPath: clientDepsPath
-        prefix: clientDepsPrefix
-      app:
-        src: [
-          'bower_components/este-library/este/**/*_test.js'
-          'client/**/*_test.js'
-        ]
-
-    esteExtractMessages:
-      app:
-        options:
-          root: [
-            'bower_components/este-library/este'
-            'client/app/js'
-          ]
-          messagesPath: 'messages/app'
-          languages: ['en', 'cs']
-
-    release:
-      options:
-        bump: true
-        add: true
-        commit: true
-        tag: true
-        push: true
-        pushTags: true
-        npm: false
+    # run tasks
 
     env:
       development:
@@ -186,10 +183,9 @@ module.exports = (grunt) ->
         NODE_ENV: 'production'
 
     bgShell:
-      _defaults:
-        bg: true
       app:
         cmd: 'node server/app'
+        bg: true
 
     esteWatch:
       options:
@@ -197,6 +193,7 @@ module.exports = (grunt) ->
           'bower_components/closure-library/**/'
           'bower_components/este-library/este/**/'
           'client/**/{js,css}/**/'
+          'server/**/'
         ]
 
       coffee: (filepath) ->
@@ -232,6 +229,28 @@ module.exports = (grunt) ->
         if grunt.option('stage')
           return 'cssmin:app'
 
+    # other tasks
+
+    esteExtractMessages:
+      app:
+        options:
+          root: [
+            'bower_components/este-library/este'
+            'client/app/js'
+          ]
+          messagesPath: 'messages/app'
+          languages: ['en', 'cs']
+
+    release:
+      options:
+        bump: true
+        add: true
+        commit: true
+        tag: true
+        push: true
+        pushTags: true
+        npm: false
+
   grunt.loadNpmTasks 'grunt-bg-shell'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -243,6 +262,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-release'
+  grunt.loadNpmTasks 'grunt-text-replace'
 
   grunt.registerTask 'build', 'Build app.', (app = 'app') ->
     tasks = [
@@ -256,8 +276,11 @@ module.exports = (grunt) ->
       "esteUnitTests:#{app}"
     ]
     if grunt.option 'stage'
-      tasks.push "cssmin:#{app}"
-      tasks.push "esteBuilder:#{app}"
+      tasks = tasks.concat [
+        "cssmin:#{app}"
+        "replace:updateIndexEsteLibraryVersion"
+        "esteBuilder:#{app}"
+      ]
     grunt.task.run tasks
 
   grunt.registerTask 'run', 'Run stack.', (app = 'app') ->
