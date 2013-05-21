@@ -4,5 +4,5 @@ if env == 'development'
   script(src="/client/deps.js")
   script(src="/client/app/js/start.js")
 else
-  link(href="/client/app/build/app.css", rel="stylesheet")
-  script(src="/client/app/build/app.js")
+  link(href="/client/app/build/app.css?v=#{appVersion}", rel="stylesheet")
+  script(src="/client/app/build/app.js?v=#{appVersion}")
