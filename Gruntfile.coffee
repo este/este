@@ -119,17 +119,6 @@ module.exports = (grunt) ->
         files:
           'client/app/build/app.css': 'client/app/css/app.css'
 
-    replace:
-      updateIndexEsteLibraryVersion:
-        src: 'server/app/views/index.jade'
-        overwrite: true
-        replacements: [
-          from: /\(v.+\)/g
-          to: ->
-            version = require('./bower_components/este-library/bower.json').version
-            "(v#{version})"
-        ]
-
     esteBuilder:
       options:
         root: clientDirs
@@ -173,6 +162,17 @@ module.exports = (grunt) ->
       #     locales: ['cs', 'de']
 
     # run tasks
+
+    replace:
+      esteLibraryVersion:
+        src: 'server/app/views/index.jade'
+        overwrite: true
+        replacements: [
+          from: /\(v.+\)/g
+          to: ->
+            version = require('./bower_components/este-library/bower.json').version
+            "(v#{version})"
+        ]
 
     env:
       development:
@@ -256,7 +256,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
@@ -278,13 +277,13 @@ module.exports = (grunt) ->
     if grunt.option 'stage'
       tasks = tasks.concat [
         "cssmin:#{app}"
-        "replace:updateIndexEsteLibraryVersion"
         "esteBuilder:#{app}"
       ]
     grunt.task.run tasks
 
   grunt.registerTask 'run', 'Run stack.', (app = 'app') ->
     grunt.task.run [
+      "replace:esteLibraryVersion"
       if grunt.option 'stage' then 'env:stage' else 'env:development'
       "bgShell:#{app}"
       "esteWatch"
