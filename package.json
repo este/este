@@ -41,7 +41,7 @@
     "test": "grunt build --stage"
   },
   "engines": {
-    "node": "v0.8.x"
+    "node": ">= 0.9.2"
   },
   "license": "MIT",
   "subdomain": "este"
