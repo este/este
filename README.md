@@ -42,6 +42,25 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - point your browser to [localhost:8000](http://localhost:8000)
   - build something beautiful
 
+### Development stack
+  Este development stack is driven by [Grunt](http://gruntjs.com) and
+  [grunt-este](https://github.com/Steida/grunt-este) tasks. It does many things.
+  
+  - watch changes, check syntax, and compile
+    - CoffeeScript
+    - Stylus
+    - Closure Templates
+  - run very fast unit tests immediately after file save
+  - calculate and resolve module dependencies 
+  - CoffeeLint source code
+  - extract and inject strings for localizations
+  - run development server
+  - join and minify css
+  - compile JavaScript
+  - update running app styles without browser reload (LiveReload)
+  - reload browser and server when needed
+  - prepare app for production
+
 ## Usage
 
   Start development. Build app, run development stack.
@@ -71,7 +90,7 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   Compile project with localized messages.
 
   ```grunt esteBuilder:appLocalized```
-
+  
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
 Must-have Packages
