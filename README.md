@@ -1,6 +1,6 @@
 # Este [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Este is robust, modular and comfortable dev stack for web apps development with several unique features. [Demos](http://este.jit.su).
+Este is robust, modular and comfortable dev stack and library for web apps development with several unique features. [Demos](http://este.jit.su).
 
   - statically compiled [CoffeeScript](http://coffeescript.org)
   - [Google Closure Tools](https://developers.google.com/closure)
@@ -9,13 +9,31 @@ Este is robust, modular and comfortable dev stack for web apps development with 
     - [Templates](https://developers.google.com/closure/templates)
   - [Este library](https://github.com/Steida/este-library)
     - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app)
+    - mobile support (tap and swipe events, touch enabled drag, hide address bar, local storage, and more)
   - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - [Stylus](http://learnboost.github.io/stylus) styles
-  - [Express](http://expressjs.com) app boilerplate
+  - Node.js [Express](http://expressjs.com) app boilerplate
   - powerful internalization and localization
-  - driven by [Grunt](http://gruntjs.com)
+  - driven by [Grunt](http://gruntjs.com) and [grunt-este](https://github.com/Steida/grunt-este)
   - LiveReload included
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
+  
+#### Dev stack
+  
+  - watch changes, check syntax, and compile
+    - CoffeeScript
+    - Stylus
+    - Closure Templates
+  - run very fast unit tests immediately after file save
+  - calculate and resolve module dependencies 
+  - CoffeeLint source code
+  - extract and inject strings for localizations
+  - run development server
+  - join and minify css
+  - compile JavaScript
+  - update running app styles without browser reload (LiveReload)
+  - reload browser and server when needed
+  - prepare app for production
 
 ## Install
   [Node.js](http://nodejs.org) is required. Ensure you have grunt-cli and bower modules installed.
@@ -41,25 +59,6 @@ Este is robust, modular and comfortable dev stack for web apps development with 
   - run ```grunt```
   - point your browser to [localhost:8000](http://localhost:8000)
   - build something beautiful
-
-### Development stack
-  Este development stack is driven by [Grunt](http://gruntjs.com) and
-  [grunt-este](https://github.com/Steida/grunt-este) tasks. It does many things.
-  
-  - watch changes, check syntax, and compile
-    - CoffeeScript
-    - Stylus
-    - Closure Templates
-  - run very fast unit tests immediately after file save
-  - calculate and resolve module dependencies 
-  - CoffeeLint source code
-  - extract and inject strings for localizations
-  - run development server
-  - join and minify css
-  - compile JavaScript
-  - update running app styles without browser reload (LiveReload)
-  - reload browser and server when needed
-  - prepare app for production
 
 ## Usage
 
