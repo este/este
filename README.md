@@ -2,7 +2,7 @@
 
 Este is robust, modular and comfortable dev stack and library for web apps development with several unique features. [Demos](http://este.jit.su).
 
-  - statically compiled [CoffeeScript](http://coffeescript.org)
+  - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
   - [Google Closure Tools](https://developers.google.com/closure)
     - [Library](https://developers.google.com/closure/library)
     - [Compiler](https://developers.google.com/closure/compiler)
