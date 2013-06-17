@@ -1,6 +1,6 @@
 {
   "name": "este",
-  "version": "3.4.0",
+  "version": "3.4.0-4",
   "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
   "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
@@ -41,8 +41,13 @@
     "test": "grunt build --stage"
   },
   "engines": {
-    "node": ">= 0.9.2"
+    "node": "v0.8.x"
   },
   "license": "MIT",
-  "subdomain": "este"
+  "subdomain": "este",
+  "contributors": [
+    "Steida <daniel@steigerwald.cz>",
+    "Michael Czolko <michael@czolko.cz>",
+    "VojtechBartos <me@vojtechbartos.cz>"
+  ]
 }
