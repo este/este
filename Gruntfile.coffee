@@ -256,6 +256,12 @@ module.exports = (grunt) ->
         pushTags: true
         npm: false
 
+    'npm-contributors':
+      options:
+        file: 'package.json'
+        commit: false
+        commitMessage: 'Update contributors'
+
   grunt.loadNpmTasks 'grunt-bg-shell'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -265,6 +271,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-env'
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
+  grunt.loadNpmTasks 'grunt-npm'
   grunt.loadNpmTasks 'grunt-release'
   grunt.loadNpmTasks 'grunt-text-replace'
 
