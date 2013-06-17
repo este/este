@@ -129,6 +129,8 @@ module.exports = (grunt) ->
             '--output_wrapper="(function(){%output%})();"'
             '--compilation_level="ADVANCED_OPTIMIZATIONS"'
             '--warning_level="VERBOSE"'
+            # experimental stuff
+            # '--use_types_for_optimization'
           ]
           # remove code for ancient browsers (IE<8, very old Gecko/Webkit)
           flags = flags.concat [
