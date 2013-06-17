@@ -123,6 +123,8 @@ module.exports = (grunt) ->
       options:
         root: clientDirs
         depsPath: clientDepsPath
+        # Enable faster compilation for Windows with Java 1.7+
+        # javaFlags: ['-XX:+TieredCompilation']
         compilerFlags: do ->
           # you will love advanced compilation with verbose warning level
           flags = [
