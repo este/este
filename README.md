@@ -1,6 +1,6 @@
 # Este [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Este is robust, modular and comfortable dev stack and library for web apps development with several unique features. [Demos](http://este.jit.su).
+Este is robust, modular and comfortable dev stack and library for web apps development with several unique features.
 
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
   - [Google Closure Tools](https://developers.google.com/closure)
@@ -17,6 +17,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   - driven by [Grunt](http://gruntjs.com) and [grunt-este](https://github.com/Steida/grunt-este)
   - LiveReload included
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
+  - [Demos](http://este.jit.su)
   
 #### Dev stack
   
@@ -58,7 +59,20 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 ## Getting Started
   - run ```grunt```
   - point your browser to [localhost:8000](http://localhost:8000)
-  - build something beautiful
+  - build something beautiful 
+
+## How to Learn Este
+
+  Take a look at project structure. ```server``` directory contains server-side backend code, in this case
+  it's Node.js Express server, but we can use any backend of course. Este is client-side technology
+  and it's possible to create Este app that don't require any backend at all.
+  
+  ```client``` directory contains client-side apps. By default, only ```app``` is needed. But it's not rare that
+  our project needs several separated sub-projects, for example: ```site```, ```app```, ```administration```.
+  
+  Take a look at app entry point [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee),
+  check Este [demos](https://github.com/Steida/este-library/tree/master/este/demos) or [TodoMVC demo](https://github.com/Steida/este-library/tree/master/este/demos/app/todomvc).
+  Learn from well documented source code and demos.
 
 ## Usage
 
