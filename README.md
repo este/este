@@ -59,7 +59,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 ## Getting Started
   - run ```grunt```
   - point your browser to [localhost:8000](http://localhost:8000) 
-  - build something beautiful (start writing you code here: [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee))
+  - build something beautiful (start writing you code in [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee) file)
 
 ## How to Learn Este
 
