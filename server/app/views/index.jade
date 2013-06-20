@@ -31,12 +31,15 @@ body
       Google Closure demos
 
   h2 Simple TodoMVC Component Example
-  p.
-    Check and learn from source code.<br>
-    <a href="https://github.com/Steida/este/tree/master/client/app/js">https://github.com/Steida/este/tree/master/client/app/js</a>
   #todo-mvc
-
-  script.
-    app.start({"someDataFromServer": 123});
+  p.
+    Source files:
+  ul
+    li.
+      <a href="https://github.com/Steida/este/tree/master/client/app/js/start.coffee">github.com/Steida/este/tree/master/client/app/js/start.coffee</a>
+    li.
+      <a href="https://github.com/Steida/este/blob/master/server/app/index.coffee">github.com/Steida/este/blob/master/server/app/index.coffee</a>
+    script.
+      app.start({"someDataFromServer": 123});
   if env == 'development'
     script(src="http://localhost:35729/livereload.js")
