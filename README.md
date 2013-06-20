@@ -54,12 +54,12 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 #### For Windows Users
   - install Java, Python 2 (Python 3 does not work)
   - set environment variables for Python and Java
-  - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
+  - http://docs.python.org/using/windows.html#excursus-setting-environment-variables 
 
 ## Getting Started
   - run ```grunt```
-  - point your browser to [localhost:8000](http://localhost:8000)
-  - build something beautiful 
+  - point your browser to [localhost:8000](http://localhost:8000) 
+  - build something beautiful (start writing you code here: [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee))
 
 ## How to Learn Este
 
@@ -73,7 +73,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   Take a look at app entry point [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee),
   check Este [demos](https://github.com/Steida/este-library/tree/master/este/demos) or [TodoMVC demo](https://github.com/Steida/este-library/tree/master/este/demos/app/todomvc).
   Learn from well documented source code and demos.
-
+  
 ## Usage
 
   Start development. Build app, run development stack.
