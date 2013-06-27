@@ -109,6 +109,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 Must-have Packages
 
   - [Sublime Package Control](http://wbond.net/sublime_packages/package_control)
+  - EditorConfig
   - CoffeeScript
   - Stylus
   - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate)
