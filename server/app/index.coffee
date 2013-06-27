@@ -9,7 +9,7 @@ run = ->
   app.configure ->
     app.locals.env = config.currentEnv
 
-    app.set 'title', 'github.com/Steida/este'
+    app.set 'title', 'github.com/steida/este'
     app.set 'views', __dirname + '/views'
     app.set 'view engine', 'jade'
     app.use express.compress()

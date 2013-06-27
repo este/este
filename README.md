@@ -7,26 +7,26 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
     - [Library](https://developers.google.com/closure/library)
     - [Compiler](https://developers.google.com/closure/compiler)
     - [Templates](https://developers.google.com/closure/templates)
-  - [Este library](https://github.com/Steida/este-library)
-    - Este MVC [framework](https://github.com/Steida/este-library/tree/master/app)
+  - [Este library](https://github.com/steida/este-library)
+    - Este MVC [framework](https://github.com/steida/este-library/tree/master/app)
     - mobile support (tap and swipe events, touch enabled drag, hide address bar, local storage, and more)
   - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - [Stylus](http://learnboost.github.io/stylus) styles
   - Node.js [Express](http://expressjs.com) app boilerplate
   - powerful internalization and localization
-  - driven by [Grunt](http://gruntjs.com) and [grunt-este](https://github.com/Steida/grunt-este)
+  - driven by [Grunt](http://gruntjs.com) and [grunt-este](https://github.com/steida/grunt-este)
   - LiveReload included
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
   - [Demos](http://este.jit.su)
-  
+
 #### Dev stack
-  
+
   - watch changes, check syntax, and compile
     - CoffeeScript
     - Stylus
     - Closure Templates
   - run very fast unit tests immediately after file save
-  - calculate and resolve module dependencies 
+  - calculate and resolve module dependencies
   - CoffeeLint source code
   - extract and inject strings for localizations
   - run development server
@@ -45,7 +45,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 
   Now, you can install Este.
   ```shell
-  git clone https://github.com/Steida/este.git
+  git clone https://github.com/steida/este.git
   cd este
   npm install
   bower install
@@ -54,26 +54,26 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 #### For Windows Users
   - install Java, Python 2 (Python 3 does not work)
   - set environment variables for Python and Java
-  - http://docs.python.org/using/windows.html#excursus-setting-environment-variables 
+  - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
   - run ```grunt```
-  - point your browser to [localhost:8000](http://localhost:8000) 
-  - build something beautiful (start writing you code in [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee) file)
+  - point your browser to [localhost:8000](http://localhost:8000)
+  - build something beautiful (start writing you code in [start.coffee](https://github.com/steida/este/blob/master/client/app/js/start.coffee) file)
 
 ## How to Learn Este
 
   Take a look at project structure. ```server``` directory contains server-side backend code, in this case
   it's Node.js Express server, but we can use any backend of course. Este is client-side technology
   and it's possible to create Este app that don't require any backend at all.
-  
+
   ```client``` directory contains client-side apps. By default, only ```app``` is needed. But it's not rare that
   our project needs several separated sub-projects, for example: ```site```, ```app```, ```administration```.
-  
-  Take a look at app entry point [start.coffee](https://github.com/Steida/este/blob/master/client/app/js/start.coffee),
-  check Este [demos](https://github.com/Steida/este-library/tree/master/este/demos) or [TodoMVC demo](https://github.com/Steida/este-library/tree/master/este/demos/app/todomvc).
+
+  Take a look at app entry point [start.coffee](https://github.com/steida/este/blob/master/client/app/js/start.coffee),
+  check Este [demos](https://github.com/steida/este-library/tree/master/este/demos) or [TodoMVC demo](https://github.com/steida/este-library/tree/master/este/demos/app/todomvc).
   Learn from well documented source code and demos.
-  
+
 ## Usage
 
   Start development. Build app, run development stack.
@@ -103,7 +103,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   Compile project with localized messages.
 
   ```grunt esteBuilder:appLocalized```
-  
+
 ### Recommended Editor: [Sublime Text](http://www.sublimetext.com)
 
 Must-have Packages
@@ -116,7 +116,7 @@ Must-have Packages
   - Clipboard History
   - JsFormat
 
-My Sublime Text [settings and snippets](https://github.com/Steida/Sublimetext-user-settings).
+My Sublime Text [settings and snippets](https://github.com/steida/Sublimetext-user-settings).
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
 
 ## Stay Tuned
