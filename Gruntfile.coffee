@@ -112,7 +112,7 @@ module.exports = (grunt) ->
           'client/**/*_test.js'
         ]
 
-    # build --stage tasks, build for production
+    # build --stage tasks
 
     cssmin:
       app:
