@@ -109,24 +109,26 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 Must-have Packages
 
   - [Sublime Package Control](http://wbond.net/sublime_packages/package_control) (read instructions)
-  - EditorConfig
   - CoffeeScript
   - Stylus
   - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate) (read instructions)
   - Clipboard History
   - JsFormat
-
+  - EditorConfig
+  
 My Sublime Text [settings and snippets](https://github.com/steida/Sublimetext-user-settings).
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
 
 ## Stay Tuned
 
   - [twitter.com/estejs](https://twitter.com/estejs)
-  - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
   - [estejs.tumblr.com](http://estejs.tumblr.com)
+  - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
+  - [github.com/Steida/este-library](https://github.com/Steida/este-library)
 
 ## Tips
 
+  - watch (star) [github.com/Steida/este-library](https://github.com/Steida/este-library) for interesting updates
   - learn ```npm link``` and ```bower link```
   - from time to time delete bower_components and node_component dirs, then run npm install and bower install, to update dev stack and its dependencies
 
