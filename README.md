@@ -37,7 +37,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   - prepare app for production
 
 ## Install
-  [Node.js](http://nodejs.org) is required. Ensure you have grunt-cli and bower modules installed.
+  [Node.js](http://nodejs.org) is required. Ensure you have command-line git installed too. Then install grunt-cli and bower.
   ```shell
   npm install -g grunt-cli
   npm install -g bower
@@ -108,11 +108,11 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
 
 Must-have Packages
 
-  - [Sublime Package Control](http://wbond.net/sublime_packages/package_control)
+  - [Sublime Package Control](http://wbond.net/sublime_packages/package_control) (read instructions)
   - EditorConfig
   - CoffeeScript
   - Stylus
-  - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate)
+  - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate) (read instructions)
   - Clipboard History
   - JsFormat
 
