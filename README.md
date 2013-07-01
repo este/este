@@ -8,7 +8,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
     - [Compiler](https://developers.google.com/closure/compiler)
     - [Templates](https://developers.google.com/closure/templates)
   - [Este library](https://github.com/steida/este-library)
-    - Este MVC [framework](https://github.com/steida/este-library/tree/master/app)
+    - Este MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
     - mobile support (tap and swipe events, touch enabled drag, hide address bar, local storage, and more)
   - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - [Stylus](http://learnboost.github.io/stylus) styles
