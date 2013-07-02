@@ -2,29 +2,32 @@
 
 Este is robust, modular and comfortable dev stack and library for web apps development with several unique features.
 
+#### Features
+
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
   - powerful development stack build on top of [gruntjs.com](gruntjs.com)
     - [grunt-este](https://github.com/steida/grunt-este)
     - fast file [watcher](https://github.com/Steida/grunt-este-watch/) without pooling and with LiveReload
-  - TDD ready, fast unit testing via [Mocha](http://visionmedia.github.io/mocha)
-  - Node.js [Express](http://expressjs.com) app boilerplate
-  - [Stylus](http://learnboost.github.io/stylus) styles
-  - great internalization and strings localizations support
-  - snippets and settings for [SublimeText](http://www.sublimetext.com)
   - [Este library](https://github.com/steida/este-library)
     - Este App MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
     - desktop, tablet, mobile ready
     - UI components and other handy stuff
+  - TDD ready, fast unit testing via [Mocha](http://visionmedia.github.io/mocha)
+  - great internalization and strings localizations support
+  - snippets and settings for [SublimeText](http://www.sublimetext.com)
+  - server Express App boilerplate (you can use any backend)
   - third parties included
     - [Google Closure Tools](https://developers.google.com/closure)
       - [Library](https://developers.google.com/closure/library)
       - [Compiler](https://developers.google.com/closure/compiler)
       - [Templates](https://developers.google.com/closure/templates)
+    - [Stylus](http://learnboost.github.io/stylus) styles
+    - Node.js [Express](http://expressjs.com)
     - Google [Polymer](http://www.polymer-project.org/)
     - Facebook [React](http://facebook.github.io/react/)
   - [Demos](http://este.jit.su)
 
-#### Dev stack
+#### Development Stack
 
   - watch changes, check syntax, and compile
     - CoffeeScript
