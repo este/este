@@ -3,20 +3,25 @@
 Este is robust, modular and comfortable dev stack and library for web apps development with several unique features.
 
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
-  - [Google Closure Tools](https://developers.google.com/closure)
-    - [Library](https://developers.google.com/closure/library)
-    - [Compiler](https://developers.google.com/closure/compiler)
-    - [Templates](https://developers.google.com/closure/templates)
-  - [Este library](https://github.com/steida/este-library)
-    - Este MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
-    - mobile support (tap and swipe events, touch enabled drag, hide address bar, local storage, and more)
-  - TDD ready, unit testing via [Mocha](http://visionmedia.github.io/mocha)
-  - [Stylus](http://learnboost.github.io/stylus) styles
+  - powerful development stack build on top of [gruntjs.com](gruntjs.com)
+    - [grunt-este](https://github.com/steida/grunt-este)
+    - fast file [watcher](https://github.com/Steida/grunt-este-watch/) without pooling and with LiveReload
+  - TDD ready, fast unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - Node.js [Express](http://expressjs.com) app boilerplate
-  - powerful internalization and localization
-  - driven by [Grunt](http://gruntjs.com) and [grunt-este](https://github.com/steida/grunt-este)
-  - LiveReload included
+  - [Stylus](http://learnboost.github.io/stylus) styles
+  - great internalization and strings localizations support
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
+  - [Este library](https://github.com/steida/este-library)
+    - Este App MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
+    - desktop, tablet, mobile ready
+    - UI components and other handy stuff
+  - third parties included
+    - [Google Closure Tools](https://developers.google.com/closure)
+      - [Library](https://developers.google.com/closure/library)
+      - [Compiler](https://developers.google.com/closure/compiler)
+      - [Templates](https://developers.google.com/closure/templates)
+    - Google [Polymer](http://www.polymer-project.org/)
+    - Facebook [React](http://facebook.github.io/react/)
   - [Demos](http://este.jit.su)
 
 #### Dev stack
