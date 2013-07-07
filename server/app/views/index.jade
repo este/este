@@ -7,22 +7,14 @@ head
 body
   h1 Este.js
   p.
-    Este is robust, modular and comfortable dev stack for web apps development
+    Este is robust, modular, and comfortable dev stack for web apps development
     with several unique features.
-
-  h2 Boilerplate for Your Este App
-  p.
-    <a href="https://github.com/steida/este">github.com/steida/este</a><br>
-
-  h2 Library Containing Este MVC, UI Components, Utils, and More...
-  p.
-    <a href="https://github.com/steida/este-library">github.com/steida/este-library</a>
 
   h2 Demos
   p.
-    In development mode, every class has own file, therefore even simple demo
-    consists of many files. It's a good thing. For production all styles and
-    scripts are joined and compiled with unbeatable level of compression.
+    Source files are not compiled so you can view-source them easily. All scripts and styles
+    are automatically compiled with unbeatable level of
+    compression for production.
   ul
     li.
       <a href="/bower_components/este-library/este/demos/index.html">Este demos</a>
@@ -30,16 +22,17 @@ body
     li: a(href="/bower_components/closure-library/closure/goog/demos/index.html").
       Google Closure demos
 
+  h2 App Boilerplate
+  p.
+    <a href="https://github.com/steida/este">github.com/steida/este</a><br>
+
+  h2 Library
+  p.
+    <a href="https://github.com/steida/este-library">github.com/steida/este-library</a>
+
   h2 Simple TodoMVC Component Example
   #todo-mvc
-  p.
-    Source files:
-  ul
-    li.
-      <a href="https://github.com/steida/este/tree/master/client/app/js/start.coffee">github.com/steida/este/tree/master/client/app/js/start.coffee</a>
-    li.
-      <a href="https://github.com/steida/este/blob/master/server/app/index.coffee">github.com/steida/este/blob/master/server/app/index.coffee</a>
-    script.
-      app.start({"someDataFromServer": 123});
+  script.
+    app.start({"someDataFromServer": 123});
   if env == 'development'
     script(src="http://localhost:35729/livereload.js")

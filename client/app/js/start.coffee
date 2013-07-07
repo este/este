@@ -1,6 +1,7 @@
 ###*
-  @fileoverview Este app boilerplate. This example demonstrates a simple
-  TodoMVC component. For full TodoMVC app:
+  @fileoverview Our application main entry point.
+
+  This example demonstrates a simple TodoMVC component. For full TodoMVC app:
   @see este/bower_components/este-library/este/demos/app/todomvc/index.html.
 ###
 
@@ -8,7 +9,7 @@
 goog.provide 'app.start'
 
 # Let's require what our app needs.
-goog.require 'app.todos.create'
+goog.require 'este.demos.react.start'
 
 ###*
   App main entry point. This function should be called before body closing tag.
@@ -39,9 +40,7 @@ app.start = (data) ->
   ###
 
   # Create simple TodoMVC component via its factory method.
-  # At this place, we can create full TodoMVC app, some simple micro tool for
-  # our site or web app, or anything else.
-  app.todos.create '#todo-mvc'
+  este.demos.react.start '#todo-mvc'
 
 # Ensures the symbol will be visible after compiler renaming.
 goog.exportSymbol 'app.start', app.start
