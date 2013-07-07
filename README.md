@@ -1,4 +1,4 @@
-# Este [![Build Status](https://secure.travis-ci.org/Steida/este.png?branch=master)](http://travis-ci.org/Steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
+# Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
 Este is robust, modular and comfortable dev stack and library for web apps development with several unique features.
 
@@ -7,7 +7,7 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
   - powerful development stack build on top of [gruntjs.com](gruntjs.com)
     - [grunt-este](https://github.com/steida/grunt-este)
-    - fast file [watcher](https://github.com/Steida/grunt-este-watch/) without pooling and with LiveReload
+    - fast file [watcher](https://github.com/steida/grunt-este-watch/) without pooling and with LiveReload
   - [Este library](https://github.com/steida/este-library)
     - Este App MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
     - desktop, tablet, mobile ready
@@ -123,7 +123,7 @@ Must-have Packages
   - Clipboard History
   - JsFormat
   - EditorConfig
-  
+
 My Sublime Text [settings and snippets](https://github.com/steida/Sublimetext-user-settings).
 Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-sublime-text-code-snippets-cheat-sheet).
 
@@ -132,11 +132,11 @@ Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-su
   - [twitter.com/estejs](https://twitter.com/estejs)
   - [estejs.tumblr.com](http://estejs.tumblr.com)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
-  - [github.com/Steida/este-library](https://github.com/Steida/este-library)
+  - [github.com/steida/este-library](https://github.com/steida/este-library)
 
 ## Tips
 
-  - watch (star) [github.com/Steida/este-library](https://github.com/Steida/este-library) for interesting updates
+  - watch (star) [github.com/steida/este-library](https://github.com/steida/este-library) for interesting updates
   - learn ```npm link``` and ```bower link```
   - from time to time delete bower_components and node_component dirs, then run npm install and bower install, to update dev stack and its dependencies
 
