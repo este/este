@@ -1,7 +1,7 @@
 ###*
   @fileoverview Este app boilerplate. This example demonstrates a simple
-  TodoMVC component. To see full TodoMVC app, check:
-  este/bower_components/este-library/este/demos/app/todomvc/index.html.
+  TodoMVC component. For full TodoMVC app:
+  @see este/bower_components/este-library/este/demos/app/todomvc/index.html.
 ###
 
 # This is how we provide namespaces.
@@ -39,6 +39,8 @@ app.start = (data) ->
   ###
 
   # Create simple TodoMVC component via its factory method.
+  # At this place, we can create full TodoMVC app, some simple micro tool for
+  # our site or web app, or anything else.
   app.todos.create '#todo-mvc'
 
 # Ensures the symbol will be visible after compiler renaming.
