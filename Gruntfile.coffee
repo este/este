@@ -158,11 +158,11 @@ module.exports = (grunt) ->
               '--define=goog.DEBUG=false'
             ]
 
-          # Externs. They allow us to use thirdparty code without [] syntax.
-          # Uncomment if your app requires este.trirdParty.react namespace.
-          # flags.concat [
-          #   '--externs=bower_components/este-library/externs/react/react-3.3.js'
-          # ]
+          # Compiler Externs. They allow us to use thirdparty code without []
+          # syntax.
+          flags.concat [
+            '--externs=bower_components/este-library/externs/react/react-3.3.js'
+          ]
 
       app:
         options:
