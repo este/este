@@ -5,3 +5,7 @@ before_script:
   - npm install -g grunt-cli
   - npm install bower -g
   - bower install
+deploy:
+  provider: nodejitsu
+  user: "Steida"
+  api_key: "b0921d6d-48f4-4401-bcf8-a5124b30d2eb"
