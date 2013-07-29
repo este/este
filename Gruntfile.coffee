@@ -149,7 +149,7 @@ module.exports = (grunt) ->
           # Compiler Externs. They allow us to use thirdparty code without []
           # syntax.
           flags.concat [
-            '--externs=bower_components/este-library/externs/react/react-3.3.js'
+            '--externs=bower_components/este-library/externs/react.js'
           ]
 
       app:
