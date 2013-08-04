@@ -5,33 +5,23 @@ head
   include includes/assets
 
 body
-  h1 Este.js
+  h1 Este.js App Boilerplate
   p.
-    Este is robust, modular, and comfortable dev stack for web apps development
-    with several unique features.
-
-  h2 Demos
-  p.
-    Source files are not compiled so you can view-source them easily. All scripts and styles
-    are automatically compiled with unbeatable level of
-    compression for production.
+    This is single page application boilerplate.
   ul
-    li.
-      <a href="/bower_components/este-library/este/demos/index.html">Este demos</a>
-      (v3.9.4)
+    li: a(href="/bower_components/este-library/este/demos/index.html").
+      Este demos
     li: a(href="/bower_components/closure-library/closure/goog/demos/index.html").
       Google Closure demos
-
-  h2 App Boilerplate
   p.
-    <a href="https://github.com/steida/este">github.com/steida/este</a><br>
-
-  h2 Library
-  p.
-    <a href="https://github.com/steida/este-library">github.com/steida/este-library</a>
-
-  h2 Simple TodoMVC Component Example
+    Simple TodoMVC component example:
   #todo-mvc
+  p Where to start:
+  ul
+    li: code client/app/js/start.coffee
+    li: code client/app/css/app.styl
+    li: code server/app/*
+  p Happy Codding!
   script.
     app.start({"someDataFromServer": 123});
   if env == 'development'

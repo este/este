@@ -1,4 +1,4 @@
 exports.index = (req, res) ->
   res.render 'index',
-    title: 'github.com/steida/este'
+    title: 'Este.js'
     appVersion: require('../../../package.json').version
