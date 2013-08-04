@@ -35,7 +35,6 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
     - Closure Templates
   - run very fast unit tests immediately after file save
   - calculate and resolve module dependencies
-  - CoffeeLint source code
   - extract and inject strings for localizations
   - run development server
   - join and minify css
