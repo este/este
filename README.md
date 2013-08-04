@@ -1,22 +1,23 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Este is robust, modular and comfortable dev stack and library for web apps development with several unique features.
+Robust and comfortable dev stack for web app development.
 
 #### Features
 
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
+  - desktop, tablet, mobile supported
+  - pure client side technology, any backend is supported
   - powerful development stack build on top of [gruntjs.com](gruntjs.com)
     - [grunt-este](https://github.com/steida/grunt-este)
     - fast file [watcher](https://github.com/steida/grunt-este-watch/) without pooling and with LiveReload
   - [Este library](https://github.com/steida/este-library)
     - Este App MVC [framework](https://github.com/steida/este-library/tree/master/este/app)
-    - desktop, tablet, mobile ready
     - UI components and other handy stuff
   - TDD ready, fast unit testing via [Mocha](http://visionmedia.github.io/mocha)
   - great internalization and strings localizations support
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
-  - server Express App boilerplate (you can use any backend)
-  - third parties included
+  - server Express App boilerplate
+  - incorporated third party libraries:
     - [Google Closure Tools](https://developers.google.com/closure)
       - [Library](https://developers.google.com/closure/library)
       - [Compiler](https://developers.google.com/closure/compiler)
@@ -43,30 +44,34 @@ Este is robust, modular and comfortable dev stack and library for web apps devel
   - reload browser and server when needed
   - prepare app for production
 
-## Install
-  [Node.js](http://nodejs.org) is required. Ensure you have command-line git installed too. Then install grunt-cli and bower.
+## Prerequisites
+  [Node.js](http://nodejs.org) is required. Ensure also you have ```grunt-cli``` and ```bower``` installed.
   ```shell
   npm install -g grunt-cli
   npm install -g bower
   ```
 
-  Now, you can install Este.
-  ```shell
-  git clone https://github.com/steida/este.git
-  cd este
-  npm install
-  bower install
-  ```
-
 #### For Windows Users
-  - install Java, Python 2 (Python 3 does not work)
+  - install Java and Python 2 (Python 3 does not work)
   - set environment variables for Python and Java
   - http://docs.python.org/using/windows.html#excursus-setting-environment-variables
 
 ## Getting Started
+
+### Create Este App
+  
+  ```shell
+  git clone https://github.com/steida/este.git este-app
+  cd este-app
+  npm install
+  bower install
+  ```
+  
+### Start Development
+
   - run ```grunt```
   - point your browser to [localhost:8000](http://localhost:8000)
-  - build something beautiful (start writing you code in [start.coffee](https://github.com/steida/este/blob/master/client/app/js/start.coffee) file)
+  - build something beautiful
 
 ## How to Learn Este
 
@@ -131,13 +136,12 @@ Code snippets [cheat sheet](http://estejs.tumblr.com/post/29363589575/este-js-su
   - [twitter.com/estejs](https://twitter.com/estejs)
   - [estejs.tumblr.com](http://estejs.tumblr.com)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
-  - [github.com/steida/este-library](https://github.com/steida/este-library)
 
 ## Tips
 
-  - watch (star) [github.com/steida/este-library](https://github.com/steida/este-library) for interesting updates
-  - learn ```npm link``` and ```bower link```
-  - from time to time delete bower_components and node_component dirs, then run npm install and bower install, to update dev stack and its dependencies
+  - watch [github.com/steida/este-library](https://github.com/steida/este-library) for updates
+  - learn ```npm link``` and ```bower link``` and use it with your npm modules and bower libraries
+  - learn ```bower link``` and keep your ```este-library``` fresh
 
 ## License
 Copyright (c) 2013 Daniel Steigerwald
