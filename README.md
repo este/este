@@ -17,7 +17,7 @@ Robust and comfortable dev stack for web app development.
   - great internalization and strings localizations support
   - snippets and settings for [SublimeText](http://www.sublimetext.com)
   - server Express App boilerplate
-  - incorporated third party libraries:
+  - third parties:
     - [Google Closure Tools](https://developers.google.com/closure)
       - [Library](https://developers.google.com/closure/library)
       - [Compiler](https://developers.google.com/closure/compiler)
@@ -26,7 +26,6 @@ Robust and comfortable dev stack for web app development.
     - Node.js [Express](http://expressjs.com)
     - Google [Polymer](http://www.polymer-project.org/)
     - Facebook [React](http://facebook.github.io/react/)
-  - [Demos](http://este.jit.su)
 
 #### Development Stack
 
