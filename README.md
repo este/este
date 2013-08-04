@@ -2,6 +2,14 @@
 
 Robust and comfortable dev stack for web app development.
 
+## Why Este.js?
+
+I believe static typing makes code more robust and readable while CoffeeScrips makes code more concise.
+I designed Este MVC with touch devices and good UX in mind. I prefer Closure Library, it's
+huge, mature, and well written. Closure Compiler extraordinery level of minification is win for mobile apps.
+Facebook React is brilliant for building dynamic UI's. Polymer PointerGestures rocks. Unit tests must be
+light-fast and automatic. Well tunned dev stack is important. And more.
+
 #### Features
 
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
