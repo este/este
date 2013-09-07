@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "express": "~3.3.1",
-    "jade": "~0.34.1"
+    "jade": "~0.35.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -28,12 +28,12 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-cssmin": "~0.6.1",
-    "grunt-contrib-stylus": "~0.7.0",
+    "grunt-contrib-stylus": "~0.8.0",
     "grunt-env": "~0.4.0",
     "grunt-este": "~2.3.1",
     "grunt-este-watch": "~0.1.1",
     "grunt-npm": "0.0.2",
-    "grunt-release": "~0.4.0",
+    "grunt-release": "~0.5.1",
     "grunt-text-replace": "~0.3.2",
     "piping": "~0.1.6"
   },
@@ -42,7 +42,7 @@
     "test": "grunt build --stage"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": "0.10.x"
   },
   "license": "MIT",
   "subdomain": "este",
