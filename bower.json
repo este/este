@@ -1,6 +1,6 @@
 {
   "name": "este-clientside",
-  "version": "3.9.2",
+  "version": "3.9.3",
   "dependencies": {
     "animate-css": "git://github.com/daneden/animate.css.git",
     "closure-compiler": "http://closure-compiler.googlecode.com/files/compiler-latest.zip",
