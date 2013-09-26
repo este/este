@@ -19,7 +19,7 @@
     "url": "https://github.com/steida/este.git"
   },
   "dependencies": {
-    "express": "~3.3.1",
+    "express": "~3.4.0",
     "jade": "~0.35.0"
   },
   "devDependencies": {
