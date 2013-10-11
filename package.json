@@ -10,6 +10,7 @@
     "Este",
     "Google",
     "Mocha",
+    "React",
     "Soy",
     "Stylus"
   ],
@@ -33,7 +34,7 @@
     "grunt-este": "~2.3.1",
     "grunt-este-watch": "~0.1.1",
     "grunt-npm": "0.0.2",
-    "grunt-release": "~0.5.1",
+    "grunt-release": "~0.6.0",
     "grunt-text-replace": "~0.3.2",
     "piping": "~0.1.6"
   },
