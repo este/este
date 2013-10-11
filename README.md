@@ -131,7 +131,6 @@ Must-have Packages
   - CoffeeScript
   - Stylus
   - [github.com/anvie/SoyTemplate](https://github.com/anvie/SoyTemplate) (read instructions)
-  - Clipboard History
   - JsFormat
   - EditorConfig
 
