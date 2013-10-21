@@ -1,34 +1,5 @@
 module.exports = (grunt) ->
 
-  stylusStyles = [
-    'bower_components/este-library/este/**/*.styl'
-    'client/app/css/**/*.styl'
-  ]
-
-  coffeeScripts = [
-    'bower_components/este-library/este/**/*.coffee'
-    'client/app/js/**/*.coffee'
-    'server/**/*.coffee'
-  ]
-
-  soyTemplates = [
-    'bower_components/este-library/este/**/*.soy'
-    'client/app/js/**/*.soy'
-  ]
-
-  clientDirs = [
-    'bower_components/closure-library'
-    'bower_components/closure-templates'
-    'bower_components/este-library/este'
-    'client/app/js'
-  ]
-
-  clientDepsPath =
-    'client/deps.js'
-
-  clientDepsPrefix =
-    '../../../../'
-
   grunt.initConfig
 
     # build tasks
@@ -51,7 +22,10 @@ module.exports = (grunt) ->
       all:
         files: [
           expand: true
-          src: stylusStyles
+          src: [
+            'bower_components/este-library/este/**/*.styl'
+            'client/app/css/**/*.styl'
+          ]
           ext: '.css'
         ]
       app:
@@ -67,33 +41,41 @@ module.exports = (grunt) ->
       app:
         files: [
           expand: true
-          src: coffeeScripts
+          src: [
+            'bower_components/este-library/este/**/*.coffee'
+            'client/app/js/**/*.coffee'
+            'server/**/*.coffee'
+          ]
           ext: '.js'
         ]
 
     coffee2closure:
       app:
-        files: [
-          expand: true
-          src: coffeeScripts
-          ext: '.js'
-        ]
+        files: '<%= coffee.app.files %>'
 
     esteTemplates:
       app:
-        src: soyTemplates
+        src: [
+          'bower_components/este-library/este/**/*.soy'
+          'client/app/js/**/*.soy'
+        ]
 
     esteDeps:
       all:
         options:
-          outputFile: clientDepsPath
-          prefix: clientDepsPrefix
-          root: clientDirs
+          outputFile: 'client/deps.js'
+          prefix: '../../../../'
+          root: [
+            'bower_components/closure-library'
+            'bower_components/closure-templates'
+            'bower_components/este-library/este'
+            'client/app/js'
+          ]
 
     esteUnitTests:
       options:
-        depsPath: clientDepsPath
-        prefix: clientDepsPrefix
+        depsPath: '<%= esteDeps.all.options.outputFile %>'
+        prefix: '<%= esteDeps.all.options.prefix %>'
       app:
         src: [
           'bower_components/este-library/este/**/*_test.js'
@@ -109,8 +91,8 @@ module.exports = (grunt) ->
 
     esteBuilder:
       options:
-        root: clientDirs
-        depsPath: clientDepsPath
+        root: '<%= esteDeps.all.options.root%>'
+        depsPath: '<%= esteDeps.all.options.outputFile %>'
 
         # Enable faster compilation for Windows with Java 1.7+.
         # javaFlags: ['-XX:+TieredCompilation']
