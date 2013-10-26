@@ -228,15 +228,12 @@ module.exports = (grunt) ->
           messagesPath: 'messages/app'
           languages: ['en', 'cs']
 
-    release:
+    bump:
       options:
-        bump: true
-        add: true
-        commit: true
-        tag: true
-        push: true
-        pushTags: true
-        npm: false
+        commitFiles: ['-a']
+        files: ['bower.json', 'package.json']
+        pushTo: 'origin'
+        tagName: '%VERSION%'
 
     'npm-contributors':
       options:
@@ -245,6 +242,7 @@ module.exports = (grunt) ->
         commitMessage: 'Update contributors'
 
   grunt.loadNpmTasks 'grunt-bg-shell'
+  grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
@@ -253,7 +251,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-este'
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-npm'
-  grunt.loadNpmTasks 'grunt-release'
   grunt.loadNpmTasks 'grunt-text-replace'
 
   grunt.registerTask 'build', 'Build app.', (app = 'app') ->
