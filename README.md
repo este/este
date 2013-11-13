@@ -14,7 +14,7 @@ light-fast and automatic. Well tunned dev stack is important. And more.
 
   - statically compiled JavaScript or [CoffeeScript](http://coffeescript.org)
   - desktop, tablet, mobile supported
-  - pure client side technology, any backend is supported
+  - pure client side, backend agnostic
   - powerful development stack build on top of [gruntjs.com](gruntjs.com)
     - [grunt-este](https://github.com/steida/grunt-este)
     - fast file [watcher](https://github.com/steida/grunt-este-watch/) without pooling and with LiveReload
@@ -34,6 +34,7 @@ light-fast and automatic. Well tunned dev stack is important. And more.
     - Node.js [Express](http://expressjs.com)
     - Google [Polymer](http://www.polymer-project.org/)
     - Facebook [React](http://facebook.github.io/react/)
+  - support for server side Closure and React rendering
 
 #### Development Stack
 
