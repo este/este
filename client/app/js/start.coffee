@@ -4,13 +4,14 @@
 
 goog.provide 'app.start'
 
-goog.require 'este.demos.react.start'
+goog.require 'este.demos.react.todoApp'
 
 ###*
-  @param {Object} config Server side generated app config.
+  @param {Object} data Server side data.
 ###
-app.start = (config) ->
-  # console.log config['userId']
-  este.demos.react.start '#todo-mvc'
+app.start = (data) ->
+  todoApp = este.demos.react.todoApp data['todoApp']
+  parentEl = document.querySelector '#todo-mvc'
+  este.react.render todoApp, parentEl
 
 goog.exportSymbol 'app.start', app.start

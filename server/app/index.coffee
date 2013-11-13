@@ -1,58 +1,33 @@
+# Google Closure server side integration.
+require '../../bower_components/closure-library/closure/goog/bootstrap/nodejs.js'
+require '../../client/deps.js'
+
 config = require './config'
-express = require 'express'
-http = require 'http'
-path = require 'path'
-routes = require './routes'
+di = require 'di'
 
-run = ->
-  app = express()
-  app.configure ->
-    app.locals.env = config.currentEnv
+start = ->
+  module =
+    app: ['factory', require './app']
+    appVersion: ['value', require('../../package.json').version]
+    config: ['value', config]
+    express: ['value', require 'express']
+    http: ['value', require 'http']
+    loadJsonSeed: ['factory', require './loadjsonseed']
+    logger: ['factory', require './logger']
+    React: ['value', require('react-tools').React]
+    renderReact: ['factory', require './renderreact']
+    winston: ['value', require 'winston']
 
-    app.set 'title', 'github.com/steida/este'
-    app.set 'views', __dirname + '/views'
-    app.set 'view engine', 'jade'
-    app.use express.compress()
-    app.use express.favicon()
+    homeController: ['factory', require './home/controller']
+    setRoutes: ['factory', require './setroutes']
+    runServer: ['factory', require './runserver']
 
-    if config.env.development
-      # app.use express.logger 'dev'
-      app.locals.pretty = true
-
-    app.use express.bodyParser()
-    app.use express.methodOverride()
-    app.use app.router
-
-    if config.env.development
-      app.use '/client', express.static 'client'
-      app.use '/bower_components', express.static 'bower_components'
-    else
-      app.use '/client', express.static 'client'
-      # because Este demos are uncompiled
-      app.use '/bower_components', express.static 'bower_components'
-
-    app.use (req, res) ->
-      res.status 400
-      res.render '404',
-        title: '404: File Not Found'
-
-    if config.env.development
-      app.use express.errorHandler
-        dumpExceptions: true
-        showStack: true
-    else
-      app.use (err, req, res, next) ->
-        res.status 500
-        res.render '500',
-          title: '500: Internal Server Error'
-          error: error
-
-  app.get '/', routes.index
-
-  http.createServer(app).listen config.server.port, ->
-    console.log "Express server listening on port #{config.server.port}"
+  injector = new di.Injector [module]
+  injector.invoke (setRoutes, runServer) ->
+    setRoutes()
+    runServer()
 
 if config.env.development
-  run() if require('piping')()
+  start() if require('piping')()
 else
-  run()
+  start()

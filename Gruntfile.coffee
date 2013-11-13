@@ -151,7 +151,7 @@ module.exports = (grunt) ->
 
     replace:
       esteLibraryVersion:
-        src: 'server/app/views/index.jade'
+        src: 'server/app/views/home.jade'
         overwrite: true
         replacements: [
           from: /\(v.+\)/g

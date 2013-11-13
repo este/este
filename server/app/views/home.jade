@@ -1,0 +1,27 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    include includes/assets
+
+  body
+    h1 Este.js App Boilerplate
+    p.
+      Boilerplate for <a href="//github.com/steida/este">Este</a>
+      application. Happy Codding!
+    ul
+      li: a(href="/bower_components/este-library/este/demos/index.html").
+        Este demos
+      li: a(href="/bower_components/closure-library/closure/goog/demos/index.html").
+        Google Closure demos
+    p.
+      Simple <a href="//facebook.github.io/react/">React</a> TodoMVC demo:
+
+    #todo-mvc!= html
+
+    script.
+      app.start(!{jsonSeed});
+    if env == 'development'
+      script(src="//localhost:35729/livereload.js")
