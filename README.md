@@ -53,7 +53,7 @@ light-fast and automatic. Well tunned dev stack is important. And more.
   - prepare app for production
 
 ## Prerequisites
-  [Node.js](http://nodejs.org) is required. Ensure also you have ```grunt-cli``` and ```bower``` installed.
+  [Java 1.7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required. Ensure also you have ```grunt-cli``` and ```bower``` installed.
   ```shell
   npm install -g grunt-cli
   npm install -g bower
