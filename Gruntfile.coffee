@@ -94,8 +94,6 @@ module.exports = (grunt) ->
         root: '<%= esteDeps.all.options.root%>'
         depsPath: '<%= esteDeps.all.options.outputFile %>'
 
-        # Enable faster compilation for Windows with Java 1.7+.
-        # javaFlags: ['-XX:+TieredCompilation']
         compilerFlags: do ->
 
           # Default compiler settings. You will love advanced compilation with

@@ -3,7 +3,7 @@
   "version": "4.2.0",
   "dependencies": {
     "animate-css": "git://github.com/daneden/animate.css.git",
-    "closure-compiler": "http://closure-compiler.googlecode.com/files/compiler-latest.zip",
+    "closure-compiler": "http://dl.google.com/closure-compiler/compiler-latest.zip",
     "closure-templates": "http://closure-templates.googlecode.com/files/closure-templates-for-javascript-latest.zip",
     "este-library": "git://github.com/steida/este-library.git",
     "normalize-css": "git://github.com/necolas/normalize.css.git"
