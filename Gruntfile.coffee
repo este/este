@@ -174,7 +174,6 @@ module.exports = (grunt) ->
     esteWatch:
       options:
         dirs: [
-          'bower_components/closure-library/**/'
           'bower_components/este-library/este/**/'
           'client/**/{js,css}/**/'
           'server/**/'
