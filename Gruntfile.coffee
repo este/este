@@ -232,12 +232,6 @@ module.exports = (grunt) ->
         pushTo: 'origin'
         tagName: '%VERSION%'
 
-    'npm-contributors':
-      options:
-        file: 'package.json'
-        commit: false
-        commitMessage: 'Update contributors'
-
   grunt.loadNpmTasks 'grunt-bg-shell'
   grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-contrib-clean'
