@@ -21,17 +21,17 @@
   },
   "dependencies": {
     "express": "~3.4.0",
-    "jade": "~0.35.0",
+    "jade": "~1.0.0",
     "di": "0.0.1",
     "winston": "~0.7.2",
-    "react-tools": "~0.5.1"
+    "react-tools": "~0.8.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-bg-shell": "~2.3.0",
     "grunt-bump": "0.0.13",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-coffee": "~0.8.0",
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-contrib-stylus": "~0.11.0",
     "grunt-env": "~0.4.0",
