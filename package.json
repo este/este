@@ -43,7 +43,8 @@
   },
   "scripts": {
     "start": "node server/app",
-    "test": "grunt build --stage"
+    "test": "grunt build --stage",
+    "postinstall": "bower install"
   },
   "engines": {
     "node": "0.10.x"
