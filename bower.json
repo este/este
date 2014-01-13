@@ -1,6 +1,6 @@
 {
   "name": "este",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "private": true,
   "dependencies": {
     "animate-css": "git://github.com/daneden/animate.css.git",
