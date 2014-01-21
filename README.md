@@ -67,14 +67,13 @@ light-fast and automatic. Well tunned dev stack is important. And more.
 ## Getting Started
 
 ### Create Este App
-  
+
   ```shell
   git clone https://github.com/steida/este.git este-app
   cd este-app
   npm install
-  bower install
   ```
-  
+
 ### Start Development
 
   - run ```grunt```
