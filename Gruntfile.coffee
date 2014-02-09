@@ -134,13 +134,13 @@ module.exports = (grunt) ->
 
       app:
         options:
-          namespace: 'app.start'
+          namespace: 'app.main'
           outputFilePath: 'client/app/build/app.js'
 
       # Use this task to build specific language, /client/build/app_de.js etc.
       # appLocalized:
       #   options:
-      #     namespace: 'app.start'
+      #     namespace: 'app.main'
       #     outputFilePath: 'client/app/build/app.js'
       #     messagesPath: 'messages/app'
       #     locales: ['cs', 'de']

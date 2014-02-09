@@ -22,6 +22,6 @@ html(lang="en")
     #todo-mvc!= html
 
     script.
-      app.start(!{jsonSeed});
+      app.main(!{jsonSeed});
     if env == 'development'
       script(src="//localhost:35729/livereload.js")
