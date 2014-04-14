@@ -1,11 +1,9 @@
 {
-  "name": "este-clientside",
-  "version": "3.9.2",
+  "name": "este",
+  "version": "6.0.1",
+  "private": true,
   "dependencies": {
-    "animate-css": "git://github.com/daneden/animate.css.git",
-    "closure-compiler": "http://closure-compiler.googlecode.com/files/compiler-latest.zip",
-    "closure-templates": "http://closure-templates.googlecode.com/files/closure-templates-for-javascript-latest.zip",
     "este-library": "git://github.com/steida/este-library.git",
-    "normalize-css": "git://github.com/necolas/normalize.css.git"
+    "observe-js": "~0.2.2"
   }
 }
