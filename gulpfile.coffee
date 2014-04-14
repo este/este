@@ -66,6 +66,7 @@ paths =
     'server/**/*.js'
     'tmp/**/*.js'
   ]
+  packages: './*.json'
 
 watchedDirs = [
   'bower_components/este-library/este'
