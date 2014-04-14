@@ -202,12 +202,10 @@ gulp.task 'concatDeps', ->
 gulp.task 'concatScripts', ->
   src = if args.stage then [
     'bower_components/react/react.min.js'
-    'bower_components/jquery/dist/jquery.min.js'
     'client/app/build/app.js'
   ]
   else [
     'bower_components/react/react.js'
-    'bower_components/jquery/dist/jquery.js'
   ]
   gulp.src src
     .pipe concat 'app.js'
