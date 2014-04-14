@@ -201,10 +201,12 @@ gulp.task 'concatDeps', ->
 
 gulp.task 'concatScripts', ->
   src = if args.stage then [
+    'bower_components/observe-js/src/observe.js'
     'bower_components/react/react.min.js'
     'client/app/build/app.js'
   ]
   else [
+    'bower_components/observe-js/src/observe.js'
     'bower_components/react/react.js'
   ]
   gulp.src src

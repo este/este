@@ -1,40 +1,46 @@
 /** @jsx React.DOM */
-goog.provide('app.home.react.TodoApp');
+goog.provide('app.react.App');
 
 /**
+ * @param {app.todos.Collection} todos
  * @constructor
  */
-app.home.react.TodoApp = function() {
+app.react.App = function(todos) {
+
   var TodoList = React.createClass({
     render: function() {
-      var createItem = function(itemText) {
-        return <li>{itemText}</li>;
+      var createItem = function(itemText, i) {
+        return <li key={i}>{itemText}</li>;
       };
       return <ul>{this.props.items.map(createItem)}</ul>;
     }
   });
+
   this.reactClass = React.createClass(/** @lends {React.ReactComponent.prototype} */{
     getInitialState: function() {
-      return {items: [], text: ''};
+      return {text: ''};
     },
     onChange: function(e) {
       this.setState({text: e.target.value});
     },
-    handleSubmit: function(e) {
+    onFormSubmit: function(e) {
       e.preventDefault();
-      var nextItems = this.state.items.concat([this.state.text]);
-      var nextText = '';
-      this.setState({items: nextItems, text: nextText});
+      todos.add(this.state.text);
+      this.setState({text: ''});
+    },
+    onButtonClick: function(e) {
+      todos.clear();
     },
     render: function() {
       return (
         <div>
           <h3>TODO</h3>
-          <TodoList items={this.state.items} />
-          <form onSubmit={this.handleSubmit}>
+          <TodoList items={todos.items} />
+          <form onSubmit={this.onFormSubmit}>
             <input onChange={this.onChange} value={this.state.text} />
-            <button>{'Add #' + (this.state.items.length + 1)}</button>
+            <button>{'Add #' + (todos.items.length + 1)}</button>
           </form>
+          <button onClick={this.onButtonClick}>Clear</button>
         </div>
       );
     }

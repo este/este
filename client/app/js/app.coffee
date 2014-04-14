@@ -4,11 +4,21 @@ class App
 
   ###*
     @param {Element} element
-    @param {app.home.Controller} homeController
+    @param {app.todos.Collection} todos
+    @param {app.react.App} reactApp
     @constructor
   ###
-  constructor: (element, homeController) ->
+  constructor: (element, todos, reactApp) ->
 
-    # Here will be full-fledged MVC framework soon. In the meantime, let's make
-    # a simple React TodoMVC demo with server-side rendering.
-    homeController.render element
+    reactAppComponent = reactApp.reactClass()
+    React.renderComponent reactAppComponent, element
+
+    # Square brackets syntax for external code without externs.
+    observer = new goog.global['ArrayObserver'] todos.items
+    observer.open ->
+      reactAppComponent.forceUpdate()
+
+    if !Object['observe']
+      setInterval goog.global['Platform']['performMicrotaskCheckpoint'], 50
+
+    return

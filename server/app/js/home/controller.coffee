@@ -4,7 +4,7 @@ class server.home.Controller
 
   ###*
     @param {server.FrontPage} frontPage
-    @param {app.home.react.TodoApp} todoApp
+    @param {app.react.App} todoApp
     @constructor
   ###
   constructor: (@frontPage, @todoApp) ->

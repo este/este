@@ -3,6 +3,7 @@
   "version": "6.0.1",
   "private": true,
   "dependencies": {
-    "este-library": "git://github.com/steida/este-library.git"
+    "este-library": "git://github.com/steida/este-library.git",
+    "observe-js": "~0.2.2"
   }
 }
