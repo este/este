@@ -1,12 +1,8 @@
 {
   "name": "este",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "private": true,
   "dependencies": {
-    "animate-css": "git://github.com/daneden/animate.css.git",
-    "closure-compiler": "http://dl.google.com/closure-compiler/compiler-latest.zip",
-    "closure-templates": "http://closure-templates.googlecode.com/files/closure-templates-for-javascript-latest.zip",
-    "este-library": "git://github.com/steida/este-library.git",
-    "normalize-css": "git://github.com/necolas/normalize.css.git"
+    "este-library": "git://github.com/steida/este-library.git"
   }
 }

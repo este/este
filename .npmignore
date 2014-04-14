@@ -1,9 +1,0 @@
-.DS_Store
-este.sublime-workspace
-
-# commented because este.jit.su demos needs uncompiled sources
-# bower_components/
-bower_components/animate-css/
-bower_components/closure-compiler/
-bower_components/html5-boilerplate/
-bower_components/normalize-css/
