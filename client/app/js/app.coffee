@@ -11,12 +11,12 @@ class App
   constructor: (element, todos, reactApp) ->
 
     reactAppComponent = reactApp.reactClass()
-    React.renderComponent reactAppComponent, element
+    renderedAppComponent = React.renderComponent reactAppComponent, element
 
     # Square brackets syntax for external code without externs.
     observer = new goog.global['ArrayObserver'] todos.items
     observer.open ->
-      reactAppComponent.forceUpdate()
+      renderedAppComponent.forceUpdate()
 
     if !Object['observe']
       setInterval goog.global['Platform']['performMicrotaskCheckpoint'], 50
