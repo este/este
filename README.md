@@ -17,9 +17,10 @@ Robust and comfortable dev stack for isomorphic web apps.
   - ES6 (in progress)
 
 #### Tools
-  - Well configured [gulpjs.com](gulpjs.com) dev stack.
-  - Super fast file [watcher](https://github.com/steida/este-watch).
-  - Neat unit tests with [Mocha](http://visionmedia.github.io/mocha).
+  - Well tuned [gulpjs.com](gulpjs.com) dev stack.
+  - Super fast [file-watcher](https://github.com/steida/este-watch).  
+  - [DI Container](https://github.com/steida/gulp-closure-dicontainer) for with automatic registration and resolving based on types.
+  - Unit testing with [Mocha](http://visionmedia.github.io/mocha).
 
 #### Features
   - React server-side rendering.
