@@ -10,8 +10,7 @@ class App
   ###
   constructor: (element, todos, reactApp) ->
 
-    reactAppComponent = reactApp.reactClass()
-    React.renderComponent reactAppComponent, element
+    reactAppComponent = React.renderComponent reactApp.reactClass(), element
 
     # Square brackets syntax for external code without externs.
     observer = new goog.global['ArrayObserver'] todos.items
