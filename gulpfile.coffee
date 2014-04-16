@@ -67,6 +67,12 @@ paths =
     'tmp/**/*.js'
   ]
   packages: './*.json'
+  js: [
+    '!client/todolessjs/**/*.js'
+  ]
+  less: [
+    'client/todolessjs/css/app.less'
+  ]
 
 watchedDirs = [
   'bower_components/este-library/este'
@@ -77,7 +83,7 @@ watchedDirs = [
 
 diContainers = [
   name: 'app.DiContainer'
-  resolve: ['App']
+  resolve: ['App', 'Todolessjs']
 ,
   name: 'server.DiContainer'
   resolve: ['server.App']
@@ -91,13 +97,14 @@ changedFilePath = null
 
 gulp.task 'clean', ->
   extPaths = []
-    .concat paths.stylus, paths.coffee, paths.react
+    .concat paths.stylus, paths.coffee, paths.react, paths.js
     .map (extPath) -> extPath.replace path.extname(extPath), '.js'
   # Remove only compiled files without its original file.
   isOrphan = (file) ->
-    for ext in ['.styl', '.coffee', '.jsx']
+    for ext in ['.styl', '.coffee', '.jsx', '.less']
       return false if fs.existsSync file.path.replace '.js', ext
     true
+
   gulp.src extPaths, read: false
     .pipe filter isOrphan
     .pipe clean()
@@ -262,6 +269,11 @@ gulp.task 'compileClientApp', ->
   options.compilerFlags.closure_entry_point = 'app.main'
   compile 'client/app/build', options
 
+gulp.task 'compileClientTodoLessJS', ->
+  options = compileOptions()
+  options.compilerFlags.closure_entry_point = 'todolessjs.main'
+  compile 'client/todolessjs/build', options
+
 gulp.task 'compileServerApp', ->
   options = compileOptions()
   options.compilerFlags.closure_entry_point = 'server.main'
@@ -279,6 +291,7 @@ gulp.task 'js', (callback) ->
   sequence.push 'unitTests', 'diContainer', 'concatDeps'
   sequence.push [
     'compileClientApp'
+    'compileClientTodoLessJS'
     'compileServerApp'
   ] if args.stage
   sequence.push 'concatScripts'
