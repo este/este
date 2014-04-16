@@ -20,6 +20,7 @@ fs = require 'fs'
 git = require 'gulp-git'
 gutil = require 'gulp-util'
 jsdom = require('jsdom').jsdom
+less = require 'gulp-less'
 livereload = require 'gulp-livereload'
 minifyCss = require 'gulp-minify-css'
 mocha = require 'gulp-mocha'
@@ -38,7 +39,10 @@ args = yargs
   .alias 's', 'stage'
   .alias 'p', 'patch'
   .alias 'm', 'minor'
+  .alias 'ca', 'clientApp'
   .argv
+
+app = process.env['APP'] = args.app or 'app'
 
 paths =
   stylus: [
@@ -67,6 +71,12 @@ paths =
     'tmp/**/*.js'
   ]
   packages: './*.json'
+  js: [
+    '!client/todolessjs/**/*.js'
+  ]
+  less: [
+    'client/todolessjs/css/app.less'
+  ]
 
 watchedDirs = [
   'bower_components/este-library/este'
@@ -78,6 +88,9 @@ watchedDirs = [
 diContainers = [
   name: 'app.DiContainer'
   resolve: ['App']
+,
+  name: 'todolessjs.DiContainer'
+  resolve: ['Todolessjs']
 ,
   name: 'server.DiContainer'
   resolve: ['server.App']
@@ -91,13 +104,14 @@ changedFilePath = null
 
 gulp.task 'clean', ->
   extPaths = []
-    .concat paths.stylus, paths.coffee, paths.react
+    .concat paths.stylus, paths.coffee, paths.react, paths.js
     .map (extPath) -> extPath.replace path.extname(extPath), '.js'
   # Remove only compiled files without its original file.
   isOrphan = (file) ->
-    for ext in ['.styl', '.coffee', '.jsx']
+    for ext in ['.styl', '.coffee', '.jsx', '.less']
       return false if fs.existsSync file.path.replace '.js', ext
     true
+
   gulp.src extPaths, read: false
     .pipe filter isOrphan
     .pipe clean()
@@ -117,6 +131,19 @@ gulp.task 'stylus', ->
   # TODO(steida): Ensure watch isn't stopped on error. Waiting for Gulp 4
   # github.com/gulpjs/gulp/issues/258.
   return
+
+gulp.task 'less', ->
+  streams = paths.less.map (lessPath) ->
+    gulp.src lessPath, base: '.'
+      .pipe less paths: paths.less
+      .on 'error', (err) -> gutil.log err.message
+      .pipe gulp.dest '.'
+      .pipe rename (path) ->
+        path.dirname = path.dirname.replace '/css', '/build'
+        return
+      .pipe cond args.stage, minifyCss()
+      .pipe gulp.dest '.'
+  eventStream.merge streams...
 
 gulp.task 'coffee', ->
   gulp.src changedFilePath ? paths.coffee, base: '.'
@@ -203,7 +230,7 @@ gulp.task 'concatScripts', ->
   src = if args.stage then [
     'bower_components/observe-js/src/observe.js'
     'bower_components/react/react.min.js'
-    'client/app/build/app.js'
+    "client/#{app}/build/app.js"
   ]
   else [
     'bower_components/observe-js/src/observe.js'
@@ -211,7 +238,7 @@ gulp.task 'concatScripts', ->
   ]
   gulp.src src
     .pipe concat 'app.js'
-    .pipe gulp.dest 'client/app/build'
+    .pipe gulp.dest "client/#{app}/build"
 
 gulp.task 'livereload-notify', ->
   return if !changedFilePath
@@ -222,7 +249,7 @@ compileOptions = ->
     fileName: 'app.js'
     compilerPath: 'bower_components/closure-compiler/compiler.jar'
     compilerFlags:
-      closure_entry_point: 'app.main'
+      closure_entry_point: "#{app}.main"
       compilation_level: 'ADVANCED_OPTIMIZATIONS'
       define: [
         "goog.DEBUG=#{args.stage == 'debug'}"
@@ -259,8 +286,8 @@ getExterns = (dir) ->
 
 gulp.task 'compileClientApp', ->
   options = compileOptions()
-  options.compilerFlags.closure_entry_point = 'app.main'
-  compile 'client/app/build', options
+  options.compilerFlags.closure_entry_point = "#{app}.main"
+  compile "client/#{app}/build", options
 
 gulp.task 'compileServerApp', ->
   options = compileOptions()
@@ -290,6 +317,7 @@ gulp.task 'build', (done) ->
   runSequence [
     'clean'
     'stylus'
+    'less'
     'coffee'
     'react'
     'js'
