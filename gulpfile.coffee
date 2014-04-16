@@ -20,6 +20,7 @@ fs = require 'fs'
 git = require 'gulp-git'
 gutil = require 'gulp-util'
 jsdom = require('jsdom').jsdom
+less = require 'gulp-less'
 livereload = require 'gulp-livereload'
 minifyCss = require 'gulp-minify-css'
 mocha = require 'gulp-mocha'
@@ -124,6 +125,19 @@ gulp.task 'stylus', ->
   # TODO(steida): Ensure watch isn't stopped on error. Waiting for Gulp 4
   # github.com/gulpjs/gulp/issues/258.
   return
+
+gulp.task 'less', ->
+  streams = paths.less.map (lessPath) ->
+    gulp.src lessPath, base: '.'
+      .pipe less paths: paths.less
+      .on 'error', (err) -> gutil.log err.message
+      .pipe gulp.dest '.'
+      .pipe rename (path) ->
+        path.dirname = path.dirname.replace '/css', '/build'
+        return
+      .pipe cond args.stage, minifyCss()
+      .pipe gulp.dest '.'
+  eventStream.merge streams...
 
 gulp.task 'coffee', ->
   gulp.src changedFilePath ? paths.coffee, base: '.'
@@ -303,6 +317,7 @@ gulp.task 'build', (callback) ->
   runSequence [
     'clean'
     'stylus'
+    'less'
     'coffee'
     'react'
     'js'
