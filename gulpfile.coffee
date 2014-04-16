@@ -273,7 +273,7 @@ gulp.task 'compileServerApp', ->
   options.compilerFlags.externs.push nodeJsExterns...
   compile 'server/app/build', options
 
-gulp.task 'js', (callback) ->
+gulp.task 'js', (done) ->
   sequence = []
   sequence.push 'deps' if closureDeps.changed changedFilePath
   sequence.push 'unitTests', 'diContainer', 'concatDeps'
@@ -283,17 +283,17 @@ gulp.task 'js', (callback) ->
   ] if args.stage
   sequence.push 'concatScripts'
   sequence.push 'livereload-notify' if changedFilePath && !args.stage
-  sequence.push callback
+  sequence.push done
   runSequence sequence...
 
-gulp.task 'build', (callback) ->
+gulp.task 'build', (done) ->
   runSequence [
     'clean'
     'stylus'
     'coffee'
     'react'
     'js'
-    callback
+    done
   ]...
 
 gulp.task 'env', ->
@@ -320,11 +320,11 @@ gulp.task 'watch', ->
       else changedFilePath = null
   watch.start()
 
-gulp.task 'run', (callback) ->
-  runSequence 'env', 'livereload-server', 'watch', 'server', callback
+gulp.task 'run', (done) ->
+  runSequence 'env', 'livereload-server', 'watch', 'server', done
 
-gulp.task 'default', (callback) ->
-  runSequence 'build', 'run', callback
+gulp.task 'default', (done) ->
+  runSequence 'build', 'run', done
 
 gulp.task 'bump', (done) ->
   gulp.src paths.packages
