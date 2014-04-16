@@ -1,18 +1,17 @@
 goog.provide('todolessjs.main');
-goog.require('app.DiContainer');
+goog.require('todolessjs.DiContainer');
 
 /**
   @param {Object} data Server side data. Useful for config, preload, whatever.
  */
 todolessjs.main = function(data) {
-  var container;
-  container = new app.DiContainer;
+  var container = new todolessjs.DiContainer;
   container.configure({
     resolve: Todolessjs,
     "with": {
       element: document.querySelector('#este-app')
     }
   });
-  return container.resolveApp();
+  return container.resolveTodolessjs();
 };
 goog.exportSymbol('todolessjs.main', todolessjs.main);

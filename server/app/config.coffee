@@ -12,3 +12,4 @@ module.exports =
       "http://localhost:#{port}/"
     else
       "http://#{process.env.SUBDOMAIN}.jit.su/"
+  app: process.env['APP']

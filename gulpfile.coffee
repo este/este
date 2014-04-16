@@ -39,7 +39,10 @@ args = yargs
   .alias 's', 'stage'
   .alias 'p', 'patch'
   .alias 'm', 'minor'
+  .alias 'ca', 'clientApp'
   .argv
+
+app = process.env['APP'] = args.app or 'app'
 
 paths =
   stylus: [
@@ -84,7 +87,10 @@ watchedDirs = [
 
 diContainers = [
   name: 'app.DiContainer'
-  resolve: ['App', 'Todolessjs']
+  resolve: ['App']
+,
+  name: 'todolessjs.DiContainer'
+  resolve: ['Todolessjs']
 ,
   name: 'server.DiContainer'
   resolve: ['server.App']
@@ -224,7 +230,7 @@ gulp.task 'concatScripts', ->
   src = if args.stage then [
     'bower_components/observe-js/src/observe.js'
     'bower_components/react/react.min.js'
-    'client/app/build/app.js'
+    "client/#{app}/build/app.js"
   ]
   else [
     'bower_components/observe-js/src/observe.js'
@@ -232,7 +238,7 @@ gulp.task 'concatScripts', ->
   ]
   gulp.src src
     .pipe concat 'app.js'
-    .pipe gulp.dest 'client/app/build'
+    .pipe gulp.dest "client/#{app}/build"
 
 gulp.task 'livereload-notify', ->
   return if !changedFilePath
@@ -243,7 +249,7 @@ compileOptions = ->
     fileName: 'app.js'
     compilerPath: 'bower_components/closure-compiler/compiler.jar'
     compilerFlags:
-      closure_entry_point: 'app.main'
+      closure_entry_point: "#{app}.main"
       compilation_level: 'ADVANCED_OPTIMIZATIONS'
       define: [
         "goog.DEBUG=#{args.stage == 'debug'}"
@@ -280,13 +286,8 @@ getExterns = (dir) ->
 
 gulp.task 'compileClientApp', ->
   options = compileOptions()
-  options.compilerFlags.closure_entry_point = 'app.main'
-  compile 'client/app/build', options
-
-gulp.task 'compileClientTodoLessJS', ->
-  options = compileOptions()
-  options.compilerFlags.closure_entry_point = 'todolessjs.main'
-  compile 'client/todolessjs/build', options
+  options.compilerFlags.closure_entry_point = "#{app}.main"
+  compile "client/#{app}/build", options
 
 gulp.task 'compileServerApp', ->
   options = compileOptions()
@@ -305,7 +306,6 @@ gulp.task 'js', (callback) ->
   sequence.push 'unitTests', 'diContainer', 'concatDeps'
   sequence.push [
     'compileClientApp'
-    'compileClientTodoLessJS'
     'compileServerApp'
   ] if args.stage
   sequence.push 'concatScripts'

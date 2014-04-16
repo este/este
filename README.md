@@ -18,7 +18,7 @@ Robust and comfortable dev stack for isomorphic web apps.
 
 #### Tools
   - Well tuned [gulpjs.com](gulpjs.com) dev stack.
-  - Super fast [file-watcher](https://github.com/steida/este-watch).  
+  - Super fast [file-watcher](https://github.com/steida/este-watch).
   - [DI Container](https://github.com/steida/gulp-closure-dicontainer) for with automatic registration and resolving based on types.
   - Unit testing with [Mocha](http://visionmedia.github.io/mocha).
 
@@ -72,6 +72,10 @@ Robust and comfortable dev stack for isomorphic web apps.
   Debug makes compiled scripts readable.
 
   ```gulp build --stage=debug```
+
+  If you have more client apps, you can easily switch between them.
+
+  ```gulp build --clientApp=todolessjs``` or ```gulp build --ca=todolessjs```
 
 ### Recommended Editor: [Atom.io](http://atom.io)
 

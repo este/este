@@ -25,6 +25,7 @@ server.main = (config) ->
       buildNumber: 0
       # Data which will be passed into app.main method.
       clientData: {}
+      app: config.app
   ,
     resolve: server.Middleware
     with:

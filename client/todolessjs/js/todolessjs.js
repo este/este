@@ -7,9 +7,8 @@ goog.provide('Todolessjs');
   @constructor
  */
 var Todolessjs = function(element, todos, reactApp) {
-  var observer, reactAppComponent;
-  reactAppComponent = React.renderComponent(reactApp.reactClass(), element);
-  observer = new goog.global['ArrayObserver'](todos.items);
+  var reactAppComponent = React.renderComponent(reactApp.reactClass(), element);
+  var observer = new goog.global['ArrayObserver'](todos.items);
   observer.open(function() {
     return reactAppComponent.forceUpdate();
   });
