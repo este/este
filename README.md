@@ -53,25 +53,25 @@ Robust and comfortable dev stack for isomorphic (browser + Node.js) web apps.
 
 ## Usage
 
-  Start development. Build app, run development stack.
+  Start development. Build app and run development stack.
 
-  ```gulp ```
+  ```gulp```
 
-  Start development in stage mode. Styles are minified and scripts are compiled.
+  Production mode. Styles are minified and scripts are compiled.
 
-  ```gulp --stage``` or ```gulp -s```
+  ```gulp --production``` or ```gulp -p```
 
-  Build app. Useful for continuous integration.
+  Only build. Useful for continuous integration.
 
-  ```gulp build``` or ```gulp build --stage```
+  ```gulp build``` or ```gulp build --production```
 
   Run development stack. Useful to skip building phase.
 
-  ```gulp run``` or ```gulp run --stage```
+  ```gulp run``` or ```gulp run --production```
 
   Debug makes compiled scripts readable.
 
-  ```gulp build --stage=debug```
+  ```gulp build --production=debug```
 
 ### Recommended Editor: [Atom.io](http://atom.io)
 

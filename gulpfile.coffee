@@ -35,7 +35,7 @@ stylus = require 'gulp-stylus'
 yargs = require 'yargs'
 
 args = yargs
-  .alias 's', 'stage'
+  .alias 'p', 'production'
   .argv
 
 paths =
@@ -48,9 +48,6 @@ paths =
     'server/**/js/**/*.coffee'
   ]
   react: [
-    # Why this crazy /**/js/** pattern? Because one server app can have several
-    # compilation targets: client/app, client/admin, client/landingpage etc.
-    # This pattern ensures that client/whatever/build directories are ignored.
     'client/**/js/**/*.jsx'
     'server/**/js/**/*.jsx'
   ]
@@ -114,7 +111,7 @@ gulp.task 'stylus', ->
       .pipe rename (path) ->
         path.dirname = path.dirname.replace '/css', '/build'
         return
-      .pipe cond args.stage, minifyCss()
+      .pipe cond args.production, minifyCss()
       .pipe gulp.dest '.'
   eventStream.merge streams...
   # NOTE: Ensure watch isn't stopped on error. Waiting for Gulp 4.
@@ -207,7 +204,7 @@ gulp.task 'concatDeps', ->
     .pipe gulp.dest 'tmp'
 
 gulp.task 'concatScripts', ->
-  src = if args.stage then [
+  src = if args.production then [
     'bower_components/observe-js/src/observe.js'
     'bower_components/react/react.min.js'
     'client/app/build/app.js'
@@ -232,7 +229,7 @@ compileOptions = ->
       closure_entry_point: 'app.main'
       compilation_level: 'ADVANCED_OPTIMIZATIONS'
       define: [
-        "goog.DEBUG=#{args.stage == 'debug'}"
+        "goog.DEBUG=#{args.production == 'debug'}"
       ]
       externs: [
         'bower_components/este-library/externs/react.js'
@@ -242,7 +239,7 @@ compileOptions = ->
       output_wrapper: '(function(){%output%})();'
       warning_level: 'VERBOSE'
 
-  if args.stage == 'debug'
+  if args.production == 'debug'
     # Debug and formatting makes compiled code readable.
     options.compilerFlags.debug = true
     options.compilerFlags.formatting = 'PRETTY_PRINT'
@@ -291,9 +288,9 @@ gulp.task 'js', (done) ->
   sequence.push [
     'compileClientApp'
     'compileServerApp'
-  ] if args.stage
+  ] if args.production
   sequence.push 'concatScripts'
-  sequence.push 'livereload-notify' if changedFilePath && !args.stage
+  sequence.push 'livereload-notify' if changedFilePath && !args.production
   sequence.push done
   runSequence sequence...
 
@@ -301,8 +298,8 @@ gulp.task 'build', (done) ->
   runSequence 'clean', 'transpile',  'js', done
 
 gulp.task 'env', ->
-  process.env['NODE_ENV'] = if args.stage
-    'stage'
+  process.env['NODE_ENV'] = if args.production
+    'production'
   else
     'development'
 
@@ -326,7 +323,7 @@ gulp.task 'watch', ->
 
 gulp.task 'run', (done) ->
   sequence = ['env']
-  sequence.push 'livereload-server' if !args.stage
+  sequence.push 'livereload-server' if !args.production
   sequence.push 'watch', 'server', done
   runSequence sequence...
 

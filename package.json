@@ -62,7 +62,7 @@
   },
   "scripts": {
     "start": "node server/app",
-    "test": "gulp build --stage"
+    "test": "gulp build --production"
   },
   "engines": {
     "node": "0.10.x"

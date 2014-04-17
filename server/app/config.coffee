@@ -4,7 +4,6 @@ port = process.env.PORT || 8000
 module.exports =
   env:
     development: currentEnv == 'development'
-    staging: currentEnv == 'staging'
     production: currentEnv == 'production'
   server:
     port: port
