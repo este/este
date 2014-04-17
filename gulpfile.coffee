@@ -328,8 +328,11 @@ gulp.task 'default', (done) ->
   runSequence 'build', 'run', done
 
 gulp.task 'bump', (done) ->
+  type = args.major && 'major' || args.minor && 'minor' || 'patch'
+  # This prevents accidental major bump.
+  return if type == 'major'
   gulp.src paths.packages
-    .pipe bump type: args.major && 'major' || args.minor && 'minor' || 'patch'
+    .pipe bump type: type
     .pipe gulp.dest './'
     .on 'end', ->
       version = require('./package').version
