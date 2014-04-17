@@ -1,20 +1,20 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Robust and comfortable dev stack for isomorphic web apps.
+Robust and comfortable dev stack for isomorphic (browser + Node.js) web apps.
 
 #### Libraries
   - Google Closure
   - Facebook React
-  - Polymer Pointer Events
-  - Node.js
+  - Polymer
+  -   Pointer Events
+    - observe-js
   - [este-library](https://github.com/steida/este-library)
 
 #### Languages
-  - CoffeeScript (optional)
-  - Stylus (optional)
+  - ES6 (via Facebook React JSX harmony)
+  - CoffeeScript (compatible with Closure Compiler)
+  - Stylus
   - CSS Less (in progress)
-  - TypeScript (in progress)
-  - ES6 (in progress)
 
 #### Tools
   - Well tuned [gulpjs.com](gulpjs.com) dev stack.
