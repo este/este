@@ -46,24 +46,28 @@ paths =
   ]
   coffee: [
     'bower_components/este-library/este/**/*.coffee'
-    'client/**/*.coffee'
-    'server/**/*.coffee'
+    'client/**/js/**/*.coffee'
+    'server/**/js/**/*.coffee'
   ]
   react: [
-    'client/**/*.jsx'
-    'server/**/*.jsx'
+    # Why this crazy /**/js/** pattern? Because one server app can have several
+    # compilation targets: client/app, client/admin, client/landingpage etc.
+    # This pattern ensures that client/whatever/build directories are ignored.
+    'client/**/js/**/*.jsx'
+    'server/**/js/**/*.jsx'
   ]
   depsPrefix: '../../../..'
   nodejs: 'bower_components/closure-library/closure/goog/bootstrap/nodejs'
   unitTests: [
     'bower_components/este-library/este/**/*_test.js'
-    'client/**/*_test.js'
+    'client/**/js/**/*_test.js'
+    'client/**/js/**/*_test.js'
   ]
   compile: [
     'bower_components/closure-library/**/*.js'
     'bower_components/este-library/este/**/*.js'
-    'client/**/*.js'
-    'server/**/*.js'
+    'client/**/js/**/*.js'
+    'server/**/js/**/*.js'
     'tmp/**/*.js'
   ]
   packages: './*.json'
@@ -128,7 +132,7 @@ gulp.task 'coffee', ->
 
 gulp.task 'react', ->
   gulp.src changedFilePath ? paths.react, base: '.'
-    .pipe react()
+    .pipe react harmony: true
     .pipe gulp.dest '.'
 
 gulp.task 'deps', ->
@@ -139,6 +143,12 @@ gulp.task 'deps', ->
     .pipe gulp.dest 'tmp'
 
 gulp.task 'unitTests', ->
+  if changedFilePath
+    # Ensure changedFilePath is _test.js file.
+    if !/_test\.js$/.test changedFilePath
+      changedFilePath = changedFilePath.replace '.js', '_test.js'
+    return if not fs.existsSync changedFilePath
+
   # Clean global variables created during test. For instance: goog and este.
   Object.keys(global).forEach (key) ->
     return if globals.indexOf(key) > -1
@@ -161,10 +171,7 @@ gulp.task 'unitTests', ->
   require './' + paths.nodejs
   require './' + 'tmp/deps0.js'
 
-  # For watch mode, run foo_test.js when foo.js is changed.
-  if changedFilePath && !/_test\.js$/.test changedFilePath
-    changedFilePath = changedFilePath.replace '.js', '_test.js'
-
+  # Auto require Closure dependencies for unit test.
   autoRequire = (file) ->
     jsPath = file.path.replace '_test.js', '.js'
     return false if not fs.existsSync jsPath
@@ -176,9 +183,7 @@ gulp.task 'unitTests', ->
 
   gulp.src changedFilePath ? paths.unitTests
     .pipe filter autoRequire
-    .pipe mocha
-      ui: 'tdd'
-      reporter: 'dot'
+    .pipe mocha reporter: 'dot',  ui: 'tdd'
 
 gulp.task 'diContainer', ->
   streams = for container, i in diContainers
@@ -273,6 +278,9 @@ gulp.task 'compileServerApp', ->
   options.compilerFlags.externs.push nodeJsExterns...
   compile 'server/app/build', options
 
+gulp.task 'transpile', (done) ->
+  runSequence 'stylus', 'coffee', 'react', done
+
 gulp.task 'js', (done) ->
   sequence = []
   sequence.push 'deps' if closureDeps.changed changedFilePath
@@ -287,14 +295,7 @@ gulp.task 'js', (done) ->
   runSequence sequence...
 
 gulp.task 'build', (done) ->
-  runSequence [
-    'clean'
-    'stylus'
-    'coffee'
-    'react'
-    'js'
-    done
-  ]...
+  runSequence 'clean', 'transpile',  'js', done
 
 gulp.task 'env', ->
   process.env['NODE_ENV'] = if args.stage
