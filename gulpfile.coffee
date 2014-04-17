@@ -325,7 +325,10 @@ gulp.task 'watch', ->
   watch.start()
 
 gulp.task 'run', (done) ->
-  runSequence 'env', 'livereload-server', 'watch', 'server', done
+  sequence = ['env']
+  sequence.push 'livereload-server' if !args.stage
+  sequence.push 'watch', 'server', done
+  runSequence sequence...
 
 gulp.task 'default', (done) ->
   runSequence 'build', 'run', done
