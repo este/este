@@ -252,6 +252,7 @@ compileOptions = ->
 compile = (dest, compileOptions) ->
   gulp.src paths.compile
     .pipe closureCompiler compileOptions
+    .on 'error', (err) -> gutil.log err.message
     .pipe size showFiles: true, gzip: true
     .pipe gulp.dest dest
 
