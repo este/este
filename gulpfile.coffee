@@ -104,6 +104,7 @@ gulp.task 'clean', ->
     .pipe filter isOrphan
     .pipe clean()
 
+# NOTE: gulp-stylus doesn't report fileName on error. Waiting for Gulp 4.
 gulp.task 'stylus', ->
   streams = paths.stylus.map (stylusPath) ->
     gulp.src stylusPath, base: '.'
@@ -116,7 +117,7 @@ gulp.task 'stylus', ->
       .pipe cond args.stage, minifyCss()
       .pipe gulp.dest '.'
   eventStream.merge streams...
-  # TODO(steida): Ensure watch isn't stopped on error. Waiting for Gulp 4
+  # NOTE: Ensure watch isn't stopped on error. Waiting for Gulp 4.
   # github.com/gulpjs/gulp/issues/258.
   return
 
@@ -128,9 +129,12 @@ gulp.task 'coffee', ->
     .pipe coffee2closure()
     .pipe gulp.dest '.'
 
+# NOTE: gulp-react doesn't report fileName on error. Waiting for Gulp 4.
 gulp.task 'react', ->
   gulp.src changedFilePath ? paths.react, base: '.'
+    .pipe plumber()
     .pipe react harmony: true
+    .on 'error', (err) -> gutil.log err.message
     .pipe gulp.dest '.'
 
 gulp.task 'deps', ->
