@@ -55,7 +55,7 @@ Robust and comfortable dev stack for isomorphic (browser + Node.js) web apps.
 
   Start development. Build app and run development stack.
 
-  ```gulp```
+  ```gulp ```
 
   Production mode. Styles are minified and scripts are compiled.
 
