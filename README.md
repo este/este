@@ -1,19 +1,19 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Robust and comfortable dev stack for isomorphic (browser + Node.js) web apps.
+Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) (browser + Node.js) web apps.
 
 #### Libraries
-  - Google Closure
-  - Facebook React
+  - [Google Closure](https://developers.google.com/closure/library/)
+  - [Facebook React](http://facebook.github.io/react/)
   - Polymer
-  -   Pointer Events
-    - observe-js
+    - [Pointer Events](http://www.polymer-project.org/platform/pointer-events.html)
+    - [observe-js](https://github.com/Polymer/observe-js)
   - [este-library](https://github.com/steida/este-library)
 
 #### Languages
-  - ES6 (via Facebook React JSX harmony)
-  - CoffeeScript (compatible with Closure Compiler)
-  - Stylus
+  - ES6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
+  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/))
+  - [Stylus](http://learnboost.github.io/stylus/)
   - CSS Less (in progress)
 
 #### Tools
