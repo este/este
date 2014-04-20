@@ -161,7 +161,3 @@ gulp.task 'default', (done) ->
 
 gulp.task 'bump', (done) ->
   este.bump './*.json', yargs, done
-
-gulp.task 'clean', ->
-  este.cleanOrphans
-    '{client,server}/**/*.js': []
