@@ -75,6 +75,8 @@ Robust and comfortable dev stack for isomorphic (browser + Node.js) web apps.
 
 ### Recommended Editor: [Atom.io](http://atom.io)
 
+Editor [settings](https://github.com/steida/atom-io-settings).
+
 ## Stay Tuned
 
   - [twitter.com/estejs](https://twitter.com/estejs)
