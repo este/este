@@ -16,24 +16,23 @@ paths =
   ]
   coffee: [
     'bower_components/este-library/este/**/*.coffee'
-    'client/**/js/**/*.coffee'
-    'server/**/js/**/*.coffee'
+    '{client,server}/**/*.coffee'
   ]
   react: [
-    'client/**/js/**/*.jsx'
-    'server/**/js/**/*.jsx'
+    '{client,server}/**/*.jsx'
   ]
   scripts: [
     'bower_components/closure-library/**/*.js'
     'bower_components/este-library/este/**/*.js'
-    'client/**/js/**/*.js'
-    'server/**/js/**/*.js'
+    '{client,server}/**/*.js'
     'tmp/**/*.js'
+    '!**/build/**'
   ]
   unittest: [
-    'bower_components/este-library/este/**/*_test.js'
-    'client/**/js/**/*_test.js'
-    'server/**/js/**/*_test.js'
+    # App unit tests.
+    '{client,server}/**/*_test.js'
+    # Linked library unit tests. Useful for library development.
+    # 'bower_components/este-library/**/*_test.js'
   ]
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [
@@ -162,3 +161,7 @@ gulp.task 'default', (done) ->
 
 gulp.task 'bump', (done) ->
   este.bump './*.json', yargs, done
+
+gulp.task 'clean', ->
+  este.cleanOrphans
+    '{client,server}/**/*.js': []
