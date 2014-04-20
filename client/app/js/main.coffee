@@ -14,7 +14,7 @@ app.main = (data) ->
       # Inject runtime value.
       element: document.querySelector '#este-app'
 
-  # Check app.coffee to see what happen there.
+  # Check 'app.coffee' file to see what happens there.
   container.resolveApp()
 
 goog.exportSymbol 'app.main', app.main
