@@ -11,7 +11,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - [este-library](https://github.com/steida/este-library)
 
 #### Languages
-  - ES6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
+  - ECMAScript 6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
   - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/))
   - [Stylus](http://learnboost.github.io/stylus/)
   - CSS Less (in progress)
