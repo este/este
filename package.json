@@ -33,7 +33,7 @@
     "piping": "~0.1.6",
     "run-sequence": "^0.3.6",
     "yargs": "^1.2.1",
-    "gulp-este": "^0.1.1"
+    "gulp-este": "^0.2.0"
   },
   "scripts": {
     "start": "node server/app",
