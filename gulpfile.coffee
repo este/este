@@ -18,7 +18,7 @@ paths =
     'bower_components/este-library/este/**/*.coffee'
     '{client,server}/**/*.coffee'
   ]
-  react: [
+  jsx: [
     '{client,server}/**/*.jsx'
   ]
   scripts: [
@@ -63,8 +63,8 @@ gulp.task 'stylus', ->
 gulp.task 'coffee', ->
   este.coffee paths.coffee
 
-gulp.task 'react', ->
-  este.react paths.react
+gulp.task 'jsx', ->
+  este.jsx paths.jsx
 
 gulp.task 'deps', ->
   este.deps paths.scripts
@@ -110,7 +110,7 @@ gulp.task 'compile-serverapp', ->
       formatting: 'PRETTY_PRINT'
 
 gulp.task 'transpile', (done) ->
-  runSequence 'stylus', 'coffee', 'react', done
+  runSequence 'stylus', 'coffee', 'jsx', done
 
 gulp.task 'js', (done) ->
   runSequence [
@@ -143,7 +143,7 @@ gulp.task 'watch', ->
     coffee: 'coffee'
     css: 'livereload-notify'
     js: 'js'
-    jsx: 'react'
+    jsx: 'jsx'
     styl: 'stylus'
   , (task) -> gulp.start task
 
