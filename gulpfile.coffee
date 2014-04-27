@@ -29,10 +29,9 @@ paths =
     '!**/build/**'
   ]
   unittest: [
-    # App unit tests.
     '{client,server}/**/*_test.js'
-    # Linked library unit tests. Useful for library development.
-    # 'bower_components/este-library/**/*_test.js'
+    # Useful for in app library development together with 'bower link'.
+    # 'bower_components/xyz-library/**/*_test.js'
   ]
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [

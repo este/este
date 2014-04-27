@@ -30,7 +30,7 @@
     "jsdom": "^0.10.5"
   },
   "devDependencies": {
-    "gulp-este": "^0.3.2",
+    "gulp-este": "^0.3.4",
     "piping": "~0.1.6",
     "run-sequence": "^0.3.6",
     "yargs": "^1.2.1"
