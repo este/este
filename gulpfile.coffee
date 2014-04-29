@@ -49,12 +49,14 @@ paths =
 
 dirs =
   googBaseJs: 'bower_components/closure-library/closure/goog'
+  nodeJsExterns: 'bower_components/closure-compiler-externs'
   watch: [
     'bower_components/este-library/este'
+    # Do not watch /build directories! That's why /app is specified.
     'client/app/css'
     'client/app/js'
     'server/app/js'
-  ]
+  ],
 
 gulp.task 'stylus', ->
   este.stylus paths.stylus
@@ -64,6 +66,9 @@ gulp.task 'coffee', ->
 
 gulp.task 'jsx', ->
   este.jsx paths.jsx
+
+gulp.task 'transpile', (done) ->
+  runSequence 'stylus', 'coffee', 'jsx', done
 
 gulp.task 'deps', ->
   este.deps paths.scripts
@@ -83,13 +88,6 @@ gulp.task 'dicontainer', ->
 gulp.task 'concat-deps', ->
   este.concatDeps()
 
-gulp.task 'concat-all', ->
-  este.concatAll
-    'client/app/build/app.js': paths.concatAll
-
-gulp.task 'livereload-notify', ->
-  este.liveReloadNotify()
-
 gulp.task 'compile-clientapp', ->
   este.compile paths.scripts, 'client/app/build',
     compilerPath: paths.compiler
@@ -103,13 +101,17 @@ gulp.task 'compile-serverapp', ->
     compilerFlags:
       closure_entry_point: 'server.main'
       externs: paths.externs
-        .concat este.getExterns 'bower_components/closure-compiler-externs'
+        .concat este.getExterns dirs.nodeJsExterns
       # To have compiled code readable, so we can trace errors.
       debug: true
       formatting: 'PRETTY_PRINT'
 
-gulp.task 'transpile', (done) ->
-  runSequence 'stylus', 'coffee', 'jsx', done
+gulp.task 'concat-all', ->
+  este.concatAll
+    'client/app/build/app.js': paths.concatAll
+
+gulp.task 'livereload-notify', ->
+  este.liveReloadNotify()
 
 gulp.task 'js', (done) ->
   runSequence [
@@ -132,8 +134,6 @@ gulp.task 'build', (done) ->
 gulp.task 'env', ->
   este.setNodeEnv()
 
-gulp.task 'server', este.bg 'node', ['server/app']
-
 gulp.task 'livereload-server', ->
   este.liveReloadServer()
 
@@ -145,6 +145,8 @@ gulp.task 'watch', ->
     jsx: 'jsx'
     styl: 'stylus'
   , (task) -> gulp.start task
+
+gulp.task 'server', este.bg 'node', ['server/app']
 
 gulp.task 'run', (done) ->
   runSequence [
