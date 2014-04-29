@@ -56,7 +56,7 @@ dirs =
     'client/app/css'
     'client/app/js'
     'server/app/js'
-  ],
+  ]
 
 gulp.task 'stylus', ->
   este.stylus paths.stylus
