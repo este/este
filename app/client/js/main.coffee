@@ -10,9 +10,7 @@ app.main = (data) ->
 
   container.configure
     resolve: App
-    with:
-      # Inject runtime value.
-      element: document.querySelector '#este-app'
+    with: element: document.body
 
   # Check 'app.coffee' file to see what happens there.
   container.resolveApp()

@@ -51,7 +51,7 @@ class server.FrontPage
           #{headScripts}
         </head>
         <body>
-          <div id="este-app">#{reactComponentHtml}</div>
+          #{reactComponentHtml}
           #{bodyScripts}
         </body>
       </html>

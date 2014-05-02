@@ -33,7 +33,7 @@ app.react.App = function(todos) {
     },
     render: function() {
       return (
-        <div>
+        <div id="este-app">
           <h3>TODO</h3>
           <TodoList items={todos.items} />
           <form onSubmit={this.onFormSubmit}>
