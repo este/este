@@ -21,13 +21,13 @@ class server.FrontPage
     reactComponentHtml = React.renderComponentToString reactComponent()
 
     headScripts = """
-      <script src="/client/app/build/app.js?v=#{@buildNumber}"></script>
+      <script src="/app/client/build/app.js?v=#{@buildNumber}"></script>
     """
     if @isDev
       headScripts += """
         <script src="/bower_components/closure-library/closure/goog/base.js"></script>
         <script src="/tmp/deps.js"></script>
-        <script src="/client/app/js/main.js"></script>
+        <script src="/app/client/js/main.js"></script>
       """
 
     bodyScripts = """
@@ -46,8 +46,8 @@ class server.FrontPage
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
           <title>#{title}</title>
-          <link href="/client/app/img/favicon.ico" rel="shortcut icon" />
-          <link href="/client/app/build/app.css?v=#{@buildNumber}" rel="stylesheet" />
+          <link href="/app/client/img/favicon.ico" rel="shortcut icon" />
+          <link href="/app/client/build/app.css?v=#{@buildNumber}" rel="stylesheet" />
           #{headScripts}
         </head>
         <body>

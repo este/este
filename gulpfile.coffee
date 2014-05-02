@@ -12,24 +12,24 @@ este = new GulpEste __dirname, args.production, '../../../..'
 
 paths =
   stylus: [
-    'client/app/css/app.styl'
+    'app/client/css/app.styl'
   ]
   coffee: [
     'bower_components/este-library/este/**/*.coffee'
-    '{client,server}/**/*.coffee'
+    'app/**/*.coffee'
   ]
   jsx: [
-    '{client,server}/**/*.jsx'
+    'app/**/*.jsx'
   ]
-  scripts: [
+  js: [
     'bower_components/closure-library/**/*.js'
     'bower_components/este-library/este/**/*.js'
-    '{client,server}/**/*.js'
+    'app/**/*.js'
     'tmp/**/*.js'
     '!**/build/**'
   ]
   unittest: [
-    '{client,server}/**/*_test.js'
+    'app/**/*_test.js'
     # Useful for in app library development together with 'bower link'.
     # 'bower_components/xyz-library/**/*_test.js'
   ]
@@ -37,7 +37,7 @@ paths =
   externs: [
     'bower_components/este-library/externs/react.js'
   ]
-  concatAll:
+  thirdParty:
     development: [
       'bower_components/observe-js/src/observe.js'
       'bower_components/react/react.js'
@@ -50,13 +50,7 @@ paths =
 dirs =
   googBaseJs: 'bower_components/closure-library/closure/goog'
   nodeJsExterns: 'bower_components/closure-compiler-externs'
-  watch: [
-    'bower_components/este-library/este'
-    # Do not watch /build directories! That's why /app is specified.
-    'client/app/css'
-    'client/app/js'
-    'server/app/js'
-  ]
+  watch: ['app']
 
 gulp.task 'stylus', ->
   este.stylus paths.stylus
@@ -71,7 +65,7 @@ gulp.task 'transpile', (done) ->
   runSequence 'stylus', 'coffee', 'jsx', done
 
 gulp.task 'deps', ->
-  este.deps paths.scripts
+  este.deps paths.js
 
 gulp.task 'unittest', ->
   este.unitTest dirs.googBaseJs, paths.unittest
@@ -89,14 +83,14 @@ gulp.task 'concat-deps', ->
   este.concatDeps()
 
 gulp.task 'compile-clientapp', ->
-  este.compile paths.scripts, 'client/app/build',
+  este.compile paths.js, 'app/client/build',
     compilerPath: paths.compiler
     compilerFlags:
       closure_entry_point: 'app.main'
       externs: paths.externs
 
 gulp.task 'compile-serverapp', ->
-  este.compile paths.scripts, 'server/app/build',
+  este.compile paths.js, 'app/server/build',
     compilerPath: paths.compiler
     compilerFlags:
       closure_entry_point: 'server.main'
@@ -108,7 +102,7 @@ gulp.task 'compile-serverapp', ->
 
 gulp.task 'concat-all', ->
   este.concatAll
-    'client/app/build/app.js': paths.concatAll
+    'app/client/build/app.js': paths.thirdParty
 
 gulp.task 'livereload-notify', ->
   este.liveReloadNotify()
@@ -146,7 +140,7 @@ gulp.task 'watch', ->
     styl: 'stylus'
   , (task) -> gulp.start task
 
-gulp.task 'server', este.bg 'node', ['server/app']
+gulp.task 'server', este.bg 'node', ['app/server']
 
 gulp.task 'run', (done) ->
   runSequence [

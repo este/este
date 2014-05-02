@@ -13,6 +13,6 @@ class server.Middleware
 
   use: (app) ->
     app['use'] @compression()
-    app['use'] @favicon 'client/app/img/favicon.ico'
+    # app['use'] @favicon 'app/client/img/favicon.ico'
     app['use'] @bodyParser()
     app['use'] @methodOverride()

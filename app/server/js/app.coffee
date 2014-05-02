@@ -19,11 +19,11 @@ class server.App
     if isDev
       # Square brackets syntax until we will have Express 4 externs.
       app['use'] '/bower_components', express['static'] 'bower_components'
-      app['use'] '/client', express['static'] 'client'
+      app['use'] '/app', express['static'] 'app'
       app['use'] '/tmp', express['static'] 'tmp'
     else
       # Compiled script has per deploy specific url so set maxAge to one year.
-      app['use'] '/client', express['static'] 'client', 'maxAge': 31557600000
+      app['use'] '/app', express['static'] 'app', 'maxAge': 31557600000
 
     app['listen'] port, ->
       console.log 'Express server listening on port ' + port

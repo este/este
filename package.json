@@ -30,13 +30,13 @@
     "jsdom": "^0.10.5"
   },
   "devDependencies": {
-    "gulp-este": "^0.3.4",
+    "gulp-este": "^0.4.1",
     "piping": "~0.1.6",
     "run-sequence": "^0.3.6",
     "yargs": "^1.2.1"
   },
   "scripts": {
-    "start": "node server/app",
+    "start": "node app/server",
     "test": "gulp build --production"
   },
   "engines": {
