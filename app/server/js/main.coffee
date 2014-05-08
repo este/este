@@ -10,7 +10,7 @@ server.main = (config) ->
   container = new server.DiContainer
 
   # Note how CommonJS modules are injected. Requiring from different place
-  # than composite root is an anti-pattern leading towards hard to test code.
+  # than composite root is an anti-pattern leading toward hard to test code.
   container.configure
     resolve: server.App
     with:

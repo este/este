@@ -6,13 +6,16 @@ goog.require 'app.DiContainer'
   @param {Object} data Server side data. Useful for config, preload, whatever.
 ###
 app.main = (data) ->
+
+  # DI container is magic tool, check: github.com/steida/closure-dicontainer.
   container = new app.DiContainer
 
+  # Inject document.body to App constructor.
   container.configure
     resolve: App
     with: element: document.body
 
-  # Check 'app.coffee' file to see what happens there.
+  # Instantiate App with all their dependencies resolved.
   container.resolveApp()
 
 goog.exportSymbol 'app.main', app.main

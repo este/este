@@ -39,11 +39,9 @@ paths =
   ]
   thirdParty:
     development: [
-      'bower_components/observe-js/src/observe.js'
       'bower_components/react/react.js'
     ]
     production: [
-      'bower_components/observe-js/src/observe.js'
       'bower_components/react/react.min.js'
     ]
 
