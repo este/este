@@ -5,22 +5,20 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 #### Libraries
   - [Google Closure](https://developers.google.com/closure/library/)
   - [Facebook React](http://facebook.github.io/react/)
-  - Polymer
-    - [Pointer Events](http://www.polymer-project.org/platform/pointer-events.html)
-    - [observe-js](https://github.com/Polymer/observe-js)
+  - [Polymer Pointer Events](http://www.polymer-project.org/platform/pointer-events.html)
   - [este-library](https://github.com/steida/este-library)
 
 #### Languages
-  - ECMAScript 6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
   - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/))
+  - ECMAScript 6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
   - [Stylus](http://learnboost.github.io/stylus/)
-  - CSS Less (in progress)
 
 #### Tools
-  - Well tuned [gulpjs.com](gulpjs.com) dev stack.
-  - Super fast [file-watcher](https://github.com/steida/este-watch).  
-  - [DI Container](https://github.com/steida/gulp-closure-dicontainer) for with automatic registration and resolving based on types.
-  - Unit testing with [Mocha](http://visionmedia.github.io/mocha).
+  - Well tuned [gulp](gulpjs.com) [dev stack](https://github.com/steida/gulp-este)
+  - Super fast [file-watcher](https://github.com/steida/este-watch)
+  - Neat [DI Container](https://github.com/steida/gulp-closure-dicontainer)
+  - Fantastic [Closure Compiler](https://developers.google.com/closure/compiler/)
+  - TDD ready [Mocha](http://visionmedia.github.io/mocha)
 
 #### Features
   - React server-side rendering.
