@@ -73,7 +73,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 
 ### Recommended Editor: [Atom.io](http://atom.io)
 
-Editor [settings](https://github.com/steida/atom-io-settings).
+Recommended [settings](https://github.com/steida/atom-io-settings).
 
 ## Stay Tuned
 
