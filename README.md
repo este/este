@@ -79,6 +79,7 @@ Recommended [settings](https://github.com/steida/atom-io-settings).
 
   - [twitter.com/estejs](https://twitter.com/estejs)
   - [medium.com/@steida](https://medium.com/@steida)
+  - [facebook.com/groups/110240425784074](https://www.facebook.com/groups/110240425784074/)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
 
 ## License
