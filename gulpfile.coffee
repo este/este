@@ -35,7 +35,7 @@ paths =
   ]
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [
-    'bower_components/este-library/externs/react.js'
+    'bower_components/react-externs/externs.js'
   ]
   thirdParty:
     development: [
