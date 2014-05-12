@@ -1,12 +1,11 @@
-goog.provide 'app.todos.Storage'
+goog.provide 'app.todos.Store'
 
 goog.require 'goog.array'
 goog.require 'goog.events.EventTarget'
 
-class app.todos.Storage extends goog.events.EventTarget
+class app.todos.Store extends goog.events.EventTarget
 
   ###*
-    Storage handles all operations with todo models.
     @param {app.todos.Todos} todos
     @constructor
     @extends {goog.events.EventTarget}
@@ -32,21 +31,21 @@ class app.todos.Storage extends goog.events.EventTarget
   ###
   add: (title) ->
     @todos.add title
-    @dispatchChangeEvent()
+    @notify_()
 
   clearAll: ->
     @todos.clearAll()
-    @dispatchChangeEvent()
+    @notify_()
 
   ###*
     @param {app.todos.Todo} todo
   ###
   remove: (todo) ->
     goog.array.remove @todos.items, todo
-    @dispatchChangeEvent()
+    @notify_()
 
   ###*
     @private
   ###
-  dispatchChangeEvent: ->
+  notify_: ->
     @dispatchEvent 'change'

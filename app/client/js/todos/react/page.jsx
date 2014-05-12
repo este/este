@@ -2,10 +2,10 @@
 goog.provide('app.todos.react.Page');
 
 /**
- * @param {app.todos.Storage} storage
+ * @param {app.todos.Store} store
  * @constructor
  */
-app.todos.react.Page = function(storage) {
+app.todos.react.Page = function(store) {
 
   this.reactClass = React.createClass({
 
@@ -16,7 +16,7 @@ app.todos.react.Page = function(storage) {
     },
 
     render: function() {
-      var todos = storage.getTodos();
+      var todos = store.getTodos();
 
       return (
         <div className="todos-page">
@@ -48,15 +48,15 @@ app.todos.react.Page = function(storage) {
     },
 
     componentDidMount: function() {
-      storage.listen('change', this.onStorageChange);
+      store.listen('change', this.onStoreChange);
     },
 
-    onStorageChange: function(e) {
+    onStoreChange: function(e) {
       this.forceUpdate();
     },
 
     onCompleteButtonClick: function(todo, e) {
-      storage.remove(todo);
+      store.remove(todo);
     },
 
     onNewTodoFormSubmit: function(e) {
@@ -66,7 +66,7 @@ app.todos.react.Page = function(storage) {
         this.refs['newTodoInput'].getDOMNode().focus();
         return;
       }
-      storage.add(title);
+      store.add(title);
       this.setState({text: ''});
     },
 
@@ -75,7 +75,7 @@ app.todos.react.Page = function(storage) {
     },
 
     onClearAllButtonClick: function(e) {
-      storage.clearAll();
+      store.clearAll();
     }
 
   });
