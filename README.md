@@ -31,6 +31,8 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   npm install -g gulp
   npm install -g bower
   ```
+  
+For Windows users, how to install jsdom: [http://alexmeub.com/posts/2014-02-06-windows-npm-install-jsdom.html](http://alexmeub.com/posts/2014-02-06-windows-npm-install-jsdom.html).
 
 ## Getting Started
 
