@@ -12,7 +12,7 @@ class app.todos.react.Page
   constructor: (store) ->
     {div,ul,form,input,button,li} = React.DOM
 
-    @reactClass = React.createClass
+    @create = React.createClass
 
       getInitialState: ->
         text: ''

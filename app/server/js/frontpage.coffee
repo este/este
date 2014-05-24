@@ -18,7 +18,7 @@ class server.FrontPage
   ###
   render: (title, reactComponent) ->
     bodyHtml = @getBodyHtml reactComponent
-    html = React.renderComponentToStaticMarkup @reactApp.reactClass
+    html = React.renderComponentToStaticMarkup @reactApp.create
       bodyHtml: bodyHtml
       buildNumber: @buildNumber
       isDev: @isDev

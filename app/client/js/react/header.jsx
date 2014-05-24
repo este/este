@@ -6,7 +6,7 @@ goog.provide('app.react.Header');
  */
 app.react.Header = function() {
 
-  this.reactClass = React.createClass({
+  this.create = React.createClass({
 
     render: function() {
       return (

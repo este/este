@@ -8,4 +8,4 @@ class App
     @constructor
   ###
   constructor: (reactApp, element) ->
-    React.renderComponent reactApp.reactClass(), element
+    React.renderComponent reactApp.create(), element

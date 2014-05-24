@@ -7,10 +7,10 @@ goog.provide('app.react.App');
  * @constructor
  */
 app.react.App = function(header, todosPage) {
-  var Header = header.reactClass;
-  var TodosPage = todosPage.reactClass;
+  var Header = header.create;
+  var TodosPage = todosPage.create;
 
-  this.reactClass = React.createClass({
+  this.create = React.createClass({
 
     render: function() {
       return (

@@ -5,7 +5,7 @@ goog.provide('server.react.App');
  * @constructor
  */
 server.react.App = function() {
-  this.reactClass = React.createClass({
+  this.create = React.createClass({
 
     render: function() {
       return (

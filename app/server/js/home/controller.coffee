@@ -12,6 +12,6 @@ class server.home.Controller
   use: (route) ->
     route
       .get (req, res) =>
-        html = @frontPage.render 'Home - Este.js', @todoApp.reactClass
+        html = @frontPage.render 'Home - Este.js', @todoApp.create
         res['send'] html
         return
