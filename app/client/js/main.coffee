@@ -7,15 +7,15 @@ goog.require 'app.DiContainer'
 ###
 app.main = (data) ->
 
-  # DI container is magic tool, check: github.com/steida/closure-dicontainer.
+  # Learn something about: github.com/steida/closure-dicontainer
   container = new app.DiContainer
 
-  # Inject document.body to App constructor.
+  # Configure runtime values.
   container.configure
     resolve: App
     with: element: document.body
 
-  # Instantiate App with all their dependencies resolved.
+  # Run app with resolved dependencies.
   container.resolveApp()
 
 goog.exportSymbol 'app.main', app.main
