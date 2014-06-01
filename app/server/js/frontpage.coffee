@@ -13,28 +13,30 @@ class server.FrontPage
 
   ###*
     @param {string} title
-    @param {function(): React.ReactComponent} reactComponent
+    @param {function(): React.ReactComponent} createReactApp
     @return {string} Rendered HTML.
   ###
-  render: (title, reactComponent) ->
-    bodyHtml = @getBodyHtml reactComponent
+  render: (title, createReactApp) ->
+    appHtml = React.renderComponentToString createReactApp()
+    scriptsHtml = @getScriptsHtml()
+
     html = React.renderComponentToStaticMarkup @reactApp.create
-      bodyHtml: bodyHtml
+      bodyHtml: appHtml + scriptsHtml
       buildNumber: @buildNumber
-      isDev: @isDev
       title: title
 
     # React can't render doctype so we have to manually add it.
     '<!DOCTYPE html>' + html
 
-  ###*
-    Body HTML must be injected to prevent content escaping.
-    @param {function(): React.ReactComponent} reactComponent
-    @return {string}
-  ###
-  getBodyHtml: (reactComponent) ->
-    bodyHtml = React.renderComponentToString reactComponent()
-    bodyHtml += "<script>app.main(#{JSON.stringify @clientData});</script>"
-    if @isDev
-      bodyHtml += '<script src="http://localhost:35729/livereload.js"></script>'
-    bodyHtml
+  getScriptsHtml: ->
+    scripts = ['/app/client/build/app.js?v=' + @buildNumber]
+    if @isDev then scripts.push [
+      '/bower_components/closure-library/closure/goog/base.js'
+      '/tmp/deps.js'
+      '/app/client/js/main.js'
+      'http://localhost:35729/livereload.js'
+    ]...
+    html = scripts
+      .map (script) -> """<script src="#{script}"></script>"""
+      .join ''
+    html + "<script>app.main(#{JSON.stringify @clientData});</script>"
