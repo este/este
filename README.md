@@ -77,6 +77,10 @@ For Windows users, how to install jsdom: [http://alexmeub.com/posts/2014-02-06-w
 
 Recommended [settings](https://github.com/steida/atom-io-settings).
 
+### Issues
+
+Error: EMFILE... OSX has default limit for opened file set to 256. Fix it with ```ulimit -n 10000```
+
 ## Stay Tuned
 
   - [twitter.com/estejs](https://twitter.com/estejs)
