@@ -31,7 +31,7 @@ paths =
   unittest: [
     'app/**/*_test.js'
     # Useful for in app library development together with 'bower link'.
-    # 'bower_components/xyz-library/**/*_test.js'
+    # 'bower_components/este-library/este/**/*_test.js'
   ]
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [
