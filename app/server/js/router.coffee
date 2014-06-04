@@ -3,14 +3,15 @@ goog.provide 'server.Router'
 class server.Router
 
   ###*
-    @param {server.home.Controller} homeController
+    @param {server.FrontPage} frontPage
+    @param {app.react.App} todoApp
+    @param {app.Routes} routes
     @constructor
   ###
-  constructor: (@homeController) ->
+  constructor: (@frontPage, @todoApp, @routes) ->
 
   use: (app) ->
-    routes =
-      '/': @homeController
-
-    for mask, controller of routes
-      controller.use app['route'] mask
+    @routes.addToExpress app, (req, res) =>
+      title = @routes.getActive().title
+      html = @frontPage.render title, @todoApp.create
+      res['send'] html
