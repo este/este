@@ -12,6 +12,6 @@ class server.Router
 
   use: (app) ->
     @routes.addToExpress app, (req, res) =>
-      title = @routes.getActive().title
+      title = @routes.active.title
       html = @frontPage.render title, @todoApp.create
       res['send'] html

@@ -10,8 +10,7 @@ class app.Routes extends este.Routes
   ###
   constructor: ->
     super()
-    @home = new este.Route '/',
-      'Home | Este.js'
+    @home = new este.Route '/', 'Home | Este.js'
 
     @list = [
       @home
