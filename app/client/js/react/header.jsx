@@ -29,6 +29,7 @@ app.react.Header = function() {
             we can share any code between client and server side. This is a{' '}
             <b>Holy Grail</b>.
           </p>
+          <p>In progress: Isomorphic app title and storages.</p>
         </header>
       );
     }

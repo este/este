@@ -4,7 +4,7 @@ class app.react.App
 
   ###*
    @param {app.react.Header} header
-   @param {app.todos.react.Page} todosPage
+   @param {app.react.pages.Todos} todosPage
    @constructor
   ###
   constructor: (header, todosPage) ->

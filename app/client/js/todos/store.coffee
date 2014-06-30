@@ -1,47 +1,42 @@
 goog.provide 'app.todos.Store'
 
+goog.require 'app.todos.Todo'
 goog.require 'goog.array'
 goog.require 'goog.events.EventTarget'
 
 class app.todos.Store extends goog.events.EventTarget
 
   ###*
-    @param {app.todos.Todos} todos
     @constructor
     @extends {goog.events.EventTarget}
     @final
   ###
-  constructor: (@todos) ->
+  constructor: ->
     super()
+    @todos = []
 
   ###*
-    @type {app.todos.Todos}
-    @private
+    @type {Array.<app.todos.Todo>}
   ###
   todos: null
-
-  ###*
-    @return {Array.<app.todos.Todo>}
-  ###
-  getTodos: ->
-    @todos.items
 
   ###*
     @param {string} title
   ###
   add: (title) ->
-    @todos.add title
+    todo = new app.todos.Todo title
+    @todos.push todo
     @notify_()
 
   clearAll: ->
-    @todos.clearAll()
+    @todos.length = 0
     @notify_()
 
   ###*
     @param {app.todos.Todo} todo
   ###
   remove: (todo) ->
-    goog.array.remove @todos.items, todo
+    goog.array.remove @todos, todo
     @notify_()
 
   ###*

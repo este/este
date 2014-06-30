@@ -1,9 +1,9 @@
 ###
   @fileoverview React written as idiomatic CoffeeScript. We don't need JSX.
 ###
-goog.provide 'app.todos.react.Page'
+goog.provide 'app.react.pages.Todos'
 
-class app.todos.react.Page
+class app.react.pages.Todos
 
   ###*
     @param {app.todos.Store} store
@@ -18,16 +18,15 @@ class app.todos.react.Page
         text: ''
 
       render: ->
-        todos = store.getTodos()
-
         div className: 'todos-page',
-          ul null, todos.map @renderTodo
+          ul null, store.todos.map @renderTodo
           form onSubmit: @onNewTodoFormSubmit,
             input
+              autoFocus: true
               onChange: @onNewTodoInputChange
               ref: 'newTodoInput'
               value: @state.text
-            button null, "Add ##{todos.length + 1}"
+            button null, "Add ##{store.todos.length + 1}"
           button onClick: @onClearAllButtonClick, 'Clear All'
 
       renderTodo: (todo, i) ->
