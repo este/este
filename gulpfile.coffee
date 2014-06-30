@@ -111,10 +111,8 @@ gulp.task 'js', (done) ->
     'unittest'
     'dicontainer'
     'concat-deps'
-    [
-      'compile-clientapp'
-      'compile-serverapp'
-    ] if args.production
+    'compile-clientapp' if args.production
+    'compile-serverapp' if args.production
     'concat-all'
     'livereload-notify' if este.shouldNotify()
     done
