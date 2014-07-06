@@ -3,7 +3,7 @@
 Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) (browser + Node.js) web apps. TodoMVC [demo](http://steida-este-todomvc.nodejitsu.com).
 
 Why I created Este.js? Because I love/need:
-  - Google Closure Library and Compiler, the most mature JavaScript library and optimalizer
+  - Google Closure Library and Compiler, the most mature JavaScript library and compiler.
   - Functional programming paradigm
   - Facebook React UI library (forget Angular, React is much better)
   - Isomorphic SPA (server side render, easily share manny code between client and server)
