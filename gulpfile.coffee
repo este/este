@@ -47,7 +47,6 @@ paths =
 
 dirs =
   googBaseJs: 'bower_components/closure-library/closure/goog'
-  nodeJsExterns: 'bower_components/closure-compiler-externs'
   watch: ['app']
 
 gulp.task 'stylus', ->
@@ -92,8 +91,7 @@ gulp.task 'compile-serverapp', ->
     compilerPath: paths.compiler
     compilerFlags:
       closure_entry_point: 'server.main'
-      externs: paths.externs
-        .concat este.getExterns dirs.nodeJsExterns
+      externs: paths.externs.concat este.getNodeJsExterns()
       # To have compiled code readable, so we can trace errors.
       debug: true
       formatting: 'PRETTY_PRINT'
