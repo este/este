@@ -3,18 +3,18 @@
 Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) (browser + Node.js) web apps. TodoMVC [demo](http://steida-este-todomvc.nodejitsu.com).
 
 Why I created Este.js? Because I love/need:
-  - Google Closure Library and Compiler, the most mature JavaScript library and compiler.
-  - Functional programming paradigm
-  - Facebook React UI library (forget Angular, React is much better)
-  - Isomorphic SPA (server side render, easily share manny code between client and server)
-  - offline first (app must hold state and allow optimistic updates with sync asap)
-  - mobile first (app must be super small and super snappy with min 60fps)
-  - statically compiled code (so we can happily refactore anything)
-  - TDD, dev stack is ready and super fast
-  - DI container, so we can write clean code and never ever thing about right app structure. Just create class and ask for elsewhere in some other class constructor.
-  - CoffeeScript (ok, Este.js does not require it, but I like it, especially with React it's super beautiful syntax)
-  - Well tunned Gulp dev stack for everything
-  - TODO: Add else features I just forget to mention.
+  - Google Closure Library and Compiler (The most mature JavaScript library and compiler.)
+  - Functional programming paradigm (Tame app state properly.)
+  - Facebook React UI library (Forget about Angular.js, React.js is much better.)
+  - Isomorphic SPA (Server side render, and much more. Reuse as much as possible code between client and server.)
+  - Offline first (App must hold state and allow optimistic updates with sync as soon as possible.)
+  - Mobile first (App must be super small and super snappy with at least 60fps.)
+  - Statically compiled code (So we can happily refactore anything.)
+  - TDD (Dev stack is ready and super fast.)
+  - DI container (So we can write clean code and don't have to thing about app structure. Just create class here and ask for it elsewhere. Done.)
+  - CoffeeScript (Optional, Este.js does not require it. But I like CoffeeScript a lot, especially with plain React.)
+  - Well tunned gulp dev stack (For everything.)
+  - TODO: Add features I have forget to mention.
 
 #### Libraries
   - [Google Closure](https://developers.google.com/closure/library/)
