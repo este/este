@@ -8,7 +8,7 @@ Why I created Este.js? Because I love/need:
   - Facebook React UI library (Forget about Angular.js, React.js is much better.)
   - Isomorphic SPA (Server side render, and much more. Reuse as much as possible code between client and server.)
   - Offline first (App must hold state and allow optimistic updates with sync as soon as possible.)
-  - Mobile first (App must be super small and super snappy with at least 60fps.)
+  - Mobile first (App must be super small and super snappy with at least 60FPS.)
   - Statically compiled code (So we can happily refactore anything.)
   - TDD (Dev stack is ready and super fast.)
   - DI container (So we can write clean code and don't have to thing about app structure. Just create class here and ask for it elsewhere. Done.)
