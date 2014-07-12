@@ -30,7 +30,7 @@
     "static-favicon": "^1.0.2"
   },
   "devDependencies": {
-    "gulp-este": "^0.5.2",
+    "gulp-este": "^1.0.1",
     "piping": "~0.1.6",
     "run-sequence": "^0.3.6",
     "yargs": "^1.2.1"
