@@ -1,8 +1,6 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/),
-[frontend first](http://frontendfirst.com), [offline first](https://developer.chrome.com/apps/offline_apps), and
-[mobile first](http://www.lukew.com/ff/entry.asp?933) web apps.
+Dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) [mobile first](http://www.lukew.com/ff/entry.asp?933) / [offline first](https://developer.chrome.com/apps/offline_apps) / [frontend first](http://frontendfirst.com)web apps.
 
 #### Demos
   - [TodoMVC](http://steida-este-todomvc.jit.su/)
