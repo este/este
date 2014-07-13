@@ -1,20 +1,12 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 
-Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) (browser + Node.js) web apps. TodoMVC [demo](http://steida-este-todomvc.nodejitsu.com).
+Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/),
+[frontend first](http://frontendfirst.com), [offline first](https://developer.chrome.com/apps/offline_apps), and
+[mobile first](http://www.lukew.com/ff/entry.asp?933) web apps.
 
-Why I created Este.js? Because I love/need:
-  - Google Closure Library and Compiler (The most mature JavaScript library and compiler.)
-  - Functional programming paradigm (Tame app state properly.)
-  - Facebook React UI library (Forget about Angular.js, React.js is much better.)
-  - Isomorphic SPA (Server side render, and much more. Reuse as much as possible code between client and server.)
-  - Offline first (App must hold state and allow optimistic updates with sync as soon as possible.)
-  - Mobile first (App must be super small and super snappy with at least 60FPS.)
-  - Statically compiled code (So we can happily refactore anything.)
-  - TDD (Dev stack is ready and super fast.)
-  - DI container (So we can write clean code and don't have to thing about app structure. Just create class here and ask for it elsewhere. Done.)
-  - CoffeeScript (Optional, Este.js does not require it. But I like CoffeeScript a lot, especially with plain React.)
-  - Well tunned gulp dev stack (For everything.)
-  - TODO: Add features I have forget to mention.
+#### Demos
+  - [TodoMVC](http://steida-este-todomvc.jit.su/)
+  - [Songary](http://songary.jit.su/)
 
 #### Libraries
   - [Google Closure](https://developers.google.com/closure/library/)
