@@ -40,7 +40,7 @@ Why I created Este.js? Because I love/need:
   - MVC meta framework (in progress).
 
 ## Prerequisites
-  [Java 1.7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required.
+  [Java 1.7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required.
   ```shell
   npm install -g gulp
   npm install -g bower
