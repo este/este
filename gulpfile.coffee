@@ -36,13 +36,16 @@ paths =
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [
     'bower_components/react-externs/externs.js'
+    'lib/discuss-externs.js'
   ]
   thirdParty:
     development: [
-      'bower_components/react/react.js'
+      'bower_components/react/react.js',
+      'bower_components/discuss.js/dist/discuss.js',
     ]
     production: [
       'bower_components/react/react.min.js'
+      'bower_components/discuss.js/dist/discuss.min.js',
     ]
 
 dirs =
@@ -90,6 +93,7 @@ gulp.task 'compile-serverapp', ->
   este.compile paths.js, 'app/server/build',
     compilerPath: paths.compiler
     compilerFlags:
+      compilation_level: 'SIMPLE_OPTIMIZATIONS'
       closure_entry_point: 'server.main'
       externs: paths.externs.concat este.getNodeJsExterns()
       # To have compiled code readable, so we can trace errors.

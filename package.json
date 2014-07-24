@@ -19,6 +19,7 @@
     "url": "https://github.com/steida/este.git"
   },
   "dependencies": {
+    "baucis": "^1.0.0-candidate.10",
     "body-parser": "^1.0.1",
     "coffee-script": "^1.7.1",
     "compression": "^1.0.1",
@@ -26,6 +27,7 @@
     "gulp": "^3.6.0",
     "jsdom": "^0.11.0",
     "method-override": "^2.0.0",
+    "mongoose": "^3.8.13",
     "react": "^0.11.0",
     "static-favicon": "^1.0.2"
   },

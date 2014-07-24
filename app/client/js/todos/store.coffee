@@ -3,12 +3,13 @@ goog.provide 'app.todos.Store'
 goog.require 'app.todos.Todo'
 goog.require 'goog.array'
 goog.require 'goog.events.EventTarget'
+goog.require 'este.labs.Store'
 
-class app.todos.Store extends goog.events.EventTarget
+class app.todos.Store extends este.labs.Store
 
   ###*
     @constructor
-    @extends {goog.events.EventTarget}
+    @extends {este.labs.Store}
     @final
   ###
   constructor: ->
@@ -26,21 +27,21 @@ class app.todos.Store extends goog.events.EventTarget
   add: (title) ->
     todo = new app.todos.Todo title
     @todos.push todo
-    @notify_()
+    @notify()
 
   clearAll: ->
     @todos.length = 0
-    @notify_()
+    @notify()
 
   ###*
     @param {app.todos.Todo} todo
   ###
   remove: (todo) ->
     goog.array.remove @todos, todo
-    @notify_()
+    @notify()
 
   ###*
     @private
   ###
-  notify_: ->
-    @dispatchEvent 'change'
+#  notify_: ->
+#    @dispatchEvent 'change'
