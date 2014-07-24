@@ -11,3 +11,5 @@ class app.Routes extends este.Routes
   constructor: ->
     super()
     @home = @route '/'
+    @foo = @route '/foo'
+    @users = @route '/users'

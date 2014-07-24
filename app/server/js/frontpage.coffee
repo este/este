@@ -17,7 +17,7 @@ class server.FrontPage
     @return {string} Rendered HTML.
   ###
   render: (title, createReactApp) ->
-    appHtml = React.renderComponentToString createReactApp()
+    appHtml = if @isDev then '' else React.renderComponentToString createReactApp()
     scriptsHtml = @getScriptsHtml()
 
     html = React.renderComponentToStaticMarkup @reactApp.create

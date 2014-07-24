@@ -37,11 +37,12 @@ class app.react.pages.Todos
             onClick: @onCompleteButtonClick.bind @, todo
           , '✔'
 
-      componentDidMount: ->
-        store.listen 'change', @onStoreChange
-
-      onStoreChange: ->
-        @forceUpdate()
+# Not needed.
+#      componentDidMount: ->
+#        store.listen 'change', @onStoreChange
+#
+#      onStoreChange: ->
+#        @forceUpdate()
 
       onCompleteButtonClick: (todo, e) ->
         store.remove todo
