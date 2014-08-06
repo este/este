@@ -4,7 +4,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 
 #### Demos
   - [TodoMVC](http://steida-este-todomvc.jit.su/), [repo](https://github.com/steida/este-todomvc)
-  - Songary (soon)
+  - [Songary](https://github.com/steida/songary) (under development, will be released soon)
 
 #### Libraries
   - [Google Closure](https://developers.google.com/closure/library/)
