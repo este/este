@@ -12,10 +12,13 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - [Polymer Pointer Events](http://www.polymer-project.org/platform/pointer-events.html)
   - [este-library](https://github.com/steida/este-library)
 
-#### Languages
-  - You can use [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/)), if you like
-  - ECMAScript 6 (via Facebook React [jstransform](https://github.com/facebook/jstransform/tree/master/visitors/__tests__))
-  - [Stylus](http://learnboost.github.io/stylus/)
+#### JavaScript
+  - Plain old JavaScript
+  - [React JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) (don't use harmony class syntax yet)
+  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/))
+
+#### Styles
+  - [Stylus](http://learnboost.github.io/stylus/) is recommended, sure you can use [LESS](https://github.com/plus3network/gulp-less) or what else you want.
 
 #### Tools
   - Well tuned [gulp](gulpjs.com) [dev stack](https://github.com/steida/gulp-este)
