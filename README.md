@@ -36,7 +36,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   npm install -g bower
   ```
   
-For Windows users, how to install jsdom: [http://alexmeub.com/posts/2014-02-06-windows-npm-install-jsdom.html](http://alexmeub.com/posts/2014-02-06-windows-npm-install-jsdom.html).
+For Windows users, because jsdom installation sucks, you have to install Visual Studio Express 2012 C++ (it's free) before. Remember, install right 32/64 bit versions depending on your Windows.
 
 ## Getting Started
 
