@@ -10,9 +10,10 @@ class app.react.App
   constructor: (header, todosPage) ->
     {div} = React.DOM
 
-    @create = React.createClass
+    @component = React.createClass
 
       render: ->
         div id: 'este-app',
-          header.create null
-          todosPage.create null
+          header.component {}
+          # Here you can choose another page by routes.active route.
+          todosPage.component {}

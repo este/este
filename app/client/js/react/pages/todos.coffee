@@ -12,21 +12,21 @@ class app.react.pages.Todos
   constructor: (store) ->
     {div,ul,form,input,button,li} = React.DOM
 
-    @create = React.createClass
+    @component = React.createClass
 
       getInitialState: ->
         text: ''
 
       render: ->
         div className: 'todos-page',
-          ul null, store.todos.map @renderTodo
+          ul {}, store.todos.map @renderTodo
           form onSubmit: @onNewTodoFormSubmit,
             input
               autoFocus: true
               onChange: @onNewTodoInputChange
               ref: 'newTodoInput'
               value: @state.text
-            button null, "Add ##{store.todos.length + 1}"
+            button {}, "Add ##{store.todos.length + 1}"
           button onClick: @onClearAllButtonClick, 'Clear All'
 
       renderTodo: (todo, i) ->
@@ -43,7 +43,7 @@ class app.react.pages.Todos
       onStoreChange: ->
         @forceUpdate()
 
-      onCompleteButtonClick: (todo, e) ->
+      onCompleteButtonClick: (todo) ->
         store.remove todo
 
       onNewTodoFormSubmit: (e) ->

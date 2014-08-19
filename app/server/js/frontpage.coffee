@@ -3,33 +3,36 @@ goog.provide 'server.FrontPage'
 class server.FrontPage
 
   ###*
-    @param {server.react.App} reactApp
-    @param {boolean} isDev
-    @param {number} buildNumber
+    @param {server.react.App} serverApp
+    @param {app.react.App} app
+    @param {app.Title} appTitle
     @param {Object} clientData
+    @param {number} version
+    @param {boolean} isDev
     @constructor
   ###
-  constructor: (@reactApp, @isDev, @buildNumber, @clientData) ->
+  constructor: (@serverApp, @app, @appTitle, @clientData, @version, @isDev) ->
 
   ###*
-    @param {string} title
-    @param {function(): React.ReactComponent} createReactApp
-    @return {string} Rendered HTML.
+    @return {string} HTML string
   ###
-  render: (title, createReactApp) ->
-    appHtml = React.renderComponentToString createReactApp()
+  render: ->
+    appHtml = React.renderComponentToString @app.component()
     scriptsHtml = @getScriptsHtml()
 
-    html = React.renderComponentToStaticMarkup @reactApp.create
+    html = React.renderComponentToStaticMarkup @serverApp.component
       bodyHtml: appHtml + scriptsHtml
-      buildNumber: @buildNumber
-      title: title
+      title: @appTitle.get()
+      version: @version
 
-    # React can't render doctype so we have to manually add it.
+    # Add doctype manually because React doesn't support it.
     '<!DOCTYPE html>' + html
 
+  ###*
+    @return {string}
+  ###
   getScriptsHtml: ->
-    scripts = ['/app/client/build/app.js?v=' + @buildNumber]
+    scripts = ['/app/client/build/app.js?v=' + @version]
     if @isDev then scripts.push [
       '/bower_components/closure-library/closure/goog/base.js'
       '/tmp/deps.js'

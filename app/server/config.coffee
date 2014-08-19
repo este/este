@@ -11,3 +11,4 @@ module.exports =
       "http://localhost:#{port}/"
     else
       "http://#{process.env.SUBDOMAIN}.jit.su/"
+  version: require('../../package.json')['version']

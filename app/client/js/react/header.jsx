@@ -2,12 +2,12 @@
 goog.provide('app.react.Header');
 
 /**
- * This is example for Facebook React JSX.
+ * This is example of Facebook React JSX.
  * @constructor
  */
 app.react.Header = function() {
 
-  this.create = React.createClass({
+  this.component = React.createClass({
 
     render: function() {
       return (
@@ -29,7 +29,7 @@ app.react.Header = function() {
             we can share any code between client and server side. This is a{' '}
             <b>Holy Grail</b>.
           </p>
-          <p>In progress: Isomorphic app title and storages.</p>
+          <p>More sophisticated app is in development: <a href="https://github.com/steida/songary">github.com/steida/songary</a>.</p>
         </header>
       );
     }
