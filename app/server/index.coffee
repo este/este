@@ -8,7 +8,7 @@ if !config.env.development || require('piping')()
     require '../../tmp/deps.js'
 
   # Mock client-side stuff for server-side.
-  global.React = require 'react'
+  global.React = require 'react/addons'
   doc = require('jsdom').jsdom()
   global.window = doc.parentWindow
   global.document = doc.parentWindow.document
