@@ -21,7 +21,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - [Stylus](http://learnboost.github.io/stylus/) is recommended, sure you can use [LESS](https://github.com/plus3network/gulp-less) or what else you want.
 
 #### Tools
-  - Well tuned [gulp](gulpjs.com) [dev stack](https://github.com/steida/gulp-este)
+  - Well tuned [gulp](http://gulpjs.com) [dev stack](https://github.com/steida/gulp-este)
   - Super fast [file-watcher](https://github.com/steida/este-watch)
   - Neat [DI Container](https://github.com/steida/gulp-closure-dicontainer)
   - Fantastic [Closure Compiler](https://developers.google.com/closure/compiler/)
@@ -38,7 +38,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   npm install -g gulp
   npm install -g bower
   ```
-  
+
 For Windows users, because jsdom installation sucks, you have to install Visual Studio Express 2012 C++ (it's free) before. Remember, install right 32/64 bit versions depending on your Windows.
 
 ## Getting Started
