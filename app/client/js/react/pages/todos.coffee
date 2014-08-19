@@ -53,7 +53,7 @@ class app.react.pages.Todos
       addTodo: ->
         title = @state.text.trim()
         if !title
-          @refs['newTodoInput'].getDOMNode().focus()
+          @refs.newTodoInput.getDOMNode().focus()
           return
         store.add title
         @setState text: ''
