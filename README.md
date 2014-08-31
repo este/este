@@ -9,7 +9,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 #### Libraries
   - [Google Closure](https://developers.google.com/closure/library/)
   - [Facebook React](http://facebook.github.io/react/)
-  - [Polymer Pointer Events](http://www.polymer-project.org/platform/pointer-events.html)
+  - [Polymer Pointer Events](http://www.polymer-project.org/platform/pointer-events.html), will be replaced with [polymer-gestures](https://github.com/Polymer/polymer-gestures) soon
   - [este-library](https://github.com/steida/este-library)
 
 #### JavaScript
