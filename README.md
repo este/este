@@ -28,9 +28,8 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - TDD ready [Mocha](http://visionmedia.github.io/mocha)
 
 #### Features
-  - React server-side rendering.
-  - Isomorphic routing (in progress).
-  - MVC meta framework (in progress).
+  - Isomorphic App (HTML, Routing, Build, and more.)
+  - So React server-side rendering is supported.
 
 ## Prerequisites
   [Java 1.7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required.
