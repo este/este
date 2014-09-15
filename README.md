@@ -15,8 +15,8 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 
 #### JavaScript
   - Plain old JavaScript
-  - [React JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) (don't use harmony class syntax yet)
-  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/))
+  - [React JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) - Don't use harmony class syntax yet please.
+  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/)) - Why CoffeeScript? Isn't ES6 better? It is, but CoffeeScript works well for years already, and I'm waiting for full ES6 support in Closure, which will come soon.
 
 #### Styles
   - [Stylus](http://learnboost.github.io/stylus/) is recommended, sure you can use [LESS](https://github.com/plus3network/gulp-less) or what else you want.
