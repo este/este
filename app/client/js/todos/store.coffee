@@ -7,6 +7,7 @@ goog.require 'goog.events.EventTarget'
 class app.todos.Store extends goog.events.EventTarget
 
   ###*
+    TODO: Add Flux with global error handling.
     @constructor
     @extends {goog.events.EventTarget}
     @final

@@ -5,19 +5,20 @@ goog.require 'este.labs.Storage'
 class server.Storage extends este.labs.Storage
 
   ###*
+    @param {app.Routes} routes
     @constructor
     @extends {este.labs.Storage}
     @final
   ###
-  constructor: ->
+  constructor: (@routes) ->
     super()
 
   ###*
     @override
   ###
-  load: (route, params, routes) ->
+  load: (route, params) ->
     switch route
-      when routes.home
+      when @routes.home
         @ok()
       else
         @notFound()

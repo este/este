@@ -42,7 +42,7 @@ class server.App
     routes.addToExpress app, (route, req, res) ->
       params = req['params']
 
-      storage.load route, params, routes
+      storage.load route, params
         .then ->
           routes.setActive route, params
         .thenCatch (reason) ->
