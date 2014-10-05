@@ -4,33 +4,29 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 
 #### Demos
   - [TodoMVC](http://steida-este-todomvc.jit.su/), [repo](https://github.com/steida/este-todomvc)
-  - [Songary](https://github.com/steida/songary) (under development, will be released soon)
+  - [Songary](https://github.com/steida/songary), [repo](https://github.com/steida/songary)
 
-#### Libraries
+#### Build with
   - [Google Closure](https://developers.google.com/closure/library/)
   - [Facebook React](http://facebook.github.io/react/)
-  - [Polymer Pointer Events](http://www.polymer-project.org/platform/pointer-events.html), will be replaced with [polymer-gestures](https://github.com/Polymer/polymer-gestures) soon
-  - [este-library](https://github.com/steida/este-library)
   - [expressjs](http://expressjs.com/)
+  - [este-library](https://github.com/steida/este-library)
+  - [polymer-gestures](https://github.com/Polymer/polymer-gestures)
 
 #### JavaScript
-  - Plain old JavaScript
+  - Plain old JavaScript, of course.
   - [React JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) - Don't use harmony class syntax yet please.
-  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/)) - Why CoffeeScript? Isn't ES6 better? It is, but CoffeeScript works well for years already, and I'm waiting for full ES6 support in Closure, which will come soon.
+  - [CoffeeScript](coffeescript.org) (compatible with [Closure Compiler](https://developers.google.com/closure/compiler/)) - Why CoffeeScript? Isn't ES6 better? Maybe, but CoffeeScript works well for years already.
 
 #### Styles
-  - [Stylus](http://learnboost.github.io/stylus/) is recommended, sure you can use [LESS](https://github.com/plus3network/gulp-less) or what else you want.
+  - [Stylus](http://learnboost.github.io/stylus/) is recommended, sure you can use [LESS](https://github.com/plus3network/gulp-less) or anything else.
 
 #### Tools
   - Well tuned [gulp](http://gulpjs.com) [dev stack](https://github.com/steida/gulp-este)
   - Super fast [file-watcher](https://github.com/steida/este-watch)
-  - Neat [DI Container](https://github.com/steida/gulp-closure-dicontainer)
-  - Fantastic [Closure Compiler](https://developers.google.com/closure/compiler/)
+  - Awesome [DI Container](https://github.com/steida/gulp-closure-dicontainer)
+  - Brilliant [Closure Compiler](https://developers.google.com/closure/compiler/)
   - TDD ready [Mocha](http://visionmedia.github.io/mocha)
-
-#### Features
-  - Isomorphic App (HTML, Routing, Build, and more.)
-  - So React server-side rendering is supported.
 
 ## Prerequisites
   [Java 1.7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required.
