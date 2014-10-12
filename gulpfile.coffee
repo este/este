@@ -27,6 +27,7 @@ paths =
     'app/**/*.js'
     'tmp/**/*.js'
     '!**/build/**'
+    '!**/*_test.js'
   ]
   unittest: [
     'app/**/*_test.js'
