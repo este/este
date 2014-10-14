@@ -28,6 +28,9 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - Brilliant [Closure Compiler](https://developers.google.com/closure/compiler/)
   - TDD ready [Mocha](http://visionmedia.github.io/mocha)
 
+#### TODO
+  - Add more sophisticated demo with este-disptacher and more techniques from Songary. 
+
 ## Prerequisites
   [Java 1.7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Node.js](http://nodejs.org) are required.
   ```shell
