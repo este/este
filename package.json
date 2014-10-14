@@ -27,7 +27,7 @@
     "jsdom": "^1.0.0",
     "method-override": "^2.0.0",
     "react": "^0.11.0",
-    "static-favicon": "^1.0.2"
+    "serve-favicon": "^2.1.5"
   },
   "devDependencies": {
     "gulp-este": "^1.0.1",

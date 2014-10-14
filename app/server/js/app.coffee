@@ -24,7 +24,7 @@ class server.App
 
     # Middleware first.
     app['use'] compression()
-    app['use'] favicon 'app/client/img/favicon.ico'
+    # app['use'] favicon 'app/client/img/favicon.ico'
     app['use'] bodyParser['json']()
     app['use'] methodOverride()
 

@@ -16,7 +16,7 @@ server.main = (config) ->
       port: config['server']['port']
       express: require 'express'
       compression: require 'compression'
-      favicon: require 'static-favicon'
+      favicon: require 'serve-favicon'
       bodyParser: require 'body-parser'
       methodOverride: require 'method-override'
   ,
