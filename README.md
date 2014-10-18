@@ -94,6 +94,10 @@ OSX has default limit for opened files set to 256. Fix it with ```ulimit -n 1000
   - [facebook.com/groups/110240425784074](https://www.facebook.com/groups/110240425784074/)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
 
+## Future
+
+Integrate ES6, definitely. Add and decribe more functional patterns, like Flux or CSP. More mobile/offline awareness. 
+
 ## License
 Copyright (c) 2013 Daniel Steigerwald
 
