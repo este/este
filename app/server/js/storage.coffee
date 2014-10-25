@@ -14,7 +14,9 @@ class server.Storage extends este.Storage
     super()
 
   ###*
-    @override
+    @param {este.Route} route
+    @param {Object=} params
+    @return {!goog.Promise}
   ###
   load: (route, params) ->
     switch route
