@@ -10,7 +10,7 @@ class app.react.App
   constructor: (header, todosPage) ->
     {div} = React.DOM
 
-    @component = React.createClass
+    @component = React.createFactory React.createClass
 
       render: ->
         div id: 'este-app',

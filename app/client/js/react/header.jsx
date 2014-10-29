@@ -7,7 +7,7 @@ goog.provide('app.react.Header');
  */
 app.react.Header = function() {
 
-  this.component = React.createClass({
+  this.component = React.createFactory(React.createClass({
 
     render: function() {
       return (
@@ -34,6 +34,6 @@ app.react.Header = function() {
       );
     }
 
-  });
+  }));
 
 };

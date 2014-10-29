@@ -10,7 +10,7 @@ class server.react.App
   constructor: ->
     {html,head,meta,title,link,body} = React.DOM
 
-    @component = React.createClass
+    @component = React.createFactory React.createClass
       render: ->
         html lang: 'en', className: @getHtmlClassName(),
           head {},

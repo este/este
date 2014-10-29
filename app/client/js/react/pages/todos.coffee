@@ -12,7 +12,7 @@ class app.react.pages.Todos
   constructor: (store) ->
     {div,ul,form,input,button,li} = React.DOM
 
-    @component = React.createClass
+    @component = React.createFactory React.createClass
 
       getInitialState: ->
         text: ''
@@ -63,3 +63,4 @@ class app.react.pages.Todos
 
       onClearAllButtonClick: (e) ->
         store.clearAll()
+        return

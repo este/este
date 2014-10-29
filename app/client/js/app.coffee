@@ -14,4 +14,4 @@ class App
     routes.setActive routes.home, {}
 
     document.title = appTitle.get()
-    React.renderComponent reactApp.component(), element
+    React.render reactApp.component(), element

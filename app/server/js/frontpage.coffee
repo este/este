@@ -17,10 +17,10 @@ class server.FrontPage
     @return {string} HTML string
   ###
   render: ->
-    appHtml = React.renderComponentToString @app.component()
+    appHtml = React.renderToString @app.component()
     scriptsHtml = @getScriptsHtml()
 
-    html = React.renderComponentToStaticMarkup @serverApp.component
+    html = React.renderToStaticMarkup @serverApp.component
       bodyHtml: appHtml + scriptsHtml
       title: @appTitle.get()
       version: @version
