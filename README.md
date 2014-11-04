@@ -11,7 +11,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   - [Google Closure](https://developers.google.com/closure/library/)
   - [Facebook React](http://facebook.github.io/react/)
   - [expressjs](http://expressjs.com/)
-  - [este-library](https://github.com/steida/este-library)
+  - [este-library](https://github.com/steida/este-library) (only router stuff and some React and Flux helpers)
   - [polymer-gestures](https://github.com/Polymer/polymer-gestures)
 
 #### JavaScript
