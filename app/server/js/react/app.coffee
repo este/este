@@ -8,7 +8,7 @@ class server.react.App
     @constructor
   ###
   constructor: ->
-    {html,head,meta,title,link,body} = React.DOM
+    {html, head, meta, title, link, body} = React.DOM
 
     @component = React.createFactory React.createClass
       render: ->

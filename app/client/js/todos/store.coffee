@@ -1,20 +1,25 @@
 goog.provide 'app.todos.Store'
 
 goog.require 'app.todos.Todo'
+goog.require 'este.Store'
 goog.require 'goog.array'
-goog.require 'goog.events.EventTarget'
 
-class app.todos.Store extends goog.events.EventTarget
+class app.todos.Store extends este.Store
 
   ###*
-    TODO: Add Flux with global error handling.
+    @param {este.Dispatcher} dispatcher
     @constructor
-    @extends {goog.events.EventTarget}
-    @final
+    @extends {este.Store}
   ###
-  constructor: ->
+  constructor: (dispatcher) ->
     super()
     @todos = []
+
+    dispatcher.register (action, payload) =>
+      switch action
+        when app.Actions.COMPLETE_TODO then @completeTodo_ payload
+        when app.Actions.ADD_TODO then @addTodo_ payload
+        when app.Actions.CLEAR_TODOS then @clearTodos_()
 
   ###*
     @type {Array.<app.todos.Todo>}
@@ -22,26 +27,19 @@ class app.todos.Store extends goog.events.EventTarget
   todos: null
 
   ###*
-    @param {string} title
+    @param {app.todos.Todo} todo
   ###
-  add: (title) ->
-    todo = new app.todos.Todo title
-    @todos.push todo
-    @notify_()
-
-  clearAll: ->
-    @todos.length = 0
-    @notify_()
+  completeTodo_: (todo) ->
+    goog.array.remove @todos, todo
+    @notify()
 
   ###*
     @param {app.todos.Todo} todo
   ###
-  remove: (todo) ->
-    goog.array.remove @todos, todo
-    @notify_()
+  addTodo_: (todo) ->
+    @todos.push todo
+    @notify()
 
-  ###*
-    @private
-  ###
-  notify_: ->
-    @dispatchEvent 'change'
+  clearTodos_: ->
+    @todos.length = 0
+    @notify()

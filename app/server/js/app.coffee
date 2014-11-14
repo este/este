@@ -5,20 +5,20 @@ goog.require 'goog.labs.userAgent.util'
 class server.App
 
   ###*
+    @param {Function} bodyParser
+    @param {Function} compression
     @param {Function} express
+    @param {Function} favicon
+    @param {Function} methodOverride
     @param {app.Routes} routes
     @param {boolean} isDev
     @param {number} port
     @param {server.FrontPage} frontPage
-    @param {server.Storage} storage
-    @param {Function} compression
-    @param {Function} favicon
-    @param {Function} bodyParser
-    @param {Function} methodOverride
+    @param {server.routes.Store} routesStore
     @constructor
   ###
-  constructor: (express, routes, isDev, port, frontPage, storage,
-      compression, favicon, bodyParser, methodOverride) ->
+  constructor: (bodyParser, compression, express, favicon, methodOverride,
+      routes, isDev, port, frontPage, routesStore) ->
 
     app = express()
 
@@ -42,17 +42,14 @@ class server.App
     routes.addToExpress app, (route, req, res) ->
       params = req['params']
 
-      storage.load route, params
-        .then ->
-          routes.setActive route, params
-        .thenCatch (reason) ->
-          routes.trySetErrorRoute reason
+      routesStore.load route, params
+        .then -> routes.setActive route, params
+        .thenCatch (reason) -> routes.trySetErrorRoute reason
         .then ->
           # User-agent detection on server for isomorphic responsive web design.
           goog.labs.userAgent.util.setUserAgent req['headers']['user-agent']
           frontPage.render()
-        .then (html) ->
-          res['send'] html
+        .then (html) -> res['send'] html
         .thenCatch (reason) ->
           # The stack property contains the message as well as the stack.
           console.log reason.stack

@@ -1,66 +1,58 @@
-###
-  @fileoverview React written as idiomatic CoffeeScript. We don't need JSX.
-###
 goog.provide 'app.react.pages.Todos'
+
+goog.require 'app.todos.Todo'
 
 class app.react.pages.Todos
 
   ###*
-    @param {app.todos.Store} store
+    @param {app.Actions} actions
+    @param {app.todos.Store} todosStore
+    @param {este.react.Element} element
     @constructor
   ###
-  constructor: (store) ->
-    {div,ul,form,input,button,li} = React.DOM
+  constructor: (actions, todosStore, element) ->
+    {div, ul, li, button, form, input} = element
+
+    state =
+      newTodo: new app.todos.Todo
 
     @component = React.createFactory React.createClass
 
-      getInitialState: ->
-        text: ''
-
       render: ->
         div className: 'todos-page',
-          ul {}, store.todos.map @renderTodo
+          ul {}, todosStore.todos.map (todo, i) =>
+            li key: i,
+              todo.title
+              button
+                className: 'complete'
+                onClick: @onCompleteButtonClick.bind @, todo
+              , '✔'
           form onSubmit: @onNewTodoFormSubmit,
             input
               autoFocus: true
               onChange: @onNewTodoInputChange
               ref: 'newTodoInput'
-              value: @state.text
-            button {}, "Add ##{store.todos.length + 1}"
-          button onClick: @onClearAllButtonClick, 'Clear All'
-
-      renderTodo: (todo, i) ->
-        li key: i,
-          todo.title
-          button
-            className: 'complete'
-            onClick: @onCompleteButtonClick.bind @, todo
-          , '✔'
-
-      componentDidMount: ->
-        store.listen 'change', @onStoreChange
-
-      onStoreChange: ->
-        @forceUpdate()
+              value: state.newTodo.title
+            button {}, "Add ##{todosStore.todos.length + 1}"
+          button onClick: @onClearTodosButtonClick, 'Clear All'
 
       onCompleteButtonClick: (todo) ->
-        store.remove todo
+        actions.completeTodo todo
 
       onNewTodoFormSubmit: (e) ->
         e.preventDefault()
-        @addTodo()
-
-      addTodo: ->
-        title = @state.text.trim()
+        title = state.newTodo.title?.trim()
         if !title
           @refs.newTodoInput.getDOMNode().focus()
           return
-        store.add title
-        @setState text: ''
+        actions.addTodo state.newTodo
+          .then =>
+            state.newTodo = new app.todos.Todo
+            @forceUpdate()
 
       onNewTodoInputChange: (e) ->
-        @setState text: e.target.value
+        state.newTodo.title = e.target.value
+        @forceUpdate()
 
-      onClearAllButtonClick: (e) ->
-        store.clearAll()
-        return
+      onClearTodosButtonClick: (e) ->
+        actions.clearTodos()

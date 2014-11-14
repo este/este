@@ -12,5 +12,11 @@
   across whole app.
 ###
 
+class appTodosTodo
+  appTodosTodo::title
+
 class appReactPagesTodosRef
   appReactPagesTodosRef::newTodoInput
+
+class esteReactElement
+  esteReactElement::touchAction
