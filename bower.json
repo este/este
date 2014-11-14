@@ -1,6 +1,6 @@
 {
   "name": "este",
-  "version": "7.0.2",
+  "version": "8.0.0",
   "private": true,
   "dependencies": {
     "este-library": "git://github.com/steida/este-library.git#^8.0.0",
