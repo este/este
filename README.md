@@ -36,7 +36,7 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
   npm install -g bower
   ```
 
-For Windows users, because jsdom installation sucks, you have to install [Visual Studio Express 2012 C++](http://www.microsoft.com/en-us/download/details.aspx?id=34673) (it's free) before. Remember, install right 32/64 bit versions depending on your Windows.
+For Windows users, because jsdom installation sucks, you have to install [Visual Studio Express 2012 C++](http://www.microsoft.com/en-us/download/details.aspx?id=34673) (it's free) before. Remember, install right 32/64 bit versions depending on your Windows. You will also need to install [Python 2.7](https://www.python.org/downloads/), because contextify needs it.
 
 ## Getting Started
 
