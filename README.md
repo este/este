@@ -87,7 +87,7 @@ OSX has default limit for opened files set to 256. Fix it with ```ulimit -n 1000
 
 ## Stay Tuned
 
-  - [twitter.com/estejs](https://twitter.com/estejs)
+  - [twitter.com/steida](https://twitter.com/steida)
   - [medium.com/@steida](https://medium.com/@steida)
   - [facebook.com/groups/110240425784074](https://www.facebook.com/groups/110240425784074/)
   - [groups.google.com/forum/#!forum/estejs](https://groups.google.com/forum/#!forum/estejs)
