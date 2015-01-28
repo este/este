@@ -5,6 +5,8 @@
 
 Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web apps. [Mobile first](http://www.lukew.com/ff/entry.asp?933), [offline first](https://developer.chrome.com/apps/offline_apps), [frontend first](http://frontendfirst.com).
 
+In the near future I will introduce Este ES6 edition. Yes, with migration tool.
+
 #### Demos
   - [TodoMVC](http://steida-este-todomvc.jit.su/), [repo](https://github.com/steida/este-todomvc) Just plain TodoMVC example.
   - [Songary](https://github.com/steida/songary), [repo](https://github.com/steida/songary) Real app in development. Many interesting patterns to see.
