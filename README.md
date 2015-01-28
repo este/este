@@ -1,6 +1,8 @@
 # Este [![Build Status](https://secure.travis-ci.org/steida/este.png?branch=master)](http://travis-ci.org/steida/este) [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este) [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/steida/este?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+![Este Logo](https://cloud.githubusercontent.com/assets/66249/5931133/9e973dfc-a699-11e4-83bc-7b5c6fb58bfd.jpeg)
+
 Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web apps. [Mobile first](http://www.lukew.com/ff/entry.asp?933), [offline first](https://developer.chrome.com/apps/offline_apps), [frontend first](http://frontendfirst.com).
 
 #### Demos
