@@ -7,10 +7,6 @@ Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomor
 
 In the near future I will introduce Este ES6 edition. Yes, with migration tool.
 
-#### Demos
-  - [TodoMVC](http://steida-este-todomvc.jit.su/), [repo](https://github.com/steida/este-todomvc) Just plain TodoMVC example.
-  - [Songary](https://github.com/steida/songary), [repo](https://github.com/steida/songary) Real app in development. Many interesting patterns to see.
-
 #### Build with
   - [Google Closure](https://developers.google.com/closure/library/)
   - [Facebook React](http://facebook.github.io/react/)
