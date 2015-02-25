@@ -5,7 +5,7 @@
 
 Robust and comfortable dev stack for [isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web apps. [Mobile first](http://www.lukew.com/ff/entry.asp?933), [offline first](https://developer.chrome.com/apps/offline_apps), [frontend first](http://frontendfirst.com).
 
-In the near future I will introduce Este ES6 edition. Yes, with migration tool.
+_In the near future I will introduce Este ES6 edition_. Sneek peak: [este-todomvc](https://github.com/steida/este-todomvc)
 
 #### Build with
   - [Google Closure](https://developers.google.com/closure/library/)
