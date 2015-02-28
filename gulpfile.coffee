@@ -28,11 +28,12 @@ paths =
     'tmp/**/*.js'
     '!**/build/**'
     '!**/*_test.js'
+    '!app/client/js/externs.js'
   ]
   unittest: [
     'app/**/*_test.js'
     # Useful for in app library development together with 'bower link'.
-    # 'bower_components/este-library/este/**/*_test.js'
+    'bower_components/este-library/este/**/*_test.js'
   ]
   compiler: 'bower_components/closure-compiler/compiler.jar'
   externs: [
@@ -83,6 +84,7 @@ gulp.task 'concat-deps', ->
 
 gulp.task 'compile-clientapp', ->
   este.compile paths.js, 'app/client/build',
+    fileName: 'app/client/build/app.js',
     compilerPath: paths.compiler
     compilerFlags:
       closure_entry_point: 'app.main'
@@ -90,6 +92,7 @@ gulp.task 'compile-clientapp', ->
 
 gulp.task 'compile-serverapp', ->
   este.compile paths.js, 'app/server/build',
+    fileName: 'app/server/build/app.js',
     compilerPath: paths.compiler
     compilerFlags:
       closure_entry_point: 'server.main'
