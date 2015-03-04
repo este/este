@@ -1,9 +1,0 @@
-{
-  "name": "este",
-  "version": "8.0.0",
-  "private": true,
-  "dependencies": {
-    "este-library": "git://github.com/steida/este-library.git",
-    "stylus-nib": "git://github.com/visionmedia/nib.git"
-  }
-}
