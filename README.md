@@ -70,7 +70,7 @@ npm install
 
 ## Tips and Tricks and Lips and Tits
 
-- With global immutable app state, you don't need IoC container so bad. [DI](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional) is workaround for passing state.
+- With global immutable app state, you don't need IoC container so bad. [The next step is functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
 - With global immutable state and cursors and PureRenderMixin in Este, you don't need React component wrappers like omniscientjs or om.
 - 
 
