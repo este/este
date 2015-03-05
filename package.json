@@ -46,6 +46,6 @@
     "stylus-loader": "^0.6.0",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0",
-    "yargs": "^1.3.3"
+    "yargs": "^3.3.1"
   }
 }
