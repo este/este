@@ -69,16 +69,14 @@ npm install
 * [ ] Optional Closure Tools support.
 * [ ] Async and pendings actions.
 * [ ] React inline styles with tools.
-* [ ] Add responsive shit.
-* [ ] Add gestures shit.
+* [ ] Add responsiveness.
+* [ ] Add gestures.
 
 ## Tips and Tricks and Lips and Tits
 
-- With global immutable app state, you don't need IoC container. [The next step is functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
-- With global immutable state and cursors and PureRenderMixin in Este, you don't need React component wrappers like omniscientjs or om.
+- With global immutable app state, you don't need IoC container. [SOLID: the next step is Functional ](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
 - Use `const` for CONSTANTS or immutable structures.
 - Always use React propTypes.
-- Put React components into components directory.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
