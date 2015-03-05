@@ -21,9 +21,9 @@
 - Still vanilla Flux. You don't need over-abstracted frameworks.
 - Webpack css livereaload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
-- Super fast performance with immutable.js.
-- Well tuned webpack devstack.
-- Stylesheets can be CSS, LESS, SASS or Stylus.
+- Super fast rendering performance with [immutable.js](http://facebook.github.io/immutable-js).
+- Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
+- Stylesheets in CSS, LESS, SASS or Stylus. 
 
 ## Prerequisites
 
