@@ -11,10 +11,12 @@
 ## Techniques
 
 - ES6 and future JavaScripts via [babeljs.io](https://babeljs.io/), JSX and flowtype syntax supported as well.
+- server side rendering
 - Mobile first, offline first, frontend first.
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - React with Flux with immutable global app state.
 - Isomorphic architecture with stateless actions and stores.
+- Still vanilla Flux :-)
 - webpack css livereaload and hot module reload even for React components.
 - Easy undo/redo and app state load/save.
 - Super fast performance with immutable.js.
@@ -65,7 +67,7 @@ npm install
 * [ ] React 0.13 [plain JS class](http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#plain-javascript-classes). It supports immutable.js out of the box.
 * [ ] Optional Closure Tools support.
 * [ ] Async and pendings actions.
-* [ ] React inline styles.
+* [ ] React styles with and tools.
 
 ## Tips and Tricks and Lips and Tits
 
@@ -76,8 +78,6 @@ npm install
 - Put all React components into components dir
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
-- 
-
 
 ## Credit
 
