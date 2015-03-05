@@ -71,7 +71,6 @@ npm install
 * [ ] React inline styles with tools.
 * [ ] Add responsive shit.
 * [ ] Add gestures shit.
-* 
 
 ## Tips and Tricks and Lips and Tits
 
