@@ -1,4 +1,4 @@
-# <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
+# <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515265/b91f0fb8-c388-11e4-857e-c90902e0b7a1.png" width="200">
 
 > Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns with practiques and apply them on laser focused libraries.
 
@@ -95,5 +95,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 
 ## Credit
+
+# <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
 made by [twitter.com/steida](https://twitter.com/steida)
