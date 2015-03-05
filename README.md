@@ -20,7 +20,8 @@
 - Webpack css livereaload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
 - Super fast performance with immutable.js.
-- Well tunned webpack devstack.
+- Well tuned webpack devstack.
+- Stylesheets can be CSS, LESS, SASS or Stylus.
 
 ## Prerequisites
 
@@ -68,6 +69,9 @@ npm install
 * [ ] Optional Closure Tools support.
 * [ ] Async and pendings actions.
 * [ ] React inline styles with tools.
+* [ ] Add responsive shit.
+* [ ] Add gestures shit.
+* 
 
 ## Tips and Tricks and Lips and Tits
 
@@ -75,9 +79,10 @@ npm install
 - With global immutable state and cursors and PureRenderMixin in Este, you don't need React component wrappers like omniscientjs or om.
 - Use `const` for CONSTANTS or immutable structures.
 - Always use React propTypes.
-- Put all React components into components dir
+- Put React components into components directory.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
+- [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 
 ## Credit
 
