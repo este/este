@@ -10,9 +10,9 @@
 
 ## Techniques
 
-- ES6 and future JavaScripts via [babeljs.io/](https://babeljs.io/), JSX and flowtype syntax supported as well.
+- ES6 and future JavaScripts via [babeljs.io](https://babeljs.io/), JSX and flowtype syntax supported as well.
 - Mobile first, offline first, frontend first.
-- Localization with [formatjs.io/](http://formatjs.io/), stale browsers supported as well.
+- Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - React with Flux with immutable global app state.
 - Isomorphic architecture with stateless actions and stores.
 - webpack css livereaload and hot module reload even for React components.
