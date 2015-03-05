@@ -37,3 +37,6 @@ npm install
 - `gulp build -p` or `npm run build` just build app for continuous integration
 - `gulp test` or `npm test` run tests
 
+## Credit
+
+made by [steida](https://twitter.com/steida)
