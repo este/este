@@ -54,7 +54,15 @@ npm install
 
 ## Examples
 
+- [Empty Este.js App](https://este.herokuapp.com)
 - [Este TodoMVC](https://github.com/steida/este-todomvc)
+
+## Documentation
+
+tl;dr - [este.herokuapp.com/todos](https://este.herokuapp.com/todos)
+
+So you decided to give a chance this web stack, but where is documentation? Code is documentation as it illustrates various patterns itself, but for start you have to read something about [React.js](http://facebook.github.io/react/). Then you should learn [what is the Flux
+application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e). Now refresh you JavaScript knowledge about "new" JavaScript - [learn ES6](https://babeljs.io/docs/learn-es6/). This stack uses [immutable.js](http://facebook.github.io/immutable-js/) and for a [good reason](https://github.com/facebook/immutable-js/#the-case-for-immutability). Check this nice short [video](https://www.youtube.com/watch?v=5yHFTN-_mOo Ok, Server side you.http://expressjs.com/), to see one of many great advantages of [functional programming](http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming/). [expressjs](http://expressjs.com/) is used on the [Node.js](http://nodejs.org/api/) server. Application is [isomorphic](http://isomorphic.net/javascript), so can share code between client and server easily.
 
 ## Todo
 
