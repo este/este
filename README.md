@@ -8,6 +8,20 @@ Robust and comfortable dev stack for isomorphic web apps.
 [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+## Prerequisites
 
+Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
+Then install [gulp.js](http://gulpjs.com/).
+```shell
+npm install -g gulp
+```
+
+## Create App
+
+```shell
+git clone https://github.com/steida/este.git myapp
+cd myapp
+npm install
+```
 
 
