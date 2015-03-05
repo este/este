@@ -62,15 +62,22 @@ npm install
 * [ ] Global errors handling with several last app states reporting.
 * [ ] Consider async actions and [CSP channels](https://github.com/ubolonton/js-csp), [video](https://www.youtube.com/watch?v=W2DgDNQZOwo&list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr&index=6).
 * [ ] [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
-* [ ] React 0.13 [plain JS class](http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#plain-javascript-classes).
+* [ ] React 0.13 [plain JS class](http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#plain-javascript-classes). It supports immutable.js out of the box.
 * [ ] Optional Closure Tools support.
 * [ ] Async and pendings actions.
-* 
+* [ ] React inline styles.
 
 ## Tips and Tricks and Lips and Tits
 
 - With global immutable app state, you don't need IoC container. [The next step is functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
 - With global immutable state and cursors and PureRenderMixin in Este, you don't need React component wrappers like omniscientjs or om.
+- Use `const` for CONSTANTS or immutable structures.
+- Always use React propTypes.
+- Put all React components into components dir
+- Never mock browser inside server code, it can confuse isomorphic libraries.
+- Always use settostring helper.
+- 
+
 
 ## Credit
 
