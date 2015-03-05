@@ -24,4 +24,9 @@ cd myapp
 npm install
 ```
 
+## Start Development
+
+- run `gulp`
+- point your browser to [localhost:8000](http://localhost:8000)
+- build something beautiful
 
