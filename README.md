@@ -70,10 +70,8 @@ npm install
 
 ## Tips and Tricks and Lips and Tits
 
-- With immutable global app state, you don't need IoC container so bad. DI is workaround for state passing.
+- With global immutable app state, you don't need IoC container so bad. DI is workaround for passing state.
 - With global immutable state and cursors and PureRenderMixin in Este, you don't need React component wrappers like omniscientjs or om.
-- 
-
 
 ## Credit
 
