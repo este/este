@@ -1,14 +1,14 @@
 # <a href="https://este.herokuapp.com/"><img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515265/b91f0fb8-c388-11e4-857e-c90902e0b7a1.png" width="200"></a>
 
-> Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns with practiques and apply them on laser focused libraries.
-
-> Ok, again. This is dev stack for building both static and dynamic web sites or apps or whatever. You don't need to think about Ruby or PHP or Angular or something else. Use this stack. JavaScript won.
-
 [![Circle CI](https://circleci.com/gh/steida/este.svg?style=svg)](https://circleci.com/gh/steida/este)
 [![Join the chat at https://gitter.im/steida/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/steida/este)
 [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este)
 [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+> Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns with practiques and apply them on laser focused libraries.
+
+> Ok, again. This is dev stack for building both static and dynamic web sites or apps or whatever. You don't need to think about Ruby or PHP or Angular or something else. Use this stack. JavaScript won.
 
 ## Techniques
 
@@ -98,6 +98,6 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Credit
 
-# <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
+<img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
 made by [twitter.com/steida](https://twitter.com/steida)
