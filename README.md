@@ -6,9 +6,7 @@
 [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-> Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns with practiques and apply them on laser focused libraries.
-
-> Ok, again. This is dev stack for building both static and dynamic web sites or apps or whatever. You don't need to think about Ruby or PHP or Angular or something else. Use this stack. JavaScript won.
+> Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns and practiques and apply them on laser focused libraries.
 
 ## Techniques
 
