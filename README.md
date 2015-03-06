@@ -24,7 +24,7 @@
 - Super fast rendering performance with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - Stylesheets in CSS, LESS, SASS or Stylus. 
-- optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path)
+- Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 
 ## Prerequisites
 
