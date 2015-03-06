@@ -95,6 +95,11 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
+ 
+## Notes
+
+- Este.js dev stack should work on OSX, Linux, and even on Windows. Feel free to report any issues.
+- As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE. In theory, It should not be hard to support IE8 as hell.
 
 ## Credit
 
