@@ -12,7 +12,7 @@
 
 ## Techniques
 
-- ES6 and future JavaScripts via [babeljs.io](https://babeljs.io/), JSX and flowtype syntax supported as well.
+- ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default. 
 - Server side rendering.
 - Mobile first, offline first, frontend first.
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
