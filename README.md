@@ -99,6 +99,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
+- You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
  
 ## Notes
 
