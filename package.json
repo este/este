@@ -5,9 +5,9 @@
   "version": "9.0.0",
   "private": true,
   "scripts": {
-    "build": "gulp build --production",
+    "postinstall": "gulp build --production",
     "dev": "gulp",
-    "start": "gulp -p",
+    "start": "node src/server",
     "test": "gulp test"
   },
   "engines": {
