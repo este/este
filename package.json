@@ -29,7 +29,7 @@
     "gulp": "^3.8.10",
     "gulp-bg": "0.0.5",
     "gulp-util": "^3.0.2",
-    "immutable": "^3.6.2",
+    "immutable": "3.6.2",
     "intl": "^0.1.4",
     "less-loader": "^2.0.0",
     "node-notifier": "^4.1.0",
