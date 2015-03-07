@@ -46,12 +46,17 @@ npm install
 - point your browser to [localhost:8000](http://localhost:8000)
 - build something beautiful
 
-## Other Dev Tasks
+## Dev Tasks
 
-- `gulp` or `npm run dev` run app in development mode
-- `gulp -p` or `npm start` run app in production mode
-- `gulp build -p` or `npm run build` just build app for continuous integration
-- `gulp test` or `npm test` run tests
+- `gulp` run app in development mode
+- `gulp -p` run app in production mode
+- `gulp test`
+
+## CI Tasks
+
+- `npm start` just run app, remember to set NODE_ENV=production and others
+- `npm postinstall` just alias for `gulp build --production`
+- `npm test` just alias for `gulp test`
 
 ## Examples
 
