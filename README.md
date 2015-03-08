@@ -95,7 +95,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 - With global immutable app state, you don't need IoC container. [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
 - Use `const` for CONSTANTS or immutable structures.
-- Always use React propTypes.
+- Always use React propTypes for props passed to component, and if props are immutables or primitives, use PureRenderMixin. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
