@@ -93,7 +93,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks and Lips and Tits
 
-- With global immutable app state, you don't need IoC container. [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional).
+- With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is pretty relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` only for CONSTANTS or immutable structures.
 - Use `() =>` lambda only for anonymous functions like callbacks or predicates.
 - Always use React propTypes for props passed to component, and if props are immutables or primitives, use PureRenderMixin. Simple rule for ultimate performance.
