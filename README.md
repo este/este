@@ -17,7 +17,7 @@
 - React with Flux with immutable global app state.
 - Isomorphic architecture with stateless actions and stores.
 - Vanilla Flux, we don't need over abstracted frameworks.
-- Webpack css livereaload with hot module reload even for React components.
+- Webpack css livereload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
