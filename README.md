@@ -6,7 +6,7 @@
 [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-> Robust and comfortable dev stack for isomorphic web apps. Forget about over abstracted frameworks. It's better to learn patterns and practiques and apply them on laser focused libraries.
+> Robust and comfortable dev stack for isomorphic web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/). Learn and use laser focused libraries and patterns instead.
 
 ## Techniques
 
@@ -93,9 +93,9 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks and Lips and Tits
 
-- With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is pretty relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
+- With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` only for CONSTANTS or immutable structures.
-- Use `() =>` lambda only for anonymous functions like callbacks or predicates.
+- Use `() =>` lambda expression for all predicates and anonymous functions.
 - Always use React propTypes for props passed to component, and if props are immutables or primitives, use PureRenderMixin. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper for actions.
