@@ -16,13 +16,14 @@
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - React with Flux with immutable global app state.
 - Isomorphic architecture with stateless actions and stores.
-- Still vanilla Flux. You don't need over-abstracted frameworks.
+- Vanilla Flux, we don't need over abstracted frameworks.
 - Webpack css livereaload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
-- Super fast rendering performance with [immutable.js](http://facebook.github.io/immutable-js).
+- Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - Stylesheets in CSS, LESS, SASS or Stylus. 
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
+- Google Analytics.
 
 ## Prerequisites
 
@@ -54,13 +55,13 @@ npm install
 
 ## CI Tasks
 
-- `npm start` just run app, remember to set NODE_ENV=production and others
-- `npm postinstall` just alias for `gulp build --production`
+- `npm start` just run app, remember to set NODE_ENV=production and others enviroment variables.
+- `npm postinstall` just alias for `gulp build --production`, useful for Heroku.
 - `npm test` just alias for `gulp test`
 
 ## Examples
 
-- [Empty Este.js App](https://este.herokuapp.com)
+- [Este App](https://este.herokuapp.com) - Empty Este.js app bootstrap.
 - [Este TodoMVC](https://github.com/steida/este-todomvc)
 
 ## Documentation
