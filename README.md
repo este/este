@@ -6,7 +6,7 @@
 [![devDependency Status](https://david-dm.org/steida/este/dev-status.png)](https://david-dm.org/steida/este#info=devDependencies)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-> Robust and comfortable dev stack for isomorphic web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn then use laser focused libraries and patterns instead.
+> Robust and comfortable dev stack for isomorphic web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
 ## Techniques
 
