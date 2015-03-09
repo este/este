@@ -105,7 +105,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
  
 ## Notes
 
-- Este.js dev stack should work on OSX, Linux, and even on Windows. Feel free to report any issues.
+- Este.js dev stack should work on OSX, Linux, and even Windows. Feel free to report any issue.
 - As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE. In theory, It should not be hard to support IE8 as hell.
 
 ## Credit
