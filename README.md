@@ -80,7 +80,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 * [ ] [Jest](https://facebook.github.io/jest)
 * [ ] [ESLint](http://eslint.org/), almost [ready](https://github.com/eslint/espree/issues/10)
-* [ ] [flowtype](http://flowtype.org/)
+* [ ] [flowtype](http://flowtype.org/), waiting for [ES6 support](https://github.com/facebook/flow/issues/62)
 * [ ] Sync app state across browser tabs/windows via [broadcastpubsub.js](http://goo.gl/Pt8NFQ)
 * [ ] Global errors handling with several last app states reporting.
 * [ ] Consider async actions and [CSP channels](https://github.com/ubolonton/js-csp), [video](https://www.youtube.com/watch?v=W2DgDNQZOwo&list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr&index=6).
