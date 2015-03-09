@@ -4,7 +4,7 @@ import Promise from 'bluebird'
 import React from 'react'
 import Router from 'react-router'
 import config from './config'
-import messages from '../client/messages'
+import initialState from './initialstate'
 import routes from '../client/routes'
 import {state} from '../client/state'
 
@@ -12,25 +12,11 @@ export default function(path, locale) {
   return loadData(path, locale).then(renderPage)
 }
 
-// TODO: Preload app state from DB or whatever.
 function loadData(path, locale) {
+  // TODO: Preload and merge user specific state.
+  const appState = initialState
   return new Promise((resolve, reject) => {
-    resolve({
-      path,
-      appState: {
-        i18n: {
-          formats: {},
-          locales: locale,
-          messages: messages[locale]
-        },
-        newTodo: { title: '' },
-        todos: [
-          {id: 1, title: 'consider ‘stop doing’ app'},
-          {id: 2, title: 'relax'}
-        ],
-        user: {}
-      }
-    })
+    resolve({path, appState})
   })
 }
 
