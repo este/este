@@ -1,8 +1,8 @@
 import * as actions from './actions'
-import dispatcher from '../dispatcher'
 import {Range, Record} from 'immutable'
 import {getRandomString} from '../../lib/getrandomstring'
 import {newTodoCursor, todosCursor} from '../state'
+import {register} from '../dispatcher'
 
 // Isomorphic store has to be state-less.
 
@@ -11,8 +11,7 @@ const TodoItem = Record({
   title: ''
 })
 
-export const dispatchToken = dispatcher.register((payload) => {
-  const {action, data} = payload
+export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
     case actions.onNewTodoFieldChange:
