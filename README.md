@@ -98,7 +98,8 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Use `() =>` lambda only for anonymous functions like callbacks or predicates.
 - Always use React propTypes for props passed to component, and if props are immutables or primitives, use PureRenderMixin. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
-- Always use settostring helper.
+- Always use settostring helper for actions.
+- Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't use it since it's runtime value. Use webpack DefinePlugin to set process.env.IS_BROWSER rather, because compilation removes dead code then.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
  
