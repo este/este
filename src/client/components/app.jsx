@@ -29,7 +29,7 @@ export default React.createClass({
   render() {
     return (
       <DocumentTitle title='Este.js App Bootstrap'>
-        <div className="app">
+        <div className="page">
           <header>
             <h1>
               <a href="https://github.com/steida/este">Este.js</a> App Bootstrap
