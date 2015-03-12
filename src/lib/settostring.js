@@ -1,18 +1,15 @@
-const actionToStringNames = []
-
-/**
- * Override actions toString methods. Pretty useful for pendings or logging.
- * Also ensures unique action name.
- */
-export default function setToString(prefix: string, actions: Object) {
-  Object.keys(actions).forEach(function(name) {
+/*
+  Override toString methods. Useful for logging Flux actions for example.
+  Example:
+    function login() {}
+    function logout() {}
+    // ES6 syntax.
+    setToString('user', {login, logout})
+    console.log(login) // Will log 'user/login'
+*/
+export default function setToString(prefix: string, object: Object) {
+  Object.keys(object).forEach(function(name) {
     const toStringName = prefix + '/' + name
-    actions[name].toString = () => toStringName
-
-    if (process.env.NODE_ENV != 'production') {
-      if (actionToStringNames.indexOf(toStringName) != -1)
-        throw Error(`Action ${toStringName} already exists.`)
-      actionToStringNames.push(toStringName)
-    }
+    object[name].toString = () => toStringName
   })
 }
