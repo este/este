@@ -91,6 +91,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks and Lips and Tits
 
+- App state snapshot: Press `shift+ctrl+s`, then open dev console and type `_appState`.
 - With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` only for CONSTANTS or immutable structures.
 - Use `() =>` lambda expression for all predicates and anonymous functions.
