@@ -36,9 +36,11 @@ export default React.createClass({
     if (!e.shiftKey || !e.ctrlKey) return
     switch (e.keyCode) {
       case 19:
-        window._appState = JSON.stringify(state.save())
+        window._appState = state.save()
+        window._appStateString = JSON.stringify(window._appState)
         console.log('app state saved')
-        console.log('copy the state to your clipboard by calling copy(_appState)')
+        console.log('copy the state to your clipboard by calling copy(_appStateString)')
+        console.log('for dev type _appState and press enter')
         break
       case 12:
         let stateStr = window.prompt('Path the serialized state into the input')
