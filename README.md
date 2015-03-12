@@ -111,4 +111,4 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
-made by [twitter.com/steida](https://twitter.com/steida)
+made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida)
