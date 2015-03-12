@@ -61,7 +61,6 @@ npm install
 
 ## Examples
 
-- [Este App](https://este.herokuapp.com) - Empty Este.js app bootstrap.
 - [Este TodoMVC](https://github.com/steida/este-todomvc)
 
 ## Documentation
