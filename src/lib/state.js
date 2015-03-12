@@ -3,13 +3,17 @@ import Immutable from 'immutable'
 
 export default class State extends EventEmitter {
 
-  constructor(state) {
+  constructor(state, reviver: ?Function) {
     this._state = null
+    this._reviver = reviver
     this.load(state || {})
   }
 
   load(state: Object) {
-    this.set(Immutable.Map.isMap(state) ? state : Immutable.fromJS(state))
+    this.set(Immutable.Map.isMap(state)
+      ? state
+      : Immutable.fromJS(state, this._reviver)
+    )
   }
 
   set(state) {
