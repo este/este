@@ -7,7 +7,7 @@ import render from './render'
 
 export default function() {
 
-  let app = express()
+  const app = express()
 
   app.use(compression())
   // TODO: Add favicon.
@@ -17,13 +17,13 @@ export default function() {
   app.use('/assets', express.static('assets'))
 
   app.get('*', (req, res) => {
-    let acceptsLanguages = req.acceptsLanguages(config.appLocales)
+    const acceptsLanguages = req.acceptsLanguages(config.appLocales)
     render(req.path, acceptsLanguages || config.defaultLocale)
       .then((result) => {
         res.status(result.status).send(result.html)
       })
       .catch((error) => {
-        let msg = error.stack || error
+        const msg = error.stack || error
         console.log(msg)
         res.status(500).send('500: ' + msg)
       })
