@@ -4,14 +4,14 @@ export default React.createClass({
 
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
-    let linkStyles = this.props.isProduction &&
+    const linkStyles = this.props.isProduction &&
       <link
         href={`/build/app.css?v=${this.props.version}`}
         rel="stylesheet"
       />
 
     // TODO: Add favicon.
-    let linkFavicon = false && <link
+    const linkFavicon = false && <link
       href={`/build/img/favicon.icon?v=${this.props.version}`}
       rel="shortcut icon"
     />

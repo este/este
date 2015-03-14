@@ -43,8 +43,8 @@ export default React.createClass({
         console.log('for dev type _appState and press enter')
         break
       case 12:
-        let stateStr = window.prompt('Path the serialized state into the input')
-        let newState = JSON.parse(stateStr)
+        const stateStr = window.prompt('Path the serialized state into the input')
+        const newState = JSON.parse(stateStr)
         if (!newState) return
         state.load(newState)
         break

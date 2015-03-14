@@ -13,7 +13,7 @@ export function onNewTodoFieldChange({target: {name, value}}) {
 }
 
 export function addTodo(todo) {
-  let title = todo.get('title').trim()
+  const title = todo.get('title').trim()
   if (!title) return
   dispatch(addTodo, todo)
 }

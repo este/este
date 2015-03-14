@@ -24,8 +24,8 @@ function renderPage({path, appState}) {
   return new Promise((resolve, reject) => {
     Router.run(routes, path, (Handler, routerState) => {
       state.load(appState)
-      let html = getPageHtml(Handler, appState)
-      let isNotFound = routerState.routes.some(route => route.name == 'not-found')
+      const html = getPageHtml(Handler, appState)
+      const isNotFound = routerState.routes.some(route => route.name == 'not-found')
       resolve({
         html: html,
         status: isNotFound ? 404: 200
@@ -35,8 +35,8 @@ function renderPage({path, appState}) {
 }
 
 function getPageHtml(Handler, appState) {
-  let appHtml = `<div id="app">${React.renderToString(<Handler {...appState.i18n} />)}</div>`
-  let appScriptSrc = config.isProduction
+  const appHtml = `<div id="app">${React.renderToString(<Handler {...appState.i18n} />)}</div>`
+  const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js'
   let scriptHtml = `
@@ -63,7 +63,7 @@ function getPageHtml(Handler, appState) {
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
       </script>`
   }
-  let title = DocumentTitle.rewind()
+  const title = DocumentTitle.rewind()
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html

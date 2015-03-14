@@ -13,15 +13,17 @@ const TodoItem = Record({
 
 export const dispatchToken = register(({action, data}) => {
 
+  let todo
+
   switch (action) {
     case actions.onNewTodoFieldChange:
       // Always use destructing vars. It's explicit.
-      var {name, value} = data
+      const {name, value} = data
       newTodoCursor(todo => todo.set(name, value))
       break
 
     case actions.addTodo:
-      var todo = data
+      todo = data
       todosCursor(todos => todos.push(new TodoItem({
         id: getRandomString(),
         title: todo.get('title')
@@ -30,7 +32,7 @@ export const dispatchToken = register(({action, data}) => {
       break
 
     case actions.deleteTodo:
-      var todo = data
+      todo = data
       todosCursor(todos => todos.delete(todos.indexOf(todo)))
       break
 
@@ -42,7 +44,7 @@ export const dispatchToken = register(({action, data}) => {
       todosCursor(todos => {
         return todos.withMutations(list => {
           Range(0, 100).forEach(i => {
-            let id = getRandomString()
+            const id = getRandomString()
             list.push(new TodoItem({
               id: id,
               title: `Item #${id}`

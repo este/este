@@ -1,7 +1,7 @@
 import config from './config'
 import messages from '../client/messages'
 
-let initialLocale = 'en'
+const initialLocale = 'en'
 
 export default {
   i18n: {
