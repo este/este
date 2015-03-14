@@ -25,6 +25,7 @@
     "express": "^4.11.2",
     "extract-text-webpack-plugin": "^0.3.8",
     "fastclick": "^1.0.6",
+    "file-loader": "^0.8.1",
     "flux": "^2.0.1",
     "gulp": "^3.8.10",
     "gulp-bg": "0.0.5",
@@ -44,6 +45,7 @@
     "serve-favicon": "^2.2.0",
     "style-loader": "^0.8.3",
     "stylus-loader": "^0.6.0",
+    "url-loader": "^0.5.5",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0",
     "yargs": "^3.3.1"
