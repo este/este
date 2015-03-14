@@ -101,6 +101,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Always use settostring helper for actions.
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't use it since it's runtime value. Use webpack DefinePlugin to set process.env.IS_BROWSER rather, because compilation removes dead code then.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
+- Why React `this.state` isn't used? Because whole app state belongs to app one global immutable app state. So we can log it easily, user can navigate out page with half fulfilled form without losing its state, and more.
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
  
 ## Notes
