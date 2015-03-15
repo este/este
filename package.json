@@ -15,6 +15,7 @@
   "dependencies": {
     "babel": "^4.0.1",
     "babel-core": "^4.0.1",
+    "babel-jest": "^4.0.0",
     "babel-loader": "^4.0.0",
     "bluebird": "^2.9.9",
     "classnames": "^1.1.4",
@@ -30,8 +31,10 @@
     "gulp": "^3.8.10",
     "gulp-bg": "0.0.5",
     "gulp-util": "^3.0.2",
+    "harmonize": "^1.4.1",
     "immutable": "^3.6.4",
     "intl": "^0.1.4",
+    "jest-cli": "^0.4.0",
     "less-loader": "^2.0.0",
     "node-notifier": "^4.1.0",
     "normalize.css": "^3.0.2",
