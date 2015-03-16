@@ -1,5 +1,5 @@
-jest.dontMock('../lib/getrandomstring')
-import {getRandomString} from '../lib/getrandomstring'
+jest.dontMock('../getrandomstring')
+import {getRandomString} from '../getrandomstring'
 
 describe('getRandomString', () => {
   it('is a string', () =>
