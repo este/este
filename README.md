@@ -76,20 +76,6 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [stackoverflow.com/questions/tagged/estejs](http://stackoverflow.com/questions/tagged/estejs)
 - [twitter.com/estejs](https://twitter.com/estejs)
 
-## Todo
-
-* [ ] [ESLint](http://eslint.org/), almost [ready](https://github.com/eslint/espree/issues/10)
-* [ ] [flowtype](http://flowtype.org/), waiting for [ES6 support](https://github.com/facebook/flow/issues/62)
-* [ ] Sync app state across browser tabs/windows via [broadcastpubsub.js](http://goo.gl/Pt8NFQ)
-* [ ] Global errors handling with several last app states reporting.
-* [ ] Consider async actions and [CSP channels](https://github.com/ubolonton/js-csp), [video](https://www.youtube.com/watch?v=W2DgDNQZOwo&list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr&index=6).
-* [ ] React 0.13 [plain JS class](http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#plain-javascript-classes). It supports immutable.js out of the box.
-* [ ] Optional Closure Tools support.
-* [ ] Async and pendings actions.
-* [ ] React inline styles with tools.
-* [ ] Add responsiveness.
-* [ ] Add gestures.
-
 ## Tips and Tricks and Lips and Tits
 
 - App state snapshot: Press `shift+ctrl+s`, then open dev console and type `_appState`.
