@@ -1,5 +1,3 @@
-// __tests__/foo.js
-
 jest.dontMock('../lib/getrandomstring')
 import {getRandomString} from '../lib/getrandomstring'
 

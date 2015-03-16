@@ -12,20 +12,21 @@
 
 ## Techniques
 
-- ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default. 
+- ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default.
+- [jest](https://facebook.github.io/jest) unit testing.
 - Server side rendering.
-- Mobile first, offline first, frontend first.
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - React with Flux with immutable global app state.
 - Isomorphic architecture with stateless actions and stores.
+- Mobile first, offline first, frontend first.
 - Vanilla Flux, we don't need over abstracted frameworks.
 - Webpack css livereload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
-- Stylesheets in CSS, LESS, SASS or Stylus. 
+- Stylesheets in CSS, LESS, SASS or Stylus.
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
-- Google Analytics.
+- Google Analytics preconfigured.
 
 ## Prerequisites
 
@@ -103,7 +104,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - Why React `this.state` isn't used? Because whole app state belongs to app one global immutable app state. So we can log it easily, user can navigate out page with half fulfilled form without losing its state, and more.
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
- 
+
 ## Notes
 
 - Este.js dev stack should work on OSX, Linux, and even Windows. Feel free to report any issue.
