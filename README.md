@@ -13,10 +13,10 @@
 ## Techniques
 
 - ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default.
-- [jest](https://facebook.github.io/jest) unit testing.
+- [jest](https://facebook.github.io/jest) unit testing
 - Server side rendering.
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
-- React with Flux with immutable global app state.
+- React with Flux with immutable global app state like Om or [Omniscient](https://github.com/omniscientjs/omniscient/wiki/Simpler-UI-Reasoning-with-Unidirectional-Dataflow-and-Immutable-Data).
 - Isomorphic architecture with stateless actions and stores.
 - Mobile first, offline first, frontend first.
 - Vanilla Flux, we don't need over abstracted frameworks.
@@ -78,7 +78,6 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Todo
 
-* [ ] [Jest](https://facebook.github.io/jest)
 * [ ] [ESLint](http://eslint.org/), almost [ready](https://github.com/eslint/espree/issues/10)
 * [ ] [flowtype](http://flowtype.org/), waiting for [ES6 support](https://github.com/facebook/flow/issues/62)
 * [ ] Sync app state across browser tabs/windows via [broadcastpubsub.js](http://goo.gl/Pt8NFQ)
