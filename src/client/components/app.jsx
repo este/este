@@ -3,7 +3,7 @@ import React from 'react'
 import {IntlMixin} from 'react-intl'
 import {Link, RouteHandler} from 'react-router'
 import {addHundredTodos} from '../todos/store'
-import {state} from '../state'
+import {addChangeListener} from '../store'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl')
@@ -17,7 +17,7 @@ export default React.createClass({
     // isomorphic libraries. TODO: Wait for iOS fix, then remove.
     require('fastclick').attach(document.body)
 
-    state.on('change', () => {
+    addChangeListener(() => {
       // Try hundreds todos with and without PureRenderMixin.
       console.time('whole app rerender')
       this.forceUpdate(() => {

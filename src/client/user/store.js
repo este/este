@@ -1,7 +1,12 @@
-import dispatcher from '../dispatcher'
-import {userCursor} from '../state'
+import {fromJS} from 'immutable'
+import {register} from '../dispatcher'
+import store from '../store'
 
-export const dispatchToken = dispatcher.register({
+const userCursor = store('user', json => json
+  ? fromJS(json)
+  : Map())
+
+export const dispatchToken = register({
 })
 
 export function getUser() {

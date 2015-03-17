@@ -1,7 +1,7 @@
 import * as actions from './actions'
-import {Range, Record} from 'immutable'
+import {Range, Record, Map, List, fromJS} from 'immutable'
 import {getRandomString} from '../../lib/getrandomstring'
-import {newTodoCursor, todosCursor} from '../state'
+import store from '../store'
 import {register} from '../dispatcher'
 
 // Isomorphic store has to be state-less.
@@ -10,6 +10,17 @@ const TodoItem = Record({
   id: '',
   title: ''
 })
+
+const newTodoCursor = store('newTodo', json => json
+  ? fromJS(json)
+  : Map({title: ''}))
+
+const todosCursor = store('todos', json => json
+  ? fromJS(json).map(TodoItem)
+  : List([
+      TodoItem({id: 1, title: 'consider ‘stop doing’ app'}),
+      TodoItem({id: 2, title: 'relax'})
+    ]))
 
 export const dispatchToken = register({
   [actions.onNewTodoFieldChange]: ({name, value}) => {

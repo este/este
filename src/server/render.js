@@ -5,7 +5,8 @@ import React from 'react'
 import Router from 'react-router'
 import config from './config'
 import routes from '../client/routes'
-import {state, i18nCursor} from '../client/state'
+import * as store from '../client/store'
+import {getI18n} from '../client/i18n/store'
 
 export default function(path, locale) {
   return loadData(path, locale).then(renderPage)
@@ -32,14 +33,14 @@ function renderPage({path}) {
 }
 
 function getPageHtml({Handler}) {
-  const appHtml = `<div id="app">${React.renderToString(<Handler {...i18nCursor().toJS()} />)}</div>`
+  const appHtml = `<div id="app">${React.renderToString(<Handler {...getI18n().toJS()} />)}</div>`
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js'
   let scriptHtml = `
     <script>
       (function() {
-        window._appState = ${JSON.stringify(state.save())};
+        window._appState = ${JSON.stringify(store.toJS())};
         var app = document.createElement('script'); app.type = 'text/javascript'; app.async = true;
         var src = '${appScriptSrc}';
         // IE<11 and Safari need Intl polyfill.
