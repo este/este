@@ -5,7 +5,7 @@ import React from 'react'
 import Router from 'react-router'
 import config from './config'
 import routes from '../client/routes'
-import * as store from '../client/store'
+import {save} from '../client/state'
 import {getI18n} from '../client/i18n/store'
 
 export default function(path, locale) {
@@ -40,7 +40,7 @@ function getPageHtml({Handler}) {
   let scriptHtml = `
     <script>
       (function() {
-        window._appState = ${JSON.stringify(store.toJS())};
+        window._appState = ${JSON.stringify(save())};
         var app = document.createElement('script'); app.type = 'text/javascript'; app.async = true;
         var src = '${appScriptSrc}';
         // IE<11 and Safari need Intl polyfill.

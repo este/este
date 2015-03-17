@@ -6,7 +6,7 @@ import {FormattedMessage, IntlMixin} from 'react-intl'
 import {Link} from 'react-router'
 import {addHundredTodos, clearAll} from '../../todos/actions'
 import {getNewTodo, getTodos} from '../../todos/store'
-import state from '../../state'
+import {save} from '../../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/todos.styl')
@@ -34,7 +34,7 @@ export default React.createClass({
     if (!e.shiftKey || !e.ctrlKey) return
     switch (e.keyCode) {
       case 19:
-        window._appState = state.save()
+        window._appState = save()
         window._appStateString = JSON.stringify(window._appState)
         console.log('app state saved')
         console.log('copy the state to your clipboard by calling copy(_appStateString)')

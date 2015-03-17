@@ -9,7 +9,7 @@ export default React.createClass({
 
   propTypes: {
     // Whenever component prop is an immutable structure, use PureRenderMixin.
-    todos: React.PropTypes.instanceOf(immutable.List)
+    todos: React.PropTypes.instanceOf(immutable.Iterable)
   },
 
   render() {

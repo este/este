@@ -12,4 +12,5 @@ export default function setToString(prefix: string, object: Object) {
     const toStringName = prefix + '/' + name
     object[name].toString = () => toStringName
   })
+  return object
 }
