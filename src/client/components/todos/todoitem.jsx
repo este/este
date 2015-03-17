@@ -8,7 +8,7 @@ export default React.createClass({
   mixins: [addons.PureRenderMixin],
 
   propTypes: {
-    todo: React.PropTypes.instanceOf(immutable.Map)
+    todo: React.PropTypes.instanceOf(immutable.Record)
   },
 
   render() {

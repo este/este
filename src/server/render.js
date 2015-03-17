@@ -4,27 +4,25 @@ import Promise from 'bluebird'
 import React from 'react'
 import Router from 'react-router'
 import config from './config'
-import initialState from './initialstate'
 import routes from '../client/routes'
-import {state} from '../client/state'
+import * as store from '../client/store'
+import {getI18n} from '../client/i18n/store'
 
 export default function(path, locale) {
   return loadData(path, locale).then(renderPage)
 }
 
-function loadData(path, locale) {
+function loadData({path, locale}) {
   // TODO: Preload and merge user specific state.
-  const appState = initialState
   return new Promise((resolve, reject) => {
-    resolve({path, appState})
+    resolve({path})
   })
 }
 
-function renderPage({path, appState}) {
+function renderPage({path}) {
   return new Promise((resolve, reject) => {
     Router.run(routes, path, (Handler, routerState) => {
-      state.load(appState)
-      const html = getPageHtml(Handler, appState)
+      const html = getPageHtml({Handler})
       const isNotFound = routerState.routes.some(route => route.name == 'not-found')
       resolve({
         html: html,
@@ -34,15 +32,15 @@ function renderPage({path, appState}) {
   })
 }
 
-function getPageHtml(Handler, appState) {
-  const appHtml = `<div id="app">${React.renderToString(<Handler {...appState.i18n} />)}</div>`
+function getPageHtml({Handler}) {
+  const appHtml = `<div id="app">${React.renderToString(<Handler {...getI18n().toJS()} />)}</div>`
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js'
   let scriptHtml = `
     <script>
       (function() {
-        window._appState = ${JSON.stringify(appState)};
+        window._appState = ${JSON.stringify(store.toJS())};
         var app = document.createElement('script'); app.type = 'text/javascript'; app.async = true;
         var src = '${appScriptSrc}';
         // IE<11 and Safari need Intl polyfill.

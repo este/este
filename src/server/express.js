@@ -18,7 +18,7 @@ export default function() {
 
   app.get('*', (req, res) => {
     const acceptsLanguages = req.acceptsLanguages(config.appLocales)
-    render(req.path, acceptsLanguages || config.defaultLocale)
+    render({path: req.path, locale: acceptsLanguages || config.defaultLocale})
       .then((result) => {
         res.status(result.status).send(result.html)
       })

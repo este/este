@@ -6,7 +6,7 @@ import {FormattedMessage, IntlMixin} from 'react-intl'
 import {Link} from 'react-router'
 import {addHundredTodos, clearAll} from '../../todos/actions'
 import {getNewTodo, getTodos} from '../../todos/store'
-import {state} from '../../state'
+import state from '../../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/todos.styl')

@@ -21,7 +21,7 @@ export default class State extends EventEmitter {
     this._state = state
     this.emit('change', this._state)
   }
-
+  
   get() {
     return this._state
   }
