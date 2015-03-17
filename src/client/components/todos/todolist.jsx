@@ -4,7 +4,7 @@ import immutable from 'immutable'
 import {addons} from 'react/addons'
 
 export default React.createClass({
-  // Try add hunderds todos. Typing new todo is still superfast.
+  // Try add hundreds todos. Typing new todo is still superfast.
   mixins: [addons.PureRenderMixin],
 
   propTypes: {
