@@ -1,26 +1,22 @@
 import * as actions from './actions'
 import {Range, Record} from 'immutable'
+import {TodoRecord} from './model'
 import {getRandomString} from '../../lib/getrandomstring'
 import {newTodoCursor, todosCursor} from '../state'
 import {register} from '../dispatcher'
 
 // Isomorphic store has to be state-less.
 
-const TodoItem = Record({
-  id: '',
-  title: ''
-})
-
 export const dispatchToken = register({
   [actions.onNewTodoFieldChange]: ({name, value}) => {
     newTodoCursor(todo => todo.set(name, value))
   },
   [actions.addTodo]: ({todo}) => {
-    todosCursor(todos => todos.push(new TodoItem({
+    todosCursor(todos => todos.push(new TodoRecord({
       id: getRandomString(),
       title: todo.get('title')
     }).toMap()))
-    newTodoCursor(todo => new TodoItem().toMap())
+    newTodoCursor(todo => new TodoRecord().toMap())
   },
   [actions.deleteTodo]: ({todo}) => {
     todosCursor(todos => todos.delete(todos.indexOf(todo)))
@@ -33,7 +29,7 @@ export const dispatchToken = register({
       return todos.withMutations(list => {
         Range(0, 100).forEach(i => {
           const id = getRandomString()
-          list.push(new TodoItem({
+          list.push(new TodoRecord({
             id: id,
             title: `Item #${id}`
           }).toMap())
