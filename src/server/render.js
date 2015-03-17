@@ -11,7 +11,7 @@ export default function(path, locale) {
   return loadData(path, locale).then(renderPage)
 }
 
-function loadData(path, locale) {
+function loadData({path, locale}) {
   // TODO: Preload and merge user specific state.
   return new Promise((resolve, reject) => {
     resolve({path})
@@ -21,7 +21,7 @@ function loadData(path, locale) {
 function renderPage({path}) {
   return new Promise((resolve, reject) => {
     Router.run(routes, path, (Handler, routerState) => {
-      const html = getPageHtml(Handler)
+      const html = getPageHtml({Handler})
       const isNotFound = routerState.routes.some(route => route.name == 'not-found')
       resolve({
         html: html,
@@ -31,7 +31,7 @@ function renderPage({path}) {
   })
 }
 
-function getPageHtml(Handler) {
+function getPageHtml({Handler}) {
   const appHtml = `<div id="app">${React.renderToString(<Handler {...i18nCursor().toJS()} />)}</div>`
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
