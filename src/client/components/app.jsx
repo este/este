@@ -2,7 +2,6 @@ import DocumentTitle from 'react-document-title'
 import React from 'react'
 import {IntlMixin} from 'react-intl'
 import {Link, RouteHandler} from 'react-router'
-import {addHundredTodos} from '../todos/store'
 import {state} from '../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
