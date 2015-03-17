@@ -18,12 +18,10 @@ export default React.createClass({
   mixins: [IntlMixin],
 
   componentDidMount() {
-    state.on('change', this.onStateChange)
     document.addEventListener('keypress', this.onDocumentKeypress)
   },
 
   componentWillUnmount() {
-    state.removeListener('change', this.onStateChange)
     document.removeEventListener('keypress', this.onDocumentKeypress)
   },
 
@@ -51,15 +49,7 @@ export default React.createClass({
     }
   },
 
-  undo() {
-    undoStates.pop()
-    state.set(undoStates.pop())
-  },
-
   render() {
-    // This is just a demo. In real app you would set first undo elsewhere.
-    if (!undoStates.length) undoStates.push(state.get())
-
     // This is composite component. It load its data from store, and passes them
     // through props, so NewTodo and TodoList can leverage PureRenderMixin.
     const newTodo = getNewTodo()
@@ -80,13 +70,6 @@ export default React.createClass({
               children={this.getIntlMessage('todos.add100')}
               onClick={addHundredTodos}
             />
-            <button
-              disabled={undoStates.length == 1}
-              onClick={() => this.undo()}
-            ><FormattedMessage
-              message={this.getIntlMessage('todos.undo')}
-              steps={undoStates.length - 1}
-            /></button>
           </div>
           <h3>
             Things to Check
