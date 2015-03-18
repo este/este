@@ -11,7 +11,7 @@ export default React.createClass({
   mixins: [IntlMixin],
 
   componentDidMount() {
-    // Must be required here because there is no DOM in Node.js. Rememeber,
+    // Must be required here because there is no DOM in Node.js. Remember,
     // mocking DOM in Node.js is an anti-pattern, because it can confuse
     // isomorphic libraries. TODO: Wait for iOS fix, then remove.
     require('fastclick').attach(document.body)
