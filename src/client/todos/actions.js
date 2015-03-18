@@ -1,5 +1,5 @@
 import setToString from '../../lib/settostring'
-import {dispatch} from '../dispatcher'
+import {dispatch} from '../../lib/dispatcher'
 
 export const MAX_TODO_TITLE_LENGTH = 42
 

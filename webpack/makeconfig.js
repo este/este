@@ -37,9 +37,9 @@ module.exports = function(isDevelopment) {
         // Why only-dev-server instead of dev-server:
         // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
         'webpack/hot/only-dev-server',
-        './src/client/main.js'
+        './src/client/index.jsx'
       ] : [
-        './src/client/main.js'
+        './src/client/index.jsx'
       ],
       // For Safari, IE<11, and some old browsers. More languages will need more
       // specific builds.
@@ -50,11 +50,11 @@ module.exports = function(isDevelopment) {
         'webpack/hot/only-dev-server',
         './node_modules/intl/Intl.js',
         './node_modules/intl/locale-data/jsonp/en.js',
-        './src/client/main.js'
+        './src/client/index.jsx'
       ] : [
         './node_modules/intl/Intl.js',
         './node_modules/intl/locale-data/jsonp/en.js',
-        './src/client/main.js'
+        './src/client/index.jsx'
       ]
     },
     module: {

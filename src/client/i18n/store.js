@@ -1,7 +1,7 @@
 import {Map, fromJS} from 'immutable'
-import {register} from '../dispatcher'
+import {register} from '../../lib/dispatcher'
+import {store} from '../../lib/state'
 import messages from '../messages'
-import {store} from '../state'
 
 const initialLocale = 'en'
 

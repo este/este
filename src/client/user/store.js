@@ -1,6 +1,6 @@
 import {Map, fromJS} from 'immutable'
-import {register} from '../dispatcher'
-import {store} from '../state'
+import {register} from '../../lib/dispatcher'
+import {store} from '../../lib/state'
 
 const userCursor = store({
   name: 'user',

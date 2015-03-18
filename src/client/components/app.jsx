@@ -3,7 +3,7 @@ import React from 'react'
 import {IntlMixin} from 'react-intl'
 import {Link, RouteHandler} from 'react-router'
 import {addHundredTodos} from '../todos/store'
-import {addChangeListener} from '../state'
+import {addChangeListener} from '../../lib/state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl')

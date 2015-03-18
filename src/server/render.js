@@ -5,7 +5,7 @@ import React from 'react'
 import Router from 'react-router'
 import config from './config'
 import routes from '../client/routes'
-import {save} from '../client/state'
+import {save} from '../lib/state'
 import {getI18n} from '../client/i18n/store'
 
 export default function(path, locale) {

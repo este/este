@@ -1,8 +1,8 @@
 import * as todosActions from './actions'
 import {Range, Record, Map, List, fromJS} from 'immutable'
 import {getRandomString} from '../../lib/getrandomstring'
-import {store} from '../state'
-import {register} from '../dispatcher'
+import {store} from '../../lib/state'
+import {register} from '../../lib/dispatcher'
 
 // Isomorphic store has to be state-less.
 
