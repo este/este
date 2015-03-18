@@ -17,7 +17,7 @@ export default React.createClass({
     return (
       <li className={classnames({editing: false})}>
         <label>{todo.get('title')}</label>
-        <button onClick={() => deleteTodo(todo)}>x</button>
+        <button onClick={() => deleteTodo({todo})}>x</button>
       </li>
     )
   }

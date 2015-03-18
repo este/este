@@ -12,14 +12,14 @@ export function onNewTodoFieldChange({target: {name, value}}) {
   dispatch(onNewTodoFieldChange, {name, value})
 }
 
-export function addTodo(todo) {
+export function addTodo({todo}) {
   const title = todo.get('title').trim()
   if (!title) return
-  dispatch(addTodo, todo)
+  dispatch(addTodo, {todo})
 }
 
-export function deleteTodo(todo) {
-  dispatch(deleteTodo, todo)
+export function deleteTodo({todo}) {
+  dispatch(deleteTodo, {todo})
 }
 
 export function clearAll() {

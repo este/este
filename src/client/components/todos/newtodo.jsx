@@ -14,7 +14,7 @@ export default React.createClass({
 
   onKeyDown(e) {
     if (e.key == 'Enter')
-      addTodo(this.props.todo)
+      addTodo({todo: this.props.todo})
   },
 
   render() {

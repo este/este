@@ -11,9 +11,6 @@ import {save} from '../../state'
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/todos.styl')
 
-// Naïve undo implementation.
-const undoStates = []
-
 export default React.createClass({
   mixins: [IntlMixin],
 
@@ -23,10 +20,6 @@ export default React.createClass({
 
   componentWillUnmount() {
     document.removeEventListener('keypress', this.onDocumentKeypress)
-  },
-
-  onStateChange(state) {
-    undoStates.push(state)
   },
 
   onDocumentKeypress(e) {
