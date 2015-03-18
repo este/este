@@ -41,11 +41,7 @@ export function store({name, create, load, save}) {
   _savers  = _savers.set(name, save)
   _loaders = _loaders.set(name, load)
 
-  console.assert(!process.env.IS_BROWSER || window._appState[name])
-
-  set(_state.set(name, process.env.IS_BROWSER
-    ? (load || fromJS)(window._appState[name])
-    : create()))
+  set(_state.set(name, create()))
 
   return (update) => {
     if (update) {
