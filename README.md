@@ -58,7 +58,7 @@ npm install
 
 ## CI Tasks
 
-- `npm start` just run app, remember to set NODE_ENV=production and others enviroment variables.
+- `npm start` just run app, remember to set NODE_ENV=production and others environment variables.
 - `npm postinstall` just alias for `gulp build --production`, useful for Heroku.
 - `npm test` just alias for `gulp test`
 
