@@ -36,9 +36,8 @@ export default class State extends EventEmitter {
 
   cursor(path) {
     return (update) => {
-      if (update) {
+      if (update)
         this.set(this._state.updateIn(path, update))
-      }
       else
         return this._state.getIn(path)
     }
