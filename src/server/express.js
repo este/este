@@ -12,9 +12,7 @@ export default function() {
   app.use(compression())
   // TODO: Add favicon.
   // app.use(favicon('assets/img/favicon.ico'))
-  // TODO: Move to CDN.
   app.use('/build', express.static('build'))
-  app.use('/assets', express.static('assets'))
 
   app.get('*', (req, res) => {
     const acceptsLanguages = req.acceptsLanguages(config.appLocales)

@@ -62,7 +62,7 @@ module.exports = function(isDevelopment) {
     },
     module: {
       loaders: [{
-        loader: 'url-loader?limit=100000',
+        loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]',
         test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
       }, {
         exclude: /node_modules/,
@@ -76,11 +76,12 @@ module.exports = function(isDevelopment) {
     },
     output: isDevelopment ? {
       path: path.join(__dirname, '/build/'),
-      filename: '[name].js',
+      filename: '[name]-[hash].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
       path: 'build/',
-      filename: '[name].js'
+      filename: '[name]-[hash].js',
+      publicPath: 'https://ab4s6a3e2pfi5.cloudfront.net/'
     },
     plugins: (function() {
       var plugins = [
@@ -102,7 +103,7 @@ module.exports = function(isDevelopment) {
         plugins.push(
           // Render styles into separate cacheable file to prevent FOUC and
           // optimize for critical rendering path.
-          new ExtractTextPlugin('app.css', {
+          new ExtractTextPlugin('[name]-[contenthash].css', {
             allChunks: true
           }),
           new webpack.optimize.DedupePlugin(),
