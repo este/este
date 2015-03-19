@@ -76,7 +76,7 @@ module.exports = function(isDevelopment) {
     },
     output: isDevelopment ? {
       path: path.join(__dirname, '/build/'),
-      filename: '[name]-[hash].js',
+      filename: '[name].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
       path: 'build/',
