@@ -88,6 +88,18 @@
     "handle-callback-err": [1, "^(err|error)$"],
     "no-mixed-requires": 1,
     "no-new-require": 1,
-    "no-path-concat": 1
-  }
+    "no-path-concat": 1,
+    // React
+    "react/jsx-uses-react": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1,
+    "react/wrap-multilines": 1
+  },
+  "plugins": [
+    "react"
+  ]
 }

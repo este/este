@@ -2,6 +2,13 @@ import React from 'react'
 
 export default React.createClass({
 
+  propTypes: {
+    bodyHtml: React.PropTypes.string.isRequired,
+    isProduction: React.PropTypes.bool.isRequired,
+    title: React.PropTypes.string.isRequired,
+    version: React.PropTypes.string.isRequired
+  },
+
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
     const linkStyles = this.props.isProduction &&
