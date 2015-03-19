@@ -3,8 +3,8 @@
 'use strict'
 
 var bg = require('gulp-bg')
-var gulp = require('gulp')
 var eslint = require('gulp-eslint')
+var gulp = require('gulp')
 var harmonize = require('harmonize')
 var jest = require('jest-cli')
 var makeWebpackConfig = require('./webpack/makeconfig')
@@ -48,7 +48,6 @@ gulp.task('jest', function(done) {
     'testFileExtensions': ['es6', 'js'],
     'moduleFileExtensions': ['js', 'json', 'es6']
   }}, rootDir, function(success) {
-    /* eslint no-process-exit:0 */
     done(success ? null : 'jest failed')
     process.on('exit', function() {
       process.exit(success ? 0 : 1)
