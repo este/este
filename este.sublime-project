@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "name": "/",
+      "path": ".",
+      "file_exclude_patterns": [
+        "*.sublime-workspace"
+      ],
+      "folder_exclude_patterns": [
+        "assets",
+        "build",
+        "node_modules",
+        "src",
+        "webpack"
+      ]
+    },
+
+    {
+      "path": "node_modules"
+    },
+
+    {
+      "path": "assets"
+    },
+
+    {
+      "path": "build"
+    },
+
+    {
+      "path": "src"
+    },
+
+    {
+      "path": "webpack"
+    }
+  ]
+}
