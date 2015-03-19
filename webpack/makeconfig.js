@@ -8,18 +8,21 @@ var path = require('path')
 var webpack = require('webpack')
 
 var loaders = {
-  'css': 'css-loader',
-  'less': 'css-loader!less-loader',
-  'scss|sass': 'css-loader!sass-loader',
-  'styl': 'css-loader!stylus-loader'
+  'css': '',
+  'less': '!less-loader',
+  'scss|sass': '!sass-loader',
+  'styl': '!stylus-loader'
 }
 
 module.exports = function(isDevelopment) {
 
   function stylesLoaders() {
     return Object.keys(loaders).map(function(ext) {
-      var loader = isDevelopment ? 'style-loader!' + loaders[ext] :
-        ExtractTextPlugin.extract('style-loader', loaders[ext])
+      var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version!stylus-loader'
+      var extLoaders = prefix + loaders[ext]
+      var loader = isDevelopment
+        ? 'style-loader!' + extLoaders
+        : ExtractTextPlugin.extract('style-loader', extLoaders)
       return {
         loader: loader,
         test: new RegExp('\\.(' + ext + ')$')
