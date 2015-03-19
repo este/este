@@ -1,5 +1,10 @@
+/* eslint-env node */
+
+'use strict'
+
 var bg = require('gulp-bg')
 var gulp = require('gulp')
+var eslint = require('gulp-eslint')
 var harmonize = require('harmonize')
 var jest = require('jest-cli')
 var makeWebpackConfig = require('./webpack/makeconfig')
@@ -24,9 +29,21 @@ gulp.task('build-webpack-dev', webpackDevServer(makeWebpackConfig(true)))
 gulp.task('build-webpack', [args.production ? 'build-webpack-production' : 'build-webpack-dev'])
 gulp.task('build', ['build-webpack'])
 
+gulp.task('eslint', function() {
+  return gulp.src([
+      'gulpfile.js',
+      'src/**/*.{js,jsx}',
+      'webpack/*.js'
+    ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError())
+})
+
 gulp.task('jest', function(done) {
   var rootDir = './src'
-  function onComplete(success) {
+  var onComplete = function(success) {
+    /* eslint no-process-exit:0 */
     done(success ? null : 'jest failed')
     process.on('exit', function() {
       process.exit(success ? 0 : 1)
@@ -40,13 +57,12 @@ gulp.task('jest', function(done) {
   }}, rootDir, onComplete)
 })
 
-// TODO: Add es6lint.
 gulp.task('test', function(done) {
   // Run test tasks serially, because it doesn't make sense to build when tests
   // are not passing, and it doesn't make sense to run tests, if lint has failed.
   // Gulp deps aren't helpful, because we want to run tasks without deps as well.
-  runSequence('jest', 'build-webpack-production', done)
-});
+  runSequence('eslint', 'jest', 'build-webpack-production', done)
+})
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'))
 

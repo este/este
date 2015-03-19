@@ -1,6 +1,6 @@
 /* @flow weak */
 
-"use strict"
+'use strict'
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var NotifyPlugin = require('./notifyplugin')
@@ -16,7 +16,7 @@ var loaders = {
 
 module.exports = function(isDevelopment) {
 
-  function stylesLoaders() {
+  var stylesLoaders = function() {
     return Object.keys(loaders).map(function(ext) {
       var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version'
       var extLoaders = prefix + loaders[ext]
@@ -118,7 +118,7 @@ module.exports = function(isDevelopment) {
     resolve: {
       // To allow require('file') instead of require('file.jsx')
       extensions: ['', '.js', '.jsx', '.json']
-    },
+    }
   }
 
   return config

@@ -1,6 +1,6 @@
 /* @flow weak */
 
-"use strict"
+'use strict'
 
 var webpack = require('webpack')
 var gutil = require('gulp-util')
@@ -11,9 +11,8 @@ module.exports = function(webpackConfig) {
       var jsonStats = stats.toJson()
       var buildError = fatalError || jsonStats.errors[0] || jsonStats.warnings[0]
 
-      if (buildError) {
+      if (buildError)
         throw new gutil.PluginError('webpack', buildError)
-      }
 
       gutil.log('[webpack]', stats.toString({
         colors: true,
