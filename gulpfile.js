@@ -48,6 +48,7 @@ gulp.task('jest', function(done) {
     'testFileExtensions': ['es6', 'js'],
     'moduleFileExtensions': ['js', 'json', 'es6']
   }}, rootDir, function(success) {
+    /* eslint no-process-exit:0 */
     done(success ? null : 'jest failed')
     process.on('exit', function() {
       process.exit(success ? 0 : 1)
