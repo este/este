@@ -31,7 +31,7 @@ export default class State extends EventEmitter {
   }
 
   toConsole() {
-    console.log(JSON.stringify(this.save()))
+    console.log(JSON.stringify(this.save())) // eslint-disable-line no-console
   }
 
   cursor(path) {

@@ -11,7 +11,6 @@ Router.run(routes, Router.HistoryLocation, (Handler) => {
   React.render(<Handler {...i18nCursor().toJS()} />, app)
 })
 
-if ('production' != process.env.NODE_ENV) {
-  // Dev only code.
-  // TODO: Report app errors.
-}
+// // TODO: Report app errors.
+// if ('production' === process.env.NODE_ENV) {
+// }

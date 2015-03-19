@@ -7,9 +7,9 @@ export function register(callback: Function): string {
 }
 
 export function dispatch(action: Function, data: ?Object) {
-  if ('production' != process.env.NODE_ENV) {
-    console.log(action)
-    if (action.toString == Function.prototype.toString)
+  if ('production' !== process.env.NODE_ENV) {
+    console.log(action) // eslint-disable-line no-console
+    if (action.toString === Function.prototype.toString)
       throw new Error('Action toString has to be overridden with dispatcher.setToString.')
   }
 

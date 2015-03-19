@@ -16,7 +16,7 @@ var loaders = {
 
 module.exports = function(isDevelopment) {
 
-  var stylesLoaders = function() {
+  function stylesLoaders() {
     return Object.keys(loaders).map(function(ext) {
       var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version'
       var extLoaders = prefix + loaders[ext]

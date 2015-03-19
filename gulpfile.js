@@ -42,19 +42,18 @@ gulp.task('eslint', function() {
 
 gulp.task('jest', function(done) {
   var rootDir = './src'
-  var onComplete = function(success) {
-    /* eslint no-process-exit:0 */
-    done(success ? null : 'jest failed')
-    process.on('exit', function() {
-      process.exit(success ? 0 : 1)
-    })
-  }
   jest.runCLI({config: {
     'rootDir': rootDir,
     'scriptPreprocessor': '../node_modules/babel-jest',
     'testFileExtensions': ['es6', 'js'],
     'moduleFileExtensions': ['js', 'json', 'es6']
-  }}, rootDir, onComplete)
+  }}, rootDir, function(success) {
+    /* eslint no-process-exit:0 */
+    done(success ? null : 'jest failed')
+    process.on('exit', function() {
+      process.exit(success ? 0 : 1)
+    })
+  })
 })
 
 gulp.task('test', function(done) {

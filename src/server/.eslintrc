@@ -1,5 +1,10 @@
 {
   "env": {
     "node": true
+  },
+
+  "rules": {
+    "strict": [2, "never"] // Not sure about it.
   }
+
 }

@@ -5,7 +5,7 @@
 var notifier = require('node-notifier')
 var path = require('path')
 
-var getLocMessage = function(error, loc) {
+function getLocMessage(error, loc) {
   var filePath = error.module.resource.split(path.sep)
   return [
     filePath[filePath.length - 1],

@@ -1,6 +1,5 @@
 {
   "parser": "babel-eslint",
-
   "rules": {
     "brace-style": [1, "1tbs", {"allowSingleLine": true}],
     "camelcase": 1,
@@ -11,13 +10,13 @@
     "curly": [2, "multi"],
     "eqeqeq": [2, "allow-null"],
     "eol-last": 1,
-    "func-style": [1, "expression"],
+    "func-style": [2, "declaration"],
     "guard-for-in": 1,
     "indent": [2, 2],
     "key-spacing": 0,
-    "new-cap": 1,
-    "new-parens": 1,
-    "no-bitwise": 1,
+    "new-cap": [1, {"capIsNew": false, "newIsCap": true}],
+    "new-parens": 0,
+    "no-bitwise": 0,
     "no-cond-assign": 1,
     "no-console": 1,
     "no-constant-condition": 1,
@@ -62,9 +61,9 @@
     "no-undef": 1,
     "no-undefined": 2,
     "no-undef-init": 1,
-    "no-underscore-dangle": 1,
+    "no-underscore-dangle": 0,
     "no-unreachable": 1,
-    "no-use-before-define": 2,
+    "no-use-before-define": 0,
     "no-warning-comments": [1, {"terms": ["todo", "fixme"]}],
     "no-wrap-func": 1,
     "quotes": [1, "single", "avoid-escape"],
@@ -85,7 +84,6 @@
     "vars-on-top": 0,  // disabled for now, see github.com/eslint/eslint/issues/2099
     "wrap-iife": [1, "inside"],
     "yoda": 0,
-
     // Node.js specific
     "handle-callback-err": [1, "^(err|error)$"],
     "no-mixed-requires": 1,

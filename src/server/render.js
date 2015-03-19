@@ -25,7 +25,7 @@ function renderPage({path, appState}) {
     Router.run(routes, path, (Handler, routerState) => {
       state.load(appState)
       const html = getPageHtml(Handler, appState)
-      const isNotFound = routerState.routes.some(route => route.name == 'not-found')
+      const isNotFound = routerState.routes.some(route => route.name === 'not-found')
       resolve({
         html: html,
         status: isNotFound ? 404: 200
@@ -52,7 +52,7 @@ function getPageHtml(Handler, appState) {
       })();
     </script>`
 
-  if (config.googleAnalyticsId != 'UA-XXXXXXX-X') {
+  if (config.googleAnalyticsId !== 'UA-XXXXXXX-X')
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -62,7 +62,6 @@ function getPageHtml(Handler, appState) {
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
       </script>`
-  }
   const title = DocumentTitle.rewind()
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(

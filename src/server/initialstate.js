@@ -9,7 +9,9 @@ export default {
     locales: initialLocale,
     messages: messages[initialLocale]
   },
-  newTodo: { title: '' },
+  newTodo: {
+    title: ''
+  },
   todos: [
     {id: 1, title: 'consider ‘stop doing’ app'},
     {id: 2, title: 'relax'}

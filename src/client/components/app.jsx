@@ -18,10 +18,12 @@ export default React.createClass({
 
     state.on('change', () => {
       // Try hundreds todos with and without PureRenderMixin.
+      /*eslint-disable no-console */
       console.time('whole app rerender')
       this.forceUpdate(() => {
         console.timeEnd('whole app rerender')
       })
+      /*eslint-enable */
     })
   },
 

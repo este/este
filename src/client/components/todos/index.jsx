@@ -38,12 +38,14 @@ export default React.createClass({
       case 19:
         window._appState = state.save()
         window._appStateString = JSON.stringify(window._appState)
+        /*eslint-disable no-console */
         console.log('app state saved')
         console.log('copy the state to your clipboard by calling copy(_appStateString)')
         console.log('for dev type _appState and press enter')
+        /*eslint-enable */
         break
       case 12:
-        const stateStr = window.prompt('Path the serialized state into the input')
+        const stateStr = window.prompt('Path the serialized state into the input') // eslint-disable-line no-alert
         const newState = JSON.parse(stateStr)
         if (!newState) return
         state.load(newState)
@@ -81,7 +83,7 @@ export default React.createClass({
               onClick={addHundredTodos}
             />
             <button
-              disabled={undoStates.length == 1}
+              disabled={undoStates.length === 1}
               onClick={() => this.undo()}
             ><FormattedMessage
               message={this.getIntlMessage('todos.undo')}

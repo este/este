@@ -1,3 +1,5 @@
+/*eslint-disable no-console */
+
 import React from 'react'
 import compression from 'compression'
 import config from './config'
