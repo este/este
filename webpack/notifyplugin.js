@@ -1,11 +1,11 @@
 /* @flow weak */
 
-"use strict"
+'use strict'
 
 var notifier = require('node-notifier')
 var path = require('path')
 
-function getLocMessage(error, loc) {
+var getLocMessage = function(error, loc) {
   var filePath = error.module.resource.split(path.sep)
   return [
     filePath[filePath.length - 1],
@@ -23,7 +23,7 @@ module.exports = function() {
     var error = stats.compilation.errors[0]
     if (!error) return
     var loc = error.error.loc
-    var msg;
+    var msg
     if (loc)
       msg = getLocMessage(error, loc)
     else if (error.message)

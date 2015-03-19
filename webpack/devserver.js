@@ -1,15 +1,14 @@
 /* @flow weak */
 
-"use strict"
+'use strict'
 
 var gutil = require('gulp-util')
-var path = require('path')
 var webpack = require('webpack')
-var webpackDevServer = require('webpack-dev-server')
+var WebpackDevServer = require('webpack-dev-server')
 
 module.exports = function(webpackConfig) {
   return function(callback) {
-    new webpackDevServer(webpack(webpackConfig), {
+    new WebpackDevServer(webpack(webpackConfig), {
       contentBase: 'http://localhost:8888',
       hot: true,
       publicPath: webpackConfig.output.publicPath,
