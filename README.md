@@ -89,6 +89,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - Why React `this.state` isn't used? Because whole app state belongs to app one global immutable app state. So we can log it easily, user can navigate out page with half fulfilled form without losing its state, and more.
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
+- Recommended editor is [atom.io](https://atom.io) or [sublimetext](http://www.sublimetext.com/).
 
 ## Notes
 
