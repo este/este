@@ -1,3 +1,7 @@
+/* eslint-env node */
+
+'use strict'
+
 var bg = require('gulp-bg')
 var gulp = require('gulp')
 var eslint = require('gulp-eslint')
@@ -38,7 +42,8 @@ gulp.task('eslint', function() {
 
 gulp.task('jest', function(done) {
   var rootDir = './src'
-  function onComplete(success) {
+  var onComplete = function(success) {
+    /* eslint no-process-exit:0 */
     done(success ? null : 'jest failed')
     process.on('exit', function() {
       process.exit(success ? 0 : 1)
@@ -57,7 +62,7 @@ gulp.task('test', function(done) {
   // are not passing, and it doesn't make sense to run tests, if lint has failed.
   // Gulp deps aren't helpful, because we want to run tasks without deps as well.
   runSequence('eslint', 'jest', 'build-webpack-production', done)
-});
+})
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'))
 
