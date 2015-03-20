@@ -13,18 +13,20 @@
 ## Techniques
 
 - ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default.
-- [jest](https://facebook.github.io/jest) unit testing
+- [jest](https://facebook.github.io/jest) unit testing.
+- [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support.
+- Isomorphic architecture with stateless actions and stores.
 - Server side rendering.
 - Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
-- React with Flux with immutable global app state like Om or [Omniscient](https://github.com/omniscientjs/omniscient/wiki/Simpler-UI-Reasoning-with-Unidirectional-Dataflow-and-Immutable-Data).
-- Isomorphic architecture with stateless actions and stores.
+- [React](http://facebook.github.io/react/) with [Flux](https://facebook.github.io/flux/) with [immutable](http://facebook.github.io/immutable-js) global app state like Om or [Omniscient](https://github.com/omniscientjs/omniscient/wiki/Simpler-UI-Reasoning-with-Unidirectional-Dataflow-and-Immutable-Data).
 - Mobile first, offline first, frontend first.
 - Vanilla Flux, we don't need over abstracted frameworks.
 - Webpack css livereload with hot module reload even for React components.
 - Easy undo/redo and app state load/save.
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
-- Stylesheets in CSS, LESS, SASS or Stylus.
+- LESS, SASS Stylus supported
+- [autoprefixer](https://github.com/postcss/autoprefixer) preconfigured for last two versions
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
 
