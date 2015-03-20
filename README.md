@@ -26,8 +26,7 @@
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - [ftlabs/fastclick](https://github.com/ftlabs/fastclick) for fast click on touch devices
-- LESS, SASS Stylus supported
-- [autoprefixer](https://github.com/postcss/autoprefixer) preconfigured for last two versions
+- LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
 
