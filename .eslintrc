@@ -10,7 +10,6 @@
     "curly": [2, "multi"],
     "eqeqeq": [2, "allow-null"],
     "eol-last": 1,
-    "func-style": [2, "declaration"],
     "guard-for-in": 1,
     "indent": [2, 2],
     "key-spacing": 0,
