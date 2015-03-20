@@ -17,8 +17,7 @@ export default React.createClass({
       <ol>
         {this.props.todos.map((todo, i) => {
           return <TodoItem todo={todo} key={todo.get('id')} />
-          // toArray will not be required in React 0.13.
-        }).toArray()}
+        })}
       </ol>
     )
   }
