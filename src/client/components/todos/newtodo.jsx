@@ -25,7 +25,7 @@ export default React.createClass({
         name="title"
         onChange={onNewTodoFieldChange}
         onKeyDown={this.onKeyDown}
-        placeholder={this.getIntlMessage('todos.newTodoPlaceholder')}
+        placeholder={'todos.newTodoPlaceholder'}
         value={this.props.todo.get('title')}
       />
     )

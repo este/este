@@ -6,30 +6,22 @@ import {FormattedMessage, IntlMixin} from 'react-intl'
 import {Link} from 'react-router'
 import {addHundredTodos, clearAll} from '../../todos/actions'
 import {getNewTodo, getTodos} from '../../todos/store'
-import {state} from '../../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/todos.styl')
 
 // Naïve undo implementation.
 // TODO: Reimplement it.
-const undoStates = []
 
 export default React.createClass({
   mixins: [IntlMixin],
 
   componentDidMount() {
-    state.on('change', this.onStateChange)
     document.addEventListener('keypress', this.onDocumentKeypress)
   },
 
   componentWillUnmount() {
-    state.removeListener('change', this.onStateChange)
     document.removeEventListener('keypress', this.onDocumentKeypress)
-  },
-
-  onStateChange(state) {
-    undoStates.push(state)
   },
 
   onDocumentKeypress(e) {
@@ -37,7 +29,7 @@ export default React.createClass({
     if (!e.shiftKey || !e.ctrlKey) return
     switch (e.keyCode) {
       case 19:
-        window._appState = state.save()
+        window._appState = state.toJS()
         window._appStateString = JSON.stringify(window._appState)
         /*eslint-disable no-console */
         console.log('app state saved')
@@ -49,20 +41,12 @@ export default React.createClass({
         const stateStr = window.prompt('Path the serialized state into the input') // eslint-disable-line no-alert
         const newState = JSON.parse(stateStr)
         if (!newState) return
-        state.load(newState)
+        state.set(state.fromJS(newState))
         break
     }
   },
 
-  undo() {
-    undoStates.pop()
-    state.set(undoStates.pop())
-  },
-
   render() {
-    // This is just a demo. In real app you would set first undo elsewhere.
-    if (!undoStates.length) undoStates.push(state.get())
-
     // This is composite component. It load its data from store, and passes them
     // through props, so NewTodo and TodoList can leverage PureRenderMixin.
     const newTodo = getNewTodo()
@@ -75,21 +59,14 @@ export default React.createClass({
           <TodoList todos={todos} />
           <div className="buttons">
             <button
-              children={this.getIntlMessage('todos.clearAll')}
+              children={'todos.clearAll'}
               disabled={!todos.size}
               onClick={clearAll}
             />
             <button
-              children={this.getIntlMessage('todos.add100')}
+              children={'todos.add100'}
               onClick={addHundredTodos}
             />
-            <button
-              disabled={undoStates.length === 1}
-              onClick={() => this.undo()}
-            ><FormattedMessage
-              message={this.getIntlMessage('todos.undo')}
-              steps={undoStates.length - 1}
-            /></button>
           </div>
           <h3>
             Things to Check

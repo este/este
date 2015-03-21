@@ -2,7 +2,7 @@ import DocumentTitle from 'react-document-title'
 import React from 'react'
 import {IntlMixin} from 'react-intl'
 import {Link, RouteHandler} from 'react-router'
-import {state} from '../state'
+import state from '../../lib/state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl')
@@ -16,7 +16,7 @@ export default React.createClass({
     // isomorphic libraries. TODO: Wait for iOS fix, then remove.
     require('fastclick').attach(document.body)
 
-    state.on('change', () => {
+    state.addChangeListener(() => {
       // Try hundreds todos with and without PureRenderMixin.
       /*eslint-disable no-console */
       console.time('whole app rerender')

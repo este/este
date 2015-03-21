@@ -20,5 +20,5 @@ export default class TodoItem extends PureComponent {
 }
 
 TodoItem.propTypes = {
-  todo: React.PropTypes.instanceOf(immutable.Map)
+  todo: React.PropTypes.instanceOf(immutable.Record)
 }

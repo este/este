@@ -1,46 +1,57 @@
+/* @flow */
+
 import EventEmitter from 'eventemitter3'
-import Immutable from 'immutable'
+import {Map, KeyedCollection} from 'immutable'
+//import invariant from 'invariant'
 
-export default class State extends EventEmitter {
+class State {
 
-  constructor(state, reviver: ?Function) {
-    this._state = null
-    this._reviver = reviver
-    this.load(state || {})
+  constructor() {
+    this.state = Map()
+    this.emitter = new EventEmitter()
   }
 
-  load(state: Object) {
-    this.set(Immutable.Map.isMap(state)
-      ? state
-      : Immutable.fromJS(state, this._reviver)
-    )
+  toJS():Object {
+    return this.state.map((v, k) => v.toJS())
   }
 
-  set(state) {
-    if (this._state === state) return
-    this._state = state
-    this.emit('change', this._state)
+  fromJS(json:Object):Map {
+    return Map(json).map((v, k) => this.state.get(k).fromJS(v))
   }
 
-  get() {
-    return this._state
+  set(state:KeyedCollection) {
+    if (this.state === state) return
+    this.state = state
+    this.emitter.emit('change')
   }
 
-  save(): Object {
-    return this._state.toJS()
+  get():Map {
+    return this.state
   }
 
-  toConsole() {
-    console.log(JSON.stringify(this.save())) // eslint-disable-line no-console
+  addChangeListener(listener:Function) {
+    this.emitter.on('change', listener)
   }
 
-  cursor(path) {
-    return (update) => {
-      if (update)
-        this.set(this._state.updateIn(path, update))
-      else
-        return this._state.getIn(path)
+  removeChangeListener(listener:Function) {
+    this.emitter.removeEventListener('change', listener)
+  }
+
+  register(Store):Function {
+    const store = new Store()
+    const name = store.toString()
+    //invariant(!this.state.get(name), 'Store name conflict')
+    this.set(this.state.set(name, store))
+
+    return (updater:Function) => {
+      if (updater) {
+        this.set(this.state.update(name, updater))
+      } else {
+        return this.state.get(name)
+      }
     }
   }
 
 }
+
+export default new State()

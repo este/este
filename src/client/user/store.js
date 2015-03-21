@@ -1,11 +1,22 @@
-import dispatcher from '../dispatcher'
-import {userCursor} from '../state'
+import {register} from '../dispatcher'
+import state from '../../lib/state'
+import {Record} from 'Immutable'
 
-export const dispatchToken = dispatcher.register(({action, data}) => {
+class User extends Record({
+  toString() {
+    return 'user'
+  }
+}) {
+  
+}
+
+const cursor = state.register(User)
+
+export const dispatchToken = register(({action, data}) => {
   // switch (action) {
   // }
 })
 
 export function getUser() {
-  return userCursor()
+  return cursor()
 }
