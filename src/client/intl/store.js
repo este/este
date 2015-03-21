@@ -10,7 +10,7 @@ export const dispatchToken = register(({action, data}) => {
 export function msg(path): string {
   const pathParts = ['messages'].concat(path.split('.'))
   const message = i18nCursor().getIn(pathParts)
-  if (message === undefined)
+  if (message == null)
     throw new ReferenceError('Could not find Intl message: ' + path)
   return message
 }
