@@ -29,11 +29,11 @@ export default React.createClass({
 
   render() {
     return (
-      <DocumentTitle title='Este.js App Bootstrap'>
+      <DocumentTitle title='Este.js App'>
         <div className="page">
           <header>
             <h1>
-              <a href="https://github.com/steida/este">Este.js</a> App Bootstrap
+              <a href="https://github.com/steida/este">Este.js</a> App
             </h1>
             <ul>
               <li><Link to="home">Home</Link></li>
