@@ -84,7 +84,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Use `() =>` lambda expression for all predicates and anonymous functions.
-- Always use React propTypes for props passed to component, and if props are immutables or primitives, use PureRenderMixin. Simple rule for ultimate performance.
+- If React props are immutable or primitive, subclass from PureComponent. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper for actions.
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't use it since it's runtime value. Use webpack DefinePlugin to set process.env.IS_BROWSER rather, because compilation removes dead code then.
