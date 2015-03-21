@@ -2,10 +2,11 @@ import DocumentTitle from 'react-document-title'
 import NewTodo from './newtodo'
 import React from 'react'
 import TodoList from './todolist'
-import {FormattedMessage, IntlMixin} from 'react-intl'
+import {FormattedMessage} from 'react-intl'
 import {Link} from 'react-router'
 import {addHundredTodos, clearAll} from '../../todos/actions'
 import {getNewTodo, getTodos} from '../../todos/store'
+import {msg} from '../../intl/store'
 import {state} from '../../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
@@ -15,22 +16,21 @@ require('../../../../assets/css/todos.styl')
 // TODO: Reimplement it.
 const undoStates = []
 
-export default React.createClass({
-  mixins: [IntlMixin],
+export default class Index extends React.Component {
 
   componentDidMount() {
     state.on('change', this.onStateChange)
     document.addEventListener('keypress', this.onDocumentKeypress)
-  },
+  }
 
   componentWillUnmount() {
     state.removeListener('change', this.onStateChange)
     document.removeEventListener('keypress', this.onDocumentKeypress)
-  },
+  }
 
   onStateChange(state) {
     undoStates.push(state)
-  },
+  }
 
   onDocumentKeypress(e) {
     // Press shift+ctrl+s to save app state and shift+ctrl+l to load.
@@ -52,19 +52,19 @@ export default React.createClass({
         state.load(newState)
         break
     }
-  },
+  }
 
   undo() {
     undoStates.pop()
     state.set(undoStates.pop())
-  },
+  }
 
   render() {
     // This is just a demo. In real app you would set first undo elsewhere.
     if (!undoStates.length) undoStates.push(state.get())
 
     // This is composite component. It load its data from store, and passes them
-    // through props, so NewTodo and TodoList can leverage PureRenderMixin.
+    // through props, so NewTodo and TodoList can leverage PureComponent.
     const newTodo = getNewTodo()
     const todos = getTodos()
 
@@ -75,19 +75,19 @@ export default React.createClass({
           <TodoList todos={todos} />
           <div className="buttons">
             <button
-              children={this.getIntlMessage('todos.clearAll')}
+              children={msg('todos.clearAll')}
               disabled={!todos.size}
               onClick={clearAll}
             />
             <button
-              children={this.getIntlMessage('todos.add100')}
+              children={msg('todos.add100')}
               onClick={addHundredTodos}
             />
             <button
               disabled={undoStates.length === 1}
               onClick={() => this.undo()}
             ><FormattedMessage
-              message={this.getIntlMessage('todos.undo')}
+              message={msg('todos.undo')}
               steps={undoStates.length - 1}
             /></button>
           </div>
@@ -133,4 +133,4 @@ export default React.createClass({
     )
   }
 
-})
+}

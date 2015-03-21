@@ -1,14 +1,12 @@
 import DocumentTitle from 'react-document-title'
 import React from 'react'
-import {IntlMixin} from 'react-intl'
 import {Link, RouteHandler} from 'react-router'
 import {state} from '../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl')
 
-export default React.createClass({
-  mixins: [IntlMixin],
+export default class App extends React.Component {
 
   componentDidMount() {
     // Must be required here because there is no DOM in Node.js. Remember,
@@ -17,7 +15,6 @@ export default React.createClass({
     require('fastclick').attach(document.body)
 
     state.on('change', () => {
-      // Try hundreds todos with and without PureRenderMixin.
       /*eslint-disable no-console */
       console.time('whole app rerender')
       this.forceUpdate(() => {
@@ -25,7 +22,7 @@ export default React.createClass({
       })
       /*eslint-enable */
     })
-  },
+  }
 
   render() {
     return (
@@ -51,4 +48,4 @@ export default React.createClass({
     )
   }
 
-})
+}
