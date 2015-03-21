@@ -12,6 +12,7 @@ import {state} from '../../state'
 require('../../../../assets/css/todos.styl')
 
 // Naïve undo implementation.
+// TODO: Reimplement it.
 const undoStates = []
 
 export default React.createClass({

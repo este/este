@@ -1,15 +1,10 @@
+import PureComponent from '../../../lib/purecomponent'
 import React from 'react'
 import classnames from 'classnames'
 import immutable from 'immutable'
-import {addons} from 'react/addons'
 import {deleteTodo} from '../../todos/actions'
 
-export default React.createClass({
-  mixins: [addons.PureRenderMixin],
-
-  propTypes: {
-    todo: React.PropTypes.instanceOf(immutable.Map)
-  },
+export default class TodoItem extends PureComponent {
 
   render() {
     const todo = this.props.todo
@@ -22,4 +17,8 @@ export default React.createClass({
     )
   }
 
-})
+}
+
+TodoItem.propTypes = {
+  todo: React.PropTypes.instanceOf(immutable.Map)
+}
