@@ -27,7 +27,7 @@
     "eslint-plugin-react": "^1.5.0",
     "eventemitter3": "^0.1.6",
     "express": "^4.11.2",
-    "extract-text-webpack-plugin": "^0.3.8",
+    "extract-text-webpack-plugin": "^0.4.0",
     "fastclick": "^1.0.6",
     "file-loader": "^0.8.1",
     "flux": "^2.0.1",
