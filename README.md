@@ -77,6 +77,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 - [stackoverflow.com/questions/tagged/estejs](http://stackoverflow.com/questions/tagged/estejs)
 - [twitter.com/estejs](https://twitter.com/estejs)
+- [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
 ## Tips and Tricks and Lips and Tits
 
