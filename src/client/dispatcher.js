@@ -2,8 +2,12 @@ import {Dispatcher} from 'flux'
 
 const dispatcher = new Dispatcher
 
-export function register(callback: Function): string {
-  return dispatcher.register(callback)
+export function register(handlers:Object):string {
+  return dispatcher.register(({action, data}) => {
+    const handler:Function = handlers[action]
+    if (!handler) return
+    handler(data)
+  })
 }
 
 export function dispatch(action: Function, data: ?Object) {
