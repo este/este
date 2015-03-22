@@ -1,21 +1,16 @@
+import PureComponent from '../../../lib/purecomponent'
 import React from 'react'
 import immutable from 'immutable'
-import {IntlMixin} from 'react-intl'
 import {addTodo, onNewTodoFieldChange} from '../../todos/actions'
 import {addons} from 'react/addons'
+import {msg} from '../../intl/store'
 
-export default React.createClass({
-  // TODO: Refactor to less boilerplate after React 0.13 release.
-  mixins: [addons.PureRenderMixin, IntlMixin],
+export default class NewTodo extends PureComponent {
 
-  propTypes: {
-    todo: React.PropTypes.instanceOf(immutable.Map)
-  },
-
-  onKeyDown(e) {
+  addTodoOnEnter(e) {
     if (e.key === 'Enter')
       addTodo(this.props.todo)
-  },
+  }
 
   render() {
     return (
@@ -24,11 +19,15 @@ export default React.createClass({
         className="new-todo"
         name="title"
         onChange={onNewTodoFieldChange}
-        onKeyDown={this.onKeyDown}
-        placeholder={this.getIntlMessage('todos.newTodoPlaceholder')}
+        onKeyDown={(e) => this.addTodoOnEnter(e)}
+        placeholder={msg('todos.newTodoPlaceholder')}
         value={this.props.todo.get('title')}
       />
     )
   }
 
-})
+}
+
+NewTodo.propTypes = {
+  todo: React.PropTypes.instanceOf(immutable.Map)
+}

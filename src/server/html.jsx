@@ -1,13 +1,6 @@
 import React from 'react'
 
-export default React.createClass({
-
-  propTypes: {
-    bodyHtml: React.PropTypes.string.isRequired,
-    isProduction: React.PropTypes.bool.isRequired,
-    title: React.PropTypes.string.isRequired,
-    version: React.PropTypes.string.isRequired
-  },
+export default class Html extends React.Component {
 
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
@@ -37,4 +30,11 @@ export default React.createClass({
     )
   }
 
-})
+}
+
+Html.propTypes = {
+  bodyHtml: React.PropTypes.string.isRequired,
+  isProduction: React.PropTypes.bool.isRequired,
+  title: React.PropTypes.string.isRequired,
+  version: React.PropTypes.string.isRequired
+}
