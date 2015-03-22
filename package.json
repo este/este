@@ -38,6 +38,7 @@
     "harmonize": "^1.4.1",
     "immutable": "^3.6.4",
     "intl": "^0.1.4",
+    "intl-messageformat": "^1.1.0",
     "jest-cli": "^0.4.0",
     "less-loader": "^2.0.0",
     "node-notifier": "^4.1.0",
@@ -54,6 +55,7 @@
     "style-loader": "^0.8.3",
     "stylus-loader": "^1.0.0",
     "url-loader": "^0.5.5",
+    "validator": "^3.34.0",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0",
     "yargs": "^3.3.1"
