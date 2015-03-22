@@ -30,7 +30,8 @@
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
-- Authentication form with validation and reusable `auth` component to protect access to specific route. 
+- Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
+- Authentication form and reusable `auth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific components. 
 
 ## Prerequisites
 
