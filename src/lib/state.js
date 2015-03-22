@@ -41,11 +41,11 @@ export function register(StoreRecord):Function {
   //invariant(is.function(store.fromJS), 'Store missing fromJS')
   //invariant(!state.get(name), 'Store name conflict')
 
-  this.set(state.set(name, store))
+  set(state.set(name, store))
 
   return (updater:Function) => {
     if (updater) {
-      this.set(state.update(name, updater))
+      set(state.update(name, updater))
     } else {
       return state.get(name)
     }
