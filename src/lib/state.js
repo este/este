@@ -5,57 +5,49 @@ import {Map} from 'immutable'
 //import is from 'is_js'
 //import invariant from 'invariant'
 
-class State {
+let state = new Map()
+let emitter = new EventEmitter()
 
-  constructor() {
-    this._state = Map()
-    this._emitter = new EventEmitter()
-  }
-
-  toJS():Object {
-    return this._state.map((v, k) => v.toJS())
-  }
-
-  fromJS(json:Object):Map {
-    return Map(json).map((v, k) => this._state.get(k).fromJS(v))
-  }
-
-  set(state:Map) {
-    if (this._state === state) return
-    this._state = state
-    this._emitter.emit('change')
-  }
-
-  get():Map {
-    return this._state
-  }
-
-  addChangeListener(listener:Function) {
-    this._emitter.on('change', listener)
-  }
-
-  removeChangeListener(listener:Function) {
-    this._emitter.removeEventListener('change', listener)
-  }
-
-  register(StoreRecord):Function {
-    const store = new StoreRecord()
-    const name  = store._name || store.constructor.name;
-
-    //invariant(is.function(store.fromJS), 'Store missing fromJS')
-    //invariant(!this._state.get(name), 'Store name conflict')
-
-    this.set(this._state.set(name, store))
-
-    return (updater:Function) => {
-      if (updater) {
-        this.set(this._state.update(name, updater))
-      } else {
-        return this._state.get(name)
-      }
-    }
-  }
-
+export function toJS():Object {
+  return state.map((v, k) => v.toJS())
 }
 
-export default new State()
+export function fromJS(json:Object):Map {
+  return Map(json).map((v, k) => state.get(k).fromJS(v))
+}
+
+export function set(value:Map) {
+  if (state === value) return
+  state = value
+  emitter.emit('change')
+}
+
+export function get():Map {
+  return state
+}
+
+export function addChangeListener(listener:Function) {
+  emitter.on('change', listener)
+}
+
+export function removeChangeListener(listener:Function) {
+  emitter.removeEventListener('change', listener)
+}
+
+export function register(StoreRecord):Function {
+  const store = new StoreRecord()
+  const name = store._name || store.constructor.name
+
+  //invariant(is.function(store.fromJS), 'Store missing fromJS')
+  //invariant(!state.get(name), 'Store name conflict')
+
+  this.set(state.set(name, store))
+
+  return (updater:Function) => {
+    if (updater) {
+      this.set(state.update(name, updater))
+    } else {
+      return state.get(name)
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import {register} from '../dispatcher'
-import state from '../../lib/state'
+import * as state from '../../lib/state'
 import {Record} from 'Immutable'
 
 class User extends Record({
