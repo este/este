@@ -3,11 +3,8 @@ import state from '../../lib/state'
 import {Record} from 'Immutable'
 
 class User extends Record({
-  toString() {
-    return 'user'
-  }
 }) {
-  
+
 }
 
 const cursor = state.register(User)

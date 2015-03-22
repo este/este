@@ -5,7 +5,7 @@ import React from 'react'
 import Router from 'react-router'
 import config from './config'
 import routes from '../client/routes'
-import {state} from '../lib/state'
+import state from '../lib/state'
 
 export default function(path, locale) {
   return loadData(path, locale).then(renderPage)

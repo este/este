@@ -10,9 +10,6 @@ class TodoItem extends Record({
   id: '',
   title: ''
 }) {
-  toString() {
-    return 'todo'
-  }
 }
 
 class Todos extends Record({
@@ -26,14 +23,10 @@ class Todos extends Record({
     return new Todos(fromJS(json))
       .update('todos', todos => todos.map(json => new TodoItem(json)))
   }
-  toString() {
-    return 'todos'
-  }
 }
 
 const cursor = state.register(Todos)
 
-  console.log(cursor().todos)
 export const dispatchToken = register(({action, data}) => {
 
   let todo

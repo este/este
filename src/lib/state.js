@@ -1,53 +1,57 @@
 /* @flow */
 
 import EventEmitter from 'eventemitter3'
-import {Map, KeyedCollection} from 'immutable'
+import {Map} from 'immutable'
+//import is from 'is_js'
 //import invariant from 'invariant'
 
 class State {
 
   constructor() {
-    this.state = Map()
-    this.emitter = new EventEmitter()
+    this._state = Map()
+    this._emitter = new EventEmitter()
   }
 
   toJS():Object {
-    return this.state.map((v, k) => v.toJS())
+    return this._state.map((v, k) => v.toJS())
   }
 
   fromJS(json:Object):Map {
-    return Map(json).map((v, k) => this.state.get(k).fromJS(v))
+    return Map(json).map((v, k) => this._state.get(k).fromJS(v))
   }
 
-  set(state:KeyedCollection) {
-    if (this.state === state) return
-    this.state = state
-    this.emitter.emit('change')
+  set(state:Map) {
+    if (this._state === state) return
+    this._state = state
+    this._emitter.emit('change')
   }
 
   get():Map {
-    return this.state
+    return this._state
   }
 
   addChangeListener(listener:Function) {
-    this.emitter.on('change', listener)
+    this._emitter.on('change', listener)
   }
 
   removeChangeListener(listener:Function) {
-    this.emitter.removeEventListener('change', listener)
+    this._emitter.removeEventListener('change', listener)
   }
 
-  register(Store):Function {
-    const store = new Store()
-    const name = store.toString()
-    //invariant(!this.state.get(name), 'Store name conflict')
-    this.set(this.state.set(name, store))
+  register(StoreRecord):Function {
+    const store = new StoreRecord()
+    const name  = store._name || store.constructor.name;
+
+    //invariant(is.function(store.fromJS), 'Store missing fromJS')
+    //invariant(!this._state.get(name), 'Store name conflict')
+
+    this.set(this._state.set(name, store))
 
     return (updater:Function) => {
       if (updater) {
-        this.set(this.state.update(name, updater))
+        this.set(this._state.update(name, updater))
       } else {
-        return this.state.get(name)
+        return this._state.get(name)
       }
     }
   }
