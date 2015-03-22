@@ -29,6 +29,8 @@
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
+- [react-router](https://github.com/rackt/react-router) for routing on client and server side.
+- Authentication form with validation and reusable `auth` component to protect access to specific route. 
 
 ## Prerequisites
 
