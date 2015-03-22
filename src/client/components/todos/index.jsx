@@ -70,7 +70,7 @@ export default class Index extends React.Component {
 
     return (
       <DocumentTitle title="Todos">
-        <section id="todos">
+        <section className="todos">
           <NewTodo todo={newTodo} />
           <TodoList todos={todos} />
           <div className="buttons">

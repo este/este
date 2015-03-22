@@ -1,6 +1,7 @@
 import DocumentTitle from 'react-document-title'
 import React from 'react'
 import {Link, RouteHandler} from 'react-router'
+import {isLoggedIn} from '../user/store'
 import {state} from '../state'
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
@@ -35,6 +36,9 @@ export default class App extends React.Component {
             <ul>
               <li><Link to="home">Home</Link></li>
               <li><Link to="todos">Todos</Link></li>
+              <li><Link to="me">Me (protected)</Link></li>
+              {!isLoggedIn() &&
+                <li><Link to="login">Login</Link></li>}
             </ul>
           </header>
           <RouteHandler />
