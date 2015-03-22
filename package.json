@@ -50,7 +50,7 @@
     "react-intl": "^1.1.0",
     "react-router": "^0.13.1",
     "run-sequence": "^1.0.2",
-    "sass-loader": "^0.5.0",
+    "sass-loader": "^1.0.0",
     "serve-favicon": "^2.2.0",
     "style-loader": "^0.8.3",
     "stylus-loader": "^1.0.0",
