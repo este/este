@@ -20,10 +20,7 @@ export default function() {
 
   app.get('*', (req, res) => {
     const acceptsLanguages = req.acceptsLanguages(config.appLocales)
-    render(req.path, acceptsLanguages || config.defaultLocale)
-      .then((result) => {
-        res.status(result.status).send(result.html)
-      })
+    render(req, res, acceptsLanguages || config.defaultLocale)
       .catch((error) => {
         const msg = error.stack || error
         console.log(msg)

@@ -8,28 +8,45 @@ import initialState from './initialstate'
 import routes from '../client/routes'
 import {state} from '../client/state'
 
-export default function(path, locale) {
-  return loadData(path, locale).then(renderPage)
+export default function render(req, res, locale) {
+  const path = req.path
+  return loadData(path, locale)
+    .then((appState) => renderPage(res, appState, path))
 }
 
 function loadData(path, locale) {
   // TODO: Preload and merge user specific state.
   const appState = initialState
   return new Promise((resolve, reject) => {
-    resolve({path, appState})
+    resolve(appState)
   })
 }
 
-function renderPage({path, appState}) {
+// TODO: Refactor.
+function renderPage(res, appState, path) {
   return new Promise((resolve, reject) => {
-    Router.run(routes, path, (Handler, routerState) => {
+    const router = Router.create({
+      routes,
+      location: path,
+      onError: reject,
+      onAbort: (abortReason) => {
+        if (abortReason.constructor.name === 'Redirect') {
+          const {to, params, query} = abortReason
+          const path = router.makePath(to, params, query)
+          res.redirect(path)
+          resolve()
+          return
+        }
+        reject(abortReason)
+      }
+    })
+    router.run((Handler, routerState) => {
       state.load(appState)
       const html = getPageHtml(Handler, appState)
-      const isNotFound = routerState.routes.some(route => route.name === 'not-found')
-      resolve({
-        html: html,
-        status: isNotFound ? 404: 200
-      })
+      const notFound = routerState.routes.some(route => route.name === 'not-found')
+      const status = notFound ? 404 : 200
+      res.status(status).send(html)
+      resolve()
     })
   })
 }
@@ -39,6 +56,7 @@ function getPageHtml(Handler, appState) {
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js'
+
   let scriptHtml = `
     <script>
       (function() {
@@ -62,6 +80,7 @@ function getPageHtml(Handler, appState) {
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
       </script>`
+
   const title = DocumentTitle.rewind()
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
