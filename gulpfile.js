@@ -32,7 +32,7 @@ gulp.task('build', ['build-webpack'])
 gulp.task('eslint', function() {
   return gulp.src([
       'gulpfile.js',
-      'src/**/*.{js,jsx}',
+      'src/**/*.js',
       'webpack/*.js'
     ])
     .pipe(eslint())
