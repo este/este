@@ -71,7 +71,7 @@ module.exports = function(isDevelopment) {
         ] : [
           'babel-loader'
         ],
-        test: /\.jsx?$/
+        test: /\.js$/
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
@@ -116,8 +116,7 @@ module.exports = function(isDevelopment) {
       return plugins
     })(),
     resolve: {
-      // To allow require('file') instead of require('file.jsx')
-      extensions: ['', '.js', '.jsx', '.json']
+      extensions: ['', '.js', '.json']
     }
   }
 
