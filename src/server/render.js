@@ -70,7 +70,7 @@ function getPageHtml(Handler, appState) {
       })();
     </script>`
 
-  if (config.googleAnalyticsId !== 'UA-XXXXXXX-X')
+  if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
