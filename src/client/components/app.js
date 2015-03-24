@@ -13,6 +13,7 @@ export default class App extends React.Component {
     // Must be required here because there is no DOM in Node.js. Remember,
     // mocking DOM in Node.js is an anti-pattern, because it can confuse
     // isomorphic libraries. TODO: Wait for iOS fix, then remove.
+    // http://developer.telerik.com/featured/300-ms-click-delay-ios-8/
     require('fastclick').attach(document.body)
 
     state.on('change', () => {
