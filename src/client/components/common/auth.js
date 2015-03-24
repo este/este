@@ -11,7 +11,7 @@ export default function auth(Component) {
         transition.redirect('/login', {}, {nextPath: transition.path})
     }
     render() {
-      return <Component {...this.props} />
+      return React.cloneElement(React.Children.onlyChild(this.props.children))
     }
   }
 
