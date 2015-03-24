@@ -29,6 +29,9 @@
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
+- [react-router](https://github.com/rackt/react-router) for routing on client and server side.
+- Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
+- Authentication form and reusable `auth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific components. 
 
 ## Prerequisites
 
@@ -92,7 +95,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - Why React `this.state` isn't used? Because whole app state belongs to app one global immutable app state. So we can log it easily, user can navigate out page with half fulfilled form without losing its state, and more.
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
-- Recommended editor is [atom.io](https://atom.io) or [sublimetext](http://www.sublimetext.com/).
+- Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
 
 ## Notes
 
