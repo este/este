@@ -78,7 +78,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Links
 
-- [stackoverflow.com/questions/tagged/estejs](http://stackoverflow.com/questions/tagged/estejs)
+- [wiki/Recommended-React-Components](https://github.com/steida/este/wiki/Recommended-React-Components)
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
