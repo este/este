@@ -4,6 +4,8 @@
 
 var webpack = require('webpack')
 var gutil = require('gulp-util')
+var fs = require('fs');
+var path = require('path')
 
 module.exports = function(webpackConfig) {
   return function(callback) {
@@ -13,6 +15,13 @@ module.exports = function(webpackConfig) {
 
       if (buildError)
         throw new gutil.PluginError('webpack', buildError)
+
+      var outputFilename = path.join(__dirname, 'stats.json');
+      fs.writeFile(outputFilename, JSON.stringify(jsonStats, null, 4), function(err) {
+        if(err) {
+          gutil.log('[webpack]', err);
+        }
+      })
 
       gutil.log('[webpack]', stats.toString({
         colors: true,
