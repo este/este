@@ -68,7 +68,7 @@
     "quotes": [1, "single", "avoid-escape"],
     "quote-props": [0, "as-needed"],
     "radix": 1,
-    "semi": [1, "never"],
+    "semi": [2, "always"],
     "semi-spacing": [1, {"before": false, "after": true}],
     "space-after-keywords": [1, "always"],
     "space-before-blocks": [1, "always"],

@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router'
+import React from 'react';
+import {Link} from 'react-router';
 
 export default class Home extends React.Component {
 
@@ -11,7 +11,7 @@ export default class Home extends React.Component {
           Este.js</a>. Check <Link to="todos">todos</Link>.
         </p>
       </div>
-    )
+    );
   }
 
 }

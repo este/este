@@ -1,5 +1,5 @@
-import React from 'react'
-import shallowEqual from 'react/lib/shallowEqual'
+import React from 'react';
+import shallowEqual from 'react/lib/shallowEqual';
 
 /**
  * PureRenderMixin replacement for React component ES6 classes.
@@ -9,7 +9,7 @@ export default class PureComponent extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !shallowEqual(this.props, nextProps) ||
-           !shallowEqual(this.state, nextState)
+           !shallowEqual(this.state, nextState);
   }
 
 }

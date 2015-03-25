@@ -1,7 +1,7 @@
-import PureComponent from '../../../lib/purecomponent'
-import React from 'react'
-import TodoItem from './todoitem'
-import immutable from 'immutable'
+import PureComponent from '../../../lib/purecomponent';
+import React from 'react';
+import TodoItem from './todoitem';
+import immutable from 'immutable';
 
 export default class TodoList extends PureComponent {
 
@@ -9,10 +9,10 @@ export default class TodoList extends PureComponent {
     return (
       <ol>
         {this.props.todos.map((todo, i) => {
-          return <TodoItem todo={todo} key={todo.get('id')} />
+          return <TodoItem todo={todo} key={todo.get('id')} />;
         })}
       </ol>
-    )
+    );
   }
 
 }
@@ -21,4 +21,4 @@ export default class TodoList extends PureComponent {
 // https://github.com/babel/babel/issues/57#issuecomment-58834201
 TodoList.propTypes = {
   todos: React.PropTypes.instanceOf(immutable.List)
-}
+};
