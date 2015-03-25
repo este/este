@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default class Html extends React.Component {
 
@@ -8,13 +8,13 @@ export default class Html extends React.Component {
       <link
         href={`/build/app.css?v=${this.props.version}`}
         rel="stylesheet"
-      />
+      />;
 
     // TODO: Add favicon.
     const linkFavicon = false && <link
       href={`/build/img/favicon.icon?v=${this.props.version}`}
       rel="shortcut icon"
-    />
+    />;
 
     return (
       <html lang="en">
@@ -27,7 +27,7 @@ export default class Html extends React.Component {
         </head>
         <body dangerouslySetInnerHTML={{__html: this.props.bodyHtml}} />
       </html>
-    )
+    );
   }
 
 }
@@ -37,4 +37,4 @@ Html.propTypes = {
   isProduction: React.PropTypes.bool.isRequired,
   title: React.PropTypes.string.isRequired,
   version: React.PropTypes.string.isRequired
-}
+};

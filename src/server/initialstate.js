@@ -1,7 +1,7 @@
-import config from './config'
-import messages from '../client/messages'
+import config from './config';
+import messages from '../client/messages';
 
-const initialLocale = 'en'
+const initialLocale = 'en';
 
 export default {
   $pendingActions: {},
