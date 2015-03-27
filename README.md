@@ -41,6 +41,8 @@ Then install [gulp.js](http://gulpjs.com/).
 npm install -g gulp
 ```
 
+Windows users, please read [ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/). sass-loader needs something similar, so please fix it for yourself, or remove sass-loader from `package.json` and `makeconfig.js`, or give it up and use developer more friendly OS like Linux or Mac. I just tried to install Python 2.7 on Windows but installation has failed for no reason. Typical Windows, so happy I quit.
+
 ## Create App
 
 ```shell
