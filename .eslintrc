@@ -10,7 +10,7 @@
     "curly": [2, "multi"],
     "eqeqeq": [2, "allow-null"],
     "eol-last": 1,
-    "guard-for-in": 1,
+    "guard-for-in": 0,
     "indent": [2, 2],
     "key-spacing": 0,
     "new-cap": [1, {"capIsNew": false, "newIsCap": true}],
