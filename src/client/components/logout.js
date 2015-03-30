@@ -1,6 +1,6 @@
-import React from 'react'
-import {logout} from '../auth/actions'
-import {msg} from '../intl/store'
+import React from 'react';
+import {logout} from '../auth/actions';
+import {msg} from '../intl/store';
 
 export default class Logout extends React.Component {
 
@@ -12,7 +12,7 @@ export default class Logout extends React.Component {
           onClick={logout}
         />
       </div>
-    )
+    );
   }
 
 }

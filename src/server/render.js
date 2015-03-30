@@ -1,25 +1,25 @@
-import DocumentTitle from 'react-document-title'
-import Html from './html'
-import Promise from 'bluebird'
-import React from 'react'
-import Router from 'react-router'
-import config from './config'
-import initialState from './initialstate'
-import routes from '../client/routes'
-import {state} from '../client/state'
+import DocumentTitle from 'react-document-title';
+import Html from './html';
+import Promise from 'bluebird';
+import React from 'react';
+import Router from 'react-router';
+import config from './config';
+import initialState from './initialstate';
+import routes from '../client/routes';
+import {state} from '../client/state';
 
 export default function render(req, res, locale) {
-  const path = req.path
+  const path = req.path;
   return loadData(path, locale)
-    .then((appState) => renderPage(res, appState, path))
+    .then((appState) => renderPage(res, appState, path));
 }
 
 function loadData(path, locale) {
   // TODO: Preload and merge user specific state.
-  const appState = initialState
+  const appState = initialState;
   return new Promise((resolve, reject) => {
-    resolve(appState)
-  })
+    resolve(appState);
+  });
 }
 
 // TODO: Refactor.
@@ -31,31 +31,31 @@ function renderPage(res, appState, path) {
       onError: reject,
       onAbort: (abortReason) => {
         if (abortReason.constructor.name === 'Redirect') {
-          const {to, params, query} = abortReason
-          const path = router.makePath(to, params, query)
-          res.redirect(path)
-          resolve()
-          return
+          const {to, params, query} = abortReason;
+          const path = router.makePath(to, params, query);
+          res.redirect(path);
+          resolve();
+          return;
         }
-        reject(abortReason)
+        reject(abortReason);
       }
-    })
+    });
     router.run((Handler, routerState) => {
-      state.load(appState)
-      const html = getPageHtml(Handler, appState)
-      const notFound = routerState.routes.some(route => route.name === 'not-found')
-      const status = notFound ? 404 : 200
-      res.status(status).send(html)
-      resolve()
-    })
-  })
+      state.load(appState);
+      const html = getPageHtml(Handler, appState);
+      const notFound = routerState.routes.some(route => route.name === 'not-found');
+      const status = notFound ? 404 : 200;
+      res.status(status).send(html);
+      resolve();
+    });
+  });
 }
 
 function getPageHtml(Handler, appState) {
-  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`
+  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`;
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
-    : '//localhost:8888/build/app.js'
+    : '//localhost:8888/build/app.js';
 
   let scriptHtml = `
     <script>
@@ -68,7 +68,7 @@ function getPageHtml(Handler, appState) {
         app.src = src;
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(app, s);
       })();
-    </script>`
+    </script>`;
 
   if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
     scriptHtml += `
@@ -79,9 +79,9 @@ function getPageHtml(Handler, appState) {
         e.src='//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
-      </script>`
+      </script>`;
 
-  const title = DocumentTitle.rewind()
+  const title = DocumentTitle.rewind();
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html
@@ -90,5 +90,5 @@ function getPageHtml(Handler, appState) {
       title={title}
       version={config.version}
     />
-  )
+  );
 }

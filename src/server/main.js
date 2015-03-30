@@ -1,3 +1,3 @@
-import express from './express'
+import express from './express';
 
-express()
+express();

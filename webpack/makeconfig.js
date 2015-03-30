@@ -1,33 +1,33 @@
 /* @flow weak */
 
-'use strict'
+'use strict';
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var NotifyPlugin = require('./notifyplugin')
-var path = require('path')
-var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var NotifyPlugin = require('./notifyplugin');
+var path = require('path');
+var webpack = require('webpack');
 
 var loaders = {
   'css': '',
   'less': '!less-loader',
   'scss|sass': '!sass-loader',
   'styl': '!stylus-loader'
-}
+};
 
 module.exports = function(isDevelopment) {
 
   function stylesLoaders() {
     return Object.keys(loaders).map(function(ext) {
-      var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version'
-      var extLoaders = prefix + loaders[ext]
+      var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version';
+      var extLoaders = prefix + loaders[ext];
       var loader = isDevelopment
         ? 'style-loader!' + extLoaders
-        : ExtractTextPlugin.extract('style-loader', extLoaders)
+        : ExtractTextPlugin.extract('style-loader', extLoaders);
       return {
         loader: loader,
         test: new RegExp('\\.(' + ext + ')$')
-      }
-    })
+      };
+    });
   }
 
   var config = {
@@ -90,14 +90,14 @@ module.exports = function(isDevelopment) {
             IS_BROWSER: true
           }
         })
-      ]
+      ];
       if (isDevelopment)
         plugins.push(
           NotifyPlugin,
           new webpack.HotModuleReplacementPlugin(),
           // Tell reloader to not reload if there is an error.
           new webpack.NoErrorsPlugin()
-        )
+        );
       else
         plugins.push(
           // Render styles into separate cacheable file to prevent FOUC and
@@ -112,14 +112,14 @@ module.exports = function(isDevelopment) {
               warnings: false
             }
           })
-        )
-      return plugins
+        );
+      return plugins;
     })(),
     resolve: {
       extensions: ['', '.js', '.json']
     }
-  }
+  };
 
-  return config
+  return config;
 
-}
+};

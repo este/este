@@ -1,15 +1,15 @@
-import PureComponent from '../../../lib/purecomponent'
-import React from 'react'
-import immutable from 'immutable'
-import {addTodo, onNewTodoFieldChange} from '../../todos/actions'
-import {addons} from 'react/addons'
-import {msg} from '../../intl/store'
+import PureComponent from '../../../lib/purecomponent';
+import React from 'react';
+import immutable from 'immutable';
+import {addTodo, onNewTodoFieldChange} from '../../todos/actions';
+import {addons} from 'react/addons';
+import {msg} from '../../intl/store';
 
 export default class NewTodo extends PureComponent {
 
   addTodoOnEnter(e) {
     if (e.key === 'Enter')
-      addTodo(this.props.todo)
+      addTodo(this.props.todo);
   }
 
   render() {
@@ -23,11 +23,11 @@ export default class NewTodo extends PureComponent {
         placeholder={msg('todos.newTodoPlaceholder')}
         value={this.props.todo.get('title')}
       />
-    )
+    );
   }
 
 }
 
 NewTodo.propTypes = {
   todo: React.PropTypes.instanceOf(immutable.Map)
-}
+};
