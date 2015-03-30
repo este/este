@@ -36,4 +36,4 @@ export default {
       password: `Password must contain at least {minLength} characters.`
     }
   }
-}
+};

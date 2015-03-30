@@ -1,11 +1,11 @@
-import DocumentTitle from 'react-document-title'
-import React from 'react'
-import {Link, RouteHandler} from 'react-router'
-import {isLoggedIn} from '../user/store'
-import {state} from '../state'
+import DocumentTitle from 'react-document-title';
+import React from 'react';
+import {Link, RouteHandler} from 'react-router';
+import {isLoggedIn} from '../user/store';
+import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
-require('../../../assets/css/app.styl')
+require('../../../assets/css/app.styl');
 
 export default class App extends React.Component {
 
@@ -14,16 +14,16 @@ export default class App extends React.Component {
     // mocking DOM in Node.js is an anti-pattern, because it can confuse
     // isomorphic libraries. TODO: Wait for iOS fix, then remove.
     // http://developer.telerik.com/featured/300-ms-click-delay-ios-8/
-    require('fastclick').attach(document.body)
+    require('fastclick').attach(document.body);
 
     state.on('change', () => {
       /*eslint-disable no-console */
-      console.time('whole app rerender')
+      console.time('whole app rerender');
       this.forceUpdate(() => {
-        console.timeEnd('whole app rerender')
-      })
+        console.timeEnd('whole app rerender');
+      });
       /*eslint-enable */
-    })
+    });
   }
 
   render() {
@@ -50,7 +50,7 @@ export default class App extends React.Component {
           </footer>
         </div>
       </DocumentTitle>
-    )
+    );
   }
 
 }

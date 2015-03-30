@@ -1,6 +1,6 @@
-import Logout from './logout'
-import React from 'react'
-import auth from './common/auth'
+import Logout from './logout';
+import React from 'react';
+import auth from './common/auth';
 
 class Me extends React.Component {
 
@@ -12,9 +12,9 @@ class Me extends React.Component {
         </p>
         <Logout />
       </div>
-    )
+    );
   }
 
 }
 
-export default auth(Me)
+export default auth(Me);

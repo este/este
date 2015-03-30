@@ -41,6 +41,8 @@ Then install [gulp.js](http://gulpjs.com/).
 npm install -g gulp
 ```
 
+Windows users, please read [ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/). sass-loader needs something similar, so please fix it for yourself, or remove sass-loader from `package.json` and `makeconfig.js`, or give it up and use developer more friendly OS like Linux or Mac. I just tried to install Python 2.7 on Windows but installation has failed for no reason. Typical Windows, so happy I quit.
+
 ## Create App
 
 ```shell
@@ -78,7 +80,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Links
 
-- [stackoverflow.com/questions/tagged/estejs](http://stackoverflow.com/questions/tagged/estejs)
+- [wiki/Recommended-React-Components](https://github.com/steida/este/wiki/Recommended-React-Components)
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
@@ -88,6 +90,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Use `() =>` lambda expression for all predicates and anonymous functions.
+- Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. Get object values: `Seq(RoomType).toSet().toJS()`
 - If React props are immutable or primitive, subclass from PureComponent. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
 - Always use settostring helper for actions.

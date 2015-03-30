@@ -1,30 +1,30 @@
-import React from 'react'
-import exposeRouter from './common/exposerouter'
-import {focusInvalidField} from '../../lib/validation'
-import {getForm} from '../auth/store'
-import {msg} from '../intl/store'
-import {updateFormField, login} from '../auth/actions'
+import React from 'react';
+import exposeRouter from './common/exposerouter';
+import {focusInvalidField} from '../../lib/validation';
+import {getForm} from '../auth/store';
+import {msg} from '../intl/store';
+import {updateFormField, login} from '../auth/actions';
 
-require('../../../assets/css/login.styl')
+require('../../../assets/css/login.styl');
 
 class Login extends React.Component {
 
   login(e) {
-    e.preventDefault()
-    const nextPath = this.props.router.getCurrentQuery().nextPath
-    const fields = getForm().toJS().fields
+    e.preventDefault();
+    const nextPath = this.props.router.getCurrentQuery().nextPath;
+    const fields = getForm().toJS().fields;
 
     login(fields)
       .catch(focusInvalidField(this))
       .then(() => {
         // TODO: Probably use hard reload for Chrome to remember password.
         // https://code.google.com/p/chromium/issues/detail?id=43219#c56
-        this.props.router.replaceWith(nextPath || '/')
-      })
+        this.props.router.replaceWith(nextPath || '/');
+      });
   }
 
   render() {
-    const form = getForm().toJS()
+    const form = getForm().toJS();
 
     return (
       <div className="login">
@@ -61,13 +61,17 @@ class Login extends React.Component {
           </fieldset>
         </form>
       </div>
-    )
+    );
   }
 
 }
 
+<<<<<<< HEAD
 Login.propTypes = {
   router: React.PropTypes.func
 }
 
 export default exposeRouter(Login)
+=======
+export default exposeRouter(Login);
+>>>>>>> origin/master

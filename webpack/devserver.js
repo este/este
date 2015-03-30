@@ -1,10 +1,10 @@
 /* @flow weak */
 
-'use strict'
+'use strict';
 
-var gutil = require('gulp-util')
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
+var gutil = require('gulp-util');
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
 
 module.exports = function(webpackConfig) {
   return function(callback) {
@@ -29,9 +29,9 @@ module.exports = function(webpackConfig) {
     }).listen(8888, 'localhost', function(err) {
       // Callback is called only once, can't be used to catch compilation errors.
       if (err)
-        throw new gutil.PluginError('webpack-dev-server', err)
-      gutil.log('[webpack-dev-server]', 'localhost:8888/build/client.js')
-      callback()
-    })
-  }
-}
+        throw new gutil.PluginError('webpack-dev-server', err);
+      gutil.log('[webpack-dev-server]', 'localhost:8888/build/client.js');
+      callback();
+    });
+  };
+};
