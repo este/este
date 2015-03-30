@@ -66,12 +66,8 @@ class Login extends React.Component {
 
 }
 
-<<<<<<< HEAD
 Login.propTypes = {
   router: React.PropTypes.func
-}
+};
 
-export default exposeRouter(Login)
-=======
 export default exposeRouter(Login);
->>>>>>> origin/master
