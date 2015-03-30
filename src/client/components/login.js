@@ -66,4 +66,8 @@ class Login extends React.Component {
 
 }
 
+Login.propTypes = {
+  router: React.PropTypes.func
+}
+
 export default exposeRouter(Login)
