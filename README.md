@@ -31,7 +31,7 @@
 - Google Analytics preconfigured.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
 - Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
-- Authentication form and reusable `auth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific components. 
+- Authentication form and reusable `auth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific components.
 
 ## Prerequisites
 
@@ -80,7 +80,8 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Links
 
-- [wiki/Recommended-React-Components](https://github.com/steida/este/wiki/Recommended-React-Components)
+- [wiki: Recommended React Components](https://github.com/steida/este/wiki/Recommended-React-Components)
+- [wiki: Recommended Sublime Text 3 Packages](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages)
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
