@@ -22,6 +22,8 @@ export default class Html extends React.Component {
           <meta charSet="utf-8" />
           <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
           <title>{this.props.title}</title>
+          <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.6/nprogress.min.js"></script>
+          <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.6/nprogress.min.css" rel="stylesheet"></link>
           {linkStyles}
           {linkFavicon}
         </head>
