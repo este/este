@@ -9,6 +9,15 @@ require('../../../assets/css/app.styl');
 
 export default class App extends React.Component {
 
+  static fetchData() {
+    // fake a long response from api server
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, Math.random() > 0.5 ? 500 : 1000);
+    });
+  }
+
   componentDidMount() {
     // Must be required here because there is no DOM in Node.js. Remember,
     // mocking DOM in Node.js is an anti-pattern, because it can confuse
