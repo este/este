@@ -5,7 +5,10 @@ import immutable from 'immutable';
 import {deleteTodo} from '../../todos/actions';
 
 export default class TodoItem extends PureComponent {
-
+  static propTypes = {
+    todo: React.PropTypes.instanceOf(immutable.Map)
+  }
+  
   render() {
     const todo = this.props.todo;
 
@@ -18,7 +21,3 @@ export default class TodoItem extends PureComponent {
   }
 
 }
-
-TodoItem.propTypes = {
-  todo: React.PropTypes.instanceOf(immutable.Map)
-};
