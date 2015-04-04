@@ -1,5 +1,6 @@
 export default {
   en: {
+    text: 'English',
     auth: {
       form: {
         legend: 'Login / Sign Up',
@@ -41,5 +42,45 @@ export default {
       message: 'The link may be broken, or the page may have been removed.',
       continueMessage: 'Continue here please.'
     }
+  },
+
+  fr: {
+    text: 'français',
+    auth: {
+      form: {
+        legend: 'se connecter / signer',
+        placeholder: {
+          email: 'votre@email.com',
+          password: 'mot de passe'
+        },
+        button: {
+          login: 'se connecter',
+          signup: 'signer'
+        },
+        hint: 'allusion: pass1'
+      },
+      logout: {
+        button: 'se déconnecter'
+      }
+    },
+    todos: {
+      add100: 'ajouter 100 Todos',
+      clearAll: 'tout effacer',
+      newTodoPlaceholder: 'ce qui dit doit être fait?',
+      undo: `annuler {steps, plural,
+        =0 {}
+        other {(#)}
+      }`
+    },
+    validation: {
+      required: `se il vous plaît remplir {prop, select,
+        email {email}
+        mot de passe {password}
+        other {'{prop}'}
+      }.`,
+      email: `adresse e-mail ne est pas valide`,
+      password: `mot de passe doit cotain à bail {minLength} caractères.`
+    }
   }
+
 };
