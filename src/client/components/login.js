@@ -9,6 +9,10 @@ require('../../../assets/css/login.styl');
 
 class Login extends React.Component {
 
+  static propTypes = {
+    router: React.PropTypes.func
+  }
+
   login(e) {
     e.preventDefault();
     const nextPath = this.props.router.getCurrentQuery().nextPath;
@@ -65,9 +69,5 @@ class Login extends React.Component {
   }
 
 }
-
-Login.propTypes = {
-  router: React.PropTypes.func
-};
 
 export default exposeRouter(Login);
