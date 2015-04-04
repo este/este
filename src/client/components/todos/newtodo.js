@@ -8,8 +8,8 @@ import {msg} from '../../intl/store';
 export default class NewTodo extends PureComponent {
   static propTypes = {
     todo: React.PropTypes.instanceOf(immutable.Map)
-  }
-  
+  };
+
   addTodoOnEnter(e) {
     if (e.key === 'Enter')
       addTodo(this.props.todo);
