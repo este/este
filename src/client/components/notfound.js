@@ -1,20 +1,17 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {Link} from 'react-router';
+import {msg} from '../intl/store';
 
 export default class NotFound extends React.Component {
 
   render() {
     return (
-      <DocumentTitle title="Page Not Found">
+      <DocumentTitle title={msg('notFound.title')}>
         <div>
-          <h1>
-            This page isn't available
-          </h1>
-          <p>
-            The link may be broken, or the page may have been removed.
-          </p>
-          <Link to="home">Continue here please.</Link>
+          <h1>{msg('notFound.header')}</h1>
+          <p>{msg('notFound.message')}</p>
+          <Link to="home">{msg('notFound.continueMessage')}</Link>
         </div>
       </DocumentTitle>
     );
