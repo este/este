@@ -1,11 +1,16 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
+import Language from './common/language'
 import {Link, RouteHandler} from 'react-router';
 import {isLoggedIn} from '../user/store';
 import {state} from '../state';
+import {getLocales, getCurrentLocale} from '../intl/store';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl');
+
+const locales = getLocales();
+const defaultLocale = getCurrentLocale();
 
 export default class App extends React.Component {
 
@@ -34,6 +39,7 @@ export default class App extends React.Component {
             <h1>
               <a href="https://github.com/steida/este">Este.js</a> App
             </h1>
+            <Language langs={locales} default={defaultLocale} />
             <ul>
               <li><Link to="home">Home</Link></li>
               <li><Link to="todos">Todos</Link></li>

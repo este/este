@@ -2,7 +2,7 @@ import State from '../lib/state';
 
 const initialState = process.env.IS_BROWSER
   ? window._appState
-  : require('../server/initialstate');
+  : require('../server/initialstate').getInitialState();
 
 export const state = new State(initialState);
 export const $pendingActionsCursor = state.cursor(['$pendingActions']);

@@ -4,8 +4,8 @@ import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
 import config from './config';
-import initialState from './initialstate';
 import routes from '../client/routes';
+import {getInitialState} from './initialstate';
 import {state} from '../client/state';
 
 export default function render(req, res, locale) {
@@ -16,7 +16,7 @@ export default function render(req, res, locale) {
 
 function loadData(path, locale) {
   // TODO: Preload and merge user specific state.
-  const appState = initialState;
+  const appState = getInitialState(locale);
   return new Promise((resolve, reject) => {
     resolve(appState);
   });
