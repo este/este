@@ -4,9 +4,6 @@ import TodoItem from './todoitem';
 import immutable from 'immutable';
 
 export default class TodoList extends PureComponent {
-  static propTypes = {
-    todos: React.PropTypes.instanceOf(immutable.List)
-  }
 
   render() {
     return (
@@ -19,3 +16,7 @@ export default class TodoList extends PureComponent {
   }
 
 }
+
+TodoList.propTypes = {
+  todos: React.PropTypes.instanceOf(immutable.List)
+};
