@@ -4,6 +4,9 @@ import TodoItem from './todoitem';
 import immutable from 'immutable';
 
 export default class TodoList extends PureComponent {
+  static propTypes = {
+    todos: React.PropTypes.instanceOf(immutable.List)
+  }
 
   render() {
     return (
@@ -16,9 +19,3 @@ export default class TodoList extends PureComponent {
   }
 
 }
-
-// Note only static methods can be defined in a class, no object props.
-// https://github.com/babel/babel/issues/57#issuecomment-58834201
-TodoList.propTypes = {
-  todos: React.PropTypes.instanceOf(immutable.List)
-};

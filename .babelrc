@@ -1,0 +1,6 @@
+{
+  "stage": 0,
+  "optional": [
+    "optimisation.react.constantElements"
+  ]
+}

@@ -7,6 +7,7 @@ import validator from 'validator';
 
 export class ValidationError extends Error {
   constructor(message: string, prop: string) {
+    super();
     this.message = message;
     this.prop = prop;
   }
