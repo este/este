@@ -69,7 +69,7 @@ module.exports = function(isDevelopment) {
         loaders: isDevelopment ? [
           'react-hot', 'babel-loader'
         ] : [
-          'babel-loader?optional[]=optimisation.react.inlineElements'
+          'babel-loader'
         ],
         test: /\.js$/
       }].concat(stylesLoaders())
