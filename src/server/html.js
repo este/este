@@ -2,6 +2,13 @@ import React from 'react';
 
 export default class Html extends React.Component {
 
+  static propTypes = {
+    bodyHtml: React.PropTypes.string.isRequired,
+    isProduction: React.PropTypes.bool.isRequired,
+    title: React.PropTypes.string.isRequired,
+    version: React.PropTypes.string.isRequired
+  }
+
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
     const linkStyles = this.props.isProduction &&
@@ -31,10 +38,3 @@ export default class Html extends React.Component {
   }
 
 }
-
-Html.propTypes = {
-  bodyHtml: React.PropTypes.string.isRequired,
-  isProduction: React.PropTypes.bool.isRequired,
-  title: React.PropTypes.string.isRequired,
-  version: React.PropTypes.string.isRequired
-};
