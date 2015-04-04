@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 export default class State extends EventEmitter {
 
   constructor(state, reviver: ?Function) {
+    super();
     this._state = null;
     this._reviver = reviver;
     this.load(state || {});
