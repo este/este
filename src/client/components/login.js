@@ -9,18 +9,21 @@ require('../../../assets/css/login.styl');
 
 class Login extends React.Component {
 
-  login(e) {
+  onFormSubmit(e) {
     e.preventDefault();
-    const nextPath = this.props.router.getCurrentQuery().nextPath;
     const fields = getForm().toJS().fields;
-
     login(fields)
-      .catch(focusInvalidField(this))
       .then(() => {
-        // TODO: Probably use hard reload for Chrome to remember password.
-        // https://code.google.com/p/chromium/issues/detail?id=43219#c56
-        this.props.router.replaceWith(nextPath || '/');
-      });
+        this.redirectAfterLogin();
+      })
+      .catch(focusInvalidField(this));
+  }
+
+  redirectAfterLogin() {
+    // TODO: Probably use hard reload for Chrome to remember password.
+    // https://code.google.com/p/chromium/issues/detail?id=43219#c56
+    const nextPath = this.props.router.getCurrentQuery().nextPath;
+    this.props.router.replaceWith(nextPath || '/');
   }
 
   render() {
@@ -28,7 +31,7 @@ class Login extends React.Component {
 
     return (
       <div className="login">
-        <form onSubmit={(e) => this.login(e)}>
+        <form onSubmit={(e) => this.onFormSubmit(e)}>
           <fieldset>
             <legend>{msg('auth.form.legend')}</legend>
             <input
