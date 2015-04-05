@@ -17,4 +17,4 @@ export default class LinkComponent extends PureComponent {
 
 }
 
-LinkComponent.contextTypes = { router: React.PropTypes.func };
+LinkComponent.contextTypes = {router: React.PropTypes.func};

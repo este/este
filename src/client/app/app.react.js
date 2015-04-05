@@ -1,8 +1,9 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
-import {Link, RouteHandler} from 'react-router';
+import {RouteHandler} from 'react-router';
 import {isLoggedIn} from '../user/store';
 import {state} from '../state';
+import Menu from './menu';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.styl');
@@ -30,18 +31,7 @@ export default class App extends React.Component {
     return (
       <DocumentTitle title='Este.js App'>
         <div className="page">
-          <header>
-            <h1>
-              <a href="https://github.com/steida/este">Este.js</a> App
-            </h1>
-            <ul>
-              <li><Link to="home">Home</Link></li>
-              <li><Link to="todos">Todos</Link></li>
-              <li><Link to="me">Me (protected)</Link></li>
-              {!isLoggedIn() &&
-                <li><Link to="login">Login</Link></li>}
-            </ul>
-          </header>
+          <Menu isLoggedIn={isLoggedIn()} />
           <RouteHandler />
           <footer>
             <p>
