@@ -1,6 +1,6 @@
-import Logout from './logout';
+import Logout from '../auth/logout.react';
 import React from 'react';
-import auth from './common/auth';
+import requireAuth from '../auth/requireauth.react';
 
 class Me extends React.Component {
 
@@ -17,4 +17,4 @@ class Me extends React.Component {
 
 }
 
-export default auth(Me);
+export default requireAuth(Me);

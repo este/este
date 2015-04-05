@@ -1,5 +1,5 @@
 import React from 'react';
-import {logout} from '../auth/actions';
+import {logout} from './actions';
 import {msg} from '../intl/store';
 
 export default class Logout extends React.Component {

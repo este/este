@@ -1,8 +1,8 @@
-import PureComponent from '../../../lib/purecomponent';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import classnames from 'classnames';
 import immutable from 'immutable';
-import {deleteTodo} from '../../todos/actions';
+import {deleteTodo} from './actions';
 
 export default class TodoItem extends PureComponent {
 

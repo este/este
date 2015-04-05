@@ -1,9 +1,9 @@
-import PureComponent from '../../../lib/purecomponent';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
-import {addTodo, onNewTodoFieldChange} from '../../todos/actions';
+import {addTodo, onNewTodoFieldChange} from './actions';
 import {addons} from 'react/addons';
-import {msg} from '../../intl/store';
+import {msg} from '../intl/store';
 
 export default class NewTodo extends PureComponent {
 

@@ -1,10 +1,10 @@
-import App from './components/app';
-import Home from './components/home';
-import Login from './components/login';
-import Me from './components/me';
-import NotFound from './components/notfound';
+import App from './app/app.react';
+import Home from './pages/home.react';
+import Login from './pages/login.react';
+import Me from './pages/me.react';
+import NotFound from './pages/notfound.react';
 import React from 'react';
-import Todos from './components/todos';
+import Todos from './pages/todos.react';
 import {DefaultRoute, NotFoundRoute, Route} from 'react-router';
 
 export default (

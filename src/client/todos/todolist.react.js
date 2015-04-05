@@ -1,6 +1,6 @@
-import PureComponent from '../../../lib/purecomponent';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
-import TodoItem from './todoitem';
+import TodoItem from './todoitem.react';
 import immutable from 'immutable';
 
 export default class TodoList extends PureComponent {

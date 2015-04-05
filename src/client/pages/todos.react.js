@@ -1,22 +1,22 @@
 import DocumentTitle from 'react-document-title';
-import NewTodo from './newtodo';
+import NewTodo from '../todos/newtodo.react';
 import React from 'react';
-import TodoList from './todolist';
+import TodoList from '../todos/todolist.react';
 import {FormattedMessage} from 'react-intl';
 import {Link} from 'react-router';
-import {addHundredTodos, clearAll} from '../../todos/actions';
-import {getNewTodo, getTodos} from '../../todos/store';
-import {msg} from '../../intl/store';
-import {state} from '../../state';
+import {addHundredTodos, clearAll} from '../todos/actions';
+import {getNewTodo, getTodos} from '../todos/store';
+import {msg} from '../intl/store';
+import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
-require('../../../../assets/css/todos.styl');
+require('./todos.styl');
 
 // Naïve undo implementation.
 // TODO: Reimplement it.
 const undoStates = [];
 
-export default class Index extends React.Component {
+export default class Todos extends React.Component {
 
   componentDidMount() {
     state.on('change', this.onStateChange);

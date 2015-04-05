@@ -5,7 +5,7 @@ import {isLoggedIn} from '../user/store';
 import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
-require('../../../assets/css/app.styl');
+require('./app.styl');
 
 export default class App extends React.Component {
 
