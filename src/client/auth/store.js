@@ -17,13 +17,15 @@ export const dispatchToken = register(({action, data}) => {
 
     case loginError:
       authCursor(auth => {
-        return auth.setIn(['form', 'error'], data);
+        const error = data;
+        return auth.setIn(['form', 'error'], error);
       });
       break;
 
     case updateFormField:
       authCursor(auth => {
-        return auth.setIn(['form', 'fields', data.name], data.value);
+        const {name, value} = data;
+        return auth.setIn(['form', 'fields', name], value);
       });
       break;
   }

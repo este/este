@@ -13,27 +13,34 @@ const TodoItem = Record({
 
 export const dispatchToken = register(({action, data}) => {
 
-  let todo;
-
   switch (action) {
     case actions.onNewTodoFieldChange:
-      // Always use destructing vars. It's explicit.
-      const {name, value} = data;
-      newTodoCursor(todo => todo.set(name, value));
+      newTodoCursor(todo => {
+        // Use destructuring assignment. It's explicit.
+        const {name, value} = data;
+        return todo.set(name, value);
+      });
       break;
 
     case actions.addTodo:
-      todo = data;
-      todosCursor(todos => todos.push(new TodoItem({
-        id: getRandomString(),
-        title: todo.get('title')
-      }).toMap()));
+      todosCursor(todos => {
+        const title = data.get('title');
+        const todo = new TodoItem({
+          id: getRandomString(),
+          title: title
+        }).toMap();
+        return todos.push(todo);
+      });
+      // TODO: Use Record instead of Map.
       newTodoCursor(todo => new TodoItem().toMap());
       break;
 
     case actions.deleteTodo:
-      todo = data;
-      todosCursor(todos => todos.delete(todos.indexOf(todo)));
+      todosCursor(todos => {
+        const todo = data;
+        // TODO: Use Map or OrderedMap.
+        return todos.delete(todos.indexOf(todo));
+      });
       break;
 
     case actions.clearAll:

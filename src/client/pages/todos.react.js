@@ -42,7 +42,7 @@ export default class Todos extends React.Component {
         /*eslint-disable no-console */
         console.log('app state saved');
         console.log('copy the state to your clipboard by calling copy(_appStateString)');
-        console.log('for dev type _appState and press enter');
+        console.log('or type _appState and press enter');
         /*eslint-enable */
         break;
       case 12:
