@@ -43,7 +43,13 @@ Then install [gulp.js](http://gulpjs.com/).
 npm install -g gulp
 ```
 
-Windows users, please read [ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/). sass-loader needs something similar, so please fix it for yourself, or remove sass-loader from `package.json` and `makeconfig.js`, or give it up and use developer more friendly OS like Linux or Mac. I just tried to install Python 2.7 on Windows but installation has failed for no reason. Typical Windows, so happy I quit.
+### Windows
+
+- Install Python - Install version 2.7 of Python and add it to your path or/and create a PYTHONPATH environment variable.
+- Install Visual Studio (Express Edition is fine) - We will need this for some of modules that are compiled when we are installing Este. [Download VS Express](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), get one of the versions that has C++ - Express 2013 for Windows Desktop for example.
+- Set Visual Studio Version Flags - We need to tell node-gyp (something that is used for compiling addons) what version of Visual Studio we want to compile with. You can do this either through an environment variable GYP_MSVS_VERSION. If you are using Express, you have to say GYP_MSVS_VERSION=2013e.
+
+Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/)
 
 ## Create App
 
