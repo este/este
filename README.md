@@ -43,7 +43,7 @@ Then install [gulp.js](http://gulpjs.com/).
 npm install -g gulp
 ```
 
-### Windows
+#### Windows
 
 - Install Python - Install version 2.7 of Python and add it to your path or/and create a PYTHONPATH environment variable.
 - Install Visual Studio (Express Edition is fine) - We will need this for some of modules that are compiled when we are installing Este. [Download VS Express](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), get one of the versions that has C++ - Express 2013 for Windows Desktop for example.
