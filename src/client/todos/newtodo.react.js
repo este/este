@@ -8,8 +8,9 @@ import {msg} from '../intl/store';
 export default class NewTodo extends PureComponent {
 
   addTodoOnEnter(e) {
-    if (e.key === 'Enter')
+    if (e.key === 'Enter') {
       addTodo(this.props.todo);
+    }
   }
 
   render() {

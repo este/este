@@ -14,7 +14,9 @@ export function onNewTodoFieldChange({target: {name, value}}) {
 
 export function addTodo(todo) {
   const title = todo.get('title').trim();
-  if (!title) return;
+  if (!title) {
+    return;
+  }
   dispatch(addTodo, todo);
 }
 

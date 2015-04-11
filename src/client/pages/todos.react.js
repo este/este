@@ -34,7 +34,9 @@ export default class Todos extends React.Component {
 
   onDocumentKeypress(e) {
     // Press shift+ctrl+s to save app state and shift+ctrl+l to load.
-    if (!e.shiftKey || !e.ctrlKey) return;
+    if (!e.shiftKey || !e.ctrlKey) {
+      return;
+    }
     switch (e.keyCode) {
       case 19:
         window._appState = state.save();
@@ -48,7 +50,9 @@ export default class Todos extends React.Component {
       case 12:
         const stateStr = window.prompt('Path the serialized state into the input'); // eslint-disable-line no-alert
         const newState = JSON.parse(stateStr);
-        if (!newState) return;
+        if (!newState) {
+          return;
+        }
         state.load(newState);
         break;
     }
@@ -61,7 +65,9 @@ export default class Todos extends React.Component {
 
   render() {
     // This is just a demo. In real app you would set first undo elsewhere.
-    if (!undoStates.length) undoStates.push(state.get());
+    if (!undoStates.length) {
+      undoStates.push(state.get());
+    }
 
     // This is composite component. It load its data from store, and passes them
     // through props, so NewTodo and TodoList can leverage PureComponent.

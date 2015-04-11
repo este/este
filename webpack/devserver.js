@@ -28,8 +28,9 @@ module.exports = function(webpackConfig) {
       }
     }).listen(8888, 'localhost', function(err) {
       // Callback is called only once, can't be used to catch compilation errors.
-      if (err)
+      if (err) {
         throw new gutil.PluginError('webpack-dev-server', err);
+      }
       gutil.log('[webpack-dev-server]', 'localhost:8888/build/client.js');
       callback();
     });

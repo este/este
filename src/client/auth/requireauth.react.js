@@ -7,8 +7,9 @@ export default function auth(Component) {
 
   return class Auth extends React.Component {
     static willTransitionTo(transition) {
-      if (!isLoggedIn())
+      if (!isLoggedIn()) {
         transition.redirect('/login', {}, {nextPath: transition.path});
+      }
     }
     render() {
       return <Component {...this.props} />;
