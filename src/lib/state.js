@@ -18,7 +18,9 @@ export default class State extends EventEmitter {
   }
 
   set(state) {
-    if (this._state === state) return;
+    if (this._state === state) {
+      return;
+    }
     this._state = state;
     this.emit('change', this._state);
   }
@@ -37,10 +39,11 @@ export default class State extends EventEmitter {
 
   cursor(path) {
     return (update) => {
-      if (update)
+      if (update) {
         this.set(this._state.updateIn(path, update));
-      else
+      } else {
         return this._state.getIn(path);
+      }
     };
   }
 

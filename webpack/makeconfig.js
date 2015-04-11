@@ -91,14 +91,14 @@ module.exports = function(isDevelopment) {
           }
         })
       ];
-      if (isDevelopment)
+      if (isDevelopment) {
         plugins.push(
           NotifyPlugin,
           new webpack.HotModuleReplacementPlugin(),
           // Tell reloader to not reload if there is an error.
           new webpack.NoErrorsPlugin()
         );
-      else
+      } else {
         plugins.push(
           // Render styles into separate cacheable file to prevent FOUC and
           // optimize for critical rendering path.
@@ -113,6 +113,7 @@ module.exports = function(isDevelopment) {
             }
           })
         );
+      }
       return plugins;
     })(),
     resolve: {

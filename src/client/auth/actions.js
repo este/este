@@ -34,10 +34,11 @@ function validateCredentials(fields) {
   // Simulate long async action.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (fields.password === 'pass1')
+      if (fields.password === 'pass1') {
         resolve();
-      else
+      } else {
         reject(new ValidationError('Wrong password', 'password'));
+      }
     }, 3000);
   });
 }

@@ -16,11 +16,17 @@ export class ValidationError extends Error {
 export function focusInvalidField(component) {
   return (error) => {
     if (error instanceof ValidationError) {
-      if (!error.prop) return;
+      if (!error.prop) {
+        return;
+      }
       const node = React.findDOMNode(component);
-      if (!node) return;
+      if (!node) {
+        return;
+      }
       const el = node.querySelector(`[name=${error.prop}]`);
-      if (!el) return;
+      if (!el) {
+        return;
+      }
       el.focus();
       return;
     }
@@ -42,7 +48,9 @@ export default class Validation {
     const value = this._object[prop];
     const object = this._object;
     this.promise = this.promise.then(() => {
-      if (required && !this._isEmptyString(value)) return;
+      if (required && !this._isEmptyString(value)) {
+        return;
+      }
       callback(value, prop, object);
     });
     return this;
@@ -72,7 +80,9 @@ export default class Validation {
 
   email() {
     return this.custom((value, prop) => {
-      if (this._validator.isEmail(value)) return;
+      if (this._validator.isEmail(value)) {
+        return;
+      }
       throw new ValidationError(
         this.getEmailMessage(prop, value),
         prop
@@ -87,7 +97,9 @@ export default class Validation {
   simplePassword() {
     return this.custom((value, prop) => {
       const minLength = 5;
-      if (value.length >= minLength) return;
+      if (value.length >= minLength) {
+        return;
+      }
       throw new ValidationError(
         this.getSimplePasswordMessage(minLength),
         prop

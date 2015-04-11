@@ -7,8 +7,9 @@ const cachedInstances = Object.create(null);
 const intlRelativeFormat = new IntlRelativeFormat;
 
 function getCachedInstanceOf(message) {
-  if (message in cachedInstances)
+  if (message in cachedInstances) {
     return cachedInstances[message];
+  }
   // TODO: Add locales support.
   cachedInstances[message] = new IntlMessageFormat(message);
   return cachedInstances[message];
@@ -17,10 +18,12 @@ function getCachedInstanceOf(message) {
 export function msg(path, values = null): string {
   const pathParts = ['messages'].concat(path.split('.'));
   const message = i18nCursor().getIn(pathParts);
-  if (message == null)
+  if (message == null) {
     throw new ReferenceError('Could not find Intl message: ' + path);
-  if (!values)
+  }
+  if (!values) {
     return message;
+  }
 
   return getCachedInstanceOf(message).format(values);
 }

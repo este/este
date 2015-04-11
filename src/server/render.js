@@ -70,7 +70,7 @@ function getPageHtml(Handler, appState) {
       })();
     </script>`;
 
-  if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
+  if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X') {
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -80,6 +80,7 @@ function getPageHtml(Handler, appState) {
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
       </script>`;
+  }
 
   const title = DocumentTitle.rewind();
 
