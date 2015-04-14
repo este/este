@@ -1,4 +1,4 @@
-import config from './config';
+// import config from './config';
 import messages from '../client/messages';
 
 const initialLocale = 'en';
@@ -29,4 +29,4 @@ export default {
   user: {
     authData: null
   }
-}
+};

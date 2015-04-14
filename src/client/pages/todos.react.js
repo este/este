@@ -28,8 +28,8 @@ export default class Todos extends React.Component {
     document.removeEventListener('keypress', this.onDocumentKeypress);
   }
 
-  onStateChange(state) {
-    undoStates.push(state);
+  onStateChange(newState) {
+    undoStates.push(newState);
   }
 
   onDocumentKeypress(e) {
