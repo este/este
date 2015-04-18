@@ -109,6 +109,7 @@ module.exports = function(isDevelopment) {
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.UglifyJsPlugin({
             compress: {
+              // Because uglify reports so many irrelevant warnings.
               warnings: false
             }
           })
