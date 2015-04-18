@@ -9,12 +9,12 @@ import routes from '../client/routes';
 import {state} from '../client/state';
 
 export default function render(req, res, locale) {
-  const path = req.path;
-  return loadData(path, locale)
-    .then((appState) => renderPage(res, appState, path));
+  const url = req.originalUrl;
+  return loadData(url, locale)
+    .then((appState) => renderPage(res, appState, url));
 }
 
-function loadData(path, locale) {
+function loadData(url, locale) {
   // TODO: Preload and merge user specific state.
   const appState = initialState;
   return new Promise((resolve, reject) => {
@@ -23,11 +23,11 @@ function loadData(path, locale) {
 }
 
 // TODO: Refactor.
-function renderPage(res, appState, path) {
+function renderPage(res, appState, url) {
   return new Promise((resolve, reject) => {
     const router = Router.create({
       routes,
-      location: path,
+      location: url,
       onError: reject,
       onAbort: (abortReason) => {
         if (abortReason.constructor.name === 'Redirect') {
