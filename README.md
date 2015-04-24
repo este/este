@@ -92,17 +92,17 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks and Lips and Tits
 
-- App state snapshot: Press `shift+ctrl+s`, then open dev console and type `_appState`.
-- With global immutable app state, you don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
+- Whole app state is stored in one immutable app state object. To get snapshot, press `shift+ctrl+s`, then open dev consolea and type `_appState`.
+- There are still use cases where component state is useful. We can use it for small togglers or alerts, which should disappear when component is remounted.
+- With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Use `() =>` lambda expression for all predicates and anonymous functions.
 - Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. Get object values: `Seq(RoomType).toSet().toJS()`
 - If React props are immutable or primitive, subclass from PureComponent. Simple rule for ultimate performance.
 - Never mock browser inside server code, it can confuse isomorphic libraries.
-- Always use settostring helper for actions.
+- Always use setToString helper for actions.
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't use it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code then.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
-- Why React `this.state` isn't used? Because whole app state belongs to app one global immutable app state. So we can log it easily, user can navigate out page with half fulfilled form without losing its state, and more.
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
 
