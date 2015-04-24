@@ -9,8 +9,6 @@
 
 > Forget about PHP, Ruby, Angular, Backbone, whatever client/server only solution. Also, you don't need another me-too-flux library, vanilla Flux is enough. This dev stack is web dev panacea, at least for me :-)
 
-> Feel free to support Este.js development via Bitcoin: 1Cvn5RdFQpvoMhFmgGTb8QVwQ264oaSAb6
-
 ## Techniques
 
 - ES6 and other future JavaScripts dialects with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported as well. Sourcemaps enabled by default.
