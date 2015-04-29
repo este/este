@@ -3,7 +3,7 @@ import React from 'react';
 import {RouteHandler} from 'react-router';
 import {isLoggedIn} from '../user/store';
 import {state} from '../state';
-import Menu from './menu';
+import Menu from './menu.react';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.styl');
