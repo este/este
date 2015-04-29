@@ -1,6 +1,7 @@
 export default {
   en: {
     auth: {
+      title: 'Login',
       form: {
         legend: 'Login / Sign Up',
         placeholder: {
@@ -17,7 +18,14 @@ export default {
         button: 'Logout'
       }
     },
+    me: {
+      title: 'My profile'
+    },
+    home: {
+      title: 'Home page'
+    },
     todos: {
+      title: 'Todos',
       add100: 'Add 100 Todos',
       clearAll: 'Clear All',
       newTodoPlaceholder: 'What needs to be done?',

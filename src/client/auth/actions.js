@@ -19,7 +19,6 @@ export function login(fields) {
       loginError(error);
       throw error;
     })
-    .then((authData) => logged(authData))
   );
 }
 
@@ -46,15 +45,11 @@ export function loginError(error) {
   dispatch(loginError, error);
 }
 
-export function logged(authData) {
-  dispatch(logged, authData);
-}
-
 export function logout() {
   // Always reload app on logout for security reasons.
   location.href = '/';
 }
 
 setToString('auth', {
-  updateFormField, login, loginError, logged, logout
+  updateFormField, login, loginError, logout
 });

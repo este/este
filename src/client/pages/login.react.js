@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentTitle from 'react-document-title';
 import exposeRouter from '../components/exposerouter.react';
 import {focusInvalidField} from '../../lib/validation';
 import {getForm} from '../auth/store';
@@ -30,40 +31,42 @@ class Login extends React.Component {
     const form = getForm().toJS();
 
     return (
-      <div className="login">
-        <form onSubmit={(e) => this.onFormSubmit(e)}>
-          <fieldset>
-            <legend>{msg('auth.form.legend')}</legend>
-            <input
-              autoFocus="true"
-              disabled={login.pending}
-              name="email"
-              onChange={updateFormField}
-              placeholder={msg('auth.form.placeholder.email')}
-              value={form.fields.email}
-            /><br />
-            <input
-              disabled={login.pending}
-              name="password"
-              onChange={updateFormField}
-              placeholder={msg('auth.form.placeholder.password')}
-              type="password"
-              value={form.fields.password}
-            /><br />
-            <button
-              disabled={login.pending}
-              type="submit"
-            >{msg('auth.form.button.login')}</button>
-            {/*
-            <button type="submit">{msg('auth.form.button.signup')}</button>
-            */}
-            {form.error &&
+      <DocumentTitle title={msg('auth.title')}>
+        <div className="login">
+          <form onSubmit={(e) => this.onFormSubmit(e)}>
+            <fieldset>
+              <legend>{msg('auth.form.legend')}</legend>
+              <input
+                autoFocus="true"
+                disabled={login.pending}
+                name="email"
+                onChange={updateFormField}
+                placeholder={msg('auth.form.placeholder.email')}
+                value={form.fields.email}
+                /><br />
+              <input
+                disabled={login.pending}
+                name="password"
+                onChange={updateFormField}
+                placeholder={msg('auth.form.placeholder.password')}
+                type="password"
+                value={form.fields.password}
+                /><br />
+              <button
+                disabled={login.pending}
+                type="submit"
+                >{msg('auth.form.button.login')}</button>
+              {/*
+               <button type="submit">{msg('auth.form.button.signup')}</button>
+               */}
+              {form.error &&
               <span className="error-message">{form.error.message}</span>
-            }
-            <div>{msg('auth.form.hint')}</div>
-          </fieldset>
-        </form>
-      </div>
+              }
+              <div>{msg('auth.form.hint')}</div>
+            </fieldset>
+          </form>
+        </div>
+      </DocumentTitle>
     );
   }
 

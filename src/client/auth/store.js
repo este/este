@@ -1,5 +1,5 @@
 import {authCursor} from '../state';
-import {login, loginError, updateFormField} from './actions';
+import * as actions from './actions';
 import {register} from '../dispatcher';
 
 export function getForm() {
@@ -9,20 +9,20 @@ export function getForm() {
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
-    case login:
+    case actions.login:
       authCursor(auth => {
         return resetForm(auth);
       });
       break;
 
-    case loginError:
+    case actions.loginError:
       authCursor(auth => {
         const error = data;
         return auth.setIn(['form', 'error'], error);
       });
       break;
 
-    case updateFormField:
+    case actions.updateFormField:
       authCursor(auth => {
         const {name, value} = data;
         return auth.setIn(['form', 'fields', name], value);
