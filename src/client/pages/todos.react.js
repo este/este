@@ -69,7 +69,7 @@ export default class Todos extends React.Component {
     const todos = getTodos();
 
     return (
-      <DocumentTitle title="Todos">
+      <DocumentTitle title={msg('todos.title')}>
         <section className="todos">
           <NewTodo todo={newTodo} />
           <TodoList todos={todos} />
