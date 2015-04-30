@@ -11,8 +11,8 @@ export default class PureComponent extends React.Component {
     // https://github.com/rackt/react-router/issues/866
     // so our <Link> components are always re-rendered with a route change
     if (this.context.router) {
-      const changed = this.pureComponentlastPath !== this.context.router.getCurrentPath();
-      this.pureComponentlastPath = this.context.router.getCurrentPath();
+      const changed = this.pureComponentLastPath !== this.context.router.getCurrentPath();
+      this.pureComponentLastPath = this.context.router.getCurrentPath();
       if (changed) return true;
     }
 
