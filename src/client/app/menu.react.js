@@ -1,6 +1,6 @@
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import {Link} from 'react-router';
-import PureComponent from '../components/purecomponent.react';
 
 export default class Menu extends PureComponent {
 

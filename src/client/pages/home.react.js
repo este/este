@@ -1,6 +1,6 @@
+import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {Link} from 'react-router';
-import DocumentTitle from 'react-document-title';
 import {msg} from '../intl/store';
 
 export default class Home extends React.Component {

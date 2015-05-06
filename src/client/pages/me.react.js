@@ -1,6 +1,6 @@
-import React from 'react';
 import DocumentTitle from 'react-document-title';
 import Logout from '../auth/logout.react';
+import React from 'react';
 import requireAuth from '../auth/requireauth.react';
 import {msg} from '../intl/store';
 

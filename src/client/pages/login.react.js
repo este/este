@@ -1,5 +1,5 @@
-import React from 'react';
 import DocumentTitle from 'react-document-title';
+import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
 import {focusInvalidField} from '../../lib/validation';
 import {getForm} from '../auth/store';
