@@ -104,6 +104,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
+- Because whole app UI is rerendered on any global app state change, you should measure `this.forceUpdate` in `app.react.js` render time before app is released. If your app has complex UI or contains long lists, you can easily optimize render via PureComponent, but anything under 16ms (60fps) is ok.
 
 ## Notes
 
