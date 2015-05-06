@@ -20,7 +20,7 @@ export default class NewTodo extends PureComponent {
         onChange={onNewTodoFieldChange}
         onKeyDown={(e) => this.addTodoOnEnter(e)}
         placeholder={msg('todos.newTodoPlaceholder')}
-        value={this.props.todo.get('title')}
+        value={this.props.todo.title}
       />
     );
   }
@@ -28,5 +28,5 @@ export default class NewTodo extends PureComponent {
 }
 
 NewTodo.propTypes = {
-  todo: React.PropTypes.instanceOf(immutable.Map)
+  todo: React.PropTypes.instanceOf(immutable.Record)
 };

@@ -8,9 +8,9 @@ export default class TodoList extends PureComponent {
   render() {
     return (
       <ol>
-        {this.props.todos.map((todo, i) => {
-          return <TodoItem key={todo.get('id')} todo={todo} />;
-        })}
+        {this.props.todos.map((todo, i) =>
+          <TodoItem key={todo.id} todo={todo} />
+        )}
       </ol>
     );
   }

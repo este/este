@@ -11,7 +11,7 @@ export default class TodoItem extends PureComponent {
 
     return (
       <li className={classnames({editing: false})}>
-        <label>{todo.get('title')}</label>
+        <label>{todo.title}</label>
         <button onClick={() => deleteTodo(todo)}>x</button>
       </li>
     );
@@ -20,5 +20,5 @@ export default class TodoItem extends PureComponent {
 }
 
 TodoItem.propTypes = {
-  todo: React.PropTypes.instanceOf(immutable.Map)
+  todo: React.PropTypes.instanceOf(immutable.Record)
 };
