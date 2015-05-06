@@ -35,12 +35,13 @@ export default class State extends EventEmitter {
     console.log(JSON.stringify(this.save())); // eslint-disable-line no-console
   }
 
-  cursor(path) {
-    return (update) => {
-      if (update)
-        this.set(this._state.updateIn(path, update));
-      else
+  cursor(path: Array<string>) {
+    return (arg) => {
+      if (!arg)
         return this._state.getIn(path);
+      if (Array.isArray(arg))
+        return this._state.getIn(path.concat(arg));
+      this.set(this._state.updateIn(path, arg), path);
     };
   }
 

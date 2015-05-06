@@ -1,15 +1,14 @@
 import * as actions from './actions';
-import {Range, Record} from 'immutable';
+import TodoItem from './todoitem';
+import {Range} from 'immutable';
 import {getRandomString} from '../../lib/getrandomstring';
 import {newTodoCursor, todosCursor} from '../state';
 import {register} from '../dispatcher';
 
 // Isomorphic store has to be state-less.
 
-const TodoItem = Record({
-  id: '',
-  title: ''
-});
+export const getNewTodo = () => newTodoCursor();
+export const getTodos = () => todosCursor();
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -24,21 +23,19 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.addTodo:
       todosCursor(todos => {
-        const title = data.get('title');
+        const title = data.title;
         const todo = new TodoItem({
           id: getRandomString(),
           title: title
-        }).toMap();
+        });
         return todos.push(todo);
       });
-      // TODO: Use Record instead of Map.
-      newTodoCursor(todo => new TodoItem().toMap());
+      newTodoCursor(todo => new TodoItem());
       break;
 
     case actions.deleteTodo:
       todosCursor(todos => {
         const todo = data;
-        // TODO: Use Map or OrderedMap.
         return todos.delete(todos.indexOf(todo));
       });
       break;
@@ -55,7 +52,7 @@ export const dispatchToken = register(({action, data}) => {
             list.push(new TodoItem({
               id: id,
               title: `Item #${id}`
-            }).toMap());
+            }));
           });
         });
       });
@@ -63,11 +60,3 @@ export const dispatchToken = register(({action, data}) => {
   }
 
 });
-
-export function getNewTodo() {
-  return newTodoCursor();
-}
-
-export function getTodos() {
-  return todosCursor();
-}

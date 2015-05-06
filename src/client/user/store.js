@@ -3,7 +3,8 @@ import {login} from '../auth/actions';
 import {register} from '../dispatcher';
 import {userCursor} from '../state';
 
-const getIn = (path) => userCursor().getIn(path);
+// TODO: Use sessionStorage and real redirect to fix Chrome.
+export const isLoggedIn = () => !!userCursor(['authData']);
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -16,8 +17,3 @@ export const dispatchToken = register(({action, data}) => {
   }
 
 });
-
-export function isLoggedIn() {
-  // TODO: Use sessionStorage and real redirect to fix Chrome.
-  return !!getIn(['authData']);
-}
