@@ -20,7 +20,7 @@
     "babel-jest": "^5.0.0",
     "babel-loader": "^5.0.0",
     "bluebird": "^2.9.9",
-    "classnames": "^1.1.4",
+    "classnames": "^2.1.1",
     "compression": "^1.4.0",
     "css-loader": "^0.12.0",
     "del": "^1.1.1",
