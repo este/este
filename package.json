@@ -2,7 +2,7 @@
   "name": "este-app",
   "description": "Robust and comfortable dev stack for isomorphic web apps",
   "author": "Daniel Steigerwald",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "private": true,
   "scripts": {
     "postinstall": "gulp build --production",
