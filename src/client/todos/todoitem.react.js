@@ -26,10 +26,6 @@ export default class TodoItem extends PureComponent {
       });
   }
 
-  onTodoChange(e) {
-    onTodoFieldChange(this.props.todo, e);
-  }
-
   render() {
     const todo = this.props.todo;
 
@@ -40,7 +36,7 @@ export default class TodoItem extends PureComponent {
           <input
             type="text"
             name="title"
-            onChange={(e) => this.onTodoChange(e)}
+            onChange={(e) => onTodoFieldChange(todo, e)}
             onKeyDown={(e) => this.stopEditing(e)}
             value={todo.title} />
         }
