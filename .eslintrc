@@ -63,7 +63,7 @@
     "no-underscore-dangle": 0,
     "no-unreachable": 1,
     "no-use-before-define": [1, "nofunc"],
-    "no-warning-comments": [1, {"terms": ["todo", "fixme"]}],
+    "no-warning-comments": [0, {"terms": ["todo", "fixme"]}],
     "no-wrap-func": 1,
     "quotes": [1, "single", "avoid-escape"],
     "quote-props": [0, "as-needed"],
