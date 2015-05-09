@@ -63,11 +63,3 @@ export const dispatchToken = register(({action, data}) => {
   }
 
 });
-
-export function getNewTodo() {
-  return newTodoCursor();
-}
-
-export function getTodos() {
-  return todosCursor();
-}

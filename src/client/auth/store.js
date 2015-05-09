@@ -2,10 +2,6 @@ import {authCursor} from '../state';
 import * as actions from './actions';
 import {register} from '../dispatcher';
 
-export function getForm() {
-  return authCursor().get('form');
-}
-
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {

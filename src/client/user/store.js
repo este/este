@@ -16,8 +16,3 @@ export const dispatchToken = register(({action, data}) => {
   }
 
 });
-
-export function isLoggedIn() {
-  // TODO: Use sessionStorage and real redirect to fix Chrome.
-  return !!getIn(['authData']);
-}
