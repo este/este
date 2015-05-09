@@ -2,17 +2,19 @@ import React from 'react';
 import DocumentTitle from 'react-document-title';
 import exposeRouter from '../components/exposerouter.react';
 import {focusInvalidField} from '../../lib/validation';
-import {getForm} from '../auth/store';
 import {msg} from '../intl/store';
 import {updateFormField, login} from '../auth/actions';
+import PureComponent from '../components/purecomponent.react';
+import {Map} from 'immutable';
+import '../auth/store';
 
 require('./login.styl');
 
-class Login extends React.Component {
+class Login extends PureComponent {
 
   onFormSubmit(e) {
     e.preventDefault();
-    const fields = getForm().toJS().fields;
+    const fields = this.props.appState.getIn(['auth', 'form']).toJS().fields;
     login(fields)
       .then(() => {
         this.redirectAfterLogin();
@@ -28,7 +30,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const form = getForm().toJS();
+    const form = this.props.appState.getIn(['auth', 'form']).toJS();
 
     return (
       <DocumentTitle title={msg('auth.title')}>
@@ -73,7 +75,8 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  router: React.PropTypes.func
+  router: React.PropTypes.func,
+  appState: React.PropTypes.instanceOf(Map)
 };
 
 export default exposeRouter(Login);

@@ -2,34 +2,25 @@ import DocumentTitle from 'react-document-title';
 import NewTodo from '../todos/newtodo.react';
 import React from 'react';
 import TodoList from '../todos/todolist.react';
-import {FormattedMessage} from 'react-intl';
 import {Link} from 'react-router';
 import {addHundredTodos, clearAll} from '../todos/actions';
-import {getNewTodo, getTodos} from '../todos/store';
 import {msg} from '../intl/store';
 import {state} from '../state';
+import PureComponent from '../components/purecomponent.react';
+import {Map} from 'immutable';
+import '../todos/store';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./todos.styl');
 
-// Naïve undo implementation.
-// TODO: Reimplement it.
-const undoStates = [];
-
-export default class Todos extends React.Component {
+export default class Todos extends PureComponent {
 
   componentDidMount() {
-    state.on('change', this.onStateChange);
     document.addEventListener('keypress', this.onDocumentKeypress);
   }
 
   componentWillUnmount() {
-    state.removeListener('change', this.onStateChange);
     document.removeEventListener('keypress', this.onDocumentKeypress);
-  }
-
-  onStateChange(newState) {
-    undoStates.push(newState);
   }
 
   onDocumentKeypress(e) {
@@ -54,19 +45,11 @@ export default class Todos extends React.Component {
     }
   }
 
-  undo() {
-    undoStates.pop();
-    state.set(undoStates.pop());
-  }
-
   render() {
-    // This is just a demo. In real app you would set first undo elsewhere.
-    if (!undoStates.length) undoStates.push(state.get());
-
     // This is composite component. It load its data from store, and passes them
     // through props, so NewTodo and TodoList can leverage PureComponent.
-    const newTodo = getNewTodo();
-    const todos = getTodos();
+    const newTodo = this.props.appState.getIn(['newTodo']);
+    const todos = this.props.appState.getIn(['todos']);
 
     return (
       <DocumentTitle title={msg('todos.title')}>
@@ -83,13 +66,6 @@ export default class Todos extends React.Component {
               children={msg('todos.add100')}
               onClick={addHundredTodos}
             />
-            <button
-              disabled={undoStates.length === 1}
-              onClick={() => this.undo()}
-            ><FormattedMessage
-              message={msg('todos.undo')}
-              steps={undoStates.length - 1}
-            /></button>
           </div>
           <h3>
             Things to Check
@@ -108,7 +84,6 @@ export default class Todos extends React.Component {
               Isomorphic <Link to="/this-is-not-the-web-page-you-are-looking-for">
               404</Link> page.
             </li>
-            <li>Undo button.</li>
             <li>
               Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
               video</a>? Try <b>shift+ctrl+s</b> to save app state, and <b>
@@ -134,3 +109,7 @@ export default class Todos extends React.Component {
   }
 
 }
+
+Todos.propTypes = {
+  appState: React.PropTypes.instanceOf(Map)
+};

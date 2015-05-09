@@ -2,8 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import DocumentTitle from 'react-document-title';
 import {msg} from '../intl/store';
+import PureComponent from '../components/purecomponent.react';
 
-export default class Home extends React.Component {
+export default class Home extends PureComponent {
 
   render() {
     return (

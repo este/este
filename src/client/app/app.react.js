@@ -1,14 +1,20 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {RouteHandler} from 'react-router';
-import {isLoggedIn} from '../user/store';
+import '../user/store';
 import {state} from '../state';
 import Menu from './menu.react';
+import PureComponent from '../components/purecomponent.react';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.styl');
 
-export default class App extends React.Component {
+export default class App extends PureComponent {
+
+  constructor() {
+    super();
+    this.state = {app: state.get()};
+  }
 
   componentDidMount() {
     // Must be required here because there is no DOM in Node.js. Remember,
@@ -18,12 +24,7 @@ export default class App extends React.Component {
     require('fastclick').attach(document.body);
 
     state.on('change', () => {
-      /*eslint-disable no-console */
-      console.time('whole app rerender');
-      this.forceUpdate(() => {
-        console.timeEnd('whole app rerender');
-      });
-      /*eslint-enable */
+      this.setState({app: state.get()});
     });
   }
 
@@ -31,8 +32,8 @@ export default class App extends React.Component {
     return (
       <DocumentTitle title='Este.js App'>
         <div className="page">
-          <Menu isLoggedIn={isLoggedIn()} />
-          <RouteHandler />
+          <Menu isLoggedIn={!!this.state.app.getIn(['user','authData'])} />
+          <RouteHandler appState={this.state.app} />
           <footer>
             <p>
               made by <a href="https://twitter.com/steida">steida</a>

@@ -3,8 +3,9 @@ import DocumentTitle from 'react-document-title';
 import Logout from '../auth/logout.react';
 import requireAuth from '../auth/requireauth.react';
 import {msg} from '../intl/store';
+import PureComponent from '../components/purecomponent.react';
 
-class Me extends React.Component {
+class Me extends PureComponent {
 
   render() {
     return (
