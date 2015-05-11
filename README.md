@@ -84,7 +84,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 ## Links
 
 - [wiki: Recommended React Components](https://github.com/steida/este/wiki/Recommended-React-Components)
-- [wiki: Recommended Sublime Text 3 Packages](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages)
+- [wiki: Recommended Sublime Text 3 Packages](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings)
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
