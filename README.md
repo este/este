@@ -5,13 +5,13 @@
 [![Dependency Status](https://david-dm.org/steida/este.png)](https://david-dm.org/steida/este)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-> Robust and comfortable dev stack for isomorphic web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
+> The most complete React/Flux dev stack and starter kit for isomorphic functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
-> Forget also about PHP, Ruby, Angular, Backbone, whatever client or server only solution. Also, we don't need another me too Flux library, vanilla Flux is good enough. This dev stack is web dev panacea, at least for me :-)
+> Forget about PHP/Ruby/Angular/Backbone whatever client or server only framework. Also, we don't need another me too Flux library, vanilla Flux is good enough. This dev stack is web dev panacea, at least for me :-)
 
 ## Techniques
 
-- ECMAScript 6/7 with the best transpiler [babeljs.io](https://babeljs.io/). Both [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
+- ECMAScript 6/7 via the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Isomorphic architecture with server side rendering.
 - Immutable and functional design. Class is leaky abstraction for "business model".
 - Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
@@ -28,7 +28,6 @@
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - [ftlabs/fastclick](https://github.com/ftlabs/fastclick) for fast click on touch devices
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
-- Optimized for [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
 - Google Analytics preconfigured.
 
 ## Prerequisites
@@ -95,21 +94,17 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - There are still use cases where component state is useful. We can use it for small togglers or alerts, which should disappear when component is remounted.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
-- Use `() =>` lambda expression for all predicates and anonymous functions.
-- Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. Get object values: `Seq(RoomType).toSet().toJS()`
-- If React props are immutable or primitive, subclass from PureComponent. Simple rule for ultimate performance.
+- Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
 - Never mock browser inside server code, it can confuse isomorphic libraries.
-- Always use setToString helper for actions.
-- Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't use it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code then.
+- Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
-- You can still use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
+- How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
-- Because whole app UI is rerendered on any global app state change, you should measure `this.forceUpdate` in `app.react.js` render time before app is released. If your app has complex UI or contains long lists, you can easily optimize render via PureComponent, but anything under 16ms (60fps) is ok.
 
 ## Notes
 
 - Este.js dev stack should work on OSX, Linux, and even Windows. Feel free to report any issue.
-- As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE. In theory, It should not be hard to support IE8 as hell.
+- As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE.
 
 ## Credit
 
