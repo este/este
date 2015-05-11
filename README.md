@@ -91,13 +91,10 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 ## Tips and Tricks and Lips and Tits
 
 - Whole app state is stored in one immutable app state object. To get snapshot, press `shift+ctrl+s`, then open dev console and type `_appState`.
-- There are still use cases where component state is useful. We can use it for small togglers or alerts, which should disappear when component is remounted.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
-- Never mock browser inside server code, it can confuse isomorphic libraries.
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
-- [aeflash.com/2015-02/react-tips-and-best-practices.html](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
 
