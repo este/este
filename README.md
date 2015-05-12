@@ -88,7 +88,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
-## Tips and Tricks and Lips and Tits
+## Tips and Tricks 
 
 - Whole app state is stored in one immutable app state object. To get snapshot, press `shift+ctrl+s`, then open dev console and type `_appState`.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
