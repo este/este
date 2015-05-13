@@ -8,22 +8,34 @@ import initialState from './initialstate';
 import routes from '../client/routes';
 import {state} from '../client/state';
 
+const assign = React.__spread;
+let requestCount = 0;
+
 export default function render(req, res, locale) {
   const url = req.originalUrl;
-  return loadData(url, locale)
-    .then((appState) => renderPage(res, appState, url));
+  let currentRequest = ++requestCount;
+
+  console.log(`Request ${currentRequest} started`);
+
+  return loadData(url, locale, currentRequest)
+    .then((appState) => {
+      return renderPage(res, appState, url, currentRequest);
+    });
 }
 
-function loadData(url, locale) {
+function loadData(url, locale, currentRequest) {
   // TODO: Preload and merge user specific state.
-  const appState = initialState;
+  const random = Math.random();
+  const appState = assign({}, initialState, {userState: 'some user state ' + random});
+  console.log(`Request ${currentRequest}, userState: ${random}`)
+
   return new Promise((resolve, reject) => {
     resolve(appState);
   });
 }
 
 // TODO: Refactor.
-function renderPage(res, appState, url) {
+function renderPage(res, appState, url, currentRequest) {
   return new Promise((resolve, reject) => {
     const router = Router.create({
       routes,
@@ -42,11 +54,14 @@ function renderPage(res, appState, url) {
     });
     router.run((Handler, routerState) => {
       state.load(appState);
-      const html = getPageHtml(Handler, appState);
-      const notFound = routerState.routes.some(route => route.name === 'not-found');
-      const status = notFound ? 404 : 200;
-      res.status(status).send(html);
-      resolve();
+      setTimeout(() => {
+        const html = getPageHtml(Handler, appState)
+        const notFound = routerState.routes.some(route => route.name === 'not-found');
+        const status = notFound ? 404 : 200;
+        res.status(status).send(html);
+        console.log(`Request ${currentRequest} finished`);
+        resolve();
+      }, currentRequest % 2 ? 10000 : 0);
     });
   });
 }
