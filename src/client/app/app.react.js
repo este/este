@@ -3,7 +3,7 @@ import Menu from './menu.react';
 import React from 'react';
 import {RouteHandler} from 'react-router';
 import {isLoggedIn} from '../user/store';
-import {state} from '../state';
+import {state, userStateCursor} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.styl');
@@ -28,10 +28,12 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(`Rendering App with ${userStateCursor()} `)
     return (
       <DocumentTitle title='Este.js App'>
         <div className="page">
           <Menu isLoggedIn={isLoggedIn()} />
+          <h1>UserState: {userStateCursor()}</h1>
           <RouteHandler />
           <footer>
             <p>
