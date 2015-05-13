@@ -7,7 +7,7 @@
 
 > The most complete React/Flux dev stack and starter kit for isomorphic functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
-> Forget about PHP/Ruby/Angular/Backbone whatever client or server only framework. Also, we don't need another me too Flux library, vanilla Flux is good enough. This dev stack is web dev panacea, at least for me :-)
+> Forget about PHP/Ruby/Angular/Backbone whatever client or server only framework. Also, we don't need yet another Flux library, vanilla Flux is good enough. This dev stack is web dev panacea, at least for me :-)
 
 ## Techniques
 
@@ -97,6 +97,10 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
+
+## Training
+- [Czech Republic](http://javascript-skoleni.cz)
+- San Francisco - feel free to [write me](daniel@steigerwald.cz)
 
 ## Notes
 
