@@ -21,6 +21,14 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.onTodoFieldChange:
+      todosCursor(todos => {
+        const {todo, name, value} = data;
+        const index = todos.indexOf(todo);
+        return todos.setIn([index, name], value);
+      });
+      break;
+
     case actions.addTodo:
       todosCursor(todos => {
         const title = data.title;

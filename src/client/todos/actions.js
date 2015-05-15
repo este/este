@@ -30,11 +30,21 @@ export function onNewTodoFieldChange({target: {name, value}}) {
   dispatch(onNewTodoFieldChange, {name, value});
 }
 
+export function onTodoFieldChange(todo, {target: {name, value}}) {
+  switch (name) {
+    case 'title':
+      value = value.slice(0, MAX_TODO_TITLE_LENGTH);
+      break;
+  }
+  dispatch(onTodoFieldChange, {todo, name, value});
+}
+
 // Override actions toString for logging.
 setToString('todos', {
   addHundredTodos,
   addTodo,
   clearAll,
   deleteTodo,
-  onNewTodoFieldChange
+  onNewTodoFieldChange,
+  onTodoFieldChange
 });
