@@ -57,12 +57,12 @@ export default class Validation {
     return this;
   }
 
-  required() {
+  required(getRequiredMessage?) {
     return this.custom((value, prop) => {
-      throw new ValidationError(
-        this.getRequiredMessage(prop, value),
-        prop
-      );
+      const msg = getRequiredMessage
+        ? getRequiredMessage(prop, value)
+        : this.getRequiredMessage(prop, value);
+      throw new ValidationError(msg, prop);
     }, {required: true});
   }
 
