@@ -1,6 +1,6 @@
 /*eslint-disable no-console */
 
-import {$pendingActionsCursor} from './state';
+import {pendingActionsCursor} from './state';
 import {Dispatcher} from 'flux';
 
 const dispatcher = new Dispatcher;
@@ -22,7 +22,7 @@ export function dispatch(action: Function, data: ?Object, options: ?Object) {
 }
 
 export function isPending(actionName) {
-  return $pendingActionsCursor().has(actionName);
+  return pendingActionsCursor().has(actionName);
 }
 
 function dispatchAsync(action: Function, promise: Object, options: ?Object) {
@@ -53,13 +53,13 @@ function dispatchAsync(action: Function, promise: Object, options: ?Object) {
 }
 
 function setPending(actionName: string, pending: boolean) {
-  $pendingActionsCursor($pendingActions => pending
-    ? $pendingActions.set(actionName, true)
-    : $pendingActions.delete(actionName)
+  pendingActionsCursor(pendingActions => pending
+    ? pendingActions.set(actionName, true)
+    : pendingActions.delete(actionName)
   );
 }
 
 function dispatchSync(action: Function, data: ?Object) {
-  if (isDev) console.log(action);
+  if (isDev) console.log(action/*, data*/);
   dispatcher.dispatch({action, data});
 }
