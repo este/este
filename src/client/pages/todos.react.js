@@ -40,13 +40,13 @@ export default class Todos extends React.Component {
         window._appState = state.save();
         window._appStateString = JSON.stringify(window._appState);
         /*eslint-disable no-console */
-        console.log('app state saved');
-        console.log('copy the state to your clipboard by calling copy(_appStateString)');
+        console.log('App state saved');
+        console.log('Copy the state to your clipboard by calling copy(_appStateString),');
         console.log('or type _appState and press enter');
         /*eslint-enable */
         break;
       case 12:
-        const stateStr = window.prompt('Path the serialized state into the input'); // eslint-disable-line no-alert
+        const stateStr = window.prompt('Paste the serialized state into the input'); // eslint-disable-line no-alert
         const newState = JSON.parse(stateStr);
         if (!newState) return;
         state.load(newState);
@@ -95,11 +95,15 @@ export default class Todos extends React.Component {
             Things to Check
           </h3>
           <ul>
-            <li>View page source, take a look how app is server rendered with initial data.</li>
+            <li>
+              View page source, take a look how HTML is server rendered with
+              initial data.
+            </li>
             <li>Open console, take a look how actions are logged from <code>src/client/dispatcher.js</code>.</li>
             <li>
-              Development mode (<code>gulp</code>), try livereload styles or <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">
-              live-editing</a> React components without app refresh.
+              Development mode (<code>gulp</code>), try edit styles or
+              react component to see <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">
+              live-editing</a> without app reload.
             </li>
             <li>
               Production mode (<code>gulp -p</code>), to check built app performance and size.
@@ -111,12 +115,13 @@ export default class Todos extends React.Component {
             <li>Undo button.</li>
             <li>
               Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
-              video</a>? Try <b>shift+ctrl+s</b> to save app state, and <b>
-              shift+ctrl+l</b> to reload.
+              video</a>? Try <b>ctrl+shift+s</b> to save app state, and <b>
+              ctrl+shift+l</b> to load.
             </li>
             <li>
                 <a href="http://facebook.github.io/react/docs/advanced-performance.html">
-                Advanced performance</a> with <a href="http://facebook.github.io/react/docs/pure-render-mixin.html">PureRenderMixin</a>.
+                Advanced performance</a> with PureComponent. Always use PureComponent
+                and everything will be faster and simpler.
               </li>
             <li>
               <a href="https://github.com/ftlabs/fastclick">ftlabs/fastclick
