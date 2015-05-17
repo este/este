@@ -1,19 +1,24 @@
+import * as actions from './actions';
 import DocumentTitle from 'react-document-title';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
+import immutable from 'immutable';
 import {focusInvalidField} from '../../lib/validation';
-import {getForm} from '../auth/store';
 import {msg} from '../intl/store';
-import {updateFormField, login} from '../auth/actions';
 
 require('./login.styl');
 
-class Login extends React.Component {
+class Login extends PureComponent {
+
+  getForm() {
+    return this.props.auth.get('form');
+  }
 
   onFormSubmit(e) {
     e.preventDefault();
-    const fields = getForm().toJS().fields;
-    login(fields)
+    const fields = this.getForm().fields.toJS();
+    actions.login(fields)
       .then(() => {
         this.redirectAfterLogin();
       })
@@ -21,46 +26,47 @@ class Login extends React.Component {
   }
 
   redirectAfterLogin() {
-    // TODO: Probably use hard reload for Chrome to remember password.
+    // TODO: Use hard location reload for Chrome to remember password.
     // https://code.google.com/p/chromium/issues/detail?id=43219#c56
     const nextPath = this.props.router.getCurrentQuery().nextPath;
     this.props.router.replaceWith(nextPath || '/');
   }
 
   render() {
-    const form = getForm().toJS();
+    const form = this.getForm();
 
     return (
       <DocumentTitle title={msg('auth.title')}>
         <div className="login">
-          <form onSubmit={(e) => this.onFormSubmit(e)}>
-            <fieldset>
+          <form onSubmit={e => this.onFormSubmit(e)}>
+            <fieldset disabled={actions.login.pending}>
               <legend>{msg('auth.form.legend')}</legend>
               <input
-                autoFocus="true"
-                disabled={login.pending}
+                autoFocus
                 name="email"
-                onChange={updateFormField}
+                onChange={actions.updateFormField}
                 placeholder={msg('auth.form.placeholder.email')}
                 value={form.fields.email}
-                /><br />
+              />
+              <br />
               <input
-                disabled={login.pending}
                 name="password"
-                onChange={updateFormField}
+                onChange={actions.updateFormField}
                 placeholder={msg('auth.form.placeholder.password')}
                 type="password"
                 value={form.fields.password}
-                /><br />
+              />
+              <br />
               <button
-                disabled={login.pending}
+                children={msg('auth.form.button.login')}
+                disabled={actions.login.pending}
                 type="submit"
-                >{msg('auth.form.button.login')}</button>
+              />
               {/*
                <button type="submit">{msg('auth.form.button.signup')}</button>
-               */}
+              */}
               {form.error &&
-              <span className="error-message">{form.error.message}</span>
+                <span className="error-message">{form.error.message}</span>
               }
               <div>{msg('auth.form.hint')}</div>
             </fieldset>
@@ -73,6 +79,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
+  auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
   router: React.PropTypes.func
 };
 

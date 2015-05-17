@@ -30,6 +30,7 @@ function renderPage(res, appState, url) {
       location: url,
       onError: reject,
       onAbort: (abortReason) => {
+        // Some requireAuth higher order component requested redirect.
         if (abortReason.constructor.name === 'Redirect') {
           const {to, params, query} = abortReason;
           const path = router.makePath(to, params, query);

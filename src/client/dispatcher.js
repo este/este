@@ -60,6 +60,7 @@ function setPending(actionName: string, pending: boolean) {
 }
 
 function dispatchSync(action: Function, data: ?Object) {
+  // To log dispatched data, uncomment comment.
   if (isDev) console.log(action/*, data*/);
   dispatcher.dispatch({action, data});
 }

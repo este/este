@@ -1,58 +1,60 @@
 import * as actions from './actions';
-import TodoItem from './todoitem';
+import Todo from './todo';
 import {Range} from 'immutable';
 import {getRandomString} from '../../lib/getrandomstring';
-import {newTodoCursor, todosCursor} from '../state';
 import {register} from '../dispatcher';
-
-// Isomorphic store has to be state-less.
-
-export const getNewTodo = () => newTodoCursor();
-export const getTodos = () => todosCursor();
+import {todosCursor} from '../state';
 
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
     case actions.onNewTodoFieldChange:
-      newTodoCursor(todo => {
-        // Use destructuring assignment. It's explicit.
+      todosCursor(todos => {
         const {name, value} = data;
-        return todo.set(name, value);
+        return todos.setIn(['newTodo', name], value);
       });
       break;
 
     case actions.addTodo:
       todosCursor(todos => {
-        const title = data.title;
-        const todo = new TodoItem({
-          id: getRandomString(),
-          title: title
-        });
-        return todos.push(todo);
+        return todos
+          .update('list', (list) => {
+            const todo = new Todo({
+              id: getRandomString(),
+              title: data.title
+            });
+            return list.push(todo);
+          })
+          .set('newTodo', new Todo);
       });
-      newTodoCursor(todo => new TodoItem());
       break;
 
     case actions.deleteTodo:
       todosCursor(todos => {
         const todo = data;
-        return todos.delete(todos.indexOf(todo));
+        return todos.update('list', list => list.delete(list.indexOf(todo)));
       });
       break;
 
     case actions.clearAll:
-      todosCursor(todos => todos.clear());
+      todosCursor(todos => {
+        return todos
+          .update('list', list => list.clear())
+          .set('newTodo', new Todo);
+      });
       break;
 
     case actions.addHundredTodos:
       todosCursor(todos => {
-        return todos.withMutations(list => {
-          Range(0, 100).forEach(i => {
-            const id = getRandomString();
-            list.push(new TodoItem({
-              id: id,
-              title: `Item #${id}`
-            }));
+        return todos.update('list', list => {
+          return list.withMutations(list => {
+            Range(0, 100).forEach(i => {
+              const id = getRandomString();
+              list.push(new Todo({
+                id: id,
+                title: `Item #${id}`
+              }));
+            });
           });
         });
       });

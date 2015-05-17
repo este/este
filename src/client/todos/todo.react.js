@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import immutable from 'immutable';
 import {deleteTodo} from './actions';
 
-export default class TodoItem extends PureComponent {
+class Todo extends PureComponent {
 
   render() {
     const todo = this.props.todo;
@@ -12,13 +12,15 @@ export default class TodoItem extends PureComponent {
     return (
       <li className={classnames({editing: false})}>
         <label>{todo.title}</label>
-        <button onClick={() => deleteTodo(todo)}>x</button>
+        <span className="button" onClick={() => deleteTodo(todo)}>x</span>
       </li>
     );
   }
 
 }
 
-TodoItem.propTypes = {
+Todo.propTypes = {
   todo: React.PropTypes.instanceOf(immutable.Record)
 };
+
+export default Todo;

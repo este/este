@@ -14,6 +14,8 @@ function getCachedInstanceOf(message) {
   return cachedInstances[message];
 }
 
+// This store can export getters, because messages are constants.
+
 export function msg(path, values = null): string {
   const pathParts = ['messages'].concat(path.split('.'));
   const message = i18nCursor(pathParts);

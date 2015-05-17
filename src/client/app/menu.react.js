@@ -2,7 +2,7 @@ import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import {Link} from 'react-router';
 
-export default class Menu extends PureComponent {
+class Menu extends PureComponent {
 
   render() {
     return (
@@ -14,8 +14,10 @@ export default class Menu extends PureComponent {
           <li><Link to="home">Home</Link></li>
           <li><Link to="todos">Todos</Link></li>
           <li><Link to="me">Me (protected)</Link></li>
+          {/* Note simple rule: Never put HTML and JS into the same line.*/}
           {!this.props.isLoggedIn &&
-            <li><Link to="login">Login</Link></li>}
+            <li><Link to="login">Login</Link></li>
+          }
         </ul>
       </header>
     );
@@ -26,3 +28,5 @@ export default class Menu extends PureComponent {
 Menu.propTypes = {
   isLoggedIn: React.PropTypes.bool
 };
+
+export default Menu;

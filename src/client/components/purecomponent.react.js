@@ -36,4 +36,6 @@ export default class PureComponent extends React.Component {
 
 }
 
-PureComponent.contextTypes = {router: React.PropTypes.func};
+PureComponent.contextTypes = {
+  router: React.PropTypes.func
+};

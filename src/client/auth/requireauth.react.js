@@ -1,18 +1,29 @@
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
-import {isLoggedIn} from '../user/store';
+import {userCursor} from '../state';
 
 // Higher order component.
 // https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750
-export default function auth(Component) {
+export default function requireAuth(Component) {
 
-  return class Auth extends React.Component {
+  class Authenticated extends PureComponent {
+
     static willTransitionTo(transition) {
-      if (!isLoggedIn())
-        transition.redirect('/login', {}, {nextPath: transition.path});
+      const isLoggedIn = userCursor().get('isLoggedIn');
+      if (isLoggedIn) return;
+      transition.redirect('/login', {}, {
+        nextPath: transition.path
+      });
     }
+
     render() {
       return <Component {...this.props} />;
     }
-  };
+
+  }
+
+  Authenticated.displayName = `${Component.name}Authenticated`;
+
+  return Authenticated;
 
 }

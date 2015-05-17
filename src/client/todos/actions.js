@@ -30,7 +30,7 @@ export function onNewTodoFieldChange({target: {name, value}}) {
   dispatch(onNewTodoFieldChange, {name, value});
 }
 
-// Override actions toString for logging.
+// Override toString methods. Pretty useful for dispatched actions monitoring.
 setToString('todos', {
   addHundredTodos,
   addTodo,

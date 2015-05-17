@@ -1,17 +1,21 @@
 import DocumentTitle from 'react-document-title';
 import Logout from '../auth/logout.react';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
+import immutable from 'immutable';
 import requireAuth from '../auth/requireauth.react';
 import {msg} from '../intl/store';
 
-class Me extends React.Component {
+class Me extends PureComponent {
 
   render() {
+    const email = this.props.auth.get('data').email;
+
     return (
       <DocumentTitle title={msg('me.title')}>
-        <div>
+        <div className="me-page">
           <p>
-            This is your secret page.
+            {msg('me.welcome', {email: email})}
           </p>
           <Logout />
         </div>
@@ -20,5 +24,9 @@ class Me extends React.Component {
   }
 
 }
+
+Me.propTypes = {
+  auth: React.PropTypes.instanceOf(immutable.Map).isRequired
+};
 
 export default requireAuth(Me);

@@ -1,15 +1,14 @@
-import {authCursor} from '../state';
 import * as actions from './actions';
+import Data from './data.js';
+import {authCursor} from '../state';
 import {register} from '../dispatcher';
-
-export const getForm = () => authCursor(['form']);
 
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
     case actions.login:
       authCursor(auth => {
-        return resetForm(auth);
+        return auth.setIn(['data'], new Data(data));
       });
       break;
 
@@ -29,10 +28,3 @@ export const dispatchToken = register(({action, data}) => {
   }
 
 });
-
-function resetForm(auth) {
-  return auth
-    .setIn(['form', 'error'], null)
-    .setIn(['form', 'fields', 'email'], '')
-    .setIn(['form', 'fields', 'password'], '');
-}

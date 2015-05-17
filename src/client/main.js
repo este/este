@@ -7,9 +7,12 @@ import routes from './routes';
 const app = document.getElementById('app');
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {
-  React.render(<Handler />, app);
+  console.time('app render on route change'); // eslint-disable-line no-console
+  React.render(<Handler />, app, () => {
+    console.timeEnd('app render on route change'); // eslint-disable-line no-console
+  });
 });
 
-// // TODO: Report app errors.
 // if ('production' === process.env.NODE_ENV) {
+//   // TODO: Report app errors.
 // }

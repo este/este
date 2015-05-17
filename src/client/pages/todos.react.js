@@ -1,95 +1,93 @@
+import * as actions from '../todos/actions';
 import DocumentTitle from 'react-document-title';
+import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
-import TodoList from '../todos/todolist.react';
-import {FormattedMessage} from 'react-intl';
+import immutable from 'immutable';
 import {Link} from 'react-router';
-import {addHundredTodos, clearAll} from '../todos/actions';
-import {getNewTodo, getTodos} from '../todos/store';
 import {msg} from '../intl/store';
-import {state} from '../state';
 
-// Leverage webpack require goodness for feature toggle based dead code removal.
+// import {FormattedMessage} from 'react-intl';
+// import {state} from '../state';
+
+// Leverage webpack require goodness.
 require('./todos.styl');
 
 // Naïve undo implementation.
 // TODO: Reimplement it.
-const undoStates = [];
+// const undoStates = [];
 
-export default class Todos extends React.Component {
+class Todos extends PureComponent {
 
-  componentDidMount() {
-    state.on('change', this.onStateChange);
-    document.addEventListener('keypress', this.onDocumentKeypress);
-  }
+  // componentDidMount() {
+  //   state.on('change', this.onStateChange);
+  //   document.addEventListener('keypress', this.onDocumentKeypress);
+  // }
 
-  componentWillUnmount() {
-    state.removeListener('change', this.onStateChange);
-    document.removeEventListener('keypress', this.onDocumentKeypress);
-  }
+  // componentWillUnmount() {
+  //   state.removeListener('change', this.onStateChange);
+  //   document.removeEventListener('keypress', this.onDocumentKeypress);
+  // }
 
-  onStateChange(newState) {
-    undoStates.push(newState);
-  }
+  // onStateChange(newState) {
+  //   undoStates.push(newState);
+  // }
 
-  onDocumentKeypress(e) {
-    // Press shift+ctrl+s to save app state and shift+ctrl+l to load.
-    if (!e.shiftKey || !e.ctrlKey) return;
-    switch (e.keyCode) {
-      case 19:
-        window._appState = state.save();
-        window._appStateString = JSON.stringify(window._appState);
-        /*eslint-disable no-console */
-        console.log('App state saved');
-        console.log('Copy the state to your clipboard by calling copy(_appStateString),');
-        console.log('or type _appState and press enter');
-        /*eslint-enable */
-        break;
-      case 12:
-        const stateStr = window.prompt('Paste the serialized state into the input'); // eslint-disable-line no-alert
-        const newState = JSON.parse(stateStr);
-        if (!newState) return;
-        state.load(newState);
-        break;
-    }
-  }
+  // onDocumentKeypress(e) {
+  //   // Press shift+ctrl+s to save app state and shift+ctrl+l to load.
+  //   if (!e.shiftKey || !e.ctrlKey) return;
+  //   switch (e.keyCode) {
+  //     case 19:
+  //       window._appState = state.save();
+  //       window._appStateString = JSON.stringify(window._appState);
+  //       /*eslint-disable no-console */
+  //       console.log('App state saved');
+  //       console.log('Copy the state to your clipboard by calling copy(_appStateString),');
+  //       console.log('or type _appState and press enter');
+  //       /*eslint-enable */
+  //       break;
+  //     case 12:
+  //       const stateStr = window.prompt('Paste the serialized state into the input'); // eslint-disable-line no-alert
+  //       const newState = JSON.parse(stateStr);
+  //       if (!newState) return;
+  //       state.load(newState);
+  //       break;
+  //   }
+  // }
 
-  undo() {
-    undoStates.pop();
-    state.set(undoStates.pop());
-  }
+  // undo() {
+  //   undoStates.pop();
+  //   state.set(undoStates.pop());
+  // }
 
   render() {
-    // This is just a demo. In real app you would set first undo elsewhere.
-    if (!undoStates.length) undoStates.push(state.get());
-
-    // This is composite component. It load its data from store, and passes them
-    // through props, so NewTodo and TodoList can leverage PureComponent.
-    const newTodo = getNewTodo();
-    const todos = getTodos();
+    // if (!undoStates.length) undoStates.push(state.get());
+    const newTodo = this.props.todos.get('newTodo');
+    const todos = this.props.todos.get('list');
 
     return (
       <DocumentTitle title={msg('todos.title')}>
-        <section className="todos">
+        <section className="todos-page">
           <NewTodo todo={newTodo} />
-          <TodoList todos={todos} />
+          <List todos={todos} />
           <div className="buttons">
             <button
               children={msg('todos.clearAll')}
               disabled={!todos.size}
-              onClick={clearAll}
+              onClick={actions.clearAll}
             />
             <button
               children={msg('todos.add100')}
-              onClick={addHundredTodos}
+              onClick={actions.addHundredTodos}
             />
-            <button
+            {/*<button
               disabled={undoStates.length === 1}
               onClick={() => this.undo()}
             ><FormattedMessage
               message={msg('todos.undo')}
               steps={undoStates.length - 1}
-            /></button>
+            /></button>*/}
           </div>
           <h3>
             Things to Check
@@ -123,14 +121,6 @@ export default class Todos extends React.Component {
                 Advanced performance</a> with PureComponent. Always use PureComponent
                 and everything will be faster and simpler.
               </li>
-            <li>
-              <a href="https://github.com/ftlabs/fastclick">ftlabs/fastclick
-              </a> to remove click delays on browsers with touch UIs.
-            </li>
-            <li>
-              <a href="http://formatjs.io">formatjs.io</a> localization with <a href="https://github.com/andyearnshaw/Intl.js">
-              polyfill</a> for browsers without native Intl.
-            </li>
             <li>... and much more.</li>
           </ul>
         </section>
@@ -139,3 +129,9 @@ export default class Todos extends React.Component {
   }
 
 }
+
+Todos.propTypes = {
+  todos: React.PropTypes.instanceOf(immutable.Map).isRequired
+};
+
+export default Todos;
