@@ -34,28 +34,6 @@ class Todos extends PureComponent {
   //   undoStates.push(newState);
   // }
 
-  // onDocumentKeypress(e) {
-  //   // Press shift+ctrl+s to save app state and shift+ctrl+l to load.
-  //   if (!e.shiftKey || !e.ctrlKey) return;
-  //   switch (e.keyCode) {
-  //     case 19:
-  //       window._appState = state.save();
-  //       window._appStateString = JSON.stringify(window._appState);
-  //       /*eslint-disable no-console */
-  //       console.log('App state saved');
-  //       console.log('Copy the state to your clipboard by calling copy(_appStateString),');
-  //       console.log('or type _appState and press enter');
-  //       /*eslint-enable */
-  //       break;
-  //     case 12:
-  //       const stateStr = window.prompt('Paste the serialized state into the input'); // eslint-disable-line no-alert
-  //       const newState = JSON.parse(stateStr);
-  //       if (!newState) return;
-  //       state.load(newState);
-  //       break;
-  //   }
-  // }
-
   // undo() {
   //   undoStates.pop();
   //   state.set(undoStates.pop());

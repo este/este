@@ -1,20 +1,37 @@
 import EventEmitter from 'eventemitter3';
-import Immutable from 'immutable';
+import immutable from 'immutable';
 
 export default class State extends EventEmitter {
 
-  constructor(state, reviver: ?Function) {
+  constructor(state, storesReviver: ?Function) {
     super();
     this._state = null;
-    this._reviver = reviver;
+    this._storesReviver = storesReviver;
     this.load(state || {});
   }
 
   load(state: Object) {
-    this.set(Immutable.Map.isMap(state)
+    const revivedState = immutable.Map.isMap(state)
       ? state
-      : Immutable.fromJS(state, this._reviver)
-    );
+      : this._storesReviver
+        ? immutable.fromJS(state, this.revive_(state, this._storesReviver))
+        : immutable.fromJS(state);
+    this.set(revivedState);
+  }
+
+  revive_(state, storesReviver) {
+    return function(key, value) {
+      // Revive only top level keys.
+      if (this === state) {
+        const revived = storesReviver(key, value);
+        if (revived) return revived;
+      }
+
+      // This is default fromJS method behavior. Revive [] as List, and {} as Map.
+      return immutable.Iterable.isIndexed(value)
+        ? value.toList()
+        : value.toMap();
+    };
   }
 
   set(state, path?) {
