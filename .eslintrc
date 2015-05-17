@@ -68,6 +68,8 @@
     "quotes": [1, "single", "avoid-escape"],
     "quote-props": [0, "as-needed"],
     "radix": 1,
+    // Use this rule, if you consider JavaScript semicolons as superfluous:
+    // "semi": [1, "never"],
     "semi": [2, "always"],
     "semi-spacing": [1, {"before": false, "after": true}],
     "space-after-keywords": [1, "always"],
