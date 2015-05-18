@@ -6,7 +6,8 @@ import exposeRouter from '../components/exposerouter.react';
 import {RouteHandler} from 'react-router';
 
 // Load stores, but don't import anything. Read from global app state instead.
-// Remember: Anytime you create a new store, you have to import it here.
+// Remember: Anytime you create a new store, you have to load it here.
+import '../app/store';
 import '../auth/store';
 import '../todos/store';
 import '../user/store';
@@ -24,6 +25,7 @@ class App extends PureComponent {
 
   getState() {
     return {
+      app: appState.appCursor(),
       auth: appState.authCursor(),
       isLoggedIn: appState.userCursor().get('isLoggedIn'),
       pendingActions: appState.pendingActionsCursor(),
