@@ -18,6 +18,7 @@ export default {
   },
   pendingActions: {},
   todos: {
+    editables: {},
     // New Todo data. Imagine new, not yet saved Todo, is being edited, and
     // changes are persisted on server. Therefore we need to revive it as well.
     newTodo: {

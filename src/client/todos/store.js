@@ -8,10 +8,19 @@ import {todosCursor} from '../state';
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
-    case actions.onNewTodoFieldChange:
+    case actions.addHundredTodos:
       todosCursor(todos => {
-        const {name, value} = data;
-        return todos.setIn(['newTodo', name], value);
+        return todos.update('list', list => {
+          return list.withMutations(list => {
+            Range(0, 100).forEach(i => {
+              const id = getRandomString();
+              list.push(new Todo({
+                id: id,
+                title: `Item #${id}`
+              }));
+            });
+          });
+        });
       });
       break;
 
@@ -32,13 +41,6 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
-    case actions.deleteTodo:
-      todosCursor(todos => {
-        const todo = data;
-        return todos.update('list', list => list.delete(list.indexOf(todo)));
-      });
-      break;
-
     case actions.clearAll:
       todosCursor(todos => {
         return todos
@@ -47,21 +49,38 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
-    case actions.addHundredTodos:
+    case actions.deleteTodo:
       todosCursor(todos => {
+        const todo = data;
+        return todos.update('list', list => list.delete(list.indexOf(todo)));
+      });
+      break;
+
+    case actions.onEditableState:
+      todosCursor(todos => {
+        const {id, name, state} = data;
+        return todos.setIn(['editables', id, name], state);
+      });
+      break;
+
+    case actions.onNewTodoFieldChange:
+      todosCursor(todos => {
+        const {name, value} = data;
+        return todos.setIn(['newTodo', name], value);
+      });
+      break;
+
+    case actions.saveTitle:
+      todosCursor(todos => {
+        // najit todo podle id, a zmenit mu title
+        const {id, title} = data;
         return todos.update('list', list => {
-          return list.withMutations(list => {
-            Range(0, 100).forEach(i => {
-              const id = getRandomString();
-              list.push(new Todo({
-                id: id,
-                title: `Item #${id}`
-              }));
-            });
-          });
+          const idx = list.findIndex(todo => todo.id === id);
+          return list.setIn([idx, 'title'], title);
         });
       });
       break;
+
   }
 
 });

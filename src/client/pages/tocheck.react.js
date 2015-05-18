@@ -28,7 +28,8 @@ class ToCheck extends PureComponent {
             Isomorphic <Link to="/this-is-not-the-web-page-you-are-looking-for">
             404</Link> page.
           </li>
-          <li>Undo button.</li>
+          <li>Undo button. (temporally disabled)</li>
+          <li>Edit todo: Click to edit, esc to cancel, enter to save.</li>
           <li>
             Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
             video</a>? Try <b>ctrl+shift+s</b> to save app state, and <b>

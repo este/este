@@ -18,6 +18,11 @@ export default {
         button: 'Logout'
       }
     },
+    buttons: {
+      cancel: 'Cancel',
+      edit: 'Edit',
+      save: 'Save'
+    },
     home: {
       title: 'Este.js App'
     },

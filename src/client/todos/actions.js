@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import setToString from '../../lib/settostring';
 import {dispatch} from '../dispatcher';
 
@@ -21,6 +22,10 @@ export function deleteTodo(todo) {
   dispatch(deleteTodo, todo);
 }
 
+export function onEditableState(id, name, state) {
+  dispatch(onEditableState, {id, name, state});
+}
+
 export function onNewTodoFieldChange({target: {name, value}}) {
   switch (name) {
     case 'title':
@@ -30,11 +35,23 @@ export function onNewTodoFieldChange({target: {name, value}}) {
   dispatch(onNewTodoFieldChange, {name, value});
 }
 
+export function saveTitle(id, title) {
+  // Simulate async saving.
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({id, title});
+    }, 300);
+  });
+  return dispatch(saveTitle, promise);
+}
+
 // Override toString methods. Pretty useful for dispatched actions monitoring.
 setToString('todos', {
   addHundredTodos,
   addTodo,
   clearAll,
   deleteTodo,
-  onNewTodoFieldChange
+  onEditableState,
+  onNewTodoFieldChange,
+  saveTitle
 });

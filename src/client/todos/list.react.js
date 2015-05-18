@@ -15,9 +15,15 @@ class List extends PureComponent {
       );
 
     return (
-      <ol>
+      <ol className="todo-list">
         {todos.map((todo, i) =>
-          <Todo key={todo.id} todo={todo} />
+          <Todo
+            editable={this.props.editables.get(todo.id)}
+            key={todo.id}
+            /* TODO: Pass concrete pending action. */
+            pendingActions={this.props.pendingActions}
+            todo={todo}
+          />
         )}
       </ol>
     );
@@ -26,6 +32,8 @@ class List extends PureComponent {
 }
 
 List.propTypes = {
+  editables: React.PropTypes.instanceOf(immutable.Map).isRequired,
+  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   todos: React.PropTypes.instanceOf(immutable.List)
 };
 

@@ -14,6 +14,7 @@ require('./todos.styl');
 class Todos extends PureComponent {
 
   render() {
+    const editables = this.props.todos.get('editables');
     const newTodo = this.props.todos.get('newTodo');
     const todos = this.props.todos.get('list');
 
@@ -21,7 +22,11 @@ class Todos extends PureComponent {
       <DocumentTitle title={msg('todos.title')}>
         <section className="todos-page">
           <NewTodo todo={newTodo} />
-          <List todos={todos} />
+          <List
+            editables={editables}
+            pendingActions={this.props.pendingActions}
+            todos={todos}
+          />
           <Buttons clearAllEnabled={todos.size > 0} />
           <ToCheck />
         </section>
@@ -32,6 +37,8 @@ class Todos extends PureComponent {
 }
 
 Todos.propTypes = {
+  app: React.PropTypes.instanceOf(immutable.Map).isRequired,
+  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   todos: React.PropTypes.instanceOf(immutable.Map).isRequired
 };
 
