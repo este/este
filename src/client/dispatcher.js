@@ -21,6 +21,10 @@ export function dispatch(action: Function, data: ?Object, options: ?Object) {
     dispatchSync(action, data);
 }
 
+export function waitFor(ids: Array) {
+  dispatcher.waitFor(ids);
+}
+
 export function isPending(actionName) {
   return pendingActionsCursor().has(actionName);
 }
@@ -54,8 +58,8 @@ function dispatchAsync(action: Function, promise: Object, options: ?Object) {
 
 function setPending(actionName: string, pending: boolean) {
   pendingActionsCursor(pendingActions => pending
-    ? pendingActions.set(actionName, true)
-    : pendingActions.delete(actionName)
+      ? pendingActions.set(actionName, true)
+      : pendingActions.delete(actionName)
   );
 }
 
