@@ -100,7 +100,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Training
 - [Czech Republic](http://javascript-skoleni.cz)
-- San Francisco - feel free to [write me](daniel@steigerwald.cz)
+- San Francisco - feel free to [write me](mailto:daniel@steigerwald.cz)
 
 ## Notes
 
