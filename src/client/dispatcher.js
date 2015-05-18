@@ -58,8 +58,8 @@ function dispatchAsync(action: Function, promise: Object, options: ?Object) {
 
 function setPending(actionName: string, pending: boolean) {
   pendingActionsCursor(pendingActions => pending
-      ? pendingActions.set(actionName, true)
-      : pendingActions.delete(actionName)
+    ? pendingActions.set(actionName, true)
+    : pendingActions.delete(actionName)
   );
 }
 
