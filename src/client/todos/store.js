@@ -19,11 +19,14 @@ export const dispatchToken = register(({action, data}) => {
       todosCursor(todos => {
         return todos
           .update('list', (list) => {
-            const todo = new Todo({
-              id: getRandomString(),
-              title: data.title
+            // Always denote what data represents. Favour readability over wtf.
+            // Try to resist being smart ass. Fuck pride.
+            // https://www.youtube.com/watch?v=ruhFmBrl4GM
+            const todo = data;
+            const newTodo = todo.merge({
+              id: getRandomString()
             });
-            return list.push(todo);
+            return list.push(newTodo);
           })
           .set('newTodo', new Todo);
       });
