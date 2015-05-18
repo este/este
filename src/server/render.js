@@ -6,20 +6,13 @@ import Router from 'react-router';
 import config from './config';
 import initialState from './initialstate';
 import routes from '../client/routes';
+import extend from 'extend';
 import {state} from '../client/state';
 
-export default function render(req, res, locale) {
+export default function render(req, res, preloadedState) {
   const url = req.originalUrl;
-  return loadData(url, locale)
-    .then((appState) => renderPage(res, appState, url));
-}
-
-function loadData(url, locale) {
-  // TODO: Preload and merge user specific state.
-  const appState = initialState;
-  return new Promise((resolve, reject) => {
-    resolve(appState);
-  });
+  let appState = extend(true, initialState, preloadedState);
+  return renderPage(res, appState, url);
 }
 
 // TODO: Refactor.
