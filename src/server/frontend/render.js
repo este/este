@@ -6,8 +6,15 @@ import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
+<<<<<<< HEAD:src/server/render.js
 import routes from '../client/routes';
 import {state} from '../client/state';
+=======
+import config from '../config';
+import initialState from '../initialstate';
+import routes from '../../client/routes';
+import {state} from '../../client/state';
+>>>>>>> Initial commit -> first part of refactor done:src/server/frontend/render.js
 
 export default function render(req, res, preloadedState) {
   const url = req.originalUrl;
