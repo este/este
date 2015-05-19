@@ -12,14 +12,14 @@ class ToCheck extends PureComponent {
     return (
       <div>
         <button
-          className="todo-button"
           children={msg('todos.clearAll')}
+          className="todo-button"
           disabled={!this.props.clearAllEnabled}
           onClick={actions.clearAll}
         />
         <button
-          className="todo-button"
           children={msg('todos.add100')}
+          className="todo-button"
           onClick={actions.addHundredTodos}
         />
         {/* TODO: Reimplement undo. */}
