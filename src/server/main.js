@@ -12,8 +12,11 @@ const server = exports.server = Server(app);
 app.use(require('./frontend'));
 
 // Add error handler
-app.use((err, res) => {
-  res.send(err.message);
+// Four arguments need to be defined in order for the middleware to act as an error handler
+app.use((err, req, res, next) => {
+  const msg = err.stack || err;
+  console.log('Yay', msg);
+  res.status(500).send('500: ' + msg);
 });
 
 server.listen(config.port, () => {

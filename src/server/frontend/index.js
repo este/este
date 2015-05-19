@@ -13,14 +13,10 @@ app.use(compression());
 app.use('/build', express.static('build'));
 app.use('/assets', express.static('assets'));
 
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
   const acceptsLanguages = req.acceptsLanguages(config.appLocales);
   render(req, res, acceptsLanguages || config.defaultLocale)
-    .catch((error) => {
-      const msg = error.stack || error;
-      console.log(msg);
-      res.status(500).send('500: ' + msg);
-    });
+    .catch(next);
 });
 
 app.on('mount', () => {
