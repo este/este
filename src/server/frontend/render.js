@@ -1,10 +1,10 @@
+import config from '../config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
+import initialState from '../initialstate';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
-import config from '../config';
-import initialState from '../initialstate';
 import routes from '../../client/routes';
 import {state} from '../../client/state';
 
