@@ -3,10 +3,10 @@ import Html from './html.react';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
-import config from './config';
-import initialState from './initialstate';
-import routes from '../client/routes';
-import {state} from '../client/state';
+import config from '../config';
+import initialState from '../initialstate';
+import routes from '../../client/routes';
+import {state} from '../../client/state';
 
 export default function render(req, res, locale) {
   const url = req.originalUrl;

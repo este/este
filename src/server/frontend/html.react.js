@@ -1,4 +1,4 @@
-import Component from '../client/components/component.react';
+import Component from '../../client/components/component.react';
 import React from 'react';
 
 export default class Html extends Component {
