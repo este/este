@@ -1,10 +1,10 @@
 import * as actions from './actions';
+import Component from '../components/component.react';
 import Editable from '../components/editable.react';
-import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
 
-class Todo extends PureComponent {
+class Todo extends Component {
 
   onEditableSave(todo, title, hide) {
     actions.saveTitle(todo.id, title).then(hide);

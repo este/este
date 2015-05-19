@@ -1,10 +1,10 @@
 import * as actions from '../todos/actions';
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 // import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
-class ToCheck extends PureComponent {
+class ToCheck extends Component {
 
   render() {
     return (

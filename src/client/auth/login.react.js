@@ -1,6 +1,6 @@
 import * as actions from './actions';
+import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
-import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
 import immutable from 'immutable';
@@ -9,7 +9,7 @@ import {msg} from '../intl/store';
 
 require('./login.styl');
 
-class Login extends PureComponent {
+class Login extends Component {
 
   getForm() {
     return this.props.auth.get('form');

@@ -1,12 +1,12 @@
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 import {userCursor} from '../state';
 
 // Higher order component.
 // https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750
-export default function requireAuth(Component) {
+export default function requireAuth(WrappedComponent) {
 
-  class Authenticated extends PureComponent {
+  class Authenticated extends Component {
 
     static willTransitionTo(transition) {
       const isLoggedIn = userCursor().get('isLoggedIn');
@@ -17,12 +17,12 @@ export default function requireAuth(Component) {
     }
 
     render() {
-      return <Component {...this.props} />;
+      return <WrappedComponent {...this.props} />;
     }
 
   }
 
-  Authenticated.displayName = `${Component.name}Authenticated`;
+  Authenticated.displayName = `${WrappedComponent.name}Authenticated`;
 
   return Authenticated;
 

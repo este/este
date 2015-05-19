@@ -1,8 +1,8 @@
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 import {Link} from 'react-router';
 
-class ToCheck extends PureComponent {
+class ToCheck extends Component {
 
   render() {
     return (

@@ -1,8 +1,8 @@
 import Buttons from './buttons.react';
+import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
-import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import ToCheck from './tocheck.react';
 import immutable from 'immutable';
@@ -11,7 +11,7 @@ import {msg} from '../intl/store';
 // Leverage webpack require goodness.
 require('./todos.styl');
 
-class Todos extends PureComponent {
+class Todos extends Component {
 
   render() {
     const editables = this.props.todos.get('editables');

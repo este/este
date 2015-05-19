@@ -1,10 +1,10 @@
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class List extends PureComponent {
+class List extends Component {
 
   render() {
     const todos = this.props.todos;

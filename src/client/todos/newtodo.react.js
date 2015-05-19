@@ -1,10 +1,10 @@
 import * as actions from './actions';
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class NewTodo extends PureComponent {
+class NewTodo extends Component {
 
   addTodoOnEnter(e) {
     if (e.key === 'Enter')

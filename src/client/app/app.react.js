@@ -1,6 +1,6 @@
 import * as appState from '../state';
+import Component from '../components/component.react';
 import Menu from './menu.react';
-import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
 import {RouteHandler} from 'react-router';
@@ -15,7 +15,7 @@ import '../user/store';
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.styl');
 
-class App extends PureComponent {
+class App extends Component {
 
   constructor(props) {
     super(props);

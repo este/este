@@ -4,13 +4,10 @@ import shallowEqual from 'react-pure-render/shallowEqual';
 // import diff from 'immutablediff';
 
 /**
- * PureComponent is pure goodness. Always use it for two reasons:
- *  1) The fastest possible rendering. No need to optimize anything anymore.
- *  2) It's explicit which data aka props component needs, and we can easily
- *     define behavior for not yet loaded data.
+ * Purified React.Component. Goodness.
  * http://facebook.github.io/react/docs/advanced-performance.html
  */
-export default class PureComponent extends React.Component {
+class Component extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     // TODO: Make whole React Pure, add something like dangerouslySetLocalState.
@@ -44,6 +41,8 @@ export default class PureComponent extends React.Component {
 
 }
 
-PureComponent.contextTypes = {
+Component.contextTypes = {
   router: React.PropTypes.func
 };
+
+export default Component;

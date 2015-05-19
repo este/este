@@ -1,7 +1,7 @@
-import PureComponent from '../client/components/purecomponent.react';
+import Component from '../client/components/component.react';
 import React from 'react';
 
-export default class Html extends PureComponent {
+export default class Html extends Component {
 
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.

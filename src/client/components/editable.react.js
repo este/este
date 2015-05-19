@@ -1,4 +1,4 @@
-import PureComponent from '../components/purecomponent.react';
+import Component from '../components/component.react';
 import React from 'react';
 import classnames from 'classnames';
 import immutable from 'immutable';
@@ -26,7 +26,7 @@ const State = immutable.Map({
   value: ''
 });
 
-class Editable extends PureComponent {
+class Editable extends Component {
 
   // Like setInitialState, but defined in global state and lazily.
   setDefaultState() {

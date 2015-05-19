@@ -1,10 +1,10 @@
+import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import LoginForm from '../auth/login.react';
-import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import {msg} from '../intl/store';
 
-class Login extends PureComponent {
+class Login extends Component {
 
   render() {
     return (
