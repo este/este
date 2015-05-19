@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import config from './config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
@@ -12,6 +13,15 @@ import {state} from '../client/state';
 =======
 import config from '../config';
 import initialState from '../initialstate';
+=======
+import config from '../config';
+import DocumentTitle from 'react-document-title';
+import Html from './html.react';
+import initialState from '../initialstate';
+import Promise from 'bluebird';
+import React from 'react';
+import Router from 'react-router';
+>>>>>>> Alphabetical order FTW
 import routes from '../../client/routes';
 import {state} from '../../client/state';
 >>>>>>> Initial commit -> first part of refactor done:src/server/frontend/render.js
