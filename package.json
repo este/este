@@ -26,7 +26,6 @@
     "del": "^1.1.1",
     "eslint-plugin-react": "^2.0.1",
     "eventemitter3": "^1.0.1",
-    "express": "^4.11.2",
     "extend": "^2.0.1",
     "extract-text-webpack-plugin": "^0.8.0",
     "fastclick": "^1.0.6",
