@@ -1,11 +1,11 @@
-import React from 'react';
-import immutable from 'immutable';
-import DocumentTitle from 'react-document-title';
-import PureComponent from '../components/purecomponent.react';
-import {msg} from '../intl/store';
-import List from '../todos/list.react';
 import Buttons from '../todos/buttons.react';
+import DocumentTitle from 'react-document-title';
+import immutable from 'immutable';
+import List from '../todos/list.react';
+import {msg} from '../intl/store';
 import NewTodo from '../todos/newtodo.react';
+import PureComponent from '../components/purecomponent.react';
+import React from 'react';
 import ToCheck from './tocheck.react';
 
 class Todos extends PureComponent {
