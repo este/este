@@ -4,17 +4,21 @@ import React from 'react';
 // import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
+require('./buttons.styl');
+
 class ToCheck extends PureComponent {
 
   render() {
     return (
-      <div className="buttons">
+      <div>
         <button
+          className="todo-button"
           children={msg('todos.clearAll')}
           disabled={!this.props.clearAllEnabled}
           onClick={actions.clearAll}
         />
         <button
+          className="todo-button"
           children={msg('todos.add100')}
           onClick={actions.addHundredTodos}
         />

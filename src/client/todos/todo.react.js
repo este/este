@@ -4,6 +4,8 @@ import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
 
+require('./todo.styl');
+
 class Todo extends PureComponent {
 
   render() {
@@ -24,7 +26,7 @@ class Todo extends PureComponent {
           pendingActions={this.props.pendingActions}
           state={this.props.editable}
         >
-          <label>{todo.title}</label>
+          <label className="todo-item__label">{todo.title}</label>
         </Editable>
         <span
           /*
@@ -32,7 +34,7 @@ class Todo extends PureComponent {
             Use it only for primitive values like string or number.
           */
           children="x"
-          className="button"
+          className="todo-item__button"
           onClick={() => actions.deleteTodo(todo)}
         />
       </li>
