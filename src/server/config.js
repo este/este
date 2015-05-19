@@ -1,4 +1,10 @@
-module.exports = {
+var nconf = require('nconf');
+
+// Specifying an env delimiter allows you to override below config when shipping to production server
+// by e.g. defining piping__ignore or version variables.
+nconf.env('__');
+
+var config = {
   appLocales: ['en', 'fr'],
   defaultLocale: 'en',
   googleAnalyticsId: 'UA-XXXXXXX-X',
@@ -14,3 +20,10 @@ module.exports = {
   version: require('../../package').version,
   webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl']
 };
+
+// Use above config as a default one
+// Multiple other providers are available like loading config from json and more
+// Check out nconf docs for fancier examples
+nconf.defaults(config);
+
+module.exports = nconf.get();
