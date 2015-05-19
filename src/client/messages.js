@@ -23,6 +23,9 @@ export default {
       edit: 'Edit',
       save: 'Save'
     },
+    confirmations: {
+      cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`
+    },
     home: {
       title: 'Este.js App'
     },

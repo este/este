@@ -2,6 +2,7 @@ import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import classnames from 'classnames';
 import immutable from 'immutable';
+import {msg} from '../intl/store';
 
 require('./editable.styl');
 
@@ -16,8 +17,8 @@ require('./editable.styl');
   TODO:
     - isEditable visual hint, optionally explicit edit button.
     - Optionally save and cancel buttons.
-    - Growing textarea for multilines.
-    - Cancel confirm warning for dirty value.
+    - Growing textarea for multilines. Probably make a GoogTextarea component.
+      https://github.com/google/closure-library/blob/master/closure/goog/ui/textarea.js
 */
 
 const State = immutable.Map({
@@ -57,7 +58,10 @@ class Editable extends PureComponent {
   }
 
   saveEdit() {
-    // TODO: Add if (!this.valueHasChanged()) return;
+    if (!this.valueHasChanged()) {
+      this.setDefaultState();
+      return;
+    }
     const value = this.getState().toJS().value.trim();
     if (!value && this.props.isRequired)
       return;
@@ -66,7 +70,14 @@ class Editable extends PureComponent {
     });
   }
 
+  valueHasChanged() {
+    return this.props.defaultValue !== this.getState().get('value');
+  }
+
   cancelEdit() {
+    if (this.valueHasChanged())
+      if (!confirm(msg('confirmations.cancelEdit'))) // eslint-disable-line no-alert
+        return;
     this.setDefaultState();
   }
 
