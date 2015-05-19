@@ -8,19 +8,18 @@ require('./editable.styl');
 /*
   This is super useful component for inline editation. Reactive app must be able
   to allow editation any piece of UI, any form field, individually. Granularity
-  is key to good user experience. Traditionally, such approach required a lot of
+  is key to good user experience. Traditionally, such approach requires a lot of
   boilerplate code, but it's piece of cake with React composition. Note editable
-  state is stored in global app state. Remember never use component local state.
+  state is stored in global app state, not in component local state. Component
+  local state is workaround for mutable app state, therefore should be avoided.
 
   TODO:
     - isEditable visual hint, optionally explicit edit button.
     - Optionally save and cancel buttons.
-    - isRequired to empty value check
     - Growing textarea for multilines.
     - Cancel confirm warning for dirty value.
 */
 
-// Globalized local state :-)
 const State = immutable.Map({
   isEditing: false,
   value: ''
@@ -28,14 +27,12 @@ const State = immutable.Map({
 
 class Editable extends PureComponent {
 
-  // Don't use this.state, who knows how React is dealing with it.
-  getState() {
-    return this.props.state
-      ? this.props.state.get(this.props.name)
-      : State;
+  // Like setInitialState, but defined in global state and lazily.
+  setDefaultState() {
+    this.setState(() => State);
   }
 
-  // Override React local setState with global setState :-)
+  // Override setState to use global state instead of local.
   setState(callback) {
     this.props.onState(
       this.props.id,
@@ -44,8 +41,12 @@ class Editable extends PureComponent {
     );
   }
 
-  setDefaultState() {
-    this.setState(() => State);
+  // Use getState because this.state is reserved for React. Returns component
+  // local state stored in global app state.
+  getState() {
+    return this.props.state
+      ? this.props.state.get(this.props.name)
+      : State;
   }
 
   enableEdit() {
@@ -58,6 +59,8 @@ class Editable extends PureComponent {
   saveEdit() {
     // TODO: Add if (!this.valueHasChanged()) return;
     const value = this.getState().toJS().value.trim();
+    if (!value && this.props.isRequired)
+      return;
     this.props.onSave(value, () => {
       this.setDefaultState();
     });
@@ -134,6 +137,7 @@ Editable.propTypes = {
   defaultValue: React.PropTypes.string.isRequired,
   disabled: React.PropTypes.bool,
   id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
+  isRequired: React.PropTypes.bool,
   maxLength: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   onSave: React.PropTypes.func.isRequired,

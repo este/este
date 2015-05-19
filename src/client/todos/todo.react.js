@@ -6,6 +6,10 @@ import immutable from 'immutable';
 
 class Todo extends PureComponent {
 
+  onEditableSave(todo, title, hide) {
+    actions.saveTitle(todo.id, title).then(hide);
+  }
+
   render() {
     const todo = this.props.todo;
 
@@ -15,11 +19,10 @@ class Todo extends PureComponent {
           defaultValue={todo.title}
           disabled={actions.saveTitle.pending}
           id={todo.id}
+          isRequired
           maxLength={actions.MAX_TODO_TITLE_LENGTH}
           name="title"
-          onSave={(title, hide) => {
-            actions.saveTitle(todo.id, title).then(hide);
-          }}
+          onSave={(title, hide) => this.onEditableSave(todo, title, hide)}
           onState={actions.onEditableState}
           pendingActions={this.props.pendingActions}
           state={this.props.editable}
