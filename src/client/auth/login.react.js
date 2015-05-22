@@ -26,8 +26,6 @@ class Login extends Component {
   }
 
   redirectAfterLogin() {
-    // TODO: Use hard location reload for Chrome to remember password.
-    // https://code.google.com/p/chromium/issues/detail?id=43219#c56
     const nextPath = this.props.router.getCurrentQuery().nextPath;
     this.props.router.replaceWith(nextPath || '/');
   }
