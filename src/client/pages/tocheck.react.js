@@ -1,24 +1,8 @@
 import Component from '../components/component.react';
 import React from 'react';
 import {Link} from 'react-router';
-import {FormattedHTMLMessage} from 'react-intl';
+import ToCheckItem from './tocheckitem.react';
 import {msg, msgArray} from '../intl/store';
-
-class ToCheckItem extends Component {
-
-  render() {
-    return (
-      <li>
-        <FormattedHTMLMessage message={this.props.message} />
-      </li>
-    );
-  }
-
-}
-
-ToCheckItem.propTypes = {
-  message: React.PropTypes.string.isRequired
-};
 
 class ToCheck extends Component {
 

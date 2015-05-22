@@ -38,7 +38,7 @@ export function msgArray(path, values = null): array {
     throw new ReferenceError('Could not find Intl messages: ' + path);
   if (!Map.isMap(messages))
     throw new ReferenceError('Not a Map of Intl messages: ' + path);
-  
+
   messages.forEach(
     (message, key) => messagesArray.push({
       key: key,
