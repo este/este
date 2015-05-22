@@ -2,6 +2,7 @@ import IntlMessageFormat from 'intl-messageformat';
 import IntlRelativeFormat from 'intl-relativeformat';
 import {i18nCursor} from '../state';
 import {register} from '../dispatcher';
+import {Map} from 'immutable';
 
 const cachedInstances = Object.create(null);
 const intlRelativeFormat = new IntlRelativeFormat;
@@ -25,6 +26,27 @@ export function msg(path, values = null): string {
     return message;
 
   return getCachedInstanceOf(message).format(values);
+}
+
+// get array of objects like [{key: message_key, message: message_text}, ...]
+export function msgArray(path, values = null): array {
+  const pathParts = ['messages'].concat(path.split('.'));
+  const messages = i18nCursor(pathParts);
+  let messagesArray = [];
+
+  if (messages == null)
+    throw new ReferenceError('Could not find Intl messages: ' + path);
+  if (!Map.isMap(messages))
+    throw new ReferenceError('Not a Map of Intl messages: ' + path);
+  
+  messages.forEach(
+    (message, key) => messagesArray.push({
+      key: key,
+      message: values ? getCachedInstanceOf(message).format(values) : message
+    })
+  );
+
+  return messagesArray;
 }
 
 export function relativeDateFormat(date, options?): string {

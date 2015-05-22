@@ -3,6 +3,7 @@ import setToString from '../../lib/settostring';
 import {ValidationError} from '../../lib/validation';
 import {dispatch} from '../dispatcher';
 import {validate} from '../validation';
+import {msg} from '../intl/store';
 
 export function login(fields) {
   // Promise, because we don't know whether fields are valid etc.
@@ -38,7 +39,7 @@ function validateCredentials(fields) {
       if (fields.password === 'pass1')
         resolve(fields);
       else
-        reject(new ValidationError('Wrong password', 'password'));
+        reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
     }, 1000);
   });
 }
