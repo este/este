@@ -58,7 +58,7 @@ export default {
         source: `View page source, take a look how HTML is server rendered with initial data.`,
         console: `Open console, take a look how actions are logged from <code>src/client/dispatcher.js</code>.`,
         development: `Development mode (<code>gulp</code>), try edit styles or react component to see
-            <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8"> live-editing</a> without app reload.`,
+            <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">live-editing</a> without app reload.`,
         production: `Production mode (<code>gulp -p</code>), to check built app performance and size.`,
         undo: `Undo button. (temporally disabled)`,
         edit: `Edit todo: Click to edit, esc to cancel, enter to save.`,
