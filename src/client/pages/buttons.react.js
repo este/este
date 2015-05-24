@@ -4,7 +4,7 @@ import React from 'react';
 // import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
-class ToCheck extends Component {
+class TodoButtons extends Component {
 
   render() {
     return (
@@ -32,8 +32,8 @@ class ToCheck extends Component {
 
 }
 
-ToCheck.propTypes = {
+TodoButtons.propTypes = {
   clearAllEnabled: React.PropTypes.bool.isRequired
 };
 
-export default ToCheck;
+export default TodoButtons;
