@@ -6,6 +6,11 @@ import {msg} from '../intl/store';
 
 class NewTodo extends Component {
 
+  constructor(props) {
+    super(props);
+    this.addTodoOnEnter = this.addTodoOnEnter.bind(this);
+  }
+
   addTodoOnEnter(e) {
     if (e.key === 'Enter')
       actions.addTodo(this.props.todo);
@@ -18,7 +23,7 @@ class NewTodo extends Component {
         className="new-todo"
         name="title"
         onChange={actions.onNewTodoFieldChange}
-        onKeyDown={(e) => this.addTodoOnEnter(e)}
+        onKeyDown={this.addTodoOnEnter}
         placeholder={msg('todos.newTodoPlaceholder')}
         value={this.props.todo.title}
       />

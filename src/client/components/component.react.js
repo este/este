@@ -33,10 +33,10 @@ class Component extends React.Component {
   // _logShouldUpdateComponents(nextProps, nextState) {
   //   const name = this.constructor.displayName || this.constructor.name
   //   console.log(`${name} shouldUpdate`)
-  //   const propsDiff = diff(this.props, nextProps).toJS()
-  //   const stateDiff = diff(this.state, nextState).toJS()
-  //   if (propsDiff.length) console.log('props', propsDiff)
-  //   if (stateDiff.length) console.log('state', stateDiff)
+  //   // const propsDiff = diff(this.props, nextProps).toJS()
+  //   // const stateDiff = diff(this.state, nextState).toJS()
+  //   // if (propsDiff.length) console.log('props', propsDiff)
+  //   // if (stateDiff.length) console.log('state', stateDiff)
   // }
 
 }

@@ -11,6 +11,11 @@ require('./login.styl');
 
 class Login extends Component {
 
+  constructor(props) {
+    super(props);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
   getForm() {
     return this.props.auth.get('form');
   }
@@ -36,7 +41,7 @@ class Login extends Component {
     return (
       <DocumentTitle title={msg('auth.title')}>
         <div className="login">
-          <form onSubmit={e => this.onFormSubmit(e)}>
+          <form onSubmit={this.onFormSubmit}>
             <fieldset disabled={actions.login.pending}>
               <legend>{msg('auth.form.legend')}</legend>
               <input

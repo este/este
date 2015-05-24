@@ -6,10 +6,6 @@ import immutable from 'immutable';
 
 class Todo extends Component {
 
-  onEditableSave(todo, title, hide) {
-    actions.saveTitle(todo.id, title).then(hide);
-  }
-
   render() {
     const todo = this.props.todo;
 
@@ -22,7 +18,7 @@ class Todo extends Component {
           isRequired
           maxLength={actions.MAX_TODO_TITLE_LENGTH}
           name="title"
-          onSave={(title, hide) => this.onEditableSave(todo, title, hide)}
+          onSave={(title, hide) => actions.saveTitle(todo.id, title).then(hide)}
           onState={actions.onEditableState}
           pendingActions={this.props.pendingActions}
           state={this.props.editable}

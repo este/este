@@ -28,6 +28,14 @@ const State = immutable.Map({
 
 class Editable extends Component {
 
+  constructor(props) {
+    super(props);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onInputFocus = this.onInputFocus.bind(this);
+    this.onInputKeyDown = this.onInputKeyDown.bind(this);
+    this.onViewClick = this.onViewClick.bind(this);
+  }
+
   // Like setInitialState, but defined in global state and lazily.
   setDefaultState() {
     this.setState(() => State);
@@ -109,7 +117,8 @@ class Editable extends Component {
   }
 
   render() {
-    const {isEditing, value} = this.getState().toJS();
+    const isEditing = this.getState().get('isEditing');
+    const value = this.getState().get('value');
 
     const edit = (
       <div className="edit">
@@ -117,9 +126,9 @@ class Editable extends Component {
           autoFocus
           disabled={this.props.disabled}
           maxLength={this.props.maxLength}
-          onChange={(e) => this.onInputChange(e)}
-          onFocus={(e) => this.onInputFocus(e)}
-          onKeyDown={(e) => this.onInputKeyDown(e)}
+          onChange={this.onInputChange}
+          onFocus={this.onInputFocus}
+          onKeyDown={this.onInputKeyDown}
           value={value}
         />
       </div>
@@ -129,7 +138,7 @@ class Editable extends Component {
       <div
         children={this.props.children}
         className="view"
-        onClick={() => this.onViewClick()}
+        onClick={this.onViewClick}
       />
     );
 
