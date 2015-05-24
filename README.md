@@ -32,7 +32,7 @@
 
 ## Prerequisites
 
-Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
+Install [node.js](http://nodejs.org).
 Then install [gulp.js](http://gulpjs.com/).
 ```shell
 npm install -g gulp
@@ -49,8 +49,8 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
 ## Create App
 
 ```shell
-git clone https://github.com/steida/este.git myapp
-cd myapp
+git clone https://github.com/steida/este.git este-app
+cd este-app
 npm install
 ```
 
@@ -72,10 +72,6 @@ npm install
 - `npm postinstall` just alias for `gulp build --production`, useful for Heroku.
 - `npm test` just alias for `gulp test`
 
-## Examples
-
-- [Este TodoMVC](https://github.com/steida/este-todomvc)
-
 ## Documentation
 
 So you decided to give a chance to this web stack, but where is documentation? Code is documentation itself as it illustrates various patterns, but for start you should read something about [React.js](http://facebook.github.io/react/). Then you should learn [what is the Flux
@@ -90,13 +86,13 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks 
 
-- Whole app state is stored in one immutable app state object. To get snapshot, press `shift+ctrl+s`, then open dev console and type `_appState`.
+- Whole app state is stored in one immutable app state object. To get snapshot, press `ctrl+shift+s`, then open dev console and type `_appState`.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
-- Recommended editor is [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)) or [sublimetext](http://www.sublimetext.com/).
+- Recommended editor is [sublimetext](http://www.sublimetext.com/), or [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
 
 ## Training
 - [Czech Republic](http://javascript-skoleni.cz)
@@ -104,7 +100,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Notes
 
-- Este.js dev stack should work on OSX, Linux, and even Windows. Feel free to report any issue.
+- Este.js dev stack should work on OSX, Linux, and Windows. Feel free to report any issue.
 - As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE.
 
 ## Credit
