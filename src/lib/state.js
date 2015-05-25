@@ -7,6 +7,8 @@ export default class State extends EventEmitter {
     super();
     this._state = null;
     this._storesReviver = storesReviver;
+    this._states = [];
+    this._statePos = 0;
     this.load(state || {});
   }
 
@@ -40,7 +42,16 @@ export default class State extends EventEmitter {
     // It's easy with: https://github.com/intelie/immutable-js-diff
     const previousState = this._state;
     this._state = state;
+    if (!this.isNewStateSameAsRedo(state)) 
+      this._states.length = this._statePos;    
+    this._states.push(state);
+    this._statePos++;
     this.emit('change', this._state, previousState, path);
+  }
+
+  isNewStateSameAsRedo(state) {
+    if (!this.canRedo) return false;
+    return state.equals(this._states[this._statePos]);    
   }
 
   get() {
@@ -53,6 +64,28 @@ export default class State extends EventEmitter {
 
   toConsole() {
     console.log(JSON.stringify(this.save())); // eslint-disable-line no-console
+  }
+
+  get canUndo() {
+    return this._statePos > 1;
+  }  
+
+  get canRedo() {
+    return this._statePos < this._states.length;
+  }
+
+  undo() {
+    this.gotostep(this._statePos - 1);    
+  }
+
+  redo() {
+    this.gotostep(this._statePos + 1);    
+  }
+
+  gotostep(pos) {
+    this._statePos = pos;
+    this._state = this._states[pos - 1];
+    this.emit('change', this._state);   
   }
 
   cursor(path: Array<string>) {
