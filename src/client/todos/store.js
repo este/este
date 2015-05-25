@@ -72,7 +72,6 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.saveTitle:
       todosCursor(todos => {
-        // najit todo podle id, a zmenit mu title
         const {id, title} = data;
         return todos.update('list', list => {
           const idx = list.findIndex(todo => todo.id === id);
