@@ -1,10 +1,24 @@
 import * as actions from '../todos/actions';
 import Component from '../components/component.react';
 import React from 'react';
-// import {FormattedMessage} from 'react-intl';
+
+//import * as appState from '../state';
+import {state} from '../state';
+
+import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
-class TodoButtons extends Component {
+class TodoButtons  {
+
+  undo() {
+    console.log(!state.canUndo);
+    if (state.canUndo) state.undo();
+  }
+
+  redo(){
+    console.log(!state.canRedo);
+    if (state.canRedo) state.redo();
+  }
 
   render() {
     return (
@@ -18,18 +32,19 @@ class TodoButtons extends Component {
           children={msg('todos.add100')}
           onClick={actions.addHundredTodos}
         />
-        {/* TODO: Reimplement undo. */}
-        {/*<button
-          disabled={undoStates.length === 1}
+        {/* disabled don't work */}        
+        <button
+          disabled={!state.canUndo}
           onClick={() => this.undo()}
-        ><FormattedMessage
-          message={msg('todos.undo')}
-          steps={undoStates.length - 1}
-        /></button>*/}
+        >Undo</button>
+        <button
+          disabled={!state.canRedo}
+          onClick={() => this.redo()}
+        >Redo</button>        
+        
       </div>
     );
   }
-
 }
 
 TodoButtons.propTypes = {
