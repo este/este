@@ -20,8 +20,7 @@ class Todos extends Component {
     const editables = this.props.todos.get('editables');
     const newTodo = this.props.todos.get('newTodo');
     const todos = this.props.todos.get('list');
-    //const {canUndo, canRedo} = state;
-    const appStete = state;
+    const appState = state;
 
     return (
       <DocumentTitle title={msg('todos.title')}>
@@ -33,7 +32,7 @@ class Todos extends Component {
             todos={todos}
           />
           <Buttons clearAllEnabled={todos.size > 0} />
-          <HistoryButtons state={appStete} canUndo={appStete.canUndo} canRedo={appStete.canRedo} />
+          <HistoryButtons state={appState} canUndo={appState.canUndo} canRedo={appState.canRedo} />
           <ToCheck />
         </section>
       </DocumentTitle>
