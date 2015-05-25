@@ -1,4 +1,5 @@
 import Buttons from './buttons.react';
+import HistoryButtons from './historybuttons.react';
 import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import List from '../todos/list.react';
@@ -7,6 +8,8 @@ import React from 'react';
 import ToCheck from './tocheck.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
+
+import {state} from '../state';
 
 // Leverage webpack require goodness.
 require('./todos.styl');
@@ -17,6 +20,8 @@ class Todos extends Component {
     const editables = this.props.todos.get('editables');
     const newTodo = this.props.todos.get('newTodo');
     const todos = this.props.todos.get('list');
+    //const {canUndo, canRedo} = state;
+    const appStete = state;
 
     return (
       <DocumentTitle title={msg('todos.title')}>
@@ -28,6 +33,7 @@ class Todos extends Component {
             todos={todos}
           />
           <Buttons clearAllEnabled={todos.size > 0} />
+          <HistoryButtons state={appStete} canUndo={appStete.canUndo} canRedo={appStete.canRedo} />
           <ToCheck />
         </section>
       </DocumentTitle>

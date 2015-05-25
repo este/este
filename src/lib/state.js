@@ -74,10 +74,6 @@ export default class State extends EventEmitter {
     return this._statePos < this._states.length;
   }
 
-  get statePos(){
-    return this._statePos;
-  }
-
   undo() {
     this.gotostep(this._statePos - 1)    
   }
