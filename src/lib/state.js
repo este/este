@@ -50,8 +50,8 @@ export default class State extends EventEmitter {
   }
 
   isNewStateSameAsRedo(state) {
-    if (!this.canRedo) return false
-    return state.equals(this._states[this._statePos])    
+    if (!this.canRedo) return false;
+    return state.equals(this._states[this._statePos]);    
   }
 
   get() {
