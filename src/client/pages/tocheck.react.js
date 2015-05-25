@@ -2,7 +2,7 @@ import Component from '../components/component.react';
 import React from 'react';
 import {Link} from 'react-router';
 import ToCheckItem from './tocheckitem.react';
-import {msg, msgArray} from '../intl/store';
+import {msg, msgs} from '../intl/store';
 
 class ToCheck extends Component {
 
@@ -13,8 +13,8 @@ class ToCheck extends Component {
           {msg('toCheck.header')}
         </h3>
         <ul>
-          {msgArray('toCheck.items').map(
-            (item) => <ToCheckItem key={item.key} message={item.message} />
+          {msgs('toCheck.itemListHtml').map(
+            (item) => <ToCheckItem item={item} key={item.get('key')} />
           )}
           <li>
             {msg('toCheck.isomorphicPage')} <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>.

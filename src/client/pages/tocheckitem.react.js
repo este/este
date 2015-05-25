@@ -7,7 +7,7 @@ class ToCheckItem extends Component {
   render() {
     return (
       <li>
-        <FormattedHTMLMessage message={this.props.message} />
+        <FormattedHTMLMessage message={this.props.item.get('txt')} />
       </li>
     );
   }
@@ -15,7 +15,7 @@ class ToCheckItem extends Component {
 }
 
 ToCheckItem.propTypes = {
-  message: React.PropTypes.string.isRequired
+  item: React.PropTypes.object.isRequired
 };
 
 export default ToCheckItem;

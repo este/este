@@ -2,7 +2,7 @@ import IntlMessageFormat from 'intl-messageformat';
 import IntlRelativeFormat from 'intl-relativeformat';
 import {i18nCursor} from '../state';
 import {register} from '../dispatcher';
-import {Map} from 'immutable';
+import {List, Map} from 'immutable';
 
 const cachedInstances = Object.create(null);
 const intlRelativeFormat = new IntlRelativeFormat;
@@ -20,33 +20,29 @@ function getCachedInstanceOf(message) {
 export function msg(path, values = null): string {
   const pathParts = ['messages'].concat(path.split('.'));
   const message = i18nCursor(pathParts);
+
   if (message == null)
     throw new ReferenceError('Could not find Intl message: ' + path);
-  if (!values)
-    return message;
 
-  return getCachedInstanceOf(message).format(values);
+  return !values ? message : getCachedInstanceOf(message).format(values);
 }
 
-// get array of objects like [{key: message_key, message: message_text}, ...]
-export function msgArray(path, values = null): array {
+// get List[.slice(start[, end])] of message Maps like [{key: message_key, txt: message_text}, ...]
+export function msgs(path, values = null, ...sliceParams): List<Map> {
   const pathParts = ['messages'].concat(path.split('.'));
   const messages = i18nCursor(pathParts);
-  let messagesArray = [];
 
   if (messages == null)
     throw new ReferenceError('Could not find Intl messages: ' + path);
-  if (!Map.isMap(messages))
-    throw new ReferenceError('Not a Map of Intl messages: ' + path);
+  if (!List.isList(messages))
+    throw new ReferenceError('Not a List of Intl messages: ' + path);
 
-  messages.forEach(
-    (message, key) => messagesArray.push({
-      key: key,
-      message: values ? getCachedInstanceOf(message).format(values) : message
-    })
-  );
+  const messageList = !sliceParams ? messages : List.prototype.slice.apply(messages, sliceParams);
 
-  return messagesArray;
+  return !values ? messageList : messageList.map((item) => Map({
+      key: item.get('key'),
+      txt: getCachedInstanceOf(item.get('txt')).format(values)
+    }));
 }
 
 export function relativeDateFormat(date, options?): string {
