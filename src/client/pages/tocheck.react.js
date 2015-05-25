@@ -1,6 +1,8 @@
 import Component from '../components/component.react';
 import React from 'react';
 import {Link} from 'react-router';
+import ToCheckItem from './tocheckitem.react';
+import {msg, msgs} from '../intl/store';
 
 class ToCheck extends Component {
 
@@ -8,39 +10,18 @@ class ToCheck extends Component {
     return (
       <div className="tocheck">
         <h3>
-          Things to Check
+          {msg('toCheck.header')}
         </h3>
         <ul>
+          {msgs('toCheck.itemListHtml').map(
+            (item) => <ToCheckItem item={item} key={item.get('key')} />
+          )}
           <li>
-            View page source, take a look how HTML is server rendered with
-            initial data.
-          </li>
-          <li>Open console, take a look how actions are logged from <code>src/client/dispatcher.js</code>.</li>
-          <li>
-            Development mode (<code>gulp</code>), try edit styles or
-            react component to see <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">
-            live-editing</a> without app reload.
+            {msg('toCheck.isomorphicPage')} <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>.
           </li>
           <li>
-            Production mode (<code>gulp -p</code>), to check built app performance and size.
+            {msg('toCheck.andMuchMore')}
           </li>
-          <li>
-            Isomorphic <Link to="/this-is-not-the-web-page-you-are-looking-for">
-            404</Link> page.
-          </li>
-          <li>Undo button. (temporally disabled)</li>
-          <li>Edit todo: Click to edit, esc to cancel, enter to save.</li>
-          <li>
-            Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
-            video</a>? Try <b>ctrl+shift+s</b> to save app state, and <b>
-            ctrl+shift+l</b> to load.
-          </li>
-          <li>
-              <a href="http://facebook.github.io/react/docs/advanced-performance.html">
-              Advanced performance</a> with PureComponent. Always use PureComponent
-              and everything will be faster and simpler.
-            </li>
-          <li>... and much more.</li>
         </ul>
       </div>
     );

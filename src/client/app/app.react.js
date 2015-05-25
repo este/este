@@ -4,6 +4,8 @@ import Menu from './menu.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
 import {RouteHandler} from 'react-router';
+import {FormattedHTMLMessage} from 'react-intl';
+import {msg} from '../intl/store';
 
 // Load stores, but don't import anything. Read from global app state instead.
 // Remember: Anytime you create a new store, you have to load it here.
@@ -94,7 +96,7 @@ class App extends Component {
         <RouteHandler {...this.state} />
         <footer>
           <p>
-            made by <a href="https://twitter.com/steida">steida</a>
+            <FormattedHTMLMessage message={msg('app.madeByHtml')} />
           </p>
         </footer>
       </div>
