@@ -44,7 +44,7 @@ export default class State extends EventEmitter {
     this._state = state;
     if (!this.isNewStateSameAsRedo(state)) 
       this._states.length = this._statePos;    
-    this._states.push(state)
+    this._states.push(state);
     this._statePos++;
     this.emit('change', this._state, previousState, path);
   }
@@ -75,17 +75,17 @@ export default class State extends EventEmitter {
   }
 
   undo() {
-    this.gotostep(this._statePos - 1)    
+    this.gotostep(this._statePos - 1);    
   }
 
   redo() {
-    this.gotostep(this._statePos + 1)    
+    this.gotostep(this._statePos + 1);    
   }
 
   gotostep(pos) {
     this._statePos = pos;
-    this._state = this._states[pos - 1]
-    this.emit('change', this._state)   
+    this._state = this._states[pos - 1];
+    this.emit('change', this._state);   
   }
 
   cursor(path: Array<string>) {
