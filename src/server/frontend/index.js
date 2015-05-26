@@ -15,7 +15,12 @@ app.use('/assets', express.static('assets'));
 
 app.get('*', (req, res, next) => {
   const acceptsLanguages = req.acceptsLanguages(config.appLocales);
-  render(req, res, acceptsLanguages || config.defaultLocale)
+  const userState = {
+    i18n: {
+      locales: acceptsLanguages || config.defaultLocale
+    }
+  };
+  render(req, res, userState)
     .catch(next);
 });
 
