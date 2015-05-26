@@ -1,13 +1,13 @@
-import config from './config';
+import config from '../config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
-import initialState from './initialstate';
+import initialState from '../initialstate';
 import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
-import routes from '../client/routes';
-import {state} from '../client/state';
+import routes from '../../client/routes';
+import {state} from '../../client/state';
 
 export default function render(req, res, preloadedState) {
   const url = req.originalUrl;
