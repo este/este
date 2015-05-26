@@ -1,3 +1,5 @@
+<<<<<<< HEAD:src/server/frontend/render.js
+<<<<<<< HEAD
 import config from './config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
@@ -6,8 +8,35 @@ import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
+<<<<<<< HEAD:src/server/render.js
 import routes from '../client/routes';
 import {state} from '../client/state';
+=======
+import config from '../config';
+import initialState from '../initialstate';
+=======
+import config from '../config';
+import DocumentTitle from 'react-document-title';
+import Html from './html.react';
+import initialState from '../initialstate';
+import Promise from 'bluebird';
+import React from 'react';
+import Router from 'react-router';
+>>>>>>> Alphabetical order FTW
+import routes from '../../client/routes';
+import {state} from '../../client/state';
+>>>>>>> Initial commit -> first part of refactor done:src/server/frontend/render.js
+=======
+import config from '../config';
+import DocumentTitle from 'react-document-title';
+import Html from './html.react';
+import initialState from '../initialstate';
+import Promise from 'bluebird';
+import React from 'react';
+import Router from 'react-router';
+import routes from '../../client/routes';
+import {state} from '../../client/state';
+>>>>>>> 94050d42c1788e6a397259b5acae75fcd84194fc:src/server/frontend/render.js
 
 export default function render(req, res, preloadedState) {
   const url = req.originalUrl;
