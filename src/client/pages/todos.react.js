@@ -1,4 +1,4 @@
-import Buttons from './buttons.react';
+import Buttons from '../todos/buttons.react';
 import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import List from '../todos/list.react';
