@@ -1,25 +1,20 @@
+import config from './config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
+import initialState from './initialstate';
+import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
-import config from './config';
-import initialState from './initialstate';
 import routes from '../client/routes';
 import {state} from '../client/state';
 
-export default function render(req, res, locale) {
+export default function render(req, res, preloadedState) {
   const url = req.originalUrl;
-  return loadData(url, locale)
-    .then((appState) => renderPage(res, appState, url));
-}
-
-function loadData(url, locale) {
-  // TODO: Preload and merge user specific state.
-  const appState = initialState;
-  return new Promise((resolve, reject) => {
-    resolve(appState);
-  });
+  const baseState = Immutable.fromJS(initialState);
+  const userState = Immutable.fromJS(preloadedState);
+  const appState = baseState.mergeDeep(userState);
+  return renderPage(res, appState, url);
 }
 
 // TODO: Refactor.
