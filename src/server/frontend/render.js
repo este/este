@@ -1,28 +1,47 @@
-import config from '../config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
-import initialState from '../initialstate';
 import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
+import config from '../config';
+import initialState from '../initialstate';
 import routes from '../../client/routes';
 import {state} from '../../client/state';
 
-export default function render(req, res, preloadedState) {
-  const url = req.originalUrl;
-  const baseState = Immutable.fromJS(initialState);
-  const userState = Immutable.fromJS(preloadedState);
-  const appState = baseState.mergeDeep(userState);
-  return renderPage(res, appState, url);
+export default function render(req, res) {
+  return loadUserState(req)
+    .then((appState) => {
+      return renderPage(req, res, appState);
+    });
 }
 
-// TODO: Refactor.
-function renderPage(res, appState, url) {
+// Example how initialState, which is the same for all users, is enriched with
+// user state. With state-less Flux, we don't need instances.
+function loadUserState(req) {
   return new Promise((resolve, reject) => {
+
+    const acceptsLanguages = req.acceptsLanguages(config.appLocales);
+    const userState = {
+      i18n: {
+        locales: acceptsLanguages || config.defaultLocale
+      }
+    };
+    const appState = Immutable.fromJS(initialState).mergeDeep(userState).toJS();
+
+    // Simulate async loading from DB.
+    setTimeout(() => {
+      resolve(appState);
+    }, 20);
+  });
+}
+
+function renderPage(req, res, appState) {
+  return new Promise((resolve, reject) => {
+
     const router = Router.create({
       routes,
-      location: url,
+      location: req.originalUrl,
       onError: reject,
       onAbort: (abortReason) => {
         // Some requireAuth higher order component requested redirect.
@@ -36,15 +55,22 @@ function renderPage(res, appState, url) {
         reject(abortReason);
       }
     });
+
     router.run((Handler, routerState) => {
-      state.load(appState);
-      const html = getPageHtml(Handler, appState);
+      const html = preloadAppStateThenRenderHtml(Handler, appState);
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
       resolve();
     });
+
   });
+}
+
+function preloadAppStateThenRenderHtml(Handler, appState) {
+  // Load app state for server rendering.
+  state.load(appState);
+  return getPageHtml(Handler, appState);
 }
 
 function getPageHtml(Handler, appState) {
@@ -53,6 +79,7 @@ function getPageHtml(Handler, appState) {
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js';
 
+  // Serialize app state for client.
   let scriptHtml = `
     <script>
       (function() {
