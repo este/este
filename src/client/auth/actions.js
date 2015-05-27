@@ -41,12 +41,11 @@ function validateCredentials(fields) {
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          resolve(fields);
-        } else {
-          reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
-        }
+      if (xhr.readyState !== 4) return;
+      if (xhr.status === 200) {
+        resolve(fields);
+      } else {
+        reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
       }
     };
 
