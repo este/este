@@ -43,11 +43,10 @@ function validateCredentials(fields) {
     // @TODO show how to handle different password/username server errors
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
-      if (xhr.status === 200) {
+      if (xhr.status === 200)
         resolve(fields);
-      } else {
+      else
         reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
-      }
     };
 
     xhr.send(JSON.stringify(fields));
