@@ -33,14 +33,24 @@ function validateForm(fields) {
 }
 
 function validateCredentials(fields) {
-  // Simulate lengthy async action.
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (fields.password === 'pass1')
-        resolve(fields);
-      else
-        reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
-    }, 1000);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/api/v1/auth/login', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(fields);
+        } else {
+          reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
+        }
+      }
+    };
+
+    xhr.send(JSON.stringify(fields));
   });
 }
 
