@@ -1,7 +1,5 @@
-// import config from './config';
 import messages from '../client/messages';
 
-// TODO: Language switching.
 const initialLocale = 'en';
 
 export default {
