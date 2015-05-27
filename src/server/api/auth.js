@@ -9,11 +9,10 @@ router.route('/login')
 
     // Simulate DB checks here
     setTimeout(() => {
-      if (password !== 'pass1') {
+      if (password !== 'pass1')
         res.status(400).end();
-      } else {
+      else
         res.status(200).end();
-      }
     });
 
   });
