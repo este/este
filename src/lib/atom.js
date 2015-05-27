@@ -17,4 +17,8 @@ export default class Atom extends EventEmitter {
   get() {
     return this._value
   }
+
+  toString() {return "Atom(" + this._value + ")";}
+  toSource() {return this.toString();}
+  inspect() {return this.toString();}
 }

@@ -12,4 +12,8 @@ export default class Cursor {
   get() {
     return this._ref.get().getIn(this._path)
   }
+
+  toString() {return "Cursor(" + this._ref + ", " + this._path + ")";}
+  toSource() {return this.toString();}
+  inspect() {return this.toString();}
 }
