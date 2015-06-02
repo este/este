@@ -13,7 +13,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "autoprefixer-loader": "^1.2.0",
+    "autoprefixer-loader": "^2.0.0",
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
     "babel-eslint": "^3.0.1",
