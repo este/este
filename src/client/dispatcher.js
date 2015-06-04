@@ -31,17 +31,15 @@ export function isPending(actionName) {
 
 function dispatchAsync(action: Function, promise: Object, options: ?Object) {
   const actionName = action.toString();
-  // Pending property is defined lazily.
+
   if (!action.hasOwnProperty('pending'))
     Object.defineProperty(action, 'pending', {
       get: () => isPending(actionName)
     });
 
-  if (isPending(actionName))
-    if (isDev) console.warn(`Warning: Action ${actionName} is already pending.`);
-
   if (isDev) console.log(`pending ${actionName}`);
   setPending(actionName, true);
+
   return promise.then(
     (data) => {
       setPending(actionName, false);
