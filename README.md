@@ -7,6 +7,8 @@
 
 > The most complete React/Flux dev stack and starter kit for isomorphic functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
+> __UPDATE__: I'm in San Francisco right now. Feel free to ask for Este.js training or consulting. [Write me](mailto:daniel@steigerwald.cz).
+
 > Forget about PHP/Ruby/Angular/Backbone whatever client or server only framework. Also, we don't need yet another Flux library, vanilla Flux is good enough. This dev stack is web dev panacea, at least for me :-)
 
 ## Techniques
