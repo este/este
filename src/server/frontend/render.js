@@ -9,31 +9,9 @@ import initialState from '../initialstate';
 import routes from '../../client/routes';
 import {state} from '../../client/state';
 
-export default function render(req, res) {
-  return loadUserState(req)
-    .then((appState) => {
-      return renderPage(req, res, appState);
-    });
-}
-
-// Example how initialState, which is the same for all users, is enriched with
-// user state. With state-less Flux, we don't need instances.
-function loadUserState(req) {
-  return new Promise((resolve, reject) => {
-
-    const acceptsLanguages = req.acceptsLanguages(config.appLocales);
-    const userState = {
-      i18n: {
-        locales: acceptsLanguages || config.defaultLocale
-      }
-    };
-    const appState = Immutable.fromJS(initialState).mergeDeep(userState).toJS();
-
-    // Simulate async loading from DB.
-    setTimeout(() => {
-      resolve(appState);
-    }, 20);
-  });
+export default function render(req, res, userState = {}) {
+  const appState = Immutable.fromJS(initialState).mergeDeep(userState).toJS();
+  return renderPage(req, res, appState);
 }
 
 function renderPage(req, res, appState) {
