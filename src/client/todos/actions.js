@@ -40,7 +40,7 @@ export function saveTitle(id, title) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({id, title});
-    }, 300);
+    }, 500);
   });
   return dispatch(saveTitle, promise);
 }
