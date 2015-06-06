@@ -4,6 +4,9 @@ import Editable from '../components/editable.react';
 import React from 'react';
 import immutable from 'immutable';
 
+// Leverage webpack require goodness.
+require('./todo.styl');
+
 class Todo extends Component {
 
   render() {

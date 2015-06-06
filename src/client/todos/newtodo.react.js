@@ -4,6 +4,8 @@ import React from 'react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
+require('./newtodo.styl');
+
 class NewTodo extends Component {
 
   addTodoOnEnter(e) {

@@ -8,9 +8,6 @@ import ToCheck from './tocheck.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-// Leverage webpack require goodness.
-require('./todos.styl');
-
 class Todos extends Component {
 
   render() {

@@ -4,6 +4,8 @@ import React from 'react';
 // import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
+require('./buttons.styl');
+
 class TodoButtons extends Component {
 
   render() {
