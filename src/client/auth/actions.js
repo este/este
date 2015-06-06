@@ -35,12 +35,12 @@ function validateForm(fields) {
 function validateCredentials(fields) {
   return new Promise((resolve, reject) => {
 
+    // For real usage, consider matthew-andrews/isomorphic-fetch.
     var xhr = new XMLHttpRequest();
-
     xhr.open('POST', '/api/v1/auth/login', true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
-    // @TODO show how to handle different password/username server errors
+    // TODO: Show how to handle different password/username server errors.
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
       if (xhr.status === 200)
