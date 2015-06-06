@@ -39,10 +39,10 @@ export function msgs(path, values = null, ...sliceParams): List<Map> {
 
   const messageList = !sliceParams ? messages : List.prototype.slice.apply(messages, sliceParams);
 
-  return !values ? messageList : messageList.map((item) => Map({
-      key: item.get('key'),
+  return !values ? messageList : messageList.map((item) =>
+    item.merge(Map({
       txt: getCachedInstanceOf(item.get('txt')).format(values)
-    }));
+    })));
 }
 
 export function relativeDateFormat(date, options?): string {
