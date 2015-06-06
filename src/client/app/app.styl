@@ -15,8 +15,8 @@ body
   height 100%
 
 body {
-  font-family 'Segoe UI', 'Lucida Grande','Ubuntu','sans-serif'
   color #333
+  font-family 'Segoe UI', 'Lucida Grande','Ubuntu','sans-serif'
   font-size 16px
   line-height 1.5
 }
@@ -62,7 +62,7 @@ body {
     &[disabled]
       opacity .5
 
-    &:hover:not([disabled])
+    &:hover:not(&[disabled])
       background-color #346392
       text-shadow -1px 1px #27496d
 
@@ -70,8 +70,8 @@ body {
       background-color #27496d
       text-shadow -1px 1px #193047
 
+  button
   input
   textarea
-  button
     &:disabled
       opacity .5
