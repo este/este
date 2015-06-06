@@ -5,8 +5,7 @@ import exposeRouter from '../components/exposerouter.react';
 import immutable from 'immutable';
 import {focusInvalidField} from '../../lib/validation';
 import {msg} from '../intl/store';
-
-require('./login.styl');
+import './login.styl';
 
 class Login extends Component {
 
