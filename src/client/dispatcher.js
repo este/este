@@ -25,17 +25,8 @@ export function waitFor(ids: Array) {
   dispatcher.waitFor(ids);
 }
 
-export function isPending(actionName) {
-  return pendingActionsCursor().has(actionName);
-}
-
 function dispatchAsync(action: Function, promise: Object, options: ?Object) {
   const actionName = action.toString();
-
-  if (!action.hasOwnProperty('pending'))
-    Object.defineProperty(action, 'pending', {
-      get: () => isPending(actionName)
-    });
 
   if (isDev) console.log(`pending ${actionName}`);
   setPending(actionName, true);
@@ -54,15 +45,16 @@ function dispatchAsync(action: Function, promise: Object, options: ?Object) {
   );
 }
 
-function setPending(actionName: string, pending: boolean) {
-  pendingActionsCursor(pendingActions => pending
-    ? pendingActions.set(actionName, true)
-    : pendingActions.delete(actionName)
-  );
+function setPending(actionName, pending) {
+  pendingActionsCursor(pendingActions => {
+    return pending
+      ? pendingActions.set(actionName, true)
+      : pendingActions.delete(actionName);
+  });
 }
 
 function dispatchSync(action: Function, data: ?Object) {
-  // To log dispatched data, uncomment comment.
-  if (isDev) console.log(action.toString()); // , data
+  if (isDev) console.log(action.toString());
+  // if (isDev) console.log(action.toString(), data);
   dispatcher.dispatch({action, data});
 }

@@ -35,7 +35,7 @@ class Login extends Component {
     return (
       <div className="login">
         <form onSubmit={(e) => this.onFormSubmit(e)}>
-          <fieldset disabled={actions.login.pending}>
+          <fieldset disabled={this.props.pendingActions.of(actions.login)}>
             <legend>{msg('auth.form.legend')}</legend>
             <input
               autoFocus
@@ -55,7 +55,6 @@ class Login extends Component {
             <br />
             <button
               children={msg('auth.form.button.login')}
-              disabled={actions.login.pending}
               type="submit"
             />
             {/*
@@ -75,6 +74,7 @@ class Login extends Component {
 
 Login.propTypes = {
   auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
+  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   router: React.PropTypes.func
 };
 

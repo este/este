@@ -7,8 +7,8 @@ import {RouteHandler} from 'react-router';
 import {FormattedHTMLMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
-// Load stores, but don't import anything. Read from global app state instead.
-// Remember: Anytime you create a new store, you have to load it here.
+// Load stores, but don't import anything from them. Read from global app state.
+// Remember: Anytime you create a new store, you have to load module here.
 import '../app/store';
 import '../auth/store';
 import '../todos/store';
@@ -26,11 +26,14 @@ class App extends Component {
   }
 
   getState() {
+    const pendingActions = appState.pendingActionsCursor();
+    pendingActions.of = (action) => pendingActions.has(action.toString());
+
     return {
       app: appState.appCursor(),
       auth: appState.authCursor(),
       isLoggedIn: appState.userCursor().get('isLoggedIn'),
-      pendingActions: appState.pendingActionsCursor(),
+      pendingActions: pendingActions,
       todos: appState.todosCursor(),
       user: appState.userCursor()
     };

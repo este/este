@@ -2,6 +2,7 @@ import * as actions from './actions';
 import Component from '../components/component.react';
 import Editable from '../components/editable.react';
 import React from 'react';
+import TodoButtons from './todobottons.react';
 import immutable from 'immutable';
 
 // Leverage webpack require goodness.
@@ -16,27 +17,18 @@ class Todo extends Component {
       <li className="todo-item">
         <Editable
           defaultValue={todo.title}
-          disabled={actions.saveTitle.pending}
+          disabled={this.props.pendingSaveTitle}
           id={todo.id}
           isRequired
           maxLength={actions.MAX_TODO_TITLE_LENGTH}
           name="title"
           onSave={(title, hide) => actions.saveTitle(todo.id, title).then(hide)}
           onState={actions.onEditableState}
-          pendingActions={this.props.pendingActions}
           state={this.props.editable}
         >
           <label>{todo.title}</label>
         </Editable>
-        <span
-          /*
-            Note pattern, like input has value prop, element have children prop.
-            Use it only for primitive values like string or number.
-          */
-          children="x"
-          className="button"
-          onClick={() => actions.deleteTodo(todo)}
-        />
+        <TodoButtons todo={todo} />
       </li>
     );
   }
@@ -45,7 +37,7 @@ class Todo extends Component {
 
 Todo.propTypes = {
   editable: React.PropTypes.instanceOf(immutable.Map),
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+  pendingSaveTitle: React.PropTypes.bool.isRequired,
   todo: React.PropTypes.instanceOf(immutable.Record)
 };
 

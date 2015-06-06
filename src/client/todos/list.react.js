@@ -1,3 +1,4 @@
+import * as actions from './actions';
 import Component from '../components/component.react';
 import React from 'react';
 import Todo from './todo.react';
@@ -20,8 +21,7 @@ class List extends Component {
           <Todo
             editable={this.props.editables.get(todo.id)}
             key={todo.id}
-            /* TODO: Pass concrete pending action. */
-            pendingActions={this.props.pendingActions}
+            pendingSaveTitle={this.props.pendingActions.of(actions.saveTitle)}
             todo={todo}
           />
         )}
