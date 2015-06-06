@@ -5,8 +5,8 @@ import {Server} from 'http';
 const app = express();
 const server = Server(app);
 
-// TODO: Add API sub-app to demonstrate other use cases
-// app.use('/api/v1', require('./api'));
+// Load API
+app.use('/api/v1', require('./api'));
 
 // Load react-js frontend.
 app.use(require('./frontend'));
