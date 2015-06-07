@@ -1,9 +1,9 @@
+import './editable.styl';
 import Component from '../components/component.react';
 import React from 'react';
 import classnames from 'classnames';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
-import './editable.styl';
 
 /*
   This is super useful component for inline editation. Reactive app must be able

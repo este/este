@@ -1,9 +1,9 @@
+import './newtodo.styl';
 import * as actions from './actions';
 import Component from '../components/component.react';
 import React from 'react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
-import './newtodo.styl';
 
 class NewTodo extends Component {
 

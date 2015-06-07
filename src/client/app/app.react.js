@@ -1,10 +1,11 @@
+import './app.styl';
 import * as appState from '../state';
 import Component from '../components/component.react';
 import Menu from './menu.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
-import {RouteHandler} from 'react-router';
 import {FormattedHTMLMessage} from 'react-intl';
+import {RouteHandler} from 'react-router';
 import {msg} from '../intl/store';
 
 // Load stores, but don't import anything from them. Read from global app state.
@@ -13,9 +14,6 @@ import '../app/store';
 import '../auth/store';
 import '../todos/store';
 import '../user/store';
-
-// Leverage webpack require goodness for feature toggle based dead code removal.
-import './app.styl';
 
 class App extends Component {
 

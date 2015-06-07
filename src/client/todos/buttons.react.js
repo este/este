@@ -1,9 +1,9 @@
+// import {FormattedMessage} from 'react-intl';
+import './buttons.styl';
 import * as actions from '../todos/actions';
 import Component from '../components/component.react';
 import React from 'react';
-// import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
-import './buttons.styl';
 
 class TodoButtons extends Component {
 

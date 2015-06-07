@@ -1,3 +1,4 @@
+import './login.styl';
 import * as actions from './actions';
 import Component from '../components/component.react';
 import React from 'react';
@@ -5,7 +6,6 @@ import exposeRouter from '../components/exposerouter.react';
 import immutable from 'immutable';
 import {focusInvalidField} from '../../lib/validation';
 import {msg} from '../intl/store';
-import './login.styl';
 
 class Login extends Component {
 
