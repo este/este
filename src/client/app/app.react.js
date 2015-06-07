@@ -24,14 +24,11 @@ class App extends Component {
   }
 
   getState() {
-    const pendingActions = appState.pendingActionsCursor();
-    pendingActions.of = (action) => pendingActions.has(action.toString());
-
     return {
       app: appState.appCursor(),
       auth: appState.authCursor(),
       isLoggedIn: appState.userCursor().get('isLoggedIn'),
-      pendingActions: pendingActions,
+      pendingActions: appState.pendingActionsCursor(),
       todos: appState.todosCursor(),
       user: appState.userCursor()
     };

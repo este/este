@@ -34,7 +34,7 @@ class Login extends Component {
     return (
       <div className="login">
         <form onSubmit={(e) => this.onFormSubmit(e)}>
-          <fieldset disabled={this.props.pendingActions.of(actions.login)}>
+          <fieldset disabled={this.props.pendingActions.has(actions.login.toString())}>
             <legend>{msg('auth.form.legend')}</legend>
             <input
               autoFocus

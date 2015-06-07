@@ -21,7 +21,7 @@ class List extends Component {
           <Todo
             editable={this.props.editables.get(todo.id)}
             key={todo.id}
-            pendingSaveTitle={this.props.pendingActions.of(actions.saveTitle)}
+            pendingSaveTitle={this.props.pendingActions.has(actions.saveTitle.toString())}
             todo={todo}
           />
         )}
