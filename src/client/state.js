@@ -1,4 +1,4 @@
-import State from '../lib/state';
+import State from './lib/state';
 import reviveAuth from './auth/revive';
 import reviveTodos from './todos/revive';
 import reviveUser from './user/revive';

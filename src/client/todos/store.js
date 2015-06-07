@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import Todo from './todo';
 import {Range} from 'immutable';
-import {getRandomString} from '../../lib/getrandomstring';
+import {getRandomString} from '../lib/getrandomstring';
 import {register} from '../dispatcher';
 import {todosCursor} from '../state';
 

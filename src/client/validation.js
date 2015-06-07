@@ -1,4 +1,4 @@
-import Validation from '../lib/validation';
+import Validation from './lib/validation';
 import {msg} from './intl/store';
 
 class AppValidation extends Validation {
