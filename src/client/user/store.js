@@ -12,7 +12,7 @@ export const dispatchToken = register(({action, data}) => {
         const userData = data;
         return user
           .set('data', new User(userData))
-          .setIn(['isLoggedIn'], true);
+          .set('isLoggedIn', true);
       });
       break;
   }
