@@ -1,10 +1,16 @@
 import compression from 'compression';
+import config from '../config';
+import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
 // import favicon from 'serve-favicon';
-import config from '../config';
 import render from './render';
 
 const app = express();
+
+// Add Este.js headers for React related routes only
+if (!config.isProduction) {
+  app.use(esteHeaders());
+}
 
 app.use(compression());
 // TODO: Add favicon.
