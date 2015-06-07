@@ -2,7 +2,7 @@ import * as actions from './actions';
 import Component from '../components/component.react';
 import Editable from '../components/editable.react';
 import React from 'react';
-import TodoButtons from './todobottons.react';
+import TodoButtons from './todobuttons.react';
 import immutable from 'immutable';
 
 // Leverage webpack require goodness.

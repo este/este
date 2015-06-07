@@ -7,10 +7,12 @@ class TodoButtons extends Component {
 
   render() {
     return (
-      <span
-        className="button"
-        onClick={() => actions.deleteTodo(this.props.todo)}
-      >x</span>
+      <div className="todo-item-buttons">
+        <span
+          className="button"
+          onClick={() => actions.deleteTodo(this.props.todo)}
+        >x</span>
+      </div>
     );
   }
 
