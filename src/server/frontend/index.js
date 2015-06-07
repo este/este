@@ -22,6 +22,11 @@ app.use(function(req, res, next) {
   req.userState = {
     i18n: {
       locales: acceptsLanguages || config.defaultLocale
+    },
+    todos: {
+      list: [
+        {id: 2, title: 'relax'}
+      ]
     }
   };
 
