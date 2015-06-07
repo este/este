@@ -31,6 +31,7 @@ export default {
   },
   user: {
     // User can be authenticated on server, and then isLoggedIn must be true.
-    isLoggedIn: false
+    isLoggedIn: false,
+    data: null
   }
 };

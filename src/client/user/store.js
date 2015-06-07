@@ -1,6 +1,6 @@
-// import * as actions from './actions';
 import * as authActions from '../auth/actions';
 import {register} from '../dispatcher';
+import User from './user';
 import {userCursor} from '../state';
 
 export const dispatchToken = register(({action, data}) => {
@@ -9,7 +9,10 @@ export const dispatchToken = register(({action, data}) => {
     // See how user store can handle auth action.
     case authActions.login:
       userCursor(user => {
-        return user.setIn(['isLoggedIn'], true);
+        const userData = data;
+        return user
+          .set('data', new User(userData))
+          .setIn(['isLoggedIn'], true);
       });
       break;
   }

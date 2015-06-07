@@ -9,7 +9,7 @@ import {msg} from '../intl/store';
 class Me extends Component {
 
   render() {
-    const email = this.props.auth.get('data').email;
+    const email = this.props.user.get('data').email;
 
     return (
       <DocumentTitle title={msg('me.title')}>
@@ -26,7 +26,7 @@ class Me extends Component {
 }
 
 Me.propTypes = {
-  auth: React.PropTypes.instanceOf(immutable.Map).isRequired
+  user: React.PropTypes.instanceOf(immutable.Map).isRequired
 };
 
 export default requireAuth(Me);
