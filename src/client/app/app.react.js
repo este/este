@@ -15,7 +15,7 @@ import '../todos/store';
 import '../user/store';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
-require('./app.styl');
+import './app.styl';
 
 class App extends Component {
 

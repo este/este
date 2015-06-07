@@ -3,8 +3,7 @@ import Component from '../components/component.react';
 import React from 'react';
 // import {FormattedMessage} from 'react-intl';
 import {msg} from '../intl/store';
-
-require('./buttons.styl');
+import './buttons.styl';
 
 class TodoButtons extends Component {
 

@@ -3,8 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
-
-require('./editable.styl');
+import './editable.styl';
 
 /*
   This is super useful component for inline editation. Reactive app must be able

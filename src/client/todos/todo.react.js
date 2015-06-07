@@ -6,7 +6,7 @@ import TodoButtons from './todobuttons.react';
 import immutable from 'immutable';
 
 // Leverage webpack require goodness.
-require('./todo.styl');
+import './todo.styl';
 
 class Todo extends Component {
 
