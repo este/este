@@ -10,17 +10,15 @@ export const dispatchToken = register(({action, data}) => {
   switch (action) {
     case actions.addHundredTodos:
       todosCursor(todos => {
-        return todos.update('list', list => {
-          return list.withMutations(list => {
-            Range(0, 100).forEach(i => {
-              const id = getRandomString();
-              list.push(new Todo({
-                id: id,
-                title: `Item #${id}`
-              }));
-            });
+        return todos.update('list', list => list.withMutations(list => {
+          Range(0, 100).forEach(i => {
+            const id = getRandomString();
+            list.push(new Todo({
+              id,
+              title: `Item #${id}`
+            }));
           });
-        });
+        }));
       });
       break;
 
