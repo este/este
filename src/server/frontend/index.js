@@ -8,9 +8,8 @@ import render from './render';
 const app = express();
 
 // Add Este.js headers for React related routes only
-if (!config.isProduction) {
+if (!config.isProduction)
   app.use(esteHeaders());
-}
 
 app.use(compression());
 // TODO: Add favicon.
