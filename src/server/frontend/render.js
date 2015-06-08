@@ -8,9 +8,10 @@ import config from '../config';
 import initialState from '../initialstate';
 import routes from '../../client/routes';
 import {state} from '../../client/state';
+import stateMerger from '../lib/merger';
 
 export default function render(req, res, userState = {}) {
-  const appState = Immutable.fromJS(initialState).mergeDeep(userState).toJS();
+  const appState = Immutable.fromJS(initialState).mergeWith(stateMerger, userState).toJS();
   return renderPage(req, res, appState);
 }
 

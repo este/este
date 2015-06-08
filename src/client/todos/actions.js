@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import setToString from '../../lib/settostring';
+import setToString from '../lib/settostring';
 import {dispatch} from '../dispatcher';
 
 export const MAX_TODO_TITLE_LENGTH = 42;
