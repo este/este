@@ -13,8 +13,8 @@ class ToCheck extends Component {
           {msg('toCheck.header')}
         </h3>
         <ul>
-          {msgs('toCheck.itemListHtml').map(
-            (item) => <ToCheckItem item={item} key={item.get('key')} />
+          {msgs('toCheck.itemListHtml').map((item) =>
+            <ToCheckItem item={item} key={item.get('key')} />
           )}
           <li>
             {msg('toCheck.isomorphicPage')} <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>.
