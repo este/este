@@ -31,7 +31,6 @@ describe('merger', () => {
     expect(state.todos.list).to.not.be.empty;
     expect(state.todos.list).to.be.an('array');
     expect(state.todos.list).to.have.length(2);
-    //expect(state.todos.list).to.equal(initialState.todos.list);
     expect(state.todos.list[0]).to.deep.equal(initialState.todos.list[0]);
     expect(state.todos.list[1]).to.deep.equal(userState.todos.list[0]);
   });
