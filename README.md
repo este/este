@@ -28,7 +28,6 @@
 - Easy undo/redo and app state load/save.
 - [jest](https://facebook.github.io/jest) unit testing.
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
-- [ftlabs/fastclick](https://github.com/ftlabs/fastclick) for fast click on touch devices
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Google Analytics preconfigured.
 

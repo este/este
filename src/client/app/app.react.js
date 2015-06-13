@@ -8,9 +8,9 @@ import {FormattedHTMLMessage} from 'react-intl';
 import {RouteHandler} from 'react-router';
 import {msg} from '../intl/store';
 
-// Load stores, but don't import anything from them. Read from global app state.
-// Remember: Anytime you create a new store, you have to load module here.
-import '../app/store';
+// Remember, anytime you create a new store, you have to import it here.
+// Why? Because stores are state-less reducers and mappers, therefore not
+// necessarily required by any another module.
 import '../auth/store';
 import '../todos/store';
 import '../user/store';
@@ -19,7 +19,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    // Set initial state.
     this.state = this.getState();
   }
 
@@ -36,12 +35,6 @@ class App extends Component {
 
   // This method is not called on the server.
   componentDidMount() {
-    // fastclick must be required here because there is no DOM in Node.js.
-    // Remember, mocking DOM in Node.js is an anti-pattern, because it can
-    // confuse isomorphic libraries. TODO: Wait for iOS fix, then remove it.
-    // http://developer.telerik.com/featured/300-ms-click-delay-ios-8/
-    require('fastclick').attach(document.body);
-
     document.addEventListener('keypress', this.onDocumentKeypress);
 
     appState.state.on('change', () => {
@@ -51,11 +44,16 @@ class App extends Component {
       });
     });
 
-    // This is for client based auths like Firebase. Server redirects unauth
-    // user to login path defined in requireAuth. If this.state.isLoggedIn
-    // equals true and next path is defined, redirect user to original page.
-    // TODO: All example with localStorage persisted auth.
     this.maybeRedirectAfterClientSideAuth();
+  }
+
+  // For Firebase and similar client side only auths. Flow: Server automatically
+  // redirects unauth users to path defined in requireAuth component. Then user
+  // is authenticated in browser, then redirected to originally requested path.
+  maybeRedirectAfterClientSideAuth() {
+    const nextPath = this.props.router.getCurrentQuery().nextPath;
+    if (nextPath && this.state.isLoggedIn)
+      this.props.router.replaceWith(nextPath);
   }
 
   onDocumentKeypress(e) {
@@ -79,12 +77,6 @@ class App extends Component {
         state.load(newState);
         break;
     }
-  }
-
-  maybeRedirectAfterClientSideAuth() {
-    const nextPath = this.props.router.getCurrentQuery().nextPath;
-    if (nextPath && this.state.isLoggedIn)
-      this.props.router.replaceWith(nextPath);
   }
 
   render() {
