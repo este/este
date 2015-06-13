@@ -34,7 +34,6 @@ class Todos extends Component {
 }
 
 Todos.propTypes = {
-  app: React.PropTypes.instanceOf(immutable.Map).isRequired,
   pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   todos: React.PropTypes.instanceOf(immutable.Map).isRequired
 };
