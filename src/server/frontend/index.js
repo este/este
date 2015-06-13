@@ -47,7 +47,7 @@ app.get('*', (req, res, next) => {
 });
 
 app.on('mount', () => {
-  console.log('Este.js app is now available at path %s', app.mountpath);
+  console.log('App is available at %s', app.mountpath);
 });
 
 export default app;
