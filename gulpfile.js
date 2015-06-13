@@ -5,16 +5,12 @@
 var bg = require('gulp-bg');
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
-var harmonize = require('harmonize');
-var jest = require('jest-cli');
 var makeWebpackConfig = require('./webpack/makeconfig');
 var runSequence = require('run-sequence');
 var webpackBuild = require('./webpack/build');
 var webpackDevServer = require('./webpack/devserver');
+var karma = require('karma').server;
 var yargs = require('yargs');
-
-// Enables node's --harmony flag programmatically for jest.
-harmonize();
 
 var args = yargs
   .alias('p', 'production')
@@ -40,27 +36,17 @@ gulp.task('eslint', function() {
     .pipe(eslint.failOnError());
 });
 
-gulp.task('jest', function(done) {
-  var rootDir = './src';
-  jest.runCLI({config: {
-    'rootDir': rootDir,
-    'scriptPreprocessor': '../node_modules/babel-jest',
-    'testFileExtensions': ['es6', 'js'],
-    'moduleFileExtensions': ['js', 'json', 'es6']
-  }}, rootDir, function(success) {
-    /* eslint no-process-exit:0 */
-    done(success ? null : 'jest failed');
-    process.on('exit', function() {
-      process.exit(success ? 0 : 1);
-    });
-  });
+gulp.task('karma', function(done) {
+  karma.start({
+    configFile: require('path').join(__dirname, 'karma.conf.js')
+  }, done);
 });
 
 gulp.task('test', function(done) {
   // Run test tasks serially, because it doesn't make sense to build when tests
   // are not passing, and it doesn't make sense to run tests, if lint has failed.
   // Gulp deps aren't helpful, because we want to run tasks without deps as well.
-  runSequence('eslint', 'jest', 'build-webpack-production', done);
+  runSequence('eslint', 'karma', 'build-webpack-production', done);
 });
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'));

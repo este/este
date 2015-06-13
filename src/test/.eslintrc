@@ -1,0 +1,12 @@
+{
+  "env": {
+    "node": true
+  },
+
+  "rules": {
+    "strict": [2, "never"], // Not sure about it.
+    "no-console": true,
+    "no-unused-expressions": false // https://jslinterrors.com/expected-an-assignment-or-function-call
+  }
+
+}
