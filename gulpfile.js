@@ -18,6 +18,7 @@ var args = yargs
 
 gulp.task('env', function() {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
+  process.env.CONTINUOUS_INTEGRATION = !!process.env.CIRCLECI
 });
 
 gulp.task('build-webpack-production', webpackBuild(makeWebpackConfig(false)));

@@ -6,7 +6,7 @@ module.exports = function (config) {
     basePath: '',
     singleRun: process.env.CONTINUOUS_INTEGRATION ? false : true,
     autoWatch: process.env.CONTINUOUS_INTEGRATION ? true : false,
-    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome'],
+    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'PhantomJS' : 'Chrome'],
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai'],
     basePath: '',
