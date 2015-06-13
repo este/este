@@ -20,7 +20,7 @@ app.use('/assets', express.static('assets'));
 
 // Example how initialState, which is the same for all users, is enriched with
 // user state. With state-less Flux, we don't need instances.
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
 
   const acceptsLanguages = req.acceptsLanguages(config.appLocales);
 
