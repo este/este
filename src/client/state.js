@@ -7,8 +7,6 @@ const initialState = process.env.IS_BROWSER
   ? window._appState
   : require('../server/initialstate');
 
-// Custom reviver example, check how to convert JSON to custom record types.
-// http://facebook.github.io/immutable-js/docs/#/fromJS
 export const state = new State(initialState, function(key, value) {
   switch (key) {
     case 'auth': return reviveAuth(value);
@@ -17,7 +15,6 @@ export const state = new State(initialState, function(key, value) {
   }
 });
 
-export const appCursor = state.cursor(['app']);
 export const authCursor = state.cursor(['auth']);
 export const i18nCursor = state.cursor(['i18n']);
 export const pendingActionsCursor = state.cursor(['pendingActions']);

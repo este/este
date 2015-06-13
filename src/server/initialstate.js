@@ -4,7 +4,6 @@ const initialLocale = 'en';
 
 export default {
   // Each key represents one app feature/store.
-  app: {},
   auth: {
     data: null,
     form: null
