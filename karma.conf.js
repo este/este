@@ -6,7 +6,7 @@ module.exports = function (config) {
     basePath: '',
     singleRun: true,
     autoWatch: false,
-    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'PhantomJS' : 'Chrome'],
+    browsers: [process.env.CONTINUOUS_INTEGRATION ? 'PhantomJS2' : 'Chrome'],
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai'],
     basePath: '',
@@ -40,7 +40,8 @@ module.exports = function (config) {
       dir: 'coverage/'
     },
     exclude: ['./node_modules'],
-    logLevel: process.env.CONTINUOUS_INTEGRATION ? config.LOG_WARN : config.LOG_WARN
+    port: 9876,
+    logLevel: process.env.CONTINUOUS_INTEGRATION ? config.LOG_WARN : config.LOG_INFO
   });
 
 };

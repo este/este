@@ -46,7 +46,6 @@ gulp.task('test', function(done) {
   // Run test tasks serially, because it doesn't make sense to build when tests
   // are not passing, and it doesn't make sense to run tests, if lint has failed.
   // Gulp deps aren't helpful, because we want to run tasks without deps as well.
-  process.env.CONTINUOUS_INTEGRATION = !!process.env.CIRCLECI;
   runSequence('eslint', 'karma', 'build-webpack-production', done);
 });
 
