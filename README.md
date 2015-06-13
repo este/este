@@ -26,7 +26,7 @@
 - [React](http://facebook.github.io/react/) with [Flux](https://facebook.github.io/flux/) with [immutable](http://facebook.github.io/immutable-js) global app state like Om.
 - Vanilla Flux, we don't need over abstracted frameworks.
 - Easy undo/redo and app state load/save.
-- [jest](https://facebook.github.io/jest) unit testing.
+- [Karma](http://karma-runner.github.io/) as the test runner, [mocha](http://mochajs.org/) as test framework and [Chai](http://chaijs.com/) as BDD / TDD assertion library.
 - Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Google Analytics preconfigured.

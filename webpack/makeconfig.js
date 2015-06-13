@@ -4,8 +4,11 @@
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var NotifyPlugin = require('./notifyplugin');
+var constants = require('./constants');
 var path = require('path');
 var webpack = require('webpack');
+
+var devtools = process.env.CONTINUOUS_INTEGRATION ? 'inline-source-map' : 'eval-source-map';
 
 var loaders = {
   'css': '',
@@ -33,14 +36,14 @@ module.exports = function(isDevelopment) {
   var config = {
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment ? 'eval-source-map' : '',
+    devtool: isDevelopment ? devtools : '',
     entry: {
       app: isDevelopment ? [
         'webpack-dev-server/client?http://localhost:8888',
         // Why only-dev-server instead of dev-server:
         // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
         'webpack/hot/only-dev-server',
-        './src/client/main.js'
+        path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
         './src/client/main.js'
       ],
@@ -51,13 +54,13 @@ module.exports = function(isDevelopment) {
         // Why only-dev-server instead of dev-server:
         // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
         'webpack/hot/only-dev-server',
-        './node_modules/intl/Intl.js',
-        './node_modules/intl/locale-data/jsonp/en.js',
-        './src/client/main.js'
+        path.join(constants.NODE_MODULES_DIR, 'intl/Intl.js'),
+        path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
+        path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
-        './node_modules/intl/Intl.js',
-        './node_modules/intl/locale-data/jsonp/en.js',
-        './src/client/main.js'
+        path.join(constants.NODE_MODULES_DIR, 'intl/Intl.js'),
+        path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
+        path.join(constants.SRC_DIR, 'client/main.js')
       ]
     },
     module: {
@@ -75,12 +78,14 @@ module.exports = function(isDevelopment) {
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
-      path: path.join(__dirname, '/build/'),
+      path: constants.BUILD_DIR,
       filename: '[name].js',
+      chunkFilename: '[name]-[chunkhash].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
-      path: 'build/',
-      filename: '[name].js'
+      path: constants.DIST_DIR,
+      filename: '[name]-[chunkhash].js',
+      chunkFilename: '[name]-[chunkhash].js'
     },
     plugins: (function() {
       var plugins = [
@@ -117,7 +122,12 @@ module.exports = function(isDevelopment) {
       return plugins;
     })(),
     resolve: {
-      extensions: ['', '.js', '.json']
+      extensions: ['', '.js', '.json'],
+      modulesDirectories: ['src', 'node_modules'],
+      root: constants.ABSOLUTE_BASE,
+      alias: {
+        'react$': require.resolve(path.join(constants.NODE_MODULES_DIR, 'react'))
+      }
     }
   };
 

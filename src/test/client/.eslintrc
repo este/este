@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    // Because webpack handles it.
+    "process": true,
+    "require": true
+  },
+  "rules": {
+    "strict": [2, "never"] // Not sure about it.
+  }
+}
