@@ -1,13 +1,12 @@
 import './app.styl';
-import * as appState from '../state';
+import * as state from '../state';
 import Component from '../components/component.react';
 import Footer from './footer.react';
 import Menu from './menu.react';
 import React from 'react';
-import exposeRouter from '../components/exposerouter.react';
 import {RouteHandler} from 'react-router';
 
-// Remmeber, any time you add a new store, import it here.
+// Remember to import all app stores here.
 import '../auth/store';
 import '../todos/store';
 import '../user/store';
@@ -21,58 +20,24 @@ class App extends Component {
 
   getState() {
     return {
-      app: appState.appCursor(),
-      auth: appState.authCursor(),
-      isLoggedIn: appState.userCursor().get('isLoggedIn'),
-      pendingActions: appState.pendingActionsCursor(),
-      todos: appState.todosCursor(),
-      user: appState.userCursor()
+      auth: state.authCursor(),
+      isLoggedIn: state.userCursor().get('isLoggedIn'),
+      pendingActions: state.pendingActionsCursor(),
+      todos: state.todosCursor(),
+      user: state.userCursor()
     };
   }
 
-  componentDidMount() {
-    document.addEventListener('keypress', this.onDocumentKeypress);
-
-    appState.state.on('change', () => {
-      console.time('app render'); // eslint-disable-line no-console
+  componentWillMount() {
+    if (!process.env.IS_BROWSER) return;
+    state.state.on('change', () => {
+      if ('production' !== process.env.NODE_ENV)
+        console.time('app render'); // eslint-disable-line no-console
       this.setState(this.getState(), () => {
-        console.timeEnd('app render'); // eslint-disable-line no-console
+        if ('production' !== process.env.NODE_ENV)
+          console.timeEnd('app render'); // eslint-disable-line no-console
       });
     });
-
-    this.maybeRedirectAfterClientSideAuth();
-  }
-
-  // For Firebase and similar client side only auths. Flow: Server automatically
-  // redirects unauth users to path defined in requireAuth component. Then user
-  // is authenticated in browser, then redirected to originally requested path.
-  maybeRedirectAfterClientSideAuth() {
-    const nextPath = this.props.router.getCurrentQuery().nextPath;
-    if (nextPath && this.state.isLoggedIn)
-      this.props.router.replaceWith(nextPath);
-  }
-
-  onDocumentKeypress(e) {
-    // Press ctrl+shift+s to save app state, and ctrl+shift+l to load.
-    if (!e.ctrlKey || !e.shiftKey) return;
-    const state = appState.state;
-    switch (e.keyCode) {
-      case 19:
-        window._appState = state.save();
-        window._appStateString = JSON.stringify(window._appState);
-        /*eslint-disable no-console */
-        console.log('App state saved.');
-        console.log('To report error, type copy(_appStateString) and press enter.');
-        console.log('To debug app state, type _appState and press enter.');
-        /*eslint-enable */
-        break;
-      case 12:
-        const stateStr = window.prompt('Paste the serialized state into the input'); // eslint-disable-line no-alert
-        const newState = JSON.parse(stateStr);
-        if (!newState) return;
-        state.load(newState);
-        break;
-    }
   }
 
   render() {
@@ -87,8 +52,4 @@ class App extends Component {
 
 }
 
-App.propTypes = {
-  router: React.PropTypes.func
-};
-
-export default exposeRouter(App);
+export default App;
