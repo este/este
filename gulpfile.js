@@ -31,13 +31,14 @@ gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', function() {
   return gulp.src([
-      'gulpfile.js',
-      'src/**/*.js',
-      'webpack/*.js'
-    ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failOnError());
+    'gulpfile.js',
+    'src/**/*.js',
+    'webpack/*.js',
+    '!**/__tests__/*.*'
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failOnError());
 });
 
 gulp.task('jest', function(done) {
