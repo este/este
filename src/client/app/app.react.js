@@ -1,16 +1,13 @@
 import './app.styl';
 import * as appState from '../state';
 import Component from '../components/component.react';
+import Footer from './footer.react';
 import Menu from './menu.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
-import {FormattedHTMLMessage} from 'react-intl';
 import {RouteHandler} from 'react-router';
-import {msg} from '../intl/store';
 
-// Remember, anytime you create a new store, you have to import it here.
-// Why? Because stores are state-less reducers and mappers, therefore not
-// necessarily required by any another module.
+// Remmeber, any time you add a new store, import it here.
 import '../auth/store';
 import '../todos/store';
 import '../user/store';
@@ -33,7 +30,6 @@ class App extends Component {
     };
   }
 
-  // This method is not called on the server.
   componentDidMount() {
     document.addEventListener('keypress', this.onDocumentKeypress);
 
@@ -84,11 +80,7 @@ class App extends Component {
       <div className="page">
         <Menu isLoggedIn={this.state.isLoggedIn} />
         <RouteHandler {...this.state} />
-        <footer>
-          <p>
-            <FormattedHTMLMessage message={msg('app.madeByHtml')} />
-          </p>
-        </footer>
+        <Footer />
       </div>
     );
   }
