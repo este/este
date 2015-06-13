@@ -4,6 +4,7 @@ import Component from '../components/component.react';
 import Footer from './footer.react';
 import Menu from './menu.react';
 import React from 'react';
+import persistState from './persiststate.react';
 import {RouteHandler} from 'react-router';
 
 // Remember to import all app stores here.
@@ -51,5 +52,7 @@ class App extends Component {
   }
 
 }
+
+App = persistState(App);
 
 export default App;
