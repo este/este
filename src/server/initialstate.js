@@ -27,9 +27,8 @@ export default {
       {id: 1, title: 'consider ‘stop doing’ app'}
     ]
   },
-  user: {
-    // User can be authenticated on server, and then isLoggedIn must be true.
-    isLoggedIn: false,
-    data: null
+  users: {
+    // User can be authenticated on server, and then viewer must be defined.
+    viewer: null
   }
 };

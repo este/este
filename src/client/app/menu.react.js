@@ -1,12 +1,15 @@
 import Component from '../components/component.react';
 import React from 'react';
-import {Link} from 'react-router';
+import immutable from 'immutable';
 import {FormattedHTMLMessage} from 'react-intl';
+import {Link} from 'react-router';
 import {msg} from '../intl/store';
 
 class Menu extends Component {
 
   render() {
+    const userIsLoggedIn = !!this.props.viewer;
+
     return (
       <header>
         <h1>
@@ -17,7 +20,7 @@ class Menu extends Component {
           <li><Link to="todos">{msg('menu.todos')}</Link></li>
           <li><Link to="me">{msg('menu.me')}</Link></li>
           {/* Note simple rule: Never put HTML and JS into the same line.*/}
-          {!this.props.isLoggedIn &&
+          {!userIsLoggedIn &&
             <li><Link to="login">{msg('menu.login')}</Link></li>
           }
         </ul>
@@ -28,7 +31,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  isLoggedIn: React.PropTypes.bool
+  viewer: React.PropTypes.instanceOf(immutable.Record)
 };
 
 export default Menu;

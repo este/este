@@ -10,7 +10,7 @@ import {RouteHandler} from 'react-router';
 // Remember to import all app stores here.
 import '../auth/store';
 import '../todos/store';
-import '../user/store';
+import '../users/store';
 
 class App extends Component {
 
@@ -22,10 +22,10 @@ class App extends Component {
   getState() {
     return {
       auth: state.authCursor(),
-      isLoggedIn: state.userCursor().get('isLoggedIn'),
       pendingActions: state.pendingActionsCursor(),
       todos: state.todosCursor(),
-      user: state.userCursor()
+      users: state.usersCursor(),
+      viewer: state.usersCursor().get('viewer')
     };
   }
 
@@ -44,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="page">
-        <Menu isLoggedIn={this.state.isLoggedIn} />
+        <Menu viewer={this.state.viewer} />
         <RouteHandler {...this.state} />
         <Footer />
       </div>
