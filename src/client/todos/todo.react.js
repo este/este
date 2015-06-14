@@ -3,7 +3,6 @@ import * as actions from './actions';
 import Component from '../components/component.react';
 import Editable from '../components/editable.react';
 import React from 'react';
-import TodoButtons from './todobuttons.react';
 import immutable from 'immutable';
 
 class Todo extends Component {
