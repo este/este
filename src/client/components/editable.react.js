@@ -1,29 +1,15 @@
 import './editable.styl';
 import Component from '../components/component.react';
 import React from 'react';
-import classnames from 'classnames';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-/*
-  This is super useful component for inline editation. Reactive app must be able
-  to allow editation any piece of UI, any form field, individually. Granularity
-  is key to good user experience. Traditionally, such approach requires a lot of
-  boilerplate code, but it's piece of cake with React composition. Note editable
-  state is stored in global app state, not in component local state. Component
-  local state is workaround for mutable app state, therefore should be avoided.
-
-  TODO:
-    - isEditable visual hint, optionally explicit edit button.
-    - Optionally save and cancel buttons.
-    - Growing textarea for multilines. Probably make a GoogTextarea component.
-      https://github.com/google/closure-library/blob/master/closure/goog/ui/textarea.js
-*/
-
-const State = immutable.Map({
+const State = immutable.Record({
   isEditing: false,
   value: ''
 });
+
+const initialState = new State;
 
 class Editable extends Component {
 
@@ -35,65 +21,18 @@ class Editable extends Component {
     this.onViewClick = this.onViewClick.bind(this);
   }
 
-  // Like setInitialState, but defined in global state and lazily.
-  setDefaultState() {
-    this.setState(() => State);
-  }
-
-  // Override setState to use global state instead of local.
-  setState(callback) {
-    this.props.onState(
-      this.props.id,
-      this.props.name,
-      callback(this.getState())
-    );
-  }
-
-  // Use getState because this.state is reserved for React. Returns component
-  // local state stored in global app state.
-  getState() {
-    return this.props.state
-      ? this.props.state.get(this.props.name)
-      : State;
-  }
-
-  enableEdit() {
-    this.setState(state => state.merge({
-      isEditing: true,
-      value: this.props.defaultValue
-    }));
-  }
-
-  saveEdit() {
-    if (!this.valueHasChanged()) {
-      this.setDefaultState();
-      return;
-    }
-    const value = this.getState().toJS().value.trim();
-    if (!value && this.props.isRequired)
-      return;
-    this.props.onSave(value, () => {
-      this.setDefaultState();
-    });
-  }
-
-  valueHasChanged() {
-    return this.props.defaultValue !== this.getState().get('value');
-  }
-
-  cancelEdit() {
-    if (this.valueHasChanged())
-      if (!confirm(msg('confirmations.cancelEdit'))) // eslint-disable-line no-alert
-        return;
-    this.setDefaultState();
-  }
-
   onInputChange(e) {
     this.setState(state => state.set('value', e.target.value));
   }
 
   onInputFocus(e) {
-    e.target.select();
+    this.moveCaretToEnd(e.target);
+  }
+
+  moveCaretToEnd(field) {
+    const length = field.value.length;
+    field.selectionStart = length;
+    field.selectionEnd = length;
   }
 
   onInputKeyDown(e) {
@@ -107,61 +46,97 @@ class Editable extends Component {
     this.saveEdit();
   }
 
+  saveEdit() {
+    if (!this.isDirty()) {
+      this.disableEdit();
+      return;
+    }
+
+    const value = this.props.state.value.trim();
+    if (!value && this.props.isRequired)
+      return;
+
+    this.props
+      .onSave(this.props.id, this.props.name, value)
+      .then(() => {
+        this.disableEdit();
+      });
+  }
+
+  isDirty() {
+    return this.props.state.value !== this.props.text;
+  }
+
   onKeyEscape() {
     this.cancelEdit();
   }
 
-  onViewClick() {
+  cancelEdit() {
+    if (this.isDirty())
+      if (!confirm(msg('confirmations.cancelEdit'))) // eslint-disable-line no-alert
+        return;
+    this.disableEdit();
+  }
+
+  disableEdit() {
+    this.setState(state => null);
+  }
+
+  onViewClick(e) {
     this.enableEdit();
   }
 
-  render() {
-    const isEditing = this.getState().get('isEditing');
-    const value = this.getState().get('value');
+  enableEdit() {
+    this.setState(state => state.merge({
+      isEditing: true,
+      value: this.props.text
+    }));
+  }
 
-    const edit = (
-      <div className="edit">
-        <input
-          autoFocus
-          disabled={this.props.disabled}
-          maxLength={this.props.maxLength}
-          onChange={this.onInputChange}
-          onFocus={this.onInputFocus}
-          onKeyDown={this.onInputKeyDown}
-          value={value}
-        />
-      </div>
+  setState(callback) {
+    this.props.onState(
+      this.props.id,
+      this.props.name,
+      callback(this.props.state || initialState)
     );
+  }
 
-    const view = (
-      <div
-        children={this.props.children}
-        className="view"
-        onClick={this.onViewClick}
-      />
+  render() {
+    const {state, text, disabled} = this.props;
+    const isEditing = state && state.isEditing;
+
+    if (!isEditing) return (
+      <span className="editable view" onClick={this.onViewClick}>{text}</span>
     );
 
     return (
-      <div className={classnames('editable-component', {isEditing: isEditing})}>
-        {isEditing ? edit : view}
-      </div>
+      <input
+        autoFocus
+        className="editable edit"
+        disabled={disabled}
+        onChange={this.onInputChange}
+        onFocus={this.onInputFocus}
+        onKeyDown={this.onInputKeyDown}
+        value={state.value}
+      />
     );
-
   }
 
 }
 
 Editable.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  defaultValue: React.PropTypes.string.isRequired,
   disabled: React.PropTypes.bool,
   id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
   isRequired: React.PropTypes.bool,
-  maxLength: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   onSave: React.PropTypes.func.isRequired,
   onState: React.PropTypes.func.isRequired,
-  state: React.PropTypes.instanceOf(immutable.Map)
+  state: React.PropTypes.instanceOf(State),
+  text: React.PropTypes.string.isRequired
+};
+
+Editable.defaultProps = {
+  isRequired: true
 };
 
 export default Editable;

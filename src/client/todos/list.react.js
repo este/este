@@ -17,14 +17,21 @@ class List extends Component {
 
     return (
       <ol className="todo-list">
-        {todos.map((todo, i) =>
-          <Todo
-            editable={editables.get(todo.id)}
-            key={todo.id}
-            pendingSaveTitle={pendingActions.has(actions.saveTitle.toString())}
-            todo={todo}
-          />
-        )}
+        {todos.map(todo => {
+          const editable = editables.get(todo.id);
+          const disabled =
+            !!editable &&
+            pendingActions.has(actions.onEditableSave.toString());
+
+          return (
+            <Todo
+              disabled={disabled}
+              editable={editable}
+              key={todo.id}
+              todo={todo}
+            />
+          );
+        })}
       </ol>
     );
   }

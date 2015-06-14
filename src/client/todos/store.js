@@ -54,6 +54,16 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.onEditableSave:
+      todosCursor(todos => {
+        const {id, name, value} = data;
+        return todos.update('list', list => {
+          const idx = list.findIndex(todo => todo.id === id);
+          return list.setIn([idx, name], value);
+        });
+      });
+      break;
+
     case actions.onEditableState:
       todosCursor(todos => {
         const {id, name, state} = data;
@@ -65,16 +75,6 @@ export const dispatchToken = register(({action, data}) => {
       todosCursor(todos => {
         const {name, value} = data;
         return todos.setIn(['newTodo', name], value);
-      });
-      break;
-
-    case actions.saveTitle:
-      todosCursor(todos => {
-        const {id, title} = data;
-        return todos.update('list', list => {
-          const idx = list.findIndex(todo => todo.id === id);
-          return list.setIn([idx, 'title'], title);
-        });
       });
       break;
 

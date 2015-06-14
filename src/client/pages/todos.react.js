@@ -11,20 +11,19 @@ import {msg} from '../intl/store';
 class Todos extends Component {
 
   render() {
-    const editables = this.props.todos.get('editables');
-    const newTodo = this.props.todos.get('newTodo');
-    const todos = this.props.todos.get('list');
+    const {todos, pendingActions} = this.props;
+    const list = todos.get('list');
 
     return (
       <DocumentTitle title={msg('todos.title')}>
         <section className="todos-page">
-          <NewTodo todo={newTodo} />
+          <NewTodo todo={todos.get('newTodo')} />
           <List
-            editables={editables}
-            pendingActions={this.props.pendingActions}
-            todos={todos}
+            editables={todos.get('editables')}
+            pendingActions={pendingActions}
+            todos={list}
           />
-          <Buttons clearAllEnabled={todos.size > 0} />
+          <Buttons clearAllEnabled={list.size > 0} />
           <ToCheck />
         </section>
       </DocumentTitle>

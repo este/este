@@ -9,24 +9,27 @@ import immutable from 'immutable';
 class Todo extends Component {
 
   render() {
-    const {todo, pendingSaveTitle, editable} = this.props;
+    const {disabled, editable, todo} = this.props;
+
+    const editableFor = (propName) =>
+      <Editable
+        disabled={disabled}
+        id={todo.id}
+        name={propName}
+        onSave={actions.onEditableSave}
+        onState={actions.onEditableState}
+        state={editable ? editable.get(propName) : null}
+        text={todo[propName]}
+      />;
 
     return (
       <li className="todo-item">
-        <Editable
-          defaultValue={todo.title}
-          disabled={pendingSaveTitle}
-          id={todo.id}
-          isRequired
-          maxLength={actions.MAX_TODO_TITLE_LENGTH}
-          name="title"
-          onSave={(title, hide) => actions.saveTitle(todo.id, title).then(hide)}
-          onState={actions.onEditableState}
-          state={editable}
-        >
-          <label>{todo.title}</label>
-        </Editable>
-        <TodoButtons todo={todo} />
+        {editableFor('title')}
+        <span
+          children="x"
+          className="button"
+          onClick={() => actions.deleteTodo(todo)}
+        />
       </li>
     );
   }
@@ -34,9 +37,9 @@ class Todo extends Component {
 }
 
 Todo.propTypes = {
+  disabled: React.PropTypes.bool.isRequired,
   editable: React.PropTypes.instanceOf(immutable.Map),
-  pendingSaveTitle: React.PropTypes.bool.isRequired,
-  todo: React.PropTypes.instanceOf(immutable.Record)
+  todo: React.PropTypes.instanceOf(immutable.Record).isRequired
 };
 
 export default Todo;
