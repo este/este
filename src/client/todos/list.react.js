@@ -8,7 +8,7 @@ import {msg} from '../intl/store';
 class List extends Component {
 
   render() {
-    const todos = this.props.todos;
+    const {todos, editables, pendingActions} = this.props;
 
     if (!todos.size)
       return (
@@ -19,9 +19,9 @@ class List extends Component {
       <ol className="todo-list">
         {todos.map((todo, i) =>
           <Todo
-            editable={this.props.editables.get(todo.id)}
+            editable={editables.get(todo.id)}
             key={todo.id}
-            pendingSaveTitle={this.props.pendingActions.has(actions.saveTitle.toString())}
+            pendingSaveTitle={pendingActions.has(actions.saveTitle.toString())}
             todo={todo}
           />
         )}

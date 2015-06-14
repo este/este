@@ -17,7 +17,8 @@ class ToCheck extends Component {
             <ToCheckItem item={item} key={item.get('key')} />
           )}
           <li>
-            {msg('toCheck.isomorphicPage')} <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>.
+            {msg('toCheck.isomorphicPage')}{' '}
+            <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>.
           </li>
           <li>
             {msg('toCheck.andMuchMore')}

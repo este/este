@@ -9,20 +9,20 @@ import immutable from 'immutable';
 class Todo extends Component {
 
   render() {
-    const todo = this.props.todo;
+    const {todo, pendingSaveTitle, editable} = this.props;
 
     return (
       <li className="todo-item">
         <Editable
           defaultValue={todo.title}
-          disabled={this.props.pendingSaveTitle}
+          disabled={pendingSaveTitle}
           id={todo.id}
           isRequired
           maxLength={actions.MAX_TODO_TITLE_LENGTH}
           name="title"
           onSave={(title, hide) => actions.saveTitle(todo.id, title).then(hide)}
           onState={actions.onEditableState}
-          state={this.props.editable}
+          state={editable}
         >
           <label>{todo.title}</label>
         </Editable>
