@@ -29,6 +29,7 @@ class App extends Component {
     };
   }
 
+  // https://github.com/steida/este/issues/274
   componentWillMount() {
     if (!process.env.IS_BROWSER) return;
     state.state.on('change', () => {
