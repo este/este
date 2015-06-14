@@ -1,6 +1,7 @@
 import './editable.styl';
 import Component from '../components/component.react';
 import React from 'react';
+import Textarea from 'react-textarea-autosize';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
@@ -43,6 +44,7 @@ class Editable extends Component {
   }
 
   onKeyEnter() {
+    if (this.props.type === 'textarea') return;
     this.saveEdit();
   }
 
@@ -102,24 +104,26 @@ class Editable extends Component {
   }
 
   render() {
-    const {state, text, disabled} = this.props;
+    const {state, text, disabled, type, rows, maxRows} = this.props;
     const isEditing = state && state.isEditing;
 
     if (!isEditing) return (
       <span className="editable view" onClick={this.onViewClick}>{text}</span>
     );
 
-    return (
-      <input
-        autoFocus
-        className="editable edit"
-        disabled={disabled}
-        onChange={this.onInputChange}
-        onFocus={this.onInputFocus}
-        onKeyDown={this.onInputKeyDown}
-        value={state.value}
-      />
-    );
+    const props = {
+      autoFocus: true,
+      className: 'editable edit',
+      disabled: disabled,
+      onChange: this.onInputChange,
+      onFocus: this.onInputFocus,
+      onKeyDown: this.onInputKeyDown,
+      value: state.value
+    };
+
+    return type === 'textarea'
+      ? <Textarea {...props} maxRows={maxRows} rows={rows} />
+      : <input {...props} />;
   }
 
 }
@@ -128,11 +132,14 @@ Editable.propTypes = {
   disabled: React.PropTypes.bool,
   id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
   isRequired: React.PropTypes.bool,
+  maxRows: React.PropTypes.number,
   name: React.PropTypes.string.isRequired,
   onSave: React.PropTypes.func.isRequired,
   onState: React.PropTypes.func.isRequired,
+  rows: React.PropTypes.number,
   state: React.PropTypes.instanceOf(State),
-  text: React.PropTypes.string.isRequired
+  text: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string
 };
 
 Editable.defaultProps = {

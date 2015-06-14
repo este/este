@@ -30,6 +30,9 @@ export default {
     confirmations: {
       cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`
     },
+    examples: {
+      title: 'Examples'
+    },
     home: {
       infoHtml: `App starter kit for <a href="https://github.com/steida/este">Este.js</a>. Check`,
       title: 'Este.js App',
@@ -40,6 +43,7 @@ export default {
       welcome: `Hi {email}. This is your secret page.`
     },
     menu: {
+      examples: 'Examples',
       headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
       home: 'Home',
       login: 'Login',

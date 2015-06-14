@@ -57,6 +57,7 @@
     "react-intl": "^1.1.0",
     "react-pure-render": "^1.0.1",
     "react-router": "^0.13.1",
+    "react-textarea-autosize": "^2.3.1",
     "run-sequence": "^1.0.2",
     "sass-loader": "^1.0.0",
     "serve-favicon": "^2.2.0",
