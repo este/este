@@ -26,7 +26,7 @@
     "cors": "^2.6.0",
     "css-loader": "^0.14.2",
     "del": "^1.1.1",
-    "eslint": "^0.22.1",
+    "eslint": "^0.23.0",
     "eslint-plugin-react": "^2.0.1",
     "eventemitter3": "^1.0.1",
     "express": "^4.11.2",
