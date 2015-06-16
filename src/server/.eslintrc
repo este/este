@@ -5,7 +5,7 @@
 
   "rules": {
     "strict": [2, "never"], // Not sure about it.
-    "no-console": true
+    "no-console": 0 // http://eslint.org/docs/rules/no-console#when-not-to-use-it
   }
 
 }
