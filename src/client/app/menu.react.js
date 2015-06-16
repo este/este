@@ -18,12 +18,11 @@ class Menu extends Component {
         <ul>
           <li><Link to="home">{msg('menu.home')}</Link></li>
           <li><Link to="todos">{msg('menu.todos')}</Link></li>
+          <li><Link to="examples">{msg('menu.examples')}</Link></li>
           <li><Link to="me">{msg('menu.me')}</Link></li>
-          {/* Note simple rule: Never put HTML and JS into the same line.*/}
           {!userIsLoggedIn &&
             <li><Link to="login">{msg('menu.login')}</Link></li>
           }
-          <li><Link to="examples">{msg('menu.examples')}</Link></li>
         </ul>
       </header>
     );
