@@ -13,23 +13,20 @@
 
 ## Techniques
 
-- ECMAScript 6/7 via the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
-- Isomorphic architecture with server side rendering.
-- Immutable and functional design. Class is leaky abstraction for "business model".
-- Well tuned webpack devstack with handy [notifier](https://github.com/mikaelbr/node-notifier).
-- Webpack css livereload with hot module reload even for React components.
+- Isomorphic [React](http://facebook.github.io/react/) with server side rendering.
+- Vanilla [Flux](https://facebook.github.io/flux/), we don't need over abstracted frameworks.
+- [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
+- Functional state-less design. Class is leaky abstraction for "business model".
+- ECMAScript 6/7, via the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
+- Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
+- CSS livereload, hot module reload even for React components.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages#how-to-setup-the-eslint-for-st3))
-- Localization with [formatjs.io](http://formatjs.io/), stale browsers supported as well.
+- Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
 - Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
-- Authentication form and reusable `auth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific components.
-- [React](http://facebook.github.io/react/) with [Flux](https://facebook.github.io/flux/) with [immutable](http://facebook.github.io/immutable-js) global app state like Om.
-- Vanilla Flux, we don't need over abstracted frameworks.
-- Easy undo/redo and app state load/save.
-- [jest](https://facebook.github.io/jest) unit testing.
-- Super fast rendering with [immutable.js](http://facebook.github.io/immutable-js).
+- Login and Signup, `requireAuth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific pages.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
-- Google Analytics preconfigured.
+- Easy undo/redo and app state load/save.
 
 ## Prerequisites
 
