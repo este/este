@@ -7,10 +7,10 @@ import routes from './routes';
 const app = document.getElementById('app');
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {
-  if ('production' !== process.env.NODE_ENV)
-    console.time('app render on route change'); // eslint-disable-line no-console
+  // if ('production' !== process.env.NODE_ENV)
+  //   console.time('app render on route change'); // eslint-disable-line no-console
   React.render(<Handler />, app, () => {
-    if ('production' !== process.env.NODE_ENV)
-      console.timeEnd('app render on route change'); // eslint-disable-line no-console
+    // if ('production' !== process.env.NODE_ENV)
+    //   console.timeEnd('app render on route change'); // eslint-disable-line no-console
   });
 });

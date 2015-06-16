@@ -33,11 +33,11 @@ class App extends Component {
   componentWillMount() {
     if (!process.env.IS_BROWSER) return;
     state.state.on('change', () => {
-      if ('production' !== process.env.NODE_ENV)
-        console.time('app render'); // eslint-disable-line no-console
+      // if ('production' !== process.env.NODE_ENV)
+      //   console.time('app render'); // eslint-disable-line no-console
       this.setState(this.getState(), () => {
-        if ('production' !== process.env.NODE_ENV)
-          console.timeEnd('app render'); // eslint-disable-line no-console
+        // if ('production' !== process.env.NODE_ENV)
+        //   console.timeEnd('app render'); // eslint-disable-line no-console
       });
     });
   }
