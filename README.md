@@ -20,6 +20,7 @@
 - ECMAScript 6/7, via the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - CSS livereload, hot module reload even for React components.
+- [mocha](http://mochajs.org/) test framework with [Chai](http://chaijs.com/) BDD/TDD assertion library.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
@@ -37,6 +38,8 @@ npm install -g gulp
 ```
 
 #### Windows
+
+Use this if you are using JEST or another library, which has to be compiled.
 
 - Install Python - Install version 2.7 of Python and add it to your path or/and create a PYTHONPATH environment variable.
 - Install Visual Studio (Express Edition is fine) - We will need this for some of modules that are compiled when we are installing Este. [Download VS Express](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), get one of the versions that has C++ - Express 2013 for Windows Desktop for example.
