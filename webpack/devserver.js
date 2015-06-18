@@ -26,7 +26,7 @@ module.exports = function(webpackConfig) {
         chunks: false,
         chunkModules: false
       }
-    }).listen(8888, 'localhost', function(err) {
+    }).listen(8888, '0.0.0.0', function(err) {
       // Callback is called only once, can't be used to catch compilation errors.
       if (err)
         throw new gutil.PluginError('webpack-dev-server', err);
