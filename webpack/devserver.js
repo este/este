@@ -26,6 +26,8 @@ module.exports = function(webpackConfig) {
         chunks: false,
         chunkModules: false
       }
+    // Why '0.0.0.0' and 'localhost'? Because it works for remote machines.
+    // https://github.com/webpack/webpack-dev-server/issues/151#issuecomment-104643642
     }).listen(8888, '0.0.0.0', function(err) {
       // Callback is called only once, can't be used to catch compilation errors.
       if (err)
