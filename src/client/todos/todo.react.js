@@ -24,11 +24,7 @@ class Todo extends Component {
     return (
       <li className="todo-item">
         {editableFor('title')}
-        <span
-          children="x"
-          className="button"
-          onClick={() => actions.deleteTodo(todo)}
-        />
+        <span className="button" onClick={() => actions.deleteTodo(todo)}>x</span>
       </li>
     );
   }

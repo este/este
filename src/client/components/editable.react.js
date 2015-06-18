@@ -16,10 +16,13 @@ class Editable extends Component {
 
   constructor(props) {
     super(props);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.enableEdit = this.enableEdit.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
     this.onViewClick = this.onViewClick.bind(this);
+    this.saveEdit = this.saveEdit.bind(this);
   }
 
   onInputChange(e) {
@@ -104,16 +107,21 @@ class Editable extends Component {
   }
 
   render() {
-    const {state, text, disabled, type, rows, maxRows} = this.props;
+    const {
+      disabled, editButtons, maxRows, rows, showEditButtons,
+      showViewButtons, state, text, type, viewButtons
+    } = this.props;
     const isEditing = state && state.isEditing;
 
     if (!isEditing) return (
-      <span className="editable view" onClick={this.onViewClick}>{text}</span>
+      <div className="editable view">
+        <span onClick={this.onViewClick}>{text}</span>
+        {showViewButtons && viewButtons(this.enableEdit, disabled)}
+      </div>
     );
 
-    const props = {
+    const fieldProps = {
       autoFocus: true,
-      className: 'editable edit',
       disabled: disabled,
       onChange: this.onInputChange,
       onFocus: this.onInputFocus,
@@ -121,15 +129,24 @@ class Editable extends Component {
       value: state.value
     };
 
-    return type === 'textarea'
-      ? <Textarea {...props} maxRows={maxRows} rows={rows} />
-      : <input {...props} />;
+    const field = type === 'textarea'
+      ? <Textarea {...fieldProps} maxRows={maxRows} rows={rows} />
+      : <input {...fieldProps} />;
+
+    return (
+      <div className="editable edit">
+        {field}
+        {showEditButtons && editButtons(this.saveEdit, this.cancelEdit, disabled)}
+      </div>
+    );
+
   }
 
 }
 
 Editable.propTypes = {
   disabled: React.PropTypes.bool,
+  editButtons: React.PropTypes.func,
   id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
   isRequired: React.PropTypes.bool,
   maxRows: React.PropTypes.number,
@@ -137,13 +154,27 @@ Editable.propTypes = {
   onSave: React.PropTypes.func.isRequired,
   onState: React.PropTypes.func.isRequired,
   rows: React.PropTypes.number,
+  showEditButtons: React.PropTypes.bool,
+  showViewButtons: React.PropTypes.bool,
   state: React.PropTypes.instanceOf(State),
   text: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string
+  type: React.PropTypes.string,
+  viewButtons: React.PropTypes.func
 };
 
 Editable.defaultProps = {
-  isRequired: true
+  isRequired: true,
+  showEditButtons: false,
+  showViewButtons: false,
+  editButtons: (onSaveClick, onCancelClick, disabled) =>
+    <div className="btn-group">
+      <button disabled={disabled} onClick={onSaveClick}>Save</button>
+      <button disabled={disabled} onClick={onCancelClick}>Cancel</button>
+    </div>,
+  viewButtons: (onEditClick, disabled) =>
+    <div className="btn-group">
+      <button disabled={disabled} onClick={onEditClick}>Edit</button>
+    </div>
 };
 
 export default Editable;

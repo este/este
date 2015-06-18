@@ -9,6 +9,7 @@ import {RouteHandler} from 'react-router';
 
 // Remember to import all app stores here.
 import '../auth/store';
+import '../examples/store';
 import '../todos/store';
 import '../users/store';
 
@@ -22,6 +23,7 @@ class App extends Component {
   getState() {
     return {
       auth: state.authCursor(),
+      examples: state.examplesCursor(),
       pendingActions: state.pendingActionsCursor(),
       todos: state.todosCursor(),
       users: state.usersCursor(),

@@ -5,7 +5,8 @@ import {Link} from 'react-router';
 import {FormattedHTMLMessage} from 'react-intl';
 import {msg} from '../intl/store';
 
-export default class Home extends Component {
+class Home extends Component {
+
   render() {
     return (
       <DocumentTitle title={msg('home.title')}>
@@ -20,3 +21,5 @@ export default class Home extends Component {
   }
 
 }
+
+export default Home;
