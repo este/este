@@ -63,11 +63,7 @@ export default {
       itemListHtml: [  // List of language dependent length containing translated messages for React components
         {
           key: 'source',
-          txt: `Server rendered HTML, view page source.`
-        },
-        {
-          key: 'console',
-          txt: `Logged actions from <code>src/client/dispatcher.js</code>.`
+          txt: `Server rendered todos, view page source.`
         },
         {
           key: 'development',
