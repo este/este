@@ -1,5 +1,5 @@
 /*
-  Override toString methods. Useful for console logging Flux actions.
+  Override toString of Flux actions.
 */
 export default function setToString(prefix: string, object: Object) {
   Object.keys(object).forEach((name) => {
