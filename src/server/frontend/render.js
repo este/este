@@ -1,3 +1,4 @@
+import * as state from '../../client/state';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
 import Immutable from 'immutable';
@@ -7,7 +8,6 @@ import Router from 'react-router';
 import config from '../config';
 import initialState from '../initialstate';
 import routes from '../../client/routes';
-import {state} from '../../client/state';
 import stateMerger from '../lib/merger';
 
 export default function render(req, res, userState = {}) {
@@ -36,7 +36,7 @@ function renderPage(req, res, appState) {
     });
 
     router.run((Handler, routerState) => {
-      const html = preloadAppStateThenRenderHtml(Handler, appState);
+      const html = loadAppStateThenRenderHtml(Handler, appState);
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
@@ -46,9 +46,8 @@ function renderPage(req, res, appState) {
   });
 }
 
-function preloadAppStateThenRenderHtml(Handler, appState) {
-  // Load app state for server rendering.
-  state.load(appState);
+function loadAppStateThenRenderHtml(Handler, appState) {
+  state.appState.load(appState);
   return getPageHtml(Handler, appState);
 }
 

@@ -7,7 +7,7 @@ const initialState = process.env.IS_BROWSER
   ? window._appState
   : require('../server/initialstate');
 
-export const state = new State(initialState, function(key, value) {
+export const appState = new State(initialState, function(key, value) {
   switch (key) {
     case 'auth': return reviveAuth(value);
     case 'todos': return reviveTodos(value);
@@ -15,9 +15,9 @@ export const state = new State(initialState, function(key, value) {
   }
 });
 
-export const authCursor = state.cursor(['auth']);
-export const examplesCursor = state.cursor(['examples']);
-export const i18nCursor = state.cursor(['i18n']);
-export const pendingActionsCursor = state.cursor(['pendingActions']);
-export const todosCursor = state.cursor(['todos']);
-export const usersCursor = state.cursor(['users']);
+export const authCursor = appState.cursor(['auth']);
+export const examplesCursor = appState.cursor(['examples']);
+export const i18nCursor = appState.cursor(['i18n']);
+export const pendingActionsCursor = appState.cursor(['pendingActions']);
+export const todosCursor = appState.cursor(['todos']);
+export const usersCursor = appState.cursor(['users']);
