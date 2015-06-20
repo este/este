@@ -87,8 +87,8 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Tips and Tricks 
 
-- To check app state, press `ctrl+shift+s` and then open console. 
-- To check app render time, open console and write `este.measureRender(true)`.
+- To check app state, press `ctrl+shift+s`, and then open console. 
+- To check app render time, open console, and write `este.measureRender = true`.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Use `const` by default, `let` if you have to rebind a variable.
 - Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
