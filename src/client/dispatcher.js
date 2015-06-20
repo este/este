@@ -1,5 +1,3 @@
-/*eslint-disable no-console */
-
 import {pendingActionsCursor} from './state';
 import {Dispatcher} from 'flux';
 
@@ -28,7 +26,7 @@ export function waitFor(ids: Array) {
 function dispatchAsync(action: Function, promise: Object, options: ?Object) {
   const actionName = action.toString();
 
-  if (isDev) console.log(`pending ${actionName}`);
+  if (isDev) console.log(`pending ${actionName}`); // eslint-disable-line no-console
   setPending(actionName, true);
 
   return promise.then(
@@ -38,7 +36,7 @@ function dispatchAsync(action: Function, promise: Object, options: ?Object) {
       return data;
     },
     (reason) => {
-      if (isDev) console.log(`reject ${actionName}`);
+      if (isDev) console.log(`reject ${actionName}`); // eslint-disable-line no-console
       setPending(actionName, false);
       throw reason;
     }
@@ -54,7 +52,7 @@ function setPending(actionName, pending) {
 }
 
 function dispatchSync(action: Function, data: ?Object) {
-  if (isDev) console.log(action.toString());
-  // if (isDev) console.log(action.toString(), data);
+  if (isDev) console.log(action.toString()); // eslint-disable-line no-console
+  // if (isDev) console.log(action.toString(), data); // eslint-disable-line no-console
   dispatcher.dispatch({action, data});
 }
