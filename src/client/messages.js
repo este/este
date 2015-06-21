@@ -67,21 +67,25 @@ export default {
         },
         {
           key: 'development',
-          txt: `Development mode (<code>gulp</code>), try edit styles or react component to check
-                <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">live-editing</a> without app reload.`
+          txt: `Try edit styles, components, actions, or stores to check
+                <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">live editing</a>
+                in development mode (<code>gulp</code>).`
         },
         {
           key: 'production',
-          txt: `Production mode (<code>gulp -p</code>), to check built app performance and size.`
+          txt: `Check real app performance and size in production mode (<code>gulp -p</code>)`
         },
         {
           key: 'edit',
-          txt: `Editable todo: Click to edit, esc to cancel, enter to save.`
+          txt: `Todos are editable. Click to edit, esc to cancel, enter to save,
+                everything is safely saved in global app state. Try to go
+                elsewhere then back, note components state is always preserved.`
         },
         {
           key: 'globalState',
           txt: `Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
-                video</a>? Try <b>ctrl+shift+s</b> to save app state, and <b>ctrl+shift+l</b> to load.`
+                video</a>? Try <b>ctrl+shift+s</b> to save current app state,
+                and <b>ctrl+shift+l</b> to load.`
         }
       ]
     },
