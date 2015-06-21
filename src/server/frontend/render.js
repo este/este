@@ -1,17 +1,17 @@
 import * as state from '../../client/state';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
-import Immutable from 'immutable';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
 import config from '../config';
+import immutable from 'immutable';
 import initialState from '../initialstate';
 import routes from '../../client/routes';
 import stateMerger from '../lib/merger';
 
 export default function render(req, res, userState = {}) {
-  const appState = Immutable.fromJS(initialState).mergeWith(stateMerger, userState).toJS();
+  const appState = immutable.fromJS(initialState).mergeWith(stateMerger, userState).toJS();
   return renderPage(req, res, appState);
 }
 
