@@ -14,11 +14,12 @@
 ## Techniques
 
 - Isomorphic pure [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
-- Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic global immutable app state like [Om](https://github.com/omcljs/om) and [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
+- Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic global immutable app state like [Om](https://github.com/omcljs/om) via [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
 - Functional design. Class is a leaky abstraction for "business model".
 - ECMAScript 2015+ with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
-- CSS livereload, hot module reload even for React components.
+- Hot module reload for React components and Flux actions and stores.
+- CSS livereload
 - [mocha](http://mochajs.org/) test framework with [Chai](http://chaijs.com/) BDD/TDD assertion library.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
