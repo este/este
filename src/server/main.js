@@ -1,15 +1,17 @@
+import api from './api';
 import config from './config';
 import express from 'express';
+import frontend from './frontend';
 import {Server} from 'http';
 
 const app = express();
 const server = Server(app);
 
-// Load API
-app.use('/api/v1', require('./api'));
+// Load API.
+app.use('/api/v1', api);
 
 // Load react-js frontend.
-app.use(require('./frontend'));
+app.use(frontend);
 
 // Add error handler. Four arguments need to be defined in order for the
 // middleware to act as an error handler.
