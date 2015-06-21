@@ -13,9 +13,8 @@
 
 ## Techniques
 
-- Isomorphic pure [React](http://facebook.github.io/react/)
+- Isomorphic pure [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
 - Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic global immutable app state like [Om](https://github.com/omcljs/om) and [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
-- Server side rendering on [expressjs](http://expressjs.com/) backend.
 - Functional design. Class is a leaky abstraction for "business model".
 - ECMAScript 2015+ with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
@@ -27,7 +26,7 @@
 - Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
 - Login and Signup, `requireAuth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific pages.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
-- Easy undo/redo and app state load/save.
+- Easy undo/redo and load/save for app state.
 
 ## Prerequisites
 
