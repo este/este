@@ -8,7 +8,12 @@ var constants = require('./constants');
 var path = require('path');
 var webpack = require('webpack');
 
-var devtools = process.env.CONTINUOUS_INTEGRATION ? 'inline-source-map' : 'eval-source-map';
+var devtools = process.env.CONTINUOUS_INTEGRATION
+  ? 'inline-source-map'
+  // cheap-module-eval-source-map, because we want original source, but we don't
+  // care about columns, which makes this devtool faster than eval-source-map.
+  // http://webpack.github.io/docs/configuration.html#devtool
+  : 'cheap-module-eval-source-map';
 
 var loaders = {
   'css': '',
