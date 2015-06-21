@@ -13,11 +13,11 @@
 
 ## Techniques
 
-- Isomorphic [React](http://facebook.github.io/react/) with server side rendering.
-- Vanilla [Flux](https://facebook.github.io/flux/), we don't need over abstracted frameworks.
-- [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
-- Functional state-less design. Class is leaky abstraction for "business model".
-- ECMAScript 6/7, via the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
+- Isomorphic pure [React](http://facebook.github.io/react/)
+- Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic global immutable app state like [Om](https://github.com/omcljs/om) and [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
+- Server side rendering on [expressjs](http://expressjs.com/) backend.
+- Functional design. Class is a leaky abstraction for "business model".
+- ECMAScript 2015+ with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - CSS livereload, hot module reload even for React components.
 - [mocha](http://mochajs.org/) test framework with [Chai](http://chaijs.com/) BDD/TDD assertion library.
