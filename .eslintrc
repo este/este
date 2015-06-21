@@ -80,6 +80,7 @@
     "space-in-parens": [1, "never"],
     "space-return-throw-case": 1,
     "space-unary-ops": [1, {"words": true, "nonwords": false}],
+    "strict": [0, "never"],
     "use-isnan": 1,
     "valid-typeof": 1,
     "vars-on-top": 0,  // disabled for now, see github.com/eslint/eslint/issues/2099
