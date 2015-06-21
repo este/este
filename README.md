@@ -20,7 +20,7 @@
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
 - Hot module reload for React components and Flux actions and stores.
 - CSS livereload
-- [mocha](http://mochajs.org/) test framework with [Chai](http://chaijs.com/) BDD/TDD assertion library.
+- [Karma](http://karma-runner.github.io/) as the test runner, [mocha](http://mochajs.org/) as test framework, and [Chai](http://chaijs.com/) as BDD / TDD assertion library.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
