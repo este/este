@@ -18,9 +18,11 @@
 - Functional design. Class is a leaky abstraction for "business model".
 - ECMAScript 2015+ with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
-- Hot module reload for React components and Flux actions and stores.
-- CSS livereload
+- CSS livereload.
+- Hot module reload for React components and Flux actions and stores..
 - [Karma](http://karma-runner.github.io/) as the test runner, [mocha](http://mochajs.org/) as test framework, and [Chai](http://chaijs.com/) as BDD / TDD assertion library.
+- Testing stack configured for TDD - test driven development.
+- [Shallow rendering](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) for testing React components without DOM.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-Packages#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
