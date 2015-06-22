@@ -13,15 +13,16 @@ const args = yargs
   .alias('p', 'production')
   .argv;
 
-const runKarma = (config, done) => {
+const runKarma = ({singleRun}, done) => {
   karmaServer.start({
     configFile: path.join(__dirname, 'karma.conf.js'), // eslint-disable-line no-undef
-    singleRun: config.singleRun
+    singleRun: singleRun
   }, done);
 };
 
 gulp.task('env', () => {
-  process.env.NODE_ENV = args.production ? 'production' : 'development'; // eslint-disable-line no-undef
+  const env = args.production ? 'production' : 'development';
+  process.env.NODE_ENV = env; // eslint-disable-line no-undef
 });
 
 gulp.task('build-webpack-production', webpackBuild(makeWebpackConfig(false)));
@@ -61,4 +62,9 @@ gulp.task('test', (done) => {
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'));
 
-gulp.task('default', ['server', 'karma-dev']);
+gulp.task('default', (done) => {
+  if (args.production)
+    runSequence('server', done);
+  else
+    runSequence('server', 'karma-dev', done);
+});
