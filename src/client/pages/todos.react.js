@@ -16,7 +16,7 @@ class Todos extends Component {
 
     return (
       <DocumentTitle title={msg('todos.title')}>
-        <section className="todos-page">
+        <div className="todos-page">
           <NewTodo todo={todos.get('newTodo')} />
           <List
             editables={todos.get('editables')}
@@ -25,7 +25,7 @@ class Todos extends Component {
           />
           <Buttons clearAllEnabled={list.size > 0} />
           <ToCheck />
-        </section>
+        </div>
       </DocumentTitle>
     );
   }
