@@ -88,8 +88,8 @@ module.exports = function(isDevelopment) {
       chunkFilename: '[name]-[chunkhash].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
-      path: constants.DIST_DIR,
-      filename: '[name]-[chunkhash].js',
+      path: constants.BUILD_DIR,
+      filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js'
     },
     plugins: (function() {
