@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "postinstall": "gulp build --production",
-    "start": "node src/server",
+    "start": "gulp server --production",
     "test": "gulp test"
   },
   "engines": {
