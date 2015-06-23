@@ -58,4 +58,4 @@ Weekly updates and summary of all changes in the Este project. The changelog is 
 - `5306eb6` - Fixed non working ST3 link
 - `d80b9b0` - Karma-dev doesn't run in production anymore
 - `28b1dc5` - Fixed 404 error for static files in production
-- `794449d` - Use `0.0.0.0` instead of localhost - accessing remote hosts work remotely now
+- `794449d` - Use `0.0.0.0` instead of localhost - accessing dev server from remote host works now (Note to Windows users - looks like `0.0.0.0` is not properly recognised, please submit an issue if needed)
