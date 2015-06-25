@@ -8,6 +8,28 @@ export function register(callback: Function): string {
   return dispatcher.register(callback);
 }
 
+export function on(actions, callback) {
+  if (!Array.isArray(actions))
+    actions = [actions]
+  return {
+    actions: actions,
+    handler: callback
+  };
+}
+
+export function registerNew(cursor, handlers) {
+  return register(({action, data}) => {
+    handlers.forEach(({actions, handler}) => {
+      if (actions.indexOf(action) >= 0) {
+        cursor(state => {
+          const newState = handler(data, state);
+          return newState || state;
+        });
+      }
+    });
+  });
+}
+
 export function dispatch(action: Function, data: ?Object, options: ?Object) {
   if (isDev && action.toString === Function.prototype.toString)
     throw new Error(`Action ${action} toString method has to be overridden by setToString.`);

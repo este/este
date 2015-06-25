@@ -1,23 +1,21 @@
 import * as actions from './actions';
 import {authCursor} from '../state';
-import {register} from '../dispatcher';
+import {registerNew, on} from '../dispatcher';
 
-export const dispatchToken = register(({action, data}) => {
+export const dispatchToken = registerNew(authCursor, [
 
-  switch (action) {
-    case actions.loginError:
-      authCursor(auth => {
-        const error = data;
-        return auth.setIn(['form', 'error'], error);
-      });
-      break;
+  on(actions.loginError, (data, state) => {
+    const error = data;
+    return state.setIn(['form', 'error'], error);
+  }),
 
-    case actions.updateFormField:
-      authCursor(auth => {
-        const {name, value} = data;
-        return auth.setIn(['form', 'fields', name], value);
-      });
-      break;
-  }
+  on(actions.updateFormField, (data, state) => {
+    const {name, value} = data;
+    return state.setIn(['form', 'fields', name], value);
+  }),
 
-});
+  on([actions.updateFormField, actions.loginError], (_, state) => {
+    console.log('Woo, multiple actions');
+  })
+
+]);
