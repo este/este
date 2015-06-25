@@ -15,7 +15,7 @@ export const dispatchToken = registerNew(authCursor, [
   }),
 
   on([actions.updateFormField, actions.loginError], (_, state) => {
-    console.log('Woo, multiple actions');
+    // Woo, multiple actions
   })
 
 ]);

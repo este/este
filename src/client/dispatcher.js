@@ -10,7 +10,7 @@ export function register(callback: Function): string {
 
 export function on(actions, callback) {
   if (!Array.isArray(actions))
-    actions = [actions]
+    actions = [actions];
   return {
     actions: actions,
     handler: callback
@@ -20,12 +20,11 @@ export function on(actions, callback) {
 export function registerNew(cursor, handlers) {
   return register(({action, data}) => {
     handlers.forEach(({actions, handler}) => {
-      if (actions.indexOf(action) >= 0) {
+      if (actions.indexOf(action) >= 0)
         cursor(state => {
           const newState = handler(data, state);
           return newState || state;
         });
-      }
     });
   });
 }
