@@ -35,10 +35,8 @@ class App extends Component {
 
   getState() {
      return {
-       auth: state.authCursor(),
        pendingActions: state.pendingActionsCursor(),
-       todos: state.todosCursor(),
-       users: state.usersCursor()
+       todos: state.todosCursor()
      };
    }
 
