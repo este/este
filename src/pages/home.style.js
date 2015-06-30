@@ -8,5 +8,17 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  header: {
+    height: 110,
+    backgroundColor: '#31AACC',
+    marginTop: -40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerText: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontFamily: 'Lato-Light'
   }
 });

@@ -54,6 +54,9 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.completeTodo:
+      break;
+
     case actions.onEditableSave:
       todosCursor(todos => {
         const {id, name, value} = data;

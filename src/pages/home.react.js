@@ -1,5 +1,5 @@
 import Component from '../components/component.react';
-import Header from '../components/header.react';
+import immutable from 'immutable';
 import React from 'react-native';
 import {
   View,
@@ -12,14 +12,19 @@ import style from './home.style';
 class Home extends Component {
 
   render() {
+    const {todos} = this.props;
+    const leftTodos = todos.get('list').size;
+
     return (
       <View style={style.container}>
 
-        <Header
-          navigation={this.props.navigation}
-          showMenuButton={true}
-          title={msg('home.title')}
-        />
+        <View style={style.header}>
+          <Text style={style.headerText}>
+            {!leftTodos && msg('todos.emptyListHeading')}
+            {leftTodos == 1 && msg('todos.oneTodo')}
+            {leftTodos > 1 && msg('todos.todos', {size: leftTodos})}
+          </Text>
+        </View>
 
         <View style={style.centeredView}>
           <Text>{msg('home.text')}</Text>
@@ -32,7 +37,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  navigation: React.PropTypes.object
+  navigation: React.PropTypes.object,
+  todos: React.PropTypes.instanceOf(immutable.Map).isRequired
 };
 
 export default Home;

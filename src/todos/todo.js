@@ -3,7 +3,8 @@ import {Record} from 'immutable';
 const TodoRecord = Record({
   // Record will create getter for every property.
   id: '',
-  title: ''
+  title: '',
+  completed: false
 });
 
 export default class Todo extends TodoRecord {
@@ -12,4 +13,3 @@ export default class Todo extends TodoRecord {
   //   return this.title.toLowerCase();
   // }
 }
-

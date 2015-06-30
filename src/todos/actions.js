@@ -22,6 +22,10 @@ export function deleteTodo(todo) {
   dispatch(deleteTodo, todo);
 }
 
+export function completeTodo(todo) {
+  dispatch(completeTodo, todo);
+}
+
 export function onEditableSave(id, name, value) {
   // Simulate async saving.
   const promise = new Promise((resolve, reject) => {

@@ -16,13 +16,8 @@ class Menu extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props;
-
     return (
       <ScrollView style={styles.menu}>
-        <Text onPress={_ => this.onItemSelected('home')} style={styles.item}>
-          {msg('menu.home')}
-        </Text>
         <Text onPress={_ => this.onItemSelected('todos')} style={styles.item}>
           {msg('menu.todos')}
         </Text>
