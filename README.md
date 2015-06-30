@@ -101,6 +101,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 ## Training
 - [Czech Republic](http://javascript-skoleni.cz)
 - San Francisco - feel free to [write me](mailto:daniel@steigerwald.cz)
+- [DzejEs.cz](http://www.dzejes.cz) - Czech articles about modern web applications
 
 ## Notes
 
