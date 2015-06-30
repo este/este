@@ -30,9 +30,6 @@ export default {
     confirmations: {
       cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`
     },
-    examples: {
-      title: 'Examples'
-    },
     home: {
       title: 'Home',
       text: 'App starter kit for Este.js. Check todos'

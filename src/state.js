@@ -13,7 +13,6 @@ export const appState = new State(initialState, function(key, value) {
 });
 
 export const authCursor = appState.cursor(['auth']);
-export const examplesCursor = appState.cursor(['examples']);
 export const i18nCursor = appState.cursor(['i18n']);
 export const pendingActionsCursor = appState.cursor(['pendingActions']);
 export const todosCursor = appState.cursor(['todos']);

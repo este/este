@@ -1,7 +1,6 @@
 import Component from '../components/component.react';
 import Header from '../components/header.react';
 import React from 'react-native';
-import requireAuth from '../auth/requireauth.react';
 import {
   View,
   Text
@@ -36,4 +35,4 @@ Home.propTypes = {
   navigation: React.PropTypes.object
 };
 
-export default requireAuth(Home);
+export default Home;

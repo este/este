@@ -15,6 +15,7 @@ class Login extends Component {
       <View style={style.container}>
         <Header
           navigation={this.props.navigation}
+          showMenuButton={true}
           title={msg('auth.title')}
         />
       </View>

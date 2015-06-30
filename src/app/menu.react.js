@@ -33,9 +33,6 @@ class Menu extends Component {
         <Text onPress={_ => this.onItemSelected('todos')} style={styles.item}>
           {msg('menu.todos')}
         </Text>
-        <Text onPress={_ => this.onItemSelected('examples')} style={styles.item}>
-          {msg('menu.examples')}
-        </Text>
 
         {isLoggedIn && (
           <View>
@@ -53,7 +50,6 @@ class Menu extends Component {
             {msg('menu.login')}
           </Text>
         )}
-
       </ScrollView>
     );
   }

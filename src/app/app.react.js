@@ -36,7 +36,6 @@ class App extends Component {
   getState() {
      return {
        auth: state.authCursor(),
-       examples: state.examplesCursor(),
        pendingActions: state.pendingActionsCursor(),
        todos: state.todosCursor(),
        users: state.usersCursor()

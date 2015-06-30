@@ -8,12 +8,6 @@ export default {
     data: null,
     form: null
   },
-  examples: {
-    editable: {
-      state: null,
-      text: 'Some inline-editable text.'
-    }
-  },
   i18n: {
     formats: {},
     locales: initialLocale,
