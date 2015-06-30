@@ -12,24 +12,21 @@ import style from './home.style';
 class Home extends Component {
 
   render() {
-    const {todos} = this.props;
-    const leftTodos = todos.get('list').size;
+    const leftTodos = this.props.todos.get('list').size;
+    const headingMessage = leftTodos
+      ? (leftTodos > 1 ? 'todos.todos' : 'todos.oneTodo')
+      : 'todos.emptyListHeading';
 
     return (
       <View style={style.container}>
-
         <View style={style.header}>
           <Text style={style.headerText}>
-            {!leftTodos && msg('todos.emptyListHeading')}
-            {leftTodos == 1 && msg('todos.oneTodo')}
-            {leftTodos > 1 && msg('todos.todos', {size: leftTodos})}
+            {msg(headingMessage, {size: leftTodos})}
           </Text>
         </View>
-
         <View style={style.centeredView}>
           <Text>{msg('home.text')}</Text>
         </View>
-
       </View>
     );
   }
