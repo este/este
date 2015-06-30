@@ -8,12 +8,12 @@ export default function requireAuth(BaseComponent) {
 
   class Authenticated extends Component {
 
-    static willTransitionTo(transition) {
+    componentDidMount() {
       const isLoggedIn = !!usersCursor().get('viewer');
-      if (isLoggedIn) return;
-      transition.redirect('/login', {}, {
-        nextPath: transition.path
-      });
+      if (!isLoggedIn) {
+        const route = this.props.navigation.getRoute('login');
+        this.props.navigation.replace(route);
+      }
     }
 
     render() {
@@ -23,6 +23,10 @@ export default function requireAuth(BaseComponent) {
   }
 
   Authenticated.displayName = `${BaseComponent.name}Authenticated`;
+
+  Authenticated.propTypes = {
+    navigation: React.PropTypes.object.isRequired
+  };
 
   return Authenticated;
 

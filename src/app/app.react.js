@@ -23,14 +23,6 @@ class App extends Component {
     return routes[page];
   }
 
-  transitionTo(page) {
-    this.refs.navigator.push(this.getRoute(page));
-  }
-
-  goBack() {
-    this.refs.navigator.pop();
-  }
-
   toggleMenu() {
     this.refs.menu.toggleMenu();
   }
@@ -47,8 +39,7 @@ class App extends Component {
        examples: state.examplesCursor(),
        pendingActions: state.pendingActionsCursor(),
        todos: state.todosCursor(),
-       users: state.usersCursor(),
-       viewer: state.usersCursor().get('viewer')
+       users: state.usersCursor()
      };
    }
 
@@ -84,7 +75,7 @@ class App extends Component {
 
     const navigation = {
       ...navigator,
-      transitionTo: this.transitionTo.bind(this),
+      transitionTo: (route) => navigator.push(this.getRoute(route)),
       getRoute: this.getRoute.bind(this),
       toggleMenu: this.toggleMenu.bind(this)
     };
