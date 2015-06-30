@@ -2,6 +2,7 @@ import './editable.styl';
 import Component from '../components/component.react';
 import React from 'react';
 import Textarea from 'react-textarea-autosize';
+import classnames from 'classnames';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
@@ -34,6 +35,8 @@ class Editable extends Component {
   }
 
   moveCaretToEnd(field) {
+    const isSelectable = /text|password|search|tel|url/.test(field.type);
+    if (!isSelectable) return;
     const length = field.value.length;
     field.selectionStart = length;
     field.selectionEnd = length;
@@ -108,13 +111,13 @@ class Editable extends Component {
 
   render() {
     const {
-      disabled, editButtons, maxRows, rows, showEditButtons,
+      className, disabled, editButtons, maxRows, rows, showEditButtons,
       showViewButtons, state, text, type, viewButtons
     } = this.props;
     const isEditing = state && state.isEditing;
 
     if (!isEditing) return (
-      <div className="editable view">
+      <div className={classnames('editable view', className)}>
         <span onClick={this.onViewClick}>{text}</span>
         {showViewButtons && viewButtons(this.enableEdit, disabled)}
       </div>
@@ -131,12 +134,13 @@ class Editable extends Component {
 
     const field = type === 'textarea'
       ? <Textarea {...fieldProps} maxRows={maxRows} rows={rows} />
-      : <input {...fieldProps} />;
+      : <input {...fieldProps} type={type || 'text'} />;
 
     return (
-      <div className="editable edit">
+      <div className={classnames('editable edit', className)}>
         {field}
-        {showEditButtons && editButtons(this.saveEdit, this.cancelEdit, disabled)}
+        {(showEditButtons || type === 'textarea') &&
+          editButtons(this.saveEdit, this.cancelEdit, disabled)}
       </div>
     );
 
@@ -145,6 +149,7 @@ class Editable extends Component {
 }
 
 Editable.propTypes = {
+  className: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   editButtons: React.PropTypes.func,
   id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
