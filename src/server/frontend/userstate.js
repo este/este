@@ -8,14 +8,14 @@ export default function userState() {
 
   return (req, res, next) => {
     loadUserData(req).then(loadedData => {
-      req.userState = Immutable.Map().mergeWith(...loadedData);
+      req.userState = Immutable.Map().merge(...loadedData);
       next();
     });
   };
 
 }
 
-// Gracefully settle all promises, ignore failed
+// Gracefully settle all promises, ignore failed.
 function loadUserData(req) {
   const dataSources = [
     acceptLanguages(req),
@@ -39,7 +39,7 @@ function acceptLanguages(req) {
   };
 }
 
-// Simulate async action
+// Simulate async action.
 function loadTodos() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
