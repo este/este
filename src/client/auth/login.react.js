@@ -25,8 +25,7 @@ class Login extends Component {
 
   redirectAfterLogin() {
     const nextPath = this.props.router.getCurrentQuery().nextPath;
-    // TODO: Redirect to home explicitly without magic string '/'.
-    this.props.router.replaceWith(nextPath || '/');
+    this.props.router.replaceWith(nextPath || 'home');
   }
 
   render() {
