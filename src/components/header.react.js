@@ -38,7 +38,7 @@ class Header extends Component {
           </TouchableOpacity>
         )}
 
-        <Text style={style.header}>{title} {isMainView}</Text>
+        <Text style={style.header}>{title}</Text>
       </View>
     );
   }
