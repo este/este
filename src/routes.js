@@ -5,7 +5,6 @@ import {msg} from './intl/store';
 export const routes = {
   todos: {
     component: Todos,
-    title: msg('todos.title'),
     hideNavbar: true
   },
   home: {
