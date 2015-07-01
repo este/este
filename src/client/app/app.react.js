@@ -1,4 +1,4 @@
-import './app.styl';
+import '../../../assets/css/app.sass';
 import * as state from '../state';
 import Component from '../components/component.react';
 import Footer from './footer.react';

@@ -1,0 +1,68 @@
+%selectbox-unchecked
+  content: ""
+  position: absolute
+  left: 0
+  top: 0
+  +square(20px)
+  border-radius: 5px
+  background: white
+  border: 1px solid #ccc
+
+%selectbox-checked
+  @extend %icon_check
+  position: absolute
+  top: -3px
+  left: 3px
+  font-size: 22px
+  border-radius: 5px
+  color: $dark-text
+
+.checkbox
+  // Disable selecting label text when clicking on the checkbox
+  user-select: none
+  input
+    &[type="checkbox"]
+      &:not(:checked), &:checked
+        position: absolute
+        left: -9999px
+        & + label
+          position: relative
+          padding-left: 32px
+          cursor: pointer
+          &:before
+            @extend %selectbox-unchecked
+          &:after
+            @extend %selectbox-checked
+      // Hide before/after element according to the checkbox status
+      &:not(:checked) + label:after
+        opacity: 0
+      &:checked + label:after
+        opacity: 1
+
+      // Disabled checkbox
+      &:disabled
+        &:not(:checked), &:checked
+          + label:before
+            box-shadow: none
+            border-color: #bbbbbb
+            background-color: #dddddd
+        &:checked + label:after
+          color: #999999
+        &+ label
+          color: #aaaaaa
+
+      // Focused checkbox (for tab control)
+      &:not(:checked), &:checked
+        &:focus + label
+          &:before
+            border-color: #999
+
+  // Checkbox with error
+  &.has-error
+    input[type="checkbox"]
+      &:not(:checked), &:checked
+        &+ label:before
+          border-color: $brand-danger
+        &:focus + label:before
+          border-color: #a60017
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ff405a

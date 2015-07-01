@@ -1,0 +1,31 @@
+$base: 1rem
+
+$space-none:     0   * $base
+$space-xsmall:   .5  * $base
+$space-small:    .75 * $base
+$space-medium:   1.0 * $base
+$space-large:    1.5 * $base
+$space-xlarge:   2   * $base
+$space-x2large:  3   * $base
+$space-x3large:  4   * $base
+
+$gaps: p padding, m margin
+$spaces: n $space-none, xs $space-xsmall, s $space-small, m $space-medium, l $space-large, xl $space-xlarge, x2l $space-x2large, x3l $space-x3large
+$directions: t top, r right, b bottom, l left
+$aliases: v vertical, h horizontal, a all
+
+@each $gap-name, $gap-type in $gaps
+  @each $space-name, $space-value in $spaces
+    @each $dir-name, $dir-value in $directions
+      .#{$gap-name}#{$dir-name}#{$space-name}
+        #{$gap-type}-#{$dir-value}: $space-value !important
+    @each $alias-name, $alias-type in $aliases
+      .#{$gap-name}#{$alias-name}#{$space-name}
+        @if $alias-type == "vertical"
+          #{$gap-type}-top: $space-value !important
+          #{$gap-type}-bottom: $space-value !important
+        @else if $alias-type == "horizontal"
+          #{$gap-type}-left: $space-value !important
+          #{$gap-type}-right: $space-value !important
+        @else if $alias-type == "all"
+          #{$gap-type}: $space-value !important

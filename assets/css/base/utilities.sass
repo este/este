@@ -1,0 +1,48 @@
+.blocked
+  display: block !important
+
+.inlined
+  display: inline !important
+
+.inline-blocked
+  display: inline-block !important
+
+// Opposite to oveflow: visible
+.lacked
+  overflow: hidden
+
+.hyphenated
+  -ms-word-break: break-all
+  word-break: break-all
+  word-break: break-word
+  -webkit-hyphens: auto
+  -moz-hyphens: auto
+  -ms-hyphens: auto
+  hyphens: auto
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden
+  display: none !important
+  visibility: hidden !important
+  &-mobile
+    +media(phone)
+      display: none !important
+  &-tablet
+    +media(tablet)
+      display: none !important
+  &-desktop
+    +media(desktop)
+      display: none !important
+
+.force-break
+  word-break: break-all !important
+
+.pull-up
+  transform: translateY(-50%)
+  padding: 10px
+  background-color: white
+  display: inline-block
+
+.text-dark
+  color: $dark-text
