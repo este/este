@@ -1,9 +1,9 @@
-import Home from './pages/home.react';
+import Todos from './pages/todos.react';
 
 export default {
 
-  home: {
-    component: Home
+  todos: {
+    component: Todos
   }
 
 };

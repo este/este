@@ -1,32 +1,31 @@
-import Buttons from '../todos/buttons.react';
 import Component from '../components/component.react';
-import DocumentTitle from 'react-document-title';
+import immutable from 'immutable';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
-import React from 'react';
-import ToCheck from './tocheck.react';
-import immutable from 'immutable';
-import {msg} from '../intl/store';
+import React from 'react-native';
+import TodoHeader from '../todos/todoheader.react';
+import {
+  View
+} from 'react-native';
+
+import style from './todos.style';
 
 class Todos extends Component {
 
   render() {
     const {todos, pendingActions} = this.props;
-    const list = todos.get('list');
+    const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
 
     return (
-      <DocumentTitle title={msg('todos.title')}>
-        <div className="todos-page">
-          <NewTodo todo={todos.get('newTodo')} />
-          <List
-            editables={todos.get('editables')}
-            pendingActions={pendingActions}
-            todos={list}
-          />
-          <Buttons clearAllEnabled={list.size > 0} />
-          <ToCheck />
-        </div>
-      </DocumentTitle>
+      <View style={style.container}>
+        <TodoHeader leftTodos={leftTodos} />
+        <NewTodo todo={todos.get('newTodo')} />
+        <List
+          editables={todos.get('editables')}
+          pendingActions={pendingActions}
+          todos={todos.get('list')}
+        />
+      </View>
     );
   }
 
