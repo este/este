@@ -2,6 +2,7 @@ import Component from '../components/component.react';
 import immutable from 'immutable';
 import NewTodo from '../todos/newtodo.react';
 import React from 'react-native';
+import TodoHeader from '../todos/todoheader.react';
 import {
   View,
   Text
@@ -15,17 +16,10 @@ class Home extends Component {
   render() {
     const {todos} = this.props;
     const leftTodos = todos.get('list').size;
-    const headingMessage = leftTodos
-      ? (leftTodos > 1 ? 'todos.todos' : 'todos.oneTodo')
-      : 'todos.emptyListHeading';
 
     return (
       <View style={style.container}>
-        <View style={style.header}>
-          <Text style={style.headerText}>
-            {msg(headingMessage, {size: leftTodos})}
-          </Text>
-        </View>
+        <TodoHeader leftTodos={leftTodos} />
         <NewTodo todo={todos.get('newTodo')} />
         <View style={style.centeredView}>
           <Text>{msg('home.text')}</Text>
