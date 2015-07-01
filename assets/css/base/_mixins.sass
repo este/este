@@ -1,0 +1,47 @@
+@import ./media_queries
+
+@function number($string)
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9'
+  $numbers:  0   1   2   3   4   5   6   7   8   9
+  $result: 0
+
+  @for $i from 1 through str-length($string)
+    $character: str-slice($string, $i, $i)
+    $index: index($strings, $character)
+    $number: nth($numbers, $index)
+    $result: $result * 10 + $number
+  @return $result
+
+=make-columns($args...)
+  @for $i from 1 through length($args)
+    $type: str-slice(nth($args, $i), 1,2)
+    $size: number(str-slice(nth($args, $i), 3, str-length(nth($args, $i))))
+    @if $type == 'xs'
+      +make-xs-column($size)
+    @if $type == 'ms'
+      +make-ms-column($size)
+    @if $type == 'sm'
+      +make-sm-column($size)
+    @if $type == 'md'
+      +make-md-column($size)
+    @if $type == 'lg'
+      +make-lg-column($size)
+
+=circle($size, $color: $white)
+  +square($size)
+  border-radius: 50%
+  // +hide-text
+  background-color: $color
+
+=keyframes($animationName)
+  @-webkit-keyframes #{$animationName}
+    @content
+
+  @-moz-keyframes #{$animationName}
+    @content
+
+  @-o-keyframes #{$animationName}
+    @content
+
+  @keyframes #{$animationName}
+    @content

@@ -1,0 +1,23 @@
+$phone: "(max-width: #{$screen-xs-max-new})"
+$tablet: "(min-width: #{$screen-ms-min}) and (max-width: #{$screen-ms-max})"
+$desktop: "(min-width: #{$screen-sm-min}) and (max-width: #{$screen-sm-max})"
+$large: "(min-width: #{$screen-md-min})"
+$retina: "screen and (-webkit-min-device-pixel-ratio: 2)"
+
+=media($type...)
+  @for $i from 1 through length($type)
+    @if nth($type, $i) == phone
+      @media #{$phone}
+        @content
+    @if nth($type, $i) == tablet
+      @media #{$tablet}
+        @content
+    @if nth($type, $i) == desktop
+      @media #{$desktop}
+        @content
+    @if nth($type, $i) == large
+      @media #{$large}
+        @content
+    @if nth($type, $i) == retina
+      @media #{$retina}
+        @content

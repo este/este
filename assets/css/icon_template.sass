@@ -1,0 +1,37 @@
+// {{comment}}
+
+@font-face
+  font-family: {{fontName}}
+  src: url("{{fontPath}}/{{fontName}}.eot")
+  src: url("{{fontPath}}/{{fontName}}.eot?#iefix") format('embedded-opentype'), url("{{fontPath}}/{{fontName}}.woff2") format('woff2'), url("{{fontPath}}/{{fontName}}.woff") format('woff'), url("{{fontPath}}/{{fontName}}.ttf") format('truetype')
+  font-weight: normal
+  font-style: normal
+
+%icon, .icon
+  font:
+    family: '{{fontName}}'
+    style: normal
+    variant: normal
+    weight: normal
+  line-height: 1
+  speak: none
+  text-transform: none
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
+=icon($content)
+  &:before
+    content: $content
+    line-height: 1
+    speak: none
+    text-transform: none
+    @content
+
+$icon_list: ({% for icon in icons -%}{{icon.name}}: "\{{icon.code}}", {% endfor %})
+
+@each $name, $glyph_code in $icon_list
+  %icon_#{$name}
+    @extend %icon
+    content: $glyph_code
+  .icon-#{$name}:before
+    @extend %icon_#{$name}

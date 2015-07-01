@@ -1,0 +1,128 @@
+// Bootstrap Mid-Small - col-ms-* - the missing grid set for Bootstrap3.
+//
+// This is a hack to fill the gap between 480 and 767 pixels - a missing range
+// in the bootstrap responsive grid structure.  Use these classes to style pages
+// on cellphones when they transition from portrait to landscape.
+//
+// Contains:
+//   Columns, Offsets, Pushes, Pulls for the Mid-Small layout
+//   Visibility classes for the Mid-Small layout
+//   Redefined visibility classes for the Extra Small layout
+//
+// See https://github.com/twbs/bootstrap/issues/10203 for more info.
+// Original gist: https://gist.github.com/andyl/6360906
+//
+// Instructions: Add the following to the end of bootstrap.scss
+//
+//   @import "bootstrap-ms"
+//
+
+// Mid-Small breakpoint
+$screen-ms: 480px !default
+$screen-ms-min: $screen-ms !default
+$screen-ms-max: $screen-sm-min - 1 !default
+
+// Redefined Extra Small max value (Can't override non-default variables in SASS)
+$screen-xs-max-new: $screen-ms-min - 1 !default
+
+// Common styles (see make-grid-columns() in bootstrap/mixins/_grid-framework.scss)
+.col-ms-1,
+.col-ms-2,
+.col-ms-3,
+.col-ms-4,
+.col-ms-5,
+.col-ms-6,
+.col-ms-7,
+.col-ms-8,
+.col-ms-9,
+.col-ms-10,
+.col-ms-11,
+.col-ms-12
+  position: relative
+  // Prevent columns from collapsing when empty
+  min-height: 1px
+  // Inner gutter via padding
+  padding-left: $grid-gutter-width / 2
+  padding-right: $grid-gutter-width / 2
+
+// Misc. class adjustments for col-ms
+@media (min-width: $screen-ms) and (max-width: $screen-ms-max)
+  .container
+    max-width: $screen-sm
+  .hidden-xs
+    display: block !important
+
+// col-ms grid
+@media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+  +make-grid(ms)
+
+// Visibility utilities
++responsive-invisibility(".visible-xs, .visible-ms")
+
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block,
+.visible-ms-block,
+.visible-ms-inline,
+.visible-ms-inline-block
+  display: none !important
+
+@media (max-width: $screen-xs-max-new)
+  +responsive-visibility(".visible-xs")
+
+.visible-xs-block
+  @media (max-width: $screen-xs-max-new)
+    display: block !important
+
+.visible-xs-inline
+  @media (max-width: $screen-xs-max-new)
+    display: inline !important
+
+.visible-xs-inline-block
+  @media (max-width: $screen-xs-max-new)
+    display: inline-block !important
+
+@media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+  +responsive-visibility(".visible-ms")
+
+.visible-ms-block
+  @media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+    display: block !important
+
+.visible-ms-inline
+  @media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+    display: inline !important
+
+.visible-ms-inline-block
+  @media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+    display: inline-block !important
+
+@media (max-width: $screen-xs-max-new)
+  +responsive-invisibility(".hidden-xs")
+
+@media (min-width: $screen-ms-min) and (max-width: $screen-ms-max)
+  +responsive-invisibility(".hidden-ms")
+
+//  An extension of andyl's hack – https://gist.github.com/andyl/6360906
+//  in a mixin version.
+
+=make-ms-column($columns, $gutter: $grid-gutter-width)
+  position: relative
+  min-height: 1px
+  padding-left: $gutter / 2
+  padding-right: $gutter / 2
+  @media (min-width: $screen-ms-min)
+    float: left
+    width: percentage($columns / $grid-columns)
+
+=make-ms-column-offset($columns)
+  @media (min-width: $screen-ms-min)
+    margin-left: percentage($columns / $grid-columns)
+
+=make-ms-column-push($columns)
+  @media (min-width: $screen-ms-min)
+    left: percentage($columns / $grid-columns)
+
+=make-ms-column-pull($columns)
+  @media (min-width: $screen-ms-min)
+    right: percentage($columns / $grid-columns)

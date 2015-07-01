@@ -1,0 +1,97 @@
+=font-regular
+  font-family: $font-regular
+  font-weight: 400
+
+body
+  font-size: 1.4rem !important
+
+.font-size, %font-size
+  &-small
+    font-size: 1.2rem
+  &-regular
+    font-size: 1.6rem
+  &-large
+    font-size: 2rem
+  &-x-large
+    font-size: 1.8rem
+  &-2x-large
+    font-size: 2.5rem
+  &-3x-large
+    font-size: 3rem
+  &-4x-large
+    font-size: 6rem
+
+.light-type, %light_type
+  font-weight: 300
+.bold-type, %bold_type
+  font-weight: 700
+
+h1, h2, h3, h4, h5, h6
+  font-weight: initial
+  color: $heading-text
+  margin:
+    top: 1rem
+    bottom: .5rem
+  &.bold
+    font-weight: 900
+  &.light-type
+    @extend %light_type
+  &.bold-type
+    @extend %font_bold
+  &.upper
+    text-transform: uppercase
+
+h1
+  @extend %font-size-4x-large
+h2
+  @extend %font-size-3x-large
+h3
+  @extend %font-size-2x-large
+h4
+  @extend %font-size-x-large
+h5
+  @extend %font-size-large
+
+p
+  @extend %font-size-regular
+  &.light-type
+    @extend %light_type
+  &.bold-type
+    @extend %font_bold
+  &.upper
+    text-transform: uppercase
+
+.muted
+  color: rgba($muted-text, .5)
+
+a
+  cursor: pointer
+  color: $brand-primary
+  &:not(.btn)
+    text-decoration: none
+    border-bottom: 1px solid $brand-primary
+    transition: border-color .2s ease-in-out, color .2s ease-in-out
+    &:hover
+      border-bottom-color: $link-hover
+  &.accented
+    @extend %font_bold
+  &.clean
+    text-decoration: none
+    border-bottom: none
+
+.type-small
+  font-size: 80%
+.type-tiny
+  font-size: 65%
+.type-micro
+  font-size: 50%
+.type-up
+  font-size: 113%
+.type-twice
+  font-size: 2rem
+
+.text-transform-initial
+  text-transform: initial !important
+
+.highlight
+  color: $brand-primary !important

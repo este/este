@@ -1,0 +1,54 @@
+=button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)
+  padding: $padding-vertical $padding-horizontal $padding-vertical $padding-horizontal
+  font-size: $font-size
+  line-height: $line-height
+  border-radius: $border-radius
+
+%default-button-style
+  display: inline-block
+  margin-bottom: 0
+  text:
+    align: center
+  vertical-align: middle
+  cursor: pointer
+  background-image: none
+  border: 1px solid transparent
+  white-space: normal
+  touch-action: manipulation
+  outline: none
+  font-weight: bold
+  user-select: none
+  +button-size(1.6rem, 34px, 1.7rem, 1.7rem, 0)
+
+.btn
+  @extend %default-button-style
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out
+  +media(phone)
+    width: 100%
+    margin-bottom: 8px
+  + .btn
+    margin-left: 10px
+  &.btn-primary
+    +button-variant(white, $brand-primary, transparent)
+  &.btn-secondary
+    +button-variant(white, #919191, transparent)
+  &.btn-fluid
+    display: block
+    width: 100%
+    margin:
+      left: initial
+      right: initial
+  &.btn-xs
+    +button-size($padding-small-vertical, $padding-small-horizontal,  1.5rem, $line-height-small, 0)
+  &.btn-large
+    +button-size($space-medium, $space-x2large, 2.5rem, 1.4, 0)
+  &.btn-extra-large
+    +button-size($space-large, $space-x3large, 3rem, 1.4, 0)
+    +media(phone)
+      font-size: 2rem
+  &:hover, &:focus, &.focus
+    text-decoration: none
+  &.disabled, &[disabled]
+    opacity: 0.6
+    pointer-events: none
+    cursor: not-allowed

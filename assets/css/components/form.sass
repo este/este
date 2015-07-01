@@ -1,0 +1,38 @@
+input
+  color: $gray-light
+  font-size: 1.8rem
+  border: 1px solid $gray-lighter
+  padding: .6rem 1rem
+
+.form-group
+  position: relative
+  label
+    font-size: 16px
+    color: #333333
+  &.has-error
+    border-color: $brand-danger
+    .error-message
+      color: $brand-danger
+  &.checkbox.has-error p
+    margin-top: 0
+  .form-control
+    box-shadow: 0 1px 0 rgba(0,0,0,.2)
+    // Reset default iOS style
+    -webkit-appearance: none !important
+    border-radius: 0
+    font-size: 18px
+    font-weight: 300
+    &:focus
+      box-shadow: 0 1px 0 scale_color($brand-primary, $alpha: -50%)
+
+.password-wrapper
+  position: relative
+  .input-wrapper
+    display: inline-block
+    position: relative
+    input
+      padding-right: 30px
+      // Disable built-in password reveal for IE10
+      &::-ms-clear, &::-ms-reveal
+        display: none
+
