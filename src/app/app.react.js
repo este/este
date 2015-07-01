@@ -12,6 +12,8 @@ import {
 
 import appStyle from './app.style';
 
+import '../todos/store';
+
 class App extends Component {
 
   constructor(props) {
