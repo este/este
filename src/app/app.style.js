@@ -10,6 +10,21 @@ export const centered = {
   textAlign: 'center'
 };
 
+export const container = {
+  flex: 1
+};
+
+export const containerWithNavbar = {
+  ...container,
+  marginTop: 64
+};
+
+export const centeredView = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
 export default StyleSheet.create({
   container: {
     flex: 1,

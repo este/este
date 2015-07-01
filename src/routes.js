@@ -1,12 +1,16 @@
 import Todos from './pages/todos.react';
 import Home from './pages/home.react';
+import {msg} from './intl/store';
 
 export const routes = {
   todos: {
-    component: Todos
+    component: Todos,
+    title: msg('todos.title'),
+    hideNavbar: true
   },
   home: {
-    component: Home
+    component: Home,
+    title: msg('home.title')
   }
 };
 

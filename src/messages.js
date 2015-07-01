@@ -34,7 +34,7 @@ export default {
     },
     home: {
       title: 'Home',
-      text: 'App starter kit for Este.js. \n\n Open left menu and check todos!'
+      text: 'App starter kit for Este.js. \n\n Open left menu and check todos! \n\n Press CMD+R to reload \n Press CMD+D for debug menu'
     },
     me: {
       title: 'Me',

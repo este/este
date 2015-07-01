@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native';
 
-import style from './todos.style';
+import {container} from '../app/app.style';
 
 class Todos extends Component {
 
@@ -17,7 +17,7 @@ class Todos extends Component {
     const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
 
     return (
-      <View style={style.container}>
+      <View style={container}>
         <TodoHeader
           leftTodos={leftTodos}
           navigation={navigation}

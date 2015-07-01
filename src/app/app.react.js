@@ -1,5 +1,6 @@
 import * as state from '../state';
 import Component from '../components/component.react';
+import Header from '../components/header.react';
 import Menu from './menu.react';
 import React from 'react-native';
 import {routes, defaultRoute} from '../routes';
@@ -19,6 +20,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = this.getState();
+    this.onItemSelected = this.onItemSelected.bind(this);
+    this.handleStatusBarAppearance = this.handleStatusBarAppearance.bind(this);
+    this.configureScene = this.configureScene.bind(this);
+    this.renderScene = this.renderScene.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   getRoute(page) {
@@ -91,16 +97,17 @@ class App extends Component {
       <SideMenu
         animation='spring'
         disableGestures={true}
-        menu={<Menu onItemSelected={this.onItemSelected.bind(this)}/>}
-        onChange={this.handleStatusBarAppearance.bind(this)}
+        menu={<Menu onItemSelected={this.onItemSelected}/>}
+        onChange={this.handleStatusBarAppearance}
         ref='menu'
         style={appStyle.container}>
 
         <Navigator
-          configureScene={this.configureScene.bind(this)}
+          configureScene={this.configureScene}
           initialRoute={this.getRoute(defaultRoute)}
+          navigationBar={<Header menuAction={this.toggleMenu} />}
           ref='navigator'
-          renderScene={this.renderScene.bind(this)}
+          renderScene={this.renderScene}
           style={appStyle.container}
         />
 

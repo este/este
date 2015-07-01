@@ -14,23 +14,33 @@ class Header extends Component {
 
   handleBackButtonClick(isMainView) {
     if (isMainView)
-      this.props.navigation.toggleMenu();
+      this.props.menuAction();
     else
-      this.props.navigation.pop();
+      this.props.navigator.pop();
+  }
+
+  getCurrentRoute(navigator) {
+    const routes = navigator.getCurrentRoutes();
+    return routes[routes.length - 1];
   }
 
   render() {
-    const {title, hideBackButton, navigation} = this.props;
-    const isMainView = navigation.getCurrentRoutes().length === 1;
+    const {navigator} = this.props;
+    const isMainView = navigator.getCurrentRoutes().length === 1;
+    const route = this.getCurrentRoute(navigator);
 
     const backButton = isMainView ?
       <Image source={require('image!menu-icon')} style={style.menuIcon} /> :
       <Text style={style.menuLink}>{msg('buttons.back')}</Text>;
 
-    return (
-      <View style={style.container}>
+    const navbarStyle = [style.container];
+    if (route.hideNavbar)
+      navbarStyle.push(style.containerHidden);
 
-        {!hideBackButton && (
+    return (
+      <View style={navbarStyle}>
+
+        {!route.hideBackButton && (
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={_ => this.handleBackButtonClick(isMainView)}>
@@ -38,7 +48,7 @@ class Header extends Component {
           </TouchableOpacity>
         )}
 
-        <Text style={style.header}>{title}</Text>
+        <Text style={style.header}>{route.title}</Text>
       </View>
     );
   }
@@ -46,9 +56,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  hideBackButton: React.PropTypes.bool,
-  navigation: React.PropTypes.object.isRequired,
-  title: React.PropTypes.string.isRequired
+  menuAction: React.PropTypes.func.isRequired,
+  navigator: React.PropTypes.object.isRequired
 };
 
 export default Header;
