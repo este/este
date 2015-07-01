@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 
 import style from './todos.style';
+import {paragraph, centered} from '../app/app.style';
 
-class About extends Component {
+class Home extends Component {
 
   render() {
     const {navigation} = this.props;
@@ -19,15 +20,17 @@ class About extends Component {
           navigation={navigation}
           title={msg('home.title')}
         />
-      <Text onPress={_ => navigation.transitionTo('about')}>TET</Text>
+        <View style={style.centeredView}>
+          <Text style={[centered, paragraph]}>{msg('home.text')}</Text>
+        </View>
       </View>
     );
   }
 
 }
 
-About.propTypes = {
+Home.propTypes = {
   navigation: React.PropTypes.object.isRequired
 };
 
-export default About;
+export default Home;

@@ -26,14 +26,15 @@ export default {
       cancel: 'Cancel',
       edit: 'Edit',
       save: 'Save',
-      menu: 'Menu'
+      menu: 'Menu',
+      back: 'Back'
     },
     confirmations: {
       cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`
     },
     home: {
       title: 'Home',
-      text: 'App starter kit for Este.js. Check todos'
+      text: 'App starter kit for Este.js. \n\n Open left menu and check todos!'
     },
     me: {
       title: 'Me',
@@ -42,7 +43,7 @@ export default {
     menu: {
       examples: 'Examples',
       headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
-      about: 'About',
+      home: 'Home',
       login: 'Login',
       me: 'Me (protected)',
       todos: 'Todos',

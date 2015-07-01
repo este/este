@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {paragraph} from '../app/app.style';
 
 export default StyleSheet.create({
   container: {
@@ -7,9 +8,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   input: {
-    color: '#7C7C7C',
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
+    ...paragraph,
     paddingRight: 20,
     flex: 1
   },

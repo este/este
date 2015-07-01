@@ -4,7 +4,7 @@ const menuLink = {
   height: 25,
   position: 'absolute',
   left: 15,
-  top: 30,
+  top: 37,
   opacity: 0.9,
   color: '#FFFFFF',
   fontSize: 15
@@ -13,6 +13,7 @@ const menuLink = {
 export default StyleSheet.create({
   container: {
     height: 74,
+    paddingTop: 14,
     backgroundColor: '#31AACC',
     marginTop: -40,
     alignItems: 'center',
@@ -32,7 +33,7 @@ export default StyleSheet.create({
   menuIcon: {
     ...menuLink,
     width: 25,
-    top: 27
+    top: 32
   }
 
 });

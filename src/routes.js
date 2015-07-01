@@ -1,13 +1,13 @@
 import Todos from './pages/todos.react';
-import About from './pages/about.react';
+import Home from './pages/home.react';
 
 export const routes = {
   todos: {
     component: Todos
   },
-  about: {
-    component: About
+  home: {
+    component: Home
   }
 };
 
-export const defaultRoute = 'about';
+export const defaultRoute = 'home';

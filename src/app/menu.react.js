@@ -16,7 +16,7 @@ class Menu extends Component {
   }
 
   render() {
-    const pages = ['todos', 'about'];
+    const pages = ['home', 'todos'];
 
     return (
       <ScrollView style={styles.menu}>

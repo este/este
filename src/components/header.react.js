@@ -1,5 +1,6 @@
 import React from 'react-native';
 import Component from '../components/component.react';
+import {msg} from '../intl/store';
 import {
   Text,
   View,
@@ -24,7 +25,7 @@ class Header extends Component {
 
     const backButton = isMainView ?
       <Image source={require('image!menu-icon')} style={style.menuIcon} /> :
-      <Text style={style.menuLink}>Back</Text>;
+      <Text style={style.menuLink}>{msg('buttons.back')}</Text>;
 
     return (
       <View style={style.container}>
