@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export default StyleSheet.create({
+export const style = StyleSheet.create({
   container: {
     height: 62,
     backgroundColor: '#31AACC',
@@ -8,6 +8,13 @@ export default StyleSheet.create({
     borderTopColor: '#73CEE7'
   },
   input: {
-    flex: 1
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontFamily: 'Helvetica Neue'
   }
 });
+
+export const placeholderTextColor = '#cce9f2';

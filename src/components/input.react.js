@@ -9,6 +9,9 @@ class Input extends React.Component {
     super(props);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onEndEditing = this.onEndEditing.bind(this);
+    this.state = {
+      value: this.props.value
+    };
   }
 
   onFieldChange(event) {
@@ -21,17 +24,12 @@ class Input extends React.Component {
   }
 
   onEndEditing() {
-    this.refs.textInput.setNativeProps({
-      text: this.props.value
-    });
     this.props.onEndEditing();
-  }
-
-  componentWillReceiveProps({value}) {
-    if (!value.length)
+    setTimeout(_ => {
       this.refs.textInput.setNativeProps({
-        value: value
+        text: this.props.value
       });
+    });
   }
 
   blur() {
@@ -39,7 +37,7 @@ class Input extends React.Component {
   }
 
   render() {
-    const value = this.props.value;
+    const value = this.state.value;
     return (
       <TextInput
         {...this.props}
