@@ -25,7 +25,8 @@ export default {
     buttons: {
       cancel: 'Cancel',
       edit: 'Edit',
-      save: 'Save'
+      save: 'Save',
+      menu: 'Menu'
     },
     confirmations: {
       cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`

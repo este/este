@@ -13,12 +13,15 @@ import style from './todos.style';
 class Todos extends Component {
 
   render() {
-    const {todos, pendingActions} = this.props;
+    const {todos, pendingActions, navigation} = this.props;
     const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
 
     return (
       <View style={style.container}>
-        <TodoHeader leftTodos={leftTodos} />
+        <TodoHeader
+          leftTodos={leftTodos}
+          navigation={navigation}
+        />
         <NewTodo todo={todos.get('newTodo')} />
         <List
           editables={todos.get('editables')}
@@ -32,6 +35,7 @@ class Todos extends Component {
 }
 
 Todos.propTypes = {
+  navigation: React.PropTypes.object.isRequired,
   pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   todos: React.PropTypes.instanceOf(immutable.Map).isRequired
 };
