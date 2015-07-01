@@ -1,9 +1,10 @@
 import Component from '../components/component.react';
 import React from 'react-native';
-import TodoHeader from '../todos/todoheader.react';
+import Header from '../components/header.react';
+import {msg} from '../intl/store';
 import {
-  Text,
-  View
+  View,
+  Text
 } from 'react-native';
 
 import style from './todos.style';
@@ -14,10 +15,11 @@ class About extends Component {
     const {navigation} = this.props;
     return (
       <View style={style.container}>
-        <TodoHeader
+        <Header
           navigation={navigation}
+          title={msg('home.title')}
         />
-        <Text>Wat</Text>
+      <Text onPress={_ => navigation.transitionTo('about')}>TET</Text>
       </View>
     );
   }

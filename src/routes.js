@@ -1,7 +1,7 @@
 import Todos from './pages/todos.react';
 import About from './pages/about.react';
 
-export default {
+export const routes = {
   todos: {
     component: Todos
   },
@@ -9,3 +9,5 @@ export default {
     component: About
   }
 };
+
+export const defaultRoute = 'about';

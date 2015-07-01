@@ -21,7 +21,9 @@ class TodoHeader extends Component {
     return (
       <View style={style.container}>
 
-        <TouchableOpacity activeOpacity={0.7} onPress={navigation.toggleMenu}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={navigation.toggleMenu}>
           <Image source={require('image!menu-icon')} style={style.menuLink} />
         </TouchableOpacity>
 

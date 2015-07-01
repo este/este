@@ -2,7 +2,7 @@ import * as state from '../state';
 import Component from '../components/component.react';
 import Menu from './menu.react';
 import React from 'react-native';
-import routes from '../routes';
+import {routes, defaultRoute} from '../routes';
 import SideMenu from 'react-native-side-menu';
 import {
   StatusBarIOS,
@@ -98,7 +98,7 @@ class App extends Component {
 
         <Navigator
           configureScene={this.configureScene.bind(this)}
-          initialRoute={this.getRoute('todos')}
+          initialRoute={this.getRoute(defaultRoute)}
           ref='navigator'
           renderScene={this.renderScene.bind(this)}
           style={appStyle.container}
