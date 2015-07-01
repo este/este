@@ -19,6 +19,10 @@ export const containerWithNavbar = {
   marginTop: 64
 };
 
+export const paddingBottom = {
+  paddingBottom: 64
+};
+
 export const centeredView = {
   flex: 1,
   justifyContent: 'center',

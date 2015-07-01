@@ -6,16 +6,16 @@ import {
   Text
 } from 'react-native';
 
-import {paragraph, centered, containerWithNavbar, centeredView} from '../app/app.style';
+import * as style from '../app/app.style';
 
 class Home extends Component {
 
   render() {
     const {navigation} = this.props;
     return (
-      <View style={containerWithNavbar}>
-        <View style={centeredView}>
-          <Text style={[centered, paragraph]}>{msg('home.text')}</Text>
+      <View style={style.containerWithNavbar}>
+        <View style={[style.centeredView, style.paddingBottom]}>
+          <Text style={[style.centered, style.paragraph]}>{msg('home.text')}</Text>
         </View>
       </View>
     );
