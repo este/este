@@ -49,8 +49,11 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.deleteTodo:
       todosCursor(todos => {
-        const todo = data;
-        return todos.update('list', list => list.delete(list.indexOf(todo)));
+        const {id} = data;
+        return todos.update('list', list => {
+          const idx = list.findIndex(todo => todo.id === id);
+          return list.delete(idx);
+        });
       });
       break;
 
@@ -74,14 +77,22 @@ export const dispatchToken = register(({action, data}) => {
       break;
 
     case actions.toggleTodoCompleted:
-    todosCursor(todos => {
-      const {id} = data;
-      return todos.update('list', list => {
-        const idx = list.findIndex(todo => todo.id === id);
-        return list
-          .updateIn([idx, 'completed'], completed => !completed);
+      todosCursor(todos => {
+        const {id} = data;
+        return todos.update('list', list => {
+          const idx = list.findIndex(todo => todo.id === id);
+          return list
+            .updateIn([idx, 'completed'], completed => !completed);
+        });
       });
-    });
+      break;
+
+    case actions.clearCompletedTodos:
+      todosCursor(todos => {
+        return todos
+          .update('list', list => list.filter(todo => !todo.completed));
+      });
+      break;
 
   }
 

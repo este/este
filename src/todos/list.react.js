@@ -1,3 +1,4 @@
+import * as actions from './actions';
 import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
@@ -6,12 +7,11 @@ import {
   View,
   Text,
   ListView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 import style from './list.style';
-
-const simpleComparator = (r1, r2) => r1 !== r2;
 
 class List extends React.Component {
 
@@ -21,8 +21,7 @@ class List extends React.Component {
   }
 
   dataStore = new ListView.DataSource({
-    sectionHeaderHasChanged: simpleComparator,
-    rowHasChanged: simpleComparator
+    rowHasChanged: (r1, r2) => r1 !== r2
   })
 
   renderRow(todo) {
@@ -55,9 +54,21 @@ class List extends React.Component {
         </View>
       );
 
+    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
+
+    const renderFooter = () => {
+      if (hasCompletedTodos)
+        return (
+          <TouchableOpacity activeOpacity={0.9} onPress={actions.clearCompletedTodos}>
+            <Text style={style.clearCompleted}>{msg('todos.clearCompleted')}</Text>
+          </TouchableOpacity>
+        );
+    };
+
     return (
       <ListView
         dataSource={dataSource}
+        renderFooter={renderFooter}
         renderRow={this.renderRow}
       />
     );

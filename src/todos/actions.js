@@ -43,6 +43,10 @@ export function toggleTodoCompleted(todo) {
   dispatch(toggleTodoCompleted, todo);
 }
 
+export function clearCompletedTodos() {
+  dispatch(clearCompletedTodos);
+}
+
 export function onNewTodoFieldChange({target: {name, value}}) {
   switch (name) {
     case 'title':
@@ -56,8 +60,9 @@ setToString('todos', {
   addHundredTodos,
   addTodo,
   clearAll,
+  clearCompletedTodos,
   deleteTodo,
   onTodoFieldChange,
   onNewTodoFieldChange,
-  toggleTodoCompleted
+  toggleTodoCompleted,
 });
