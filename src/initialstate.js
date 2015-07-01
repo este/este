@@ -19,8 +19,8 @@ export default {
     // Initial state can contain prefetched lists and maps. List for array, map
     // for object. We can also use sortedByTitle list, if we need sorted data.
     list: [
-      {id: 1, title: 'consider ‘stop doing’ app'},
-      {id: 2, title: 'consider ‘stop doing’ app'}
+      {id: 1, title: 'Buy a cat'},
+      {id: 2, title: 'Create a todo list app', completed: true}
     ]
   }
 };

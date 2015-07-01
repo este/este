@@ -4,6 +4,7 @@ import Input from '../components/input.react';
 import React from 'react';
 import TodoRecord from './todo';
 import {
+  Image,
   View
 } from 'react-native';
 
@@ -14,18 +15,31 @@ class Todo extends Component {
   render() {
     const {todo, disabled} = this.props;
 
+    let todoStyle = [style.input];
+    if (todo.completed)
+      todoStyle.push(style.inputCompleted);
+
     const editableFor = (propName) =>
       <Input
         editable={!disabled}
         enablesReturnKeyAutomatically={true}
         name={propName}
-        onChange={e => actions.onTodoFieldChange(todo.id, e)}
-        style={style.input}
+        onChange={e => actions.onTodoFieldChange(todo, e)}
+        onEndEditing={_ => actions.onTodoEndEditing(todo)}
+        style={todoStyle}
         value={todo[propName]}
       />;
 
+    const image = todo.completed
+      ? require('image!SelectedCheckbox')
+      : require('image!EmptyCheckbox');
+
     return (
-      <View>
+      <View style={style.container}>
+        <Image
+          source={image}
+          style={style.checkbox}
+        />
         {editableFor('title')}
       </View>
     );

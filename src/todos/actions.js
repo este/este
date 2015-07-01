@@ -25,13 +25,18 @@ export function completeTodo(todo) {
   dispatch(completeTodo, todo);
 }
 
-export function onTodoFieldChange(id, {target: {name, value}}) {
+export function onTodoFieldChange({id}, {target: {name, value}}) {
   switch (name) {
     case 'title':
       value = value.slice(0, MAX_TODO_TITLE_LENGTH);
       break;
   }
   dispatch(onTodoFieldChange, {id, name, value});
+}
+
+export function onTodoEndEditing(todo) {
+  if (todo.title.length === 0)
+    dispatch(deleteTodo, todo);
 }
 
 export function onNewTodoFieldChange({target: {name, value}}) {

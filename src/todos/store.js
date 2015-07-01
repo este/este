@@ -59,7 +59,9 @@ export const dispatchToken = register(({action, data}) => {
         const {id, name, value} = data;
         return todos.update('list', list => {
           const idx = list.findIndex(todo => todo.id === id);
-          return list.setIn([idx, name], value);
+          return list
+            .setIn([idx, name], value)
+            .setIn([idx, 'completed'], false);
         });
       });
       break;

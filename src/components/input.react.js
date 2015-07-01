@@ -31,9 +31,10 @@ class Input extends React.Component {
       }
     });
     setTimeout(_ => {
-      this.refs.textInput.setNativeProps({
-        text: this.props.value
-      });
+      if (this && this.refs.textInput)
+        this.refs.textInput.setNativeProps({
+          text: this.props.value
+        });
     });
   }
 

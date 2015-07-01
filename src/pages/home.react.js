@@ -14,7 +14,7 @@ class Home extends Component {
 
   render() {
     const {todos, pendingActions} = this.props;
-    const leftTodos = todos.get('list').size;
+    const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
 
     return (
       <View style={style.container}>
