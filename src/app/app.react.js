@@ -98,7 +98,7 @@ class App extends Component {
 
         <Navigator
           configureScene={this.configureScene.bind(this)}
-          initialRoute={this.getRoute('todos')}
+          initialRoute={this.getRoute('home')}
           ref='navigator'
           renderScene={this.renderScene.bind(this)}
           style={appStyle.container}

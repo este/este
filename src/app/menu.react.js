@@ -16,11 +16,15 @@ class Menu extends Component {
   }
 
   render() {
+    const pages = ['home', 'todos'];
+
     return (
       <ScrollView style={styles.menu}>
-        <Text onPress={_ => this.onItemSelected('todos')} style={styles.item}>
-          {msg('menu.todos')}
-        </Text>
+        {pages.map(page => (
+          <Text onPress={_ => this.onItemSelected(page)} style={styles.item}>
+            {msg(`menu.${page}`)}
+          </Text>
+        ))}
       </ScrollView>
     );
   }
