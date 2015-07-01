@@ -89,6 +89,7 @@ export default {
     todos: {
       add100: 'Add 100 Todos',
       clearCompleted: 'Clear completed',
+      clearAll: 'Clear all',
       oneTodo: 'You have almost done',
       todos: 'You have {size} tasks to go!',
       emptyListHeading: 'Nothing, enjoy',

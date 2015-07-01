@@ -1,4 +1,4 @@
-import * as actions from './actions';
+import Buttons from './buttons.react';
 import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
@@ -7,8 +7,7 @@ import {
   View,
   Text,
   ListView,
-  Image,
-  TouchableOpacity
+  Image
 } from 'react-native';
 
 import style from './list.style';
@@ -57,12 +56,12 @@ class List extends React.Component {
     const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
 
     const renderFooter = () => {
-      if (hasCompletedTodos)
-        return (
-          <TouchableOpacity activeOpacity={0.9} onPress={actions.clearCompletedTodos}>
-            <Text style={style.clearCompleted}>{msg('todos.clearCompleted')}</Text>
-          </TouchableOpacity>
-        );
+      return (
+        <Buttons
+          clearAllEnabled={!hasCompletedTodos}
+          clearCompletedEnabled={hasCompletedTodos}
+        />
+      );
     };
 
     return (
