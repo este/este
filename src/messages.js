@@ -92,7 +92,7 @@ export default {
       oneTodo: 'You have almost done',
       todos: 'You have {size} tasks to go!',
       emptyListHeading: 'Nothing, enjoy',
-      emptyList: 'Nothing. Go outside and enjoy world.',
+      emptyList: 'It\'s rather empty here...',
       newTodoPlaceholder: 'What needs to be done?',
       title: 'Todos',
       undo: `Undo {steps, plural,

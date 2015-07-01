@@ -1,38 +1,71 @@
 import * as actions from './actions';
-import Component from '../components/component.react';
-import React from 'react';
+import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
+import {
+  View,
+  Text,
+  ListView,
+  Image
+} from 'react-native';
 
-class List extends Component {
+import style from './list.style';
+
+const simpleComparator = (r1, r2) => r1 !== r2;
+
+class List extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.renderRow = this.renderRow.bind(this);
+  }
+
+  dataStore = new ListView.DataSource({
+    sectionHeaderHasChanged: simpleComparator,
+    rowHasChanged: simpleComparator
+  })
+
+  renderRow(todo) {
+    const {editables, pendingActions} = this.props;
+    const editable = editables.get(todo.id);
+    const isPending = pendingActions.has(actions.onEditableSave.toString());
+    const disabled = !!editable && isPending;
+
+    return (
+      <View style={style.row}>
+        <Todo
+          disabled={disabled}
+          editable={editable}
+          key={todo.id}
+          todo={todo}
+        />
+      </View>
+    );
+  }
 
   render() {
-    const {todos, editables, pendingActions} = this.props;
+    const {todos} = this.props;
+    const dataSource = this.dataStore.cloneWithRows(todos.toJS());
 
     if (!todos.size)
       return (
-        <p>{msg('todos.emptyList')}</p>
+        <View style={style.centeredView}>
+          <Image
+            source={require('image!Empty State')}
+            style={style.icon}
+          />
+          <Text style={style.noTodosText}>
+            {msg('todos.emptyList')}
+          </Text>
+        </View>
       );
 
     return (
-      <ol className="todo-list">
-        {todos.map(todo => {
-          const editable = editables.get(todo.id);
-          const disabled =
-            !!editable &&
-            pendingActions.has(actions.onEditableSave.toString());
-
-          return (
-            <Todo
-              disabled={disabled}
-              editable={editable}
-              key={todo.id}
-              todo={todo}
-            />
-          );
-        })}
-      </ol>
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow}
+      />
     );
   }
 
