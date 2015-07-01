@@ -73,6 +73,16 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.toggleTodoCompleted:
+    todosCursor(todos => {
+      const {id} = data;
+      return todos.update('list', list => {
+        const idx = list.findIndex(todo => todo.id === id);
+        return list
+          .updateIn([idx, 'completed'], completed => !completed);
+      });
+    });
+
   }
 
 });

@@ -4,6 +4,7 @@ import Input from '../components/input.react';
 import React from 'react';
 import TodoRecord from './todo';
 import {
+  TouchableOpacity,
   Image,
   View
 } from 'react-native';
@@ -21,8 +22,8 @@ class Todo extends Component {
 
     const editableFor = (propName) =>
       <Input
+        clearButtonMode='while-editing'
         editable={!disabled}
-        enablesReturnKeyAutomatically={true}
         name={propName}
         onChange={e => actions.onTodoFieldChange(todo, e)}
         onEndEditing={_ => actions.onTodoEndEditing(todo)}
@@ -36,10 +37,14 @@ class Todo extends Component {
 
     return (
       <View style={style.container}>
-        <Image
-          source={image}
-          style={style.checkbox}
-        />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={_ => actions.toggleTodoCompleted(todo)}>
+          <Image
+            source={image}
+            style={style.checkbox}
+          />
+        </TouchableOpacity>
         {editableFor('title')}
       </View>
     );
