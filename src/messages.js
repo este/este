@@ -42,7 +42,7 @@ export default {
     menu: {
       examples: 'Examples',
       headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
-      about: 'Home',
+      about: 'About',
       login: 'Login',
       me: 'Me (protected)',
       todos: 'Todos',
