@@ -21,5 +21,9 @@ export default StyleSheet.create({
     height: 63,
     borderBottomWidth: 1,
     borderBottomColor: '#f1f1f1'
+  },
+  listView: {
+    alignSelf: 'stretch',
+    flex: 1
   }
 });

@@ -2,7 +2,7 @@ import * as actions from './actions';
 import Component from '../components/component.react';
 import Input from '../components/input.react';
 import React from 'react';
-import TodoRecord from './todo';
+import {Record} from 'immutable';
 import {
   TouchableOpacity,
   Image,
@@ -54,7 +54,7 @@ class Todo extends Component {
 
 Todo.propTypes = {
   disabled: React.PropTypes.bool.isRequired,
-  todo: React.PropTypes.instanceOf(TodoRecord).isRequired
+  todo: React.PropTypes.instanceOf(Record).isRequired
 };
 
 export default Todo;

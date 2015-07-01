@@ -1,11 +1,11 @@
 import Todos from './pages/todos.react';
-import Home from './pages/home.react';
+import About from './pages/about.react';
 
 export default {
   todos: {
     component: Todos
   },
-  home: {
-    component: Home
+  about: {
+    component: About
   }
 };

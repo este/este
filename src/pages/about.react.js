@@ -8,7 +8,7 @@ import {
 
 import style from './todos.style';
 
-class Home extends Component {
+class About extends Component {
 
   render() {
     const {navigation} = this.props;
@@ -24,8 +24,8 @@ class Home extends Component {
 
 }
 
-Home.propTypes = {
+About.propTypes = {
   navigation: React.PropTypes.object.isRequired
 };
 
-export default Home;
+export default About;

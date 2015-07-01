@@ -1,4 +1,5 @@
 import Buttons from './buttons.react';
+import Component from '../components/component.react';
 import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
@@ -6,41 +7,20 @@ import {msg} from '../intl/store';
 import {
   View,
   Text,
-  ListView,
+  ScrollView,
   Image
 } from 'react-native';
 
 import style from './list.style';
 
-class List extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.renderRow = this.renderRow.bind(this);
-  }
-
-  dataStore = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2
-  })
-
-  renderRow(todo) {
-    const {editables, pendingActions} = this.props;
-
-    return (
-      <View style={style.row}>
-        <Todo
-          key={todo.id}
-          todo={todo}
-        />
-      </View>
-    );
-  }
+class List extends Component {
 
   render() {
     const {todos} = this.props;
-    const dataSource = this.dataStore.cloneWithRows(todos.toJS());
 
-    if (!todos.size)
+    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
+
+    if (todos.size === 0)
       return (
         <View style={style.centeredView}>
           <Image
@@ -53,30 +33,30 @@ class List extends React.Component {
         </View>
       );
 
-    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
-
-    const renderFooter = () => {
-      return (
+    return (
+      <ScrollView>
+        {todos.map(todo => {
+          return (
+            <View key={todo.id} style={style.row}>
+              <Todo
+                disabled={false}
+                key={todo.id}
+                todo={todo}
+              />
+            </View>
+          );
+        })}
         <Buttons
           clearAllEnabled={!hasCompletedTodos}
           clearCompletedEnabled={hasCompletedTodos}
         />
-      );
-    };
-
-    return (
-      <ListView
-        dataSource={dataSource}
-        renderFooter={renderFooter}
-        renderRow={this.renderRow}
-      />
+      </ScrollView>
     );
   }
 
 }
 
 List.propTypes = {
-  editables: React.PropTypes.instanceOf(immutable.Map).isRequired,
   pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
   todos: React.PropTypes.instanceOf(immutable.List)
 };
