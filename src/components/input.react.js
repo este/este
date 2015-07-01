@@ -23,8 +23,13 @@ class Input extends React.Component {
     });
   }
 
-  onEndEditing() {
-    this.props.onEndEditing();
+  onEndEditing(event) {
+    this.props.onEndEditing({
+      target: {
+        name: this.props.name,
+        value: event.nativeEvent.text
+      }
+    });
     setTimeout(_ => {
       this.refs.textInput.setNativeProps({
         text: this.props.value

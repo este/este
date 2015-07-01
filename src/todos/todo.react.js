@@ -1,19 +1,32 @@
 import * as actions from './actions';
 import Component from '../components/component.react';
+import Input from '../components/input.react';
 import React from 'react';
-import immutable from 'immutable';
+import TodoRecord from './todo';
 import {
-  View,
-  Text
+  View
 } from 'react-native';
-import style from './todo.style';
+
+import style from './todo.style.js';
 
 class Todo extends Component {
 
   render() {
+    const {todo, disabled} = this.props;
+
+    const editableFor = (propName) =>
+      <Input
+        editable={!disabled}
+        enablesReturnKeyAutomatically={true}
+        name={propName}
+        onChange={e => actions.onTodoFieldChange(todo.id, e)}
+        style={style.input}
+        value={todo[propName]}
+      />;
+
     return (
       <View>
-        <Text>{this.props.todo.title}</Text>
+        {editableFor('title')}
       </View>
     );
   }
@@ -22,8 +35,7 @@ class Todo extends Component {
 
 Todo.propTypes = {
   disabled: React.PropTypes.bool.isRequired,
-  editable: React.PropTypes.instanceOf(immutable.Map),
-  todo: React.PropTypes.instanceOf(immutable.Record).isRequired
+  todo: React.PropTypes.instanceOf(TodoRecord).isRequired
 };
 
 export default Todo;

@@ -1,4 +1,3 @@
-import * as actions from './actions';
 import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
@@ -28,15 +27,10 @@ class List extends React.Component {
 
   renderRow(todo) {
     const {editables, pendingActions} = this.props;
-    const editable = editables.get(todo.id);
-    const isPending = pendingActions.has(actions.onEditableSave.toString());
-    const disabled = !!editable && isPending;
 
     return (
       <View style={style.row}>
         <Todo
-          disabled={disabled}
-          editable={editable}
           key={todo.id}
           todo={todo}
         />

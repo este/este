@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import setToString from '../lib/settostring';
 import {dispatch} from '../dispatcher';
 
@@ -26,20 +25,13 @@ export function completeTodo(todo) {
   dispatch(completeTodo, todo);
 }
 
-export function onEditableSave(id, name, value) {
-  // Simulate async saving.
-  const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({id, name, value});
-    }, 500);
-  });
-  return dispatch(onEditableSave, promise);
-}
-
-export function onEditableState(id, name, state) {
-  if (state)
-    state = state.set('value', state.value.slice(0, MAX_TODO_TITLE_LENGTH));
-  dispatch(onEditableState, {id, name, state});
+export function onTodoFieldChange(id, {target: {name, value}}) {
+  switch (name) {
+    case 'title':
+      value = value.slice(0, MAX_TODO_TITLE_LENGTH);
+      break;
+  }
+  dispatch(onTodoFieldChange, {id, name, value});
 }
 
 export function onNewTodoFieldChange({target: {name, value}}) {
@@ -56,7 +48,6 @@ setToString('todos', {
   addTodo,
   clearAll,
   deleteTodo,
-  onEditableSave,
-  onEditableState,
+  onTodoFieldChange,
   onNewTodoFieldChange
 });
