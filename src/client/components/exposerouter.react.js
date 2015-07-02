@@ -12,7 +12,7 @@ export default function exposeRouter(BaseComponent) {
   }
 
   ExposeRouter.contextTypes = {
-    router: React.PropTypes.func.isRequired
+    router: React.PropTypes.object.isRequired
   };
 
   ExposeRouter.displayName = `${BaseComponent.name}ExposeRouter`;
