@@ -1,14 +1,25 @@
 # Este Native
 
-React Native 0.6 app supporting iOS.
+> The most complete React Native dev stack with the immutable functional app state and stores that acts as reducers.
 
-Uses webpack, ES6 syntax, bluebird as the default Promises library, `fetch` (polyfill) for cross-domain requests, React Native (PureRender) with Flux (heavily based on Este.js)
+### At a glance
+
+- Webpack out of the box
+- ES6 syntax and beyond
+- Bluebird, window.fetch and other pollyfils
+- PureRender everywhere
+- Flux
+- Store reducers
+- Immutable app state
+- Powerful inspired by React Router routing library
+
+<img src="https://cloud.githubusercontent.com/assets/2464966/8488032/4e29c154-2110-11e5-9c66-a1a8a69c675d.png" width="400" />
 
 ### How to install
 
 ```bash
 $ npm install
-$ npm dedupe
+$ npm start
 ```
 
 ### How to run
@@ -25,10 +36,6 @@ As React Native Packager checks if it's already running, there's no need to repe
 - `npm start`
 - Refresh after you see a React Packager header (same you've closed in step number 4). If you will see an error saying `cannot find .../_entry` it's likely you have refreshed your Simulator before React packager has started. Go to step #7.
 - Keep coding. Bundle reloads and rebuilds automatically with Webpack and ES6.
-
-### Structure
-
-All interesting app logic is located in the `src` folder. For iOS specific features (including app start-up) refer to `iOS` folder written in Objective-C.
 
 ### Contributing
 
