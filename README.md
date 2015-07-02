@@ -13,7 +13,7 @@
 - Immutable app state
 - Powerful inspired by React Router routing library
 
-<img src="https://cloud.githubusercontent.com/assets/2464966/8488032/4e29c154-2110-11e5-9c66-a1a8a69c675d.png" width="400" />
+<img src="https://cloud.githubusercontent.com/assets/2464966/8488163/f5a99cc4-2110-11e5-8576-a779831c5beb.png" width="400" />
 
 ### How to install
 
