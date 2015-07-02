@@ -75,10 +75,7 @@ class Login extends Component {
 Login.propTypes = {
   auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
   pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  router: React.PropTypes.shape({
-    getCurrentQuery: React.PropTypes.func,
-    replaceWith: React.PropTypes.func
-  })
+  router: React.PropTypes.func
 };
 
 export default exposeRouter(Login);
