@@ -17,9 +17,9 @@ export default class Component extends React.Component {
     // TODO: Make whole React Pure, add something like dangerouslySetLocalState.
     // https://github.com/gaearon/react-pure-render#known-issues
     // https://twitter.com/steida/status/600395820295450624
-    if (this.context.router) {
-      const changed = this.pureComponentLastPath !== this.context.router.getCurrentPath();
-      this.pureComponentLastPath = this.context.router.getCurrentPath();
+    if (this.props.location) {
+      const changed = this.pureComponentLastPath !== this.props.location.pathname;
+      this.pureComponentLastPath = this.props.location.pathname;
       if (changed) return true;
     }
 
