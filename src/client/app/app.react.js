@@ -21,14 +21,11 @@ class App extends Component {
   }
 
   getState() {
-    return {
-      auth: state.authCursor(),
-      examples: state.examplesCursor(),
-      pendingActions: state.pendingActionsCursor(),
-      todos: state.todosCursor(),
-      users: state.usersCursor(),
-      viewer: state.usersCursor().get('viewer')
-    };
+    const viewer = state.usersCursor().get('viewer');
+    return state.appState.get().merge({
+      isLoggedIn: !!viewer,
+      viewer: viewer
+    }).toObject();
   }
 
   // Why componentWillMount instead of componentDidMount.
