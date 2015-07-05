@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   // Why componentWillMount instead of componentDidMount.
-  // https://github.com/steida/este/issues/274
+  // https://github.com/este/este/issues/274
   componentWillMount() {
     if (!process.env.IS_BROWSER) return;
     state.appState.on('change', () => {

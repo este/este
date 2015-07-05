@@ -34,7 +34,7 @@ export default {
       title: 'Examples'
     },
     home: {
-      infoHtml: `App starter kit for <a href="https://github.com/steida/este">Este.js</a>. Check`,
+      infoHtml: `App starter kit for <a href="https://github.com/este/este">Este.js</a>. Check`,
       title: 'Este.js App',
       todos: 'todos'
     },
@@ -44,7 +44,7 @@ export default {
     },
     menu: {
       examples: 'Examples',
-      headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
+      headerHtml: `<a href="https://github.com/este/este">Este.js</a> App`,
       home: 'Home',
       login: 'Login',
       me: 'Me (protected)',
