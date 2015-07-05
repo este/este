@@ -5,6 +5,7 @@ import Login from './pages/login.react';
 import Me from './pages/me.react';
 import NotFound from './pages/notfound.react';
 import React from 'react';
+import requireAuth from './auth/requireauth';
 import Todos from './pages/todos.react';
 import {Route} from 'react-router';
 
@@ -13,7 +14,7 @@ export default (
     <Route component={Home} path="/" />
     <Route component={Examples} path="examples" />
     <Route component={Login} path="login" />
-    <Route component={Me} path="me" />
+    <Route component={Me} path="me" onEnter={requireAuth} />
     <Route component={Todos} path="todos" />
     <Route component={NotFound} path="*" />
   </Route>
