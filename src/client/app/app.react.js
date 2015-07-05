@@ -2,7 +2,7 @@ import './app.styl';
 import * as state from '../state';
 import Component from '../components/component.react';
 import Footer from './footer.react';
-import Menu from './menu.react';
+import Header from './header.react';
 import React from 'react';
 import {RouteHandler} from 'react-router';
 import {measureRender} from '../console';
@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <div className="page">
-        <Menu viewer={this.state.viewer} />
+        <Header isLoggedIn={this.state.isLoggedIn} />
         <RouteHandler {...this.state} />
         <Footer />
       </div>
