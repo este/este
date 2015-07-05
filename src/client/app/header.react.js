@@ -19,12 +19,12 @@ export default class Header extends Component {
           <FormattedHTMLMessage message={msg('app.header.h1Html')} />
         </h1>
         <ul>
-          <li><Link to="home">{msg('app.header.home')}</Link></li>
-          <li><Link to="todos">{msg('app.header.todos')}</Link></li>
-          <li><Link to="examples">{msg('app.header.examples')}</Link></li>
-          <li><Link to="me">{msg('app.header.me')}</Link></li>
+          <li><Link to="/home">{msg('app.header.home')}</Link></li>
+          <li><Link to="/todos">{msg('app.header.todos')}</Link></li>
+          <li><Link to="/examples">{msg('app.header.examples')}</Link></li>
+          <li><Link to="/me">{msg('app.header.me')}</Link></li>
           {!isLoggedIn &&
-            <li><Link to="login">{msg('app.header.login')}</Link></li>
+            <li><Link to="/login">{msg('app.header.login')}</Link></li>
           }
         </ul>
       </header>

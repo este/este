@@ -6,15 +6,15 @@ import Me from './pages/me.react';
 import NotFound from './pages/notfound.react';
 import React from 'react';
 import Todos from './pages/todos.react';
-import {DefaultRoute, NotFoundRoute, Route} from 'react-router';
+import {Route} from 'react-router';
 
 export default (
-  <Route handler={App} path="/">
-    <DefaultRoute handler={Home} name="home" />
-    <NotFoundRoute handler={NotFound} name="not-found" />
-    <Route handler={Examples} name="examples" />
-    <Route handler={Login} name="login" />
-    <Route handler={Me} name="me" />
-    <Route handler={Todos} name="todos" />
+  <Route component={App}>
+    <Route component={Home} path="/" />
+    <Route component={Examples} path="examples" />
+    <Route component={Login} path="login" />
+    <Route component={Me} path="me" />
+    <Route component={Todos} path="todos" />
+    <Route component={NotFound} path="*" />
   </Route>
 );

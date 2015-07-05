@@ -12,7 +12,7 @@ export default class NotFound extends Component {
         <div className="notfound-page">
           <h1>{msg('pages.notFound.header')}</h1>
           <p>{msg('pages.notFound.message')}</p>
-          <Link to="home">{msg('pages.notFound.continueMessage')}</Link>
+          <Link to="/home">{msg('pages.notFound.continueMessage')}</Link>
         </div>
       </DocumentTitle>
     );

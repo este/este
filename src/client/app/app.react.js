@@ -3,7 +3,6 @@ import Component from '../components/component.react';
 import Footer from './footer.react';
 import Header from './header.react';
 import React from 'react';
-import {RouteHandler} from 'react-router';
 import {appState} from '../state';
 import {measureRender} from '../console';
 
