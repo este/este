@@ -38,10 +38,12 @@ export default class App extends Component {
   }
 
   render() {
+    const children = React.cloneElement(this.props.children, this.state);
+
     return (
       <div className="page">
         <Header isLoggedIn={this.state.isLoggedIn} />
-        <RouteHandler {...this.state} />
+        {children}
         <Footer />
       </div>
     );
