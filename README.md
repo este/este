@@ -11,21 +11,20 @@
 
 ## Techniques
 
-- Isomorphic pure [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
+- Universal (formerly isomorphic) and functional application architecture. 
+- [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
 - Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic global immutable app state like [Om](https://github.com/omcljs/om) via [immutable.js](http://facebook.github.io/immutable-js) for super fast rendering and sane state management.
-- Functional design. Class is a leaky abstraction for "business model".
 - ECMAScript 2015+ with the best transpiler [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
-- Well tuned webpack dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier).
+- Well tuned [webpack](http://webpack.github.io/) dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier). TDD ready.
 - CSS livereload.
-- Hot module reload for React components and Flux actions and stores..
+- Hot module reloading for React components and Flux stores and actions.
 - [Karma](http://karma-runner.github.io/) as the test runner, [mocha](http://mochajs.org/) as test framework, and [Chai](http://chaijs.com/) as BDD / TDD assertion library.
-- Testing stack configured for TDD - test driven development.
 - [Shallow rendering](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) for testing React components without DOM.
 - [eslint](http://eslint.org/) ES6 linting with [React](https://github.com/yannickcr/eslint-plugin-react) JSX support. ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
 - Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
-- Login and Signup, `requireAuth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific pages.
+- Login and Signup example, `requireAuth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific pages.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Easy undo/redo and load/save for app state.
 
@@ -50,7 +49,7 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
 ## Create App
 
 ```shell
-git clone https://github.com/steida/este.git este-app
+git clone https://github.com/este/este.git este-app
 cd este-app
 npm install
 ```
@@ -90,20 +89,19 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - To check app state, press `ctrl+shift+s`, and then open console. 
 - To check app render time, open console, and write `este.measureRender = true`.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
-- Use `const` by default, `let` if you have to rebind a variable.
 - Learn and use immutable [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
-- Recommended editor is [sublimetext](http://www.sublimetext.com/), or [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
+- Recommended editors are [sublimetext](http://www.sublimetext.com/) and [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
 
 ## Training
-- [Czech Republic](http://javascript-skoleni.cz)
-- San Francisco - feel free to [write me](mailto:daniel@steigerwald.cz)
+- [learn-reactjs.com/](http://www.learn-reactjs.com/) 
+- [javascript-skoleni.cz](http://javascript-skoleni.cz)
 - [DzejEs.cz](http://www.dzejes.cz) - Czech articles about modern web applications
 
 ## Notes
 
-- Este.js dev stack should work on OSX, Linux, and Windows. Feel free to report any issue.
+- Este.js dev stack works on OSX, Linux, and Windows. Feel free to report any issue.
 - As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE.
 
 ## Credit
