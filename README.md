@@ -54,6 +54,8 @@ cd este-app
 npm install
 ```
 
+To create an empty app, clone `https://github.com/este/bare.git`.
+
 ## Start Development
 
 - run `gulp`
