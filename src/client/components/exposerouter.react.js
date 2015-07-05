@@ -6,7 +6,7 @@ export default function exposeRouter(BaseComponent) {
   return class ExposeRouter extends Component {
 
     static contextTypes = {
-      router: React.PropTypes.func.isRequired
+      router: React.PropTypes.object.isRequired
     };
 
     static displayName = `${BaseComponent.name}ExposeRouter`;
@@ -18,4 +18,3 @@ export default function exposeRouter(BaseComponent) {
   };
 
 }
-
