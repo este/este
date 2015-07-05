@@ -2,10 +2,15 @@ import * as actions from '../examples/actions';
 import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import Editable from '../components/editable.react';
-import React from 'react';
 import immutable from 'immutable';
+import React from 'react';
+import requestState from '../components/requeststate.react';
 import {msg} from '../intl/store';
 
+@requestState({
+  examples: ['examples'],
+  pendingActions: ['pendingActions']
+})
 export default class Examples extends Component {
 
   static propTypes = {

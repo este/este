@@ -37,6 +37,7 @@ export default class App extends Component {
   }
 
   render() {
+    // TODO remove when not needed
     const children = React.cloneElement(this.props.children, this.state);
 
     return (
