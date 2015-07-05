@@ -1,12 +1,14 @@
 import * as state from '../../client/state';
+import config from '../config';
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
+import immutable from 'immutable';
+import initialState from '../initialstate';
+import Location from 'react-router/lib/location';
+import NotFound from '../../client/pages/notfound.react';
 import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
-import config from '../config';
-import immutable from 'immutable';
-import initialState from '../initialstate';
 import routes from '../../client/routes';
 import stateMerger from '../lib/merger';
 
@@ -17,42 +19,40 @@ export default function render(req, res, ...customStates) {
 
 function renderPage(req, res, appState) {
   return new Promise((resolve, reject) => {
+    const location = new Location(req.path, req.query);
+    Router.run(routes, location, (error, initialState, transition) => {
+      if (error) console.error('Error!', error);
 
-    const router = Router.create({
-      routes,
-      location: req.originalUrl,
-      onError: reject,
-      onAbort: (abortReason) => {
-        // Some requireAuth higher order component requested redirect.
-        if (abortReason.constructor.name === 'Redirect') {
-          const {to, params, query} = abortReason;
-          const path = router.makePath(to, params, query);
-          res.redirect(path);
-          resolve();
-          return;
-        }
-        reject(abortReason);
-      }
-    });
-
-    router.run((Handler, routerState) => {
-      const html = loadAppStateThenRenderHtml(Handler, appState);
-      const notFound = routerState.routes.some(route => route.name === 'not-found');
+      const html = loadAppStateThenRenderHtml(<Router {...initialState} />, appState);
+      const notFound = initialState.components.some(component => component === NotFound);
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
       resolve();
-    });
 
+      // TODO onAbort and onError - how to handle?
+      // onError: reject,
+      // onAbort: (abortReason) => {
+      //   // Some requireAuth higher order component requested redirect.
+      //   if (abortReason.constructor.name === 'Redirect') {
+      //     const {to, params, query} = abortReason;
+      //     const path = router.makePath(to, params, query);
+      //     res.redirect(path);
+      //     resolve();
+      //     return;
+      //   }
+      //   reject(abortReason);
+      // }
+    });
   });
 }
 
-function loadAppStateThenRenderHtml(Handler, appState) {
+function loadAppStateThenRenderHtml(appElement, appState) {
   state.appState.load(appState);
-  return getPageHtml(Handler, appState);
+  return getPageHtml(appElement, appState);
 }
 
-function getPageHtml(Handler, appState) {
-  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`;
+function getPageHtml(appElement, appState) {
+  const appHtml = `<div id="app">${React.renderToString(appElement)}</div>`;
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js';
