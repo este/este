@@ -24,8 +24,9 @@ class Login extends Component {
   }
 
   redirectAfterLogin() {
-    const nextPath = this.props.router.getCurrentQuery().nextPath;
-    this.props.router.replaceWith(nextPath || 'home');
+    const {router} = this.props;
+    const nextPath = router.getCurrentQuery().nextPath;
+    router.replaceWith(nextPath || 'home');
   }
 
   render() {
