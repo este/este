@@ -6,6 +6,10 @@ import {msg} from '../intl/store';
 
 class Header extends Component {
 
+  static propTypes = {
+    isLoggedIn: React.PropTypes.bool.isRequired
+  };
+
   render() {
     const {isLoggedIn} = this.props;
 
@@ -28,9 +32,5 @@ class Header extends Component {
   }
 
 }
-
-Header.propTypes = {
-  isLoggedIn: React.PropTypes.bool.isRequired
-};
 
 export default Header;

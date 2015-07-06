@@ -7,6 +7,10 @@ import {msg} from '../intl/store';
 
 class TodoButtons extends Component {
 
+  static propTypes = {
+    clearAllEnabled: React.PropTypes.bool.isRequired
+  };
+
   render() {
     return (
       <div className="buttons">
@@ -32,9 +36,5 @@ class TodoButtons extends Component {
   }
 
 }
-
-TodoButtons.propTypes = {
-  clearAllEnabled: React.PropTypes.bool.isRequired
-};
 
 export default TodoButtons;

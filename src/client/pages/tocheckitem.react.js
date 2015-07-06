@@ -4,6 +4,10 @@ import {FormattedHTMLMessage} from 'react-intl';
 
 class ToCheckItem extends Component {
 
+  static propTypes = {
+    item: React.PropTypes.object.isRequired
+  };
+
   render() {
     return (
       <li>
@@ -13,9 +17,5 @@ class ToCheckItem extends Component {
   }
 
 }
-
-ToCheckItem.propTypes = {
-  item: React.PropTypes.object.isRequired
-};
 
 export default ToCheckItem;
