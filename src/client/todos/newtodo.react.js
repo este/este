@@ -7,6 +7,10 @@ import {msg} from '../intl/store';
 
 class NewTodo extends Component {
 
+  static propTypes = {
+    todo: React.PropTypes.instanceOf(immutable.Record)
+  };
+
   addTodoOnEnter(e) {
     if (e.key === 'Enter')
       actions.addTodo(this.props.todo);
@@ -27,9 +31,5 @@ class NewTodo extends Component {
   }
 
 }
-
-NewTodo.propTypes = {
-  todo: React.PropTypes.instanceOf(immutable.Record)
-};
 
 export default NewTodo;

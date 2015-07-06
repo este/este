@@ -8,6 +8,11 @@ import {msg} from '../intl/store';
 
 class Examples extends Component {
 
+  static propTypes = {
+    examples: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired
+  };
+
   render() {
     const {examples, pendingActions} = this.props;
     const editableState = examples.getIn(['editable', 'state']);
@@ -38,10 +43,5 @@ class Examples extends Component {
   }
 
 }
-
-Examples.propTypes = {
-  examples: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired
-};
 
 export default Examples;

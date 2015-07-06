@@ -7,6 +7,12 @@ import immutable from 'immutable';
 
 class Todo extends Component {
 
+  static propTypes = {
+    disabled: React.PropTypes.bool.isRequired,
+    editable: React.PropTypes.instanceOf(immutable.Map),
+    todo: React.PropTypes.instanceOf(immutable.Record).isRequired
+  };
+
   render() {
     const {disabled, editable, todo} = this.props;
 
@@ -30,11 +36,5 @@ class Todo extends Component {
   }
 
 }
-
-Todo.propTypes = {
-  disabled: React.PropTypes.bool.isRequired,
-  editable: React.PropTypes.instanceOf(immutable.Map),
-  todo: React.PropTypes.instanceOf(immutable.Record).isRequired
-};
 
 export default Todo;

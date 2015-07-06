@@ -7,6 +7,12 @@ import {msg} from '../intl/store';
 
 class List extends Component {
 
+  static propTypes = {
+    editables: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    todos: React.PropTypes.instanceOf(immutable.List)
+  };
+
   render() {
     const {todos, editables, pendingActions} = this.props;
 
@@ -37,11 +43,5 @@ class List extends Component {
   }
 
 }
-
-List.propTypes = {
-  editables: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  todos: React.PropTypes.instanceOf(immutable.List)
-};
 
 export default List;
