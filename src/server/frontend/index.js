@@ -20,8 +20,11 @@ app.use(compression());
 app.use('/build', express.static('build'));
 app.use('/assets', express.static('assets'));
 
-// Load state extras for current user
+// Load translations, fallback to defaultLocale if no
+// translations available
 app.use(i18nLoader(config.defaultLocale));
+
+// Load state extras for current user
 app.use(userState());
 
 app.get('*', (req, res, next) => {
