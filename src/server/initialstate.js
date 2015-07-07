@@ -1,7 +1,3 @@
-import messages from './messages';
-
-const initialLocale = 'en';
-
 export default {
   // Each key represents one app feature/store.
   auth: {
@@ -13,11 +9,6 @@ export default {
       state: null,
       text: 'Some inline-editable text.'
     }
-  },
-  i18n: {
-    formats: {},
-    locales: initialLocale,
-    messages: messages[initialLocale]
   },
   pendingActions: {},
   todos: {
