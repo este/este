@@ -1,5 +1,7 @@
 import glob from 'glob';
 import path from 'path';
+import immutable from 'immutable';
+import merger from './merger';
 
 function loadLanguages() {
   const files = glob
@@ -40,10 +42,13 @@ export default function middleware({defaultLocale, getLocaleFromRequest = extrac
 
   return (req, res, next) => {
     const locale = getLocaleFromRequest(req, locales);
-    if (!messages[locale]) locale = defaultLocale;
+    const defaultMessages = messages[defaultLocale];
+    const localeMessages = messages[locale];
     req.i18n = {
       locale,
-      messages: messages[locale]
+      messages: defaultLocale !== locale
+        ? immutable.fromJS(defaultMessages).mergeWith(merger, localeMessages)
+        : defaultMessages
     };
     next();
   };
