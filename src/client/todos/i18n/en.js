@@ -3,7 +3,6 @@ export default {
   clearAll: 'Clear All',
   emptyList: 'Nothing. Go outside and enjoy world.',
   newTodoPlaceholder: 'What needs to be done?',
-  title: 'Todos',
   undo: `Undo {steps, plural,
     =0 {}
     other {(#)}

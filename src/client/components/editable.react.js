@@ -115,7 +115,7 @@ class Editable extends Component {
 
   cancelEdit() {
     if (this.isDirty())
-      if (!confirm(msg('confirmations.cancelEdit'))) // eslint-disable-line no-alert
+      if (!confirm(msg('components.editable.cancelEdit'))) // eslint-disable-line no-alert
         return;
     this.disableEdit();
   }

@@ -16,15 +16,15 @@ class Header extends Component {
     return (
       <header>
         <h1>
-          <FormattedHTMLMessage message={msg('header.h1Html')} />
+          <FormattedHTMLMessage message={msg('app.header.h1Html')} />
         </h1>
         <ul>
-          <li><Link to="home">{msg('header.home')}</Link></li>
-          <li><Link to="todos">{msg('header.todos')}</Link></li>
-          <li><Link to="examples">{msg('header.examples')}</Link></li>
-          <li><Link to="me">{msg('header.me')}</Link></li>
+          <li><Link to="home">{msg('app.header.home')}</Link></li>
+          <li><Link to="todos">{msg('app.header.todos')}</Link></li>
+          <li><Link to="examples">{msg('app.header.examples')}</Link></li>
+          <li><Link to="me">{msg('app.header.me')}</Link></li>
           {!isLoggedIn &&
-            <li><Link to="login">{msg('header.login')}</Link></li>
+            <li><Link to="login">{msg('app.header.login')}</Link></li>
           }
         </ul>
       </header>

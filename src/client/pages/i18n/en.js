@@ -17,6 +17,9 @@ export default {
   examples: {
     title: 'Examples'
   },
+  todos: {
+    title: 'Todos'
+  },
   toCheck: {
     andMuchMore: '... and much more.',
     header: 'Things to Check',
