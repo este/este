@@ -7,7 +7,7 @@ export default function userState() {
 
   return (req, res, next) => {
     loadUserData(req).then(loadedData => {
-      req.userState = Immutable.Map().merge(...loadedData, req.i18n);
+      req.userState = Immutable.Map().merge(...loadedData);
       next();
     });
   };

@@ -25,7 +25,7 @@ app.use(i18nLoader(config.defaultLocale));
 app.use(userState());
 
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState).catch(next);
+  render(req, res, req.userState, {i18n: req.i18n}).catch(next);
 });
 
 app.on('mount', () => {
