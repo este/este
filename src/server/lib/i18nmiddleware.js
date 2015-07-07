@@ -36,12 +36,11 @@ function extractLocaleFromReq(req, locales) {
 }
 
 export default function middleware({defaultLocale, getLocaleFromRequest = extractLocaleFromReq}) {
-
   const {locales, messages} = loadLanguages();
 
   return (req, res, next) => {
-    const acceptedLanguage = getLocaleFromRequest(req, locales);
-    const locale = acceptedLanguage || defaultLocale;
+    const locale = getLocaleFromRequest(req, locales);
+    if (!messages[locale]) locale = defaultLocale;
     req.i18n = {
       locale,
       messages: messages[locale]
