@@ -9,11 +9,11 @@ class Home extends Component {
 
   render() {
     return (
-      <DocumentTitle title={msg('home.title')}>
+      <DocumentTitle title={msg('pages.home.title')}>
         <div className="home-page">
           <p>
-            <FormattedHTMLMessage message={msg('home.infoHtml')} />{' '}
-            <Link to="todos">{msg('home.todos')}</Link>.
+            <FormattedHTMLMessage message={msg('pages.home.infoHtml')} />{' '}
+            <Link to="todos">{msg('pages.home.todos')}</Link>.
           </p>
         </div>
       </DocumentTitle>

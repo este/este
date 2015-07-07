@@ -17,10 +17,10 @@ class Me extends Component {
     const {viewer: {email}} = this.props;
 
     return (
-      <DocumentTitle title={msg('me.title')}>
+      <DocumentTitle title={msg('pages.me.title')}>
         <div className="me-page">
           <p>
-            {msg('me.welcome', {email})}
+            {msg('pages.me.welcome', {email})}
           </p>
           <Logout />
         </div>

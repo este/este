@@ -1,4 +1,4 @@
-import messages from '../client/messages';
+import messages from './messages';
 
 const initialLocale = 'en';
 
