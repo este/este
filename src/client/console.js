@@ -28,7 +28,7 @@ if (isBrowser) {
     saveState() {
       window._appState = state.appState.save();
       window._appStateString = JSON.stringify(window._appState);
-      console.log('App state saved. Type copy(_appStateString) and press enter, to copy app state into clipboard.'); // eslint-disable-line no-console
+      console.log('App state saved. To copy app state into clipboard, type copy(_appStateString) and press enter.'); // eslint-disable-line no-console
       console.log(window._appState); // eslint-disable-line no-console
     }
 

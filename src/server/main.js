@@ -1,5 +1,6 @@
 import api from './api';
 import config from './config';
+import errorHandler from './lib/errorhandler';
 import express from 'express';
 import frontend from './frontend';
 import {Server} from 'http';
@@ -13,13 +14,8 @@ app.use('/api/v1', api);
 // Load react-js frontend.
 app.use(frontend);
 
-// Add error handler. Four arguments need to be defined in order for the
-// middleware to act as an error handler.
-app.use((err, req, res, next) => {
-  const msg = err.stack || err;
-  console.log('Yay', msg);
-  res.status(500).send('500: ' + msg);
-});
+// Error reporting
+app.use(errorHandler);
 
 server.listen(config.port, () => {
   console.log('Server started at port %s', config.port);

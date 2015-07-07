@@ -7,7 +7,14 @@ import immutable from 'immutable';
 import {focusInvalidField} from '../lib/validation';
 import {msg} from '../intl/store';
 
+@exposeRouter
 class Login extends Component {
+
+  static propTypes = {
+    auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    router: React.PropTypes.func
+  };
 
   getForm() {
     return this.props.auth.get('form');
@@ -24,8 +31,9 @@ class Login extends Component {
   }
 
   redirectAfterLogin() {
-    const nextPath = this.props.router.getCurrentQuery().nextPath;
-    this.props.router.replaceWith(nextPath || '/');
+    const {router} = this.props;
+    const nextPath = router.getCurrentQuery().nextPath;
+    router.replaceWith(nextPath || 'home');
   }
 
   render() {
@@ -72,10 +80,4 @@ class Login extends Component {
 
 }
 
-Login.propTypes = {
-  auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  router: React.PropTypes.func
-};
-
-export default exposeRouter(Login);
+export default Login;

@@ -8,7 +8,7 @@ if (config.isProduction || require('piping')(config.piping)) {
   if (!global.Intl)
     global.Intl = require('intl');
 
-  require('babel/register');
+  require('babel/register')({optional: ['es7']});
 
   // To ignore webpack custom loaders on server.
   config.webpackStylesExtensions.forEach(function(ext) {

@@ -1,5 +1,5 @@
+import getRandomString from 'client/lib/getrandomstring';
 import {expect} from 'chai';
-import {getRandomString} from 'client/lib/getrandomstring';
 
 describe('getRandomString', () => {
   it('is a string', () => {

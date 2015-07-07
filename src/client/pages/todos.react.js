@@ -10,6 +10,11 @@ import {msg} from '../intl/store';
 
 class Todos extends Component {
 
+  static propTypes = {
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    todos: React.PropTypes.instanceOf(immutable.Map).isRequired
+  };
+
   render() {
     const {todos, pendingActions} = this.props;
     const list = todos.get('list');
@@ -31,10 +36,5 @@ class Todos extends Component {
   }
 
 }
-
-Todos.propTypes = {
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  todos: React.PropTypes.instanceOf(immutable.Map).isRequired
-};
 
 export default Todos;

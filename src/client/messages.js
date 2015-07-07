@@ -33,22 +33,22 @@ export default {
     examples: {
       title: 'Examples'
     },
+    header: {
+      examples: 'Examples',
+      h1Html: `<a href="https://github.com/este/este">Este.js</a> App`,
+      home: 'Home',
+      login: 'Login',
+      me: 'Me (protected)',
+      todos: 'Todos'
+    },
     home: {
-      infoHtml: `App starter kit for <a href="https://github.com/steida/este">Este.js</a>. Check`,
+      infoHtml: `App starter kit for <a href="https://github.com/este/este">Este.js</a>. Check`,
       title: 'Este.js App',
       todos: 'todos'
     },
     me: {
       title: 'Me',
       welcome: `Hi {email}. This is your secret page.`
-    },
-    menu: {
-      examples: 'Examples',
-      headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
-      home: 'Home',
-      login: 'Login',
-      me: 'Me (protected)',
-      todos: 'Todos'
     },
     notFound: {
       continueMessage: 'Continue here please.',

@@ -50,7 +50,7 @@ module.exports = function(isDevelopment) {
         'webpack/hot/only-dev-server',
         path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
-        './src/client/main.js'
+        path.join(constants.SRC_DIR, 'client/main.js')
       ],
       // For Safari, IE<11, and some old browsers. More languages will need more
       // specific builds.
@@ -75,9 +75,9 @@ module.exports = function(isDevelopment) {
       }, {
         exclude: /node_modules/,
         loaders: isDevelopment ? [
-          'react-hot', 'babel-loader'
+          'react-hot', 'babel-loader?stage=0'
         ] : [
-          'babel-loader'
+          'babel-loader?stage=0'
         ],
         test: /\.js$/
       }].concat(stylesLoaders())
