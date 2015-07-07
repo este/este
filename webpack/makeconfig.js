@@ -75,9 +75,9 @@ module.exports = function(isDevelopment) {
       }, {
         exclude: /node_modules/,
         loaders: isDevelopment ? [
-          'react-hot', 'babel-loader?stage=0'
+          'react-hot', 'babel-loader'
         ] : [
-          'babel-loader?stage=0'
+          'babel-loader'
         ],
         test: /\.js$/
       }].concat(stylesLoaders())
