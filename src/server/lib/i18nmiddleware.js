@@ -31,13 +31,17 @@ function loadLanguages() {
   };
 }
 
-export default function middleware(defaultLanguage) {
+function extractLocaleFromReq(req, locales) {
+  return req.acceptsLanguages(locales);
+}
+
+export default function middleware({defaultLocale, getLocaleFromRequest = extractLocaleFromReq}) {
 
   const {locales, messages} = loadLanguages();
 
   return (req, res, next) => {
-    const acceptedLanguage = req.acceptsLanguages(locales);
-    const locale = acceptedLanguage || defaultLanguage;
+    const acceptedLanguage = getLocaleFromRequest(req, locales);
+    const locale = acceptedLanguage || defaultLocale;
     req.i18n = {
       locale,
       messages: messages[locale]

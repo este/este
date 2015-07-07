@@ -22,7 +22,9 @@ app.use('/assets', express.static('assets'));
 
 // Load translations, fallback to defaultLocale if no
 // translations available.
-app.use(i18nLoader(config.defaultLocale));
+app.use(i18nLoader({
+  defaultLocale: config.defaultLocale
+}));
 
 // Load state extras for current user.
 app.use(userState());
