@@ -1,0 +1,10 @@
+{
+  "stage": 2, // Draft + Candidate
+  "optional": [
+    // Stage 1 - Proposal
+    "es7.decorators",
+    "es7.classProperties",
+    // Stage 0 - Strawman
+    "es7.functionBind"
+  ]
+}
