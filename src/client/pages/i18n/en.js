@@ -20,6 +20,9 @@ export default {
   todos: {
     title: 'Todos'
   },
+  auth: {
+    title: 'Login'
+  },
   toCheck: {
     andMuchMore: '... and much more.',
     header: 'Things to Check',

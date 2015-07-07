@@ -1,8 +1,5 @@
 import glob from 'glob';
 import path from 'path';
-import globalMessages from '../client/messages';
-import immutable from 'immutable';
-import merger from './lib/merger';
 
 const files = glob
   .sync('src/client/*/i18n/*.js')
@@ -23,6 +20,4 @@ files.forEach(({language, feature, translations}) => {
   messages[language][feature] = translations;
 });
 
-console.log(immutable.fromJS(globalMessages).mergeWith(merger, messages).toJS());
-
-export default immutable.fromJS(globalMessages).mergeWith(merger, messages).toJS();
+export default messages;

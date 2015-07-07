@@ -15,5 +15,13 @@ export default {
   logout: {
     button: 'Logout'
   },
-  title: 'Login'
+  validation: {
+    email: `Email address is not valid.`,
+    password: `Password must contain at least {minLength} characters.`,
+    required: `Please fill out {prop, select,
+      email {email}
+      password {password}
+      other {'{prop}'}
+    }.`
+  }
 };
