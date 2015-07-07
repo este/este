@@ -97,7 +97,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Recommended editors are [sublimetext](http://www.sublimetext.com/) and [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
 
 ## Training
-- [learn-reactjs.com/](http://www.learn-reactjs.com) 
+- [learn-reactjs.com](http://www.learn-reactjs.com) 
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
 - [DzejEs.cz](http://www.dzejes.cz) - Czech articles about modern web applications
 
