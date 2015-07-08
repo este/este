@@ -9,6 +9,10 @@ import shallowEqual from 'react-pure-render/shallowEqual';
  */
 class Component extends React.Component {
 
+  static contextTypes = {
+    router: React.PropTypes.func
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     // TODO: Make whole React Pure, add something like dangerouslySetLocalState.
     // https://github.com/gaearon/react-pure-render#known-issues
@@ -40,9 +44,5 @@ class Component extends React.Component {
   // }
 
 }
-
-Component.contextTypes = {
-  router: React.PropTypes.func
-};
 
 export default Component;
