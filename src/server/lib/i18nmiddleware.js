@@ -45,7 +45,7 @@ export default function middleware({defaultLocale, getLocaleFromRequest = extrac
     const defaultMessages = messages[defaultLocale];
     const userMessages = messages[userLocale];
     req.i18n = {
-      locale,
+      locale: userLocale,
       messages: defaultLocale !== userLocale
         ? immutable.fromJS(defaultMessages).mergeWith(merger, userMessages)
         : defaultMessages
