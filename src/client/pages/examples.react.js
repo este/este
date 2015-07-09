@@ -33,7 +33,7 @@ class Examples extends Component {
       />;
 
     return (
-      <DocumentTitle title={msg('examples.title')}>
+      <DocumentTitle title={msg('pages.examples.title')}>
         <div className="examples-page">
           <h2>editable.react.js</h2>
           {editableFor(1, 'example')}

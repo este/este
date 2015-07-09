@@ -1,4 +1,3 @@
-import config from '../config';
 import Promise from 'bluebird';
 import Immutable from 'immutable';
 
@@ -18,7 +17,6 @@ export default function userState() {
 // Gracefully settle all promises, ignore failed.
 function loadUserData(req) {
   const dataSources = [
-    acceptLanguages(req),
     loadTodos()
   ];
 
@@ -27,16 +25,6 @@ function loadUserData(req) {
       .filter(promise => promise.isFulfilled())
       .map(promise => promise.value())
   );
-}
-
-function acceptLanguages(req) {
-  const acceptsLanguages = req.acceptsLanguages(config.appLocales);
-
-  return {
-    i18n: {
-      locales: acceptsLanguages || config.defaultLocale
-    }
-  };
 }
 
 // Simulate async action.

@@ -20,7 +20,7 @@ class Todos extends Component {
     const list = todos.get('list');
 
     return (
-      <DocumentTitle title={msg('todos.title')}>
+      <DocumentTitle title={msg('pages.todos.title')}>
         <div className="todos-page">
           <NewTodo todo={todos.get('newTodo')} />
           <List

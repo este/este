@@ -4,15 +4,15 @@ import {msg} from './intl/store';
 class AppValidation extends Validation {
 
   getRequiredMessage(prop) {
-    return msg('validation.required', {prop});
+    return msg('auth.validation.required', {prop});
   }
 
   getEmailMessage(prop) {
-    return msg('validation.email', {prop});
+    return msg('auth.validation.email', {prop});
   }
 
   getSimplePasswordMessage(minLength) {
-    return msg('validation.password', {minLength});
+    return msg('auth.validation.password', {minLength});
   }
 
 }

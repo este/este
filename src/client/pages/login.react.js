@@ -8,7 +8,7 @@ class Login extends Component {
 
   render() {
     return (
-      <DocumentTitle title={msg('auth.title')}>
+      <DocumentTitle title={msg('pages.auth.title')}>
         <div className="login-page">
           <LoginForm {...this.props} />
         </div>
