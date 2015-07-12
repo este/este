@@ -43,7 +43,7 @@
     "harmonize": "^1.4.1",
     "immutable": "^3.6.4",
     "immutablediff": "^0.4.2",
-    "intl": "^0.1.4",
+    "intl": "^1.0.0",
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
     "karma": "^0.12.36",
