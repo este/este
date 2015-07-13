@@ -3,6 +3,7 @@
 'use strict';
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 var NotifyPlugin = require('./notifyplugin');
 var constants = require('./constants');
 var path = require('path');
@@ -115,6 +116,7 @@ module.exports = function(isDevelopment) {
           new ExtractTextPlugin('app.css', {
             allChunks: true
           }),
+          new NyanProgressPlugin(),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.UglifyJsPlugin({
