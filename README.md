@@ -95,6 +95,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editors are [sublimetext](http://www.sublimetext.com/) and [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
+- When `gulp` command fails with `No gulpfile found`. Problem is with gulp version on your system. Simple fix: https://github.com/gulpjs/gulp-cli/issues/27#issuecomment-116134527
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com) 
