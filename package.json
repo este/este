@@ -1,6 +1,6 @@
 {
   "name": "este-app",
-  "description": "Robust and comfortable dev stack for isomorphic web apps",
+  "description": "The most complete dev stack for React/Flux universal web apps.",
   "author": "Daniel Steigerwald",
   "version": "9.2.0",
   "private": true,

@@ -1,10 +1,10 @@
 {
   "name": "este-app",
-  "description": "Robust and comfortable dev stack for isomorphic web apps",
+  "description": "The most complete dev stack for React/Flux universal web apps.",
   "env": {
    "NODE_ENV": "production"
   },
   "repository": "https://github.com/este/este",
   "logo": "https://cloud.githubusercontent.com/assets/66249/5931133/9e973dfc-a699-11e4-83bc-7b5c6fb58bfd.jpeg",
-  "keywords": ["este", "flux", "gulp", "immutable", "isomorphic", "node", "react", "webpack"]
+  "keywords": ["este", "flux", "gulp", "immutable", "universal", "isomorphic", "node", "react", "webpack"]
 }
