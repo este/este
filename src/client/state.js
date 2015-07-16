@@ -2,9 +2,10 @@ import State from './lib/state';
 import reviveAuth from './auth/revive';
 import reviveTodos from './todos/revive';
 import reviveUsers from './users/revive';
+import {getPersistedState, listenStateChange} from './app/statesessionstorage';
 
 const initialState = process.env.IS_BROWSER
-  ? window._appState
+  ? (getPersistedState() || window._appState)
   : require('../server/initialstate');
 
 export const appState = new State(initialState, function(key, value) {
@@ -21,3 +22,5 @@ export const i18nCursor = appState.cursor(['i18n']);
 export const pendingActionsCursor = appState.cursor(['pendingActions']);
 export const todosCursor = appState.cursor(['todos']);
 export const usersCursor = appState.cursor(['users']);
+
+if (process.env.IS_BROWSER) listenStateChange(appState);
