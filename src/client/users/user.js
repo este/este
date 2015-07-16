@@ -1,8 +1,6 @@
 import {Record} from 'immutable';
 
-const UserRecord = Record({
+export default Record({
   email: '',
   password: ''
 });
-
-export default class User extends UserRecord {}

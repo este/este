@@ -1,6 +1,7 @@
 import {Record} from 'immutable';
 
-// immutable Record is superuseful. It defines default values and getters.
+// Record is something like class, but immutable and with default values.
+// https://facebook.github.io/immutable-js/docs/#/Record
 const FormRecord = Record({
   fields: new (Record({
     email: '',
@@ -9,9 +10,5 @@ const FormRecord = Record({
   error: null
 });
 
-export default class Form extends FormRecord {
-  // We can add getters here. For example:
-  // get emailIsTheSameAsPassword() {
-  //   return this.email === this.password;
-  // }
-}
+// We can subclass FormRecord to add custom getters or methods.
+export default class Form extends FormRecord {}
