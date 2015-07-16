@@ -7,17 +7,18 @@ import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
 import webpackDevServer from './webpack/devserver';
 import yargs from 'yargs';
-import {server as karmaServer} from 'karma';
+import {Server as KarmaServer} from 'karma';
 
 const args = yargs
   .alias('p', 'production')
   .argv;
 
 const runKarma = ({singleRun}, done) => {
-  karmaServer.start({
+  const server = new KarmaServer({
     configFile: path.join(__dirname, 'karma.conf.js'), // eslint-disable-line no-undef
     singleRun: singleRun
   }, done);
+  server.start();
 };
 
 gulp.task('env', () => {
