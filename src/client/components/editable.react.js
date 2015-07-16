@@ -13,7 +13,7 @@ const State = immutable.Record({
 
 const initialState = new State;
 
-class Editable extends Component {
+export default class Editable extends Component {
 
   static propTypes = {
     className: React.PropTypes.string,
@@ -181,5 +181,3 @@ class Editable extends Component {
   }
 
 }
-
-export default Editable;

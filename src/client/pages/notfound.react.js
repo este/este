@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {msg} from '../intl/store';
 
-class NotFound extends Component {
+export default class NotFound extends Component {
 
   render() {
     return (
@@ -19,5 +19,3 @@ class NotFound extends Component {
   }
 
 }
-
-export default NotFound;

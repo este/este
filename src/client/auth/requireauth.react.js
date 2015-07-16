@@ -4,7 +4,9 @@ import {usersCursor} from '../state';
 
 export default function requireAuth(BaseComponent) {
 
-  class Authenticated extends Component {
+  return class Authenticated extends Component {
+
+    static displayName = `${BaseComponent.name}Authenticated`;
 
     static willTransitionTo(transition) {
       const isLoggedIn = !!usersCursor().get('viewer');
@@ -18,10 +20,6 @@ export default function requireAuth(BaseComponent) {
       return <BaseComponent {...this.props} />;
     }
 
-  }
-
-  Authenticated.displayName = `${BaseComponent.name}Authenticated`;
-
-  return Authenticated;
+  };
 
 }

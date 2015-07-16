@@ -5,7 +5,7 @@ import React from 'react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class NewTodo extends Component {
+export default class NewTodo extends Component {
 
   static propTypes = {
     todo: React.PropTypes.instanceOf(immutable.Record)
@@ -31,5 +31,3 @@ class NewTodo extends Component {
   }
 
 }
-
-export default NewTodo;

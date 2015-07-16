@@ -5,7 +5,7 @@ import Editable from '../components/editable.react';
 import React from 'react';
 import immutable from 'immutable';
 
-class Todo extends Component {
+export default class Todo extends Component {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,
@@ -36,5 +36,3 @@ class Todo extends Component {
   }
 
 }
-
-export default Todo;

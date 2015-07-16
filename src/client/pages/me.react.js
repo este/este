@@ -7,7 +7,7 @@ import requireAuth from '../auth/requireauth.react';
 import {msg} from '../intl/store';
 
 @requireAuth
-class Me extends Component {
+export default class Me extends Component {
 
   static propTypes = {
     viewer: React.PropTypes.instanceOf(immutable.Record).isRequired
@@ -29,5 +29,3 @@ class Me extends Component {
   }
 
 }
-
-export default Me;

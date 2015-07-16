@@ -7,7 +7,7 @@ import shallowEqual from 'react-pure-render/shallowEqual';
  * Purified React.Component. Goodness.
  * http://facebook.github.io/react/docs/advanced-performance.html
  */
-class Component extends React.Component {
+export default class Component extends React.Component {
 
   static contextTypes = {
     router: React.PropTypes.func
@@ -44,5 +44,3 @@ class Component extends React.Component {
   // }
 
 }
-
-export default Component;

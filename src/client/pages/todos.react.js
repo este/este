@@ -8,7 +8,7 @@ import ToCheck from './tocheck.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class Todos extends Component {
+export default class Todos extends Component {
 
   static propTypes = {
     pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
@@ -36,5 +36,3 @@ class Todos extends Component {
   }
 
 }
-
-export default Todos;

@@ -2,7 +2,7 @@ import Component from '../components/component.react';
 import React from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
 
-class ToCheckItem extends Component {
+export default class ToCheckItem extends Component {
 
   static propTypes = {
     item: React.PropTypes.object.isRequired
@@ -17,5 +17,3 @@ class ToCheckItem extends Component {
   }
 
 }
-
-export default ToCheckItem;

@@ -4,7 +4,7 @@ import LoginForm from '../auth/login.react';
 import React from 'react';
 import {msg} from '../intl/store';
 
-class Login extends Component {
+export default class Login extends Component {
 
   render() {
     return (
@@ -17,5 +17,3 @@ class Login extends Component {
   }
 
 }
-
-export default Login;

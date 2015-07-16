@@ -4,7 +4,7 @@ import {FormattedHTMLMessage} from 'react-intl';
 import {Link} from 'react-router';
 import {msg} from '../intl/store';
 
-class Header extends Component {
+export default class Header extends Component {
 
   static propTypes = {
     isLoggedIn: React.PropTypes.bool.isRequired
@@ -32,5 +32,3 @@ class Header extends Component {
   }
 
 }
-
-export default Header;

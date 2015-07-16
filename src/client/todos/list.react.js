@@ -5,7 +5,7 @@ import Todo from './todo.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class List extends Component {
+export default class List extends Component {
 
   static propTypes = {
     editables: React.PropTypes.instanceOf(immutable.Map).isRequired,
@@ -43,5 +43,3 @@ class List extends Component {
   }
 
 }
-
-export default List;

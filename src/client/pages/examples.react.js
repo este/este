@@ -6,7 +6,7 @@ import React from 'react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
-class Examples extends Component {
+export default class Examples extends Component {
 
   static propTypes = {
     examples: React.PropTypes.instanceOf(immutable.Map).isRequired,
@@ -43,5 +43,3 @@ class Examples extends Component {
   }
 
 }
-
-export default Examples;

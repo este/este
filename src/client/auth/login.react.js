@@ -8,7 +8,7 @@ import {focusInvalidField} from '../lib/validation';
 import {msg} from '../intl/store';
 
 @exposeRouter
-class Login extends Component {
+export default class Login extends Component {
 
   static propTypes = {
     auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
@@ -79,5 +79,3 @@ class Login extends Component {
   }
 
 }
-
-export default Login;

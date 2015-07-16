@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import ToCheckItem from './tocheckitem.react';
 import {msg, msgs} from '../intl/store';
 
-class ToCheck extends Component {
+export default class ToCheck extends Component {
 
   render() {
     return (
@@ -29,5 +29,3 @@ class ToCheck extends Component {
   }
 
 }
-
-export default ToCheck;
