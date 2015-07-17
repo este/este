@@ -42,7 +42,7 @@
     "gulp-util": "^3.0.2",
     "immutable": "^3.6.4",
     "immutablediff": "^0.4.2",
-    "intl": "^1.0.0",
+    "intl": "^0.1.4",
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
     "karma": "^0.13.0",
