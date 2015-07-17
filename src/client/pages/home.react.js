@@ -13,7 +13,7 @@ export default class Home extends Component {
         <div className="home-page">
           <p>
             <FormattedHTMLMessage message={msg('pages.home.infoHtml')} />{' '}
-            <Link to="todos">{msg('pages.home.todos')}</Link>.
+            <Link to="/todos">{msg('pages.home.todos')}</Link>.
           </p>
         </div>
       </DocumentTitle>

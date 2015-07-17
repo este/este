@@ -13,7 +13,7 @@ export default class Login extends Component {
   static propTypes = {
     auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
     pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-    router: React.PropTypes.func
+    router: React.PropTypes.object.isRequired
   };
 
   getForm() {
@@ -31,9 +31,8 @@ export default class Login extends Component {
   }
 
   redirectAfterLogin() {
-    const {router} = this.props;
-    const nextPath = router.getCurrentQuery().nextPath;
-    router.replaceWith(nextPath || 'home');
+    const {location: {query: {nextPath}}, router} = this.props;
+    router.replaceWith(nextPath || '/');
   }
 
   render() {

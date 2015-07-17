@@ -3,7 +3,6 @@ import Component from '../components/component.react';
 import Footer from './footer.react';
 import Header from './header.react';
 import React from 'react';
-import {RouteHandler} from 'react-router';
 import {appState} from '../state';
 import {measureRender} from '../console';
 
@@ -38,10 +37,13 @@ export default class App extends Component {
   }
 
   render() {
+    // TODO remove when not needed
+    const children = React.cloneElement(this.props.children, this.state);
+
     return (
       <div className="page">
         <Header isLoggedIn={this.state.isLoggedIn} />
-        <RouteHandler {...this.state} />
+        {children}
         <Footer />
       </div>
     );

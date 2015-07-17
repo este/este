@@ -1,5 +1,6 @@
 import Buttons from '../todos/buttons.react';
 import Component from '../components/component.react';
+import requestState from '../components/requeststate.react';
 import DocumentTitle from 'react-document-title';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
@@ -8,6 +9,10 @@ import ToCheck from './tocheck.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
 
+@requestState({
+  pendingActions: ['pendingActions'],
+  todos: ['todos']
+})
 export default class Todos extends Component {
 
   static propTypes = {
