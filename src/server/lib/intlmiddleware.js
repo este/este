@@ -5,10 +5,10 @@ import merger from './merger';
 
 function loadLanguages() {
   const files = glob
-    .sync('src/client/*/i18n/*.js')
+    .sync('src/client/*/intl/*.js')
     .map(file => {
       const translations = require(path.join(__dirname, '../../../', file));
-      const tokens = file.match(/([^/]+)\/i18n\/([^/]+).js$/);
+      const tokens = file.match(/([^/]+)\/intl\/([^/]+).js$/);
       return {
         language: tokens[2],
         feature: tokens[1],
@@ -44,7 +44,7 @@ export default function middleware({defaultLocale, getLocaleFromRequest = extrac
     const userLocale = getLocaleFromRequest(req, locales);
     const defaultMessages = messages[defaultLocale];
     const userMessages = messages[userLocale];
-    req.i18n = {
+    req.intl = {
       locale: userLocale,
       messages: defaultLocale !== userLocale
         ? immutable.fromJS(defaultMessages).mergeWith(merger, userMessages)

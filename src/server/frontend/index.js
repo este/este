@@ -1,11 +1,11 @@
+// import favicon from 'serve-favicon';
 import compression from 'compression';
 import config from '../config';
 import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
-// import favicon from 'serve-favicon';
+import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
 import userState from './userstate';
-import i18nLoader from '../lib/i18nmiddleware';
 
 const app = express();
 
@@ -20,9 +20,8 @@ app.use(compression());
 app.use('/build', express.static('build'));
 app.use('/assets', express.static('assets'));
 
-// Load translations, fallback to defaultLocale if no
-// translations available.
-app.use(i18nLoader({
+// Load translations, fallback to defaultLocale if no translation is available.
+app.use(intlMiddleware({
   defaultLocale: config.defaultLocale
 }));
 
@@ -30,7 +29,7 @@ app.use(i18nLoader({
 app.use(userState());
 
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState, {i18n: req.i18n}).catch(next);
+  render(req, res, req.userState, {intl: req.intl}).catch(next);
 });
 
 app.on('mount', () => {
