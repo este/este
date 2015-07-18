@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import Component from '../components/component.react';
 import Input from '../components/input.react';
-import React from 'react';
+import React from 'react-native';
 import {Record} from 'immutable';
 import {
   TouchableOpacity,
