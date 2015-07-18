@@ -6,7 +6,7 @@
     "start": "./node_modules/.bin/react-native-webpack-server start"
   },
   "dependencies": {
-    "react-native-side-menu": "^0.9.2"
+    "react-native-side-menu": "0.9.2"
   },
   "devDependencies": {
     "babel": "^5.6.7",
