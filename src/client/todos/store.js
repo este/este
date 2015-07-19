@@ -1,18 +1,18 @@
 import Todo from './todo';
 import getRandomString from '../lib/getrandomstring';
-import {Range, Record, Map} from 'immutable';
+import {Range, Record} from 'immutable';
 import {actions} from './actions';
 
-function revive(state) {
-  // Records are good. They allow us to use immutable without getters.
-  // Revive simply convert maps to concrete structures.
-  return new (Record({
-    editables: Map(),
-    newTodo: new Todo(state.get('newTodo')),
-    // User can get list of todos from server as well, make Todos from them.
-    list: state.get('list').map(todo => new Todo(todo))
-  }));
-}
+// Records are good. https://facebook.github.io/immutable-js/docs/#/Record
+const initialState = new (Record({
+  list: [],
+  newTodo: null
+}));
+
+const revive = state => initialState.merge({
+  list: state.get('list').map(todo => new Todo(todo)),
+  newTodo: new Todo(state.get('newTodo'))
+});
 
 function getRandomTodos(howMuch) {
   return Range(0, howMuch).map(() => {
@@ -21,7 +21,7 @@ function getRandomTodos(howMuch) {
   }).toArray();
 }
 
-export default function(state, action, payload) {
+export default function(state = initialState, action, payload) {
   if (!action) state = revive(state);
 
   switch (action) {
