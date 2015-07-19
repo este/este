@@ -44,7 +44,7 @@
     "intl": "^0.1.4",
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
-    "karma": "^0.13.0",
+    "karma": "^0.12.36",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-coverage": "^0.4.2",

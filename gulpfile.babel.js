@@ -7,18 +7,17 @@ import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
 import webpackDevServer from './webpack/devserver';
 import yargs from 'yargs';
-import {Server as KarmaServer} from 'karma';
+import {server as karmaServer} from 'karma';
 
 const args = yargs
   .alias('p', 'production')
   .argv;
 
 const runKarma = ({singleRun}, done) => {
-  const server = new KarmaServer({
+  karmaServer.start({
     configFile: path.join(__dirname, 'karma.conf.js'), // eslint-disable-line no-undef
     singleRun: singleRun
   }, done);
-  server.start();
 };
 
 gulp.task('env', () => {
@@ -55,19 +54,14 @@ gulp.task('karma-dev', (done) => {
 });
 
 gulp.task('test', (done) => {
-  // Karma disabled because https://github.com/este/este/issues/350.
-  // runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
-  runSequence('eslint', 'build-webpack-production', done);
+  runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
 });
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'));
 
-gulp.task('default', (done) => {
-  if (args.production)
-    runSequence('server', done);
-  else
-    runSequence('server', done);
-    // Karma disabled because https://github.com/este/este/issues/350.
-    // It will be replaced pretty soon anyway.
-    // runSequence('server', 'karma-dev', done);
+// Run karma configured for TDD.
+gulp.task('tdd', (done) => {
+  runSequence('server', 'karma-dev', done);
 });
+
+gulp.task('default', ['server']);
