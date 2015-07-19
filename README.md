@@ -63,7 +63,8 @@ To create an empty app, clone `https://github.com/este/bare.git`.
 
 - `gulp` run app in development mode
 - `gulp -p` run app in production mode
-- `gulp test`
+- `gulp test` run eslint, karma-ci, webpack build for production
+- `gulp tdd` run app in dev mode with Karma configured for test driven development
 
 ## CI Tasks
 
