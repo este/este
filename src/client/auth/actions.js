@@ -1,73 +1,60 @@
 import Promise from 'bluebird';
-import setToString from '../lib/settostring';
 import {ValidationError} from '../lib/validation';
-import {dispatch} from '../dispatcher';
-import {validate} from '../validation';
-import {msg} from '../intl/store';
 
-export function login(fields) {
-  // Promise, because we don't know whether fields are valid.
-  const promise = validateForm(fields)
-    .then(() => {
-      return validateCredentials(fields);
-    })
-    .catch(error => {
-      loginError(error);
-      throw error;
-    });
+export const actions = create();
+export const feature = 'auth';
 
-  return dispatch(login, promise);
-}
+const formFieldMaxLength = 100;
 
-function validateForm(fields) {
-  // Validate function is just wrapper for node-validator providing promise api,
-  // so we can mix client sync and server async validations easily.
-  return validate(fields)
-    // Of course we can add another validation methods.
+export function create(dispatch, validate, msg) {
+
+  const validateForm = fields => validate(fields)
     .prop('email').required().email()
     .prop('password').required().simplePassword()
     .promise;
-}
 
-function validateCredentials(fields) {
-  return new Promise((resolve, reject) => {
-
-    // For real usage, consider matthew-andrews/isomorphic-fetch.
+  const validateCredentials = fields => new Promise((resolve, reject) => {
+    // For real usage, use isomorphic-fetch, socket.io, or whatever.
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/v1/auth/login', true);
     xhr.setRequestHeader('Content-type', 'application/json');
-
     // TODO: Show how to handle different password/username server errors.
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
       if (xhr.status === 200)
         resolve(fields);
       else
-        reject(new ValidationError(msg('auth.form.wrongPassword'), 'password'));
+        reject(new ValidationError(msg.form.wrongPassword, 'password'));
     };
-
     xhr.send(JSON.stringify(fields));
   });
-}
 
-export function loginError(error) {
-  dispatch(loginError, error);
-}
+  return {
 
-export function logout() {
-  // Always reload app on logout for security reasons.
-  location.href = '/';
-}
+    login(fields) {
+      dispatch(actions.login);
 
-export function updateFormField({target: {name, value}}) {
-  // Both email and password max length is 100.
-  value = value.slice(0, 100);
-  dispatch(updateFormField, {name, value});
-}
+      return validateForm(fields)
+        .then(() => validateCredentials(fields))
+        .then(() => dispatch(actions.loginSuccess, fields))
+        .catch(error => {
+          dispatch(actions.loginFail, error);
+          throw error;
+        });
+    },
+    loginSuccess() {},
+    loginFail() {},
 
-setToString('auth', {
-  login,
-  loginError,
-  logout,
-  updateFormField
-});
+    logout() {
+      // Always reload app on logout for security reasons.
+      location.href = '/';
+    },
+
+    setFormField({target: {name, value}}) {
+      value = value.slice(0, formFieldMaxLength);
+      dispatch(actions.setFormField, {name, value});
+    }
+
+  };
+
+}

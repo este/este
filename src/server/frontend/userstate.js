@@ -1,8 +1,6 @@
 import Promise from 'bluebird';
 import Immutable from 'immutable';
 
-// Example how initialState, which is the same for all users, is enriched with
-// user state. With state-less Flux, we don't need instances.
 export default function userState() {
 
   return (req, res, next) => {

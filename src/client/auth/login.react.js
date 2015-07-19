@@ -1,32 +1,24 @@
 import './login.styl';
-import * as actions from './actions';
 import Component from '../components/component.react';
 import React from 'react';
 import exposeRouter from '../components/exposerouter.react';
-import immutable from 'immutable';
 import {focusInvalidField} from '../lib/validation';
-import {msg} from '../intl/store';
 
 @exposeRouter
 export default class Login extends Component {
 
   static propTypes = {
-    auth: React.PropTypes.instanceOf(immutable.Map).isRequired,
-    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    actions: React.PropTypes.object.isRequired,
+    auth: React.PropTypes.object.isRequired,
+    msg: React.PropTypes.object.isRequired,
     router: React.PropTypes.func
   };
 
-  getForm() {
-    return this.props.auth.get('form');
-  }
-
   onFormSubmit(e) {
     e.preventDefault();
-    const fields = this.getForm().fields.toJS();
-    actions.login(fields)
-      .then(() => {
-        this.redirectAfterLogin();
-      })
+    const {actions: {auth}, auth: {form}} = this.props;
+    auth.login(form.fields)
+      .then(() => this.redirectAfterLogin())
       .catch(focusInvalidField(this));
   }
 
@@ -37,41 +29,41 @@ export default class Login extends Component {
   }
 
   render() {
-    const form = this.getForm();
-    const {pendingActions} = this.props;
+    const {
+      actions: {auth: actions},
+      auth: {form},
+      msg: {auth: {form: msg}}
+    } = this.props;
 
     return (
       <div className="login">
-        <form onSubmit={(e) => this.onFormSubmit(e)}>
-          <fieldset disabled={pendingActions.has(actions.login.toString())}>
-            <legend>{msg('auth.form.legend')}</legend>
+        <form onSubmit={::this.onFormSubmit}>
+          <fieldset disabled={form.disabled}>
+            <legend>{msg.legend}</legend>
             <input
               autoFocus
               name="email"
-              onChange={actions.updateFormField}
-              placeholder={msg('auth.form.placeholder.email')}
+              onChange={actions.setFormField}
+              placeholder={msg.placeholder.email}
               value={form.fields.email}
             />
             <br />
             <input
               name="password"
-              onChange={actions.updateFormField}
-              placeholder={msg('auth.form.placeholder.password')}
+              onChange={actions.setFormField}
+              placeholder={msg.placeholder.password}
               type="password"
               value={form.fields.password}
             />
             <br />
             <button
-              children={msg('auth.form.button.login')}
+              children={msg.button.login}
               type="submit"
             />
-            {/*
-             <button type="submit">{msg('auth.form.button.signup')}</button>
-            */}
             {form.error &&
               <span className="error-message">{form.error.message}</span>
             }
-            <div>{msg('auth.form.hint')}</div>
+            <div>{msg.hint}</div>
           </fieldset>
         </form>
       </div>

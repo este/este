@@ -67,5 +67,8 @@ gulp.task('default', (done) => {
   if (args.production)
     runSequence('server', done);
   else
-    runSequence('server', 'karma-dev', done);
+    runSequence('server', done);
+    // Karma disabled because https://github.com/este/este/issues/350.
+    // It will be replaced pretty soon anyway.
+    // runSequence('server', 'karma-dev', done);
 });

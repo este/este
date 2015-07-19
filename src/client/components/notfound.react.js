@@ -2,17 +2,22 @@ import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {Link} from 'react-router';
-import {msg} from '../intl/store';
 
 export default class NotFound extends Component {
 
+  static propTypes = {
+    msg: React.PropTypes.object.isRequired
+  }
+
   render() {
+    const {msg: {components: msg}} = this.props;
+
     return (
-      <DocumentTitle title={msg('pages.notFound.title')}>
+      <DocumentTitle title={msg.notFound.title}>
         <div className="notfound-page">
-          <h1>{msg('pages.notFound.header')}</h1>
-          <p>{msg('pages.notFound.message')}</p>
-          <Link to="home">{msg('pages.notFound.continueMessage')}</Link>
+          <h1>{msg.notFound.header}</h1>
+          <p>{msg.notFound.message}</p>
+          <Link to="home">{msg.notFound.continueMessage}</Link>
         </div>
       </DocumentTitle>
     );

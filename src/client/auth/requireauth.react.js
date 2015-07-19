@@ -1,16 +1,15 @@
 import Component from '../components/component.react';
 import React from 'react';
-import {usersCursor} from '../state';
+import User from '../users/user';
 
 export default function requireAuth(BaseComponent) {
 
-  return class Authenticated extends Component {
+  return class RequireAuth extends Component {
 
-    static displayName = `${BaseComponent.name}Authenticated`;
+    static displayName = `${BaseComponent.name}RequireAuth`;
 
     static willTransitionTo(transition) {
-      const isLoggedIn = !!usersCursor().get('viewer');
-      if (isLoggedIn) return;
+      if (User.isLoggedIn) return;
       transition.redirect('/login', {}, {
         nextPath: transition.path
       });

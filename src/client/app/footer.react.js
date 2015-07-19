@@ -1,15 +1,20 @@
 import Component from '../components/component.react';
 import React from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
-import {msg} from '../intl/store';
 
 export default class Footer extends Component {
 
+  static propTypes = {
+    msg: React.PropTypes.object.isRequired
+  }
+
   render() {
+    const {msg: {app: {footer}}} = this.props;
+
     return (
       <footer>
         <p>
-          <FormattedHTMLMessage message={msg('app.madeByHtml')} />
+          <FormattedHTMLMessage message={footer.madeByHtml} />
         </p>
       </footer>
     );

@@ -1,25 +1,27 @@
 import './buttons.styl';
-import * as actions from '../todos/actions';
 import Component from '../components/component.react';
 import React from 'react';
-import {msg} from '../intl/store';
 
 export default class TodoButtons extends Component {
 
   static propTypes = {
-    clearAllEnabled: React.PropTypes.bool.isRequired
+    actions: React.PropTypes.object.isRequired,
+    clearAllEnabled: React.PropTypes.bool.isRequired,
+    msg: React.PropTypes.object.isRequired
   };
 
   render() {
+    const {actions, clearAllEnabled, msg} = this.props;
+
     return (
       <div className="buttons">
         <button
-          children={msg('todos.clearAll')}
-          disabled={!this.props.clearAllEnabled}
+          children={msg.clearAll}
+          disabled={!clearAllEnabled}
           onClick={actions.clearAll}
         />
         <button
-          children={msg('todos.add100')}
+          children={msg.add100}
           onClick={actions.addHundredTodos}
         />
       </div>

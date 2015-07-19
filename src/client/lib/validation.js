@@ -1,12 +1,12 @@
 /*
-  Simple serial "one by one" sync/async promises based validation.
+  Simple serial sync/async chriso/validator.js validation wrapper with promises.
 */
 import Promise from 'bluebird';
 import React from 'react';
 import validator from 'validator';
 
 export class ValidationError extends Error {
-  constructor(message: string, prop: string) {
+  constructor(message, prop) {
     super();
     this.message = message;
     this.prop = prop;
@@ -30,14 +30,14 @@ export function focusInvalidField(component) {
 
 export default class Validation {
 
-  constructor(object: Object) {
+  constructor(object) {
     this._object = object;
     this._prop = null;
     this._validator = validator;
     this.promise = Promise.resolve();
   }
 
-  custom(callback: Function, {required} = {}) {
+  custom(callback, {required} = {}) {
     const prop = this._prop;
     const value = this._object[prop];
     const object = this._object;
@@ -52,12 +52,12 @@ export default class Validation {
     return !this._validator.toString(value).trim();
   }
 
-  prop(prop: string) {
+  prop(prop) {
     this._prop = prop;
     return this;
   }
 
-  required(getRequiredMessage?) {
+  required(getRequiredMessage) {
     return this.custom((value, prop) => {
       const msg = getRequiredMessage
         ? getRequiredMessage(prop, value)

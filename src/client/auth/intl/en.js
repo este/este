@@ -10,10 +10,13 @@ export default {
       email: 'your@email.com',
       password: 'password'
     },
-    wrongPassword: 'Wrong password'
+    wrongPassword: 'Wrong password.'
   },
   logout: {
     button: 'Logout'
+  },
+  page: {
+    title: 'Login'
   },
   validation: {
     email: `Email address is not valid.`,

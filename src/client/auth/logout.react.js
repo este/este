@@ -1,16 +1,21 @@
-import * as actions from './actions';
 import Component from '../components/component.react';
 import React from 'react';
-import {msg} from '../intl/store';
 
 export default class Logout extends Component {
 
+  static propTypes = {
+    actions: React.PropTypes.object.isRequired,
+    msg: React.PropTypes.object.isRequired
+  }
+
   render() {
+    const {actions, msg} = this.props;
+
     return (
       <div className="logout">
         <button
-          children={msg('auth.logout.button')}
-          onClick={actions.logout}
+          children={msg.auth.logout.button}
+          onClick={actions.auth.logout}
         />
       </div>
     );

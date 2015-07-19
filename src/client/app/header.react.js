@@ -2,29 +2,29 @@ import Component from '../components/component.react';
 import React from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
 import {Link} from 'react-router';
-import {msg} from '../intl/store';
 
 export default class Header extends Component {
 
   static propTypes = {
-    isLoggedIn: React.PropTypes.bool.isRequired
+    msg: React.PropTypes.object.isRequired,
+    viewer: React.PropTypes.object
   };
 
   render() {
-    const {isLoggedIn} = this.props;
+    const {msg: {app: {header}}, viewer} = this.props;
 
     return (
       <header>
         <h1>
-          <FormattedHTMLMessage message={msg('app.header.h1Html')} />
+          <FormattedHTMLMessage message={header.h1Html} />
         </h1>
         <ul>
-          <li><Link to="home">{msg('app.header.home')}</Link></li>
-          <li><Link to="todos">{msg('app.header.todos')}</Link></li>
-          <li><Link to="examples">{msg('app.header.examples')}</Link></li>
-          <li><Link to="me">{msg('app.header.me')}</Link></li>
-          {!isLoggedIn &&
-            <li><Link to="login">{msg('app.header.login')}</Link></li>
+          <li><Link to="home">{header.home}</Link></li>
+          <li><Link to="todos">{header.todos}</Link></li>
+          {/*<li><Link to="examples">{header.examples}</Link></li>*/}
+          <li><Link to="me">{header.me}</Link></li>
+          {!viewer &&
+            <li><Link to="login">{header.login}</Link></li>
           }
         </ul>
       </header>

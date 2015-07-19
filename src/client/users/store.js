@@ -1,18 +1,26 @@
-import * as authActions from '../auth/actions';
-import {register} from '../dispatcher';
 import User from './user';
-import {usersCursor} from '../state';
+import {Record} from 'immutable';
+import {actions as authActions} from '../auth/actions';
 
-export const dispatchToken = register(({action, data}) => {
+function revive(state) {
+  // Handle case user was authenticated on the server.
+  const viewer = state && state.get('viewer');
+  return new (Record({
+    viewer: viewer ? new User(viewer) : null
+  }));
+}
+
+export default function(state, action, payload) {
+  if (!action) state = revive(state);
 
   switch (action) {
-    // See how user store can handle auth action.
-    case authActions.login:
-      usersCursor(users => {
-        const user = data;
-        return users.set('viewer', new User(user));
-      });
-      break;
+
+    case authActions.loginSuccess:
+      // Hideous side effect hack, will be removed soon with new react-router.
+      User.isLoggedIn = true;
+      return state.set('viewer', new User(payload));
+
   }
 
-});
+  return state;
+}
