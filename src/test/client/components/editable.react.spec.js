@@ -1,6 +1,6 @@
 import Editable from 'client/components/editable.react';
 import React from 'react/addons';
-import {expect} from 'chai'; // http://chaijs.com/api/bdd
+import {expect} from 'chai';
 import {render} from 'test/utils';
 
 describe('Editable', () => {
