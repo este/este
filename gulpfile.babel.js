@@ -55,10 +55,9 @@ gulp.task('karma-dev', (done) => {
 });
 
 gulp.task('test', (done) => {
-  // Run test tasks serially, because it doesn't make sense to build when tests
-  // are not passing, and it doesn't make sense to run tests, if lint has failed.
-  // Gulp deps aren't helpful, because we want to run tasks without deps as well.
-  runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
+  // Karma disabled because https://github.com/este/este/issues/350.
+  // runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
+  runSequence('eslint', 'build-webpack-production', done);
 });
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'));
