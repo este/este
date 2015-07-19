@@ -19,25 +19,6 @@ export default class Todo extends Component {
         <span className="button" onClick={() => actions.deleteTodo(todo)}>x</span>
       </li>
     );
-
-    // Editable jako komponenta jo, ale state patri do modelu primo, tak.
-    // const editableFor = (propName) =>
-    //   <Editable
-    //     disabled={disabled}
-    //     id={todo.id}
-    //     name={propName}
-    //     onSave={actions.onEditableSave}
-    //     onState={actions.onEditableState}
-    //     state={editable ? editable.get(propName) : null}
-    //     text={todo[propName]}
-    //   />;
-
-    // return (
-    //   <li className="todo">
-    //     {editableFor('title')}
-    //     <span className="button" onClick={() => actions.deleteTodo(todo)}>x</span>
-    //   </li>
-    // );
   }
 
 }
