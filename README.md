@@ -10,9 +10,9 @@
 ## Techniques
 
 - Universal JavaScript (formerly isomorphic), one dev stack for browser, server, desktop, mobile.
-- Functional works, we can take app state snapshots, time travel, hot reload everything (without app restart).
+- Functional works: App state snapshots, time travel, hot reload everything.
 - [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
-- Stateless vanilla [Flux](https://facebook.github.io/flux/) with atomic [immutable.js](http://facebook.github.io/immutable-js) app state for super fast rendering and sane state management.
+- Super minimal [Flux](https://facebook.github.io/flux/) with atomic [immutable.js](http://facebook.github.io/immutable-js) app state for fast rendering and sane state management.
 - ECMAScript 2015+ with [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps are enabled by default.
 - Well tuned [webpack](http://webpack.github.io/) dev stack with handy [notifier](https://github.com/mikaelbr/node-notifier). TDD ready.
 - [Karma](http://karma-runner.github.io/) as the test runner, [mocha](http://mochajs.org/) as test framework, and [Chai](http://chaijs.com/) as BDD / TDD assertion library.
