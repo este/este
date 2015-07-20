@@ -98,7 +98,7 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com) 
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
-- [DzejEs.cz](http://www.dzejes.cz) - Czech articles about modern web applications
+- [DzejEs.cz](http://www.dzejes.cz) - czech articles about Este
 
 ## Notes
 
