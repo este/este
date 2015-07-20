@@ -74,8 +74,17 @@ class App extends Component {
   renderScene(route, navigator) {
     var Handler = route.component;
 
+    // This is our custom navigator we pass down to components,
+    // If you feel like some navigator methods are missing,
+    // pass them like `pop`
+    // Babel Object.assign() does not support extending objects
+    // that have ennumerable properties in the prototype chain hence
+    // we need to be explicit here
     const navigation = {
-      transitionTo: (route) => navigator.push(this.getRoute(route)),
+      goBack: navigator.pop,
+      popToTop: navigator.popToTop,
+      replaceAtIndex: navigator.replaceAtIndex,
+      transitionTo: route => navigator.push(this.getRoute(route)),
       getRoute: this.getRoute.bind(this),
       toggleMenu: this.toggleMenu.bind(this)
     };
