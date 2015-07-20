@@ -6,7 +6,7 @@ import React from 'react';
 import ToCheck from './tocheck.react';
 import Todos from './todos.react';
 
-export default class Page extends Component {
+export default class Index extends Component {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
