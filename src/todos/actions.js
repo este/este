@@ -64,5 +64,5 @@ setToString('todos', {
   deleteTodo,
   onTodoFieldChange,
   onNewTodoFieldChange,
-  toggleTodoCompleted,
+  toggleTodoCompleted
 });

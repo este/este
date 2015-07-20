@@ -1,12 +1,7 @@
 import React from 'react-native';
 import Component from '../components/component.react';
 import {msg} from '../intl/store';
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity
-} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 
 import style from './header.style';
 

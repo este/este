@@ -2,15 +2,18 @@ import Component from '../components/component.react';
 import immutable from 'immutable';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
-import React from 'react-native';
 import TodoHeader from '../todos/todoheader.react';
-import {
-  View
-} from 'react-native';
+import React, {View} from 'react-native';
 
 import {container} from '../app/app.style';
 
-class Todos extends Component {
+export default class Todos extends Component {
+
+  static propTypes = {
+    navigation: React.PropTypes.object.isRequired,
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    todos: React.PropTypes.instanceOf(immutable.Map).isRequired
+  }
 
   render() {
     const {todos, pendingActions, navigation} = this.props;
@@ -33,11 +36,3 @@ class Todos extends Component {
   }
 
 }
-
-Todos.propTypes = {
-  navigation: React.PropTypes.object.isRequired,
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  todos: React.PropTypes.instanceOf(immutable.Map).isRequired
-};
-
-export default Todos;
