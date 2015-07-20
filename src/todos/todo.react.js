@@ -3,15 +3,16 @@ import Component from '../components/component.react';
 import Input from '../components/input.react';
 import React from 'react-native';
 import {Record} from 'immutable';
-import {
-  TouchableOpacity,
-  Image,
-  View
-} from 'react-native';
+import {TouchableOpacity, Image, View} from 'react-native';
 
 import style from './todo.style.js';
 
-class Todo extends Component {
+export default class Todo extends Component {
+
+  static propTypes = {
+    disabled: React.PropTypes.bool.isRequired,
+    todo: React.PropTypes.instanceOf(Record).isRequired
+  }
 
   render() {
     const {todo, disabled} = this.props;
@@ -51,10 +52,3 @@ class Todo extends Component {
   }
 
 }
-
-Todo.propTypes = {
-  disabled: React.PropTypes.bool.isRequired,
-  todo: React.PropTypes.instanceOf(Record).isRequired
-};
-
-export default Todo;

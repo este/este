@@ -1,10 +1,7 @@
 import Component from '../components/component.react';
 import React from 'react-native';
 import {msg} from '../intl/store';
-import {
-  ScrollView,
-  Text
-} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 
 import styles from './menu.style';
 

@@ -5,11 +5,7 @@ import Menu from './menu.react';
 import React from 'react-native';
 import {routes, defaultRoute} from '../routes';
 import SideMenu from 'react-native-side-menu';
-import {
-  StatusBarIOS,
-  View,
-  Navigator
-} from 'react-native';
+import {StatusBarIOS, View, Navigator} from 'react-native';
 
 import appStyle from './app.style';
 

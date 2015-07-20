@@ -4,16 +4,16 @@ import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import {msg} from '../intl/store';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image
-} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 
 import style from './list.style';
 
-class List extends Component {
+export default class List extends Component {
+
+  static propTypes = {
+    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    todos: React.PropTypes.instanceOf(immutable.List)
+  }
 
   render() {
     const {todos} = this.props;
@@ -55,10 +55,3 @@ class List extends Component {
   }
 
 }
-
-List.propTypes = {
-  pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-  todos: React.PropTypes.instanceOf(immutable.List)
-};
-
-export default List;

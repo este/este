@@ -4,17 +4,14 @@ import {msg} from '../intl/store';
 import React from 'react-native';
 import Input from '../components/input.react';
 import Todo from './todo';
-import {
-  View
-} from 'react-native';
+import {View} from 'react-native';
 
 import {style, placeholderTextColor} from './newtodo.style';
 
-class NewTodo extends Component {
+export default class NewTodo extends Component {
 
-  constructor(props) {
-    super(props);
-    this.addTodoOnEnd = this.addTodoOnEnd.bind(this);
+  static propTypes = {
+    todo: React.PropTypes.instanceOf(Todo)
   }
 
   addTodoOnEnd() {
@@ -28,7 +25,7 @@ class NewTodo extends Component {
         <Input
           name='title'
           onChange={actions.onNewTodoFieldChange}
-          onEndEditing={this.addTodoOnEnd}
+          onEndEditing={::this.addTodoOnEnd}
           placeholder={msg('todos.newTodoPlaceholder')}
           placeholderTextColor={placeholderTextColor}
           style={style.input}
@@ -39,9 +36,3 @@ class NewTodo extends Component {
   }
 
 }
-
-NewTodo.propTypes = {
-  todo: React.PropTypes.instanceOf(Todo)
-};
-
-export default NewTodo;

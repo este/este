@@ -1,7 +1,5 @@
 import React from 'react-native';
-import {
-  TextInput
-} from 'react-native';
+import {TextInput} from 'react-native';
 
 class Input extends React.Component {
 
