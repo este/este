@@ -28,10 +28,12 @@ export default class App extends Component {
 
   createActions() {
     const {flux, msg} = this.props;
-    this.actions = actions.reduce((actions, {feature, create}) =>
-      ({...actions, [feature]: create(
-        ::flux.dispatch, createValidate(msg), msg[feature]
-      )}), {});
+    const validate = createValidate(msg);
+    this.actions = actions.reduce((actions, {feature, create}) => {
+      const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
+      const featureActions = create(dispatch, validate, msg[feature]);
+      return {...actions, [feature]: featureActions};
+    }, {});
   }
 
   render() {
