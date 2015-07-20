@@ -75,7 +75,6 @@ class App extends Component {
     var Handler = route.component;
 
     const navigation = {
-      ...navigator,
       transitionTo: (route) => navigator.push(this.getRoute(route)),
       getRoute: this.getRoute.bind(this),
       toggleMenu: this.toggleMenu.bind(this)

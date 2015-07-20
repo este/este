@@ -2,9 +2,8 @@ import Component from '../components/component.react';
 import immutable from 'immutable';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
-import React from 'react-native';
 import TodoHeader from '../todos/todoheader.react';
-import {View} from 'react-native';
+import React, {View} from 'react-native';
 
 import {container} from '../app/app.style';
 

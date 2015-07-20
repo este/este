@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/react-native-webpack-server start"
+    "start": "./node_modules/.bin/react-native-webpack-server start",
+    "postinstall": "cp ./transformer.js ./node_modules/react-native/packager/transformer.js"
   },
   "dependencies": {
     "react-native-side-menu": "0.9.5"
@@ -23,7 +24,6 @@
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
     "react-native": "0.7.1",
-    "react-native-browser-polyfill": "^0.1.1",
     "react-native-progress-hud": "^1.0.2",
     "react-native-webpack-server": "0.2.2",
     "react-pure-render": "^1.0.2",

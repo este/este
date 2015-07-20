@@ -26,3 +26,15 @@ $ npm install
 ### Contributing
 
 This project heavily uses ESLint (refer to .eslint for settings defined), please make sure all tests pass before pushing updated code. Try to be as explicit and idiomatic as possible. Comment methods were possible for further development sake.
+
+### Common problems
+
+> Unexpected use of reserved word "import"
+
+It's likely you've upgraded from Webpack and new packager does not transform all your files with new transformations because they are in cache.
+Reset the cache using the tips in below issue (hint: for now, you need to add a flag to packager directly) and rerun:
+https://github.com/facebook/react-native/issues/1480#issuecomment-121649714
+
+> Unable to resolve module Dimensions<any other native module>...
+
+This is due to latest change in how React exposes these modules. Till React 0.9, you can ignore it, it will run without any problems. 

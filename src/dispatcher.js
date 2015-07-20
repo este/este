@@ -2,9 +2,10 @@
 /* @flow */
 import {pendingActionsCursor} from './state';
 import {Dispatcher} from 'flux';
+import {env} from './config';
 
 const dispatcher = new Dispatcher;
-const isDev = 'production' !== process.env.NODE_ENV;
+const isDev = 'production' !== env;
 
 export function register(callback: Function): string {
   return dispatcher.register(callback);

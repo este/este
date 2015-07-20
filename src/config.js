@@ -5,11 +5,14 @@ const prodConfig = {
   stripe: {
     url: 'https://api.stripe.com/v1',
     token: 'pk_test_1GnxFHMHyaLGh4fcByyrpsLG'
-  }
+  },
+  env: 'production'
 };
 
 // Put your dev config here to override production/common settings
-const devConfig = {};
+const devConfig = {
+  env: 'development'
+};
 
 export default __DEV__
   ? prodConfig

@@ -5,4 +5,4 @@ import './node_modules/intl/locale-data/jsonp/en.js';
 
 // Load app
 import {AppRegistry} from 'react-native';
-AppRegistry.registerComponent('este', () => require('./app/app.react.js'));
+AppRegistry.registerComponent('este', () => require('./src/app/app.react.js'));
