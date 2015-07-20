@@ -1,6 +1,6 @@
 {
   "name": "Este",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/react-native-webpack-server start",
@@ -25,7 +25,6 @@
     "intl-relativeformat": "^1.1.0",
     "react-native": "0.7.1",
     "react-native-progress-hud": "^1.0.2",
-    "react-native-webpack-server": "0.2.2",
     "react-pure-render": "^1.0.2",
     "validator": "^3.41.2"
   }
