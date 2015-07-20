@@ -1,5 +1,3 @@
-/* @flow weak */
-
 'use strict';
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -120,9 +118,18 @@ module.exports = function(isDevelopment) {
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.UglifyJsPlugin({
+            // keep_fnames prevents function name mangling.
+            // Function names are useful. Seeing a readable error stack while
+            // being able to programmatically analyse it is priceless. And yes,
+            // we don't need infamous FLUX_ACTION_CONSTANTS with function name.
+            // It's ES6 standard polyfilled by Babel.
             compress: {
-              // Because uglify reports so many irrelevant warnings.
-              warnings: false
+              keep_fnames: true,
+              screw_ie8: true,
+              warnings: false // Because uglify reports irrelevant warnings.
+            },
+            mangle: {
+              keep_fnames: true
             }
           })
         );
