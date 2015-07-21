@@ -13,7 +13,7 @@ export default class Index extends Component {
     const {msg} = this.props;
 
     return (
-      <DocumentTitle title={msg.auth.page.title}>
+      <DocumentTitle title={msg.auth.index.title}>
         <div className="login-page">
           <Login {...this.props} />
         </div>
