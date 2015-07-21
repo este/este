@@ -2,7 +2,7 @@ import Component from '../../components/component.react';
 import Flux from './flux';
 import React from 'react';
 
-export default function decorator(store) {
+export default function decorate(store) {
 
   return BaseComponent => class Decorator extends Component {
 
@@ -19,6 +19,7 @@ export default function decorator(store) {
       this.fluxify();
     }
 
+    // Always use componentWillUnmount where componentWillMount is used.
     componentWillUnmount() {
       this.flux.removeListener('dispatch', this.onFluxDispatch);
     }
