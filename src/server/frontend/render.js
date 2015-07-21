@@ -35,7 +35,7 @@ function renderPage(req, res, appState) {
     });
 
     router.run((Handler, routerState) => {
-      const html = getPageHtml(Handler, appState);
+      const html = getPageHtml(Handler, appState, {hostname: req.hostname});
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
@@ -45,14 +45,14 @@ function renderPage(req, res, appState) {
   });
 }
 
-function getPageHtml(Handler, appState) {
+function getPageHtml(Handler, appState, {hostname}) {
   const appHtml = `<div id="app">${
     React.renderToString(<Handler initialState={appState} />)
   }</div>`;
 
   const appScriptSrc = config.isProduction
     ? '/build/app.js?v=' + config.version
-    : '//localhost:8888/build/app.js';
+    : `//${hostname}:8888/build/app.js`;
 
   let scriptHtml = `
     <script>
