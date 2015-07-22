@@ -6,7 +6,7 @@
 // import immutable from 'immutable';
 // import {msg} from '../intl/store';
 
-// export default class Page extends Component {
+// export default class Index extends Component {
 
 //   static propTypes = {
 //     examples: React.PropTypes.instanceOf(immutable.Map).isRequired,

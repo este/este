@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import Login from './login.react';
 import React from 'react';
 
-export default class Page extends Component {
+export default class Index extends Component {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired
@@ -13,7 +13,7 @@ export default class Page extends Component {
     const {msg} = this.props;
 
     return (
-      <DocumentTitle title={msg.auth.page.title}>
+      <DocumentTitle title={msg.auth.index.title}>
         <div className="login-page">
           <Login {...this.props} />
         </div>

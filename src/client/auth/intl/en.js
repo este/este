@@ -15,7 +15,7 @@ export default {
   logout: {
     button: 'Logout'
   },
-  page: {
+  index: {
     title: 'Login'
   },
   validation: {

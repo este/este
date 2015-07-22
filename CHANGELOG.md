@@ -6,6 +6,21 @@ Weekly updates and summary of all changes in the Este project. The changelog is 
 - `Features` - new features and real changes
 - `Style and deps` - mainly style tweaks and dependencies updates
 
+## 23.06 - 20.07
+
+- New super awesome even more reduced Flux. Who needs Flux framework?
+- Test examples for actions and stores
+- Este devtools are back
+- Fixed intl and Karma deps until their issues will be resolved
+- Some small changes in app structure, i18n renamed to intl etc.
+- Add nyan progress bar for the webpack build
+- Locales per app feature, extend translations with default ones.
+- Smarter user state preloading
+- Removed pages directory, all components belong to features
+- Add ES7 support, add decorators, function bind syntax, static props
+- Added link to Czech articles about Este.js
+- several minor fixes
+
 ## 13.06 - 23.06
 
 ### Features
