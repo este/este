@@ -72,6 +72,10 @@ To create an empty app, clone `https://github.com/este/bare.git`.
 - `npm postinstall` just alias for `gulp build --production`, useful for Heroku.
 - `npm test` just alias for `gulp test`
 
+## Examples
+
+- [bare](https://github.com/este/bare) - empty application
+
 ## Documentation
 
 So you decided to give a chance to this web stack, but where is documentation? Code is documentation itself as it illustrates various patterns, but for start you should read something about [React.js](http://facebook.github.io/react/). Then you should learn [what is the Flux
