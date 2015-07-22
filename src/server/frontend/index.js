@@ -6,6 +6,7 @@ import express from 'express';
 import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
 import userState from './userstate';
+import fetchData from './fetchData';
 
 const app = express();
 
@@ -26,10 +27,13 @@ app.use(intlMiddleware({
 }));
 
 // Load state extras for current user.
-app.use(userState());
+//app.use(userState());
+
+//Load api datas
+app.use(fetchData());
 
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState, {intl: req.intl}).catch(next);
+  render(req, res).catch(next);
 });
 
 app.on('mount', () => {

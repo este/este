@@ -4,17 +4,13 @@ import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
 import config from '../config';
-import immutable from 'immutable';
-import initialState from '../initialstate';
 import routes from '../../client/routes';
-import stateMerger from '../lib/merger';
 
-export default function render(req, res, ...customStates) {
-  const appState = immutable.fromJS(initialState).mergeWith(stateMerger, ...customStates).toJS();
-  return renderPage(req, res, appState);
+export default function render(req, res) {
+  return renderPage(req, res);
 }
 
-function renderPage(req, res, appState) {
+function renderPage(req, res) {
   return new Promise((resolve, reject) => {
 
     const router = Router.create({
@@ -35,7 +31,7 @@ function renderPage(req, res, appState) {
     });
 
     router.run((Handler, routerState) => {
-      const html = getPageHtml(Handler, appState);
+      const html = getPageHtml(Handler, req.appState);
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);

@@ -14,6 +14,17 @@ export default class Page extends Component {
     todos: React.PropTypes.object.isRequired
   };
 
+  static fetchData(actions) {
+    return actions.todos.loadAllTodos();
+  }
+
+  componentDidMount() {
+    const {todos, actions} = this.props;
+
+    if (!todos.list.size > 0)
+      Page.fetchData(actions);
+  }
+
   render() {
     const {
       todos: {newTodo, list},
@@ -27,13 +38,13 @@ export default class Page extends Component {
           <NewTodo {...{newTodo, actions, msg}} />
           {/* It's just shorter syntax for:
             <NewTodo actions={actions} msg={msg} newTodo={newTodo} />
-          */}
-          <Todos {...{list, actions, msg}} />
-          <Buttons clearAllEnabled={list.size > 0} {...{actions, msg}} />
-          <ToCheck msg={msg.toCheck} />
-        </div>
-      </DocumentTitle>
-    );
-  }
+            */}
+            <Todos {...{list, actions, msg}} />
+            <Buttons clearAllEnabled={list.size > 0} {...{actions, msg}} />
+            <ToCheck msg={msg.toCheck} />
+          </div>
+        </DocumentTitle>
+      );
+    }
 
-}
+  }

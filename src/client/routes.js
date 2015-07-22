@@ -6,6 +6,7 @@ import Me from './me/page.react';
 import NotFound from './components/notfound.react';
 import React from 'react';
 import Todos from './todos/page.react';
+import TodoPage from './todos/todoPage.react';
 import {DefaultRoute, NotFoundRoute, Route} from 'react-router';
 
 export default (
@@ -16,5 +17,6 @@ export default (
     <Route handler={Login} name="login" />
     <Route handler={Me} name="me" />
     <Route handler={Todos} name="todos" />
+    <Route handler={TodoPage} name="todo" path="todos/:id" />
   </Route>
 );

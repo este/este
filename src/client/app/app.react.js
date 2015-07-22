@@ -8,10 +8,7 @@ import store from './store';
 import {RouteHandler} from 'react-router';
 import {createValidate} from '../validate';
 
-import * as authActions from '../auth/actions';
-import * as todosActions from '../todos/actions';
-
-const actions = [authActions, todosActions];
+import actions from './allActions';
 
 @flux(store)
 export default class App extends Component {

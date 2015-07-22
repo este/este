@@ -26,8 +26,13 @@ export default function(state = initialState, action, payload) {
 
   switch (action) {
 
+    case actions.loadAllTodos:
+        const todos = payload.map((item) => new Todo(item));
+        return state.update('list', list => list.push(...todos));
+
+
     case actions.addHundredTodos:
-      return state.update('list', list => list.push(...getRandomTodos(100)));
+      return state.update('list', list => list.push(...getRandomTodos(10)));
 
     case actions.addTodo:
       return state

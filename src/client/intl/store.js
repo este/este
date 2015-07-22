@@ -5,6 +5,7 @@ const cachedFormatters = Object.create(null);
 const intlRelativeFormat = new IntlRelativeFormat;
 
 export default function(state, action, payload) {
+  
   if (!action) state = state.toJS();
   return state;
 }
