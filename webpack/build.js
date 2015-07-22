@@ -27,7 +27,7 @@ module.exports = function(webpackConfig) {
         hash: false,
         timings: false,
         chunks: false,
-        chunkModules: false
+        chunkModules: false,
       }));
 
       callback();

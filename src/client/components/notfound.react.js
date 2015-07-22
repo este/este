@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 export default class NotFound extends Component {
 
   static propTypes = {
-    msg: React.PropTypes.object.isRequired
+    msg: React.PropTypes.object.isRequired,
   }
 
   render() {

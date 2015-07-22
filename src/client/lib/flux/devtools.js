@@ -6,7 +6,7 @@ export default function devTools(BaseComponent) {
   return class DevTools extends Component {
 
     static propTypes = {
-      flux: React.PropTypes.object.isRequired
+      flux: React.PropTypes.object.isRequired,
     }
 
     constructor(props) {

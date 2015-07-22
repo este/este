@@ -11,7 +11,7 @@ export default class Login extends Component {
     actions: React.PropTypes.object.isRequired,
     auth: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
-    router: React.PropTypes.func
+    router: React.PropTypes.func,
   };
 
   onFormSubmit(e) {
@@ -32,7 +32,7 @@ export default class Login extends Component {
     const {
       actions: {auth: actions},
       auth: {form},
-      msg: {auth: {form: msg}}
+      msg: {auth: {form: msg}},
     } = this.props;
 
     return (

@@ -6,7 +6,7 @@ function revive(state) {
   // Handle case user was authenticated on the server.
   const viewer = state && state.get('viewer');
   return new (Record({
-    viewer: viewer ? new User(viewer) : null
+    viewer: viewer ? new User(viewer) : null,
   }));
 }
 

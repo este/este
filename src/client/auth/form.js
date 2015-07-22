@@ -7,8 +7,8 @@ const FormRecord = Record({
   error: null,
   fields: new (Record({
     email: '',
-    password: ''
-  }))
+    password: '',
+  })),
 });
 
 // We can subclass FormRecord to add custom getters or methods.

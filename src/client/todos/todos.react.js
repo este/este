@@ -7,7 +7,7 @@ export default class List extends Component {
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
     list: React.PropTypes.object.isRequired,
-    msg: React.PropTypes.object.isRequired
+    msg: React.PropTypes.object.isRequired,
   };
 
   render() {

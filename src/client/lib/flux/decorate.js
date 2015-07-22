@@ -7,7 +7,7 @@ export default function decorate(store) {
   return BaseComponent => class Decorator extends Component {
 
     static propTypes = {
-      initialState: React.PropTypes.object
+      initialState: React.PropTypes.object,
     }
 
     constructor(props) {

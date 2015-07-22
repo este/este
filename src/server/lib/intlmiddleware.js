@@ -12,7 +12,7 @@ function loadLanguages() {
       return {
         language: tokens[2],
         feature: tokens[1],
-        translations
+        translations,
       };
     });
 
@@ -29,7 +29,7 @@ function loadLanguages() {
   return {
     formats: {},
     locales,
-    messages
+    messages,
   };
 }
 
@@ -48,7 +48,7 @@ export default function middleware({defaultLocale, getLocaleFromRequest = extrac
       locale: userLocale,
       messages: defaultLocale !== userLocale
         ? immutable.fromJS(defaultMessages).mergeWith(merger, userMessages)
-        : defaultMessages
+        : defaultMessages,
     };
     next();
   };

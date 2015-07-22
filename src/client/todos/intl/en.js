@@ -12,16 +12,16 @@ export default {
     itemListHtml: [
       {
         key: 'source',
-        txt: `Server rendered todos, check page source.`
+        txt: `Server rendered todos, check page source.`,
       },
       {
         key: 'development',
         txt: `Try edit styles, components, actions, stores. Everything is hot
-              reloadable.`
+              reloadable.`,
       },
       {
         key: 'production',
-        txt: `Check real app performance and size in production mode (<code>gulp -p</code>)`
+        txt: `Check real app performance and size in production mode (<code>gulp -p</code>)`,
       },
       // {
       //   key: 'edit',
@@ -33,12 +33,12 @@ export default {
         key: 'globalState',
         txt: `Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
               video</a>? Try <b>ctrl+shift+s</b> to save app state, and
-              <b>ctrl+shift+l</b> to load.`
-      }
-    ]
+              <b>ctrl+shift+l</b> to load.`,
+      },
+    ],
   },
   undo: `Undo {steps, plural,
     =0 {}
     other {(#)}
-  }`
+  }`,
 };

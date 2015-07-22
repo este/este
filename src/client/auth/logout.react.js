@@ -5,7 +5,7 @@ export default class Logout extends Component {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
-    msg: React.PropTypes.object.isRequired
+    msg: React.PropTypes.object.isRequired,
   }
 
   render() {

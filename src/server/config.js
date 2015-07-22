@@ -13,11 +13,11 @@ var config = {
     // Ignore webpack custom loaders on server. TODO: Reuse index.js config.
     ignore: /(\/\.|~$|\.(css|less|sass|scss|styl))/,
     // Hook ensures always fresh server response even for client file change.
-    hook: true
+    hook: true,
   },
   port: process.env.PORT || 8000,
   version: require('../../package').version,
-  webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl']
+  webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl'],
 };
 
 // Use above config as a default one

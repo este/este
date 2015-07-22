@@ -33,7 +33,7 @@ export function create(dispatch, validate) {
           break;
       }
       dispatch(actions.setNewTodoField, {name, value});
-    }
+    },
 
   };
 

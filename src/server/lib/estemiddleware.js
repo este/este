@@ -9,7 +9,7 @@ export default function addEsteHeaders() {
     // been disabled by the user previously
     if (app.get('x-powered-by'))
       res.set({
-        'X-Powered-By': 'Este.js'
+        'X-Powered-By': 'Este.js',
       });
 
     next();

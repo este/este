@@ -11,7 +11,7 @@ export default class Index extends Component {
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
-    users: React.PropTypes.object.isRequired
+    users: React.PropTypes.object.isRequired,
   };
 
   render() {

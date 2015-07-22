@@ -13,7 +13,7 @@ function getLocMessage(error, loc) {
     loc.line,
     ',',
     loc.column,
-    ']'
+    ']',
   ].join('');
 }
 
@@ -33,7 +33,7 @@ module.exports = function() {
 
     notifier.notify({
       title: 'Webpack Error',
-      message: msg
+      message: msg,
     });
   });
 };

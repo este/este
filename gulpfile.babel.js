@@ -16,7 +16,7 @@ const args = yargs
 const runKarma = ({singleRun}, done) => {
   karmaServer.start({
     configFile: path.join(__dirname, 'karma.conf.js'), // eslint-disable-line no-undef
-    singleRun: singleRun
+    singleRun: singleRun,
   }, done);
 };
 
@@ -29,7 +29,7 @@ gulp.task('build-webpack-production', webpackBuild(makeWebpackConfig(false)));
 gulp.task('build-webpack-dev', webpackDevServer(makeWebpackConfig(true)));
 gulp.task('build-webpack', [args.production
   ? 'build-webpack-production'
-  : 'build-webpack-dev'
+  : 'build-webpack-dev',
 ]);
 gulp.task('build', ['build-webpack']);
 
@@ -38,7 +38,7 @@ gulp.task('eslint', () => {
     'gulpfile.babel.js',
     'src/**/*.js',
     'webpack/*.js',
-    '!**/__tests__/*.*'
+    '!**/__tests__/*.*',
   ])
   .pipe(eslint())
   .pipe(eslint.format())
