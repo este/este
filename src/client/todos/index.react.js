@@ -22,7 +22,7 @@ export default class Index extends Component {
     const {todos, actions} = this.props;
 
     if (!todos.list.size > 0)
-      Page.fetchData(actions);
+      Index.fetchData(actions);
   }
 
   render() {
