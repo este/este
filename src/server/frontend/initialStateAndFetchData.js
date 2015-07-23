@@ -9,7 +9,7 @@ import routes from '../../client/routes';
 
 import allActions from '../../client/app/allActions';
 
-export default function fetchData() {
+export default function initialStateAndFetchData() {
 
   return (req, res, next) => {
 
