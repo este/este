@@ -1,3 +1,6 @@
 export default {
-    'title': 'Vamos - Utilisateurs'
+    'page_title': 'Vamos - Utilisateurs',
+    'title': 'Utilisateurs',
+    'edit': 'Editer',
+    'create_user': 'Créer un utilisateur'
 };

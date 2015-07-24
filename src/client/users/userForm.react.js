@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import forms from 'newforms';
 import Component from '../../components/component.react';
 import {msg} from '../../messages/store';
@@ -88,3 +88,4 @@ class UserForm extends Component {
 }
 
 export default UserForm;
+*/

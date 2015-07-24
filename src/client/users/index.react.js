@@ -3,6 +3,9 @@ import DocumentTitle from 'react-document-title';
 import React from 'react';
 import Users from './users.react';
 import UsersList from './usersList.react';
+import UsersToolbar from './usersToolbar.react';
+import UserForm from './userForm.react';
+import Pagination from '../components/pagination.react';
 
 export default class UsersIndex extends Component {
 
@@ -13,7 +16,6 @@ export default class UsersIndex extends Component {
     };
 
     static fetchData(actions) {
-        console.log(actions.users);
         return actions.users.loadAllUsers();
     }
 
@@ -31,10 +33,15 @@ export default class UsersIndex extends Component {
             users: {list: list}
         } = this.props;
 
+        const msgPagination = this.props.msg;
+
         return (
-            <DocumentTitle title={msg.title}>
+            <DocumentTitle title={msg.page_title}>
                 <div className="users-page">
+                    {/*<UserForm {...{list, actions, msg}} />*/}
+                    <UsersToolbar {...{list, actions, msg}} />
                     <UsersList {...{list, actions, msg}} />
+                    <Pagination action={actions.loadAllUsers} msg={msgPagination}/>
                 </div>
             </DocumentTitle>
         );

@@ -59,7 +59,7 @@
     "karma-webpack": "^1.5.1",
     "less": "^2.5.1",
     "less-loader": "^2.0.0",
-    "material-ui": "^0.9.2",
+    "material-ui": "^0.10.1",
     "mocha": "^2.2.5",
     "nconf": "^0.7.1",
     "newforms": "^0.12.1",

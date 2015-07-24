@@ -10,19 +10,19 @@ class Login extends Component {
         msg: React.PropTypes.object.isRequired,
         router: React.PropTypes.func
     };
-
+/*
     static willTransitionTo(transition) {
         if (!CurrentUser.isLoggedIn) return;
 
         transition.redirect('/');
-    }
+    }*/
 
-    // constructor(props){
-    //     super(props);
-    //     if(process.env.IS_BROWSER)
-    //         if(props.users.viewer)
-    //             location.href = '/';
-    // }
+    constructor(props){
+        super(props);
+        if(process.env.IS_BROWSER)
+            if(props.users.viewer)
+                location.href = '/';
+    }
 
     render() {
         const {

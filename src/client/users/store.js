@@ -18,7 +18,7 @@ function revive(state) {
     }));
 }
 
-export default function(state, action, payload) {
+export default function(state = initialState, action, payload) {
     if (!action) state = revive(state);
 
     switch (action) {
@@ -32,7 +32,8 @@ export default function(state, action, payload) {
         // break;
 
         case actions.loadAllUsers:
-            const users = payload.map((item) => new User(item));
+            const data = JSON.parse(payload.text);
+            const users = data.map((item) => new User(item));
             return state.update('list', () => users);
         break;
 

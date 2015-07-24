@@ -7,7 +7,6 @@ export default {
     headers: null,
 
     setHeaders(cookie) {
-
         if (!cookie) return null;
 
         const token = JSON.parse(cookie).token;

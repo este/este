@@ -15,11 +15,10 @@ export function create(dispatch, validate){
             return new Promise((resolve, reject) => {
                 APIUtils.get('users', data)
                     .then(res => {
-                        console.log(res);
                         dispatch(actions.loadAllUsers, res);
                     })
                     .catch(err => {
-                        console.log('Erreur lors du chargement des contacts');
+                        console.log(err);
                     });
             });
         },

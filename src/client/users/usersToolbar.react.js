@@ -1,21 +1,22 @@
-/*import Component from '../../components/component.react';
+import Component from '../components/component.react';
 import React from 'react';
 import {Toolbar, ToolbarTitle, ToolbarGroup, RaisedButton} from 'material-ui';
-import {msg} from '../../messages/store';
 
 class UsersToolbar extends Component {
     static propTypes = {
-        handleCreation: React.PropTypes.func.isRequired
+        actions: React.PropTypes.object.isRequired,
+        msg: React.PropTypes.object.isRequired
     };
 
     render() {
+        const {msg} = this.props;
         return (
             <Toolbar>
                 <ToolbarGroup key={0} float="left">
-                    <ToolbarTitle text={msg('users.title')} />
+                    <ToolbarTitle text={msg.title} />
                 </ToolbarGroup>
                 <ToolbarGroup key={1} float="right">
-                    <RaisedButton float="right" label={msg('users.create_user')} primary={true} onClick={this.props.handleCreation} />
+                    <RaisedButton float="right" label={msg.create_user} primary={true} />
                 </ToolbarGroup>
             </Toolbar>
         );
@@ -24,4 +25,4 @@ class UsersToolbar extends Component {
 }
 
 export default UsersToolbar;
-*/
+

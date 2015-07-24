@@ -1,6 +1,6 @@
 import Component from '../components/component.react';
 import React from 'react';
-//import UserItem from './userItem.react';
+import UserItem from './userItem.react';
 import {List} from 'material-ui';
 
 class UsersList extends Component {
@@ -12,14 +12,18 @@ class UsersList extends Component {
     };
 
     render() {
-        const users = this.props.list;
+        const {actions, msg, list} = this.props;
 
 
         return (
              <List>
-                {users.map(user => {
+                {list.map(user => {
                     return (
-                        <li>coucou</li>
+                        <UserItem
+                            user={user}
+                            key={user.id}
+                            {...{actions, msg}}
+                        />
                     );
                 })}
             </List>

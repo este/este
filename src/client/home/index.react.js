@@ -15,14 +15,6 @@ export default class Index extends Component {
     render() {
         const {actions, msg} = this.props;
 
-        console.log(actions);
-
-       /* const {
-            actions: {auth: actions},
-            msg: {auth: msg}
-        } = this.props;*/
-
-
         return (
             <DocumentTitle title={msg.home.title}>
                 <div className="home-page">

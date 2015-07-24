@@ -11,19 +11,20 @@ export default function requireAuth(BaseComponent) {
 
         static displayName = `${BaseComponent.name}RequireAuth`;
 
-        // constructor(props){
-        //     super(props);
-        //     if(process.env.IS_BROWSER)
-        //         if(!props.users.viewer)
-        //             location.href = '/login';
-        // }
-
-        static willTransitionTo(transition) {
-          // console.log(CurrentUser.isLoggedIn, 'huhuh');
-          //   if (CurrentUser.isLoggedIn) return;
-
-            transition.redirect('/login');
+        constructor(props){
+            super(props);
+            if(process.env.IS_BROWSER)
+                if(!props.users.viewer)
+                    location.href = '/login';
         }
+
+        /*static willTransitionTo(transition) {
+            if (CurrentUser.isLoggedIn) return;
+
+            transition.redirect('/login', {}, {
+              nextPath: transition.path
+            });
+        }*/
 
         render() {
             return <BaseComponent {...this.props} />;
