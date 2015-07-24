@@ -24,17 +24,12 @@ export function create(dispatch, validate) {
 
     loadAllTodos() {
 
-      return new Promise((resolve, reject) => {
-        Api.get()
-          .then(res => {
-            dispatch(actions.loadAllTodos, res);
-            resolve(res);
-          })
-          .catch(err => {
-            reject(err);
-          });
-
-      });
+      return Api.get()
+              .then(res => {
+                dispatch(actions.loadAllTodos, res);
+              })
+              .catch(err => {
+              });
 
     },
 
