@@ -1,24 +1,34 @@
 import Component from '../components/component.react';
+import exposeRouter from '../components/exposerouter.react';
+import CurrentUser from '../users/currentUser';
+
 import React from 'react';
-import User from '../users/user';
+import Router from 'react-router';
 
 export default function requireAuth(BaseComponent) {
 
-  return class RequireAuth extends Component {
+    return class RequireAuth extends Component {
 
-    static displayName = `${BaseComponent.name}RequireAuth`;
+        static displayName = `${BaseComponent.name}RequireAuth`;
 
-    static willTransitionTo(transition) {
-      if (User.isLoggedIn) return;
-      transition.redirect('/login', {}, {
-        nextPath: transition.path
-      });
-    }
+        // constructor(props){
+        //     super(props);
+        //     if(process.env.IS_BROWSER)
+        //         if(!props.users.viewer)
+        //             location.href = '/login';
+        // }
 
-    render() {
-      return <BaseComponent {...this.props} />;
-    }
+        static willTransitionTo(transition) {
+          // console.log(CurrentUser.isLoggedIn, 'huhuh');
+          //   if (CurrentUser.isLoggedIn) return;
 
-  };
+            transition.redirect('/login');
+        }
+
+        render() {
+            return <BaseComponent {...this.props} />;
+        }
+
+    };
 
 }

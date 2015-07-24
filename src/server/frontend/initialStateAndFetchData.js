@@ -11,34 +11,34 @@ import allActions from '../../client/app/allActions';
 
 export default function initialStateAndFetchData() {
 
-  return (req, res, next) => {
+    return (req, res, next) => {
 
-    let appState = Immutable.fromJS(initialState).mergeWith(stateMerger, req.userState, {intl: req.intl}).toJS();
-    const flux = new Flux(store, appState);
+        let appState = Immutable.fromJS(initialState).mergeWith(stateMerger, req.userState, {intl: req.intl}).toJS();
+        const flux = new Flux(store, appState);
 
-    const actions = allActions.reduce((actions, {feature, create}) => {
-      const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
-      const featureActions = create(dispatch);
-      return {...actions, [feature]: featureActions};
-    }, {});
+        const actions = allActions.reduce((actions, {feature, create}) => {
+            const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
+            const featureActions = create(dispatch);
+            return {...actions, [feature]: featureActions};
+        }, {});
 
-    Router.run(routes, req.originalUrl, (Root, routerState) => {
+        Router.run(routes, req.originalUrl, (Root, routerState) => {
 
-      Promise.all(routerState.routes
-        .filter(route => route.handler.fetchData)
-        .map(route => {
-          return route.handler.fetchData(actions); //Pass actions here - Maybe there is a better solution. Honestly I've no idea what I'm doing :)
-        })
-      ).then(() => {
+            Promise.all(routerState.routes
+                .filter(route => route.handler.fetchData)
+                .map(route => {
+                  return route.handler.fetchData(actions); //Pass actions here - Maybe there is a better solution. Honestly I've no idea what I'm doing :)
+                })
+            ).then(() => {
 
-        req.appState = flux.state.toJS(); //Get updated state
-        next();
+                req.appState = flux.state.toJS(); //Get updated state
+                next();
 
-      });
+            });
 
-    });
+        });
 
 
-  };
+    };
 
 }

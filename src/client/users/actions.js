@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-//import APIUtils from '../../libs/APIUtils.js';
+import APIUtils from '../libs/APIUtils.js';
 
 export const actions = create();
 export const feature = 'users';
@@ -8,46 +8,48 @@ export function create(dispatch, validate){
     return {
 
         loadAllUsers(page = 1) {
-            console.log(loadAllUsers);
-            /*return new Promise((resolve, reject) => {
+            const data = {
+                page: page
+            };
+
+            return new Promise((resolve, reject) => {
                 APIUtils.get('users', data)
                     .then(res => {
-                        resolve(res);
+                        console.log(res);
+                        dispatch(actions.loadAllUsers, res);
                     })
                     .catch(err => {
-                        reject(err);
+                        console.log('Erreur lors du chargement des contacts');
                     });
-            });*/
+            });
         },
 
         createUser(data) {
-            /*return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 APIUtils.post('users', data)
                     .then(res => {
-                        resolve(res);
+                        dispatch(actions.createUser, res);
                     })
                     .catch(err => {
                         const msg = JSON.parse(err.res.text);
 
                         console.log(msg.message);
-                        reject(err);
                     });
-            });*/
+            });
         },
 
         editUser(data) {
-            /*return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 APIUtils.put('users/' + data.id, data)
                     .then(res => {
-                        resolve(res);
+                        dispatch(actions.editUser, res);
                     })
                     .catch(err => {
                         const msg = JSON.parse(err.res.text);
 
                         console.log(msg.message);
-                        reject(err);
                     });
-            });*/
+            });
         }
     };
 }

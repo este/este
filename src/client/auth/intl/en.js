@@ -1,30 +1,33 @@
 export default {
-  form: {
-    button: {
-      login: 'Login',
-      signup: 'Sign up'
+    form: {
+        button: {
+            login: 'Login',
+            signup: 'Sign up'
+        },
+        hint: 'Hint: pass1',
+        legend: 'Login / Sign Up',
+        placeholder: {
+            email: 'your@email.com',
+            password: 'password'
+        },
+        wrongPassword: 'Wrong password.'
     },
-    hint: 'Hint: pass1',
-    legend: 'Login / Sign Up',
-    placeholder: {
-      email: 'your@email.com',
-      password: 'password'
+    index: {
+        title: 'Login'
     },
-    wrongPassword: 'Wrong password.'
-  },
-  logout: {
-    button: 'Logout'
-  },
-  index: {
-    title: 'Login'
-  },
-  validation: {
-    email: `Email address is not valid.`,
-    password: `Password must contain at least {minLength} characters.`,
-    required: `Please fill out {prop, select,
-      email {email}
-      password {password}
-      other {'{prop}'}
-    }.`
-  }
+    validation: {
+        email: `Email address is not valid.`,
+        password: `Password must contain at least {minLength} characters.`,
+        required: `Please fill out {prop, select,
+            email {email}
+            password {password}
+            other {'{prop}'}
+        }.`
+    },
+    login: {
+        button: 'Se connecter'
+    },
+    logout: {
+        button: 'Se déconnecter'
+    }
 };
