@@ -7,6 +7,7 @@ import { MenuItem, LeftNav, Avatar } from 'material-ui';
 let menuItems = [
     { route: 'home', text: 'Home' },
     { route: 'users', text: 'Utilisateurs', access: 'UserPage' },
+    { route: 'todos', text: 'Todos', access: 'UserPage' },
     { type: MenuItem.Types.SUBHEADER, text: 'A subtitle' },
     { type: MenuItem.Types.LINK, payload: 'https://github.com/callemall/material-ui', text: 'A link', access: 'LinkAccess' },
     { type: MenuItem.Types.LINK, payload: 'http://facebook.github.io/react', text: 'A link' },

@@ -34,7 +34,7 @@ export default class UsersIndex extends Component {
         } = this.props;
 
         const msgPagination = this.props.msg;
-
+        
         return (
             <DocumentTitle title={msg.page_title}>
                 <div className="users-page">

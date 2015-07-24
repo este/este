@@ -1,9 +1,6 @@
 import Component from '../components/component.react';
-import exposeRouter from '../components/exposerouter.react';
 import CurrentUser from '../users/currentUser';
-
 import React from 'react';
-import Router from 'react-router';
 
 export default function requireAuth(BaseComponent) {
 
@@ -11,20 +8,14 @@ export default function requireAuth(BaseComponent) {
 
         static displayName = `${BaseComponent.name}RequireAuth`;
 
-        constructor(props){
-            super(props);
-            if(process.env.IS_BROWSER)
-                if(!props.users.viewer)
-                    location.href = '/login';
-        }
-
-        /*static willTransitionTo(transition) {
-            if (CurrentUser.isLoggedIn) return;
+        static willTransitionTo(transition) {
+            const isLoggedIn = process.env.IS_BROWSER ? localStorage.getItem('token') : CurrentUser.isLoggedIn;
+            if (isLoggedIn) return;
 
             transition.redirect('/login', {}, {
               nextPath: transition.path
             });
-        }*/
+        }
 
         render() {
             return <BaseComponent {...this.props} />;

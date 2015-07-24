@@ -1,28 +1,29 @@
-import CurrentUser from './currentUser';
 import {Record} from 'immutable';
 import {actions} from './actions';
+import CurrentUser from './currentUser';
 import User from './user';
 
 const initialState = new (Record({
-    list: []
+    list: [],
+    viewer: null
 }));
 
-function revive(state) {
-    // Handle case user was authenticated on the server.
-    const viewer = state && state.get('viewer');
-    const list = state && state.get('list');
+const revive = state => {
 
-    return new (Record({
-        viewer: viewer ? new CurrentUser(viewer) : null,
-        list: list ? list : []
-    }));
-}
+    const viewer = state && state.get('viewer');
+    CurrentUser.isLoggedIn = !!viewer;
+
+    return initialState.merge({
+            list: state.get('list').map(user => new User(user)),
+            viewer: viewer ? new CurrentUser(viewer) : null
+        });
+};
 
 export default function(state = initialState, action, payload) {
+
     if (!action) state = revive(state);
 
     switch (action) {
-
 
 
         // case authActions.loginSuccess:
@@ -32,21 +33,20 @@ export default function(state = initialState, action, payload) {
         // break;
 
         case actions.loadAllUsers:
-            const data = JSON.parse(payload.text);
-            const users = data.map((item) => new User(item));
-            return state.update('list', () => users);
-        break;
+        const {users: payload} = JSON.parse(payload.text);
+        const users = payload.map((item) => new User(item));
+        return state.update('list', () => users);
 
         case actions.createUser:
-            actions.loadAllUsers(1);
+        actions.loadAllUsers(1);
         break;
 
         case actions.editUser:
-            const {id, email, picture} = JSON.parse(data.text);
-            const idx = list.findIndex(user => user.id === id);
-            return state
-                    .setIn([idx, 'email'], email)
-                    .setIn([idx, 'picture'], picture);
+        const {id, email, picture} = JSON.parse(data.text);
+        const idx = list.findIndex(user => user.id === id);
+        return state
+        .setIn([idx, 'email'], email)
+        .setIn([idx, 'picture'], picture);
         break;
     }
 

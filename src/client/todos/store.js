@@ -5,57 +5,59 @@ import {actions} from './actions';
 
 // Records are good. https://facebook.github.io/immutable-js/docs/#/Record
 const initialState = new (Record({
-  list: [],
-  newTodo: null
+    list: [],
+    newTodo: null
 }));
 
 const revive = state => initialState.merge({
-  list: state.get('list').map(todo => new Todo(todo)),
-  newTodo: new Todo(state.get('newTodo'))
+    list: state.get('list').map(todo => new Todo(todo)),
+    newTodo: new Todo(state.get('newTodo'))
 });
 
 function getRandomTodos(howMuch) {
-  return Range(0, howMuch).map(() => {
-    const id = getRandomString();
-    return new Todo({id, title: `Item #${id}`});
-  }).toArray();
+    return Range(0, howMuch).map(() => {
+        const id = getRandomString();
+        return new Todo({id, title: `Item #${id}`});
+    }).toArray();
 }
 
 export default function(state = initialState, action, payload) {
-  if (!action) state = revive(state);
 
-  switch (action) {
+    if (!action) state = revive(state);
 
-    case actions.loadAllTodos:
+    switch (action) {
+
+        case actions.loadAllTodos:
         const todos = payload.map((item) => new Todo(item));
+        console.log(payload);
         return state.update('list', list => list.push(...todos));
 
 
-    case actions.addHundredTodos:
-      return state.update('list', list => list.push(...getRandomTodos(10)));
+        case actions.addHundredTodos:
+        return state.update('list', list => list.push(...getRandomTodos(10)));
 
-    case actions.addTodo:
-      return state
+        case actions.addTodo:
+        return state
         .update('list', list => {
-          const newTodo = payload.merge({id: getRandomString()});
-          return list.push(newTodo);
+            const newTodo = payload.merge({id: getRandomString()});
+            return list.push(newTodo);
         })
         .set('newTodo', new Todo);
 
-    case actions.clearAll:
-      return state
+        case actions.clearAll:
+        return state
         .update('list', list => list.clear())
         .set('newTodo', new Todo);
 
-    case actions.deleteTodo:
-      return state.update('list', list => list.delete(list.indexOf(payload)));
+        case actions.deleteTodo:
+        return state.update('list', list => list.delete(list.indexOf(payload)));
 
-    case actions.setNewTodoField:
-      return state.setIn(['newTodo', payload.name], payload.value);
+        case actions.setNewTodoField:
+        return state.setIn(['newTodo', payload.name], payload.value);
 
-  }
+    }
 
-  return state;
+    return state;
 }
 
 //     case actions.onEditableSave:
