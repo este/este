@@ -1,0 +1,49 @@
+// Remember to use rems and ems. http://css-tricks.com/rems-ems.
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import './libs/normalize.scss';
+@import './libs/flexbox.scss';
+
+// http://phonegap-tips.com/articles/essential-phonegap-css-webkit-tap-highlight-color.html
+*{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+// Goodness.
+*, ::after, ::before{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    height:100%;
+}
+
+body {
+    color:#333;
+    font-size:16px;
+    line-height:1.5;
+    font-family: Roboto, sans-serif;
+}
+
+.page{
+    &-container{
+        padding: 20px;
+    }
+}
+
+.nav{
+    &__header{
+        background: url(http://192.185.228.226/projects/ma/v1-4-1/jQuery/img/profile-menu.png);
+        background-size:cover;
+        padding: 50px 0px 0px;
+
+        &__info{
+            font-size:12px;
+            color:white;
+            padding:7px 10px;
+            background: rgba(black, 0.5);
+        }
+    }
+}

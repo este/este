@@ -8,6 +8,7 @@ export default {
     home: 'Home',
     login: 'Login',
     me: 'Me (protected)',
-    todos: 'Todos'
+    todos: 'Todos',
+    users: 'Utilisateurs'
   }
 };

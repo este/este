@@ -26,6 +26,7 @@ export default class Header extends Component {
           {!viewer &&
             <li><Link to="login">{header.login}</Link></li>
           }
+          <li><Link to="users">{header.users}</Link></li>
         </ul>
       </header>
     );

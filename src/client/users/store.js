@@ -1,26 +1,54 @@
-import User from './user';
 import {Record} from 'immutable';
-import {actions as authActions} from '../auth/actions';
+import {actions} from './actions';
+import CurrentUser from './currentUser';
+import User from './user';
 
-function revive(state) {
-  // Handle case user was authenticated on the server.
-  const viewer = state && state.get('viewer');
-  return new (Record({
-    viewer: viewer ? new User(viewer) : null
-  }));
-}
+const initialState = new (Record({
+    list: [],
+    viewer: null
+}));
 
-export default function(state, action, payload) {
-  if (!action) state = revive(state);
+const revive = state => {
 
-  switch (action) {
+    const viewer = state && state.get('viewer');
+    CurrentUser.isLoggedIn = !!viewer;
 
-    case authActions.loginSuccess:
-      // Hideous side effect hack, will be removed soon with new react-router.
-      User.isLoggedIn = true;
-      return state.set('viewer', new User(payload));
+    return initialState.merge({
+            list: state.get('list').map(user => new User(user)),
+            viewer: viewer ? new CurrentUser(viewer) : null
+        });
+};
 
-  }
+export default function(state = initialState, action, payload) {
 
-  return state;
+    if (!action) state = revive(state);
+
+    switch (action) {
+
+
+        // case authActions.loginSuccess:
+        //     // Hideous side effect hack, will be removed soon with new react-router.
+        //     User.isLoggedIn = true;
+        //     return state.set('viewer', new User(payload));
+        // break;
+
+        case actions.loadAllUsers:
+        const {users: payload} = JSON.parse(payload.text);
+        const users = payload.map((item) => new User(item));
+        return state.update('list', () => users);
+
+        case actions.createUser:
+        actions.loadAllUsers(1);
+        break;
+
+        case actions.editUser:
+        const {id, email, picture} = JSON.parse(data.text);
+        const idx = list.findIndex(user => user.id === id);
+        return state
+        .setIn([idx, 'email'], email)
+        .setIn([idx, 'picture'], picture);
+        break;
+    }
+
+    return state;
 }

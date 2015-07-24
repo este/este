@@ -1,4 +1,4 @@
-import './app.styl';
+//import './app.styl';
 import Component from '../components/component.react';
 import Footer from './footer.react';
 import Header from './header.react';
@@ -7,47 +7,68 @@ import flux from '../lib/flux';
 import store from './store';
 import {RouteHandler} from 'react-router';
 import {createValidate} from '../validate';
+import VamosTheme from '../libs/vamos-theme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import Cookies from 'cookies-js';
+import APIUtils from '../libs/APIUtils';
 
-import * as authActions from '../auth/actions';
-import * as todosActions from '../todos/actions';
+import mui from 'material-ui';
 
-const actions = [authActions, todosActions];
+const ThemeManager = new mui.Styles.ThemeManager();
+
+// Needed for onTouchTap
+// Can go away when react 1.0 release
+// Check this repo:
+// https://github.com/zilverline/react-tap-event-plugin
+injectTapEventPlugin();
+
+
+import actions from './allActions';
 
 @flux(store)
 export default class App extends Component {
 
-  static propTypes = {
-    flux: React.PropTypes.object.isRequired,
-    msg: React.PropTypes.object.isRequired,
-    users: React.PropTypes.object.isRequired
-  };
+    static propTypes = {
+        flux: React.PropTypes.object.isRequired,
+        msg: React.PropTypes.object.isRequired,
+        users: React.PropTypes.object.isRequired
+    };
 
-  componentWillMount() {
-    this.createActions();
-  }
+    static childContextTypes = {
+        muiTheme: React.PropTypes.object
+    }
 
-  createActions() {
-    const {flux, msg} = this.props;
-    const validate = createValidate(msg);
-    this.actions = actions.reduce((actions, {feature, create}) => {
-      const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
-      const featureActions = create(dispatch, validate, msg[feature]);
-      return {...actions, [feature]: featureActions};
-    }, {});
-  }
+    getChildContext() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    }
 
-  render() {
-    const props = {...this.props, actions: this.actions};
-    const {users: {viewer}, msg} = props;
+    componentWillMount() {
+        ThemeManager.setPalette(VamosTheme.getPalette());
+        this.createActions();
 
-    return (
-      <div className="page">
-        {/* Pass only what's needed. Law of Demeter ftw. */}
-        <Header msg={msg} viewer={viewer} />
-        <RouteHandler {...props} />
-        <Footer msg={msg} />
-      </div>
-    );
-  }
+        if (process.env.IS_BROWSER)
+            APIUtils.setHeaders(Cookies.get('user') || null);
+    }
+
+    createActions() {
+        const {flux, msg} = this.props;
+        const validate = createValidate(msg);
+        this.actions = actions.reduce((actions, {feature, create}) => {
+            const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
+            const featureActions = create(dispatch, validate, msg[feature]);
+            return {...actions, [feature]: featureActions};
+        }, {});
+    }
+
+    render() {
+        const props = {...this.props, actions: this.actions};
+        const {users: {viewer}, msg} = props;
+
+        return (
+            <RouteHandler {...props} />
+        );
+    }
 
 }

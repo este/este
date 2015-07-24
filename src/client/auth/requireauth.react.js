@@ -1,24 +1,26 @@
 import Component from '../components/component.react';
+import CurrentUser from '../users/currentUser';
 import React from 'react';
-import User from '../users/user';
 
 export default function requireAuth(BaseComponent) {
 
-  return class RequireAuth extends Component {
+    return class RequireAuth extends Component {
 
-    static displayName = `${BaseComponent.name}RequireAuth`;
+        static displayName = `${BaseComponent.name}RequireAuth`;
 
-    static willTransitionTo(transition) {
-      if (User.isLoggedIn) return;
-      transition.redirect('/login', {}, {
-        nextPath: transition.path
-      });
-    }
+        static willTransitionTo(transition) {
+            const isLoggedIn = process.env.IS_BROWSER ? localStorage.getItem('token') : CurrentUser.isLoggedIn;
+            if (isLoggedIn) return;
 
-    render() {
-      return <BaseComponent {...this.props} />;
-    }
+            transition.redirect('/login', {}, {
+              nextPath: transition.path
+            });
+        }
 
-  };
+        render() {
+            return <BaseComponent {...this.props} />;
+        }
+
+    };
 
 }

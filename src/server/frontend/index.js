@@ -3,9 +3,12 @@ import compression from 'compression';
 import config from '../config';
 import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
 import userState from './userstate';
+import dataFetching from './initialStateAndFetchData';
 
 const app = express();
 
@@ -14,6 +17,10 @@ if (!config.isProduction)
   app.use(esteHeaders());
 
 app.use(compression());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 // TODO: Add favicon.
 // app.use(favicon('assets/img/favicon.ico'))
 // TODO: Move to CDN.
@@ -25,11 +32,14 @@ app.use(intlMiddleware({
   defaultLocale: config.defaultLocale
 }));
 
-// Load state extras for current user.
+// Load current user if cookie exists.
 app.use(userState());
 
+//Load api datas
+app.use(dataFetching());
+
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState, {intl: req.intl}).catch(next);
+  render(req, res).catch(next);
 });
 
 app.on('mount', () => {
