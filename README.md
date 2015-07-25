@@ -74,7 +74,8 @@ To create an empty app, clone `https://github.com/este/bare.git`.
 
 ## Examples
 
-- [bare](https://github.com/este/bare) - empty application
+- [bare](https://github.com/este/bare) - empty app
+- [firebase](https://github.com/este/este-firebase) - Firebase, nice example of reactive app in Relay style
 
 ## Documentation
 
