@@ -11,7 +11,7 @@ export default function requireAuth(BaseComponent) {
     static willTransitionTo(transition) {
       if (User.isLoggedIn) return;
       transition.redirect('/login', {}, {
-        nextPath: transition.path
+        nextPath: transition.path,
       });
     }
 

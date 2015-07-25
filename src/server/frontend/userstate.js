@@ -15,7 +15,7 @@ export default function userState() {
 // Gracefully settle all promises, ignore failed.
 function loadUserData(req) {
   const dataSources = [
-    loadTodos()
+    loadTodos(),
   ];
 
   return Promise.settle(dataSources).then(receivedData =>
@@ -32,9 +32,9 @@ function loadTodos() {
       const todos = {
         todos: {
           list: [
-            {id: 2, title: 'relax'}
-          ]
-        }
+            {id: 2, title: 'relax'},
+          ],
+        },
       };
 
       resolve(todos);

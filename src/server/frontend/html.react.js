@@ -7,7 +7,7 @@ export default class Html extends Component {
     bodyHtml: React.PropTypes.string.isRequired,
     isProduction: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
-    version: React.PropTypes.string.isRequired
+    version: React.PropTypes.string.isRequired,
   };
 
   render() {

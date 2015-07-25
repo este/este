@@ -8,7 +8,7 @@ import shallowEqual from 'react-pure-render/shallowEqual';
 export default class Component extends React.Component {
 
   static contextTypes = {
-    router: React.PropTypes.func
+    router: React.PropTypes.func,
   }
 
   shouldComponentUpdate(nextProps, nextState) {

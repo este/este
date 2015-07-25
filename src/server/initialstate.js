@@ -2,7 +2,7 @@ export default {
   examples: {
     editable: {
       state: null,
-      text: 'Some inline-editable text.'
-    }
-  }
+      text: 'Some inline-editable text.',
+    },
+  },
 };

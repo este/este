@@ -6,12 +6,12 @@ import {actions} from './actions';
 // Records are good. https://facebook.github.io/immutable-js/docs/#/Record
 const initialState = new (Record({
   list: [],
-  newTodo: null
+  newTodo: null,
 }));
 
 const revive = state => initialState.merge({
   list: state.get('list').map(todo => new Todo(todo)),
-  newTodo: new Todo(state.get('newTodo'))
+  newTodo: new Todo(state.get('newTodo')),
 });
 
 function getRandomTodos(howMuch) {

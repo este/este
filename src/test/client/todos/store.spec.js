@@ -15,7 +15,7 @@ describe('todos store', () => {
     it('should set revived state', () => {
       const state = store(immutable.fromJS({
         list: [{title: 'list'}],
-        newTodo: {title: 'newTodo'}
+        newTodo: {title: 'newTodo'},
       })).toJS();
       expect(state.list).to.have.length(1);
       expect(state.list[0].title).to.equal('list');
@@ -27,7 +27,7 @@ describe('todos store', () => {
     it('should add new todo into list and reset newTodo', () => {
       const stateBefore = store(immutable.fromJS({
         list: [],
-        newTodo: new Todo({title: '1'})
+        newTodo: new Todo({title: '1'}),
       }));
       const newTodo = new Todo({title: 2});
       const stateAfter = store(stateBefore, actions.addTodo, newTodo);

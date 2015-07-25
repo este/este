@@ -24,8 +24,8 @@ module.exports = function(webpackConfig) {
         hash: false,
         timings: false,
         chunks: false,
-        chunkModules: false
-      }
+        chunkModules: false,
+      },
     // Why '0.0.0.0' and 'localhost'? Because it works for remote machines.
     // https://github.com/webpack/webpack-dev-server/issues/151#issuecomment-104643642
     }).listen(8888, '0.0.0.0', function(err) {

@@ -8,7 +8,7 @@ import {msg} from '../intl/store';
 
 const State = immutable.Record({
   isEditing: false,
-  value: ''
+  value: '',
 });
 
 const initialState = new State;
@@ -31,7 +31,7 @@ export default class Editable extends Component {
     state: React.PropTypes.instanceOf(State),
     text: React.PropTypes.string.isRequired,
     type: React.PropTypes.string,
-    viewButtons: React.PropTypes.func
+    viewButtons: React.PropTypes.func,
   };
 
   static defaultProps = {
@@ -46,7 +46,7 @@ export default class Editable extends Component {
     viewButtons: (onEditClick, disabled) =>
       <div className="btn-group">
         <button disabled={disabled} onClick={onEditClick}>Edit</button>
-      </div>
+      </div>,
   };
 
   constructor(props) {
@@ -131,7 +131,7 @@ export default class Editable extends Component {
   enableEdit() {
     this.setState(state => state.merge({
       isEditing: true,
-      value: this.props.text
+      value: this.props.text,
     }));
   }
 
@@ -146,7 +146,7 @@ export default class Editable extends Component {
   render() {
     const {
       className, disabled, editButtons, maxRows, rows, showEditButtons,
-      showViewButtons, state, text, type, viewButtons
+      showViewButtons, state, text, type, viewButtons,
     } = this.props;
     const isEditing = state && state.isEditing;
 
@@ -163,7 +163,7 @@ export default class Editable extends Component {
       onChange: this.onInputChange,
       onFocus: this.onInputFocus,
       onKeyDown: this.onInputKeyDown,
-      value: state.value
+      value: state.value,
     };
 
     const field = type === 'textarea'

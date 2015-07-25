@@ -18,7 +18,7 @@ var loaders = {
   'css': '',
   'less': '!less-loader',
   'scss|sass': '!sass-loader',
-  'styl': '!stylus-loader'
+  'styl': '!stylus-loader',
 };
 
 module.exports = function(isDevelopment) {
@@ -32,7 +32,7 @@ module.exports = function(isDevelopment) {
         : ExtractTextPlugin.extract('style-loader', extLoaders);
       return {
         loader: loader,
-        test: new RegExp('\\.(' + ext + ')$')
+        test: new RegExp('\\.(' + ext + ')$'),
       };
     });
   }
@@ -47,9 +47,9 @@ module.exports = function(isDevelopment) {
         // Why only-dev-server instead of dev-server:
         // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
         'webpack/hot/only-dev-server',
-        path.join(constants.SRC_DIR, 'client/main.js')
+        path.join(constants.SRC_DIR, 'client/main.js'),
       ] : [
-        path.join(constants.SRC_DIR, 'client/main.js')
+        path.join(constants.SRC_DIR, 'client/main.js'),
       ],
       // For Safari, IE<11, and some old browsers. More languages will need more
       // specific builds.
@@ -60,45 +60,45 @@ module.exports = function(isDevelopment) {
         'webpack/hot/only-dev-server',
         path.join(constants.NODE_MODULES_DIR, 'intl/Intl.js'),
         path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
-        path.join(constants.SRC_DIR, 'client/main.js')
+        path.join(constants.SRC_DIR, 'client/main.js'),
       ] : [
         path.join(constants.NODE_MODULES_DIR, 'intl/Intl.min.js'),
         path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
-        path.join(constants.SRC_DIR, 'client/main.js')
-      ]
+        path.join(constants.SRC_DIR, 'client/main.js'),
+      ],
     },
     module: {
       loaders: [{
         loader: 'url-loader?limit=100000',
-        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
+        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/,
       }, {
         exclude: /node_modules/,
         loaders: isDevelopment ? [
-          'react-hot', 'babel-loader'
+          'react-hot', 'babel-loader',
         ] : [
-          'babel-loader'
+          'babel-loader',
         ],
-        test: /\.js$/
-      }].concat(stylesLoaders())
+        test: /\.js$/,
+      }].concat(stylesLoaders()),
     },
     output: isDevelopment ? {
       path: constants.BUILD_DIR,
       filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: 'http://localhost:8888/build/'
+      publicPath: 'http://localhost:8888/build/',
     } : {
       path: constants.BUILD_DIR,
       filename: '[name].js',
-      chunkFilename: '[name]-[chunkhash].js'
+      chunkFilename: '[name]-[chunkhash].js',
     },
     plugins: (function() {
       var plugins = [
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-            IS_BROWSER: true
-          }
-        })
+            IS_BROWSER: true,
+          },
+        }),
       ];
       if (isDevelopment)
         plugins.push(
@@ -112,7 +112,7 @@ module.exports = function(isDevelopment) {
           // Render styles into separate cacheable file to prevent FOUC and
           // optimize for critical rendering path.
           new ExtractTextPlugin('app.css', {
-            allChunks: true
+            allChunks: true,
           }),
           new NyanProgressPlugin(),
           new webpack.optimize.DedupePlugin(),
@@ -127,11 +127,11 @@ module.exports = function(isDevelopment) {
             compress: {
               keep_fnames: true,
               screw_ie8: true,
-              warnings: false // Because uglify reports irrelevant warnings.
+              warnings: false, // Because uglify reports irrelevant warnings.
             },
             mangle: {
-              keep_fnames: true
-            }
+              keep_fnames: true,
+            },
             /* eslint-enable camelcase */
           })
         );
@@ -142,9 +142,9 @@ module.exports = function(isDevelopment) {
       modulesDirectories: ['src', 'node_modules'],
       root: constants.ABSOLUTE_BASE,
       alias: {
-        'react$': require.resolve(path.join(constants.NODE_MODULES_DIR, 'react'))
-      }
-    }
+        'react$': require.resolve(path.join(constants.NODE_MODULES_DIR, 'react')),
+      },
+    },
   };
 
   return config;

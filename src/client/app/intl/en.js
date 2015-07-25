@@ -1,6 +1,6 @@
 export default {
   footer: {
-    madeByHtml: `made by <a href="https://twitter.com/steida">steida</a>`
+    madeByHtml: `made by <a href="https://twitter.com/steida">steida</a>`,
   },
   header: {
     examples: 'Examples',
@@ -8,6 +8,6 @@ export default {
     home: 'Home',
     login: 'Login',
     me: 'Me (protected)',
-    todos: 'Todos'
-  }
+    todos: 'Todos',
+  },
 };

@@ -53,7 +53,7 @@ export function create(dispatch, validate, msg) {
     setFormField({target: {name, value}}) {
       value = value.slice(0, formFieldMaxLength);
       dispatch(actions.setFormField, {name, value});
-    }
+    },
 
   };
 

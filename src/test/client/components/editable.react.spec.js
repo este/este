@@ -23,7 +23,7 @@ describe('Editable', () => {
     // shallow rendering for some reason, or it doesn't provide diff.
     expect(JSON.stringify(component.props.children)).to.equal(JSON.stringify([
       <span>a</span>,
-      false
+      false,
     ]));
   });
 

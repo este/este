@@ -10,17 +10,17 @@ describe('merger', () => {
   const initialState = {
     todos: {
       list: [
-        {id: 1, title: 'Consider `stop doing` app'}
-      ]
-    }
+        {id: 1, title: 'Consider `stop doing` app'},
+      ],
+    },
   };
 
   const userState = {
     todos: {
       list: [
-        {id: 2, title: 'relax'}
-      ]
-    }
+        {id: 2, title: 'relax'},
+      ],
+    },
   };
 
   it('should merge deep lists', () => {

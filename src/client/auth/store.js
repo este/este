@@ -4,7 +4,7 @@ import {actions} from './actions';
 
 // We can use simple initialState if no data from server need to be revived.
 const initialState = new (Record({
-  form: new Form
+  form: new Form,
 }));
 
 const disableForm = (state, disable) =>

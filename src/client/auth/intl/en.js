@@ -2,21 +2,21 @@ export default {
   form: {
     button: {
       login: 'Login',
-      signup: 'Sign up'
+      signup: 'Sign up',
     },
     hint: 'Hint: pass1',
     legend: 'Login / Sign Up',
     placeholder: {
       email: 'your@email.com',
-      password: 'password'
+      password: 'password',
     },
-    wrongPassword: 'Wrong password.'
+    wrongPassword: 'Wrong password.',
   },
   logout: {
-    button: 'Logout'
+    button: 'Logout',
   },
   index: {
-    title: 'Login'
+    title: 'Login',
   },
   validation: {
     email: `Email address is not valid.`,
@@ -25,6 +25,6 @@ export default {
       email {email}
       password {password}
       other {'{prop}'}
-    }.`
-  }
+    }.`,
+  },
 };
