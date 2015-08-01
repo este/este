@@ -2,6 +2,15 @@ import Component from '../../components/component.react';
 import Flux from './flux';
 import React from 'react';
 
+// https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
+function now() {
+  const hasBrowserPerformanceNow =
+    process.env.IS_BROWSER && window.performance && window.performance.now;
+  return hasBrowserPerformanceNow
+    ? window.performance.now()
+    : Date.now();
+}
+
 export default function decorate(store) {
 
   return BaseComponent => class Decorator extends Component {
@@ -33,14 +42,9 @@ export default function decorate(store) {
 
     onFluxDispatch() {
       const state = {...this.flux.state.toObject(), flux: this.flux};
-      if (!process.env.IS_BROWSER) {
-        this.setState(state);
-        return;
-      }
-      // https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
-      const start = performance.now();
+      const start = now();
       this.setState(state, () => {
-        const total = performance.now() - start;
+        const total = now() - start;
         this.flux.emit('render', total);
       });
     }
