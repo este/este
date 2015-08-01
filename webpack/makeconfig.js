@@ -100,41 +100,39 @@ module.exports = function(isDevelopment) {
           }
         })
       ];
-      if (isDevelopment)
-        plugins.push(
-          NotifyPlugin,
-          new webpack.HotModuleReplacementPlugin(),
-          // Tell reloader to not reload if there is an error.
-          new webpack.NoErrorsPlugin()
-        );
-      else
-        plugins.push(
-          // Render styles into separate cacheable file to prevent FOUC and
-          // optimize for critical rendering path.
-          new ExtractTextPlugin('app.css', {
-            allChunks: true
-          }),
-          new NyanProgressPlugin(),
-          new webpack.optimize.DedupePlugin(),
-          new webpack.optimize.OccurenceOrderPlugin(),
-          new webpack.optimize.UglifyJsPlugin({
-            // keep_fnames prevents function name mangling.
-            // Function names are useful. Seeing a readable error stack while
-            // being able to programmatically analyse it is priceless. And yes,
-            // we don't need infamous FLUX_ACTION_CONSTANTS with function name.
-            // It's ES6 standard polyfilled by Babel.
-            /* eslint-disable camelcase */
-            compress: {
-              keep_fnames: true,
-              screw_ie8: true,
-              warnings: false // Because uglify reports irrelevant warnings.
-            },
-            mangle: {
-              keep_fnames: true
-            }
-            /* eslint-enable camelcase */
-          })
-        );
+      if (isDevelopment) plugins.push(
+        NotifyPlugin,
+        new webpack.HotModuleReplacementPlugin(),
+        // Tell reloader to not reload if there is an error.
+        new webpack.NoErrorsPlugin()
+      );
+      else plugins.push(
+        // Render styles into separate cacheable file to prevent FOUC and
+        // optimize for critical rendering path.
+        new ExtractTextPlugin('app.css', {
+          allChunks: true
+        }),
+        new NyanProgressPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          // keep_fnames prevents function name mangling.
+          // Function names are useful. Seeing a readable error stack while
+          // being able to programmatically analyse it is priceless. And yes,
+          // we don't need infamous FLUX_ACTION_CONSTANTS with function name.
+          // It's ES6 standard polyfilled by Babel.
+          /* eslint-disable camelcase */
+          compress: {
+            keep_fnames: true,
+            screw_ie8: true,
+            warnings: false // Because uglify reports irrelevant warnings.
+          },
+          mangle: {
+            keep_fnames: true
+          }
+          /* eslint-enable camelcase */
+        })
+      );
       return plugins;
     })(),
     resolve: {

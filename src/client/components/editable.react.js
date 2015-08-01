@@ -78,8 +78,8 @@ export default class Editable extends Component {
 
   onInputKeyDown(e) {
     switch (e.key) {
-      case 'Enter': this.onKeyEnter(); break;
-      case 'Escape': this.onKeyEscape(); break;
+    case 'Enter': this.onKeyEnter(); break;
+    case 'Escape': this.onKeyEscape(); break;
     }
   }
 
@@ -114,9 +114,12 @@ export default class Editable extends Component {
   }
 
   cancelEdit() {
-    if (this.isDirty())
-      if (!confirm(msg('components.editable.cancelEdit'))) // eslint-disable-line no-alert
-        return;
+    if (!this.isDirty()) {
+      this.disableEdit();
+      return;
+    }
+    if (!confirm(msg('components.editable.cancelEdit'))) // eslint-disable-line no-alert
+      return;
     this.disableEdit();
   }
 

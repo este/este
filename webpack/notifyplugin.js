@@ -28,8 +28,7 @@ module.exports = function() {
       msg = getLocMessage(error, loc);
     else if (error.message)
       msg = error.message;
-    else
-      return;
+    else return;
 
     notifier.notify({
       title: 'Webpack Error',

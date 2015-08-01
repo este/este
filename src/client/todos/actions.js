@@ -28,9 +28,9 @@ export function create(dispatch, validate) {
 
     setNewTodoField({target: {name, value}}) {
       switch (name) {
-        case 'title':
-          value = value.slice(0, maxTitleLength);
-          break;
+      case 'title':
+        value = value.slice(0, maxTitleLength);
+        break;
       }
       dispatch(actions.setNewTodoField, {name, value});
     }

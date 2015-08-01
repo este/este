@@ -26,27 +26,27 @@ export default function(state = initialState, action, payload) {
 
   switch (action) {
 
-    case actions.addHundredTodos:
-      return state.update('list', list => list.push(...getRandomTodos(100)));
+  case actions.addHundredTodos:
+    return state.update('list', list => list.push(...getRandomTodos(100)));
 
-    case actions.addTodo:
-      return state
-        .update('list', list => {
-          const newTodo = payload.merge({id: getRandomString()});
-          return list.push(newTodo);
-        })
-        .set('newTodo', new Todo);
+  case actions.addTodo:
+    return state
+      .update('list', list => {
+        const newTodo = payload.merge({id: getRandomString()});
+        return list.push(newTodo);
+      })
+      .set('newTodo', new Todo);
 
-    case actions.clearAll:
-      return state
-        .update('list', list => list.clear())
-        .set('newTodo', new Todo);
+  case actions.clearAll:
+    return state
+      .update('list', list => list.clear())
+      .set('newTodo', new Todo);
 
-    case actions.deleteTodo:
-      return state.update('list', list => list.delete(list.indexOf(payload)));
+  case actions.deleteTodo:
+    return state.update('list', list => list.delete(list.indexOf(payload)));
 
-    case actions.setNewTodoField:
-      return state.setIn(['newTodo', payload.name], payload.value);
+  case actions.setNewTodoField:
+    return state.setIn(['newTodo', payload.name], payload.value);
 
   }
 

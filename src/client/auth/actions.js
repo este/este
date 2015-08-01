@@ -21,10 +21,8 @@ export function create(dispatch, validate, msg) {
     // TODO: Show how to handle different password/username server errors.
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
-      if (xhr.status === 200)
-        resolve(fields);
-      else
-        reject(new ValidationError(msg.form.wrongPassword, 'password'));
+      if (xhr.status === 200) resolve(fields);
+      else reject(new ValidationError(msg.form.wrongPassword, 'password'));
     };
     xhr.send(JSON.stringify(fields));
   });
