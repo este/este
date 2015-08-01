@@ -3,8 +3,8 @@ import Router from 'react-router';
 import routes from './routes';
 
 const app = document.getElementById('app');
-const appState = window._appState;
+const initialState = window._initialState;
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {
-  React.render(<Handler initialState={appState} />, app);
+  React.render(<Handler initialState={initialState} />, app);
 });

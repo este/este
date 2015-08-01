@@ -57,7 +57,7 @@ function getPageHtml(Handler, appState, {hostname}) {
   let scriptHtml = `
     <script>
       (function() {
-        window._appState = ${JSON.stringify(appState)};
+        window._initialState = ${JSON.stringify(appState)};
         var app = document.createElement('script'); app.type = 'text/javascript'; app.async = true;
         var src = '${appScriptSrc}';
         // IE<11 and Safari need Intl polyfill.
