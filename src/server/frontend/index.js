@@ -20,6 +20,10 @@ app.use(compression());
 app.use('/build', express.static('build'));
 app.use('/assets', express.static('assets'));
 
+// Intl
+app.use('/node_modules/intl/dist', express.static('node_modules/intl/dist'));
+app.use('/node_modules/intl/locale-data', express.static('node_modules/intl/locale-data'));
+
 // Load translations, fallback to defaultLocale if no translation is available.
 app.use(intlMiddleware({
   defaultLocale: config.defaultLocale

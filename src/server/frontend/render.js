@@ -8,6 +8,7 @@ import immutable from 'immutable';
 import initialState from '../initialstate';
 import routes from '../../client/routes';
 import stateMerger from '../lib/merger';
+import useragent from 'useragent';
 
 export default function render(req, res, ...customStates) {
   const appState = immutable.fromJS(initialState).mergeWith(stateMerger, ...customStates).toJS();
@@ -35,7 +36,12 @@ function renderPage(req, res, appState) {
     });
 
     router.run((Handler, routerState) => {
-      const html = getPageHtml(Handler, appState, {hostname: req.hostname});
+      const ua = useragent.is(req.headers['user-agent']);
+      const html = getPageHtml(Handler, appState, {
+        hostname: req.hostname,
+        // TODO: Remove once Safari and IE without Intl will die.
+        needIntlPolyfill: ua.safari || (ua.ie && ua.version < '11')
+      });
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
@@ -45,7 +51,7 @@ function renderPage(req, res, appState) {
   });
 }
 
-function getPageHtml(Handler, appState, {hostname}) {
+function getPageHtml(Handler, appState, {hostname, needIntlPolyfill}) {
   const appHtml = `<div id="app">${
     React.renderToString(<Handler initialState={appState} />)
   }</div>`;
@@ -54,18 +60,20 @@ function getPageHtml(Handler, appState, {hostname}) {
     ? '/build/app.js?v=' + config.version
     : `//${hostname}:8888/build/app.js`;
 
-  let scriptHtml = `
+  let scriptHtml = '';
+
+  if (needIntlPolyfill) {
+    scriptHtml += `
+    <script src="/node_modules/intl/dist/Intl.min.js"></script>
+    <script src="/node_modules/intl/locale-data/jsonp/en-US.js"></script>`;
+  }
+
+  scriptHtml += `
     <script>
-      (function() {
-        window._initialState = ${JSON.stringify(appState)};
-        var app = document.createElement('script'); app.type = 'text/javascript'; app.async = true;
-        var src = '${appScriptSrc}';
-        // IE<11 and Safari need Intl polyfill.
-        if (!window.Intl) src = src.replace('.js', 'intl.js');
-        app.src = src;
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(app, s);
-      })();
-    </script>`;
+      window._initialState = ${JSON.stringify(appState)};
+    </script>
+    <script src="${appScriptSrc}"></script>
+  `;
 
   if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
     scriptHtml += `

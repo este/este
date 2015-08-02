@@ -50,21 +50,6 @@ module.exports = function(isDevelopment) {
         path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
         path.join(constants.SRC_DIR, 'client/main.js')
-      ],
-      // For Safari, IE<11, and some old browsers. More languages will need more
-      // specific builds.
-      appintl: isDevelopment ? [
-        'webpack-dev-server/client?http://localhost:8888',
-        // Why only-dev-server instead of dev-server:
-        // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
-        'webpack/hot/only-dev-server',
-        path.join(constants.NODE_MODULES_DIR, 'intl/Intl.js'),
-        path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
-        path.join(constants.SRC_DIR, 'client/main.js')
-      ] : [
-        path.join(constants.NODE_MODULES_DIR, 'intl/Intl.min.js'),
-        path.join(constants.NODE_MODULES_DIR, 'intl/locale-data/jsonp/en.js'),
-        path.join(constants.SRC_DIR, 'client/main.js')
       ]
     },
     module: {
