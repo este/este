@@ -8,7 +8,7 @@ export default class Todo extends Component {
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
     todo: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const {actions, todo} = this.props;

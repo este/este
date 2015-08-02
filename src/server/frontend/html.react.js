@@ -8,7 +8,7 @@ export default class Html extends Component {
     isProduction: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
     version: React.PropTypes.string.isRequired
-  };
+  }
 
   render() {
     const {bodyHtml, isProduction, title, version} = this.props;

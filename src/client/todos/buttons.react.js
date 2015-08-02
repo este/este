@@ -8,7 +8,7 @@ export default class TodoButtons extends Component {
     actions: React.PropTypes.object.isRequired,
     clearAllEnabled: React.PropTypes.bool.isRequired,
     msg: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const {actions, clearAllEnabled, msg} = this.props;

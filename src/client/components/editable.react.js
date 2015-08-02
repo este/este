@@ -32,7 +32,7 @@ export default class Editable extends Component {
     text: React.PropTypes.string.isRequired,
     type: React.PropTypes.string,
     viewButtons: React.PropTypes.func
-  };
+  }
 
   static defaultProps = {
     isRequired: true,
@@ -47,7 +47,7 @@ export default class Editable extends Component {
       <div className="btn-group">
         <button disabled={disabled} onClick={onEditClick}>Edit</button>
       </div>
-  };
+  }
 
   constructor(props) {
     super(props);

@@ -12,7 +12,7 @@ export default class Index extends Component {
     actions: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     todos: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const {

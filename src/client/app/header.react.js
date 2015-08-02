@@ -8,7 +8,7 @@ export default class Header extends Component {
   static propTypes = {
     msg: React.PropTypes.object.isRequired,
     viewer: React.PropTypes.object
-  };
+  }
 
   render() {
     const {msg: {app: {header}}, viewer} = this.props;

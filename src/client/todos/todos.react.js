@@ -8,7 +8,7 @@ export default class List extends Component {
     actions: React.PropTypes.object.isRequired,
     list: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const {actions, list, msg} = this.props;

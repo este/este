@@ -8,7 +8,7 @@ export default class NewTodo extends Component {
     actions: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     newTodo: React.PropTypes.object.isRequired
-  };
+  }
 
   onKeyDown(e) {
     if (e.key === 'Enter')

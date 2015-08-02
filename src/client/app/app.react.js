@@ -20,7 +20,7 @@ export default class App extends Component {
     flux: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     users: React.PropTypes.object.isRequired
-  };
+  }
 
   componentWillMount() {
     this.createActions();

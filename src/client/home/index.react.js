@@ -8,7 +8,7 @@ export default class Index extends Component {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const {msg: {home: msg}} = this.props;
