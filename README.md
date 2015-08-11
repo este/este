@@ -84,9 +84,9 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
-## Tips and Tricks 
+## Tips and Tricks
 
-- To check app state, press `ctrl+shift+s`, then open console. 
+- To check app state, press `ctrl+shift+s`, then open console.
 - With global app state, we don't need IoC container so badly - [SOLID: the next step is Functional](http://blog.ploeh.dk/2014/03/10/solid-the-next-step-is-functional). Still DI is relevant for some cases and then use [Pure DI](http://blog.ploeh.dk/2014/06/10/pure-di/).
 - Learn immutable.js, for example [Seq](https://github.com/facebook/immutable-js#lazy-seq). Very handy even for native arrays and objects. For example, get object values: `Seq(RoomType).toSet().toJS()`
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
@@ -94,8 +94,24 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - Recommended editors are [sublimetext](http://www.sublimetext.com/) and [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
 - When `gulp` command fails with `No gulpfile found`. Problem is with gulp version on your system. Simple fix: https://github.com/gulpjs/gulp-cli/issues/27#issuecomment-116134527
 
+## FAQ
+#### Why does the CSS flicker when starting the app/refreshing it?
+In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
+
+#### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
+Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be `use()` by the main app, like any other middleware.
+
+#### What's the difference with [Redux](https://github.com/gaearon/redux)?
+Redux aims to be the framework to rule them all. It wants to be everything for everyone, while Este assumes being strongly opiniated, needing much less boilerplate to work. Moreover, while Redux (or many other implementation of the Flux pattern) are frameworks, Este tries to simply be the a design pattern and a set of best practices.
+
+#### Is it possible use XXX library with Este?
+Yes. Este makes little assumptions about your stack, and passing every bit of needed info through props. This is not a framework, nothing prevents you from picking the bits you're interested in.
+
+#### Do you have any other example apps using Este?
+Right now, there are little open sourced apps on the web (if you have any example, feel free to send a PR, or tip us on Gitter). You can have a look at the other repositories of the [este organization](http://github.com/este). You might for instance find some interesting stuff in [este-firebase](https://github.com/este/este-firebase/).
+
 ## Training
-- [learn-reactjs.com](http://www.learn-reactjs.com) 
+- [learn-reactjs.com](http://www.learn-reactjs.com)
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
 - [DzejEs.cz](http://www.dzejes.cz) - czech articles about Este
 
