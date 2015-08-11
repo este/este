@@ -102,13 +102,16 @@ In dev mode, webpack loads all the style inline, which makes them hot reloadable
 Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be `use()` by the main app, like any other middleware.
 
 #### What's the difference with [Redux](https://github.com/gaearon/redux)?
-Redux aims to be the framework to rule them all. It wants to be everything for everyone, while Este assumes being strongly opiniated, needing much less boilerplate to work. Moreover, while Redux (or many other implementation of the Flux pattern) are frameworks, Este tries to simply be the a design pattern and a set of best practices.
+Redux aims to be the framework to rule them all. It wants to be everything for everyone, while Este assumes being strongly opinionated, needing much less boilerplate to work. Moreover, while Redux (or many other implementation of the Flux pattern) are frameworks, Este tries to simply be the show a pattern and a set of best practices.
 
 #### Is it possible use XXX library with Este?
 Yes. Este makes little assumptions about your stack, and passing every bit of needed info through props. This is not a framework, nothing prevents you from picking the bits you're interested in.
 
 #### Do you have any other example apps using Este?
 Right now, there are little open sourced apps on the web (if you have any example, feel free to send a PR, or tip us on Gitter). You can have a look at the other repositories of the [este organization](http://github.com/este). You might for instance find some interesting stuff in [este-firebase](https://github.com/este/este-firebase/).
+
+#### Does it work with React Native?
+Yes! Check the [native](https://github.com/este/native) repo.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
