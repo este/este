@@ -22,7 +22,7 @@ function getRandomTodos(howMuch) {
 }
 
 export default function(state = initialState, action, payload) {
-  if (!action) state = revive(state);
+  if (!action) return revive(state);
 
   switch (action) {
 
