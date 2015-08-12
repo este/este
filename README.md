@@ -2,8 +2,8 @@
 
 [![Circle CI](https://circleci.com/gh/este/este.svg?style=svg)](https://circleci.com/gh/este/este)
 [![Join the chat at https://gitter.im/este/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/este/este)
-[![Dependency Status](https://david-dm.org/este/este.png)](https://david-dm.org/este/este)
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
