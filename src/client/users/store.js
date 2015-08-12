@@ -16,10 +16,11 @@ export default function(state, action, payload) {
   switch (action) {
 
   case authActions.loginSuccess:
-    // Hideous side effect hack, will be removed soon with new react-router.
-    User.isLoggedIn = true;
-    return state.set('viewer', new User(payload));
-
+    return state.set('viewer', new User({
+      email: payload.email,
+      password: payload.password,
+      isLoggedIn: !!payload
+    }));
   }
 
   return state;

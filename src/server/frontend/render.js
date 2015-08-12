@@ -9,6 +9,7 @@ import initialState from '../initialstate';
 import routes from '../../client/routes';
 import stateMerger from '../lib/merger';
 import useragent from 'useragent';
+import fetchData from '../../client/lib/fetchdata';
 
 export default function render(req, res, ...customStates) {
   const appState = immutable.fromJS(initialState).mergeWith(stateMerger, ...customStates).toJS();
@@ -37,15 +38,21 @@ function renderPage(req, res, appState) {
 
     router.run((Handler, routerState) => {
       const ua = useragent.is(req.headers['user-agent']);
-      const html = getPageHtml(Handler, appState, {
-        hostname: req.hostname,
-        // TODO: Remove once Safari and IE without Intl will die.
-        needIntlPolyfill: ua.safari || (ua.ie && ua.version < '11')
-      });
-      const notFound = routerState.routes.some(route => route.name === 'not-found');
-      const status = notFound ? 404 : 200;
-      res.status(status).send(html);
-      resolve();
+      fetchData(routerState, appState)
+        .then(fullState => {
+          fullState = fullState || appState;
+          return getPageHtml(Handler, fullState, {
+            hostname: req.hostname,
+            // TODO: Remove once Safari and IE without Intl will die.
+            needIntlPolyfill: ua.safari || (ua.ie && ua.version < '11')
+          });
+        })
+        .then(html => {
+          const notFound = routerState.routes.some(route => route.name === 'not-found');
+          const status = notFound ? 404 : 200;
+          res.status(status).send(html);
+          resolve();
+        });
     });
 
   });

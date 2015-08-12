@@ -1,8 +1,9 @@
 import Component from '../../components/component.react';
 import Flux from './flux';
 import React from 'react';
+import Router from 'react-router';
+import fetchData from '../fetchdata';
 
-// https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
 function now() {
   const hasBrowserPerformanceNow =
     process.env.IS_BROWSER && window.performance && window.performance.now;
@@ -17,6 +18,20 @@ export default function decorate(store) {
 
     static propTypes = {
       initialState: React.PropTypes.object
+    };
+
+    static _flux = false;
+
+    static run(container, routes, initialState) {
+      Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
+        let appState = (Decorator._flux && Decorator._flux.state.toJS()) || initialState;
+        if (Decorator._flux)
+          fetchData(routerState, appState).then(fullState => {
+            if (fullState)
+              Decorator._flux.load(fullState);
+          });
+        React.render(<Handler initialState={appState} />, container);
+      });
     }
 
     constructor(props) {
@@ -30,22 +45,22 @@ export default function decorate(store) {
 
     // Always use componentWillUnmount where componentWillMount is used.
     componentWillUnmount() {
-      this.flux.removeListener('dispatch', this.onFluxDispatch);
+      Decorator._flux.removeListener('dispatch', this.onFluxDispatch);
     }
 
     fluxify() {
-      if (this.flux) this.flux.removeListener('dispatch', this.onFluxDispatch);
-      this.flux = new Flux(store, this.props.initialState);
-      this.flux.on('dispatch', this.onFluxDispatch);
+      if (Decorator._flux) Decorator._flux.removeListener('dispatch', this.onFluxDispatch);
+      Decorator._flux = new Flux(store, this.props.initialState);
+      Decorator._flux.on('dispatch', this.onFluxDispatch);
       this.onFluxDispatch();
     }
 
     onFluxDispatch() {
-      const state = {...this.flux.state.toObject(), flux: this.flux};
+      const state = {...Decorator._flux.state.toObject(), flux: Decorator._flux};
       const start = now();
       this.setState(state, () => {
         const total = now() - start;
-        this.flux.emit('render', total);
+        Decorator._flux.emit('render', total);
       });
     }
 
@@ -54,7 +69,11 @@ export default function decorate(store) {
     }
 
     ensureStoreAfterHotReload() {
-      this.flux.store = store;
+      try {
+        Decorator._flux.store = store;
+      } catch(err) {
+        this.fluxify();
+      }
     }
 
     render() {

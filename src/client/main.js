@@ -1,10 +1,5 @@
-import React from 'react';
-import Router from 'react-router';
 import routes from './routes';
+import App from './app/app.react';
 
 const app = document.getElementById('app');
-const initialState = window._initialState;
-
-Router.run(routes, Router.HistoryLocation, (Handler) => {
-  React.render(<Handler initialState={initialState} />, app);
-});
+App.run(app, routes, window._initialState);

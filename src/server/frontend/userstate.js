@@ -15,7 +15,7 @@ export default function userState() {
 // Gracefully settle all promises, ignore failed.
 function loadUserData(req) {
   const dataSources = [
-    loadTodos()
+    loadViewer(req)
   ];
 
   return Promise.settle(dataSources).then(receivedData =>
@@ -25,19 +25,14 @@ function loadUserData(req) {
   );
 }
 
-// Simulate async action.
-function loadTodos() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const todos = {
-        todos: {
-          list: [
-            {id: 2, title: 'relax'}
-          ]
-        }
-      };
-
-      resolve(todos);
-    }, 20);
-  });
+function loadViewer(req) {
+  return {
+    users: {
+      viewer: {
+        email: req.user && req.user.email,
+        password: req.user && req.user.password,
+        isLoggedIn: !!req.user
+      }
+    }
+  };
 }
