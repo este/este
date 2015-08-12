@@ -11,6 +11,7 @@ const disableForm = (state, disable) =>
   state.setIn(['form', 'disabled'], disable);
 
 export default function(state = initialState, action, payload) {
+  if (!action) return state;
 
   switch (action) {
 
