@@ -20,7 +20,7 @@ export default class List extends Component {
     return (
       <ol className="todos">
         {list.map(todo =>
-          <Todo actions={actions} key={todo.id} todo={todo} />
+          <Todo {...{actions, todo}} key={todo.id} />
         )}
       </ol>
     );
