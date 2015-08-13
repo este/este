@@ -9,6 +9,10 @@ export default function requireAuth(BaseComponent) {
     static displayName = `${BaseComponent.name}RequireAuth`;
 
     static willTransitionTo(transition) {
+      // Hideous hack, will be removed with new react-router.
+      if (process.env.IS_BROWSER && typeof User.isLoggedIn === 'undefined')
+        User.isLoggedIn = !!window._initialState.users.viewer;
+
       if (User.isLoggedIn) return;
       transition.redirect('/login', {}, {
         nextPath: transition.path
