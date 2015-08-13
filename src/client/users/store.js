@@ -5,6 +5,7 @@ import {actions as authActions} from '../auth/actions';
 function revive(state) {
   // Handle case user was authenticated on the server.
   const viewer = state && state.get('viewer');
+  User.isLoggedIn = !!viewer;
   return new (Record({
     viewer: viewer ? new User(viewer) : null
   }));
