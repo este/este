@@ -7,7 +7,7 @@ import usersStore from '../users/store';
 
 export default function(state, action, payload) {
   // Create immutable from JSON asap to prevent side effects accidents.
-  if (!action) return immutable.fromJS(state);
+  if (!action) state = immutable.fromJS(state);
 
   // Btw, this can be refactored, but leaving it explicit for now.
   state = state
