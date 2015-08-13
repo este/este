@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import {ValidationError} from '../lib/validation';
 
 export const actions = create();
@@ -6,25 +5,31 @@ export const feature = 'auth';
 
 const formFieldMaxLength = 100;
 
-export function create(dispatch, validate, msg) {
+// Note pattern, optional inject function. Remember the Law of Demeter.
+export function inject(dispatch, validate, fetch, state) {
+  return [dispatch, validate, fetch, () => state().msg.auth];
+}
+
+export function create(dispatch, validate, fetch, msg) {
 
   const validateForm = fields => validate(fields)
     .prop('email').required().email()
     .prop('password').required().simplePassword()
     .promise;
 
-  const validateCredentials = fields => new Promise((resolve, reject) => {
-    // For real usage, use isomorphic-fetch, socket.io, or whatever.
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/v1/auth/login', true);
-    xhr.setRequestHeader('Content-type', 'application/json');
+  // In real app, we would use smarter fetch wrapper.
+  const validateCredentials = fields => fetch('/api/v1/auth/login', {
+    body: JSON.stringify(fields),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'post'
+  }).then(response => {
     // TODO: Show how to handle different password/username server errors.
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== 4) return;
-      if (xhr.status === 200) resolve(fields);
-      else reject(new ValidationError(msg.form.wrongPassword, 'password'));
-    };
-    xhr.send(JSON.stringify(fields));
+    if (response.status !== 200)
+      throw new ValidationError(msg().form.wrongPassword, 'password');
+    return fields;
   });
 
   return {
