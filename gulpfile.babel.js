@@ -1,7 +1,6 @@
 import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
-import gulpif from 'gulp-if';
 import makeWebpackConfig from './webpack/makeconfig';
 import path from 'path';
 import runSequence from 'run-sequence';
@@ -36,16 +35,20 @@ gulp.task('build-webpack', [args.production
 gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', () => {
-  return gulp.src([
+  let stream = gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
     'webpack/*.js',
     '!**/__tests__/*.*'
   ])
   .pipe(eslint())
-  .pipe(eslint.format())
+  .pipe(eslint.format());
+
   // Exit process with an error code (1) on lint error for CI build.
-  .pipe(eslint.failOnError());
+  if (args.production)
+    stream = stream.pipe(eslint.failOnError());
+
+  return stream;
 });
 
 gulp.task('karma-ci', (done) => {
