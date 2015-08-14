@@ -45,7 +45,7 @@ gulp.task('eslint', () => {
   .pipe(eslint())
   .pipe(eslint.format())
   // Exit process with an error code (1) on lint error for CI build.
-  .pipe(gulpif(args.production, eslint.failOnError()));
+  .pipe(eslint.failOnError());
 });
 
 gulp.task('karma-ci', (done) => {
