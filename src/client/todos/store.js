@@ -29,13 +29,13 @@ export default function(state = initialState, action, payload) {
   case actions.addHundredTodos:
     return state.update('list', list => list.push(...getRandomTodos(100)));
 
-  case actions.addTodo:
+  // Note how we use block in switch case so const bindings don't clash.
+  case actions.addTodo: {
+    const newTodo = payload.merge({id: getRandomString()});
     return state
-      .update('list', list => {
-        const newTodo = payload.merge({id: getRandomString()});
-        return list.push(newTodo);
-      })
+      .update('list', list => list.push(newTodo))
       .set('newTodo', new Todo);
+  }
 
   case actions.clearAll:
     return state
