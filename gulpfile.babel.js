@@ -1,6 +1,7 @@
 import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
+import gulpif from 'gulp-if';
 import makeWebpackConfig from './webpack/makeconfig';
 import path from 'path';
 import runSequence from 'run-sequence';
@@ -43,7 +44,7 @@ gulp.task('eslint', () => {
   ])
   .pipe(eslint())
   .pipe(eslint.format())
-  .pipe(eslint.failOnError());
+  // .pipe(gulpif(args.production, eslint.failOnError()));
 });
 
 gulp.task('karma-ci', (done) => {

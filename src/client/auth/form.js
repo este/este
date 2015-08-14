@@ -4,7 +4,7 @@ import {Record} from 'immutable';
 // https://facebook.github.io/immutable-js/docs/#/Record
 const FormRecord = Record({
   disabled: false,
-  error: null,
+  error: null ,
   fields: new (Record({
     email: '',
     password: ''
