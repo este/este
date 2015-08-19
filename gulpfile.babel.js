@@ -21,6 +21,17 @@ const runKarma = ({singleRun}, done) => {
   server.start();
 };
 
+const runEslint = () => {
+  return gulp.src([
+    'gulpfile.babel.js',
+    'src/**/*.js',
+    'webpack/*.js',
+    '!**/__tests__/*.*'
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format());
+};
+
 gulp.task('env', () => {
   const env = args.production ? 'production' : 'development';
   process.env.NODE_ENV = env; // eslint-disable-line no-undef
@@ -35,34 +46,31 @@ gulp.task('build-webpack', [args.production
 gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', () => {
-  return gulp.src([
-    'gulpfile.babel.js',
-    'src/**/*.js',
-    'webpack/*.js',
-    '!**/__tests__/*.*'
-  ])
-  .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failOnError());
+  return runEslint();
+});
+
+gulp.task('eslint-ci', () => {
+  // Exit process with an error code (1) on lint error for CI build.
+  return runEslint().pipe(eslint.failOnError());
 });
 
 gulp.task('karma-ci', (done) => {
   runKarma({singleRun: true}, done);
 });
 
-gulp.task('karma-dev', (done) => {
+gulp.task('karma', (done) => {
   runKarma({singleRun: false}, done);
 });
 
 gulp.task('test', (done) => {
-  runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
+  runSequence('eslint-ci', 'karma-ci', 'build-webpack-production', done);
 });
 
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'));
 
-// Run karma configured for TDD.
 gulp.task('tdd', (done) => {
-  runSequence('server', 'karma-dev', done);
+  // Run karma configured for TDD.
+  runSequence('server', 'karma', done);
 });
 
 gulp.task('default', ['server']);

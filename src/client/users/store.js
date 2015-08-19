@@ -11,7 +11,7 @@ function revive(state) {
 }
 
 export default function(state, action, payload) {
-  if (!action) state = revive(state);
+  if (!action) return revive(state);
 
   switch (action) {
 

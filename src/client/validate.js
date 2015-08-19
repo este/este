@@ -7,15 +7,15 @@ export function createValidate(msg) {
 
     // Override default messages.
     getRequiredMessage(prop) {
-      return format(msg.auth.validation.required, {prop});
+      return format(msg().auth.validation.required, {prop});
     }
 
     getEmailMessage(prop) {
-      return format(msg.auth.validation.email, {prop});
+      return format(msg().auth.validation.email, {prop});
     }
 
     getSimplePasswordMessage(minLength) {
-      return format(msg.auth.validation.password, {minLength});
+      return format(msg().auth.validation.password, {minLength});
     }
 
     // Sure we can add own validation rules.

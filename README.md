@@ -2,8 +2,8 @@
 
 [![Circle CI](https://circleci.com/gh/este/este.svg?style=svg)](https://circleci.com/gh/este/este)
 [![Join the chat at https://gitter.im/este/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/este/este)
-[![Dependency Status](https://david-dm.org/este/este.png)](https://david-dm.org/este/este)
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
@@ -50,8 +50,6 @@ git clone https://github.com/este/este.git este-app
 cd este-app
 npm install
 ```
-
-To create an empty app, clone `https://github.com/este/bare.git`.
 
 ## Start Development
 
@@ -112,6 +110,9 @@ Right now, there are little open sourced apps on the web (if you have any exampl
 
 #### Does it work with React Native?
 Yes! Check the [native](https://github.com/este/native) repo.
+
+#### Why Este is pure and why we have to pass data through props?
+Pure means no side effects. Programming without side effects rocks. It allows us to hot reload everything and testing is much easier as well. When component renders only data passed through props, [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) can be implemented [only once](https://github.com/este/este/blob/d08556dd1e4d57b4c0e605e3395ce6af9963910e/src/client/components/component.react.js#L14) per whole app. One can say it's verbose, but it isn't. It's explicit. And remember, we have to pass only data going to be rendered. Actions have access to app state.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
