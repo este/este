@@ -1,7 +1,8 @@
 import Promise from 'bluebird';
 import Immutable from 'immutable';
+import loadTodos from '../../client/todos/loadTodos'
 
-export default function userState() {
+export default function todosState() {
 
   return (req, res, next) => {
     loadUserData(req).then(loadedData => {
@@ -9,7 +10,6 @@ export default function userState() {
       next();
     });
   };
-
 }
 
 // Gracefully settle all promises, ignore failed.
@@ -23,21 +23,4 @@ function loadUserData(req) {
       .filter(promise => promise.isFulfilled())
       .map(promise => promise.value())
   );
-}
-
-// Simulate async action.
-function loadTodos() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const todos = {
-        todos: {
-          list: [
-            {id: 2, title: 'relax'}
-          ]
-        }
-      };
-
-      resolve(todos);
-    }, 20);
-  });
 }

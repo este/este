@@ -1,3 +1,4 @@
+import loadTodos from './loadTodos';
 export const actions = create();
 export const feature = 'todos';
 
@@ -7,7 +8,10 @@ const maxTitleLength = 42;
 export function create(dispatch, validate) {
 
   return {
-
+    loadTodos(){
+      loadTodos()
+        .then((todos) => dispatch(actions.loadTodos, todos));
+    },
     addHundredTodos() {
       dispatch(actions.addHundredTodos);
     },

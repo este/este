@@ -5,7 +5,7 @@ import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
 import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
-import userState from './userstate';
+import todosState from './todosstate';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(intlMiddleware({
 }));
 
 // Load state extras for current user.
-app.use(userState());
+app.use('/todos', todosState());
 
 app.get('*', (req, res, next) => {
   render(req, res, req.userState, {intl: req.intl}).catch(next);
