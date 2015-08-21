@@ -75,6 +75,71 @@ npm install
 So you decided to give a chance to this web stack, but where is documentation? Code is documentation itself as it illustrates various patterns, but for start you should read something about [React.js](http://facebook.github.io/react/). Then you should learn [what is the Flux
 application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e). Now refresh you JavaScript knowledge about "new" JavaScript - [learn ES6](https://babeljs.io/docs/learn-es6/). This stack uses [immutable.js](http://facebook.github.io/immutable-js/) and class-less design for a [good reason](https://github.com/facebook/immutable-js/#the-case-for-immutability). Check this nice short [video](https://www.youtube.com/watch?v=5yHFTN-_mOo), wouldn't be possible with classic OOP classes everywhere approach. Functional programming is a next (current) big thing, read [why](https://medium.com/javascript-scene/the-dao-of-immutability-9f91a70c88cd). [Express.js](http://expressjs.com/) is used on the [Node.js](http://nodejs.org/api/) based server. Application is [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9), so we can share code between browser, server, mobile, whatever easily. Congrats, you're Este.js expert level 1 now :-)
 
+## Este.js in one minute
+
+Most of the app shouldn't surprise you, if you are acquainted with the the technologies described in the [Documentation](https://github.com/este/este#documentation). But here is how you can use our implementation of Flux.
+
+**Creating an action**
+
+Add a method to the returned object of any `action.js` file:
+```javascript
+updateFavouriteTodo(newTodoValue) {
+  // Do your tests
+  if (!newTodoValue) {
+    // You can dispatch as many actions as you want, it's quite handy for complicated actions !
+    dispatch(actions.warnUser, 'Your favourite todo cannot be empty!');
+  }
+
+  // Dispatch the action and its payload
+  dispatch(actions.updateFavouriteTodo, newTodoValue)
+}
+```
+
+**Updating a store with an action**
+
+Add a `case` to the switch of the corresponding store:
+```javascript
+case actions.updateFavouriteTodo: {
+  // The state before the action is a parameter of the store function
+  // All you need to do is to modify the state to reflect the modifications of the store, and then return it
+  // payload corresponds to the second parameter of the dispatch method
+  return state.set('favTodo', new Todo(payload));
+}
+```
+
+**Using an action from a component**
+
+The root component of the adds the actions to the props it passes to its children. You can then pass all the actions (or the one specific to a given feature) to any components, recursively (think of a tree)
+```javascript
+// todos/index.react.js
+render() {
+  const {actions} = this.props
+
+  return (
+    // FavouriteTodo doesn't need the actions from the whole app
+    <FavouriteTodo actions={actions.todos}/>
+  )
+}
+
+// todos/newtodo.react.js
+export default class FavouriteTodo extends Component {
+  static propTypes = {
+    actions: React.PropTypes.object.isRequired,
+  }
+
+  onEdit(newTodo) {
+    const {actions} = this.props;
+
+    // It's just a function. It can't be simpler
+    actions.updateFavouriteTodo(newTodo);
+  }
+}
+```
+
+**Accessing some data/state from a component**
+
+It works just like with the actions! `app.react.js` has access to the whole state, and can pass it to its children. So just pass everything through props!
+
 ## Links
 
 - [wiki: Recommended React Components](https://github.com/steida/este/wiki/Recommended-React-Components)
