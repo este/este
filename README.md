@@ -77,21 +77,21 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 
 ## Este.js in one minute
 
-Most of the app shouldn't surprise you, if you are acquainted with the the technologies described in the [Documentation](https://github.com/este/este#documentation). But here is how you can use our implementation of Flux.
+Most of the app shouldn't surprise you, if you are acquainted with technologies described in  [Documentation](https://github.com/este/este#documentation). But here is how you can use our Flux implementation.
 
 **Creating an action**
 
 Add a method to the returned object of any `action.js` file:
 ```javascript
 updateFavouriteTodo(newTodoValue) {
-  // Do your tests
+  // Some validation.
   if (!newTodoValue) {
-    // You can dispatch as many actions as you want, it's quite handy for complicated actions !
-    dispatch(actions.warnUser, 'Your favourite todo cannot be empty!');
+    // We can dispatch as many actions as we want, it's quite handy for complicated actions.
+    dispatch(actions.warnUser, 'Your favourite todo cannot be empty.');
   }
 
-  // Dispatch the action and its payload
-  dispatch(actions.updateFavouriteTodo, newTodoValue)
+  // Dispatch the action and its payload.
+  dispatch(actions.updateFavouriteTodo, newTodoValue);
 }
 ```
 
@@ -100,45 +100,43 @@ updateFavouriteTodo(newTodoValue) {
 Add a `case` to the switch of the corresponding store:
 ```javascript
 case actions.updateFavouriteTodo: {
-  // The state before the action is a parameter of the store function
-  // All you need to do is to modify the state to reflect the modifications of the store, and then return it
-  // payload corresponds to the second parameter of the dispatch method
+  // The state before the action is a parameter of the store function.
+  // All we need to do is to modify the state to reflect the modifications of the store.
   return state.set('favTodo', new Todo(payload));
 }
 ```
 
 **Using an action from a component**
 
-The root component of the adds the actions to the props it passes to its children. You can then pass all the actions (or the one specific to a given feature) to any components, recursively (think of a tree)
-```javascript
+The root `app.react.js` component creates actions and passes then to its children.
+```js
 // todos/index.react.js
 render() {
-  const {actions} = this.props
+  const {actions} = this.props;
 
   return (
-    // FavouriteTodo doesn't need the actions from the whole app
     <FavouriteTodo actions={actions.todos}/>
   )
 }
 
-// todos/newtodo.react.js
+// todos/favouritetodo.react.js
 export default class FavouriteTodo extends Component {
   static propTypes = {
-    actions: React.PropTypes.object.isRequired,
+    actions: React.PropTypes.object.isRequired
   }
 
   onEdit(newTodo) {
     const {actions} = this.props;
 
-    // It's just a function. It can't be simpler
+    // It's just a function. It can't be simpler.
     actions.updateFavouriteTodo(newTodo);
   }
 }
 ```
 
-**Accessing some data/state from a component**
+**Accessing data/state from a component**
 
-It works just like with the actions! `app.react.js` has access to the whole state, and can pass it to its children. So just pass everything through props!
+It works just like with the actions. `app.react.js` has access to the whole state, and can pass it to its children. So just pass everything through props.
 
 ## Links
 
