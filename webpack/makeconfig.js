@@ -17,7 +17,8 @@ var devtools = process.env.CONTINUOUS_INTEGRATION
 var loaders = {
   'css': '',
   'less': '!less-loader',
-  'scss|sass': '!sass-loader',
+  'scss': '!sass-loader',
+  'sass': '!sass-loader?indentedSyntax',
   'styl': '!stylus-loader'
 };
 
