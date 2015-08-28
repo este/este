@@ -64,7 +64,7 @@
     "nyan-progress-webpack-plugin": "^1.0.0",
     "piping": "^0.2.0",
     "react": "^0.13.1",
-    "react-document-title": "^1.0.0",
+    "react-document-title": "^2.0.0",
     "react-hot-loader": "^1.1.4",
     "react-intl": "^1.1.0",
     "react-pure-render": "^1.0.1",
