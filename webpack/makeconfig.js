@@ -88,9 +88,7 @@ module.exports = function(isDevelopment) {
       ];
       if (isDevelopment) plugins.push(
         NotifyPlugin,
-        new webpack.HotModuleReplacementPlugin(),
-        // Tell reloader to not reload if there is an error.
-        new webpack.NoErrorsPlugin()
+        new webpack.HotModuleReplacementPlugin()
       );
       else plugins.push(
         // Render styles into separate cacheable file to prevent FOUC and
