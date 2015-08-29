@@ -9,6 +9,11 @@ export default class List extends Component {
     list: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired
   }
+  componentDidMount(){
+    if(!this.props.list.size){
+      this.props.actions.loadTodos();
+    }
+  }
 
   render() {
     const {actions, list, msg} = this.props;
