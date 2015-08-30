@@ -10,7 +10,6 @@
     "test": "gulp test"
   },
   "engines": {
-    "iojs": ">= 2.2.x",
     "node": "0.10.x"
   },
   "dependencies": {
