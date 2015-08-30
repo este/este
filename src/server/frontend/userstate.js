@@ -1,23 +1,41 @@
 import Promise from 'bluebird';
-import Immutable from 'immutable';
+import Router from 'react-router';
+import routes from '../../client/routes';
+import {Map} from 'immutable';
 
 export default function userState() {
 
   return (req, res, next) => {
-    loadUserData(req).then(loadedData => {
-      req.userState = Immutable.Map().merge(...loadedData);
-      next();
-    });
+    getRouterState(req.originalUrl)
+      .then(routerState => loadUserData(routerState, req))
+      .then(loadedData => {
+        req.userState = Map().merge(...loadedData);
+        next();
+      });
   };
 
 }
 
-// Gracefully settle all promises, ignore failed.
-function loadUserData(req) {
+function getRouterState(originalUrl) {
+  return new Promise((resolve, reject) => {
+    Router.run(routes, originalUrl, (Root, state) => resolve(state));
+  });
+}
+
+function loadUserData(routerState, req) {
+  // We can use params and routesAsPath to preload only current route, which is
+  // convenient  if we are using higher order components for client loading.
+  // const {params, routes} = routerState;
+  // const routesAsPath = routerState.routes
+  //   .map(route => route.name)
+  //   .filter(name => name)
+  //   .join('/');
+
   const dataSources = [
     loadTodos()
   ];
 
+  // Gracefully settle all promises, ignore failed.
   return Promise.settle(dataSources).then(receivedData =>
     receivedData
       .filter(promise => promise.isFulfilled())
