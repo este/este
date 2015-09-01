@@ -1,6 +1,6 @@
 {
   "name": "Este",
-  "version": "0.1.1",
+  "version": "1.0.0-rc",
   "private": true,
   "dependencies": {
     "core-decorators": "^0.2.0",
