@@ -52,24 +52,3 @@ export default function(state = initialState, action, payload) {
 
   return state;
 }
-
-//     case actions.onEditableSave:
-//       todosCursor(todos => {
-//         const {id, name, value} = data;
-//         return todos.update('list', list => {
-//           const idx = list.findIndex(todo => todo.id === id);
-//           return list.setIn([idx, name], value);
-//         });
-//       });
-//       break;
-
-//     case actions.onEditableState:
-//       todosCursor(todos => {
-//         const {id, name, state} = data;
-//         return todos.setIn(['editables', id, name], state);
-//       });
-//       break;
-
-//   }
-
-// });
