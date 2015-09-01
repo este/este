@@ -1,7 +1,7 @@
-import * as actions from './actions';
+import React, {TouchableOpacity, Image, View} from 'react-native';
 import Component from '../components/component.react';
+import Input from '../components/input.react';
 import Todo from './todo';
-import React, {TouchableOpacity, TextInput, Image, View} from 'react-native';
 
 import style from './todo.style.js';
 
@@ -9,23 +9,32 @@ export default class TodoItem extends Component {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,
+    onEndEditing: React.PropTypes.func.isRequired,
+    onFieldChange: React.PropTypes.func.isRequired,
+    onToggleCompleted: React.PropTypes.func.isRequired,
     todo: React.PropTypes.instanceOf(Todo).isRequired
   }
 
   render() {
-    const {todo, disabled} = this.props;
+    const {
+      todo,
+      disabled,
+      onEndEditing,
+      onFieldChange,
+      onToggleCompleted
+    } = this.props;
 
     let todoStyle = [style.input];
     if (todo.completed)
       todoStyle.push(style.inputCompleted);
 
     const editableFor = (propName) =>
-      <TextInput
+      <Input
         clearButtonMode='while-editing'
         editable={!disabled}
         name={propName}
-        onChange={e => actions.onTodoFieldChange(todo, e)}
-        onEndEditing={_ => actions.onTodoEndEditing(todo)}
+        onChange={e => onFieldChange(todo, e)}
+        onEndEditing={_ => onEndEditing(todo)}
         style={todoStyle}
         value={todo[propName]}
       />;
@@ -38,7 +47,7 @@ export default class TodoItem extends Component {
       <View style={style.container}>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={_ => actions.toggleTodoCompleted(todo)}>
+          onPress={_ => onToggleCompleted(todo)}>
           <Image
             source={image}
             style={style.checkbox}

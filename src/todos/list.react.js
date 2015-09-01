@@ -44,6 +44,9 @@ export default class List extends Component {
               <Todo
                 disabled={false}
                 key={todo.id}
+                onEndEditing={actions.onTodoEndEditing}
+                onFieldChange={actions.onTodoFieldChange}
+                onToggleCompleted={actions.toggleTodoCompleted}
                 todo={todo}
               />
             </View>
