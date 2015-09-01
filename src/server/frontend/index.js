@@ -12,7 +12,7 @@ const app = express();
 app.use(esteHeaders());
 app.use(compression());
 
-// app.use(favicon('_assets/img/favicon.ico?' + config.assetsHashes.favicon));
+// app.use(favicon('_assets/img/favicon.ico'));
 
 // Serve the static assets. We can cache them as they include hashes.
 app.use('/assets/img', express.static('assets/img', {maxAge: '200d'}));
