@@ -1,11 +1,14 @@
 {
   "parser": "babel-eslint",
-  "env": {
-    "browser": true
-  },
   "globals": {
-    "process": true,
-    "require": true
+    "require": true,
+    "window": true,
+    "navigator": true,
+    "console": true,
+    "Intl": true,
+    "setInterval": true,
+    "clearInterval": true,
+    "setTimeout": true
   },
   "rules": {
     "brace-style": [1, "1tbs", {"allowSingleLine": true}],
@@ -14,11 +17,13 @@
     "comma-spacing": [1, {"before": false, "after": true}],
     "comma-style": [1, "last"],
     "consistent-this": [1, "self"],
-    "curly": [2, "multi"],
+    "curly": [2, "multi-line"],
     "eqeqeq": [2, "allow-null"],
     "eol-last": 1,
     "guard-for-in": 0,
-    "indent": [2, 2],
+    "indent": [2, 2, {
+      "SwitchCase": 1
+    }],
     "key-spacing": 0,
     "new-cap": [1, {"capIsNew": false, "newIsCap": true}],
     "new-parens": 0,
@@ -30,7 +35,7 @@
     "no-debugger": 1,
     "no-dupe-keys": 1,
     "no-duplicate-case": 1,
-    "no-empty-class": 1,
+    "no-empty-character-class": 1,
     "no-eval": 1,
     "no-ex-assign": 1,
     "no-extend-native": 1,
@@ -72,34 +77,31 @@
     "no-unreachable": 1,
     "no-use-before-define": [1, "nofunc"],
     "no-warning-comments": [0, {"terms": ["todo", "fixme"]}],
-    "no-wrap-func": 1,
+    "no-extra-parens": 0,
     "quotes": [1, "single", "avoid-escape"],
     "quote-props": [0, "as-needed"],
     "radix": 1,
-    // Use this rule, if you consider JavaScript semicolons as superfluous:
-    // "semi": [1, "never"],
+    "semi": [1, "never"],
     "semi": [2, "always"],
     "semi-spacing": [1, {"before": false, "after": true}],
     "space-after-keywords": [1, "always"],
     "space-before-blocks": [1, "always"],
-    "space-before-function-parentheses": [1, "never"],
+    "space-before-function-paren": [1, "never"],
     "space-infix-ops": 1,
-    "space-in-brackets": 1,
+    "curly-spacing": 0,
     "space-in-parens": [1, "never"],
     "space-return-throw-case": 1,
     "space-unary-ops": [1, {"words": true, "nonwords": false}],
     "use-isnan": 1,
     "valid-typeof": 1,
-    "vars-on-top": 0,  // disabled for now, see github.com/eslint/eslint/issues/2099
+    "valid-jsdoc": [2, {"requireReturn": false}],
+    "vars-on-top": 0,
     "wrap-iife": [1, "inside"],
     "yoda": 0,
-    // Node.js specific
     "handle-callback-err": [1, "^(err|error)$"],
     "no-mixed-requires": 1,
     "no-new-require": 1,
     "no-path-concat": 1,
-    // React
-    // Not needed. "react/display-name": 1,
     "react/jsx-boolean-value": 1,
     "react/jsx-quotes": 1,
     "react/jsx-no-undef": 1,
@@ -114,7 +116,14 @@
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
-    // Not ready yet. "react/sort-comp": 1,
+    "react/sort-comp": [1, {
+      "order": [
+        "state",
+        "lifecycle",
+        "everything-else",
+        "render"
+      ]
+    }],
     "react/wrap-multilines": 1
   },
   "plugins": [

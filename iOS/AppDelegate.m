@@ -44,7 +44,9 @@
   // user experience or just to have nice development
   // Remember - you need to rerun app from XCode in order for these changes to propagate
   // Normal refreshing will have no effect
-  rootView.initialProperties = [userSettings dictionaryForKey:@"state"] ?: initialState;
+  rootView.initialProperties = @{
+    @"initialState": [userSettings dictionaryForKey:@"state"] ?: initialState
+  };
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [[UIViewController alloc] init];
