@@ -21,9 +21,10 @@
 - Localization via [formatjs.io](http://formatjs.io/), stale browsers supported as well.
 - [react-router](https://github.com/rackt/react-router) for routing on client and server side.
 - Simple yet powerfull sync/async validation based on famous [chriso/validator.js](https://github.com/chriso/validator.js)
-- Login and Signup example, `requireAuth` [higher order](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) component to protect access to specific pages.
+- Auth example with `requireAuth` [higher order component](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) to protect access to specific pages.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Easy undo/redo and load/save for app state.
+- Long Term Caching through file hashes enabled.
 
 ## Prerequisites
 
