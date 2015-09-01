@@ -14,11 +14,6 @@ export const container = {
   flex: 1
 };
 
-export const containerWithNavbar = {
-  ...container,
-  marginTop: 64
-};
-
 export const paddingBottom = {
   paddingBottom: 64
 };
@@ -36,7 +31,6 @@ export default StyleSheet.create({
   },
   sceneView: {
     backgroundColor: '#FFFFFF',
-    flex: 1,
-    paddingTop: 40
+    flex: 1
   }
 });

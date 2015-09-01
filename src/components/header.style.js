@@ -5,26 +5,18 @@ const menuLink = {
   position: 'absolute',
   left: 15,
   top: 34,
-  opacity: 0.9,
-  fontSize: 15
+  opacity: 0.9
 };
 
 export default StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 64,
-    paddingTop: 14,
     backgroundColor: '#31AACC',
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: '#73CEE7'
-  },
-  containerHidden: {
-    top: -64
+    borderBottomColor: '#73CEE7',
+    height: 60,
+    position: 'relative'
   },
   header: {
     fontSize: 20,
@@ -33,12 +25,7 @@ export default StyleSheet.create({
   },
   menuLink: {
     ...menuLink,
-    color: '#FFFFFF'
-  },
-  menuLinkRight: {
-    ...menuLink,
-    right: 15,
-    left: void 0,
+    fontSize: 15,
     color: '#FFFFFF'
   },
   menuIcon: {

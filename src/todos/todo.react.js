@@ -1,17 +1,15 @@
 import * as actions from './actions';
 import Component from '../components/component.react';
-import Input from '../components/input.react';
-import React from 'react-native';
-import {Record} from 'immutable';
-import {TouchableOpacity, Image, View} from 'react-native';
+import Todo from './todo';
+import React, {TouchableOpacity, TextInput, Image, View} from 'react-native';
 
 import style from './todo.style.js';
 
-export default class Todo extends Component {
+export default class TodoItem extends Component {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,
-    todo: React.PropTypes.instanceOf(Record).isRequired
+    todo: React.PropTypes.instanceOf(Todo).isRequired
   }
 
   render() {
@@ -22,7 +20,7 @@ export default class Todo extends Component {
       todoStyle.push(style.inputCompleted);
 
     const editableFor = (propName) =>
-      <Input
+      <TextInput
         clearButtonMode='while-editing'
         editable={!disabled}
         name={propName}

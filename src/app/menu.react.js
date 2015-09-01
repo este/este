@@ -1,25 +1,25 @@
 import Component from '../components/component.react';
 import React from 'react-native';
-import {msg} from '../intl/store';
 import {ScrollView, Text} from 'react-native';
 
 import styles from './menu.style';
 
 class Menu extends Component {
 
-  onItemSelected(item) {
-    this.props.menuActions.close();
-    this.props.onItemSelected(item);
+  static propTypes = {
+    msg: React.PropTypes.object.isRequired,
+    onItemSelected: React.PropTypes.func.isRequired
   }
 
   render() {
     const pages = ['home', 'todos'];
+    const {msg, onItemSelected} = this.props;
 
     return (
       <ScrollView style={styles.menu}>
         {pages.map(page => (
-          <Text key={page} onPress={_ => this.onItemSelected(page)} style={styles.item}>
-            {msg(`menu.${page}`)}
+          <Text key={page} onPress={_ => onItemSelected(page)} style={styles.item}>
+            {msg[page]}
           </Text>
         ))}
       </ScrollView>
@@ -29,8 +29,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  menuActions: React.PropTypes.object,
-  onItemSelected: React.PropTypes.func.isRequired
+
 };
 
 export default Menu;

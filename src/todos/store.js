@@ -3,20 +3,15 @@ import Todo from './todo';
 import getRandomString from '../lib/getrandomstring';
 import {Range, Record, List} from 'immutable';
 
-const initialState = new Record({
-  newTodo: new Record({
-    title: ''
-  }),
-  list: List([])
-});
+const initialState = new (Record({
+  list: List([]),
+  newTodo: new Todo
+}));
 
-const revive = state => {
-  const list = state.get('list');
-  return initialState.merge({
-    newTodo: new Todo(state.get('newTodo')),
-    list: list ? list.map(todo => new Todo(todo)) : List([])
-  });
-};
+const revive = state => initialState.merge({
+  list: state.get('list').map(todo => new Todo(todo)),
+  newTodo: new Todo(state.get('newTodo'))
+});
 
 export default function todoStore(state = initialState, action, payload) {
   if (!action) return revive(state);

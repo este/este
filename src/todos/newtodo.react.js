@@ -1,10 +1,8 @@
 import * as actions from './actions';
 import Component from '../components/component.react';
 import {msg} from '../intl/store';
-import React from 'react-native';
-import Input from '../components/input.react';
 import Todo from './todo';
-import {View} from 'react-native';
+import React, {TextInput, View} from 'react-native';
 
 import {style, placeholderTextColor} from './newtodo.style';
 
@@ -27,7 +25,7 @@ export default class NewTodo extends Component {
     const {todo} = this.props;
     return (
       <View style={style.container}>
-        <Input
+        <TextInput
           name='title'
           onChange={actions.onNewTodoFieldChange}
           onEndEditing={this.addTodoOnEnd}

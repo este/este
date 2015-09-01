@@ -26,9 +26,6 @@
   // Your initial state, data always populated for new users
   // when no state is saved
   NSDictionary *initialState = @{
-    @"i18n": @{
-      @"locales": @"en"
-    },
     @"todos": @{
       @"list": @[
         @{@"id": @1, @"title": @"Buy a cat"},
@@ -36,10 +33,10 @@
       ]
     }
   };
-  
+
   // Let's load user defaults we saved previously
   NSUserDefaults *userSettings = [NSUserDefaults standardUserDefaults];
-  
+
   // Use user saved state if there is one, load initial state otherwise to give seamless
   // user experience or just to have nice development
   // Remember - you need to rerun app from XCode in order for these changes to propagate
@@ -53,7 +50,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
+
   return YES;
 }
 
