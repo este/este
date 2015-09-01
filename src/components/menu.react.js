@@ -1,9 +1,11 @@
 import SideMenu from 'react-native-side-menu';
+import React from 'react-native';
 
 export default class Menu extends SideMenu {
 
   static propTypes = {
-    ...SideMenu.propTypes
+    ...SideMenu.propTypes,
+    disableGestures: React.PropTypes.oneOfType([React.PropTypes.func, React.PropTypes.bool])
   }
 
   constructor(props) {

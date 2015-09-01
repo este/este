@@ -7,8 +7,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderBottomWidth: 2,
     borderBottomColor: '#73CEE7',
-    height: 60,
-    paddingTop: 20,
+    height: 70,
+    paddingTop: 30,
     paddingBottom: 10,
     position: 'relative'
   },
@@ -20,7 +20,7 @@ export default StyleSheet.create({
   menuLink: {
     position: 'absolute',
     left: 8,
-    top: 15,
+    top: 25,
     width: 44,
     height: 44,
     padding: 10,

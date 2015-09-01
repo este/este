@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "core-decorators": "^0.2.0",
     "react-native-side-menu": "0.12.1"
   },
   "devDependencies": {
