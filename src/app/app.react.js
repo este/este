@@ -3,6 +3,7 @@ import Component from '../components/component.react';
 import Menu from './menu.react';
 import {routes, defaultRoute} from '../routes';
 import SideMenu from '../components/menu.react';
+import ContentView from '../components/contentView.react';
 
 import appStyle from './app.style';
 
@@ -119,9 +120,13 @@ class App extends Component {
     };
 
     return (
-      <View style={[appStyle.sceneView, route.style]}>
-        <Handler navigation={navigation} {...props} />
-      </View>
+      <ContentView
+        isDisabled={this.props.app.isMenuOpened}
+        onDisabledTap={this.actions.app.toggleMenu}>
+        <View style={[appStyle.sceneView, route.style]}>
+          <Handler navigation={navigation} {...props} />
+        </View>
+      </ContentView>
     );
   }
 
