@@ -44,6 +44,7 @@ export default class Todos extends Component {
         />
 
         <List
+          actions={actions.todos}
           editables={todos.editables}
           msg={msg.list}
           todos={todos.list}

@@ -89,10 +89,6 @@ export default {
       ]
     },
     todos: {
-      add100: 'Add 100 Todos',
-      clearCompleted: 'Clear completed',
-      clearAll: 'Clear all',
-      emptyList: 'It\'s rather empty here...',
       newTodo: {
         placeholder: 'What needs to be done?'
       },
@@ -101,6 +97,14 @@ export default {
         =0 {}
         other {(#)}
       }`,
+      list: {
+        empty: 'It\'s rather empty here...',
+        buttons: {
+          add100: 'Add 100 Todos',
+          clearCompleted: 'Clear completed',
+          clearAll: 'Clear all'
+        }
+      },
       leftTodos: {
         oneTodo: 'You have almost done',
         todos: 'You have {size} tasks to go!',
