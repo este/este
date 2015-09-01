@@ -1,13 +1,5 @@
 import {StyleSheet} from 'react-native';
 
-const menuLink = {
-  height: 25,
-  position: 'absolute',
-  left: 15,
-  top: 34,
-  opacity: 0.9
-};
-
 export default StyleSheet.create({
   container: {
     backgroundColor: '#31AACC',
@@ -16,6 +8,8 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#73CEE7',
     height: 60,
+    paddingTop: 20,
+    paddingBottom: 10,
     position: 'relative'
   },
   header: {
@@ -24,14 +18,19 @@ export default StyleSheet.create({
     fontFamily: 'Lato-Light'
   },
   menuLink: {
-    ...menuLink,
-    fontSize: 15,
-    color: '#FFFFFF'
+    position: 'absolute',
+    left: 8,
+    top: 15,
+    width: 44,
+    height: 44,
+    padding: 10,
+    opacity: 0.9,
+    backgroundColor: 'transparent'
   },
   menuIcon: {
-    ...menuLink,
-    width: 25,
-    top: 29
+    width: 24,
+    height: 24,
+    backgroundColor: 'transparent'
   }
 
 });

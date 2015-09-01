@@ -20,7 +20,8 @@ export default class Header extends Component {
         {menuButtonAction && (
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={menuButtonAction}>
+            onPress={menuButtonAction}
+            style={style.menuLink}>
               <Image
                 source={require('image!menu-icon')}
                 style={style.menuIcon}
@@ -31,8 +32,9 @@ export default class Header extends Component {
         {backButtonAction && (
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={backButtonAction}>
-              <Text style={style.menuLink}>{'<'}</Text>
+            onPress={backButtonAction}
+            style={style.menuLink}>
+              <Text style={style.menuText}>{'<'}</Text>
           </TouchableOpacity>
         )}
 
