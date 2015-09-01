@@ -22,27 +22,28 @@
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"este"
                                                    launchOptions:launchOptions];
-
-  // Your initial state, data always populated for new users
-  // when no state is saved
-  NSDictionary *initialState = @{
-    @"todos": @{
-      @"list": @[
-        @{@"id": @1, @"title": @"Buy a cat"},
-        @{@"id": @2, @"title": @"Buy another cat"}
-      ]
-    }
-  };
-
+  
+  // Sometimes you want your users to get few todos by default when they launch the app
+  // for the first time
+  NSMutableDictionary *initialState = [NSMutableDictionary dictionaryWithDictionary:@{
+    @"list": @[
+      @{@"id": @1, @"title": @"Buy a cat"},
+      @{@"id": @2, @"title": @"Buy another cat"}
+    ]
+  }];
+  
   // Let's load user defaults we saved previously
-  NSUserDefaults *userSettings = [NSUserDefaults standardUserDefaults];
+  // and merge them into initial state
+  // you can perform other async actions here, up to you
+  NSDictionary *userState = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"state"];
+  [initialState addEntriesFromDictionary:userState];
 
   // Use user saved state if there is one, load initial state otherwise to give seamless
   // user experience or just to have nice development
   // Remember - you need to rerun app from XCode in order for these changes to propagate
   // Normal refreshing will have no effect
   rootView.initialProperties = @{
-    @"initialState": [userSettings dictionaryForKey:@"state"] ?: initialState
+    @"initialState": initialState
   };
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
