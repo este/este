@@ -17,7 +17,7 @@
     "comma-spacing": [1, {"before": false, "after": true}],
     "comma-style": [1, "last"],
     "consistent-this": [1, "self"],
-    "curly": [2, "multi-line"],
+    "curly": [2, "multi"],
     "eqeqeq": [2, "allow-null"],
     "eol-last": 1,
     "guard-for-in": 0,
