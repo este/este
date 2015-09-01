@@ -37,6 +37,7 @@
     "gulp-bg": "0.0.7",
     "gulp-eslint": "^1.0.0",
     "gulp-util": "^3.0.2",
+    "hash-file": "^2.1.0",
     "immutable": "^3.6.4",
     "immutablediff": "^0.4.2",
     "intl": "^1.0.0",

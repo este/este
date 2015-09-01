@@ -12,9 +12,11 @@ const app = express();
 app.use(esteHeaders());
 app.use(compression());
 
-// app.use(favicon('assets/img/favicon.ico'))
-app.use('/build', express.static('build'));
-app.use('/assets', express.static('assets'));
+// app.use(favicon('_assets/img/favicon.ico?' + config.assetsHashes.favicon));
+
+// Serve the static assets. We can cache them as they include hashes.
+app.use('/assets/img', express.static('assets/img', {maxAge: '200d'}));
+app.use('/_assets', express.static('build', {maxAge: '200d'}));
 
 // Intl
 app.use('/node_modules/intl/dist', express.static('node_modules/intl/dist'));
@@ -29,7 +31,8 @@ app.use(intlMiddleware({
 app.use(userState());
 
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState, {intl: req.intl}).catch(next);
+  render(req, res, req.userState, {intl: req.intl})
+    .catch(next);
 });
 
 app.on('mount', () => {

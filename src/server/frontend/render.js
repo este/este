@@ -57,7 +57,7 @@ function getPageHtml(Handler, appState, {hostname, needIntlPolyfill}) {
   }</div>`;
 
   const appScriptSrc = config.isProduction
-    ? '/build/app.js?v=' + config.version
+    ? '/_assets/app.js?' + config.assetsHashes.appJs
     : `//${hostname}:8888/build/app.js`;
 
   let scriptHtml = '';
@@ -90,10 +90,10 @@ function getPageHtml(Handler, appState, {hostname, needIntlPolyfill}) {
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html
+      appCssHash={config.assetsHashes.appCss}
       bodyHtml={appHtml + scriptHtml}
       isProduction={config.isProduction}
       title={title}
-      version={config.version}
     />
   );
 }
