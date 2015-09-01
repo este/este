@@ -2,6 +2,7 @@ import React, {Settings, StatusBarIOS, View, Navigator} from 'react-native';
 import Component from '../components/component.react';
 import Menu from './menu.react';
 import {routes, defaultRoute} from '../routes';
+import {autobind} from 'core-decorators';
 import SideMenu from '../components/menu.react';
 import ContentView from '../components/contentView.react';
 
@@ -29,13 +30,6 @@ class App extends Component {
     intl: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     todos: React.PropTypes.object.isRequired
-  }
-
-  constructor(...args) {
-    super(...args);
-    this.onItemSelected = this.onItemSelected.bind(this);
-    this.configureScene = this.configureScene.bind(this);
-    this.renderScene = this.renderScene.bind(this);
   }
 
   componentWillMount() {
@@ -79,6 +73,7 @@ class App extends Component {
     this.refs.menu.toggleMenu();
   }
 
+  @autobind
   onItemSelected(itemKey) {
     const route = routes[itemKey];
 
@@ -88,10 +83,12 @@ class App extends Component {
     }
   }
 
+  @autobind
   configureScene(route) {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;
   }
 
+  @autobind
   renderScene(route, navigator) {
     const Handler = route.component;
     const context = navigator.navigationContext;

@@ -1,5 +1,6 @@
 import React, {View} from 'react-native';
 import Component from './component.react';
+import {autobind} from 'core-decorators';
 
 // This component disables interactions when isDisabled prop
 // is true. Used to disable interactions with content when side menu is toggled
@@ -15,9 +16,9 @@ export default class ContentView extends Component {
     onDisabledTap: () => {}
   }
 
+  @autobind
   onPress(e) {
-    if (this.props.isDisabled)
-      this.props.onDisabledTap();
+    if (this.props.isDisabled) this.props.onDisabledTap();
   }
 
   render() {
@@ -25,7 +26,7 @@ export default class ContentView extends Component {
 
     return (
       <View
-        onResponderRelease={this.onPress.bind(this)}
+        onResponderRelease={this.onPress}
         onStartShouldSetResponderCapture={_ => isDisabled}
         style={{flex: 1}}>
         {this.props.children}

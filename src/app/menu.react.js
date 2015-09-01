@@ -4,7 +4,7 @@ import {ScrollView, Text} from 'react-native';
 
 import styles from './menu.style';
 
-class Menu extends Component {
+export default class Menu extends Component {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired,
@@ -27,9 +27,3 @@ class Menu extends Component {
   }
 
 }
-
-Menu.propTypes = {
-
-};
-
-export default Menu;
