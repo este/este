@@ -6,13 +6,6 @@ module.exports = function(config) {
     // autoWatch, it works enabled or not. Probably defined by singleRun.
     basePath: '',
     browsers: ['ChromeSmall'],
-    coverageReporter: process.env.CONTINUOUS_INTEGRATION ? {
-      type: 'lcov',
-      dir: 'coverage/'
-    } : {
-      type: 'html',
-      dir: 'coverage/'
-    },
     customLaunchers: {
       ChromeSmall: {
         base: 'Chrome',
@@ -41,9 +34,8 @@ module.exports = function(config) {
     },
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: process.env.CONTINUOUS_INTEGRATION ? [
-      'coverage'
     ] : [
-      'progress', 'coverage', 'notify'
+      'progress', 'notify'
     ],
     webpack: require('./webpack/makeconfig')(true),
     webpackServer: {
