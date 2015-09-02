@@ -25,7 +25,7 @@
     "classnames": "^2.1.1",
     "compression": "^1.4.0",
     "cors": "^2.6.0",
-    "css-loader": "^0.16.0",
+    "css-loader": "^0.17.0",
     "eslint": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "eventemitter3": "^1.0.1",
