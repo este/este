@@ -1,5 +1,5 @@
 import Component from '../../components/component.react';
-import Flux from './flux';
+import FluxClass from './flux';
 import React from 'react';
 
 // https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
@@ -11,9 +11,9 @@ function now() {
     : Date.now();
 }
 
-export default function decorate(store) {
+export default function flux(store) {
 
-  return BaseComponent => class Decorator extends Component {
+  return BaseComponent => class Flux extends Component {
 
     static propTypes = {
       initialState: React.PropTypes.object
@@ -35,7 +35,7 @@ export default function decorate(store) {
 
     fluxify() {
       if (this.flux) this.flux.removeListener('dispatch', this.onFluxDispatch);
-      this.flux = new Flux(store, this.props.initialState);
+      this.flux = new FluxClass(store, this.props.initialState);
       this.flux.on('dispatch', this.onFluxDispatch);
       this.onFluxDispatch();
     }

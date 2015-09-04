@@ -9,8 +9,6 @@ export default function exposeRouter(BaseComponent) {
       router: React.PropTypes.func.isRequired
     };
 
-    static displayName = `${BaseComponent.name}ExposeRouter`;
-
     render() {
       return <BaseComponent {...this.props} router={this.context.router} />;
     }

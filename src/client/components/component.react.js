@@ -23,11 +23,6 @@ export default class Component extends React.Component {
       !shallowEqual(this.props, nextProps) ||
       !shallowEqual(this.state, nextState);
 
-    // TODO: Dev tools.
-    // if (shouldUpdate)
-    //   const name = this.constructor.displayName || this.constructor.name
-    //   console.log(`${name} shouldUpdate`)
-
     return shouldUpdate;
   }
 

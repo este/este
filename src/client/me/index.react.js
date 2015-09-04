@@ -6,7 +6,7 @@ import requireAuth from '../auth/requireauth.react';
 import {format} from '../intl/store';
 
 @requireAuth
-export default class Index extends Component {
+export default class MeIndex extends Component {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,

@@ -1,8 +1,8 @@
-import decorate from './decorate';
+import Flux from './flux.react';
 import devTools from './devtools';
 
 export default function(store) {
   return process.env.IS_BROWSER
-    ? Component => decorate(store)(devTools(Component))
-    : decorate(store);
+    ? Component => Flux(store)(devTools(Component))
+    : Flux(store);
 }

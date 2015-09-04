@@ -6,7 +6,7 @@ import React from 'react';
 import ToCheck from './tocheck.react';
 import Todos from './todos.react';
 
-export default class Index extends Component {
+export default class TodosIndex extends Component {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
@@ -25,9 +25,6 @@ export default class Index extends Component {
       <DocumentTitle title={msg.title}>
         <div className="todos-page">
           <NewTodo {...{newTodo, actions, msg}} />
-          {/* It's just shorter syntax for:
-            <NewTodo actions={actions} msg={msg} newTodo={newTodo} />
-          */}
           <Todos {...{list, actions, msg}} />
           <Buttons clearAllEnabled={list.size > 0} {...{actions, msg}} />
           <ToCheck msg={msg.toCheck} />
