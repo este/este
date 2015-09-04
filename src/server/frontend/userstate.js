@@ -37,7 +37,7 @@ function loadUserData(routerState, req) {
   //   .join('/');
 
   const dataSources = [
-    loadTodos()
+    loadViewer(req)
   ];
 
   // Gracefully settle all promises, ignore failed.
@@ -48,19 +48,14 @@ function loadUserData(routerState, req) {
   );
 }
 
-// Simulate async action.
-function loadTodos() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const todos = {
-        todos: {
-          list: [
-            {id: 2, title: 'relax'}
-          ]
-        }
-      };
-
-      resolve(todos);
-    }, 20);
-  });
+function loadViewer(req) {
+  return {
+    users: {
+      viewer: {
+        email: req.user && req.user.email,
+        password: req.user && req.user.password,
+        isLoggedIn: !!req.user
+      }
+    }
+  };
 }

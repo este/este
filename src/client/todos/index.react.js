@@ -5,6 +5,7 @@ import NewTodo from './newtodo.react';
 import React from 'react';
 import ToCheck from './tocheck.react';
 import Todos from './todos.react';
+import * as api from '../lib/api';
 
 export default class Index extends Component {
 
@@ -12,6 +13,22 @@ export default class Index extends Component {
     actions: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     todos: React.PropTypes.object.isRequired
+  }
+
+  // appState is javascript object.
+  // return false to prevent state merging.
+  static fetchData(forceUpdate, params, query, appState) {
+    // const list = appState.todos && appState.todos.list;
+    // if (!forceUpdate && list && !list.every(item => '' + item.id !== '' + params.id)) return false;
+
+    const {users: {viewer}} = appState;
+    return api.post('/api/v1/todos', viewer).then(res => {
+      return {
+        todos: {
+          list: res.data
+        }
+      };
+    });
   }
 
   render() {

@@ -1,6 +1,6 @@
 import Component from '../components/component.react';
 import React from 'react';
-import User from '../users/user';
+import App from '../app/app.react';
 
 export default function requireAuth(BaseComponent) {
 
@@ -9,7 +9,8 @@ export default function requireAuth(BaseComponent) {
     static displayName = `${BaseComponent.name}RequireAuth`;
 
     static willTransitionTo(transition) {
-      if (User.isLoggedIn) return;
+      const isLoggedIn = App._flux.state && App._flux.state.getIn(['users', 'viewer', 'isLoggedIn']);
+      if (isLoggedIn) return;
       transition.redirect('/login', {}, {
         nextPath: transition.path
       });

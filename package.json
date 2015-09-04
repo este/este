@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "autoprefixer-loader": "^2.0.0",
+    "axios": "^0.5.4",
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
     "babel-eslint": "^4.0.5",
