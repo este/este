@@ -1,7 +1,7 @@
 import './login.styl';
 import Component from '../components/component.react';
 import React from 'react';
-import exposeRouter from '../components/exposerouter.react';
+import exposeRouter from '../components/exposerouter';
 import {focusInvalidField} from '../lib/validation';
 
 @exposeRouter

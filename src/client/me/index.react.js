@@ -2,7 +2,7 @@ import Component from '../components/component.react';
 import DocumentTitle from 'react-document-title';
 import Logout from '../auth/logout.react';
 import React from 'react';
-import requireAuth from '../auth/requireauth.react';
+import requireAuth from '../auth/requireauth';
 import {format} from '../intl/store';
 
 @requireAuth
