@@ -1,99 +1,86 @@
-import * as actions from './actions';
+import {actions} from './actions';
 import Todo from './todo';
 import getRandomString from '../lib/getrandomstring';
-import {Range} from 'immutable';
-import {register} from '../dispatcher';
-import {todosCursor} from '../state';
+import {Range, Record, List} from 'immutable';
 
-export const dispatchToken = register(({action, data}) => {
+const initialState = new (Record({
+  list: List([]),
+  newTodo: new Todo
+}));
+
+const revive = state => initialState.merge({
+  list: state.get('list').map(todo => new Todo(todo)),
+  newTodo: new Todo(state.get('newTodo'))
+});
+
+export default function todoStore(state = initialState, action, payload) {
+  if (!action) return revive(state);
 
   switch (action) {
+
     case actions.addHundredTodos:
-      todosCursor(todos => {
-        return todos.update('list', list => list.withMutations(list => {
-          Range(0, 100).forEach(i => {
-            const id = getRandomString();
-            list.push(new Todo({
-              id,
-              title: `Item #${id}`
-            }));
-          });
-        }));
-      });
-      break;
+      return state.update('list', list => list.withMutations(list => {
+        Range(0, 100).forEach(i => {
+          const id = getRandomString();
+          list.push(new Todo({
+            id,
+            title: `Item #${id}`
+          }));
+        });
+      }));
 
     case actions.addTodo:
-      todosCursor(todos => {
-        return todos
-          .update('list', (list) => {
-            // Always denote what data represents. Favour readability over wtf.
-            // Try to resist being smart ass. Fuck pride.
-            // https://www.youtube.com/watch?v=ruhFmBrl4GM
-            const todo = data;
-            const newTodo = todo.merge({
-              id: getRandomString()
-            });
-            return list.push(newTodo);
-          })
-          .set('newTodo', new Todo);
-      });
-      break;
+      return state
+        .update('list', (list) => {
+          const todo = payload;
+          const newTodo = todo.merge({
+            id: getRandomString()
+          });
+          return list.push(newTodo);
+        })
+        .set('newTodo', new Todo);
 
     case actions.clearAll:
-      todosCursor(todos => {
-        return todos
-          .update('list', list => list.clear())
-          .set('newTodo', new Todo);
-      });
-      break;
+      return state
+        .update('list', list => list.clear())
+        .set('newTodo', new Todo);
 
-    case actions.deleteTodo:
-      todosCursor(todos => {
-        const {id} = data;
-        return todos.update('list', list => {
-          const idx = list.findIndex(todo => todo.id === id);
-          return list.delete(idx);
-        });
+    case actions.deleteTodo: {
+      const {id} = payload;
+      return state.update('list', list => {
+        const idx = list.findIndex(todo => todo.id === id);
+        return list.delete(idx);
       });
-      break;
+    }
 
-    case actions.onTodoFieldChange:
-      todosCursor(todos => {
-        const {id, name, value} = data;
-        return todos.update('list', list => {
-          const idx = list.findIndex(todo => todo.id === id);
-          return list
-            .setIn([idx, name], value)
-            .setIn([idx, 'completed'], false);
-        });
+    case actions.onTodoFieldChange: {
+      const {id, name, value} = payload;
+      return state.update('list', list => {
+        const idx = list.findIndex(todo => todo.id === id);
+        return list
+          .setIn([idx, name], value)
+          .setIn([idx, 'completed'], false);
       });
-      break;
+    }
 
-    case actions.onNewTodoFieldChange:
-      todosCursor(todos => {
-        const {name, value} = data;
-        return todos.setIn(['newTodo', name], value);
-      });
-      break;
+    case actions.onNewTodoFieldChange: {
+      const {name, value} = payload;
+      return state.setIn(['newTodo', name], value);
+    }
 
-    case actions.toggleTodoCompleted:
-      todosCursor(todos => {
-        const {id} = data;
-        return todos.update('list', list => {
-          const idx = list.findIndex(todo => todo.id === id);
-          return list
-            .updateIn([idx, 'completed'], completed => !completed);
-        });
+    case actions.toggleTodoCompleted: {
+      const {id} = payload;
+      return state.update('list', list => {
+        const idx = list.findIndex(todo => todo.id === id);
+        return list
+          .updateIn([idx, 'completed'], completed => !completed);
       });
-      break;
+    }
 
     case actions.clearCompletedTodos:
-      todosCursor(todos => {
-        return todos
-          .update('list', list => list.filter(todo => !todo.completed));
-      });
-      break;
+      return state.update('list', list => list.filter(todo => !todo.completed));
 
   }
 
-});
+  return state;
+};

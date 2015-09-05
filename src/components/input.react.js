@@ -1,17 +1,22 @@
-import React from 'react-native';
-import {TextInput} from 'react-native';
+// To make your app truly isomorphic, we need to wrap WebEvents in React Native
+import React, {TextInput} from 'react-native';
+import {autobind} from 'core-decorators';
+import Component from './component.react';
 
-class Input extends React.Component {
+export default class Input extends Component {
 
-  constructor(props) {
-    super(props);
-    this.onFieldChange = this.onFieldChange.bind(this);
-    this.onEndEditing = this.onEndEditing.bind(this);
-    this.state = {
-      value: this.props.value
-    };
+  static propTypes = {
+    name: React.PropTypes.string,
+    onChange: React.PropTypes.func,
+    onEndEditing: React.PropTypes.func
   }
 
+  static defaultProps = {
+    onChange: function() {},
+    onEndEditing: function() {}
+  }
+
+  @autobind
   onFieldChange(event) {
     this.props.onChange({
       target: {
@@ -21,18 +26,13 @@ class Input extends React.Component {
     });
   }
 
+  @autobind
   onEndEditing(event) {
     this.props.onEndEditing({
       target: {
         name: this.props.name,
         value: event.nativeEvent.text
       }
-    });
-    setTimeout(_ => {
-      if (this && this.refs.textInput)
-        this.refs.textInput.setNativeProps({
-          text: this.props.value
-        });
     });
   }
 
@@ -41,30 +41,14 @@ class Input extends React.Component {
   }
 
   render() {
-    const value = this.state.value;
     return (
       <TextInput
         {...this.props}
         onChange={this.onFieldChange}
         onEndEditing={this.onEndEditing}
         ref='textInput'
-        value={value}
       />
     );
   }
 
 }
-
-Input.propTypes = {
-  name: React.PropTypes.string,
-  onChange: React.PropTypes.func,
-  onEndEditing: React.PropTypes.func,
-  value: React.PropTypes.any.isRequired
-};
-
-Input.defaultProps = {
-  onChange: function() {},
-  onEndEditing: function() {}
-};
-
-export default Input;

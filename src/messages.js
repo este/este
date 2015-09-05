@@ -89,19 +89,27 @@ export default {
       ]
     },
     todos: {
-      add100: 'Add 100 Todos',
-      clearCompleted: 'Clear completed',
-      clearAll: 'Clear all',
-      oneTodo: 'You have almost done',
-      todos: 'You have {size} tasks to go!',
-      emptyListHeading: 'Nothing, enjoy',
-      emptyList: 'It\'s rather empty here...',
-      newTodoPlaceholder: 'What needs to be done?',
+      newTodo: {
+        placeholder: 'What needs to be done?'
+      },
       title: 'Todos',
       undo: `Undo {steps, plural,
         =0 {}
         other {(#)}
-      }`
+      }`,
+      list: {
+        empty: 'It\'s rather empty here...',
+        buttons: {
+          add100: 'Add 100 Todos',
+          clearCompleted: 'Clear completed',
+          clearAll: 'Clear all'
+        }
+      },
+      leftTodos: {
+        oneTodo: 'You have almost done',
+        todos: 'You have {size} tasks to go!',
+        emptyList: 'Nothing, enjoy'
+      }
     },
     validation: {
       email: `Email address is not valid.`,

@@ -1,22 +1,25 @@
 import Buttons from './buttons.react';
 import Component from '../components/component.react';
-import React from 'react-native';
 import Todo from './todo.react';
 import immutable from 'immutable';
-import {msg} from '../intl/store';
-import {View, Text, ScrollView, Image} from 'react-native';
+import React, {View, Text, ScrollView, Image} from 'react-native';
 
 import style from './list.style';
 
 export default class List extends Component {
 
   static propTypes = {
-    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    actions: React.PropTypes.object.isRequired,
+    msg: React.PropTypes.object.isRequired,
     todos: React.PropTypes.instanceOf(immutable.List)
   }
 
   render() {
-    const {todos} = this.props;
+    const {
+      actions,
+      todos,
+      msg
+    } = this.props;
 
     const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
 
@@ -28,7 +31,7 @@ export default class List extends Component {
             style={style.icon}
           />
           <Text style={style.noTodosText}>
-            {msg('todos.emptyList')}
+            {msg.empty}
           </Text>
         </View>
       );
@@ -41,14 +44,19 @@ export default class List extends Component {
               <Todo
                 disabled={false}
                 key={todo.id}
+                onEndEditing={actions.onTodoEndEditing}
+                onFieldChange={actions.onTodoFieldChange}
+                onToggleCompleted={actions.toggleTodoCompleted}
                 todo={todo}
               />
             </View>
           );
         })}
         <Buttons
-          clearAllEnabled={!hasCompletedTodos}
-          clearCompletedEnabled={hasCompletedTodos}
+          msg={msg.buttons}
+          onAddRandomTodosClicked={actions.addHundredTodos}
+          onClearAllClicked={!hasCompletedTodos ? actions.clearAll : null}
+          onClearCompletedClicked={hasCompletedTodos ? actions.clearCompleted : null}
         />
       </ScrollView>
     );

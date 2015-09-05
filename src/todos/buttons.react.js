@@ -1,35 +1,55 @@
-import * as actions from '../todos/actions';
+import React, {View, TouchableOpacity, Text} from 'react-native';
 import Component from '../components/component.react';
-import React from 'react-native';
-import {msg} from '../intl/store';
-import {View, TouchableOpacity, Text} from 'react-native';
 
 import style from './buttons.style';
 
 export default class TodoButtons extends Component {
 
   static propTypes = {
-    clearAllEnabled: React.PropTypes.bool.isRequired,
-    clearCompletedEnabled: React.PropTypes.bool.isRequired
+    msg: React.PropTypes.object.isRequired,
+    onAddRandomTodosClicked: React.PropTypes.func,
+    onClearAllClicked: React.PropTypes.func,
+    onClearCompletedClicked: React.PropTypes.func
   }
 
   render() {
-    const {clearAllEnabled, clearCompletedEnabled} = this.props;
+    const {
+      onAddRandomTodosClicked,
+      onClearAllClicked,
+      onClearCompletedClicked,
+      msg
+    } = this.props;
+
     return (
       <View style={style.buttons}>
-        {clearCompletedEnabled && (
-          <TouchableOpacity activeOpacity={0.9} onPress={actions.clearCompletedTodos}>
-            <Text style={style.listButton}>{msg('todos.clearCompleted')}</Text>
+
+        {onClearCompletedClicked && (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onClearCompletedClicked}
+            style={style.listButton}>
+            <Text style={style.listButtonText}>{msg.clearCompleted}</Text>
           </TouchableOpacity>
         )}
-        {!clearCompletedEnabled && clearAllEnabled && (
-          <TouchableOpacity activeOpacity={0.9} onPress={actions.clearAll}>
-            <Text style={style.listButton}>{msg('todos.clearAll')}</Text>
+
+        {onClearAllClicked && (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onClearAllClicked}
+            style={style.listButton}>
+            <Text style={style.listButtonText}>{msg.clearAll}</Text>
           </TouchableOpacity>
         )}
-        <TouchableOpacity activeOpacity={0.9} onPress={actions.addHundredTodos}>
-          <Text style={style.listButton}>{msg('todos.add100')}</Text>
-        </TouchableOpacity>
+
+        {onAddRandomTodosClicked && (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={onAddRandomTodosClicked}
+            style={style.listButton}>
+            <Text style={style.listButtonText}>{msg.add100}</Text>
+          </TouchableOpacity>
+        )}
+
       </View>
     );
   }

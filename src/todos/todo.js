@@ -8,8 +8,10 @@ const TodoRecord = Record({
 });
 
 export default class Todo extends TodoRecord {
+
   // And here we can add own getters.
-  // get titleLowerCase() {
-  //   return this.title.toLowerCase();
-  // }
+  get titleLowerCase() {
+    return this.title.toLowerCase();
+  }
+
 }

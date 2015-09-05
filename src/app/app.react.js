@@ -1,115 +1,148 @@
-import * as state from '../state';
+import React, {Settings, StatusBarIOS, View, Navigator} from 'react-native';
 import Component from '../components/component.react';
-import Header from '../components/header.react';
 import Menu from './menu.react';
-import React from 'react-native';
 import {routes, defaultRoute} from '../routes';
-import SideMenu from 'react-native-side-menu';
-import {StatusBarIOS, View, Navigator} from 'react-native';
+import {autobind} from 'core-decorators';
+import SideMenu from '../components/menu.react';
 
 import appStyle from './app.style';
 
-import '../todos/store';
+// flux
+import flux from '../lib/flux/decorate';
+import store from './store';
+import setToString from '../lib/settostring';
 
+import * as appActions from './actions';
+import * as todoActions from '../todos/actions';
+
+const registerActions = [
+  todoActions,
+  appActions
+];
+
+@flux(store)
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = this.getState();
-    this.onItemSelected = this.onItemSelected.bind(this);
-    this.handleStatusBarAppearance = this.handleStatusBarAppearance.bind(this);
-    this.configureScene = this.configureScene.bind(this);
-    this.renderScene = this.renderScene.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
-  }
-
-  getRoute(page) {
-    return routes[page];
-  }
-
-  toggleMenu() {
-    this.refs.menu.toggleMenu();
+  static propTypes = {
+    app: React.PropTypes.object.isRequired,
+    flux: React.PropTypes.object.isRequired,
+    intl: React.PropTypes.object.isRequired,
+    msg: React.PropTypes.object.isRequired,
+    todos: React.PropTypes.object.isRequired
   }
 
   componentWillMount() {
-    state.appState.on('change', () => {
-      this.setState(this.getState()); //eslint-disable-line react/no-did-mount-set-state
-    });
+    this.createActions();
+
+    StatusBarIOS.setHidden(this.props.app.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(this.props.app.statusBarStyle, false);
   }
 
-  getState() {
-     return {
-       pendingActions: state.pendingActionsCursor(),
-       todos: state.todosCursor()
-     };
-   }
+  componentDidUpdate(prevProps) {
+    // Add checks for user authentication here and redirect using this.refs...
+    // when it's neccessary
+    Settings.set({
+      state: {
+        todos: this.props.todos.toJS()
+      }
+    });
+
+    StatusBarIOS.setHidden(this.props.app.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(this.props.app.statusBarStyle, false);
+  }
+
+  createActions() {
+    const {flux} = this.props;
+
+    this.actions = registerActions.reduce((registerActions, {feature, actions, create, deps = []}) => {
+      const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
+      const featureActions = create(dispatch, ...deps);
+      setToString(feature, actions);
+      return {...registerActions, [feature]: featureActions};
+    }, {});
+  }
+
+  getInitialRoute() {
+    // Add more checks here when having user validation
+    // to show e.g login page
+    return routes[defaultRoute];
+  }
 
   onButtonPressed() {
     this.refs.menu.toggleMenu();
   }
 
-  handleStatusBarAppearance() {
-    StatusBarIOS.setHidden(!(this.refs.menu.isOpen || false), true);
-  }
-
+  @autobind
   onItemSelected(itemKey) {
-    const navigator = this.refs.navigator;
-    const route = this.getRoute(itemKey);
+    const route = routes[itemKey];
 
     if (route) {
-      const currentRoutes = navigator.getCurrentRoutes();
-      let currentRoute = currentRoutes[currentRoutes.length - 1];
-
-      // Transition only when routes are different
-      if (currentRoute.component !== route.component)
-        this.refs.navigator.replace(route);
+      this.refs.navigator.replace(route);
+      this.actions.app.toggleMenu();
     }
-
   }
 
+  @autobind
   configureScene(route) {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;
   }
 
+  @autobind
   renderScene(route, navigator) {
-    var Handler = route.component;
+    const Handler = route.component;
+    const context = navigator.navigationContext;
 
-    // This is our custom navigator we pass down to components,
-    // If you feel like some navigator methods are missing,
-    // pass them like `pop`
-    // Babel Object.assign() does not support extending objects
-    // that have ennumerable properties in the prototype chain hence
-    // we need to be explicit here
+    // Custom navigation to speed your things a little bit
+    // Feel free to add your own methods
     const navigation = {
-      goBack: navigator.pop,
+      pop: navigator.pop,
       popToTop: navigator.popToTop,
+      popBack: (index) => {
+        const routes = navigator.getCurrentRoutes();
+        navigator.popToRoute(routes[routes.length - index - 1]);
+      },
       replaceAtIndex: navigator.replaceAtIndex,
-      transitionTo: route => navigator.push(this.getRoute(route)),
-      getRoute: this.getRoute.bind(this),
-      toggleMenu: this.toggleMenu.bind(this)
+      replace: navigator.replace,
+      transitionTo: (route, passProps = {}) => navigator.push({...this.getRoute(route), passProps}),
+      getRoute: (route) => routes[route],
+      menu: this.refs.menu,
+      addListener: context.addListener.bind(context)
+    };
+
+    const props = {
+      ...this.props,
+      ...route.passProps,
+      actions: this.actions
     };
 
     return (
       <View style={[appStyle.sceneView, route.style]}>
-        <Handler navigation={navigation} {...this.state} />
+        <Handler navigation={navigation} {...props} />
       </View>
     );
   }
 
   render() {
+    const {app: {toggleStatusBar}} = this.actions;
+    const {
+      msg: {menu: msg},
+      app: {isMenuOpened}
+    } = this.props;
+
     return (
       <SideMenu
         animation='spring'
         disableGestures={true}
-        menu={<Menu onItemSelected={this.onItemSelected}/>}
-        onChange={this.handleStatusBarAppearance}
+        isOpen={isMenuOpened}
+        menu={<Menu msg={msg} onItemSelected={this.onItemSelected}/>}
+        onChange={toggleStatusBar}
         ref='menu'
-        style={appStyle.container}>
+        style={appStyle.container}
+        touchToClose={true}>
 
         <Navigator
           configureScene={this.configureScene}
-          initialRoute={this.getRoute(defaultRoute)}
-          navigationBar={<Header menuAction={this.toggleMenu} />}
+          initialRoute={this.getInitialRoute()}
           ref='navigator'
           renderScene={this.renderScene}
           style={appStyle.container}

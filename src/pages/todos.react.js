@@ -1,36 +1,55 @@
+import React, {View} from 'react-native';
 import Component from '../components/component.react';
-import immutable from 'immutable';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
-import React, {View} from 'react-native';
-
+import Header from '../components/header.react';
 import {container} from '../app/app.style';
 
 export default class Todos extends Component {
 
   static propTypes = {
-    navigation: React.PropTypes.object.isRequired,
-    pendingActions: React.PropTypes.instanceOf(immutable.Map).isRequired,
-    todos: React.PropTypes.instanceOf(immutable.Map).isRequired
+    actions: React.PropTypes.object.isRequired,
+    msg: React.PropTypes.object.isRequired,
+    todos: React.PropTypes.object.isRequired
   }
 
   render() {
-    const {todos, pendingActions, navigation} = this.props;
+    const {
+      todos,
+      actions,
+      msg: {todos: msg}
+    } = this.props;
+
     const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
 
     return (
       <View style={container}>
+
+        <Header
+          menuButtonAction={actions.app.toggleMenu}
+          title={msg.title}
+        />
+
         <TodoHeader
           leftTodos={leftTodos}
-          navigation={navigation}
+          msg={msg.leftTodos}
         />
-        <NewTodo todo={todos.get('newTodo')} />
+
+        <NewTodo
+          msg={msg.newTodo}
+          onFieldChange={actions.todos.onNewTodoFieldChange}
+          onFormSubmitted={actions.todos.addTodo}
+          todo={todos.newTodo}
+        />
+
         <List
-          editables={todos.get('editables')}
-          pendingActions={pendingActions}
-          todos={todos.get('list')}
+          actions={actions.todos}
+          editables={todos.editables}
+          msg={msg.list}
+          todos={todos.list}
         />
+
       </View>
     );
   }

@@ -25,7 +25,6 @@
 		AD7CEAB51B3C368000F78EFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7CEAAE1B3C368000F78EFF /* AppDelegate.m */; };
 		AD7CEAB61B3C368000F78EFF /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAAF1B3C368000F78EFF /* Base.lproj */; };
 		AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB11B3C368000F78EFF /* Images.xcassets */; };
-		AD7CEAB91B3C368000F78EFF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB21B3C368000F78EFF /* Info.plist */; };
 		AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB31B3C368000F78EFF /* main.jsbundle */; };
 		AD7CEABB1B3C368000F78EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7CEAB41B3C368000F78EFF /* main.m */; };
 /* End PBXBuildFile section */
@@ -502,7 +501,6 @@
 			files = (
 				AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */,
 				AD2FB01C1B4356CF00E8AD91 /* Lato-Bold.ttf in Resources */,
-				AD7CEAB91B3C368000F78EFF /* Info.plist in Resources */,
 				AD2FB01F1B4356CF00E8AD91 /* Lato-Regular.ttf in Resources */,
 				AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */,
 				AD2FB01D1B4356CF00E8AD91 /* Lato-Italic.ttf in Resources */,
