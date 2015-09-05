@@ -1,6 +1,7 @@
 import Component from '../../components/component.react';
 import FluxClass from './flux';
 import React from 'react';
+import invariant from 'invariant';
 
 // https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
 function now() {
@@ -12,6 +13,11 @@ function now() {
 }
 
 export default function flux(store) {
+
+  invariant(
+    typeof store === 'function',
+    `@flux(...): Store must be a pure function, ${typeof store} given`
+  );
 
   return BaseComponent => class Flux extends Component {
 
