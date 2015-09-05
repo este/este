@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "PFC Demo.app"
-               BlueprintName = "PFC Demo"
+               BuildableName = "este-native.app"
+               BlueprintName = "Este Native"
                ReferencedContainer = "container:este.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "PFC Demo.app"
-            BlueprintName = "PFC Demo"
+            BuildableName = "este-native.app"
+            BlueprintName = "Este Native"
             ReferencedContainer = "container:este.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,8 +77,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "PFC Demo.app"
-            BlueprintName = "PFC Demo"
+            BuildableName = "este-native.app"
+            BlueprintName = "Este Native"
             ReferencedContainer = "container:este.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -96,8 +96,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "PFC Demo.app"
-            BlueprintName = "PFC Demo"
+            BuildableName = "este-native.app"
+            BlueprintName = "Este Native"
             ReferencedContainer = "container:este.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
