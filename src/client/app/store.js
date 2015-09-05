@@ -21,7 +21,7 @@ export default function appStore(state, action, payload) {
 
   state = state
     .update('auth', (s) => authStore(s, action, payload))
-    // .update('device', (s) => deviceStore(s, action, payload))
+    .update('device', (s) => deviceStore(s, action, payload))
     .update('intl', (s) => intlStore(s, action, payload))
     .update('todos', (s) => todosStore(s, action, payload))
     .update('users', (s) => usersStore(s, action, payload));
