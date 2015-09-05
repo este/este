@@ -4,7 +4,6 @@ import Menu from './menu.react';
 import {routes, defaultRoute} from '../routes';
 import {autobind} from 'core-decorators';
 import SideMenu from '../components/menu.react';
-import ContentView from '../components/contentView.react';
 
 import appStyle from './app.style';
 
@@ -117,13 +116,9 @@ class App extends Component {
     };
 
     return (
-      <ContentView
-        isDisabled={this.props.app.isMenuOpened}
-        onDisabledTap={this.actions.app.toggleMenu}>
-        <View style={[appStyle.sceneView, route.style]}>
-          <Handler navigation={navigation} {...props} />
-        </View>
-      </ContentView>
+      <View style={[appStyle.sceneView, route.style]}>
+        <Handler navigation={navigation} {...props} />
+      </View>
     );
   }
 
@@ -142,7 +137,8 @@ class App extends Component {
         menu={<Menu msg={msg} onItemSelected={this.onItemSelected}/>}
         onChange={toggleStatusBar}
         ref='menu'
-        style={appStyle.container}>
+        style={appStyle.container}
+        touchToClose={true}>
 
         <Navigator
           configureScene={this.configureScene}
