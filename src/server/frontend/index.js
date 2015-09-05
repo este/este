@@ -3,6 +3,7 @@ import compression from 'compression';
 import config from '../config';
 import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
+import device from 'express-device';
 import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
 import userState from './userstate';
@@ -28,10 +29,18 @@ app.use(intlMiddleware({
 }));
 
 // Load state extras for current user.
+app.use(device.capture());
 app.use(userState());
 
 app.get('*', (req, res, next) => {
-  render(req, res, req.userState, {intl: req.intl})
+  const userState = {
+    ...req.userState,
+    app: {
+      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
+    },
+    intl: req.intl
+  };
+  render(req, res, userState)
     .catch(next);
 });
 

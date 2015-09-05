@@ -4,7 +4,7 @@ import IntlRelativeFormat from 'intl-relativeformat';
 const cachedFormatters = Object.create(null);
 const intlRelativeFormat = new IntlRelativeFormat;
 
-export default function(state, action, payload) {
+export default function intlStore(state, action, payload) {
   if (!action) return state.toJS();
   return state;
 }
