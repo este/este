@@ -21,7 +21,7 @@ function getRandomTodos(howMuch) {
   }).toArray();
 }
 
-export default function(state = initialState, action, payload) {
+export default function todoStore(state = initialState, action, payload) {
   if (!action) return revive(state);
 
   switch (action) {

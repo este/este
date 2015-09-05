@@ -10,7 +10,7 @@ const initialState = new (Record({
 const disableForm = (state, disable) =>
   state.setIn(['form', 'disabled'], disable);
 
-export default function(state = initialState, action, payload) {
+export default function authStore(state = initialState, action, payload) {
   if (!action) return state;
 
   switch (action) {
