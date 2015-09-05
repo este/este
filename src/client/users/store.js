@@ -10,7 +10,7 @@ function revive(state) {
   }));
 }
 
-export default function userStore(state, action, payload) {
+export default function usersStore(state, action, payload) {
   if (!action) return revive(state);
 
   switch (action) {
