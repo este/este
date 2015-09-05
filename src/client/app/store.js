@@ -1,39 +1,36 @@
 import immutable, {Record} from 'immutable';
 
-// Import stores
+// Import stores.
 import authStore from '../auth/store';
 import intlStore from '../intl/store';
 import todosStore from '../todos/store';
 import usersStore from '../users/store';
 
-const initialState = new (Record({
+const deviceInitialState = new (Record({
   isMobile: false
 }));
 
-const revive = state => initialState.merge(state);
-
-function appStore(state = initialState, action, payload) {
-  if (!action) return revive(state);
-  return state;
+function deviceStore(state, action, payload) {
+  if (action) return state;
+  return deviceInitialState.merge(state);
 }
 
-export default function registerStores(state, action, payload) {
+export default function appStore(state, action, payload) {
   // Create immutable from JSON asap to prevent side effects accidents.
   if (!action) state = immutable.fromJS(state);
 
-  // Btw, this can be refactored, but leaving it explicit for now.
   state = state
-    .update('app', (s) => appStore(s, action, payload))
     .update('auth', (s) => authStore(s, action, payload))
+    // .update('device', (s) => deviceStore(s, action, payload))
     .update('intl', (s) => intlStore(s, action, payload))
     .update('todos', (s) => todosStore(s, action, payload))
     .update('users', (s) => usersStore(s, action, payload));
 
-  // We can reduce and compose stores. Note we don't need no waitFor.
+  // Stores can be both reduced and composed.
   state = state
-    // Reduced store.
+    // Reduce intl store.
     .update('msg', (s) => state.get('intl').messages);
-    // Composed store example:
+    // Compose new store from auth.
     // .update('foo', (s) => fooStore(s, state.get('auth'), action, payload));
 
   return state;

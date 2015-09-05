@@ -1,9 +1,9 @@
 // import favicon from 'serve-favicon';
 import compression from 'compression';
 import config from '../config';
+import device from 'express-device';
 import esteHeaders from '../lib/estemiddleware';
 import express from 'express';
-import device from 'express-device';
 import intlMiddleware from '../lib/intlmiddleware';
 import render from './render';
 import userState from './userstate';
@@ -33,15 +33,13 @@ app.use(device.capture());
 app.use(userState());
 
 app.get('*', (req, res, next) => {
-  const userState = {
-    ...req.userState,
-    app: {
+  const userState = req.userState.merge({
+    device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
     },
     intl: req.intl
-  };
-  render(req, res, userState)
-    .catch(next);
+  });
+  render(req, res, userState).catch(next);
 });
 
 app.on('mount', () => {
