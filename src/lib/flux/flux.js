@@ -11,10 +11,6 @@ export default class Flux extends EventEmitter {
   }
 
   dispatch(action, payload, meta?) {
-    if (Array.isArray(action)) {
-      return action.forEach(action => this.dispatch(action, payload, meta));
-    }
-    console.log(`Dispatching ${action.toString()}`);
     this.state = this.store(this.state, action, payload);
     this.emit('dispatch', this.state, action, payload, meta);
   }

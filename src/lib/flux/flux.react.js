@@ -1,37 +1,45 @@
-import Flux from './flux';
+import Component from '../../components/component.react';
+import FluxClass from './flux';
 import React from 'react-native';
+import {autobind} from 'core-decorators';
 
-export default function decorate(store) {
+// https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now?hl=en
+function now() {
+  return Date.now();
+}
 
-  return BaseComponent => class Decorator extends React.Component {
+export default function flux(store) {
+
+  return BaseComponent => class Flux extends Component {
 
     static propTypes = {
       initialState: React.PropTypes.object
-    }
-
-    constructor(props) {
-      super(props);
-      this.onFluxDispatch = this.onFluxDispatch.bind(this);
     }
 
     componentWillMount() {
       this.fluxify();
     }
 
+    // Always use componentWillUnmount where componentWillMount is used.
     componentWillUnmount() {
       this.flux.removeListener('dispatch', this.onFluxDispatch);
     }
 
     fluxify() {
       if (this.flux) this.flux.removeListener('dispatch', this.onFluxDispatch);
-      this.flux = new Flux(store, this.props.initialState);
+      this.flux = new FluxClass(store, this.props.initialState);
       this.flux.on('dispatch', this.onFluxDispatch);
       this.onFluxDispatch();
     }
 
+    @autobind
     onFluxDispatch() {
       const state = {...this.flux.state.toObject(), flux: this.flux};
-      this.setState(state);
+      const start = now();
+      this.setState(state, () => {
+        const total = now() - start;
+        this.flux.emit('render', total);
+      });
     }
 
     componentWillReceiveProps() {

@@ -4,11 +4,11 @@ import Menu from './menu.react';
 import {routes, defaultRoute} from '../routes';
 import {autobind} from 'core-decorators';
 import SideMenu from '../components/menu.react';
-
+import {env} from '../config';
 import appStyle from './app.style';
 
 // flux
-import flux from '../lib/flux/decorate';
+import flux from '../lib/flux/flux.react';
 import store from './store';
 import setToString from '../lib/settostring';
 
@@ -33,6 +33,11 @@ class App extends Component {
 
   componentWillMount() {
     this.createActions();
+
+    if (env === 'development')
+      this.props.flux.on('render', total => {
+        console.log(`App re-rendered in ${total} ms`); // eslint-disable-line no-console
+      });
 
     StatusBarIOS.setHidden(this.props.app.isStatusBarHidden, true);
     StatusBarIOS.setStyle(this.props.app.statusBarStyle, false);
