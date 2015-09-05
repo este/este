@@ -10,5 +10,5 @@ const devConfig = {
 };
 
 export default __DEV__
-  ? {...prodConfig, ...devConfig}
-  : prodConfig;
+  ? devConfig
+  : {...devConfig, ...prodConfig};
