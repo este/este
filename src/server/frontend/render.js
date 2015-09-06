@@ -77,23 +77,13 @@ function getPageHtml(Handler, appState, {hostname, needIntlPolyfill}) {
     <script src="${appScriptSrc}"></script>
   `;
 
-  if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
-    scriptHtml += `
-      <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','${config.googleAnalyticsId}');ga('send','pageview');
-      </script>`;
-
   const title = DocumentTitle.rewind();
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html
       appCssHash={config.assetsHashes.appCss}
       bodyHtml={appHtml + scriptHtml}
+      googleAnalyticsId={config.googleAnalyticsId}
       isProduction={config.isProduction}
       title={title}
     />
