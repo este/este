@@ -59,11 +59,7 @@ module.exports = function(isDevelopment) {
         test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
       }, {
         exclude: /node_modules/,
-        loaders: isDevelopment ? [
-          'react-hot', 'babel-loader'
-        ] : [
-          'babel-loader'
-        ],
+        loaders: ['babel'],
         test: /\.js$/
       }].concat(stylesLoaders())
     },
