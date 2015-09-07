@@ -80,12 +80,10 @@
     "validator": "^4.0.5",
     "webpack": "^1.12.1",
     "webpack-dev-server": "^1.10.1",
-    "yargs": "^3.24.0"
-  },
-  "devDependencies": {
+    "yargs": "^3.24.0",
+    "express-device": "^0.4.1",
     "babel-plugin-react-transform": "^1.0.3",
     "delicate-error-reporter": "0.0.5",
-    "express-device": "^0.4.1",
     "react-transform-catch-errors": "^0.1.1",
     "react-transform-webpack-hmr": "^0.1.4",
     "redbox-react": "^1.0.1"
