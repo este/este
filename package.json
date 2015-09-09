@@ -2,7 +2,6 @@
   "name": "este-app",
   "description": "The most complete dev stack for React/Flux universal web apps.",
   "author": "Daniel Steigerwald",
-  "version": "10.0.0",
   "private": true,
   "scripts": {
     "postinstall": "gulp build --production",
