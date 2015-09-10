@@ -8,18 +8,22 @@
     // Stage 0 - Strawman
     "es7.functionBind"
   ],
-  "plugins": [
-    "react-transform"
-  ],
-  "extra": {
-    "react-transform": [{
-      "target": "react-transform-webpack-hmr",
-      "imports": ["react"],
-      "locals": ["module"]
-    }, {
-      "target": "react-transform-catch-errors",
-      // https://github.com/KeywordBrain/redbox-react/issues/11
-      "imports": ["react", "delicate-error-reporter"]
-    }]
+  "env": {
+    "development": {
+      "plugins": [
+        "react-transform"
+      ],
+      "extra": {
+        "react-transform": [{
+          "target": "react-transform-webpack-hmr",
+          "imports": ["react"],
+          "locals": ["module"]
+        }, {
+          "target": "react-transform-catch-errors",
+          // https://github.com/KeywordBrain/redbox-react/issues/11
+          "imports": ["react", "delicate-error-reporter"]
+        }]
+      }
+    }
   }
 }
