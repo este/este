@@ -1,5 +1,6 @@
 'use strict';
 
+var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 var NotifyPlugin = require('./notifyplugin');
@@ -26,7 +27,7 @@ module.exports = function(isDevelopment) {
 
   function stylesLoaders() {
     return Object.keys(loaders).map(function(ext) {
-      var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version';
+      var prefix = 'css-loader!postcss-loader';
       var extLoaders = prefix + loaders[ext];
       var loader = isDevelopment
         ? 'style-loader!' + extLoaders
@@ -119,6 +120,9 @@ module.exports = function(isDevelopment) {
       );
       return plugins;
     })(),
+    postcss: function() {
+      return [autoprefixer({browsers: 'last 2 version'})];
+    },
     resolve: {
       extensions: ['', '.js', '.json'],
       modulesDirectories: ['src', 'node_modules'],
