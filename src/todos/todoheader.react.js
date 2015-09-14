@@ -1,10 +1,10 @@
 import React, {Text, View} from 'react-native';
 import {format} from '../intl/store';
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 
 import style from './todoheader.style';
 
-export default class TodoHeader extends Component {
+export default class TodoHeader extends PureComponent {
 
   static propTypes = {
     leftTodos: React.PropTypes.number,

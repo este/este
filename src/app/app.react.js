@@ -1,75 +1,39 @@
-import React, {Settings, StatusBarIOS, View, Navigator} from 'react-native';
-import Component from '../components/component.react';
+import React, {StatusBarIOS, View, Navigator} from 'react-native';
+import {PureComponent} from 'react-pure-render';
 import Menu from './menu.react';
 import {routes, defaultRoute} from '../routes';
 import {autobind} from 'core-decorators';
 import SideMenu from '../components/menu.react';
-import {env} from '../config';
 import appStyle from './app.style';
+import {toggleStatusBar, toggleMenu} from './actions';
+import {connect} from 'react-redux';
+import {appSettings} from './selectors';
 
-// flux
-import flux from '../lib/flux/flux.react';
-import store from './store';
-import setToString from '../lib/settostring';
-
-import * as appActions from './actions';
-import * as todoActions from '../todos/actions';
-
-const registerActions = [
-  todoActions,
-  appActions
-];
-
-@flux(store)
-class App extends Component {
+@connect(appSettings)
+export default class App extends PureComponent {
 
   static propTypes = {
-    app: React.PropTypes.object.isRequired,
-    flux: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
     intl: React.PropTypes.object.isRequired,
+    isMenuOpened: React.PropTypes.bool,
+    isStatusBarHidden: React.PropTypes.bool,
     msg: React.PropTypes.object.isRequired,
-    todos: React.PropTypes.object.isRequired
+    statusBarStyle: React.PropTypes.string
   }
 
   componentWillMount() {
-    this.createActions();
-
-    if (env === 'development')
-      this.props.flux.on('render', total => {
-        console.log(`App re-rendered in ${total} ms`); // eslint-disable-line no-console
-      });
-
-    StatusBarIOS.setHidden(this.props.app.isStatusBarHidden, true);
-    StatusBarIOS.setStyle(this.props.app.statusBarStyle, false);
+    StatusBarIOS.setHidden(this.props.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(this.props.statusBarStyle, false);
   }
 
   componentDidUpdate(prevProps) {
-    // Add checks for user authentication here and redirect using this.refs...
-    // when it's neccessary
-    Settings.set({
-      state: {
-        todos: this.props.todos.toJS()
-      }
-    });
-
-    StatusBarIOS.setHidden(this.props.app.isStatusBarHidden, true);
-    StatusBarIOS.setStyle(this.props.app.statusBarStyle, false);
+    StatusBarIOS.setHidden(this.props.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(this.props.statusBarStyle, false);
   }
 
-  createActions() {
-    const {flux} = this.props;
-
-    this.actions = registerActions.reduce((registerActions, {feature, actions, create, deps = []}) => {
-      const dispatch = (action, payload) => flux.dispatch(action, payload, {feature});
-      const featureActions = create(dispatch, ...deps);
-      setToString(feature, actions);
-      return {...registerActions, [feature]: featureActions};
-    }, {});
-  }
-
+  // Add more checks here when having user validation
+  // to show e.g login page
   getInitialRoute() {
-    // Add more checks here when having user validation
-    // to show e.g login page
     return routes[defaultRoute];
   }
 
@@ -83,7 +47,7 @@ class App extends Component {
 
     if (route) {
       this.refs.navigator.replace(route);
-      this.actions.app.toggleMenu();
+      this.props.dispatch(toggleMenu());
     }
   }
 
@@ -128,22 +92,22 @@ class App extends Component {
   }
 
   render() {
-    const {app: {toggleStatusBar}} = this.actions;
     const {
+      dispatch,
       msg: {menu: msg},
-      app: {isMenuOpened}
+      isMenuOpened
     } = this.props;
 
     return (
       <SideMenu
         animation='spring'
-        disableGestures={true}
+        disableGestures
         isOpen={isMenuOpened}
         menu={<Menu msg={msg} onItemSelected={this.onItemSelected}/>}
-        onChange={toggleStatusBar}
+        onChange={_ => dispatch(toggleStatusBar())}
         ref='menu'
         style={appStyle.container}
-        touchToClose={true}>
+        touchToClose>
 
         <Navigator
           configureScene={this.configureScene}
@@ -159,5 +123,3 @@ class App extends Component {
   }
 
 }
-
-export default App;

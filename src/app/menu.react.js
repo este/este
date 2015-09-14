@@ -1,10 +1,10 @@
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 import React from 'react-native';
 import {ScrollView, Text} from 'react-native';
 
 import styles from './menu.style';
 
-export default class Menu extends Component {
+export default class Menu extends PureComponent {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired,

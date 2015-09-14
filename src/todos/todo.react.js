@@ -1,11 +1,11 @@
 import React, {TouchableOpacity, Image, View} from 'react-native';
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 import Input from '../components/input.react';
 import Todo from './todo';
 
 import style from './todo.style.js';
 
-export default class TodoItem extends Component {
+export default class TodoItem extends PureComponent {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,

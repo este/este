@@ -1,12 +1,12 @@
 import Buttons from './buttons.react';
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import React, {View, Text, ScrollView, Image} from 'react-native';
 
 import style from './list.style';
 
-export default class List extends Component {
+export default class List extends PureComponent {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,

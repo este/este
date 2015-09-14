@@ -1,11 +1,11 @@
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 import Todo from './todo';
 import Input from '../components/input.react';
 import React, {View} from 'react-native';
 
 import {style, placeholderTextColor} from './newtodo.style';
 
-export default class NewTodo extends Component {
+export default class NewTodo extends PureComponent {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired,

@@ -1,10 +1,10 @@
-import Component from '../components/component.react';
 import React, {View, Text} from 'react-native';
+import {PureComponent} from 'react-pure-render';
 import Header from '../components/header.react';
 
 import * as style from '../app/app.style';
 
-export default class Home extends Component {
+export default class Home extends PureComponent {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,

@@ -1,9 +1,9 @@
 import React, {Text, View, Image, TouchableOpacity} from 'react-native';
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 
 import style from './header.style';
 
-export default class Header extends Component {
+export default class Header extends PureComponent {
 
   static propTypes = {
     backButtonAction: React.PropTypes.func,

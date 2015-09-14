@@ -1,12 +1,12 @@
 import React, {View} from 'react-native';
-import Component from '../components/component.react';
+import {PureComponent} from 'react-pure-render';
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
 import {container} from '../app/app.style';
 
-export default class Todos extends Component {
+export default class Todos extends PureComponent {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
