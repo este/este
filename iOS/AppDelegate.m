@@ -19,7 +19,8 @@
   //  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   // Sometimes you want your users to get few todos by default when they launch the app
-  // for the first time
+  // for the first time, you can load here other settings/properties and results of sync requests, 
+  // like [[UIDevice currentDevice] identifierForVendor] etc
   NSMutableDictionary *initialState = [NSMutableDictionary dictionaryWithDictionary:@{
     @"todos": @{
       @"list": @[
@@ -29,9 +30,7 @@
     }
   }];
 
-  // Let's load user defaults we saved previously
-  // and merge them into initial state
-  // you can perform other async actions here, up to you
+  // Let's load user defaults we saved previously with Settings
   NSDictionary *userState = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"state"];
   [initialState addEntriesFromDictionary:userState];
 
