@@ -41,6 +41,7 @@
     "react-pure-render": "^1.0.2"
   },
   "dependencies": {
+    "lodash.assign": "^3.2.0",
     "react-redux": "^2.1.2",
     "redux": "^3.0.0",
     "reselect": "^1.0.0"

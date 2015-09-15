@@ -1,50 +1,67 @@
 import React, {View} from 'react-native';
+import connect from '../lib/connect';
+import {bindActionCreators} from 'redux';
 import {PureComponent} from 'react-pure-render';
+
+// Styles
+import {container} from '../app/app.style';
+
+// Selectors
+import {selectTranslations} from '../lib/intl';
+import {selectVisibleTodos, selectLeftTodos} from '../todos/selectors';
+
+// Actions
+import {toggleMenu} from '../app/actions';
+import * as TodoActionCreators from '../todos/actions';
+
+// Components
 import List from '../todos/list.react';
 import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
-import {container} from '../app/app.style';
 
+@connect(selectTranslations, selectVisibleTodos, selectLeftTodos)
 export default class Todos extends PureComponent {
 
   static propTypes = {
-    actions: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+    leftTodos: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     todos: React.PropTypes.object.isRequired
   }
 
   render() {
     const {
+      dispatch,
       todos,
-      actions,
+      leftTodos,
       msg: {todos: msg}
     } = this.props;
 
-    const leftTodos = todos.get('list').filter(todo => !todo.completed).size;
+    const todoActions = bindActionCreators(TodoActionCreators, dispatch);
 
     return (
       <View style={container}>
 
         <Header
-          menuButtonAction={actions.app.toggleMenu}
+          menuButtonAction={_ => dispatch(toggleMenu())}
           title={msg.title}
         />
 
         <TodoHeader
-          leftTodos={leftTodos}
+          leftTodos={leftTodos.size}
           msg={msg.leftTodos}
         />
 
         <NewTodo
           msg={msg.newTodo}
-          onFieldChange={actions.todos.onNewTodoFieldChange}
-          onFormSubmitted={actions.todos.addTodo}
+          onFieldChange={todoActions.onNewTodoFieldChange}
+          onFormSubmitted={todoActions.addTodo}
           todo={todos.newTodo}
         />
 
         <List
-          actions={actions.todos}
+          actions={todoActions}
           editables={todos.editables}
           msg={msg.list}
           todos={todos.list}
