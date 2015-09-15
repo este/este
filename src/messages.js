@@ -28,9 +28,7 @@ export default {
     },
     home: {
       title: 'Home',
-      text: `App starter kit for Este.js. \n\n
-             Open left menu and check todos! \n\n 
-             Press CMD+R to reload \n Press CMD+D for debug menu`
+      text: `App starter kit for Este.js. \n\n Open left menu and check todos! \n\nPress CMD+R to reload \n Press CMD+D for debug menu`
     },
     menu: {
       examples: 'Examples',
@@ -58,15 +56,6 @@ export default {
         todos: 'You have {size} tasks to go!',
         emptyList: 'Nothing, enjoy'
       }
-    },
-    validation: {
-      email: `Email address is not valid.`,
-      password: `Password must contain at least {minLength} characters.`,
-      required: `Please fill out {prop, select,
-        email {email}
-        password {password}
-        other {'{prop}'}
-      }.`
     }
   },
   pl: {
@@ -98,10 +87,7 @@ export default {
     },
     home: {
       title: 'Strona główna',
-      text: `Zestaw startowy do Este.js aplikacji. \n\n 
-             Otwórz menu po lewej stronie i sprawdź todos! \n\n 
-             Naciśnij CMD + R, aby przeładować naciśnij CMD + D by otworzyć menu
-             do debuggowania`
+      text: `Zestaw startowy do Este.js aplikacji. \n\n Otwórz menu po lewej stronie i sprawdź todos! \n\n Naciśnij CMD + R, aby przeładować naciśnij CMD + D by otworzyć menu do debuggowania`
     },
     menu: {
       examples: 'Przykłady',
@@ -128,15 +114,6 @@ export default {
         oneTodo: 'Prawie gotowe',
         todos: 'Pozostało {length} zadań!',
         emptyList: 'Wszystko zrobione'
-      }
-    },
-    validation: {
-      email: 'Adres email nie jest prawidłowy.',
-      password: 'Hasło musi zawierać co najmniej {minLength} znaków.',
-      required: `Prosimy o wypełnienie {prop, select,
-        email {email}
-        password {password}
-        other {\'{prop}\'}`
       }
     }
   }
