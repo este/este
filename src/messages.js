@@ -114,7 +114,7 @@ export default {
       },
       leftTodos: {
         oneTodo: 'Prawie gotowe',
-        todos: 'Pozostało {length} zadań!',
+        todos: 'Pozostało {size} zadań!',
         emptyList: 'Wszystko zrobione'
       }
     }
