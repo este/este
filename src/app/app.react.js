@@ -15,7 +15,6 @@ export default class App extends PureComponent {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    intl: React.PropTypes.object.isRequired,
     isMenuOpened: React.PropTypes.bool,
     isStatusBarHidden: React.PropTypes.bool,
     msg: React.PropTypes.object.isRequired,

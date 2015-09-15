@@ -55,8 +55,8 @@ export default class List extends PureComponent {
         <Buttons
           msg={msg.buttons}
           onAddRandomTodosClicked={actions.addHundredTodos}
-          onClearAllClicked={!hasCompletedTodos ? actions.clearAll : null}
-          onClearCompletedClicked={hasCompletedTodos ? actions.clearCompleted : null}
+          onClearAllClicked={!hasCompletedTodos ? actions.clearAllTodos : null}
+          onClearCompletedClicked={hasCompletedTodos ? actions.clearCompletedTodos : null}
         />
       </ScrollView>
     );

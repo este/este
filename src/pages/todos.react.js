@@ -8,7 +8,7 @@ import {container} from '../app/app.style';
 
 // Selectors
 import {selectTranslations} from '../intl/selectors';
-import {selectVisibleTodos, selectLeftTodos} from '../todos/selectors';
+import {selectVisibleTodos, selectNewTodo, selectLeftTodos} from '../todos/selectors';
 
 // Actions
 import {toggleMenu} from '../app/actions';
@@ -20,20 +20,24 @@ import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
 
-@connect(selectTranslations, selectVisibleTodos, selectLeftTodos)
+@connect(selectTranslations, selectVisibleTodos, selectNewTodo, selectLeftTodos)
 export default class Todos extends PureComponent {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
+    hasCompletedTodos: React.PropTypes.bool,
     leftTodos: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
-    todos: React.PropTypes.object.isRequired
+    newTodo: React.PropTypes.object.isRequired,
+    visibleTodos: React.PropTypes.object.isRequired
   }
 
   render() {
     const {
       dispatch,
-      todos,
+      newTodo,
+      visibleTodos,
+      hasCompletedTodos,
       leftTodos,
       msg: {todos: msg}
     } = this.props;
@@ -57,14 +61,14 @@ export default class Todos extends PureComponent {
           msg={msg.newTodo}
           onFieldChange={todoActions.onNewTodoFieldChange}
           onFormSubmitted={todoActions.addTodo}
-          todo={todos.newTodo}
+          todo={newTodo}
         />
 
         <List
           actions={todoActions}
-          editables={todos.editables}
           msg={msg.list}
-          todos={todos.list}
+          todos={visibleTodos}
+          hasCompletedTodos={hasCompletedTodos}
         />
 
       </View>

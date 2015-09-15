@@ -3,6 +3,8 @@ import Todo from './Todo';
 import getRandomString from '../lib/getrandomstring';
 import {Range, Record, List} from 'immutable';
 
+console.log(getRandomString);
+
 const initialState = new (Record({
   list: List([]),
   newTodo: new Todo
@@ -33,15 +35,16 @@ export default function todoReducer(state = initialState, action) {
     case actions.ADD_TODO:
       return state
         .update('list', (list) => {
-          const todo = action.payload;
-          const newTodo = todo.merge({
-            id: getRandomString()
-          });
-          return list.push(newTodo);
+          const {title} = action.payload;
+          const todo = {
+            id: getRandomString(),
+            title
+          };
+          return list.push(new Todo(todo));
         })
         .set('newTodo', new Todo);
 
-    case actions.CLEAR_ALL:
+    case actions.CLEAR_ALL_TODOS:
       return initialState;
 
     case actions.DELETE_TODO: {

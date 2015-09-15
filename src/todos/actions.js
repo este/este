@@ -37,7 +37,7 @@ export function addTodo(todo) {
   };
 };
 
-export function clearAll() {
+export function clearAllTodos() {
   return {
     type: CLEAR_ALL_TODOS
   };
