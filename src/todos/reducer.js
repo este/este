@@ -22,15 +22,16 @@ export default function todoReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.ADD_HUNDRED_TODOS:
-      return state.update('list', list => list.withMutations(list => {
-        list.concat(Range(0, 100).map(i => {
-          const id = getRandomString();
-          return new Todo({
-            id,
-            title: `Item #${id}`
-          });
-        }));
-      }));
+      return state.update('list', list => list
+        .concat(
+          Range(0, 100).map(i => {
+            const id = getRandomString();
+            return new Todo({
+              id,
+              title: `Item #${id}`
+            });
+          })
+        ));
 
     case actions.ADD_TODO:
       return state
