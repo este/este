@@ -1,6 +1,7 @@
 import React, {Text, View, Image, TouchableOpacity} from 'react-native';
 import PureComponent from '../components/component.react';
 
+// Styles
 import style from './header.style';
 
 export default class Header extends PureComponent {

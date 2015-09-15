@@ -4,6 +4,7 @@ import Todo from './todo.react';
 import immutable from 'immutable';
 import React, {View, Text, ScrollView, Image} from 'react-native';
 
+// Styles
 import style from './list.style';
 
 export default class List extends PureComponent {

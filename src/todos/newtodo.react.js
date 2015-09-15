@@ -3,6 +3,7 @@ import Todo from './Todo';
 import Input from '../components/input.react';
 import React, {View} from 'react-native';
 
+// Styles
 import {style, placeholderTextColor} from './newtodo.style';
 
 export default class NewTodo extends PureComponent {

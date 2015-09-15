@@ -1,6 +1,7 @@
 import React, {View, TouchableOpacity, Text} from 'react-native';
 import PureComponent from '../components/component.react';
 
+// Styles
 import style from './buttons.style';
 
 export default class TodoButtons extends PureComponent {

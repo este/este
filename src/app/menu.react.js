@@ -2,6 +2,7 @@ import PureComponent from '../components/component.react';
 import React from 'react-native';
 import {ScrollView, Text} from 'react-native';
 
+// Styles
 import styles from './menu.style';
 
 export default class Menu extends PureComponent {
