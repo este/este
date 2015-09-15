@@ -21,10 +21,12 @@
   // Sometimes you want your users to get few todos by default when they launch the app
   // for the first time
   NSMutableDictionary *initialState = [NSMutableDictionary dictionaryWithDictionary:@{
-    @"list": @[
-      @{@"id": @1, @"title": @"Buy a cat"},
-      @{@"id": @2, @"title": @"Buy another cat"}
-    ]
+    @"todos": @{
+      @"list": @[
+        @{@"id": @1, @"title": @"Buy a cat"},
+        @{@"id": @2, @"title": @"Buy another cat"}
+      ]
+    }
   }];
 
   // Let's load user defaults we saved previously

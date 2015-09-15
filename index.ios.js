@@ -2,7 +2,7 @@
 import './src/lib/polyfill.js';
 import './node_modules/intl/index.js';
 import './node_modules/intl/locale-data/jsonp/en.js';
-import React, {AppRegistry} from 'react-native';
+import React, {AppRegistry, Settings} from 'react-native';
 import App from './src/app/app.react';
 import {reviveState} from './src/app/actions';
 
@@ -18,7 +18,17 @@ class Root extends React.Component {
 
   componentWillMount() {
     const {initialState} = this.props;
+
     store.dispatch(reviveState(initialState));
+
+    store.subscribe(() => {
+      const {todos} = store.getState();
+      Settings.set({
+        state: {
+          todos: todos.toJS()
+        }
+      });
+    });
   }
 
   render() {
