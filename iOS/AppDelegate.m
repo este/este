@@ -20,8 +20,11 @@
 
   // Sometimes you want your users to get few todos by default when they launch the app
   // for the first time, you can load here other settings/properties and results of sync requests, 
-  // like [[UIDevice currentDevice] identifierForVendor] etc
+  // like getting preferred language
   NSMutableDictionary *initialState = [NSMutableDictionary dictionaryWithDictionary:@{
+    @"intl": @{
+      @"selectedLanguage": [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0]
+    },
     @"todos": @{
       @"list": @[
         @{@"id": @1, @"title": @"Buy a cat"},
