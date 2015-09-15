@@ -8,8 +8,9 @@
 - Intl support and other polyfills made easy
 - PureRender all the way down
 - Efficient state serialisation
-- Flux
-- Store reducers
+- Redux
+- Reducers
+- Language detection and switching
 - Immutable app state
 - Powerful "React Router" like routing library
 
