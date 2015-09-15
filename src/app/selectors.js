@@ -1,1 +1,1 @@
-export const appSettings = ({app}) => app.toJS();
+export const selectSettings = ({app}) => app.toJS();

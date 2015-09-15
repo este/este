@@ -3,8 +3,6 @@ import Todo from './Todo';
 import getRandomString from '../lib/getrandomstring';
 import {Range, Record, List} from 'immutable';
 
-console.log(getRandomString);
-
 const initialState = new (Record({
   list: List([]),
   newTodo: new Todo

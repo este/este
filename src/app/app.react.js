@@ -1,16 +1,24 @@
 import React, {StatusBarIOS, View, Navigator} from 'react-native';
 import PureComponent from '../components/component.react';
-import Menu from './menu.react';
-import {routes, defaultRoute} from '../routes';
 import {autobind} from 'core-decorators';
-import SideMenu from '../components/menu.react';
-import appStyle from './app.style';
-import {toggleStatusBar, toggleMenu} from './actions';
 import connect from '../lib/connect';
-import {appSettings} from './selectors';
+
+// Components
+import Menu from './menu.react';
+import SideMenu from '../components/menu.react';
+import {routes, defaultRoute} from '../routes';
+
+// Styles
+import appStyle from './app.style';
+
+// Actions
+import {toggleStatusBar, toggleMenu} from './actions';
+
+// Selectors
+import {selectSettings} from './selectors';
 import {selectTranslations} from '../intl/selectors';
 
-@connect(appSettings, selectTranslations)
+@connect(selectSettings, selectTranslations)
 export default class App extends PureComponent {
 
   static propTypes = {

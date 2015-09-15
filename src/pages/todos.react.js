@@ -66,9 +66,9 @@ export default class Todos extends PureComponent {
 
         <List
           actions={todoActions}
+          hasCompletedTodos={hasCompletedTodos}
           msg={msg.list}
           todos={visibleTodos}
-          hasCompletedTodos={hasCompletedTodos}
         />
 
       </View>
