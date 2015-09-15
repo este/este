@@ -5,6 +5,7 @@ import {REVIVE_STATE} from '../app/actions';
 
 const initialState = new (Record({
   messages: messages,
+  availableLanguages: ['en', 'pl'],
   selectedLanguage: 'en',
   defaultLanguage: 'en'
 }));
@@ -21,7 +22,7 @@ export default function intlStore(state = initialState, action) {
       const {locale} = action.payload;
       return state.set('selectedLanguage', locale);
     }
-    
+
     case REVIVE_STATE: {
       const {intl} = action.payload;
       return intl ? revive(intl) : state;

@@ -36,7 +36,8 @@ export default {
       login: 'Login',
       me: 'Me (protected)',
       todos: 'Todos',
-      link: 'Menu'
+      link: 'Menu',
+      selectLanguage: 'Select language'
     },
     todos: {
       newTodo: {
@@ -94,8 +95,9 @@ export default {
       home: 'Strona główna',
       login: 'Zgłoś się do systemu',
       me: 'Mnie (chronione)',
-      todos: 'Todos',
-      link: 'Menu'
+      todos: 'Zadania',
+      link: 'Menu',
+      selectLanguage: 'Wybierz język'
     },
     todos: {
       newTodo: {

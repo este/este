@@ -13,6 +13,7 @@ import appStyle from './app.style';
 
 // Actions
 import {toggleStatusBar, toggleMenu} from './actions';
+import {selectLanguage} from '../intl/actions';
 
 // Selectors
 import {selectSettings} from './selectors';
@@ -22,6 +23,7 @@ import {selectTranslations} from '../intl/selectors';
 export default class App extends PureComponent {
 
   static propTypes = {
+    availableLanguages: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     isMenuOpened: React.PropTypes.bool,
     isStatusBarHidden: React.PropTypes.bool,
@@ -101,17 +103,27 @@ export default class App extends PureComponent {
 
   render() {
     const {
+      availableLanguages,
       dispatch,
       msg: {menu: msg},
       isMenuOpened
     } = this.props;
+
+    const menu = (
+      <Menu
+        availableLanguages={availableLanguages}
+        msg={msg}
+        onItemSelected={this.onItemSelected}
+        onLanguageSelected={lang => dispatch(selectLanguage(lang))}
+      />
+    );
 
     return (
       <SideMenu
         animation='spring'
         disableGestures
         isOpen={isMenuOpened}
-        menu={<Menu msg={msg} onItemSelected={this.onItemSelected}/>}
+        menu={menu}
         onChange={_ => dispatch(toggleStatusBar())}
         ref='menu'
         style={appStyle.container}
