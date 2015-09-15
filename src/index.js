@@ -11,7 +11,8 @@ export default class Root extends React.Component {
   static propTypes = {
     initialState: React.PropTypes.object
   }
-
+  
+  // @todo performance, use compose instead of willMount hook
   componentWillMount() {
     const {initialState} = this.props;
 
