@@ -1,4 +1,5 @@
 import * as actions from './actions';
+import {REVIVE_STATE} from '../app/actions';
 import Todo from './Todo';
 import getRandomString from '../lib/getrandomstring';
 import {Range, Record, List} from 'immutable';
@@ -9,13 +10,11 @@ const initialState = new (Record({
 }));
 
 const revive = state => initialState.merge({
-  list: state.get('list').map(todo => new Todo(todo)),
-  newTodo: new Todo(state.get('newTodo'))
+  list: state.list.map(todo => new Todo(todo)),
+  newTodo: new Todo(state.newTodo)
 });
 
 export default function todoReducer(state = initialState, action) {
-
-  if (!(state instanceof Record)) return revive(state);
 
   switch (action.type) {
 
@@ -77,6 +76,11 @@ export default function todoReducer(state = initialState, action) {
     case actions.CLEAR_COMPLETED_TODOS:
       return state
         .update('list', list => list.filter(todo => !todo.completed));
+
+    case REVIVE_STATE: {
+      const {todos} = action.payload;
+      return todos ? revive(todos) : state;
+    }
 
   }
 
