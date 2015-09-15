@@ -4,7 +4,6 @@
   "author": "Daniel Steigerwald",
   "private": true,
   "scripts": {
-    "postinstall": "gulp build --production",
     "start": "node src/server",
     "test": "gulp test"
   },
