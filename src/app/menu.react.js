@@ -1,4 +1,4 @@
-import {PureComponent} from 'react-pure-render';
+import PureComponent from '../components/component.react';
 import React from 'react-native';
 import {ScrollView, Text} from 'react-native';
 

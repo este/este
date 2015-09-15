@@ -6,7 +6,7 @@ import React, {AppRegistry} from 'react-native';
 import App from './src/app/app.react';
 
 // Redux
-import {Provider} from 'react-redux';
+import {Provider} from 'react-redux/native';
 import store from './src/store';
 
 class Root extends React.Component {
@@ -14,7 +14,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        {() => <App />}
       </Provider>
     );
   }

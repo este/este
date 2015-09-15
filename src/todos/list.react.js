@@ -1,5 +1,5 @@
 import Buttons from './buttons.react';
-import {PureComponent} from 'react-pure-render';
+import PureComponent from '../components/component.react';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import React, {View, Text, ScrollView, Image} from 'react-native';

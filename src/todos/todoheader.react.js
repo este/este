@@ -1,6 +1,6 @@
 import React, {Text, View} from 'react-native';
-import {format} from '../intl/store';
-import {PureComponent} from 'react-pure-render';
+import {format} from '../intl/lib';
+import PureComponent from '../components/component.react';
 
 import style from './todoheader.style';
 

@@ -1,13 +1,13 @@
 import React, {View} from 'react-native';
 import connect from '../lib/connect';
 import {bindActionCreators} from 'redux';
-import {PureComponent} from 'react-pure-render';
+import PureComponent from '../components/component.react';
 
 // Styles
 import {container} from '../app/app.style';
 
 // Selectors
-import {selectTranslations} from '../lib/intl';
+import {selectTranslations} from '../intl/selectors';
 import {selectVisibleTodos, selectLeftTodos} from '../todos/selectors';
 
 // Actions

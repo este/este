@@ -1,6 +1,6 @@
 import React, {View, Text} from 'react-native';
-import {PureComponent} from 'react-pure-render';
-import {connect} from 'react-redux';
+import PureComponent from '../components/component.react';
+import {connect} from 'react-redux/native';
 
 // Actions
 import {toggleMenu} from '../app/actions';

@@ -1,1 +1,1 @@
-export const appSettings = ({app}) => app;
+export const appSettings = ({app}) => app.toJS();

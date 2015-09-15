@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import assign from 'lodash.assign';
-import {connect} from 'react-redux';
+import {connect} from 'react-redux/native';
 
 export default function mergeSelectors(...selectors) {
   const mapStateToProps = createSelector(selectors, (...output) => {

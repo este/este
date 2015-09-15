@@ -1,5 +1,5 @@
 import React, {View, TouchableOpacity, Text} from 'react-native';
-import {PureComponent} from 'react-pure-render';
+import PureComponent from '../components/component.react';
 
 import style from './buttons.style';
 

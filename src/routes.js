@@ -1,6 +1,5 @@
 import Todos from './pages/todos.react';
 import Home from './pages/home.react';
-import {msg} from './intl/store';
 
 export const routes = {
   todos: {
@@ -8,8 +7,7 @@ export const routes = {
     hideNavbar: true
   },
   home: {
-    component: Home,
-    title: msg('home.title')
+    component: Home
   }
 };
 

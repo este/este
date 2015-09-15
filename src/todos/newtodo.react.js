@@ -1,5 +1,5 @@
-import {PureComponent} from 'react-pure-render';
-import Todo from './todo';
+import PureComponent from '../components/component.react';
+import Todo from './Todo';
 import Input from '../components/input.react';
 import React, {View} from 'react-native';
 

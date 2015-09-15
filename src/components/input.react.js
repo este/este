@@ -1,7 +1,7 @@
 // To make your app truly isomorphic, we need to wrap WebEvents in React Native
 import React, {TextInput} from 'react-native';
 import {autobind} from 'core-decorators';
-import {PureComponent} from 'react-pure-render';
+import PureComponent from '../components/component.react';
 
 export default class Input extends PureComponent {
 
