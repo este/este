@@ -1,5 +1,5 @@
 import React, {Settings} from 'react-native';
-import App from './app/app.react';
+import App from './containers/App';
 import {reviveState} from './app/actions';
 
 // Redux

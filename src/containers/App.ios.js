@@ -4,19 +4,19 @@ import {autobind} from 'core-decorators';
 import connect from '../lib/connect';
 
 // Components
-import Menu from './menu.react';
+import Menu from '../app/menu.react';
 import SideMenu from '../components/menu.react';
 import {routes, defaultRoute} from '../routes';
 
 // Styles
-import appStyle from './app.style';
+import appStyle from '../app/app.style';
 
 // Actions
-import {toggleStatusBar, toggleMenu} from './actions';
+import {toggleStatusBar, toggleMenu} from '../app/actions';
 import {selectLanguage} from '../intl/actions';
 
 // Selectors
-import {selectSettings} from './selectors';
+import {selectSettings} from '../app/selectors';
 import {selectTranslations} from '../intl/selectors';
 
 @connect(selectSettings, selectTranslations)

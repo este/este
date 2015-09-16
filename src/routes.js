@@ -1,5 +1,5 @@
-import Todos from './pages/todos.react';
-import Home from './pages/home.react';
+import Todos from './containers/Todos';
+import Home from './containers/Home';
 
 /**
  * Simple definition of your routes
