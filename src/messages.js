@@ -37,7 +37,11 @@ export default {
       me: 'Me (protected)',
       todos: 'Todos',
       link: 'Menu',
-      selectLanguage: 'Select language'
+      selectLanguage: 'Select language',
+      languages: {
+        pl: 'Polish',
+        en: 'English'
+      }
     },
     todos: {
       newTodo: {
@@ -97,7 +101,11 @@ export default {
       me: 'Mnie (chronione)',
       todos: 'Zadania',
       link: 'Menu',
-      selectLanguage: 'Wybierz język'
+      selectLanguage: 'Wybierz język',
+      languages: {
+        pl: 'Polski',
+        en: 'Angielski'
+      }
     },
     todos: {
       newTodo: {

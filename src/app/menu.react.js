@@ -23,19 +23,25 @@ export default class Menu extends PureComponent {
     } = this.props;
 
     return (
-      <ScrollView style={styles.menu}>
-        {pages.map(page => (
-          <Text key={page} onPress={_ => onItemSelected(page)} style={styles.item}>
-            {msg[page]}
-          </Text>
-        ))}
+      <ScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={styles.menu}
+        style={styles.container}>
 
         <View>
-          <Text>{msg.selectLanguage}</Text>
+          {pages.map(page => (
+            <Text key={page} onPress={_ => onItemSelected(page)} style={styles.item}>
+              {msg[page]}
+            </Text>
+          ))}
+        </View>
+
+        <View>
+          <Text style={styles.header}>{msg.selectLanguage}</Text>
           <View>
             {availableLanguages.map(lang => (
               <Text key={lang} onPress={_ => onLanguageSelected(lang)} style={styles.item}>
-                {lang}
+                {msg.languages[lang]}
               </Text>
             ))}
           </View>
