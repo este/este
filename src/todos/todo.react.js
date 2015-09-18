@@ -1,7 +1,7 @@
 import React, {TouchableOpacity, Image, View} from 'react-native';
 import PureComponent from '../components/component.react';
 import Input from '../components/input.react';
-import Todo from './Todo';
+import Todo from './todo';
 
 import style from './todo.style.js';
 

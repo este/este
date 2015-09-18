@@ -1,20 +1,8 @@
 import {createSelector} from 'reselect';
 
-export const selectVisibleTodos = ({todos}) => ({
-  visibleTodos: todos.list
-});
+const todos = ({todos}) => todos.list;
 
-export const selectLeftTodos = createSelector(
-  selectVisibleTodos,
-  ({visibleTodos}) => {
-    const leftTodos = visibleTodos.filter(todo => !todo.completed);
-    return {
-      hasCompletedTodos: visibleTodos.size > leftTodos.size,
-      leftTodos
-    };
-  }
+export const selectTodos = createSelector(
+  todos,
+  list => list.filter(todo => !todo.completed)
 );
-
-export const selectNewTodo = ({todos}) => ({
-  newTodo: todos.newTodo
-});

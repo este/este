@@ -14,7 +14,11 @@ import {selectTranslations} from '../intl/selectors';
 // Style
 import * as style from '../app/app.style';
 
-@connect(selectTranslations)
+const mapStateToProps = state => ({
+  msg: selectTranslations(state)
+});
+
+@connect(mapStateToProps)
 export default class Home extends PureComponent {
 
   static propTypes = {

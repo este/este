@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import {REVIVE_STATE} from '../app/actions';
-import Todo from './Todo';
+import Todo from './todo';
 import getRandomString from '../lib/getrandomstring';
 import {Range, Record, List} from 'immutable';
 
@@ -30,17 +30,19 @@ export default function todoReducer(state = initialState, action) {
           })
         ));
 
-    case actions.ADD_TODO:
+    case actions.ADD_TODO: {
+      const {title} = action.payload;
+      if (title.length === 0) return state;
       return state
-        .update('list', (list) => {
-          const {title} = action.payload;
-          const todo = {
-            id: getRandomString(),
-            title
-          };
-          return list.push(new Todo(todo));
-        })
-        .set('newTodo', new Todo);
+          .update('list', (list) => {
+            const todo = {
+              id: getRandomString(),
+              title
+            };
+            return list.push(new Todo(todo));
+          })
+          .set('newTodo', new Todo);
+    }
 
     case actions.CLEAR_ALL_TODOS:
       return initialState;

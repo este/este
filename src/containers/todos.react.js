@@ -1,5 +1,5 @@
 import React, {View} from 'react-native';
-import connect from '../lib/connect';
+import {connect} from 'react-redux/native';
 import {bindActionCreators} from 'redux';
 import PureComponent from '../components/component.react';
 
@@ -8,7 +8,7 @@ import {container} from '../app/app.style';
 
 // Selectors
 import {selectTranslations} from '../intl/selectors';
-import {selectVisibleTodos, selectNewTodo, selectLeftTodos} from '../todos/selectors';
+import {selectTodos} from '../todos/selectors';
 
 // Actions
 import {toggleMenu} from '../app/actions';
@@ -20,7 +20,14 @@ import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
 
-@connect(selectTranslations, selectVisibleTodos, selectNewTodo, selectLeftTodos)
+const mapStateToProps = state => ({
+  msg: selectTranslations(state),
+  todos: state.todos.list,
+  newTodo: state.todos.newTodo,
+  leftTodos: selectTodos(state)
+});
+
+@connect(mapStateToProps)
 export default class Todos extends PureComponent {
 
   static propTypes = {
@@ -29,14 +36,14 @@ export default class Todos extends PureComponent {
     leftTodos: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     newTodo: React.PropTypes.object.isRequired,
-    visibleTodos: React.PropTypes.object.isRequired
+    todos: React.PropTypes.object.isRequired
   }
 
   render() {
     const {
       dispatch,
       newTodo,
-      visibleTodos,
+      todos,
       hasCompletedTodos,
       leftTodos,
       msg: {todos: msg}
@@ -68,7 +75,7 @@ export default class Todos extends PureComponent {
           actions={todoActions}
           hasCompletedTodos={hasCompletedTodos}
           msg={msg.list}
-          todos={visibleTodos}
+          todos={todos}
         />
 
       </View>

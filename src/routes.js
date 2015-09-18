@@ -1,5 +1,5 @@
-import Todos from './containers/Todos';
-import Home from './containers/Home';
+import Todos from './containers/todos.react';
+import Home from './containers/home.react';
 
 /**
  * Simple definition of your routes
@@ -9,7 +9,7 @@ import Home from './containers/Home';
  * use navigation.transitionTo(key) to go to a route
  * Feel free to extend this object with properties you need
  */
-export const routes = {
+export default {
   todos: {
     component: Todos
   },
@@ -17,5 +17,3 @@ export const routes = {
     component: Home
   }
 };
-
-export const defaultRoute = 'home';

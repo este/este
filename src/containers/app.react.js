@@ -1,12 +1,12 @@
 import React, {StatusBarIOS, View, Navigator} from 'react-native';
 import PureComponent from '../components/component.react';
 import {autobind} from 'core-decorators';
-import connect from '../lib/connect';
+import {connect} from 'react-redux/native';
 
 // Components
 import Menu from '../app/menu.react';
 import SideMenu from '../components/menu.react';
-import {routes, defaultRoute} from '../routes';
+import routes from '../routes';
 
 // Styles
 import appStyle from '../app/app.style';
@@ -16,35 +16,38 @@ import {toggleStatusBar, toggleMenu} from '../app/actions';
 import {selectLanguage} from '../intl/actions';
 
 // Selectors
-import {selectSettings} from '../app/selectors';
 import {selectTranslations} from '../intl/selectors';
 
-@connect(selectSettings, selectTranslations)
+const mapStateToProps = state => ({
+  settings: state.app,
+  msg: selectTranslations(state),
+  availableLanguages: state.intl.availableLanguages
+});
+
+@connect(mapStateToProps)
 export default class App extends PureComponent {
 
   static propTypes = {
     availableLanguages: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
-    isMenuOpened: React.PropTypes.bool,
-    isStatusBarHidden: React.PropTypes.bool,
     msg: React.PropTypes.object.isRequired,
-    statusBarStyle: React.PropTypes.string
+    settings: React.PropTypes.shape({
+      isMenuOpened: React.PropTypes.bool,
+      isStatusBarHidden: React.PropTypes.bool,
+      statusBarStyle: React.PropTypes.string
+    }).isRequired
   }
 
   componentWillMount() {
-    StatusBarIOS.setHidden(this.props.isStatusBarHidden, true);
-    StatusBarIOS.setStyle(this.props.statusBarStyle, false);
+    const {settings} = this.props;
+    StatusBarIOS.setHidden(settings.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(settings.statusBarStyle, false);
   }
 
   componentDidUpdate(prevProps) {
-    StatusBarIOS.setHidden(this.props.isStatusBarHidden, true);
-    StatusBarIOS.setStyle(this.props.statusBarStyle, false);
-  }
-
-  // Add more checks here when having user validation
-  // to show e.g login page
-  getInitialRoute() {
-    return routes[defaultRoute];
+    const {settings} = this.props;
+    StatusBarIOS.setHidden(settings.isStatusBarHidden, true);
+    StatusBarIOS.setStyle(settings.statusBarStyle, false);
   }
 
   onButtonPressed() {
@@ -106,7 +109,7 @@ export default class App extends PureComponent {
       availableLanguages,
       dispatch,
       msg: {menu: msg},
-      isMenuOpened
+      settings
     } = this.props;
 
     const menu = (
@@ -122,7 +125,7 @@ export default class App extends PureComponent {
       <SideMenu
         animation='spring'
         disableGestures
-        isOpen={isMenuOpened}
+        isOpen={settings.isMenuOpened}
         menu={menu}
         onChange={_ => dispatch(toggleStatusBar())}
         ref='menu'
@@ -131,7 +134,7 @@ export default class App extends PureComponent {
 
         <Navigator
           configureScene={this.configureScene}
-          initialRoute={this.getInitialRoute()}
+          initialRoute={routes.home}
           ref='navigator'
           renderScene={this.renderScene}
           style={appStyle.container}
