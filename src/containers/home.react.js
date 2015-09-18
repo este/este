@@ -15,7 +15,7 @@ import {selectTranslations} from '../intl/selectors';
 import * as style from '../app/app.style';
 
 const mapStateToProps = state => ({
-  msg: selectTranslations(state)
+  msg: selectTranslations(state).home
 });
 
 @connect(mapStateToProps)
@@ -29,7 +29,7 @@ export default class Home extends PureComponent {
   render() {
     const {
       dispatch,
-      msg: {home: msg}
+      msg
     } = this.props;
 
     return (
