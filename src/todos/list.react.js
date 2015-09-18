@@ -1,12 +1,13 @@
 import Buttons from './buttons.react';
-import Component from '../components/component.react';
+import PureComponent from '../components/component.react';
 import Todo from './todo.react';
 import immutable from 'immutable';
 import React, {View, Text, ScrollView, Image} from 'react-native';
 
+// Styles
 import style from './list.style';
 
-export default class List extends Component {
+export default class List extends PureComponent {
 
   static propTypes = {
     actions: React.PropTypes.object.isRequired,
@@ -55,8 +56,8 @@ export default class List extends Component {
         <Buttons
           msg={msg.buttons}
           onAddRandomTodosClicked={actions.addHundredTodos}
-          onClearAllClicked={!hasCompletedTodos ? actions.clearAll : null}
-          onClearCompletedClicked={hasCompletedTodos ? actions.clearCompleted : null}
+          onClearAllClicked={!hasCompletedTodos ? actions.clearAllTodos : null}
+          onClearCompletedClicked={hasCompletedTodos ? actions.clearCompletedTodos : null}
         />
       </ScrollView>
     );

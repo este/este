@@ -8,7 +8,6 @@
  */
 
 #import "AppDelegate.h"
-
 #import "RCTRootView.h"
 
 @implementation AppDelegate
@@ -19,22 +18,22 @@
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
   //  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"este"
-                                                   launchOptions:launchOptions];
-  
   // Sometimes you want your users to get few todos by default when they launch the app
-  // for the first time
+  // for the first time, you can load here other settings/properties and results of sync requests, 
+  // like getting preferred language
   NSMutableDictionary *initialState = [NSMutableDictionary dictionaryWithDictionary:@{
-    @"list": @[
-      @{@"id": @1, @"title": @"Buy a cat"},
-      @{@"id": @2, @"title": @"Buy another cat"}
-    ]
+    @"intl": @{
+      @"selectedLanguage": [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0]
+    },
+    @"todos": @{
+      @"list": @[
+        @{@"id": @1, @"title": @"Buy a cat"},
+        @{@"id": @2, @"title": @"Buy another cat"}
+      ]
+    }
   }];
-  
-  // Let's load user defaults we saved previously
-  // and merge them into initial state
-  // you can perform other async actions here, up to you
+
+  // Let's load user defaults we saved previously with Settings
   NSDictionary *userState = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"state"];
   [initialState addEntriesFromDictionary:userState];
 
@@ -42,9 +41,14 @@
   // user experience or just to have nice development
   // Remember - you need to rerun app from XCode in order for these changes to propagate
   // Normal refreshing will have no effect
-  rootView.initialProperties = @{
+  NSDictionary *initialProperties = @{
     @"initialState": initialState
   };
+
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:@"este"
+                                               initialProperties:initialProperties
+                                                   launchOptions:launchOptions];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [[UIViewController alloc] init];

@@ -1,8 +1,5 @@
 export default {
   en: {
-    app: {
-      madeByHtml: `made by <a href="https://twitter.com/steida">steida</a>`
-    },
     auth: {
       form: {
         button: {
@@ -29,74 +26,28 @@ export default {
       menu: 'Menu',
       back: 'Back'
     },
-    confirmations: {
-      cancelEdit: `You have unsaved changes. Are you sure you want to cancel them?`
-    },
     home: {
       title: 'Home',
-      text: 'App starter kit for Este.js. \n\n Open left menu and check todos! \n\n Press CMD+R to reload \n Press CMD+D for debug menu'
-    },
-    me: {
-      title: 'Me',
-      welcome: `Hi {email}. This is your secret page.`
+      text: `App starter kit for Este.js. \n\n Open left menu and check todos! \n\nPress CMD+R to reload \n Press CMD+D for debug menu`
     },
     menu: {
       examples: 'Examples',
-      headerHtml: `<a href="https://github.com/steida/este">Este.js</a> App`,
       home: 'Home',
       login: 'Login',
       me: 'Me (protected)',
       todos: 'Todos',
-      link: 'Menu'
-    },
-    notFound: {
-      continueMessage: 'Continue here please.',
-      header: 'This page isn\'t available',
-      message: 'The link may be broken, or the page may have been removed.',
-      title: 'Page Not Found'
-    },
-    toCheck: {
-      andMuchMore: '... and much more.',
-      header: 'Things to Check',
-      isomorphicPage: 'Isomorphic page',
-      itemListHtml: [  // List of language dependent length containing translated messages for React components
-        {
-          key: 'source',
-          txt: `Server rendered todos, view page source.`
-        },
-        {
-          key: 'development',
-          txt: `Try edit styles, components, actions, or stores to check
-                <a href="https://www.youtube.com/watch?v=pw4fKkyPPg8">live editing</a>
-                in development mode (<code>gulp</code>).`
-        },
-        {
-          key: 'production',
-          txt: `Check real app performance and size in production mode (<code>gulp -p</code>)`
-        },
-        {
-          key: 'edit',
-          txt: `Todos are editable. Click to edit, esc to cancel, enter to save,
-                everything is safely saved in global app state. Try to go
-                elsewhere then back, note components state is always preserved.`
-        },
-        {
-          key: 'globalState',
-          txt: `Global immutable app state, have you seen this <a href="https://www.youtube.com/watch?v=5yHFTN-_mOo">
-                video</a>? Try <b>ctrl+shift+s</b> to save current app state,
-                and <b>ctrl+shift+l</b> to load.`
-        }
-      ]
+      link: 'Menu',
+      selectLanguage: 'Select language',
+      languages: {
+        pl: 'Polish',
+        en: 'English'
+      }
     },
     todos: {
       newTodo: {
         placeholder: 'What needs to be done?'
       },
       title: 'Todos',
-      undo: `Undo {steps, plural,
-        =0 {}
-        other {(#)}
-      }`,
       list: {
         empty: 'It\'s rather empty here...',
         buttons: {
@@ -110,15 +61,70 @@ export default {
         todos: 'You have {size} tasks to go!',
         emptyList: 'Nothing, enjoy'
       }
+    }
+  },
+  pl: {
+    auth: {
+      form: {
+        button: {
+          login: 'Zgłoś się do systemu',
+          signup: 'Zarejestruj się'
+        },
+        hint: 'Wskazówka: pass1',
+        legend: 'Zaloguj się / Zarejestruj się',
+        placeholder: {
+          email: 'your@email.com',
+          password: 'hasło'
+        },
+        wrongPassword: 'Złe hasło'
+      },
+      logout: {
+        button: 'Wyloguj się'
+      },
+      title: 'Zaloguj się'
     },
-    validation: {
-      email: `Email address is not valid.`,
-      password: `Password must contain at least {minLength} characters.`,
-      required: `Please fill out {prop, select,
-        email {email}
-        password {password}
-        other {'{prop}'}
-      }.`
+    buttons: {
+      cancel: 'Anuluj',
+      edit: 'Edytuj',
+      save: 'Zapisz',
+      menu: 'Menu',
+      back: 'Wstecz'
+    },
+    home: {
+      title: 'Strona główna',
+      text: `Zestaw startowy do Este.js aplikacji. \n\n Otwórz menu po lewej stronie i sprawdź todos! \n\n Naciśnij CMD + R, aby przeładować naciśnij CMD + D by otworzyć menu do debuggowania`
+    },
+    menu: {
+      examples: 'Przykłady',
+      home: 'Strona główna',
+      login: 'Zgłoś się do systemu',
+      me: 'Mnie (chronione)',
+      todos: 'Zadania',
+      link: 'Menu',
+      selectLanguage: 'Wybierz język',
+      languages: {
+        pl: 'Polski',
+        en: 'Angielski'
+      }
+    },
+    todos: {
+      newTodo: {
+        placeholder: 'Co trzeba zrobić?'
+      },
+      title: 'Zadania',
+      list: {
+        empty: 'Trochę tu pusto...',
+        buttons: {
+          add100: 'Dodaj 100 Todos',
+          clearCompleted: 'Wyczyść ukończone',
+          clearAll: 'Wyczyść wszystko'
+        }
+      },
+      leftTodos: {
+        oneTodo: 'Prawie gotowe',
+        todos: 'Pozostało {size} zadań!',
+        emptyList: 'Wszystko zrobione'
+      }
     }
   }
 };

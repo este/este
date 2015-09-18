@@ -4,18 +4,27 @@ import {StyleSheet} from 'react-native';
 const window = Dimensions.get('window');
 
 export default StyleSheet.create({
-  menu: {
+  container: {
     flex: 1,
     width: window.width * 0.7,
-    height: window.height,
-    backgroundColor: '#2C2C2C',
-    padding: 20
+    backgroundColor: '#2C2C2C'
+  },
+  menu: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    paddingHorizontal: 30
   },
   item: {
-    marginLeft: 5,
     fontSize: 16,
     padding: 10,
+    color: '#FFFFFF'
+  },
+  header: {
     color: '#FFFFFF',
-    marginBottom: 5
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginBottom: 10
   }
 });

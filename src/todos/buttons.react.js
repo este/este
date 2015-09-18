@@ -1,9 +1,10 @@
 import React, {View, TouchableOpacity, Text} from 'react-native';
-import Component from '../components/component.react';
+import PureComponent from '../components/component.react';
 
+// Styles
 import style from './buttons.style';
 
-export default class TodoButtons extends Component {
+export default class TodoButtons extends PureComponent {
 
   static propTypes = {
     msg: React.PropTypes.object.isRequired,

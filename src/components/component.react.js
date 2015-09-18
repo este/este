@@ -13,8 +13,4 @@ class Component extends React.Component {
 
 }
 
-Component.contextTypes = {
-  router: React.PropTypes.func
-};
-
 export default Component;
