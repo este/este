@@ -9,6 +9,7 @@ export default class TodoItem extends PureComponent {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,
+    key: React.PropTypes.number.isRequired,
     onEndEditing: React.PropTypes.func.isRequired,
     onFieldChange: React.PropTypes.func.isRequired,
     onToggleCompleted: React.PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ export default class TodoItem extends PureComponent {
     } = this.props;
 
     let todoStyle = [style.input];
+
     if (todo.completed)
       todoStyle.push(style.inputCompleted);
 

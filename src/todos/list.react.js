@@ -39,12 +39,11 @@ export default class List extends PureComponent {
 
     return (
       <ScrollView>
-        {todos.map(todo => {
+        {todos.map((todo, index) => {
           return (
-            <View key={todo.id} style={style.row}>
+            <View key={index} style={style.row}>
               <Todo
                 disabled={false}
-                key={todo.id}
                 onEndEditing={actions.onTodoEndEditing}
                 onFieldChange={actions.onTodoFieldChange}
                 onToggleCompleted={actions.toggleTodoCompleted}
