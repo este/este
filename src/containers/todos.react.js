@@ -21,7 +21,7 @@ import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
 
 const mapStateToProps = state => ({
-  msg: selectTranslations(state),
+  msg: selectTranslations(state).todos,
   todos: state.todos.list,
   newTodo: state.todos.newTodo,
   leftTodos: selectTodos(state)
@@ -46,7 +46,7 @@ export default class Todos extends PureComponent {
       todos,
       hasCompletedTodos,
       leftTodos,
-      msg: {todos: msg}
+      msg
     } = this.props;
 
     const todoActions = bindActionCreators(TodoActionCreators, dispatch);

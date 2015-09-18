@@ -107,15 +107,15 @@ export default class App extends PureComponent {
   render() {
     const {
       availableLanguages,
+      msg,
       dispatch,
-      msg: {menu: msg},
       settings
     } = this.props;
 
     const menu = (
       <Menu
         availableLanguages={availableLanguages}
-        msg={msg}
+        msg={msg.menu}
         onItemSelected={this.onItemSelected}
         onLanguageSelected={lang => dispatch(selectLanguage(lang))}
       />
