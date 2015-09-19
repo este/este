@@ -45,9 +45,9 @@ module.exports = function(isDevelopment) {
     entry: {
       app: isDevelopment ? [
         'webpack-hot-middleware/client',
-        path.join(constants.SRC_DIR, 'browser/main.js')
+        path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
-        path.join(constants.SRC_DIR, 'browser/main.js')
+        path.join(constants.SRC_DIR, 'client/main.js')
       ]
     },
     module: {

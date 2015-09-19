@@ -1,7 +1,7 @@
 import './login.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
-import {focusInvalidField} from '../lib/validation';
+import {Validation} from '@este/common';
 
 export default class Login extends Component {
 
@@ -19,7 +19,7 @@ export default class Login extends Component {
     actions.login(form.fields)
       .then(({error, payload}) => {
         if (error)
-          focusInvalidField(this, payload);
+          Validation.focusInvalidField(this, payload);
         else
           this.redirectAfterLogin();
       });

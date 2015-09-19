@@ -3,8 +3,7 @@ import Component from 'react-pure-render/component';
 import Footer from './footer.react';
 import Header from './header.react';
 import React, {PropTypes} from 'react';
-import mapDispatchToProps from './mapDispatchToProps';
-import mapStateToProps from './mapStateToProps';
+import {mapDispatchToProps, mapStateToProps} from '@este/common';
 import {connect} from 'react-redux';
 
 @connect(mapStateToProps, mapDispatchToProps)

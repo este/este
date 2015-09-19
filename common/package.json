@@ -5,15 +5,18 @@
     "Daniel Steigerwald",
     "Mike Grabowski"
   ],
+  "version": "1.0.0-rc1",
   "private": true,
   "dependencies": {
-    "redux-logger": "^1.0.8",
-    "isomorphic-fetch": "^2.1.1",
-    "redux": "^3.0.0",
-    "redux-devtools": "^2.1.2",
-    "redux-promise-middleware": "^0.2.1",
     "immutable": "^3.6.4",
     "intl-messageformat": "^1.1.0",
-    "intl-relativeformat": "^1.1.0"
+    "intl-relativeformat": "^1.1.0",
+    "isomorphic-fetch": "^2.1.1",
+    "react-dom": "^0.1.0",
+    "redux": "^3.0.0",
+    "redux-devtools": "^2.1.2",
+    "redux-logger": "^1.0.8",
+    "redux-promise-middleware": "^0.2.1",
+    "validator": "^4.0.6"
   }
 }
