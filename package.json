@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "install": "(cd web && npm install)",
-    "start": "(cd web && node src/server)",
+    "start": "(cd web && gulp)",
     "test": "(cd web && gulp test)"
   },
   "dependencies": []
