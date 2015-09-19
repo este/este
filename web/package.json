@@ -73,6 +73,7 @@
     "react-redux": "^2.1.2",
     "react-router": "^1.0.0-rc1",
     "react-textarea-autosize": "^2.3.1",
+    "redux-devtools": "^2.1.2",
     "react-transform-catch-errors": "^0.2.0",
     "react-transform-webpack-hmr": "^0.1.5",
     "redbox-react": "^1.0.5",
