@@ -9,6 +9,7 @@
   "scripts": {
     "postinstall": "gulp build --production",
     "start": "node src/server",
+    "start-dev": "gulp",
     "test": "gulp test"
   },
   "engines": {

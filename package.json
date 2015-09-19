@@ -9,7 +9,10 @@
   "scripts": {
     "preinstall": "(cd web && npm link ../common)",
     "postinstall": "(cd web && npm install)",
-    "start": "(cd web && gulp)",
+    "start": "echo Please use npm run-script web-start to start a server",
+    "web-start": "(cd web && npm start)",
+    "web-start-dev": "(cd web && npm run-script start-dev)",
+    "native-start": "",
     "test": "(cd web && gulp test)"
   },
   "engines": {
