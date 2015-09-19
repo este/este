@@ -18,7 +18,6 @@
   "dependencies": {
     "@este/common": "1.0.0-rc1",
     "autoprefixer": "^6.0.2",
-    "babel-loader": "^5.0.0",
     "babel-plugin-react-transform": "^1.0.5",
     "bluebird": "^2.9.9",
     "body-parser": "^1.12.4",
@@ -28,7 +27,6 @@
     "compression": "^1.4.0",
     "cors": "^2.6.0",
     "css-loader": "^0.18.0",
-    "eslint": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "eventemitter3": "^1.0.1",
     "express": "^4.11.2",

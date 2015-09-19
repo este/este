@@ -7,6 +7,10 @@
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
+## At a glance
+
+WIP.
+
 ## Techniques
 
 - Universal JavaScript dev stack for browser, server, mobile.
