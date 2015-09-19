@@ -75,7 +75,7 @@
     "react-textarea-autosize": "^2.3.1",
     "redux-devtools": "^2.1.2",
     "react-transform-catch-errors": "^0.2.0",
-    "react-transform-webpack-hmr": "^0.1.5",
+    "react-transform-hmr": "^0.1.6",
     "redbox-react": "^1.0.5",
     "reselect": "^1.0.0",
     "run-sequence": "^1.0.2",
