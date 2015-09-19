@@ -5,12 +5,13 @@ const router = express.Router();
 router.route('/login')
   .post((req, res, next) => {
 
-    const {password} = req.body;
+    const {email, password} = req.body;
 
     // Simulate DB checks here.
     setTimeout(() => {
-      if (password !== 'pass1') res.status(400).end();
-      else res.status(200).end();
+      // Use http status code 401 for wrong authentication credentials.
+      if (password !== 'pass1') res.status(401).end();
+      else res.status(200).send({email}).end();
     }, 1000);
 
   });

@@ -1,11 +1,9 @@
 import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
-import makeWebpackConfig from './webpack/makeconfig';
 import path from 'path';
 import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
-import webpackDevServer from './webpack/devserver';
 import yargs from 'yargs';
 import {Server as KarmaServer} from 'karma';
 
@@ -25,8 +23,8 @@ const runEslint = () => {
   return gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
-    'webpack/*.js',
-    '!**/__tests__/*.*'
+    'webpack/*.js'
+    // '!**/__tests__/*.*'
   ])
   .pipe(eslint())
   .pipe(eslint.format());
@@ -37,13 +35,8 @@ gulp.task('env', () => {
   process.env.NODE_ENV = env; // eslint-disable-line no-undef
 });
 
-gulp.task('build-webpack-production', webpackBuild(makeWebpackConfig(false)));
-gulp.task('build-webpack-dev', webpackDevServer(makeWebpackConfig(true)));
-gulp.task('build-webpack', [args.production
-  ? 'build-webpack-production'
-  : 'build-webpack-dev'
-]);
-gulp.task('build', ['build-webpack']);
+gulp.task('build-webpack', webpackBuild);
+gulp.task('build', args.production ? ['build-webpack'] : []);
 
 gulp.task('eslint', () => {
   return runEslint();

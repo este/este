@@ -7,5 +7,28 @@
     "es7.objectRestSpread",
     // Stage 0 - Strawman
     "es7.functionBind"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-transform"
+      ],
+      "extra": {
+        "react-transform": [{
+          "target": "react-transform-webpack-hmr",
+          "imports": ["react"],
+          "locals": ["module"]
+        }, {
+          "target": "react-transform-catch-errors",
+          "imports": ["react", "redbox-react"]
+        }]
+      }
+    },
+    "production": {
+      "optional": [
+        "optimisation.react.constantElements",
+        "optimisation.react.inlineElements"
+      ]
+    }
+  }
 }

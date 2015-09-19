@@ -1,9 +1,8 @@
 'use strict';
 
-var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var NyanProgressPlugin = require('nyan-progress-webpack-plugin');
-var NotifyPlugin = require('./notifyplugin');
+var autoprefixer = require('autoprefixer');
 var constants = require('./constants');
 var path = require('path');
 var webpack = require('webpack');
@@ -45,13 +44,10 @@ module.exports = function(isDevelopment) {
     devtool: isDevelopment ? devtools : '',
     entry: {
       app: isDevelopment ? [
-        'webpack-dev-server/client?http://localhost:8888',
-        // Why only-dev-server instead of dev-server:
-        // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
-        'webpack/hot/only-dev-server',
-        path.join(constants.SRC_DIR, 'client/main.js')
+        'webpack-hot-middleware/client',
+        path.join(constants.SRC_DIR, 'browser/main.js')
       ] : [
-        path.join(constants.SRC_DIR, 'client/main.js')
+        path.join(constants.SRC_DIR, 'browser/main.js')
       ]
     },
     module: {
@@ -60,11 +56,7 @@ module.exports = function(isDevelopment) {
         test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
       }, {
         exclude: /node_modules/,
-        loaders: isDevelopment ? [
-          'react-hot', 'babel-loader'
-        ] : [
-          'babel-loader'
-        ],
+        loaders: ['babel'],
         test: /\.js$/
       }].concat(stylesLoaders())
     },
@@ -72,7 +64,7 @@ module.exports = function(isDevelopment) {
       path: constants.BUILD_DIR,
       filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: 'http://localhost:8888/build/'
+      publicPath: '/build/'
     } : {
       path: constants.BUILD_DIR,
       filename: '[name].js',
@@ -88,8 +80,9 @@ module.exports = function(isDevelopment) {
         })
       ];
       if (isDevelopment) plugins.push(
-        NotifyPlugin,
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
       );
       else plugins.push(
         // Render styles into separate cacheable file to prevent FOUC and
@@ -101,21 +94,10 @@ module.exports = function(isDevelopment) {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
-          // keep_fnames prevents function name mangling.
-          // Function names are useful. Seeing a readable error stack while
-          // being able to programmatically analyse it is priceless. And yes,
-          // we don't need infamous FLUX_ACTION_CONSTANTS with function name.
-          // It's ES6 standard polyfilled by Babel.
-          /* eslint-disable camelcase */
           compress: {
-            keep_fnames: true,
-            screw_ie8: true,
+            screw_ie8: true, // eslint-disable-line camelcase
             warnings: false // Because uglify reports irrelevant warnings.
-          },
-          mangle: {
-            keep_fnames: true
           }
-          /* eslint-enable camelcase */
         })
       );
       return plugins;

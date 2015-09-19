@@ -1,13 +1,11 @@
 import Promise from 'bluebird';
-import Router from 'react-router';
-import routes from '../../client/routes';
 import {Map} from 'immutable';
 
 export default function userState() {
 
   return (req, res, next) => {
-    getRouterState(req.originalUrl)
-      .then(routerState => loadUserData(routerState, req))
+    // TODO: Refactor it. Use actions to fulfill state.
+    loadUserData(req)
       .then(loadedData => {
         req.userState = Map().merge(...loadedData);
         next();
@@ -20,13 +18,7 @@ export default function userState() {
 
 }
 
-function getRouterState(originalUrl) {
-  return new Promise((resolve, reject) => {
-    Router.run(routes, originalUrl, (Root, state) => resolve(state));
-  });
-}
-
-function loadUserData(routerState, req) {
+function loadUserData(req) {
   // We can use params and currentRoutePath to preload only current route, which
   // is convenient  if we are using higher order components for client loading.
   // After React 0.14 release, we will add true isomorphic server fetching.
