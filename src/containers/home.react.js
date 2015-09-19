@@ -1,6 +1,5 @@
 import React, {View, Text} from 'react-native';
 import PureComponent from '../components/component.react';
-import {connect} from 'react-redux/native';
 
 // Actions
 import {toggleMenu} from '../app/actions';
@@ -8,17 +7,9 @@ import {toggleMenu} from '../app/actions';
 // Components
 import Header from '../components/header.react';
 
-// Selectors
-import {selectTranslations} from '../intl/selectors';
-
 // Style
 import * as style from '../app/app.style';
 
-const mapStateToProps = state => ({
-  msg: selectTranslations(state).home
-});
-
-@connect(mapStateToProps)
 export default class Home extends PureComponent {
 
   static propTypes = {
@@ -29,7 +20,7 @@ export default class Home extends PureComponent {
   render() {
     const {
       dispatch,
-      msg
+      msg: {home: msg}
     } = this.props;
 
     return (

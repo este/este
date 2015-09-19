@@ -1,14 +1,9 @@
 import React, {View} from 'react-native';
-import {connect} from 'react-redux/native';
 import {bindActionCreators} from 'redux';
 import PureComponent from '../components/component.react';
 
 // Styles
 import {container} from '../app/app.style';
-
-// Selectors
-import {selectTranslations} from '../intl/selectors';
-import {selectTodos} from '../todos/selectors';
 
 // Actions
 import {toggleMenu} from '../app/actions';
@@ -20,33 +15,19 @@ import NewTodo from '../todos/newtodo.react';
 import TodoHeader from '../todos/todoheader.react';
 import Header from '../components/header.react';
 
-const mapStateToProps = state => ({
-  msg: selectTranslations(state).todos,
-  todos: state.todos.list,
-  newTodo: state.todos.newTodo,
-  leftTodos: selectTodos(state)
-});
-
-@connect(mapStateToProps)
-export default class Todos extends PureComponent {
+export default class TodoView extends PureComponent {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    hasCompletedTodos: React.PropTypes.bool,
-    leftTodos: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
-    newTodo: React.PropTypes.object.isRequired,
     todos: React.PropTypes.object.isRequired
   }
 
   render() {
     const {
       dispatch,
-      newTodo,
       todos,
-      hasCompletedTodos,
-      leftTodos,
-      msg
+      msg: {todos: msg}
     } = this.props;
 
     const todoActions = bindActionCreators(TodoActionCreators, dispatch);
@@ -60,7 +41,7 @@ export default class Todos extends PureComponent {
         />
 
         <TodoHeader
-          leftTodos={leftTodos.size}
+          leftTodos={todos.list.size}
           msg={msg.leftTodos}
         />
 
@@ -68,14 +49,13 @@ export default class Todos extends PureComponent {
           msg={msg.newTodo}
           onFieldChange={todoActions.onNewTodoFieldChange}
           onFormSubmitted={todoActions.addTodo}
-          todo={newTodo}
+          todo={todos.newTodo}
         />
 
         <List
           actions={todoActions}
-          hasCompletedTodos={hasCompletedTodos}
           msg={msg.list}
-          todos={todos}
+          todos={todos.list}
         />
 
       </View>

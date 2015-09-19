@@ -6,7 +6,7 @@ import intl from './intl/reducer';
 import todos from './todos/reducer';
 
 const rootReducer = combineReducers({
-  app,
+  settings: app,
   intl,
   todos
 });

@@ -18,18 +18,15 @@ import {selectLanguage} from '../intl/actions';
 // Selectors
 import {selectTranslations} from '../intl/selectors';
 
-const mapStateToProps = state => ({
-  settings: state.app,
-  msg: selectTranslations(state),
-  availableLanguages: state.intl.availableLanguages
-});
-
-@connect(mapStateToProps)
+@connect(state => ({
+  ...state,
+  msg: selectTranslations(state)
+}))
 export default class App extends PureComponent {
 
   static propTypes = {
-    availableLanguages: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
+    intl: React.PropTypes.object.isRequired,
     msg: React.PropTypes.object.isRequired,
     settings: React.PropTypes.shape({
       isMenuOpened: React.PropTypes.bool,
@@ -93,8 +90,7 @@ export default class App extends PureComponent {
 
     const props = {
       ...this.props,
-      ...route.passProps,
-      actions: this.actions
+      ...route.passProps
     };
 
     return (
@@ -106,7 +102,7 @@ export default class App extends PureComponent {
 
   render() {
     const {
-      availableLanguages,
+      intl: {availableLanguages},
       msg,
       dispatch,
       settings
