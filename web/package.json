@@ -1,10 +1,12 @@
 {
-  "name": "este-app",
+  "name": "@este/web",
   "description": "The most complete dev stack for React/Flux universal web apps.",
-  "author": "Daniel Steigerwald",
+  "authors": [
+    "Daniel Steigerwald",
+    "Mike Grabowski"
+  ],
   "private": true,
   "scripts": {
-    "preinstall": "npm link ../common",
     "postinstall": "gulp build --production",
     "start": "node src/server",
     "test": "gulp test"
@@ -16,9 +18,6 @@
   "dependencies": {
     "@este/common": "1.0.0-rc1",
     "autoprefixer": "^6.0.2",
-    "babel": "^5.0.8",
-    "babel-core": "^5.0.8",
-    "babel-eslint": "^4.0.5",
     "babel-loader": "^5.0.0",
     "babel-plugin-react-transform": "^1.0.5",
     "bluebird": "^2.9.9",

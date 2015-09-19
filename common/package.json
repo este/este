@@ -8,6 +8,7 @@
   "version": "1.0.0-rc1",
   "private": true,
   "dependencies": {
+    "bluebird": "^2.10.0",
     "immutable": "^3.6.4",
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
