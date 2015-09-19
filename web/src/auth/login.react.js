@@ -1,7 +1,7 @@
 import './login.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
-import {focusInvalidField} from '../../common/lib/validation';
+import {focusInvalidField} from '../lib/validation';
 
 export default class Login extends Component {
 

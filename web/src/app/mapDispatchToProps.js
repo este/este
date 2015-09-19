@@ -1,5 +1,5 @@
-import * as authActions from '../../common/auth/actions';
-import * as todosActions from '../../common/todos/actions';
+import * as authActions from '@este/common/lib/auth/actions';
+import * as todosActions from '@este/common/lib/todos/actions';
 import {Map} from 'immutable';
 import {bindActionCreators} from 'redux';
 

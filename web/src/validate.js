@@ -1,24 +1,24 @@
 import Validation, {ValidationError} from './lib/validation';
-import {format} from './intl/format';
+import {intl} from '@este/common';
 
 export default function validate(state) {
 
   // TODO: Refactor. Use simple selector from intl, for mapStateToProps as well.
-  const intl = state.get('intl');
-  const msg = intl.messages[intl.selectedLanguage];
+  const locale = state.get('intl');
+  const msg = intl.messages[locale.selectedLanguage];
 
   class LocalizedValidation extends Validation {
 
     getRequiredMessage(prop) {
-      return format(msg.auth.validation.required, {prop});
+      return intl.format(msg.auth.validation.required, {prop});
     }
 
     getEmailMessage(prop) {
-      return format(msg.auth.validation.email, {prop});
+      return intl.format(msg.auth.validation.email, {prop});
     }
 
     getSimplePasswordMessage(minLength) {
-      return format(msg.auth.validation.password, {minLength});
+      return intl.format(msg.auth.validation.password, {minLength});
     }
 
     // Sure we can add own validation rules.
