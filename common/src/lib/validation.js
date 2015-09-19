@@ -2,7 +2,6 @@
   Simple serial sync/async chriso/validator.js validation wrapper with promises.
 */
 import Promise from 'bluebird';
-import ReactDOM from 'react-dom';
 import validator from 'validator';
 
 export class ValidationError extends Error {
@@ -11,16 +10,6 @@ export class ValidationError extends Error {
     this.message = message;
     this.prop = prop;
   }
-}
-
-export function focusInvalidField(component, error) {
-  if (!(error instanceof ValidationError)) return;
-  if (!error.prop) return;
-  const node = ReactDOM.findDOMNode(component);
-  if (!node) return;
-  const el = node.querySelector(`[name=${error.prop}]`);
-  if (!el) return;
-  el.focus();
 }
 
 export default class Validation {

@@ -1,4 +1,4 @@
-import Validation, {ValidationError} from './lib/validation';
+import Validation from './lib/validation';
 import {format} from './intl/format';
 
 export default function validate(state) {
@@ -21,14 +21,12 @@ export default function validate(state) {
       return format(msg.auth.validation.password, {minLength});
     }
 
-    // Sure we can add own validation rules.
-
   }
 
   const validate = (object) => new LocalizedValidation(object);
 
   validate.wrongPassword = prop =>
-    new ValidationError(msg.auth.form.wrongPassword, prop);
+    new Validation.ValidationError(msg.auth.form.wrongPassword, prop);
 
   return validate;
 
