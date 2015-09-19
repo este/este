@@ -7,6 +7,9 @@
   ],
   "version": "1.0.0-rc1",
   "private": true,
+  "engines": {
+    "node": "^4.0.0"
+  },
   "dependencies": {
     "bluebird": "^2.10.0",
     "immutable": "^3.6.4",

@@ -30,11 +30,13 @@ WIP.
 
 ## Prerequisites
 
-Install [node.js](http://nodejs.org).
+Install [node.js](http://nodejs.org) (v4 is required).
 Then install [gulp.js](http://gulpjs.com/).
 ```shell
 npm install -g gulp
 ```
+
+If you are using different node versions on your machine, use `nvm` to manage them.
 
 #### Windows
 

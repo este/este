@@ -11,6 +11,9 @@
     "start": "(cd web && gulp)",
     "test": "(cd web && gulp test)"
   },
+  "engines": {
+    "node": "^4.0.0"
+  },
   "dependencies": {
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
