@@ -7,7 +7,6 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "(cd web && npm link ../common)",
     "install": "(cd web && npm install)",
     "start": "(cd web && node src/server)",
     "test": "(cd web && gulp test)"
