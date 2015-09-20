@@ -1,0 +1,47 @@
+{
+  "name": "@este/native",
+  "version": "1.0.0-rc",
+  "private": true,
+  "author": "Mike Grabowski <grabbou@gmail.com>",
+  "jest": {
+    "scriptPreprocessor": "./src/lib/jestSupport/scriptPreprocessor.js",
+    "setupEnvScriptFile": "./src/lib/jestSupport/env.js",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "./iOS/",
+      "./assets/",
+      "./src/lib"
+    ],
+    "testPathDirs": [
+      "./src/"
+    ],
+    "testFileExtensions": [
+      "js"
+    ],
+    "unmockedModulePathPatterns": [
+      "./node_modules/immutable",
+      "./node_modules/bluebird",
+      "source-map"
+    ]
+  },
+  "engines": {
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
+  },
+  "dependencies": {
+    "lodash.assign": "^3.2.0",
+    "react-redux": "^2.1.2",
+    "redux": "^3.0.0",
+    "redux-promise-middleware": "^0.2.1",
+    "reselect": "^1.0.0",
+    "core-decorators": "^0.3.0",
+    "react-native-side-menu": "0.13.0",
+    "eventemitter3": "^1.1.1",
+    "immutable": "^3.7.5",
+    "intl": "^1.0.0",
+    "intl-messageformat": "^1.1.0",
+    "intl-relativeformat": "^1.1.0",
+    "react-native": "0.11.0",
+    "react-pure-render": "^1.0.2"
+  }
+}

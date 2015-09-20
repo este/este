@@ -1,0 +1,12 @@
+{
+  "globals": {
+    "require": true,
+    "window": true,
+    "navigator": true,
+    "console": true,
+    "Intl": true,
+    "setInterval": true,
+    "clearInterval": true,
+    "setTimeout": true
+  }
+}

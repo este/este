@@ -7,10 +7,6 @@
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
-## At a glance
-
-WIP.
-
 ## Techniques
 
 - Universal JavaScript dev stack for browser, server, mobile.
@@ -58,21 +54,20 @@ npm install
 
 ## Start Development
 
-- run `gulp`
+- run `npm run web-start-dev`
 - point your browser to [localhost:8000](http://localhost:8000)
 - build something beautiful
 
 ## Dev Tasks
 
-- `gulp` run app in development mode
-- `gulp -p` run app in production mode
-- `gulp test` run eslint, karma-ci, webpack build for production
-- `gulp tdd` run app in dev mode with Karma configured for test driven development
+- `npm run web-start-dev` run app in development mode
+- `npm run web-start-dev -p` run app in production mode
+- `npm test` test native, web & common
+- `npm run web-build` build web package
 
 ## CI Tasks
 
-- `npm start` just run app, remember to set NODE_ENV=production and others environment variables.
-- `npm postinstall` just alias for `gulp build --production`, useful for Heroku.
+- `npm run web-start` just run app, remember to set NODE_ENV=production and others environment variables.
 - `npm test` just alias for `gulp test`
 
 ## Documentation

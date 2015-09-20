@@ -1,18 +1,20 @@
 {
   "name": "@este/web",
   "description": "The most complete dev stack for React/Flux universal web apps.",
-  "authors": [
-    "Daniel Steigerwald",
-    "Mike Grabowski"
+  "author": "Daniel Steigerwald",
+  "contributors": [
+    "Mike Grabowski <grabbou@gmail.com>"
   ],
   "private": true,
   "scripts": {
-    "postinstall": "gulp build --production",
+    "build": "gulp build --production",
     "start": "node src/server",
+    "start-dev": "gulp",
     "test": "gulp test"
   },
   "engines": {
-    "node": "^4.0.0"
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
   },
   "version": "1.0.0-rc1",
   "dependencies": {
@@ -89,6 +91,7 @@
     "webpack": "^1.9.5",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.1.0",
+    "babel-loader": "^5.0.0",
     "yargs": "^3.3.1"
   }
 }

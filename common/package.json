@@ -1,14 +1,15 @@
 {
   "name": "@este/common",
   "description": "Common logic used across Este universe",
-  "authors": [
-    "Daniel Steigerwald",
-    "Mike Grabowski"
+  "author": "Daniel Steigerwald",
+  "contributors": [
+    "Mike Grabowski <grabbou@gmail.com>"
   ],
   "version": "1.0.0-rc1",
   "private": true,
   "engines": {
-    "node": "^4.0.0"
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
   },
   "dependencies": {
     "bluebird": "^2.10.0",
