@@ -18,15 +18,12 @@
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		AD2FB01C1B4356CF00E8AD91 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2FB0181B4356CF00E8AD91 /* Lato-Bold.ttf */; };
-		AD2FB01D1B4356CF00E8AD91 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2FB0191B4356CF00E8AD91 /* Lato-Italic.ttf */; };
-		AD2FB01E1B4356CF00E8AD91 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2FB01A1B4356CF00E8AD91 /* Lato-Light.ttf */; };
-		AD2FB01F1B4356CF00E8AD91 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2FB01B1B4356CF00E8AD91 /* Lato-Regular.ttf */; };
 		AD7CEAB51B3C368000F78EFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7CEAAE1B3C368000F78EFF /* AppDelegate.m */; };
 		AD7CEAB61B3C368000F78EFF /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAAF1B3C368000F78EFF /* Base.lproj */; };
 		AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB11B3C368000F78EFF /* Images.xcassets */; };
 		AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB31B3C368000F78EFF /* main.jsbundle */; };
 		AD7CEABB1B3C368000F78EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7CEAB41B3C368000F78EFF /* main.m */; };
+		AD8BAE301BAEB73E009518A7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE2F1BAEB73E009518A7 /* assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,10 +119,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		AD2FB0181B4356CF00E8AD91 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
-		AD2FB0191B4356CF00E8AD91 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
-		AD2FB01A1B4356CF00E8AD91 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
-		AD2FB01B1B4356CF00E8AD91 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		AD7CEAAD1B3C368000F78EFF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iOS/AppDelegate.h; sourceTree = "<group>"; };
 		AD7CEAAE1B3C368000F78EFF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iOS/AppDelegate.m; sourceTree = "<group>"; };
 		AD7CEAAF1B3C368000F78EFF /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = iOS/Base.lproj; sourceTree = "<group>"; };
@@ -133,6 +126,7 @@
 		AD7CEAB21B3C368000F78EFF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOS/Info.plist; sourceTree = "<group>"; };
 		AD7CEAB31B3C368000F78EFF /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = iOS/main.jsbundle; sourceTree = "<group>"; };
 		AD7CEAB41B3C368000F78EFF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iOS/main.m; sourceTree = "<group>"; };
+		AD8BAE2F1BAEB73E009518A7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +218,7 @@
 		13B07FAE1A68108700A75B9A /* Este */ = {
 			isa = PBXGroup;
 			children = (
-				AD2FB0161B4356CF00E8AD91 /* assets */,
+				AD8BAE2F1BAEB73E009518A7 /* assets */,
 				AD7CEAAD1B3C368000F78EFF /* AppDelegate.h */,
 				AD7CEAAE1B3C368000F78EFF /* AppDelegate.m */,
 				AD7CEAAF1B3C368000F78EFF /* Base.lproj */,
@@ -295,25 +289,6 @@
 				13B07F961A680F5B00A75B9A /* este-native.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		AD2FB0161B4356CF00E8AD91 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				AD2FB0171B4356CF00E8AD91 /* fonts */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
-		AD2FB0171B4356CF00E8AD91 /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				AD2FB0181B4356CF00E8AD91 /* Lato-Bold.ttf */,
-				AD2FB0191B4356CF00E8AD91 /* Lato-Italic.ttf */,
-				AD2FB01A1B4356CF00E8AD91 /* Lato-Light.ttf */,
-				AD2FB01B1B4356CF00E8AD91 /* Lato-Regular.ttf */,
-			);
-			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,12 +470,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */,
-				AD2FB01C1B4356CF00E8AD91 /* Lato-Bold.ttf in Resources */,
-				AD2FB01F1B4356CF00E8AD91 /* Lato-Regular.ttf in Resources */,
+				AD8BAE301BAEB73E009518A7 /* assets in Resources */,
 				AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */,
-				AD2FB01D1B4356CF00E8AD91 /* Lato-Italic.ttf in Resources */,
 				AD7CEAB61B3C368000F78EFF /* Base.lproj in Resources */,
-				AD2FB01E1B4356CF00E8AD91 /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
