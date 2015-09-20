@@ -62,7 +62,8 @@ npm install
 
 - `npm run web-start-dev` run app in development mode
 - `npm run web-start-dev -p` run app in production mode
-- `npm test` run eslint, karma-ci, webpack build for production
+- `npm test` test native, web & common
+- `npm run web-build` build web package
 
 ## CI Tasks
 

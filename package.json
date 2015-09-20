@@ -7,10 +7,11 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "(cd web && npm link ../common)",
+    "preinstall": "(cd web && npm link ../common) && (cd native && npm link ../common)",
     "postinstall": "(cd web && npm install) && (cd native && npm install)",
     "start": "echo Please use `npm run web-start` to start a server",
     "web-start": "(cd web && npm start)",
+    "web-build": "(cd web && npm run build)",
     "web-start-dev": "(cd web && npm run start-dev)",
     "native-start": "",
     "test": "(cd web && gulp test)"
