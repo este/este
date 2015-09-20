@@ -7,6 +7,48 @@
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
+## At a glance
+
+Este universe is organized into several folders, each of them contains its own package.json.
+
+#### @este/universal
+
+This is umbrella package to help you working with different targets.
+You should not install any dependencies here. The only dependencies that are included in that
+package are eslint and its parsers so it's easier to work with Atom/SublimeText.
+
+This package contains several scripts that are here to help you with development, but since they are just wrappers
+to the underlaying `web/` and `native/` tasks, it's not required to use them. See Dev and CI tasks section.
+
+#### @este/common
+
+Este common is a package that contains Flux (Redux) implementation, actions, reducers and universal logic that works
+across all targets. You should not install any React-specific or target-specific dependencies here to make this
+package fully cross-platform.
+
+#### @este/web
+
+This package contains previous Este/web and comes with both client and server.
+
+#### @este/native
+
+This package contains previous Este/native and comes with React Native iOS & Android implementations.
+
+## Prerequisites
+
+Install [node.js](http://nodejs.org) (v4 is required).
+Then install [gulp.js](http://gulpjs.com/).
+```shell
+npm install -g gulp
+```
+
+If you are using different node versions on your machine, use `nvm` to manage them.
+
+You may also need to upgrade `npm` to 3.x
+```shell
+npm install -g npm@3.x
+```
+
 ## Techniques
 
 - Universal JavaScript dev stack for browser, server, mobile.
@@ -24,27 +66,7 @@
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Long Term Caching through file hashes.
 
-## Prerequisites
-
-Install [node.js](http://nodejs.org) (v4 is required).
-Then install [gulp.js](http://gulpjs.com/).
-```shell
-npm install -g gulp
-```
-
-If you are using different node versions on your machine, use `nvm` to manage them.
-
-#### Windows
-
-Use this if you are using JEST or another library, which has to be compiled.
-
-- Install Python - Install version 2.7 of Python and add it to your path or/and create a PYTHONPATH environment variable.
-- Install Visual Studio (Express Edition is fine) - We will need this for some of modules that are compiled when we are installing Este. [Download VS Express](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), get one of the versions that has C++ - Express 2013 for Windows Desktop for example.
-- Set Visual Studio Version Flags - We need to tell node-gyp (something that is used for compiling addons) what version of Visual Studio we want to compile with. You can do this either through an environment variable GYP_MSVS_VERSION. If you are using Express, you have to say GYP_MSVS_VERSION=2013e.
-
-Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/)
-
-## Create App
+## Installing
 
 ```shell
 git clone https://github.com/este/este.git este-app
@@ -81,6 +103,16 @@ application architecture](https://medium.com/brigade-engineering/what-is-the-flu
 - [wiki: Recommended Sublime Text 3 Packages](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings)
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
+
+## Windows
+
+Use this if you are using JEST or another library, which has to be compiled.
+
+- Install Python - Install version 2.7 of Python and add it to your path or/and create a PYTHONPATH environment variable.
+- Install Visual Studio (Express Edition is fine) - We will need this for some of modules that are compiled when we are installing Este. [Download VS Express](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), get one of the versions that has C++ - Express 2013 for Windows Desktop for example.
+- Set Visual Studio Version Flags - We need to tell node-gyp (something that is used for compiling addons) what version of Visual Studio we want to compile with. You can do this either through an environment variable GYP_MSVS_VERSION. If you are using Express, you have to say GYP_MSVS_VERSION=2013e.
+
+Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jest-for-testing-react-components-on-windows/)
 
 ## Tips and Tricks
 
@@ -126,4 +158,4 @@ Pure means no side effects. Programming without side effects rocks. It allows us
 
 <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
-made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida)
+made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida), @grabbou and the community
