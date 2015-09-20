@@ -130,6 +130,14 @@ You can completely ignore them since they are coming from optional React Native 
 [here](https://github.com/facebook/react-native/issues/2655#issuecomment-139826260). They will be gone with React Native 0.12
 being released.
 
+#### Why do I get EACCES error during `npm install`?
+ This indicates that you do not have permission to write to the directories that npm uses to store packages and commands. One possible solution is to change the permission to npm's default directory.
+ 1. Find the path to npm's directory:  `npm config get prefix`  For many systems, this will be `/usr/local`
+ 2. Change the owner of npm's directory's to the effective name of the current user
+ ```
+ sudo chown -R `whoami` <directory>
+ ```
+
 #### Why does the CSS flicker when starting the app/refreshing it?
 In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
 
