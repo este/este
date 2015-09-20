@@ -10,7 +10,7 @@
     "preinstall": "(cd web; npm link ../common); (cd native; npm link ../common)",
     "postinstall": "(cd web; npm install); (cd native; npm install)",
     "start": "echo Please use `npm run web-start` to start a server",
-    "web-start": "(cd web && npm start)",
+    "web-start": "(cd web; npm start)",
     "web-start-dev": "(cd web; npm run start-dev)",
     "web-build": "(cd web; npm run build)",
     "native-start": "",
