@@ -124,6 +124,12 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
 
 ## FAQ
 
+#### Why I am seeing warnings and errors when running `npm install`?
+
+You can completely ignore them since they are coming from optional React Native dependencies as noted
+[here](https://github.com/facebook/react-native/issues/2655#issuecomment-139826260). They will be gone with React Native 0.12
+being released.
+
 #### Why does the CSS flicker when starting the app/refreshing it?
 In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
 
