@@ -7,6 +7,10 @@ var constants = require('./constants');
 var path = require('path');
 var webpack = require('webpack');
 
+// Webpack does not like npm link
+// https://github.com/webpack/webpack/issues/784#issuecomment-126835731
+var babelLoader = require.resolve('babel-loader');
+
 var devtools = process.env.CONTINUOUS_INTEGRATION
   ? 'inline-source-map'
   // cheap-module-eval-source-map, because we want original source, but we don't
@@ -56,7 +60,7 @@ module.exports = function(isDevelopment) {
         test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
       }, {
         exclude: /node_modules/,
-        loaders: ['babel'],
+        loaders: [babelLoader],
         test: /\.js$/
       }].concat(stylesLoaders())
     },

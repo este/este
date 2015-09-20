@@ -90,6 +90,7 @@
     "webpack": "^1.9.5",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.1.0",
+    "babel-loader": "^5.0.0",
     "yargs": "^3.3.1"
   }
 }
