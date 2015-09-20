@@ -2,9 +2,7 @@
   "name": "@este/native",
   "version": "1.0.0-rc",
   "private": true,
-  "author": [
-    "Mike Grabowski"
-  ],
+  "author": "Mike Grabowski <grabbou@gmail.com>",
   "jest": {
     "scriptPreprocessor": "./src/lib/jestSupport/scriptPreprocessor.js",
     "setupEnvScriptFile": "./src/lib/jestSupport/env.js",
@@ -27,7 +25,8 @@
     ]
   },
   "engines": {
-    "node": ">= 4.0.0"
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
   },
   "dependencies": {
     "lodash.assign": "^3.2.0",

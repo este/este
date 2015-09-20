@@ -1,9 +1,9 @@
 {
   "name": "@este/web",
   "description": "The most complete dev stack for React/Flux universal web apps.",
-  "authors": [
-    "Daniel Steigerwald",
-    "Mike Grabowski"
+  "author": "Daniel Steigerwald",
+  "contributors": [
+    "Mike Grabowski <grabbou@gmail.com>"
   ],
   "private": true,
   "scripts": {
@@ -13,7 +13,8 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": "^4.0.0"
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
   },
   "version": "1.0.0-rc1",
   "dependencies": {

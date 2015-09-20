@@ -17,7 +17,8 @@
     "test": "(cd web && gulp test)"
   },
   "engines": {
-    "node": "^4.0.0"
+    "node": "^4.0.0",
+    "npm": "^3.0.0"
   },
   "dependencies": {
     "babel": "^5.0.8",
