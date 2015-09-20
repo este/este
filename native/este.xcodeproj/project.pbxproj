@@ -23,7 +23,10 @@
 		AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB11B3C368000F78EFF /* Images.xcassets */; };
 		AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = AD7CEAB31B3C368000F78EFF /* main.jsbundle */; };
 		AD7CEABB1B3C368000F78EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7CEAB41B3C368000F78EFF /* main.m */; };
-		AD8BAE301BAEB73E009518A7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE2F1BAEB73E009518A7 /* assets */; };
+		AD8BAE421BAEC130009518A7 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE3E1BAEC130009518A7 /* Lato-Bold.ttf */; };
+		AD8BAE431BAEC130009518A7 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE3F1BAEC130009518A7 /* Lato-Italic.ttf */; };
+		AD8BAE441BAEC130009518A7 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE401BAEC130009518A7 /* Lato-Light.ttf */; };
+		AD8BAE451BAEC130009518A7 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD8BAE411BAEC130009518A7 /* Lato-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +129,10 @@
 		AD7CEAB21B3C368000F78EFF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOS/Info.plist; sourceTree = "<group>"; };
 		AD7CEAB31B3C368000F78EFF /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = iOS/main.jsbundle; sourceTree = "<group>"; };
 		AD7CEAB41B3C368000F78EFF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iOS/main.m; sourceTree = "<group>"; };
-		AD8BAE2F1BAEB73E009518A7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
+		AD8BAE3E1BAEC130009518A7 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		AD8BAE3F1BAEC130009518A7 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
+		AD8BAE401BAEC130009518A7 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
+		AD8BAE411BAEC130009518A7 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +224,7 @@
 		13B07FAE1A68108700A75B9A /* Este */ = {
 			isa = PBXGroup;
 			children = (
-				AD8BAE2F1BAEB73E009518A7 /* assets */,
+				AD8BAE461BAEC138009518A7 /* Resources */,
 				AD7CEAAD1B3C368000F78EFF /* AppDelegate.h */,
 				AD7CEAAE1B3C368000F78EFF /* AppDelegate.m */,
 				AD7CEAAF1B3C368000F78EFF /* Base.lproj */,
@@ -289,6 +295,17 @@
 				13B07F961A680F5B00A75B9A /* este-native.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8BAE461BAEC138009518A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BAE3E1BAEC130009518A7 /* Lato-Bold.ttf */,
+				AD8BAE3F1BAEC130009518A7 /* Lato-Italic.ttf */,
+				AD8BAE401BAEC130009518A7 /* Lato-Light.ttf */,
+				AD8BAE411BAEC130009518A7 /* Lato-Regular.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,8 +486,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8BAE421BAEC130009518A7 /* Lato-Bold.ttf in Resources */,
+				AD8BAE431BAEC130009518A7 /* Lato-Italic.ttf in Resources */,
+				AD8BAE441BAEC130009518A7 /* Lato-Light.ttf in Resources */,
+				AD8BAE451BAEC130009518A7 /* Lato-Regular.ttf in Resources */,
 				AD7CEAB81B3C368000F78EFF /* Images.xcassets in Resources */,
-				AD8BAE301BAEB73E009518A7 /* assets in Resources */,
 				AD7CEABA1B3C368000F78EFF /* main.jsbundle in Resources */,
 				AD7CEAB61B3C368000F78EFF /* Base.lproj in Resources */,
 			);
