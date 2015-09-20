@@ -54,19 +54,19 @@ npm install
 
 ## Start Development
 
-- run `npm run-script web-start-dev`
+- run `npm run web-start-dev`
 - point your browser to [localhost:8000](http://localhost:8000)
 - build something beautiful
 
 ## Dev Tasks
 
-- `npm run-script web-start-dev` run app in development mode
-- `npm run-script web-start-dev -p` run app in production mode
+- `npm run web-start-dev` run app in development mode
+- `npm run web-start-dev -p` run app in production mode
 - `npm test` run eslint, karma-ci, webpack build for production
 
 ## CI Tasks
 
-- `npm run-script web-start` just run app, remember to set NODE_ENV=production and others environment variables.
+- `npm run web-start` just run app, remember to set NODE_ENV=production and others environment variables.
 - `npm test` just alias for `gulp test`
 
 ## Documentation
