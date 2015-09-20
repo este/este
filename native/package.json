@@ -25,8 +25,7 @@
     ]
   },
   "engines": {
-    "node": "^4.0.0",
-    "npm": "^3.0.0"
+    "iojs": "2.5.0"
   },
   "dependencies": {
     "lodash.assign": "^3.2.0",
