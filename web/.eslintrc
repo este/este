@@ -3,11 +3,10 @@
     "browser": true
   },
   "globals": {
-    // Because webpack handles it.
     "process": true,
     "require": true
   },
   "rules": {
-    "strict": [0, "never"] // don't require "use strict" in source files, webpack adds it
+    "strict": [0, "never"]
   }
 }

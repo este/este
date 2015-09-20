@@ -20,42 +20,42 @@ export default function todosReducer(state = initialState, action) {
 
   switch (action.type) {
 
-  case actions.SET_NEW_TODO_FIELD: {
-    const {name, value} = action.payload;
-    return state.setIn(['newTodo', name], value);
-  }
+    case actions.SET_NEW_TODO_FIELD: {
+      const {name, value} = action.payload;
+      return state.setIn(['newTodo', name], value);
+    }
 
-  case actions.ADD_TODO: {
-    const {todo} = action.payload;
-    const newTodo = todo.merge({
-      id: getRandomString(),
-      title: todo.title.trim()
-    });
-    return state
-      .update('list', list => list.push(newTodo))
-      .set('newTodo', new Todo);
-  }
+    case actions.ADD_TODO: {
+      const {todo} = action.payload;
+      const newTodo = todo.merge({
+        id: getRandomString(),
+        title: todo.title.trim()
+      });
+      return state
+        .update('list', list => list.push(newTodo))
+        .set('newTodo', new Todo);
+    }
 
-  case actions.DELETE_TODO: {
-    const {id} = action.payload;
-    return state.update('list', list =>
-      list.delete(list.findIndex(todo => todo.id === id))
-    );
-  }
+    case actions.DELETE_TODO: {
+      const {id} = action.payload;
+      return state.update('list', list =>
+        list.delete(list.findIndex(todo => todo.id === id))
+      );
+    }
 
-  case actions.CLEAR_ALL: {
-    return state
-      .update('list', list => list.clear())
-      .set('newTodo', new Todo);
-  }
+    case actions.CLEAR_ALL: {
+      return state
+        .update('list', list => list.clear())
+        .set('newTodo', new Todo);
+    }
 
-  case actions.ADD_HUNDRED_TODOS: {
-    const todos = Range(0, 100).map(() => {
-      const id = getRandomString();
-      return new Todo({id, title: `Item #${id}`});
-    }).toArray();
-    return state.update('list', list => list.push(...todos));
-  }
+    case actions.ADD_HUNDRED_TODOS: {
+      const todos = Range(0, 100).map(() => {
+        const id = getRandomString();
+        return new Todo({id, title: `Item #${id}`});
+      }).toArray();
+      return state.update('list', list => list.push(...todos));
+    }
 
   }
 

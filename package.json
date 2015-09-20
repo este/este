@@ -21,8 +21,9 @@
   "dependencies": {
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
-    "babel-eslint": "^4.0.5",
+    "babel-eslint": "^4.1.2",
     "babel-loader": "^5.0.0",
-    "eslint": "^1.0.0"
+    "eslint": "^1.4.1",
+    "eslint-plugin-react": "^3.3.2"
   }
 }
