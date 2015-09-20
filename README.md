@@ -83,14 +83,13 @@ npm install
 ## Dev Tasks
 
 - `npm run web-start-dev` run app in development mode
-- `npm run web-start-dev -p` run app in production mode
 - `npm test` test native, web & common
 - `npm run web-build` build web package
+- `npm test` test all targets
 
-## CI Tasks
+## Prod Tasks
 
 - `npm run web-start` just run app, remember to set NODE_ENV=production and others environment variables.
-- `npm test` just alias for `gulp test`
 
 ## Documentation
 
