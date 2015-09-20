@@ -83,9 +83,8 @@ npm install
 ## Dev Tasks
 
 - `npm run web-start-dev` run app in development mode
-- `npm test` test native, web & common
 - `npm run web-build` build web package
-- `npm test` test all targets
+- `npm test` test native, web & common
 
 ## Prod Tasks
 
