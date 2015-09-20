@@ -17,8 +17,7 @@
     "test": "(cd web && npm test)"
   },
   "engines": {
-    "node": "^4.0.0",
-    "npm": "^3.0.0"
+    "iojs": "2.5.0"
   },
   "dependencies": {
     "eslint": "^1.4.1",
