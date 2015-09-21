@@ -37,10 +37,6 @@ This package contains previous Este/native and comes with React Native iOS & And
 ## Prerequisites
 
 Install [node.js](http://nodejs.org) (v4 is required).
-Then install [gulp.js](http://gulpjs.com/).
-```shell
-npm install -g gulp
-```
 
 If you are using different node versions on your machine, use `nvm` to manage them.
 
@@ -120,7 +116,6 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
 - Even though we can use `import {canUseDOM} from 'react/lib/ExecutionEnvironment'` to detect browser/server, don't do it since it's runtime value. Use webpack DefinePlugin to set `process.env.IS_BROWSER` rather, because compilation removes dead code.
 - How to use Closure Tools, [gist](https://gist.github.com/steida/afbc595a1e2f27e925d9)
 - Recommended editors are [sublimetext](http://www.sublimetext.com/) and [atom.io](https://atom.io) ([tips](https://github.com/steida/atom-io-settings)).
-- When `gulp` command fails with `No gulpfile found`. Problem is with gulp version on your system. Simple fix: https://github.com/gulpjs/gulp-cli/issues/27#issuecomment-116134527
 
 ## FAQ
 
@@ -139,7 +134,7 @@ being released.
  ```
 
 #### Why does the CSS flicker when starting the app/refreshing it?
-In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
+In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`NODE_ENV=production npm web-start`).
 
 #### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
 Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be `use()` by the main app, like any other middleware.
