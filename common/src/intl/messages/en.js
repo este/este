@@ -59,11 +59,7 @@ export default {
         },
         {
           key: 'production',
-          txt: `App performance and size in production mode (<code>gulp -p</code>)`
-        },
-        {
-          key: 'globalState',
-          txt: `Time travel with <b>ctrl+shift+s</b> and <b>ctrl+shift+l</b>.`
+          txt: `App performance and size in production mode (<code>npm web-start</code>)`
         }
       ]
     }
