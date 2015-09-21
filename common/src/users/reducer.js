@@ -19,10 +19,10 @@ export default function usersReducer(state = initialState, action) {
 
   switch (action.type) {
 
-  case authActions.LOGIN_SUCCESS: {
-    const {email} = action.payload;
-    return state.set('viewer', new User({email}));
-  }
+    case authActions.LOGIN_SUCCESS: {
+      const {email} = action.payload;
+      return state.set('viewer', new User({email}));
+    }
 
   }
 
