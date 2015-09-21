@@ -68,6 +68,7 @@
     "no-unreachable": 2,
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "no-use-before-define": [2, "nofunc"],
+    "no-var": 2,
     "no-warning-comments": [0, {"terms": ["todo", "fixme"]}],
     "object-curly-spacing": 2,
     "quote-props": [0, "as-needed"],

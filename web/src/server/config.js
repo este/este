@@ -1,3 +1,5 @@
+/* eslint-disable no-var */
+
 var hashFile = require('hash-file');
 var nconf = require('nconf');
 

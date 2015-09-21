@@ -1,24 +1,22 @@
-'use strict';
-
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var NyanProgressPlugin = require('nyan-progress-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var constants = require('./constants');
-var path = require('path');
-var webpack = require('webpack');
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import NyanProgressPlugin from 'nyan-progress-webpack-plugin';
+import autoprefixer from 'autoprefixer';
+import constants from './constants';
+import path from 'path';
+import webpack from 'webpack';
 
 // Webpack does not like npm link
 // https://github.com/webpack/webpack/issues/784#issuecomment-126835731
-var babelLoader = require.resolve('babel-loader');
+const babelLoader = require.resolve('babel-loader');
 
-var devtools = process.env.CONTINUOUS_INTEGRATION
+const devtools = process.env.CONTINUOUS_INTEGRATION
   ? 'inline-source-map'
   // cheap-module-eval-source-map, because we want original source, but we don't
   // care about columns, which makes this devtool faster than eval-source-map.
   // http://webpack.github.io/docs/configuration.html#devtool
   : 'cheap-module-eval-source-map';
 
-var loaders = {
+const loaders = {
   'css': '',
   'less': '!less-loader',
   'scss': '!sass-loader',
@@ -26,23 +24,23 @@ var loaders = {
   'styl': '!stylus-loader'
 };
 
-module.exports = function(isDevelopment) {
+export default function makeConfig(isDevelopment) {
 
   function stylesLoaders() {
-    return Object.keys(loaders).map(function(ext) {
-      var prefix = 'css-loader!postcss-loader';
-      var extLoaders = prefix + loaders[ext];
-      var loader = isDevelopment
-        ? 'style-loader!' + extLoaders
+    return Object.keys(loaders).map(ext => {
+      const prefix = 'css-loader!postcss-loader';
+      const extLoaders = prefix + loaders[ext];
+      const loader = isDevelopment
+        ? `style-loader!${extLoaders}`
         : ExtractTextPlugin.extract('style-loader', extLoaders);
       return {
         loader: loader,
-        test: new RegExp('\\.(' + ext + ')$')
+        test: new RegExp(`\\.(${ext})$`)
       };
     });
   }
 
-  var config = {
+  const config = {
     cache: isDevelopment,
     debug: isDevelopment,
     devtool: isDevelopment ? devtools : '',
@@ -74,8 +72,8 @@ module.exports = function(isDevelopment) {
       filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js'
     },
-    plugins: (function() {
-      var plugins = [
+    plugins: (() => {
+      const plugins = [
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
@@ -106,9 +104,7 @@ module.exports = function(isDevelopment) {
       );
       return plugins;
     })(),
-    postcss: function() {
-      return [autoprefixer({browsers: 'last 2 version'})];
-    },
+    postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     resolve: {
       extensions: ['', '.js', '.json'],
       modulesDirectories: ['src', 'node_modules'],

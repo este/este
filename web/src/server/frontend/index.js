@@ -4,7 +4,7 @@ import config from '../config';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
-import makeWebpackConfig from '../../../webpack/makeconfig';
+import makeWebpackConfig from '../../../webpack/makeConfig';
 import render from './render';
 import userState from './userstate';
 import webpack from 'webpack';
