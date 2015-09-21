@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignore": ["src/client/**", "../common"]
+}

@@ -97,5 +97,8 @@
     "karma-notify-reporter": "^0.1.1",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.7.0"
   }
 }
