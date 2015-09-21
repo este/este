@@ -1,10 +1,10 @@
 import App from './app/app.react';
-import Home from './home/index.react';
-import Login from './auth/index.react';
-import Me from './me/index.react';
-import NotFound from './notfound/index.react';
+import Home from './pages/home.react';
+import Login from './pages/auth.react';
+import Me from './pages/me.react';
+import NotFound from './pages/notfound.react';
 import React from 'react';
-import Todos from './todos/index.react';
+import Todos from './pages/todos.react';
 import {IndexRoute, Route} from 'react-router';
 
 export default function createRoutes(getState) {

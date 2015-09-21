@@ -1,10 +1,10 @@
 import Component from 'react-pure-render/component';
 import DocumentTitle from 'react-document-title';
 import React, {PropTypes} from 'react';
-import ToCheck from './toCheck.react';
+import ToCheck from '../home/toCheck.react';
 import {FormattedHTMLMessage} from 'react-intl';
 
-export default class HomeIndex extends Component {
+export default class Home extends Component {
 
   // Why not .isRequired? https://github.com/rackt/react-router/issues/1505
   static propTypes = {

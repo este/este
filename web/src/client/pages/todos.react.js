@@ -1,11 +1,11 @@
-import Buttons from './buttons.react';
+import Buttons from '../todos/buttons.react';
 import Component from 'react-pure-render/component';
 import DocumentTitle from 'react-document-title';
-import NewTodo from './newTodo.react';
+import NewTodo from '../todos/newTodo.react';
 import React, {PropTypes} from 'react';
-import Todos from './todos.react';
+import TodosList from '../todos/todosList.react';
 
-export default class TodosIndex extends Component {
+export default class Todos extends Component {
 
   static propTypes = {
     actions: PropTypes.object,
@@ -20,7 +20,7 @@ export default class TodosIndex extends Component {
       <DocumentTitle title={msg.title}>
         <div className="todos-page">
           <NewTodo {...{actions, msg, newTodo}} />
-          <Todos {...{actions, list, msg}} />
+          <TodosList {...{actions, list, msg}} />
           <Buttons clearAllEnabled={list.size > 0} {...{actions, msg}} />
         </div>
       </DocumentTitle>

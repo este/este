@@ -1,9 +1,9 @@
 import Component from 'react-pure-render/component';
 import DocumentTitle from 'react-document-title';
-import Login from './login.react';
+import Login from '../auth/login.react';
 import React, {PropTypes} from 'react';
 
-export default class AuthIndex extends Component {
+export default class Auth extends Component {
 
   static propTypes = {
     msg: PropTypes.object
