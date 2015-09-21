@@ -1,6 +1,6 @@
 import api from './api';
 import config from './config';
-import errorHandler from './lib/errorHandler';
+import errorHandler from './lib/errorhandler';
 import express from 'express';
 import frontend from './frontend';
 import {Server} from 'http';

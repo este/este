@@ -9,7 +9,7 @@ import {configureStore} from '@este/common';
 import createLocation from 'history/lib/createLocation';
 import createRoutes from '../../client/createRoutes';
 import immutable from 'immutable';
-import initialState from '../initialState';
+import initialState from '../initialstate';
 import stateMerger from '../lib/merger';
 import useragent from 'useragent';
 import {IntlProvider} from 'react-intl';
