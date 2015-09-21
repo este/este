@@ -16,7 +16,7 @@ const revive = ({list, newTodo}) => initialState.merge({
 });
 
 export default function todosReducer(state = initialState, action) {
-  if (!(state instanceof InitialState)) state = revive(state);
+  if (!(state instanceof InitialState)) return revive(state);
 
   switch (action.type) {
 

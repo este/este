@@ -10,7 +10,7 @@ const initialState = new InitialState;
 
 export default function intlReducer(state = initialState, action) {
 
-  if (!(state instanceof InitialState)) state = initialState.mergeDeep(state);
+  if (!(state instanceof InitialState)) return initialState.mergeDeep(state);
 
   return state;
 

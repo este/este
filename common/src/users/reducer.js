@@ -15,7 +15,7 @@ function revive({viewer}) {
 }
 
 export default function usersReducer(state = initialState, action) {
-  if (!(state instanceof InitialState)) state = revive(state);
+  if (!(state instanceof InitialState)) return revive(state);
 
   switch (action.type) {
 
