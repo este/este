@@ -1,6 +1,8 @@
 /* eslint-env node */
 
-module.exports = function(config) {
+import makeConfig from './webpack/makeConfig';
+
+export default function karmaConf(config) {
 
   config.set({
     // autoWatch, it works enabled or not. Probably defined by singleRun.
@@ -37,7 +39,7 @@ module.exports = function(config) {
     ] : [
       'progress', 'notify'
     ],
-    webpack: require('./webpack/makeconfig')(true),
+    webpack: makeConfig(true),
     webpackServer: {
       noInfo: true
     }
