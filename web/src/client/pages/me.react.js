@@ -4,7 +4,7 @@ import Logout from '../auth/logout.react';
 import React, {PropTypes} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-export default class MeIndex extends Component {
+export default class Me extends Component {
 
   static propTypes = {
     msg: PropTypes.object,
