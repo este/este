@@ -3,6 +3,7 @@ import createLogger from 'redux-logger';
 import fetch from 'isomorphic-fetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
+import stateToJS from './lib/stateToJS';
 import validate from './validate';
 import {applyMiddleware, createStore} from 'redux';
 
@@ -16,7 +17,7 @@ export default function configureStore(initialState) {
   if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
     const logger = createLogger({
       collapsed: () => true,
-      transformer: state => state.toJS()
+      transformer: stateToJS
     });
     middlewares.push(logger);
   }
