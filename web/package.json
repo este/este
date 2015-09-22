@@ -9,7 +9,6 @@
   "scripts": {
     "build": "gulp build --production",
     "start": "node src/server",
-    "start-hot": "node webpack/server",
     "start-dev": "gulp",
     "test": "gulp test"
   },

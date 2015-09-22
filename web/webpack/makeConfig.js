@@ -41,7 +41,7 @@ export default function makeConfig(isDevelopment) {
   }
 
   const config = {
-    hotPort: 8080,
+    hotPort: constants.HOT_RELOAD_PORT,
     cache: isDevelopment,
     debug: isDevelopment,
     devtool: isDevelopment ? devtools : '',
