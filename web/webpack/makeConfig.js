@@ -47,7 +47,7 @@ export default function makeConfig(isDevelopment) {
     devtool: isDevelopment ? devtools : '',
     entry: {
       app: isDevelopment ? [
-        'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr',
+        `webpack-hot-middleware/client?path=http://localhost:${constants.HOT_RELOAD_PORT}/__webpack_hmr`,
         path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
         path.join(constants.SRC_DIR, 'client/main.js')
@@ -67,7 +67,7 @@ export default function makeConfig(isDevelopment) {
       path: constants.BUILD_DIR,
       filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: 'http://localhost:8080/build/'
+      publicPath: `http://localhost:${constants.HOT_RELOAD_PORT}/build/`
     } : {
       path: constants.BUILD_DIR,
       filename: '[name].js',
