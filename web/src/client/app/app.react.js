@@ -24,7 +24,6 @@ export default class App extends Component {
 
     return (
       <div className="page">
-        !!!
         <Header msg={msg.app.header} {...{viewer, pathname}} />
         {React.cloneElement(this.props.children, this.props)}
         <Footer msg={msg.app.footer} />
