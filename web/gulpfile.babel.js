@@ -32,7 +32,7 @@ gulp.task('eslint-ci', () => {
 });
 
 gulp.task('test', (done) => {
-  runSequence('eslint-ci', 'build-webpack', done);
+  runSequence('eslint-ci', 'build', done);
 });
 
 gulp.task('server-hot', bg('node', './webpack/server'));
