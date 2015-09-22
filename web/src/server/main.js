@@ -8,13 +8,8 @@ import {Server} from 'http';
 const app = express();
 const server = Server(app);
 
-// Load API.
 app.use('/api/v1', api);
-
-// Load react-js frontend.
 app.use(frontend);
-
-// Error reporting
 app.use(errorHandler);
 
 server.listen(config.port, () => {
