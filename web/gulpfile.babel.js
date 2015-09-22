@@ -20,7 +20,7 @@ gulp.task('env', () => {
   process.env.NODE_ENV = 'development'; // eslint-disable-line no-undef
 });
 
-gulp.task('build-webpack', webpackBuild);
+gulp.task('build', webpackBuild);
 
 gulp.task('eslint', () => {
   return runEslint();

@@ -7,7 +7,7 @@
   ],
   "private": true,
   "scripts": {
-    "build": "gulp build --production",
+    "build": "gulp build",
     "start": "NODE_ENV=production node src/server",
     "start-dev": "gulp",
     "test": "gulp test"
