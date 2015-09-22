@@ -7,6 +7,8 @@
 
 > The most complete React/Flux dev stack and starter kit for universal functional web apps. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), learn laser focused libraries and patterns instead.
 
+> _Breaking_: Come to discuss Este with us at [reactive2015.com](http://reactive2015.com/) conference. The speaker line up is surprisingly good: Guillermo Rauch, Nikita Prokopov, James Long, Martin Konicek (Facebook React Native developer), Julia Gao and more.
+
 ## At a glance
 
 Este universe is organized into several folders, each of them contains its own package.json.
