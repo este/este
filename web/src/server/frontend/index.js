@@ -1,27 +1,11 @@
 // import favicon from 'serve-favicon';
 import compression from 'compression';
-import config from '../config';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
-import makeWebpackConfig from '../../../webpack/makeConfig';
 import render from './render';
-import webpack from 'webpack';
-import webpackDev from 'webpack-dev-middleware';
-import webpackHot from 'webpack-hot-middleware';
 
 const app = express();
-
-// TODO: Move to separate server.
-if (!config.isProduction) {
-  const webpackConfig = makeWebpackConfig(true);
-  const compiler = webpack(webpackConfig);
-  app.use(webpackDev(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
-  }));
-  app.use(webpackHot(compiler));
-}
 
 app.use(esteMiddleware());
 app.use(compression());

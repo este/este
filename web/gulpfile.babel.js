@@ -61,11 +61,8 @@ gulp.task('test', (done) => {
   runSequence('eslint-ci', 'build-webpack', done);
 });
 
-gulp.task('server', ['env', 'build'], bg('node', './src/server'));
+gulp.task('server-hot', bg('node', './webpack/server'));
 
-// gulp.task('tdd', (done) => {
-//   // Run karma configured for TDD.
-//   runSequence('server', 'karma', done);
-// });
+gulp.task('server', ['env', 'build', 'server-hot'], bg('nodemon', './src/server'));
 
 gulp.task('default', ['server']);

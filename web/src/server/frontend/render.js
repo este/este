@@ -73,7 +73,7 @@ function getPageHtml(renderProps, store, hostname, ua) {
 
   const appScriptSrc = config.isProduction
     ? '/_assets/app.js?' + config.assetsHashes.appJs
-    : `//${hostname}:8000/build/app.js`;
+    : `//${hostname}:8080/build/app.js`;
 
   let scriptHtml = '';
 
