@@ -2,7 +2,7 @@ import App from './app/app.react';
 import Home from './pages/home.react';
 import Login from './pages/auth.react';
 import Me from './pages/me.react';
-import NotFound from './pages/notfound.react';
+import NotFound from './pages/notFound.react';
 import React from 'react';
 import Todos from './pages/todos.react';
 import {IndexRoute, Route} from 'react-router';
