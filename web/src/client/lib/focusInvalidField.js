@@ -1,8 +1,8 @@
-import {Validation} from '@este/common';
+import {ValidationError} from '@este/common';
 import ReactDOM from 'react-dom';
 
 export default function focusInvalidField(component, error) {
-  if (!(error instanceof Validation.ValidationError)) return;
+  if (!(error instanceof ValidationError)) return;
   if (!error.prop) return;
   const node = ReactDOM.findDOMNode(component);
   if (!node) return;

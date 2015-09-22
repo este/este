@@ -1,10 +1,11 @@
 import Validation from './lib/validation';
+import ValidationError from './lib/ValidationError';
 import {format} from './intl/format';
 
+// Localized validation.
 export default function validate(state) {
 
-  // TODO: Refactor. Use simple selector from intl, for mapStateToProps as well.
-  const intl = state.get('intl');
+  const intl = state.intl;
   const msg = intl.messages[intl.selectedLanguage];
 
   class LocalizedValidation extends Validation {
@@ -26,7 +27,7 @@ export default function validate(state) {
   const validate = (object) => new LocalizedValidation(object);
 
   validate.wrongPassword = prop =>
-    new Validation.ValidationError(msg.auth.form.wrongPassword, prop);
+    new ValidationError(msg.auth.form.wrongPassword, prop);
 
   return validate;
 

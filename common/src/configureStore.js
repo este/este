@@ -8,7 +8,10 @@ import validate from './validate';
 import {applyMiddleware, createStore} from 'redux';
 
 export default function configureStore(initialState) {
-  const dependenciesMiddleware = injectDependencies({fetch}, {validate});
+  const dependenciesMiddleware = injectDependencies(
+    {fetch},
+    {validate}
+  );
   const middlewares = [
     dependenciesMiddleware,
     promiseMiddleware

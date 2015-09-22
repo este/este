@@ -1,16 +1,7 @@
-/*
-  Simple serial sync/async chriso/validator.js validation wrapper with promises.
-*/
+// Simple serial sync/async chriso/validator.js wrapper with promises.
 import Promise from 'bluebird';
+import ValidationError from './ValidationError';
 import validator from 'validator';
-
-export class ValidationError extends Error {
-  constructor(message, prop) {
-    super();
-    this.message = message;
-    this.prop = prop;
-  }
-}
 
 export default class Validation {
 
