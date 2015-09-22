@@ -10,7 +10,10 @@ const initialState = new InitialState;
 
 export default function intlReducer(state = initialState, action) {
 
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state);
+  if (!(state instanceof InitialState)) return initialState
+    .mergeDeep(state)
+    // TODO: Investigate why messages are converted to map.
+    .update('messages', messages => messages.toJS())
 
   return state;
 

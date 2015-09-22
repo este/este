@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 
 const app = document.getElementById('app');
 const initialState = window.__INITIAL_STATE__;
+
 const store = configureStore(initialState);
 const routes = createRoutes(() => store.getState());
 

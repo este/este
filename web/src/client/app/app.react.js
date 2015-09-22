@@ -17,6 +17,7 @@ export default class App extends Component {
   }
 
   render() {
+
     // Use location pathname to ensure header is rerendered on url change, so
     // links update their active className.
     const {location: {pathname}, msg, users: {viewer}} = this.props;

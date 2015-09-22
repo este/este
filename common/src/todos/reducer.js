@@ -5,7 +5,7 @@ import {Range, Record} from 'immutable';
 
 const InitialState = Record({
   list: [],
-  newTodo: null
+  newTodo: new Todo
 });
 const initialState = new InitialState;
 

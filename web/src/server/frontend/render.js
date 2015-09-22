@@ -1,99 +1,65 @@
-// TODO: Split to files.
+// TODO: Refactor to files.
 import DocumentTitle from 'react-document-title';
 import Html from './html.react';
-import Promise from 'bluebird';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import config from '../config';
-import {configureStore} from '@este/common';
 import createLocation from 'history/lib/createLocation';
 import createRoutes from '../../client/createRoutes';
-import immutable from 'immutable';
 import initialState from '../initialState';
-import stateMerger from '../lib/merger';
 import useragent from 'useragent';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
+import {configureStore} from '@este/common';
+import {fromJS} from 'immutable';
 
-export default function render(req, res, userState) {
-  const appState = immutable.fromJS(initialState)
-    .mergeWith(stateMerger, userState).toJS();
-  return renderPage(req, res, appState);
-}
+export default function render(req, res, next) {
+  const requestInitialState = fromJS(initialState).mergeDeep({
+    device: {
+      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
+    }
+  });
 
-function renderPage(req, res, appState) {
-  return new Promise((resolve, reject) => {
+  const store = configureStore(requestInitialState.toJS());
 
-    const routes = createRoutes(() => appState);
-    const location = createLocation(req.url);
+  // TODO: Refactor to user state without common.
+  // const {actions} = mapDispatchToProps(store.dispatch);
+  // actions.addTodo(new Todo({title: 'relax'}));
 
-    match({routes, location}, (error, redirectLocation, renderProps) => {
-      if (redirectLocation) {
-        res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-        resolve();
-      } else if (error) {
-        // res.send(500, error.message)
-        reject(error);
-      } else if (renderProps == null) {
-        // TODO: Redirect to page we already have.
-        res.send(404, 'Not found');
-        resolve();
-      } else {
-        // console.log(renderProps)
-        // TODO: Extract method.
-        const ua = useragent.is(req.headers['user-agent']);
-        const html = getPageHtml(renderProps, appState, {
-          hostname: req.hostname,
-          // TODO: Remove once Safari and IE without Intl will die.
-          needIntlPolyfill: ua.safari || (ua.ie && ua.version < '11')
-        });
+  const routes = createRoutes(() => store.getState());
+  const location = createLocation(req.url);
 
-        res.send(html);
-      }
-    });
+  match({routes, location}, (error, redirectLocation, renderProps) => {
+    // console.log(error)
+
+    if (redirectLocation) {
+      console.log('redirectLocation');
+      res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+      return;
+    }
+
+    if (error) {
+      next(error);
+      return;
+    }
+
+    if (renderProps == null) {
+      console.log('renderProps == null');
+      // TODO: Redirect to page we already have.
+      res.send(404, 'Not found');
+      return;
+    }
+
+    const ua = useragent.is(req.headers['user-agent']);
+    const html = getPageHtml(renderProps, store, req.hostname, ua);
+    res.send(html);
   });
 }
 
-// function renderPage(req, res, appState) {
-//   return new Promise((resolve, reject) => {
-
-//     const router = Router.create({
-//       routes,
-//       location: req.originalUrl,
-//       onError: reject,
-//       onAbort: (abortReason) => {
-//         // Some requireAuth higher order component requested redirect.
-//         if (abortReason.constructor.name === 'Redirect') {
-//           const {to, params, query} = abortReason;
-//           const path = router.makePath(to, params, query);
-//           res.redirect(path);
-//           resolve();
-//           return;
-//         }
-//         reject(abortReason);
-//       }
-//     });
-
-//     router.run((Handler, routerState) => {
-//       const ua = useragent.is(req.headers['user-agent']);
-//       const html = getPageHtml(Handler, appState, {
-//         hostname: req.hostname,
-//         // TODO: Remove once Safari and IE without Intl will die.
-//         needIntlPolyfill: ua.safari || (ua.ie && ua.version < '11')
-//       });
-//       const notFound = routerState.routes.some(route => route.name === 'not-found');
-//       const status = notFound ? 404 : 200;
-//       res.status(status).send(html);
-//       resolve();
-//     });
-
-//   });
-// }
-
-function getPageHtml(renderProps, appState, {hostname, needIntlPolyfill}) {
-  // TODO: Refactor body html pridavat, lepsi. A komponentu do stringu!
-  const store = configureStore(appState);
+// TODO: Refactor.
+function getPageHtml(renderProps, store, hostname, ua) {
+  const needIntlPolyfill = ua.safari || (ua.ie && ua.version < '11');
 
   const appHtml = `<div id="app">${
     ReactDOMServer.renderToString(
@@ -119,7 +85,7 @@ function getPageHtml(renderProps, appState, {hostname, needIntlPolyfill}) {
 
   scriptHtml += `
     <script>
-      window.__INITIAL_STATE__ = ${JSON.stringify(appState)};
+      window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};
     </script>
     <script src="${appScriptSrc}"></script>
   `;

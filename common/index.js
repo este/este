@@ -1,3 +1,4 @@
+// TODO: Redesign.
 export {default as ValidationError} from './src/lib/ValidationError';
 export {default as Validation} from './src/lib/validation';
 export {default as configureStore} from './src/configureStore';
