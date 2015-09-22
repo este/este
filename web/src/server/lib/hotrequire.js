@@ -33,7 +33,7 @@ export function searchCache(moduleName, callback) {
       // Call the specified callback providing the
       // found module
       callback(mod);
-    }
+    };
 
     run(mod);
   }
