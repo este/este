@@ -3,11 +3,6 @@ import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
-import yargs from 'yargs';
-
-const args = yargs
-  .alias('p', 'production')
-  .argv;
 
 const runEslint = () => {
   return gulp.src([
@@ -20,13 +15,12 @@ const runEslint = () => {
   .pipe(eslint.format());
 };
 
+// Always use Gulp only in development
 gulp.task('env', () => {
-  const env = args.production ? 'production' : 'development';
-  process.env.NODE_ENV = env; // eslint-disable-line no-undef
+  process.env.NODE_ENV = 'development'; // eslint-disable-line no-undef
 });
 
 gulp.task('build-webpack', webpackBuild);
-gulp.task('build', args.production ? ['build-webpack'] : []);
 
 gulp.task('eslint', () => {
   return runEslint();
@@ -43,6 +37,6 @@ gulp.task('test', (done) => {
 
 gulp.task('server-hot', bg('node', './webpack/server'));
 
-gulp.task('server', ['env', 'build', 'server-hot'], bg('nodemon', './src/server'));
+gulp.task('server', ['env', 'server-hot'], bg('nodemon', './src/server'));
 
 gulp.task('default', ['server']);
