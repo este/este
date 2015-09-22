@@ -3,7 +3,7 @@
 export function uncache(moduleName) {
   // Run over the cache looking for the files
   // loaded by the specified module name
-  searchCache(moduleName, (mod) => delete require.cache[mod.id])
+  searchCache(moduleName, (mod) => delete require.cache[mod.id]);
 
   // Remove cached paths to the module.
   // Thanks to @bentael for pointing this out.
@@ -11,13 +11,13 @@ export function uncache(moduleName) {
     .keys(module.constructor._pathCache)
     .filter((cacheKey) => cacheKey.indexOf(moduleName) > 0)
     .forEach((cacheKey) => {
-      delete module.constructor._pathCache[cacheKey]
-    })
+      delete module.constructor._pathCache[cacheKey];
+    });
 }
 
 export function searchCache(moduleName, callback) {
   // Resolve the module identified by the specified name
-  let mod = require.resolve(moduleName)
+  let mod = require.resolve(moduleName);
 
   // Check if the module has been resolved and found within
   // the cache
@@ -26,20 +26,20 @@ export function searchCache(moduleName, callback) {
     const run = (mod) => {
       // Go over each of the module's children and
       // run over it
-      mod.children.forEach(function (child) {
-        run(child)
-      })
+      mod.children.forEach(function(child) {
+        run(child);
+      });
 
       // Call the specified callback providing the
       // found module
-      callback(mod)
+      callback(mod);
     }
 
-    run(mod)
+    run(mod);
   }
 }
 
 export default function hotrequire(moduleName) {
-  uncache(moduleName)
-  return require(moduleName)
+  uncache(moduleName);
+  return require(moduleName);
 }
