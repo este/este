@@ -1,8 +1,9 @@
+import express from 'express';
+import makeWebpackConfig from '../makeConfig';
 import webpack from 'webpack';
 import webpackDev from 'webpack-dev-middleware';
 import webpackHot from 'webpack-hot-middleware';
-import makeWebpackConfig from '../makeConfig';
-import express from 'express';
+import {logWebpack} from '../../src/server/lib/logger';
 
 const app = express();
 
@@ -17,5 +18,5 @@ app.use(webpackDev(compiler, {
 app.use(webpackHot(compiler));
 
 app.listen(webpackConfig.hotPort, () => {
-  console.log('Hot server started at port %s', webpackConfig.hotPort); // eslint-disable-line no-console
+  logWebpack(`Hot server started at port ${webpackConfig.hotPort}`); // eslint-disable-line no-console
 });
