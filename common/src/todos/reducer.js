@@ -1,10 +1,10 @@
 import * as actions from './actions';
 import Todo from './todo';
 import getRandomString from '../lib/getRandomString';
-import {Range, Record} from 'immutable';
+import {List, Range, Record} from 'immutable';
 
 const InitialState = Record({
-  list: [],
+  list: List(),
   newTodo: new Todo
 });
 const initialState = new InitialState;

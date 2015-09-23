@@ -8,13 +8,12 @@ const InitialState = Record({
 });
 const initialState = new InitialState;
 
-export default function intlReducer(state = initialState, action) {
+const revive = state => initialState
+  .mergeDeep(state)
+  .toJS();
 
-  if (!(state instanceof InitialState)) return initialState
-    .mergeDeep(state)
-    // TODO: Investigate why messages are converted to map.
-    .update('messages', messages => messages.toJS())
+export default function intlReducer(state = initialState, action) {
+  if (!(state instanceof InitialState)) return revive(state);
 
   return state;
-
 }
