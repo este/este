@@ -16,7 +16,7 @@ const runEslint = () => {
 };
 
 // Always use Gulp only in development
-gulp.task('env', () => {
+gulp.task('set-dev-environment', () => {
   process.env.NODE_ENV = 'development'; // eslint-disable-line no-undef
 });
 
@@ -37,6 +37,6 @@ gulp.task('test', (done) => {
 
 gulp.task('server-hot', bg('node', './webpack/server'));
 
-gulp.task('server', ['env', 'server-hot'], bg('nodemon', './src/server'));
+gulp.task('server', ['set-dev-environment', 'server-hot'], bg('nodemon', './src/server'));
 
 gulp.task('default', ['server']);
