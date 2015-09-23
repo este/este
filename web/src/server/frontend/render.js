@@ -13,6 +13,7 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 import {configureStore} from '@este/common';
 import {fromJS} from 'immutable';
+import {HOT_RELOAD_PORT} from '../../../webpack/constants';
 
 export default function render(req, res, next) {
   const requestInitialState = fromJS(initialState).mergeDeep({
@@ -73,7 +74,7 @@ function getPageHtml(renderProps, store, hostname, ua) {
 
   const appScriptSrc = config.isProduction
     ? '/_assets/app.js?' + config.assetsHashes.appJs
-    : `//${hostname}:8000/build/app.js`;
+    : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
 
   let scriptHtml = '';
 

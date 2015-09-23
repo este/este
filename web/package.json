@@ -7,8 +7,8 @@
   ],
   "private": true,
   "scripts": {
-    "build": "gulp build --production",
-    "start": "node src/server",
+    "build": "NODE_ENV=production gulp build",
+    "start": "NODE_ENV=production node src/server",
     "start-dev": "gulp",
     "test": "gulp test"
   },
@@ -60,7 +60,6 @@
     "node-sass": "^3.1.2",
     "normalize.css": "^3.0.2",
     "nyan-progress-webpack-plugin": "^1.0.0",
-    "piping": "^0.2.0",
     "postcss-loader": "^0.6.0",
     "react": "^0.14.0-rc1",
     "react-document-title": "^2.0.0",
@@ -97,5 +96,9 @@
     "karma-notify-reporter": "^0.1.1",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.7.0",
+    "webpack-dev-server": "^1.11.0"
   }
 }
