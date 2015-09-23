@@ -13,6 +13,7 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 import {configureStore} from '@este/common';
 import {fromJS} from 'immutable';
+import hotrequire from '../lib/hotrequire';
 
 export default function render(req, res, next) {
   const requestInitialState = fromJS(initialState).mergeDeep({
@@ -27,7 +28,9 @@ export default function render(req, res, next) {
   // const {actions} = mapDispatchToProps(store.dispatch);
   // actions.addTodo(new Todo({title: 'relax'}));
 
-  const routes = createRoutes(() => store.getState());
+  const routes = config.isProduction
+    ? createRoutes(() => store.getState())
+    : hotrequire('../../client/createRoutes')(() => store.getState());
   const location = createLocation(req.url);
 
   match({routes, location}, (error, redirectLocation, renderProps) => {
