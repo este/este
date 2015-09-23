@@ -37,6 +37,6 @@ gulp.task('test', (done) => {
 
 gulp.task('server-hot', bg('node', './webpack/server'));
 
-gulp.task('server', ['set-dev-environment', 'server-hot'], bg('nodemon', './src/server'));
+gulp.task('server', ['set-dev-environment', 'server-hot'], bg('./node_modules/.bin/nodemon', './src/server'));
 
 gulp.task('default', ['server']);
