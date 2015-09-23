@@ -12,7 +12,8 @@ nconf.env('__');
 var config = {
   assetsHashes: {
     appCss: isProduction ? hashFile.sync('build/app.css') : '',
-    appJs: isProduction ? hashFile.sync('build/app.js') : ''
+    appJs: isProduction ? hashFile.sync('build/app.js') : '',
+    vendorJs: isProduction ? hashFile.sync('build/vendor.js') : ''
   },
   appLocales: ['en', 'fr'],
   defaultLocale: 'en',

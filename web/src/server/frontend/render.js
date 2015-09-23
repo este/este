@@ -76,6 +76,10 @@ function getPageHtml(renderProps, store, hostname, ua) {
     ? '/_assets/app.js?' + config.assetsHashes.appJs
     : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
 
+  const vendorScriptSrc = config.isProduction
+    ? '/_assets/vendor.js?' + config.assetsHashes.vendorJs
+    : `//${hostname}:${HOT_RELOAD_PORT}/build/vendor.js`;
+
   let scriptHtml = '';
 
   if (needIntlPolyfill) {
@@ -88,6 +92,7 @@ function getPageHtml(renderProps, store, hostname, ua) {
     <script>
       window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};
     </script>
+    <script src="${vendorScriptSrc}"></script>
     <script src="${appScriptSrc}"></script>
   `;
 

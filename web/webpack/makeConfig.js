@@ -51,6 +51,21 @@ export default function makeConfig(isDevelopment) {
         path.join(constants.SRC_DIR, 'client/main.js')
       ] : [
         path.join(constants.SRC_DIR, 'client/main.js')
+      ],
+      vendor: [
+        'immutable',
+        'invariant',
+        'react-document-title',
+        'react-dom',
+        'react-intl',
+        'react-pure-render',
+        'react-redux',
+        'react-router',
+        'react-textarea-autosize',
+        'react',
+        'redux-devtools',
+        'redux-devtools/lib/react',
+        'redux',
       ]
     },
     module: {
@@ -83,6 +98,7 @@ export default function makeConfig(isDevelopment) {
         })
       ];
       if (isDevelopment) plugins.push(
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
@@ -94,6 +110,7 @@ export default function makeConfig(isDevelopment) {
           allChunks: true
         }),
         new NyanProgressPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
