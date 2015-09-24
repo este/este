@@ -16,8 +16,11 @@ export default function configureStore(initialState) {
     dependenciesMiddleware,
     promiseMiddleware
   ];
+  const loggerEnabled =
+    process.env.IS_BROWSER && // eslint-disable-line no-undef
+    process.env.NODE_ENV !== 'production'; // eslint-disable-line no-undef
 
-  if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
+  if (loggerEnabled) {
     const logger = createLogger({
       collapsed: () => true,
       transformer: stateToJS
