@@ -10,7 +10,7 @@ const initialState = new InitialState;
 
 const revive = state => initialState
   .mergeDeep(state)
-  .toJS();
+  .update('messages', messages => messages.toJS());
 
 export default function intlReducer(state = initialState, action) {
   if (!(state instanceof InitialState)) return revive(state);
