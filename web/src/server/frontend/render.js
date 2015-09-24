@@ -35,7 +35,7 @@ function renderPage(store, req, res, next) {
     }
 
     if (renderProps == null) {
-      res.send(404, 'Not found');
+      res.status(404).end();
       return;
     }
 
