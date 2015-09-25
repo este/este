@@ -13,7 +13,7 @@ const validateForm = (validate, fields) => validate(fields)
 const post = (fetch, endpoint, body) =>
   fetch(`/api/v1/${endpoint}`, {
     body: JSON.stringify(body),
-	credentials: 'include', // accept cookies from server, for authentication
+    credentials: 'include', // accept cookies from server, for authentication
     headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     method: 'post'
   })
