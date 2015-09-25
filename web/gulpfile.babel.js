@@ -40,8 +40,7 @@ gulp.task('server-hot', bg('node', './webpack/server'));
 
 gulp.task('nodemon', () => {
   nodemon({
-    script: './src/server',
-    env: {'NODE_ENV': process.env.NODE_ENV || 'development'}
+    script: './src/server'
   });
 });
 
