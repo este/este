@@ -3,6 +3,7 @@ import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
+import os from 'os';
 
 const runEslint = () => {
   return gulp.src([
@@ -37,6 +38,7 @@ gulp.task('test', (done) => {
 
 gulp.task('server-hot', bg('node', './webpack/server'));
 
-gulp.task('server', ['set-dev-environment', 'server-hot'], bg('./node_modules/.bin/nodemon', './src/server'));
+gulp.task('server', ['set-dev-environment', 'server-hot'], bg(
+  os.type() == 'Windows_NT' ? '.\\node_modules\\.bin\\nodemon.cmd' : './node_modules/.bin/nodemon', './src/server'));
 
 gulp.task('default', ['server']);
