@@ -10,10 +10,10 @@ const app = express();
 app.use(esteMiddleware());
 app.use(compression());
 
-// app.use(favicon('_assets/img/favicon.ico'));
+// app.use(favicon('../assets/img/favicon.ico'));
 
 // Serve the static assets. We can cache them as they include hashes.
-app.use('/assets/img', express.static('assets/img', {maxAge: '200d'}));
+app.use('/assets/img', express.static('../assets/img', {maxAge: '200d'}));
 app.use('/_assets', express.static('build', {maxAge: '200d'}));
 
 // Intl.
