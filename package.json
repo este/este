@@ -7,7 +7,6 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "./scripts/cli.js preinstall",
     "postinstall": "./scripts/cli.js postinstall",
     "start": "echo Please use `npm run web-start` to start a server",
     "web-start": "./scripts/cli.js web-start",
@@ -22,13 +21,17 @@
   },
   "dependencies": {
     "babel-eslint": "^4.1.2",
+    "bluebird": "^2.10.1",
+    "commander": "^2.8.1",
     "eslint": "^1.4.1",
     "eslint-plugin-react": "^3.3.2",
-    "commander": "^2.8.1",
     "fs-extra": "^0.24.0"
   },
   "cacheDirectories": [
     "./web/node_modules",
     "./common/node_modules"
-  ]
+  ],
+  "devDependencies": {
+    "async": "^1.4.2"
+  }
 }

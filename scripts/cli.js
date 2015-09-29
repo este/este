@@ -8,19 +8,12 @@
 
 var program = require('commander');
 var path = require('path');
-var preInstall = require('./preInstall');
 var postInstall = require('./postInstall');
 var spawnInFolder = require('./utils').spawnInFolder;
 var webPath = path.join(process.cwd(), './web');
 var nativePath = path.join(process.cwd(), './web');
 
 program.version('1.0.0-rc1');
-
-program
-  .command('preinstall')
-  .description('Links packages for development or copies in Heroku environment')
-  .action(preInstall);
-
 program
   .command('postinstall')
   .description('Installs web & native dependencies. Skips native on Heroku')
