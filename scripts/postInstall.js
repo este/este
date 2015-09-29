@@ -13,8 +13,8 @@ module.exports = function postInstall() {
  * Installs dependencies for web & native
  *
  * CLI equvialent is:
- * cd web && npm install
- * cd native && npm install
+ * cd web && npm link ../common && npm install
+ * cd native && npm link ../common && npm install
  */
 function postInstallDev() {
   var webPath = path.join(process.cwd(), './web');
@@ -37,10 +37,9 @@ function postInstallDev() {
 }
 
 /**
- * Installs dependencies for web only on Heroku
- *
- * CLI equvialent is:
- * cd web && npm install
+ * Installs dependencies for web only on Heroku.
+ * Does the above except it copies instead of linking
+ * It also builds the app on every deploy just like previously
  */
 function postInstallHeroku() {
   var webPath = path.join(process.cwd(), './web');
