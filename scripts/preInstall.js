@@ -21,8 +21,8 @@ function preInstallDev() {
   var webPath = path.join(process.cwd(), './web');
   var nativePath = path.join(process.cwd(), './native');
 
-  _linkCommonFolder(webPath);
-  _linkCommonFolder(nativePath);
+  spawnInFolder('npm link ' + path.join(webPath, '../common'), webPath);
+  spawnInFolder('npm link ' + path.join(nativePath, '../common'), webPath);
 }
 
 /**
@@ -37,22 +37,11 @@ function preInstallDev() {
  */
 function preInstallHeroku() {
   var webPath = path.join(process.cwd(), './web');
-
-  _linkCommonFolderHeroku(webPath);
-}
-
-function _linkCommonFolderHeroku(withFolder, callback) {
-
-  var modulesFolder = path.join(withFolder, 'node_modules/@este');
-  var destFolder = path.join(withFolder, 'node_modules/@este/common')
+  var modulesFolder = path.join(webPath, 'node_modules/@este');
+  var destFolder = path.join(webPath, 'node_modules/@este/common')
 
   fs.mkdirpSync(destFolder);
   fs.copySync(commonPath, destFolder);
 
   spawnInFolder('npm install', destFolder, callback);
-}
-
-function _linkCommonFolder(withFolder, callback) {
-  var commonPath = path.join(withFolder, '../common');
-  spawnInFolder('npm link ' + commonPath, withFolder, callback);
 }
