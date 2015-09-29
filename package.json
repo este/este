@@ -7,22 +7,31 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "(cd web && npm link ../common) && (cd native && npm link ../common)",
-    "postinstall": "(cd web && npm install) && (cd native && npm install)",
+    "postinstall": "./scripts/cli.js postinstall",
     "start": "echo Please use `npm run web-start` to start a server",
-    "web-start": "(cd web && npm start)",
-    "web-start-dev": "(cd web && npm run start-dev)",
-    "web-build": "(cd web && npm run build)",
-    "native-start": "",
-    "test": "(cd web && npm test)"
+    "web-start": "./scripts/cli.js web-start",
+    "web-start-dev": "./scripts/cli.js web-start-dev",
+    "web-build": "./scripts/cli.js web-build",
+    "native-start": "echo Please open XCode and run project from there instead",
+    "test": "./scripts/cli.js test"
   },
   "engines": {
     "node": "^4.0.0",
     "npm": "^3.0.0"
   },
   "dependencies": {
+    "babel-eslint": "^4.1.2",
+    "bluebird": "^2.10.1",
+    "commander": "^2.8.1",
     "eslint": "^1.4.1",
     "eslint-plugin-react": "^3.3.2",
-    "babel-eslint": "^4.1.2"
+    "fs-extra": "^0.24.0"
+  },
+  "cacheDirectories": [
+    "./web/node_modules",
+    "./common/node_modules"
+  ],
+  "devDependencies": {
+    "async": "^1.4.2"
   }
 }
