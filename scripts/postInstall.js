@@ -22,13 +22,13 @@ function postInstallDev() {
 
   _installDependencies(webPath, function(err) {
     console.log(!err
-      ? '[este-dev] Web dependencies successfull'
+      ? '[este-dev] Web dependencies installed successfully'
       : err.message);
   });
 
   _installDependencies(nativePath, function(err) {
     console.log(!err
-      ? '[este-dev] Native dependencies successfull'
+      ? '[este-dev] Native dependencies installed successfully'
       : err.message);
   });
 }
@@ -44,7 +44,7 @@ function postInstallHeroku() {
 
   _installDependencies(webPath, function(err, stdout) {
     console.log(!err
-      ? '[este-dev] Heroku web dependencies successfull'
+      ? '[este-dev] Heroku web dependencies installed successfully'
       : err.message);
   });
 }
