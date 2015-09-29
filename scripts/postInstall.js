@@ -54,5 +54,8 @@ function postInstallHeroku() {
   return spawnInFolder('npm install', destFolder)
     .then(function installDependencies() {
       return spawnInFolder('npm install', webPath)
+    })
+    .then(function buildApplication() {
+      return spawnInFolder('npm run build', webPath);
     });
 }
