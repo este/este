@@ -2,6 +2,9 @@ var spawn = require('child_process').exec;
 var path = require('path');
 
 module.exports = {
+
+  // Small wrapper that prints the output of executed command
+  // to stdout/stderr
   spawnInFolder: function(cmd, cwd, callback) {
     var child = spawn(cmd, {cwd: cwd}, callback);
 
@@ -13,4 +16,5 @@ module.exports = {
       process.stdout.write(data.toString());
     });
   }
+
 }
