@@ -1,4 +1,4 @@
-var spawn = require('child_process').exec;
+var spawnInFolder = require('./utils').spawnInFolder;
 var path = require('path');
 var fs = require('fs-extra');
 
@@ -21,17 +21,8 @@ function preInstallDev() {
   var webPath = path.join(process.cwd(), './web');
   var nativePath = path.join(process.cwd(), './native');
 
-  _linkCommonFolder(webPath, function(err) {
-    console.log(!err
-      ? '[este-dev] Preinstall successfull'
-      : err.message);
-  });
-
-  _linkCommonFolder(nativePath, function(err) {
-    console.log(!err
-      ? '[este-dev] Preinstall successfull'
-      : err.message);
-  });
+  _linkCommonFolder(webPath);
+  _linkCommonFolder(nativePath);
 }
 
 /**
@@ -47,34 +38,21 @@ function preInstallDev() {
 function preInstallHeroku() {
   var webPath = path.join(process.cwd(), './web');
 
-  _linkCommonFolderHeroku(webPath, function(err, stdout) {
-    console.log(!err
-      ? '[este-dev] Heroku Preinstall successfull'
-      : err.message);
-  });
+  _linkCommonFolderHeroku(webPath);
 }
 
 function _linkCommonFolderHeroku(withFolder, callback) {
-  var commonPath = path.join(withFolder, '../common');
+
   var modulesFolder = path.join(withFolder, 'node_modules/@este');
   var destFolder = path.join(withFolder, 'node_modules/@este/common')
 
-  try {
-    fs.mkdirpSync(destFolder);
-    fs.copySync(commonPath, destFolder);
-  } catch(err) {
-    callback(err);
-  }
+  fs.mkdirpSync(destFolder);
+  fs.copySync(commonPath, destFolder);
 
-  spawn('npm install', {
-    cwd: destFolder
-  }, callback);
+  spawnInFolder('npm install', destFolder, callback);
 }
 
 function _linkCommonFolder(withFolder, callback) {
   var commonPath = path.join(withFolder, '../common');
-  var options = {
-    cwd: withFolder
-  };
-  spawn('npm link ' + commonPath, options, callback);
+  spawnInFolder('npm link ' + commonPath, withFolder, callback);
 }

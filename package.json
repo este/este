@@ -10,11 +10,11 @@
     "preinstall": "./scripts/cli.js preinstall",
     "postinstall": "./scripts/cli.js postinstall",
     "start": "echo Please use `npm run web-start` to start a server",
-    "web-start": "(cd web && npm start)",
-    "web-start-dev": "(cd web && npm run start-dev)",
-    "web-build": "(cd web && npm run build)",
-    "native-start": "",
-    "test": "(cd web && npm test)"
+    "web-start": "./scripts/cli.js web-start",
+    "web-start-dev": "./scripts/cli.js web-start-dev",
+    "web-build": "./scripts/cli.js web-build",
+    "native-start": "echo Please open XCode and run project from there instead",
+    "test": "./scripts/cli.js test"
   },
   "engines": {
     "node": "^4.0.0",
