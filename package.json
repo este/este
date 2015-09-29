@@ -7,8 +7,7 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "(cd web && npm link ../common) && (cd native && npm link ../common)",
-    "postinstall": "(cd web && npm install) && (cd native && npm install)",
+    "postinstall": "./scripts/postInstall.sh",
     "start": "echo Please use `npm run web-start` to start a server",
     "web-start": "(cd web && npm start)",
     "web-start-dev": "(cd web && npm run start-dev)",
@@ -24,5 +23,10 @@
     "eslint": "^1.4.1",
     "eslint-plugin-react": "^3.3.2",
     "babel-eslint": "^4.1.2"
-  }
+  },
+  "cacheDirectories": [
+    "./web/node_modules",
+    "./node_modules",
+    "./common/node_modules"
+  ]
 }
