@@ -21,6 +21,8 @@ var webPath = path.join(__dirname, '../web');
 var nativePath = path.join(__dirname, '../native');
 var commonPath = path.join(__dirname, '../common');
 
+var isHeroku = !!process.env.DYNO;
+
 /**
  * Steps:
  * 1. cd ./common && npm install
@@ -36,9 +38,9 @@ program
   .action(function() {
     chain([
       [exec, 'npm install', webPath],
-      [exec, 'npm install', nativePath],
+      !isHeroku && [exec, 'npm install', nativePath],
       [ln, webPath],
-      [ln, nativePath],
+      !isHeroku && [ln, nativePath],
       [exec, 'npm install', commonPath],
       [exec, 'npm run build', webPath]
     ], function(err) {

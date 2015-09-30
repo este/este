@@ -28,7 +28,6 @@
   "cacheDirectories": [
     "./web/node_modules",
     "./common/node_modules",
-    "./native/node_modules",
     "./node_modules"
   ]
 }
