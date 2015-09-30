@@ -37,6 +37,12 @@ program
     ], noop)
   });
 
+program
+  .command('start')
+  .action(function postInstall() {
+    console.log('Use web-start to start web server instead');
+  });
+
 /**
  * Steps:
  * 1. cd ./web && npm start
