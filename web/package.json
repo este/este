@@ -7,18 +7,17 @@
   ],
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production gulp build",
-    "start": "NODE_ENV=production node src/server",
+    "build": "gulp build",
+    "start": "node src/server",
     "start-dev": "gulp",
     "test": "gulp test"
   },
   "engines": {
-    "node": "^4.0.0",
-    "npm": "^3.0.0"
+    "node": "^4.0.0"
   },
   "version": "1.0.0-rc1",
   "dependencies": {
-    "@este/common": "1.0.0-rc1",
+    "@este/common": "file:../common",
     "autoprefixer": "^6.0.2",
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
@@ -85,7 +84,9 @@
     "webpack": "^1.9.5",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.1.0",
-    "yargs": "^3.3.1"
+    "yargs": "^3.3.1",
+    "nodemon": "^1.7.0",
+    "webpack-dev-server": "^1.11.0"
   },
   "disabledDependencies": {
     "karma": "^0.13.3",
@@ -96,9 +97,5 @@
     "karma-notify-reporter": "^0.1.1",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.7.0",
-    "webpack-dev-server": "^1.11.0"
   }
 }

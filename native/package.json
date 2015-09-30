@@ -29,6 +29,7 @@
     "npm": "^3.0.0"
   },
   "dependencies": {
+    "@este/common": "file:../common",
     "lodash.assign": "^3.2.0",
     "react-redux": "^2.1.2",
     "redux": "^3.0.0",

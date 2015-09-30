@@ -7,22 +7,21 @@
   ],
   "private": true,
   "scripts": {
-    "preinstall": "(cd web && npm link ../common) && (cd native && npm link ../common)",
-    "postinstall": "(cd web && npm install) && (cd native && npm install)",
+    "postinstall": "./bin/cli.js postinstall",
     "start": "echo Please use `npm run web-start` to start a server",
-    "web-start": "(cd web && npm start)",
-    "web-start-dev": "(cd web && npm run start-dev)",
-    "web-build": "(cd web && npm run build)",
-    "native-start": "",
-    "test": "(cd web && npm test)"
+    "web-start": "./bin/cli.js web-start",
+    "web-start-dev": "./bin/cli.js web-start-dev",
+    "web-build": "./bin/cli.js web-build",
+    "test": "./bin/cli.js test"
   },
   "engines": {
-    "node": "^4.0.0",
-    "npm": "^3.0.0"
+    "node": "^4.0.0"
   },
   "dependencies": {
+    "babel-eslint": "^4.1.2",
+    "commander": "^2.8.1",
     "eslint": "^1.4.1",
     "eslint-plugin-react": "^3.3.2",
-    "babel-eslint": "^4.1.2"
+    "slide": "^1.1.6"
   }
 }
