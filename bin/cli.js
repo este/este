@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+/**
+ * Author: Mike Grabowski <grabbou@gmail.com>
+ *
+ * @description
+ * Cross-platform wrapper for trivial Unix commands that should work
+ * You Windows users - you own me a beer!
+ */
+
 // Deps
 var chain = require('slide').chain;
 var path = require('path');
@@ -27,20 +35,20 @@ program
   .description('Links packages and installs their dependencies')
   .action(function() {
     chain([
-      [exec, 'npm install', commonPath],
       [exec, 'npm install', webPath],
       [exec, 'npm install', nativePath],
       [ln, webPath],
       [ln, nativePath],
+      [exec, 'npm install', commonPath],
       [exec, 'npm run build', webPath]
     ], function(err) {
       if (err) console.log(err);
-    })
+    });
   });
 
 program
   .command('start')
-  .action(function postInstall() {
+  .action(function() {
     console.log('Use web-start to start web server instead');
   });
 
@@ -51,7 +59,7 @@ program
 program
   .command('web-start')
   .description('Starts web server')
-  .action(function postInstall() {
+  .action(function() {
     exec('npm start', webPath);
   });
 

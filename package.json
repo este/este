@@ -24,5 +24,11 @@
     "eslint-plugin-react": "^3.3.2",
     "linklocal": "^2.5.2",
     "slide": "^1.1.6"
-  }
+  },
+  "cacheDirectories": [
+    "./web/node_modules",
+    "./common/node_modules",
+    "./native/node_modules",
+    "./node_modules"
+  ]
 }
