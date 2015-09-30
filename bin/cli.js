@@ -6,6 +6,7 @@ var path = require('path');
 var ln = require('linklocal');
 var exec = require('./exec');
 var program = require('commander');
+var linklocal = require('linklocal');
 
 // Paths
 var webPath = path.join(__dirname, '../web');
@@ -29,8 +30,8 @@ program
   .action(function() {
     chain([
       [exec, 'npm install', commonPath],
-      [exec, '../node_modules/.bin/linklocal', webPath],
-      [exec, '../node_modules/.bin/linklocal', nativePath],
+      [ln, webPath],
+      [ln, nativePath],
       [exec, 'npm install', webPath],
       [exec, 'npm install', nativePath],
       [exec, 'npm run build', webPath]

@@ -22,6 +22,7 @@
     "commander": "^2.8.1",
     "eslint": "^1.4.1",
     "eslint-plugin-react": "^3.3.2",
+    "linklocal": "^2.5.2",
     "slide": "^1.1.6"
   }
 }
