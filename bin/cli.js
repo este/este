@@ -1,0 +1,101 @@
+#!/usr/bin/env node
+
+/**
+ * Author: Mike Grabowski <grabbou@gmail.com>
+ *
+ * @description
+ * Cross-platform wrapper for trivial Unix commands that should work
+ * You Windows users - you own me a beer!
+ */
+
+// Deps
+var chain = require('slide').chain;
+var path = require('path');
+var ln = require('linklocal');
+var exec = require('./exec');
+var program = require('commander');
+var linklocal = require('linklocal');
+
+// Paths
+var webPath = path.join(__dirname, '../web');
+var nativePath = path.join(__dirname, '../native');
+var commonPath = path.join(__dirname, '../common');
+
+var isHeroku = !!process.env.DYNO;
+
+/**
+ * Steps:
+ * 1. cd ./common && npm install
+ * 2. cd ./web && linklocal
+ * 3. cd ./native && linklocal
+ * 4. cd ./web && npm install
+ * 5. cd ./native && npm install
+ * 6. cd ./web && npm build
+ */
+program
+  .command('postinstall')
+  .description('Links packages and installs their dependencies')
+  .action(function() {
+    chain([
+      [exec, 'npm install', webPath],
+      !isHeroku && [exec, 'npm install', nativePath],
+      [ln, webPath],
+      !isHeroku && [ln, nativePath],
+      [exec, 'npm install', commonPath],
+      [exec, 'npm run build', webPath]
+    ], function(err) {
+      if (err) console.log(err);
+    });
+  });
+
+program
+  .command('start')
+  .action(function() {
+    console.log('Use web-start to start web server instead');
+  });
+
+/**
+ * Steps:
+ * 1. cd ./web && npm start
+ */
+program
+  .command('web-start')
+  .description('Starts web server')
+  .action(function() {
+    exec('npm start', webPath);
+  });
+
+/**
+ * Steps:
+ * 1. cd ./web && npm run start-dev
+ */
+program
+  .command('web-start-dev')
+  .description('Starts web server')
+  .action(function() {
+    exec('npm run start-dev', webPath);
+  });
+
+/**
+ * Steps:
+ * 1. cd ./web && npm run build
+ */
+program
+  .command('web-build')
+  .description('Starts web server')
+  .action(function() {
+    exec('npm run build', webPath);
+  });
+
+/**
+ * Steps:
+ * 1. cd ./web && npm test
+ */
+program
+  .command('test')
+  .description('Starts web server')
+  .action(function() {
+    exec('npm test', webPath);
+  });
+
+program.parse(process.argv)

@@ -3,6 +3,16 @@ import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
+import yargs from 'yargs';
+
+const args = yargs
+  .alias('p', 'production')
+  .argv;
+
+gulp.task('env', () => {
+  const env = args.production ? 'production' : 'development';
+  process.env.NODE_ENV = env; // eslint-disable-line no-undef
+});
 
 const runEslint = () => {
   return gulp.src([
@@ -20,7 +30,7 @@ gulp.task('set-dev-environment', () => {
   process.env.NODE_ENV = 'development'; // eslint-disable-line no-undef
 });
 
-gulp.task('build', webpackBuild);
+gulp.task('build', ['env'], webpackBuild);
 
 gulp.task('eslint', () => {
   return runEslint();
@@ -37,6 +47,6 @@ gulp.task('test', (done) => {
 
 gulp.task('server-hot', bg('node', './webpack/server'));
 
-gulp.task('server', ['set-dev-environment', 'server-hot'], bg('./node_modules/.bin/nodemon', './src/server'));
+gulp.task('server', ['env'], bg('./node_modules/.bin/nodemon', './src/server'));
 
 gulp.task('default', ['server']);
