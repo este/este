@@ -7,12 +7,12 @@
   ],
   "private": true,
   "scripts": {
-    "postinstall": "./bin/cli.js postinstall",
+    "postinstall": "bin/cli.js postinstall",
     "start": "echo Please use `npm run web-start` to start a server",
-    "web-start": "./bin/cli.js web-start",
-    "web-start-dev": "./bin/cli.js web-start-dev",
-    "web-build": "./bin/cli.js web-build",
-    "test": "./bin/cli.js test"
+    "web-start": "bin/cli.js web-start",
+    "web-start-dev": "bin/cli.js web-start-dev",
+    "web-build": "bin/cli.js web-build",
+    "test": "bin/cli.js test"
   },
   "engines": {
     "node": "^4.0.0"
