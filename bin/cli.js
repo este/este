@@ -13,8 +13,6 @@ var webPath = path.join(__dirname, '../web');
 var nativePath = path.join(__dirname, '../native');
 var commonPath = path.join(__dirname, '../common');
 
-function noop() {}
-
 /**
  * Steps:
  * 1. cd ./common && npm install
@@ -30,12 +28,14 @@ program
   .action(function() {
     chain([
       [exec, 'npm install', commonPath],
-      [ln, webPath],
-      [ln, nativePath],
       [exec, 'npm install', webPath],
       [exec, 'npm install', nativePath],
+      [ln, webPath],
+      [ln, nativePath],
       [exec, 'npm run build', webPath]
-    ], noop)
+    ], function(err) {
+      if (err) console.log(err);
+    })
   });
 
 program
