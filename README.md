@@ -9,6 +9,8 @@
 
 > _Breaking_: Come to discuss Este with us at [reactive2015.com](http://reactive2015.com/) conference. The speaker line up is surprisingly good: Guillermo Rauch, Nikita Prokopov, James Long, Martin Konicek (Facebook React Native developer), Julia Gao and more.
 
+# Work in progress, sorry.
+
 ## At a glance
 
 Este universe is organized into several folders, each of them contains its own package.json.
