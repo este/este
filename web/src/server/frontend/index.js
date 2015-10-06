@@ -3,6 +3,7 @@ import compression from 'compression';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
+import {logServer} from '../lib/logger';
 import render from './render';
 
 const app = express();
@@ -24,7 +25,7 @@ app.use(device.capture());
 app.get('*', render);
 
 app.on('mount', () => {
-  console.log('App is available at %s', app.mountpath);
+  logServer(`App is available at ${app.mountpath}`);
 });
 
 export default app;

@@ -28,6 +28,7 @@
     "body-parser": "^1.12.4",
     "chai": "^3.0.0",
     "chai-immutable": "^1.1.1",
+    "chalk": "^1.1.1",
     "classnames": "^2.1.1",
     "compression": "^1.4.0",
     "cors": "^2.6.0",
