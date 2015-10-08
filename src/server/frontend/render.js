@@ -1,18 +1,19 @@
+import config from '../config';
+import configureStore from '../../common/configureStore';
+import createCredentialsStore from '../../browser/lib/createCredentialsStore';
+import createRoutes from '../../browser/createRoutes';
 import Helmet from 'react-helmet';
 import Html from './Html.react';
 import Promise from 'bluebird';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import config from '../config';
-import configureStore from '../../common/configureStore';
-import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
 import useragent from 'useragent';
+import {createMemoryHistory} from 'history';
 import {HOT_RELOAD_PORT} from '../../../webpack/constants';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
-import {createMemoryHistory} from 'history';
 
 export default function render(req, res, next) {
   const initialState = {
@@ -20,7 +21,8 @@ export default function render(req, res, next) {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
     }
   };
-  const store = configureStore({initialState});
+  const credentialsStore = createCredentialsStore(req);
+  const store = configureStore({initialState, credentialsStore});
 
   // Fetch logged in user here because routes may need it. Remember we can use
   // store.dispatch method.

@@ -1,4 +1,5 @@
 import express from 'express';
+import getRandomString from '../../common/lib/getRandomString';
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.route('/login')
     setTimeout(() => {
       // Use HTTP status code 401 for wrong authentication credentials.
       if (password !== 'pass1') res.status(401).end();
-      else res.status(200).send({email}).end();
+      else res.status(200).send({email, authToken: getRandomString()}).end();
     }, 1000);
 
   });

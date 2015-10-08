@@ -3,7 +3,9 @@ import Form from './form';
 import {Record} from 'immutable';
 
 const InitialState = Record({
-  form: new Form
+  authToken: null,
+  form: new Form,
+  isLoggedIn: false
 });
 const initialState = new InitialState;
 
@@ -20,12 +22,27 @@ export default function authReducer(state = initialState, action) {
     case actions.LOGIN_START:
       return state.setIn(['form', 'disabled'], true);
 
-    case actions.LOGIN_SUCCESS:
+    case actions.LOGIN_SUCCESS: {
+      return state
+        .set('isLoggedIn', true)
+        .set('form', new Form);
+    }
+
     case actions.LOGIN_ERROR: {
-      const error = action.type === actions.LOGIN_ERROR ? action.payload : null;
+      const error = action.payload;
       return state
         .setIn(['form', 'disabled'], false)
         .setIn(['form', 'error'], error);
+    }
+
+    case actions.SET_AUTH_TOKEN: {
+      const authToken = action.payload;
+      return state.set('authToken', authToken);
+    }
+
+    case actions.SET_IS_LOGGED_IN: {
+      const isLoggedIn = action.payload;
+      return state.set('isLoggedIn', isLoggedIn);
     }
 
   }

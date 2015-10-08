@@ -1,4 +1,5 @@
 import appReducer from './app/reducer';
+import runDefaultActions from './runDefaultActions';
 import createLogger from 'redux-logger';
 import fetch from './fetch';
 import injectDependencies from './lib/injectDependencies';
@@ -15,11 +16,11 @@ const BROWSER_DEVELOPMENT = (
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
 
-export default function configureStore({engine, initialState}) {
+export default function configureStore({engine, initialState, credentialsStore} = {}) {
 
   // Inject services for actions.
   const dependenciesMiddleware = injectDependencies(
-    {fetch},
+    {fetch, credentialsStore},
     {validate}
   );
 
@@ -63,6 +64,9 @@ export default function configureStore({engine, initialState}) {
       store.replaceReducer(nextAppReducer);
     });
   }
+
+  // Run default actions - log in user, etc.
+  runDefaultActions(store.dispatch, credentialsStore);
 
   return store;
 }

@@ -6,6 +6,7 @@ export default {
     links: {
       home: 'Home',
       login: 'Login',
+      logout: 'Logout',
       me: 'Me (protected)',
       todos: 'Todos'
     }

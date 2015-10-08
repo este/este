@@ -1,4 +1,5 @@
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
@@ -11,6 +12,9 @@ app.use(esteMiddleware());
 app.use(compression());
 
 // app.use(favicon('assets/img/favicon.ico'));
+
+// Parse cookies for CookieDough.
+app.use(cookieParser());
 
 // Serve the static assets. We can cache them as they include hashes.
 app.use('/assets/img', express.static('../assets/img', {maxAge: '200d'}));

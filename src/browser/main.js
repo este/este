@@ -1,10 +1,11 @@
+import configureStore from '../common/configureStore';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import createCredentialsStore from './lib/createCredentialsStore';
+import createEngine from 'redux-storage/engines/localStorage';
+import createRoutes from './createRoutes';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';
-import configureStore from '../common/configureStore';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-import createEngine from 'redux-storage/engines/localStorage';
-import createRoutes from './createRoutes';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 
@@ -14,7 +15,12 @@ import {Provider} from 'react-redux';
 const app = document.getElementById('app');
 const engine = createEngine('este-app');
 const initialState = window.__INITIAL_STATE__;
-const store = configureStore({engine, initialState});
+const credentialsStore = createCredentialsStore();
+const store = configureStore({
+  engine,
+  initialState,
+  credentialsStore
+});
 const routes = createRoutes(store.getState);
 
 ReactDOM.render(
