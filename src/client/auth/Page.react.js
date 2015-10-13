@@ -1,4 +1,4 @@
-import AuthLogin from '../auth/login.react';
+import AuthLogin from './Login.react';
 import Component from 'react-pure-render/component';
 import DocumentTitle from 'react-document-title';
 import React, {PropTypes} from 'react';
