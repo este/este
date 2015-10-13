@@ -1,10 +1,10 @@
 export default {
   app: {
     footer: {
-      madeByHtml: `made by <a href="https://twitter.com/steida">steida</a>`
+      madeByHtml: 'made by <a href="https://twitter.com/steida">steida</a>'
     },
     links: {
-      home: `Home`,
+      home: 'Home',
       login: 'Login',
       me: 'Me (protected)',
       todos: 'Todos'
@@ -31,8 +31,8 @@ export default {
       title: 'Login'
     },
     validation: {
-      email: `Email address is not valid.`,
-      password: `Password must contain at least {minLength} characters.`,
+      email: 'Email address is not valid.',
+      password: 'Password must contain at least {minLength} characters.',
       required: `Please fill out {prop, select,
         email {email}
         password {password}
@@ -43,7 +43,7 @@ export default {
   home: {
     // // TODO: Android text.
     // androidInfoText: ``,
-    infoHtml: `<a href="https://github.com/este/este">Este.js</a> dev stack.`,
+    infoHtml: '<a href="https://github.com/este/este">Este.js</a> dev stack.',
     iosInfoText: `Este.js dev stack.\n\nOpen left menu and check todos!\n\nPress CMD+R to reload.\nPress CMD+D for debug menu.`,
     title: 'Este.js',
     toCheck: {
@@ -54,22 +54,22 @@ export default {
       list: [
         {
           key: 'source',
-          text: `Server rendering`
+          text: 'Server rendering'
         },
         {
           key: 'development',
-          text: `Hot reload for styles, components, etc.`
+          text: 'Hot reload for styles, components, etc.'
         },
         {
           key: 'production',
-          text: `Performance and size of production build (<code>gulp -p</code>)`
+          text: 'Performance and size of production build (<code>gulp -p</code>)'
         }
       ]
     }
   },
   me: {
     title: 'Me',
-    welcome: `Hi {email}. This is your secret page.`
+    welcome: 'Hi {email}. This is your secret page.'
   },
   notFound: {
     continueMessage: 'Continue here please.',
