@@ -1,4 +1,4 @@
-import './login.styl';
+import './Login.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import focusInvalidField from '../lib/focusInvalidField';
