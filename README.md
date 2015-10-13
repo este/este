@@ -11,9 +11,8 @@
 
 ## Prerequisites
 
-Install [node.js](http://nodejs.org) (v4 is required).
-
-Install [gulp](http://gulpjs.com/): `npm install --global gulp`
+- [node.js](http://nodejs.org) (v4 is required).
+- [gulp](http://gulpjs.com/) (`npm install -g gulp`)
 
 If you are using different node versions on your machine, use `nvm` to manage them.
 
@@ -32,7 +31,7 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - Simple yet powerfull sync/async validation based on [chriso/validator.js](https://github.com/chriso/validator.js)
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Long Term Caching.
-- And much more...
+- And much more.
 
 ## Installing
 
