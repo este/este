@@ -12,7 +12,7 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": "^4.0.0"
+    "node": "4.2.x"
   },
   "dependencies": {
     "autoprefixer": "^6.0.2",
