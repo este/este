@@ -1,3 +1,4 @@
+import 'react-native-browser-polyfill';
 import App from './app/App.react';
 import React, {AppRegistry, Component} from 'react-native';
 import configureStore from '../common/configureStore';
