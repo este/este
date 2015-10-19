@@ -24,6 +24,7 @@ export default class Header extends Component {
           {!viewer &&
             <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
           }
+          <li><Link activeClassName="active" to="/profile/FooBar">Foo Bar's profile</Link></li>
         </ul>
       </header>
     );

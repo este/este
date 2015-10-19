@@ -1,6 +1,5 @@
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
 
 import fetch from '../../common/components/fetch';
 import {loadProfile} from '../../common/profile/actions';
@@ -19,7 +18,7 @@ export default class TabConnect extends Component {
 
     return (
       <div className="profile-content connect">
-        {tabData.map((data, index) => <div key={index} dangerouslySetInnerHTML={{ __html: data }}/>)}
+        {tabData.map((data, index) => <div dangerouslySetInnerHTML={{__html: data}} key={index}/>)}
       </div>
     );
   }

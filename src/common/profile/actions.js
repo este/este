@@ -1,5 +1,3 @@
-import Promise from 'bluebird';
-
 //import {canUseDOM} from 'exenv';
 
 export const PROFILE_LOAD = 'PROFILE_LOAD';
@@ -7,16 +5,15 @@ export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS';
 export const PROFILE_LOAD_ERROR = 'PROFILE_LOAD_ERROR';
 
 const get = (fetch, endpoint) => {
-  console.log('profile/actions get endpoint', endpoint);
   return fetch(endpoint, {
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-      method: 'get'
-    })
+    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    method: 'get'
+  })
     .then(response => {
       if (response.status === 200) return response.json();
       throw response;
     });
-}
+};
 
 
 

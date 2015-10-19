@@ -6,22 +6,23 @@ import {Link} from 'react-router';
 
 import TabBio from './TabBio.react.js';
 import TabConnect from './TabConnect.react.js';
-import TabContributed from './TabContributed.react.js';
-import TabEvents from './TabEvents.react.js';
-import TabPromoted from './TabPromoted.react.js';
 
 
 export default class ProfileBody extends Component {
 
   static propTypes = {
-    profile: PropTypes.object.isRequired,
+    cssPrefix: PropTypes.string.isRequired,
+    defaultActiveTab: PropTypes.string.isRequired,
+    key: PropTypes.string,
     location: PropTypes.object.isRequired,
+    navListRefName: PropTypes.string.isRequired,
+    profile: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
+    cssPrefix: 'profile',
     defaultActiveTab: 'bio',
     navListRefName: 'profileNav',
-    cssPrefix: 'profile'
   }
 
   getActiveTabFromPathname() {
@@ -53,28 +54,18 @@ export default class ProfileBody extends Component {
   render() {
     const {
       profile,
-      location,
       } = this.props;
 
     const slug = `/profile/${profile.get('slug')}`;
 
-    this.props.key = location.pathname;
+    //this.props.key = location.pathname;
 
     const activeTabName = this.getActiveTabFromPathname();
 
     let childComponent =  <TabBio key={activeTabName}/>;
-    switch(activeTabName) {
+    switch (activeTabName) {
       case 'connect':
-        childComponent = <TabConnect key={activeTabName}/>
-        break;
-      case 'contributed':
-        childComponent = <TabContributed key={activeTabName}/>
-        break;
-      case 'events':
-        childComponent = <TabEvents key={activeTabName}/>
-        break;
-      case 'promoted':
-        childComponent = <TabPromoted key={activeTabName}/>
+        childComponent = <TabConnect key={activeTabName}/>;
         break;
     }
 
@@ -82,11 +73,8 @@ export default class ProfileBody extends Component {
       <div className="profile-body">
         <div className="profile-nav">
           <ul ref="profileNav">
-            <li id="profile-tab-bio" className="active"><Link to={slug}>Bio</Link></li>
+            <li className="active" id="profile-tab-bio"><Link to={slug}>Bio</Link></li>
             <li id="profile-tab-connect"><Link to={slug + '/connect'}>Connect</Link></li>
-            <li id="profile-tab-contributed"><Link to={slug + '/contributed'}>Contributed Ways</Link></li>
-            <li id="profile-tab-promoted"><Link to={slug + '/promoted'}>Promoted Ways</Link></li>
-            <li id="profile-tab-events"><Link to={slug + '/events'}>Events</Link></li>
           </ul>
         </div>
         <div className="profile-content-wrapper">

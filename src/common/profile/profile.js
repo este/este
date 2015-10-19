@@ -1,4 +1,4 @@
-import {Record, Map, List} from 'immutable';
+import {Record, List} from 'immutable';
 
 const Profile = Record({
   loaded: false,
@@ -8,14 +8,6 @@ const Profile = Record({
   lastName: '',
   name: '',
   slug: '',
-  img: '',
-  position: '',
-  org: '',
-  orgUrl: '',
-  location: '',
-  following: 0,
-  followers: 0,
-  viewerIsFollowing: false,
   bio: new (List),
   connect: new (List),
   contributed: new (List),
