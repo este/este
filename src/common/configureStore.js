@@ -39,13 +39,13 @@ export default function configureStore({engine, initialState} = {}) {
   // }
 
   // Logger must be last middleware in chain.
-  if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
-    const logger = createLogger({
-      collapsed: true,
-      transformer: stateToJS
-    });
-    middleware.push(logger);
-  }
+  //if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
+  //  const logger = createLogger({
+  //    collapsed: true,
+  //    transformer: stateToJS
+  //  });
+  //  middleware.push(logger);
+  //}
 
   const createStoreWithMiddleware = applyMiddleware(...middleware);
   const store = createStoreWithMiddleware(createStore)(appReducer, initialState);

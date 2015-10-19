@@ -12,8 +12,10 @@ app.use(compression());
 
 // app.use(favicon('assets/img/favicon.ico'));
 
+const assetsDir = __dirname + '/../../../assets';
 // Serve the static assets. We can cache them as they include hashes.
-app.use('/assets/img', express.static('../assets/img', {maxAge: '200d'}));
+app.use('/assets/img', express.static(assetsDir + '/img', {maxAge: '200d'}));
+app.use('/json', express.static(assetsDir + '/json', {maxAge: '200d'}));
 app.use('/_assets', express.static('build', {maxAge: '200d'}));
 
 // Intl.

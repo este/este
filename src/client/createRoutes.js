@@ -2,6 +2,12 @@ import App from './app/App.react';
 import Auth from './auth/Page.react';
 import Home from './home/Page.react';
 import Me from './me/Page.react';
+import Profile from './profile/Page.react';
+import ProfileTabBio from './profile/TabBio.react.js';
+import ProfileTabConnect from './profile/TabConnect.react.js';
+import ProfileTabContributed from './profile/TabContributed.react.js';
+import ProfileTabEvents from './profile/TabEvents.react.js';
+import ProfileTabPromoted from './profile/TabPromoted.react.js';
 import NotFound from './components/NotFound.react';
 import React from 'react';
 import Todos from './todos/Page.react';
@@ -22,6 +28,13 @@ export default function createRoutes(getState) {
       <Route component={Auth} path="login" />
       <Route component={Me} onEnter={requireAuth} path="me" />
       <Route component={Todos} path="todos" />
+      <Route component={Profile} path="profile/:userSlug">
+        <IndexRoute component={ProfileTabBio}/>
+        <Route component={ProfileTabConnect} path="connect"/>
+        <Route component={ProfileTabContributed} path="contributed"/>
+        <Route component={ProfileTabEvents} path="events"/>
+        <Route component={ProfileTabPromoted} path="promoted"/>
+      </Route>
       <Route component={NotFound} path="*" />
     </Route>
   );

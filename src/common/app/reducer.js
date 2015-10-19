@@ -9,6 +9,7 @@ import intl from '../intl/reducer';
 import todos from '../todos/reducer';
 import ui from '../ui/reducer';
 import users from '../users/reducer';
+import profile from '../profile/reducer';
 
 const appReducer = combineReducers({
   auth,
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   intl,
   todos,
   ui,
-  users
+  users,
+  profile
 });
 
 export default appReducer;

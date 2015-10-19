@@ -1,0 +1,173 @@
+.profile-nav {
+  ul {
+    list-style: none;
+    li {
+      padding: 10px;
+      display: inline-block;
+      border-bottom: solid 1px #666;
+      &.active {
+        border-bottom: solid 1px transparent;
+      }
+    }
+  }
+}
+
+//// Uses Bourban and Bourban Neat
+//
+//.profile-header {
+//  @include outer-container(960px);
+//  padding-bottom:1rem;
+//  margin-bottom:1rem;
+//  &-image {
+//    @include fill-parent();
+//    @media #{$medium-up}{
+//      @include span-columns(2);
+//    }
+//    .thumb {
+//      width:rem-calc(139);
+//      height:rem-calc(139);
+//      border-radius: 50%;
+//      overflow: hidden;
+//      margin:0 auto;
+//      img {display: block;}
+//    }
+//  }
+//  &-user{
+//    width:66%;
+//    margin:0 auto;
+//    @media #{$medium-up}{
+//      @include span-columns(10);
+//      padding-left:2%;
+//    }
+//
+//    &-info{
+//      text-align: center;
+//      margin-bottom:1.5em;
+//      @media #{$medium-up}{
+//        @include span-columns(9);
+//        text-align: left;
+//        margin-bottom:0;
+//      }
+//    }
+//    &-stats {
+//      @media #{$medium-up}{
+//        @include span-columns(3);
+//      }
+//
+//      ul{
+//        @include clearfix;
+//        margin-top:1em;
+//      }
+//      li {
+//        float: left;
+//        width:50%;
+//        &:first-child {
+//          border-right:1px solid $light-gray;
+//        }
+//        span{
+//          display: block;
+//          text-transform: uppercase;
+//          text-align: center;
+//          font-weight: 400;
+//        }
+//        .value {
+//          color:$orange;
+//          font-weight: 500;
+//          font-size: rem-calc(18);
+//        }
+//        .label {color:$medium-gray; font-size:rem-calc(11); letter-spacing: 0.02em;}
+//      }
+//    }
+//
+//    padding-top: rem-calc(24);
+//    .user-name {
+//      font-size: rem-calc(30);
+//      font-weight:400;
+//      margin-bottom:0;
+//      line-height: 1;
+//      i {
+//        color: $green;
+//        vertical-align: top;
+//        font-size:0.5em;
+//      }
+//    }
+//    .user-details {
+//      color: $medium-gray;
+//      margin-top:0.25em;
+//      margin-bottom:0.75em;
+//    }
+//    .user-links {
+//      font-size:rem-calc(14);
+//
+//      a, span {
+//        @include icon (both);
+//        line-height: 1;
+//        display: inline-block;
+//        margin-right:0.65em;
+//        color:$medium-gray;
+//        &.url{
+//          @include icon (before, world);
+//        }
+//        &.place{
+//          @include icon (before, place);
+//        }
+//      }
+//      a:hover {color:$orange;}
+//    }
+//    .follow-btn {
+//      @include button($green);
+//      display: block;
+//      width: 100%;
+//      padding:0.35em 1em;
+//      text-transform: uppercase;
+//      font-size:rem-calc(14);
+//    }
+//  }
+//}
+//.profile-body {
+//  @include outer-container(960px);
+//  @include clearfix;
+//}
+//.profile-nav {
+//  width:90%;
+//  margin:0 auto;
+//  @media #{$medium-up}{
+//    @include span-columns(2);
+//  }
+//  li{
+//    a {
+//      color:$dark-gray;
+//      font-weight:500;
+//      display: block;
+//      padding: 0.75em 0;
+//      border-bottom:1px solid $light-gray;
+//      &:hover {color:$orange;}
+//    }
+//    &.active{
+//      a{border-bottom: 2px solid $orange; color:$orange;}
+//    }
+//    /* &:first-child{
+//         a{border-top:1px solid $light-gray;}
+//     }*/
+//  }
+//
+//}
+//.profile-content-wrapper{
+//  width:90%;
+//  margin:0 auto;
+//  @media #{$medium-up}{
+//    @include span-columns(10);
+//    padding-left:2%;
+//  }
+//
+//  padding-bottom:3rem;
+//
+//}
+//.profile-content {
+//  border-top:1px solid $light-gray;
+//  &.bio {
+//    max-width: 40em;
+//    padding-top:1.5rem;
+//  }
+//
+//}
