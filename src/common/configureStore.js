@@ -5,7 +5,12 @@ import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
 import stateToJS from './lib/stateToJS';
 import validate from './validate';
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+
+const BROWSER_DEVELOPMENT = (
+  process.env.NODE_ENV !== 'production' && // eslint-disable-line no-undef
+  process.env.IS_BROWSER // eslint-disable-line no-undef
+);
 
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
@@ -18,7 +23,7 @@ export default function configureStore({engine, initialState}) {
     {validate}
   );
 
-  const middleware = [
+  let middleware = [
     dependenciesMiddleware,
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
@@ -35,21 +40,20 @@ export default function configureStore({engine, initialState}) {
   //   middleware.push(storage.createMiddleware(engine));
   // }
 
-  const loggerEnabled =
-    process.env.NODE_ENV !== 'production' && // eslint-disable-line no-undef
-    process.env.IS_BROWSER; // eslint-disable-line no-undef
-
-  if (loggerEnabled) {
+  if (BROWSER_DEVELOPMENT) {
     const logger = createLogger({
       collapsed: true,
       transformer: stateToJS
     });
     // Logger must be the last middleware in chain.
-    middleware.push(logger);
+    middleware = [...middleware, logger];
   }
 
-  const createStoreWithMiddleware = applyMiddleware(...middleware);
-  const store = createStoreWithMiddleware(createStore)(appReducer, initialState);
+  const createReduxStore = (BROWSER_DEVELOPMENT && window.devToolsExtension) // eslint-disable-line no-undef
+    ? compose(applyMiddleware(...middleware), window.devToolsExtension()) // eslint-disable-line no-undef
+    : applyMiddleware(...middleware);
+
+  const store = createReduxStore(createStore)(appReducer, initialState);
 
   // Enable hot reload where available.
   if (module.hot) { // eslint-disable-line no-undef
