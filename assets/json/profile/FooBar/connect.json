@@ -1,0 +1,9 @@
+{
+  "error": "",
+  "id": "1",
+  "firstName": "Foo",
+  "lastName": "Bar",
+  "name": "Foo Bar",
+  "slug": "FooBar",
+  "connect": ["<p>connect</p>"]
+}

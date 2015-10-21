@@ -16,7 +16,7 @@ export default class Header extends Component {
     return (
       <header>
         <h1>
-          <Link to="/">{msg.home}</Link>
+          <Link to="/">{msg.home} Blah</Link>
         </h1>
         <ul>
           <li><Link activeClassName="active" to="/todos">{msg.todos}</Link></li>
@@ -24,6 +24,7 @@ export default class Header extends Component {
           {!viewer &&
             <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
           }
+          <li><Link activeClassName="active" to="/profile/FooBar">Foo Bar's profile</Link></li>
         </ul>
       </header>
     );

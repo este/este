@@ -29,7 +29,7 @@ export default class App extends Component {
       <div className="page" data-pathname={pathname}>
         {/* pathname enforces header rerender so activeClassName is updated */}
         <Header msg={msg} pathname={pathname} viewer={viewer} />
-        {React.cloneElement(children, this.props)}
+        {React.cloneElement(children, {...this.props, children: children.props.children})}
         <Footer msg={msg.app.footer} />
       </div>
     );
