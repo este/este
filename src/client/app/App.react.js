@@ -22,14 +22,15 @@ export default class App extends Component {
   }
 
   render() {
-    const {children, location: {pathname}, msg, users: {viewer}} = this.props;
+    const {location: {pathname}, msg, users: {viewer}} = this.props;
+    const {children, ...passProps} = this.props;
 
     return (
       // Pass data-pathname to allow route specific styling.
       <div className="page" data-pathname={pathname}>
         {/* pathname enforces header rerender so activeClassName is updated */}
         <Header msg={msg} pathname={pathname} viewer={viewer} />
-        {React.cloneElement(children, this.props)}
+        {React.cloneElement(children, passProps)}
         <Footer msg={msg.app.footer} />
       </div>
     );
