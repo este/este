@@ -54,20 +54,10 @@ export default class ProfileBody extends Component {
   render() {
     const {
       profile,
+      children
       } = this.props;
 
     const slug = `/profile/${profile.get('slug')}`;
-
-    //this.props.key = location.pathname;
-
-    const activeTabName = this.getActiveTabFromPathname();
-
-    let childComponent =  <TabBio key={activeTabName}/>;
-    switch (activeTabName) {
-      case 'connect':
-        childComponent = <TabConnect key={activeTabName}/>;
-        break;
-    }
 
     return (
       <div className="profile-body">
@@ -78,25 +68,7 @@ export default class ProfileBody extends Component {
           </ul>
         </div>
         <div className="profile-content-wrapper">
-          {/*
-          Should this work? It does not:
-           <TabBio {...this.props}/>
-           <TabConnect {...this.props}/>
-           <TabContributed {...this.props}/>
-           <TabEvents {...this.props}/>
-           <TabPromoted {...this.props}/>
-          */}
-          {/*
-          Use with animations
-          <ReactCSSTransitionGroup
-            component="div"
-            transitionName="tabbody"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={1}>
-            {React.cloneElement(childComponent, this.props)}
-          </ReactCSSTransitionGroup>
-           */}
-          {React.cloneElement(childComponent, this.props)}
+          {React.cloneElement(children, this.props)}
         </div>
       </div>
     );
