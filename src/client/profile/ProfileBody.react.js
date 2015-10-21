@@ -65,7 +65,7 @@ export default class ProfileBody extends Component {
           </ul>
         </div>
         <div className="profile-content-wrapper">
-          {React.cloneElement(children, this.props)}
+          {React.cloneElement(children, {profile})}
         </div>
       </div>
     );
