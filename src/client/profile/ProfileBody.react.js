@@ -4,13 +4,10 @@ import ReactDom from 'react-dom';
 import {Link} from 'react-router';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import TabBio from './TabBio.react.js';
-import TabConnect from './TabConnect.react.js';
-
-
 export default class ProfileBody extends Component {
 
   static propTypes = {
+    children: PropTypes.object.isRequired,
     cssPrefix: PropTypes.string.isRequired,
     defaultActiveTab: PropTypes.string.isRequired,
     key: PropTypes.string,
