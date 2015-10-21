@@ -1,9 +1,9 @@
 import appReducer from './app/reducer';
-import createLogger from 'redux-logger';
+//import createLogger from 'redux-logger';
 import fetch from 'isomorphic-fetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
-import stateToJS from './lib/stateToJS';
+//import stateToJS from './lib/stateToJS';
 import validate from './validate';
 import {applyMiddleware, createStore} from 'redux';
 
@@ -39,13 +39,13 @@ export default function configureStore({engine, initialState} = {}) {
   // }
 
   // Logger must be last middleware in chain.
-  if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
-    const logger = createLogger({
-      collapsed: true,
-      transformer: stateToJS
-    });
-    middleware.push(logger);
-  }
+  //if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
+  //  const logger = createLogger({
+  //    collapsed: true,
+  //    transformer: stateToJS
+  //  });
+  //  middleware.push(logger);
+  //}
 
   const createStoreWithMiddleware = applyMiddleware(...middleware);
   const store = createStoreWithMiddleware(createStore)(appReducer, initialState);

@@ -10,6 +10,7 @@ export default class ProfileBody extends Component {
     children: PropTypes.object.isRequired,
     cssPrefix: PropTypes.string.isRequired,
     defaultActiveTab: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
     key: PropTypes.string,
     location: PropTypes.object.isRequired,
     navListRefName: PropTypes.string.isRequired,
@@ -50,6 +51,7 @@ export default class ProfileBody extends Component {
 
   render() {
     const {
+      dispatch,
       profile,
       children
       } = this.props;
@@ -65,7 +67,7 @@ export default class ProfileBody extends Component {
           </ul>
         </div>
         <div className="profile-content-wrapper">
-          {React.cloneElement(children, {profile})}
+          {React.cloneElement(children, {profile, dispatch})}
         </div>
       </div>
     );
