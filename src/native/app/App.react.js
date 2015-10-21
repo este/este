@@ -32,7 +32,7 @@ export default class App extends Component {
   }
 
   // TODO: Fluxify routing and make it universal with redux-router.
-  // Store  current route in storage.
+  // Store current route in storage.
   // https://github.com/rackt/redux-router/issues/63
   onRouteChange(route) {
     const {actions} = this.props;
