@@ -7,7 +7,7 @@ export default function fetch(action) {
   return Wrapped => class Fetch extends Component {
 
     static propTypes = {
-      dispatch: PropTypes.func,
+      dispatch: PropTypes.func.isRequired,
       location: PropTypes.object,
       params: PropTypes.object
     }
