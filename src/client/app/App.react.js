@@ -3,6 +3,7 @@ import Component from 'react-pure-render/component';
 import Footer from './Footer.react';
 import Header from './Header.react';
 import React, {PropTypes} from 'react';
+import RouterHandler from '../../common/components/RouterHandler.react';
 import mapDispatchToProps from '../../common/app/mapDispatchToProps';
 import mapStateToProps from '../../common/app/mapStateToProps';
 import {connect} from 'react-redux';
@@ -22,14 +23,14 @@ export default class App extends Component {
   }
 
   render() {
-    const {children, location: {pathname}, msg, users: {viewer}} = this.props;
+    const {location: {pathname}, msg, users: {viewer}} = this.props;
 
     return (
       // Pass data-pathname to allow route specific styling.
       <div className="page" data-pathname={pathname}>
-        {/* pathname enforces header rerender so activeClassName is updated */}
+        {/* Pathname enforces rerender so activeClassName is updated. */}
         <Header msg={msg} pathname={pathname} viewer={viewer} />
-        {React.cloneElement(children, this.props)}
+        <RouterHandler {...this.props} />
         <Footer msg={msg.app.footer} />
       </div>
     );

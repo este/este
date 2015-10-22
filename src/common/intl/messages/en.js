@@ -89,5 +89,11 @@ export default {
     }`,
     newTodoPlaceholder: 'What needs to be done?',
     title: 'Todos'
+  },
+  profile: {
+    title: 'Profile'
+  },
+  settings: {
+    title: 'Settings'
   }
 };
