@@ -3,8 +3,11 @@ import Header from './Header.react';
 import List from './List.react';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes, View} from 'react-native';
+import fetch from '../../common/components/fetch';
 import style from '../app/App.style';
+import {fetchUserTodos} from '../../common/todos/actions';
 
+@fetch(fetchUserTodos)
 export default class Page extends Component {
 
   static propTypes = {
@@ -15,10 +18,11 @@ export default class Page extends Component {
 
   render() {
     const {actions, msg: {todos: msg}, todos} = this.props;
+    const leftTodos = todos.list.filter(todo => !todo.completed).size;
 
     return (
       <View style={[style.container]}>
-        <Header leftTodos={0} msg={msg} />
+        <Header leftTodos={leftTodos} msg={msg} />
         <NewTodo actions={actions} msg={msg} todo={todos.newTodo} />
         <List actions={actions} msg={msg} todos={todos.list} />
       </View>

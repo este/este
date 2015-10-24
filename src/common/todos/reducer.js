@@ -55,6 +55,13 @@ export default function todosReducer(state = initialState, action) {
       );
     }
 
+    case actions.FETCH_USER_TODOS_SUCCESS: {
+      const userTodos = List(action.payload.todos.map(json => new Todo(json)));
+      // Don't update non empty list since todos are not persisted in this demo.
+      if (state.get('list').size) return state;
+      return state.set('list', List(userTodos));
+    }
+
     case actions.ON_NEW_TODO_CHANGE: {
       const {name, value} = action.payload;
       return state.setIn(['newTodo', name], value);

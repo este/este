@@ -17,15 +17,14 @@ function getAssetHash(filePath) {
   }
 }
 
+// Remember, never put production secrets in config. Use nconf.
 const config = {
   assetsHashes: {
     appCss: getAssetHash('build/app.css'),
     appJs: getAssetHash('build/app.js')
   },
-  appLocales: ['en', 'fr'],
-  defaultLocale: 'en',
-  googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: isProduction,
+  googleAnalyticsId: 'UA-XXXXXXX-X',
   port: process.env.PORT || 8000,
   webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl']
 };

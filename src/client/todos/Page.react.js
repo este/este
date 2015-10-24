@@ -4,7 +4,12 @@ import DocumentTitle from 'react-document-title';
 import List from './List.react';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes} from 'react';
+import fetch from '../../common/components/fetch';
+import {fetchUserTodos} from '../../common/todos/actions';
 
+// This decorator (higher order component) fetches todos both on client and
+// server side. It's true isomorphic data fetching and rendering.
+@fetch(fetchUserTodos)
 export default class Page extends Component {
 
   static propTypes = {

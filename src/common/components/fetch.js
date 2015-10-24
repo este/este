@@ -1,7 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 
-// TODO: Add example for isomorphic data fetching.
 export default function fetch(action) {
 
   return Wrapped => class Fetch extends Component {
@@ -12,10 +11,14 @@ export default function fetch(action) {
       params: PropTypes.object
     }
 
-    // This allows server fetching.
+    // This enables server side fetching.
+    // Check src/server/frontend/render.js fetchComponentData function.
     static fetchAction = action;
 
+    // This enables client side fetching, method is called only in browser.
     componentDidMount() {
+      // Dispatch is injected by react-redux.
+      // React router injects location and params for every routed component.
       const {dispatch, location, params} = this.props;
       dispatch(action({location, params}));
     }

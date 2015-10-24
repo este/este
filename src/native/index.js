@@ -16,7 +16,13 @@ import '../../node_modules/intl/locale-data/jsonp/en.js';
 
 export default function index(platform) {
 
-  const store = configureStore();
+  // TODO: Add engine.
+  const initialState = {
+    device: {
+      isMobile: true
+    }
+  };
+  const store = configureStore({initialState});
   // Set platform, ios or android.
   store.dispatch(setPlatform(platform));
 

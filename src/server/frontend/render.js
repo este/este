@@ -6,7 +6,6 @@ import ReactDOMServer from 'react-dom/server';
 import config from '../config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../client/createRoutes';
-import initialState from '../initialState';
 import serialize from 'serialize-javascript';
 import useragent from 'useragent';
 import {HOT_RELOAD_PORT} from '../../../webpack/constants';
@@ -14,17 +13,18 @@ import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
-import {fromJS} from 'immutable';
 
 export default function render(req, res, next) {
-  const state = fromJS(initialState).mergeDeep({
+  const initialState = {
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
     }
-  }).toJS();
-  const store = configureStore({initialState: state});
+  };
+  const store = configureStore({initialState});
+
   // Fetch logged in user here because routes may need it. Remember we can use
   // store.dispatch method.
+
   const routes = createRoutes(() => store.getState());
   const location = createMemoryHistory().createLocation(req.url);
 
@@ -57,12 +57,19 @@ function fetchComponentData(dispatch, req, {components, location, params}) {
   const fetchActions = components.reduce((actions, component) => {
     return actions.concat(component.fetchAction || []);
   }, []);
-  const promises = fetchActions.map(action => dispatch(action({
-    location,
-    params,
-    req
-  })));
-  return Promise.all(promises);
+  const promises = fetchActions.map(action => dispatch(action(
+    {location, params}
+  )));
+
+  // Because redux-promise-middleware always returns fulfilled promise, we have
+  // to detect errors manually.
+  // https://github.com/pburtchaell/redux-promise-middleware#usage
+  return Promise.all(promises).then(results => {
+    results.forEach(result => {
+      if (result.error)
+        throw result.payload;
+    });
+  });
 }
 
 function renderPage(store, renderProps, req) {

@@ -1,6 +1,6 @@
 import appReducer from './app/reducer';
 import createLogger from 'redux-logger';
-import fetch from 'isomorphic-fetch';
+import fetch from './fetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
 import stateToJS from './lib/stateToJS';
@@ -10,14 +10,9 @@ import {applyMiddleware, createStore} from 'redux';
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
 
-export default function configureStore({engine, initialState} = {}) {
+export default function configureStore({engine, initialState}) {
 
-  // This is something like services in Angular, but without magic DI resolver,
-  // which is cool if you need it, but much better is design where DI resolver
-  // is not needed. Why DI container is not needed anymore? Remember, we are
-  // using dependency injection only for stuff with state (instances etc.).
-  // If app state is atomic aka at one place in whole app, we don't need DI
-  // container anymore. injectDependencies with custom factories is all we need.
+  // Inject services for actions.
   const dependenciesMiddleware = injectDependencies(
     {fetch},
     {validate}
@@ -38,12 +33,16 @@ export default function configureStore({engine, initialState} = {}) {
   //   middleware.push(storage.createMiddleware(engine));
   // }
 
-  // Logger must be last middleware in chain.
-  if (process.env.NODE_ENV !== 'production') { // eslint-disable-line no-undef
+  const loggerEnabled =
+    process.env.NODE_ENV !== 'production' && // eslint-disable-line no-undef
+    process.env.IS_BROWSER; // eslint-disable-line no-undef
+
+  if (loggerEnabled) {
     const logger = createLogger({
       collapsed: true,
       transformer: stateToJS
     });
+    // Logger must be the last middleware in chain.
     middleware.push(logger);
   }
 
