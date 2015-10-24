@@ -23,8 +23,9 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
 - [React Native](https://facebook.github.io/react-native/) for iOS and Android (wip).
 - [Redux](http://rackt.github.io/redux/) [Flux](https://facebook.github.io/flux/) with atomic [immutable.js](http://facebook.github.io/immutable-js) app state.
-- [react-router](https://github.com/rackt/react-router).
 - ECMAScript 2015+ with [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps enabled by default.
+- [react-router](https://github.com/rackt/react-router) for isomorphic routing.
+- Universal/Isomorphic data fetching example.
 - Well tuned [webpack](http://webpack.github.io/) dev stack.
 - [eslint](http://eslint.org/) ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/).
