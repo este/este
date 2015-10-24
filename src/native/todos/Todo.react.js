@@ -1,6 +1,29 @@
 import Component from '../components/Component.react';
-import React, {Image, PropTypes, TextInput, TouchableOpacity, View} from 'react-native';
-import style from './Todo.style.js';
+import React from 'react-native';
+
+const {
+  Image, PropTypes, StyleSheet, TextInput, TouchableOpacity, View
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row'
+  },
+  input: {
+    color: '#7C7C7C',
+    flex: 1,
+    fontSize: 16,
+    paddingRight: 20
+  },
+  checkbox: {
+    height: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    width: 30
+  }
+});
 
 export default class TodoItem extends Component {
 
@@ -16,16 +39,16 @@ export default class TodoItem extends Component {
       : require('image!EmptyCheckbox');
 
     return (
-      <View style={style.container}>
+      <View style={styles.container}>
         <TouchableOpacity
           activeOpacity={.8}
           onPress={() => actions.toggleTodoCompleted(todo)}
         >
-          <Image source={image} style={style.checkbox} />
+          <Image source={image} style={styles.checkbox} />
         </TouchableOpacity>
         <TextInput
           editable={false}
-          style={[style.input]}
+          style={[styles.input]}
           value={todo.title}
         />
       </View>

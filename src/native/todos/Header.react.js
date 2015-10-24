@@ -1,7 +1,25 @@
 import Component from '../components/Component.react';
-import React, {PropTypes, Text, View} from 'react-native';
-import style from './Header.style';
+import React from 'react-native';
 import {format} from '../../common/intl/format';
+
+const {
+  PropTypes, StyleSheet, Text, View
+} = React;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#31AACC',
+    justifyContent: 'center',
+    marginTop: -5,
+    paddingBottom: 20,
+    paddingTop: 10
+  },
+  header: {
+    color: '#fff',
+    fontSize: 20,
+  }
+});
 
 export default class Header extends Component {
 
@@ -14,8 +32,8 @@ export default class Header extends Component {
     const {leftTodos, msg} = this.props;
 
     return (
-      <View style={style.container}>
-        <Text style={style.header}>
+      <View style={styles.container}>
+        <Text style={styles.header}>
           {(format(msg.leftList, {size: leftTodos}))}
         </Text>
       </View>

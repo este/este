@@ -1,6 +1,27 @@
-import React, {PropTypes, Text, TouchableOpacity, View} from 'react-native';
 import Component from '../components/Component.react';
-import style from './Buttons.style';
+import React from 'react-native';
+
+const {
+  PropTypes, StyleSheet, Text, TouchableOpacity, View
+} = React;
+
+const styles = StyleSheet.create({
+  buttons: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row'
+  },
+  listButton: {
+    flex: 1,
+    paddingBottom: 15,
+    paddingTop: 15
+  },
+  listButtonText: {
+    color: '#C1C1C1',
+    fontSize: 16,
+    textAlign: 'center'
+  }
+});
 
 export default class TodoButtons extends Component {
 
@@ -18,13 +39,13 @@ export default class TodoButtons extends Component {
       <TouchableOpacity
         activeOpacity={.9}
         onPress={action}
-        style={style.listButton}
+        style={styles.listButton}
       >
-        <Text style={style.listButtonText}>{text}</Text>
+        <Text style={styles.listButtonText}>{text}</Text>
       </TouchableOpacity>;
 
     return (
-      <View style={style.buttons}>
+      <View style={styles.buttons}>
         {hasCompletedTodos
           ? Button(actions.clearAllCompletedTodos, msg.clearCompleted)
           : Button(actions.clearAllTodos, msg.clearAll)

@@ -6,7 +6,7 @@ import SideMenu from '../components/SideMenu.react';
 import mapDispatchToProps from '../../common/app/mapDispatchToProps';
 import mapStateToProps from '../../common/app/mapStateToProps';
 import routes from '../routes';
-import style from './App.style';
+import styles from './styles';
 import {connect} from 'react-redux/native';
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -44,7 +44,7 @@ export default class App extends Component {
     const {actions, device, msg, ui} = this.props;
 
     const renderScene = (route, navigator) =>
-      <View style={[style.sceneView, route.style]}>
+      <View style={[styles.sceneView, route.style]}>
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={actions.toggleSideMenu}
@@ -62,15 +62,15 @@ export default class App extends Component {
         menu={menu}
         onChange={actions.onSideMenuChange}
         platform={device.platform}
-        style={style.container}
+        style={styles.container}
         touchToClose
       >
         <Navigator
           configureScene={App.configureScene}
-          initialRoute={routes.home}
+          initialRoute={routes.todos}
           ref={c => this.navigator = c}
           renderScene={renderScene}
-          style={style.container}
+          style={styles.container}
         />
       </SideMenu>
     );

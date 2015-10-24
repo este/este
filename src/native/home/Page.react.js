@@ -1,6 +1,6 @@
 import Component from '../components/Component.react';
 import React, {PropTypes, Text, View} from 'react-native';
-import style from '../app/App.style';
+import appStyles from '../app/styles';
 
 export default class Page extends Component {
 
@@ -12,8 +12,8 @@ export default class Page extends Component {
     const {msg} = this.props;
 
     return (
-      <View style={[style.centeredView, {paddingBottom: 64}]}>
-        <Text style={[style.centered, style.paragraph]}>
+      <View style={[appStyles.centeredView, {paddingBottom: 64}]}>
+        <Text style={[appStyles.centered, appStyles.paragraph]}>
           {msg.home.iosInfoText}
         </Text>
       </View>

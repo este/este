@@ -1,8 +1,34 @@
 import Buttons from './Buttons.react';
 import Component from '../components/Component.react';
-import React, {Image, PropTypes, ScrollView, Text, View} from 'react-native';
+import React from 'react-native';
 import Todo from './Todo.react';
-import style from './List.style';
+
+const {
+  Image, PropTypes, ScrollView, StyleSheet, Text, View
+} = React;
+
+const styles = StyleSheet.create({
+  centeredView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    paddingBottom: 40
+  },
+  noTodosText: {
+    color: '#aaa',
+    fontSize: 20
+  },
+  icon: {
+    height: 70,
+    marginBottom: 10,
+    width: 70
+  },
+  row: {
+    borderBottomColor: '#f1f1f1',
+    borderBottomWidth: 1,
+    height: 63
+  }
+});
 
 export default class List extends Component {
 
@@ -18,12 +44,12 @@ export default class List extends Component {
 
     if (todos.size === 0)
       return (
-        <View style={style.centeredView}>
+        <View style={styles.centeredView}>
           <Image
             source={require('image!Empty State')}
-            style={style.icon}
+            style={styles.icon}
           />
-          <Text style={style.noTodosText}>
+          <Text style={styles.noTodosText}>
             {msg.empty}
           </Text>
         </View>
@@ -32,7 +58,7 @@ export default class List extends Component {
     return (
       <ScrollView>
         {todos.map(todo =>
-          <View key={todo.id} style={style.row}>
+          <View key={todo.id} style={styles.row}>
             <Todo actions={actions} todo={todo} />
           </View>
         )}

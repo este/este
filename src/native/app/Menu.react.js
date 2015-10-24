@@ -1,6 +1,39 @@
 import Component from '../components/Component.react';
-import MenuStyle from './Menu.style';
-import React, {PropTypes, ScrollView, View, Text} from 'react-native';
+import Dimensions from 'Dimensions';
+import React from 'react-native';
+
+const {
+  PropTypes, ScrollView, StyleSheet, Text, View
+} = React;
+
+const window = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#2C2C2C',
+    flex: 1,
+    height: window.height,
+    width: window.width * .7
+  },
+  menu: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    paddingHorizontal: 30
+  },
+  item: {
+    fontSize: 16,
+    padding: 10,
+    color: '#fff'
+  },
+  header: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginBottom: 10
+  }
+});
 
 export default class Menu extends Component {
 
@@ -16,15 +49,15 @@ export default class Menu extends Component {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={false}
-        contentContainerStyle={MenuStyle.menu}
-        style={MenuStyle.container}
+        contentContainerStyle={styles.menu}
+        style={styles.container}
       >
         <View>
           {pages.map(page =>
             <Text
               key={page}
               onPress={() => onRouteChange(page)}
-              style={MenuStyle.item}
+              style={styles.item}
             >{links[page]}</Text>
           )}
         </View>
