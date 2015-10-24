@@ -67,7 +67,7 @@ export default class App extends Component {
       >
         <Navigator
           configureScene={App.configureScene}
-          initialRoute={routes.todos}
+          initialRoute={routes.home}
           ref={c => this.navigator = c}
           renderScene={renderScene}
           style={styles.container}
