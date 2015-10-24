@@ -45,7 +45,6 @@
     "history": "^1.9.0",
     "immutable": "^3.6.4",
     "intl": "^1.0.0",
-    "intl-locales-supported": "^1.0.0",
     "intl-messageformat": "^1.1.0",
     "intl-relativeformat": "^1.1.0",
     "invariant": "^2.1.0",
