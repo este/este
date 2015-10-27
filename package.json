@@ -79,6 +79,7 @@
     "serve-favicon": "^2.2.0",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.0.0",
+    "urijs": "^1.16.1",
     "url-loader": "^0.5.5",
     "useragent": "^2.1.7",
     "validator": "^4.0.6",

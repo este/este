@@ -1,11 +1,12 @@
 import isomorphicFetch from 'isomorphic-fetch';
+import URI from 'urijs';
 
 const local = 'http://localhost:8000/';
 
 function ensureAbsoluteUrl(input) {
   if (typeof input !== 'string') return input;
   if (input.indexOf('http') !== -1) return input;
-  return local + input;
+  return URI(local + input).normalize().toString();
 }
 
 // Wrapper over isomorphicFetch making relative urls absolute. We don't want
