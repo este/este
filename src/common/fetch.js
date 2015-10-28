@@ -5,7 +5,7 @@ const local = 'http://localhost:8000/';
 
 function ensureAbsoluteUrl(input) {
   if (typeof input !== 'string') return input;
-  if (URI(input).is('relative')) return input;
+  if (URI(input).is('absolute')) return input;
   return URI(local + input).normalize().toString();
 }
 
