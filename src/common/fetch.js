@@ -5,9 +5,8 @@ const local = 'http://localhost:8000/';
 
 function ensureAbsoluteUrl(input) {
   if (typeof input !== 'string') return input;
-  const uri = new URI(input);
-  if (uri.is("url") === false) return input;
-  return uri.normalize().toString();
+  if (URI(input).is('url') === false) return input;
+  return URI(local + input).normalize().toString();
 }
 
 // Wrapper over isomorphicFetch making relative urls absolute. We don't want
