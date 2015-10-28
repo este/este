@@ -5,7 +5,7 @@ const local = 'http://localhost:8000/';
 
 function ensureAbsoluteUrl(input) {
   if (typeof input !== 'string') return input;
-  if (URI(input).is('url') === false) return input;
+  if (URI(input).is('relative')) return input;
   return URI(local + input).normalize().toString();
 }
 
@@ -15,4 +15,3 @@ export default function fetch(input, init) {
   input = ensureAbsoluteUrl(input);
   return isomorphicFetch(input, init);
 }
-
