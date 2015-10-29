@@ -1,6 +1,8 @@
-import './Todo.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+
+if (process.env.IS_BROWSER)
+  require('./Todo.styl');
 
 export default class Todo extends Component {
 

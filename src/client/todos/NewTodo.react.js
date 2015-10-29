@@ -1,6 +1,8 @@
-import './NewTodo.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+
+if (process.env.IS_BROWSER)
+  require('./NewTodo.styl');
 
 export default class NewTodo extends Component {
 
