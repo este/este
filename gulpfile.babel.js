@@ -3,6 +3,7 @@ import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
 import gulp from 'gulp';
+import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
 import os from 'os';
 import path from 'path';
@@ -48,7 +49,8 @@ gulp.task('mocha', () => {
       require: ['./test/mochaSetup.js'],
       reporter: 'spec'
     }))
-    .on('error', process.exit.bind(process, 1));
+    // .on('error', process.exit.bind(process, 1));
+    .on('error', gutil.log);
 });
 
 // Continuous test running
