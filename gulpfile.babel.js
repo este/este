@@ -57,7 +57,7 @@ gulp.task('mocha-watch', () => {
 });
 
 gulp.task('test', done => {
-  runSequence('eslint-ci', 'build-webpack', 'mocha', done);
+  runSequence('eslint-ci', 'mocha', 'build-webpack', done);
 });
 
 gulp.task('server-node', bg('node', './src/server'));
