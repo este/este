@@ -1,6 +1,8 @@
-import './Buttons.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+
+if (process.env.IS_BROWSER)
+  require('./Buttons.styl');
 
 export default class Buttons extends Component {
 

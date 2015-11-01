@@ -1,4 +1,13 @@
 {
+  "globals": {
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false,
+    "require"    : false
+  },
   "parser": "babel-eslint",
   "rules": {
     "array-bracket-spacing": 2,
