@@ -1,3 +1,4 @@
+import autobind from 'core-decorators/lib/autobind';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 
@@ -12,6 +13,7 @@ export default class NewTodo extends Component {
     newTodo: PropTypes.object.isRequired
   }
 
+  @autobind
   onKeyDown(e) {
     const {actions, newTodo} = this.props;
     if (e.key === 'Enter' && newTodo.title.trim())
@@ -27,7 +29,7 @@ export default class NewTodo extends Component {
         className="new-todo"
         name="title"
         onChange={e => actions.onNewTodoChange(e.target.name, e.target.value)}
-        onKeyDown={e => this.onKeyDown(e)}
+        onKeyDown={this.onKeyDown}
         placeholder={msg.newTodoPlaceholder}
         value={newTodo.title}
       />

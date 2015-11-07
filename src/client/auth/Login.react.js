@@ -1,3 +1,4 @@
+import autobind from 'core-decorators/lib/autobind';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import focusInvalidField from '../lib/focusInvalidField';
@@ -15,6 +16,7 @@ export default class Login extends Component {
     msg: PropTypes.object.isRequired
   }
 
+  @autobind
   onFormSubmit(e) {
     e.preventDefault();
     const {actions, auth: {form}} = this.props;
@@ -41,7 +43,7 @@ export default class Login extends Component {
 
     return (
       <div className="login">
-        <form onSubmit={e => this.onFormSubmit(e)}>
+        <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={form.disabled}>
             <legend>{msg.legend}</legend>
             <input

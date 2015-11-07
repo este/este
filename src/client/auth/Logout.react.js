@@ -1,3 +1,4 @@
+import autobind from 'core-decorators/lib/autobind';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 
@@ -7,7 +8,8 @@ export default class Logout extends Component {
     msg: PropTypes.object.isRequired
   }
 
-  logout() {
+  @autobind
+  onLogout() {
     // Always reload app on logout for security reasons.
     location.href = '/';
   }
@@ -17,7 +19,7 @@ export default class Logout extends Component {
 
     return (
       <div className="logout">
-        <button onClick={() => this.logout()}>{msg.button}</button>
+        <button onClick={this.onLogout}>{msg.button}</button>
       </div>
     );
   }
