@@ -55,7 +55,7 @@ export default function render(req, res, next) {
 
 function fetchComponentData(dispatch, req, {components, location, params}) {
   const fetchActions = components.reduce((actions, component) => {
-    return actions.concat(component.fetchAction || []);
+    return actions.concat(component.fetchActions || []);
   }, []);
   const promises = fetchActions.map(action => dispatch(action(
     {location, params}
