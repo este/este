@@ -22,26 +22,28 @@ describe('Login component', () => {
     }
   };
 
-  const loginAction = sinon.stub().resolves({});
-  const replaceState = sinon.spy();
+  let sandbox, loginComponent, inputs, button, loginAction, replaceState, form;
 
-  const data = {
-    actions: {
-      login: loginAction
-    },
-    history: {
-      replaceState
-    },
-    location: {},
-    msg: msg,
-    auth: {form: new Form()}
+  function componentProps() {
+    return {
+      actions: {
+        login: loginAction
+      },
+      history: {
+        replaceState
+      },
+      location: {},
+      msg: msg,
+      auth: {form: new Form()}
+    };
   };
-
-  let sandbox, loginComponent, inputs, button;
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    loginComponent = TestUtils.renderIntoDocument(<Login {...data} />);
+    loginAction = sandbox.stub().resolves({});
+    replaceState = sandbox.spy();
+
+    loginComponent = TestUtils.renderIntoDocument(<Login {...componentProps()} />);
     inputs = TestUtils.scryRenderedDOMComponentsWithTag(loginComponent, 'input');
     button = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'button');
     form = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'form');
@@ -56,14 +58,19 @@ describe('Login component', () => {
     expect(button).to.not.equal(null);
   });
 
-  it('should fire login action and redirect', (done) => {
+  it('should fire login action on form submit', () => {
     TestUtils.Simulate.submit(form);
 
     expect(loginAction.calledOnce).to.be.true;
+  });
+
+  it('should redirect to home on successful login', done => {
+    TestUtils.Simulate.submit(form);
+
     loginAction().then(() => {
       expect(replaceState.calledOnce).to.be.true;
       expect(replaceState.calledWithExactly(null, '/')).to.be.true;
       done();
-    })
+    });
   });
 });
