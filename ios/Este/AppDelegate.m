@@ -23,7 +23,7 @@
    * OPTION 1
    * Load from development server. Start the server from the repository root:
    *
-   * $ npm start
+   * $ npm run start-native
    *
    * To run on device, change `localhost` to the IP address of your computer
    * (you can get this by typing `ifconfig` into the terminal and selecting the
