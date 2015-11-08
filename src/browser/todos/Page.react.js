@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title';
 import List from './List.react';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes} from 'react';
-import fetch from '../../common/components/fetch';
+import fetch from '../components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
 // This decorator (higher order component) fetches todos both in browser and
