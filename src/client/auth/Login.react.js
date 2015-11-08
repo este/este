@@ -47,14 +47,14 @@ export default class Login extends Component {
             <input
               autoFocus
               name="email"
-              onChange={actions.setFormField}
+              onChange={actions.onAuthFormFieldChange}
               placeholder={msg.placeholder.email}
               value={form.fields.email}
             />
             <br />
             <input
               name="password"
-              onChange={actions.setFormField}
+              onChange={actions.onAuthFormFieldChange}
               placeholder={msg.placeholder.password}
               type="password"
               value={form.fields.password}

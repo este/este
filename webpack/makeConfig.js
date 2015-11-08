@@ -62,6 +62,7 @@ function makeConfig(isDevelopment) {
         loader: 'babel',
         query: {
           stage: 0,
+          cacheDirectory: true,
           env: {
             development: {
               // react-transform belongs to webpack config only, not to .babelrc

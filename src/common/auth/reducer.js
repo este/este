@@ -12,12 +12,12 @@ export default function authReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case actions.SET_FORM_FIELD: {
+    case actions.ON_AUTH_FORM_FIELD_CHANGE: {
       const {name, value} = action.payload;
       return state.setIn(['form', 'fields', name], value);
     }
 
-    case actions.LOGIN:
+    case actions.LOGIN_START:
       return state.setIn(['form', 'disabled'], true);
 
     case actions.LOGIN_SUCCESS:
