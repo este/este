@@ -7,8 +7,8 @@ import React, {PropTypes} from 'react';
 import fetch from '../../common/components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
-// This decorator (higher order component) fetches todos both on client and
-// server side. It's true isomorphic data fetching and rendering.
+// This decorator (higher order component) fetches todos both in browser and
+// on server side. It's true isomorphic data fetching and rendering.
 @fetch(fetchUserTodos)
 export default class Page extends Component {
 
