@@ -62,7 +62,7 @@ export default {
         },
         {
           key: 'production',
-          text: 'Performance and size of production build (<code>gulp -p</code>)'
+          text: 'Performance and size of production build (<code>npm run start-production</code>)'
         }
       ]
     }

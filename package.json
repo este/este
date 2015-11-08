@@ -7,9 +7,18 @@
   "description": "Dev stack and starter kit for React universal web apps",
   "private": true,
   "scripts": {
-    "postinstall": "gulp build --production",
-    "start": "node_modules/react-native/packager/packager.sh",
-    "test": "gulp test"
+    "lint": "eslint 'src/**/*.js' 'webpack/*.js'",
+    "test": "npm run lint && mocha --require test/mochaSetup.js --reporter spec --compilers js:babel-core/register 'src/**/*.spec.js'",
+    "test:watch": "npm test -- -w",
+    "build": "node webpack/build.js",
+    "postinstall": "npm run build",
+    "server-node": "node src/server",
+    "server-hot": "node webpack/server",
+    "server-nodemon": "nodemon src/server",
+    "start": "npm run server-hot & npm run server-nodemon",
+    "start-production": "npm run --production build && npm run --production server-node",
+    "start-native": "node_modules/react-native/packager/packager.sh",
+    "clean-native": "rctapp clean cache"
   },
   "engines": {
     "node": "4.2.x"
@@ -35,13 +44,6 @@
     "express-device": "^0.4.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.1",
-    "glob": "^5.0.13",
-    "gulp": "^3.9.0",
-    "gulp-bg": "0.0.7",
-    "gulp-eslint": "^1.0.0",
-    "gulp-mocha": "^2.1.3",
-    "gulp-shell": "^0.5.0",
-    "gulp-util": "^3.0.7",
     "hash-file": "^2.1.0",
     "history": "^1.9.0",
     "immutable": "^3.6.4",
@@ -54,11 +56,13 @@
     "jsdom": "^7.0.2",
     "less": "^2.5.1",
     "less-loader": "^2.0.0",
+    "mocha": "^2.3.3",
     "nconf": "^0.8.1",
     "node-sass": "^3.1.2",
     "nodemon": "<1.8.0",
     "normalize.css": "^3.0.2",
     "postcss-loader": "^0.7.0",
+    "rctapp": "^0.2.4",
     "react": "^0.14.2",
     "react-addons-test-utils": "^0.14.1",
     "react-document-title": "^2.0.0",
@@ -91,7 +95,6 @@
     "validator": "^4.0.6",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.1.0",
-    "yargs": "^3.3.1"
+    "webpack-hot-middleware": "^2.1.0"
   }
 }
