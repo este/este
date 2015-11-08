@@ -50,7 +50,7 @@ npm install
 ## Dev Tasks
 
 - `npm start` run web app in development mode
-- `npm --production start` run web app in production mode
+- `npm run start-production` run web app in production mode
 - `npm test` test app
 
 ## Documentation
