@@ -43,7 +43,6 @@
     "express-device": "^0.4.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.1",
-    "gulp-bg": "0.0.7",
     "hash-file": "^2.1.0",
     "history": "^1.9.0",
     "immutable": "^3.6.4",
