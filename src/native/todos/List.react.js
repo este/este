@@ -46,7 +46,7 @@ export default class List extends Component {
       return (
         <View style={styles.centeredView}>
           <Image
-            source={require('image!Empty State')}
+            source={require('../../../assets/img/EmptyState.png')}
             style={styles.icon}
           />
           <Text style={styles.noTodosText}>

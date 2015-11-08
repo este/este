@@ -15,7 +15,7 @@ export default class SideMenu extends Component {
   componentDidUpdate(prevProps) {
     const {isOpen, platform} = this.props;
     if (prevProps.isOpen === isOpen) return;
-    if (this.props.isOpen) {
+    if (!isOpen) {
       // Handle platform specific behavior.
       if (platform === 'ios')
         StatusBarIOS.setHidden(true, true);

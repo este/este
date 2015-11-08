@@ -35,8 +35,8 @@ export default class TodoItem extends Component {
   render() {
     const {actions, todo} = this.props;
     const image = todo.completed
-      ? require('image!SelectedCheckbox')
-      : require('image!EmptyCheckbox');
+      ? require('../../../assets/img/SelectedCheckbox.png')
+      : require('../../../assets/img/EmptyCheckbox.png');
 
     return (
       <View style={styles.container}>

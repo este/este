@@ -1,10 +1,11 @@
 import React from 'react-native';
 import shallowEqual from 'react-pure-render/shallowEqual';
 
-// Purified React.Component. Goodness.
+// Pure React component. The goodness.
 // http://facebook.github.io/react/docs/advanced-performance.html
-// TODO: Investigate why 'react-pure-render/component' can't be used.
-// https://github.com/facebook/react-native/issues/3369
+// For some reason react-pure-render/component doesn't work in react-native.
+// https://github.com/gaearon/react-pure-render/issues/14
+// TODO: Remove once react-native will support React 0.14
 export default class Component extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {

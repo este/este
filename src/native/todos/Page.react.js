@@ -4,7 +4,7 @@ import List from './List.react';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes, View} from 'react-native';
 import appStyles from '../app/styles';
-import fetch from '../../common/components/fetch';
+import fetch from '../components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
 @fetch(fetchUserTodos)
