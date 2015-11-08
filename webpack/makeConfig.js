@@ -1,9 +1,9 @@
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import autoprefixer from 'autoprefixer';
-import constants from './constants';
-import path from 'path';
-import webpack from 'webpack';
-import ip from 'ip';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const constants = require('./constants');
+const path = require('path');
+const webpack = require('webpack');
+const ip = require('ip');
 
 const devtools = process.env.CONTINUOUS_INTEGRATION
   ? 'inline-source-map'
@@ -22,7 +22,9 @@ const loaders = {
 
 const serverIp = ip.address();
 
-export default function makeConfig(isDevelopment) {
+module.exports = makeConfig;
+
+function makeConfig(isDevelopment) {
 
   function stylesLoaders() {
     return Object.keys(loaders).map(ext => {

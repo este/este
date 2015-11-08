@@ -15,7 +15,6 @@ app.use(compression());
 // Serve the static assets. We can cache them as they include hashes.
 app.use('/assets/img', express.static('../assets/img', {maxAge: '200d'}));
 app.use('/_assets', express.static('build', {maxAge: '200d'}));
-console.log('app.use(/_assets);')
 
 // Intl.
 app.use('/node_modules/intl/dist', express.static('node_modules/intl/dist'));

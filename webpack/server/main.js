@@ -1,8 +1,8 @@
-import webpack from 'webpack';
-import webpackDev from 'webpack-dev-middleware';
-import webpackHot from 'webpack-hot-middleware';
-import makeWebpackConfig from '../makeConfig';
-import express from 'express';
+const webpack = require('webpack');
+const webpackDev = require('webpack-dev-middleware');
+const webpackHot = require('webpack-hot-middleware');
+const makeWebpackConfig = require('../makeConfig');
+const express = require('express');
 
 const app = express();
 

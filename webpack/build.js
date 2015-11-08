@@ -1,5 +1,5 @@
-import makeWebpackConfig from './makeConfig';
-import webpack from 'webpack';
+const makeWebpackConfig = require('./makeConfig');
+const webpack = require('webpack');
 
 build();
 
@@ -19,7 +19,7 @@ function build() {
     if (buildError)
       throw new Error(buildError);
 
-    console.log('[webpack]', stats.toString({
+    console.log('[webpack]', stats.toString({  // eslint-disable-line no-console
       colors: true,
       version: false,
       hash: false,

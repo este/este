@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 
 const ABSOLUTE_BASE = path.normalize(path.join(__dirname, '..'));
 
@@ -12,4 +12,4 @@ const constants = Object.freeze({
   HOT_RELOAD_PORT: 8080
 });
 
-export default constants;
+module.exports = constants;

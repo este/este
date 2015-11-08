@@ -50,7 +50,7 @@ npm install
 ## Dev Tasks
 
 - `npm start` run web app in development mode
-- `npm run start-production` run web app in production mode
+- `npm --production start` run web app in production mode
 - `npm test` test app
 
 ## Documentation
@@ -93,7 +93,7 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
  ```
 
 #### Why does the CSS flicker when starting the app/refreshing it?
-In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`npm run start-production`).
+In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`npm --production start`).
 
 #### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
 Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be `use()` by the main app, like any other middleware.
