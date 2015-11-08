@@ -13,7 +13,7 @@ export default function uiReducer(state = initialState, action) {
 
     case actions.ON_SIDE_MENU_CHANGE: {
       const {isOpen} = action.payload;
-      return state.set('isSideMenuOpen', !isOpen);
+      return state.set('isSideMenuOpen', isOpen);
     }
 
     case actions.TOGGLE_SIDE_MENU:
