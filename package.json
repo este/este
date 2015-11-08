@@ -15,7 +15,8 @@
     "server-node": "node src/server",
     "server-hot": "node webpack/server",
     "server-nodemon": "nodemon src/server",
-    "start": "node scripts/server",
+    "start": "npm run server-hot & npm run server-nodemon",
+    "start-production": "npm run --production build && npm run --production server-node",
     "start-native": "node_modules/react-native/packager/packager.sh",
     "clean-native": "rctapp clean cache"
   },
