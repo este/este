@@ -1,4 +1,3 @@
-import * as actions from '../../../common/auth/actions';
 import Form from '../../../common/auth/form';
 import Login from '../Login.react';
 
@@ -23,21 +22,31 @@ describe('Login component', () => {
     }
   };
 
-  const data = {
-    actions: actions,
-    history: {},
-    location: {},
-    msg: msg,
-    auth: {form: new Form()}
-  };
+  let sandbox, loginComponent, inputs, button, loginAction, replaceState, form;
 
-  let sandbox, loginForm, inputs, button;
+  function componentProps() {
+    return {
+      actions: {
+        login: loginAction
+      },
+      history: {
+        replaceState
+      },
+      location: {},
+      msg: msg,
+      auth: {form: new Form()}
+    };
+  };
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    loginForm = TestUtils.renderIntoDocument(<Login {...data} />);
-    inputs = TestUtils.scryRenderedDOMComponentsWithTag(loginForm, 'input');
-    button = TestUtils.findRenderedDOMComponentWithTag(loginForm, 'button');
+    loginAction = sandbox.stub().resolves({});
+    replaceState = sandbox.spy();
+
+    loginComponent = TestUtils.renderIntoDocument(<Login {...componentProps()} />);
+    inputs = TestUtils.scryRenderedDOMComponentsWithTag(loginComponent, 'input');
+    button = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'button');
+    form = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'form');
   });
 
   afterEach(() => {
@@ -47,5 +56,21 @@ describe('Login component', () => {
   it('should generate a login form', () => {
     expect(inputs.length).to.equal(2);
     expect(button).to.not.equal(null);
+  });
+
+  it('should fire login action on form submit', () => {
+    TestUtils.Simulate.submit(form);
+
+    expect(loginAction.calledOnce).to.be.true;
+  });
+
+  it('should redirect to home on successful login', done => {
+    TestUtils.Simulate.submit(form);
+
+    loginAction().then(() => {
+      expect(replaceState.calledOnce).to.be.true;
+      expect(replaceState.calledWithExactly(null, '/')).to.be.true;
+      done();
+    });
   });
 });

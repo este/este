@@ -82,6 +82,7 @@
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.2.0",
     "sinon": "^1.17.2",
+    "sinon-as-promised": "^4.0.0",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.0.0",
