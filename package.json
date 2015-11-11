@@ -15,7 +15,7 @@
     "node": "4.2.x"
   },
   "dependencies": {
-    "autoprefixer": "^6.0.2",
+    "autoprefixer": "^6.1.0",
     "babel": "^5.0.8",
     "babel-core": "^5.0.8",
     "babel-eslint": "^4.1.2",
