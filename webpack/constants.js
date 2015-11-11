@@ -9,7 +9,7 @@ const constants = Object.freeze({
   DIST_DIR: path.join(ABSOLUTE_BASE, 'dist'),
   SRC_DIR: path.join(ABSOLUTE_BASE, 'src'),
   ASSETS_DIR: path.join(ABSOLUTE_BASE, 'assets'),
-  HOT_RELOAD_PORT: 8080
+  HOT_RELOAD_PORT: process.env.HOT_RELOAD_PORT || 8080
 });
 
 export default constants;
