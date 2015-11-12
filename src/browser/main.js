@@ -7,6 +7,7 @@ import createEngine from 'redux-storage/engines/localStorage';
 import createRoutes from './createRoutes';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
+import {syncReduxAndRouter} from 'redux-simple-router';
 
 // TODO: Add app storage example.
 // import storage from 'redux-storage';
@@ -16,14 +17,17 @@ if (process.env.IS_BROWSER) require('regenerator/runtime');
 
 const app = document.getElementById('app');
 const engine = createEngine('este-app');
+const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore({engine, initialState});
 const routes = createRoutes(store.getState);
 
+syncReduxAndRouter(history, store);
+
 ReactDOM.render(
   <Provider store={store}>
     <IntlProvider>
-      <Router history={createBrowserHistory()}>
+      <Router history={history}>
         {routes}
       </Router>
     </IntlProvider>
