@@ -12,7 +12,7 @@ import {Provider} from 'react-redux';
 // import storage from 'redux-storage';
 
 // Enabling ES7 `async/await` in browser:
-if (process.env.IS_BROWSER) require('babel-core/polyfill');
+if (process.env.IS_BROWSER) require('regenerator/runtime');
 
 const app = document.getElementById('app');
 const engine = createEngine('este-app');
