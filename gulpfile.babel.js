@@ -1,8 +1,8 @@
 /* eslint-disable no-undef, no-console */
 import bg from 'gulp-bg';
+import del from 'del';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
-import del from 'del';
 import gulp from 'gulp';
 import mochaRunCreator from './test/mochaRunCreator';
 import os from 'os';
