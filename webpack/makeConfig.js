@@ -92,7 +92,7 @@ export default function makeConfig(isDevelopment) {
       publicPath: `http://${serverIp}:${constants.HOT_RELOAD_PORT}/build/`
     } : {
       path: constants.BUILD_DIR,
-      filename: '[name].js',
+      filename: '[name]-[hash].js',
       chunkFilename: '[name]-[chunkhash].js'
     },
     plugins: (() => {
@@ -112,7 +112,7 @@ export default function makeConfig(isDevelopment) {
       else plugins.push(
         // Render styles into separate cacheable file to prevent FOUC and
         // optimize for critical rendering path.
-        new ExtractTextPlugin('app.css', {
+        new ExtractTextPlugin('app-[hash].css', {
           allChunks: true
         }),
         new webpack.optimize.DedupePlugin(),

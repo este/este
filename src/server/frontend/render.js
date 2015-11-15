@@ -4,6 +4,7 @@ import Promise from 'bluebird';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import config from '../config';
+import getAppAssetFilenamesAsync from './assets';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
@@ -72,15 +73,16 @@ function fetchComponentData(dispatch, req, {components, location, params}) {
   });
 }
 
-function renderPage(store, renderProps, req) {
+async function renderPage(store, renderProps, req) {
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
-  const scriptHtml = getScriptHtml(clientState, headers, hostname);
+  const {js: appJsFilename, css: appCssFilename} = await getAppAssetFilenamesAsync();
+  const scriptHtml = getScriptHtml(clientState, headers, hostname, appJsFilename);
 
   return '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
     <Html
-      appCssHash={config.assetsHashes.appCss}
+      appCssFilename={appCssFilename}
       bodyHtml={`<div id="app">${appHtml}</div>${scriptHtml}`}
       googleAnalyticsId={config.googleAnalyticsId}
       isProduction={config.isProduction}
@@ -99,7 +101,7 @@ function getAppHtml(store, renderProps) {
   );
 }
 
-function getScriptHtml(clientState, headers, hostname) {
+function getScriptHtml(clientState, headers, hostname, appJsFilename) {
   let scriptHtml = '';
 
   const ua = useragent.is(headers['user-agent']);
@@ -112,7 +114,7 @@ function getScriptHtml(clientState, headers, hostname) {
   }
 
   const appScriptSrc = config.isProduction
-    ? '/_assets/app.js?' + config.assetsHashes.appJs
+    ? `/_assets/${appJsFilename}`
     : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
 
   // Note how clientState is serialized. JSON.stringify is anti-pattern.

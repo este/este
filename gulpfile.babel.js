@@ -2,6 +2,7 @@
 import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
+import del from 'del';
 import gulp from 'gulp';
 import mochaRunCreator from './test/mochaRunCreator';
 import os from 'os';
@@ -28,6 +29,8 @@ const runEslint = () => {
 gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
+
+gulp.task('clean', done => del('build/*', done));
 
 gulp.task('build-webpack', ['env'], webpackBuild);
 gulp.task('build', ['build-webpack']);
@@ -67,7 +70,7 @@ gulp.task('server-nodemon', shell.task(
 
 gulp.task('server', ['env'], done => {
   if (args.production)
-    runSequence('build', 'server-node', done);
+    runSequence('clean', 'build', 'server-node', done);
   else
     runSequence('server-hot', 'server-nodemon', done);
 });
