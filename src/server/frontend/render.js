@@ -15,6 +15,8 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
+let appAssetFilenameCache = null;
+
 export default function render(req, res, next) {
   const initialState = {
     device: {
@@ -77,7 +79,7 @@ async function renderPage(store, renderProps, req) { // eslint-disable-line spac
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
-  const {js: appJsFilename, css: appCssFilename} = await getAppAssetFilenamesAsync();
+  const {js: appJsFilename, css: appCssFilename} = await getAppAssetFilenamesCachedAsync();
   const scriptHtml = getScriptHtml(clientState, headers, hostname, appJsFilename);
 
   return '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
@@ -99,6 +101,14 @@ function getAppHtml(store, renderProps) {
       </IntlProvider>
     </Provider>
   );
+}
+
+async function getAppAssetFilenamesCachedAsync() { // eslint-disable-line space-before-function-paren
+  if (appAssetFilenameCache) return appAssetFilenameCache;
+
+  appAssetFilenameCache = await getAppAssetFilenamesAsync();
+
+  return appAssetFilenameCache;
 }
 
 function getScriptHtml(clientState, headers, hostname, appJsFilename) {
