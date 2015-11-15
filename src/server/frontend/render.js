@@ -73,7 +73,7 @@ function fetchComponentData(dispatch, req, {components, location, params}) {
   });
 }
 
-async function renderPage(store, renderProps, req) {
+async function renderPage(store, renderProps, req) { // eslint-disable-line space-before-function-paren
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
