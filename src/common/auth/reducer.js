@@ -37,7 +37,7 @@ export default function authReducer(state = initialState, action) {
 
     case actions.SET_AUTH_TOKEN: {
       const authToken = action.payload;
-      return state.set('authToken', authToken);
+      return state.set('authToken', authToken).set('isLoggedIn', true);
     }
 
     case actions.SET_IS_LOGGED_IN: {

@@ -1,5 +1,4 @@
 import appReducer from './app/reducer';
-import runDefaultActions from './runDefaultActions';
 import createLogger from 'redux-logger';
 import fetch from './fetch';
 import injectDependencies from './lib/injectDependencies';
@@ -64,9 +63,6 @@ export default function configureStore({engine, initialState, credentialsStore} 
       store.replaceReducer(nextAppReducer);
     });
   }
-
-  // Run default actions - log in user, etc.
-  runDefaultActions(store.dispatch, credentialsStore);
 
   return store;
 }

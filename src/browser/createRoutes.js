@@ -12,7 +12,7 @@ import {IndexRoute, Route} from 'react-router';
 export default function createRoutes(getState) {
 
   function requireAuth(nextState, replaceState) {
-    const loggedInUser = getState().users.viewer;
+    const loggedInUser = getState().auth.isLoggedIn;
     if (!loggedInUser) {
       replaceState({nextPathname: nextState.location.pathname}, '/login');
     }

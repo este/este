@@ -1,5 +1,6 @@
 import express from 'express';
 import getRandomString from '../../common/lib/getRandomString';
+import {newUser} from './userStorage';
 
 const router = express.Router();
 
@@ -12,7 +13,11 @@ router.route('/login')
     setTimeout(() => {
       // Use HTTP status code 401 for wrong authentication credentials.
       if (password !== 'pass1') res.status(401).end();
-      else res.status(200).send({email, authToken: getRandomString()}).end();
+
+      // create user in user Storage
+      const authToken = getRandomString();
+      newUser(email, authToken);
+      res.status(200).send({email, authToken}).end();
     }, 1000);
 
   });

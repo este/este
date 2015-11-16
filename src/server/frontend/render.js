@@ -16,12 +16,19 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 
 export default function render(req, res, next) {
+  const credentialsStore = createCredentialsStore(req);
+
   const initialState = {
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
+    },
+    auth: {
+      authToken: credentialsStore.get('authToken'),
+      isLoggedIn: !!credentialsStore.get('authToken')
     }
   };
-  const credentialsStore = createCredentialsStore(req);
+
+  console.log(initialState)
   const store = configureStore({initialState, credentialsStore});
 
   // Fetch logged in user here because routes may need it. Remember we can use
