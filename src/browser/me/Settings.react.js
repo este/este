@@ -1,5 +1,5 @@
 import Component from 'react-pure-render/component';
-import DocumentTitle from 'react-document-title';
+import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 
 export default class Settings extends Component {
@@ -12,13 +12,12 @@ export default class Settings extends Component {
     const {msg} = this.props;
 
     return (
-      <DocumentTitle title={msg.settings.title}>
-        <div className="settings-page">
-          <p>
-            {msg.settings.title}
-          </p>
-        </div>
-      </DocumentTitle>
+      <div className="settings-page">
+        <Helmet title={msg.settings.title} />
+        <p>
+          {msg.settings.title}
+        </p>
+      </div>
     );
   }
 
