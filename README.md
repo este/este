@@ -32,6 +32,7 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - Simple yet powerfull sync/async validation based on [chriso/validator.js](https://github.com/chriso/validator.js)
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
 - Long Term Caching.
+- [React Helmet](https://github.com/nfl/react-helmet) for handling Title and Meta changes on server and client
 - And much more.
 
 ## Installing

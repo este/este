@@ -1,4 +1,5 @@
 import Component from 'react-pure-render/component';
+import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import focusInvalidField from '../lib/focusInvalidField';
 
@@ -41,6 +42,7 @@ export default class Login extends Component {
 
     return (
       <div className="login">
+        <Helmet title="Login" />
         <form onSubmit={e => this.onFormSubmit(e)}>
           <fieldset disabled={form.disabled}>
             <legend>{msg.legend}</legend>

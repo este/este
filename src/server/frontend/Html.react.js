@@ -6,13 +6,13 @@ export default class Html extends Component {
     appCssFilename: PropTypes.string.isRequired,
     bodyHtml: PropTypes.string.isRequired,
     googleAnalyticsId: PropTypes.string.isRequired,
+    helmet: PropTypes.object.isRequired,
     isProduction: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
   }
 
   render() {
     const {
-      appCssFilename, bodyHtml, googleAnalyticsId, isProduction, title
+      appCssFilename, bodyHtml, googleAnalyticsId, isProduction, helmet
     } = this.props;
 
     // Only for production. For dev, it's handled by webpack with livereload.
@@ -37,7 +37,11 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');`}}
         <head>
           <meta charSet="utf-8" />
           <meta content="width=device-width, initial-scale=1" name="viewport" />
-          <title>{title}</title>
+          {helmet.title.toComponent()}
+          {helmet.base.toComponent()}
+          {helmet.meta.toComponent()}
+          {helmet.link.toComponent()}
+          {helmet.script.toComponent()}
           {linkStyles}
           {analytics}
         </head>
