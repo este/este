@@ -22,10 +22,8 @@ export default function authReducer(state = initialState, action) {
     case actions.LOGIN_START:
       return state.setIn(['form', 'disabled'], true);
 
-    case actions.LOGIN_SUCCESS: {
-      return state
-        .set('form', new Form);
-    }
+    case actions.LOGIN_SUCCESS:
+      return state.set('form', new Form);
 
     case actions.LOGIN_ERROR: {
       const error = action.payload;

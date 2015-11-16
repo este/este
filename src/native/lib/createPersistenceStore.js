@@ -1,5 +1,6 @@
 import {AsyncStorage} from 'react-native';
 
+// This is tricky, all persistence stores are sync and Native is async :(
 export default function createPersistenceStore() {
 
   return {
