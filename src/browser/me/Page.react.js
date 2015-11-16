@@ -15,13 +15,14 @@ if (process.env.IS_BROWSER)
 export default class Page extends Component {
 
   static propTypes = {
+    actions: PropTypes.object,
     children: PropTypes.object,
     msg: PropTypes.object,
     users: PropTypes.object
   }
 
   render() {
-    const {children, msg, users: {viewer: {createdAt, email}}} = this.props;
+    const {actions, children, msg, users: {viewer: {createdAt, email}}} = this.props;
 
     return (
       <div className="me-page">
@@ -40,7 +41,7 @@ export default class Page extends Component {
               />
             </p>
         }
-        <AuthLogout msg={msg.auth.logout} />
+        <AuthLogout actions={actions} msg={msg.auth.logout} />
       </div>
     );
   }

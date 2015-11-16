@@ -4,7 +4,7 @@ import User from './user';
 import {Record} from 'immutable';
 
 const InitialState = Record({
-  viewer: null,
+  viewer: new User(),
 });
 const initialState = new InitialState;
 

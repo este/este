@@ -2,6 +2,7 @@ import 'react-native-browser-polyfill';
 import App from './app/App.react';
 import React, {AppRegistry, Component} from 'react-native';
 import configureStore from '../common/configureStore';
+import createPersistenceStore from './lib/createPersistenceStore';
 import {Provider} from 'react-redux/native';
 import {setPlatform} from '../common/device/actions';
 
@@ -23,7 +24,8 @@ export default function index(platform) {
       isMobile: true
     }
   };
-  const store = configureStore({initialState});
+  const persistenceStore = createPersistenceStore();
+  const store = configureStore({initialState, persistenceStore});
   // Set platform, ios or android.
   store.dispatch(setPlatform(platform));
 

@@ -23,7 +23,7 @@ export default class Header extends Component {
           <li><Link activeClassName="active" to="/todos">{msg.todos}</Link></li>
           <li><Link activeClassName="active" to="/me">{msg.me}</Link></li>
           {isLoggedIn
-            ? <li><a href="/" onClick={onLogout}>{msg.logout}</a></li>
+            ? <li><a href='/' onClick={onLogout}>{msg.logout}</a></li>
             : <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
           }
         </ul>

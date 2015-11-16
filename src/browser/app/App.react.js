@@ -18,16 +18,16 @@ export default class App extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    msg: PropTypes.object.isRequired,
+    persistence: PropTypes.object.isRequired
   }
 
   render() {
     const {
       actions: {logout},
-      auth: {isLoggedIn},
+      persistence: {authToken},
       location: {pathname},
       msg
     } = this.props;
@@ -44,7 +44,7 @@ export default class App extends Component {
         />
         {/* Pathname enforces rerender so activeClassName is updated. */}
         <Header
-          isLoggedIn={isLoggedIn}
+          isLoggedIn={!!authToken}
           msg={msg}
           onLogout={logout}
           pathname={pathname}

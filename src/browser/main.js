@@ -1,7 +1,7 @@
 import configureStore from '../common/configureStore';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import createCredentialsStore from './lib/createCredentialsStore';
 import createEngine from 'redux-storage/engines/localStorage';
+import createPersistenceStore from './lib/createPersistenceStore';
 import createRoutes from './createRoutes';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,11 +15,11 @@ import {Provider} from 'react-redux';
 const app = document.getElementById('app');
 const engine = createEngine('este-app');
 const initialState = window.__INITIAL_STATE__;
-const credentialsStore = createCredentialsStore();
+const persistenceStore = createPersistenceStore();
 const store = configureStore({
   engine,
   initialState,
-  credentialsStore
+  persistenceStore
 });
 const routes = createRoutes(store.getState);
 

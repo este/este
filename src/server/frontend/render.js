@@ -1,6 +1,6 @@
 import config from '../config';
 import configureStore from '../../common/configureStore';
-import createCredentialsStore from '../../browser/lib/createCredentialsStore';
+import createPersistenceStore from '../lib/createPersistenceStore';
 import createRoutes from '../../browser/createRoutes';
 import Helmet from 'react-helmet';
 import Html from './Html.react';
@@ -16,20 +16,15 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 
 export default function render(req, res, next) {
-  const credentialsStore = createCredentialsStore(req);
+  const persistenceStore = createPersistenceStore(req);
 
   const initialState = {
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
-    },
-    auth: {
-      authToken: credentialsStore.get('authToken'),
-      isLoggedIn: !!credentialsStore.get('authToken')
     }
   };
 
-  console.log(initialState)
-  const store = configureStore({initialState, credentialsStore});
+  const store = configureStore({initialState, persistenceStore});
 
   // Fetch logged in user here because routes may need it. Remember we can use
   // store.dispatch method.

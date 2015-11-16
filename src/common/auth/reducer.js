@@ -24,7 +24,6 @@ export default function authReducer(state = initialState, action) {
 
     case actions.LOGIN_SUCCESS: {
       return state
-        .set('isLoggedIn', true)
         .set('form', new Form);
     }
 
@@ -33,16 +32,6 @@ export default function authReducer(state = initialState, action) {
       return state
         .setIn(['form', 'disabled'], false)
         .setIn(['form', 'error'], error);
-    }
-
-    case actions.SET_AUTH_TOKEN: {
-      const authToken = action.payload;
-      return state.set('authToken', authToken).set('isLoggedIn', true);
-    }
-
-    case actions.SET_IS_LOGGED_IN: {
-      const isLoggedIn = action.payload;
-      return state.set('isLoggedIn', isLoggedIn);
     }
 
   }

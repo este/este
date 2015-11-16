@@ -3,6 +3,7 @@ import createLogger from 'redux-logger';
 import fetch from './fetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
+import reviveStateFromPersistence from './persistence/reviveStateFromPersistence';
 import stateToJS from './lib/stateToJS';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
@@ -15,11 +16,11 @@ const BROWSER_DEVELOPMENT = (
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
 
-export default function configureStore({engine, initialState, credentialsStore} = {}) {
+export default function configureStore({engine, initialState, persistenceStore} = {}) {
 
   // Inject services for actions.
   const dependenciesMiddleware = injectDependencies(
-    {fetch, credentialsStore},
+    {fetch, persistenceStore},
     {validate}
   );
 
@@ -53,7 +54,10 @@ export default function configureStore({engine, initialState, credentialsStore} 
     ? compose(applyMiddleware(...middleware), window.devToolsExtension()) // eslint-disable-line no-undef
     : applyMiddleware(...middleware);
 
-  const store = createReduxStore(createStore)(appReducer, initialState);
+  // Load data to app state for persistence store
+  const initialStateWithPersistence = reviveStateFromPersistence(initialState, persistenceStore);
+
+  const store = createReduxStore(createStore)(appReducer, initialStateWithPersistence);
 
   // Enable hot reload where available.
   if (module.hot) { // eslint-disable-line no-undef

@@ -4,12 +4,13 @@ import React, {PropTypes} from 'react';
 export default class Logout extends Component {
 
   static propTypes = {
+    actions: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   }
 
   logout() {
-    // Always reload app on logout for security reasons.
-    location.href = '/';
+    const {actions} = this.props;
+    actions.logout();
   }
 
   render() {

@@ -1,4 +1,5 @@
 /* global window */
+import * as persistenceActions from '../persistence/actions';
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_START = 'LOGIN_START';
@@ -35,29 +36,14 @@ export function onAuthFormFieldChange({target: {name, value}}) {
   };
 }
 
-export function setAuthToken(authToken) {
-  return {
-    type: SET_AUTH_TOKEN,
-    payload: authToken
-  };
-}
-
-export function setIsLoggedIn(isLoggedIn) {
-  return {
-    type: SET_IS_LOGGED_IN,
-    payload: isLoggedIn
-  };
-}
-
 export function login(fields) {
-  return ({fetch, validate, credentialsStore, dispatch}) => ({
+  return ({fetch, validate, dispatch}) => ({
     type: 'LOGIN',
     payload: {
       promise: validateForm(validate, fields)
         .then(() => post(fetch, 'auth/login', fields))
         .then(response => {
-          credentialsStore.set('authToken', response.authToken);
-          dispatch(setAuthToken(response.authToken));
+          dispatch(persistenceActions.set('authToken', response.authToken));
           return response;
         })
         .catch(response => {
@@ -71,8 +57,9 @@ export function login(fields) {
 }
 
 export function logout() {
-  return ({credentialsStore}) => {
-    credentialsStore.remove('authToken');
+  return ({dispatch}) => {
+    dispatch(persistenceActions.remove('authToken'));
+
     window.location.href = '/';
 
     return {
