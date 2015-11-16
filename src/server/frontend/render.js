@@ -1,4 +1,4 @@
-import DocumentTitle from 'react-document-title';
+import Helmet from 'react-helmet';
 import Html from './Html.react';
 import Promise from 'bluebird';
 import React from 'react';
@@ -83,8 +83,8 @@ function renderPage(store, renderProps, req) {
       appCssHash={config.assetsHashes.appCss}
       bodyHtml={`<div id="app">${appHtml}</div>${scriptHtml}`}
       googleAnalyticsId={config.googleAnalyticsId}
+      helmet={Helmet.rewind()}
       isProduction={config.isProduction}
-      title={DocumentTitle.rewind()}
     />
   );
 }
