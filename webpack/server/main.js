@@ -17,5 +17,5 @@ app.use(webpackDev(compiler, {
 app.use(webpackHot(compiler));
 
 app.listen(webpackConfig.hotPort, () => {
-  console.log('Hot server started at port %s', webpackConfig.hotPort); // eslint-disable-line no-console
+  console.log('Hot server started at port %d', webpackConfig.hotPort); // eslint-disable-line no-console
 });

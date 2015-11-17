@@ -11,5 +11,5 @@ app.use(frontend);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log('Server started at port %s', port);
+  console.log('Server started at port %d', port);
 });
