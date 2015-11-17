@@ -64,13 +64,12 @@ describe('Login component', () => {
     expect(loginAction.calledOnce).to.be.true;
   });
 
-  it('should redirect to home on successful login', done => {
+  it('should redirect to home on successful login', async () => {
     TestUtils.Simulate.submit(form);
 
-    loginAction().then(() => {
-      expect(replaceState.calledOnce).to.be.true;
-      expect(replaceState.calledWithExactly(null, '/')).to.be.true;
-      done();
-    });
+    await loginAction();
+
+    expect(replaceState.calledOnce).to.be.true;
+    expect(replaceState.calledWithExactly(null, '/')).to.be.true;
   });
 });
