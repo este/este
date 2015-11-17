@@ -48,8 +48,10 @@ export function fetchUserTodos({location, params}) {
     type: 'FETCH_USER_TODOS',
     payload: {
       // We can use location and params to create custom endpoint.
-      promise: fetch('api/v1/todos/user')
-        .then(response => response.json())
+      promise: (async () => {
+        const response = await fetch('api/v1/todos/user');
+        return response.json();
+      })()
     }
   });
 }

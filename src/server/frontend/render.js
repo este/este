@@ -31,7 +31,7 @@ export default function render(req, res, next) {
   const routes = createRoutes(() => store.getState());
   const location = createMemoryHistory().createLocation(req.url);
 
-  match({routes, location}, (error, redirectLocation, renderProps) => {
+  match({routes, location}, async (error, redirectLocation, renderProps) => {
 
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
@@ -49,14 +49,18 @@ export default function render(req, res, next) {
     //   return;
     // }
 
-    fetchComponentData(store.dispatch, req, renderProps)
-      .then(() => renderPage(store, renderProps, req))
-      .then(html => res.send(html))
-      .catch(next);
+    try {
+      await fetchComponentDataAsync(store.dispatch, req, renderProps);
+      const html = await renderPageAsync(store, renderProps, req);
+      res.send(html);
+    }
+    catch (e) {
+      next(e);
+    }
   });
 }
 
-function fetchComponentData(dispatch, req, {components, location, params}) {
+async function fetchComponentDataAsync(dispatch, req, {components, location, params}) { // eslint-disable-line space-before-function-paren
   const fetchActions = components.reduce((actions, component) => {
     return actions.concat(component.fetchActions || []);
   }, []);
@@ -67,15 +71,14 @@ function fetchComponentData(dispatch, req, {components, location, params}) {
   // Because redux-promise-middleware always returns fulfilled promise, we have
   // to detect errors manually.
   // https://github.com/pburtchaell/redux-promise-middleware#usage
-  return Promise.all(promises).then(results => {
-    results.forEach(result => {
-      if (result.error)
-        throw result.payload;
-    });
+  const results = await Promise.all(promises);
+  results.forEach(result => {
+    if (result.error)
+      throw result.payload;
   });
 }
 
-async function renderPage(store, renderProps, req) { // eslint-disable-line space-before-function-paren
+async function renderPageAsync(store, renderProps, req) { // eslint-disable-line space-before-function-paren
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
