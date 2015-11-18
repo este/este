@@ -1,8 +1,8 @@
 import api from './api';
-import {port} from './config';
 import errorHandler from './lib/errorHandler';
 import express from 'express';
 import frontend from './frontend';
+import {port} from './config';
 
 const app = express();
 

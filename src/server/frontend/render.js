@@ -15,8 +15,6 @@ import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
-let appAssetFilenameCache = null;
-
 export default function render(req, res, next) {
   const initialState = {
     device: {
@@ -105,6 +103,8 @@ function getAppHtml(store, renderProps) {
     </Provider>
   );
 }
+
+let appAssetFilenameCache = null;
 
 async function getAppAssetFilenamesCachedAsync() { // eslint-disable-line space-before-function-paren
   if (appAssetFilenameCache) return appAssetFilenameCache;

@@ -15,8 +15,10 @@ else {
 
 require('babel/register')({optional: ['es7']});
 
+const serverConfig = require('./config');
+
 // To ignore webpack custom loaders on server.
-require('./config').webpackStylesExtensions.forEach(ext => {
+serverConfig.webpackStylesExtensions.forEach(ext => {
   require.extensions['.' + ext] = () => {};
 });
 

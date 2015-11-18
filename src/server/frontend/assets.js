@@ -1,5 +1,5 @@
-import {isProduction} from '../config';
 import fs from '../../common/lib/fs';
+import {isProduction} from '../config';
 
 const DEFAULT = {js: 'app.js', css: 'app.css'};
 
