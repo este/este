@@ -2,7 +2,6 @@ import compression from 'compression';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
-import path from 'path';
 // import favicon from 'serve-favicon';
 import render from './render';
 
