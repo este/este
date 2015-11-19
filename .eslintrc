@@ -118,12 +118,33 @@
     "react/react-in-jsx-scope": 2,
     "react/self-closing-comp": 2,
     // Not ready yet. "react/sort-comp": 2,
-    "react/wrap-multilines": 2
+    "react/wrap-multilines": 2,
+    // Import
+    "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2,
   },
   "plugins": [
+    "import",
     "react"
   ],
   "ecmaFeatures": {
     "jsx": true
+  },
+  "settings": {
+    "import/ignore": [
+      "node_modules",
+      "\\.json$"
+    ],
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".json"
+      ]
+    }
   }
 }
