@@ -1,5 +1,5 @@
 import config from '../config';
-import fs from '../../common/lib/fs';
+import fs from '../lib/fs';
 
 const DEFAULT = {js: 'app.js', css: 'app.css'};
 
