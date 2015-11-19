@@ -1,6 +1,5 @@
 import Component from '../components/Component.react';
-import Dimensions from 'Dimensions';
-import React from 'react-native';
+import React, {Dimensions} from 'react-native';
 
 const {
   PropTypes, ScrollView, StyleSheet, Text, View
