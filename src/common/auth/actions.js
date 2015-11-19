@@ -10,16 +10,16 @@ const validateForm = (validate, fields) => validate(fields)
   .prop('password').required().simplePassword()
   .promise;
 
-const post = (fetch, endpoint, body) =>
-  fetch(`/api/v1/${endpoint}`, {
-    body: JSON.stringify(body),
-    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-    method: 'post'
-  })
-  .then(response => {
-    if (response.status === 200) return response.json();
-    throw response;
+const post = async (fetch, endpoint, body) => {
+  const response = await fetch(`/api/v1/${endpoint}`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
   });
+
+  if (response.status === 200) return response.json();
+  throw response;
+};
 
 export function onAuthFormFieldChange({target: {name, value}}) {
   value = value.slice(0, FORM_FIELD_MAX_LENGTH);

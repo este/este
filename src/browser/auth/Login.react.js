@@ -16,16 +16,14 @@ export default class Login extends Component {
     msg: PropTypes.object.isRequired
   }
 
-  onFormSubmit(e) {
+  async onFormSubmit(e) {
     e.preventDefault();
-    const {actions, auth: {form}} = this.props;
-    actions.login(form.fields)
-      .then(({error, payload: maybeValidationError}) => {
-        if (error)
-          focusInvalidField(this, maybeValidationError);
-        else
-          this.redirectAfterLogin();
-      });
+    const {actions: {login}, auth: {form}} = this.props;
+    const {error, payload: maybeValidationError} = await login(form.fields);
+    if (error)
+      focusInvalidField(this, maybeValidationError);
+    else
+      this.redirectAfterLogin();
   }
 
   // TODO: Use redux-react-router.

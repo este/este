@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 export default class Html extends Component {
 
   static propTypes = {
-    appCssHash: PropTypes.string.isRequired,
+    appCssFilename: PropTypes.string.isRequired,
     bodyHtml: PropTypes.string.isRequired,
     googleAnalyticsId: PropTypes.string.isRequired,
     helmet: PropTypes.object.isRequired,
@@ -12,13 +12,13 @@ export default class Html extends Component {
 
   render() {
     const {
-      appCssHash, bodyHtml, googleAnalyticsId, isProduction, helmet
+      appCssFilename, bodyHtml, googleAnalyticsId, isProduction, helmet
     } = this.props;
 
     // Only for production. For dev, it's handled by webpack with livereload.
     const linkStyles = isProduction &&
       <link
-        href={'/_assets/app.css?' + appCssHash}
+        href={`/_assets/${appCssFilename}`}
         rel="stylesheet"
       />;
 

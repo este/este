@@ -26,7 +26,7 @@
     "react",
     "react.displayName",
     "regenerator",
-    'es6.constants',
-    'es7.asyncFunctions'
+    "es6.constants",
+    "es7.asyncFunctions"
   ]
 }

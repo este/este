@@ -18,8 +18,8 @@ else {
 }
 
 // To ignore webpack custom loaders on server.
-serverConfig.webpackStylesExtensions.forEach(function(ext) {
-  require.extensions['.' + ext] = function() {};
+serverConfig.webpackStylesExtensions.forEach(ext => {
+  require.extensions['.' + ext] = () => {};
 });
 
 require('./main');

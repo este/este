@@ -10,6 +10,8 @@ app.use('/api/v1', api);
 app.use(frontend);
 app.use(errorHandler);
 
-app.listen(config.port, () => {
-  console.log('Server started at port %s', config.port);
+const {port} = config;
+
+app.listen(port, () => {
+  console.log('Server started at port %d', port);
 });
