@@ -8,7 +8,6 @@ export function fetchMe({location, params}) {
     return {
       type: 'FETCH_ME',
       payload: {
-        // We can use location and params to create custom endpoint.
         promise: fetch('api/v1/user/me', {
           headers: {
             'Accept': 'application/json',

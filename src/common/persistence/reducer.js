@@ -8,12 +8,12 @@ export default function persitenceStoreReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case actions.SET_PERSISTENCE: {
+    case actions.PERSISTENCE_SET: {
       const {key, value} = action.data;
       return state.set(key, value);
     }
 
-    case actions.REMOVE_PERSISTENCE: {
+    case actions.PERSISTENCE_REMOVE: {
       const {key} = action.data;
       return state.remove(key);
     }

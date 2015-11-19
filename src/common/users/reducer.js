@@ -1,5 +1,5 @@
-import * as authActions from '../auth/actions';
 import * as actions from './actions';
+import * as authActions from '../auth/actions';
 import User from './user';
 import {Record} from 'immutable';
 

@@ -10,7 +10,9 @@ export default class Logout extends Component {
 
   logout() {
     const {actions} = this.props;
-    actions.logout();
+    actions.logout().then(() => {
+      window.location.href = '/';
+    });
   }
 
   render() {

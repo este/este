@@ -1,4 +1,3 @@
-/* global window */
 import * as persistenceActions from '../persistence/actions';
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -59,8 +58,6 @@ export function login(fields) {
 export function logout() {
   return ({dispatch}) => {
     dispatch(persistenceActions.remove('authToken'));
-
-    window.location.href = '/';
 
     return {
       type: 'LOGOUT'

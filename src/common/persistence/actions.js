@@ -1,12 +1,12 @@
-export const SET_PERSISTENCE = 'SET_PERSISTENCE';
-export const REMOVE_PERSISTENCE = 'REMOVE_PERSISTENCE';
+export const PERSISTENCE_SET = 'PERSISTENCE_SET';
+export const PERSISTENCE_REMOVE = 'PERSISTENCE_REMOVE';
 
 export function set(key, value) {
   return ({persistenceStore}) => {
     persistenceStore.set(key, value);
 
     return {
-      type: SET_PERSISTENCE,
+      type: PERSISTENCE_SET,
       data: {key, value}
     };
   };
@@ -17,7 +17,7 @@ export function remove(key, value) {
     persistenceStore.remove(key, value);
 
     return {
-      type: REMOVE_PERSISTENCE,
+      type: PERSISTENCE_REMOVE,
       data: {key}
     };
   };
