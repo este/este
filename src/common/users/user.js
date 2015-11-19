@@ -1,8 +1,9 @@
 import {Record} from 'immutable';
 
 const User = Record({
-  email: ''
-  // password: ''
+  authToken: '',
+  createdAt: null,
+  email: '',
 });
 
 export default User;

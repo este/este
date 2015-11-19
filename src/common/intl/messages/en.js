@@ -6,6 +6,7 @@ export default {
     links: {
       home: 'Home',
       login: 'Login',
+      logout: 'Logout',
       me: 'Me (protected)',
       todos: 'Todos'
     }
@@ -69,7 +70,7 @@ export default {
   },
   me: {
     title: 'Me',
-    welcome: 'Hi {email}. This is your secret page.'
+    welcome: 'Hi {email}. This is your secret page. You were logged in at {createdAt}'
   },
   notFound: {
     continueMessage: 'Continue here please.',

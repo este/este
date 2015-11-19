@@ -6,22 +6,26 @@ import ReactDOMServer from 'react-dom/server';
 import config from '../config';
 import getAppAssetFilenamesAsync from './assets';
 import configureStore from '../../common/configureStore';
+import createPersistenceStore from '../lib/createPersistenceStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
 import useragent from 'useragent';
+import {createMemoryHistory} from 'history';
 import {HOT_RELOAD_PORT} from '../../../webpack/constants';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
-import {createMemoryHistory} from 'history';
 
 export default function render(req, res, next) {
+  const persistenceStore = createPersistenceStore(req);
+
   const initialState = {
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
     }
   };
-  const store = configureStore({initialState});
+
+  const store = configureStore({initialState, persistenceStore});
 
   // Fetch logged in user here because routes may need it. Remember we can use
   // store.dispatch method.

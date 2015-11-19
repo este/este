@@ -5,13 +5,14 @@ import {Link} from 'react-router';
 export default class Header extends Component {
 
   static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
     msg: PropTypes.object.isRequired,
-    pathname: PropTypes.string.isRequired,
-    viewer: PropTypes.object
+    onLogout: PropTypes.func.isRequired,
+    pathname: PropTypes.string.isRequired
   }
 
   render() {
-    const {msg: {app: {links: msg}}, viewer} = this.props;
+    const {msg: {app: {links: msg}}, isLoggedIn, onLogout} = this.props;
 
     return (
       <header>
@@ -21,8 +22,9 @@ export default class Header extends Component {
         <ul>
           <li><Link activeClassName="active" to="/todos">{msg.todos}</Link></li>
           <li><Link activeClassName="active" to="/me">{msg.me}</Link></li>
-          {!viewer &&
-            <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
+          {isLoggedIn
+            ? <li><a href='/' onClick={onLogout}>{msg.logout}</a></li>
+            : <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
           }
         </ul>
       </header>
