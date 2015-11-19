@@ -1,3 +1,5 @@
+require('babel/register')({optional: ['es7']});
+
 const serverConfig = require('./config');
 
 if (!process.env.NODE_ENV)
@@ -14,8 +16,6 @@ if (global.Intl) {
 else {
   global.Intl = require('intl');
 }
-
-require('babel/register')({optional: ['es7']});
 
 // To ignore webpack custom loaders on server.
 serverConfig.webpackStylesExtensions.forEach(function(ext) {
