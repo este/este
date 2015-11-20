@@ -3,6 +3,7 @@
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
+import path from 'path';
 
 function reportError(errorReporter) {
   return errorReporter === 'process' ? process.exit.bind(process, 1) : gutil.log;
@@ -22,9 +23,9 @@ export default function mochaRunCreator(errorReporter = 'process') {
       if (file.path.indexOf('__test__') !== -1)
         source = file.path;
       else {
-        const parts = file.path.split('/');
+        const parts = file.path.split(path.sep);
         const filename = parts.pop(1);
-        const dir = parts.join('/');
+        const dir = parts.join(path.sep);
         source = `${dir}/__test__/${filename.split('.')[0]}*.js`;
       }
     }
