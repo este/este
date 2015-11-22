@@ -1,0 +1,31 @@
+.todo
+  font-size .875em
+  margin-bottom .25em
+  max-width 42em
+
+  .editable.view,
+  .button
+    background-color #eed
+    border-radius .5em
+    display inline-block
+    padding .125em .5em
+
+  .editable.edit
+    display inline-block
+
+  .button
+    background-color #6496c8
+    color #fff
+    cursor pointer // Like button.
+    font-weight bold
+    margin-left .25em
+    text-shadow -1px 1px #417cb8
+    user-select none // Like button.
+    visibility hidden
+
+    &:hover
+      background-color #346392
+      text-shadow -1px 1px #27496d
+
+  &:hover .button
+    visibility visible

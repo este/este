@@ -1,10 +1,32 @@
 {
-  "stage": 2, // Draft + Candidate
-  "optional": [
-    // Stage 1 - Proposal
-    "es7.decorators",
+  "env": {
+    "production": {
+      "optional": [
+        "optimisation.react.constantElements",
+        "optimisation.react.inlineElements"
+      ]
+    }
+  },
+  "whitelist": [
+    "es6.arrowFunctions",
+    "es6.blockScoping",
+    "es6.classes",
+    "es6.destructuring",
+    "es6.modules",
+    "es6.parameters",
+    "es6.properties.computed",
+    "es6.properties.shorthand",
+    "es6.spread",
+    "es6.templateLiterals",
     "es7.classProperties",
-    // Stage 0 - Strawman
-    "es7.functionBind"
+    "es7.decorators",
+    "es7.objectRestSpread",
+    "es7.trailingFunctionCommas",
+    "flow",
+    "react",
+    "react.displayName",
+    "regenerator",
+    "es6.constants",
+    "es7.asyncFunctions"
   ]
 }

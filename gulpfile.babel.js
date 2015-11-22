@@ -1,70 +1,101 @@
+/* eslint-disable no-undef, no-console */
 import bg from 'gulp-bg';
+import del from 'del';
 import eslint from 'gulp-eslint';
+import fs from 'fs';
 import gulp from 'gulp';
-import makeWebpackConfig from './webpack/makeconfig';
+import mochaRunCreator from './test/mochaRunCreator';
+import os from 'os';
 import path from 'path';
 import runSequence from 'run-sequence';
+import shell from 'gulp-shell';
 import webpackBuild from './webpack/build';
-import webpackDevServer from './webpack/devserver';
 import yargs from 'yargs';
-import {server as karmaServer} from 'karma';
 
 const args = yargs
   .alias('p', 'production')
   .argv;
 
-const runKarma = ({singleRun}, done) => {
-  karmaServer.start({
-    configFile: path.join(__dirname, 'karma.conf.js'), // eslint-disable-line no-undef
-    singleRun: singleRun
-  }, done);
-};
-
-gulp.task('env', () => {
-  const env = args.production ? 'production' : 'development';
-  process.env.NODE_ENV = env; // eslint-disable-line no-undef
-});
-
-gulp.task('build-webpack-production', webpackBuild(makeWebpackConfig(false)));
-gulp.task('build-webpack-dev', webpackDevServer(makeWebpackConfig(true)));
-gulp.task('build-webpack', [args.production
-  ? 'build-webpack-production'
-  : 'build-webpack-dev'
-]);
-gulp.task('build', ['build-webpack']);
-
-gulp.task('eslint', () => {
+const runEslint = () => {
   return gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
-    'webpack/*.js',
-    '!**/__tests__/*.*'
+    'webpack/*.js'
   ])
   .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failOnError());
+  .pipe(eslint.format());
+};
+
+gulp.task('env', () => {
+  process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
 
-gulp.task('karma-ci', (done) => {
-  runKarma({singleRun: true}, done);
+gulp.task('clean', done => del('build/*', done));
+
+gulp.task('build-webpack', ['env'], webpackBuild);
+gulp.task('build', ['build-webpack']);
+
+gulp.task('eslint', () => {
+  return runEslint();
 });
 
-gulp.task('karma-dev', (done) => {
-  runKarma({singleRun: false}, done);
+gulp.task('eslint-ci', () => {
+  // Exit process with an error code (1) on lint error for CI build.
+  return runEslint().pipe(eslint.failAfterError());
 });
 
-gulp.task('test', (done) => {
-  // Run test tasks serially, because it doesn't make sense to build when tests
-  // are not passing, and it doesn't make sense to run tests, if lint has failed.
-  // Gulp deps aren't helpful, because we want to run tasks without deps as well.
-  runSequence('eslint', 'karma-ci', 'build-webpack-production', done);
+gulp.task('mocha', () => {
+  mochaRunCreator('process')();
 });
 
-gulp.task('server', ['env', 'build'], bg('node', 'src/server'));
+// Continuous test running
+gulp.task('mocha-watch', () => {
+  gulp.watch(
+    ['src/browser/**', 'src/common/**', 'src/server/**'],
+    mochaRunCreator('log')
+  );
+});
 
-gulp.task('default', (done) => {
+gulp.task('test', done => {
+  runSequence('eslint-ci', 'mocha', 'build-webpack', done);
+});
+
+gulp.task('server-node', bg('node', './src/server'));
+gulp.task('server-hot', bg('node', './webpack/server'));
+// Shell fixes Windows este/issues/522, bg is still needed for server-hot.
+gulp.task('server-nodemon', shell.task(
+  // Normalize makes path cross platform.
+  path.normalize('node_modules/.bin/nodemon src/server')
+));
+
+gulp.task('server', ['env'], done => {
   if (args.production)
-    runSequence('server', done);
+    runSequence('clean', 'build', 'server-node', done);
   else
-    runSequence('server', 'karma-dev', done);
+    runSequence('server-hot', 'server-nodemon', done);
+});
+
+gulp.task('default', ['server']);
+
+// React Native
+
+// Fix for custom .babelrc cache issue.
+// https://github.com/facebook/react-native/issues/1924#issuecomment-120170512
+gulp.task('clear-react-packager-cache', function() {
+  // Clear react-packager cache
+  const tempDir = os.tmpdir();
+
+  const cacheFiles = fs.readdirSync(tempDir).filter(function(fileName) {
+    return fileName.indexOf('react-packager-cache') === 0;
+  });
+
+  cacheFiles.forEach(function(cacheFile) {
+    const cacheFilePath = path.join(tempDir, cacheFile);
+    fs.unlinkSync(cacheFilePath);
+    console.log('Deleted cache: ', cacheFilePath);
+  });
+
+  if (!cacheFiles.length) {
+    console.log('No cache files found!');
+  }
 });

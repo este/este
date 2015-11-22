@@ -1,19 +1,25 @@
-const config = require('./config');
+require('babel/register')({optional: ['es7']});
 
-if (config.isProduction || require('piping')(config.piping)) {
-  if (!process.env.NODE_ENV)
-    throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables. To run app locally in production mode, use gulp -p command instead.');
+const serverConfig = require('./config');
 
-  // Load and use polyfill for ECMA-402.
-  if (!global.Intl)
-    global.Intl = require('intl');
+if (!process.env.NODE_ENV)
+  throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables.');
 
-  require('babel/register')({optional: ['es7']});
-
-  // To ignore webpack custom loaders on server.
-  config.webpackStylesExtensions.forEach(function(ext) {
-    require.extensions['.' + ext] = function() {};
-  });
-
-  require('./main');
+// http://formatjs.io/guides/runtime-environments/#polyfill-node
+if (global.Intl) {
+  // We don't have to check whether Node runtime supports specific language,
+  // because without special build it does support only english anyway.
+  require('intl');
+  global.Intl.NumberFormat = global.IntlPolyfill.NumberFormat;
+  global.Intl.DateTimeFormat = global.IntlPolyfill.DateTimeFormat;
 }
+else {
+  global.Intl = require('intl');
+}
+
+// To ignore webpack custom loaders on server.
+serverConfig.webpackStylesExtensions.forEach(ext => {
+  require.extensions['.' + ext] = () => {};
+});
+
+require('./main');
