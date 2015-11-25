@@ -15,11 +15,11 @@ const BROWSER_DEVELOPMENT = (
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
 
-export default function configureStore({engine, initialState}) {
+export default function configureStore({deps, engine, initialState}) {
 
   // Inject services for actions.
   const dependenciesMiddleware = injectDependencies(
-    {fetch},
+    {...deps, fetch},
     {validate}
   );
 
