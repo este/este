@@ -1,5 +1,6 @@
 import config from '../config';
 import fs from '../lib/fs';
+import path from 'path';
 
 const DEFAULT = {js: 'app.js', css: 'app.css'};
 
@@ -10,7 +11,8 @@ export default async function getAppAssetFilenamesAsync() { // eslint-disable-li
   if (!config.isProduction) return DEFAULT;
 
   try {
-    const buildDirFiles = await fs.readdirAsync('build');
+    const buildDir = path.resolve(__dirname, '..', '..', '..', 'build');
+    const buildDirFiles = await fs.readdirAsync(buildDir);
 
     return {
       js: buildDirFiles.find(filename => APP_JS_PATTERN.test(filename)),
