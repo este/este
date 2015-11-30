@@ -51,7 +51,7 @@ gulp.task('mocha', () => {
 // Enable to run single test file
 // ex. gulp mocha-file --file src/browser/components/__test__/Button.js
 gulp.task('mocha-file', () => {
-  mochaRunCreator('process')({path: path.join(__dirname, args['file'])})
+  mochaRunCreator('process')({path: path.join(__dirname, args['file'])});
 });
 
 // Continuous test running
