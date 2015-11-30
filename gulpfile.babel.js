@@ -48,6 +48,12 @@ gulp.task('mocha', () => {
   mochaRunCreator('process')();
 });
 
+// Enable to run single test file
+// ex. gulp mocha-file --file src/browser/components/__test__/Button.js
+gulp.task('mocha-file', () => {
+  mochaRunCreator('process')({path: path.join(__dirname, args['file'])})
+});
+
 // Continuous test running
 gulp.task('mocha-watch', () => {
   gulp.watch(
