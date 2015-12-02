@@ -19,6 +19,9 @@ export default function render(req, res, next) {
   const initialState = {
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
+    },
+    routing: {
+      path: req.path
     }
   };
   const store = configureStore({initialState});

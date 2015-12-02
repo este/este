@@ -78,6 +78,7 @@
     "redux": "^3.0.4",
     "redux-logger": "^2.0.1",
     "redux-promise-middleware": "^2.1.1",
+    "redux-simple-router": "0.0.7",
     "redux-storage": "^1.2.4",
     "regenerator": "^0.8.42",
     "run-sequence": "^1.0.2",

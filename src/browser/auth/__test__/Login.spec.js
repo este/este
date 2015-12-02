@@ -22,15 +22,13 @@ describe('Login component', () => {
     }
   };
 
-  let sandbox, loginComponent, inputs, button, loginAction, replaceState, form;
+  let sandbox, loginComponent, inputs, button, loginAction, updatePath, form;
 
   function componentProps() {
     return {
       actions: {
-        login: loginAction
-      },
-      history: {
-        replaceState
+        login: loginAction,
+        updatePath: updatePath
       },
       location: {},
       msg: msg,
@@ -41,7 +39,7 @@ describe('Login component', () => {
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     loginAction = sandbox.stub().resolves({});
-    replaceState = sandbox.spy();
+    updatePath = sandbox.spy();
 
     loginComponent = TestUtils.renderIntoDocument(<Login {...componentProps()} />);
     inputs = TestUtils.scryRenderedDOMComponentsWithTag(loginComponent, 'input');
@@ -69,7 +67,7 @@ describe('Login component', () => {
 
     await loginAction();
 
-    expect(replaceState.calledOnce).to.be.true;
-    expect(replaceState.calledWithExactly(null, '/')).to.be.true;
+    expect(updatePath.calledOnce).to.be.true;
+    expect(updatePath.calledWithExactly('/')).to.be.true;
   });
 });
