@@ -1,16 +1,14 @@
-*.log
+# Este
+#
 *.sublime-workspace
+
+# OSX
+#
 .DS_Store
-.idea
-build
-coverage
-dist
-node_modules
 
 # Xcode
-.idea
-.gradle
-local.properties
+#
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -29,6 +27,12 @@ DerivedData
 project.xcworkspace
 
 # Android/IJ
+#
 .idea
 .gradle
 local.properties
+
+# node.js
+#
+node_modules/
+npm-debug.log
