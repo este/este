@@ -80,6 +80,7 @@ async function renderPageAsync(store, renderProps, req) { // eslint-disable-line
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
+  const helmet = Helmet.rewind();
   const {js: appJsFilename, css: appCssFilename} = await getAppAssetFilenamesCachedAsync();
   const scriptHtml = getScriptHtml(clientState, headers, hostname, appJsFilename);
 
@@ -88,7 +89,7 @@ async function renderPageAsync(store, renderProps, req) { // eslint-disable-line
       appCssFilename={appCssFilename}
       bodyHtml={`<div id="app">${appHtml}</div>${scriptHtml}`}
       googleAnalyticsId={config.googleAnalyticsId}
-      helmet={Helmet.rewind()}
+      helmet={helmet}
       isProduction={config.isProduction}
     />
   );
