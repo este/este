@@ -76,7 +76,7 @@
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",
-    "redux-logger": "^2.0.1",
+    "redux-logger": "^2.1.1",
     "redux-promise-middleware": "2.2.3",
     "redux-storage": "^1.2.4",
     "regenerator": "^0.8.42",
