@@ -24,12 +24,13 @@ const styles = StyleSheet.create({
 export default class Header extends Component {
 
   static propTypes = {
-    leftTodos: PropTypes.number.isRequired,
+    map: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   }
 
   render() {
-    const {leftTodos, msg} = this.props;
+    const {map, msg} = this.props;
+    const leftTodos = map.filter(todo => !todo.completed).size;
 
     return (
       <View style={styles.container}>

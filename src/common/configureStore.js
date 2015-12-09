@@ -3,6 +3,7 @@ import createLogger from 'redux-logger';
 import fetch from './fetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
+import shortid from 'shortid';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
 
@@ -17,8 +18,10 @@ const BROWSER_DEVELOPMENT = (
 export default function configureStore({deps, engine, initialState}) {
 
   // Inject services for actions.
+  const getUid = () => shortid.generate();
+  const now = () => Date.now();
   const dependenciesMiddleware = injectDependencies(
-    {...deps, fetch},
+    {...deps, fetch, getUid, now},
     {validate}
   );
 

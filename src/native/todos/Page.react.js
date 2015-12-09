@@ -17,14 +17,13 @@ export default class Page extends Component {
   }
 
   render() {
-    const {actions, msg: {todos: msg}, todos} = this.props;
-    const leftTodos = todos.list.filter(todo => !todo.completed).size;
+    const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;
 
     return (
       <View style={[appStyles.container]}>
-        <Header leftTodos={leftTodos} msg={msg} />
-        <NewTodo actions={actions} msg={msg} todo={todos.newTodo} />
-        <List actions={actions} msg={msg} todos={todos.list} />
+        <Header map={map} msg={msg} />
+        <NewTodo actions={actions} msg={msg} todo={newTodo} />
+        <List actions={actions} map={map} msg={msg} />
       </View>
     );
   }

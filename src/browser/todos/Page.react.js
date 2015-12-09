@@ -19,14 +19,14 @@ export default class Page extends Component {
   }
 
   render() {
-    const {actions, msg: {todos: msg}, todos: {newTodo, list}} = this.props;
+    const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;
 
     return (
       <div className="todos-page">
         <Helmet title={msg.title} />
         <NewTodo {...{actions, msg, newTodo}} />
-        <List {...{actions, list, msg}} />
-        <Buttons clearAllEnabled={list.size > 0} {...{actions, msg}} />
+        <List {...{actions, map, msg}} />
+        <Buttons clearAllEnabled={map.size > 0} {...{actions, msg}} />
       </div>
     );
   }

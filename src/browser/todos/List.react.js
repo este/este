@@ -6,15 +6,17 @@ export default class List extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    list: PropTypes.object.isRequired,
+    map: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   }
 
   render() {
-    const {actions, list, msg} = this.props;
+    const {actions, map, msg} = this.props;
 
-    if (!list.size)
+    if (!map.size)
       return <p>{msg.emptyList}</p>;
+
+    const list = map.toList().sortBy(item => item.createdAt);
 
     return (
       <ol className="todos">

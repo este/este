@@ -34,15 +34,15 @@ export default class List extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired,
-    todos: PropTypes.object.isRequired
+    map: PropTypes.object.isRequired,
+    msg: PropTypes.object.isRequired
   }
 
   render() {
-    const {actions, todos, msg} = this.props;
-    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
+    const {actions, map, msg} = this.props;
+    const hasCompletedTodos = map.count(todo => todo.completed) > 0;
 
-    if (todos.size === 0)
+    if (map.size === 0)
       return (
         <View style={styles.centeredView}>
           <Image
@@ -55,9 +55,11 @@ export default class List extends Component {
         </View>
       );
 
+    const list = map.toList().sortBy(item => item.createdAt);
+
     return (
       <ScrollView>
-        {todos.map(todo =>
+        {list.map(todo =>
           <View key={todo.id} style={styles.row}>
             <Todo actions={actions} todo={todo} />
           </View>
