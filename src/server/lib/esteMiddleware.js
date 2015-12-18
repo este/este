@@ -11,6 +11,10 @@ export default function esteMiddleware() {
         'X-Powered-By': 'Este.js'
       });
 
+    GLOBAL.navigator = {
+      userAgent: req.headers['user-agent']
+    };
+
     next();
   };
 
