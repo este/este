@@ -1,8 +1,7 @@
 {
   "name": "Este",
   "authors": [
-    "Daniel Steigerwald",
-    "Mike Grabowski"
+    "Daniel Steigerwald"
   ],
   "description": "Dev stack and starter kit for React universal web apps",
   "private": true,
@@ -12,7 +11,7 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": "4.2.x"
+    "node": "5.3.0"
   },
   "dependencies": {
     "autoprefixer": "^6.1.0",
