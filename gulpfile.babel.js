@@ -51,7 +51,7 @@ gulp.task('mocha', () => {
 // Enable to run single test file
 // ex. gulp mocha-file --file src/browser/components/__test__/Button.js
 gulp.task('mocha-file', () => {
-  mochaRunCreator('process')({path: path.join(__dirname, args['file'])});
+  mochaRunCreator('process')({path: path.join(__dirname, args.file)});
 });
 
 // Continuous test running
@@ -87,15 +87,15 @@ gulp.task('default', ['server']);
 
 // Fix for custom .babelrc cache issue.
 // https://github.com/facebook/react-native/issues/1924#issuecomment-120170512
-gulp.task('clear-react-packager-cache', function() {
+gulp.task('clear-react-packager-cache', () => {
   // Clear react-packager cache
   const tempDir = os.tmpdir();
 
-  const cacheFiles = fs.readdirSync(tempDir).filter(function(fileName) {
+  const cacheFiles = fs.readdirSync(tempDir).filter(fileName => {
     return fileName.indexOf('react-packager-cache') === 0;
   });
 
-  cacheFiles.forEach(function(cacheFile) {
+  cacheFiles.forEach(cacheFile => {
     const cacheFilePath = path.join(tempDir, cacheFile);
     fs.unlinkSync(cacheFilePath);
     console.log('Deleted cache: ', cacheFilePath);

@@ -14,7 +14,7 @@ const todos = {
 };
 
 router.route('/user')
-  .get((req, res, next) => {
+  .get((req, res) => {
     // Simulate async access.
     // In real app we would check user credentials and load user data from DB.
     setTimeout(() => {

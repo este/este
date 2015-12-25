@@ -8,14 +8,14 @@ import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
 
 const BROWSER_DEVELOPMENT = (
-  process.env.NODE_ENV !== 'production' && // eslint-disable-line no-undef
-  process.env.IS_BROWSER // eslint-disable-line no-undef
+  process.env.NODE_ENV !== 'production' &&
+  process.env.IS_BROWSER
 );
 
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
 
-export default function configureStore({deps, engine, initialState}) {
+export default function configureStore({deps, engine, initialState}) { // eslint-disable-line no-unused-vars
 
   // Inject services for actions.
   const getUid = () => shortid.generate();

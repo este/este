@@ -3,7 +3,7 @@ import path from 'path';
 export const ABSOLUTE_BASE = path.normalize(path.join(__dirname, '..'));
 
 const constants = Object.freeze({
-  ABSOLUTE_BASE: ABSOLUTE_BASE,
+  ABSOLUTE_BASE,
   NODE_MODULES_DIR: path.join(ABSOLUTE_BASE, 'node_modules'),
   BUILD_DIR: path.join(ABSOLUTE_BASE, 'build'),
   DIST_DIR: path.join(ABSOLUTE_BASE, 'dist'),

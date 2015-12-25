@@ -30,7 +30,7 @@ export default function makeConfig(isDevelopment) {
         ? `style-loader!${extLoaders}`
         : ExtractTextPlugin.extract('style-loader', extLoaders);
       return {
-        loader: loader,
+        loader,
         test: new RegExp(`\\.(${ext})$`)
       };
     });
@@ -123,4 +123,4 @@ export default function makeConfig(isDevelopment) {
 
   return config;
 
-};
+}

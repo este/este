@@ -51,8 +51,7 @@ export default function render(req, res, next) {
       await fetchComponentDataAsync(store.dispatch, renderProps);
       const html = await renderPageAsync(store, renderProps, req);
       res.send(html);
-    }
-    catch (e) {
+    } catch (e) {
       next(e);
     }
   });

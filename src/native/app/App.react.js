@@ -23,14 +23,6 @@ export default class App extends Component {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;
   }
 
-  getTitle(route) {
-    const {msg: {app: {links}}} = this.props;
-    switch (route) {
-      case routes.home: return links.home;
-      case routes.todos: return links.todos;
-    }
-  }
-
   // TODO: Fluxify routing and make it universal with redux-router.
   // Store current route in storage.
   // https://github.com/rackt/redux-router/issues/63
@@ -40,10 +32,18 @@ export default class App extends Component {
     actions.toggleSideMenu();
   }
 
+  getTitle(route) {
+    const {msg: {app: {links}}} = this.props;
+    switch (route) {
+      case routes.home: return links.home;
+      case routes.todos: return links.todos;
+    }
+  }
+
   render() {
     const {actions, device, msg, ui} = this.props;
 
-    const renderScene = (route, navigator) =>
+    const renderScene = route =>
       <View style={[styles.sceneView, route.style]}>
         <Header
           title={this.getTitle(route)}

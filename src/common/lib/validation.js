@@ -41,7 +41,7 @@ export default class Validation {
     }, {required: true});
   }
 
-  getRequiredMessage(prop, value) {
+  getRequiredMessage(prop) {
     return `Please fill out '${prop}' field.`;
   }
 

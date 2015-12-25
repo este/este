@@ -22,7 +22,13 @@ describe('Login component', () => {
     }
   };
 
-  let sandbox, loginComponent, inputs, button, loginAction, replaceState, form;
+  let button;
+  let form;
+  let inputs;
+  let loginAction;
+  let loginComponent;
+  let replaceState;
+  let sandbox;
 
   function componentProps() {
     return {
@@ -36,7 +42,7 @@ describe('Login component', () => {
       msg: msg,
       auth: {form: new Form()}
     };
-  };
+  }
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();

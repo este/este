@@ -25,6 +25,3 @@ export default function logRenderTime(BaseComponent) {
   };
 
 }
-
-
-

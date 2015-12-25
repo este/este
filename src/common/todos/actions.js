@@ -41,7 +41,7 @@ export function addTodo(todo) {
       payload: {newTodo}
     };
   };
-};
+}
 
 export function clearAllCompletedTodos() {
   return {
@@ -62,11 +62,11 @@ export function deleteTodo(id) {
   };
 }
 
-export function fetchUserTodos({location, params}) {
+export function fetchUserTodos(/* {location, params} */) {
+  // We can use location and params to create custom endpoint.
   return ({fetch}) => ({
     type: 'FETCH_USER_TODOS',
     payload: {
-      // We can use location and params to create custom endpoint.
       promise: fetch('api/v1/todos/user')
         .then(response => response.json())
     }
@@ -89,6 +89,4 @@ export function toggleTodoCompleted(todo) {
     type: TOGGLE_TODO_COMPLETED,
     payload: {todo}
   };
-};
-
-
+}

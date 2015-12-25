@@ -20,8 +20,7 @@ export default class SideMenu extends Component {
       if (platform === 'ios')
         StatusBarIOS.setHidden(true, true);
       this.sideMenu.openMenu();
-    }
-    else {
+    } else {
       if (platform === 'ios')
         StatusBarIOS.setHidden(false, true);
       this.sideMenu.closeMenu();

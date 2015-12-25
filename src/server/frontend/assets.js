@@ -21,8 +21,7 @@ export default async function getAppAssetFilenamesAsync() { // eslint-disable-li
       js: buildDirFiles.find(filename => APP_JS_PATTERN.test(filename)),
       css: buildDirFiles.find(filename => APP_CSS_PATTERN.test(filename))
     };
-  }
-  catch (e) {
+  } catch (e) {
     return DEFAULT;
   }
 }

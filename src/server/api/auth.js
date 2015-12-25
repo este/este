@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 router.route('/login')
-  .post((req, res, next) => {
+  .post((req, res) => {
 
     const {email, password} = req.body;
 

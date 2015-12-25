@@ -1,6 +1,6 @@
 import config from '../config';
 
-export default function errorHandler(err, req, res, next) {
+export default function errorHandler(err, req, res) {
   const errorDetails = err.stack || err;
 
   console.error('Yay', errorDetails);
@@ -29,4 +29,4 @@ export default function errorHandler(err, req, res, next) {
       res.send(`500 Internal server error:\n${message}`);
     }
   });
-};
+}

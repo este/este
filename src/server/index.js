@@ -12,8 +12,7 @@ if (global.Intl) {
   require('intl');
   global.Intl.NumberFormat = global.IntlPolyfill.NumberFormat;
   global.Intl.DateTimeFormat = global.IntlPolyfill.DateTimeFormat;
-}
-else {
+} else {
   global.Intl = require('intl');
 }
 
