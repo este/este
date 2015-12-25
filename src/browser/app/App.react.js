@@ -9,12 +9,7 @@ import mapDispatchToProps from '../../common/app/mapDispatchToProps';
 import mapStateToProps from '../../common/app/mapStateToProps';
 import {connect} from 'react-redux';
 
-// // logRenderTime is useful for app with huge UI to check render performance.
-// import logRenderTime from '../lib/logRenderTime';
-
-@connect(mapStateToProps, mapDispatchToProps)
-// @logRenderTime
-export default class App extends Component {
+class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -45,3 +40,9 @@ export default class App extends Component {
   }
 
 }
+
+// // logRenderTime is useful for app with huge UI to check render performance.
+// import logRenderTime from '../lib/logRenderTime';
+// App = logRenderTime(App)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,9 +1,9 @@
-require('babel/register')({optional: ['es7']});
+require('babel-register');
 
 const serverConfig = require('./config');
 
-if (!process.env.NODE_ENV)
-  throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables.');
+// if (!process.env.NODE_ENV)
+//   throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables.');
 
 // http://formatjs.io/guides/runtime-environments/#polyfill-node
 if (global.Intl) {
