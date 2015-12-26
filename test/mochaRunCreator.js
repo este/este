@@ -2,12 +2,18 @@
 
 // Because root .babelrc is configured for react-native (browser users webpack
 // and server has own .babelrc file), we have to require regenerator explicitly.
-require('regenerator/runtime');
+import 'regenerator/runtime';
 
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
 import path from 'path';
+import serverConfig from '../src/server/config';
+
+// To ignore webpack custom loaders on server.
+serverConfig.webpackStylesExtensions.forEach(ext => {
+  require.extensions['.' + ext] = () => {};
+});
 
 function reportError(errorReporter) {
   return errorReporter === 'process' ? process.exit.bind(process, 1) : gutil.log;
