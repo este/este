@@ -1,6 +1,9 @@
+// This .babelrc is for react-native, webpack server, and gulpfile.babel.js
+// For browser, check ./webpack/makeConfig.js
+// For server, check ./src/server/.babelrc
+// https://github.com/facebook/react-native/issues/4811#issuecomment-166653384
 {
-  "presets": ["es2015", "react", "stage-1"],
-  "plugins": ["transform-runtime", "add-module-exports"],
+  "extends": "react-native/packager/react-packager/.babelrc",
   "env": {
     "production": {
       "plugins": [

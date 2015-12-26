@@ -7,8 +7,7 @@ import appStyles from '../app/styles';
 import fetch from '../components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
-@fetch(fetchUserTodos)
-export default class Page extends Component {
+class Page extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -29,3 +28,5 @@ export default class Page extends Component {
   }
 
 }
+
+export default fetch(fetchUserTodos)(Page);

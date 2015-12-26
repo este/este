@@ -30,7 +30,7 @@ gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
 
-gulp.task('clean', done => del('build/*', done));
+gulp.task('clean', () => del('build/*'));
 
 gulp.task('build-webpack', ['env'], webpackBuild);
 gulp.task('build', ['build-webpack']);
@@ -104,4 +104,10 @@ gulp.task('clear-react-packager-cache', () => {
   if (!cacheFiles.length) {
     console.log('No cache files found!');
   }
+});
+
+// Must be called after npm install.
+// https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
+gulp.task('remove-babelrc-files', () => {
+  return del(['node_modules/**/.babelrc', '!node_modules/react-native/**']);
 });

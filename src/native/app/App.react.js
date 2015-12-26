@@ -9,8 +9,7 @@ import routes from '../routes';
 import styles from './styles';
 import {connect} from 'react-redux/native';
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class App extends Component {
+class App extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -77,3 +76,5 @@ export default class App extends Component {
   }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

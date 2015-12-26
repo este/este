@@ -5,9 +5,10 @@
   ],
   "description": "Dev stack and starter kit for React universal web apps",
   "private": true,
+  "//": "Use gulp. npm start is for react-native and postinstall for Heroku",
   "scripts": {
     "postinstall": "gulp build --production",
-    "start": "node_modules/react-native/packager/packager.sh",
+    "start": "react-native start",
     "test": "gulp test"
   },
   "engines": {
@@ -79,7 +80,7 @@
     "react-dom": "^0.14.0",
     "react-helmet": "^2.1.1",
     "react-intl": "^2.0.0-pr-1",
-    "react-native": "^0.14.0",
+    "react-native": "^0.17.0",
     "react-native-browser-polyfill": "^0.1.1",
     "react-native-side-menu": "^0.14.2",
     "react-pure-render": "^1.0.1",
