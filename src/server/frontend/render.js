@@ -41,16 +41,15 @@ export default function render(req, res, next) {
       return;
     }
 
-    // // Not possible with * route.
-    // if (renderProps == null) {
-    //   res.send(404, 'Not found');
-    //   return;
-    // }
-
     try {
       await fetchComponentDataAsync(store.dispatch, renderProps);
       const html = await renderPageAsync(store, renderProps, req);
-      res.send(html);
+      // renderProps are always defined with * route.
+      // https://github.com/rackt/react-router/blob/master/docs/guides/advanced/ServerRendering.md
+      const status = renderProps.routes.some(route => route.path === '*')
+        ? 404
+        : 200;
+      res.status(status).send(html);
     } catch (e) {
       next(e);
     }
@@ -80,7 +79,10 @@ async function renderPageAsync(store, renderProps, req) { // eslint-disable-line
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);
   const helmet = Helmet.rewind();
-  const {js: appJsFilename, css: appCssFilename} = await getAppAssetFilenamesCachedAsync();
+  const {
+    css: appCssFilename,
+    js: appJsFilename
+  } = await getAppAssetFilenamesCachedAsync();
   const scriptHtml = getScriptHtml(clientState, headers, hostname, appJsFilename);
 
   return '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
