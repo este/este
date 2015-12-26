@@ -5,10 +5,9 @@
   ],
   "description": "Dev stack and starter kit for React universal web apps",
   "private": true,
-  "//": "Use gulp. npm start is for react-native and postinstall for Heroku",
+  "//": "Use gulp for dev etc. Note postinstall, it's for Heroku",
   "scripts": {
     "postinstall": "gulp build --production",
-    "start": "react-native start",
     "test": "gulp test"
   },
   "engines": {
@@ -93,6 +92,7 @@
     "redux-logger": "^2.1.1",
     "redux-promise-middleware": "2.2.3",
     "redux-storage": "^1.2.4",
+    "regenerator": "^0.8.42",
     "run-sequence": "^1.0.2",
     "sass-loader": "^3.0.0",
     "serialize-javascript": "^1.1.2",

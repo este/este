@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
 
+// Because root .babelrc is configured for react-native (browser users webpack
+// and server has own .babelrc file), we have to require regenerator explicitly.
+require('regenerator/runtime');
+
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
