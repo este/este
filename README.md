@@ -107,7 +107,7 @@ Yes. Este makes little assumptions about your stack, and passing every bit of ne
 Pure means no side effects. Programming without side effects rocks. It allows us to hot reload everything and testing is much easier as well. When component renders only data passed through props, [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) can be implemented [only once](https://github.com/este/este/blob/master/src/native/components/Component.react.js#L11) per whole app. One can say it's verbose, but it isn't. It's explicit. And remember, we have to pass only data going to be rendered. Actions have access to app state.
 
 #### How React Native is used in this project?
-Just as regular React Native project created via `react-native init AwesomeProject`. Nothing has to be changed, it just works. We can easily share modules across platforms.
+Just as regular React Native project created via `react-native init AwesomeProject`. We can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
