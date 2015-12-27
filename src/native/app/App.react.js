@@ -1,8 +1,8 @@
 import Component from '../components/Component.react';
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, {Navigator, PropTypes, View} from 'react-native';
-import SideMenu from '../components/SideMenu.react';
+import React, {Navigator, PropTypes, StatusBarIOS, View} from 'react-native';
+import SideMenu from 'react-native-side-menu';
 import mapDispatchToProps from '../../common/app/mapDispatchToProps';
 import mapStateToProps from '../../common/app/mapStateToProps';
 import routes from '../routes';
@@ -31,6 +31,13 @@ class App extends Component {
     actions.toggleSideMenu();
   }
 
+  onSideMenuChange(isOpen) {
+    const {actions, device} = this.props;
+    if (device.platform === 'ios')
+      StatusBarIOS.setHidden(isOpen, true);
+    actions.onSideMenuChange(isOpen);
+  }
+
   getTitle(route) {
     const {msg: {app: {links}}} = this.props;
     switch (route) {
@@ -40,7 +47,7 @@ class App extends Component {
   }
 
   render() {
-    const {actions, device, msg, ui} = this.props;
+    const {actions, msg, ui} = this.props;
 
     const renderScene = route =>
       <View style={[styles.sceneView, route.style]}>
@@ -59,10 +66,8 @@ class App extends Component {
         disableGestures
         isOpen={ui.isSideMenuOpen}
         menu={menu}
-        onChange={actions.onSideMenuChange}
-        platform={device.platform}
+        onChange={isOpen => this.onSideMenuChange(isOpen)}
         style={styles.container}
-        touchToClose
       >
         <Navigator
           configureScene={App.configureScene}

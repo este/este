@@ -81,7 +81,7 @@
     "react-intl": "^2.0.0-pr-1",
     "react-native": "^0.17.0",
     "react-native-browser-polyfill": "^0.1.1",
-    "react-native-side-menu": "^0.14.2",
+    "react-native-side-menu": "^0.17.0",
     "react-pure-render": "^1.0.1",
     "react-redux": "^3.0.0",
     "react-router": "^1.0.2",
