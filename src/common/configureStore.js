@@ -25,7 +25,7 @@ export default function configureStore({deps, engine, initialState}) { // eslint
     {validate}
   );
 
-  let middleware = [
+  const middleware = [
     dependenciesMiddleware,
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
@@ -49,7 +49,7 @@ export default function configureStore({deps, engine, initialState}) { // eslint
       stateTransformer: state => JSON.parse(JSON.stringify(state))
     });
     // Logger must be the last middleware in chain.
-    middleware = [...middleware, logger];
+    middleware.push(logger);
   }
 
   const createReduxStore = (BROWSER_DEVELOPMENT && window.devToolsExtension) // eslint-disable-line no-undef
