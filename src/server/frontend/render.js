@@ -64,14 +64,7 @@ async function fetchComponentDataAsync(dispatch, {components, location, params})
     {location, params}
   )));
 
-  // Because redux-promise-middleware always returns fulfilled promise, we have
-  // to detect errors manually.
-  // https://github.com/pburtchaell/redux-promise-middleware#usage
-  const results = await Promise.all(promises);
-  results.forEach(result => {
-    if (result.error)
-      throw result.payload;
-  });
+  await Promise.all(promises);
 }
 
 async function renderPageAsync(store, renderProps, req) { // eslint-disable-line space-before-function-paren
