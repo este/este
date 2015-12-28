@@ -16,10 +16,10 @@ export default class Login extends Component {
 
   async onFormSubmit(e) {
     e.preventDefault();
-    const {actions: {login}, auth: {form}} = this.props;
-    const {error, payload: maybeValidationError} = await login(form.fields);
-    if (error)
-      focusInvalidField(this, maybeValidationError);
+    const {actions, auth} = this.props;
+    const result = await actions.login(auth.form.fields).payload.promise;
+    if (result.error)
+      focusInvalidField(this, result.payload);
     else
       this.redirectAfterLogin();
   }

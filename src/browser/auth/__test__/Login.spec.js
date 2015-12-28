@@ -46,7 +46,11 @@ describe('Login component', () => {
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
-    loginAction = sandbox.stub().resolves({});
+    loginAction = sandbox.stub().returns({
+      payload: {
+        promise: Promise.resolve({})
+      }
+    });
     replaceState = sandbox.spy();
 
     loginComponent = TestUtils.renderIntoDocument(<Login {...componentProps()} />);
