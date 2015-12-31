@@ -7,10 +7,9 @@ import shortid from 'shortid';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
 
-const BROWSER_DEVELOPMENT = (
+const BROWSER_DEVELOPMENT =
   process.env.NODE_ENV !== 'production' &&
-  process.env.IS_BROWSER
-);
+  process.env.IS_BROWSER;
 
 // TODO: Add example for browser/native storage.
 // import storage from 'redux-storage';
