@@ -8,7 +8,7 @@ export default function createFetch(React, Component) {
         dispatch: React.PropTypes.func,
         location: React.PropTypes.object,
         params: React.PropTypes.object
-      }
+      };
 
       // This enables server side fetching.
       // Check src/server/frontend/render.js fetchComponentData function.

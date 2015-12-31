@@ -8,7 +8,7 @@ export default class Header extends Component {
     msg: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
     viewer: PropTypes.object
-  }
+  };
 
   render() {
     const {msg: {app: {links: msg}}, viewer} = this.props;

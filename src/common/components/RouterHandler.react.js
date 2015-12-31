@@ -12,7 +12,7 @@ export default class RouterHandler extends Component {
 
   static propTypes = {
     children: PropTypes.object
-  }
+  };
 
   render() {
     const {children} = this.props;

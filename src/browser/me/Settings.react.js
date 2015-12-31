@@ -6,7 +6,7 @@ export default class Settings extends Component {
 
   static propTypes = {
     msg: PropTypes.object
-  }
+  };
 
   render() {
     const {msg} = this.props;

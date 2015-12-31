@@ -29,7 +29,7 @@ export default class NewTodo extends Component {
     actions: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     todo: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, msg, todo} = this.props;

@@ -12,7 +12,7 @@ export default class Login extends Component {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
-  }
+  };
 
   async onFormSubmit(e) {
     e.preventDefault();

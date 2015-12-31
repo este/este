@@ -29,7 +29,7 @@ export default class TodoButtons extends Component {
     actions: PropTypes.object.isRequired,
     hasCompletedTodos: PropTypes.bool.isRequired,
     msg: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, hasCompletedTodos, msg} = this.props;

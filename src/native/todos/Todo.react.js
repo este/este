@@ -30,7 +30,7 @@ export default class TodoItem extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     todo: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, todo} = this.props;

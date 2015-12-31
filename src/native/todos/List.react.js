@@ -36,7 +36,7 @@ export default class List extends Component {
     actions: PropTypes.object.isRequired,
     map: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, map, msg} = this.props;

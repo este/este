@@ -26,7 +26,7 @@ export default class Header extends Component {
   static propTypes = {
     map: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {map, msg} = this.props;

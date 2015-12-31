@@ -13,7 +13,7 @@ export default class Page extends Component {
     children: PropTypes.object,
     msg: PropTypes.object,
     users: PropTypes.object
-  }
+  };
 
   render() {
     const {children, msg, users: {viewer: {email}}} = this.props;

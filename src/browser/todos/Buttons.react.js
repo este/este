@@ -8,7 +8,7 @@ export default class Buttons extends Component {
     actions: PropTypes.object.isRequired,
     clearAllEnabled: PropTypes.bool.isRequired,
     msg: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, clearAllEnabled, msg} = this.props;

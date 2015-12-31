@@ -16,7 +16,7 @@ class App extends Component {
     location: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {location: {pathname}, msg, users: {viewer}} = this.props;

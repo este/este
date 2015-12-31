@@ -5,7 +5,7 @@ export default class Logout extends Component {
 
   static propTypes = {
     msg: PropTypes.object.isRequired
-  }
+  };
 
   logout() {
     // Always reload app on logout for security reasons.

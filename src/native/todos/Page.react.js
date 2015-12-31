@@ -13,7 +13,7 @@ class Page extends Component {
     actions: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     todos: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;

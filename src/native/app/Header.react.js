@@ -43,7 +43,7 @@ export default class Header extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     toggleSideMenu: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     const {title, toggleSideMenu} = this.props;

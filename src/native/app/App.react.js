@@ -16,7 +16,7 @@ class App extends Component {
     device: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired
-  }
+  };
 
   static configureScene(route) {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;

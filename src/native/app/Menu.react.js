@@ -39,7 +39,7 @@ export default class Menu extends Component {
   static propTypes = {
     msg: PropTypes.object.isRequired,
     onRouteChange: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     const {msg: {app: {links}}, onRouteChange} = this.props;

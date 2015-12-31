@@ -8,7 +8,7 @@ export default class NewTodo extends Component {
     actions: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     newTodo: PropTypes.object.isRequired
-  }
+  };
 
   onKeyDown(e) {
     const {actions, newTodo} = this.props;

@@ -7,7 +7,7 @@ export default class Page extends Component {
 
   static propTypes = {
     msg: PropTypes.object
-  }
+  };
 
   render() {
     const {msg} = this.props;
