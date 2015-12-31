@@ -1,9 +1,9 @@
 import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import List from './List.react';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes} from 'react';
+import Todos from './Todos.react';
 import fetch from '../components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
@@ -22,7 +22,7 @@ class Page extends Component {
       <div className="todos-page">
         <Helmet title={msg.title} />
         <NewTodo {...{actions, msg, newTodo}} />
-        <List {...{actions, map, msg}} />
+        <Todos {...{actions, map, msg}} />
         <Buttons clearAllEnabled={map.size > 0} {...{actions, msg}} />
       </div>
     );

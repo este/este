@@ -2,7 +2,7 @@ import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import Todo from './Todo.react';
 
-export default class List extends Component {
+export default class Todos extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,

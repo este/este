@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class List extends Component {
+export default class Todos extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
