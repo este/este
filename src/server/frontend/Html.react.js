@@ -8,7 +8,7 @@ export default class Html extends Component {
     googleAnalyticsId: PropTypes.string.isRequired,
     helmet: PropTypes.object.isRequired,
     isProduction: PropTypes.bool.isRequired,
-  }
+  };
 
   render() {
     const {
@@ -36,7 +36,8 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');`}}
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
-          <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+          <meta content="ie=edge" httpEquiv="x-ua-compatible" />
           {helmet.title.toComponent()}
           {helmet.base.toComponent()}
           {helmet.meta.toComponent()}
