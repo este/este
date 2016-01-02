@@ -9,7 +9,7 @@ import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
-import {RoutingContext, match} from 'react-router';
+import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
@@ -28,7 +28,7 @@ const getAppHtml = (store, renderProps) => {
   return ReactDOMServer.renderToString(
     <Provider store={store}>
       <IntlProvider>
-        <RoutingContext {...renderProps} />
+        <RouterContext {...renderProps} />
       </IntlProvider>
     </Provider>
   );

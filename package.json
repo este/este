@@ -85,7 +85,7 @@
     "react-native-side-menu": "^0.17.0",
     "react-pure-render": "^1.0.1",
     "react-redux": "^3.0.0",
-    "react-router": "^1.0.2",
+    "react-router": "^2.0.0-rc5",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.0.5",
