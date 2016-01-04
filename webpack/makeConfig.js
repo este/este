@@ -3,8 +3,8 @@ import autoprefixer from 'autoprefixer';
 import constants from './constants';
 import path from 'path';
 import webpack from 'webpack';
-import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import webpackIsomorphicAssets from './assets';
+import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import ip from 'ip';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
