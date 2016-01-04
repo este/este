@@ -4,12 +4,10 @@ import Promise from 'bluebird';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import config from '../config';
-import getAppAssetFilenamesAsync from './assets';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
 import useragent from 'useragent';
-import {HOT_RELOAD_PORT} from '../../../webpack/constants';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
@@ -73,10 +71,15 @@ async function renderPageAsync(store, renderProps, req) { // eslint-disable-line
   const appHtml = getAppHtml(store, renderProps);
   const helmet = Helmet.rewind();
   const {
-    css: appCssFilename,
-    js: appJsFilename
-  } = await getAppAssetFilenamesCachedAsync();
+    styles: {app: appCssFilename},
+    javascript: {app: appJsFilename}
+  } = webpackIsomorphicTools.assets();
+
   const scriptHtml = getScriptHtml(clientState, headers, hostname, appJsFilename);
+
+  if (!config.isProduction) {
+    webpackIsomorphicTools.refresh();
+  }
 
   return '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
     <Html
@@ -99,16 +102,6 @@ function getAppHtml(store, renderProps) {
   );
 }
 
-let appAssetFilenameCache = null;
-
-async function getAppAssetFilenamesCachedAsync() { // eslint-disable-line space-before-function-paren
-  if (appAssetFilenameCache) return appAssetFilenameCache;
-
-  appAssetFilenameCache = await getAppAssetFilenamesAsync();
-
-  return appAssetFilenameCache;
-}
-
 function getScriptHtml(clientState, headers, hostname, appJsFilename) {
   let scriptHtml = '';
 
@@ -121,16 +114,12 @@ function getScriptHtml(clientState, headers, hostname, appJsFilename) {
     `;
   }
 
-  const appScriptSrc = config.isProduction
-    ? `/_assets/${appJsFilename}`
-    : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
-
   // Note how clientState is serialized. JSON.stringify is anti-pattern.
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
   return scriptHtml + `
     <script>
       window.__INITIAL_STATE__ = ${serialize(clientState)};
     </script>
-    <script src="${appScriptSrc}"></script>
+    <script src="${appJsFilename}"></script>
   `;
 }
