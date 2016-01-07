@@ -23,7 +23,7 @@ export default class Page extends Component {
         </p>
         <div className="tocheck">
           <h2>{msg.toCheck.h2}</h2>
-          <img alt="50x50 placeholder" src="/assets/img/50x50.png"/>
+          <img alt="50x50 placeholder" src={require('./50x50.png')}/>
           <ul>
             {msg.toCheck.list.map(({key, text}) =>
               <li key={key}>

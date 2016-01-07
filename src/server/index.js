@@ -1,6 +1,9 @@
 require('babel-register');
 
 const serverConfig = require('./config');
+const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+const webpackIsomorphicAssets = require('../../webpack/assets');
+const rootDir = require('path').resolve(__dirname, '..', '..');
 
 // if (!process.env.NODE_ENV)
 //   throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables.');
@@ -16,9 +19,8 @@ if (global.Intl) {
   global.Intl = require('intl');
 }
 
-// To ignore webpack custom loaders on server.
-serverConfig.webpackStylesExtensions.forEach(ext => {
-  require.extensions['.' + ext] = () => {};
-});
-
-require('./main');
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAssets)
+  .development(!serverConfig.isProduction)
+  .server(rootDir, () => {
+    require('./main');
+  });
