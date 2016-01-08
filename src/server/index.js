@@ -5,8 +5,10 @@ const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const webpackIsomorphicAssets = require('../../webpack/assets');
 const rootDir = require('path').resolve(__dirname, '..', '..');
 
-// if (!process.env.NODE_ENV)
-//   throw new Error('Environment variable NODE_ENV isn\'t set. Remember it\'s up your production enviroment to set NODE_ENV and maybe other variables.');
+if (!process.env.NODE_ENV)
+  throw new Error(
+    'Environment variable NODE_ENV must be set to development or production.'
+  );
 
 // http://formatjs.io/guides/runtime-environments/#polyfill-node
 if (global.Intl) {
