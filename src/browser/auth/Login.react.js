@@ -14,6 +14,13 @@ export default class Login extends Component {
     msg: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    // Read why we bind event handlers explicitly.
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
   async onFormSubmit(e) {
     e.preventDefault();
     const {actions, auth} = this.props;
@@ -39,7 +46,7 @@ export default class Login extends Component {
     return (
       <div className="login">
         <Helmet title="Login" />
-        <form onSubmit={e => this.onFormSubmit(e)}>
+        <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={form.disabled}>
             <legend>{msg.legend}</legend>
             <input

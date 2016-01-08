@@ -54,7 +54,7 @@ export default function render(req, res, next) {
   });
 }
 
-async function fetchComponentDataAsync(dispatch, {components, location, params}) { // eslint-disable-line space-before-function-paren
+async function fetchComponentDataAsync(dispatch, {components, location, params}) {
   const fetchActions = components.reduce((actions, component) => {
     return actions.concat(component.fetchActions || []);
   }, []);
@@ -65,7 +65,7 @@ async function fetchComponentDataAsync(dispatch, {components, location, params})
   await Promise.all(promises);
 }
 
-async function renderPageAsync(store, renderProps, req) { // eslint-disable-line space-before-function-paren
+async function renderPageAsync(store, renderProps, req) {
   const clientState = store.getState();
   const {headers, hostname} = req;
   const appHtml = getAppHtml(store, renderProps);

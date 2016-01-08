@@ -55,7 +55,7 @@ export default class Menu extends Component {
           {pages.map(page =>
             <Text
               key={page}
-              onPress={() => onRouteChange(page)}
+              onPress={() => onRouteChange(page)} // eslint-disable-line react/jsx-no-bind
               style={styles.item}
             >{links[page]}</Text>
           )}

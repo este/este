@@ -1,3 +1,4 @@
+/* global module:false, require:false */
 import appReducer from './app/reducer';
 import createLogger from 'redux-logger';
 import fetch from './fetch';
@@ -11,10 +12,9 @@ const BROWSER_DEVELOPMENT =
   process.env.NODE_ENV !== 'production' &&
   process.env.IS_BROWSER;
 
-// TODO: Add example for browser/native storage.
+// TODO: Add example for browser/native redux-storage.
 // import storage from 'redux-storage';
-
-export default function configureStore({deps, engine, initialState}) { // eslint-disable-line no-unused-vars
+export default function configureStore({deps, /* engine, */ initialState}) {
 
   // Inject services for actions.
   const getUid = () => shortid.generate();
@@ -31,11 +31,11 @@ export default function configureStore({deps, engine, initialState}) { // eslint
     })
   ];
 
-  // TODO: Add storage example.
+  // TODO: Add redux-storage example.
   // if (engine) {
-  //   // The order is important.
+  //   // The order of decorators is important.
   //   engine = storage.decorators.filter(engine, [
-  //     ['todos', 'list']
+  //     ['todos']
   //   ]);
   //   engine = storage.decorators.debounce(engine, 1500);
   //   middleware.push(storage.createMiddleware(engine));
@@ -51,17 +51,16 @@ export default function configureStore({deps, engine, initialState}) { // eslint
     middleware.push(logger);
   }
 
-  const createReduxStore = (BROWSER_DEVELOPMENT && window.devToolsExtension) // eslint-disable-line no-undef
-    ? compose(applyMiddleware(...middleware), window.devToolsExtension()) // eslint-disable-line no-undef
+  const createReduxStore = (BROWSER_DEVELOPMENT && window.devToolsExtension)
+    ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
-
   const store = createReduxStore(createStore)(appReducer, initialState);
 
   // Enable hot reload where available.
-  if (module.hot) { // eslint-disable-line no-undef
+  if (module.hot) {
     // Enable Webpack hot module replacement for reducers.
-    module.hot.accept('./app/reducer', () => { // eslint-disable-line no-undef
-      const nextAppReducer = require('./app/reducer'); // eslint-disable-line no-undef
+    module.hot.accept('./app/reducer', () => {
+      const nextAppReducer = require('./app/reducer');
       store.replaceReducer(nextAppReducer);
     });
   }

@@ -7,6 +7,11 @@ export default class Logout extends Component {
     msg: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
   logout() {
     // Always reload app on logout for security reasons.
     location.href = '/';
@@ -17,7 +22,7 @@ export default class Logout extends Component {
 
     return (
       <div className="logout">
-        <button onClick={() => this.logout()}>{msg.button}</button>
+        <button onClick={this.logout}>{msg.button}</button>
       </div>
     );
   }

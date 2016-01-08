@@ -18,14 +18,13 @@ import '../../node_modules/intl/locale-data/jsonp/en.js';
 
 export default function index() {
 
-  // TODO: Add engine.
+  // TODO: Add local storage example.
   const initialState = {
     device: {
       isMobile: true
     }
   };
   const store = configureStore({initialState});
-  // This makes platform detection universal.
   store.dispatch(setPlatform(Platform.OS));
 
   class Root extends Component {

@@ -15,11 +15,11 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIso
 const devtools = 'cheap-module-eval-source-map';
 
 const loaders = {
-  'css': '',
-  'less': '!less-loader',
-  'scss': '!sass-loader',
-  'sass': '!sass-loader?indentedSyntax',
-  'styl': '!stylus-loader'
+  css: '',
+  less: '!less-loader',
+  scss: '!sass-loader',
+  sass: '!sass-loader?indentedSyntax',
+  styl: '!stylus-loader'
 };
 
 const serverIp = ip.address();
@@ -123,7 +123,7 @@ export default function makeConfig(isDevelopment) {
       modulesDirectories: ['src', 'node_modules'],
       root: constants.ABSOLUTE_BASE,
       alias: {
-        'react$': require.resolve(path.join(constants.NODE_MODULES_DIR, 'react'))
+        react$: require.resolve(path.join(constants.NODE_MODULES_DIR, 'react'))
       }
     }
   };

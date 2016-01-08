@@ -9,15 +9,25 @@ export default class Todo extends Component {
     todo: PropTypes.object.isRequired
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.onButtonClick = this.onButtonClick.bind(this);
+  }
+
+  onButtonClick() {
     const {actions, todo} = this.props;
+    actions.deleteTodo(todo.id);
+  }
+
+  render() {
+    const {todo} = this.props;
 
     return (
       <li className="todo">
         <span className="view">{todo.title}</span>
         <span
           className="button"
-          onClick={() => actions.deleteTodo(todo.id)}
+          onClick={this.onButtonClick}
         >x</span>
       </li>
     );

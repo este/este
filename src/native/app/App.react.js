@@ -22,6 +22,17 @@ class App extends Component {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;
   }
 
+  constructor(props) {
+    super(props);
+    this.onNavigatorRef = this.onNavigatorRef.bind(this);
+    this.onRouteChange = this.onRouteChange.bind(this);
+    this.onSideMenuChange = this.onSideMenuChange.bind(this);
+  }
+
+  onNavigatorRef(component) {
+    this.navigator = component;
+  }
+
   // TODO: Fluxify routing and make it universal with redux-router.
   // Store current route in storage.
   // https://github.com/rackt/redux-router/issues/63
@@ -59,20 +70,20 @@ class App extends Component {
       </View>;
 
     const menu =
-      <Menu msg={msg} onRouteChange={route => this.onRouteChange(route)} />;
+      <Menu msg={msg} onRouteChange={this.onRouteChange} />;
 
     return (
       <SideMenu
         disableGestures
         isOpen={ui.isSideMenuOpen}
         menu={menu}
-        onChange={isOpen => this.onSideMenuChange(isOpen)}
+        onChange={this.onSideMenuChange}
         style={styles.container}
       >
         <Navigator
           configureScene={App.configureScene}
           initialRoute={routes.home}
-          ref={c => this.navigator = c}
+          ref={this.onNavigatorRef}
           renderScene={renderScene}
           style={styles.container}
         />

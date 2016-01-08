@@ -31,14 +31,31 @@ export default class NewTodo extends Component {
     todo: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.onTextInputChangeText = this.onTextInputChangeText.bind(this);
+    this.onTextInputEndEditing = this.onTextInputEndEditing.bind(this);
+  }
+
+  onTextInputChangeText(text) {
+    const {actions} = this.props;
+    actions.onNewTodoChange('title', text);
+  }
+
+  onTextInputEndEditing() {
+    const {actions, todo} = this.props;
+    actions.addTodo(todo);
+  }
+
   render() {
-    const {actions, msg, todo} = this.props;
+    const {msg, todo} = this.props;
 
     return (
       <View style={styles.container}>
         <TextInput
-          onChangeText={text => actions.onNewTodoChange('title', text)}
-          onEndEditing={() => actions.addTodo(todo)}
+          // TODO: Use redux-form.
+          onChangeText={this.onTextInputChangeText}
+          onEndEditing={this.onTextInputEndEditing}
           placeholder={msg.newTodoPlaceholder}
           placeholderTextColor={'#cce9f2'}
           style={styles.input}

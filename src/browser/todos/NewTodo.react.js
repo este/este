@@ -10,22 +10,33 @@ export default class NewTodo extends Component {
     newTodo: PropTypes.object.isRequired
   };
 
-  onKeyDown(e) {
+  constructor(props) {
+    super(props);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onInputKeyDown = this.onInputKeyDown.bind(this);
+  }
+
+  onInputChange(e) {
+    const {actions} = this.props;
+    actions.onNewTodoChange(e.target.name, e.target.value);
+  }
+
+  onInputKeyDown(e) {
     const {actions, newTodo} = this.props;
     if (e.key === 'Enter' && newTodo.title.trim())
       actions.addTodo(newTodo);
   }
 
   render() {
-    const {actions, msg, newTodo} = this.props;
+    const {msg, newTodo} = this.props;
 
     return (
       <input
         autoFocus
         className="new-todo"
         name="title"
-        onChange={e => actions.onNewTodoChange(e.target.name, e.target.value)}
-        onKeyDown={e => this.onKeyDown(e)}
+        onChange={this.onInputChange}
+        onKeyDown={this.onInputKeyDown}
         placeholder={msg.newTodoPlaceholder}
         value={newTodo.title}
       />

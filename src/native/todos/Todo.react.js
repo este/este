@@ -32,8 +32,18 @@ export default class TodoItem extends Component {
     todo: PropTypes.object.isRequired
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.onTouchableOpacityPress = this.onTouchableOpacityPress.bind(this);
+  }
+
+  onTouchableOpacityPress() {
     const {actions, todo} = this.props;
+    actions.toggleTodoCompleted(todo);
+  }
+
+  render() {
+    const {todo} = this.props;
     const image = todo.completed
       ? require('../../../assets/img/SelectedCheckbox.png')
       : require('../../../assets/img/EmptyCheckbox.png');
@@ -42,7 +52,7 @@ export default class TodoItem extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           activeOpacity={.8}
-          onPress={() => actions.toggleTodoCompleted(todo)}
+          onPress={this.onTouchableOpacityPress}
         >
           <Image source={image} style={styles.checkbox} />
         </TouchableOpacity>
