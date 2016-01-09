@@ -1,3 +1,5 @@
+// This is just a demonstration. I don't think simple components must be tested.
+
 import Form from '../../../common/auth/form';
 import Login from '../Login.react';
 
