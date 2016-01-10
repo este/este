@@ -20,7 +20,7 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
       return actions.concat(component.fetchActions || []);
     }, [])
     .map(action => {
-      return dispatch(action({location, params}));
+      return dispatch(action({location, params})).payload.promise;
     });
   await Promise.all(promises);
 };
