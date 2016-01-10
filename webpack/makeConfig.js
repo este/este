@@ -119,7 +119,7 @@ export default function makeConfig(isDevelopment) {
     })(),
     postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     resolve: {
-      extensions: ['', '.js', '.json'],
+      extensions: ['', '.js'],
       modulesDirectories: ['src', 'node_modules'],
       root: constants.ABSOLUTE_BASE,
       alias: {
