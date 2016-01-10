@@ -106,7 +106,6 @@
     "stylus-loader": "^1.0.0",
     "urijs": "^1.16.1",
     "url-loader": "^0.5.5",
-    "useragent": "^2.1.7",
     "validator": "^4.0.6",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",

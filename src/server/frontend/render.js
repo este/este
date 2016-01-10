@@ -7,7 +7,6 @@ import config from '../config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
-import useragent from 'useragent';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
@@ -36,18 +35,12 @@ const getAppHtml = (store, renderProps) => {
 };
 
 const getScriptHtml = (state, headers, hostname, appJsFilename) => {
-  let scriptHtml = '';
-  const ua = useragent.is(headers['user-agent']);
-  const needIntlPolyfill = ua.safari || (ua.ie && ua.version < '11');
-  if (needIntlPolyfill) {
-    scriptHtml += `
-      <script src="/node_modules/intl/dist/Intl.min.js"></script>
-      <script src="/node_modules/intl/locale-data/jsonp/en-US.js"></script>
-    `;
-  }
-  // Note how state is serialized. JSON.stringify is anti-pattern.
+  // Note how app state is serialized. JSON.stringify is anti-pattern.
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  return scriptHtml + `
+  // Note how we use cdn.polyfill.io, en is default, but can be changed later.
+  // This approach is great for server-less apps.
+  return `
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
