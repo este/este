@@ -24,6 +24,7 @@ If you are using different node versions on your machine, use `nvm` to manage th
   - isomorphic data fetching
   - prerender for static hosting
 - Functional works: immutability, hot reloading, time travel
+- Test driven development ready
 
 ## Libraries
 
@@ -40,8 +41,11 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
 - [chriso/validator.js](https://github.com/chriso/validator.js) For Este simple yet powerfull sync/async validation
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's always better than native implementation
-- [mochajs](https://mochajs.org/) the fun, simple, flexible JavaScript test framework
+- [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
+- [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
+- [gulp](http://gulpjs.com/) For cross platform scripting.
+- And much more. Check source code.
 
 ## Installing
 
