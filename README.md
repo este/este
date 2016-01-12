@@ -5,7 +5,7 @@
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-> The best dev stack and starter kit for React universal web apps.
+> Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused libraries and design patterns instead.
 
@@ -18,21 +18,28 @@ If you are using different node versions on your machine, use `nvm` to manage th
 
 ## Techniques
 
-- Universal JavaScript dev stack for browser, server, mobile.
-- [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
-- [React Native](https://facebook.github.io/react-native/) for iOS and Android.
-- [Redux](http://rackt.github.io/redux/) [Flux](https://facebook.github.io/flux/) with atomic [immutable.js](http://facebook.github.io/immutable-js) app state.
-- Functional works: App state snapshots, time travel, hot reload everything.
-- ECMAScript 2015+ with [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax. Sourcemaps enabled.
-- [react-router](https://github.com/rackt/react-router) for isomorphic routing.
-- Universal / isomorphic data fetching example.
-- Well tuned [webpack](http://webpack.github.io/) dev stack.
-- [eslint](http://eslint.org/) ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings#how-to-setup-the-eslint-for-st3))
-- Localization with [formatjs.io](http://formatjs.io/).
-- Simple yet powerfull sync/async validation based on [chriso/validator.js](https://github.com/chriso/validator.js)
-- LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer).
-- Long Term Caching.
-- [React Helmet](https://github.com/nfl/react-helmet) for handling Title and Meta changes on server and client
+- Truly universal architecture
+  - code shared across platforms
+  - server side rendering
+  - isomorphic data fetching
+  - prerender for static hosting
+- Functional works: immutability, hot reloading, time travel
+
+## Libraries
+
+- [React](http://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/) 
+- [Redux](http://rackt.github.io/redux/)
+- [babeljs](https://babeljs.io/)
+- [immutablejs](http://facebook.github.io/immutable-js)
+- [react-router](https://github.com/rackt/react-router)
+- [webpack](http://webpack.github.io/)
+- [expressjs](http://expressjs.com/)
+- [eslint](http://eslint.org/)
+- [formatjs](http://formatjs.io/)
+- [React Helmet](https://github.com/nfl/react-helmet)
+- [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
+- [chriso/validator.js](https://github.com/chriso/validator.js) for simple yet powerfull sync/async validation
+- less, sass, stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - And much more.
 
 ## Installing
@@ -49,11 +56,23 @@ npm install
 - point your browser to [localhost:8000](http://localhost:8000)
 - build something beautiful
 
+React Native: [facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)
+
+
 ## Dev Tasks
 
 - `gulp` run web app in development mode
-- `gulp -p` run web app in production mode
-- `gulp test` test app
+- `gulp -p` run web app in production mode for local testing
+- `npm test` run all checks and tests
+- `gulp mocha` run mocha unit tests
+- `gulp eslint` eslint app
+
+## Production Tasks
+
+- `gulp build -p` build app for production, for example for [Heroku](https://dashboard.heroku.com/)
+- `node src/server` start app, remember to set NODE_ENV=production
+- `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
+
 
 ## Documentation
 
