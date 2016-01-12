@@ -36,12 +36,12 @@ If you are using different node versions on your machine, use [nvm](https://gith
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
-- [formatjs](http://formatjs.io/) Internationalize your web apps on the client & server
-- [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React
+- [formatjs](http://formatjs.io/) Internationalize your web apps on the client & server.
+- [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React.
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
-- [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation
-- [bluebird](https://github.com/petkaantonov/bluebird) Because it's always better than native implementation
-- [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework
+- [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
+- [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
+- [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) For cross platform scripting.
