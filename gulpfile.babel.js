@@ -81,7 +81,66 @@ gulp.task('server', ['env'], done => {
     runSequence('server-hot', 'server-nodemon', done);
 });
 
+// Default task to start development. Just type gulp.
 gulp.task('default', ['server']);
+
+// Prerender app to HTML files. Useful for static hostings like Firebase.
+// Test (OSX): cd build && python -m SimpleHTTPServer 8000
+gulp.task('to-html', done => {
+  args.production = true;
+
+  const urls = {
+    '/': 'index.html',
+    '/foo-bla-bar': '404.html'
+  };
+
+  const fetch = url => new Promise((resolve, reject) => {
+    require('http').get({host: 'localhost', path: url, port: 8000}, res => {
+      // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
+      res.setEncoding('utf8');
+      let body = '';
+      res.on('data', data => body += data);
+      res.on('end', () => resolve(body));
+    }).on('error', reject);
+  });
+
+  const moveAssets = () => {
+    const assets = fs.readdirSync('build');
+    fs.mkdirSync(path.join('build', 'assets'));
+    assets.forEach(fileName => {
+      fs.renameSync(
+        path.join('build', fileName),
+        path.join('build', 'assets', fileName)
+      );
+    });
+  };
+
+  const toHtml = () => {
+    const promises = Object.keys(urls).map(url => fetch(url).then(html => {
+      fs.writeFile(path.join('build', urls[url]), html);
+    }));
+    return Promise.all(promises);
+  };
+
+  runSequence('clean', 'build', () => {
+    const proc = require('child_process').spawn('node', ['./src/server']);
+    proc.stderr.on('data', (data) => console.log(data.toString()));
+    proc.stdout.on('data', async data => {
+      data = data.toString();
+      if (data.indexOf('Server started') === -1) return;
+      try {
+        moveAssets();
+        await toHtml();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        proc.kill();
+        done();
+        console.log('App has been rendered to /build directory.');
+      }
+    });
+  });
+});
 
 // React Native
 

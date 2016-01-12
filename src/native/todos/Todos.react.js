@@ -46,7 +46,7 @@ export default class Todos extends Component {
       return (
         <View style={styles.centeredView}>
           <Image
-            source={require('../../../assets/img/EmptyState.png')}
+            source={require('./img/EmptyState.png')}
             style={styles.icon}
           />
           <Text style={styles.noTodosText}>

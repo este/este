@@ -56,7 +56,7 @@ export default class Header extends Component {
           style={styles.menuLink}
         >
           <Image
-            source={require('../../../assets/img/MenuIcon.png')}
+            source={require('./img/MenuIcon.png')}
             style={styles.menuIcon}
           />
         </TouchableOpacity>

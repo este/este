@@ -2,7 +2,6 @@ import compression from 'compression';
 import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
-// import favicon from 'serve-favicon';
 import render from './render';
 
 const app = express();
@@ -10,12 +9,12 @@ const app = express();
 app.use(esteMiddleware());
 app.use(compression());
 
-// app.use(favicon('assets/img/favicon.ico'));
+// Note we don't need serve-favicon middleware, it doesn't work with static
+// prerendered sites anyway.
 
-// Serve the static assets. We can cache them as they include hashes.
-// express.static is relative to the directory where you launch your node process
-app.use('/assets/img', express.static('assets/img', {maxAge: '200d'}));
-app.use('/_assets', express.static('build', {maxAge: '200d'}));
+// All assets must be handled via require syntax like this:
+// <img alt="50x50 placeholder" src={require('./50x50.png')} />
+app.use('/assets', express.static('build', {maxAge: '200d'}));
 
 app.use(device.capture());
 app.get('*', render);

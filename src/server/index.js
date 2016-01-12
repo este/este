@@ -1,9 +1,9 @@
 require('babel-register');
 
-const serverConfig = require('./config');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const webpackIsomorphicAssets = require('../../webpack/assets');
 const rootDir = require('path').resolve(__dirname, '..', '..');
+const serverConfig = require('./config');
+const webpackIsomorphicAssets = require('../../webpack/assets');
 
 if (!process.env.NODE_ENV)
   throw new Error(

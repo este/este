@@ -55,8 +55,14 @@ export default function makeConfig(isDevelopment) {
     },
     module: {
       loaders: [{
+        loader: 'url-loader?limit=10000',
+        test: /\.(gif|jpg|png|svg)$/
+      }, {
+        loader: 'url-loader?limit=1',
+        test: /favicon\.ico$/
+      }, {
         loader: 'url-loader?limit=100000',
-        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
+        test: /\.(eot|ttf|woff|woff2)$/
       }, {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -82,7 +88,7 @@ export default function makeConfig(isDevelopment) {
       path: constants.BUILD_DIR,
       filename: '[name]-[hash].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: '/_assets/'
+      publicPath: '/assets/'
     },
     plugins: (() => {
       const plugins = [
