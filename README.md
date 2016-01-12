@@ -7,14 +7,14 @@
 
 > Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
-> Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused libraries and design patterns instead.
+> Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
 ## Prerequisites
 
 - [node.js](http://nodejs.org) (Node 5 with npm 3 is highly recommended).
 - [gulp](http://gulpjs.com/) (`npm install -g gulp`)
 
-If you are using different node versions on your machine, use `nvm` to manage them.
+If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
 
 ## Techniques
 
@@ -39,7 +39,7 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - [formatjs](http://formatjs.io/) Internationalize your web apps on the client & server
 - [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
-- [chriso/validator.js](https://github.com/chriso/validator.js) For Este simple yet powerfull sync/async validation
+- [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's always better than native implementation
 - [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
