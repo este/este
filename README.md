@@ -35,12 +35,13 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
-- [formatjs](http://formatjs.io/)
-- [React Helmet](https://github.com/nfl/react-helmet)
+- [formatjs](http://formatjs.io/) Internationalize your web apps on the client & server
+- [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
-- [chriso/validator.js](https://github.com/chriso/validator.js) for simple yet powerfull sync/async validation
-- less, sass, stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
-- And much more.
+- [chriso/validator.js](https://github.com/chriso/validator.js) For Este simple yet powerfull sync/async validation
+- [bluebird](https://github.com/petkaantonov/bluebird) Because it's always better than native implementation
+- [mochajs](https://mochajs.org/) the fun, simple, flexible JavaScript test framework
+- LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 
 ## Installing
 
