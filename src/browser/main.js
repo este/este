@@ -1,3 +1,4 @@
+import Bluebird from 'bluebird';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router';
@@ -10,6 +11,9 @@ import {Provider} from 'react-redux';
 
 // TODO: Add app storage example.
 // import storage from 'redux-storage';
+
+// http://bluebirdjs.com/docs/why-bluebird.html
+window.Promise = Bluebird;
 
 const app = document.getElementById('app');
 const engine = createEngine('este-app');
