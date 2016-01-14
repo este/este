@@ -11,7 +11,7 @@
 
 ## Prerequisites
 
-- [node.js](http://nodejs.org) (Node 5 with npm 3 is highly recommended).
+- [node.js](http://nodejs.org) (Node 5 with npm 3 is required).
 - [gulp](http://gulpjs.com/) (`npm install -g gulp`)
 
 If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
