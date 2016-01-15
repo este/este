@@ -1,7 +1,7 @@
 /* global module:false, require:false */
 import appReducer from './app/reducer';
 import createLogger from 'redux-logger';
-import fetch from './fetch';
+import createFetch from './createFetch';
 import injectDependencies from './lib/injectDependencies';
 import promiseMiddleware from 'redux-promise-middleware';
 import shortid from 'shortid';
@@ -15,6 +15,11 @@ const BROWSER_DEVELOPMENT =
 // TODO: Add example for browser/native redux-storage.
 // import storage from 'redux-storage';
 export default function configureStore({deps, /* engine, */ initialState}) {
+  // Server address is passed in environment var WEB_ADDR
+  // defaulted to 'http://localhost:8000' for mobile device
+  // or '' for browser/server platforms (e.g. treat as relative URL to current page)
+  const webAddr = process.env.WEB_ADDR || (initialState.device.isMobile ? 'http://localhost:8000' : '');
+  const fetch = createFetch(webAddr);
 
   // Inject services for actions.
   const getUid = () => shortid.generate();

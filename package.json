@@ -7,6 +7,7 @@
   "private": true,
   "//": "Use gulp for dev etc. Note postinstall, it's for Heroku",
   "scripts": {
+    "install": "gulp remove-babelrc-files",
     "postinstall": "gulp build --production",
     "test": "gulp test"
   },
