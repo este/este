@@ -67,14 +67,15 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 ## Dev Tasks
 
 - `gulp` run web app in development mode
-- `gulp -p` run web app in production mode for local testing
-- `npm test` run all checks and tests
+- `gulp -p` run web app in production mode
 - `gulp mocha` run mocha unit tests
-- `gulp eslint` eslint app
+- `gulp mocha-watch` continuous test running for TDD
+- `gulp eslint` eslint
 
 ## Production Tasks
 
 - `gulp build -p` build app for production, for example for [Heroku](https://dashboard.heroku.com/)
+- `npm test` run all checks and tests
 - `node src/server` start app, remember to set NODE_ENV=production
 - `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
 
