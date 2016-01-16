@@ -28,17 +28,16 @@ export default class Login extends Component {
     e.preventDefault();
     const {actions, auth} = this.props;
     const result = await actions.login(auth.form.fields).payload.promise;
-    if (result.error)
+    if (result.error) {
       focusInvalidField(this, result.payload);
-    else
-      this.redirectAfterLogin();
+      return;
+    }
+    this.redirectAfterLogin();
   }
 
-  // TODO: Use redux-react-router.
   redirectAfterLogin() {
     const {location} = this.props;
     const {router} = this.context;
-
     if (location.state && location.state.nextPathname)
       router.replace(location.state.nextPathname);
     else

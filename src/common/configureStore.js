@@ -1,7 +1,6 @@
 import appReducer from './app/reducer';
-import createLogger from 'redux-logger';
 import createFetch from './createFetch';
-import injectDependencies from './lib/injectDependencies';
+import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import shortid from 'shortid';
 import validate from './validate';
@@ -19,20 +18,26 @@ export default function configureStore({deps, /* engine, */ initialState}) {
   // platforms (e.g. treat as relative URL to current page).
   const webAddr = process.env.WEB_ADDR ||
     (initialState.device.isMobile ? 'http://localhost:8000' : '');
-  const fetch = createFetch(webAddr);
 
-  // Inject services for actions.
-  const getUid = () => shortid.generate();
-  const now = () => Date.now();
-  const dependenciesMiddleware = injectDependencies(
-    {...deps, fetch, getUid, now},
-    {validate}
-  );
+  // Este dependency injection middleware. So simple that we don't need a lib.
+  // It's like mixed redux-thunk and redux-inject.
+  const injectMiddleware = deps => store => next => action => {
+    return next(typeof action === 'function'
+      ? action({...deps, store})
+      : action
+    );
+  };
 
   const middleware = [
-    dependenciesMiddleware,
-    promiseMiddleware({
-      promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
+    injectMiddleware({
+      ...deps,
+      fetch: createFetch(webAddr),
+      getUid: () => shortid.generate(),
+      now: () => Date.now(),
+      validate
+    }),
+    promiseMiddleware(
+      {promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
     })
   ];
 
