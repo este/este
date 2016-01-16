@@ -9,9 +9,12 @@ export default class Login extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
+  };
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -33,11 +36,13 @@ export default class Login extends Component {
 
   // TODO: Use redux-react-router.
   redirectAfterLogin() {
-    const {history, location} = this.props;
+    const {location} = this.props;
+    const {router} = this.context;
+
     if (location.state && location.state.nextPathname)
-      history.replaceState(null, location.state.nextPathname);
+      router.replace(location.state.nextPathname);
     else
-      history.replaceState(null, '/');
+      router.replace('/');
   }
 
   render() {

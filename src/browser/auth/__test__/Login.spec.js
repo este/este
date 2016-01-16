@@ -10,6 +10,22 @@ import {
   TestUtils
 } from '../../../../test/mochaTestHelper';
 
+function provideRouterContext(Component, router) {
+  return class extends Component {
+    static childContextTypes = {
+      router: React.PropTypes.object
+    };
+
+    getChildContext() {
+      return {router};
+    }
+
+    render() {
+      return <Component {...this.props} />;
+    }
+  };
+}
+
 describe('Login component', () => {
   const msg = {
     auth: {
@@ -29,16 +45,13 @@ describe('Login component', () => {
   let inputs;
   let loginAction;
   let loginComponent;
-  let replaceState;
+  let replace;
   let sandbox;
 
   function componentProps() {
     return {
       actions: {
         login: loginAction
-      },
-      history: {
-        replaceState
       },
       location: {},
       msg: msg,
@@ -53,9 +66,10 @@ describe('Login component', () => {
         promise: Promise.resolve({})
       }
     });
-    replaceState = sandbox.spy();
+    replace = sandbox.spy();
 
-    loginComponent = TestUtils.renderIntoDocument(<Login {...componentProps()} />);
+    const Component = provideRouterContext(Login, {replace});
+    loginComponent = TestUtils.renderIntoDocument(<Component {...componentProps()} />);
     inputs = TestUtils.scryRenderedDOMComponentsWithTag(loginComponent, 'input');
     button = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'button');
     form = TestUtils.findRenderedDOMComponentWithTag(loginComponent, 'form');
@@ -81,7 +95,7 @@ describe('Login component', () => {
 
     await loginAction();
 
-    expect(replaceState.calledOnce).to.be.true;
-    expect(replaceState.calledWithExactly(null, '/')).to.be.true;
+    expect(replace.calledOnce).to.be.true;
+    expect(replace.calledWithExactly('/')).to.be.true;
   });
 });
