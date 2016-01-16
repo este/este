@@ -25,6 +25,7 @@ If you are using different node versions on your machine, use [nvm](https://gith
   - prerender for static hosting
 - Functional works: immutability, hot reloading, time travel
 - Test driven development ready
+- Well tuned dev stack
 
 ## Libraries
 
@@ -88,10 +89,8 @@ So you decided to give a chance to this web stack, but where is documentation? C
 
 ## Links
 
-- [wiki: Recommended React Components](https://github.com/steida/este/wiki/Recommended-React-Components)
-- [wiki: Recommended Sublime Text 3 Packages](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings)
+- [wiki](https://github.com/este/este/wiki)
 - [twitter.com/estejs](https://twitter.com/estejs)
-- [github.com/enaqx/awesome-react](https://github.com/enaqx/awesome-react)
 
 ## Windows
 
