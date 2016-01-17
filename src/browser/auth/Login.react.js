@@ -37,45 +37,42 @@ export default class Login extends Component {
 
   redirectAfterLogin() {
     const {location} = this.props;
-    const {router} = this.context;
-    if (location.state && location.state.nextPathname)
-      router.replace(location.state.nextPathname);
-    else
-      router.replace('/');
+    const nextPathname = location.state && location.state.nextPathname || '/';
+    this.context.router.replace(nextPathname);
   }
 
   render() {
-    const {actions, auth: {form}, msg: {auth: {form: msg}}} = this.props;
+    const {actions, auth, msg} = this.props;
 
     return (
       <div className="login">
         <Helmet title="Login" />
         <form onSubmit={this.onFormSubmit}>
-          <fieldset disabled={form.disabled}>
-            <legend>{msg.legend}</legend>
+          <fieldset disabled={auth.form.disabled}>
+            <legend>{msg.auth.form.legend}</legend>
             <input
               autoFocus
               name="email"
               onChange={actions.onAuthFormFieldChange}
-              placeholder={msg.placeholder.email}
-              value={form.fields.email}
+              placeholder={msg.auth.form.placeholder.email}
+              value={auth.form.fields.email}
             />
             <br />
             <input
               name="password"
               onChange={actions.onAuthFormFieldChange}
-              placeholder={msg.placeholder.password}
+              placeholder={msg.auth.form.placeholder.password}
               type="password"
-              value={form.fields.password}
+              value={auth.form.fields.password}
             />
             <br />
             <button
-              children={msg.button.login}
+              children={msg.auth.form.button.login}
               type="submit"
             />
-            <span className="hint">{msg.hint}</span>
-            {form.error &&
-              <p className="error-message">{form.error.message}</p>
+            <span className="hint">{msg.auth.form.hint}</span>
+            {auth.form.error &&
+              <p className="error-message">{auth.form.error.message}</p>
             }
           </fieldset>
         </form>
