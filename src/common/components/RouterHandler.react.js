@@ -20,10 +20,13 @@ export default class RouterHandler extends Component {
     if (!children) return null;
 
     // That makes nested routes working.
-    const propsWithoutChildren = {...this.props};
-    delete propsWithoutChildren.children;
+    const propsForChildren = {...this.props};
+    delete propsForChildren.children;
 
-    return React.cloneElement(children, propsWithoutChildren);
+    // Delete route to prevent overwrite of correct value.
+    delete propsForChildren.route;
+
+    return React.cloneElement(children, propsForChildren);
   }
 
 }
