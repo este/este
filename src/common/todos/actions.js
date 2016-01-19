@@ -67,7 +67,7 @@ export function fetchUserTodos(/* {location, params} */) {
   return ({fetch}) => ({
     type: 'FETCH_USER_TODOS',
     payload: {
-      promise: fetch('api/v1/todos/user')
+      promise: fetch('/api/v1/todos/user')
         .then(response => response.json())
     }
   });
