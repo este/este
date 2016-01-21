@@ -14,7 +14,7 @@ export default class Todos extends Component {
     const {actions, map, msg} = this.props;
 
     if (!map.size)
-      return <p>{msg.emptyList}</p>;
+      return <p>{msg.empty}</p>;
 
     const list = map.toList().sortBy(item => item.createdAt);
 
