@@ -1,6 +1,6 @@
 import config from '../config';
 
-export default function errorHandler(err, req, res) {
+export default function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
   const errorDetails = err.stack || err;
 
   console.error('Yay', errorDetails);
