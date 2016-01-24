@@ -19,11 +19,11 @@ If you are using different node versions on your machine, use [nvm](https://gith
 ## Techniques
 
 - Truly universal architecture
-  - code shared across platforms
+  - code shared across platforms (browser, server, native mobile)
   - server side rendering
-  - isomorphic data fetching
+  - universal data fetching via one higher order component
   - prerender for static hosting
-- Functional works: immutability, hot reloading, time travel
+- Functional works: immutability, hot reload, time travel
 - Test driven development ready
 - Well tuned dev stack
 
@@ -37,7 +37,7 @@ If you are using different node versions on your machine, use [nvm](https://gith
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
-- [formatjs](http://formatjs.io/) Internationalize your web apps on the client & server.
+- [formatjs](http://formatjs.io/) Universal internationalization.
 - [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React.
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
