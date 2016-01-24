@@ -1,5 +1,8 @@
-import Component from '../components/Component.react';
+import Component from 'react-pure-render/component';
 import React from 'react-native';
+
+// yahoo/react-intl still does not support React Native, but we can use format.
+// https://github.com/yahoo/react-intl/issues/119
 import {format} from '../../common/intl/format';
 
 const {

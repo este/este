@@ -62,8 +62,7 @@ export function deleteTodo(id) {
   };
 }
 
-export function fetchUserTodos(/* {location, params} */) {
-  // We can use location and params to create custom endpoint.
+export function fetchUserTodos() {
   return ({fetch}) => ({
     type: 'FETCH_USER_TODOS',
     payload: {

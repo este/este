@@ -1,4 +1,4 @@
-import Component from '../components/Component.react';
+import Component from 'react-pure-render/component';
 import React from 'react-native';
 
 const {
@@ -23,6 +23,20 @@ const styles = StyleSheet.create({
   }
 });
 
+const Button = (props) =>
+  <TouchableOpacity
+    activeOpacity={.9}
+    onPress={props.onPress}
+    style={styles.listButton}
+  >
+    <Text style={styles.listButtonText}>{props.children}</Text>
+  </TouchableOpacity>;
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onPress: PropTypes.func.isRequired
+};
+
 export default class TodoButtons extends Component {
 
   static propTypes = {
@@ -33,26 +47,14 @@ export default class TodoButtons extends Component {
 
   render() {
     const {actions, hasCompletedTodos, msg} = this.props;
-    // TODO: Use React 0.14 component.
-    // https://github.com/facebook/react-native/issues/3369#issuecomment-147543147
-    const Button = (action, text) =>
-      <TouchableOpacity
-        activeOpacity={.9}
-        onPress={action}
-        style={styles.listButton}
-      >
-        <Text style={styles.listButtonText}>{text}</Text>
-      </TouchableOpacity>;
 
     return (
       <View style={styles.buttons}>
         {hasCompletedTodos
-          ? Button(actions.clearAllCompletedTodos, msg.clearCompleted)
-          : Button(actions.clearAllTodos, msg.clearAll)
+          ? <Button onPress={actions.clearAllCompletedTodos}>{msg.clearCompleted}</Button>
+          : <Button onPress={actions.clearAllTodos}>{msg.clearAll}</Button>
         }
-        {
-          Button(actions.addHundredTodos, msg.add100)
-        }
+        <Button onPress={actions.addHundredTodos}>{msg.add100}</Button>
       </View>
     );
   }

@@ -44,10 +44,10 @@ export default {
     // // TODO: Android text.
     // androidInfoText: ``,
     infoHtml: '<a href="https://github.com/este/este">Este.js</a> dev stack.',
-    iosInfoText: `Este.js dev stack.
-      Open left menu and check todos!
-      Press CMD+R to reload.
-      Press CMD+D for debug menu.
+    iosInfoText: `
+      Este.js dev stack
+      Press CMD+R to reload
+      Press CMD+D for debug menu
     `,
     title: 'Este.js',
     toCheck: {

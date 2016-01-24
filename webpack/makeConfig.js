@@ -94,9 +94,9 @@ export default function makeConfig(isDevelopment) {
       const plugins = [
         new webpack.DefinePlugin({
           'process.env': {
+            IS_BROWSER: true, // Because webpack is used only for browser code.
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-            WEB_ADDR: JSON.stringify(process.env.WEB_ADDR || ''),
-            IS_BROWSER: true
+            WEB_ADDRESS: JSON.stringify(process.env.WEB_ADDRESS || '')
           }
         })
       ];

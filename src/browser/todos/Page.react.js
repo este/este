@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import NewTodo from './NewTodo.react';
 import React, {PropTypes} from 'react';
 import Todos from './Todos.react';
-import fetch from '../components/fetch';
+import fetch from '../../common/components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
 
 class Page extends Component {
@@ -30,6 +30,8 @@ class Page extends Component {
 
 }
 
-// This higher order component fetches todos both in browser and on server side.
-// It's true isomorphic data fetching and rendering.
-export default fetch(fetchUserTodos)(Page);
+// Truly universal (not only isomorphic) data fetching.
+// One higher order component for browser, server, and mobile.
+Page = fetch(fetchUserTodos)(Page);
+
+export default Page;

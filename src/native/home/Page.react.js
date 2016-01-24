@@ -1,4 +1,4 @@
-import Component from '../components/Component.react';
+import Component from 'react-pure-render/component';
 import React, {PropTypes, Text, View} from 'react-native';
 import appStyles from '../app/styles';
 
