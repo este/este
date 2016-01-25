@@ -7,12 +7,10 @@ const InitialState = Record({
 });
 const initialState = new InitialState;
 
-const revive = ({viewer}) => {
-  return initialState.merge({
-    // Handle user authenticated on the server.
-    viewer: viewer ? new User(viewer) : null
-  });
-};
+const revive = ({viewer}) => initialState.merge({
+  // Handle user authenticated on the server.
+  viewer: viewer ? new User(viewer) : null
+});
 
 export default function usersReducer(state = initialState, action) {
   if (!(state instanceof InitialState)) return revive(state);

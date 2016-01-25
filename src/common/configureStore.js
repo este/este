@@ -18,12 +18,11 @@ export default function configureStore({deps, initialState}) {
 
   // Este dependency injection middleware. So simple that we don't need a lib.
   // It's like mixed redux-thunk and redux-inject.
-  const injectMiddleware = deps => store => next => action => {
-    return next(typeof action === 'function'
+  const injectMiddleware = deps => store => next => action =>
+    next(typeof action === 'function'
       ? action({...deps, store})
       : action
     );
-  };
 
   const middleware = [
     injectMiddleware({
