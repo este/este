@@ -96,7 +96,7 @@ export default function makeConfig(isDevelopment) {
           'process.env': {
             IS_BROWSER: true, // Because webpack is used only for browser code.
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-            WEB_ADDRESS: JSON.stringify(process.env.WEB_ADDRESS || '')
+            SERVER_URL: JSON.stringify(process.env.SERVER_URL || '')
           }
         })
       ];

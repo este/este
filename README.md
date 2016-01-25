@@ -77,7 +77,7 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 
 - `gulp build -p` build app for production, for example for [Heroku](https://dashboard.heroku.com/)
 - `npm test` run all checks and tests
-- `node src/server` start app, remember to set NODE_ENV=production
+- `node src/server` start app, remember to set NODE_ENV and SERVER_URL
 - `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
 
 

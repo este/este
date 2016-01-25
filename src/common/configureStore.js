@@ -10,8 +10,8 @@ const BROWSER_DEVELOPMENT =
   process.env.NODE_ENV !== 'production' &&
   process.env.IS_BROWSER;
 
-// Remember to set deploy WEB_ADDRESS for server and react-native.
-const WEB_ADDRESS = process.env.WEB_ADDRESS ||
+// Remember to set SERVER_URL for deployment.
+const SERVER_URL = process.env.SERVER_URL ||
   (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
 
 export default function configureStore({deps, initialState}) {
@@ -28,7 +28,7 @@ export default function configureStore({deps, initialState}) {
   const middleware = [
     injectMiddleware({
       ...deps,
-      fetch: createFetch(WEB_ADDRESS),
+      fetch: createFetch(SERVER_URL),
       getUid: () => shortid.generate(),
       now: () => Date.now(),
       validate
