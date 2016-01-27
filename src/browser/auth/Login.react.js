@@ -2,13 +2,15 @@ import './Login.styl';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
+import fields from '../../common/components/fields';
 import focusInvalidField from '../lib/focusInvalidField';
 
-export default class Login extends Component {
+class Login extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   };
@@ -26,8 +28,8 @@ export default class Login extends Component {
 
   async onFormSubmit(e) {
     e.preventDefault();
-    const {actions, auth} = this.props;
-    const result = await actions.login(auth.form.fields).payload.promise;
+    const {actions, fields} = this.props;
+    const result = await actions.login(fields.toValues()).payload.promise;
     if (result.error) {
       focusInvalidField(this, result.payload);
       return;
@@ -42,37 +44,31 @@ export default class Login extends Component {
   }
 
   render() {
-    const {actions, auth, msg} = this.props;
+    const {fields, auth, msg} = this.props;
+    const {email, password} = fields;
 
     return (
       <div className="login">
         <Helmet title="Login" />
         <form onSubmit={this.onFormSubmit}>
-          <fieldset disabled={auth.form.disabled}>
+          <fieldset disabled={auth.formDisabled}>
             <legend>{msg.auth.form.legend}</legend>
             <input
               autoFocus
-              name="email"
-              onChange={actions.onAuthFormFieldChange}
               placeholder={msg.auth.form.placeholder.email}
-              value={auth.form.fields.email}
+              {...email}
             />
             <br />
             <input
-              name="password"
-              onChange={actions.onAuthFormFieldChange}
-              placeholder={msg.auth.form.placeholder.password}
               type="password"
-              value={auth.form.fields.password}
+              placeholder={msg.auth.form.placeholder.password}
+              {...password}
             />
             <br />
-            <button
-              children={msg.auth.form.button.login}
-              type="submit"
-            />
+            <button type="submit">{msg.auth.form.button.login}</button>
             <span className="hint">{msg.auth.form.hint}</span>
-            {auth.form.error &&
-              <p className="error-message">{auth.form.error.message}</p>
+            {auth.formError &&
+              <p className="error-message">{auth.formError.message}</p>
             }
           </fieldset>
         </form>
@@ -81,3 +77,10 @@ export default class Login extends Component {
   }
 
 }
+
+Login = fields(Login, {
+  path: 'auth', // Path can be dynamic. props => ['todos', props.todo.id]
+  fields: ['email', 'password'] // TODO: Fields default values by props.
+});
+
+export default Login;
