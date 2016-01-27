@@ -55,13 +55,15 @@ class Login extends Component {
             <legend>{msg.auth.form.legend}</legend>
             <input
               autoFocus
+              maxLength="100" // Use maxLength, because react-native needs it.
               placeholder={msg.auth.form.placeholder.email}
               {...email}
             />
             <br />
             <input
-              type="password"
+              maxLength="300"
               placeholder={msg.auth.form.placeholder.password}
+              type="password"
               {...password}
             />
             <br />
