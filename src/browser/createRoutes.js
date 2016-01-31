@@ -14,10 +14,9 @@ export default function createRoutes(getState) {
   const requireAuth = (nextState, replace) => {
     const loggedInUser = getState().users.viewer;
     if (!loggedInUser) {
-      replace({
-        pathname: '/login',
-        state: {nextPathname: nextState.location.pathname}
-      });
+      replace(
+        `/login?${nextState.location.pathname}${nextState.location.search}`
+      );
     }
   };
 

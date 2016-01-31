@@ -15,10 +15,6 @@ class Login extends Component {
     msg: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  };
-
   constructor(props) {
     super(props);
     // Read why we bind event handlers explicitly.
@@ -39,8 +35,12 @@ class Login extends Component {
 
   redirectAfterLogin() {
     const {location} = this.props;
-    const nextPathname = location.state && location.state.nextPathname || '/';
-    this.context.router.replace(nextPathname);
+    const {actions} = this.props;
+
+    if (location.search && location.search.length > 1)
+      actions.replace(location.search.replace(/^\?/, ''));
+    else
+      actions.replace('/');
   }
 
   render() {
