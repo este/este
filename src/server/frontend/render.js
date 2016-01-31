@@ -89,7 +89,7 @@ export default function render(req, res, next) {
   match({routes, location}, async (error, redirectLocation, renderProps) => {
 
     if (redirectLocation) {
-      res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+      res.redirect(303, redirectLocation.pathname + redirectLocation.search);
       return;
     }
 
