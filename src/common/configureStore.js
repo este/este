@@ -5,6 +5,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 import shortid from 'shortid';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
+import {syncHistory} from 'react-router-redux';
 
 const BROWSER_DEVELOPMENT =
   process.env.NODE_ENV !== 'production' &&
@@ -14,7 +15,7 @@ const BROWSER_DEVELOPMENT =
 const SERVER_URL = process.env.SERVER_URL ||
   (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
 
-export default function configureStore({deps, initialState}) {
+export default function configureStore({deps, initialState, history}) {
 
   // Este dependency injection middleware. So simple that we don't need a lib.
   // It's like mixed redux-thunk and redux-inject.
@@ -37,6 +38,12 @@ export default function configureStore({deps, initialState}) {
     })
   ];
 
+  let reduxRouterMiddleware;
+  if (history) {
+    reduxRouterMiddleware = syncHistory(history);
+    middleware.push(reduxRouterMiddleware);
+  }
+
   if (BROWSER_DEVELOPMENT) {
     const logger = createLogger({
       collapsed: true,
@@ -51,6 +58,10 @@ export default function configureStore({deps, initialState}) {
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
   const store = createReduxStore(createStore)(appReducer, initialState);
+
+  if (reduxRouterMiddleware) {
+    reduxRouterMiddleware.listenForReplays(store);
+  }
 
   // Enable hot reload where available.
   if (module.hot) {
