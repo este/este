@@ -8,6 +8,10 @@ import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {browserHistory} from 'react-router';
 
+if (process.env.NODE_ENV === 'development') {
+  require('./devTools.js');
+}
+
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
 
