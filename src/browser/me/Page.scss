@@ -1,0 +1,15 @@
+.me-page {
+  a.active {
+    text-decoration: underline !important;
+    font-weight: normal !important;
+  }
+
+  ul {
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+  }
+}

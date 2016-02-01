@@ -1,4 +1,4 @@
-import './Page.styl';
+import './Page.scss';
 import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
