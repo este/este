@@ -13,7 +13,7 @@ window.Promise = Bluebird;
 
 const app = document.getElementById('app');
 const initialState = window.__INITIAL_STATE__;
-const store = configureStore({initialState});
+const store = configureStore({initialState, history: browserHistory});
 const routes = createRoutes(store.getState);
 
 ReactDOM.render(
