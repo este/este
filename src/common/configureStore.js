@@ -24,10 +24,14 @@ export default function configureStore({deps, initialState}) {
       : action
     );
 
+  const serverUrl = process.env.SERVER_URL ||
+    // Browser is ok with relative url. Server and React Native need absolute.
+    (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
+
   const middleware = [
     injectMiddleware({
       ...deps,
-      fetch: createFetch(SERVER_URL),
+      fetch: createFetch(serverUrl),
       getUid: () => shortid.generate(),
       now: () => Date.now(),
       validate
@@ -37,7 +41,11 @@ export default function configureStore({deps, initialState}) {
     })
   ];
 
-  if (BROWSER_DEVELOPMENT) {
+  // Enable logger only for browser and React Native development.
+  const enableLogger = process.env.NODE_ENV !== 'production' &&
+    (process.env.IS_BROWSER || process.env.IS_REACT_NATIVE);
+
+  if (enableLogger) {
     const logger = createLogger({
       collapsed: true,
       // Convert immutable to JSON.
@@ -47,7 +55,6 @@ export default function configureStore({deps, initialState}) {
     middleware.push(logger);
   }
 
-  const createReduxStore = (BROWSER_DEVELOPMENT && window.devToolsExtension)
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
   const store = createReduxStore(createStore)(appReducer, initialState);
