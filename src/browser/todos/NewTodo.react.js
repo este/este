@@ -13,13 +13,7 @@ class NewTodo extends Component {
 
   constructor(props) {
     super(props);
-    this.onInputChange = this.onInputChange.bind(this);
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
-  }
-
-  onInputChange(e) {
-    const {actions} = this.props;
-    actions.onNewTodoChange(e.target.name, e.target.value);
   }
 
   onInputKeyDown(e) {
