@@ -1,4 +1,4 @@
-import './NewTodo.styl';
+import './NewTodo.scss';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import fields from '../../common/components/fields';

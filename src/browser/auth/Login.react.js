@@ -1,4 +1,4 @@
-import './Login.styl';
+import './Login.scss';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';

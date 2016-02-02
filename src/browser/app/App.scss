@@ -1,0 +1,104 @@
+// Remember to use rems and ems. http://css-tricks.com/rems-ems.
+
+@import '~normalize.css/normalize.css';
+
+// http://phonegap-tips.com/articles/essential-phonegap-css-webkit-tap-highlight-color.html
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+// Goodness.
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color: #333;
+  font-family: 'Segoe UI', 'Lucida Grande', 'Ubuntu', 'sans-serif';
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#app {
+  margin: 1em 2em;
+
+  > header {
+    h1 {
+      margin-bottom: 0;
+    }
+
+    ul {
+      li {
+        font-size: 1em;
+      }
+    }
+  }
+
+  > footer {
+    font-size: .75em;
+    font-style: italic;
+  }
+
+  :focus {
+    outline-style: none;
+  }
+
+  a {
+    color: #346392;
+    text-decoration: none;
+
+    &:hover:not(.active) {
+      text-decoration: underline;
+    }
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  button {
+    background-color: #6496c8;
+    border: 0;
+    border-radius: 1em;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.8;
+    margin: 0 10px 0 0;
+    padding: 0 1em;
+    text-shadow: -1px 1px #417cb8;
+
+    &[disabled] {
+      opacity: .5;
+    }
+
+    &:hover:not(&[disabled]) {
+      background-color: #346392;
+      text-shadow: -1px 1px #27496d;
+    }
+
+    &:active {
+      background-color: #27496d;
+      text-shadow: -1px 1px #193047;
+    }
+  }
+
+  button,
+  input,
+  textarea {
+    &:disabled {
+      opacity: .5;
+    }
+  }
+
+  p,
+  li {
+    max-width: 42em;
+  }
+}
