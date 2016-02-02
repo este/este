@@ -39,9 +39,13 @@ export default function configureStore({deps, initialState}) {
 
   if (BROWSER_DEVELOPMENT) {
     const logger = createLogger({
-      collapsed: true,
-      // Convert immutable to JSON.
-      stateTransformer: state => JSON.parse(JSON.stringify(state))
+      // Immutable introspection:
+      // For Chrome 47+ there is custom formatter in browser/devTool.js.
+      // Check Enable Custom Formatters option in Developer Tools/
+      // Settings/General/Console.
+      // For Firefox there are extensions too.
+      // stateTransformer: state => JSON.parse(JSON.stringify(state)),
+      collapsed: true
     });
     // Logger must be the last middleware in chain.
     middleware.push(logger);
