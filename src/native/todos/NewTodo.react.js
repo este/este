@@ -1,5 +1,6 @@
 import Component from 'react-pure-render/component';
 import React from 'react-native';
+import fields from '../../common/components/fields';
 
 const {
   PropTypes, StyleSheet, TextInput, View
@@ -23,46 +24,49 @@ const styles = StyleSheet.create({
 });
 
 
-export default class NewTodo extends Component {
+class NewTodo extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired,
-    todo: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    msg: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.onTextInputChangeText = this.onTextInputChangeText.bind(this);
     this.onTextInputEndEditing = this.onTextInputEndEditing.bind(this);
   }
 
-  onTextInputChangeText(text) {
-    const {actions} = this.props;
-    actions.onNewTodoChange('title', text);
-  }
-
   onTextInputEndEditing() {
-    const {actions, todo} = this.props;
-    actions.addTodo(todo);
+    const {actions, fields} = this.props;
+    if (!fields.title.value.trim()) return;
+    actions.addTodo(fields.title.value);
+    fields.$reset();
   }
 
   render() {
-    const {msg, todo} = this.props;
+    const {fields, msg} = this.props;
+    const {title} = fields;
 
     return (
       <View style={styles.container}>
         <TextInput
-          // TODO: Use redux-form.
-          onChangeText={this.onTextInputChangeText}
+          maxLength={100} // React Native needs explicit maxLength.
           onEndEditing={this.onTextInputEndEditing}
           placeholder={msg.newTodoPlaceholder}
           placeholderTextColor={'#cce9f2'}
           style={styles.input}
-          value={todo.title}
+          {...title}
         />
       </View>
     );
   }
 
 }
+
+NewTodo = fields(NewTodo, {
+  path: 'newTodo',
+  fields: ['title']
+});
+
+export default NewTodo;

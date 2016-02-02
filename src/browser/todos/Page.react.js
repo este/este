@@ -11,19 +11,21 @@ class Page extends Component {
 
   static propTypes = {
     actions: PropTypes.object,
+    fields: PropTypes.object,
     msg: PropTypes.object,
     todos: PropTypes.object
   };
 
   render() {
-    const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;
+    const {actions, fields, msg: {todos: msg}, todos} = this.props;
 
     return (
       <div className="todos-page">
         <Helmet title={msg.title} />
-        <NewTodo {...{actions, msg, newTodo}} />
-        <Todos {...{actions, map, msg}} />
-        <Buttons clearAllEnabled={map.size > 0} {...{actions, msg}} />
+        {/* Model is passed only to enforce pure component rerender. */}
+        <NewTodo {...{actions, msg}} model={fields.getIn(['newTodo'])} />
+        <Todos {...{actions, msg}} map={todos.map} />
+        <Buttons {...{actions, msg}} clearAllEnabled={todos.map.size > 0} />
       </div>
     );
   }

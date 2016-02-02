@@ -11,6 +11,8 @@ import '../../node_modules/intl/locale-data/jsonp/en.js';
 
 export default function index() {
 
+  process.env.IS_REACT_NATIVE = true;
+
   const initialState = {
     device: {
       isMobile: true

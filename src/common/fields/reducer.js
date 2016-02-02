@@ -6,6 +6,11 @@ export default function todosReducer(state = Map(), action) {
 
   switch (action.type) {
 
+    case actions.DELETE_FIELD: {
+      const {path} = action.payload;
+      return state.deleteIn(path);
+    }
+
     case actions.SET_FIELD: {
       const {path, value} = action.payload;
       return state.setIn(path, value);

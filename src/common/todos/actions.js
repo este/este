@@ -9,10 +9,7 @@ export const DELETE_TODO = 'DELETE_TODO';
 export const FETCH_USER_TODOS_ERROR = 'FETCH_USER_TODOS_ERROR';
 export const FETCH_USER_TODOS_START = 'FETCH_USER_TODOS_START';
 export const FETCH_USER_TODOS_SUCCESS = 'FETCH_USER_TODOS_SUCCESS';
-export const ON_NEW_TODO_CHANGE = 'ON_NEW_TODO_CHANGE';
 export const TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
-
-const MAX_TODO_TITLE_LENGTH = 42;
 
 export function addHundredTodos() {
   // Note how dependency injection ensures pure action.
@@ -29,16 +26,16 @@ export function addHundredTodos() {
   };
 }
 
-export function addTodo(todo) {
+export function addTodo(title) {
   return ({getUid, now}) => {
-    const newTodo = todo.merge({
+    const todo = new Todo({
       createdAt: now(),
       id: getUid(),
-      title: todo.title.trim()
+      title: title.trim()
     });
     return {
       type: ADD_TODO,
-      payload: {newTodo}
+      payload: {todo}
     };
   };
 }
@@ -70,17 +67,6 @@ export function fetchUserTodos() {
         .then(response => response.json())
     }
   });
-}
-
-export function onNewTodoChange(name, value) {
-  switch (name) {
-    case 'title':
-      value = value.slice(0, MAX_TODO_TITLE_LENGTH); break;
-  }
-  return {
-    type: ON_NEW_TODO_CHANGE,
-    payload: {name, value}
-  };
 }
 
 export function toggleTodoCompleted(todo) {

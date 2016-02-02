@@ -11,18 +11,20 @@ class Page extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     todos: PropTypes.object.isRequired
   };
 
   render() {
-    const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;
+    const {actions, fields, msg: {todos: msg}, todos} = this.props;
 
     return (
       <View style={[appStyles.container]}>
-        <Header map={map} msg={msg} />
-        <NewTodo actions={actions} msg={msg} todo={newTodo} />
-        <Todos actions={actions} map={map} msg={msg} />
+        <Header map={todos.map} msg={msg} />
+        {/* Model is passed only to enforce pure component rerender. */}
+        <NewTodo actions={actions} msg={msg} model={fields.getIn(['newTodo'])} />
+        <Todos actions={actions} map={todos.map} msg={msg} />
       </View>
     );
   }

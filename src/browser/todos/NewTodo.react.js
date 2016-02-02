@@ -1,13 +1,14 @@
 import './NewTodo.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+import fields from '../../common/components/fields';
 
-export default class NewTodo extends Component {
+class NewTodo extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired,
-    newTodo: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    msg: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -22,25 +23,34 @@ export default class NewTodo extends Component {
   }
 
   onInputKeyDown(e) {
-    const {actions, newTodo} = this.props;
-    if (e.key === 'Enter' && newTodo.title.trim())
-      actions.addTodo(newTodo);
+    if (e.key !== 'Enter') return;
+    const {actions, fields} = this.props;
+    if (!fields.title.value.trim()) return;
+    actions.addTodo(fields.title.value);
+    fields.$reset();
   }
 
   render() {
-    const {msg, newTodo} = this.props;
+    const {fields, msg} = this.props;
+    const {title} = fields;
 
     return (
       <input
         autoFocus
         className="new-todo"
-        name="title"
-        onChange={this.onInputChange}
+        maxLength={100}
         onKeyDown={this.onInputKeyDown}
         placeholder={msg.newTodoPlaceholder}
-        value={newTodo.title}
+        {...title}
       />
     );
   }
 
 }
+
+NewTodo = fields(NewTodo, {
+  path: 'newTodo',
+  fields: ['title']
+});
+
+export default NewTodo;

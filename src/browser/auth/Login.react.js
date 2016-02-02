@@ -29,7 +29,7 @@ class Login extends Component {
   async onFormSubmit(e) {
     e.preventDefault();
     const {actions, fields} = this.props;
-    const result = await actions.login(fields.toValues()).payload.promise;
+    const result = await actions.login(fields.$values()).payload.promise;
     if (result.error) {
       focusInvalidField(this, result.payload);
       return;
@@ -55,7 +55,7 @@ class Login extends Component {
             <legend>{msg.auth.form.legend}</legend>
             <input
               autoFocus
-              maxLength="100" // Use maxLength, because react-native needs it.
+              maxLength="100"
               placeholder={msg.auth.form.placeholder.email}
               {...email}
             />
