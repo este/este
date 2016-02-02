@@ -6,14 +6,6 @@ import shortid from 'shortid';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
 
-const BROWSER_DEVELOPMENT =
-  process.env.NODE_ENV !== 'production' &&
-  process.env.IS_BROWSER;
-
-// Remember to set SERVER_URL for deployment.
-const SERVER_URL = process.env.SERVER_URL ||
-  (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
-
 export default function configureStore({deps, initialState}) {
 
   // Este dependency injection middleware. So simple that we don't need a lib.
@@ -24,6 +16,7 @@ export default function configureStore({deps, initialState}) {
       : action
     );
 
+  // Remember to set SERVER_URL for deploy.
   const serverUrl = process.env.SERVER_URL ||
     // Browser is ok with relative url. Server and React Native need absolute.
     (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
@@ -55,6 +48,12 @@ export default function configureStore({deps, initialState}) {
     middleware.push(logger);
   }
 
+  const enableDevToolsExtension =
+    process.env.NODE_ENV !== 'production' &&
+    process.env.IS_BROWSER &&
+    window.devToolsExtension;
+
+  const createReduxStore = enableDevToolsExtension
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
   const store = createReduxStore(createStore)(appReducer, initialState);
