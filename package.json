@@ -7,6 +7,7 @@
   "private": true,
   "//": "Use gulp for dev. It's cross platform.",
   "scripts": {
+    "build": "gulp build",
     "install": "gulp fix-react-native",
     "postinstall": "gulp build --production",
     "test": "gulp test"

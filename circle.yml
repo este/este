@@ -1,3 +1,16 @@
 machine:
-  node:
-    version: 5.5.0
+  services:
+    - docker
+
+# Includes caching: https://circleci.com/docs/docker#caching-docker-layers
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+    - docker build --rm=false -t este/este:latest . # --rm=false https://discuss.circleci.com/t/docker-error-removing-intermediate-container/70/2
+    - mkdir -p ~/docker; docker save este/este:latest > ~/docker/image.tar
+
+test:
+  override:
+    - docker run este/este:latest test
