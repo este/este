@@ -12,7 +12,6 @@ import {connect} from 'react-redux';
 class App extends Component {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired
