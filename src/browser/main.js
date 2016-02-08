@@ -2,11 +2,11 @@
 import Bluebird from 'bluebird';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from 'react-router';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
+import {Router} from 'react-router';
 import {browserHistory} from 'react-router';
 
 // http://bluebirdjs.com/docs/why-bluebird.html
