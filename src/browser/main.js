@@ -1,3 +1,4 @@
+/* eslint-disable import/default */
 import Bluebird from 'bluebird';
 import React from 'react';
 import ReactDOM from 'react-dom';
