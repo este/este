@@ -2,15 +2,16 @@ import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
-export default class NotFound extends Component {
+class NotFound extends Component {
 
   static propTypes = {
     msg: PropTypes.object
   };
 
   render() {
-    const {msg: {notFound: msg}} = this.props;
+    const {msg} = this.props;
 
     return (
       <div className="notfound-page">
@@ -23,3 +24,7 @@ export default class NotFound extends Component {
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.notFound
+}))(NotFound);

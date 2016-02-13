@@ -1,29 +1,37 @@
 import './Buttons.scss';
+import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-export default class Buttons extends Component {
+class Buttons extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    clearAllEnabled: PropTypes.bool.isRequired,
-    msg: PropTypes.object.isRequired
+    addHundredTodos: PropTypes.func.isRequired,
+    clearAllTodos: PropTypes.func.isRequired,
+    msg: PropTypes.object.isRequired,
+    todos: PropTypes.object.isRequired
   };
 
   render() {
-    const {actions, clearAllEnabled, msg} = this.props;
+    const {addHundredTodos, clearAllTodos, msg, todos} = this.props;
 
     return (
       <div className="buttons">
         <button
-          disabled={!clearAllEnabled}
-          onClick={actions.clearAllTodos}
+          disabled={todos.size === 0}
+          onClick={clearAllTodos}
         >{msg.clearAll}</button>
         <button
-          onClick={actions.addHundredTodos}
+          onClick={addHundredTodos}
         >{msg.add100}</button>
       </div>
     );
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.todos,
+  todos: state.todos.map
+}), todosActions)(Buttons);

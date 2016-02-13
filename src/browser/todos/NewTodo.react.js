@@ -1,12 +1,14 @@
 import './NewTodo.scss';
+import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import fields from '../../common/components/fields';
+import {connect} from 'react-redux';
 
 class NewTodo extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
+    addTodo: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   };
@@ -18,15 +20,14 @@ class NewTodo extends Component {
 
   onInputKeyDown(e) {
     if (e.key !== 'Enter') return;
-    const {actions, fields} = this.props;
+    const {addTodo, fields} = this.props;
     if (!fields.title.value.trim()) return;
-    actions.addTodo(fields.title.value);
+    addTodo(fields.title.value);
     fields.$reset();
   }
 
   render() {
     const {fields, msg} = this.props;
-    const {title} = fields;
 
     return (
       <input
@@ -35,7 +36,7 @@ class NewTodo extends Component {
         maxLength={100}
         onKeyDown={this.onInputKeyDown}
         placeholder={msg.newTodoPlaceholder}
-        {...title}
+        {...fields.title}
       />
     );
   }
@@ -47,4 +48,7 @@ NewTodo = fields(NewTodo, {
   fields: ['title']
 });
 
-export default NewTodo;
+export default connect(state => ({
+  _newTodo: state.fields.get('newTodo'), // TODO: Redesign field, use connect.
+  msg: state.intl.msg.todos
+}), todosActions)(NewTodo);

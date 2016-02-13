@@ -1,23 +1,29 @@
-import AuthLogin from './Login.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
+import Login from './Login.react';
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-export default class Page extends Component {
+class Page extends Component {
 
   static propTypes = {
+    location: PropTypes.object,
     msg: PropTypes.object
   };
 
   render() {
-    const {msg} = this.props;
+    const {location, msg} = this.props;
 
     return (
       <div className="login-page">
-        <Helmet title={msg.auth.login.title} />
-        <AuthLogin {...this.props} />
+        <Helmet title={msg.title} />
+        <Login location={location} />
       </div>
     );
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.auth.login
+}))(Page);

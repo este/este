@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
 export default class Menu extends Component {
 
   static propTypes = {
-    msg: PropTypes.object.isRequired,
+    links: PropTypes.object.isRequired,
     onRouteChange: PropTypes.func.isRequired
   };
 
   render() {
-    const {msg: {app: {links}}, onRouteChange} = this.props;
+    const {links, onRouteChange} = this.props;
     const pages = ['home', 'todos'];
 
     return (

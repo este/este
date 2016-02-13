@@ -1,8 +1,9 @@
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
+import {connect} from 'react-redux';
 
-export default class Footer extends Component {
+class Footer extends Component {
 
   static propTypes = {
     msg: PropTypes.object.isRequired
@@ -21,3 +22,7 @@ export default class Footer extends Component {
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.app.footer
+}))(Footer);

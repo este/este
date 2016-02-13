@@ -1,6 +1,8 @@
+import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React from 'react-native';
 import fields from '../../common/components/fields';
+import {connect} from 'react-redux';
 
 const {
   PropTypes, StyleSheet, TextInput, View
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
 class NewTodo extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
+    addTodo: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     msg: PropTypes.object.isRequired
   };
@@ -38,9 +40,9 @@ class NewTodo extends Component {
   }
 
   onTextInputEndEditing() {
-    const {actions, fields} = this.props;
+    const {addTodo, fields} = this.props;
     if (!fields.title.value.trim()) return;
-    actions.addTodo(fields.title.value);
+    addTodo(fields.title.value);
     fields.$reset();
   }
 
@@ -69,4 +71,7 @@ NewTodo = fields(NewTodo, {
   fields: ['title']
 });
 
-export default NewTodo;
+export default connect(state => ({
+  _newTodo: state.fields.get('newTodo'), // TODO: Redesign field, use connect.
+  msg: state.intl.msg.todos
+}), todosActions)(NewTodo);

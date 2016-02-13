@@ -1,5 +1,6 @@
 import Component from 'react-pure-render/component';
 import React from 'react-native';
+import {connect} from 'react-redux';
 
 // yahoo/react-intl still does not support React Native, but we can use format.
 // https://github.com/yahoo/react-intl/issues/119
@@ -24,16 +25,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Header extends Component {
+class Header extends Component {
 
   static propTypes = {
-    map: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    msg: PropTypes.object.isRequired,
+    todos: PropTypes.object.isRequired
   };
 
   render() {
-    const {map, msg} = this.props;
-    const leftTodos = map.filter(todo => !todo.completed).size;
+    const {msg, todos} = this.props;
+    const leftTodos = todos.filter(todo => !todo.completed).size;
 
     return (
       <View style={styles.container}>
@@ -45,3 +46,8 @@ export default class Header extends Component {
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.todos,
+  todos: state.todos.map
+}))(Header);

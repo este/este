@@ -3,17 +3,16 @@ import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import {FormattedHTMLMessage} from 'react-intl';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
-export default class Page extends Component {
+class Page extends Component {
 
   static propTypes = {
-    // Why not PropTypes.object.isRequired? Because:
-    // https://github.com/rackt/react-router/issues/1505
-    msg: PropTypes.object
+    msg: PropTypes.object.isRequired
   };
 
   render() {
-    const {msg: {home: msg}} = this.props;
+    const {msg} = this.props;
 
     return (
       <div className="home-page">
@@ -45,3 +44,9 @@ export default class Page extends Component {
   }
 
 }
+
+Page = connect(state => ({
+  msg: state.intl.msg.home
+}))(Page);
+
+export default Page;

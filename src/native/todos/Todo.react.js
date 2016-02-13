@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class TodoItem extends Component {
+export default class Todo extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    todo: PropTypes.object.isRequired
+    todo: PropTypes.object.isRequired,
+    toggleTodoCompleted: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -38,8 +38,8 @@ export default class TodoItem extends Component {
   }
 
   onTouchableOpacityPress() {
-    const {actions, todo} = this.props;
-    actions.toggleTodoCompleted(todo);
+    const {todo, toggleTodoCompleted} = this.props;
+    toggleTodoCompleted(todo);
   }
 
   render() {

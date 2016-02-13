@@ -1,8 +1,9 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-export default class Profile extends Component {
+class Profile extends Component {
 
   static propTypes = {
     msg: PropTypes.object
@@ -13,12 +14,16 @@ export default class Profile extends Component {
 
     return (
       <div className="profile-page">
-        <Helmet title={msg.profile.title} />
+        <Helmet title={msg.title} />
         <p>
-          {msg.profile.title}
+          {msg.title}
         </p>
       </div>
     );
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.profile
+}))(Profile);

@@ -1,31 +1,47 @@
+import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import Todo from './Todo.react';
+import {connect} from 'react-redux';
 
-export default class Todos extends Component {
+// Container component.
+class Todos extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    map: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    deleteTodo: PropTypes.func.isRequired,
+    msg: PropTypes.object.isRequired,
+    todos: PropTypes.object.isRequired
   };
 
   render() {
-    const {actions, map, msg} = this.props;
+    const {deleteTodo, msg, todos} = this.props;
 
-    if (!map.size)
+    if (!todos.size)
       return <p>{msg.empty}</p>;
 
-    // Note this is naive approach. Huge lists should be presorted in reducer.
-    const list = map.toList().sortBy(item => item.createdAt);
+    // Big lists should be sorted in reducer.
+    const list = todos.toList().sortBy(item => item.createdAt);
 
     return (
       <ol className="todos">
         {list.map(todo =>
-          <Todo {...{actions, todo}} key={todo.id} />
+          <Todo
+            deleteTodo={deleteTodo}
+            todo={todo}
+            key={todo.id}
+          />
         )}
       </ol>
     );
   }
 
 }
+
+// // To check render performance of connected component.
+// import logRenderTime from '../lib/logRenderTime';
+// Todos = logRenderTime(Todos)
+
+export default connect(state => ({
+  msg: state.intl.msg.todos,
+  todos: state.todos.map
+}), todosActions)(Todos);

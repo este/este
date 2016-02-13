@@ -1,17 +1,19 @@
 import './Login.scss';
+import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import fields from '../../common/components/fields';
 import focusInvalidField from '../lib/focusInvalidField';
+import {connect} from 'react-redux';
 
 class Login extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
+    login: PropTypes.func.isRequired,
     msg: PropTypes.object.isRequired
   };
 
@@ -28,8 +30,8 @@ class Login extends Component {
 
   async onFormSubmit(e) {
     e.preventDefault();
-    const {actions, fields} = this.props;
-    const result = await actions.login(fields.$values()).payload.promise;
+    const {login, fields} = this.props;
+    const result = await login(fields.$values()).payload.promise;
     if (result.error) {
       focusInvalidField(this, result.payload);
       return;
@@ -44,31 +46,30 @@ class Login extends Component {
   }
 
   render() {
-    const {fields, auth, msg} = this.props;
-    const {email, password} = fields;
+    const {auth, fields, msg} = this.props;
 
     return (
       <div className="login">
         <Helmet title="Login" />
         <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={auth.formDisabled}>
-            <legend>{msg.auth.form.legend}</legend>
+            <legend>{msg.legend}</legend>
             <input
               autoFocus
               maxLength="100"
-              placeholder={msg.auth.form.placeholder.email}
-              {...email}
+              placeholder={msg.placeholder.email}
+              {...fields.email}
             />
             <br />
             <input
               maxLength="300"
-              placeholder={msg.auth.form.placeholder.password}
+              placeholder={msg.placeholder.password}
               type="password"
-              {...password}
+              {...fields.password}
             />
             <br />
-            <button type="submit">{msg.auth.form.button.login}</button>
-            <span className="hint">{msg.auth.form.hint}</span>
+            <button type="submit">{msg.button.login}</button>
+            <span className="hint">{msg.hint}</span>
             {auth.formError &&
               <p className="error-message">{auth.formError.message}</p>
             }
@@ -85,4 +86,8 @@ Login = fields(Login, {
   fields: ['email', 'password'] // TODO: Fields default values by props.
 });
 
-export default Login;
+export default connect(state => ({
+  _auth: state.fields.get('auth'), // TODO: Redesign field, use connect.
+  auth: state.auth,
+  msg: state.intl.msg.auth.form
+}), authActions)(Login);

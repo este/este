@@ -2,10 +2,11 @@ import './Todo.scss';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 
+// Presentational component.
 export default class Todo extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
     todo: PropTypes.object.isRequired
   };
 
@@ -15,8 +16,8 @@ export default class Todo extends Component {
   }
 
   onButtonClick() {
-    const {actions, todo} = this.props;
-    actions.deleteTodo(todo.id);
+    const {deleteTodo, todo} = this.props;
+    deleteTodo(todo.id);
   }
 
   render() {

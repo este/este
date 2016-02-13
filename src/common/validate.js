@@ -3,10 +3,7 @@ import ValidationError from './lib/ValidationError';
 import {format} from './intl/format';
 
 // Localized validation.
-export default function validate(state) {
-
-  const intl = state.intl;
-  const msg = intl.messages[intl.selectedLanguage];
+export default function validate({intl: {msg}}) {
 
   class LocalizedValidation extends Validation {
 

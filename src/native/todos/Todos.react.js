@@ -1,7 +1,9 @@
+import * as todosActions from '../../common/todos/actions';
 import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import React from 'react-native';
 import Todo from './Todo.react';
+import {connect} from 'react-redux';
 
 const {
   Image, PropTypes, ScrollView, StyleSheet, Text, View
@@ -30,19 +32,18 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Todos extends Component {
+class Todos extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    map: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    msg: PropTypes.object.isRequired,
+    todos: PropTypes.object.isRequired,
+    toggleTodoCompleted: PropTypes.func.isRequired
   };
 
   render() {
-    const {actions, map, msg} = this.props;
-    const hasCompletedTodos = map.count(todo => todo.completed) > 0;
+    const {msg, todos, toggleTodoCompleted} = this.props;
 
-    if (map.size === 0)
+    if (todos.size === 0)
       return (
         <View style={styles.centeredView}>
           <Image
@@ -55,22 +56,23 @@ export default class Todos extends Component {
         </View>
       );
 
-    const list = map.toList().sortBy(item => item.createdAt);
+    const list = todos.toList().sortBy(item => item.createdAt);
 
     return (
       <ScrollView>
         {list.map(todo =>
           <View key={todo.id} style={styles.row}>
-            <Todo actions={actions} todo={todo} />
+            <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
           </View>
         )}
-        <Buttons
-          actions={actions}
-          hasCompletedTodos={hasCompletedTodos}
-          msg={msg}
-        />
+        <Buttons />
       </ScrollView>
     );
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.todos,
+  todos: state.todos.map
+}), todosActions)(Todos);

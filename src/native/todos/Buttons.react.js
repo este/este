@@ -1,5 +1,7 @@
+import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React from 'react-native';
+import {connect} from 'react-redux';
 
 const {
   PropTypes, StyleSheet, Text, TouchableOpacity, View
@@ -37,26 +39,36 @@ Button.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
-export default class TodoButtons extends Component {
+class TodoButtons extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    hasCompletedTodos: PropTypes.bool.isRequired,
-    msg: PropTypes.object.isRequired
+    addHundredTodos: PropTypes.func.isRequired,
+    clearAllCompletedTodos: PropTypes.func.isRequired,
+    clearAllTodos: PropTypes.func.isRequired,
+    msg: PropTypes.object.isRequired,
+    todos: PropTypes.object.isRequired
   };
 
   render() {
-    const {actions, hasCompletedTodos, msg} = this.props;
+    const {
+      addHundredTodos, clearAllCompletedTodos, clearAllTodos, msg, todos
+    } = this.props;
+    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
 
     return (
       <View style={styles.buttons}>
         {hasCompletedTodos
-          ? <Button onPress={actions.clearAllCompletedTodos}>{msg.clearCompleted}</Button>
-          : <Button onPress={actions.clearAllTodos}>{msg.clearAll}</Button>
+          ? <Button onPress={clearAllCompletedTodos}>{msg.clearCompleted}</Button>
+          : <Button onPress={clearAllTodos}>{msg.clearAll}</Button>
         }
-        <Button onPress={actions.addHundredTodos}>{msg.add100}</Button>
+        <Button onPress={addHundredTodos}>{msg.add100}</Button>
       </View>
     );
   }
 
 }
+
+export default connect(state => ({
+  msg: state.intl.msg.todos,
+  todos: state.todos.map
+}), todosActions)(TodoButtons);
