@@ -14,14 +14,25 @@ import {createMemoryHistory} from 'react-router';
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const {components, location, params} = renderProps;
   const promises = components
-    .reduce((actions, component) =>
-      actions.concat(component.fetchActions || [])
-    , [])
-    .map(action =>
+    .reduce((actions, component) => {
+      if (typeof component === 'function') {
+        actions = actions.concat(component.fetchActions || [])
+      }
+      else {
+        // route may contains multi components eg:
+        // <Route path="category/:category" components={{ content: Category, sidebar: CategorySidebar }}>
+        for(let c in component) {
+          actions = actions.concat(component[c].fetchActions || [])
+        }
+      }
+      return actions;
+    }, [])
+    .map(action => {
+      console.log(action, location);
       // Server side fetching can use only router location and params props.
       // There is no easy way how to support custom component props.
       dispatch(action({location, params})).payload.promise
-    );
+    });
   await Promise.all(promises);
 };
 
