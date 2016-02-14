@@ -62,7 +62,7 @@ export default function makeConfig(isDevelopment) {
         test: /favicon\.ico$/
       }, {
         loader: 'url-loader?limit=100000',
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/
       }, {
         test: /\.js$/,
         exclude: /node_modules/,
