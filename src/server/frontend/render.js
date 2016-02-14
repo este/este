@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import Helmet from 'react-helmet';
 import Html from './Html.react';
 import React from 'react';
