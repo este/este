@@ -17,13 +17,11 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const promises = components
     .reduce((actions, component) => {
       if (typeof component === 'function') {
-        actions = actions.concat(component.fetchActions || [])
+        actions = actions.concat(component.fetchActions || []);
       } else {
-        // route may contains multi components eg:
-        // <Route path="category/:category" components={{ content: Category, sidebar: CategorySidebar }}>
-        for(let c in component) {
-          actions = actions.concat(component[c].fetchActions || [])
-        }
+        Object.keys(component).forEach(c => {
+          actions = actions.concat(component[c].fetchActions || []);
+        });
       }
       return actions;
     }, [])
