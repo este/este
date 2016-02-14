@@ -18,8 +18,7 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
     .reduce((actions, component) => {
       if (typeof component === 'function') {
         actions = actions.concat(component.fetchActions || [])
-      }
-      else {
+      } else {
         // route may contains multi components eg:
         // <Route path="category/:category" components={{ content: Category, sidebar: CategorySidebar }}>
         for(let c in component) {
