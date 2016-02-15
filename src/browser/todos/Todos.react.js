@@ -37,10 +37,6 @@ class Todos extends Component {
 
 }
 
-// // To check render performance of connected component.
-// import logRenderTime from '../lib/logRenderTime';
-// Todos = logRenderTime(Todos)
-
 export default connect(state => ({
   msg: state.intl.msg.todos,
   todos: state.todos.map
