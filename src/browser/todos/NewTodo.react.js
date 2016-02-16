@@ -49,6 +49,5 @@ NewTodo = fields(NewTodo, {
 });
 
 export default connect(state => ({
-  _newTodo: state.reduxFields.get('newTodo'), // TODO: Redesign field, use connect.
   msg: state.intl.msg.todos
 }), todosActions)(NewTodo);

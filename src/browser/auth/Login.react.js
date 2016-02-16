@@ -87,7 +87,6 @@ Login = fields(Login, {
 });
 
 export default connect(state => ({
-  _auth: state.reduxFields.get('auth'), // TODO: Redesign field, use connect.
   auth: state.auth,
   msg: state.intl.msg.auth.form
 }), authActions)(Login);

@@ -6,18 +6,17 @@ import {resetFields, setField} from './actions';
 // Higher order component for huge fast dynamic deeply nested universal forms.
 export default function fields(Wrapped, options) {
   const {
+    path = '',
     fields = [],
-    path = ''
+    getInitialState
   } = options;
 
   invariant(Array.isArray(fields), 'Fields must be an array.');
   invariant((
     (typeof path === 'string') ||
-    Array.isArray(path) ||
-    (typeof path === 'function')
-  ), 'Path must be string, array, or function.');
-  if (typeof path === 'function')
-    invariant(Array.isArray(path({})), 'Path function must return an array.');
+    (typeof path === 'function') ||
+    Array.isArray(path)
+  ), 'Path must be a string, function, or an array.');
 
   return class Fields extends Component {
 
@@ -33,30 +32,36 @@ export default function fields(Wrapped, options) {
       }
     }
 
-    static getFieldsValues(model) {
+    static getFieldValue(field, model, props) {
+      if (model && model.has(field)) {
+        return model.get(field);
+      }
+      const initialState = getInitialState && getInitialState(props);
+      if (initialState && initialState.hasOwnProperty(field)) {
+        return initialState[field];
+      }
+      return '';
+    }
+
+    static lazyJsonValuesOf(model, props) {
       // http://www.devthought.com/2012/01/18/an-object-is-not-a-hash
-      const values = Object.create(null);
-      options.fields.forEach(field => {
-        values[field] = model && model.get(field) || '';
-      });
-      return values;
+      return options.fields.reduce((fields, field) => ({
+        ...fields,
+        [field]: Fields.getFieldValue(field, model, props)
+      }), Object.create(null));
     }
 
     constructor(props) {
       super(props);
-      this.createFields();
+      this.state = {
+        model: null
+      };
     }
 
     createFields() {
-      this.fields = Object.create(null);
-      this.fields.$values = () => Fields.getFieldsValues(this.getModel());
-      this.fields.$reset = () => {
-        const normalizedPath = Fields.getNormalizePath(this.props);
-        this.context.store.dispatch(resetFields(normalizedPath));
-      };
-      options.fields.forEach(field => {
+      const formFields = options.fields.reduce((fields, field) => {
         // TODO: Detect in library somehow. Imho native propagates itself.
-        this.fields[field] = process.env.IS_REACT_NATIVE ? {
+        const fieldObject = process.env.IS_REACT_NATIVE ? {
           onChangeText: text => {
             this.onChange(field, text);
           }
@@ -66,7 +71,25 @@ export default function fields(Wrapped, options) {
             this.onChange(field, e.target.value);
           }
         };
-      });
+        return {
+          ...fields,
+          [field]: fieldObject
+        };
+      }, {});
+
+      this.fields = {
+        ...formFields,
+        $values: () => this.values,
+        $reset: () => {
+          const normalizedPath = Fields.getNormalizePath(this.props);
+          this.context.store.dispatch(resetFields(normalizedPath));
+        }
+      };
+    }
+
+    getModelFromState() {
+      const normalizedPath = Fields.getNormalizePath(this.props);
+      return this.context.store.getState().reduxFields.getIn(normalizedPath);
     }
 
     onChange(field, value) {
@@ -74,25 +97,41 @@ export default function fields(Wrapped, options) {
       this.context.store.dispatch(setField(normalizedPath, value));
     }
 
-    getModel() {
-      const normalizedPath = Fields.getNormalizePath(this.props);
-      return this.context.store.getState().reduxFields.getIn(normalizedPath);
+    setModel(model) {
+      this.values = Fields.lazyJsonValuesOf(model, this.props);
+      options.fields.forEach(field => {
+        this.fields[field].value = this.values[field];
+      });
+      this.setState({model});
+    }
+
+    componentWillMount() {
+      this.createFields();
+      this.setModel(this.getModelFromState());
+    }
+
+    componentDidMount() {
+      const {store} = this.context;
+      this.unsubscribe = store.subscribe(() => {
+        const newModel = this.getModelFromState();
+        if (newModel === this.state.model) return;
+        this.setModel(newModel);
+      });
     }
 
     componentWillUnmount() {
-      this.fields = null; // To help GC.
+      this.unsubscribe();
+      this.fields = null;
     }
 
     render() {
-      const model = this.getModel();
-      const fieldsValues = Fields.getFieldsValues(model);
-      // Only update fields values.
-      options.fields.forEach(field => {
-        this.fields[field].value = fieldsValues[field];
-      });
-      // Note component rerender is enforced via model property.
-      // TODO: Musi resit connect, model nemam co predavat, ok.
-      return <Wrapped {...this.props} fields={this.fields} model={model} />;
+      return (
+        <Wrapped
+          {...this.props}
+          fields={this.fields}
+          fieldsModel={this.state.model} // Ensure rerender for pure components.
+        />
+      );
     }
 
   };
