@@ -1,8 +1,8 @@
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React from 'react-native';
-import fields from '../../common/components/fields';
 import {connect} from 'react-redux';
+import {fields} from '../../common/lib/redux-fields';
 
 const {
   PropTypes, StyleSheet, TextInput, View
@@ -72,6 +72,6 @@ NewTodo = fields(NewTodo, {
 });
 
 export default connect(state => ({
-  _newTodo: state.fields.get('newTodo'), // TODO: Redesign field, use connect.
+  _newTodo: state.reduxFields.get('newTodo'), // TODO: Redesign field, use connect.
   msg: state.intl.msg.todos
 }), todosActions)(NewTodo);

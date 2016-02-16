@@ -29,16 +29,14 @@ export function addHundredTodos() {
 }
 
 export function addTodo(title) {
-  return ({getUid, now}) => {
-    return {
-      type: ADD_TODO,
-      payload: {
-        createdAt: now(),
-        id: getUid(),
-        title: title.trim()
-      }
-    };
-  };
+  return ({getUid, now}) => ({
+    type: ADD_TODO,
+    payload: {
+      createdAt: now(),
+      id: getUid(),
+      title: title.trim()
+    }
+  });
 }
 
 export function clearAllCompletedTodos() {

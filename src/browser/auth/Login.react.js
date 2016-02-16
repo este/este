@@ -3,9 +3,9 @@ import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
-import fields from '../../common/components/fields';
 import focusInvalidField from '../lib/focusInvalidField';
 import {connect} from 'react-redux';
+import {fields} from '../../common/lib/redux-fields';
 
 class Login extends Component {
 
@@ -82,12 +82,12 @@ class Login extends Component {
 }
 
 Login = fields(Login, {
-  path: 'auth', // Path can be dynamic. props => ['todos', props.todo.id]
-  fields: ['email', 'password'] // TODO: Fields default values by props.
+  path: 'auth',
+  fields: ['email', 'password']
 });
 
 export default connect(state => ({
-  _auth: state.fields.get('auth'), // TODO: Redesign field, use connect.
+  _auth: state.reduxFields.get('auth'), // TODO: Redesign field, use connect.
   auth: state.auth,
   msg: state.intl.msg.auth.form
 }), authActions)(Login);

@@ -1,9 +1,9 @@
-export const DELETE_FIELD = 'DELETE_FIELD';
+export const RESET_FIELDS = 'RESET_FIELDS';
 export const SET_FIELD = 'SET_FIELD';
 
-export function deleteField(path) {
+export function resetFields(path) {
   return {
-    type: DELETE_FIELD,
+    type: RESET_FIELDS,
     payload: {path}
   };
 }
