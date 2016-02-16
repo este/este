@@ -18,10 +18,11 @@
   - server side rendering
   - universal data fetching via one higher order component
   - prerender for static hosting
-- Functional works: immutability, hot reload, time travel
+- Functional architecture (immutability, hot reload, time traveling)
 - Test driven development ready
-- Advanced performance with pure components.
+- Advanced performance with pure components
 - Well tuned dev stack
+- Universal forms with validation
 
 ## Libraries
 
