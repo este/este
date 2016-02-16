@@ -13,6 +13,16 @@ class Todos extends Component {
     todos: PropTypes.object.isRequired
   };
 
+  // Example how to measure component update.
+  // componentWillUpdate() {
+  //   this.start = Date.now();
+  // }
+
+  // componentDidUpdate() {
+  //   const total = Date.now() - this.start;
+  //   console.log(`[ESTE] Todos updated in ${total}ms`); // eslint-disable-line no-console, no-undef
+  // }
+
   render() {
     const {deleteTodo, msg, todos} = this.props;
 
