@@ -20,7 +20,7 @@ class Todos extends Component {
 
   // componentDidUpdate() {
   //   const total = Date.now() - this.start;
-  //   console.log(`[ESTE] Todos updated in ${total}ms`); // eslint-disable-line no-console, no-undef
+  //   console.log(`[ESTE] Todos updated in ${total}ms`);
   // }
 
   render() {
