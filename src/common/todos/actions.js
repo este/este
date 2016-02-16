@@ -1,4 +1,3 @@
-import Todo from './todo';
 import {Range} from 'immutable';
 
 export const ADD_HUNDRED_TODOS = 'ADD_HUNDRED_TODOS';
@@ -14,28 +13,30 @@ export const TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
 export function addHundredTodos() {
   // Note how dependency injection ensures pure action.
   return ({getUid, now}) => {
-    const todos = {};
-    Range(0, 100).forEach(() => {
+    const payload = Range(0, 100).map(() => {
       const id = getUid();
-      todos[id] = new Todo({createdAt: now(), id, title: `Item #${id}`});
-    });
+      return {
+        createdAt: now(),
+        id,
+        title: `Item #${id}`
+      };
+    }).toJS();
     return {
       type: ADD_HUNDRED_TODOS,
-      payload: {todos}
+      payload
     };
   };
 }
 
 export function addTodo(title) {
   return ({getUid, now}) => {
-    const todo = new Todo({
-      createdAt: now(),
-      id: getUid(),
-      title: title.trim()
-    });
     return {
       type: ADD_TODO,
-      payload: {todo}
+      payload: {
+        createdAt: now(),
+        id: getUid(),
+        title: title.trim()
+      }
     };
   };
 }

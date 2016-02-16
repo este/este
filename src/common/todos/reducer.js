@@ -18,12 +18,14 @@ export default function todosReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.ADD_HUNDRED_TODOS: {
-      const {todos} = action.payload;
+      const todos = action.payload.reduce((todos, json) => {
+        return todos.set(json.id, new Todo(json));
+      }, Map());
       return state.update('map', map => map.merge(todos));
     }
 
     case actions.ADD_TODO: {
-      const {todo} = action.payload;
+      const todo = new Todo(action.payload);
       return state
         .update('map', map => map.set(todo.id, todo));
     }
