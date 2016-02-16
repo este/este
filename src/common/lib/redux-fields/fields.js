@@ -3,6 +3,10 @@ import React, {PropTypes} from 'react';
 import invariant from 'invariant';
 import {resetFields, setField} from './actions';
 
+const isReactNative =
+  typeof navigator === 'object' &&
+  navigator.product === 'ReactNative';
+
 // Higher order component for huge fast dynamic deeply nested universal forms.
 export default function fields(Wrapped, options) {
   const {
@@ -51,31 +55,37 @@ export default function fields(Wrapped, options) {
       }), Object.create(null));
     }
 
+    static createFieldObject(field, onChange) {
+      return isReactNative ? {
+        onChangeText: text => {
+          onChange(field, text);
+        }
+      } : {
+        name: field,
+        onChange: e => {
+          onChange(field, e.target.value);
+        }
+      };
+    }
+
     constructor(props) {
       super(props);
       this.state = {
         model: null
       };
+      this.onFieldChange = this.onFieldChange.bind(this);
+    }
+
+    onFieldChange(field, value) {
+      const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
+      this.context.store.dispatch(setField(normalizedPath, value));
     }
 
     createFields() {
-      const formFields = options.fields.reduce((fields, field) => {
-        // TODO: Detect in library somehow. Imho native propagates itself.
-        const fieldObject = process.env.IS_REACT_NATIVE ? {
-          onChangeText: text => {
-            this.onChange(field, text);
-          }
-        } : {
-          name: field,
-          onChange: e => {
-            this.onChange(field, e.target.value);
-          }
-        };
-        return {
-          ...fields,
-          [field]: fieldObject
-        };
-      }, {});
+      const formFields = options.fields.reduce((fields, field) => ({
+        ...fields,
+        [field]: Fields.createFieldObject(field, this.onFieldChange)
+      }), {});
 
       this.fields = {
         ...formFields,
@@ -92,16 +102,12 @@ export default function fields(Wrapped, options) {
       return this.context.store.getState().reduxFields.getIn(normalizedPath);
     }
 
-    onChange(field, value) {
-      const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
-      this.context.store.dispatch(setField(normalizedPath, value));
-    }
-
     setModel(model) {
       this.values = Fields.lazyJsonValuesOf(model, this.props);
       options.fields.forEach(field => {
         this.fields[field].value = this.values[field];
       });
+      this.fields = {...this.fields}; // Ensure rerender for pure components.
       this.setState({model});
     }
 
@@ -129,7 +135,6 @@ export default function fields(Wrapped, options) {
         <Wrapped
           {...this.props}
           fields={this.fields}
-          fieldsModel={this.state.model} // Ensure rerender for pure components.
         />
       );
     }
