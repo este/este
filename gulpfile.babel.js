@@ -119,7 +119,7 @@ gulp.task('to-html', done => {
 
   runSequence('clean', 'build', () => {
     const proc = require('child_process').spawn('node', ['./src/server']);
-    proc.stderr.on('data', (data) => console.log(data.toString()));
+    proc.stderr.on('data', data => console.log(data.toString()));
     proc.stdout.on('data', async data => {
       data = data.toString();
       if (data.indexOf('Server started') === -1) return;
@@ -145,12 +145,13 @@ gulp.task('fix-react-native', done => {
 });
 
 // https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
+// Still broken in RN 0.20. Remove fbjs from package.json after fix.
 gulp.task('fix-native-babelrc-files', () =>
   del(['node_modules/**/.babelrc', '!node_modules/react-native/**'])
 );
 
 // https://github.com/facebook/react-native/issues/5467#issuecomment-173989493
-// Should be fixed in RN 0.20.
+// Still broken in RN 0.20. Remove fbjs from package.json after fix.
 gulp.task('fix-native-fbjs', () =>
   del(['node_modules/**/fbjs', '!node_modules/fbjs'])
 );
