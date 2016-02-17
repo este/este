@@ -178,3 +178,18 @@ gulp.task('clear-react-packager-cache', () => {
     console.log('No cache files found!');
   }
 });
+
+gulp.task('bare', () => {
+  console.log(`
+    If you want to have bare Este without examples, you have to it manually now.
+
+    Here is a quick checklist:
+      - remove /src/browser/todos, /src/common/todos, /src/native/todos dirs
+      - remove todos reducer from /src/common/app/reducer.js
+      - remove todos messages from /src/common/intl/messages/en.js
+      - remove todos routes from /src/browser/createRoutes.js
+      - remove link from /src/browser/app/Header.react.js
+
+    Yeah, it's that easy.
+  `)
+});
