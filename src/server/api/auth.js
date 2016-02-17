@@ -9,9 +9,13 @@ router.route('/login')
 
     // Simulate DB checks here.
     setTimeout(() => {
-      // Use HTTP status code 401 for wrong authentication credentials.
-      if (password !== 'pass1') res.status(401).end();
-      else res.status(200).send({email}).end();
+      if (password !== 'pass1') {
+        // Use HTTP status code 401 for wrong authentication credentials.
+        res.status(401).end();
+      } else {
+        const id = Date.now();
+        res.status(200).send({email, id}).end();
+      }
     }, 1000);
 
   });
