@@ -27,7 +27,7 @@ export default function configureStore({deps, initialState}) {
       fetch: createFetch(serverUrl),
       getUid: () => shortid.generate(),
       now: () => Date.now(),
-      validate
+      validate: validate(() => store.getState()) // eslint-disable-line no-use-before-define
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']

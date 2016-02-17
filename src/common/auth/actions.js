@@ -3,8 +3,7 @@ export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 export function login(fields) {
-  return ({fetch, store: {getState}, validate}) => {
-    validate = validate(getState());
+  return ({fetch, validate}) => {
 
     const getPromise = async () => {
       try {
@@ -22,8 +21,9 @@ export function login(fields) {
         return response.json();
       } catch (error) {
         // We can handle different password/username server errors here.
-        if (error.status === 401)
+        if (error.status === 401) {
           throw validate.wrongPassword('password');
+        }
         throw error;
       }
     };
