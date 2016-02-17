@@ -74,11 +74,7 @@ body {
     padding: 0 1em;
     text-shadow: -1px 1px #417cb8;
 
-    &[disabled] {
-      opacity: .5;
-    }
-
-    &:hover:not(&[disabled]) {
+    &:hover {
       background-color: #346392;
       text-shadow: -1px 1px #27496d;
     }
@@ -87,6 +83,13 @@ body {
       background-color: #27496d;
       text-shadow: -1px 1px #193047;
     }
+
+    &[disabled] {
+      background-color: #6496c8;
+      opacity: .5;
+      text-shadow: -1px 1px #417cb8;
+    }
+
   }
 
   button,
