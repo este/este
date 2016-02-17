@@ -127,7 +127,7 @@ export default function makeConfig(isDevelopment) {
     })(),
     postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     resolve: {
-      extensions: ['', '.js'],
+      extensions: ['', '.js'], // .json is ommited to ignore ./firebase.json
       modulesDirectories: ['src', 'node_modules'],
       root: constants.ABSOLUTE_BASE,
       alias: {
