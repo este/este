@@ -191,5 +191,5 @@ gulp.task('bare', () => {
       - remove link from /src/browser/app/Header.react.js
 
     Yeah, it's that easy.
-  `)
+  `);
 });
