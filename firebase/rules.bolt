@@ -1,0 +1,53 @@
+// This is example of Firebase security and modeling language.
+// https://github.com/firebase/bolt/blob/master/docs/guide.md
+
+isSignedIn() { auth != null }
+isUser(uid) { isSignedIn() && auth.uid == uid }
+
+type ShortRequiredString extends String {
+  // Is required via this.length > 0
+  validate() { this.length > 0 && this.length < 42 }
+}
+
+type LongString extends String {
+  validate() { this.length < 1000 }
+}
+
+type HelloWorld {
+  createdAt: Number
+}
+
+path /hello-world is HelloWorld {
+  // Anyone can create, read, update. No one can delete.
+  create() { true }
+  read() { true }
+  update() { true }
+}
+
+type User {
+  displayName: ShortRequiredString,
+  email: LongString,
+  id: ShortRequiredString,
+  profileImageURL: LongString,
+  provider: LongString
+}
+
+path /users/{uid} is User {
+  read() { true }
+  write() { isUser(uid) }
+}
+
+//type Task {
+//  completed: Boolean,
+//  createdAt: Number,
+//  deletedAt: Number | Null,
+//  description: LongString | Null,
+//  id: String,
+//  title: ShortRequiredString,
+//  updatedAt: Number
+//}
+
+//path /users-tasks/{uid}/$focusId is Task {
+//  read() { isUser(uid) }
+//  write() { isUser(uid) }
+//}

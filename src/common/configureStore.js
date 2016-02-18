@@ -1,3 +1,4 @@
+import Firebase from 'firebase';
 import appReducer from './app/reducer';
 import createFetch from './createFetch';
 import createLogger from 'redux-logger';
@@ -5,8 +6,15 @@ import promiseMiddleware from 'redux-promise-middleware';
 import shortid from 'shortid';
 import validate from './validate';
 import {applyMiddleware, compose, createStore} from 'redux';
+import {firebaseMiddleware} from './lib/redux-firebase';
 
 export default function configureStore({deps, initialState}) {
+
+  const firebase = new Firebase('https://este.firebaseio.com');
+  // // Check whether connection works.
+  // firebase.child('hello-world').set({
+  //   createdAt: Firebase.ServerValue.TIMESTAMP
+  // });
 
   // Este dependency injection middleware. So simple that we don't need a lib.
   // It's like mixed redux-thunk and redux-inject.
@@ -25,13 +33,15 @@ export default function configureStore({deps, initialState}) {
     injectMiddleware({
       ...deps,
       fetch: createFetch(serverUrl),
+      firebase,
       getUid: () => shortid.generate(),
       now: () => Date.now(),
       validate: validate(() => store.getState()) // eslint-disable-line no-use-before-define
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
-    })
+    }),
+    firebaseMiddleware(firebase)
   ];
 
   // Enable logger only for browser and React Native development.

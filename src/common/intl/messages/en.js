@@ -4,9 +4,10 @@ export default {
       madeByHtml: 'made by <a href="https://twitter.com/steida">steida</a>'
     },
     links: {
+      firebase: 'Firebase',
       home: 'Home',
       login: 'Login',
-      me: 'Me (protected)',
+      me: 'Me',
       todos: 'Todos'
     }
   },

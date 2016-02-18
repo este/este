@@ -1,0 +1,13 @@
+{
+  "firebase": "este",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rules": "firebase/rules.bolt",
+  "public": "build",
+  "ignore": [
+    "**/.*",
+    "**/node_modules/**",
+    ".DS_Store",
+    "firebase.json"
+  ]
+}
