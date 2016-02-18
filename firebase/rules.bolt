@@ -33,7 +33,7 @@ type User {
 }
 
 path /users/{uid} is User {
-  read() { true }
+  read() { isUser(uid) }
   write() { isUser(uid) }
 }
 
