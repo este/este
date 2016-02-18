@@ -3,19 +3,18 @@
   margin-bottom: .25em;
   max-width: 42em;
 
-  .editable.view,
+  .view {
+    cursor: pointer;
+  }
+
+  .completed {
+    text-decoration: line-through;
+  }
+
   .button {
-    background-color: #eed;
     border-radius: .5em;
     display: inline-block;
     padding: .125em .5em;
-  }
-
-  .editable.edit {
-    display: inline-block;
-  }
-
-  .button {
     background-color: #6496c8;
     color: #fff;
     cursor: pointer; // Like button.
