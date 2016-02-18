@@ -10,7 +10,8 @@ class Todos extends Component {
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
     msg: PropTypes.object.isRequired,
-    todos: PropTypes.object.isRequired
+    todos: PropTypes.object.isRequired,
+    toggleTodoCompleted: PropTypes.func.isRequired
   };
 
   // Example how to measure component update.
@@ -24,7 +25,7 @@ class Todos extends Component {
   // }
 
   render() {
-    const {deleteTodo, msg, todos} = this.props;
+    const {deleteTodo, msg, todos, toggleTodoCompleted} = this.props;
 
     if (!todos.size)
       return <p>{msg.empty}</p>;
@@ -38,6 +39,7 @@ class Todos extends Component {
           <Todo
             deleteTodo={deleteTodo}
             todo={todo}
+            toggleTodoCompleted={toggleTodoCompleted}
             key={todo.id}
           />
         )}
