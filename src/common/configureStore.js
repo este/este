@@ -3,8 +3,10 @@ import appReducer from './app/reducer';
 import createFetch from './createFetch';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
+import recycle from './lib/redux-recycle';
 import shortid from 'shortid';
 import validate from './validate';
+import {LOGOUT} from './auth/actions';
 import {applyMiddleware, compose, createStore} from 'redux';
 import {firebaseMiddleware} from './lib/redux-firebase';
 
@@ -66,7 +68,12 @@ export default function configureStore({deps, initialState}) {
   const createReduxStore = enableDevToolsExtension
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
-  const store = createReduxStore(createStore)(appReducer, initialState);
+
+  // Reset app store on logout to initial state. Because app state can be
+  // persisted in localStorage, recycle on logout is must.
+  const recycleAppReducer = recycle(appReducer, [LOGOUT], initialState);
+
+  const store = createReduxStore(createStore)(recycleAppReducer, initialState);
 
   // Enable hot reload where available.
   if (module.hot) {

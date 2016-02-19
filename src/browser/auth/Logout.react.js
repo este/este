@@ -1,3 +1,4 @@
+import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
@@ -5,7 +6,12 @@ import {connect} from 'react-redux';
 class Logout extends Component {
 
   static propTypes = {
+    logout: PropTypes.func.isRequired,
     msg: PropTypes.object.isRequired
+  };
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -14,8 +20,10 @@ class Logout extends Component {
   }
 
   logout() {
-    // Always reload app on logout for security reasons.
-    location.href = '/';
+    const {logout} = this.props;
+    // We have to redirect user to root before logout, because it resets store.
+    this.context.router.replace('/');
+    logout();
   }
 
   render() {
@@ -32,4 +40,4 @@ class Logout extends Component {
 
 export default connect(state => ({
   msg: state.intl.msg.auth.logout
-}))(Logout);
+}), authActions)(Logout);

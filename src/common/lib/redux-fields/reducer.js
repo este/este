@@ -1,8 +1,10 @@
 import * as actions from './actions';
 import {Map} from 'immutable';
 
-export default function todosReducer(state = Map(), action) {
-  if (!(state instanceof Map)) return Map().mergeDeep(state);
+const initialState = Map();
+
+export default function todosReducer(state = initialState, action) {
+  if (!(state instanceof Map)) return initialState.mergeDeep(state);
 
   switch (action.type) {
 
