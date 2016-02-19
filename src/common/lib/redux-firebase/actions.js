@@ -3,7 +3,6 @@ import mapAuthToUser from './mapAuthToUser';
 export const REDUX_FIREBASE_LOGIN_ERROR = 'REDUX_FIREBASE_LOGIN_ERROR';
 export const REDUX_FIREBASE_LOGIN_START = 'REDUX_FIREBASE_LOGIN_START';
 export const REDUX_FIREBASE_LOGIN_SUCCESS = 'REDUX_FIREBASE_LOGIN_SUCCESS';
-export const REDUX_FIREBASE_LOGOUT = 'REDUX_FIREBASE_LOGOUT';
 export const REDUX_FIREBASE_OFF_QUERY = 'REDUX_FIREBASE_OFF_QUERY';
 export const REDUX_FIREBASE_ON_AUTH = 'REDUX_FIREBASE_ON_AUTH';
 export const REDUX_FIREBASE_ON_QUERY = 'REDUX_FIREBASE_ON_QUERY';
@@ -41,14 +40,5 @@ export function onAuth(authData) {
   return {
     type: REDUX_FIREBASE_ON_AUTH,
     payload: {authData}
-  };
-}
-
-export function logout() {
-  return ({firebase}) => {
-    firebase.unauth();
-    return {
-      type: REDUX_FIREBASE_LOGOUT
-    };
   };
 }

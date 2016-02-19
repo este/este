@@ -1,9 +1,10 @@
 import './Page.scss';
-import * as firebaseActions from '../../common/lib/redux-firebase/actions';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {login} from '../../common/lib/redux-firebase/actions';
+import {logout} from '../../common/auth/actions';
 
 class Page extends Component {
 
@@ -28,8 +29,11 @@ class Page extends Component {
         {viewer ?
           <div className="user-logged-in">
             <h2>Hi {viewer.displayName || viewer.email}</h2>
-            <img className="profile-image" src={viewer.profileImageURL} />
-            <br />
+            {viewer.profileImageURL &&
+              <div className="profile-image">
+                <img src={viewer.profileImageURL} />
+              </div>
+            }
             <button onClick={logout}>Logout</button>
           </div>
         :
@@ -53,4 +57,4 @@ class Page extends Component {
 export default connect(state => ({
   auth: state.auth,
   viewer: state.users.viewer
-}), firebaseActions)(Page);
+}), {login, logout})(Page);

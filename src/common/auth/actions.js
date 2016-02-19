@@ -1,6 +1,7 @@
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
 export function login(fields) {
   return ({fetch, validate}) => {
@@ -33,6 +34,15 @@ export function login(fields) {
       payload: {
         promise: getPromise()
       }
+    };
+  };
+}
+
+export function logout() {
+  return ({firebase}) => {
+    firebase.unauth();
+    return {
+      type: LOGOUT
     };
   };
 }

@@ -1,8 +1,10 @@
 .firebase-page {
 
   .profile-image {
-    border-radius: 25%;
-    margin-bottom: 1em;
+    img {
+      border-radius: 25%;
+      margin-bottom: 1em;
+    }
   }
 
   .error-message {
