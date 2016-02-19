@@ -3,7 +3,8 @@ import {Record} from 'immutable';
 
 const InitialState = Record({
   isMobile: false,
-  platform: ''
+  platform: '',
+  host: ''
 });
 const initialState = new InitialState;
 
