@@ -1,0 +1,28 @@
+.firebase-login {
+  .social-auth-providers {
+    margin-bottom: 1em;
+  }
+  form {
+    width: 20em;
+    input {
+      margin: .25em 0;
+      padding: .25em;
+      border: solid 1px #ccc;
+      width: 100%;
+      &:focus {
+        border: solid 1px #aaa;
+      }
+    }
+    button {
+      font-size: .825em;
+    }
+    .hint {
+      font-size: .75em;
+    }
+    .error-message {
+      color: red;
+      margin: .5em;
+      padding-top: .5em;
+    }
+  }
+}

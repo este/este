@@ -6,28 +6,30 @@ export const LOGOUT = 'LOGOUT';
 export function login(fields) {
   return ({fetch, validate}) => {
 
-    const getPromise = async () => {
+    // Why function? https://phabricator.babeljs.io/T2765
+    async function getPromise() {
       try {
         await validate(fields)
           .prop('email').required().email()
           .prop('password').required().simplePassword()
           .promise;
-        // This is example. Use smarter fetch wrapper in the real app.
+        // Sure we can use smarter api than raw fetch.
         const response = await fetch(`/api/v1/auth/login`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(fields)
         });
         if (response.status !== 200) throw response;
+        // Return JSON response.
         return response.json();
       } catch (error) {
-        // We can handle different password/username server errors here.
+        // Here we can transforn error statuses to custom errors.
         if (error.status === 401) {
           throw validate.wrongPassword('password');
         }
         throw error;
       }
-    };
+    }
 
     return {
       type: 'LOGIN',
