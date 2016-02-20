@@ -6,7 +6,7 @@ isUser(uid) { isSignedIn() && auth.uid == uid }
 
 type ShortRequiredString extends String {
   // Is required via this.length > 0
-  validate() { this.length > 0 && this.length < 42 }
+  validate() { this.length > 0 && this.length < 100 }
 }
 
 type LongString extends String {
@@ -25,8 +25,8 @@ path /hello-world is HelloWorld {
 }
 
 type User {
-  displayName: ShortRequiredString,
-  email: LongString,
+  displayName: LongString,
+  email: ShortRequiredString,
   id: ShortRequiredString,
   profileImageURL: LongString,
   provider: LongString
