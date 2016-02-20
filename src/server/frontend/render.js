@@ -80,9 +80,12 @@ const renderPage = (store, renderProps, req) => {
 };
 
 export default function render(req, res, next) {
+  // Detect Heroku protocol
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const initialState = {
     device: {
-      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1
+      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,
+      host: `${protocol}://${req.headers.host}`
     }
   };
   const store = configureStore({initialState});

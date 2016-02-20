@@ -26,8 +26,9 @@ export default function configureStore({deps, initialState}) {
       : action
     );
 
+  const {device: {host}} = initialState;
   // Remember to set SERVER_URL for deploy.
-  const serverUrl = process.env.SERVER_URL ||
+  const serverUrl = host || process.env.SERVER_URL ||
     // Browser is ok with relative url. Server and React Native need absolute.
     (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
 
