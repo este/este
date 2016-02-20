@@ -3,7 +3,7 @@ import {Map} from 'immutable';
 
 const initialState = Map();
 
-export default function todosReducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   if (!(state instanceof Map)) return initialState.mergeDeep(state);
 
   switch (action.type) {
