@@ -11,20 +11,24 @@ class Login extends Component {
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
+    resetPassword: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSocialLoginClick = this.onSocialLoginClick.bind(this);
-    this.signUp = this.signUp.bind(this);
-  }
-
-  onFormSubmit(e) {
-    e.preventDefault();
-    const {fields, login} = this.props;
-    login('password', fields.$values());
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onSignUpClick = this.onSignUpClick.bind(this);
+    this.onEmailInputRef = this.onEmailInputRef.bind(this);
+    this.toggleForgetPassword = this.toggleForgetPassword.bind(this);
+    this.onResetPasswordClick = this.onResetPasswordClick.bind(this);
+    // A state is used, because it's life span is limited by UI visibility. When
+    // the user leaves current page and lately returns, a state is not restored.
+    this.state = {
+      forgetPasswordIsShown: false,
+      recoveryEmailSent: false
+    };
   }
 
   onSocialLoginClick(e) {
@@ -33,13 +37,43 @@ class Login extends Component {
     login(provider, fields.$values());
   }
 
-  signUp() {
+  onFormSubmit(e) {
+    e.preventDefault();
+    const {fields, login} = this.props;
+    login('password', fields.$values());
+  }
+
+  onSignUpClick() {
     const {fields, signUp} = this.props;
     signUp(fields.$values());
   }
 
+  onEmailInputRef(input) {
+    this.emailInput = input;
+  }
+
+  toggleForgetPassword() {
+    this.setState(({forgetPasswordIsShown}) => ({
+      forgetPasswordIsShown: !forgetPasswordIsShown
+    }), () => {
+      if (this.emailInput) this.emailInput.focus();
+    });
+  }
+
+  async onResetPasswordClick() {
+    const {fields, resetPassword} = this.props;
+    const {email} = fields.$values();
+    const result = await resetPassword(email).payload.promise;
+    if (result.error) return;
+    this.setState({
+      forgetPasswordIsShown: false,
+      recoveryEmailSent: true
+    });
+  }
+
   render() {
     const {auth, fields} = this.props;
+    const {forgetPasswordIsShown, recoveryEmailSent} = this.state;
 
     return (
       <div className="firebase-login">
@@ -52,23 +86,52 @@ class Login extends Component {
         </div>
         <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={auth.formDisabled}>
-            <legend>Email Login / Sign Up</legend>
+            {!this.state.forgetPasswordIsShown ?
+              <legend>Email Login / Sign Up</legend>
+            :
+              <legend>Email Password Recovery</legend>
+            }
             <input
               autoFocus
               maxLength="100"
+              ref={this.onEmailInputRef}
               placeholder="your@email.com"
               {...fields.email}
             />
-            <br />
-            <input
-              maxLength="1000"
-              placeholder="password"
-              type="password"
-              {...fields.password}
-            />
-            <br />
-            <button>Login</button>
-            <button onClick={this.signUp} type="button">Sign Up</button>
+            {!forgetPasswordIsShown &&
+              <input
+                maxLength="1000"
+                placeholder="password"
+                type="password"
+                {...fields.password}
+              />
+            }
+            {!forgetPasswordIsShown ?
+              <div className="buttons">
+                <button>Login</button>
+                <button onClick={this.onSignUpClick} type="button">Sign Up</button>
+                <button
+                  onClick={this.toggleForgetPassword}
+                  type="button"
+                >Forgot your password?</button>
+                {recoveryEmailSent &&
+                  <p>
+                    <b>Recovery email has been sent.</b>
+                  </p>
+                }
+              </div>
+            :
+              <div className="buttons">
+                <button
+                  onClick={this.onResetPasswordClick}
+                  type="button"
+                >Reset Password</button>
+                <button
+                  onClick={this.toggleForgetPassword}
+                  type="button"
+                >Dismiss</button>
+              </div>
+            }
           </fieldset>
         </form>
         {auth.formError &&

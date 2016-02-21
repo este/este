@@ -2,6 +2,8 @@ import * as actions from './actions';
 import Firebase from 'firebase';
 import invariant from 'invariant';
 
+// For decarative Firebase queries as higher order components.
+
 const arrayify = item => [].concat(item);
 
 export default function firebaseMiddleware(firebase) {

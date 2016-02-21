@@ -3,7 +3,7 @@
     margin-bottom: 1em;
   }
   form {
-    width: 20em;
+    max-width: 24em;
     input {
       margin: .25em 0;
       padding: .25em;
@@ -13,8 +13,11 @@
         border: solid 1px #aaa;
       }
     }
-    button {
-      font-size: .825em;
+    .buttons {
+      padding-top: .5em;
+      button {
+        font-size: .825em;
+      }
     }
     .hint {
       font-size: .75em;

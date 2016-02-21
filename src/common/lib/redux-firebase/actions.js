@@ -6,6 +6,9 @@ export const REDUX_FIREBASE_LOGIN_SUCCESS = 'REDUX_FIREBASE_LOGIN_SUCCESS';
 export const REDUX_FIREBASE_OFF_QUERY = 'REDUX_FIREBASE_OFF_QUERY';
 export const REDUX_FIREBASE_ON_AUTH = 'REDUX_FIREBASE_ON_AUTH';
 export const REDUX_FIREBASE_ON_QUERY = 'REDUX_FIREBASE_ON_QUERY';
+export const REDUX_FIREBASE_RESET_PASSWORD_ERROR = 'REDUX_FIREBASE_RESET_PASSWORD_ERROR';
+export const REDUX_FIREBASE_RESET_PASSWORD_START = 'REDUX_FIREBASE_RESET_PASSWORD_START';
+export const REDUX_FIREBASE_RESET_PASSWORD_SUCCESS = 'REDUX_FIREBASE_RESET_PASSWORD_SUCCESS';
 export const REDUX_FIREBASE_SIGN_UP_ERROR = 'REDUX_FIREBASE_SIGN_UP_ERROR';
 export const REDUX_FIREBASE_SIGN_UP_START = 'REDUX_FIREBASE_SIGN_UP_START';
 export const REDUX_FIREBASE_SIGN_UP_SUCCESS = 'REDUX_FIREBASE_SIGN_UP_SUCCESS';
@@ -42,6 +45,16 @@ export function onAuth(authData) {
   return {
     type: REDUX_FIREBASE_ON_AUTH,
     payload: {authData}
+  };
+}
+
+export function resetPassword(email) {
+  return ({firebase}) => {
+    const promise = firebase.resetPassword({email});
+    return {
+      type: 'REDUX_FIREBASE_RESET_PASSWORD',
+      payload: {promise}
+    };
   };
 }
 
