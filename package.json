@@ -95,6 +95,7 @@
     "redux": "^3.0.4",
     "redux-logger": "^2.1.1",
     "redux-promise-middleware": "^2.3.2",
+    "redux-recycle": "^1.1.0",
     "regenerator": "^0.8.42",
     "run-sequence": "^1.0.2",
     "sass-loader": "^3.0.0",

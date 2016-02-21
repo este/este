@@ -3,7 +3,7 @@ import appReducer from './app/reducer';
 import createFetch from './createFetch';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
-import recycle from './lib/redux-recycle';
+import recycle from 'redux-recycle';
 import shortid from 'shortid';
 import validate from './validate';
 import {LOGOUT} from './auth/actions';
@@ -72,6 +72,7 @@ export default function configureStore({deps, initialState}) {
 
   // Reset app store on logout to initial state. Because app state can be
   // persisted in localStorage, recycle on logout is must.
+  // Remember to pass {} whenever initialState contains sensitive informations.
   const recycleAppReducer = recycle(appReducer, [LOGOUT], initialState);
 
   const store = createReduxStore(createStore)(recycleAppReducer, initialState);
