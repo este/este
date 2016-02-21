@@ -15,7 +15,7 @@ import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 window.Promise = Bluebird;
 
 const app = document.getElementById('app');
-const initialState = window.__INITIAL_STATE__;
+const initialState = JSON.parse(app.getAttribute('data-initial-state'));
 const store = configureStore({
   initialState,
   platformMiddleware: [routerMiddleware(browserHistory)]

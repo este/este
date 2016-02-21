@@ -4,15 +4,15 @@ export default class Html extends Component {
 
   static propTypes = {
     appCssFilename: PropTypes.string,
-    bodyHtml: PropTypes.string.isRequired,
+    children: PropTypes.array.isRequired,
     googleAnalyticsId: PropTypes.string.isRequired,
     helmet: PropTypes.object.isRequired,
-    isProduction: PropTypes.bool.isRequired,
+    isProduction: PropTypes.bool.isRequired
   };
 
   render() {
     const {
-      appCssFilename, bodyHtml, googleAnalyticsId, isProduction, helmet
+      appCssFilename, googleAnalyticsId, isProduction, helmet, children
     } = this.props;
 
     const linkStyles = appCssFilename &&
@@ -45,7 +45,9 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
           {linkStyles}
           {analytics}
         </head>
-        <body dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+        <body>
+          {children}
+        </body>
       </html>
     );
   }
