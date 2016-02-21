@@ -70,10 +70,9 @@ export default function configureStore({deps, initialState}) {
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
 
-  // Reset app store on logout to initial state. Because app state can be
-  // persisted in localStorage, recycle on logout is must.
-  // Remember to pass {} whenever initialState contains sensitive informations.
-  const recycleAppReducer = recycle(appReducer, [LOGOUT], initialState);
+  // Reset app store on logout to its initial state. Because app state can be
+  // persisted in localStorage, recycle on logout is a must.
+  const recycleAppReducer = recycle(appReducer, [LOGOUT]);
 
   const store = createReduxStore(createStore)(recycleAppReducer, initialState);
 
