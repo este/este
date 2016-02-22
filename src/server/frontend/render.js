@@ -41,23 +41,22 @@ const getAppContainer = (state, store, renderProps) =>
     </Provider>
   </div>;
 
-const getScripts = (state, headers, hostname, appJsFilename) =>
+const getScripts = (appJsFilename) =>
   // Note how we use cdn.polyfill.io, en is default, but can be changed later.
   <div>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
     <script src={appJsFilename}></script>
   </div>;
 
-const renderPage = (store, renderProps, req) => {
+const renderPage = (store, renderProps) => {
   const state = store.getState();
-  const { headers, hostname } = req;
   const appContainer = getAppContainer(state, store, renderProps);
   const helmet = Helmet.rewind();
   const {
     styles: { app: appCssFilename },
     javascript: { app: appJsFilename }
   } = webpackIsomorphicTools.assets();
-  const scripts = getScripts(state, headers, hostname, appJsFilename);
+  const scripts = getScripts(appJsFilename);
   if (!config.isProduction) {
     webpackIsomorphicTools.refresh();
   }
