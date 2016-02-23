@@ -6,8 +6,8 @@ import {connect} from 'react-redux';
 class Header extends Component {
 
   static propTypes = {
+    location: PropTypes.object,
     msg: PropTypes.object.isRequired,
-    pathname: PropTypes.string.isRequired,
     viewer: PropTypes.object
   };
 
@@ -34,6 +34,7 @@ class Header extends Component {
 }
 
 export default connect(state => ({
+  location: state.routing.locationBeforeTransitions,
   msg: state.intl.msg.app.links,
   viewer: state.users.viewer
 }))(Header);
