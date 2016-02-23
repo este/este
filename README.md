@@ -21,7 +21,10 @@
 - Advanced performance with pure components
 - Well tuned dev stack
 - Universal forms with validation
-- Firebase integration ([este.firebaseapp.com](https://este.firebaseapp.com))
+- Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
+  - email and facebook login
+  - declarative queryFirebase higher order component for Firebase imperative api
+  - and more
 
 ## Libraries
 
