@@ -10,7 +10,6 @@ import { LOGOUT } from './auth/actions';
 import { applyMiddleware, compose, createStore } from 'redux';
 
 export default function configureStore({ deps, initialState }) {
-
   const firebase = new Firebase('https://este.firebaseio.com');
   // // Check whether connection works.
   // firebase.child('hello-world').set({

@@ -5,20 +5,19 @@
   ],
   "extends" : ["airbnb"],
   "rules": {
-    // Soften rules for legacy projects.
-    "comma-dangle": 0,
-    "default-case": 0,
-    "new-cap": [2, {"capIsNew": false, "newIsCap": true}],
-    "no-floating-decimal": 0,
-    "no-param-reassign": 0,
-    "no-shadow": 0,
-    "padded-blocks": 0,
-    // Import
-    "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
+    // Soften some rules.
+    "comma-dangle": 0, // Nobody cares about commas.
+    "default-case": 0, // Required default case is nonsense.
+    "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
+    "no-floating-decimal": 0, // .5 is just fine.
+    "no-param-reassign": 0, // We love param reassignment.
+    "no-shadow": 0, // Shadowing is a nice language feature.
+    // eslint-plugin-import
+    "import/no-unresolved": [2, {"commonjs": true}],
     "import/named": 2,
-    "import/namespace": 2,
     "import/default": 2,
-    "import/export": 2,
+    "import/namespace": 2,
+    "import/export": 2
   },
   "globals": {
     "after": false,

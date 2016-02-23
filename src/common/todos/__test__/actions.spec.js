@@ -2,7 +2,6 @@ import * as actions from '../actions.js';
 import { expect } from 'chai';
 
 describe('todos actions', () => {
-
   // // Async testing example.
   // it('should do something async', done => {
   //   setTimeout(() => {
@@ -23,5 +22,4 @@ describe('todos actions', () => {
     expect(payload.id).equal('uid');
     expect(payload.title).equal('Hello');
   });
-
 });

@@ -4,7 +4,6 @@ import { format } from './intl/format';
 
 // Localized validation.
 export default function validate(getState) {
-
   const localizedValidate = json => {
     const { msg } = getState().intl;
 
@@ -29,5 +28,4 @@ export default function validate(getState) {
   };
 
   return localizedValidate;
-
 }

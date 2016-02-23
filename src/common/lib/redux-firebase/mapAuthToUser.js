@@ -1,5 +1,4 @@
 export default function mapAuthToUser(authData) {
-
   const {
     uid: id,
     provider,

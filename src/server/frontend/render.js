@@ -97,7 +97,6 @@ export default function render(req, res, next) {
   const location = createMemoryHistory().createLocation(req.url);
 
   match({ routes, location }, async (error, redirectLocation, renderProps) => {
-
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
       return;

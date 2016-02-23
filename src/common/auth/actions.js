@@ -5,7 +5,6 @@ export const LOGOUT = 'LOGOUT';
 
 export function login(fields) {
   return ({ fetch, validate }) => {
-
     // Why function? https://phabricator.babeljs.io/T2765
     async function getPromise() {
       try {

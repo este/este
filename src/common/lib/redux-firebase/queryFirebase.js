@@ -29,7 +29,6 @@ const optionsToPayload = ({ child, key, params }) => ({ child, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
 export default function queryFirebase(Wrapped, mapPropsToOptions) {
-
   return class FirebaseQuery extends Component {
 
     static contextTypes = {

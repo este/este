@@ -25,7 +25,6 @@ const loaders = {
 const serverIp = ip.address();
 
 export default function makeConfig(isDevelopment) {
-
   function stylesLoaders() {
     return Object.keys(loaders).map(ext => {
       const prefix = 'css-loader!postcss-loader';
@@ -140,5 +139,4 @@ export default function makeConfig(isDevelopment) {
   };
 
   return config;
-
 }

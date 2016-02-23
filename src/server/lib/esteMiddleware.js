@@ -1,7 +1,6 @@
 // X-Powered-By: Este.js
 // http://expressjs.com/4x/api.html#res.set
 export default function esteMiddleware() {
-
   return (req, res, next) => {
     const { app } = req;
 
@@ -14,5 +13,4 @@ export default function esteMiddleware() {
 
     next();
   };
-
 }

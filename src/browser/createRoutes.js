@@ -11,7 +11,6 @@ import Todos from './todos/Page.react';
 import { IndexRoute, Route } from 'react-router';
 
 export default function createRoutes(getState) {
-
   const requireAuth = (nextState, replace) => {
     const loggedInUser = getState().users.viewer;
     if (!loggedInUser) {
@@ -35,5 +34,4 @@ export default function createRoutes(getState) {
       <Route component={NotFound} path="*" />
     </Route>
   );
-
 }
