@@ -1,8 +1,12 @@
-// This is example of Firebase security and modeling language.
+// An example of Firebase security and modeling language.
 // https://github.com/firebase/bolt/blob/master/docs/guide.md
+
+// Functions
 
 isSignedIn() { auth != null }
 isUser(uid) { isSignedIn() && auth.uid == uid }
+
+// Types
 
 type ShortRequiredString extends String {
   // Is required via this.length > 0
@@ -17,6 +21,20 @@ type HelloWorld {
   createdAt: Number
 }
 
+type User {
+  authenticatedAt: Number,
+  displayName: LongString,
+  id: ShortRequiredString,
+  profileImageURL: LongString,
+  provider: LongString
+}
+
+type Email {
+  email: ShortRequiredString
+}
+
+// Paths
+
 path /hello-world is HelloWorld {
   // Anyone can create, read, update. No one can delete.
   create() { true }
@@ -24,30 +42,16 @@ path /hello-world is HelloWorld {
   update() { true }
 }
 
-type User {
-  displayName: LongString,
-  email: ShortRequiredString,
-  id: ShortRequiredString,
-  profileImageURL: LongString,
-  provider: LongString
+path /users {
+  read() { true }
+  index() { ["authenticatedAt"] }
 }
 
 path /users/{uid} is User {
-  read() { isUser(uid) }
   write() { isUser(uid) }
 }
 
-//type Task {
-//  completed: Boolean,
-//  createdAt: Number,
-//  deletedAt: Number | Null,
-//  description: LongString | Null,
-//  id: String,
-//  title: ShortRequiredString,
-//  updatedAt: Number
-//}
-
-//path /users-tasks/{uid}/$focusId is Task {
-//  read() { isUser(uid) }
-//  write() { isUser(uid) }
-//}
+path /users-emails/{uid} is Email {
+  read() { isUser(uid) }
+  write() { isUser(uid) }
+}

@@ -1,9 +1,9 @@
 import './Login.scss';
-import * as firebaseActions from '../../common/lib/redux-firebase/actions';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {fields} from '../../common/lib/redux-fields';
+import {firebaseActions} from '../../common/lib/redux-firebase';
 
 class Login extends Component {
 
@@ -23,8 +23,8 @@ class Login extends Component {
     this.onEmailInputRef = this.onEmailInputRef.bind(this);
     this.toggleForgetPassword = this.toggleForgetPassword.bind(this);
     this.onResetPasswordClick = this.onResetPasswordClick.bind(this);
-    // A state is used, because it's life span is limited by UI visibility. When
-    // the user leaves current page and lately returns, a state is not restored.
+    // Note we deliberately use component state, because we don't want to
+    // preserve this piece of state when the user leaves a page.
     this.state = {
       forgetPasswordIsShown: false,
       recoveryEmailSent: false

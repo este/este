@@ -1,6 +1,6 @@
 import * as actions from './actions';
-import * as firebaseActions from '../lib/redux-firebase/actions';
 import {Record} from 'immutable';
+import {firebaseActions} from '../lib/redux-firebase';
 
 const InitialState = Record({
   formDisabled: false,

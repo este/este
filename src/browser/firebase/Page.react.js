@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import Login from './Login.react';
 import Profile from './Profile.react';
 import React, {PropTypes} from 'react';
+import Users from './Users.react';
 import {connect} from 'react-redux';
 
 class Page extends Component {
@@ -28,6 +29,8 @@ class Page extends Component {
         :
           <Login />
         }
+        <Users limitToLast={10} />
+        <button disabled>TODO: Load more</button>
       </div>
     );
   }

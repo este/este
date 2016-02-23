@@ -21,7 +21,7 @@ class Logout extends Component {
 
   logout() {
     const {logout} = this.props;
-    // We have to redirect user to root before logout, because it resets store.
+    // Redirect user to root page before logout since logout recycles app state.
     this.context.router.replace('/');
     logout();
   }

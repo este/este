@@ -8,7 +8,6 @@ import shortid from 'shortid';
 import validate from './validate';
 import {LOGOUT} from './auth/actions';
 import {applyMiddleware, compose, createStore} from 'redux';
-import {firebaseMiddleware} from './lib/redux-firebase';
 
 export default function configureStore({deps, initialState}) {
 
@@ -43,8 +42,7 @@ export default function configureStore({deps, initialState}) {
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
-    }),
-    firebaseMiddleware(firebase)
+    })
   ];
 
   // Enable logger only for browser and React Native development.

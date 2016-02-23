@@ -1,10 +1,9 @@
-// TODO: import actions from './actions';
-import firebaseMiddleware from './firebaseMiddleware';
+import * as firebaseActions from './actions';
 import mapAuthToUser from './mapAuthToUser';
 import queryFirebase from './queryFirebase';
 
 export {
-  firebaseMiddleware,
+  firebaseActions,
   mapAuthToUser,
   queryFirebase
 };
