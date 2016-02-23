@@ -1,9 +1,9 @@
 import './Login.scss';
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {fields} from '../../common/lib/redux-fields';
-import {firebaseActions} from '../../common/lib/redux-firebase';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { fields } from '../../common/lib/redux-fields';
+import { firebaseActions } from '../../common/lib/redux-firebase';
 
 class Login extends Component {
 
@@ -32,19 +32,19 @@ class Login extends Component {
   }
 
   onSocialLoginClick(e) {
-    const {provider} = e.target.dataset;
-    const {fields, login} = this.props;
+    const { provider } = e.target.dataset;
+    const { fields, login } = this.props;
     login(provider, fields.$values());
   }
 
   onFormSubmit(e) {
     e.preventDefault();
-    const {fields, login} = this.props;
+    const { fields, login } = this.props;
     login('password', fields.$values());
   }
 
   onSignUpClick() {
-    const {fields, signUp} = this.props;
+    const { fields, signUp } = this.props;
     signUp(fields.$values());
   }
 
@@ -53,8 +53,8 @@ class Login extends Component {
   }
 
   async onResetPasswordClick() {
-    const {fields, resetPassword} = this.props;
-    const {email} = fields.$values();
+    const { fields, resetPassword } = this.props;
+    const { email } = fields.$values();
     const result = await resetPassword(email).payload.promise;
     if (result.error) return;
     this.setState({
@@ -64,7 +64,7 @@ class Login extends Component {
   }
 
   toggleForgetPassword() {
-    this.setState(({forgetPasswordIsShown}) => ({
+    this.setState(({ forgetPasswordIsShown }) => ({
       forgetPasswordIsShown: !forgetPasswordIsShown
     }), () => {
       if (this.emailInput) this.emailInput.focus();
@@ -72,8 +72,8 @@ class Login extends Component {
   }
 
   render() {
-    const {auth, fields} = this.props;
-    const {forgetPasswordIsShown, recoveryEmailSent} = this.state;
+    const { auth, fields } = this.props;
+    const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
 
     return (
       <div className="firebase-login">

@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes, Text, View} from 'react-native';
+import React, { PropTypes, Text, View } from 'react-native';
 import appStyles from '../app/styles';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class Page extends Component {
 
@@ -10,10 +10,10 @@ class Page extends Component {
   };
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
-      <View style={[appStyles.centeredView, {paddingBottom: 64}]}>
+      <View style={[appStyles.centeredView, { paddingBottom: 64 }]}>
         <Text style={[appStyles.centered, appStyles.paragraph]}>
           {msg.iosInfoText}
         </Text>

@@ -1,9 +1,9 @@
 import './NewTodo.scss';
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {fields} from '../../common/lib/redux-fields';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { fields } from '../../common/lib/redux-fields';
 
 class NewTodo extends Component {
 
@@ -20,14 +20,14 @@ class NewTodo extends Component {
 
   onInputKeyDown(e) {
     if (e.key !== 'Enter') return;
-    const {addTodo, fields} = this.props;
+    const { addTodo, fields } = this.props;
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);
     fields.$reset();
   }
 
   render() {
-    const {fields, msg} = this.props;
+    const { fields, msg } = this.props;
 
     return (
       <input

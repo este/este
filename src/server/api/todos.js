@@ -18,7 +18,7 @@ router.route('/user')
     // Simulate async access.
     // In real app we would check user credentials and load user data from DB.
     setTimeout(() => {
-      res.status(200).send({todos}).end();
+      res.status(200).send({ todos }).end();
     }, 50);
   });
 

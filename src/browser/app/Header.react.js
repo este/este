@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Header extends Component {
 
@@ -12,7 +12,7 @@ class Header extends Component {
   };
 
   render() {
-    const {msg, viewer} = this.props;
+    const { msg, viewer } = this.props;
 
     return (
       <header>

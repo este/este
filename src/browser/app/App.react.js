@@ -3,9 +3,9 @@ import Component from 'react-pure-render/component';
 import Footer from './Footer.react';
 import Header from './Header.react';
 import Helmet from 'react-helmet';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {onAppComponentDidMount} from '../../common/app/actions';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { onAppComponentDidMount } from '../../common/app/actions';
 
 class App extends Component {
 
@@ -20,19 +20,19 @@ class App extends Component {
   // the right place to dispatch client only (e.g. Firebase) actions.
   // Firebase can be used on the server as well, but it's over of this example.
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(onAppComponentDidMount());
   }
 
   render() {
-    const {children, location} = this.props;
+    const { children, location } = this.props;
 
     return (
       // Pass data-pathname to allow route specific styling.
       <div className="page" data-pathname={location.pathname}>
         <Helmet
           link={[
-            {rel: 'shortcut icon', href: require('./favicon.ico')}
+            { rel: 'shortcut icon', href: require('./favicon.ico') }
           ]}
           meta={[{
             name: 'description',

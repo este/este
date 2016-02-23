@@ -10,7 +10,7 @@ app.use('/api/v1', api);
 app.use(frontend);
 app.use(errorHandler);
 
-const {port} = config;
+const { port } = config;
 
 app.listen(port, () => {
   console.log('Server started at port %d', port);

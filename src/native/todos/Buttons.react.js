@@ -1,7 +1,7 @@
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 const {
   PropTypes, StyleSheet, Text, TouchableOpacity, View

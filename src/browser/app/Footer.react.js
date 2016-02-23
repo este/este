@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {FormattedHTMLMessage} from 'react-intl';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
+import { connect } from 'react-redux';
 
 class Footer extends Component {
 
@@ -10,7 +10,7 @@ class Footer extends Component {
   };
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
       <footer>

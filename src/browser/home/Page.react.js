@@ -1,9 +1,9 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, {PropTypes} from 'react';
-import {FormattedHTMLMessage} from 'react-intl';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Page extends Component {
 
@@ -12,7 +12,7 @@ class Page extends Component {
   };
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
       <div className="home-page">

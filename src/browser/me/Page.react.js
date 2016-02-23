@@ -2,10 +2,10 @@ import './Page.scss';
 import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, {PropTypes} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Page extends Component {
 
@@ -16,7 +16,7 @@ class Page extends Component {
   };
 
   render() {
-    const {children, msg, viewer: {email}} = this.props;
+    const { children, msg, viewer: { email } } = this.props;
 
     return (
       <div className="me-page">
@@ -30,7 +30,7 @@ class Page extends Component {
             <FormattedMessage
               defaultMessage={msg.me.welcome}
               id={'msg.me.welcome'}
-              values={{email}}
+              values={{ email }}
             />
           </p>
         }

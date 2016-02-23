@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import Todo from './todo';
-import {Map, Record} from 'immutable';
+import { Map, Record } from 'immutable';
 
 const InitialState = Record({
   map: Map()
@@ -8,7 +8,7 @@ const InitialState = Record({
 const initialState = new InitialState;
 
 // Note how JSON from server is revived to immutable record.
-const revive = ({map}) => initialState.merge({
+const revive = ({ map }) => initialState.merge({
   map: Map(map).map(todo => new Todo(todo))
 });
 
@@ -40,7 +40,7 @@ export default function todosReducer(state = initialState, action) {
     }
 
     case actions.DELETE_TODO: {
-      const {id} = action.payload;
+      const { id } = action.payload;
       return state.update('map', map => map.delete(id));
     }
 
@@ -50,7 +50,7 @@ export default function todosReducer(state = initialState, action) {
     }
 
     case actions.TOGGLE_TODO_COMPLETED: {
-      const {todo} = action.payload;
+      const { todo } = action.payload;
       return state
         .updateIn(['map', todo.id, 'completed'], completed => !completed);
     }

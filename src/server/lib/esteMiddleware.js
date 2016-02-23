@@ -3,7 +3,7 @@
 export default function esteMiddleware() {
 
   return (req, res, next) => {
-    const {app} = req;
+    const { app } = req;
 
     // Set X-Powered-By only if it has not been disabled by the user previously.
     if (app.get('x-powered-by')) {

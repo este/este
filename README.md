@@ -77,6 +77,7 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 - `gulp mocha` run mocha unit tests
 - `gulp mocha-watch` continuous test running for TDD
 - `gulp eslint` eslint
+- `gulp eslint --fix` fix some eslint issues
 
 ## Production Tasks
 

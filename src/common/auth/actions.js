@@ -4,7 +4,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
 export function login(fields) {
-  return ({fetch, validate}) => {
+  return ({ fetch, validate }) => {
 
     // Why function? https://phabricator.babeljs.io/T2765
     async function getPromise() {
@@ -16,7 +16,7 @@ export function login(fields) {
         // Sure we can use smarter api than raw fetch.
         const response = await fetch('/api/v1/auth/login', {
           method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(fields)
         });
         if (response.status !== 200) throw response;
@@ -41,7 +41,7 @@ export function login(fields) {
 }
 
 export function logout() {
-  return ({firebase}) => {
+  return ({ firebase }) => {
     firebase.unauth();
     return {
       type: LOGOUT

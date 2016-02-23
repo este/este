@@ -7,7 +7,7 @@ export default function errorHandler(err, req, res, next) { // eslint-disable-li
 
   res.status(500).format({
     json() {
-      const errorInfo = {error: err.toString()};
+      const errorInfo = { error: err.toString() };
       if (!config.isProduction) errorInfo.details = errorDetails;
 
       res.send(errorInfo);

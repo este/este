@@ -8,8 +8,8 @@ nconf.env('__');
 
 // Remember, never put production secrets in config. Use nconf.
 const config = {
-  isProduction: isProduction,
   googleAnalyticsId: 'UA-XXXXXXX-X',
+  isProduction,
   port: process.env.PORT || 8000,
   webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl']
 };

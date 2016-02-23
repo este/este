@@ -11,7 +11,7 @@ export default class Validation {
     this.promise = Promise.resolve();
   }
 
-  custom(callback, {required} = {}) {
+  custom(callback, { required } = {}) {
     const prop = this._prop;
     const value = this._object[prop];
     const object = this._object;
@@ -37,7 +37,7 @@ export default class Validation {
         ? getRequiredMessage(prop, value)
         : this.getRequiredMessage(prop, value);
       throw new ValidationError(msg, prop);
-    }, {required: true});
+    }, { required: true });
   }
 
   getRequiredMessage(prop) {

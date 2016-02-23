@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 class Settings extends Component {
 
@@ -10,7 +10,7 @@ class Settings extends Component {
   };
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
       <div className="settings-page">

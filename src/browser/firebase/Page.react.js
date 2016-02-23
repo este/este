@@ -3,9 +3,9 @@ import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import Login from './Login.react';
 import Profile from './Profile.react';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import Users from './Users.react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class Page extends Component {
 
@@ -14,7 +14,7 @@ class Page extends Component {
   };
 
   render() {
-    const {viewer} = this.props;
+    const { viewer } = this.props;
 
     return (
       <div className="firebase-page">

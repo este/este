@@ -1,7 +1,7 @@
 import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 class Logout extends Component {
 
@@ -20,14 +20,14 @@ class Logout extends Component {
   }
 
   logout() {
-    const {logout} = this.props;
+    const { logout } = this.props;
     // Redirect user to root page before logout since logout recycles app state.
     this.context.router.replace('/');
     logout();
   }
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
       <div className="logout">

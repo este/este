@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux';
-import {reduxFields} from '../lib/redux-fields';
+import { combineReducers } from 'redux';
+import { reduxFields } from '../lib/redux-fields';
 
 import auth from '../auth/reducer';
 import device from '../device/reducer';

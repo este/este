@@ -4,6 +4,7 @@ import del from 'del';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
 import gulp from 'gulp';
+import gulpIf from 'gulp-if';
 import mochaRunCreator from './test/mochaRunCreator';
 import os from 'os';
 import path from 'path';
@@ -16,14 +17,18 @@ const args = yargs
   .alias('p', 'production')
   .argv;
 
-const runEslint = () =>
-  gulp.src([
+// To fix some eslint issues: gulp eslint --fix
+const runEslint = () => {
+  const isFixed = file => args.fix && file.eslint && file.eslint.fixed;
+  return gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
     'webpack/*.js'
-  ])
-  .pipe(eslint())
-  .pipe(eslint.format());
+  ], { base: './' })
+    .pipe(eslint({ fix: args.fix }))
+    .pipe(eslint.format())
+    .pipe(gulpIf(isFixed, gulp.dest('./')));
+};
 
 gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
@@ -46,7 +51,7 @@ gulp.task('mocha', () => {
 // Enable to run single test file
 // ex. gulp mocha-file --file src/browser/components/__test__/Button.js
 gulp.task('mocha-file', () => {
-  mochaRunCreator('process')({path: path.join(__dirname, args.file)});
+  mochaRunCreator('process')({ path: path.join(__dirname, args.file) });
 });
 
 // Continuous test running
@@ -91,7 +96,7 @@ gulp.task('to-html', done => {
   };
 
   const fetch = url => new Promise((resolve, reject) => {
-    require('http').get({host: 'localhost', path: url, port: 8000}, res => {
+    require('http').get({ host: 'localhost', path: url, port: 8000 }, res => {
       // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
       res.setEncoding('utf8');
       let body = '';

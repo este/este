@@ -2,11 +2,11 @@ import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import NewTodo from './NewTodo.react';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import Todos from './Todos.react';
 import fetch from '../../common/components/fetch';
-import {connect} from 'react-redux';
-import {fetchUserTodos} from '../../common/todos/actions';
+import { connect } from 'react-redux';
+import { fetchUserTodos } from '../../common/todos/actions';
 
 class Page extends Component {
 
@@ -15,7 +15,7 @@ class Page extends Component {
   };
 
   render() {
-    const {msg} = this.props;
+    const { msg } = this.props;
 
     return (
       <div className="todos-page">

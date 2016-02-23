@@ -1,5 +1,5 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 export default function fetch(...actions) {
   return Wrapped => class Fetch extends Component {
@@ -19,9 +19,9 @@ export default function fetch(...actions) {
 
     // For client side fetching.
     componentDidMount() {
-      const {store: {dispatch}} = this.context;
-      const {location, params} = this.props;
-      actions.forEach(action => dispatch(action({location, params})));
+      const { store: { dispatch } } = this.context;
+      const { location, params } = this.props;
+      actions.forEach(action => dispatch(action({ location, params })));
     }
 
     render() {

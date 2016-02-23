@@ -1,5 +1,5 @@
 import * as actions from '../actions.js';
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 describe('todos actions', () => {
 
@@ -17,7 +17,7 @@ describe('todos actions', () => {
       now: () => 'now'
     };
     const action = actions.addTodo('Hello')(deps);
-    const {type, payload} = action;
+    const { type, payload } = action;
     expect(type).equal('ADD_TODO');
     expect(payload.createdAt).equal('now');
     expect(payload.id).equal('uid');

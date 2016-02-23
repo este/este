@@ -18,14 +18,14 @@
 import * as actions from './actions';
 import Component from 'react-pure-render/component';
 import Firebase from 'firebase';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import invariant from 'invariant';
 
 const ensureArray = item => [].concat(item);
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
 // recycled on logout. Then we can just set the key to current viewer.
-const optionsToPayload = ({child, key, params}) => ({child, key, params});
+const optionsToPayload = ({ child, key, params }) => ({ child, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
 export default function queryFirebase(Wrapped, mapPropsToOptions) {
@@ -54,7 +54,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     dispatch(callback) {
-      this.context.store.dispatch(({firebase}) => {
+      this.context.store.dispatch(({ firebase }) => {
         invariant(firebase instanceof Firebase,
           'Expected the firebase to be an instance of Firebase.');
         const options = mapPropsToOptions(this.props);
@@ -63,12 +63,12 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         const ref = firebase.child(options.child);
         const type = callback(ref, options);
         const payload = optionsToPayload(options);
-        return {type, payload};
+        return { type, payload };
       });
     }
 
     on() {
-      this.dispatch((ref, {on, once, params = []}) => {
+      this.dispatch((ref, { on, once, params = [] }) => {
         // Map declarative params to Firebase imperative API.
         params.forEach(([method, ...args]) => {
           ref = ref[method](...args);

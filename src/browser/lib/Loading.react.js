@@ -3,7 +3,7 @@
 
 import './Loading.scss';
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 export default class Loading extends Component {
 
@@ -27,10 +27,10 @@ export default class Loading extends Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      this.setState({currentText: this.props.loadingText});
+      this.setState({ currentText: this.props.loadingText });
     }, 1000);
     this.longTimer = setTimeout(() => {
-      this.setState({currentText: this.props.longLoadingText});
+      this.setState({ currentText: this.props.longLoadingText });
     }, 10000);
   }
 

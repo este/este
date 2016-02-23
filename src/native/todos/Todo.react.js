@@ -38,12 +38,12 @@ export default class Todo extends Component {
   }
 
   onTouchableOpacityPress() {
-    const {todo, toggleTodoCompleted} = this.props;
+    const { todo, toggleTodoCompleted } = this.props;
     toggleTodoCompleted(todo);
   }
 
   render() {
-    const {todo} = this.props;
+    const { todo } = this.props;
     const image = todo.completed
       ? require('./img/SelectedCheckbox.png')
       : require('./img/EmptyCheckbox.png');

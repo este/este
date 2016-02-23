@@ -1,10 +1,10 @@
 import Component from 'react-pure-render/component';
 import React from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // yahoo/react-intl still does not support React Native, but we can use format.
 // https://github.com/yahoo/react-intl/issues/119
-import {format} from '../../common/intl/format';
+import { format } from '../../common/intl/format';
 
 const {
   PropTypes, StyleSheet, Text, View
@@ -33,13 +33,13 @@ class Header extends Component {
   };
 
   render() {
-    const {msg, todos} = this.props;
+    const { msg, todos } = this.props;
     const leftTodos = todos.filter(todo => !todo.completed).size;
 
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          {(format(msg.leftList, {size: leftTodos}))}
+          {(format(msg.leftList, { size: leftTodos }))}
         </Text>
       </View>
     );

@@ -2,10 +2,10 @@ import './Users.scss';
 import * as usersActions from '../../common/users/actions';
 import Component from 'react-pure-render/component';
 import Loading from '../lib/Loading.react';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
-import {connect} from 'react-redux';
-import {queryFirebase} from '../../common/lib/redux-firebase';
+import { connect } from 'react-redux';
+import { queryFirebase } from '../../common/lib/redux-firebase';
 
 class Users extends Component {
 
@@ -15,7 +15,7 @@ class Users extends Component {
   };
 
   render() {
-    const {limitToLast, users} = this.props;
+    const { limitToLast, users } = this.props;
 
     return (
       <div className="firebase-users">

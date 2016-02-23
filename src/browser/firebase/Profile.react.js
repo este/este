@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {logout} from '../../common/auth/actions';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { logout } from '../../common/auth/actions';
 
 class Profile extends Component {
 
@@ -20,14 +20,14 @@ class Profile extends Component {
   }
 
   logout() {
-    const {logout} = this.props;
+    const { logout } = this.props;
     // Redirect user to root page before logout since logout recycles app state.
     this.context.router.replace('/');
     logout();
   }
 
   render() {
-    const {viewer} = this.props;
+    const { viewer } = this.props;
 
     return (
       <div className="firebase-profile">
@@ -49,4 +49,4 @@ class Profile extends Component {
 
 export default connect(state => ({
   viewer: state.users.viewer
-}), {logout})(Profile);
+}), { logout })(Profile);

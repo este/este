@@ -1,6 +1,6 @@
 import * as actions from './actions';
-import {Record} from 'immutable';
-import {firebaseActions} from '../lib/redux-firebase';
+import { Record } from 'immutable';
+import { firebaseActions } from '../lib/redux-firebase';
 
 const InitialState = Record({
   formDisabled: false,
@@ -24,13 +24,13 @@ export default function authReducer(state = initialState, action) {
     case firebaseActions.REDUX_FIREBASE_LOGIN_ERROR:
     case firebaseActions.REDUX_FIREBASE_RESET_PASSWORD_ERROR:
     case firebaseActions.REDUX_FIREBASE_SIGN_UP_ERROR:
-      return state.merge({formDisabled: false, formError: action.payload});
+      return state.merge({ formDisabled: false, formError: action.payload });
 
     case actions.LOGIN_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_LOGIN_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_RESET_PASSWORD_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_SIGN_UP_SUCCESS:
-      return state.merge({formDisabled: false, formError: null});
+      return state.merge({ formDisabled: false, formError: null });
 
   }
 

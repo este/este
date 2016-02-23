@@ -5,17 +5,13 @@
   ],
   "extends" : ["airbnb"],
   "rules": {
-    // Soften rules for legacy projects. Can be removed for clean project.
+    // Soften rules for legacy projects.
     "comma-dangle": 0,
     "default-case": 0,
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}],
     "no-floating-decimal": 0,
     "no-param-reassign": 0,
     "no-shadow": 0,
-    "no-unused-expressions": 0,
-    "no-use-before-define": [2, "nofunc"],
-    "object-curly-spacing": [2, "never"],
-    "object-shorthand": 0,
     "padded-blocks": 0,
     // Import
     "import/no-unresolved": [2, {"commonjs": true, "amd": true}],

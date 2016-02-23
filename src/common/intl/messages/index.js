@@ -5,4 +5,4 @@ import en from './en';
 // Your app is used and useful, so now it's time for further optimization. Since
 // messages are in app state, they can be fetched or passed from server easily.
 
-export default {en};
+export default { en };

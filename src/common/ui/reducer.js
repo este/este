@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 
 const InitialState = Record({
   isSideMenuOpen: false
@@ -12,7 +12,7 @@ export default function uiReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.ON_SIDE_MENU_CHANGE: {
-      const {isOpen} = action.payload;
+      const { isOpen } = action.payload;
       return state.set('isSideMenuOpen', isOpen);
     }
 

@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 
 const InitialState = Record({
   isMobile: false,
@@ -14,7 +14,7 @@ export default function deviceReducer(state = initialState, action) {
   switch (action.type) {
 
     case actions.SET_PLATFORM: {
-      const {platform} = action.payload;
+      const { platform } = action.payload;
       return state.set('platform', platform);
     }
 

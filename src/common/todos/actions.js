@@ -1,4 +1,4 @@
-import {Range} from 'immutable';
+import { Range } from 'immutable';
 
 export const ADD_HUNDRED_TODOS = 'ADD_HUNDRED_TODOS';
 export const ADD_TODO = 'ADD_TODO';
@@ -12,7 +12,7 @@ export const TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
 
 export function addHundredTodos() {
   // Note how dependency injection ensures pure action.
-  return ({getUid, now}) => {
+  return ({ getUid, now }) => {
     const payload = Range(0, 100).map(() => {
       const id = getUid();
       return {
@@ -29,7 +29,7 @@ export function addHundredTodos() {
 }
 
 export function addTodo(title) {
-  return ({getUid, now}) => ({
+  return ({ getUid, now }) => ({
     type: ADD_TODO,
     payload: {
       createdAt: now(),
@@ -54,12 +54,12 @@ export function clearAllTodos() {
 export function deleteTodo(id) {
   return {
     type: DELETE_TODO,
-    payload: {id}
+    payload: { id }
   };
 }
 
 export function fetchUserTodos() {
-  return ({fetch}) => ({
+  return ({ fetch }) => ({
     type: 'FETCH_USER_TODOS',
     payload: {
       promise: fetch('/api/v1/todos/user')
@@ -71,6 +71,6 @@ export function fetchUserTodos() {
 export function toggleTodoCompleted(todo) {
   return {
     type: TOGGLE_TODO_COMPLETED,
-    payload: {todo}
+    payload: { todo }
   };
 }

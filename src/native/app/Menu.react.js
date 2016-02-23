@@ -1,5 +1,5 @@
 import Component from 'react-pure-render/component';
-import React, {Dimensions} from 'react-native';
+import React, { Dimensions } from 'react-native';
 
 const {
   PropTypes, ScrollView, StyleSheet, Text, View
@@ -42,7 +42,7 @@ export default class Menu extends Component {
   };
 
   render() {
-    const {links, onRouteChange} = this.props;
+    const { links, onRouteChange } = this.props;
     const pages = ['home', 'todos'];
 
     return (

@@ -6,10 +6,10 @@ import promiseMiddleware from 'redux-promise-middleware';
 import recycle from 'redux-recycle';
 import shortid from 'shortid';
 import validate from './validate';
-import {LOGOUT} from './auth/actions';
-import {applyMiddleware, compose, createStore} from 'redux';
+import { LOGOUT } from './auth/actions';
+import { applyMiddleware, compose, createStore } from 'redux';
 
-export default function configureStore({deps, initialState}) {
+export default function configureStore({ deps, initialState }) {
 
   const firebase = new Firebase('https://este.firebaseio.com');
   // // Check whether connection works.
@@ -19,13 +19,13 @@ export default function configureStore({deps, initialState}) {
 
   // Este dependency injection middleware. So simple that we don't need a lib.
   // It's like mixed redux-thunk and redux-inject.
-  const injectMiddleware = deps => ({dispatch, getState}) => next => action =>
+  const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     next(typeof action === 'function'
-      ? action({...deps, dispatch, getState})
+      ? action({ ...deps, dispatch, getState })
       : action
     );
 
-  const {device: {host}} = initialState;
+  const { device: { host } } = initialState;
   // Remember to set SERVER_URL for deploy.
   const serverUrl = host || process.env.SERVER_URL ||
     // Browser is ok with relative url. Server and React Native need absolute.

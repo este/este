@@ -1,8 +1,8 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import Login from './Login.react';
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 class Page extends Component {
 
@@ -12,7 +12,7 @@ class Page extends Component {
   };
 
   render() {
-    const {location, msg} = this.props;
+    const { location, msg } = this.props;
 
     return (
       <div className="login-page">

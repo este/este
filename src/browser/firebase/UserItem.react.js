@@ -1,5 +1,5 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 export default class UserItem extends Component {
 
@@ -9,7 +9,7 @@ export default class UserItem extends Component {
 
   render() {
     const {
-      user: {displayName, profileImageURL}
+      user: { displayName, profileImageURL }
     } = this.props;
     const title = displayName || 'Some user logged in via email';
     return (

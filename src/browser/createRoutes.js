@@ -8,7 +8,7 @@ import Profile from './me/Profile.react';
 import React from 'react';
 import Settings from './me/Settings.react';
 import Todos from './todos/Page.react';
-import {IndexRoute, Route} from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 
 export default function createRoutes(getState) {
 
@@ -17,7 +17,7 @@ export default function createRoutes(getState) {
     if (!loggedInUser) {
       replace({
         pathname: '/login',
-        state: {nextPathname: nextState.location.pathname}
+        state: { nextPathname: nextState.location.pathname }
       });
     }
   };

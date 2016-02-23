@@ -1,11 +1,11 @@
 import Component from 'react-pure-render/component';
 import Header from './Header.react';
 import NewTodo from './NewTodo.react';
-import React, {View} from 'react-native';
+import React, { View } from 'react-native';
 import Todos from './Todos.react';
 import appStyles from '../app/styles';
 import fetch from '../../common/components/fetch';
-import {fetchUserTodos} from '../../common/todos/actions';
+import { fetchUserTodos } from '../../common/todos/actions';
 
 class Page extends Component {
 
