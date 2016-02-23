@@ -32,6 +32,7 @@ class NewTodo extends Component {
   constructor(props) {
     super(props);
     this.onTextInputEndEditing = this.onTextInputEndEditing.bind(this);
+    this.onSubmitEditing = this.onSubmitEditing.bind(this);
   }
 
   onTextInputEndEditing() {
@@ -39,6 +40,10 @@ class NewTodo extends Component {
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);
     fields.$reset();
+  }
+
+  onSubmitEditing() {
+    this.onTextInputEndEditing();
   }
 
   render() {
@@ -50,6 +55,7 @@ class NewTodo extends Component {
         <TextInput
           maxLength={100} // React Native needs explicit maxLength.
           onEndEditing={this.onTextInputEndEditing}
+          onSubmitEditing={this.onSubmitEditing}
           placeholder={msg.newTodoPlaceholder}
           placeholderTextColor={'#cce9f2'}
           style={styles.input}
