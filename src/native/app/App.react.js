@@ -40,8 +40,9 @@ class App extends Component {
 
   onSideMenuChange(isOpen) {
     const {device, onSideMenuChange} = this.props;
-    if (device.platform === 'ios')
+    if (device.platform === 'ios') {
       StatusBarIOS.setHidden(isOpen, true);
+    }
     onSideMenuChange(isOpen);
   }
 
@@ -51,6 +52,7 @@ class App extends Component {
       case routes.home: return links.home;
       case routes.todos: return links.todos;
     }
+    throw new Error('Route not found.');
   }
 
   render() {

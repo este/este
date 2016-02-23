@@ -7,7 +7,6 @@
   "rules": {
     // Soften rules for legacy projects. Can be removed for clean project.
     "comma-dangle": 0,
-    "curly": 0,
     "default-case": 0,
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}],
     "no-floating-decimal": 0,
@@ -18,8 +17,6 @@
     "object-curly-spacing": [2, "never"],
     "object-shorthand": 0,
     "padded-blocks": 0,
-    // React
-    "react/sort-comp": 0, // Not ready yet
     // Import
     "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
     "import/named": 2,

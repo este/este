@@ -77,7 +77,7 @@ export default {
     add100: 'Add 100 Todos',
     clearAll: 'Clear All',
     clearCompleted: 'Clear Completed',
-    empty: `It's rather empty here...`,
+    empty: 'It\'s rather empty here...',
     leftList: `{size, plural,
       =0 {Nothing, enjoy}
       one {You are almost done}

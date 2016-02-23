@@ -6,10 +6,11 @@ const rootDir = require('path').resolve(__dirname, '..', '..');
 const serverConfig = require('./config');
 const webpackIsomorphicAssets = require('../../webpack/assets');
 
-if (!process.env.NODE_ENV)
+if (!process.env.NODE_ENV) {
   throw new Error(
     'Environment variable NODE_ENV must be set to development or production.'
   );
+}
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 global.Promise = Bluebird;

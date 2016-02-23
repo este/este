@@ -43,7 +43,7 @@ class Todos extends Component {
   render() {
     const {msg, todos, toggleTodoCompleted} = this.props;
 
-    if (todos.size === 0)
+    if (todos.size === 0) {
       return (
         <View style={styles.centeredView}>
           <Image
@@ -55,6 +55,7 @@ class Todos extends Component {
           </Text>
         </View>
       );
+    }
 
     const list = todos.toList().sortBy(item => item.createdAt);
 

@@ -52,14 +52,6 @@ class Login extends Component {
     this.emailInput = input;
   }
 
-  toggleForgetPassword() {
-    this.setState(({forgetPasswordIsShown}) => ({
-      forgetPasswordIsShown: !forgetPasswordIsShown
-    }), () => {
-      if (this.emailInput) this.emailInput.focus();
-    });
-  }
-
   async onResetPasswordClick() {
     const {fields, resetPassword} = this.props;
     const {email} = fields.$values();
@@ -68,6 +60,14 @@ class Login extends Component {
     this.setState({
       forgetPasswordIsShown: false,
       recoveryEmailSent: true
+    });
+  }
+
+  toggleForgetPassword() {
+    this.setState(({forgetPasswordIsShown}) => ({
+      forgetPasswordIsShown: !forgetPasswordIsShown
+    }), () => {
+      if (this.emailInput) this.emailInput.focus();
     });
   }
 

@@ -70,10 +70,11 @@ gulp.task('server-nodemon', shell.task(
 ));
 
 gulp.task('server', ['env'], done => {
-  if (args.production)
+  if (args.production) {
     runSequence('clean', 'build', 'server-node', done);
-  else
+  } else {
     runSequence('server-hot', 'server-nodemon', done);
+  }
 });
 
 // Default task to start development. Just type gulp.
@@ -94,7 +95,9 @@ gulp.task('to-html', done => {
       // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
       res.setEncoding('utf8');
       let body = '';
-      res.on('data', data => body += data);
+      res.on('data', data => {
+        body += data;
+      });
       res.on('end', () => resolve(body));
     }).on('error', reject);
   });

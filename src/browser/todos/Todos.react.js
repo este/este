@@ -27,8 +27,9 @@ class Todos extends Component {
   render() {
     const {deleteTodo, msg, todos, toggleTodoCompleted} = this.props;
 
-    if (!todos.size)
+    if (!todos.size) {
       return <p>{msg.empty}</p>;
+    }
 
     // Big lists should be sorted in reducer.
     const list = todos.toList().sortBy(item => item.createdAt);
