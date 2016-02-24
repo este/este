@@ -9,7 +9,13 @@ import validate from './validate';
 import { LOGOUT } from './auth/actions';
 import { applyMiddleware, compose, createStore } from 'redux';
 
-export default function configureStore({ deps, initialState }) {
+export default function configureStore(options) {
+  const {
+    initialState,
+    platformDeps = {},
+    platformMiddleware = []
+  } = options;
+
   const firebase = new Firebase('https://este.firebaseio.com');
   // // Check whether connection works.
   // firebase.child('hello-world').set({
@@ -31,8 +37,9 @@ export default function configureStore({ deps, initialState }) {
     (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
 
   const middleware = [
+    ...platformMiddleware,
     injectMiddleware({
-      ...deps,
+      ...platformDeps,
       fetch: createFetch(serverUrl),
       firebase,
       getUid: () => shortid.generate(),

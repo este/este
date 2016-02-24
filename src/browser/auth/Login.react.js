@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import focusInvalidField from '../lib/focusInvalidField';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { replace } from 'react-router-redux';
 
 class Login extends Component {
 
@@ -14,11 +15,8 @@ class Login extends Component {
     fields: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
-    msg: PropTypes.object.isRequired
-  };
-
-  static contextTypes = {
-    router: PropTypes.object.isRequired
+    msg: PropTypes.object.isRequired,
+    replace: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -39,11 +37,10 @@ class Login extends Component {
     this.redirectAfterLogin();
   }
 
-  // TODO: Use react-router-redux.
   redirectAfterLogin() {
-    const { location } = this.props;
+    const { location, replace } = this.props;
     const nextPathname = location.state && location.state.nextPathname || '/';
-    this.context.router.replace(nextPathname);
+    replace(nextPathname);
   }
 
   render() {
@@ -90,4 +87,4 @@ Login = fields(Login, {
 export default connect(state => ({
   auth: state.auth,
   msg: state.intl.msg.auth.form
-}), authActions)(Login);
+}), { ...authActions, replace })(Login);

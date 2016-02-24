@@ -9,14 +9,17 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
 
 const app = document.getElementById('app');
 const initialState = window.__INITIAL_STATE__;
-const store = configureStore({ initialState });
+const store = configureStore({
+  initialState,
+  platformMiddleware: [routerMiddleware(browserHistory)]
+});
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store.getState);
 

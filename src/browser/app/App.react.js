@@ -11,7 +11,8 @@ class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired
   };
 
   // Note pattern how actions related to app start are dispatched.
@@ -24,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, location } = this.props;
 
     return (
       <div className="page">
@@ -38,7 +39,8 @@ class App extends Component {
           }]}
           titleTemplate="%s - Este.js"
         />
-        <Header />
+        {/* Pass location to ensure header active links are updated. */}
+        <Header location={location} />
         {children}
         <Footer />
       </div>
@@ -47,5 +49,7 @@ class App extends Component {
 
 }
 
-// Just inject dispatch and don't listen to store.
-export default connect()(App);
+// github.com/reactjs/react-router-redux#how-do-i-access-router-state-in-a-container-component
+export default connect((state, ownProps) => ({
+  location: ownProps.location
+}))(App);

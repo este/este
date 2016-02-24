@@ -33,10 +33,6 @@ class Header extends Component {
 }
 
 export default connect(state => ({
-  // Connect location to ensure current activeClassName links are updated.
-  // TODO: Reading location from locationBeforeTransitions is discouraged.
-  // http://goo.gl/juiym8
-  location: state.routing.locationBeforeTransitions,
   msg: state.intl.msg.app.links,
   viewer: state.users.viewer
 }))(Header);
