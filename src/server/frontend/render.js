@@ -9,8 +9,8 @@ import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { RouterContext, match } from 'react-router';
-import { createMemoryHistory } from 'react-router';
+import { createMemoryHistory, match, RouterContext } from 'react-router';
+import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const { components, location, params } = renderProps;
@@ -88,15 +88,17 @@ export default function render(req, res, next) {
       host: `${protocol}://${req.headers.host}`
     }
   };
-  const store = configureStore({ initialState });
-
-  // Fetch logged in user here because routes may need it. Remember we can use
-  // store.dispatch method.
-
+  const memoryHistory = createMemoryHistory(req.path);
+  const store = configureStore({
+    initialState,
+    platformMiddleware: [routerMiddleware(memoryHistory)]
+  });
+  const history = syncHistoryWithStore(memoryHistory, store);
+  // Fetch and dispatch current user here because routes may need it.
   const routes = createRoutes(() => store.getState());
-  const location = createMemoryHistory().createLocation(req.url);
+  const location = req.url;
 
-  match({ routes, location }, async (error, redirectLocation, renderProps) => {
+  match({ history, routes, location }, async (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
       return;
