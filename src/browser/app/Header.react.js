@@ -35,7 +35,7 @@ class Header extends Component {
 export default connect(state => ({
   // Connect location to ensure current activeClassName links are updated.
   // TODO: Reading location from locationBeforeTransitions is discouraged.
-  // github.com/reactjs/react-router-redux/blob/8012934f01f7ff0d955911a0b8bcd4e49a7d6320/src/reducer.js#L13-L15
+  // http://goo.gl/juiym8
   location: state.routing.locationBeforeTransitions,
   msg: state.intl.msg.app.links,
   viewer: state.users.viewer
