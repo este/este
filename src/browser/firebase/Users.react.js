@@ -38,9 +38,9 @@ class Users extends Component {
 }
 
 Users = queryFirebase(Users, props => ({
-  // Query path to listen. For one user we can use `users/${props.userId}`.
-  child: 'users',
-  // firebase.com/docs/web/api/query
+  // Query path to listen. For one user we can use `users/${props.user.id}`.
+  path: 'users',
+  // Firebase imperative firebase.com/docs/web/api/query as declarative params.
   params: [
     ['orderByChild', 'authenticatedAt'],
     ['limitToLast', props.limitToLast] // TODO: Enforce via propTypes.

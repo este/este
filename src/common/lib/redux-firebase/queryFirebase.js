@@ -4,7 +4,7 @@
 // Example:
 // Users = queryFirebase(Users, props => ({
 //   // Query path to listen. For one user we can use `users/${props.userId}`.
-//   child: 'users',
+//   path: 'users',
 //   // firebase.com/docs/web/api/query
 //   params: [
 //     ['orderByChild', 'authenticatedAt'],
@@ -25,7 +25,7 @@ const ensureArray = item => [].concat(item);
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
 // recycled on logout. Then we can just set the key to current viewer.
-const optionsToPayload = ({ child, key, params }) => ({ child, key, params });
+const optionsToPayload = ({ path, key, params }) => ({ path, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
 export default function queryFirebase(Wrapped, mapPropsToOptions) {
@@ -57,9 +57,9 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         invariant(firebase instanceof Firebase,
           'Expected the firebase to be an instance of Firebase.');
         const options = mapPropsToOptions(this.props);
-        invariant(typeof options.child === 'string',
-          'Expected the child to be a string.');
-        const ref = firebase.child(options.child);
+        invariant(typeof options.path === 'string',
+          'Expected the path to be a string.');
+        const ref = firebase.child(options.path);
         const type = callback(ref, options);
         const payload = optionsToPayload(options);
         return { type, payload };
