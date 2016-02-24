@@ -18,7 +18,7 @@ export default {
         signup: 'Sign up'
       },
       hint: 'Hint: pass1',
-      legend: 'classic XMLHttpRequest login',
+      legend: 'Classic XMLHttpRequest Login',
       placeholder: {
         email: 'your@email.com',
         password: 'password'

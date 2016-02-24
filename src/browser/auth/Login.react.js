@@ -39,6 +39,7 @@ class Login extends Component {
     this.redirectAfterLogin();
   }
 
+  // TODO: Use react-router-redux.
   redirectAfterLogin() {
     const { location } = this.props;
     const nextPathname = location.state && location.state.nextPathname || '/';
