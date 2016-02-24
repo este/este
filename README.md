@@ -33,6 +33,7 @@
 - [babeljs](https://babeljs.io/)
 - [immutablejs](http://facebook.github.io/immutable-js)
 - [react-router](https://github.com/rackt/react-router)
+- [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)

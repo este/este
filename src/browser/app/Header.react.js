@@ -7,7 +7,6 @@ class Header extends Component {
 
   static propTypes = {
     msg: PropTypes.object.isRequired,
-    pathname: PropTypes.string.isRequired,
     viewer: PropTypes.object
   };
 
@@ -34,6 +33,8 @@ class Header extends Component {
 }
 
 export default connect(state => ({
+  // Connect location to ensure current activeClassName links are updated.
+  location: state.routing.locationBeforeTransitions,
   msg: state.intl.msg.app.links,
   viewer: state.users.viewer
 }))(Header);

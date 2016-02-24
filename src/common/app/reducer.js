@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reduxFields } from '../lib/redux-fields';
+import { routerReducer as routing } from 'react-router-redux';
 
 import auth from '../auth/reducer';
 import device from '../device/reducer';
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   device,
   intl,
   reduxFields,
+  routing,
   todos,
   ui,
   users

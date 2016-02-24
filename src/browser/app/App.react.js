@@ -11,8 +11,7 @@ class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
   };
 
   // Note pattern how actions related to app start are dispatched.
@@ -25,11 +24,10 @@ class App extends Component {
   }
 
   render() {
-    const { children, location } = this.props;
+    const { children } = this.props;
 
     return (
-      // Pass data-pathname to allow route specific styling.
-      <div className="page" data-pathname={location.pathname}>
+      <div className="page">
         <Helmet
           link={[
             { rel: 'shortcut icon', href: require('./favicon.ico') }
@@ -40,10 +38,7 @@ class App extends Component {
           }]}
           titleTemplate="%s - Este.js"
         />
-        <Header
-          // TODO: Use react-router-redux, then connect location.
-          pathname={location.pathname}
-        />
+        <Header />
         {children}
         <Footer />
       </div>
