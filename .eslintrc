@@ -16,7 +16,8 @@
     "import/no-unresolved": [2, {"commonjs": true}],
     "import/named": 2,
     "import/default": 2,
-    "import/namespace": 2,
+    // TODO: https://github.com/benmosher/eslint-plugin-import/issues/192
+    "import/namespace": 0,
     "import/export": 2
   },
   "globals": {
