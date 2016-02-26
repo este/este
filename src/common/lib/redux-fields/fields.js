@@ -62,12 +62,9 @@ export default function fields(Wrapped, options) {
         }
       } : {
         name: field,
-        onChange: e => {
-          const value = (e.target.type &&
-                         e.target.type.toLowerCase() === 'checkbox') ?
-            e.target.checked :
-            e.target.value;
-          onChange(field, value);
+        onChange: ({ target: { type, checked, value } }) => {
+          const isCheckbox = type && type.toLowerCase() === 'checkbox';
+          onChange(field, isCheckbox ? checked : value);
         }
       };
     }
