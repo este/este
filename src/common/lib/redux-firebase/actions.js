@@ -18,7 +18,7 @@ export const REDUX_FIREBASE_SIGN_UP_SUCCESS = 'REDUX_FIREBASE_SIGN_UP_SUCCESS';
 export const REDUX_FIREBASE_WATCH_AUTH = 'REDUX_FIREBASE_WATCH_AUTH';
 
 async function socialLogin(firebase, provider) {
-  const settings = { scope: 'email' };
+  const settings = { scope: 'email, user_friends' };
   // https://www.firebase.com/docs/web/guide/user-auth.html#section-popups
   try {
     await firebase.authWithOAuthPopup(provider, settings);
