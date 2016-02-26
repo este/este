@@ -1,7 +1,6 @@
 import './Login.scss';
 import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
-import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import focusInvalidField from '../lib/focusInvalidField';
 import { connect } from 'react-redux';
@@ -48,7 +47,6 @@ class Login extends Component {
 
     return (
       <div className="login">
-        <Helmet title="Login" />
         <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={auth.formDisabled}>
             <legend>{msg.legend}</legend>
