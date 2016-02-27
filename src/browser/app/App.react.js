@@ -49,7 +49,5 @@ class App extends Component {
 
 }
 
-// github.com/reactjs/react-router-redux#how-do-i-access-router-state-in-a-container-component
-export default connect((state, ownProps) => ({
-  location: ownProps.location
-}))(App);
+// Just inject dispatch.
+export default connect()(App);
