@@ -51,7 +51,6 @@ class Login extends Component {
           <fieldset disabled={auth.formDisabled}>
             <legend>{msg.legend}</legend>
             <input
-              autoFocus
               maxLength="100"
               placeholder={msg.placeholder.email}
               {...fields.email}

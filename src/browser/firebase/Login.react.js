@@ -20,7 +20,6 @@ class Login extends Component {
     this.onSocialLoginClick = this.onSocialLoginClick.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSignUpClick = this.onSignUpClick.bind(this);
-    this.onEmailInputRef = this.onEmailInputRef.bind(this);
     this.toggleForgetPassword = this.toggleForgetPassword.bind(this);
     this.onResetPasswordClick = this.onResetPasswordClick.bind(this);
     // Note we deliberately use component state, because we don't want to
@@ -48,10 +47,6 @@ class Login extends Component {
     signUp(fields.$values());
   }
 
-  onEmailInputRef(input) {
-    this.emailInput = input;
-  }
-
   async onResetPasswordClick() {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
@@ -66,9 +61,7 @@ class Login extends Component {
   toggleForgetPassword() {
     this.setState(({ forgetPasswordIsShown }) => ({
       forgetPasswordIsShown: !forgetPasswordIsShown
-    }), () => {
-      if (this.emailInput) this.emailInput.focus();
-    });
+    }));
   }
 
   render() {
@@ -92,9 +85,7 @@ class Login extends Component {
               <legend>Email Password Recovery</legend>
             }
             <input
-              autoFocus
               maxLength="100"
-              ref={this.onEmailInputRef}
               placeholder="your@email.com"
               {...fields.email}
             />
