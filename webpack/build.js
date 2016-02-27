@@ -10,7 +10,7 @@ export default function build(callback) {
     // We can save jsonStats to be analyzed with
     // http://webpack.github.io/analyse or
     // https://github.com/robertknight/webpack-bundle-size-analyzer.
-    // import fs from 'fs';
+    // const fs = require('fs');
     // fs.writeFileSync('./bundle-stats.json', JSON.stringify(jsonStats));
 
     const buildError = fatalError || jsonStats.errors[0] || jsonStats.warnings[0];
