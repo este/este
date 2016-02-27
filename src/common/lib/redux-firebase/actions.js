@@ -17,14 +17,17 @@ export const REDUX_FIREBASE_SIGN_UP_START = 'REDUX_FIREBASE_SIGN_UP_START';
 export const REDUX_FIREBASE_SIGN_UP_SUCCESS = 'REDUX_FIREBASE_SIGN_UP_SUCCESS';
 export const REDUX_FIREBASE_WATCH_AUTH = 'REDUX_FIREBASE_WATCH_AUTH';
 
+// Doesn't work on React Native, because there is no window nor redirect.
+// Use React Native Facebook login component with authWithOAuthToken instead.
 async function socialLogin(firebase, provider) {
-  const settings = { scope: 'email, user_friends' };
+  const settings = { scope: 'email,user_friends' };
   // https://www.firebase.com/docs/web/guide/user-auth.html#section-popups
   try {
     await firebase.authWithOAuthPopup(provider, settings);
   } catch (error) {
     if (error.code === 'TRANSPORT_UNAVAILABLE') {
-      await firebase.authWithOAuthRedirect(provider, settings);
+      // Pass an empty function until Firebase fix bug.
+      await firebase.authWithOAuthRedirect(provider, () => {}, settings);
     }
     throw error;
   }
