@@ -14,6 +14,14 @@
 //     value: (snapshot) => props.setUsersList(snapshot.val())
 //   }
 // }));
+// Something doesn't work? Note how we can handle error:
+// on: {
+//   value: [(snapshot) => {
+//     console.log(snapshot.val())
+//   }, (error) => {
+//     console.log(error)
+//   }]
+// }
 
 import * as actions from './actions';
 import Component from 'react-pure-render/component';

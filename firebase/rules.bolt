@@ -9,12 +9,12 @@ isUser(uid) { isSignedIn() && auth.uid == uid }
 // Types
 
 type ShortRequiredString extends String {
-  // Is required via this.length > 0
-  validate() { this.length > 0 && this.length < 100 }
+  // Required form field with maxLength="100".
+  validate() { this.length > 0 && this.length <= 100 }
 }
 
 type LongString extends String {
-  validate() { this.length < 1000 }
+  validate() { this.length <= 1000 }
 }
 
 type HelloWorld {
