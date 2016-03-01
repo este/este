@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.1.0",
-    "babel-core": "^6.3.26",
+    "babel-core": "^6.6.0",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -113,7 +113,7 @@
     "validator": "^5.0.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.1.0",
+    "webpack-hot-middleware": "2.7.1",
     "webpack-isomorphic-tools": "^2.2.24",
     "yargs": "^4.1.0"
   }
