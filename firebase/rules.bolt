@@ -4,7 +4,7 @@
 // Functions
 
 isSignedIn() { auth != null }
-isUser(uid) { isSignedIn() && auth.uid == uid }
+isViewer(uid) { isSignedIn() && auth.uid == uid }
 
 // Types
 
@@ -48,10 +48,10 @@ path /users {
 }
 
 path /users/{uid} is User {
-  write() { isUser(uid) }
+  write() { isViewer(uid) }
 }
 
 path /users-emails/{uid} is Email {
-  read() { isUser(uid) }
-  write() { isUser(uid) }
+  read() { isViewer(uid) }
+  write() { isViewer(uid) }
 }
