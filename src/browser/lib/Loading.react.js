@@ -1,5 +1,13 @@
 // Text loading component with two important limits.
 // https://www.nngroup.com/articles/response-times-3-important-limits
+// Example:
+// {!users ?
+//   <Loading />
+// :
+//   <div>
+//     users here
+//   </div>
+// }
 
 import './Loading.scss';
 import Component from 'react-pure-render/component';

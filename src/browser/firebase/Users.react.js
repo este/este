@@ -46,7 +46,9 @@ Users = queryFirebase(Users, props => ({
     ['limitToLast', props.limitToLast] // TODO: Enforce via propTypes.
   ],
   on: {
-    value: (snapshot) => props.setUsersList(snapshot.val())
+    // Value event always rerenders all users. For better granularity, use
+    // child_added, child_changed, child_removed, child_changed events.
+    value: snapshot => props.setUsersList(snapshot.val())
   }
 }));
 
