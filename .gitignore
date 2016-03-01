@@ -35,3 +35,7 @@ webpack-assets.json
 
 # firebase
 firebase/rules.json
+
+# js bundles for react native
+*.jsbundle
+
