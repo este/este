@@ -27,6 +27,8 @@ class App extends Component {
     this.onNavigatorRef = this.onNavigatorRef.bind(this);
     this.onRouteChange = this.onRouteChange.bind(this);
     this.onSideMenuChange = this.onSideMenuChange.bind(this);
+    this.renderScene = this.renderScene.bind(this);
+    this.toggleSideMenu = props.toggleSideMenu.bind(this);
   }
 
   onNavigatorRef(component) {
@@ -55,18 +57,19 @@ class App extends Component {
     throw new Error('Route not found.');
   }
 
-  render() {
-    const { links, toggleSideMenu, ui } = this.props;
-
-    const renderScene = route =>
+  renderScene(route) {
+    return (
       <View style={[styles.sceneView, route.style]}>
         <Header
           title={this.getTitle(route)}
-          toggleSideMenu={toggleSideMenu}
+          toggleSideMenu={this.toggleSideMenu}
         />
         <route.Page />
-      </View>;
+      </View>);
+  }
 
+  render() {
+    const { links, ui } = this.props;
     const menu =
       <Menu links={links} onRouteChange={this.onRouteChange} />;
 
@@ -82,7 +85,7 @@ class App extends Component {
           configureScene={App.configureScene}
           initialRoute={routes.home}
           ref={this.onNavigatorRef}
-          renderScene={renderScene}
+          renderScene={this.renderScene}
           style={styles.container}
         />
       </SideMenu>
