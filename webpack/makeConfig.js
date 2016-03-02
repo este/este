@@ -76,7 +76,7 @@ export default function makeConfig(isDevelopment) {
             }
           }
         },
-        externals: {'react-native': "require('react-native/Libraries/react-native/react-native.js')"}
+        externals: { 'react-native': "require('react-native/Libraries/react-native/react-native.js')" }
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
