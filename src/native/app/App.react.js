@@ -58,14 +58,13 @@ class App extends Component {
   }
 
   renderScene(route) {
-    return (
-      <View style={[styles.sceneView, route.style]}>
-        <Header
-          title={this.getTitle(route)}
-          toggleSideMenu={this.toggleSideMenu}
-        />
-        <route.Page />
-      </View>);
+    const childHeader = React.createElement(Header, {
+      title: this.getTitle(route),
+      toggleSideMenu: this.toggleSideMenu
+    });
+    const childPage = React.createElement(route.Page);
+    return React.createElement(View, { style: [styles.sceneView, route.style] },
+      childHeader, childPage);
   }
 
   render() {
