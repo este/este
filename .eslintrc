@@ -5,13 +5,14 @@
   ],
   "extends" : ["airbnb"],
   "rules": {
-    // Soften some rules.
+    // Soft some rules.
     "comma-dangle": 0, // Nobody cares about commas.
     "default-case": 0, // Required default case is nonsense.
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
     "no-floating-decimal": 0, // .5 is just fine.
-    "no-param-reassign": 0, // We love param reassignment.
-    "no-shadow": 0, // Shadowing is a nice language feature.
+    "no-nested-ternary": 0, // It's nice for JSX.
+    "no-param-reassign": 0, // We love param reassignment. Naming is hard.
+    "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
     // eslint-plugin-import
     "import/no-unresolved": [2, {"commonjs": true}],
     "import/named": 2,

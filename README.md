@@ -9,6 +9,8 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
+> Další veřejné školení Este.js se bude konat 17. - 18. března. Cena je 9 500 kč, pokud se [zaregistrujete](https://learn-reactjs.com) nyní.
+
 ## Techniques
 
 - Truly universal architecture
@@ -45,7 +47,7 @@
 - [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework.
 - LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
-- [gulp](http://gulpjs.com/) For cross platform scripting.
+- [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - And much more. Check source code.
 
 ## Prerequisites
