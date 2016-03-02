@@ -125,7 +125,7 @@ gulp.task('to-html', done => {
     return Promise.all(promises);
   };
 
-  runSequence('clean', 'build', () => {
+  runSequence('eslint-ci', 'mocha', 'clean', 'build', () => {
     const proc = require('child_process').spawn('node', ['./src/server']);
     proc.stderr.on('data', data => console.log(data.toString()));
     proc.stdout.on('data', async data => {
