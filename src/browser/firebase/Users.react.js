@@ -5,7 +5,7 @@ import Loading from '../lib/Loading.react';
 import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
 import { connect } from 'react-redux';
-import { queryFirebase } from '../../common/lib/redux-firebase';
+import { queryFirebase } from 'este-firebase-redux';
 
 class Users extends Component {
 
