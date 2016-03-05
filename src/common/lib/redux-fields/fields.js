@@ -56,7 +56,7 @@ export default function fields(Wrapped, options) {
     }
 
     static createFieldObject(field, onChange) {
-      return isReactNative ? {
+      const fieldObject = isReactNative ? {
         onChangeText: text => {
           onChange(field, text);
         }
@@ -65,6 +65,12 @@ export default function fields(Wrapped, options) {
         onChange: ({ target: { type, checked, value } }) => {
           const isCheckbox = type && type.toLowerCase() === 'checkbox';
           onChange(field, isCheckbox ? checked : value);
+        }
+      };
+      return {
+        ...fieldObject,
+        setValue(value) {
+          onChange(field, value);
         }
       };
     }
