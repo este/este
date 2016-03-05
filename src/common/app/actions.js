@@ -1,5 +1,5 @@
 import * as authActions from '../auth/actions';
-import { firebaseActions } from '../lib/redux-firebase';
+import { firebaseActions } from 'este-firebase-redux';
 
 export const ON_APP_COMPONENT_DID_MOUNT = 'ON_APP_COMPONENT_DID_MOUNT';
 
