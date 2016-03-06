@@ -1,4 +1,5 @@
 require('babel-register');
+require('babel-polyfill');
 
 const Bluebird = require('bluebird');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
