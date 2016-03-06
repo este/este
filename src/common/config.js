@@ -7,6 +7,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 // production server. 'foo__bar=2 gulp' will set config to '{foo: {bar: 2}}'
 nconf.env('__');
 
+// For local development with secrets, create git ignored secrets.json file.
+// nconf.file('src/common/secrets.json');
+
 // Remember, never put secrets in this file. To override default values for
 // production, use environment variables.
 nconf.defaults({
@@ -15,8 +18,5 @@ nconf.defaults({
   isProduction,
   port: process.env.PORT || 8000
 });
-
-// For local development with secrets, create git ignored secrets.json file.
-// nconf.file('src/common/secrets.json');
 
 export default nconf.get();
