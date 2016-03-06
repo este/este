@@ -1,5 +1,5 @@
 import api from './api';
-import config from './config';
+import config from '../common/config';
 import errorHandler from './lib/errorHandler';
 import express from 'express';
 import frontend from './frontend';

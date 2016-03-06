@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import Html from './Html.react';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import config from '../config';
+import config from '../../common/config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
@@ -83,6 +83,10 @@ export default function render(req, res, next) {
   // Detect Heroku protocol
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const initialState = {
+    config: {
+      // Never pass whole server config to the client.
+      firebaseUrl: config.firebaseUrl
+    },
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,
       host: `${protocol}://${req.headers.host}`
