@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 // Container component.
-class Todos extends Component {
+export class Todos extends Component {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
