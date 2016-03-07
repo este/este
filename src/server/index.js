@@ -16,14 +16,6 @@ if (!process.env.NODE_ENV) {
 // http://bluebirdjs.com/docs/why-bluebird.html
 global.Promise = Bluebird;
 
-Promise.config({
-  warnings: {
-    // Disables forgotten return statements warnings when await is used.
-    // "Warning: a promise was created in a handler but was not returned from it"
-    wForgottenReturn: false
-  }
-});
-
 // http://formatjs.io/guides/runtime-environments/#polyfill-node
 if (global.Intl) {
   // We don't have to check whether Node runtime supports specific language,
