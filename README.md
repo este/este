@@ -9,7 +9,7 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
-> Další veřejné školení Este.js se bude konat 17. - 18. března. Cena je 9 500 kč, pokud se [zaregistrujete](https://learn-reactjs.com) nyní.
+> Další veřejné školení Este.js se bude konat 23. - 24. března. Cena je 9 500 kč, pokud se [zaregistrujete](https://learn-reactjs.com) předem.
 
 ## Techniques
 
