@@ -1,30 +1,54 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 
-class NotFound extends Component {
+const messages = defineMessages({
+  title: {
+    defaultMessage: 'Page Not Found',
+    id: 'notFound.title'
+  },
+  h1: {
+    defaultMessage: 'This page isn\'t available',
+    id: 'notFound.h1'
+  },
+  p: {
+    defaultMessage: 'The link may be broken, or the page may have been removed.',
+    id: 'notFound.p'
+  },
+  continue: {
+    defaultMessage: 'Continue here please.',
+    id: 'notFound.continue'
+  }
+});
+
+class Page extends Component {
 
   static propTypes = {
-    msg: PropTypes.object
+    intl: intlShape.isRequired
   };
 
   render() {
-    const { msg } = this.props;
+    const { intl } = this.props;
+    const title = intl.formatMessage(messages.title);
 
     return (
       <div className="notfound-page">
-        <Helmet title={msg.title} />
-        <h1>{msg.header}</h1>
-        <p>{msg.message}</p>
-        <Link to="/">{msg.continueMessage}</Link>
+        <Helmet title={title} />
+        <h1>
+          <FormattedMessage {...messages.h1} />
+        </h1>
+        <p>
+          <FormattedMessage {...messages.p} />
+        </p>
+        <Link to="/">
+          <FormattedMessage {...messages.continue} />
+        </Link>
       </div>
     );
   }
 
 }
 
-export default connect(state => ({
-  msg: state.intl.msg.notFound
-}))(NotFound);
+export default injectIntl(Page);

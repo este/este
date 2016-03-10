@@ -4,13 +4,21 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
+
+const messages = defineMessages({
+  placeholder: {
+    defaultMessage: 'What needs to be done?',
+    id: 'todos.newTodo.placeholder'
+  }
+});
 
 class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    intl: intlShape.isRequired
   };
 
   constructor(props) {
@@ -27,7 +35,8 @@ class NewTodo extends Component {
   }
 
   render() {
-    const { fields, msg } = this.props;
+    const { intl, fields } = this.props;
+    const placeholder = intl.formatMessage(messages.placeholder);
 
     return (
       <input
@@ -35,7 +44,7 @@ class NewTodo extends Component {
         className="new-todo"
         maxLength={100}
         onKeyDown={this.onInputKeyDown}
-        placeholder={msg.newTodoPlaceholder}
+        placeholder={placeholder}
         {...fields.title}
       />
     );
@@ -48,6 +57,7 @@ NewTodo = fields(NewTodo, {
   fields: ['title']
 });
 
-export default connect(state => ({
-  msg: state.intl.msg.todos
-}), todosActions)(NewTodo);
+NewTodo = injectIntl(NewTodo);
+
+// Sure we can pass only actions.
+export default connect(null, todosActions)(NewTodo);

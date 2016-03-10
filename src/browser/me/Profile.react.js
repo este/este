@@ -1,22 +1,30 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+
+const messages = defineMessages({
+  title: {
+    defaultMessage: 'Profile',
+    id: 'me.profilePage.title'
+  }
+});
 
 class Profile extends Component {
 
   static propTypes = {
-    msg: PropTypes.object
+    intl: intlShape.isRequired
   };
 
   render() {
-    const { msg } = this.props;
+    const { intl } = this.props;
+    const title = intl.formatMessage(messages.title);
 
     return (
       <div className="profile-page">
-        <Helmet title={msg.title} />
+        <Helmet title={title} />
         <p>
-          {msg.title}
+          <FormattedMessage {...messages.title} />
         </p>
       </div>
     );
@@ -24,6 +32,4 @@ class Profile extends Component {
 
 }
 
-export default connect(state => ({
-  msg: state.intl.msg.profile
-}))(Profile);
+export default injectIntl(Profile);
