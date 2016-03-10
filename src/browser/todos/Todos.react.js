@@ -2,14 +2,21 @@ import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
+
+const messages = defineMessages({
+  empty: {
+    defaultMessage: 'It\'s rather empty here...',
+    id: 'todos.empty'
+  }
+});
 
 // Container component.
 class Todos extends Component {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
-    msg: PropTypes.object.isRequired,
     todos: PropTypes.object.isRequired,
     toggleTodoCompleted: PropTypes.func.isRequired
   };
@@ -25,10 +32,10 @@ class Todos extends Component {
   // }
 
   render() {
-    const { deleteTodo, msg, todos, toggleTodoCompleted } = this.props;
+    const { deleteTodo, todos, toggleTodoCompleted } = this.props;
 
     if (!todos.size) {
-      return <p>{msg.empty}</p>;
+      return <p><FormattedMessage {...messages.empty} /></p>;
     }
 
     // Big lists should be sorted in reducer.
@@ -51,6 +58,5 @@ class Todos extends Component {
 }
 
 export default connect(state => ({
-  msg: state.intl.msg.todos,
   todos: state.todos.map
 }), todosActions)(Todos);

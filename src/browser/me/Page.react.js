@@ -3,35 +3,55 @@ import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
+const messages = defineMessages({
+  title: {
+    defaultMessage: 'Me',
+    id: 'me.page.title'
+  },
+  welcome: {
+    defaultMessage: 'Hi {email}. This is your secret page.',
+    id: 'me.page.welcome'
+  },
+  linkToProfile: {
+    defaultMessage: 'Profile',
+    id: 'me.page.linkToProfile'
+  },
+  linkToSettings: {
+    defaultMessage: 'Settings',
+    id: 'me.page.linkToSettings'
+  },
+});
 
 class Page extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    msg: PropTypes.object,
+    intl: intlShape.isRequired,
     viewer: PropTypes.object
   };
 
   render() {
-    const { children, msg, viewer: { email } } = this.props;
+    const { children, intl, viewer: { email } } = this.props;
+    const title = intl.formatMessage(messages.title);
 
     return (
       <div className="me-page">
-        <Helmet title={msg.me.title} />
+        <Helmet title={title} />
         <ul>
-          <li><Link activeClassName="active" to="/me/profile">{msg.profile.title}</Link></li>
-          <li><Link activeClassName="active" to="/me/settings">{msg.settings.title}</Link></li>
+          <li><Link activeClassName="active" to="/me/profile">
+            <FormattedMessage {...messages.linkToProfile} />
+          </Link></li>
+          <li><Link activeClassName="active" to="/me/settings">
+            <FormattedMessage {...messages.linkToSettings} />
+          </Link></li>
         </ul>
         {children ||
           <p>
-            <FormattedMessage
-              defaultMessage={msg.me.welcome}
-              id={'msg.me.welcome'}
-              values={{ email }}
-            />
+            <FormattedMessage {...messages.welcome} values={{ email }} />
           </p>
         }
         <AuthLogout />
@@ -41,7 +61,8 @@ class Page extends Component {
 
 }
 
+Page = injectIntl(Page);
+
 export default connect(state => ({
-  msg: state.intl.msg,
   viewer: state.users.viewer
 }))(Page);

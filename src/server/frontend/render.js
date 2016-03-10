@@ -36,7 +36,7 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
-      <IntlProvider>
+      <IntlProvider locale="en">
         <RouterContext {...renderProps} />
       </IntlProvider>
     </Provider>

@@ -5,11 +5,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
+import en from 'react-intl/locale-data/en';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import { addLocaleData } from 'react-intl';
 import { browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+
+// github.com/yahoo/react-intl/wiki/Upgrade-Guide#add-call-to-addlocaledata-in-browser
+addLocaleData(en);
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
@@ -25,7 +30,7 @@ const routes = createRoutes(store.getState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <IntlProvider>
+    <IntlProvider locale="en">
       <Router history={history}>
         {routes}
       </Router>
