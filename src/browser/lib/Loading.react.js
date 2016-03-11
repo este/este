@@ -8,6 +8,7 @@
 //     users here
 //   </div>
 // }
+// TODO: Make it universal.
 
 import './Loading.scss';
 import Component from 'react-pure-render/component';
