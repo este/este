@@ -29,19 +29,27 @@ class Header extends Component {
           </Link>
         </h1>
         <ul>
-          <li><Link activeClassName="active" to="/firebase">
-            <FormattedMessage {...messages.firebase} />
-          </Link></li>
-          <li><Link activeClassName="active" to="/todos">
-            <FormattedMessage {...messages.todos} />
-          </Link></li>
-          <li><Link activeClassName="active" to="/me">
-            <FormattedMessage {...messages.me} />
-          </Link></li>
+          <li>
+            <Link activeClassName="active" to="/firebase">
+              <FormattedMessage {...messages.firebase} />
+            </Link>
+          </li>
+          <li>
+            <Link activeClassName="active" to="/todos">
+              <FormattedMessage {...messages.todos} />
+            </Link>
+          </li>
+          <li>
+            <Link activeClassName="active" to="/me">
+              <FormattedMessage {...messages.me} />
+            </Link>
+          </li>
           {!viewer &&
-            <li><Link activeClassName="active" to="/login">
-              <FormattedMessage {...messages.login} />
-            </Link></li>
+            <li>
+              <Link activeClassName="active" to="/login">
+                <FormattedMessage {...messages.login} />
+              </Link>
+            </li>
           }
         </ul>
       </header>

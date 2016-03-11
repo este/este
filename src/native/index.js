@@ -2,31 +2,30 @@ import 'react-native-browser-polyfill';
 import App from './app/App.react';
 import Component from 'react-pure-render/component';
 import React, { AppRegistry, Platform } from 'react-native';
-import config from '../common/config';
 import configureStore from '../common/configureStore';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { setPlatform } from '../common/device/actions';
-
-import '../../node_modules/intl/index.js';
-import '../../node_modules/intl/locale-data/jsonp/en.js';
 
 export default function index() {
   const initialState = {
     config: {
-      firebaseUrl: config.firebaseUrl
+      // TODO: Use common config for dev and production via gulp task.
+      firebaseUrl: 'https://este.firebaseio.com'
     },
     device: {
-      isMobile: true
+      isMobile: true,
+      platform: Platform.OS
     }
   };
   const store = configureStore({ initialState });
-  store.dispatch(setPlatform(Platform.OS));
 
   class Root extends Component {
     render() {
       return (
         <Provider store={store}>
-          <App />
+          <IntlProvider locale="en">
+            <App />
+          </IntlProvider>
         </Provider>
       );
     }
