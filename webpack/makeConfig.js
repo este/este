@@ -75,7 +75,8 @@ export default function makeConfig(isDevelopment) {
               presets: ['react-hmre']
             }
           }
-        }
+        },
+        externals: { 'react-native': "require('react-native/Libraries/react-native/react-native.js')" }
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
