@@ -1,3 +1,5 @@
+import { ValidationError } from '../lib/validation';
+
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -21,9 +23,9 @@ export function login(fields) {
         // Return JSON response.
         return response.json();
       } catch (error) {
-        // Here we can transforn error statuses to custom errors.
+        // Transform error status to custom error.
         if (error.status === 401) {
-          throw validate.wrongPassword('password');
+          throw new ValidationError('wrongPassword', { prop: 'password' });
         }
         throw error;
       }

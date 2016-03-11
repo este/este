@@ -1,17 +1,18 @@
 import './Login.scss';
 import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
+import LoginError from './LoginError.react';
 import React, { PropTypes } from 'react';
-import focusInvalidField from '../lib/focusInvalidField';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { focusInvalidField } from '../../common/lib/validation';
 import { replace } from 'react-router-redux';
 
 const messages = defineMessages({
-  legend: {
+  formLegend: {
     defaultMessage: 'Classic XMLHttpRequest Login',
-    id: 'auth.login.legend'
+    id: 'auth.login.formLegend'
   },
   emailPlaceholder: {
     defaultMessage: 'your@email.com',
@@ -21,9 +22,9 @@ const messages = defineMessages({
     defaultMessage: 'password',
     id: 'auth.login.passwordPlaceholder'
   },
-  login: {
+  loginButton: {
     defaultMessage: 'Login',
-    id: 'auth.login.login'
+    id: 'auth.login.loginButton'
   },
   hint: {
     defaultMessage: 'Hint: pass1',
@@ -74,7 +75,9 @@ class Login extends Component {
       <div className="login">
         <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={auth.formDisabled}>
-            <legend><FormattedMessage {...messages.legend} /></legend>
+            <legend>
+              <FormattedMessage {...messages.formLegend} />
+            </legend>
             <input
               maxLength="100"
               placeholder={emailPlaceholder}
@@ -89,14 +92,12 @@ class Login extends Component {
             />
             <br />
             <button type="submit">
-              <FormattedMessage {...messages.login} />
+              <FormattedMessage {...messages.loginButton} />
             </button>
             <span className="hint">
               <FormattedMessage {...messages.hint} />
             </span>
-            {auth.formError &&
-              <p className="error-message">{auth.formError.message}</p>
-            }
+            <LoginError error={auth.formError} />
           </fieldset>
         </form>
       </div>

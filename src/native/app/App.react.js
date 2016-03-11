@@ -12,7 +12,6 @@ class App extends Component {
 
   static propTypes = {
     device: PropTypes.object.isRequired,
-    links: PropTypes.object.isRequired,
     onSideMenuChange: PropTypes.func.isRequired,
     toggleSideMenu: PropTypes.func.isRequired,
     ui: PropTypes.object.isRequired
@@ -46,17 +45,18 @@ class App extends Component {
     onSideMenuChange(isOpen);
   }
 
-  getTitle(route) {
-    const { links } = this.props;
-    switch (route) {
-      case routes.home: return links.home;
-      case routes.todos: return links.todos;
-    }
-    throw new Error('Route not found.');
+  getTitle(/* route */) {
+    return 'none';
+    // const { links } = this.props;
+    // switch (route) {
+    //   case routes.home: return links.home;
+    //   case routes.todos: return links.todos;
+    // }
+    // throw new Error('Route not found.');
   }
 
   render() {
-    const { links, toggleSideMenu, ui } = this.props;
+    const { toggleSideMenu, ui } = this.props;
 
     const renderScene = route =>
       <View style={[styles.sceneView, route.style]}>
@@ -67,14 +67,13 @@ class App extends Component {
         <route.Page />
       </View>;
 
-    const menu =
-      <Menu links={links} onRouteChange={this.onRouteChange} />;
-
     return (
       <SideMenu
         disableGestures
         isOpen={ui.isSideMenuOpen}
-        menu={menu}
+        menu={
+          <Menu onRouteChange={this.onRouteChange} />
+        }
         onChange={this.onSideMenuChange}
         style={styles.container}
       >
@@ -93,7 +92,6 @@ class App extends Component {
 
 App = connect(state => ({
   device: state.device,
-  links: state.intl.msg.app.links,
   ui: state.ui
 }), uiActions)(App);
 

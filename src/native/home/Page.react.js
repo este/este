@@ -1,28 +1,31 @@
 import Component from 'react-pure-render/component';
-import React, { PropTypes, Text, View } from 'react-native';
+import React, { Text, View } from 'react-native';
 import appStyles from '../app/styles';
-import { connect } from 'react-redux';
+import { FormattedMessage, defineMessages } from 'react-intl';
 
-class Page extends Component {
+const messages = defineMessages({
+  intro: {
+    defaultMessage: `
+      Este App
+      Press CMD+R to reload
+      Press CMD+D for debug menu
+    `,
+    id: 'home.native.intro'
+  }
+});
 
-  static propTypes = {
-    msg: PropTypes.object.isRequired
-  };
+export default class Page extends Component {
 
   render() {
-    const { msg } = this.props;
-
     return (
       <View style={[appStyles.centeredView, { paddingBottom: 64 }]}>
         <Text style={[appStyles.centered, appStyles.paragraph]}>
-          {msg.iosInfoText}
+          <FormattedMessage {...messages.intro}>{formattedMessage =>
+            <Text>{formattedMessage}</Text>
+          }</FormattedMessage>
         </Text>
       </View>
     );
   }
 
 }
-
-export default connect(state => ({
-  msg: state.intl.msg.home
-}))(Page);

@@ -44,7 +44,7 @@ export default function configureStore(options) {
       firebase,
       getUid: () => shortid.generate(),
       now: () => Date.now(),
-      validate: validate(() => store.getState()) // eslint-disable-line no-use-before-define
+      validate
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
