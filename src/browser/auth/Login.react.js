@@ -27,7 +27,7 @@ const messages = defineMessages({
     id: 'auth.login.loginButton'
   },
   hint: {
-    defaultMessage: 'Hint: pass1',  
+    defaultMessage: 'Hint: pass1',
     id: 'auth.login.hint'
   }
 });
