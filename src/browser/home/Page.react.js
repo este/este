@@ -7,7 +7,7 @@ const messages = defineMessages({
   intro: {
     defaultMessage: `
       <p>
-        Ahoy, this is
+        Ahoy, this is the
         <a target="_blank" href="https://github.com/este/este">Este</a> dev stack.
       </p>
     `,

@@ -6,7 +6,7 @@ import { FormattedHTMLMessage, defineMessages } from 'react-intl';
 // https://github.com/yahoo/react-intl/wiki/API#definemessages
 const messages = defineMessages({
   madeByHtml: {
-    defaultMessage: 'made by <a href="https://twitter.com/steida">steida</a>',
+    defaultMessage: 'Made with love by <a href="https://twitter.com/steida">Steida</a>',
     id: 'footer.madeByHtml'
   }
 });

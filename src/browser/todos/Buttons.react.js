@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 
 const messages = defineMessages({
   add100: {
-    defaultMessage: 'Add 100 Todos',
+    defaultMessage: 'Add 100 Todo\'s',
     id: 'todos.buttons.add100'
   },
   clearAll: {
-    defaultMessage: 'Clear All',
+    defaultMessage: 'Clear All Todo\'s',
     id: 'todos.buttons.clearAll'
   }
 });

@@ -30,7 +30,7 @@ class Page extends Component {
           <Login />
         }
         <Users limitToLast={10} />
-        <button disabled>TODO: Load more</button>
+        <button disabled>TODO: Load More</button>
       </div>
     );
   }
