@@ -194,10 +194,33 @@ gulp.task('bare', () => {
     Here is a quick checklist:
       - remove /src/browser/todos, /src/common/todos, /src/native/todos dirs
       - remove todos reducer from /src/common/app/reducer.js
-      - remove todos messages from /src/common/intl/messages/en.js
       - remove todos routes from /src/browser/createRoutes.js
       - remove link from /src/browser/app/Header.react.js
 
     Yeah, it's that easy.
   `);
+});
+
+gulp.task('extractDefaultMessages', () => {
+  const through = require('through2');
+  const babel = require('babel-core');
+  const messages = [];
+
+  const getReactIntlMessages = code => babel.transform(code, {
+    plugins: ['react-intl'],
+    presets: ['es2015', 'react', 'stage-1']
+  }).metadata['react-intl'].messages;
+
+  return gulp.src([
+    'src/**/*.js'
+  ])
+  .pipe(through.obj((file, enc, cb) => {
+    const code = file.contents.toString();
+    messages.push(...getReactIntlMessages(code));
+    cb(null, file);
+  }))
+  .on('end', () => {
+    messages.sort((a, b) => a.id.localeCompare(b.id));
+    fs.writeFile('messages/_default.js', JSON.stringify(messages, null, 2));
+  });
 });
