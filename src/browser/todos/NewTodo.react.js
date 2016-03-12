@@ -2,16 +2,10 @@ import './NewTodo.scss';
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
+import newTodoMessages from '../../common/todos/newTodoMessages';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
-
-const messages = defineMessages({
-  placeholder: {
-    defaultMessage: 'What needs to be done?',
-    id: 'todos.newTodo.placeholder'
-  }
-});
+import { injectIntl, intlShape } from 'react-intl';
 
 class NewTodo extends Component {
 
@@ -36,7 +30,7 @@ class NewTodo extends Component {
 
   render() {
     const { intl, fields } = this.props;
-    const placeholder = intl.formatMessage(messages.placeholder);
+    const placeholder = intl.formatMessage(newTodoMessages.placeholder);
 
     return (
       <input
@@ -59,5 +53,4 @@ NewTodo = fields(NewTodo, {
 
 NewTodo = injectIntl(NewTodo);
 
-// Sure we can pass only actions.
 export default connect(null, todosActions)(NewTodo);

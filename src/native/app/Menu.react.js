@@ -1,5 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, { Dimensions } from 'react-native';
+import linksMessages from '../../common/app/linksMessages';
+import { injectIntl, intlShape } from 'react-intl';
 
 const {
   PropTypes, ScrollView, StyleSheet, Text, View
@@ -34,16 +36,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Menu extends Component {
+class Menu extends Component {
 
   static propTypes = {
-    links: PropTypes.object,
+    intl: intlShape.isRequired,
     onRouteChange: PropTypes.func.isRequired
   };
 
   render() {
-    const { links = {}, onRouteChange } = this.props;
-    const pages = ['home', 'todos'];
+    const { intl, onRouteChange } = this.props;
 
     return (
       <ScrollView
@@ -52,13 +53,14 @@ export default class Menu extends Component {
         style={styles.container}
       >
         <View>
-          {pages.map(page =>
-            <Text
-              key={page}
-              onPress={() => onRouteChange(page)} // eslint-disable-line react/jsx-no-bind
-              style={styles.item}
-            >{links[page]}</Text>
-          )}
+          <Text
+            onPress={() => onRouteChange('home')} // eslint-disable-line react/jsx-no-bind
+            style={styles.item}
+          >{intl.formatMessage(linksMessages.home)}</Text>
+          <Text
+            onPress={() => onRouteChange('todos')} // eslint-disable-line react/jsx-no-bind
+            style={styles.item}
+          >{intl.formatMessage(linksMessages.todos)}</Text>
         </View>
         {/* TODO: Switch language here. */}
       </ScrollView>
@@ -66,3 +68,5 @@ export default class Menu extends Component {
   }
 
 }
+
+export default injectIntl(Menu);

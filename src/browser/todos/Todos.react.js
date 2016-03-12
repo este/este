@@ -2,15 +2,9 @@ import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import todosMessages from '../../common/todos/todosMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-
-const messages = defineMessages({
-  empty: {
-    defaultMessage: 'It\'s rather empty here...',
-    id: 'todos.empty'
-  }
-});
 
 // Container component.
 class Todos extends Component {
@@ -21,24 +15,13 @@ class Todos extends Component {
     toggleTodoCompleted: PropTypes.func.isRequired
   };
 
-  // Example how to measure component update.
-  // componentWillUpdate() {
-  //   this.start = Date.now();
-  // }
-
-  // componentDidUpdate() {
-  //   const total = Date.now() - this.start;
-  //   console.log(`[ESTE] Todos updated in ${total}ms`);
-  // }
-
   render() {
     const { deleteTodo, todos, toggleTodoCompleted } = this.props;
 
     if (!todos.size) {
-      return <p><FormattedMessage {...messages.empty} /></p>;
+      return <p><FormattedMessage {...todosMessages.empty} /></p>;
     }
 
-    // Big lists should be sorted in reducer.
     const list = todos.toList().sortBy(item => item.createdAt);
 
     return (
