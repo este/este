@@ -58,7 +58,7 @@ class Todos extends Component {
       );
     }
 
-    const list = todos.toList().sortBy(item => item.createdAt);
+    const list = todos.toList().sortBy(item => item.createdAt).reverse();
 
     return (
       <ScrollView>

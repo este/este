@@ -22,7 +22,7 @@ class Todos extends Component {
       return <p><FormattedMessage {...todosMessages.empty} /></p>;
     }
 
-    const list = todos.toList().sortBy(item => item.createdAt);
+    const list = todos.toList().sortBy(item => item.createdAt).reverse();
 
     return (
       <ol className="todos">
