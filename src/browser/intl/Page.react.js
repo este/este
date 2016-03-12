@@ -1,18 +1,15 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React from 'react';
-import * as reactIntl from 'react-intl';
-
-const {
+import {
   FormattedDate,
   FormattedMessage,
   FormattedNumber,
-  FormattedPlural,
   FormattedRelative,
   defineMessages,
   injectIntl,
   intlShape
-} = reactIntl;
+} from 'react-intl';
 
 const messages = defineMessages({
   h2: {
@@ -22,6 +19,13 @@ const messages = defineMessages({
   title: {
     defaultMessage: 'Intl',
     id: 'intl.page.title'
+  },
+  unreadCount: {
+    defaultMessage: `{unreadCount, plural,
+      one {message}
+      other {messages}
+    }`,
+    id: 'intl.page.unreadCount'
   }
 });
 
@@ -50,10 +54,7 @@ class Page extends Component {
         </p>
         <p>
           <FormattedNumber value={unreadCount} /> {' '}
-          <FormattedPlural value={unreadCount}
-            one="message"
-            other="messages"
-          />
+          <FormattedMessage {...messages.unreadCount} values={{ unreadCount }} />
         </p>
         <p>
           <FormattedRelative
