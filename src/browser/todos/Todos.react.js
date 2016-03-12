@@ -15,6 +15,14 @@ class Todos extends Component {
     toggleTodoCompleted: PropTypes.func.isRequired
   };
 
+  // // Check render performance.
+  // componentWillUpdate() {
+  //   this.start = Date.now();
+  // }
+  // componentDidUpdate() {
+  //   console.log(`[ESTE] Todos updated in ${Date.now() - this.start}ms`);
+  // }
+
   render() {
     const { deleteTodo, todos, toggleTodoCompleted } = this.props;
 
