@@ -4,14 +4,17 @@ import Header from './Header.react';
 import Menu from './Menu.react';
 import React, { Navigator, PropTypes, StatusBarIOS, View } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import styles from './styles';
 import { connect } from 'react-redux';
+import { injectIntl, intlShape } from 'react-intl';
 
 class App extends Component {
 
   static propTypes = {
     device: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     onSideMenuChange: PropTypes.func.isRequired,
     toggleSideMenu: PropTypes.func.isRequired,
     ui: PropTypes.object.isRequired
@@ -26,6 +29,7 @@ class App extends Component {
     this.onNavigatorRef = this.onNavigatorRef.bind(this);
     this.onRouteChange = this.onRouteChange.bind(this);
     this.onSideMenuChange = this.onSideMenuChange.bind(this);
+    this.renderScene = this.renderScene.bind(this);
   }
 
   onNavigatorRef(component) {
@@ -45,27 +49,30 @@ class App extends Component {
     onSideMenuChange(isOpen);
   }
 
-  getTitle(/* route */) {
-    return 'none';
-    // const { links } = this.props;
-    // switch (route) {
-    //   case routes.home: return links.home;
-    //   case routes.todos: return links.todos;
-    // }
-    // throw new Error('Route not found.');
+  getTitle(route) {
+    const { intl } = this.props;
+    switch (route) {
+      case routes.home: return intl.formatMessage(linksMessages.home);
+      case routes.todos: return intl.formatMessage(linksMessages.todos);
+    }
+    throw new Error('Route not found.');
   }
 
-  render() {
-    const { toggleSideMenu, ui } = this.props;
-
-    const renderScene = route =>
+  renderScene(route) {
+    const { toggleSideMenu } = this.props;
+    return (
       <View style={[styles.sceneView, route.style]}>
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={toggleSideMenu}
         />
         <route.Page />
-      </View>;
+      </View>
+    );
+  }
+
+  render() {
+    const { ui } = this.props;
 
     return (
       <SideMenu
@@ -81,7 +88,7 @@ class App extends Component {
           configureScene={App.configureScene}
           initialRoute={routes.home}
           ref={this.onNavigatorRef}
-          renderScene={renderScene}
+          renderScene={this.renderScene}
           style={styles.container}
         />
       </SideMenu>
@@ -90,9 +97,9 @@ class App extends Component {
 
 }
 
-App = connect(state => ({
+App = injectIntl(App);
+
+export default connect(state => ({
   device: state.device,
   ui: state.ui
 }), uiActions)(App);
-
-export default App;

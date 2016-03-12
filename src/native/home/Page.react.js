@@ -20,9 +20,9 @@ export default class Page extends Component {
     return (
       <View style={[appStyles.centeredView, { paddingBottom: 64 }]}>
         <Text style={[appStyles.centered, appStyles.paragraph]}>
-          <FormattedMessage {...messages.intro}>{formattedMessage =>
-            <Text>{formattedMessage}</Text>
-          }</FormattedMessage>
+          <FormattedMessage {...messages.intro}>
+            {message => <Text>{message}</Text>}
+          </FormattedMessage>
         </Text>
       </View>
     );
