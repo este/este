@@ -16,17 +16,18 @@
 - Truly universal architecture
   - code shared across platforms (browser, server, native mobile)
   - server side rendering
-  - universal data fetching via one higher order component
-  - prerender for static hosting
+  - universal data fetching
+  - optional rendering to HTML files for static hosting
+  - universal internationalization
+  - universal forms with universal validation (universal ftw, yeah)
 - Functional architecture (immutability, hot reload, time traveling)
 - Test driven development ready
 - Advanced performance with pure components
 - Well tuned dev stack
-- Universal forms with validation
 - Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
+  - useful predefined actions
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative api
-  - and more
 
 ## Libraries
 
