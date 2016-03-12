@@ -73,6 +73,12 @@ export default function makeConfig(isDevelopment) {
           env: {
             development: {
               presets: ['react-hmre']
+            },
+            production: {
+              plugins: [
+                'transform-react-constant-elements',
+                'transform-react-inline-elements'
+              ]
             }
           }
         }
