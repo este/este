@@ -7,10 +7,11 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 
 export default function index() {
+  // TODO: Use common/config.
   const initialState = {
-    config: {
-      // TODO: Use common config for dev and production via gulp task.
-      firebaseUrl: 'https://este.firebaseio.com'
+    intl: {
+      locales: ['cs', 'en'],
+      currentLocale: 'en'
     },
     device: {
       isMobile: true,
