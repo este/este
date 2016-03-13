@@ -1,15 +1,24 @@
+import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  locales: null,
-  currentLocale: null
+  currentLocale: null, // Autodetected on the server/frontend/render.js
+  locales: null, // Defined in common/config.js
+  messages: {} // Created from messages/ files.
 });
 const initialState = new InitialState;
 
-export default function intlReducer(state = initialState) {
-  if (!(state instanceof InitialState)) return initialState.merge(state);
+export default function intlReducer(state = initialState, action) {
+  if (!(state instanceof InitialState)) return new InitialState(state);
 
-  // TODO: Add SET_CURRENT_LOCALE action.
+  switch (action.type) {
+
+    case actions.SET_CURRENT_LOCALE: {
+      const { locale } = action.payload;
+      return state.set('currentLocale', locale);
+    }
+
+  }
 
   return state;
 }

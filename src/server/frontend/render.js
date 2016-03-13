@@ -6,10 +6,13 @@ import ReactDOMServer from 'react-dom/server';
 import config from '../../common/config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
+import loadMessages from '../../common/loadMessages';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+
+const messages = loadMessages();
 
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const { components, location, params } = renderProps;
@@ -85,8 +88,10 @@ export default function render(req, res, next) {
       firebaseUrl: config.firebaseUrl
     },
     intl: {
+      // http://formatjs.io/guides/runtime-environments/#user-locale-server
+      currentLocale: req.acceptsLanguages(config.locales) || 'en',
       locales: config.locales,
-      currentLocale: 'en' // TODO: Detect.
+      messages
     },
     device: {
       isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,

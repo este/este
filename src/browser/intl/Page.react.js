@@ -1,5 +1,6 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
+import Locales from './Locales.react';
 import React from 'react';
 import {
   FormattedDate,
@@ -46,6 +47,7 @@ class Page extends Component {
         <h2>
           <FormattedMessage {...messages.h2} />
         </h2>
+        <Locales />
         <p>
           <FormattedDate
             value={Date.now()}
@@ -59,7 +61,7 @@ class Page extends Component {
         <p>
           <FormattedRelative
             value={Date.now()}
-            updateInterval={1000 * 5}
+            updateInterval={1000 * 10}
           />
         </p>
       </div>

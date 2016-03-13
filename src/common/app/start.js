@@ -9,7 +9,8 @@ export default function start(Wrapped) {
 
     static propTypes = {
       currentLocale: PropTypes.string.isRequired,
-      dispatch: PropTypes.func.isRequired
+      dispatch: PropTypes.func.isRequired,
+      messages: PropTypes.object.isRequired
     };
 
     componentDidMount() {
@@ -18,10 +19,10 @@ export default function start(Wrapped) {
     }
 
     render() {
-      const { currentLocale } = this.props;
+      const { currentLocale, messages } = this.props;
 
       return (
-        <IntlProvider locale={currentLocale}>
+        <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
           <Wrapped {...this.props} />
         </IntlProvider>
       );
@@ -30,7 +31,8 @@ export default function start(Wrapped) {
   }
 
   Start = connect(state => ({
-    currentLocale: state.intl.currentLocale
+    currentLocale: state.intl.currentLocale,
+    messages: state.intl.messages
   }))(Start);
 
   return Start;

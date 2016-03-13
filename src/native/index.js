@@ -3,7 +3,10 @@ import App from './app/App.react';
 import Component from 'react-pure-render/component';
 import React, { AppRegistry, Platform } from 'react-native';
 import configureStore from '../common/configureStore';
+import loadMessages from '../common/loadMessages';
 import { Provider } from 'react-redux';
+
+const messages = loadMessages();
 
 export default function index() {
   // TODO: Use common/config.
@@ -12,8 +15,9 @@ export default function index() {
       firebaseUrl: 'https://este.firebaseio.com'
     },
     intl: {
+      currentLocale: 'en',
       locales: ['cs', 'en'],
-      currentLocale: 'en'
+      messages
     },
     device: {
       isMobile: true,
