@@ -7,6 +7,7 @@ import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import styles from './styles';
+import start from '../../common/app/start';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
@@ -99,7 +100,9 @@ class App extends Component {
 
 App = injectIntl(App);
 
-export default connect(state => ({
+App = connect(state => ({
   device: state.device,
   ui: state.ui
 }), uiActions)(App);
+
+export default start(App);

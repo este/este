@@ -7,7 +7,6 @@ import config from '../../common/config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import serialize from 'serialize-javascript';
-import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
@@ -36,9 +35,7 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
-      <IntlProvider locale="en">
-        <RouterContext {...renderProps} />
-      </IntlProvider>
+      <RouterContext {...renderProps} />
     </Provider>
   );
 
