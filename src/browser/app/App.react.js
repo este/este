@@ -4,25 +4,14 @@ import Footer from './Footer.react';
 import Header from './Header.react';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { onAppComponentDidMount } from '../../common/app/actions';
+import start from '../../common/app/start';
 
 class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
   };
-
-  // Note pattern how actions related to app start are dispatched.
-  // componentDidMount is not called in ReactDOMServer.renderToString, so it's
-  // the right place to dispatch client only (e.g. Firebase) actions.
-  // Firebase can be used on the server as well, but it's over of this example.
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(onAppComponentDidMount());
-  }
 
   render() {
     const { children, location } = this.props;
@@ -49,5 +38,4 @@ class App extends Component {
 
 }
 
-// Just inject dispatch.
-export default connect()(App);
+export default start(App);

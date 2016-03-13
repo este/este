@@ -7,7 +7,7 @@ const InitialState = Record({
 const initialState = new InitialState;
 
 export default function intlReducer(state = initialState) {
-  if (!(state instanceof InitialState)) initialState.merge(state);
+  if (!(state instanceof InitialState)) return initialState.merge(state);
 
   // TODO: Add SET_CURRENT_LOCALE action.
 

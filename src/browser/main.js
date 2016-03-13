@@ -6,7 +6,6 @@ import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import cs from 'react-intl/locale-data/cs';
 import en from 'react-intl/locale-data/en';
-import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { addLocaleData } from 'react-intl';
@@ -20,10 +19,8 @@ addLocaleData(en);
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
 
-const app = document.getElementById('app');
-const initialState = window.__INITIAL_STATE__;
 const store = configureStore({
-  initialState,
+  initialState: window.__INITIAL_STATE__,
   platformMiddleware: [routerMiddleware(browserHistory)]
 });
 const history = syncHistoryWithStore(browserHistory, store);
@@ -31,11 +28,9 @@ const routes = createRoutes(store.getState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <IntlProvider locale="en">
-      <Router history={history}>
-        {routes}
-      </Router>
-    </IntlProvider>
-  </Provider>,
-  app
+    <Router history={history}>
+      {routes}
+    </Router>
+  </Provider>
+  , document.getElementById('app')
 );

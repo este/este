@@ -75,11 +75,7 @@ export default function configureStore(options) {
   const createReduxStore = enableDevToolsExtension
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
-
-  // Reset app store on logout to its initial state. Because app state can be
-  // persisted in localStorage, recycle on logout is a must.
-  const recycleAppReducer = recycle(appReducer, [LOGOUT]);
-
+  const recycleAppReducer = recycle(appReducer, [LOGOUT], initialState);
   const store = createReduxStore(createStore)(recycleAppReducer, initialState);
 
   // Enable hot reload where available.
