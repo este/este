@@ -133,7 +133,7 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
 In dev mode, webpack loads all the styles inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
 
 #### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
-Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply called with a `use()` statement by the main app, just like any other middleware.
+Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be called with a `use()` statement by the main app, just like any other middleware.
 
 #### Is it possible use XYZ library with Este?
 Yes. Este tries to make as few assumptions about your stack as possible. This is not a framework, nothing prevents you from picking the bits you're interested in.
@@ -149,7 +149,7 @@ In the same way as any other React Native project created via `react-native init
 ## Notes
 
 - Este.js dev stack works on OSX, Linux, and Windows.
-- As a rule of thumb, Este.js supports all evergreen browsers plus the last two pieces of IE.
+- As a rule of thumb, Este.js supports all evergreen browsers plus the last two major versions of IE.
 - Support Este.js development via Bitcoin - [daniel.steigerwald.cz/#donate-estejs](http://daniel.steigerwald.cz/#donate-estejs)
 
 ## Credit
