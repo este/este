@@ -16,6 +16,7 @@ nconf.defaults({
   firebaseUrl: 'https://este.firebaseio.com',
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction,
+  locales: ['cs', 'en'],
   port: process.env.PORT || 8000
 });
 
