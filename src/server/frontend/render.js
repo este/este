@@ -94,7 +94,7 @@ export default function render(req, res, next) {
     },
     intl: {
       // http://formatjs.io/guides/runtime-environments/#user-locale-server
-      currentLocale: req.acceptsLanguages(config.locales) || 'en',
+      currentLocale: req.acceptsLanguages(config.locales) || config.defaultLocale,
       locales: config.locales,
       messages
     },
