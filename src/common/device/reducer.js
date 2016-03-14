@@ -1,7 +1,6 @@
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  isMobile: false,
   platform: '',
   host: ''
 });

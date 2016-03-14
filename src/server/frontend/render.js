@@ -99,7 +99,6 @@ export default function render(req, res, next) {
       messages
     },
     device: {
-      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,
       host: `${protocol}://${req.headers.host}`
     }
   };
