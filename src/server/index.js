@@ -4,7 +4,7 @@ require('babel-polyfill');
 const Bluebird = require('bluebird');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const config = require('./config');
-const polyfillLocales = require('./polyfillLocales');
+const polyfillLocales = require('./intl/polyfillLocales');
 const rootDir = require('path').resolve(__dirname, '..', '..');
 const webpackIsomorphicAssets = require('../../webpack/assets');
 

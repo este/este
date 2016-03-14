@@ -77,11 +77,13 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 ## Dev Tasks
 
 - `gulp` run web app in development mode
+- `gulp ios` run iOS app in development mode
+- `gulp android` run Android app in development mode
 - `gulp -p` run web app in production mode
 - `gulp mocha` run mocha unit tests
 - `gulp mocha-watch` continuous test running for TDD
 - `gulp eslint` eslint
-- `gulp eslint --fix` fix some eslint issues
+- `gulp eslint --fix` fix fixable eslint issues
 - `gulp extractDefaultMessages` extract string messages for translation
 
 ## Production Tasks

@@ -2,25 +2,26 @@ import 'react-native-browser-polyfill';
 import App from './app/App.react';
 import Component from 'react-pure-render/component';
 import React, { AppRegistry, Platform } from 'react-native';
+import config from './config';
 import configureStore from '../common/configureStore';
-import loadMessages from '../common/loadMessages';
+import messages from './messages';
 import { Provider } from 'react-redux';
 
-const messages = loadMessages();
+// Yeah, require because polyfillLocales is shared with CommonJS Node code.
+require('../server/intl/polyfillLocales')(self, config.locales);
 
 export default function index() {
-  // TODO: Use common/config.
   const initialState = {
     config: {
-      firebaseUrl: 'https://este.firebaseio.com'
+      firebaseUrl: config.firebaseUrl
     },
     intl: {
-      currentLocale: 'en',
-      locales: ['cs', 'en'],
+      // TODO: Detect native current locale.
+      currentLocale: config.defaultLocale,
+      locales: config.locales,
       messages
     },
     device: {
-      isMobile: true,
       platform: Platform.OS
     }
   };

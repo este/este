@@ -147,6 +147,31 @@ gulp.task('to-html', done => {
 
 // React Native
 
+gulp.task('native', done => {
+  // native/config.js
+  const config = require('./src/server/config');
+  const { defaultLocale, firebaseUrl, locales } = config;
+  fs.writeFile('src/native/config.js',
+// Yeah, that's how ES6 template string indentation works.
+`/* eslint-disable eol-last, quotes, quote-props */
+export default ${
+  JSON.stringify({ defaultLocale, firebaseUrl, locales }, null, 2)
+};`
+  );
+  // native/messages.js
+  const messages = require('./src/server/intl/loadMessages')();
+  fs.writeFile('src/native/messages.js',
+`/* eslint-disable eol-last, max-len, quotes, quote-props */
+export default ${
+  JSON.stringify(messages, null, 2)
+};`
+  );
+  done();
+});
+
+gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
+gulp.task('android', ['native'], bg('react-native', 'run-android'));
+
 // Various fixes for react-native issues. Must be called after npm install.
 gulp.task('fix-react-native', done => {
   runSequence('fix-native-babelrc-files', 'fix-native-fbjs', done);
