@@ -42,12 +42,17 @@ const getAppHtml = (store, renderProps) =>
     </Provider>
   );
 
+const intlPolyfillFeatures = config.locales
+  .map(locale => `Intl.~locale.${locale}`)
+  .join();
+
 const getScriptHtml = (state, headers, hostname, appJsFilename) =>
-  // Note how app state is serialized. JSON.stringify is anti-pattern.
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  // Note how we use cdn.polyfill.io, en is default, but can be changed later.
+  // https://github.com/andyearnshaw/Intl.js/#intljs-and-ft-polyfill-service
   `
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=${
+      intlPolyfillFeatures
+    }"></script>
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
