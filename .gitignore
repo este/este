@@ -1,5 +1,6 @@
 # Este
 *.sublime-workspace
+secrets.json
 
 # OSX
 .DS_Store
