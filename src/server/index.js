@@ -3,8 +3,8 @@ require('babel-polyfill');
 
 const Bluebird = require('bluebird');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const areIntlLocalesSupported = require('intl-locales-supported');
-const config = require('../common/config').default;
+const config = require('./config');
+const polyfillLocales = require('./polyfillLocales');
 const rootDir = require('path').resolve(__dirname, '..', '..');
 const webpackIsomorphicAssets = require('../../webpack/assets');
 
@@ -14,20 +14,7 @@ if (!process.env.NODE_ENV) {
   );
 }
 
-// https://github.com/yahoo/intl-locales-supported#usage
-if (global.Intl) {
-  // Determine if the built-in `Intl` has the locale data we need.
-  if (!areIntlLocalesSupported(config.locales)) {
-    // `Intl` exists, but it doesn't have the data we need, so load the
-    // polyfill and replace the constructors we need with the polyfill's.
-    require('intl');
-    Intl.NumberFormat = IntlPolyfill.NumberFormat; // eslint-disable-line no-undef
-    Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat; // eslint-disable-line no-undef
-  }
-} else {
-  // No `Intl`, so use and load the polyfill.
-  global.Intl = require('intl');
-}
+polyfillLocales(global, config.locales);
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 global.Promise = Bluebird;

@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import Html from './Html.react';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import config from '../../common/config';
+import config from '../../server/config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
 import loadMessages from '../../common/loadMessages';

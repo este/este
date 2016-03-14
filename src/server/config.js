@@ -1,3 +1,5 @@
+// Application configuration.
+
 // http://www.codedependant.net/2015/01/31/production-ready-node-configuration
 import nconf from 'nconf';
 
@@ -7,11 +9,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 // production server. 'foo__bar=2 gulp' will set config to '{foo: {bar: 2}}'
 nconf.env('__');
 
-// For local development with secrets, create git ignored secrets.json file.
+// For local development with secrets. Check src/common/_secrets.json file.
 // nconf.file('src/common/secrets.json');
 
-// Remember, never put secrets in this file. To override default values for
-// production, use environment variables.
+// Remember, never put secrets in default config.
+// Use environment variables for production.
 nconf.defaults({
   firebaseUrl: 'https://este.firebaseio.com',
   googleAnalyticsId: 'UA-XXXXXXX-X',

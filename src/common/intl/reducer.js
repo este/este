@@ -3,7 +3,7 @@ import { Record } from 'immutable';
 
 const InitialState = Record({
   currentLocale: null, // Autodetected on the server/frontend/render.js
-  locales: null, // Defined in common/config.js
+  locales: null, // Defined in server/config.js
   messages: {} // Created from messages/ files.
 });
 const initialState = new InitialState;
