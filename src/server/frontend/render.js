@@ -87,9 +87,10 @@ const renderPage = (store, renderProps, req) => {
 export default function render(req, res, next) {
   // Detect Heroku protocol
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  // This should be somehow shared with gulp native task.
   const initialState = {
-    // Never pass whole server config to the client.
     config: {
+      appName: config.appName,
       firebaseUrl: config.firebaseUrl
     },
     intl: {

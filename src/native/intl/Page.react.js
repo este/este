@@ -1,9 +1,10 @@
 import * as intlActions from '../../common/intl/actions';
 import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Text, View } from 'react-native';
+import appStyles from '../app/styles';
 import { connect } from 'react-redux';
 
-class Locales extends Component {
+class Page extends Component {
 
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,
@@ -15,15 +16,18 @@ class Locales extends Component {
     const { currentLocale, locales, setCurrentLocale } = this.props;
 
     return (
-      <div className="locales">
+      <View style={[appStyles.centeredView, { paddingBottom: 64 }]}>
         {locales.map(locale =>
-          <button
-            disabled={locale === currentLocale}
+          <Text
+            style={[appStyles.centered, {
+              fontSize: 30,
+              fontWeight: locale === currentLocale ? 'bold' : 'normal'
+            }]}
             key={locale}
-            onClick={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
-          >{locale}</button>
+            onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
+          >{locale}</Text>
         )}
-      </div>
+      </View>
     );
   }
 
@@ -32,5 +36,5 @@ class Locales extends Component {
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
   locales: state.intl.locales
-}), intlActions)(Locales);
+}), intlActions)(Page);
 

@@ -61,8 +61,11 @@ class Menu extends Component {
             onPress={() => onRouteChange('todos')} // eslint-disable-line react/jsx-no-bind
             style={styles.item}
           >{intl.formatMessage(linksMessages.todos)}</Text>
+          <Text
+            onPress={() => onRouteChange('intl')} // eslint-disable-line react/jsx-no-bind
+            style={styles.item}
+          >{intl.formatMessage(linksMessages.intl)}</Text>
         </View>
-        {/* TODO: Switch language here. */}
       </ScrollView>
     );
   }

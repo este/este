@@ -3,6 +3,7 @@
 // http://www.codedependant.net/2015/01/31/production-ready-node-configuration
 import nconf from 'nconf';
 
+const appName = require('../../package.json').name;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Specifying an env delimiter allows us to override config when shipping to
@@ -13,8 +14,9 @@ nconf.env('__');
 // nconf.file('src/common/secrets.json');
 
 // Remember, never put secrets in default config.
-// Use environment variables for production.
+// Use environment variables for production, and secrets.json for development.
 nconf.defaults({
+  appName,
   defaultLocale: 'en',
   firebaseUrl: 'https://este.firebaseio.com',
   googleAnalyticsId: 'UA-XXXXXXX-X',

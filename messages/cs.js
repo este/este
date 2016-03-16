@@ -89,7 +89,7 @@
   },
   {
     "id": "intl.page.title",
-    "defaultMessage": "Intl"
+    "defaultMessage": "Lokalizace"
   },
   {
     "id": "intl.page.unreadCount",

@@ -2,7 +2,9 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import { onAppComponentDidMount } from './actions';
+import { firebaseActions } from '../lib/redux-firebase';
+import { logout } from '../auth/actions';
+import { updateAppStateFromStorage } from './actions';
 
 export default function start(Wrapped) {
   class Start extends Component {
@@ -15,14 +17,20 @@ export default function start(Wrapped) {
 
     componentDidMount() {
       const { dispatch } = this.props;
-      dispatch(onAppComponentDidMount());
+      // Client side changes must be dispatched after initial client render.
+      // componentDidMount is not called on the server.
+      dispatch(firebaseActions.watchAuth(logout));
+      dispatch(updateAppStateFromStorage());
     }
 
     render() {
       const { currentLocale, messages } = this.props;
-
       return (
-        <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
+        <IntlProvider
+          key={currentLocale} // https://github.com/yahoo/react-intl/issues/234
+          locale={currentLocale}
+          messages={messages[currentLocale]}
+        >
           <Wrapped {...this.props} />
         </IntlProvider>
       );

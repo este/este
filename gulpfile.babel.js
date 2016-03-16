@@ -150,12 +150,12 @@ gulp.task('to-html', done => {
 gulp.task('native', done => {
   // native/config.js
   const config = require('./src/server/config');
-  const { defaultLocale, firebaseUrl, locales } = config;
+  const { appName, defaultLocale, firebaseUrl, locales } = config;
   fs.writeFile('src/native/config.js',
 // Yeah, that's how ES6 template string indentation works.
 `/* eslint-disable eol-last, quotes, quote-props */
 export default ${
-  JSON.stringify({ defaultLocale, firebaseUrl, locales }, null, 2)
+  JSON.stringify({ appName, defaultLocale, firebaseUrl, locales }, null, 2)
 };`
   );
   // native/messages.js

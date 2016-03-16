@@ -54,6 +54,7 @@ class App extends Component {
     const { intl } = this.props;
     switch (route) {
       case routes.home: return intl.formatMessage(linksMessages.home);
+      case routes.intl: return intl.formatMessage(linksMessages.intl);
       case routes.todos: return intl.formatMessage(linksMessages.todos);
     }
     throw new Error('Route not found.');

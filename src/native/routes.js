@@ -1,4 +1,5 @@
 import Home from './home/Page.react';
+import Intl from './intl/Page.react';
 import Todos from './todos/Page.react';
 
 export default {
@@ -7,5 +8,8 @@ export default {
   },
   todos: {
     Page: Todos
+  },
+  intl: {
+    Page: Intl
   }
 };

@@ -1,15 +1,16 @@
-import * as authActions from '../auth/actions';
-import { firebaseActions } from '../lib/redux-firebase';
+import { setCurrentLocale } from '../intl/actions';
 
-export const ON_APP_COMPONENT_DID_MOUNT = 'ON_APP_COMPONENT_DID_MOUNT';
+export const UPDATE_APP_STATE_FROM_STORAGE = 'UPDATE_APP_STATE_FROM_STORAGE';
 
-export function onAppComponentDidMount() {
-  // Who injected dispatch? Check configureStore.js injectMiddleware.
-  return ({ dispatch }) => {
-    dispatch(firebaseActions.watchAuth(authActions.logout));
-
+export function updateAppStateFromStorage() {
+  return ({ dispatch, engine }) => {
+    engine.load().then(state => {
+      if (state.intl && state.intl.currentLocale) {
+        dispatch(setCurrentLocale(state.intl.currentLocale));
+      }
+    });
     return {
-      type: ON_APP_COMPONENT_DID_MOUNT
+      type: UPDATE_APP_STATE_FROM_STORAGE
     };
   };
 }

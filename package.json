@@ -1,5 +1,5 @@
 {
-  "name": "Este",
+  "name": "este",
   "authors": [
     "Daniel Steigerwald"
   ],
@@ -100,6 +100,11 @@
     "redux-logger": "^2.1.1",
     "redux-promise-middleware": "^2.3.2",
     "redux-recycle": "^1.1.0",
+    "redux-storage": "^4.0.0",
+    "redux-storage-decorator-debounce": "^1.0.0",
+    "redux-storage-decorator-filter": "^1.1.1",
+    "redux-storage-engine-localstorage": "^1.0.1",
+    "redux-storage-engine-reactnativeasyncstorage": "^1.0.0",
     "regenerator": "^0.8.42",
     "run-sequence": "^1.0.2",
     "sass-loader": "^3.0.0",
