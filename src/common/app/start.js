@@ -17,8 +17,7 @@ export default function start(Wrapped) {
 
     componentDidMount() {
       const { dispatch } = this.props;
-      // Client side changes must be dispatched after initial client render.
-      // componentDidMount is not called on the server.
+      // Client side changes must be dispatched after componentDidMount.
       dispatch(firebaseActions.watchAuth(logout));
       dispatch(updateAppStateFromStorage());
     }

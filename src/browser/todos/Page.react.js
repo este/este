@@ -40,6 +40,9 @@ class Page extends Component {
 
 // Truly universal (not only isomorphic) data fetching.
 // One higher order component for browser, server, and mobile.
-Page = fetch(fetchUserTodos)(Page);
+// No server fetching for server-less apps.
+if (!process.env.IS_SERVERLESS) {
+  Page = fetch(fetchUserTodos)(Page);
+}
 
 export default injectIntl(Page);

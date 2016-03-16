@@ -89,10 +89,11 @@ gulp.task('default', ['server']);
 // Test (OSX): cd build && python -m SimpleHTTPServer 8000
 gulp.task('to-html', done => {
   args.production = true;
+  process.env.IS_SERVERLESS = true;
 
   const urls = {
     '/': 'index.html',
-    '/foo-bla-bar': '404.html'
+    '/404': '404.html'
   };
 
   const fetch = url => new Promise((resolve, reject) => {

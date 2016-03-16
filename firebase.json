@@ -9,5 +9,9 @@
     "**/node_modules/**",
     ".DS_Store",
     "firebase.json"
-  ]
+  ],
+  "rewrites": [{
+    "source": "**",
+    "destination": "/index.html"
+  }]
 }
