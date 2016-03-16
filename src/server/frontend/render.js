@@ -114,7 +114,7 @@ export default function render(req, res, next) {
   });
   const history = syncHistoryWithStore(memoryHistory, store);
   // Fetch and dispatch current user here because routes may need it.
-  const routes = createRoutes(() => store.getState());
+  const routes = createRoutes(store.getState);
   const location = req.url;
 
   match({ history, routes, location }, async (error, redirectLocation, renderProps) => {
