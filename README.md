@@ -39,7 +39,7 @@
 - [react-router](https://github.com/rackt/react-router)
 - [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [react-intl](https://github.com/yahoo/react-intl)
-- [react-storage](https://github.com/michaelcontento/redux-storage)
+- [redux-storage](https://github.com/michaelcontento/redux-storage)
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
