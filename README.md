@@ -19,7 +19,7 @@
   - server side rendering
   - universal data fetching
   - optional rendering to HTML files for static hosting
-  - universal internationalization
+  - universal internationalization with runtime language switching
   - universal forms with universal validation (universal ftw, yeah)
 - Functional architecture (immutability, hot reload, time traveling)
 - Test driven development ready
@@ -32,17 +32,19 @@
 
 ## Libraries
 
-- [React](http://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/) 
-- [Redux](http://rackt.github.io/redux/)
+- [react](http://facebook.github.io/react/) and [react native](https://facebook.github.io/react-native/) 
+- [redux](http://rackt.github.io/redux/)
 - [babeljs](https://babeljs.io/)
 - [immutablejs](http://facebook.github.io/immutable-js)
 - [react-router](https://github.com/rackt/react-router)
 - [react-router-redux](https://github.com/reactjs/react-router-redux)
+- [react-intl](https://github.com/yahoo/react-intl)
+- [react-storage](https://github.com/michaelcontento/redux-storage)
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
 - [formatjs](http://formatjs.io/) Universal internationalization.
-- [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React.
+- [react-helmet](https://github.com/nfl/react-helmet) A document head manager for React.
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
@@ -149,7 +151,6 @@ Just as regular React Native project created via `react-native init AwesomeProje
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
-- [DzejEs.cz](http://www.dzejes.cz) - czech articles about Este
 
 ## Notes
 
