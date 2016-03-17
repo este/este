@@ -23,8 +23,8 @@ class App extends Component {
             { rel: 'shortcut icon', href: require('./favicon.ico') }
           ]}
           meta={[{
-            name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React web apps'
+            content: 'Dev stack and starter kit for functional and universal React web apps',
+            name: 'description'
           }]}
           titleTemplate="%s - Este.js"
         />
