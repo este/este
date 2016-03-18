@@ -4,15 +4,18 @@ import Header from './Header.react';
 import Menu from './Menu.react';
 import React, { Navigator, PropTypes, StatusBarIOS, View } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import styles from './styles';
+import start from '../../common/app/start';
 import { connect } from 'react-redux';
+import { injectIntl, intlShape } from 'react-intl';
 
 class App extends Component {
 
   static propTypes = {
     device: PropTypes.object.isRequired,
-    links: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     onSideMenuChange: PropTypes.func.isRequired,
     toggleSideMenu: PropTypes.func.isRequired,
     ui: PropTypes.object.isRequired
@@ -49,10 +52,11 @@ class App extends Component {
   }
 
   getTitle(route) {
-    const { links } = this.props;
+    const { intl } = this.props;
     switch (route) {
-      case routes.home: return links.home;
-      case routes.todos: return links.todos;
+      case routes.home: return intl.formatMessage(linksMessages.home);
+      case routes.intl: return intl.formatMessage(linksMessages.intl);
+      case routes.todos: return intl.formatMessage(linksMessages.todos);
     }
     throw new Error('Route not found.');
   }
@@ -68,15 +72,15 @@ class App extends Component {
   }
 
   render() {
-    const { links, ui } = this.props;
-    const menu =
-      <Menu links={links} onRouteChange={this.onRouteChange} />;
+    const { ui } = this.props;
 
     return (
       <SideMenu
         disableGestures
         isOpen={ui.isSideMenuOpen}
-        menu={menu}
+        menu={
+          <Menu onRouteChange={this.onRouteChange} />
+        }
         onChange={this.onSideMenuChange}
         style={styles.container}
       >
@@ -93,10 +97,11 @@ class App extends Component {
 
 }
 
+App = injectIntl(App);
+
 App = connect(state => ({
   device: state.device,
-  links: state.intl.msg.app.links,
   ui: state.ui
 }), uiActions)(App);
 
-export default App;
+export default start(App);

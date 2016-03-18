@@ -1,52 +1,44 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React from 'react';
+import { FormattedHTMLMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+
+const messages = defineMessages({
+  intro: {
+    defaultMessage: `
+      <p>
+        Ahoy, this is
+        <a target="_blank" href="https://github.com/este/este">Este</a> dev stack.
+      </p>
+    `,
+    id: 'home.intro'
+  },
+  title: {
+    defaultMessage: 'Home',
+    id: 'home.title'
+  }
+});
 
 class Page extends Component {
 
   static propTypes = {
-    msg: PropTypes.object.isRequired
+    intl: intlShape.isRequired
   };
 
   render() {
-    const { msg } = this.props;
+    const { intl } = this.props;
+    const title = intl.formatMessage(messages.title);
 
     return (
       <div className="home-page">
-        <Helmet title={msg.title} />
-        <p>
-          <FormattedHTMLMessage defaultMessage={msg.infoHtml} />
-        </p>
-        <div className="tocheck">
-          <h2>{msg.toCheck.h2}</h2>
-          <ul>
-            {msg.toCheck.list.map((text, i) =>
-              <li key={i}>
-                <FormattedHTMLMessage defaultMessage={text} />
-              </li>
-            )}
-            <li>
-              {msg.toCheck.isomorphicPage}{' '}
-              <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>
-            </li>
-            <li>
-              {msg.toCheck.andMuchMore}
-            </li>
-          </ul>
-          {/* Note require usage for image source. Very useful for CDN. */}
-          <img alt="50x50 placeholder" src={require('./50x50.png')} />
-        </div>
+        <Helmet title={title} />
+        <FormattedHTMLMessage {...messages.intro} />
+        {/* Use require for assets. It's super useful for CDN. */}
+        <img alt="50x50 placeholder" src={require('./50x50.png')} />
       </div>
     );
   }
 
 }
 
-Page = connect(state => ({
-  msg: state.intl.msg.home
-}))(Page);
-
-export default Page;
+export default injectIntl(Page);

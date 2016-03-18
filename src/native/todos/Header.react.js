@@ -1,14 +1,18 @@
 import Component from 'react-pure-render/component';
-import React from 'react-native';
+import React, { PropTypes, StyleSheet, Text, View } from 'react-native';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 
-// yahoo/react-intl still does not support React Native, but we can use format.
-// https://github.com/yahoo/react-intl/issues/119
-import { format } from '../../common/intl/format';
-
-const {
-  PropTypes, StyleSheet, Text, View
-} = React;
+const messages = defineMessages({
+  leftTodos: {
+    defaultMessage: `{leftTodos, plural,
+      =0 {Nothing, enjoy :-)}
+      one {You have {leftTodos} task}
+      other {You have {leftTodos} tasks}
+    }`,
+    id: 'todos.leftTodos'
+  }
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -28,19 +32,18 @@ const styles = StyleSheet.create({
 class Header extends Component {
 
   static propTypes = {
-    msg: PropTypes.object.isRequired,
     todos: PropTypes.object.isRequired
   };
 
   render() {
-    const { msg, todos } = this.props;
+    const { todos } = this.props;
     const leftTodos = todos.filter(todo => !todo.completed).size;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>
-          {(format(msg.leftList, { size: leftTodos }))}
-        </Text>
+        <FormattedMessage {...messages.leftTodos} values={{ leftTodos }}>
+          {message => <Text style={styles.header}>{message}</Text>}
+        </FormattedMessage>
       </View>
     );
   }
@@ -48,6 +51,5 @@ class Header extends Component {
 }
 
 export default connect(state => ({
-  msg: state.intl.msg.todos,
   todos: state.todos.map
 }))(Header);

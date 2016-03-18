@@ -6,11 +6,13 @@ import ReactDOMServer from 'react-dom/server';
 import config from '../config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
+import loadMessages from '../intl/loadMessages';
 import serialize from 'serialize-javascript';
-import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+
+const messages = loadMessages();
 
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const { components, location, params } = renderProps;
@@ -36,18 +38,21 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
-      <IntlProvider>
-        <RouterContext {...renderProps} />
-      </IntlProvider>
+      <RouterContext {...renderProps} />
     </Provider>
   );
 
+const intlPolyfillFeatures = config.locales
+  .map(locale => `Intl.~locale.${locale}`)
+  .join();
+
 const getScriptHtml = (state, headers, hostname, appJsFilename) =>
-  // Note how app state is serialized. JSON.stringify is anti-pattern.
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  // Note how we use cdn.polyfill.io, en is default, but can be changed later.
+  // https://github.com/andyearnshaw/Intl.js/#intljs-and-ft-polyfill-service
   `
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=${
+      intlPolyfillFeatures
+    }"></script>
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
@@ -56,6 +61,10 @@ const getScriptHtml = (state, headers, hostname, appJsFilename) =>
 
 const renderPage = (store, renderProps, req) => {
   const state = store.getState();
+  if (process.env.IS_SERVERLESS) {
+    // No server routing for server-less apps.
+    delete state.routing;
+  }
   const { headers, hostname } = req;
   const appHtml = getAppHtml(store, renderProps);
   const helmet = Helmet.rewind();
@@ -80,11 +89,21 @@ const renderPage = (store, renderProps, req) => {
 };
 
 export default function render(req, res, next) {
-  // Detect Heroku protocol
+  const currentLocale = process.env.IS_SERVERLESS
+    ? config.defaultLocale
+    : req.acceptsLanguages(config.locales) || config.defaultLocale;
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const initialState = {
+    config: {
+      appName: config.appName,
+      firebaseUrl: config.firebaseUrl
+    },
+    intl: {
+      currentLocale,
+      locales: config.locales,
+      messages
+    },
     device: {
-      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,
       host: `${protocol}://${req.headers.host}`
     }
   };
@@ -95,7 +114,7 @@ export default function render(req, res, next) {
   });
   const history = syncHistoryWithStore(memoryHistory, store);
   // Fetch and dispatch current user here because routes may need it.
-  const routes = createRoutes(() => store.getState());
+  const routes = createRoutes(store.getState);
   const location = req.url;
 
   match({ history, routes, location }, async (error, redirectLocation, renderProps) => {

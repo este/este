@@ -1,5 +1,4 @@
 import compression from 'compression';
-import device from 'express-device';
 import esteMiddleware from '../lib/esteMiddleware';
 import express from 'express';
 import render from './render';
@@ -16,7 +15,6 @@ app.use(compression());
 // <img alt="50x50 placeholder" src={require('./50x50.png')} />
 app.use('/assets', express.static('build', { maxAge: '200d' }));
 
-app.use(device.capture());
 app.get('*', render);
 
 app.on('mount', () => {

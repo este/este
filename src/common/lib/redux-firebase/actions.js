@@ -99,6 +99,7 @@ export function signUp(fields) {
 }
 
 export function watchAuth(logout) {
+  let wasAuthenticated = false;
   return ({ dispatch, firebase }) => {
     // Use sync getAuth to set app state immediately.
     dispatch(onAuth(firebase.getAuth()));
@@ -106,9 +107,10 @@ export function watchAuth(logout) {
     firebase.onAuth(authData => {
       dispatch(onAuth(authData));
       if (authData) {
+        wasAuthenticated = true;
         dispatch(saveUserOnAuth(authData));
       } else {
-        dispatch(logout());
+        if (wasAuthenticated) dispatch(logout());
       }
     });
     return {

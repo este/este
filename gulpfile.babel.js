@@ -90,10 +90,11 @@ gulp.task('default', ['server']);
 // Test (OSX): cd build && python -m SimpleHTTPServer 8000
 gulp.task('to-html', done => {
   args.production = true;
+  process.env.IS_SERVERLESS = true;
 
   const urls = {
     '/': 'index.html',
-    '/foo-bla-bar': '404.html'
+    '/404': '404.html'
   };
 
   const fetch = url => new Promise((resolve, reject) => {
@@ -147,6 +148,31 @@ gulp.task('to-html', done => {
 });
 
 // React Native
+
+gulp.task('native', done => {
+  // native/config.js
+  const config = require('./src/server/config');
+  const { appName, defaultLocale, firebaseUrl, locales } = config;
+  fs.writeFile('src/native/config.js',
+// Yeah, that's how ES6 template string indentation works.
+`/* eslint-disable eol-last, quotes, quote-props */
+export default ${
+  JSON.stringify({ appName, defaultLocale, firebaseUrl, locales }, null, 2)
+};`
+  );
+  // native/messages.js
+  const messages = require('./src/server/intl/loadMessages')();
+  fs.writeFile('src/native/messages.js',
+`/* eslint-disable eol-last, max-len, quotes, quote-props */
+export default ${
+  JSON.stringify(messages, null, 2)
+};`
+  );
+  done();
+});
+
+gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
+gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues. Must be called after npm install.
 gulp.task('fix-react-native', done => {
@@ -206,10 +232,33 @@ gulp.task('bare', () => {
     Here is a quick checklist:
       - remove /src/browser/todos, /src/common/todos, /src/native/todos dirs
       - remove todos reducer from /src/common/app/reducer.js
-      - remove todos messages from /src/common/intl/messages/en.js
       - remove todos routes from /src/browser/createRoutes.js
       - remove link from /src/browser/app/Header.react.js
 
     Yeah, it's that easy.
   `);
+});
+
+gulp.task('extractDefaultMessages', () => {
+  const through = require('through2');
+  const babel = require('babel-core');
+  const messages = [];
+
+  const getReactIntlMessages = code => babel.transform(code, {
+    plugins: ['react-intl'],
+    presets: ['es2015', 'react', 'stage-1']
+  }).metadata['react-intl'].messages;
+
+  return gulp.src([
+    'src/**/*.js'
+  ])
+  .pipe(through.obj((file, enc, cb) => {
+    const code = file.contents.toString();
+    messages.push(...getReactIntlMessages(code));
+    cb(null, file);
+  }))
+  .on('end', () => {
+    messages.sort((a, b) => a.id.localeCompare(b.id));
+    fs.writeFile('messages/_default.js', JSON.stringify(messages, null, 2));
+  });
 });

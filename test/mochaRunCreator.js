@@ -8,10 +8,9 @@ import gulp from 'gulp';
 import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
 import path from 'path';
-import serverConfig from '../src/server/config';
 
 // To ignore webpack custom loaders on server.
-serverConfig.webpackStylesExtensions.forEach(ext => {
+['css', 'less', 'sass', 'scss', 'styl'].forEach(ext => {
   require.extensions['.' + ext] = () => {};
 });
 

@@ -1,3 +1,5 @@
+import { ValidationError } from '../lib/validation';
+
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -5,8 +7,7 @@ export const LOGOUT = 'LOGOUT';
 
 export function login(fields) {
   return ({ fetch, validate }) => {
-    // Why function? https://phabricator.babeljs.io/T2765
-    async function getPromise() {
+    const getPromise = async () => {
       try {
         await validate(fields)
           .prop('email').required().email()
@@ -22,13 +23,13 @@ export function login(fields) {
         // Return JSON response.
         return response.json();
       } catch (error) {
-        // Here we can transforn error statuses to custom errors.
+        // Transform error status to custom error.
         if (error.status === 401) {
-          throw validate.wrongPassword('password');
+          throw new ValidationError('wrongPassword', { prop: 'password' });
         }
         throw error;
       }
-    }
+    };
 
     return {
       type: 'LOGIN',

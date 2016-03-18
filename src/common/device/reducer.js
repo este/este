@@ -1,24 +1,12 @@
-import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  isMobile: false,
-  platform: '',
-  host: ''
+  host: '',
+  platform: '' // iOS or Android in React Native.
 });
 const initialState = new InitialState;
 
-export default function deviceReducer(state = initialState, action) {
+export default function deviceReducer(state = initialState) {
   if (!(state instanceof InitialState)) return initialState.merge(state);
-
-  switch (action.type) {
-
-    case actions.SET_PLATFORM: {
-      const { platform } = action.payload;
-      return state.set('platform', platform);
-    }
-
-  }
-
   return state;
 }
