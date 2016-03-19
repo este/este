@@ -1,7 +1,9 @@
 /* eslint-disable no-undef, no-console */
 import bg from 'gulp-bg';
 import del from 'del';
+import cp from 'cp';
 import eslint from 'gulp-eslint';
+import replace from 'gulp-replace';
 import fs from 'fs';
 import gulp from 'gulp';
 import gulpIf from 'gulp-if';
@@ -175,7 +177,8 @@ gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues. Must be called after npm install.
 gulp.task('fix-react-native', done => {
-  runSequence('fix-native-babelrc-files', 'fix-native-fbjs', done);
+  runSequence('fix-native-babelrc-files', 'fix-native-fbjs',
+    'fix-native-babel-helpers-file', 'fix-react-native-build-active-arch-only', done);
 });
 
 // https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
@@ -188,6 +191,36 @@ gulp.task('fix-native-babelrc-files', () =>
 // Still broken in RN 0.20. Remove fbjs from package.json after fix.
 gulp.task('fix-native-fbjs', () =>
   del(['node_modules/**/fbjs', '!node_modules/fbjs'])
+);
+
+// https://github.com/este/este/issues/662#issuecomment-189674310
+// Fix for babelHelpers.js still broken in RN 0.20.0
+const babelHelpersSrc = 'src/native/fixes/babelHelpers.js';
+const babelHelpersDst = 'node_modules/react-native/packager/react-packager'
+  + '/src/Resolver/polyfills/babelHelpers.js';
+
+gulp.task('fix-native-babel-helpers-file', () =>
+  cp.sync(babelHelpersSrc, babelHelpersDst)
+);
+
+// Fix for "build active architecture only" in react native xcode files
+const reactNativeXcodeSrcFiles = [
+  'React/React',
+  'Libraries/ActionSheetIOS/RCTActionSheet',
+  'Libraries/Geolocation/RCTGeolocation',
+  'Libraries/Image/RCTImage',
+  'Libraries/LinkingIOS/RCTLinking',
+  'Libraries/Network/RCTNetwork',
+  'Libraries/Settings/RCTSettings',
+  'Libraries/Text/RCTText',
+  'Libraries/Vibration/RCTVibration',
+  'Libraries/WebSocket/RCTWebSocket'
+].map(f => `${'node_modules/react-native/'}${f}${'.xcodeproj/project.pbxproj'}`);
+
+gulp.task('fix-react-native-build-active-arch-only', () =>
+  gulp.src(reactNativeXcodeSrcFiles)
+    .pipe(replace('ONLY_ACTIVE_ARCH = YES', 'ONLY_ACTIVE_ARCH = NO'))
+    .pipe(gulp.dest(file => file.base))
 );
 
 // Tasks for issues seem to be already fixed.
