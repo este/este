@@ -6,8 +6,8 @@ import { firebaseActions } from '../lib/redux-firebase';
 import { mapAuthToUser } from '../lib/redux-firebase';
 
 const InitialState = Record({
-  list: null,
-  viewer: null
+  list: undefined,
+  viewer: undefined
 });
 const initialState = new InitialState;
 
