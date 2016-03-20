@@ -3,7 +3,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { firebaseActions } from '../../common/lib/redux-firebase';
+import { firebaseActions } from 'este-firebase-redux';
 
 class Login extends Component {
 
