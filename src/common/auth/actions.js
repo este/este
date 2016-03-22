@@ -13,6 +13,13 @@ export function login(fields) {
           .prop('email').required().email()
           .prop('password').required().simplePassword()
           .promise;
+        // Simulate response for server-less (Firebase hosting) example.
+        if (process.env.IS_SERVERLESS) {
+          return {
+            email: fields.email,
+            id: Date.now()
+          };
+        }
         // Sure we can use smarter api than raw fetch.
         const response = await fetch('/api/v1/auth/login', {
           method: 'POST',
