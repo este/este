@@ -41,7 +41,8 @@ export function login(fields) {
 }
 
 export function logout() {
-  return ({ firebase }) => {
+  return ({ engine, firebase }) => {
+    engine.save({});
     firebase.unauth();
     return {
       type: LOGOUT
