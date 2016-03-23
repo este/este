@@ -62,15 +62,15 @@ class App extends Component {
 
   renderScene(route) {
     const { toggleSideMenu } = this.props;
-    return (
-      <View style={[styles.sceneView, route.style]}>
-        <Header
-          title={this.getTitle(route)}
-          toggleSideMenu={toggleSideMenu}
-        />
-        <route.Page />
-      </View>
-    );
+    // Workaround not using JSX per Este issue
+    // See: https://github.com/este/este/issues/752
+    const childHeader = React.createElement(Header, {
+      title: this.getTitle(route),
+      toggleSideMenu: this.toggleSideMenu
+    });
+    const childPage = React.createElement(route.Page);
+    return React.createElement(View, { style: [styles.sceneView, route.style] },
+      childHeader, childPage);
   }
 
   render() {
