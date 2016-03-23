@@ -97,6 +97,18 @@ export default [
     "defaultMessage": "{unreadCount, plural, one {message} other {messages}}"
   },
   {
+    "id": "lib.loading.loadingText",
+    "defaultMessage": "Chargement"
+  },
+  {
+    "id": "lib.loading.longLoadingText",
+    "defaultMessage": "Toujours en train de charger, veuillez vérifier votre connexion internet"
+  },
+  {
+    "id": "lib.loading.title",
+    "defaultMessage": "Chargement"
+  },
+  {
     "id": "me.page.linkToProfile",
     "defaultMessage": "Profil"
   },

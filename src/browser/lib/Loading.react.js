@@ -12,18 +12,29 @@
 
 import './Loading.scss';
 import Component from 'react-pure-render/component';
+import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import { FormattedHTMLMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 
-export default class Loading extends Component {
+const messages = defineMessages({
+  title: {
+    defaultMessage: 'Loading',
+    id: 'lib.loading.title'
+  },
+  loadingText: {
+    defaultMessage: 'Loading',
+    id: 'lib.loading.loadingText'
+  },
+  longLoadingText: {
+    defaultMessage: 'Still loading, please check your internet connection',
+    id: 'lib.loading.longLoadingText'
+  }
+});
+
+class Loading extends Component {
 
   static propTypes = {
-    loadingText: PropTypes.string.isRequired,
-    longLoadingText: PropTypes.string.isRequired
-  };
-
-  static defaultProps = {
-    loadingText: 'Loading',
-    longLoadingText: 'Still loading, please check your internet connection'
+    intl: intlShape.isRequired
   };
 
   constructor(props) {
@@ -35,11 +46,14 @@ export default class Loading extends Component {
   }
 
   componentDidMount() {
+    const { intl } = this.props;
+    const loadingText = intl.formatMessage(messages.loadingText);
+    const longLoadingText = intl.formatMessage(messages.longLoadingText);
     this.timer = setTimeout(() => {
-      this.setState({ currentText: this.props.loadingText });
+      this.setState({ currentText: loadingText });
     }, 1000);
     this.longTimer = setTimeout(() => {
-      this.setState({ currentText: this.props.longLoadingText });
+      this.setState({ currentText: longLoadingText });
     }, 10000);
   }
 
@@ -49,11 +63,18 @@ export default class Loading extends Component {
   }
 
   render() {
+    const { intl } = this.props;
+    const title = intl.formatMessage(messages.title);
     return (
       <div className="este-loading">
+        <Helmet title={title} />
         {this.state.currentText}
       </div>
     );
   }
 
 }
+
+Loading = injectIntl(Loading);
+
+export default Loading;
