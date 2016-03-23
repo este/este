@@ -1,4 +1,5 @@
-[
+/* eslint-disable max-len, quote-props, quotes */
+export default [
   {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
@@ -163,4 +164,4 @@
     "id": "todos.todos.empty",
     "defaultMessage": "E calm pe aici..."
   }
-]
+];

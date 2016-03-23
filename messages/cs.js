@@ -1,4 +1,5 @@
-[
+/* eslint-disable max-len, quote-props, quotes */
+export default [
   {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
@@ -73,7 +74,9 @@
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Ahoj, tohle je <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
+    "defaultMessage": `
+      <p>Ahoj, tohle je <a target="_blank" href="https://github.com/este/este">
+      Este</a> dev stack.</p>`
   },
   {
     "id": "home.native.intro",
@@ -163,4 +166,4 @@
     "id": "todos.todos.empty",
     "defaultMessage": "Nic tu není..."
   }
-]
+];

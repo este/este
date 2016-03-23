@@ -22,6 +22,7 @@ const runEslint = () => {
   const isFixed = file => args.fix && file.eslint && file.eslint.fixed;
   return gulp.src([
     'gulpfile.babel.js',
+    'messages/*.js',
     'src/**/*.js',
     'webpack/*.js'
   ], { base: './' })
@@ -247,6 +248,10 @@ gulp.task('extractDefaultMessages', () => {
   }))
   .on('end', () => {
     messages.sort((a, b) => a.id.localeCompare(b.id));
-    fs.writeFile('messages/_default.js', JSON.stringify(messages, null, 2));
+    const eslint = '/* eslint-disable max-len, quote-props, quotes */';
+    const json = JSON.stringify(messages, null, 2);
+    // ES6 allows us to use multiline strings and eslint.
+    const es6code = `${eslint}\nexport default ${json};\n`;
+    fs.writeFile('messages/_default.js', es6code);
   });
 });
