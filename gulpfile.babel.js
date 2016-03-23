@@ -176,7 +176,7 @@ gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues. Must be called after npm install.
 gulp.task('fix-react-native', done => {
-  runSequence('fix-native-babelrc-files', 'fix-native-fbjs', done);
+  runSequence('fix-native-babelrc-files', 'fix-native-fbjs', 'fix-native-babel-helpers-file', done);
 });
 
 // https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
@@ -189,6 +189,16 @@ gulp.task('fix-native-babelrc-files', () =>
 // Still broken in RN 0.20. Remove fbjs from package.json after fix.
 gulp.task('fix-native-fbjs', () =>
   del(['node_modules/**/fbjs', '!node_modules/fbjs'])
+);
+
+// https://github.com/este/este/issues/662#issuecomment-189674310
+// Fix for babelHelpers.js still broken in RN 0.20.0
+const babelHelpersSrc = 'src/native/fixes/babelHelpers.js';
+const babelHelpersDst = 'node_modules/react-native/packager/react-packager'
+  + '/src/Resolver/polyfills/babelHelpers.js';
+
+gulp.task('fix-native-babel-helpers-file', () =>
+  cp.sync(babelHelpersSrc, babelHelpersDst)
 );
 
 // Tasks for issues seem to be already fixed.
