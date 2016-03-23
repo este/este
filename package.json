@@ -81,7 +81,7 @@
     "nconf": "^0.8.1",
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",
-    "normalize.css": "^3.0.2",
+    "normalize.css": "^4.0.0",
     "postcss-loader": "^0.8.0",
     "react": "^0.14.2",
     "react-addons-test-utils": "^0.14.1",
