@@ -107,7 +107,7 @@ export default function render(req, res, next) {
       host: `${protocol}://${req.headers.host}`
     }
   };
-  const memoryHistory = createMemoryHistory(req.path);
+  const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore({
     initialState,
     platformMiddleware: [routerMiddleware(memoryHistory)]
