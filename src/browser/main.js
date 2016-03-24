@@ -9,6 +9,7 @@ import cs from 'react-intl/locale-data/cs';
 import de from 'react-intl/locale-data/de';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
+import no from 'react-intl/locale-data/no';
 import ro from 'react-intl/locale-data/ro';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
