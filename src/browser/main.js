@@ -20,7 +20,7 @@ import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 window.Promise = Bluebird;
 
 // github.com/yahoo/react-intl/wiki/Upgrade-Guide#add-call-to-addlocaledata-in-browser
-[cs, de, en, fr, ro].forEach(addLocaleData);
+[cs, de, en, fr, no, ro].forEach(addLocaleData);
 
 const store = configureStore({
   createEngine,
