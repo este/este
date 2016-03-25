@@ -9,7 +9,7 @@
   "scripts": {
     "build": "gulp build",
     "install": "gulp fix-react-native",
-    "postinstall": "gulp build --production",
+    "postinstall": "gulp native && gulp build --production",
     "test": "gulp test"
   },
   "engines": {
