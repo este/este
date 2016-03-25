@@ -7,6 +7,7 @@ import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
 import cs from 'react-intl/locale-data/cs';
 import de from 'react-intl/locale-data/de';
+import es from 'react-intl/locale-data/es';
 import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import no from 'react-intl/locale-data/no';
@@ -22,7 +23,7 @@ import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 window.Promise = Bluebird;
 
 // github.com/yahoo/react-intl/wiki/Upgrade-Guide#add-call-to-addlocaledata-in-browser
-[cs, de, en, fr, no, pt, ro].forEach(addLocaleData);
+[cs, de, es, en, fr, no, pt, ro].forEach(addLocaleData);
 
 const store = configureStore({
   createEngine,
