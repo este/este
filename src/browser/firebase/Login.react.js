@@ -5,7 +5,6 @@ import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-i
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { firebaseActions } from 'este-firebase-redux';
-import invariant from 'invariant';
 
 const messages = defineMessages({
   facebookLogin: {
@@ -70,7 +69,8 @@ const messages = defineMessages({
   },
   emailTaken: {
     id: 'firebase.error.emailTaken',
-    defaultMessage: 'The new user account cannot be created because the specified email address is already in use.'
+    defaultMessage: `The new user account cannot be created because the
+      specified email address is already in use.`
   },
   expiredToken: {
     id: 'firebase.error.expiredToken',
@@ -82,7 +82,8 @@ const messages = defineMessages({
   },
   invalidConfiguration: {
     id: 'firebase.error.invalidConfiguration',
-    defaultMessage: 'The requested authentication provider is misconfigured, and the request cannot complete.'
+    defaultMessage: `The requested authentication provider is misconfigured, and
+      the request cannot complete.`
   },
   invalidCredentials: {
     id: 'firebase.error.invalidCredentials',
@@ -130,7 +131,8 @@ const messages = defineMessages({
   },
   preempted: {
     id: 'firebase.error.preempted',
-    defaultMessage: 'The active or pending auth credentials were superseded by another call to auth.'
+    defaultMessage: `The active or pending auth credentials were superseded by
+      another call to auth.`
   },
   providerError: {
     id: 'firebase.error.providerError',

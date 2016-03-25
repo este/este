@@ -5,7 +5,7 @@ import Login from './Login.react';
 import Profile from './Profile.react';
 import React, { PropTypes } from 'react';
 import Users from './Users.react';
-import { FormattedMessage, defineMessages, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 
 const messages = defineMessages({
@@ -18,7 +18,6 @@ const messages = defineMessages({
 class Page extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired,
     viewer: PropTypes.object
   };
 
