@@ -5,11 +5,20 @@ import Login from './Login.react';
 import Profile from './Profile.react';
 import React, { PropTypes } from 'react';
 import Users from './Users.react';
+import { FormattedMessage, defineMessages, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
+
+const messages = defineMessages({
+  loadMore: {
+    defaultMessage: 'Load more',
+    id: 'firebase.page.loadMore'
+  }
+});
 
 class Page extends Component {
 
   static propTypes = {
+    intl: intlShape.isRequired,
     viewer: PropTypes.object
   };
 
@@ -30,7 +39,9 @@ class Page extends Component {
           <Login />
         }
         <Users limitToLast={10} />
-        <button disabled>TODO: Load more</button>
+        <button disabled>
+          TODO: <FormattedMessage {...messages.loadMore} />
+        </button>
       </div>
     );
   }
