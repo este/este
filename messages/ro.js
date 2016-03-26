@@ -127,7 +127,7 @@ export default [
   {
     "id": "firebase.error.maxRetries",
     "defaultMessage": "Tranzacția a avut prea multe reîncercări."
-    },
+  },
   {
     "id": "firebase.error.networkError",
     "defaultMessage": "Operația nu a putut fi realizată din cauza unei erori de rețea."
