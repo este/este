@@ -7,20 +7,16 @@ export default class Html extends Component {
     bodyHtml: PropTypes.string.isRequired,
     googleAnalyticsId: PropTypes.string.isRequired,
     helmet: PropTypes.object.isRequired,
-    isProduction: PropTypes.bool.isRequired,
+    isProduction: PropTypes.bool.isRequired
   };
 
   render() {
-    const {
-      appCssFilename, bodyHtml, googleAnalyticsId, isProduction, helmet
-    } = this.props;
-
+    const { appCssFilename, bodyHtml, googleAnalyticsId, helmet, isProduction } = this.props;
     const linkStyles = appCssFilename &&
       <link
         href={appCssFilename}
         rel="stylesheet"
       />;
-
     const analytics = isProduction && googleAnalyticsId !== 'UA-XXXXXXX-X' &&
       <script
         dangerouslySetInnerHTML={{ __html: `
@@ -32,11 +28,8 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
       />;
 
     return (
-      <html lang="en">
+      <html {...helmet.htmlAttributes.toComponent()}>
         <head>
-          <meta charSet="utf-8" />
-          <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-          <meta content="ie=edge" httpEquiv="x-ua-compatible" />
           {helmet.title.toComponent()}
           {helmet.base.toComponent()}
           {helmet.meta.toComponent()}
