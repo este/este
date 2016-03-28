@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { FormattedMessage, defineMessages, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
 
@@ -63,6 +63,8 @@ class Profile extends Component {
   }
 
 }
+
+Profile = injectIntl(Profile);
 
 export default connect(state => ({
   viewer: state.users.viewer

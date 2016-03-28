@@ -2,7 +2,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import { firebaseActions } from 'este-firebase-redux';
+import { firebaseActions } from '../lib/redux-firebase';
 import { logout } from '../auth/actions';
 import { updateAppStateFromStorage } from './actions';
 

@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { firebaseActions } from 'este-firebase-redux';
+import { firebaseActions } from '../../common/lib/redux-firebase';
 
 const messages = defineMessages({
   facebookLogin: {

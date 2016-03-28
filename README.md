@@ -19,14 +19,15 @@
   - optional rendering to HTML files for static hosting
   - universal internationalization with runtime language switching
   - universal forms with universal validation (universal ftw, yeah)
-- Functional architecture (immutability, hot reload, time traveling)
-- Test driven development ready
+- Functional works (immutability, hot reload, time traveling)
+- Test driven development
 - Advanced performance with pure components
 - Well tuned dev stack
 - Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined actions
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative api
+- Este is monorepo, [read](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) [why](http://danluu.com/monorepo/). 
 
 ## Libraries
 

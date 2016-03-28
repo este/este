@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { queryFirebase } from 'este-firebase-redux';
+import { queryFirebase } from '../../common/lib/redux-firebase';
 
 const messages = defineMessages({
   lastLoggedInUsers: {

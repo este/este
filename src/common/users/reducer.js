@@ -2,7 +2,7 @@ import * as actions from './actions';
 import * as authActions from '../auth/actions';
 import User from './user';
 import { Record, Seq } from 'immutable';
-import { firebaseActions, mapAuthToUser } from 'este-firebase-redux';
+import { firebaseActions, mapAuthToUser } from '../lib/redux-firebase';
 
 const InitialState = Record({
   list: undefined,
