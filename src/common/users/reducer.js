@@ -10,8 +10,13 @@ const InitialState = Record({
 });
 const initialState = new InitialState;
 
-const revive = ({ viewer }) => initialState.merge({
-  // Handle user authenticated on the server.
+const usersJsonToList = users => Seq(users)
+  .map(json => new User(json))
+  .sortBy(user => -user.authenticatedAt)
+  .toList();
+
+const revive = ({ list, viewer }) => initialState.merge({
+  list: usersJsonToList(list),
   viewer: viewer ? new User(viewer) : null
 });
 
@@ -28,7 +33,7 @@ export default function usersReducer(state = initialState, action) {
 
     case firebaseActions.REDUX_FIREBASE_ON_AUTH: {
       const { authData } = action.payload;
-      // Handle user logout.
+      // Handle logout.
       if (!authData) {
         return state.delete('viewer');
       }
@@ -38,11 +43,7 @@ export default function usersReducer(state = initialState, action) {
 
     case actions.ON_USERS_LIST: {
       const { users } = action.payload;
-      const list = Seq(users)
-        .map(json => new User(json))
-        .sortBy(user => user.authenticatedAt)
-        .reverse()
-        .toList();
+      const list = usersJsonToList(users);
       return state.set('list', list);
     }
 
