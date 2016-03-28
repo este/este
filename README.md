@@ -48,7 +48,7 @@
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
 - [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework.
-- LESS, SASS, Stylus, or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
+- SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - And much more. Check source code.

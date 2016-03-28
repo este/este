@@ -16,10 +16,9 @@ const devtools = 'cheap-module-eval-source-map';
 
 const loaders = {
   css: '',
-  less: '!less-loader',
+  // Why not LESS or Stylus? The battle is over, let's focus on inline styles.
   scss: '!sass-loader',
-  sass: '!sass-loader?indentedSyntax',
-  styl: '!stylus-loader'
+  sass: '!sass-loader?indentedSyntax'
 };
 
 const serverIp = ip.address();
