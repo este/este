@@ -1,8 +1,8 @@
 import * as storage from 'redux-storage';
 import Firebase from 'firebase';
 import appReducer from './app/reducer';
-import createFetch from './createFetch';
 import createLogger from 'redux-logger';
+import isomorphicFetch from 'isomorphic-fetch';
 import promiseMiddleware from 'redux-promise-middleware';
 import recycle from 'redux-recycle';
 import shortid from 'shortid';
@@ -20,17 +20,6 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     ? action({ ...deps, dispatch, getState })
     : action
   );
-
-const createUniversalFetch = initialState => {
-  const serverUrl =
-    initialState.device.host || // Autodetected in Node.
-    process.env.SERVER_URL || // Must be set for React Native production app.
-    (process.env.IS_BROWSER
-      ? '' // Browser can handle relative urls.
-      : 'http://localhost:8000' // Failback for dev.
-    );
-  return createFetch(serverUrl);
-};
 
 const isReactNative =
   typeof navigator === 'object' &&
@@ -73,7 +62,7 @@ export default function configureStore(options) {
     injectMiddleware({
       ...platformDeps,
       engine,
-      fetch: createUniversalFetch(initialState),
+      fetch: isomorphicFetch,
       firebase,
       getUid: () => shortid.generate(),
       now: () => Date.now(),

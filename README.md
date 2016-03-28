@@ -16,7 +16,7 @@
   - code shared across platforms (browser, server, native mobile)
   - server side rendering
   - universal data fetching
-  - optional rendering to HTML files for static hosting
+  - an optional rendering to HTML files (for static hosting)
   - universal internationalization with runtime language switching
   - universal forms with universal validation (universal ftw, yeah)
 - Functional works (immutability, hot reload, time traveling)

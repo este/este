@@ -14,27 +14,6 @@ import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 const messages = loadMessages();
 
-const fetchComponentDataAsync = async (dispatch, renderProps) => {
-  const { components, location, params } = renderProps;
-  const promises = components
-    .reduce((actions, component) => {
-      if (typeof component === 'function') {
-        actions = actions.concat(component.fetchActions || []);
-      } else {
-        Object.keys(component).forEach(c => {
-          actions = actions.concat(component[c].fetchActions || []);
-        });
-      }
-      return actions;
-    }, [])
-    .map(action =>
-      // Server side fetching can use only router location and params props.
-      // There is no easy way how to support custom component props.
-      dispatch(action({ location, params })).payload.promise
-    );
-  await Promise.all(promises);
-};
-
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
@@ -129,7 +108,6 @@ export default function render(req, res, next) {
     }
 
     try {
-      await fetchComponentDataAsync(store.dispatch, renderProps);
       const html = renderPage(store, renderProps, req);
       // renderProps are always defined with * route.
       // https://github.com/rackt/react-router/blob/master/docs/guides/advanced/ServerRendering.md

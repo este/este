@@ -4,9 +4,7 @@ import Helmet from 'react-helmet';
 import NewTodo from './NewTodo.react';
 import React from 'react';
 import Todos from './Todos.react';
-import fetch from '../../common/components/fetch';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
-import { fetchUserTodos } from '../../common/todos/actions';
 
 const messages = defineMessages({
   title: {
@@ -14,7 +12,6 @@ const messages = defineMessages({
     id: 'todos.page.title'
   }
 });
-
 
 class Page extends Component {
 
@@ -36,13 +33,6 @@ class Page extends Component {
     );
   }
 
-}
-
-// Truly universal (not only isomorphic) data fetching.
-// One higher order component for browser, server, and mobile.
-// No server fetching for server-less apps.
-if (!process.env.IS_SERVERLESS) {
-  Page = fetch(fetchUserTodos)(Page);
 }
 
 export default injectIntl(Page);

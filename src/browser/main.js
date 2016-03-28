@@ -5,19 +5,20 @@ import ReactDOM from 'react-dom';
 import configureStore from '../common/configureStore';
 import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
-import cs from 'react-intl/locale-data/cs';
-import de from 'react-intl/locale-data/de';
-import es from 'react-intl/locale-data/es';
-import en from 'react-intl/locale-data/en';
-import fr from 'react-intl/locale-data/fr';
-import no from 'react-intl/locale-data/no';
-import pt from 'react-intl/locale-data/pt';
-import ro from 'react-intl/locale-data/ro';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { addLocaleData } from 'react-intl';
 import { browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+
+import cs from 'react-intl/locale-data/cs';
+import de from 'react-intl/locale-data/de';
+import en from 'react-intl/locale-data/en';
+import es from 'react-intl/locale-data/es';
+import fr from 'react-intl/locale-data/fr';
+import no from 'react-intl/locale-data/no';
+import pt from 'react-intl/locale-data/pt';
+import ro from 'react-intl/locale-data/ro';
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
