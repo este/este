@@ -1,9 +1,9 @@
 import './Users.scss';
 import * as usersActions from '../../common/users/actions';
 import Component from 'react-pure-render/component';
-import Loading from '../lib/Loading.react';
 import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
+import loading from '../lib/loading';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { queryFirebase } from '../../common/lib/redux-firebase';
@@ -20,7 +20,7 @@ class Users extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
     limitToLast: PropTypes.number.isRequired,
-    users: PropTypes.object
+    users: PropTypes.object.isRequired
   };
 
   render() {
@@ -28,28 +28,27 @@ class Users extends Component {
 
     return (
       <div className="firebase-users">
-        {!users ?
-          <Loading />
-        :
-          <div>
-            <h3>
-              <FormattedMessage
-                {...messages.lastLoggedInUsers}
-                values={{ limitToLast }}
-              />
-            </h3>
-            <ol>
-              {users.map(user =>
-                <UserItem key={user.id} user={user} />
-              )}
-            </ol>
-          </div>
-        }
+        <h3>
+          <FormattedMessage
+            {...messages.lastLoggedInUsers}
+            values={{ limitToLast }}
+          />
+        </h3>
+        <ol>
+          {users.map(user =>
+            <UserItem key={user.id} user={user} />
+          )}
+        </ol>
       </div>
     );
   }
 
 }
+
+// Are you scared of many higher order components? Remember, these HOC's
+// are just functions and can be composed ad-hoc later when patterns emerge :-)
+
+Users = loading(Users, ['users']);
 
 Users = queryFirebase(Users, props => ({
   // Query path to listen. For one user we can use `users/${props.user.id}`.
@@ -57,7 +56,7 @@ Users = queryFirebase(Users, props => ({
   // Firebase imperative firebase.com/docs/web/api/query as declarative params.
   params: [
     ['orderByChild', 'authenticatedAt'],
-    ['limitToLast', props.limitToLast] // TODO: Enforce via propTypes.
+    ['limitToLast', props.limitToLast]
   ],
   on: {
     // Value event always rerenders all users. For better granularity, use

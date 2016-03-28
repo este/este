@@ -5,12 +5,13 @@ import { Record, Seq } from 'immutable';
 import { firebaseActions, mapAuthToUser } from '../lib/redux-firebase';
 
 const InitialState = Record({
+  // Undefined is absence of evidence. Null is evidence of absence.
   list: undefined,
   viewer: undefined
 });
 const initialState = new InitialState;
 
-const usersJsonToList = users => Seq(users)
+const usersJsonToList = users => users && Seq(users)
   .map(json => new User(json))
   .sortBy(user => -user.authenticatedAt)
   .toList();
