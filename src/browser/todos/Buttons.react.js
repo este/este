@@ -6,17 +6,6 @@ import buttonsMessages from '../../common/todos/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
-const messages = defineMessages({
-  add100: {
-    defaultMessage: 'Add 100 Todo\'s',
-    id: 'todos.buttons.add100'
-  },
-  clearAll: {
-    defaultMessage: 'Clear All Todo\'s',
-    id: 'todos.buttons.clearAll'
-  }
-});
-
 class Buttons extends Component {
 
   static propTypes = {

@@ -7,13 +7,6 @@ import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl, intlShape } from 'react-intl';
 
-const messages = defineMessages({
-  placeholder: {
-    defaultMessage: 'What needs to be done?',
-    id: 'todos.newTodo.placeholder'
-  }
-});
-
 class NewTodo extends Component {
 
   static propTypes = {

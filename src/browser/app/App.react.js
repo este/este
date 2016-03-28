@@ -57,5 +57,8 @@ class App extends Component {
 
 }
 
-// Just inject dispatch.
-export default connect()(App);
+App = start(App);
+
+export default connect(state => ({
+  currentLocale: state.intl.currentLocale
+}))(App);

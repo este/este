@@ -6,13 +6,6 @@ import todosMessages from '../../common/todos/todosMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
-const messages = defineMessages({
-  empty: {
-    defaultMessage: 'It\'s rather empty here...',
-    id: 'todos.empty'
-  }
-});
-
 // Container component.
 export class Todos extends Component {
 

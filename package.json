@@ -3,7 +3,7 @@
   "authors": [
     "Daniel Steigerwald"
   ],
-  "description": "Dev stack and starter kit for React universal web apps",
+  "description": "Dev stack and starter kit for functional and universal React apps",
   "private": true,
   "//": "Use gulp for dev. It's cross platform.",
   "scripts": {
@@ -117,7 +117,6 @@
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.0.0",
     "through2": "^2.0.1",
-    "urijs": "^1.16.1",
     "url-loader": "^0.5.5",
     "validator": "^5.0.0",
     "webpack": "^1.12.3",
