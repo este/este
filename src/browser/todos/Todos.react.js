@@ -2,7 +2,8 @@ import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import todosMessages from '../../common/todos/todosMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 const messages = defineMessages({
@@ -13,7 +14,7 @@ const messages = defineMessages({
 });
 
 // Container component.
-class Todos extends Component {
+export class Todos extends Component {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
@@ -21,25 +22,22 @@ class Todos extends Component {
     toggleTodoCompleted: PropTypes.func.isRequired
   };
 
-  // Example how to measure component update.
+  // // Check render performance.
   // componentWillUpdate() {
   //   this.start = Date.now();
   // }
-
   // componentDidUpdate() {
-  //   const total = Date.now() - this.start;
-  //   console.log(`[ESTE] Todos updated in ${total}ms`);
+  //   console.log(`[ESTE] Todos updated in ${Date.now() - this.start}ms`);
   // }
 
   render() {
     const { deleteTodo, todos, toggleTodoCompleted } = this.props;
 
     if (!todos.size) {
-      return <p><FormattedMessage {...messages.empty} /></p>;
+      return <p><FormattedMessage {...todosMessages.empty} /></p>;
     }
 
-    // Big lists should be sorted in reducer.
-    const list = todos.toList().sortBy(item => item.createdAt);
+    const list = todos.toList().sortBy(item => item.createdAt).reverse();
 
     return (
       <ol className="todos">

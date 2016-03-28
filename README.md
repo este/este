@@ -1,46 +1,49 @@
 <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515265/b91f0fb8-c388-11e4-857e-c90902e0b7a1.png" width="200">
 
-[![Circle CI](https://circleci.com/gh/este/este.svg?style=svg)](https://circleci.com/gh/este/este)
+[![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
 [![Join the chat at https://gitter.im/este/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/este/este)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![GitHub license](https://img.shields.io/github/license/este/este.svg)](https://github.com/este/este/blob/master/LICENSE)
+[![Deploy](https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg)](https://heroku.com/deploy)
 
 > Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
-
-> Další veřejné školení Este.js se bude konat 23. - 24. března. Cena je 9 500 kč, pokud se [zaregistrujete](https://learn-reactjs.com) předem.
 
 ## Techniques
 
 - Truly universal architecture
   - code shared across platforms (browser, server, native mobile)
   - server side rendering
-  - universal data fetching via one higher order component
-  - prerender for static hosting
-- Functional architecture (immutability, hot reload, time traveling)
-- Test driven development ready
+  - universal data fetching
+  - an optional rendering to HTML files (for static hosting)
+  - universal internationalization with runtime language switching
+  - universal forms with universal validation (universal ftw, yeah)
+- Functional works (immutability, hot reload, time traveling)
+- Test driven development
 - Advanced performance with pure components
 - Well tuned dev stack
-- Universal forms with validation
 - Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
+  - useful predefined actions
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative api
-  - and more
+- Este is monorepo, [read](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) [why](http://danluu.com/monorepo/). 
 
 ## Libraries
 
-- [React](http://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/) 
-- [Redux](http://rackt.github.io/redux/)
+- [react](http://facebook.github.io/react/) and [react native](https://facebook.github.io/react-native/) 
+- [redux](http://rackt.github.io/redux/)
 - [babeljs](https://babeljs.io/)
 - [immutablejs](http://facebook.github.io/immutable-js)
 - [react-router](https://github.com/rackt/react-router)
 - [react-router-redux](https://github.com/reactjs/react-router-redux)
+- [react-intl](https://github.com/yahoo/react-intl)
+- [redux-storage](https://github.com/michaelcontento/redux-storage)
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
 - [formatjs](http://formatjs.io/) Universal internationalization.
-- [React Helmet](https://github.com/nfl/react-helmet) A document head manager for React.
+- [react-helmet](https://github.com/nfl/react-helmet) A document head manager for React.
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
@@ -76,11 +79,14 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 ## Dev Tasks
 
 - `gulp` run web app in development mode
+- `gulp ios` run iOS app in development mode
+- `gulp android` run Android app in development mode
 - `gulp -p` run web app in production mode
 - `gulp mocha` run mocha unit tests
 - `gulp mocha-watch` continuous test running for TDD
 - `gulp eslint` eslint
-- `gulp eslint --fix` fix some eslint issues
+- `gulp eslint --fix` fix fixable eslint issues
+- `gulp extractDefaultMessages` extract string messages for translation
 
 ## Production Tasks
 
@@ -139,12 +145,11 @@ Yes it does. Este is agnostic of what you use in your backend and is completely 
 Yes. Este tries to make as few assumptions about your stack as possible. This is not a framework, nothing prevents you from picking the bits you're interested in.
 
 #### How is React Native used in this project?
-In the same way as any other React Native project created via `react-native init AwesomeProject`. But thanks to the universal application design we can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
+In the same way as any other React Native project is created via `react-native init AwesomeProject`. But thanks to the universal application design we can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
-- [DzejEs.cz](http://www.dzejes.cz) - czech articles about Este
 
 ## Notes
 

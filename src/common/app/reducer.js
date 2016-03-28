@@ -10,7 +10,7 @@ import todos from '../todos/reducer';
 import ui from '../ui/reducer';
 import users from '../users/reducer';
 
-const appReducer = combineReducers({
+export default combineReducers({
   auth,
   config,
   device,
@@ -21,5 +21,3 @@ const appReducer = combineReducers({
   ui,
   users
 });
-
-export default appReducer;

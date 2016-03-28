@@ -1,9 +1,9 @@
-// Higher order component for declarative Firebase queries.
-// No more on / off madness.
-// TODO: Support server rendering via componentWillMount.
+// A higher order component for Firebase queries without on / off madness.
+
 // Example:
 // Users = queryFirebase(Users, props => ({
 //   // Query path to listen. For one user we can use `users/${props.userId}`.
+//   // We can postpone fetching: userId && `users/${props.userId}`
 //   path: 'users',
 //   // firebase.com/docs/web/api/query
 //   params: [
@@ -11,10 +11,11 @@
 //     ['limitToFirst', props.limitToFirst]
 //   ],
 //   on: {
-//     value: (snapshot) => props.setUsersList(snapshot.val())
+//     value: (snapshot) => props.onUsersList(snapshot.val())
 //   }
 // }));
-// Something doesn't work? Note how we can handle error:
+
+// Something doesn't work? Note how we can catch error:
 // on: {
 //   value: [(snapshot) => {
 //     console.log(snapshot.val())
@@ -35,6 +36,9 @@ const ensureArray = item => [].concat(item);
 // recycled on logout. Then we can just set the key to current viewer.
 const optionsToPayload = ({ path, key, params }) => ({ path, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
+
+let serverFetching = false;
+let serverFetchingPromises = null;
 
 export default function queryFirebase(Wrapped, mapPropsToOptions) {
   return class FirebaseQuery extends Component {
@@ -62,7 +66,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
 
     dispatch(props, callback) {
       const options = mapPropsToOptions(props);
-      // When any prop is not yet loaded, we can postpone loading easily.
+      // How to postpone query for not yet loaded property.
       // Example: { path: product && `products/${product.id}`, ... }
       if (!options.path) return;
       this.context.store.dispatch(({ firebase }) => {
@@ -71,9 +75,10 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         invariant(typeof options.path === 'string',
           'Expected the path to be a string.');
         const ref = firebase.child(options.path);
-        const type = callback(ref, options);
-        const payload = optionsToPayload(options);
-        return { type, payload };
+        return {
+          type: callback(ref, options),
+          payload: optionsToPayload(options)
+        };
       });
     }
 
@@ -83,10 +88,24 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         params.forEach(([method, ...args]) => {
           ref = ref[method](...args);
         });
+        // Map declarative on and once to Firebase imperative API.
         this.onArgs = this.createArgs(on);
-        this.onArgs.forEach(arg => ref.on(...arg));
+        this.onArgs.forEach(arg => {
+          if (serverFetching) {
+            // Use 'once' on the server because 'on' doesn't make sense.
+            serverFetchingPromises.push(ref.once(...arg));
+          } else {
+            ref.on(...arg);
+          }
+        });
         this.onceArgs = this.createArgs(once);
-        this.onceArgs.forEach(arg => ref.once(...arg));
+        this.onceArgs.forEach(arg => {
+          if (serverFetching) {
+            serverFetchingPromises.push(ref.once(...arg));
+          } else {
+            ref.once(...arg);
+          }
+        });
         return actions.REDUX_FIREBASE_ON_QUERY;
       });
     }
@@ -97,6 +116,11 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         this.onceArgs.forEach(arg => ref.off(...arg));
         return actions.REDUX_FIREBASE_OFF_QUERY;
       });
+    }
+
+    componentWillMount() {
+      if (!serverFetching) return;
+      this.on();
     }
 
     componentDidMount() {
@@ -122,3 +146,27 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
 
   };
 }
+
+// queryFirebaseServer is for server side data fetching. Example:
+// await queryFirebaseServer(() => {
+//   // Render app calls componentWillMount on every rendered component, so
+//   // we don't have to rely on react-router routes. It's pretty fast, under
+//   // 10ms generally, because view has no data yet.
+//   renderApp(store, renderProps);
+// });
+// const html = renderPage(store, renderProps, req);
+export const queryFirebaseServer = renderAppCallback => {
+  serverFetching = true;
+  serverFetchingPromises = [];
+  try {
+    renderAppCallback();
+  } catch (e) {
+    console.log(e); // eslint-disable-line no-console
+  } finally {
+    serverFetching = false;
+    return Promise
+      // Wait until all promises in an array are either rejected or fulfilled.
+      // http://bluebirdjs.com/docs/api/reflect.html
+      .all(serverFetchingPromises.map(promise => promise.reflect()));
+  }
+};

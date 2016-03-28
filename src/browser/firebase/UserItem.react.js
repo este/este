@@ -11,7 +11,7 @@ export default class UserItem extends Component {
     const {
       user: { displayName, profileImageURL }
     } = this.props;
-    const title = displayName || 'User logged in via email.';
+    const title = displayName || 'Some user logged in via email';
     return (
       <li>
         <img src={profileImageURL} title={title} />

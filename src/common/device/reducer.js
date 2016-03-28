@@ -1,13 +1,12 @@
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  isMobile: false,
-  platform: '',
-  host: ''
+  host: '',
+  platform: '' // iOS or Android in React Native.
 });
 const initialState = new InitialState;
 
 export default function deviceReducer(state = initialState) {
-  if (!(state instanceof InitialState)) return initialState.merge(state);
+  if (!(state instanceof InitialState)) return new InitialState(state);
   return state;
 }

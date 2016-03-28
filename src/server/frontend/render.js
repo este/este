@@ -3,51 +3,35 @@ import Helmet from 'react-helmet';
 import Html from './Html.react';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import config from '../../common/config';
+import config from '../config';
 import configureStore from '../../common/configureStore';
 import createRoutes from '../../browser/createRoutes';
+import loadMessages from '../intl/loadMessages';
 import serialize from 'serialize-javascript';
-import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
-const fetchComponentDataAsync = async (dispatch, renderProps) => {
-  const { components, location, params } = renderProps;
-  const promises = components
-    .reduce((actions, component) => {
-      if (typeof component === 'function') {
-        actions = actions.concat(component.fetchActions || []);
-      } else {
-        Object.keys(component).forEach(c => {
-          actions = actions.concat(component[c].fetchActions || []);
-        });
-      }
-      return actions;
-    }, [])
-    .map(action =>
-      // Server side fetching can use only router location and params props.
-      // There is no easy way how to support custom component props.
-      dispatch(action({ location, params })).payload.promise
-    );
-  await Promise.all(promises);
-};
+const messages = loadMessages();
 
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
-      <IntlProvider locale="en">
-        <RouterContext {...renderProps} />
-      </IntlProvider>
+      <RouterContext {...renderProps} />
     </Provider>
   );
 
+const intlPolyfillFeatures = config.locales
+  .map(locale => `Intl.~locale.${locale}`)
+  .join();
+
 const getScriptHtml = (state, headers, hostname, appJsFilename) =>
-  // Note how app state is serialized. JSON.stringify is anti-pattern.
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  // Note how we use cdn.polyfill.io, en is default, but can be changed later.
+  // https://github.com/andyearnshaw/Intl.js/#intljs-and-ft-polyfill-service
   `
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=${
+      intlPolyfillFeatures
+    }"></script>
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
@@ -56,6 +40,10 @@ const getScriptHtml = (state, headers, hostname, appJsFilename) =>
 
 const renderPage = (store, renderProps, req) => {
   const state = store.getState();
+  if (process.env.IS_SERVERLESS) {
+    // No server routing for server-less apps.
+    delete state.routing;
+  }
   const { headers, hostname } = req;
   const appHtml = getAppHtml(store, renderProps);
   const helmet = Helmet.rewind();
@@ -80,26 +68,32 @@ const renderPage = (store, renderProps, req) => {
 };
 
 export default function render(req, res, next) {
-  // Detect Heroku protocol
+  const currentLocale = process.env.IS_SERVERLESS
+    ? config.defaultLocale
+    : req.acceptsLanguages(config.locales) || config.defaultLocale;
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const initialState = {
     config: {
-      // Never pass whole server config to the client.
+      appName: config.appName,
       firebaseUrl: config.firebaseUrl
     },
+    intl: {
+      currentLocale,
+      locales: config.locales,
+      messages
+    },
     device: {
-      isMobile: ['phone', 'tablet'].indexOf(req.device.type) > -1,
       host: `${protocol}://${req.headers.host}`
     }
   };
-  const memoryHistory = createMemoryHistory(req.path);
+  const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore({
     initialState,
     platformMiddleware: [routerMiddleware(memoryHistory)]
   });
   const history = syncHistoryWithStore(memoryHistory, store);
   // Fetch and dispatch current user here because routes may need it.
-  const routes = createRoutes(() => store.getState());
+  const routes = createRoutes(store.getState);
   const location = req.url;
 
   match({ history, routes, location }, async (error, redirectLocation, renderProps) => {
@@ -114,7 +108,6 @@ export default function render(req, res, next) {
     }
 
     try {
-      await fetchComponentDataAsync(store.dispatch, renderProps);
       const html = renderPage(store, renderProps, req);
       // renderProps are always defined with * route.
       // https://github.com/rackt/react-router/blob/master/docs/guides/advanced/ServerRendering.md

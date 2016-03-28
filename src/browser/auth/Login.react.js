@@ -11,7 +11,7 @@ import { replace } from 'react-router-redux';
 
 const messages = defineMessages({
   formLegend: {
-    defaultMessage: 'Classic XMLHttpRequest style Login',
+    defaultMessage: 'Classic XMLHttpRequest Login',
     id: 'auth.login.formLegend'
   },
   emailPlaceholder: {

@@ -44,11 +44,6 @@ export default function todosReducer(state = initialState, action) {
       return state.update('map', map => map.delete(id));
     }
 
-    case actions.FETCH_USER_TODOS_SUCCESS: {
-      const todos = Map(action.payload.todos).map(todo => new Todo(todo));
-      return state.update('map', map => map.merge(todos));
-    }
-
     case actions.TOGGLE_TODO_COMPLETED: {
       const { todo } = action.payload;
       return state

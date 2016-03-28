@@ -1,8 +1,10 @@
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes, StyleSheet, TextInput, View } from 'react-native';
+import newTodoMessages from '../../common/todos/newTodoMessages';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { injectIntl, intlShape } from 'react-intl';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +28,7 @@ class NewTodo extends Component {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
+    intl: intlShape.isRequired
   };
 
   constructor(props) {
@@ -47,8 +49,8 @@ class NewTodo extends Component {
   }
 
   render() {
-    const { fields, msg } = this.props;
-    const { title } = fields;
+    const { intl, fields } = this.props;
+    const placeholder = intl.formatMessage(newTodoMessages.placeholder);
 
     return (
       <View style={styles.container}>
@@ -56,10 +58,10 @@ class NewTodo extends Component {
           maxLength={100} // React Native needs explicit maxLength.
           onEndEditing={this.onTextInputEndEditing}
           onSubmitEditing={this.onSubmitEditing}
-          placeholder={msg.newTodoPlaceholder}
+          placeholder={placeholder}
           placeholderTextColor={'#cce9f2'}
           style={styles.input}
-          {...title}
+          {...fields.title}
         />
       </View>
     );
@@ -72,6 +74,6 @@ NewTodo = fields(NewTodo, {
   fields: ['title']
 });
 
-export default connect(state => ({
-  msg: state.intl.msg.todos
-}), todosActions)(NewTodo);
+NewTodo = injectIntl(NewTodo);
+
+export default connect(null, todosActions)(NewTodo);

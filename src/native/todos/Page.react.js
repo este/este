@@ -4,10 +4,8 @@ import NewTodo from './NewTodo.react';
 import React, { View } from 'react-native';
 import Todos from './Todos.react';
 import appStyles from '../app/styles';
-import fetch from '../../common/components/fetch';
-import { fetchUserTodos } from '../../common/todos/actions';
 
-class Page extends Component {
+export default class Page extends Component {
 
   render() {
     return (
@@ -20,9 +18,3 @@ class Page extends Component {
   }
 
 }
-
-// Truly universal (not only isomorphic) data fetching.
-// One higher order component for browser, server, and mobile.
-Page = fetch(fetchUserTodos)(Page);
-
-export default Page;

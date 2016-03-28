@@ -32,12 +32,16 @@ export default class LoginError extends Component {
 
   render() {
     const { error } = this.props;
-
     if (!error) return null;
+    const message = messages[error.name];
 
     return (
       <p className="error-message">
-        <FormattedMessage {...messages[error.name]} values={error.params} />
+        {message ?
+          <FormattedMessage {...message} values={error.params} />
+        :
+          error.toString()
+        }
       </p>
     );
   }

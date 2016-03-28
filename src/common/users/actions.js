@@ -1,8 +1,10 @@
-export const SET_USERS_LIST = 'SET_USERS_LIST';
+// Note prefix ON_.
+// This convention means action is dispatched by server, not by viewer.
+export const ON_USERS_LIST = 'ON_USERS_LIST';
 
-export function setUsersList(users) {
+export function onUsersList(users) {
   return {
-    type: SET_USERS_LIST,
+    type: ON_USERS_LIST,
     payload: { users }
   };
 }

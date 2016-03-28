@@ -4,12 +4,21 @@ import Component from 'react-pure-render/component';
 import Loading from '../lib/Loading.react';
 import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { queryFirebase } from '../../common/lib/redux-firebase';
+
+const messages = defineMessages({
+  lastLoggedInUsers: {
+    defaultMessage: 'Last {limitToLast} Logged In Users',
+    id: 'firebase.users.lastLoggedInUsers'
+  }
+});
 
 class Users extends Component {
 
   static propTypes = {
+    intl: intlShape.isRequired,
     limitToLast: PropTypes.number.isRequired,
     users: PropTypes.object
   };
@@ -23,7 +32,12 @@ class Users extends Component {
           <Loading />
         :
           <div>
-            <h3>Last {limitToLast} Logged In Users</h3>
+            <h3>
+              <FormattedMessage
+                {...messages.lastLoggedInUsers}
+                values={{ limitToLast }}
+              />
+            </h3>
             <ol>
               {users.map(user =>
                 <UserItem key={user.id} user={user} />
@@ -48,9 +62,11 @@ Users = queryFirebase(Users, props => ({
   on: {
     // Value event always rerenders all users. For better granularity, use
     // child_added, child_changed, child_removed, child_changed events.
-    value: snapshot => props.setUsersList(snapshot.val())
+    value: snapshot => props.onUsersList(snapshot.val())
   }
 }));
+
+Users = injectIntl(Users);
 
 export default connect(state => ({
   users: state.users.list

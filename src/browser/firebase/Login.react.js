@@ -1,15 +1,181 @@
 import './Login.scss';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { firebaseActions } from '../../common/lib/redux-firebase';
+
+const messages = defineMessages({
+  facebookLogin: {
+    defaultMessage: 'Facebook Login',
+    id: 'firebase.login.facebookLogin'
+  },
+  emailLoginOrSignUp: {
+    defaultMessage: 'Email Login / Sign Up',
+    id: 'firebase.login.emailLoginOrSignUp'
+  },
+  emailPasswordRecovery: {
+    defaultMessage: 'Email Password Recovery',
+    id: 'firebase.login.emailPasswordRecovery'
+  },
+  emailPlaceholder: {
+    defaultMessage: 'your@email.com',
+    id: 'firebase.login.emailPlaceholder'
+  },
+  passwordPlaceholder: {
+    defaultMessage: 'password',
+    id: 'firebase.login.passwordPlaceholder'
+  },
+  loginButton: {
+    defaultMessage: 'Login',
+    id: 'firebase.login.loginButton'
+  },
+  signUp: {
+    defaultMessage: 'Sign Up',
+    id: 'firebase.login.signUp'
+  },
+  passwordForgotten: {
+    defaultMessage: 'Forgot your password?',
+    id: 'firebase.login.passwordForgotten'
+  },
+  recoveryEmailSent: {
+    defaultMessage: 'Recovery email has been sent.',
+    id: 'firebase.login.recoveryEmailSent'
+  },
+  resetPassword: {
+    defaultMessage: 'Reset Password',
+    id: 'firebase.login.resetPassword'
+  },
+  dismiss: {
+    defaultMessage: 'Dismiss',
+    id: 'firebase.login.dismiss'
+  },
+  authenticationProviderDisabled: {
+    id: 'firebase.error.authenticationProviderDisabled',
+    defaultMessage: 'The requested authentication provider is disabled for this Firebase.'
+  },
+  dataStale: {
+    id: 'firebase.error.dataStale',
+    defaultMessage: 'Internal use.'
+  },
+  deniedByUser: {
+    id: 'firebase.error.deniedByUser',
+    defaultMessage: 'The user did not authorize the application.'
+  },
+  disconnected: {
+    id: 'firebase.error.disconnected',
+    defaultMessage: 'The operation had to be aborted due to a network disconnect.'
+  },
+  emailTaken: {
+    id: 'firebase.error.emailTaken',
+    defaultMessage: `The new user account cannot be created because the
+      specified email address is already in use.`
+  },
+  expiredToken: {
+    id: 'firebase.error.expiredToken',
+    defaultMessage: 'The supplied auth token has expired.'
+  },
+  invalidAuthArguments: {
+    id: 'firebase.error.invalidAuthArguments',
+    defaultMessage: 'The specified credentials are malformed or incomplete.'
+  },
+  invalidConfiguration: {
+    id: 'firebase.error.invalidConfiguration',
+    defaultMessage: `The requested authentication provider is misconfigured, and
+      the request cannot complete.`
+  },
+  invalidCredentials: {
+    id: 'firebase.error.invalidCredentials',
+    defaultMessage: 'The specified authentication credentials are invalid.'
+  },
+  invalidEmail: {
+    id: 'firebase.error.invalidEmail',
+    defaultMessage: 'The specified email is not a valid email.'
+  },
+  invalidPassword: {
+    id: 'firebase.error.invalidPassword',
+    defaultMessage: 'The specified user account password is incorrect.'
+  },
+  invalidProvider: {
+    id: 'firebase.error.invalidProvider',
+    defaultMessage: 'The requested authentication provider does not exist.'
+  },
+  invalidToken: {
+    id: 'firebase.error.invalidToken',
+    defaultMessage: 'The specified authentication token is invalid.'
+  },
+  limitsExceeded: {
+    id: 'firebase.error.limitsExceeded',
+    defaultMessage: 'Limits exceeded.'
+  },
+  maxRetries: {
+    id: 'firebase.error.maxRetries',
+    defaultMessage: 'The transaction had too many retries.'
+  },
+  networkError: {
+    id: 'firebase.error.networkError',
+    defaultMessage: 'The operation could not be performed due to a network error.'
+  },
+  operationFailed: {
+    id: 'firebase.error.operationFailed',
+    defaultMessage: 'The server indicated that this operation failed.'
+  },
+  overriddenBySet: {
+    id: 'firebase.error.overriddenBySet',
+    defaultMessage: 'The transaction was overridden by a subsequent set.'
+  },
+  permissionDenied: {
+    id: 'firebase.error.permissionDenied',
+    defaultMessage: 'This client does not have permission to perform this operation.'
+  },
+  preempted: {
+    id: 'firebase.error.preempted',
+    defaultMessage: `The active or pending auth credentials were superseded by
+      another call to auth.`
+  },
+  providerError: {
+    id: 'firebase.error.providerError',
+    defaultMessage: 'A third-party provider error occurred.'
+  },
+  unavailable: {
+    id: 'firebase.error.unavailable',
+    defaultMessage: 'The service is unavailable.'
+  },
+  unknownError: {
+    id: 'firebase.error.unknownError',
+    defaultMessage: 'An unknown error occurred.'
+  },
+  userCancelled: {
+    id: 'firebase.error.userCancelled',
+    defaultMessage: 'The user cancelled authentication.'
+  },
+  userCodeException: {
+    id: 'firebase.error.userCodeException',
+    defaultMessage: 'An exception occurred in user code.'
+  },
+  userDoesNotExist: {
+    id: 'firebase.error.userDoesNotExist',
+    defaultMessage: 'The specified user account does not exist.'
+  },
+  writeCanceled: {
+    id: 'firebase.error.writeCanceled',
+    defaultMessage: 'The write was canceled locally.'
+  }
+});
+
+// Maps upper snake cased error code to camel case
+// e.g: INVALID_EMAIL -> invalidEmail
+const mapFirebaseCodeToMessageDescriptorKey = code =>
+  code.toLowerCase()
+    .replace(/(_.)/g, (x) => x[1].toUpperCase());
 
 class Login extends Component {
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     login: PropTypes.func.isRequired,
     resetPassword: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired
@@ -65,49 +231,67 @@ class Login extends Component {
   }
 
   render() {
-    const { auth, fields } = this.props;
+    const { auth: { formDisabled, formError }, fields } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
+    const { intl } = this.props;
+    const emailPlaceholder = intl.formatMessage(messages.emailPlaceholder);
+    const passwordPlaceholder = intl.formatMessage(messages.passwordPlaceholder);
+
+    // Breaks login if <FormattedMessage /> is used inside button.
+    // This could be fixed with React 15 (no generated span's)
+    const facebookLogin = intl.formatMessage(messages.facebookLogin);
+
+    const firebaseErrorKey = formError &&
+      mapFirebaseCodeToMessageDescriptorKey(formError.code);
 
     return (
       <div className="firebase-login">
         <div className="social-auth-providers">
           <button
             data-provider="facebook"
-            disabled={auth.formDisabled}
+            disabled={formDisabled}
             onClick={this.onSocialLoginClick}
-          >Facebook Login</button>
+          >
+            {facebookLogin}
+          </button>
         </div>
         <form onSubmit={this.onFormSubmit}>
-          <fieldset disabled={auth.formDisabled}>
+          <fieldset disabled={formDisabled}>
             {!this.state.forgetPasswordIsShown ?
-              <legend>Email Login / Sign Up</legend>
+              <legend><FormattedMessage {...messages.emailLoginOrSignUp} /></legend>
             :
-              <legend>Email Password Recovery</legend>
+              <legend><FormattedMessage {...messages.emailPasswordRecovery} /></legend>
             }
             <input
               maxLength="100"
-              placeholder="your@email.com"
+              placeholder={emailPlaceholder}
               {...fields.email}
             />
             {!forgetPasswordIsShown &&
               <input
                 maxLength="1000"
-                placeholder="password"
+                placeholder={passwordPlaceholder}
                 type="password"
                 {...fields.password}
               />
             }
             {!forgetPasswordIsShown ?
               <div className="buttons">
-                <button>Login</button>
-                <button onClick={this.onSignUpClick} type="button">Sign Up</button>
+                <button>
+                  <FormattedMessage {...messages.loginButton} />
+                </button>
+                <button onClick={this.onSignUpClick} type="button">
+                  <FormattedMessage {...messages.signUp} />
+                </button>
                 <button
                   onClick={this.toggleForgetPassword}
                   type="button"
-                >Forgot your password?</button>
+                >
+                  <FormattedMessage {...messages.passwordForgotten} />
+                </button>
                 {recoveryEmailSent &&
                   <p>
-                    <b>Recovery email has been sent.</b>
+                    <b><FormattedMessage {...messages.recoveryEmailSent} /></b>
                   </p>
                 }
               </div>
@@ -116,17 +300,20 @@ class Login extends Component {
                 <button
                   onClick={this.onResetPasswordClick}
                   type="button"
-                >Reset Password</button>
+                ><FormattedMessage {...messages.resetPassword} />
+                </button>
                 <button
                   onClick={this.toggleForgetPassword}
                   type="button"
-                >Dismiss</button>
+                ><FormattedMessage {...messages.dismiss} /></button>
               </div>
             }
           </fieldset>
         </form>
-        {auth.formError &&
-          <p className="error-message">{auth.formError.message}</p>
+        {formError &&
+          <p className="error-message">
+            <FormattedMessage {...messages[firebaseErrorKey]} />
+          </p>
         }
       </div>
     );
@@ -138,6 +325,8 @@ Login = fields(Login, {
   path: 'auth',
   fields: ['email', 'password']
 });
+
+Login = injectIntl(Login);
 
 export default connect(state => ({
   auth: state.auth

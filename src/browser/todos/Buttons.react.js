@@ -2,7 +2,8 @@ import './Buttons.scss';
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import buttonsMessages from '../../common/todos/buttonsMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 const messages = defineMessages({
@@ -32,10 +33,10 @@ class Buttons extends Component {
         <button
           disabled={todos.size === 0}
           onClick={clearAllTodos}
-        ><FormattedMessage {...messages.clearAll} /></button>
+        ><FormattedMessage {...buttonsMessages.clearAll} /></button>
         <button
           onClick={addHundredTodos}
-        ><FormattedMessage {...messages.add100} /></button>
+        ><FormattedMessage {...buttonsMessages.add100} /></button>
       </div>
     );
   }
