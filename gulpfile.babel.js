@@ -228,6 +228,9 @@ gulp.task('bare', () => {
   `);
 });
 
+// An example of deploy to Firebase static hosting.
+gulp.task('deploy', ['to-html'], bg('firebase', 'deploy'));
+
 gulp.task('extractDefaultMessages', () => {
   const through = require('through2');
   const babel = require('babel-core');
