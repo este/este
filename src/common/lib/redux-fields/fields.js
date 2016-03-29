@@ -36,15 +36,21 @@ export default function fields(Wrapped, options) {
       }
     }
 
+    static initialStateFieldValue(props) {
+      return field => {
+        const initialState = getInitialState && getInitialState(props);
+        if (initialState && initialState.hasOwnProperty(field)) {
+          return initialState[field];
+        }
+        return '';
+      };
+    }
+
     static getFieldValue(field, model, props) {
       if (model && model.has(field)) {
         return model.get(field);
       }
-      const initialState = getInitialState && getInitialState(props);
-      if (initialState && initialState.hasOwnProperty(field)) {
-        return initialState[field];
-      }
-      return '';
+      return Fields.initialStateFieldValue(props)(field);
     }
 
     static lazyJsonValuesOf(model, props) {
@@ -100,6 +106,14 @@ export default function fields(Wrapped, options) {
         $reset: () => {
           const normalizedPath = Fields.getNormalizePath(this.props);
           this.context.store.dispatch(resetFields(normalizedPath));
+        },
+        $isDirty: () => {
+          const initialStateFieldValueForProps =
+            Fields.initialStateFieldValue(this.props);
+          return fields
+            .filter(field => field !== 'error')
+            .some(field =>
+              this.values[field] !== initialStateFieldValueForProps(field));
         }
       };
     }
