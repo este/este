@@ -12,17 +12,9 @@
 //   ],
 //   on: {
 //     value: (snapshot) => props.onUsersList(snapshot.val())
+//     // value: [..., onError]
 //   }
 // }));
-
-// Something doesn't work? Note how we can catch error:
-// on: {
-//   value: [(snapshot) => {
-//     console.log(snapshot.val())
-//   }, (error) => {
-//     console.log(error)
-//   }]
-// }
 
 import * as actions from './actions';
 import Component from 'react-pure-render/component';
@@ -30,7 +22,12 @@ import Firebase from 'firebase';
 import React, { PropTypes } from 'react';
 import invariant from 'invariant';
 
-const ensureArray = item => [].concat(item);
+const onError = error => console.log(error); // eslint-disable-line no-console
+const ensureArrayWithDefaultOnError = item => {
+  const array = [].concat(item);
+  if (array.length === 1) array.push(onError);
+  return array;
+};
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
 // recycled on logout. Then we can just set the key to current viewer.
@@ -53,13 +50,13 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
       this.state = {};
     }
 
-    // {value: fn} -> [['value', fnWithProps]] or
+    // {value: fn} -> [['value', fnWithProps, onError]]
     // {value: [fn1, fn2]} -> [['value', fnWithProps1, fnWithProps2]]
     createArgs(eventTypes = {}) {
       return Object.keys(eventTypes)
         .map(eventType => [
           eventType,
-          ...ensureArray(eventTypes[eventType])
+          ...ensureArrayWithDefaultOnError(eventTypes[eventType])
             .map(fn => (...args) => fn.apply(this, [...args, this.props]))
         ]);
     }
