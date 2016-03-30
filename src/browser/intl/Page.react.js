@@ -66,6 +66,7 @@ class Page extends Component {
         </p>
         <p>
           <FormattedRelative
+            initialNow={this.componentRenderedAt}
             updateInterval={1000 * 1}
             value={this.componentRenderedAt}
           />
