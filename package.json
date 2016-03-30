@@ -43,6 +43,7 @@
     "classnames": "^2.1.1",
     "compression": "^1.4.0",
     "cors": "^2.6.0",
+    "cp": "^0.2.0",
     "css-loader": "^0.23.0",
     "del": "^2.1.0",
     "enzyme": "^2.0.0",
