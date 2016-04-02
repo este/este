@@ -10,6 +10,8 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
+> [vetoapp.com](https://vetoapp.com/) - [example](https://github.com/steida/vetoapp) app developed with Este
+
 ## Techniques
 
 - Truly universal architecture
