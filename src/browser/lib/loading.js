@@ -6,7 +6,7 @@ import NotFound from '../notfound/Page.react';
 import React from 'react';
 
 export default function loading(Wrapped, propsToCheck, customLoading) {
-  return class LoadingWrapper extends Component {
+  return class Wrapper extends Component {
 
     render() {
       const props = propsToCheck.map(prop => this.props[prop]);
