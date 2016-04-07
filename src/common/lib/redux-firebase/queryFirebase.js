@@ -12,9 +12,13 @@
 //   ],
 //   on: {
 //     value: (snapshot) => props.onUsersList(snapshot.val())
-//     // value: [..., onError]
+//     // value: [fn, onCustomError]
+//     // all: onUser // All Firebase eventTypes.
 //   }
 // }));
+
+// TODO: Granular updates sucks. Use Virtual DOM like diff for "value" update.
+// The problem is, that detached collection is hard to update without "value".
 
 import * as actions from './actions';
 import Component from 'react-pure-render/component';
@@ -44,21 +48,59 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
       store: PropTypes.object // Redux store.
     };
 
-    constructor(props) {
-      super(props);
-      // Redux actions ftw, still we can call setState in action handler.
-      this.state = {};
-    }
-
-    // {value: fn} -> [['value', fnWithProps, onError]]
-    // {value: [fn1, fn2]} -> [['value', fnWithProps1, fnWithProps2]]
+    // {eventType: fn} -> [['eventType', fn, onDefaultError]]
+    // {eventType: [fn1, fn2]} -> [['eventType', fn1, fn2]]
     createArgs(eventTypes = {}) {
-      return Object.keys(eventTypes)
-        .map(eventType => [
-          eventType,
-          ...ensureArrayWithDefaultOnError(eventTypes[eventType])
-            .map(fn => (...args) => fn.apply(this, [...args, this.props]))
-        ]);
+      // Make a shallow copy to prevent eventTypes argument modification.
+      eventTypes = { ...eventTypes };
+      // eventTypes.all is a shorthand for all granular Firebase events.
+      // We can project all changes to immutable list with updateList helper.
+      // But there is an issue with Firebase granular updates, detached
+      // collection decays, and there is no way how to update it later, so it
+      // must be reseted.
+      if (eventTypes.all) {
+        const action = eventTypes.all;
+        delete eventTypes.all;
+        if (serverFetching) {
+          // On the server we have to fetch value once. We can't use 'on'
+          // because we need promise to detect data are loaded.
+          // There is no way how to fetch data once in the right order.
+          // The snapshot.val() doesn't ensure the order, nor snapshot.forEach.
+          // And we can't use on 'child_added' on the server.
+          // Therefore the order must be enforced in the reducer.
+          // TODO: I'm discussing this with Firebase support.
+          eventTypes.value = (snapshot) => {
+            const val = snapshot.val() || {};
+            Object.keys(val).forEach(key => {
+              action({
+                eventType: 'child_added',
+                key,
+                value: val[key]
+              });
+            });
+          };
+        } else {
+          ['child_added', 'child_changed', 'child_moved', 'child_removed']
+            .forEach(eventType => {
+              eventTypes[eventType] = (snapshot, prevChildKey) => action({
+                eventType,
+                key: snapshot.key(),
+                prevChildKey,
+                value: snapshot.val()
+              });
+            });
+        }
+      }
+      // These ad hoc events doesn't make sense to listen them on the server.
+      if (serverFetching) {
+        delete eventTypes.child_changed;
+        delete eventTypes.child_moved;
+        delete eventTypes.child_removed;
+      }
+      return Object.keys(eventTypes).map(eventType => [
+        eventType,
+        ...ensureArrayWithDefaultOnError(eventTypes[eventType])
+      ]);
     }
 
     dispatch(props, callback) {
@@ -109,8 +151,9 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
 
     off(props) {
       this.dispatch(props, ref => {
-        this.onArgs.forEach(arg => ref.off(...arg));
-        this.onceArgs.forEach(arg => ref.off(...arg));
+        // For deregistration, we have to use only eventType and callback.
+        this.onArgs.forEach(arg => ref.off(arg[0], arg[1]));
+        this.onceArgs.forEach(arg => ref.off(arg[0], arg[1]));
         return actions.REDUX_FIREBASE_OFF_QUERY;
       });
     }
@@ -121,6 +164,12 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     componentDidMount() {
+      // Dispatch all handler without args to reset collection, because granular
+      // events works only on fresh collections.
+      const options = mapPropsToOptions(this.props);
+      if (options.on && options.on.all) {
+        options.on.all();
+      }
       this.on();
     }
 
@@ -138,7 +187,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     render() {
-      return <Wrapped {...this.props} {...this.state} />;
+      return <Wrapped {...this.props} />;
     }
 
   };
