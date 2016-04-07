@@ -38,7 +38,13 @@ function saveUserOnAuth(authData) {
     const user = mapAuthToUser(authData);
     user.authenticatedAt = firebase.constructor.ServerValue.TIMESTAMP;
     const { email } = user;
+    // Delete Facebook etc. user email for better security.
     delete user.email;
+    // But use it as displayName for users logged in via email, because that's
+    // the only info we have.
+    if (user.provider === 'password') {
+      user.displayName = email;
+    }
     // With Firebase multi-path updates, we can update values at multiple
     // locations at the same time. Powerful feature for data denormalization.
     const promise = firebase.update({
