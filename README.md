@@ -12,6 +12,8 @@
 
 > [vetoapp.com](https://vetoapp.com/) - [example](https://github.com/steida/vetoapp) app developed with Este
 
+> _Další školení Este se bude konat 21. a 22. dubna, registrovat se můžete [zde](https://learn-reactjs.com/)_
+
 ## Techniques
 
 - Truly universal architecture
