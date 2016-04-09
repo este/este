@@ -20,8 +20,26 @@ import no from 'react-intl/locale-data/no';
 import pt from 'react-intl/locale-data/pt';
 import ro from 'react-intl/locale-data/ro';
 
-// http://bluebirdjs.com/docs/why-bluebird.html
+// bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
+// Warnings are useful for user code, but annoying for third party libraries.
+Bluebird.config({ warnings: false });
+
+// bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
+window.addEventListener('unhandledrejection', error => {
+  if (process.env.NODE_ENV === 'production') {
+    // We don't want to show anything in the user console.
+    error.preventDefault();
+    // TODO: Report rejection to the server via Firebase. PR anyone?
+  } else {
+    // We don't want to show plain string warnings in the developer console.
+    error.preventDefault();
+    /* eslint-disable no-console */
+    console.warn('Unhandled promise rejection warning. You can fix it or ignore it.');
+    console.log(error.detail.reason);
+    /* eslint-enable no-console */
+  }
+});
 
 // github.com/yahoo/react-intl/wiki/Upgrade-Guide#add-call-to-addlocaledata-in-browser
 [cs, de, es, en, fr, no, pt, ro].forEach(addLocaleData);

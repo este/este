@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import ValidationError from './ValidationError';
 
-// This is dumb, but it works.
 export default function focusInvalidField(component, error) {
   if (!(error instanceof ValidationError)) return;
   if (!error.params.prop) return;

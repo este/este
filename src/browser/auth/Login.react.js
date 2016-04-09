@@ -51,9 +51,10 @@ class Login extends Component {
   async onFormSubmit(e) {
     e.preventDefault();
     const { login, fields } = this.props;
-    const result = await login(fields.$values()).payload.promise;
-    if (result.error) {
-      focusInvalidField(this, result.payload);
+    try {
+      await login(fields.$values());
+    } catch (error) {
+      focusInvalidField(this, error.reason);
       return;
     }
     this.redirectAfterLogin();

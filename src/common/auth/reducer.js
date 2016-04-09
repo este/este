@@ -13,7 +13,6 @@ export default function authReducer(state = initialState, action) {
 
   switch (action.type) {
 
-    // Note how one reducer can handle several actions.
     case actions.LOGIN_START:
     case firebaseActions.REDUX_FIREBASE_LOGIN_START:
     case firebaseActions.REDUX_FIREBASE_RESET_PASSWORD_START:
@@ -24,13 +23,19 @@ export default function authReducer(state = initialState, action) {
     case firebaseActions.REDUX_FIREBASE_LOGIN_ERROR:
     case firebaseActions.REDUX_FIREBASE_RESET_PASSWORD_ERROR:
     case firebaseActions.REDUX_FIREBASE_SIGN_UP_ERROR:
-      return state.merge({ formDisabled: false, formError: action.payload });
+      return state.merge({
+        formDisabled: false,
+        formError: action.payload
+      });
 
     case actions.LOGIN_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_LOGIN_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_RESET_PASSWORD_SUCCESS:
     case firebaseActions.REDUX_FIREBASE_SIGN_UP_SUCCESS:
-      return state.merge({ formDisabled: false, formError: null });
+      return state.merge({
+        formDisabled: false,
+        formError: null
+      });
 
   }
 

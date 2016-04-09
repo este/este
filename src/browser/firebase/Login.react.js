@@ -188,7 +188,7 @@ class Login extends Component {
     this.onSignUpClick = this.onSignUpClick.bind(this);
     this.toggleForgetPassword = this.toggleForgetPassword.bind(this);
     this.onResetPasswordClick = this.onResetPasswordClick.bind(this);
-    // Note we deliberately use component state, because we don't want to
+    // Note we deliberately use the component state, because we don't want to
     // preserve this piece of state when the user leaves a page.
     this.state = {
       forgetPasswordIsShown: false,
@@ -216,8 +216,7 @@ class Login extends Component {
   async onResetPasswordClick() {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
-    const result = await resetPassword(email).payload.promise;
-    if (result.error) return;
+    await resetPassword(email);
     this.setState({
       forgetPasswordIsShown: false,
       recoveryEmailSent: true
@@ -291,7 +290,7 @@ class Login extends Component {
                 </button>
                 {recoveryEmailSent &&
                   <p>
-                    <b><FormattedMessage {...messages.recoveryEmailSent} /></b>
+                    <FormattedMessage {...messages.recoveryEmailSent} />
                   </p>
                 }
               </div>

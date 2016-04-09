@@ -16,8 +16,10 @@ if (!process.env.NODE_ENV) {
 
 polyfillLocales(global, config.locales);
 
-// http://bluebirdjs.com/docs/why-bluebird.html
+// bluebirdjs.com/docs/why-bluebird.html
 global.Promise = Bluebird;
+// Warnings are useful for user code, but annoying for third party libraries.
+Bluebird.config({ warnings: false });
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAssets)
   .development(!config.isProduction)
