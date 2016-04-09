@@ -122,10 +122,9 @@ class Login extends Component {
     const { intl } = this.props;
     const emailPlaceholder = intl.formatMessage(messages.emailPlaceholder);
     const passwordPlaceholder = intl.formatMessage(messages.passwordPlaceholder);
-    const errorMessage = formError && (formError.code
-      ? firebaseMessages[formError.code]
-      : messages.unknownError
-    );
+    const errorMessage = formError
+      ? firebaseMessages[formError.code] || messages.unknownError
+      : null;
 
     // Breaks login if <FormattedMessage /> is used inside button.
     // This could be fixed with React 15 (no generated span's)
