@@ -103,6 +103,7 @@ class Login extends Component {
   async onResetPasswordClick() {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
+    if (!email.trim()) return;
     await resetPassword(email);
     this.setState({
       forgetPasswordIsShown: false,
