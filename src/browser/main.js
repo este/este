@@ -28,7 +28,8 @@ Bluebird.config({ warnings: false });
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
 window.addEventListener('unhandledrejection', error => {
   if (process.env.NODE_ENV === 'production') {
-    // We don't want to show anything in the user console.
+    // We don't want to show anything in the user console. Note preventDefault
+    // doesn't always work with third party code.
     error.preventDefault();
     // TODO: Report rejection to the server via Firebase. PR anyone?
   } else {
