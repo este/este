@@ -1,5 +1,5 @@
 # https://github.com/mhart/alpine-node
-FROM mhart/alpine-node:5.8.0
+FROM mhart/alpine-node:5.10.1
 
 ENV DIR=/opt/este PORT=8000 NODE_ENV=production
 
