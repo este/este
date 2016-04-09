@@ -19,6 +19,7 @@ export default function index() {
     intl: {
       // TODO: Detect native current locale.
       currentLocale: config.defaultLocale,
+      initialNow: Date.now(),
       locales: config.locales,
       messages
     },
