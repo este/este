@@ -84,7 +84,7 @@ class Login extends Component {
   }
 
   onSocialLoginClick(e) {
-    const { provider } = e.target.dataset;
+    const { provider } = e.currentTarget.dataset;
     const { fields, login } = this.props;
     login(provider, fields.$values());
   }
@@ -127,10 +127,6 @@ class Login extends Component {
       ? firebaseMessages[formError.code] || messages.unknownError
       : null;
 
-    // Breaks login if <FormattedMessage /> is used inside button.
-    // This could be fixed with React 15 (no generated span's)
-    const facebookLogin = intl.formatMessage(messages.facebookLogin);
-
     return (
       <div className="firebase-login">
         <div className="social-auth-providers">
@@ -139,7 +135,7 @@ class Login extends Component {
             disabled={formDisabled}
             onClick={this.onSocialLoginClick}
           >
-            {facebookLogin}
+            <FormattedMessage {...messages.facebookLogin} />
           </button>
         </div>
         <form onSubmit={this.onFormSubmit}>
