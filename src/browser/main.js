@@ -1,15 +1,16 @@
 import 'babel-polyfill';
+import { addLocaleData } from 'react-intl';
+import { browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { reportRejectionEvent } from '../common/lib/rejections';
+import { Router } from 'react-router';
+import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import Bluebird from 'bluebird';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import configureStore from '../common/configureStore';
 import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { addLocaleData } from 'react-intl';
-import { browserHistory } from 'react-router';
-import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import cs from 'react-intl/locale-data/cs';
 import de from 'react-intl/locale-data/de';
@@ -25,13 +26,16 @@ window.Promise = Bluebird;
 // Warnings are useful for user code, but annoying for third party libraries.
 Bluebird.config({ warnings: false });
 
+const initialState = () => window.__INITIAL_STATE__;
+
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
 window.addEventListener('unhandledrejection', error => {
   if (process.env.NODE_ENV === 'production') {
     // We don't want to show anything in the user console. Note preventDefault
     // doesn't always work with third party code.
     error.preventDefault();
-    // TODO: Report rejection to the server via Firebase. PR anyone?
+    const { config: { firebaseUrl } } = initialState();
+    reportRejectionEvent({ firebaseUrl, error: error.detail.reason });
   } else {
     // We don't want to show plain string warnings in the developer console.
     error.preventDefault();
@@ -47,7 +51,7 @@ window.addEventListener('unhandledrejection', error => {
 
 const store = configureStore({
   createEngine,
-  initialState: window.__INITIAL_STATE__,
+  initialState: initialState(),
   platformMiddleware: [routerMiddleware(browserHistory)]
 });
 const history = syncHistoryWithStore(browserHistory, store);
