@@ -23,24 +23,8 @@ class Profile extends Component {
     viewer: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
-  logout() {
-    const { logout } = this.props;
-    // Redirect user to root page before logout since logout recycles app state.
-    this.context.router.replace('/');
-    logout();
-  }
-
   render() {
-    const { viewer } = this.props;
+    const { logout, viewer } = this.props;
 
     return (
       <div className="firebase-profile">
@@ -54,7 +38,7 @@ class Profile extends Component {
         }
         <button
           className="btn btn-secondary-outline"
-          onClick={this.logout}
+          onClick={logout}
         >
           <FormattedMessage {...messages.logout} />
         </button>

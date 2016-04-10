@@ -1,13 +1,13 @@
 import './Login.scss';
-import * as authActions from '../../common/auth/actions';
 import Component from 'react-pure-render/component';
 import LoginError from './LoginError.react';
 import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { focusInvalidField } from '../../common/lib/validation';
-import { replace } from 'react-router-redux';
+import { login } from '../../common/auth/actions';
 
 const messages = defineMessages({
   formLegend: {
@@ -39,8 +39,7 @@ class Login extends Component {
     fields: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
     location: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
-    replace: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -61,9 +60,9 @@ class Login extends Component {
   }
 
   redirectAfterLogin() {
-    const { location, replace } = this.props;
+    const { location } = this.props;
     const nextPathname = location.state && location.state.nextPathname || '/';
-    replace(nextPathname);
+    browserHistory.replace(nextPathname);
   }
 
   render() {
@@ -116,4 +115,4 @@ Login = injectIntl(Login);
 
 export default connect(state => ({
   auth: state.auth
-}), { ...authActions, replace })(Login);
+}), { login })(Login);

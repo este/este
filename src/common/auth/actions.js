@@ -1,4 +1,5 @@
 import { ValidationError } from '../lib/validation';
+import { browserHistory } from 'react-router';
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_START = 'LOGIN_START';
@@ -47,6 +48,10 @@ export function login(fields) {
 
 export function logout() {
   return ({ engine, firebase }) => {
+    // Always redirect to root first to ensure valid view state after logout.
+    if (process.env.IS_BROWSER) {
+      browserHistory.replace('/');
+    }
     engine.save({});
     firebase.unauth();
     return {

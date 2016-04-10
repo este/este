@@ -1,10 +1,8 @@
-import * as storage from 'redux-storage';
 import Firebase from 'firebase';
 import appReducer from './app/reducer';
 import createLogger from 'redux-logger';
 import isomorphicFetch from 'isomorphic-fetch';
 import promiseMiddleware from 'redux-promise-middleware';
-import recycle from 'redux-recycle';
 import shortid from 'shortid';
 import storageDebounce from 'redux-storage-decorator-debounce';
 import storageFilter from 'redux-storage-decorator-filter';
@@ -12,14 +10,7 @@ import validate from './validate';
 import { LOGOUT } from './auth/actions';
 import { SET_CURRENT_LOCALE } from './intl/actions';
 import { applyMiddleware, compose, createStore } from 'redux';
-
-// Este dependency injection middleware. So simple that we don't need a lib.
-// It's like mixed redux-thunk and redux-inject.
-const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
-  next(typeof action === 'function'
-    ? action({ ...deps, dispatch, getState })
-    : action
-  );
+import { createMiddleware as createStorageMiddleware } from 'redux-storage';
 
 const isReactNative =
   typeof navigator === 'object' &&
@@ -31,8 +22,14 @@ const enableLogger =
 
 const enableDevToolsExtension =
   process.env.NODE_ENV !== 'production' &&
-  process.env.IS_BROWSER &&
-  window.devToolsExtension;
+  process.env.IS_BROWSER && window.devToolsExtension;
+
+// Like redux-thunk with dependency injection.
+const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
+  next(typeof action === 'function'
+    ? action({ ...deps, dispatch, getState })
+    : action
+  );
 
 export default function configureStore(options) {
   const {
@@ -43,19 +40,12 @@ export default function configureStore(options) {
   } = options;
 
   const engineKey = `redux-storage:${initialState.config.appName}`;
-  const engine = createEngine && createEngine(engineKey); // No server engine.
+  const engine = createEngine && createEngine(engineKey);
   const firebase = new Firebase(initialState.config.firebaseUrl);
   // // Check whether connection works.
   // firebase.child('hello-world').set({
   //   createdAt: Firebase.ServerValue.TIMESTAMP
   // });
-
-  let reducer = appReducer;
-  reducer = recycle(reducer, [LOGOUT], {
-    // Whitelist app initialState props to be preserved after a logout.
-    device: initialState.device,
-    intl: initialState.intl
-  });
 
   const middleware = [
     ...platformMiddleware,
@@ -78,7 +68,7 @@ export default function configureStore(options) {
       ['intl', 'currentLocale']
     ]);
     decoratedEngine = storageDebounce(decoratedEngine, 300);
-    middleware.push(storage.createMiddleware(decoratedEngine, [], [
+    middleware.push(createStorageMiddleware(decoratedEngine, [], [
       SET_CURRENT_LOCALE
     ]));
   }
@@ -93,17 +83,33 @@ export default function configureStore(options) {
     middleware.push(logger);
   }
 
+  // Reset app state on logout, stackoverflow.com/q/35622588/233902.
+  const resetOnLogout = reducer => (state, action) => {
+    if (action.type === LOGOUT) {
+      state = {
+        device: initialState.device,
+        intl: initialState.intl,
+        routing: state.routing // Note routing state has to be reused.
+      };
+    }
+    return reducer(state, action);
+  };
+
+  // github.com/zalmoxisus/redux-devtools-extension
   const createStoreWithMiddleware = enableDevToolsExtension
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
-  const store = createStoreWithMiddleware(createStore)(reducer, initialState);
+  const store = createStoreWithMiddleware(createStore)(
+    resetOnLogout(appReducer),
+    initialState
+  );
 
   // Enable hot reload where available.
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers.
     module.hot.accept('./app/reducer', () => {
       const nextAppReducer = require('./app/reducer');
-      store.replaceReducer(nextAppReducer);
+      store.replaceReducer(resetOnLogout(nextAppReducer));
     });
   }
 
