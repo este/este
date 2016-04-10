@@ -4,7 +4,8 @@ export const UPDATE_APP_STATE_FROM_STORAGE = 'UPDATE_APP_STATE_FROM_STORAGE';
 
 export function updateAppStateFromStorage() {
   return ({ dispatch, engine }) => {
-    engine.load().then(state => {
+    const getPromise = async () => {
+      const state = await engine.load();
       if (state.intl && state.intl.currentLocale) {
         dispatch(setCurrentLocale(state.intl.currentLocale));
       } else if (process.env.IS_SERVERLESS) {
@@ -12,9 +13,10 @@ export function updateAppStateFromStorage() {
         // to config defaultLocale.
         dispatch(setCurrentLocale('en'));
       }
-    });
+    };
     return {
-      type: UPDATE_APP_STATE_FROM_STORAGE
+      type: UPDATE_APP_STATE_FROM_STORAGE,
+      payload: getPromise()
     };
   };
 }
