@@ -48,11 +48,11 @@ export function login(fields) {
 
 export function logout() {
   return ({ engine, firebase }) => {
-    // Always redirect to root first to ensure valid view state after logout.
+    // Always redirect to home first to ensure valid view state after logout.
     if (process.env.IS_BROWSER) {
       browserHistory.replace('/');
     }
-    engine.save({});
+    engine.save({}); // Always reset client storage.
     firebase.unauth();
     return {
       type: LOGOUT
