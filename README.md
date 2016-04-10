@@ -32,6 +32,7 @@
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative api
 - Este is monorepo, [read](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) [why](http://danluu.com/monorepo/). 
+- Note `npm-shrinkwrap.json` file. It helps us to keep Este stable. It's updated only when new dependencies are tested.
 
 ## Libraries
 
