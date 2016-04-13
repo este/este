@@ -23,7 +23,7 @@ export default class Loading extends Component {
 
   static defaultProps = {
     loadingText: 'Loading',
-    longLoadingText: 'Still loading, please check your internet connection'
+    longLoadingText: 'Still loading, please check your connection'
   };
 
   constructor(props) {

@@ -56,7 +56,7 @@
 - SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
-- And much more. Check source code.
+- And much more. Explore the repository.
 
 ## Prerequisites
 
@@ -79,7 +79,7 @@ npm install
 - point your browser to [localhost:8000](http://localhost:8000)
 - build something beautiful
 
-React Native: [facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)
+React Native: [Getting Started](https://facebook.github.io/react-native/docs/getting-started.html)
 
 ## Dev Tasks
 
@@ -103,9 +103,9 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 
 ## Documentation
 
-For absolute beginners: [react-howto](https://github.com/petehunt/react-howto).
+For absolute beginners, see: [react-howto](https://github.com/petehunt/react-howto).
 
-So you decided to give a chance to this web stack, but where is documentation? Code is documentation itself as it illustrates various patterns, but for start you should read something about [React.js](http://facebook.github.io/react/) and [Redux](http://redux.js.org/). Refresh you JavaScript knowledge about "new" JavaScript - [learn ES6](https://babeljs.io/docs/learn-es6/). This stack uses [immutable.js](http://facebook.github.io/immutable-js/) and class-less design for a [good reason](https://github.com/facebook/immutable-js/#the-case-for-immutability). [Express.js](http://expressjs.com/) is used on the [Node.js](http://nodejs.org/api/) based server. Application is [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9), so we can share code between browser, server, mobile, whatever easily. Congrats, you're Este.js expert level 1 now :-)
+So you've decided to give this web stack a chance, but where is the documentation? Code is documentation in itself as it illustrates various patterns, but to start with you should educate yourself on [React.js](http://facebook.github.io/react/) and [Redux](http://redux.js.org/). You should [learn ES6](https://babeljs.io/docs/learn-es6/) to refresh your knowledge about "new" JavaScript practices and syntax. This stack uses [immutable.js](http://facebook.github.io/immutable-js/) and class-less design for a [good reason](https://github.com/facebook/immutable-js/#the-case-for-immutability). [Express.js](http://expressjs.com/) is used on the [Node.js](http://nodejs.org/api/) based server. The application architecture is [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) so we can share code between the browser, server, & mobile platform easily. Congrats, you're Este.js expert level 1 now :-)
 
 ## Links
 
@@ -141,16 +141,16 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
  ```
 
 #### Why does the CSS flicker when starting the app/refreshing it?
-In dev mode, webpack loads all the style inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
+In dev mode, webpack loads all the styles inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
 
 #### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
-Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be `use()` by the main app, like any other middleware.
+Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be called with a `use()` statement by the main app, just like any other middleware.
 
-#### Is it possible use XXX library with Este?
-Yes. Este makes little assumptions about your stack, and passing every bit of needed info through props. This is not a framework, nothing prevents you from picking the bits you're interested in.
+#### Is it possible use XYZ library with Este?
+Yes. Este tries to make as few assumptions about your stack as possible. This is not a framework, nothing prevents you from picking the bits you're interested in.
 
-#### How React Native is used in this project?
-Just as regular React Native project created via `react-native init AwesomeProject`. We can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
+#### How is React Native used in this project?
+In the same way as any other React Native project is created via `react-native init AwesomeProject`. But thanks to the universal application design we can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)
@@ -159,11 +159,11 @@ Just as regular React Native project created via `react-native init AwesomeProje
 ## Notes
 
 - Este.js dev stack works on OSX, Linux, and Windows.
-- As a rule of thumb, Este.js supports all evergreen browsers plus last two pieces of IE.
+- As a rule of thumb, Este.js supports all evergreen browsers plus the last two major versions of IE.
 - Support Este.js development via Bitcoin - [daniel.steigerwald.cz/#donate-estejs](http://daniel.steigerwald.cz/#donate-estejs)
 
 ## Credit
 
 <img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
-made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida) and the community
+Made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida) and the community.
