@@ -41,21 +41,15 @@ gulp.task('build-webpack', ['env'], webpackBuild);
 gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', () => runEslint());
-
-// Exit process with an error code (1) on lint error for CI build.
 gulp.task('eslint-ci', () => runEslint().pipe(eslint.failAfterError()));
 
 gulp.task('mocha', () => {
   mochaRunCreator('process')();
 });
-
-// Enable to run single test file
-// ex. gulp mocha-file --file src/browser/components/__test__/Button.js
 gulp.task('mocha-file', () => {
+  // Example: gulp mocha-file --file src/browser/components/__test__/Button.js
   mochaRunCreator('process')({ path: path.join(__dirname, args.file) });
 });
-
-// Continuous test running
 gulp.task('mocha-watch', () => {
   gulp.watch(
     ['src/browser/**', 'src/common/**', 'src/server/**'],
@@ -74,7 +68,6 @@ gulp.task('server-nodemon', shell.task(
   // Normalize makes path cross platform.
   path.normalize('node_modules/.bin/nodemon --ignore webpack-assets.json src/server')
 ));
-
 gulp.task('server', ['env'], done => {
   if (args.production) {
     runSequence('clean', 'build', 'server-node', done);
@@ -150,69 +143,35 @@ gulp.task('to-html', done => {
 // React Native
 
 gulp.task('native', done => {
-  // native/config.js
   const config = require('./src/server/config');
   const { appName, defaultLocale, firebaseUrl, locales } = config;
+  const messages = require('./src/server/intl/loadMessages')();
   fs.writeFile('src/native/config.js',
-// Yeah, that's how ES6 template string indentation works.
 `/* eslint-disable eol-last, quotes, quote-props */
 export default ${
   JSON.stringify({ appName, defaultLocale, firebaseUrl, locales }, null, 2)
-};`
-  );
-  // native/messages.js
-  const messages = require('./src/server/intl/loadMessages')();
+};`);
   fs.writeFile('src/native/messages.js',
 `/* eslint-disable eol-last, max-len, quotes, quote-props */
 export default ${
   JSON.stringify(messages, null, 2)
-};`
-  );
+};`);
   done();
 });
 
 gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
 gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
-// Various fixes for react-native issues. Must be called after npm install.
+// Various fixes for react-native issues.
 gulp.task('fix-react-native', done => {
-  runSequence('fix-native-babelrc-files', 'fix-native-fbjs', done);
+  runSequence('fix-native-babelrc-files', done);
 });
 
 // https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
-// Still broken in RN 0.20. Remove fbjs from package.json after fix.
+// Still broken in RN 0.23.1
 gulp.task('fix-native-babelrc-files', () =>
   del(['node_modules/**/.babelrc', '!node_modules/react-native/**'])
 );
-
-// https://github.com/facebook/react-native/issues/5467#issuecomment-173989493
-// Still broken in RN 0.20. Remove fbjs from package.json after fix.
-gulp.task('fix-native-fbjs', () =>
-  del(['node_modules/**/fbjs', '!node_modules/fbjs'])
-);
-
-// Tasks for issues seem to be already fixed.
-
-// Fix for custom .babelrc cache issue.
-// https://github.com/facebook/react-native/issues/1924#issuecomment-120170512
-gulp.task('clear-react-packager-cache', () => {
-  // Clear react-packager cache
-  const tempDir = os.tmpdir();
-
-  const cacheFiles = fs.readdirSync(tempDir).filter(
-    fileName => fileName.indexOf('react-packager-cache') === 0
-  );
-
-  cacheFiles.forEach(cacheFile => {
-    const cacheFilePath = path.join(tempDir, cacheFile);
-    fs.unlinkSync(cacheFilePath);
-    console.log('Deleted cache: ', cacheFilePath);
-  });
-
-  if (!cacheFiles.length) {
-    console.log('No cache files found!');
-  }
-});
 
 gulp.task('bare', () => {
   console.log(`
