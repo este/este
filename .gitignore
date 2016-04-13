@@ -6,6 +6,7 @@ src/native/config.js
 src/native/messages.js
 webpack-assets.json
 firebase/rules.json
+*.jsbundle
 
 # React Native
 # OSX
