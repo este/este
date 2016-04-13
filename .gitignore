@@ -1,13 +1,19 @@
 # Este
+#
 *.sublime-workspace
 src/common/secrets.json
 src/native/config.js
 src/native/messages.js
+webpack-assets.json
+firebase/rules.json
 
+# React Native
 # OSX
+#
 .DS_Store
 
 # Xcode
+#
 build/
 *.pbxuser
 !default.pbxuser
@@ -27,14 +33,12 @@ DerivedData
 project.xcworkspace
 
 # Android/IJ
+#
 .idea
 .gradle
 local.properties
 
 # node.js
+#
 node_modules/
 npm-debug.log
-webpack-assets.json
-
-# firebase
-firebase/rules.json
