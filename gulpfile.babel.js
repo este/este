@@ -6,7 +6,6 @@ import fs from 'fs';
 import gulp from 'gulp';
 import gulpIf from 'gulp-if';
 import mochaRunCreator from './test/mochaRunCreator';
-import os from 'os';
 import path from 'path';
 import runSequence from 'run-sequence';
 import shell from 'gulp-shell';
@@ -159,8 +158,9 @@ export default ${
   done();
 });
 
-gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
-gulp.task('android', ['native'], bg('react-native', 'run-android'));
+// TODO: These tasks doesn't work right now.
+// gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
+// gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues.
 gulp.task('fix-react-native', done => {
