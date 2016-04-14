@@ -6,9 +6,8 @@ import configureStore from '../common/configureStore';
 import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { addLocaleData } from 'react-intl';
-import { browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 import cs from 'react-intl/locale-data/cs';

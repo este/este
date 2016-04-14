@@ -29,7 +29,7 @@ class Page extends Component {
         <Helmet title="Firebase" />
         <h2>
           <a href="https://www.firebase.com/" target="_blank">
-            <img height="27" src={require('./FirebaseLogo.png')} width="140" />
+            <img alt="Firebase Logo" height="27" src={require('./FirebaseLogo.png')} width="140" />
           </a>
         </h2>
         {viewer ?

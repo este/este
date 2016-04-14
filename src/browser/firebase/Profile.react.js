@@ -33,7 +33,7 @@ class Profile extends Component {
         </h2>
         {viewer.profileImageURL &&
           <div className="profile-image">
-            <img src={viewer.profileImageURL} />
+            <img alt="Profile" src={viewer.profileImageURL} />
           </div>
         }
         <button
