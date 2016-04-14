@@ -2,7 +2,7 @@ import * as uiActions from '../../common/ui/actions';
 import Component from 'react-pure-render/component';
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, { Navigator, PropTypes, StatusBarIOS, View, Dimensions } from 'react-native';
+import React, { Navigator, PropTypes, StatusBar, View } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
@@ -10,8 +10,6 @@ import styles from './styles';
 import start from '../../common/app/start';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-
-const deviceScreen = Dimensions.get('window');
 
 class App extends Component {
 
@@ -31,7 +29,6 @@ class App extends Component {
     super(props);
     this.onNavigatorRef = this.onNavigatorRef.bind(this);
     this.onRouteChange = this.onRouteChange.bind(this);
-    this.onSideMenuChange = this.onSideMenuChange.bind(this);
     this.renderScene = this.renderScene.bind(this);
   }
 
@@ -42,14 +39,6 @@ class App extends Component {
   onRouteChange(route) {
     this.navigator.replace(routes[route]);
     this.props.toggleSideMenu();
-  }
-
-  onSideMenuChange(isOpen) {
-    const { device, onSideMenuChange } = this.props;
-    if (device.platform === 'ios') {
-      StatusBarIOS.setHidden(isOpen, true);
-    }
-    onSideMenuChange(isOpen);
   }
 
   getTitle(route) {
@@ -63,9 +52,10 @@ class App extends Component {
   }
 
   renderScene(route) {
-    const { toggleSideMenu } = this.props;
+    const { toggleSideMenu, ui } = this.props;
     return (
       <View style={[styles.sceneView, route.style]}>
+        <StatusBar hidden={ui.isSideMenuOpen} />
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={toggleSideMenu}
@@ -76,7 +66,7 @@ class App extends Component {
   }
 
   render() {
-    const { ui } = this.props;
+    const { onSideMenuChange, ui } = this.props;
 
     return (
       <SideMenu
@@ -85,9 +75,8 @@ class App extends Component {
         menu={
           <Menu onRouteChange={this.onRouteChange} />
         }
-        onChange={this.onSideMenuChange}
+        onChange={onSideMenuChange}
         style={styles.container}
-        openMenuOffset={deviceScreen.width * 1 / 3}
       >
         <Navigator
           configureScene={App.configureScene}
