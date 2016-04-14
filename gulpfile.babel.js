@@ -158,9 +158,11 @@ export default ${
   done();
 });
 
-// TODO: These tasks doesn't work right now.
-// gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
-// gulp.task('android', ['native'], bg('react-native', 'run-android'));
+// If this doesn't work, while manual Xcode works, try:
+// 1) delete ios/build directory
+// 2) reset content and settings in iOS simulator
+gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
+gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues.
 gulp.task('fix-react-native', done => {
