@@ -12,13 +12,10 @@
 //   ],
 //   on: {
 //     value: (snapshot) => props.onUsersList(snapshot.val())
-//     // value: [fn, onCustomError]
-//     // all: onUser // All Firebase eventTypes.
+//     // To handle custom error: value: [callback, onCustomError]
+//     // To handle all events, check github.com/steida/vetoapp VetoedBy.
 //   }
 // }));
-
-// TODO: Granular updates sucks. Use Virtual DOM like diff for "value" update.
-// The problem is, that detached collection is hard to update without "value".
 
 import * as actions from './actions';
 import Component from 'react-pure-render/component';
@@ -34,7 +31,7 @@ const ensureArrayWithDefaultOnError = item => {
 };
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
-// recycled on logout. Then we can just set the key to current viewer.
+// recycled on logout. Then we can just set the key to the current viewer.
 const optionsToPayload = ({ path, key, params }) => ({ path, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
@@ -51,51 +48,37 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     // {eventType: fn} -> [['eventType', fn, onDefaultError]]
     // {eventType: [fn1, fn2]} -> [['eventType', fn1, fn2]]
     createArgs(eventTypes = {}) {
-      // Make a shallow copy to prevent eventTypes argument modification.
-      eventTypes = { ...eventTypes };
-      // eventTypes.all is a shorthand for all granular Firebase events.
-      // We can project all changes to immutable list with updateList helper.
-      // But there is an issue with Firebase granular updates, detached
-      // collection decays, and there is no way how to update it later, so it
-      // must be reseted.
+      // eventTypes.all is shorthand for all granular Firebase events.
       if (eventTypes.all) {
+        // Make a shallow copy to prevent original eventTypes modifications.
+        eventTypes = { ...eventTypes };
         const action = eventTypes.all;
         delete eventTypes.all;
-        if (serverFetching) {
-          // On the server we have to fetch value once. We can't use 'on'
-          // because we need promise to detect data are loaded.
-          // There is no way how to fetch data once in the right order.
-          // The snapshot.val() doesn't ensure the order, nor snapshot.forEach.
-          // And we can't use on 'child_added' on the server.
-          // Therefore the order must be enforced in the reducer.
-          // TODO: I'm discussing this with Firebase support.
-          eventTypes.value = (snapshot) => {
-            const val = snapshot.val() || {};
-            Object.keys(val).forEach(key => {
-              action({
-                eventType: 'child_added',
-                key,
-                value: val[key]
-              });
-            });
-          };
-        } else {
+        // Use value to get current state once.
+        eventTypes.value = snapshot => {
+          this._onAllValueCalled = true;
+          const val = [];
+          snapshot.forEach(childSnapshot => {
+            val.push(childSnapshot.val());
+          });
+          action({ eventType: 'value', val });
+        };
+        if (!serverFetching) {
           ['child_added', 'child_changed', 'child_moved', 'child_removed']
             .forEach(eventType => {
-              eventTypes[eventType] = (snapshot, prevChildKey) => action({
-                eventType,
-                key: snapshot.key(),
-                prevChildKey,
-                value: snapshot.val()
-              });
+              eventTypes[eventType] = (snapshot, prevChildKey) => {
+                if (eventType === 'child_added' && !this._onAllValueCalled) {
+                  return;
+                }
+                action({
+                  eventType,
+                  key: snapshot.key(),
+                  prevChildKey,
+                  val: snapshot.val()
+                });
+              };
             });
         }
-      }
-      // These ad hoc events doesn't make sense to listen them on the server.
-      if (serverFetching) {
-        delete eventTypes.child_changed;
-        delete eventTypes.child_moved;
-        delete eventTypes.child_removed;
       }
       return Object.keys(eventTypes).map(eventType => [
         eventType,
@@ -122,6 +105,8 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     on() {
+      // This flag is for ignoring all child_added events before once value.
+      this._onAllValueCalled = false;
       this.dispatch(this.props, (ref, { on, once, params = [] }) => {
         // Map declarative params to Firebase imperative API.
         params.forEach(([method, ...args]) => {
@@ -131,8 +116,11 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         this.onArgs = this.createArgs(on);
         this.onArgs.forEach(arg => {
           if (serverFetching) {
-            // Use 'once' on the server because 'on' doesn't make sense.
+            // Always use once for the server fetching.
             serverFetchingPromises.push(ref.once(...arg));
+          } else if (on.all && arg[0] === 'value') {
+            // Always use once for on.all value.
+            ref.once(...arg);
           } else {
             ref.on(...arg);
           }
@@ -164,12 +152,6 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     componentDidMount() {
-      // Dispatch all handler without args to reset collection, because granular
-      // events works only on fresh collections.
-      const options = mapPropsToOptions(this.props);
-      if (options.on && options.on.all) {
-        options.on.all();
-      }
       this.on();
     }
 
@@ -210,9 +192,10 @@ export const queryFirebaseServer = renderAppCallback => {
     console.log(e); // eslint-disable-line no-console
   } finally {
     serverFetching = false;
-    return Promise
-      // Wait until all promises in an array are either rejected or fulfilled.
-      // http://bluebirdjs.com/docs/api/reflect.html
-      .all(serverFetchingPromises.map(promise => promise.reflect()));
+    // Wait until all promises in an array are either rejected or fulfilled.
+    // http://bluebirdjs.com/docs/api/reflect.html
+    const promises = serverFetchingPromises.map(promise => promise.reflect());
+    serverFetchingPromises = null;
+    return Promise.all(promises);
   }
 };
