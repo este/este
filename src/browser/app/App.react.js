@@ -32,7 +32,7 @@ class App extends Component {
     const { children, currentLocale, location } = this.props;
 
     return (
-      <div className="page">
+      <div className="container">
         <Helmet
           htmlAttributes={{ lang: currentLocale }}
           titleTemplate="%s - Este.js"
