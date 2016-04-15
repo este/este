@@ -2,10 +2,12 @@ import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  currentLocale: null, // Autodetected in /server/frontend/render.js
-  initialNow: null, // Set in /server/frontend/render.js
-  locales: null, // Defined in /server/config.js
-  messages: {} // Created from /messages files.
+  // Defined in server/frontend/render.js and native/index.js
+  currentLocale: null,
+  defaultLocale: null,
+  initialNow: null,
+  locales: null,
+  messages: {}
 });
 const initialState = new InitialState;
 

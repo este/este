@@ -17,8 +17,8 @@ export default function index() {
       firebaseUrl: config.firebaseUrl
     },
     intl: {
-      // TODO: Detect native current locale.
-      currentLocale: config.defaultLocale,
+      currentLocale: config.defaultLocale, // TODO: Detect native locale.
+      defaultLocale: config.defaultLocale,
       initialNow: Date.now(),
       locales: config.locales,
       messages
