@@ -177,13 +177,18 @@ gulp.task('fix-native-babelrc-files', () =>
 
 gulp.task('bare', () => {
   console.log(`
-    If you want to have bare Este without examples, you have to it manually now.
+    Steps to make bare Este app. Yes, you have to it manually for now.
 
-    Here is a quick checklist:
+    Remove app todos (or other app features)
       - remove /src/browser/todos, /src/common/todos, /src/native/todos dirs
       - remove todos reducer from /src/common/app/reducer.js
       - remove todos routes from /src/browser/createRoutes.js
       - remove link from /src/browser/app/Header.react.js
+
+    Customize app
+      - set defaultLocale and locales in src/server/config.js
+      - import only used locale-data in src/browser/main.js
+      - set app name in package.json
 
     Yeah, it's that easy.
   `);
