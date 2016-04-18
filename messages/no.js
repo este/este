@@ -69,6 +69,174 @@ export default [
     "defaultMessage": "Logg inn"
   },
   {
+    "id": "firebase.error.authenticationProviderDisabled",
+    "defaultMessage": "Den autentiseringsleverandør som er etterspurt er ikke tilgjengelig for herværende Firebase."
+  },
+  {
+    "id": "firebase.error.dataStale",
+    "defaultMessage": "Intern bruk,"
+  },
+  {
+    "id": "firebase.error.deniedByUser",
+    "defaultMessage": "Brukeren har ikke gitt programmet de nødvendige rettigheter"
+  },
+  {
+    "id": "firebase.error.disconnected",
+    "defaultMessage": "Aktiviteten måtte avbrytes på grunn av at nettverksforbindelsen er brutt"
+  },
+  {
+    "id": "firebase.error.emailTaken",
+    "defaultMessage": "Den nye brukerkontoen kan ikke bli laget fordi den oppgitte e-postadressen er i bruk allerede."
+  },
+  {
+    "id": "firebase.error.expiredToken",
+    "defaultMessage": "Det vedlagte autentiseringsmerke har gått ut på tid."
+  },
+  {
+    "id": "firebase.error.invalidAuthArguments",
+    "defaultMessage": "Den oppgitte legitimasjon er ufullstendig eller har feil."
+  },
+  {
+    "id": "firebase.error.invalidConfiguration",
+    "defaultMessage": "Den autentiseringsleverandør som er etterspurt er feil-konfigurert og forespørselen kan ikke fullföres."
+  },
+  {
+    "id": "firebase.error.invalidCredentials",
+    "defaultMessage": "Den oppgitte autentiserings-legitimasjon er ugyldig."
+  },
+  {
+    "id": "firebase.error.invalidEmail",
+    "defaultMessage": "Den oppgitte e-postadressen er ikke en gyldig e-postadresse."
+  },
+  {
+    "id": "firebase.error.invalidPassword",
+    "defaultMessage": "Det oppgitte passordet for brukerkontoen er feil. "
+  },
+  {
+    "id": "firebase.error.invalidProvider",
+    "defaultMessage": "Den autentiseringsleverandør som er etterspurt finnes ikke"
+  },
+  {
+    "id": "firebase.error.invalidToken",
+    "defaultMessage": "Den oppgitte autentiseringsmerke er ugyldig"
+  },
+  {
+    "id": "firebase.error.limitsExceeded",
+    "defaultMessage": "Grensene er overskredet"
+  },
+  {
+    "id": "firebase.error.maxRetries",
+    "defaultMessage": "Transaksjonen har hatt blitt forsøkt for mange ganger."
+  },
+  {
+    "id": "firebase.error.networkError",
+    "defaultMessage": "Aktiviteten kunne ikke bli utført på grunn av nettverksfeil."
+  },
+  {
+    "id": "firebase.error.operationFailed",
+    "defaultMessage": "Serveren har oppgitt at denne aktiviteten var mislykket"
+  },
+  {
+    "id": "firebase.error.overriddenBySet",
+    "defaultMessage": "Transaksjonen ble overstyret av et etterfølgende sett"
+  },
+  {
+    "id": "firebase.error.permissionDenied",
+    "defaultMessage": "Denne klienten mangler tillatelse til å utføre denne aktiviteten."
+  },
+  {
+    "id": "firebase.error.preempted",
+    "defaultMessage": "Den aktive eller ventende autentiserings-legitimasjon ble erstattet av et annet kall til auth"
+  },
+  {
+    "id": "firebase.error.providerError",
+    "defaultMessage": "En feil oppstod hos en tredjepartsleverandør"
+  },
+  {
+    "id": "firebase.error.unavailable",
+    "defaultMessage": "Tjenesten er ikke tilgjengelig."
+  },
+  {
+    "id": "firebase.error.unknownError",
+    "defaultMessage": "En annen, ukjent, feil oppstod"
+  },
+  {
+    "id": "firebase.error.userCancelled",
+    "defaultMessage": "Brukeren avbrøt autentiseringen."
+  },
+  {
+    "id": "firebase.error.userCodeException",
+    "defaultMessage": "Et avvik oppsto i programvare hos brukeren."
+  },
+  {
+    "id": "firebase.error.userDoesNotExist",
+    "defaultMessage": "Den oppgitte brukerkonto finnes ikke."
+  },
+  {
+    "id": "firebase.error.writeCanceled",
+    "defaultMessage": "Skrivingen ble avbrutt lokalt."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Avslutt"
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "E-post Logg inn / Påmelding"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Gjenopprett passord for E-post"
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "dittnavn@eksempel.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Logg inn med Facebook"
+  },
+  {
+    "id": "firebase.login.loginButton",
+    "defaultMessage": "Logg inn"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Har du glemt passordet?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "passord"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "E-post for gjenoppretting er sendt."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Tilbakestill Passord"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Påmelding"
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Last opp mer"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Hei"
+  },
+  {
+    "id": "firebase.profile.logout",
+    "defaultMessage": "Logg ut"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": " Siste {limitToLast} innloggede brukere"
+  },
+  {
     "id": "footer.madeByHtml",
     "defaultMessage": "laget av <a href=\"https://twitter.com/steida\">steida</a>"
   },
