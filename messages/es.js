@@ -69,6 +69,174 @@ export default [
     "defaultMessage": "Iniciar Sesión"
   },
   {
+    "id": "firebase.error.authenticationProviderDisabled",
+    "defaultMessage": " El proveedor de autenticación solicitado está deshabilitado para este Firebase."
+  },
+  {
+    "id": "firebase.error.dataStale",
+    "defaultMessage": "Uso interno."
+  },
+  {
+    "id": "firebase.error.deniedByUser",
+    "defaultMessage": "El usuario no ha autorizado la aplicación."
+  },
+  {
+    "id": "firebase.error.disconnected",
+    "defaultMessage": "La operación tuvo que ser abortada debido a desconexión de la red."
+  },
+  {
+    "id": "firebase.error.emailTaken",
+    "defaultMessage": "La nueva cuenta de usuario no puede ser creada porque la dirección de correo electrónico especificada ya se encuentra en uso."
+  },
+  {
+    "id": "firebase.error.expiredToken",
+    "defaultMessage": "El token de autorización suministrado ha expirado."
+  },
+  {
+    "id": "firebase.error.invalidAuthArguments",
+    "defaultMessage": "Las credenciales especificadas están mal escritas o incompletas."
+  },
+  {
+    "id": "firebase.error.invalidConfiguration",
+    "defaultMessage": "El proveedor de autenticación solicitado esta desconfigurado, y la solicitud no puede completarse."
+  },
+  {
+    "id": "firebase.error.invalidCredentials",
+    "defaultMessage": "Las credenciales de autenticación especificadas son invalidas. "
+  },
+  {
+    "id": "firebase.error.invalidEmail",
+    "defaultMessage": "La dirección de correo especificada no es una dirección de correo válida."
+  },
+  {
+    "id": "firebase.error.invalidPassword",
+    "defaultMessage": "La contraseña de la cuenta de usuario especificada no es válida."
+  },
+  {
+    "id": "firebase.error.invalidProvider",
+    "defaultMessage": "El proveedor de autenticación solicitado no existe."
+  },
+  {
+    "id": "firebase.error.invalidToken",
+    "defaultMessage": "El token de autenticación especificado no es válido."
+  },
+  {
+    "id": "firebase.error.limitsExceeded",
+    "defaultMessage": "Límites superados."
+  },
+  {
+    "id": "firebase.error.maxRetries",
+    "defaultMessage": "La transacción tuvo muchos reintentos"
+  },
+  {
+    "id": "firebase.error.networkError",
+    "defaultMessage": "La operación no pudo ser realizada debido a un error de red."
+  },
+  {
+    "id": "firebase.error.operationFailed",
+    "defaultMessage": "El servidor ha indicado que la operacion fallo"
+  },
+  {
+    "id": "firebase.error.overriddenBySet",
+    "defaultMessage": "La transacción fue anulada por un conjunto subsecuente"
+  },
+  {
+    "id": "firebase.error.permissionDenied",
+    "defaultMessage": "Este cliente no tiene permisos para realizar esta operación"
+  },
+  {
+    "id": "firebase.error.preempted",
+    "defaultMessage": "Las credenciales de autenticación activas o pendientes fueron reemplazadas por otro llamado de autenticación"
+  },
+  {
+    "id": "firebase.error.providerError",
+    "defaultMessage": "Se ha producido un error de proveedor de terceros."
+  },
+  {
+    "id": "firebase.error.unavailable",
+    "defaultMessage": "El servicio no está disponible."
+  },
+  {
+    "id": "firebase.error.unknownError",
+    "defaultMessage": "Ha ocurrido un error desconocido."
+  },
+  {
+    "id": "firebase.error.userCancelled",
+    "defaultMessage": "El usuario cancel la autenticación."
+  },
+  {
+    "id": "firebase.error.userCodeException",
+    "defaultMessage": "Una excepción ha ocurrido en el código de usuario."
+  },
+  {
+    "id": "firebase.error.userDoesNotExist",
+    "defaultMessage": "La cuenta de usuario especificada no existe."
+  },
+  {
+    "id": "firebase.error.writeCanceled",
+    "defaultMessage": "La escritura fue cancelada localmente."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Despedir."
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "Inicio de sesión correo electrónico / Regístrese"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Recuperación de contraseña de correo electrónico."
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "tu@email.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Iniciar sesión en Facebook"
+  },
+  {
+    "id": "firebase.login.loginButton",
+    "defaultMessage": "Iniciar sesión."
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Olvido su contraseña?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "contraseña"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "Correo electrónico de recuperación ha sido enviado."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Restablecer contraseña"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Regístrese"
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Cargar mas"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Hola"
+  },
+  {
+    "id": "firebase.profile.logout",
+    "defaultMessage": "Cerrar sesion"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Ultimos {limitToLast} Usuarios Conectados."
+  },
+  {
     "id": "footer.madeByHtml",
     "defaultMessage": "Hecho por <a href=\"https://twitter.com/steida\">steida</a>"
   },
