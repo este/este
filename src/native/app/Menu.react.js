@@ -26,13 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 10,
     color: '#fff'
-  },
-  header: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginBottom: 10
   }
 });
 

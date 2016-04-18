@@ -1,7 +1,7 @@
 {
   "parser"  : "babel-eslint",
   "plugins": [
-    "import"
+    "react-native"
   ],
   "extends" : ["airbnb"],
   "rules": {
@@ -14,14 +14,11 @@
     "no-nested-ternary": 0, // It's nice for JSX.
     "no-param-reassign": 0, // We love param reassignment. Naming is hard.
     "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
-    // eslint-plugin-import
-    "import/no-unresolved": [2, {"commonjs": true}],
-    "import/named": 2,
-    "import/default": 2,
-    "import/namespace": 2,
-    "import/export": 2,
-    // Overide Stateless
-    "react/prefer-stateless-function": 0
+    "react/prefer-stateless-function": 0, // We are not there yet.
+    "react/require-render-return": 0, // yannickcr/eslint-plugin-react/issues/548
+    // React Native.
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
   },
   "globals": {
     "after": false,
