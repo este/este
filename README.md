@@ -10,6 +10,9 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
+#### Další školení JavaScriptu, Reactu, Este.js se koná 5. a 6. května v Praze. Cena je 9800 Kč, pokud se registrujete nyní. Pište na daniel@steigerwald.cz.
+
+
 ## Techniques
 
 - Truly universal architecture
