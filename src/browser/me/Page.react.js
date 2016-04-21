@@ -3,15 +3,12 @@ import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 const messages = defineMessages({
-  title: {
-    defaultMessage: 'Me',
-    id: 'me.page.title'
-  },
   welcome: {
     defaultMessage: 'Hi {email}. This is your secret page.',
     id: 'me.page.welcome'
@@ -36,7 +33,7 @@ class Page extends Component {
 
   render() {
     const { children, intl, viewer: { email } } = this.props;
-    const title = intl.formatMessage(messages.title);
+    const title = intl.formatMessage(linksMessages.me);
 
     return (
       <div className="me-page">

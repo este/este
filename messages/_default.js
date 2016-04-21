@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Logout"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Login"
-  },
-  {
     "id": "firebase.error.authenticationProviderDisabled",
     "defaultMessage": "The requested authentication provider is disabled for this Firebase."
   },
@@ -249,16 +245,8 @@ export default [
     "defaultMessage": "Este App\n      Press CMD+R to reload\n      Press CMD+D for debug menu"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Home"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "react-intl demonstration"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Intl"
   },
   {
     "id": "intl.page.unreadCount",
@@ -271,10 +259,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Settings"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Me"
   },
   {
     "id": "me.page.welcome",
@@ -323,10 +307,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "What needs to be done?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Todos"
   },
   {
     "id": "todos.todos.empty",

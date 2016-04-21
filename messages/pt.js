@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Sair"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Usuário"
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "desenvolvido por <a href=\"https://twitter.com/steida\">steida</a>"
   },
@@ -81,16 +77,8 @@ export default [
     "defaultMessage": "Este App\n      Pressione CMD+R para recarregar\n      Pressione CMD+D para depurar menu"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Início"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "Demonstração de react-intl"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Idioma"
   },
   {
     "id": "intl.page.unreadCount",
@@ -103,10 +91,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Configurações"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Eu"
   },
   {
     "id": "me.page.welcome",
@@ -155,10 +139,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "O que precisa ser feito?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Tarefas"
   },
   {
     "id": "todos.todos.empty",

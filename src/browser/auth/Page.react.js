@@ -2,14 +2,8 @@ import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import Login from './Login.react';
 import React, { PropTypes } from 'react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
-
-const messages = defineMessages({
-  title: {
-    defaultMessage: 'Login',
-    id: 'auth.page.title'
-  }
-});
+import linksMessages from '../../common/app/linksMessages';
+import { injectIntl, intlShape } from 'react-intl';
 
 class Page extends Component {
 
@@ -20,8 +14,7 @@ class Page extends Component {
 
   render() {
     const { intl, location } = this.props;
-    const title = intl.formatMessage(messages.title);
-
+    const title = intl.formatMessage(linksMessages.login);
     return (
       <div className="login-page">
         <Helmet title={title} />

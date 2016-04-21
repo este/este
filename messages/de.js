@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Abmelden"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Anmeldung"
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "Umgesetzt von <a href=\"https://twitter.com/steida\">steida</a>"
   },
@@ -81,16 +77,8 @@ export default [
     "defaultMessage": "Este App\n      CMD+R drücken um zu Aktualisieren\n      CMD+D drücken um das Debugging-Menu zu öffnen"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Home"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "Demo von react-intl"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Übersetzung"
   },
   {
     "id": "intl.page.unreadCount",
@@ -103,10 +91,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Einstellungen"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Ich"
   },
   {
     "id": "me.page.welcome",
@@ -155,10 +139,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "Was müssen Sie tun?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Aufgaben"
   },
   {
     "id": "todos.todos.empty",

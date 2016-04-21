@@ -1,6 +1,7 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React from 'react';
+import linksMessages from '../../common/app/linksMessages';
 import { FormattedHTMLMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 
 const messages = defineMessages({
@@ -12,10 +13,6 @@ const messages = defineMessages({
       </p>
     `,
     id: 'home.intro'
-  },
-  title: {
-    defaultMessage: 'Home',
-    id: 'home.title'
   }
 });
 
@@ -27,7 +24,7 @@ class Page extends Component {
 
   render() {
     const { intl } = this.props;
-    const title = intl.formatMessage(messages.title);
+    const title = intl.formatMessage(linksMessages.home);
 
     return (
       <div className="home-page">

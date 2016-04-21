@@ -4,14 +4,8 @@ import Helmet from 'react-helmet';
 import NewTodo from './NewTodo.react';
 import React from 'react';
 import Todos from './Todos.react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
-
-const messages = defineMessages({
-  title: {
-    defaultMessage: 'Todos',
-    id: 'todos.page.title'
-  }
-});
+import linksMessages from '../../common/app/linksMessages';
+import { injectIntl, intlShape } from 'react-intl';
 
 class Page extends Component {
 
@@ -21,7 +15,7 @@ class Page extends Component {
 
   render() {
     const { intl } = this.props;
-    const title = intl.formatMessage(messages.title);
+    const title = intl.formatMessage(linksMessages.todos);
 
     return (
       <div className="todos-page">
