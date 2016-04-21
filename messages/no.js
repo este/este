@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Logg ut"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Logg inn"
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "laget av <a href=\"https://twitter.com/steida\">steida</a>"
   },
@@ -81,16 +77,8 @@ export default [
     "defaultMessage": "Este App\n      Trykk CMD+R for oppdatering\n      Trykk CMD+D for debugmeny"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Hjem"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "react-intl demonstrasjon"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Språk"
   },
   {
     "id": "intl.page.unreadCount",
@@ -103,10 +91,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Innstillinger"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Meg"
   },
   {
     "id": "me.page.welcome",
@@ -155,10 +139,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "Hva trengs å gjøres?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Gjøremål"
   },
   {
     "id": "todos.todos.empty",

@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Déconnexion"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Authentification"
-  },
-  {
     "id": "firebase.error.authenticationProviderDisabled",
     "defaultMessage": "Le fournisseur d'authentification est désactivé pour cette Firebase."
   },
@@ -249,16 +245,8 @@ export default [
     "defaultMessage": "Este App\n      Pressez CMD+R pour rafraîchir\n      Pressez CMD+D pour le menu de débogage"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Accueil"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "Démonstration de react-intl"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Traduction"
   },
   {
     "id": "intl.page.unreadCount",
@@ -271,10 +259,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Paramètres"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Moi"
   },
   {
     "id": "me.page.welcome",
@@ -323,10 +307,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "Qu'avez-vous à faire ?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Tâches"
   },
   {
     "id": "todos.todos.empty",

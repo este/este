@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Deconexiune"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Autentificare"
-  },
-  {
     "id": "firebase.error.authenticationProviderDisabled",
     "defaultMessage": "Furnizorul de autentificare solicitat este dezactivat pentru acest Firebase."
   },
@@ -249,16 +245,8 @@ export default [
     "defaultMessage": "Este App\n      Apăsați CMD+R pentru refresh\n      Apăsați CMD+D pentru meniul de debug"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Acasă"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "Demonstrație de react-intl"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Traducere"
   },
   {
     "id": "intl.page.unreadCount",
@@ -271,10 +259,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Parametri"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Eu"
   },
   {
     "id": "me.page.welcome",
@@ -323,10 +307,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "Ce trebuie să faceți ?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Sarcini"
   },
   {
     "id": "todos.todos.empty",

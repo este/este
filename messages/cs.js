@@ -65,10 +65,6 @@ export default [
     "defaultMessage": "Odlásit se"
   },
   {
-    "id": "auth.page.title",
-    "defaultMessage": "Přihlášení"
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">steida</a>"
   },
@@ -83,16 +79,8 @@ export default [
     "defaultMessage": "Este App\n      Stiskni CMD+R pro znovunačtení\n      Stiskni CMD+D pro debug menu"
   },
   {
-    "id": "home.title",
-    "defaultMessage": "Úvod"
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "ukázka react-intl"
-  },
-  {
-    "id": "intl.page.title",
-    "defaultMessage": "Lokalizace"
   },
   {
     "id": "intl.page.unreadCount",
@@ -105,10 +93,6 @@ export default [
   {
     "id": "me.page.linkToSettings",
     "defaultMessage": "Nastavení"
-  },
-  {
-    "id": "me.page.title",
-    "defaultMessage": "Já"
   },
   {
     "id": "me.page.welcome",
@@ -157,10 +141,6 @@ export default [
   {
     "id": "todos.newTodo.placeholder",
     "defaultMessage": "Co je třeba udělat?"
-  },
-  {
-    "id": "todos.page.title",
-    "defaultMessage": "Úkoly"
   },
   {
     "id": "todos.todos.empty",
