@@ -14,7 +14,7 @@ const messages = defineMessages({
   }
 });
 
-export default class Page extends Component {
+export default class HomePage extends Component {
 
   render() {
     return (

@@ -5,7 +5,7 @@ import React, { View } from 'react-native';
 import Todos from './Todos.react';
 import appStyles from '../app/styles';
 
-export default class Page extends Component {
+export default class TodosPage extends Component {
 
   render() {
     return (

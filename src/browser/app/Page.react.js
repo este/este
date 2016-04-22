@@ -20,7 +20,7 @@ const bootstrap4Metas = [
   }
 ];
 
-class App extends Component {
+class Page extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -57,8 +57,8 @@ class App extends Component {
 
 }
 
-App = start(App);
+Page = start(Page);
 
 export default connect(state => ({
   currentLocale: state.intl.currentLocale
-}))(App);
+}))(Page);

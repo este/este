@@ -27,7 +27,7 @@ const messages = defineMessages({
   }
 });
 
-class Page extends Component {
+class IntlPage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired
@@ -74,4 +74,4 @@ class Page extends Component {
 
 }
 
-export default injectIntl(Page);
+export default injectIntl(IntlPage);

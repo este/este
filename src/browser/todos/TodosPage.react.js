@@ -7,7 +7,7 @@ import Todos from './Todos.react';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl, intlShape } from 'react-intl';
 
-class Page extends Component {
+class TodosPage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired
@@ -29,4 +29,4 @@ class Page extends Component {
 
 }
 
-export default injectIntl(Page);
+export default injectIntl(TodosPage);

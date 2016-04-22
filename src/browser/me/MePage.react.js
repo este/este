@@ -23,7 +23,7 @@ const messages = defineMessages({
   },
 });
 
-class Page extends Component {
+class MePage extends Component {
 
   static propTypes = {
     children: PropTypes.object,
@@ -58,8 +58,8 @@ class Page extends Component {
 
 }
 
-Page = injectIntl(Page);
+MePage = injectIntl(MePage);
 
 export default connect(state => ({
   viewer: state.users.viewer
-}))(Page);
+}))(MePage);
