@@ -8,14 +8,15 @@
     // Soft some rules.
     "comma-dangle": 0, // Nobody cares about commas.
     "default-case": 0, // Required default case is nonsense.
+    "global-require": 0, // Used by webpack-isomorphic-tools and React Native.
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
     "no-confusing-arrow": 0, // No, this is not confusing.
     "no-floating-decimal": 0, // .5 is just fine.
     "no-nested-ternary": 0, // It's nice for JSX.
     "no-param-reassign": 0, // We love param reassignment. Naming is hard.
     "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
+    "no-underscore-dangle": 0, // It's classic pattern to denote private props.
     "react/prefer-stateless-function": 0, // We are not there yet.
-    "react/require-render-return": 0, // yannickcr/eslint-plugin-react/issues/548
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
@@ -28,19 +29,5 @@
     "describe": false,
     "it": false,
     "require": false
-  },
-  "settings": {
-    "import/ignore": [
-      "node_modules",
-      "\\.json$"
-    ],
-    "import/parser": "babel-eslint",
-    "import/resolve": {
-      "extensions": [
-        ".js",
-        ".jsx",
-        ".json"
-      ]
-    }
   }
 }
