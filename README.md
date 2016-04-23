@@ -4,7 +4,6 @@
 [![Join the chat at https://gitter.im/este/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/este/este)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 [![GitHub license](https://img.shields.io/github/license/este/este.svg)](https://github.com/este/este/blob/master/LICENSE)
-[![Deploy](https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg)](https://heroku.com/deploy)
 
 > Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
@@ -89,11 +88,11 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp mocha-watch` continuous test running for TDD
 - `gulp eslint` eslint
 - `gulp eslint --fix` fix fixable eslint issues
-- `gulp extractDefaultMessages` extract string messages for translation
+- `gulp extractDefaultMessages` extract messages for translation
 
 ## Production Tasks
 
-- `gulp build -p` build app for production, for example for [Heroku](https://dashboard.heroku.com/)
+- `gulp build -p` build app for production
 - `npm test` run all checks and tests
 - `node src/server` start app, remember to set NODE_ENV and SERVER_URL
 - `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
