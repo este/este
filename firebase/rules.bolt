@@ -8,6 +8,10 @@ isViewer(uid) { isSignedIn() && auth.uid == uid }
 
 // Types
 
+type ShortString extends String {
+  validate() { this.length <= 100 }
+}
+
 type ShortRequiredString extends String {
   // Required form field with maxLength="100".
   validate() { this.length > 0 && this.length <= 100 }
@@ -15,6 +19,18 @@ type ShortRequiredString extends String {
 
 type LongString extends String {
   validate() { this.length <= 1000 }
+}
+
+type LongRequiredString extends String {
+  validate() { this.length > 0 && this.length <= 1000 }
+}
+
+type ExtraLongString extends String {
+  validate() { this.length <= 10000 }
+}
+
+type ExtraLongRequiredString extends String {
+  validate() { this.length > 0 && this.length <= 10000 }
 }
 
 type HelloWorld {
