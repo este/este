@@ -10,7 +10,7 @@ const messages = defineMessages({
   }
 });
 
-class Settings extends Component {
+class SettingsPage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired
@@ -32,4 +32,4 @@ class Settings extends Component {
 
 }
 
-export default injectIntl(Settings);
+export default injectIntl(SettingsPage);

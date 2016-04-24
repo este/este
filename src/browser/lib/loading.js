@@ -2,7 +2,7 @@
 
 import Component from 'react-pure-render/component';
 import Loading from './Loading.react';
-import NotFound from '../notfound/Page.react';
+import NotFound from '../notfound/NotFoundPage.react';
 import React from 'react';
 
 export default function loading(Wrapped, propsToCheck, customLoading) {

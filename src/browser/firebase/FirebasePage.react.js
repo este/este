@@ -16,7 +16,7 @@ const messages = defineMessages({
   }
 });
 
-class Page extends Component {
+class FirebasePage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
@@ -50,8 +50,8 @@ class Page extends Component {
 
 }
 
-Page = injectIntl(Page);
+FirebasePage = injectIntl(FirebasePage);
 
 export default connect(state => ({
   viewer: state.users.viewer
-}))(Page);
+}))(FirebasePage);

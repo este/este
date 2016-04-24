@@ -1,14 +1,14 @@
-import App from './app/App.react';
-import Auth from './auth/Page.react';
-import Firebase from './firebase/Page.react';
-import Home from './home/Page.react';
-import Intl from './intl/Page.react';
-import Me from './me/Page.react';
-import NotFound from './notfound/Page.react';
-import Profile from './me/Profile.react';
+import App from './app/Page.react';
+import Auth from './auth/AuthPage.react';
+import Firebase from './firebase/FirebasePage.react';
+import Home from './home/HomePage.react';
+import Intl from './intl/IntlPage.react';
+import Me from './me/MePage.react';
+import NotFound from './notfound/NotFoundPage.react';
+import Profile from './me/ProfilePage.react';
 import React from 'react';
-import Settings from './me/Settings.react';
-import Todos from './todos/Page.react';
+import Settings from './me/SettingsPage.react';
+import Todos from './todos/TodosPage.react';
 import { IndexRoute, Route } from 'react-router';
 
 export default function createRoutes(getState) {

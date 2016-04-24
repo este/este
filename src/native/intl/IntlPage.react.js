@@ -4,7 +4,7 @@ import React, { PropTypes, Text, View } from 'react-native';
 import appStyles from '../app/styles';
 import { connect } from 'react-redux';
 
-class Page extends Component {
+class IntlPage extends Component {
 
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,
@@ -36,5 +36,4 @@ class Page extends Component {
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
   locales: state.intl.locales
-}), intlActions)(Page);
-
+}), intlActions)(IntlPage);

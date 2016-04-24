@@ -1,6 +1,6 @@
-import Home from './home/Page.react';
-import Intl from './intl/Page.react';
-import Todos from './todos/Page.react';
+import Home from './home/HomePage.react';
+import Intl from './intl/IntlPage.react';
+import Todos from './todos/TodosPage.react';
 
 export default {
   home: {

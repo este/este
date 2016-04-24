@@ -10,7 +10,7 @@ const messages = defineMessages({
   }
 });
 
-class Profile extends Component {
+class ProfilePage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired
@@ -32,4 +32,4 @@ class Profile extends Component {
 
 }
 
-export default injectIntl(Profile);
+export default injectIntl(ProfilePage);

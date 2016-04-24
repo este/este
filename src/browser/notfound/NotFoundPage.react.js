@@ -23,7 +23,7 @@ const messages = defineMessages({
   }
 });
 
-class Page extends Component {
+class NotFoundPage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired
@@ -51,4 +51,4 @@ class Page extends Component {
 
 }
 
-export default injectIntl(Page);
+export default injectIntl(NotFoundPage);
