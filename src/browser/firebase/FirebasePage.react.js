@@ -1,4 +1,4 @@
-import './Page.scss';
+import './FirebasePage.scss';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import Login from './Login.react';

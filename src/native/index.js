@@ -1,5 +1,5 @@
 import 'react-native-browser-polyfill';
-import App from './app/Page.react';
+import App from './app/AppPage.react';
 import Component from 'react-pure-render/component';
 import React, { AppRegistry, Platform } from 'react-native';
 import config from './config';
