@@ -7,10 +7,12 @@ import gulp from 'gulp';
 import gulpIf from 'gulp-if';
 import mochaRunCreator from './test/mochaRunCreator';
 import path from 'path';
+import realFavicon from 'gulp-real-favicon';
 import runSequence from 'run-sequence';
 import shell from 'gulp-shell';
 import webpackBuild from './webpack/build';
 import yargs from 'yargs';
+import { injectFavicon } from './favicon/favicon';
 
 const args = yargs
   .alias('p', 'production')
@@ -228,4 +230,56 @@ gulp.task('extractDefaultMessages', () => {
     const es6code = `${eslint}\nexport default ${json};\n`;
     fs.writeFile('messages/_default.js', es6code);
   });
+});
+
+gulp.task('favicon', done => {
+  runSequence('generate-favicon', 'inject-favicon', done);
+});
+
+gulp.task('generate-favicon', done => {
+  realFavicon.generateFavicon({
+    masterPicture: './favicon/icon.png',
+    dest: './build/icons',
+    iconsPath: '/assets/icons',
+    design: {
+      ios: {
+        pictureAspect: 'backgroundAndMargin',
+        backgroundColor: '#ffffff',
+        margin: '28%'
+      },
+      desktopBrowser: {},
+      windows: {
+        pictureAspect: 'noChange',
+        backgroundColor: '#2d89ef',
+        onConflict: 'override'
+      },
+      androidChrome: {
+        pictureAspect: 'noChange',
+        themeColor: '#ffffff',
+        manifest: {
+          name: 'este',
+          display: 'browser',
+          orientation: 'notSet',
+          onConflict: 'override',
+          declared: true
+        }
+      },
+      safariPinnedTab: {
+        pictureAspect: 'silhouette',
+        themeColor: '#5bbad5'
+      }
+    },
+    settings: {
+      scalingAlgorithm: 'Mitchell',
+      errorOnImageTooSmall: false
+    },
+    markupFile: './favicon/faviconData.json'
+  }, done);
+});
+
+gulp.task('inject-favicon', () => {
+  const content = `/* eslint-disable quote-props, quotes */
+export default ${JSON.stringify(injectFavicon(), null, 2)};
+`;
+  fs.writeFileSync('./src/browser/app/favicon.js', content);
 });
