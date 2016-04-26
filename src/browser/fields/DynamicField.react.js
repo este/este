@@ -1,5 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 import { fields } from '../../common/lib/redux-fields';
 
 class DynamicField extends Component {
@@ -18,11 +19,10 @@ class DynamicField extends Component {
     const { fields } = this.props;
 
     return (
-      <div className="dynamic-field">
+      <div className={classnames('dynamic-field', { 'is-dirty': this.isDirty() })}>
         <input
           {...fields.name}
           maxLength={100}
-          style={{ opacity: this.isDirty() ? 1 : .5 }}
           type="text"
         />
       </div>

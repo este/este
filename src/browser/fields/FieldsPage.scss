@@ -22,6 +22,14 @@
   }
   .dynamic-field {
     display: inline-block;
+    input {
+      border: solid 1px #ccc;
+    }
+    &.is-dirty {
+      input {
+        border: solid 1px red;
+      }
+    }
   }
   button {
     font-size: .75em;
