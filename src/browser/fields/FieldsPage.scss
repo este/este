@@ -1,0 +1,33 @@
+.fields-page {
+  form {
+    max-width: 42em;
+  }
+  h3 {
+    margin: .5em 0;
+  }
+  fieldset {
+    border-radius: .5em;
+  }
+  label {
+    display: inline-block;
+    margin: .25em 1em 0 0;
+  }
+  input {
+    font-size: .75em;
+    margin: .25em;
+    padding: .25em;
+  }
+  input[type="text"] {
+    width: 16em;
+  }
+  .dynamic-field {
+    display: inline-block;
+  }
+  button {
+    font-size: .75em;
+    margin-top: 1em !important;
+  }
+  pre {
+    font-size: .625em;
+  }
+}

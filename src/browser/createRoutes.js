@@ -1,5 +1,6 @@
 import App from './app/AppPage.react';
 import Auth from './auth/AuthPage.react';
+import Fields from './fields/FieldsPage.react';
 import Firebase from './firebase/FirebasePage.react';
 import Home from './home/HomePage.react';
 import Intl from './intl/IntlPage.react';
@@ -27,6 +28,7 @@ export default function createRoutes(getState) {
       <IndexRoute component={Home} />
       <Route component={Auth} path="login" />
       <Route component={Intl} path="intl" />
+      <Route component={Fields} path="fields" />
       <Route component={Firebase} path="firebase" />
       <Route component={Me} onEnter={requireAuth} path="me">
         <Route component={Profile} path="profile" />

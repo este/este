@@ -33,6 +33,11 @@ class Header extends Component {
             </Link>
           </li>
           <li>
+            <Link activeClassName="active" to="/fields">
+              <FormattedMessage {...linksMessages.fields} />
+            </Link>
+          </li>
+          <li>
             <Link activeClassName="active" to="/intl">
               <FormattedMessage {...linksMessages.intl} />
             </Link>
