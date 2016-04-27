@@ -146,16 +146,16 @@ class Login extends Component {
               <legend><FormattedMessage {...messages.emailPasswordRecovery} /></legend>
             }
             <input
+              {...fields.email}
               maxLength="100"
               placeholder={emailPlaceholder}
-              {...fields.email}
             />
             {!forgetPasswordIsShown &&
               <input
+                {...fields.password}
                 maxLength="1000"
                 placeholder={passwordPlaceholder}
                 type="password"
-                {...fields.password}
               />
             }
             {!forgetPasswordIsShown ?

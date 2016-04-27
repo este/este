@@ -79,16 +79,16 @@ class Login extends Component {
               <FormattedMessage {...messages.formLegend} />
             </legend>
             <input
+              {...fields.email}
               maxLength="100"
               placeholder={emailPlaceholder}
-              {...fields.email}
             />
             <br />
             <input
+              {...fields.password}
               maxLength="300"
               placeholder={passwordPlaceholder}
               type="password"
-              {...fields.password}
             />
             <br />
             <button type="submit">

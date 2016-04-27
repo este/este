@@ -55,13 +55,13 @@ class NewTodo extends Component {
     return (
       <View style={styles.container}>
         <TextInput
+          {...fields.title}
           maxLength={100} // React Native needs explicit maxLength.
           onEndEditing={this.onTextInputEndEditing}
           onSubmitEditing={this.onSubmitEditing}
           placeholder={placeholder}
           placeholderTextColor={'#cce9f2'}
           style={styles.input}
-          {...fields.title}
         />
       </View>
     );

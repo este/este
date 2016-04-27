@@ -34,12 +34,12 @@ class NewTodo extends Component {
 
     return (
       <input
+        {...fields.title}
         autoFocus
         className="new-todo"
         maxLength={100}
         onKeyDown={this.onInputKeyDown}
         placeholder={placeholder}
-        {...fields.title}
       />
     );
   }
