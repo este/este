@@ -9,7 +9,7 @@ import storageFilter from 'redux-storage-decorator-filter';
 import validate from './validate';
 import { LOGOUT } from './auth/actions';
 import { SET_CURRENT_LOCALE } from './intl/actions';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { createMiddleware as createStorageMiddleware } from 'redux-storage';
 
 const isReactNative =
@@ -20,16 +20,24 @@ const enableLogger =
   process.env.NODE_ENV !== 'production' &&
   process.env.IS_BROWSER || isReactNative;
 
-const enableDevToolsExtension =
-  process.env.NODE_ENV !== 'production' &&
-  process.env.IS_BROWSER && window.devToolsExtension;
-
 // Like redux-thunk with dependency injection.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   next(typeof action === 'function'
     ? action({ ...deps, dispatch, getState })
     : action
   );
+
+// Reset app state on logout, stackoverflow.com/q/35622588/233902.
+const resetOnLogout = reducer => (state, action) => {
+  if (action.type === LOGOUT) {
+    state = {
+      device: initialState.device,
+      intl: initialState.intl,
+      routing: state.routing // Note routing state has to be reused.
+    };
+  }
+  return reducer(state, action);
+};
 
 export default function configureStore(options) {
   const {
@@ -83,23 +91,7 @@ export default function configureStore(options) {
     middleware.push(logger);
   }
 
-  // Reset app state on logout, stackoverflow.com/q/35622588/233902.
-  const resetOnLogout = reducer => (state, action) => {
-    if (action.type === LOGOUT) {
-      state = {
-        device: initialState.device,
-        intl: initialState.intl,
-        routing: state.routing // Note routing state has to be reused.
-      };
-    }
-    return reducer(state, action);
-  };
-
-  // github.com/zalmoxisus/redux-devtools-extension
-  const createStoreWithMiddleware = enableDevToolsExtension
-    ? compose(applyMiddleware(...middleware), window.devToolsExtension())
-    : applyMiddleware(...middleware);
-  const store = createStoreWithMiddleware(createStore)(
+  const store = applyMiddleware(...middleware)(createStore)(
     resetOnLogout(appReducer),
     initialState
   );
