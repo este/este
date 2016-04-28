@@ -28,7 +28,7 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   );
 
 // Reset app state on logout, stackoverflow.com/q/35622588/233902.
-const resetOnLogout = reducer => (state, action) => {
+const resetOnLogout = (reducer, initialState) => (state, action) => {
   if (action.type === LOGOUT) {
     state = {
       device: initialState.device,
@@ -91,9 +91,10 @@ export default function configureStore(options) {
     middleware.push(logger);
   }
 
-  const store = applyMiddleware(...middleware)(createStore)(
-    resetOnLogout(appReducer),
-    initialState
+  const store = createStore(
+    resetOnLogout(appReducer, initialState),
+    initialState,
+    applyMiddleware(...middleware)
   );
 
   // Enable hot reload where available.
@@ -101,7 +102,7 @@ export default function configureStore(options) {
     // Enable Webpack hot module replacement for reducers.
     module.hot.accept('./app/reducer', () => {
       const nextAppReducer = require('./app/reducer');
-      store.replaceReducer(resetOnLogout(nextAppReducer));
+      store.replaceReducer(resetOnLogout(nextAppReducer, initialState));
     });
   }
 
