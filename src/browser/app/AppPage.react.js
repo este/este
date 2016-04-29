@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import start from '../../common/app/start';
 import { connect } from 'react-redux';
+import { locationShape } from 'react-router';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas = [
@@ -25,7 +26,7 @@ class AppPage extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     currentLocale: PropTypes.string.isRequired,
-    location: PropTypes.object.isRequired
+    location: locationShape
   };
 
   render() {

@@ -3,7 +3,7 @@ import Component from 'react-pure-render/component';
 import LoginError from './LoginError.react';
 import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
-import { browserHistory } from 'react-router';
+import { browserHistory, locationShape } from 'react-router';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { focusInvalidField } from '../../common/lib/validation';
@@ -38,7 +38,7 @@ class Login extends Component {
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
-    location: PropTypes.object.isRequired,
+    location: locationShape,
     login: PropTypes.func.isRequired
   };
 

@@ -1,15 +1,16 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import Login from './Login.react';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl, intlShape } from 'react-intl';
+import { locationShape } from 'react-router';
 
 class AuthPage extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
-    location: PropTypes.object
+    location: locationShape
   };
 
   render() {
