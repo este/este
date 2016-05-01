@@ -23,8 +23,7 @@ export default defineMessages({
     id: 'firebase.error.INVALID_USER'
   },
   NETWORK_ERROR: {
-    defaultMessage: `An error occurred while attempting to contact the
-      authentication server.`,
+    defaultMessage: 'The operation could not be performed due to a network error.',
     id: 'firebase.error.NETWORK_ERROR'
   }
 });

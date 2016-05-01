@@ -66,7 +66,7 @@ export default [
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",

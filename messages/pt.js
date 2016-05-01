@@ -65,8 +65,92 @@ export default [
     "defaultMessage": "Sair"
   },
   {
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "Novo usuário não pode ser criado, o email informado já foi utilizado."
+  },
+  {
+    "id": "firebase.error.INVALID_EMAIL",
+    "defaultMessage": "Email informado não é válido."
+  },
+  {
+    "id": "firebase.error.INVALID_PASSWORD",
+    "defaultMessage": "A senha do usuário específico está incorreta."
+  },
+  {
+    "id": "firebase.error.INVALID_USER",
+    "defaultMessage": "Usuário especificado não existe."
+  },
+  {
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "Operação não realizada devido a erro de conexão."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Destituir"
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "Email do usuário / Acessar"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Email para recuperação de senha."
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "endereço@email.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Login do Facebook"
+  },
+  {
+    "id": "firebase.login.loginButton",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Esqueceu sua senha?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "senha"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "Email de recuperação foi enviado."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Restaurar Senha"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Acesso"
+  },
+  {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "Erro desconhecido."
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Saiba mais"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Olá"
+  },
+  {
+    "id": "firebase.profile.logout",
+    "defaultMessage": "Sair"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Últimos {limitToLast} usuários conectados"
+  },
+  {
     "id": "footer.madeByHtml",
-    "defaultMessage": "desenvolvido por <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "desenvolvido por <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",

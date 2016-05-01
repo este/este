@@ -65,8 +65,92 @@ export default [
     "defaultMessage": "Cerrar Sesión"
   },
   {
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "La nueva cuenta de usuario no puede ser creada porque la dirección de correo electrónico especificada ya se encuentra en uso."
+  },
+  {
+    "id": "firebase.error.INVALID_EMAIL",
+    "defaultMessage": "La dirección de correo especificada no es una dirección de correo válida."
+  },
+  {
+    "id": "firebase.error.INVALID_PASSWORD",
+    "defaultMessage": "La contraseña de la cuenta de usuario especificada no es válida."
+  },
+  {
+    "id": "firebase.error.INVALID_USER",
+    "defaultMessage": "La cuenta de usuario especificada no existe."
+  },
+  {
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "La operación no pudo ser realizada debido a un error de red."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Despedir"
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "Inicio de sesión correo electrónico / Regístrese"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Recuperación de contraseña de correo electrónico."
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "tu@email.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Iniciar sesión en Facebook"
+  },
+  {
+    "id": "firebase.login.loginButton",
+    "defaultMessage": "Iniciar sesión"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Olvido su contraseña?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "contraseña"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "Correo electrónico de recuperación ha sido enviado."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Restablecer contraseña"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Regístrese"
+  },
+  {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "Ha ocurrido un error desconocido."
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Cargar mas"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Hola"
+  },
+  {
+    "id": "firebase.profile.logout",
+    "defaultMessage": "Cerrar sesion"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Ultimos {limitToLast} Usuarios Conectados"
+  },
+  {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Hecho por <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "Hecho por <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",

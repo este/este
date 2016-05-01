@@ -1,6 +1,42 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Delete"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Edit"
+  },
+  {
+    "id": "app.buttons.login",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Logout"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Save"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Are you sure?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "You have unsaved changes. Are you sure?"
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Fields"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -65,112 +101,32 @@ export default [
     "defaultMessage": "Logout"
   },
   {
-    "id": "firebase.error.authenticationProviderDisabled",
-    "defaultMessage": "The requested authentication provider is disabled for this Firebase."
+    "id": "fields.page.h2",
+    "defaultMessage": "redux-fields demonstration"
   },
   {
-    "id": "firebase.error.dataStale",
-    "defaultMessage": "Internal use."
+    "id": "fields.page.p",
+    "defaultMessage": "Something like redux-form but simplified."
   },
   {
-    "id": "firebase.error.deniedByUser",
-    "defaultMessage": "The user did not authorize the application."
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "The new user account cannot be created because the\n      specified email address is already in use."
   },
   {
-    "id": "firebase.error.disconnected",
-    "defaultMessage": "The operation had to be aborted due to a network disconnect."
-  },
-  {
-    "id": "firebase.error.emailTaken",
-    "defaultMessage": "The new user account cannot be created because the specified email address is already in use."
-  },
-  {
-    "id": "firebase.error.expiredToken",
-    "defaultMessage": "The supplied auth token has expired."
-  },
-  {
-    "id": "firebase.error.invalidAuthArguments",
-    "defaultMessage": "The specified credentials are malformed or incomplete."
-  },
-  {
-    "id": "firebase.error.invalidConfiguration",
-    "defaultMessage": "The requested authentication provider is misconfigured, and the request cannot complete."
-  },
-  {
-    "id": "firebase.error.invalidCredentials",
-    "defaultMessage": "The specified authentication credentials are invalid."
-  },
-  {
-    "id": "firebase.error.invalidEmail",
+    "id": "firebase.error.INVALID_EMAIL",
     "defaultMessage": "The specified email is not a valid email."
   },
   {
-    "id": "firebase.error.invalidPassword",
+    "id": "firebase.error.INVALID_PASSWORD",
     "defaultMessage": "The specified user account password is incorrect."
   },
   {
-    "id": "firebase.error.invalidProvider",
-    "defaultMessage": "The requested authentication provider does not exist."
-  },
-  {
-    "id": "firebase.error.invalidToken",
-    "defaultMessage": "The specified authentication token is invalid."
-  },
-  {
-    "id": "firebase.error.limitsExceeded",
-    "defaultMessage": "Limits exceeded."
-  },
-  {
-    "id": "firebase.error.maxRetries",
-    "defaultMessage": "The transaction had too many retries."
-  },
-  {
-    "id": "firebase.error.networkError",
-    "defaultMessage": "The operation could not be performed due to a network error."
-  },
-  {
-    "id": "firebase.error.operationFailed",
-    "defaultMessage": "The server indicated that this operation failed."
-  },
-  {
-    "id": "firebase.error.overriddenBySet",
-    "defaultMessage": "The transaction was overridden by a subsequent set."
-  },
-  {
-    "id": "firebase.error.permissionDenied",
-    "defaultMessage": "This client does not have permission to perform this operation."
-  },
-  {
-    "id": "firebase.error.preempted",
-    "defaultMessage": "The active or pending auth credentials were superseded by another call to auth."
-  },
-  {
-    "id": "firebase.error.providerError",
-    "defaultMessage": "A third-party provider error occurred."
-  },
-  {
-    "id": "firebase.error.unavailable",
-    "defaultMessage": "The service is unavailable."
-  },
-  {
-    "id": "firebase.error.unknownError",
-    "defaultMessage": "An unknown error occurred."
-  },
-  {
-    "id": "firebase.error.userCancelled",
-    "defaultMessage": "The user cancelled authentication."
-  },
-  {
-    "id": "firebase.error.userCodeException",
-    "defaultMessage": "An exception occurred in user code."
-  },
-  {
-    "id": "firebase.error.userDoesNotExist",
+    "id": "firebase.error.INVALID_USER",
     "defaultMessage": "The specified user account does not exist."
   },
   {
-    "id": "firebase.error.writeCanceled",
-    "defaultMessage": "The write was canceled locally."
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "The operation could not be performed due to a network error."
   },
   {
     "id": "firebase.login.dismiss",
@@ -217,6 +173,10 @@ export default [
     "defaultMessage": "Sign Up"
   },
   {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "An unknown error occurred."
+  },
+  {
     "id": "firebase.page.loadMore",
     "defaultMessage": "Load more"
   },
@@ -234,11 +194,11 @@ export default [
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "made by <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "Made with love by <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Ahoy, this is\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
+    "defaultMessage": "<p>\n        Ahoy, this is the\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
   },
   {
     "id": "home.native.intro",

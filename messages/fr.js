@@ -1,6 +1,42 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Annuler"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Supprimer"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editer"
+  },
+  {
+    "id": "app.buttons.login",
+    "defaultMessage": "Connexion"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Déconnexion"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Enregistrer"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Etes-vous sûr ?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Vous avez effectué des modifications. Etes-vous sûr ?"
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Champs"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -65,124 +101,44 @@ export default [
     "defaultMessage": "Déconnexion"
   },
   {
-    "id": "firebase.error.authenticationProviderDisabled",
-    "defaultMessage": "Le fournisseur d'authentification est désactivé pour cette Firebase."
+    "id": "fields.page.h2",
+    "defaultMessage": "Démonstration de redux-fields"
   },
   {
-    "id": "firebase.error.dataStale",
-    "defaultMessage": "Usage interne."
+    "id": "fields.page.p",
+    "defaultMessage": "Comme redux-fields mais simplifié."
   },
   {
-    "id": "firebase.error.deniedByUser",
-    "defaultMessage": "L'utilisateur n'a pas autorisé cette application."
-  },
-  {
-    "id": "firebase.error.disconnected",
-    "defaultMessage": "L'opération a dû être abandonnée à cause d'une déconnexion réseau."
-  },
-  {
-    "id": "firebase.error.emailTaken",
+    "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Le nouveau compte utilisateur ne peut pas être créé car l'email indiqué est déjà utilisé."
   },
   {
-    "id": "firebase.error.expiredToken",
-    "defaultMessage": "Le jeton d'identification fourni a expiré."
-  },
-  {
-    "id": "firebase.error.invalidAuthArguments",
-    "defaultMessage": "Les informations d'identité sont malformées ou incomplètes."
-  },
-  {
-    "id": "firebase.error.invalidConfiguration",
-    "defaultMessage": "Le fournisseur d'identification est mal configuré et la requête ne peut aboutir."
-  },
-  {
-    "id": "firebase.error.invalidCredentials",
-    "defaultMessage": "Les informations d'identification spécifiées sont invalides."
-  },
-  {
-    "id": "firebase.error.invalidEmail",
+    "id": "firebase.error.INVALID_EMAIL",
     "defaultMessage": "L'email spécifié n'est pas valide."
   },
   {
-    "id": "firebase.error.invalidPassword",
+    "id": "firebase.error.INVALID_PASSWORD",
     "defaultMessage": "Le mot de passe du compte utilisateur spécifié est incorrect."
   },
   {
-    "id": "firebase.error.invalidProvider",
-    "defaultMessage": "Le fournisseur d'identification demandé n'existe pas."
-  },
-  {
-    "id": "firebase.error.invalidToken",
-    "defaultMessage": "Le jeton d'identification spécifié est invalide."
-  },
-  {
-    "id": "firebase.error.limitsExceeded",
-    "defaultMessage": "Les limites sont dépassées."
-  },
-  {
-    "id": "firebase.error.maxRetries",
-    "defaultMessage": "La transaction a eu trop d'essais."
-  },
-  {
-    "id": "firebase.error.networkError",
-    "defaultMessage": "L'opération n'a pas abouti à cause d'un problème réseau."
-  },
-  {
-    "id": "firebase.error.operationFailed",
-    "defaultMessage": "Le serveur a indiqué que l'opération a échoué."
-  },
-  {
-    "id": "firebase.error.overriddenBySet",
-    "defaultMessage": "La transaction a été surchargée par un ensemble de données ultérieur."
-  },
-  {
-    "id": "firebase.error.permissionDenied",
-    "defaultMessage": "Ce client n'as pas la permission d'effectuer cette opération."
-  },
-  {
-    "id": "firebase.error.preempted",
-    "defaultMessage": "Les informations d'identification actives ou en cours ont été remplacées par un autre appel d'identité."
-  },
-  {
-    "id": "firebase.error.providerError",
-    "defaultMessage": "Une erreur de fournisseur tiers s'est produite."
-  },
-  {
-    "id": "firebase.error.unavailable",
-    "defaultMessage": "Le service est indisponible."
-  },
-  {
-    "id": "firebase.error.unknownError",
-    "defaultMessage": "Une erreur inconnue s'est produite."
-  },
-  {
-    "id": "firebase.error.userCancelled",
-    "defaultMessage": "L'utilisateur a annulé l'identification."
-  },
-  {
-    "id": "firebase.error.userCodeException",
-    "defaultMessage": "Une exception s'est produite dans le code utilisateur."
-  },
-  {
-    "id": "firebase.error.userDoesNotExist",
+    "id": "firebase.error.INVALID_USER",
     "defaultMessage": "Le compte utilisateur spécifié n'existe pas."
   },
   {
-    "id": "firebase.error.writeCanceled",
-    "defaultMessage": "L'écriture a été annulée localement."
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "Une erreur est survenue lors de la tentative de connexion avec les serveur de authentification."
   },
   {
     "id": "firebase.login.dismiss",
-    "defaultMessage": "Annuler"
+    "defaultMessage": "Abandonner"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Authentification par email / Enregistrement"
+    "defaultMessage": "Connexion par email / S'enregistrer"
   },
   {
     "id": "firebase.login.emailPasswordRecovery",
-    "defaultMessage": "Email Password Recovery"
+    "defaultMessage": "Récupération de mot de passe"
   },
   {
     "id": "firebase.login.emailPlaceholder",
@@ -190,11 +146,11 @@ export default [
   },
   {
     "id": "firebase.login.facebookLogin",
-    "defaultMessage": "Authentification Facebook"
+    "defaultMessage": "Connexion Facebook"
   },
   {
     "id": "firebase.login.loginButton",
-    "defaultMessage": "Authentification"
+    "defaultMessage": "Connexion"
   },
   {
     "id": "firebase.login.passwordForgotten",
@@ -206,7 +162,7 @@ export default [
   },
   {
     "id": "firebase.login.recoveryEmailSent",
-    "defaultMessage": "L'émail de récupération du mot de passe a été envoyé."
+    "defaultMessage": "L'email de récupération du mot de passe a été envoyé."
   },
   {
     "id": "firebase.login.resetPassword",
@@ -214,7 +170,11 @@ export default [
   },
   {
     "id": "firebase.login.signUp",
-    "defaultMessage": "Enregistrement"
+    "defaultMessage": "S'enregistrer"
+  },
+  {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "Une erreur inconnue est survenue."
   },
   {
     "id": "firebase.page.loadMore",
@@ -222,11 +182,11 @@ export default [
   },
   {
     "id": "firebase.profile.greeting",
-    "defaultMessage": "Hi"
+    "defaultMessage": "Bonjour"
   },
   {
     "id": "firebase.profile.logout",
-    "defaultMessage": "Logout"
+    "defaultMessage": "Déconnexion"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",
@@ -234,7 +194,7 @@ export default [
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "réalisé par <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "Réalisé avec amour par <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",

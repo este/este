@@ -65,8 +65,92 @@ export default [
     "defaultMessage": "Logg ut"
   },
   {
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "Den nye brukerkontoen kan ikke bli laget fordi den oppgitte e-postadressen er i bruk allerede."
+  },
+  {
+    "id": "firebase.error.INVALID_EMAIL",
+    "defaultMessage": "Den oppgitte e-postadressen er ikke en gyldig e-postadresse."
+  },
+  {
+    "id": "firebase.error.INVALID_PASSWORD",
+    "defaultMessage": "Det oppgitte passordet for brukerkontoen er feil."
+  },
+  {
+    "id": "firebase.error.INVALID_USER",
+    "defaultMessage": "Den oppgitte brukerkonto finnes ikke."
+  },
+  {
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "Aktiviteten kunne ikke bli utført på grunn av nettverksfeil."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Avslutt"
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "E-post Logg inn / Påmelding"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Gjenopprett passord for E-post"
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "dittnavn@eksempel.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Logg inn med Facebook"
+  },
+  {
+    "id": "firebase.login.loginButton",
+    "defaultMessage": "Logg inn"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Har du glemt passordet?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "passord"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "E-post for gjenoppretting er sendt."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Tilbakestill Passord"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Påmelding"
+  },
+  {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "En annen, ukjent, feil oppstod."
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Last opp mer"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Hei"
+  },
+  {
+    "id": "firebase.profile.logout",
+    "defaultMessage": "Logg ut"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Siste {limitToLast} innloggede brukere"
+  },
+  {
     "id": "footer.madeByHtml",
-    "defaultMessage": "laget av <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "laget av <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",

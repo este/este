@@ -66,7 +66,7 @@ export default [
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Umgesetzt von <a href=\"https://twitter.com/steida\">steida</a>"
+    "defaultMessage": "Umgesetzt von <a href=\"https://twitter.com/steida\">Steida</a>"
   },
   {
     "id": "home.intro",
