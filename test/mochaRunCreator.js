@@ -2,7 +2,7 @@
 
 // Because root .babelrc is configured for react-native (browser users webpack
 // and server has own .babelrc file), we have to require regenerator explicitly.
-import 'regenerator/runtime';
+import 'regenerator-runtime/runtime';
 
 import gulp from 'gulp';
 import gutil from 'gulp-util';
