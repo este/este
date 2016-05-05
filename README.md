@@ -9,9 +9,6 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
-#### Další školení JavaScriptu, Reactu, Este.js se koná 5. a 6. května v Praze. Cena je 9800 Kč, pokud se registrujete nyní. Pište na daniel@steigerwald.cz.
-
-
 ## Techniques
 
 - Truly universal architecture
@@ -24,7 +21,7 @@
 - Functional works (immutability, hot reload, time traveling)
 - Test driven development
 - Advanced performance with pure components
-- Well tuned dev stack
+- Well tuned dev stack (OS X, Linux, Windows)
 - Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined actions
   - email and facebook login
@@ -152,11 +149,9 @@ In the same way as any other React Native project is created via `react-native i
 - [learn-reactjs.com](http://www.learn-reactjs.com)
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
 
-## Notes
+## Support Este development
 
-- Este.js dev stack works on OSX, Linux, and Windows.
-- As a rule of thumb, Este.js supports all evergreen browsers plus the last two major versions of IE.
-- Support Este.js development via Bitcoin - [daniel.steigerwald.cz/#donate-estejs](http://daniel.steigerwald.cz/#donate-estejs)
+<img alt="Support Este development QR code" src="http://i.imgur.com/btUZ0IU.png" width="115" height="115">
 
 ## Credit
 
