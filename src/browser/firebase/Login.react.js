@@ -1,15 +1,16 @@
 import './Login.scss';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
+import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { firebaseActions, firebaseMessages } from '../../common/lib/redux-firebase';
 
 const messages = defineMessages({
-  facebookLogin: {
-    defaultMessage: 'Facebook Login',
-    id: 'firebase.login.facebookLogin'
+  dismiss: {
+    defaultMessage: 'Dismiss',
+    id: 'firebase.login.dismiss'
   },
   emailLoginOrSignUp: {
     defaultMessage: 'Email Login / Sign Up',
@@ -23,21 +24,17 @@ const messages = defineMessages({
     defaultMessage: 'your@email.com',
     id: 'firebase.login.emailPlaceholder'
   },
-  passwordPlaceholder: {
-    defaultMessage: 'password',
-    id: 'firebase.login.passwordPlaceholder'
-  },
-  loginButton: {
-    defaultMessage: 'Login',
-    id: 'firebase.login.loginButton'
-  },
-  signUp: {
-    defaultMessage: 'Sign Up',
-    id: 'firebase.login.signUp'
+  facebookLogin: {
+    defaultMessage: 'Facebook Login',
+    id: 'firebase.login.facebookLogin'
   },
   passwordForgotten: {
     defaultMessage: 'Forgot your password?',
     id: 'firebase.login.passwordForgotten'
+  },
+  passwordPlaceholder: {
+    defaultMessage: 'password',
+    id: 'firebase.login.passwordPlaceholder'
   },
   recoveryEmailSent: {
     defaultMessage: 'Recovery email has been sent.',
@@ -47,9 +44,9 @@ const messages = defineMessages({
     defaultMessage: 'Reset Password',
     id: 'firebase.login.resetPassword'
   },
-  dismiss: {
-    defaultMessage: 'Dismiss',
-    id: 'firebase.login.dismiss'
+  signUp: {
+    defaultMessage: 'Sign Up',
+    id: 'firebase.login.signUp'
   },
   unknownError: {
     defaultMessage: 'An unknown error occurred.',
@@ -161,7 +158,7 @@ class Login extends Component {
             {!forgetPasswordIsShown ?
               <div className="buttons">
                 <button>
-                  <FormattedMessage {...messages.loginButton} />
+                  <FormattedMessage {...buttonsMessages.login} />
                 </button>
                 <button onClick={this.onSignUpClick} type="button">
                   <FormattedMessage {...messages.signUp} />

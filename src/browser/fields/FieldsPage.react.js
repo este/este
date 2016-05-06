@@ -3,6 +3,7 @@ import Component from 'react-pure-render/component';
 import DynamicField from './DynamicField.react.js';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -140,7 +141,9 @@ class FieldsPage extends Component {
               Use checkboxes or custom checkable dynamic fields instead.
             */}
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit">
+                <FormattedMessage {...buttonsMessages.submit} />
+              </button>
             </div>
             <pre>
               {
@@ -180,4 +183,3 @@ FieldsPage = fields(FieldsPage, {
 export default connect(state => ({
   fieldsPageModel: state.reduxFields.get('fieldsPage')
 }))(FieldsPage);
-

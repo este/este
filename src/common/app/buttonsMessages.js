@@ -24,5 +24,9 @@ export default defineMessages({
   save: {
     defaultMessage: 'Save',
     id: 'app.buttons.save'
+  },
+  submit: {
+    defaultMessage: 'Submit',
+    id: 'app.buttons.submit'
   }
 });

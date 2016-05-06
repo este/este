@@ -1,15 +1,9 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import buttonsMessages from '../../common/app/buttonsMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
-
-const messages = defineMessages({
-  logout: {
-    defaultMessage: 'Logout',
-    id: 'auth.logout'
-  }
-});
 
 class Logout extends Component {
 
@@ -23,7 +17,7 @@ class Logout extends Component {
     return (
       <div className="logout">
         <button onClick={logout}>
-          <FormattedMessage {...messages.logout} />
+          <FormattedMessage {...buttonsMessages.logout} />
         </button>
       </div>
     );

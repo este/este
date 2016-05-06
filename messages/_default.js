@@ -25,6 +25,10 @@ export default [
     "defaultMessage": "Save"
   },
   {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Submit"
+  },
+  {
     "id": "app.confirm.areYouSure",
     "defaultMessage": "Are you sure?"
   },
@@ -89,16 +93,8 @@ export default [
     "defaultMessage": "Hint: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Login"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "password"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Logout"
   },
   {
     "id": "fields.page.h2",
@@ -149,10 +145,6 @@ export default [
     "defaultMessage": "Facebook Login"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Login"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Forgot your password?"
   },
@@ -183,10 +175,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Hi"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Logout"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

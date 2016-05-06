@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Anmelden"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Abmelden"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Tipp: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Anmelden"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "Passwort"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Abmelden"
   },
   {
     "id": "footer.madeByHtml",

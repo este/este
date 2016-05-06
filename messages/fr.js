@@ -25,6 +25,10 @@ export default [
     "defaultMessage": "Enregistrer"
   },
   {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Envoyer"
+  },
+  {
     "id": "app.confirm.areYouSure",
     "defaultMessage": "Etes-vous sûr ?"
   },
@@ -89,16 +93,8 @@ export default [
     "defaultMessage": "Conseil: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Authentification"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "mot de passe"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Déconnexion"
   },
   {
     "id": "fields.page.h2",
@@ -106,7 +102,7 @@ export default [
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Comme redux-fields mais simplifié."
+    "defaultMessage": "Comme redux-form mais simplifié."
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -149,10 +145,6 @@ export default [
     "defaultMessage": "Connexion Facebook"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Connexion"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Mot de passe oublié ?"
   },
@@ -183,10 +175,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Bonjour"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Déconnexion"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

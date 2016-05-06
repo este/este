@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Logg inn"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Logg ut"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Hint: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Logg inn"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "passord"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Logg ut"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -105,10 +105,6 @@ export default [
     "defaultMessage": "Logg inn med Facebook"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Logg inn"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Har du glemt passordet?"
   },
@@ -139,10 +135,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Hei"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Logg ut"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

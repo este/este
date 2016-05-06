@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Autentificare"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Deconectare"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Sugestie: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Autentificare"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "parolă"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Deconexiune"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -105,10 +105,6 @@ export default [
     "defaultMessage": "Logare Facebook"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Logare"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Ai uitat parola?"
   },
@@ -139,10 +135,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Salut"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Deconectare"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

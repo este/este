@@ -2,6 +2,7 @@ import './Login.scss';
 import Component from 'react-pure-render/component';
 import LoginError from './LoginError.react';
 import React, { PropTypes } from 'react';
+import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
 import { browserHistory, locationShape } from 'react-router';
 import { connect } from 'react-redux';
@@ -10,25 +11,21 @@ import { focusInvalidField } from '../../common/lib/validation';
 import { login } from '../../common/auth/actions';
 
 const messages = defineMessages({
-  formLegend: {
-    defaultMessage: 'Classic XMLHttpRequest Login',
-    id: 'auth.login.formLegend'
-  },
   emailPlaceholder: {
     defaultMessage: 'your@email.com',
     id: 'auth.login.emailPlaceholder'
   },
-  passwordPlaceholder: {
-    defaultMessage: 'password',
-    id: 'auth.login.passwordPlaceholder'
-  },
-  loginButton: {
-    defaultMessage: 'Login',
-    id: 'auth.login.loginButton'
+  formLegend: {
+    defaultMessage: 'Classic XMLHttpRequest Login',
+    id: 'auth.login.formLegend'
   },
   hint: {
     defaultMessage: 'Hint: pass1',
     id: 'auth.login.hint'
+  },
+  passwordPlaceholder: {
+    defaultMessage: 'password',
+    id: 'auth.login.passwordPlaceholder'
   }
 });
 
@@ -92,7 +89,7 @@ class Login extends Component {
             />
             <br />
             <button type="submit">
-              <FormattedMessage {...messages.loginButton} />
+              <FormattedMessage {...buttonsMessages.login} />
             </button>
             <span className="hint">
               <FormattedMessage {...messages.hint} />

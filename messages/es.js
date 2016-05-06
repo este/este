@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Iniciar Sesión"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Cerrar Sesión"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Indicio: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Iniciar Sesión"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "Contraseña"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Cerrar Sesión"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -105,10 +105,6 @@ export default [
     "defaultMessage": "Iniciar sesión en Facebook"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Iniciar sesión"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Olvido su contraseña?"
   },
@@ -139,10 +135,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Hola"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Cerrar sesion"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

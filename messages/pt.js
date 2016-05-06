@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Usuário"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Sair"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Dica: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Usuário"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "Senha"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Sair"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -105,10 +105,6 @@ export default [
     "defaultMessage": "Login do Facebook"
   },
   {
-    "id": "firebase.login.loginButton",
-    "defaultMessage": "Login"
-  },
-  {
     "id": "firebase.login.passwordForgotten",
     "defaultMessage": "Esqueceu sua senha?"
   },
@@ -139,10 +135,6 @@ export default [
   {
     "id": "firebase.profile.greeting",
     "defaultMessage": "Olá"
-  },
-  {
-    "id": "firebase.profile.logout",
-    "defaultMessage": "Sair"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

@@ -1,6 +1,14 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.login",
+    "defaultMessage": "Přihlášení"
+  },
+  {
+    "id": "app.buttons.logout",
+    "defaultMessage": "Odlásit se"
+  },
+  {
     "id": "app.links.firebase",
     "defaultMessage": "Firebase"
   },
@@ -53,16 +61,8 @@ export default [
     "defaultMessage": "Nápověda: pass1"
   },
   {
-    "id": "auth.login.loginButton",
-    "defaultMessage": "Přihlášení"
-  },
-  {
     "id": "auth.login.passwordPlaceholder",
     "defaultMessage": "heslo"
-  },
-  {
-    "id": "auth.logout",
-    "defaultMessage": "Odlásit se"
   },
   {
     "id": "footer.madeByHtml",
