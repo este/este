@@ -11,13 +11,13 @@ const InitialState = Record({
 });
 const initialState = new InitialState;
 
-const usersJsonToList = users => users && Seq(users)
+const reviveList = list => list && Seq(list)
   .map(json => new User(json))
   .sortBy(user => -user.authenticatedAt)
   .toList();
 
 const revive = ({ list, viewer }) => initialState.merge({
-  list: usersJsonToList(list),
+  list: reviveList(list),
   viewer: viewer ? new User(viewer) : null
 });
 
@@ -43,9 +43,8 @@ export default function usersReducer(state = initialState, action) {
     }
 
     case actions.ON_USERS_LIST: {
-      const { users } = action.payload;
-      const list = usersJsonToList(users);
-      return state.set('list', list);
+      const { list } = action.payload;
+      return state.set('list', reviveList(list));
     }
 
   }
