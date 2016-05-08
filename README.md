@@ -85,7 +85,8 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp mocha-watch` continuous test running for TDD
 - `gulp eslint` eslint
 - `gulp eslint --fix` fix fixable eslint issues
-- `gulp extractDefaultMessages` extract messages for translation
+- `gulp extractMessages` extract messages for translation
+- `gulp checkMessages` check missing and unused translations
 
 ## Production Tasks
 
