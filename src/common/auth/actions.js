@@ -12,8 +12,12 @@ export function login(fields) {
       try {
         // Validate fields async.
         await validate(fields)
-          .prop('email').required().email()
-          .prop('password').required().simplePassword()
+          .prop('email')
+            .required()
+            .email()
+          .prop('password')
+            .required()
+            .simplePassword()
           .promise;
         // Simulate response for server-less (Firebase hosting) example.
         if (process.env.IS_SERVERLESS) {

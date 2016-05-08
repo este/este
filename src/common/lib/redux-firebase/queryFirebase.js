@@ -196,6 +196,6 @@ export const queryFirebaseServer = renderAppCallback => {
     // http://bluebirdjs.com/docs/api/reflect.html
     const promises = serverFetchingPromises.map(promise => promise.reflect());
     serverFetchingPromises = null;
-    return Promise.all(promises);
+    return Promise.all(promises); // eslint-disable-line no-unsafe-finally
   }
 };

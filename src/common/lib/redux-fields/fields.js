@@ -16,11 +16,11 @@ export default function fields(Wrapped, options) {
   } = options;
 
   invariant(Array.isArray(fields), 'Fields must be an array.');
-  invariant((
+  invariant(
     (typeof path === 'string') ||
     (typeof path === 'function') ||
     Array.isArray(path)
-  ), 'Path must be a string, function, or an array.');
+  , 'Path must be a string, function, or an array.');
 
   return class Fields extends Component {
 

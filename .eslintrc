@@ -10,6 +10,7 @@
     "default-case": 0, // Required default case is nonsense.
     "global-require": 0, // Used by webpack-isomorphic-tools and React Native.
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
+    "no-class-assign": 0, // Class assign is used for higher order components.
     "no-confusing-arrow": 0, // No, this is not confusing.
     "no-floating-decimal": 0, // .5 is just fine.
     "no-nested-ternary": 0, // It's nice for JSX.
