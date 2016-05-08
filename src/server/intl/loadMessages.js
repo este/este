@@ -5,9 +5,11 @@ const descriptorsToMessages = descriptors =>
     ...previous, [id]: defaultMessage
   }), {});
 
-export default function loadMessages() {
+export default function loadMessages({
+  includeDefault = false
+} = {}) {
   return fs.readdirSync('messages')
-    .filter(fileName => !fileName.startsWith('_'))
+    .filter(fileName => includeDefault || !fileName.startsWith('_'))
     .map(fileName => ({
       descriptors: require(`../../../messages/${fileName}`).default,
       locale: fileName.split('.')[0]
