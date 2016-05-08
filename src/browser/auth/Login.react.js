@@ -51,7 +51,7 @@ class Login extends Component {
       await login(fields.$values());
     } catch (error) {
       focusInvalidField(this, error.reason);
-      return;
+      throw error;
     }
     this.redirectAfterLogin();
   }

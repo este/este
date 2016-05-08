@@ -1,7 +1,7 @@
+// Bootstrap environment
 require('babel-register');
 require('babel-polyfill');
 
-const Bluebird = require('bluebird');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const config = require('./config');
 const polyfillLocales = require('./intl/polyfillLocales');
@@ -16,10 +16,7 @@ if (!process.env.NODE_ENV) {
 
 polyfillLocales(global, config.locales);
 
-// bluebirdjs.com/docs/why-bluebird.html
-global.Promise = Bluebird;
-// Warnings are useful for user code, but annoying for third party libraries.
-Bluebird.config({ warnings: false });
+global.Promise = require('../common/configureBluebird');
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAssets)
   .development(!config.isProduction)
