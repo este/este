@@ -1,4 +1,4 @@
-import App from './app/AppPage.react';
+import App from './app/App.react';
 import Component from 'react-pure-render/component';
 import React, { AppRegistry, Platform } from 'react-native';
 import config from './config';

@@ -1,4 +1,4 @@
-import App from './app/AppPage.react';
+import App from './app/App.react';
 import Auth from './auth/AuthPage.react';
 import Fields from './fields/FieldsPage.react';
 import Firebase from './firebase/FirebasePage.react';

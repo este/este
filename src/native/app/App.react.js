@@ -11,7 +11,7 @@ import start from '../../common/app/start';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
-class AppPage extends Component {
+class App extends Component {
 
   static propTypes = {
     device: PropTypes.object.isRequired,
@@ -79,7 +79,7 @@ class AppPage extends Component {
         style={styles.container}
       >
         <Navigator
-          configureScene={AppPage.configureScene}
+          configureScene={App.configureScene}
           initialRoute={routes.home}
           ref={this.onNavigatorRef}
           renderScene={this.renderScene}
@@ -91,11 +91,11 @@ class AppPage extends Component {
 
 }
 
-AppPage = injectIntl(AppPage);
+App = injectIntl(App);
 
-AppPage = connect(state => ({
+App = connect(state => ({
   device: state.device,
   ui: state.ui
-}), uiActions)(AppPage);
+}), uiActions)(App);
 
-export default start(AppPage);
+export default start(App);
