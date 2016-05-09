@@ -39,6 +39,7 @@ const resetOnLogout = (reducer, initialState) => (state, action) => {
   return reducer(state, action);
 };
 
+// blog.ploeh.dk/2011/07/28/CompositionRoot
 export default function configureStore(options) {
   const {
     createEngine,
@@ -56,7 +57,6 @@ export default function configureStore(options) {
   // });
 
   const middleware = [
-    ...platformMiddleware,
     injectMiddleware({
       ...platformDeps,
       engine,
@@ -68,7 +68,8 @@ export default function configureStore(options) {
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
-    })
+    }),
+    ...platformMiddleware
   ];
 
   if (engine) {
