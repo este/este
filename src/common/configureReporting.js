@@ -40,6 +40,7 @@ const reportingMiddleware = () => next => action => {
   if (action.type === firebaseActions.REDUX_FIREBASE_ON_AUTH) {
     setRavenUserContext(action.payload.authData);
   }
+  // TODO: Use Raven.setExtraContext for last 10 actions and limited app state.
   return next(action);
 };
 
