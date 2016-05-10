@@ -12,16 +12,15 @@ nconf.env('__');
 const appName = require('../../package.json').name;
 
 // The semver is for libraries, apps are versioned by git commit SHA.
-const appVersion = execSync('git rev-parse HEAD')
+const sourceVersion = process.env.SOURCE_VERSION || execSync('git rev-parse HEAD')
   .toString()
-  .trim()
-  .slice(0, 7);
+  .trim();
 
 // Remember, never put secrets in default config.
 // Use environment variables for production, and secrets.json for development.
 nconf.defaults({
   appName,
-  appVersion,
+  appVersion: sourceVersion.slice(0, 7),
   defaultLocale: 'en',
   firebaseUrl: 'https://este.firebaseio.com',
   googleAnalyticsId: 'UA-XXXXXXX-X',
