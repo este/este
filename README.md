@@ -17,6 +17,7 @@
   - universal data fetching
   - an optional rendering to HTML files (for static hosting)
   - universal internationalization with runtime language switching
+  - universal crash reporting via Sentry
   - universal forms with universal validation (universal ftw, yeah)
 - Functional works (immutability, hot reload, time traveling)
 - Test driven development
@@ -50,6 +51,7 @@
 - SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
+- [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
 - And much more. Explore the repository.
 
 ## Prerequisites

@@ -26,7 +26,9 @@ const getInitialState = req => {
   return {
     config: {
       appName: config.appName,
-      firebaseUrl: config.firebaseUrl
+      appVersion: config.appVersion,
+      firebaseUrl: config.firebaseUrl,
+      sentryUrl: config.sentryUrl
     },
     intl: {
       currentLocale,
