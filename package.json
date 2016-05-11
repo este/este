@@ -81,7 +81,7 @@
     "react-addons-test-utils": "^0.14.1",
     "react-dom": "^0.14.0",
     "react-helmet": "^3.0.0",
-    "react-intl": "^2.0.0-rc-1",
+    "react-intl": "^2.1.2",
     "react-native": "^0.23.1",
     "react-native-browser-polyfill": "^0.1.1",
     "react-native-side-menu": "^0.18.0",

@@ -18,7 +18,7 @@ import no from 'react-intl/locale-data/no';
 import pt from 'react-intl/locale-data/pt';
 import ro from 'react-intl/locale-data/ro';
 
-addLocaleData([cs, de, es, en, fr, no, pt, ro]);
+[cs, de, es, en, fr, no, pt, ro].forEach(locale => addLocaleData(locale));
 
 const initialState = window.__INITIAL_STATE__;
 const reportingMiddleware = configureReporting({
