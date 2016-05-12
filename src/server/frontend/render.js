@@ -14,9 +14,6 @@ import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFireba
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 const messages = loadMessages();
-const intlPolyfillFeatures = config.locales
-  .map(locale => `Intl.~locale.${locale}`)
-  .join();
 
 const getInitialState = req => {
   const currentLocale = process.env.IS_SERVERLESS
@@ -54,12 +51,8 @@ const renderApp = (store, renderProps) => {
 
 const renderScripts = (state, headers, hostname, appJsFilename) =>
   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  // https://github.com/andyearnshaw/Intl.js/#intljs-and-ft-polyfill-service
   // TODO: Switch to CSP, https://github.com/este/este/pull/731
   `
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=${
-      intlPolyfillFeatures
-    }"></script>
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
