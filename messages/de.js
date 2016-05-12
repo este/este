@@ -1,12 +1,44 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Abbrechen"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Löschen"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Bearbeiten"
+  },
+  {
     "id": "app.buttons.login",
     "defaultMessage": "Anmelden"
   },
   {
     "id": "app.buttons.logout",
     "defaultMessage": "Abmelden"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Speichern"
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Senden"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Sind Sie sicher?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Sie haben Änderungen gemacht. Sind Sie sicher?"
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "redux-fields"
   },
   {
     "id": "app.links.firebase",
@@ -65,6 +97,90 @@ export default [
     "defaultMessage": "Passwort"
   },
   {
+    "id": "fields.page.h2",
+    "defaultMessage": "Demo redux-fields"
+  },
+  {
+    "id": "fields.page.p",
+    "defaultMessage": "Wie redux-form aber vereinfacht"
+  },
+  {
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "Das Konto konnte nicht erstellt werden, weil die E-Mail bereits benutzt wurde."
+  },
+  {
+    "id": "firebase.error.INVALID_EMAIL",
+    "defaultMessage": "Die angegebene E-Mail ist nicht gültig."
+  },
+  {
+    "id": "firebase.error.INVALID_PASSWORD",
+    "defaultMessage": "Das eingegebene Passwort ist falsch für dieses Konto."
+  },
+  {
+    "id": "firebase.error.INVALID_USER",
+    "defaultMessage": "Das eigegebene Konto existiert nicht."
+  },
+  {
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "Die Verbinung zur Authentifizierung konnte nicht hergestellt werden."
+  },
+  {
+    "id": "firebase.login.dismiss",
+    "defaultMessage": "Abbrechen"
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "Login per E-Mail / Registrieren"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Passwort zurücksetzen"
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "ihre@email.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Anmeldung via Facebook"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Passwort vergessen?"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
+    "defaultMessage": "Passwort"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "Die E-Mail zum Zurücksetzen Ihres Passwortes wurde gesendet."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Passwort zurücksetzen"
+  },
+  {
+    "id": "firebase.login.signUp",
+    "defaultMessage": "Registrieren"
+  },
+  {
+    "id": "firebase.login.unknownError",
+    "defaultMessage": "Ein unbekannter Fehler ist aufgetreten"
+  },
+  {
+    "id": "firebase.page.loadMore",
+    "defaultMessage": "Mehr"
+  },
+  {
+    "id": "firebase.profile.greeting",
+    "defaultMessage": "Hallo"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Die letzten {limitToLast} angemeldeten Benutzer"
+  },
+  {
     "id": "footer.madeByHtml",
     "defaultMessage": "Umgesetzt von <a href=\"https://twitter.com/steida\">Steida</a>"
   },
@@ -94,7 +210,7 @@ export default [
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Guten Tag {email}. Das ist Ihre geheime Seite."
+    "defaultMessage": "Hallo {email}. Das ist Ihre geheime Seite."
   },
   {
     "id": "me.profilePage.title",

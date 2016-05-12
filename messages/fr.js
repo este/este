@@ -38,7 +38,7 @@ export default [
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Champs"
+    "defaultMessage": "redux-fields"
   },
   {
     "id": "app.links.firebase",
