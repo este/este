@@ -1,6 +1,9 @@
 {
   "presets": ["es2015-node5", "react", "stage-1"],
-  "plugins": ["transform-runtime", "add-module-exports"],
+  "plugins": [
+    ['transform-runtime', { polyfill: false, regenerator: false }],
+    'add-module-exports',
+  ],
   "env": {
     "production": {
       "plugins": [
