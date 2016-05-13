@@ -8,9 +8,9 @@ import gulpIf from 'gulp-if';
 import mochaRunCreator from './test/mochaRunCreator';
 import path from 'path';
 import runSequence from 'run-sequence';
-import shell from 'gulp-shell';
 import webpackBuild from './webpack/build';
 import yargs from 'yargs';
+import childProcess from 'child_process';
 
 const args = yargs
   .alias('p', 'production')
@@ -62,11 +62,17 @@ gulp.task('test', done => {
 
 gulp.task('server-node', bg('node', './src/server'));
 gulp.task('server-hot', bg('node', './webpack/server'));
-// Shell fixes Windows este/issues/522, bg is still needed for server-hot.
-gulp.task('server-nodemon', shell.task(
-  // Normalize makes path cross platform.
-  path.normalize('node_modules/.bin/nodemon --ignore webpack-assets.json src/server')
-));
+
+gulp.task(
+  'server-nodemon',
+  bg(
+    path.normalize('node_modules/.bin/nodemon'),
+    '--ignore',
+    'webpack-assets.json',
+    path.normalize('src/server')
+  )
+);
+
 gulp.task('server', ['env'], done => {
   if (args.production) {
     runSequence('clean', 'build', 'server-node', done);
@@ -198,9 +204,11 @@ gulp.task('bare', () => {
 });
 
 // An example of deploy to Firebase static hosting.
-gulp.task('deploy', ['to-html'], shell.task([
-  'firebase deploy'
-]));
+gulp.task('deploy', ['to-html'], (cb) => {
+  // I don't know any better way how to run a simple shell task:
+  // http://stackoverflow.com/questions/37187069/how-to-easily-run-system-shell-task-command-in-gulp
+  childProcess.spawn('firebase', ['deploy'], { stdio: 'inherit' }).on('close', cb);
+});
 
 gulp.task('extractMessages', () => {
   const through = require('through2');
