@@ -83,6 +83,10 @@ class Login extends Component {
   onSocialLoginClick(e) {
     const { provider } = e.currentTarget.dataset;
     const { fields, login } = this.props;
+    // Note that Firebase auth on the iOS embedded Safari / iOS Chrome always
+    // reloads page, so redirect after success auth will not happen.
+    // Quick workaround is to render link instead of login button for the
+    // authenticated user.
     login(provider, fields.$values());
   }
 
