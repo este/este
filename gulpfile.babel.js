@@ -1,5 +1,6 @@
 /* eslint-disable no-undef, no-console */
 import bg from 'gulp-bg';
+import childProcess, { execSync } from 'child_process';
 import del from 'del';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
@@ -10,7 +11,6 @@ import path from 'path';
 import runSequence from 'run-sequence';
 import webpackBuild from './webpack/build';
 import yargs from 'yargs';
-import childProcess from 'child_process';
 
 const args = yargs
   .alias('p', 'production')
@@ -32,7 +32,14 @@ const runEslint = () => {
 
 gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
+  // The app is not a library, so it doesn't make sense to use semver.
+  // Este uses appVersion for crash reporting to match bad builds easily.
+  const gitIsAvailable = !process.env.SOURCE_VERSION; // Heroku detection.
+  if (gitIsAvailable) {
+    process.env.appVersion = execSync('git rev-parse HEAD').toString().trim();
+  }
 });
+
 
 gulp.task('clean', () => del('build/*'));
 
