@@ -9,6 +9,8 @@
 
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
+> Další školení Este.js se koná 23. a 24. června v Praze. Registrujte se na [learn-reactjs.com](https://learn-reactjs.com/) nebo pište na daniel@steigerwald.cz.
+
 ## Techniques
 
 - Truly universal architecture
