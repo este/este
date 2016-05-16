@@ -62,7 +62,10 @@ export default function fields(Wrapped, options) {
         }
       } : {
         name: field,
-        onChange: ({ target: { type, checked, value } }) => {
+        onChange: (event) => {
+          // React-select is not passing an event but the target directly
+          const target = event.target || event;
+          const { type, checked, value } = target;
           const isCheckbox = type && type.toLowerCase() === 'checkbox';
           onChange(field, isCheckbox ? checked : value);
         }
