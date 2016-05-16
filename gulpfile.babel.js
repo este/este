@@ -40,22 +40,25 @@ gulp.task('env', () => {
   }
 });
 
-
 gulp.task('clean', () => del('build/*'));
 
 gulp.task('build-webpack', ['env'], webpackBuild);
+
 gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', () => runEslint());
+
 gulp.task('eslint-ci', () => runEslint().pipe(eslint.failAfterError()));
 
 gulp.task('mocha', () => {
   mochaRunCreator('process')();
 });
+
 gulp.task('mocha-file', () => {
-  // Example: gulp mocha-file --file src/browser/components/__test__/Button.js
+  // Example: gulp mocha-file --file src/common/todos/__test__/actions.js
   mochaRunCreator('process')({ path: path.join(__dirname, args.file) });
 });
+
 gulp.task('mocha-watch', () => {
   gulp.watch(
     ['src/browser/**', 'src/common/**', 'src/server/**'],
@@ -68,6 +71,7 @@ gulp.task('test', done => {
 });
 
 gulp.task('server-node', bg('node', './src/server'));
+
 gulp.task('server-hot', bg('node', './webpack/server'));
 
 gulp.task(
@@ -175,6 +179,7 @@ export default ${
 // 1) delete ios/build directory
 // 2) reset content and settings in iOS simulator
 gulp.task('ios', ['native'], bg('react-native', 'run-ios'));
+
 gulp.task('android', ['native'], bg('react-native', 'run-android'));
 
 // Various fixes for react-native issues.
