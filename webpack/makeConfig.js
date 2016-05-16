@@ -134,6 +134,9 @@ export default function makeConfig(isDevelopment) {
               warnings: false // Because uglify reports irrelevant warnings.
             }
           }),
+          new webpack.SourceMapDevToolPlugin({
+            filename: '[file].map'
+          }),
           webpackIsomorphicToolsPlugin
         );
       }
