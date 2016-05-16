@@ -128,6 +128,9 @@ export default function makeConfig(isDevelopment) {
           }),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.OccurenceOrderPlugin(),
+          new webpack.SourceMapDevToolPlugin({
+            filename: '[file].map'
+          }),
           new webpack.optimize.UglifyJsPlugin({
             compress: {
               screw_ie8: true, // eslint-disable-line camelcase
