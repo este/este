@@ -36,11 +36,10 @@ export default function fields(Wrapped, options) {
       }
     }
 
-    static getFieldValue(field, model, props) {
+    static getFieldValue(field, model, initialState) {
       if (model && model.has(field)) {
         return model.get(field);
       }
-      const initialState = getInitialState && getInitialState(props);
       if (initialState && initialState.hasOwnProperty(field)) {
         return initialState[field];
       }
@@ -48,10 +47,11 @@ export default function fields(Wrapped, options) {
     }
 
     static lazyJsonValuesOf(model, props) {
+      const initialState = getInitialState && getInitialState(props);
       // http://www.devthought.com/2012/01/18/an-object-is-not-a-hash
       return options.fields.reduce((fields, field) => ({
         ...fields,
-        [field]: Fields.getFieldValue(field, model, props)
+        [field]: Fields.getFieldValue(field, model, initialState)
       }), Object.create(null));
     }
 
