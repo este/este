@@ -7,6 +7,9 @@
 
 > Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
+- If you don't need the [React Native](http://facebook.github.io/react-native/) now, just delete native folder and deps.
+- If you don't need a server side rendering now, just render static pages with `gulp to-html`.
+
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
 > Nejbližší **školení Este.js** se koná 23. a 24. června v Praze. Cena je 11 500 Kč. Registrujte se přes [learn-reactjs.com](https://learn-reactjs.com/), nebo mi napište: daniel@steigerwald.cz.
@@ -16,8 +19,8 @@
 - Truly universal architecture
   - code shared across platforms (browser, server, native mobile)
   - server side rendering
-  - universal data fetching
-  - an optional rendering to HTML files (for static hosting)
+  - universal data fetching (unique approach without react-router) 
+  - an optional rendering to HTML files (for static hostings)
   - universal internationalization with runtime language switching
   - universal crash reporting via Sentry
   - universal forms with universal validation (universal ftw, yeah)
