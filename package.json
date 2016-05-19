@@ -100,6 +100,7 @@
     "redux-storage-engine-localstorage": "^1.0.1",
     "redux-storage-engine-reactnativeasyncstorage": "^1.0.0",
     "regenerator": "^0.8.42",
+    "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
     "sass-loader": "^3.0.0",
     "serialize-javascript": "^1.1.2",
