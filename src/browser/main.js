@@ -4,8 +4,9 @@ import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
+import useScroll from 'react-router-scroll';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 const initialState = window.__INITIAL_STATE__;
@@ -24,7 +25,10 @@ const routes = createRoutes(store.getState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router
+      history={history}
+      render={applyRouterMiddleware(useScroll())}
+    >
       {routes}
     </Router>
   </Provider>
