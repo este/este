@@ -1,6 +1,10 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.add",
+    "defaultMessage": "Ajouter"
+  },
+  {
     "id": "app.buttons.cancel",
     "defaultMessage": "Annuler"
   },

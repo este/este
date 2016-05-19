@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import gulp from 'gulp';
 
-gulp.task('checkMessages', () => {
+gulp.task('messages-check', () => {
   const loadMessages = require('../src/server/intl/loadMessages');
   const messages = loadMessages({ includeDefault: true });
   const defaultMessagesKeys = Object.keys(messages._default);

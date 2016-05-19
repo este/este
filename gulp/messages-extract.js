@@ -1,7 +1,7 @@
 import fs from 'fs';
 import gulp from 'gulp';
 
-gulp.task('extractMessages', () => {
+gulp.task('messages-extract', () => {
   const through = require('through2');
   const babel = require('babel-core');
   const messages = [];
