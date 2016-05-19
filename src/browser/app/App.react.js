@@ -4,6 +4,7 @@ import Footer from './Footer.react';
 import Header from './Header.react';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import favicon from './favicon';
 import start from '../../common/app/start';
 import { connect } from 'react-redux';
 import { locationShape } from 'react-router';
@@ -42,10 +43,11 @@ class App extends Component {
             {
               name: 'description',
               content: 'Dev stack and starter kit for functional and universal React apps'
-            }
+            },
+            ...favicon.meta
           ]}
           link={[
-            { rel: 'shortcut icon', href: require('./favicon.ico') }
+            ...favicon.link
           ]}
         />
         {/* Pass location to ensure header active links are updated. */}
