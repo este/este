@@ -57,6 +57,7 @@
 - [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
+- [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
 - And much more. Explore the repository.
 
 ## Prerequisites
@@ -94,6 +95,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp eslint --fix` fix fixable eslint issues
 - `gulp messages-extract` extract messages for translation
 - `gulp messages-check` check missing and unused translations
+- `gulp favicon` create multiplatform favicon
 
 ## Production Tasks
 
