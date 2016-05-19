@@ -32,7 +32,7 @@ export default function usersReducer(state = initialState, action) {
       return state.set('viewer', user);
     }
 
-    case firebaseActions.REDUX_FIREBASE_ON_AUTH: {
+    case firebaseActions.ESTE_REDUX_FIREBASE_ON_AUTH: {
       const { authData } = action.payload;
       // Handle logout.
       if (!authData) {

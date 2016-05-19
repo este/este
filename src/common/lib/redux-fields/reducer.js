@@ -8,12 +8,12 @@ export default function reducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case actions.RESET_FIELDS: {
+    case actions.ESTE_REDUX_FIELDS_RESET_FIELDS: {
       const { path } = action.payload;
       return state.deleteIn(path);
     }
 
-    case actions.SET_FIELD: {
+    case actions.ESTE_REDUX_FIELDS_SET_FIELD: {
       const { path, value } = action.payload;
       return state.setIn(path, value);
     }
