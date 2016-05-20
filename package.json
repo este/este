@@ -87,7 +87,7 @@
     "react-native-side-menu": "^0.19.0",
     "react-pure-render": "^1.0.1",
     "react-redux": "^4.0.0",
-    "react-router": "^2.0.0",
+    "react-router": "^2.3.0",
     "react-router-redux": "^4.0.0",
     "react-router-scroll": "^0.2.0",
     "react-transform-catch-errors": "^1.0.0",
