@@ -8,6 +8,11 @@ isViewer(uid) { isSignedIn() && auth.uid == uid }
 
 // Types
 
+// github.com/firebase/bolt/blob/master/docs/guide.md#dealing-with-timestamps
+type CurrentTimestamp extends Number {
+  validate() { this == now }
+}
+
 type ShortString extends String {
   validate() { this.length <= 100 }
 }
@@ -34,7 +39,7 @@ type ExtraLongRequiredString extends String {
 }
 
 type HelloWorld {
-  createdAt: Number
+  createdAt: CurrentTimestamp
 }
 
 type User {
