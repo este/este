@@ -1,45 +1,37 @@
 # Este
-#
+
+*.jsbundle
 *.sublime-workspace
+.DS_Store
+.firebaserc
+build/
+firebase-debug.log
+firebase/rules.json
+node_modules/
+npm-debug.log
 src/common/secrets.json
 src/native/config.js
 src/native/messages.js
 webpack-assets.json
-firebase/rules.json
-*.jsbundle
 
 # React Native
-# OSX
-#
-.DS_Store
 
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
 !default.mode1v3
-*.mode2v3
 !default.mode2v3
-*.perspectivev3
+!default.pbxuser
 !default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
 *.hmap
 *.ipa
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+*.xccheckout
 *.xcuserstate
-project.xcworkspace
-
-# Android/IJ
-#
-.idea
 .gradle
+.idea
+DerivedData
 local.properties
-
-# node.js
-#
-node_modules/
-npm-debug.log
+project.xcworkspace
+xcuserdata
