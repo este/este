@@ -10,8 +10,4 @@ app.use(bodyParser.json());
 
 app.use('/auth', auth);
 
-app.on('mount', () => {
-  console.log('Api is available at %s', app.mountpath);
-});
-
 export default app;
