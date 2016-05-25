@@ -6,7 +6,7 @@ export default [
   },
   {
     "id": "app.buttons.logout",
-    "defaultMessage": "Odlásit se"
+    "defaultMessage": "Odhlásit se"
   },
   {
     "id": "app.links.firebase",
