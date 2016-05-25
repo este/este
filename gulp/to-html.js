@@ -5,14 +5,14 @@ import gulp from 'gulp';
 import path from 'path';
 import runSequence from 'run-sequence';
 
+const urls = {
+  '/': 'index.html',
+  '/404': '404.html'
+};
+
 gulp.task('to-html', done => {
   args.production = true;
   process.env.IS_SERVERLESS = true;
-
-  const urls = {
-    '/': 'index.html',
-    '/404': '404.html'
-  };
 
   const fetch = url => new Promise((resolve, reject) => {
     require('http').get({ host: 'localhost', path: url, port: 8000 }, res => {
@@ -59,6 +59,7 @@ gulp.task('to-html', done => {
         proc.kill();
         done();
         console.log('App has been rendered to /build directory.');
+        console.log('OSX tip: cd build && python -m SimpleHTTPServer 8000');
       }
     });
   });
