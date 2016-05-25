@@ -1,11 +1,12 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import autoprefixer from 'autoprefixer';
 import constants from './constants';
+import ip from 'ip';
 import path from 'path';
 import webpack from 'webpack';
 import webpackIsomorphicAssets from './assets';
-import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
-import ip from 'ip';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
@@ -137,7 +138,13 @@ export default function makeConfig(isDevelopment) {
           new webpack.SourceMapDevToolPlugin({
             filename: '[file].map'
           }),
-          webpackIsomorphicToolsPlugin
+          webpackIsomorphicToolsPlugin,
+          new CopyWebpackPlugin([{
+            from: './src/browser/app/favicons/',
+            to: 'favicons'
+          }], {
+            ignore: ['original/**']
+          })
         );
       }
       return plugins;
