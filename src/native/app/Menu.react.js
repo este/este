@@ -1,11 +1,8 @@
 import Component from 'react-pure-render/component';
-import React, { Dimensions } from 'react-native';
+import React, { PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
+import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { injectIntl, intlShape } from 'react-intl';
-
-const {
-  PropTypes, ScrollView, StyleSheet, Text, View
-} = React;
 
 const window = Dimensions.get('window');
 

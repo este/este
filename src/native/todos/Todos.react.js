@@ -1,15 +1,12 @@
 import * as todosActions from '../../common/todos/actions';
 import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
-import React from 'react-native';
+import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
 import todosMessages from '../../common/todos/todosMessages';
 import { FormattedMessage } from 'react-intl';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-
-const {
-  Image, PropTypes, ScrollView, StyleSheet, Text, View
-} = React;
 
 const styles = StyleSheet.create({
   centeredView: {

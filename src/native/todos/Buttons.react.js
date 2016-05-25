@@ -1,13 +1,10 @@
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
-import React from 'react-native';
+import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-
-const {
-  PropTypes, StyleSheet, Text, TouchableOpacity, View
-} = React;
 
 const styles = StyleSheet.create({
   button: {

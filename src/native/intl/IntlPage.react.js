@@ -1,7 +1,8 @@
 import * as intlActions from '../../common/intl/actions';
 import Component from 'react-pure-render/component';
-import React, { PropTypes, Text, View } from 'react-native';
+import React, { PropTypes } from 'react';
 import appStyles from '../app/styles';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 class IntlPage extends Component {

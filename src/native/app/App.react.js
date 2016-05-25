@@ -2,12 +2,13 @@ import * as uiActions from '../../common/ui/actions';
 import Component from 'react-pure-render/component';
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, { Navigator, PropTypes, StatusBar, View } from 'react-native';
+import React, { PropTypes } from 'react';
 import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
-import styles from './styles';
 import start from '../../common/app/start';
+import styles from './styles';
+import { Navigator, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 

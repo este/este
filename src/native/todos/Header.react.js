@@ -1,6 +1,7 @@
 import Component from 'react-pure-render/component';
-import React, { PropTypes, StyleSheet, Text, View } from 'react-native';
+import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 const messages = defineMessages({

@@ -1,9 +1,6 @@
 import Component from 'react-pure-render/component';
-import React from 'react-native';
-
-const {
-  Image, PropTypes, StyleSheet, TextInput, TouchableOpacity, View
-} = React;
+import React, { PropTypes } from 'react';
+import { Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

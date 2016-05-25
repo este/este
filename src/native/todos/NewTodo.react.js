@@ -1,7 +1,8 @@
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
-import React, { PropTypes, StyleSheet, TextInput, View } from 'react-native';
+import React, { PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl, intlShape } from 'react-intl';

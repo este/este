@@ -1,7 +1,8 @@
 import Component from 'react-pure-render/component';
-import React, { Text, View } from 'react-native';
+import React from 'react';
 import appStyles from '../app/styles';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { Text, View } from 'react-native';
 
 const messages = defineMessages({
   intro: {
