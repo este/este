@@ -78,7 +78,7 @@
     "normalize.css": "^4.0.0",
     "postcss-loader": "^0.9.1",
     "raven-js": "^3.0.3",
-    "react": "^0.14.2",
+    "react": "^15.0.2",
     "react-addons-test-utils": "^0.14.1",
     "react-dom": "^0.14.0",
     "react-helmet": "^3.0.0",
