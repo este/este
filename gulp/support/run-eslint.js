@@ -7,6 +7,7 @@ import gulpIf from 'gulp-if';
 const runEslint = () => {
   const isFixed = file => args.fix && file.eslint && file.eslint.fixed;
   return gulp.src([
+    'gulp/**/*.js',
     'gulpfile.babel.js',
     'messages/*.js',
     'src/**/*.js',
