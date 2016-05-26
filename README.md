@@ -5,12 +5,9 @@
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 [![GitHub license](https://img.shields.io/github/license/este/este.svg)](https://github.com/este/este/blob/master/LICENSE)
 
-> Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
+> Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
 
-> Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
-
-- If you don't need the [React Native](http://facebook.github.io/react-native/) now, just delete native folder and dependencies in package.json.
-- If you don't need a server side rendering now, just render static pages with `gulp to-html`.
+> You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimal valuable product asap with the state of the art real-time universal app stack**.
 
 > Nejbližší **školení Este.js** se koná 23. a 24. června v Praze. Cena je 11 500 Kč. Registrujte se přes [learn-reactjs.com](https://learn-reactjs.com/), nebo mi napište: daniel@steigerwald.cz.
 
@@ -64,7 +61,11 @@
 
 - [node.js](http://nodejs.org) Node 6 with NPM 3 is required.
 - [gulp](http://gulpjs.com/) `npm install -g gulp`
-- [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli` (optional)
+
+#### Optional
+
+- [firebase-cli](https://firebase.google.com/docs/cli/) `npm install -g firebase-tools`
+- [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli`
 
 If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
 
