@@ -1,4 +1,4 @@
 {
-  "presets": ["es2015-node5"],
+  "presets": ["es2015-node6"],
   "plugins": ["add-module-exports"]
 }

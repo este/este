@@ -7,10 +7,10 @@
 
 > Happily maintained dev stack and starter kit for React universal apps. One stack for browser, server, mobile.
 
-- If you don't need the [React Native](http://facebook.github.io/react-native/) now, just delete native folder and deps.
-- If you don't need a server side rendering now, just render static pages with `gulp to-html`.
-
 > Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
+
+- If you don't need the [React Native](http://facebook.github.io/react-native/) now, just delete native folder and dependencies in package.json.
+- If you don't need a server side rendering now, just render static pages with `gulp to-html`.
 
 > Nejbližší **školení Este.js** se koná 23. a 24. června v Praze. Cena je 11 500 Kč. Registrujte se přes [learn-reactjs.com](https://learn-reactjs.com/), nebo mi napište: daniel@steigerwald.cz.
 
@@ -62,8 +62,9 @@
 
 ## Prerequisites
 
-- [node.js](http://nodejs.org) (Node 5 with npm 3 is required).
-- [gulp](http://gulpjs.com/) (`npm install -g gulp`)
+- [node.js](http://nodejs.org) Node 6 with NPM 3 is required.
+- [gulp](http://gulpjs.com/) `npm install -g gulp`
+- [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli` (optional)
 
 If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
 
