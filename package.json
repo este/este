@@ -9,7 +9,7 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": ">=5"
+    "node": ">=6"
   },
   "dependencies": {
     "autoprefixer": "^6.1.0",
