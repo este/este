@@ -105,7 +105,9 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `npm test` run all checks and tests
 - `node src/server` start app, remember to set NODE_ENV and SERVER_URL
 - `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
-- `gulp deploy` deploy app
+- `gulp deploy-heroku` deploy [Heroku](https://www.heroku.com/) app
+- `gulp deploy-firebase` deploy [Firebase](https://firebase.google.com/) app
+- `gulp deploy-firebase-database` deploy Firebase database only
 
 ## Documentation
 
