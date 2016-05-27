@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { focusInvalidField, ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
@@ -23,7 +24,9 @@ const messages = defineMessages({
 class FieldsPage extends Component {
 
   static propTypes = {
+    // Generated fields by fields higher order component.
     fields: PropTypes.object.isRequired,
+    // We can read anything from fields model directly.
     fieldsPageModel: PropTypes.object,
     intl: intlShape.isRequired,
   };
@@ -33,18 +36,43 @@ class FieldsPage extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onFormSubmit(e) {
-    /* eslint-disable no-alert, no-console */
+  async onFormSubmit(e) {
     e.preventDefault();
-    const { fields, fieldsPageModel } = this.props;
-    alert('Check developer console.');
-    // For simple flat forms we can use handy fields.$values() helper.
-    console.log(fields.$values());
-    // For complex nested forms we can get whole model via redux connect.
-    console.log(fieldsPageModel && fieldsPageModel.toJS());
-    // Reset all fieldsPage fields, even nested.
+    const { fields } = this.props;
+
+    // Disable form.
+    fields.$disabled.setValue(true);
+
+    // Use Redux action for real usage.
+    const exampleAction = async (values) => new Promise((resolve, reject) => {
+      if (values.someField.trim()) {
+        setTimeout(resolve, 1000);
+        return;
+      }
+      setTimeout(() => {
+        reject({
+          reason: new ValidationError('required', { prop: 'someField' })
+        });
+      }, 1000);
+    });
+
+    try {
+      // For simple flat forms we can use handy fields.$values() helper.
+      const values = fields.$values();
+      console.log(values); // eslint-disable-line no-console
+      // For complex nested forms we can get whole model via redux connect.
+      // const allValues = this.propsfieldsPageModel && this.propsfieldsPageModel.toJS();
+      // console.log(allValues); // eslint-disable-line no-console
+      await exampleAction(values);
+    } catch (error) {
+      fields.$disabled.setValue(false);
+      fields.$error.setValue(error.reason);
+      focusInvalidField(this, error.reason);
+      throw error;
+    }
+
+    // Reset all (even nested) fieldsPage fields.
     fields.$reset();
-    /* eslint-enable no-alert, no-console */
   }
 
   render() {
@@ -77,7 +105,7 @@ class FieldsPage extends Component {
           <FormattedMessage {...messages.p} />
         </p>
         <form onSubmit={this.onFormSubmit}>
-          <fieldset>
+          <fieldset disabled={fields.$disabled.value}>
             <h3>Some Field</h3>
             <input
               {...fields.someField}
@@ -144,6 +172,9 @@ class FieldsPage extends Component {
               <button type="submit">
                 <FormattedMessage {...buttonsMessages.submit} />
               </button>
+              {fields.$error.value &&
+                <b className="error-message">{fields.$error.value.message}</b>
+              }
             </div>
             <pre>
               {
@@ -164,14 +195,14 @@ FieldsPage = injectIntl(FieldsPage);
 FieldsPage = fields(FieldsPage, {
   path: 'fieldsPage',
   fields: [
+    '$disabled', // We can use fields even for meta values. Use $ prefix.
+    '$error',
     'someField',
     'hasCar',
     'hasBike',
     'gender',
     'selectedNumber'
   ],
-  // With getInitialState we can set any initial value easily.
-  // Use fields.$reset() to reset whole fieldsPage model.
   getInitialState: () => ({
     // someField: '123',
     // hasCar: true,
@@ -180,6 +211,7 @@ FieldsPage = fields(FieldsPage, {
   })
 });
 
+// Connect is not required. It's just a demonstration of reduxFields state.
 export default connect(state => ({
   fieldsPageModel: state.reduxFields.get('fieldsPage')
 }))(FieldsPage);
