@@ -20,7 +20,7 @@ class Users extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
     limitToLast: PropTypes.number.isRequired,
-    users: PropTypes.object.isRequired
+    users: PropTypes.object
   };
 
   render() {
@@ -34,11 +34,15 @@ class Users extends Component {
             values={{ limitToLast }}
           />
         </h3>
-        <ol>
-          {users.map(user =>
-            <UserItem key={user.id} user={user} />
-          )}
-        </ol>
+        {!users ?
+          <p>Empty</p>
+        :
+          <ol>
+            {users.map(user =>
+              <UserItem key={user.id} user={user} />
+            )}
+          </ol>
+        }
       </div>
     );
   }
@@ -48,7 +52,7 @@ class Users extends Component {
 // Are you scared of many higher order components? Remember, these HOC's
 // are just functions and can be composed ad-hoc later when patterns emerge :-)
 
-Users = loading(Users, ['users']);
+Users = loading(Users, ['users'], { isCollection: true });
 
 Users = queryFirebase(Users, props => ({
   // Query path to listen. For one user we can use `users/${props.user.id}`.

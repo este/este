@@ -5,13 +5,18 @@ import Loading from './Loading.react';
 import NotFound from '../notfound/NotFoundPage.react';
 import React from 'react';
 
-export default function loading(Wrapped, propsToCheck, customLoading) {
+export default function loading(Wrapped, propsToCheck, options = {}) {
+  const {
+    customLoading,
+    isCollection = false
+  } = options;
+
   return class Wrapper extends Component {
 
     render() {
       const props = propsToCheck.map(prop => this.props[prop]);
       // Null is evidence of absence.
-      if (props.some(prop => prop === null)) {
+      if (!isCollection && props.some(prop => prop === null)) {
         return <NotFound />;
       }
       // Undefined is absence of evidence.
