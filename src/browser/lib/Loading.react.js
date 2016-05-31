@@ -29,8 +29,8 @@ export default class Loading extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Don't show anything for the first second.
-      currentText: ''
+      // Render no-break space for the first second of loading.
+      currentText: String.fromCharCode(160)
     };
   }
 
