@@ -1,19 +1,13 @@
 import fs from 'fs';
 import gulp from 'gulp';
 
-gulp.task('native', done => {
-  const config = require('../src/server/config');
-  const { appName, defaultLocale, firebaseUrl, locales } = config;
-  const messages = require('../src/server/intl/loadMessages')();
-  fs.writeFile('src/native/config.js',
-`/* eslint-disable eol-last, quotes, quote-props */
-export default ${
-  JSON.stringify({ appName, defaultLocale, firebaseUrl, locales }, null, 2)
-};`);
-  fs.writeFile('src/native/messages.js',
+// Native can't run Node code, so we need gulp task to pre-write initialState.
+gulp.task('native', ['env'], done => {
+  const initialState = require('../src/server/frontend/createInitialState')();
+  fs.writeFile('src/native/initialState.js',
 `/* eslint-disable eol-last, max-len, quotes, quote-props */
 export default ${
-  JSON.stringify(messages, null, 2)
+  JSON.stringify(initialState, null, 2)
 };`);
   done();
 });

@@ -1,44 +1,32 @@
-import 'babel-polyfill';
 import Helmet from 'react-helmet';
 import Html from './Html.react';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import config from '../config';
 import configureStore from '../../common/configureStore';
+import createInitialState from './createInitialState';
 import createRoutes from '../../browser/createRoutes';
-import loadMessages from '../intl/loadMessages';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
-const messages = loadMessages();
+const initialState = createInitialState();
 
-const getInitialState = req => {
-  const currentLocale = process.env.IS_SERVERLESS
-    ? config.defaultLocale
-    : req.acceptsLanguages(config.locales) || config.defaultLocale;
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-  return {
-    config: {
-      appName: config.appName,
-      appVersion: config.appVersion,
-      firebaseUrl: config.firebaseUrl,
-      sentryUrl: config.sentryUrl
-    },
-    intl: {
-      currentLocale,
-      defaultLocale: config.defaultLocale,
-      initialNow: Date.now(),
-      locales: config.locales,
-      messages
-    },
-    device: {
-      host: `${protocol}://${req.headers.host}`
-    }
-  };
-};
+const createRequestInitialState = req => ({
+  ...initialState,
+  intl: {
+    ...initialState.intl,
+    currentLocale: process.env.IS_SERVERLESS
+      ? config.defaultLocale
+      : req.acceptsLanguages(config.locales) || config.defaultLocale,
+    initialNow: Date.now(),
+  },
+  device: {
+    host: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`
+  },
+});
 
 const renderApp = (store, renderProps) => {
   const appHtml = ReactDOMServer.renderToString(
@@ -88,10 +76,9 @@ const renderPage = (store, renderProps, req) => {
 };
 
 export default function render(req, res, next) {
-  const initialState = getInitialState(req);
   const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore({
-    initialState,
+    initialState: createRequestInitialState(req),
     platformMiddleware: [routerMiddleware(memoryHistory)]
   });
   const history = syncHistoryWithStore(memoryHistory, store);

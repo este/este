@@ -30,7 +30,6 @@ node_modules/
 npm-debug.log
 project.xcworkspace
 src/common/secrets.json
-src/native/config.js
-src/native/messages.js
+src/native/initialState.js
 webpack-assets.json
 xcuserdata
