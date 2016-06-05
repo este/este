@@ -3,7 +3,7 @@ import appReducer from './app/reducer';
 import createLogger from 'redux-logger';
 import isomorphicFetch from 'isomorphic-fetch';
 import promiseMiddleware from 'redux-promise-middleware';
-import uuid from 'node-uuid';
+import shortid from 'shortid';
 import storageDebounce from 'redux-storage-decorator-debounce';
 import storageFilter from 'redux-storage-decorator-filter';
 import validate from './validate';
@@ -62,7 +62,7 @@ export default function configureStore(options) {
       engine,
       fetch: isomorphicFetch,
       firebase,
-      getUid: () => uuid.v4(),
+      getUid: () => shortid.generate(),
       now: () => Date.now(),
       validate
     }),

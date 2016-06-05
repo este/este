@@ -51,7 +51,7 @@
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
 - [mochajs](https://mochajs.org/) The fun, simple, flexible JavaScript test framework.
 - SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
-- [node-uuid](https://github.com/broofa/node-uuid) Node uuid id generator. Url-friendly. Non-predictable.
+- [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
 - [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
