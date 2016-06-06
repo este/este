@@ -61,6 +61,8 @@
 
 - [node.js](http://nodejs.org) Node 6 with NPM 3 is required.
 - [gulp](http://gulpjs.com/) `npm install -g gulp`
+- [git](https://git-scm.com/downloads) git cmd tool is required
+
 
 #### Optional
 
