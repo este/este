@@ -54,7 +54,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.1",
-    "firebase": "^2.4.0",
+    "firebase": "2.4.2",
     "gulp": "^3.9.0",
     "gulp-bg": "^0.0.8",
     "gulp-eslint": "2.0.0",
