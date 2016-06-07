@@ -1,15 +1,20 @@
 import fs from 'fs';
+import path from 'path';
 
 const descriptorsToMessages = descriptors =>
   descriptors.reduce((previous, { defaultMessage, id }) => ({
     ...previous, [id]: defaultMessage
   }), {});
 
-export default function loadMessages({
-  includeDefault = false
-} = {}) {
+export default function loadMessages(options) {
+  const {
+    includeDefault = false
+  } = options || {};
+  const isDictionary = fileName =>
+    path.extname(fileName) === '.js' &&
+    (includeDefault || !fileName.startsWith('_'));
   return fs.readdirSync('messages')
-    .filter(fileName => includeDefault || !fileName.startsWith('_'))
+    .filter(isDictionary)
     .map(fileName => ({
       descriptors: require(`../../../messages/${fileName}`).default,
       locale: fileName.split('.')[0]
