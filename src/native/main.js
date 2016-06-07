@@ -20,8 +20,8 @@ const createNativeInitialState = () => ({
 });
 
 const store = configureStore({
-  createEngine,
-  initialState: createNativeInitialState()
+  initialState: createNativeInitialState(),
+  platformDeps: { createEngine },
 });
 
 class Root extends Component {

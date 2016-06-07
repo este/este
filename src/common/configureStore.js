@@ -29,15 +29,15 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
 // configureStore is blog.ploeh.dk/2011/07/28/CompositionRoot
 export default function configureStore(options) {
   const {
-    createEngine,
     initialState,
     platformDeps = {},
     platformMiddleware = [],
     platformReducers = {},
   } = options;
 
-  const engineKey = `redux-storage:${initialState.config.appName}`;
-  const engine = createEngine && createEngine(engineKey);
+  const engine =
+    platformDeps.createEngine &&
+    platformDeps.createEngine(`redux-storage:${initialState.config.appName}`);
   const firebase = new Firebase(initialState.config.firebaseUrl);
   // // Check whether connection works.
   // firebase.child('hello-world').set({

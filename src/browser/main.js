@@ -16,9 +16,9 @@ const reportingMiddleware = configureReporting({
   unhandledRejection: fn => window.addEventListener('unhandledrejection', fn)
 });
 const store = configureStore({
-  createEngine,
   initialState,
-  platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)]
+  platformDeps: { createEngine },
+  platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)],
 });
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store.getState);
