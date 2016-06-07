@@ -1,5 +1,5 @@
 import Firebase from 'firebase';
-import appReducer from './app/reducer';
+import configureReducer from './configureReducer';
 import createLogger from 'redux-logger';
 import isomorphicFetch from 'isomorphic-fetch';
 import promiseMiddleware from 'redux-promise-middleware';
@@ -7,7 +7,6 @@ import shortid from 'shortid';
 import storageDebounce from 'redux-storage-decorator-debounce';
 import storageFilter from 'redux-storage-decorator-filter';
 import validate from './validate';
-import { LOGOUT } from './auth/actions';
 import { SET_CURRENT_LOCALE } from './intl/actions';
 import { applyMiddleware, createStore } from 'redux';
 import { createMiddleware as createStorageMiddleware } from 'redux-storage';
@@ -27,25 +26,14 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
-// Reset app state on logout, stackoverflow.com/q/35622588/233902.
-const resetOnLogout = (reducer, initialState) => (state, action) => {
-  if (action.type === LOGOUT) {
-    state = {
-      device: initialState.device,
-      intl: initialState.intl,
-      routing: state.routing // Note routing state has to be reused.
-    };
-  }
-  return reducer(state, action);
-};
-
-// blog.ploeh.dk/2011/07/28/CompositionRoot
+// configureStore is blog.ploeh.dk/2011/07/28/CompositionRoot
 export default function configureStore(options) {
   const {
     createEngine,
     initialState,
     platformDeps = {},
-    platformMiddleware = []
+    platformMiddleware = [],
+    platformReducers = {},
   } = options;
 
   const engineKey = `redux-storage:${initialState.config.appName}`;
@@ -93,7 +81,7 @@ export default function configureStore(options) {
   }
 
   const store = createStore(
-    resetOnLogout(appReducer, initialState),
+    configureReducer(initialState, platformReducers),
     initialState,
     applyMiddleware(...middleware)
   );
@@ -101,9 +89,10 @@ export default function configureStore(options) {
   // Enable hot reload where available.
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers.
-    module.hot.accept('./app/reducer', () => {
-      const nextAppReducer = require('./app/reducer');
-      store.replaceReducer(resetOnLogout(nextAppReducer, initialState));
+    module.hot.accept('./configureReducer', () => {
+      const configureReducer = require('./configureReducer');
+      const reducer = configureReducer(initialState, platformReducers);
+      store.replaceReducer(reducer);
     });
   }
 
