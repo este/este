@@ -6,8 +6,9 @@ gulp.task('upgrade-react-native', () => {
     Steps to upgrade React Native in Este
 
     Fresh React Native
-      - run 'react-native init Este' somewhere
+      - run 'react-native init Este' somewhere (you should use YourAppName)
       - copy android and ios directories to Este app directory
+      - run 'rnpm link'
 
     Already existing App
       - run 'react-native upgrade'
