@@ -1,6 +1,7 @@
 package com.este;
 
 import com.facebook.react.ReactActivity;
+import io.fixd.rctlocale.RCTLocalePackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -34,7 +35,8 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage()
+            new MainReactPackage(),
+            new RCTLocalePackage()
         );
     }
 }

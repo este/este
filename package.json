@@ -85,6 +85,7 @@
     "react-intl": "^2.1.2",
     "react-native": "^0.27.0",
     "react-native-browser-polyfill": "^0.1.1",
+    "react-native-locale": "0.0.10",
     "react-native-router-flux": "^3.26.16",
     "react-native-side-menu": "^0.19.0",
     "react-pure-render": "^1.0.1",
