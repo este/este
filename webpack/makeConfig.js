@@ -1,6 +1,7 @@
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
+import OfflinePlugin from 'offline-plugin';
 import autoprefixer from 'autoprefixer';
 import constants from './constants';
 import ip from 'ip';
@@ -144,6 +145,12 @@ export default function makeConfig(isDevelopment) {
             to: 'favicons'
           }], {
             ignore: ['original/**']
+          }),
+          // Has to be last in a list to pick-up all generated files
+          new OfflinePlugin({
+            publicPath: '/assets/',
+            relativePaths: false,
+            excludes: ['favicons/**']
           })
         );
       }

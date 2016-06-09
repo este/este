@@ -8,6 +8,7 @@ import useScroll from 'react-router-scroll';
 import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import offlinePlugin from 'offline-plugin/runtime';
 
 const initialState = window.__INITIAL_STATE__;
 const reportingMiddleware = configureReporting({
@@ -34,3 +35,5 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('app')
 );
+
+offlinePlugin.install();
