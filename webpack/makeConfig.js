@@ -140,7 +140,7 @@ export default function makeConfig(isDevelopment) {
           }),
           webpackIsomorphicToolsPlugin,
           new CopyWebpackPlugin([{
-            from: './src/browser/app/favicons/',
+            from: './src/common/app/favicons/',
             to: 'favicons'
           }], {
             ignore: ['original/**']
