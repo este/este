@@ -88,12 +88,17 @@ export default function configureStore(options) {
 
   // Enable hot reload where available.
   if (module.hot) {
-    // Enable Webpack hot module replacement for reducers.
-    module.hot.accept('./configureReducer', () => {
-      const configureReducer = require('./configureReducer');
-      const reducer = configureReducer(initialState, platformReducers);
-      store.replaceReducer(reducer);
-    });
+    const replaceReducer = configureReducer =>
+      store.replaceReducer(configureReducer(initialState, platformReducers));
+    if (process.env.IS_BROWSER) {
+      module.hot.accept('./configureReducer', () => {
+        replaceReducer(require('./configureReducer'));
+      });
+    } else { // React Native hot reload has different API.
+      module.hot.accept(() => {
+        replaceReducer(require('./configureReducer').default);
+      });
+    }
   }
 
   return store;
