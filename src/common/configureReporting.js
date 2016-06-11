@@ -3,6 +3,8 @@ import { ValidationError } from './lib/validation';
 import { firebaseActions, firebaseMessages } from './lib/redux-firebase';
 
 // Some errors can be ignored, for example ValidationError is pretty innocent.
+// Such errors should be handled locally without re-throw.
+// This check is here because legacy code.
 const isNegligibleError = error =>
   error.reason instanceof ValidationError ||
   firebaseMessages[error.reason && error.reason.code];
