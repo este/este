@@ -90,13 +90,13 @@ export default function configureStore(options) {
   if (module.hot) {
     const replaceReducer = configureReducer =>
       store.replaceReducer(configureReducer(initialState, platformReducers));
-    if (process.env.IS_BROWSER) {
-      module.hot.accept('./configureReducer', () => {
-        replaceReducer(require('./configureReducer'));
-      });
-    } else { // React Native hot reload has different API.
+    if (isReactNative) {
       module.hot.accept(() => {
         replaceReducer(require('./configureReducer').default);
+      });
+    } else {
+      module.hot.accept('./configureReducer', () => {
+        replaceReducer(require('./configureReducer'));
       });
     }
   }
