@@ -2,7 +2,7 @@ import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  // Defined in server/frontend/render.js and native/index.js
+  // Defined in src/server/frontend/createInitialState.js by server config.
   currentLocale: null,
   defaultLocale: null,
   initialNow: null,
