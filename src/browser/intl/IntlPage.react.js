@@ -54,7 +54,7 @@ class IntlPage extends Component {
         <p>
           <FormattedDate
             value={Date.now()}
-            {...{ day: 'numeric', month: 'long', year: 'numeric' }}
+            {...{ day: 'numeric', month: 'short', year: 'numeric' }}
           />
         </p>
         <p>
