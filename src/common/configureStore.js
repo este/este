@@ -3,13 +3,12 @@ import configureReducer from './configureReducer';
 import createLogger from 'redux-logger';
 import isomorphicFetch from 'isomorphic-fetch';
 import promiseMiddleware from 'redux-promise-middleware';
+import reduxStorage from 'redux-storage';
 import shortid from 'shortid';
 import storageDebounce from 'redux-storage-decorator-debounce';
 import storageFilter from 'redux-storage-decorator-filter';
 import validate from './validate';
-import { SET_CURRENT_LOCALE } from './intl/actions';
 import { applyMiddleware, createStore } from 'redux';
-import { createMiddleware as createStorageMiddleware } from 'redux-storage';
 
 const isReactNative =
   typeof navigator === 'object' &&
@@ -65,15 +64,15 @@ export default function configureStore(options) {
       ['intl', 'currentLocale']
     ]);
     decoratedEngine = storageDebounce(decoratedEngine, 300);
-    middleware.push(createStorageMiddleware(decoratedEngine, [], [
-      SET_CURRENT_LOCALE
-    ]));
+    middleware.push(reduxStorage.createMiddleware(decoratedEngine));
   }
 
   // Logger must be the last middleware in chain.
   if (enableLogger) {
+    const ignoredActions = [reduxStorage.SAVE];
     const logger = createLogger({
       collapsed: true,
+      predicate: (getState, action) => ignoredActions.indexOf(action.type) === -1,
       // Convert immutable to JSON.
       stateTransformer: state => JSON.parse(JSON.stringify(state))
     });
