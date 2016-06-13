@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-// Because root .babelrc is configured for react-native (browser users webpack
+// Because root .babelrc is configured for react-native (browser uses webpack
 // and server has own .babelrc file), we have to require regenerator explicitly.
 import 'regenerator-runtime/runtime';
 
@@ -14,11 +14,7 @@ import path from 'path';
   require.extensions['.' + ext] = () => {};
 });
 
-function reportError(errorReporter) {
-  return errorReporter === 'process' ? process.exit.bind(process, 1) : gutil.log;
-}
-
-export default function mochaRunCreator(errorReporter = 'process') {
+export default function mochaRunCreator(onError = 'exit') {
   return (file) => {
     let source = 'src/**/__test__/**/*.js';
 
@@ -45,6 +41,15 @@ export default function mochaRunCreator(errorReporter = 'process') {
         require: ['./test/mochaSetup.js'],
         reporter: 'spec'
       }))
-      .on('error', reportError(errorReporter));
+      .on('error', error => {
+        // Looking for unhandled errors in mocha to log.
+        //  Handled and logged "it()" errors are returned with no stack
+        if (error.stack) {
+          gutil.log(error);
+        }
+        if (onError === 'exit') {
+          process.exit(1);
+        }
+      });
   };
 }
