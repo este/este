@@ -129,6 +129,10 @@ export default [
     "defaultMessage": "The operation could not be performed due to a network error."
   },
   {
+    "id": "firebase.error.USER_CANCELLED",
+    "defaultMessage": "Login cancelled."
+  },
+  {
     "id": "firebase.login.dismiss",
     "defaultMessage": "Dismiss"
   },
