@@ -54,7 +54,10 @@ class IntlPage extends Component {
         <p>
           <FormattedDate
             value={Date.now()}
-            {...{ day: 'numeric', month: 'short', year: 'numeric' }}
+            day="numeric"
+            month="long"
+            year="numeric"
+            formatMatcher="basic" // while this bug remains in react-intl: https://github.com/andyearnshaw/Intl.js/issues/179
           />
         </p>
         <p>
