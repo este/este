@@ -1,3 +1,4 @@
+import app from './app/reducer';
 import auth from './auth/reducer';
 import config from './config/reducer';
 import device from './device/reducer';
@@ -45,6 +46,7 @@ const updateAppStateFromStorage = reducer => (state, action) => {
 export default function configureReducer(initialState, platformReducers) {
   let reducer = combineReducers({
     ...platformReducers,
+    app,
     auth,
     config,
     device,

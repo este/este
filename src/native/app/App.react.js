@@ -15,11 +15,11 @@ import { injectIntl, intlShape } from 'react-intl';
 class App extends Component {
 
   static propTypes = {
-    device: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
+    isSideMenuOpen: PropTypes.bool.isRequired,
     onSideMenuChange: PropTypes.func.isRequired,
+    storageLoaded: PropTypes.bool.isRequired,
     toggleSideMenu: PropTypes.func.isRequired,
-    ui: PropTypes.object.isRequired
   };
 
   static configureScene(route) {
@@ -53,10 +53,10 @@ class App extends Component {
   }
 
   renderScene(route) {
-    const { toggleSideMenu, ui } = this.props;
+    const { isSideMenuOpen, toggleSideMenu } = this.props;
     return (
       <View style={[styles.sceneView, route.style]}>
-        <StatusBar hidden={ui.isSideMenuOpen} />
+        <StatusBar hidden={isSideMenuOpen} />
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={toggleSideMenu}
@@ -67,12 +67,15 @@ class App extends Component {
   }
 
   render() {
-    const { onSideMenuChange, ui } = this.props;
+    const { isSideMenuOpen, onSideMenuChange, storageLoaded } = this.props;
+    // Don't render anything until AsyncStorage is loaded to prevent flashes
+    // of unloaded content.
+    if (!storageLoaded) return null;
 
     return (
       <SideMenu
         disableGestures
-        isOpen={ui.isSideMenuOpen}
+        isOpen={isSideMenuOpen}
         menu={
           <Menu onRouteChange={this.onRouteChange} />
         }
@@ -95,8 +98,8 @@ class App extends Component {
 App = injectIntl(App);
 
 App = connect(state => ({
-  device: state.device,
-  ui: state.ui
+  isSideMenuOpen: state.ui.isSideMenuOpen,
+  storageLoaded: state.app.storageLoaded,
 }), uiActions)(App);
 
 export default start(App);
