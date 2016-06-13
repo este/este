@@ -9,19 +9,18 @@ const InitialState = Record({
   list: undefined,
   viewer: undefined
 });
-const initialState = new InitialState;
 
 const reviveList = list => list && Seq(list)
   .map(json => new User(json))
   .sortBy(user => -user.authenticatedAt)
   .toList();
 
-const revive = ({ list, viewer }) => initialState.merge({
+const revive = ({ list, viewer }) => new InitialState({
   list: reviveList(list),
   viewer: viewer ? new User(viewer) : null
 });
 
-export default function usersReducer(state = initialState, action) {
+export default function usersReducer(state = new InitialState, action) {
   if (!(state instanceof InitialState)) return revive(state);
 
   switch (action.type) {

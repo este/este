@@ -4,10 +4,9 @@ import { Record } from 'immutable';
 const InitialState = Record({
   isSideMenuOpen: false
 });
-const initialState = new InitialState;
 
-export default function uiReducer(state = initialState, action) {
-  if (!(state instanceof InitialState)) return initialState;
+export default function uiReducer(state = new InitialState, action) {
+  if (!(state instanceof InitialState)) return new InitialState(state);
 
   switch (action.type) {
 

@@ -2,16 +2,15 @@ import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
-  // Defined in src/server/frontend/createInitialState.js by server config.
+  // Defined in src/server/frontend/createInitialState.js
   currentLocale: null,
   defaultLocale: null,
   initialNow: null,
   locales: null,
   messages: {}
 });
-const initialState = new InitialState;
 
-export default function intlReducer(state = initialState, action) {
+export default function intlReducer(state = new InitialState, action) {
   if (!(state instanceof InitialState)) return new InitialState(state);
 
   switch (action.type) {

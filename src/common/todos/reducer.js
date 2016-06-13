@@ -1,14 +1,19 @@
 import * as actions from './actions';
 import Todo from './todo';
-import { Map, Record } from 'immutable';
+import { Map, Record, Seq } from 'immutable';
 
 const InitialState = Record({
   map: Map()
 });
-const initialState = new InitialState;
 
-export default function todosReducer(state = initialState, action) {
-  if (!(state instanceof InitialState)) return initialState;
+const reviveMap = map => Seq(map).map(json => new Todo(json)).toMap();
+
+const revive = ({ map }) => new InitialState({
+  map: reviveMap(map)
+});
+
+export default function todosReducer(state = new InitialState, action) {
+  if (!(state instanceof InitialState)) return revive(state);
 
   switch (action.type) {
 
