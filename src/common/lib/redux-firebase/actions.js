@@ -1,23 +1,21 @@
 import mapAuthToUser from './mapAuthToUser';
 
-/* eslint-disable max-len */
-export const ESTE_REDUX_FIREBASE_LOGIN_ERROR = 'ESTE_REDUX_FIREBASE_LOGIN_ERROR';
-export const ESTE_REDUX_FIREBASE_LOGIN_START = 'ESTE_REDUX_FIREBASE_LOGIN_START';
-export const ESTE_REDUX_FIREBASE_LOGIN_SUCCESS = 'ESTE_REDUX_FIREBASE_LOGIN_SUCCESS';
-export const ESTE_REDUX_FIREBASE_OFF_QUERY = 'ESTE_REDUX_FIREBASE_OFF_QUERY';
-export const ESTE_REDUX_FIREBASE_ON_AUTH = 'ESTE_REDUX_FIREBASE_ON_AUTH';
-export const ESTE_REDUX_FIREBASE_ON_QUERY = 'ESTE_REDUX_FIREBASE_ON_QUERY';
-export const ESTE_REDUX_FIREBASE_RESET_PASSWORD_ERROR = 'ESTE_REDUX_FIREBASE_RESET_PASSWORD_ERROR';
-export const ESTE_REDUX_FIREBASE_RESET_PASSWORD_START = 'ESTE_REDUX_FIREBASE_RESET_PASSWORD_START';
-export const ESTE_REDUX_FIREBASE_RESET_PASSWORD_SUCCESS = 'ESTE_REDUX_FIREBASE_RESET_PASSWORD_SUCCESS';
-export const ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_ERROR = 'ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_ERROR';
-export const ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_START = 'ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_START';
-export const ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_SUCCESS = 'ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH_SUCCESS';
-export const ESTE_REDUX_FIREBASE_SIGN_UP_ERROR = 'ESTE_REDUX_FIREBASE_SIGN_UP_ERROR';
-export const ESTE_REDUX_FIREBASE_SIGN_UP_START = 'ESTE_REDUX_FIREBASE_SIGN_UP_START';
-export const ESTE_REDUX_FIREBASE_SIGN_UP_SUCCESS = 'ESTE_REDUX_FIREBASE_SIGN_UP_SUCCESS';
-export const ESTE_REDUX_FIREBASE_WATCH_AUTH = 'ESTE_REDUX_FIREBASE_WATCH_AUTH';
-/* eslint-enable max-len */
+export const FIREBASE_LOGIN_ERROR = 'FIREBASE_LOGIN_ERROR';
+export const FIREBASE_LOGIN_START = 'FIREBASE_LOGIN_START';
+export const FIREBASE_LOGIN_SUCCESS = 'FIREBASE_LOGIN_SUCCESS';
+export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
+export const FIREBASE_ON_AUTH = 'FIREBASE_ON_AUTH';
+export const FIREBASE_ON_QUERY = 'FIREBASE_ON_QUERY';
+export const FIREBASE_RESET_PASSWORD_ERROR = 'FIREBASE_RESET_PASSWORD_ERROR';
+export const FIREBASE_RESET_PASSWORD_START = 'FIREBASE_RESET_PASSWORD_START';
+export const FIREBASE_RESET_PASSWORD_SUCCESS = 'FIREBASE_RESET_PASSWORD_SUCCESS';
+export const FIREBASE_SAVE_USER_ON_AUTH_ERROR = 'FIREBASE_SAVE_USER_ON_AUTH_ERROR';
+export const FIREBASE_SAVE_USER_ON_AUTH_START = 'FIREBASE_SAVE_USER_ON_AUTH_START';
+export const FIREBASE_SAVE_USER_ON_AUTH_SUCCESS = 'FIREBASE_SAVE_USER_ON_AUTH_SUCCESS';
+export const FIREBASE_SIGN_UP_ERROR = 'FIREBASE_SIGN_UP_ERROR';
+export const FIREBASE_SIGN_UP_START = 'FIREBASE_SIGN_UP_START';
+export const FIREBASE_SIGN_UP_SUCCESS = 'FIREBASE_SIGN_UP_SUCCESS';
+export const FIREBASE_WATCH_AUTH = 'FIREBASE_WATCH_AUTH';
 
 // Doesn't work on React Native, because there is no window nor redirect.
 // Use React Native Facebook login component with authWithOAuthToken instead.
@@ -54,7 +52,7 @@ function saveUserOnAuth(authData) {
       [`users-emails/${user.id}`]: { email }
     });
     return {
-      type: 'ESTE_REDUX_FIREBASE_SAVE_USER_ON_AUTH',
+      type: 'FIREBASE_SAVE_USER_ON_AUTH',
       payload: promise
     };
   };
@@ -66,7 +64,7 @@ export function login(provider, fields) {
       ? firebase.authWithPassword(fields)
       : socialLogin(firebase, provider);
     return {
-      type: 'ESTE_REDUX_FIREBASE_LOGIN',
+      type: 'FIREBASE_LOGIN',
       payload: promise
     };
   };
@@ -74,7 +72,7 @@ export function login(provider, fields) {
 
 export function onAuth(authData) {
   return {
-    type: ESTE_REDUX_FIREBASE_ON_AUTH,
+    type: FIREBASE_ON_AUTH,
     payload: { authData }
   };
 }
@@ -83,7 +81,7 @@ export function resetPassword(email) {
   return ({ firebase }) => {
     const promise = firebase.resetPassword({ email });
     return {
-      type: 'ESTE_REDUX_FIREBASE_RESET_PASSWORD',
+      type: 'FIREBASE_RESET_PASSWORD',
       payload: promise
     };
   };
@@ -96,7 +94,7 @@ export function signUp(fields) {
       await firebase.authWithPassword(fields);
     };
     return {
-      type: 'ESTE_REDUX_FIREBASE_SIGN_UP',
+      type: 'FIREBASE_SIGN_UP',
       payload: getPromise()
     };
   };
@@ -118,7 +116,7 @@ export function watchAuth(logout) {
       }
     });
     return {
-      type: ESTE_REDUX_FIREBASE_WATCH_AUTH
+      type: FIREBASE_WATCH_AUTH
     };
   };
 }

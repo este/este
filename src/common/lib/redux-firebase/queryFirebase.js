@@ -133,7 +133,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
             ref.once(...arg);
           }
         });
-        return actions.ESTE_REDUX_FIREBASE_ON_QUERY;
+        return actions.FIREBASE_ON_QUERY;
       });
     }
 
@@ -142,7 +142,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         // For deregistration, we have to use only eventType and callback.
         this.onArgs.forEach(arg => ref.off(arg[0], arg[1]));
         this.onceArgs.forEach(arg => ref.off(arg[0], arg[1]));
-        return actions.ESTE_REDUX_FIREBASE_OFF_QUERY;
+        return actions.FIREBASE_OFF_QUERY;
       });
     }
 
