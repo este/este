@@ -64,11 +64,11 @@ path /hello-world is HelloWorld {
 }
 
 path /users {
-  read() { true }
   index() { ["authenticatedAt"] }
 }
 
 path /users/{uid} is User {
+  read() { true }
   write() { isViewer(uid) }
 }
 
