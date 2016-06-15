@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import { Map } from 'immutable';
 
-export default function reducer(state = Map(), action) {
+export default function fieldsReducer(state = Map(), action) {
   if (!(state instanceof Map)) return Map().mergeDeep(state);
 
   switch (action.type) {
