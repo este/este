@@ -1,7 +1,7 @@
 import fields from './fields';
-import reduxFields from './reducer';
+import fieldsReducer from './reducer';
 
 export {
   fields,
-  reduxFields
+  fieldsReducer
 };

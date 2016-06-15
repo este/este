@@ -109,7 +109,7 @@ export default function fields(Wrapped, options) {
 
     getModelFromState() {
       const normalizedPath = Fields.getNormalizePath(this.props);
-      return this.context.store.getState().reduxFields.getIn(normalizedPath);
+      return this.context.store.getState().fields.getIn(normalizedPath);
     }
 
     setModel(model) {

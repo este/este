@@ -9,7 +9,7 @@ import users from './users/reducer';
 import { LOGOUT } from './auth/actions';
 import { UPDATE_APP_STATE_FROM_STORAGE_SUCCESS } from './app/actions';
 import { combineReducers } from 'redux';
-import { reduxFields } from './lib/redux-fields';
+import { fieldsReducer as fields } from './lib/redux-fields';
 import { routerReducer as routing } from 'react-router-redux';
 
 // Reset app state on logout, stackoverflow.com/q/35622588/233902.
@@ -50,12 +50,12 @@ export default function configureReducer(initialState, platformReducers) {
     auth,
     config,
     device,
+    fields,
     intl,
-    reduxFields,
     routing,
     todos,
     ui,
-    users
+    users,
   });
 
   // The power of higher-order reducers, http://slides.com/omnidan/hor

@@ -211,7 +211,7 @@ FieldsPage = fields(FieldsPage, {
   })
 });
 
-// Connect is not required. It's just a demonstration of reduxFields state.
+// Connect is not required. It's just a demonstration of fields state.
 export default connect(state => ({
-  fieldsPageModel: state.reduxFields.get('fieldsPage')
+  fieldsPageModel: state.fields.get('fieldsPage')
 }))(FieldsPage);
