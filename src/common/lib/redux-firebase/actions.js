@@ -5,6 +5,7 @@ export const FIREBASE_LOGIN_START = 'FIREBASE_LOGIN_START';
 export const FIREBASE_LOGIN_SUCCESS = 'FIREBASE_LOGIN_SUCCESS';
 export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
 export const FIREBASE_ON_AUTH = 'FIREBASE_ON_AUTH';
+export const FIREBASE_ON_PERMISSION_DENIED = 'FIREBASE_ON_PERMISSION_DENIED';
 export const FIREBASE_ON_QUERY = 'FIREBASE_ON_QUERY';
 export const FIREBASE_RESET_PASSWORD_ERROR = 'FIREBASE_RESET_PASSWORD_ERROR';
 export const FIREBASE_RESET_PASSWORD_START = 'FIREBASE_RESET_PASSWORD_START';
@@ -74,6 +75,13 @@ export function onAuth(authData) {
   return {
     type: FIREBASE_ON_AUTH,
     payload: { authData }
+  };
+}
+
+export function onPermissionDenied(message) {
+  return {
+    type: FIREBASE_ON_PERMISSION_DENIED,
+    payload: { message }
   };
 }
 

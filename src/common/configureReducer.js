@@ -10,6 +10,7 @@ import { LOGOUT } from './auth/actions';
 import { UPDATE_APP_STATE_FROM_STORAGE_SUCCESS } from './app/actions';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
+import { firebaseReducer as firebase } from './lib/redux-firebase';
 import { routerReducer as routing } from 'react-router-redux';
 
 // Reset app state on logout, stackoverflow.com/q/35622588/233902.
@@ -51,6 +52,7 @@ export default function configureReducer(initialState, platformReducers) {
     config,
     device,
     fields,
+    firebase,
     intl,
     routing,
     todos,
