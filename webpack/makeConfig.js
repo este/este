@@ -27,6 +27,7 @@ const loaders = {
 // Dynamically getting dev server IP address instead of using hardcoded
 // "localhost" string to ensure hot module replacement works on devices.
 const serverIp = ip.address();
+// const serverIp = 'localhost'; // Uncomment for permanent testing, then 'gulp'
 // Note ip.address() returns 127.0.0.1 for offline and 10.0.1.3 (or similar) for
 // online. With 10.0.1.3, hot reload works on devices, but offline doesn't work.
 // To test Este app in offline mode, disable wifi and then run 'gulp' again.
