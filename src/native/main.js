@@ -24,6 +24,7 @@ const createNativeInitialState = () => ({
     initialNow: Date.now(),
   },
   device: {
+    isReactNative: true,
     platform: Platform.OS,
   },
 });
