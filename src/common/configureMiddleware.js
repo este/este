@@ -48,7 +48,8 @@ export default function configureMiddleware(
 
   if (engine) {
     let decoratedEngine = storageFilter(engine, [
-      ['intl', 'currentLocale']
+      ['intl', 'currentLocale'],
+      ['users', 'viewer'],
     ]);
     decoratedEngine = storageDebounce(decoratedEngine, 300);
     middleware.push(storage.createMiddleware(decoratedEngine));
