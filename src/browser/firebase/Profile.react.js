@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
 
@@ -15,7 +15,6 @@ const messages = defineMessages({
 class Profile extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired,
     logout: PropTypes.func.isRequired,
     viewer: PropTypes.object.isRequired
   };
@@ -26,7 +25,8 @@ class Profile extends Component {
     return (
       <div className="firebase-profile">
         <h2>
-          <FormattedMessage {...messages.greeting} /> {viewer.displayName || viewer.email}!
+          <FormattedMessage {...messages.greeting} />{' '}
+          {viewer.displayName || viewer.email}!
         </h2>
         {viewer.profileImageURL &&
           <div className="profile-image">
@@ -44,8 +44,6 @@ class Profile extends Component {
   }
 
 }
-
-Profile = injectIntl(Profile);
 
 export default connect(state => ({
   viewer: state.users.viewer

@@ -3,16 +3,15 @@ import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { injectIntl, intlShape } from 'react-intl';
 
 class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired,
-    intl: intlShape.isRequired
+    fields: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -29,18 +28,19 @@ class NewTodo extends Component {
   }
 
   render() {
-    const { intl, fields } = this.props;
-    const placeholder = intl.formatMessage(newTodoMessages.placeholder);
+    const { fields } = this.props;
 
     return (
-      <input
-        {...fields.title}
-        autoFocus
-        className="new-todo"
-        maxLength={100}
-        onKeyDown={this.onInputKeyDown}
-        placeholder={placeholder}
-      />
+      <FormattedMessage {...newTodoMessages.placeholder}>
+        {message => <input
+          {...fields.title}
+          autoFocus
+          className="new-todo"
+          maxLength={100}
+          onKeyDown={this.onInputKeyDown}
+          placeholder={message}
+        />}
+      </FormattedMessage>
     );
   }
 
@@ -50,7 +50,5 @@ NewTodo = fields(NewTodo, {
   path: 'newTodo',
   fields: ['title']
 });
-
-NewTodo = injectIntl(NewTodo);
 
 export default connect(null, todosActions)(NewTodo);

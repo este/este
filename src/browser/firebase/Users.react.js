@@ -4,7 +4,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import UserItem from './UserItem.react';
 import loading from '../lib/loading';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import { queryFirebase } from '../../common/lib/redux-firebase';
 
@@ -18,7 +18,6 @@ const messages = defineMessages({
 class Users extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired,
     limitToLast: PropTypes.number.isRequired,
     users: PropTypes.object
   };
@@ -68,8 +67,6 @@ Users = queryFirebase(Users, props => ({
     value: snapshot => props.onUsersList(snapshot.val())
   }
 }));
-
-Users = injectIntl(Users);
 
 export default connect(state => ({
   users: state.users.list

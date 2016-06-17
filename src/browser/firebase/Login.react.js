@@ -2,7 +2,7 @@ import './Login.scss';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { firebaseActions, firebaseMessages } from '../../common/lib/redux-firebase';
@@ -59,7 +59,6 @@ class Login extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
     login: PropTypes.func.isRequired,
     resetPassword: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired
@@ -121,9 +120,6 @@ class Login extends Component {
   render() {
     const { auth: { formDisabled, formError }, fields } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
-    const { intl } = this.props;
-    const emailPlaceholder = intl.formatMessage(messages.emailPlaceholder);
-    const passwordPlaceholder = intl.formatMessage(messages.passwordPlaceholder);
     const errorMessage = formError
       ? firebaseMessages[formError.code] || messages.unknownError
       : null;
@@ -146,18 +142,22 @@ class Login extends Component {
             :
               <legend><FormattedMessage {...messages.emailPasswordRecovery} /></legend>
             }
-            <input
-              {...fields.email}
-              maxLength="100"
-              placeholder={emailPlaceholder}
-            />
+            <FormattedMessage {...messages.emailPlaceholder}>
+              {message => <input
+                {...fields.email}
+                maxLength="100"
+                placeholder={message}
+              />}
+            </FormattedMessage>
             {!forgetPasswordIsShown &&
-              <input
-                {...fields.password}
-                maxLength="1000"
-                placeholder={passwordPlaceholder}
-                type="password"
-              />
+              <FormattedMessage {...messages.passwordPlaceholder}>
+                {message => <input
+                  {...fields.password}
+                  maxLength="1000"
+                  placeholder={message}
+                  type="password"
+                />}
+              </FormattedMessage>
             }
             {!forgetPasswordIsShown ?
               <div className="buttons">
@@ -209,8 +209,6 @@ Login = fields(Login, {
   path: 'auth',
   fields: ['email', 'password']
 });
-
-Login = injectIntl(Login);
 
 export default connect(state => ({
   auth: state.auth

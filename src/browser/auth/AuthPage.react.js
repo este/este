@@ -3,27 +3,26 @@ import Helmet from 'react-helmet';
 import Login from './Login.react';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { locationShape } from 'react-router';
 
-class AuthPage extends Component {
+export default class AuthPage extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired,
     location: locationShape
   };
 
   render() {
-    const { intl, location } = this.props;
-    const title = intl.formatMessage(linksMessages.login);
+    const { location } = this.props;
+
     return (
       <div className="auth-page">
-        <Helmet title={title} />
+        <FormattedMessage {...linksMessages.login}>
+          {message => <Helmet title={message} />}
+        </FormattedMessage>
         <Login location={location} />
       </div>
     );
   }
 
 }
-
-export default injectIntl(AuthPage);

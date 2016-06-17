@@ -5,7 +5,7 @@ import newTodoMessages from '../../common/todos/newTodoMessages';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,8 +28,7 @@ class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired,
-    intl: intlShape.isRequired
+    fields: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -50,20 +49,21 @@ class NewTodo extends Component {
   }
 
   render() {
-    const { intl, fields } = this.props;
-    const placeholder = intl.formatMessage(newTodoMessages.placeholder);
+    const { fields } = this.props;
 
     return (
       <View style={styles.container}>
-        <TextInput
-          {...fields.title}
-          maxLength={100} // React Native needs explicit maxLength.
-          onEndEditing={this.onTextInputEndEditing}
-          onSubmitEditing={this.onSubmitEditing}
-          placeholder={placeholder}
-          placeholderTextColor={'#cce9f2'}
-          style={styles.input}
-        />
+        <FormattedMessage {...newTodoMessages.placeholder}>
+          {message => <TextInput
+            {...fields.title}
+            maxLength={100} // React Native needs explicit maxLength.
+            onEndEditing={this.onTextInputEndEditing}
+            onSubmitEditing={this.onSubmitEditing}
+            placeholder={message}
+            placeholderTextColor={'#cce9f2'}
+            style={styles.input}
+          />}
+        </FormattedMessage>
       </View>
     );
   }
@@ -74,7 +74,5 @@ NewTodo = fields(NewTodo, {
   path: 'newTodo',
   fields: ['title']
 });
-
-NewTodo = injectIntl(NewTodo);
 
 export default connect(null, todosActions)(NewTodo);

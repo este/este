@@ -8,9 +8,7 @@ import {
   FormattedMessage,
   FormattedNumber,
   FormattedRelative,
-  defineMessages,
-  injectIntl,
-  intlShape
+  defineMessages
 } from 'react-intl';
 
 const messages = defineMessages({
@@ -27,11 +25,7 @@ const messages = defineMessages({
   }
 });
 
-class IntlPage extends Component {
-
-  static propTypes = {
-    intl: intlShape.isRequired
-  };
+export default class IntlPage extends Component {
 
   constructor(props) {
     super(props);
@@ -39,14 +33,14 @@ class IntlPage extends Component {
   }
 
   render() {
-    const { intl } = this.props;
-    const title = intl.formatMessage(linksMessages.intl);
     // To remember beloved −123 min. https://www.youtube.com/watch?v=VKOv1I8zKso
     const unreadCount = 123;
 
     return (
       <div className="intl-page">
-        <Helmet title={title} />
+        <FormattedMessage {...linksMessages.intl}>
+          {message => <Helmet title={message} />}
+        </FormattedMessage>
         <h2>
           <FormattedMessage {...messages.h2} />
         </h2>
@@ -76,5 +70,3 @@ class IntlPage extends Component {
   }
 
 }
-
-export default injectIntl(IntlPage);

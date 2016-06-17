@@ -5,18 +5,18 @@ import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { focusInvalidField, ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
 const messages = defineMessages({
   h2: {
-    defaultMessage: 'redux-fields demonstration',
+    defaultMessage: 'Fields',
     id: 'fields.page.h2'
   },
   p: {
-    defaultMessage: 'Something like redux-form but simplified.',
+    defaultMessage: 'Something like redux-form but simplified and universal.',
     id: 'fields.page.p'
   }
 });
@@ -27,8 +27,7 @@ class FieldsPage extends Component {
     // Generated fields by fields higher order component.
     fields: PropTypes.object.isRequired,
     // We can read anything from fields model directly.
-    fieldsPageModel: PropTypes.object,
-    intl: intlShape.isRequired,
+    fieldsPageModel: PropTypes.object
   };
 
   constructor(props) {
@@ -76,7 +75,7 @@ class FieldsPage extends Component {
   }
 
   render() {
-    const { fields, fieldsPageModel, intl } = this.props;
+    const { fields, fieldsPageModel } = this.props;
 
     // Just an example of some dynamically loaded data.
     // cato.org/publications/commentary/key-concepts-libertarianism
@@ -97,7 +96,9 @@ class FieldsPage extends Component {
 
     return (
       <div className="fields-page">
-        <Helmet title={intl.formatMessage(linksMessages.fields)} />
+        <FormattedMessage {...linksMessages.fields}>
+          {message => <Helmet title={message} />}
+        </FormattedMessage>
         <h2>
           <FormattedMessage {...messages.h2} />
         </h2>
@@ -189,8 +190,6 @@ class FieldsPage extends Component {
   }
 
 }
-
-FieldsPage = injectIntl(FieldsPage);
 
 FieldsPage = fields(FieldsPage, {
   path: 'fieldsPage',

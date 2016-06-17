@@ -4,7 +4,7 @@ import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -27,24 +27,28 @@ class MePage extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    intl: intlShape.isRequired,
     viewer: PropTypes.object
   };
 
   render() {
-    const { children, intl, viewer: { email } } = this.props;
-    const title = intl.formatMessage(linksMessages.me);
+    const { children, viewer: { email } } = this.props;
 
     return (
       <div className="me-page">
-        <Helmet title={title} />
+        <FormattedMessage {...linksMessages.me}>
+          {message => <Helmet title={message} />}
+        </FormattedMessage>
         <ul>
-          <li><Link activeClassName="active" to="/me/profile">
-            <FormattedMessage {...messages.linkToProfile} />
-          </Link></li>
-          <li><Link activeClassName="active" to="/me/settings">
-            <FormattedMessage {...messages.linkToSettings} />
-          </Link></li>
+          <li>
+            <Link activeClassName="active" to="/me/profile">
+              <FormattedMessage {...messages.linkToProfile} />
+            </Link>
+          </li>
+          <li>
+            <Link activeClassName="active" to="/me/settings">
+              <FormattedMessage {...messages.linkToSettings} />
+            </Link>
+          </li>
         </ul>
         {children ||
           <p>
@@ -57,8 +61,6 @@ class MePage extends Component {
   }
 
 }
-
-MePage = injectIntl(MePage);
 
 export default connect(state => ({
   viewer: state.users.viewer
