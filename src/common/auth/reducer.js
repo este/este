@@ -4,7 +4,9 @@ import { firebaseActions } from '../lib/redux-firebase';
 
 const InitialState = Record({
   formDisabled: false,
-  formError: null
+  formError: null,
+  isAuthenticated: false,
+  token: null,
 });
 
 export default function authReducer(state = new InitialState, action) {
@@ -35,6 +37,16 @@ export default function authReducer(state = new InitialState, action) {
         formDisabled: false,
         formError: null
       });
+
+    case firebaseActions.FIREBASE_ON_AUTH: {
+      const { authData } = action.payload;
+      return state.merge({
+        isAuthenticated: !!authData,
+        // Note the auth token is updated lazily aka only with the new one.
+        // The token must be stored in a storage because Firebase 3 needs it.
+        token: authData && authData.token || state.token,
+      });
+    }
 
   }
 

@@ -10,13 +10,13 @@ export const FIREBASE_ON_QUERY = 'FIREBASE_ON_QUERY';
 export const FIREBASE_RESET_PASSWORD_ERROR = 'FIREBASE_RESET_PASSWORD_ERROR';
 export const FIREBASE_RESET_PASSWORD_START = 'FIREBASE_RESET_PASSWORD_START';
 export const FIREBASE_RESET_PASSWORD_SUCCESS = 'FIREBASE_RESET_PASSWORD_SUCCESS';
-export const FIREBASE_SAVE_USER_ON_AUTH_ERROR = 'FIREBASE_SAVE_USER_ON_AUTH_ERROR';
-export const FIREBASE_SAVE_USER_ON_AUTH_START = 'FIREBASE_SAVE_USER_ON_AUTH_START';
-export const FIREBASE_SAVE_USER_ON_AUTH_SUCCESS = 'FIREBASE_SAVE_USER_ON_AUTH_SUCCESS';
+export const FIREBASE_SAVE_USER_ERROR = 'FIREBASE_SAVE_USER_ERROR';
+export const FIREBASE_SAVE_USER_START = 'FIREBASE_SAVE_USER_START';
+export const FIREBASE_SAVE_USER_SUCCESS = 'FIREBASE_SAVE_USER_SUCCESS';
 export const FIREBASE_SIGN_UP_ERROR = 'FIREBASE_SIGN_UP_ERROR';
 export const FIREBASE_SIGN_UP_START = 'FIREBASE_SIGN_UP_START';
 export const FIREBASE_SIGN_UP_SUCCESS = 'FIREBASE_SIGN_UP_SUCCESS';
-export const FIREBASE_WATCH_AUTH = 'FIREBASE_WATCH_AUTH';
+// export const FIREBASE_WATCH_AUTH = 'FIREBASE_WATCH_AUTH';
 
 // Doesn't work on React Native, because there is no window nor redirect.
 // Use React Native Facebook login component with authWithOAuthToken instead.
@@ -34,7 +34,7 @@ async function socialLogin(firebase, provider) {
   }
 }
 
-function saveUserOnAuth(authData) {
+export function saveUser(authData) {
   return ({ firebase }) => {
     const user = mapAuthToUser(authData);
     user.authenticatedAt = firebase.constructor.ServerValue.TIMESTAMP;
@@ -53,8 +53,9 @@ function saveUserOnAuth(authData) {
       [`users-emails/${user.id}`]: { email }
     });
     return {
-      type: 'FIREBASE_SAVE_USER_ON_AUTH',
-      payload: promise
+      type: 'FIREBASE_SAVE_USER',
+      payload: promise,
+      meta: { user },
     };
   };
 }
@@ -104,27 +105,6 @@ export function signUp(fields) {
     return {
       type: 'FIREBASE_SIGN_UP',
       payload: getPromise()
-    };
-  };
-}
-
-export function watchAuth(logout) {
-  let wasAuthenticated = false;
-  return ({ dispatch, firebase }) => {
-    // Use sync getAuth to set app state immediately.
-    dispatch(onAuth(firebase.getAuth()));
-    // Watch auth.
-    firebase.onAuth(authData => {
-      dispatch(onAuth(authData));
-      if (authData) {
-        wasAuthenticated = true;
-        dispatch(saveUserOnAuth(authData));
-      } else {
-        if (wasAuthenticated) dispatch(logout());
-      }
-    });
-    return {
-      type: FIREBASE_WATCH_AUTH
     };
   };
 }

@@ -11,7 +11,7 @@
 //     ['limitToFirst', props.limitToFirst]
 //   ],
 //   on: {
-//     value: (snapshot) => props.onUsersList(snapshot.val())
+//     value: (snap) => props.onUsersList(snap.val())
 //     // To handle cancelCallback: value: [callback, cancelCallback]
 //     // To handle all events, check github.com/steida/vetoapp VetoedBy.
 //   }
@@ -59,26 +59,26 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         const action = eventTypes.all;
         delete eventTypes.all;
         // Use value to get current state once.
-        eventTypes.value = snapshot => {
+        eventTypes.value = snap => {
           this._onAllValueCalled = true;
           const val = [];
-          snapshot.forEach(childSnapshot => {
-            val.push(childSnapshot.val());
+          snap.forEach(childSnap => {
+            val.push(childSnap.val());
           });
           action({ eventType: 'value', val });
         };
         if (!serverFetching) {
           ['child_added', 'child_changed', 'child_moved', 'child_removed']
             .forEach(eventType => {
-              eventTypes[eventType] = (snapshot, prevChildKey) => {
+              eventTypes[eventType] = (snap, prevChildKey) => {
                 if (eventType === 'child_added' && !this._onAllValueCalled) {
                   return;
                 }
                 action({
                   eventType,
-                  key: snapshot.key(),
+                  key: snap.key(),
                   prevChildKey,
-                  val: snapshot.val()
+                  val: snap.val()
                 });
               };
             });

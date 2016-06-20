@@ -1,26 +1,23 @@
+import * as actions from './actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import { firebaseActions } from '../lib/redux-firebase';
-import { logout } from '../auth/actions';
-import { updateAppStateFromStorage } from './actions';
 
 export default function start(Wrapped) {
   class Start extends Component {
 
     static propTypes = {
-      dispatch: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired
+      intl: PropTypes.object.isRequired,
+      start: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
-      const { dispatch } = this.props;
-      // Client side changes must be dispatched after componentDidMount, aka
-      // the first app render, to match client and server HTML. Otherwise,
+      const { start } = this.props;
+      // Client side changes must be dispatched on componentDidMount, aka
+      // after the first app render, to match client and server HTML. Otherwise,
       // React attempt to reuse markup will fail.
-      dispatch(firebaseActions.watchAuth(logout));
-      dispatch(updateAppStateFromStorage());
+      start();
     }
 
     render() {
@@ -44,7 +41,7 @@ export default function start(Wrapped) {
 
   Start = connect(state => ({
     intl: state.intl
-  }))(Start);
+  }), actions)(Start);
 
   return Start;
 }

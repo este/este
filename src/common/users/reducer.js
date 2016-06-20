@@ -2,7 +2,7 @@ import * as actions from './actions';
 import * as authActions from '../auth/actions';
 import User from './user';
 import { Record, Seq } from 'immutable';
-import { firebaseActions, mapAuthToUser } from '../lib/redux-firebase';
+import { firebaseActions } from '../lib/redux-firebase';
 
 const InitialState = Record({
   // Undefined is absence of evidence. Null is evidence of absence.
@@ -17,7 +17,7 @@ const reviveList = list => list && Seq(list)
 
 const revive = ({ list, viewer }) => new InitialState({
   list: reviveList(list),
-  viewer: viewer ? new User(viewer) : null
+  viewer: viewer && new User(viewer)
 });
 
 export default function usersReducer(state = new InitialState, action) {
@@ -31,13 +31,8 @@ export default function usersReducer(state = new InitialState, action) {
       return state.set('viewer', user);
     }
 
-    case firebaseActions.FIREBASE_ON_AUTH: {
-      const { authData } = action.payload;
-      // Handle logout.
-      if (!authData) {
-        return state.delete('viewer');
-      }
-      const user = new User(mapAuthToUser(authData));
+    case firebaseActions.FIREBASE_SAVE_USER_SUCCESS: {
+      const user = new User(action.meta.user);
       return state.set('viewer', user);
     }
 

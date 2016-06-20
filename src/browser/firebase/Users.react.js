@@ -64,7 +64,7 @@ Users = queryFirebase(Users, props => ({
   on: {
     // Value event always rerenders all users. For better granularity, use
     // child_added, child_changed, child_removed, child_changed events.
-    value: snapshot => props.onUsersList(snapshot.val())
+    value: snap => props.onUsersList(snap.val())
   }
 }));
 

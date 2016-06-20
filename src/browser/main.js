@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
-import createEngine from 'redux-storage-engine-localstorage';
 import createRoutes from './createRoutes';
+import createStorageEngine from 'redux-storage-engine-localstorage';
 import useScroll from 'react-router-scroll';
 import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
@@ -17,7 +17,7 @@ const reportingMiddleware = configureReporting({
 });
 const store = configureStore({
   initialState,
-  platformDeps: { createEngine },
+  platformDeps: { createStorageEngine },
   platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)],
 });
 const history = syncHistoryWithStore(browserHistory, store);

@@ -6,7 +6,9 @@ const InitialState = Record({
   map: Map()
 });
 
-const reviveMap = map => Seq(map).map(json => new Todo(json)).toMap();
+const reviveMap = map => Seq(map)
+  .map(json => new Todo(json))
+  .toMap();
 
 const revive = ({ map }) => new InitialState({
   map: reviveMap(map)

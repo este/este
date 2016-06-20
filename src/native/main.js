@@ -3,7 +3,7 @@ import Component from 'react-pure-render/component';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
 import React from 'react';
 import configureStore from '../common/configureStore';
-import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
+import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import initialState from './initialState';
 import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
@@ -31,7 +31,7 @@ const createNativeInitialState = () => ({
 
 const store = configureStore({
   initialState: createNativeInitialState(),
-  platformDeps: { createEngine },
+  platformDeps: { createStorageEngine },
 });
 
 class Root extends Component {

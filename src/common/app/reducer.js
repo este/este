@@ -2,18 +2,23 @@ import * as actions from './actions';
 import { Record } from 'immutable';
 
 const InitialState = Record({
+  online: false,
   storageLoaded: false
 });
 
 export default function appReducer(state = new InitialState, action) {
-  if (!(state instanceof InitialState)) return new InitialState(state);
+  if (!(state instanceof InitialState)) return new InitialState;
 
   switch (action.type) {
 
-    case actions.UPDATE_APP_STATE_FROM_STORAGE_ERROR:
-    case actions.UPDATE_APP_STATE_FROM_STORAGE_SUCCESS: {
+    case actions.APP_OFFLINE:
+      return state.set('online', false);
+
+    case actions.APP_ONLINE:
+      return state.set('online', true);
+
+    case actions.APP_STORAGE_LOAD:
       return state.set('storageLoaded', true);
-    }
 
   }
 

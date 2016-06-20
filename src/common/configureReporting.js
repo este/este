@@ -33,7 +33,7 @@ const setRavenUserContext = authData => {
     return;
   }
   Raven.setUserContext({
-    email: authData[authData.provider].email,
+    email: authData.token.email,
     id: authData.uid
   });
 };

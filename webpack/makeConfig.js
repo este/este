@@ -24,13 +24,11 @@ const loaders = {
   sass: '!sass-loader?indentedSyntax'
 };
 
-// Dynamically getting dev server IP address instead of using hardcoded
-// "localhost" string to ensure hot module replacement works on devices.
+// Dynamic IP address enables hot reload on remote devices.
+// To test app without wifi aka offline, disable wifi and restart app.
 const serverIp = ip.address();
-// const serverIp = 'localhost'; // Uncomment for permanent testing, then 'gulp'
-// Note ip.address() returns 127.0.0.1 for offline and 10.0.1.3 (or similar) for
-// online. With 10.0.1.3, hot reload works on devices, but offline doesn't work.
-// To test Este app in offline mode, disable wifi and then run 'gulp' again.
+// For permanent offline testing, uncomment next line.
+// const serverIp = 'localhost';
 
 export default function makeConfig(isDevelopment) {
   function stylesLoaders() {
