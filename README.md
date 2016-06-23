@@ -9,7 +9,7 @@
 
 > You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimal valuable product asap with the state of the art real-time universal app stack**.
 
-> Nejbližší **školení Este.js** se koná 23. a 24. června v Praze. Cena je 11 500 Kč. Registrujte se přes [learn-reactjs.com](https://learn-reactjs.com/), nebo mi napište: daniel@steigerwald.cz.
+> Další školení Este.js bude 21. a 22. července v Praze. Dva dny za 9 800 Kč. Pokud máte zájem nebo otázky, napište mi: daniel@steigerwald.cz
 
 ## Techniques
 
@@ -99,7 +99,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp eslint --fix` fix fixable eslint issues
 - `gulp messages-extract` extract messages for translation
 - `gulp messages-check` check missing and unused translations
-- `gulp favicon` create multiplatform favicon
+- `gulp favicon` create universal favicon
 
 ## Production Tasks
 
@@ -110,6 +110,17 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp deploy-heroku` deploy [Heroku](https://www.heroku.com/) app
 - `gulp deploy-firebase` deploy [Firebase](https://firebase.google.com/) app
 - `gulp deploy-firebase-database` deploy Firebase database only
+
+## Customize Este App
+
+- set name in `package.json`
+- set locales, firebaseUrl, sentryUrl, etc. in `src/server/config.js`
+- remove unused locale-data from `src/browser/index.js`
+- set routes in `src/browser/createRoutes.js` and `src/native/routes.js`
+- set title, links, etc. in `src/browser/app` and `src/native/app` dirs
+- change `src/common/app/favicons/original/favicon.png`, then `gulp favicon`
+- delete unused app features, todos for example: src/{platform}/todos
+- remove unused reducers from `src/common/configureReducer.js`
 
 ## Documentation
 
