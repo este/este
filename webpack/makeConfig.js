@@ -29,8 +29,6 @@ const serverIp = config.remoteHotReload
   ? ip.address() // Dynamic IP address enables hot reload on remote devices.
   : 'localhost';
 
-console.log(serverIp);
-
 export default function makeConfig(options) {
   const {
     isDevelopment
