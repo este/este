@@ -2,8 +2,8 @@ import gutil from 'gulp-util';
 import makeWebpackConfig from './makeConfig';
 import webpack from 'webpack';
 
-export default function build(callback) {
-  const config = makeWebpackConfig(false);
+export default function build(done) {
+  const config = makeWebpackConfig({ isDevelopment: false });
   webpack(config, (fatalError, stats) => {
     const jsonStats = stats.toJson();
 
@@ -28,6 +28,6 @@ export default function build(callback) {
       chunkModules: false
     }));
 
-    callback();
+    done();
   });
 }

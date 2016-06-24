@@ -6,7 +6,7 @@ import express from 'express';
 
 const app = express();
 
-const webpackConfig = makeWebpackConfig(true);
+const webpackConfig = makeWebpackConfig({ isDevelopment: true });
 const compiler = webpack(webpackConfig);
 
 app.use(webpackDev(compiler, {

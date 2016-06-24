@@ -2,6 +2,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import autoprefixer from 'autoprefixer';
+import config from '../src/server/config';
 import constants from './constants';
 import ip from 'ip';
 import path from 'path';
@@ -24,26 +25,28 @@ const loaders = {
   sass: '!sass-loader?indentedSyntax'
 };
 
-// Dynamic IP address enables hot reload on remote devices.
-// To test app without wifi aka offline, disable wifi and restart app.
-const serverIp = ip.address();
-// For permanent offline testing, uncomment next line.
-// const serverIp = 'localhost';
+const serverIp = config.remoteHotReload
+  ? ip.address() // Dynamic IP address enables hot reload on remote devices.
+  : 'localhost';
 
-export default function makeConfig(isDevelopment) {
-  function stylesLoaders() {
-    return Object.keys(loaders).map(ext => {
-      const prefix = 'css-loader!postcss-loader';
-      const extLoaders = prefix + loaders[ext];
-      const loader = isDevelopment
-        ? `style-loader!${extLoaders}`
-        : ExtractTextPlugin.extract('style-loader', extLoaders);
-      return {
-        loader,
-        test: new RegExp(`\\.(${ext})$`)
-      };
-    });
-  }
+console.log(serverIp);
+
+export default function makeConfig(options) {
+  const {
+    isDevelopment
+  } = options;
+
+  const stylesLoaders = Object.keys(loaders).map(ext => {
+    const prefix = 'css-loader!postcss-loader';
+    const extLoaders = prefix + loaders[ext];
+    const loader = isDevelopment
+      ? `style-loader!${extLoaders}`
+      : ExtractTextPlugin.extract('style-loader', extLoaders);
+    return {
+      loader,
+      test: new RegExp(`\\.(${ext})$`)
+    };
+  });
 
   const config = {
     hotPort: constants.HOT_RELOAD_PORT,
@@ -59,41 +62,44 @@ export default function makeConfig(isDevelopment) {
       ]
     },
     module: {
-      loaders: [{
-        loader: 'url-loader?limit=10000',
-        test: /\.(gif|jpg|png|svg)$/
-      }, {
-        loader: 'url-loader?limit=1',
-        test: /favicon\.ico$/
-      }, {
-        loader: 'url-loader?limit=100000',
-        test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/
-      }, {
-        test: /\.js$/,
-        exclude: constants.NODE_MODULES_DIR,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true,
-          plugins: [
-            // 'transform-runtime' should do as little as possible.
-            // https://github.com/este/este/issues/862
-            ['transform-runtime', { polyfill: false, regenerator: false }],
-            'add-module-exports',
-          ],
-          presets: ['es2015', 'react', 'stage-1'],
-          env: {
-            development: {
-              presets: ['react-hmre']
-            },
-            production: {
-              plugins: [
-                'transform-react-constant-elements',
-                'transform-react-inline-elements'
-              ]
+      loaders: [
+        {
+          loader: 'url-loader?limit=10000',
+          test: /\.(gif|jpg|png|svg)$/
+        }, {
+          loader: 'url-loader?limit=1',
+          test: /favicon\.ico$/
+        }, {
+          loader: 'url-loader?limit=100000',
+          test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/
+        }, {
+          test: /\.js$/,
+          exclude: constants.NODE_MODULES_DIR,
+          loader: 'babel',
+          query: {
+            cacheDirectory: true,
+            plugins: [
+              // 'transform-runtime' should do as little as possible.
+              // https://github.com/este/este/issues/862
+              ['transform-runtime', { polyfill: false, regenerator: false }],
+              'add-module-exports',
+            ],
+            presets: ['es2015', 'react', 'stage-1'],
+            env: {
+              development: {
+                presets: ['react-hmre']
+              },
+              production: {
+                plugins: [
+                  'transform-react-constant-elements',
+                  'transform-react-inline-elements'
+                ]
+              }
             }
           }
-        }
-      }].concat(stylesLoaders())
+        },
+        ...stylesLoaders
+      ]
     },
     output: isDevelopment ? {
       path: constants.BUILD_DIR,
