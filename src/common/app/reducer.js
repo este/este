@@ -7,7 +7,7 @@ const InitialState = Record({
 });
 
 export default function appReducer(state = new InitialState, action) {
-  if (!(state instanceof InitialState)) return new InitialState;
+  if (!(state instanceof InitialState)) return new InitialState(state);
 
   switch (action.type) {
 

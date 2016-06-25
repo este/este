@@ -16,11 +16,13 @@ import { updateStateOnStorageLoad } from './configureStorage';
 const resetStateOnLogout = (reducer, initialState) => (state, action) => {
   // Reset app state on logout, stackoverflow.com/q/35622588/233902.
   if (action.type === LOGOUT) {
-    // Delete whole app state except some fixtures and routing state.
+    // Preserve state without sensitive data.
     state = {
+      app: state.app,
+      config: initialState.config,
       device: initialState.device,
       intl: initialState.intl,
-      routing: state.routing // Note routing state has to be reused.
+      routing: state.routing // Routing state has to be reused.
     };
   }
   return reducer(state, action);
