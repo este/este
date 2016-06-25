@@ -43,7 +43,7 @@ type HelloWorld {
 }
 
 type User {
-  authenticatedAt: Number,
+  authenticatedAt: CurrentTimestamp,
   displayName: LongString,
   id: ShortRequiredString,
   profileImageURL: LongString,
