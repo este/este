@@ -1,9 +1,0 @@
-{
-  "env": {
-    "browser": true
-  },
-  "globals": {
-    // Handled by Webpack.
-    "process": true
-  },
-}

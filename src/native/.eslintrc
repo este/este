@@ -1,7 +1,0 @@
-{
-  "globals": {
-    "require": true,
-    "window": true,
-    "Dimensions": true
-  }
-}
