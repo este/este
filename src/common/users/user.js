@@ -12,16 +12,3 @@ const User = Record({
 });
 
 export default User;
-
-// // Note we can subclass Record to add en.wikipedia.org/wiki/Compound_key
-// export default class extends User {
-
-//   static id(email, provider) {
-//     return [email, email].join();
-//   }
-
-//   get id() {
-//     return [this.email, this.provider].join();
-//   }
-
-// }
