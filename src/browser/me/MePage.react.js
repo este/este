@@ -31,7 +31,8 @@ class MePage extends Component {
   };
 
   render() {
-    const { children, viewer: { displayName } } = this.props;
+    const { children, viewer } = this.props;
+    const displayName = viewer.displayName || viewer.email;
 
     return (
       <div className="me-page">
