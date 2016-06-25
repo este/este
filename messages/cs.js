@@ -96,7 +96,7 @@ export default [
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Ahoj {email}. Tohle je tvoje tajná stránka."
+    "defaultMessage": "Ahoj {displayName}. Tohle je tvoje tajná stránka."
   },
   {
     "id": "me.profilePage.title",

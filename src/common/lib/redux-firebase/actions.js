@@ -36,15 +36,12 @@ async function socialLogin(firebase, provider) {
 
 export function saveUser(authData) {
   return ({ firebase }) => {
-    const user = mapAuthToUser(authData);
+    const user = mapAuthToUser(authData).toJS();
+    const email = user.email;
+    delete user.email; // Do not store email in public users collection.
     user.authenticatedAt = firebase.constructor.ServerValue.TIMESTAMP;
-    const { email } = user;
-    // Delete Facebook etc. user email for better security.
-    delete user.email;
-    // But use it as displayName for users logged in via email, because that's
-    // the only info we have.
     if (user.provider === 'password') {
-      user.displayName = email;
+      user.displayName = email; // Use email as display name for password.
     }
     // With Firebase multi-path updates, we can update values at multiple
     // locations at the same time. Powerful feature for data denormalization.

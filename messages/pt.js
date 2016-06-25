@@ -170,7 +170,7 @@ export default [
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Olá {email}. Esta é sua página secreta."
+    "defaultMessage": "Olá {displayName}. Esta é sua página secreta."
   },
   {
     "id": "me.profilePage.title",

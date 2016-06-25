@@ -1,3 +1,5 @@
+import User from '../../users/user';
+
 export default function mapAuthToUser(authData) {
   const {
     uid: id,
@@ -10,11 +12,11 @@ export default function mapAuthToUser(authData) {
     profileImageURL = ''
   } = authData[provider];
 
-  return {
+  return new User({
     displayName,
     email,
     id,
     profileImageURL,
     provider
-  };
+  });
 }

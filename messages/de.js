@@ -214,7 +214,7 @@ export default [
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Hallo {email}. Das ist Ihre geheime Seite."
+    "defaultMessage": "Hallo {displayName}. Das ist Ihre geheime Seite."
   },
   {
     "id": "me.profilePage.title",

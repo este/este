@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 const messages = defineMessages({
   welcome: {
-    defaultMessage: 'Hi {email}. This is your secret page.',
+    defaultMessage: 'Hi {displayName}. This is your secret page.',
     id: 'me.page.welcome'
   },
   linkToProfile: {
@@ -31,7 +31,7 @@ class MePage extends Component {
   };
 
   render() {
-    const { children, viewer: { email } } = this.props;
+    const { children, viewer: { displayName } } = this.props;
 
     return (
       <div className="me-page">
@@ -52,7 +52,7 @@ class MePage extends Component {
         </ul>
         {children ||
           <p>
-            <FormattedMessage {...messages.welcome} values={{ email }} />
+            <FormattedMessage {...messages.welcome} values={{ displayName }} />
           </p>
         }
         <AuthLogout />
