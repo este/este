@@ -106,7 +106,7 @@
     "regenerator": "^0.8.42",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
-    "sass-loader": "^3.0.0",
+    "sass-loader": "^4.0.0",
     "serialize-javascript": "^1.1.2",
     "shortid": "^2.2.4",
     "sinon": "^1.17.2",
