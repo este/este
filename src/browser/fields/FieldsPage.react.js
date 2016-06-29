@@ -66,7 +66,11 @@ class FieldsPage extends Component {
     } catch (error) {
       fields.$disabled.setValue(false);
       fields.$error.setValue(error.reason);
-      focusInvalidField(this, error.reason);
+      const { reason } = error;
+      if (reason instanceof ValidationError) {
+        focusInvalidField(this, reason);
+        return;
+      }
       throw error;
     }
 

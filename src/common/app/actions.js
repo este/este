@@ -20,13 +20,6 @@ const loadStorage = async (dispatch, storageEngine) => {
   dispatch({ type: APP_STORAGE_LOAD, payload: state });
 };
 
-const maybeSaveUser = (authData, dispatch) => {
-  // authData contains user profile data only shortly after login
-  const isAuthenticatedWithProfile = authData && authData[authData.provider];
-  if (!isAuthenticatedWithProfile) return;
-  dispatch(firebaseActions.saveUser(authData));
-};
-
 const monitorFirebaseAuth = (dispatch, firebase) => {
   firebase.onAuth(authData => {
     dispatch(firebaseActions.onAuth(authData));
@@ -40,7 +33,6 @@ const monitorFirebaseAuth = (dispatch, firebase) => {
     //       console.log(error.code, error.message);
     //     });
     // }
-    maybeSaveUser(authData, dispatch);
   });
 };
 

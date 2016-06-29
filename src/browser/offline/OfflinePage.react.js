@@ -26,10 +26,6 @@ class OfflinePage extends Component {
           Offline
         </h2>
         <p>
-          Este app works <a href="http://offlinefirst.org/">offline</a>. To
-          test offline mode, disable wifi and restart app via <code>gulp</code>.
-        </p>
-        <p>
           Network state:<br />
           <code>state.app.online: <b>{online.toString()}</b></code>
         </p>
@@ -43,8 +39,8 @@ class OfflinePage extends Component {
           }</b></code>
         </p>
         <p>
-          All editable fields are persisted in the local storage by default. But
-          syncing is hard, so that's why we disable the input during offline.
+          Editable fields are persisted in the local storage by default. But
+          syncing is hard, so that's why the next field is disabled on offline.
         </p>
         <input
           {...fields.somePersistedText}

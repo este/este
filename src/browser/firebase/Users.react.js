@@ -2,7 +2,7 @@ import './Users.scss';
 import * as usersActions from '../../common/users/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import UserItem from './UserItem.react';
+import User from './User.react';
 import loading from '../lib/loading';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ class Users extends Component {
         :
           <ol>
             {users.map(user =>
-              <UserItem key={user.id} user={user} />
+              <User key={user.id} user={user} />
             )}
           </ol>
         }

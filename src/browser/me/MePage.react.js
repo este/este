@@ -27,12 +27,13 @@ class MePage extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    viewer: PropTypes.object
+    viewer: PropTypes.object.isRequired
   };
 
   render() {
     const { children, viewer } = this.props;
     const displayName = viewer.displayName || viewer.email;
+    const { profileImageURL } = viewer;
 
     return (
       <div className="me-page">
@@ -52,11 +53,16 @@ class MePage extends Component {
           </li>
         </ul>
         {children ||
-          <p>
-            <FormattedMessage {...messages.welcome} values={{ displayName }} />
-          </p>
+          <div>
+            {profileImageURL &&
+              <img role="presentation" src={profileImageURL} />
+            }
+            <p>
+              <FormattedMessage {...messages.welcome} values={{ displayName }} />
+            </p>
+            <AuthLogout />
+          </div>
         }
-        <AuthLogout />
       </div>
     );
   }

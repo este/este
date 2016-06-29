@@ -2,10 +2,10 @@ import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
+import { FormattedMessage } from 'react-intl';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { FormattedMessage } from 'react-intl';
 
 const styles = StyleSheet.create({
   container: {

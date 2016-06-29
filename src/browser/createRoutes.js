@@ -1,9 +1,9 @@
 import App from './app/App.react';
-import Auth from './auth/AuthPage.react';
 import Fields from './fields/FieldsPage.react';
 import Firebase from './firebase/FirebasePage.react';
 import Home from './home/HomePage.react';
 import Intl from './intl/IntlPage.react';
+import Login from './auth/LoginPage.react';
 import Me from './me/MePage.react';
 import NotFound from './notfound/NotFoundPage.react';
 import Offline from './offline/OfflinePage.react';
@@ -14,11 +14,10 @@ import Todos from './todos/TodosPage.react';
 import { IndexRoute, Route } from 'react-router';
 
 export default function createRoutes(getState) {
-  const requireViewer = (nextState, replace) => {
+  const requireAuth = (nextState, replace) => {
     // Note how we can read anything from the global app state safely, because
     // the app state is an immutable value.
-    const { viewer } = getState().users;
-    if (!viewer) {
+    if (!getState().auth.isAuthenticated) {
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname }
@@ -29,11 +28,11 @@ export default function createRoutes(getState) {
   return (
     <Route component={App} path="/">
       <IndexRoute component={Home} />
-      <Route component={Auth} path="login" />
+      <Route component={Login} path="login" />
       <Route component={Intl} path="intl" />
       <Route component={Fields} path="fields" />
       <Route component={Firebase} path="firebase" />
-      <Route component={Me} onEnter={requireViewer} path="me">
+      <Route component={Me} onEnter={requireAuth} path="me">
         <Route component={Profile} path="profile" />
         <Route component={Settings} path="settings" />
       </Route>

@@ -1,28 +1,19 @@
 import Raven from 'raven-js';
-import { ValidationError } from './lib/validation';
-import { firebaseActions, firebaseMessages } from './lib/redux-firebase';
-
-// Some errors can be ignored, for example ValidationError is pretty innocent.
-// Such errors should be handled locally without re-throw.
-// This check is here because legacy code.
-const isNegligibleError = error =>
-  error.reason instanceof ValidationError ||
-  firebaseMessages[error.reason && error.reason.code];
+import { firebaseActions } from './lib/redux-firebase';
 
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
 const register = unhandledRejection => unhandledRejection(event => {
   event.preventDefault();
   const { reason: error } = event.detail;
-  if (isNegligibleError(error)) return;
   if (process.env.NODE_ENV === 'production') {
-    // error.reason || error because redux-promise-middleware
+    // "error.reason || error" because redux-promise-middleware
     Raven.captureException(error.reason || error);
     // We can use also Raven.lastEventId() and Raven.showReportDialog().
     // Check docs.getsentry.com/hosted/clients/javascript/usage
   } else {
     /* eslint-disable no-console */
     console.warn('Unhandled promise rejection. Fix it or it will be reported.');
-    console.warn(error);
+    console.warn(JSON.parse(JSON.stringify(error)));
     /* eslint-enable no-console */
   }
 });

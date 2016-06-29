@@ -1,24 +1,29 @@
 .login {
-  form {
-    width: 20em;
+  .social-login {
+    margin-bottom: 1em;
   }
-
-  input {
-    margin: .25em 0;
-    width: 100%;
+  .email-login {
+    max-width: 28em;
+    input {
+      margin: .25em 0;
+      padding: .25em;
+      border: solid 1px #ccc;
+      width: 100%;
+      &:focus {
+        border: solid 1px #aaa;
+      }
+    }
+    .buttons {
+      padding-top: .5em;
+      button {
+        font-size: .825em;
+      }
+    }
+    .hint {
+      font-size: .75em;
+    }
   }
-
-  button {
-    font-size: .75em;
-  }
-
-  .hint {
-    font-size: .75em;
-  }
-
-  .error-message {
+  .login-error {
     color: red;
-    margin: .5em;
-    padding-top: .5em;
   }
 }

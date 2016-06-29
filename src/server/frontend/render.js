@@ -102,8 +102,8 @@ export default function render(req, res, next) {
       const status = renderProps.routes
         .some(route => route.path === '*') ? 404 : 200;
       res.status(status).send(html);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   });
 }

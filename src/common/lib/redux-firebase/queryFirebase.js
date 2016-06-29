@@ -192,8 +192,8 @@ export const queryFirebaseServer = renderAppCallback => {
   serverFetchingPromises = [];
   try {
     renderAppCallback();
-  } catch (e) {
-    console.log(e); // eslint-disable-line no-console
+  } catch (error) {
+    console.log(error); // eslint-disable-line no-console
   } finally {
     serverFetching = false;
     // Wait until all promises in an array are either rejected or fulfilled.

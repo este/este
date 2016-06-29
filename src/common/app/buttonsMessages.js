@@ -13,6 +13,10 @@ export default defineMessages({
     defaultMessage: 'Delete',
     id: 'app.buttons.delete'
   },
+  dismiss: {
+    defaultMessage: 'Dismiss',
+    id: 'app.buttons.dismiss'
+  },
   edit: {
     defaultMessage: 'Edit',
     id: 'app.buttons.edit'
@@ -28,6 +32,10 @@ export default defineMessages({
   save: {
     defaultMessage: 'Save',
     id: 'app.buttons.save'
+  },
+  signUp: {
+    defaultMessage: 'Sign Up',
+    id: 'app.buttons.signUp'
   },
   submit: {
     defaultMessage: 'Submit',

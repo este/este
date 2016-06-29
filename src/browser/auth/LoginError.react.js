@@ -1,6 +1,8 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { connect } from 'react-redux';
+import { firebaseMessages } from '../../common/lib/redux-firebase';
 
 const messages = defineMessages({
   required: {
@@ -17,26 +19,24 @@ const messages = defineMessages({
   simplePassword: {
     defaultMessage: 'Password must contain at least {minLength} characters.',
     id: 'auth.login.error.simplePassword'
-  },
-  wrongPassword: {
-    defaultMessage: 'Wrong password.',
-    id: 'auth.login.error.wrongPassword'
   }
 });
 
-export default class LoginError extends Component {
+class LoginError extends Component {
 
   static propTypes = {
-    error: PropTypes.object
+    error: PropTypes.instanceOf(Error)
   };
 
   render() {
     const { error } = this.props;
     if (!error) return null;
-    const message = messages[error.name];
+    const message =
+      messages[error.name] ||
+      firebaseMessages[error.name];
 
     return (
-      <p className="error-message">
+      <p className="login-error">
         {message ?
           <FormattedMessage {...message} values={error.params} />
         :
@@ -47,3 +47,7 @@ export default class LoginError extends Component {
   }
 
 }
+
+export default connect(state => ({
+  error: state.auth.formError
+}))(LoginError);
