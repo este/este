@@ -1,14 +1,15 @@
 import './FieldsPage.scss';
 import Component from 'react-pure-render/component';
 import DynamicField from './DynamicField.react.js';
+import FieldError from '../lib/FieldError.react';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages } from 'react-intl';
-import { focusInvalidField, ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { focusInvalidField, ValidationError } from '../../common/lib/validation';
 
 const messages = defineMessages({
   h2: {
@@ -117,6 +118,7 @@ class FieldsPage extends Component {
               maxLength={100}
               type="text"
             />
+            <FieldError error={fields.$error.value} prop="someField" />
             <h3>Dynamic Fields</h3>
             <div>
               {keyConceptsOfLibertarianism.map(concept =>
@@ -177,13 +179,9 @@ class FieldsPage extends Component {
               <button type="submit">
                 <FormattedMessage {...buttonsMessages.submit} />
               </button>
-              {fields.$error.value &&
-                <b className="error-message">{fields.$error.value.message}</b>
-              }
             </div>
             <pre>
-              {
-                fieldsPageModel &&
+              {fieldsPageModel &&
                 JSON.stringify(fieldsPageModel.toJS(), null, 2)
               }
             </pre>
