@@ -5,10 +5,6 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  USER_CANCELLED: {
-    defaultMessage: 'Login cancelled.',
-    id: 'firebase.error.USER_CANCELLED'
-  },
   EMAIL_TAKEN: {
     defaultMessage: `The new user account cannot be created because the
       specified email address is already in use.`,

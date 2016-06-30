@@ -30,7 +30,7 @@ class LoginError extends Component {
 
   render() {
     const { error } = this.props;
-    if (!error) return null;
+    if (!error || error.code === 'USER_CANCELLED') return null;
     const message =
       messages[error.name] ||
       firebaseMessages[error.name];

@@ -24,10 +24,18 @@ class SocialLogin extends Component {
     this.onButtonClick = this.onButtonClick.bind(this);
   }
 
-  onButtonClick(e) {
+  async onButtonClick(e) {
     const { login } = this.props;
     const { provider } = e.currentTarget.dataset;
-    login(provider);
+    try {
+      await login(provider);
+    } catch (error) {
+      const { reason } = error;
+      if (reason.code === 'USER_CANCELLED') {
+        return;
+      }
+      throw error;
+    }
   }
 
   render() {
