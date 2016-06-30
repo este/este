@@ -1,12 +1,66 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.add",
+    "defaultMessage": "Přidat"
+  },
+  {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Zrušit"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Smazat"
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Zrušit"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editovat"
+  },
+  {
     "id": "app.buttons.login",
     "defaultMessage": "Přihlášení"
   },
   {
     "id": "app.buttons.logout",
     "defaultMessage": "Odhlásit se"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Uložit"
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "Registrace"
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Odeslat"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Jste si jistý?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Máte neuložené změny. Jste si jistý?"
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": `{prop, select,
+      description {Prosím zadejte popis.}
+      email {Prosím zadejte email.}
+      name {Prosím zadejte jméno.}
+      password {Prosím zadejte heslo.}
+      other {Prosím vyplnit.}
+    }`
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Fields"
   },
   {
     "id": "app.links.firebase",
@@ -29,12 +83,12 @@ export default [
     "defaultMessage": "Já"
   },
   {
-    "id": "app.links.todos",
-    "defaultMessage": "Úkoly"
+    "id": "app.links.offline",
+    "defaultMessage": "Offline"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "tvuj@email.com"
+    "id": "app.links.todos",
+    "defaultMessage": "Úkoly"
   },
   {
     "id": "auth.login.error.email",
@@ -49,20 +103,68 @@ export default [
     "defaultMessage": "Heslo musí obsahovat alespoň {minLength} znaků."
   },
   {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Špatné heslo."
+    "id": "fields.page.h2",
+    "defaultMessage": "Fields"
   },
   {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Klasické XMLHttpRequest Přihlášení"
+    "id": "fields.page.p",
+    "defaultMessage": "Něco jako redux-form, ale jednodušší."
   },
   {
-    "id": "auth.login.hint",
-    "defaultMessage": "Nápověda: pass1"
+    "id": "firebase.error.EMAIL_TAKEN",
+    "defaultMessage": "Tento email je už obsazen."
   },
   {
-    "id": "auth.login.passwordPlaceholder",
+    "id": "firebase.error.INVALID_EMAIL",
+    "defaultMessage": "Email není ve správném formátu."
+  },
+  {
+    "id": "firebase.error.INVALID_PASSWORD",
+    "defaultMessage": "Nesprávné heslo."
+  },
+  {
+    "id": "firebase.error.INVALID_USER",
+    "defaultMessage": "Nesprávný uživatel."
+  },
+  {
+    "id": "firebase.error.NETWORK_ERROR",
+    "defaultMessage": "Chyba sítě."
+  },
+  {
+    "id": "firebase.login.emailLoginOrSignUp",
+    "defaultMessage": "Email Přihlášení / Registrace"
+  },
+  {
+    "id": "firebase.login.emailPasswordRecovery",
+    "defaultMessage": "Obnovení hesla"
+  },
+  {
+    "id": "firebase.login.emailPlaceholder",
+    "defaultMessage": "tvuj@email.com"
+  },
+  {
+    "id": "firebase.login.facebookLogin",
+    "defaultMessage": "Přihlášení přes Facebook"
+  },
+  {
+    "id": "firebase.login.passwordForgotten",
+    "defaultMessage": "Zapomenuté heslo"
+  },
+  {
+    "id": "firebase.login.passwordPlaceholder",
     "defaultMessage": "heslo"
+  },
+  {
+    "id": "firebase.login.recoveryEmailSent",
+    "defaultMessage": "Email pro obnovení hesla odeslán."
+  },
+  {
+    "id": "firebase.login.resetPassword",
+    "defaultMessage": "Reset hesla"
+  },
+  {
+    "id": "firebase.users.lastLoggedInUsers",
+    "defaultMessage": "Posledních {limitToLast} přihlášených uživatelů."
   },
   {
     "id": "footer.madeByHtml",
@@ -70,9 +172,7 @@ export default [
   },
   {
     "id": "home.intro",
-    "defaultMessage": `
-      <p>Ahoj, tohle je <a target="_blank" href="https://github.com/este/este">
-      Este</a> dev stack.</p>`
+    "defaultMessage": "\n      <p>Ahoj, tohle je <a target=\"_blank\" href=\"https://github.com/este/este\">\n      Este</a> dev stack.</p>"
   },
   {
     "id": "home.native.intro",
@@ -145,125 +245,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Nic tu není..."
-  },
-  {
-    "id": "app.links.fields",
-    "defaultMessage": "redux-fields"
-  },
-  {
-    "id": "fields.page.h2",
-    "defaultMessage": "redux-fields demonstrace"
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Něco jako redux-form, ale jednodušší."
-  },
-  {
-    "id": "app.buttons.submit",
-    "defaultMessage": "Odeslat"
-  },
-  {
-    "id": "firebase.login.resetPassword",
-    "defaultMessage": "Reset hesla"
-  },
-  {
-    "id": "app.buttons.cancel",
-    "defaultMessage": "Zrušit"
-  },
-  {
-    "id": "app.buttons.delete",
-    "defaultMessage": "Smazat"
-  },
-  {
-    "id": "app.buttons.edit",
-    "defaultMessage": "Editovat"
-  },
-  {
-    "id": "app.buttons.save",
-    "defaultMessage": "Uložit"
-  },
-  {
-    "id": "app.confirm.areYouSure",
-    "defaultMessage": "Jste si jistý?"
-  },
-  {
-    "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Máte neuložené změny. Jste si jistý?"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "Registrace"
-  },
-  {
-    "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "Tento email je už obsazen."
-  },
-  {
-    "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "Email není ve správném formátu."
-  },
-  {
-    "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "Nesprávné heslo."
-  },
-  {
-    "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "Nesprávný uživatel."
-  },
-  {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Chyba sítě."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Zrušit"
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Email Přihlášení / Registrace"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
-    "defaultMessage": "Obnovení hesla"
-  },
-  {
-    "id": "firebase.login.emailPlaceholder",
-    "defaultMessage": "tvuj@email.com"
-  },
-  {
-    "id": "firebase.login.facebookLogin",
-    "defaultMessage": "Přihlášení přes Facebook"
-  },
-  {
-    "id": "firebase.login.passwordForgotten",
-    "defaultMessage": "Zapomenuté heslo"
-  },
-  {
-    "id": "firebase.login.passwordPlaceholder",
-    "defaultMessage": "heslo"
-  },
-  {
-    "id": "firebase.login.recoveryEmailSent",
-    "defaultMessage": "Email pro obnovení hesla odeslán."
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Neznámá chyba."
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Neznámá chyba."
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Nahrát další."
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Ahoj"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Posledních {limitToLast} přihlášených uživatelů."
-  },
+  }
 ];

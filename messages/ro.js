@@ -33,10 +33,6 @@ export default [
     "defaultMessage": "Tasks"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "emailul@vostru.com"
-  },
-  {
     "id": "auth.login.error.email",
     "defaultMessage": "Adresa e-mail nu este validă."
   },
@@ -47,22 +43,6 @@ export default [
   {
     "id": "auth.login.error.simplePassword",
     "defaultMessage": "Parola trebuie să conține cel puțin {minLength} caractere."
-  },
-  {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Parolă eronată."
-  },
-  {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Authentificare XMLHttpRequest clasică"
-  },
-  {
-    "id": "auth.login.hint",
-    "defaultMessage": "Sugestie: pass1"
-  },
-  {
-    "id": "auth.login.passwordPlaceholder",
-    "defaultMessage": "parolă"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -83,10 +63,6 @@ export default [
   {
     "id": "firebase.error.NETWORK_ERROR",
     "defaultMessage": "Operația nu a putut fi realizată din cauza unei erori de rețea."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Destitui"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
@@ -119,22 +95,6 @@ export default [
   {
     "id": "firebase.login.resetPassword",
     "defaultMessage": "Resetează parola"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "Înregistrare"
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "A apărut o eroare necunoscută."
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Încarcă mai mult"
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Salut"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

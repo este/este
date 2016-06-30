@@ -33,10 +33,6 @@ export default [
     "defaultMessage": "Tarefas"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "endereço@email.com"
-  },
-  {
     "id": "auth.login.error.email",
     "defaultMessage": "Email inválido."
   },
@@ -47,22 +43,6 @@ export default [
   {
     "id": "auth.login.error.simplePassword",
     "defaultMessage": "Senha precisa conter {minLength} caracteres."
-  },
-  {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Senha incorreta."
-  },
-  {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Usuário XMLHttpRequest Antigo"
-  },
-  {
-    "id": "auth.login.hint",
-    "defaultMessage": "Dica: pass1"
-  },
-  {
-    "id": "auth.login.passwordPlaceholder",
-    "defaultMessage": "Senha"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -83,10 +63,6 @@ export default [
   {
     "id": "firebase.error.NETWORK_ERROR",
     "defaultMessage": "Operação não realizada devido a erro de conexão."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Destituir"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
@@ -119,22 +95,6 @@ export default [
   {
     "id": "firebase.login.resetPassword",
     "defaultMessage": "Restaurar Senha"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "Acesso"
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Erro desconhecido."
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Saiba mais"
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Olá"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

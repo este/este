@@ -42,7 +42,7 @@ export default [
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "redux-fields"
+    "defaultMessage": "Fields"
   },
   {
     "id": "app.links.firebase",
@@ -69,10 +69,6 @@ export default [
     "defaultMessage": "Aufgaben"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "ihre@email.com"
-  },
-  {
     "id": "auth.login.error.email",
     "defaultMessage": "Diese E-Mail Adresse ist nicht gültig."
   },
@@ -85,24 +81,8 @@ export default [
     "defaultMessage": "Das Passwort muss mindestens {minLength} Zeichen lang sein."
   },
   {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Falsches Passwort"
-  },
-  {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Klassische Anmeldung via XMLHttpRequest"
-  },
-  {
-    "id": "auth.login.hint",
-    "defaultMessage": "Tipp: pass1"
-  },
-  {
-    "id": "auth.login.passwordPlaceholder",
-    "defaultMessage": "Passwort"
-  },
-  {
     "id": "fields.page.h2",
-    "defaultMessage": "Demo redux-fields"
+    "defaultMessage": "Fields"
   },
   {
     "id": "fields.page.p",
@@ -127,10 +107,6 @@ export default [
   {
     "id": "firebase.error.NETWORK_ERROR",
     "defaultMessage": "Die Verbinung zur Authentifizierung konnte nicht hergestellt werden."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Abbrechen"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
@@ -163,22 +139,6 @@ export default [
   {
     "id": "firebase.login.resetPassword",
     "defaultMessage": "Passwort zurücksetzen"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "Registrieren"
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Ein unbekannter Fehler ist aufgetreten"
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Mehr"
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Hallo"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

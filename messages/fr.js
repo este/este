@@ -42,7 +42,7 @@ export default [
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "redux-fields"
+    "defaultMessage": "Fields"
   },
   {
     "id": "app.links.firebase",
@@ -69,10 +69,6 @@ export default [
     "defaultMessage": "Tâches"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "votre@email.com"
-  },
-  {
     "id": "auth.login.error.email",
     "defaultMessage": "L'adresse email n'est pas valide."
   },
@@ -85,24 +81,8 @@ export default [
     "defaultMessage": "Le mot de passe doit contenir au moins {minLength} caractères."
   },
   {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Mot de passe erroné."
-  },
-  {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Authentification XMLHttpRequest classique"
-  },
-  {
-    "id": "auth.login.hint",
-    "defaultMessage": "Conseil: pass1"
-  },
-  {
-    "id": "auth.login.passwordPlaceholder",
-    "defaultMessage": "mot de passe"
-  },
-  {
     "id": "fields.page.h2",
-    "defaultMessage": "Démonstration de redux-fields"
+    "defaultMessage": "Fields"
   },
   {
     "id": "fields.page.p",
@@ -127,10 +107,6 @@ export default [
   {
     "id": "firebase.error.NETWORK_ERROR",
     "defaultMessage": "Une erreur est survenue lors de la tentative de connexion avec les serveur de authentification."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Abandonner"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
@@ -163,22 +139,6 @@ export default [
   {
     "id": "firebase.login.resetPassword",
     "defaultMessage": "Réinitialiser le mot de passe"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "S'enregistrer"
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Une erreur inconnue est survenue."
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Voir plus"
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Bonjour"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",

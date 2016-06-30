@@ -33,10 +33,6 @@ export default [
     "defaultMessage": "Tareas"
   },
   {
-    "id": "auth.login.emailPlaceholder",
-    "defaultMessage": "tu@email.com"
-  },
-  {
     "id": "auth.login.error.email",
     "defaultMessage": "Dirección de correo no valida."
   },
@@ -47,22 +43,6 @@ export default [
   {
     "id": "auth.login.error.simplePassword",
     "defaultMessage": "La contraseña debe contener al menos {minLength} caracteres."
-  },
-  {
-    "id": "auth.login.error.wrongPassword",
-    "defaultMessage": "Contraseña Incorrecta."
-  },
-  {
-    "id": "auth.login.formLegend",
-    "defaultMessage": "Inicio de sesión XMLHttpRequest Clasico"
-  },
-  {
-    "id": "auth.login.hint",
-    "defaultMessage": "Indicio: pass1"
-  },
-  {
-    "id": "auth.login.passwordPlaceholder",
-    "defaultMessage": "Contraseña"
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -83,10 +63,6 @@ export default [
   {
     "id": "firebase.error.NETWORK_ERROR",
     "defaultMessage": "La operación no pudo ser realizada debido a un error de red."
-  },
-  {
-    "id": "firebase.login.dismiss",
-    "defaultMessage": "Despedir"
   },
   {
     "id": "firebase.login.emailLoginOrSignUp",
@@ -119,22 +95,6 @@ export default [
   {
     "id": "firebase.login.resetPassword",
     "defaultMessage": "Restablecer contraseña"
-  },
-  {
-    "id": "firebase.login.signUp",
-    "defaultMessage": "Regístrese"
-  },
-  {
-    "id": "firebase.login.unknownError",
-    "defaultMessage": "Ha ocurrido un error desconocido."
-  },
-  {
-    "id": "firebase.page.loadMore",
-    "defaultMessage": "Cargar mas"
-  },
-  {
-    "id": "firebase.profile.greeting",
-    "defaultMessage": "Hola"
   },
   {
     "id": "firebase.users.lastLoggedInUsers",
