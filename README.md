@@ -67,6 +67,7 @@
 #### Optional
 
 - [firebase-cli](https://firebase.google.com/docs/cli/) `npm install -g firebase-tools`
+- [firebase-bolt](https://github.com/firebase/bolt) `npm install -g firebase-bolt`
 - [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli`
 
 If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
