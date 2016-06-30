@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import gulp from 'gulp';
+import { diff } from './support/messages';
 
-gulp.task('messages-check', () => {
+gulp.task('messages-check', ['messages-extract'], () => {
   const loadMessages = require('../src/server/intl/loadMessages');
   const messages = loadMessages({ includeDefault: true });
   const defaultMessagesKeys = Object.keys(messages._default);
 
-  const diff = (a, b) => a.filter(item => b.indexOf(item) === -1);
   const log = (what, messagesKeys) => {
     if (!messagesKeys.length) return;
     console.log(`  ${what}`);
@@ -14,7 +14,7 @@ gulp.task('messages-check', () => {
   };
 
   Object.keys(messages)
-    .filter(key => key !== '_default')
+    .filter(locale => locale !== '_default')
     .forEach(locale => {
       const localeMessagesKeys = Object.keys(messages[locale]);
       const missingMessagesKeys = diff(defaultMessagesKeys, localeMessagesKeys);

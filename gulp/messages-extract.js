@@ -1,5 +1,6 @@
 import fs from 'fs';
 import gulp from 'gulp';
+import { messagesToCode } from './support/messages';
 
 gulp.task('messages-extract', () => {
   const through = require('through2');
@@ -20,11 +21,7 @@ gulp.task('messages-extract', () => {
     cb(null, file);
   }))
   .on('end', () => {
-    messages.sort((a, b) => a.id.localeCompare(b.id));
-    const eslint = '/* eslint-disable max-len, quote-props, quotes */';
-    const json = JSON.stringify(messages, null, 2);
-    // ES6 allows us to use multiline strings and eslint.
-    const es6code = `${eslint}\nexport default ${json};\n`;
-    fs.writeFile('messages/_default.js', es6code);
+    const code = messagesToCode(messages);
+    fs.writeFileSync('messages/_default.js', code);
   });
 });

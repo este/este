@@ -99,6 +99,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp eslint --fix` fix fixable eslint issues
 - `gulp messages-extract` extract messages for translation
 - `gulp messages-check` check missing and unused translations
+- `gulp messages-clear` remove unused translations
 - `gulp favicon` create universal favicon
 
 ## Production Tasks
