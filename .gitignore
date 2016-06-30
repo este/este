@@ -23,6 +23,7 @@ android/app/libs
 android/keystores/debug.keystore
 buck-out/
 build/
+bundle-stats.json
 firebase-debug.log
 firebase/rules.json
 local.properties
