@@ -33,4 +33,3 @@ export default connect(state => ({
   currentLocale: state.intl.currentLocale,
   locales: state.intl.locales
 }), intlActions)(Locales);
-

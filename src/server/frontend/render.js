@@ -11,22 +11,25 @@ import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import { toJSON } from '../../common/transit';
 
 const initialState = createInitialState();
 
-const createRequestInitialState = req => ({
-  ...initialState,
-  intl: {
-    ...initialState.intl,
-    currentLocale: process.env.IS_SERVERLESS
-      ? config.defaultLocale
-      : req.acceptsLanguages(config.locales) || config.defaultLocale,
-    initialNow: Date.now(),
-  },
-  device: {
-    host: `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`
-  },
-});
+const createRequestInitialState = req => {
+  const currentLocale = process.env.IS_SERVERLESS
+    ? config.defaultLocale
+    : req.acceptsLanguages(config.locales) || config.defaultLocale;
+  const host =
+    `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
+  return {
+    ...initialState,
+    intl: initialState.intl
+      .set('currentLocale', currentLocale)
+      .set('initialNow', Date.now()),
+    device: initialState.device
+      .set('host', host),
+  };
+};
 
 const renderApp = (store, renderProps) => {
   const appHtml = ReactDOMServer.renderToString(
@@ -42,7 +45,7 @@ const renderScripts = (state, headers, hostname, appJsFilename) =>
   // TODO: Switch to CSP, https://github.com/este/este/pull/731
   `
     <script>
-      window.__INITIAL_STATE__ = ${serialize(state)};
+      window.__INITIAL_STATE__ = ${serialize(toJSON(state))};
     </script>
     <script src="${appJsFilename}"></script>
   `;

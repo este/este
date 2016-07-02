@@ -1,13 +1,11 @@
 import * as actions from './actions';
-import { Record } from 'immutable';
+import { Record } from '../transit';
 
 const InitialState = Record({
   isSideMenuOpen: false
-});
+}, 'ui');
 
 export default function uiReducer(state = new InitialState, action) {
-  if (!(state instanceof InitialState)) return new InitialState(state);
-
   switch (action.type) {
 
     case actions.ON_SIDE_MENU_CHANGE: {

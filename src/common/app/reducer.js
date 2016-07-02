@@ -1,14 +1,12 @@
 import * as actions from './actions';
-import { Record } from 'immutable';
+import { Record } from '../transit';
 
 const InitialState = Record({
   online: false,
   storageLoaded: false
-});
+}, 'app');
 
 export default function appReducer(state = new InitialState, action) {
-  if (!(state instanceof InitialState)) return new InitialState(state);
-
   switch (action.type) {
 
     case actions.APP_OFFLINE:
@@ -19,7 +17,6 @@ export default function appReducer(state = new InitialState, action) {
 
     case actions.APP_STORAGE_LOAD:
       return state.set('storageLoaded', true);
-
   }
 
   return state;

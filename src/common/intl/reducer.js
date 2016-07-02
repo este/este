@@ -1,18 +1,15 @@
 import * as actions from './actions';
-import { Record } from 'immutable';
+import { Record } from '../transit';
 
 const InitialState = Record({
-  // Defined in src/server/frontend/createInitialState.js
   currentLocale: null,
   defaultLocale: null,
   initialNow: null,
   locales: null,
-  messages: {}
-});
+  messages: null
+}, 'intl');
 
 export default function intlReducer(state = new InitialState, action) {
-  if (!(state instanceof InitialState)) return new InitialState(state);
-
   switch (action.type) {
 
     case actions.SET_CURRENT_LOCALE: {

@@ -4,29 +4,29 @@ import Locale from 'react-native-locale'; // eslint-disable-line import/no-unres
 import React from 'react';
 import configureStore from '../common/configureStore';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
-import initialState from './initialState';
 import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
+import { fromJSON } from '../common/transit';
+import { initialTransitState } from './initialState';
 
-const getCurrentLocale = () => {
-  const currentLocale = Locale.constants().localeIdentifier.split('_')[0];
-  const { intl: { defaultLocale, locales } } = initialState;
-  return locales.indexOf(currentLocale) !== -1
-    ? currentLocale
-    : defaultLocale;
+const initialState = fromJSON(initialTransitState);
+
+const getDefaultDeviceLocale = () => {
+  const deviceLocale = Locale.constants().localeIdentifier.split('_')[0];
+  const { defaultLocale, locales } = initialState.intl;
+  const isSupported = locales.indexOf(deviceLocale) !== -1;
+  return isSupported ? deviceLocale : defaultLocale;
 };
 
 const createNativeInitialState = () => ({
   ...initialState,
-  intl: {
-    ...initialState.intl,
-    currentLocale: getCurrentLocale(),
-    initialNow: Date.now(),
-  },
-  device: {
-    isReactNative: true,
-    platform: Platform.OS,
-  },
+  device: initialState.device
+    .set('isReactNative', true)
+    .set('platform', Platform.OS),
+  intl: initialState.intl
+    .set('currentLocale', getDefaultDeviceLocale())
+    .set('defaultLocale', getDefaultDeviceLocale())
+    .set('initialNow', Date.now()),
 });
 
 const store = configureStore({
