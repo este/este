@@ -32,8 +32,10 @@ class MePage extends Component {
 
   render() {
     const { children, viewer } = this.props;
-    const displayName = viewer.displayName || viewer.email;
-    const { profileImageURL } = viewer;
+    const {
+      displayName = viewer.email,
+      profileImageURL
+    } = viewer;
 
     return (
       <div className="me-page">

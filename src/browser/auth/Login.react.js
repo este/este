@@ -39,9 +39,6 @@ class Login extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props;
-    if (isAuthenticated) return null;
-
     return (
       <div className="login">
         <SocialLogin />
@@ -56,5 +53,7 @@ class Login extends Component {
 Login = withRouter(Login);
 
 export default connect(state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  // Pass viewer to enforce componentWillReceiveProps on the app state change.
+  viewer: state.users.viewer
 }))(Login);
