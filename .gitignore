@@ -3,6 +3,7 @@
 !default.pbxuser
 !default.perspectivev3
 *.hmap
+*.iml
 *.ipa
 *.jsbundle
 *.mode1v3
