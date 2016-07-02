@@ -41,4 +41,19 @@
   .alert-danger {
     color: red;
   }
+  .custom-toggle {
+    border-radius: .5em;
+    border: solid 1px #ccc;
+    cursor: default;
+    display: inline-block;
+    font-size: .75em;
+    padding: .25em .5em;
+    user-select: none;
+    &:hover {
+      border: solid 1px #ddd;
+    }
+    &:active {
+      border: solid 1px #eee;
+    }
+  }
 }

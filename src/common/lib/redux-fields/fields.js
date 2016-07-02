@@ -56,24 +56,18 @@ export default function fields(Wrapped, options) {
     }
 
     static createFieldObject(field, onChange) {
-      const fieldObject = isReactNative ? {
+      return isReactNative ? {
         onChangeText: text => {
           onChange(field, text);
         }
       } : {
         name: field,
         onChange: (event) => {
-          // React-select is not passing an event but the target directly
+          // Some custom components like react-select pass the target directly.
           const target = event.target || event;
           const { type, checked, value } = target;
           const isCheckbox = type && type.toLowerCase() === 'checkbox';
           onChange(field, isCheckbox ? checked : value);
-        }
-      };
-      return {
-        ...fieldObject,
-        setValue(value) {
-          onChange(field, value);
         }
       };
     }
@@ -100,10 +94,11 @@ export default function fields(Wrapped, options) {
       this.fields = {
         ...formFields,
         $values: () => this.values,
+        $setValue: (field, value) => this.onFieldChange(field, value),
         $reset: () => {
           const normalizedPath = Fields.getNormalizePath(this.props);
           this.context.store.dispatch(resetFields(normalizedPath));
-        }
+        },
       };
     }
 
