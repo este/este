@@ -5,7 +5,7 @@ import { APP_STORAGE_LOAD } from './app/actions';
 import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
-const whitelist = [
+const stateToSave = [
   ['auth', 'token'],
   ['fields'],
   ['todos'],
@@ -20,9 +20,12 @@ const invariantFeatureState = (state, feature) => invariant(
 
 const updateState = (state, storageStateJson) => {
   try {
-    if (!Object.keys(storageStateJson).length) return state;
     fromJSON(storageStateJson).forEach(({ feature, featurePath, value }) => {
       invariantFeatureState(state, feature);
+      // As we can see, updateState always overrides the current app state.
+      // That's perfect for token, fields, currentLocale, or viewer.
+      // But what if todos are prefetched on the server? Then we would like to
+      // merge locally cached with fresh from the server. TODO: Add customUpdate.
       state[feature] = state[feature].setIn(featurePath, value);
     });
   } catch (error) {
@@ -31,10 +34,10 @@ const updateState = (state, storageStateJson) => {
   return state;
 };
 
-const storageFilter = (engine, paths = []) => ({
+const storageFilter = engine => ({
   ...engine,
   save(state) {
-    const saveState = paths.map(([feature, ...featurePath]) => {
+    const saveState = stateToSave.map(([feature, ...featurePath]) => {
       invariantFeatureState(state, feature);
       return {
         feature, featurePath, value: state[feature].getIn(featurePath)
@@ -45,7 +48,7 @@ const storageFilter = (engine, paths = []) => ({
 });
 
 const createStorageMiddleware = storageEngine => {
-  let decoratedEngine = storageFilter(storageEngine, whitelist);
+  let decoratedEngine = storageFilter(storageEngine);
   decoratedEngine = storageDebounce(decoratedEngine, 300);
   return storage.createMiddleware(decoratedEngine);
 };
