@@ -13,7 +13,7 @@ const register = unhandledRejection => unhandledRejection(event => {
   } else {
     /* eslint-disable no-console */
     console.warn('Unhandled promise rejection. Fix it or it will be reported.');
-    console.warn(JSON.parse(JSON.stringify(error)));
+    console.warn(error);
     /* eslint-enable no-console */
   }
 });
