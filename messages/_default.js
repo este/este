@@ -239,5 +239,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "It's rather empty here..."
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Loading"
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Still loading, please check your connection"
   }
 ];

@@ -14,6 +14,18 @@ import './Loading.scss';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import { defineMessages, FormattedMessage } from 'react-intl';
+
+const messages = defineMessages({
+  loadingText: {
+    defaultMessage: 'Loading',
+    id: 'loading.loadingText'
+  },
+  longLoadingText: {
+    defaultMessage: 'Still loading, please check your connection',
+    id: 'loading.longLoadingText'
+  }
+});
 
 export default class Loading extends Component {
 
@@ -30,17 +42,16 @@ export default class Loading extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Render no-break space for the first second of loading.
-      currentText: String.fromCharCode(160)
+      currentText: null
     };
   }
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      this.setState({ currentText: this.props.loadingText });
+      this.setState({ currentText: messages.loadingText });
     }, 1000);
     this.longTimer = setTimeout(() => {
-      this.setState({ currentText: this.props.longLoadingText });
+      this.setState({ currentText: messages.longLoadingText });
     }, 10000);
   }
 
@@ -50,10 +61,17 @@ export default class Loading extends Component {
   }
 
   render() {
+    const { currentText } = this.state;
     return (
-      <div className="este-loading">
-        <Helmet title={this.state.currentText} />
-        {this.state.currentText}
+      <div>
+        {currentText ?
+          <div className="este-loading">
+            <FormattedMessage {...currentText}>
+              {title => <Helmet title={title} />}
+            </FormattedMessage>
+            <FormattedMessage {...currentText} />
+          </div>
+          : String.fromCharCode(160)}
       </div>
     );
   }
