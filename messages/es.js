@@ -179,5 +179,65 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Esta bastante vacío aquí..."
-  }
+  },
+  {
+    "id": "app.buttons.add",
+    "defaultMessage": "Añadir"
+  },
+  {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Cancelar"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Borrar"
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Despedir"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editar"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Salvar"
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "Regístrate"
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Enviar"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "¿Estás seguro?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Hay cambios sin guardar. ¿Estás seguro?"
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": "Necesario"
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Campos"
+  },
+  {
+    "id": "app.links.offline",
+    "defaultMessage": "Desconectado"
+  },
+  {
+    "id": "fields.page.h2",
+    "defaultMessage": "Campos"
+  },
+  {
+    "id": "fields.page.p",
+    "defaultMessage": "Algo así como redux-forma, pero simplificada y universal."
+  },
 ];
