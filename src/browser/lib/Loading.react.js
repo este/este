@@ -1,20 +1,8 @@
-// Text loading component with two important limits.
-// https://www.nngroup.com/articles/response-times-3-important-limits
-// Example:
-// {!users ?
-//   <Loading />
-// :
-//   <div>
-//     users here
-//   </div>
-// }
-// TODO: Make it universal.
-
 import './Loading.scss';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import React from 'react';
+import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   loadingText: {
@@ -29,16 +17,6 @@ const messages = defineMessages({
 
 export default class Loading extends Component {
 
-  static propTypes = {
-    loadingText: PropTypes.string.isRequired,
-    longLoadingText: PropTypes.string.isRequired
-  };
-
-  static defaultProps = {
-    loadingText: 'Loading',
-    longLoadingText: 'Still loading, please check your connection'
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +25,7 @@ export default class Loading extends Component {
   }
 
   componentDidMount() {
+    // www.nngroup.com/articles/response-times-3-important-limits
     this.timer = setTimeout(() => {
       this.setState({ currentText: messages.loadingText });
     }, 1000);
@@ -62,16 +41,15 @@ export default class Loading extends Component {
 
   render() {
     const { currentText } = this.state;
+    if (!currentText) {
+      return <div className="este-loading">{String.fromCharCode(160)}</div>;
+    }
     return (
-      <div>
-        {currentText ?
-          <div className="este-loading">
-            <FormattedMessage {...currentText}>
-              {title => <Helmet title={title} />}
-            </FormattedMessage>
-            <FormattedMessage {...currentText} />
-          </div>
-          : String.fromCharCode(160)}
+      <div className="este-loading">
+        <FormattedMessage {...currentText}>
+          {title => <Helmet title={title} />}
+        </FormattedMessage>
+        <FormattedMessage {...currentText} />
       </div>
     );
   }
