@@ -223,5 +223,21 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "C'est plutôt calme par ici..."
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Rejeter"
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "S'inscrire"
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": "Obligatoire"
+  },
+  {
+    "id": "app.links.offline",
+    "defaultMessage": "Hors ligne"
   }
 ];

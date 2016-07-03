@@ -179,5 +179,65 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "E calm pe aici..."
-  }
+  },
+  {
+    "id": "app.buttons.add",
+    "defaultMessage": "Adăuga"
+  },
+  {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Anulare"
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Șterge"
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Destitui"
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editați"
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Salvați"
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "Inscrie-te"
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "A depune"
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Esti sigur?"
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Ai modificări nesalvate. Esti sigur?"
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": "Necesar"
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Câmpuri"
+  },
+  {
+    "id": "app.links.offline",
+    "defaultMessage": "Deconectat"
+  },
+  {
+    "id": "fields.page.h2",
+    "defaultMessage": "Câmpuri"
+  },
+  {
+    "id": "fields.page.p",
+    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală."
+  },
 ];
