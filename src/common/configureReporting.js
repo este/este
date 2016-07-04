@@ -6,14 +6,15 @@ const register = unhandledRejection => unhandledRejection(event => {
   event.preventDefault();
   const { reason: error } = event.detail;
   if (process.env.NODE_ENV === 'production') {
-    // "error.reason || error" because redux-promise-middleware
+    // error.reason because redux-promise-middleware wraps error
     Raven.captureException(error.reason || error);
     // We can use also Raven.lastEventId() and Raven.showReportDialog().
     // Check docs.getsentry.com/hosted/clients/javascript/usage
   } else {
     /* eslint-disable no-console */
     console.warn('Unhandled promise rejection. Fix it or it will be reported.');
-    console.warn(error);
+    // error.reason because redux-promise-middleware wraps error
+    console.warn(error.reason || error);
     /* eslint-enable no-console */
   }
 });
