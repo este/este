@@ -77,7 +77,7 @@
     "raven-js": "^3.0.3",
     "react": "15.2.0",
     "react-addons-test-utils": "15.2.0",
-    "react-dom": "15.2.0",
+    "react-dom": "15.2.1",
     "react-helmet": "^3.0.0",
     "react-intl": "^2.1.2",
     "react-native": "0.28.0",
