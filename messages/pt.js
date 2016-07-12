@@ -21,6 +21,10 @@ export default [
     "defaultMessage": "Idioma"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Usuário"
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Usuário"
   },
@@ -33,7 +37,11 @@ export default [
     "defaultMessage": "Tarefas"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "Email inválido."
   },
   {
@@ -41,7 +49,7 @@ export default [
     "defaultMessage": "Favor preencher {prop, select, email {endereço de email} password {senha}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Senha precisa conter {minLength} caracteres."
   },
   {
@@ -61,15 +69,7 @@ export default [
     "defaultMessage": "Usuário especificado não existe."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Operação não realizada devido a erro de conexão."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Email do usuário / Acessar"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Email para recuperação de senha."
   },
   {
@@ -77,7 +77,7 @@ export default [
     "defaultMessage": "endereço@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Login do Facebook"
   },
   {
@@ -89,16 +89,12 @@ export default [
     "defaultMessage": "senha"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "Email de recuperação foi enviado."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Restaurar Senha"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Últimos {limitToLast} usuários conectados"
   },
   {
     "id": "footer.madeByHtml",

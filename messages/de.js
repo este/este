@@ -5,6 +5,10 @@ export default [
     "defaultMessage": "Hinzufügen"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Anmelden"
+  },
+  {
     "id": "app.buttons.cancel",
     "defaultMessage": "Abbrechen"
   },
@@ -69,7 +73,11 @@ export default [
     "defaultMessage": "Aufgaben"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "E-Mail"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "Diese E-Mail Adresse ist nicht gültig."
   },
   {
@@ -77,7 +85,7 @@ export default [
     "defaultMessage": "Bitte füllen Sie das Feld {prop, select, email {Email} password {Passwort}} aus."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Das Passwort muss mindestens {minLength} Zeichen lang sein."
   },
   {
@@ -105,15 +113,7 @@ export default [
     "defaultMessage": "Das eigegebene Konto existiert nicht."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Die Verbinung zur Authentifizierung konnte nicht hergestellt werden."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Login per E-Mail / Registrieren"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Passwort zurücksetzen"
   },
   {
@@ -121,7 +121,7 @@ export default [
     "defaultMessage": "ihre@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Anmeldung via Facebook"
   },
   {
@@ -133,16 +133,12 @@ export default [
     "defaultMessage": "Passwort"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "Die E-Mail zum Zurücksetzen Ihres Passwortes wurde gesendet."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Passwort zurücksetzen"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Die letzten {limitToLast} angemeldeten Benutzer"
   },
   {
     "id": "footer.madeByHtml",

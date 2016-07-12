@@ -21,6 +21,10 @@ export default [
     "defaultMessage": "Traducere"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Autentificare"
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Autentificare"
   },
@@ -33,7 +37,11 @@ export default [
     "defaultMessage": "Tasks"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "E-mail"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "Adresa e-mail nu este validă."
   },
   {
@@ -41,7 +49,7 @@ export default [
     "defaultMessage": "Completați câmpurile {prop, select, email {email} password {parolă}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Parola trebuie să conține cel puțin {minLength} caractere."
   },
   {
@@ -61,15 +69,7 @@ export default [
     "defaultMessage": "Contul de utilizator specificat nu există."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Operația nu a putut fi realizată din cauza unei erori de rețea."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Logare / Înregistrare Email"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Recuperarea parolei de email"
   },
   {
@@ -77,7 +77,7 @@ export default [
     "defaultMessage": "altău@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Logare Facebook"
   },
   {
@@ -89,16 +89,12 @@ export default [
     "defaultMessage": "Parolă"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "Emailul de recuperare a fost trimis."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Resetează parola"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Ultima {limitToLast} logat in utilizatori"
   },
   {
     "id": "footer.madeByHtml",

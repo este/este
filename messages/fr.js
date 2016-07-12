@@ -17,6 +17,10 @@ export default [
     "defaultMessage": "Editer"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Connexion"
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Connexion"
   },
@@ -69,7 +73,11 @@ export default [
     "defaultMessage": "Tâches"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "L'adresse email n'est pas valide."
   },
   {
@@ -77,7 +85,7 @@ export default [
     "defaultMessage": "Veuillez remplir le champ {prop, select, email {email} password {mot de passe}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Le mot de passe doit contenir au moins {minLength} caractères."
   },
   {
@@ -105,15 +113,7 @@ export default [
     "defaultMessage": "Le compte utilisateur spécifié n'existe pas."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Une erreur est survenue lors de la tentative de connexion avec les serveur de authentification."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Connexion par email / S'enregistrer"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Récupération de mot de passe"
   },
   {
@@ -121,7 +121,7 @@ export default [
     "defaultMessage": "votre@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Connexion Facebook"
   },
   {
@@ -133,16 +133,12 @@ export default [
     "defaultMessage": "mot de passe"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "L'email de récupération du mot de passe a été envoyé."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Réinitialiser le mot de passe"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Derniers {limitToLast} utilisateurs authentifiés"
   },
   {
     "id": "footer.madeByHtml",

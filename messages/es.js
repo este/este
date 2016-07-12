@@ -21,6 +21,10 @@ export default [
     "defaultMessage": "Idioma"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Iniciar Sesión"
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Iniciar Sesión"
   },
@@ -33,7 +37,11 @@ export default [
     "defaultMessage": "Tareas"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Correo"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "Dirección de correo no valida."
   },
   {
@@ -41,7 +49,7 @@ export default [
     "defaultMessage": "Por favor llenar {prop, select, email {email} password {contraseña}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "La contraseña debe contener al menos {minLength} caracteres."
   },
   {
@@ -61,15 +69,7 @@ export default [
     "defaultMessage": "La cuenta de usuario especificada no existe."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "La operación no pudo ser realizada debido a un error de red."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Inicio de sesión correo electrónico / Regístrese"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Recuperación de contraseña de correo electrónico."
   },
   {
@@ -77,7 +77,7 @@ export default [
     "defaultMessage": "tu@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Iniciar sesión en Facebook"
   },
   {
@@ -89,16 +89,12 @@ export default [
     "defaultMessage": "contraseña"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "Correo electrónico de recuperación ha sido enviado."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Restablecer contraseña"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Ultimos {limitToLast} Usuarios Conectados"
   },
   {
     "id": "footer.madeByHtml",

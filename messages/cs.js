@@ -13,6 +13,14 @@ export default [
     "defaultMessage": "Smazat"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Přihlášení"
+  },
+  {
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Email"
+  },
+  {
     "id": "app.buttons.dismiss",
     "defaultMessage": "Zrušit"
   },
@@ -91,7 +99,7 @@ export default [
     "defaultMessage": "Úkoly"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.signInError.email",
     "defaultMessage": "Emailová adresa není zprávná."
   },
   {
@@ -99,7 +107,7 @@ export default [
     "defaultMessage": "Prosím vyplňte {prop, select, email {email} password {heslo}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Heslo musí obsahovat alespoň {minLength} znaků."
   },
   {
@@ -127,15 +135,7 @@ export default [
     "defaultMessage": "Nesprávný uživatel."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "Chyba sítě."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Email Přihlášení / Registrace"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
+    "id": "auth.email.passwordRecoveryLegend",
     "defaultMessage": "Obnovení hesla"
   },
   {
@@ -143,7 +143,7 @@ export default [
     "defaultMessage": "tvuj@email.com"
   },
   {
-    "id": "firebase.login.facebookLogin",
+    "id": "auth.social.facebookSignIn",
     "defaultMessage": "Přihlášení přes Facebook"
   },
   {
@@ -155,16 +155,12 @@ export default [
     "defaultMessage": "heslo"
   },
   {
-    "id": "firebase.login.recoveryEmailSent",
+    "id": "auth.email.recoveryEmailSent",
     "defaultMessage": "Email pro obnovení hesla odeslán."
   },
   {
-    "id": "firebase.login.resetPassword",
+    "id": "auth.email.resetPassword",
     "defaultMessage": "Reset hesla"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Posledních {limitToLast} přihlášených uživatelů."
   },
   {
     "id": "footer.madeByHtml",
@@ -245,5 +241,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Nic tu není..."
-  }
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Nahrávám"
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Stále nahrávám..."
+  },
 ];
