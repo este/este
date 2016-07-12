@@ -1,11 +1,11 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Iniciar Sesión"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Cerrar Sesión"
   },
   {
@@ -21,7 +21,7 @@ export default [
     "defaultMessage": "Idioma"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Iniciar Sesión"
   },
   {
@@ -37,7 +37,7 @@ export default [
     "defaultMessage": "Dirección de correo no valida."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Por favor llenar {prop, select, email {email} password {contraseña}}."
   },
   {
@@ -73,7 +73,7 @@ export default [
     "defaultMessage": "Recuperación de contraseña de correo electrónico."
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "tu@email.com"
   },
   {
@@ -81,11 +81,11 @@ export default [
     "defaultMessage": "Iniciar sesión en Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Olvido su contraseña?"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "contraseña"
   },
   {

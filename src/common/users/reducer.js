@@ -14,16 +14,15 @@ export default function usersReducer(state = new InitialState, action) {
   switch (action.type) {
 
     case firebaseActions.FIREBASE_ON_AUTH: {
-      const { user } = action.meta;
-      if (!user) return state;
-      return state.set('viewer', new User(user));
+      const { user } = action.payload;
+      return state.set('viewer', user);
     }
 
     case actions.ON_USERS_LIST: {
       const { list } = action.payload;
       const sortedList = list && Seq(list)
         .map(json => new User(json))
-        .sortBy(user => -user.authenticatedAt)
+        .sortBy(user => user.displayName)
         .toList();
       return state.set('list', sortedList);
     }

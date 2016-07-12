@@ -21,16 +21,16 @@ export default [
     "defaultMessage": "Edit"
   },
   {
-    "id": "app.buttons.login",
-    "defaultMessage": "Login"
-  },
-  {
-    "id": "app.buttons.logout",
-    "defaultMessage": "Logout"
-  },
-  {
     "id": "app.buttons.save",
     "defaultMessage": "Save"
+  },
+  {
+    "id": "app.buttons.signIn",
+    "defaultMessage": "Sign In"
+  },
+  {
+    "id": "app.buttons.signOut",
+    "defaultMessage": "Sign Out"
   },
   {
     "id": "app.buttons.signUp",
@@ -69,10 +69,6 @@ export default [
     "defaultMessage": "Intl"
   },
   {
-    "id": "app.links.login",
-    "defaultMessage": "Login"
-  },
-  {
     "id": "app.links.me",
     "defaultMessage": "Me"
   },
@@ -81,20 +77,56 @@ export default [
     "defaultMessage": "Offline"
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Sign in"
+  },
+  {
     "id": "app.links.todos",
     "defaultMessage": "Todos"
   },
   {
-    "id": "auth.login.error.email",
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "auth.email.emailPlaceholder",
+    "defaultMessage": "your@email.com"
+  },
+  {
+    "id": "auth.email.passwordForgotten",
+    "defaultMessage": "Forgot Your Password?"
+  },
+  {
+    "id": "auth.email.passwordPlaceholder",
+    "defaultMessage": "password"
+  },
+  {
+    "id": "auth.email.passwordRecoveryLegend",
+    "defaultMessage": "Email Password Recovery"
+  },
+  {
+    "id": "auth.email.recoveryEmailSent",
+    "defaultMessage": "Recovery email has been sent."
+  },
+  {
+    "id": "auth.email.resetPassword",
+    "defaultMessage": "Reset Password"
+  },
+  {
+    "id": "auth.signInError.email",
     "defaultMessage": "Email address is not valid."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Please fill out {prop, select, email {email} password {password}}."
   },
   {
-    "id": "auth.login.error.simplePassword",
+    "id": "auth.signInError.simplePassword",
     "defaultMessage": "Password must contain at least {minLength} characters."
+  },
+  {
+    "id": "auth.social.facebookSignIn",
+    "defaultMessage": "Facebook Login"
   },
   {
     "id": "fields.page.h2",
@@ -121,46 +153,6 @@ export default [
     "defaultMessage": "The specified user account does not exist."
   },
   {
-    "id": "firebase.error.NETWORK_ERROR",
-    "defaultMessage": "The operation could not be performed due to a network error."
-  },
-  {
-    "id": "firebase.login.emailLoginOrSignUp",
-    "defaultMessage": "Email Login / Sign Up"
-  },
-  {
-    "id": "firebase.login.emailPasswordRecovery",
-    "defaultMessage": "Email Password Recovery"
-  },
-  {
-    "id": "firebase.login.emailPlaceholder",
-    "defaultMessage": "your@email.com"
-  },
-  {
-    "id": "firebase.login.facebookLogin",
-    "defaultMessage": "Facebook Login"
-  },
-  {
-    "id": "firebase.login.passwordForgotten",
-    "defaultMessage": "Forgot your password?"
-  },
-  {
-    "id": "firebase.login.passwordPlaceholder",
-    "defaultMessage": "password"
-  },
-  {
-    "id": "firebase.login.recoveryEmailSent",
-    "defaultMessage": "Recovery email has been sent."
-  },
-  {
-    "id": "firebase.login.resetPassword",
-    "defaultMessage": "Reset Password"
-  },
-  {
-    "id": "firebase.users.lastLoggedInUsers",
-    "defaultMessage": "Last {limitToLast} Logged In Users"
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "Made with love by <a href=\"https://twitter.com/steida\">Steida</a>"
   },
@@ -179,6 +171,14 @@ export default [
   {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {message} other {messages}}"
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Loading"
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Still loading, please check your connection"
   },
   {
     "id": "me.page.linkToProfile",
@@ -239,13 +239,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "It's rather empty here..."
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Loading"
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Still loading, please check your connection"
   }
 ];

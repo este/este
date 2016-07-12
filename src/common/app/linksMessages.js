@@ -17,9 +17,9 @@ export default defineMessages({
     defaultMessage: 'Home',
     id: 'app.links.home'
   },
-  login: {
-    defaultMessage: 'Login',
-    id: 'app.links.login'
+  signIn: {
+    defaultMessage: 'Sign in',
+    id: 'app.links.signIn'
   },
   me: {
     defaultMessage: 'Me',

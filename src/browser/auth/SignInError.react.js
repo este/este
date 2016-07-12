@@ -10,19 +10,19 @@ const messages = defineMessages({
       email {email}
       password {password}
     }.`,
-    id: 'auth.login.error.required'
+    id: 'auth.signInError.required'
   },
   email: {
     defaultMessage: 'Email address is not valid.',
-    id: 'auth.login.error.email'
+    id: 'auth.signInError.email'
   },
   simplePassword: {
     defaultMessage: 'Password must contain at least {minLength} characters.',
-    id: 'auth.login.error.simplePassword'
+    id: 'auth.signInError.simplePassword'
   }
 });
 
-class LoginError extends Component {
+class SignInError extends Component {
 
   static propTypes = {
     error: PropTypes.instanceOf(Error)
@@ -30,13 +30,13 @@ class LoginError extends Component {
 
   render() {
     const { error } = this.props;
-    if (!error || error.code === 'USER_CANCELLED') return null;
+    if (!error) return null;
     const message =
       messages[error.name] ||
       firebaseMessages[error.name];
 
     return (
-      <p className="login-error">
+      <p className="signin-error">
         {message ?
           <FormattedMessage {...message} values={error.params} />
         :
@@ -49,5 +49,5 @@ class LoginError extends Component {
 }
 
 export default connect(state => ({
-  error: state.auth.formError
-}))(LoginError);
+  error: state.auth.error
+}))(SignInError);

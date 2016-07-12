@@ -1,11 +1,11 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Autentificare"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Deconectare"
   },
   {
@@ -21,7 +21,7 @@ export default [
     "defaultMessage": "Traducere"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Autentificare"
   },
   {
@@ -37,7 +37,7 @@ export default [
     "defaultMessage": "Adresa e-mail nu este validă."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Completați câmpurile {prop, select, email {email} password {parolă}}."
   },
   {
@@ -73,7 +73,7 @@ export default [
     "defaultMessage": "Recuperarea parolei de email"
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "altău@email.com"
   },
   {
@@ -81,11 +81,11 @@ export default [
     "defaultMessage": "Logare Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Ai uitat parola?"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "Parolă"
   },
   {

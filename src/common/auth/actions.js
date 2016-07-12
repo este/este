@@ -1,21 +1,18 @@
 import { browserHistory } from 'react-router';
 
-// Firebase Login / Sign Up actions are in src/common/lib/redux-firebase/actions.js
+// Check Firebase actions in src/common/lib/redux-firebase/actions.js
 
-export const LOGOUT = 'LOGOUT';
+export const SIGN_OUT = 'SIGN_OUT';
 
-export function logout() {
-  return ({ firebase, storageEngine }) => {
-    // Always redirect to home first to ensure valid view state after logout.
+export function signOut() {
+  return ({ firebaseAuth }) => {
+    // Always redirect to home first to ensure valid view state after sign out.
     if (process.env.IS_BROWSER) {
       browserHistory.replace('/');
     }
-    // Always reset client storage.
-    storageEngine.save({});
-    // Will dispatch FIREBASE_ON_AUTH.
-    firebase.unauth();
+    firebaseAuth().signOut();
     return {
-      type: LOGOUT
+      type: SIGN_OUT
     };
   };
 }

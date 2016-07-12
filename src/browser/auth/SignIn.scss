@@ -1,8 +1,8 @@
-.login {
-  .social-login {
+.sign-in {
+  .social {
     margin-bottom: 1em;
   }
-  .email-login {
+  .email {
     max-width: 28em;
     input {
       margin: .25em 0;
@@ -23,7 +23,7 @@
       font-size: .75em;
     }
   }
-  .login-error {
+  .signin-error {
     color: red;
   }
 }

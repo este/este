@@ -1,11 +1,12 @@
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
-import promiseMiddleware from 'redux-promise-middleware';
 
 // Deps.
-import Firebase from 'firebase';
+import firebase from 'firebase';
 import shortid from 'shortid';
 import validate from './validate';
+
+let firebaseDeps = null;
 
 // Like redux-thunk but with dependency injection.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
@@ -14,12 +15,42 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
+// Like redux-promise-middleware but without the noise.
+const promiseMiddleware = ({ dispatch }) => next => action => {
+  const { type, payload: promise } = action;
+  const isPromise = promise && typeof promise.then === 'function';
+  if (!isPromise) return next(action);
+  const createAction = (suffix, payload) => ({
+    type: `${type}_${suffix}`, meta: { action }, payload
+  });
+  next(createAction('START'));
+  const onFulfilled = value => {
+    dispatch(createAction('SUCCESS', value));
+    return value;
+  };
+  const onRejected = error => {
+    dispatch(createAction('ERROR', error));
+    throw error;
+  };
+  return promise.then(onFulfilled, onRejected);
+};
+
 export default function configureMiddleware(initialState, platformDeps, platformMiddleware) {
-  const firebase = new Firebase(initialState.config.firebaseUrl);
-  // // Check whether connection works.
-  // firebase.child('hello-world').set({
-  //   createdAt: Firebase.ServerValue.TIMESTAMP
+  if (!firebaseDeps) {
+    // Lazy init.
+    firebase.initializeApp(initialState.config.firebase);
+    firebaseDeps = {
+      firebase: firebase.database().ref(),
+      firebaseAuth: firebase.auth,
+      firebaseDatabase: firebase.database,
+    };
+  }
+  // Check whether Firebase works.
+  // firebaseDeps.firebase.child('hello-world').set({
+  //   createdAt: firebaseDeps.firebaseDatabase.ServerValue.TIMESTAMP,
+  //   text: 'Yes!'
   // });
+
   const {
     STORAGE_SAVE,
     storageEngine,
@@ -29,15 +60,13 @@ export default function configureMiddleware(initialState, platformDeps, platform
   const middleware = [
     injectMiddleware({
       ...platformDeps,
-      firebase,
+      ...firebaseDeps,
       getUid: () => shortid.generate(),
-      now: () => Date.now(), // Consider Firebase.ServerValue.TIMESTAMP
+      now: () => Date.now(),
       storageEngine,
       validate,
     }),
-    promiseMiddleware({
-      promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
-    }),
+    promiseMiddleware,
     ...platformMiddleware,
   ];
 

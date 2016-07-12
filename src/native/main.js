@@ -1,5 +1,6 @@
 import App from './app/App.react';
 import Component from 'react-pure-render/component';
+import FBSDK from 'react-native-fbsdk';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
 import React from 'react';
 import configureStore from '../common/configureStore';
@@ -8,6 +9,12 @@ import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { fromJSON } from '../common/transit';
 import { initialTransitState } from './initialState';
+
+// import { AsyncStorage } from 'react-native';
+// setTimeout(async () => {
+//   const keys = await AsyncStorage.getAllKeys();
+//   console.log(keys);
+// }, 1000)
 
 const initialState = fromJSON(initialTransitState);
 
@@ -31,7 +38,7 @@ const createNativeInitialState = () => ({
 
 const store = configureStore({
   initialState: createNativeInitialState(),
-  platformDeps: { createStorageEngine },
+  platformDeps: { FBSDK, createStorageEngine },
 });
 
 class Root extends Component {

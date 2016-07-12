@@ -22,7 +22,7 @@ export default class FirebasePage extends Component {
             />
           </a>
         </h2>
-        <Users limitToLast={10} />
+        <Users />
       </div>
     );
   }

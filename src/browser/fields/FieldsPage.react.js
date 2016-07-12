@@ -46,9 +46,7 @@ const exampleAction = async (values) => new Promise((resolve, reject) => {
     return;
   }
   setTimeout(() => {
-    reject({
-      reason: new ValidationError('required', { prop: 'someField' })
-    });
+    reject(new ValidationError('required', { prop: 'someField' }));
   }, 1000);
 });
 
@@ -85,11 +83,10 @@ class FieldsPage extends Component {
     try {
       await exampleAction(values);
     } catch (error) {
-      const { reason } = error;
-      if (reason instanceof ValidationError) {
-        this.setState({ error: reason }, () => {
+      if (error instanceof ValidationError) {
+        this.setState({ error }, () => {
           setTimeout(() => {
-            focusInvalidField(this, reason);
+            focusInvalidField(this, error);
           }, 0);
         });
         return;

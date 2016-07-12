@@ -1,5 +1,5 @@
 .firebase-users {
-  
+
   ol {
     list-style-type: none;
     padding: 0;
@@ -9,8 +9,8 @@
       margin: .5em;
       display: inline-block;
       img {
-        height: 100%;
-        border-radius: 25%;
+        max-height: 50px;
+        border-radius: 50%;
       }
     }
   }

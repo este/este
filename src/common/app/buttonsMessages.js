@@ -21,17 +21,21 @@ export default defineMessages({
     defaultMessage: 'Edit',
     id: 'app.buttons.edit'
   },
-  login: {
-    defaultMessage: 'Login',
-    id: 'app.buttons.login'
-  },
-  logout: {
-    defaultMessage: 'Logout',
-    id: 'app.buttons.logout'
+  facebookSignIn: {
+    defaultMessage: 'Facebook Login', // Because Login is official name.
+    id: 'auth.social.facebookSignIn'
   },
   save: {
     defaultMessage: 'Save',
     id: 'app.buttons.save'
+  },
+  signIn: {
+    defaultMessage: 'Sign In',
+    id: 'app.buttons.signIn'
+  },
+  signOut: {
+    defaultMessage: 'Sign Out',
+    id: 'app.buttons.signOut'
   },
   signUp: {
     defaultMessage: 'Sign Up',

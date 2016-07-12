@@ -1,19 +1,19 @@
-import './Login.scss';
+import './SignIn.scss';
 import Component from 'react-pure-render/component';
-import EmailLogin from './EmailLogin.react';
-import LoginError from './LoginError.react';
+import Email from './Email.react';
 import React, { PropTypes } from 'react';
-import SocialLogin from './SocialLogin.react';
+import SignInError from './SignInError.react';
+import Social from './Social.react';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 
-class Login extends Component {
+class SignIn extends Component {
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
     location: locationShape,
     redirectTo: PropTypes.string.isRequired,
     router: routerShape,
+    viewer: PropTypes.object,
   };
 
   static defaultProps = {
@@ -25,8 +25,8 @@ class Login extends Component {
     this.wasRedirected = false;
   }
 
-  componentWillReceiveProps({ isAuthenticated }) {
-    if (!isAuthenticated) return;
+  componentWillReceiveProps({ viewer }) {
+    if (!viewer) return;
     if (this.wasRedirected) return;
     this.wasRedirected = true;
     this.redirect();
@@ -40,20 +40,18 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
-        <SocialLogin />
-        <EmailLogin />
-        <LoginError />
+      <div className="sign-in">
+        <Social />
+        <Email />
+        <SignInError />
       </div>
     );
   }
 
 }
 
-Login = withRouter(Login);
+SignIn = withRouter(SignIn);
 
 export default connect(state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  // Pass viewer to enforce componentWillReceiveProps on the app state change.
   viewer: state.users.viewer
-}))(Login);
+}))(SignIn);

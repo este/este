@@ -39,15 +39,14 @@ type ExtraLongRequiredString extends String {
 }
 
 type HelloWorld {
-  createdAt: CurrentTimestamp
+  createdAt: CurrentTimestamp,
+  text: ShortString
 }
 
 type User {
-  authenticatedAt: CurrentTimestamp,
   displayName: LongString,
   id: ShortRequiredString,
-  profileImageURL: LongString,
-  provider: LongString
+  photoURL: LongString
 }
 
 type Email {
@@ -64,12 +63,10 @@ path /hello-world is HelloWorld {
 }
 
 path /users {
-  read() { true } // Reading all users allowed for demo.
-  index() { ["authenticatedAt"] }
+  read() { true }
 }
 
 path /users/{uid} is User {
-  // TODO: Move /users read() { true } here for more secured app.
   write() { isViewer(uid) }
 }
 

@@ -5,48 +5,48 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import { ValidationError, focusInvalidField } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { firebaseActions } from '../../common/lib/redux-firebase';
+import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
 
 const messages = defineMessages({
-  emailLoginOrSignUp: {
-    defaultMessage: 'Email Login / Sign Up',
-    id: 'firebase.login.emailLoginOrSignUp'
+  emailLegend: {
+    defaultMessage: 'Email',
+    id: 'auth.email.emailLegend'
   },
-  emailPasswordRecovery: {
+  passwordRecoveryLegend: {
     defaultMessage: 'Email Password Recovery',
-    id: 'firebase.login.emailPasswordRecovery'
+    id: 'auth.email.passwordRecoveryLegend'
   },
   emailPlaceholder: {
     defaultMessage: 'your@email.com',
-    id: 'firebase.login.emailPlaceholder'
+    id: 'auth.email.emailPlaceholder'
   },
   passwordPlaceholder: {
     defaultMessage: 'password',
-    id: 'firebase.login.passwordPlaceholder'
+    id: 'auth.email.passwordPlaceholder'
   },
   passwordForgotten: {
-    defaultMessage: 'Forgot your password?',
-    id: 'firebase.login.passwordForgotten'
+    defaultMessage: 'Forgot Your Password?',
+    id: 'auth.email.passwordForgotten'
   },
   recoveryEmailSent: {
     defaultMessage: 'Recovery email has been sent.',
-    id: 'firebase.login.recoveryEmailSent'
+    id: 'auth.email.recoveryEmailSent'
   },
   resetPassword: {
     defaultMessage: 'Reset Password',
-    id: 'firebase.login.resetPassword'
+    id: 'auth.email.resetPassword'
   },
 });
 
 
-class EmailLogin extends Component {
+class Email extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
     resetPassword: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired
+    signIn: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -54,8 +54,8 @@ class EmailLogin extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSignUpClick = this.onSignUpClick.bind(this);
     this.onForgetPasswordClick = this.onForgetPasswordClick.bind(this);
-    // Remember the component state is preserved only for shown components.
-    // We don't want to preserve forgetPasswordIsShown nor recoveryEmailSent.
+    // Note we are using the component state instead of the app state, because
+    // the component state is the right place for an ephemeral UI state.
     this.state = {
       forgetPasswordIsShown: false,
       recoveryEmailSent: false
@@ -67,18 +67,17 @@ class EmailLogin extends Component {
     if (this.state.forgetPasswordIsShown) {
       this.resetPassword();
     } else {
-      this.loginViaPassword();
+      this.signInViaPassword();
     }
   }
 
   async onSignUpClick() {
     const { fields, signUp } = this.props;
     try {
-      await signUp(fields.$values());
+      await signUp('password', fields.$values());
     } catch (error) {
-      const { reason } = error;
-      if (reason instanceof ValidationError) {
-        focusInvalidField(this, reason);
+      if (error instanceof ValidationError) {
+        focusInvalidField(this, error);
         return;
       }
       throw error;
@@ -96,9 +95,8 @@ class EmailLogin extends Component {
     try {
       await resetPassword(email);
     } catch (error) {
-      const { reason } = error;
-      if (reason instanceof ValidationError) {
-        focusInvalidField(this, reason);
+      if (error instanceof ValidationError) {
+        focusInvalidField(this, error);
         return;
       }
       throw error;
@@ -109,14 +107,13 @@ class EmailLogin extends Component {
     });
   }
 
-  async loginViaPassword() {
-    const { fields, login } = this.props;
+  async signInViaPassword() {
+    const { fields, signIn } = this.props;
     try {
-      await login('password', fields.$values());
+      await signIn('password', fields.$values());
     } catch (error) {
-      const { reason } = error;
-      if (reason instanceof ValidationError) {
-        focusInvalidField(this, reason);
+      if (error instanceof ValidationError) {
+        focusInvalidField(this, error);
         return;
       }
       throw error;
@@ -127,11 +124,11 @@ class EmailLogin extends Component {
     const { disabled, fields } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
     const legendMessage = forgetPasswordIsShown
-      ? messages.emailPasswordRecovery
-      : messages.emailLoginOrSignUp;
+      ? messages.passwordRecoveryLegend
+      : messages.emailLegend;
 
     return (
-      <form className="email-login" onSubmit={this.onFormSubmit}>
+      <form className="email" onSubmit={this.onFormSubmit}>
         <fieldset disabled={disabled}>
           <legend>
             <FormattedMessage {...legendMessage} />
@@ -156,7 +153,7 @@ class EmailLogin extends Component {
           {!forgetPasswordIsShown ?
             <div className="buttons">
               <button>
-                <FormattedMessage {...buttonsMessages.login} />
+                <FormattedMessage {...buttonsMessages.signIn} />
               </button>
               <button onClick={this.onSignUpClick} type="button">
                 <FormattedMessage {...buttonsMessages.signUp} />
@@ -191,11 +188,11 @@ class EmailLogin extends Component {
 
 }
 
-EmailLogin = fields(EmailLogin, {
-  path: 'auth',
+Email = fields(Email, {
+  path: ['auth', 'email'],
   fields: ['email', 'password']
 });
 
 export default connect(state => ({
   disabled: state.auth.formDisabled
-}), firebaseActions)(EmailLogin);
+}), { resetPassword, signIn, signUp })(Email);

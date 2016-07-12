@@ -3,7 +3,7 @@ import { Record } from '../transit';
 const InitialState = Record({
   appName: '',
   appVersion: '',
-  firebaseUrl: '',
+  firebase: '',
   sentryUrl: ''
 }, 'config');
 

@@ -19,13 +19,11 @@
 
 import * as actions from './actions';
 import Component from 'react-pure-render/component';
-import Firebase from 'firebase';
 import React, { PropTypes } from 'react';
-import invariant from 'invariant';
 
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
-// recycled on logout. Then we can just set the key to the current viewer.
+// recycled on sign out. Then we can just set the key to the current viewer.
 const optionsToPayload = ({ path, key, params }) => ({ path, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
@@ -76,7 +74,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
                 }
                 action({
                   eventType,
-                  key: snap.key(),
+                  key: snap.key,
                   prevChildKey,
                   val: snap.val()
                 });
@@ -96,10 +94,6 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
       // Example: { path: product && `products/${product.id}`, ... }
       if (!options.path) return;
       this.context.store.dispatch(({ firebase }) => {
-        invariant(firebase instanceof Firebase,
-          'Expected the firebase to be an instance of Firebase.');
-        invariant(typeof options.path === 'string',
-          'Expected the path to be a string.');
         const ref = firebase.child(options.path);
         return {
           type: callback(ref, options),

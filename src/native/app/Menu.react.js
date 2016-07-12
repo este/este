@@ -43,6 +43,7 @@ class Menu extends Component {
         style={styles.container}
       >
         <View>
+          {/* TODO: Refactor */}
           <Text
             onPress={() => onRouteChange('home')} // eslint-disable-line react/jsx-no-bind
             style={styles.item}
@@ -55,6 +56,14 @@ class Menu extends Component {
             onPress={() => onRouteChange('intl')} // eslint-disable-line react/jsx-no-bind
             style={styles.item}
           >{intl.formatMessage(linksMessages.intl)}</Text>
+          <Text
+            onPress={() => onRouteChange('offline')} // eslint-disable-line react/jsx-no-bind
+            style={styles.item}
+          >{intl.formatMessage(linksMessages.offline)}</Text>
+          <Text
+            onPress={() => onRouteChange('signIn')} // eslint-disable-line react/jsx-no-bind
+            style={styles.item}
+          >{intl.formatMessage(linksMessages.signIn)}</Text>
         </View>
       </ScrollView>
     );

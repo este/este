@@ -15,7 +15,13 @@ nconf.defaults({
   // Use appVersion defined in gulp env task or Heroku dyno metadata.
   appVersion: process.env.appVersion || process.env.HEROKU_SLUG_COMMIT,
   defaultLocale: 'en',
-  firebaseUrl: 'https://este.firebaseio.com',
+  firebase: {
+    // To get the config, just click Add web app from the overview page.
+    apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
+    authDomain: 'este.firebaseapp.com',
+    databaseURL: 'https://este.firebaseio.com',
+    storageBucket: 'project-808488257248094054.appspot.com',
+  },
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',
   locales: ['cs', 'de', 'en', 'es', 'fr', 'pt', 'ro'],

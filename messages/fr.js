@@ -17,11 +17,11 @@ export default [
     "defaultMessage": "Editer"
   },
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Connexion"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Déconnexion"
   },
   {
@@ -57,7 +57,7 @@ export default [
     "defaultMessage": "Traduction"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Authentification"
   },
   {
@@ -73,7 +73,7 @@ export default [
     "defaultMessage": "L'adresse email n'est pas valide."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Veuillez remplir le champ {prop, select, email {email} password {mot de passe}}."
   },
   {
@@ -117,7 +117,7 @@ export default [
     "defaultMessage": "Récupération de mot de passe"
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "votre@email.com"
   },
   {
@@ -125,11 +125,11 @@ export default [
     "defaultMessage": "Connexion Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Mot de passe oublié ?"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "mot de passe"
   },
   {

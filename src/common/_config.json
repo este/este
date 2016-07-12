@@ -1,4 +1,9 @@
 {
-  "firebaseUrl": "https://este.firebaseio.com",
+  "firebase": {
+    "apiKey": "...",
+    "authDomain": "...",
+    "databaseURL": "...",
+    "storageBucket": "..."
+  },
   "remoteHotReload": true
 }

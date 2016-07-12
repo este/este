@@ -17,11 +17,11 @@ export default [
     "defaultMessage": "Bearbeiten"
   },
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Anmelden"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Abmelden"
   },
   {
@@ -57,7 +57,7 @@ export default [
     "defaultMessage": "Übersetzung"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Anmelden"
   },
   {
@@ -73,7 +73,7 @@ export default [
     "defaultMessage": "Diese E-Mail Adresse ist nicht gültig."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Bitte füllen Sie das Feld {prop, select, email {Email} password {Passwort}} aus."
   },
   {
@@ -117,7 +117,7 @@ export default [
     "defaultMessage": "Passwort zurücksetzen"
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "ihre@email.com"
   },
   {
@@ -125,11 +125,11 @@ export default [
     "defaultMessage": "Anmeldung via Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Passwort vergessen?"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "Passwort"
   },
   {

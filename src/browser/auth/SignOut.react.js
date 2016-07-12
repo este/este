@@ -3,21 +3,21 @@ import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { logout } from '../../common/auth/actions';
+import { signOut } from '../../common/auth/actions';
 
-class Logout extends Component {
+class SignOut extends Component {
 
   static propTypes = {
-    logout: PropTypes.func.isRequired
+    signOut: PropTypes.func.isRequired
   };
 
   render() {
-    const { logout } = this.props;
+    const { signOut } = this.props;
 
     return (
-      <div className="logout">
-        <button onClick={logout}>
-          <FormattedMessage {...buttonsMessages.logout} />
+      <div className="sign-out">
+        <button onClick={signOut}>
+          <FormattedMessage {...buttonsMessages.signOut} />
         </button>
       </div>
     );
@@ -25,4 +25,4 @@ class Logout extends Component {
 
 }
 
-export default connect(null, { logout })(Logout);
+export default connect(null, { signOut })(SignOut);

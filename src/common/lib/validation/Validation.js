@@ -48,7 +48,8 @@ export default class Validation {
 
   simplePassword() {
     return this.validate((value, prop) => {
-      const minLength = 5;
+      // Password must be at least 6 characters.
+      const minLength = 6;
       if (value.length >= minLength) return;
       throw new ValidationError('simplePassword', { prop, minLength });
     });

@@ -1,22 +1,15 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import buttonsMessages from '../../common/app/buttonsMessages';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { login } from '../../common/lib/redux-firebase/actions';
+import { signIn } from '../../common/lib/redux-firebase/actions';
 
-const messages = defineMessages({
-  facebookLogin: {
-    defaultMessage: 'Facebook Login',
-    id: 'firebase.login.facebookLogin'
-  }
-});
-
-// TODO: Add all social providers with configuration via default props.
-class SocialLogin extends Component {
+class Social extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
-    login: PropTypes.func.isRequired
+    signIn: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -25,13 +18,13 @@ class SocialLogin extends Component {
   }
 
   async onButtonClick(e) {
-    const { login } = this.props;
+    const { signIn } = this.props;
     const { provider } = e.currentTarget.dataset;
     try {
-      await login(provider);
+      await signIn(provider);
     } catch (error) {
-      const { reason } = error;
-      if (reason.code === 'USER_CANCELLED') {
+      // Swallow innocuous error here, so it will not be reported.
+      if (error.code === 'auth/popup-closed-by-user') {
         return;
       }
       throw error;
@@ -42,13 +35,13 @@ class SocialLogin extends Component {
     const { disabled } = this.props;
 
     return (
-      <div className="social-login">
+      <div className="social">
         <button
           data-provider="facebook"
           disabled={disabled}
           onClick={this.onButtonClick}
         >
-          <FormattedMessage {...messages.facebookLogin} />
+          <FormattedMessage {...buttonsMessages.facebookSignIn} />
         </button>
       </div>
     );
@@ -58,4 +51,4 @@ class SocialLogin extends Component {
 
 export default connect(state => ({
   disabled: state.auth.formDisabled
-}), { login })(SocialLogin);
+}), { signIn })(Social);

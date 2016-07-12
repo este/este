@@ -1,29 +1,22 @@
-// Only selected relevant to user errors are translated.
-// Use general error for the others.
-// firebase.com/docs/web/guide/user-auth.html#section-handling-errors
 
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  EMAIL_TAKEN: {
+  'auth/email-already-in-use': {
     defaultMessage: `The new user account cannot be created because the
       specified email address is already in use.`,
     id: 'firebase.error.EMAIL_TAKEN'
   },
-  INVALID_EMAIL: {
+  'auth/invalid-email': {
     defaultMessage: 'The specified email is not a valid email.',
     id: 'firebase.error.INVALID_EMAIL'
   },
-  INVALID_PASSWORD: {
-    defaultMessage: 'The specified user account password is incorrect.',
-    id: 'firebase.error.INVALID_PASSWORD'
-  },
-  INVALID_USER: {
+  'auth/user-not-found': {
     defaultMessage: 'The specified user account does not exist.',
     id: 'firebase.error.INVALID_USER'
   },
-  NETWORK_ERROR: {
-    defaultMessage: 'The operation could not be performed due to a network error.',
-    id: 'firebase.error.NETWORK_ERROR'
+  'auth/wrong-password': {
+    defaultMessage: 'The specified user account password is incorrect.',
+    id: 'firebase.error.INVALID_PASSWORD'
   }
 });

@@ -21,11 +21,11 @@ export default [
     "defaultMessage": "Editovat"
   },
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Přihlášení"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Odhlásit se"
   },
   {
@@ -75,7 +75,7 @@ export default [
     "defaultMessage": "Lokalizace"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Přihlášení"
   },
   {
@@ -95,7 +95,7 @@ export default [
     "defaultMessage": "Emailová adresa není zprávná."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Prosím vyplňte {prop, select, email {email} password {heslo}}."
   },
   {
@@ -139,7 +139,7 @@ export default [
     "defaultMessage": "Obnovení hesla"
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "tvuj@email.com"
   },
   {
@@ -147,11 +147,11 @@ export default [
     "defaultMessage": "Přihlášení přes Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Zapomenuté heslo"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "heslo"
   },
   {

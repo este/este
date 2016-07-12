@@ -9,13 +9,12 @@ import { fields } from '../../common/lib/redux-fields';
 class OfflinePage extends Component {
 
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     online: PropTypes.bool.isRequired,
   };
 
   render() {
-    const { auth, fields, online } = this.props;
+    const { fields, online } = this.props;
 
     return (
       <div className="offline-page">
@@ -26,17 +25,7 @@ class OfflinePage extends Component {
           Offline
         </h2>
         <p>
-          Network state:<br />
           <code>state.app.online: <b>{online.toString()}</b></code>
-        </p>
-        <p>
-          Auth state:<br />
-          <code>state.auth.isAuthenticated: <b>{
-            auth.isAuthenticated.toString()
-          }</b></code><br />
-          <code>state.auth.token: <b>{
-            auth.token ? auth.token.slice(0, 16) : 'null'
-          }</b></code>
         </p>
         <p>
           Editable fields are persisted in the local storage by default. But
@@ -66,6 +55,5 @@ OfflinePage = fields(OfflinePage, {
 });
 
 export default connect(state => ({
-  auth: state.auth,
   online: state.app.online
 }))(OfflinePage);

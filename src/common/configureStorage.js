@@ -6,7 +6,6 @@ import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
 const stateToSave = [
-  ['auth', 'token'],
   ['fields'],
   ['todos'],
   ['intl', 'currentLocale'],
@@ -23,7 +22,7 @@ const updateState = (state, storageStateJson) => {
     fromJSON(storageStateJson).forEach(({ feature, featurePath, value }) => {
       invariantFeatureState(state, feature);
       // As we can see, updateState always overrides the current app state.
-      // That's perfect for token, fields, currentLocale, or viewer.
+      // That's perfect for fields, currentLocale, or viewer.
       // But what if todos are prefetched on the server? Then we would like to
       // merge locally cached with fresh from the server. TODO: Add customUpdate.
       state[feature] = state[feature].setIn(featurePath, value);

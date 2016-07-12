@@ -1,8 +1,9 @@
 import './MePage.scss';
-import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
+import Gravatar from 'react-gravatar';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
+import SignOut from '../auth/SignOut.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { Link } from 'react-router';
@@ -32,10 +33,7 @@ class MePage extends Component {
 
   render() {
     const { children, viewer } = this.props;
-    const {
-      displayName = viewer.email,
-      profileImageURL
-    } = viewer;
+    const { displayName, email, photoURL } = viewer;
 
     return (
       <div className="me-page">
@@ -56,13 +54,21 @@ class MePage extends Component {
         </ul>
         {children ||
           <div>
-            {profileImageURL &&
-              <img role="presentation" src={profileImageURL} />
+            {photoURL ?
+              <img role="presentation" src={photoURL} />
+            :
+              <Gravatar
+                default="retro"
+                email={email}
+                https
+                rating="x"
+                size={100}
+              />
             }
             <p>
               <FormattedMessage {...messages.welcome} values={{ displayName }} />
             </p>
-            <AuthLogout />
+            <SignOut />
           </div>
         }
       </div>

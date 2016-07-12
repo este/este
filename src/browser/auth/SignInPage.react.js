@@ -1,12 +1,12 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import Login from './Login.react';
 import React from 'react';
+import SignIn from './SignIn.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { locationShape } from 'react-router';
 
-export default class LoginPage extends Component {
+export default class SignInPage extends Component {
 
   static propTypes = {
     location: locationShape
@@ -16,8 +16,8 @@ export default class LoginPage extends Component {
     const { location } = this.props;
 
     return (
-      <div className="login-page">
-        <FormattedMessage {...linksMessages.login}>
+      <div className="signin-page">
+        <FormattedMessage {...linksMessages.signIn}>
           {message => <Helmet title={message} />}
         </FormattedMessage>
         <h2>
@@ -33,7 +33,7 @@ export default class LoginPage extends Component {
           Este uses <a href="https://firebase.google.com/docs/auth/">
           Firebase Authentication</a> because it saves a lot of time.
         </p>
-        <Login location={location} />
+        <SignIn location={location} />
       </div>
     );
   }

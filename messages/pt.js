@@ -1,11 +1,11 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
-    "id": "app.buttons.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Usuário"
   },
   {
-    "id": "app.buttons.logout",
+    "id": "app.buttons.signOut",
     "defaultMessage": "Sair"
   },
   {
@@ -21,7 +21,7 @@ export default [
     "defaultMessage": "Idioma"
   },
   {
-    "id": "app.links.login",
+    "id": "app.buttons.signIn",
     "defaultMessage": "Usuário"
   },
   {
@@ -37,7 +37,7 @@ export default [
     "defaultMessage": "Email inválido."
   },
   {
-    "id": "auth.login.error.required",
+    "id": "auth.signInError.required",
     "defaultMessage": "Favor preencher {prop, select, email {endereço de email} password {senha}}."
   },
   {
@@ -73,7 +73,7 @@ export default [
     "defaultMessage": "Email para recuperação de senha."
   },
   {
-    "id": "firebase.login.emailPlaceholder",
+    "id": "auth.email.emailPlaceholder",
     "defaultMessage": "endereço@email.com"
   },
   {
@@ -81,11 +81,11 @@ export default [
     "defaultMessage": "Login do Facebook"
   },
   {
-    "id": "firebase.login.passwordForgotten",
+    "id": "auth.email.passwordForgotten",
     "defaultMessage": "Esqueceu sua senha?"
   },
   {
-    "id": "firebase.login.passwordPlaceholder",
+    "id": "auth.email.passwordPlaceholder",
     "defaultMessage": "senha"
   },
   {
