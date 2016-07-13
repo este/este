@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
+import OnlineUsers from '../users/OnlineUsers.react';
 import React from 'react';
-import Users from './Users.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,7 +14,7 @@ export default class FirebasePage extends Component {
           {message => <Helmet title={message} />}
         </FormattedMessage>
         <h2>
-          <a href="https://www.firebase.com/" target="_blank">
+          <a href="https://firebase.google.com/" target="_blank">
             <img
               role="presentation"
               src={require('./logo.png')}
@@ -22,7 +22,10 @@ export default class FirebasePage extends Component {
             />
           </a>
         </h2>
-        <Users />
+        <h3>
+          Online users
+        </h3>
+        <OnlineUsers />
       </div>
     );
   }

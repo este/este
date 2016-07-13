@@ -1,8 +1,10 @@
-export const ON_USERS_LIST = 'ON_USERS_LIST';
+export const ON_USERS_PRESENCE = 'ON_USERS_PRESENCE';
 
-export function onUsersList(list) {
+export function onUsersPresence(snap) {
+  const presence = snap.val();
+
   return {
-    type: ON_USERS_LIST,
-    payload: { list }
+    type: ON_USERS_PRESENCE,
+    payload: { presence }
   };
 }

@@ -91,17 +91,39 @@ const saveUser = user => ({ firebase }) => {
   };
 };
 
-const onAuth = firebaseUser => ({ dispatch }) => {
-  const user = mapFirebaseUserToAppUser(firebaseUser);
+const onAuth = user => ({ dispatch }) => {
   if (user) {
-    // TODO: Monitor user presence here.
-    // https://firebase.google.com/docs/database/web/offline-capabilities
     // TODO: Save user only after sign in, once Firebase team tell me how.
     dispatch(saveUser(user));
   }
   return {
     type: FIREBASE_ON_AUTH,
     payload: { user }
+  };
+};
+
+// firebase.google.com/docs/database/web/offline-capabilities#section-sample
+const createPresenceMonitor = () => {
+  let off = null;
+
+  return (firebase, firebaseDatabase, user) => {
+    if (!user) return;
+    const connectedRef = firebase.child('.info/connected');
+    const presenceRef = firebase.child(`users-presence/${user.id}`);
+    if (off) off();
+    const handler = snap => {
+      if (!snap.val()) return;
+      const userWithoutEmail = user.toJS();
+      delete userWithoutEmail.email;
+      presenceRef
+        .push({
+          authenticatedAt: firebaseDatabase.ServerValue.TIMESTAMP,
+          user: userWithoutEmail
+        })
+        .onDisconnect().remove();
+    };
+    off = () => connectedRef.off('value', handler);
+    connectedRef.on('value', handler);
   };
 };
 
@@ -195,14 +217,18 @@ export function resetPassword(email) {
 }
 
 export function firebaseStart() {
-  return ({ dispatch, firebase, firebaseAuth, getState }) => {
+  const monitorPresence = createPresenceMonitor();
+
+  return ({ dispatch, firebase, firebaseAuth, firebaseDatabase, getState }) => {
     firebaseAuth().getRedirectResult().then(result => {
       if (!result.credential) return;
       dispatch({ type: FIREBASE_SIGN_IN_SUCCESS, payload: result });
     }, error => {
       dispatch({ type: FIREBASE_SIGN_IN_ERROR, payload: error });
     });
-    firebaseAuth().onAuthStateChanged(user => {
+    firebaseAuth().onAuthStateChanged(firebaseUser => {
+      const user = mapFirebaseUserToAppUser(firebaseUser);
+      monitorPresence(firebase, firebaseDatabase, user);
       dispatch(onAuth(user));
     });
     firebase.child('.info/connected').on('value', snap => {
