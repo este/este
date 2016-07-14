@@ -49,6 +49,17 @@
         </dict>
       </dict>
     </dict>
+    <key>UIAppFonts</key>
+    <array>
+      <string>Entypo.ttf</string>
+      <string>EvilIcons.ttf</string>
+      <string>FontAwesome.ttf</string>
+      <string>Foundation.ttf</string>
+      <string>Ionicons.ttf</string>
+      <string>MaterialIcons.ttf</string>
+      <string>Octicons.ttf</string>
+      <string>Zocial.ttf</string>
+    </array>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -68,17 +79,6 @@
       <string>fb-messenger-api</string>
       <string>fbauth2</string>
       <string>fbshareextension</string>
-    </array>
-    <key>UIAppFonts</key>
-    <array>
-      <string>Entypo.ttf</string>
-      <string>EvilIcons.ttf</string>
-      <string>FontAwesome.ttf</string>
-      <string>Foundation.ttf</string>
-      <string>Ionicons.ttf</string>
-      <string>MaterialIcons.ttf</string>
-      <string>Octicons.ttf</string>
-      <string>Zocial.ttf</string>
     </array>
   </dict>
 </plist>
