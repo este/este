@@ -19,6 +19,7 @@ const User = ({ user: { displayName, photoURL } }) =>
       <Gravatar
         default="retro"
         email={displayName} // For users signed in via email.
+        https
         rating="x"
         size={50}
         title={displayName}
