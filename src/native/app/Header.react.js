@@ -1,6 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from 'native-base';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,9 +20,10 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   menuIcon: {
-    backgroundColor: 'transparent',
-    height: 24,
-    width: 24
+    color: '#fff',
+    fontSize: 26,
+    position: 'relative',
+    top: -3
   },
   menuLink: {
     backgroundColor: 'transparent',
@@ -52,10 +54,7 @@ export default class Header extends Component {
           onPress={toggleSideMenu}
           style={styles.menuLink}
         >
-          <Image
-            source={require('./img/MenuIcon.png')}
-            style={styles.menuIcon}
-          />
+          <Icon name="ios-menu" style={styles.menuIcon} />
         </TouchableOpacity>
         <Text style={styles.header}>{title}</Text>
       </View>
