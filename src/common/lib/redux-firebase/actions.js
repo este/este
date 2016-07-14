@@ -134,33 +134,33 @@ export function signIn(providerName, fields) {
       : socialSignIn(firebaseAuth, providerName);
     return {
       type: 'FIREBASE_SIGN_IN',
-      payload: promise
+      payload: promise,
+      meta: { providerName, fields },
     };
   };
 }
 
-// TODO: Should ne nativeSignIn.
-// export function fok(provider, fields) {
-//   return ({ FBSDK: { AccessToken, LoginManager }, firebaseAuth }) => {
-//     const getPromise = async () => {
-//       // TODO: Use config
-//       const permissions = facebookPermissions;
-//       const result = await LoginManager.logInWithReadPermissions(permissions);
-//       // TODO: Try to dispatch the same error as firebase.
-//       // if (result.isCancelled) {
-//       //   throw new Error('Login cancelled')
-//       // }
-//       const { accessToken } = await AccessToken.getCurrentAccessToken();
-//       const facebookCredential = firebaseAuth.FacebookAuthProvider
-//         .credential(accessToken.toString());
-//       await firebaseAuth().signInWithCredential(facebookCredential);
-//     }
-//     return {
-//       type: 'FOK',
-//       payload: getPromise()
-//     }
-//   };
-// }
+export function nativeSignIn(providerName) {
+  return ({ FBSDK: { AccessToken, LoginManager }, firebaseAuth }) => {
+    invariant(providerName === 'facebook',
+     `${providerName} provider is not yet supported in nativeSignIn.`);
+    const getPromise = async () => {
+      const result = await LoginManager.logInWithReadPermissions(facebookPermissions);
+      // TODO: Dispatch the same cancelled error as web Firebase.
+      if (result.isCancelled) {
+        throw new Error('Login cancelled');
+      }
+      const { accessToken } = await AccessToken.getCurrentAccessToken();
+      const facebookCredential = firebaseAuth.FacebookAuthProvider
+        .credential(accessToken.toString());
+      await firebaseAuth().signInWithCredential(facebookCredential);
+    };
+    return {
+      type: 'FIREBASE_SIGN_IN',
+      payload: getPromise()
+    };
+  };
+}
 
 export function signUp(providerName, fields) {
   return ({ firebaseAuth, validate }) => {

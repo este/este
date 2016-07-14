@@ -1,27 +1,39 @@
 import Component from 'react-pure-render/component';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import { Button } from 'native-base';
 import { FormattedMessage } from 'react-intl';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { fok } from '../../common/lib/redux-firebase/actions';
+import { nativeSignIn } from '../../common/lib/redux-firebase/actions';
 
 class Social extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
-    fok: PropTypes.func.isRequired
+    nativeSignIn: PropTypes.func.isRequired
   };
 
-  render() {
-    const { fok } = this.props;
+  constructor(props) {
+    super(props);
+    this.onFacebookLoginPress = this.onFacebookLoginPress.bind(this);
+  }
 
+  onFacebookLoginPress() {
+    const { nativeSignIn } = this.props;
+    nativeSignIn('facebook');
+  }
+
+  render() {
     return (
       <View>
         <FormattedMessage {...buttonsMessages.facebookSignIn}>
           {message =>
-            <Button onPress={fok}>{message}</Button>
+            <Icon.Button
+              name="facebook"
+              backgroundColor="#3b5998"
+              onPress={this.onFacebookLoginPress}
+            >{message}</Icon.Button>
           }
         </FormattedMessage>
       </View>
@@ -32,4 +44,4 @@ class Social extends Component {
 
 export default connect(state => ({
   disabled: state.auth.formDisabled
-}), { fok })(Social);
+}), { nativeSignIn })(Social);

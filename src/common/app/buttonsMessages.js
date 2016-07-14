@@ -22,7 +22,7 @@ export default defineMessages({
     id: 'app.buttons.edit'
   },
   facebookSignIn: {
-    defaultMessage: 'Facebook Login', // Because Login is official name.
+    defaultMessage: 'Login with Facebook',
     id: 'auth.social.facebookSignIn'
   },
   save: {
