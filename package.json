@@ -77,7 +77,7 @@
     "postcss-loader": "^0.9.1",
     "raven-js": "^3.0.3",
     "react": "15.2.0",
-    "react-addons-test-utils": "15.2.0",
+    "react-addons-test-utils": "15.2.1",
     "react-dom": "15.2.0",
     "react-gravatar": "^2.4.4",
     "react-helmet": "^3.0.0",
