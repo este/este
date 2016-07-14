@@ -25,7 +25,7 @@
 - Test driven development
 - Advanced performance with pure components
 - Well tuned dev stack (OS X, Linux, Windows)
-- Firebase Redux integration ([este-b7210.firebaseapp.com](https://este-b7210.firebaseapp.com))
+- Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined actions
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative api
