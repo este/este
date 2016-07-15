@@ -7,6 +7,22 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { nativeSignIn } from '../../common/lib/redux-firebase/actions';
 
+const SocialLoginButton = ({ backgroundColor, message, name, onPress }) =>
+  <FormattedMessage {...message}>
+    {message =>
+      <Icon.Button {...{ backgroundColor, name, onPress }}>
+        {message}
+      </Icon.Button>
+    }
+  </FormattedMessage>;
+
+SocialLoginButton.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  message: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
+
 class Social extends Component {
 
   static propTypes = {
@@ -26,16 +42,13 @@ class Social extends Component {
 
   render() {
     return (
-      <View>
-        <FormattedMessage {...buttonsMessages.facebookSignIn}>
-          {message =>
-            <Icon.Button
-              name="facebook"
-              backgroundColor="#3b5998"
-              onPress={this.onFacebookLoginPress}
-            >{message}</Icon.Button>
-          }
-        </FormattedMessage>
+      <View style={{ alignItems: 'center', paddingTop: 64 }}>
+        <SocialLoginButton
+          backgroundColor="#3b5998"
+          message={buttonsMessages.facebookSignIn}
+          name="facebook"
+          onPress={this.onFacebookLoginPress}
+        />
       </View>
     );
   }
