@@ -1,4 +1,8 @@
-<img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515265/b91f0fb8-c388-11e4-857e-c90902e0b7a1.png" width="200">
+<img
+  alt="Este.js"
+  src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg"
+  width="200"
+/>
 
 [![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
 [![Join the chat at https://gitter.im/este/este](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/este/este)
@@ -179,12 +183,6 @@ In the same way as any other React Native project is created via `react-native i
 - [learn-reactjs.com](http://www.learn-reactjs.com)
 - [javascript-skoleni.cz](http://javascript-skoleni.cz)
 
-## Support Este development
-
-<img alt="Support Este development QR code" src="http://i.imgur.com/btUZ0IU.png" width="115" height="115">
-
 ## Credit
-
-<img alt="Este.js" src="https://cloud.githubusercontent.com/assets/66249/6515278/de638916-c388-11e4-8754-184f5b11e770.jpeg" width="200">
 
 Made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida) and the community.
