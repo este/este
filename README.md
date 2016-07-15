@@ -9,7 +9,7 @@
 
 > You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimal valuable product asap with the state of the art real-time universal app stack**.
 
-> Další školení Este.js bude 21. a 22. července v Praze. Dva dny za 9 800 Kč. Pokud máte zájem nebo otázky, napište mi: daniel@steigerwald.cz
+> Další školení Este.js bude 23. a 24. srpna v Praze. Dva dny za 9 800 Kč. Pokud máte zájem nebo otázky, napište mi daniel@steigerwald.cz
 
 ## Techniques
 
