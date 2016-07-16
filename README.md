@@ -29,10 +29,11 @@
 - Test driven development
 - Advanced performance with pure components
 - Well tuned dev stack (OS X, Linux, Windows)
-- Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
-  - useful predefined actions
+- [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
+  - useful predefined Redux actions
   - email and facebook login
-  - declarative queryFirebase higher order component for Firebase imperative api
+  - declarative queryFirebase higher order component for Firebase imperative API
+  - user presence
 - Este is monorepo, [read](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) [why](http://danluu.com/monorepo/).
 
 ## Libraries
