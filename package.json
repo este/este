@@ -69,7 +69,7 @@
     "ip": "^1.0.2",
     "jsdom": "^9.0.0",
     "make-error": "^1.0.4",
-    "native-base": "^0.4.9",
+    "native-base": "^0.5.0",
     "nconf": "^0.8.1",
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",

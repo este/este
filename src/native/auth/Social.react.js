@@ -1,6 +1,7 @@
 import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
+import SignOut from './SignOut.react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { View } from 'react-native';
@@ -27,7 +28,8 @@ class Social extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
-    nativeSignIn: PropTypes.func.isRequired
+    nativeSignIn: PropTypes.func.isRequired,
+    viewer: PropTypes.object,
   };
 
   constructor(props) {
@@ -35,20 +37,36 @@ class Social extends Component {
     this.onFacebookLoginPress = this.onFacebookLoginPress.bind(this);
   }
 
-  onFacebookLoginPress() {
+  async onFacebookLoginPress() {
     const { nativeSignIn } = this.props;
-    nativeSignIn('facebook');
+    try {
+      await nativeSignIn('facebook');
+    } catch (error) {
+      // Swallow innocuous error here, so it will not be reported.
+      if (error.code === 'auth/popup-closed-by-user') {
+        return;
+      }
+      throw error;
+    }
+    // TODO: Redirect to requested or default page.
   }
 
   render() {
+    const { disabled, viewer } = this.props;
+    if (disabled) return null;
+
     return (
       <View style={{ alignItems: 'center', paddingTop: 64 }}>
-        <SocialLoginButton
-          backgroundColor="#3b5998"
-          message={buttonsMessages.facebookSignIn}
-          name="facebook"
-          onPress={this.onFacebookLoginPress}
-        />
+        {viewer ?
+          <SignOut />
+        :
+          <SocialLoginButton
+            backgroundColor="#3b5998"
+            message={buttonsMessages.facebookSignIn}
+            name="facebook"
+            onPress={this.onFacebookLoginPress}
+          />
+        }
       </View>
     );
   }
@@ -56,5 +74,6 @@ class Social extends Component {
 }
 
 export default connect(state => ({
-  disabled: state.auth.formDisabled
+  disabled: state.auth.formDisabled,
+  viewer: state.users.viewer,
 }), { nativeSignIn })(Social);

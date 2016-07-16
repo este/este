@@ -2,6 +2,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
 const window = Dimensions.get('window');
@@ -30,11 +31,12 @@ class Menu extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
-    onRouteChange: PropTypes.func.isRequired
+    onRouteChange: PropTypes.func.isRequired,
+    viewer: PropTypes.object,
   };
 
   render() {
-    const { intl, onRouteChange } = this.props;
+    const { intl, onRouteChange, viewer } = this.props;
 
     return (
       <ScrollView
@@ -60,10 +62,17 @@ class Menu extends Component {
             onPress={() => onRouteChange('offline')} // eslint-disable-line react/jsx-no-bind
             style={styles.item}
           >{intl.formatMessage(linksMessages.offline)}</Text>
-          <Text
-            onPress={() => onRouteChange('signIn')} // eslint-disable-line react/jsx-no-bind
-            style={styles.item}
-          >{intl.formatMessage(linksMessages.signIn)}</Text>
+          {viewer ?
+            <Text
+              onPress={() => onRouteChange('me')} // eslint-disable-line react/jsx-no-bind
+              style={styles.item}
+            >{intl.formatMessage(linksMessages.me)}</Text>
+          :
+            <Text
+              onPress={() => onRouteChange('signIn')} // eslint-disable-line react/jsx-no-bind
+              style={styles.item}
+            >{intl.formatMessage(linksMessages.signIn)}</Text>
+          }
         </View>
       </ScrollView>
     );
@@ -71,4 +80,8 @@ class Menu extends Component {
 
 }
 
-export default injectIntl(Menu);
+Menu = injectIntl(Menu);
+
+export default connect(state => ({
+  viewer: state.users.viewer
+}))(Menu);

@@ -47,6 +47,7 @@ class App extends Component {
     switch (route) {
       case routes.home: return intl.formatMessage(linksMessages.home);
       case routes.intl: return intl.formatMessage(linksMessages.intl);
+      case routes.me: return intl.formatMessage(linksMessages.me);
       case routes.offline: return intl.formatMessage(linksMessages.offline);
       case routes.signIn: return intl.formatMessage(linksMessages.signIn);
       case routes.todos: return intl.formatMessage(linksMessages.todos);

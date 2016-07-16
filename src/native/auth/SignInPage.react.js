@@ -8,7 +8,6 @@ export default class SignInPage extends Component {
   render() {
     return (
       <View>
-        {/* TODO: Style it. */}
         <Social />
       </View>
     );

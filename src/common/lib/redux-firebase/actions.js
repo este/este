@@ -146,9 +146,11 @@ export function nativeSignIn(providerName) {
      `${providerName} provider is not yet supported in nativeSignIn.`);
     const getPromise = async () => {
       const result = await LoginManager.logInWithReadPermissions(facebookPermissions);
-      // TODO: Dispatch the same cancelled error as web Firebase.
       if (result.isCancelled) {
-        throw new Error('Login cancelled');
+        // Mimic Firebase error to have the same universal API.
+        const error = new Error('auth/popup-closed-by-user');
+        error.code = 'auth/popup-closed-by-user';
+        throw error;
       }
       const { accessToken } = await AccessToken.getCurrentAccessToken();
       const facebookCredential = firebaseAuth.FacebookAuthProvider
