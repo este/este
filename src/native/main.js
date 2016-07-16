@@ -10,12 +10,6 @@ import { Provider } from 'react-redux';
 import { fromJSON } from '../common/transit';
 import { initialTransitState } from './initialState';
 
-// import { AsyncStorage } from 'react-native';
-// setTimeout(async () => {
-//   const keys = await AsyncStorage.getAllKeys();
-//   console.log(keys);
-// }, 1000)
-
 const initialState = fromJSON(initialTransitState);
 
 const getDefaultDeviceLocale = () => {
