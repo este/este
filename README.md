@@ -71,6 +71,8 @@
 
 #### Optional
 
+- [Facebook SDK for iOS](https://developers.facebook.com/docs/ios/) In order to make Facebook login work on iOS
+- [Facebook SDK for Android](https://developers.facebook.com/docs/android/) In order to make Facebook login work on Android
 - [firebase-cli](https://firebase.google.com/docs/cli/) `npm install -g firebase-tools`
 - [firebase-bolt](https://github.com/firebase/bolt) `npm install -g firebase-bolt`
 - [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli`
@@ -128,6 +130,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - change `src/common/app/favicons/original/favicon.png`, then `gulp favicon`
 - delete unused app features, todos for example: src/{platform}/todos
 - remove unused reducers from `src/common/configureReducer.js`
+- modify your FB app_id e.g. for [iOS](https://developers.facebook.com/docs/ios/getting-started/#configure-xcode-project)
 
 ## Documentation
 
