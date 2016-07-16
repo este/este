@@ -185,4 +185,4 @@ In the same way as any other React Native project is created via `react-native i
 
 ## Credit
 
-Made by Daniel Steigerwald, [twitter.com/steida](https://twitter.com/steida) and the community.
+Made by [Daniel Steigerwald](https://twitter.com/steida) and the community.
