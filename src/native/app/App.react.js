@@ -1,4 +1,3 @@
-import * as uiActions from '../../common/ui/actions';
 import Component from 'react-pure-render/component';
 import Header from './Header.react';
 import Menu from './Menu.react';
@@ -11,6 +10,7 @@ import styles from './styles';
 import { Navigator, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
+import { toggleSideMenu, onSideMenuChange } from '../../common/ui/actions';
 
 class App extends Component {
 
@@ -103,6 +103,6 @@ App = injectIntl(App);
 App = connect(state => ({
   isSideMenuOpen: state.ui.isSideMenuOpen,
   storageLoaded: state.app.storageLoaded,
-}), uiActions)(App);
+}), { toggleSideMenu, onSideMenuChange })(App);
 
 export default start(App);

@@ -1,4 +1,3 @@
-import * as todosActions from '../../common/todos/actions';
 import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
@@ -7,6 +6,7 @@ import todosMessages from '../../common/todos/todosMessages';
 import { FormattedMessage } from 'react-intl';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import { toggleTodoCompleted } from '../../common/todos/actions';
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -73,4 +73,4 @@ class Todos extends Component {
 
 export default connect(state => ({
   todos: state.todos.map
-}), todosActions)(Todos);
+}), { toggleTodoCompleted })(Todos);

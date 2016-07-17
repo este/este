@@ -1,9 +1,9 @@
-import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { FormattedMessage } from 'react-intl';
 import { StyleSheet, TextInput, View } from 'react-native';
+import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
@@ -75,4 +75,4 @@ NewTodo = fields(NewTodo, {
   fields: ['title']
 });
 
-export default connect(null, todosActions)(NewTodo);
+export default connect(null, { addTodo })(NewTodo);

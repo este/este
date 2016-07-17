@@ -1,10 +1,10 @@
-import * as intlActions from '../../common/intl/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import appStyles from '../app/styles';
+import { FormattedDate, FormattedRelative } from 'react-intl';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { FormattedDate, FormattedRelative } from 'react-intl';
+import { setCurrentLocale } from '../../common/intl/actions';
 
 class IntlPage extends Component {
 
@@ -61,4 +61,4 @@ class IntlPage extends Component {
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
   locales: state.intl.locales
-}), intlActions)(IntlPage);
+}), { setCurrentLocale })(IntlPage);

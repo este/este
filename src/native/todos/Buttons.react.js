@@ -1,9 +1,13 @@
-import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  addHundredTodos,
+  clearAllCompletedTodos,
+  clearAllTodos
+} from '../../common/todos/actions';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -71,4 +75,4 @@ class TodoButtons extends Component {
 
 export default connect(state => ({
   todos: state.todos.map
-}), todosActions)(TodoButtons);
+}), { addHundredTodos, clearAllCompletedTodos, clearAllTodos })(TodoButtons);
