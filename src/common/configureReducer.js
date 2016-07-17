@@ -4,7 +4,6 @@ import config from './config/reducer';
 import device from './device/reducer';
 import intl from './intl/reducer';
 import todos from './todos/reducer';
-import ui from './ui/reducer';
 import users from './users/reducer';
 import { SIGN_OUT } from './auth/actions';
 import { combineReducers } from 'redux';
@@ -40,7 +39,6 @@ export default function configureReducer(initialState, platformReducers) {
     intl,
     routing,
     todos,
-    ui,
     users,
   });
 

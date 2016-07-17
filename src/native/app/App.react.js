@@ -10,16 +10,12 @@ import styles from './styles';
 import { Navigator, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-import { toggleSideMenu, onSideMenuChange } from '../../common/ui/actions';
 
 class App extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
-    isSideMenuOpen: PropTypes.bool.isRequired,
-    onSideMenuChange: PropTypes.func.isRequired,
     storageLoaded: PropTypes.bool.isRequired,
-    toggleSideMenu: PropTypes.func.isRequired,
   };
 
   static configureScene(route) {
@@ -28,9 +24,14 @@ class App extends Component {
 
   constructor() {
     super();
+    this.state = {
+      sideMenuOpen: false,
+    };
     this.onNavigatorRef = this.onNavigatorRef.bind(this);
     this.onRouteChange = this.onRouteChange.bind(this);
+    this.onSideMenuChange = this.onSideMenuChange.bind(this);
     this.renderScene = this.renderScene.bind(this);
+    this.toggleSideMenu = this.toggleSideMenu.bind(this);
   }
 
   onNavigatorRef(component) {
@@ -39,7 +40,11 @@ class App extends Component {
 
   onRouteChange(route) {
     this.navigator.replace(routes[route]);
-    this.props.toggleSideMenu();
+    this.toggleSideMenu();
+  }
+
+  onSideMenuChange(sideMenuOpen) {
+    this.setState({ sideMenuOpen });
   }
 
   getTitle(route) {
@@ -55,14 +60,18 @@ class App extends Component {
     throw new Error('Route not found.');
   }
 
+  toggleSideMenu() {
+    this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
+  }
+
   renderScene(route) {
-    const { isSideMenuOpen, toggleSideMenu } = this.props;
+    const { sideMenuOpen } = this.state;
     return (
       <View style={[styles.sceneView, route.style]}>
-        <StatusBar hidden={isSideMenuOpen} />
+        <StatusBar hidden={sideMenuOpen} />
         <Header
           title={this.getTitle(route)}
-          toggleSideMenu={toggleSideMenu}
+          toggleSideMenu={this.toggleSideMenu}
         />
         <route.Page />
       </View>
@@ -70,19 +79,18 @@ class App extends Component {
   }
 
   render() {
-    const { isSideMenuOpen, onSideMenuChange, storageLoaded } = this.props;
-    // Don't render anything until AsyncStorage is loaded to prevent flashes
-    // of unloaded content.
+    const { storageLoaded } = this.props;
+    const { sideMenuOpen } = this.state;
     if (!storageLoaded) return null;
 
     return (
       <SideMenu
         disableGestures
-        isOpen={isSideMenuOpen}
+        isOpen={sideMenuOpen}
         menu={
           <Menu onRouteChange={this.onRouteChange} />
         }
-        onChange={onSideMenuChange}
+        onChange={this.onSideMenuChange}
         style={styles.container}
       >
         <Navigator
@@ -101,8 +109,7 @@ class App extends Component {
 App = injectIntl(App);
 
 App = connect(state => ({
-  isSideMenuOpen: state.ui.isSideMenuOpen,
   storageLoaded: state.app.storageLoaded,
-}), { toggleSideMenu, onSideMenuChange })(App);
+}))(App);
 
 export default start(App);
