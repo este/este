@@ -26,8 +26,8 @@ class App extends Component {
     return route.animationType || Navigator.SceneConfigs.FloatFromRight;
   }
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onNavigatorRef = this.onNavigatorRef.bind(this);
     this.onRouteChange = this.onRouteChange.bind(this);
     this.renderScene = this.renderScene.bind(this);

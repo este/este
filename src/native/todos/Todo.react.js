@@ -29,8 +29,8 @@ export default class Todo extends Component {
     toggleTodoCompleted: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onTouchableOpacityPress = this.onTouchableOpacityPress.bind(this);
   }
 

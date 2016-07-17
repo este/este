@@ -32,8 +32,8 @@ class Social extends Component {
     viewer: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onFacebookLoginPress = this.onFacebookLoginPress.bind(this);
   }
 

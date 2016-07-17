@@ -49,8 +49,8 @@ class Email extends Component {
     signUp: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSignUpClick = this.onSignUpClick.bind(this);
     this.onForgetPasswordClick = this.onForgetPasswordClick.bind(this);

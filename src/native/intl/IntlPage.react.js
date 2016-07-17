@@ -14,8 +14,8 @@ class IntlPage extends Component {
     setCurrentLocale: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.componentRenderedAt = Date.now();
   }
 

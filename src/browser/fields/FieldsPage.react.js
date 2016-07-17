@@ -59,8 +59,8 @@ class FieldsPage extends Component {
     fieldsPageModel: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onToggleClick = this.onToggleClick.bind(this);
     this.state = {

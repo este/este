@@ -72,8 +72,8 @@ export default function fields(Wrapped, options) {
       };
     }
 
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
       this.state = {
         model: null
       };

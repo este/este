@@ -31,8 +31,8 @@ class NewTodo extends Component {
     fields: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onTextInputEndEditing = this.onTextInputEndEditing.bind(this);
     this.onSubmitEditing = this.onSubmitEditing.bind(this);
   }

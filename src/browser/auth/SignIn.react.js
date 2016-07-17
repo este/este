@@ -20,8 +20,8 @@ class SignIn extends Component {
     redirectTo: '/'
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.wasRedirected = false;
   }
 

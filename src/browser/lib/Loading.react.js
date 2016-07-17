@@ -17,8 +17,8 @@ const messages = defineMessages({
 
 export default class Loading extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       currentText: null
     };

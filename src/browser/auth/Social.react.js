@@ -12,8 +12,8 @@ class Social extends Component {
     signIn: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onButtonClick = this.onButtonClick.bind(this);
   }
 
