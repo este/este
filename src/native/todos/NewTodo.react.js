@@ -6,10 +6,11 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { theme } from '../app/styles';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#31AACC',
+    backgroundColor: theme.brandPrimary,
     borderTopColor: '#73CEE7',
     borderTopWidth: 1,
     height: 62

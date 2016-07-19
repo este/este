@@ -1,10 +1,11 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import appStyles from '../app/styles';
+import { CenteredView, Text } from '../app/components';
 import { FormattedDate, FormattedRelative } from 'react-intl';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
+import { theme } from '../app/styles';
 
 class IntlPage extends Component {
 
@@ -23,18 +24,19 @@ class IntlPage extends Component {
     const { currentLocale, locales, setCurrentLocale } = this.props;
 
     return (
-      <View style={[appStyles.centeredView, { paddingBottom: 64 }]}>
+      <CenteredView>
         {locales.map(locale =>
           <Text
-            style={[appStyles.centered, {
-              fontSize: 30,
-              fontWeight: locale === currentLocale ? 'bold' : 'normal'
-            }]}
+            style={{
+              fontSize: theme.fontSizeH5,
+              fontWeight: locale === currentLocale ? 'bold' : 'normal',
+              marginBottom: theme.fontSizeBase * .5,
+            }}
             key={locale}
             onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
           >{locale}</Text>
         )}
-        <View style={{ marginTop: 16 }}>
+        <View style={{ marginTop: theme.fontSizeBase }}>
           <FormattedDate
             value={Date.now()}
             day="numeric"
@@ -52,7 +54,7 @@ class IntlPage extends Component {
             {relative => <Text>{relative}</Text>}
           </FormattedRelative>
         </View>
-      </View>
+      </CenteredView>
     );
   }
 

@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import { theme } from '../app/styles';
 
 const messages = defineMessages({
   leftTodos: {
@@ -18,7 +19,7 @@ const messages = defineMessages({
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#31AACC',
+    backgroundColor: theme.brandPrimary,
     justifyContent: 'center',
     marginTop: -5,
     paddingBottom: 20,

@@ -2,8 +2,8 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
 import Social from '../auth/Social.react';
-import appStyles from '../app/styles';
-import { Image, Text, View } from 'react-native';
+import { CenteredView, Text } from '../app/components';
+import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 class MePage extends Component {
@@ -19,8 +19,8 @@ class MePage extends Component {
     const { displayName, photoURL } = viewer;
 
     return (
-      <View style={appStyles.centeredView}>
-        <View style={{ marginTop: 64 }}>
+      <CenteredView>
+        <View>
           <Text>{displayName}</Text>
         </View>
         {/* TODO: Use react-native-avatar-gravatar for email auth provider. */}
@@ -29,7 +29,7 @@ class MePage extends Component {
           style={{ height: 100, margin: 20, width: 100, }}
         />
         <SignOut />
-      </View>
+      </CenteredView>
     );
   }
 

@@ -6,8 +6,8 @@ import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import start from '../../common/app/start';
-import styles from './styles';
-import { Navigator, StatusBar, View } from 'react-native';
+import { Container } from './components';
+import { Navigator, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
@@ -67,14 +67,14 @@ class App extends Component {
   renderScene(route) {
     const { sideMenuOpen } = this.state;
     return (
-      <View style={[styles.sceneView, route.style]}>
+      <Container>
         <StatusBar hidden={sideMenuOpen} />
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={this.toggleSideMenu}
         />
         <route.Page />
-      </View>
+      </Container>
     );
   }
 
@@ -87,18 +87,14 @@ class App extends Component {
       <SideMenu
         disableGestures
         isOpen={sideMenuOpen}
-        menu={
-          <Menu onRouteChange={this.onRouteChange} />
-        }
+        menu={<Menu onRouteChange={this.onRouteChange} />}
         onChange={this.onSideMenuChange}
-        style={styles.container}
       >
         <Navigator
           configureScene={App.configureScene}
           initialRoute={routes.home}
           ref={this.onNavigatorRef}
           renderScene={this.renderScene}
-          style={styles.container}
         />
       </SideMenu>
     );

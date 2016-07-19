@@ -1,7 +1,8 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from './components';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
