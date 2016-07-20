@@ -8,6 +8,7 @@ gulp.task('upgrade-react-native', () => {
     Fresh React Native
       - run 'react-native init Este' somewhere (you should use YourAppName)
       - copy android and ios directories to Este app directory
+      - run 'npm install'
       - run 'react-native link'
       - follow instruction from github.com/facebook/react-native-fbsdk
 
