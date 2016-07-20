@@ -1,16 +1,22 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import styles from '../styles';
-import { Text } from 'react-native';
+import theme from '../theme';
+import { StyleSheet, Text } from 'react-native';
 
-// React Native Text component preserves spaces. This solves problem with string
-// defined via ES6 template strings. It normalizes '\n    ' stuff.
+const styles = StyleSheet.create({
+  text: {
+    color: theme.textColor,
+    fontSize: theme.fontSizeBase,
+  }
+});
+
+// Normalize multiline strings because Text component preserves spaces.
 const normalizeMultilineString = message => message.replace(/ +/g, ' ').trim();
 
 export default class AppText extends Component {
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     style: Text.propTypes.style,
   };
 

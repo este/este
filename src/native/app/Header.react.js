@@ -1,12 +1,12 @@
 import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, { PropTypes } from 'react';
+import theme from './theme';
 import { Button, Text } from './components';
 import { StyleSheet, View } from 'react-native';
-import { theme } from './styles';
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     backgroundColor: theme.brandPrimary,
     flexDirection: 'row',
     justifyContent: 'space-between', // align items in the flexDirection
@@ -42,7 +42,7 @@ export default class Header extends Component {
     const { title, toggleSideMenu } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.header}>
         <Button onPress={toggleSideMenu} style={styles.button}>
           <Icon name="ios-menu" style={styles.icon} />
         </Button>

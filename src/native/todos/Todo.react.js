@@ -1,24 +1,26 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import theme from '../app/theme';
+import { Button } from '../app/components';
+import { Image, StyleSheet, TextInput, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  todo: {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row'
   },
   input: {
-    color: '#7C7C7C',
+    color: theme.textColor,
     flex: 1,
-    fontSize: 16,
-    paddingRight: 20
+    fontSize: theme.fontSizeBase,
+    paddingRight: theme.fontSizeH5,
   },
   checkbox: {
-    height: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    width: 30
+    height: theme.fontSizeH5,
+    marginLeft: theme.fontSizeH5,
+    marginRight: theme.fontSizeH5,
+    width: theme.fontSizeH5,
   }
 });
 
@@ -46,13 +48,10 @@ export default class Todo extends Component {
       : require('./img/EmptyCheckbox.png');
 
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          activeOpacity={.8}
-          onPress={this.onTouchableOpacityPress}
-        >
+      <View style={styles.todo}>
+        <Button onPress={this.onTouchableOpacityPress}>
           <Image source={image} style={styles.checkbox} />
-        </TouchableOpacity>
+        </Button>
         <TextInput
           editable={false}
           style={[styles.input]}

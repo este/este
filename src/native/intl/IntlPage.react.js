@@ -1,11 +1,11 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { CenteredView, Text } from '../app/components';
+import theme from '../app/theme';
+import { CenteredContainer, Text } from '../app/components';
 import { FormattedDate, FormattedRelative } from 'react-intl';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
-import { theme } from '../app/styles';
 
 class IntlPage extends Component {
 
@@ -24,7 +24,7 @@ class IntlPage extends Component {
     const { currentLocale, locales, setCurrentLocale } = this.props;
 
     return (
-      <CenteredView>
+      <CenteredContainer>
         {locales.map(locale =>
           <Text
             style={{
@@ -54,7 +54,7 @@ class IntlPage extends Component {
             {relative => <Text>{relative}</Text>}
           </FormattedRelative>
         </View>
-      </CenteredView>
+      </CenteredContainer>
     );
   }
 

@@ -2,7 +2,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
 import Social from '../auth/Social.react';
-import { CenteredView, Text } from '../app/components';
+import { CenteredContainer, Text } from '../app/components';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -19,7 +19,7 @@ class MePage extends Component {
     const { displayName, photoURL } = viewer;
 
     return (
-      <CenteredView>
+      <CenteredContainer>
         <View>
           <Text>{displayName}</Text>
         </View>
@@ -29,7 +29,7 @@ class MePage extends Component {
           style={{ height: 100, margin: 20, width: 100, }}
         />
         <SignOut />
-      </CenteredView>
+      </CenteredContainer>
     );
   }
 

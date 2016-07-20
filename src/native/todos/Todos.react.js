@@ -2,27 +2,23 @@ import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
+import theme from '../app/theme';
 import todosMessages from '../../common/todos/todosMessages';
+import { CenteredContainer, Text } from '../app/components';
 import { FormattedMessage } from 'react-intl';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { toggleTodoCompleted } from '../../common/todos/actions';
 
 const styles = StyleSheet.create({
-  centeredView: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    paddingBottom: 40
-  },
   empty: {
-    color: '#aaa',
-    fontSize: 20
+    color: theme.lighten(theme.textColor),
+    fontSize: theme.fontSizeH5,
   },
   icon: {
     height: 70,
     marginBottom: 10,
-    width: 70
+    width: 70,
   },
   row: {
     borderBottomColor: '#f1f1f1',
@@ -43,7 +39,7 @@ class Todos extends Component {
 
     if (todos.size === 0) {
       return (
-        <View style={styles.centeredView}>
+        <CenteredContainer>
           <Image
             source={require('./img/EmptyState.png')}
             style={styles.icon}
@@ -51,7 +47,7 @@ class Todos extends Component {
           <FormattedMessage {...todosMessages.empty}>
             {message => <Text style={styles.empty}>{message}</Text>}
           </FormattedMessage>
-        </View>
+        </CenteredContainer>
       );
     }
 

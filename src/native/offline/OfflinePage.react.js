@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { CenteredView, Text } from '../app/components';
+import { CenteredContainer, Text } from '../app/components';
 import { connect } from 'react-redux';
 
 class OfflinePage extends Component {
@@ -13,9 +13,9 @@ class OfflinePage extends Component {
     const { online } = this.props;
 
     return (
-      <CenteredView>
+      <CenteredContainer>
         <Text>state.app.online: {online.toString()}</Text>
-      </CenteredView>
+      </CenteredContainer>
     );
   }
 

@@ -1,16 +1,17 @@
 import Component from 'react-pure-render/component';
+import Container from './Container.react';
 import React, { PropTypes } from 'react';
-import theme from '../theme';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.backgroundColor,
-    flex: 1,
+  centeredContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
-export default class Container extends Component {
+// TODO: Use golden ratio for vertical alignment.
+export default class CenteredContainer extends Component {
 
   static propTypes = {
     children: PropTypes.node,
@@ -20,9 +21,9 @@ export default class Container extends Component {
   render() {
     const { children, style } = this.props;
     return (
-      <View {...this.props} style={[styles.container, style]}>
+      <Container {...this.props} style={[styles.centeredContainer, style]}>
         {children}
-      </View>
+      </Container>
     );
   }
 
