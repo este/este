@@ -1,11 +1,11 @@
 import './FieldsPage.scss';
 import Component from 'react-pure-render/component';
 import DynamicField from './DynamicField.react.js';
-import FieldError from '../lib/FieldError.react';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
+import { FieldError } from '../app/components';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';

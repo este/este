@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import ValidationError from '../../common/lib/validation/ValidationError';
+import ValidationError from '../../../common/lib/validation/ValidationError';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({

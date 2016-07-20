@@ -1,8 +1,8 @@
 import './OnlineUsers.scss';
 import Component from 'react-pure-render/component';
 import Gravatar from 'react-gravatar';
-import Loading from '../lib/Loading.react';
 import React, { PropTypes } from 'react';
+import { Loading } from '../app/components';
 import { connect } from 'react-redux';
 import { onUsersPresence } from '../../common/users/actions';
 import { queryFirebase } from '../../common/lib/redux-firebase';

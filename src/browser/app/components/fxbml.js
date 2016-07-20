@@ -7,7 +7,7 @@ import Component from 'react-pure-render/component';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function facebook(Wrapped) {
+export default function xfbml(Wrapped) {
   return class Wrapper extends Component {
 
     parseXfbmlAsap(el) {
