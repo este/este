@@ -82,7 +82,7 @@
     "react-gravatar": "^2.4.4",
     "react-helmet": "^3.0.0",
     "react-intl": "^2.1.2",
-    "react-native": "0.29.2",
+    "react-native": "0.30.0",
     "react-native-browser-polyfill": "^0.1.1",
     "react-native-fbsdk": "^0.2.2",
     "react-native-locale": "0.0.10",
