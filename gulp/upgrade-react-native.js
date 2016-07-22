@@ -5,15 +5,20 @@ gulp.task('upgrade-react-native', () => {
   console.log(`
     Steps to upgrade React Native in Este
 
-    Fresh React Native
-      - run 'react-native init Este' somewhere (you should use YourAppName)
-      - copy android and ios directories to Este app directory
-      - run 'npm install'
-      - run 'react-native link'
-      - follow instruction from github.com/facebook/react-native-fbsdk
+    - Update package.json
+      - react-native, use fixed version
+      - react, use fixed version from React Native dependencies
 
     Already existing App
       - run 'react-native upgrade'
+
+    From Scratch
+      - run 'react-native init YourAppName' in some temp dir
+      - delete 'android' and 'ios' directories in your Este app
+      - copy 'android' and 'ios' directories from some temp dir
+      - run 'npm install'
+      - run 'react-native link'
+      - follow instruction from github.com/facebook/react-native-fbsdk
 
     Yeah, it's that easy.
   `);
