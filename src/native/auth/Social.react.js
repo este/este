@@ -29,6 +29,7 @@ class Social extends Component {
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
     nativeSignIn: PropTypes.func.isRequired,
+    style: View.propTypes.style,
     viewer: PropTypes.object,
   };
 
@@ -52,11 +53,11 @@ class Social extends Component {
   }
 
   render() {
-    const { disabled, viewer } = this.props;
+    const { disabled, viewer, style } = this.props;
     if (disabled) return null;
 
     return (
-      <View style={{ alignItems: 'center', paddingTop: 64 }}>
+      <View style={style}>
         {viewer ?
           <SignOut />
         :

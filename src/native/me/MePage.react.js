@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
+import SignIn from '../auth/SignIn.react';
 import SignOut from '../auth/SignOut.react';
-import Social from '../auth/Social.react';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -14,10 +14,15 @@ class MePage extends Component {
 
   render() {
     const { viewer } = this.props;
-    // TODO: Add native redirect to home in signOut action.
-    if (!viewer) return <Social />;
-    const { displayName, photoURL } = viewer;
+    if (!viewer) {
+      return (
+        <CenteredContainer>
+          <SignIn />
+        </CenteredContainer>
+      );
+    }
 
+    const { displayName, photoURL } = viewer;
     return (
       <CenteredContainer>
         <View>

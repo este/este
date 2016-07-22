@@ -126,7 +126,7 @@ export default [
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Facebook Login"
+    "defaultMessage": "Login with Facebook"
   },
   {
     "id": "fields.page.h2",

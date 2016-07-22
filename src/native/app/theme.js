@@ -4,6 +4,7 @@ import Color from 'color';
 //  - facebook.github.io/react-native/docs/style.html
 //  - medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
 // Tips:
+//  - Note there is no shared styles. Favour prestyled app/components instead.
 //  - Use theme.fontSizeBase for responsive layouts (mobile, tablet, etc.)
 //    - example: paddingBottom: theme.fontSizeBase * 1.5 // pxtoem.com
 //  - Use Platform.select for platform specific styles and theme constants

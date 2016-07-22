@@ -1,43 +1,12 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import emailMessages from '../../common/auth/emailMessages';
+import { FormattedMessage } from 'react-intl';
 import { ValidationError, focusInvalidField } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
-
-const messages = defineMessages({
-  emailLegend: {
-    defaultMessage: 'Email',
-    id: 'auth.email.emailLegend'
-  },
-  passwordRecoveryLegend: {
-    defaultMessage: 'Email Password Recovery',
-    id: 'auth.email.passwordRecoveryLegend'
-  },
-  emailPlaceholder: {
-    defaultMessage: 'your@email.com',
-    id: 'auth.email.emailPlaceholder'
-  },
-  passwordPlaceholder: {
-    defaultMessage: 'password',
-    id: 'auth.email.passwordPlaceholder'
-  },
-  passwordForgotten: {
-    defaultMessage: 'Forgot Your Password?',
-    id: 'auth.email.passwordForgotten'
-  },
-  recoveryEmailSent: {
-    defaultMessage: 'Recovery email has been sent.',
-    id: 'auth.email.recoveryEmailSent'
-  },
-  resetPassword: {
-    defaultMessage: 'Reset Password',
-    id: 'auth.email.resetPassword'
-  },
-});
-
 
 class Email extends Component {
 
@@ -124,8 +93,8 @@ class Email extends Component {
     const { disabled, fields } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
     const legendMessage = forgetPasswordIsShown
-      ? messages.passwordRecoveryLegend
-      : messages.emailLegend;
+      ? emailMessages.passwordRecoveryLegend
+      : emailMessages.emailLegend;
 
     return (
       <form className="email" onSubmit={this.onFormSubmit}>
@@ -133,18 +102,18 @@ class Email extends Component {
           <legend>
             <FormattedMessage {...legendMessage} />
           </legend>
-          <FormattedMessage {...messages.emailPlaceholder}>
+          <FormattedMessage {...emailMessages.emailPlaceholder}>
             {message => <input
               {...fields.email}
-              maxLength="100"
+              maxLength={100}
               placeholder={message}
             />}
           </FormattedMessage>
           {!forgetPasswordIsShown &&
-            <FormattedMessage {...messages.passwordPlaceholder}>
+            <FormattedMessage {...emailMessages.passwordPlaceholder}>
               {message => <input
                 {...fields.password}
-                maxLength="1000"
+                maxLength={1000}
                 placeholder={message}
                 type="password"
               />}
@@ -162,18 +131,18 @@ class Email extends Component {
                 onClick={this.onForgetPasswordClick}
                 type="button"
               >
-                <FormattedMessage {...messages.passwordForgotten} />
+                <FormattedMessage {...emailMessages.passwordForgotten} />
               </button>
               {recoveryEmailSent &&
                 <p>
-                  <FormattedMessage {...messages.recoveryEmailSent} />
+                  <FormattedMessage {...emailMessages.recoveryEmailSent} />
                 </p>
               }
             </div>
           :
             <div className="buttons">
               <button>
-                <FormattedMessage {...messages.resetPassword} />
+                <FormattedMessage {...emailMessages.resetPassword} />
               </button>
               <button
                 onClick={this.onForgetPasswordClick}
