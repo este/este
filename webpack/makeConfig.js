@@ -11,12 +11,9 @@ import webpackIsomorphicAssets from './assets';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
-// cheap-module-eval-source-map, because we want original source, but we don't
-// care about columns, which makes this devtool faster than eval-source-map.
+// cheap-module-eval-source-map, because we want the fastest original source.
 // http://webpack.github.io/docs/configuration.html#devtool
-// const devtools = 'cheap-module-eval-source-map';
-// TODO: https://github.com/webpack/webpack/issues/2145
-const devtools = 'eval-source-map';
+const devtools = 'cheap-module-eval-source-map';
 
 const loaders = {
   css: '',
