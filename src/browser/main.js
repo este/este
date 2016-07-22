@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import offlinePlugin from 'offline-plugin/runtime';
 
 const initialState = fromJSON(window.__INITIAL_STATE__);
 const reportingMiddleware = configureReporting({
@@ -35,3 +36,5 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('app')
 );
+
+offlinePlugin.install();

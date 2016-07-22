@@ -74,6 +74,7 @@
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",
     "normalize.css": "^4.0.0",
+    "offline-plugin": "^3.3.1",
     "postcss-loader": "^0.9.1",
     "raven-js": "^3.0.3",
     "react": "15.2.1",
