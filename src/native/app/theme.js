@@ -14,13 +14,15 @@ import Color from 'color';
 //    - developer.android.com/guide/practices/ui_guidelines
 
 export default {
+  fontSizeBase: 16,
+  textColor: '#7C7C7C',
   backgroundColor: '#fff',
+
+  inverseTextColor: '#eee',
+  inverseBackgroundColor: '#2C2C2C',
+
   brandPrimary: '#31AACC',
   buttonActiveOpacity: .5,
-  fontSizeBase: 16,
-  inverseBackgroundColor: '#2C2C2C',
-  inverseTextColor: '#fff',
-  textColor: '#7C7C7C',
 
   // Multiples from Bootstrap 4
   get fontSizeH1() { return this.fontSizeBase * 2.5; },

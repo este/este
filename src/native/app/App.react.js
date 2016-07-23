@@ -85,7 +85,6 @@ class App extends Component {
 
     return (
       <SideMenu
-        disableGestures
         isOpen={sideMenuOpen}
         menu={<Menu onRouteChange={this.onRouteChange} />}
         onChange={this.onSideMenuChange}
