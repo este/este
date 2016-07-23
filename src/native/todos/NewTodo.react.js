@@ -57,6 +57,7 @@ class NewTodo extends Component {
         <FormattedMessage {...newTodoMessages.placeholder}>
           {message => <TextInput
             {...fields.title}
+            autoCorrect={false}
             maxLength={100} // React Native needs explicit maxLength.
             onEndEditing={this.onTextInputEndEditing}
             onSubmitEditing={this.onSubmitEditing}
