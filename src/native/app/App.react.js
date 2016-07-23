@@ -73,7 +73,7 @@ class App extends Component {
           title={this.getTitle(route)}
           toggleSideMenu={this.toggleSideMenu}
         />
-        <route.Page />
+        <route.Page navigator={this.navigator} />
       </Container>
     );
   }

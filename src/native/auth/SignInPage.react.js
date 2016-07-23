@@ -1,9 +1,28 @@
 import Component from 'react-pure-render/component';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import SignIn from './SignIn.react';
+import routes from '../routes';
 import { CenteredContainer } from '../app/components';
+import { connect } from 'react-redux';
 
-export default class SignInPage extends Component {
+class SignInPage extends Component {
+
+  static propTypes = {
+    navigator: PropTypes.object,
+    viewer: PropTypes.object,
+  };
+
+  constructor() {
+    super();
+    this.wasRedirected = false;
+  }
+
+  componentWillReceiveProps({ navigator, viewer }) {
+    if (!viewer) return;
+    if (this.wasRedirected) return;
+    this.wasRedirected = true;
+    navigator.replace(routes.home);
+  }
 
   render() {
     return (
@@ -14,3 +33,7 @@ export default class SignInPage extends Component {
   }
 
 }
+
+export default connect(state => ({
+  viewer: state.users.viewer,
+}))(SignInPage);

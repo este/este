@@ -1,7 +1,6 @@
 import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
-import SignOut from './SignOut.react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { View } from 'react-native';
@@ -11,9 +10,11 @@ import { nativeSignIn } from '../../common/lib/redux-firebase/actions';
 const SocialLoginButton = ({ backgroundColor, message, name, onPress }) =>
   <FormattedMessage {...message}>
     {message =>
-      <Icon.Button {...{ backgroundColor, name, onPress }}>
-        {message}
-      </Icon.Button>
+      <Icon.Button
+        backgroundColor={backgroundColor}
+        name={name}
+        onPress={onPress}
+      >{message}</Icon.Button>
     }
   </FormattedMessage>;
 
@@ -30,7 +31,6 @@ class Social extends Component {
     disabled: PropTypes.bool.isRequired,
     nativeSignIn: PropTypes.func.isRequired,
     style: View.propTypes.style,
-    viewer: PropTypes.object,
   };
 
   constructor() {
@@ -39,7 +39,8 @@ class Social extends Component {
   }
 
   async onFacebookLoginPress() {
-    const { nativeSignIn } = this.props;
+    const { disabled, nativeSignIn } = this.props;
+    if (disabled) return;
     try {
       await nativeSignIn('facebook');
     } catch (error) {
@@ -49,25 +50,20 @@ class Social extends Component {
       }
       throw error;
     }
-    // TODO: Redirect to requested or default page.
   }
 
   render() {
-    const { disabled, viewer, style } = this.props;
-    if (disabled) return null;
+    const { disabled, style } = this.props;
 
     return (
-      <View style={style}>
-        {viewer ?
-          <SignOut />
-        :
-          <SocialLoginButton
-            backgroundColor="#3b5998"
-            message={buttonsMessages.facebookSignIn}
-            name="facebook"
-            onPress={this.onFacebookLoginPress}
-          />
-        }
+      <View style={[style, { opacity: disabled ? .5 : 1 }]}>
+        <SocialLoginButton
+          backgroundColor="#3b5998"
+          message={buttonsMessages.facebookSignIn}
+          name="facebook"
+          onPress={this.onFacebookLoginPress}
+        />
+        {/* TODO: Add more social login buttons. */}
       </View>
     );
   }
@@ -76,5 +72,4 @@ class Social extends Component {
 
 export default connect(state => ({
   disabled: state.auth.formDisabled,
-  viewer: state.users.viewer,
 }), { nativeSignIn })(Social);
