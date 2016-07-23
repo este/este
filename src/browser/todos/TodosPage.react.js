@@ -10,7 +10,7 @@ import { injectIntl, intlShape } from 'react-intl';
 class TodosPage extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
   };
 
   render() {

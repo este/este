@@ -21,7 +21,7 @@ const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
       config: initialState.config,
       device: initialState.device,
       intl: initialState.intl,
-      routing: state.routing // Routing state has to be reused.
+      routing: state.routing, // Routing state has to be reused.
     };
   }
   return reducer(state, action);

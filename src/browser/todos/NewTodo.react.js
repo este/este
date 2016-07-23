@@ -11,7 +11,7 @@ class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
   };
 
   constructor() {
@@ -48,7 +48,7 @@ class NewTodo extends Component {
 
 NewTodo = fields(NewTodo, {
   path: 'newTodo',
-  fields: ['title']
+  fields: ['title'],
 });
 
 export default connect(null, { addTodo })(NewTodo);

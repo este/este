@@ -4,7 +4,7 @@ const Todo = Record({
   completed: false,
   createdAt: null,
   id: '',
-  title: ''
+  title: '',
 }, 'todo');
 
 export default Todo;

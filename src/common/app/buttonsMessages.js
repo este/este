@@ -3,46 +3,46 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   add: {
     defaultMessage: 'Add',
-    id: 'app.buttons.add'
+    id: 'app.buttons.add',
   },
   cancel: {
     defaultMessage: 'Cancel',
-    id: 'app.buttons.cancel'
+    id: 'app.buttons.cancel',
   },
   delete: {
     defaultMessage: 'Delete',
-    id: 'app.buttons.delete'
+    id: 'app.buttons.delete',
   },
   dismiss: {
     defaultMessage: 'Dismiss',
-    id: 'app.buttons.dismiss'
+    id: 'app.buttons.dismiss',
   },
   edit: {
     defaultMessage: 'Edit',
-    id: 'app.buttons.edit'
+    id: 'app.buttons.edit',
   },
   facebookSignIn: {
     defaultMessage: 'Login with Facebook',
-    id: 'auth.social.facebookSignIn'
+    id: 'auth.social.facebookSignIn',
   },
   save: {
     defaultMessage: 'Save',
-    id: 'app.buttons.save'
+    id: 'app.buttons.save',
   },
   signIn: {
     defaultMessage: 'Sign In',
-    id: 'app.buttons.signIn'
+    id: 'app.buttons.signIn',
   },
   signOut: {
     defaultMessage: 'Sign Out',
-    id: 'app.buttons.signOut'
+    id: 'app.buttons.signOut',
   },
   signUp: {
     defaultMessage: 'Sign Up',
-    id: 'app.buttons.signUp'
+    id: 'app.buttons.signUp',
   },
   submit: {
     defaultMessage: 'Submit',
-    id: 'app.buttons.submit'
-  }
+    id: 'app.buttons.submit',
+  },
 });

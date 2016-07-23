@@ -28,14 +28,14 @@ const User = ({ user: { displayName, photoURL } }) =>
   </div>;
 
 User.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 class OnlineUsers extends Component {
 
   static propTypes = {
     users: PropTypes.object,
-    loaded: PropTypes.bool.isRequired
+    loaded: PropTypes.bool.isRequired,
   };
 
   render() {
@@ -60,10 +60,10 @@ class OnlineUsers extends Component {
 
 OnlineUsers = queryFirebase(OnlineUsers, ({ onUsersPresence }) => ({
   path: 'users-presence',
-  on: { value: onUsersPresence }
+  on: { value: onUsersPresence },
 }));
 
 export default connect(state => ({
   users: state.users.online,
-  loaded: state.users.onlineLoaded
+  loaded: state.users.onlineLoaded,
 }), { onUsersPresence })(OnlineUsers);

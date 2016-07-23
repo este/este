@@ -12,7 +12,7 @@ export default function fields(Wrapped, options) {
   const {
     path = '',
     fields = [],
-    getInitialState
+    getInitialState,
   } = options;
 
   invariant(Array.isArray(fields), 'Fields must be an array.');
@@ -25,7 +25,7 @@ export default function fields(Wrapped, options) {
   return class Fields extends Component {
 
     static contextTypes = {
-      store: PropTypes.object // Redux store.
+      store: PropTypes.object, // Redux store.
     };
 
     static getNormalizePath(props) {
@@ -51,7 +51,7 @@ export default function fields(Wrapped, options) {
       // http://www.devthought.com/2012/01/18/an-object-is-not-a-hash
       return options.fields.reduce((fields, field) => ({
         ...fields,
-        [field]: Fields.getFieldValue(field, model, initialState)
+        [field]: Fields.getFieldValue(field, model, initialState),
       }), Object.create(null));
     }
 
@@ -59,7 +59,7 @@ export default function fields(Wrapped, options) {
       return isReactNative ? {
         onChangeText: text => {
           onChange(field, text);
-        }
+        },
       } : {
         name: field,
         onChange: (event) => {
@@ -68,14 +68,14 @@ export default function fields(Wrapped, options) {
           const { type, checked, value } = target;
           const isCheckbox = type && type.toLowerCase() === 'checkbox';
           onChange(field, isCheckbox ? checked : value);
-        }
+        },
       };
     }
 
     constructor() {
       super();
       this.state = {
-        model: null
+        model: null,
       };
       this.onFieldChange = this.onFieldChange.bind(this);
     }
@@ -88,7 +88,7 @@ export default function fields(Wrapped, options) {
     createFields() {
       const formFields = options.fields.reduce((fields, field) => ({
         ...fields,
-        [field]: Fields.createFieldObject(field, this.onFieldChange)
+        [field]: Fields.createFieldObject(field, this.onFieldChange),
       }), {});
 
       this.fields = {

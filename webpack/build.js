@@ -25,7 +25,7 @@ export default function build(done) {
       hash: false,
       timings: false,
       chunks: false,
-      chunkModules: false
+      chunkModules: false,
     }));
 
     done();

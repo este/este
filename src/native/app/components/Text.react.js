@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   text: {
     color: theme.textColor,
     fontSize: theme.fontSizeBase,
-  }
+  },
 });
 
 // Normalize multiline strings because Text component preserves spaces.

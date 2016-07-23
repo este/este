@@ -9,7 +9,7 @@ import { locationShape } from 'react-router';
 export default class SignInPage extends Component {
 
   static propTypes = {
-    location: locationShape
+    location: locationShape,
   };
 
   render() {

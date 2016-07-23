@@ -4,15 +4,15 @@ export default {
   assets: {
     images: {
       extensions: ['gif', 'jpg', 'png', 'ico'],
-      parser: plugin.url_loader_parser
+      parser: plugin.url_loader_parser,
     },
     fonts: {
       extensions: ['eot', 'ttf', 'woff', 'woff2'],
-      parser: plugin.url_loader_parser
+      parser: plugin.url_loader_parser,
     },
     svg: {
       extension: 'svg',
-      parser: plugin.url_loader_parser
+      parser: plugin.url_loader_parser,
     },
     styles: {
       extensions: ['css', 'less', 'sass', 'scss', 'styl'],
@@ -30,7 +30,7 @@ export default {
         return options.development
           ? plugin.css_modules_loader_parser(module, options, log)
           : module.source;
-      }
-    }
-  }
+      },
+    },
+  },
 };

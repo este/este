@@ -12,8 +12,8 @@ const messages = defineMessages({
         <a target="_blank" href="https://github.com/este/este">Este</a> dev stack.
       </p>
     `,
-    id: 'home.intro'
-  }
+    id: 'home.intro',
+  },
 });
 
 export default class HomePage extends Component {

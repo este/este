@@ -11,7 +11,7 @@ class Buttons extends Component {
   static propTypes = {
     addHundredTodos: PropTypes.func.isRequired,
     clearAllTodos: PropTypes.func.isRequired,
-    todos: PropTypes.object.isRequired
+    todos: PropTypes.object.isRequired,
   };
 
   render() {
@@ -33,5 +33,5 @@ class Buttons extends Component {
 }
 
 export default connect(state => ({
-  todos: state.todos.map
+  todos: state.todos.map,
 }), { addHundredTodos, clearAllTodos })(Buttons);

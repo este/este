@@ -6,8 +6,8 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 const messages = defineMessages({
   title: {
     defaultMessage: 'Profile',
-    id: 'me.profilePage.title'
-  }
+    id: 'me.profilePage.title',
+  },
 });
 
 export default class ProfilePage extends Component {

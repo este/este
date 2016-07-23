@@ -12,7 +12,7 @@ export class Todos extends Component {
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
     todos: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired
+    toggleTodoCompleted: PropTypes.func.isRequired,
   };
 
   // // Check render performance.
@@ -49,5 +49,5 @@ export class Todos extends Component {
 }
 
 export default connect(state => ({
-  todos: state.todos.map
+  todos: state.todos.map,
 }), { deleteTodo, toggleTodoCompleted })(Todos);

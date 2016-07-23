@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   todo: {
     alignItems: 'center',
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   input: {
     color: theme.textColor,
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     marginLeft: theme.fontSizeH5,
     marginRight: theme.fontSizeH5,
     width: theme.fontSizeH5,
-  }
+  },
 });
 
 export default class Todo extends Component {
 
   static propTypes = {
     todo: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired
+    toggleTodoCompleted: PropTypes.func.isRequired,
   };
 
   constructor() {

@@ -27,7 +27,7 @@ class Email extends Component {
     // the component state is the right place for an ephemeral UI state.
     this.state = {
       forgetPasswordIsShown: false,
-      recoveryEmailSent: false
+      recoveryEmailSent: false,
     };
   }
 
@@ -72,7 +72,7 @@ class Email extends Component {
     }
     this.setState({
       forgetPasswordIsShown: false,
-      recoveryEmailSent: true
+      recoveryEmailSent: true,
     });
   }
 
@@ -159,9 +159,9 @@ class Email extends Component {
 
 Email = fields(Email, {
   path: ['auth', 'email'],
-  fields: ['email', 'password']
+  fields: ['email', 'password'],
 });
 
 export default connect(state => ({
-  disabled: state.auth.formDisabled
+  disabled: state.auth.formDisabled,
 }), { resetPassword, signIn, signUp })(Email);

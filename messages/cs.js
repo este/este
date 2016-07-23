@@ -2,59 +2,59 @@
 export default [
   {
     "id": "app.buttons.add",
-    "defaultMessage": "Přidat"
+    "defaultMessage": "Přidat",
   },
   {
     "id": "app.buttons.cancel",
-    "defaultMessage": "Zrušit"
+    "defaultMessage": "Zrušit",
   },
   {
     "id": "app.buttons.delete",
-    "defaultMessage": "Smazat"
+    "defaultMessage": "Smazat",
   },
   {
     "id": "app.links.signIn",
-    "defaultMessage": "Přihlášení"
+    "defaultMessage": "Přihlášení",
   },
   {
     "id": "auth.email.emailLegend",
-    "defaultMessage": "Email"
+    "defaultMessage": "Email",
   },
   {
     "id": "app.buttons.dismiss",
-    "defaultMessage": "Zrušit"
+    "defaultMessage": "Zrušit",
   },
   {
     "id": "app.buttons.edit",
-    "defaultMessage": "Editovat"
+    "defaultMessage": "Editovat",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Přihlášení"
+    "defaultMessage": "Přihlášení",
   },
   {
     "id": "app.buttons.signOut",
-    "defaultMessage": "Odhlásit se"
+    "defaultMessage": "Odhlásit se",
   },
   {
     "id": "app.buttons.save",
-    "defaultMessage": "Uložit"
+    "defaultMessage": "Uložit",
   },
   {
     "id": "app.buttons.signUp",
-    "defaultMessage": "Registrace"
+    "defaultMessage": "Registrace",
   },
   {
     "id": "app.buttons.submit",
-    "defaultMessage": "Odeslat"
+    "defaultMessage": "Odeslat",
   },
   {
     "id": "app.confirm.areYouSure",
-    "defaultMessage": "Jste si jistý?"
+    "defaultMessage": "Jste si jistý?",
   },
   {
     "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Máte neuložené změny. Jste si jistý?"
+    "defaultMessage": "Máte neuložené změny. Jste si jistý?",
   },
   {
     "id": "app.FieldError.required",
@@ -64,190 +64,190 @@ export default [
       name {Prosím zadejte jméno.}
       password {Prosím zadejte heslo.}
       other {Prosím vyplnit.}
-    }`
+    }`,
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "app.links.firebase",
-    "defaultMessage": "Firebase"
+    "defaultMessage": "Firebase",
   },
   {
     "id": "app.links.home",
-    "defaultMessage": "Úvod"
+    "defaultMessage": "Úvod",
   },
   {
     "id": "app.links.intl",
-    "defaultMessage": "Lokalizace"
+    "defaultMessage": "Lokalizace",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Přihlášení"
+    "defaultMessage": "Přihlášení",
   },
   {
     "id": "app.links.me",
-    "defaultMessage": "Já"
+    "defaultMessage": "Já",
   },
   {
     "id": "app.links.offline",
-    "defaultMessage": "Offline"
+    "defaultMessage": "Offline",
   },
   {
     "id": "app.links.todos",
-    "defaultMessage": "Úkoly"
+    "defaultMessage": "Úkoly",
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "Emailová adresa není zprávná."
+    "defaultMessage": "Emailová adresa není zprávná.",
   },
   {
     "id": "auth.signInError.required",
-    "defaultMessage": "Prosím vyplňte {prop, select, email {email} password {heslo}}."
+    "defaultMessage": "Prosím vyplňte {prop, select, email {email} password {heslo}}.",
   },
   {
     "id": "auth.signInError.simplePassword",
-    "defaultMessage": "Heslo musí obsahovat alespoň {minLength} znaků."
+    "defaultMessage": "Heslo musí obsahovat alespoň {minLength} znaků.",
   },
   {
     "id": "fields.page.h2",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Něco jako redux-form, ale jednodušší."
+    "defaultMessage": "Něco jako redux-form, ale jednodušší.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "Tento email je už obsazen."
+    "defaultMessage": "Tento email je už obsazen.",
   },
   {
     "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "Email není ve správném formátu."
+    "defaultMessage": "Email není ve správném formátu.",
   },
   {
     "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "Nesprávné heslo."
+    "defaultMessage": "Nesprávné heslo.",
   },
   {
     "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "Nesprávný uživatel."
+    "defaultMessage": "Nesprávný uživatel.",
   },
   {
     "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Obnovení hesla"
+    "defaultMessage": "Obnovení hesla",
   },
   {
     "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "tvuj@email.com"
+    "defaultMessage": "tvuj@email.com",
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Přihlášení přes Facebook"
+    "defaultMessage": "Přihlášení přes Facebook",
   },
   {
     "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Zapomenuté heslo"
+    "defaultMessage": "Zapomenuté heslo",
   },
   {
     "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "heslo"
+    "defaultMessage": "heslo",
   },
   {
     "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Email pro obnovení hesla odeslán."
+    "defaultMessage": "Email pro obnovení hesla odeslán.",
   },
   {
     "id": "auth.email.resetPassword",
-    "defaultMessage": "Reset hesla"
+    "defaultMessage": "Reset hesla",
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">Steida</a>"
+    "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
-    "defaultMessage": "\n      <p>Ahoj, tohle je <a target=\"_blank\" href=\"https://github.com/este/este\">\n      Este</a> dev stack.</p>"
+    "defaultMessage": "\n      <p>Ahoj, tohle je <a target=\"_blank\" href=\"https://github.com/este/este\">\n      Este</a> dev stack.</p>",
   },
   {
     "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Stiskni CMD+R pro znovunačtení\n      Stiskni CMD+D pro debug menu"
+    "defaultMessage": "Este App\n      Stiskni CMD+R pro znovunačtení\n      Stiskni CMD+D pro debug menu",
   },
   {
     "id": "intl.page.h2",
-    "defaultMessage": "ukázka react-intl"
+    "defaultMessage": "ukázka react-intl",
   },
   {
     "id": "intl.page.unreadCount",
-    "defaultMessage": "{unreadCount, plural, one {zpráva} other {zpráv}}"
+    "defaultMessage": "{unreadCount, plural, one {zpráva} other {zpráv}}",
   },
   {
     "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.page.linkToSettings",
-    "defaultMessage": "Nastavení"
+    "defaultMessage": "Nastavení",
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Ahoj {displayName}. Tohle je tvoje tajná stránka."
+    "defaultMessage": "Ahoj {displayName}. Tohle je tvoje tajná stránka.",
   },
   {
     "id": "me.profilePage.title",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.settingsPage.title",
-    "defaultMessage": "Nastavení"
+    "defaultMessage": "Nastavení",
   },
   {
     "id": "notFound.continue",
-    "defaultMessage": "Pokračujte zde prosím."
+    "defaultMessage": "Pokračujte zde prosím.",
   },
   {
     "id": "notFound.h1",
-    "defaultMessage": "Tato stránka není dostupná"
+    "defaultMessage": "Tato stránka není dostupná",
   },
   {
     "id": "notFound.p",
-    "defaultMessage": "Možná máte špatný odkaz, nebo byla stránka odstraněna."
+    "defaultMessage": "Možná máte špatný odkaz, nebo byla stránka odstraněna.",
   },
   {
     "id": "notFound.title",
-    "defaultMessage": "Stránka nenalezena"
+    "defaultMessage": "Stránka nenalezena",
   },
   {
     "id": "todos.buttons.add100",
-    "defaultMessage": "Přidat 100 úkolů"
+    "defaultMessage": "Přidat 100 úkolů",
   },
   {
     "id": "todos.buttons.clearAll",
-    "defaultMessage": "Vymazat vše"
+    "defaultMessage": "Vymazat vše",
   },
   {
     "id": "todos.buttons.clearCompleted",
-    "defaultMessage": "Vymazat hotové"
+    "defaultMessage": "Vymazat hotové",
   },
   {
     "id": "todos.leftTodos",
-    "defaultMessage": "{leftTodos, plural, =0 {Nic, užívej :-)} one {Máš {leftTodos} úkol} other {Máš {leftTodos} úkolů}}"
+    "defaultMessage": "{leftTodos, plural, =0 {Nic, užívej :-)} one {Máš {leftTodos} úkol} other {Máš {leftTodos} úkolů}}",
   },
   {
     "id": "todos.newTodo.placeholder",
-    "defaultMessage": "Co je třeba udělat?"
+    "defaultMessage": "Co je třeba udělat?",
   },
   {
     "id": "todos.todos.empty",
-    "defaultMessage": "Nic tu není..."
+    "defaultMessage": "Nic tu není...",
   },
   {
     "id": "loading.loadingText",
-    "defaultMessage": "Nahrávám"
+    "defaultMessage": "Nahrávám",
   },
   {
     "id": "loading.longLoadingText",
-    "defaultMessage": "Stále nahrávám..."
+    "defaultMessage": "Stále nahrávám...",
   },
 ];

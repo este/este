@@ -10,8 +10,8 @@ const messages = defineMessages({
       Press CMD+R to reload
       Press CMD+D for debug menu
     `,
-    id: 'home.native.intro'
-  }
+    id: 'home.native.intro',
+  },
 });
 
 export default class HomePage extends Component {

@@ -8,7 +8,7 @@ import { StyleSheet, View } from 'react-native';
 import {
   addHundredTodos,
   clearAllCompletedTodos,
-  clearAllTodos
+  clearAllTodos,
 } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
-  }
+  },
 });
 
 class TodoButtons extends Component {
@@ -36,7 +36,7 @@ class TodoButtons extends Component {
     addHundredTodos: PropTypes.func.isRequired,
     clearAllCompletedTodos: PropTypes.func.isRequired,
     clearAllTodos: PropTypes.func.isRequired,
-    todos: PropTypes.object.isRequired
+    todos: PropTypes.object.isRequired,
   };
 
   render() {
@@ -70,5 +70,5 @@ class TodoButtons extends Component {
 }
 
 export default connect(state => ({
-  todos: state.todos.map
+  todos: state.todos.map,
 }), { addHundredTodos, clearAllCompletedTodos, clearAllTodos })(TodoButtons);

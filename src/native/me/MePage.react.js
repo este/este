@@ -31,7 +31,7 @@ class MePage extends Component {
         {/* TODO: Use react-native-avatar-gravatar for email auth provider. */}
         <Image
           source={{ uri: photoURL }}
-          style={{ height: 100, margin: 20, width: 100, }}
+          style={{ height: 100, margin: 20, width: 100 }}
         />
         <SignOut />
       </CenteredContainer>

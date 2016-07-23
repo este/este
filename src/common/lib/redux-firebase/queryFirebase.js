@@ -34,7 +34,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
   return class FirebaseQuery extends Component {
 
     static contextTypes = {
-      store: PropTypes.object // Redux store.
+      store: PropTypes.object, // Redux store.
     };
 
     ensureCancelCallback(callbackOrCallbackWithCancelCallback) {
@@ -76,7 +76,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
                   eventType,
                   key: snap.key,
                   prevChildKey,
-                  val: snap.val()
+                  val: snap.val(),
                 });
               };
             });
@@ -84,7 +84,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
       }
       return Object.keys(eventTypes).map(eventType => [
         eventType,
-        ...this.ensureCancelCallback(eventTypes[eventType])
+        ...this.ensureCancelCallback(eventTypes[eventType]),
       ]);
     }
 
@@ -97,7 +97,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
         const ref = firebase.child(options.path);
         return {
           type: callback(ref, options),
-          payload: optionsToPayload(options)
+          payload: optionsToPayload(options),
         };
       });
     }

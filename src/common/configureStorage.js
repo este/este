@@ -39,11 +39,11 @@ const storageFilter = engine => ({
     const saveState = stateToSave.map(([feature, ...featurePath]) => {
       invariantFeatureState(state, feature);
       return {
-        feature, featurePath, value: state[feature].getIn(featurePath)
+        feature, featurePath, value: state[feature].getIn(featurePath),
       };
     });
     return engine.save(toJSON(saveState));
-  }
+  },
 });
 
 const createStorageMiddleware = storageEngine => {
@@ -70,6 +70,6 @@ export default function configureStorage(initialState, createStorageEngine) {
   return {
     STORAGE_SAVE: storage.SAVE,
     storageEngine,
-    storageMiddleware
+    storageMiddleware,
   };
 }

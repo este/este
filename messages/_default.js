@@ -2,242 +2,242 @@
 export default [
   {
     "id": "app.buttons.add",
-    "defaultMessage": "Add"
+    "defaultMessage": "Add",
   },
   {
     "id": "app.buttons.cancel",
-    "defaultMessage": "Cancel"
+    "defaultMessage": "Cancel",
   },
   {
     "id": "app.buttons.delete",
-    "defaultMessage": "Delete"
+    "defaultMessage": "Delete",
   },
   {
     "id": "app.buttons.dismiss",
-    "defaultMessage": "Dismiss"
+    "defaultMessage": "Dismiss",
   },
   {
     "id": "app.buttons.edit",
-    "defaultMessage": "Edit"
+    "defaultMessage": "Edit",
   },
   {
     "id": "app.buttons.save",
-    "defaultMessage": "Save"
+    "defaultMessage": "Save",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Sign In"
+    "defaultMessage": "Sign In",
   },
   {
     "id": "app.buttons.signOut",
-    "defaultMessage": "Sign Out"
+    "defaultMessage": "Sign Out",
   },
   {
     "id": "app.buttons.signUp",
-    "defaultMessage": "Sign Up"
+    "defaultMessage": "Sign Up",
   },
   {
     "id": "app.buttons.submit",
-    "defaultMessage": "Submit"
+    "defaultMessage": "Submit",
   },
   {
     "id": "app.confirm.areYouSure",
-    "defaultMessage": "Are you sure?"
+    "defaultMessage": "Are you sure?",
   },
   {
     "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "You have unsaved changes. Are you sure?"
+    "defaultMessage": "You have unsaved changes. Are you sure?",
   },
   {
     "id": "app.FieldError.required",
-    "defaultMessage": "{prop, select, description {Please enter a description.} email {Please enter an email address.} name {Please enter a name.} password {Please enter a password.} other {You can't leave this empty.}}"
+    "defaultMessage": "{prop, select, description {Please enter a description.} email {Please enter an email address.} name {Please enter a name.} password {Please enter a password.} other {You can't leave this empty.}}",
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "app.links.firebase",
-    "defaultMessage": "Firebase"
+    "defaultMessage": "Firebase",
   },
   {
     "id": "app.links.home",
-    "defaultMessage": "Home"
+    "defaultMessage": "Home",
   },
   {
     "id": "app.links.intl",
-    "defaultMessage": "Intl"
+    "defaultMessage": "Intl",
   },
   {
     "id": "app.links.me",
-    "defaultMessage": "Me"
+    "defaultMessage": "Me",
   },
   {
     "id": "app.links.offline",
-    "defaultMessage": "Offline"
+    "defaultMessage": "Offline",
   },
   {
     "id": "app.links.signIn",
-    "defaultMessage": "Sign in"
+    "defaultMessage": "Sign in",
   },
   {
     "id": "app.links.todos",
-    "defaultMessage": "Todos"
+    "defaultMessage": "Todos",
   },
   {
     "id": "auth.email.emailLegend",
-    "defaultMessage": "Email"
+    "defaultMessage": "Email",
   },
   {
     "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "your@email.com"
+    "defaultMessage": "your@email.com",
   },
   {
     "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Forgot Your Password?"
+    "defaultMessage": "Forgot Your Password?",
   },
   {
     "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "password"
+    "defaultMessage": "password",
   },
   {
     "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Email Password Recovery"
+    "defaultMessage": "Email Password Recovery",
   },
   {
     "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Recovery email has been sent."
+    "defaultMessage": "Recovery email has been sent.",
   },
   {
     "id": "auth.email.resetPassword",
-    "defaultMessage": "Reset Password"
+    "defaultMessage": "Reset Password",
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "Email address is not valid."
+    "defaultMessage": "Email address is not valid.",
   },
   {
     "id": "auth.signInError.required",
-    "defaultMessage": "Please fill out {prop, select, email {email} password {password}}."
+    "defaultMessage": "Please fill out {prop, select, email {email} password {password}}.",
   },
   {
     "id": "auth.signInError.simplePassword",
-    "defaultMessage": "Password must contain at least {minLength} characters."
+    "defaultMessage": "Password must contain at least {minLength} characters.",
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Login with Facebook"
+    "defaultMessage": "Login with Facebook",
   },
   {
     "id": "fields.page.h2",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Something like redux-form but simplified and universal."
+    "defaultMessage": "Something like redux-form but simplified and universal.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "The new user account cannot be created because the\n      specified email address is already in use."
+    "defaultMessage": "The new user account cannot be created because the\n      specified email address is already in use.",
   },
   {
     "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "The specified email is not a valid email."
+    "defaultMessage": "The specified email is not a valid email.",
   },
   {
     "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "The specified user account password is incorrect."
+    "defaultMessage": "The specified user account password is incorrect.",
   },
   {
     "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "The specified user account does not exist."
+    "defaultMessage": "The specified user account does not exist.",
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Made with love by <a href=\"https://twitter.com/steida\">Steida</a>"
+    "defaultMessage": "Made with love by <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Ahoy, this is the\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
+    "defaultMessage": "<p>\n        Ahoy, this is the\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
   },
   {
     "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Press CMD+R to reload\n      Press CMD+D for debug menu"
+    "defaultMessage": "Este App\n      Press CMD+R to reload\n      Press CMD+D for debug menu",
   },
   {
     "id": "intl.page.h2",
-    "defaultMessage": "react-intl demonstration"
+    "defaultMessage": "react-intl demonstration",
   },
   {
     "id": "intl.page.unreadCount",
-    "defaultMessage": "{unreadCount, plural, one {message} other {messages}}"
+    "defaultMessage": "{unreadCount, plural, one {message} other {messages}}",
   },
   {
     "id": "loading.loadingText",
-    "defaultMessage": "Loading"
+    "defaultMessage": "Loading",
   },
   {
     "id": "loading.longLoadingText",
-    "defaultMessage": "Still loading, please check your connection"
+    "defaultMessage": "Still loading, please check your connection",
   },
   {
     "id": "me.page.linkToProfile",
-    "defaultMessage": "Profile"
+    "defaultMessage": "Profile",
   },
   {
     "id": "me.page.linkToSettings",
-    "defaultMessage": "Settings"
+    "defaultMessage": "Settings",
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Hi {displayName}. This is your secret page."
+    "defaultMessage": "Hi {displayName}. This is your secret page.",
   },
   {
     "id": "me.profilePage.title",
-    "defaultMessage": "Profile"
+    "defaultMessage": "Profile",
   },
   {
     "id": "me.settingsPage.title",
-    "defaultMessage": "Settings"
+    "defaultMessage": "Settings",
   },
   {
     "id": "notFound.continue",
-    "defaultMessage": "Continue here please."
+    "defaultMessage": "Continue here please.",
   },
   {
     "id": "notFound.h1",
-    "defaultMessage": "This page isn't available"
+    "defaultMessage": "This page isn't available",
   },
   {
     "id": "notFound.p",
-    "defaultMessage": "The link may be broken, or the page may have been removed."
+    "defaultMessage": "The link may be broken, or the page may have been removed.",
   },
   {
     "id": "notFound.title",
-    "defaultMessage": "Page Not Found"
+    "defaultMessage": "Page Not Found",
   },
   {
     "id": "todos.buttons.add100",
-    "defaultMessage": "Add 100 Todos"
+    "defaultMessage": "Add 100 Todos",
   },
   {
     "id": "todos.buttons.clearAll",
-    "defaultMessage": "Clear All"
+    "defaultMessage": "Clear All",
   },
   {
     "id": "todos.buttons.clearCompleted",
-    "defaultMessage": "Clear Completed"
+    "defaultMessage": "Clear Completed",
   },
   {
     "id": "todos.leftTodos",
-    "defaultMessage": "{leftTodos, plural, =0 {Nothing, enjoy :-)} one {You have {leftTodos} task} other {You have {leftTodos} tasks}}"
+    "defaultMessage": "{leftTodos, plural, =0 {Nothing, enjoy :-)} one {You have {leftTodos} task} other {You have {leftTodos} tasks}}",
   },
   {
     "id": "todos.newTodo.placeholder",
-    "defaultMessage": "What needs to be done?"
+    "defaultMessage": "What needs to be done?",
   },
   {
     "id": "todos.todos.empty",
-    "defaultMessage": "It's rather empty here..."
-  }
+    "defaultMessage": "It's rather empty here...",
+  },
 ];

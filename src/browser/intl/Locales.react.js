@@ -8,7 +8,7 @@ class Locales extends Component {
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,
     locales: PropTypes.arrayOf(React.PropTypes.string),
-    setCurrentLocale: PropTypes.func.isRequired
+    setCurrentLocale: PropTypes.func.isRequired,
   };
 
   render() {
@@ -31,5 +31,5 @@ class Locales extends Component {
 
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
-  locales: state.intl.locales
+  locales: state.intl.locales,
 }), { setCurrentLocale })(Locales);

@@ -60,7 +60,7 @@ const renderPage = (store, renderProps, req) => {
   const { appHtml, helmet } = renderApp(store, renderProps);
   const {
     styles: { app: appCssFilename },
-    javascript: { app: appJsFilename }
+    javascript: { app: appJsFilename },
   } = webpackIsomorphicTools.assets();
   const scriptsHtml = renderScripts(state, headers, hostname, appJsFilename);
   if (!config.isProduction) {
@@ -82,7 +82,7 @@ export default function render(req, res, next) {
   const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore({
     initialState: createRequestInitialState(req),
-    platformMiddleware: [routerMiddleware(memoryHistory)]
+    platformMiddleware: [routerMiddleware(memoryHistory)],
   });
   const history = syncHistoryWithStore(memoryHistory, store);
   const routes = createRoutes(store.getState);

@@ -7,7 +7,7 @@ import { firebaseActions } from '../lib/redux-firebase';
 const InitialState = Record({
   online: null,
   onlineLoaded: false,
-  viewer: null
+  viewer: null,
 }, 'users');
 
 export default function usersReducer(state = new InitialState, action) {

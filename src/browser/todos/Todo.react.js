@@ -9,7 +9,7 @@ export default class Todo extends Component {
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,
     todo: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired
+    toggleTodoCompleted: PropTypes.func.isRequired,
   };
 
   constructor() {

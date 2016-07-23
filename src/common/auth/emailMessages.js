@@ -3,30 +3,30 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   emailLegend: {
     defaultMessage: 'Email',
-    id: 'auth.email.emailLegend'
+    id: 'auth.email.emailLegend',
   },
   passwordRecoveryLegend: {
     defaultMessage: 'Email Password Recovery',
-    id: 'auth.email.passwordRecoveryLegend'
+    id: 'auth.email.passwordRecoveryLegend',
   },
   emailPlaceholder: {
     defaultMessage: 'your@email.com',
-    id: 'auth.email.emailPlaceholder'
+    id: 'auth.email.emailPlaceholder',
   },
   passwordPlaceholder: {
     defaultMessage: 'password',
-    id: 'auth.email.passwordPlaceholder'
+    id: 'auth.email.passwordPlaceholder',
   },
   passwordForgotten: {
     defaultMessage: 'Forgot Your Password?',
-    id: 'auth.email.passwordForgotten'
+    id: 'auth.email.passwordForgotten',
   },
   recoveryEmailSent: {
     defaultMessage: 'Recovery email has been sent.',
-    id: 'auth.email.recoveryEmailSent'
+    id: 'auth.email.recoveryEmailSent',
   },
   resetPassword: {
     defaultMessage: 'Reset Password',
-    id: 'auth.email.resetPassword'
+    id: 'auth.email.resetPassword',
   },
 });

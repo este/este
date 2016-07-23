@@ -6,7 +6,7 @@ const InitialState = Record({
   defaultLocale: null,
   initialNow: null,
   locales: null,
-  messages: null
+  messages: null,
 }, 'intl');
 
 export default function intlReducer(state = new InitialState, action) {

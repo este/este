@@ -9,11 +9,11 @@ gulp.task('messages-extract', () => {
 
   const getReactIntlMessages = code => babel.transform(code, {
     plugins: ['react-intl'],
-    presets: ['es2015', 'react', 'stage-1']
+    presets: ['es2015', 'react', 'stage-1'],
   }).metadata['react-intl'].messages;
 
   return gulp.src([
-    'src/**/*.js'
+    'src/**/*.js',
   ])
   .pipe(through.obj((file, enc, cb) => {
     const code = file.contents.toString();

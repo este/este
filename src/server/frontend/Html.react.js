@@ -7,7 +7,7 @@ export default class Html extends Component {
     bodyHtml: PropTypes.string.isRequired,
     googleAnalyticsId: PropTypes.string.isRequired,
     helmet: PropTypes.object.isRequired,
-    isProduction: PropTypes.bool.isRequired
+    isProduction: PropTypes.bool.isRequired,
   };
 
   render() {

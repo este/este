@@ -4,7 +4,7 @@ const InitialState = Record({
   appName: '',
   appVersion: '',
   firebase: '',
-  sentryUrl: ''
+  sentryUrl: '',
 }, 'config');
 
 export default function configReducer(state = new InitialState) {

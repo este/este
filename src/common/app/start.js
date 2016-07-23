@@ -40,7 +40,7 @@ export default function start(Wrapped) {
   }
 
   Start = connect(state => ({
-    intl: state.intl
+    intl: state.intl,
   }), actions)(Start);
 
   return Start;

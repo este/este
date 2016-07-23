@@ -12,15 +12,15 @@ import { connect } from 'react-redux';
 const messages = defineMessages({
   welcome: {
     defaultMessage: 'Hi {displayName}. This is your secret page.',
-    id: 'me.page.welcome'
+    id: 'me.page.welcome',
   },
   linkToProfile: {
     defaultMessage: 'Profile',
-    id: 'me.page.linkToProfile'
+    id: 'me.page.linkToProfile',
   },
   linkToSettings: {
     defaultMessage: 'Settings',
-    id: 'me.page.linkToSettings'
+    id: 'me.page.linkToSettings',
   },
 });
 
@@ -28,7 +28,7 @@ class MePage extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    viewer: PropTypes.object.isRequired
+    viewer: PropTypes.object.isRequired,
   };
 
   render() {
@@ -78,5 +78,5 @@ class MePage extends Component {
 }
 
 export default connect(state => ({
-  viewer: state.users.viewer
+  viewer: state.users.viewer,
 }))(MePage);

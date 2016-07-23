@@ -10,22 +10,22 @@ const messages = defineMessages({
       email {email}
       password {password}
     }.`,
-    id: 'auth.signInError.required'
+    id: 'auth.signInError.required',
   },
   email: {
     defaultMessage: 'Email address is not valid.',
-    id: 'auth.signInError.email'
+    id: 'auth.signInError.email',
   },
   simplePassword: {
     defaultMessage: 'Password must contain at least {minLength} characters.',
-    id: 'auth.signInError.simplePassword'
-  }
+    id: 'auth.signInError.simplePassword',
+  },
 });
 
 class SignInError extends Component {
 
   static propTypes = {
-    error: PropTypes.instanceOf(Error)
+    error: PropTypes.instanceOf(Error),
   };
 
   render() {
@@ -49,5 +49,5 @@ class SignInError extends Component {
 }
 
 export default connect(state => ({
-  error: state.auth.error
+  error: state.auth.error,
 }))(SignInError);

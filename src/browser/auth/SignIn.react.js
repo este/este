@@ -17,7 +17,7 @@ class SignIn extends Component {
   };
 
   static defaultProps = {
-    redirectTo: '/'
+    redirectTo: '/',
   };
 
   constructor() {
@@ -53,5 +53,5 @@ class SignIn extends Component {
 SignIn = withRouter(SignIn);
 
 export default connect(state => ({
-  viewer: state.users.viewer
+  viewer: state.users.viewer,
 }))(SignIn);

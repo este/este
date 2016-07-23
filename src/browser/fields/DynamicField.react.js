@@ -34,5 +34,5 @@ class DynamicField extends Component {
 export default fields(DynamicField, {
   path: props => ['fieldsPage', 'dynamicFields', props.item.id],
   fields: ['name'],
-  getInitialState: props => props.item
+  getInitialState: props => props.item,
 });

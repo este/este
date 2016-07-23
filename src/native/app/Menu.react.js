@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizeBase,
     padding: theme.fontSizeBase * .625,
     color: '#fff',
-  }
+  },
 });
 
 class Menu extends Component {
@@ -86,5 +86,5 @@ class Menu extends Component {
 Menu = injectIntl(Menu);
 
 export default connect(state => ({
-  viewer: state.users.viewer
+  viewer: state.users.viewer,
 }))(Menu);

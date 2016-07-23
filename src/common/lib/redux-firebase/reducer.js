@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import { Record } from '../../transit';
 
 const InitialState = Record({
-  errors: Map() // We need one place to store all Firebase errors.
+  errors: Map(), // We need one place to store all Firebase errors.
 }, 'firebase');
 
 // "permission_denied at /users-emails/123: Client doesn't have..."

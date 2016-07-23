@@ -27,6 +27,6 @@ export default function errorHandler(err, req, res, next) { // eslint-disable-li
         : `${errorDetails}`;
 
       res.send(`500 Internal server error:\n${message}`);
-    }
+    },
   });
 }

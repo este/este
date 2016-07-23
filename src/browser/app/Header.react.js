@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class Header extends Component {
 
   static propTypes = {
-    viewer: PropTypes.object
+    viewer: PropTypes.object,
   };
 
   render() {
@@ -67,5 +67,5 @@ class Header extends Component {
 }
 
 export default connect(state => ({
-  viewer: state.users.viewer
+  viewer: state.users.viewer,
 }))(Header);

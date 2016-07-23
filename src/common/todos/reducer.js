@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import { Record } from '../transit';
 
 const InitialState = Record({
-  map: Map()
+  map: Map(),
 }, 'todos');
 
 export default function todosReducer(state = new InitialState, action) {

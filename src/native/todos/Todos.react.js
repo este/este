@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
   row: {
     borderBottomColor: '#f1f1f1',
     borderBottomWidth: 1,
-    height: 63
-  }
+    height: 63,
+  },
 });
 
 class Todos extends Component {
 
   static propTypes = {
     todos: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired
+    toggleTodoCompleted: PropTypes.func.isRequired,
   };
 
   render() {
@@ -68,5 +68,5 @@ class Todos extends Component {
 }
 
 export default connect(state => ({
-  todos: state.todos.map
+  todos: state.todos.map,
 }), { toggleTodoCompleted })(Todos);

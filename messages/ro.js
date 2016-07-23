@@ -2,238 +2,238 @@
 export default [
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Autentificare"
+    "defaultMessage": "Autentificare",
   },
   {
     "id": "app.buttons.signOut",
-    "defaultMessage": "Deconectare"
+    "defaultMessage": "Deconectare",
   },
   {
     "id": "app.links.firebase",
-    "defaultMessage": "Firebase"
+    "defaultMessage": "Firebase",
   },
   {
     "id": "app.links.home",
-    "defaultMessage": "Acasă"
+    "defaultMessage": "Acasă",
   },
   {
     "id": "app.links.intl",
-    "defaultMessage": "Traducere"
+    "defaultMessage": "Traducere",
   },
   {
     "id": "app.links.signIn",
-    "defaultMessage": "Autentificare"
+    "defaultMessage": "Autentificare",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Autentificare"
+    "defaultMessage": "Autentificare",
   },
   {
     "id": "app.links.me",
-    "defaultMessage": "Eu"
+    "defaultMessage": "Eu",
   },
   {
     "id": "app.links.todos",
-    "defaultMessage": "Tasks"
+    "defaultMessage": "Tasks",
   },
   {
     "id": "auth.email.emailLegend",
-    "defaultMessage": "E-mail"
+    "defaultMessage": "E-mail",
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "Adresa e-mail nu este validă."
+    "defaultMessage": "Adresa e-mail nu este validă.",
   },
   {
     "id": "auth.signInError.required",
-    "defaultMessage": "Completați câmpurile {prop, select, email {email} password {parolă}}."
+    "defaultMessage": "Completați câmpurile {prop, select, email {email} password {parolă}}.",
   },
   {
     "id": "auth.signInError.simplePassword",
-    "defaultMessage": "Parola trebuie să conține cel puțin {minLength} caractere."
+    "defaultMessage": "Parola trebuie să conține cel puțin {minLength} caractere.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "Noul cont de utilizator nu poate fi creat, deoarece adresa de email specificată este deja în uz."
+    "defaultMessage": "Noul cont de utilizator nu poate fi creat, deoarece adresa de email specificată este deja în uz.",
   },
   {
     "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "Emailul specificat nu este un email valid."
+    "defaultMessage": "Emailul specificat nu este un email valid.",
   },
   {
     "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "Parola specificată contului de utilizator este incorectă."
+    "defaultMessage": "Parola specificată contului de utilizator este incorectă.",
   },
   {
     "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "Contul de utilizator specificat nu există."
+    "defaultMessage": "Contul de utilizator specificat nu există.",
   },
   {
     "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Recuperarea parolei de email"
+    "defaultMessage": "Recuperarea parolei de email",
   },
   {
     "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "altău@email.com"
+    "defaultMessage": "altău@email.com",
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Logare Facebook"
+    "defaultMessage": "Logare Facebook",
   },
   {
     "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Ai uitat parola?"
+    "defaultMessage": "Ai uitat parola?",
   },
   {
     "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "Parolă"
+    "defaultMessage": "Parolă",
   },
   {
     "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Emailul de recuperare a fost trimis."
+    "defaultMessage": "Emailul de recuperare a fost trimis.",
   },
   {
     "id": "auth.email.resetPassword",
-    "defaultMessage": "Resetează parola"
+    "defaultMessage": "Resetează parola",
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "realizat de <a href=\"https://twitter.com/steida\">Steida</a>"
+    "defaultMessage": "realizat de <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Cucu, e\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
+    "defaultMessage": "<p>\n        Cucu, e\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
   },
   {
     "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Apăsați CMD+R pentru refresh\n      Apăsați CMD+D pentru meniul de debug"
+    "defaultMessage": "Este App\n      Apăsați CMD+R pentru refresh\n      Apăsați CMD+D pentru meniul de debug",
   },
   {
     "id": "intl.page.h2",
-    "defaultMessage": "Demonstrație de react-intl"
+    "defaultMessage": "Demonstrație de react-intl",
   },
   {
     "id": "intl.page.unreadCount",
-    "defaultMessage": "{unreadCount, plural, one {mesaj} other {mesaje}}"
+    "defaultMessage": "{unreadCount, plural, one {mesaj} other {mesaje}}",
   },
   {
     "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.page.linkToSettings",
-    "defaultMessage": "Parametri"
+    "defaultMessage": "Parametri",
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Bună {displayName}. Aici e pagina voastră secretă."
+    "defaultMessage": "Bună {displayName}. Aici e pagina voastră secretă.",
   },
   {
     "id": "me.profilePage.title",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.settingsPage.title",
-    "defaultMessage": "Parametri"
+    "defaultMessage": "Parametri",
   },
   {
     "id": "notFound.continue",
-    "defaultMessage": "Continuați aici, vă rog."
+    "defaultMessage": "Continuați aici, vă rog.",
   },
   {
     "id": "notFound.h1",
-    "defaultMessage": "Această pagină nu este disponibilă"
+    "defaultMessage": "Această pagină nu este disponibilă",
   },
   {
     "id": "notFound.p",
-    "defaultMessage": "S-ar putea că linkul a fost vechi sau că pagina a fost ștearsă."
+    "defaultMessage": "S-ar putea că linkul a fost vechi sau că pagina a fost ștearsă.",
   },
   {
     "id": "notFound.title",
-    "defaultMessage": "Pagina nu poate fi găsită"
+    "defaultMessage": "Pagina nu poate fi găsită",
   },
   {
     "id": "todos.buttons.add100",
-    "defaultMessage": "Adăugați 100 de sarcini."
+    "defaultMessage": "Adăugați 100 de sarcini.",
   },
   {
     "id": "todos.buttons.clearAll",
-    "defaultMessage": "Șterge totul"
+    "defaultMessage": "Șterge totul",
   },
   {
     "id": "todos.buttons.clearCompleted",
-    "defaultMessage": "Ștergere reușită"
+    "defaultMessage": "Ștergere reușită",
   },
   {
     "id": "todos.leftTodos",
-    "defaultMessage": "{leftTodos, plural, =0 {Nu e nimic de făcut! :-)} one {Aveți o sarcină} other {Aveți {leftTodos} sarcini}}"
+    "defaultMessage": "{leftTodos, plural, =0 {Nu e nimic de făcut! :-)} one {Aveți o sarcină} other {Aveți {leftTodos} sarcini}}",
   },
   {
     "id": "todos.newTodo.placeholder",
-    "defaultMessage": "Ce trebuie să faceți ?"
+    "defaultMessage": "Ce trebuie să faceți ?",
   },
   {
     "id": "todos.todos.empty",
-    "defaultMessage": "E calm pe aici..."
+    "defaultMessage": "E calm pe aici...",
   },
   {
     "id": "app.buttons.add",
-    "defaultMessage": "Adăuga"
+    "defaultMessage": "Adăuga",
   },
   {
     "id": "app.buttons.cancel",
-    "defaultMessage": "Anulare"
+    "defaultMessage": "Anulare",
   },
   {
     "id": "app.buttons.delete",
-    "defaultMessage": "Șterge"
+    "defaultMessage": "Șterge",
   },
   {
     "id": "app.buttons.dismiss",
-    "defaultMessage": "Destitui"
+    "defaultMessage": "Destitui",
   },
   {
     "id": "app.buttons.edit",
-    "defaultMessage": "Editați"
+    "defaultMessage": "Editați",
   },
   {
     "id": "app.buttons.save",
-    "defaultMessage": "Salvați"
+    "defaultMessage": "Salvați",
   },
   {
     "id": "app.buttons.signUp",
-    "defaultMessage": "Inscrie-te"
+    "defaultMessage": "Inscrie-te",
   },
   {
     "id": "app.buttons.submit",
-    "defaultMessage": "A depune"
+    "defaultMessage": "A depune",
   },
   {
     "id": "app.confirm.areYouSure",
-    "defaultMessage": "Esti sigur?"
+    "defaultMessage": "Esti sigur?",
   },
   {
     "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Ai modificări nesalvate. Esti sigur?"
+    "defaultMessage": "Ai modificări nesalvate. Esti sigur?",
   },
   {
     "id": "app.FieldError.required",
-    "defaultMessage": "Necesar"
+    "defaultMessage": "Necesar",
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Câmpuri"
+    "defaultMessage": "Câmpuri",
   },
   {
     "id": "app.links.offline",
-    "defaultMessage": "Deconectat"
+    "defaultMessage": "Deconectat",
   },
   {
     "id": "fields.page.h2",
-    "defaultMessage": "Câmpuri"
+    "defaultMessage": "Câmpuri",
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală."
+    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală.",
   },
 ];

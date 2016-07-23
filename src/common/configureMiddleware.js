@@ -21,7 +21,7 @@ const promiseMiddleware = ({ dispatch }) => next => action => {
   const isPromise = promise && typeof promise.then === 'function';
   if (!isPromise) return next(action);
   const createAction = (suffix, payload) => ({
-    type: `${type}_${suffix}`, meta: { action }, payload
+    type: `${type}_${suffix}`, meta: { action }, payload,
   });
   next(createAction('START'));
   const onFulfilled = value => {
@@ -85,7 +85,7 @@ export default function configureMiddleware(initialState, platformDeps, platform
       collapsed: true,
       predicate: (getState, action) => ignoredActions.indexOf(action.type) === -1,
       // Convert immutable to JSON.
-      stateTransformer: state => JSON.parse(JSON.stringify(state))
+      stateTransformer: state => JSON.parse(JSON.stringify(state)),
     });
     middleware.push(logger);
   }

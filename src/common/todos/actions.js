@@ -15,12 +15,12 @@ export function addHundredTodos() {
       return {
         createdAt: now(),
         id,
-        title: `Item #${id}`
+        title: `Item #${id}`,
       };
     }).toJS();
     return {
       type: ADD_HUNDRED_TODOS,
-      payload
+      payload,
     };
   };
 }
@@ -31,33 +31,33 @@ export function addTodo(title) {
     payload: {
       createdAt: now(),
       id: getUid(),
-      title: title.trim()
-    }
+      title: title.trim(),
+    },
   });
 }
 
 export function clearAllCompletedTodos() {
   return {
-    type: CLEAR_ALL_COMPLETED_TODOS
+    type: CLEAR_ALL_COMPLETED_TODOS,
   };
 }
 
 export function clearAllTodos() {
   return {
-    type: CLEAR_ALL_TODOS
+    type: CLEAR_ALL_TODOS,
   };
 }
 
 export function deleteTodo(id) {
   return {
     type: DELETE_TODO,
-    payload: { id }
+    payload: { id },
   };
 }
 
 export function toggleTodoCompleted(todo) {
   return {
     type: TOGGLE_TODO_COMPLETED,
-    payload: { todo }
+    payload: { todo },
   };
 }

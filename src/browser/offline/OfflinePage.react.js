@@ -50,10 +50,10 @@ class OfflinePage extends Component {
 OfflinePage = fields(OfflinePage, {
   path: 'offline',
   fields: [
-    'somePersistedText'
-  ]
+    'somePersistedText',
+  ],
 });
 
 export default connect(state => ({
-  online: state.app.online
+  online: state.app.online,
 }))(OfflinePage);

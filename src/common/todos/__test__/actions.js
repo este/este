@@ -13,7 +13,7 @@ describe('todos actions', () => {
   it('should create todo', () => {
     const deps = {
       getUid: () => 'uid',
-      now: () => 'now'
+      now: () => 'now',
     };
     const action = actions.addTodo('Hello')(deps);
     const { type, payload } = action;

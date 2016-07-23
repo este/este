@@ -12,7 +12,7 @@ class IntlPage extends Component {
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,
     locales: PropTypes.arrayOf(React.PropTypes.string),
-    setCurrentLocale: PropTypes.func.isRequired
+    setCurrentLocale: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -62,5 +62,5 @@ class IntlPage extends Component {
 
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
-  locales: state.intl.locales
+  locales: state.intl.locales,
 }), { setCurrentLocale })(IntlPage);

@@ -18,7 +18,7 @@ export default function createRoutes(getState) {
     if (getState().users.viewer) return;
     replace({
       pathname: '/signin',
-      state: { nextPathname: nextState.location.pathname }
+      state: { nextPathname: nextState.location.pathname },
     });
   };
 

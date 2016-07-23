@@ -25,7 +25,7 @@ const setRavenUserContext = user => {
   }
   Raven.setUserContext({
     email: user.email,
-    id: user.id
+    id: user.id,
   });
 };
 
@@ -40,7 +40,7 @@ const reportingMiddleware = () => next => action => {
 export default function configureReporting(options) {
   const { appVersion, sentryUrl, unhandledRejection } = options;
   Raven.config(sentryUrl, {
-    release: appVersion
+    release: appVersion,
     // TODO: serverName: device.uuid
     // TODO: Add list of common ignore rules from
     // docs.getsentry.com/hosted/clients/javascript/tips/#decluttering-sentry

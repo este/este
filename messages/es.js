@@ -2,238 +2,238 @@
 export default [
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Iniciar Sesión"
+    "defaultMessage": "Iniciar Sesión",
   },
   {
     "id": "app.buttons.signOut",
-    "defaultMessage": "Cerrar Sesión"
+    "defaultMessage": "Cerrar Sesión",
   },
   {
     "id": "app.links.firebase",
-    "defaultMessage": "Firebase"
+    "defaultMessage": "Firebase",
   },
   {
     "id": "app.links.home",
-    "defaultMessage": "Inicio"
+    "defaultMessage": "Inicio",
   },
   {
     "id": "app.links.intl",
-    "defaultMessage": "Idioma"
+    "defaultMessage": "Idioma",
   },
   {
     "id": "app.links.signIn",
-    "defaultMessage": "Iniciar Sesión"
+    "defaultMessage": "Iniciar Sesión",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Iniciar Sesión"
+    "defaultMessage": "Iniciar Sesión",
   },
   {
     "id": "app.links.me",
-    "defaultMessage": "Yo"
+    "defaultMessage": "Yo",
   },
   {
     "id": "app.links.todos",
-    "defaultMessage": "Tareas"
+    "defaultMessage": "Tareas",
   },
   {
     "id": "auth.email.emailLegend",
-    "defaultMessage": "Correo"
+    "defaultMessage": "Correo",
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "Dirección de correo no valida."
+    "defaultMessage": "Dirección de correo no valida.",
   },
   {
     "id": "auth.signInError.required",
-    "defaultMessage": "Por favor llenar {prop, select, email {email} password {contraseña}}."
+    "defaultMessage": "Por favor llenar {prop, select, email {email} password {contraseña}}.",
   },
   {
     "id": "auth.signInError.simplePassword",
-    "defaultMessage": "La contraseña debe contener al menos {minLength} caracteres."
+    "defaultMessage": "La contraseña debe contener al menos {minLength} caracteres.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "La nueva cuenta de usuario no puede ser creada porque la dirección de correo electrónico especificada ya se encuentra en uso."
+    "defaultMessage": "La nueva cuenta de usuario no puede ser creada porque la dirección de correo electrónico especificada ya se encuentra en uso.",
   },
   {
     "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "La dirección de correo especificada no es una dirección de correo válida."
+    "defaultMessage": "La dirección de correo especificada no es una dirección de correo válida.",
   },
   {
     "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "La contraseña de la cuenta de usuario especificada no es válida."
+    "defaultMessage": "La contraseña de la cuenta de usuario especificada no es válida.",
   },
   {
     "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "La cuenta de usuario especificada no existe."
+    "defaultMessage": "La cuenta de usuario especificada no existe.",
   },
   {
     "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Recuperación de contraseña de correo electrónico."
+    "defaultMessage": "Recuperación de contraseña de correo electrónico.",
   },
   {
     "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "tu@email.com"
+    "defaultMessage": "tu@email.com",
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Iniciar sesión en Facebook"
+    "defaultMessage": "Iniciar sesión en Facebook",
   },
   {
     "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Olvido su contraseña?"
+    "defaultMessage": "Olvido su contraseña?",
   },
   {
     "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "contraseña"
+    "defaultMessage": "contraseña",
   },
   {
     "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Correo electrónico de recuperación ha sido enviado."
+    "defaultMessage": "Correo electrónico de recuperación ha sido enviado.",
   },
   {
     "id": "auth.email.resetPassword",
-    "defaultMessage": "Restablecer contraseña"
+    "defaultMessage": "Restablecer contraseña",
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Hecho por <a href=\"https://twitter.com/steida\">Steida</a>"
+    "defaultMessage": "Hecho por <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Hey, este es\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> colección desarrollador.\n      </p>"
+    "defaultMessage": "<p>\n        Hey, este es\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> colección desarrollador.\n      </p>",
   },
   {
     "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Presione CMD+R para recargar\n      Presione CMD+D para el menú de depuración"
+    "defaultMessage": "Este App\n      Presione CMD+R para recargar\n      Presione CMD+D para el menú de depuración",
   },
   {
     "id": "intl.page.h2",
-    "defaultMessage": "Demostracion react-intl"
+    "defaultMessage": "Demostracion react-intl",
   },
   {
     "id": "intl.page.unreadCount",
-    "defaultMessage": "{unreadCount, plural, one {mensaje} other {mensajes}}"
+    "defaultMessage": "{unreadCount, plural, one {mensaje} other {mensajes}}",
   },
   {
     "id": "me.page.linkToProfile",
-    "defaultMessage": "Perfil"
+    "defaultMessage": "Perfil",
   },
   {
     "id": "me.page.linkToSettings",
-    "defaultMessage": "Ajustes"
+    "defaultMessage": "Ajustes",
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Hola {displayName}. Esta es su página secreta."
+    "defaultMessage": "Hola {displayName}. Esta es su página secreta.",
   },
   {
     "id": "me.profilePage.title",
-    "defaultMessage": "Perfil"
+    "defaultMessage": "Perfil",
   },
   {
     "id": "me.settingsPage.title",
-    "defaultMessage": "Ajustes"
+    "defaultMessage": "Ajustes",
   },
   {
     "id": "notFound.continue",
-    "defaultMessage": "Continuar aquí por favor."
+    "defaultMessage": "Continuar aquí por favor.",
   },
   {
     "id": "notFound.h1",
-    "defaultMessage": "Esta página no está disponible"
+    "defaultMessage": "Esta página no está disponible",
   },
   {
     "id": "notFound.p",
-    "defaultMessage": "El link puede estar roto, o la página ha sido eliminada."
+    "defaultMessage": "El link puede estar roto, o la página ha sido eliminada.",
   },
   {
     "id": "notFound.title",
-    "defaultMessage": "Página no encontrada"
+    "defaultMessage": "Página no encontrada",
   },
   {
     "id": "todos.buttons.add100",
-    "defaultMessage": "Adicionar 100 Tareas"
+    "defaultMessage": "Adicionar 100 Tareas",
   },
   {
     "id": "todos.buttons.clearAll",
-    "defaultMessage": "Borrar Tareas"
+    "defaultMessage": "Borrar Tareas",
   },
   {
     "id": "todos.buttons.clearCompleted",
-    "defaultMessage": "Borrado Completo"
+    "defaultMessage": "Borrado Completo",
   },
   {
     "id": "todos.leftTodos",
-    "defaultMessage": "{leftTodos, plural, =0 {Nada, Disfruta :-)} one {Usted tiene {leftTodos} tareas} other {Usted tiene {leftTodos} tareas}}"
+    "defaultMessage": "{leftTodos, plural, =0 {Nada, Disfruta :-)} one {Usted tiene {leftTodos} tareas} other {Usted tiene {leftTodos} tareas}}",
   },
   {
     "id": "todos.newTodo.placeholder",
-    "defaultMessage": "Que hay que hacer?"
+    "defaultMessage": "Que hay que hacer?",
   },
   {
     "id": "todos.todos.empty",
-    "defaultMessage": "Esta bastante vacío aquí..."
+    "defaultMessage": "Esta bastante vacío aquí...",
   },
   {
     "id": "app.buttons.add",
-    "defaultMessage": "Añadir"
+    "defaultMessage": "Añadir",
   },
   {
     "id": "app.buttons.cancel",
-    "defaultMessage": "Cancelar"
+    "defaultMessage": "Cancelar",
   },
   {
     "id": "app.buttons.delete",
-    "defaultMessage": "Borrar"
+    "defaultMessage": "Borrar",
   },
   {
     "id": "app.buttons.dismiss",
-    "defaultMessage": "Despedir"
+    "defaultMessage": "Despedir",
   },
   {
     "id": "app.buttons.edit",
-    "defaultMessage": "Editar"
+    "defaultMessage": "Editar",
   },
   {
     "id": "app.buttons.save",
-    "defaultMessage": "Salvar"
+    "defaultMessage": "Salvar",
   },
   {
     "id": "app.buttons.signUp",
-    "defaultMessage": "Regístrate"
+    "defaultMessage": "Regístrate",
   },
   {
     "id": "app.buttons.submit",
-    "defaultMessage": "Enviar"
+    "defaultMessage": "Enviar",
   },
   {
     "id": "app.confirm.areYouSure",
-    "defaultMessage": "¿Estás seguro?"
+    "defaultMessage": "¿Estás seguro?",
   },
   {
     "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Hay cambios sin guardar. ¿Estás seguro?"
+    "defaultMessage": "Hay cambios sin guardar. ¿Estás seguro?",
   },
   {
     "id": "app.FieldError.required",
-    "defaultMessage": "Necesario"
+    "defaultMessage": "Necesario",
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Campos"
+    "defaultMessage": "Campos",
   },
   {
     "id": "app.links.offline",
-    "defaultMessage": "Desconectado"
+    "defaultMessage": "Desconectado",
   },
   {
     "id": "fields.page.h2",
-    "defaultMessage": "Campos"
+    "defaultMessage": "Campos",
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Algo así como redux-forma, pero simplificada y universal."
+    "defaultMessage": "Algo así como redux-forma, pero simplificada y universal.",
   },
 ];

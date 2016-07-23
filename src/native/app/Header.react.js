@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
   icon: {
     color: theme.inverseTextColor,
     fontSize: theme.fontSizeH4,
-  }
+  },
 });
 
 export default class Header extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
-    toggleSideMenu: PropTypes.func.isRequired
+    toggleSideMenu: PropTypes.func.isRequired,
   };
 
   render() {

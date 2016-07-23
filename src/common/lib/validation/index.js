@@ -5,5 +5,5 @@ import focusInvalidField from './focusInvalidField';
 export {
   Validation,
   ValidationError,
-  focusInvalidField
+  focusInvalidField,
 };

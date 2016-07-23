@@ -3,7 +3,7 @@ import { Record } from '../transit';
 
 const InitialState = Record({
   online: false,
-  storageLoaded: false
+  storageLoaded: false,
 }, 'app');
 
 export default function appReducer(state = new InitialState, action) {

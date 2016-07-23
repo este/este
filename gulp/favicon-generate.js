@@ -12,13 +12,13 @@ gulp.task('favicon-generate', done => {
       ios: {
         pictureAspect: 'backgroundAndMargin',
         backgroundColor: '#ffffff',
-        margin: '28%'
+        margin: '28%',
       },
       desktopBrowser: {},
       windows: {
         pictureAspect: 'noChange',
         backgroundColor: '#2d89ef',
-        onConflict: 'override'
+        onConflict: 'override',
       },
       androidChrome: {
         pictureAspect: 'noChange',
@@ -28,18 +28,18 @@ gulp.task('favicon-generate', done => {
           display: 'browser',
           orientation: 'notSet',
           onConflict: 'override',
-          declared: true
-        }
+          declared: true,
+        },
       },
       safariPinnedTab: {
         pictureAspect: 'silhouette',
-        themeColor: '#5bbad5'
-      }
+        themeColor: '#5bbad5',
+      },
     },
     settings: {
       scalingAlgorithm: 'Mitchell',
-      errorOnImageTooSmall: false
+      errorOnImageTooSmall: false,
     },
-    markupFile: './gulp/support/favicon/favicon-data.json'
+    markupFile: './gulp/support/favicon/favicon-data.json',
   }, done);
 });

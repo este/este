@@ -3,12 +3,12 @@ import path from 'path';
 
 const descriptorsToMessages = descriptors =>
   descriptors.reduce((previous, { defaultMessage, id }) => ({
-    ...previous, [id]: defaultMessage
+    ...previous, [id]: defaultMessage,
   }), {});
 
 export default function loadMessages(options) {
   const {
-    includeDefault = false
+    includeDefault = false,
   } = options || {};
   const isDictionary = fileName =>
     path.extname(fileName) === '.js' &&
@@ -17,9 +17,9 @@ export default function loadMessages(options) {
     .filter(isDictionary)
     .map(fileName => ({
       descriptors: require(`../../../messages/${fileName}`).default,
-      locale: fileName.split('.')[0]
+      locale: fileName.split('.')[0],
     }))
     .reduce((previous, { descriptors, locale }) => ({
-      ...previous, [locale]: descriptorsToMessages(descriptors)
+      ...previous, [locale]: descriptorsToMessages(descriptors),
     }), {});
 }

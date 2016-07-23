@@ -13,8 +13,8 @@ const messages = defineMessages({
       one {You have {leftTodos} task}
       other {You have {leftTodos} tasks}
     }`,
-    id: 'todos.leftTodos'
-  }
+    id: 'todos.leftTodos',
+  },
 });
 
 const styles = StyleSheet.create({
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
   text: {
     color: theme.inverseTextColor,
     fontSize: theme.fontSizeH5,
-  }
+  },
 });
 
 class Header extends Component {
 
   static propTypes = {
-    todos: PropTypes.object.isRequired
+    todos: PropTypes.object.isRequired,
   };
 
   render() {
@@ -54,5 +54,5 @@ class Header extends Component {
 }
 
 export default connect(state => ({
-  todos: state.todos.map
+  todos: state.todos.map,
 }))(Header);

@@ -2,238 +2,238 @@
 export default [
   {
     "id": "app.buttons.add",
-    "defaultMessage": "Ajouter"
+    "defaultMessage": "Ajouter",
   },
   {
     "id": "app.buttons.cancel",
-    "defaultMessage": "Annuler"
+    "defaultMessage": "Annuler",
   },
   {
     "id": "app.buttons.delete",
-    "defaultMessage": "Supprimer"
+    "defaultMessage": "Supprimer",
   },
   {
     "id": "app.buttons.edit",
-    "defaultMessage": "Editer"
+    "defaultMessage": "Editer",
   },
   {
     "id": "app.links.signIn",
-    "defaultMessage": "Connexion"
+    "defaultMessage": "Connexion",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Connexion"
+    "defaultMessage": "Connexion",
   },
   {
     "id": "app.buttons.signOut",
-    "defaultMessage": "Déconnexion"
+    "defaultMessage": "Déconnexion",
   },
   {
     "id": "app.buttons.save",
-    "defaultMessage": "Enregistrer"
+    "defaultMessage": "Enregistrer",
   },
   {
     "id": "app.buttons.submit",
-    "defaultMessage": "Envoyer"
+    "defaultMessage": "Envoyer",
   },
   {
     "id": "app.confirm.areYouSure",
-    "defaultMessage": "Etes-vous sûr ?"
+    "defaultMessage": "Etes-vous sûr ?",
   },
   {
     "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Vous avez effectué des modifications. Etes-vous sûr ?"
+    "defaultMessage": "Vous avez effectué des modifications. Etes-vous sûr ?",
   },
   {
     "id": "app.links.fields",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "app.links.firebase",
-    "defaultMessage": "Firebase"
+    "defaultMessage": "Firebase",
   },
   {
     "id": "app.links.home",
-    "defaultMessage": "Accueil"
+    "defaultMessage": "Accueil",
   },
   {
     "id": "app.links.intl",
-    "defaultMessage": "Traduction"
+    "defaultMessage": "Traduction",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Authentification"
+    "defaultMessage": "Authentification",
   },
   {
     "id": "app.links.me",
-    "defaultMessage": "Moi"
+    "defaultMessage": "Moi",
   },
   {
     "id": "app.links.todos",
-    "defaultMessage": "Tâches"
+    "defaultMessage": "Tâches",
   },
   {
     "id": "auth.email.emailLegend",
-    "defaultMessage": "Email"
+    "defaultMessage": "Email",
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "L'adresse email n'est pas valide."
+    "defaultMessage": "L'adresse email n'est pas valide.",
   },
   {
     "id": "auth.signInError.required",
-    "defaultMessage": "Veuillez remplir le champ {prop, select, email {email} password {mot de passe}}."
+    "defaultMessage": "Veuillez remplir le champ {prop, select, email {email} password {mot de passe}}.",
   },
   {
     "id": "auth.signInError.simplePassword",
-    "defaultMessage": "Le mot de passe doit contenir au moins {minLength} caractères."
+    "defaultMessage": "Le mot de passe doit contenir au moins {minLength} caractères.",
   },
   {
     "id": "fields.page.h2",
-    "defaultMessage": "Fields"
+    "defaultMessage": "Fields",
   },
   {
     "id": "fields.page.p",
-    "defaultMessage": "Comme redux-form mais simplifié."
+    "defaultMessage": "Comme redux-form mais simplifié.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
-    "defaultMessage": "Le nouveau compte utilisateur ne peut pas être créé car l'email indiqué est déjà utilisé."
+    "defaultMessage": "Le nouveau compte utilisateur ne peut pas être créé car l'email indiqué est déjà utilisé.",
   },
   {
     "id": "firebase.error.INVALID_EMAIL",
-    "defaultMessage": "L'email spécifié n'est pas valide."
+    "defaultMessage": "L'email spécifié n'est pas valide.",
   },
   {
     "id": "firebase.error.INVALID_PASSWORD",
-    "defaultMessage": "Le mot de passe du compte utilisateur spécifié est incorrect."
+    "defaultMessage": "Le mot de passe du compte utilisateur spécifié est incorrect.",
   },
   {
     "id": "firebase.error.INVALID_USER",
-    "defaultMessage": "Le compte utilisateur spécifié n'existe pas."
+    "defaultMessage": "Le compte utilisateur spécifié n'existe pas.",
   },
   {
     "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Récupération de mot de passe"
+    "defaultMessage": "Récupération de mot de passe",
   },
   {
     "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "votre@email.com"
+    "defaultMessage": "votre@email.com",
   },
   {
     "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Connexion Facebook"
+    "defaultMessage": "Connexion Facebook",
   },
   {
     "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Mot de passe oublié ?"
+    "defaultMessage": "Mot de passe oublié ?",
   },
   {
     "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "mot de passe"
+    "defaultMessage": "mot de passe",
   },
   {
     "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "L'email de récupération du mot de passe a été envoyé."
+    "defaultMessage": "L'email de récupération du mot de passe a été envoyé.",
   },
   {
     "id": "auth.email.resetPassword",
-    "defaultMessage": "Réinitialiser le mot de passe"
+    "defaultMessage": "Réinitialiser le mot de passe",
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Réalisé avec amour par <a href=\"https://twitter.com/steida\">Steida</a>"
+    "defaultMessage": "Réalisé avec amour par <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
-    "defaultMessage": "<p>\n        Hé ho, c'est\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>"
+    "defaultMessage": "<p>\n        Hé ho, c'est\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
   },
   {
     "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Pressez CMD+R pour rafraîchir\n      Pressez CMD+D pour le menu de débogage"
+    "defaultMessage": "Este App\n      Pressez CMD+R pour rafraîchir\n      Pressez CMD+D pour le menu de débogage",
   },
   {
     "id": "intl.page.h2",
-    "defaultMessage": "Démonstration de react-intl"
+    "defaultMessage": "Démonstration de react-intl",
   },
   {
     "id": "intl.page.unreadCount",
-    "defaultMessage": "{unreadCount, plural, one {message} other {messages}}"
+    "defaultMessage": "{unreadCount, plural, one {message} other {messages}}",
   },
   {
     "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.page.linkToSettings",
-    "defaultMessage": "Paramètres"
+    "defaultMessage": "Paramètres",
   },
   {
     "id": "me.page.welcome",
-    "defaultMessage": "Bonjour {displayName}. C'est votre page secrète."
+    "defaultMessage": "Bonjour {displayName}. C'est votre page secrète.",
   },
   {
     "id": "me.profilePage.title",
-    "defaultMessage": "Profil"
+    "defaultMessage": "Profil",
   },
   {
     "id": "me.settingsPage.title",
-    "defaultMessage": "Paramètres"
+    "defaultMessage": "Paramètres",
   },
   {
     "id": "notFound.continue",
-    "defaultMessage": "Continuez ici s'il vous plaît."
+    "defaultMessage": "Continuez ici s'il vous plaît.",
   },
   {
     "id": "notFound.h1",
-    "defaultMessage": "Cette page n'est pas disponible"
+    "defaultMessage": "Cette page n'est pas disponible",
   },
   {
     "id": "notFound.p",
-    "defaultMessage": "Le lien est peut-être périmé ou la page a été supprimée."
+    "defaultMessage": "Le lien est peut-être périmé ou la page a été supprimée.",
   },
   {
     "id": "notFound.title",
-    "defaultMessage": "Page introuvable"
+    "defaultMessage": "Page introuvable",
   },
   {
     "id": "todos.buttons.add100",
-    "defaultMessage": "Ajouter 100 tâches"
+    "defaultMessage": "Ajouter 100 tâches",
   },
   {
     "id": "todos.buttons.clearAll",
-    "defaultMessage": "Tout supprimer"
+    "defaultMessage": "Tout supprimer",
   },
   {
     "id": "todos.buttons.clearCompleted",
-    "defaultMessage": "Suppression terminée"
+    "defaultMessage": "Suppression terminée",
   },
   {
     "id": "todos.leftTodos",
-    "defaultMessage": "{leftTodos, plural, =0 {Il n'y a rien à faire, profitez ! :-)} one {Vous avez {leftTodos} tâche} other {Vous avez {leftTodos} tâches}}"
+    "defaultMessage": "{leftTodos, plural, =0 {Il n'y a rien à faire, profitez ! :-)} one {Vous avez {leftTodos} tâche} other {Vous avez {leftTodos} tâches}}",
   },
   {
     "id": "todos.newTodo.placeholder",
-    "defaultMessage": "Qu'avez-vous à faire ?"
+    "defaultMessage": "Qu'avez-vous à faire ?",
   },
   {
     "id": "todos.todos.empty",
-    "defaultMessage": "C'est plutôt calme par ici..."
+    "defaultMessage": "C'est plutôt calme par ici...",
   },
   {
     "id": "app.buttons.dismiss",
-    "defaultMessage": "Rejeter"
+    "defaultMessage": "Rejeter",
   },
   {
     "id": "app.buttons.signUp",
-    "defaultMessage": "S'inscrire"
+    "defaultMessage": "S'inscrire",
   },
   {
     "id": "app.FieldError.required",
-    "defaultMessage": "Obligatoire"
+    "defaultMessage": "Obligatoire",
   },
   {
     "id": "app.links.offline",
-    "defaultMessage": "Hors ligne"
-  }
+    "defaultMessage": "Hors ligne",
+  },
 ];

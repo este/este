@@ -12,15 +12,15 @@ const messages = defineMessages({
       password {Please enter a password.}
       other {You can't leave this empty.}
     }`,
-    id: 'app.FieldError.required'
-  }
+    id: 'app.FieldError.required',
+  },
 });
 
 export default class FieldError extends Component {
 
   static propTypes = {
     error: PropTypes.any,
-    prop: PropTypes.string.isRequired
+    prop: PropTypes.string.isRequired,
   };
 
   render() {

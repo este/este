@@ -5,6 +5,6 @@ export function onUsersPresence(snap) {
 
   return {
     type: ON_USERS_PRESENCE,
-    payload: { presence }
+    payload: { presence },
   };
 }

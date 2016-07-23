@@ -7,12 +7,12 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 const messages = defineMessages({
   loadingText: {
     defaultMessage: 'Loading',
-    id: 'loading.loadingText'
+    id: 'loading.loadingText',
   },
   longLoadingText: {
     defaultMessage: 'Still loading, please check your connection',
-    id: 'loading.longLoadingText'
-  }
+    id: 'loading.longLoadingText',
+  },
 });
 
 export default class Loading extends Component {
@@ -20,7 +20,7 @@ export default class Loading extends Component {
   constructor() {
     super();
     this.state = {
-      currentText: null
+      currentText: null,
     };
   }
 

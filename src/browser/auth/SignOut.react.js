@@ -8,7 +8,7 @@ import { signOut } from '../../common/auth/actions';
 class SignOut extends Component {
 
   static propTypes = {
-    signOut: PropTypes.func.isRequired
+    signOut: PropTypes.func.isRequired,
   };
 
   render() {

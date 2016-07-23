@@ -7,7 +7,7 @@ import runSequence from 'run-sequence';
 
 const urls = {
   '/': 'index.html',
-  '/404': '404.html'
+  '/404': '404.html',
 };
 
 gulp.task('to-html', done => {

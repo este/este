@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.brandPrimary,
     borderTopColor: theme.lighten(theme.brandPrimary),
     borderTopWidth: 1,
-    height: theme.fontSizeBase * 4
+    height: theme.fontSizeBase * 4,
   },
   input: {
     color: theme.inverseTextColor,
@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizeH5,
     marginLeft: theme.fontSizeBase,
     marginRight: theme.fontSizeBase,
-  }
+  },
 });
 
 class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
   };
 
   constructor() {
@@ -73,7 +73,7 @@ class NewTodo extends Component {
 
 NewTodo = fields(NewTodo, {
   path: 'newTodo',
-  fields: ['title']
+  fields: ['title'],
 });
 
 export default connect(null, { addTodo })(NewTodo);

@@ -14,19 +14,19 @@ describe('Todos', () => {
       empty: 'No todos!',
     },
     todos: Map(),
-    toggleTodoCompleted: () => {}
+    toggleTodoCompleted: () => {},
   };
 
   it('should render a Todo item per todo', () => {
     const todoList = Map({
       1: {
         id: 1,
-        title: 'First todo'
+        title: 'First todo',
       },
       2: {
         id: 3,
-        title: 'Second todo'
-      }
+        title: 'Second todo',
+      },
     });
 
     // Use shallow-rendering as much as possible.

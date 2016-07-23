@@ -18,6 +18,6 @@ export default function createInitialState() {
       .set('currentLocale', config.defaultLocale)
       .set('defaultLocale', config.defaultLocale)
       .set('locales', config.locales)
-      .set('messages', messages)
+      .set('messages', messages),
   };
 }

@@ -83,11 +83,11 @@ const saveUser = user => ({ firebase }) => {
   // locations at the same time atomically.
   const promise = firebase.update({
     [`users/${user.id}`]: json,
-    [`users-emails/${user.id}`]: { email }
+    [`users-emails/${user.id}`]: { email },
   });
   return {
     type: 'FIREBASE_SAVE_USER',
-    payload: promise
+    payload: promise,
   };
 };
 
@@ -98,7 +98,7 @@ const onAuth = user => ({ dispatch }) => {
   }
   return {
     type: FIREBASE_ON_AUTH,
-    payload: { user }
+    payload: { user },
   };
 };
 
@@ -118,7 +118,7 @@ const createPresenceMonitor = () => {
       presenceRef
         .push({
           authenticatedAt: firebaseDatabase.ServerValue.TIMESTAMP,
-          user: userWithoutEmail
+          user: userWithoutEmail,
         })
         .onDisconnect().remove();
     };
@@ -159,7 +159,7 @@ export function nativeSignIn(providerName) {
     };
     return {
       type: 'FIREBASE_SIGN_IN',
-      payload: getPromise()
+      payload: getPromise(),
     };
   };
 }
@@ -182,7 +182,7 @@ export function signUp(providerName, fields) {
     };
     return {
       type: 'FIREBASE_SIGN_UP',
-      payload: getPromise()
+      payload: getPromise(),
     };
   };
 }
@@ -190,7 +190,7 @@ export function signUp(providerName, fields) {
 export function onPermissionDenied(message) {
   return {
     type: FIREBASE_ON_PERMISSION_DENIED,
-    payload: { message }
+    payload: { message },
   };
 }
 
@@ -213,7 +213,7 @@ export function resetPassword(email) {
     };
     return {
       type: 'FIREBASE_RESET_PASSWORD',
-      payload: getPromise()
+      payload: getPromise(),
     };
   };
 }
@@ -239,7 +239,7 @@ export function firebaseStart() {
       dispatch({ type: online ? APP_ONLINE : APP_OFFLINE });
     });
     return {
-      type: FIREBASE_START
+      type: FIREBASE_START,
     };
   };
 }

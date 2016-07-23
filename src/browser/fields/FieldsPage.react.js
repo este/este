@@ -14,12 +14,12 @@ import { focusInvalidField, ValidationError } from '../../common/lib/validation'
 const messages = defineMessages({
   h2: {
     defaultMessage: 'Fields',
-    id: 'fields.page.h2'
+    id: 'fields.page.h2',
   },
   p: {
     defaultMessage: 'Something like redux-form but simplified and universal.',
-    id: 'fields.page.p'
-  }
+    id: 'fields.page.p',
+  },
 });
 
 // Just an example of some dynamically loaded data.
@@ -56,7 +56,7 @@ class FieldsPage extends Component {
     // Generated fields by fields higher order component.
     fields: PropTypes.object.isRequired,
     // We can read anything from fields model directly.
-    fieldsPageModel: PropTypes.object
+    fieldsPageModel: PropTypes.object,
   };
 
   constructor() {
@@ -216,18 +216,18 @@ FieldsPage = fields(FieldsPage, {
     'hasBike',
     'gender',
     'selectedNumber',
-    'toggled'
+    'toggled',
   ],
   getInitialState: () => ({
     // someField: '123',
     // hasCar: true,
     gender: 'male',
     selectedNumber: '2',
-    toggled: false
-  })
+    toggled: false,
+  }),
 });
 
 // Connect is not required. It's just a demonstration of fields state.
 export default connect(state => ({
-  fieldsPageModel: state.fields.get('fieldsPage')
+  fieldsPageModel: state.fields.get('fieldsPage'),
 }))(FieldsPage);
