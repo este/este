@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import gulp from 'gulp';
 
-gulp.task('upgrade-react-native', () => {
+gulp.task('native-upgrade', () => {
   console.log(`
     Steps to upgrade React Native in Este
 
     - Update package.json
       - react-native, use fixed version
-      - react, use fixed version from React Native dependencies
+      - react, use fixed version from React Native package.json dependencies
 
     Already existing App
       - run 'react-native upgrade'

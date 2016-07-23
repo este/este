@@ -60,7 +60,7 @@
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
 - [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
-- [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk) For Facebook Login in React Native. Follow readme install notes.
+- [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk) For Facebook Login in React Native. Follow the readme install notes.
 - And much more. Explore the repository.
 
 ## Prerequisites
@@ -181,7 +181,7 @@ Yes it does. Este is agnostic of what you use in your backend and is completely 
 Yes. Este tries to make as few assumptions about your stack as possible. This is not a framework, nothing prevents you from picking the bits you're interested in.
 
 #### How is React Native used in this project?
-In the same way as any other React Native project is created via `react-native init AwesomeProject`. But thanks to the universal application design we can easily share modules across platforms. But remember to check [gulpfile.babel.js](https://github.com/este/este/blob/master/gulpfile.babel.js) for details.
+In the same way as any other React Native project is created via `react-native init AwesomeProject`. But thanks to the universal application design we can easily share modules across platforms.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)

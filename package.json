@@ -4,7 +4,7 @@
   "//": "Use gulp for dev. It's cross platform.",
   "scripts": {
     "build": "gulp build",
-    "install": "gulp fix-react-native",
+    "install": "gulp native-fix",
     "postinstall": "gulp native && gulp build --production",
     "test": "gulp test"
   },
