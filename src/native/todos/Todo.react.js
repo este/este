@@ -1,8 +1,8 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import theme from '../app/theme';
-import { Button } from '../app/components';
-import { Image, StyleSheet, TextInput, View } from 'react-native';
+import { Checkbox } from '../app/components';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 const styles = StyleSheet.create({
   todo: {
@@ -33,28 +33,26 @@ export default class Todo extends Component {
 
   constructor() {
     super();
-    this.onTouchableOpacityPress = this.onTouchableOpacityPress.bind(this);
+    this.onCheckboxPress = this.onCheckboxPress.bind(this);
   }
 
-  onTouchableOpacityPress() {
+  onCheckboxPress() {
     const { todo, toggleTodoCompleted } = this.props;
     toggleTodoCompleted(todo);
   }
 
   render() {
     const { todo } = this.props;
-    const image = todo.completed
-      ? require('./img/SelectedCheckbox.png')
-      : require('./img/EmptyCheckbox.png');
-
     return (
       <View style={styles.todo}>
-        <Button onPress={this.onTouchableOpacityPress}>
-          <Image source={image} style={styles.checkbox} />
-        </Button>
+        <Checkbox
+          checked={todo.completed}
+          onPress={this.onCheckboxPress}
+          style={styles.checkbox}
+        />
         <TextInput
           editable={false}
-          style={[styles.input]}
+          style={styles.input}
           value={todo.title}
         />
       </View>
