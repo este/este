@@ -14,8 +14,8 @@ import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/a
 const styles = StyleSheet.create({
   input: {
     height: theme.fontSizeH5,
-    marginBottom: theme.fontSizeBase * .5,
-    marginTop: theme.fontSizeBase * .5,
+    marginBottom: theme.fontSize * .5,
+    marginTop: theme.fontSize * .5,
   },
   legend: {
     fontSize: theme.fontSizeH3,

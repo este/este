@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.fontSizeH5,
   },
   item: {
-    fontSize: theme.fontSizeBase,
-    padding: theme.fontSizeBase * .625,
+    fontSize: theme.fontSize,
+    padding: theme.fontSize * .625,
     color: theme.inverseTextColor,
   },
 });

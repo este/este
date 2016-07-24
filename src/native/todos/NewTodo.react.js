@@ -13,15 +13,15 @@ const styles = StyleSheet.create({
     backgroundColor: theme.brandPrimary,
     borderTopColor: theme.lighten(theme.brandPrimary),
     borderTopWidth: 1,
-    height: theme.fontSizeBase * 4,
+    height: theme.fontSize * 4,
   },
   input: {
     color: theme.inverseTextColor,
     flex: 1,
     fontFamily: 'Helvetica Neue',
     fontSize: theme.fontSizeH5,
-    marginLeft: theme.fontSizeBase,
-    marginRight: theme.fontSizeBase,
+    marginLeft: theme.fontSize,
+    marginRight: theme.fontSize,
   },
 });
 

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   input: {
     color: theme.textColor,
     flex: 1,
-    fontSize: theme.fontSizeBase,
+    fontSize: theme.fontSize,
     paddingRight: theme.fontSizeH5,
   },
   checkbox: {

@@ -30,13 +30,13 @@ class IntlPage extends Component {
             style={{
               fontSize: theme.fontSizeH5,
               fontWeight: locale === currentLocale ? 'bold' : 'normal',
-              marginBottom: theme.fontSizeBase * .5,
+              marginBottom: theme.fontSize * .5,
             }}
             key={locale}
             onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
           >{locale}</Text>
         )}
-        <View style={{ marginTop: theme.fontSizeBase }}>
+        <View style={{ marginTop: theme.fontSize }}>
           <FormattedDate
             value={Date.now()}
             day="numeric"

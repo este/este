@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between', // align items in the flexDirection
     alignItems: 'center', // align items in the cross-axis flexDirection
-    paddingTop: theme.fontSizeBase * 1.875, // pxtoem.com
-    paddingBottom: theme.fontSizeBase * .625,
+    paddingTop: theme.fontSize * 1.875, // pxtoem.com
+    paddingBottom: theme.fontSize * .625,
     borderBottomColor: theme.lighten(theme.brandPrimary),
     borderBottomWidth: 2,
   },
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     top: 1,
-    width: theme.fontSizeBase * 3,
+    width: theme.fontSize * 3,
   },
   icon: {
     color: theme.inverseTextColor,

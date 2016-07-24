@@ -15,12 +15,12 @@ import { connect } from 'react-redux';
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    paddingBottom: theme.fontSizeBase,
-    paddingTop: theme.fontSizeBase,
+    paddingBottom: theme.fontSize,
+    paddingTop: theme.fontSize,
   },
   buttonText: {
     color: theme.lighten(theme.textColor),
-    fontSize: theme.fontSizeBase,
+    fontSize: theme.fontSize,
     textAlign: 'center',
   },
   buttons: {
