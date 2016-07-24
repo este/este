@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import theme from '../theme';
+import theme from '../../../common/app/theme';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({

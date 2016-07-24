@@ -2,7 +2,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 // import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
-import theme from '../app/theme';
+import theme from '../../common/app/theme';
 // import { Button } from '../app/components';
 import { Text } from '../app/components';
 import { FormattedMessage } from 'react-intl';

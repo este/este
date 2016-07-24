@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import theme from '../theme';
+import theme from '../../../common/app/theme';
 import { TouchableOpacity, View } from 'react-native';
 
 export default class Button extends Component {

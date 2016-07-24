@@ -1,14 +1,12 @@
 import Color from 'color';
 
-// Learn React Native styles:
-//  - facebook.github.io/react-native/docs/style.html
-//  - medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
 // Tips:
-//  - Note there is no shared styles. Favour prestyled app/components instead.
-//  - Use theme.fontSize for responsive layouts (mobile, tablet, etc.)
-//    - example: paddingBottom: theme.fontSize * 1.5 // pxtoem.com
-//  - Use Platform.select for platform specific styles and theme constants
-//  - Use vocabulary from:
+//  - Prefer styled app/components over shared StyleSheet instances.
+//  - Use theme.fontSize for the responsive sizing // pxtoem.com
+//  - Learn React Native flexbox
+//    - facebook.github.io/react-native/docs/style.html
+//    - medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
+//  - Learn UI vocabulary
 //    - v4-alpha.getbootstrap.com/getting-started/introduction
 //    - developer.apple.com/ios/human-interface-guidelines
 //    - developer.android.com/guide/practices/ui_guidelines

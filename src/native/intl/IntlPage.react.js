@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import theme from '../app/theme';
+import theme from '../../common/app/theme';
 import { CenteredContainer, Text } from '../app/components';
 import { FormattedDate, FormattedRelative } from 'react-intl';
 import { View } from 'react-native';

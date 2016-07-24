@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, { PropTypes } from 'react';
-import theme from './theme';
+import theme from '../../common/app/theme';
 import { Button, Text } from './components';
 import { StyleSheet, View } from 'react-native';
 

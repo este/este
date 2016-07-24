@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import theme from '../app/theme';
+import theme from '../../common/app/theme';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from './components';
 import { connect } from 'react-redux';

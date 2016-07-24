@@ -2,7 +2,7 @@ import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
-import theme from '../app/theme';
+import theme from '../../common/app/theme';
 import todosMessages from '../../common/todos/todosMessages';
 import { CenteredContainer, Text } from '../app/components';
 import { FormattedMessage } from 'react-intl';

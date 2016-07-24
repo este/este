@@ -2,7 +2,7 @@ import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import theme from '../app/theme';
+import theme from '../../common/app/theme';
 import { FormattedMessage } from 'react-intl';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
