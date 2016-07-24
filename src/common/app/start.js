@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 
-export default function start(Wrapped) {
+export default function start(WrappedComponent) {
   class Start extends Component {
 
     static propTypes = {
@@ -32,7 +32,7 @@ export default function start(Wrapped) {
           locale={currentLocale}
           messages={messages[currentLocale]}
         >
-          <Wrapped {...this.props} />
+          <WrappedComponent {...this.props} />
         </IntlProvider>
       );
     }

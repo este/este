@@ -8,7 +8,7 @@ const isReactNative =
   navigator.product === 'ReactNative';
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-export default function fields(Wrapped, options) {
+export default function fields(WrappedComponent, options) {
   const {
     path = '',
     fields = [],
@@ -137,7 +137,7 @@ export default function fields(Wrapped, options) {
 
     render() {
       return (
-        <Wrapped {...this.props} fields={this.fields} />
+        <WrappedComponent {...this.props} fields={this.fields} />
       );
     }
 

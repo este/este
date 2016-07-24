@@ -30,7 +30,7 @@ const optionsToPayloadString = options => JSON.stringify(optionsToPayload(option
 let serverFetching = false;
 let serverFetchingPromises = null;
 
-export default function queryFirebase(Wrapped, mapPropsToOptions) {
+export default function queryFirebase(WrappedComponent, mapPropsToOptions) {
   return class FirebaseQuery extends Component {
 
     static contextTypes = {
@@ -168,7 +168,7 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
 
     render() {
       return (
-        <Wrapped {...this.props} />
+        <WrappedComponent {...this.props} />
       );
     }
 
