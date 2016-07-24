@@ -14,7 +14,7 @@ export default class Button extends Component {
     const { children, style } = this.props;
     return (
       <TouchableOpacity
-        activeOpacity={theme.buttonActiveOpacity}
+        activeOpacity={theme.activeOpacity}
         style={style}
         {...this.props}
       >

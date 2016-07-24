@@ -15,6 +15,7 @@ import Color from 'color';
 
 export default {
   fontSizeBase: 16,
+
   textColor: '#7C7C7C',
   backgroundColor: '#fff',
 
@@ -22,7 +23,9 @@ export default {
   inverseBackgroundColor: '#2C2C2C',
 
   brandPrimary: '#31AACC',
-  buttonActiveOpacity: .5,
+
+  activeOpacity: .5,
+  disabledOpacity: .3,
 
   // Multiples from Bootstrap 4
   get fontSizeH1() { return this.fontSizeBase * 2.5; },
