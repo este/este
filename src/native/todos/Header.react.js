@@ -1,10 +1,10 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import theme from '../../common/app/theme';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
-import { Text } from '../app/components';
 import { connect } from 'react-redux';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   leftTodos: {
@@ -44,11 +44,11 @@ class Header extends Component {
 
     return (
       <View style={styles.header}>
-        <FormattedMessage {...messages.leftTodos} values={{ leftTodos }}>
-          {message =>
-            <Text style={styles.text}>{message}</Text>
-          }
-        </FormattedMessage>
+        <FormattedMessage
+          {...messages.leftTodos}
+          style={styles.text}
+          values={{ leftTodos }}
+        />
       </View>
     );
   }

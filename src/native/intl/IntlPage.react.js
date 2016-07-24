@@ -1,9 +1,12 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import theme from '../../common/app/theme';
-import { CenteredContainer, Text } from '../app/components';
-import { FormattedDate, FormattedRelative } from 'react-intl';
-import { View } from 'react-native';
+import {
+  CenteredContainer,
+  FormattedDate,
+  FormattedRelative,
+  Text,
+} from '../app/components';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
@@ -36,28 +39,18 @@ class IntlPage extends Component {
             onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
           >{locale}</Text>
         )}
-        <View style={{ marginTop: theme.fontSize }}>
-          <FormattedDate
-            value={Date.now()}
-            day="numeric"
-            month="long"
-            year="numeric"
-            formatMatcher="basic" // while this bug remains in react-intl: https://github.com/andyearnshaw/Intl.js/issues/179
-          >
-            {date =>
-              <Text>{date}</Text>
-            }
-          </FormattedDate>
-          <FormattedRelative
-            initialNow={this.componentRenderedAt}
-            updateInterval={1000 * 1}
-            value={this.componentRenderedAt}
-          >
-            {relative =>
-              <Text>{relative}</Text>
-            }
-          </FormattedRelative>
-        </View>
+        <FormattedDate
+          day="numeric"
+          month="short"
+          style={{ margin: theme.fontSize }}
+          value={Date.now()}
+          year="numeric"
+        />
+        <FormattedRelative
+          initialNow={this.componentRenderedAt}
+          updateInterval={1000 * 1}
+          value={this.componentRenderedAt}
+        />
       </CenteredContainer>
     );
   }

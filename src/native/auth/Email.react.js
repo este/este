@@ -4,8 +4,7 @@ import React, { PropTypes } from 'react';
 import emailMessages from '../../common/auth/emailMessages';
 import theme from '../../common/app/theme';
 // import { Button } from '../app/components';
-import { Text } from '../app/components';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../app/components';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
@@ -113,7 +112,7 @@ class Email extends Component {
 
     return (
       <View style={style}>
-        <Text style={styles.legend}>Email</Text>
+        <FormattedMessage {...emailMessages.emailLegend} style={styles.legend} />
         <FormattedMessage {...emailMessages.emailPlaceholder}>
           {message =>
             <TextInput
@@ -122,7 +121,7 @@ class Email extends Component {
               autoCorrect={false}
               maxLength={100}
               placeholder={message}
-              placeholderTextColor={theme.lighten(theme.textColor)}
+              placeholderTextColor={theme.placeholderTextColor}
               style={styles.input}
             />
           }
@@ -134,7 +133,7 @@ class Email extends Component {
                 {...fields.password}
                 maxLength={1000}
                 placeholder={message}
-                placeholderTextColor={theme.lighten(theme.textColor)}
+                placeholderTextColor={theme.placeholderTextColor}
                 secureTextEntry
                 style={styles.input}
               />

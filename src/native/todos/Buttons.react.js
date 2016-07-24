@@ -2,8 +2,7 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../../common/app/theme';
-import { Button, Text } from '../app/components';
-import { FormattedMessage } from 'react-intl';
+import { Button, FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import {
   addHundredTodos,
@@ -14,17 +13,14 @@ import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   button: {
+    // borderWidth: 1, borderColor: 'red', // To check the touchable area.
     flex: 1,
-    paddingBottom: theme.fontSize,
-    paddingTop: theme.fontSize,
-  },
-  buttonText: {
-    textAlign: 'center',
+    alignItems: 'center',
+    padding: theme.fontSize,
   },
   buttons: {
-    alignItems: 'center',
-    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 
@@ -38,34 +34,27 @@ class TodoButtons extends Component {
   };
 
   render() {
-    const { addHundredTodos, clearAllCompletedTodos, clearAllTodos, todos } = this.props;
+    const {
+      addHundredTodos,
+      clearAllCompletedTodos,
+      clearAllTodos,
+      todos,
+    } = this.props;
     const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
 
     return (
       <View style={styles.buttons}>
         {hasCompletedTodos ?
           <Button onPress={clearAllCompletedTodos} style={styles.button}>
-            <FormattedMessage {...buttonsMessages.clearCompleted}>
-              {message =>
-                <Text style={styles.buttonText}>{message}</Text>
-              }
-            </FormattedMessage>
+            <FormattedMessage {...buttonsMessages.clearCompleted} />
           </Button>
         :
           <Button onPress={clearAllTodos} style={styles.button}>
-            <FormattedMessage {...buttonsMessages.clearAll}>
-              {message =>
-                <Text style={styles.buttonText}>{message}</Text>
-              }
-            </FormattedMessage>
+            <FormattedMessage {...buttonsMessages.clearAll} />
           </Button>
         }
         <Button onPress={addHundredTodos} style={styles.button}>
-          <FormattedMessage {...buttonsMessages.add100}>
-            {message =>
-              <Text style={styles.buttonText}>{message}</Text>
-            }
-          </FormattedMessage>
+          <FormattedMessage {...buttonsMessages.add100} />
         </Button>
       </View>
     );

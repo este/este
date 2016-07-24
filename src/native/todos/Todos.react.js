@@ -4,8 +4,7 @@ import React, { PropTypes } from 'react';
 import Todo from './Todo.react';
 import theme from '../../common/app/theme';
 import todosMessages from '../../common/todos/todosMessages';
-import { CenteredContainer, Text } from '../app/components';
-import { FormattedMessage } from 'react-intl';
+import { CenteredContainer, FormattedMessage } from '../app/components';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { toggleTodoCompleted } from '../../common/todos/actions';
@@ -44,11 +43,7 @@ class Todos extends Component {
             source={require('./img/EmptyState.png')}
             style={styles.icon}
           />
-          <FormattedMessage {...todosMessages.empty}>
-            {message =>
-              <Text style={styles.empty}>{message}</Text>
-            }
-          </FormattedMessage>
+          <FormattedMessage {...todosMessages.empty} style={styles.empty} />
         </CenteredContainer>
       );
     }

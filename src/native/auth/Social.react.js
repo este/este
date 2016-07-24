@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import theme from '../../common/app/theme';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../app/components';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { nativeSignIn } from '../../common/lib/redux-firebase/actions';

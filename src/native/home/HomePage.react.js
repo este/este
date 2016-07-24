@@ -1,7 +1,7 @@
 import Component from 'react-pure-render/component';
 import React from 'react';
-import { CenteredContainer, Text } from '../app/components';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { CenteredContainer, FormattedMessage } from '../app/components';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   intro: {
@@ -19,13 +19,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <CenteredContainer>
-        <FormattedMessage {...messages.intro}>
-          {message =>
-            <Text style={{ textAlign: 'center' }}>
-              {message}
-            </Text>
-          }
-        </FormattedMessage>
+        <FormattedMessage {...messages.intro} style={{ textAlign: 'center' }} />
       </CenteredContainer>
     );
   }
