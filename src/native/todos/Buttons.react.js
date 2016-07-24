@@ -19,8 +19,6 @@ const styles = StyleSheet.create({
     paddingTop: theme.fontSize,
   },
   buttonText: {
-    color: theme.lighten(theme.textColor),
-    fontSize: theme.fontSize,
     textAlign: 'center',
   },
   buttons: {

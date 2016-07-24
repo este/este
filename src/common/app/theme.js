@@ -11,28 +11,39 @@ import Color from 'color';
 //    - developer.apple.com/ios/human-interface-guidelines
 //    - developer.android.com/guide/practices/ui_guidelines
 
+const darken = color => Color(color).darken(.3).hexString();
+const lighten = color => Color(color).lighten(.3).hexString();
+
+const fontSize = 16;
+
+const textColor = '#7C7C7C';
+const backgroundColor = '#fff';
+const inverseTextColor = '#eee';
+const inverseBackgroundColor = '#2C2C2C';
+
+const brandPrimary = '#31AACC';
+
+const activeOpacity = .5;
+const disabledOpacity = .3;
+
 export default {
-  fontSize: 16,
-
-  textColor: '#7C7C7C',
-  backgroundColor: '#fff',
-
-  inverseTextColor: '#eee',
-  inverseBackgroundColor: '#2C2C2C',
-
-  brandPrimary: '#31AACC',
-
-  activeOpacity: .5,
-  disabledOpacity: .3,
-
-  // Multiples from Bootstrap 4
-  get fontSizeH1() { return this.fontSize * 2.5; },
-  get fontSizeH2() { return this.fontSize * 2; },
-  get fontSizeH3() { return this.fontSize * 1.75; },
-  get fontSizeH4() { return this.fontSize * 1.5; },
-  get fontSizeH5() { return this.fontSize * 1.25; },
-
-  // Example: { borderBottomColor: theme.lighten(theme.brandPrimary) }
-  lighten: color => Color(color).lighten(.3).hexString(),
-  darken: color => Color(color).darken(.3).hexString(),
+  // Basic
+  fontSize,
+  textColor,
+  backgroundColor,
+  inverseTextColor,
+  inverseBackgroundColor,
+  brandPrimary,
+  activeOpacity,
+  disabledOpacity,
+  // Derived
+  placeholderTextColor: lighten(textColor),
+  fontSizeH1: fontSize * 2.5, // From the Bootstrap 4
+  fontSizeH2: fontSize * 2,
+  fontSizeH3: fontSize * 1.75,
+  fontSizeH4: fontSize * 1.5,
+  fontSizeH5: fontSize * 1.25,
+  // Helpers
+  darken,
+  lighten,
 };

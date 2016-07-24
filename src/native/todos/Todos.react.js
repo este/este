@@ -12,7 +12,7 @@ import { toggleTodoCompleted } from '../../common/todos/actions';
 
 const styles = StyleSheet.create({
   empty: {
-    color: theme.lighten(theme.textColor),
+    color: theme.placeholderTextColor,
     fontSize: theme.fontSizeH5,
   },
   icon: {

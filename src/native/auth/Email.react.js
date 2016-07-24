@@ -14,11 +14,11 @@ import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/a
 const styles = StyleSheet.create({
   input: {
     height: theme.fontSizeH5,
-    marginBottom: theme.fontSize * .5,
-    marginTop: theme.fontSize * .5,
+    marginBottom: theme.fontSize * .75,
   },
   legend: {
     fontSize: theme.fontSizeH3,
+    marginBottom: theme.fontSize * 2,
   },
 });
 
@@ -115,11 +115,13 @@ class Email extends Component {
       <View style={style}>
         <Text style={styles.legend}>Email</Text>
         <FormattedMessage {...emailMessages.emailPlaceholder}>
-          {placeholder =>
+          {message =>
             <TextInput
               {...fields.email}
+              autoCapitalize="none"
+              autoCorrect={false}
               maxLength={100}
-              placeholder={placeholder}
+              placeholder={message}
               placeholderTextColor={theme.lighten(theme.textColor)}
               style={styles.input}
             />
@@ -127,11 +129,11 @@ class Email extends Component {
         </FormattedMessage>
         {!forgetPasswordIsShown &&
           <FormattedMessage {...emailMessages.passwordPlaceholder}>
-            {placeholder =>
+            {message =>
               <TextInput
                 {...fields.password}
                 maxLength={1000}
-                placeholder={placeholder}
+                placeholder={message}
                 placeholderTextColor={theme.lighten(theme.textColor)}
                 secureTextEntry
                 style={styles.input}
