@@ -19,7 +19,9 @@ class OfflinePage extends Component {
     return (
       <div className="offline-page">
         <FormattedMessage {...linksMessages.offline}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h2>
           Offline

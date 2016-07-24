@@ -29,7 +29,9 @@ export default class NotFoundPage extends Component {
     return (
       <div className="notfound-page">
         <FormattedMessage {...messages.title}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h1>
           <FormattedMessage {...messages.h1} />

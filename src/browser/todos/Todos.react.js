@@ -27,7 +27,9 @@ export class Todos extends Component {
     const { deleteTodo, todos, toggleTodoCompleted } = this.props;
 
     if (!todos.size) {
-      return <p><FormattedMessage {...todosMessages.empty} /></p>;
+      return (
+        <p><FormattedMessage {...todosMessages.empty} /></p>
+      );
     }
 
     const list = todos.toList().sortBy(item => item.createdAt).reverse();

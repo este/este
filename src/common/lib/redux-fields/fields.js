@@ -136,7 +136,9 @@ export default function fields(Wrapped, options) {
     }
 
     render() {
-      return <Wrapped {...this.props} fields={this.fields} />;
+      return (
+        <Wrapped {...this.props} fields={this.fields} />
+      );
     }
 
   };

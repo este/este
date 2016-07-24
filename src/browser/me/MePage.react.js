@@ -38,7 +38,9 @@ class MePage extends Component {
     return (
       <div className="me-page">
         <FormattedMessage {...linksMessages.me}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <ul>
           <li>

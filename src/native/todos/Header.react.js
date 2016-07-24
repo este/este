@@ -45,7 +45,9 @@ class Header extends Component {
     return (
       <View style={styles.header}>
         <FormattedMessage {...messages.leftTodos} values={{ leftTodos }}>
-          {message => <Text style={styles.text}>{message}</Text>}
+          {message =>
+            <Text style={styles.text}>{message}</Text>
+          }
         </FormattedMessage>
       </View>
     );

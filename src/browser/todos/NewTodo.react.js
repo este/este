@@ -32,14 +32,16 @@ class NewTodo extends Component {
 
     return (
       <FormattedMessage {...newTodoMessages.placeholder}>
-        {message => <input
-          {...fields.title}
-          autoFocus
-          className="new-todo"
-          maxLength={100}
-          onKeyDown={this.onInputKeyDown}
-          placeholder={message}
-        />}
+        {message =>
+          <input
+            {...fields.title}
+            autoFocus
+            className="new-todo"
+            maxLength={100}
+            onKeyDown={this.onInputKeyDown}
+            placeholder={message}
+          />
+        }
       </FormattedMessage>
     );
   }

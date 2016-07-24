@@ -18,7 +18,9 @@ export default class SignInPage extends Component {
     return (
       <div className="signin-page">
         <FormattedMessage {...linksMessages.signIn}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h2>
           <a href="https://www.firebase.com/" target="_blank">

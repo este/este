@@ -42,12 +42,16 @@ export default class Loading extends Component {
   render() {
     const { currentText } = this.state;
     if (!currentText) {
-      return <div className="este-loading">{String.fromCharCode(160)}</div>;
+      return (
+        <div className="este-loading">{String.fromCharCode(160)}</div>
+      );
     }
     return (
       <div className="este-loading">
         <FormattedMessage {...currentText}>
-          {title => <Helmet title={title} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <FormattedMessage {...currentText} />
       </div>

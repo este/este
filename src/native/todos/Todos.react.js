@@ -45,7 +45,9 @@ class Todos extends Component {
             style={styles.icon}
           />
           <FormattedMessage {...todosMessages.empty}>
-            {message => <Text style={styles.empty}>{message}</Text>}
+            {message =>
+              <Text style={styles.empty}>{message}</Text>
+            }
           </FormattedMessage>
         </CenteredContainer>
       );

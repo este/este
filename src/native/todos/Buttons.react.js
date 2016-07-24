@@ -48,19 +48,25 @@ class TodoButtons extends Component {
         {hasCompletedTodos ?
           <Button onPress={clearAllCompletedTodos} style={styles.button}>
             <FormattedMessage {...buttonsMessages.clearCompleted}>
-              {message => <Text style={styles.buttonText}>{message}</Text>}
+              {message =>
+                <Text style={styles.buttonText}>{message}</Text>
+              }
             </FormattedMessage>
           </Button>
         :
           <Button onPress={clearAllTodos} style={styles.button}>
             <FormattedMessage {...buttonsMessages.clearAll}>
-              {message => <Text style={styles.buttonText}>{message}</Text>}
+              {message =>
+                <Text style={styles.buttonText}>{message}</Text>
+              }
             </FormattedMessage>
           </Button>
         }
         <Button onPress={addHundredTodos} style={styles.button}>
           <FormattedMessage {...buttonsMessages.add100}>
-            {message => <Text style={styles.buttonText}>{message}</Text>}
+            {message =>
+              <Text style={styles.buttonText}>{message}</Text>
+            }
           </FormattedMessage>
         </Button>
       </View>

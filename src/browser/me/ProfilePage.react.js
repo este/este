@@ -16,7 +16,9 @@ export default class ProfilePage extends Component {
     return (
       <div className="profile-page">
         <FormattedMessage {...messages.title}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <p>
           <FormattedMessage {...messages.title} />

@@ -111,7 +111,9 @@ class FieldsPage extends Component {
     return (
       <div className="fields-page">
         <FormattedMessage {...linksMessages.fields}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h2>
           <FormattedMessage {...messages.h2} />

@@ -39,7 +39,9 @@ export default class IntlPage extends Component {
     return (
       <div className="intl-page">
         <FormattedMessage {...linksMessages.intl}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h2>
           <FormattedMessage {...messages.h2} />

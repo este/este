@@ -167,7 +167,9 @@ export default function queryFirebase(Wrapped, mapPropsToOptions) {
     }
 
     render() {
-      return <Wrapped {...this.props} />;
+      return (
+        <Wrapped {...this.props} />
+      );
     }
 
   };

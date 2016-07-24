@@ -103,20 +103,24 @@ class Email extends Component {
             <FormattedMessage {...legendMessage} />
           </legend>
           <FormattedMessage {...emailMessages.emailPlaceholder}>
-            {message => <input
-              {...fields.email}
-              maxLength={100}
-              placeholder={message}
-            />}
+            {message =>
+              <input
+                {...fields.email}
+                maxLength={100}
+                placeholder={message}
+              />
+            }
           </FormattedMessage>
           {!forgetPasswordIsShown &&
             <FormattedMessage {...emailMessages.passwordPlaceholder}>
-              {message => <input
-                {...fields.password}
-                maxLength={1000}
-                placeholder={message}
-                type="password"
-              />}
+              {message =>
+                <input
+                  {...fields.password}
+                  maxLength={1000}
+                  placeholder={message}
+                  type="password"
+                />
+              }
             </FormattedMessage>
           }
           {!forgetPasswordIsShown ?

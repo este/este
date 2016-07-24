@@ -21,9 +21,10 @@ export default class HomePage extends Component {
   render() {
     return (
       <div className="home-page">
-        {/* Note child is a function, so we can localize anything. */}
         <FormattedMessage {...linksMessages.home}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <FormattedHTMLMessage {...messages.intro} />
         {/* Use require for assets. It's super useful for CDN. */}

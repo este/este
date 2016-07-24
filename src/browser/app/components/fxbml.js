@@ -35,7 +35,9 @@ export default function xfbml(Wrapped) {
     }
 
     render() {
-      return <Wrapped {...this.props} />;
+      return (
+        <Wrapped {...this.props} />
+      );
     }
 
   };

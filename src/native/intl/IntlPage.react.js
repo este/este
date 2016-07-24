@@ -44,14 +44,18 @@ class IntlPage extends Component {
             year="numeric"
             formatMatcher="basic" // while this bug remains in react-intl: https://github.com/andyearnshaw/Intl.js/issues/179
           >
-            {date => <Text>{date}</Text>}
+            {date =>
+              <Text>{date}</Text>
+            }
           </FormattedDate>
           <FormattedRelative
             initialNow={this.componentRenderedAt}
             updateInterval={1000 * 1}
             value={this.componentRenderedAt}
           >
-            {relative => <Text>{relative}</Text>}
+            {relative =>
+              <Text>{relative}</Text>
+            }
           </FormattedRelative>
         </View>
       </CenteredContainer>

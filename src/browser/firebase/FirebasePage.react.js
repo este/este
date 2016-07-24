@@ -11,7 +11,9 @@ export default class FirebasePage extends Component {
     return (
       <div className="firebase-page">
         <FormattedMessage {...linksMessages.firebase}>
-          {message => <Helmet title={message} />}
+          {message =>
+            <Helmet title={message} />
+          }
         </FormattedMessage>
         <h2>
           <a href="https://firebase.google.com/" target="_blank">
