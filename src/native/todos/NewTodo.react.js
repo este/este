@@ -55,16 +55,18 @@ class NewTodo extends Component {
     return (
       <View style={styles.newTodo}>
         <FormattedMessage {...newTodoMessages.placeholder}>
-          {message => <TextInput
-            {...fields.title}
-            autoCorrect={false}
-            maxLength={100} // React Native needs explicit maxLength.
-            onEndEditing={this.onTextInputEndEditing}
-            onSubmitEditing={this.onSubmitEditing}
-            placeholder={message}
-            placeholderTextColor={'#cce9f2'}
-            style={styles.input}
-          />}
+          {message =>
+            <TextInput
+              {...fields.title}
+              autoCorrect={false}
+              maxLength={100} // React Native needs explicit maxLength.
+              onEndEditing={this.onTextInputEndEditing}
+              onSubmitEditing={this.onSubmitEditing}
+              placeholder={message}
+              placeholderTextColor={'#cce9f2'}
+              style={styles.input}
+            />
+          }
         </FormattedMessage>
       </View>
     );
