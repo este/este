@@ -1,6 +1,6 @@
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 
 export default function configureStore(options) {
   const {
@@ -24,7 +24,11 @@ export default function configureStore(options) {
   const store = createStore(
     reducer,
     initialState,
-    applyMiddleware(...middleware)
+    compose(
+      applyMiddleware(...middleware),
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ?
+        window.devToolsExtension() : f => f
+    )
   );
 
   // Enable hot reload where available.
