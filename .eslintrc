@@ -4,9 +4,13 @@
   },
   "parser"  : "babel-eslint",
   "plugins": [
+    "ava",
     "react-native"
   ],
-  "extends" : ["airbnb"],
+  "extends" : [
+    "airbnb",
+    "plugin:ava/recommended"
+  ],
   "rules": {
     // Soft some rules.
     "default-case": 0, // Required default case is nonsense.

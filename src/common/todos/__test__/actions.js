@@ -1,25 +1,30 @@
-import * as actions from '../actions.js';
-import { expect } from 'chai';
+import test from 'ava';
+import * as actions from '../actions';
 
-describe('todos actions', () => {
-  // // Async testing example.
-  // it('should do something async', done => {
-  //   setTimeout(() => {
-  //     expect('foo').equal('bar');
-  //     done();
-  //   }, 500)
-  // });
+// Learn AVA:
+//  - speakerdeck.com/novemberborn/ava-at-lnug
+//  - shift.infinite.red/testing-the-bejeezus-out-of-react-native-apps-with-ava-330f51f8f6c3
+//  - http://silvenon.com/testing-react-and-redux/
 
-  it('should create todo', () => {
-    const deps = {
-      getUid: () => 'uid',
-      now: () => 'now',
-    };
-    const action = actions.addTodo('Hello')(deps);
-    const { type, payload } = action;
-    expect(type).equal('ADD_TODO');
-    expect(payload.createdAt).equal('now');
-    expect(payload.id).equal('uid');
-    expect(payload.title).equal('Hello');
+// Note test assertions with a non-clever syntax:
+//  - t.true(someBool);
+//  - t.deepEqual(a, b);
+//  - t.is(a, b);
+//  - github.com/avajs/ava#assertions
+
+test('addTodo creates todo', t => {
+  const title = 'Hello';
+  const deps = {
+    getUid: () => 'uid',
+    now: () => 1,
+  };
+  const action = actions.addTodo(title)(deps);
+  t.deepEqual(action, {
+    type: 'ADD_TODO',
+    payload: {
+      createdAt: 1,
+      id: 'uid',
+      title: 'Hello',
+    },
   });
 });
