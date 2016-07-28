@@ -1,14 +1,13 @@
 {
   "presets": ["es2015-node6", "react", "stage-1"],
   "plugins": [
-    ['transform-runtime', { polyfill: false, regenerator: false }],
-    'add-module-exports',
+    ["transform-runtime", { "polyfill": false, "regenerator": false }],
+    "add-module-exports",
   ],
   "env": {
     "production": {
       "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
+        "transform-react-constant-elements"
       ]
     }
   }
