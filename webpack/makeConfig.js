@@ -86,8 +86,7 @@ export default function makeConfig(options) {
               },
               production: {
                 plugins: [
-                  'transform-react-constant-elements',
-                  'transform-react-inline-elements',
+                  'transform-react-constant-elements'
                 ],
               },
             },
