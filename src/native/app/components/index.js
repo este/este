@@ -1,8 +1,10 @@
+import Alert from './Alert.react';
 import Button from './Button.react';
 import CenteredContainer from './CenteredContainer.react';
 import Checkbox from './Checkbox.react';
 import Container from './Container.react';
 import Text from './Text.react';
+import TextInput from './TextInput.react';
 import {
   FormattedDate,
   FormattedMessage,
@@ -13,6 +15,7 @@ import {
 } from './formatted';
 
 export {
+  Alert,
   Button,
   CenteredContainer,
   Checkbox,
@@ -24,4 +27,5 @@ export {
   FormattedRelative,
   FormattedTime,
   Text,
+  TextInput,
 };

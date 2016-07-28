@@ -1,23 +1,31 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-// import buttonsMessages from '../../common/app/buttonsMessages';
+import ValidationError from '../../common/lib/validation/ValidationError';
+import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import theme from '../../common/app/theme';
-// import { Button } from '../app/components';
-import { FormattedMessage } from '../app/components';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { FormattedMessage, Button, TextInput } from '../app/components';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { injectIntl, intlShape } from 'react-intl';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
 
 const styles = StyleSheet.create({
-  input: {
-    height: theme.fontSizeH5,
-    marginBottom: theme.fontSize * .75,
-  },
   legend: {
-    fontSize: theme.fontSizeH3,
+    fontSize: theme.fontSizeH4,
     marginBottom: theme.fontSize * 2,
+    marginTop: theme.fontSize * 4,
+    textAlign: 'center',
+  },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginVertical: theme.fontSize * 2,
+  },
+  recoveryEmailSent: {
+    color: theme.brandInfo,
   },
 });
 
@@ -26,6 +34,7 @@ class Email extends Component {
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     resetPassword: PropTypes.func.isRequired,
     signIn: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
@@ -34,9 +43,10 @@ class Email extends Component {
 
   constructor() {
     super();
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onSignUpClick = this.onSignUpClick.bind(this);
-    this.onForgetPasswordClick = this.onForgetPasswordClick.bind(this);
+    this.onForgetPasswordPress = this.onForgetPasswordPress.bind(this);
+    this.onResetPasswordPress = this.onResetPasswordPress.bind(this);
+    this.onSignInViaPasswordPress = this.onSignInViaPasswordPress.bind(this);
+    this.onSignUpPress = this.onSignUpPress.bind(this);
     // Note we are using the component state instead of the app state, because
     // the component state is the right place for an ephemeral UI state.
     this.state = {
@@ -45,100 +55,111 @@ class Email extends Component {
     };
   }
 
-  onFormSubmit() {
-    // e.preventDefault();
-    // if (this.state.forgetPasswordIsShown) {
-    //   this.resetPassword();
-    // } else {
-    //   this.signInViaPassword();
-    // }
+  async onSignInViaPasswordPress() {
+    const { fields, signIn } = this.props;
+    try {
+      await signIn('password', fields.$values());
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        // TODO: Highlight or focus invalid field universally via ref.
+        return;
+      }
+      throw error;
+    }
   }
 
-  async onSignUpClick() {
-    // const { fields, signUp } = this.props;
-    // try {
-    //   await signUp('password', fields.$values());
-    // } catch (error) {
-    //   if (error instanceof ValidationError) {
-    //     focusInvalidField(this, error);
-    //     return;
-    //   }
-    //   throw error;
-    // }
+  async onSignUpPress() {
+    const { fields, signUp } = this.props;
+    try {
+      await signUp('password', fields.$values());
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        // TODO: Highlight or focus invalid field universally via ref.
+        return;
+      }
+      throw error;
+    }
   }
 
-  onForgetPasswordClick() {
-    // const { forgetPasswordIsShown } = this.state;
-    // this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
+  onForgetPasswordPress() {
+    const { forgetPasswordIsShown } = this.state;
+    this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
   }
 
-  async resetPassword() {
-    // const { fields, resetPassword } = this.props;
-    // const { email } = fields.$values();
-    // try {
-    //   await resetPassword(email);
-    // } catch (error) {
-    //   if (error instanceof ValidationError) {
-    //     focusInvalidField(this, error);
-    //     return;
-    //   }
-    //   throw error;
-    // }
-    // this.setState({
-    //   forgetPasswordIsShown: false,
-    //   recoveryEmailSent: true
-    // });
-  }
-
-  async signInViaPassword() {
-    // const { fields, signIn } = this.props;
-    // try {
-    //   await signIn('password', fields.$values());
-    // } catch (error) {
-    //   if (error instanceof ValidationError) {
-    //     focusInvalidField(this, error);
-    //     return;
-    //   }
-    //   throw error;
-    // }
+  async onResetPasswordPress() {
+    const { fields, resetPassword } = this.props;
+    const { email } = fields.$values();
+    try {
+      await resetPassword(email);
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        // TODO: Highlight or focus invalid field universally via ref.
+        return;
+      }
+      throw error;
+    }
+    this.setState({
+      forgetPasswordIsShown: false,
+      recoveryEmailSent: true,
+    });
   }
 
   render() {
-    const { fields, style } = this.props;
-    const { forgetPasswordIsShown } = this.state;
-    // const legendMessage = forgetPasswordIsShown
-    //   ? emailMessages.passwordRecoveryLegend
-    //   : emailMessages.emailLegend;
+    const { disabled, fields, intl, style } = this.props;
+    const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
+    const legendMessage = forgetPasswordIsShown
+      ? emailMessages.passwordRecoveryLegend
+      : emailMessages.emailLegend;
 
     return (
       <View style={style}>
-        <FormattedMessage {...emailMessages.emailLegend} style={styles.legend} />
-        <FormattedMessage {...emailMessages.emailPlaceholder}>
-          {message =>
-            <TextInput
-              {...fields.email}
-              autoCapitalize="none"
-              autoCorrect={false}
-              maxLength={100}
-              placeholder={message}
-              placeholderTextColor={theme.placeholderTextColor}
-              style={styles.input}
-            />
-          }
-        </FormattedMessage>
+        <FormattedMessage {...legendMessage} style={styles.legend} />
+        <TextInput
+          {...fields.email}
+          autoCapitalize="none"
+          autoCorrect={false}
+          editable={!disabled}
+          maxLength={100}
+          placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
+        />
         {!forgetPasswordIsShown &&
-          <FormattedMessage {...emailMessages.passwordPlaceholder}>
-            {message =>
-              <TextInput
-                {...fields.password}
-                maxLength={1000}
-                placeholder={message}
-                placeholderTextColor={theme.placeholderTextColor}
-                secureTextEntry
-                style={styles.input}
+          <TextInput
+            {...fields.password}
+            editable={!disabled}
+            maxLength={1000}
+            placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
+            secureTextEntry
+          />
+        }
+        {!forgetPasswordIsShown ?
+          <View>
+            <View style={styles.buttons}>
+              <Button disabled={disabled} onPress={this.onSignInViaPasswordPress}>
+                <FormattedMessage {...buttonsMessages.signIn} />
+              </Button>
+              <Button disabled={disabled} onPress={this.onSignUpPress}>
+                <FormattedMessage {...buttonsMessages.signUp} />
+              </Button>
+              <Button disabled={disabled} onPress={this.onForgetPasswordPress}>
+                <FormattedMessage {...emailMessages.passwordForgotten} />
+              </Button>
+            </View>
+            {recoveryEmailSent &&
+              <FormattedMessage
+                {...emailMessages.recoveryEmailSent}
+                style={styles.recoveryEmailSent}
               />
             }
-          </FormattedMessage>
+          </View>
+        :
+          <View style={styles.buttons}>
+            <Button disabled={disabled} onPress={this.onResetPasswordPress}>
+              <FormattedMessage {...emailMessages.resetPassword} />
+            </Button>
+            <Button disabled={disabled} onPress={this.onForgetPasswordPress}>
+              <FormattedMessage {...buttonsMessages.dismiss} />
+            </Button>
+          </View>
         }
       </View>
     );
@@ -152,7 +173,7 @@ class Email extends Component {
     //             <FormattedMessage {...buttonsMessages.signUp} />
     //           </button>
     //           <button
-    //             onClick={this.onForgetPasswordClick}
+    //             onClick={this.onForgetPasswordPress}
     //             type="button"
     //           >
     //             <FormattedMessage {...emailMessages.passwordForgotten} />
@@ -165,13 +186,7 @@ class Email extends Component {
     //         </div>
     //       :
     //         <div className="buttons">
-    //           <button>
-    //             <FormattedMessage {...emailMessages.resetPassword} />
-    //           </button>
-    //           <button
-    //             onClick={this.onForgetPasswordClick}
-    //             type="button"
-    //           ><FormattedMessage {...buttonsMessages.dismiss} /></button>
+
     //         </div>
     //       }
     //     </fieldset>
@@ -180,6 +195,8 @@ class Email extends Component {
   }
 
 }
+
+Email = injectIntl(Email);
 
 Email = fields(Email, {
   path: ['auth', 'email'],

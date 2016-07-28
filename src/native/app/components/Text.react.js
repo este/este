@@ -6,7 +6,9 @@ import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
   text: {
     color: theme.textColor,
+    fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
+    lineHeight: theme.lineHeight,
   },
 });
 

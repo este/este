@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   button: {
-    // borderWidth: 1, borderColor: 'red', // To check the touchable area.
+    // borderWidth: 1, // To check the touchable area.
     flex: 1,
     alignItems: 'center',
     padding: theme.fontSize,

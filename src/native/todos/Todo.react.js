@@ -1,8 +1,8 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import theme from '../../common/app/theme';
-import { Checkbox } from '../app/components';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Checkbox, TextInput } from '../app/components';
+import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   todo: {
@@ -10,17 +10,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  input: {
-    color: theme.textColor,
-    flex: 1,
-    fontSize: theme.fontSize,
-    paddingRight: theme.fontSizeH5,
-  },
   checkbox: {
     height: theme.fontSizeH5,
     marginLeft: theme.fontSizeH5,
     marginRight: theme.fontSizeH5,
     width: theme.fontSizeH5,
+  },
+  input: {
+    flex: 1,
+    alignSelf: 'center',
   },
 });
 

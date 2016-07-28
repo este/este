@@ -2,11 +2,12 @@ import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../../common/app/theme';
-import { FormattedMessage } from 'react-intl';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { TextInput } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { injectIntl, intlShape } from 'react-intl';
 
 const styles = StyleSheet.create({
   newTodo: {
@@ -18,10 +19,8 @@ const styles = StyleSheet.create({
   input: {
     color: theme.inverseTextColor,
     flex: 1,
-    fontFamily: 'Helvetica Neue',
     fontSize: theme.fontSizeH5,
-    marginLeft: theme.fontSize,
-    marginRight: theme.fontSize,
+    marginHorizontal: theme.fontSize,
   },
 });
 
@@ -30,6 +29,7 @@ class NewTodo extends Component {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
   };
 
   constructor() {
@@ -50,29 +50,27 @@ class NewTodo extends Component {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, intl: { formatMessage } } = this.props;
 
     return (
       <View style={styles.newTodo}>
-        <FormattedMessage {...newTodoMessages.placeholder}>
-          {message =>
-            <TextInput
-              {...fields.title}
-              autoCorrect={false}
-              maxLength={100} // React Native needs explicit maxLength.
-              onEndEditing={this.onTextInputEndEditing}
-              onSubmitEditing={this.onSubmitEditing}
-              placeholder={message}
-              placeholderTextColor={'#cce9f2'}
-              style={styles.input}
-            />
-          }
-        </FormattedMessage>
+        <TextInput
+          {...fields.title}
+          autoCorrect={false}
+          maxLength={100}
+          onEndEditing={this.onTextInputEndEditing}
+          onSubmitEditing={this.onSubmitEditing}
+          placeholder={formatMessage(newTodoMessages.placeholder)}
+          placeholderTextColor={'#cce9f2'}
+          style={styles.input}
+        />
       </View>
     );
   }
 
 }
+
+NewTodo = injectIntl(NewTodo);
 
 NewTodo = fields(NewTodo, {
   path: 'newTodo',

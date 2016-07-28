@@ -68,6 +68,7 @@ class App extends Component {
     const { sideMenuOpen } = this.state;
     return (
       <Container>
+        {/* TODO: App is offline <Alert /> */}
         <StatusBar hidden={sideMenuOpen} />
         <Header
           title={this.getTitle(route)}

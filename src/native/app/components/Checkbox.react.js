@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, { PropTypes } from 'react';
-import { Button } from './index';
+import { Button } from './';
 import { Image, View } from 'react-native';
 
 export default class Checkbox extends Component {

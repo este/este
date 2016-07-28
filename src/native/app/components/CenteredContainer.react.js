@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
-import Container from './Container.react';
 import React, { PropTypes } from 'react';
+import { Container } from './';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({

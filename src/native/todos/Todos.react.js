@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizeH5,
   },
   icon: {
-    height: 70,
+    height: 60,
     marginBottom: 10,
-    width: 70,
+    width: 60,
   },
   row: {
     borderBottomColor: '#f1f1f1',
     borderBottomWidth: 1,
-    height: 63,
+    height: 53,
   },
 });
 

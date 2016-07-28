@@ -2,7 +2,6 @@ import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import theme from '../../common/app/theme';
 import { FormattedMessage } from '../app/components';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
@@ -54,11 +53,10 @@ class Social extends Component {
   }
 
   render() {
-    const { disabled, style } = this.props;
-    const opacity = disabled ? theme.disabledOpacity : 1;
+    const { style } = this.props;
 
     return (
-      <View style={[style, { opacity }]}>
+      <View style={style}>
         <SocialLoginButton
           backgroundColor="#3b5998"
           message={buttonsMessages.facebookSignIn}
