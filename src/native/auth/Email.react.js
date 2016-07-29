@@ -14,8 +14,7 @@ import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/a
 const styles = StyleSheet.create({
   legend: {
     fontSize: theme.fontSizeH4,
-    marginBottom: theme.fontSize * 2,
-    marginTop: theme.fontSize * 4,
+    marginVertical: theme.fontSize * 2,
     textAlign: 'center',
   },
   buttons: {
@@ -33,6 +32,7 @@ class Email extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,
+    error: PropTypes.instanceOf(Error),
     fields: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
     resetPassword: PropTypes.func.isRequired,
@@ -60,10 +60,7 @@ class Email extends Component {
     try {
       await signIn('password', fields.$values());
     } catch (error) {
-      if (error instanceof ValidationError) {
-        // TODO: Highlight or focus invalid field universally via ref.
-        return;
-      }
+      if (error instanceof ValidationError) return;
       throw error;
     }
   }
@@ -73,10 +70,7 @@ class Email extends Component {
     try {
       await signUp('password', fields.$values());
     } catch (error) {
-      if (error instanceof ValidationError) {
-        // TODO: Highlight or focus invalid field universally via ref.
-        return;
-      }
+      if (error instanceof ValidationError) return;
       throw error;
     }
   }
@@ -92,10 +86,7 @@ class Email extends Component {
     try {
       await resetPassword(email);
     } catch (error) {
-      if (error instanceof ValidationError) {
-        // TODO: Highlight or focus invalid field universally via ref.
-        return;
-      }
+      if (error instanceof ValidationError) return;
       throw error;
     }
     this.setState({
@@ -105,7 +96,7 @@ class Email extends Component {
   }
 
   render() {
-    const { disabled, fields, intl, style } = this.props;
+    const { disabled, error, fields, intl, style } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
     const legendMessage = forgetPasswordIsShown
       ? emailMessages.passwordRecoveryLegend
@@ -119,6 +110,7 @@ class Email extends Component {
           autoCapitalize="none"
           autoCorrect={false}
           editable={!disabled}
+          invalid={ValidationError.isInvalid(error, 'email')}
           maxLength={100}
           placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
         />
@@ -126,6 +118,7 @@ class Email extends Component {
           <TextInput
             {...fields.password}
             editable={!disabled}
+            invalid={ValidationError.isInvalid(error, 'password')}
             maxLength={1000}
             placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
             secureTextEntry
@@ -163,35 +156,6 @@ class Email extends Component {
         }
       </View>
     );
-
-    //       {!forgetPasswordIsShown ?
-    //         <div className="buttons">
-    //           <button>
-    //             <FormattedMessage {...buttonsMessages.signIn} />
-    //           </button>
-    //           <button onClick={this.onSignUpClick} type="button">
-    //             <FormattedMessage {...buttonsMessages.signUp} />
-    //           </button>
-    //           <button
-    //             onClick={this.onForgetPasswordPress}
-    //             type="button"
-    //           >
-    //             <FormattedMessage {...emailMessages.passwordForgotten} />
-    //           </button>
-    //           {recoveryEmailSent &&
-    //             <p>
-    //               <FormattedMessage {...emailMessages.recoveryEmailSent} />
-    //             </p>
-    //           }
-    //         </div>
-    //       :
-    //         <div className="buttons">
-
-    //         </div>
-    //       }
-    //     </fieldset>
-    //   </form>
-    // );
   }
 
 }
@@ -205,4 +169,5 @@ Email = fields(Email, {
 
 export default connect(state => ({
   disabled: state.auth.formDisabled,
+  error: state.auth.error,
 }), { resetPassword, signIn, signUp })(Email);

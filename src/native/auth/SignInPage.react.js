@@ -14,7 +14,7 @@ import { firebaseMessages } from '../../common/lib/redux-firebase';
 const styles = StyleSheet.create({
   email: {
     marginBottom: theme.fontSize * 2,
-    width: theme.fontSize * 14,
+    width: theme.fontSize * 16,
   },
   social: {
     alignSelf: 'center',

@@ -13,14 +13,17 @@ const styles = StyleSheet.create({
   newTodo: {
     backgroundColor: theme.brandPrimary,
     borderTopColor: theme.lighten(theme.brandPrimary),
-    borderTopWidth: 1,
-    height: theme.fontSize * 4,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
-  input: {
+  textInputInput: {
     color: theme.inverseTextColor,
-    flex: 1,
     fontSize: theme.fontSizeH5,
     marginHorizontal: theme.fontSize,
+  },
+  textInputView: {
+    borderBottomWidth: 0,
+    marginBottom: 0,
+    paddingVertical: theme.fontSize * .75,
   },
 });
 
@@ -56,13 +59,13 @@ class NewTodo extends Component {
       <View style={styles.newTodo}>
         <TextInput
           {...fields.title}
-          autoCorrect={false}
           maxLength={100}
           onEndEditing={this.onTextInputEndEditing}
           onSubmitEditing={this.onSubmitEditing}
           placeholder={formatMessage(newTodoMessages.placeholder)}
           placeholderTextColor={'#cce9f2'}
-          style={styles.input}
+          viewStyle={styles.textInputView}
+          inputStyle={styles.textInputInput}
         />
       </View>
     );

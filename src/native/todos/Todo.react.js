@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
     marginRight: theme.fontSizeH5,
     width: theme.fontSizeH5,
   },
-  input: {
-    flex: 1,
+  textInputView: {
     alignSelf: 'center',
+    borderBottomWidth: 0,
+    flex: 1,
+    marginBottom: 0,
   },
 });
 
@@ -50,7 +52,7 @@ export default class Todo extends Component {
         />
         <TextInput
           editable={false}
-          style={styles.input}
+          viewStyle={styles.textInputView}
           value={todo.title}
         />
       </View>
