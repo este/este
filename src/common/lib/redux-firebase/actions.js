@@ -59,12 +59,22 @@ const emailSignIn = async (firebaseAuth, validate, { email, password }) => {
   }
 };
 
+// stackoverflow.com/a/33997042/233902
+const isFacebookApp = () => {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
+};
+
 const socialSignIn = async (firebaseAuth, providerName) => {
   invariant(providerName === 'facebook',
    `${providerName} provider is not yet supported.`);
   // firebase.google.com/docs/auth/web/facebook-login
   const provider = new firebaseAuth.FacebookAuthProvider();
   provider.addScope(facebookPermissions.join(','));
+  // github.com/steida/firebase/issues/15
+  if (isFacebookApp()) {
+    return await firebaseAuth().signInWithRedirect(provider);
+  }
   try {
     return await firebaseAuth().signInWithPopup(provider);
   } catch (error) {
