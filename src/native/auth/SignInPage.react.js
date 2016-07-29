@@ -1,6 +1,5 @@
-import Component from 'react-pure-render/component';
 import Email from './Email.react';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import Social from './Social.react';
 import ValidationError from '../../common/lib/validation/ValidationError';
 import authErrorMessages from '../../common/auth/errorMessages';
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class SignInPage extends Component {
+class SignInPage extends PureComponent {
 
   static propTypes = {
     error: PropTypes.instanceOf(Error),

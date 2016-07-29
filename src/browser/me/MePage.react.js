@@ -1,8 +1,7 @@
 import './MePage.scss';
-import Component from 'react-pure-render/component';
 import Gravatar from 'react-gravatar';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import SignOut from '../auth/SignOut.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage, defineMessages } from 'react-intl';
@@ -24,7 +23,7 @@ const messages = defineMessages({
   },
 });
 
-class MePage extends Component {
+class MePage extends PureComponent {
 
   static propTypes = {
     children: PropTypes.object,

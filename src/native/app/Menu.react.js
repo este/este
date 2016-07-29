@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from '../../common/app/theme';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Menu extends Component {
+class Menu extends PureComponent {
 
   static propTypes = {
     intl: intlShape.isRequired,

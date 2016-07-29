@@ -1,6 +1,5 @@
-import Component from 'react-pure-render/component';
 import Icon from 'react-native-vector-icons/Ionicons';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../common/app/theme';
 import { Button, Text } from './components';
 import { StyleSheet, View } from 'react-native';
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Header extends Component {
+export default class Header extends PureComponent {
 
   static propTypes = {
     title: PropTypes.string.isRequired,

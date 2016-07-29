@@ -1,8 +1,7 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../../common/app/theme';
-import { FormattedMessage, Text } from './';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { FormattedMessage, Text } from './';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Alert extends Component {
+export default class Alert extends PureComponent {
 
   static propTypes = {
     brand: PropTypes.string,

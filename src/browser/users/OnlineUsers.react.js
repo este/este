@@ -1,7 +1,6 @@
 import './OnlineUsers.scss';
-import Component from 'react-pure-render/component';
 import Gravatar from 'react-gravatar';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { Loading } from '../app/components';
 import { connect } from 'react-redux';
 import { onUsersPresence } from '../../common/users/actions';
@@ -31,7 +30,7 @@ User.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-class OnlineUsers extends Component {
+class OnlineUsers extends PureComponent {
 
   static propTypes = {
     users: PropTypes.object,

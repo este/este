@@ -1,12 +1,11 @@
-import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import SignIn from './SignIn.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { locationShape } from 'react-router';
 
-export default class SignInPage extends Component {
+export default class SignInPage extends PureComponent {
 
   static propTypes = {
     location: locationShape,

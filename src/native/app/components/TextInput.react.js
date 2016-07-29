@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../../common/app/theme';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AppTextInput extends Component {
+export default class AppTextInput extends PureComponent {
 
   static propTypes = {
     invalid: PropTypes.bool,

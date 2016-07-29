@@ -1,13 +1,12 @@
 import './SignIn.scss';
-import Component from 'react-pure-render/component';
 import Email from './Email.react';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import SignInError from './SignInError.react';
 import Social from './Social.react';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 
-class SignIn extends Component {
+class SignIn extends PureComponent {
 
   static propTypes = {
     location: locationShape,

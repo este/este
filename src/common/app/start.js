@@ -1,11 +1,10 @@
 import * as actions from './actions';
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 
 export default function start(WrappedComponent) {
-  class Start extends Component {
+  class Start extends PureComponent {
 
     static propTypes = {
       intl: PropTypes.object.isRequired,

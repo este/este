@@ -1,7 +1,6 @@
-import Component from 'react-pure-render/component';
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
@@ -11,7 +10,7 @@ import { Navigator, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
-class App extends Component {
+class App extends PureComponent {
 
   static propTypes = {
     intl: intlShape.isRequired,

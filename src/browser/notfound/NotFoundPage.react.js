@@ -1,6 +1,5 @@
-import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { Link } from 'react-router';
 
@@ -23,7 +22,7 @@ const messages = defineMessages({
   },
 });
 
-export default class NotFoundPage extends Component {
+export default class NotFoundPage extends PureComponent {
 
   render() {
     return (

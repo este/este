@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../common/app/theme';
 import {
   CenteredContainer,
@@ -10,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
-class IntlPage extends Component {
+class IntlPage extends PureComponent {
 
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,

@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { CenteredContainer, FormattedMessage } from '../app/components';
 import { defineMessages } from 'react-intl';
 
@@ -14,7 +13,7 @@ const messages = defineMessages({
   },
 });
 
-export default class HomePage extends Component {
+export default class HomePage extends PureComponent {
 
   render() {
     return (

@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../../common/app/theme';
 import { StyleSheet, View } from 'react-native';
 
@@ -10,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Container extends Component {
+export default class Container extends PureComponent {
 
   static propTypes = {
     children: PropTypes.node,

@@ -1,9 +1,8 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { Button } from './';
 import { Image, View } from 'react-native';
 
-export default class Checkbox extends Component {
+export default class Checkbox extends PureComponent {
 
   static propTypes = {
     checked: PropTypes.bool,

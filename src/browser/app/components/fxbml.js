@@ -3,12 +3,11 @@
 //  https://gist.github.com/steida/04a39dfa1043e1451044ba8370743b0c
 //  https://gist.github.com/steida/b19a1858e38007651a616ae44244ca52
 
-import Component from 'react-pure-render/component';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function xfbml(WrappedComponent) {
-  return class Wrapper extends Component {
+  return class Wrapper extends PureComponent {
 
     parseXfbmlAsap(el) {
       if (window.FB) {

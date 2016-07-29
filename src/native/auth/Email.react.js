@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import ValidationError from '../../common/lib/validation/ValidationError';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Email extends Component {
+class Email extends PureComponent {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,

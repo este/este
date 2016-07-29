@@ -1,9 +1,8 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import classnames from 'classnames';
 import { fields } from '../../common/lib/redux-fields';
 
-class DynamicField extends Component {
+class DynamicField extends PureComponent {
 
   static propTypes = {
     fields: PropTypes.object.isRequired,

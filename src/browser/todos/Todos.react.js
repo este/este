@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import Todo from './Todo.react';
 import todosMessages from '../../common/todos/todosMessages';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +6,7 @@ import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 
 // Container component.
-export class Todos extends Component {
+export class Todos extends PureComponent {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,

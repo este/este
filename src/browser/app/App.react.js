@@ -1,9 +1,8 @@
 import './App.scss';
-import Component from 'react-pure-render/component';
 import Footer from './Footer.react';
 import Header from './Header.react';
 import Helmet from 'react-helmet';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { connect } from 'react-redux';
@@ -22,7 +21,7 @@ const bootstrap4Metas = [
   },
 ];
 
-class App extends Component {
+class App extends PureComponent {
 
   static propTypes = {
     children: PropTypes.object.isRequired,

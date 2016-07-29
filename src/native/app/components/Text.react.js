@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../../common/app/theme';
 import { StyleSheet, Text } from 'react-native';
 
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
 // Normalize multiline strings because Text component preserves spaces.
 const normalizeMultilineString = message => message.replace(/ +/g, ' ').trim();
 
-export default class AppText extends Component {
+export default class AppText extends PureComponent {
 
   static propTypes = {
     children: PropTypes.node,

@@ -1,8 +1,7 @@
 import App from './app/App.react';
-import Component from 'react-pure-render/component';
 import FBSDK from 'react-native-fbsdk';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
-import React from 'react';
+import React, { PureComponent } from 'react';
 import configureStore from '../common/configureStore';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import { AppRegistry, Platform } from 'react-native';
@@ -35,7 +34,7 @@ const store = configureStore({
   platformDeps: { FBSDK, createStorageEngine },
 });
 
-class Root extends Component {
+class Root extends PureComponent {
   render() {
     return (
       <Provider store={store}>

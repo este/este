@@ -1,12 +1,11 @@
 import './Buttons.scss';
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 
-class Buttons extends Component {
+class Buttons extends PureComponent {
 
   static propTypes = {
     addHundredTodos: PropTypes.func.isRequired,
