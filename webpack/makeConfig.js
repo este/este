@@ -73,13 +73,15 @@ export default function makeConfig(options) {
           loader: 'babel',
           query: {
             cacheDirectory: true,
-            plugins: [
-              // 'transform-runtime' should do as little as possible.
-              // https://github.com/este/este/issues/862
-              ['transform-runtime', { polyfill: false, regenerator: false }],
-              'add-module-exports',
-            ],
             presets: ['es2015', 'react', 'stage-1'],
+            plugins: [
+              ['transform-runtime', {
+                helpers: false,
+                polyfill: false,
+                regenerator: false,
+              }],
+              "add-module-exports",
+            ],
             env: {
               development: {
                 presets: ['react-hmre'],
