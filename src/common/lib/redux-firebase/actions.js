@@ -114,24 +114,29 @@ const onAuth = user => ({ dispatch }) => {
 
 // firebase.google.com/docs/database/web/offline-capabilities#section-sample
 const createPresenceMonitor = () => {
+  let connections = [];
   let off = null;
 
   return (firebase, firebaseDatabase, user) => {
-    if (!user) return;
+    if (!user) {
+      connections.forEach(connection => connection.remove());
+      connections = [];
+      return;
+    }
     const connectedRef = firebase.child('.info/connected');
-    const presenceRef = firebase.child(`users-presence/${user.id}`);
-    if (off) off();
     const handler = snap => {
       if (!snap.val()) return;
       const userWithoutEmail = user.toJS();
       delete userWithoutEmail.email;
-      presenceRef
+      const connectionRef = firebase.child(`users-presence/${user.id}`)
         .push({
           authenticatedAt: firebaseDatabase.ServerValue.TIMESTAMP,
           user: userWithoutEmail,
-        })
-        .onDisconnect().remove();
+        });
+      connections.push(connectionRef);
+      connectionRef.onDisconnect().remove();
     };
+    if (off) off();
     off = () => connectedRef.off('value', handler);
     connectedRef.on('value', handler);
   };
