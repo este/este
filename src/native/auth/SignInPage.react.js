@@ -41,7 +41,7 @@ class SignInPage extends PureComponent {
   }
 
   getMessageAndValuesFromError(error) {
-    if (!(error instanceof ValidationError)) return [];
+    if (!(error instanceof ValidationError)) return {};
     const message =
       authErrorMessages[error.name] ||
       firebaseMessages[error.name] ||
