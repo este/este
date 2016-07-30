@@ -80,7 +80,7 @@ export default function makeConfig(options) {
                 polyfill: false,
                 regenerator: false,
               }],
-              "add-module-exports",
+              'add-module-exports',
             ],
             env: {
               development: {
