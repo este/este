@@ -91,7 +91,7 @@ npm install
 ## Start Development
 
 - run `gulp`
-- point your browser to [localhost:8000](http://localhost:8000)
+- point your browser to [localhost:3000](http://localhost:3000)
 - build something beautiful
 
 React Native: [Getting Started](https://facebook.github.io/react-native/docs/getting-started.html)

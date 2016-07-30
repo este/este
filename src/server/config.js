@@ -25,7 +25,7 @@ nconf.defaults({
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',
   locales: ['cs', 'de', 'en', 'es', 'fr', 'pt', 'ro'],
-  port: process.env.PORT || 8000,
+  port: process.env.PORT || 3000,
   // Enable hot reload on remote device. Note it prevents offline testing,
   // because it depends on ip.address(), which doesn't work with disabled wifi.
   // How do we access a website running on localhost from mobile browser?

@@ -15,7 +15,7 @@ gulp.task('to-html', done => {
   process.env.IS_SERVERLESS = true;
 
   const fetch = url => new Promise((resolve, reject) => {
-    require('http').get({ host: 'localhost', path: url, port: 8000 }, res => {
+    require('http').get({ host: 'localhost', path: url, port: 3000 }, res => {
       // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
       res.setEncoding('utf8');
       let body = '';
@@ -59,7 +59,7 @@ gulp.task('to-html', done => {
         proc.kill();
         done();
         console.log('App has been rendered to /build directory.');
-        console.log('OSX tip: cd build && python -m SimpleHTTPServer 8000');
+        console.log('OSX tip: cd build && python -m SimpleHTTPServer 3000');
       }
     });
   });
