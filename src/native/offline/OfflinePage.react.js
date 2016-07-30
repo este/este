@@ -1,9 +1,8 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { connect } from 'react-redux';
 
-class OfflinePage extends Component {
+class OfflinePage extends PureComponent {
 
   static propTypes = {
     online: PropTypes.bool.isRequired,

@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../../common/app/theme';
 import { StyleSheet, View } from 'react-native';
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class NewTodo extends Component {
+class NewTodo extends PureComponent {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,

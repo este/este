@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import theme from '../../common/app/theme';
 import { Checkbox, TextInput } from '../app/components';
 import { StyleSheet, View } from 'react-native';
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Todo extends Component {
+export default class Todo extends PureComponent {
 
   static propTypes = {
     todo: PropTypes.object.isRequired,

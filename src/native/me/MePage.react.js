@@ -1,12 +1,11 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import SignOut from '../auth/SignOut.react';
 import routes from '../routes';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-class MePage extends Component {
+class MePage extends PureComponent {
 
   static propTypes = {
     viewer: PropTypes.object,

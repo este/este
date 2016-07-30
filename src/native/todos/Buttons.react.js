@@ -1,5 +1,4 @@
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../../common/app/theme';
 import { Button, FormattedMessage } from '../app/components';
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class TodoButtons extends Component {
+class TodoButtons extends PureComponent {
 
   static propTypes = {
     addHundredTodos: PropTypes.func.isRequired,

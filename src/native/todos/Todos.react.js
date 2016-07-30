@@ -1,6 +1,5 @@
 import Buttons from './Buttons.react';
-import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import Todo from './Todo.react';
 import theme from '../../common/app/theme';
 import todosMessages from '../../common/todos/todosMessages';
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Todos extends Component {
+class Todos extends PureComponent {
 
   static propTypes = {
     todos: PropTypes.object.isRequired,
