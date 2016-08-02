@@ -1,10 +1,10 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../theme';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const styles = StyleSheet.create({
   view: {
-    borderBottomColor: theme.lighten(theme.placeholderTextColor),
+    borderBottomColor: theme.light(theme.placeholderTextColor),
     borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: theme.fontSize * 1.5,
   },
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AppTextInput extends PureComponent {
+export default class AppTextInput extends Component {
 
   static propTypes = {
     invalid: PropTypes.bool,

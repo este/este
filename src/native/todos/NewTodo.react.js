@@ -1,6 +1,6 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import theme from '../../common/app/theme';
+import theme from '../app/theme';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
@@ -11,7 +11,7 @@ import { injectIntl, intlShape } from 'react-intl';
 const styles = StyleSheet.create({
   newTodo: {
     backgroundColor: theme.brandPrimary,
-    borderTopColor: theme.lighten(theme.brandPrimary),
+    borderTopColor: theme.light(theme.brandPrimary),
     borderTopWidth: StyleSheet.hairlineWidth,
   },
   textInputInput: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class NewTodo extends PureComponent {
+class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,

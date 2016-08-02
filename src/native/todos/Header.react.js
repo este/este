@@ -1,5 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../app/theme';
 import { FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends PureComponent {
+class Header extends Component {
 
   static propTypes = {
     todos: PropTypes.object.isRequired,

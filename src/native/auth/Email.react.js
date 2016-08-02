@@ -1,8 +1,8 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ValidationError from '../../common/lib/validation/ValidationError';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
-import theme from '../../common/app/theme';
+import theme from '../app/theme';
 import { FormattedMessage, Button, TextInput } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Email extends PureComponent {
+class Email extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,

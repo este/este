@@ -1,12 +1,12 @@
 import * as reactIntl from 'react-intl';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Text from './Text.react';
 
 // Create react-intl component which work in the React Native.
 // It replaces the browser span with the styleable native View.
 // github.com/yahoo/react-intl/issues/119
 const native = WrappedComponent =>
-  class Native extends PureComponent {
+  class Native extends Component {
 
     static propTypes = {
       children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

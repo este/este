@@ -161,10 +161,6 @@ export default [
     "defaultMessage": "<p>\n        Ahoy, this is the\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
   },
   {
-    "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Press CMD+R to reload\n      Press CMD+D for debug menu",
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "react-intl demonstration",
   },

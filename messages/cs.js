@@ -13,14 +13,6 @@ export default [
     "defaultMessage": "Smazat",
   },
   {
-    "id": "app.links.signIn",
-    "defaultMessage": "Přihlášení",
-  },
-  {
-    "id": "auth.email.emailLegend",
-    "defaultMessage": "Email",
-  },
-  {
     "id": "app.buttons.dismiss",
     "defaultMessage": "Zrušit",
   },
@@ -29,16 +21,20 @@ export default [
     "defaultMessage": "Editovat",
   },
   {
+    "id": "app.buttons.save",
+    "defaultMessage": "Uložit",
+  },
+  {
+    "id": "app.buttons.signIn",
+    "defaultMessage": "Přihlášení",
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Přihlášení",
   },
   {
     "id": "app.buttons.signOut",
     "defaultMessage": "Odhlásit se",
-  },
-  {
-    "id": "app.buttons.save",
-    "defaultMessage": "Uložit",
   },
   {
     "id": "app.buttons.signUp",
@@ -58,13 +54,7 @@ export default [
   },
   {
     "id": "app.FieldError.required",
-    "defaultMessage": `{prop, select,
-      description {Prosím zadejte popis.}
-      email {Prosím zadejte email.}
-      name {Prosím zadejte jméno.}
-      password {Prosím zadejte heslo.}
-      other {Prosím vyplnit.}
-    }`,
+    "defaultMessage": "{prop, select,\n      description {Prosím zadejte popis.}\n      email {Prosím zadejte email.}\n      name {Prosím zadejte jméno.}\n      password {Prosím zadejte heslo.}\n      other {Prosím vyplnit.}\n    }",
   },
   {
     "id": "app.links.fields",
@@ -83,10 +73,6 @@ export default [
     "defaultMessage": "Lokalizace",
   },
   {
-    "id": "app.buttons.signIn",
-    "defaultMessage": "Přihlášení",
-  },
-  {
     "id": "app.links.me",
     "defaultMessage": "Já",
   },
@@ -95,8 +81,40 @@ export default [
     "defaultMessage": "Offline",
   },
   {
+    "id": "app.links.signIn",
+    "defaultMessage": "Přihlášení",
+  },
+  {
     "id": "app.links.todos",
     "defaultMessage": "Úkoly",
+  },
+  {
+    "id": "auth.email.emailLegend",
+    "defaultMessage": "Email",
+  },
+  {
+    "id": "auth.email.emailPlaceholder",
+    "defaultMessage": "tvuj@email.com",
+  },
+  {
+    "id": "auth.email.passwordForgotten",
+    "defaultMessage": "Zapomenuté heslo",
+  },
+  {
+    "id": "auth.email.passwordPlaceholder",
+    "defaultMessage": "heslo",
+  },
+  {
+    "id": "auth.email.passwordRecoveryLegend",
+    "defaultMessage": "Obnovení hesla",
+  },
+  {
+    "id": "auth.email.recoveryEmailSent",
+    "defaultMessage": "Email pro obnovení hesla odeslán.",
+  },
+  {
+    "id": "auth.email.resetPassword",
+    "defaultMessage": "Reset hesla",
   },
   {
     "id": "auth.signInError.email",
@@ -109,6 +127,10 @@ export default [
   {
     "id": "auth.signInError.simplePassword",
     "defaultMessage": "Heslo musí obsahovat alespoň {minLength} znaků.",
+  },
+  {
+    "id": "auth.social.facebookSignIn",
+    "defaultMessage": "Přihlášení přes Facebook",
   },
   {
     "id": "fields.page.h2",
@@ -135,34 +157,6 @@ export default [
     "defaultMessage": "Nesprávný uživatel.",
   },
   {
-    "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Obnovení hesla",
-  },
-  {
-    "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "tvuj@email.com",
-  },
-  {
-    "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Přihlášení přes Facebook",
-  },
-  {
-    "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Zapomenuté heslo",
-  },
-  {
-    "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "heslo",
-  },
-  {
-    "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Email pro obnovení hesla odeslán.",
-  },
-  {
-    "id": "auth.email.resetPassword",
-    "defaultMessage": "Reset hesla",
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "stvořil <a href=\"https://twitter.com/steida\">Steida</a>",
   },
@@ -171,16 +165,20 @@ export default [
     "defaultMessage": "\n      <p>Ahoj, tohle je <a target=\"_blank\" href=\"https://github.com/este/este\">\n      Este</a> dev stack.</p>",
   },
   {
-    "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Stiskni CMD+R pro znovunačtení\n      Stiskni CMD+D pro debug menu",
-  },
-  {
     "id": "intl.page.h2",
     "defaultMessage": "ukázka react-intl",
   },
   {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {zpráva} other {zpráv}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Nahrávám",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Stále nahrávám...",
   },
   {
     "id": "me.page.linkToProfile",
@@ -241,13 +239,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Nic tu není...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Nahrávám",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Stále nahrávám...",
   },
 ];

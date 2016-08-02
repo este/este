@@ -1,5 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../theme';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { FormattedMessage, Text } from './';
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Alert extends PureComponent {
+export default class Alert extends Component {
 
   static propTypes = {
     brand: PropTypes.string,
@@ -104,7 +104,7 @@ export default class Alert extends PureComponent {
     };
     const alertStyle = {
       backgroundColor: brand,
-      borderBottomColor: theme.lighten(brand),
+      borderBottomColor: theme.light(brand),
     };
 
     if (!message) return null;

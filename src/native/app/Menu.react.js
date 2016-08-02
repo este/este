@@ -1,30 +1,24 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import theme from '../../common/app/theme';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import theme from './theme';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from './components';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
 const styles = StyleSheet.create({
-  menu: {
-    backgroundColor: theme.inverseBackgroundColor,
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'space-between',
+  contentContainer: {
+    paddingHorizontal: theme.fontSizeH5 * .5,
     paddingVertical: theme.fontSizeH5,
-    paddingHorizontal: theme.fontSizeH5,
   },
   item: {
+    color: theme.inverseTextColor,
     fontSize: theme.fontSize,
     padding: theme.fontSize * .625,
-    color: theme.inverseTextColor,
   },
 });
 
-class Menu extends PureComponent {
+class Menu extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
@@ -34,43 +28,26 @@ class Menu extends PureComponent {
 
   render() {
     const { intl, onRouteChange, viewer } = this.props;
+    const links = [
+      'home',
+      'todos',
+      'intl',
+      'offline',
+      (viewer ? 'me' : 'signIn'),
+    ];
 
     return (
       <ScrollView
         automaticallyAdjustContentInsets={false}
-        contentContainerStyle={styles.content}
-        style={styles.menu}
+        contentContainerStyle={styles.contentContainer}
       >
-        <View>
-          {/* TODO: Refactor */}
+        {links.map(link =>
           <Text
-            onPress={() => onRouteChange('home')} // eslint-disable-line react/jsx-no-bind
+            key={link}
+            onPress={() => onRouteChange(link)} // eslint-disable-line react/jsx-no-bind
             style={styles.item}
-          >{intl.formatMessage(linksMessages.home)}</Text>
-          <Text
-            onPress={() => onRouteChange('todos')} // eslint-disable-line react/jsx-no-bind
-            style={styles.item}
-          >{intl.formatMessage(linksMessages.todos)}</Text>
-          <Text
-            onPress={() => onRouteChange('intl')} // eslint-disable-line react/jsx-no-bind
-            style={styles.item}
-          >{intl.formatMessage(linksMessages.intl)}</Text>
-          <Text
-            onPress={() => onRouteChange('offline')} // eslint-disable-line react/jsx-no-bind
-            style={styles.item}
-          >{intl.formatMessage(linksMessages.offline)}</Text>
-          {viewer ?
-            <Text
-              onPress={() => onRouteChange('me')} // eslint-disable-line react/jsx-no-bind
-              style={styles.item}
-            >{intl.formatMessage(linksMessages.me)}</Text>
-          :
-            <Text
-              onPress={() => onRouteChange('signIn')} // eslint-disable-line react/jsx-no-bind
-              style={styles.item}
-            >{intl.formatMessage(linksMessages.signIn)}</Text>
-          }
-        </View>
+          >{intl.formatMessage(linksMessages[link])}</Text>
+        )}
       </ScrollView>
     );
   }

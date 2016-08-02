@@ -1,5 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../theme';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
     color: theme.textColor,
     fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
-    lineHeight: theme.lineHeight,
+    lineHeight: theme.fontSize * theme.lineHeight,
   },
 });
 
 // Normalize multiline strings because Text component preserves spaces.
 const normalizeMultilineString = message => message.replace(/ +/g, ' ').trim();
 
-export default class AppText extends PureComponent {
+export default class AppText extends Component {
 
   static propTypes = {
     children: PropTypes.node,

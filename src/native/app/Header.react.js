@@ -1,8 +1,8 @@
 import Icon from 'react-native-vector-icons/Ionicons';
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from './theme';
 import { Button, Text } from './components';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between', // align items in the flexDirection
     alignItems: 'center', // align items in the cross-axis flexDirection
-    paddingTop: theme.fontSize * 1.875, // pxtoem.com
+    paddingTop: (theme.fontSize * 1.875) - (Platform.OS === 'ios' ? 0 : 20),
     paddingBottom: theme.fontSize * .625,
-    borderBottomColor: theme.lighten(theme.brandPrimary),
+    borderBottomColor: theme.light(theme.brandPrimary),
     borderBottomWidth: 2,
   },
   title: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    top: 1,
+    top: 2,
     width: theme.fontSize * 3,
   },
   icon: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Header extends PureComponent {
+export default class Header extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,

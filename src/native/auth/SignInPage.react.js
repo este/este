@@ -1,10 +1,10 @@
 import Email from './Email.react';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Social from './Social.react';
 import ValidationError from '../../common/lib/validation/ValidationError';
 import authErrorMessages from '../../common/auth/errorMessages';
 import routes from '../routes';
-import theme from '../../common/app/theme';
+import theme from '../app/theme';
 import { Alert, Container } from '../app/components';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class SignInPage extends PureComponent {
+class SignInPage extends Component {
 
   static propTypes = {
     error: PropTypes.instanceOf(Error),

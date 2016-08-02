@@ -1,5 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../app/theme';
 import {
   CenteredContainer,
   FormattedDate,
@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
-class IntlPage extends PureComponent {
+class IntlPage extends Component {
 
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,

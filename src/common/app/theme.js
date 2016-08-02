@@ -1,61 +1,45 @@
 import Color from 'color';
 
-//  - Prefer styled app/components over shared StyleSheet instances.
-//  - Use theme.fontSize for the responsive sizing // pxtoem.com
-//  - Learn React Native flexbox
-//    - facebook.github.io/react-native/docs/style.html
-//    - medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
-//  - Learn UI vocabulary
-//    - v4-alpha.getbootstrap.com/getting-started/introduction
-//    - developer.apple.com/ios/human-interface-guidelines
-//    - developer.android.com/guide/practices/ui_guidelines
-//  - Constants taken from the Bootstrap 4
-
-const darken = color => Color(color).darken(.3).hexString();
-const lighten = color => Color(color).lighten(.3).hexString();
-
-const fontSize = 16;
-const fontFamily = 'System';
-const lineHeight = fontSize * 1.5;
-
-const textColor = '#7C7C7C';
-const backgroundColor = '#fff';
-const inverseTextColor = '#eee';
-const inverseBackgroundColor = '#2C2C2C';
-
-const brandPrimary = '#31AACC';
-const brandSuccess = '#5cb85c';
-const brandInfo = '#5bc0de';
-const brandWarning = '#f0ad4e';
-const brandDanger = '#d9534f';
-
-const activeOpacity = .5;
-const disabledOpacity = .3;
+// Styling & Flexbox
+//   facebook.github.io/react-native/docs/style.html
+//   medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
+// Vocabulary
+//   developer.apple.com/ios/human-interface-guidelines
+//   developer.android.com/guide/practices/ui_guidelines
+//   v4-alpha.getbootstrap.com/getting-started/introduction
+// Tips
+//   Favour styled app/components over shared StyleSheets
+//   Leverage theme.fontSize for responsive sizing, check pxtoem.com
 
 export default {
-  // Basic
-  fontSize,
-  fontFamily,
-  lineHeight,
-  textColor,
-  backgroundColor,
-  inverseTextColor,
-  inverseBackgroundColor,
-  brandPrimary,
-  brandSuccess,
-  brandInfo,
-  brandWarning,
-  brandDanger,
-  activeOpacity,
-  disabledOpacity,
-  // Derived
-  placeholderTextColor: lighten(textColor),
-  fontSizeH1: fontSize * 2.5,
-  fontSizeH2: fontSize * 2,
-  fontSizeH3: fontSize * 1.75,
-  fontSizeH4: fontSize * 1.5,
-  fontSizeH5: fontSize * 1.25,
-  // Helpers
-  darken,
-  lighten,
+  fontSize: 16,
+  fontFamily: 'System',
+  lineHeight: 1.5,
+  textColor: '#7C7C7C',
+  backgroundColor: '#fff',
+  inverseTextColor: '#eee',
+  inverseBackgroundColor: '#2C2C2C',
+
+  brandPrimary: '#31AACC',
+  brandSuccess: '#5cb85c',
+  brandInfo: '#5bc0de',
+  brandWarning: '#f0ad4e',
+  brandDanger: '#d9534f',
+
+  activeOpacity: .5,
+  disabledOpacity: .3,
+
+  darken: .3,
+  lighten: .3,
+
+  get placeholderTextColor() { return this.light(this.textColor); },
+
+  get fontSizeH1() { return this.fontSize * 2.5; },
+  get fontSizeH2() { return this.fontSize * 2; },
+  get fontSizeH3() { return this.fontSize * 1.75; },
+  get fontSizeH4() { return this.fontSize * 1.5; },
+  get fontSizeH5() { return this.fontSize * 1.25; },
+
+  dark(color) { return Color(color).darken(this.darken).hexString(); },
+  light(color) { return Color(color).lighten(this.lighten).hexString(); },
 };

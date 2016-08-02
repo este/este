@@ -1,12 +1,64 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.add",
+    "defaultMessage": "Adicionar",
+  },
+  {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Cancelar",
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Excluir",
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Demitir",
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editar",
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Salvar",
+  },
+  {
+    "id": "app.buttons.signIn",
+    "defaultMessage": "Usuário",
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Usuário",
   },
   {
     "id": "app.buttons.signOut",
     "defaultMessage": "Sair",
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "Inscrever-se",
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "Enviar",
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Você tem certeza?",
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Você tem alterações não salvas. Você tem certeza?",
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": "Requeridos",
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Campos",
   },
   {
     "id": "app.links.firebase",
@@ -21,16 +73,16 @@ export default [
     "defaultMessage": "Idioma",
   },
   {
-    "id": "app.links.signIn",
-    "defaultMessage": "Usuário",
-  },
-  {
-    "id": "app.buttons.signIn",
-    "defaultMessage": "Usuário",
-  },
-  {
     "id": "app.links.me",
     "defaultMessage": "Eu",
+  },
+  {
+    "id": "app.links.offline",
+    "defaultMessage": "Off-line",
+  },
+  {
+    "id": "app.links.signIn",
+    "defaultMessage": "Usuário",
   },
   {
     "id": "app.links.todos",
@@ -39,6 +91,30 @@ export default [
   {
     "id": "auth.email.emailLegend",
     "defaultMessage": "Email",
+  },
+  {
+    "id": "auth.email.emailPlaceholder",
+    "defaultMessage": "endereço@email.com",
+  },
+  {
+    "id": "auth.email.passwordForgotten",
+    "defaultMessage": "Esqueceu sua senha?",
+  },
+  {
+    "id": "auth.email.passwordPlaceholder",
+    "defaultMessage": "senha",
+  },
+  {
+    "id": "auth.email.passwordRecoveryLegend",
+    "defaultMessage": "Email para recuperação de senha.",
+  },
+  {
+    "id": "auth.email.recoveryEmailSent",
+    "defaultMessage": "Email de recuperação foi enviado.",
+  },
+  {
+    "id": "auth.email.resetPassword",
+    "defaultMessage": "Restaurar Senha",
   },
   {
     "id": "auth.signInError.email",
@@ -51,6 +127,18 @@ export default [
   {
     "id": "auth.signInError.simplePassword",
     "defaultMessage": "Senha precisa conter {minLength} caracteres.",
+  },
+  {
+    "id": "auth.social.facebookSignIn",
+    "defaultMessage": "Login do Facebook",
+  },
+  {
+    "id": "fields.page.h2",
+    "defaultMessage": "Campos",
+  },
+  {
+    "id": "fields.page.p",
+    "defaultMessage": "Algo como redux-forma, mas simplificado e universal.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -69,44 +157,12 @@ export default [
     "defaultMessage": "Usuário especificado não existe.",
   },
   {
-    "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Email para recuperação de senha.",
-  },
-  {
-    "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "endereço@email.com",
-  },
-  {
-    "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Login do Facebook",
-  },
-  {
-    "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Esqueceu sua senha?",
-  },
-  {
-    "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "senha",
-  },
-  {
-    "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Email de recuperação foi enviado.",
-  },
-  {
-    "id": "auth.email.resetPassword",
-    "defaultMessage": "Restaurar Senha",
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "desenvolvido por <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
     "defaultMessage": "<p>\n        Olá, este é\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> coleção programador.\n      </p>",
-  },
-  {
-    "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Pressione CMD+R para recarregar\n      Pressione CMD+D para depurar menu",
   },
   {
     "id": "intl.page.h2",
@@ -175,65 +231,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Vazio...",
-  },
-  {
-    "id": "app.buttons.add",
-    "defaultMessage": "Adicionar",
-  },
-  {
-    "id": "app.buttons.cancel",
-    "defaultMessage": "Cancelar",
-  },
-  {
-    "id": "app.buttons.delete",
-    "defaultMessage": "Excluir",
-  },
-  {
-    "id": "app.buttons.dismiss",
-    "defaultMessage": "Demitir",
-  },
-  {
-    "id": "app.buttons.edit",
-    "defaultMessage": "Editar",
-  },
-  {
-    "id": "app.buttons.save",
-    "defaultMessage": "Salvar",
-  },
-  {
-    "id": "app.buttons.signUp",
-    "defaultMessage": "Inscrever-se",
-  },
-  {
-    "id": "app.buttons.submit",
-    "defaultMessage": "Enviar",
-  },
-  {
-    "id": "app.confirm.areYouSure",
-    "defaultMessage": "Você tem certeza?",
-  },
-  {
-    "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Você tem alterações não salvas. Você tem certeza?",
-  },
-  {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Requeridos",
-  },
-  {
-    "id": "app.links.fields",
-    "defaultMessage": "Campos",
-  },
-  {
-    "id": "app.links.offline",
-    "defaultMessage": "Off-line",
-  },
-  {
-    "id": "fields.page.h2",
-    "defaultMessage": "Campos",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Algo como redux-forma, mas simplificado e universal.",
   },
 ];

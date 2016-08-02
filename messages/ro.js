@@ -1,12 +1,64 @@
 /* eslint-disable max-len, quote-props, quotes */
 export default [
   {
+    "id": "app.buttons.add",
+    "defaultMessage": "Adăuga",
+  },
+  {
+    "id": "app.buttons.cancel",
+    "defaultMessage": "Anulare",
+  },
+  {
+    "id": "app.buttons.delete",
+    "defaultMessage": "Șterge",
+  },
+  {
+    "id": "app.buttons.dismiss",
+    "defaultMessage": "Destitui",
+  },
+  {
+    "id": "app.buttons.edit",
+    "defaultMessage": "Editați",
+  },
+  {
+    "id": "app.buttons.save",
+    "defaultMessage": "Salvați",
+  },
+  {
+    "id": "app.buttons.signIn",
+    "defaultMessage": "Autentificare",
+  },
+  {
     "id": "app.buttons.signIn",
     "defaultMessage": "Autentificare",
   },
   {
     "id": "app.buttons.signOut",
     "defaultMessage": "Deconectare",
+  },
+  {
+    "id": "app.buttons.signUp",
+    "defaultMessage": "Inscrie-te",
+  },
+  {
+    "id": "app.buttons.submit",
+    "defaultMessage": "A depune",
+  },
+  {
+    "id": "app.confirm.areYouSure",
+    "defaultMessage": "Esti sigur?",
+  },
+  {
+    "id": "app.confirm.unsavedChanges",
+    "defaultMessage": "Ai modificări nesalvate. Esti sigur?",
+  },
+  {
+    "id": "app.FieldError.required",
+    "defaultMessage": "Necesar",
+  },
+  {
+    "id": "app.links.fields",
+    "defaultMessage": "Câmpuri",
   },
   {
     "id": "app.links.firebase",
@@ -21,16 +73,16 @@ export default [
     "defaultMessage": "Traducere",
   },
   {
-    "id": "app.links.signIn",
-    "defaultMessage": "Autentificare",
-  },
-  {
-    "id": "app.buttons.signIn",
-    "defaultMessage": "Autentificare",
-  },
-  {
     "id": "app.links.me",
     "defaultMessage": "Eu",
+  },
+  {
+    "id": "app.links.offline",
+    "defaultMessage": "Deconectat",
+  },
+  {
+    "id": "app.links.signIn",
+    "defaultMessage": "Autentificare",
   },
   {
     "id": "app.links.todos",
@@ -39,6 +91,30 @@ export default [
   {
     "id": "auth.email.emailLegend",
     "defaultMessage": "E-mail",
+  },
+  {
+    "id": "auth.email.emailPlaceholder",
+    "defaultMessage": "altău@email.com",
+  },
+  {
+    "id": "auth.email.passwordForgotten",
+    "defaultMessage": "Ai uitat parola?",
+  },
+  {
+    "id": "auth.email.passwordPlaceholder",
+    "defaultMessage": "Parolă",
+  },
+  {
+    "id": "auth.email.passwordRecoveryLegend",
+    "defaultMessage": "Recuperarea parolei de email",
+  },
+  {
+    "id": "auth.email.recoveryEmailSent",
+    "defaultMessage": "Emailul de recuperare a fost trimis.",
+  },
+  {
+    "id": "auth.email.resetPassword",
+    "defaultMessage": "Resetează parola",
   },
   {
     "id": "auth.signInError.email",
@@ -51,6 +127,18 @@ export default [
   {
     "id": "auth.signInError.simplePassword",
     "defaultMessage": "Parola trebuie să conține cel puțin {minLength} caractere.",
+  },
+  {
+    "id": "auth.social.facebookSignIn",
+    "defaultMessage": "Logare Facebook",
+  },
+  {
+    "id": "fields.page.h2",
+    "defaultMessage": "Câmpuri",
+  },
+  {
+    "id": "fields.page.p",
+    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală.",
   },
   {
     "id": "firebase.error.EMAIL_TAKEN",
@@ -69,44 +157,12 @@ export default [
     "defaultMessage": "Contul de utilizator specificat nu există.",
   },
   {
-    "id": "auth.email.passwordRecoveryLegend",
-    "defaultMessage": "Recuperarea parolei de email",
-  },
-  {
-    "id": "auth.email.emailPlaceholder",
-    "defaultMessage": "altău@email.com",
-  },
-  {
-    "id": "auth.social.facebookSignIn",
-    "defaultMessage": "Logare Facebook",
-  },
-  {
-    "id": "auth.email.passwordForgotten",
-    "defaultMessage": "Ai uitat parola?",
-  },
-  {
-    "id": "auth.email.passwordPlaceholder",
-    "defaultMessage": "Parolă",
-  },
-  {
-    "id": "auth.email.recoveryEmailSent",
-    "defaultMessage": "Emailul de recuperare a fost trimis.",
-  },
-  {
-    "id": "auth.email.resetPassword",
-    "defaultMessage": "Resetează parola",
-  },
-  {
     "id": "footer.madeByHtml",
     "defaultMessage": "realizat de <a href=\"https://twitter.com/steida\">Steida</a>",
   },
   {
     "id": "home.intro",
     "defaultMessage": "<p>\n        Cucu, e\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
-  },
-  {
-    "id": "home.native.intro",
-    "defaultMessage": "Este App\n      Apăsați CMD+R pentru refresh\n      Apăsați CMD+D pentru meniul de debug",
   },
   {
     "id": "intl.page.h2",
@@ -175,65 +231,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "E calm pe aici...",
-  },
-  {
-    "id": "app.buttons.add",
-    "defaultMessage": "Adăuga",
-  },
-  {
-    "id": "app.buttons.cancel",
-    "defaultMessage": "Anulare",
-  },
-  {
-    "id": "app.buttons.delete",
-    "defaultMessage": "Șterge",
-  },
-  {
-    "id": "app.buttons.dismiss",
-    "defaultMessage": "Destitui",
-  },
-  {
-    "id": "app.buttons.edit",
-    "defaultMessage": "Editați",
-  },
-  {
-    "id": "app.buttons.save",
-    "defaultMessage": "Salvați",
-  },
-  {
-    "id": "app.buttons.signUp",
-    "defaultMessage": "Inscrie-te",
-  },
-  {
-    "id": "app.buttons.submit",
-    "defaultMessage": "A depune",
-  },
-  {
-    "id": "app.confirm.areYouSure",
-    "defaultMessage": "Esti sigur?",
-  },
-  {
-    "id": "app.confirm.unsavedChanges",
-    "defaultMessage": "Ai modificări nesalvate. Esti sigur?",
-  },
-  {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Necesar",
-  },
-  {
-    "id": "app.links.fields",
-    "defaultMessage": "Câmpuri",
-  },
-  {
-    "id": "app.links.offline",
-    "defaultMessage": "Deconectat",
-  },
-  {
-    "id": "fields.page.h2",
-    "defaultMessage": "Câmpuri",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală.",
   },
 ];

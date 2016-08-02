@@ -1,8 +1,8 @@
-import React, { PropTypes, PureComponent } from 'react';
-import theme from '../../../common/app/theme';
+import React, { PropTypes, Component } from 'react';
+import theme from '../theme';
 import { TouchableOpacity, View } from 'react-native';
 
-export default class Button extends PureComponent {
+export default class Button extends Component {
 
   static propTypes = {
     children: PropTypes.node,

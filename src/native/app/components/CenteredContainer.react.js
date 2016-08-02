@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Container } from './';
 import { StyleSheet, View } from 'react-native';
 
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class CenteredContainer extends PureComponent {
+export default class CenteredContainer extends Component {
 
   static propTypes = {
     children: PropTypes.node,

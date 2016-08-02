@@ -1,5 +1,5 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from '../app/components';
 import { View } from 'react-native';
@@ -24,7 +24,7 @@ SocialLoginButton.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
-class Social extends PureComponent {
+class Social extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,

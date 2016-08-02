@@ -1,16 +1,24 @@
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import start from '../../common/app/start';
+import theme from './theme';
 import { Container } from './components';
-import { Navigator, StatusBar } from 'react-native';
+import { Navigator, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
-class App extends PureComponent {
+const styles = StyleSheet.create({
+  app: {
+    backgroundColor: theme.inverseBackgroundColor,
+    flex: 1,
+  },
+});
+
+class App extends Component {
 
   static propTypes = {
     intl: intlShape.isRequired,
@@ -67,8 +75,9 @@ class App extends PureComponent {
     const { sideMenuOpen } = this.state;
     return (
       <Container>
-        {/* TODO: App is offline <Alert /> */}
-        <StatusBar hidden={sideMenuOpen} />
+        {Platform.OS === 'ios' && // Required only for iOS.
+          <StatusBar hidden={sideMenuOpen} />
+        }
         <Header
           title={this.getTitle(route)}
           toggleSideMenu={this.toggleSideMenu}
@@ -84,18 +93,20 @@ class App extends PureComponent {
     if (!storageLoaded) return null;
 
     return (
-      <SideMenu
-        isOpen={sideMenuOpen}
-        menu={<Menu onRouteChange={this.onRouteChange} />}
-        onChange={this.onSideMenuChange}
-      >
-        <Navigator
-          configureScene={App.configureScene}
-          initialRoute={routes.home}
-          ref={this.onNavigatorRef}
-          renderScene={this.renderScene}
-        />
-      </SideMenu>
+      <View style={styles.app}>
+        <SideMenu
+          isOpen={sideMenuOpen}
+          menu={<Menu onRouteChange={this.onRouteChange} />}
+          onChange={this.onSideMenuChange}
+        >
+          <Navigator
+            configureScene={App.configureScene}
+            initialRoute={routes.home}
+            ref={this.onNavigatorRef}
+            renderScene={this.renderScene}
+          />
+        </SideMenu>
+      </View>
     );
   }
 

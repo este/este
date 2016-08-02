@@ -1,7 +1,7 @@
 import Buttons from './Buttons.react';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Todo from './Todo.react';
-import theme from '../../common/app/theme';
+import theme from '../app/theme';
 import todosMessages from '../../common/todos/todosMessages';
 import { CenteredContainer, FormattedMessage } from '../app/components';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Todos extends PureComponent {
+class Todos extends Component {
 
   static propTypes = {
     todos: PropTypes.object.isRequired,

@@ -1,6 +1,6 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
-import theme from '../../common/app/theme';
+import theme from '../app/theme';
 import { Button, FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class TodoButtons extends PureComponent {
+class TodoButtons extends Component {
 
   static propTypes = {
     addHundredTodos: PropTypes.func.isRequired,
