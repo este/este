@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     color: theme.textColor,
     fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
-    height: theme.fontSize * 2,
+    height: theme.fontSize * 2.5,
   },
   invalid: {
     borderBottomColor: theme.brandDanger,
@@ -39,6 +39,7 @@ export default class AppTextInput extends Component {
       <View style={[styles.view, invalid && styles.invalid, viewStyle]}>
         <TextInput
           {...this.props}
+          underlineColorAndroid="transparent"
           style={[styles.input, inputStyle]}
         />
       </View>

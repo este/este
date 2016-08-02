@@ -21,9 +21,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.brandPrimary,
     justifyContent: 'center',
-    marginTop: -2, // To override app header borderBottom.
-    paddingBottom: theme.fontSizeH5,
-    paddingTop: theme.fontSize * .625,
+    paddingTop: theme.fontSize,
+    paddingBottom: theme.fontSize * .5,
   },
   text: {
     color: theme.inverseTextColor,

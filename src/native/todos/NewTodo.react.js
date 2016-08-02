@@ -11,8 +11,6 @@ import { injectIntl, intlShape } from 'react-intl';
 const styles = StyleSheet.create({
   newTodo: {
     backgroundColor: theme.brandPrimary,
-    borderTopColor: theme.light(theme.brandPrimary),
-    borderTopWidth: StyleSheet.hairlineWidth,
   },
   textInputInput: {
     color: theme.inverseTextColor,

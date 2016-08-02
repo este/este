@@ -14,7 +14,6 @@ import Color from 'color';
 export default {
   fontSize: 16,
   fontFamily: 'System',
-  lineHeight: 1.5,
   textColor: '#7C7C7C',
   backgroundColor: '#fff',
   inverseTextColor: '#eee',

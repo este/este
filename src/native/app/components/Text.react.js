@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     color: theme.textColor,
     fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
-    lineHeight: theme.fontSize * theme.lineHeight,
   },
 });
 
