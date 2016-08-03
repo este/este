@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ValidationError from '../../../common/lib/validation/ValidationError';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { ValidationError } from '../../../common/lib/validation';
 
 const messages = defineMessages({
   required: {

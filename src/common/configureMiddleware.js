@@ -1,5 +1,6 @@
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
+import { ValidationError } from '../common/lib/validation';
 
 // Deps.
 import firebase from 'firebase';
@@ -15,24 +16,22 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
-// Like redux-promise-middleware but without the noise.
-const promiseMiddleware = ({ dispatch }) => next => action => {
-  const { type, payload: promise } = action;
-  const isPromise = promise && typeof promise.then === 'function';
-  if (!isPromise) return next(action);
+// Action payload as promise with error handling.
+const promiseMiddleware = options => ({ dispatch }) => next => action => {
+  const { payload } = action;
+  const payloadIsPromise = payload && typeof payload.then === 'function';
+  if (!payloadIsPromise) return next(action);
   const createAction = (suffix, payload) => ({
-    type: `${type}_${suffix}`, meta: { action }, payload,
+    type: `${action.type}_${suffix}`, meta: { action }, payload,
   });
-  next(createAction('START'));
-  const onFulfilled = value => {
-    dispatch(createAction('SUCCESS', value));
-    return value;
-  };
-  const onRejected = error => {
-    dispatch(createAction('ERROR', error));
-    throw error;
-  };
-  return promise.then(onFulfilled, onRejected);
+  // Note we don't return promise, because martinfowler.com/bliki/CQRS.html
+  payload
+    .then(value => dispatch(createAction('SUCCESS', value)))
+    .catch(error => {
+      dispatch(createAction('ERROR', error));
+      if (options.onError) options.onError(error);
+    });
+  return next(createAction('START'));
 };
 
 export default function configureMiddleware(initialState, platformDeps, platformMiddleware) {
@@ -66,7 +65,12 @@ export default function configureMiddleware(initialState, platformDeps, platform
       storageEngine,
       validate,
     }),
-    promiseMiddleware,
+    promiseMiddleware({
+      onError(error) {
+        if (error instanceof ValidationError) return;
+        throw error;
+      },
+    }),
     ...platformMiddleware,
   ];
 

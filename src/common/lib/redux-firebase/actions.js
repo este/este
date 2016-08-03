@@ -1,8 +1,8 @@
-import ValidationError from '../validation/ValidationError';
 import invariant from 'invariant';
 import mapFirebaseUserToAppUser from './mapFirebaseUserToAppUser';
 import messages from './messages';
 import { APP_OFFLINE, APP_ONLINE } from '../../app/actions';
+import { ValidationError } from '../validation';
 
 export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
 export const FIREBASE_ON_AUTH = 'FIREBASE_ON_AUTH';
@@ -209,7 +209,7 @@ export function onPermissionDenied(message) {
   };
 }
 
-export function resetPassword(email) {
+export function resetPassword(email, onSuccess) {
   return ({ firebaseAuth, validate }) => {
     const getPromise = async () => {
       await validate({ email })
@@ -225,6 +225,7 @@ export function resetPassword(email) {
         }
         throw error;
       }
+      if (onSuccess) onSuccess();
     };
     return {
       type: 'FIREBASE_RESET_PASSWORD',

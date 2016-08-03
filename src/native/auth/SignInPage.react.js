@@ -1,12 +1,12 @@
 import Email from './Email.react';
 import React, { Component, PropTypes } from 'react';
 import Social from './Social.react';
-import ValidationError from '../../common/lib/validation/ValidationError';
 import authErrorMessages from '../../common/auth/errorMessages';
 import routes from '../routes';
 import theme from '../app/theme';
 import { Alert, Container } from '../app/components';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { firebaseMessages } from '../../common/lib/redux-firebase';
 

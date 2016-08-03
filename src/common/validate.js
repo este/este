@@ -1,5 +1,4 @@
-import Validation from './lib/validation/Validation';
-import ValidationError from './lib/validation/ValidationError';
+import { Validation, ValidationError } from './lib/validation';
 
 class AppValidation extends Validation {
 

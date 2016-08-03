@@ -16,18 +16,10 @@ class Social extends Component {
     this.onButtonClick = this.onButtonClick.bind(this);
   }
 
-  async onButtonClick(e) {
+  onButtonClick(e) {
     const { signIn } = this.props;
     const { provider } = e.currentTarget.dataset;
-    try {
-      await signIn(provider);
-    } catch (error) {
-      // Swallow innocuous error here, so it will not be reported.
-      if (error.code === 'auth/popup-closed-by-user') {
-        return;
-      }
-      throw error;
-    }
+    signIn(provider);
   }
 
   render() {

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import { FormattedMessage } from 'react-intl';
-import { ValidationError, focusInvalidField } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
@@ -39,17 +38,9 @@ class Email extends Component {
     }
   }
 
-  async onSignUpClick() {
+  onSignUpClick() {
     const { fields, signUp } = this.props;
-    try {
-      await signUp('password', fields.$values());
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        focusInvalidField(this, error);
-        return;
-      }
-      throw error;
-    }
+    signUp('password', fields.$values());
   }
 
   onForgetPasswordClick() {
@@ -57,35 +48,20 @@ class Email extends Component {
     this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
   }
 
-  async resetPassword() {
+  resetPassword() {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
-    try {
-      await resetPassword(email);
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        focusInvalidField(this, error);
-        return;
-      }
-      throw error;
-    }
-    this.setState({
-      forgetPasswordIsShown: false,
-      recoveryEmailSent: true,
+    resetPassword(email, () => {
+      this.setState({
+        forgetPasswordIsShown: false,
+        recoveryEmailSent: true,
+      });
     });
   }
 
-  async signInViaPassword() {
+  signInViaPassword() {
     const { fields, signIn } = this.props;
-    try {
-      await signIn('password', fields.$values());
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        focusInvalidField(this, error);
-        return;
-      }
-      throw error;
-    }
+    signIn('password', fields.$values());
   }
 
   render() {

@@ -37,18 +37,10 @@ class Social extends Component {
     this.onFacebookLoginPress = this.onFacebookLoginPress.bind(this);
   }
 
-  async onFacebookLoginPress() {
+  onFacebookLoginPress() {
     const { disabled, nativeSignIn } = this.props;
     if (disabled) return;
-    try {
-      await nativeSignIn('facebook');
-    } catch (error) {
-      // Swallow innocuous error here, so it will not be reported.
-      if (error.code === 'auth/popup-closed-by-user') {
-        return;
-      }
-      throw error;
-    }
+    nativeSignIn('facebook');
   }
 
   render() {
