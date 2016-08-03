@@ -1,10 +1,10 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-class Header extends PureComponent {
+class Header extends Component {
 
   static propTypes = {
     viewer: PropTypes.object,

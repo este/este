@@ -1,6 +1,6 @@
 import Header from './Header.react';
 import Menu from './Menu.react';
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SideMenu from 'react-native-side-menu';
 import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';

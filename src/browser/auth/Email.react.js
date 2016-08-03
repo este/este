@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
 
-class Email extends PureComponent {
+class Email extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,

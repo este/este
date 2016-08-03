@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { connect } from 'react-redux';
 

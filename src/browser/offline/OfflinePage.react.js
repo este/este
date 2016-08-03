@@ -1,11 +1,11 @@
 import Helmet from 'react-helmet';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
-class OfflinePage extends PureComponent {
+class OfflinePage extends Component {
 
   static propTypes = {
     fields: PropTypes.object.isRequired,

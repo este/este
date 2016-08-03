@@ -2,7 +2,7 @@
 import './FieldsPage.scss';
 import DynamicField from './DynamicField.react.js';
 import Helmet from 'react-helmet';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
 import { FieldError } from '../app/components';
@@ -50,7 +50,7 @@ const exampleAction = async (values) => new Promise((resolve, reject) => {
   }, 1000);
 });
 
-class FieldsPage extends PureComponent {
+class FieldsPage extends Component {
 
   static propTypes = {
     // Generated fields by fields higher order component.

@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/theme';
 import { StyleSheet, View } from 'react-native';

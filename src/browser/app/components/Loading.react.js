@@ -1,6 +1,6 @@
 import './Loading.scss';
 import Helmet from 'react-helmet';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -14,7 +14,7 @@ const messages = defineMessages({
   },
 });
 
-export default class Loading extends PureComponent {
+export default class Loading extends Component {
 
   constructor() {
     super();

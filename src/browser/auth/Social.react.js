@@ -1,10 +1,10 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { signIn } from '../../common/lib/redux-firebase/actions';
 
-class Social extends PureComponent {
+class Social extends Component {
 
   static propTypes = {
     disabled: PropTypes.bool.isRequired,

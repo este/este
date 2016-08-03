@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from './theme';
 import { ScrollView, StyleSheet } from 'react-native';

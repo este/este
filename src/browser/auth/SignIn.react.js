@@ -1,12 +1,12 @@
 import './SignIn.scss';
 import Email from './Email.react';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SignInError from './SignInError.react';
 import Social from './Social.react';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 
-class SignIn extends PureComponent {
+class SignIn extends Component {
 
   static propTypes = {
     location: locationShape,

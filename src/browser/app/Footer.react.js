@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedHTMLMessage, defineMessages } from 'react-intl';
 
 // Messages collocation ftw.
@@ -10,7 +10,7 @@ const messages = defineMessages({
   },
 });
 
-export default class Footer extends PureComponent {
+export default class Footer extends Component {
 
   render() {
     return (

@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
 import routes from '../routes';
 import { CenteredContainer, Text } from '../app/components';

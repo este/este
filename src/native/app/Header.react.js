@@ -1,5 +1,5 @@
 import Icon from 'react-native-vector-icons/Ionicons';
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import theme from './theme';
 import { Button, Text } from './components';
 import { Platform, StyleSheet, View } from 'react-native';

@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
 
@@ -21,7 +21,7 @@ export default function fields(WrappedComponent, options) {
     Array.isArray(path)
   , 'Path must be a string, function, or an array.');
 
-  return class Fields extends PureComponent {
+  return class Fields extends Component {
 
     static contextTypes = {
       store: PropTypes.object, // Redux store.

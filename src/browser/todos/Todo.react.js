@@ -1,9 +1,9 @@
 import './Todo.scss';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 // Presentational component.
-export default class Todo extends PureComponent {
+export default class Todo extends Component {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,

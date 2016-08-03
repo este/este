@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import theme from '../theme';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { FormattedMessage, Text } from './';

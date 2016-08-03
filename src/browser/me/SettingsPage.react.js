@@ -1,5 +1,5 @@
 import Helmet from 'react-helmet';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -9,7 +9,7 @@ const messages = defineMessages({
   },
 });
 
-export default class SettingsPage extends PureComponent {
+export default class SettingsPage extends Component {
 
   render() {
     return (

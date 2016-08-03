@@ -1,5 +1,5 @@
 import Helmet from 'react-helmet';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedHTMLMessage, FormattedMessage, defineMessages } from 'react-intl';
 
@@ -15,7 +15,7 @@ const messages = defineMessages({
   },
 });
 
-export default class HomePage extends PureComponent {
+export default class HomePage extends Component {
 
   render() {
     return (

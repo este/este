@@ -18,7 +18,7 @@
 // }));
 
 import * as actions from './actions';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 // Use key whenever you want to force off / on event registration. It's useful
 // when queried component must be rerendered, for example when app state is
@@ -30,7 +30,7 @@ let serverFetching = false;
 let serverFetchingPromises = null;
 
 export default function queryFirebase(WrappedComponent, mapPropsToOptions) {
-  return class FirebaseQuery extends PureComponent {
+  return class FirebaseQuery extends Component {
 
     static contextTypes = {
       store: PropTypes.object, // Redux store.

@@ -25,10 +25,8 @@
   - universal internationalization with runtime language switching
   - universal crash reporting via Sentry
   - universal forms with universal validation (universal ftw, yeah)
-- Functional works (immutability, hot reload, time traveling)
-- Test driven development
-- Advanced performance with pure components
 - Well tuned dev stack (OS X, Linux, Windows)
+- Immutable app state
 - [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined Redux actions
   - email and facebook login

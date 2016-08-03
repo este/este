@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/theme';
 import { Button, FormattedMessage } from '../app/components';

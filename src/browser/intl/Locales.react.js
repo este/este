@@ -1,8 +1,8 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
-class Locales extends PureComponent {
+class Locales extends Component {
 
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,

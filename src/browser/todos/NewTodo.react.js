@@ -1,12 +1,12 @@
 import './NewTodo.scss';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { FormattedMessage } from 'react-intl';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
-class NewTodo extends PureComponent {
+class NewTodo extends Component {
 
   static propTypes = {
     addTodo: PropTypes.func.isRequired,

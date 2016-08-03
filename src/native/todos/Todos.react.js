@@ -1,5 +1,5 @@
 import Buttons from './Buttons.react';
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Todo from './Todo.react';
 import theme from '../app/theme';
 import todosMessages from '../../common/todos/todosMessages';

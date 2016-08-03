@@ -1,6 +1,6 @@
 import Helmet from 'react-helmet';
 import Locales from './Locales.react';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import {
   FormattedDate,
@@ -24,7 +24,7 @@ const messages = defineMessages({
   },
 });
 
-export default class IntlPage extends PureComponent {
+export default class IntlPage extends Component {
 
   constructor() {
     super();

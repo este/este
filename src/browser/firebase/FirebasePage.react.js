@@ -1,10 +1,10 @@
 import Helmet from 'react-helmet';
 import OnlineUsers from '../users/OnlineUsers.react';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
-export default class FirebasePage extends PureComponent {
+export default class FirebasePage extends Component {
 
   render() {
     return (

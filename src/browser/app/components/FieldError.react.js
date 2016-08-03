@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ValidationError from '../../../common/lib/validation/ValidationError';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
@@ -15,7 +15,7 @@ const messages = defineMessages({
   },
 });
 
-export default class FieldError extends PureComponent {
+export default class FieldError extends Component {
 
   static propTypes = {
     error: PropTypes.any,

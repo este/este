@@ -1,5 +1,5 @@
 import Email from './Email.react';
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Social from './Social.react';
 import ValidationError from '../../common/lib/validation/ValidationError';
 import authErrorMessages from '../../common/auth/errorMessages';

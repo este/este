@@ -1,5 +1,5 @@
 import * as reactIntl from 'react-intl';
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Text from './Text.react';
 
 // Create react-intl component which work in the React Native.
