@@ -1,4 +1,7 @@
 {
+  "env": {
+    "node": true
+  },
   "rules": {
     "no-console": 0 // http://eslint.org/docs/rules/no-console#when-not-to-use-it
   },

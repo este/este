@@ -1,17 +1,20 @@
-// A higher order component for Facebook XFBML.
+// Higher order component for Facebook XFBML.
 // Examples
 //  https://gist.github.com/steida/04a39dfa1043e1451044ba8370743b0c
 //  https://gist.github.com/steida/b19a1858e38007651a616ae44244ca52
-
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
 
 export default function xfbml(WrappedComponent) {
   return class Wrapper extends PureComponent {
 
-    parseXfbmlAsap(el) {
+    constructor() {
+      super();
+      this.onWrappedComponentRef = this.onWrappedComponentRef.bind(this);
+    }
+
+    parseXfbmlAsap() {
       if (window.FB) {
-        window.FB.XFBML.parse(el);
+        window.FB.XFBML.parse(this.el);
         return;
       }
       const fbAsyncInit = window.fbAsyncInit;
@@ -19,23 +22,26 @@ export default function xfbml(WrappedComponent) {
       window.fbAsyncInit = () => {
         fbAsyncInit();
         if (!this._isMounted) return;
-        window.FB.XFBML.parse(el);
+        window.FB.XFBML.parse(this.el);
       };
     }
 
     componentDidMount() {
       this._isMounted = true;
-      const el = ReactDOM.findDOMNode(this);
-      this.parseXfbmlAsap(el);
+      this.parseXfbmlAsap();
     }
 
     componentWillUnmount() {
       this._isMounted = false;
     }
 
+    onWrappedComponentRef(el) {
+      this.el = el;
+    }
+
     render() {
       return (
-        <WrappedComponent {...this.props} />
+        <WrappedComponent {...this.props} ref={this.onWrappedComponentRef} />
       );
     }
 

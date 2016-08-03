@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 
 // Container component.
-export class Todos extends PureComponent {
+class Todos extends PureComponent {
 
   static propTypes = {
     deleteTodo: PropTypes.func.isRequired,

@@ -74,9 +74,9 @@ export default function configureMiddleware(initialState, platformDeps, platform
     middleware.push(storageMiddleware);
   }
 
-  const enableLogger =
-    process.env.NODE_ENV !== 'production' &&
-    process.env.IS_BROWSER || initialState.device.isReactNative;
+  const enableLogger = process.env.NODE_ENV !== 'production' && (
+    process.env.IS_BROWSER || initialState.device.isReactNative
+  );
 
   // Logger must be the last middleware in chain.
   if (enableLogger) {

@@ -15,7 +15,7 @@ export default class FirebasePage extends PureComponent {
           }
         </FormattedMessage>
         <h2>
-          <a href="https://firebase.google.com/" target="_blank">
+          <a href="https://firebase.google.com/">
             <img
               role="presentation"
               src={require('./logo.png')}

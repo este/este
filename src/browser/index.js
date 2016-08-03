@@ -1,3 +1,4 @@
+/* eslint-disable react/require-extension */
 // Bootstrap environment
 
 const onWindowIntl = () => {
@@ -13,6 +14,7 @@ const onWindowIntl = () => {
   const fr = require('react-intl/locale-data/fr');
   const pt = require('react-intl/locale-data/pt');
   const ro = require('react-intl/locale-data/ro');
+
   [cs, de, en, es, fr, pt, ro].forEach(locale => addLocaleData(locale));
 
   require('./main');
@@ -38,6 +40,7 @@ if (!window.Intl) {
     require('intl/locale-data/jsonp/fr.js');
     require('intl/locale-data/jsonp/pt.js');
     require('intl/locale-data/jsonp/ro.js');
+
     onWindowIntl();
   });
 } else {

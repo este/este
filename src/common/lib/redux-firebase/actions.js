@@ -61,7 +61,7 @@ const emailSignIn = async (firebaseAuth, validate, { email, password }) => {
 
 // stackoverflow.com/a/33997042/233902
 const isFacebookApp = () => {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const ua = navigator.userAgent || navigator.vendor; // eslint-disable-line no-undef
   return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
 };
 

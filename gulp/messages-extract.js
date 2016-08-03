@@ -5,8 +5,8 @@ import { messagesToCode } from './support/messages';
 gulp.task('messages-extract', () => {
   const through = require('through2');
   const babel = require('babel-core');
-  const messages = [];
 
+  const messages = [];
   const getReactIntlMessages = code => babel.transform(code, {
     plugins: ['react-intl'],
     presets: ['es2015', 'react', 'stage-1'],

@@ -8,6 +8,7 @@ module.exports = function polyfillLocales(global, locales) {
       // `Intl` exists, but it doesn't have the data we need, so load the
       // polyfill and replace the constructors we need with the polyfill's.
       require('intl');
+
       Intl.NumberFormat = IntlPolyfill.NumberFormat; // eslint-disable-line no-undef
       Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat; // eslint-disable-line no-undef
     }

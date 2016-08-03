@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import fs from 'fs';
 import gulp from 'gulp';
+import loadMessages from '../src/server/intl/loadMessages';
 import { diff, messagesToCode } from './support/messages';
 
 gulp.task('messages-clear', ['messages-extract'], () => {
-  const loadMessages = require('../src/server/intl/loadMessages');
   const messages = loadMessages({ includeDefault: true });
   const defaultMessagesKeys = Object.keys(messages._default);
 

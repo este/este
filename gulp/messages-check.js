@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import gulp from 'gulp';
+import loadMessages from '../src/server/intl/loadMessages';
 import { diff } from './support/messages';
 
 gulp.task('messages-check', ['messages-extract'], () => {
-  const loadMessages = require('../src/server/intl/loadMessages');
   const messages = loadMessages({ includeDefault: true });
   const defaultMessagesKeys = Object.keys(messages._default);
 
@@ -20,7 +20,7 @@ gulp.task('messages-check', ['messages-extract'], () => {
       const missingMessagesKeys = diff(defaultMessagesKeys, localeMessagesKeys);
       const unusedMessagesKeys = diff(localeMessagesKeys, defaultMessagesKeys);
       if (!missingMessagesKeys.length && !unusedMessagesKeys.length) return;
-      console.log(locale);
+      console.log(locale); // eslint-disable-line no-console
       log('missing messages', missingMessagesKeys);
       log('unused messages', unusedMessagesKeys);
     });

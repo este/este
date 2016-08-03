@@ -1,6 +1,6 @@
 import fs from 'fs';
 import gulp from 'gulp';
-import { injectFavicon } from './support/favicon/favicon';
+import injectFavicon from './support/favicon/favicon';
 
 gulp.task('favicon-inject', () => {
   const content = `/* eslint-disable quote-props, quotes */

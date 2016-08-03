@@ -33,7 +33,7 @@ class SignIn extends PureComponent {
 
   redirect() {
     const { location, redirectTo, router } = this.props;
-    const url = location.state && location.state.nextPathname || redirectTo;
+    const url = (location.state && location.state.nextPathname) || redirectTo;
     router.replace(url);
   }
 
