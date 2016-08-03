@@ -20,10 +20,14 @@ export default class AppText extends Component {
     style: Text.propTypes.style,
   };
 
+  setNativeProps(nativeProps) {
+    this.text.setNativeProps(nativeProps);
+  }
+
   render() {
     const { children, style } = this.props;
     return (
-      <Text {...this.props} style={[styles.text, style]}>
+      <Text {...this.props} ref={text => { this.text = text; }} style={[styles.text, style]}>
         {typeof children === 'string'
           ? normalizeMultilineString(children)
           : children
