@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
+import gravatar from 'gravatar-api';
 import routes from '../routes';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, View } from 'react-native';
@@ -27,21 +28,25 @@ class MePage extends Component {
     const { viewer } = this.props;
     if (!viewer) return null;
     const { displayName, photoURL } = viewer;
+    const uri = photoURL || gravatar.imageUrl({
+      email: displayName,
+      parameters: {
+        default: 'retro',
+        rating: 'x',
+        size: 100,
+      },
+      secure: true,
+    });
 
     return (
       <CenteredContainer>
         <View>
           <Text>{displayName}</Text>
         </View>
-        {photoURL ?
-          <Image
-            source={{ uri: photoURL }}
-            style={{ height: 100, margin: 20, width: 100 }}
-          />
-        :
-          // TODO: Add gravatar, remember the displayName is the email.
-          <View style={{ margin: 20 }} />
-        }
+        <Image
+          source={{ uri }}
+          style={{ height: 100, margin: 20, width: 100 }}
+        />
         <SignOut />
       </CenteredContainer>
     );
