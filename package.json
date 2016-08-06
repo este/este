@@ -36,8 +36,6 @@
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-react-intl": "^2.1.1",
     "babel-plugin-react-transform": "^2.0.0",
-    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
-    "babel-plugin-transform-es2015-parameters": "^6.11.4",
     "babel-plugin-transform-react-constant-elements": "^6.3.13",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-polyfill": "^6.5.0",

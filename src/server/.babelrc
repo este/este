@@ -1,14 +1,13 @@
 {
-  "presets": ["es2015-node6", "react", "stage-1"],
+  "presets": ["es2015-node6/object-rest", "react", "stage-1"],
   "plugins": [
     ["transform-runtime", {
       "helpers": false,
       "polyfill": false,
       "regenerator": false,
     }],
-    "add-module-exports",
     "transform-es2015-destructuring",
-    "transform-es2015-parameters"
+    "add-module-exports"
   ],
   "env": {
     "production": {
