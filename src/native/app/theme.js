@@ -4,9 +4,12 @@ import { Platform } from 'react-native';
 // // TODO: Set fontSize by Math.min(height, width);
 // const { height, width } = Dimensions.get('window');
 
-theme.fontSize = Platform.select({
-  android: 18,
-  ios: 16,
-});
+const nativeTheme = {
+  ...theme,
+  fontSize: Platform.select({
+    android: 18,
+    ios: 16,
+  }),
+};
 
-export default theme;
+export default nativeTheme;
