@@ -242,6 +242,9 @@ export function firebaseStart() {
       if (!result.credential) return;
       dispatch({ type: FIREBASE_SIGN_IN_SUCCESS, payload: result });
     }, error => {
+      if (error.code === 'auth/operation-not-supported-in-this-environment') {
+        return;
+      }
       dispatch({ type: FIREBASE_SIGN_IN_ERROR, payload: error });
     });
     firebaseAuth().onAuthStateChanged(firebaseUser => {
