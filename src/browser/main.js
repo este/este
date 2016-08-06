@@ -4,11 +4,11 @@ import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-localstorage';
-import useScroll from 'react-router-scroll';
 import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import { useScroll } from 'react-router-scroll';
 
 const initialState = fromJSON(window.__INITIAL_STATE__);
 const reportingMiddleware = configureReporting({

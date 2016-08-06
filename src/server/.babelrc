@@ -6,7 +6,9 @@
       "polyfill": false,
       "regenerator": false,
     }],
-    "add-module-exports"
+    "add-module-exports",
+    "transform-es2015-destructuring",
+    "transform-es2015-parameters"
   ],
   "env": {
     "production": {
