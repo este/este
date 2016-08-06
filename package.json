@@ -103,7 +103,7 @@
     "react-redux": "^4.0.0",
     "react-router": "^2.3.0",
     "react-router-redux": "^4.0.0",
-    "react-router-scroll": "^0.2.0",
+    "react-router-scroll": "^0.3.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.0.5",
