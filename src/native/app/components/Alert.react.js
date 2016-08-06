@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
     height: 0,
     left: 0,
     overflow: 'hidden',
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   message: {
-    color: '#fff',
+    color: theme.light(theme.inverseTextColor),
     fontWeight: 'bold',
     margin: theme.fontSize * .75,
     textAlign: 'center',

@@ -18,6 +18,7 @@ export default {
   backgroundColor: '#fff',
   inverseTextColor: '#eee',
   inverseBackgroundColor: '#2C2C2C',
+  separator: '#f1f1f1',
 
   brandPrimary: '#31AACC',
   brandSuccess: '#5cb85c',

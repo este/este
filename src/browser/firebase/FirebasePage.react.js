@@ -4,6 +4,13 @@ import React, { Component } from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
+const styles = {
+  image: {
+    height: 27,
+    width: 140,
+  },
+};
+
 export default class FirebasePage extends Component {
 
   render() {
@@ -19,7 +26,7 @@ export default class FirebasePage extends Component {
             <img
               role="presentation"
               src={require('./logo.png')}
-              style={{ height: 27, width: 140 }}
+              style={styles.image}
             />
           </a>
         </h2>

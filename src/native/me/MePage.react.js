@@ -3,8 +3,16 @@ import SignOut from '../auth/SignOut.react';
 import gravatar from 'gravatar-api';
 import routes from '../routes';
 import { CenteredContainer, Text } from '../app/components';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
+
+const styles = StyleSheet.create({
+  image: {
+    height: 100,
+    margin: 20,
+    width: 100,
+  },
+});
 
 class MePage extends Component {
 
@@ -45,7 +53,7 @@ class MePage extends Component {
         </View>
         <Image
           source={{ uri }}
-          style={{ height: 100, margin: 20, width: 100 }}
+          style={styles.image}
         />
         <SignOut />
       </CenteredContainer>

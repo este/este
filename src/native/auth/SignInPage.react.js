@@ -8,6 +8,9 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
   email: {
     marginBottom: theme.fontSize * 2,
     width: theme.fontSize * 16,
@@ -40,7 +43,7 @@ class SignInPage extends Component {
     return (
       <View>
         <ScrollView>
-          <Container style={{ alignItems: 'center' }}>
+          <Container style={styles.container}>
             <Email style={styles.email} />
             <Social style={styles.social} />
           </Container>

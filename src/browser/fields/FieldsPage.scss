@@ -55,5 +55,8 @@
     &:active {
       border: solid 1px #eee;
     }
+    &.toggled {
+      font-weight: bold;
+    }
   }
 }

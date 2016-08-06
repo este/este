@@ -1,13 +1,26 @@
+import * as components from '../app/components';
 import React, { Component, PropTypes } from 'react';
 import theme from '../app/theme';
-import {
+import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { setCurrentLocale } from '../../common/intl/actions';
+
+const {
   CenteredContainer,
   FormattedDate,
   FormattedRelative,
   Text,
-} from '../app/components';
-import { connect } from 'react-redux';
-import { setCurrentLocale } from '../../common/intl/actions';
+} = components;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: theme.fontSizeH5,
+    marginBottom: theme.fontSize * .5,
+  },
+  selected: {
+    fontWeight: 'bold',
+  },
+});
 
 class IntlPage extends Component {
 
@@ -29,11 +42,7 @@ class IntlPage extends Component {
       <CenteredContainer>
         {locales.map(locale =>
           <Text
-            style={{
-              fontSize: theme.fontSizeH5,
-              fontWeight: locale === currentLocale ? 'bold' : 'normal',
-              marginBottom: theme.fontSize * .5,
-            }}
+            style={[styles.text, locale === currentLocale && styles.selected]}
             key={locale}
             onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
           >{locale}</Text>

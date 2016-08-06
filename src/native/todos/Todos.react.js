@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     width: 60,
   },
   row: {
-    borderBottomColor: '#f1f1f1',
+    borderBottomColor: theme.separator,
     borderBottomWidth: 1,
     height: 53,
   },

@@ -4,6 +4,7 @@ import DynamicField from './DynamicField.react.js';
 import Helmet from 'react-helmet';
 import React, { Component, PropTypes } from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
+import classnames from 'classnames';
 import linksMessages from '../../common/app/linksMessages';
 import { FieldError } from '../app/components';
 import { FormattedMessage, defineMessages } from 'react-intl';
@@ -172,9 +173,10 @@ class FieldsPage extends Component {
             */}
             <h3>Custom</h3>
             <div
-              className="custom-toggle"
+              className={classnames('custom-toggle', {
+                toggled: fields.toggled.value,
+              })}
               onClick={this.onToggleClick}
-              style={{ fontWeight: fields.toggled.value ? 'bold' : 'normal' }}
             >Toggle me!</div>
             <div>
               <button type="submit">

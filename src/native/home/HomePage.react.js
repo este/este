@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { CenteredContainer, Text } from '../app/components';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  text: {
+    textAlign: 'center',
+  },
+});
 
 export default class HomePage extends Component {
 
   render() {
     return (
       <CenteredContainer>
-        <Text style={{ textAlign: 'center' }}>
+        <Text style={styles.text}>
           {Platform.select({
             android: `
               Este App
