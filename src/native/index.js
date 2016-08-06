@@ -2,11 +2,6 @@
 // Bootstrap environment
 require('react-native-browser-polyfill');
 
-console.ignoredYellowBox = [
-  // github.com/facebook/react-native/issues/9093
-  'Warning: You are manually calling a React.PropTypes validation',
-];
-
 // global.Intl Polyfill
 // Server polyfillLocales doesn't work anymore, because packager error:
 // Encountered an error while persisting cache:
