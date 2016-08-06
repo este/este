@@ -6,7 +6,7 @@ import linksMessages from '../../common/app/linksMessages';
 import routes from '../routes';
 import start from '../../common/app/start';
 import theme from './theme';
-import { Container } from './components';
+import { Alert, Container } from './components';
 import { Navigator, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
@@ -82,6 +82,7 @@ class App extends Component {
           title={this.getTitle(route)}
           toggleSideMenu={this.toggleSideMenu}
         />
+        <Alert />
         <route.Page navigator={this.navigator} />
       </Container>
     );

@@ -1,6 +1,6 @@
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
-import { ValidationError } from '../common/lib/validation';
+import errorToMessage from '../common/app/errorToMessage';
 
 // Deps.
 import firebase from 'firebase';
@@ -16,8 +16,9 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
-// Action payload as promise with error handling.
+// Like redux-promise-middleware but sane.
 const promiseMiddleware = options => ({ dispatch }) => next => action => {
+  const { shouldThrow } = options || {};
   const { payload } = action;
   const payloadIsPromise = payload && typeof payload.then === 'function';
   if (!payloadIsPromise) return next(action);
@@ -29,14 +30,17 @@ const promiseMiddleware = options => ({ dispatch }) => next => action => {
     .then(value => dispatch(createAction('SUCCESS', value)))
     .catch(error => {
       dispatch(createAction('ERROR', error));
-      if (options.onError) options.onError(error);
+      // Not all errors need to be reported.
+      if (shouldThrow(error)) {
+        throw error;
+      }
     });
   return next(createAction('START'));
 };
 
 export default function configureMiddleware(initialState, platformDeps, platformMiddleware) {
+  // Lazy init.
   if (!firebaseDeps) {
-    // Lazy init.
     firebase.initializeApp(initialState.config.firebase);
     firebaseDeps = {
       firebase: firebase.database().ref(),
@@ -66,10 +70,7 @@ export default function configureMiddleware(initialState, platformDeps, platform
       validate,
     }),
     promiseMiddleware({
-      onError(error) {
-        if (error instanceof ValidationError) return;
-        throw error;
-      },
+      shouldThrow: error => errorToMessage(error) === undefined,
     }),
     ...platformMiddleware,
   ];
