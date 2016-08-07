@@ -1,12 +1,12 @@
-import test from 'ava';
 import * as actions from '../actions';
+import test from 'ava';
 
 // Learn AVA:
 //  - speakerdeck.com/novemberborn/ava-at-lnug
 //  - shift.infinite.red/testing-the-bejeezus-out-of-react-native-apps-with-ava-330f51f8f6c3
 //  - http://silvenon.com/testing-react-and-redux/
 
-// Note test assertions with a non-clever syntax:
+// Test assertions with a non-clever syntax:
 //  - t.true(someBool);
 //  - t.deepEqual(a, b);
 //  - t.is(a, b);
