@@ -4,7 +4,7 @@ import Social from './Social.react';
 import routes from '../routes';
 import theme from '../app/theme';
 import { Container } from '../app/components';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -41,14 +41,12 @@ class SignInPage extends Component {
 
   render() {
     return (
-      <View>
-        <ScrollView>
-          <Container style={styles.container}>
-            <Email style={styles.email} />
-            <Social style={styles.social} />
-          </Container>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <Container style={styles.container}>
+          <Email style={styles.email} />
+          <Social style={styles.social} />
+        </Container>
+      </ScrollView>
     );
   }
 

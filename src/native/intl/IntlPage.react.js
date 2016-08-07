@@ -1,7 +1,7 @@
 import * as components from '../app/components';
 import React, { Component, PropTypes } from 'react';
 import theme from '../app/theme';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
@@ -39,27 +39,29 @@ class IntlPage extends Component {
     const { currentLocale, locales, setCurrentLocale } = this.props;
 
     return (
-      <CenteredContainer>
-        {locales.map(locale =>
-          <Text
-            style={[styles.text, locale === currentLocale && styles.selected]}
-            key={locale}
-            onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
-          >{locale}</Text>
-        )}
-        <FormattedDate
-          day="numeric"
-          month="short"
-          style={{ margin: theme.fontSize }}
-          value={Date.now()}
-          year="numeric"
-        />
-        <FormattedRelative
-          initialNow={this.componentRenderedAt}
-          updateInterval={1000 * 1}
-          value={this.componentRenderedAt}
-        />
-      </CenteredContainer>
+      <ScrollView>
+        <CenteredContainer>
+          {locales.map(locale =>
+            <Text
+              style={[styles.text, locale === currentLocale && styles.selected]}
+              key={locale}
+              onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
+            >{locale}</Text>
+          )}
+          <FormattedDate
+            day="numeric"
+            month="short"
+            style={{ margin: theme.fontSize }}
+            value={Date.now()}
+            year="numeric"
+          />
+          <FormattedRelative
+            initialNow={this.componentRenderedAt}
+            updateInterval={1000 * 1}
+            value={this.componentRenderedAt}
+          />
+        </CenteredContainer>
+      </ScrollView>
     );
   }
 
