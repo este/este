@@ -13,6 +13,9 @@ const {
 } = components;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: theme.fontSizeH5,
+  },
   text: {
     fontSize: theme.fontSizeH5,
     marginBottom: theme.fontSize * .5,
@@ -40,7 +43,7 @@ class IntlPage extends Component {
 
     return (
       <ScrollView>
-        <CenteredContainer>
+        <CenteredContainer style={styles.container}>
           {locales.map(locale =>
             <Text
               style={[styles.text, locale === currentLocale && styles.selected]}
