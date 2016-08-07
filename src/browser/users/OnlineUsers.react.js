@@ -14,7 +14,7 @@ const styles = {
     margin: '.5em',
     maxHeight: 50,
   },
-}
+};
 
 const User = ({ user: { displayName, photoURL } }) =>
   <div style={styles.user}>
