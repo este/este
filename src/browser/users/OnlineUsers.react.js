@@ -1,4 +1,3 @@
-import './OnlineUsers.scss';
 import Gravatar from 'react-gravatar';
 import React, { Component, PropTypes } from 'react';
 import { Loading } from '../app/components';
@@ -6,12 +5,24 @@ import { connect } from 'react-redux';
 import { onUsersPresence } from '../../common/users/actions';
 import { queryFirebase } from '../../common/lib/redux-firebase';
 
+const styles = {
+  user: {
+    display: 'inline-block',
+  },
+  gravatar: {
+    borderRadius: '25%',
+    margin: '.5em',
+    maxHeight: 50,
+  },
+}
+
 const User = ({ user: { displayName, photoURL } }) =>
-  <div className="user">
+  <div style={styles.user}>
     {photoURL ?
       <img
         role="presentation"
         src={photoURL}
+        style={styles.gravatar}
         title={displayName}
       />
     :
@@ -20,7 +31,7 @@ const User = ({ user: { displayName, photoURL } }) =>
         email={displayName} // For users signed in via email.
         https
         rating="x"
-        size={50}
+        style={styles.gravatar}
         title={displayName}
       />
     }

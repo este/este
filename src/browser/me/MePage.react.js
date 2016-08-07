@@ -1,4 +1,3 @@
-import './MePage.scss';
 import Gravatar from 'react-gravatar';
 import Helmet from 'react-helmet';
 import React, { Component, PropTypes } from 'react';
@@ -7,6 +6,26 @@ import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
+// Inline styles without any library like Khan/aphrodite or whatever.
+// I don't think we need such abstraction.
+//  1) Common CSS rules can be inlined
+//  2) Browser CSS rules can still leverage .scss
+// http://shouldiprefix.com
+
+const styles = {
+  ul: {
+    padding: 0,
+  },
+  li: {
+    display: 'inline-block',
+    marginRight: '1em',
+  },
+  active: {
+    fontWeight: 'normal',
+    textDecoration: 'underline',
+  },
+};
 
 class MePage extends Component {
 
@@ -26,14 +45,14 @@ class MePage extends Component {
             <Helmet title={message} />
           }
         </FormattedMessage>
-        <ul>
-          <li>
-            <Link activeClassName="active" to="/me/profile">
+        <ul style={styles.ul}>
+          <li style={styles.li}>
+            <Link activeStyle={styles.active} to="/me/profile">
               <FormattedMessage {...linksMessages.profile} />
             </Link>
           </li>
-          <li>
-            <Link activeClassName="active" to="/me/settings">
+          <li style={styles.li}>
+            <Link activeStyle={styles.active} to="/me/settings">
               <FormattedMessage {...linksMessages.settings} />
             </Link>
           </li>
