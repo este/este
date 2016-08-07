@@ -17,20 +17,28 @@ export default defineMessages({
     defaultMessage: 'Home',
     id: 'app.links.home',
   },
-  signIn: {
-    defaultMessage: 'Sign in',
-    id: 'app.links.signIn',
-  },
   me: {
     defaultMessage: 'Me',
     id: 'app.links.me',
   },
-  todos: {
-    defaultMessage: 'Todos',
-    id: 'app.links.todos',
-  },
   offline: {
     defaultMessage: 'Offline',
     id: 'app.links.offline',
+  },
+  profile: {
+    defaultMessage: 'Profile',
+    id: 'app.links.profile',
+  },
+  settings: {
+    defaultMessage: 'Settings',
+    id: 'app.links.settings',
+  },
+  signIn: {
+    defaultMessage: 'Sign in',
+    id: 'app.links.signIn',
+  },
+  todos: {
+    defaultMessage: 'Todos',
+    id: 'app.links.todos',
   },
 });

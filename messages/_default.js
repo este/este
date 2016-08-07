@@ -77,6 +77,14 @@ export default [
     "defaultMessage": "Offline",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Profile",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Settings",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Sign in",
   },
@@ -175,18 +183,6 @@ export default [
   {
     "id": "loading.longLoadingText",
     "defaultMessage": "Still loading, please check your connection",
-  },
-  {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Profile",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Settings",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Hi {displayName}. This is your secret page.",
   },
   {
     "id": "me.profilePage.title",

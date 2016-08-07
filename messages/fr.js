@@ -81,6 +81,14 @@ export default [
     "defaultMessage": "Hors ligne",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Profil",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Paramètres",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Connexion",
   },
@@ -173,18 +181,6 @@ export default [
     "defaultMessage": "{unreadCount, plural, one {message} other {messages}}",
   },
   {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Paramètres",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Bonjour {displayName}. C'est votre page secrète.",
-  },
-  {
     "id": "me.profilePage.title",
     "defaultMessage": "Profil",
   },
@@ -231,5 +227,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "C'est plutôt calme par ici...",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Chargement",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Chargement toujours, s'il vous plaît vérifier votre connexion",
   },
 ];

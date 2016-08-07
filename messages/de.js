@@ -81,6 +81,14 @@ export default [
     "defaultMessage": "Offline",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Profil",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Einstellungen",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Anmelden",
   },
@@ -173,18 +181,6 @@ export default [
     "defaultMessage": "{unreadCount, plural, one {Meldung} other {Meldungen}}",
   },
   {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Einstellungen",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Hallo {displayName}. Das ist Ihre geheime Seite.",
-  },
-  {
     "id": "me.profilePage.title",
     "defaultMessage": "Profil",
   },
@@ -231,5 +227,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Es ist eher ruhig hier...",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Laden",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Noch Laden, überprüfen Sie bitte Ihre Verbindung",
   },
 ];

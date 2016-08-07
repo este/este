@@ -81,6 +81,14 @@ export default [
     "defaultMessage": "Deconectat",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Profil",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Parametri",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Autentificare",
   },
@@ -173,18 +181,6 @@ export default [
     "defaultMessage": "{unreadCount, plural, one {mesaj} other {mesaje}}",
   },
   {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Parametri",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Bună {displayName}. Aici e pagina voastră secretă.",
-  },
-  {
     "id": "me.profilePage.title",
     "defaultMessage": "Profil",
   },
@@ -231,5 +227,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "E calm pe aici...",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Se incarca",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Încă se încarcă, vă rugăm să verificați conexiunea",
   },
 ];

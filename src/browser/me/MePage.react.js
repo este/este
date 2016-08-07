@@ -4,24 +4,9 @@ import Helmet from 'react-helmet';
 import React, { Component, PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
-const messages = defineMessages({
-  welcome: {
-    defaultMessage: 'Hi {displayName}. This is your secret page.',
-    id: 'me.page.welcome',
-  },
-  linkToProfile: {
-    defaultMessage: 'Profile',
-    id: 'me.page.linkToProfile',
-  },
-  linkToSettings: {
-    defaultMessage: 'Settings',
-    id: 'me.page.linkToSettings',
-  },
-});
 
 class MePage extends Component {
 
@@ -44,17 +29,18 @@ class MePage extends Component {
         <ul>
           <li>
             <Link activeClassName="active" to="/me/profile">
-              <FormattedMessage {...messages.linkToProfile} />
+              <FormattedMessage {...linksMessages.profile} />
             </Link>
           </li>
           <li>
             <Link activeClassName="active" to="/me/settings">
-              <FormattedMessage {...messages.linkToSettings} />
+              <FormattedMessage {...linksMessages.settings} />
             </Link>
           </li>
         </ul>
         {children ||
           <div>
+            <p>{displayName}</p>
             {photoURL ?
               <img role="presentation" src={photoURL} />
             :
@@ -66,9 +52,6 @@ class MePage extends Component {
                 size={100}
               />
             }
-            <p>
-              <FormattedMessage {...messages.welcome} values={{ displayName }} />
-            </p>
             <SignOut />
           </div>
         }

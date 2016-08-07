@@ -81,6 +81,14 @@ export default [
     "defaultMessage": "Off-line",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Perfil",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Configurações",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Usuário",
   },
@@ -173,18 +181,6 @@ export default [
     "defaultMessage": "{unreadCount, plural, one {mensagem} other {mensagens}}",
   },
   {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Perfil",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Configurações",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Olá {displayName}. Esta é sua página secreta.",
-  },
-  {
     "id": "me.profilePage.title",
     "defaultMessage": "Perfil",
   },
@@ -231,5 +227,13 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Vazio...",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Carregando",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Ainda a carregar, por favor, verifique sua conexão",
   },
 ];

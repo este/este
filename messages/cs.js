@@ -81,6 +81,14 @@ export default [
     "defaultMessage": "Offline",
   },
   {
+    "id": "app.links.profile",
+    "defaultMessage": "Profil",
+  },
+  {
+    "id": "app.links.settings",
+    "defaultMessage": "Nastavení",
+  },
+  {
     "id": "app.links.signIn",
     "defaultMessage": "Přihlášení",
   },
@@ -179,18 +187,6 @@ export default [
   {
     "id": "loading.longLoadingText",
     "defaultMessage": "Stále nahrávám...",
-  },
-  {
-    "id": "me.page.linkToProfile",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.page.linkToSettings",
-    "defaultMessage": "Nastavení",
-  },
-  {
-    "id": "me.page.welcome",
-    "defaultMessage": "Ahoj {displayName}. Tohle je tvoje tajná stránka.",
   },
   {
     "id": "me.profilePage.title",
