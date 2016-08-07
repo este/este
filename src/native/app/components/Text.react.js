@@ -5,7 +5,6 @@ import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
   text: {
     color: theme.textColor,
-    lineHeight: theme.lineHeight * theme.fontSize,
     fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
   },
@@ -36,8 +35,15 @@ export default class AppText extends Component {
 
   render() {
     const { children, style } = this.props;
+    const fontSize = (style && style.fontSize) || theme.fontSize;
+    const lineHeight = fontSize * theme.lineHeight;
+
     return (
-      <Text {...this.props} ref={this.onTextRef} style={[styles.text, style]}>
+      <Text
+        {...this.props}
+        ref={this.onTextRef}
+        style={[styles.text, style, { lineHeight }]}
+      >
         {typeof children === 'string'
           ? normalizeMultilineString(children)
           : children
