@@ -34,19 +34,14 @@ class NewTodo extends Component {
 
   constructor() {
     super();
-    this.onTextInputEndEditing = this.onTextInputEndEditing.bind(this);
     this.onSubmitEditing = this.onSubmitEditing.bind(this);
   }
 
-  onTextInputEndEditing() {
+  onSubmitEditing() {
     const { addTodo, fields } = this.props;
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);
     fields.$reset();
-  }
-
-  onSubmitEditing() {
-    this.onTextInputEndEditing();
   }
 
   render() {
@@ -56,13 +51,12 @@ class NewTodo extends Component {
       <View style={styles.newTodo}>
         <TextInput
           {...fields.title}
+          inputStyle={styles.textInputInput}
           maxLength={100}
-          onEndEditing={this.onTextInputEndEditing}
           onSubmitEditing={this.onSubmitEditing}
           placeholder={formatMessage(newTodoMessages.placeholder)}
           placeholderTextColor={'#cce9f2'}
           viewStyle={styles.textInputView}
-          inputStyle={styles.textInputInput}
         />
       </View>
     );
