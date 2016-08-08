@@ -114,9 +114,8 @@ class App extends Component {
 }
 
 App = injectIntl(App);
+App = start(App);
 
-App = connect(state => ({
+export default connect(state => ({
   storageLoaded: state.app.storageLoaded,
 }))(App);
-
-export default start(App);

@@ -25,7 +25,6 @@ const createNativeInitialState = () => ({
     .set('platform', Platform.OS),
   intl: initialState.intl
     .set('currentLocale', getDefaultDeviceLocale())
-    .set('defaultLocale', getDefaultDeviceLocale())
     .set('initialNow', Date.now()),
 });
 
