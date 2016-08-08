@@ -85,8 +85,6 @@ path /users-presence {
 
 path /users-presence/{uid} is UserPresence[] {
   create() { isViewer(uid) }
-  update() { isViewer(uid) }
-  // Figure out how it can be protected. Waiting for Kato response.
-  // Can't be simple isViewer because unauth user connection would live forever.
+  update() { true }
   delete() { true }
 }
