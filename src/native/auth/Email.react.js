@@ -98,6 +98,7 @@ class Email extends Component {
           invalid={ValidationError.isInvalid(error, 'email')}
           maxLength={100}
           placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
+          returnKeyType="next"
         />
         {!forgetPasswordIsShown &&
           <TextInput
@@ -106,6 +107,7 @@ class Email extends Component {
             invalid={ValidationError.isInvalid(error, 'password')}
             maxLength={1000}
             placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
+            returnKeyType="next"
             secureTextEntry
           />
         }
