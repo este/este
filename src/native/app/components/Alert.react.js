@@ -112,7 +112,7 @@ class Alert extends Component {
     if (!error) return null;
 
     const errorMessage = errorToMessage(error);
-    if (!errorMessage) return null;
+    if (!errorMessage || !errorMessage.message) return null;
 
     const alertStyle = this.getAlertStyle();
     const containerStyle = this.getContainerStyle();

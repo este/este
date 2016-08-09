@@ -70,7 +70,7 @@ export default function configureMiddleware(initialState, platformDeps, platform
       validate,
     }),
     promiseMiddleware({
-      shouldThrow: error => errorToMessage(error) === undefined,
+      shouldThrow: error => !errorToMessage(error),
     }),
     ...platformMiddleware,
   ];

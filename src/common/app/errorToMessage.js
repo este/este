@@ -5,20 +5,30 @@ import { firebaseMessages } from '../lib/redux-firebase';
 const isInnocuousError = error =>
   error.code === 'auth/popup-closed-by-user'; // Firebase stuff.
 
+const validationErrorToMessage = error => ({
+  message: authErrorMessages[error.name] || firebaseMessages[error.name],
+  values: error.params,
+});
+
+// Map promiseMiddleware rejected error to UI message.
+// Unknown errors are reported so the developer can check what is wrong.
 export default function errorToMessage(error) {
-  // Some errors can be just ignored.
-  if (isInnocuousError(error)) return null;
-
-  // // TODO: Handle Firebase stuff. No net and no auth.
-  // if (error.code === 'auth/network-request-failed') {
-  // }
-
-  if (error instanceof ValidationError) {
-    const message =
-      authErrorMessages[error.name] ||
-      firebaseMessages[error.name];
-    const values = error.params;
-    return { message, values };
+  // Some errors are so innocuos that we don't have to show any message.
+  if (isInnocuousError(error)) {
+    return { message: null };
   }
-  return undefined;
+
+  // Note all app validation errors are mapped to UI messages here.
+  // With such design the app can have a lot of various different components,
+  // and it's not a component responsibility to project an error to UI.
+  if (error instanceof ValidationError) {
+    return validationErrorToMessage(error);
+  }
+
+  if (firebaseMessages[error.code]) {
+    return { message: firebaseMessages[error.code] };
+  }
+
+  // Return null for unknown error so it will be reported.
+  return null;
 }

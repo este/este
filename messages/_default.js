@@ -145,6 +145,18 @@ export default [
     "defaultMessage": "Something like redux-form but simplified and universal.",
   },
   {
+    "id": "firebase.error.auth/network-request-failed",
+    "defaultMessage": "No internet connection.",
+  },
+  {
+    "id": "firebase.error.auth/too-many-requests",
+    "defaultMessage": "Too many requests. Try it later, please.",
+  },
+  {
+    "id": "firebase.error.auth/user-token-expired",
+    "defaultMessage": "Your credential has expired. Please sign in.",
+  },
+  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "The new user account cannot be created because the\n      specified email address is already in use.",
   },
