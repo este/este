@@ -5,7 +5,7 @@ import device from './device/reducer';
 import intl from './intl/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
-import { SIGN_OUT } from './auth/actions';
+import { FIREBASE_ON_AUTH } from '../common/lib/redux-firebase/actions';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
 import { firebaseReducer as firebase } from './lib/redux-firebase';
@@ -14,7 +14,10 @@ import { updateStateOnStorageLoad } from './configureStorage';
 
 const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
   // Reset app state on sign out, stackoverflow.com/q/35622588/233902.
-  if (action.type === SIGN_OUT) {
+  const userWasSignedOut =
+    action.type === FIREBASE_ON_AUTH &&
+    state.users.viewer && !action.payload.user;
+  if (userWasSignedOut) {
     // Preserve state without sensitive data.
     state = {
       app: state.app,

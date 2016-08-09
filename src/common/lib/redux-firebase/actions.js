@@ -3,6 +3,7 @@ import mapFirebaseUserToAppUser from './mapFirebaseUserToAppUser';
 import messages from './messages';
 import { APP_OFFLINE, APP_ONLINE } from '../../app/actions';
 import { ValidationError } from '../validation';
+import { replace } from 'react-router-redux';
 
 export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
 export const FIREBASE_ON_AUTH = 'FIREBASE_ON_AUTH';
@@ -101,10 +102,13 @@ const saveUser = user => ({ firebase }) => {
   };
 };
 
-const onAuth = user => ({ dispatch }) => {
+const onAuth = user => ({ dispatch, getState }) => {
   if (user) {
-    // TODO: Save user only after sign in, once Firebase team tell me how.
+    // Save user after successful auth to possible update its profile data.
     dispatch(saveUser(user));
+  } else if (getState().users.viewer) {
+    // Redirect to home page before sign out to ensure a valid view state.
+    dispatch(replace('/'));
   }
   return {
     type: FIREBASE_ON_AUTH,
@@ -247,16 +251,19 @@ export function firebaseStart() {
       }
       dispatch({ type: FIREBASE_SIGN_IN_ERROR, payload: error });
     });
+
     firebaseAuth().onAuthStateChanged(firebaseUser => {
       const user = mapFirebaseUserToAppUser(firebaseUser);
       monitorPresence(firebase, firebaseDatabase, user);
       dispatch(onAuth(user));
     });
+
     firebase.child('.info/connected').on('value', snap => {
       const online = snap.val();
       if (getState().app.online === online) return;
       dispatch({ type: online ? APP_ONLINE : APP_OFFLINE });
     });
+
     return {
       type: FIREBASE_START,
     };
