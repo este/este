@@ -131,6 +131,11 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - remove unused reducers from `src/common/configureReducer.js`
 - modify your FB app_id e.g. for [iOS](https://developers.facebook.com/docs/ios/getting-started/#configure-xcode-project)
 
+## Flow
+
+- install [nuclide.io](https://nuclide.io/)
+- go to Nuclide settings, enable "Use the Flow binary included in each project"
+
 ## Documentation
 
 For absolute beginners, see: [react-howto](https://github.com/petehunt/react-howto).
