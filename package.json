@@ -98,7 +98,7 @@
     "react-native": "0.31.0",
     "react-native-browser-polyfill": "^0.1.1",
     "react-native-fbsdk": "^0.3.0",
-    "react-native-locale": "0.0.10",
+    "react-native-locale": "0.0.11",
     "react-native-side-menu": "^0.20.0",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.0.0",
