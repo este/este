@@ -24,8 +24,7 @@ const createNativeInitialState = () => ({
     .set('isReactNative', true)
     .set('platform', Platform.OS),
   intl: initialState.intl
-    .set('currentLocale', getDefaultDeviceLocale())
-    .set('initialNow', Date.now()),
+    .set('currentLocale', getDefaultDeviceLocale()),
 });
 
 const store = configureStore({
