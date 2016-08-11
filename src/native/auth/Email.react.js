@@ -96,6 +96,7 @@ class Email extends Component {
           autoCorrect={false}
           editable={!disabled}
           invalid={ValidationError.isInvalid(error, 'email')}
+          keyboardType="email-address"
           maxLength={100}
           placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
           returnKeyType="next"
