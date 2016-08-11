@@ -30,9 +30,8 @@ const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
   return reducer(state, action);
 };
 
-export default function configureReducer(initialState, platformReducers) {
+export default function configureReducer(initialState) {
   let reducer = combineReducers({
-    ...platformReducers,
     app,
     auth,
     config,

@@ -7,13 +7,9 @@ export default function configureStore(options) {
     initialState,
     platformDeps = {},
     platformMiddleware = [],
-    platformReducers = {},
   } = options;
 
-  const reducer = configureReducer(
-    initialState,
-    platformReducers
-  );
+  const reducer = configureReducer(initialState);
 
   const middleware = configureMiddleware(
     initialState,
@@ -30,7 +26,7 @@ export default function configureStore(options) {
   // Enable hot reload where available.
   if (module.hot) {
     const replaceReducer = configureReducer =>
-      store.replaceReducer(configureReducer(initialState, platformReducers));
+      store.replaceReducer(configureReducer(initialState));
 
     if (initialState.device.isReactNative) {
       module.hot.accept(() => {
