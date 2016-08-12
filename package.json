@@ -55,7 +55,7 @@
     "css-loader": "^0.23.0",
     "del": "^2.1.0",
     "eslint": "^3.2.2",
-    "eslint-config-airbnb": "^10.0.0",
+    "eslint-config-airbnb": "^10.0.1",
     "eslint-loader": "^1.1.1",
     "eslint-plugin-ava": "^3.0.0",
     "eslint-plugin-babel": "^3.0.0",
