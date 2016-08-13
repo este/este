@@ -48,7 +48,7 @@ class IntlPage extends Component {
             <Text
               style={[styles.text, locale === currentLocale && styles.selected]}
               key={locale}
-              onPress={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
+              onPress={() => setCurrentLocale(locale)}
             >{locale}</Text>
           )}
           <FormattedDate

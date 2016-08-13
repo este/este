@@ -19,7 +19,7 @@ class Locales extends Component {
           <button
             disabled={locale === currentLocale}
             key={locale}
-            onClick={() => setCurrentLocale(locale)} // eslint-disable-line react/jsx-no-bind
+            onClick={() => setCurrentLocale(locale)}
           >{locale}</button>
         )}
       </div>
