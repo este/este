@@ -1,13 +1,13 @@
 import { Record } from '../transit';
 import { firebaseActions } from '../lib/redux-firebase';
 
-const InitialState = Record({
+const State = Record({
   formDisabled: false,
   error: null,
   success: null, // To get accessToken, refreshToken, whatever.
 }, 'auth');
 
-export default function authReducer(state = new InitialState, action) {
+export default function authReducer(state = new State, action) {
   switch (action.type) {
 
     case firebaseActions.FIREBASE_RESET_PASSWORD_START:

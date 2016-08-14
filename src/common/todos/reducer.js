@@ -3,11 +3,11 @@ import Todo from './todo';
 import { Map } from 'immutable';
 import { Record } from '../transit';
 
-const InitialState = Record({
+const State = Record({
   map: Map(),
 }, 'todos');
 
-export default function todosReducer(state = new InitialState, action) {
+export default function todosReducer(state = new State, action) {
   switch (action.type) {
 
     case actions.ADD_HUNDRED_TODOS: {

@@ -4,13 +4,13 @@ import { Record } from '../transit';
 import { Seq } from 'immutable';
 import { firebaseActions } from '../lib/redux-firebase';
 
-const InitialState = Record({
+const State = Record({
   online: null,
   onlineLoaded: false,
   viewer: null,
 }, 'users');
 
-export default function usersReducer(state = new InitialState, action) {
+export default function usersReducer(state = new State, action) {
   switch (action.type) {
 
     case firebaseActions.FIREBASE_ON_AUTH: {

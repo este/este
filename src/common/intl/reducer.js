@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import { Record } from '../transit';
 
-const InitialState = Record({
+const State = Record({
   currentLocale: null,
   defaultLocale: null,
   initialNow: null,
@@ -9,7 +9,7 @@ const InitialState = Record({
   messages: null,
 }, 'intl');
 
-export default function intlReducer(state = new InitialState, action) {
+export default function intlReducer(state = new State, action) {
   switch (action.type) {
 
     case actions.SET_CURRENT_LOCALE: {

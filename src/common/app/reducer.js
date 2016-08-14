@@ -1,14 +1,14 @@
 import * as actions from './actions';
 import { Record } from '../transit';
 
-const InitialState = Record({
+const State = Record({
   error: null,
   menuShown: false,
   online: false,
   storageLoaded: false,
 }, 'app');
 
-export default function appReducer(state = new InitialState, action) {
+export default function appReducer(state = new State, action) {
   switch (action.type) {
 
     case actions.APP_OFFLINE:
