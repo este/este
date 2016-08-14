@@ -1,26 +1,8 @@
 import Helmet from 'react-helmet';
 import React, { Component } from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import messages from '../../common/notfound/messages';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
-
-const messages = defineMessages({
-  title: {
-    defaultMessage: 'Page Not Found',
-    id: 'notFound.title',
-  },
-  h1: {
-    defaultMessage: 'This page isn\'t available',
-    id: 'notFound.h1',
-  },
-  p: {
-    defaultMessage: 'The link may be broken, or the page may have been removed.',
-    id: 'notFound.p',
-  },
-  continue: {
-    defaultMessage: 'Continue here please.',
-    id: 'notFound.continue',
-  },
-});
 
 export default class NotFoundPage extends Component {
 

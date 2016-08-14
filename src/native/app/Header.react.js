@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import theme from './theme';
 import { Button, Text } from './components';
 import { Platform, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+import { showMenu } from '../../common/app/actions';
 
 const iOSDefaultStatusBarHeight = 20;
 const paddingTopOffset = Platform.OS === 'ios' ? iOSDefaultStatusBarHeight : 0;
@@ -33,19 +35,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Header extends Component {
+class Header extends Component {
 
   static propTypes = {
+    menuShown: PropTypes.bool.isRequired,
+    showMenu: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    toggleSideMenu: PropTypes.func.isRequired,
   };
 
   render() {
-    const { title, toggleSideMenu } = this.props;
+    const { menuShown, showMenu, title } = this.props;
 
     return (
       <View style={styles.header}>
-        <Button onPress={toggleSideMenu} style={styles.button}>
+        <Button onPress={() => showMenu(!menuShown)} style={styles.button}>
           <Icon name="ios-menu" style={styles.icon} />
         </Button>
         <Text style={styles.title}>{title}</Text>
@@ -58,3 +61,9 @@ export default class Header extends Component {
   }
 
 }
+
+Header = connect(state => ({
+  menuShown: state.app.menuShown,
+}), { showMenu })(Header);
+
+export default Header;

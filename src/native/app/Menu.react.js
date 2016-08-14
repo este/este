@@ -5,29 +5,65 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from './components';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
+import { selectTab } from '../routing/actions';
+import { showMenu } from '../../common/app/actions';
 
 const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: theme.fontSizeH5 * .5,
     paddingVertical: theme.fontSizeH5,
   },
-  item: {
+  tabLink: {
     color: theme.inverseTextColor,
     fontSize: theme.fontSize,
     padding: theme.fontSize * .625,
   },
+  selected: {
+    backgroundColor: theme.light(theme.inverseBackgroundColor),
+  },
 });
+
+// Note patern, stateless component with arrow function.
+// github.com/airbnb/javascript/issues/801#issuecomment-230848043
+const TabLink = ({ children, link, selectTab, selected }) => (
+  <Text
+    onPress={() => selectTab(link)}
+    style={[styles.tabLink, selected && styles.selected]}
+  >
+    {children}
+  </Text>
+);
+
+TabLink.propTypes = {
+  children: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  selectTab: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
+};
 
 class Menu extends Component {
 
   static propTypes = {
+    currentTab: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
-    onRouteChange: PropTypes.func.isRequired,
+    selectTab: PropTypes.func.isRequired,
+    showMenu: PropTypes.func.isRequired,
     viewer: PropTypes.object,
   };
 
+  constructor() {
+    super();
+    this.onTabLinkSelectTap = this.onTabLinkSelectTap.bind(this);
+  }
+
+  onTabLinkSelectTap(key) {
+    const { selectTab, showMenu } = this.props;
+    showMenu(false);
+    selectTab(key);
+  }
+
   render() {
-    const { intl, onRouteChange, viewer } = this.props;
+    const { currentTab, intl, viewer } = this.props;
     const links = [
       'home',
       'todos',
@@ -42,11 +78,14 @@ class Menu extends Component {
         contentContainerStyle={styles.contentContainer}
       >
         {links.map(link =>
-          <Text
+          <TabLink
             key={link}
-            onPress={() => onRouteChange(link)} // eslint-disable-line react/jsx-no-bind
-            style={styles.item}
-          >{intl.formatMessage(linksMessages[link])}</Text>
+            selected={link === currentTab}
+            link={link}
+            selectTab={this.onTabLinkSelectTap}
+          >
+            {intl.formatMessage(linksMessages[link])}
+          </TabLink>
         )}
       </ScrollView>
     );
@@ -57,5 +96,6 @@ class Menu extends Component {
 Menu = injectIntl(Menu);
 
 export default connect(state => ({
+  currentTab: state.routing.currentTab,
   viewer: state.users.viewer,
-}))(Menu);
+}), { selectTab, showMenu })(Menu);

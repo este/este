@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import SignOut from '../auth/SignOut.react';
 import gravatar from 'gravatar-api';
-import routes from '../routes';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
+import { selectTab } from '../routing/actions';
 
 const styles = StyleSheet.create({
   image: {
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
 class MePage extends Component {
 
   static propTypes = {
+    selectTab: PropTypes.func.isRequired,
     viewer: PropTypes.object,
   };
 
@@ -25,11 +26,11 @@ class MePage extends Component {
     this.wasRedirected = false;
   }
 
-  componentWillReceiveProps({ navigator, viewer }) {
+  componentWillReceiveProps({ selectTab, viewer }) {
     if (viewer) return;
     if (this.wasRedirected) return;
     this.wasRedirected = true;
-    navigator.replace(routes.home);
+    selectTab('home');
   }
 
   render() {
@@ -62,6 +63,8 @@ class MePage extends Component {
 
 }
 
-export default connect(state => ({
+MePage = connect(state => ({
   viewer: state.users.viewer,
-}))(MePage);
+}), { selectTab })(MePage);
+
+export default MePage;

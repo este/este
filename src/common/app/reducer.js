@@ -3,6 +3,7 @@ import { Record } from '../transit';
 
 const InitialState = Record({
   error: null,
+  menuShown: false,
   online: false,
   storageLoaded: false,
 }, 'app');
@@ -15,6 +16,9 @@ export default function appReducer(state = new InitialState, action) {
 
     case actions.APP_ONLINE:
       return state.set('online', true);
+
+    case actions.APP_SHOW_MENU:
+      return state.set('menuShown', action.payload.show);
 
     case actions.APP_STORAGE_LOAD:
       return state.set('storageLoaded', true);

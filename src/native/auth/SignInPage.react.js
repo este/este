@@ -1,11 +1,11 @@
 import Email from './Email.react';
 import React, { Component, PropTypes } from 'react';
 import Social from './Social.react';
-import routes from '../routes';
 import theme from '../app/theme';
 import { Container } from '../app/components';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { selectTab } from '../routing/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 class SignInPage extends Component {
 
   static propTypes = {
-    navigator: PropTypes.object,
+    selectTab: PropTypes.func.isRequired,
     viewer: PropTypes.object,
   };
 
@@ -32,11 +32,11 @@ class SignInPage extends Component {
     this.wasRedirected = false;
   }
 
-  componentWillReceiveProps({ navigator, viewer }) {
+  componentWillReceiveProps({ viewer, selectTab }) {
     if (!viewer) return;
     if (this.wasRedirected) return;
     this.wasRedirected = true;
-    navigator.replace(routes.home);
+    selectTab('home');
   }
 
   render() {
@@ -54,4 +54,4 @@ class SignInPage extends Component {
 
 export default connect(state => ({
   viewer: state.users.viewer,
-}))(SignInPage);
+}), { selectTab })(SignInPage);

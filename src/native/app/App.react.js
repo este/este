@@ -1,121 +1,43 @@
-import Header from './Header.react';
 import Menu from './Menu.react';
+import Navigator from './Navigator.react';
 import React, { Component, PropTypes } from 'react';
 import SideMenu from 'react-native-side-menu';
-import linksMessages from '../../common/app/linksMessages';
-import routes from '../routes';
 import start from '../../common/app/start';
-import theme from './theme';
-import { Alert, Container } from './components';
-import { Navigator, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Container } from './components';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape } from 'react-intl';
-
-const styles = StyleSheet.create({
-  app: {
-    backgroundColor: theme.inverseBackgroundColor,
-    flex: 1,
-  },
-});
+import { showMenu } from '../../common/app/actions';
 
 class App extends Component {
 
   static propTypes = {
-    intl: intlShape.isRequired,
+    menuShown: PropTypes.bool.isRequired,
+    routes: PropTypes.object.isRequired,
+    showMenu: PropTypes.func.isRequired,
     storageLoaded: PropTypes.bool.isRequired,
   };
 
-  static configureScene(route) {
-    return route.animationType || Navigator.SceneConfigs.FloatFromRight;
-  }
-
-  constructor() {
-    super();
-    this.state = {
-      sideMenuOpen: false,
-    };
-    this.onNavigatorRef = this.onNavigatorRef.bind(this);
-    this.onRouteChange = this.onRouteChange.bind(this);
-    this.onSideMenuChange = this.onSideMenuChange.bind(this);
-    this.renderScene = this.renderScene.bind(this);
-    this.toggleSideMenu = this.toggleSideMenu.bind(this);
-  }
-
-  onNavigatorRef(component) {
-    this.navigator = component;
-  }
-
-  onRouteChange(route) {
-    this.navigator.replace(routes[route]);
-    this.toggleSideMenu();
-  }
-
-  onSideMenuChange(sideMenuOpen) {
-    this.setState({ sideMenuOpen });
-  }
-
-  getTitle(route) {
-    const { intl } = this.props;
-    switch (route) {
-      case routes.home: return intl.formatMessage(linksMessages.home);
-      case routes.intl: return intl.formatMessage(linksMessages.intl);
-      case routes.me: return intl.formatMessage(linksMessages.me);
-      case routes.offline: return intl.formatMessage(linksMessages.offline);
-      case routes.signIn: return intl.formatMessage(linksMessages.signIn);
-      case routes.todos: return intl.formatMessage(linksMessages.todos);
-    }
-    throw new Error('Route not found.');
-  }
-
-  toggleSideMenu() {
-    this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
-  }
-
-  renderScene(route) {
-    const { sideMenuOpen } = this.state;
-    return (
-      <Container>
-        {Platform.OS === 'ios' && // Required only for iOS.
-          <StatusBar hidden={sideMenuOpen} />
-        }
-        <Header
-          title={this.getTitle(route)}
-          toggleSideMenu={this.toggleSideMenu}
-        />
-        <Alert />
-        <route.Page navigator={this.navigator} />
-      </Container>
-    );
-  }
-
   render() {
-    const { storageLoaded } = this.props;
-    const { sideMenuOpen } = this.state;
+    const { menuShown, routes, showMenu, storageLoaded } = this.props;
     if (!storageLoaded) return null;
 
     return (
-      <View style={styles.app}>
+      <Container inverse>
         <SideMenu
-          isOpen={sideMenuOpen}
-          menu={<Menu onRouteChange={this.onRouteChange} />}
-          onChange={this.onSideMenuChange}
+          isOpen={menuShown}
+          menu={<Menu />}
+          onChange={showMenu}
         >
-          <Navigator
-            configureScene={App.configureScene}
-            initialRoute={routes.home}
-            ref={this.onNavigatorRef}
-            renderScene={this.renderScene}
-          />
+          <Navigator routes={routes} />
         </SideMenu>
-      </View>
+      </Container>
     );
   }
 
 }
 
-App = injectIntl(App);
 App = start(App);
 
 export default connect(state => ({
+  menuShown: state.app.menuShown,
   storageLoaded: state.app.storageLoaded,
-}))(App);
+}), { showMenu })(App);

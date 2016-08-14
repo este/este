@@ -3,6 +3,7 @@ import FBSDK from 'react-native-fbsdk';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
 import React, { Component } from 'react';
 import configureStore from '../common/configureStore';
+import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
@@ -31,12 +32,13 @@ const store = configureStore({
   initialState: createNativeInitialState(),
   platformDeps: { FBSDK, createStorageEngine },
 });
+const routes = createRoutes();
 
 class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <App routes={routes} />
       </Provider>
     );
   }

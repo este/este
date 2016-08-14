@@ -5,12 +5,20 @@ import { APP_STORAGE_LOAD } from './app/actions';
 import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
+const isReactNative =
+  typeof navigator === 'object' &&
+  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+
 const stateToSave = [
   ['fields'],
   ['todos'],
   ['intl', 'currentLocale'],
   ['users', 'viewer'],
 ];
+
+if (isReactNative) {
+  stateToSave.push(['routing', 'currentTab']);
+}
 
 const invariantFeatureState = (state, feature) => invariant(
   Iterable.isIterable(state[feature]),

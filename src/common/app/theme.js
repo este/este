@@ -40,6 +40,7 @@ export default {
   get fontSizeH3() { return this.fontSize * 1.75; },
   get fontSizeH4() { return this.fontSize * 1.5; },
   get fontSizeH5() { return this.fontSize * 1.25; },
+  get fontSizeH6() { return this.fontSize * 1; },
 
   dark(color) { return Color(color).darken(this.darken).hexString(); },
   light(color) { return Color(color).lighten(this.lighten).hexString(); },
