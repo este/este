@@ -81,7 +81,7 @@ If you are using different node versions on your machine, use [nvm](https://gith
 ## Create App
 
 ```shell
-git clone https://github.com/este/este.git este-app
+git clone --depth=1 https://github.com/este/este.git este-app
 cd este-app
 npm install
 ```
