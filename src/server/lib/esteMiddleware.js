@@ -11,6 +11,10 @@ export default function esteMiddleware() {
       });
     }
 
+    GLOBAL.navigator = {
+      userAgent: req.headers['user-agent']
+    };
+
     next();
   };
 }
