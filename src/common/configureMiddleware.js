@@ -5,7 +5,6 @@ import errorToMessage from '../common/app/errorToMessage';
 // Deps.
 import firebase from 'firebase';
 import validate from './validate';
-import uuid from 'uuid';
 
 let firebaseDeps = null;
 
@@ -64,7 +63,7 @@ export default function configureMiddleware(initialState, platformDeps, platform
     injectMiddleware({
       ...platformDeps,
       ...firebaseDeps,
-      getUid: () => uuid.v4(),
+      getUid: () => platformDeps.uuid.v4(),
       now: () => Date.now(),
       storageEngine,
       validate,

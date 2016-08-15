@@ -27,9 +27,6 @@
       "babel-polyfill"
     ]
   },
-  "react-native": {
-    "uuid": "react-native-uuid"
-  },
   "dependencies": {
     "autoprefixer": "^6.1.0",
     "ava": "^0.16.0",

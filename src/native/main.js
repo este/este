@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
+import uuid from 'react-native-uuid';
 import { AppRegistry, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { fromJSON } from '../common/transit';
@@ -30,7 +31,7 @@ const createNativeInitialState = () => ({
 
 const store = configureStore({
   initialState: createNativeInitialState(),
-  platformDeps: { FBSDK, createStorageEngine },
+  platformDeps: { FBSDK, createStorageEngine, uuid },
 });
 const routes = createRoutes();
 
