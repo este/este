@@ -4,6 +4,7 @@ import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-localstorage';
+import uuid from 'uuid';
 import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
@@ -18,7 +19,7 @@ const reportingMiddleware = configureReporting({
 });
 const store = configureStore({
   initialState,
-  platformDeps: { createStorageEngine },
+  platformDeps: { createStorageEngine, uuid },
   platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)],
 });
 const history = syncHistoryWithStore(browserHistory, store);

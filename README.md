@@ -54,7 +54,8 @@
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
 - [AVA](https://github.com/avajs/ava) Futuristic JavaScript test runner.
 - SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
-- [shortid](https://github.com/dylang/shortid) Short id generator. Url-friendly. Non-predictable.
+- [uuid](https://github.com/defunctzombie/node-uuid) Generate RFC-compliant UUIDs in JavaScript.
+- [react-native-uuid](https://github.com/eugenehp/react-native-uuid) node-uuid for react-native.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
 - [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
