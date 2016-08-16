@@ -1,24 +1,29 @@
-// Remember to use rems and ems. http://css-tricks.com/rems-ems.
-
+// Makes browsers render all elements more consistently.
 @import '~normalize.css/normalize.css';
 
-// http://phonegap-tips.com/articles/essential-phonegap-css-webkit-tap-highlight-color.html
-* {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-// Goodness.
-*,
-::after,
-::before {
+// Useful stuff from github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+html {
+  // Note React Native uses border-box by default.
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
+html {
+  // Changes the default tap highlight to be completely transparent in iOS.
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+[tabindex="-1"]:focus {
+  outline: none !important;
+}
+
+// Este styles. Note Este is going to leverage inline styles soon.
+// TODO: Rewrite to inline styles.
 body {
   color: #333;
   // Use modern, beautiful fonts with zero latency.
