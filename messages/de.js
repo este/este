@@ -166,11 +166,7 @@ export default [
   },
   {
     "id": "footer.madeByHtml",
-    "defaultMessage": "Umgesetzt von <a href=\"https://twitter.com/steida\">Steida</a>",
-  },
-  {
-    "id": "home.intro",
-    "defaultMessage": "<p>\n        Hey ho, hier\n        <a target=\"_blank\" href=\"https://github.com/este/este\">Este</a> dev stack.\n      </p>",
+    "defaultMessage": "Umgesetzt von",
   },
   {
     "id": "intl.page.h2",
