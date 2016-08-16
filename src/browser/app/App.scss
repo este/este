@@ -35,19 +35,6 @@ html {
     outline-style: none;
   }
 
-  a {
-    color: #346392;
-    text-decoration: none;
-
-    &:hover:not(.active) {
-      text-decoration: underline;
-    }
-
-    &.active {
-      font-weight: bold;
-    }
-  }
-
   button {
     background-color: #6496c8;
     border: 0;
