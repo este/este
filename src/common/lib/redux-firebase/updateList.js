@@ -1,13 +1,9 @@
+/* @flow weak */
 // Helper for updating immutable List by all Firebase events.
 
 import { List } from 'immutable';
 
-export default function updateList(
-  list,
-  ItemRecord,
-  idProp,
-  args
-) {
+const updateList = (list, ItemRecord, idProp, args) => {
   const { eventType, key, prevChildKey, val } = args;
   const findIndex = id => list.findIndex(item => item[idProp] === id);
   const getInsertIndex = () => prevChildKey ? findIndex(prevChildKey) + 1 : 0;
@@ -39,4 +35,6 @@ export default function updateList(
     }
   }
   return list;
-}
+};
+
+export default updateList;

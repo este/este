@@ -1,3 +1,4 @@
+/* @flow weak */
 import * as actions from './actions';
 import { Record } from '../transit';
 
@@ -8,7 +9,7 @@ const State = Record({
   storageLoaded: false,
 }, 'app');
 
-export default function appReducer(state = new State, action) {
+const appReducer = (state = new State, action) => {
   switch (action.type) {
 
     case actions.APP_OFFLINE:
@@ -31,4 +32,6 @@ export default function appReducer(state = new State, action) {
   }
 
   return state;
-}
+};
+
+export default appReducer;

@@ -1,3 +1,4 @@
+/* @flow weak */
 import { Record } from '../transit';
 
 const State = Record({
@@ -7,6 +8,6 @@ const State = Record({
   sentryUrl: '',
 }, 'config');
 
-export default function configReducer(state = new State) {
-  return state;
-}
+const configReducer = (state = new State) => state;
+
+export default configReducer;

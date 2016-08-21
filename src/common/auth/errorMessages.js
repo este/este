@@ -1,6 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+const errorMessages = defineMessages({
   required: {
     defaultMessage: `Please fill out {prop, select,
       email {email}
@@ -17,3 +18,5 @@ export default defineMessages({
     id: 'auth.signInError.simplePassword',
   },
 });
+
+export default errorMessages;

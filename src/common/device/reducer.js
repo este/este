@@ -1,3 +1,4 @@
+/* @flow weak */
 import { Record } from '../transit';
 
 const State = Record({
@@ -6,6 +7,6 @@ const State = Record({
   platform: '', // iOS or Android in React Native.
 }, 'device');
 
-export default function deviceReducer(state = new State) {
-  return state;
-}
+const deviceReducer = (state = new State) => state;
+
+export default deviceReducer;

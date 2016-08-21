@@ -1,6 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+const confirmMessages = defineMessages({
   areYouSure: {
     defaultMessage: 'Are you sure?',
     id: 'app.confirm.areYouSure',
@@ -10,3 +11,5 @@ export default defineMessages({
     id: 'app.confirm.unsavedChanges',
   },
 });
+
+export default confirmMessages;

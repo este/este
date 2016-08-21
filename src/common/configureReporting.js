@@ -1,3 +1,4 @@
+/* @flow weak */
 import Raven from 'raven-js';
 import { firebaseActions } from './lib/redux-firebase';
 
@@ -37,7 +38,7 @@ const reportingMiddleware = () => next => action => {
   return next(action);
 };
 
-export default function configureReporting(options) {
+const configureReporting = (options) => {
   const { appVersion, sentryUrl, unhandledRejection } = options;
   Raven.config(sentryUrl, {
     // gist.github.com/impressiver/5092952
@@ -85,4 +86,6 @@ export default function configureReporting(options) {
   }).install();
   register(unhandledRejection);
   return reportingMiddleware;
-}
+};
+
+export default configureReporting;

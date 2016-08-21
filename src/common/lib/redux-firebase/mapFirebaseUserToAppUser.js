@@ -1,6 +1,7 @@
+/* @flow weak */
 import User from '../../users/user';
 
-export default function mapFirebaseUserToAppUser(firebaseUser) {
+const mapFirebaseUserToAppUser = firebaseUser => {
   if (!firebaseUser) return null;
   // A Firebase User instance keeps track of every provider linked to the user.
   // https://firebase.google.com/docs/auth/users
@@ -12,4 +13,6 @@ export default function mapFirebaseUserToAppUser(firebaseUser) {
     id: firebaseUser.uid,
     photoURL: facebookProfile.photoURL || '',
   });
-}
+};
+
+export default mapFirebaseUserToAppUser;

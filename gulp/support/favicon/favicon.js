@@ -32,11 +32,13 @@ const faviconProcessingHtmlResultCode = () => {
 
 const isLink = element => /^<link/.test(element);
 
-export default function injectFavicon() {
+const injectFavicon = () => {
   const elements = faviconProcessingHtmlResultCode().split('\n');
   return elements.reduce((acc, element) => {
     const key = isLink(element) ? 'link' : 'meta';
     acc[key].push(toObject(element));
     return acc;
   }, { link: [], meta: [] });
-}
+};
+
+export default injectFavicon;

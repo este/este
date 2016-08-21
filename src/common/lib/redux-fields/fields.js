@@ -7,7 +7,7 @@ const isReactNative =
   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-export default function fields(WrappedComponent, options) {
+const fields = (WrappedComponent, options) => {
   const {
     path = '',
     fields = [],
@@ -141,4 +141,6 @@ export default function fields(WrappedComponent, options) {
     }
 
   };
-}
+};
+
+export default fields;

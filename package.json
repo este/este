@@ -6,6 +6,7 @@
     "ava": "ava",
     "ava:watch": "ava --watch",
     "build": "gulp build",
+    "flow": "flow",
     "install": "gulp native-fix",
     "postinstall": "gulp native && gulp build --production",
     "start": "gulp",

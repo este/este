@@ -1,3 +1,4 @@
+/* @flow weak */
 import * as actions from './actions';
 import { Map } from 'immutable';
 import { Record } from '../../transit';
@@ -10,7 +11,7 @@ const State = Record({
 const removeStalePermissionDeniedErrors = path => errors => errors
   .filter((value, key) => key.indexOf(`${path}:`) === -1);
 
-export default function firebaseReducer(state = new State, action) {
+const firebaseReducer = (state = new State, action) => {
   switch (action.type) {
 
     case actions.FIREBASE_ON_PERMISSION_DENIED: {
@@ -26,4 +27,6 @@ export default function firebaseReducer(state = new State, action) {
   }
 
   return state;
-}
+};
+
+export default firebaseReducer;

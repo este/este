@@ -1,3 +1,4 @@
+/* @flow weak */
 import invariant from 'invariant';
 import storage from 'redux-storage';
 import storageDebounce from 'redux-storage-decorator-debounce';
@@ -74,7 +75,7 @@ export const updateStateOnStorageLoad = reducer => (state, action) => {
   return reducer(state, action);
 };
 
-export default function configureStorage(initialState, createStorageEngine) {
+const configureStorage = (initialState, createStorageEngine) => {
   const storageEngine =
     createStorageEngine &&
     createStorageEngine(`redux-storage:${initialState.config.appName}`);
@@ -87,4 +88,6 @@ export default function configureStorage(initialState, createStorageEngine) {
     storageEngine,
     storageMiddleware,
   };
-}
+};
+
+export default configureStorage;

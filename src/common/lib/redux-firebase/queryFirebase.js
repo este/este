@@ -1,3 +1,4 @@
+/* @flow weak */
 // A higher order component for Firebase queries without on / off madness.
 
 // Example:
@@ -29,12 +30,17 @@ const optionsToPayloadString = options => JSON.stringify(optionsToPayload(option
 let serverFetching = false;
 let serverFetchingPromises = null;
 
-export default function queryFirebase(WrappedComponent, mapPropsToOptions) {
-  return class FirebaseQuery extends Component {
+const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
+  class FirebaseQuery extends Component {
 
     static contextTypes = {
       store: PropTypes.object, // Redux store.
     };
+
+    _onAllValueCalled: boolean;
+    onArgs: any;
+    onceArgs: any;
+
 
     ensureCancelCallback(callbackOrCallbackWithCancelCallback) {
       const callbacks = [].concat(callbackOrCallbackWithCancelCallback);
@@ -172,7 +178,8 @@ export default function queryFirebase(WrappedComponent, mapPropsToOptions) {
     }
 
   };
-}
+
+export default queryFirebase;
 
 // queryFirebaseServer is for server side data fetching. Example:
 // await queryFirebaseServer(() => {

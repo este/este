@@ -1,3 +1,4 @@
+/* @flow */
 import authErrorMessages from '../auth/errorMessages';
 import { ValidationError } from '../lib/validation';
 import { firebaseMessages } from '../lib/redux-firebase';
@@ -12,7 +13,7 @@ const validationErrorToMessage = error => ({
 
 // Map promiseMiddleware rejected error to UI message.
 // Unknown errors are reported so the developer can check what is wrong.
-export default function errorToMessage(error) {
+const errorToMessage = (error: Object) => {
   // Some errors are so innocuos that we don't have to show any message.
   if (isInnocuousError(error)) {
     return { message: null };
@@ -31,4 +32,6 @@ export default function errorToMessage(error) {
 
   // Return null for unknown error so it will be reported.
   return null;
-}
+};
+
+export default errorToMessage;

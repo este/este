@@ -1,3 +1,4 @@
+/* @flow */
 import * as firebaseActions from './actions';
 import firebaseMessages from './messages';
 import firebaseReducer from './reducer';

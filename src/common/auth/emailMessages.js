@@ -1,6 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+const emailMessages = defineMessages({
   emailLegend: {
     defaultMessage: 'Email',
     id: 'auth.email.emailLegend',
@@ -30,3 +31,5 @@ export default defineMessages({
     id: 'auth.email.resetPassword',
   },
 });
+
+export default emailMessages;

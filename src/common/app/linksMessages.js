@@ -1,6 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+const LinkMessages = defineMessages({
   intl: {
     defaultMessage: 'Intl',
     id: 'app.links.intl',
@@ -42,3 +43,5 @@ export default defineMessages({
     id: 'app.links.todos',
   },
 });
+
+export default LinkMessages;

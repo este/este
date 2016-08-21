@@ -1,3 +1,4 @@
+/* @flow */
 import invariant from 'invariant';
 import mapFirebaseUserToAppUser from './mapFirebaseUserToAppUser';
 import messages from './messages';
@@ -150,8 +151,8 @@ const createPresenceMonitor = () => {
   };
 };
 
-export function signIn(providerName, fields) {
-  return ({ firebaseAuth, validate }) => {
+export const signIn = (providerName: string, fields: Object) =>
+  ({ firebaseAuth, validate }: any) => {
     const promise = providerName === 'password'
       ? emailSignIn(firebaseAuth, validate, fields)
       : socialSignIn(firebaseAuth, providerName);
@@ -161,17 +162,16 @@ export function signIn(providerName, fields) {
       meta: { providerName, fields },
     };
   };
-}
 
-export function nativeSignIn(providerName) {
-  return ({ FBSDK: { AccessToken, LoginManager }, firebaseAuth }) => {
+export const nativeSignIn = (providerName: string) =>
+  ({ FBSDK: { AccessToken, LoginManager }, firebaseAuth }: any) => {
     invariant(providerName === 'facebook',
      `${providerName} provider is not yet supported in nativeSignIn.`);
     const getPromise = async () => {
       const result = await LoginManager.logInWithReadPermissions(facebookPermissions);
       if (result.isCancelled) {
         // Mimic Firebase error to have the same universal API.
-        const error = new Error('auth/popup-closed-by-user');
+        const error: any = new Error('auth/popup-closed-by-user');
         error.code = 'auth/popup-closed-by-user';
         throw error;
       }
@@ -185,10 +185,9 @@ export function nativeSignIn(providerName) {
       payload: getPromise(),
     };
   };
-}
 
-export function signUp(providerName, fields) {
-  return ({ firebaseAuth, validate }) => {
+export const signUp = (providerName: string, fields: Object) =>
+  ({ firebaseAuth, validate }: any) => {
     const getPromise = async () => {
       invariant(providerName === 'password',
        `${providerName} provider is not supported.`);
@@ -208,17 +207,14 @@ export function signUp(providerName, fields) {
       payload: getPromise(),
     };
   };
-}
 
-export function onPermissionDenied(message) {
-  return {
-    type: FIREBASE_ON_PERMISSION_DENIED,
-    payload: { message },
-  };
-}
+export const onPermissionDenied = (message: string) => ({
+  type: FIREBASE_ON_PERMISSION_DENIED,
+  payload: { message },
+});
 
-export function resetPassword(email, onSuccess) {
-  return ({ firebaseAuth, validate }) => {
+export const resetPassword = (email: string, onSuccess: Function) =>
+  ({ firebaseAuth, validate }: any) => {
     const getPromise = async () => {
       await validate({ email })
         .prop('email')
@@ -240,12 +236,18 @@ export function resetPassword(email, onSuccess) {
       payload: getPromise(),
     };
   };
-}
 
-export function firebaseStart() {
+export const firebaseStart = () => {
   const monitorPresence = createPresenceMonitor();
 
-  return ({ dispatch, firebase, firebaseAuth, firebaseDatabase, getState }) => {
+  return (deps: any) => {
+    const {
+      dispatch,
+      firebase,
+      firebaseAuth,
+      firebaseDatabase,
+      getState,
+    } = deps;
     firebaseAuth().getRedirectResult().then(result => {
       if (!result.credential) return;
       dispatch({ type: FIREBASE_SIGN_IN_SUCCESS, payload: result });
@@ -272,4 +274,4 @@ export function firebaseStart() {
       type: FIREBASE_START,
     };
   };
-}
+};

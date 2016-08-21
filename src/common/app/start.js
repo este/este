@@ -1,9 +1,10 @@
+/* @flow weak */
 import React, { Component, PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { start as appStart } from './actions';
 
-export default function start(WrappedComponent) {
+const start = WrappedComponent => {
   class Start extends Component {
 
     static propTypes = {
@@ -13,9 +14,8 @@ export default function start(WrappedComponent) {
 
     componentDidMount() {
       const { appStart } = this.props;
-      // Client side changes must be dispatched on componentDidMount, aka
-      // after the first app render, to match client and server HTML. Otherwise,
-      // React attempt to reuse markup will fail.
+      // Note the appStart must be dispatched after the initial render, to match
+      // client and server rendered HTML.
       appStart();
     }
 
@@ -43,4 +43,7 @@ export default function start(WrappedComponent) {
   }), { appStart })(Start);
 
   return Start;
-}
+};
+
+
+export default start;

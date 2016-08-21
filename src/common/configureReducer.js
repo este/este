@@ -1,3 +1,4 @@
+/* @flow weak */
 import app from './app/reducer';
 import auth from './auth/reducer';
 import config from './config/reducer';
@@ -31,7 +32,7 @@ const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
   return reducer(state, action);
 };
 
-export default function configureReducer(initialState) {
+const configureReducer = (initialState: Object) => {
   // One day we will have universal routing, but we are not there yet.
   // jmurzy/react-router-native
   const routing = initialState.device.isReactNative
@@ -55,4 +56,6 @@ export default function configureReducer(initialState) {
   reducer = updateStateOnStorageLoad(reducer);
 
   return reducer;
-}
+};
+
+export default configureReducer;

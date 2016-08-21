@@ -1,3 +1,4 @@
+/* @flow weak */
 import * as actions from './actions';
 import { Record } from '../transit';
 
@@ -9,7 +10,7 @@ const State = Record({
   messages: null,
 }, 'intl');
 
-export default function intlReducer(state = new State, action) {
+const intlReducer = (state = new State, action) => {
   switch (action.type) {
 
     case actions.SET_CURRENT_LOCALE: {
@@ -20,4 +21,6 @@ export default function intlReducer(state = new State, action) {
   }
 
   return state;
-}
+};
+
+export default intlReducer;

@@ -78,7 +78,7 @@ const renderPage = (store, renderProps, req) => {
   return `<!DOCTYPE html>${docHtml}`;
 };
 
-export default function render(req, res, next) {
+const render = (req, res, next) => {
   const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore({
     initialState: createRequestInitialState(req),
@@ -109,4 +109,6 @@ export default function render(req, res, next) {
       next(error);
     }
   });
-}
+};
+
+export default render;

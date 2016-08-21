@@ -1,3 +1,4 @@
+/* @flow */
 import { Record } from '../transit';
 
 const Todo = Record({

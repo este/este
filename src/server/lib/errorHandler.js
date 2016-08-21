@@ -1,13 +1,17 @@
+/* @flow weak */
 import config from '../config';
 
-export default function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
+const errorHandler = (err, req, res) => {
   const errorDetails = err.stack || err;
 
   console.error('Yay', errorDetails);
 
   res.status(500).format({
     json() {
-      const errorInfo = { error: err.toString() };
+      const errorInfo = {
+        details: null,
+        error: err.toString(),
+      };
       if (!config.isProduction) errorInfo.details = errorDetails;
 
       res.send(errorInfo);
@@ -29,4 +33,6 @@ export default function errorHandler(err, req, res, next) { // eslint-disable-li
       res.send(`500 Internal server error:\n${message}`);
     },
   });
-}
+};
+
+export default errorHandler;

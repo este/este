@@ -6,7 +6,7 @@ const descriptorsToMessages = descriptors =>
     ...previous, [id]: defaultMessage,
   }), {});
 
-export default function loadMessages(options) {
+const loadMessages = (options) => {
   const {
     includeDefault = false,
   } = options || {};
@@ -22,4 +22,6 @@ export default function loadMessages(options) {
     .reduce((previous, { descriptors, locale }) => ({
       ...previous, [locale]: descriptorsToMessages(descriptors),
     }), {});
-}
+};
+
+export default loadMessages;

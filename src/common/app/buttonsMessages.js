@@ -1,6 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+const buttonsMessages = defineMessages({
   add: {
     defaultMessage: 'Add',
     id: 'app.buttons.add',
@@ -46,3 +47,5 @@ export default defineMessages({
     id: 'app.buttons.submit',
   },
 });
+
+export default buttonsMessages;

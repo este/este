@@ -1,3 +1,4 @@
+/* @flow weak */
 import App from './app/App.react';
 import Fields from './fields/FieldsPage.react';
 import Firebase from './firebase/FirebasePage.react';
@@ -13,7 +14,7 @@ import SignIn from './auth/SignInPage.react';
 import Todos from './todos/TodosPage.react';
 import { IndexRoute, Route } from 'react-router';
 
-export default function createRoutes(getState) {
+const createRoutes = (getState) => {
   const requireViewer = (nextState, replace) => {
     if (getState().users.viewer) return;
     replace({
@@ -38,4 +39,6 @@ export default function createRoutes(getState) {
       <Route component={NotFound} path="*" />
     </Route>
   );
-}
+};
+
+export default createRoutes;

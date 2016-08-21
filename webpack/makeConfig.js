@@ -1,3 +1,4 @@
+/* @flow weak */
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
@@ -26,7 +27,7 @@ const serverIp = config.remoteHotReload
   ? ip.address() // Dynamic IP address enables hot reload on remote devices.
   : 'localhost';
 
-export default function makeConfig(options) {
+const makeConfig = options => {
   const {
     isDevelopment,
   } = options;
@@ -167,4 +168,6 @@ export default function makeConfig(options) {
   };
 
   return config;
-}
+};
+
+export default makeConfig;

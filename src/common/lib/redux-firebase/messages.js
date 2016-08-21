@@ -1,11 +1,7 @@
+/* @flow */
 import { defineMessages } from 'react-intl';
 
-// firebase.google.com/docs/reference/js/firebase.auth.Error
-// Some errors are not translated, because they should not happen.
-//  PERMISSION_DENIED - Probably app error so it should be reported.
-//  auth/requires-recent-login - Should be handled in the code.
-
-export default defineMessages({
+const messages = defineMessages({
   'auth/email-already-in-use': {
     defaultMessage: `The new user account cannot be created because the
       specified email address is already in use.`,
@@ -36,3 +32,5 @@ export default defineMessages({
     id: 'firebase.error.auth/user-token-expired',
   },
 });
+
+export default messages;

@@ -1,3 +1,4 @@
+/* @flow */
 import { Validation, ValidationError } from './lib/validation';
 
 class AppValidation extends Validation {
@@ -13,6 +14,6 @@ class AppValidation extends Validation {
 
 }
 
-export default function validate(json) {
-  return new AppValidation(json);
-}
+const validate = (json: Object) => new AppValidation(json);
+
+export default validate;

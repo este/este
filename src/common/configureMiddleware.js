@@ -1,3 +1,4 @@
+/* @flow weak */
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
 import errorToMessage from '../common/app/errorToMessage';
@@ -37,7 +38,7 @@ const promiseMiddleware = options => ({ dispatch }) => next => action => {
   return next(createAction('START'));
 };
 
-export default function configureMiddleware(initialState, platformDeps, platformMiddleware) {
+const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
   // Lazy init.
   if (!firebaseDeps) {
     firebase.initializeApp(initialState.config.firebase);
@@ -95,4 +96,6 @@ export default function configureMiddleware(initialState, platformDeps, platform
   }
 
   return middleware;
-}
+};
+
+export default configureMiddleware;

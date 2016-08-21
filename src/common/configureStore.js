@@ -1,8 +1,15 @@
+/* @flow weak */
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
 import { applyMiddleware, createStore } from 'redux';
 
-export default function configureStore(options) {
+type Options = {
+  initialState: Object,
+  platformDeps: Object,
+  platformMiddleware: Array<Function>,
+};
+
+const configureStore = (options: Options) => {
   const {
     initialState,
     platformDeps = {},
@@ -40,4 +47,6 @@ export default function configureStore(options) {
   }
 
   return store;
-}
+};
+
+export default configureStore;

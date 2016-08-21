@@ -1,7 +1,8 @@
+/* @flow weak */
 import * as actions from './actions';
 import { Map } from 'immutable';
 
-export default function fieldsReducer(state = Map(), action) {
+const fieldsReducer = (state = Map(), action) => {
   switch (action.type) {
 
     case actions.FIELDS_RESET_FIELDS: {
@@ -17,4 +18,6 @@ export default function fieldsReducer(state = Map(), action) {
   }
 
   return state;
-}
+};
+
+export default fieldsReducer;
