@@ -10,13 +10,13 @@ import { showMenu } from '../../common/app/actions';
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingHorizontal: theme.fontSizeH5 * .5,
+    paddingHorizontal: theme.fontSizeH5 * 0.5,
     paddingVertical: theme.fontSizeH5,
   },
   tabLink: {
     color: theme.inverseTextColor,
     fontSize: theme.fontSize,
-    padding: theme.fontSize * .625,
+    padding: theme.fontSize * 0.625,
   },
   selected: {
     backgroundColor: theme.light(theme.inverseBackgroundColor),

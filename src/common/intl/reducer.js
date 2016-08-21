@@ -10,7 +10,7 @@ const State = Record({
   messages: null,
 }, 'intl');
 
-const intlReducer = (state = new State, action) => {
+const intlReducer = (state = new State(), action) => {
   switch (action.type) {
 
     case actions.SET_CURRENT_LOCALE: {

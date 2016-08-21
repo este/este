@@ -9,7 +9,7 @@ const State = Record({
   storageLoaded: false,
 }, 'app');
 
-const appReducer = (state = new State, action) => {
+const appReducer = (state = new State(), action) => {
   // This is how we can handle all async actions rejections.
   if (action.type.endsWith('_ERROR')) {
     const error = action.payload;

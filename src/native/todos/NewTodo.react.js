@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   textInputView: {
     borderBottomWidth: 0,
     marginBottom: 0,
-    paddingVertical: theme.fontSize * .75,
+    paddingVertical: theme.fontSize * 0.75,
   },
 });
 

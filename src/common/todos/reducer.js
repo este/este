@@ -8,7 +8,7 @@ const State = Record({
   map: Map(),
 }, 'todos');
 
-const todosReducer = (state = new State, action) => {
+const todosReducer = (state = new State(), action) => {
   switch (action.type) {
 
     case actions.ADD_HUNDRED_TODOS: {

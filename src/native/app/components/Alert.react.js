@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   message: {
     color: theme.light(theme.inverseTextColor),
     fontWeight: 'bold',
-    margin: theme.fontSize * .75,
+    margin: theme.fontSize * 0.75,
     textAlign: 'center',
   },
 });

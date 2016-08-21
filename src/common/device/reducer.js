@@ -7,6 +7,6 @@ const State = Record({
   platform: '', // iOS or Android in React Native.
 }, 'device');
 
-const deviceReducer = (state = new State) => state;
+const deviceReducer = (state = new State()) => state;
 
 export default deviceReducer;

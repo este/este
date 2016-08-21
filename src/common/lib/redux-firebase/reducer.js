@@ -11,7 +11,7 @@ const State = Record({
 const removeStalePermissionDeniedErrors = path => errors => errors
   .filter((value, key) => key.indexOf(`${path}:`) === -1);
 
-const firebaseReducer = (state = new State, action) => {
+const firebaseReducer = (state = new State(), action) => {
   switch (action.type) {
 
     case actions.FIREBASE_ON_PERMISSION_DENIED: {

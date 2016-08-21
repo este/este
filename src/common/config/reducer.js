@@ -8,6 +8,6 @@ const State = Record({
   sentryUrl: '',
 }, 'config');
 
-const configReducer = (state = new State) => state;
+const configReducer = (state = new State()) => state;
 
 export default configReducer;

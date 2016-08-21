@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.brandPrimary,
     justifyContent: 'center',
     paddingTop: theme.fontSize,
-    paddingBottom: theme.fontSize * .5,
+    paddingBottom: theme.fontSize * 0.5,
   },
   text: {
     color: theme.inverseTextColor,

@@ -11,7 +11,7 @@ const State = Record({
   viewer: null,
 }, 'users');
 
-const usersReducer = (state = new State, action) => {
+const usersReducer = (state = new State(), action) => {
   switch (action.type) {
 
     case firebaseActions.FIREBASE_ON_AUTH: {

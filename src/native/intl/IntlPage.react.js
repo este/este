@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: theme.fontSizeH5,
-    marginBottom: theme.fontSize * .5,
+    marginBottom: theme.fontSize * 0.5,
   },
   selected: {
     fontWeight: 'bold',

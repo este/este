@@ -27,11 +27,11 @@ export default {
   brandWarning: '#f0ad4e',
   brandDanger: '#d9534f',
 
-  activeOpacity: .5,
-  disabledOpacity: .3,
+  activeOpacity: 0.5,
+  disabledOpacity: 0.3,
 
-  darken: .3,
-  lighten: .3,
+  darken: 0.3,
+  lighten: 0.3,
 
   get placeholderTextColor() { return this.light(this.textColor); },
 
