@@ -24,9 +24,10 @@ const firebaseReducer = (state = new State, action) => {
       return state.update('errors', removeStalePermissionDeniedErrors(path));
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default firebaseReducer;

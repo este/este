@@ -14,9 +14,10 @@ const routingReducer = (state = new State, action) => {
       return state.set('currentTab', key);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default routingReducer;

@@ -41,9 +41,10 @@ const todosReducer = (state = new State, action) => {
       return state.updateIn(['map', todo.id, 'completed'], value => !value);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default todosReducer;

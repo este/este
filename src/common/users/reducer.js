@@ -35,9 +35,10 @@ const usersReducer = (state = new State, action) => {
         .set('onlineLoaded', true);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default usersReducer;

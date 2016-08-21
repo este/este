@@ -33,8 +33,9 @@ const updateList = (list, ItemRecord, idProp, args) => {
     case 'value': {
       return List(val).map(item => new ItemRecord(item));
     }
+    default:
+      return list;
   }
-  return list;
 };
 
 export default updateList;

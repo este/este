@@ -10,6 +10,12 @@ const State = Record({
 }, 'app');
 
 const appReducer = (state = new State, action) => {
+  // This is how we can handle all async actions rejections.
+  if (action.type.endsWith('_ERROR')) {
+    const error = action.payload;
+    return state.set('error', error);
+  }
+
   switch (action.type) {
 
     case actions.APP_OFFLINE:
@@ -23,15 +29,11 @@ const appReducer = (state = new State, action) => {
 
     case actions.APP_STORAGE_LOAD:
       return state.set('storageLoaded', true);
-  }
 
-  // This is how we can handle all async actions rejections.
-  if (action.type.endsWith('_ERROR')) {
-    const error = action.payload;
-    return state.set('error', error);
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default appReducer;

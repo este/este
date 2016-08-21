@@ -18,9 +18,10 @@ const intlReducer = (state = new State, action) => {
       return state.set('currentLocale', locale);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default intlReducer;

@@ -35,9 +35,10 @@ const authReducer = (state = new State, action) => {
         .set('success', action.payload);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 };
 
 export default authReducer;

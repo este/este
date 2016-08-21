@@ -15,9 +15,9 @@ const fieldsReducer = (state = Map(), action) => {
       return state.setIn(path, value);
     }
 
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export default fieldsReducer;
