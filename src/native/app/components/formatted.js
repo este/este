@@ -33,10 +33,11 @@ const native = WrappedComponent =>
 
       return (
         <WrappedComponent {...wrappedComponentProps}>
-          {message => childrenAsFunction
-            ? children(message)
-            : <Text ref={this.onTextRef} style={style}>{message}</Text>
-          }
+          {message => (
+            childrenAsFunction
+              ? children(message)
+              : <Text ref={this.onTextRef} style={style}>{message}</Text>
+          )}
         </WrappedComponent>
       );
     }

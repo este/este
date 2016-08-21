@@ -6,7 +6,7 @@ import { List } from 'immutable';
 const updateList = (list, ItemRecord, idProp, args) => {
   const { eventType, key, prevChildKey, val } = args;
   const findIndex = id => list.findIndex(item => item[idProp] === id);
-  const getInsertIndex = () => prevChildKey ? findIndex(prevChildKey) + 1 : 0;
+  const getInsertIndex = () => (prevChildKey ? findIndex(prevChildKey) + 1 : 0);
   // TODO: Firebase ensures consistency, so maybe we don't need if checks with
   // once value approach.
   switch (eventType) {
