@@ -16,7 +16,7 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
-// Like redux-promise-middleware but sane.
+// Like redux-promise-middleware but simpler.
 const promiseMiddleware = options => ({ dispatch }) => next => action => {
   const { shouldThrow } = options || {};
   const { payload } = action;
@@ -25,7 +25,8 @@ const promiseMiddleware = options => ({ dispatch }) => next => action => {
   const createAction = (suffix, payload) => ({
     type: `${action.type}_${suffix}`, meta: { action }, payload,
   });
-  // Note we don't return promise, because martinfowler.com/bliki/CQRS.html
+  // Note we don't return promise.
+  // github.com/este/este/issues/1091
   payload
     .then(value => dispatch(createAction('SUCCESS', value)))
     .catch(error => {
