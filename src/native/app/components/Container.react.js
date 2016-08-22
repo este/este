@@ -18,14 +18,14 @@ class Container extends React.Component {
   };
 
   render() {
-    const { children, inverse, style } = this.props;
+    const { children, inverse, style, ...props } = this.props;
     const backgroundColor = inverse
       ? theme.inverseBackgroundColor
       : theme.backgroundColor;
 
     return (
       <View
-        {...this.props}
+        {...props}
         style={[styles.container, { backgroundColor }, style]}
       >
         {children}

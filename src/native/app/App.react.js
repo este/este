@@ -1,3 +1,4 @@
+/* @flow */
 import Menu from './Menu.react';
 import Navigator from './Navigator.react';
 import React from 'react';

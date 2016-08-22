@@ -18,9 +18,9 @@ class CenteredContainer extends React.Component {
   };
 
   render() {
-    const { children, style } = this.props;
+    const { children, style, ...props } = this.props;
     return (
-      <Container {...this.props} style={[styles.centeredContainer, style]}>
+      <Container {...props} style={[styles.centeredContainer, style]}>
         {children}
       </Container>
     );
