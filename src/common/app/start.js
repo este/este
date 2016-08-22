@@ -1,15 +1,15 @@
 /* @flow weak */
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { start as appStart } from './actions';
 
 const start = WrappedComponent => {
-  class Start extends Component {
+  class Start extends React.Component {
 
     static propTypes = {
-      intl: PropTypes.object.isRequired,
-      appStart: PropTypes.func.isRequired,
+      intl: React.PropTypes.object.isRequired,
+      appStart: React.PropTypes.func.isRequired,
     };
 
     componentDidMount() {

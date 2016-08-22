@@ -2,7 +2,7 @@
 import './FieldsPage.scss';
 import DynamicField from './DynamicField.react.js';
 import Helmet from 'react-helmet';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import classnames from 'classnames';
 import linksMessages from '../../common/app/linksMessages';
@@ -40,13 +40,13 @@ const keyConceptsOfLibertarianism = [
   name: concept,
 }));
 
-class FieldsPage extends Component {
+class FieldsPage extends React.Component {
 
   static propTypes = {
     // Generated fields by fields higher order component.
-    fields: PropTypes.object.isRequired,
+    fields: React.PropTypes.object.isRequired,
     // We can read anything from fields model directly.
-    fieldsPageModel: PropTypes.object,
+    fieldsPageModel: React.PropTypes.object,
   };
 
   constructor() {

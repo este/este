@@ -1,5 +1,5 @@
 import * as components from '../app/components';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import theme from '../app/theme';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
   },
 });
 
-class IntlPage extends Component {
+class IntlPage extends React.Component {
 
   static propTypes = {
-    currentLocale: PropTypes.string.isRequired,
-    locales: PropTypes.arrayOf(React.PropTypes.string),
-    setCurrentLocale: PropTypes.func.isRequired,
+    currentLocale: React.PropTypes.string.isRequired,
+    locales: React.PropTypes.arrayOf(React.PropTypes.string),
+    setCurrentLocale: React.PropTypes.func.isRequired,
   };
 
   constructor() {

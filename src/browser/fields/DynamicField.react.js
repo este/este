@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import classnames from 'classnames';
 import { fields } from '../../common/lib/redux-fields';
 
-class DynamicField extends Component {
+class DynamicField extends React.Component {
 
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    item: PropTypes.object.isRequired,
+    fields: React.PropTypes.object.isRequired,
+    item: React.PropTypes.object.isRequired,
   };
 
   isDirty() {

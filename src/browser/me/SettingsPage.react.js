@@ -1,5 +1,6 @@
+/* @flow */
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -9,7 +10,7 @@ const messages = defineMessages({
   },
 });
 
-export default class SettingsPage extends Component {
+class SettingsPage extends React.Component {
 
   render() {
     return (
@@ -27,3 +28,5 @@ export default class SettingsPage extends Component {
   }
 
 }
+
+export default SettingsPage;

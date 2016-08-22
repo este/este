@@ -1,44 +1,33 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { signIn } from '../../common/lib/redux-firebase/actions';
 
-class Social extends Component {
-
-  static propTypes = {
-    disabled: PropTypes.bool.isRequired,
-    signIn: PropTypes.func.isRequired,
-  };
-
-  constructor() {
-    super();
-    this.onButtonClick = this.onButtonClick.bind(this);
-  }
-
-  onButtonClick(e) {
-    const { signIn } = this.props;
+const Social = ({ disabled, signIn }) => {
+  const onButtonClick = e => {
     const { provider } = e.currentTarget.dataset;
     signIn(provider);
-  }
+  };
 
-  render() {
-    const { disabled } = this.props;
+  return (
+    <div className="social">
+      <button
+        data-provider="facebook"
+        disabled={disabled}
+        onClick={onButtonClick}
+      >
+        <FormattedMessage {...buttonsMessages.facebookSignIn} />
+      </button>
+    </div>
+  );
+};
 
-    return (
-      <div className="social">
-        <button
-          data-provider="facebook"
-          disabled={disabled}
-          onClick={this.onButtonClick}
-        >
-          <FormattedMessage {...buttonsMessages.facebookSignIn} />
-        </button>
-      </div>
-    );
-  }
-
-}
+Social.propTypes = {
+  disabled: React.PropTypes.bool.isRequired,
+  signIn: React.PropTypes.func.isRequired,
+};
 
 export default connect(state => ({
   disabled: state.auth.formDisabled,

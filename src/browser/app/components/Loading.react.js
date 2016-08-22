@@ -1,6 +1,6 @@
 import './Loading.scss';
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -14,7 +14,7 @@ const messages = defineMessages({
   },
 });
 
-export default class Loading extends Component {
+class Loading extends React.Component {
 
   constructor() {
     super();
@@ -58,3 +58,5 @@ export default class Loading extends Component {
   }
 
 }
+
+export default Loading;

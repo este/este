@@ -1,10 +1,10 @@
 import Header from './Header.react';
 import NewTodo from './NewTodo.react';
-import React, { Component } from 'react';
+import React from 'react';
 import Todos from './Todos.react';
 import { Container } from '../app/components';
 
-export default class TodosPage extends Component {
+class TodosPage extends React.Component {
 
   render() {
     return (
@@ -17,3 +17,5 @@ export default class TodosPage extends Component {
   }
 
 }
+
+export default TodosPage;

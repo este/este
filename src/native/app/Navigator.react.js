@@ -1,6 +1,6 @@
 import Header from './Header.react';
 import NotFoundPage from '../notfound/NotFound.react';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import notFoundMessages from '../../common/notfound/messages';
 import { Alert, Container } from './components';
 import { Platform, StatusBar } from 'react-native';
@@ -12,13 +12,13 @@ import { injectIntl, intlShape } from 'react-intl';
 // To add NavigationCardStack check this example:
 // NavigationExperimental/NavigationCardStack-NavigationHeader-Tabs-example.js
 
-class Navigator extends Component {
+class Navigator extends React.Component {
 
   static propTypes = {
-    currentTab: PropTypes.string.isRequired,
+    currentTab: React.PropTypes.string.isRequired,
     intl: intlShape.isRequired,
-    menuShown: PropTypes.bool.isRequired,
-    routes: PropTypes.object.isRequired,
+    menuShown: React.PropTypes.bool.isRequired,
+    routes: React.PropTypes.object.isRequired,
   };
 
   render() {

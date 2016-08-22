@@ -1,47 +1,29 @@
 import './Todo.scss';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-// Presentational component.
-export default class Todo extends Component {
+const Todo = ({ deleteTodo, todo, toggleTodoCompleted }) => {
+  const onTitleClick = () => toggleTodoCompleted(todo);
+  const onButtonClick = () => deleteTodo(todo.id);
 
-  static propTypes = {
-    deleteTodo: PropTypes.func.isRequired,
-    todo: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired,
-  };
+  return (
+    <li className="todo">
+      <span
+        className={classnames('view', { completed: todo.completed })}
+        onClick={onTitleClick}
+      >{todo.title}</span>
+      <span
+        className="button"
+        onClick={onButtonClick}
+      >x</span>
+    </li>
+  );
+};
 
-  constructor() {
-    super();
-    this.onButtonClick = this.onButtonClick.bind(this);
-    this.onTitleClick = this.onTitleClick.bind(this);
-  }
+Todo.propTypes = {
+  deleteTodo: React.PropTypes.func.isRequired,
+  todo: React.PropTypes.object.isRequired,
+  toggleTodoCompleted: React.PropTypes.func.isRequired,
+};
 
-  onButtonClick() {
-    const { deleteTodo, todo } = this.props;
-    deleteTodo(todo.id);
-  }
-
-  onTitleClick() {
-    const { todo, toggleTodoCompleted } = this.props;
-    toggleTodoCompleted(todo);
-  }
-
-  render() {
-    const { todo } = this.props;
-
-    return (
-      <li className="todo">
-        <span
-          className={classnames('view', { completed: todo.completed })}
-          onClick={this.onTitleClick}
-        >{todo.title}</span>
-        <span
-          className="button"
-          onClick={this.onButtonClick}
-        >x</span>
-      </li>
-    );
-  }
-
-}
+export default Todo;

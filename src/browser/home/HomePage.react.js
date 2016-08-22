@@ -1,9 +1,10 @@
+/* @flow */
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
-export default class HomePage extends Component {
+class HomePage extends React.Component {
 
   render() {
     return (
@@ -22,3 +23,5 @@ export default class HomePage extends Component {
   }
 
 }
+
+export default HomePage;

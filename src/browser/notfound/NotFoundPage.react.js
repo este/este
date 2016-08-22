@@ -1,10 +1,10 @@
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React from 'react';
 import messages from '../../common/notfound/messages';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 
-export default class NotFoundPage extends Component {
+class NotFoundPage extends React.Component {
 
   render() {
     return (
@@ -28,3 +28,5 @@ export default class NotFoundPage extends Component {
   }
 
 }
+
+export default NotFoundPage;

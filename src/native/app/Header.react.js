@@ -1,5 +1,5 @@
 import Icon from 'react-native-vector-icons/Ionicons';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import theme from './theme';
 import { Button, Text } from './components';
 import { Platform, StyleSheet, View } from 'react-native';
@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends Component {
+class Header extends React.Component {
 
   static propTypes = {
-    menuShown: PropTypes.bool.isRequired,
-    showMenu: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    menuShown: React.PropTypes.bool.isRequired,
+    showMenu: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string.isRequired,
   };
 
   render() {

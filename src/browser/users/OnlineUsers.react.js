@@ -1,5 +1,5 @@
 import Gravatar from 'react-gravatar';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { Loading } from '../app/components';
 import { connect } from 'react-redux';
 import { onUsersPresence } from '../../common/users/actions';
@@ -38,35 +38,27 @@ const User = ({ user: { displayName, photoURL } }) =>
   </div>;
 
 User.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: React.PropTypes.object.isRequired,
 };
 
-class OnlineUsers extends Component {
+let OnlineUsers = ({ loaded, users }) => (
+  <div className="online-users">
+    {!loaded ?
+      <Loading />
+    : !users ?
+      <p>No one is online.</p>
+    :
+      users.reverse().map(user =>
+        <User key={user.id} user={user} />
+      )
+    }
+  </div>
+);
 
-  static propTypes = {
-    users: PropTypes.object,
-    loaded: PropTypes.bool.isRequired,
-  };
-
-  render() {
-    const { users, loaded } = this.props;
-
-    return (
-      <div className="online-users">
-        {!loaded ?
-          <Loading />
-        : !users ?
-          <p>No one is online.</p>
-        :
-          users.reverse().map(user =>
-            <User key={user.id} user={user} />
-          )
-        }
-      </div>
-    );
-  }
-
-}
+OnlineUsers.propTypes = {
+  users: React.PropTypes.object,
+  loaded: React.PropTypes.bool.isRequired,
+};
 
 OnlineUsers = queryFirebase(OnlineUsers, ({ onUsersPresence }) => ({
   path: 'users-presence',

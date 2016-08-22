@@ -1,18 +1,18 @@
 import './SignIn.scss';
 import Email from './Email.react';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import SignInError from './SignInError.react';
 import Social from './Social.react';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 
-class SignIn extends Component {
+class SignIn extends React.Component {
 
   static propTypes = {
     location: locationShape,
-    redirectTo: PropTypes.string.isRequired,
+    redirectTo: React.PropTypes.string.isRequired,
     router: routerShape,
-    viewer: PropTypes.object,
+    viewer: React.PropTypes.object,
   };
 
   static defaultProps = {

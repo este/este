@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from './theme';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -35,20 +35,20 @@ const TabLink = ({ children, link, selectTab, selected }) => (
 );
 
 TabLink.propTypes = {
-  children: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  selectTab: PropTypes.func.isRequired,
-  selected: PropTypes.bool.isRequired,
+  children: React.PropTypes.string.isRequired,
+  link: React.PropTypes.string.isRequired,
+  selectTab: React.PropTypes.func.isRequired,
+  selected: React.PropTypes.bool.isRequired,
 };
 
-class Menu extends Component {
+class Menu extends React.Component {
 
   static propTypes = {
-    currentTab: PropTypes.string.isRequired,
+    currentTab: React.PropTypes.string.isRequired,
     intl: intlShape.isRequired,
-    selectTab: PropTypes.func.isRequired,
-    showMenu: PropTypes.func.isRequired,
-    viewer: PropTypes.object,
+    selectTab: React.PropTypes.func.isRequired,
+    showMenu: React.PropTypes.func.isRequired,
+    viewer: React.PropTypes.object,
   };
 
   constructor() {

@@ -1,6 +1,7 @@
+/* @flow */
 import Helmet from 'react-helmet';
 import OnlineUsers from '../users/OnlineUsers.react';
-import React, { Component } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
@@ -11,7 +12,7 @@ const styles = {
   },
 };
 
-export default class FirebasePage extends Component {
+class FirebasePage extends React.Component {
 
   render() {
     return (
@@ -39,3 +40,5 @@ export default class FirebasePage extends Component {
   }
 
 }
+
+export default FirebasePage;

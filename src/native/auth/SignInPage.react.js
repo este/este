@@ -1,5 +1,5 @@
 import Email from './Email.react';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import Social from './Social.react';
 import theme from '../app/theme';
 import { Container } from '../app/components';
@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class SignInPage extends Component {
+class SignInPage extends React.Component {
 
   static propTypes = {
-    selectTab: PropTypes.func.isRequired,
-    viewer: PropTypes.object,
+    selectTab: React.PropTypes.func.isRequired,
+    viewer: React.PropTypes.object,
   };
 
   constructor() {

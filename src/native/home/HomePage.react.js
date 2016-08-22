@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* @flow */
+import React from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { Platform, StyleSheet } from 'react-native';
 
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class HomePage extends Component {
+class HomePage extends React.Component {
 
   render() {
     return (
@@ -32,3 +33,5 @@ export default class HomePage extends Component {
   }
 
 }
+
+export default HomePage;

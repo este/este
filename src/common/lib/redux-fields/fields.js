@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
 
@@ -21,10 +21,10 @@ const fields = (WrappedComponent, options) => {
     Array.isArray(path)
   , 'Path must be a string, function, or an array.');
 
-  return class Fields extends Component {
+  return class Fields extends React.Component {
 
     static contextTypes = {
-      store: PropTypes.object, // Redux store.
+      store: React.PropTypes.object, // Redux store.
     };
 
     static getNormalizePath(props) {

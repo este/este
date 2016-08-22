@@ -1,32 +1,26 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
-class Locales extends Component {
+const Locales = ({ currentLocale, locales, setCurrentLocale }) => (
+  <div className="locales">
+    {locales.map(locale =>
+      <button
+        disabled={locale === currentLocale}
+        key={locale}
+        onClick={() => setCurrentLocale(locale)}
+      >
+        {locale}
+      </button>
+    )}
+  </div>
+);
 
-  static propTypes = {
-    currentLocale: PropTypes.string.isRequired,
-    locales: PropTypes.arrayOf(React.PropTypes.string),
-    setCurrentLocale: PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { currentLocale, locales, setCurrentLocale } = this.props;
-
-    return (
-      <div className="locales">
-        {locales.map(locale =>
-          <button
-            disabled={locale === currentLocale}
-            key={locale}
-            onClick={() => setCurrentLocale(locale)}
-          >{locale}</button>
-        )}
-      </div>
-    );
-  }
-
-}
+Locales.propTypes = {
+  currentLocale: React.PropTypes.string.isRequired,
+  locales: React.PropTypes.arrayOf(React.PropTypes.string),
+  setCurrentLocale: React.PropTypes.func.isRequired,
+};
 
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,

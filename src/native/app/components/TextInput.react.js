@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import theme from '../theme';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -19,10 +20,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AppTextInput extends Component {
+class AppTextInput extends React.Component {
 
   static propTypes = {
-    invalid: PropTypes.bool,
+    invalid: React.PropTypes.bool,
     inputStyle: Text.propTypes.style,
     viewStyle: View.propTypes.style,
   };
@@ -47,3 +48,5 @@ export default class AppTextInput extends Component {
   }
 
 }
+
+export default AppTextInput;

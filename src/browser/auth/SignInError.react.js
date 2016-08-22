@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import errorMessages from '../../common/auth/errorMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { firebaseMessages } from '../../common/lib/redux-firebase';
 
-class SignInError extends Component {
+class SignInError extends React.Component {
 
   static propTypes = {
-    error: PropTypes.instanceOf(Error),
+    error: React.PropTypes.instanceOf(Error),
   };
 
   render() {

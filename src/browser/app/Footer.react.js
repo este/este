@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* @flow */
+import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -8,18 +9,14 @@ const messages = defineMessages({
   },
 });
 
-export default class Footer extends Component {
+const Footer = () => (
+  <footer>
+    <p>
+      <FormattedMessage {...messages.madeByHtml} />
+      {' '}
+      <a href="https://twitter.com/steida">steida</a>
+    </p>
+  </footer>
+);
 
-  render() {
-    return (
-      <footer>
-        <p>
-          <FormattedMessage {...messages.madeByHtml} />
-          {' '}
-          <a href="https://twitter.com/steida">steida</a>
-        </p>
-      </footer>
-    );
-  }
-
-}
+export default Footer;

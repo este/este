@@ -1,15 +1,15 @@
 import Helmet from 'react-helmet';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 
-class OfflinePage extends Component {
+class OfflinePage extends React.Component {
 
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    online: PropTypes.bool.isRequired,
+    fields: React.PropTypes.object.isRequired,
+    online: React.PropTypes.bool.isRequired,
   };
 
   render() {

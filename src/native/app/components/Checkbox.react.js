@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import { Button } from './';
 import { Image, View } from 'react-native';
 
-export default class Checkbox extends Component {
+class Checkbox extends React.Component {
 
   static propTypes = {
-    checked: PropTypes.bool,
-    onPress: PropTypes.func.isRequired,
+    checked: React.PropTypes.bool,
+    onPress: React.PropTypes.func.isRequired,
     style: View.propTypes.style,
   };
 
@@ -24,3 +25,5 @@ export default class Checkbox extends Component {
   }
 
 }
+
+export default Checkbox;

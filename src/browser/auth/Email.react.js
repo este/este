@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -7,15 +7,15 @@ import { fields } from '../../common/lib/redux-fields';
 import { focus } from '../app/components';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
 
-class Email extends Component {
+class Email extends React.Component {
 
   static propTypes = {
-    disabled: PropTypes.bool.isRequired,
-    fields: PropTypes.object.isRequired,
+    disabled: React.PropTypes.bool.isRequired,
+    fields: React.PropTypes.object.isRequired,
     intl: intlShape.isRequired,
-    resetPassword: PropTypes.func.isRequired,
-    signIn: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired,
+    resetPassword: React.PropTypes.func.isRequired,
+    signIn: React.PropTypes.func.isRequired,
+    signUp: React.PropTypes.func.isRequired,
   };
 
   constructor() {

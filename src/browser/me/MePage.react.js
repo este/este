@@ -1,6 +1,6 @@
 import Gravatar from 'react-gravatar';
 import Helmet from 'react-helmet';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import SignOut from '../auth/SignOut.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
@@ -27,11 +27,11 @@ const styles = {
   },
 };
 
-class MePage extends Component {
+class MePage extends React.Component {
 
   static propTypes = {
-    children: PropTypes.object,
-    viewer: PropTypes.object.isRequired,
+    children: React.PropTypes.object,
+    viewer: React.PropTypes.object.isRequired,
   };
 
   render() {

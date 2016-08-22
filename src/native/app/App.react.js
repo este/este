@@ -1,19 +1,19 @@
 import Menu from './Menu.react';
 import Navigator from './Navigator.react';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
 import { Container } from './components';
 import { connect } from 'react-redux';
 import { showMenu } from '../../common/app/actions';
 
-class App extends Component {
+class App extends React.Component {
 
   static propTypes = {
-    menuShown: PropTypes.bool.isRequired,
-    routes: PropTypes.object.isRequired,
-    showMenu: PropTypes.func.isRequired,
-    storageLoaded: PropTypes.bool.isRequired,
+    menuShown: React.PropTypes.bool.isRequired,
+    routes: React.PropTypes.object.isRequired,
+    showMenu: React.PropTypes.func.isRequired,
+    storageLoaded: React.PropTypes.bool.isRequired,
   };
 
   render() {

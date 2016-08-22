@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import SignOut from '../auth/SignOut.react';
 import gravatar from 'gravatar-api';
 import { CenteredContainer, Text } from '../app/components';
@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class MePage extends Component {
+class MePage extends React.Component {
 
   static propTypes = {
-    selectTab: PropTypes.func.isRequired,
-    viewer: PropTypes.object,
+    selectTab: React.PropTypes.func.isRequired,
+    viewer: React.PropTypes.object,
   };
 
   constructor() {

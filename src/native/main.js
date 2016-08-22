@@ -1,7 +1,7 @@
 import App from './app/App.react';
 import FBSDK from 'react-native-fbsdk';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
-import React, { Component } from 'react';
+import React from 'react';
 import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
@@ -35,7 +35,7 @@ const store = configureStore({
 });
 const routes = createRoutes();
 
-class Root extends Component {
+class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>

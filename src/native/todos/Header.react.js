@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import theme from '../app/theme';
 import { FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends Component {
+class Header extends React.Component {
 
   static propTypes = {
-    todos: PropTypes.object.isRequired,
+    todos: React.PropTypes.object.isRequired,
   };
 
   render() {

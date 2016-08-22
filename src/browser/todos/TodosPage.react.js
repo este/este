@@ -1,12 +1,13 @@
+/* @flow */
 import Buttons from './Buttons.react';
 import Helmet from 'react-helmet';
 import NewTodo from './NewTodo.react';
-import React, { Component } from 'react';
+import React from 'react';
 import Todos from './Todos.react';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl, intlShape } from 'react-intl';
 
-class TodosPage extends Component {
+class TodosPage extends React.Component {
 
   static propTypes = {
     intl: intlShape.isRequired,

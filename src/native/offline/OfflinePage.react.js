@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { connect } from 'react-redux';
 
-class OfflinePage extends Component {
+class OfflinePage extends React.Component {
 
   static propTypes = {
-    online: PropTypes.bool.isRequired,
+    online: React.PropTypes.bool.isRequired,
   };
 
   render() {

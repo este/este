@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { Button, FormattedMessage } from '../app/components';
 import { connect } from 'react-redux';
 import { signOut } from '../../common/auth/actions';
 
-class SignOut extends Component {
+class SignOut extends React.Component {
 
   static propTypes = {
-    signOut: PropTypes.func.isRequired,
+    signOut: React.PropTypes.func.isRequired,
   };
 
   render() {

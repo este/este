@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import errorToMessage from '../../../common/app/errorToMessage';
 import theme from '../theme';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
   },
 });
 
-class Alert extends Component {
+class Alert extends React.Component {
 
   static propTypes = {
-    brand: PropTypes.string,
-    duration: PropTypes.number.isRequired,
-    error: PropTypes.instanceOf(Error),
-    hideTimeout: PropTypes.number.isRequired,
+    brand: React.PropTypes.string,
+    duration: React.PropTypes.number.isRequired,
+    error: React.PropTypes.instanceOf(Error),
+    hideTimeout: React.PropTypes.number.isRequired,
   };
 
   static defaultProps = {

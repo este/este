@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import theme from '../app/theme';
 import { Checkbox, TextInput } from '../app/components';
 import { StyleSheet, View } from 'react-native';
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Todo extends Component {
+export default class Todo extends React.Component {
 
   static propTypes = {
-    todo: PropTypes.object.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired,
+    todo: React.PropTypes.object.isRequired,
+    toggleTodoCompleted: React.PropTypes.func.isRequired,
   };
 
   constructor() {

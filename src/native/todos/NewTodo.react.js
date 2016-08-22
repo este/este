@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/theme';
 import { StyleSheet, View } from 'react-native';
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class NewTodo extends Component {
+class NewTodo extends React.Component {
 
   static propTypes = {
-    addTodo: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired,
+    addTodo: React.PropTypes.func.isRequired,
+    fields: React.PropTypes.object.isRequired,
     intl: intlShape.isRequired,
   };
 

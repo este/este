@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import theme from '../app/theme';
@@ -27,16 +27,16 @@ const styles = StyleSheet.create({
   },
 });
 
-class Email extends Component {
+class Email extends React.Component {
 
   static propTypes = {
-    disabled: PropTypes.bool.isRequired,
-    error: PropTypes.instanceOf(Error),
-    fields: PropTypes.object.isRequired,
+    disabled: React.PropTypes.bool.isRequired,
+    error: React.PropTypes.instanceOf(Error),
+    fields: React.PropTypes.object.isRequired,
     intl: intlShape.isRequired,
-    resetPassword: PropTypes.func.isRequired,
-    signIn: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired,
+    resetPassword: React.PropTypes.func.isRequired,
+    signIn: React.PropTypes.func.isRequired,
+    signUp: React.PropTypes.func.isRequired,
     style: View.propTypes.style,
   };
 

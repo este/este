@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import theme from '../theme';
 import { StyleSheet, View } from 'react-native';
 
@@ -8,11 +9,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Container extends Component {
+class Container extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
-    inverse: PropTypes.bool,
+    children: React.PropTypes.node,
+    inverse: React.PropTypes.bool,
     style: View.propTypes.style,
   };
 
@@ -33,3 +34,5 @@ export default class Container extends Component {
   }
 
 }
+
+export default Container;

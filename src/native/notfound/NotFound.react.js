@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import messages from '../../common/notfound/messages';
 import theme from '../app/theme';
 import { Button, CenteredContainer, FormattedMessage } from '../app/components';
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   },
 });
 
-class NotFoundPage extends Component {
+class NotFoundPage extends React.Component {
 
   static propTypes = {
-    selectTab: PropTypes.func.isRequired,
+    selectTab: React.PropTypes.func.isRequired,
   };
 
   render() {

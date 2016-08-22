@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import { Container } from './';
 import { StyleSheet, View } from 'react-native';
 
@@ -9,10 +10,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class CenteredContainer extends Component {
+class CenteredContainer extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
+    children: React.PropTypes.node,
     style: View.propTypes.style,
   };
 
@@ -26,3 +27,5 @@ export default class CenteredContainer extends Component {
   }
 
 }
+
+export default CenteredContainer;

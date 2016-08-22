@@ -1,5 +1,5 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from '../app/components';
 import { View } from 'react-native';
@@ -18,17 +18,17 @@ const SocialLoginButton = ({ backgroundColor, message, name, onPress }) =>
   </FormattedMessage>;
 
 SocialLoginButton.propTypes = {
-  backgroundColor: PropTypes.string.isRequired,
-  message: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
+  backgroundColor: React.PropTypes.string.isRequired,
+  message: React.PropTypes.object.isRequired,
+  name: React.PropTypes.string.isRequired,
+  onPress: React.PropTypes.func.isRequired,
 };
 
-class Social extends Component {
+class Social extends React.Component {
 
   static propTypes = {
-    disabled: PropTypes.bool.isRequired,
-    nativeSignIn: PropTypes.func.isRequired,
+    disabled: React.PropTypes.bool.isRequired,
+    nativeSignIn: React.PropTypes.func.isRequired,
     style: View.propTypes.style,
   };
 

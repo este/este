@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { ValidationError } from '../../../common/lib/validation';
 
@@ -15,11 +16,11 @@ const messages = defineMessages({
   },
 });
 
-export default class FieldError extends Component {
+class FieldError extends React.Component {
 
   static propTypes = {
-    error: PropTypes.any,
-    prop: PropTypes.string.isRequired,
+    error: React.PropTypes.any,
+    prop: React.PropTypes.string.isRequired,
   };
 
   render() {
@@ -35,3 +36,5 @@ export default class FieldError extends Component {
   }
 
 }
+
+export default FieldError;

@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 
-export default class Html extends Component {
+export default class Html extends React.Component {
 
   static propTypes = {
-    appCssFilename: PropTypes.string,
-    bodyHtml: PropTypes.string.isRequired,
-    googleAnalyticsId: PropTypes.string.isRequired,
-    helmet: PropTypes.object.isRequired,
-    isProduction: PropTypes.bool.isRequired,
+    appCssFilename: React.PropTypes.string,
+    bodyHtml: React.PropTypes.string.isRequired,
+    googleAnalyticsId: React.PropTypes.string.isRequired,
+    helmet: React.PropTypes.object.isRequired,
+    isProduction: React.PropTypes.bool.isRequired,
   };
 
   render() {

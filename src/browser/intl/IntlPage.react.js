@@ -1,6 +1,7 @@
+/* @flow */
 import Helmet from 'react-helmet';
 import Locales from './Locales.react';
-import React, { Component } from 'react';
+import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import {
   FormattedDate,
@@ -24,12 +25,14 @@ const messages = defineMessages({
   },
 });
 
-export default class IntlPage extends Component {
+class IntlPage extends React.Component {
 
   constructor() {
     super();
     this.componentRenderedAt = Date.now();
   }
+
+  componentRenderedAt: number;
 
   render() {
     // To remember beloved −123 min. https://www.youtube.com/watch?v=VKOv1I8zKso
@@ -71,3 +74,5 @@ export default class IntlPage extends Component {
   }
 
 }
+
+export default IntlPage;

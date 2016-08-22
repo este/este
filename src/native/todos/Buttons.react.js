@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/theme';
 import { Button, FormattedMessage } from '../app/components';
@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
   },
 });
 
-class TodoButtons extends Component {
+class TodoButtons extends React.Component {
 
   static propTypes = {
-    addHundredTodos: PropTypes.func.isRequired,
-    clearAllCompletedTodos: PropTypes.func.isRequired,
-    clearAllTodos: PropTypes.func.isRequired,
-    todos: PropTypes.object.isRequired,
+    addHundredTodos: React.PropTypes.func.isRequired,
+    clearAllCompletedTodos: React.PropTypes.func.isRequired,
+    clearAllTodos: React.PropTypes.func.isRequired,
+    todos: React.PropTypes.object.isRequired,
   };
 
   render() {

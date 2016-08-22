@@ -1,7 +1,7 @@
 /* @flow weak */
 import { BaseError } from 'make-error';
 
-export default class ValidationError extends BaseError {
+class ValidationError extends BaseError {
 
   static isInvalid(error, prop) {
     if (!(error instanceof ValidationError)) return false;
@@ -15,3 +15,5 @@ export default class ValidationError extends BaseError {
   }
 
 }
+
+export default ValidationError;

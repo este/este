@@ -3,7 +3,7 @@ import ValidationError from './ValidationError';
 import validator from 'validator';
 
 // Subclass to add custom validations.
-export default class Validation {
+class Validation {
 
   // JSON to be validated.
   constructor(object) {
@@ -56,3 +56,5 @@ export default class Validation {
   }
 
 }
+
+export default Validation;

@@ -1,11 +1,11 @@
 import Helmet from 'react-helmet';
-import React, { Component } from 'react';
+import React from 'react';
 import SignIn from './SignIn.react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { locationShape } from 'react-router';
 
-export default class SignInPage extends Component {
+class SignInPage extends React.Component {
 
   static propTypes = {
     location: locationShape,
@@ -34,3 +34,5 @@ export default class SignInPage extends Component {
   }
 
 }
+
+export default SignInPage;

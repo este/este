@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import theme from '../theme';
 import { StyleSheet, Text } from 'react-native';
 
@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
 // Normalize multiline strings because Text component preserves spaces.
 const normalizeMultilineString = message => message.replace(/ +/g, ' ').trim();
 
-export default class AppText extends Component {
+class AppText extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
+    children: React.PropTypes.node,
     style: Text.propTypes.style,
   };
 
@@ -62,3 +62,5 @@ export default class AppText extends Component {
   }
 
 }
+
+export default AppText;

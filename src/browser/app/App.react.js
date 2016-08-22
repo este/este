@@ -2,7 +2,7 @@ import './App.scss';
 import Footer from './Footer.react';
 import Header from './Header.react';
 import Helmet from 'react-helmet';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { connect } from 'react-redux';
@@ -21,11 +21,11 @@ const bootstrap4Metas = [
   },
 ];
 
-class App extends Component {
+class App extends React.Component {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
-    currentLocale: PropTypes.string.isRequired,
+    children: React.PropTypes.object.isRequired,
+    currentLocale: React.PropTypes.string.isRequired,
     location: locationShape,
   };
 
