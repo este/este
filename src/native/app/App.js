@@ -1,6 +1,6 @@
 /* @flow */
-import Menu from './Menu.react';
-import Navigator from './Navigator.react';
+import Menu from './Menu';
+import Navigator from './Navigator';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';

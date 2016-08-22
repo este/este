@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import Todo from './Todo.react';
+import Todo from './Todo';
 import todosMessages from '../../common/todos/todosMessages';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';

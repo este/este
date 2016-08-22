@@ -1,5 +1,5 @@
 import React from 'react';
-import SignOut from '../auth/SignOut.react';
+import SignOut from '../auth/SignOut';
 import gravatar from 'gravatar-api';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, StyleSheet, View } from 'react-native';

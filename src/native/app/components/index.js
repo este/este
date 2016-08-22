@@ -1,10 +1,10 @@
-import Alert from './Alert.react';
-import Button from './Button.react';
-import CenteredContainer from './CenteredContainer.react';
-import Checkbox from './Checkbox.react';
-import Container from './Container.react';
-import Text from './Text.react';
-import TextInput from './TextInput.react';
+import Alert from './Alert';
+import Button from './Button';
+import CenteredContainer from './CenteredContainer';
+import Checkbox from './Checkbox';
+import Container from './Container';
+import Text from './Text';
+import TextInput from './TextInput';
 import {
   FormattedDate,
   FormattedMessage,

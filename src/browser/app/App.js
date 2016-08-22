@@ -1,6 +1,6 @@
 import './App.scss';
-import Footer from './Footer.react';
-import Header from './Header.react';
+import Footer from './Footer';
+import Header from './Header';
 import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';

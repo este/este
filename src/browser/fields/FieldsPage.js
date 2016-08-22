@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import './FieldsPage.scss';
-import DynamicField from './DynamicField.react.js';
+import DynamicField from './DynamicField.js';
 import Helmet from 'react-helmet';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';

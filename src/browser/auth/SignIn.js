@@ -1,8 +1,8 @@
 import './SignIn.scss';
-import Email from './Email.react';
+import Email from './Email';
 import React from 'react';
-import SignInError from './SignInError.react';
-import Social from './Social.react';
+import SignInError from './SignInError';
+import Social from './Social';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 

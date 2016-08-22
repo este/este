@@ -1,5 +1,5 @@
-import Header from './Header.react';
-import NotFoundPage from '../notfound/NotFound.react';
+import Header from './Header';
+import NotFoundPage from '../notfound/NotFound';
 import React from 'react';
 import notFoundMessages from '../../common/notfound/messages';
 import { Alert, Container } from './components';

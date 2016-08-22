@@ -1,4 +1,4 @@
-import App from './app/App.react';
+import App from './app/App';
 import FBSDK from 'react-native-fbsdk';
 import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
 import React from 'react';

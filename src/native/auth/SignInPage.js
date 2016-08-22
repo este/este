@@ -1,6 +1,6 @@
-import Email from './Email.react';
+import Email from './Email';
 import React from 'react';
-import Social from './Social.react';
+import Social from './Social';
 import theme from '../app/theme';
 import { Container } from '../app/components';
 import { ScrollView, StyleSheet } from 'react-native';

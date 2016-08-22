@@ -1,5 +1,5 @@
-import FieldError from './FieldError.react';
-import Loading from './Loading.react';
+import FieldError from './FieldError';
+import Loading from './Loading';
 import focus from './focus';
 import fxbml from './fxbml';
 

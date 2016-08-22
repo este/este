@@ -1,9 +1,9 @@
 /* @flow */
-import Buttons from './Buttons.react';
+import Buttons from './Buttons';
 import Helmet from 'react-helmet';
-import NewTodo from './NewTodo.react';
+import NewTodo from './NewTodo';
 import React from 'react';
-import Todos from './Todos.react';
+import Todos from './Todos';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl, intlShape } from 'react-intl';
 

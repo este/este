@@ -1,6 +1,6 @@
 import * as reactIntl from 'react-intl';
 import React from 'react';
-import Text from './Text.react';
+import Text from './Text';
 
 // Create react-intl component which work in the React Native.
 // It replaces the browser span with the styleable native View.

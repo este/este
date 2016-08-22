@@ -1,6 +1,6 @@
 import Helmet from 'react-helmet';
 import React from 'react';
-import SignIn from './SignIn.react';
+import SignIn from './SignIn';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { locationShape } from 'react-router';

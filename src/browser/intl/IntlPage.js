@@ -1,6 +1,6 @@
 /* @flow */
 import Helmet from 'react-helmet';
-import Locales from './Locales.react';
+import Locales from './Locales';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import {

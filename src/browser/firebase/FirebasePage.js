@@ -1,6 +1,6 @@
 /* @flow */
 import Helmet from 'react-helmet';
-import OnlineUsers from '../users/OnlineUsers.react';
+import OnlineUsers from '../users/OnlineUsers';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';

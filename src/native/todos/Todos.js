@@ -1,6 +1,6 @@
-import Buttons from './Buttons.react';
+import Buttons from './Buttons';
 import React from 'react';
-import Todo from './Todo.react';
+import Todo from './Todo';
 import theme from '../app/theme';
 import todosMessages from '../../common/todos/todosMessages';
 import { CenteredContainer, FormattedMessage } from '../app/components';

@@ -1,7 +1,7 @@
-import Header from './Header.react';
-import NewTodo from './NewTodo.react';
+import Header from './Header';
+import NewTodo from './NewTodo';
 import React from 'react';
-import Todos from './Todos.react';
+import Todos from './Todos';
 import { Container } from '../app/components';
 
 class TodosPage extends React.Component {

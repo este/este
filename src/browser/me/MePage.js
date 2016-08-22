@@ -1,7 +1,7 @@
 import Gravatar from 'react-gravatar';
 import Helmet from 'react-helmet';
 import React from 'react';
-import SignOut from '../auth/SignOut.react';
+import SignOut from '../auth/SignOut';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
