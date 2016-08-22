@@ -1,3 +1,4 @@
+/* @flow weak */
 import React from 'react';
 import theme from '../app/theme';
 import { Checkbox, TextInput } from '../app/components';
@@ -23,39 +24,30 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Todo extends React.Component {
-
-  static propTypes = {
-    todo: React.PropTypes.object.isRequired,
-    toggleTodoCompleted: React.PropTypes.func.isRequired,
+const Todo = ({ todo, toggleTodoCompleted }) => {
+  const onCheckboxPress = () => {
+    toggleTodoCompleted(todo);
   };
 
-  constructor() {
-    super();
-    this.onCheckboxPress = this.onCheckboxPress.bind(this);
-  }
+  return (
+    <View style={styles.todo}>
+      <Checkbox
+        checked={todo.completed}
+        onPress={onCheckboxPress}
+        style={styles.checkbox}
+      />
+      <TextInput
+        editable={false}
+        viewStyle={styles.textInputView}
+        value={todo.title}
+      />
+    </View>
+  );
+};
 
-  onCheckboxPress() {
-    const { todo, toggleTodoCompleted } = this.props;
-    toggleTodoCompleted(todo);
-  }
+Todo.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  toggleTodoCompleted: React.PropTypes.func.isRequired,
+};
 
-  render() {
-    const { todo } = this.props;
-    return (
-      <View style={styles.todo}>
-        <Checkbox
-          checked={todo.completed}
-          onPress={this.onCheckboxPress}
-          style={styles.checkbox}
-        />
-        <TextInput
-          editable={false}
-          viewStyle={styles.textInputView}
-          value={todo.title}
-        />
-      </View>
-    );
-  }
-
-}
+export default Todo;
