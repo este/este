@@ -32,7 +32,6 @@ class App extends React.Component {
 
   render() {
     const { children, currentLocale, location } = this.props;
-    
     return (
       // jxnblk.com/rebass/#Container
       <Container>
