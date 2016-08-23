@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
+import { Container } from 'rebass';
 import { connect } from 'react-redux';
 import { locationShape } from 'react-router';
 
@@ -31,9 +32,10 @@ class App extends React.Component {
 
   render() {
     const { children, currentLocale, location } = this.props;
-
+    
     return (
-      <div className="container">
+      // jxnblk.com/rebass/#Container
+      <Container>
         <Helmet
           htmlAttributes={{ lang: currentLocale }}
           titleTemplate="%s - Este.js"
@@ -53,7 +55,7 @@ class App extends React.Component {
         <Header location={location} />
         {children}
         <Footer />
-      </div>
+      </Container>
     );
   }
 
