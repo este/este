@@ -1,25 +1,16 @@
 // Makes browsers render all elements more consistently.
+// TODO: Inline it all.
+
 @import '~normalize.css/normalize.css';
 
-// Useful stuff from github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
-html {
-  // Note React Native uses border-box by default.
+* {
   box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
 }
 
 html {
   // Changes the default tap highlight to be completely transparent in iOS.
+  // github.com/necolas/normalize.css/issues/23#issuecomment-1699200
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-[tabindex="-1"]:focus {
-  outline: none !important;
 }
 
 // Este styles. Note Este is going to leverage inline styles soon.
