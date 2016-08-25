@@ -1,6 +1,7 @@
+/* @flow */
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
@@ -32,11 +33,6 @@ class NewTodo extends React.Component {
     intl: intlShape.isRequired,
   };
 
-  constructor() {
-    super();
-    this.onSubmitEditing = this.onSubmitEditing.bind(this);
-  }
-
   onSubmitEditing() {
     const { addTodo, fields } = this.props;
     if (!fields.title.value.trim()) return;
@@ -53,7 +49,7 @@ class NewTodo extends React.Component {
           {...fields.title}
           inputStyle={styles.textInputInput}
           maxLength={100}
-          onSubmitEditing={this.onSubmitEditing}
+          onSubmitEditing={() => this.onSubmitEditing()}
           placeholder={formatMessage(newTodoMessages.placeholder)}
           placeholderTextColor={'#cce9f2'}
           viewStyle={styles.textInputView}

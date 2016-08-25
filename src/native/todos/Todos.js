@@ -1,7 +1,7 @@
 import Buttons from './Buttons';
 import React from 'react';
 import Todo from './Todo';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import todosMessages from '../../common/todos/todosMessages';
 import { CenteredContainer, FormattedMessage } from '../app/components';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';

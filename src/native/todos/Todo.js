@@ -1,6 +1,6 @@
 /* @flow weak */
 import React from 'react';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { Checkbox, TextInput } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 

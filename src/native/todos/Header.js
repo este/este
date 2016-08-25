@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';

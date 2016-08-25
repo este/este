@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from '../theme';
+import theme from '../themes/initial';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({

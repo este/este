@@ -1,7 +1,7 @@
 import Email from './Email';
 import React from 'react';
 import Social from './Social';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { Container } from '../app/components';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';

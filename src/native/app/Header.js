@@ -1,6 +1,6 @@
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import theme from './theme';
+import theme from './themes/initial';
 import { Button, Text } from './components';
 import { Platform, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';

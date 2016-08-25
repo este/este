@@ -1,6 +1,6 @@
 import React from 'react';
 import messages from '../../common/notfound/messages';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { Button, CenteredContainer, FormattedMessage } from '../app/components';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';

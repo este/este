@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import theme from '../theme';
+import theme from '../themes/initial';
 import { TouchableOpacity, View } from 'react-native';
 
 class Button extends React.Component {

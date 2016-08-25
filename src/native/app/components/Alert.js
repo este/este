@@ -1,6 +1,6 @@
 import React from 'react';
 import errorToMessage from '../../../common/app/errorToMessage';
-import theme from '../theme';
+import theme from '../themes/initial';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { FormattedMessage } from './';
 import { connect } from 'react-redux';

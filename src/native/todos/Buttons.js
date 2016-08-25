@@ -1,6 +1,6 @@
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { Button, FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import {

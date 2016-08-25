@@ -1,7 +1,7 @@
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { FormattedMessage, Button, TextInput } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import { ValidationError } from '../../common/lib/validation';

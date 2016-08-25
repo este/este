@@ -1,6 +1,6 @@
 import * as components from '../app/components';
 import React from 'react';
-import theme from '../app/theme';
+import theme from '../app/themes/initial';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';

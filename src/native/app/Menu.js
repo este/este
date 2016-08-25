@@ -1,6 +1,7 @@
+/* flow */
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import theme from './theme';
+import theme from './themes/initial';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from './components';
 import { connect } from 'react-redux';
