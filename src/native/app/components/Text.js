@@ -21,11 +21,6 @@ class AppText extends React.Component {
     style: Text.propTypes.style,
   };
 
-  constructor() {
-    super();
-    this.onTextRef = this.onTextRef.bind(this);
-  }
-
   onTextRef(text) {
     this.text = text;
   }
@@ -52,7 +47,11 @@ class AppText extends React.Component {
     const textStyle = this.getTextStyleWithMaybeComputedLineHeight();
 
     return (
-      <Text {...this.props} ref={this.onTextRef} style={textStyle}>
+      <Text
+        {...this.props}
+        ref={text => this.onTextRef(text)}
+        style={textStyle}
+      >
         {typeof children === 'string'
           ? normalizeMultilineString(children)
           : children

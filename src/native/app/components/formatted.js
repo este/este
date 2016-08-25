@@ -13,11 +13,6 @@ const native = WrappedComponent =>
       style: Text.propTypes.style,
     };
 
-    constructor() {
-      super();
-      this.onTextRef = this.onTextRef.bind(this);
-    }
-
     onTextRef(text) {
       this.text = text;
     }
@@ -33,11 +28,16 @@ const native = WrappedComponent =>
 
       return (
         <WrappedComponent {...wrappedComponentProps}>
-          {message => (
-            childrenAsFunction
-              ? children(message)
-              : <Text ref={this.onTextRef} style={style}>{message}</Text>
-          )}
+          {message => childrenAsFunction ?
+            children(message)
+          :
+            <Text
+              ref={text => this.onTextRef(text)}
+              style={style}
+            >
+              {message}
+            </Text>
+          }
         </WrappedComponent>
       );
     }

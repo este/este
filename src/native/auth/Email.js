@@ -42,10 +42,6 @@ class Email extends React.Component {
 
   constructor() {
     super();
-    this.onForgetPasswordPress = this.onForgetPasswordPress.bind(this);
-    this.onResetPasswordPress = this.onResetPasswordPress.bind(this);
-    this.onSignInViaPasswordPress = this.onSignInViaPasswordPress.bind(this);
-    this.onSignUpPress = this.onSignUpPress.bind(this);
     // Note we are using the component state instead of the app state, because
     // the component state is the right place for an ephemeral UI state.
     this.state = {
@@ -115,13 +111,22 @@ class Email extends React.Component {
         {!forgetPasswordIsShown ?
           <View>
             <View style={styles.buttons}>
-              <Button disabled={disabled} onPress={this.onSignInViaPasswordPress}>
+              <Button
+                disabled={disabled}
+                onPress={() => this.onSignInViaPasswordPress()}
+              >
                 <FormattedMessage {...buttonsMessages.signIn} />
               </Button>
-              <Button disabled={disabled} onPress={this.onSignUpPress}>
+              <Button
+                disabled={disabled}
+                onPress={() => this.onSignUpPress()}
+              >
                 <FormattedMessage {...buttonsMessages.signUp} />
               </Button>
-              <Button disabled={disabled} onPress={this.onForgetPasswordPress}>
+              <Button
+                disabled={disabled}
+                onPress={() => this.onForgetPasswordPress()}
+              >
                 <FormattedMessage {...emailMessages.passwordForgotten} />
               </Button>
             </View>
@@ -134,10 +139,16 @@ class Email extends React.Component {
           </View>
         :
           <View style={styles.buttons}>
-            <Button disabled={disabled} onPress={this.onResetPasswordPress}>
+            <Button
+              disabled={disabled}
+              onPress={() => this.onResetPasswordPress()}
+            >
               <FormattedMessage {...emailMessages.resetPassword} />
             </Button>
-            <Button disabled={disabled} onPress={this.onForgetPasswordPress}>
+            <Button
+              disabled={disabled}
+              onPress={() => this.onForgetPasswordPress()}
+            >
               <FormattedMessage {...buttonsMessages.dismiss} />
             </Button>
           </View>

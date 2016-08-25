@@ -20,9 +20,6 @@ class Email extends React.Component {
 
   constructor() {
     super();
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onSignUpClick = this.onSignUpClick.bind(this);
-    this.onForgetPasswordClick = this.onForgetPasswordClick.bind(this);
     // Note we are using the component state instead of the app state, because
     // the component state is the right place for an ephemeral UI state.
     this.state = {
@@ -74,7 +71,7 @@ class Email extends React.Component {
       : emailMessages.emailLegend;
 
     return (
-      <form className="email" onSubmit={this.onFormSubmit}>
+      <form className="email" onSubmit={e => this.onFormSubmit(e)}>
         <fieldset disabled={disabled}>
           <legend>
             <FormattedMessage {...legendMessage} />
@@ -97,11 +94,11 @@ class Email extends React.Component {
               <button>
                 <FormattedMessage {...buttonsMessages.signIn} />
               </button>
-              <button onClick={this.onSignUpClick} type="button">
+              <button onClick={() => this.onSignUpClick()} type="button">
                 <FormattedMessage {...buttonsMessages.signUp} />
               </button>
               <button
-                onClick={this.onForgetPasswordClick}
+                onClick={() => this.onForgetPasswordClick()}
                 type="button"
               >
                 <FormattedMessage {...emailMessages.passwordForgotten} />

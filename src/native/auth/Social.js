@@ -32,11 +32,6 @@ class Social extends React.Component {
     style: View.propTypes.style,
   };
 
-  constructor() {
-    super();
-    this.onFacebookLoginPress = this.onFacebookLoginPress.bind(this);
-  }
-
   onFacebookLoginPress() {
     const { disabled, nativeSignIn } = this.props;
     if (disabled) return;
@@ -52,7 +47,7 @@ class Social extends React.Component {
           backgroundColor="#3b5998"
           message={buttonsMessages.facebookSignIn}
           name="facebook"
-          onPress={this.onFacebookLoginPress}
+          onPress={() => this.onFacebookLoginPress()}
         />
         {/* TODO: Add more social login buttons. */}
       </View>

@@ -51,8 +51,6 @@ class FieldsPage extends React.Component {
 
   constructor() {
     super();
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onToggleClick = this.onToggleClick.bind(this);
     // For a demo, we can store the state in the component.
     this.state = {
       disabled: false,
@@ -106,7 +104,7 @@ class FieldsPage extends React.Component {
         <p>
           <FormattedMessage {...messages.p} />
         </p>
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={e => this.onFormSubmit(e)}>
           <fieldset disabled={disabled}>
             <h3>Some Field</h3>
             <input
@@ -176,7 +174,7 @@ class FieldsPage extends React.Component {
               className={classnames('custom-toggle', {
                 toggled: fields.toggled.value,
               })}
-              onClick={this.onToggleClick}
+              onClick={() => this.onToggleClick()}
             >Toggle me!</div>
             <div>
               <button type="submit">

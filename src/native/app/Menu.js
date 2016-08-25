@@ -52,11 +52,6 @@ class Menu extends React.Component {
     viewer: React.PropTypes.object,
   };
 
-  constructor() {
-    super();
-    this.onTabLinkSelectTap = this.onTabLinkSelectTap.bind(this);
-  }
-
   onTabLinkSelectTap(key) {
     const { selectTab, showMenu } = this.props;
     showMenu(false);
@@ -83,7 +78,7 @@ class Menu extends React.Component {
             key={link}
             selected={link === currentTab}
             link={link}
-            selectTab={this.onTabLinkSelectTap}
+            selectTab={key => this.onTabLinkSelectTap(key)}
           >
             {intl.formatMessage(linksMessages[link])}
           </TabLink>

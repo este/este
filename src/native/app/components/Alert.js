@@ -46,8 +46,6 @@ class Alert extends React.Component {
 
   constructor() {
     super();
-    this.onAlertLayout = this.onAlertLayout.bind(this);
-    this.onPress = this.onPress.bind(this);
     this.state = {
       alertHeight: 0,
       animation: new Animated.Value(0),
@@ -118,9 +116,12 @@ class Alert extends React.Component {
     const containerStyle = this.getContainerStyle();
 
     return (
-      <TouchableWithoutFeedback onPress={this.onPress}>
+      <TouchableWithoutFeedback onPress={() => this.onPress()}>
         <Animated.View style={[styles.container, containerStyle]}>
-          <View style={[styles.alert, alertStyle]} onLayout={this.onAlertLayout}>
+          <View
+            style={[styles.alert, alertStyle]}
+            onLayout={e => this.onAlertLayout(e)}
+          >
             <FormattedMessage
               {...errorMessage.message}
               values={errorMessage.values}
