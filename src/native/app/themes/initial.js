@@ -1,5 +1,5 @@
 /* @flow weak */
-import Color from 'color';
+import chroma from 'chroma-js';
 import { Platform } from 'react-native';
 
 /*
@@ -40,9 +40,9 @@ export default {
   disabledOpacity: 0.3,
 
   darken: 0.3,
-  lighten: 0.3,
+  brighten: 0.3,
 
-  get placeholderTextColor() { return this.light(this.textColor); },
+  get placeholderTextColor() { return this.bright(this.textColor); },
 
   get fontSizeH1() { return this.fontSize * 2.5; },
   get fontSizeH2() { return this.fontSize * 2; },
@@ -51,6 +51,6 @@ export default {
   get fontSizeH5() { return this.fontSize * 1.25; },
   get fontSizeH6() { return this.fontSize * 1; },
 
-  dark(color) { return Color(color).darken(this.darken).hexString(); },
-  light(color) { return Color(color).lighten(this.lighten).hexString(); },
+  dark(color) { return chroma(color).darken(this.darken).hex(); },
+  bright(color) { return chroma(color).brighten(this.brighten).hex(); },
 };

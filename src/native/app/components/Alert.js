@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   message: {
-    color: theme.light(theme.inverseTextColor),
+    color: theme.bright(theme.inverseTextColor),
     fontWeight: 'bold',
     margin: theme.fontSize * 0.75,
     textAlign: 'center',
@@ -70,7 +70,7 @@ class Alert extends React.Component {
     const { brand } = this.props;
     return {
       backgroundColor: brand,
-      borderBottomColor: theme.light(brand),
+      borderBottomColor: theme.bright(brand),
     };
   }
 

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center', // align items in the cross-axis flexDirection
     backgroundColor: theme.brandPrimary,
-    borderBottomColor: theme.light(theme.brandPrimary),
+    borderBottomColor: theme.bright(theme.brandPrimary),
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     justifyContent: 'space-between', // align items in the flexDirection

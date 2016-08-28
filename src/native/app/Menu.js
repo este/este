@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     padding: theme.fontSize * 0.625,
   },
   selected: {
-    backgroundColor: theme.light(theme.inverseBackgroundColor),
+    backgroundColor: theme.bright(theme.inverseBackgroundColor),
   },
 });
 
