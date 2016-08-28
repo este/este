@@ -9,8 +9,6 @@ import { injectIntl, intlShape } from 'react-intl';
 
 // This is temporary pure React Native solution.
 // TODO: Use jmurzy/react-router-native once released.
-// To add NavigationCardStack check this example:
-// NavigationExperimental/NavigationCardStack-NavigationHeader-Tabs-example.js
 
 class Navigator extends React.Component {
 
@@ -24,7 +22,7 @@ class Navigator extends React.Component {
   render() {
     const { currentTab, intl, menuShown, routes } = this.props;
     const route = routes.tabs[currentTab];
-    const RouteComponent = route ? route.component : NotFoundPage;
+    const RoutePage = route ? route.component : NotFoundPage;
     const title = route ? route.title : notFoundMessages.title;
 
     return (
@@ -34,7 +32,7 @@ class Navigator extends React.Component {
         }
         <Header title={intl.formatMessage(title)} />
         <Alert />
-        <RouteComponent />
+        <RoutePage />
       </Container>
     );
   }
