@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import SignOut from '../auth/SignOut';
 import linksMessages from '../../common/app/linksMessages';
+import { Link } from '../app/components';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 // Inline styles without any library like Khan/aphrodite or whatever.

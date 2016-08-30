@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+import { Link } from './components';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -14,7 +15,7 @@ const Footer = () => (
     <p>
       <FormattedMessage {...messages.madeByHtml} />
       {' '}
-      <a href="https://twitter.com/steida">steida</a>
+      <Link to="https://twitter.com/steida">steida</Link>
     </p>
   </footer>
 );

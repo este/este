@@ -2,7 +2,7 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import messages from '../../common/notfound/messages';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
+import { Link } from '../app/components';
 
 class NotFoundPage extends React.Component {
 
