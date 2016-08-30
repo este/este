@@ -3,6 +3,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
 import React from 'react';
+import Theme from './Theme';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Container } from 'rebass';
@@ -33,28 +34,29 @@ class App extends React.Component {
   render() {
     const { children, currentLocale, location } = this.props;
     return (
-      // jxnblk.com/rebass/#Container
-      <Container>
-        <Helmet
-          htmlAttributes={{ lang: currentLocale }}
-          titleTemplate="%s - Este.js"
-          meta={[
-            ...bootstrap4Metas,
-            {
-              name: 'description',
-              content: 'Dev stack and starter kit for functional and universal React apps',
-            },
-            ...favicon.meta,
-          ]}
-          link={[
-            ...favicon.link,
-          ]}
-        />
-        {/* Pass location to ensure header active links are updated. */}
-        <Header location={location} />
-        {children}
-        <Footer />
-      </Container>
+      <Theme>
+        <Container>
+          <Helmet
+            htmlAttributes={{ lang: currentLocale }}
+            titleTemplate="%s - Este.js"
+            meta={[
+              ...bootstrap4Metas,
+              {
+                name: 'description',
+                content: 'Dev stack and starter kit for functional and universal React apps',
+              },
+              ...favicon.meta,
+            ]}
+            link={[
+              ...favicon.link,
+            ]}
+          />
+          {/* Pass location to ensure header active links are updated. */}
+          <Header location={location} />
+          {children}
+          <Footer />
+        </Container>
+      </Theme>
     );
   }
 

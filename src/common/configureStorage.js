@@ -12,8 +12,9 @@ const isReactNative =
 
 const stateToSave = [
   ['fields'],
-  ['todos'],
   ['intl', 'currentLocale'],
+  ['themes', 'currentTheme'],
+  ['todos'],
   ['users', 'viewer'],
 ];
 

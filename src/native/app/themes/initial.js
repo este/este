@@ -15,6 +15,8 @@ Vocabulary
 
 Tips
   Leverage theme.fontSize for responsive and rhythm sizing, check pxtoem.com
+
+TODO: In a long term, we need the universal github.com/jxnblk/rebass
 */
 
 export default {

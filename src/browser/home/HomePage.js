@@ -1,6 +1,7 @@
 /* @flow */
 import Helmet from 'react-helmet';
 import React from 'react';
+import SwitchTheme from '../themes/SwitchTheme';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
 
@@ -17,7 +18,10 @@ class HomePage extends React.Component {
         <p>
           <a href="https://github.com/este/este">github.com/este/este</a>
         </p>
-        <img alt="50x50 placeholder" src={require('./50x50.png')} />
+        <p>
+          <img alt="50x50 placeholder" src={require('./50x50.png')} />
+        </p>
+        <SwitchTheme />
       </div>
     );
   }
