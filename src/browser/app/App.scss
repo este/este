@@ -12,25 +12,16 @@ html {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+// Where are the other styles?
+// Este is switching to inline styles.
+// jxnblk.com/writing/posts/patterns-for-style-composition-in-react
+// Check src/browser/app/themes/
+// Not everything is possible with plain inline styles so that browser specific
+// styles can be still used here.
+// I do not plan to use any special inline styles library yet.
+
 // TODO: Rewrite to inline styles.
 #app {
-  > header {
-    h1 {
-      margin-bottom: 0;
-    }
-
-    ul {
-      li {
-        font-size: 1em;
-      }
-    }
-  }
-
-  > footer {
-    font-size: .75em;
-    font-style: italic;
-  }
-
   :focus {
     outline-style: none;
   }
@@ -83,10 +74,5 @@ html {
     &:disabled {
       opacity: .5;
     }
-  }
-
-  p,
-  li {
-    max-width: 42em;
   }
 }
