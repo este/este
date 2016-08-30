@@ -175,9 +175,6 @@ Thanks to [Ryanlanciaux](http://ryanlanciaux.github.io/blog/2014/08/02/using-jes
  sudo chown -R `whoami` <directory>
  ```
 
-#### Why does the CSS flicker when starting the app/refreshing it?
-In dev mode, webpack loads all the styles inline, which makes them hot reloadable. This behaviour disappears in production mode (`gulp -p`).
-
 #### Does Hapi/SailJS/Restify/Rails work with Este? Do you have any example app for this framework?
 Yes it does. Este is agnostic of what you use in your backend and is completely decoupled from the API. It uses an Express app for server-side rendering, but you can use anything for your API. The only benefit that an Express API has is that it can simply be called with a `use()` statement by the main app, just like any other middleware.
 
