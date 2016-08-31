@@ -2,7 +2,6 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
-// Router components must be ES6 classes because hot reloading.
 import App from './app/App';
 import Fields from './fields/FieldsPage';
 import Firebase from './firebase/FirebasePage';
