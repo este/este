@@ -101,6 +101,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp ios` run iOS app in development mode
 - `gulp android` run Android app in development mode
 - `gulp -p` run web app in production mode
+- `gulp -f` run web app in development mode, but only browser source rebuilds on file changes
 - `gulp ava` run ava unit tests
 - `gulp ava-watch` continuous test running for TDD
 - `gulp eslint` eslint
