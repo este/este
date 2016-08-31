@@ -1,19 +1,25 @@
-import immutable from 'immutable';
+/* @flow */
+import { Record as ImmutableRecord, Seq } from 'immutable';
 import invariant from 'invariant';
 import transit from 'transit-immutable-js';
 
-const records = [];
+const records = {};
+
+const transitRecords = () =>
+  transit.withRecords(
+    Seq(records).toSet().toArray()
+  );
 
 // Transit allows us to serialize / deserialize immutable Records automatically.
-export const fromJSON = string => transit.withRecords(records).fromJSON(string);
-export const toJSON = object => transit.withRecords(records).toJSON(object);
+export const fromJSON = (string: string) => transitRecords().fromJSON(string);
+export const toJSON = (object: any) => transitRecords().toJSON(object);
 
-// Record is just a wrapper for immutable.Record registering all Records.
+// TransitRecord is just a wrapper for the Record registering all Records.
 // This is aspect-oriented programming. It's for cross-cutting concerns.
-export const Record = (defaultValues, name) => {
+export const Record = (defaultValues: Object, name: string) => {
   invariant(name && typeof name === 'string',
     'Transit Record second argument name must be a non empty string.');
-  const ImmutableRecord = immutable.Record(defaultValues, name);
-  records.push(ImmutableRecord);
-  return ImmutableRecord;
+  // Hot reloading can register the already registered record, so override it.
+  records[name] = ImmutableRecord(defaultValues, name);
+  return records[name];
 };
