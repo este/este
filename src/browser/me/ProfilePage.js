@@ -10,23 +10,17 @@ const messages = defineMessages({
   },
 });
 
-class ProfilePage extends React.Component {
-
-  render() {
-    return (
-      <div className="profile-page">
-        <FormattedMessage {...messages.title}>
-          {message =>
-            <Helmet title={message} />
-          }
-        </FormattedMessage>
-        <p>
-          <FormattedMessage {...messages.title} />
-        </p>
-      </div>
-    );
-  }
-
-}
+const ProfilePage = () => (
+  <div className="profile-page">
+    <FormattedMessage {...messages.title}>
+      {message =>
+        <Helmet title={message} />
+      }
+    </FormattedMessage>
+    <p>
+      <FormattedMessage {...messages.title} />
+    </p>
+  </div>
+);
 
 export default ProfilePage;

@@ -10,23 +10,17 @@ const messages = defineMessages({
   },
 });
 
-class SettingsPage extends React.Component {
-
-  render() {
-    return (
-      <div className="settings-page">
-        <FormattedMessage {...messages.title}>
-          {message =>
-            <Helmet title={message} />
-          }
-        </FormattedMessage>
-        <p>
-          <FormattedMessage {...messages.title} />
-        </p>
-      </div>
-    );
-  }
-
-}
+const SettingsPage = () => (
+  <div className="settings-page">
+    <FormattedMessage {...messages.title}>
+      {message =>
+        <Helmet title={message} />
+      }
+    </FormattedMessage>
+    <p>
+      <FormattedMessage {...messages.title} />
+    </p>
+  </div>
+);
 
 export default SettingsPage;

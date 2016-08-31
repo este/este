@@ -30,12 +30,13 @@ const configureStore = (options: Options) => {
     applyMiddleware(...middleware)
   );
 
-  // Enable hot reload where available.
+  // Enable hot reloading for reducers.
   if (module.hot) {
     const replaceReducer = configureReducer =>
       store.replaceReducer(configureReducer(initialState));
 
     if (initialState.device.isReactNative) {
+      // TODO: Should be the same as non React Native.
       module.hot.accept(() => {
         replaceReducer(require('./configureReducer').default);
       });

@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Root from './app/Root';
 import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
-import createRoutes from './createRoutes';
 import createStorageEngine from 'redux-storage-engine-localstorage';
 import uuid from 'uuid';
-import { Provider } from 'react-redux';
-import { Router, applyRouterMiddleware, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
-import { useScroll } from 'react-router-scroll';
 
 const initialState = fromJSON(window.__INITIAL_STATE__);
 const reportingMiddleware = configureReporting({
@@ -23,16 +21,21 @@ const store = configureStore({
   platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)],
 });
 const history = syncHistoryWithStore(browserHistory, store);
-const routes = createRoutes(store.getState);
+const appElement = document.getElementById('app');
 
+// Initial render.
 ReactDOM.render(
-  <Provider store={store}>
-    <Router
-      history={history}
-      render={applyRouterMiddleware(useScroll())}
-    >
-      {routes}
-    </Router>
-  </Provider>
-  , document.getElementById('app')
-);
+  <Root history={history} store={store} />
+, appElement);
+
+// Hot reload render.
+// gist.github.com/gaearon/06bd9e2223556cb0d841#file-naive-js
+if (module.hot) {
+  module.hot.accept('./app/Root', () => {
+    const NextRoot = require('./app/Root');
+
+    ReactDOM.render(
+      <NextRoot history={history} store={store} />
+    , appElement);
+  });
+}

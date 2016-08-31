@@ -4,31 +4,26 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { firebaseMessages } from '../../common/lib/redux-firebase';
 
-class SignInError extends React.Component {
+const SignInError = ({ error }) => {
+  if (!error) return null;
+  const message =
+    errorMessages[error.name] ||
+    firebaseMessages[error.name];
 
-  static propTypes = {
-    error: React.PropTypes.instanceOf(Error),
-  };
+  return (
+    <p className="signin-error">
+      {message ?
+        <FormattedMessage {...message} values={error.params} />
+      :
+        error.toString()
+      }
+    </p>
+  );
+};
 
-  render() {
-    const { error } = this.props;
-    if (!error) return null;
-    const message =
-      errorMessages[error.name] ||
-      firebaseMessages[error.name];
-
-    return (
-      <p className="signin-error">
-        {message ?
-          <FormattedMessage {...message} values={error.params} />
-        :
-          error.toString()
-        }
-      </p>
-    );
-  }
-
-}
+SignInError.propTypes = {
+  error: React.PropTypes.instanceOf(Error),
+};
 
 export default connect(state => ({
   error: state.auth.error,

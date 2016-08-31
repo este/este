@@ -84,9 +84,6 @@ const makeConfig = options => {
               'add-module-exports',
             ],
             env: {
-              development: {
-                presets: ['react-hmre'],
-              },
               production: {
                 plugins: [
                   'transform-react-constant-elements',
