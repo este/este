@@ -1,11 +1,12 @@
 import './App.scss';
+import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
 import React from 'react';
-import Theme from './Theme';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
+import theme from '../../common/app/theme';
 import { Container } from '../app/components';
 import { connect } from 'react-redux';
 import { locationShape } from 'react-router';
@@ -24,29 +25,27 @@ const bootstrap4Metas = [
 ];
 
 let App = ({ children, currentLocale, location }) => (
-  <Theme>
-    <Container>
-      <Helmet
-        htmlAttributes={{ lang: currentLocale }}
-        titleTemplate="%s - Este.js"
-        meta={[
-          ...bootstrap4Metas,
-          {
-            name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React apps',
-          },
-          ...favicon.meta,
-        ]}
-        link={[
-          ...favicon.link,
-        ]}
-      />
-      {/* Pass location to ensure header active links are updated. */}
-      <Header location={location} />
-      {children}
-      <Footer />
-    </Container>
-  </Theme>
+  <Container>
+    <Helmet
+      htmlAttributes={{ lang: currentLocale }}
+      titleTemplate="%s - Este.js"
+      meta={[
+        ...bootstrap4Metas,
+        {
+          name: 'description',
+          content: 'Dev stack and starter kit for functional and universal React apps',
+        },
+        ...favicon.meta,
+      ]}
+      link={[
+        ...favicon.link,
+      ]}
+    />
+    {/* Pass location to ensure header active links are updated. */}
+    <Header location={location} />
+    {children}
+    <Footer />
+  </Container>
 );
 
 App.propTypes = {
@@ -56,6 +55,7 @@ App.propTypes = {
 };
 
 App = start(App);
+App = theme(App, themes);
 
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,

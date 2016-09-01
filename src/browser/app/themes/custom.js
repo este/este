@@ -1,10 +1,16 @@
 /* @flow */
-import initial from './initial';
+import initial, { setComponents } from './initial';
 
 // This is just a custom theme example.
+
 const theme = {
   ...initial,
-  color: 'red',
+  colors: {
+    ...initial.colors,
+    black: '#555',
+  },
+  fontSizes: [46, 30, 22, 18, 14, 12, 10],
+  lineHeight: 2,
 };
 
-export default theme;
+export default setComponents(theme);
