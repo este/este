@@ -10,16 +10,25 @@ const transitRecords = () =>
     Seq(records).toSet().toArray()
   );
 
+const fixForHotReload = (Record, previous) => {
+  if (!previous) return;
+  const names = Object.getOwnPropertyNames(previous);
+  const transitGuidKey = names.find(n => n.startsWith('transit$guid$'));
+  if (!transitGuidKey) return;
+  Record[transitGuidKey] = previous[transitGuidKey];
+};
+
 // Transit allows us to serialize / deserialize immutable Records automatically.
 export const fromJSON = (string: string) => transitRecords().fromJSON(string);
 export const toJSON = (object: any) => transitRecords().toJSON(object);
 
-// TransitRecord is just a wrapper for the Record registering all Records.
+// Just a wrapper for ImmutableRecord with registration for the transit.
 // This is aspect-oriented programming. It's for cross-cutting concerns.
 export const Record = (defaultValues: Object, name: string) => {
   invariant(name && typeof name === 'string',
     'Transit Record second argument name must be a non empty string.');
-  // Hot reloading can register the already registered record, so override it.
-  records[name] = ImmutableRecord(defaultValues, name);
-  return records[name];
+  const TransitImmutableRecord = ImmutableRecord(defaultValues, name);
+  fixForHotReload(TransitImmutableRecord, records[name]);
+  records[name] = TransitImmutableRecord;
+  return TransitImmutableRecord;
 };
