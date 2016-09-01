@@ -12,9 +12,9 @@ import webpackIsomorphicAssets from './assets';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
-// cheap-module-eval-source-map, because we want the fastest original source.
-// http://webpack.github.io/docs/configuration.html#devtool
-const devtools = 'cheap-module-eval-source-map';
+// github.com/facebookincubator/create-react-app/issues/343#issuecomment-237241875
+// You may want 'cheap-module-source-map' instead if you prefer source maps.
+const devtools = 'eval';
 
 const loaders = {
   css: '',
