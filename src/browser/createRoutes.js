@@ -1,4 +1,4 @@
-/* @flow weak */
+/* @flow */
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
@@ -15,7 +15,7 @@ import Settings from './me/SettingsPage';
 import SignIn from './auth/SignInPage';
 import Todos from './todos/TodosPage';
 
-const createRoutes = (getState) => {
+const createRoutes = (getState: Function) => {
   const requireViewer = (nextState, replace) => {
     if (getState().users.viewer) return;
     replace({
