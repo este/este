@@ -6,7 +6,7 @@ import React from 'react';
 import Theme from './Theme';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Container } from 'rebass';
+import { Container } from '../app/components';
 import { connect } from 'react-redux';
 import { locationShape } from 'react-router';
 

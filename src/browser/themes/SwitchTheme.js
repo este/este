@@ -1,7 +1,7 @@
 /* @flow */
 import * as themes from '../app/themes';
 import React from 'react';
-import { Button, Space } from 'rebass';
+import { Button, Space } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
