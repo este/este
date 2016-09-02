@@ -1,5 +1,5 @@
 import * as reactIntl from 'react-intl';
-import React from 'react';
+import React, { Children } from 'react';
 import Text from './Text';
 
 // Create react-intl component which work in the React Native.
@@ -28,14 +28,14 @@ const native = WrappedComponent =>
 
       return (
         <WrappedComponent {...wrappedComponentProps}>
-          {message => childrenAsFunction ?
-            children(message)
+          {nodes => childrenAsFunction ?
+            children(...Children.toArray(nodes))
           :
             <Text
               ref={text => this.onTextRef(text)}
               style={style}
             >
-              {message}
+              {Children.toArray(nodes)}
             </Text>
           }
         </WrappedComponent>
