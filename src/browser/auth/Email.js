@@ -29,11 +29,6 @@ class Email extends React.Component {
     signUp: React.PropTypes.func.isRequired,
   };
 
-  state: {
-    forgetPasswordIsShown: boolean,
-    recoveryEmailSent: boolean,
-  };
-
   constructor() {
     super();
     // Note we are using the component state instead of the app state, because
@@ -43,6 +38,11 @@ class Email extends React.Component {
       recoveryEmailSent: false,
     };
   }
+
+  state: {
+    forgetPasswordIsShown: boolean,
+    recoveryEmailSent: boolean,
+  };
 
   onFormSubmit(e) {
     e.preventDefault();
