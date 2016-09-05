@@ -58,5 +58,8 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 
 unsafe.enable_getters_and_setters=true
 
+# gist.github.com/lambdahands/d19e0da96285b749f0ef#gistcomment-1804512
+module.name_mapper='.*\(.css\)' -> 'empty/object'
+
 [version]
 ^0.30.0
