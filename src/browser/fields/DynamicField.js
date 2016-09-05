@@ -1,29 +1,30 @@
 /* @flow */
 import React from 'react';
-import classnames from 'classnames';
+import { Input, View } from '../app/components';
 import { fields } from '../../common/lib/redux-fields';
 
-const DynamicField = ({ fields, item }) => {
-  const isDirty = () => fields.name.value !== item.name;
-
-  return (
-    <div className={classnames('dynamic-field', { 'is-dirty': isDirty() })}>
-      <input
-        {...fields.name}
-        maxLength={100}
-        type="text"
-      />
-    </div>
-  );
+type Props = {
+  disabled?: boolean,
+  fields: Object,
+  item: Object,
 };
 
-DynamicField.propTypes = {
-  fields: React.PropTypes.object.isRequired,
-  item: React.PropTypes.object.isRequired,
-};
+const DynamicField = ({ disabled, fields, item }: Props) => (
+  <View>
+    <Input
+      {...fields.name}
+      // This is just an example of aria-invalid and changed value.
+      aria-invalid={fields.name.value !== item.name}
+      disabled={disabled}
+      label=""
+      maxLength={100}
+      type="text"
+    />
+  </View>
+);
 
 export default fields(DynamicField, {
-  path: props => ['fieldsPage', 'dynamicFields', props.item.id],
+  path: props => props.path,
   fields: ['name'],
   getInitialState: props => props.item,
 });

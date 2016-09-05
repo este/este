@@ -2,6 +2,7 @@
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
+import { Button } from '../app/components';
 import { connect } from 'react-redux';
 import { signIn } from '../../common/lib/redux-firebase/actions';
 
@@ -12,15 +13,13 @@ const Social = ({ disabled, signIn }) => {
   };
 
   return (
-    <div className="social">
-      <button
-        data-provider="facebook"
-        disabled={disabled}
-        onClick={onButtonClick}
-      >
-        <FormattedMessage {...buttonsMessages.facebookSignIn} />
-      </button>
-    </div>
+    <Button
+      data-provider="facebook"
+      disabled={disabled}
+      onClick={onButtonClick}
+    >
+      <FormattedMessage {...buttonsMessages.facebookSignIn} />
+    </Button>
   );
 };
 

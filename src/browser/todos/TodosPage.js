@@ -1,26 +1,24 @@
 /* @flow */
 import Buttons from './Buttons';
-import Helmet from 'react-helmet';
 import NewTodo from './NewTodo';
 import React from 'react';
 import Todos from './Todos';
 import linksMessages from '../../common/app/linksMessages';
+import { PageHeader, Title, View } from '../app/components';
 import { injectIntl, intlShape } from 'react-intl';
 
-const TodosPage = ({ intl }) => {
-  const title = intl.formatMessage(linksMessages.todos);
-  return (
-    <div className="todos-page">
-      <Helmet title={title} />
-      <NewTodo />
-      <Todos />
-      <Buttons />
-    </div>
-  );
-};
+const TodosPage = ({ intl }) => (
+  <View>
+    <Title message={linksMessages.todos} />
+    <PageHeader heading={intl.formatMessage(linksMessages.todos)} />
+    <NewTodo />
+    <Todos />
+    <Buttons />
+  </View>
+);
 
 TodosPage.propTypes = {
-  intl: intlShape.isRequired,
+  intl: intlShape,
 };
 
 export default injectIntl(TodosPage);

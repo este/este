@@ -1,7 +1,7 @@
-import './Loading.scss';
-import Helmet from 'react-helmet';
+/* @flow */
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { Title, View } from '.';
 
 const messages = defineMessages({
   loadingText: {
@@ -23,6 +23,10 @@ class Loading extends React.Component {
     };
   }
 
+  state: {
+    currentText: ?Object,
+  };
+
   componentDidMount() {
     // www.nngroup.com/articles/response-times-3-important-limits
     this.timer = setTimeout(() => {
@@ -38,22 +42,22 @@ class Loading extends React.Component {
     clearTimeout(this.longTimer);
   }
 
+  timer: number;
+  longTimer: number;
+
   render() {
     const { currentText } = this.state;
     if (!currentText) {
       return (
-        <div className="este-loading">{String.fromCharCode(160)}</div>
+        <View>{String.fromCharCode(160)}</View>
       );
     }
+
     return (
-      <div className="este-loading">
-        <FormattedMessage {...currentText}>
-          {message =>
-            <Helmet title={message} />
-          }
-        </FormattedMessage>
+      <View>
+        <Title message={currentText} />
         <FormattedMessage {...currentText} />
-      </div>
+      </View>
     );
   }
 

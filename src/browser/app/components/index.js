@@ -1,24 +1,22 @@
 /* @flow */
-import Button from './Button';
-import FieldError from './FieldError';
-import Loading from './Loading';
-import focus from './focus';
-import fxbml from './fxbml';
 
-// Read jxnblk.com/writing/posts/patterns-for-style-composition-in-react.
-// Rebass gives us the initial UI vocabulary and styles.
-// We should add custom components as the app grows.
+// jxnblk.com/writing/posts/patterns-for-style-composition-in-react
 
 // App components
-export {
-  Button,
-  FieldError,
-  Loading,
-  focus,
-  fxbml,
-};
+export { default as Button } from './Button';
+export { default as FieldError } from './FieldError';
+export { default as Form } from './Form';
+export { default as Image } from './Image';
+export { default as Link } from './Link';
+export { default as Loading } from './Loading';
+export { default as SwitchTheme } from './SwitchTheme';
+export { default as Title } from './Title';
+export { default as View } from './View';
+export { default as focus } from './focus';
+export { default as fxbml } from './fxbml';
 
 // Rebass components
+// github.com/jxnblk/rebass
 export {
   Base,
   Arrow,
@@ -79,3 +77,12 @@ export {
   Toolbar,
   Tooltip,
 } from 'rebass';
+
+// Reflexbox components
+// github.com/jxnblk/reflexbox
+export {
+  Reflex,
+  Flex,
+  Box,
+  Grid,
+} from 'reflexbox';

@@ -1,30 +1,22 @@
-import Helmet from 'react-helmet';
+/* @flow */
 import React from 'react';
 import SignIn from './SignIn';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage } from 'react-intl';
+import { PageHeader, Title, View } from '../app/components';
+import { injectIntl, intlShape } from 'react-intl';
 import { locationShape } from 'react-router';
 
-const SignInPage = ({ location }) => (
-  <div className="signin-page">
-    <FormattedMessage {...linksMessages.signIn}>
-      {message =>
-        <Helmet title={message} />
-      }
-    </FormattedMessage>
-    <p>
-      Este uses <a
-        href="https://firebase.google.com/docs/auth/"
-        rel="noopener noreferrer"
-        target="_blank"
-      >Firebase Authentication</a> because it saves a lot of time.
-    </p>
+const SignInPage = ({ intl, location }) => (
+  <View>
+    <Title message={linksMessages.signIn} />
+    <PageHeader heading={intl.formatMessage(linksMessages.signIn)} />
     <SignIn location={location} />
-  </div>
+  </View>
 );
 
 SignInPage.propTypes = {
+  intl: intlShape,
   location: locationShape,
 };
 
-export default SignInPage;
+export default injectIntl(SignInPage);

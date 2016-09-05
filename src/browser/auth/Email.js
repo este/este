@@ -1,11 +1,22 @@
+/* @flow */
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { focus } from '../app/components';
 import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
+import {
+  ButtonOutline as Button,
+  Form,
+  Input,
+  Message,
+  Panel,
+  PanelHeader,
+  Space,
+  View,
+  focus,
+} from '../app/components';
 
 class Email extends React.Component {
 
@@ -16,6 +27,11 @@ class Email extends React.Component {
     resetPassword: React.PropTypes.func.isRequired,
     signIn: React.PropTypes.func.isRequired,
     signUp: React.PropTypes.func.isRequired,
+  };
+
+  state: {
+    forgetPasswordIsShown: boolean,
+    recoveryEmailSent: boolean,
   };
 
   constructor() {
@@ -71,57 +87,73 @@ class Email extends React.Component {
       : emailMessages.emailLegend;
 
     return (
-      <form className="email" onSubmit={e => this.onFormSubmit(e)}>
-        <fieldset disabled={disabled}>
-          <legend>
+      // bude napovidat?
+      <Form onSubmit={e => this.onFormSubmit(e)} small>
+        <Panel theme="primary">
+          <PanelHeader>
             <FormattedMessage {...legendMessage} />
-          </legend>
-          <input
+          </PanelHeader>
+          <Input
             {...fields.email}
+            disabled={disabled}
+            label=""
             maxLength={100}
             placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
           />
           {!forgetPasswordIsShown &&
-            <input
+            <Input
               {...fields.password}
+              disabled={disabled}
+              label=""
               maxLength={1000}
               placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
               type="password"
             />
           }
           {!forgetPasswordIsShown ?
-            <div className="buttons">
-              <button>
+            <View>
+              <Button disabled={disabled}>
                 <FormattedMessage {...buttonsMessages.signIn} />
-              </button>
-              <button onClick={() => this.onSignUpClick()} type="button">
+              </Button>
+              <Space />
+              <Button
+                disabled={disabled}
+                onClick={() => this.onSignUpClick()}
+                type="button"
+              >
                 <FormattedMessage {...buttonsMessages.signUp} />
-              </button>
-              <button
+              </Button>
+              <Space />
+              <Button
+                disabled={disabled}
                 onClick={() => this.onForgetPasswordClick()}
                 type="button"
               >
                 <FormattedMessage {...emailMessages.passwordForgotten} />
-              </button>
+              </Button>
               {recoveryEmailSent &&
-                <p>
+                <Message>
                   <FormattedMessage {...emailMessages.recoveryEmailSent} />
-                </p>
+                </Message>
               }
-            </div>
+            </View>
           :
-            <div className="buttons">
-              <button>
+            <View>
+              <Button disabled={disabled}>
                 <FormattedMessage {...emailMessages.resetPassword} />
-              </button>
-              <button
-                onClick={this.onForgetPasswordClick}
+              </Button>
+              <Space />
+              <Button
+                disabled={disabled}
+                onClick={() => this.onForgetPasswordClick()}
                 type="button"
-              ><FormattedMessage {...buttonsMessages.dismiss} /></button>
-            </div>
+              >
+                <FormattedMessage {...buttonsMessages.dismiss} />
+              </Button>
+            </View>
           }
-        </fieldset>
-      </form>
+        </Panel>
+      </Form>
     );
   }
 

@@ -1,7 +1,7 @@
 /* @flow */
-import Helmet from 'react-helmet';
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { Block, Title, View } from '../app/components';
 
 const messages = defineMessages({
   title: {
@@ -11,16 +11,12 @@ const messages = defineMessages({
 });
 
 const SettingsPage = () => (
-  <div className="settings-page">
-    <FormattedMessage {...messages.title}>
-      {message =>
-        <Helmet title={message} />
-      }
-    </FormattedMessage>
-    <p>
+  <View>
+    <Title message={messages.title} />
+    <Block>
       <FormattedMessage {...messages.title} />
-    </p>
-  </div>
+    </Block>
+  </View>
 );
 
 export default SettingsPage;

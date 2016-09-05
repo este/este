@@ -1,33 +1,30 @@
 /* @flow */
-import * as themes from '../app/themes';
+import * as themes from '../themes';
 import React from 'react';
-import { Button, Space } from '../app/components';
+import { Button, View } from '.';
 import { connect } from 'react-redux';
-import { setTheme } from '../../common/themes/actions';
+import { setTheme } from '../../../common/themes/actions';
 
 const getSortedThemeKeys = () => {
-  const customThemesKeys = Object
-    .keys(themes)
+  const customThemesKeys = Object.keys(themes)
     .filter(key => key !== 'initial')
     .sort();
   return ['initial', ...customThemesKeys];
 };
 
 const SwitchTheme = ({ currentTheme, setTheme }) => (
-  <div>
+  <View>
     {getSortedThemeKeys().map(themeKey =>
-      <span key={themeKey}>
-        <Button
-          key={themeKey}
-          onClick={() => setTheme(themeKey)}
-          theme={themeKey === currentTheme ? 'primary' : 'secondary'}
-        >
-          {themeKey} theme
-        </Button>
-        <Space />
-      </span>
+      <Button
+        key={themeKey}
+        mr={1}
+        onClick={() => setTheme(themeKey)}
+        theme={themeKey === currentTheme ? 'primary' : 'secondary'}
+      >
+        {themeKey} theme
+      </Button>
     )}
-  </div>
+  </View>
 );
 
 SwitchTheme.propTypes = {

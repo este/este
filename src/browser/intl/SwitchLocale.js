@@ -1,22 +1,26 @@
+/* @flow */
 import React from 'react';
+import { Button, View } from '../app/components';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
-const Locales = ({ currentLocale, locales, setCurrentLocale }) => (
-  <div className="locales">
+const SwitchLocale = ({ currentLocale, locales, setCurrentLocale }) => (
+  <View>
     {locales.map(locale =>
-      <button
-        disabled={locale === currentLocale}
+      <Button
         key={locale}
+        mb={1}
+        mr={1}
         onClick={() => setCurrentLocale(locale)}
+        theme={locale === currentLocale ? 'primary' : 'secondary'}
       >
         {locale}
-      </button>
+      </Button>
     )}
-  </div>
+  </View>
 );
 
-Locales.propTypes = {
+SwitchLocale.propTypes = {
   currentLocale: React.PropTypes.string.isRequired,
   locales: React.PropTypes.arrayOf(React.PropTypes.string),
   setCurrentLocale: React.PropTypes.func.isRequired,
@@ -25,4 +29,4 @@ Locales.propTypes = {
 export default connect(state => ({
   currentLocale: state.intl.currentLocale,
   locales: state.intl.locales,
-}), { setCurrentLocale })(Locales);
+}), { setCurrentLocale })(SwitchLocale);

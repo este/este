@@ -1,8 +1,9 @@
-import './SignIn.scss';
+/* @flow */
 import Email from './Email';
 import React from 'react';
 import SignInError from './SignInError';
 import Social from './Social';
+import { Block, View } from '../app/components';
 import { connect } from 'react-redux';
 import { locationShape, routerShape, withRouter } from 'react-router';
 
@@ -31,6 +32,8 @@ class SignIn extends React.Component {
     this.redirect();
   }
 
+  wasRedirected: boolean;
+
   redirect() {
     const { location, redirectTo, router } = this.props;
     const url = (location.state && location.state.nextPathname) || redirectTo;
@@ -39,11 +42,15 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className="sign-in">
-        <Social />
-        <Email />
+      <View>
+        <Block>
+          <Social />
+        </Block>
+        <Block>
+          <Email />
+        </Block>
         <SignInError />
-      </div>
+      </View>
     );
   }
 

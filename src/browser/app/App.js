@@ -1,3 +1,4 @@
+/* @flow */
 import './App.scss';
 import * as themes from './themes';
 import Footer from './Footer';
@@ -6,13 +7,12 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import theme from '../../common/app/theme';
 import { Container } from '../app/components';
+import { ThemeProvider } from '../../common/app/components';
 import { connect } from 'react-redux';
-import { locationShape } from 'react-router';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
-const bootstrap4Metas = [
+const bootstrap4Metas: any = [
   { charset: 'utf-8' },
   {
     name: 'viewport',
@@ -24,39 +24,42 @@ const bootstrap4Metas = [
   },
 ];
 
-let App = ({ children, currentLocale, location }) => (
-  <Container>
-    <Helmet
-      htmlAttributes={{ lang: currentLocale }}
-      titleTemplate="%s - Este.js"
-      meta={[
-        ...bootstrap4Metas,
-        {
-          name: 'description',
-          content: 'Dev stack and starter kit for functional and universal React apps',
-        },
-        ...favicon.meta,
-      ]}
-      link={[
-        ...favicon.link,
-      ]}
-    />
-    {/* Pass location to ensure header active links are updated. */}
-    <Header location={location} />
-    {children}
-    <Footer />
-  </Container>
+let App = ({ children, currentLocale, currentTheme }) => (
+  <ThemeProvider
+    key={currentTheme} // The same issue github.com/yahoo/react-intl/issues/234
+    theme={themes[currentTheme] || themes.initial}
+  >
+    <Container>
+      <Helmet
+        htmlAttributes={{ lang: currentLocale }}
+        meta={[
+          ...bootstrap4Metas,
+          {
+            name: 'description',
+            content: 'Dev stack and starter kit for functional and universal React apps',
+          },
+          ...favicon.meta,
+        ]}
+        link={[
+          ...favicon.link,
+        ]}
+      />
+      <Header />
+      {children}
+      <Footer />
+    </Container>
+  </ThemeProvider>
 );
 
 App.propTypes = {
-  children: React.PropTypes.object.isRequired,
+  children: React.PropTypes.node.isRequired,
   currentLocale: React.PropTypes.string.isRequired,
-  location: locationShape,
+  currentTheme: React.PropTypes.string,
 };
 
-App = start(App);
-App = theme(App, themes);
-
-export default connect(state => ({
+App = connect(state => ({
   currentLocale: state.intl.currentLocale,
+  currentTheme: state.themes.currentTheme,
 }))(App);
+
+export default start(App);

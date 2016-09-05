@@ -1,6 +1,7 @@
+/* @flow */
 import Gravatar from 'react-gravatar';
 import React from 'react';
-import { Loading } from '../app/components';
+import { Image, Loading, Text, View } from '../app/components';
 import { connect } from 'react-redux';
 import { onUsersPresence } from '../../common/users/actions';
 import { queryFirebase } from '../../common/lib/redux-firebase';
@@ -16,10 +17,10 @@ const styles = {
   },
 };
 
-const User = ({ user: { displayName, photoURL } }) =>
-  <div style={styles.user}>
+const User = ({ user: { displayName, photoURL } }) => (
+  <View style={styles.user}>
     {photoURL ?
-      <img
+      <Image
         role="presentation"
         src={photoURL}
         style={styles.gravatar}
@@ -35,24 +36,25 @@ const User = ({ user: { displayName, photoURL } }) =>
         title={displayName}
       />
     }
-  </div>;
+  </View>
+);
 
 User.propTypes = {
   user: React.PropTypes.object.isRequired,
 };
 
 let OnlineUsers = ({ loaded, users }) => (
-  <div className="online-users">
+  <View>
     {!loaded ?
       <Loading />
     : !users ?
-      <p>No one is online.</p>
+      <Text>No one is online.</Text>
     :
-      users.reverse().map(user =>
+      users.map(user =>
         <User key={user.id} user={user} />
       )
     }
-  </div>
+  </View>
 );
 
 OnlineUsers.propTypes = {

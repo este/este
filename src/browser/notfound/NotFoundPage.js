@@ -1,26 +1,24 @@
-import Helmet from 'react-helmet';
+/* @flow */
 import React from 'react';
 import messages from '../../common/notfound/messages';
-import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Link, PageHeader, Title, View } from '../app/components';
 
-const NotFoundPage = () => (
-  <div className="notfound-page">
-    <FormattedMessage {...messages.title}>
-      {message =>
-        <Helmet title={message} />
-      }
-    </FormattedMessage>
-    <h1>
-      <FormattedMessage {...messages.h1} />
-    </h1>
-    <p>
-      <FormattedMessage {...messages.p} />
-    </p>
-    <Link to="/">
+const NotFoundPage = ({ intl }) => (
+  <View>
+    <Title message={messages.title} />
+    <PageHeader
+      description={intl.formatMessage(messages.p)}
+      heading={intl.formatMessage(messages.h1)}
+    />
+    <Link index to="/">
       <FormattedMessage {...messages.continue} />
     </Link>
-  </div>
+  </View>
 );
 
-export default NotFoundPage;
+NotFoundPage.propTypes = {
+  intl: intlShape.isRequired,
+};
+
+export default injectIntl(NotFoundPage);

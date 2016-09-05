@@ -2,6 +2,7 @@
 import React from 'react';
 import Todo from './Todo';
 import todosMessages from '../../common/todos/todosMessages';
+import { Block, View } from '../app/components';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
@@ -9,23 +10,29 @@ import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 const Todos = ({ deleteTodo, todos, toggleTodoCompleted }) => {
   if (!todos.size) {
     return (
-      <p><FormattedMessage {...todosMessages.empty} /></p>
+      <Block>
+        <FormattedMessage {...todosMessages.empty} />
+      </Block>
     );
   }
 
-  const list = todos.toList().sortBy(item => item.createdAt).reverse();
+  const list = todos
+    .toList()
+    .sortBy(item => item.createdAt)
+    .reverse();
 
   return (
-    <ol className="todos">
+    <View>
       {list.map(todo =>
-        <Todo
-          deleteTodo={deleteTodo}
-          todo={todo}
-          toggleTodoCompleted={toggleTodoCompleted}
-          key={todo.id}
-        />
+        <Block key={todo.id}>
+          <Todo
+            deleteTodo={deleteTodo}
+            todo={todo}
+            toggleTodoCompleted={toggleTodoCompleted}
+          />
+        </Block>
       )}
-    </ol>
+    </View>
   );
 };
 

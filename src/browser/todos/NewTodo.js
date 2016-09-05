@@ -1,12 +1,13 @@
-import './NewTodo.scss';
+/* @flow */
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import { FormattedMessage } from 'react-intl';
+import { Input } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import { injectIntl, intlShape } from 'react-intl';
 
-let NewTodo = ({ addTodo, fields }) => {
+let NewTodo = ({ addTodo, fields, intl }) => {
   const onInputKeyDown = event => {
     if (event.key !== 'Enter') return;
     if (!fields.title.value.trim()) return;
@@ -15,29 +16,27 @@ let NewTodo = ({ addTodo, fields }) => {
   };
 
   return (
-    <FormattedMessage {...newTodoMessages.placeholder}>
-      {message =>
-        <input
-          {...fields.title}
-          autoFocus
-          className="new-todo"
-          maxLength={100}
-          onKeyDown={onInputKeyDown}
-          placeholder={message}
-        />
-      }
-    </FormattedMessage>
+    <Input
+      {...fields.title}
+      label=""
+      maxLength={100}
+      onKeyDown={onInputKeyDown}
+      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+    />
   );
 };
 
 NewTodo.propTypes = {
   addTodo: React.PropTypes.func.isRequired,
   fields: React.PropTypes.object.isRequired,
+  intl: intlShape.isRequired,
 };
 
 NewTodo = fields(NewTodo, {
   path: 'newTodo',
   fields: ['title'],
 });
+
+NewTodo = injectIntl(NewTodo);
 
 export default connect(null, { addTodo })(NewTodo);

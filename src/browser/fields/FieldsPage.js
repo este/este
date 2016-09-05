@@ -1,29 +1,32 @@
-/* eslint-disable jsx-a11y/label-has-for */
-import './FieldsPage.scss';
+/* @flow */
 import DynamicField from './DynamicField.js';
-import Helmet from 'react-helmet';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import classnames from 'classnames';
 import linksMessages from '../../common/app/linksMessages';
-import { FieldError } from '../app/components';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
+import {
+  Block,
+  Box,
+  Button,
+  Checkbox,
+  FieldError,
+  Flex,
+  Form,
+  Heading,
+  Input,
+  PageHeader,
+  Pre,
+  Radio,
+  Select,
+  Space,
+  Title,
+  View,
+} from '../app/components';
 
-const messages = defineMessages({
-  h2: {
-    defaultMessage: 'Fields',
-    id: 'fields.page.h2',
-  },
-  p: {
-    defaultMessage: 'Something like redux-form but simplified and universal.',
-    id: 'fields.page.p',
-  },
-});
-
-// Just an example of some dynamically loaded data.
+// The example of dynamically loaded editable data.
 // cato.org/publications/commentary/key-concepts-libertarianism
 const keyConceptsOfLibertarianism = [
   'Individualism',
@@ -43,152 +46,161 @@ const keyConceptsOfLibertarianism = [
 class FieldsPage extends React.Component {
 
   static propTypes = {
-    // Generated fields by fields higher order component.
     fields: React.PropTypes.object.isRequired,
-    // We can read anything from fields model directly.
-    fieldsPageModel: React.PropTypes.object,
+    dynamicFields: React.PropTypes.object,
   };
 
   constructor() {
     super();
-    // For a demo, we can store the state in the component.
     this.state = {
       disabled: false,
       error: null,
+      submittedValues: null,
     };
   }
 
+  state: {
+    disabled: boolean,
+    error: ?Object,
+    submittedValues: ?Object,
+  };
+
   onFormSubmit(e) {
     e.preventDefault();
-    const { fields } = this.props;
-    const values = fields.$values();
+    const { dynamicFields, fields } = this.props;
 
-    // This is just a demo. Check src/common/auth flow for the real usage.
+    const values = {
+      ...fields.$values(),
+      concepts: {
+        ...(dynamicFields && dynamicFields.toJS()),
+      },
+    };
 
-    // Disable form now.
+    // This is just a demo. This code belongs to Redux action creator.
+
+    // Disable form.
     this.setState({ disabled: true });
 
     // Simulate async action.
     setTimeout(() => {
       this.setState({ disabled: false });
-      const isValid = values.someField.trim();
+      const isValid = values.name.trim();
       if (!isValid) {
-        const error = new ValidationError('required', { prop: 'someField' });
-        this.setState({ error });
+        const error = new ValidationError('required', { prop: 'name' });
+        this.setState({ error, submittedValues: null });
         return;
       }
-      this.setState({ error: null });
+      this.setState({ error: null, submittedValues: values });
       fields.$reset();
-    }, 1000);
-  }
-
-  onToggleClick() {
-    const { fields } = this.props;
-    fields.$setValue('toggled', !fields.toggled.value);
+    }, 500);
   }
 
   render() {
-    const { fields, fieldsPageModel } = this.props;
-    const { disabled, error } = this.state;
+    const { fields } = this.props;
+    const { disabled, error, submittedValues } = this.state;
 
     return (
-      <div className="fields-page">
-        <FormattedMessage {...linksMessages.fields}>
-          {message =>
-            <Helmet title={message} />
-          }
-        </FormattedMessage>
-        <h2>
-          <FormattedMessage {...messages.h2} />
-        </h2>
-        <p>
-          <FormattedMessage {...messages.p} />
-        </p>
-        <form onSubmit={e => this.onFormSubmit(e)}>
-          <fieldset disabled={disabled}>
-            <h3>Some Field</h3>
-            <input
-              {...fields.someField}
-              maxLength={100}
-              type="text"
-            />
-            <FieldError error={error} prop="someField" />
-            <h3>Dynamic Fields</h3>
-            <div>
-              {keyConceptsOfLibertarianism.map(concept =>
-                <DynamicField item={concept} key={concept.id} />
+      <View>
+        <Title message={linksMessages.fields} />
+        <PageHeader
+          description={`Something like redux-form but simplified and universal.
+            Will be released as lib soon.`}
+          heading="redux-fields"
+        />
+        <Form onSubmit={e => this.onFormSubmit(e)}>
+          <Input
+            {...fields.name}
+            aria-invalid={ValidationError.isInvalid(error, 'name')}
+            disabled={disabled}
+            label="Your Name"
+            maxLength={100}
+            type="text"
+          />
+          <FieldError error={error} prop="name" />
+          <Heading alt>Key Concepts of Libertarianism</Heading>
+          <Block>
+            <Flex wrap>
+              {keyConceptsOfLibertarianism.map(item =>
+                <Box mr={1} key={item.id}>
+                  <DynamicField
+                    disabled={disabled}
+                    item={item}
+                    path={['fieldsPage', 'dynamic', item.id]}
+                  />
+                </Box>
               )}
-            </div>
-            <h3>Checkboxes</h3>
-            <label>
-              <input
-                {...fields.hasCar}
-                checked={fields.hasCar.value}
-                type="checkbox"
-              /> Has Car
-            </label>
-            <label>
-              <input
-                {...fields.hasBike}
-                checked={fields.hasBike.value}
-                type="checkbox"
-              /> Has Bike
-            </label>
-            <h3>Radios</h3>
-            <label>
-              <input
+            </Flex>
+          </Block>
+          <Block>
+            <Checkbox
+              {...fields.isLibertarian}
+              checked={fields.isLibertarian.value}
+              disabled={disabled}
+              label="I'm libertarian"
+            />
+            <Checkbox
+              {...fields.isAnarchist}
+              checked={fields.isAnarchist.value}
+              disabled={disabled}
+              label="I'm anarchist"
+            />
+          </Block>
+          <Block>
+            <Flex>
+              <Radio
                 {...fields.gender}
                 checked={fields.gender.value === 'male'}
-                type="radio"
+                disabled={disabled}
+                label="Male"
                 value="male"
-              /> Male
-            </label>
-            <label>
-              <input
+              />
+              <Space x={2} />
+              <Radio
                 {...fields.gender}
                 checked={fields.gender.value === 'female'}
-                type="radio"
+                disabled={disabled}
+                label="Female"
                 value="female"
-              /> Female
-            </label>
-            <label>
-              <input
+              />
+              <Space x={2} />
+              <Radio
                 {...fields.gender}
                 checked={fields.gender.value === 'other'}
-                type="radio"
+                disabled={disabled}
+                label="Other"
                 value="other"
-              /> Other
-            </label>
-            <h3>Select</h3>
-            <select {...fields.selectedNumber}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            {/*
-              Why no multiple select? Because users are not familiar with that.
-              Use checkboxes or custom checkable dynamic fields instead.
-            */}
-            <h3>Custom</h3>
-            <div
-              className={classnames('custom-toggle', {
-                toggled: fields.toggled.value,
-              })}
-              onClick={() => this.onToggleClick()}
-            >Toggle me!</div>
-            <div>
-              <button type="submit">
-                <FormattedMessage {...buttonsMessages.submit} />
-              </button>
-            </div>
-            <pre>
-              {fieldsPageModel &&
-                JSON.stringify(fieldsPageModel.toJS(), null, 2)
-              }
-            </pre>
-          </fieldset>
-        </form>
-      </div>
+              />
+            </Flex>
+          </Block>
+          <Block>
+            <Select
+              {...fields.donation}
+              disabled={disabled}
+              label="Donation"
+              options={[
+                { children: 'Two', value: 2 },
+                { children: 'Four', value: 4 },
+                { children: 'Eight', value: 8 },
+                { children: 'Sixteen', value: 16 },
+                { children: 'Thirty-Two', value: 32 },
+                { children: 'Sixty-Four', value: 64 },
+              ]}
+            />
+          </Block>
+          {/*
+            Why no multiple select? Because users are not familiar with that.
+            Use checkboxes or custom checkable dynamic fields instead.
+          */}
+          <Button disabled={disabled} type="submit">
+            <FormattedMessage {...buttonsMessages.submit} />
+          </Button>
+          {submittedValues &&
+            <Pre>
+              {JSON.stringify(submittedValues, null, 2)}
+            </Pre>
+          }
+        </Form>
+      </View>
     );
   }
 
@@ -197,23 +209,20 @@ class FieldsPage extends React.Component {
 FieldsPage = fields(FieldsPage, {
   path: 'fieldsPage',
   fields: [
-    'someField',
-    'hasCar',
-    'hasBike',
+    'donation',
     'gender',
-    'selectedNumber',
-    'toggled',
+    'isAnarchist',
+    'isLibertarian',
+    'name',
   ],
   getInitialState: () => ({
-    // someField: '123',
-    // hasCar: true,
+    donation: '2',
     gender: 'male',
-    selectedNumber: '2',
-    toggled: false,
+    isAnarchist: false,
+    isLibertarian: false,
   }),
 });
 
-// Connect is not required. It's just a demonstration of nested fields state.
 export default connect(state => ({
-  fieldsPageModel: state.fields.get('fieldsPage'),
+  dynamicFields: state.fields.getIn(['fieldsPage', 'dynamic']),
 }))(FieldsPage);

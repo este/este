@@ -1,4 +1,5 @@
 /* @flow */
+
 /*
   Styling
     - jxnblk.com/writing/posts/patterns-for-style-composition-in-react
@@ -38,23 +39,39 @@ const inverted = colors.white;
 
 const zIndex = [0, 2, 4, 8, 16];
 
+const states = {
+  disabled: { cursor: 'default', opacity: 0.5 },
+};
+
 const theme = {
   ...typography,
   colors,
   ...borders,
   inverted,
   zIndex,
+  states,
 };
 
-export const setComponents = (theme: Object) => ({
+export const compute = (theme: Object) => ({
   ...theme,
+  link: {
+    color: theme.colors.primary,
+    bold: { fontWeight: theme.bold },
+    link: { textDecoration: 'none' },
+    hover: { textDecoration: 'underline' },
+    active: { textDecoration: 'underline' },
+  },
   Container: {
     backgroundColor: theme.colors.white,
-    color: theme.colors.black,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.fontSizes[4],
-    lineHeight: theme.lineHeight,
+    color: theme.colors.black, // inherited
+    fontFamily: theme.fontFamily, // inherited
+    fontSize: theme.fontSizes[4], // inherited
+    lineHeight: theme.lineHeight, // inherited
+  },
+  Toolbar: {
+    marginTop: theme.scale[2],
+    padding: theme.scale[2],
   },
 });
 
-export default setComponents(theme);
+export default compute(theme);

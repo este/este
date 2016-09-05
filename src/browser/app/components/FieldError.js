@@ -1,6 +1,7 @@
-/* @flow weak */
+/* @flow */
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { Message } from '.';
 import { ValidationError } from '../../../common/lib/validation';
 
 const messages = defineMessages({
@@ -16,19 +17,19 @@ const messages = defineMessages({
   },
 });
 
-const FieldError = ({ error, prop }) => {
+type Props = {
+  error: any,
+  prop: string,
+};
+
+const FieldError = ({ error, prop }: Props) => {
   if (!(error instanceof ValidationError)) return null;
   if (error.params.prop !== prop) return null;
   return (
-    <div>
+    <Message inverted theme="error">
       <FormattedMessage {...messages[error.name]} values={error.params} />
-    </div>
+    </Message>
   );
-};
-
-FieldError.propTypes = {
-  error: React.PropTypes.any,
-  prop: React.PropTypes.string.isRequired,
 };
 
 export default FieldError;

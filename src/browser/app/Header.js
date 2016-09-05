@@ -2,56 +2,51 @@
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
+import { Link, Space, Toolbar } from '../app/components';
 import { connect } from 'react-redux';
 
+const styles = {
+  toolbar: {
+    flexWrap: 'wrap',
+  },
+};
+
 const Header = ({ viewer }) => (
-  <header>
-    <h1>
-      <Link to="/">
-        <FormattedMessage {...linksMessages.home} />
+  <Toolbar style={styles.toolbar}>
+    <Link bold index inverted to="/">
+      <FormattedMessage {...linksMessages.home} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/firebase">
+      <FormattedMessage {...linksMessages.firebase} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/todos">
+      <FormattedMessage {...linksMessages.todos} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/fields">
+      <FormattedMessage {...linksMessages.fields} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/intl">
+      <FormattedMessage {...linksMessages.intl} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/offline">
+      <FormattedMessage {...linksMessages.offline} />
+    </Link>
+    <Space x={2} />
+    <Link bold inverted to="/me">
+      <FormattedMessage {...linksMessages.me} />
+    </Link>
+    <Space x={2} />
+    {!viewer &&
+      <Link bold inverted to="/signin">
+        <FormattedMessage {...linksMessages.signIn} />
       </Link>
-    </h1>
-    <ul>
-      <li>
-        <Link activeClassName="active" to="/firebase">
-          <FormattedMessage {...linksMessages.firebase} />
-        </Link>
-      </li>
-      <li>
-        <Link activeClassName="active" to="/todos">
-          <FormattedMessage {...linksMessages.todos} />
-        </Link>
-      </li>
-      <li>
-        <Link activeClassName="active" to="/fields">
-          <FormattedMessage {...linksMessages.fields} />
-        </Link>
-      </li>
-      <li>
-        <Link activeClassName="active" to="/intl">
-          <FormattedMessage {...linksMessages.intl} />
-        </Link>
-      </li>
-      <li>
-        <Link activeClassName="active" to="/offline">
-          <FormattedMessage {...linksMessages.offline} />
-        </Link>
-      </li>
-      <li>
-        <Link activeClassName="active" to="/me">
-          <FormattedMessage {...linksMessages.me} />
-        </Link>
-      </li>
-      {!viewer &&
-        <li>
-          <Link activeClassName="active" to="/signin">
-            <FormattedMessage {...linksMessages.signIn} />
-          </Link>
-        </li>
-      }
-    </ul>
-  </header>
+    }
+  </Toolbar>
 );
 
 Header.propTypes = {

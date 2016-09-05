@@ -1,10 +1,10 @@
-/* @flow weak */
+/* @flow */
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { start as appStart } from './actions';
 
-const start = WrappedComponent => {
+const start = (WrappedComponent: Function) => {
   class Start extends React.Component {
 
     static propTypes = {

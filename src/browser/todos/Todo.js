@@ -1,22 +1,35 @@
-import './Todo.scss';
+/* @flow */
 import React from 'react';
-import classnames from 'classnames';
+import { Flex, Text } from '../app/components';
 
-const Todo = ({ deleteTodo, todo, toggleTodoCompleted }) => {
-  const onTitleClick = () => toggleTodoCompleted(todo);
-  const onButtonClick = () => deleteTodo(todo.id);
+type Props = {
+  deleteTodo: () => void,
+  todo: Object,
+  toggleTodoCompleted: () => void,
+};
+
+const Todo = ({ deleteTodo, todo, toggleTodoCompleted }: Props) => {
+  const styles = {
+    title: {
+      ...(todo.completed && {
+        textDecoration: 'line-through',
+      }),
+      cursor: 'pointer',
+    },
+    delete: {
+      cursor: 'pointer',
+    },
+  };
 
   return (
-    <li className="todo">
-      <span
-        className={classnames('view', { completed: todo.completed })}
-        onClick={onTitleClick}
-      >{todo.title}</span>
-      <span
-        className="button"
-        onClick={onButtonClick}
-      >x</span>
-    </li>
+    <Flex>
+      <Text onClick={() => toggleTodoCompleted(todo)} style={styles.title}>
+        {todo.title}
+      </Text>
+      <Text bold ml={1} onClick={() => deleteTodo(todo.id)} style={styles.delete}>
+        ×
+      </Text>
+    </Flex>
   );
 };
 

@@ -1,38 +1,22 @@
 /* @flow */
-import Helmet from 'react-helmet';
 import OnlineUsers from '../users/OnlineUsers';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage } from 'react-intl';
-
-const styles = {
-  image: {
-    height: 27,
-    width: 140,
-  },
-};
+import { Block, Heading, PageHeader, Title, View } from '../app/components';
 
 const FirebasePage = () => (
-  <div className="firebase-page">
-    <FormattedMessage {...linksMessages.firebase}>
-      {message =>
-        <Helmet title={message} />
-      }
-    </FormattedMessage>
-    <h2>
-      <a href="https://firebase.google.com/">
-        <img
-          role="presentation"
-          src={require('./logo.png')}
-          style={styles.image}
-        />
-      </a>
-    </h2>
-    <h3>
-      Online users
-    </h3>
-    <OnlineUsers />
-  </div>
+  <View>
+    <Title message={linksMessages.firebase} />
+    <PageHeader
+      description={`A cloud-hosted database. Data is stored as JSON and
+        synchronized in realtime to every connected client.`}
+      heading="Firebase"
+    />
+    <Heading alt>Online users</Heading>
+    <Block>
+      <OnlineUsers />
+    </Block>
+  </View>
 );
 
 export default FirebasePage;

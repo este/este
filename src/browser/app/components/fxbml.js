@@ -1,11 +1,11 @@
-/* @flow weak */
+/* @flow */
 // Higher order component for Facebook XFBML.
 // Examples
 //  https://gist.github.com/steida/04a39dfa1043e1451044ba8370743b0c
 //  https://gist.github.com/steida/b19a1858e38007651a616ae44244ca52
 import React from 'react';
 
-const xfbml = (WrappedComponent) =>
+const xfbml = (WrappedComponent: any) =>
   class Wrapper extends React.Component {
 
     el: Element;
@@ -34,7 +34,7 @@ const xfbml = (WrappedComponent) =>
       this._isMounted = false;
     }
 
-    onWrappedComponentRef(el) {
+    onWrappedComponentRef(el: Element) {
       this.el = el;
     }
 

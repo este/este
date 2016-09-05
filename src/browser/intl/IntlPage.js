@@ -1,8 +1,8 @@
 /* @flow */
-import Helmet from 'react-helmet';
-import Locales from './Locales';
+import Locales from './SwitchLocale';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
+import { Block, PageHeader, Text, Title, View } from '../app/components';
 import {
   FormattedDate,
   FormattedMessage,
@@ -12,10 +12,6 @@ import {
 } from 'react-intl';
 
 const messages = defineMessages({
-  h2: {
-    defaultMessage: 'react-intl demonstration',
-    id: 'intl.page.h2',
-  },
   unreadCount: {
     defaultMessage: `{unreadCount, plural,
       one {message}
@@ -25,31 +21,17 @@ const messages = defineMessages({
   },
 });
 
-class IntlPage extends React.Component {
+const IntlPage = () => {
+  const componentRenderedAt = Date.now();
+  const unreadCount = 123;
 
-  constructor() {
-    super();
-    this.componentRenderedAt = Date.now();
-  }
-
-  componentRenderedAt: number;
-
-  render() {
-    // To remember beloved −123 min. https://www.youtube.com/watch?v=VKOv1I8zKso
-    const unreadCount = 123;
-
-    return (
-      <div className="intl-page">
-        <FormattedMessage {...linksMessages.intl}>
-          {message =>
-            <Helmet title={message} />
-          }
-        </FormattedMessage>
-        <h2>
-          <FormattedMessage {...messages.h2} />
-        </h2>
-        <Locales />
-        <p>
+  return (
+    <View>
+      <Title message={linksMessages.intl} />
+      <PageHeader heading="react-intl" />
+      <Locales />
+      <Block>
+        <Text>
           <FormattedDate
             value={Date.now()}
             day="numeric"
@@ -57,22 +39,21 @@ class IntlPage extends React.Component {
             year="numeric"
             formatMatcher="basic" // while this bug remains in react-intl: https://github.com/andyearnshaw/Intl.js/issues/179
           />
-        </p>
-        <p>
+        </Text>
+        <Text>
           <FormattedNumber value={unreadCount} /> {' '}
           <FormattedMessage {...messages.unreadCount} values={{ unreadCount }} />
-        </p>
-        <p>
+        </Text>
+        <Text>
           <FormattedRelative
-            initialNow={this.componentRenderedAt}
+            initialNow={componentRenderedAt}
             updateInterval={1000 * 1}
-            value={this.componentRenderedAt}
+            value={componentRenderedAt}
           />
-        </p>
-      </div>
-    );
-  }
-
-}
+        </Text>
+      </Block>
+    </View>
+  );
+};
 
 export default IntlPage;
