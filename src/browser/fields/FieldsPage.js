@@ -65,8 +65,7 @@ class FieldsPage extends React.Component {
     submittedValues: ?Object,
   };
 
-  onFormSubmit(e) {
-    e.preventDefault();
+  onFormSubmit() {
     const { dynamicFields, fields } = this.props;
 
     const values = {

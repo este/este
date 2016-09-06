@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import { Input } from '../app/components';
+import { Input, Form } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
@@ -16,13 +16,15 @@ let NewTodo = ({ addTodo, fields, intl }) => {
   };
 
   return (
-    <Input
-      {...fields.title}
-      label=""
-      maxLength={100}
-      onKeyDown={onInputKeyDown}
-      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-    />
+    <Form small>
+      <Input
+        {...fields.title}
+        label=""
+        maxLength={100}
+        onKeyDown={onInputKeyDown}
+        placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+      />
+    </Form>
   );
 };
 

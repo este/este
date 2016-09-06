@@ -3,18 +3,31 @@ import React from 'react';
 import { Base } from 'rebass';
 
 type Props = {
-  maxWidthInEms?: number,
+  onSubmit?: () => void,
   small?: boolean,
   style?: any,
 };
 
-const Form = ({ maxWidthInEms = 42, small, style, ...props }: Props) => {
-  const sx = {
-    ...style,
-    maxWidth: `${small ? 30 : maxWidthInEms}em`,
+const maxWidth = 42;
+const maxWidthSmall = 30;
+
+const Form = ({ small, ...props }: Props) => {
+  const style = {
+    maxWidth: `${small ? maxWidthSmall : maxWidth}em`,
+    ...props.style,
+  };
+  const onBaseSubmit = e => {
+    e.preventDefault();
+    if (!props.onSubmit) return;
+    props.onSubmit(e);
   };
   return (
-    <Base {...props} style={sx} is="form" />
+    <Base
+      {...props}
+      onSubmit={onBaseSubmit}
+      style={style}
+      is="form"
+    />
   );
 };
 

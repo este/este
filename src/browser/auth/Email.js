@@ -44,8 +44,7 @@ class Email extends React.Component {
     recoveryEmailSent: boolean,
   };
 
-  onFormSubmit(e) {
-    e.preventDefault();
+  onFormSubmit() {
     if (this.state.forgetPasswordIsShown) {
       this.resetPassword();
     } else {
@@ -87,7 +86,6 @@ class Email extends React.Component {
       : emailMessages.emailLegend;
 
     return (
-      // bude napovidat?
       <Form onSubmit={e => this.onFormSubmit(e)} small>
         <Panel theme="primary">
           <PanelHeader>
