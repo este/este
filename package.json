@@ -52,7 +52,7 @@
     "classnames": "^2.1.1",
     "compression": "^1.4.0",
     "copy-webpack-plugin": "^3.0.0",
-    "css-loader": "^0.24.0",
+    "css-loader": "^0.25.0",
     "del": "^2.1.0",
     "empty": "^0.10.1",
     "eslint": "^3.2.2",

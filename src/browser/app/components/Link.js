@@ -67,5 +67,5 @@ export default connect(state => ({
   // TODO: Remove after update to RR4.
   // - github.com/reactjs/react-router/pull/3430
   // - github.com/taion/react-router-scroll/issues/28#issuecomment-244503918
-  pathname: state.routing.locationBeforeTransitions.pathname,
+  pathname: state.routing && state.routing.locationBeforeTransitions.pathname,
 }))(Link);
