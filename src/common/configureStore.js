@@ -1,7 +1,7 @@
 /* @flow weak */
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 
 type Options = {
   initialState: Object,
@@ -27,7 +27,11 @@ const configureStore = (options: Options) => {
   const store = createStore(
     reducer,
     initialState,
-    applyMiddleware(...middleware)
+    compose(
+      applyMiddleware(...middleware),
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ?
+        window.devToolsExtension() : f => f
+    )
   );
 
   // Enable hot reloading for reducers.
