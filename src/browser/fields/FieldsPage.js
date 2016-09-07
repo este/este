@@ -102,8 +102,8 @@ class FieldsPage extends React.Component {
       <View>
         <Title message={linksMessages.fields} />
         <PageHeader
-          description={`Something like redux-form but simplified and universal.
-            Will be released as lib soon.`}
+          description="Something like redux-form but simplified and universal.
+            Will be released as lib soon."
           heading="redux-fields"
         />
         <Form onSubmit={e => this.onFormSubmit(e)}>

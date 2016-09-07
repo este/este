@@ -14,11 +14,11 @@ const HomePage = () => (
   <View>
     <Title message="Este.js" />
     <PageHeader
-      description={`Starter kit for universal full–fledged React app. One stack
-        for browser, mobile, server.`}
+      description="Starter kit for universal full–fledged React app. One stack
+        for browser, mobile, server."
       heading="Este"
     />
-    {/* This is a block with margin-bottom: scale[4], inline styles rocks. */}
+    {/* This is a block with margin-bottom: scale[4]. Inline styles rocks. */}
     <Block mb={4}>
       <Link to="https://github.com/este/este">
         github.com/este/este

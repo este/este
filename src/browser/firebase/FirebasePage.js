@@ -8,8 +8,8 @@ const FirebasePage = () => (
   <View>
     <Title message={linksMessages.firebase} />
     <PageHeader
-      description={`A cloud-hosted database. Data is stored as JSON and
-        synchronized in realtime to every connected client.`}
+      description="A cloud-hosted database. Data is stored as JSON and
+        synchronized in realtime to every connected client."
       heading="Firebase"
     />
     <Heading alt>Online users</Heading>
