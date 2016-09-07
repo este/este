@@ -47,20 +47,24 @@ class Loading extends React.Component {
 
   render() {
     const { currentText } = this.state;
-    if (!currentText) {
-      return (
-        <View>{String.fromCharCode(160)}</View>
-      );
-    }
+    if (!currentText) return null;
+    const { children } = this.props;
 
     return (
       <View>
         <Title message={currentText} />
-        <FormattedMessage {...currentText} />
+        <FormattedMessage {...currentText} children={children} />
       </View>
     );
   }
 
 }
+
+Loading.propTypes = {
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.func,
+    React.PropTypes.node,
+  ]),
+};
 
 export default Loading;

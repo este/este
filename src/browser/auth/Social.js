@@ -8,6 +8,7 @@ import { signIn } from '../../common/lib/redux-firebase/actions';
 
 const Social = ({ disabled, signIn }) => {
   const onButtonClick = e => {
+    if (disabled) return;
     const { provider } = e.currentTarget.dataset;
     signIn(provider);
   };
@@ -15,7 +16,6 @@ const Social = ({ disabled, signIn }) => {
   return (
     <Button
       data-provider="facebook"
-      disabled={disabled}
       onClick={onButtonClick}
     >
       <FormattedMessage {...buttonsMessages.facebookSignIn} />
