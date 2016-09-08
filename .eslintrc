@@ -22,6 +22,9 @@
     "react/jsx-filename-extension": 0, // No, JSX belongs to .js files
     "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
     "no-confusing-arrow": 0, // This rule is super confusing.
+    "react/forbid-prop-types": 0, // Este is going to use Flow types.
+    "react/no-unused-prop-types": 0, // Este is going to use Flow types.
+    "class-methods-use-this": 0, // Good idea, but ignores React render.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
