@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './app/Root';
@@ -32,7 +33,7 @@ ReactDOM.render(
 // gist.github.com/gaearon/06bd9e2223556cb0d841#file-naive-js
 if (module.hot) {
   module.hot.accept('./app/Root', () => {
-    const NextRoot = require('./app/Root');
+    const NextRoot = require('./app/Root').default;
 
     ReactDOM.render(
       <NextRoot history={history} store={store} />

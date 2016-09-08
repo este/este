@@ -81,7 +81,6 @@ const makeConfig = options => {
                 polyfill: false,
                 regenerator: false,
               }],
-              'add-module-exports',
             ],
             env: {
               production: {

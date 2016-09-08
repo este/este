@@ -3,7 +3,7 @@ require('babel-register');
 require('babel-polyfill');
 
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const config = require('./config');
+const config = require('./config').default;
 const polyfillLocales = require('./intl/polyfillLocales');
 const rootDir = require('path').resolve(__dirname, '..', '..');
 const webpackIsomorphicAssets = require('../../webpack/assets');

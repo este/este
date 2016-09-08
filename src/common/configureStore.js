@@ -1,4 +1,4 @@
-/* @flow weak */
+/* @flow */
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
 import { applyMiddleware, createStore } from 'redux';
@@ -32,19 +32,19 @@ const configureStore = (options: Options) => {
 
   // Enable hot reloading for reducers.
   if (module.hot) {
-    const replaceReducer = configureReducer =>
-      store.replaceReducer(configureReducer(initialState));
-
     if (initialState.device.isReactNative) {
-      // TODO: Should be the same as non React Native.
+      // React Native for some reason needs accept without the explicit path.
       module.hot.accept(() => {
-        replaceReducer(require('./configureReducer').default);
+        const configureReducer = require('./configureReducer').default;
+        store.replaceReducer(configureReducer(initialState));
       });
     } else {
       module.hot.accept('./configureReducer', () => {
-        replaceReducer(require('./configureReducer'));
+        const configureReducer = require('./configureReducer').default;
+        store.replaceReducer(configureReducer(initialState));
       });
     }
+
   }
 
   return store;

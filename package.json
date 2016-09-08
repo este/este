@@ -34,7 +34,6 @@
     "babel-core": "^6.6.0",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.2.0",
-    "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-react-intl": "^2.1.1",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-plugin-transform-react-constant-elements": "^6.3.13",
