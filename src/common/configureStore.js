@@ -34,12 +34,14 @@ const configureStore = (options: Options) => {
   if (module.hot) {
     if (initialState.device.isReactNative) {
       // React Native for some reason needs accept without the explicit path.
+      // facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
       module.hot.accept(() => {
         const configureReducer = require('./configureReducer').default;
 
         store.replaceReducer(configureReducer(initialState));
       });
     } else {
+      // Webpack for some reason needs accept with the explicit path.
       module.hot.accept('./configureReducer', () => {
         const configureReducer = require('./configureReducer').default;
 
