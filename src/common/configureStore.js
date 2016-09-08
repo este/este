@@ -36,15 +36,16 @@ const configureStore = (options: Options) => {
       // React Native for some reason needs accept without the explicit path.
       module.hot.accept(() => {
         const configureReducer = require('./configureReducer').default;
+
         store.replaceReducer(configureReducer(initialState));
       });
     } else {
       module.hot.accept('./configureReducer', () => {
         const configureReducer = require('./configureReducer').default;
+
         store.replaceReducer(configureReducer(initialState));
       });
     }
-
   }
 
   return store;
