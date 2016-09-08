@@ -19,7 +19,9 @@ class App extends React.Component {
 
   render() {
     const { menuShown, routes, showMenu, storageLoaded } = this.props;
-    if (!storageLoaded) return null;
+    // TODO: Add splash screen.
+    const doNotRenderAnythingUntilStorageIsLoaded = !storageLoaded;
+    if (doNotRenderAnythingUntilStorageIsLoaded) return null;
 
     return (
       <Container inverse>

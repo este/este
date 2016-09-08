@@ -24,26 +24,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const Todo = ({ todo, toggleTodoCompleted }) => {
-  const onCheckboxPress = () => {
-    toggleTodoCompleted(todo);
-  };
-
-  return (
-    <View style={styles.todo}>
-      <Checkbox
-        checked={todo.completed}
-        onPress={onCheckboxPress}
-        style={styles.checkbox}
-      />
-      <TextInput
-        editable={false}
-        viewStyle={styles.textInputView}
-        value={todo.title}
-      />
-    </View>
-  );
-};
+const Todo = ({ todo, toggleTodoCompleted }) => (
+  <View style={styles.todo}>
+    <Checkbox
+      checked={todo.completed}
+      onPress={() => toggleTodoCompleted(todo)}
+      style={styles.checkbox}
+    />
+    <TextInput
+      editable={false}
+      viewStyle={styles.textInputView}
+      value={todo.title}
+    />
+  </View>
+);
 
 Todo.propTypes = {
   todo: React.PropTypes.object.isRequired,

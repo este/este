@@ -30,28 +30,22 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends React.Component {
+const Header = ({ todos }) => {
+  const leftTodos = todos.filter(todo => !todo.completed).size;
+  return (
+    <View style={styles.header}>
+      <FormattedMessage
+        {...messages.leftTodos}
+        style={styles.text}
+        values={{ leftTodos }}
+      />
+    </View>
+  );
+};
 
-  static propTypes = {
-    todos: React.PropTypes.object.isRequired,
-  };
-
-  render() {
-    const { todos } = this.props;
-    const leftTodos = todos.filter(todo => !todo.completed).size;
-
-    return (
-      <View style={styles.header}>
-        <FormattedMessage
-          {...messages.leftTodos}
-          style={styles.text}
-          values={{ leftTodos }}
-        />
-      </View>
-    );
-  }
-
-}
+Header.propTypes = {
+  todos: React.PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   todos: state.todos.map,
