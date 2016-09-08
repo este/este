@@ -1,6 +1,3 @@
 {
-  "presets": ["es2015-node6/object-rest"],
-  "plugins": [
-    "add-module-exports"
-  ]
+  "presets": ["es2015-node6/object-rest"]
 }

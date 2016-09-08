@@ -1,3 +1,9 @@
 machine:
   node:
     version: 6.1.0
+
+# Disable cache because CircleCI doesn't detect deleted packages.
+# circleci.com/docs/how-cache-works/#clearing-the-cache
+dependencies:
+  post:
+    - rm -r ~/.gradle
