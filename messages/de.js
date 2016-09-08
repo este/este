@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Anmeldung via Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Fields",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Wie redux-form aber vereinfacht",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Das Konto konnte nicht erstellt werden, weil die E-Mail bereits benutzt wurde.",
   },
@@ -169,12 +161,16 @@ export default [
     "defaultMessage": "Umgesetzt von",
   },
   {
-    "id": "intl.page.h2",
-    "defaultMessage": "Demo von react-intl",
-  },
-  {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {Meldung} other {Meldungen}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Laden",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Noch Laden, überprüfen Sie bitte Ihre Verbindung",
   },
   {
     "id": "me.profilePage.title",
@@ -223,13 +219,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Es ist eher ruhig hier...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Laden",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Noch Laden, überprüfen Sie bitte Ihre Verbindung",
   },
 ];

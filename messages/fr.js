@@ -26,11 +26,11 @@ export default [
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Connexion",
+    "defaultMessage": "Authentification",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Authentification",
+    "defaultMessage": "Connexion",
   },
   {
     "id": "app.buttons.signOut",
@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Connexion Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Fields",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Comme redux-form mais simplifié.",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Le nouveau compte utilisateur ne peut pas être créé car l'email indiqué est déjà utilisé.",
   },
@@ -169,12 +161,16 @@ export default [
     "defaultMessage": "Réalisé avec amour par",
   },
   {
-    "id": "intl.page.h2",
-    "defaultMessage": "Démonstration de react-intl",
-  },
-  {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {message} other {messages}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Chargement",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Chargement toujours, s'il vous plaît vérifier votre connexion",
   },
   {
     "id": "me.profilePage.title",
@@ -223,13 +219,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "C'est plutôt calme par ici...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Chargement",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Chargement toujours, s'il vous plaît vérifier votre connexion",
   },
 ];

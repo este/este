@@ -137,14 +137,6 @@ export default [
     "defaultMessage": "Login with Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Fields",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Something like redux-form but simplified and universal.",
-  },
-  {
     "id": "firebase.error.auth/network-request-failed",
     "defaultMessage": "No internet connection.",
   },
@@ -175,10 +167,6 @@ export default [
   {
     "id": "footer.madeByHtml",
     "defaultMessage": "Made with love by",
-  },
-  {
-    "id": "intl.page.h2",
-    "defaultMessage": "react-intl demonstration",
   },
   {
     "id": "intl.page.unreadCount",

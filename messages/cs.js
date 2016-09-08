@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Přihlášení přes Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Fields",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Něco jako redux-form, ale jednodušší.",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Tento email je už obsazen.",
   },
@@ -167,10 +159,6 @@ export default [
   {
     "id": "footer.madeByHtml",
     "defaultMessage": "stvořil",
-  },
-  {
-    "id": "intl.page.h2",
-    "defaultMessage": "ukázka react-intl",
   },
   {
     "id": "intl.page.unreadCount",

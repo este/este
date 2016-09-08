@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Iniciar sesión en Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Campos",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Algo así como redux-forma, pero simplificada y universal.",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "La nueva cuenta de usuario no puede ser creada porque la dirección de correo electrónico especificada ya se encuentra en uso.",
   },
@@ -169,12 +161,16 @@ export default [
     "defaultMessage": "Hecho por",
   },
   {
-    "id": "intl.page.h2",
-    "defaultMessage": "Demostracion react-intl",
-  },
-  {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {mensaje} other {mensajes}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Cargando",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Todavía se está cargando, por favor, compruebe su conexión",
   },
   {
     "id": "me.profilePage.title",
@@ -223,13 +219,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Esta bastante vacío aquí...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Cargando",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Todavía se está cargando, por favor, compruebe su conexión",
   },
 ];

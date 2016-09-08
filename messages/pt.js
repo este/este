@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Login do Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Campos",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Algo como redux-forma, mas simplificado e universal.",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Novo usuário não pode ser criado, o email informado já foi utilizado.",
   },
@@ -169,12 +161,16 @@ export default [
     "defaultMessage": "desenvolvido por",
   },
   {
-    "id": "intl.page.h2",
-    "defaultMessage": "Demonstração de react-intl",
-  },
-  {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {mensagem} other {mensagens}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Carregando",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Ainda a carregar, por favor, verifique sua conexão",
   },
   {
     "id": "me.profilePage.title",
@@ -223,13 +219,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "Vazio...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Carregando",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Ainda a carregar, por favor, verifique sua conexão",
   },
 ];

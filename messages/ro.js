@@ -141,14 +141,6 @@ export default [
     "defaultMessage": "Logare Facebook",
   },
   {
-    "id": "fields.page.h2",
-    "defaultMessage": "Câmpuri",
-  },
-  {
-    "id": "fields.page.p",
-    "defaultMessage": "Ceva de genul Redux-formă, dar simplificată și universală.",
-  },
-  {
     "id": "firebase.error.EMAIL_TAKEN",
     "defaultMessage": "Noul cont de utilizator nu poate fi creat, deoarece adresa de email specificată este deja în uz.",
   },
@@ -169,12 +161,16 @@ export default [
     "defaultMessage": "realizat de",
   },
   {
-    "id": "intl.page.h2",
-    "defaultMessage": "Demonstrație de react-intl",
-  },
-  {
     "id": "intl.page.unreadCount",
     "defaultMessage": "{unreadCount, plural, one {mesaj} other {mesaje}}",
+  },
+  {
+    "id": "loading.loadingText",
+    "defaultMessage": "Se incarca",
+  },
+  {
+    "id": "loading.longLoadingText",
+    "defaultMessage": "Încă se încarcă, vă rugăm să verificați conexiunea",
   },
   {
     "id": "me.profilePage.title",
@@ -223,13 +219,5 @@ export default [
   {
     "id": "todos.todos.empty",
     "defaultMessage": "E calm pe aici...",
-  },
-  {
-    "id": "loading.loadingText",
-    "defaultMessage": "Se incarca",
-  },
-  {
-    "id": "loading.longLoadingText",
-    "defaultMessage": "Încă se încarcă, vă rugăm să verificați conexiunea",
   },
 ];
