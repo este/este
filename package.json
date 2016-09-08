@@ -96,7 +96,6 @@
     "react-intl": "^2.1.2",
     "react-native": "^0.32.0",
     "react-native-fbsdk": "^0.3.0",
-    "react-native-locale": "0.0.11",
     "react-native-side-menu": "^0.20.0",
     "react-native-uuid": "^1.4.8",
     "react-native-vector-icons": "^2.0.3",

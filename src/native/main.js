@@ -1,19 +1,20 @@
+/* @flow */
 import FBSDK from 'react-native-fbsdk';
-import Locale from 'react-native-locale'; // eslint-disable-line import/no-unresolved
 import React from 'react';
 import Root from './app/Root';
 import configureStore from '../common/configureStore';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import uuid from 'react-native-uuid';
-import { AppRegistry, Platform } from 'react-native';
+import { AppRegistry, NativeModules, Platform } from 'react-native';
 import { fromJSON } from '../common/transit';
 import { initialTransitState } from './initialState';
 
 const initialState = fromJSON(initialTransitState);
 
 const getDefaultDeviceLocale = () => {
-  const deviceLocale = Locale.constants().localeIdentifier.split('_')[0];
   const { defaultLocale, locales } = initialState.intl;
+  const deviceLocale = NativeModules.SettingsManager.settings
+    .AppleLocale.split('_')[0];
   const isSupported = locales.indexOf(deviceLocale) !== -1;
   return isSupported ? deviceLocale : defaultLocale;
 };

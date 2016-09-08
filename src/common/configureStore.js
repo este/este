@@ -5,8 +5,8 @@ import { applyMiddleware, createStore } from 'redux';
 
 type Options = {
   initialState: Object,
-  platformDeps: Object,
-  platformMiddleware: Array<Function>,
+  platformDeps?: Object,
+  platformMiddleware?: Array<Function>,
 };
 
 const configureStore = (options: Options) => {
