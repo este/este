@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
-import { Message } from '.';
+import { Message } from './';
 import { ValidationError } from '../../../common/lib/validation';
 
 const messages = defineMessages({
