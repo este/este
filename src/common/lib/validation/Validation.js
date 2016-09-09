@@ -8,13 +8,13 @@ class Validation {
   // JSON to be validated.
   constructor(object) {
     this.object = object;
-    this.prop = null;
+    this.currentProp = null;
     this.validator = validator;
     this.promise = Promise.resolve();
   }
 
   validate(callback, { required } = {}) {
-    const prop = this.prop;
+    const prop = this.currentProp;
     const value = this.object[prop];
     const object = this.object;
     this.promise = this.promise.then(() => {
@@ -29,7 +29,7 @@ class Validation {
   }
 
   prop(prop) {
-    this.prop = prop;
+    this.currentProp = prop;
     return this;
   }
 
