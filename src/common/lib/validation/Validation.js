@@ -7,29 +7,29 @@ class Validation {
 
   // JSON to be validated.
   constructor(object) {
-    this._object = object;
-    this._prop = null;
-    this._validator = validator;
+    this.object = object;
+    this.prop = null;
+    this.validator = validator;
     this.promise = Promise.resolve();
   }
 
   validate(callback, { required } = {}) {
-    const prop = this._prop;
-    const value = this._object[prop];
-    const object = this._object;
+    const prop = this.prop;
+    const value = this.object[prop];
+    const object = this.object;
     this.promise = this.promise.then(() => {
-      if (required && !this._isEmptyString(value)) return;
+      if (required && !this.isEmptyString(value)) return;
       callback(value, prop, object);
     });
     return this;
   }
 
-  _isEmptyString(value) {
-    return !this._validator.toString(value).trim();
+  isEmptyString(value) {
+    return !this.validator.toString(value).trim();
   }
 
   prop(prop) {
-    this._prop = prop;
+    this.prop = prop;
     return this;
   }
 
@@ -41,7 +41,7 @@ class Validation {
 
   email() {
     return this.validate((value, prop) => {
-      if (this._validator.isEmail(value)) return;
+      if (this.validator.isEmail(value)) return;
       throw new ValidationError('email', { prop });
     });
   }

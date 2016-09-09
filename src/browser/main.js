@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
-const initialState = fromJSON(window.__INITIAL_STATE__);
+const initialState = fromJSON(window.__INITIAL_STATE__); // eslint-disable-line no-underscore-dangle
 const reportingMiddleware = configureReporting({
   appVersion: initialState.config.appVersion,
   sentryUrl: initialState.config.sentryUrl,

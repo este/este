@@ -6,7 +6,8 @@ import { diff, messagesToCode } from './support/messages';
 
 gulp.task('messages-clear', ['messages-extract'], () => {
   const messages = loadMessages({ includeDefault: true });
-  const defaultMessagesKeys = Object.keys(messages._default);
+  const defaultMessagesKeys = Object
+    .keys(messages._default); // eslint-disable-line no-underscore-dangle
 
   Object.keys(messages)
     .filter(locale => locale !== '_default')

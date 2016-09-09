@@ -9,7 +9,7 @@ const xfbml = (WrappedComponent: any) =>
   class Wrapper extends React.Component {
 
     el: Element;
-    _isMounted: boolean;
+    isMounted: boolean;
 
     parseXfbmlAsap() {
       if (window.FB) {
@@ -20,18 +20,18 @@ const xfbml = (WrappedComponent: any) =>
       // Aspect Oriented Programming ftw.
       window.fbAsyncInit = () => {
         fbAsyncInit();
-        if (!this._isMounted) return;
+        if (!this.isMounted) return;
         window.FB.XFBML.parse(this.el);
       };
     }
 
     componentDidMount() {
-      this._isMounted = true;
+      this.isMounted = true;
       this.parseXfbmlAsap();
     }
 
     componentWillUnmount() {
-      this._isMounted = false;
+      this.isMounted = false;
     }
 
     onWrappedComponentRef(el: Element) {

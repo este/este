@@ -37,7 +37,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
       store: React.PropTypes.object, // Redux store.
     };
 
-    _onAllValueCalled: boolean;
+    onAllValueCalled: boolean;
     onArgs: any;
     onceArgs: any;
 
@@ -63,7 +63,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
         delete eventTypes.all;
         // Use value to get current state once.
         eventTypes.value = snap => {
-          this._onAllValueCalled = true;
+          this.onAllValueCalled = true;
           const val = [];
           snap.forEach(childSnap => {
             val.push(childSnap.val());
@@ -74,7 +74,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
           ['child_added', 'child_changed', 'child_moved', 'child_removed']
             .forEach(eventType => {
               eventTypes[eventType] = (snap, prevChildKey) => {
-                if (eventType === 'child_added' && !this._onAllValueCalled) {
+                if (eventType === 'child_added' && !this.onAllValueCalled) {
                   return;
                 }
                 action({
@@ -109,7 +109,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
 
     on() {
       // This flag is for ignoring all child_added events before once value.
-      this._onAllValueCalled = false;
+      this.onAllValueCalled = false;
       this.dispatch(this.props, (ref, { on, once, params = [] }) => {
         // Map declarative params to Firebase imperative API.
         params.forEach(([method, ...args]) => {
