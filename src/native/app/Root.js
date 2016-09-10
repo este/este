@@ -8,10 +8,21 @@ type Props = {
   store: Object,
 };
 
-const Root = ({ store }: Props) => (
-  <Provider store={store}>
-    <App routes={createRoutes()} />
-  </Provider>
-);
+// Must be the ES6 class to ensure hot reload works for stateless components.
+/* eslint-disable react/prefer-stateless-function */
+class Root extends React.Component {
+
+  props: Props;
+
+  render() {
+    const { store } = this.props;
+    return (
+      <Provider store={store}>
+        <App routes={createRoutes()} />
+      </Provider>
+    );
+  }
+
+}
 
 export default Root;
