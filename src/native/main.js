@@ -33,7 +33,8 @@ const store = configureStore({
   platformDeps: { FBSDK, createStorageEngine, uuid },
 });
 
-// Must be a ES6 class to ensure hot reload works for stateless components.
+// Must be the ES6 class to ensure hot reload works for stateless components.
+/* eslint-disable react/prefer-stateless-function */
 class Este extends React.Component {
   render() {
     return (

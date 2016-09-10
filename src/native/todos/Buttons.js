@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/themes/initial';
@@ -23,43 +24,37 @@ const styles = StyleSheet.create({
   },
 });
 
-class TodoButtons extends React.Component {
-
-  static propTypes = {
-    addHundredTodos: React.PropTypes.func.isRequired,
-    clearAllCompletedTodos: React.PropTypes.func.isRequired,
-    clearAllTodos: React.PropTypes.func.isRequired,
-    todos: React.PropTypes.object.isRequired,
-  };
-
-  render() {
-    const {
-      addHundredTodos,
-      clearAllCompletedTodos,
-      clearAllTodos,
-      todos,
-    } = this.props;
-    const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
-
-    return (
-      <View style={styles.buttons}>
-        {hasCompletedTodos ?
-          <Button onPress={clearAllCompletedTodos} style={styles.button}>
-            <FormattedMessage {...buttonsMessages.clearCompleted} />
-          </Button>
-        :
-          <Button onPress={clearAllTodos} style={styles.button}>
-            <FormattedMessage {...buttonsMessages.clearAll} />
-          </Button>
-        }
-        <Button onPress={addHundredTodos} style={styles.button}>
-          <FormattedMessage {...buttonsMessages.add100} />
+const TodoButtons = ({
+  addHundredTodos,
+  clearAllCompletedTodos,
+  clearAllTodos,
+  todos,
+}) => {
+  const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
+  return (
+    <View style={styles.buttons}>
+      {hasCompletedTodos ?
+        <Button onPress={clearAllCompletedTodos} style={styles.button}>
+          <FormattedMessage {...buttonsMessages.clearCompleted} />
         </Button>
-      </View>
-    );
-  }
+      :
+        <Button onPress={clearAllTodos} style={styles.button}>
+          <FormattedMessage {...buttonsMessages.clearAll} />
+        </Button>
+      }
+      <Button onPress={addHundredTodos} style={styles.button}>
+        <FormattedMessage {...buttonsMessages.add100} />
+      </Button>
+    </View>
+  );
+};
 
-}
+TodoButtons.propTypes = {
+  addHundredTodos: React.PropTypes.func.isRequired,
+  clearAllCompletedTodos: React.PropTypes.func.isRequired,
+  clearAllTodos: React.PropTypes.func.isRequired,
+  todos: React.PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   todos: state.todos.map,

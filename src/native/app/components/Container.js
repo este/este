@@ -9,30 +9,21 @@ const styles = StyleSheet.create({
   },
 });
 
-class Container extends React.Component {
+type Props = {
+  inverse?: boolean,
+  style?: Object,
+};
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    inverse: React.PropTypes.bool,
-    style: View.propTypes.style,
-  };
-
-  render() {
-    const { children, inverse, style, ...props } = this.props;
-    const backgroundColor = inverse
-      ? theme.inverseBackgroundColor
-      : theme.backgroundColor;
-
-    return (
-      <View
-        {...props}
-        style={[styles.container, { backgroundColor }, style]}
-      >
-        {children}
-      </View>
-    );
-  }
-
-}
+const Container = ({ inverse, style, ...props }: Props) => {
+  const backgroundColor = inverse
+    ? theme.inverseBackgroundColor
+    : theme.backgroundColor;
+  return (
+    <View
+      {...props}
+      style={[styles.container, { backgroundColor }, style]}
+    />
+  );
+};
 
 export default Container;

@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import errorToMessage from '../../../common/app/errorToMessage';
 import theme from '../themes/initial';
@@ -52,6 +53,11 @@ class Alert extends React.Component {
     };
   }
 
+  state: {
+    alertHeight: number,
+    animation: any,
+  };
+
   componentWillReceiveProps({ error }) {
     if (!error) return;
     this.show();
@@ -84,6 +90,8 @@ class Alert extends React.Component {
       opacity: animation,
     };
   }
+
+  hideTimer: number;
 
   animateTo(toValue, fromValue) {
     const { duration } = this.props;
@@ -124,7 +132,7 @@ class Alert extends React.Component {
           >
             <FormattedMessage
               {...errorMessage.message}
-              values={errorMessage.values}
+              values={errorMessage.values || {}}
               style={styles.message}
             />
           </View>

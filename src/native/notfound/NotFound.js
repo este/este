@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import messages from '../../common/notfound/messages';
 import theme from '../app/themes/initial';
@@ -19,26 +20,18 @@ const styles = StyleSheet.create({
   },
 });
 
-class NotFoundPage extends React.Component {
+const NotFoundPage = ({ selectTab }) => (
+  <CenteredContainer>
+    <FormattedMessage {...messages.h1} style={styles.heading} />
+    <FormattedMessage {...messages.p} style={styles.paragraph} />
+    <Button onPress={() => selectTab('home')}>
+      <FormattedMessage {...messages.continue} style={styles.button} />
+    </Button>
+  </CenteredContainer>
+);
 
-  static propTypes = {
-    selectTab: React.PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { selectTab } = this.props;
-
-    return (
-      <CenteredContainer>
-        <FormattedMessage {...messages.h1} style={styles.heading} />
-        <FormattedMessage {...messages.p} style={styles.paragraph} />
-        <Button onPress={() => selectTab('home')}>
-          <FormattedMessage {...messages.continue} style={styles.button} />
-        </Button>
-      </CenteredContainer>
-    );
-  }
-
-}
+NotFoundPage.propTypes = {
+  selectTab: React.PropTypes.func.isRequired,
+};
 
 export default connect(null, { selectTab })(NotFoundPage);

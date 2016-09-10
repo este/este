@@ -1,3 +1,4 @@
+/* @flow */
 import Header from './Header';
 import NotFoundPage from '../notfound/NotFound';
 import React from 'react';
@@ -8,36 +9,29 @@ import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
 // This is temporary pure React Native solution.
-// TODO: Use jmurzy/react-router-native once released.
 
-class Navigator extends React.Component {
+let Navigator = ({ currentTab, intl, menuShown, routes }) => {
+  const route = routes.tabs[currentTab];
+  const RoutePage = route ? route.component : NotFoundPage;
+  const title = route ? route.title : notFoundMessages.title;
+  return (
+    <Container>
+      {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.
+        <StatusBar hidden={menuShown} />
+      }
+      <Header title={intl.formatMessage(title)} />
+      <Alert />
+      <RoutePage />
+    </Container>
+  );
+};
 
-  static propTypes = {
-    currentTab: React.PropTypes.string.isRequired,
-    intl: intlShape.isRequired,
-    menuShown: React.PropTypes.bool.isRequired,
-    routes: React.PropTypes.object.isRequired,
-  };
-
-  render() {
-    const { currentTab, intl, menuShown, routes } = this.props;
-    const route = routes.tabs[currentTab];
-    const RoutePage = route ? route.component : NotFoundPage;
-    const title = route ? route.title : notFoundMessages.title;
-
-    return (
-      <Container>
-        {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.
-          <StatusBar hidden={menuShown} />
-        }
-        <Header title={intl.formatMessage(title)} />
-        <Alert />
-        <RoutePage />
-      </Container>
-    );
-  }
-
-}
+Navigator.propTypes = {
+  currentTab: React.PropTypes.string.isRequired,
+  intl: intlShape.isRequired,
+  menuShown: React.PropTypes.bool.isRequired,
+  routes: React.PropTypes.object.isRequired,
+};
 
 Navigator = injectIntl(Navigator);
 

@@ -1,4 +1,4 @@
-/* flow */
+/* @flow */
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from './themes/initial';
@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// Note patern, stateless component with arrow function.
-// github.com/airbnb/javascript/issues/801#issuecomment-230848043
 const TabLink = ({ children, link, selectTab, selected }) => (
   <Text
     onPress={() => selectTab(link)}
@@ -42,52 +40,44 @@ TabLink.propTypes = {
   selected: React.PropTypes.bool.isRequired,
 };
 
-class Menu extends React.Component {
-
-  static propTypes = {
-    currentTab: React.PropTypes.string.isRequired,
-    intl: intlShape.isRequired,
-    selectTab: React.PropTypes.func.isRequired,
-    showMenu: React.PropTypes.func.isRequired,
-    viewer: React.PropTypes.object,
-  };
-
-  onTabLinkSelectTap(key) {
-    const { selectTab, showMenu } = this.props;
+let Menu = ({ currentTab, intl, selectTab, showMenu, viewer }) => {
+  const onTabLinkSelectTap = (key) => {
     showMenu(false);
     selectTab(key);
-  }
+  };
+  const links = [
+    'home',
+    'todos',
+    'intl',
+    'offline',
+    (viewer ? 'me' : 'signIn'),
+  ];
+  return (
+    <ScrollView
+      automaticallyAdjustContentInsets={false}
+      contentContainerStyle={styles.contentContainer}
+    >
+      {links.map(link =>
+        <TabLink
+          key={link}
+          selected={link === currentTab}
+          link={link}
+          selectTab={key => onTabLinkSelectTap(key)}
+        >
+          {intl.formatMessage(linksMessages[link])}
+        </TabLink>
+      )}
+    </ScrollView>
+  );
+};
 
-  render() {
-    const { currentTab, intl, viewer } = this.props;
-    const links = [
-      'home',
-      'todos',
-      'intl',
-      'offline',
-      (viewer ? 'me' : 'signIn'),
-    ];
-
-    return (
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {links.map(link =>
-          <TabLink
-            key={link}
-            selected={link === currentTab}
-            link={link}
-            selectTab={key => this.onTabLinkSelectTap(key)}
-          >
-            {intl.formatMessage(linksMessages[link])}
-          </TabLink>
-        )}
-      </ScrollView>
-    );
-  }
-
-}
+Menu.propTypes = {
+  currentTab: React.PropTypes.string.isRequired,
+  intl: intlShape.isRequired,
+  selectTab: React.PropTypes.func.isRequired,
+  showMenu: React.PropTypes.func.isRequired,
+  viewer: React.PropTypes.object,
+};
 
 Menu = injectIntl(Menu);
 

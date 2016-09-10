@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import theme from '../themes/initial';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 const styles = StyleSheet.create({
   view: {
@@ -20,33 +20,25 @@ const styles = StyleSheet.create({
   },
 });
 
-class AppTextInput extends React.Component {
+type Props = {
+  invalid: boolean,
+  inputStyle: Object,
+  viewStyle: Object,
+};
 
-  static propTypes = {
-    invalid: React.PropTypes.bool,
-    inputStyle: Text.propTypes.style,
-    viewStyle: View.propTypes.style,
-  };
+const AppTextInput = ({ invalid, inputStyle, viewStyle, ...props }: Props) => (
+  <View style={[styles.view, invalid && styles.invalid, viewStyle]}>
+    <TextInput
+      {...props}
+      underlineColorAndroid="transparent"
+      style={[styles.input, inputStyle]}
+    />
+  </View>
+);
 
-  static defaultProps = {
-    invalid: false,
-    placeholderTextColor: theme.placeholderTextColor,
-  };
-
-  render() {
-    const { invalid, inputStyle, viewStyle } = this.props;
-
-    return (
-      <View style={[styles.view, invalid && styles.invalid, viewStyle]}>
-        <TextInput
-          {...this.props}
-          underlineColorAndroid="transparent"
-          style={[styles.input, inputStyle]}
-        />
-      </View>
-    );
-  }
-
-}
+AppTextInput.defaultProps = {
+  invalid: false,
+  placeholderTextColor: theme.placeholderTextColor,
+};
 
 export default AppTextInput;

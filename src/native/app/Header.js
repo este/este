@@ -1,3 +1,4 @@
+/* @flow */
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import theme from './themes/initial';
@@ -35,35 +36,25 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends React.Component {
+const Header = ({ menuShown, showMenu, title }) => (
+  <View style={styles.header}>
+    <Button onPress={() => showMenu(!menuShown)} style={styles.button}>
+      <Icon name="ios-menu" style={styles.icon} />
+    </Button>
+    <Text style={styles.title}>{title}</Text>
+    <Button style={styles.button}>
+      {/* This is a placeholder for the right side button. */}
+      {/* <Icon name="ios-menu" style={styles.icon} /> */}
+    </Button>
+  </View>
+);
 
-  static propTypes = {
-    menuShown: React.PropTypes.bool.isRequired,
-    showMenu: React.PropTypes.func.isRequired,
-    title: React.PropTypes.string.isRequired,
-  };
+Header.propTypes = {
+  menuShown: React.PropTypes.bool.isRequired,
+  showMenu: React.PropTypes.func.isRequired,
+  title: React.PropTypes.string.isRequired,
+};
 
-  render() {
-    const { menuShown, showMenu, title } = this.props;
-
-    return (
-      <View style={styles.header}>
-        <Button onPress={() => showMenu(!menuShown)} style={styles.button}>
-          <Icon name="ios-menu" style={styles.icon} />
-        </Button>
-        <Text style={styles.title}>{title}</Text>
-        <Button style={styles.button}>
-          {/* This is a placeholder for the right side button. */}
-          {/* <Icon name="ios-menu" style={styles.icon} /> */}
-        </Button>
-      </View>
-    );
-  }
-
-}
-
-Header = connect(state => ({
+export default connect(state => ({
   menuShown: state.app.menuShown,
 }), { showMenu })(Header);
-
-export default Header;

@@ -1,3 +1,4 @@
+/* @flow */
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
@@ -24,37 +25,29 @@ SocialLoginButton.propTypes = {
   onPress: React.PropTypes.func.isRequired,
 };
 
-class Social extends React.Component {
-
-  static propTypes = {
-    disabled: React.PropTypes.bool.isRequired,
-    nativeSignIn: React.PropTypes.func.isRequired,
-    style: View.propTypes.style,
-  };
-
-  onFacebookLoginPress() {
-    const { disabled, nativeSignIn } = this.props;
+const Social = ({ disabled, nativeSignIn, style }) => {
+  const onFacebookLoginPress = () => {
     if (disabled) return;
     nativeSignIn('facebook');
-  }
+  };
+  return (
+    <View style={style}>
+      <SocialLoginButton
+        backgroundColor="#3b5998"
+        message={buttonsMessages.facebookSignIn}
+        name="facebook"
+        onPress={onFacebookLoginPress}
+      />
+      {/* TODO: Add more social login buttons. */}
+    </View>
+  );
+};
 
-  render() {
-    const { style } = this.props;
-
-    return (
-      <View style={style}>
-        <SocialLoginButton
-          backgroundColor="#3b5998"
-          message={buttonsMessages.facebookSignIn}
-          name="facebook"
-          onPress={() => this.onFacebookLoginPress()}
-        />
-        {/* TODO: Add more social login buttons. */}
-      </View>
-    );
-  }
-
-}
+Social.propTypes = {
+  disabled: React.PropTypes.bool.isRequired,
+  nativeSignIn: React.PropTypes.func.isRequired,
+  style: View.propTypes.style,
+};
 
 export default connect(state => ({
   disabled: state.auth.formDisabled,

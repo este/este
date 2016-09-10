@@ -1,3 +1,4 @@
+/* @flow */
 import Email from './Email';
 import React from 'react';
 import Social from './Social';
@@ -38,6 +39,8 @@ class SignInPage extends React.Component {
     this.wasRedirected = true;
     selectTab('home');
   }
+
+  wasRedirected: boolean;
 
   render() {
     return (

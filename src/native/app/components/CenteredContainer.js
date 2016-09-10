@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Container } from './';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   centeredContainer: {
@@ -10,22 +10,15 @@ const styles = StyleSheet.create({
   },
 });
 
-class CenteredContainer extends React.Component {
+type Props = {
+  style: Object,
+};
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    style: View.propTypes.style,
-  };
-
-  render() {
-    const { children, style, ...props } = this.props;
-    return (
-      <Container {...props} style={[styles.centeredContainer, style]}>
-        {children}
-      </Container>
-    );
-  }
-
-}
+const CenteredContainer = ({ style, ...props }: Props) => (
+  <Container
+    {...props}
+    style={[styles.centeredContainer, style]}
+  />
+);
 
 export default CenteredContainer;

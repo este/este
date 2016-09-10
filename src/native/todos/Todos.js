@@ -1,3 +1,4 @@
+/* @flow */
 import Buttons from './Buttons';
 import React from 'react';
 import Todo from './Todo';
@@ -25,43 +26,35 @@ const styles = StyleSheet.create({
   },
 });
 
-class Todos extends React.Component {
-
-  static propTypes = {
-    todos: React.PropTypes.object.isRequired,
-    toggleTodoCompleted: React.PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { todos, toggleTodoCompleted } = this.props;
-
-    if (todos.size === 0) {
-      return (
-        <CenteredContainer>
-          <Image
-            source={require('./img/EmptyState.png')}
-            style={styles.icon}
-          />
-          <FormattedMessage {...todosMessages.empty} style={styles.empty} />
-        </CenteredContainer>
-      );
-    }
-
-    const list = todos.toList().sortBy(item => item.createdAt).reverse();
-
+const Todos = ({ todos, toggleTodoCompleted }) => {
+  if (todos.size === 0) {
     return (
-      <ScrollView>
-        {list.map(todo =>
-          <View key={todo.id} style={styles.row}>
-            <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
-          </View>
-        )}
-        <Buttons />
-      </ScrollView>
+      <CenteredContainer>
+        <Image
+          source={require('./img/EmptyState.png')}
+          style={styles.icon}
+        />
+        <FormattedMessage {...todosMessages.empty} style={styles.empty} />
+      </CenteredContainer>
     );
   }
+  const list = todos.toList().sortBy(item => item.createdAt).reverse();
+  return (
+    <ScrollView>
+      {list.map(todo =>
+        <View key={todo.id} style={styles.row}>
+          <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
+        </View>
+      )}
+      <Buttons />
+    </ScrollView>
+  );
+};
 
-}
+Todos.propTypes = {
+  todos: React.PropTypes.object.isRequired,
+  toggleTodoCompleted: React.PropTypes.func.isRequired,
+};
 
 export default connect(state => ({
   todos: state.todos.map,

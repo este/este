@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
@@ -49,6 +50,11 @@ class Email extends React.Component {
       recoveryEmailSent: false,
     };
   }
+
+  state: {
+    forgetPasswordIsShown: boolean,
+    recoveryEmailSent: boolean,
+  };
 
   onSignInViaPasswordPress() {
     const { fields, signIn } = this.props;

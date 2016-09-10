@@ -25,40 +25,32 @@ const styles = StyleSheet.create({
   },
 });
 
-class NewTodo extends React.Component {
-
-  static propTypes = {
-    addTodo: React.PropTypes.func.isRequired,
-    fields: React.PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
-  };
-
-  onSubmitEditing() {
-    const { addTodo, fields } = this.props;
+let NewTodo = ({ addTodo, fields, intl }) => {
+  const onSubmitEditing = () => {
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);
     fields.$reset();
-  }
+  };
+  return (
+    <View style={styles.newTodo}>
+      <TextInput
+        {...fields.title}
+        inputStyle={styles.textInputInput}
+        maxLength={100}
+        onSubmitEditing={onSubmitEditing}
+        placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+        placeholderTextColor={'#cce9f2'}
+        viewStyle={styles.textInputView}
+      />
+    </View>
+  );
+};
 
-  render() {
-    const { fields, intl: { formatMessage } } = this.props;
-
-    return (
-      <View style={styles.newTodo}>
-        <TextInput
-          {...fields.title}
-          inputStyle={styles.textInputInput}
-          maxLength={100}
-          onSubmitEditing={() => this.onSubmitEditing()}
-          placeholder={formatMessage(newTodoMessages.placeholder)}
-          placeholderTextColor={'#cce9f2'}
-          viewStyle={styles.textInputView}
-        />
-      </View>
-    );
-  }
-
-}
+NewTodo.propTypes = {
+  addTodo: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.object.isRequired,
+  intl: intlShape.isRequired,
+};
 
 NewTodo = injectIntl(NewTodo);
 
