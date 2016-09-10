@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { start as appStart } from './actions';
 
 const start = (WrappedComponent: Function) => {
+  let appStarted = false;
+
   class Start extends React.Component {
 
     static propTypes = {
@@ -14,8 +16,11 @@ const start = (WrappedComponent: Function) => {
 
     componentDidMount() {
       const { appStart } = this.props;
-      // Note the appStart must be dispatched after the initial render, to match
-      // client and server rendered HTML.
+      // The appStart must be called after the initial render, because
+      // componentDidMount is not called on the server. Because hot reloading,
+      // we have to call appStart only once.
+      if (appStarted) return;
+      appStarted = true;
       appStart();
     }
 
