@@ -18,7 +18,10 @@ gulp.task('native-upgrade', () => {
       - copy 'android' and 'ios' directories from some temp dir
       - run 'npm install'
       - run 'react-native link'
-      - follow instruction from github.com/facebook/react-native-fbsdk
+      - fresh install
+        - follow instruction from github.com/facebook/react-native-fbsdk
+      - update
+        - check git diff
 
     Yeah, it's that easy.
   `);

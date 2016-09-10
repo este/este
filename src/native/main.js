@@ -1,11 +1,12 @@
 /* @flow */
 import FBSDK from 'react-native-fbsdk';
 import React from 'react';
+import ReactNativeI18n from 'react-native-i18n';
 import Root from './app/Root';
 import configureStore from '../common/configureStore';
 import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import uuid from 'react-native-uuid';
-import { AppRegistry, NativeModules, Platform } from 'react-native';
+import { AppRegistry, Platform } from 'react-native';
 import { fromJSON } from '../common/transit';
 import { initialTransitState } from './initialState';
 
@@ -13,8 +14,7 @@ const initialState = fromJSON(initialTransitState);
 
 const getDefaultDeviceLocale = () => {
   const { defaultLocale, locales } = initialState.intl;
-  const deviceLocale = NativeModules.SettingsManager.settings
-    .AppleLocale.split('_')[0];
+  const deviceLocale = ReactNativeI18n.locale.split('-')[0];
   const isSupported = locales.indexOf(deviceLocale) !== -1;
   return isSupported ? deviceLocale : defaultLocale;
 };
