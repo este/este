@@ -2,12 +2,15 @@ import React from 'react';
 import theme from '../themes/initial';
 import { StyleSheet, Text } from 'react-native';
 
+// https://github.com/facebook/react-native/issues/7877
+const round = value => Math.round(value);
+
 const styles = StyleSheet.create({
   text: { // eslint-disable-line react-native/no-unused-styles
     color: theme.textColor,
     fontFamily: theme.fontFamily,
     fontSize: theme.fontSize,
-    lineHeight: theme.fontSize * theme.lineHeight,
+    lineHeight: round(theme.fontSize * theme.lineHeight),
   },
 });
 
@@ -38,7 +41,7 @@ class AppText extends React.Component {
     if (!Number.isInteger(customFontSize)) {
       return [styles.text, style];
     }
-    const lineHeight = customFontSize * theme.lineHeight;
+    const lineHeight = round(customFontSize * theme.lineHeight);
     return [styles.text, style, { lineHeight }];
   }
 
