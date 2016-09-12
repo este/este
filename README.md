@@ -27,6 +27,9 @@
   - universal forms with universal validation (universal ftw, yeah)
 - Well tuned dev stack (OS X, Linux, Windows)
 - Immutable app state
+- Stateless functional UI components with inline-styles
+- Flowtype
+- Vanilla hot reloading makes everything hot reloadable.
 - [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined Redux actions
   - email and facebook login
@@ -60,6 +63,7 @@
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
 - [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
 - [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk) For Facebook Login in React Native. Follow the readme install notes.
+- [rebass](https://github.com/jxnblk/rebass) Configurable React Stateless Functional UI Components
 - And much more. Explore the repository.
 
 ## Prerequisites
