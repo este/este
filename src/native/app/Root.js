@@ -1,6 +1,7 @@
 /* @flow */
 import App from './App';
 import React from 'react';
+import RoutingProvider from '../routing/RoutingProvider';
 import createRoutes from '../createRoutes';
 import { Provider } from 'react-redux';
 
@@ -16,9 +17,12 @@ class Root extends React.Component {
 
   render() {
     const { store } = this.props;
+    const routes = createRoutes(store.getState);
     return (
       <Provider store={store}>
-        <App routes={createRoutes()} />
+        <RoutingProvider routes={routes}>
+          <App />
+        </RoutingProvider>
       </Provider>
     );
   }
