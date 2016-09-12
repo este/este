@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Já",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Stránka nenalezena",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Offline",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Stále nahrávám...",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Nastavení",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Pokračujte zde prosím.",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "Možná máte špatný odkaz, nebo byla stránka odstraněna.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Stránka nenalezena",
   },
   {
     "id": "todos.buttons.add100",

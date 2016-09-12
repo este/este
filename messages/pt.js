@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Eu",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Página não encontrada",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Off-line",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Ainda a carregar, por favor, verifique sua conexão",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Perfil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Configurações",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Por favor, continue aqui.",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "O link está indisponível ou a página foi removida.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Página não encontrada",
   },
   {
     "id": "todos.buttons.add100",

@@ -1,20 +1,14 @@
 /* @flow */
 import React from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import linksMessages from '../../common/app/linksMessages';
 import { Block, Title, View } from '../app/components';
-
-const messages = defineMessages({
-  title: {
-    defaultMessage: 'Settings',
-    id: 'me.settingsPage.title',
-  },
-});
+import { FormattedMessage } from 'react-intl';
 
 const SettingsPage = () => (
   <View>
-    <Title message={messages.title} />
+    <Title message={linksMessages.settings} />
     <Block>
-      <FormattedMessage {...messages.title} />
+      <FormattedMessage {...linksMessages.settings} />
     </Block>
   </View>
 );

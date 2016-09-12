@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Ich",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Seite nicht gefunden",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Offline",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Noch Laden, überprüfen Sie bitte Ihre Verbindung",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Einstellungen",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Hier weiter bitte",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "Der Link ist möglicherweise veraltet oder die Seite wurde gelöscht.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Seite nicht gefunden",
   },
   {
     "id": "todos.buttons.add100",

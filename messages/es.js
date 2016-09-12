@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Yo",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Página no encontrada",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Desconectado",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Todavía se está cargando, por favor, compruebe su conexión",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Perfil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Ajustes",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Continuar aquí por favor.",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "El link puede estar roto, o la página ha sido eliminada.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Página no encontrada",
   },
   {
     "id": "todos.buttons.add100",

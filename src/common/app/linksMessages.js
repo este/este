@@ -22,6 +22,10 @@ const LinkMessages = defineMessages({
     defaultMessage: 'Me',
     id: 'app.links.me',
   },
+  notFound: {
+    defaultMessage: 'Page Not Found',
+    id: 'app.links.notFound',
+  },
   offline: {
     defaultMessage: 'Offline',
     id: 'app.links.offline',

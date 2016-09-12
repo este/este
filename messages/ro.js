@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Eu",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Pagina nu poate fi găsită",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Deconectat",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Încă se încarcă, vă rugăm să verificați conexiunea",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Parametri",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Continuați aici, vă rog.",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "S-ar putea că linkul a fost vechi sau că pagina a fost ștearsă.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Pagina nu poate fi găsită",
   },
   {
     "id": "todos.buttons.add100",

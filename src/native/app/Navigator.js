@@ -2,7 +2,7 @@
 import Header from './Header';
 import NotFoundPage from '../notfound/NotFound';
 import React from 'react';
-import notFoundMessages from '../../common/notfound/messages';
+import linksMessages from '../../common/app/linksMessages';
 import { Alert, Container } from './components';
 import { Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { injectIntl, intlShape } from 'react-intl';
 let Navigator = ({ currentTab, intl, menuShown, routes }) => {
   const route = routes.tabs[currentTab];
   const RoutePage = route ? route.component : NotFoundPage;
-  const title = route ? route.title : notFoundMessages.title;
+  const title = route ? route.title : linksMessages.notFound;
   return (
     <Container>
       {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.

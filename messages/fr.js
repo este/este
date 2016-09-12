@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Moi",
   },
   {
+    "id": "app.links.notFound",
+    "defaultMessage": "Page introuvable",
+  },
+  {
     "id": "app.links.offline",
     "defaultMessage": "Hors ligne",
   },
@@ -173,14 +177,6 @@ export default [
     "defaultMessage": "Chargement toujours, s'il vous plaît vérifier votre connexion",
   },
   {
-    "id": "me.profilePage.title",
-    "defaultMessage": "Profil",
-  },
-  {
-    "id": "me.settingsPage.title",
-    "defaultMessage": "Paramètres",
-  },
-  {
     "id": "notFound.continue",
     "defaultMessage": "Continuez ici s'il vous plaît.",
   },
@@ -191,10 +187,6 @@ export default [
   {
     "id": "notFound.p",
     "defaultMessage": "Le lien est peut-être périmé ou la page a été supprimée.",
-  },
-  {
-    "id": "notFound.title",
-    "defaultMessage": "Page introuvable",
   },
   {
     "id": "todos.buttons.add100",
