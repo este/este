@@ -1,7 +1,8 @@
 /* @flow */
+/* eslint-env browser*/
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 
 type Options = {
   initialState: Object,
@@ -24,10 +25,19 @@ const configureStore = (options: Options) => {
     platformMiddleware
   );
 
+  let devTools = f => f;
+  if (typeof window === 'object') {
+    if (typeof window.devToolsExtension !== 'undefined') {
+      devTools = window.devToolsExtension();
+    }
+  }
   const store = createStore(
     reducer,
     initialState,
-    applyMiddleware(...middleware)
+    compose(
+      applyMiddleware(...middleware),
+      devTools
+    )
   );
 
   // Enable hot reloading for reducers.
