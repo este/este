@@ -9,6 +9,7 @@ import ip from 'ip';
 import path from 'path';
 import webpack from 'webpack';
 import webpackIsomorphicAssets from './assets';
+import PostcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
@@ -152,7 +153,7 @@ const makeConfig = options => {
       }
       return plugins;
     })(),
-    postcss: () => [autoprefixer({ browsers: 'last 2 version' })],
+    postcss: () => [PostcssFlexbugsFixes, autoprefixer({ browsers: 'last 2 version' })],
     resolve: {
       extensions: ['', '.js'], // .json is ommited to ignore ./firebase.json
       modulesDirectories: ['src', 'node_modules'],
