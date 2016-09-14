@@ -5,7 +5,7 @@ import gulp from 'gulp';
 import http from 'http';
 import path from 'path';
 import runSequence from 'run-sequence';
-import spawn from 'cross-spawn';
+import spawn from 'cross-spawn'; // Package used to counteract https://github.com/este/este/issues/1134
 
 const urls = {
   '/': 'index.html',
