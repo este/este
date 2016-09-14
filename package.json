@@ -18,7 +18,8 @@
   "ava": {
     "babel": "inherit",
     "files": [
-      "src/**/__test__/**/*.js"
+      "src/**/__test__/**/*.js",
+      "firebase/__test__/**/*.js"
     ],
     "source": [
       "src/**/*"
@@ -47,6 +48,7 @@
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
     "bluebird": "^3.0.5",
+    "chai": "^3.5.0",
     "chroma-js": "^1.2.1",
     "classnames": "^2.1.1",
     "compression": "^1.4.0",
@@ -67,6 +69,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "firebase": "^3.1.0",
+    "firebase-bolt": "^0.8.1",
     "flow-bin": "0.30.0",
     "gravatar-api": "^1.4.0",
     "gulp": "^3.9.0",
@@ -122,6 +125,7 @@
     "sinon": "^1.17.2",
     "sinon-as-promised": "^4.0.0",
     "style-loader": "^0.13.0",
+    "targaryen": "^2.2.0",
     "through2": "^2.0.1",
     "transit-immutable-js": "^0.6.0",
     "transit-js": "^0.8.846",

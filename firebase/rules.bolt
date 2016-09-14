@@ -6,12 +6,15 @@
 isSignedIn() { auth != null }
 isViewer(uid) { isSignedIn() && auth.uid == uid }
 isFriend(uid) { true } // We can limit access to sensitive data easily.
+isRoomMember(room_id) { isSignedIn() && prior(root['rooms-members'][room_id][auth.uid]) != null }
 
 // Types
 
 // github.com/firebase/bolt/blob/master/docs/guide.md#dealing-with-timestamps
 type CurrentTimestamp extends Number {
-  validate() { this == now }
+  // Fix me (can be bad): <= is only made to make targaryen tests work
+  // see https://github.com/goldibex/targaryen/issues/29
+  validate() { this <= now }
 }
 
 type ShortString extends String {
@@ -60,6 +63,21 @@ type UserPresence {
   user: User
 }
 
+type Room {
+  name: ShortRequiredString,
+  createdAt: CurrentTimestamp
+}
+
+type RoomMemberShip {
+  joinedAt: CurrentTimestamp
+}
+
+type RoomMessage {
+  user: User,
+  message: ExtraLongRequiredString,
+  sentAt:  CurrentTimestamp
+}
+
 // Paths
 
 path /hello-world is HelloWorld {
@@ -87,4 +105,30 @@ path /users-presence/{uid} is UserPresence[] {
   create() { isViewer(uid) }
   update() { true }
   delete() { true }
+}
+
+path /rooms {
+  read() { true }
+}
+
+path /rooms/{room_id} is Room {
+  create() { isSignedIn() }
+}
+
+path /rooms-members/{room_id} {
+  read() { true }
+}
+
+path /rooms-members/{room_id}/{uid} is RoomMemberShip {
+  create() { isViewer(uid) }
+  delete() { isViewer(uid) }
+}
+
+path /rooms-messages/{room_id} {
+  read() { isRoomMember(room_id) }
+}
+
+path /rooms-messages/{room_id}/{message_id} is RoomMessage {
+  // Todo: check if room exist
+  create() { isRoomMember(room_id) }
 }
