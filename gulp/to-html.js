@@ -5,7 +5,7 @@ import gulp from 'gulp';
 import http from 'http';
 import path from 'path';
 import runSequence from 'run-sequence';
-import { spawn } from 'child_process';
+import spawn from 'cross-spawn';
 
 const urls = {
   '/': 'index.html',
