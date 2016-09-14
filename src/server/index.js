@@ -2,6 +2,11 @@
 require('babel-register');
 require('babel-polyfill');
 
+// Specify environment variables NODE_ENV and SERVER_URL
+const env = require('node-env-file');
+
+env('./.env');
+
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const config = require('./config').default;
 const polyfillLocales = require('./intl/polyfillLocales');
