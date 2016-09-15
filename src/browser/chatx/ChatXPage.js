@@ -22,6 +22,21 @@ let ChatXPage = ({ canLoadChat }) => (
   <View>
     <Title message="ChatX" />
     <PageHeader heading="A Chat" />
+    <Flex align="flex-start" justify="space-between">
+      <Box col={3}>
+        <Card mr={1}>
+          <Box px={2} py={2}>
+            <Rooms />
+          </Box>
+          <Divider my={0} />
+          <Box px={2} py={2}>
+            <NewRoom />
+          </Box>
+        </Card>
+      </Box>
+      <Box auto>
+      </Box>
+    </Flex>
   </View>
 );
 
