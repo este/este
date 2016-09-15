@@ -36,3 +36,14 @@ export const createRoom = roomName => ({ firebase, dispatch }) => {
     type: 'ADD_ROOM_REQUEST',
   };
 };
+
+export const joinRoom = (myuid, roomId) => ({ firebase, dispatch }) => {
+  firebase
+    .child(`rooms-members/${roomId}/${myuid}`)
+    .set({ joinedAt: database.ServerValue.TIMESTAMP })
+    .then(() => dispatch({ type: 'JOINED_ROOM' }));
+  return {
+    type: 'JOIN_ROOM_REQUEST',
+    payload: { myuid, roomId },
+  };
+};

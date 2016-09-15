@@ -1,19 +1,26 @@
 import React, { PropTypes } from 'react';
-import { Flex, Heading, Space, Tooltip, Badge } from '../app/components';
+import { Flex, Space, Badge, Button, Text } from '../app/components';
 
-const Room = ({ room }) => {
+const Room = ({ room, onJoinClicked }) => {
   return (
-    <Flex>
-      <Heading level={5}> {room.name}
-        <Space x={1} />
-          <Badge
-            circle
-            rounded
-            theme="primary"
-          >
-            {room.members.size}
-          </Badge>
-      </Heading>
+    <Flex align="baseline">
+      <Text children={room.name} />
+      <Space x={1} />
+      <Badge
+        circle
+        rounded
+        theme="primary"
+      >
+        {room.members.size}
+      </Badge>
+      <Space auto />
+      { room.joined ?
+        <Button theme="secondary" disabled>joined</Button>
+        :
+        <Button theme="primary" onClick={onJoinClicked}>
+          join
+        </Button>
+      }
     </Flex>
   );
 };
@@ -21,6 +28,7 @@ const Room = ({ room }) => {
 
 Room.propTypes = {
   room: PropTypes.object.isRequired,
+  onJoinClicked: PropTypes.func.isRequired,
 };
 
 export default Room;
