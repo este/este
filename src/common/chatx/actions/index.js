@@ -17,3 +17,8 @@ export {
 } from './rooms';
 
 
+export {
+  processReceivedMessages,
+  sendMessage,
+  ON_MESSAGES_VALUE,
+} from './messages';
