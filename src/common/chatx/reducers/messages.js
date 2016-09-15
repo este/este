@@ -7,6 +7,8 @@ export default (state = new Map(), action) => {
     case actions.ON_MESSAGES_VALUE: {
       const { roomId, messages } = action.payload;
 
+      if (!messages) return state;
+
       const newMessages =
       Object.keys(messages)
         .map((messageId) => {
