@@ -2,6 +2,10 @@
 require('babel-register');
 require('babel-polyfill');
 
+const env = require('node-env-file');
+
+env('.env');
+
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const config = require('./config').default;
 const polyfillLocales = require('./intl/polyfillLocales');
