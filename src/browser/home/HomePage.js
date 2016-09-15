@@ -12,11 +12,10 @@ import {
 
 const HomePage = () => (
   <View>
-    <Title message="Este.js" />
+    <Title message="Flamingo City." />
     <PageHeader
-      description="Starter kit for universal full–fledged React app. One stack
-        for browser, mobile, server."
-      heading="Este"
+      description="Fashion blog showcasing designs by Ayeisha Autumn."
+      heading="Flamingo City."
     />
     {/* This is a block with margin-bottom: scale[4]. Inline styles rocks. */}
     <Block mb={4}>
