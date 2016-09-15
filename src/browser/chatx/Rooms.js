@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { joinRoom } from '../../common/chatx/actions';
+import { joinRoom, openRoom } from '../../common/chatx/actions';
 import Room from './Room';
 import { View, Divider } from '../app/components';
 import { bindActionCreators } from 'redux';
 
 
-const Rooms = ( {rooms, myuid, onRoomJoin} ) => {
+const Rooms = ( {rooms, myuid, onRoomJoin, onRoomOpen} ) => {
   return (
     <View>
       {rooms.valueSeq().map((room, i) => {
@@ -15,6 +15,7 @@ const Rooms = ( {rooms, myuid, onRoomJoin} ) => {
             <Room
               room={room}
               onJoinClicked={() => onRoomJoin(myuid, room.id)}
+              onOpenClicked={() => onRoomOpen(room.id)}
             />
             { i !== rooms.size - 1 ? <Divider /> : ''}
           </div>
@@ -28,6 +29,7 @@ const Rooms = ( {rooms, myuid, onRoomJoin} ) => {
 Rooms.propTypes = {
   rooms: PropTypes.object.isRequired,
   onRoomJoin: PropTypes.func.isRequired,
+  onRoomOpen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -37,12 +39,13 @@ const mapStateToProps = (state) => {
   rooms = rooms.map(r => r.set('joined', r.members.has(myuid)));
   return {
     rooms,
-    myuid,
+    myuid
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   onRoomJoin: bindActionCreators(joinRoom, dispatch),
+  onRoomOpen: bindActionCreators(openRoom, dispatch),
 });
 
 

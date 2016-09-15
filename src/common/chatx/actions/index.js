@@ -13,8 +13,10 @@ export const chatXStart = () => ({ firebase, dispatch }) => {
 export {
   createRoom,
   joinRoom,
+  openRoom,
   ON_ROOMS_VALUE,
   ON_ROOM_MEMBER_VALUE,
+  ON_ROOM_OPEN,
 } from './rooms';
 
 

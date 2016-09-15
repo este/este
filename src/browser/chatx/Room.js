@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Flex, Space, Badge, Button, Text } from '../app/components';
+import { Flex, Space, Badge, Button, Text, LinkBlock } from '../app/components';
 
-const Room = ({ room, onJoinClicked }) => {
+const Room = ({ room, onJoinClicked, onOpenClicked }) => {
   return (
     <Flex align="baseline">
-      <Text children={room.name} />
+      <LinkBlock is='a' href="javascript:void(0);" onClick={onOpenClicked}>
+        <Text children={room.name} />
+      </LinkBlock>
       <Space x={1} />
       <Badge
         circle
@@ -29,6 +31,7 @@ const Room = ({ room, onJoinClicked }) => {
 Room.propTypes = {
   room: PropTypes.object.isRequired,
   onJoinClicked: PropTypes.func.isRequired,
+  onOpenClicked: PropTypes.func.isRequired,
 };
 
 export default Room;
