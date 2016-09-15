@@ -33,6 +33,8 @@ const colors = {
 const borders = {
   borderRadius: 2,
   borderColor: 'rgba(0, 0, 0, .25)',
+  margin: 0,
+  padding: 0,
 };
 
 const inverted = colors.white;
@@ -67,10 +69,20 @@ export const compute = (theme: Object) => ({
     fontFamily: theme.fontFamily, // inherited
     fontSize: theme.fontSizes[4], // inherited
     lineHeight: theme.lineHeight, // inherited
+    margin: theme.margin,
+    padding: theme.padding,
   },
   Toolbar: {
-    marginTop: theme.scale[2],
+    marginTop: theme.scale[0],
     padding: theme.scale[2],
+  },
+  Footer: {
+    backgroundColor: theme.colors.gray,
+    fontFamily: theme.fontFamily,
+    fontSize: theme.fontSizes[4],
+    lineHeight: theme.lineHeight,
+    marginTop: theme.scale[2],
+    padding: theme.padding,
   },
 });
 
