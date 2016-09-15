@@ -49,6 +49,9 @@ ChatRoom.propTypes = {
 ChatRoom = queryFirebase(ChatRoom, ({ roomId, onMessagesReceived }) => ({
   path: `rooms-messages/${roomId}`,
   on: { value: snap => onMessagesReceived(roomId, snap.val()) },
+  params: [
+    ['limitToFirst', 10],
+  ],
 }));
 
 
