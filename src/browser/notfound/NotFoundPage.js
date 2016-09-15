@@ -12,7 +12,7 @@ const NotFoundPage = ({ intl }) => (
       description={intl.formatMessage(messages.p)}
       heading={intl.formatMessage(messages.h1)}
     />
-    <Link index to="/">
+    <Link to="/">
       <FormattedMessage {...messages.continue} />
     </Link>
   </View>

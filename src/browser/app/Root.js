@@ -1,35 +1,49 @@
 /* @flow */
+import App from './App';
+import BrowserHistory from 'react-history/BrowserHistory';
 import React from 'react';
-import createRoutes from '../createRoutes';
-import { Provider } from 'react-redux';
-import { Router, applyRouterMiddleware } from 'react-router';
-import { useScroll } from 'react-router-scroll';
+import { Provider as Redux, connect } from 'react-redux';
+import { StaticRouter } from 'react-router';
+import { setLocation } from '../../common/app/actions';
 
-type Props = {
-  history: Object,
+type RouterProps = {
+  dispatch: () => void,
+  pathname: string,
+};
+
+const Router = ({ dispatch, pathname }: RouterProps) => (
+  <BrowserHistory key={pathname}>
+    {({ history, action, location }) => {
+      setTimeout(() => {
+        dispatch(setLocation(location));
+      }, 0);
+      return (
+        <StaticRouter
+          action={action}
+          location={location}
+          onPush={history.push}
+          onReplace={history.replace}
+          blockTransitions={history.block}
+        >
+          <App />
+        </StaticRouter>
+      );
+    }}
+  </BrowserHistory>
+);
+
+const ConnectedRouter = connect(state => ({
+  pathname: state.app.location && state.app.location.pathname,
+}))(Router);
+
+type RootProps = {
   store: Object,
 };
 
-// Root component is the must for vanilla hot reloading.
-// Using HMR Directly: medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf
-const Root = ({ history, store }: Props) => {
-  const routes = createRoutes(store.getState);
-  return (
-    // Don't touch. Otherwise, server-side rendering will not work.
-    <Provider store={store}>
-      <Router
-        history={history}
-        render={applyRouterMiddleware(useScroll())}
-      >
-        {routes}
-      </Router>
-    </Provider>
-  );
-};
-
-Root.propTypes = {
-  history: React.PropTypes.object.isRequired,
-  store: React.PropTypes.object.isRequired,
-};
+const Root = ({ store }: RootProps) => (
+  <Redux store={store}>
+    <ConnectedRouter />
+  </Redux>
+);
 
 export default Root;

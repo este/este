@@ -4,7 +4,6 @@ import auth from './auth/reducer';
 import config from './config/reducer';
 import device from './device/reducer';
 import intl from './intl/reducer';
-import nativeRouting from '../native/routing/reducer';
 import themes from './themes/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
@@ -12,7 +11,6 @@ import { FIREBASE_ON_AUTH } from '../common/lib/redux-firebase/actions';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
 import { firebaseReducer as firebase } from './lib/redux-firebase';
-import { routerReducer as browserRouting } from 'react-router-redux';
 import { updateStateOnStorageLoad } from './configureStorage';
 
 const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
@@ -36,9 +34,9 @@ const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
 const configureReducer = (initialState: Object) => {
   // One day we will have universal routing, but we are not there yet.
   // jmurzy/react-router-native or React Router 4
-  const routing = initialState.device.isReactNative
-    ? nativeRouting
-    : browserRouting;
+  // const routing = initialState.device.isReactNative
+  //   ? nativeRouting
+  //   : browserRouting;
   let reducer = combineReducers({
     app,
     auth,
@@ -47,7 +45,7 @@ const configureReducer = (initialState: Object) => {
     fields,
     firebase,
     intl,
-    routing,
+    // routing,
     themes,
     todos,
     users,

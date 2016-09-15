@@ -5,15 +5,12 @@ import SignInError from './SignInError';
 import Social from './Social';
 import { Block, Loading, Message, View } from '../app/components';
 import { connect } from 'react-redux';
-import { locationShape, routerShape, withRouter } from 'react-router';
 
 class SignIn extends React.Component {
 
   static propTypes = {
     disabled: React.PropTypes.bool.isRequired,
-    location: locationShape,
     redirectTo: React.PropTypes.string.isRequired,
-    router: routerShape,
     viewer: React.PropTypes.object,
   };
 
@@ -64,8 +61,6 @@ class SignIn extends React.Component {
   }
 
 }
-
-SignIn = withRouter(SignIn);
 
 export default connect(state => ({
   disabled: state.auth.formDisabled,

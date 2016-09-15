@@ -4,8 +4,6 @@ import mapFirebaseUserToAppUser from './mapFirebaseUserToAppUser';
 import messages from './messages';
 import { APP_OFFLINE, APP_ONLINE } from '../../app/actions';
 import { ValidationError } from '../validation';
-import { replace } from 'react-router-redux';
-import { selectTab } from '../../../native/routing/actions';
 
 export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
 export const FIREBASE_ON_AUTH = 'FIREBASE_ON_AUTH';
@@ -110,10 +108,10 @@ const onAuth = user => ({ dispatch, getState }) => {
     dispatch(saveUser(user));
   } else if (getState().users.viewer) {
     // Redirect to home page before sign out to ensure a valid view state.
-    const action = getState().device.isReactNative
-      ? selectTab('home')
-      : replace('/');
-    dispatch(action);
+    // const action = getState().device.isReactNative
+    //   ? selectTab('home')
+    //   : replace('/');
+    // dispatch(action);
   }
   return {
     type: FIREBASE_ON_AUTH,

@@ -6,27 +6,27 @@ import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import createStorageEngine from 'redux-storage-engine-localstorage';
 import uuid from 'uuid';
-import { browserHistory } from 'react-router';
 import { fromJSON } from '../common/transit';
-import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 const initialState = fromJSON(window.__INITIAL_STATE__); // eslint-disable-line no-underscore-dangle
+
 const reportingMiddleware = configureReporting({
   appVersion: initialState.config.appVersion,
   sentryUrl: initialState.config.sentryUrl,
   unhandledRejection: fn => window.addEventListener('unhandledrejection', fn),
 });
+
 const store = configureStore({
   initialState,
   platformDeps: { createStorageEngine, uuid },
-  platformMiddleware: [reportingMiddleware, routerMiddleware(browserHistory)],
+  platformMiddleware: [reportingMiddleware],
 });
-const history = syncHistoryWithStore(browserHistory, store);
+
 const appElement = document.getElementById('app');
 
 // Initial render.
 ReactDOM.render(
-  <Root history={history} store={store} />
+  <Root store={store} />
 , appElement);
 
 // Hot reload render.
@@ -36,7 +36,7 @@ if (module.hot) {
     const NextRoot = require('./app/Root').default;
 
     ReactDOM.render(
-      <NextRoot history={history} store={store} />
+      <NextRoot store={store} />
     , appElement);
   });
 }
