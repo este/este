@@ -6,6 +6,7 @@ const Room = Record({
   name: null,
   id: null,
   members: Map(),
+  joined: null,
 }, 'room');
 
 
