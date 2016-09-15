@@ -46,6 +46,10 @@ const LinkMessages = defineMessages({
     defaultMessage: 'Todos',
     id: 'app.links.todos',
   },
+  chatx: {
+    defaultMessage: 'ChatX',
+    id: 'app.links.chatx',
+  },
 });
 
 export default LinkMessages;

@@ -14,6 +14,7 @@ import Profile from './me/ProfilePage';
 import Settings from './me/SettingsPage';
 import SignIn from './auth/SignInPage';
 import Todos from './todos/TodosPage';
+import ChatX from './chatx/ChatXPage';
 
 const createRoutes = (getState: Function) => {
   const requireViewer = (nextState, replace) => {
@@ -28,6 +29,7 @@ const createRoutes = (getState: Function) => {
     <Route component={App} path="/">
       <IndexRoute component={Home} />
       <Route component={Fields} path="fields" />
+      <Route component={ChatX} path="chatx" />
       <Route component={Firebase} path="firebase" />
       <Route component={Intl} path="intl" />
       <Route component={Me} onEnter={requireViewer} path="me">
