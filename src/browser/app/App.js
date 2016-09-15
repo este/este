@@ -60,18 +60,18 @@ let App = ({ children, currentLocale, currentTheme }) => (
         >
 
           {children}
-        
+
         </Flexbox>
-        
+
         <Flexbox
           flex="0.1 0 auto"
           minWidth="100vw"
         >
-        
+
           <Footer
             minWidth="100vw"
           />
-        
+
         </Flexbox>
       </Flexbox>
     </Container>
