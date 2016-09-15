@@ -74,7 +74,7 @@ type RoomMemberShip {
 
 type RoomMessage {
   user: User,
-  message: ExtraLongRequiredString,
+  text: ExtraLongRequiredString,
   sentAt:  CurrentTimestamp
 }
 
