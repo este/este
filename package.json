@@ -86,6 +86,7 @@
     "ip": "^1.0.2",
     "make-error": "^1.0.4",
     "nconf": "^0.8.1",
+    "node-env-file": "^0.1.8",
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",
     "postcss-flexbugs-fixes": "^2.0.0",
