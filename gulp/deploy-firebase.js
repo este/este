@@ -1,8 +1,7 @@
-import childProcess from 'child_process';
+import spawn from 'cross-spawn';
 import gulp from 'gulp';
 
 gulp.task('deploy-firebase', ['to-html'], done => {
-  childProcess
-    .spawn('firebase', ['deploy'], { stdio: 'inherit' })
-    .on('close', done);
+  spawn('firebase', ['deploy'], { stdio: 'inherit' })
+  .on('close', done);
 });
