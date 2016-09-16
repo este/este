@@ -22,9 +22,9 @@ const AppFooter = () => (
   <Footer style={styles.footerBox}>
     <FormattedMessage {...messages.madeByHtml} />
     {'\u00a0'}
-    <Link to="https://twitter.com/steida">
+    {/* <Link to="https://twitter.com/steida">
       steida
-    </Link>
+    </Link> */}
   </Footer>
 );
 
