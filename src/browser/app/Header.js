@@ -3,7 +3,7 @@ import './Header.scss';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
-import { Link, Toolbar } from '../app/components';
+import { Link, Space, Toolbar } from '../app/components';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -24,24 +24,31 @@ const Header = ({ viewer }) => (
     <Link bold index inverted to="/" id="li" style={styles.toolbar.li}>
       <FormattedMessage {...linksMessages.home} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/firebase" id="li" style={styles.toolbar.li}>
       <FormattedMessage {...linksMessages.firebase} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/todos" id="li" style={styles.toolbar.li}>
       <FormattedMessage {...linksMessages.todos} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/fields" id="li" style={styles.toolbar.li}>
       <FormattedMessage {...linksMessages.fields} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/intl" id="li" style={styles.toolbar.li}>
       <FormattedMessage {...linksMessages.intl} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/offline" id="social" style={styles.toolbar.social}>
       <FormattedMessage {...linksMessages.offline} />
     </Link>
+    <Space x={2} />
     <Link bold inverted to="/me" id="social" style={styles.toolbar.social}>
       <FormattedMessage {...linksMessages.me} />
     </Link>
+    <Space x={2} />
     {!viewer &&
       <Link bold inverted to="/signin" id="social" style={styles.toolbar.social}>
         <FormattedMessage {...linksMessages.signIn} />
