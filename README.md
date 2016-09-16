@@ -78,7 +78,7 @@
 - [Facebook SDK for iOS](https://developers.facebook.com/docs/ios/) In order to make Facebook login work on iOS
 - [Facebook SDK for Android](https://developers.facebook.com/docs/android/) In order to make Facebook login work on Android
 - [firebase-cli](https://firebase.google.com/docs/cli/) `npm install -g firebase-tools`
-- [firebase-bolt](https://github.com/firebase/bolt) `npm install -g firebase-bolt`
+- [firebase-bolt](https://github.com/firebase/bolt) `npm install -g firebase-bolt` Note: install oscar-b/firebase-tools instead as it has the cross-spawn package update.
 - [react-native-cli](http://facebook.github.io/react-native/docs/getting-started.html) `npm install -g react-native-cli`
 
 If you are using different node versions on your machine, use [nvm](https://github.com/creationix/nvm) to manage them.
