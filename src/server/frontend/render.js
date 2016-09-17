@@ -1,5 +1,4 @@
 /* @flow */
-// import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
 import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
@@ -13,6 +12,12 @@ import serialize from 'serialize-javascript';
 import { Provider as Redux } from 'react-redux';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { toJSON } from '../../common/transit';
+
+// TODO: Redesign queryFirebaseServer.
+// import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
+// if (!process.env.IS_SERVERLESS) {
+//    await queryFirebaseServer(() => renderApp(store, renderProps));
+//  }
 
 const initialState = createInitialState();
 
@@ -93,7 +98,6 @@ const render = (req: Object, res: Object, next: Function) => {
     let status = 200;
     if (result.missed) {
       status = 404;
-      // TODO: Do not queryFirebase twice somehow.
       bodyMarkupWithHelmet = renderBody(store, context, req.url);
     }
     const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
