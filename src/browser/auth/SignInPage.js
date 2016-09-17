@@ -1,20 +1,61 @@
 /* @flow */
+import Email from './Email';
 import React from 'react';
-import SignIn from './SignIn';
+import SignInError from './SignInError';
+import Social from './Social';
 import linksMessages from '../../common/app/linksMessages';
-import { PageHeader, Title, View } from '../app/components';
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
+import {
+  Block,
+  Loading,
+  Message,
+  PageHeader,
+  Title,
+  View,
+} from '../app/components';
 
-const SignInPage = ({ intl }) => (
-  <View>
-    <Title message={linksMessages.signIn} />
-    <PageHeader heading={intl.formatMessage(linksMessages.signIn)} />
-    {/* <SignIn location={location} /> */}
-  </View>
+let SignInPage = ({ disabled, intl, location, viewer }) => (
+  viewer ?
+    <Redirect
+      to={{
+        pathname: (
+          location.state &&
+          location.state.from &&
+          location.state.from.pathname
+        ) || '/',
+      }}
+    />
+  :
+    <View>
+      <Title message={linksMessages.signIn} />
+      <PageHeader heading={intl.formatMessage(linksMessages.signIn)} />
+      <Block>
+        <Social />
+      </Block>
+      <Block>
+        <Email />
+      </Block>
+      <SignInError />
+      {disabled &&
+        <Loading>
+          {message => <Message>{message}</Message>}
+        </Loading>
+      }
+    </View>
 );
 
 SignInPage.propTypes = {
+  disabled: React.PropTypes.bool.isRequired,
   intl: intlShape,
+  location: React.PropTypes.object.isRequired,
+  viewer: React.PropTypes.object,
 };
 
-export default injectIntl(SignInPage);
+SignInPage = injectIntl(SignInPage);
+
+export default connect(state => ({
+  disabled: state.auth.formDisabled,
+  viewer: state.users.viewer,
+}))(SignInPage);

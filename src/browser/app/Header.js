@@ -13,7 +13,7 @@ const styles = {
 
 const Header = ({ viewer }) => (
   <Toolbar style={styles.toolbar}>
-    <Link bold index inverted to="/">
+    <Link bold inverted exactly to="/">
       <FormattedMessage {...linksMessages.home} />
     </Link>
     <Space x={2} />

@@ -25,18 +25,18 @@ const start = (WrappedComponent: Function) => {
     }
 
     render() {
-      const { intl } = this.props;
+      const { intl, ...props } = this.props;
       const { currentLocale, defaultLocale, initialNow, messages } = intl;
 
       return (
         <IntlProvider
           defaultLocale={defaultLocale}
           initialNow={initialNow}
-          key={currentLocale} // https://github.com/yahoo/react-intl/issues/234
+          key={currentLocale} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
           locale={currentLocale}
           messages={messages[currentLocale]}
         >
-          <WrappedComponent {...this.props} />
+          <WrappedComponent {...props} />
         </IntlProvider>
       );
     }

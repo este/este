@@ -5,11 +5,16 @@ import SignOut from '../auth/SignOut';
 import linksMessages from '../../common/app/linksMessages';
 import { Block, Image, Link, Space, Text, Title, View } from '../app/components';
 import { FormattedMessage } from 'react-intl';
+import { Match, Redirect } from 'react-router';
 import { connect } from 'react-redux';
+
+// Pages
+import Profile from './ProfilePage';
+import Settings from './SettingsPage';
 
 const Navbar = () => (
   <Block>
-    <Link index to="/me">
+    <Link exactly to="/me">
       <FormattedMessage {...linksMessages.me} />
     </Link>
     <Space x={2} />
@@ -23,39 +28,43 @@ const Navbar = () => (
   </Block>
 );
 
-const MePage = ({ children, viewer }) => {
-  const { displayName, email, photoURL } = viewer;
-
-  return (
+const MePage = ({ viewer }) => (
+  !viewer ?
+    <Redirect to={{ pathname: '/' }} />
+  :
     <View>
       <Title message={linksMessages.me} />
       <Navbar />
-      {children ||
-        <View>
-          <Text>{displayName}</Text>
-          <Block>
-            {photoURL ?
-              <Image role="presentation" src={photoURL} />
-            :
-              <Gravatar
-                default="retro"
-                email={email}
-                https
-                rating="x"
-                size={100}
-              />
-            }
-          </Block>
-          <SignOut />
-        </View>
-      }
+      <Match
+        exactly
+        pattern="/me"
+        render={() => (
+          <View>
+            <Text>{viewer.displayName}</Text>
+            <Block>
+              {viewer.photoURL ?
+                <Image role="presentation" src={viewer.photoURL} />
+              :
+                <Gravatar
+                  default="retro"
+                  email={viewer.email}
+                  https
+                  rating="x"
+                  size={100}
+                />
+              }
+            </Block>
+            <SignOut />
+          </View>
+        )}
+      />
+      <Match pattern="/me/profile" component={Profile} />
+      <Match pattern="/me/settings" component={Settings} />
     </View>
-  );
-};
+);
 
 MePage.propTypes = {
-  children: React.PropTypes.object,
-  viewer: React.PropTypes.object.isRequired,
+  viewer: React.PropTypes.object,
 };
 
 export default connect(state => ({

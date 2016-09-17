@@ -19,7 +19,7 @@ const stateToSave = [
 ];
 
 if (isReactNative) {
-  stateToSave.push(['routing', 'currentTab']);
+  stateToSave.push(['app', 'location']);
 }
 
 const invariantFeatureState = (state, feature) => invariant(

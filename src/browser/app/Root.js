@@ -12,11 +12,16 @@ type RouterProps = {
 };
 
 const Router = ({ dispatch, pathname }: RouterProps) => (
-  <BrowserHistory key={pathname}>
+  // TODO: Use ControlledRouter once it will be released.
+  <BrowserHistory
+    key={pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
+  >
     {({ history, action, location }) => {
-      setTimeout(() => {
-        dispatch(setLocation(location));
-      }, 0);
+      if (location.pathname !== pathname) {
+        setImmediate(() => {
+          dispatch(setLocation(location));
+        });
+      }
       return (
         <StaticRouter
           action={action}
@@ -40,6 +45,7 @@ type RootProps = {
   store: Object,
 };
 
+// We needs such Root for vanilla hot reloading.
 const Root = ({ store }: RootProps) => (
   <Redux store={store}>
     <ConnectedRouter />

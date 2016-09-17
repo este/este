@@ -8,11 +8,11 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Container } from '../app/components';
-import { Match, Miss } from 'react-router';
+import { Match, Miss, Redirect } from 'react-router';
 import { ThemeProvider } from '../../common/app/components';
 import { connect } from 'react-redux';
 
-// pages
+// Pages
 import Fields from '../fields/FieldsPage';
 import Firebase from '../firebase/FirebasePage';
 import Home from '../home/HomePage';
@@ -36,9 +36,35 @@ const bootstrap4Metas: any = [
   },
 ];
 
+let MatchWhenAuthorized = ({ component: Component, viewer, ...props }) => (
+  <Match
+    {...props}
+    render={renderProps => (
+      viewer ?
+        <Component {...renderProps} />
+      :
+        <Redirect
+          to={{
+            pathname: '/signin',
+            state: { from: renderProps.location },
+          }}
+        />
+    )}
+  />
+);
+
+MatchWhenAuthorized.propTypes = {
+  component: React.PropTypes.func.isRequired,
+  viewer: React.PropTypes.object,
+};
+
+MatchWhenAuthorized = connect(state => ({
+  viewer: state.users.viewer,
+}))(MatchWhenAuthorized);
+
 let App = ({ currentLocale, currentTheme }) => (
   <ThemeProvider
-    key={currentTheme} // The same as github.com/yahoo/react-intl/issues/234
+    key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
     theme={themes[currentTheme] || themes.initial}
   >
     <Container>
@@ -61,7 +87,7 @@ let App = ({ currentLocale, currentTheme }) => (
       <Match pattern="/fields" component={Fields} />
       <Match pattern="/firebase" component={Firebase} />
       <Match pattern="/intl" component={Intl} />
-      <Match pattern="/me" component={Me} />
+      <MatchWhenAuthorized pattern="/me" component={Me} />
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />

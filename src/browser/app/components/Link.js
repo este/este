@@ -4,28 +4,19 @@ import pseudo from './pseudo';
 import { Base } from 'rebass';
 import { Link as RouterLink } from 'react-router';
 
-const Link = ({ bold, index, inverted, pseudo, to, ...props }, { rebass }) => {
-  // React Router does not support absolute paths.
-  const isExternalLink = to.includes('://');
-  const isActive = false;
-  // TODO: Jak na aktivni? A funguje to?
-  // const isActive = !isExternalLink && router.isActive(to, index);
-
+const Link = ({ bold, exactly, inverted, pseudo, to, ...props }, { rebass }) => {
   const baseStyle = {
     color: inverted ? rebass.inverted : rebass.link.color,
     ...(bold && rebass.link.bold),
-    // Lord Vader's Former Handle Anakin.
     ...(rebass.link.link),
     ...(pseudo.hover && rebass.link.hover),
-    ...(isActive && rebass.link.active),
   };
-
   const linkProps = {
     ...props,
     baseStyle,
     className: 'Link',
   };
-
+  const isExternalLink = to.includes('://');
   return isExternalLink ? (
     <Base
       {...linkProps}
@@ -35,6 +26,8 @@ const Link = ({ bold, index, inverted, pseudo, to, ...props }, { rebass }) => {
   ) : (
     <Base
       {...linkProps}
+      activeOnlyWhenExact={exactly}
+      activeStyle={rebass.link.active}
       is={RouterLink}
       to={to}
     />
@@ -43,7 +36,7 @@ const Link = ({ bold, index, inverted, pseudo, to, ...props }, { rebass }) => {
 
 Link.propTypes = {
   bold: React.PropTypes.bool,
-  index: React.PropTypes.bool, // TODO: Rename to RR4 terminology.
+  exactly: React.PropTypes.bool,
   inverted: React.PropTypes.bool,
   pseudo: React.PropTypes.object.isRequired,
   to: React.PropTypes.string.isRequired,

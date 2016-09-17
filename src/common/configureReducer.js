@@ -25,18 +25,12 @@ const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
       config: initialState.config,
       device: initialState.device,
       intl: initialState.intl,
-      routing: state.routing, // Routing state has to be reused.
     };
   }
   return reducer(state, action);
 };
 
 const configureReducer = (initialState: Object) => {
-  // One day we will have universal routing, but we are not there yet.
-  // jmurzy/react-router-native or React Router 4
-  // const routing = initialState.device.isReactNative
-  //   ? nativeRouting
-  //   : browserRouting;
   let reducer = combineReducers({
     app,
     auth,
@@ -45,7 +39,6 @@ const configureReducer = (initialState: Object) => {
     fields,
     firebase,
     intl,
-    // routing,
     themes,
     todos,
     users,
