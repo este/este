@@ -10,9 +10,9 @@ const LinkMessages = defineMessages({
     defaultMessage: 'Fields',
     id: 'app.links.fields',
   },
-  firebase: {
-    defaultMessage: 'Firebase',
-    id: 'app.links.firebase',
+  users: {
+    defaultMessage: 'Users',
+    id: 'app.links.users',
   },
   home: {
     defaultMessage: 'Home',
