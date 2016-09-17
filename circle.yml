@@ -6,4 +6,4 @@ machine:
 # circleci.com/docs/how-cache-works/#clearing-the-cache
 dependencies:
   post:
-    - rm -r ~/.gradle
+    - rm -fr ~/.gradle
