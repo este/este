@@ -23,3 +23,6 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAsse
   .server(rootDir, () => {
     require('./main');
   });
+
+// https://github.com/ReactTraining/react-router/issues/3886
+global.location = {};

@@ -1,15 +1,17 @@
 /* @flow */
+// import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
+import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
+import ServerRouter from 'react-router/ServerRouter';
 import config from '../config';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
+import createServerRenderContext from 'react-router/createServerRenderContext';
 import serialize from 'serialize-javascript';
 import { Provider as Redux } from 'react-redux';
-import { ServerRouter, createServerRenderContext } from 'react-router'
-import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
-import { renderToStaticMarkup, renderToString } from 'react-dom/server'
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { toJSON } from '../../common/transit';
 
 const initialState = createInitialState();
@@ -32,25 +34,57 @@ const createStore = (req) => configureStore({
   },
 });
 
-const renderApp = (store, context, location) => {
+const renderBody = (store, context, location) => {
   const markup = renderToString(
     <Redux store={store}>
       <ServerRouter
         context={context}
         location={location}
       >
-        <App/>
+        <App />
       </ServerRouter>
     </Redux>
   );
   return { markup, helmet: Helmet.rewind() };
 };
 
+const renderScripts = (state, appJsFilename) =>
+  // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
+  // TODO: Switch to CSP, https://github.com/este/este/pull/731
+  `
+    <script>
+      window.__INITIAL_STATE__ = ${serialize(toJSON(state))};
+    </script>
+    <script src="${appJsFilename}"></script>
+  `;
+
+const renderHtml = (state, bodyMarkupWithHelmet) => {
+  const {
+    styles: { app: appCssFilename },
+    javascript: { app: appJsFilename },
+  } = global.webpackIsomorphicTools.assets();
+  if (!config.isProduction) {
+    global.webpackIsomorphicTools.refresh();
+  }
+  const { markup: bodyMarkup, helmet } = bodyMarkupWithHelmet;
+  const scriptsMarkup = renderScripts(state, appJsFilename);
+  const markup = renderToStaticMarkup(
+    <Html
+      appCssFilename={appCssFilename}
+      bodyHtml={`<div id="app">${bodyMarkup}</div>${scriptsMarkup}`}
+      googleAnalyticsId={config.googleAnalyticsId}
+      helmet={helmet}
+      isProduction={config.isProduction}
+    />
+  );
+  return `<!DOCTYPE html>${markup}`;
+};
+
 const render = (req: Object, res: Object, next: Function) => {
   try {
     const context = createServerRenderContext();
     const store = createStore(req);
-    let appMarkupWithHelmet = renderApp(store, context, req.url);
+    let bodyMarkupWithHelmet = renderBody(store, context, req.url);
     const result = context.getResult();
     if (result.redirect) {
       res.redirect(301, result.redirect.pathname + result.redirect.search);
@@ -59,11 +93,11 @@ const render = (req: Object, res: Object, next: Function) => {
     let status = 200;
     if (result.missed) {
       status = 404;
-      // TODO: Do not fetch twice somehow.
-      appMarkupWithHelmet = renderApp(store, context, req.url);
+      // TODO: Do not queryFirebase twice somehow.
+      bodyMarkupWithHelmet = renderBody(store, context, req.url);
     }
-    // TODO:
-    // res.status(status).send(html);
+    const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
+    res.status(status).send(htmlMarkup);
   } catch (error) {
     console.log(error);
     next(error);
@@ -71,76 +105,3 @@ const render = (req: Object, res: Object, next: Function) => {
 };
 
 export default render;
-
-// const renderScripts = (state, headers, hostname, appJsFilename) =>
-//   // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-//   // TODO: Switch to CSP, https://github.com/este/este/pull/731
-//   `
-//     <script>
-//       window.__INITIAL_STATE__ = ${serialize(toJSON(state))};
-//     </script>
-//     <script src="${appJsFilename}"></script>
-//   `;
-//
-// const renderPage = (store, renderProps, req) => {
-//   const state = store.getState();
-//   // No server routing for server-less apps.
-//   if (process.env.IS_SERVERLESS) {
-//     delete state.routing;
-//   }
-//   const { headers, hostname } = req;
-//   const { appHtml, helmet } = renderApp(store, renderProps);
-//   const {
-//     styles: { app: appCssFilename },
-//     javascript: { app: appJsFilename },
-//   } = webpackIsomorphicTools.assets();
-//   const scriptsHtml = renderScripts(state, headers, hostname, appJsFilename);
-//   if (!config.isProduction) {
-//     webpackIsomorphicTools.refresh();
-//   }
-//   const docHtml = ReactDOMServer.renderToStaticMarkup(
-//     <Html
-//       appCssFilename={appCssFilename}
-//       bodyHtml={`<div id="app">${appHtml}</div>${scriptsHtml}`}
-//       googleAnalyticsId={config.googleAnalyticsId}
-//       helmet={helmet}
-//       isProduction={config.isProduction}
-//     />
-//   );
-//   return `<!DOCTYPE html>${docHtml}`;
-// };
-//
-// const render = (req, res, next) => {
-//   const memoryHistory = createMemoryHistory(req.originalUrl);
-//   const store = configureStore({
-//     initialState: createRequestInitialState(req),
-//     platformMiddleware: [routerMiddleware(memoryHistory)],
-//   });
-//   const history = syncHistoryWithStore(memoryHistory, store);
-//   const routes = createRoutes(store.getState);
-//   const location = req.url;
-//
-//   match({ history, routes, location }, async (error, redirectLocation, renderProps) => {
-//     if (redirectLocation) {
-//       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-//       return;
-//     }
-//     if (error) {
-//       next(error);
-//       return;
-//     }
-//     try {
-//       if (!process.env.IS_SERVERLESS) {
-//         await queryFirebaseServer(() => renderApp(store, renderProps));
-//       }
-//       const html = renderPage(store, renderProps, req);
-//       const status = renderProps.routes
-//         .some(route => route.path === '*') ? 404 : 200;
-//       res.status(status).send(html);
-//     } catch (error) {
-//       next(error);
-//     }
-//   });
-// };
-//
-// export default render;

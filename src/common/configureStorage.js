@@ -6,9 +6,9 @@ import { APP_STORAGE_LOAD } from './app/actions';
 import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+// const isReactNative =
+//   typeof navigator === 'object' &&
+//   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 const stateToSave = [
   ['fields'],
@@ -18,9 +18,10 @@ const stateToSave = [
   ['users', 'viewer'],
 ];
 
-if (isReactNative) {
-  stateToSave.push(['app', 'location']);
-}
+// TODO: Do it.
+// if (isReactNative) {
+//   stateToSave.push(['app', 'location']);
+// }
 
 const invariantFeatureState = (state, feature) => invariant(
   Iterable.isIterable(state[feature]),
