@@ -3,6 +3,7 @@ import Button from './Button';
 import CenteredContainer from './CenteredContainer';
 import Checkbox from './Checkbox';
 import Container from './Container';
+import Link from './Link';
 import Text from './Text';
 import TextInput from './TextInput';
 import {
@@ -20,6 +21,7 @@ export {
   CenteredContainer,
   Checkbox,
   Container,
+  Link,
   FormattedDate,
   FormattedMessage,
   FormattedNumber,

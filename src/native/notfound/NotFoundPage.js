@@ -5,7 +5,6 @@ import theme from '../app/themes/initial';
 import { Button, CenteredContainer, FormattedMessage } from '../app/components';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { selectTab } from '../routing/actions';
 
 const styles = StyleSheet.create({
   heading: {
@@ -20,11 +19,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const NotFoundPage = ({ selectTab }) => (
+// Use NotFoundPage for missing dynamic data. For non existing static page, use
+// redirect to home rather.
+const NotFoundPage = () => (
   <CenteredContainer>
     <FormattedMessage {...messages.h1} style={styles.heading} />
     <FormattedMessage {...messages.p} style={styles.paragraph} />
-    <Button onPress={() => selectTab('home')}>
+    {/* onPress={() => selectTab('home')} */}
+    <Button>
       <FormattedMessage {...messages.continue} style={styles.button} />
     </Button>
   </CenteredContainer>
@@ -34,4 +36,4 @@ NotFoundPage.propTypes = {
   selectTab: React.PropTypes.func.isRequired,
 };
 
-export default connect(null, { selectTab })(NotFoundPage);
+export default NotFoundPage;

@@ -6,10 +6,6 @@ import { APP_STORAGE_LOAD } from './app/actions';
 import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
-// const isReactNative =
-//   typeof navigator === 'object' &&
-//   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
-
 const stateToSave = [
   ['fields'],
   ['intl', 'currentLocale'],
@@ -18,7 +14,10 @@ const stateToSave = [
   ['users', 'viewer'],
 ];
 
-// TODO: Do it.
+// const isReactNative =
+//   typeof navigator === 'object' &&
+//   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+//
 // if (isReactNative) {
 //   stateToSave.push(['app', 'location']);
 // }

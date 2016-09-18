@@ -8,8 +8,8 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Container } from '../app/components';
-import { Match, Miss, Redirect } from 'react-router';
-import { ThemeProvider } from '../../common/app/components';
+import { Match, Miss } from 'react-router';
+import { MatchWhenAuthorized, ThemeProvider } from '../../common/app/components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -36,32 +36,6 @@ const bootstrap4Metas: any = [
   },
 ];
 
-let MatchWhenAuthorized = ({ component: Component, viewer, ...props }) => (
-  <Match
-    {...props}
-    render={renderProps => (
-      viewer ?
-        <Component {...renderProps} />
-      :
-        <Redirect
-          to={{
-            pathname: '/signin',
-            state: { from: renderProps.location },
-          }}
-        />
-    )}
-  />
-);
-
-MatchWhenAuthorized.propTypes = {
-  component: React.PropTypes.func.isRequired,
-  viewer: React.PropTypes.object,
-};
-
-MatchWhenAuthorized = connect(state => ({
-  viewer: state.users.viewer,
-}))(MatchWhenAuthorized);
-
 let App = ({ currentLocale, currentTheme }) => (
   <ThemeProvider
     key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
@@ -87,10 +61,10 @@ let App = ({ currentLocale, currentTheme }) => (
       <Match pattern="/fields" component={Fields} />
       <Match pattern="/firebase" component={Firebase} />
       <Match pattern="/intl" component={Intl} />
-      <MatchWhenAuthorized pattern="/me" component={Me} />
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />
+      <MatchWhenAuthorized pattern="/me" component={Me} />
       <Miss component={NotFound} />
       <Footer />
     </Container>

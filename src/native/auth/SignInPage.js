@@ -6,7 +6,6 @@ import theme from '../app/themes/initial';
 import { Container } from '../app/components';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { selectTab } from '../routing/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,4 +56,4 @@ class SignInPage extends React.Component {
 
 export default connect(state => ({
   viewer: state.users.viewer,
-}), { selectTab })(SignInPage);
+}))(SignInPage);

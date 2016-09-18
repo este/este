@@ -4,24 +4,31 @@ import Menu from './Menu';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
-import withRouting from '../routing/withRouting';
-import { Alert, Container } from './components';
+import { Alert, Container, Text } from './components';
+import { Match, Miss, Redirect } from 'react-router';
+import { MatchWhenAuthorized } from '../../common/app/components';
 import { Platform, StatusBar } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import { showMenu } from '../../common/app/actions';
 
+// Pages
+import Home from '../home/HomePage';
+import Intl from '../intl/IntlPage';
+import Me from '../me/MePage';
+import Offline from '../offline/OfflinePage';
+import SignIn from '../auth/SignInPage';
+import Todos from '../todos/TodosPage';
+
 let App = ({
-  currentTab,
   intl,
   menuShown,
-  routing,
   showMenu,
   storageLoaded,
 }) => {
   // TODO: Add splash screen.
   if (!storageLoaded) return null;
-  const route = routing.routes.get(currentTab);
   return (
     <Container inverse>
       {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.
@@ -33,9 +40,17 @@ let App = ({
         onChange={showMenu}
       >
         <Container>
-          <Header title={intl.formatMessage(route.title)} />
+          {/* <Header title={intl.formatMessage(route.title)} /> */}
           <Alert />
-          <route.Component />
+          <Match exactly pattern="/" component={Home} />
+          <Match pattern="/intl" component={Intl} />
+          <Match pattern="/offline" component={Offline} />
+          <Match pattern="/signin" component={SignIn} />
+          <Match pattern="/todos" component={Todos} />
+          <MatchWhenAuthorized pattern="/me" component={Me} />
+          {/* It's better to render Home than 404 for unknown top page. */}
+          {/* Use NotFoundPage for dynamic data. */}
+          <Miss component={Home} />
         </Container>
       </SideMenu>
     </Container>
@@ -43,20 +58,15 @@ let App = ({
 };
 
 App.propTypes = {
-  currentTab: React.PropTypes.string.isRequired,
   intl: intlShape.isRequired,
   menuShown: React.PropTypes.bool.isRequired,
-  routing: React.PropTypes.object.isRequired,
   showMenu: React.PropTypes.func.isRequired,
   storageLoaded: React.PropTypes.bool.isRequired,
 };
 
 App = injectIntl(App);
 
-App = withRouting(App);
-
 App = connect(state => ({
-  currentTab: state.routing.currentTab,
   menuShown: state.app.menuShown,
   storageLoaded: state.app.storageLoaded,
 }), { showMenu })(App);

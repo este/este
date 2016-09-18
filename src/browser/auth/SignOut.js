@@ -27,7 +27,7 @@ SignOut.propTypes = {
 };
 
 SignOut.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: React.PropTypes.object,
 };
 
 export default connect(null, { signOut })(SignOut);

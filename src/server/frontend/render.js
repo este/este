@@ -3,13 +3,12 @@ import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
-import ServerRouter from 'react-router/ServerRouter';
 import config from '../config';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
-import createServerRenderContext from 'react-router/createServerRenderContext';
 import serialize from 'serialize-javascript';
 import { Provider as Redux } from 'react-redux';
+import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { toJSON } from '../../common/transit';
 

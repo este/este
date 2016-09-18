@@ -11,11 +11,9 @@ type RouterProps = {
   pathname: string,
 };
 
+// TODO: Use ControlledRouter once it will be released.
 const Router = ({ dispatch, pathname }: RouterProps) => (
-  // TODO: Use ControlledRouter once it will be released.
-  <BrowserHistory
-    key={pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-  >
+  <BrowserHistory>
     {({ history, action, location }) => {
       if (location.pathname !== pathname) {
         setImmediate(() => {
@@ -25,10 +23,11 @@ const Router = ({ dispatch, pathname }: RouterProps) => (
       return (
         <StaticRouter
           action={action}
+          blockTransitions={history.block}
+          key={pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
           location={location}
           onPush={history.push}
           onReplace={history.replace}
-          blockTransitions={history.block}
         >
           <App />
         </StaticRouter>
