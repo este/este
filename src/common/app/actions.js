@@ -1,5 +1,6 @@
 /* @flow weak */
 import { firebaseStart } from '../lib/redux-firebase/actions';
+import { chatXStart } from '../chatx/actions';
 
 export const APP_OFFLINE = 'APP_OFFLINE';
 export const APP_ONLINE = 'APP_ONLINE';
@@ -21,6 +22,7 @@ export const start = () => {
     loadStorage(dispatch, storageEngine).finally(() => {
       dispatch(firebaseStart());
     });
+    dispatch(chatXStart());
     return {
       type: APP_START,
     };

@@ -1,0 +1,27 @@
+{
+  "rooms": {
+    "854ecee8-7a62-11e6-8b77-86f30ca893d3": {
+      "name": "Tavern",
+      "createdAt": 1473847488
+    }
+  },
+  "rooms-members": {
+    "854ecee8-7a62-11e6-8b77-86f30ca893d3": {
+      "XXd5r6CyNZf4roaLBgzFzcwJfRZ2": {
+        "joinedAt": 1473847488
+      }
+    }
+  },
+  "rooms-messages": {
+    "854ecee8-7a62-11e6-8b77-86f30ca893d3": {
+      "854ed776-7a62-11e6-8b77-86f30ca893d3": {
+        "user": {
+          "id": "XXd5r6CyNZf4roaLBgzFzcwJfRZ2",
+          "displayName": "Alex"
+        },
+        "message": "Hello here!",
+        "sentAt": 1473847488
+      }
+    }
+  }
+}

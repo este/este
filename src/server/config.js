@@ -17,10 +17,10 @@ nconf.defaults({
   defaultLocale: 'en',
   firebase: {
     // To get the config, just click Add web app from the overview page.
-    apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
-    authDomain: 'este.firebaseapp.com',
-    databaseURL: 'https://este.firebaseio.com',
-    storageBucket: 'project-808488257248094054.appspot.com',
+    apiKey: 'AIzaSyCBXvbbLuoudj63oquUhT8Il30oUQHxvGM',
+    authDomain: 'este-efounders-test.firebaseapp.com',
+    databaseURL: 'https://este-efounders-test.firebaseio.com',
+    storageBucket: 'este-efounders-test.appspot.com',
   },
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',

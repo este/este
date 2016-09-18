@@ -8,6 +8,7 @@ import nativeRouting from '../native/routing/reducer';
 import themes from './themes/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
+import chatx from './chatx/reducers';
 import { FIREBASE_ON_AUTH } from '../common/lib/redux-firebase/actions';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
@@ -51,6 +52,7 @@ const configureReducer = (initialState: Object) => {
     themes,
     todos,
     users,
+    chatx,
   });
 
   // The power of higher-order reducers, http://slides.com/omnidan/hor
