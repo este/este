@@ -4,11 +4,10 @@ import Menu from './Menu';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
-import { Alert, Container, Text } from './components';
-import { Match, Miss, Redirect } from 'react-router';
+import { Alert, Container } from './components';
+import { Match, Miss } from 'react-router';
 import { MatchWhenAuthorized } from '../../common/app/components';
 import { Platform, StatusBar } from 'react-native';
-import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import { showMenu } from '../../common/app/actions';
@@ -49,7 +48,7 @@ let App = ({
           <Match pattern="/todos" component={Todos} />
           <MatchWhenAuthorized pattern="/me" component={Me} />
           {/* It's better to render Home than 404 for unknown top page. */}
-          {/* Use NotFoundPage for dynamic data. */}
+          {/* github.com/ReactTraining/react-router/issues/3905 */}
           <Miss component={Home} />
         </Container>
       </SideMenu>

@@ -9,7 +9,7 @@ const Link = ({
   exactly,
   onPress,
   style,
-  to
+  to,
 }, { router }) => (
   <Match exactly={exactly} pattern={to}>
     {({ matched }) => (
@@ -17,7 +17,7 @@ const Link = ({
         onPress={() => {
           router.transitionTo(to);
           if (!onPress) return;
-          setTimeout(onPress, 0);
+          onPress();
         }}
         style={[style, matched && activeStyle]}
       >
@@ -35,6 +35,7 @@ Link.propTypes = {
   activeStyle: React.PropTypes.any,
   children: React.PropTypes.node.isRequired,
   exactly: React.PropTypes.bool,
+  onPress: React.PropTypes.func,
   style: React.PropTypes.any,
   to: React.PropTypes.oneOfType([
     React.PropTypes.string,
