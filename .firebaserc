@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "flamingocity-staging",
+    "production": "flamingocity-cf5f7"
+  }
+}

@@ -10,6 +10,7 @@ import start from '../../common/app/start';
 import { Container } from '../app/components';
 import { ThemeProvider } from '../../common/app/components';
 import { connect } from 'react-redux';
+import Flexbox from 'flexbox-react';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
@@ -30,23 +31,49 @@ let App = ({ children, currentLocale, currentTheme }) => (
     theme={themes[currentTheme] || themes.initial}
   >
     <Container>
-      <Helmet
-        htmlAttributes={{ lang: currentLocale }}
-        meta={[
-          ...bootstrap4Metas,
-          {
-            name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React apps',
-          },
-          ...favicon.meta,
-        ]}
-        link={[
-          ...favicon.link,
-        ]}
-      />
-      <Header />
-      {children}
-      <Footer />
+      <Flexbox
+        flexDirection="column"
+        minHeight="100vh"
+        minWidth="100vw"
+        maxWidth="1195px"
+      >
+        <Helmet
+          htmlAttributes={{ lang: currentLocale }}
+          meta={[
+            ...bootstrap4Metas,
+            {
+              name: 'description',
+              content: 'bespoke Fashion Designs Blog.',
+            },
+            ...favicon.meta,
+          ]}
+          link={[
+            ...favicon.link,
+          ]}
+        />
+        <Header />
+        <Flexbox
+          element="main"
+          minWidth="100vw"
+          paddingLeft="10px"
+          flex="1 0 auto"
+        >
+
+          {children}
+
+        </Flexbox>
+
+        <Flexbox
+          flex="0.1 0 auto"
+          minWidth="100vw"
+        >
+
+          <Footer
+            minWidth="100vw"
+          />
+
+        </Flexbox>
+      </Flexbox>
     </Container>
   </ThemeProvider>
 );

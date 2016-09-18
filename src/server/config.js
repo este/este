@@ -17,12 +17,13 @@ nconf.defaults({
   defaultLocale: 'en',
   firebase: {
     // To get the config, just click Add web app from the overview page.
-    apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
-    authDomain: 'este.firebaseapp.com',
-    databaseURL: 'https://este.firebaseio.com',
-    storageBucket: 'project-808488257248094054.appspot.com',
+    apiKey: 'AIzaSyAf2wggqN85qBCIOaSOn7VudauFxYkAVt4',
+    authDomain: 'flamingocity-cf5f7.firebaseapp.com',
+    databaseURL: 'https://flamingocity-cf5f7.firebaseio.com',
+    storageBucket: 'flamingocity-cf5f7.appspot.com',
+    messagingSenderId: '683542758790',
   },
-  googleAnalyticsId: 'UA-XXXXXXX-X',
+  googleAnalyticsId: 'UA-84205440-1',
   isProduction: process.env.NODE_ENV === 'production',
   locales: ['cs', 'de', 'en', 'es', 'fr', 'pt', 'ro'],
   port: process.env.PORT || 3000,
@@ -31,7 +32,7 @@ nconf.defaults({
   // How do we access a website running on localhost from mobile browser?
   // stackoverflow.com/questions/3132105
   remoteHotReload: false,
-  sentryUrl: 'https://f297cec9c9654088b8ccf1ea9136c458@app.getsentry.com/77415',
+  sentryUrl: 'https://e94b8d75c0a842c28271d35e7d95811b@sentry.io/99300',
 });
 
 export default nconf.get();

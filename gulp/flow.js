@@ -1,8 +1,7 @@
-import childProcess from 'child_process';
+import spawn from 'cross-spawn';
 import gulp from 'gulp';
 
 gulp.task('flow', done => {
-  childProcess
-    .spawn('npm', ['run', 'flow'], { stdio: 'inherit' })
-    .on('close', done);
+  spawn('npm', ['run', 'flow'], { stdio: 'inherit' })
+  .on('close', done);
 });

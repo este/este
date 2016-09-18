@@ -1,22 +1,30 @@
 /* @flow */
 import React from 'react';
-import { Footer, Link } from '../app/components';
+import { Footer } from '../app/components';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   madeByHtml: {
-    defaultMessage: 'Made with love by',
+    defaultMessage: '©2016 Flamingo City.',
     id: 'footer.madeByHtml',
   },
 });
 
+const styles = {
+  footerBox: {
+    minWidth: '100%',
+    borderTop: 'none',
+    paddingLeft: '10px',
+  },
+};
+
 const AppFooter = () => (
-  <Footer>
+  <Footer style={styles.footerBox}>
     <FormattedMessage {...messages.madeByHtml} />
     {'\u00a0'}
-    <Link to="https://twitter.com/steida">
+    {/* <Link to="https://twitter.com/steida">
       steida
-    </Link>
+    </Link> */}
   </Footer>
 );
 
