@@ -3,7 +3,7 @@ import React from 'react';
 import createRoutes from '../createRoutes';
 import { Provider } from 'react-redux';
 import { Router, applyRouterMiddleware } from 'react-router';
-import { useScroll } from 'react-router-scroll';
+import useScroll from 'react-router-scroll/lib/useScroll';
 
 type Props = {
   history: Object,
