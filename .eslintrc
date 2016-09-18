@@ -29,5 +29,7 @@
     "react-native/split-platform-components": 2,
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
+    "linebreak-style": 0,
+    "arrow-parens": 0,
   }
 }

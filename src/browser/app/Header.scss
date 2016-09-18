@@ -1,0 +1,20 @@
+@media all and (max-width: 1000px) {
+  Toolbar {
+    flex-wrap: wrap;
+  }
+  
+  Toolbar #li {
+    flex: 1 1 50%;
+  }
+  
+  Toolbar #social {
+      flex: 1 1 25%;
+  }
+  
+}
+
+@media all and (max-width: 500px) {
+	Toolbar #li {
+		flex-basis: 100%;
+	}
+} 
