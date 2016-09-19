@@ -102,16 +102,10 @@ const saveUser = user => ({ firebase }) => {
   };
 };
 
-const onAuth = user => ({ dispatch, getState }) => {
+const onAuth = user => ({ dispatch }) => {
   if (user) {
     // Save user after successful auth to possible update its profile data.
     dispatch(saveUser(user));
-  } else if (getState().users.viewer) {
-    // Redirect to home page before sign out to ensure a valid view state.
-    // const action = getState().device.isReactNative
-    //   ? selectTab('home')
-    //   : replace('/');
-    // dispatch(action);
   }
   return {
     type: FIREBASE_ON_AUTH,
