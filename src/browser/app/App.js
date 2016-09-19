@@ -8,8 +8,8 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Container } from '../app/components';
-import { Match, Miss } from 'react-router';
-import { MatchWhenAuthorized, ThemeProvider } from '../../common/app/components';
+import { Match, ThemeProvider } from '../../common/app/components';
+import { Miss } from 'react-router';
 import { connect } from 'react-redux';
 
 // Pages
@@ -64,7 +64,7 @@ let App = ({ currentLocale, currentTheme }) => (
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />
-      <MatchWhenAuthorized pattern="/me" component={Me} />
+      <Match authorized pattern="/me" component={Me} />
       <Miss component={NotFound} />
       <Footer />
     </Container>
