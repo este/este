@@ -27,7 +27,7 @@ const getImageSource = viewer => viewer.photoURL || gravatar.imageUrl({
 
 const MePage = ({ viewer }) => (
   !viewer ?
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to="/" />
   :
     <CenteredContainer>
       <View>
