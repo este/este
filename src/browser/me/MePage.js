@@ -12,32 +12,36 @@ import { connect } from 'react-redux';
 import Profile from './ProfilePage';
 import Settings from './SettingsPage';
 
-const Navbar = () => (
+const Navbar = ({ pathname }) => (
   <Block>
-    <Link exactly to="/me">
+    <Link exactly to={pathname}>
       <FormattedMessage {...linksMessages.me} />
     </Link>
     <Space x={2} />
-    <Link to="/me/profile">
+    <Link to={`${pathname}/profile`}>
       <FormattedMessage {...linksMessages.profile} />
     </Link>
     <Space x={2} />
-    <Link to="/me/settings">
+    <Link to={`${pathname}/settings`}>
       <FormattedMessage {...linksMessages.settings} />
     </Link>
   </Block>
 );
 
-const MePage = ({ viewer }) => (
+Navbar.propTypes = {
+  pathname: React.PropTypes.string.isRequired,
+};
+
+const MePage = ({ pathname, viewer }) => (
   !viewer ?
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to="/" />
   :
     <View>
       <Title message={linksMessages.me} />
-      <Navbar />
+      <Navbar pathname={pathname} />
       <Match
         exactly
-        pattern="/me"
+        pattern={pathname}
         render={() => (
           <View>
             <Text>{viewer.displayName}</Text>
@@ -58,12 +62,13 @@ const MePage = ({ viewer }) => (
           </View>
         )}
       />
-      <Match pattern="/me/profile" component={Profile} />
-      <Match pattern="/me/settings" component={Settings} />
+      <Match pattern={`${pathname}/profile`} component={Profile} />
+      <Match pattern={`${pathname}/settings`} component={Settings} />
     </View>
 );
 
 MePage.propTypes = {
+  pathname: React.PropTypes.string.isRequired,
   viewer: React.PropTypes.object,
 };
 
