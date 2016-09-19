@@ -7,15 +7,21 @@ import { StaticRouter } from 'react-router';
 import { setLocation } from '../../common/app/actions';
 
 type RouterProps = {
+  appLocation: ?Object,
   dispatch: () => void,
-  pathname: string,
+  pathname: ?string,
 };
 
+const getMemoryHistoryInitialState = appLocation => ({
+  ...(appLocation && {
+    initialEntries: [appLocation],
+    initialIndex: 0,
+  }),
+});
+
 // TODO: Use ControlledRouter once it will be released.
-const Router = ({ dispatch, pathname }: RouterProps) => (
-  // initialEntries={initialEntries}
-  // initialIndex={initialIndex}
-  <MemoryHistory>
+const Router = ({ appLocation, dispatch, pathname }: RouterProps) => (
+  <MemoryHistory {...getMemoryHistoryInitialState(appLocation)}>
     {({ history, action, location }) => {
       if (location.pathname !== pathname) {
         setImmediate(() => {
@@ -39,6 +45,7 @@ const Router = ({ dispatch, pathname }: RouterProps) => (
 );
 
 const ConnectedRouter = connect(state => ({
+  appLocation: state.app.location,
   pathname: state.app.location && state.app.location.pathname,
 }))(Router);
 
