@@ -5,7 +5,7 @@ import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
 import { Container } from './components';
-import { Miss, Redirect } from 'react-router';
+import { Match, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { showMenu } from '../../common/app/actions';
@@ -41,10 +41,20 @@ let App = ({
         <Page pattern="/signin" component={SignIn} />
         <Page pattern="/todos" component={Todos} />
         <Page authorized pattern="/me" component={Me} />
-        {/* It's better to redirect to home for missing static page. */}
-        {/* Use NotFoundPage only for missing dynamic pages. */}
+        {/* Miss does't work yet. */}
         {/* github.com/ReactTraining/react-router/issues/3905 */}
-        <Miss render={() => <Redirect to="/" />} />
+        {/* <Miss render={() => <Redirect to="/" />} /> */}
+        {/* This is silly workaround. */}
+        <Match
+          pattern="/"
+          render={({ location: { pathname } }) => {
+            const urls = ['/', '/intl', '/offline', '/signin', '/todos', '/me'];
+            if (urls.indexOf(pathname) !== -1) return null;
+            return (
+              <Redirect to="/" />
+            );
+          }}
+        />
       </SideMenu>
     </Container>
   );

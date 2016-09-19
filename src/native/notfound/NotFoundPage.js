@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   },
 });
 
+// It's better to redirect to home for missing static pages. Use NotFoundPage
+// only for missing dynamic pages.
 const NotFoundPage = () => (
   <CenteredContainer>
     <FormattedMessage {...messages.h1} style={styles.heading} />

@@ -8,7 +8,7 @@ import { setLocation } from '../../common/app/actions';
 
 type RouterProps = {
   dispatch: () => void,
-  pathname: string,
+  pathname: ?string,
 };
 
 // TODO: Use ControlledRouter once it will be released.
