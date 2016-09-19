@@ -3,6 +3,7 @@ import Header from './Header';
 import Menu from './Menu';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
+import linksMessages from '../../common/app/linksMessages';
 import start from '../../common/app/start';
 import { Alert, Container } from './components';
 import { Match, Miss } from 'react-router';
@@ -20,8 +21,32 @@ import Offline from '../offline/OfflinePage';
 import SignIn from '../auth/SignInPage';
 import Todos from '../todos/TodosPage';
 
+let AppHeader = ({ intl }) => (
+  <Match
+    pattern="/"
+    render={({ location }) => {
+      const title = {
+        '/': linksMessages.home,
+        '/intl': linksMessages.intl,
+        '/offline': linksMessages.offline,
+        '/signin': linksMessages.signIn,
+        '/todos': linksMessages.todos,
+        '/me': linksMessages.me,
+      }[location.pathname];
+      return (
+        <Header title={intl.formatMessage(title)} />
+      );
+    }}
+  />
+);
+
+AppHeader.propTypes = {
+  intl: intlShape.isRequired,
+};
+
+AppHeader = injectIntl(AppHeader);
+
 let App = ({
-  intl,
   menuShown,
   showMenu,
   storageLoaded,
@@ -39,7 +64,7 @@ let App = ({
         onChange={showMenu}
       >
         <Container>
-          {/* <Header title={intl.formatMessage(route.title)} /> */}
+          <AppHeader />
           <Alert />
           <Match exactly pattern="/" component={Home} />
           <Match pattern="/intl" component={Intl} />
@@ -47,7 +72,8 @@ let App = ({
           <Match pattern="/signin" component={SignIn} />
           <Match pattern="/todos" component={Todos} />
           <MatchWhenAuthorized pattern="/me" component={Me} />
-          {/* It's better to render Home than 404 for unknown top page. */}
+          {/* It's better to render Home than 404 for unknown static page. */}
+          {/* Use NotFoundPage for dynamic pages. */}
           {/* github.com/ReactTraining/react-router/issues/3905 */}
           <Miss component={Home} />
         </Container>
@@ -57,13 +83,10 @@ let App = ({
 };
 
 App.propTypes = {
-  intl: intlShape.isRequired,
   menuShown: React.PropTypes.bool.isRequired,
   showMenu: React.PropTypes.func.isRequired,
   storageLoaded: React.PropTypes.bool.isRequired,
 };
-
-App = injectIntl(App);
 
 App = connect(state => ({
   menuShown: state.app.menuShown,
