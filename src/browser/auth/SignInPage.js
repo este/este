@@ -19,13 +19,11 @@ import {
 let SignInPage = ({ disabled, intl, location, viewer }) => (
   viewer ?
     <Redirect
-      to={{
-        pathname: (
-          location.state &&
-          location.state.from &&
-          location.state.from.pathname
-        ) || '/',
-      }}
+      to={(
+        location.state &&
+        location.state.from &&
+        location.state.from.pathname
+      ) || '/'}
     />
   :
     <View>

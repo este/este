@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const getImageSource = viewer => viewer.photoURL || gravatar.imageUrl({
+const getImageSourceUri = viewer => viewer.photoURL || gravatar.imageUrl({
   email: viewer.displayName,
   parameters: {
     default: 'retro',
@@ -34,7 +34,7 @@ const MePage = ({ viewer }) => (
         <Text>{viewer.displayName}</Text>
       </View>
       <Image
-        source={getImageSource(viewer)}
+        source={{ uri: getImageSourceUri(viewer) }}
         style={styles.image}
       />
       <SignOut />
