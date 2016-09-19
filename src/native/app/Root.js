@@ -13,10 +13,9 @@ type RouterProps = {
 
 // TODO: Use ControlledRouter once it will be released.
 const Router = ({ dispatch, pathname }: RouterProps) => (
-  <MemoryHistory
-    // initialEntries={initialEntries}
-    // initialIndex={initialIndex}
-  >
+  // initialEntries={initialEntries}
+  // initialIndex={initialIndex}
+  <MemoryHistory>
     {({ history, action, location }) => {
       if (location.pathname !== pathname) {
         setImmediate(() => {

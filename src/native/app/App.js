@@ -1,16 +1,13 @@
 /* @flow */
-import Header from './Header';
 import Menu from './Menu';
+import Page from './Page';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
-import linksMessages from '../../common/app/linksMessages';
 import start from '../../common/app/start';
-import { Alert, Container } from './components';
-import { Match, Miss } from 'react-router';
-import { MatchWhenAuthorized } from '../../common/app/components';
+import { Container } from './components';
+import { Miss, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape } from 'react-intl';
 import { showMenu } from '../../common/app/actions';
 
 // Pages
@@ -20,31 +17,6 @@ import Me from '../me/MePage';
 import Offline from '../offline/OfflinePage';
 import SignIn from '../auth/SignInPage';
 import Todos from '../todos/TodosPage';
-
-let AppHeader = ({ intl }) => (
-  <Match
-    pattern="/"
-    render={({ location }) => {
-      const title = {
-        '/': linksMessages.home,
-        '/intl': linksMessages.intl,
-        '/offline': linksMessages.offline,
-        '/signin': linksMessages.signIn,
-        '/todos': linksMessages.todos,
-        '/me': linksMessages.me,
-      }[location.pathname];
-      return (
-        <Header title={intl.formatMessage(title)} />
-      );
-    }}
-  />
-);
-
-AppHeader.propTypes = {
-  intl: intlShape.isRequired,
-};
-
-AppHeader = injectIntl(AppHeader);
 
 let App = ({
   menuShown,
@@ -63,20 +35,16 @@ let App = ({
         menu={<Menu />}
         onChange={showMenu}
       >
-        <Container>
-          <AppHeader />
-          <Alert />
-          <Match exactly pattern="/" component={Home} />
-          <Match pattern="/intl" component={Intl} />
-          <Match pattern="/offline" component={Offline} />
-          <Match pattern="/signin" component={SignIn} />
-          <Match pattern="/todos" component={Todos} />
-          <MatchWhenAuthorized pattern="/me" component={Me} />
-          {/* It's better to render Home than 404 for unknown static page. */}
-          {/* Use NotFoundPage for dynamic pages. */}
-          {/* github.com/ReactTraining/react-router/issues/3905 */}
-          <Miss component={Home} />
-        </Container>
+        <Page exactly pattern="/" component={Home} />
+        <Page pattern="/intl" component={Intl} />
+        <Page pattern="/offline" component={Offline} />
+        <Page pattern="/signin" component={SignIn} />
+        <Page pattern="/todos" component={Todos} />
+        <Page authorized pattern="/me" component={Me} />
+        {/* It's better to redirect to home for missing static page. */}
+        {/* Use NotFoundPage only for missing dynamic pages. */}
+        {/* github.com/ReactTraining/react-router/issues/3905 */}
+        <Miss render={() => <Redirect to="/" />} />
       </SideMenu>
     </Container>
   );
