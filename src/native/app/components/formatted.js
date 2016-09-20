@@ -3,7 +3,7 @@ import React, { Children } from 'react';
 import Text from './Text';
 
 // Create react-intl component which work in the React Native.
-// It replaces the browser span with the styleable native View.
+// It replaces the browser span with the styleable native Text.
 // github.com/yahoo/react-intl/issues/119
 const native = WrappedComponent =>
   class Native extends React.Component {

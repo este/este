@@ -27,8 +27,8 @@ import React from 'react';
 const optionsToPayload = ({ path, key, params }) => ({ path, key, params });
 const optionsToPayloadString = options => JSON.stringify(optionsToPayload(options));
 
-let serverFetching = false;
-let serverFetchingPromises = null;
+const serverFetching = false;
+// const serverFetchingPromises = null;
 
 const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
   class FirebaseQuery extends React.Component {
@@ -120,7 +120,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
         this.onArgs.forEach(arg => {
           if (serverFetching) {
             // Always use once for the server fetching.
-            serverFetchingPromises.push(ref.once(...arg));
+            // serverFetchingPromises.push(ref.once(...arg));
           } else if (on.all && arg[0] === 'value') {
             // Always use once for on.all value.
             ref.once(...arg);
@@ -131,7 +131,7 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
         this.onceArgs = this.createArgs(once);
         this.onceArgs.forEach(arg => {
           if (serverFetching) {
-            serverFetchingPromises.push(ref.once(...arg));
+            // serverFetchingPromises.push(ref.once(...arg));
           } else {
             ref.once(...arg);
           }
@@ -181,27 +181,20 @@ const queryFirebase = (WrappedComponent, mapPropsToOptions) =>
 
 export default queryFirebase;
 
-// queryFirebaseServer is for server side data fetching. Example:
-// await queryFirebaseServer(() => {
-//   // Render app calls componentWillMount on every rendered component, so
-//   // we don't have to rely on react-router routes. It's pretty fast, under
-//   // 10ms generally, because view has no data yet.
-//   renderApp(store, renderProps);
-// });
-// const html = renderPage(store, renderProps, req);
-export const queryFirebaseServer = renderAppCallback => {
-  serverFetching = true;
-  serverFetchingPromises = [];
-  try {
-    renderAppCallback();
-  } catch (error) {
-    console.log(error); // eslint-disable-line no-console
-  } finally {
-    serverFetching = false;
-    // Wait until all promises in an array are either rejected or fulfilled.
-    // http://bluebirdjs.com/docs/api/reflect.html
-    const promises = serverFetchingPromises.map(promise => promise.reflect());
-    serverFetchingPromises = null;
-    return Promise.all(promises); // eslint-disable-line no-unsafe-finally
-  }
-};
+// TODO: Redesign. Can't use global serverFetching.
+// export const queryFirebaseServer = renderAppCallback => {
+//   serverFetching = true;
+//   serverFetchingPromises = [];
+//   try {
+//     renderAppCallback();
+//   } catch (error) {
+//     console.log(error); // eslint-disable-line no-console
+//   } finally {
+//     serverFetching = false;
+//     // Wait until all promises in an array are either rejected or fulfilled.
+//     // http://bluebirdjs.com/docs/api/reflect.html
+//     const promises = serverFetchingPromises.map(promise => promise.reflect());
+//     serverFetchingPromises = null;
+//     return Promise.all(promises); // eslint-disable-line no-unsafe-finally
+//   }
+// };

@@ -1,10 +1,11 @@
+/* @flow */
 import React from 'react';
 import SignOut from '../auth/SignOut';
 import gravatar from 'gravatar-api';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, StyleSheet, View } from 'react-native';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import { selectTab } from '../routing/actions';
 
 const styles = StyleSheet.create({
   image: {
@@ -14,57 +15,36 @@ const styles = StyleSheet.create({
   },
 });
 
-class MePage extends React.Component {
+const getImageSourceUri = viewer => viewer.photoURL || gravatar.imageUrl({
+  email: viewer.displayName,
+  parameters: {
+    default: 'retro',
+    rating: 'x',
+    size: 100,
+  },
+  secure: true,
+});
 
-  static propTypes = {
-    selectTab: React.PropTypes.func.isRequired,
-    viewer: React.PropTypes.object,
-  };
+const MePage = ({ viewer }) => (
+  !viewer ?
+    <Redirect to="/" />
+  :
+    <CenteredContainer>
+      <View>
+        <Text>{viewer.displayName}</Text>
+      </View>
+      <Image
+        source={{ uri: getImageSourceUri(viewer) }}
+        style={styles.image}
+      />
+      <SignOut />
+    </CenteredContainer>
+);
 
-  constructor() {
-    super();
-    this.wasRedirected = false;
-  }
+MePage.propTypes = {
+  viewer: React.PropTypes.object,
+};
 
-  componentWillReceiveProps({ selectTab, viewer }) {
-    if (viewer) return;
-    if (this.wasRedirected) return;
-    this.wasRedirected = true;
-    selectTab('home');
-  }
-
-  render() {
-    const { viewer } = this.props;
-    if (!viewer) return null;
-    const { displayName, photoURL } = viewer;
-    const uri = photoURL || gravatar.imageUrl({
-      email: displayName,
-      parameters: {
-        default: 'retro',
-        rating: 'x',
-        size: 100,
-      },
-      secure: true,
-    });
-
-    return (
-      <CenteredContainer>
-        <View>
-          <Text>{displayName}</Text>
-        </View>
-        <Image
-          source={{ uri }}
-          style={styles.image}
-        />
-        <SignOut />
-      </CenteredContainer>
-    );
-  }
-
-}
-
-MePage = connect(state => ({
+export default connect(state => ({
   viewer: state.users.viewer,
-}), { selectTab })(MePage);
-
-export default MePage;
+}))(MePage);

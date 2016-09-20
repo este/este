@@ -1,2 +1,2 @@
-/* eslint-disable import/prefer-default-export */
+export { default as Match } from './Match';
 export { default as ThemeProvider } from './ThemeProvider';

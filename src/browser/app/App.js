@@ -8,8 +8,20 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Container } from '../app/components';
-import { ThemeProvider } from '../../common/app/components';
+import { Match, ThemeProvider } from '../../common/app/components';
+import { Miss } from 'react-router';
 import { connect } from 'react-redux';
+
+// Pages
+import Fields from '../fields/FieldsPage';
+import Firebase from '../firebase/FirebasePage';
+import Home from '../home/HomePage';
+import Intl from '../intl/IntlPage';
+import Me from '../me/MePage';
+import NotFound from '../notfound/NotFoundPage';
+import Offline from '../offline/OfflinePage';
+import SignIn from '../auth/SignInPage';
+import Todos from '../todos/TodosPage';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
@@ -24,9 +36,9 @@ const bootstrap4Metas: any = [
   },
 ];
 
-let App = ({ children, currentLocale, currentTheme }) => (
+let App = ({ currentLocale, currentTheme }) => (
   <ThemeProvider
-    key={currentTheme} // The same issue github.com/yahoo/react-intl/issues/234
+    key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
     theme={themes[currentTheme] || themes.initial}
   >
     <Container>
@@ -45,14 +57,21 @@ let App = ({ children, currentLocale, currentTheme }) => (
         ]}
       />
       <Header />
-      {children}
+      <Match exactly pattern="/" component={Home} />
+      <Match pattern="/fields" component={Fields} />
+      <Match pattern="/firebase" component={Firebase} />
+      <Match pattern="/intl" component={Intl} />
+      <Match pattern="/offline" component={Offline} />
+      <Match pattern="/signin" component={SignIn} />
+      <Match pattern="/todos" component={Todos} />
+      <Match authorized pattern="/me" component={Me} />
+      <Miss component={NotFound} />
       <Footer />
     </Container>
   </ThemeProvider>
 );
 
 App.propTypes = {
-  children: React.PropTypes.node.isRequired,
   currentLocale: React.PropTypes.string.isRequired,
   currentTheme: React.PropTypes.string,
 };
