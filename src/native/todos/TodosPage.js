@@ -1,3 +1,4 @@
+/* @flow */
 import Header from './Header';
 import NewTodo from './NewTodo';
 import React from 'react';

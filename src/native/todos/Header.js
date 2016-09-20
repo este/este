@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import theme from '../app/themes/initial';
 import { FormattedMessage } from '../app/components';

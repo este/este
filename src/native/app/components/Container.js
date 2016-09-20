@@ -9,12 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type Props = {
-  inverse?: boolean,
-  style?: Object,
-};
-
-const Container = ({ inverse, style, ...props }: Props) => {
+const Container = ({ inverse, style, ...props }: any) => {
   const backgroundColor = inverse
     ? theme.inverseBackgroundColor
     : theme.backgroundColor;

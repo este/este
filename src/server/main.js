@@ -1,3 +1,4 @@
+/* @flow */
 import config from './config';
 import errorHandler from './lib/errorHandler';
 import express from 'express';

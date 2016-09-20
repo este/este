@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 type Props = {
   checked?: boolean,
   onPress: () => void,
-  style?: Object,
+  style?: any,
 };
 
 const Checkbox = ({ checked, onPress, style }: Props) => {

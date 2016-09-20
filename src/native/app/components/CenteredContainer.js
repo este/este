@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  style: Object,
+  style?: any,
 };
 
 const CenteredContainer = ({ style, ...props }: Props) => (

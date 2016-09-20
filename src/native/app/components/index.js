@@ -1,3 +1,4 @@
+/* @flow */
 import Alert from './Alert';
 import Button from './Button';
 import CenteredContainer from './CenteredContainer';

@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  invalid: boolean,
-  inputStyle: Object,
-  viewStyle: Object,
+  invalid?: boolean,
+  inputStyle?: any,
+  viewStyle?: any,
 };
 
 const AppTextInput = ({ invalid, inputStyle, viewStyle, ...props }: Props) => (

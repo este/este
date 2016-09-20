@@ -1,3 +1,4 @@
+/* @flow */
 // Bootstrap environment
 require('babel-register');
 require('babel-polyfill');

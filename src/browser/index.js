@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint-disable react/require-extension */
 // Bootstrap environment
 
