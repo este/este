@@ -19,17 +19,17 @@
 
 - Truly universal architecture
   - code shared across platforms (browser, server, native mobile)
-  - server side rendering
-  - universal data fetching (unique approach without react-router)
-  - an optional rendering to HTML files (for static hostings)
-  - universal internationalization with runtime language switching
-  - universal crash reporting via Sentry
+  - server side rendering or server-less pre-rendering to HTML files
+  - universal routing
+  - universal internationalization (with runtime language switching)
+  - universal crash reporting (via Sentry)
+  - universal data fetching
   - universal forms with universal validation (universal ftw, yeah)
 - Well tuned dev stack (OS X, Linux, Windows)
 - Immutable app state
 - Stateless functional UI components with inline-styles
 - Flowtype
-- Vanilla hot reloading makes everything hot reloadable.
+- Vanilla hot reloading makes everything hot reloadable
 - [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - useful predefined Redux actions
   - email and facebook login
