@@ -71,18 +71,14 @@ const fields = (WrappedComponent, options) => {
       };
     }
 
-    constructor() {
-      super();
-      this.state = {
-        model: null,
-      };
-      this.onFieldChange = this.onFieldChange.bind(this);
-    }
+    state = {
+      model: null,
+    };
 
-    onFieldChange(field, value) {
+    onFieldChange = (field, value) => {
       const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
       this.context.store.dispatch(setField(normalizedPath, value));
-    }
+    };
 
     createFields() {
       const formFields = options.fields.reduce((fields, field) => ({

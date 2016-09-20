@@ -14,17 +14,14 @@ const messages = defineMessages({
   },
 });
 
+type State = {
+  currentText: ?Object,
+};
+
 class Loading extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      currentText: null,
-    };
-  }
-
-  state: {
-    currentText: ?Object,
+  state: State = {
+    currentText: null,
   };
 
   componentDidMount() {

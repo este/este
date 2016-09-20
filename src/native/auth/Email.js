@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
   },
 });
 
+type State = {
+  forgetPasswordIsShown: boolean,
+  recoveryEmailSent: boolean,
+};
+
 class Email extends React.Component {
 
   static propTypes = {
@@ -41,37 +46,27 @@ class Email extends React.Component {
     style: View.propTypes.style,
   };
 
-  constructor() {
-    super();
-    // Note we are using the component state instead of the app state, because
-    // the component state is the right place for an ephemeral UI state.
-    this.state = {
-      forgetPasswordIsShown: false,
-      recoveryEmailSent: false,
-    };
-  }
-
-  state: {
-    forgetPasswordIsShown: boolean,
-    recoveryEmailSent: boolean,
+  state: State = {
+    forgetPasswordIsShown: false,
+    recoveryEmailSent: false,
   };
 
-  onSignInViaPasswordPress() {
+  onSignInViaPasswordPress = () => {
     const { fields, signIn } = this.props;
     signIn('password', fields.$values());
-  }
+  };
 
-  onSignUpPress() {
+  onSignUpPress = () => {
     const { fields, signUp } = this.props;
     signUp('password', fields.$values());
-  }
+  };
 
-  onForgetPasswordPress() {
+  onForgetPasswordPress = () => {
     const { forgetPasswordIsShown } = this.state;
     this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
-  }
+  };
 
-  onResetPasswordPress() {
+  onResetPasswordPress = () => {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
     resetPassword(email, () => {
@@ -119,19 +114,19 @@ class Email extends React.Component {
             <View style={styles.buttons}>
               <Button
                 disabled={disabled}
-                onPress={() => this.onSignInViaPasswordPress()}
+                onPress={this.onSignInViaPasswordPress}
               >
                 <FormattedMessage {...buttonsMessages.signIn} />
               </Button>
               <Button
                 disabled={disabled}
-                onPress={() => this.onSignUpPress()}
+                onPress={this.onSignUpPress}
               >
                 <FormattedMessage {...buttonsMessages.signUp} />
               </Button>
               <Button
                 disabled={disabled}
-                onPress={() => this.onForgetPasswordPress()}
+                onPress={this.onForgetPasswordPress}
               >
                 <FormattedMessage {...emailMessages.passwordForgotten} />
               </Button>
@@ -147,13 +142,13 @@ class Email extends React.Component {
           <View style={styles.buttons}>
             <Button
               disabled={disabled}
-              onPress={() => this.onResetPasswordPress()}
+              onPress={this.onResetPasswordPress}
             >
               <FormattedMessage {...emailMessages.resetPassword} />
             </Button>
             <Button
               disabled={disabled}
-              onPress={() => this.onForgetPasswordPress()}
+              onPress={this.onForgetPasswordPress}
             >
               <FormattedMessage {...buttonsMessages.dismiss} />
             </Button>

@@ -43,6 +43,12 @@ const keyConceptsOfLibertarianism = [
   name: concept,
 }));
 
+type State = {
+  disabled: boolean,
+  error: ?Object,
+  submittedValues: ?Object,
+};
+
 class FieldsPage extends React.Component {
 
   static propTypes = {
@@ -50,22 +56,13 @@ class FieldsPage extends React.Component {
     dynamicFields: React.PropTypes.object,
   };
 
-  constructor() {
-    super();
-    this.state = {
-      disabled: false,
-      error: null,
-      submittedValues: null,
-    };
-  }
-
-  state: {
-    disabled: boolean,
-    error: ?Object,
-    submittedValues: ?Object,
+  state: State = {
+    disabled: false,
+    error: null,
+    submittedValues: null,
   };
 
-  onFormSubmit() {
+  onFormSubmit = () => {
     const { dynamicFields, fields } = this.props;
 
     const values = {
@@ -106,7 +103,7 @@ class FieldsPage extends React.Component {
             Will be released as lib soon."
           heading="redux-fields"
         />
-        <Form onSubmit={e => this.onFormSubmit(e)}>
+        <Form onSubmit={this.onFormSubmit}>
           <Input
             {...fields.name}
             aria-invalid={ValidationError.isInvalid(error, 'name')}

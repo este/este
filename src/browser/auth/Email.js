@@ -18,6 +18,11 @@ import {
   focus,
 } from '../app/components';
 
+type State = {
+  forgetPasswordIsShown: boolean,
+  recoveryEmailSent: boolean,
+};
+
 class Email extends React.Component {
 
   static propTypes = {
@@ -29,38 +34,28 @@ class Email extends React.Component {
     signUp: React.PropTypes.func.isRequired,
   };
 
-  constructor() {
-    super();
-    // Note we are using the component state instead of the app state, because
-    // the component state is the right place for an ephemeral UI state.
-    this.state = {
-      forgetPasswordIsShown: false,
-      recoveryEmailSent: false,
-    };
-  }
-
-  state: {
-    forgetPasswordIsShown: boolean,
-    recoveryEmailSent: boolean,
+  state: State = {
+    forgetPasswordIsShown: false,
+    recoveryEmailSent: false,
   };
 
-  onFormSubmit() {
+  onFormSubmit = () => {
     if (this.state.forgetPasswordIsShown) {
       this.resetPassword();
     } else {
       this.signInViaPassword();
     }
-  }
+  };
 
-  onSignUpClick() {
+  onSignUpClick = () => {
     const { fields, signUp } = this.props;
     signUp('password', fields.$values());
-  }
+  };
 
-  onForgetPasswordClick() {
+  onForgetPasswordClick = () => {
     const { forgetPasswordIsShown } = this.state;
     this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
-  }
+  };
 
   resetPassword() {
     const { fields, resetPassword } = this.props;
@@ -86,7 +81,7 @@ class Email extends React.Component {
       : emailMessages.emailLegend;
 
     return (
-      <Form onSubmit={e => this.onFormSubmit(e)} small>
+      <Form onSubmit={this.onFormSubmit} small>
         <Panel theme="primary">
           <PanelHeader>
             <FormattedMessage {...legendMessage} />
@@ -116,7 +111,7 @@ class Email extends React.Component {
               <Space />
               <Button
                 disabled={disabled}
-                onClick={() => this.onSignUpClick()}
+                onClick={this.onSignUpClick}
                 type="button"
               >
                 <FormattedMessage {...buttonsMessages.signUp} />
@@ -124,7 +119,7 @@ class Email extends React.Component {
               <Space />
               <Button
                 disabled={disabled}
-                onClick={() => this.onForgetPasswordClick()}
+                onClick={this.onForgetPasswordClick}
                 type="button"
               >
                 <FormattedMessage {...emailMessages.passwordForgotten} />
@@ -143,7 +138,7 @@ class Email extends React.Component {
               <Space />
               <Button
                 disabled={disabled}
-                onClick={() => this.onForgetPasswordClick()}
+                onClick={this.onForgetPasswordClick}
                 type="button"
               >
                 <FormattedMessage {...buttonsMessages.dismiss} />

@@ -1,32 +1,24 @@
 /* @flow */
 import React from 'react';
 
+type State = {
+  hover: bool,
+};
+
 const pseudo = (WrappedComponent: Function) =>
   class Pseudo extends React.Component {
 
-    state: {
-      hover: bool;
+    state: State = {
+      hover: false,
     };
 
-    onMouseEnter: () => void;
-    onMouseLeave: () => void;
-
-    constructor() {
-      super();
-      this.state = {
-        hover: false,
-      };
-      this.onMouseEnter = this.onMouseEnter.bind(this);
-      this.onMouseLeave = this.onMouseLeave.bind(this);
-    }
-
-    onMouseEnter() {
+    onMouseEnter = () => {
       this.setState({ hover: true });
-    }
+    };
 
-    onMouseLeave() {
+    onMouseLeave = () => {
       this.setState({ hover: false });
-    }
+    };
 
     render() {
       return (

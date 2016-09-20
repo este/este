@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
   },
 });
 
+type State = {
+  alertHeight: number,
+  animation: any,
+};
+
 class Alert extends React.Component {
 
   static propTypes = {
@@ -45,17 +50,9 @@ class Alert extends React.Component {
     hideTimeout: 4000,
   };
 
-  constructor() {
-    super();
-    this.state = {
-      alertHeight: 0,
-      animation: new Animated.Value(0),
-    };
-  }
-
-  state: {
-    alertHeight: number,
-    animation: any,
+  state: State = {
+    alertHeight: 0,
+    animation: new Animated.Value(0),
   };
 
   componentWillReceiveProps({ error }) {
@@ -68,9 +65,9 @@ class Alert extends React.Component {
     this.setState({ alertHeight });
   }
 
-  onPress() {
+  onPress = () => {
     this.animateTo(0);
-  }
+  };
 
   getAlertStyle() {
     const { brand } = this.props;
@@ -91,8 +88,6 @@ class Alert extends React.Component {
     };
   }
 
-  hideTimer: number;
-
   animateTo(toValue, fromValue) {
     const { duration } = this.props;
     const { animation } = this.state;
@@ -103,6 +98,8 @@ class Alert extends React.Component {
       .timing(animation, { duration, toValue })
       .start();
   }
+
+  hideTimer: number;
 
   show() {
     const { hideTimeout } = this.props;
@@ -124,7 +121,7 @@ class Alert extends React.Component {
     const containerStyle = this.getContainerStyle();
 
     return (
-      <TouchableWithoutFeedback onPress={() => this.onPress()}>
+      <TouchableWithoutFeedback onPress={this.onPress}>
         <Animated.View style={[styles.container, containerStyle]}>
           <View
             style={[styles.alert, alertStyle]}
