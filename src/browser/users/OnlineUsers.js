@@ -3,8 +3,8 @@ import Gravatar from 'react-gravatar';
 import React from 'react';
 import { Image, Loading, Text, View } from '../app/components';
 import { connect } from 'react-redux';
+import { firebase } from '../../common/lib/redux-firebase';
 import { onUsersPresence } from '../../common/users/actions';
-import { queryFirebase } from '../../common/lib/redux-firebase';
 
 const styles = {
   user: {
@@ -17,23 +17,23 @@ const styles = {
   },
 };
 
-const User = ({ user: { displayName, photoURL } }) => (
+const User = ({ user }) => (
   <View style={styles.user}>
-    {photoURL ?
+    {user.photoURL ?
       <Image
         role="presentation"
-        src={photoURL}
+        src={user.photoURL}
         style={styles.gravatar}
-        title={displayName}
+        title={user.displayName}
       />
     :
       <Gravatar
         default="retro"
-        email={displayName} // For users signed in via email.
+        email={user.displayName} // For users signed in via email.
         https
         rating="x"
         style={styles.gravatar}
-        title={displayName}
+        title={user.displayName}
       />
     }
   </View>
@@ -62,10 +62,12 @@ OnlineUsers.propTypes = {
   loaded: React.PropTypes.bool.isRequired,
 };
 
-OnlineUsers = queryFirebase(OnlineUsers, ({ onUsersPresence }) => ({
-  path: 'users-presence',
-  on: { value: onUsersPresence },
-}));
+OnlineUsers = firebase((database, props) => {
+  const usersPresenceRef = database.child('users-presence');
+  return [
+    [usersPresenceRef, 'on', 'value', props.onUsersPresence],
+  ];
+})(OnlineUsers);
 
 export default connect(state => ({
   users: state.users.online,
