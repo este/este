@@ -2,7 +2,9 @@
 import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
+import Promise from 'bluebird';
 import React from 'react';
+import ServerFetchProvider from './ServerFetchProvider';
 import config from '../config';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
@@ -12,11 +14,20 @@ import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { toJSON } from '../../common/transit';
 
-// TODO: Redesign queryFirebaseServer.
-// import { queryFirebaseServer } from '../../common/lib/redux-firebase/queryFirebase';
-// if (!process.env.IS_SERVERLESS) {
-//    await queryFirebaseServer(() => renderApp(store, renderProps));
-//  }
+const settleAllWithTimeout = promises => Promise
+  .all(promises.map(p => p.reflect()))
+  .each(inspection => {
+    if (inspection.isFulfilled()) return;
+    console.log('Server fetch failed:', inspection.reason());
+  })
+  .timeout(5000) // Do not block rendering if any fetch is still pending.
+  .catch(error => {
+    if (error instanceof Promise.TimeoutError) {
+      console.log('Server fetch timeouted:', error);
+      return;
+    }
+    throw error;
+  });
 
 const initialState = createInitialState();
 
@@ -38,15 +49,17 @@ const createStore = (req) => configureStore({
   },
 });
 
-const renderBody = (store, context, location) => {
+const renderBody = (store, context, location, fetchPromises) => {
   const markup = renderToString(
     <Redux store={store}>
-      <ServerRouter
-        context={context}
-        location={location}
-      >
-        <App />
-      </ServerRouter>
+      <ServerFetchProvider promises={fetchPromises}>
+        <ServerRouter
+          context={context}
+          location={location}
+        >
+          <App />
+        </ServerRouter>
+      </ServerFetchProvider>
     </Redux>
   );
   return { markup, helmet: Helmet.rewind() };
@@ -84,23 +97,35 @@ const renderHtml = (state, bodyMarkupWithHelmet) => {
   return `<!DOCTYPE html>${markup}`;
 };
 
-const render = (req: Object, res: Object, next: Function) => {
+// react-router.now.sh/ServerRouter
+const render = async (req: Object, res: Object, next: Function) => {
   try {
     const context = createServerRenderContext();
     const store = createStore(req);
-    let bodyMarkupWithHelmet = renderBody(store, context, req.url);
+    const fetchPromises = [];
+
+    let bodyMarkupWithHelmet = renderBody(store, context, req.url, fetchPromises);
     const result = context.getResult();
+
     if (result.redirect) {
       res.redirect(301, result.redirect.pathname + result.redirect.search);
       return;
     }
-    let status = 200;
+
     if (result.missed) {
-      status = 404;
+      bodyMarkupWithHelmet = renderBody(store, context, req.url);
+      const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
+      res.status(404).send(htmlMarkup);
+      return;
+    }
+
+    if (!process.env.IS_SERVERLESS && fetchPromises.length > 0) {
+      await settleAllWithTimeout(fetchPromises);
       bodyMarkupWithHelmet = renderBody(store, context, req.url);
     }
+
     const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
-    res.status(status).send(htmlMarkup);
+    res.status(200).send(htmlMarkup);
   } catch (error) {
     console.log(error);
     next(error);

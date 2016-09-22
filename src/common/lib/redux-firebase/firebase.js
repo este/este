@@ -2,7 +2,6 @@
 import * as actions from './actions';
 import React from 'react';
 
-// TODO: Add server side rendering.
 // // Example
 // OnlineUsers = firebase((database, props) => {
 //   const usersPresenceRef = database.child('users-presence');
@@ -23,6 +22,7 @@ const firebase = (onDidMount: onDidMount) => (WrappedComponent: Function) =>
 
     static contextTypes = {
       store: React.PropTypes.object, // Redux store.
+      serverFetchPromises: React.PropTypes.array,
     };
 
     queries: Array<Query>;
@@ -32,6 +32,22 @@ const firebase = (onDidMount: onDidMount) => (WrappedComponent: Function) =>
       return { type, payload: { refs } };
     }
 
+    componentWillMount() {
+      const { serverFetchPromises } = this.context;
+      if (!serverFetchPromises) return;
+      // This is called only on the server.
+      this.context.store.dispatch(({ firebase }) => {
+        this.queries = onDidMount(firebase, this.props) || [];
+        this.queries.forEach(([ref, , eventType, cb1, cb2]) => {
+          // Enforce once eventType and store a promise so render can wait.
+          const promise = ref.once(eventType, cb1, cb2);
+          serverFetchPromises.push(promise);
+        });
+        return this.createAction(actions.FIREBASE_ON_QUERY);
+      });
+    }
+
+    // This is called only on the client.
     componentDidMount() {
       this.context.store.dispatch(({ firebase }) => {
         this.queries = onDidMount(firebase, this.props) || [];
