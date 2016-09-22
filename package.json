@@ -111,7 +111,7 @@
     "redux-storage-decorator-debounce": "^1.0.0",
     "redux-storage-engine-localstorage": "^1.0.1",
     "redux-storage-engine-reactnativeasyncstorage": "^1.0.0",
-    "reflexbox": "^2.1.0",
+    "reflexbox": "^2.2.0",
     "regenerator": "^0.8.42",
     "regenerator-runtime": "^0.9.5",
     "require-dir": "^0.3.0",
