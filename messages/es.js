@@ -61,8 +61,8 @@ export default [
     "defaultMessage": "Campos",
   },
   {
-    "id": "app.links.firebase",
-    "defaultMessage": "Firebase",
+    "id": "app.links.users",
+    "defaultMessage": "Usuarios",
   },
   {
     "id": "app.links.home",

@@ -17,8 +17,8 @@ const Header = ({ viewer }) => (
       <FormattedMessage {...linksMessages.home} />
     </Link>
     <Space x={2} />
-    <Link bold inverted to="/firebase">
-      <FormattedMessage {...linksMessages.firebase} />
+    <Link bold inverted to="/users">
+      <FormattedMessage {...linksMessages.users} />
     </Link>
     <Space x={2} />
     <Link bold inverted to="/todos">

@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 
 // Pages
 import Fields from '../fields/FieldsPage';
-import Firebase from '../firebase/FirebasePage';
+import Users from '../users/UsersPage';
 import Home from '../home/HomePage';
 import Intl from '../intl/IntlPage';
 import Me from '../me/MePage';
@@ -59,7 +59,7 @@ let App = ({ currentLocale, currentTheme }) => (
       <Header />
       <Match exactly pattern="/" component={Home} />
       <Match pattern="/fields" component={Fields} />
-      <Match pattern="/firebase" component={Firebase} />
+      <Match pattern="/users" component={Users} />
       <Match pattern="/intl" component={Intl} />
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />

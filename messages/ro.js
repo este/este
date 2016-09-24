@@ -61,8 +61,8 @@ export default [
     "defaultMessage": "Câmpuri",
   },
   {
-    "id": "app.links.firebase",
-    "defaultMessage": "Firebase",
+    "id": "app.links.users",
+    "defaultMessage": "Utilizatori",
   },
   {
     "id": "app.links.home",
