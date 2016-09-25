@@ -22,7 +22,6 @@
     "no-confusing-arrow": 0, // This rule is super confusing.
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
-    "class-methods-use-this": 0, // Good idea, but ignores React render.
     "arrow-parens": 0, // Not really.
     // React Native.
     "react-native/no-unused-styles": 2,

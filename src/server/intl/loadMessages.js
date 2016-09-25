@@ -16,7 +16,7 @@ const loadMessages = (options) => {
   return fs.readdirSync('messages')
     .filter(isDictionary)
     .map(fileName => ({
-      descriptors: require(`../../../messages/${fileName}`).default,
+      descriptors: require(`../../../messages/${fileName}`).default, // eslint-disable-line import/no-dynamic-require
       locale: fileName.split('.')[0],
     }))
     .reduce((previous, { descriptors, locale }) => ({

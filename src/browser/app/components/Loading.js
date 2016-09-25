@@ -50,7 +50,9 @@ class Loading extends React.Component {
     return (
       <View>
         <Title message={currentText} />
-        <FormattedMessage {...currentText} children={children} />
+        <FormattedMessage {...currentText}>
+          {children}
+        </FormattedMessage>
       </View>
     );
   }

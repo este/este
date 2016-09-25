@@ -1,5 +1,5 @@
 /* @flow */
-import DynamicField from './DynamicField.js';
+import DynamicField from './DynamicField';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
