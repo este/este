@@ -15,6 +15,8 @@
 
 > Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, napište mi daniel@steigerwald.cz
 
+> *Vote Gary Johnson https://www.johnsonweld.com*
+
 ## Techniques
 
 - Truly universal architecture
