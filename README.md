@@ -29,7 +29,7 @@
   - universal forms with universal validation (universal ftw, yeah)
 - Well tuned dev stack (OS X, Linux, Windows)
 - Immutable app state
-- Stateless functional UI components with inline-styles
+- Stateless functional UI components with JavaScript styles
 - Flowtype
 - Vanilla hot reloading makes everything hot reloadable
 - [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
