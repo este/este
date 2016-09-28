@@ -126,7 +126,7 @@
     "transit-js": "^0.8.846",
     "url-loader": "^0.5.5",
     "uuid": "^2.0.2",
-    "validator": "^5.0.0",
+    "validator": "^6.0.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.8.1",
