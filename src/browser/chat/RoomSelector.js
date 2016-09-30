@@ -13,6 +13,9 @@ class ChatRoom extends Component {
     switchRoom: PropTypes.func.isRequired,
   };
 
+  createRoom(roomName) {
+    this.props.createRoom(roomName);
+  }
 
   render() {
     const pickerOptions = this.props.rooms.toList().map(room =>

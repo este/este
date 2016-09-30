@@ -3,8 +3,6 @@ import { combineReducers } from 'redux';
 
 import * as Actions from './actions';
 
-let messagesIndex = 2;
-
 let defaultMessages = Immutable.Map();
 defaultMessages = defaultMessages.set('0', {
   id: '0',
@@ -22,13 +20,7 @@ defaultMessages = defaultMessages.set('1', {
 const messages = (state = defaultMessages, action) => {
   switch (action.type) {
     case Actions.SEND_MESSAGE: {
-      const message = {
-        id: (messagesIndex++).toString(),
-        content: action.payload.content,
-        roomId: action.payload.roomId,
-        sentTime: Date.now(),
-      };
-      return state.set(message.id, message);
+      return state.set(action.payload.id, action.payload);
     }
 
     default:
@@ -36,7 +28,6 @@ const messages = (state = defaultMessages, action) => {
   }
 };
 
-let roomIndexes = 2;
 let defaultRooms = Immutable.Map();
 defaultRooms = defaultRooms.set('0', {
   id: '0',
@@ -51,10 +42,7 @@ defaultRooms = defaultRooms.set('1', {
 const rooms = (state = defaultRooms, action) => {
   switch (action.type) {
     case Actions.CREATE_ROOM: {
-      const newRoom = {
-        id: (roomIndexes++).toString(),
-        name: action.payload,
-      };
+      const newRoom = action.payload;
       return state.set(newRoom.id, newRoom);
     }
     default:
