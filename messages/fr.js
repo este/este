@@ -77,6 +77,10 @@ export default [
     "defaultMessage": "Moi",
   },
   {
+    "id": "app.links.chat",
+    "defaultMessage": "Chat",
+  },
+  {
     "id": "app.links.notFound",
     "defaultMessage": "Page introuvable",
   },

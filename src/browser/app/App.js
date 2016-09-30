@@ -22,6 +22,7 @@ import NotFound from '../notfound/NotFoundPage';
 import Offline from '../offline/OfflinePage';
 import SignIn from '../auth/SignInPage';
 import Todos from '../todos/TodosPage';
+import Chat from '../chat/ChatPage';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
@@ -64,6 +65,7 @@ let App = ({ currentLocale, currentTheme }) => (
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />
+      <Match pattern="/chat" component={Chat} />
       <Match authorized pattern="/me" component={Me} />
       <Miss component={NotFound} />
       <Footer />
