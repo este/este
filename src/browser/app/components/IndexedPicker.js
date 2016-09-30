@@ -1,26 +1,47 @@
 import React, { PropTypes } from 'react';
 
 const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
-  const getOptionLabel = option => getLabel ? getLabel(option) : (option.value || option.id);
+
+
+  const getOptionLabel = option => {
+    let label = 'Nothing selected';
+    console.log(option)
+    if (option) {
+      label = getLabel ? getLabel(option) : (option.value || option.id);
+    }
+    console.log(label)
+    return label;
+  };
+
+  const selectOptions = options.length ?
+    options :
+    [
+      {
+      id: 0,
+      value: 'No items',
+      },
+    ];
+
+  const selectDisabled = !(!!options.length);
 
   return (
     <span>
-      <h1>{getOptionLabel(options[selectedIndex])}</h1>
       <select
         onChange={e => onChange(e.target.value)}
         value={selectedIndex}
+        disabled={selectDisabled}
       >
-        {options.map(option => {
-          const index = option.id;
-          const label = getOptionLabel(option);
-          return (
-            <option value={index} key={index}>
-              { label }
-            </option>
-          );
-        })
+        {
+          selectOptions.map(option => {
+            const index = option.id;
+            const label = getOptionLabel(option);
+            return (
+              <option value={index} key={index}>
+                { label }
+              </option>
+            );
+          })
         }
-
       </select>
     </span>
   );

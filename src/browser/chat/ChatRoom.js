@@ -10,8 +10,8 @@ class ChatRoom extends Component {
   static propTypes = {
     messages: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
-    selectedRoom: PropTypes.string.isRequired,
-  }
+    selectedRoom: PropTypes.object,
+  };
 
   handleMessage = (message) => {
     this.props.sendMessage({
@@ -19,11 +19,20 @@ class ChatRoom extends Component {
       roomId: this.props.selectedRoom,
     });
   };
+
   render() {
     return (
       <div>
-        <MessageList messages={this.props.messages} />
-        <UniqueInput submit={this.handleMessage} btnLabel="Envoyer" />
+        {
+          this.props.selectedRoom ?
+            <div>
+              <h2>{this.props.selectedRoom.name}</h2>
+              <MessageList messages={this.props.messages} />
+              <UniqueInput submit={this.handleMessage} btnLabel="Envoyer" />
+            </div>
+            :
+          'Please select a room'
+        }
       </div>
     );
   }

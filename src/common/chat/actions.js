@@ -19,9 +19,9 @@ export const sendMessage = message => {
   };
 };
 
-export const switchRoom = roomId => ({
+export const switchRoom = room => ({
   type: SWITCH_ROOM,
-  roomId,
+  room,
 });
 
 export const createRoom = roomName => ({ dispatch }) => {
@@ -33,8 +33,8 @@ export const createRoom = roomName => ({ dispatch }) => {
     name: roomName,
   };
 
-  dispatch(switchRoom(newRoom.id));
-
+  dispatch(switchRoom(newRoom)); // Maybe too early to dispatch ??
+  
   return {
     type: CREATE_ROOM,
     payload: newRoom,

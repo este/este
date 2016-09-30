@@ -5,9 +5,9 @@ import UniqueInput from '../app/components/UniqueInput';
 import IndexedPicker from '../app/components/IndexedPicker';
 import { createRoom, switchRoom } from '../../common/chat/actions';
 
-class ChatRoom extends Component {
+class RoomSelector extends Component {
   static propTypes = {
-    selectedRoom: PropTypes.string.isRequired,
+    selectedRoom: PropTypes.object,
     rooms: PropTypes.object.isRequired,
     createRoom: PropTypes.func.isRequired,
     switchRoom: PropTypes.func.isRequired,
@@ -15,6 +15,10 @@ class ChatRoom extends Component {
 
   createRoom(roomName) {
     this.props.createRoom(roomName);
+  }
+
+  handleChange(roomId) {
+    this.props.switchRoom(this.props.rooms.find(room => room.id === roomId));
   }
 
   render() {
@@ -28,11 +32,11 @@ class ChatRoom extends Component {
     return (
       <div>
         <IndexedPicker
-          selectedIndex={this.props.selectedRoom}
-          onChange={this.props.switchRoom}
+          selectedIndex={(this.props.selectedRoom && this.props.selectedRoom.id) || ''}
+          onChange={this.handleChange.bind(this)}
           options={pickerOptions}
         />
-        <UniqueInput submit={this.props.createRoom} btnLabel="Créer" />
+        <UniqueInput submit={this.props.createRoom} btnLabel="Créer" placeholder="Room name" />
       </div>
     );
   }
@@ -43,7 +47,7 @@ const mapStateToProps = ({ chat }) => {
 
   return {
     selectedRoom,
-    rooms,
+    rooms: rooms.map,
   };
 };
 
@@ -52,4 +56,4 @@ const mapDispatchToProps = {
   switchRoom,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomSelector);

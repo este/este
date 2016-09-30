@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const UniqueInput = ({ submit, btnLabel }) => {
+const UniqueInput = ({ submit, btnLabel, placeholder }) => {
   let contentNode = null;
   const onSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +16,7 @@ const UniqueInput = ({ submit, btnLabel }) => {
     <form onSubmit={onSubmit}>
       <input
         type="text"
+        placeholder={placeholder}
         ref={node => { contentNode = node; }}
       />
       <button type="submit">
