@@ -131,6 +131,6 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.8.1",
     "webpack-isomorphic-tools": "^2.2.24",
-    "yargs": "^5.0.0"
+    "yargs": "^6.0.0"
   }
 }
