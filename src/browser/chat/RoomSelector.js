@@ -42,7 +42,9 @@ class RoomSelector extends Component {
 }
 
 const mapStateToProps = ({ chat }) => {
-  const { rooms, selectedRoom } = chat;
+  const { rooms, selectedRoomId } = chat;
+
+  const selectedRoom = rooms.map.get(selectedRoomId);
 
   return {
     selectedRoom,

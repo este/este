@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Seq } from 'immutable'
 import { connect } from 'react-redux';
 import { firebase } from '../../common/lib/redux-firebase';
 
@@ -26,9 +27,9 @@ class ChatRoom extends Component {
 
   getOnlineUsers() {
     if(this.props.selectedRoom && this.props.selectedRoom.onlineUsers) {
-      return this.props.selectedRoom.onlineUsers.map(user => (
+      return Seq(this.props.selectedRoom.onlineUsers).map(user => (
         <li key={user.id}>{user.displayName}</li>
-      ));
+      )).toArray();
     }
     return <li>No users</li>;
   }
@@ -46,6 +47,7 @@ class ChatRoom extends Component {
             :
           'Please select a room'
         }
+        <p>Users online on this channel: </p>
         <ul>
           {this.getOnlineUsers()}
         </ul>
@@ -54,16 +56,18 @@ class ChatRoom extends Component {
   }
 }
 
-const getRoomMessages = (messages, selectedRoom) => {
-  if (!selectedRoom) return {};
-  return messages.filter(message => message && message.roomId === selectedRoom.id);
+const getRoomMessages = (messages, selectedRoomId) => {
+  if (!selectedRoomId) return {};
+  return messages.filter(message => message && message.roomId === selectedRoomId);
 };
 
 const mapStateToProps = ({ chat, users }) => {
-  const { messages, selectedRoom } = chat;
+  const { messages, rooms, selectedRoomId } = chat;
   const { viewer } = users;
 
-  const roomMessages = getRoomMessages(messages.map, selectedRoom);
+  const roomMessages = getRoomMessages(messages.map, selectedRoomId);
+  const selectedRoom = rooms.map.get(selectedRoomId);
+
   return {
     messages: roomMessages,
     selectedRoom,

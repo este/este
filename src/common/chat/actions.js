@@ -52,9 +52,8 @@ let lastOnlineRef = null;
 export const switchRoom = (roomId) => ({ firebase, getState }) =>
 {
   const viewer = getState().users.viewer;
-  const room = getState().chat.rooms.map.get(roomId);
 
-  if(!room || !viewer) return {type: NOTHING};
+  if(!viewer) return {type: NOTHING};
 
   const jsViewer = viewer.toJS();
 
@@ -62,7 +61,7 @@ export const switchRoom = (roomId) => ({ firebase, getState }) =>
     const deletePromise = lastOnlineRef.remove();
 
   }
-  const onlineUserRef = firebase.child(`rooms/${room.id}/onlineUsers/${jsViewer.id}`);
+  const onlineUserRef = firebase.child(`rooms/${roomId}/onlineUsers/${jsViewer.id}`);
 
   const updatePromise = onlineUserRef.set(jsViewer);
   const removeOnDisconnectPromise = onlineUserRef.onDisconnect().remove();
@@ -70,7 +69,7 @@ export const switchRoom = (roomId) => ({ firebase, getState }) =>
   lastOnlineRef = onlineUserRef;
   return {
     type: SWITCH_ROOM,
-    room,
+    roomId,
   };
 };
 
@@ -92,7 +91,7 @@ export const createRoom = roomName => ({ getUid, dispatch }) => {
     name: roomName,
   });
 
-  dispatch(switchRoom(newRoom)); // Maybe too early to dispatch ??
+  dispatch(switchRoom(newRoom.id)); // Maybe too early to dispatch ??
   dispatch(saveRoom(newRoom));
 
   return {
@@ -104,10 +103,10 @@ export const createRoom = roomName => ({ getUid, dispatch }) => {
 export const onGetRooms = (snap) => ({ dispatch, getState }) => {
   const rooms = Map(snap.val());
   const state = getState();
-  const selectedRoom = state.chat.selectedRoom;
-  if (!selectedRoom && rooms.size) {
+  const selectedRoomId = state.chat.selectedRoomId;
+  if (!selectedRoomId && rooms.size) {
     const firstRoom = rooms.first();
-    dispatch(switchRoom(firstRoom));
+    dispatch(switchRoom(firstRoom.id));
   }
   return {
     type: FIREBASE_GET_ROOMS,

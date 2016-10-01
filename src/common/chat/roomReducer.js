@@ -18,28 +18,15 @@ export const rooms = (state = new RoomState(), action) => {
       return state.set('map', action.payload);
     }
 
-    case Actions.SWITCH_ROOM:
-      const room = action.room;
-      return state.update('map', map => map.set(room.id, room));
     default:
       return state;
   }
 };
 
-export const selectedRoom = (state = null, action) => {
+export const selectedRoomId = (state = null, action) => {
   switch (action.type) {
     case Actions.SWITCH_ROOM:
-      return action.room;
-
-    case Actions.FIREBASE_GET_ROOMS: {
-      if (state) {
-        const newSelectedRoom = action.payload.find(room => room.id === state.id);
-        console.log(action.payload);
-        console.log(newSelectedRoom);
-        return newSelectedRoom;
-      }
-      return state;
-    }
+      return action.roomId;
 
     default:
       return state;
