@@ -13,14 +13,25 @@ class ChatRoom extends Component {
     sendMessage: PropTypes.func.isRequired,
     selectedRoom: PropTypes.object,
     onGetMessages: PropTypes.func.isRequired,
+    viewer: PropTypes.object.isRequired,
   };
 
-  handleMessage = (message) => {
+  handleMessage(message) {
     this.props.sendMessage({
       content: message,
       roomId: this.props.selectedRoom.id,
+      sender: this.props.viewer,
     });
-  };
+  }
+
+  getOnlineUsers() {
+    if(this.props.selectedRoom && this.props.selectedRoom.onlineUsers) {
+      return this.props.selectedRoom.onlineUsers.map(user => (
+        <li key={user.id}>{user.displayName}</li>
+      ));
+    }
+    return <li>No users</li>;
+  }
 
   render() {
     return (
@@ -30,11 +41,14 @@ class ChatRoom extends Component {
             <div>
               <h2>{this.props.selectedRoom.name}</h2>
               <MessageList messages={this.props.messages} />
-              <UniqueInput submit={this.handleMessage} btnLabel="Envoyer" />
+              <UniqueInput submit={this.handleMessage.bind(this)} btnLabel="Envoyer" />
             </div>
             :
           'Please select a room'
         }
+        <ul>
+          {this.getOnlineUsers()}
+        </ul>
       </div>
     );
   }
@@ -45,13 +59,15 @@ const getRoomMessages = (messages, selectedRoom) => {
   return messages.filter(message => message && message.roomId === selectedRoom.id);
 };
 
-const mapStateToProps = ({ chat }) => {
+const mapStateToProps = ({ chat, users }) => {
   const { messages, selectedRoom } = chat;
+  const { viewer } = users;
 
   const roomMessages = getRoomMessages(messages.map, selectedRoom);
   return {
     messages: roomMessages,
     selectedRoom,
+    viewer,
   };
 };
 

@@ -1,6 +1,6 @@
 {
   "database": {
-    "rules": "./firebase/rules.bolt"
+    "rules": "./firebase/rules_all.bolt"
   },
   "hosting": {
     "public": "build",

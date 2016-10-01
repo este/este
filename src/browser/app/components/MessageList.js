@@ -7,7 +7,7 @@ const MessageList = ({ messages }) => {
       <span>Messages:</span>
       <ul>
         {messageList.map(message =>
-          <li key={message.id}>{message.content}</li>
+          <li key={message.id}><b>{message.senderName || message.senderId}</b> : <span>{message.content}</span></li>
         )}
       </ul>
     </div>

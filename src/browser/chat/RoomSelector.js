@@ -16,7 +16,7 @@ class RoomSelector extends Component {
   };
 
   handleChange(roomId) {
-    this.props.switchRoom(this.props.rooms.find(room => room.id === roomId));
+    this.props.switchRoom(roomId);
   }
 
   render() {
@@ -29,6 +29,7 @@ class RoomSelector extends Component {
 
     return (
       <div>
+        {pickerOptions.length ? <span>Rooms: </span> : null}
         <IndexedPicker
           selectedIndex={(this.props.selectedRoom && this.props.selectedRoom.id) || ''}
           onChange={this.handleChange.bind(this)}

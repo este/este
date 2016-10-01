@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Seq, Map } from 'immutable';
 
 import Message from './Message';
 import Room from './Room';
@@ -9,7 +9,9 @@ export const SWITCH_ROOM = 'SWITCH_ROOM';
 export const FIREBASE_GET_MESSAGES = 'FIREBASE_GET_MESSAGES';
 export const FIREBASE_SAVE_MESSAGE = 'FIREBASE_SAVE_MESSAGE';
 export const FIREBASE_GET_ROOMS = 'FIREBASE_GET_ROOMS';
-export const FIREBASE_SAVE_ROOM = 'FIREBASE_SAVE_ROOM';
+export const FIREBASE_SAVE_ROOM = 'FIREBASE_SWITCH_ROOM';
+export const FIREBASE_SWITCH_ROOM = 'FIREBASE_SAVE_ROOM';
+export const NOTHING = 'NOTHING';
 
 const saveMessage = (message) => ({ firebase }) => {
   const messageToSave = message.toJS();
@@ -30,6 +32,8 @@ export const sendMessage = message => ({ getUid, now, dispatch }) =>
     content: message.content,
     roomId: message.roomId,
     sentTime: now(),
+    senderId: message.sender.id,
+    senderName: message.sender.displayName,
   });
 
   dispatch(saveMessage(newMessage));
@@ -44,10 +48,31 @@ export const onGetMessages = (snap) => ({
   payload: snap.val(),
 });
 
-export const switchRoom = room => ({
-  type: SWITCH_ROOM,
-  room,
-});
+let lastOnlineRef = null;
+export const switchRoom = (roomId) => ({ firebase, getState }) =>
+{
+  const viewer = getState().users.viewer;
+  const room = getState().chat.rooms.map.get(roomId);
+
+  if(!room || !viewer) return {type: NOTHING};
+
+  const jsViewer = viewer.toJS();
+
+  if(lastOnlineRef) {
+    const deletePromise = lastOnlineRef.remove();
+
+  }
+  const onlineUserRef = firebase.child(`rooms/${room.id}/onlineUsers/${jsViewer.id}`);
+
+  const updatePromise = onlineUserRef.set(jsViewer);
+  const removeOnDisconnectPromise = onlineUserRef.onDisconnect().remove();
+
+  lastOnlineRef = onlineUserRef;
+  return {
+    type: SWITCH_ROOM,
+    room,
+  };
+};
 
 const saveRoom = (room) => ({ firebase }) => {
   const roomToSave = room.toJS();

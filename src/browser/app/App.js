@@ -65,7 +65,7 @@ let App = ({ currentLocale, currentTheme }) => (
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />
-      <Match pattern="/chat" component={Chat} />
+      <Match authorized pattern="/chat" component={Chat} />
       <Match authorized pattern="/me" component={Me} />
       <Miss component={NotFound} />
       <Footer />

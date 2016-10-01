@@ -64,7 +64,9 @@ type Message {
   id: ShortRequiredString,
   content: LongString,
   roomId: ShortRequiredString,
-  sentTime: Number
+  sentTime: Number,
+  senderId: ShortRequiredString
+  senderName: ShortString
 }
 
 type Room {
@@ -114,4 +116,9 @@ path /messages/{uid} is Message {
 
 path /rooms/{uid} is Room {
   create()  { true }
+}
+
+path /rooms/{rid}/onlineUsers/{uid} {
+  write()  { isViewer(uid) }
+  read() { true }
 }
