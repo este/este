@@ -34,7 +34,7 @@ export const createRoom = roomName => ({ dispatch }) => {
   };
 
   dispatch(switchRoom(newRoom)); // Maybe too early to dispatch ??
-  
+
   return {
     type: CREATE_ROOM,
     payload: newRoom,

@@ -45,7 +45,7 @@ const getRoomMessages = (messages, selectedRoom) => {
 const mapStateToProps = ({ chat }) => {
   const { messages, selectedRoom } = chat;
 
-  const roomMessages = getRoomMessages(messages, selectedRoom);
+  const roomMessages = getRoomMessages(messages.map, selectedRoom);
   return {
     messages: roomMessages,
     selectedRoom,

@@ -5,22 +5,20 @@ const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
 
   const getOptionLabel = option => {
     let label = 'Nothing selected';
-    console.log(option)
     if (option) {
       label = getLabel ? getLabel(option) : (option.value || option.id);
     }
-    console.log(label)
     return label;
   };
 
   const selectOptions = options.length ?
     options :
-    [
-      {
+  [
+    {
       id: 0,
       value: 'No items',
-      },
-    ];
+    },
+  ];
 
   const selectDisabled = !(!!options.length);
 
