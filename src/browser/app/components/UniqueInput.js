@@ -29,6 +29,7 @@ const UniqueInput = ({ submit, btnLabel, placeholder }) => {
 UniqueInput.propTypes = {
   submit: PropTypes.func.isRequired,
   btnLabel: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default UniqueInput;

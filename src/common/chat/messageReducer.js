@@ -12,7 +12,7 @@ const MessageState = Record({
 export const messages = (state = new MessageState(), action) => {
   switch (action.type) {
     case Actions.SEND_MESSAGE: {
-      let newMessage = new Message(action.payload);
+      const newMessage = new Message(action.payload);
       return state.update('map', map => map.set(newMessage.id, newMessage));
     }
 

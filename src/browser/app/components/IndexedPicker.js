@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 
 const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
 
-
   const getOptionLabel = option => {
     let label = 'Nothing selected';
     if (option) {
@@ -20,7 +19,7 @@ const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
     },
   ];
 
-  const selectDisabled = !(!!options.length);
+  const selectDisabled = !(options.length > 0);
 
   return (
     <span>
