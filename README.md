@@ -1,3 +1,6 @@
+# ChatX
+[http://chatx.oklm.fm](http://chatx.oklm.fm)
+
 > This project is a little chat application made with React/Redux, on top of [este](https://github.com/este/este) boilerplate.
 > It was originally created for a job test, and for learning React+Redux+ES6+ImmutableJS.
 

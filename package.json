@@ -1,7 +1,6 @@
 {
-  "name": "este",
+  "name": "ChatX",
   "private": true,
-  "//": "Check all github.com/este/este#dev-tasks",
   "scripts": {
     "ava": "ava",
     "ava:watch": "ava --watch",
