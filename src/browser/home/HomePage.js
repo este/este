@@ -12,7 +12,7 @@ import {
 
 const HomePage = () => (
   <View>
-    <Title message="Este.js" />
+    <Title message="ChatX" />
     <PageHeader
       description="Starter kit for universal full–fledged React app. One stack
         for browser, mobile, server."

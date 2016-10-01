@@ -41,7 +41,7 @@ class ChatRoom extends Component {
 }
 
 const getRoomMessages = (messages, selectedRoom) => {
-  if(!selectedRoom) return {};
+  if (!selectedRoom) return {};
   return messages.filter(message => message && message.roomId === selectedRoom.id);
 };
 

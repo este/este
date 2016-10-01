@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
 const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
-
-  const getOptionLabel = option => {
+  const getOptionLabel = option =>
+  {
     let label = 'Nothing selected';
     if (option) {
       label = getLabel ? getLabel(option) : (option.value || option.id);
