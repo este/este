@@ -64,7 +64,7 @@ type Message {
   id: ShortRequiredString,
   content: LongString,
   roomId: ShortRequiredString,
-  sentTime: CurrentTimestamp
+  sentTime: Number
 }
 
 type Room {
@@ -101,14 +101,17 @@ path /users-presence/{uid} is UserPresence[] {
   delete() { true }
 }
 
-path /messages/{uid} is Message[] {
-  create() { true }
-  update() { true }
-  delete() { true }
+path /messages {
+  read()   { true }
+}
+path /rooms {
+  read()   { true }
 }
 
-path /rooms/{uid} is Room[] {
-  create() { true }
-  update() { true }
-  delete() { true }
+path /messages/{uid} is Message {
+  create()  { true }
+}
+
+path /rooms/{uid} is Room {
+  create()  { true }
 }
