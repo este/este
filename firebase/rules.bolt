@@ -60,6 +60,18 @@ type UserPresence {
   user: User
 }
 
+type Message {
+  id: ShortRequiredString,
+  content: LongString,
+  roomId: ShortRequiredString,
+  sentTime: CurrentTimestamp
+}
+
+type Room {
+  id: ShortRequiredString,
+  name: ShortString
+}
+
 // Paths
 
 path /hello-world is HelloWorld {
@@ -85,6 +97,18 @@ path /users-presence {
 
 path /users-presence/{uid} is UserPresence[] {
   create() { isViewer(uid) }
+  update() { true }
+  delete() { true }
+}
+
+path /messages/{uid} is Message[] {
+  create() { true }
+  update() { true }
+  delete() { true }
+}
+
+path /rooms/{uid} is Room[] {
+  create() { true }
   update() { true }
   delete() { true }
 }

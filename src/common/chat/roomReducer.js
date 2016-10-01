@@ -1,7 +1,6 @@
 import { Map } from 'immutable';
 import { Record } from '../transit';
 
-import Room from './Room';
 import * as Actions from './actions';
 
 const RoomState = Record({
@@ -11,8 +10,12 @@ const RoomState = Record({
 export const rooms = (state = new RoomState(), action) => {
   switch (action.type) {
     case Actions.CREATE_ROOM: {
-      const newRoom = new Room(action.payload);
+      const newRoom = action.payload;
       return state.update('map', map => map.set(newRoom.id, newRoom));
+    }
+
+    case Actions.FIREBASE_GET_ROOMS: {
+      return state.set('map', action.payload);
     }
     default:
       return state;

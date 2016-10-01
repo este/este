@@ -3,8 +3,6 @@ import { Record } from '../transit';
 
 import * as Actions from './actions';
 
-import Message from './Message';
-
 const MessageState = Record({
   map: Map(),
 }, 'messages');
@@ -12,8 +10,15 @@ const MessageState = Record({
 export const messages = (state = new MessageState(), action) => {
   switch (action.type) {
     case Actions.SEND_MESSAGE: {
-      const newMessage = new Message(action.payload);
-      return state.update('map', map => map.set(newMessage.id, newMessage));
+      const message = action.payload;
+      return state.update('map', map => map.set(message.id, message));
+    }
+    case Actions.FIREBASE_SAVE_MESSAGE: {
+      return state;
+    }
+    case Actions.FIREBASE_GET_MESSAGES: {
+      const messages = Map(action.payload);
+      return state.set('map', messages);
     }
 
     default:
