@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { firebase } from '../../../common/lib/redux-firebase';
+import { fields } from '../../../common/lib/redux-fields';
 
+import { Button, Select, Flex, Box, Text } from '../../app/components';
 import UniqueInput from '../../app/components/UniqueInput';
-import IndexedPicker from '../../app/components/IndexedPicker';
 import { createRoom, switchRoom, onGetRooms } from '../../../common/chat/actions';
 
 class RoomSelector extends Component {
@@ -13,34 +14,48 @@ class RoomSelector extends Component {
     createRoom: PropTypes.func.isRequired,
     switchRoom: PropTypes.func.isRequired,
     onGetRooms: PropTypes.func.isRequired,
+    fields: React.PropTypes.object.isRequired,
   };
 
-  handleChange(roomId) {
-    this.props.switchRoom(roomId);
+  selectRoom() {
+    this.props.switchRoom(this.props.fields.selectRoomId.value);
   }
 
   render() {
-    const pickerOptions = this.props.rooms.toList().map(room =>
-      ({
-        id: room.id,
-        value: room.name,
-      })
-    ).toArray();
-    pickerOptions.unshift({
-      id: null,
-      value: 'No channel',
-      disabled: true,
-    });
+    let pickerOptions = this.props.rooms.toList().map(room =>
+        ({
+          value: room.id,
+          children: room.name,
+        })
+      ).toArray();
+
 
     return (
       <div>
-        {pickerOptions.length ? <span>Rooms: </span> : null}
-        <IndexedPicker
-          selectedIndex={(this.props.selectedRoom && this.props.selectedRoom.id) || ''}
-          onChange={this.handleChange.bind(this)}
-          options={pickerOptions}
-        />
-        <UniqueInput submit={this.props.createRoom} btnLabel="Créer" placeholder="Room name" />
+        {
+          pickerOptions.length ?
+            <div>
+              <Flex>
+                <Box auto>
+                  <Select
+                    {...this.props.fields.selectRoomId}
+                    label="Rooms"
+                    options={pickerOptions}
+                    rounded
+                    hideLabel
+                  />
+                </Box>
+                <Box>
+                  <Button onClick={this.selectRoom.bind(this)}>
+                    Select room
+                  </Button>
+                </Box>
+              </Flex>
+            </div>
+            :
+            <Text>No rooms</Text>
+        }
+        <UniqueInput submit={this.props.createRoom} inputLabel="Create a room:" btnLabel="Create" placeholder="Room name" />
       </div>
     );
   }
@@ -71,5 +86,10 @@ RoomSelector = firebase((database, props) => {
   ];
   // TODO : get rooms one by one after first initialisation
 })(RoomSelector);
+
+RoomSelector = fields(RoomSelector, {
+  path: 'roomSelector',
+  fields: ['selectRoomId'],
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomSelector);

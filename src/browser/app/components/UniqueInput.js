@@ -1,35 +1,47 @@
 import React, { PropTypes } from 'react';
+import { Form, Button, Input } from '../../app/components';
 
-const UniqueInput = ({ submit, btnLabel, placeholder }) => {
-  let contentNode = null;
+import { fields } from '../../../common/lib/redux-fields';
+
+let UniqueInput = ({ submit, fields, inputLabel, btnLabel, placeholder }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const content = contentNode.value.trim();
+    const content = fields.content.value.trim();
     if (!content) return;
+
     submit(content);
-    contentNode.value = '';
+
+    fields.$reset();
   };
 
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
+    <Form onSubmit={onSubmit}>
+      <Input
+        {...fields.content}
+        label={inputLabel || ''}
         placeholder={placeholder}
-        ref={node => { contentNode = node; }}
       />
-      <button type="submit">
+      <Button>
         { btnLabel || 'Submit' }
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
 
 UniqueInput.propTypes = {
   submit: PropTypes.func.isRequired,
   btnLabel: PropTypes.string,
+  inputLabel: PropTypes.string,
   placeholder: PropTypes.string,
+  fields: React.PropTypes.object.isRequired,
 };
+
+
+UniqueInput = fields(UniqueInput, {
+  path: 'uniqueInput',
+  fields: ['content'],
+});
 
 export default UniqueInput;
