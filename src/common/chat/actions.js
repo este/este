@@ -57,6 +57,7 @@ export const switchRoom = (roomId) => ({ firebase, getState }) =>
   const jsViewer = viewer.toJS();
 
   if (lastOnlineRef) {
+    lastOnlineRef.onDisconnect().cancel();
     const deletePromise = lastOnlineRef.remove();
   }
 
