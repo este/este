@@ -10,11 +10,10 @@ const Message = ({ message }) => {
     const date = moment(time);
     const difference = moment().diff(date);
     const isToday = moment.duration(difference).days() === 0;
-    if(isToday) {
+    if (isToday) {
       return date.format('H:mm:ss');
-    } else {
-      return date.fromNow();
     }
+    return date.fromNow();
   };
 
   return (

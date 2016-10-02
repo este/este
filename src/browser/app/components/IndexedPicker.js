@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 const NULL_INDEX = 'NULL_INDEX';
 
-const IndexedPicker = ({selectedIndex, onChange, options, getLabel}) => {
+const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
   const getOptionLabel = option => {
     let label = 'Nothing selected';
     if (option) {
@@ -12,7 +12,8 @@ const IndexedPicker = ({selectedIndex, onChange, options, getLabel}) => {
   };
 
   const selectOptions = options.length ?
-    options :
+    options
+    :
     [
       {
         id: NULL_INDEX,
@@ -24,7 +25,7 @@ const IndexedPicker = ({selectedIndex, onChange, options, getLabel}) => {
 
   const selectChange = (e) => {
     const index = e.target.value;
-    if(index === NULL_INDEX) {
+    if (index === NULL_INDEX) {
       onChange(null);
     } else {
       onChange(index);

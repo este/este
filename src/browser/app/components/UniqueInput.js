@@ -3,7 +3,7 @@ import { Form, Button, Input } from '../../app/components';
 
 import { fields } from '../../../common/lib/redux-fields';
 
-let UniqueInput = ({ submit, fields, inputLabel, btnLabel, placeholder }) => {
+const UniqueInput = ({ submit, fields, inputLabel, btnLabel, placeholder }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -39,9 +39,7 @@ UniqueInput.propTypes = {
 };
 
 
-UniqueInput = fields(UniqueInput, {
+export default fields(UniqueInput, {
   path: 'uniqueInput',
   fields: ['content'],
 });
-
-export default UniqueInput;

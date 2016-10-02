@@ -15,7 +15,6 @@ import { connect } from 'react-redux';
 // Pages
 import Fields from '../fields/FieldsPage';
 import Users from '../users/UsersPage';
-import Home from '../home/HomePage';
 import Intl from '../intl/IntlPage';
 import Me from '../me/MePage';
 import NotFound from '../notfound/NotFoundPage';
