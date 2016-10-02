@@ -1,11 +1,8 @@
 /* @flow */
 import React from 'react';
 import {
-  Block,
-  Image,
   Link,
   PageHeader,
-  SwitchTheme,
   Title,
   View,
 } from '../app/components';

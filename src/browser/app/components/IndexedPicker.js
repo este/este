@@ -14,12 +14,12 @@ const IndexedPicker = ({ selectedIndex, onChange, options, getLabel }) => {
   const selectOptions = options.length ?
     options
     :
-    [
-      {
-        id: NULL_INDEX,
-        value: 'No items',
-      },
-    ];
+  [
+    {
+      id: NULL_INDEX,
+      value: 'No items',
+    },
+  ];
 
   const selectDisabled = !(options.length > 0);
 

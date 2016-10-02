@@ -1,6 +1,6 @@
 import moment from 'moment';
-import React, {PropTypes} from 'react';
-import {Text, Box, Block, Flex, Avatar} from '../../app/components';
+import React, { PropTypes } from 'react';
+import { Text, Box, Block, Flex, Avatar } from '../../app/components';
 import Gravatar from 'react-gravatar';
 
 const styles = {
@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-const Message = ({message}) => {
+const Message = ({ message }) => {
 
   const formatSentTime = (time) => {
     const date = moment(time);
