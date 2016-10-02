@@ -13,15 +13,16 @@ import { Miss } from 'react-router';
 import { connect } from 'react-redux';
 
 // Pages
+import Home from '../home/HomePage';
 import Fields from '../fields/FieldsPage';
 import Users from '../users/UsersPage';
-import Home from '../home/HomePage';
 import Intl from '../intl/IntlPage';
 import Me from '../me/MePage';
 import NotFound from '../notfound/NotFoundPage';
 import Offline from '../offline/OfflinePage';
 import SignIn from '../auth/SignInPage';
 import Todos from '../todos/TodosPage';
+import Chat from '../chat/ChatPage';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
@@ -58,6 +59,7 @@ let App = ({ currentLocale, currentTheme }) => (
       />
       <Header />
       <Match exactly pattern="/" component={Home} />
+      <Match authorized pattern="/chat" component={Chat} />
       <Match pattern="/fields" component={Fields} />
       <Match pattern="/users" component={Users} />
       <Match pattern="/intl" component={Intl} />

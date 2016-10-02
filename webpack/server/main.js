@@ -10,9 +10,9 @@ const webpackConfig = makeWebpackConfig({ isDevelopment: true });
 const compiler = webpack(webpackConfig);
 
 app.use(webpackDev(compiler, {
-  headers: {'Access-Control-Allow-Origin': '*'},
+  headers: { 'Access-Control-Allow-Origin': '*' },
   noInfo: true,
-  publicPath: webpackConfig.output.publicPath
+  publicPath: webpackConfig.output.publicPath,
 }));
 
 app.use(webpackHot(compiler));

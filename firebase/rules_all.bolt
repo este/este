@@ -1,0 +1,4 @@
+path / {
+  read() { true },
+  write() { true }
+}

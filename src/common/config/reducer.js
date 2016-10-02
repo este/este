@@ -2,9 +2,9 @@
 import { Record } from '../transit';
 
 const State = Record({
-  appName: '',
-  appVersion: '',
-  firebase: '',
+  appName: 'ChatX',
+  appVersion: '0.0.2',
+  firebase: 'ezfiuezh',
   sentryUrl: '',
 }, 'config');
 

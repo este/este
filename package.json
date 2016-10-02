@@ -1,7 +1,6 @@
 {
-  "name": "este",
+  "name": "ChatX",
   "private": true,
-  "//": "Check all github.com/este/este#dev-tasks",
   "scripts": {
     "ava": "ava",
     "ava:watch": "ava --watch",
@@ -83,6 +82,7 @@
     "invariant": "^2.1.2",
     "ip": "^1.0.2",
     "make-error": "^1.0.4",
+    "moment": "^2.15.1",
     "nconf": "^0.8.1",
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",
@@ -103,6 +103,7 @@
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.0.0",
     "react-router": "^4.0.0-alpha.3",
+    "react-select": "^1.0.0-rc.2",
     "rebass": "^0.3.1",
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",
