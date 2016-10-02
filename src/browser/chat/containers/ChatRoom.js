@@ -3,7 +3,7 @@ import { Seq } from 'immutable';
 import { connect } from 'react-redux';
 import { firebase } from '../../../common/lib/redux-firebase';
 
-import { View, Box, Card, Heading, Divider } from '../../app/components';
+import { Text, View, Box, Card, Heading, Divider } from '../../app/components';
 
 import MessageInput from './MessageInput';
 import MessageList from '../components/MessageList';
@@ -30,17 +30,23 @@ class ChatRoom extends Component {
       <View>
         <Box sm={12} px={3} py={3}>
           <Card p={0}>
-            <Box px={2} py={2}>
+            <Box px={2} pt={2}>
               <Heading level={3}>
                 {this.props.selectedRoom.name}
               </Heading>
             </Box>
-            <MessageList messages={this.props.messages} />
-            <Divider my={0} />
+            <Divider my={1} />
+            <OnlineUsers users={this.getOnlineUsers()} />
+            {
+              this.props.messages.size ?
+                <MessageList messages={this.props.messages} />
+                :
+                <Text m={3} small>There is no messages in this room... Say hello !</Text>
+            }
+            <Divider mb={0}/>
             <MessageInput />
           </Card>
         </Box>
-        <OnlineUsers users={this.getOnlineUsers()} />
       </View>
     );
   }

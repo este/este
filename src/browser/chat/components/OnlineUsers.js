@@ -1,25 +1,26 @@
-import React, { PropTypes } from 'react';
-import { Block } from '../../app/components';
+import React, {PropTypes} from 'react';
+import {View, Text, Block} from '../../app/components';
 
-const OnlineUsers = ({ users }) => {
+const OnlineUsers = ({users}) => {
 
   return (
-    <Block>
+    <Block mt={1}>
       {
         users.size ?
-          <Block>
-            <p>Users online on this channel: </p>
-            <ul>
-              {
-                users.map(user => (
-                  <li key={user.id}>{user.displayName}</li>
-                )).toArray()
-              }
-            </ul>
-          </Block>
+          <View>
+            <Text mx={2} small>
+              <span>
+                {users.size} user{users.size > 1 ? 's' : null} in room:
+              </span>
+              <i style={{ marginLeft: '5px' }}>
+                {
+                  users.map(user => user.displayName).toArray().join(', ')
+                }
+              </i>
+            </Text>
+          </View>
           :
-          'Nobody'
-
+          <Text small></Text>
       }
     </Block>
   );

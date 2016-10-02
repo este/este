@@ -20,7 +20,7 @@ const ChatPage = ({ intl, selectedRoomId }) => (
       <ChatRoom />
       :
       <Block>
-        <Text>Please select or create a room to chat</Text>
+        <Text>Please select or create a room to begin a chat !</Text>
       </Block>
     }
   </View>
