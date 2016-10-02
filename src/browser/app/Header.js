@@ -14,10 +14,6 @@ const styles = {
 const Header = ({ viewer }) => (
   <Toolbar style={styles.toolbar}>
     <Link bold inverted exactly to="/">
-      <FormattedMessage {...linksMessages.home} />
-    </Link>
-    <Space x={2} />
-    <Link bold inverted to="/chat">
       <FormattedMessage {...linksMessages.chat} />
     </Link>
     <Space x={2} />

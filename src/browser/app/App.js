@@ -58,14 +58,13 @@ let App = ({ currentLocale, currentTheme }) => (
         ]}
       />
       <Header />
-      <Match exactly pattern="/" component={Home} />
+      <Match authorized exactly pattern="/" component={Chat} />
       <Match pattern="/fields" component={Fields} />
       <Match pattern="/users" component={Users} />
       <Match pattern="/intl" component={Intl} />
       <Match pattern="/offline" component={Offline} />
       <Match pattern="/signin" component={SignIn} />
       <Match pattern="/todos" component={Todos} />
-      <Match authorized pattern="/chat" component={Chat} />
       <Match authorized pattern="/me" component={Me} />
       <Miss component={NotFound} />
       <Footer />
