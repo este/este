@@ -103,6 +103,7 @@
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.0.0",
     "react-router": "^4.0.0-alpha.3",
+    "react-select": "^1.0.0-rc.2",
     "rebass": "^0.3.1",
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",

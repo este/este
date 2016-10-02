@@ -25,6 +25,7 @@ export const rooms = (state = new RoomState(), action) => {
 
 export const selectedRoomId = (state = null, action) => {
   switch (action.type) {
+    // TODO check if room exists : how to access rooms state ?
     case Actions.SWITCH_ROOM:
       return action.roomId;
 

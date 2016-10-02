@@ -1,6 +1,6 @@
 /* @flow */
 import React, { PropTypes } from 'react';
-import { SectionHeader, Title, View } from '../app/components';
+import { SectionHeader, Block, Divider, Title, Text, View } from '../app/components';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -15,7 +15,14 @@ const ChatPage = ({ intl, selectedRoomId }) => (
     <SectionHeader heading={intl.formatMessage(linksMessages.chat)} />
 
     <RoomSelector />
-    {selectedRoomId ? <ChatRoom /> : null}
+    <Divider />
+    {selectedRoomId ?
+      <ChatRoom />
+      :
+      <Block>
+        <Text>Please select or create a room to chat</Text>
+      </Block>
+    }
   </View>
 );
 

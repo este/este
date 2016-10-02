@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { firebase } from '../../../common/lib/redux-firebase';
 import { fields } from '../../../common/lib/redux-fields';
 
-import { Button, Select, Flex, Box, Text } from '../../app/components';
-import UniqueInput from '../../app/components/UniqueInput';
+import { Text } from '../../app/components';
 import { createRoom, switchRoom, onGetRooms } from '../../../common/chat/actions';
+
+import 'react-select/dist/react-select.css';
+import SearchSelect from 'react-select';
 
 class RoomSelector extends Component {
   static propTypes = {
@@ -17,14 +19,19 @@ class RoomSelector extends Component {
     fields: React.PropTypes.object.isRequired,
   };
 
-  selectRoom() {
-    this.props.switchRoom(this.props.fields.selectRoomId.value);
+  selectRoom(item) {
+    if (item.label === item.value) { // TODO... On dira rien
+      this.props.createRoom(item.label);
+    } else {
+      this.props.switchRoom(item.value);
+    }
   }
 
   render() {
-    let pickerOptions = this.props.rooms.toList().map(room =>
+    const pickerOptions = this.props.rooms.toList().map(room =>
         ({
           value: room.id,
+          label: room.name,
           children: room.name,
         })
       ).toArray();
@@ -32,33 +39,14 @@ class RoomSelector extends Component {
 
     return (
       <div>
-        {
-          pickerOptions.length ?
-            <div>
-              <Box>
-                <Text bold>Rooms</Text>
-              </Box>
-              <Flex>
-                <Box auto>
-                  <Select
-                    {...this.props.fields.selectRoomId}
-                    label="Rooms"
-                    options={pickerOptions}
-                    rounded
-                    hideLabel
-                  />
-                </Box>
-                <Box>
-                  <Button onClick={this.selectRoom.bind(this)}>
-                    Join room
-                  </Button>
-                </Box>
-              </Flex>
-            </div>
-            :
-            <Text>No rooms</Text>
-        }
-        <UniqueInput submit={this.props.createRoom} inputLabel="Create a room:" btnLabel="Create" placeholder="Room name" />
+        <Text bold>Rooms</Text>
+        <SearchSelect.Creatable
+          multi={false}
+          options={pickerOptions}
+          onChange={this.selectRoom.bind(this)}
+          placeholder="Enter a room name..."
+          promptTextCreator={label => `Create room "${label}"`}
+        />
       </div>
     );
   }
