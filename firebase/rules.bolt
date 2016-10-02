@@ -65,8 +65,7 @@ type Message {
   content: LongString,
   roomId: ShortRequiredString,
   sentTime: Number,
-  senderId: ShortRequiredString
-  senderName: ShortString
+  sender: Object
 }
 
 type Room {
