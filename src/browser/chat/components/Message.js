@@ -18,7 +18,7 @@ const Message = ({ message }) => {
   };
 
   return (
-    <Block p={2} borderLeft={message.unRead}>
+    <Block m={0} p={2} pt={1} pb={1} borderLeft={message.unRead}>
       <Flex align="center">
         <Box>
           <Avatar mr={2} src={message.senderAvatar || defaultAvatar} />

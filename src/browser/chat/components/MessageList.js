@@ -5,7 +5,7 @@ import { View } from '../../app/components';
 import Message from './Message';
 
 const boxStyle = {
-  height: '500px',
+  height: '220px',
   overflowY: 'scroll',
 };
 
