@@ -29,6 +29,7 @@ npm install
 
 - Select multiple channels
 - Delete a room by owner
+- Access directly to a room by URL chat/roomId
 - Read firebase with child_* event for not reloading whole data
 - Style online users
 - Use id instead of copies/references in nested data (rooms/{id}/onlineUsers/* and messages/{id}/sender)
