@@ -25,6 +25,14 @@ npm install
 - chat with the huge amount of people present in the app !
 - try editing some code
 
+## TODOs
+
+- Select multiple channels
+- Delete a room by owner
+- Read firebase with child_* event for not reloading whole data
+- Style online users
+- Use id instead of copies/references in nested data (rooms/{id}/onlineUsers/* and messages/{id}/sender)
+
 ## Dev Tasks
 
 - `gulp` run web app in development mode
@@ -43,12 +51,10 @@ npm install
 
 - `gulp build -p` build app for production
 - `npm test` run all checks and tests
-- `node src/server` start app, remember to set NODE_ENV and SERVER_URL
 - `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
-- `gulp deploy-heroku` deploy [Heroku](https://www.heroku.com/) app
 - `gulp deploy-firebase` deploy [Firebase](https://firebase.google.com/) app
 - `gulp deploy-firebase-database` deploy Firebase database only
 
 ## Credit
 
-este : Original boilerplate made by [Daniel Steigerwald](https://twitter.com/steida) and the community.
+- [este](https://github.com/este/este) : Original boilerplate made by [Daniel Steigerwald](https://twitter.com/steida) and the community.
