@@ -1,4 +1,4 @@
-import { Seq, Map } from 'immutable';
+import { Map } from 'immutable';
 
 import Message from './Message';
 import Room from './Room';
@@ -53,14 +53,14 @@ export const switchRoom = (roomId) => ({ firebase, getState }) =>
 {
   const viewer = getState().users.viewer;
 
-  if(!viewer) return {type: NOTHING};
+  if (!viewer) return { type: NOTHING };
 
   const jsViewer = viewer.toJS();
 
-  if(lastOnlineRef) {
+  if (lastOnlineRef) {
     const deletePromise = lastOnlineRef.remove();
-
   }
+
   const onlineUserRef = firebase.child(`rooms/${roomId}/onlineUsers/${jsViewer.id}`);
 
   const updatePromise = onlineUserRef.set(jsViewer);

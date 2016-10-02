@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { firebase } from '../../common/lib/redux-firebase';
+import { firebase } from '../../../common/lib/redux-firebase';
 
-import UniqueInput from '../app/components/UniqueInput';
-import IndexedPicker from '../app/components/IndexedPicker';
-import { createRoom, switchRoom, onGetRooms } from '../../common/chat/actions';
+import UniqueInput from '../../app/components/UniqueInput';
+import IndexedPicker from '../../app/components/IndexedPicker';
+import { createRoom, switchRoom, onGetRooms } from '../../../common/chat/actions';
 
 class RoomSelector extends Component {
   static propTypes = {
