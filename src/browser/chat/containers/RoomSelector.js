@@ -45,6 +45,7 @@ class RoomSelector extends Component {
           options={pickerOptions}
           onChange={this.selectRoom.bind(this)}
           placeholder="Enter a room name..."
+          noResultsText="There is no rooms, type to create one !"
           promptTextCreator={label => `Create room "${label}"`}
         />
       </div>
