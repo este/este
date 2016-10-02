@@ -91,8 +91,10 @@ export const createRoom = roomName => ({ getUid, dispatch }) => {
     name: roomName,
   });
 
-  dispatch(switchRoom(newRoom.id)); // Maybe too early to dispatch ??
   dispatch(saveRoom(newRoom));
+  setTimeout(() => { // Avant de trouver mieux
+    dispatch(switchRoom(newRoom.id)); // Maybe too early to dispatch ??
+  }, 500);
 
   return {
     type: CREATE_ROOM,

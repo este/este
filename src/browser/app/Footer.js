@@ -14,7 +14,7 @@ const AppFooter = () => (
   <Footer>
     <FormattedMessage {...messages.madeByHtml} />
     {'\u00a0'}
-    <Link to="https://github.com/pakokrew">
+    <Link to="https://github.com/pakokrew" target="_blank">
       paco
     </Link>
   </Footer>
