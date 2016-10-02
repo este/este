@@ -13,6 +13,7 @@ import { Miss } from 'react-router';
 import { connect } from 'react-redux';
 
 // Pages
+import Home from '../home/HomePage';
 import Fields from '../fields/FieldsPage';
 import Users from '../users/UsersPage';
 import Intl from '../intl/IntlPage';
@@ -57,7 +58,8 @@ let App = ({ currentLocale, currentTheme }) => (
         ]}
       />
       <Header />
-      <Match authorized exactly pattern="/" component={Chat} />
+      <Match exactly pattern="/" component={Home} />
+      <Match authorized pattern="/chat" component={Chat} />
       <Match pattern="/fields" component={Fields} />
       <Match pattern="/users" component={Users} />
       <Match pattern="/intl" component={Intl} />
