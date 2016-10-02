@@ -32,8 +32,7 @@ export const sendMessage = message => ({ getUid, now, dispatch }) =>
     content: message.content,
     roomId: message.roomId,
     sentTime: now(),
-    senderId: message.sender.id,
-    senderName: message.sender.displayName,
+    sender: message.sender,
   });
 
   dispatch(saveMessage(newMessage));

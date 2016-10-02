@@ -6,8 +6,7 @@ const Message = Record({
   content: '',
   roomId: null,
   sentTime: null,
-  senderId: '',
-  senderName: '',
+  sender: {},
 }, 'message');
 
 export default Message;

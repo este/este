@@ -35,6 +35,9 @@ class RoomSelector extends Component {
         {
           pickerOptions.length ?
             <div>
+              <Box>
+                <Text bold>Rooms</Text>
+              </Box>
               <Flex>
                 <Box auto>
                   <Select
@@ -47,7 +50,7 @@ class RoomSelector extends Component {
                 </Box>
                 <Box>
                   <Button onClick={this.selectRoom.bind(this)}>
-                    Select room
+                    Join room
                   </Button>
                 </Box>
               </Flex>

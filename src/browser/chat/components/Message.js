@@ -1,10 +1,22 @@
 import moment from 'moment';
-import React, { PropTypes } from 'react';
-import { Text, Box, Block, Flex, Avatar } from '../../app/components';
+import React, {PropTypes} from 'react';
+import {Text, Box, Block, Flex, Avatar} from '../../app/components';
+import Gravatar from 'react-gravatar';
 
-const defaultAvatar = 'https://pbs.twimg.com/profile_images/666139404210081792/ef2KOClR_bigger.png';
+const styles = {
+  gravatar: {
+    borderRadius: '100%',
+    maxHeight: '50px',
+    boxSizing: 'border-box',
+    maxWidth: 'none',
+    width: '48px',
+    height: '48px',
+    backgroundColor: 'rgb(221, 221, 221)',
+    marginRight: '16px',
+  },
+};
 
-const Message = ({ message }) => {
+const Message = ({message}) => {
 
   const formatSentTime = (time) => {
     const date = moment(time);
@@ -20,7 +32,20 @@ const Message = ({ message }) => {
     <Block m={0} p={2} pt={1} pb={1} borderLeft={message.unRead}>
       <Flex align="center">
         <Box>
-          <Avatar mr={2} src={message.senderAvatar || defaultAvatar} />
+          {
+            message.sender.photoURL ?
+              <Avatar mr={2} src={message.sender.photoURL}/>
+              :
+              <Gravatar
+                size={48}
+                default="retro"
+                email={message.sender.displayName} // For users signed in via email.
+                https
+                rating="x"
+                style={styles.gravatar}
+                title={message.sender.displayName}
+              />
+          }
         </Box>
         <Box>
           <Text
@@ -28,7 +53,7 @@ const Message = ({ message }) => {
             bold
             color="midgray"
           >
-            {message.senderName}
+            {message.sender.displayName}
           </Text>
           <Text>{message.content}</Text>
           <Text
