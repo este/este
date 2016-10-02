@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { PropTypes } from 'react';
 import { Text, Box, Block, Flex, Avatar } from '../../app/components';
 
@@ -6,8 +7,14 @@ const defaultAvatar = 'https://pbs.twimg.com/profile_images/666139404210081792/e
 const Message = ({ message }) => {
 
   const formatSentTime = (time) => {
-    const date = new Date(time);
-    return date.toLocaleTimeString();
+    const date = moment(time);
+    const difference = moment().diff(date);
+    const isToday = moment.duration(difference).days() === 0;
+    if(isToday) {
+      return date.format('H:mm:ss');
+    } else {
+      return date.fromNow();
+    }
   };
 
   return (
