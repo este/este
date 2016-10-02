@@ -100,16 +100,9 @@ export const createRoom = roomName => ({ getUid, dispatch }) => {
   };
 };
 
-export const onGetRooms = (snap) => ({ dispatch, getState }) => {
-  const rooms = Map(snap.val());
-  const state = getState();
-  const selectedRoomId = state.chat.selectedRoomId;
-  if (!selectedRoomId && rooms.size) {
-    const firstRoom = rooms.first();
-    dispatch(switchRoom(firstRoom.id));
-  }
-  return {
+export const onGetRooms = (snap) => (
+  {
     type: FIREBASE_GET_ROOMS,
-    payload: rooms,
-  };
-};
+    payload: Map(snap.val()),
+  }
+);

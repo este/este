@@ -26,6 +26,11 @@ class RoomSelector extends Component {
         value: room.name,
       })
     ).toArray();
+    pickerOptions.unshift({
+      id: null,
+      value: 'No channel',
+      disabled: true,
+    });
 
     return (
       <div>
