@@ -104,21 +104,20 @@ path /users-presence/{uid} is UserPresence[] {
 }
 
 path /messages {
-  read()   { true }
+  read()   { isSignedIn() }
 }
 path /rooms {
-  read()   { true }
+  read()   { isSignedIn() }
 }
 
-path /messages/{uid} is Message {
-  create()  { true }
+path /messages/{mid} is Message {
+  create()  { isSignedIn() }
 }
 
-path /rooms/{uid} is Room {
-  create()  { true }
+path /rooms/{rid} is Room {
+  create()  { isSignedIn() }
 }
 
 path /rooms/{rid}/onlineUsers/{uid} {
   write()  { isViewer(uid) }
-  read() { true }
 }
