@@ -52,7 +52,6 @@ const MePage = ({ pathname, viewer }) => (
                 <Gravatar
                   default="retro"
                   email={viewer.email}
-                  https
                   rating="x"
                   size={100}
                 />
