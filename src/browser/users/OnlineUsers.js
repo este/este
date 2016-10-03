@@ -30,7 +30,6 @@ const User = ({ user }) => (
       <Gravatar
         default="retro"
         email={user.displayName} // For users signed in via email.
-        https
         rating="x"
         style={styles.gravatar}
         title={user.displayName}

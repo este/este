@@ -32,7 +32,7 @@
     "autoprefixer": "^6.1.0",
     "ava": "^0.16.0",
     "babel-core": "^6.6.0",
-    "babel-eslint": "^6.0.0",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-intl": "^2.1.1",
     "babel-plugin-react-transform": "^2.0.0",
@@ -59,7 +59,7 @@
     "eslint-loader": "^1.1.1",
     "eslint-plugin-ava": "^3.0.0",
     "eslint-plugin-babel": "^3.0.0",
-    "eslint-plugin-import": "^1.0.0",
+    "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-react-native": "^2.0.0",
@@ -126,11 +126,11 @@
     "transit-js": "^0.8.846",
     "url-loader": "^0.5.5",
     "uuid": "^2.0.2",
-    "validator": "^5.0.0",
+    "validator": "^6.0.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.8.1",
     "webpack-isomorphic-tools": "^2.2.24",
-    "yargs": "^5.0.0"
+    "yargs": "^6.0.0"
   }
 }
