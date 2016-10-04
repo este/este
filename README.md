@@ -132,7 +132,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - set name in `package.json`
 - set locales, firebaseUrl, sentryUrl, etc. in `src/server/config.js`
 - remove unused locale-data from `src/browser/index.js`
-- change `src/common/app/favicons/original/favicon.png`, then `gulp favicon`
+- change `src/common/app/favicons/original/favicon.png`, then `gulp favicon` and `gulp -p`
 - remove unused reducers from `src/common/configureReducer.js`
 - delete unused app features, todos for example: src/{platform}/todos
 - modify your FB app_id e.g. for [iOS](https://developers.facebook.com/docs/ios/getting-started/#configure-xcode-project)
