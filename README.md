@@ -13,9 +13,10 @@
 
 > You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimal valuable product asap with the state of the art real-time universal app stack**.
 
-> Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, napište mi daniel@steigerwald.cz
+> Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, objednejte se na [javascript-skoleni.cz](https://javascript-skoleni.cz/).
 
-> *Vote Gary Johnson https://www.johnsonweld.com*
+> Workshop soon! [reactiveconf.com/workshop/universal-react-is-a-real-thing](https://reactiveconf.com/workshop/universal-react-is-a-real-thing)
+> Write me for 50% discount for Reactiveconf ticket (daniel@steigerwald.cz).
 
 ## Techniques
 
