@@ -1,6 +1,6 @@
 {
-  "name": "este",
-  "private": true,
+  "name": "mi-nur-cinema",
+  "private": false,
   "//": "Check all github.com/este/este#dev-tasks",
   "scripts": {
     "ava": "ava",
