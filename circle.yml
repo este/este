@@ -1,9 +1,11 @@
 machine:
   node:
-    version: 6.1.0
+    version: 6.7.0
 
-# Disable cache because CircleCI doesn't detect deleted packages.
-# circleci.com/docs/how-cache-works/#clearing-the-cache
 dependencies:
-  post:
-    - rm -fr ~/.gradle
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn
+  post:  # At least for me, it doesn't seem like `scripts` in `package.json` are being run, so you need to add them explicitly
+    - yarn run postinstall

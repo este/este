@@ -13,7 +13,7 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=6.7.0"
   },
   "ava": {
     "babel": "inherit",
