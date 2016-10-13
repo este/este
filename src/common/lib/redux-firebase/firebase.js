@@ -10,14 +10,11 @@ import React from 'react';
 //   ]
 // })(OnlineUsers);
 
-type Query = [Object, string, string, Function, Function];
-type onDidMount = (
-  database: Object,
-  props: Object
-) => void | Array<Query>;
+type Query = [Object, string, string, Function, Function | void];
+type onMount = (database: Object, props: Object) => void | Array<Query>;
 
 // Higher order component for Firebase declarative queries.
-const firebase = (onDidMount: onDidMount) => (WrappedComponent: Function) =>
+const firebase = (onMount: onMount) => (WrappedComponent: Function) =>
   class Firebase extends React.Component {
 
     static contextTypes = {
@@ -37,7 +34,7 @@ const firebase = (onDidMount: onDidMount) => (WrappedComponent: Function) =>
       if (!serverFetchPromises) return;
       // This is called only on the server.
       this.context.store.dispatch(({ firebase }) => {
-        this.queries = onDidMount(firebase, this.props) || [];
+        this.queries = onMount(firebase, this.props) || [];
         this.queries.forEach(([ref, , eventType, cb1, cb2]) => {
           // Enforce once eventType and store a promise so render can wait.
           const promise = ref.once(eventType, cb1, cb2);
@@ -50,7 +47,7 @@ const firebase = (onDidMount: onDidMount) => (WrappedComponent: Function) =>
     // This is called only on the client.
     componentDidMount() {
       this.context.store.dispatch(({ firebase }) => {
-        this.queries = onDidMount(firebase, this.props) || [];
+        this.queries = onMount(firebase, this.props) || [];
         this.queries.forEach(([ref, method, eventType, cb1, cb2]) => {
           ref[method](eventType, cb1, cb2);
         });

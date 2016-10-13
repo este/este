@@ -31,7 +31,7 @@ ReactDOM.render(
 
 // Hot reload render.
 // gist.github.com/gaearon/06bd9e2223556cb0d841#file-naive-js
-if (module.hot) {
+if (module.hot && typeof module.hot.accept === 'function') {
   module.hot.accept('./app/Root', () => {
     const NextRoot = require('./app/Root').default;
 

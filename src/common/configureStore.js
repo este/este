@@ -31,7 +31,7 @@ const configureStore = (options: Options) => {
   );
 
   // Enable hot reloading for reducers.
-  if (module.hot) {
+  if (module.hot && typeof module.hot.accept === 'function') {
     if (initialState.device.isReactNative) {
       // React Native for some reason needs accept without the explicit path.
       // facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
