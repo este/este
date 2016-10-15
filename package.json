@@ -60,7 +60,7 @@
     "eslint-plugin-ava": "^3.0.0",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "^3.0.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-react-native": "^2.0.0",
     "express": "^4.13.3",
