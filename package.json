@@ -1,6 +1,6 @@
 {
-  "name": "este",
-  "private": true,
+  "name": "mi-nur-cinema",
+  "private": false,
   "//": "Check all github.com/este/este#dev-tasks",
   "scripts": {
     "ava": "ava",
@@ -13,7 +13,7 @@
     "test": "gulp test"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=6.7.0"
   },
   "ava": {
     "babel": "inherit",
