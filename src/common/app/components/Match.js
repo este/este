@@ -10,7 +10,7 @@ const Match = ({
   component: Component,
   render,
   viewer,
-  ...props,
+  ...props
 }) => (
   <ReactRouterMatch
     {...props}
