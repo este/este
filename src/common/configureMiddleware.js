@@ -1,15 +1,10 @@
 /* @flow weak */
+import configureDeps from './configureDeps';
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
 import errorToMessage from '../common/app/errorToMessage';
 
-// Deps.
-import firebase from 'firebase';
-import validate from './validate';
-
-let firebaseDeps = null;
-
-// Like redux-thunk but with dependency injection.
+// Like redux-thunk, but with just one argument.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   next(typeof action === 'function'
     ? action({ ...deps, dispatch, getState })
@@ -40,36 +35,16 @@ const promiseMiddleware = options => ({ dispatch }) => next => action => {
 };
 
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
-  // Lazy init.
-  if (!firebaseDeps) {
-    firebase.initializeApp(initialState.config.firebase);
-    firebaseDeps = {
-      firebase: firebase.database().ref(),
-      firebaseAuth: firebase.auth,
-      firebaseDatabase: firebase.database,
-    };
-  }
-  // Check whether Firebase works.
-  // firebaseDeps.firebase.child('hello-world').set({
-  //   createdAt: firebaseDeps.firebaseDatabase.ServerValue.TIMESTAMP,
-  //   text: 'Yes!'
-  // });
-
   const {
     STORAGE_SAVE,
     storageEngine,
     storageMiddleware,
   } = configureStorage(initialState, platformDeps.createStorageEngine);
 
+  const deps = configureDeps(initialState, platformDeps, storageEngine);
+
   const middleware = [
-    injectMiddleware({
-      ...platformDeps,
-      ...firebaseDeps,
-      getUid: () => platformDeps.uuid.v4(),
-      now: () => Date.now(),
-      storageEngine,
-      validate,
-    }),
+    injectMiddleware(deps),
     promiseMiddleware({
       shouldThrow: error => !errorToMessage(error),
     }),
