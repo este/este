@@ -93,7 +93,7 @@
     "react-dom": "^15.3.1",
     "react-gravatar": "^2.4.4",
     "react-helmet": "^3.0.0",
-    "react-history": "0.13.3",
+    "react-history": "0.15.0",
     "react-intl": "^2.1.2",
     "react-native": "^0.35.0",
     "react-native-fbsdk": "^0.3.0",
