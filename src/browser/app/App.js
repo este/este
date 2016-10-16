@@ -1,84 +1,85 @@
 /* @flow */
-import './App.scss';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
-import React from 'react';
+import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import favicon from '../../common/app/favicon';
-import start from '../../common/app/start';
+import { setDevice } from '../../common/device/actions';
 import { Container } from '../app/components';
 import { Match, ThemeProvider } from '../../common/app/components';
 import { Miss } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// Pages
-import Fields from '../fields/FieldsPage';
-import Users from '../users/UsersPage';
 import Home from '../home/HomePage';
-import Intl from '../intl/IntlPage';
-import Me from '../me/MePage';
 import NotFound from '../notfound/NotFoundPage';
-import Offline from '../offline/OfflinePage';
-import SignIn from '../auth/SignInPage';
-import Todos from '../todos/TodosPage';
 
-// v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
-const bootstrap4Metas: any = [
-  { charset: 'utf-8' },
-  {
-    name: 'viewport',
-    content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-  },
-  {
-    'http-equiv': 'x-ua-compatible',
-    content: 'ie=edge',
-  },
-];
+@connect(null, (dispatch) => bindActionCreators({ setDevice }, dispatch))
+export default class App extends Component {
+  static propTypes = {
+    setDevice: RPT.func.isRequired,
+  }
 
-let App = ({ currentLocale, currentTheme }) => (
-  <ThemeProvider
-    key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-    theme={themes[currentTheme] || themes.initial}
-  >
-    <Container>
-      <Helmet
-        htmlAttributes={{ lang: currentLocale }}
-        meta={[
-          ...bootstrap4Metas,
-          {
-            name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React apps',
-          },
-          ...favicon.meta,
-        ]}
-        link={[
-          ...favicon.link,
-        ]}
-      />
-      <Header />
-      <Match exactly pattern="/" component={Home} />
-      <Match pattern="/fields" component={Fields} />
-      <Match pattern="/users" component={Users} />
-      <Match pattern="/intl" component={Intl} />
-      <Match pattern="/offline" component={Offline} />
-      <Match pattern="/signin" component={SignIn} />
-      <Match pattern="/todos" component={Todos} />
-      <Match authorized pattern="/me" component={Me} />
-      <Miss component={NotFound} />
-      <Footer />
-    </Container>
-  </ThemeProvider>
-);
+  state = {
+    mqls: [],
+  }
 
-App.propTypes = {
-  currentLocale: React.PropTypes.string.isRequired,
-  currentTheme: React.PropTypes.string,
-};
+  componentWillMount() {
+    if (!global.window) return;
 
-App = connect(state => ({
-  currentLocale: state.intl.currentLocale,
-  currentTheme: state.themes.currentTheme,
-}))(App);
+    const mqls = [
+      window.matchMedia('(max-width: 480px)'),
+      window.matchMedia('(max-width: 768px)'),
+      window.matchMedia('(min-width: 992px)'),
+    ];
+    mqls.map(x => x.addListener(() => this.mediaQueryChanged()));
 
-export default start(App);
+    this.setState({ mqls });
+    setTimeout(() => this.mediaQueryChanged(), 5);
+  }
+
+  mediaQueryChanged() {
+    const { setDevice } = this.props;
+    const { mqls } = this.state;
+    let device = 'desktop';
+    if (mqls[1] && mqls[1].matches) device = 'tablet';
+    if (mqls[0] && mqls[0].matches) device = 'mobile';
+    setDevice(device);
+  }
+
+  render() {
+    return (
+      <ThemeProvider theme={themes.initial}>
+        <Container>
+          <Helmet
+            htmlAttributes={{ lang: 'cs' }}
+            meta={[
+              { charset: 'utf-8' },
+              {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+              },
+              {
+                'http-equiv': 'x-ua-compatible',
+                content: 'ie=edge',
+              },
+              {
+                name: 'description',
+                content: 'MI-NUR Cinema Project',
+              },
+              ...favicon.meta,
+            ]}
+            link={[
+              ...favicon.link,
+            ]}
+          />
+          <Header />
+          <Match exactly pattern="/" component={Home} />
+          <Miss component={NotFound} />
+          <Footer />
+        </Container>
+      </ThemeProvider>
+    );
+  }
+}

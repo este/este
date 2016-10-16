@@ -76,7 +76,7 @@ const makeConfig = options => {
             cacheDirectory: true,
             presets: ['es2015', 'react', 'stage-1'],
             plugins: [
-              ['transform-runtime', {
+              ['transform-decorators-legacy', 'transform-runtime', {
                 helpers: false,
                 polyfill: false,
                 regenerator: false,

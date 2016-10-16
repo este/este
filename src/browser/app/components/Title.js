@@ -1,20 +1,9 @@
 /* @flow */
 import Helmet from 'react-helmet';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
-const Title = ({ message, values }: any) => {
-  if (typeof message === 'string') {
-    return (
-      <Helmet title={message} />
-    );
-  }
-  return (
-    <FormattedMessage {...message} values={values}>
-      {message => <Helmet title={message} /> }
-    </FormattedMessage>
-  );
-};
+const Title = ({ message }: any) =>
+  <Helmet title={message} />;
 
 Title.propTypes = {
   message: React.PropTypes.oneOfType([

@@ -3,9 +3,6 @@ import config from '../config';
 import configReducer from '../../common/config/reducer';
 import deviceReducer from '../../common/device/reducer';
 import intlReducer from '../../common/intl/reducer';
-import loadMessages from '../intl/loadMessages';
-
-const messages = loadMessages();
 
 const createInitialState = () => ({
   config: configReducer(undefined, {})
@@ -17,8 +14,7 @@ const createInitialState = () => ({
   intl: intlReducer(undefined, {})
     .set('currentLocale', config.defaultLocale)
     .set('defaultLocale', config.defaultLocale)
-    .set('locales', config.locales)
-    .set('messages', messages),
+    .set('locales', config.locales),
 });
 
 export default createInitialState;

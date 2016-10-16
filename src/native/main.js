@@ -8,7 +8,7 @@ import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import uuid from 'react-native-uuid';
 import { AppRegistry, Platform } from 'react-native';
 import { fromJSON } from '../common/transit';
-import { initialTransitState } from './initialState';
+import { initialTransitState } from './initialState'; // eslint-disable-line
 
 const initialState = fromJSON(initialTransitState);
 
