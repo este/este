@@ -34,18 +34,11 @@ const initialState = createInitialState();
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
-const getLocale = req => process.env.IS_SERVERLESS
-  ? config.defaultLocale
-  : req.acceptsLanguages(config.locales) || config.defaultLocale;
-
 const createStore = (req) => configureStore({
   initialState: {
     ...initialState,
     device: initialState.device
       .set('host', getHost(req)),
-    intl: initialState.intl
-      .set('currentLocale', getLocale(req))
-      .set('initialNow', Date.now()),
   },
 });
 

@@ -9,3 +9,6 @@ dependencies:
     - yarn
   post:  # At least for me, it doesn't seem like `scripts` in `package.json` are being run, so you need to add them explicitly
     - yarn run postinstall
+test:
+  override:
+    - yarn test

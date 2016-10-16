@@ -1,6 +1,3 @@
-/* @flow weak */
-import { firebaseStart } from '../lib/redux-firebase/actions';
-
 export const APP_OFFLINE = 'APP_OFFLINE';
 export const APP_ONLINE = 'APP_ONLINE';
 export const APP_SET_LOCATION = 'APP_SET_LOCATION';
@@ -13,22 +10,13 @@ export const setLocation = (location) => ({
   payload: { location },
 });
 
-export const showMenu = (show: bool) => ({
+export const showMenu = (show) => ({
   type: APP_SHOW_MENU,
   payload: { show },
 });
 
-export const start = () => {
-  const loadStorage = async (dispatch, storageEngine) => {
-    const state = await storageEngine.load();
-    dispatch({ type: APP_STORAGE_LOAD, payload: state });
-  };
-  return ({ dispatch, storageEngine }) => {
-    loadStorage(dispatch, storageEngine).finally(() => {
-      dispatch(firebaseStart());
-    });
-    return {
+export const start = () =>
+  () =>
+    ({
       type: APP_START,
-    };
-  };
-};
+    });

@@ -1,3 +1,6 @@
 {
-  "presets": ["es2015-node6/object-rest"]
+  "presets": ["es2015-node6/object-rest"],
+  "plugins": [
+    "transform-decorators-legacy"
+  ],
 }

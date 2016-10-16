@@ -2,10 +2,6 @@
 import config from '../config';
 import configReducer from '../../common/config/reducer';
 import deviceReducer from '../../common/device/reducer';
-import intlReducer from '../../common/intl/reducer';
-import loadMessages from '../intl/loadMessages';
-
-const messages = loadMessages();
 
 const createInitialState = () => ({
   config: configReducer(undefined, {})
@@ -14,11 +10,6 @@ const createInitialState = () => ({
     .set('firebase', config.firebase)
     .set('sentryUrl', config.sentryUrl),
   device: deviceReducer(undefined, {}),
-  intl: intlReducer(undefined, {})
-    .set('currentLocale', config.defaultLocale)
-    .set('defaultLocale', config.defaultLocale)
-    .set('locales', config.locales)
-    .set('messages', messages),
 });
 
 export default createInitialState;

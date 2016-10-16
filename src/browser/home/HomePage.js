@@ -1,36 +1,31 @@
 /* @flow */
-import React from 'react';
+import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import {
-  Block,
-  Image,
-  Link,
   PageHeader,
-  SwitchTheme,
   Title,
   View,
 } from '../app/components';
+import { connect } from 'react-redux';
 
-const HomePage = () => (
-  <View>
-    <Title message="Este.js" />
-    <PageHeader
-      description="Starter kit for universal full–fledged React app. One stack
-        for browser, mobile, server."
-      heading="Este"
-    />
-    {/* This is a block with margin-bottom: scale[4]. Inline styles rocks. */}
-    <Block mb={4}>
-      <Link to="https://github.com/este/este">
-        github.com/este/este
-      </Link>
-    </Block>
-    <SwitchTheme />
-    <Image
-      alt="50x50 placeholder"
-      mt={2}
-      src={require('./50x50.png')}
-    />
-  </View>
-);
+@connect(state => ({
+  device: state.device.get('device'),
+}))
+export default class HomePage extends Component {
+  static propTypes = {
+    device: RPT.string.isRequired,
+  }
 
-export default HomePage;
+  render() {
+    const { device } = this.props;
+
+    return (
+      <View>
+        <Title message="Cinema" />
+        <PageHeader
+          description={`Zařízení ${device}`}
+          heading="Kinečko"
+        />
+      </View>
+    );
+  }
+}
