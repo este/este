@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import { Link, Toolbar } from '../app/components';
-import { connect } from 'react-redux';
 
 const styles = {
   toolbar: {
@@ -17,10 +16,4 @@ const Header = () => (
   </Toolbar>
 );
 
-Header.propTypes = {
-  viewer: React.PropTypes.object,
-};
-
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(Header);
+export default Header;

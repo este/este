@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 }))
 export default class HomePage extends Component {
   static propTypes = {
-    device: RPT.func.isRequired,
+    device: RPT.string.isRequired,
   }
 
   render() {
