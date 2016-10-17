@@ -29,6 +29,9 @@
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
     "react/prefer-stateless-function": 0,
-    "default-case": 0
+    "default-case": 0,
+    "comma-dangle": 0,
+    "no-use-before-define": 0,
+    "jsx-a11y/no-static-element-interactions": 0
   }
 }

@@ -1,10 +1,13 @@
-/* @flow */
 import * as themes from './themes';
+import favicon from '../../common/app/favicon';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
+import Menu from '../mainmenu/Menu';
+import NotFound from '../notfound/NotFoundPage';
+import Program from '../program/Program';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
-import favicon from '../../common/app/favicon';
+import UnsupportedDevice from './UnsupportedDevice';
 import { setDevice } from '../../common/device/actions';
 import { Container } from '../app/components';
 import { Match, ThemeProvider } from '../../common/app/components';
@@ -12,13 +15,17 @@ import { Miss } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Home from '../home/HomePage';
-import NotFound from '../notfound/NotFoundPage';
 
-@connect(null, (dispatch) => bindActionCreators({ setDevice }, dispatch))
+@connect(state => ({
+  device: state.device.get('device'),
+  menuShown: state.app.get('menuShown'),
+}),
+(dispatch) => bindActionCreators({ setDevice }, dispatch))
 export default class App extends Component {
   static propTypes = {
+    device: RPT.string,
     setDevice: RPT.func.isRequired,
+    menuShown: RPT.bool,
   }
 
   state = {
@@ -49,6 +56,8 @@ export default class App extends Component {
   }
 
   render() {
+    const { device, menuShown } = this.props;
+
     return (
       <ThemeProvider theme={themes.initial}>
         <Container>
@@ -74,8 +83,14 @@ export default class App extends Component {
               ...favicon.link,
             ]}
           />
+          {menuShown && <Menu />}
           <Header />
-          <Match exactly pattern="/" component={Home} />
+          <div style={style.wrapper}>
+            {device === 'mobile'
+              ? <Match exactly pattern="/" component={Program} />
+              : <Match pattern="/" component={UnsupportedDevice} />
+            }
+          </div>
           <Miss component={NotFound} />
           <Footer />
         </Container>
@@ -83,3 +98,9 @@ export default class App extends Component {
     );
   }
 }
+
+const style = {
+  wrapper: {
+    paddingTop: '50px'
+  }
+};
