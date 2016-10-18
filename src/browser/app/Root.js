@@ -24,7 +24,7 @@ const Router = ({ dispatch, pathname }: RouterProps) => (
         <StaticRouter
           action={action}
           blockTransitions={history.block}
-          key={pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
+          key={location.pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
           location={location}
           onPush={history.push}
           onReplace={history.replace}
