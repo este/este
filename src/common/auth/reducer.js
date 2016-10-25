@@ -1,38 +1,33 @@
 /* @flow weak */
+import * as actions from './actions';
 import { Record } from '../transit';
-import { firebaseActions } from '../lib/redux-firebase';
 
 const State = Record({
   formDisabled: false,
   error: null,
-  success: null, // To get accessToken, refreshToken, whatever.
 }, 'auth');
 
 const authReducer = (state = new State(), action) => {
   switch (action.type) {
 
-    case firebaseActions.FIREBASE_RESET_PASSWORD_START:
-    case firebaseActions.FIREBASE_SIGN_IN_START:
-    case firebaseActions.FIREBASE_SIGN_UP_START: {
+    case actions.SIGN_IN:
+    case actions.SIGN_UP: {
       return state
         .set('formDisabled', true);
     }
 
-    case firebaseActions.FIREBASE_RESET_PASSWORD_ERROR:
-    case firebaseActions.FIREBASE_SIGN_IN_ERROR:
-    case firebaseActions.FIREBASE_SIGN_UP_ERROR: {
+    case actions.SIGN_IN_DONE:
+    case actions.SIGN_UP_DONE: {
       return state
         .set('formDisabled', false)
-        .set('error', action.payload);
+        .set('error', null);
     }
 
-    case firebaseActions.FIREBASE_RESET_PASSWORD_SUCCESS:
-    case firebaseActions.FIREBASE_SIGN_IN_SUCCESS:
-    case firebaseActions.FIREBASE_SIGN_UP_SUCCESS: {
+    case actions.SIGN_IN_FAIL:
+    case actions.SIGN_UP_FAIL: {
       return state
         .set('formDisabled', false)
-        .set('error', null)
-        .set('success', action.payload);
+        .set('error', action.payload.error);
     }
 
     default:

@@ -7,17 +7,16 @@ import intl from './intl/reducer';
 import themes from './themes/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
-import { FIREBASE_ON_AUTH } from '../common/lib/redux-firebase/actions';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
-import { firebaseReducer as firebase } from './lib/redux-firebase';
 import { updateStateOnStorageLoad } from './configureStorage';
 
 const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
   // Reset app state on sign out, stackoverflow.com/q/35622588/233902.
   const userWasSignedOut =
-    action.type === FIREBASE_ON_AUTH &&
-    state.users.viewer && !action.payload.user;
+    action.type === 'ON_AUTH' && // string because hot reloading
+    state.users.viewer &&
+    !action.payload.firebaseUser;
   if (userWasSignedOut) {
     // Preserve state without sensitive data.
     state = {
@@ -37,7 +36,6 @@ const configureReducer = (initialState: Object) => {
     config,
     device,
     fields,
-    firebase,
     intl,
     themes,
     todos,

@@ -4,7 +4,7 @@ import MemoryHistory from 'react-history/MemoryHistory';
 import React from 'react';
 import { Provider as Redux, connect } from 'react-redux';
 import { StaticRouter } from 'react-router';
-import { setLocation } from '../../common/app/actions';
+import { appSetLocation } from '../../common/app/actions';
 
 type RouterProps = {
   appLocation: ?Object,
@@ -25,7 +25,7 @@ const Router = ({ appLocation, dispatch, pathname }: RouterProps) => (
     {({ history, action, location }) => {
       if (location.pathname !== pathname) {
         setImmediate(() => {
-          dispatch(setLocation(location));
+          dispatch(appSetLocation(location));
         });
       }
       return (

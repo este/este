@@ -1,9 +1,9 @@
 /* @flow weak */
 import * as actions from './actions';
+import * as authActions from '../auth/actions';
 import User from './user';
 import { Record } from '../transit';
 import { Seq } from 'immutable';
-import { firebaseActions } from '../lib/redux-firebase';
 
 const State = Record({
   online: null,
@@ -14,8 +14,8 @@ const State = Record({
 const usersReducer = (state = new State(), action) => {
   switch (action.type) {
 
-    case firebaseActions.FIREBASE_ON_AUTH: {
-      const { user } = action.payload;
+    case authActions.ON_AUTH: {
+      const user = User.fromFirebaseUser(action.payload.firebaseUser);
       return state.set('viewer', user);
     }
 

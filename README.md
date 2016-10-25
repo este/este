@@ -38,16 +38,15 @@
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative API
   - user presence
-- Este is monorepo, [read](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) [why](http://danluu.com/monorepo/).
 
 ## Libraries
 
 - [react](http://facebook.github.io/react/) and [react native](https://facebook.github.io/react-native/)
 - [redux](http://rackt.github.io/redux/)
+- [redux-observable](https://github.com/redux-observable/redux-observable)
 - [babeljs](https://babeljs.io/)
 - [immutablejs](http://facebook.github.io/immutable-js)
 - [react-router](https://github.com/rackt/react-router)
-- [react-router-redux](https://github.com/reactjs/react-router-redux)
 - [react-intl](https://github.com/yahoo/react-intl)
 - [redux-storage](https://github.com/michaelcontento/redux-storage)
 - [webpack](http://webpack.github.io/)

@@ -7,12 +7,14 @@ const isInnocuousError = error =>
   error.code === 'auth/popup-closed-by-user'; // Firebase stuff.
 
 const validationErrorToMessage = error => ({
-  message: authErrorMessages[error.name] || firebaseMessages[error.name],
+  message:
+    authErrorMessages[error.name] ||
+    firebaseMessages[error.name],
   values: error.params,
 });
 
-// Map promiseMiddleware rejected error to UI message.
-// Unknown errors are reported so the developer can check what is wrong.
+// Because app validations can be reused at many UI places, we have one common
+// errorToMessage helper function. In React Native, it's used for global alert.
 const errorToMessage = (error: Object) => {
   // Some errors are so innocuos that we don't have to show any message.
   if (isInnocuousError(error)) {
@@ -20,7 +22,7 @@ const errorToMessage = (error: Object) => {
   }
 
   // Note all app validation errors are mapped to UI messages here.
-  // With such design the app can have a lot of various different components,
+  // With such design, the app can have a lot of various different components,
   // and it's not a component responsibility to project an error to UI.
   if (error instanceof ValidationError) {
     return validationErrorToMessage(error);
@@ -30,7 +32,7 @@ const errorToMessage = (error: Object) => {
     return { message: firebaseMessages[error.code] };
   }
 
-  // Return null for unknown error so it will be reported.
+  // Return null for unknown error, so it will be reported.
   return null;
 };
 

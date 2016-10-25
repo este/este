@@ -1,7 +1,14 @@
 /* @flow weak */
+// Damn, by feature importing doesn't work in Node.js.
+// import firebase from 'firebase/app';
+// import 'firebase/auth';
+// import 'firebase/database';
+// So we have to import everything.
 import firebase from 'firebase';
 import validate from './validate';
 
+// Ensure only one Firebase instance. I don't know how costly new instance is
+// and how to dispose of it. Yes, firebase.initializeApp is weird API.
 let firebaseDeps = null;
 
 const createFirebaseDeps = firebaseConfig => {
@@ -27,7 +34,7 @@ const configureDeps = (initialState, platformDeps, storageEngine) => ({
   getUid: () => platformDeps.uuid.v4(),
   now: () => Date.now(),
   storageEngine,
-  validate,
+  validate, // validate is pure now but could have side-effects later
 });
 
 export default configureDeps;

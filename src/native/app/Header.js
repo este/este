@@ -4,8 +4,8 @@ import React from 'react';
 import theme from './themes/initial';
 import { Button, Text } from './components';
 import { Platform, StyleSheet, View } from 'react-native';
+import { appShowMenu } from '../../common/app/actions';
 import { connect } from 'react-redux';
-import { showMenu } from '../../common/app/actions';
 
 const iOSDefaultStatusBarHeight = 20;
 const paddingTopOffset = Platform.OS === 'ios' ? iOSDefaultStatusBarHeight : 0;
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = ({ menuShown, showMenu, title }) => (
+const Header = ({ menuShown, appShowMenu, title }) => (
   <View style={styles.header}>
-    <Button onPress={() => showMenu(!menuShown)} style={styles.button}>
+    <Button onPress={() => appShowMenu(!menuShown)} style={styles.button}>
       <Icon name="ios-menu" style={styles.icon} />
     </Button>
     <Text style={styles.title}>{title}</Text>
@@ -50,11 +50,11 @@ const Header = ({ menuShown, showMenu, title }) => (
 );
 
 Header.propTypes = {
+  appShowMenu: React.PropTypes.func.isRequired,
   menuShown: React.PropTypes.bool.isRequired,
-  showMenu: React.PropTypes.func.isRequired,
   title: React.PropTypes.string.isRequired,
 };
 
 export default connect(state => ({
   menuShown: state.app.menuShown,
-}), { showMenu })(Header);
+}), { appShowMenu })(Header);

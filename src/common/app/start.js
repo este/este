@@ -2,26 +2,27 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import { start as appStart } from './actions';
+import { appStart, appStop } from './actions';
 
 const start = (WrappedComponent: Function) => {
-  let appStarted = false;
-
   class Start extends React.Component {
 
     static propTypes = {
       intl: React.PropTypes.object.isRequired,
       appStart: React.PropTypes.func.isRequired,
+      appStop: React.PropTypes.func.isRequired,
     };
 
     componentDidMount() {
       const { appStart } = this.props;
-      // The appStart must be called after the initial render, because
-      // componentDidMount is not called on the server. Because hot reloading,
-      // we have to call appStart only once.
-      if (appStarted) return;
-      appStarted = true;
+      // Must be called after the initial render to match server rendered HTML.
       appStart();
+    }
+
+    componentWillUnmount() {
+      const { appStop } = this.props;
+      // App is rerended on hot reload, therefore we need a proper cleanup.
+      appStop();
     }
 
     render() {
@@ -45,7 +46,7 @@ const start = (WrappedComponent: Function) => {
 
   Start = connect(state => ({
     intl: state.intl,
-  }), { appStart })(Start);
+  }), { appStart, appStop })(Start);
 
   return Start;
 };
