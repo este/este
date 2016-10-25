@@ -5,7 +5,7 @@ import emailMessages from '../../common/auth/emailMessages';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
+import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 import {
   ButtonOutline as Button,
   Form,
@@ -60,11 +60,10 @@ class Email extends React.Component {
   resetPassword() {
     const { fields, resetPassword } = this.props;
     const { email } = fields.$values();
-    resetPassword(email, () => {
-      this.setState({
-        forgetPasswordIsShown: false,
-        recoveryEmailSent: true,
-      });
+    resetPassword(email);
+    this.setState({
+      forgetPasswordIsShown: false,
+      recoveryEmailSent: true,
     });
   }
 

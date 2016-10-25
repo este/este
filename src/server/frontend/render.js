@@ -20,7 +20,7 @@ const settleAllWithTimeout = promises => Promise
     if (inspection.isFulfilled()) return;
     console.log('Server fetch failed:', inspection.reason());
   })
-  .timeout(5000) // Do not block rendering if any fetch is still pending.
+  .timeout(5000) // Do not block rendering forever.
   .catch(error => {
     if (error instanceof Promise.TimeoutError) {
       console.log('Server fetch timeouted:', error);

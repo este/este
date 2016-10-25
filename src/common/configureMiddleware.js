@@ -1,78 +1,30 @@
 /* @flow weak */
+import configureDeps from './configureDeps';
+import configureEpics from './configureEpics';
 import configureStorage from './configureStorage';
 import createLoggerMiddleware from 'redux-logger';
-import errorToMessage from '../common/app/errorToMessage';
+import { createEpicMiddleware } from 'redux-observable';
 
-// Deps.
-import firebase from 'firebase';
-import validate from './validate';
-
-let firebaseDeps = null;
-
-// Like redux-thunk but with dependency injection.
+// Like redux-thunk, but with just one argument.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   next(typeof action === 'function'
     ? action({ ...deps, dispatch, getState })
     : action
   );
 
-// Like redux-promise-middleware but simpler.
-const promiseMiddleware = options => ({ dispatch }) => next => action => {
-  const { shouldThrow } = options || {};
-  const { payload } = action;
-  const payloadIsPromise = payload && typeof payload.then === 'function';
-  if (!payloadIsPromise) return next(action);
-  const createAction = (suffix, payload) => ({
-    type: `${action.type}_${suffix}`, meta: { action }, payload,
-  });
-  // Note we don't return promise.
-  // github.com/este/este/issues/1091
-  payload
-    .then(value => dispatch(createAction('SUCCESS', value)))
-    .catch(error => {
-      dispatch(createAction('ERROR', error));
-      // Not all errors need to be reported.
-      if (shouldThrow(error)) {
-        throw error;
-      }
-    });
-  return next(createAction('START'));
-};
-
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
-  // Lazy init.
-  if (!firebaseDeps) {
-    firebase.initializeApp(initialState.config.firebase);
-    firebaseDeps = {
-      firebase: firebase.database().ref(),
-      firebaseAuth: firebase.auth,
-      firebaseDatabase: firebase.database,
-    };
-  }
-  // Check whether Firebase works.
-  // firebaseDeps.firebase.child('hello-world').set({
-  //   createdAt: firebaseDeps.firebaseDatabase.ServerValue.TIMESTAMP,
-  //   text: 'Yes!'
-  // });
-
   const {
     STORAGE_SAVE,
     storageEngine,
     storageMiddleware,
   } = configureStorage(initialState, platformDeps.createStorageEngine);
+  const deps = configureDeps(initialState, platformDeps, storageEngine);
+  const rootEpic = configureEpics(deps);
+  const epicMiddleware = createEpicMiddleware(rootEpic);
 
   const middleware = [
-    injectMiddleware({
-      ...platformDeps,
-      ...firebaseDeps,
-      getUid: () => platformDeps.uuid.v4(),
-      now: () => Date.now(),
-      storageEngine,
-      validate,
-    }),
-    promiseMiddleware({
-      shouldThrow: error => !errorToMessage(error),
-    }),
+    injectMiddleware(deps),
+    epicMiddleware,
     ...platformMiddleware,
   ];
 
@@ -94,6 +46,22 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
       stateTransformer: state => JSON.parse(JSON.stringify(state)),
     });
     middleware.push(logger);
+  }
+
+  if (module.hot && typeof module.hot.accept === 'function') {
+    if (initialState.device.isReactNative) {
+      module.hot.accept(() => {
+        const configureEpics = require('./configureEpics').default;
+
+        epicMiddleware.replaceEpic(configureEpics(deps));
+      });
+    } else {
+      module.hot.accept('./configureEpics', () => {
+        const configureEpics = require('./configureEpics').default;
+
+        epicMiddleware.replaceEpic(configureEpics(deps));
+      });
+    }
   }
 
   return middleware;

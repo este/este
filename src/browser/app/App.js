@@ -48,7 +48,8 @@ let App = ({ currentLocale, currentTheme }) => (
           ...bootstrap4Metas,
           {
             name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React apps',
+            content: `Starter kit for universal full–fledged React apps. One stack
+              for browser, mobile, server.`,
           },
           ...favicon.meta,
         ]}

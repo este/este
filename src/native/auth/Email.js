@@ -9,7 +9,7 @@ import { ValidationError } from '../../common/lib/validation';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl, intlShape } from 'react-intl';
-import { resetPassword, signIn, signUp } from '../../common/lib/redux-firebase/actions';
+import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 
 const styles = StyleSheet.create({
   legend: {

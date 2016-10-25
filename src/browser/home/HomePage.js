@@ -14,7 +14,7 @@ const HomePage = () => (
   <View>
     <Title message="Este.js" />
     <PageHeader
-      description="Starter kit for universal full–fledged React app. One stack
+      description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
       heading="Este"
     />

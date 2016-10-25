@@ -2,7 +2,6 @@
 import invariant from 'invariant';
 import storage from 'redux-storage';
 import storageDebounce from 'redux-storage-decorator-debounce';
-import { APP_STORAGE_LOAD } from './app/actions';
 import { Iterable } from 'immutable';
 import { fromJSON, toJSON } from './transit';
 
@@ -14,13 +13,14 @@ const stateToSave = [
   ['users', 'viewer'],
 ];
 
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+// const isReactNative =
+//   typeof navigator === 'object' &&
+//   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
-if (isReactNative) {
-  stateToSave.push(['app', 'location']);
-}
+// TODO: Fix with new router.
+// if (isReactNative) {
+//   stateToSave.push(['app', 'location']);
+// }
 
 const invariantFeatureState = (state, feature) => invariant(
   Iterable.isIterable(state[feature]),
@@ -72,8 +72,8 @@ const createStorageMiddleware = storageEngine => {
 };
 
 export const updateStateOnStorageLoad = reducer => (state, action) => {
-  if (action.type === APP_STORAGE_LOAD) {
-    state = updateState(state, action.payload);
+  if (action.type === 'APP_STORAGE_LOADED') { // string because hot reloading
+    state = updateState(state, action.payload.state);
   }
   return reducer(state, action);
 };

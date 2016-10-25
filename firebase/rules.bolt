@@ -5,7 +5,7 @@
 
 isSignedIn() { auth != null }
 isViewer(uid) { isSignedIn() && auth.uid == uid }
-isFriend(uid) { true } // We can limit access to sensitive data easily.
+// isFriend(uid) { true } // We can limit access to sensitive data easily.
 
 // Types
 
@@ -56,7 +56,7 @@ type UserEmail {
 }
 
 type UserPresence {
-  authenticatedAt: CurrentTimestamp,
+  lastSeenAt: CurrentTimestamp,
   user: User
 }
 
@@ -70,7 +70,7 @@ path /hello-world is HelloWorld {
 }
 
 path /users/{uid} is User {
-  read() { isFriend(uid) }
+  read() { true }
   write() { isViewer(uid) }
 }
 
@@ -80,11 +80,13 @@ path /users-emails/{uid} is UserEmail {
 }
 
 path /users-presence {
-  read() { true } // Sure we can limit access here as well.
+  read() { true }
+  // Sure we can limit access. For example with isFriend.
 }
 
 path /users-presence/{uid} is UserPresence[] {
   create() { isViewer(uid) }
+  // TODO: Add isViewer and isFirebaseServer somehow.
   update() { true }
   delete() { true }
 }

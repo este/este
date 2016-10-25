@@ -7,8 +7,8 @@ import start from '../../common/app/start';
 import { Container } from './components';
 import { Match, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
+import { appShowMenu } from '../../common/app/actions';
 import { connect } from 'react-redux';
-import { showMenu } from '../../common/app/actions';
 
 // Pages
 import Home from '../home/HomePage';
@@ -18,22 +18,18 @@ import Offline from '../offline/OfflinePage';
 import SignIn from '../auth/SignInPage';
 import Todos from '../todos/TodosPage';
 
-let App = ({
-  menuShown,
-  showMenu,
-  storageLoaded,
-}) => {
+let App = ({ appMenuShown, appShowMenu, appStarted }) => {
   // TODO: Add splash screen.
-  if (!storageLoaded) return null;
+  if (!appStarted) return null;
   return (
     <Container inverse>
       {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.
-        <StatusBar hidden={menuShown} />
+        <StatusBar hidden={appMenuShown} />
       }
       <SideMenu
-        isOpen={menuShown}
+        isOpen={appMenuShown}
         menu={<Menu />}
-        onChange={showMenu}
+        onChange={appShowMenu}
       >
         <Page exactly pattern="/" component={Home} />
         <Page pattern="/intl" component={Intl} />
@@ -61,14 +57,14 @@ let App = ({
 };
 
 App.propTypes = {
-  menuShown: React.PropTypes.bool.isRequired,
-  showMenu: React.PropTypes.func.isRequired,
-  storageLoaded: React.PropTypes.bool.isRequired,
+  appMenuShown: React.PropTypes.bool.isRequired,
+  appShowMenu: React.PropTypes.func.isRequired,
+  appStarted: React.PropTypes.bool.isRequired,
 };
 
 App = connect(state => ({
-  menuShown: state.app.menuShown,
-  storageLoaded: state.app.storageLoaded,
-}), { showMenu })(App);
+  appMenuShown: state.app.menuShown,
+  appStarted: state.app.started,
+}), { appShowMenu })(App);
 
 export default start(App);

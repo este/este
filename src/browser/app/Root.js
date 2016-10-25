@@ -4,7 +4,7 @@ import BrowserHistory from 'react-history/BrowserHistory';
 import React from 'react';
 import { Provider as Redux, connect } from 'react-redux';
 import { StaticRouter } from 'react-router';
-import { setLocation } from '../../common/app/actions';
+import { appSetLocation } from '../../common/app/actions';
 
 type RouterProps = {
   dispatch: () => void,
@@ -17,13 +17,14 @@ const Router = ({ dispatch, pathname }: RouterProps) => (
     {({ history, action, location }) => {
       if (location.pathname !== pathname) {
         setImmediate(() => {
-          dispatch(setLocation(location));
+          dispatch(appSetLocation(location));
         });
       }
       return (
         <StaticRouter
           action={action}
           blockTransitions={history.block}
+          // TODO: This key hack always restarts app. Wait for an official fix.
           key={location.pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
           location={location}
           onPush={history.push}
