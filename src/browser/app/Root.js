@@ -1,9 +1,8 @@
 /* @flow */
 import App from './App';
-import BrowserHistory from 'react-history/BrowserHistory';
 import React from 'react';
+import { BrowserRouter, Match } from 'react-router';
 import { Provider as Redux, connect } from 'react-redux';
-import { StaticRouter } from 'react-router';
 import { appSetLocation } from '../../common/app/actions';
 
 type RouterProps = {
@@ -11,30 +10,21 @@ type RouterProps = {
   pathname: ?string,
 };
 
-// TODO: Use ControlledRouter once it will be released.
 const Router = ({ dispatch, pathname }: RouterProps) => (
-  <BrowserHistory>
-    {({ history, action, location }) => {
-      if (location.pathname !== pathname) {
-        setImmediate(() => {
-          dispatch(appSetLocation(location));
-        });
-      }
-      return (
-        <StaticRouter
-          action={action}
-          blockTransitions={history.block}
-          // TODO: This key hack always restarts app. Wait for an official fix.
-          key={location.pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-          location={location}
-          onPush={history.push}
-          onReplace={history.replace}
-        >
-          <App />
-        </StaticRouter>
-      );
-    }}
-  </BrowserHistory>
+  <BrowserRouter>
+    {/* TODO: Use react-router-redux when it will be ready for RR4 */}
+    <Match
+      pattern="*"
+      render={({ location }) => {
+        if (location.pathname !== pathname) {
+          setImmediate(() => {
+            dispatch(appSetLocation(location));
+          });
+        }
+        return <App />;
+      }}
+    />
+  </BrowserRouter>
 );
 
 const ConnectedRouter = connect(state => ({

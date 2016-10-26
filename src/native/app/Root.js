@@ -1,9 +1,8 @@
 /* @flow */
 import App from './App';
-import MemoryHistory from 'react-history/MemoryHistory';
 import React from 'react';
+import { MemoryRouter, Match } from 'react-router';
 import { Provider as Redux, connect } from 'react-redux';
-import { StaticRouter } from 'react-router';
 import { appSetLocation } from '../../common/app/actions';
 
 type RouterProps = {
@@ -19,29 +18,21 @@ const getMemoryHistoryInitialState = appLocation => ({
   }),
 });
 
-// TODO: Use ControlledRouter once it will be released.
 const Router = ({ appLocation, dispatch, pathname }: RouterProps) => (
-  <MemoryHistory {...getMemoryHistoryInitialState(appLocation)}>
-    {({ history, action, location }) => {
-      if (location.pathname !== pathname) {
-        setImmediate(() => {
-          dispatch(appSetLocation(location));
-        });
-      }
-      return (
-        <StaticRouter
-          action={action}
-          canGo={history.canGo}
-          key={pathname} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-          location={location}
-          onPush={history.push}
-          onReplace={history.replace}
-        >
-          <App />
-        </StaticRouter>
-      );
-    }}
-  </MemoryHistory>
+  <MemoryRouter {...getMemoryHistoryInitialState(appLocation)}>
+    {/* TODO: Use react-router-redux when it will be ready for RR4 */}
+    <Match
+      pattern="*"
+      render={({ location }) => {
+        if (location.pathname !== pathname) {
+          setImmediate(() => {
+            dispatch(appSetLocation(location));
+          });
+        }
+        return <App />;
+      }}
+    />
+  </MemoryRouter>
 );
 
 const ConnectedRouter = connect(state => ({
