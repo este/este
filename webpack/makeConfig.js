@@ -61,13 +61,13 @@ const makeConfig = options => {
       loaders: [
         {
           loader: 'url-loader?limit=10000',
-          test: /\.(gif|jpg|png|svg)$/,
+          test: /\.(gif|jpg|png|svg)(\?.*)?$/,
         }, {
           loader: 'url-loader?limit=1',
           test: /favicon\.ico$/,
         }, {
           loader: 'url-loader?limit=100000',
-          test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+          test: /\.(ttf|eot|woff|woff2)(\?.*)?$/,
         }, {
           test: /\.js$/,
           exclude: constants.NODE_MODULES_DIR,
