@@ -4,7 +4,6 @@ import { Record } from '../transit';
 
 const State = Record({
   error: null,
-  location: null,
   menuShown: false,
   online: false,
   started: false,
@@ -22,9 +21,6 @@ const appReducer = (state = new State(), action) => {
 
     case actions.APP_ERROR:
       return state.set('error', action.payload.error);
-
-    case actions.APP_SET_LOCATION:
-      return state.set('location', action.payload.location);
 
     case actions.APP_SHOW_MENU:
       return state.set('menuShown', action.payload.show);
