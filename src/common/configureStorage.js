@@ -13,14 +13,6 @@ const stateToSave = [
   ['users', 'viewer'],
 ];
 
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
-
-if (isReactNative) {
-  stateToSave.push(['app', 'location']);
-}
-
 const invariantFeatureState = (state, feature) => invariant(
   Iterable.isIterable(state[feature]),
   `Storage persists only immutable iterables. '${feature}' is something else.`

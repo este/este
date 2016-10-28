@@ -4,7 +4,6 @@ import { onAuth, signInDone, signInFail } from '../auth/actions';
 
 export const APP_ERROR = 'APP_ERROR';
 export const APP_ONLINE = 'APP_ONLINE';
-export const APP_SET_LOCATION = 'APP_SET_LOCATION';
 export const APP_SHOW_MENU = 'APP_SHOW_MENU';
 export const APP_START = 'APP_START';
 export const APP_STARTED = 'APP_STARTED';
@@ -20,11 +19,6 @@ export const appError = (error: Object) => ({
 export const appOnline = (online: bool) => ({
   type: APP_ONLINE,
   payload: { online },
-});
-
-export const appSetLocation = (location: Object) => ({
-  type: APP_SET_LOCATION,
-  payload: { location },
 });
 
 export const appShowMenu = (show: bool) => ({
