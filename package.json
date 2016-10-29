@@ -105,7 +105,7 @@
     "rebass": "^0.3.1",
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",
-    "redux-logger": "2.7.0",
+    "redux-logger": "^2.7.4",
     "redux-observable": "^0.12.1",
     "redux-storage": "^4.0.0",
     "redux-storage-decorator-debounce": "^1.0.0",
