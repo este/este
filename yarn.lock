@@ -6655,12 +6655,12 @@ react-native-uuid@^1.4.8:
   dependencies:
     crypto-js "^3.1.6"
 
-react-native-vector-icons@^2.0.3:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-2.1.0.tgz#37ff40e2fc753a56624846e7471282b818b92edc"
+react-native-vector-icons@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-3.0.0.tgz#a2f63757dee4fb89f67eef660e25e86926ae6827"
   dependencies:
     lodash "^4.0.0"
-    yargs "^4.7.0"
+    yargs "^6.3.0"
 
 react-native@^0.35.0:
   version "0.35.0"
@@ -8724,7 +8724,7 @@ yargs@^3.19.0, yargs@^3.24.0:
     window-size "^0.1.4"
     y18n "^3.2.0"
 
-yargs@^4.7.0, yargs@^4.7.1:
+yargs@^4.7.1:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-4.8.1.tgz#c0c42924ca4aaa6b0e6da1739dfb216439f9ddc0"
   dependencies:
@@ -8762,7 +8762,7 @@ yargs@^5.0.0:
     y18n "^3.2.1"
     yargs-parser "^3.2.0"
 
-yargs@^6.0.0:
+yargs@^6.0.0, yargs@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.3.0.tgz#19c6dbb768744d571eb6ebae0c174cf2f71b188d"
   dependencies:

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +37,7 @@
 		E108C6B0D8484473A50DF545 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C424367505A3498098E4522D /* libRNI18n.a */; };
 		E7204913ABC64D859E012ED5 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 920EA44F7088430397CBAE9D /* Zocial.ttf */; };
 		F7A45CD76D7C4F3ABD778B9D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37565BFB49E041BC8943F135 /* Entypo.ttf */; };
+		71C1750227F84BD6B4AF2513 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A79F3000B854606AFFF37F0 /* SimpleLineIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +189,7 @@
 		CD23E673B6824E02ACAF5664 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D4E1AE3F98AC4E468E88E788 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		E214F14AD29249DF87589CDE /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
+		3A79F3000B854606AFFF37F0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,6 +430,7 @@
 				B5492F7F76B14665AA2F0252 /* MaterialIcons.ttf */,
 				CD23E673B6824E02ACAF5664 /* Octicons.ttf */,
 				920EA44F7088430397CBAE9D /* Zocial.ttf */,
+				3A79F3000B854606AFFF37F0 /* SimpleLineIcons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -691,6 +693,7 @@
 				2CDE5C4F404442BFADEB0649 /* MaterialIcons.ttf in Resources */,
 				082C2034499B4942B7F7EBD4 /* Octicons.ttf in Resources */,
 				E7204913ABC64D859E012ED5 /* Zocial.ttf in Resources */,
+				71C1750227F84BD6B4AF2513 /* SimpleLineIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
