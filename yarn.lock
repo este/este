@@ -348,7 +348,7 @@ babel-eslint@6.1.2:
     lodash.assign "^4.0.0"
     lodash.pickby "^4.0.0"
 
-babel-generator@^6.18.0:
+babel-generator@^6.14.0, babel-generator@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.18.0.tgz#e4f104cb3063996d9850556a45aae4a022060a07"
   dependencies:
@@ -3218,9 +3218,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.32.0:
-  version "0.32.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.32.0.tgz#a1d69d153a07b0a9cd4a633d13bf746d4ace5730"
+flow-bin@^0.33.0:
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.33.0.tgz#ef011eace7a6100f1ae08b852db78279032b8750"
 
 for-in@^0.1.5:
   version "0.1.6"
@@ -4573,6 +4573,15 @@ jest-file-exists@^15.0.0:
 jest-haste-map@^16.0.2:
   version "16.0.2"
   resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-16.0.2.tgz#4562915b25171ae2d0d75118c992f0e97536a2ed"
+  dependencies:
+    fb-watchman "^1.9.0"
+    graceful-fs "^4.1.6"
+    multimatch "^2.1.0"
+    worker-farm "^1.3.1"
+
+jest-haste-map@15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-15.0.1.tgz#1d1c342fa6f6d62d9bc2af76428d2e20f74a44d3"
   dependencies:
     fb-watchman "^1.9.0"
     graceful-fs "^4.1.6"
@@ -6662,14 +6671,15 @@ react-native-vector-icons@^3.0.0:
     lodash "^4.0.0"
     yargs "^6.3.0"
 
-react-native@^0.35.0:
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.35.0.tgz#59a53e80109a728a7f6c7c9f0f0899c8b14c13b2"
+react-native@^0.36.0:
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.36.0.tgz#3ce19cebcf99e2dc5a889cbb74201ef63ecb6a55"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
     async "^2.0.1"
     babel-core "^6.10.4"
+    babel-generator "^6.14.0"
     babel-plugin-external-helpers "^6.8.0"
     babel-plugin-syntax-trailing-function-commas "^6.5.0"
     babel-plugin-transform-flow-strip-types "^6.6.5"
@@ -6698,6 +6708,7 @@ react-native@^0.35.0:
     image-size "^0.3.5"
     immutable "~3.7.6"
     inquirer "^0.12.0"
+    jest-haste-map "15.0.1"
     joi "^6.6.1"
     json-stable-stringify "^1.0.1"
     json5 "^0.4.0"
@@ -6722,7 +6733,7 @@ react-native@^0.35.0:
     regenerator-runtime "^0.9.5"
     sane "~1.4.1"
     semver "^5.0.3"
-    source-map "^0.4.4"
+    source-map "^0.5.6"
     stacktrace-parser "^0.1.3"
     temp "0.8.3"
     uglify-js "^2.6.2"

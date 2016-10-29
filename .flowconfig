@@ -62,4 +62,4 @@ unsafe.enable_getters_and_setters=true
 module.name_mapper='.*\(.css\)' -> 'empty/object'
 
 [version]
-^0.32.0
+^0.33.0

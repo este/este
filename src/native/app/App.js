@@ -37,10 +37,8 @@ let App = ({ appMenuShown, appShowMenu, appStarted }) => {
         <Page pattern="/signin" component={SignIn} />
         <Page pattern="/todos" component={Todos} />
         <Page authorized pattern="/me" component={Me} />
-        {/* Miss does't work yet. */}
-        {/* github.com/ReactTraining/react-router/issues/3905 */}
+        {/* Miss does't work in React Native for some reason. */}
         {/* <Miss render={() => <Redirect to="/" />} /> */}
-        {/* This is silly workaround. */}
         <Match
           pattern="/"
           render={({ location: { pathname } }) => {
