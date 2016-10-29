@@ -1,13 +1,14 @@
 {
   "parser"  : "babel-eslint",
   "plugins": [
-    "ava",
     "react-native"
   ],
   "extends" : [
-    "airbnb",
-    "plugin:ava/recommended"
+    "airbnb"
   ],
+  env: {
+    jest: true
+  },
   "rules": {
     // Soft some rules.
     "global-require": 0, // Used by webpack-isomorphic-tools and React Native.

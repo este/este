@@ -1,8 +1,8 @@
 import childProcess from 'child_process';
 import gulp from 'gulp';
 
-gulp.task('ava-watch', done => {
+gulp.task('jest', done => {
   childProcess
-    .spawn('npm', ['run', 'ava:watch'], { stdio: 'inherit' })
+    .spawn('npm', ['run', 'jest'], { stdio: 'inherit' })
     .on('close', done);
 });

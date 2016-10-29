@@ -54,7 +54,7 @@
 - [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
-- [AVA](https://github.com/avajs/ava) Futuristic JavaScript test runner.
+- [jest](https://facebook.github.io/jest/) Painless JavaScript Testing.
 - SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [uuid](https://github.com/defunctzombie/node-uuid) Generate RFC-compliant UUIDs in JavaScript.
 - [react-native-uuid](https://github.com/eugenehp/react-native-uuid) node-uuid for react-native.
@@ -105,8 +105,8 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp android` run Android app in development mode
 - `gulp -p` run web app in production mode
 - `gulp -f` run web app in development mode, but only browser source rebuilds on file changes
-- `gulp ava` run ava unit tests
-- `gulp ava-watch` continuous test running for TDD
+- `gulp jest` run jest tests
+- `gulp jest-watch` continuous test running for TDD
 - `gulp eslint` eslint
 - `gulp eslint --fix` fix fixable eslint issues
 - `gulp messages-extract` extract messages for translation
