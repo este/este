@@ -15,6 +15,8 @@
 
 > Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, podívejte se na [javascript-skoleni.cz](https://javascript-skoleni.cz/).
 
+> *Are you looking for a technical co-founder? Write me: daniel@steigerwald.cz*
+
 ## Techniques
 
 - Truly universal architecture
