@@ -36,7 +36,7 @@ const saveUserEpic = (action$, { firebase }) =>
     });
 
 const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
-  const createInfoConnectedStream = user => Observable.create(() => {
+  const createInfoConnected$ = user => Observable.create(() => {
     let connectionRef;
     const onConnectedValue = snap => {
       const online = snap.val();
@@ -63,7 +63,7 @@ const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
     .switchMap(action => {
       const user = User.fromFirebaseUser(action.payload.firebaseUser);
       if (user) {
-        return createInfoConnectedStream(user)
+        return createInfoConnected$(user)
           .takeUntil(action$.ofType(APP_STOP));
       }
       return Observable.of();

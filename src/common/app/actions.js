@@ -59,7 +59,7 @@ const appStartEpic = (action$, { storageEngine }) =>
 const appStartFirebaseEpic = (action$, deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
-  const appOnlineStream = Observable.create(observer => {
+  const appOnline$ = Observable.create(observer => {
     const onValue = snap => {
       const online = snap.val();
       if (online === getState().app.online) return;
@@ -72,14 +72,14 @@ const appStartFirebaseEpic = (action$, deps) => {
   });
 
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
-  const onAuthStream = Observable.create(observer => {
+  const onAuth$ = Observable.create(observer => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
     });
     return unsubscribe;
   });
 
-  const signInAfterRedirectStream = Observable.create(observer => {
+  const signInAfterRedirect$ = Observable.create(observer => {
     let unsubscribed = false;
     firebaseAuth().getRedirectResult()
       .then(({ user: firebaseUser }) => {
@@ -96,12 +96,12 @@ const appStartFirebaseEpic = (action$, deps) => {
   });
 
   const streams = [
-    appOnlineStream,
-    onAuthStream,
+    appOnline$,
+    onAuth$,
   ];
 
   if (process.env.IS_BROWSER) {
-    streams.push(signInAfterRedirectStream);
+    streams.push(signInAfterRedirect$);
   }
 
   return action$.ofType(APP_STARTED)
