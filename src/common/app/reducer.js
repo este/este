@@ -5,7 +5,7 @@ import { Record } from '../transit';
 const State = Record({
   error: null,
   location: null,
-  menuShown: false,
+  menuShown: true,
   online: false,
   storageLoaded: false,
 }, 'app');
@@ -21,6 +21,9 @@ const appReducer = (state = new State(), action) => {
 
     case actions.APP_OFFLINE:
       return state.set('online', false);
+
+    case actions.TOGGLE_MENU:
+      return state.set('menuShown', !state.get('menuShown'));
 
     case actions.APP_ONLINE:
       return state.set('online', true);
