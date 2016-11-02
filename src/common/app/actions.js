@@ -56,7 +56,7 @@ const appStartEpic = (action$, { storageEngine }) =>
     )
     .mergeMap(action => Observable.of(action, appStarted()));
 
-const appStartFirebaseEpic = (action$, deps) => {
+const appStartedFirebaseEpic = (action$, deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
   const appOnline$ = Observable.create(observer => {
@@ -114,5 +114,5 @@ const appStartFirebaseEpic = (action$, deps) => {
 
 export const epics = [
   appStartEpic,
-  appStartFirebaseEpic,
+  appStartedFirebaseEpic,
 ];
