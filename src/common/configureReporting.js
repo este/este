@@ -26,15 +26,25 @@ const setRavenUserContext = user => {
   });
 };
 
-const reportingMiddleware = () => next => action => {
-  // strings, because hot reloading (ok, because circular references)
-  if (action.type === 'APP_ERROR') {
-    captureException(action.payload.error);
-  } else if (action.type === 'ON_AUTH') {
-    setRavenUserContext(action.payload.firebaseUser);
-  }
-  // TODO: Use Raven.setExtraContext for last 10 actions and limited app state.
-  return next(action);
+const createReportingMiddleware = () => {
+  let lastTenActions = [];
+  const setExtraContext = (state, action) => {
+    const { app, auth, device, fields } = state;
+    const limitedState = { app, auth, device, fields };
+    lastTenActions = [action, ...lastTenActions].slice(0, 10);
+    Raven.setExtraContext({ limitedState, lastTenActions });
+  };
+
+  return store => next => action => {
+    // strings, because hot reloading (ok, because circular references)
+    if (action.type === 'APP_ERROR') {
+      captureException(action.payload.error);
+    } else if (action.type === 'ON_AUTH') {
+      setRavenUserContext(action.payload.firebaseUser);
+    }
+    setExtraContext(store.getState(), action);
+    return next(action);
+  };
 };
 
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
@@ -91,7 +101,7 @@ const configureReporting = (options) => {
     // docs.getsentry.com/hosted/clients/javascript/tips/#decluttering-sentry
   }).install();
   register(unhandledRejection);
-  return reportingMiddleware;
+  return createReportingMiddleware();
 };
 
 export default configureReporting;
