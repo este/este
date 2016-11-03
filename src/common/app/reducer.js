@@ -14,7 +14,7 @@ const appReducer = (state = new State(), action) => {
   // In React Native, we show errors in one nicely animated unobtrusive alert.
   // In the browser, we prefer local error messages rendering.
   if (action.type.endsWith('_FAIL')) {
-    return state.set('error', action.payload.error);
+    state = state.set('error', action.payload.error);
   }
 
   switch (action.type) {
