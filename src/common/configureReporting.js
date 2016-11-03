@@ -28,9 +28,17 @@ const setRavenUserContext = user => {
 
 const createReportingMiddleware = () => {
   let lastTenActions = [];
+
   const setExtraContext = (state, action) => {
     const { app, auth, device, fields } = state;
     const limitedState = { app, auth, device, fields };
+    // Because payload is huge (whole app state).
+    if (action.type === 'REDUX_STORAGE_SAVE') {
+      action = {
+        ...action,
+        payload: {},
+      };
+    }
     lastTenActions = [action, ...lastTenActions].slice(0, 10);
     Raven.setExtraContext({ limitedState, lastTenActions });
   };
