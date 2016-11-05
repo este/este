@@ -107,7 +107,8 @@ const renderHtml = (state, body) => {
 };
 
 // react-router.now.sh/ServerRouter
-const render = async (req: Object, res: Object, next: Function) => {
+const render = async (ctx: Object, next: Function) => {
+  const { request: req, response: res } = ctx;
   try {
     const context = createServerRenderContext();
     const store = createStore(req);
@@ -117,14 +118,15 @@ const render = async (req: Object, res: Object, next: Function) => {
     const result = context.getResult();
 
     if (result.redirect) {
-      res.redirect(301, result.redirect.pathname + result.redirect.search);
+      res.status = 301;
+      res.redirect(result.redirect.pathname + result.redirect.search);
       return;
     }
 
     if (result.missed) {
+      res.status = 404;
       body = renderBody(store, context, req.url);
-      const html = renderHtml(store.getState(), body);
-      res.status(404).send(html);
+      res.body = renderHtml(store.getState(), body);
       return;
     }
 
@@ -133,8 +135,8 @@ const render = async (req: Object, res: Object, next: Function) => {
       body = renderBody(store, context, req.url);
     }
 
-    const html = renderHtml(store.getState(), body);
-    res.status(200).send(html);
+    res.status = 200;
+    res.body = renderHtml(store.getState(), body);
   } catch (error) {
     console.log(error);
     next(error);
