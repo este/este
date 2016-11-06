@@ -1,6 +1,6 @@
 import React, { PureComponent as Component } from 'react';
 import Seat from './Seat';
-import { PinchView } from 'react-pinch-zoom-pan';
+import { PinchView } from '../lib/react-pinch-zoom-pan';
 
 export default class SeatPicker extends Component {
 

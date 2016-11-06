@@ -28,14 +28,14 @@ export default class Movie extends Component {
   }
 
   render() {
-    const { dates, poster, localizedName, originalName } = this.props;
+    const { dates, poster, originalName } = this.props;
     const { isExpanded } = this.state;
 
     return (
       <div style={style.wrapper}>
         <div style={posterStyle(poster)} />
         <div style={style.right}>
-          {localizedName} ({originalName})
+          {originalName}
           <div onClick={() => this.toggleExpanded()}>{isExpanded ? 'Skrýt data' : 'Zobrazit data'}</div>
         </div>
 
@@ -49,8 +49,8 @@ export default class Movie extends Component {
 }
 
 const posterStyle = (url) => ({
-  width: '100px',
-  height: '120px',
+  width: '20%',
+  height: '100px',
   background: `url('${url}') no-repeat`,
   backgroundSize: 'cover',
   float: 'left'
@@ -66,7 +66,8 @@ const style = {
   },
   right: {
     float: 'right',
-    width: '300px',
+    width: '75%',
+    paddingLeft: '10px'
   },
   dates: {
     clear: 'both',

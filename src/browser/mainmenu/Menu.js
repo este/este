@@ -55,7 +55,8 @@ const style = {
     background: colors.secondary,
     top: 0,
     left: 0,
-    paddingTop: '40px'
+    zIndex: 999999,
+    marginTop: '50px'
   },
 
   menu: {
@@ -67,7 +68,7 @@ const style = {
 
       link: {
         width: '100%',
-        height: '100px',
+        height: '80px',
         display: 'inline-block',
         backgroundColor: colors.primary,
         top: '50%',
