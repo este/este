@@ -1,7 +1,7 @@
 import React from 'react';
 
-const AppFooter = () => (
-  <div>Moc velký displej</div>
+const UnsupportedDevice = () => (
+  <div>Zmenšete okno prohlížeče</div>
 );
 
-export default AppFooter;
+export default UnsupportedDevice;

@@ -7,7 +7,7 @@ import { remove } from 'diacritics';
 const app = express();
 
 function movieNameContains(name, query) {
-  return remove(name.toLowerCase().replace(' ', '')).indexOf(remove(query.toLowerCase().replace(' ', ''))) !== -1;
+  return remove(name.toLowerCase().replace(/ /g, '')).indexOf(remove(query.toLowerCase().replace(/ /g, ''))) !== -1;
 }
 
 app.get('/movies', (req, res) => {
