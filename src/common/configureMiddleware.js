@@ -1,5 +1,4 @@
 import createLoggerMiddleware from 'redux-logger';
-import errorToMessage from '../common/app/errorToMessage';
 import validate from './validate';
 
 // Like redux-thunk but with dependency injection.
@@ -41,7 +40,7 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
       validate,
     }),
     promiseMiddleware({
-      shouldThrow: error => !errorToMessage(error),
+      shouldThrow: error => error,
     }),
     ...platformMiddleware,
   ];

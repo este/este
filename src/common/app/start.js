@@ -1,6 +1,4 @@
-/* @flow */
 import React from 'react';
-import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { start as appStart } from './actions';
 
@@ -10,7 +8,6 @@ const start = (WrappedComponent: Function) => {
   class Start extends React.Component {
 
     static propTypes = {
-      intl: React.PropTypes.object.isRequired,
       appStart: React.PropTypes.func.isRequired,
     };
 
@@ -25,27 +22,14 @@ const start = (WrappedComponent: Function) => {
     }
 
     render() {
-      const { intl, ...props } = this.props;
-      const { currentLocale, defaultLocale, initialNow, messages } = intl;
-
       return (
-        <IntlProvider
-          defaultLocale={defaultLocale}
-          initialNow={initialNow}
-          key={currentLocale} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-          locale={currentLocale}
-          messages={messages[currentLocale]}
-        >
-          <WrappedComponent {...props} />
-        </IntlProvider>
+        <WrappedComponent {...this.props} />
       );
     }
 
   }
 
-  Start = connect(state => ({
-    intl: state.intl,
-  }), { appStart })(Start);
+  Start = connect(null, { appStart })(Start);
 
   return Start;
 };

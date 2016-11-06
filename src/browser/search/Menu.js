@@ -23,7 +23,7 @@ export default class Menu extends Component {
           <ul style={style.menu}>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/login">Přihlásit se</Link></li>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/search">Vyhledat film</Link></li>
-            <li style={style.menu.item}><Link style={style.menu.item.link} to="/">Program</Link></li>
+            <li style={style.menu.item}><Link style={style.menu.item.link} to="/program">Program</Link></li>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/news">Novinky</Link></li>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/about-us">O nás</Link></li>
           </ul>

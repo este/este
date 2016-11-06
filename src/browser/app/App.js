@@ -1,11 +1,15 @@
 import * as themes from './themes';
+import AboutUs from '../about/Page';
 import favicon from '../../common/app/favicon';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
+import Login from '../login/Page';
 import Menu from '../mainmenu/Menu';
+import News from '../news/Page';
 import NotFound from '../notfound/NotFoundPage';
 import Program from '../program/Program';
+import Search from '../search/Page';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import UnsupportedDevice from './UnsupportedDevice';
 import { setDevice } from '../../common/device/actions';
@@ -14,7 +18,6 @@ import { Match, ThemeProvider } from '../../common/app/components';
 import { Miss } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 
 @connect(state => ({
   device: state.device.get('device'),
@@ -58,6 +61,8 @@ export default class App extends Component {
   render() {
     const { device, menuShown } = this.props;
 
+    if (device !== 'mobile') return <Match pattern="/" component={UnsupportedDevice} />;
+
     return (
       <ThemeProvider theme={themes.initial}>
         <Container>
@@ -86,12 +91,13 @@ export default class App extends Component {
           {menuShown && <Menu />}
           <Header />
           <div style={style.wrapper}>
-            {device === 'mobile'
-              ? <Match exactly pattern="/" component={Program} />
-              : <Match pattern="/" component={UnsupportedDevice} />
-            }
+            <Match exactly pattern="/" component={Program} />
+            <Match exactly pattern="/login" component={Login} />
+            <Match exactly pattern="/news" component={News} />
+            <Match exactly pattern="/search" component={Search} />
+            <Match exactly pattern="/about-us" component={AboutUs} />
+            <Miss component={NotFound} />
           </div>
-          <Miss component={NotFound} />
           <Footer />
         </Container>
       </ThemeProvider>

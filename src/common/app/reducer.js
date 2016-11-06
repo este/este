@@ -5,9 +5,7 @@ import { Record } from '../transit';
 const State = Record({
   error: null,
   location: null,
-  menuShown: true,
-  online: false,
-  storageLoaded: false,
+  menuShown: false
 }, 'app');
 
 const appReducer = (state = new State(), action) => {
@@ -18,24 +16,14 @@ const appReducer = (state = new State(), action) => {
   }
 
   switch (action.type) {
-
-    case actions.APP_OFFLINE:
-      return state.set('online', false);
-
     case actions.TOGGLE_MENU:
       return state.set('menuShown', !state.get('menuShown'));
 
-    case actions.APP_ONLINE:
-      return state.set('online', true);
-
     case actions.APP_SET_LOCATION:
-      return state.set('location', action.payload.location);
+      return state.set('location', action.payload.location).set('menuShown', false);
 
     case actions.APP_SHOW_MENU:
       return state.set('menuShown', action.payload.show);
-
-    case actions.APP_STORAGE_LOAD:
-      return state.set('storageLoaded', true);
 
     default:
       return state;
