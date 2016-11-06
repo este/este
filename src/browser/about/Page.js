@@ -5,7 +5,7 @@ export default class About extends Component {
   render() {
     return (
       <div style={style}>
-        about us
+        O nás
       </div>
     );
   }

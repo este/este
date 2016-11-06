@@ -23,7 +23,7 @@ export default class Header extends Component {
 
     return (
       <div style={style.wrapper}>
-        <Link to="/" style={style.logo}>logo</Link>
+        <Link to="/" style={style.logo}>app</Link>
         <div
           style={style.menuToggle}
           onClick={() => this.toggleMenu()}
@@ -47,7 +47,8 @@ const style = {
   logo: {
     height: '100%',
     width: '100px',
-    backgroundColor: colors.secondary,
+    backgroundImage: 'url(/assets/img/logo.png)',
+    backgroundSize: 'cover',
     float: 'left'
   },
   menuToggle: {
