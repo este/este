@@ -18,10 +18,10 @@ nconf.defaults({
   defaultLocale: 'en',
   firebase: {
     // To get the config, just click Add web app from the overview page.
-    apiKey: 'AIzaSyBpEWlka3wvaJkIsRZ4SvYxTNIQW0QUrUk',
-    authDomain: 'uncaser-9c21d.firebaseapp.com',
-    databaseURL: 'https://uncaser-9c21d.firebaseio.com',
-    storageBucket: '',
+    apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
+    authDomain: 'este.firebaseapp.com',
+    databaseURL: 'https://este.firebaseio.com',
+    storageBucket: 'project-808488257248094054.appspot.com',
   },
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',
