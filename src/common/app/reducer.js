@@ -1,4 +1,3 @@
-/* @flow weak */
 import * as actions from './actions';
 import { Record } from '../transit';
 

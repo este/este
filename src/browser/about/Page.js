@@ -1,4 +1,4 @@
-import React, { PropTypes as RPT, PureComponent as Component } from 'react';
+import React, { PureComponent as Component } from 'react';
 
 export default class About extends Component {
 
