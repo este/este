@@ -2,11 +2,17 @@
 import * as actions from './actions';
 import { Record } from '../transit';
 
+const UsageDetails = Record({
+  distanceTravelled: 0,
+  averageMileage: 0,
+}, 'UsageDetails');
+
 const State = Record({
   error: null,
   menuShown: false,
   online: false,
   started: false,
+  UsageDetails: new UsageDetails(),
 }, 'app');
 
 const appReducer = (state = new State(), action) => {

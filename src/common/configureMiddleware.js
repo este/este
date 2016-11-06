@@ -1,9 +1,9 @@
 /* @flow weak */
+import createLoggerMiddleware from 'redux-logger';
+import { createEpicMiddleware } from 'redux-observable';
 import configureDeps from './configureDeps';
 import configureEpics from './configureEpics';
 import configureStorage from './configureStorage';
-import createLoggerMiddleware from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
 
 // Like redux-thunk, but with just one argument.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
@@ -13,12 +13,8 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   );
 
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
-  const {
-    STORAGE_SAVE,
-    storageEngine,
-    storageMiddleware,
-  } = configureStorage(initialState, platformDeps.createStorageEngine);
-  const deps = configureDeps(initialState, platformDeps, storageEngine);
+  const storageConfig = configureStorage(initialState, platformDeps.storageEngine);
+  const deps = configureDeps(initialState, platformDeps, storageConfig);
   const rootEpic = configureEpics(deps);
   const epicMiddleware = createEpicMiddleware(rootEpic);
 
@@ -28,17 +24,13 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
     ...platformMiddleware,
   ];
 
-  if (storageMiddleware) {
-    middleware.push(storageMiddleware);
-  }
-
   const enableLogger = process.env.NODE_ENV !== 'production' && (
     process.env.IS_BROWSER || initialState.device.isReactNative
   );
 
   // Logger must be the last middleware in chain.
   if (enableLogger) {
-    const ignoredActions = [STORAGE_SAVE];
+    const ignoredActions = [];
     const logger = createLoggerMiddleware({
       collapsed: true,
       predicate: (getState, action) => ignoredActions.indexOf(action.type) === -1,
@@ -64,7 +56,7 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
     }
   }
 
-  return middleware;
+  return { storageConfig, middleware };
 };
 
 export default configureMiddleware;

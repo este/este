@@ -4,9 +4,8 @@ import React from 'react';
 import ReactNativeI18n from 'react-native-i18n';
 import Root from './app/Root';
 import configureStore from '../common/configureStore';
-import createStorageEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import uuid from 'react-native-uuid';
-import { AppRegistry, Platform } from 'react-native';
+import { AppRegistry, Platform, AsyncStorage } from 'react-native';
 import { fromJSON } from '../common/transit';
 import { initialTransitState } from './initialState';
 
@@ -30,7 +29,7 @@ const createNativeInitialState = () => ({
 
 const store = configureStore({
   initialState: createNativeInitialState(),
-  platformDeps: { FBSDK, createStorageEngine, uuid },
+  platformDeps: { FBSDK, uuid, storageEngine: AsyncStorage },
 });
 
 const Este = () => (
