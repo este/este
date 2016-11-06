@@ -45,7 +45,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function eventPreventDefault(event) {
-  setTimeout(() => event.preventDefault(), 100);
+  setTimeout(() => event.preventDefault(), 1);
 }
 
 function isTouch() {
