@@ -2,11 +2,12 @@
 import express from 'express';
 import movies from './data/movies';
 import reservations from './data/reservations';
+import { remove } from 'diacritics';
 
 const app = express();
 
 function movieNameContains(name, query) {
-  return name.toLowerCase().replace(' ', '').indexOf(query.toLowerCase().replace(' ', '')) !== -1;
+  return remove(name.toLowerCase().replace(' ', '')).indexOf(remove(query.toLowerCase().replace(' ', ''))) !== -1;
 }
 
 app.get('/movies', (req, res) => {

@@ -1980,6 +1980,10 @@ detective@^4.3.1:
     acorn "^1.0.3"
     defined "^1.0.0"
 
+diacritics:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/diacritics/-/diacritics-1.2.3.tgz#8f34f28e5c44a05cb496078ec2885445d7c40b42"
+
 doctrine@^1.2.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.4.0.tgz#e2db32defa752407b935b381e89f3740e469e599"
@@ -4336,6 +4340,10 @@ mkdirp@*, mkdirp@^0.5.0, mkdirp@^0.5.1, "mkdirp@>=0.5 0", mkdirp@~0.5.0, mkdirp@
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.15.2.tgz#1bfdedf6a6e345f322fe956d5df5bd08a8ce84dc"
 
 ms@^0.7.1, ms@0.7.1:
   version "0.7.1"

@@ -10,8 +10,9 @@ import News from '../news/Page';
 import NotFound from '../notfound/NotFoundPage';
 import Profile from '../profile/Page';
 import Program from '../program/Program';
-import Search from '../search/Page';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
+import Reservation from '../reservation/Page';
+import Search from '../search/Page';
 import UnsupportedDevice from './UnsupportedDevice';
 import { setDevice } from '../../common/device/actions';
 import { Container } from '../app/components';
@@ -98,6 +99,7 @@ export default class App extends Component {
             <Match exactly pattern="/search" component={Search} />
             <Match exactly pattern="/about-us" component={AboutUs} />
             <Match exactly pattern="/profile" component={Profile} />
+            <Match exactly pattern="/reservation" component={Reservation} />
             <Miss component={NotFound} />
           </div>
           <Footer />
