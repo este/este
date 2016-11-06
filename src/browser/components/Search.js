@@ -7,7 +7,7 @@ import { Input } from 'rebass';
 export default class Search extends Component {
 
   static propTypes = {
-    fetchMovies: RPT.func.isR
+    fetchMovies: RPT.func.isRequired
   }
 
   findMovie(e) {
