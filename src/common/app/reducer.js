@@ -4,7 +4,8 @@ import { Record } from '../transit';
 const State = Record({
   error: null,
   location: null,
-  menuShown: false
+  menuShown: false,
+  isLoggedIn: false
 }, 'app');
 
 const appReducer = (state = new State(), action) => {
@@ -23,6 +24,12 @@ const appReducer = (state = new State(), action) => {
 
     case actions.APP_SHOW_MENU:
       return state.set('menuShown', action.payload.show);
+
+    case actions.LOGIN:
+      return state.set('isLoggedIn', true);
+
+    case actions.LOGOUT:
+      return state.set('isLoggedIn', false);
 
     default:
       return state;

@@ -8,6 +8,7 @@ import Login from '../login/Page';
 import Menu from '../mainmenu/Menu';
 import News from '../news/Page';
 import NotFound from '../notfound/NotFoundPage';
+import Profile from '../profile/Page';
 import Program from '../program/Program';
 import Search from '../search/Page';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
@@ -96,6 +97,7 @@ export default class App extends Component {
             <Match exactly pattern="/news" component={News} />
             <Match exactly pattern="/search" component={Search} />
             <Match exactly pattern="/about-us" component={AboutUs} />
+            <Match exactly pattern="/profile" component={Profile} />
             <Miss component={NotFound} />
           </div>
           <Footer />

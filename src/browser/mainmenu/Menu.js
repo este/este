@@ -1,13 +1,17 @@
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleMenu } from '../../common/app/actions';
+import { logout, toggleMenu } from '../../common/app/actions';
 import { Link } from 'react-router';
 import { colors } from '../styles';
 
-@connect(null, { toggleMenu })
+@connect(state => ({
+  isLoggedIn: state.app.get('isLoggedIn')
+}), { logout, toggleMenu })
 export default class Menu extends Component {
 
   static propTypes = {
+    isLoggedIn: RPT.bool,
+    logout: RPT.func.isRequired,
     toggleMenu: RPT.func.isRequired
   }
 
@@ -16,12 +20,22 @@ export default class Menu extends Component {
     toggleMenu();
   }
 
+  logout() {
+    const { logout } = this.props;
+    logout();
+  }
+
   render() {
+    const { isLoggedIn } = this.props;
     return (
       <div style={style.wrapper}>
         <div>
           <ul style={style.menu}>
-            <li style={style.menu.item}><Link style={style.menu.item.link} to="/login">Přihlásit se</Link></li>
+            {isLoggedIn
+              ? <li style={style.menu.item}><Link onClick={() => this.logout()} style={style.menu.item.link} to="/">Odhlásit se</Link></li>
+              : <li style={style.menu.item}><Link style={style.menu.item.link} to="/login">Přihlásit se</Link></li>
+            }
+            {isLoggedIn && <li style={style.menu.item}><Link style={style.menu.item.link} to="/profile">Moje rezervace</Link></li>}
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/search">Vyhledat film</Link></li>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/">Program</Link></li>
             <li style={style.menu.item}><Link style={style.menu.item.link} to="/news">Novinky</Link></li>
