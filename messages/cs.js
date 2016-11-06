@@ -130,7 +130,7 @@ export default [
   },
   {
     "id": "auth.signInError.email",
-    "defaultMessage": "Emailová adresa není zprávná.",
+    "defaultMessage": "Emailová adresa není správná.",
   },
   {
     "id": "auth.signInError.required",
