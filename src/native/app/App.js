@@ -11,12 +11,12 @@ import { appShowMenu } from '../../common/app/actions';
 import { connect } from 'react-redux';
 
 // Pages
-import Home from '../home/HomePage';
-import Intl from '../intl/IntlPage';
-import Me from '../me/MePage';
-import Offline from '../offline/OfflinePage';
-import SignIn from '../auth/SignInPage';
-import Todos from '../todos/TodosPage';
+import HomePage from '../home/HomePage';
+import IntlPage from '../intl/IntlPage';
+import MePage from '../me/MePage';
+import OfflinePage from '../offline/OfflinePage';
+import SignInPage from '../auth/SignInPage';
+import TodosPage from '../todos/TodosPage';
 
 let App = ({ appMenuShown, appShowMenu, appStarted }) => {
   // TODO: Add splash screen.
@@ -31,12 +31,12 @@ let App = ({ appMenuShown, appShowMenu, appStarted }) => {
         menu={<Menu />}
         onChange={appShowMenu}
       >
-        <Page exactly pattern="/" component={Home} />
-        <Page pattern="/intl" component={Intl} />
-        <Page pattern="/offline" component={Offline} />
-        <Page pattern="/signin" component={SignIn} />
-        <Page pattern="/todos" component={Todos} />
-        <Page authorized pattern="/me" component={Me} />
+        <Page exactly pattern="/" component={HomePage} />
+        <Page pattern="/intl" component={IntlPage} />
+        <Page pattern="/offline" component={OfflinePage} />
+        <Page pattern="/signin" component={SignInPage} />
+        <Page pattern="/todos" component={TodosPage} />
+        <Page authorized pattern="/me" component={MePage} />
         {/* Miss does't work in React Native for some reason. */}
         {/* <Miss render={() => <Redirect to="/" />} /> */}
         <Match

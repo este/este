@@ -13,15 +13,15 @@ import { Miss } from 'react-router';
 import { connect } from 'react-redux';
 
 // Pages
-import Fields from '../fields/FieldsPage';
-import Users from '../users/UsersPage';
-import Home from '../home/HomePage';
-import Intl from '../intl/IntlPage';
-import Me from '../me/MePage';
-import NotFound from '../notfound/NotFoundPage';
-import Offline from '../offline/OfflinePage';
-import SignIn from '../auth/SignInPage';
-import Todos from '../todos/TodosPage';
+import FieldsPage from '../fields/FieldsPage';
+import UsersPage from '../users/UsersPage';
+import HomePage from '../home/HomePage';
+import IntlPage from '../intl/IntlPage';
+import MePage from '../me/MePage';
+import NotFoundPage from '../notfound/NotFoundPage';
+import OfflinePage from '../offline/OfflinePage';
+import SignInPage from '../auth/SignInPage';
+import TodosPage from '../todos/TodosPage';
 
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
@@ -58,15 +58,15 @@ let App = ({ currentLocale, currentTheme }) => (
         ]}
       />
       <Header />
-      <Match exactly pattern="/" component={Home} />
-      <Match pattern="/fields" component={Fields} />
-      <Match pattern="/users" component={Users} />
-      <Match pattern="/intl" component={Intl} />
-      <Match pattern="/offline" component={Offline} />
-      <Match pattern="/signin" component={SignIn} />
-      <Match pattern="/todos" component={Todos} />
-      <Match authorized pattern="/me" component={Me} />
-      <Miss component={NotFound} />
+      <Match exactly pattern="/" component={HomePage} />
+      <Match pattern="/fields" component={FieldsPage} />
+      <Match pattern="/users" component={UsersPage} />
+      <Match pattern="/intl" component={IntlPage} />
+      <Match pattern="/offline" component={OfflinePage} />
+      <Match pattern="/signin" component={SignInPage} />
+      <Match pattern="/todos" component={TodosPage} />
+      <Match authorized pattern="/me" component={MePage} />
+      <Miss component={NotFoundPage} />
       <Footer />
     </Container>
   </ThemeProvider>
