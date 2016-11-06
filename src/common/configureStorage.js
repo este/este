@@ -13,7 +13,6 @@ const savePaths = [
   ['intl', ['currentLocale']],
   ['themes', ['currentTheme']],
   ['users', ['viewer']],
-  ['app', ['UsageDetails', 'distanceTravelled']],
 ];
 
 const pathFilter = (state, paths = []) => {
