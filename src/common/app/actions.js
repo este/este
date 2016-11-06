@@ -25,11 +25,6 @@ export const toggleMenu = () => ({
   type: TOGGLE_MENU
 });
 
-export const showMenu = (show) => ({
-  type: APP_SHOW_MENU,
-  payload: { show },
-});
-
 export const start = () =>
   () =>
     ({

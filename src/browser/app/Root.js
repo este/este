@@ -15,11 +15,9 @@ type RouterProps = {
 const Router = ({ dispatch, pathname }: RouterProps) => (
   <BrowserHistory>
     {({ history, action, location }) => {
-      if (location.pathname !== pathname) {
-        setImmediate(() => {
-          dispatch(setLocation(location));
-        });
-      }
+      setImmediate(() => {
+        dispatch(setLocation(location));
+      });
       return (
         <StaticRouter
           action={action}

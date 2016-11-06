@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { toggleMenu } from '../../common/app/actions';
 import { Link } from 'react-router';
 
-@connect(null, { toggleMenu })
+@connect(state => ({
+  menuShown: state.app.get('menuShown')
+}), { toggleMenu })
 export default class Header extends Component {
   static propTypes = {
+    menuShown: RPT.bool,
     toggleMenu: RPT.func.isRequired
   }
 
@@ -16,10 +19,17 @@ export default class Header extends Component {
   }
 
   render() {
+    const { menuShown } = this.props;
+
     return (
       <div style={style.wrapper}>
         <Link to="/" style={style.logo}>logo</Link>
-        <div style={style.menuToggle} onClick={() => this.toggleMenu()}>menu</div>
+        <div
+          style={style.menuToggle}
+          onClick={() => this.toggleMenu()}
+        >
+          {menuShown ? <span>&#10005;</span> : <span>&#9776;</span>}
+        </div>
       </div>
     );
   }
@@ -42,9 +52,9 @@ const style = {
   },
   menuToggle: {
     height: '100%',
-    width: '70px',
-    backgroundColor: colors.secondary,
+    width: '20px',
     float: 'right',
-    marginRight: '20px'
+    marginRight: '20px',
+    fontSize: '2.5em'
   }
 };
