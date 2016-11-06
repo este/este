@@ -84,6 +84,10 @@ export default class App extends Component {
                 name: 'description',
                 content: 'MI-NUR Cinema Project',
               },
+              {
+                name: 'robots',
+                content: 'noindex',
+              },
               ...favicon.meta,
             ]}
             link={[
@@ -94,12 +98,12 @@ export default class App extends Component {
           <Header />
           <div style={style.wrapper}>
             <Match exactly pattern="/" component={Program} />
+            <Match exactly pattern="/about-us" component={AboutUs} />
             <Match exactly pattern="/login" component={Login} />
             <Match exactly pattern="/news" component={News} />
-            <Match exactly pattern="/search" component={Search} />
-            <Match exactly pattern="/about-us" component={AboutUs} />
             <Match exactly pattern="/profile" component={Profile} />
             <Match exactly pattern="/reservation" component={Reservation} />
+            <Match exactly pattern="/search" component={Search} />
             <Miss component={NotFound} />
           </div>
           <Footer />

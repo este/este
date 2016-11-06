@@ -6,7 +6,9 @@ export default class Seat extends Component {
     picked: false
   }
 
-  togglePicked() {
+  togglePicked(e) {
+    e.stopPropagation();
+    e.preventDefault();
     this.setState({ picked: !this.state.picked });
   }
 
@@ -14,7 +16,7 @@ export default class Seat extends Component {
     const { picked } = this.state;
 
     return (
-      <div style={style(picked)} onClick={() => this.togglePicked()} />
+      <div style={style(picked)} onClick={(e) => this.togglePicked(e)} />
     );
   }
 }
@@ -27,5 +29,6 @@ const style = (picked) => ({
   backgroundColor: 'red',
   backgroundImage: picked ? 'url(/assets/img/face.png)' : '',
   backgroundSize: 'cover',
-  float: 'left'
+  float: 'left',
+  zIndex: 99999999
 });
