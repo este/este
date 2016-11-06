@@ -60,7 +60,7 @@ const makeConfig = options => {
     module: {
       noParse: [
         // https://github.com/localForage/localForage/issues/617
-        new RegExp('node_modules/localforage/dist/localforage.js'),
+        new RegExp('localforage.js'),
       ],
       loaders: [
         {

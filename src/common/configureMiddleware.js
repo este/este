@@ -1,4 +1,5 @@
 /* @flow weak */
+import { REHYDRATE } from 'redux-persist/constants';
 import createLoggerMiddleware from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
 import configureDeps from './configureDeps';
@@ -30,7 +31,7 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
 
   // Logger must be the last middleware in chain.
   if (enableLogger) {
-    const ignoredActions = [];
+    const ignoredActions = [REHYDRATE];
     const logger = createLoggerMiddleware({
       collapsed: true,
       predicate: (getState, action) => ignoredActions.indexOf(action.type) === -1,
