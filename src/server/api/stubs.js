@@ -1,6 +1,7 @@
 /* eslint-disable quotes */
 import express from 'express';
 import movies from './data/movies';
+import reservations from './data/reservations';
 
 const app = express();
 
@@ -18,6 +19,17 @@ app.get('/movies', (req, res) => {
   }
 });
 
+app.get('/reservations', (req, res) => {
+  res.json(reservations);
+});
+
+app.get('/user', (req, res) => {
+  res.json({
+    id: 2342112,
+    email: 'myemail@example.com',
+    name: 'Xavier Nur'
+  });
+});
 
 app.on('mount', () => {
   console.log('API is at %s', app.mountpath);
