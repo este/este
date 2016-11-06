@@ -1,10 +1,15 @@
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
+import { colors } from '../styles';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../common/app/actions';
+import { Link } from 'react-router';
 
-@connect(null, { toggleMenu })
+@connect(state => ({
+  menuShown: state.app.get('menuShown')
+}), { toggleMenu })
 export default class Header extends Component {
   static propTypes = {
+    menuShown: RPT.bool,
     toggleMenu: RPT.func.isRequired
   }
 
@@ -14,10 +19,17 @@ export default class Header extends Component {
   }
 
   render() {
+    const { menuShown } = this.props;
+
     return (
       <div style={style.wrapper}>
-        <div style={style.logo}>logo</div>
-        <div style={style.menuToggle} onClick={() => this.toggleMenu()}>menu</div>
+        <Link to="/" style={style.logo}>logo</Link>
+        <div
+          style={style.menuToggle}
+          onClick={() => this.toggleMenu()}
+        >
+          {menuShown ? <span>&#10005;</span> : <span>&#9776;</span>}
+        </div>
       </div>
     );
   }
@@ -27,7 +39,7 @@ const style = {
   wrapper: {
     height: '50px',
     width: '100%',
-    backgroundColor: 'red',
+    backgroundColor: colors.primary,
     position: 'fixed',
     top: 0,
     left: 0
@@ -35,14 +47,14 @@ const style = {
   logo: {
     height: '100%',
     width: '100px',
-    backgroundColor: 'blue',
+    backgroundColor: colors.secondary,
     float: 'left'
   },
   menuToggle: {
     height: '100%',
-    width: '70px',
-    backgroundColor: 'blue',
+    width: '20px',
     float: 'right',
-    marginRight: '20px'
+    marginRight: '20px',
+    fontSize: '2.5em'
   }
 };

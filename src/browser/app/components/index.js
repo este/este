@@ -1,14 +1,8 @@
-/* @flow */
-
-// jxnblk.com/writing/posts/patterns-for-style-composition-in-react
-
 // App components
 export { default as Button } from './Button';
-export { default as FieldError } from './FieldError';
 export { default as Form } from './Form';
 export { default as Image } from './Image';
 export { default as Link } from './Link';
-export { default as Loading } from './Loading';
 export { default as SwitchTheme } from './SwitchTheme';
 export { default as Title } from './Title';
 export { default as View } from './View';

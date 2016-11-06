@@ -1,4 +1,3 @@
-/* @flow */
 import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
 import { applyMiddleware, createStore } from 'redux';

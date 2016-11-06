@@ -1,5 +1,5 @@
 import createLoggerMiddleware from 'redux-logger';
-import errorToMessage from '../common/app/errorToMessage';
+import promiseMiddleware from './lib/promiseMiddleware'; // eslint-disable-line
 import validate from './validate';
 
 // Like redux-thunk but with dependency injection.
@@ -9,29 +9,6 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
     : action
   );
 
-// Like redux-promise-middleware but simpler.
-const promiseMiddleware = options => ({ dispatch }) => next => action => {
-  const { shouldThrow } = options || {};
-  const { payload } = action;
-  const payloadIsPromise = payload && typeof payload.then === 'function';
-  if (!payloadIsPromise) return next(action);
-  const createAction = (suffix, payload) => ({
-    type: `${action.type}_${suffix}`, meta: { action }, payload,
-  });
-  // Note we don't return promise.
-  // github.com/este/este/issues/1091
-  payload
-    .then(value => dispatch(createAction('SUCCESS', value)))
-    .catch(error => {
-      dispatch(createAction('ERROR', error));
-      // Not all errors need to be reported.
-      if (shouldThrow(error)) {
-        throw error;
-      }
-    });
-  return next(createAction('START'));
-};
-
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
   const middleware = [
     injectMiddleware({
@@ -40,9 +17,7 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
       now: () => Date.now(),
       validate,
     }),
-    promiseMiddleware({
-      shouldThrow: error => !errorToMessage(error),
-    }),
+    promiseMiddleware,
     ...platformMiddleware,
   ];
 

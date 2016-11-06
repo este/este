@@ -1,4 +1,4 @@
-/* @flow weak */
+import api from './api/reducer';
 import app from './app/reducer';
 import config from './config/reducer';
 import device from './device/reducer';
@@ -8,6 +8,7 @@ import { fieldsReducer as fields } from './lib/redux-fields';
 
 const configureReducer = () =>
   combineReducers({
+    api,
     app,
     config,
     device,
