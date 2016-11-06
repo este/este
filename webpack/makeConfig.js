@@ -112,7 +112,6 @@ const makeConfig = options => {
             IS_BROWSER: true, // Because webpack is used only for browser code.
             IS_SERVERLESS: JSON.stringify(process.env.IS_SERVERLESS || false),
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-            SERVER_URL: JSON.stringify(process.env.SERVER_URL || ''),
           },
         }),
       ];
