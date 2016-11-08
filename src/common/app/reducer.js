@@ -1,5 +1,6 @@
 import * as actions from './actions';
-import { Map, Record } from 'immutable';
+import { Record } from '../transit';
+import { Map } from 'immutable';
 
 const State = Record({
   error: null,
