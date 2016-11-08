@@ -1,5 +1,7 @@
 import moment from 'moment';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
+import { ButtonOutline } from 'rebass';
+import { Link } from 'react-router';
 
 export default class Movie extends Component {
   static propTypes = {
@@ -10,21 +12,12 @@ export default class Movie extends Component {
     originalName: RPT.string
   }
 
-  static contextTypes = {
-    router: RPT.object.isRequired
-  }
-
   state = {
     isExpanded: false
   }
 
   toggleExpanded() {
     this.setState({ isExpanded: !this.state.isExpanded });
-  }
-
-  startReservation() {
-    const { router } = this.context;
-    router.transitionTo('/reservation');
   }
 
   render() {
@@ -36,12 +29,12 @@ export default class Movie extends Component {
         <div style={posterStyle(poster)} />
         <div style={style.right}>
           {originalName}
-          <div onClick={() => this.toggleExpanded()}>{isExpanded ? 'Skrýt data' : 'Zobrazit data'}</div>
+          <div style={style.dataToggle} onClick={() => this.toggleExpanded()}>{isExpanded ? 'Skrýt data' : 'Zobrazit data'}</div>
         </div>
 
         {isExpanded &&
           <div style={style.dates}>
-            {dates.map(d => <div onClick={() => this.startReservation()} style={style.date}>{moment(d.date).format('hh:mm')}</div>)}
+            {dates.map(d => <ButtonOutline><Link to="/reservation">{moment(d.date).format('hh:mm')}</Link></ButtonOutline>)}
           </div>}
       </div>
     );
@@ -80,6 +73,10 @@ const style = {
     width: '70px',
     height: '25px',
     float: 'left',
-    marginLeft: '5px'
+    marginLeft: '5px',
+    cursor: 'pointer'
+  },
+  dataToggle: {
+    cursor: 'pointer'
   }
 };

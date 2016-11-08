@@ -42,7 +42,6 @@ type RootProps = {
   store: Object,
 };
 
-// We needs such Root for vanilla hot reloading.
 const Root = ({ store }: RootProps) => (
   <Redux store={store}>
     <ConnectedRouter />

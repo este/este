@@ -32,6 +32,17 @@ app.get('/user', (req, res) => {
   });
 });
 
+app.get('/cinema/:cinemaId/movie/:movieId/:time', (req, res) => {
+  const { cinemaId, movieId, time } = req.params;
+  res.json({
+    cinemaId: parseInt(cinemaId, 10),
+    movieId: parseInt(movieId, 10),
+    time: parseInt(time, 10),
+    rows: 10,
+    seatsPerRow: 16
+  });
+});
+
 app.on('mount', () => {
   console.log('API is at %s', app.mountpath);
 });

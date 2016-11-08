@@ -1,11 +1,13 @@
 import * as actions from './actions';
-import { Record } from '../transit';
+import { Map, Record } from 'immutable';
 
 const State = Record({
   error: null,
   location: null,
   menuShown: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  chosenSeats: new Map(),
+  maxSeats: 2
 }, 'app');
 
 const appReducer = (state = new State(), action) => {
@@ -27,6 +29,12 @@ const appReducer = (state = new State(), action) => {
 
     case actions.LOGOUT:
       return state.set('isLoggedIn', false);
+
+    case actions.INCREMENT_SEATS:
+      return state.set('maxSeats', state.get('maxSeats') + 1);
+
+    case actions.DECREMENT_SEATS:
+      return state.set('maxSeats', state.get('maxSeats') < 2 ? 1 : state.get('maxSeats') - 1);
 
     default:
       return state;
