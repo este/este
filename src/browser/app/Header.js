@@ -49,13 +49,15 @@ const style = {
     width: '100px',
     backgroundImage: 'url(/assets/img/logo.png)',
     backgroundSize: 'cover',
-    float: 'left'
+    float: 'left',
+    cursor: 'pointer'
   },
   menuToggle: {
     height: '100%',
     width: '20px',
     float: 'right',
     marginRight: '20px',
-    fontSize: '2.5em'
+    fontSize: '2.5em',
+    cursor: 'pointer'
   }
 };

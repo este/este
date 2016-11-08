@@ -14,18 +14,17 @@ import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import Reservation from '../reservation/Page';
 import Search from '../search/Page';
 import UnsupportedDevice from './UnsupportedDevice';
-import { setDevice } from '../../common/device/actions';
+import { connect } from 'react-redux';
 import { Container } from '../app/components';
 import { Match, ThemeProvider } from '../../common/app/components';
 import { Miss } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { setDevice } from '../../common/device/actions';
 
 @connect(state => ({
   device: state.device.get('device'),
   menuShown: state.app.get('menuShown'),
 }),
-(dispatch) => bindActionCreators({ setDevice }, dispatch))
+{ setDevice })
 export default class App extends Component {
   static propTypes = {
     device: RPT.string,
@@ -74,7 +73,7 @@ export default class App extends Component {
               { charset: 'utf-8' },
               {
                 name: 'viewport',
-                content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+                content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
               },
               {
                 'http-equiv': 'x-ua-compatible',

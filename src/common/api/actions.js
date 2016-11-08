@@ -4,6 +4,7 @@ import 'isomorphic-fetch';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_RESERVATIONS_SUCCESS = 'FETCH_RESERVATIONS_SUCCESS';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+export const FETCH_CINEMA_SUCCESS = 'FETCH_CINEMA_SUCCESS';
 
 export function fetchMovies(name) {
   return () => ({
@@ -23,5 +24,12 @@ export function fetchUser() {
   return () => ({
     type: 'FETCH_USER',
     payload: fetch('/api/user').then(res => res.json())
+  });
+}
+
+export function fetchCinema(cinemaId, movieId, time) {
+  return () => ({
+    type: 'FETCH_CINEMA',
+    payload: fetch(`/api/cinema/${cinemaId}/movie/${movieId}/${time}`).then(res => res.json())
   });
 }
