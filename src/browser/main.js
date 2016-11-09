@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Root from './app/Root';
 import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
-import createStorageEngine from 'redux-storage-engine-localstorage';
+import localforage from 'localforage';
 import uuid from 'uuid';
 import { fromJSON } from '../common/transit';
 
@@ -18,7 +18,7 @@ const reportingMiddleware = configureReporting({
 
 const store = configureStore({
   initialState,
-  platformDeps: { createStorageEngine, uuid },
+  platformDeps: { uuid, storageEngine: localforage },
   platformMiddleware: [reportingMiddleware],
 });
 

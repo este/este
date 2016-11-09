@@ -1,87 +1,60 @@
 /* @flow weak */
-import invariant from 'invariant';
-import storage from 'redux-storage';
-import storageDebounce from 'redux-storage-decorator-debounce';
-import { Iterable } from 'immutable';
+// import invariant from 'invariant';
+import { Map } from 'immutable';
+import { createTransform } from 'redux-persist';
 import { fromJSON, toJSON } from './transit';
 
-const stateToSave = [
+const SAVE_DEBOUNCE = 33;
+
+const whitelist = [];
+const savePaths = [
   ['fields'],
-  ['intl', 'currentLocale'],
-  ['themes', 'currentTheme'],
   ['todos'],
-  ['users', 'viewer'],
+  ['intl', ['currentLocale']],
+  ['themes', ['currentTheme']],
+  ['users', ['viewer']],
 ];
 
-const invariantFeatureState = (state, feature) => invariant(
-  Iterable.isIterable(state[feature]),
-  `Storage persists only immutable iterables. '${feature}' is something else.`
-);
-
-const updateState = (state, storageStateJson) => {
-  const empty = !storageStateJson || !Object.keys(storageStateJson).length;
-  if (empty) return state;
-  try {
-    fromJSON(storageStateJson).forEach(({ feature, featurePath, value }) => {
-      const canSet = state[feature] && state[feature].hasIn(featurePath);
-      if (!canSet) return;
-      // As we can see, setIn always overrides the current value.
-      // That's perfect for fields, currentLocale, or viewer.
-      // But what if something is prefetched on the server? Then we would like
-      // to merge locally cached data with fresh data from the server.
-      // TODO: Add customUpdate.
-      state[feature] = state[feature].setIn(featurePath, value);
-    });
-  } catch (error) {
-    // Shouldn't happen, but if the data's invalid, there's not much we can do.
-    console.log(error); // eslint-disable-line no-console
-  }
-  return state;
+const pathFilter = (state, paths = []) => {
+  let subset = Map();
+  paths.forEach(path => {
+    if (state.hasIn(path)) {
+      subset = subset.setIn(path, state.getIn(path));
+    }
+  });
+  return subset;
 };
 
-const storageFilter = engine => ({
-  ...engine,
-  save(state) {
-    if (!state) return Promise.resolve();
-
-    // We don't filter by actions but by the app state structure.
-    // That's fine because saving is debounced.
-    const saveState = stateToSave.map(([feature, ...featurePath]) => {
-      invariantFeatureState(state, feature);
-      return {
-        feature, featurePath, value: state[feature].getIn(featurePath),
-      };
-    });
-    return engine.save(toJSON(saveState));
-  },
+const filterSavePaths = initialState => savePaths.map(([feature, ...path]) => {
+  whitelist.push(feature);
+  return createTransform(
+    state => path.length ? pathFilter(state, path) : state,
+    state => initialState[feature].merge(state),
+    { whitelist: [feature] }
+  );
 });
 
-const createStorageMiddleware = storageEngine => {
-  let decoratedEngine = storageFilter(storageEngine);
-  decoratedEngine = storageDebounce(decoratedEngine, 300);
-  return storage.createMiddleware(decoratedEngine);
-};
+const transformImmutables = createTransform(
+  state => toJSON(state),
+  state => fromJSON(state));
 
-export const updateStateOnStorageLoad = reducer => (state, action) => {
-  if (action.type === 'APP_STORAGE_LOADED') { // string because hot reloading
-    state = updateState(state, action.payload.state);
-  }
-  return reducer(state, action);
-};
-
-const configureStorage = (initialState, createStorageEngine) => {
-  const storageEngine =
-    createStorageEngine &&
-    createStorageEngine(`redux-storage:${initialState.config.appName}`);
-  const storageMiddleware =
-    storageEngine &&
-    createStorageMiddleware(storageEngine);
-
-  return {
-    STORAGE_SAVE: storage.SAVE,
-    storageEngine,
-    storageMiddleware,
+// Rehydrating from disk always overrides the current value.
+// That's perfect for fields, currentLocale, or viewer.
+// But what if something is prefetched on the server? Then we would like
+// to merge locally cached data with fresh data from the server.
+// Research comparing to default store or timestamp/revision reducers.
+// TODO: Add customUpdate.
+const configureStorage = (initialState, storageEngine) => {
+  const keyPrefix = `${initialState.config.appName}:`;
+  const config = storageEngine && {
+    keyPrefix,
+    whitelist,
+    debounce: SAVE_DEBOUNCE,
+    storage: storageEngine,
+    transforms: [...filterSavePaths(initialState), transformImmutables],
   };
+
+  return config;
 };
 
 export default configureStorage;

@@ -58,6 +58,10 @@ const makeConfig = options => {
       ],
     },
     module: {
+      noParse: [
+        // https://github.com/localForage/localForage/issues/617
+        new RegExp('localforage.js'),
+      ],
       loaders: [
         {
           loader: 'url-loader?limit=10000',

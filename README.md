@@ -43,7 +43,7 @@
 - [immutablejs](http://facebook.github.io/immutable-js)
 - [react-router](https://github.com/rackt/react-router)
 - [react-intl](https://github.com/yahoo/react-intl)
-- [redux-storage](https://github.com/michaelcontento/redux-storage)
+- [redux-persist](https://github.com/rt2zz/redux-persist)
 - [webpack](http://webpack.github.io/)
 - [expressjs](http://expressjs.com/)
 - [eslint](http://eslint.org/)
