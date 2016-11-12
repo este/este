@@ -9,7 +9,6 @@ import todos from './todos/reducer';
 import users from './users/reducer';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
-import { updateStateOnStorageLoad } from './configureStorage';
 
 const resetStateOnSignOut = (reducer, initialState) => (state, action) => {
   // Reset app state on sign out, stackoverflow.com/q/35622588/233902.
@@ -44,7 +43,6 @@ const configureReducer = (initialState: Object) => {
 
   // The power of higher-order reducers, http://slides.com/omnidan/hor
   reducer = resetStateOnSignOut(reducer, initialState);
-  reducer = updateStateOnStorageLoad(reducer);
 
   return reducer;
 };

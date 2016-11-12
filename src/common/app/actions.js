@@ -1,5 +1,6 @@
 /* @flow weak */
 import { Observable } from 'rxjs/Observable';
+import { REHYDRATE } from 'redux-persist/constants';
 import { onAuth, signInDone, signInFail } from '../auth/actions';
 
 export const APP_ERROR = 'APP_ERROR';
@@ -44,17 +45,9 @@ export const appStorageLoaded = (state: Object) => ({
   payload: { state },
 });
 
-const appStartEpic = (action$, { storageEngine }) =>
-  action$.ofType(APP_START)
-    // www.learnrxjs.io/operators/transformation/mergemap.html
-    .mergeMap(() => Observable.from(storageEngine.load())
-      .map(appStorageLoaded)
-      // redux-observable.js.org/docs/recipes/Cancellation.html
-      .takeUntil(action$.ofType(APP_STOP))
-      // redux-observable.js.org/docs/recipes/ErrorHandling.html
-      .catch(error => Observable.of(appError(error)))
-    )
-    .mergeMap(action => Observable.of(action, appStarted()));
+const appStartEpic = action$ =>
+  action$.ofType(process.env.IS_BROWSER ? REHYDRATE : APP_START)
+    .map(appStarted);
 
 const appStartedFirebaseEpic = (action$, deps) => {
   const { firebase, firebaseAuth, getState } = deps;
