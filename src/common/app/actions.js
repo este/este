@@ -46,7 +46,7 @@ export const appStorageLoaded = (state: Object) => ({
 });
 
 const appStartEpic = action$ =>
-  action$.ofType(process.env.IS_BROWSER ? REHYDRATE : APP_START)
+  action$.ofType(REHYDRATE)
     .map(appStarted);
 
 const appStartedFirebaseEpic = (action$, deps) => {

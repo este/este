@@ -1,5 +1,5 @@
 /* @flow weak */
-import User from '../users/user';
+import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';
 import messages from '../lib/redux-firebase/messages';
 import { Observable } from 'rxjs/Observable';
@@ -33,7 +33,7 @@ export const signIn = (providerName: string, options?: Object) => ({
 export const signInDone = (firebaseUser: Object) => ({
   type: SIGN_IN_DONE,
   payload: {
-    user: User.fromFirebaseUser(firebaseUser).toJS(),
+    user: createUserFirebase(firebaseUser),
   },
 });
 
@@ -57,7 +57,7 @@ export const signUp = (providerName: string, options?: Object) => ({
 export const signUpDone = (firebaseUser: Object) => ({
   type: SIGN_UP_DONE,
   payload: {
-    user: User.fromFirebaseUser(firebaseUser).toJS(),
+    user: createUserFirebase(firebaseUser),
   },
 });
 

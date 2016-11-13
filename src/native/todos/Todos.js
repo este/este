@@ -1,5 +1,6 @@
 /* @flow */
 import Buttons from './Buttons';
+import R from 'ramda';
 import React from 'react';
 import Todo from './Todo';
 import theme from '../app/themes/initial';
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 const Todos = ({ todos, toggleTodoCompleted }) => {
-  if (todos.size === 0) {
+  if (R.isEmpty(todos)) {
     return (
       <CenteredContainer>
         <Image
@@ -38,10 +39,16 @@ const Todos = ({ todos, toggleTodoCompleted }) => {
       </CenteredContainer>
     );
   }
-  const list = todos.toList().sortBy(item => item.createdAt).reverse();
+
+  const sortedTodos = R.compose(
+    R.reverse,
+    R.sortBy(R.prop('createdAt')),
+    R.values, // object values to array
+  )(todos);
+
   return (
     <ScrollView>
-      {list.map(todo =>
+      {sortedTodos.map(todo =>
         <View key={todo.id} style={styles.row}>
           <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
         </View>
@@ -57,5 +64,5 @@ Todos.propTypes = {
 };
 
 export default connect(state => ({
-  todos: state.todos.map,
+  todos: state.todos.all,
 }), { toggleTodoCompleted })(Todos);

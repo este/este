@@ -1,4 +1,5 @@
 /* @flow */
+import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import { Button, Space, View } from '../app/components';
@@ -6,9 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 
-const Buttons = ({ addHundredTodos, clearAllTodos, todos }) => (
+const Buttons = ({ addHundredTodos, clearAllTodos, isEmpty }) => (
   <View>
-    <Button disabled={todos.size === 0} onClick={clearAllTodos}>
+    <Button disabled={isEmpty} onClick={clearAllTodos}>
       <FormattedMessage {...buttonsMessages.clearAll} />
     </Button>
     <Space />
@@ -21,9 +22,9 @@ const Buttons = ({ addHundredTodos, clearAllTodos, todos }) => (
 Buttons.propTypes = {
   addHundredTodos: React.PropTypes.func.isRequired,
   clearAllTodos: React.PropTypes.func.isRequired,
-  todos: React.PropTypes.object.isRequired,
+  isEmpty: React.PropTypes.bool.isRequired,
 };
 
 export default connect(state => ({
-  todos: state.todos.map,
+  isEmpty: R.isEmpty(state.todos.all),
 }), { addHundredTodos, clearAllTodos })(Buttons);

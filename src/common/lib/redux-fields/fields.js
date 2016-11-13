@@ -1,3 +1,4 @@
+import R from 'ramda';
 import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
@@ -36,8 +37,8 @@ const fields = (WrappedComponent, options) => {
     }
 
     static getFieldValue(field, model, initialState) {
-      if (model && model.has(field)) {
-        return model.get(field);
+      if (model && {}.hasOwnProperty.call(model, field)) {
+        return model[field];
       }
       if (initialState && {}.hasOwnProperty.call(initialState, field)) {
         return initialState[field];
@@ -99,7 +100,7 @@ const fields = (WrappedComponent, options) => {
 
     getModelFromState() {
       const normalizedPath = Fields.getNormalizePath(this.props);
-      return this.context.store.getState().fields.getIn(normalizedPath);
+      return R.path(normalizedPath, this.context.store.getState().fields);
     }
 
     setModel(model) {

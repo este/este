@@ -1,13 +1,11 @@
 /* @flow weak */
-import { Record } from '../transit';
-
-const State = Record({
+const initialState = {
   appName: '',
   appVersion: '',
   firebase: '',
   sentryUrl: '',
-}, 'config');
+};
 
-const configReducer = (state = new State()) => state;
+const configReducer = (state = initialState) => state;
 
 export default configReducer;

@@ -1,6 +1,7 @@
 /* @flow */
-import configureReducer from './configureReducer';
 import configureMiddleware from './configureMiddleware';
+import configureReducer from './configureReducer';
+import configureStorage from './configureStorage';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 
@@ -19,7 +20,7 @@ const configureStore = (options: Options) => {
 
   const reducer = configureReducer(initialState);
 
-  const { storageConfig, middleware } = configureMiddleware(
+  const middleware = configureMiddleware(
     initialState,
     platformDeps,
     platformMiddleware
@@ -34,8 +35,12 @@ const configureStore = (options: Options) => {
     )
   );
 
-  if (process.env.IS_BROWSER) {
-    persistStore(store, storageConfig);
+  if (platformDeps.storageEngine) {
+    const config = configureStorage(
+      initialState.config.appName,
+      platformDeps.storageEngine
+    );
+    persistStore(store, config);
   }
 
   // Enable hot reloading for reducers.

@@ -1,35 +1,35 @@
 /* @flow weak */
 import * as actions from './actions';
-import { Record } from '../transit';
 
-const State = Record({
+const initialState = {
   error: null,
   menuShown: false,
   online: false,
   started: false,
-}, 'app');
+};
 
-const appReducer = (state = new State(), action) => {
+const appReducer = (state = initialState, action) => {
   // Map all app errors into state.app.error.
   // In React Native, we show errors in one nicely animated unobtrusive alert.
   // In the browser, we prefer local error messages rendering.
+  // TODO: Unify it.
   if (action.type.endsWith('_FAIL')) {
-    state = state.set('error', action.payload.error);
+    state = { ...state, error: action.payload.error };
   }
 
   switch (action.type) {
 
     case actions.APP_ERROR:
-      return state.set('error', action.payload.error);
+      return { ...state, error: action.payload.error };
 
     case actions.APP_SHOW_MENU:
-      return state.set('menuShown', action.payload.show);
+      return { ...state, menuShown: action.payload.show };
 
     case actions.APP_ONLINE:
-      return state.set('online', action.payload.online);
+      return { ...state, online: action.payload.online };
 
     case actions.APP_STARTED:
-      return state.set('started', true);
+      return { ...state, started: true };
 
     default:
       return state;

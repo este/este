@@ -12,7 +12,6 @@ import serialize from 'serialize-javascript';
 import { Provider as Redux } from 'react-redux';
 import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import { toJSON } from '../../common/transit';
 
 const settleAllWithTimeout = promises => Promise
   .all(promises.map(p => p.reflect()))
@@ -41,11 +40,15 @@ const getLocale = req => process.env.IS_SERVERLESS
 const createStore = (req) => configureStore({
   initialState: {
     ...initialState,
-    device: initialState.device
-      .set('host', getHost(req)),
-    intl: initialState.intl
-      .set('currentLocale', getLocale(req))
-      .set('initialNow', Date.now()),
+    device: {
+      ...initialState.device,
+      host: getHost(req),
+    },
+    intl: {
+      ...initialState.intl,
+      currentLocale: getLocale(req),
+      initialNow: Date.now(),
+    },
   },
 });
 
@@ -66,11 +69,11 @@ const renderBody = (store, context, location, fetchPromises) => {
 };
 
 const renderScripts = (state, appJsFilename) =>
-  // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
+  // github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
   // TODO: Switch to CSP, https://github.com/este/este/pull/731
   `
     <script>
-      window.__INITIAL_STATE__ = ${serialize(toJSON(state))};
+      window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
     <script src="${appJsFilename}"></script>
   `;

@@ -40,7 +40,7 @@
 - [redux](http://rackt.github.io/redux/)
 - [redux-observable](https://github.com/redux-observable/redux-observable)
 - [babeljs](https://babeljs.io/)
-- [immutablejs](http://facebook.github.io/immutable-js)
+- [ramda](http://ramdajs.com/)
 - [react-router](https://github.com/rackt/react-router)
 - [react-intl](https://github.com/yahoo/react-intl)
 - [redux-persist](https://github.com/rt2zz/redux-persist)

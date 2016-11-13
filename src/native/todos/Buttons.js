@@ -1,4 +1,5 @@
 /* @flow */
+import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/themes/initial';
@@ -30,10 +31,10 @@ const TodoButtons = ({
   clearAllTodos,
   todos,
 }) => {
-  const hasCompletedTodos = todos.count(todo => todo.completed) > 0;
+  const completedTodos = R.values(todos).filter(todo => todo.completed).length;
   return (
     <View style={styles.buttons}>
-      {hasCompletedTodos ?
+      {completedTodos > 0 ?
         <Button onPress={clearAllCompletedTodos} style={styles.button}>
           <FormattedMessage {...buttonsMessages.clearCompleted} />
         </Button>
@@ -57,5 +58,5 @@ TodoButtons.propTypes = {
 };
 
 export default connect(state => ({
-  todos: state.todos.map,
+  todos: state.todos.all,
 }), { addHundredTodos, clearAllCompletedTodos, clearAllTodos })(TodoButtons);

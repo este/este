@@ -1,8 +1,9 @@
 /* @flow weak */
-import User from './user';
+import R from 'ramda';
+import createUserFirebase from './createUserFirebase';
+import { APP_STOP, appError } from '../app/actions';
 import { ON_AUTH, SIGN_IN_DONE, SIGN_UP_DONE } from '../auth/actions';
 import { Observable } from 'rxjs/Observable';
-import { APP_STOP, appError } from '../app/actions';
 
 export const ON_USERS_PRESENCE = 'ON_USERS_PRESENCE';
 export const SAVE_USER_DONE = 'SAVE_USER_DONE';
@@ -41,13 +42,11 @@ const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
     const onConnectedValue = snap => {
       const online = snap.val();
       if (!online) return;
-      const json = user.toJS();
-      delete json.email;
       if (connectionRef) connectionRef.remove();
       connectionRef = firebase.child(`users-presence/${user.id}`)
         .push({
           lastSeenAt: firebaseDatabase.ServerValue.TIMESTAMP,
-          user: json,
+          user: R.dissoc('email', user),
         });
       connectionRef.onDisconnect().remove();
     };
@@ -61,7 +60,7 @@ const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
   return action$.ofType(ON_AUTH)
     // switchMap unsubscribes previous stream, which is exactly what we want.
     .switchMap(action => {
-      const user = User.fromFirebaseUser(action.payload.firebaseUser);
+      const user = createUserFirebase(action.payload.firebaseUser);
       if (user) {
         return createInfoConnected$(user)
           .takeUntil(action$.ofType(APP_STOP));

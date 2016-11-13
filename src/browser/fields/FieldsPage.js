@@ -1,5 +1,6 @@
 /* @flow */
 import DynamicField from './DynamicField';
+import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
@@ -68,7 +69,7 @@ class FieldsPage extends React.Component {
     const values = {
       ...fields.$values(),
       concepts: {
-        ...(dynamicFields && dynamicFields.toJS()),
+        ...dynamicFields,
       },
     };
 
@@ -220,5 +221,5 @@ FieldsPage = fields(FieldsPage, {
 });
 
 export default connect(state => ({
-  dynamicFields: state.fields.getIn(['fieldsPage', 'dynamic']),
+  dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
 }))(FieldsPage);

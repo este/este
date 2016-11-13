@@ -42,11 +42,11 @@ User.propTypes = {
   user: React.PropTypes.object.isRequired,
 };
 
-let OnlineUsers = ({ loaded, users }) => (
+let OnlineUsers = ({ users }) => (
   <View>
-    {!loaded ?
+    { users === undefined ?
       <Loading />
-    : !users ?
+    : users === null ?
       <Text>No one is online.</Text>
     :
       users.map(user =>
@@ -57,8 +57,7 @@ let OnlineUsers = ({ loaded, users }) => (
 );
 
 OnlineUsers.propTypes = {
-  users: React.PropTypes.object,
-  loaded: React.PropTypes.bool.isRequired,
+  users: React.PropTypes.array,
 };
 
 OnlineUsers = firebase((database, props) => {
@@ -70,5 +69,4 @@ OnlineUsers = firebase((database, props) => {
 
 export default connect(state => ({
   users: state.users.online,
-  loaded: state.users.onlineLoaded,
 }), { onUsersPresence })(OnlineUsers);

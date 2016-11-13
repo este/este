@@ -28,13 +28,12 @@ const createFirebaseDeps = firebaseConfig => {
   return firebaseDeps;
 };
 
-const configureDeps = (initialState, platformDeps, storageConfig) => ({
+const configureDeps = (initialState, platformDeps) => ({
   ...platformDeps,
   ...createFirebaseDeps(initialState.config.firebase),
   getUid: () => platformDeps.uuid.v4(),
   now: () => Date.now(),
-  storageConfig,
-  validate, // validate is pure now but could have side-effects later
+  validate,
 });
 
 export default configureDeps;

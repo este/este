@@ -1,5 +1,5 @@
 /* @flow weak */
-import { Range } from 'immutable';
+import R from 'ramda';
 
 export const ADD_HUNDRED_TODOS = 'ADD_HUNDRED_TODOS';
 export const ADD_TODO = 'ADD_TODO';
@@ -9,17 +9,13 @@ export const DELETE_TODO = 'DELETE_TODO';
 export const TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
 
 export const addHundredTodos = () => ({ getUid, now }) => {
-  const payload = Range(0, 100).map(() => {
+  const todos = R.range(0, 100).map(() => {
     const id = getUid();
-    return {
-      createdAt: now(),
-      id,
-      title: `Item #${id}`,
-    };
-  }).toJS();
+    return { createdAt: now(), id, title: `Item #${id}` };
+  });
   return {
     type: ADD_HUNDRED_TODOS,
-    payload,
+    payload: { todos },
   };
 };
 

@@ -6,9 +6,8 @@ import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import localforage from 'localforage';
 import uuid from 'uuid';
-import { fromJSON } from '../common/transit';
 
-const initialState = fromJSON(window.__INITIAL_STATE__); // eslint-disable-line no-underscore-dangle
+const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 
 const reportingMiddleware = configureReporting({
   appVersion: initialState.config.appVersion,

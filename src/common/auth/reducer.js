@@ -1,33 +1,27 @@
 /* @flow weak */
 import * as actions from './actions';
-import { Record } from '../transit';
 
-const State = Record({
+const initialState = {
   formDisabled: false,
   error: null,
-}, 'auth');
+};
 
-const authReducer = (state = new State(), action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case actions.SIGN_IN:
     case actions.SIGN_UP: {
-      return state
-        .set('formDisabled', true);
+      return { ...state, formDisabled: true };
     }
 
     case actions.SIGN_IN_DONE:
     case actions.SIGN_UP_DONE: {
-      return state
-        .set('formDisabled', false)
-        .set('error', null);
+      return { ...state, formDisabled: false, error: null };
     }
 
     case actions.SIGN_IN_FAIL:
     case actions.SIGN_UP_FAIL: {
-      return state
-        .set('formDisabled', false)
-        .set('error', action.payload.error);
+      return { ...state, formDisabled: false, error: action.payload.error };
     }
 
     default:

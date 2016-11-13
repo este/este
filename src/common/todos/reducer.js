@@ -1,44 +1,43 @@
 /* @flow weak */
 import * as actions from './actions';
-import Todo from './todo';
-import { Map } from 'immutable';
-import { Record } from '../transit';
+import R from 'ramda';
+import createTodo from './createTodo';
 
-const State = Record({
-  map: Map(),
-}, 'todos');
+const initialState = {
+  all: {},
+};
 
-const todosReducer = (state = new State(), action) => {
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case actions.ADD_HUNDRED_TODOS: {
-      const todos = action.payload.reduce((todos, json) =>
-        todos.set(json.id, new Todo(json))
-      , Map());
-      return state.update('map', map => map.merge(todos));
+      return action.payload.todos
+        .map(createTodo)
+        .reduce((state, todo) =>
+          R.assocPath(['all', todo.id], todo, state)
+        , state);
     }
 
     case actions.ADD_TODO: {
-      const todo = new Todo(action.payload);
-      return state.update('map', map => map.set(todo.id, todo));
+      const todo = createTodo(action.payload);
+      return R.assocPath(['all', todo.id], todo, state);
     }
 
     case actions.CLEAR_ALL_COMPLETED_TODOS: {
-      return state.update('map', map => map.filterNot(todo => todo.completed));
+      return { ...state, all: R.filter(todo => !todo.completed, state.all) };
     }
 
     case actions.CLEAR_ALL_TODOS: {
-      return state.update('map', map => map.clear());
+      return { ...state, all: {} };
     }
 
     case actions.DELETE_TODO: {
-      const { id } = action.payload;
-      return state.update('map', map => map.delete(id));
+      return R.dissocPath(['all', action.payload.id], state);
     }
 
     case actions.TOGGLE_TODO_COMPLETED: {
-      const { todo } = action.payload;
-      return state.updateIn(['map', todo.id, 'completed'], value => !value);
+      const { id, completed } = action.payload.todo;
+      return R.assocPath(['all', id, 'completed'], !completed, state);
     }
 
     default:

@@ -1,5 +1,4 @@
 /* @flow */
-import OnlineUsers from '../users/OnlineUsers';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
@@ -15,17 +14,8 @@ const styles = {
   },
 };
 
-// Note pattern. We are prefetching stuff just via eager rendering only. KISS.
-// Now, it's six nines probability that the page /users was preloaded.
-const Prefetch = () => (
-  <div style={styles.prefetch}>
-    <OnlineUsers />
-  </div>
-);
-
 const Header = ({ viewer }) => (
   <Toolbar style={styles.toolbar}>
-    <Prefetch />
     <Link bold inverted exactly to="/">
       <FormattedMessage {...linksMessages.home} />
     </Link>

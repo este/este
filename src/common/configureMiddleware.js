@@ -1,10 +1,8 @@
 /* @flow weak */
-import { REHYDRATE } from 'redux-persist/constants';
-import createLoggerMiddleware from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
 import configureDeps from './configureDeps';
 import configureEpics from './configureEpics';
-import configureStorage from './configureStorage';
+import createLoggerMiddleware from 'redux-logger';
+import { createEpicMiddleware } from 'redux-observable';
 
 // Like redux-thunk, but with just one argument.
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
@@ -14,8 +12,7 @@ const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   );
 
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {
-  const storageConfig = configureStorage(initialState, platformDeps.storageEngine);
-  const deps = configureDeps(initialState, platformDeps, storageConfig);
+  const deps = configureDeps(initialState, platformDeps);
   const rootEpic = configureEpics(deps);
   const epicMiddleware = createEpicMiddleware(rootEpic);
 
@@ -31,12 +28,8 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
 
   // Logger must be the last middleware in chain.
   if (enableLogger) {
-    const ignoredActions = [REHYDRATE];
     const logger = createLoggerMiddleware({
       collapsed: true,
-      predicate: (getState, action) => ignoredActions.indexOf(action.type) === -1,
-      // Convert immutable to JSON.
-      stateTransformer: state => JSON.parse(JSON.stringify(state)),
     });
     middleware.push(logger);
   }
@@ -57,7 +50,7 @@ const configureMiddleware = (initialState, platformDeps, platformMiddleware) => 
     }
   }
 
-  return { storageConfig, middleware };
+  return middleware;
 };
 
 export default configureMiddleware;
