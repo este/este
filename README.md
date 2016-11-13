@@ -53,7 +53,6 @@
 - [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
 - [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
 - [jest](https://facebook.github.io/jest/) Painless JavaScript Testing.
-- SASS or plain CSS with [autoprefixer](https://github.com/postcss/autoprefixer)
 - [uuid](https://github.com/defunctzombie/node-uuid) Generate RFC-compliant UUIDs in JavaScript.
 - [react-native-uuid](https://github.com/eugenehp/react-native-uuid) node-uuid for react-native.
 - [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).

@@ -18,9 +18,6 @@ const devtools = 'eval';
 
 const loaders = {
   css: '',
-  // Why not LESS or Stylus? The battle is over, let's focus on inline styles.
-  scss: '!sass-loader',
-  sass: '!sass-loader?indentedSyntax',
 };
 
 const serverIp = config.remoteHotReload
