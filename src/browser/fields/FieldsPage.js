@@ -124,7 +124,7 @@ class FieldsPage extends React.Component {
                     item={item}
                     path={['fieldsPage', 'dynamic', item.id]}
                   />
-                </Box>
+                </Box>,
               )}
             </Flex>
           </Block>

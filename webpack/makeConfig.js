@@ -121,7 +121,7 @@ const makeConfig = (options) => {
           new webpack.optimize.OccurrenceOrderPlugin(),
           new webpack.HotModuleReplacementPlugin(),
           new webpack.NoErrorsPlugin(),
-          webpackIsomorphicToolsPlugin.development()
+          webpackIsomorphicToolsPlugin.development(),
         );
       } else {
         plugins.push(
@@ -147,7 +147,7 @@ const makeConfig = (options) => {
             to: 'favicons',
           }], {
             ignore: ['original/**'],
-          })
+          }),
         );
       }
       return plugins;

@@ -23,7 +23,7 @@ export const saveUserDone = () => ({
 const saveUserEpic = (action$, { firebase }) =>
   Observable.merge(
     action$.ofType(SIGN_IN_DONE),
-    action$.ofType(SIGN_UP_DONE)
+    action$.ofType(SIGN_UP_DONE),
   )
     .mergeMap((action) => {
       const { email, ...user } = action.payload.user;

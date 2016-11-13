@@ -101,7 +101,7 @@ const appStartedFirebaseEpic = (action$, deps) => {
     .mergeMap(() => Observable
       .merge(...streams)
       // takeUntil unsubscribes all merged streams on APP_STOP.
-      .takeUntil(action$.ofType(APP_STOP))
+      .takeUntil(action$.ofType(APP_STOP)),
     );
 };
 

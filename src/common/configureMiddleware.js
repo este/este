@@ -8,7 +8,7 @@ import { createEpicMiddleware } from 'redux-observable';
 const injectMiddleware = deps => ({ dispatch, getState }) => next => action =>
   next(typeof action === 'function'
     ? action({ ...deps, dispatch, getState })
-    : action
+    : action,
   );
 
 const configureMiddleware = (initialState, platformDeps, platformMiddleware) => {

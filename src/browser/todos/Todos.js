@@ -32,7 +32,7 @@ const Todos = ({ deleteTodo, todos, toggleTodoCompleted }) => {
             todo={todo}
             toggleTodoCompleted={toggleTodoCompleted}
           />
-        </Block>
+        </Block>,
       )}
     </View>
   );

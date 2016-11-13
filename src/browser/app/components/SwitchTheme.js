@@ -22,7 +22,7 @@ const SwitchTheme = ({ currentTheme, setTheme }) => (
         theme={themeKey === currentTheme ? 'primary' : 'secondary'}
       >
         {themeKey} theme
-      </Button>
+      </Button>,
     )}
   </View>
 );

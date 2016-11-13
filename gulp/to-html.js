@@ -34,7 +34,7 @@ gulp.task('to-html', (done) => {
     assets.forEach((fileName) => {
       fs.renameSync(
         path.join('build', fileName),
-        path.join('build', 'assets', fileName)
+        path.join('build', 'assets', fileName),
       );
     });
   };

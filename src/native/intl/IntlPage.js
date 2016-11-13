@@ -34,7 +34,7 @@ const IntlPage = ({ currentLocale, locales, setCurrentLocale }) => {
             style={[styles.text, locale === currentLocale && styles.selected]}
             key={locale}
             onPress={() => setCurrentLocale(locale)}
-          >{locale}</Text>
+          >{locale}</Text>,
         )}
         <FormattedDate
           day="numeric"

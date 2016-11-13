@@ -25,6 +25,6 @@ gulp.task('server-nodemon', (done) => {
     nodemonPath,
     '--ignore',
     'webpack-assets.json',
-    path.normalize('src/server')
+    path.normalize('src/server'),
   )(done);
 });

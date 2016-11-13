@@ -51,7 +51,7 @@ const Todos = ({ todos, toggleTodoCompleted }) => {
       {sortedTodos.map(todo =>
         <View key={todo.id} style={styles.row}>
           <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
-        </View>
+        </View>,
       )}
       <Buttons />
     </ScrollView>

@@ -15,7 +15,7 @@ const SwitchLocale = ({ currentLocale, locales, setCurrentLocale }) => (
         theme={locale === currentLocale ? 'primary' : 'secondary'}
       >
         {locale}
-      </Button>
+      </Button>,
     )}
   </View>
 );

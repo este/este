@@ -50,7 +50,7 @@ let OnlineUsers = ({ users }) => (
       <Text>No one is online.</Text>
     :
       users.map(user =>
-        <User key={user.id} user={user} />
+        <User key={user.id} user={user} />,
       )
     }
   </View>

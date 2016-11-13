@@ -31,7 +31,6 @@ const fixReactIntlLibraries = () => {
       fs.writeFileSync(path, jsonString);
     } catch (e) {
       // If reading, parsing, or writing file fails, there's not much we can do.
-      return;
     }
   });
 };

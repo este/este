@@ -23,7 +23,7 @@ const configureStore = (options: Options) => {
   const middleware = configureMiddleware(
     initialState,
     platformDeps,
-    platformMiddleware
+    platformMiddleware,
   );
 
   const store = createStore(
@@ -31,14 +31,14 @@ const configureStore = (options: Options) => {
     initialState,
     compose(
       applyMiddleware(...middleware),
-      autoRehydrate()
-    )
+      autoRehydrate(),
+    ),
   );
 
   if (platformDeps.storageEngine) {
     const config = configureStorage(
       initialState.config.appName,
-      platformDeps.storageEngine
+      platformDeps.storageEngine,
     );
     persistStore(store, config);
   }
