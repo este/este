@@ -1,7 +1,7 @@
 /* @flow weak */
 import Raven from 'raven-js';
 
-const captureException = error => {
+const captureException = (error) => {
   if (process.env.NODE_ENV === 'production') {
     Raven.captureException(error);
     // We can use also Raven.lastEventId() and Raven.showReportDialog().
@@ -15,7 +15,7 @@ const captureException = error => {
   }
 };
 
-const setRavenUserContext = user => {
+const setRavenUserContext = (user) => {
   if (!user) {
     Raven.setUserContext();
     return;
@@ -41,7 +41,7 @@ const createReportingMiddleware = () => {
     Raven.setExtraContext(context);
   };
 
-  return store => next => action => {
+  return store => next => (action) => {
     if (action.type === 'APP_ERROR') {
       captureException(action.payload.error);
     } else if (action.type === 'ON_AUTH') {
@@ -53,7 +53,7 @@ const createReportingMiddleware = () => {
 };
 
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
-const register = unhandledRejection => unhandledRejection(event => {
+const register = unhandledRejection => unhandledRejection((event) => {
   event.preventDefault();
   // http://bluebirdjs.com/docs/api/error-management-configuration.html
   captureException(event.detail.reason);

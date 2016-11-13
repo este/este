@@ -11,7 +11,7 @@ import validate from './validate';
 // and how to dispose of it. Yes, firebase.initializeApp is weird API.
 let firebaseDeps = null;
 
-const createFirebaseDeps = firebaseConfig => {
+const createFirebaseDeps = (firebaseConfig) => {
   if (!firebaseDeps) {
     firebase.initializeApp(firebaseConfig);
     firebaseDeps = {

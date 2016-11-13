@@ -1,6 +1,6 @@
 /* @flow weak */
 
-const createUser = (json) => ({
+const createUser = json => ({
   displayName: '',
   email: '',
   id: '',

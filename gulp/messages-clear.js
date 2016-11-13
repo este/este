@@ -11,7 +11,7 @@ gulp.task('messages-clear', ['messages-extract'], () => {
 
   Object.keys(messages)
     .filter(locale => locale !== '_default')
-    .forEach(locale => {
+    .forEach((locale) => {
       const localeMessagesKeys = Object.keys(messages[locale]);
       const unusedMessagesKeys = diff(localeMessagesKeys, defaultMessagesKeys);
       const clearedMessages = require(`../messages/${locale}`) // eslint-disable-line import/no-dynamic-require

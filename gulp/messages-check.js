@@ -16,7 +16,7 @@ gulp.task('messages-check', ['messages-extract'], () => {
 
   Object.keys(messages)
     .filter(locale => locale !== '_default')
-    .forEach(locale => {
+    .forEach((locale) => {
       const localeMessagesKeys = Object.keys(messages[locale]);
       const missingMessagesKeys = diff(defaultMessagesKeys, localeMessagesKeys);
       const unusedMessagesKeys = diff(localeMessagesKeys, defaultMessagesKeys);

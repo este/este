@@ -1,6 +1,7 @@
 {
   "parser"  : "babel-eslint",
   "plugins": [
+    "fp",
     "react-native"
   ],
   "extends" : [
@@ -12,7 +13,6 @@
   "rules": {
     // Soft some rules.
     "global-require": 0, // Used by webpack-isomorphic-tools and React Native.
-    "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
     "no-class-assign": 0, // Class assign is used for higher order components.
     "no-nested-ternary": 0, // It's nice for JSX.
     "no-param-reassign": 0, // We love param reassignment. Naming is hard.
@@ -23,12 +23,22 @@
     "no-confusing-arrow": 0, // This rule is super confusing.
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
-    "arrow-parens": 0, // Not really.
     "react/jsx-indent": 0, // Damn. We need Yarn asap.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
+    // Rules for functional programming. We do not need Object.freeze.
+    "fp/no-mutating-assign": 2,
+    // TODO: Can't be enabled now, it requires a lot of refactoring.
+    // "fp/no-mutating-methods": 2,
+    // "fp/no-mutation": ["error", {
+    //   "commonjs": true,
+    //   "allowThis": true,
+    //   "exceptions": [
+    //     {"property": "propTypes"}
+    //   ]
+    // }]
   }
 }

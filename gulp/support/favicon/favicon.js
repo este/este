@@ -20,7 +20,7 @@ const mapAttributesToObject = (attributesList, obj = {}) => {
   return obj;
 };
 
-const toObject = element => {
+const toObject = (element) => {
   const attributes = extractAttributesFromElement(element);
   return mapAttributesToObject(attributes);
 };

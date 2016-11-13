@@ -75,7 +75,7 @@ const validateEmailAndPassword = (validate, fields) => validate(fields)
     .simplePassword()
   .promise;
 
-const mapFirebaseErrorToEsteValidationError = code => {
+const mapFirebaseErrorToEsteValidationError = (code) => {
   const prop = {
     'auth/email-already-in-use': 'email',
     'auth/invalid-email': 'email',
@@ -106,13 +106,13 @@ const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
     return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
   };
 
-  const signInWithEmailAndPassword = options => {
+  const signInWithEmailAndPassword = (options) => {
     const { email, password } = options;
     const promise = validateEmailAndPassword(validate, { email, password })
       .then(() => firebaseAuth().signInWithEmailAndPassword(email, password));
     return Observable.from(promise)
       .map(firebaseUser => signInDone(firebaseUser))
-      .catch(error => {
+      .catch((error) => {
         if (messages[error.code]) {
           error = mapFirebaseErrorToEsteValidationError(error.code);
         }
@@ -128,7 +128,7 @@ const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
   const signInWithPopup = provider =>
     Observable.from(firebaseAuth().signInWithPopup(provider))
       .map(userCredential => signInDone(userCredential.user))
-      .catch(error => {
+      .catch((error) => {
         if (error.code === 'auth/popup-blocked') {
           return signInWithRedirect(provider);
         }
@@ -137,7 +137,7 @@ const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
 
   const nativeSignIn = () =>
     Observable.from(FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions))
-      .mergeMap(result => {
+      .mergeMap((result) => {
         if (result.isCancelled) {
           // Mimic Firebase error to have the same universal API.
           const error: any = new Error('auth/popup-closed-by-user');
@@ -183,7 +183,7 @@ const signUpEpic = (action$, { firebaseAuth, validate }) =>
         .then(() => firebaseAuth().createUserWithEmailAndPassword(email, password));
       return Observable.from(promise)
         .map(firebaseUser => signUpDone(firebaseUser))
-        .catch(error => {
+        .catch((error) => {
           if (messages[error.code]) {
             error = mapFirebaseErrorToEsteValidationError(error.code);
           }

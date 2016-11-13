@@ -24,12 +24,12 @@ const serverIp = config.remoteHotReload
   ? ip.address() // Dynamic IP address enables hot reload on remote devices.
   : 'localhost';
 
-const makeConfig = options => {
+const makeConfig = (options) => {
   const {
     isDevelopment,
   } = options;
 
-  const stylesLoaders = Object.keys(loaders).map(ext => {
+  const stylesLoaders = Object.keys(loaders).map((ext) => {
     const prefix = 'css-loader!postcss-loader';
     const extLoaders = prefix + loaders[ext];
     const loader = isDevelopment

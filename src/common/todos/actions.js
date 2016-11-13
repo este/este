@@ -19,7 +19,7 @@ export const addHundredTodos = () => ({ getUid, now }) => {
   };
 };
 
-export const addTodo = (title) => ({ getUid, now }) => ({
+export const addTodo = title => ({ getUid, now }) => ({
   type: ADD_TODO,
   payload: {
     createdAt: now(),
@@ -36,12 +36,12 @@ export const clearAllTodos = () => ({
   type: CLEAR_ALL_TODOS,
 });
 
-export const deleteTodo = (id) => ({
+export const deleteTodo = id => ({
   type: DELETE_TODO,
   payload: { id },
 });
 
-export const toggleTodoCompleted = (todo) => ({
+export const toggleTodoCompleted = todo => ({
   type: TOGGLE_TODO_COMPLETED,
   payload: { todo },
 });

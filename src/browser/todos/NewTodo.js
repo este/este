@@ -8,7 +8,7 @@ import { fields } from '../../common/lib/redux-fields';
 import { injectIntl, intlShape } from 'react-intl';
 
 let NewTodo = ({ addTodo, fields, intl }) => {
-  const onInputKeyDown = event => {
+  const onInputKeyDown = (event) => {
     if (event.key !== 'Enter') return;
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);

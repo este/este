@@ -52,8 +52,8 @@ const appStartEpic = action$ =>
 const appStartedFirebaseEpic = (action$, deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
-  const appOnline$ = Observable.create(observer => {
-    const onValue = snap => {
+  const appOnline$ = Observable.create((observer) => {
+    const onValue = (snap) => {
       const online = snap.val();
       if (online === getState().app.online) return;
       observer.next(appOnline(online));
@@ -65,21 +65,21 @@ const appStartedFirebaseEpic = (action$, deps) => {
   });
 
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
-  const onAuth$ = Observable.create(observer => {
-    const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
+  const onAuth$ = Observable.create((observer) => {
+    const unsubscribe = firebaseAuth().onAuthStateChanged((firebaseUser) => {
       observer.next(onAuth(firebaseUser));
     });
     return unsubscribe;
   });
 
-  const signInAfterRedirect$ = Observable.create(observer => {
+  const signInAfterRedirect$ = Observable.create((observer) => {
     let unsubscribed = false;
     firebaseAuth().getRedirectResult()
       .then(({ user: firebaseUser }) => {
         if (unsubscribed || !firebaseUser) return;
         observer.next(signInDone(firebaseUser));
       })
-      .catch(error => {
+      .catch((error) => {
         if (unsubscribed) return;
         observer.error(signInFail(error));
       });

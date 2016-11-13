@@ -1,6 +1,6 @@
 /* @flow weak */
 
-const createTodo = (json) => ({
+const createTodo = json => ({
   completed: false,
   createdAt: null,
   id: '',

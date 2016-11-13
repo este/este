@@ -9,11 +9,9 @@ const errorHandler = (err, req, res) => {
   res.status(500).format({
     json() {
       const errorInfo = {
-        details: null,
+        details: config.isProduction ? null : errorDetails,
         error: err.toString(),
       };
-      if (!config.isProduction) errorInfo.details = errorDetails;
-
       res.send(errorInfo);
     },
 

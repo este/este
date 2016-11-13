@@ -25,7 +25,7 @@ const saveUserEpic = (action$, { firebase }) =>
     action$.ofType(SIGN_IN_DONE),
     action$.ofType(SIGN_UP_DONE)
   )
-    .mergeMap(action => {
+    .mergeMap((action) => {
       const { email, ...user } = action.payload.user;
       const promise = firebase.update({
         [`users/${user.id}`]: user,
@@ -39,7 +39,7 @@ const saveUserEpic = (action$, { firebase }) =>
 const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
   const createInfoConnected$ = user => Observable.create(() => {
     let connectionRef;
-    const onConnectedValue = snap => {
+    const onConnectedValue = (snap) => {
       const online = snap.val();
       if (!online) return;
       if (connectionRef) connectionRef.remove();
@@ -59,7 +59,7 @@ const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
 
   return action$.ofType(ON_AUTH)
     // switchMap unsubscribes previous stream, which is exactly what we want.
-    .switchMap(action => {
+    .switchMap((action) => {
       const user = createUserFirebase(action.payload.firebaseUser);
       if (user) {
         return createInfoConnected$(user)

@@ -57,7 +57,7 @@ const fields = (WrappedComponent, options) => {
 
     static createFieldObject(field, onChange) {
       return isReactNative ? {
-        onChangeText: text => {
+        onChangeText: (text) => {
           onChange(field, text);
         },
       } : {
@@ -105,7 +105,7 @@ const fields = (WrappedComponent, options) => {
 
     setModel(model) {
       this.values = Fields.lazyJsonValuesOf(model, this.props);
-      options.fields.forEach(field => {
+      options.fields.forEach((field) => {
         this.fields[field].value = this.values[field];
       });
       this.fields = { ...this.fields }; // Ensure rerender for pure components.
