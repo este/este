@@ -24,7 +24,7 @@
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
     "arrow-parens": 0, // Not really.
-    "react/jsx-indent": 0, // wtf?
+    "react/jsx-indent": 0, // Damn. We need Yarn asap.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
