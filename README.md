@@ -109,16 +109,8 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 
 - set name in `package.json`
 - set locales, firebaseUrl, sentryUrl, etc. in `src/server/config.js`
-- remove unused locale-data from `src/browser/index.js`
 - change `src/common/app/favicons/original/favicon.png`, then `gulp favicon` and `gulp -p`
-- remove unused reducers from `src/common/configureReducer.js`
-- delete unused app features, todos for example: src/{platform}/todos
 - modify your FB app_id e.g. for [iOS](https://developers.facebook.com/docs/ios/getting-started/#configure-xcode-project)
-
-## Flow
-
-- install [nuclide.io](https://nuclide.io/)
-- go to Nuclide settings, enable "Use the Flow binary included in each project"
 
 ## Links
 
@@ -128,10 +120,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 ## Tips
 
 - Recommended editor is [Atom](https://atom.io). Check [settings](https://github.com/este/este/wiki/Recommended-Atom.io-Settings).
-
-## Training
-- [learn-reactjs.com](http://www.learn-reactjs.com)
-- [javascript-skoleni.cz](http://javascript-skoleni.cz)
+- Install [nuclide.io](https://nuclide.io/), enable "Use the Flow binary included in each project".
 
 ## Credit
 
