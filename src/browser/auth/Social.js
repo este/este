@@ -17,6 +17,9 @@ Social.propTypes = {
   signIn: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  disabled: state.auth.formDisabled,
-}), { signIn })(Social);
+export default connect(
+  state => ({
+    disabled: state.auth.formDisabled,
+  }),
+  { signIn },
+)(Social);

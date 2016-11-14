@@ -30,4 +30,7 @@ SignOut.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(null, { signOut })(SignOut);
+export default connect(
+  null,
+  { signOut },
+)(SignOut);

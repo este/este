@@ -44,9 +44,12 @@ const start = (WrappedComponent: Function) => {
 
   }
 
-  Start = connect(state => ({
-    intl: state.intl,
-  }), { appStart, appStop })(Start);
+  Start = connect(
+    state => ({
+      intl: state.intl,
+    }),
+    { appStart, appStop },
+  )(Start);
 
   return Start;
 };

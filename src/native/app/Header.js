@@ -55,6 +55,9 @@ Header.propTypes = {
   title: React.PropTypes.string.isRequired,
 };
 
-export default connect(state => ({
-  menuShown: state.app.menuShown,
-}), { appShowMenu })(Header);
+export default connect(
+  state => ({
+    menuShown: state.app.menuShown,
+  }),
+  { appShowMenu },
+)(Header);

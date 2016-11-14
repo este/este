@@ -71,6 +71,8 @@ MePage.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(MePage);
+export default connect(
+  state => ({
+    viewer: state.users.viewer,
+  }),
+)(MePage);

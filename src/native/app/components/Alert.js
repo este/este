@@ -140,6 +140,8 @@ class Alert extends React.Component {
 
 }
 
-export default connect(state => ({
-  error: state.app.error,
-}))(Alert);
+export default connect(
+  state => ({
+    error: state.app.error,
+  }),
+)(Alert);

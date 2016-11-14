@@ -35,6 +35,8 @@ Match.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(Match);
+export default connect(
+  state => ({
+    viewer: state.users.viewer,
+  }),
+)(Match);

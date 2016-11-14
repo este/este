@@ -53,7 +53,9 @@ SignInPage.propTypes = {
 
 SignInPage = injectIntl(SignInPage);
 
-export default connect(state => ({
-  disabled: state.auth.formDisabled,
-  viewer: state.users.viewer,
-}))(SignInPage);
+export default connect(
+  state => ({
+    disabled: state.auth.formDisabled,
+    viewer: state.users.viewer,
+  }),
+)(SignInPage);

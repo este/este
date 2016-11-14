@@ -59,4 +59,7 @@ NewTodo = fields(NewTodo, {
   fields: ['title'],
 });
 
-export default connect(null, { addTodo })(NewTodo);
+export default connect(
+  null,
+  { addTodo },
+)(NewTodo);

@@ -49,6 +49,9 @@ Social.propTypes = {
   style: View.propTypes.style,
 };
 
-export default connect(state => ({
-  disabled: state.auth.formDisabled,
-}), { signIn })(Social);
+export default connect(
+  state => ({
+    disabled: state.auth.formDisabled,
+  }),
+  { signIn },
+)(Social);

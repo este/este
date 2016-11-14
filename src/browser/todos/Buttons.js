@@ -25,6 +25,9 @@ Buttons.propTypes = {
   isEmpty: React.PropTypes.bool.isRequired,
 };
 
-export default connect(state => ({
-  isEmpty: R.isEmpty(state.todos.all),
-}), { addHundredTodos, clearAllTodos })(Buttons);
+export default connect(
+  state => ({
+    isEmpty: R.isEmpty(state.todos.all),
+  }),
+  { addHundredTodos, clearAllTodos },
+)(Buttons);

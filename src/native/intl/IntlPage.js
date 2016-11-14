@@ -59,7 +59,10 @@ IntlPage.propTypes = {
   setCurrentLocale: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  currentLocale: state.intl.currentLocale,
-  locales: state.intl.locales,
-}), { setCurrentLocale })(IntlPage);
+export default connect(
+  state => ({
+    currentLocale: state.intl.currentLocale,
+    locales: state.intl.locales,
+  }),
+  { setCurrentLocale },
+)(IntlPage);

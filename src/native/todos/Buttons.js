@@ -57,6 +57,9 @@ TodoButtons.propTypes = {
   todos: React.PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
-  todos: state.todos.all,
-}), { addHundredTodos, clearAllCompletedTodos, clearAllTodos })(TodoButtons);
+export default connect(
+  state => ({
+    todos: state.todos.all,
+  }),
+  { addHundredTodos, clearAllCompletedTodos, clearAllTodos },
+)(TodoButtons);

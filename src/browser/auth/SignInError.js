@@ -34,6 +34,8 @@ SignInError.propTypes = {
   error: React.PropTypes.instanceOf(Error),
 };
 
-export default connect(state => ({
-  error: state.auth.error,
-}))(SignInError);
+export default connect(
+  state => ({
+    error: state.auth.error,
+  }),
+)(SignInError);

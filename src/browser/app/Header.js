@@ -56,6 +56,8 @@ Header.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(Header);
+export default connect(
+  state => ({
+    viewer: state.users.viewer,
+  }),
+)(Header);

@@ -41,4 +41,7 @@ NewTodo = fields(NewTodo, {
 
 NewTodo = injectIntl(NewTodo);
 
-export default connect(null, { addTodo })(NewTodo);
+export default connect(
+  null,
+  { addTodo },
+)(NewTodo);

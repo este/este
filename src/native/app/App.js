@@ -60,9 +60,12 @@ App.propTypes = {
   appStarted: React.PropTypes.bool.isRequired,
 };
 
-App = connect(state => ({
-  appMenuShown: state.app.menuShown,
-  appStarted: state.app.started,
-}), { appShowMenu })(App);
+App = connect(
+  state => ({
+    appMenuShown: state.app.menuShown,
+    appStarted: state.app.started,
+  }),
+  { appShowMenu },
+)(App);
 
 export default start(App);

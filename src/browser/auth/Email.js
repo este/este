@@ -160,7 +160,10 @@ Email = fields(Email, {
   fields: ['email', 'password'],
 });
 
-export default connect(state => ({
-  disabled: state.auth.formDisabled,
-  error: state.auth.error,
-}), { resetPassword, signIn, signUp })(Email);
+export default connect(
+  state => ({
+    disabled: state.auth.formDisabled,
+    error: state.auth.error,
+  }),
+  { resetPassword, signIn, signUp },
+)(Email);

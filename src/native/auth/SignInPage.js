@@ -44,6 +44,8 @@ SignInPage.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(SignInPage);
+export default connect(
+  state => ({
+    viewer: state.users.viewer,
+  }),
+)(SignInPage);

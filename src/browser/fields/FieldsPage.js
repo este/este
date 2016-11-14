@@ -220,6 +220,8 @@ FieldsPage = fields(FieldsPage, {
   }),
 });
 
-export default connect(state => ({
-  dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
-}))(FieldsPage);
+export default connect(
+  state => ({
+    dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
+  }),
+)(FieldsPage);

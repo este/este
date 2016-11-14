@@ -41,7 +41,10 @@ MenuLink.propTypes = {
   message: React.PropTypes.object.isRequired,
 };
 
-MenuLink = connect(null, { appShowMenu })(MenuLink);
+MenuLink = connect(
+  null,
+  { appShowMenu },
+)(MenuLink);
 
 const Menu = ({ viewer }) => (
   <ScrollView
@@ -64,6 +67,8 @@ Menu.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(Menu);
+export default connect(
+  state => ({
+    viewer: state.users.viewer,
+  }),
+)(Menu);

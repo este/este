@@ -18,6 +18,8 @@ OfflinePage.propTypes = {
   online: React.PropTypes.bool.isRequired,
 };
 
-export default connect(state => ({
-  online: state.app.online,
-}))(OfflinePage);
+export default connect(
+  state => ({
+    online: state.app.online,
+  }),
+)(OfflinePage);

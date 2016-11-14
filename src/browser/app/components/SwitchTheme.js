@@ -32,6 +32,9 @@ SwitchTheme.propTypes = {
   setTheme: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  currentTheme: state.themes.currentTheme || 'initial',
-}), { setTheme })(SwitchTheme);
+export default connect(
+  state => ({
+    currentTheme: state.themes.currentTheme || 'initial',
+  }),
+  { setTheme },
+)(SwitchTheme);

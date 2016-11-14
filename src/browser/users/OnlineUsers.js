@@ -67,6 +67,9 @@ OnlineUsers = firebase((database, props) => {
   ];
 })(OnlineUsers);
 
-export default connect(state => ({
-  users: state.users.online,
-}), { onUsersPresence })(OnlineUsers);
+export default connect(
+  state => ({
+    users: state.users.online,
+  }),
+  { onUsersPresence },
+)(OnlineUsers);

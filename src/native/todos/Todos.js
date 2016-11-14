@@ -63,6 +63,9 @@ Todos.propTypes = {
   toggleTodoCompleted: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  todos: state.todos.all,
-}), { toggleTodoCompleted })(Todos);
+export default connect(
+  state => ({
+    todos: state.todos.all,
+  }),
+  { toggleTodoCompleted },
+)(Todos);

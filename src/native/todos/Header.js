@@ -49,6 +49,8 @@ Header.propTypes = {
   todos: React.PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
-  todos: state.todos.all,
-}))(Header);
+export default connect(
+  state => ({
+    todos: state.todos.all,
+  }),
+)(Header);
