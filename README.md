@@ -9,7 +9,7 @@
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 [![GitHub license](https://img.shields.io/github/license/este/este.svg)](https://github.com/este/este/blob/master/LICENSE)
 
-> Dev stack and starter kit for React universal apps. One stack for browser, server, mobile. Forget about [evil frameworks](http://tomasp.net/blog/2015/library-frameworks/), use laser focused [libraries](https://github.com/este/este#libraries) and design patterns instead.
+> Starter kit for universal full–fledged React apps. One stack for browser, mobile, server.
 
 > You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimal valuable product asap with the state of the art real-time universal app stack**.
 
@@ -20,11 +20,11 @@
 - Universal architecture
   - code shared across platforms (browser, server, native mobile)
   - server side rendering or server-less pre-rendering to HTML files
-  - universal routing
   - universal internationalization
   - universal crash reporting
   - universal data fetching
   - universal forms with universal validation
+  - universal ftw
 - Immutable app state
 - Stateless functional UI components with JavaScript styles
 - Flowtype
@@ -36,38 +36,22 @@
 
 ## Libraries
 
-- [react](http://facebook.github.io/react/) and [react native](https://facebook.github.io/react-native/)
 - [redux](http://rackt.github.io/redux/)
 - [redux-observable](https://github.com/redux-observable/redux-observable)
-- [babeljs](https://babeljs.io/)
 - [ramda](http://ramdajs.com/)
-- [react-router](https://github.com/rackt/react-router)
 - [react-intl](https://github.com/yahoo/react-intl)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
-- [webpack](http://webpack.github.io/)
-- [expressjs](http://expressjs.com/)
-- [eslint](http://eslint.org/)
-- [formatjs](http://formatjs.io/) Universal internationalization.
-- [react-helmet](https://github.com/nfl/react-helmet) A document head manager for React.
-- [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
-- [chriso/validator.js](https://github.com/chriso/validator.js) For simple yet powerfull Este sync/async validation.
-- [bluebird](https://github.com/petkaantonov/bluebird) Because it's better than native implementation.
+- [formatjs](http://formatjs.io/)
 - [jest](https://facebook.github.io/jest/) Painless JavaScript Testing.
-- [uuid](https://github.com/defunctzombie/node-uuid) Generate RFC-compliant UUIDs in JavaScript.
-- [react-native-uuid](https://github.com/eugenehp/react-native-uuid) node-uuid for react-native.
-- [gulp](http://gulpjs.com/) Aren't NPM scripts better? [No](https://twitter.com/jaffathecake/status/700320306053935104).
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
-- [gulp-real-favicon](https://www.npmjs.com/package/gulp-real-favicon) Generate a multiplatform favicon with [RealFaviconGenerator](https://realfavicongenerator.net)
-- [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk) For Facebook Login in React Native. Follow the readme install notes.
 - [rebass](https://github.com/jxnblk/rebass) Configurable React Stateless Functional UI Components
 - And much more. Explore the repository.
 
 ## Prerequisites
 
-- [node.js](http://nodejs.org) Node 6 with NPM 3 is required.
+- [node.js](http://nodejs.org) Node 6+
 - [gulp](http://gulpjs.com/) `npm install -g gulp`
 - [git](https://git-scm.com/downloads) git cmd tool is required
-
 
 #### Optional
 
@@ -82,10 +66,10 @@ If you are using different node versions on your machine, use [nvm](https://gith
 ## Create App
 
 ```shell
-git clone --depth=1 https://github.com/este/este.git este-app
+git clone
 cd este-app
 npm install
-```
+``` 
 
 ## Start Development
 
