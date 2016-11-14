@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
 });
 
 type State = {
-  forgetPasswordIsShown: boolean,
-  recoveryEmailSent: boolean,
+  forgetPasswordIsShown: bool,
+  recoveryEmailSent: bool,
 };
 
 class Email extends React.Component {

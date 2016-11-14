@@ -9,7 +9,7 @@ const xfbml = (WrappedComponent: any) =>
   class Wrapper extends React.Component {
 
     el: Element;
-    isMounted: boolean;
+    isMounted: bool;
 
     parseXfbmlAsap() {
       if (window.FB) {

@@ -4,7 +4,7 @@ import { Base } from 'rebass';
 
 type Props = {
   onSubmit?: () => void,
-  small?: boolean,
+  small?: bool,
   style?: any,
 };
 

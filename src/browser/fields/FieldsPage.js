@@ -45,7 +45,7 @@ const keyConceptsOfLibertarianism = [
 }));
 
 type State = {
-  disabled: boolean,
+  disabled: bool,
   error: ?Object,
   submittedValues: ?Object,
 };

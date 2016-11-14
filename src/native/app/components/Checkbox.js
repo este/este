@@ -4,7 +4,7 @@ import { Button } from './';
 import { Image } from 'react-native';
 
 type Props = {
-  checked?: boolean,
+  checked?: bool,
   onPress: () => void,
   style?: any,
 };
