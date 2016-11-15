@@ -5,6 +5,7 @@ import { Button, FormattedMessage } from '../app/components';
 import { connect } from 'react-redux';
 import { signOut } from '../../common/auth/actions';
 
+// $FlowFixMe
 const SignOut = ({ signOut }, { router }) => {
   const onClick = () => {
     // We have to redirect to home before signOut.

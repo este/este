@@ -2,7 +2,6 @@
 import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
-import Promise from 'bluebird';
 import React from 'react';
 import ServerFetchProvider from './ServerFetchProvider';
 import config from '../config';
@@ -15,12 +14,14 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
 const settleAllWithTimeout = promises => Promise
   .all(promises.map(p => p.reflect()))
+  // $FlowFixMe
   .each((inspection) => {
     if (inspection.isFulfilled()) return;
     console.log('Server fetch failed:', inspection.reason());
   })
   .timeout(5000) // Do not block rendering forever.
   .catch((error) => {
+    // $FlowFixMe
     if (error instanceof Promise.TimeoutError) {
       console.log('Server fetch timeouted:', error);
       return;

@@ -6,6 +6,7 @@ import frontend from './frontend';
 
 const app = express();
 
+// $FlowFixMe
 app.use(frontend);
 app.use(errorHandler);
 
