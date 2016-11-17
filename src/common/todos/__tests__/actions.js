@@ -10,9 +10,12 @@ it('addTodo creates todo', () => {
   expect(action).toEqual({
     type: 'ADD_TODO',
     payload: {
-      createdAt: 1,
-      id: 'uid',
-      title: 'Hello',
+      todo: {
+        completed: false,
+        createdAt: 1,
+        id: 'uid',
+        title: 'Hello',
+      },
     },
   });
 });
