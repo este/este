@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import theme from './themes/initial';
@@ -56,7 +57,7 @@ Header.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     menuShown: state.app.menuShown,
   }),
   { appShowMenu },

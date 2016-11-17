@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
@@ -50,7 +51,7 @@ Social.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     disabled: state.auth.formDisabled,
   }),
   { signIn },

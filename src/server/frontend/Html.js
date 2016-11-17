@@ -23,7 +23,7 @@ type Props = {
   bodyHtml: string,
   googleAnalyticsId: string,
   helmet: Object,
-  isProduction: bool,
+  isProduction: boolean,
 };
 
 const Html = ({

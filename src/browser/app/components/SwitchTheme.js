@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../../common/types';
 import * as themes from '../themes';
 import React from 'react';
 import { Button, View } from './';
@@ -33,7 +34,7 @@ SwitchTheme.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     currentTheme: state.themes.currentTheme || 'initial',
   }),
   { setTheme },

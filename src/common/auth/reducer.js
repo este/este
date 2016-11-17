@@ -1,26 +1,28 @@
-/* @flow weak */
-import * as actions from './actions';
+/* @flow */
+import type { Action, AuthState } from '../types';
 
 const initialState = {
   formDisabled: false,
   error: null,
 };
 
-const authReducer = (state = initialState, action) => {
+const reducer = (
+  state: AuthState = initialState,
+  action: Action,
+): AuthState => {
   switch (action.type) {
-
-    case actions.SIGN_IN:
-    case actions.SIGN_UP: {
+    case 'SIGN_IN':
+    case 'SIGN_UP': {
       return { ...state, formDisabled: true };
     }
 
-    case actions.SIGN_IN_DONE:
-    case actions.SIGN_UP_DONE: {
+    case 'SIGN_IN_DONE':
+    case 'SIGN_UP_DONE': {
       return { ...state, formDisabled: false, error: null };
     }
 
-    case actions.SIGN_IN_FAIL:
-    case actions.SIGN_UP_FAIL: {
+    case 'SIGN_IN_FAIL':
+    case 'SIGN_UP_FAIL': {
       return { ...state, formDisabled: false, error: action.payload.error };
     }
 
@@ -30,4 +32,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default reducer;

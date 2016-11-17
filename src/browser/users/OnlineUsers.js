@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Gravatar from 'react-gravatar';
 import React from 'react';
 import { Image, Loading, Text, View } from '../app/components';
@@ -68,7 +69,7 @@ OnlineUsers = firebase((database, props) => {
 })(OnlineUsers);
 
 export default connect(
-  state => ({
+  (state: State) => ({
     users: state.users.online,
   }),
   { onUsersPresence },

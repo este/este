@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import './App.css';
 import * as themes from './themes';
 import Footer from './Footer';
@@ -78,7 +79,7 @@ App.propTypes = {
 };
 
 App = connect(
-  state => ({
+  (state: State) => ({
     currentLocale: state.intl.currentLocale,
     currentTheme: state.themes.currentTheme,
   }),

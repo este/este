@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../../common/types';
 import React from 'react';
 import { Match as ReactRouterMatch, Redirect } from 'react-router';
 import { connect } from 'react-redux';
@@ -36,7 +37,7 @@ Match.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     viewer: state.users.viewer,
   }),
 )(Match);

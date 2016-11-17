@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Email from './Email';
 import React from 'react';
 import SignInError from './SignInError';
@@ -54,7 +55,7 @@ SignInPage.propTypes = {
 SignInPage = injectIntl(SignInPage);
 
 export default connect(
-  state => ({
+  (state: State) => ({
     disabled: state.auth.formDisabled,
     viewer: state.users.viewer,
   }),

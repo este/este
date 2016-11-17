@@ -1,10 +1,14 @@
-/* @flow weak */
+/* @flow */
+import type { DeviceState } from '../types';
+
 const initialState = {
   host: '',
   isReactNative: false,
   platform: '', // iOS or Android in React Native.
 };
 
-const deviceReducer = (state = initialState) => state;
+const reducer = (
+  state: DeviceState = initialState,
+): DeviceState => state;
 
-export default deviceReducer;
+export default reducer;

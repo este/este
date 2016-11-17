@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from './themes/initial';
@@ -68,7 +69,7 @@ Menu.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     viewer: state.users.viewer,
   }),
 )(Menu);

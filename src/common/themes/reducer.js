@@ -1,14 +1,17 @@
-/* @flow weak */
-import * as actions from './actions';
+/* @flow */
+import type { Action, ThemeState } from '../types';
 
 const initialState = {
   currentTheme: null,
 };
 
-const themesReducer = (state = initialState, action) => {
+const reducer = (
+  state: ThemeState = initialState,
+  action: Action,
+): ThemeState => {
   switch (action.type) {
 
-    case actions.SET_THEME: {
+    case 'SET_THEME': {
       return { ...state, currentTheme: action.payload.theme };
     }
 
@@ -18,4 +21,4 @@ const themesReducer = (state = initialState, action) => {
   }
 };
 
-export default themesReducer;
+export default reducer;

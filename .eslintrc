@@ -1,11 +1,13 @@
 {
   "parser"  : "babel-eslint",
   "plugins": [
+    "flowtype",
     "fp",
     "react-native"
   ],
   "extends" : [
-    "airbnb"
+    "airbnb",
+    "plugin:flowtype/recommended"
   ],
   env: {
     jest: true
@@ -24,6 +26,7 @@
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
     "react/jsx-indent": 0, // Damn. We need Yarn asap.
+    "import/prefer-default-export": 0, // No. Actions can have just one action.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,

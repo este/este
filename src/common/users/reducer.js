@@ -1,33 +1,33 @@
-/* @flow weak */
-import * as actions from './actions';
-import * as authActions from '../auth/actions';
+/* @flow */
+import type { Action, UsersState } from '../types';
 import R from 'ramda';
-import createUser from './createUser';
 import createUserFirebase from './createUserFirebase';
 
 const initialState = {
-  all: {},
   // Undefined is absence of evidence, null is evidence of absence.
   online: undefined,
   viewer: undefined,
 };
 
-const usersReducer = (state = initialState, action) => {
+const reducer = (
+  state: UsersState = initialState,
+  action: Action,
+): UsersState => {
   switch (action.type) {
 
-    case authActions.ON_AUTH: {
+    case 'ON_AUTH': {
       const user = createUserFirebase(action.payload.firebaseUser);
       return { ...state, viewer: user };
     }
 
-    case actions.ON_USERS_PRESENCE: {
+    case 'ON_USERS_PRESENCE': {
       const { presence } = action.payload;
       if (!presence) {
         return { ...state, online: null };
       }
       const sortBylastSeenAt = R.sortBy(R.prop('lastSeenAt'));
       const online = R.compose(
-        R.map(item => createUser(item.user)),
+        R.map(item => item.user),
         R.sortBy(sortBylastSeenAt),
         R.values,
         R.map(R.compose(R.last, sortBylastSeenAt, R.values)),
@@ -41,4 +41,4 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export default usersReducer;
+export default reducer;

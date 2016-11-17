@@ -17,7 +17,7 @@ const createInitialState = () => ({
   },
   device: deviceReducer(),
   intl: {
-    ...intlReducer(undefined, {}),
+    ...intlReducer(),
     currentLocale: config.defaultLocale,
     defaultLocale: config.defaultLocale,
     locales: config.locales,

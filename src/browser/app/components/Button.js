@@ -6,7 +6,7 @@ import { Button as RebassButton } from 'rebass';
 
 // medium.com/@chenglou/react-proptypes-flow-types-cheat-sheet-ed80f8e1383d
 type Props = {
-  disabled?: bool,
+  disabled?: boolean,
   style?: any,
 };
 

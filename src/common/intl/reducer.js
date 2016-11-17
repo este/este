@@ -1,5 +1,5 @@
-/* @flow weak */
-import * as actions from './actions';
+/* @flow */
+import type { Action, IntlState } from '../types';
 
 const initialState = {
   currentLocale: null,
@@ -9,10 +9,16 @@ const initialState = {
   messages: null,
 };
 
-const intlReducer = (state = initialState, action) => {
+const reducer = (
+  state: IntlState = initialState,
+  action?: Action,
+): IntlState => {
+  // Because it's called from the createInitialState.
+  if (!action) return state;
+
   switch (action.type) {
 
-    case actions.SET_CURRENT_LOCALE: {
+    case 'SET_CURRENT_LOCALE': {
       return { ...state, currentLocale: action.payload.locale };
     }
 
@@ -22,4 +28,4 @@ const intlReducer = (state = initialState, action) => {
   }
 };
 
-export default intlReducer;
+export default reducer;

@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Buttons from './Buttons';
 import R from 'ramda';
 import React from 'react';
@@ -64,7 +65,7 @@ Todos.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     todos: state.todos.all,
   }),
   { toggleTodoCompleted },

@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
@@ -26,7 +27,7 @@ Buttons.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     isEmpty: R.isEmpty(state.todos.all),
   }),
   { addHundredTodos, clearAllTodos },

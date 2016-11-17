@@ -29,6 +29,7 @@ const settleAllWithTimeout = promises => Promise
     throw error;
   });
 
+// createInitialState loads files, so it must be called once.
 const initialState = createInitialState();
 
 const getHost = req =>

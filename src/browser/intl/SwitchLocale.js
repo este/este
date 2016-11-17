@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import { Button, View } from '../app/components';
 import { connect } from 'react-redux';
@@ -27,7 +28,7 @@ SwitchLocale.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     currentLocale: state.intl.currentLocale,
     locales: state.intl.locales,
   }),

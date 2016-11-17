@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
@@ -57,7 +58,7 @@ Header.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     viewer: state.users.viewer,
   }),
 )(Header);

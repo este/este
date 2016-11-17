@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import DynamicField from './DynamicField';
 import R from 'ramda';
 import React from 'react';
@@ -44,8 +45,8 @@ const keyConceptsOfLibertarianism = [
   name: concept,
 }));
 
-type State = {
-  disabled: bool,
+type LocalState = {
+  disabled: boolean,
   error: ?Object,
   submittedValues: ?Object,
 };
@@ -57,7 +58,7 @@ class FieldsPage extends React.Component {
     dynamicFields: React.PropTypes.object,
   };
 
-  state: State = {
+  state: LocalState = {
     disabled: false,
     error: null,
     submittedValues: null,
@@ -221,7 +222,7 @@ FieldsPage = fields(FieldsPage, {
 });
 
 export default connect(
-  state => ({
+  (state: State) => ({
     dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
   }),
 )(FieldsPage);

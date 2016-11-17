@@ -1,4 +1,5 @@
 /* @flow weak */
+import type { Action } from './types';
 import Raven from 'raven-js';
 
 const captureException = (error) => {
@@ -41,7 +42,7 @@ const createReportingMiddleware = () => {
     Raven.setExtraContext(context);
   };
 
-  return store => next => (action) => {
+  return store => next => (action: Action) => {
     if (action.type === 'APP_ERROR') {
       captureException(action.payload.error);
     } else if (action.type === 'ON_AUTH') {

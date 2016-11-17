@@ -1,68 +1,59 @@
-/* @flow weak */
+/* @flow */
+import type { Action, Deps } from '../types';
 import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';
 import messages from '../lib/redux-firebase/messages';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
 
-export const ON_AUTH = 'ON_AUTH';
-export const RESET_PASSWORD = 'RESET_PASSWORD';
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_IN_DONE = 'SIGN_IN_DONE';
-export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
-export const SIGN_OUT = 'SIGN_OUT';
-export const SIGN_UP = 'SIGN_UP';
-export const SIGN_UP_DONE = 'SIGN_UP_DONE';
-export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
-
-export const onAuth = (firebaseUser: ?Object) => ({
-  type: ON_AUTH,
+export const onAuth = (firebaseUser: ?Object): Action => ({
+  type: 'ON_AUTH',
   payload: { firebaseUser },
 });
 
-export const resetPassword = (email: string) => ({
-  type: RESET_PASSWORD,
+export const resetPassword = (email: string): Action => ({
+  type: 'RESET_PASSWORD',
   payload: { email },
 });
 
-export const signIn = (providerName: string, options?: Object) => ({
-  type: SIGN_IN,
+export const signIn = (providerName: string, options?: Object): Action => ({
+  type: 'SIGN_IN',
   payload: { providerName, options },
 });
 
-export const signInDone = (firebaseUser: Object) => ({
-  type: SIGN_IN_DONE,
+export const signInDone = (firebaseUser: Object): Action => ({
+  type: 'SIGN_IN_DONE',
   payload: {
     user: createUserFirebase(firebaseUser),
   },
 });
 
-export const signInFail = (error: Error) => ({
-  type: SIGN_IN_FAIL,
+export const signInFail = (error: Error): Action => ({
+  type: 'SIGN_IN_FAIL',
   payload: { error },
 });
 
-export const signOut = () => ({ firebaseAuth }) => {
+export const signOut = () => ({ firebaseAuth }: Deps): Action => {
   firebaseAuth().signOut();
   return {
-    type: SIGN_OUT,
+    type: 'SIGN_OUT',
   };
 };
 
-export const signUp = (providerName: string, options?: Object) => ({
-  type: SIGN_UP,
+export const signUp = (providerName: string, options?: Object): Action => ({
+  type: 'SIGN_UP',
   payload: { providerName, options },
 });
 
-export const signUpDone = (firebaseUser: Object) => ({
-  type: SIGN_UP_DONE,
+export const signUpDone = (firebaseUser: Object): Action => ({
+  type: 'SIGN_UP_DONE',
   payload: {
     user: createUserFirebase(firebaseUser),
   },
 });
 
-export const signUpFail = (error: Error) => ({
-  type: SIGN_UP_FAIL,
+export const signUpFail = (error: Error): Action => ({
+  type: 'SIGN_UP_FAIL',
   payload: { error },
 });
 
@@ -85,8 +76,9 @@ const mapFirebaseErrorToEsteValidationError = (code) => {
   return new ValidationError(code, { prop });
 };
 
-const resetPasswordEpic = (action$, { firebaseAuth }) =>
-  action$.ofType(RESET_PASSWORD)
+const resetPasswordEpic = (action$: any, { firebaseAuth }: Deps) =>
+  action$
+    .filter((action: Action) => action.type === 'RESET_PASSWORD')
     .mergeMap(({ payload: { email } }) => {
       firebaseAuth().sendPasswordResetEmail(email);
       return Observable.of();
@@ -98,7 +90,10 @@ const facebookPermissions = [
   'user_friends',
 ];
 
-const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
+const signInEpic = (
+  action$: any,
+  { FBSDK, firebaseAuth, validate }: Deps,
+) => {
   // groups.google.com/forum/#!msg/firebase-talk/643d_lwUAMI/bfQyn8D-BQAJ
   // stackoverflow.com/a/33997042/233902
   const isMobileFacebookApp = () => {
@@ -154,7 +149,8 @@ const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
       .map(firebaseUser => signInDone(firebaseUser))
       .catch(error => Observable.of(signInFail(error)));
 
-  return action$.ofType(SIGN_IN)
+  return action$
+    .filter((action: Action) => action.type === 'SIGN_IN')
     .mergeMap(({ payload: { providerName, options } }) => {
       if (options && options.isNative) {
         return nativeSignIn('facebook');
@@ -174,8 +170,9 @@ const signInEpic = (action$, { FBSDK, firebaseAuth, validate }) => {
     });
 };
 
-const signUpEpic = (action$, { firebaseAuth, validate }) =>
-  action$.ofType(SIGN_UP)
+const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
+  action$
+    .filter((action: Action) => action.type === 'SIGN_UP')
     .mergeMap(({ payload: { providerName, options } }) => {
       invariant(providerName === 'password', `${providerName} provider not supported.`);
       const { email, password } = options;

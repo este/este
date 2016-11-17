@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import theme from '../app/themes/initial';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -60,7 +61,7 @@ IntlPage.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     currentLocale: state.intl.currentLocale,
     locales: state.intl.locales,
   }),

@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Menu from './Menu';
 import Page from './Page';
 import React from 'react';
@@ -61,7 +62,7 @@ App.propTypes = {
 };
 
 App = connect(
-  state => ({
+  (state: State) => ({
     appMenuShown: state.app.menuShown,
     appStarted: state.app.started,
   }),

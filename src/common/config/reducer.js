@@ -1,11 +1,15 @@
-/* @flow weak */
+/* @flow */
+import type { ConfigState } from '../types';
+
 const initialState = {
   appName: '',
   appVersion: '',
-  firebase: '',
+  firebase: null,
   sentryUrl: '',
 };
 
-const configReducer = (state = initialState) => state;
+const reducer = (
+  state: ConfigState = initialState,
+): ConfigState => state;
 
-export default configReducer;
+export default reducer;

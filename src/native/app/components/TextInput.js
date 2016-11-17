@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  invalid?: bool,
+  invalid?: boolean,
   inputStyle?: any,
   viewStyle?: any,
 };

@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Email from './Email';
 import React from 'react';
 import Social from './Social';
@@ -45,7 +46,7 @@ SignInPage.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     viewer: state.users.viewer,
   }),
 )(SignInPage);

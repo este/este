@@ -1,55 +1,48 @@
-/* @flow weak */
+/* @flow */
+import type { Action, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';
 import { onAuth, signInDone, signInFail } from '../auth/actions';
 
-export const APP_ERROR = 'APP_ERROR';
-export const APP_ONLINE = 'APP_ONLINE';
-export const APP_SHOW_MENU = 'APP_SHOW_MENU';
-export const APP_START = 'APP_START';
-export const APP_STARTED = 'APP_STARTED';
-export const APP_STOP = 'APP_STOP';
-export const APP_STORAGE_LOADED = 'APP_STORAGE_LOADED';
-
-// For serious app errors to be reported on production.
-export const appError = (error: Object) => ({
-  type: APP_ERROR,
+export const appError = (error: Object): Action => ({
+  type: 'APP_ERROR',
   payload: { error },
 });
 
-export const appOnline = (online: bool) => ({
-  type: APP_ONLINE,
+export const appOnline = (online: boolean): Action => ({
+  type: 'APP_ONLINE',
   payload: { online },
 });
 
-export const appShowMenu = (show: bool) => ({
-  type: APP_SHOW_MENU,
-  payload: { show },
+export const appShowMenu = (menuShown: boolean): Action => ({
+  type: 'APP_SHOW_MENU',
+  payload: { menuShown },
 });
 
 // Called on componentDidMount aka only at the client (browser or native).
-export const appStart = () => ({
-  type: APP_START,
+export const appStart = (): Action => ({
+  type: 'APP_START',
 });
 
-export const appStarted = () => ({
-  type: APP_STARTED,
+export const appStarted = (): Action => ({
+  type: 'APP_STARTED',
 });
 
-export const appStop = () => ({
-  type: APP_STOP,
+export const appStop = (): Action => ({
+  type: 'APP_STOP',
 });
 
-export const appStorageLoaded = (state: Object) => ({
-  type: APP_STORAGE_LOADED,
+export const appStorageLoaded = (state: Object): Action => ({
+  type: 'APP_STORAGE_LOADED',
   payload: { state },
 });
 
-const appStartEpic = action$ =>
+// TODO: Observable type.
+const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)
     .map(appStarted);
 
-const appStartedFirebaseEpic = (action$, deps) => {
+const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
   const appOnline$ = Observable.create((observer) => {
@@ -97,11 +90,14 @@ const appStartedFirebaseEpic = (action$, deps) => {
     streams.push(signInAfterRedirect$);
   }
 
-  return action$.ofType(APP_STARTED)
+  return action$
+    .filter((action: Action) => action.type === 'APP_STARTED')
     .mergeMap(() => Observable
       .merge(...streams)
       // takeUntil unsubscribes all merged streams on APP_STOP.
-      .takeUntil(action$.ofType(APP_STOP)),
+      .takeUntil(
+        action$.filter((action: Action) => action.type === 'APP_STOP'),
+      ),
     );
 };
 
