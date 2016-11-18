@@ -1,4 +1,5 @@
 /* @flow */
+import R from 'ramda';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { Input, Form } from '../app/components';
@@ -7,7 +8,7 @@ import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl, intlShape } from 'react-intl';
 
-let NewTodo = ({ addTodo, fields, intl }) => {
+const NewTodo = ({ addTodo, fields, intl }) => {
   const onInputKeyDown = (event) => {
     if (event.key !== 'Enter') return;
     if (!fields.title.value.trim()) return;
@@ -34,14 +35,14 @@ NewTodo.propTypes = {
   intl: intlShape.isRequired,
 };
 
-NewTodo = fields({
-  path: 'newTodo',
-  fields: ['title'],
-})(NewTodo);
-
-NewTodo = injectIntl(NewTodo);
-
-export default connect(
-  null,
-  { addTodo },
+export default R.compose(
+  connect(
+    null,
+    { addTodo },
+  ),
+  injectIntl,
+  fields({
+    path: 'newTodo',
+    fields: ['title'],
+  }),
 )(NewTodo);

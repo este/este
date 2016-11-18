@@ -1,6 +1,7 @@
 /* @flow */
 import type { State } from '../../common/types';
 import Email from './Email';
+import R from 'ramda';
 import React from 'react';
 import SignInError from './SignInError';
 import Social from './Social';
@@ -17,7 +18,7 @@ import {
   View,
 } from '../app/components';
 
-let SignInPage = ({ disabled, intl, location, viewer }) => (
+const SignInPage = ({ disabled, intl, location, viewer }) => (
   viewer ?
     <Redirect
       to={(
@@ -52,11 +53,12 @@ SignInPage.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-SignInPage = injectIntl(SignInPage);
-
-export default connect(
-  (state: State) => ({
-    disabled: state.auth.formDisabled,
-    viewer: state.users.viewer,
-  }),
+export default R.compose(
+  connect(
+    (state: State) => ({
+      disabled: state.auth.formDisabled,
+      viewer: state.users.viewer,
+    }),
+  ),
+  injectIntl,
 )(SignInPage);

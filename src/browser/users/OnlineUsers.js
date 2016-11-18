@@ -1,6 +1,7 @@
 /* @flow */
 import type { State } from '../../common/types';
 import Gravatar from 'react-gravatar';
+import R from 'ramda';
 import React from 'react';
 import { Image, Loading, Text, View } from '../app/components';
 import { connect } from 'react-redux';
@@ -43,7 +44,7 @@ User.propTypes = {
   user: React.PropTypes.object.isRequired,
 };
 
-let OnlineUsers = ({ users }) => (
+const OnlineUsers = ({ users }) => (
   <View>
     { users === undefined ?
       <Loading />
@@ -61,16 +62,17 @@ OnlineUsers.propTypes = {
   users: React.PropTypes.array,
 };
 
-OnlineUsers = firebase((database, props) => {
-  const usersPresenceRef = database.child('users-presence');
-  return [
-    [usersPresenceRef, 'on', 'value', props.onUsersPresence],
-  ];
-})(OnlineUsers);
-
-export default connect(
-  (state: State) => ({
-    users: state.users.online,
+export default R.compose(
+  connect(
+    (state: State) => ({
+      users: state.users.online,
+    }),
+    { onUsersPresence },
+  ),
+  firebase((database, props) => {
+    const usersPresenceRef = database.child('users-presence');
+    return [
+      [usersPresenceRef, 'on', 'value', props.onUsersPresence],
+    ];
   }),
-  { onUsersPresence },
 )(OnlineUsers);

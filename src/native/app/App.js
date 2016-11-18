@@ -2,6 +2,7 @@
 import type { State } from '../../common/types';
 import Menu from './Menu';
 import Page from './Page';
+import R from 'ramda';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
@@ -19,7 +20,7 @@ import OfflinePage from '../offline/OfflinePage';
 import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 
-let App = ({ appMenuShown, appShowMenu, appStarted }) => {
+const App = ({ appMenuShown, appShowMenu, appStarted }) => {
   // TODO: Add splash screen.
   if (!appStarted) return null;
   return (
@@ -61,12 +62,13 @@ App.propTypes = {
   appStarted: React.PropTypes.bool.isRequired,
 };
 
-App = connect(
-  (state: State) => ({
-    appMenuShown: state.app.menuShown,
-    appStarted: state.app.started,
-  }),
-  { appShowMenu },
+export default R.compose(
+  start,
+  connect(
+    (state: State) => ({
+      appMenuShown: state.app.menuShown,
+      appStarted: state.app.started,
+    }),
+    { appShowMenu },
+  ),
 )(App);
-
-export default start(App);

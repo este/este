@@ -79,11 +79,12 @@ App.propTypes = {
   currentTheme: React.PropTypes.string,
 };
 
-const connectApp = connect(
-  (state: State) => ({
-    currentLocale: state.intl.currentLocale,
-    currentTheme: state.themes.currentTheme,
-  }),
-);
-
-export default R.compose(connectApp, start)(App);
+export default R.compose(
+  connect(
+    (state: State) => ({
+      currentLocale: state.intl.currentLocale,
+      currentTheme: state.themes.currentTheme,
+    }),
+  ),
+  start,
+)(App);
