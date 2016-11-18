@@ -54,10 +54,10 @@ NewTodo.propTypes = {
 
 NewTodo = injectIntl(NewTodo);
 
-NewTodo = fields(NewTodo, {
+NewTodo = fields({
   path: 'newTodo',
   fields: ['title'],
-});
+})(NewTodo);
 
 export default connect(
   null,

@@ -34,10 +34,10 @@ NewTodo.propTypes = {
   intl: intlShape.isRequired,
 };
 
-NewTodo = fields(NewTodo, {
+NewTodo = fields({
   path: 'newTodo',
   fields: ['title'],
-});
+})(NewTodo);
 
 NewTodo = injectIntl(NewTodo);
 

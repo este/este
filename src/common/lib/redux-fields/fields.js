@@ -1,14 +1,23 @@
+/* @flow weak */
 import R from 'ramda';
 import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
+
+type Path = string | Array<string> | (props: Object) => Array<string>;
+
+type Options = {
+  path: Path,
+  fields: Array<string>,
+  getInitialState?: (props: Object) => Object,
+};
 
 const isReactNative =
   typeof navigator === 'object' &&
   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-const fields = (WrappedComponent, options) => {
+const fields = (options: Options) => (WrappedComponent) => {
   const {
     path = '',
     fields = [],
@@ -76,6 +85,10 @@ const fields = (WrappedComponent, options) => {
       model: null,
     };
 
+    fields: Object;
+    values: any;
+    unsubscribe: () => void;
+
     onFieldChange = (field, value) => {
       const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
       this.context.store.dispatch(setField(normalizedPath, value));
@@ -128,7 +141,6 @@ const fields = (WrappedComponent, options) => {
 
     componentWillUnmount() {
       this.unsubscribe();
-      this.fields = null;
     }
 
     render() {

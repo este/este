@@ -204,7 +204,7 @@ class FieldsPage extends React.Component {
 
 }
 
-FieldsPage = fields(FieldsPage, {
+FieldsPage = fields({
   path: 'fieldsPage',
   fields: [
     'donation',
@@ -219,7 +219,7 @@ FieldsPage = fields(FieldsPage, {
     isAnarchist: false,
     isLibertarian: false,
   }),
-});
+})(FieldsPage);
 
 export default connect(
   (state: State) => ({

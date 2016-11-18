@@ -163,10 +163,10 @@ class Email extends React.Component {
 
 Email = injectIntl(Email);
 
-Email = fields(Email, {
+Email = fields({
   path: ['auth', 'email'],
   fields: ['email', 'password'],
-});
+})(Email);
 
 export default connect(
   (state: State) => ({

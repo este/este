@@ -5,6 +5,7 @@ import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
+import R from 'ramda';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
@@ -37,7 +38,7 @@ const bootstrap4Metas: any = [
   },
 ];
 
-let App = ({ currentLocale, currentTheme }) => (
+const App = ({ currentLocale, currentTheme }) => (
   <ThemeProvider
     key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
     theme={themes[currentTheme] || themes.initial}
@@ -78,11 +79,11 @@ App.propTypes = {
   currentTheme: React.PropTypes.string,
 };
 
-App = connect(
+const connectApp = connect(
   (state: State) => ({
     currentLocale: state.intl.currentLocale,
     currentTheme: state.themes.currentTheme,
   }),
-)(App);
+);
 
-export default start(App);
+export default R.compose(connectApp, start)(App);

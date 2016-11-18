@@ -156,10 +156,11 @@ Email = focus(Email, 'error');
 
 Email = injectIntl(Email);
 
-Email = fields(Email, {
+Email = fields({
   path: ['auth', 'email'],
+  // fok: 123,
   fields: ['email', 'password'],
-});
+})(Email);
 
 export default connect(
   (state: State) => ({
