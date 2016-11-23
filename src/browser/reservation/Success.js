@@ -2,28 +2,27 @@ import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import OrderDetail from './OrderDetail';
 import { connect } from 'react-redux';
 import { incrementSeats, decrementSeats, seatToggle } from '../../common/app/actions';
-import { Input, Button, ButtonOutline, PageHeader } from 'rebass';
-import { Map } from 'immutable';
-import { Link } from 'react-router';
+import { PageHeader } from 'rebass';
 
 @connect(state => ({
-  selectedSeats: state.app.get('selectedSeats'),
-  isLoggedIn: state.app.get('isLoggedIn')
+  isLoggedIn: state.app.get('isLoggedIn'),
+  email: state.app.getIn(['fields', 'email'])
 }), { incrementSeats, decrementSeats, seatToggle })
 export default class Reservation extends Component {
 
   static propTypes = {
-    selectedSeats: RPT.object
+    email: RPT.string,
+    isLoggedIn: RPT.bool
   }
 
   render() {
-    const { selectedSeats, isLoggedIn } = this.props;
+    const { email, isLoggedIn } = this.props;
     return (
       <div style={style}>
         <PageHeader
           heading="Objednávka dokončena"
         />
-        <p>Objednávka č. 234232342 byla úspěšně dokončena. Na zadaný e-mail Vám byly odeslány všechny informace, které uvidíte níže. V e-mailu navíc najdete odkazy pro úpravu či zrušení objednávky.</p>
+        <p>Objednávka č. 234232342 byla úspěšně dokončena. Na Váš e-mail ({email}) Vám byly odeslány všechny informace, které uvidíte níže. V e-mailu navíc najdete odkazy pro úpravu či zrušení objednávky.</p>
         <div>
           <OrderDetail />
           QR kód níže funguje jako Vaše vstupenka. Mějte jej prosím připravený při vstupu do kina.

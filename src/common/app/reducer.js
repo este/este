@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import { Record } from '../transit';
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
 const State = Record({
   error: null,
@@ -8,7 +8,8 @@ const State = Record({
   menuShown: false,
   isLoggedIn: false,
   selectedSeats: fromJS({ 7: { 5: 'taken', 6: 'taken', 7: 'taken' } }),
-  maxSeats: 2
+  maxSeats: 2,
+  fields: new Map({ email: '' })
 }, 'app');
 
 const appReducer = (state = new State(), action) => {
@@ -46,6 +47,10 @@ const appReducer = (state = new State(), action) => {
         : state.setIn(['selectedSeats', row.toString(), seat.toString()], true);
     }
 
+    case actions.ON_FIELD_CHANGE: {
+      const { name, value } = action.payload;
+      return state.setIn(['fields', name], value);
+    }
 
     default:
       return state;

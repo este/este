@@ -1,10 +1,7 @@
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
-import SeatPicker from './SeatPicker';
 import { connect } from 'react-redux';
 import { incrementSeats, decrementSeats, seatToggle } from '../../common/app/actions';
-import { Input, Button, ButtonOutline, PageHeader } from 'rebass';
 import { Map } from 'immutable';
-import { Link } from 'react-router';
 
 @connect(state => ({
   selectedSeats: state.app.get('selectedSeats'),
@@ -18,11 +15,11 @@ export default class Reservation extends Component {
 
   render() {
     // TODO: make dynamic
-    const { selectedSeats, isLoggedIn } = this.props;
+    const { selectedSeats } = this.props;
     const filteredSeats = selectedSeats
         .reduce((prev, row, key) => prev.set(key, row.filter(s => s && s !== 'taken')), new Map())
         .filter(r => r.size > 0);
-    const seats = filteredSeats.reduce((prev, r, key) =>  `${prev} ${String.fromCharCode(97 + parseInt(key, 10)).toUpperCase()}` + r.reduce((prev2, s, key2) => s === 'taken' ? prev2 : `${prev2} ${key2}`, ''), '');
+    const seats = filteredSeats.reduce((prev, r, key) => `${prev} ${String.fromCharCode(97 + parseInt(key, 10)).toUpperCase()}${r.reduce((prev2, s, key2) => s === 'taken' ? prev2 : `${prev2} ${key2}`, '')}`, '');
     return (
       <div style={style}>
         <ul>

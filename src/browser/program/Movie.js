@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 export default class Movie extends Component {
   static propTypes = {
     dates: RPT.array,
+    description: RPT.string,
     id: RPT.number,
     poster: RPT.string,
     localizedName: RPT.string,
@@ -21,14 +22,15 @@ export default class Movie extends Component {
   }
 
   render() {
-    const { dates, poster, originalName } = this.props;
+    const { dates, description, poster, originalName } = this.props;
     const { isExpanded } = this.state;
 
     return (
       <div style={style.wrapper}>
         <div style={posterStyle(poster)} />
         <div style={style.right}>
-          {originalName}
+          <div>{originalName}</div>
+          <div style={style.description}>{description}</div>
           <div style={style.dataToggle} onClick={() => this.toggleExpanded()}>{isExpanded ? 'Skrýt data' : 'Zobrazit data'}</div>
         </div>
 
@@ -77,6 +79,10 @@ const style = {
     cursor: 'pointer'
   },
   dataToggle: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  },
+  description: {
+    fontSize: '12px'
   }
 };

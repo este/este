@@ -1,23 +1,30 @@
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import OrderDetail from './OrderDetail';
 import { connect } from 'react-redux';
-import { incrementSeats, decrementSeats, seatToggle } from '../../common/app/actions';
+import { onFieldChange, incrementSeats, decrementSeats, seatToggle } from '../../common/app/actions';
 import { Input, Button, ButtonOutline, PageHeader } from 'rebass';
-import { Map } from 'immutable';
 import { Link } from 'react-router';
 
 @connect(state => ({
-  selectedSeats: state.app.get('selectedSeats'),
+  email: state.app.getIn(['fields', 'email']),
   isLoggedIn: state.app.get('isLoggedIn')
-}), { incrementSeats, decrementSeats, seatToggle })
+}), { incrementSeats, decrementSeats, seatToggle, onFieldChange })
 export default class Reservation extends Component {
 
   static propTypes = {
-    selectedSeats: RPT.object
+    email: RPT.string,
+    isLoggedIn: RPT.bool,
+    onFieldChange: RPT.func.isRequired
+  }
+
+  onFieldChange(e) {
+    const { onFieldChange } = this.props;
+    const { name, value } = e.target;
+    onFieldChange(name, value);
   }
 
   render() {
-    const { selectedSeats, isLoggedIn } = this.props;
+    const { email, isLoggedIn } = this.props;
     return (
       <div style={style}>
         <PageHeader
@@ -29,7 +36,7 @@ export default class Reservation extends Component {
             <div>
               <p>Máte u nás účet? <ButtonOutline><Link to="/login">Přihlásit se můžete zde</Link></ButtonOutline></p>
               <p>Nebo pro dokončení objednávky zadejte e-mail:</p>
-              <Input label="E-mail:" />
+              <Input name="email" onChange={(e) => this.onFieldChange(e)} label="E-mail:" value={email} />
             </div>
             )}
         <OrderDetail />

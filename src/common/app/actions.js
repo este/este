@@ -10,6 +10,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const TOGGLE_SEAT = 'TOGGLE_SEAT';
+export const ON_FIELD_CHANGE = 'ON_FIELD_CHANGE';
 
 export const setLocation = (location) => ({
   type: APP_SET_LOCATION,
@@ -39,6 +40,11 @@ export const decrementSeats = () => ({
 export const seatToggle = (row, seat) => ({
   type: TOGGLE_SEAT,
   payload: { row, seat }
+});
+
+export const onFieldChange = (name, value) => ({
+  type: ON_FIELD_CHANGE,
+  payload: { name, value }
 });
 
 export const start = () =>
