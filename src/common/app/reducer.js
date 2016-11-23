@@ -1,13 +1,13 @@
 import * as actions from './actions';
 import { Record } from '../transit';
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 
 const State = Record({
   error: null,
   location: null,
   menuShown: false,
   isLoggedIn: false,
-  chosenSeats: new Map(),
+  selectedSeats: fromJS({ 7: { 5: 'taken', 6: 'taken', 7: 'taken' } }),
   maxSeats: 2
 }, 'app');
 
@@ -36,6 +36,16 @@ const appReducer = (state = new State(), action) => {
 
     case actions.DECREMENT_SEATS:
       return state.set('maxSeats', state.get('maxSeats') < 2 ? 1 : state.get('maxSeats') - 1);
+
+    case actions.TOGGLE_SEAT: {
+      const { row, seat } = action.payload;
+      const exists = state.getIn(['selectedSeats', row.toString(), seat.toString()]);
+      if (exists === 'taken') return state;
+      return exists
+        ? state.deleteIn(['selectedSeats', row.toString(), seat.toString()])
+        : state.setIn(['selectedSeats', row.toString(), seat.toString()], true);
+    }
+
 
     default:
       return state;

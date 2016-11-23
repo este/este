@@ -25,6 +25,7 @@ export default class Login extends Component {
   render() {
     return (
       <div style={style}>
+        Nemáte u nás ještě účet? Nevadí! Účet Vám můžeme vytvořit během první objednávky.
         <Input label="E-mail:" />
         <Input label="Heslo:" />
         <Button onClick={() => this.login()}>Přihlásit se</Button>

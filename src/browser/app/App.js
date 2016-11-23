@@ -12,6 +12,8 @@ import Profile from '../profile/Page';
 import Program from '../program/Program';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import Reservation from '../reservation/Page';
+import ReservationConfirm from '../reservation/Confirm';
+import ReservationSuccess from '../reservation/Success';
 import Search from '../search/Page';
 import UnsupportedDevice from './UnsupportedDevice';
 import { connect } from 'react-redux';
@@ -47,7 +49,7 @@ export default class App extends Component {
     mqls.map(x => x.addListener(() => this.mediaQueryChanged()));
 
     this.setState({ mqls });
-    setTimeout(() => this.mediaQueryChanged(), 5);
+    setTimeout(() => this.mediaQueryChanged(), 3);
   }
 
   mediaQueryChanged() {
@@ -102,6 +104,8 @@ export default class App extends Component {
             <Match exactly pattern="/news" component={News} />
             <Match exactly pattern="/profile" component={Profile} />
             <Match exactly pattern="/reservation" component={Reservation} />
+            <Match exactly pattern="/reservation/confirm" component={ReservationConfirm} />
+            <Match exactly pattern="/reservation/success" component={ReservationSuccess} />
             <Match exactly pattern="/search" component={Search} />
             <Miss component={NotFound} />
           </div>

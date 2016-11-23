@@ -3,23 +3,19 @@ import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 export default class Seat extends Component {
 
   static propTypes = {
-    number: RPT.number.isRequired
-  }
-
-  state = {
-    picked: false
-  }
-
-  togglePicked() {
-    this.setState({ picked: !this.state.picked });
+    onChange: RPT.func.isRequired,
+    number: RPT.number.isRequired,
+    selected: RPT.bool,
+    taken: RPT.bool
   }
 
   render() {
-    const { number, picked } = this.state;
-    const styles = style(picked);
+    const { number, selected, onChange, taken } = this.props;
+    const styles = style(selected);
+    const seatStyle = taken ? { ...styles.seat, ...styles.taken } : styles.seat;
     return (
-      <div style={styles.seat} onClick={(e) => this.togglePicked(e)}>
-        <span style={style.number}>{number}</span>
+      <div style={seatStyle} onClick={onChange}>
+        <span style={styles.number}>{number}</span>
       </div>
     );
   }
@@ -35,9 +31,14 @@ const style = (picked) => ({
     backgroundImage: picked ? 'url(/assets/img/face.png)' : '',
     backgroundSize: 'cover',
     float: 'left',
-    zIndex: 99999999
+    zIndex: 99999999,
+    fontSize: '6px',
+    cursor: 'pointer'
   },
   number: {
-
+    cursor: 'pointer'
+  },
+  taken: {
+    backgroundColor: 'grey',
   }
 });

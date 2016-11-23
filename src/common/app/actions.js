@@ -9,6 +9,7 @@ export const INCREMENT_SEATS = 'INCREMENT_SEATS';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const TOGGLE_SEAT = 'TOGGLE_SEAT';
 
 export const setLocation = (location) => ({
   type: APP_SET_LOCATION,
@@ -33,6 +34,11 @@ export const incrementSeats = () => ({
 
 export const decrementSeats = () => ({
   type: DECREMENT_SEATS
+});
+
+export const seatToggle = (row, seat) => ({
+  type: TOGGLE_SEAT,
+  payload: { row, seat }
 });
 
 export const start = () =>
