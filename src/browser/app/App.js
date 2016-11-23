@@ -13,6 +13,7 @@ import Program from '../program/Program';
 import React, { PropTypes as RPT, PureComponent as Component } from 'react';
 import Reservation from '../reservation/Page';
 import ReservationConfirm from '../reservation/Confirm';
+import ReservationPaid from '../reservation/Paid';
 import ReservationSuccess from '../reservation/Success';
 import Search from '../search/Page';
 import UnsupportedDevice from './UnsupportedDevice';
@@ -106,6 +107,7 @@ export default class App extends Component {
             <Match exactly pattern="/reservation" component={Reservation} />
             <Match exactly pattern="/reservation/confirm" component={ReservationConfirm} />
             <Match exactly pattern="/reservation/success" component={ReservationSuccess} />
+            <Match exactly pattern="/reservation/paid" component={ReservationPaid} />
             <Match exactly pattern="/search" component={Search} />
             <Miss component={NotFound} />
           </div>

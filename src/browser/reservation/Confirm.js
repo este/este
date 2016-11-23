@@ -41,7 +41,7 @@ export default class Reservation extends Component {
             )}
         <OrderDetail />
         <Button><Link to="/reservation/success">Rezervovat</Link></Button>
-        <Button><Link to="/reservation/success">Kartou ihned</Link></Button>
+        <Button><Link to="/reservation/paid">Kartou ihned</Link></Button>
       </div>
     );
   }

@@ -50,7 +50,8 @@ const style = {
     backgroundImage: 'url(/assets/img/logo.png)',
     backgroundSize: 'cover',
     float: 'left',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontSize: '0px'
   },
   menuToggle: {
     height: '100%',

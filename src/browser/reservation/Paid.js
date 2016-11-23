@@ -20,11 +20,14 @@ export default class Reservation extends Component {
     return (
       <div style={style}>
         <PageHeader
-          heading="Rezervace vytvořena"
+          heading="Hotovo!"
         />
-        <p>Rezervace č. 234232342 byla vytvořena a čeká na zaplacení. Na Váš e-mail ({email}) Vám byly odeslány všechny informace, které uvidíte níže. V e-mailu navíc najdete odkazy pro zaplacení, úpravu či zrušení objednávky.</p>
-        <p>V případě, že chcete zaplatit hotově v kině, dostavte se prosím ke kase minimálně 30 minut před začátkem filmu.</p>
-        <OrderDetail />
+        <p>Objednávka č. 234232342 byla úspěšně zaplacena. Na Váš e-mail ({email}) Vám byly odeslány všechny informace, které uvidíte níže. V e-mailu navíc najdete odkazy pro úpravu či zrušení objednávky.</p>
+        <div>
+          <OrderDetail />
+          QR kód níže funguje jako Vaše vstupenka pro všechna zakoupená místa. Mějte jej prosím připravený při vstupu do kina.
+          <div style={style.qrcode} />
+        </div>
         {!isLoggedIn && <p>Protože u nás ještě nemáte založený účet, v zadaném e-mailu naleznete odkaz, přes který se můžete jedním kliknutím zaregistrovat. Na Vašem profilu pak uvidíte všechny své objednávky a stanete se členy bonusového klubu.</p>}
       </div>
     );
