@@ -90,7 +90,7 @@
     "react-native-uuid": "^1.4.8",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^4.0.0",
-    "react-router": "4.0.0-alpha.5",
+    "react-router": "4.0.0-alpha.6",
     "rebass": "^0.3.1",
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",
