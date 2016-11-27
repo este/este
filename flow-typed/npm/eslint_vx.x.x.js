@@ -1,4 +1,4 @@
-// flow-typed signature: e8a0af39d46de428ea6a0cb6b78879ea
+// flow-typed signature: 128beca6e1b974b35295e7e5d82663d6
 // flow-typed version: <<STUB>>/eslint_v^3.2.2/flow_v0.33.0
 
 /**
@@ -247,6 +247,10 @@ declare module 'eslint/lib/rules/callback-return' {
 }
 
 declare module 'eslint/lib/rules/camelcase' {
+  declare module.exports: any;
+}
+
+declare module 'eslint/lib/rules/capitalized-comments' {
   declare module.exports: any;
 }
 
@@ -1042,6 +1046,10 @@ declare module 'eslint/lib/rules/radix' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/rules/require-await' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/rules/require-jsdoc' {
   declare module.exports: any;
 }
@@ -1195,6 +1203,10 @@ declare module 'eslint/lib/util/npm-util' {
 }
 
 declare module 'eslint/lib/util/path-util' {
+  declare module.exports: any;
+}
+
+declare module 'eslint/lib/util/patterns/letters' {
   declare module.exports: any;
 }
 
@@ -1393,6 +1405,9 @@ declare module 'eslint/lib/rules/callback-return.js' {
 }
 declare module 'eslint/lib/rules/camelcase.js' {
   declare module.exports: $Exports<'eslint/lib/rules/camelcase'>;
+}
+declare module 'eslint/lib/rules/capitalized-comments.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/capitalized-comments'>;
 }
 declare module 'eslint/lib/rules/class-methods-use-this.js' {
   declare module.exports: $Exports<'eslint/lib/rules/class-methods-use-this'>;
@@ -1988,6 +2003,9 @@ declare module 'eslint/lib/rules/quotes.js' {
 declare module 'eslint/lib/rules/radix.js' {
   declare module.exports: $Exports<'eslint/lib/rules/radix'>;
 }
+declare module 'eslint/lib/rules/require-await.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/require-await'>;
+}
 declare module 'eslint/lib/rules/require-jsdoc.js' {
   declare module.exports: $Exports<'eslint/lib/rules/require-jsdoc'>;
 }
@@ -2104,6 +2122,9 @@ declare module 'eslint/lib/util/npm-util.js' {
 }
 declare module 'eslint/lib/util/path-util.js' {
   declare module.exports: $Exports<'eslint/lib/util/path-util'>;
+}
+declare module 'eslint/lib/util/patterns/letters.js' {
+  declare module.exports: $Exports<'eslint/lib/util/patterns/letters'>;
 }
 declare module 'eslint/lib/util/rule-fixer.js' {
   declare module.exports: $Exports<'eslint/lib/util/rule-fixer'>;
