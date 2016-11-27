@@ -23,7 +23,7 @@ const resetStateOnSignOutReducer = (reducer, initialState) => (
   if (!userWasSignedOut) {
     return reducer(state, action);
   }
-  // Reset app state to purge all sensitive data.
+  // Purge sensitive data, preserve only app and safe initial state.
   return reducer({
     app: state.app,
     config: initialState.config,
