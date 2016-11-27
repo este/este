@@ -99,7 +99,7 @@
     "redux-persist": "4.0.0-beta1",
     "reflexbox": "^2.1.0",
     "regenerator": "^0.8.42",
-    "regenerator-runtime": "^0.9.5",
+    "regenerator-runtime": "^0.10.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
     "rxjs": "5.0.0-rc.1",
