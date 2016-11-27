@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../../common/types';
 import React from 'react';
 import errorToMessage from '../../../common/app/errorToMessage';
 import theme from '../themes/initial';
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type State = {
+type LocalState = {
   alertHeight: number,
   animation: any,
 };
@@ -50,7 +51,7 @@ class Alert extends React.Component {
     hideTimeout: 4000,
   };
 
-  state: State = {
+  state: LocalState = {
     alertHeight: 0,
     animation: new Animated.Value(0),
   };
@@ -140,6 +141,8 @@ class Alert extends React.Component {
 
 }
 
-export default connect(state => ({
-  error: state.app.error,
-}))(Alert);
+export default connect(
+  (state: State) => ({
+    error: state.app.error,
+  }),
+)(Alert);

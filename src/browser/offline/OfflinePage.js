@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { PageHeader, Pre, Title, View } from '../app/components';
@@ -18,6 +19,8 @@ OfflinePage.propTypes = {
   online: React.PropTypes.bool.isRequired,
 };
 
-export default connect(state => ({
-  online: state.app.online,
-}))(OfflinePage);
+export default connect(
+  (state: State) => ({
+    online: state.app.online,
+  }),
+)(OfflinePage);

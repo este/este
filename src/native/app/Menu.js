@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import theme from './themes/initial';
@@ -41,7 +42,10 @@ MenuLink.propTypes = {
   message: React.PropTypes.object.isRequired,
 };
 
-MenuLink = connect(null, { appShowMenu })(MenuLink);
+MenuLink = connect(
+  null,
+  { appShowMenu },
+)(MenuLink);
 
 const Menu = ({ viewer }) => (
   <ScrollView
@@ -64,6 +68,8 @@ Menu.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(Menu);
+export default connect(
+  (state: State) => ({
+    viewer: state.users.viewer,
+  }),
+)(Menu);

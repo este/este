@@ -1,4 +1,5 @@
 /* @flow */
+import R from 'ramda';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/themes/initial';
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-let NewTodo = ({ addTodo, fields, intl }) => {
+const NewTodo = ({ addTodo, fields, intl }) => {
   const onSubmitEditing = () => {
     if (!fields.title.value.trim()) return;
     addTodo(fields.title.value);
@@ -52,11 +53,14 @@ NewTodo.propTypes = {
   intl: intlShape.isRequired,
 };
 
-NewTodo = injectIntl(NewTodo);
-
-NewTodo = fields(NewTodo, {
-  path: 'newTodo',
-  fields: ['title'],
-});
-
-export default connect(null, { addTodo })(NewTodo);
+export default R.compose(
+  connect(
+    null,
+    { addTodo },
+  ),
+  fields({
+    path: 'newTodo',
+    fields: ['title'],
+  }),
+  injectIntl,
+)(NewTodo);

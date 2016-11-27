@@ -23,8 +23,8 @@ const DynamicField = ({ disabled, fields, item }: Props) => (
   </View>
 );
 
-export default fields(DynamicField, {
+export default fields({
   path: props => props.path,
   fields: ['name'],
   getInitialState: props => props.item,
-});
+})(DynamicField);

@@ -2,7 +2,6 @@
 import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';
-import Promise from 'bluebird';
 import React from 'react';
 import ServerFetchProvider from './ServerFetchProvider';
 import config from '../config';
@@ -12,16 +11,17 @@ import serialize from 'serialize-javascript';
 import { Provider as Redux } from 'react-redux';
 import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import { toJSON } from '../../common/transit';
 
 const settleAllWithTimeout = promises => Promise
   .all(promises.map(p => p.reflect()))
-  .each(inspection => {
+  // $FlowFixMe
+  .each((inspection) => {
     if (inspection.isFulfilled()) return;
     console.log('Server fetch failed:', inspection.reason());
   })
   .timeout(5000) // Do not block rendering forever.
-  .catch(error => {
+  .catch((error) => {
+    // $FlowFixMe
     if (error instanceof Promise.TimeoutError) {
       console.log('Server fetch timeouted:', error);
       return;
@@ -29,6 +29,7 @@ const settleAllWithTimeout = promises => Promise
     throw error;
   });
 
+// createInitialState loads files, so it must be called once.
 const initialState = createInitialState();
 
 const getHost = req =>
@@ -38,14 +39,18 @@ const getLocale = req => process.env.IS_SERVERLESS
   ? config.defaultLocale
   : req.acceptsLanguages(config.locales) || config.defaultLocale;
 
-const createStore = (req) => configureStore({
+const createStore = req => configureStore({
   initialState: {
     ...initialState,
-    device: initialState.device
-      .set('host', getHost(req)),
-    intl: initialState.intl
-      .set('currentLocale', getLocale(req))
-      .set('initialNow', Date.now()),
+    device: {
+      ...initialState.device,
+      host: getHost(req),
+    },
+    intl: {
+      ...initialState.intl,
+      currentLocale: getLocale(req),
+      initialNow: Date.now(),
+    },
   },
 });
 
@@ -60,17 +65,17 @@ const renderBody = (store, context, location, fetchPromises) => {
           <App />
         </ServerRouter>
       </ServerFetchProvider>
-    </Redux>
+    </Redux>,
   );
   return { markup, helmet: Helmet.rewind() };
 };
 
 const renderScripts = (state, appJsFilename) =>
-  // https://github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
+  // github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
   // TODO: Switch to CSP, https://github.com/este/este/pull/731
   `
     <script>
-      window.__INITIAL_STATE__ = ${serialize(toJSON(state))};
+      window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
     <script src="${appJsFilename}"></script>
   `;
@@ -92,7 +97,7 @@ const renderHtml = (state, bodyMarkupWithHelmet) => {
       googleAnalyticsId={config.googleAnalyticsId}
       helmet={helmet}
       isProduction={config.isProduction}
-    />
+    />,
   );
   return `<!DOCTYPE html>${markup}`;
 };

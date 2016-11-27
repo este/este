@@ -6,8 +6,9 @@ import frontend from './frontend';
 
 const app = express();
 
+// $FlowFixMe
 app.use(frontend);
-app.use(errorHandler);
+app.get('*', errorHandler);
 
 app.listen(config.port, () => {
   console.log(`Server started at http://localhost:${config.port}`);

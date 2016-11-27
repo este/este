@@ -1,17 +1,18 @@
-/* @flow weak */
-import * as actions from './actions';
-import { Record } from '../transit';
+/* @flow */
+import type { Action, ThemeState } from '../types';
 
-const State = Record({
+const initialState = {
   currentTheme: null,
-}, 'themes');
+};
 
-const themesReducer = (state = new State(), action) => {
+const reducer = (
+  state: ThemeState = initialState,
+  action: Action,
+): ThemeState => {
   switch (action.type) {
 
-    case actions.SET_THEME: {
-      const { theme } = action.payload;
-      return state.set('currentTheme', theme);
+    case 'SET_THEME': {
+      return { ...state, currentTheme: action.payload.theme };
     }
 
     default:
@@ -20,4 +21,4 @@ const themesReducer = (state = new State(), action) => {
   }
 };
 
-export default themesReducer;
+export default reducer;

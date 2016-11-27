@@ -1,8 +1,8 @@
 /* @flow weak */
+import type { Action } from './types';
 import Raven from 'raven-js';
-import { REHYDRATE } from 'redux-persist/constants';
 
-const captureException = error => {
+const captureException = (error) => {
   if (process.env.NODE_ENV === 'production') {
     Raven.captureException(error);
     // We can use also Raven.lastEventId() and Raven.showReportDialog().
@@ -16,7 +16,7 @@ const captureException = error => {
   }
 };
 
-const setRavenUserContext = user => {
+const setRavenUserContext = (user) => {
   if (!user) {
     Raven.setUserContext();
     return;
@@ -27,25 +27,22 @@ const setRavenUserContext = user => {
   });
 };
 
+// TODO: Add www.youtube.com/watch?v=5yHFTN-_mOo for total imperative reporting.
+const contextWithoutPrivateData = (state, actions) => ({
+  actions: actions.map(action => action.type),
+  device: state.device,
+});
+
 const createReportingMiddleware = () => {
-  let lastTenActions = [];
+  let actions = [];
 
   const setExtraContext = (state, action) => {
-    const { app, auth, device, fields } = state;
-    const limitedState = { app, auth, device, fields };
-    // Because payload is huge (whole app state).
-    if (action.type === REHYDRATE) {
-      action = {
-        ...action,
-        payload: {},
-      };
-    }
-    lastTenActions = [action, ...lastTenActions].slice(0, 10);
-    Raven.setExtraContext({ limitedState, lastTenActions });
+    actions = [action, ...actions].slice(0, 100); // last 100 actions
+    const context = contextWithoutPrivateData(state, actions);
+    Raven.setExtraContext(context);
   };
 
-  return store => next => action => {
-    // strings, because hot reloading (ok, because circular references)
+  return store => next => (action: Action) => {
     if (action.type === 'APP_ERROR') {
       captureException(action.payload.error);
     } else if (action.type === 'ON_AUTH') {
@@ -57,7 +54,7 @@ const createReportingMiddleware = () => {
 };
 
 // bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
-const register = unhandledRejection => unhandledRejection(event => {
+const register = unhandledRejection => unhandledRejection((event) => {
   event.preventDefault();
   // http://bluebirdjs.com/docs/api/error-management-configuration.html
   captureException(event.detail.reason);

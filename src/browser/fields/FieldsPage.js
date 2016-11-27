@@ -1,5 +1,7 @@
 /* @flow */
+import type { State } from '../../common/types';
 import DynamicField from './DynamicField';
+import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
@@ -43,7 +45,7 @@ const keyConceptsOfLibertarianism = [
   name: concept,
 }));
 
-type State = {
+type LocalState = {
   disabled: boolean,
   error: ?Object,
   submittedValues: ?Object,
@@ -56,7 +58,7 @@ class FieldsPage extends React.Component {
     dynamicFields: React.PropTypes.object,
   };
 
-  state: State = {
+  state: LocalState = {
     disabled: false,
     error: null,
     submittedValues: null,
@@ -68,7 +70,7 @@ class FieldsPage extends React.Component {
     const values = {
       ...fields.$values(),
       concepts: {
-        ...(dynamicFields && dynamicFields.toJS()),
+        ...dynamicFields,
       },
     };
 
@@ -123,7 +125,7 @@ class FieldsPage extends React.Component {
                     item={item}
                     path={['fieldsPage', 'dynamic', item.id]}
                   />
-                </Box>
+                </Box>,
               )}
             </Flex>
           </Block>
@@ -202,7 +204,7 @@ class FieldsPage extends React.Component {
 
 }
 
-FieldsPage = fields(FieldsPage, {
+FieldsPage = fields({
   path: 'fieldsPage',
   fields: [
     'donation',
@@ -217,8 +219,10 @@ FieldsPage = fields(FieldsPage, {
     isAnarchist: false,
     isLibertarian: false,
   }),
-});
+})(FieldsPage);
 
-export default connect(state => ({
-  dynamicFields: state.fields.getIn(['fieldsPage', 'dynamic']),
-}))(FieldsPage);
+export default connect(
+  (state: State) => ({
+    dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
+  }),
+)(FieldsPage);

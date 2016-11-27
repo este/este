@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Gravatar from 'react-gravatar';
 import React from 'react';
 import SignOut from '../auth/SignOut';
@@ -71,6 +72,8 @@ MePage.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(MePage);
+export default connect(
+  (state: State) => ({
+    viewer: state.users.viewer,
+  }),
+)(MePage);

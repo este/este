@@ -1,38 +1,38 @@
-/* @flow weak */
-import * as actions from './actions';
-import * as authActions from '../auth/actions';
-import User from './user';
-import { Record } from '../transit';
-import { Seq } from 'immutable';
+/* @flow */
+import type { Action, UsersState } from '../types';
+import R from 'ramda';
+import createUserFirebase from './createUserFirebase';
 
-const State = Record({
-  online: null,
-  onlineLoaded: false,
-  viewer: null,
-}, 'users');
+const initialState = {
+  // Undefined is absence of evidence, null is evidence of absence.
+  online: undefined,
+  viewer: undefined,
+};
 
-const usersReducer = (state = new State(), action) => {
+const reducer = (
+  state: UsersState = initialState,
+  action: Action,
+): UsersState => {
   switch (action.type) {
 
-    case authActions.ON_AUTH: {
-      const user = User.fromFirebaseUser(action.payload.firebaseUser);
-      return state.set('viewer', user);
+    case 'ON_AUTH': {
+      const user = createUserFirebase(action.payload.firebaseUser);
+      return { ...state, viewer: user };
     }
 
-    case actions.ON_USERS_PRESENCE: {
+    case 'ON_USERS_PRESENCE': {
       const { presence } = action.payload;
-      const online = presence &&
-        Seq(presence)
-          .map(userPresences => Seq(userPresences)
-            .sortBy(userPresence => userPresence.authenticatedAt)
-            .last()
-          )
-          .sortBy(userPresence => userPresence.authenticatedAt)
-          .map(userPresence => new User(userPresence.user))
-          .toList();
-      return state
-        .set('online', online)
-        .set('onlineLoaded', true);
+      if (!presence) {
+        return { ...state, online: null };
+      }
+      const sortBylastSeenAt = R.sortBy(R.prop('lastSeenAt'));
+      const online = R.compose(
+        R.map(item => item.user),
+        R.sortBy(sortBylastSeenAt),
+        R.values,
+        R.map(R.compose(R.last, sortBylastSeenAt, R.values)),
+      )(presence);
+      return { ...state, online };
     }
 
     default:
@@ -41,4 +41,4 @@ const usersReducer = (state = new State(), action) => {
   }
 };
 
-export default usersReducer;
+export default reducer;

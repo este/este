@@ -1,5 +1,7 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Gravatar from 'react-gravatar';
+import R from 'ramda';
 import React from 'react';
 import { Image, Loading, Text, View } from '../app/components';
 import { connect } from 'react-redux';
@@ -42,33 +44,35 @@ User.propTypes = {
   user: React.PropTypes.object.isRequired,
 };
 
-let OnlineUsers = ({ loaded, users }) => (
+const OnlineUsers = ({ users }) => (
   <View>
-    {!loaded ?
+    { users === undefined ?
       <Loading />
-    : !users ?
+    : users === null ?
       <Text>No one is online.</Text>
     :
       users.map(user =>
-        <User key={user.id} user={user} />
+        <User key={user.id} user={user} />,
       )
     }
   </View>
 );
 
 OnlineUsers.propTypes = {
-  users: React.PropTypes.object,
-  loaded: React.PropTypes.bool.isRequired,
+  users: React.PropTypes.array,
 };
 
-OnlineUsers = firebase((database, props) => {
-  const usersPresenceRef = database.child('users-presence');
-  return [
-    [usersPresenceRef, 'on', 'value', props.onUsersPresence],
-  ];
-})(OnlineUsers);
-
-export default connect(state => ({
-  users: state.users.online,
-  loaded: state.users.onlineLoaded,
-}), { onUsersPresence })(OnlineUsers);
+export default R.compose(
+  connect(
+    (state: State) => ({
+      users: state.users.online,
+    }),
+    { onUsersPresence },
+  ),
+  firebase((database, props) => {
+    const usersPresenceRef = database.child('users-presence');
+    return [
+      [usersPresenceRef, 'on', 'value', props.onUsersPresence],
+    ];
+  }),
+)(OnlineUsers);

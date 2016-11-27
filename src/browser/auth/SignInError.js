@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import errorMessages from '../../common/auth/errorMessages';
 import { FormattedMessage } from 'react-intl';
@@ -34,6 +35,8 @@ SignInError.propTypes = {
   error: React.PropTypes.instanceOf(Error),
 };
 
-export default connect(state => ({
-  error: state.auth.error,
-}))(SignInError);
+export default connect(
+  (state: State) => ({
+    error: state.auth.error,
+  }),
+)(SignInError);

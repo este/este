@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import Email from './Email';
 import React from 'react';
 import Social from './Social';
@@ -44,6 +45,8 @@ SignInPage.propTypes = {
   viewer: React.PropTypes.object,
 };
 
-export default connect(state => ({
-  viewer: state.users.viewer,
-}))(SignInPage);
+export default connect(
+  (state: State) => ({
+    viewer: state.users.viewer,
+  }),
+)(SignInPage);

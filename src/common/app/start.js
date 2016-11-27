@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
@@ -44,9 +45,12 @@ const start = (WrappedComponent: Function) => {
 
   }
 
-  Start = connect(state => ({
-    intl: state.intl,
-  }), { appStart, appStop })(Start);
+  Start = connect(
+    (state: State) => ({
+      intl: state.intl,
+    }),
+    { appStart, appStop },
+  )(Start);
 
   return Start;
 };

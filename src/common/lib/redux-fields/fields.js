@@ -1,13 +1,23 @@
+/* @flow weak */
+import R from 'ramda';
 import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
+
+type Path = string | Array<string> | (props: Object) => Array<string>;
+
+type Options = {
+  path: Path,
+  fields: Array<string>,
+  getInitialState?: (props: Object) => Object,
+};
 
 const isReactNative =
   typeof navigator === 'object' &&
   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-const fields = (WrappedComponent, options) => {
+const fields = (options: Options) => (WrappedComponent) => {
   const {
     path = '',
     fields = [],
@@ -36,8 +46,8 @@ const fields = (WrappedComponent, options) => {
     }
 
     static getFieldValue(field, model, initialState) {
-      if (model && model.has(field)) {
-        return model.get(field);
+      if (model && {}.hasOwnProperty.call(model, field)) {
+        return model[field];
       }
       if (initialState && {}.hasOwnProperty.call(initialState, field)) {
         return initialState[field];
@@ -56,7 +66,7 @@ const fields = (WrappedComponent, options) => {
 
     static createFieldObject(field, onChange) {
       return isReactNative ? {
-        onChangeText: text => {
+        onChangeText: (text) => {
           onChange(field, text);
         },
       } : {
@@ -74,6 +84,10 @@ const fields = (WrappedComponent, options) => {
     state = {
       model: null,
     };
+
+    fields: Object;
+    values: any;
+    unsubscribe: () => void;
 
     onFieldChange = (field, value) => {
       const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
@@ -99,12 +113,12 @@ const fields = (WrappedComponent, options) => {
 
     getModelFromState() {
       const normalizedPath = Fields.getNormalizePath(this.props);
-      return this.context.store.getState().fields.getIn(normalizedPath);
+      return R.path(normalizedPath, this.context.store.getState().fields);
     }
 
     setModel(model) {
       this.values = Fields.lazyJsonValuesOf(model, this.props);
-      options.fields.forEach(field => {
+      options.fields.forEach((field) => {
         this.fields[field].value = this.values[field];
       });
       this.fields = { ...this.fields }; // Ensure rerender for pure components.
@@ -127,7 +141,6 @@ const fields = (WrappedComponent, options) => {
 
     componentWillUnmount() {
       this.unsubscribe();
-      this.fields = null;
     }
 
     render() {

@@ -1,30 +1,31 @@
-/* @flow weak */
-import User from './user';
-import { ON_AUTH, SIGN_IN_DONE, SIGN_UP_DONE } from '../auth/actions';
+/* @flow */
+import type { Action, Deps } from '../types';
+import R from 'ramda';
+import createUserFirebase from './createUserFirebase';
+import { appError } from '../app/actions';
 import { Observable } from 'rxjs/Observable';
-import { APP_STOP, appError } from '../app/actions';
 
-export const ON_USERS_PRESENCE = 'ON_USERS_PRESENCE';
-export const SAVE_USER_DONE = 'SAVE_USER_DONE';
-
-export const onUsersPresence = (snap: Object) => {
+export const onUsersPresence = (snap: Object): Action => {
   const presence = snap.val();
   return {
-    type: ON_USERS_PRESENCE,
+    type: 'ON_USERS_PRESENCE',
     payload: { presence },
   };
 };
 
-export const saveUserDone = () => ({
-  type: SAVE_USER_DONE,
+export const saveUserDone = (): Action => ({
+  type: 'SAVE_USER_DONE',
 });
 
-const saveUserEpic = (action$, { firebase }) =>
+const saveUserEpic = (
+  action$: any,
+  { firebase }: Deps,
+) =>
   Observable.merge(
-    action$.ofType(SIGN_IN_DONE),
-    action$.ofType(SIGN_UP_DONE)
+    action$.filter((action: Action) => action.type === 'SIGN_IN_DONE'),
+    action$.filter((action: Action) => action.type === 'SIGN_UP_DONE'),
   )
-    .mergeMap(action => {
+    .mergeMap((action) => {
       const { email, ...user } = action.payload.user;
       const promise = firebase.update({
         [`users/${user.id}`]: user,
@@ -35,19 +36,20 @@ const saveUserEpic = (action$, { firebase }) =>
         .catch(error => Observable.of(appError(error)));
     });
 
-const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
+const usersPresenceEpic = (
+  action$: any,
+  { firebase, firebaseDatabase }: Deps,
+) => {
   const createInfoConnected$ = user => Observable.create(() => {
     let connectionRef;
-    const onConnectedValue = snap => {
+    const onConnectedValue = (snap) => {
       const online = snap.val();
       if (!online) return;
-      const json = user.toJS();
-      delete json.email;
       if (connectionRef) connectionRef.remove();
       connectionRef = firebase.child(`users-presence/${user.id}`)
         .push({
           lastSeenAt: firebaseDatabase.ServerValue.TIMESTAMP,
-          user: json,
+          user: R.dissoc('email', user),
         });
       connectionRef.onDisconnect().remove();
     };
@@ -58,13 +60,15 @@ const usersPresenceEpic = (action$, { firebase, firebaseDatabase }) => {
     };
   });
 
-  return action$.ofType(ON_AUTH)
+  return action$
+    .filter((action: Action) => action.type === 'ON_AUTH')
     // switchMap unsubscribes previous stream, which is exactly what we want.
-    .switchMap(action => {
-      const user = User.fromFirebaseUser(action.payload.firebaseUser);
+    .switchMap((action) => {
+      const user = createUserFirebase(action.payload.firebaseUser);
       if (user) {
-        return createInfoConnected$(user)
-          .takeUntil(action$.ofType(APP_STOP));
+        return createInfoConnected$(user).takeUntil(
+          action$.filter((action: Action) => action.type === 'APP_STOP'),
+        );
       }
       return Observable.of();
     });

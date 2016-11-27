@@ -1,17 +1,15 @@
 import fs from 'fs';
 import gulp from 'gulp';
-import { toJSON } from '../src/common/transit';
 
 // Native can't run Node code, so we need gulp task to pre-write initialState.
-gulp.task('native', ['env'], done => {
+gulp.task('native', ['env'], (done) => {
   const createInitialState = require('../src/server/frontend/createInitialState').default;
 
-  const state = createInitialState();
+  const initialState = createInitialState();
+  const string = JSON.stringify(initialState, null, 2);
 
-  const file = `/* eslint-disable quotes, comma-spacing, max-len */
-// Export locales because native/index polyfill runs before transit.
-export const locales = ${JSON.stringify(state.intl.locales)};
-export const initialTransitState = ${JSON.stringify(toJSON(state))};
+  const file = `/* eslint-disable quotes, quote-props, comma-dangle, max-len */
+export default ${string};
 `;
   fs.writeFileSync('src/native/initialState.js', file);
   done();

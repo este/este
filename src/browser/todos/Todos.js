@@ -1,4 +1,6 @@
 /* @flow */
+import type { State } from '../../common/types';
+import R from 'ramda';
 import React from 'react';
 import Todo from './Todo';
 import todosMessages from '../../common/todos/todosMessages';
@@ -8,7 +10,7 @@ import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 
 const Todos = ({ deleteTodo, todos, toggleTodoCompleted }) => {
-  if (!todos.size) {
+  if (R.isEmpty(todos)) {
     return (
       <Block>
         <FormattedMessage {...todosMessages.empty} />
@@ -16,21 +18,22 @@ const Todos = ({ deleteTodo, todos, toggleTodoCompleted }) => {
     );
   }
 
-  const list = todos
-    .toList()
-    .sortBy(item => item.createdAt)
-    .reverse();
+  const sortedTodos = R.compose(
+    R.reverse,
+    R.sortBy(R.prop('createdAt')),
+    R.values, // object values to array
+  )(todos);
 
   return (
     <View>
-      {list.map(todo =>
+      {sortedTodos.map(todo =>
         <Block key={todo.id}>
           <Todo
             deleteTodo={deleteTodo}
             todo={todo}
             toggleTodoCompleted={toggleTodoCompleted}
           />
-        </Block>
+        </Block>,
       )}
     </View>
   );
@@ -42,6 +45,9 @@ Todos.propTypes = {
   toggleTodoCompleted: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  todos: state.todos.map,
-}), { deleteTodo, toggleTodoCompleted })(Todos);
+export default connect(
+  (state: State) => ({
+    todos: state.todos.all,
+  }),
+  { deleteTodo, toggleTodoCompleted },
+)(Todos);

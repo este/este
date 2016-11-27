@@ -16,7 +16,7 @@ const Form = ({ small, ...props }: Props) => {
     maxWidth: `${small ? maxWidthSmall : maxWidth}em`,
     ...props.style,
   };
-  const onBaseSubmit = e => {
+  const onBaseSubmit = (e) => {
     e.preventDefault();
     if (!props.onSubmit) return;
     props.onSubmit(e);

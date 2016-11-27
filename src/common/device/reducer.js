@@ -1,12 +1,14 @@
-/* @flow weak */
-import { Record } from '../transit';
+/* @flow */
+import type { DeviceState } from '../types';
 
-const State = Record({
+const initialState = {
   host: '',
   isReactNative: false,
   platform: '', // iOS or Android in React Native.
-}, 'device');
+};
 
-const deviceReducer = (state = new State()) => state;
+const reducer = (
+  state: DeviceState = initialState,
+): DeviceState => state;
 
-export default deviceReducer;
+export default reducer;

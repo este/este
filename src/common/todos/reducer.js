@@ -1,44 +1,44 @@
-/* @flow weak */
-import * as actions from './actions';
-import Todo from './todo';
-import { Map } from 'immutable';
-import { Record } from '../transit';
+/* @flow */
+import type { Action, TodosState } from '../types';
+import R from 'ramda';
 
-const State = Record({
-  map: Map(),
-}, 'todos');
+const initialState = {
+  all: {},
+};
 
-const todosReducer = (state = new State(), action) => {
+const reducer = (
+  state: TodosState = initialState,
+  action: Action,
+): TodosState => {
   switch (action.type) {
 
-    case actions.ADD_HUNDRED_TODOS: {
-      const todos = action.payload.reduce((todos, json) =>
-        todos.set(json.id, new Todo(json))
-      , Map());
-      return state.update('map', map => map.merge(todos));
+    case 'ADD_HUNDRED_TODOS': {
+      return action.payload.todos
+        .reduce((state, todo) =>
+          R.assocPath(['all', todo.id], todo, state)
+        , state);
     }
 
-    case actions.ADD_TODO: {
-      const todo = new Todo(action.payload);
-      return state.update('map', map => map.set(todo.id, todo));
-    }
-
-    case actions.CLEAR_ALL_COMPLETED_TODOS: {
-      return state.update('map', map => map.filterNot(todo => todo.completed));
-    }
-
-    case actions.CLEAR_ALL_TODOS: {
-      return state.update('map', map => map.clear());
-    }
-
-    case actions.DELETE_TODO: {
-      const { id } = action.payload;
-      return state.update('map', map => map.delete(id));
-    }
-
-    case actions.TOGGLE_TODO_COMPLETED: {
+    case 'ADD_TODO': {
       const { todo } = action.payload;
-      return state.updateIn(['map', todo.id, 'completed'], value => !value);
+      return R.assocPath(['all', todo.id], todo, state);
+    }
+
+    case 'CLEAR_ALL_COMPLETED_TODOS': {
+      return { ...state, all: R.filter(todo => !todo.completed, state.all) };
+    }
+
+    case 'CLEAR_ALL_TODOS': {
+      return { ...state, all: {} };
+    }
+
+    case 'DELETE_TODO': {
+      return R.dissocPath(['all', action.payload.id], state);
+    }
+
+    case 'TOGGLE_TODO_COMPLETED': {
+      const { id, completed } = action.payload.todo;
+      return R.assocPath(['all', id, 'completed'], !completed, state);
     }
 
     default:
@@ -47,4 +47,4 @@ const todosReducer = (state = new State(), action) => {
   }
 };
 
-export default todosReducer;
+export default reducer;

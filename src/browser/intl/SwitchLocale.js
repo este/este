@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import { Button, View } from '../app/components';
 import { connect } from 'react-redux';
@@ -15,7 +16,7 @@ const SwitchLocale = ({ currentLocale, locales, setCurrentLocale }) => (
         theme={locale === currentLocale ? 'primary' : 'secondary'}
       >
         {locale}
-      </Button>
+      </Button>,
     )}
   </View>
 );
@@ -26,7 +27,10 @@ SwitchLocale.propTypes = {
   setCurrentLocale: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  currentLocale: state.intl.currentLocale,
-  locales: state.intl.locales,
-}), { setCurrentLocale })(SwitchLocale);
+export default connect(
+  (state: State) => ({
+    currentLocale: state.intl.currentLocale,
+    locales: state.intl.locales,
+  }),
+  { setCurrentLocale },
+)(SwitchLocale);

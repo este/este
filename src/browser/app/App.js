@@ -1,13 +1,15 @@
 /* @flow */
-import './App.scss';
+import type { State } from '../../common/types';
+import './App.css';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
+import R from 'ramda';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Container } from '../app/components';
+import { Box, Container, Flex } from '../app/components';
 import { Match, ThemeProvider } from '../../common/app/components';
 import { Miss } from 'react-router';
 import { connect } from 'react-redux';
@@ -23,6 +25,15 @@ import OfflinePage from '../offline/OfflinePage';
 import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 
+const styles = {
+  container: {
+    minHeight: '100vh',
+  },
+  page: {
+    flex: 1,
+  },
+};
+
 // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
 const bootstrap4Metas: any = [
   { charset: 'utf-8' },
@@ -36,7 +47,7 @@ const bootstrap4Metas: any = [
   },
 ];
 
-let App = ({ currentLocale, currentTheme }) => (
+const App = ({ currentLocale, currentTheme }) => (
   <ThemeProvider
     key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
     theme={themes[currentTheme] || themes.initial}
@@ -57,17 +68,21 @@ let App = ({ currentLocale, currentTheme }) => (
           ...favicon.link,
         ]}
       />
-      <Header />
-      <Match exactly pattern="/" component={HomePage} />
-      <Match pattern="/fields" component={FieldsPage} />
-      <Match pattern="/users" component={UsersPage} />
-      <Match pattern="/intl" component={IntlPage} />
-      <Match pattern="/offline" component={OfflinePage} />
-      <Match pattern="/signin" component={SignInPage} />
-      <Match pattern="/todos" component={TodosPage} />
-      <Match authorized pattern="/me" component={MePage} />
-      <Miss component={NotFoundPage} />
-      <Footer />
+      <Flex flexColumn style={styles.container}>
+        <Header />
+        <Box style={styles.page}>
+          <Match exactly pattern="/" component={HomePage} />
+          <Match pattern="/fields" component={FieldsPage} />
+          <Match pattern="/users" component={UsersPage} />
+          <Match pattern="/intl" component={IntlPage} />
+          <Match pattern="/offline" component={OfflinePage} />
+          <Match pattern="/signin" component={SignInPage} />
+          <Match pattern="/todos" component={TodosPage} />
+          <Match authorized pattern="/me" component={MePage} />
+          <Miss component={NotFoundPage} />
+        </Box>
+        <Footer />
+      </Flex>
     </Container>
   </ThemeProvider>
 );
@@ -77,9 +92,12 @@ App.propTypes = {
   currentTheme: React.PropTypes.string,
 };
 
-App = connect(state => ({
-  currentLocale: state.intl.currentLocale,
-  currentTheme: state.themes.currentTheme,
-}))(App);
-
-export default start(App);
+export default R.compose(
+  connect(
+    (state: State) => ({
+      currentLocale: state.intl.currentLocale,
+      currentTheme: state.themes.currentTheme,
+    }),
+  ),
+  start,
+)(App);

@@ -18,21 +18,18 @@ const devtools = 'eval';
 
 const loaders = {
   css: '',
-  // Why not LESS or Stylus? The battle is over, let's focus on inline styles.
-  scss: '!sass-loader',
-  sass: '!sass-loader?indentedSyntax',
 };
 
 const serverIp = config.remoteHotReload
   ? ip.address() // Dynamic IP address enables hot reload on remote devices.
   : 'localhost';
 
-const makeConfig = options => {
+const makeConfig = (options) => {
   const {
     isDevelopment,
   } = options;
 
-  const stylesLoaders = Object.keys(loaders).map(ext => {
+  const stylesLoaders = Object.keys(loaders).map((ext) => {
     const prefix = 'css-loader!postcss-loader';
     const extLoaders = prefix + loaders[ext];
     const loader = isDevelopment
@@ -124,7 +121,7 @@ const makeConfig = options => {
           new webpack.optimize.OccurrenceOrderPlugin(),
           new webpack.HotModuleReplacementPlugin(),
           new webpack.NoErrorsPlugin(),
-          webpackIsomorphicToolsPlugin.development()
+          webpackIsomorphicToolsPlugin.development(),
         );
       } else {
         plugins.push(
@@ -150,7 +147,7 @@ const makeConfig = options => {
             to: 'favicons',
           }], {
             ignore: ['original/**'],
-          })
+          }),
         );
       }
       return plugins;

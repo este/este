@@ -1,35 +1,39 @@
-/* @flow weak */
-import * as actions from './actions';
-import { Record } from '../transit';
+/* @flow */
+import type { Action, AppState } from '../types';
 
-const State = Record({
+const initialState = {
   error: null,
   menuShown: false,
   online: false,
   started: false,
-}, 'app');
+};
 
-const appReducer = (state = new State(), action) => {
+const reducer = (
+  state: AppState = initialState,
+  action: Action,
+): AppState => {
   // Map all app errors into state.app.error.
   // In React Native, we show errors in one nicely animated unobtrusive alert.
   // In the browser, we prefer local error messages rendering.
+  // TODO: Refactor it. We don't want sticky strings.
   if (action.type.endsWith('_FAIL')) {
-    state = state.set('error', action.payload.error);
+    // $FlowFixMe
+    state = { ...state, error: action.payload.error };
   }
 
   switch (action.type) {
 
-    case actions.APP_ERROR:
-      return state.set('error', action.payload.error);
+    case 'APP_ERROR':
+      return { ...state, error: action.payload.error };
 
-    case actions.APP_SHOW_MENU:
-      return state.set('menuShown', action.payload.show);
+    case 'APP_SHOW_MENU':
+      return { ...state, menuShown: action.payload.menuShown };
 
-    case actions.APP_ONLINE:
-      return state.set('online', action.payload.online);
+    case 'APP_ONLINE':
+      return { ...state, online: action.payload.online };
 
-    case actions.APP_STARTED:
-      return state.set('started', true);
+    case 'APP_STARTED':
+      return { ...state, started: true };
 
     default:
       return state;
@@ -37,4 +41,4 @@ const appReducer = (state = new State(), action) => {
   }
 };
 
-export default appReducer;
+export default reducer;

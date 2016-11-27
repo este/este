@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { connect } from 'react-redux';
@@ -13,6 +14,8 @@ OfflinePage.propTypes = {
   online: React.PropTypes.bool.isRequired,
 };
 
-export default connect(state => ({
-  online: state.app.online,
-}))(OfflinePage);
+export default connect(
+  (state: State) => ({
+    online: state.app.online,
+  }),
+)(OfflinePage);

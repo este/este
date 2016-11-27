@@ -1,4 +1,5 @@
 /* @flow */
+import type { State } from '../../common/types';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { FormattedMessage } from 'react-intl';
@@ -17,6 +18,9 @@ Social.propTypes = {
   signIn: React.PropTypes.func.isRequired,
 };
 
-export default connect(state => ({
-  disabled: state.auth.formDisabled,
-}), { signIn })(Social);
+export default connect(
+  (state: State) => ({
+    disabled: state.auth.formDisabled,
+  }),
+  { signIn },
+)(Social);

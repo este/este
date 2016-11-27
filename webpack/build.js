@@ -3,7 +3,7 @@ import gutil from 'gulp-util';
 import makeWebpackConfig from './makeConfig';
 import webpack from 'webpack';
 
-const build = done => {
+const build = (done) => {
   const config = makeWebpackConfig({ isDevelopment: false });
   webpack(config, (fatalError, stats) => {
     const jsonStats = stats.toJson();

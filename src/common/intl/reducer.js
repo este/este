@@ -1,21 +1,25 @@
-/* @flow weak */
-import * as actions from './actions';
-import { Record } from '../transit';
+/* @flow */
+import type { Action, IntlState } from '../types';
 
-const State = Record({
+const initialState = {
   currentLocale: null,
   defaultLocale: null,
   initialNow: null,
   locales: null,
   messages: null,
-}, 'intl');
+};
 
-const intlReducer = (state = new State(), action) => {
+const reducer = (
+  state: IntlState = initialState,
+  action?: Action,
+): IntlState => {
+  // Because it's called from the createInitialState.
+  if (!action) return state;
+
   switch (action.type) {
 
-    case actions.SET_CURRENT_LOCALE: {
-      const { locale } = action.payload;
-      return state.set('currentLocale', locale);
+    case 'SET_CURRENT_LOCALE': {
+      return { ...state, currentLocale: action.payload.locale };
     }
 
     default:
@@ -24,4 +28,4 @@ const intlReducer = (state = new State(), action) => {
   }
 };
 
-export default intlReducer;
+export default reducer;

@@ -8,17 +8,21 @@ import loadMessages from '../intl/loadMessages';
 const messages = loadMessages();
 
 const createInitialState = () => ({
-  config: configReducer(undefined, {})
-    .set('appName', config.appName)
-    .set('appVersion', config.appVersion)
-    .set('firebase', config.firebase)
-    .set('sentryUrl', config.sentryUrl),
-  device: deviceReducer(undefined, {}),
-  intl: intlReducer(undefined, {})
-    .set('currentLocale', config.defaultLocale)
-    .set('defaultLocale', config.defaultLocale)
-    .set('locales', config.locales)
-    .set('messages', messages),
+  config: {
+    ...configReducer(),
+    appName: config.appName,
+    appVersion: config.appVersion,
+    firebase: config.firebase,
+    sentryUrl: config.sentryUrl,
+  },
+  device: deviceReducer(),
+  intl: {
+    ...intlReducer(),
+    currentLocale: config.defaultLocale,
+    defaultLocale: config.defaultLocale,
+    locales: config.locales,
+    messages,
+  },
 });
 
 export default createInitialState;
