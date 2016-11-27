@@ -55,7 +55,7 @@ const createStore = req => configureStore({
 });
 
 const renderBody = (store, context, location, fetchPromises) => {
-  const markup = renderToString(
+  const html = renderToString(
     <Redux store={store}>
       <ServerFetchProvider promises={fetchPromises}>
         <ServerRouter
@@ -67,7 +67,8 @@ const renderBody = (store, context, location, fetchPromises) => {
       </ServerFetchProvider>
     </Redux>,
   );
-  return { markup, helmet: Helmet.rewind() };
+  const helmet = Helmet.rewind();
+  return { html, helmet };
 };
 
 const renderScripts = (state, appJsFilename) =>
@@ -80,7 +81,7 @@ const renderScripts = (state, appJsFilename) =>
     <script src="${appJsFilename}"></script>
   `;
 
-const renderHtml = (state, bodyMarkupWithHelmet) => {
+const renderHtml = (state, body) => {
   const {
     styles: { app: appCssFilename },
     javascript: { app: appJsFilename },
@@ -88,18 +89,17 @@ const renderHtml = (state, bodyMarkupWithHelmet) => {
   if (!config.isProduction) {
     global.webpackIsomorphicTools.refresh();
   }
-  const { markup: bodyMarkup, helmet } = bodyMarkupWithHelmet;
-  const scriptsMarkup = renderScripts(state, appJsFilename);
-  const markup = renderToStaticMarkup(
+  const scripts = renderScripts(state, appJsFilename);
+  const html = renderToStaticMarkup(
     <Html
       appCssFilename={appCssFilename}
-      bodyHtml={`<div id="app">${bodyMarkup}</div>${scriptsMarkup}`}
+      bodyHtml={`<div id="app">${body.html}</div>${scripts}`}
       googleAnalyticsId={config.googleAnalyticsId}
-      helmet={helmet}
+      helmet={body.helmet}
       isProduction={config.isProduction}
     />,
   );
-  return `<!DOCTYPE html>${markup}`;
+  return `<!DOCTYPE html>${html}`;
 };
 
 // react-router.now.sh/ServerRouter
@@ -109,7 +109,7 @@ const render = async (req: Object, res: Object, next: Function) => {
     const store = createStore(req);
     const fetchPromises = [];
 
-    let bodyMarkupWithHelmet = renderBody(store, context, req.url, fetchPromises);
+    let body = renderBody(store, context, req.url, fetchPromises);
     const result = context.getResult();
 
     if (result.redirect) {
@@ -118,19 +118,19 @@ const render = async (req: Object, res: Object, next: Function) => {
     }
 
     if (result.missed) {
-      bodyMarkupWithHelmet = renderBody(store, context, req.url);
-      const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
-      res.status(404).send(htmlMarkup);
+      body = renderBody(store, context, req.url);
+      const html = renderHtml(store.getState(), body);
+      res.status(404).send(html);
       return;
     }
 
     if (!process.env.IS_SERVERLESS && fetchPromises.length > 0) {
       await settleAllWithTimeout(fetchPromises);
-      bodyMarkupWithHelmet = renderBody(store, context, req.url);
+      body = renderBody(store, context, req.url);
     }
 
-    const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet);
-    res.status(200).send(htmlMarkup);
+    const html = renderHtml(store.getState(), body);
+    res.status(200).send(html);
   } catch (error) {
     console.log(error);
     next(error);
