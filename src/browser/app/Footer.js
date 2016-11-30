@@ -1,7 +1,9 @@
 /* @flow */
+import type { Theme } from './themes';
 import React from 'react';
-import { Footer, Link } from '../app/components';
 import { FormattedMessage, defineMessages } from 'react-intl';
+import { Text, Link } from './components';
+import { createComponent } from 'react-fela';
 
 const messages = defineMessages({
   madeByHtml: {
@@ -10,14 +12,26 @@ const messages = defineMessages({
   },
 });
 
-const AppFooter = () => (
+export const footerStyles = (props: { theme: Theme }) => ({
+  alignItems: 'center',
+  borderTop: `solid 1px ${props.theme.border.color}`,
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: `${props.theme.scales.big}px`,
+  paddingBottom: `${props.theme.scales.big}px`,
+  paddingTop: `${props.theme.scales.big}px`,
+});
+
+const Footer = createComponent(footerStyles, 'footer');
+
+export default () => (
   <Footer>
-    <FormattedMessage {...messages.madeByHtml} />
+    <Text small>
+      <FormattedMessage {...messages.madeByHtml} />
+    </Text>
     {'\u00a0'}
-    <Link to="https://twitter.com/steida">
+    <Link small to="https://twitter.com/steida">
       steida
     </Link>
   </Footer>
 );
-
-export default AppFooter;

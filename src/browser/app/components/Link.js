@@ -1,49 +1,67 @@
 /* @flow */
+/* aeslint-disable no-unused-vars, ajsx-a11y/anchor-has-content */
+import type { TextProps } from './Text';
+import type { Theme } from '../themes';
 import React from 'react';
-import pseudo from './pseudo';
-import { Base } from 'rebass';
-import { Link as RouterLink } from 'react-router';
+import { Link as ReactRouterLink } from 'react-router';
+import { createComponent } from 'react-fela';
+import { textStyles } from './Text';
 
-const Link = ({ bold, exactly, inverted, pseudo, to, ...props }, { rebass }) => {
-  const baseStyle = {
-    color: inverted ? rebass.inverted : rebass.link.color,
-    ...(bold && rebass.link.bold),
-    ...(rebass.link.link),
-    ...(pseudo.hover && rebass.link.hover),
-  };
-  const linkProps = {
-    ...props,
-    baseStyle,
-    className: 'Link',
-  };
-  const isExternalLink = to.includes('://');
-  return isExternalLink ? (
-    <Base
-      {...linkProps}
-      href={to}
-      is="a"
-    />
-  ) : (
-    <Base
-      {...linkProps}
-      activeOnlyWhenExact={exactly}
-      activeStyle={rebass.link.active}
-      is={RouterLink}
-      to={to}
+type LinkProps = {
+  download?: boolean,
+  exactly?: boolean,
+  target?: string,
+  to: string,
+} & TextProps;
+
+const linkStyles = (props: LinkProps & { theme: Theme }) => ({
+  ...textStyles(props),
+  color: props.inverted ? props.theme.colors.white : props.theme.colors.primary,
+  textDecoration: 'none',
+  ':hover': {
+    textDecoration: 'underline',
+  },
+});
+
+const AnchorLink = (props: LinkProps) => {
+  const Component = createComponent(linkStyles, 'a', {
+    href: true,
+    download: true,
+    target: true,
+  });
+  return (
+    <Component
+      {...props}
+      href={props.to}
     />
   );
 };
 
-Link.propTypes = {
-  bold: React.PropTypes.bool,
-  exactly: React.PropTypes.bool,
-  inverted: React.PropTypes.bool,
-  pseudo: React.PropTypes.object.isRequired,
-  to: React.PropTypes.string.isRequired,
+const RouterLink = (props: LinkProps) => {
+  const Component = createComponent(linkStyles, ReactRouterLink, {
+    to: true,
+    activeOnlyWhenExact: true,
+    activeStyle: true,
+  });
+  // TODO: Should be in theme.
+  const activeStyle = { textDecoration: 'underline' };
+  return (
+    <Component
+      {...props}
+      activeOnlyWhenExact={props.exactly}
+      activeStyle={activeStyle}
+    />
+  );
 };
 
-Link.contextTypes = {
-  rebass: React.PropTypes.object,
-};
+const isExternalLink = to => to.includes('://');
+const shouldRenderAnchor = isExternalLink;
 
-export default pseudo(Link);
+const Link = (props: LinkProps) => (
+  shouldRenderAnchor(props.to) ?
+    <AnchorLink {...props} />
+  :
+    <RouterLink {...props} />
+);
+
+export default Link;
