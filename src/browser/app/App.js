@@ -3,6 +3,7 @@ import type { State } from '../../common/types';
 import type { Theme } from './themes';
 import * as themes from './themes';
 import Footer from './Footer';
+import Header from './Header';
 import Helmet from 'react-helmet';
 import R from 'ramda';
 import React from 'react';
@@ -12,10 +13,6 @@ import { Match } from '../../common/app/components';
 import { Miss } from 'react-router';
 import { connect } from 'react-redux';
 import { createComponent, ThemeProvider } from 'react-fela';
-
-import { Text } from './components';
-
-// import Header from './Header';
 
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
@@ -66,9 +63,9 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           ...favicon.link,
         ]}
       />
-        <header>header</header>
+        <Header>Header</Header>
         <Page>
-          <Text>Ahoj</Text>
+          Ahoj
           {/*
             <Match exactly pattern="/" component={HomePage} />
             <Match pattern="/fields" component={FieldsPage} />

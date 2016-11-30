@@ -24,11 +24,9 @@ const linkStyles = (props: LinkProps & { theme: Theme }) => ({
 });
 
 const AnchorLink = (props: LinkProps) => {
-  const Component = createComponent(linkStyles, 'a', {
-    href: true,
-    download: true,
-    target: true,
-  });
+  const Component = createComponent(linkStyles, 'a', [
+    'download', 'href', 'target',
+  ]);
   return (
     <Component
       {...props}
@@ -38,11 +36,9 @@ const AnchorLink = (props: LinkProps) => {
 };
 
 const RouterLink = (props: LinkProps) => {
-  const Component = createComponent(linkStyles, ReactRouterLink, {
-    to: true,
-    activeOnlyWhenExact: true,
-    activeStyle: true,
-  });
+  const Component = createComponent(linkStyles, ReactRouterLink, [
+    'activeOnlyWhenExact', 'activeStyle', 'to',
+  ]);
   // TODO: Should be in theme.
   const activeStyle = { textDecoration: 'underline' };
   return (

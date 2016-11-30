@@ -19,6 +19,4 @@ export const textStyles = (props: TextProps & { theme: Theme }) => ({
 
 const Text = createComponent(textStyles, 'span');
 
-export default (props: TextProps) => {
-  return <Text {...props} />;
-};
+export default (props: TextProps) => <Text {...props} />;

@@ -5,17 +5,18 @@ import { createComponent } from 'react-fela';
 
 const Toolbar = createComponent((props: { theme: Theme }) => ({
   alignItems: 'center',
+  backgroundColor: props.theme.colors.primary,
   display: 'flex',
   flexWrap: 'wrap',
-  backgroundColor: props.theme.colors.primary,
   marginTop: `${props.theme.scales.medium}px`,
-  // padding: ${props => props.theme.scale[1]}px;
-  // padding-left: ${props => props.theme.scale[0]}px;
-  // padding-right: ${props => props.theme.scale[0]}px;
-  // > * {
-  //   margin-left: ${props => props.theme.scale[0]}px;
-  //   margin-right: ${props => props.theme.scale[0]}px;
-  // }
+  paddingBottom: `${props.theme.scales.medium}px`,
+  paddingLeft: `${props.theme.scales.small}px`,
+  paddingRight: `${props.theme.scales.small}px`,
+  paddingTop: `${props.theme.scales.medium}px`,
+  '> *': {
+    marginLeft: `${props.theme.scales.small}px`,
+    marginRight: `${props.theme.scales.small}px`,
+  },
 }));
 
 export default Toolbar;
