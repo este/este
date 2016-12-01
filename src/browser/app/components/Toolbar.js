@@ -1,21 +1,19 @@
 /* @flow */
-import type { Theme } from '../themes';
-import React from 'react';
-import { createComponent } from 'react-fela';
+import style from './style';
 
-const Toolbar = createComponent((props: { theme: Theme }) => ({
+const Toolbar = style((props, theme) => ({
   alignItems: 'center',
-  backgroundColor: props.theme.colors.primary,
+  backgroundColor: theme.colors.primary,
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: `${props.theme.scales.medium}px`,
-  paddingBottom: `${props.theme.scales.medium}px`,
-  paddingLeft: `${props.theme.scales.small}px`,
-  paddingRight: `${props.theme.scales.small}px`,
-  paddingTop: `${props.theme.scales.medium}px`,
+  marginTop: theme.scales.medium,
+  paddingBottom: theme.scales.medium,
+  paddingLeft: theme.scales.small,
+  paddingRight: theme.scales.small,
+  paddingTop: theme.scales.medium,
   '> *': {
-    marginLeft: `${props.theme.scales.small}px`,
-    marginRight: `${props.theme.scales.small}px`,
+    marginLeft: theme.scales.small,
+    marginRight: theme.scales.small,
   },
 }));
 

@@ -1,11 +1,10 @@
 /* @flow */
-/* aeslint-disable no-unused-vars, ajsx-a11y/anchor-has-content */
 import type { TextProps } from './Text';
 import type { Theme } from '../themes';
 import React from 'react';
+import style from './style';
 import { Link as ReactRouterLink } from 'react-router';
-import { createComponent } from 'react-fela';
-import { textStyles } from './Text';
+import { textStyle } from './Text';
 
 type LinkProps = {
   download?: boolean,
@@ -14,9 +13,9 @@ type LinkProps = {
   to: string,
 } & TextProps;
 
-const linkStyles = (props: LinkProps & { theme: Theme }) => ({
-  ...textStyles(props),
-  color: props.inverted ? props.theme.colors.white : props.theme.colors.primary,
+const linkStyle = (props: LinkProps, theme: Theme) => ({
+  ...textStyle(props, theme),
+  color: props.inverted ? theme.colors.white : theme.colors.primary,
   textDecoration: 'none',
   ':hover': {
     textDecoration: 'underline',
@@ -24,7 +23,7 @@ const linkStyles = (props: LinkProps & { theme: Theme }) => ({
 });
 
 const AnchorLink = (props: LinkProps) => {
-  const Component = createComponent(linkStyles, 'a', [
+  const Component = style(linkStyle, 'a', [
     'download', 'href', 'target',
   ]);
   return (
@@ -36,7 +35,7 @@ const AnchorLink = (props: LinkProps) => {
 };
 
 const RouterLink = (props: LinkProps) => {
-  const Component = createComponent(linkStyles, ReactRouterLink, [
+  const Component = style(linkStyle, ReactRouterLink, [
     'activeOnlyWhenExact', 'activeStyle', 'to',
   ]);
   // TODO: Should be in theme.

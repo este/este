@@ -1,6 +1,5 @@
 /* @flow */
 import type { State } from '../../common/types';
-import type { Theme } from './themes';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
@@ -9,10 +8,10 @@ import R from 'ramda';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Match } from '../../common/app/components';
-import { Miss } from 'react-router';
+// import { Match } from '../../common/app/components';
+// import { Miss } from 'react-router';
+import { ThemeProvider, style } from './components';
 import { connect } from 'react-redux';
-import { createComponent, ThemeProvider } from 'react-fela';
 
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
@@ -25,17 +24,17 @@ import { createComponent, ThemeProvider } from 'react-fela';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const Container = createComponent((props: { theme: Theme }) => ({
-  margin: 'auto',
-  maxWidth: 1024,
+const Container = style((props, theme) => ({
   display: 'flex',
   flexDirection: 'column',
+  margin: 'auto',
+  maxWidth: 1024,
   minHeight: '100vh', // 100vh (not 100%) because it's absolute to the viewport
-  paddingLeft: `${props.theme.scales.medium}px`,
-  paddingRight: `${props.theme.scales.medium}px`,
+  paddingLeft: theme.scales.medium,
+  paddingRight: theme.scales.medium,
 }));
 
-const Page = createComponent(() => ({
+const Page = style(() => ({
   flex: 1, // Flex 1 on the page makes footer sticky.
 }));
 
@@ -63,12 +62,10 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           ...favicon.link,
         ]}
       />
-        <Header>Header</Header>
+        <Header />
         <Page>
-          Ahoj
-          {/*
-            <Match exactly pattern="/" component={HomePage} />
-            <Match pattern="/fields" component={FieldsPage} />
+          {/* <Match exactly pattern="/" component={HomePage} /> */}
+          {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/users" component={UsersPage} />
             <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />

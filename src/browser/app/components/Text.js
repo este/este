@@ -1,7 +1,7 @@
 /* @flow */
 import type { Theme } from '../themes';
 import React from 'react';
-import { createComponent } from 'react-fela';
+import style from './style';
 
 export type TextProps = {
   bold?: boolean,
@@ -9,14 +9,14 @@ export type TextProps = {
   small?: boolean,
 };
 
-export const textStyles = (props: TextProps & { theme: Theme }) => ({
-  color: props.inverted ? props.theme.colors.white : props.theme.colors.black,
-  fontFamily: props.theme.fontFamily,
-  fontSize: `${props.small ? props.theme.fontSizes.smallText : props.theme.fontSizes.text}px`,
-  fontWeight: props.bold ? props.theme.bold : 'normal',
-  lineHeight: props.theme.lineHeight,
+export const textStyle = (props: TextProps, theme: Theme) => ({
+  color: props.inverted ? theme.colors.white : theme.colors.black,
+  fontFamily: theme.fontFamily,
+  fontSize: `${props.small ? theme.fontSizes.smallText : theme.fontSizes.text}px`,
+  fontWeight: props.bold ? theme.bold : 'normal',
+  lineHeight: theme.lineHeight,
 });
 
-const Text = createComponent(textStyles, 'span');
+const Text = style(textStyle, 'span');
 
 export default (props: TextProps) => <Text {...props} />;

@@ -1,6 +1,5 @@
 /* @flow */
 import type { State, User } from '../../common/types';
-import type { Theme } from './themes';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
@@ -14,13 +13,13 @@ type HeaderLinkProps = {
 };
 
 const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
-  <Link bold inverted to={to}>
+  <Link exactly={exactly} bold inverted to={to}>
     <FormattedMessage {...message} />
   </Link>
 );
 
 type HeaderProps = {
-  viewer: ?User
+  viewer: ?User,
 };
 
 const Header = ({ viewer }: HeaderProps) => (

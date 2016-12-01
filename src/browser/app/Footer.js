@@ -1,9 +1,7 @@
 /* @flow */
-import type { Theme } from './themes';
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
-import { Text, Link } from './components';
-import { createComponent } from 'react-fela';
+import { Text, Link, style } from './components';
 
 const messages = defineMessages({
   madeByHtml: {
@@ -12,17 +10,15 @@ const messages = defineMessages({
   },
 });
 
-export const footerStyles = (props: { theme: Theme }) => ({
+const Footer = style((props, theme) => ({
   alignItems: 'center',
-  borderTop: `solid 1px ${props.theme.border.color}`,
+  borderTop: `solid 1px ${theme.border.color}`,
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: `${props.theme.scales.big}px`,
-  paddingBottom: `${props.theme.scales.big}px`,
-  paddingTop: `${props.theme.scales.big}px`,
-});
-
-const Footer = createComponent(footerStyles, 'footer');
+  marginTop: theme.scales.big,
+  paddingBottom: theme.scales.big,
+  paddingTop: theme.scales.big,
+}));
 
 export default () => (
   <Footer>
