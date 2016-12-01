@@ -126,7 +126,7 @@ export type Style = {
   fontFeatureSettings?: string,
   fontKerning?: string,
   fontLanguageOverride?: string,
-  fontSize?: string,
+  fontSize?: number | string,
   fontSizeAdjust?: string,
   fontStretch?: string,
   fontStyle?: string,

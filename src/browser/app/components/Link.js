@@ -22,32 +22,29 @@ const linkStyle = (props: LinkProps, theme: Theme) => ({
   },
 });
 
-const AnchorLink = (props: LinkProps) => {
-  const Component = style(linkStyle, 'a', [
-    'download', 'href', 'target',
-  ]);
-  return (
-    <Component
-      {...props}
-      href={props.to}
-    />
-  );
-};
+// TODO: Can't be dynamic, but should be github.com/rofrischmann/fela/issues/151
+const StyledAnchorLink = style(linkStyle, 'a', [
+  'download', 'href', 'target',
+]);
 
-const RouterLink = (props: LinkProps) => {
-  const Component = style(linkStyle, ReactRouterLink, [
-    'activeOnlyWhenExact', 'activeStyle', 'to',
-  ]);
-  // TODO: Should be in theme.
-  const activeStyle = { textDecoration: 'underline' };
-  return (
-    <Component
-      {...props}
-      activeOnlyWhenExact={props.exactly}
-      activeStyle={activeStyle}
-    />
-  );
-};
+const AnchorLink = (props: LinkProps) => (
+  <StyledAnchorLink {...props} href={props.to} />
+);
+
+// TODO: Should be in theme, but how? Will be solved with found router anyway.
+const activeStyle = { textDecoration: 'underline' };
+
+const StyledRouterLink = style(linkStyle, ReactRouterLink, [
+  'activeOnlyWhenExact', 'activeStyle', 'to',
+]);
+
+const RouterLink = (props: LinkProps) => (
+  <StyledRouterLink
+    {...props}
+    activeOnlyWhenExact={props.exactly}
+    activeStyle={activeStyle}
+  />
+);
 
 const isExternalLink = to => to.includes('://');
 const shouldRenderAnchor = isExternalLink;
