@@ -1,5 +1,6 @@
 /* @flow */
-// Remember, circular dependencies sucks. Never "import { foo } from './'".
+// Remember, circular dependencies sucks. No component from this directory
+// should import from this file aka no import { Foo } from './'.
 export { ThemeProvider } from 'react-fela';
 export { default as Box } from './Box';
 export { default as Link } from './Link';
