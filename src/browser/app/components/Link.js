@@ -14,6 +14,7 @@ type LinkProps = {
 } & TextProps;
 
 const linkStyle = (props: LinkProps, theme: Theme) => ({
+  // Note how we can reuse styles with plain JavaScript.
   ...textStyle(props, theme),
   color: props.inverted ? theme.colors.white : theme.colors.primary,
   textDecoration: 'none',
@@ -22,38 +23,32 @@ const linkStyle = (props: LinkProps, theme: Theme) => ({
   },
 });
 
-// TODO: Can't be dynamic, but should be github.com/rofrischmann/fela/issues/151
-const StyledAnchorLink = style(linkStyle, 'a', [
+// TODO: Should be in theme, but wait for found router.
+const routerLinkActiveStyle = { textDecoration: 'underline' };
+
+const AnchorLink = style(linkStyle, 'a', [
   'download', 'href', 'target',
 ]);
 
-const AnchorLink = (props: LinkProps) => (
-  <StyledAnchorLink {...props} href={props.to} />
-);
-
-// TODO: Should be in theme, but how? Will be solved with found router anyway.
-const activeStyle = { textDecoration: 'underline' };
-
-const StyledRouterLink = style(linkStyle, ReactRouterLink, [
+const RouterLink = style(linkStyle, ReactRouterLink, [
   'activeOnlyWhenExact', 'activeStyle', 'to',
 ]);
 
-const RouterLink = (props: LinkProps) => (
-  <StyledRouterLink
-    {...props}
-    activeOnlyWhenExact={props.exactly}
-    activeStyle={activeStyle}
-  />
-);
-
 const isExternalLink = to => to.includes('://');
-const shouldRenderAnchor = isExternalLink;
 
 const Link = (props: LinkProps) => (
-  shouldRenderAnchor(props.to) ?
-    <AnchorLink {...props} />
+  isExternalLink(props.to) ?
+    <AnchorLink
+      {...props}
+      href={props.to}
+      target="_blank"
+    />
   :
-    <RouterLink {...props} />
+    <RouterLink
+      {...props}
+      activeOnlyWhenExact={props.exactly}
+      activeStyle={routerLinkActiveStyle}
+    />
 );
 
 export default Link;
