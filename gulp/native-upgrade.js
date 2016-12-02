@@ -16,6 +16,7 @@ gulp.task('native-upgrade', () => {
       - run 'react-native init YourAppName' in some temp dir
       - delete 'android' and 'ios' directories in your Este app
       - copy 'android' and 'ios' directories from some temp dir
+      - merge React Native root files like .gitignore and .flowconfig
       - run 'npm install'
       - run 'react-native link'
       - fresh install
