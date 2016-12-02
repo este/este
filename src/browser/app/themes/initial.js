@@ -2,6 +2,8 @@
 import type { OpenColor } from './openColor';
 import openColor from './openColor';
 
+export type Scale = 'extraSmall' | 'small' | 'medium' | 'big' | 'extraBig';
+
 export type Theme = {
   fontFamily: string,
   fontSizes: {
@@ -13,7 +15,6 @@ export type Theme = {
   },
   lineHeight: number,
   bold: number,
-  // Basic rhythm for paddings and margins.
   scales: {
     extraSmall: number,
     small: number,

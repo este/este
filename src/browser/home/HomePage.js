@@ -11,8 +11,9 @@ import {
 } from '../app/components';
 
 const HomePage = () => (
-  <Box margin="small">
+  <Box margin="small" marginBottom="big">
     <Title message="Este.js" />
+    fok
   </Box>
   // <View>
   //   <Title message="Este.js" />

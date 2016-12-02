@@ -2,6 +2,19 @@
 
 // These colors have been taken from open-color@1.4.0
 // We don't import them from NPM because they can change.
+// blue - blue0 - blue9
+// cyan - cyan0 - cyan9
+// grape - grape0 - grape9
+// gray - gray0 - gray9
+// green - green0 - green9
+// indigo - indigo0 - indigo9
+// lime - lime0 - lime9
+// orange - orange0 - orange9
+// pink - pink0 - pink9
+// red - red0 - red9
+// teal - teal0 - teal9
+// violet - violet0 - violet9
+// yellow - yellow0 - yellow9
 
 export type OpenColor = {
   blue0: string,

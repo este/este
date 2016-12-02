@@ -1,18 +1,25 @@
 /* @flow */
+import type { Scale } from '../themes';
 import React from 'react';
 import style from './style';
 
 // co ma box umet?
 // margin, padding, textAlign, co jeste?
+// margin bere scale jako text, nebo number pro px, ok
+//   fakt? px nesmim dovolit, protoze mensi displays, ok, fakt ne
 // border
-// width height
+// width height, chci procenta pres 1/4? hmm
 // flex
+// bg color, co text color?
+//   text color se nededi, prepisuje se, ok
+//   patri do textu, ok
 // display?
-// <box?
+
+// Jak to skladat?
+// margin je value z theme?
 
 type BoxProps = {
-  // fok?: boolean,
-  //
+  margin?: Scale,
 };
 
 const Box = style((props: BoxProps, theme) => ({
