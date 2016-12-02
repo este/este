@@ -23,6 +23,6 @@ export const textStyle = (props: TextProps, theme: Theme) => ({
 // Must be span, not p, because p can't be nested.
 const Text = style(textStyle, 'span');
 
-// Export Text wrapped in function because we want flow props check.
-// Such design is the must, beacuse it allows us to reuse styles.
+// Export Text wrapped in function because we want flow props checking.
+// Such design is the must, because it allows us to reuse styles.
 export default (props: TextProps) => <Text {...props} />;

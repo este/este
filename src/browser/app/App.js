@@ -9,7 +9,7 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
-import { Miss } from 'react-router';
+// import { Miss } from 'react-router';
 import { ThemeProvider, style } from './components';
 import { connect } from 'react-redux';
 
