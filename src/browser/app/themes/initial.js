@@ -3,9 +3,9 @@
 export type Theme = {
   fontFamily: string,
   fontSizes: {
-    h1: number,
-    h2: number,
-    h3: number,
+    // h1: number,
+    // h2: number,
+    // h3: number,
     text: number,
     smallText: number,
   },
@@ -44,9 +44,9 @@ const theme: Theme = {
   // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
   fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
   fontSizes: {
-    h1: 32,
-    h2: 24,
-    h3: 20,
+    // h1: 32,
+    // h2: 24,
+    // h3: 20,
     text: 16,
     smallText: 14,
   },
@@ -54,6 +54,7 @@ const theme: Theme = {
   bold: 600,
   // Basic rhythm for paddings and margins.
   scales: {
+    // extraSmall: 4,
     small: 8,
     medium: 16,
     big: 32,

@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import {
-  // Box,
+  Box,
   // Image,
   // Link,
   // PageHeader,
@@ -11,9 +11,9 @@ import {
 } from '../app/components';
 
 const HomePage = () => (
-  // <Box margin="small">
+  <Box margin="small">
     <Title message="Este.js" />
-  // </Box>
+  </Box>
   // <View>
   //   <Title message="Este.js" />
   //   <PageHeader

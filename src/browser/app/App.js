@@ -8,15 +8,15 @@ import R from 'ramda';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-// import { Match } from '../../common/app/components';
-// import { Miss } from 'react-router';
+import { Match } from '../../common/app/components';
+import { Miss } from 'react-router';
 import { ThemeProvider, style } from './components';
 import { connect } from 'react-redux';
 
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
 // import UsersPage from '../users/UsersPage';
-// import HomePage from '../home/HomePage';
+import HomePage from '../home/HomePage';
 // import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
 // import NotFoundPage from '../notfound/NotFoundPage';
@@ -45,6 +45,7 @@ type AppProps = {
 
 const App = ({ currentLocale, currentTheme }: AppProps) => (
   <ThemeProvider
+    // TODO: Do we need it?
     // key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
     theme={themes[currentTheme || 'initial']}
   >
@@ -64,7 +65,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
       />
         <Header />
         <Page>
-          {/* <Match exactly pattern="/" component={HomePage} /> */}
+          <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/users" component={UsersPage} />
             <Match pattern="/intl" component={IntlPage} />

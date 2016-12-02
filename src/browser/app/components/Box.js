@@ -1,4 +1,27 @@
 /* @flow */
+import React from 'react';
+import style from './style';
+
+// co ma box umet?
+// margin, padding, textAlign, co jeste?
+// border
+// width height
+// flex
+// display?
+// <box?
+
+type BoxProps = {
+  // fok?: boolean,
+  //
+};
+
+const Box = style((props: BoxProps, theme) => ({
+  // color: props.
+}));
+
+export default (props: BoxProps) => <Box {...props} />;
+
+/* @flow */
 // import type { Scale } from '../themes';
 // import type { Theme } from '../themes';
 // import React from 'react';
@@ -21,5 +44,10 @@
 //
 // const Text = createComponent(textStyles, 'span');
 //
-//
+// <div><span>
+// textAlign: props.align || 'left',
 // export default Box;
+// TODO: Align belongs to box.
+// Jak na paragraphy? do boxu, ok
+// Text vzdy P? pak kazdej odkaz? ne, hmm
+// align?: 'left' | 'right' | 'center' | 'justify',
