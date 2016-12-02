@@ -1,6 +1,7 @@
 /* @flow */
 
 // Algebraic types are composable, so it makes sense to have them at one place.
+// blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 
 // Core
 
