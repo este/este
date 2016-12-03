@@ -9,8 +9,8 @@
     "airbnb",
     "plugin:flowtype/recommended"
   ],
-  env: {
-    jest: true
+  "env": {
+    "jest": true
   },
   "rules": {
     // Soft some rules.
@@ -35,7 +35,7 @@
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
     // Rules for functional programming. We do not need Object.freeze.
-    "fp/no-mutating-assign": 2,
+    "fp/no-mutating-assign": 2
     // TODO: Can't be enabled now, it requires a lot of refactoring.
     // "fp/no-mutating-methods": 2,
     // "fp/no-mutation": ["error", {
