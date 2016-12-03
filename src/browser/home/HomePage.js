@@ -6,14 +6,15 @@ import {
   // Link,
   // PageHeader,
   // SwitchTheme,
+  Text,
   Title,
   // View,
 } from '../app/components';
 
 const HomePage = () => (
-  <Box margin="small" marginBottom="big">
+  <Box>
     <Title message="Este.js" />
-    fok
+    <Text transform="none" />
   </Box>
   // <View>
   //   <Title message="Este.js" />

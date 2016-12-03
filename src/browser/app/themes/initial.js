@@ -1,63 +1,20 @@
 /* @flow */
-import type { OpenColor } from './openColor';
+import type { Theme } from './types';
 import openColor from './openColor';
-
-export type Scale = 'extraSmall' | 'small' | 'medium' | 'big' | 'extraBig';
-
-export type Theme = {
-  fontFamily: string,
-  fontSizes: {
-    h1: number,
-    h2: number,
-    h3: number,
-    text: number,
-    smallText: number,
-  },
-  lineHeight: number,
-  bold: number,
-  scales: {
-    extraSmall: number,
-    small: number,
-    medium: number,
-    big: number,
-    extraBig: number,
-  },
-  colors: {
-    primary: string,
-    secondary: string,
-    info: string,
-    success: string,
-    warning: string,
-    error: string,
-    black: string,
-    white: string,
-    open: OpenColor,
-  },
-  border: {
-    radius: number,
-    color: string,
-  },
-  states: {
-    disabled: {
-      cursor: string,
-      opacity: number,
-    },
-  },
-};
 
 const theme: Theme = {
   // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
   fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
   fontSizes: {
-    h1: 32,
-    h2: 24,
-    h3: 20,
-    text: 16,
-    smallText: 14,
+    extraSmall: 12,
+    small: 14,
+    medium: 16,
+    big: 20,
+    extraBig: 24,
   },
   lineHeight: 1.5,
   bold: 600,
-  scales: {
+  sizes: {
     extraSmall: 4,
     small: 8,
     medium: 16,

@@ -1,15 +1,15 @@
 /* @flow */
-import type { Theme } from './initial';
+import type { Theme } from './types';
 import initial from './initial';
 
 const theme: Theme = {
   ...initial,
   fontSizes: {
-    h1: 30,
-    h2: 22,
-    h3: 18,
-    text: 14,
-    smallText: 12,
+    extraSmall: 10,
+    small: 12,
+    medium: 13,
+    big: 18,
+    extraBig: 22,
   },
   lineHeight: 2,
   colors: {

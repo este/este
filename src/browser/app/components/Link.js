@@ -1,6 +1,6 @@
 /* @flow */
 import type { TextProps } from './Text';
-import type { Theme } from '../themes';
+import type { Theme } from '../themes/types';
 import React from 'react';
 import style from './style';
 import { Link as ReactRouterLink } from 'react-router';
@@ -13,9 +13,9 @@ type LinkProps = {
   to: string,
 } & TextProps;
 
-const linkStyle = (props: LinkProps, theme: Theme) => ({
+const linkStyle = (theme: Theme, props: LinkProps) => ({
   // Note how we can reuse styles with plain JavaScript.
-  ...textStyle(props, theme),
+  ...textStyle(theme, props),
   color: props.inverted ? theme.colors.white : theme.colors.primary,
   textDecoration: 'none',
   ':hover': {

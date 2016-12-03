@@ -1,19 +1,19 @@
 /* @flow */
 import style from './style';
 
-const Toolbar = style((props, theme) => ({
+const Toolbar = style(theme => ({
   alignItems: 'center',
   backgroundColor: theme.colors.primary,
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: theme.scales.medium,
-  paddingBottom: theme.scales.medium,
-  paddingLeft: theme.scales.small,
-  paddingRight: theme.scales.small,
-  paddingTop: theme.scales.medium,
+  marginTop: theme.sizes.medium,
+  paddingBottom: theme.sizes.medium,
+  paddingLeft: theme.sizes.small,
+  paddingRight: theme.sizes.small,
+  paddingTop: theme.sizes.medium,
   '> *': {
-    marginLeft: theme.scales.small,
-    marginRight: theme.scales.small,
+    marginLeft: theme.sizes.small,
+    marginRight: theme.sizes.small,
   },
 }));
 

@@ -1,14 +1,143 @@
 /* @flow */
+import type { OpenColor } from './openColor';
 
-// CSSStyleDeclaration
-// github.com/facebook/flow/blob/master/lib/cssom.js
-// cssreference.io
-// TODO: Finish enums, replace strings with numbers, handle custom Fela syntax.
+// Theme types.
+
+export type Size = 'extraSmall' | 'small' | 'medium' | 'big' | 'extraBig';
+
+// TODO: It should be possible to reuse Size type, but { [size: Size]: number }
+// doesn't enforce keys on the theme, I don't know why. Investigate.
+export type Sizes = {
+  extraSmall: number,
+  small: number,
+  medium: number,
+  big: number,
+  extraBig: number,
+};
+
+export type Theme = {
+  fontFamily: string,
+  fontSizes: Sizes,
+  lineHeight: number,
+  bold: number,
+  sizes: Sizes,
+  colors: {
+    primary: string,
+    secondary: string,
+    info: string,
+    success: string,
+    warning: string,
+    error: string,
+    black: string,
+    white: string,
+    open: OpenColor,
+  },
+  border: {
+    radius: number,
+    color: string,
+  },
+  states: {
+    disabled: {
+      cursor: string,
+      opacity: number,
+    },
+  },
+};
+
+// Style types. Taken from cssreference.io.
+// TODO: Improve it. Consider adding Fela custom syntax. Move to separate file.
+
+export type TextTransform =
+    'none'
+  | 'capitalize'
+  | 'uppercase'
+  | 'lowercase'
+  ;
+
+export type AlignContent =
+    'stretch'
+  | 'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'space-between'
+  | 'space-around'
+  ;
+
+export type AlignItems =
+    'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'baseline'
+  | 'stretch'
+  ;
+
+export type AlignSelf =
+    'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'baseline'
+  | 'stretch'
+  ;
+
+export type Display =
+    'none'
+  | 'inline'
+  | 'block'
+  | 'inline-block'
+  | 'list-item'
+  | 'table'
+  | 'table-cell'
+  | 'table-row'
+  | 'flex'
+  | 'inline-flex'
+  ;
+
+export type FlexDirection =
+    'row'
+  | 'row-reverse'
+  | 'column'
+  | 'column-reverse'
+  ;
+
+export type FlexWrap =
+    'nowrap'
+  | 'wrap'
+  | 'wrap-reverse'
+  ;
+
+export type Float =
+    'none'
+  | 'left'
+  | 'right'
+  ;
+
+export type FontWeight =
+    'normal'
+  | 'bold'
+  | 'lighter'
+  | 'bolder'
+  | number
+  ;
+
+export type TextAlign =
+    'left'
+  | 'right'
+  | 'center'
+  | 'justify'
+  ;
+
+export type TextDecoration =
+    'none'
+  | 'underline'
+  | 'overline'
+  | 'line-through'
+  ;
+
 export type Style = {
   /* DOM CSS Properties */
-  alignContent?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around',
-  alignItems?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch',
-  alignSelf?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch',
+  alignContent?: AlignContent,
+  alignItems?: AlignItems,
+  alignSelf?: AlignSelf,
   // all?: string,
   // animation?: string,
   // animationDelay?: string,
@@ -110,17 +239,17 @@ export type Style = {
   counterReset?: string,
   cursor?: string,
   direction?: string,
-  display?: 'none' | 'inline' | 'block' | 'inline-block' | 'list-item' | 'table' | 'table-cell' | 'table-row' | 'flex' | 'inline-flex',
+  display?: Display,
   emptyCells?: string,
   filter?: string,
   flex?: number | string,
   flexBasis?: string,
-  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
+  flexDirection?: FlexDirection,
   flexFlow?: string,
   flexGrow?: number,
   flexShrink?: string,
-  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse',
-  float?: 'none' | 'left' | 'right',
+  flexWrap?: FlexWrap,
+  float?: Float,
   font?: string,
   fontFamily?: string,
   fontFeatureSettings?: string,
@@ -138,7 +267,7 @@ export type Style = {
   fontVariantLigatures?: string,
   fontVariantNumeric?: string,
   fontVariantPosition?: string,
-  fontWeight?: 'normal' | 'bold' | 'lighter' | 'bolder' | number,
+  fontWeight?: FontWeight,
   grad?: string,
   grid?: string,
   gridArea?: string,
@@ -254,10 +383,10 @@ export type Style = {
   shapeOutside?: string,
   tableLayout?: string,
   tabSize?: string,
-  textAlign?: 'left' | 'right' | 'center' | 'justify',
+  textAlign?: TextAlign,
   textAlignLast?: string,
   textCombineUpright?: string,
-  textDecoration?: 'none' | 'underline' | 'overline' | 'line-through',
+  textDecoration?: TextDecoration,
   textDecorationColor?: string,
   textDecorationLine?: string,
   textDecorationStyle?: string,
@@ -266,7 +395,7 @@ export type Style = {
   textOverflow?: string,
   textRendering?: string,
   textShadow?: string,
-  textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase',
+  textTransform?: TextTransform,
   textUnderlinePosition?: string,
   top?: string,
   touchAction?: string,

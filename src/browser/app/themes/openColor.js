@@ -312,7 +312,7 @@ const openColorOriginal = {
   ],
 };
 
-// I don't know why, but "| any" is required. Should't be.
+// I don't know why, but "| any" is required.
 const openColor: OpenColor | any = Object
   .keys(openColorOriginal)
   .reduce((flatten, colorName) => {

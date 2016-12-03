@@ -24,16 +24,18 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const Container = style((props, theme) => ({
+// TODO: Use Box.
+const Container = style(theme => ({
   display: 'flex',
   flexDirection: 'column',
   margin: 'auto',
   maxWidth: 1024,
   minHeight: '100vh', // 100vh (not 100%) because it's absolute to the viewport
-  paddingLeft: theme.scales.medium,
-  paddingRight: theme.scales.medium,
+  paddingLeft: theme.sizes.medium,
+  paddingRight: theme.sizes.medium,
 }));
 
+// TODO: Use Box.
 const Page = style(() => ({
   flex: 1, // Flex 1 on the page makes footer sticky.
 }));

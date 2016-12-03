@@ -1,28 +1,26 @@
 /* @flow */
-import type { Theme } from '../themes';
+import type { Size, TextTransform, Theme } from '../themes/types';
 import React from 'react';
 import style from './style';
 
 export type TextProps = {
   bold?: boolean,
   inverted?: boolean,
-  small?: boolean,
-  transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase',
+  size?: Size,
+  transform?: TextTransform,
 };
 
-// Style is the transformation of props and theme.
-export const textStyle = (props: TextProps, theme: Theme) => ({
+export const textStyle = (theme: Theme, props: TextProps) => ({
   color: props.inverted ? theme.colors.white : theme.colors.black,
   fontFamily: theme.fontFamily,
-  fontSize: props.small ? theme.fontSizes.smallText : theme.fontSizes.text,
+  fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
   fontWeight: props.bold ? theme.bold : 'normal',
   lineHeight: theme.lineHeight,
   textTransform: props.transform || 'none',
 });
 
-// Must be span, not p, because p can't be nested.
-const Text = style(textStyle, 'span');
+const Style = style(textStyle, 'span'); // span, because p can't be nested
 
-// Export Text wrapped in function because we want flow props checking.
-// Such design is the must, because it allows us to reuse styles.
-export default (props: TextProps) => <Text {...props} />;
+const Text = (props: TextProps) => <Style {...props} />;
+
+export default Text;

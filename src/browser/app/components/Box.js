@@ -1,5 +1,5 @@
 /* @flow */
-import type { Scale } from '../themes';
+import type { Size } from '../themes/types';
 import React from 'react';
 import style from './style';
 
@@ -15,15 +15,13 @@ import style from './style';
 //   patri do textu, ok
 // display?
 
-// Jak to skladat?
-// margin je value z theme?
-
-type BoxProps = {
-  margin?: Scale,
+export type BoxProps = {
+  margin?: Size,
 };
+// , props: BoxProps
 
-const Box = style((props: BoxProps, theme) => ({
-  // color: props.
+const Box = style(() => ({
+  // fontSize: theme.sizes.medium
 }));
 
 export default (props: BoxProps) => <Box {...props} />;

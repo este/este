@@ -10,24 +10,26 @@ const messages = defineMessages({
   },
 });
 
-const Footer = style((props, theme) => ({
+const Style = style(theme => ({
   alignItems: 'center',
   borderTop: `solid 1px ${theme.border.color}`,
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: theme.scales.big,
-  paddingBottom: theme.scales.big,
-  paddingTop: theme.scales.big,
+  marginTop: theme.sizes.big,
+  paddingBottom: theme.sizes.big,
+  paddingTop: theme.sizes.big,
 }));
 
-export default () => (
-  <Footer>
-    <Text small>
+const Footer = () => (
+  <Style>
+    <Text size="small">
       <FormattedMessage {...messages.madeByHtml} />
     </Text>
     {'\u00a0'}
-    <Link small to="https://twitter.com/steida">
+    <Link size="small" to="https://twitter.com/steida">
       steida
     </Link>
-  </Footer>
+  </Style>
 );
+
+export default Footer;
