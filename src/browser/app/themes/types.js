@@ -1,25 +1,29 @@
 /* @flow */
 import type { OpenColor } from './openColor';
 
-// Theme types.
+export type { Exact } from '../../../common/types';
 
-export type Size = $Keys<Sizes>;
-
-export type Sizes = {|
+export type Sizes = {
   extraSmall: number,
   small: number,
   medium: number,
   big: number,
   extraBig: number,
-|};
+};
 
+export type Size = $Keys<Sizes>;
+
+// Theme types.
+// We can't use Exact<T> because it breaks autocomplete.
+// We can't use native exact type because it doesn't support spread nor intersection.
+// TODO: Wait for flow fix.
 export type Theme = {
   fontFamily: string,
   fontSizes: Sizes,
   lineHeight: number,
   bold: number,
   sizes: Sizes,
-  colors: {|
+  colors: {
     primary: string,
     secondary: string,
     info: string,
@@ -29,7 +33,7 @@ export type Theme = {
     black: string,
     white: string,
     open: OpenColor,
-  |},
+  },
   border: {
     radius: number,
     color: string,
@@ -131,6 +135,15 @@ export type TextDecoration =
   | 'line-through'
   ;
 
+// Now Style can't check misspelled selectors like colour instead of color.
+// Checking misspelled selectors is possible even with Fela, but only for known
+// constants like `:hover`, not for '@media (min-height: 200px)'.
+// type FelaStyleKey = ':active' | ':hover'; Then [FelaStyleKey]: Style,
+// We have these options:
+//  1) Remove magic strings from Fela
+//  2) Use String('foo') syntax to bypass Flow checking, which is ugly.
+//    [String('@media (min-height: 200px)')]: { textDecoration: 'line-through' },
+// For now, we can live with plain Object checking, which is good enough.
 export type Style = {
   /* DOM CSS Properties */
   alignContent?: AlignContent,

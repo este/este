@@ -1,5 +1,5 @@
 /* @flow */
-import type { Size, TextTransform, Theme } from '../themes/types';
+import type { Exact, Size, TextTransform, Theme } from '../themes/types';
 import React from 'react';
 import style from './style';
 
@@ -21,6 +21,6 @@ export const textStyle = (theme: Theme, props: TextProps) => ({
 
 const Style = style(textStyle, 'span'); // span, because p can't be nested
 
-const Text = (props: TextProps) => <Style {...props} />;
+const Text = (props: Exact<TextProps>) => <Style {...props} />;
 
 export default Text;

@@ -1,6 +1,6 @@
 /* @flow */
+import type { Exact, Theme } from '../themes/types';
 import type { TextProps } from './Text';
-import type { Theme } from '../themes/types';
 import React from 'react';
 import style from './style';
 import { Link as ReactRouterLink } from 'react-router';
@@ -14,7 +14,6 @@ type LinkProps = {
 } & TextProps;
 
 const linkStyle = (theme: Theme, props: LinkProps) => ({
-  // Note how we can reuse styles with plain JavaScript.
   ...textStyle(theme, props),
   color: props.inverted ? theme.colors.white : theme.colors.primary,
   textDecoration: 'none',
@@ -36,7 +35,7 @@ const RouterLink = style(linkStyle, ReactRouterLink, [
 
 const isExternalLink = to => to.includes('://');
 
-const Link = (props: LinkProps) => (
+const Link = (props: Exact<LinkProps>) => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

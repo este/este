@@ -3,9 +3,15 @@
 // Algebraic types are composable, so it makes sense to have them at one place.
 // blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 
+// Exact is a temp workaround until native exact type will fix spread and intersection.
+// flowtype.org/docs/objects.html#exact-object-types
+// github.com/facebook/flow/issues/2405#issuecomment-256339492
+// github.com/facebook/flow/issues/2626
+export type Exact<T> = T & $Shape<T>;
+
 // Core
 
-export type Deps = {
+export type Deps = Exact<{
   FBSDK: any,
   firebase: any,
   firebaseAuth: Function,
@@ -14,76 +20,75 @@ export type Deps = {
   getUid: () => string,
   now: () => number,
   validate: (json: Object) => any,
-};
+}>;
 
 // Models
-// flowtype.org/docs/objects.html#exact-object-types
 
-export type Todo = {|
+export type Todo = Exact<{
   completed: boolean,
   createdAt: number,
   id: string,
   title: string,
-|};
+}>;
 
-export type User = {|
+export type User = Exact<{
   displayName: string,
   email: ?string,
   id: string,
   photoURL: ?string,
-|};
+}>;
 
 // Reducers
 
-export type AppState = {
+export type AppState = Exact<{
   error: ?Error,
   menuShown: boolean,
   online: boolean,
   started: boolean,
-};
+}>;
 
-export type AuthState = {
+export type AuthState = Exact<{
   formDisabled: boolean,
   error: ?Error,
-};
+}>;
 
-export type ConfigState = {
+export type ConfigState = Exact<{
   appName: string,
   appVersion: string,
   firebase: ?Object,
   sentryUrl: string,
-};
+}>;
 
-export type DeviceState = {
+export type DeviceState = Exact<{
   host: string,
   isReactNative: boolean,
   platform: string,
-};
+}>;
 
-export type IntlState = {
+export type IntlState = Exact<{
   currentLocale: ?string,
   defaultLocale: ?string,
   initialNow: ?number,
   locales: ?Array<string>,
   messages: ?Object,
-};
+}>;
 
-export type ThemeState = {
+export type ThemeState = Exact<{
   currentTheme: ?string,
-};
+}>;
 
-export type TodosState = {
+export type TodosState = Exact<{
   all: {[id: string]: Todo},
-};
+}>;
 
-export type UsersState = {
+export type UsersState = Exact<{
   online: ?Array<User>,
   viewer: ?User,
-};
+}>;
 
 // State
 
-export type State = {
+export type State = Exact<{
   app: AppState,
   auth: AuthState,
   config: ConfigState,
@@ -93,7 +98,7 @@ export type State = {
   themes: ThemeState,
   todos: TodosState,
   users: UsersState,
-};
+}>;
 
 // Actions
 

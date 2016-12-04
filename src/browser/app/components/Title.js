@@ -1,14 +1,15 @@
 /* @flow */
+import type { Exact } from '../../../common/types';
 import Helmet from 'react-helmet';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {|
+type Props = {
   message: string | Object,
   values?: Object,
-|};
+};
 
-const Title = ({ message, values }: Props) => (
+const Title = ({ message, values }: Exact<Props>) => (
   typeof message === 'string' ?
     <Helmet title={message} />
   :

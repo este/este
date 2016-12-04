@@ -26,10 +26,26 @@ const Footer = () => (
       <FormattedMessage {...messages.madeByHtml} />
     </Text>
     {'\u00a0'}
-    <Link size="small" to="https://twitter.com/steida">
+    <Link to="/"><Text size="small">steida</Text></Link>
+    {/* <Link size="small" to="https://twitter.com/steida"> */}
+    {/* <Link to="https://twitter.com/steida" text={{ size: 'small' }}>
       steida
-    </Link>
+    </Link> */}
   </Style>
 );
+
+
+// const Footer = () => (
+//   <Style>
+//     <Text size="small">
+//       <FormattedMessage {...messages.madeByHtml} />
+//     </Text>
+//     {'\u00a0'}
+//     {/* <Link size="small" to="https://twitter.com/steida"> */}
+//     {/* <Link to="https://twitter.com/steida" text={{ size: 'small' }}>
+//       steida
+//     </Link> */}
+//   </Style>
+// );
 
 export default Footer;
