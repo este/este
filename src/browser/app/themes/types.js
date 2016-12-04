@@ -3,17 +3,15 @@ import type { OpenColor } from './openColor';
 
 // Theme types.
 
-export type Size = 'extraSmall' | 'small' | 'medium' | 'big' | 'extraBig';
+export type Size = $Keys<Sizes>;
 
-// TODO: It should be possible to reuse Size type, but { [size: Size]: number }
-// doesn't enforce keys on the theme, I don't know why. Investigate.
-export type Sizes = {
+export type Sizes = {|
   extraSmall: number,
   small: number,
   medium: number,
   big: number,
   extraBig: number,
-};
+|};
 
 export type Theme = {
   fontFamily: string,
@@ -21,7 +19,7 @@ export type Theme = {
   lineHeight: number,
   bold: number,
   sizes: Sizes,
-  colors: {
+  colors: {|
     primary: string,
     secondary: string,
     info: string,
@@ -31,7 +29,7 @@ export type Theme = {
     black: string,
     white: string,
     open: OpenColor,
-  },
+  |},
   border: {
     radius: number,
     color: string,
@@ -45,7 +43,7 @@ export type Theme = {
 };
 
 // Style types. Taken from cssreference.io.
-// TODO: Improve it. Consider adding Fela custom syntax. Move to separate file.
+// TODO: Improve it. Consider adding Fela custom syntax and moving to own file.
 
 export type TextTransform =
     'none'
@@ -349,7 +347,7 @@ export type Style = {
   overflowWrap?: string,
   overflowX?: string,
   overflowY?: string,
-  padding?: string,
+  padding?: number | string,
   paddingBlockEnd?: string,
   paddingBlockStart?: string,
   paddingBottom?: number | string,
