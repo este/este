@@ -17,20 +17,21 @@ export type Deps = {
 };
 
 // Models
+// flowtype.org/docs/objects.html#exact-object-types
 
-export type Todo = {
+export type Todo = {|
   completed: boolean,
   createdAt: number,
   id: string,
   title: string,
-};
+|};
 
-export type User = {
+export type User = {|
   displayName: string,
   email: ?string,
   id: string,
   photoURL: ?string,
-};
+|};
 
 // Reducers
 
@@ -105,7 +106,6 @@ export type Action =
   | { type: 'APP_START' }
   | { type: 'APP_STARTED' }
   | { type: 'APP_STOP' }
-  | { type: 'APP_STORAGE_LOADED' }
   | { type: 'CLEAR_ALL_COMPLETED_TODOS' }
   | { type: 'CLEAR_ALL_TODOS' }
   | { type: 'DELETE_TODO', payload: { id: string } }

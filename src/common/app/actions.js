@@ -32,11 +32,6 @@ export const appStop = (): Action => ({
   type: 'APP_STOP',
 });
 
-export const appStorageLoaded = (state: Object): Action => ({
-  type: 'APP_STORAGE_LOADED',
-  payload: { state },
-});
-
 // TODO: Observable type.
 const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)
