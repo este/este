@@ -11,10 +11,14 @@ import {
   // View,
 } from '../app/components';
 
+// a mozna to pujde na props komponenty, a pak budu moci mit Text small
+
 const HomePage = () => (
-  <Box>
+  <Box padding="big" textAlign="center">
     <Title message="Este.js" />
-    <Text transform="none" />
+    <Text size="extraBig" transform="uppercase">
+      Hura
+    </Text>
   </Box>
   // <View>
   //   <Title message="Este.js" />

@@ -26,11 +26,9 @@ const Footer = () => (
       <FormattedMessage {...messages.madeByHtml} />
     </Text>
     {'\u00a0'}
-    <Link to="/"><Text size="small">steida</Text></Link>
-    {/* <Link size="small" to="https://twitter.com/steida"> */}
-    {/* <Link to="https://twitter.com/steida" text={{ size: 'small' }}>
+    <Link size="small" to="https://twitter.com/steida">
       steida
-    </Link> */}
+    </Link>
   </Style>
 );
 
