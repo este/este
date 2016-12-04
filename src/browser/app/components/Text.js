@@ -1,17 +1,21 @@
 /* @flow */
-import type { Exact, Size, TextTransform, Theme } from '../themes/types';
+import type { Color, Exact, Size, TextTransform, Theme } from '../themes/types';
 import React from 'react';
 import style from './style';
 
+// Why not <Text small underline>? For two reasons:
+//  - It's better to be explicit than smart. What about <Text small big>? Yes.
+//  - Flow 0.35 doesn't support that, & { [size: Size]: boolean } doesn't work.
+
 export type TextProps = {
   bold?: boolean,
-  inverted?: boolean,
+  color?: Color,
   size?: Size,
   transform?: TextTransform,
 };
 
 export const textStyle = (theme: Theme, props: TextProps) => ({
-  color: props.inverted ? theme.colors.white : theme.colors.black,
+  color: props.color ? theme.colors[props.color] : theme.colors.black,
   fontFamily: theme.fontFamily,
   fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
   fontWeight: props.bold ? theme.bold : 'normal',

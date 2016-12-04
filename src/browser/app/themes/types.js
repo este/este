@@ -13,6 +13,19 @@ export type Sizes = {
 
 export type Size = $Keys<Sizes>;
 
+type Colors = {
+  primary: string,
+  secondary: string,
+  info: string,
+  success: string,
+  warning: string,
+  error: string,
+  black: string,
+  white: string,
+};
+
+export type Color = $Keys<Colors>;
+
 // Theme types.
 // We can't use Exact<T> because it breaks autocomplete.
 // We can't use native exact type because it doesn't support spread nor intersection.
@@ -23,17 +36,7 @@ export type Theme = {
   lineHeight: number,
   bold: number,
   sizes: Sizes,
-  colors: {
-    primary: string,
-    secondary: string,
-    info: string,
-    success: string,
-    warning: string,
-    error: string,
-    black: string,
-    white: string,
-    open: OpenColor,
-  },
+  colors: Colors & { open: OpenColor },
   border: {
     radius: number,
     color: string,

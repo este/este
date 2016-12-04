@@ -15,7 +15,7 @@ type LinkProps = {
 
 const linkStyle = (theme: Theme, props: LinkProps) => ({
   ...textStyle(theme, props),
-  color: props.inverted ? theme.colors.white : theme.colors.primary,
+  color: props.color ? theme.colors[props.color] : theme.colors.primary,
   textDecoration: 'none',
   ':hover': {
     textDecoration: 'underline',

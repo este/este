@@ -13,7 +13,7 @@ type HeaderLinkProps = {
 };
 
 const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
-  <Link bold inverted exactly={exactly} to={to}>
+  <Link bold color="white" exactly={exactly} to={to}>
     <FormattedMessage {...message} />
   </Link>
 );

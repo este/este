@@ -6,7 +6,7 @@ import {
   // Link,
   // PageHeader,
   // SwitchTheme,
-  Text,
+  // Text,
   Title,
   // View,
 } from '../app/components';
@@ -16,9 +16,10 @@ import {
 const HomePage = () => (
   <Box padding="big" textAlign="center">
     <Title message="Este.js" />
-    <Text size="extraBig" transform="uppercase">
+    {/* <Text size="extraBig" transform="uppercase"> */}
+    {/* <Text size="extraBig" transform="lowercase">
       Hura
-    </Text>
+    </Text> */}
   </Box>
   // <View>
   //   <Title message="Este.js" />
