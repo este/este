@@ -4,6 +4,7 @@
 export { ThemeProvider } from 'react-fela';
 export { default as Box } from './Box';
 export { default as Heading } from './Heading';
+export { default as Image } from './Image';
 export { default as Link } from './Link';
 export { default as PageHeader } from './PageHeader';
 export { default as Paragraph } from './Paragraph';
