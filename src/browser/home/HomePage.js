@@ -6,7 +6,7 @@ import {
   // Link,
   // PageHeader,
   // SwitchTheme,
-  Paragraph,
+  // Paragraph,
   Text,
   Title,
   // View,
@@ -19,8 +19,10 @@ const HomePage = () => (
     <Box
       margin="auto"
       width="400"
+      padding="small"
+      border="top"
+      borderColor="error"
       textAlign="center"
-      style={{ border: 'solid 1px red' }}
     >fok</Box>
   </Box>
   // <View>

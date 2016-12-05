@@ -3,6 +3,8 @@ import type { OpenColor } from './openColor';
 
 export type { Exact } from '../../../common/types';
 
+export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
+
 export type Sizes = {
   extraSmall: number,
   small: number,
@@ -22,6 +24,7 @@ type Colors = {
   error: string,
   black: string,
   white: string,
+  gray: string,
 };
 
 export type Color = $Keys<Colors>;
@@ -38,8 +41,8 @@ export type Theme = {
   sizes: Sizes,
   colors: Colors & { open: OpenColor },
   border: {
-    radius: number,
-    color: string,
+    radius: number | string,
+    width: number | string,
   },
   states: {
     disabled: {
@@ -211,7 +214,7 @@ export type Style = {
   borderLeftColor?: string,
   borderLeftStyle?: string,
   borderLeftWidth?: string,
-  borderRadius?: string,
+  borderRadius?: number | string,
   borderRight?: string,
   borderRightColor?: string,
   borderRightStyle?: string,

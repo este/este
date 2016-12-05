@@ -1,9 +1,11 @@
 /* @flow */
 import type {
+  Color,
   Exact,
   Size,
   Style as StyleType,
   TextAlign,
+  TopBottomLeftRight,
 } from '../themes/types';
 import React from 'react';
 import style from './style';
@@ -34,6 +36,9 @@ type BoxProps = {
   minWidth?: number | string,
   minHeight?: number | string,
   style?: StyleType,
+  backgroundColor?: Color,
+  border?: true | TopBottomLeftRight,
+  borderColor?: Color,
 };
 
 const directionMapping = {
@@ -73,6 +78,19 @@ const mapPropToStyle = (prop, value: any, theme) => {
     case 'minWidth':
     case 'minHeight':
       return { [prop]: value };
+    case 'backgroundColor':
+      return { backgroundColor: theme.colors[value] };
+    case 'border': {
+      const borderProp = value === true
+        ? 'border'
+        : `border${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+      return {
+        [borderProp]: `solid ${theme.border.width}px ${theme.colors.gray}`,
+        borderRadius: theme.border.radius,
+      };
+    }
+    case 'borderColor':
+      return { borderColor: theme.colors[value] };
     default:
       return undefined;
   }

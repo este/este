@@ -30,11 +30,12 @@ const theme: Theme = {
     error: '#f52',
     black: openColor.gray8,
     white: '#fff',
+    gray: openColor.gray4,
     open: openColor,
   },
   border: {
     radius: 2,
-    color: 'rgba(0, 0, 0, .25)',
+    width: 1,
   },
   states: {
     disabled: {

@@ -12,7 +12,7 @@ const messages = defineMessages({
 
 const Style = style(theme => ({
   alignItems: 'center',
-  borderTop: `solid 1px ${theme.border.color}`,
+  borderTop: `solid 1px ${theme.colors.gray}`,
   display: 'flex',
   flexWrap: 'wrap',
   marginTop: theme.sizes.big,
