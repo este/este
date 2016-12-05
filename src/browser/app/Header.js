@@ -20,7 +20,7 @@ const Style = style(theme => ({
     marginLeft: theme.sizes.small,
     marginRight: theme.sizes.small,
   },
-}), 'header');
+}));
 
 type HeaderLinkProps = {
   exactly?: boolean,

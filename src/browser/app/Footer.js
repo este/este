@@ -18,7 +18,7 @@ const Style = style(theme => ({
   marginTop: theme.sizes.big,
   paddingBottom: theme.sizes.big,
   paddingTop: theme.sizes.big,
-}), 'footer');
+}));
 
 const Footer = () => (
   <Style>
