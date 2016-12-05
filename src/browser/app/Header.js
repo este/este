@@ -3,8 +3,24 @@ import type { State, User } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
-import { Link, Toolbar } from '../app/components';
+import { Link, style } from '../app/components';
 import { connect } from 'react-redux';
+
+const Style = style(theme => ({
+  alignItems: 'center',
+  backgroundColor: theme.colors.primary,
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: theme.sizes.medium,
+  paddingBottom: theme.sizes.medium,
+  paddingLeft: theme.sizes.small,
+  paddingRight: theme.sizes.small,
+  paddingTop: theme.sizes.medium,
+  '> *': {
+    marginLeft: theme.sizes.small,
+    marginRight: theme.sizes.small,
+  },
+}), 'header');
 
 type HeaderLinkProps = {
   exactly?: boolean,
@@ -23,7 +39,7 @@ type HeaderProps = {
 };
 
 const Header = ({ viewer }: HeaderProps) => (
-  <Toolbar>
+  <Style>
     <HeaderLink exactly to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
@@ -34,7 +50,7 @@ const Header = ({ viewer }: HeaderProps) => (
     {!viewer &&
       <HeaderLink to="/signin" message={linksMessages.signIn} />
     }
-  </Toolbar>
+  </Style>
 );
 
 export default connect(
