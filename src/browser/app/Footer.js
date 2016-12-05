@@ -18,7 +18,7 @@ const Style = style(theme => ({
   marginTop: theme.sizes.big,
   paddingBottom: theme.sizes.big,
   paddingTop: theme.sizes.big,
-}));
+}), 'footer');
 
 const Footer = () => (
   <Style>
@@ -31,19 +31,5 @@ const Footer = () => (
     </Link>
   </Style>
 );
-
-
-// const Footer = () => (
-//   <Style>
-//     <Text size="small">
-//       <FormattedMessage {...messages.madeByHtml} />
-//     </Text>
-//     {'\u00a0'}
-//     {/* <Link size="small" to="https://twitter.com/steida"> */}
-//     {/* <Link to="https://twitter.com/steida" text={{ size: 'small' }}>
-//       steida
-//     </Link> */}
-//   </Style>
-// );
 
 export default Footer;
