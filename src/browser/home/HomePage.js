@@ -6,20 +6,22 @@ import {
   // Link,
   // PageHeader,
   // SwitchTheme,
-  // Text,
+  Paragraph,
+  Text,
   Title,
   // View,
 } from '../app/components';
 
-// a mozna to pujde na props komponenty, a pak budu moci mit Text small
-
 const HomePage = () => (
-  <Box padding="big" textAlign="center">
+  <Box>
     <Title message="Este.js" />
-    {/* <Text size="extraBig" transform="uppercase"> */}
-    {/* <Text size="extraBig" transform="lowercase">
-      Hura
-    </Text> */}
+    <Text size="big">fok</Text>
+    <Box
+      margin="auto"
+      width="400"
+      textAlign="center"
+      style={{ border: 'solid 1px red' }}
+    >fok</Box>
   </Box>
   // <View>
   //   <Title message="Este.js" />

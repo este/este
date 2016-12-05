@@ -22,7 +22,6 @@ const theme: Theme = {
     extraBig: 64,
   },
   colors: {
-    // TODO: Use open colors.
     primary: '#08e',
     secondary: '#888',
     info: '#08e',

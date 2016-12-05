@@ -1,17 +1,24 @@
 /* @flow */
-import type { Exact, Size, TextAlign } from '../themes/types';
+import type {
+  Exact,
+  Size,
+  Style as StyleType,
+  TextAlign,
+} from '../themes/types';
 import React from 'react';
 import style from './style';
 import warning from 'warning';
 
-export type BoxProps = {
-  margin?: Size,
-  marginBottom?: Size,
-  marginHorizontal?: Size,
-  marginLeft?: Size,
-  marginRight?: Size,
-  marginTop?: Size,
-  marginVertical?: Size,
+type MarginSize = Size | 'auto';
+
+type BoxProps = {
+  margin?: MarginSize,
+  marginBottom?: MarginSize,
+  marginHorizontal?: MarginSize,
+  marginLeft?: MarginSize,
+  marginRight?: MarginSize,
+  marginTop?: MarginSize,
+  marginVertical?: MarginSize,
   padding?: Size,
   paddingBottom?: Size,
   paddingHorizontal?: Size,
@@ -20,6 +27,13 @@ export type BoxProps = {
   paddingTop?: Size,
   paddingVertical?: Size,
   textAlign?: TextAlign,
+  width?: number | string,
+  height?: number | string,
+  maxWidth?: number | string,
+  maxHeight?: number | string,
+  minWidth?: number | string,
+  minHeight?: number | string,
+  style?: StyleType,
 };
 
 const directionMapping = {
@@ -41,17 +55,24 @@ const mapPropToStyle = (prop, value: any, theme) => {
     case 'paddingLeft':
     case 'paddingRight':
     case 'paddingTop':
-      return { [prop]: theme.sizes[value] };
+      return { [prop]: theme.sizes[value] || 'auto' };
     case 'marginHorizontal':
     case 'marginVertical':
     case 'paddingHorizontal':
     case 'paddingVertical': {
-      const size = theme.sizes[value];
-      const [x1, x2] = directionMapping[prop];
-      return { [x1]: size, [x2]: size };
+      const size = theme.sizes[value] || 'auto';
+      const [d1, d2] = directionMapping[prop];
+      return { [d1]: size, [d2]: size };
     }
     case 'textAlign':
       return { textAlign: value };
+    case 'width':
+    case 'height':
+    case 'maxWidth':
+    case 'maxHeight':
+    case 'minWidth':
+    case 'minHeight':
+      return { [prop]: value };
     default:
       return undefined;
   }

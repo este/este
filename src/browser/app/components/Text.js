@@ -1,5 +1,12 @@
 /* @flow */
-import type { Color, Exact, Size, TextTransform, Theme } from '../themes/types';
+import type {
+  Color,
+  Exact,
+  Size,
+  Style as StyleType,
+  TextTransform,
+  Theme,
+} from '../themes/types';
 import React from 'react';
 import style from './style';
 
@@ -11,6 +18,7 @@ export type TextProps = {
   bold?: boolean,
   color?: Color,
   size?: Size,
+  style?: StyleType,
   transform?: TextTransform,
 };
 
