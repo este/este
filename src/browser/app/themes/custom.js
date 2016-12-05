@@ -8,8 +8,8 @@ const theme: Theme = {
     extraSmall: 10,
     small: 12,
     medium: 13,
-    big: 18,
-    extraBig: 22,
+    big: 20,
+    extraBig: 28,
   },
   lineHeight: 2,
   colors: {
