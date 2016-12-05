@@ -39,6 +39,7 @@ type BoxProps = {
   backgroundColor?: Color,
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
+  borderWidth?: string,
 };
 
 const directionMapping = {
@@ -48,7 +49,7 @@ const directionMapping = {
   paddingVertical: ['paddingTop', 'paddingBottom'],
 };
 
-const mapPropToStyle = (prop, value: any, theme) => {
+const mapPropToStyle = (prop, value: any, theme, props) => {
   switch (prop) {
     case 'margin':
     case 'marginBottom':
@@ -80,17 +81,22 @@ const mapPropToStyle = (prop, value: any, theme) => {
       return { [prop]: value };
     case 'backgroundColor':
       return { backgroundColor: theme.colors[value] };
-    case 'border': {
+    case 'border':
+    case 'borderColor':
+    case 'borderWidth': {
+      if (prop !== 'border') return null;
       const borderProp = value === true
         ? 'border'
         : `border${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+      const width = props.borderWidth || theme.border.width;
+      const color = props.borderColor
+        ? theme.colors[props.borderColor]
+        : theme.colors.gray;
       return {
-        [borderProp]: `solid ${theme.border.width}px ${theme.colors.gray}`,
+        [borderProp]: `solid ${width}px ${color}`,
         borderRadius: theme.border.radius,
       };
     }
-    case 'borderColor':
-      return { borderColor: theme.colors[value] };
     default:
       return undefined;
   }
@@ -105,7 +111,8 @@ const Box = style((theme, props: BoxProps) => Object
       warning(false, 'Prop %s in Box has null or undefined value.', prop);
       return style;
     }
-    const propStyle = mapPropToStyle(prop, value, theme);
+    const propStyle = mapPropToStyle(prop, value, theme, props);
+    if (propStyle === null) return style;
     if (propStyle === undefined) {
       warning(false, 'Unknown prop %s in Box.', prop);
       return style;
