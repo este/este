@@ -17,6 +17,7 @@ import style from './style';
 export type TextProps = {
   bold?: boolean,
   color?: Color,
+  display?: 'block' | 'inline' | 'inline-block',
   size?: Size,
   style?: StyleType,
   transform?: TextTransform,
@@ -24,6 +25,7 @@ export type TextProps = {
 
 export const textStyle = (theme: Theme, props: TextProps) => ({
   color: props.color ? theme.colors[props.color] : theme.colors.black,
+  display: props.display || 'inline',
   fontFamily: theme.fontFamily,
   fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
   fontWeight: props.bold ? theme.bold : 'normal',
@@ -31,7 +33,7 @@ export const textStyle = (theme: Theme, props: TextProps) => ({
   textTransform: props.transform || 'none',
 });
 
-const Style = style(textStyle, 'span'); // span, because p can't be nested
+const Style = style(textStyle);
 
 const Text = (props: Exact<TextProps>) => <Style {...props} />;
 
