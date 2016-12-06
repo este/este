@@ -1,27 +1,22 @@
 /* @flow */
-import type { Style, Theme } from '../themes/types';
+import type { BrowserStyle, Style, Theme } from '../themes/types';
 import React from 'react';
 import { createComponent } from 'react-fela';
 
-// TODO:
-//  Enforce Exact<PropType> on Component props somehow.
-//  Text.style(props) should by typed or autocompleted at least.
-//  Text.Props like React.Element, how React does it?
-//  Autocomplete for props.
+// TODO: It's almost perfect, still:
+//   - type somehow .style fn
+//   - Is it possible to pass Props type to .Props? How React does React.Element?
 
-type StyleFunction = <PropsType>(
-  rule: Style | (props: PropsType, theme: Theme) => Style,
+const style = <Props>(
+  rule: BrowserStyle | (props: Props, theme: Theme) => BrowserStyle,
   type?: string | Function,
   passProps?: Array<string>,
-) => (props: PropsType) => React.Element<any>;
-
-const style: StyleFunction = (rule, type, passProps) => {
-  const styleComponent = props => typeof rule === 'function'
-    ? rule(props, props.theme)
-    : rule;
-  const StyleComponent = createComponent(styleComponent, type, passProps);
+): Style<Props> => {
+  const componentStyle = (props) =>
+    typeof rule === 'function' ? rule(props, props.theme) : rule;
+  const StyleComponent = createComponent(componentStyle, type, passProps);
   const Component = (props: any) => <StyleComponent {...props} />;
-  Component.style = styleComponent;
+  Component.style = componentStyle;
   return Component;
 };
 

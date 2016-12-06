@@ -1,19 +1,14 @@
 /* @flow */
+import type { Exact } from '../../../common/types';
 import type { OpenColor } from './openColor';
 
-export type { Exact } from '../../../common/types';
-
-export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
-
-export type Sizes = {
+type Sizes = {|
   extraSmall: number,
   small: number,
   medium: number,
   big: number,
   extraBig: number,
-};
-
-export type Size = $Keys<Sizes>;
+|};
 
 type Colors = {
   primary: string,
@@ -27,13 +22,12 @@ type Colors = {
   gray: string,
 };
 
-export type Color = $Keys<Colors>;
-
-// Theme types.
 // We can't use Exact<T> because it breaks autocomplete.
-// We can't use native exact type because it doesn't support spread nor intersection.
-// TODO: Wait for flow fix.
-export type Theme = {
+// We can't use native exact type because it doesn't support spread spread.
+// TODO: Fix it, once Flow will support object spread on exact type.
+// Aha, ale to dela jen custom, hmm
+//
+export type Theme = {|
   fontFamily: string,
   fontSizes: Sizes,
   lineHeight: number,
@@ -50,7 +44,12 @@ export type Theme = {
       opacity: number,
     },
   },
-};
+|};
+
+export type Style<P> = (props: Exact<P>) => React$Element<any>;
+export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
+export type Size = $Keys<Sizes>;
+export type Color = $Keys<Colors>;
 
 // Style types. Taken from cssreference.io.
 // TODO: Improve it. Consider adding Fela custom syntax and moving to own file.
@@ -150,7 +149,7 @@ export type TextDecoration =
 //  2) Use String('foo') syntax to bypass Flow checking, which is ugly.
 //    [String('@media (min-height: 200px)')]: { textDecoration: 'line-through' },
 // For now, we can live with plain Object checking, which is good enough.
-export type Style = {|
+export type BrowserStyle = {|
   /* DOM CSS Properties */
   alignContent?: AlignContent,
   alignItems?: AlignItems,

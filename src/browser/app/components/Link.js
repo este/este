@@ -1,4 +1,5 @@
 /* @flow */
+import type { Style } from '../themes/types';
 import type { TextProps } from './Text';
 import React from 'react';
 import Text from './Text';
@@ -32,7 +33,7 @@ const RouterLink = createLink(ReactRouterLink, [
 const isExternalLink = to => to.includes('://');
 const routerLinkActiveStyle = { textDecoration: 'underline' };
 
-const Link = (props: LinkProps) => (
+const Link: Style<LinkProps> = (props) => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

@@ -35,7 +35,7 @@ const Container = style((props, theme) => ({
 }));
 
 const Page = style({
-  flex: 1, // Flex 1 on the page makes footer sticky.
+  flex: 1, // make footer sticky
 });
 
 type AppProps = {
