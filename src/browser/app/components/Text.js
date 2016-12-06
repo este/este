@@ -1,12 +1,5 @@
 /* @flow */
-import type {
-  Color,
-  Exact,
-  Size,
-  Style as StyleType,
-  TextTransform,
-  Theme,
-} from '../themes/types';
+import type { Color, Size, Style, TextTransform } from '../themes/types';
 import React from 'react';
 import style from './style';
 
@@ -19,11 +12,11 @@ export type TextProps = {
   color?: Color,
   display?: 'block' | 'inline' | 'inline-block',
   size?: Size,
-  style?: StyleType,
+  style?: Style,
   transform?: TextTransform,
 };
 
-export const textStyle = (theme: Theme, props: TextProps) => ({
+const Text = style((props: TextProps, theme) => ({
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.fontFamily,
@@ -31,10 +24,6 @@ export const textStyle = (theme: Theme, props: TextProps) => ({
   fontWeight: props.bold ? theme.bold : 'normal',
   lineHeight: theme.lineHeight,
   textTransform: props.transform || 'none',
-});
-
-const Style = style(textStyle);
-
-const Text = (props: Exact<TextProps>) => <Style {...props} />;
+}));
 
 export default Text;

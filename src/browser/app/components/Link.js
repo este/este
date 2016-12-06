@@ -1,41 +1,38 @@
 /* @flow */
-import type { Exact, Theme } from '../themes/types';
 import type { TextProps } from './Text';
 import React from 'react';
+import Text from './Text';
 import style from './style';
 import { Link as ReactRouterLink } from 'react-router';
-import { textStyle } from './Text';
 
-type LinkProps = {
+type LinkProps = TextProps & {
   download?: boolean,
   exactly?: boolean,
   target?: string,
   to: string,
-} & TextProps;
+};
 
-const linkStyle = (theme: Theme, props: LinkProps) => ({
-  ...textStyle(theme, props),
+const createLink = (tag, passProps) => style((props: LinkProps, theme) => ({
+  ...Text.style(props),
   color: props.color ? theme.colors[props.color] : theme.colors.primary,
   textDecoration: 'none',
-  ':hover': {
-    textDecoration: 'underline',
-  },
-});
+  // ':hover': {
+  //   textDecoration: 'underline',
+  // },
+}), tag, passProps);
 
-// TODO: Should be in theme, but wait for found router.
-const routerLinkActiveStyle = { textDecoration: 'underline' };
-
-const AnchorLink = style(linkStyle, 'a', [
+const AnchorLink = createLink('a', [
   'download', 'href', 'target',
 ]);
 
-const RouterLink = style(linkStyle, ReactRouterLink, [
+const RouterLink = createLink(ReactRouterLink, [
   'activeOnlyWhenExact', 'activeStyle', 'to',
 ]);
 
 const isExternalLink = to => to.includes('://');
+const routerLinkActiveStyle = { textDecoration: 'underline' };
 
-const Link = (props: Exact<LinkProps>) => (
+const Link = (props: LinkProps) => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

@@ -6,22 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import { Link, style } from '../app/components';
 import { connect } from 'react-redux';
 
-const Style = style(theme => ({
-  alignItems: 'center',
-  backgroundColor: theme.colors.primary,
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginTop: theme.sizes.medium,
-  paddingBottom: theme.sizes.medium,
-  paddingLeft: theme.sizes.small,
-  paddingRight: theme.sizes.small,
-  paddingTop: theme.sizes.medium,
-  '> *': {
-    marginLeft: theme.sizes.small,
-    marginRight: theme.sizes.small,
-  },
-}));
-
 type HeaderLinkProps = {
   exactly?: boolean,
   to: string,
@@ -37,6 +21,22 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
 type HeaderProps = {
   viewer: ?User,
 };
+
+const Style = style((props, theme) => ({
+  alignItems: 'center',
+  backgroundColor: theme.colors.primary,
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: theme.sizes.medium,
+  paddingBottom: theme.sizes.medium,
+  paddingLeft: theme.sizes.small,
+  paddingRight: theme.sizes.small,
+  paddingTop: theme.sizes.medium,
+  // '> *': {
+  //   marginLeft: theme.sizes.small,
+  //   marginRight: theme.sizes.small,
+  // },
+}));
 
 const Header = ({ viewer }: HeaderProps) => (
   <Style>

@@ -150,7 +150,7 @@ export type TextDecoration =
 //  2) Use String('foo') syntax to bypass Flow checking, which is ugly.
 //    [String('@media (min-height: 200px)')]: { textDecoration: 'line-through' },
 // For now, we can live with plain Object checking, which is good enough.
-export type Style = {
+export type Style = {|
   /* DOM CSS Properties */
   alignContent?: AlignContent,
   alignItems?: AlignItems,
@@ -445,4 +445,4 @@ export type Style = {
   wordWrap?: string,
   writingMode?: string,
   zIndex?: number,
-};
+|};
