@@ -1,5 +1,5 @@
 /* @flow */
-import type { BrowserStyle, Style, Theme } from '../themes/types';
+import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
 
 const createComponentRule = (rule) => (props) => {
@@ -13,15 +13,15 @@ const createComponentRule = (rule) => (props) => {
   return { ...spread, ...style };
 };
 
-const style = <Props>(
+const styled = <Props>(
   rule: BrowserStyle | (props: Props, theme: Theme) => BrowserStyle,
   type?: string | Function,
   passProps?: Array<string>,
-): Style<Props> => {
+): Styled<Props> => {
   const componentRule = createComponentRule(rule);
   const Component = createComponent(componentRule, type, passProps);
   Component.rule = componentRule;
   return Component;
 };
 
-export default style;
+export default styled;

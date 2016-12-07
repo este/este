@@ -10,7 +10,7 @@ import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
 // import { Miss } from 'react-router';
-import { ThemeProvider, style } from './components';
+import { ThemeProvider, styled } from './components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const Container = style((props, theme) => ({
+const Container = styled((props, theme) => ({
   display: 'flex',
   flexDirection: 'column',
   margin: 'auto',
@@ -34,7 +34,7 @@ const Container = style((props, theme) => ({
   paddingRight: theme.sizes.medium,
 }));
 
-const Page = style({
+const Page = styled({
   flex: 1, // make footer sticky
 });
 

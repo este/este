@@ -2,11 +2,11 @@
 import type {
   Color,
   Size,
-  Style,
+  Styled,
   TextAlign,
   TopBottomLeftRight,
 } from '../themes/types';
-import style from './style';
+import styled from './styled';
 import warning from 'warning';
 
 type MarginSize = Size | 'auto';
@@ -99,7 +99,7 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
   }
 };
 
-const Box: Style<BoxProps> = style((props, theme) => Object
+const Box: Styled<BoxProps> = styled((props, theme) => Object
   .keys(props)
   .reduce((style, prop) => {
     if (prop === 'theme') return style;

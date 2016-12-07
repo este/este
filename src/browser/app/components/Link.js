@@ -1,9 +1,9 @@
 /* @flow */
-import type { Style } from '../themes/types';
+import type { Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import React from 'react';
 import Text from './Text';
-import style from './style';
+import styled from './styled';
 import { Link as ReactRouterLink } from 'react-router';
 
 type LinkProps = TextProps & {
@@ -13,7 +13,7 @@ type LinkProps = TextProps & {
   to: string,
 };
 
-const createLink = (tag, passProps) => style((props: LinkProps, theme) => ({
+const createLink = (tag, passProps) => styled((props: LinkProps, theme) => ({
   $spread: Text,
   color: props.color ? theme.colors[props.color] : theme.colors.primary,
   textDecoration: 'none',
@@ -33,7 +33,7 @@ const RouterLink = createLink(ReactRouterLink, [
 const isExternalLink = to => to.includes('://');
 const routerLinkActiveStyle = { textDecoration: 'underline' };
 
-const Link: Style<LinkProps> = (props) => (
+const Link: Styled<LinkProps> = (props) => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

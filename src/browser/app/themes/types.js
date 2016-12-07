@@ -48,7 +48,7 @@ export type Theme = {|
 type Exact<T> = T & $Shape<T>;
 export type Color = $Keys<Colors>;
 export type Size = $Keys<Sizes>;
-export type Style<Props> = (props: Exact<Props>) => React$Element<any>;
+export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Style types. Taken from cssreference.io.

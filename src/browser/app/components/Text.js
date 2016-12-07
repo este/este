@@ -1,6 +1,12 @@
 /* @flow */
-import type { Color, Size, Style, TextDecoration, TextTransform } from '../themes/types';
-import style from './style';
+import type {
+  Color,
+  Size,
+  Styled,
+  TextDecoration,
+  TextTransform,
+} from '../themes/types';
+import styled from './styled';
 
 export type TextProps = {
   bold?: boolean,
@@ -10,7 +16,7 @@ export type TextProps = {
   transform?: TextTransform,
 };
 
-const Text: Style<TextProps> = style((props, theme) => ({
+const Text: Styled<TextProps> = styled((props, theme) => ({
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   fontFamily: theme.fontFamily,
   fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
