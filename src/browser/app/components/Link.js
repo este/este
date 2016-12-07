@@ -14,12 +14,12 @@ type LinkProps = TextProps & {
 };
 
 const createLink = (tag, passProps) => style((props: LinkProps, theme) => ({
-  ...Text.style(props),
+  $spread: Text,
   color: props.color ? theme.colors[props.color] : theme.colors.primary,
   textDecoration: 'none',
-  // ':hover': {
-  //   textDecoration: 'underline',
-  // },
+  ':hover': {
+    textDecoration: 'underline',
+  },
 }), tag, passProps);
 
 const AnchorLink = createLink('a', [

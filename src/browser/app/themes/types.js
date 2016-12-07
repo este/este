@@ -10,6 +10,7 @@ type Sizes = {|
   extraBig: number,
 |};
 
+
 type Colors = {
   primary: string,
   secondary: string,
@@ -22,11 +23,6 @@ type Colors = {
   gray: string,
 };
 
-// We can't use Exact<T> because it breaks autocomplete.
-// We can't use native exact type because it doesn't support spread spread.
-// TODO: Fix it, once Flow will support object spread on exact type.
-// Aha, ale to dela jen custom, hmm
-//
 export type Theme = {|
   fontFamily: string,
   fontSizes: Sizes,
@@ -34,25 +30,25 @@ export type Theme = {|
   bold: number,
   sizes: Sizes,
   colors: Colors & { open: OpenColor },
-  border: {
+  border: {|
     radius: number | string,
     width: number | string,
-  },
+  |},
   states: {
-    disabled: {
+    disabled: {|
       cursor: string,
       opacity: number,
-    },
+    |},
   },
 |};
 
-export type Style<P> = (props: Exact<P>) => React$Element<any>;
-export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
-export type Size = $Keys<Sizes>;
 export type Color = $Keys<Colors>;
+export type Size = $Keys<Sizes>;
+export type Style<Props> = (props: Exact<Props>) => React$Element<any>;
+export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Style types. Taken from cssreference.io.
-// TODO: Improve it. Consider adding Fela custom syntax and moving to own file.
+// TODO: Improve it.
 
 export type TextTransform =
     'none'
@@ -140,17 +136,21 @@ export type TextDecoration =
   | 'line-through'
   ;
 
-// Now Style can't check misspelled selectors like colour instead of color.
-// Checking misspelled selectors is possible even with Fela, but only for known
-// constants like `:hover`, not for '@media (min-height: 200px)'.
-// type FelaStyleKey = ':active' | ':hover'; Then [FelaStyleKey]: Style,
-// We have these options:
-//  1) Remove magic strings from Fela
-//  2) Use String('foo') syntax to bypass Flow checking, which is ugly.
-//    [String('@media (min-height: 200px)')]: { textDecoration: 'line-through' },
-// For now, we can live with plain Object checking, which is good enough.
 export type BrowserStyle = {|
+  // Custom API.
+
+  // $spread, because Flow doesn't support '...Text.style(props)' on exact type.
+  $spread?: Function | Array<Function>,
+    // Fela static API.
+  ':active'?: BrowserStyle,
+  ':first-child'?: BrowserStyle,
+  ':focus'?: BrowserStyle,
+  ':hover'?: BrowserStyle,
+  ':link'?: BrowserStyle,
+  ':visited'?: BrowserStyle,
+
   /* DOM CSS Properties */
+
   alignContent?: AlignContent,
   alignItems?: AlignItems,
   alignSelf?: AlignSelf,
