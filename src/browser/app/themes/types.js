@@ -1,5 +1,4 @@
 /* @flow */
-import type { Exact } from '../../../common/types';
 import type { OpenColor } from './openColor';
 
 type Sizes = {|
@@ -42,6 +41,11 @@ export type Theme = {|
   },
 |};
 
+// Exact is a temp workaround until native exact type will fix spread and intersection.
+// flowtype.org/docs/objects.html#exact-object-types
+// github.com/facebook/flow/issues/2405#issuecomment-256339492
+// github.com/facebook/flow/issues/2626
+type Exact<T> = T & $Shape<T>;
 export type Color = $Keys<Colors>;
 export type Size = $Keys<Sizes>;
 export type Style<Props> = (props: Exact<Props>) => React$Element<any>;
@@ -141,7 +145,7 @@ export type BrowserStyle = {|
 
   // $spread, because Flow doesn't support '...Text.style(props)' on exact type.
   $spread?: Function | Array<Function>,
-    // Fela static API.
+  // Fela static API.
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,
