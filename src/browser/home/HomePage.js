@@ -5,7 +5,7 @@ import {
   Box,
   Image,
   Link,
-  PageHeader,
+  // PageHeader,
   Title,
 } from '../app/components';
 

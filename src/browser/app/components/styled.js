@@ -4,7 +4,7 @@ import { createComponent } from 'react-fela';
 
 const createComponentRule = (rule) => (props) => {
   const { $spread, ...style } = typeof rule === 'function'
-    ? rule(props, props.theme)
+    ? rule(props.theme, props)
     : rule;
   if (!$spread) return style;
   const spread = []
@@ -14,7 +14,7 @@ const createComponentRule = (rule) => (props) => {
 };
 
 const styled = <Props>(
-  rule: BrowserStyle | (props: Props, theme: Theme) => BrowserStyle,
+  rule: BrowserStyle | (theme: Theme, props: Props) => BrowserStyle,
   type?: string | Function,
   passProps?: Array<string>,
 ): Styled<Props> => {

@@ -1,14 +1,6 @@
 /* @flow */
+import type { Exact } from '../../../common/types';
 import type { OpenColor } from './openColor';
-
-type Sizes = {|
-  extraSmall: number,
-  small: number,
-  medium: number,
-  big: number,
-  extraBig: number,
-|};
-
 
 type Colors = {
   primary: string,
@@ -21,6 +13,14 @@ type Colors = {
   white: string,
   gray: string,
 };
+
+type Sizes = {|
+  extraSmall: number,
+  small: number,
+  medium: number,
+  big: number,
+  extraBig: number,
+|};
 
 export type Theme = {|
   fontFamily: string,
@@ -41,14 +41,9 @@ export type Theme = {|
   },
 |};
 
-// Exact is a temp workaround until native exact type will fix spread and intersection.
-// flowtype.org/docs/objects.html#exact-object-types
-// github.com/facebook/flow/issues/2405#issuecomment-256339492
-// github.com/facebook/flow/issues/2626
-type Exact<T> = T & $Shape<T>;
+export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type Color = $Keys<Colors>;
 export type Size = $Keys<Sizes>;
-export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Style types. Taken from cssreference.io.
@@ -141,11 +136,8 @@ export type TextDecoration =
   ;
 
 export type BrowserStyle = {|
-  // Custom API.
-
-  // $spread, because Flow doesn't support '...Text.style(props)' on exact type.
-  $spread?: Function | Array<Function>,
-  // Fela static API.
+  // Custom API for Fela and Este.
+  $spread?: Function, // TODO: Add more strict type.
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,

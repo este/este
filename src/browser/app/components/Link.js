@@ -13,7 +13,7 @@ type LinkProps = TextProps & {
   to: string,
 };
 
-const createLink = (tag, passProps) => styled((props: LinkProps, theme) => ({
+const createLink = (tag, passProps) => styled((theme, props: LinkProps) => ({
   $spread: Text,
   color: props.color ? theme.colors[props.color] : theme.colors.primary,
   textDecoration: 'none',

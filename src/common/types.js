@@ -1,5 +1,11 @@
 /* @flow */
 
+// Exact is temp workaround until native exact will fix spread and intersection.
+// flowtype.org/docs/objects.html#exact-object-types
+// github.com/facebook/flow/issues/2405#issuecomment-256339492
+// github.com/facebook/flow/issues/2626
+export type Exact<T> = T & $Shape<T>;
+
 // Algebraic types are composable, so it makes sense to have them at one place.
 // blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 

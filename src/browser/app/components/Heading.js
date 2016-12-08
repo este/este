@@ -1,3 +1,7 @@
+// je to box, ale i text.
+// zakladni element, pomoci ktereho stvorim Text i Box?
+// Heading je text element, ok.
+
 // /* @flow */
 // import type {
 //   Color,

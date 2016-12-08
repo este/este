@@ -24,7 +24,7 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const Container = styled((props, theme) => ({
+const Container = styled((theme) => ({
   display: 'flex',
   flexDirection: 'column',
   margin: 'auto',

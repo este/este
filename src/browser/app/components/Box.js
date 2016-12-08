@@ -1,17 +1,17 @@
 /* @flow */
 import type {
   Color,
+  Display,
   Size,
   Styled,
   TextAlign,
   TopBottomLeftRight,
 } from '../themes/types';
 import styled from './styled';
-import warning from 'warning';
 
 type MarginSize = Size | 'auto';
 
-type BoxProps = {
+export type BoxProps = {
   margin?: MarginSize,
   marginBottom?: MarginSize,
   marginHorizontal?: MarginSize,
@@ -37,6 +37,7 @@ type BoxProps = {
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
   borderWidth?: string,
+  display?: Display,
 };
 
 const directionMapping = {
@@ -75,6 +76,7 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
     case 'maxHeight':
     case 'minWidth':
     case 'minHeight':
+    case 'display':
       return { [prop]: value };
     case 'backgroundColor':
       return { backgroundColor: theme.colors[value] };
@@ -95,25 +97,16 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
       };
     }
     default:
-      return undefined;
+      return null;
   }
 };
 
-const Box: Styled<BoxProps> = styled((props, theme) => Object
+const Box: Styled<BoxProps> = styled((theme, props) => Object
   .keys(props)
   .reduce((style, prop) => {
     if (prop === 'theme') return style;
-    const value = props[prop];
-    if (value == null) {
-      warning(false, 'Prop %s in Box has null or undefined value.', prop);
-      return style;
-    }
-    const propStyle = mapPropToStyle(prop, value, theme, props);
+    const propStyle = mapPropToStyle(prop, props[prop], theme, props);
     if (propStyle === null) return style;
-    if (propStyle === undefined) {
-      warning(false, 'Unknown prop %s in Box.', prop);
-      return style;
-    }
     return { ...style, ...propStyle };
   }, {}),
 );
