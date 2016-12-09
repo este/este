@@ -9,17 +9,22 @@ type PageHeaderProps = {|
   description: string,
 |};
 
-const PageHeader = (props: PageHeaderProps) => (
+const Container = (props) => (
   <Box
     border="bottom"
     borderWidth="2"
     marginVertical="extraBig"
     paddingBottom="medium"
     paddingTop="big"
-  >
+    {...props}
+  />
+);
+
+const PageHeader = (props: PageHeaderProps) => (
+  <Container>
     <Heading size="extraBig">{props.heading}</Heading>
     <Text display="block">{props.description}</Text>
-  </Box>
+  </Container>
 );
 
 export default PageHeader;
