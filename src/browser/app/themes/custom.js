@@ -42,6 +42,9 @@ const theme: Theme = {
       opacity: 0.5,
     },
   },
+  Heading: {
+    lineHeight: 1.25,
+  },
 };
 
 export default theme;

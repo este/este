@@ -39,11 +39,15 @@ export type Theme = {|
       opacity: number,
     |},
   },
+  Heading: {|
+    lineHeight: number,
+  |},
 |};
 
-export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type Color = $Keys<Colors>;
+export type MarginSize = Size | 'auto';
 export type Size = $Keys<Sizes>;
+export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Style types. Taken from cssreference.io.

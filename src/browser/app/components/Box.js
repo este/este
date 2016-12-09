@@ -2,13 +2,12 @@
 import type {
   Color,
   Display,
+  MarginSize,
   Size,
   Styled,
   TopBottomLeftRight,
 } from '../themes/types';
 import styled from './styled';
-
-type MarginSize = Size | 'auto';
 
 export type BoxProps = {
   margin?: MarginSize,
@@ -96,6 +95,10 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
       return null;
   }
 };
+
+// Box is the base component for everything.
+//  Box - Text - Heading
+//  Box - PageHeader
 
 const Box: Styled<BoxProps> = styled((theme, props) => Object
   .keys(props)

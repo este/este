@@ -5,15 +5,15 @@ import React from 'react';
 import Text from './Text';
 import styled from './styled';
 
-// Compose Heading from Text.
-const Heading = (props: TextProps) => (
-  <Text
-    // Override default props.
-    bold={props.bold || true}
-    display={props.display || 'inline'}
-    lineHeight={1.25}
-    {...props}
-  />
-);
+const Heading: Styled<TextProps> = styled((theme, {
+  bold,
+  display,
+  lineHeight,
+}) => ({
+  $extends: Text,
+  fontWeight: bold === undefined ? theme.bold : bold ? theme.bold : 'normal',
+  display: display || 'block',
+  lineHeight: lineHeight || theme.Heading.lineHeight,
+}));
 
 export default Heading;

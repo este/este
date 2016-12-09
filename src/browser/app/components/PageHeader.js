@@ -17,7 +17,7 @@ const PageHeader = (props: PageHeaderProps) => (
     paddingBottom="medium"
     paddingTop="big"
   >
-    <Heading bold size="extraBig">{props.heading}</Heading>
+    <Heading size="extraBig">{props.heading}</Heading>
     <Text display="block">{props.description}</Text>
   </Box>
 );
