@@ -59,56 +59,50 @@ export type MarginSize = Size | 'auto';
 
 // Browser types. Taken from cssreference.io.
 
-export type TextTransform =
-    'none'
-  | 'capitalize'
-  | 'uppercase'
-  | 'lowercase'
-  ;
-
 export type AlignContent =
-    'stretch'
-  | 'flex-start'
+    'center'
   | 'flex-end'
-  | 'center'
-  | 'space-between'
+  | 'flex-start'
   | 'space-around'
+  | 'space-between'
+  | 'stretch'
   ;
 
 export type AlignItems =
-    'flex-start'
-  | 'flex-end'
+    'baseline'
   | 'center'
-  | 'baseline'
+  | 'flex-end'
+  | 'flex-start'
   | 'stretch'
   ;
 
 export type AlignSelf =
-    'flex-start'
-  | 'flex-end'
-  | 'center'
+    'auto'
   | 'baseline'
+  | 'center'
+  | 'flex-end'
+  | 'flex-start'
   | 'stretch'
   ;
 
 export type Display =
-    'none'
+    'block'
+  | 'flex'
   | 'inline'
-  | 'block'
   | 'inline-block'
+  | 'inline-flex'
   | 'list-item'
+  | 'none'
   | 'table'
   | 'table-cell'
   | 'table-row'
-  | 'flex'
-  | 'inline-flex'
   ;
 
 export type FlexDirection =
-    'row'
-  | 'row-reverse'
-  | 'column'
+    'column'
   | 'column-reverse'
+  | 'row'
+  | 'row-reverse'
   ;
 
 export type FlexWrap =
@@ -117,32 +111,52 @@ export type FlexWrap =
   | 'wrap-reverse'
   ;
 
+export type FlexFlow =
+    FlexDirection
+  | FlexWrap
+  ;
+
 export type Float =
-    'none'
-  | 'left'
+    'left'
+  | 'none'
   | 'right'
   ;
 
 export type FontWeight =
-    'normal'
-  | 'bold'
-  | 'lighter'
+    'bold'
   | 'bolder'
+  | 'lighter'
+  | 'normal'
   | number
   ;
 
+export type JustifyContent =
+    'center'
+  | 'flex-end'
+  | 'flex-start'
+  | 'space-around'
+  | 'space-between'
+  ;
+
 export type TextAlign =
-    'left'
-  | 'right'
-  | 'center'
+    'center'
   | 'justify'
+  | 'left'
+  | 'right'
   ;
 
 export type TextDecoration =
-    'none'
-  | 'underline'
+    'line-through'
+  | 'none'
   | 'overline'
-  | 'line-through'
+  | 'underline'
+  ;
+
+export type TextTransform =
+    'capitalize'
+  | 'lowercase'
+  | 'none'
+  | 'uppercase'
   ;
 
 export type BrowserStyle = {|
@@ -266,11 +280,11 @@ export type BrowserStyle = {|
   emptyCells?: string,
   filter?: string,
   flex?: number,
-  flexBasis?: string,
+  flexBasis?: number | string,
   flexDirection?: FlexDirection,
-  flexFlow?: string,
+  flexFlow?: FlexFlow,
   flexGrow?: number,
-  flexShrink?: string,
+  flexShrink?: number,
   flexWrap?: FlexWrap,
   float?: Float,
   font?: string,
@@ -318,7 +332,7 @@ export type BrowserStyle = {|
   initial?: string,
   inlineSize?: string,
   isolation?: string,
-  justifyContent?: string,
+  justifyContent?: JustifyContent,
   left?: string,
   letterSpacing?: string,
   lineBreak?: string,
@@ -361,7 +375,7 @@ export type BrowserStyle = {|
   offsetInlineEnd?: string,
   offsetInlineStart?: string,
   opacity?: string,
-  order?: string,
+  order?: number,
   orphans?: string,
   outline?: string,
   outlineColor?: string,
