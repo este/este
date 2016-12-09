@@ -4,11 +4,6 @@ import Heading from './Heading';
 import React from 'react';
 import Text from './Text';
 
-type PageHeaderProps = {|
-  heading: string,
-  description: string,
-|};
-
 const Container = (props) => (
   <Box
     border="bottom"
@@ -19,6 +14,11 @@ const Container = (props) => (
     {...props}
   />
 );
+
+type PageHeaderProps = {|
+  heading: string,
+  description: string,
+|};
 
 const PageHeader = (props: PageHeaderProps) => (
   <Container>
