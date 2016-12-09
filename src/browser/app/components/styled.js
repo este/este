@@ -3,12 +3,12 @@ import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
 
 const createComponentRule = (rule) => (props) => {
-  const { $spread, ...style } = typeof rule === 'function'
+  const { $extends, ...style } = typeof rule === 'function'
     ? rule(props.theme, props)
     : rule;
-  if (!$spread) return style;
+  if (!$extends) return style;
   const spread = []
-    .concat($spread)
+    .concat($extends)
     .reduce((prev, next) => ({ ...prev, ...next.rule(props) }), {});
   return { ...spread, ...style };
 };

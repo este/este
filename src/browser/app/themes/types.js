@@ -137,7 +137,8 @@ export type TextDecoration =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  $spread?: Function, // TODO: Add more strict type.
+  // TODO: Leverage flow-style asap.
+  $extends?: Styled<any> | Array<Styled<any>>,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,
