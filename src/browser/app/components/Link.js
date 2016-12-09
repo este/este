@@ -33,7 +33,7 @@ const RouterLink = createLink(ReactRouterLink, [
 const isExternalLink = to => to.includes('://');
 const routerLinkActiveStyle = { textDecoration: 'underline' };
 
-const Link: Styled<LinkProps> = (props) => (
+const Link: Styled<LinkProps> = (props: LinkProps) => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

@@ -2,6 +2,8 @@
 import type { Exact } from '../../../common/types';
 import type { OpenColor } from './openColor';
 
+// Theme.
+
 type Colors = {
   primary: string,
   secondary: string,
@@ -44,14 +46,18 @@ export type Theme = {|
   |},
 |};
 
+// Basic theme types.
+
 export type Color = $Keys<Colors>;
-export type MarginSize = Size | 'auto';
 export type Size = $Keys<Sizes>;
 export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
-// Style types. Taken from cssreference.io.
-// TODO: Improve it.
+// Extended theme types.
+
+export type MarginSize = Size | 'auto';
+
+// Browser types. Taken from cssreference.io.
 
 export type TextTransform =
     'none'

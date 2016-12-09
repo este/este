@@ -3,12 +3,12 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {|
+type TitleProps = {|
   message: string | Object,
   values?: Object,
 |};
 
-const Title = ({ message, values }: Props) => (
+const Title = ({ message, values }: TitleProps) => (
   typeof message === 'string' ?
     <Helmet title={message} />
   :

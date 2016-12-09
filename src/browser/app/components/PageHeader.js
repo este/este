@@ -4,7 +4,7 @@ import Heading from './Heading';
 import React from 'react';
 import Text from './Text';
 
-type PageHeaderProps = {| // Flow exact object type prevents typos in props.
+type PageHeaderProps = {|
   heading: string,
   description: string,
 |};
