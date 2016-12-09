@@ -4,7 +4,6 @@ import type {
   Display,
   Size,
   Styled,
-  TextAlign,
   TopBottomLeftRight,
 } from '../themes/types';
 import styled from './styled';
@@ -26,7 +25,6 @@ export type BoxProps = {
   paddingRight?: Size,
   paddingTop?: Size,
   paddingVertical?: Size,
-  textAlign?: TextAlign,
   width?: number | string,
   height?: number | string,
   maxWidth?: number | string,
@@ -68,8 +66,6 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
       const [d1, d2] = directionMapping[prop];
       return { [d1]: size, [d2]: size };
     }
-    case 'textAlign':
-      return { textAlign: value };
     case 'width':
     case 'height':
     case 'maxWidth':

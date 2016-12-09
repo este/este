@@ -5,18 +5,18 @@ import {
   Box,
   Image,
   Link,
-  // PageHeader,
+  PageHeader,
   Title,
 } from '../app/components';
 
 const HomePage = () => (
   <Box>
     <Title message="Este.js" />
-    {/* <PageHeader
+    <PageHeader
       heading="Este"
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
-    /> */}
+    />
     <Link to="https://github.com/este/este">
       github.com/este/este
     </Link>

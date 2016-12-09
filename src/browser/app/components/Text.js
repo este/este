@@ -4,6 +4,7 @@ import type {
   Color,
   Size,
   Styled,
+  TextAlign,
   TextDecoration,
   TextTransform,
 } from '../themes/types';
@@ -11,21 +12,28 @@ import Box from './Box';
 import styled from './styled';
 
 export type TextProps = BoxProps & {
+  // The lowest common denominator of:
+  //  w3schools.com/css/css_text.asp
+  //  facebook.github.io/react-native/releases/0.39/docs/text.html#text
+  align?: TextAlign,
   bold?: boolean,
   color?: Color,
   decoration?: TextDecoration,
+  lineHeight?: number,
   size?: Size,
   transform?: TextTransform,
 };
 
 const Text: Styled<TextProps> = styled((theme, props) => ({
-  $spread: Box,
-  fontFamily: theme.fontFamily,
-  lineHeight: theme.lineHeight,
-  fontWeight: props.bold ? theme.bold : 'normal',
+  $extends: Box,
   color: props.color ? theme.colors[props.color] : theme.colors.black,
-  textDecoration: props.decoration || 'none',
+  display: props.display || 'inline',
+  fontFamily: theme.fontFamily,
   fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
+  fontWeight: props.bold ? theme.bold : 'normal',
+  lineHeight: props.lineHeight || theme.lineHeight,
+  textAlign: props.align || 'left',
+  textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
 }));
 

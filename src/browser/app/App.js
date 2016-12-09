@@ -24,6 +24,7 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
+// Make a box?
 const Container = styled((theme) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -34,6 +35,9 @@ const Container = styled((theme) => ({
   paddingRight: theme.sizes.medium,
 }));
 
+// Make a box? Use a box? Hmm, nevim jeste.
+// Hmm, cilem je, aby nikdo v app nepsal styly primo. ok.
+// const Page = (props) => <Box flex={1} {...props} />
 const Page = styled({
   flex: 1, // make footer sticky
 });

@@ -312,7 +312,7 @@ export type BrowserStyle = {|
   left?: string,
   letterSpacing?: string,
   lineBreak?: string,
-  lineHeight?: 'normal' | number | string,
+  lineHeight?: number,
   listStyle?: string,
   listStyleImage?: string,
   listStylePosition?: string,
