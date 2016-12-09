@@ -2,6 +2,7 @@
 import type {
   Color,
   Display,
+  FlexDirection,
   MarginSize,
   Size,
   Styled,
@@ -35,6 +36,9 @@ export type BoxProps = {
   borderColor?: Color,
   borderWidth?: string,
   display?: Display,
+  flex?: number,
+  flexDirection?: FlexDirection,
+  flexGrow?: number,
 };
 
 const directionMapping = {
@@ -91,6 +95,12 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
         borderRadius: theme.border.radius,
       };
     }
+    case 'flex':
+      return { flex: value };
+    case 'flexDirection':
+      return { flexDirection: value };
+    case 'flexGrow':
+      return { flexGrow: value };
     default:
       return null;
   }

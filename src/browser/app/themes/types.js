@@ -265,7 +265,7 @@ export type BrowserStyle = {|
   display?: Display,
   emptyCells?: string,
   filter?: string,
-  flex?: number | string,
+  flex?: number,
   flexBasis?: string,
   flexDirection?: FlexDirection,
   flexFlow?: string,

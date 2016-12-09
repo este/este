@@ -10,7 +10,7 @@ import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
 // import { Miss } from 'react-router';
-import { ThemeProvider, styled } from './components';
+import { Box, ThemeProvider } from './components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -24,23 +24,24 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-// Make a box?
-const Container = styled((theme) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: 'auto',
-  maxWidth: 1024,
-  minHeight: '100vh', // 100vh (not 100%) because it's absolute to the viewport
-  paddingLeft: theme.sizes.medium,
-  paddingRight: theme.sizes.medium,
-}));
+const Container = (props) => (
+  <Box
+    display="flex"
+    flexDirection="column"
+    margin="auto"
+    maxWidth={1024}
+    minHeight="100vh" // make footer sticky
+    paddingHorizontal="medium"
+    {...props}
+  />
+);
 
-// Make a box? Use a box? Hmm, nevim jeste.
-// Hmm, cilem je, aby nikdo v app nepsal styly primo. ok.
-// const Page = (props) => <Box flex={1} {...props} />
-const Page = styled({
-  flex: 1, // make footer sticky
-});
+const Page = (props) => (
+  <Box
+    flex={1} // make footer sticky
+    {...props}
+  />
+);
 
 type AppProps = {
   currentLocale: string,
