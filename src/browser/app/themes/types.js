@@ -1,6 +1,11 @@
 /* @flow */
-import type { Exact } from '../../../common/types';
 import type { OpenColor } from './openColor';
+
+// Exact is temp workaround until native exact will fix spread and intersection.
+// flowtype.org/docs/objects.html#exact-object-types
+// github.com/facebook/flow/issues/2405#issuecomment-256339492
+// github.com/facebook/flow/issues/2626
+export type Exact<T> = T & $Shape<T>;
 
 // Theme.
 
@@ -25,10 +30,12 @@ type Sizes = {|
 |};
 
 export type Theme = {|
-  fontFamily: string,
+  text: {|
+    fontFamily: string,
+    lineHeight: number,
+    bold: number,
+  |},
   fontSizes: Sizes,
-  lineHeight: number,
-  bold: number,
   sizes: Sizes,
   colors: Colors & { open: OpenColor },
   border: {|
@@ -41,9 +48,12 @@ export type Theme = {|
       opacity: number,
     |},
   },
-  Heading: {|
+  heading: {|
     lineHeight: number,
   |},
+  // Paragraph: {|
+  //   marginBottom: Size,
+  // |},
 |};
 
 // Basic theme types.

@@ -3,7 +3,11 @@ import type { Theme } from './types';
 import openColor from './openColor';
 
 const theme: Theme = {
-  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+  text: {
+    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    lineHeight: 2,
+    bold: 600,
+  },
   fontSizes: {
     extraSmall: 10,
     small: 12,
@@ -11,8 +15,6 @@ const theme: Theme = {
     big: 20,
     extraBig: 28,
   },
-  lineHeight: 2,
-  bold: 600,
   sizes: {
     extraSmall: 4,
     small: 8,
@@ -42,7 +44,7 @@ const theme: Theme = {
       opacity: 0.5,
     },
   },
-  Heading: {
+  heading: {
     lineHeight: 1.25,
   },
 };

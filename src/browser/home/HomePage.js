@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
-// import SwitchTheme from './SwitchTheme';
 import {
   Box,
   Image,
   Link,
   PageHeader,
+  Paragraph,
   Title,
 } from '../app/components';
 
@@ -21,6 +21,9 @@ const HomePage = () => (
       github.com/este/este
     </Link>
     {/* <SwitchTheme /> */}
+    <Paragraph>
+      Fok
+    </Paragraph>
     <Box marginVertical="medium">
       <Image
         alt="50x50 placeholder"

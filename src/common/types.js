@@ -1,11 +1,5 @@
 /* @flow */
 
-// Exact is temp workaround until native exact will fix spread and intersection.
-// flowtype.org/docs/objects.html#exact-object-types
-// github.com/facebook/flow/issues/2405#issuecomment-256339492
-// github.com/facebook/flow/issues/2626
-export type Exact<T> = T & $Shape<T>;
-
 // Algebraic types are composable, so it makes sense to have them at one place.
 // blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 
@@ -39,8 +33,9 @@ export type User = {|
 |};
 
 // Reducers
-// We can't use Exact<>, because it breaks autocomplete, and we can't use
-// flow exact type, because object spread is not supported yet.
+// We can't use exact object type, because spread is not supported yet.
+// We can't use Exact<T> = T & $Shape<T>, because it breaks autocomplete.
+// TODO: Wait for Flow.
 
 export type AppState = {
   error: ?Error,

@@ -2,9 +2,15 @@
 import type { Theme } from './types';
 import openColor from './openColor';
 
+// All constants belong to the theme.
+
 const theme: Theme = {
-  // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
-  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+  text: {
+    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
+    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    lineHeight: 1.5,
+    bold: 600,
+  },
   fontSizes: {
     extraSmall: 12,
     small: 14,
@@ -12,8 +18,6 @@ const theme: Theme = {
     big: 22,
     extraBig: 32,
   },
-  lineHeight: 1.5,
-  bold: 600,
   sizes: {
     extraSmall: 4,
     small: 8,
@@ -43,7 +47,7 @@ const theme: Theme = {
       opacity: 0.5,
     },
   },
-  Heading: {
+  heading: {
     lineHeight: 1.25,
   },
 };
