@@ -53,6 +53,7 @@ export type BoxProps = {
   paddingRight?: Size,
   paddingTop?: Size,
   paddingVertical?: Size,
+  style?: any,
   width?: number | string,
 };
 
