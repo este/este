@@ -6,7 +6,7 @@ import styled from './styled';
 
 const Heading: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
-  lineHeight: props.lineHeight || theme.heading.lineHeight,
+  // lineHeight: props.lineHeight || theme.heading.lineHeight,
 }));
 
 Heading.defaultProps = ({

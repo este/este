@@ -29,9 +29,9 @@ const Container = (props) => (
     display="flex"
     flexDirection="column"
     margin="auto"
-    maxWidth={1024}
+    maxWidth={960}
     minHeight="100vh" // make footer sticky
-    paddingHorizontal="medium"
+    // paddingHorizontal="medium"
     {...props}
   />
 );
@@ -65,10 +65,12 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           ...favicon.meta,
         ]}
         link={[
+          // To test vertical rhythm.
+          { href: 'http://basehold.it/24', rel: 'stylesheet' },
           ...favicon.link,
         ]}
       />
-        <Header />
+        {/* <Header /> */}
         <Page>
           <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
@@ -80,7 +82,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}
         </Page>
-        <Footer />
+        {/* <Footer /> */}
     </Container>
   </ThemeProvider>
 );

@@ -9,6 +9,12 @@ export type Exact<T> = T & $Shape<T>;
 
 // Theme.
 
+// $brand-primary:
+// $brand-success:
+// $brand-info:
+// $brand-warning:
+// $brand-danger:
+// $brand-inverse:
 type Colors = {
   primary: string,
   secondary: string,
@@ -27,6 +33,7 @@ type Sizes = {|
   medium: number,
   big: number,
   extraBig: number,
+  superBig: number,
 |};
 
 export type Theme = {|
@@ -49,7 +56,7 @@ export type Theme = {|
     |},
   },
   heading: {|
-    lineHeight: number,
+    // lineHeight: number,
   |},
   // Paragraph: {|
   //   marginBottom: Size,
@@ -346,7 +353,7 @@ export type BrowserStyle = {|
   left?: string,
   letterSpacing?: string,
   lineBreak?: string,
-  lineHeight?: number,
+  lineHeight?: number | string,
   listStyle?: string,
   listStyleImage?: string,
   listStylePosition?: string,

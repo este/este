@@ -31,7 +31,7 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   fontFamily: theme.text.fontFamily,
   fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
   fontWeight: props.bold ? theme.text.bold : 'normal',
-  lineHeight: props.lineHeight || theme.text.lineHeight,
+  lineHeight: `${props.lineHeight || theme.text.lineHeight}px`,
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
