@@ -21,34 +21,12 @@ const HomePage = () => (
     {/* <Link display="block" to="https://github.com/este/este">
       github.com/este/este
     </Link> */}
-    {/* <Text size="small" display="block">shit</Text> */}
-    {/* <Text size="extraBig" display="block">shit</Text> */}
     <Text display="block">shit</Text>
     <Text size="big" display="block">shit</Text>
-    <Text size="extraBig" display="block">shit</Text>
-    <Text size="superBig" display="block">shit</Text>
+    <Text border="bottom" borderWidth={4} marginBottom="extraSmall" size="extraBig" display="block">shit</Text>
     <Text display="block">shit</Text>
     <Text size="small" display="block">shit</Text>
     <Text size="extraSmall" display="block">shit</Text>
-    {/* <Text
-      paddingTop="extraSmall"
-      marginBottom="extraSmall"
-      display="block"
-    >shit</Text>
-    <Text display="block">shit</Text> */}
-    {/* <Text size="big" style={{
-      lineHeight: '24px',
-    }} display="block">shit</Text>
-    <Text size="extraBig" style={{
-      lineHeight: '64px',
-    }} display="block" marginVertical="medium">shit</Text>
-    <Text display="block">shit</Text>
-    <Text size="small" style={{
-      lineHeight: '24px',
-    }} display="block">shit</Text>
-    <Text size="extraSmall" style={{
-      lineHeight: '24px',
-    }} display="block">shit</Text> */}
     {/* <SwitchTheme /> */}
     {/* <Paragraph>
       Fok

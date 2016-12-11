@@ -7,7 +7,7 @@ import Text from './Text';
 const Container = (props) => (
   <Box
     border="bottom"
-    borderWidth="2"
+    borderWidth={2}
     marginVertical="extraBig"
     paddingBottom="medium"
     paddingTop="big"

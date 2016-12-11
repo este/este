@@ -1,87 +1,25 @@
 /* @flow */
 import type { Theme } from './types';
+import createTypography from './createTypography';
 import openColor from './openColor';
 
-// All constants belong to the theme.
-
-// TODO: Move to file.
-const createTypography = ({
-  baseFontSize,
-  lineHeightRatio,
-  scaleRatio,
-}) => {
-  const fontSize = number => Array.from(Array(Math.abs(number)))
-    .reduce(
-      size => number > 0 ? size * scaleRatio : size / scaleRatio,
-      baseFontSize,
-    );
-  const lineHeight = baseFontSize * lineHeightRatio;
-
-  return {
-    lineHeight,
-    // Modular scale
-    //  - www.modularscale.com/
-    //  - spencermortensen.com/articles/typographic-scale/
-    //  - 24ways.org/2011/composing-the-new-canon
-    fontSizes: {
-      extraSmall: fontSize(-2),
-      small: fontSize(-1),
-      medium: fontSize(0),
-      big: fontSize(1),
-      extraBig: fontSize(2),
-      superBig: fontSize(3),
-    },
-    // Vertical rhythm
-    //  - inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-    //  - 24ways.org/2006/compose-to-a-vertical-rhythm
-    //  - zellwk.com/blog/why-vertical-rhythms
-    //  - scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm
-    //  - basehold.it
-    sizes: {
-      // Sizes as multiples of the lineHeight ensure vertical rhythm.
-      extraSmall: lineHeight,
-      small: lineHeight * 2,
-      medium: lineHeight * 3,
-      big: lineHeight * 4,
-      extraBig: lineHeight * 5,
-      superBig: lineHeight * 6,
-    },
-  };
-};
-
-// 24ways.org/2011/composing-the-new-canon
-// TODO: Do we need that? Isn't it just a fancy naming? 🤔
-const scales = {
-  minorSecond: 1.067,
-  majorSecond: 1.125,
-  minorThird: 1.2,
-  majorThird: 1.25,
-  perfectFourth: 1.333,
-  augFourth   : 1.414,
-  perfectFifth: 1.5,
-  minorSixth: 1.6,
-  goldenSection: 1.618,
-  majorSixth: 1.667,
-  minorSeventh: 1.778,
-  majorSeventh: 1.875,
-  octave: 2,
-  majorTenth: 2.5,
-  majorEleventh: 2.667,
-  majorTwelfth: 3,
-  doubleOctave: 4,
-};
-
+// Helper to define modular scale and vertical rhythm.
 const typography = createTypography({
-  baseFontSize: 20,
+  baseFontSize: 16,
   lineHeightRatio: 1.5,
-  scaleRatio: 1.4,
-  // lineHeightRatio: scales.octave,
-  // scaleRatio: scales.octave,
+  scaleRatio: 1.5,
 });
 
+// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
+// TODO: Custom
 const theme: Theme = {
   text: {
-    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
+    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    lineHeight: typography.lineHeight,
+    bold: 600,
+  },
+  heading: {
+    // TODO: Use fontFamily and bold. Add theme opacity for text and heading.
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
     lineHeight: typography.lineHeight,
     bold: 600,
@@ -109,10 +47,6 @@ const theme: Theme = {
       cursor: 'default',
       opacity: 0.5,
     },
-  },
-  heading: {
-    // TODO: Default marginBottom belongs here. paddingTop? hmm, no.
-    // lineHeight: 1.25,
   },
 };
 

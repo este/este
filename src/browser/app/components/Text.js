@@ -23,23 +23,23 @@ export type TextProps = BoxProps & {
   transform?: TextTransform,
 };
 
-// hmm, vertical rhythm tady, protoze musim upravovat line height
-// a to podle vsech vertical box props, ok.
-// pokud pretece
-// odecitat border etc.
-
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
 const setFontSizeAndRhythmLineHeight = (theme, props) => {
   const fontSize = props.size
     ? theme.fontSizes[props.size]
     : theme.fontSizes.medium;
   const multiplier = Math.ceil(fontSize / theme.text.lineHeight);
-  const lineHeight = theme.text.lineHeight * multiplier;
+  const rhythmLineHeight = theme.text.lineHeight * multiplier;
+  const bordersVerticalHeight = props.borderWidth &&
+    props.border === true
+      ? props.borderWidth * 2
+      : { top: 1, bottom: 1 }[props.border] ? props.borderWidth : 0;
+  const lineHeight = rhythmLineHeight - bordersVerticalHeight;
   return {
     fontSize,
     lineHeight: `${lineHeight}px`,
   };
-}
+};
 
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,

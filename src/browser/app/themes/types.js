@@ -42,6 +42,11 @@ export type Theme = {|
     lineHeight: number,
     bold: number,
   |},
+  heading: {|
+    fontFamily: string,
+    lineHeight: number,
+    bold: number,
+  |},
   fontSizes: Sizes,
   sizes: Sizes,
   colors: Colors & { open: OpenColor },
@@ -55,9 +60,6 @@ export type Theme = {|
       opacity: number,
     |},
   },
-  heading: {|
-    // lineHeight: number,
-  |},
   // Paragraph: {|
   //   marginBottom: Size,
   // |},
