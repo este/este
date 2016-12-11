@@ -10,17 +10,6 @@ type HeaderProps = {
   viewer: ?User,
 };
 
-const Style = (props) => (
-  <Box
-    backgroundColor="primary"
-    display='flex'
-    flexWrap='wrap'
-    marginVertical="smallest"
-    paddingVertical="smallest"
-    {...props}
-  />
-);
-
 type HeaderLinkProps = {
   exactly?: boolean,
   to: string,
@@ -40,7 +29,13 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
 );
 
 const Header = ({ viewer }: HeaderProps) => (
-  <Style>
+  <Box
+    backgroundColor="primary"
+    display='flex'
+    flexWrap='wrap'
+    marginVertical="smallest"
+    paddingVertical="smallest"
+  >
     <HeaderLink exactly to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
@@ -51,7 +46,7 @@ const Header = ({ viewer }: HeaderProps) => (
     {!viewer &&
       <HeaderLink to="/signin" message={linksMessages.signIn} />
     }
-  </Style>
+  </Box>
 );
 
 export default connect(

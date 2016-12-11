@@ -8,21 +8,17 @@ type PageHeaderProps = {|
   description: string,
 |};
 
-const Style = (props) => (
+const PageHeader = (props: PageHeaderProps) => (
   <Box
     border="bottom"
-    borderWidth={6}
-    marginVertical="small"
+    borderWidth={2}
+    marginBottom="medium"
+    marginTop="small"
     paddingBottom="smaller"
-    {...props}
-  />
-);
-
-const PageHeader = (props: PageHeaderProps) => (
-  <Style>
-    <Text size="biggest" display="block">{props.heading}</Text>
+  >
+    <Text display="block" size="biggest" bold>{props.heading}</Text>
     <Text display="block">{props.description}</Text>
-  </Style>
+  </Box>
 );
 
 export default PageHeader;
