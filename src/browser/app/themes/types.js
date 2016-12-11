@@ -31,18 +31,8 @@ type Sizes = {|
 |};
 
 export type Theme = {|
-  text: {|
-    fontFamily: string,
-    lineHeight: number,
-    bold: number,
-  |},
-  heading: {|
-    fontFamily: string,
-    lineHeight: number,
-    bold: number,
-  |},
-  fontSizes: Sizes,
   sizes: Sizes,
+  fontSizes: Sizes,
   colors: Colors & { open: OpenColor },
   border: {|
     radius: number | string,
@@ -54,6 +44,24 @@ export type Theme = {|
       opacity: number,
     |},
   },
+  container: {|
+    maxWidths: {|
+      small: number,
+      medium: number,
+      big: number,
+      bigger: number,
+    |},
+  |},
+  text: {|
+    fontFamily: string,
+    lineHeight: number,
+    bold: number,
+  |},
+  heading: {|
+    fontFamily: string,
+    lineHeight: number,
+    bold: number,
+  |},
   // Paragraph: {|
   //   marginBottom: Size,
   // |},

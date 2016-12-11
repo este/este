@@ -10,7 +10,7 @@ import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
 // import { Miss } from 'react-router';
-import { Box, ThemeProvider, Text } from './components';
+import { Box, Container, ThemeProvider } from './components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -26,19 +26,6 @@ import HomePage from '../home/HomePage';
 
 const theme = (currentTheme) =>
   themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
-
-const Container = (props) => (
-  <Box
-    display="flex"
-    flexDirection="column"
-    margin="auto"
-    // hmm, do theme, jak? shit
-    maxWidth={960}
-    minHeight="100vh" // make footer sticky
-    paddingHorizontal="smaller"
-    {...props}
-  />
-);
 
 const Page = (props) => (
   <Box

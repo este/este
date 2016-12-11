@@ -11,20 +11,8 @@ const typography = createTypography({
 });
 
 const theme: Theme = {
-  text: {
-    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: typography.lineHeight,
-    bold: 600,
-  },
-  heading: {
-    // TODO: Use fontFamily and bold. Add theme opacity for text and heading.
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: typography.lineHeight,
-    bold: 600,
-  },
-  fontSizes: typography.fontSizes,
   sizes: typography.sizes,
+  fontSizes: typography.fontSizes,
   colors: {
     // TODO: Leverage openColor.
     primary: '#08e',
@@ -46,6 +34,26 @@ const theme: Theme = {
       cursor: 'default',
       opacity: 0.5,
     },
+  },
+  container: {
+    maxWidths: {
+      small: 540,
+      medium: 720,
+      big: 960,
+      bigger: 1140,
+    },
+  },
+  text: {
+    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
+    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    lineHeight: typography.lineHeight,
+    bold: 600,
+  },
+  heading: {
+    // TODO: Use fontFamily and bold. Add theme opacity for text and heading.
+    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    lineHeight: typography.lineHeight,
+    bold: 600,
   },
 };
 
