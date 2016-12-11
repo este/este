@@ -24,6 +24,8 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
+const theme = currentTheme => themes[currentTheme || 'initial'];
+
 const Container = (props) => (
   <Box
     display="flex"
@@ -52,7 +54,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
   <ThemeProvider
     // TODO: Do we need it?
     // key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
-    theme={themes[currentTheme || 'initial']}
+    theme={theme(currentTheme)}
   >
     <Container>
       <Helmet
@@ -65,9 +67,12 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           ...favicon.meta,
         ]}
         link={[
-          // To test vertical rhythm.
-          { href: 'http://basehold.it/24', rel: 'stylesheet' },
           ...favicon.link,
+          // Vertical rhythm test.
+          {
+            href: `http://basehold.it/${theme(currentTheme).text.lineHeight}`,
+            rel: 'stylesheet',
+          },
         ]}
       />
         {/* <Header /> */}
