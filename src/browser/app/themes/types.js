@@ -9,19 +9,12 @@ export type Exact<T> = T & $Shape<T>;
 
 // Theme.
 
-// $brand-primary:
-// $brand-success:
-// $brand-info:
-// $brand-warning:
-// $brand-danger:
-// $brand-inverse:
 type Colors = {
   primary: string,
-  secondary: string,
   info: string,
   success: string,
   warning: string,
-  error: string,
+  danger: string,
   black: string,
   white: string,
   gray: string,

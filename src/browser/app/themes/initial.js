@@ -28,11 +28,10 @@ const theme: Theme = {
   sizes: typography.sizes,
   colors: {
     primary: '#08e',
-    secondary: '#888',
     info: '#08e',
     success: '#1c7',
     warning: '#f70',
-    error: '#f52',
+    danger: '#f52',
     black: openColor.gray8,
     white: '#fff',
     gray: openColor.gray4,
