@@ -7,13 +7,12 @@ import openColor from './openColor';
 const typography = createTypography({
   baseFontSize: 16,
   lineHeightRatio: 1.5,
-  scaleRatio: 1.5,
+  scaleRatio: 1.25,
 });
 
-// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
-// TODO: Custom
 const theme: Theme = {
   text: {
+    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
     lineHeight: typography.lineHeight,
     bold: 600,
@@ -27,6 +26,7 @@ const theme: Theme = {
   fontSizes: typography.fontSizes,
   sizes: typography.sizes,
   colors: {
+    // TODO: Leverage openColor.
     primary: '#08e',
     info: '#08e',
     success: '#1c7',

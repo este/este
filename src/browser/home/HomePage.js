@@ -7,7 +7,6 @@ import {
   PageHeader,
   Paragraph,
   Title,
-  Text,
 } from '../app/components';
 
 const HomePage = () => (
@@ -21,12 +20,6 @@ const HomePage = () => (
     {/* <Link display="block" to="https://github.com/este/este">
       github.com/este/este
     </Link> */}
-    <Text display="block">shit</Text>
-    <Text size="big" display="block">shit</Text>
-    <Text border="bottom" borderWidth={4} marginBottom="extraSmall" size="extraBig" display="block">shit</Text>
-    <Text display="block">shit</Text>
-    <Text size="small" display="block">shit</Text>
-    <Text size="extraSmall" display="block">shit</Text>
     {/* <SwitchTheme /> */}
     {/* <Paragraph>
       Fok

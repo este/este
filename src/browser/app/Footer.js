@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
-import { Text, Link, styled } from './components';
+import { Box, Text, Link } from './components';
 
 const messages = defineMessages({
   madeByHtml: {
@@ -10,15 +10,14 @@ const messages = defineMessages({
   },
 });
 
-const Container = styled((theme) => ({
-  alignItems: 'center',
-  borderTop: `solid 1px ${theme.colors.gray}`,
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginTop: theme.sizes.big,
-  paddingBottom: theme.sizes.big,
-  paddingTop: theme.sizes.big,
-}));
+const Container = (props) => (
+  <Box
+    border="top"
+    borderWidth={1}
+    paddingVertical="extraSmall"
+    {...props}
+  />
+);
 
 const Footer = () => (
   <Container>

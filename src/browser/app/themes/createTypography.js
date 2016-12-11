@@ -33,6 +33,7 @@ const createTypography = ({
     lineHeight,
     // Modular scale.
     fontSizes: {
+      superSmall: fontSize(-3),
       extraSmall: fontSize(-2),
       small: fontSize(-1),
       medium: fontSize(0),
@@ -42,6 +43,7 @@ const createTypography = ({
     },
     // Vertical rhythm.
     sizes: {
+      superSmall: lineHeight / 2,
       extraSmall: lineHeight,
       small: lineHeight * 2,
       medium: lineHeight * 3,

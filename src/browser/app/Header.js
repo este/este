@@ -3,20 +3,19 @@ import type { State, User } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
-import { Link, styled } from '../app/components';
+import { Box, Link } from '../app/components';
 import { connect } from 'react-redux';
 
-const Container = styled((theme) => ({
-  alignItems: 'center',
-  backgroundColor: theme.colors.primary,
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginTop: theme.sizes.medium,
-  paddingBottom: theme.sizes.medium,
-  paddingLeft: theme.sizes.small,
-  paddingRight: theme.sizes.small,
-  paddingTop: theme.sizes.medium,
-}));
+const Container = (props) => (
+  <Box
+    backgroundColor="primary"
+    display='flex'
+    flexWrap='wrap'
+    marginVertical="superSmall"
+    paddingVertical="superSmall"
+    {...props}
+  />
+);
 
 type HeaderLinkProps = {
   exactly?: boolean,
@@ -29,7 +28,7 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
     bold
     color="white"
     exactly={exactly}
-    marginHorizontal="small"
+    marginHorizontal="superSmall"
     to={to}
   >
     <FormattedMessage {...message} />

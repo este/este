@@ -10,7 +10,7 @@ import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
 // import { Miss } from 'react-router';
-import { Box, ThemeProvider } from './components';
+import { Box, ThemeProvider, Text } from './components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -24,7 +24,8 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const theme = currentTheme => themes[currentTheme || 'initial'];
+const theme = (currentTheme) =>
+  themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
 
 const Container = (props) => (
   <Box
@@ -33,7 +34,7 @@ const Container = (props) => (
     margin="auto"
     maxWidth={960}
     minHeight="100vh" // make footer sticky
-    // paddingHorizontal="medium"
+    paddingHorizontal="extraSmall"
     {...props}
   />
 );
@@ -68,15 +69,16 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
         ]}
         link={[
           ...favicon.link,
-          // Vertical rhythm test.
-          {
-            href: `http://basehold.it/${theme(currentTheme).text.lineHeight}`,
-            rel: 'stylesheet',
-          },
+          // // Uncomment to test vertical rhythm.
+          // {
+          //   href: `http://basehold.it/${theme(currentTheme).text.lineHeight}`,
+          //   rel: 'stylesheet',
+          // },
         ]}
       />
-        {/* <Header /> */}
+        <Header />
         <Page>
+          <Text>shit</Text>
           <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/users" component={UsersPage} />
@@ -87,7 +89,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}
         </Page>
-        {/* <Footer /> */}
+        <Footer />
     </Container>
   </ThemeProvider>
 );

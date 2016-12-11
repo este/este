@@ -21,6 +21,7 @@ type Colors = {
 };
 
 type Sizes = {|
+  superSmall: number,
   extraSmall: number,
   small: number,
   medium: number,
