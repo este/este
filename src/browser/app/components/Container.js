@@ -1,5 +1,4 @@
 /* @flow */
-import type { Styled } from '../themes/types';
 import styled from './styled';
 
 const Container = styled(theme => ({

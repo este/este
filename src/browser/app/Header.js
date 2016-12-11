@@ -31,8 +31,8 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
 const Header = ({ viewer }: HeaderProps) => (
   <Box
     backgroundColor="primary"
-    display='flex'
-    flexWrap='wrap'
+    display="flex"
+    flexWrap="wrap"
     marginVertical="smallest"
     paddingVertical="smallest"
   >

@@ -8,6 +8,7 @@ import {
   Heading,
   Paragraph,
   Title,
+  Text,
 } from '../app/components';
 
 const HomePage = () => (
@@ -18,9 +19,9 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    <Heading size="biggest">
+    {/* <Heading size="biggest">
       How it started
-    </Heading>
+    </Heading> */}
     {/* <Link display="block" to="https://github.com/este/este">
       github.com/este/este
     </Link> */}
