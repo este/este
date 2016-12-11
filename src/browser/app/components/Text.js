@@ -19,19 +19,35 @@ export type TextProps = BoxProps & {
   bold?: boolean,
   color?: Color,
   decoration?: TextDecoration,
-  lineHeight?: number,
   size?: Size,
   transform?: TextTransform,
 };
 
+// hmm, vertical rhythm tady, protoze musim upravovat line height
+// a to podle vsech vertical box props, ok.
+// pokud pretece
+// odecitat border etc.
+
+// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+const setFontSizeAndRhythmLineHeight = (theme, props) => {
+  const fontSize = props.size
+    ? theme.fontSizes[props.size]
+    : theme.fontSizes.medium;
+  const multiplier = Math.ceil(fontSize / theme.text.lineHeight);
+  const lineHeight = theme.text.lineHeight * multiplier;
+  return {
+    fontSize,
+    lineHeight: `${lineHeight}px`,
+  };
+}
+
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
+  ...setFontSizeAndRhythmLineHeight(theme, props),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
-  fontSize: props.size ? theme.fontSizes[props.size] : theme.fontSizes.medium,
   fontWeight: props.bold ? theme.text.bold : 'normal',
-  lineHeight: `${props.lineHeight || theme.text.lineHeight}px`,
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',

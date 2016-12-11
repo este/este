@@ -4,9 +4,10 @@ import openColor from './openColor';
 
 // All constants belong to the theme.
 
+// TODO: Move to file.
 const createTypography = ({
   baseFontSize,
-  baseLineHeight,
+  lineHeightRatio,
   scaleRatio,
 }) => {
   const fontSize = number => Array.from(Array(Math.abs(number)))
@@ -14,11 +15,10 @@ const createTypography = ({
       size => number > 0 ? size * scaleRatio : size / scaleRatio,
       baseFontSize,
     );
-  const baseLineHeightPx = baseFontSize * baseLineHeight;
-  const scaleSize = number => baseLineHeightPx * number;
+  const lineHeight = baseFontSize * lineHeightRatio;
 
   return {
-    baseLineHeightPx,
+    lineHeight,
     // Modular scale
     //  - www.modularscale.com/
     //  - spencermortensen.com/articles/typographic-scale/
@@ -38,17 +38,19 @@ const createTypography = ({
     //  - scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm
     //  - basehold.it
     sizes: {
-      extraSmall: scaleSize(1),
-      small: scaleSize(2),
-      medium: scaleSize(3),
-      big: scaleSize(4),
-      extraBig: scaleSize(5),
-      superBig: scaleSize(6),
+      // Sizes as multiples of the lineHeight ensure vertical rhythm.
+      extraSmall: lineHeight,
+      small: lineHeight * 2,
+      medium: lineHeight * 3,
+      big: lineHeight * 4,
+      extraBig: lineHeight * 5,
+      superBig: lineHeight * 6,
     },
   };
 };
 
 // 24ways.org/2011/composing-the-new-canon
+// TODO: Do we need that? Isn't it just a fancy naming? 🤔
 const scales = {
   minorSecond: 1.067,
   majorSecond: 1.125,
@@ -70,22 +72,18 @@ const scales = {
 };
 
 const typography = createTypography({
-  baseFontSize: 16,
-  baseLineHeight: scales.perfectFifth,
-  scaleRatio: scales.perfectFifth,
+  baseFontSize: 20,
+  lineHeightRatio: 1.5,
+  scaleRatio: 1.4,
+  // lineHeightRatio: scales.octave,
+  // scaleRatio: scales.octave,
 });
-
-// optional border nebo padding, je to nutne kdyz mam size? imho je
-const rhythm = (fontSize: number) => {
-  // const multiplier = Math.ceil($font-size / $line-height-base);
-  // const lineHeight = line-height:  $line-height-base * $multiplier;
-};
 
 const theme: Theme = {
   text: {
     // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: typography.baseLineHeightPx,
+    lineHeight: typography.lineHeight,
     bold: 600,
   },
   fontSizes: typography.fontSizes,
