@@ -10,7 +10,7 @@ const messages = defineMessages({
   },
 });
 
-const Container = (props) => (
+const Style = (props) => (
   <Box
     border="top"
     borderWidth={1}
@@ -20,7 +20,7 @@ const Container = (props) => (
 );
 
 const Footer = () => (
-  <Container>
+  <Style>
     <Text size="small">
       <FormattedMessage {...messages.madeByHtml} />
     </Text>
@@ -28,7 +28,7 @@ const Footer = () => (
     <Link size="small" to="https://twitter.com/steida">
       steida
     </Link>
-  </Container>
+  </Style>
 );
 
 export default Footer;

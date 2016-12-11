@@ -57,14 +57,14 @@ export type Theme = {|
     lineHeight: number,
     bold: number,
   |},
+  // paragraph: {|
+  //   marginBottom: Size,
+  // |},
   heading: {|
     fontFamily: string,
     lineHeight: number,
     bold: number,
   |},
-  // Paragraph: {|
-  //   marginBottom: Size,
-  // |},
 |};
 
 // Basic theme types.

@@ -6,7 +6,11 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Link } from '../app/components';
 import { connect } from 'react-redux';
 
-const Container = (props) => (
+type HeaderProps = {
+  viewer: ?User,
+};
+
+const Style = (props) => (
   <Box
     backgroundColor="primary"
     display='flex'
@@ -35,12 +39,8 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
   </Link>
 );
 
-type HeaderProps = {
-  viewer: ?User,
-};
-
 const Header = ({ viewer }: HeaderProps) => (
-  <Container>
+  <Style>
     <HeaderLink exactly to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
@@ -51,7 +51,7 @@ const Header = ({ viewer }: HeaderProps) => (
     {!viewer &&
       <HeaderLink to="/signin" message={linksMessages.signIn} />
     }
-  </Container>
+  </Style>
 );
 
 export default connect(

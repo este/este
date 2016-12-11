@@ -9,6 +9,11 @@ const Heading: Styled<TextProps> = styled((theme, props) => ({
   // lineHeight: props.lineHeight || theme.heading.lineHeight,
 }));
 
+// Hmm, co pak ale pageHeader? no? hmm
+// musel by prepsat heading marginBottom
+// ok, page header pouziva text, imho staci, ok
+// Taky musi mit padding, hmm
+// // Tohle asi nechci podporovat, hmm, ok
 Heading.defaultProps = ({
   bold: true,
   display: 'block',

@@ -127,7 +127,7 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
   }
 };
 
-// Box is the base component for everything.
+// The box is the base component for almost everything (note I wrote almost).
 //  Box - Text - Heading
 //  Box - PageHeader
 

@@ -1,10 +1,10 @@
 /* @flow */
 
-type createTypographyProps = {
+type createTypographyProps = {|
   baseFontSize: number,
   lineHeightRatio: number,
   scaleRatio: number,
-};
+|};
 
 // Modular scale
 //  - www.modularscale.com/

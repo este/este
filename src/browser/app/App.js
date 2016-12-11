@@ -27,13 +27,6 @@ import HomePage from '../home/HomePage';
 const theme = (currentTheme) =>
   themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
 
-const Page = (props) => (
-  <Box
-    flex={1} // make footer sticky
-    {...props}
-  />
-);
-
 type AppProps = {
   currentLocale: string,
   currentTheme: ?string,
@@ -65,7 +58,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
         ]}
       />
         <Header />
-        <Page>
+        <Box flex={1}>
           <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/users" component={UsersPage} />
@@ -75,7 +68,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
             <Match pattern="/todos" component={TodosPage} />
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}
-        </Page>
+        </Box>
         <Footer />
     </Container>
   </ThemeProvider>
