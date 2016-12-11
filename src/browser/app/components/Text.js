@@ -24,26 +24,28 @@ export type TextProps = BoxProps & {
 };
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
-const setFontSizeAndRhythmLineHeight = (theme, props) => {
+const computeLineHeight = (fontSize, lineHeight, { border, borderWidth }) => {
+  const multiplier = Math.ceil(fontSize / lineHeight);
+  const lineHeightAdjustedByFontSize = lineHeight * multiplier;
+  const bordersVerticalHeight = borderWidth && border === true
+    ? borderWidth * 2
+    : { top: 1, bottom: 1 }[border]
+      ? borderWidth
+      : 0;
+  return lineHeightAdjustedByFontSize - bordersVerticalHeight;
+};
+
+const setFontSizeAndComputedLineHeight = (theme, props) => {
   const fontSize = props.size
     ? theme.fontSizes[props.size]
     : theme.fontSizes.medium;
-  const multiplier = Math.ceil(fontSize / theme.text.lineHeight);
-  const rhythmLineHeight = theme.text.lineHeight * multiplier;
-  const bordersVerticalHeight = props.borderWidth &&
-    props.border === true
-      ? props.borderWidth * 2
-      : { top: 1, bottom: 1 }[props.border] ? props.borderWidth : 0;
-  const lineHeight = rhythmLineHeight - bordersVerticalHeight;
-  return {
-    fontSize,
-    lineHeight: `${lineHeight}px`,
-  };
+  const lineHeight = computeLineHeight(fontSize, theme.text.lineHeight, props);
+  return { fontSize, lineHeight: `${lineHeight}px` };
 };
 
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
-  ...setFontSizeAndRhythmLineHeight(theme, props),
+  ...setFontSizeAndComputedLineHeight(theme, props),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
