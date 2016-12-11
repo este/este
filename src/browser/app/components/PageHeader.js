@@ -8,9 +8,8 @@ const Container = (props) => (
   <Box
     border="bottom"
     borderWidth={2}
-    marginVertical="extraBig"
-    paddingBottom="medium"
-    paddingTop="big"
+    marginVertical="small"
+    paddingBottom="smaller"
     {...props}
   />
 );
@@ -22,7 +21,8 @@ type PageHeaderProps = {|
 
 const PageHeader = (props: PageHeaderProps) => (
   <Container>
-    <Heading size="extraBig">{props.heading}</Heading>
+    <Heading size="biggest">{props.heading}</Heading>
+    {/* // TODO: Paragraph */}
     <Text display="block">{props.description}</Text>
   </Container>
 );

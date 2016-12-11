@@ -32,9 +32,10 @@ const Container = (props) => (
     display="flex"
     flexDirection="column"
     margin="auto"
+    // hmm, do theme, jak? shit
     maxWidth={960}
     minHeight="100vh" // make footer sticky
-    paddingHorizontal="extraSmall"
+    paddingHorizontal="smaller"
     {...props}
   />
 );
@@ -69,16 +70,15 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
         ]}
         link={[
           ...favicon.link,
-          // // Uncomment to test vertical rhythm.
-          // {
-          //   href: `http://basehold.it/${theme(currentTheme).text.lineHeight}`,
-          //   rel: 'stylesheet',
-          // },
+          // Uncomment to test vertical rhythm.
+          {
+            href: `http://basehold.it/${theme(currentTheme).text.lineHeight}`,
+            rel: 'stylesheet',
+          },
         ]}
       />
         <Header />
         <Page>
-          <Text>shit</Text>
           <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/users" component={UsersPage} />

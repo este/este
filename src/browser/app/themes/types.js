@@ -21,13 +21,13 @@ type Colors = {
 };
 
 type Sizes = {|
-  superSmall: number,
-  extraSmall: number,
+  smallest: number,
+  smaller: number,
   small: number,
   medium: number,
   big: number,
-  extraBig: number,
-  superBig: number,
+  bigger: number,
+  biggest: number,
 |};
 
 export type Theme = {|

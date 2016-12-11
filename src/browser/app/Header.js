@@ -11,8 +11,8 @@ const Container = (props) => (
     backgroundColor="primary"
     display='flex'
     flexWrap='wrap'
-    marginVertical="superSmall"
-    paddingVertical="superSmall"
+    marginVertical="smallest"
+    paddingVertical="smallest"
     {...props}
   />
 );
@@ -28,7 +28,7 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
     bold
     color="white"
     exactly={exactly}
-    marginHorizontal="superSmall"
+    marginHorizontal="smallest"
     to={to}
   >
     <FormattedMessage {...message} />

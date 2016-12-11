@@ -33,23 +33,23 @@ const createTypography = ({
     lineHeight,
     // Modular scale.
     fontSizes: {
-      superSmall: fontSize(-3),
-      extraSmall: fontSize(-2),
+      smallest: fontSize(-3),
+      smaller: fontSize(-2),
       small: fontSize(-1),
       medium: fontSize(0),
       big: fontSize(1),
-      extraBig: fontSize(2),
-      superBig: fontSize(3),
+      bigger: fontSize(2),
+      biggest: fontSize(3),
     },
     // Vertical rhythm.
     sizes: {
-      superSmall: lineHeight / 2,
-      extraSmall: lineHeight,
+      smallest: lineHeight / 2,
+      smaller: lineHeight,
       small: lineHeight * 2,
       medium: lineHeight * 3,
       big: lineHeight * 4,
-      extraBig: lineHeight * 5,
-      superBig: lineHeight * 6,
+      bigger: lineHeight * 5,
+      biggest: lineHeight * 6,
     },
   };
 };

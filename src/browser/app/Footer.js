@@ -14,7 +14,7 @@ const Container = (props) => (
   <Box
     border="top"
     borderWidth={1}
-    paddingVertical="extraSmall"
+    paddingVertical="smaller"
     {...props}
   />
 );
