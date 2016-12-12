@@ -14,35 +14,25 @@ import {
 const HomePage = () => (
   <Box>
     <Title message="Este.js" />
-    {/* <PageHeader
+    <Text display="block">test</Text>
+    <Text
+      backgroundColor="primary"
+      bold
+      borderRadius={2}
+      color="white"
+      display="inline-block"
+      marginVertical="step14"
+      paddingHorizontal="medium"
+      paddingVertical="smallest"
+      size="small"
+    >initial theme</Text>
+    <Text display="block">test</Text>
+    <Text display="block">test</Text>
+    <PageHeader
       heading="Este"
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
-    /> */}
-    <Text display="block">fok</Text>
-    <Text
-      display="block"
-      backgroundColor="primary"
-      marginTop="small"
-      marginBottom="smaller"
-      paddingVertical="smallest"
-    >fok</Text>
-    <Text display="block">fok</Text>
-    {/* <Text
-      style={{
-        // borderBottom: 'solid 1px red',
-        borderRadius: 8,
-        backgroundColor: '#ddd',
-        // marginTop: 12,
-        // marginBottom: 12,
-        // paddingTop: 4,
-        // paddingBottom: 4,
-      }}
-      paddingVertical="smallest"
-      display="block"
-    >fok</Text>
-    <Text marginVertical="smaller" display="block">fok</Text> */}
-
+    />
     {/* <Heading size="biggest">
       How it started
     </Heading> */}
@@ -61,6 +51,7 @@ const HomePage = () => (
         width={50}
       />
     </Box> */}
+    <Text size="small" display="block">test</Text>
   </Box>
 );
 

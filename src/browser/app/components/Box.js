@@ -15,6 +15,7 @@ import type {
   TopBottomLeftRight,
 } from '../themes/types';
 import styled from './styled';
+import warning from 'warning';
 
 export type BoxProps = {
   alignContent?: AlignContent,
@@ -23,6 +24,7 @@ export type BoxProps = {
   backgroundColor?: Color,
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
+  borderRadius?: number,
   borderWidth?: number,
   display?: Display,
   flex?: number,
@@ -64,27 +66,41 @@ const directionMapping = {
   paddingVertical: ['paddingTop', 'paddingBottom'],
 };
 
-const mapPropToStyle = (prop, value: any, theme, props) => {
+const propToStyle = (prop, value: any, theme) => {
   switch (prop) {
+    // Sized props.
     case 'margin':
     case 'marginBottom':
     case 'marginLeft':
     case 'marginRight':
     case 'marginTop':
-    case 'padding':
     case 'paddingBottom':
     case 'paddingLeft':
     case 'paddingRight':
     case 'paddingTop':
-      return { [prop]: theme.sizes[value] || 'auto' };
+      return { [prop]: theme.sizes[value] };
+    // Sized shorthand props.
     case 'marginHorizontal':
     case 'marginVertical':
     case 'paddingHorizontal':
     case 'paddingVertical': {
-      const size = theme.sizes[value] || 'auto';
+      const size = theme.sizes[value];
       const [d1, d2] = directionMapping[prop];
       return { [d1]: size, [d2]: size };
     }
+    case 'padding': {
+      // Split shorthand padding prop to be easily ajustable for rhythm.
+      return {
+        paddingBottom: theme.sizes[value],
+        paddingLeft: theme.sizes[value],
+        paddingRight: theme.sizes[value],
+        paddingTop: theme.sizes[value],
+      };
+    }
+    // Color props.
+    case 'backgroundColor':
+      return { backgroundColor: theme.colors[value] };
+    // Value props.
     case 'width':
     case 'height':
     case 'maxWidth':
@@ -92,58 +108,73 @@ const mapPropToStyle = (prop, value: any, theme, props) => {
     case 'minWidth':
     case 'minHeight':
     case 'display':
+    case 'flex':
+    case 'flexDirection':
+    case 'flexFlow':
+    case 'flexGrow':
+    case 'flexWrap':
+    case 'alignItems':
+    case 'alignContent':
+    case 'order':
+    case 'flexShrink':
+    case 'flexBasis':
+    case 'alignSelf':
       return { [prop]: value };
-    case 'backgroundColor':
-      return { backgroundColor: theme.colors[value] };
-    case 'flex': return { flex: value };
-    case 'flexDirection': return { flexDirection: value };
-    case 'flexFlow': return { flexFlow: value };
-    case 'flexGrow': return { flexGrow: value };
-    case 'flexWrap': return { flexWrap: value };
-    case 'alignItems': return { alignItems: value };
-    case 'alignContent': return { alignContent: value };
-    case 'order': return { order: value };
-    case 'flexShrink': return { flexShrink: value };
-    case 'flexBasis': return { flexBasis: value };
-    case 'alignSelf': return { alignSelf: value };
+    case 'borderRadius':
+      return { borderRadius: value || theme.border.radius };
     default:
       return null;
   }
 };
 
-const mapPropsToStyle = (theme, props) => Object
+const propsToStyle = (theme, props) => Object
   .keys(props)
   .reduce((style, prop) => {
     if (prop === 'theme') return style;
-    const propStyle = mapPropToStyle(prop, props[prop], theme, props);
+    const propStyle = propToStyle(prop, props[prop], theme);
     if (propStyle === null) return style;
     return { ...style, ...propStyle };
   }, {});
 
-// const bla = =// case 'border':
-// // case 'borderColor':
-// // case 'borderWidth': {
-// //   if (prop !== 'border') return null;
-// //   const borderProp = value === true
-// //     ? 'border'
-// //     : `border${value.charAt(0).toUpperCase()}${value.slice(1)}`;
-// //   const width = props.borderWidth || theme.border.width;
-// //   const color = props.borderColor
-// //     ? theme.colors[props.borderColor]
-// //     : theme.colors.gray;
-// //   return {
-// //     [borderProp]: `solid ${width}px ${color}`,
-// //     borderRadius: theme.border.radius,
-// //   };
-// // }
+// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+const adjustPaddingForRhythm = (border, borderWidth, style) => {
+  if (!borderWidth) return {};
+  return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, direction) => {
+    const adjust = border === true || border === direction.toLowerCase();
+    if (!adjust) return padding;
+    const paddingProp = 'padding' + direction;
+    const canAdjust = style[paddingProp] && (style[paddingProp] - borderWidth) >= 0;
+    if (!canAdjust) {
+      warning(false, `Add ${paddingProp} at least ${borderWidth}px to ensure vertical rhythm.`)
+      return;
+    }
+    return { ...padding, [paddingProp]: style[paddingProp] - borderWidth };
+  }, {});
+};
 
-// The box is the base component for almost everything.
-//  Box - Text - Heading
-//  Box - PageHeader
-const Box: Styled<BoxProps> = styled((theme, props) => ({
-  ...mapPropsToStyle(theme, props),
-  // position: 'abslute',
-  // return style;
-}));
+const applyBorderWithRhythm = (style, theme, props) => {
+  if (!props.border) return style;
+  const borderProp = props.border === true
+    ? 'border'
+    : `border${props.border.charAt(0).toUpperCase()}${props.border.slice(1)}`;
+  const borderWidth = props.borderWidth || theme.border.width;
+  const borderColor = props.borderColor
+    ? theme.colors[props.borderColor]
+    : theme.colors.gray;
+  const padding = adjustPaddingForRhythm(props.border, borderWidth, style);
+  return {
+    ...style,
+    ...padding,
+    [borderProp]: `solid ${borderWidth}px ${borderColor}`,
+  };
+};
+
+const Box: Styled<BoxProps> = styled((theme, props) => {
+  let style = propsToStyle(theme, props);
+  // TODO: We should be able to detect also padding and margin combinations
+  // breaking vertical rhythm.
+  style = applyBorderWithRhythm(style, theme, props);
+  return style;
+});
 
 export default Box;

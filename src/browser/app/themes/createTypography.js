@@ -1,20 +1,20 @@
 /* @flow */
 
-type createTypographyProps = {|
-  baseFontSize: number,
-  lineHeightRatio: number,
-  scaleRatio: number,
-|};
-
-// Modular scale
-//  - www.modularscale.com/
-//  - 24ways.org/2011/composing-the-new-canon
 // Vertical rhythm
 //  - inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm (the best article)
 //  - 24ways.org/2006/compose-to-a-vertical-rhythm
 //  - zellwk.com/blog/why-vertical-rhythms
 //  - scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm
 //  - basehold.it
+// Modular scale
+//  - 24ways.org/2011/composing-the-new-canon (the best article)
+//  - www.modularscale.com/
+
+type createTypographyProps = {|
+  baseFontSize: number,
+  lineHeightRatio: number,
+  scaleRatio: number,
+|};
 
 const createTypography = ({
   baseFontSize,
@@ -40,16 +40,51 @@ const createTypography = ({
       big: fontSize(1),
       bigger: fontSize(2),
       biggest: fontSize(3),
+      step1: fontSize(1),
+      step2: fontSize(2),
+      step3: fontSize(3),
+      step4: fontSize(4),
+      step5: fontSize(5),
+      step6: fontSize(6),
+      step7: fontSize(7),
+      step8: fontSize(8),
+      step9: fontSize(9),
+      step10: fontSize(10),
+      step11: fontSize(11),
+      step12: fontSize(12),
+      step13: fontSize(13),
+      step14: fontSize(14),
+      step15: fontSize(15),
+      step16: fontSize(16),
     },
-    // Vertical rhythm. Like monochord scale, tones are created by halving.
+    // Vertical rhythms for padding and margins.
     sizes: {
+      // Basic values.
       smallest: lineHeight / 8,
       smaller: lineHeight / 4,
       small: lineHeight / 2,
       medium: lineHeight,
       big: lineHeight * 2,
-      bigger: lineHeight * 3,
-      biggest: lineHeight * 4,
+      bigger: lineHeight * 4,
+      biggest: lineHeight * 8,
+      // Granular values. Yes, it's music scale. Musical interval ratios ftw.
+      // 24ways.org/2011/composing-the-new-canon
+      step1: (15/16) * lineHeight,
+      step2: (8/9) * lineHeight,
+      step3: (5/6) * lineHeight,
+      step4: (4/5) * lineHeight,
+      step5: (3/4) * lineHeight,
+      step6: (1/Math.SQRT2) * lineHeight,
+      step7: (2/3) * lineHeight,
+      step8: (5/8) * lineHeight,
+      step9: (3/5) * lineHeight,
+      step10: (9/16) * lineHeight,
+      step11: (8/15) * lineHeight,
+      step12: (1/2) * lineHeight,
+      step13: (2/5) * lineHeight,
+      step14: (3/8) * lineHeight,
+      step15: (1/3) * lineHeight,
+      step16: (1/4) * lineHeight,
     },
   };
 };

@@ -11,8 +11,8 @@ const typography = createTypography({
 });
 
 const theme: Theme = {
-  sizes: typography.sizes,
   fontSizes: typography.fontSizes,
+  sizes: typography.sizes,
   colors: {
     // TODO: Leverage openColor.
     primary: '#08e',

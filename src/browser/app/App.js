@@ -10,7 +10,7 @@ import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Match } from '../../common/app/components';
 // import { Miss } from 'react-router';
-import { Box, Container, ThemeProvider } from './components';
+import { Text, Box, Container, ThemeProvider } from './components';
 import { connect } from 'react-redux';
 
 // Pages
@@ -59,7 +59,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
       />
         <Header />
         <Box
-          flex={1} // make footer sticky
+          // flex={1} // make footer sticky
         >
           <Match exactly pattern="/" component={HomePage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
@@ -72,6 +72,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
             <Miss component={NotFoundPage} />*/}
         </Box>
         <Footer />
+        <Text>test</Text>
     </Container>
   </ThemeProvider>
 );

@@ -28,15 +28,31 @@ type Sizes = {|
   big: number,
   bigger: number,
   biggest: number,
+  step1: number,
+  step2: number,
+  step3: number,
+  step4: number,
+  step5: number,
+  step6: number,
+  step7: number,
+  step8: number,
+  step9: number,
+  step10: number,
+  step11: number,
+  step12: number,
+  step13: number,
+  step14: number,
+  step15: number,
+  step16: number,
 |};
 
 export type Theme = {|
-  sizes: Sizes,
   fontSizes: Sizes,
+  sizes: Sizes,
   colors: Colors & { open: OpenColor },
   border: {|
-    radius: number | string,
-    width: number | string,
+    radius: number,
+    width: number,
   |},
   states: {
     disabled: {|

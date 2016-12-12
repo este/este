@@ -12,9 +12,8 @@ const messages = defineMessages({
 
 const Footer = () => (
   <Box
-    border="top"
-    borderWidth={1}
-    paddingVertical="medium"
+    // border="top"
+    // paddingVertical="medium"
   >
     <Text size="small">
       <FormattedMessage {...messages.madeByHtml} />

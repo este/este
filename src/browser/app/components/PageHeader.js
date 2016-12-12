@@ -12,9 +12,9 @@ const PageHeader = (props: PageHeaderProps) => (
   <Box
     // border="bottom"
     // borderWidth={2}
-    marginBottom="medium"
-    marginTop="small"
-    paddingBottom="smaller"
+    // marginBottom="big"
+    // marginTop="big"
+    // paddingBottom="medium"
   >
     <Text display="block" size="biggest" bold>{props.heading}</Text>
     <Text display="block">{props.description}</Text>
