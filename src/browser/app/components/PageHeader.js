@@ -10,8 +10,8 @@ type PageHeaderProps = {|
 
 const PageHeader = (props: PageHeaderProps) => (
   <Box
-    border="bottom"
-    borderWidth={2}
+    // border="bottom"
+    // borderWidth={2}
     marginBottom="medium"
     marginTop="small"
     paddingBottom="smaller"

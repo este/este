@@ -14,7 +14,7 @@ const Footer = () => (
   <Box
     border="top"
     borderWidth={1}
-    paddingVertical="smaller"
+    paddingVertical="medium"
   >
     <Text size="small">
       <FormattedMessage {...messages.madeByHtml} />

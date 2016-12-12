@@ -41,15 +41,15 @@ const createTypography = ({
       bigger: fontSize(2),
       biggest: fontSize(3),
     },
-    // Vertical rhythm.
+    // Vertical rhythm. Like monochord scale, tones are created by halving.
     sizes: {
-      smallest: lineHeight / 2,
-      smaller: lineHeight,
-      small: lineHeight * 2,
-      medium: lineHeight * 3,
-      big: lineHeight * 4,
-      bigger: lineHeight * 5,
-      biggest: lineHeight * 6,
+      smallest: lineHeight / 8,
+      smaller: lineHeight / 4,
+      small: lineHeight / 2,
+      medium: lineHeight,
+      big: lineHeight * 2,
+      bigger: lineHeight * 3,
+      biggest: lineHeight * 4,
     },
   };
 };
