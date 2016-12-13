@@ -28,6 +28,7 @@ type Sizes = {|
   big: number,
   bigger: number,
   biggest: number,
+  step0: number,
   step1: number,
   step2: number,
   step3: number,
@@ -45,6 +46,17 @@ type Sizes = {|
   step15: number,
   step16: number,
 |};
+
+// Basic theme types.
+
+export type Color = $Keys<Colors>;
+export type Size = $Keys<Sizes>;
+export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
+export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
+
+// Extended theme types.
+
+export type MarginSize = Size | 'auto';
 
 export type Theme = {|
   fontSizes: Sizes,
@@ -69,30 +81,20 @@ export type Theme = {|
     |},
   |},
   text: {|
+    bold: number,
     fontFamily: string,
     lineHeight: number,
-    bold: number,
   |},
-  // paragraph: {|
-  //   marginBottom: Size,
-  // |},
   heading: {|
-    fontFamily: string,
-    lineHeight: number,
     bold: number,
+    fontFamily: string,
+    marginBottom: Size,
+  |},
+  paragraph: {|
+    marginBottom: Size,
+    maxWidth: string,
   |},
 |};
-
-// Basic theme types.
-
-export type Color = $Keys<Colors>;
-export type Size = $Keys<Sizes>;
-export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
-export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
-
-// Extended theme types.
-
-export type MarginSize = Size | 'auto';
 
 // Browser types. Taken from cssreference.io.
 

@@ -4,18 +4,11 @@ import type { TextProps } from './Text';
 import Text from './Text';
 import styled from './styled';
 
-// aha, neni to block padding?
-// Paragraph je text display="block", ok
-
-const Paragraph = styled(theme => ({
+const Paragraph: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
-  // marginBottom:
-  // marginBottom: props
+  display: props.display || 'block',
+  maxWidth: theme.paragraph.maxWidth,
+  marginBottom: theme.sizes[props.marginBottom || theme.paragraph.marginBottom],
 }));
-
-// Paragraph.defaultProps = ({
-//   display: 'block',
-//   // marginBottom: 'big', // patri to do theme?
-// }: Exact<TextProps>);
 
 export default Paragraph;

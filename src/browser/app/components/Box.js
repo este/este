@@ -142,11 +142,11 @@ const adjustPaddingForRhythm = (border, borderWidth, style) => {
   return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, direction) => {
     const adjust = border === true || border === direction.toLowerCase();
     if (!adjust) return padding;
-    const paddingProp = 'padding' + direction;
+    const paddingProp = `padding${direction}`;
     const canAdjust = style[paddingProp] && (style[paddingProp] - borderWidth) >= 0;
     if (!canAdjust) {
-      warning(false, `Add ${paddingProp} at least ${borderWidth}px to ensure vertical rhythm.`)
-      return;
+      warning(false, `Add ${paddingProp} at least ${borderWidth}px to ensure vertical rhythm.`);
+      return {};
     }
     return { ...padding, [paddingProp]: style[paddingProp] - borderWidth };
   }, {});

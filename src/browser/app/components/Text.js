@@ -36,7 +36,7 @@ const fontSizeAndLineHeight = (theme, props) => {
   const lineHeight = computeLineHeight(fontSize, theme.text.lineHeight);
   return {
     fontSize,
-    lineHeight: `${lineHeight}px`
+    lineHeight: `${lineHeight}px`,
   };
 };
 

@@ -44,16 +44,19 @@ const theme: Theme = {
     },
   },
   text: {
+    bold: 600,
     // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
     lineHeight: typography.lineHeight,
-    bold: 600,
   },
   heading: {
-    // TODO: Use fontFamily and bold. Add theme opacity for text and heading.
+    bold: 700,
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: typography.lineHeight,
-    bold: 600,
+    marginBottom: 'medium',
+  },
+  paragraph: {
+    marginBottom: 'medium',
+    maxWidth: '42em',
   },
 };
 
