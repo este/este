@@ -29,7 +29,11 @@ const HomePage = () => (
       commodo consequat.
     </Paragraph>
     <Paragraph>
-      <Link display="block" marginBottom="medium" to="https://github.com/este/este">
+      <Link
+        display="block"
+        marginBottom="medium"
+        to="https://github.com/este/este"
+      >
         github.com/este/este
       </Link>
     </Paragraph>

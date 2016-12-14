@@ -58,7 +58,7 @@ const createTypography = ({
       step15: fontSize(15),
       step16: fontSize(16),
     },
-    // Vertical rhythms for padding and margins.
+    // Vertical rhythms for padding, margins, etc.
     sizes: {
       // Basic values.
       smallest: lineHeight / 8,

@@ -57,6 +57,7 @@ export type BoxProps = {
   paddingVertical?: Size,
   style?: any,
   width?: number | string,
+  noRhythm?: boolean,
 };
 
 const directionMapping = {
@@ -137,16 +138,26 @@ const propsToStyle = (theme, props) => Object
   }, {});
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
-const adjustPaddingForRhythm = (border, borderWidth, style) => {
+const adjustPaddingForRhythm = (noRhythm, border, borderWidth, style) => {
   if (!borderWidth) return {};
-  return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, direction) => {
-    const adjust = border === true || border === direction.toLowerCase();
+  return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, prop) => {
+    const adjust = border === true || border === prop.toLowerCase();
     if (!adjust) return padding;
-    const paddingProp = `padding${direction}`;
+    const paddingProp = `padding${prop}`;
     const canAdjust = style[paddingProp] && (style[paddingProp] - borderWidth) >= 0;
     if (!canAdjust) {
-      warning(false, `Add ${paddingProp} at least ${borderWidth}px to ensure vertical rhythm.`);
-      return {};
+      if (noRhythm) return {};
+      const direction = prop === 'Left' || prop === 'Right'
+        ? 'horizontal'
+        : 'vertical';
+      warning(false, [
+        `Please increase ${paddingProp} to ensure ${direction} rhythm. `,
+        'Use noRhythm to suppress this warning.',
+      ].join(''));
+      // aha, dodat red outline, a navod, jak to vypnout
+      return {
+        outline: 'solid 1px red',
+      };
     }
     return { ...padding, [paddingProp]: style[paddingProp] - borderWidth };
   }, {});
@@ -161,7 +172,12 @@ const applyBorderWithRhythm = (style, theme, props) => {
   const borderColor = props.borderColor
     ? theme.colors[props.borderColor]
     : theme.colors.gray;
-  const padding = adjustPaddingForRhythm(props.border, borderWidth, style);
+  const padding = adjustPaddingForRhythm(
+    props.noRhythm,
+    props.border,
+    borderWidth,
+    style
+  );
   return {
     ...style,
     ...padding,
