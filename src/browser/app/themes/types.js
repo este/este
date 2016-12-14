@@ -45,6 +45,7 @@ type Sizes = {|
   step14: number,
   step15: number,
   step16: number,
+  step17: number,
 |};
 
 // Basic theme types.

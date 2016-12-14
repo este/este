@@ -57,6 +57,7 @@ const createTypography = ({
       step14: fontSize(14),
       step15: fontSize(15),
       step16: fontSize(16),
+      step17: fontSize(16),
     },
     // Vertical rhythms for padding, margins, etc.
     sizes: {
@@ -87,6 +88,7 @@ const createTypography = ({
       step14: (3 / 8) * lineHeight,
       step15: (1 / 3) * lineHeight,
       step16: (1 / 4) * lineHeight,
+      step17: (1 / 2) * lineHeight,
     },
   };
 };
