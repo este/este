@@ -52,7 +52,7 @@ const theme: Theme = {
   heading: {
     bold: 700,
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    marginBottom: 'medium',
+    marginBottom: 'step0',
   },
   paragraph: {
     marginBottom: 'medium',
