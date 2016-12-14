@@ -1,11 +1,12 @@
 /* @flow */
 import React from 'react';
+import SwitchTheme from './SwitchTheme';
 import {
   Box,
+  Heading,
   Image,
   Link,
   PageHeader,
-  Heading,
   Paragraph,
   Title,
 } from '../app/components';
@@ -26,23 +27,19 @@ const HomePage = () => (
       tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
     <Paragraph>
-      <Link
-        display="block"
-        marginBottom="medium"
-        to="https://github.com/este/este"
-      >
+      <Link to="https://github.com/este/este">
         github.com/este/este
       </Link>
     </Paragraph>
-    {/* <SwitchTheme /> */}
-    <Box marginVertical="medium">
+    <Paragraph>
       <Image
         alt="50x50 placeholder"
         height={50}
         src={require('./50x50.png')}
         width={50}
       />
-    </Box>
+    </Paragraph>
+    <SwitchTheme />
   </Box>
 );
 

@@ -1,10 +1,10 @@
 /* @flow */
 import type { Theme } from './types';
-import createTypography from './createTypography';
+import configureTypography from './configureTypography';
 import openColor from './openColor';
 
 // Helper to define modular scale and vertical rhythm.
-const typography = createTypography({
+const typography = configureTypography({
   baseFontSize: 16,
   lineHeightRatio: 1.5,
   scaleRatio: 1.25,

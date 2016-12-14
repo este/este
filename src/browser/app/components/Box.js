@@ -68,34 +68,55 @@ const directionMapping = {
 };
 
 const propToStyle = (prop, value: any, theme) => {
+  // Note pattern, use theme.sized for vertical rhythm, and theme.fontSize for
+  // horizontal rhythm.
   switch (prop) {
-    // Sized props.
-    case 'margin':
+    // Vertical props.
     case 'marginBottom':
-    case 'marginLeft':
-    case 'marginRight':
     case 'marginTop':
     case 'paddingBottom':
+    case 'paddingTop':
+      return {
+        [prop]: theme.sizes[value],
+      };
+    // Horizontal props.
+    case 'marginLeft':
+    case 'marginRight':
     case 'paddingLeft':
     case 'paddingRight':
-    case 'paddingTop':
-      return { [prop]: theme.sizes[value] };
-    // Sized shorthand props.
-    case 'marginHorizontal':
+      return {
+        [prop]: theme.fontSizes[value],
+      };
+    // Vertical shorthand props.
     case 'marginVertical':
-    case 'paddingHorizontal':
     case 'paddingVertical': {
       const size = theme.sizes[value];
       const [d1, d2] = directionMapping[prop];
       return { [d1]: size, [d2]: size };
     }
-    case 'padding': {
-      // Split shorthand padding prop to be easily ajustable for rhythm.
+    // Horizontal shorthand props.
+    case 'marginHorizontal':
+    case 'paddingHorizontal': {
+      const size = theme.fontSizes[value];
+      const [d1, d2] = directionMapping[prop];
+      return { [d1]: size, [d2]: size };
+    }
+    // Split shorthand to be easily computable.
+    case 'margin': {
       return {
-        paddingBottom: theme.sizes[value],
-        paddingLeft: theme.sizes[value],
-        paddingRight: theme.sizes[value],
+        marginLeft: theme.fontSizes[value],
+        marginRight: theme.fontSizes[value],
+        marginTop: theme.sizes[value],
+        marginBottom: theme.sizes[value],
+      };
+    }
+    // Split shorthand to be easily computable.
+    case 'padding': {
+      return {
+        paddingLeft: theme.fontSizes[value],
+        paddingRight: theme.fontSizes[value],
         paddingTop: theme.sizes[value],
+        paddingBottom: theme.sizes[value],
       };
     }
     // Color props.
@@ -154,12 +175,14 @@ const adjustPaddingForRhythm = (noRhythm, border, borderWidth, style) => {
         `Please increase ${paddingProp} to ensure ${direction} rhythm. `,
         'Use noRhythm to suppress this warning.',
       ].join(''));
-      // aha, dodat red outline, a navod, jak to vypnout
       return {
         outline: 'solid 1px red',
       };
     }
-    return { ...padding, [paddingProp]: style[paddingProp] - borderWidth };
+    return {
+      ...padding,
+      [paddingProp]: style[paddingProp] - borderWidth,
+    };
   }, {});
 };
 
@@ -186,11 +209,9 @@ const applyBorderWithRhythm = (style, theme, props) => {
 };
 
 const Box: Styled<BoxProps> = styled((theme, props) => {
-  let style = propsToStyle(theme, props);
-  // TODO: We should be able to detect also padding and margin combinations
-  // breaking vertical rhythm.
-  style = applyBorderWithRhythm(style, theme, props);
-  return style;
+  const style = propsToStyle(theme, props);
+  const styleWithBorder = applyBorderWithRhythm(style, theme, props);
+  return styleWithBorder;
 });
 
 export default Box;

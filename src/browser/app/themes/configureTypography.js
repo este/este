@@ -16,7 +16,7 @@ type createTypographyProps = {|
   scaleRatio: number,
 |};
 
-const createTypography = ({
+const configureTypography = ({
   baseFontSize,
   lineHeightRatio,
   scaleRatio,
@@ -57,11 +57,9 @@ const createTypography = ({
       step14: fontSize(14),
       step15: fontSize(15),
       step16: fontSize(16),
-      step17: fontSize(16),
     },
-    // Vertical rhythms for padding, margins, etc.
+    // Vertical rhythm for padding, margins, etc.
     sizes: {
-      // Basic values.
       smallest: lineHeight / 8,
       smaller: lineHeight / 4,
       small: lineHeight / 2,
@@ -69,28 +67,25 @@ const createTypography = ({
       big: lineHeight * 2,
       bigger: lineHeight * 4,
       biggest: lineHeight * 8,
-      // Granular values. Yes, it's music scale. Musical interval ratios ftw.
-      // 24ways.org/2011/composing-the-new-canon
       step0: 0,
-      step1: (15 / 16) * lineHeight,
-      step2: (8 / 9) * lineHeight,
-      step3: (5 / 6) * lineHeight,
-      step4: (4 / 5) * lineHeight,
-      step5: (3 / 4) * lineHeight,
-      step6: (1 / Math.SQRT2) * lineHeight,
-      step7: (2 / 3) * lineHeight,
-      step8: (5 / 8) * lineHeight,
-      step9: (3 / 5) * lineHeight,
-      step10: (9 / 16) * lineHeight,
-      step11: (8 / 15) * lineHeight,
-      step12: (1 / 2) * lineHeight,
-      step13: (2 / 5) * lineHeight,
-      step14: (3 / 8) * lineHeight,
-      step15: (1 / 3) * lineHeight,
-      step16: (1 / 4) * lineHeight,
-      step17: (1 / 2) * lineHeight,
+      step1: (1 / 4) * lineHeight,
+      step2: (1 / 3) * lineHeight,
+      step3: (3 / 8) * lineHeight,
+      step4: (2 / 5) * lineHeight,
+      step5: (1 / 2) * lineHeight,
+      step6: (8 / 15) * lineHeight,
+      step7: (9 / 16) * lineHeight,
+      step8: (3 / 5) * lineHeight,
+      step9: (5 / 8) * lineHeight,
+      step10: (2 / 3) * lineHeight,
+      step11: (1 / Math.SQRT2) * lineHeight,
+      step12: (3 / 4) * lineHeight,
+      step13: (4 / 5) * lineHeight,
+      step14: (5 / 6) * lineHeight,
+      step15: (8 / 9) * lineHeight,
+      step16: (15 / 16) * lineHeight,
     },
   };
 };
 
-export default createTypography;
+export default configureTypography;
