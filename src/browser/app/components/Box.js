@@ -24,8 +24,8 @@ export type BoxProps = {
   backgroundColor?: Color,
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
-  borderRadius?: number,
-  borderWidth?: number,
+  borderRadius?: number, // TODO: Consider Size as well.
+  borderWidth?: number, // TODO: Consider Size as well.
   display?: Display,
   flex?: number,
   flexBasis?: number | string,
