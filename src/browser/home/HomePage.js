@@ -8,7 +8,6 @@ import {
   Heading,
   Paragraph,
   Title,
-  Text,
 } from '../app/components';
 
 const HomePage = () => (
@@ -24,9 +23,7 @@ const HomePage = () => (
     </Heading>
     <Paragraph>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
+      tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
     <Paragraph>
       <Link
@@ -37,21 +34,7 @@ const HomePage = () => (
         github.com/este/este
       </Link>
     </Paragraph>
-    <Box marginBottom="medium">
-      <Text
-        backgroundColor="primary"
-        bold
-        borderRadius={2}
-        color="white"
-        display="inline-block"
-        marginVertical="step14"
-        paddingHorizontal="medium"
-        paddingVertical="smallest"
-        size="small"
-        >initial theme</Text>
-    </Box>
     {/* <SwitchTheme /> */}
-    {/*
     <Box marginVertical="medium">
       <Image
         alt="50x50 placeholder"
@@ -59,7 +42,7 @@ const HomePage = () => (
         src={require('./50x50.png')}
         width={50}
       />
-    </Box> */}
+    </Box>
   </Box>
 );
 

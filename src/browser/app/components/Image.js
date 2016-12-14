@@ -1,10 +1,7 @@
 /* @flow */
 /* eslint-disable jsx-a11y/img-has-alt */
 import React from 'react';
-
-const altOrRolePresentation = (alt) => alt
-  ? { alt }
-  : { role: 'presentation' };
+import styled from './styled';
 
 type ImageProps = {|
   alt?: string,
@@ -13,13 +10,32 @@ type ImageProps = {|
   width: number,
 |};
 
+const altOrRolePresentation = (alt) => alt
+  ? { alt }
+  : { role: 'presentation' };
+
+// TODO: Use more sophisticated logic based on aspect ratio etc.
+const ImageWrapper = styled((theme, props) => ({
+  display: 'block',
+  // width: ,
+  height: `${
+    // Shrink to nearest baseline.
+    Math.floor(props.height / theme.text.lineHeight) * theme.text.lineHeight
+  }px`,
+}));
+
 const Image = (props: ImageProps) => (
-  <img
-    {...altOrRolePresentation(props.alt)}
+  <ImageWrapper
     height={props.height}
-    src={props.src}
-    width={props.width}
-  />
+    // width={props.width}
+  >
+    <img
+      {...altOrRolePresentation(props.alt)}
+      height="100%"
+      src={props.src}
+      // width="100%"
+    />
+  </ImageWrapper>
 );
 
 export default Image;

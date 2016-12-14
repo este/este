@@ -176,7 +176,7 @@ const applyBorderWithRhythm = (style, theme, props) => {
     props.noRhythm,
     props.border,
     borderWidth,
-    style
+    style,
   );
   return {
     ...style,
