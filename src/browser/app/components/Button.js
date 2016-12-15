@@ -10,20 +10,19 @@ const Button: Styled<TextProps> = styled((theme, props) => ({
     ? theme.colors[props.backgroundColor]
     : theme.colors.primary,
   borderRadius: props.borderRadius || theme.border.radius,
+  borderWidth: 0,
   color: theme.colors.white,
+  cursor: 'pointer',
   display: props.display || 'inline-block',
+  // fontSize: theme.fontSize(0),
+  // fontSize: theme.fontSizes.small,
   fontWeight: props.bold === undefined ? 'bold' : props.bold ? theme.text.bold : 'normal',
-  marginBottom: theme.sizes.step3,
-  marginTop: theme.sizes.step3,
-  paddingBottom: theme.sizes.smallest,
-  paddingLeft: theme.fontSizes.medium,
-  paddingRight: theme.fontSizes.medium,
-  paddingTop: theme.sizes.smallest,
-}));
-
-// Oser je, tohle prepisovat, nemuzu podedit element?
-{/* <Text
-  size="small"
->initial theme</Text> */}
+  // marginBottom: theme.sizes.step3,
+  // marginTop: theme.sizes.step3,
+  // paddingBottom: theme.sizes.smallest,
+  // paddingLeft: theme.fontSizes.medium,
+  // paddingRight: theme.fontSizes.medium,
+  // paddingTop: theme.sizes.smallest,
+}), 'button');
 
 export default Button;

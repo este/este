@@ -1,18 +1,18 @@
 /* @flow */
 import type { Theme } from './types';
-import configureTypography from './configureTypography';
 import openColor from './openColor';
 
-// Helper to define modular scale and vertical rhythm.
-const typography = configureTypography({
-  baseFontSize: 16,
-  lineHeightRatio: 1.5,
-  scaleRatio: 1.25,
-});
-
 const theme: Theme = {
-  fontSizes: typography.fontSizes,
-  sizes: typography.sizes,
+  baseline() {
+    return this.fontSize * this.lineHeight;
+  },
+  // TODO: fontSize here.
+  rhythm(ratio: number) {
+    return this.baseline() * ratio;
+  },
+  fontSize: 16,
+  lineHeight: 1.5,
+  fontSizeModularScale: 1.5, // modularscale.com
   colors: {
     // TODO: Leverage openColor.
     primary: '#08e',
@@ -47,15 +47,15 @@ const theme: Theme = {
     bold: 600,
     // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: typography.lineHeight,
+    // lineHeight: typography.lineHeight,
   },
   heading: {
     bold: 700,
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    marginBottom: 'step0',
+    marginBottom: 0,
   },
   paragraph: {
-    marginBottom: 'medium',
+    marginBottom: 1,
     maxWidth: '42em',
   },
 };

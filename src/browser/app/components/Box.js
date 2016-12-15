@@ -9,8 +9,6 @@ import type {
   FlexFlow,
   FlexWrap,
   JustifyContent,
-  MarginSize,
-  Size,
   Styled,
   TopBottomLeftRight,
 } from '../themes/types';
@@ -24,8 +22,8 @@ export type BoxProps = {
   backgroundColor?: Color,
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
-  borderRadius?: number, // TODO: Consider Size as well.
-  borderWidth?: number, // TODO: Consider Size as well.
+  borderRadius?: number,
+  borderWidth?: number,
   display?: Display,
   flex?: number,
   flexBasis?: number | string,
@@ -36,29 +34,34 @@ export type BoxProps = {
   flexWrap?: FlexWrap,
   height?: number | string,
   justifyContent?: JustifyContent,
-  margin?: MarginSize,
-  marginBottom?: MarginSize,
-  marginHorizontal?: MarginSize,
-  marginLeft?: MarginSize,
-  marginRight?: MarginSize,
-  marginTop?: MarginSize,
-  marginVertical?: MarginSize,
+  margin?: number | string,
+  marginBottom?: number | string,
+  marginHorizontal?: number | string,
+  marginLeft?: number | string,
+  marginRight?: number | string,
+  marginTop?: number | string,
+  marginVertical?: number | string,
   maxHeight?: number | string,
   maxWidth?: number | string,
   minHeight?: number | string,
   minWidth?: number | string,
   order?: number,
-  padding?: Size,
-  paddingBottom?: Size,
-  paddingHorizontal?: Size,
-  paddingLeft?: Size,
-  paddingRight?: Size,
-  paddingTop?: Size,
-  paddingVertical?: Size,
+  padding?: number | string,
+  paddingBottom?: number | string,
+  paddingHorizontal?: number | string,
+  paddingLeft?: number | string,
+  paddingRight?: number | string,
+  paddingTop?: number | string,
+  paddingVertical?: number | string,
   style?: any,
   width?: number | string,
   noRhythm?: boolean,
 };
+
+const rhythmSizeOrString = (theme, value) =>
+  typeof value === 'number'
+    ? theme.baseline() * value
+    : value;
 
 const directionMapping = {
   marginHorizontal: ['marginLeft', 'marginRight'],
@@ -68,55 +71,45 @@ const directionMapping = {
 };
 
 const propToStyle = (prop, value: any, theme) => {
-  // Note pattern, use theme.sized for vertical rhythm, and theme.fontSize for
-  // horizontal rhythm.
   switch (prop) {
-    // Vertical props.
+    // Simple size props.
     case 'marginBottom':
-    case 'marginTop':
-    case 'paddingBottom':
-    case 'paddingTop':
-      return {
-        [prop]: theme.sizes[value],
-      };
-    // Horizontal props.
     case 'marginLeft':
     case 'marginRight':
+    case 'marginTop':
+    case 'paddingBottom':
     case 'paddingLeft':
     case 'paddingRight':
+    case 'paddingTop':
       return {
-        [prop]: theme.fontSizes[value],
+        [prop]: rhythmSizeOrString(theme, value),
       };
-    // Vertical shorthand props.
-    case 'marginVertical':
-    case 'paddingVertical': {
-      const size = theme.sizes[value];
-      const [d1, d2] = directionMapping[prop];
-      return { [d1]: size, [d2]: size };
-    }
-    // Horizontal shorthand props.
+    // Direction shorthand size props.
     case 'marginHorizontal':
-    case 'paddingHorizontal': {
-      const size = theme.fontSizes[value];
+    case 'marginVertical':
+    case 'paddingHorizontal':
+    case 'paddingVertical': {
       const [d1, d2] = directionMapping[prop];
-      return { [d1]: size, [d2]: size };
+      return {
+        [d1]: rhythmSizeOrString(theme, value),
+        [d2]: rhythmSizeOrString(theme, value),
+      };
     }
-    // Split shorthand to be easily computable.
+    // Split shorthand props to be computable.
     case 'margin': {
       return {
-        marginLeft: theme.fontSizes[value],
-        marginRight: theme.fontSizes[value],
-        marginTop: theme.sizes[value],
-        marginBottom: theme.sizes[value],
+        marginBottom: rhythmSizeOrString(theme, value),
+        marginLeft: rhythmSizeOrString(theme, value),
+        marginRight: rhythmSizeOrString(theme, value),
+        marginTop: rhythmSizeOrString(theme, value),
       };
     }
-    // Split shorthand to be easily computable.
     case 'padding': {
       return {
-        paddingLeft: theme.fontSizes[value],
-        paddingRight: theme.fontSizes[value],
-        paddingTop: theme.sizes[value],
-        paddingBottom: theme.sizes[value],
+        paddingBottom: rhythmSizeOrString(theme, value),
+        paddingLeft: rhythmSizeOrString(theme, value),
+        paddingRight: rhythmSizeOrString(theme, value),
+        paddingTop: rhythmSizeOrString(theme, value),
       };
     }
     // Color props.

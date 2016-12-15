@@ -1,6 +1,7 @@
 /* @flow */
 import type { OpenColor } from './openColor';
 
+// TODO: Import from /common/types
 // Exact is temp workaround until native exact will fix spread and intersection.
 // flowtype.org/docs/objects.html#exact-object-types
 // github.com/facebook/flow/issues/2405#issuecomment-256339492
@@ -20,47 +21,16 @@ type Colors = {
   gray: string,
 };
 
-type Sizes = {|
-  smallest: number,
-  smaller: number,
-  small: number,
-  medium: number,
-  big: number,
-  bigger: number,
-  biggest: number,
-  step0: number,
-  step1: number,
-  step2: number,
-  step3: number,
-  step4: number,
-  step5: number,
-  step6: number,
-  step7: number,
-  step8: number,
-  step9: number,
-  step10: number,
-  step11: number,
-  step12: number,
-  step13: number,
-  step14: number,
-  step15: number,
-  step16: number,
-|};
-
-// Basic theme types.
-
 export type Color = $Keys<Colors>;
-export type Size = $Keys<Sizes>;
 export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
-// Extended theme types.
-
-export type MarginSize = Size | 'auto';
-
 export type Theme = {|
-  fontSizes: Sizes,
-  sizes: Sizes,
+  baseline: () => number,
+  rhythm: (number) => number,
+  fontSize: number,
+  lineHeight: number,
+  fontSizeModularScale: number, // modularscale.com
   colors: Colors & { open: OpenColor },
   border: {|
     radius: number,
@@ -83,16 +53,15 @@ export type Theme = {|
   text: {|
     bold: number,
     fontFamily: string,
-    lineHeight: number,
   |},
   heading: {|
     bold: number,
     fontFamily: string,
-    marginBottom: Size,
+    marginBottom: number | string,
   |},
   paragraph: {|
-    marginBottom: Size,
-    maxWidth: string,
+    marginBottom: number | string,
+    maxWidth: number | string,
   |},
 |};
 
@@ -286,7 +255,7 @@ export type BrowserStyle = {|
   borderTopRightRadius?: string,
   borderTopStyle?: string,
   borderTopWidth?: string,
-  borderWidth?: string,
+  borderWidth?: number | string,
   bottom?: string,
   boxDecorationBreak?: string,
   boxShadow?: string,

@@ -3,7 +3,7 @@ import type { State } from '../../common/types';
 import * as themes from '../app/themes';
 import R from 'ramda';
 import React from 'react';
-import { Box, Button } from '../app/components';
+import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
@@ -13,24 +13,26 @@ type SwitchThemeProps = {
 };
 
 const getSortedThemeKeysWithDefaultAsFirst = () => {
-  const customThemesKeys = Object.keys(themes)
+  const customThemesKeys = Object
+    .keys(themes)
     .filter(key => key !== 'defaultTheme')
     .sort();
   return ['defaultTheme', ...customThemesKeys];
 };
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box>
-    {getSortedThemeKeysWithDefaultAsFirst().map(themeKey => (
+  <Box marginTop="medium">
+    <Heading>Theme Switcher</Heading>
+    {getSortedThemeKeysWithDefaultAsFirst().map((themeKey, i) => (
       <Button
-        size="small"
         key={themeKey}
+        marginLeft={i === 0 ? 'step0' : 'step1'}
         // backgroundColor="warning"
         // mr={1}
         // onClick={() => setTheme(themeKey)}
         // theme={themeKey === currentTheme ? 'primary' : 'secondary'}
       >
-        {themeKey}
+        {themeKey.replace('Theme', ' theme')}
       </Button>
     ))}
   </Box>

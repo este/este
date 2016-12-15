@@ -13,13 +13,14 @@ const messages = defineMessages({
 const Footer = () => (
   <Box
     border="top"
+    marginTop="medium"
     paddingVertical="medium"
   >
-    <Text size="small">
+    <Text size={-1}>
       <FormattedMessage {...messages.madeByHtml} />
     </Text>
     {'\u00a0'}
-    <Link size="small" to="https://twitter.com/steida">
+    <Link size={-1} to="https://twitter.com/steida">
       steida
     </Link>
   </Box>

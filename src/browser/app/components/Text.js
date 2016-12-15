@@ -2,7 +2,6 @@
 import type { BoxProps } from './Box';
 import type {
   Color,
-  Size,
   Styled,
   TextAlign,
   TextDecoration,
@@ -19,21 +18,19 @@ export type TextProps = BoxProps & {
   bold?: boolean,
   color?: Color,
   decoration?: TextDecoration,
-  size?: Size,
+  size?: number,
   transform?: TextTransform,
 };
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
-const computeLineHeight = (fontSize, lineHeight) => {
-  const multiplier = Math.ceil(fontSize / lineHeight);
-  return lineHeight * multiplier;
+const computeLineHeight = (fontSize, baseline) => {
+  const multiplier = Math.ceil(fontSize / baseline);
+  return baseline * multiplier;
 };
 
 const fontSizeAndLineHeight = (theme, props) => {
-  const fontSize = props.size
-    ? theme.fontSizes[props.size]
-    : theme.fontSizes.medium;
-  const lineHeight = computeLineHeight(fontSize, theme.text.lineHeight);
+  const fontSize = theme.fontSize(props.size || 0);
+  const lineHeight = computeLineHeight(fontSize, theme.baseline());
   return {
     fontSize,
     lineHeight: `${lineHeight}px`,

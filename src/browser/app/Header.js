@@ -21,7 +21,7 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
     bold
     color="white"
     exactly={exactly}
-    marginHorizontal="small"
+    marginHorizontal="1em"
     to={to}
   >
     <FormattedMessage {...message} />
@@ -33,8 +33,9 @@ const Header = ({ viewer }: HeaderProps) => (
     backgroundColor="primary"
     display="flex"
     flexWrap="wrap"
-    marginVertical="small"
-    paddingVertical="small"
+    // marginVertical={1/2}
+    paddingHorizontal="1em"
+    paddingVertical={.5}
   >
     <HeaderLink exactly to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />

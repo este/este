@@ -8,7 +8,7 @@ const Paragraph: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
   display: props.display || 'block',
   maxWidth: theme.paragraph.maxWidth,
-  marginBottom: theme.sizes[props.marginBottom || theme.paragraph.marginBottom],
+  // marginBottom: theme.sizes[props.marginBottom || theme.paragraph.marginBottom],
 }));
 
 export default Paragraph;

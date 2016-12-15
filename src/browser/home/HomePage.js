@@ -9,7 +9,10 @@ import {
   PageHeader,
   Paragraph,
   Title,
+  Button,
 } from '../app/components';
+
+import { styled } from '../app/components';
 
 const HomePage = () => (
   <Box>
@@ -19,12 +22,12 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    <Heading size="bigger">
-      How it started
+    <Heading size={2}>
+      Heading
     </Heading>
     <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
     <Paragraph>
       <Link to="https://github.com/este/este">
@@ -39,6 +42,13 @@ const HomePage = () => (
         width={50}
       />
     </Paragraph>
+    {/* primary: '#08e',
+    info: '#08e',
+    success: '#1c7',
+    warning: '#f70',
+    danger: '#f52', */}
+    <Button>Primary</Button>
+    <Button>Info</Button>
     <SwitchTheme />
   </Box>
 );
