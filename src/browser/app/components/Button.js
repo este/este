@@ -24,6 +24,6 @@ const Button: Styled<TextProps> = styled((theme, props) => ({
   paddingLeft: '1em',
   paddingRight: '1em',
   // paddingTop: {1 / 4},
-}), 'button');
+}), 'button', ['onClick']);
 
 export default Button;
