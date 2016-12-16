@@ -16,6 +16,7 @@ import styled from './styled';
 import warning from 'warning';
 
 export type BoxProps = {
+  // CSS
   alignContent?: AlignContent,
   alignItems?: AlignItems,
   alignSelf?: AlignSelf,
@@ -36,11 +37,9 @@ export type BoxProps = {
   justifyContent?: JustifyContent,
   margin?: number | string,
   marginBottom?: number | string,
-  marginHorizontal?: number | string,
   marginLeft?: number | string,
   marginRight?: number | string,
   marginTop?: number | string,
-  marginVertical?: number | string,
   maxHeight?: number | string,
   maxWidth?: number | string,
   minHeight?: number | string,
@@ -48,13 +47,19 @@ export type BoxProps = {
   order?: number,
   padding?: number | string,
   paddingBottom?: number | string,
-  paddingHorizontal?: number | string,
   paddingLeft?: number | string,
   paddingRight?: number | string,
   paddingTop?: number | string,
-  paddingVertical?: number | string,
-  style?: any,
   width?: number | string,
+  // Fela
+  className?: string,
+  id?: string,
+  style?: any,
+  // Custom
+  paddingHorizontal?: number | string,
+  marginHorizontal?: number | string,
+  paddingVertical?: number | string,
+  marginVertical?: number | string,
   noRhythm?: boolean,
 };
 
