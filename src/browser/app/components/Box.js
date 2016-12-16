@@ -130,6 +130,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'flexWrap':
     case 'alignItems':
     case 'alignContent':
+    case 'justifyContent':
     case 'order':
     case 'flexShrink':
     case 'flexBasis':
