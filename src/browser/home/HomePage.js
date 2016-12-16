@@ -25,7 +25,7 @@ const HomePage = () => (
       Heading
     </Heading>
     <Paragraph>
-      Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
     <Paragraph>
@@ -33,21 +33,26 @@ const HomePage = () => (
         github.com/este/este
       </Link>
     </Paragraph>
-    <Paragraph>
+    <Text size={0}>normal text</Text><br />
+    <Text size={-1}>small text</Text><br />
+    <Text size={5}>text 5</Text><br />
+    <Box marginVertical={1.5}>
       <Image
         alt="50x50 placeholder"
         height={50}
         src={require('./50x50.png')}
         width={50}
       />
-    </Paragraph>
+    </Box>
     {/* primary: '#08e',
     info: '#08e',
     success: '#1c7',
     warning: '#f70',
     danger: '#f52', */}
-    <Button>Primary</Button>
-    <Button>Info</Button>
+    <Box>
+      <Button>Primary</Button>
+      <Button>Info</Button>
+    </Box>
     <SwitchTheme />
   </Box>
 );
