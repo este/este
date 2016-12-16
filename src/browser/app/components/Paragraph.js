@@ -7,8 +7,10 @@ import styled from './styled';
 const Paragraph: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
   display: props.display || 'block',
-  maxWidth: theme.paragraph.maxWidth,
-  // marginBottom: theme.sizes[props.marginBottom || theme.paragraph.marginBottom],
+  maxWidth: props.maxWidth || theme.paragraph.maxWidth,
+  ...(props.marginBottom === undefined ? {
+    marginBottom: theme.typography.rhythm(theme.paragraph.marginBottom),
+  } : {}),
 }));
 
 export default Paragraph;

@@ -6,10 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Link } from '../app/components';
 import { connect } from 'react-redux';
 
-type HeaderProps = {
-  viewer: ?User,
-};
-
 type HeaderLinkProps = {
   exactly?: boolean,
   to: string,
@@ -21,21 +17,25 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
     bold
     color="white"
     exactly={exactly}
-    marginHorizontal="1em"
+    marginHorizontal="0.75em"
     to={to}
   >
     <FormattedMessage {...message} />
   </Link>
 );
 
+type HeaderProps = {
+  viewer: ?User,
+};
+
 const Header = ({ viewer }: HeaderProps) => (
   <Box
     backgroundColor="primary"
     display="flex"
     flexWrap="wrap"
-    // marginVertical={1/2}
-    paddingHorizontal="1em"
-    paddingVertical={.5}
+    marginVertical={1 / 2}
+    paddingHorizontal="0.5em"
+    paddingVertical={0.5}
   >
     <HeaderLink exactly to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />

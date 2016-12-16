@@ -10,9 +10,8 @@ import {
   Paragraph,
   Title,
   Button,
+  Text,
 } from '../app/components';
-
-import { styled } from '../app/components';
 
 const HomePage = () => (
   <Box>
@@ -22,7 +21,7 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    <Heading size={2}>
+    <Heading size={1}>
       Heading
     </Heading>
     <Paragraph>

@@ -58,9 +58,9 @@ export type BoxProps = {
   noRhythm?: boolean,
 };
 
-const rhythmSizeOrString = (theme, value) =>
+const rhythmOrString = (theme, value) =>
   typeof value === 'number'
-    ? theme.baseline() * value
+    ? theme.typography.lineHeight * value
     : value;
 
 const directionMapping = {
@@ -82,7 +82,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'paddingRight':
     case 'paddingTop':
       return {
-        [prop]: rhythmSizeOrString(theme, value),
+        [prop]: rhythmOrString(theme, value),
       };
     // Direction shorthand size props.
     case 'marginHorizontal':
@@ -91,25 +91,25 @@ const propToStyle = (prop, value: any, theme) => {
     case 'paddingVertical': {
       const [d1, d2] = directionMapping[prop];
       return {
-        [d1]: rhythmSizeOrString(theme, value),
-        [d2]: rhythmSizeOrString(theme, value),
+        [d1]: rhythmOrString(theme, value),
+        [d2]: rhythmOrString(theme, value),
       };
     }
     // Split shorthand props to be computable.
     case 'margin': {
       return {
-        marginBottom: rhythmSizeOrString(theme, value),
-        marginLeft: rhythmSizeOrString(theme, value),
-        marginRight: rhythmSizeOrString(theme, value),
-        marginTop: rhythmSizeOrString(theme, value),
+        marginBottom: rhythmOrString(theme, value),
+        marginLeft: rhythmOrString(theme, value),
+        marginRight: rhythmOrString(theme, value),
+        marginTop: rhythmOrString(theme, value),
       };
     }
     case 'padding': {
       return {
-        paddingBottom: rhythmSizeOrString(theme, value),
-        paddingLeft: rhythmSizeOrString(theme, value),
-        paddingRight: rhythmSizeOrString(theme, value),
-        paddingTop: rhythmSizeOrString(theme, value),
+        paddingBottom: rhythmOrString(theme, value),
+        paddingLeft: rhythmOrString(theme, value),
+        paddingRight: rhythmOrString(theme, value),
+        paddingTop: rhythmOrString(theme, value),
       };
     }
     // Color props.
@@ -165,7 +165,7 @@ const adjustPaddingForRhythm = (noRhythm, border, borderWidth, style) => {
         ? 'horizontal'
         : 'vertical';
       warning(false, [
-        `Please increase ${paddingProp} to ensure ${direction} rhythm. `,
+        `Increase ${paddingProp} to ensure ${direction} rhythm. `,
         'Use noRhythm to suppress this warning.',
       ].join(''));
       return {

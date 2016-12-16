@@ -26,11 +26,11 @@ export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 export type Theme = {|
-  baseline: () => number,
-  rhythm: (number) => number,
-  fontSize: number,
-  lineHeight: number,
-  fontSizeModularScale: number, // modularscale.com
+  typography: {|
+    fontSize: (number) => number,
+    lineHeight: number,
+    rhythm: (number) => number,
+  |},
   colors: Colors & { open: OpenColor },
   border: {|
     radius: number,
@@ -57,10 +57,10 @@ export type Theme = {|
   heading: {|
     bold: number,
     fontFamily: string,
-    marginBottom: number | string,
+    marginBottom: number,
   |},
   paragraph: {|
-    marginBottom: number | string,
+    marginBottom: number,
     maxWidth: number | string,
   |},
 |};

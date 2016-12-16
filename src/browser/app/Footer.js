@@ -13,8 +13,8 @@ const messages = defineMessages({
 const Footer = () => (
   <Box
     border="top"
-    marginTop="medium"
-    paddingVertical="medium"
+    marginTop={1}
+    paddingVertical={1}
   >
     <Text size={-1}>
       <FormattedMessage {...messages.madeByHtml} />

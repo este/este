@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { Theme } from './types';
 // import openColor from './openColor';
-//
+// rozhodne copy past, nechci mit absolutne zadne zavislosti, ok
 // const theme: Theme = {
 //   text: {
 //     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',

@@ -8,8 +8,12 @@ const Heading: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
   display: props.display || 'block',
   fontFamily: theme.heading.fontFamily,
-  fontWeight: props.bold === undefined ? 'bold' : props.bold ? theme.text.bold : 'normal',
-  // marginBottom: theme.sizes[props.marginBottom || theme.heading.marginBottom],
+  fontWeight: props.bold === undefined
+    ? 'bold'
+    : props.bold ? theme.text.bold : 'normal',
+  ...(props.marginBottom === undefined ? {
+    marginBottom: theme.typography.rhythm(theme.heading.marginBottom),
+  } : {}),
 }));
 
 export default Heading;

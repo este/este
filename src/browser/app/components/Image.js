@@ -19,8 +19,8 @@ const ImageWrapper = styled((theme, props) => ({
   display: 'block',
   // width: ,
   height: `${
-    // Shrink to nearest baseline.
-    Math.floor(props.height / theme.baseline()) * theme.baseline()
+    Math.floor(props.height / theme.typography.lineHeight) *
+    theme.typography.lineHeight
   }px`,
 }));
 

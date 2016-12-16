@@ -7,8 +7,8 @@ const Container = styled(theme => ({
   margin: 'auto',
   maxWidth: theme.container.maxWidths.big, // TODO: Use media queries.
   minHeight: '100vh', // make footer sticky
-  paddingLeft: theme.rhythm(1),
-  paddingRight: theme.rhythm(1),
+  paddingLeft: theme.typography.rhythm(1),
+  paddingRight: theme.typography.rhythm(1),
 }));
 
 export default Container;

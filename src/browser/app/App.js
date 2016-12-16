@@ -24,13 +24,13 @@ import HomePage from '../home/HomePage';
 // import SignInPage from '../auth/SignInPage';
 // import TodosPage from '../todos/TodosPage';
 
-const theme = (currentTheme) =>
-  themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
-
 type AppProps = {
   currentLocale: string,
   currentTheme: ?string,
 };
+
+const theme = (currentTheme) =>
+  themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
 
 const App = ({ currentLocale, currentTheme }: AppProps) => (
   <ThemeProvider
@@ -52,7 +52,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           ...favicon.link,
           // Test vertical rhythm.
           {
-            href: `http://basehold.it/${theme(currentTheme).baseline()}/0/0/0/0.1`,
+            href: `http://basehold.it/${theme(currentTheme).typography.lineHeight}/0/0/0/0.1`,
             rel: 'stylesheet',
           },
         ]}

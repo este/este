@@ -1,18 +1,14 @@
 /* @flow */
 import type { Theme } from './types';
 import openColor from './openColor';
+import typography from './typography';
 
 const theme: Theme = {
-  baseline() {
-    return this.fontSize * this.lineHeight;
-  },
-  // TODO: fontSize here.
-  rhythm(ratio: number) {
-    return this.baseline() * ratio;
-  },
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontSizeModularScale: 1.5, // modularscale.com
+  typography: typography({
+    fontSize: 16,
+    fontSizeScale: 'step5', // modularscale.com
+    lineHeight: 24,
+  }),
   colors: {
     // TODO: Leverage openColor.
     primary: '#08e',
@@ -47,12 +43,11 @@ const theme: Theme = {
     bold: 600,
     // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    // lineHeight: typography.lineHeight,
   },
   heading: {
     bold: 700,
     fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-    marginBottom: 0,
+    marginBottom: 1,
   },
   paragraph: {
     marginBottom: 1,

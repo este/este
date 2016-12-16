@@ -24,17 +24,14 @@ export type TextProps = BoxProps & {
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
 const computeLineHeight = (fontSize, baseline) => {
-  const multiplier = Math.ceil(fontSize / baseline);
-  return baseline * multiplier;
+  const lines = Math.ceil(fontSize / baseline);
+  return baseline * lines;
 };
 
 const fontSizeAndLineHeight = (theme, props) => {
-  const fontSize = theme.fontSize(props.size || 0);
-  const lineHeight = computeLineHeight(fontSize, theme.baseline());
-  return {
-    fontSize,
-    lineHeight: `${lineHeight}px`,
-  };
+  const fontSize = theme.typography.fontSize(props.size || 0);
+  const lineHeight = computeLineHeight(fontSize, theme.typography.lineHeight);
+  return { fontSize, lineHeight: `${lineHeight}px` };
 };
 
 const Text: Styled<TextProps> = styled((theme, props) => ({

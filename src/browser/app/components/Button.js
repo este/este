@@ -14,15 +14,16 @@ const Button: Styled<TextProps> = styled((theme, props) => ({
   color: theme.colors.white,
   cursor: 'pointer',
   display: props.display || 'inline-block',
-  // fontSize: theme.fontSize(0),
-  // fontSize: theme.fontSizes.small,
-  fontWeight: props.bold === undefined ? 'bold' : props.bold ? theme.text.bold : 'normal',
+  fontSize: theme.typography.fontSize(props.size || -1),
+  fontWeight: props.bold === undefined
+    ? 'bold'
+    : props.bold ? theme.text.bold : 'normal',
   // marginBottom: theme.sizes.step3,
   // marginTop: theme.sizes.step3,
   // paddingBottom: theme.sizes.smallest,
-  // paddingLeft: theme.fontSizes.medium,
-  // paddingRight: theme.fontSizes.medium,
-  // paddingTop: theme.sizes.smallest,
+  paddingLeft: '1em',
+  paddingRight: '1em',
+  // paddingTop: {1 / 4},
 }), 'button');
 
 export default Button;
