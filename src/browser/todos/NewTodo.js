@@ -1,5 +1,5 @@
 // /* @flow */
-// import R from 'bundle/ramba';
+// import compose from 'ramda/src/compose';
 // import React from 'react';
 // import newTodoMessages from '../../common/todos/newTodoMessages';
 // import { Input, Form } from '../app/components';
@@ -35,7 +35,7 @@
 //   intl: intlShape.isRequired,
 // };
 //
-// export default R.compose(
+// export default compose(
 //   connect(
 //     null,
 //     { addTodo },

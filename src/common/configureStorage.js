@@ -1,5 +1,5 @@
 /* @flow weak */
-import { pick } from 'bundle/ramba';
+import pick from 'ramda/src/pick';
 import { createTransform } from 'redux-persist';
 
 // TODO: Add redux-persist-migrate.

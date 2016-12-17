@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { State } from '../../common/types';
 // import Gravatar from 'react-gravatar';
-// import R from 'bundle/ramba';
+// import compose from 'ramda/src/compose';
 // import React from 'react';
 // import { Image, Loading, Text, View } from '../app/components';
 // import { connect } from 'react-redux';
@@ -62,7 +62,7 @@
 //   users: React.PropTypes.array,
 // };
 //
-// export default R.compose(
+// export default compose(
 //   connect(
 //     (state: State) => ({
 //       users: state.users.online,

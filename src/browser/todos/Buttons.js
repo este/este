@@ -1,6 +1,6 @@
 // /* @flow */
 // import type { State } from '../../common/types';
-// import R from 'bundle/ramba';
+// import isEmpty from 'ramda/src/isEmpty';
 // import React from 'react';
 // import buttonsMessages from '../../common/todos/buttonsMessages';
 // import { Button, Space, View } from '../app/components';
@@ -28,7 +28,7 @@
 //
 // export default connect(
 //   (state: State) => ({
-//     isEmpty: R.isEmpty(state.todos.all),
+//     isEmpty: isEmpty(state.todos.all),
 //   }),
 //   { addHundredTodos, clearAllTodos },
 // )(Buttons);

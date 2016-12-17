@@ -1,7 +1,12 @@
 /* @flow */
 import type { State } from '../../common/types';
 import Buttons from './Buttons';
-import { isEmpty, compose, reverse, sortBy, prop, values } from 'bundle/ramba';
+import compose from 'ramda/src/compose';
+import isEmpty from 'ramda/src/isEmpty';
+import prop from 'ramda/src/prop';
+import reverse from 'ramda/src/reverse';
+import sortBy from 'ramda/src/sortBy';
+import values from 'ramda/src/values';
 import React from 'react';
 import Todo from './Todo';
 import theme from '../app/themes/initial';

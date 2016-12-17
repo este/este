@@ -176,7 +176,6 @@ const makeConfig = (options) => {
       modules: [constants.SRC_DIR, 'node_modules'],
       alias: {
         react$: require.resolve(path.join(constants.NODE_MODULES_DIR, 'react')),
-        bundle: path.join(constants.SRC_DIR, 'common/lib/bundle/'),
       },
     },
   };

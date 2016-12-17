@@ -1,5 +1,5 @@
 /* @flow weak */
-import { path } from 'bundle/ramba';
+import path from 'ramda/src/path';
 import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';

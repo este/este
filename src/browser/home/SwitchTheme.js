@@ -1,7 +1,7 @@
 /* @flow */
 import type { State } from '../../common/types';
 import * as themes from '../app/themes';
-import { compose } from 'bundle/ramba';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';

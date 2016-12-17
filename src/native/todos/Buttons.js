@@ -1,6 +1,6 @@
 /* @flow */
 import type { State } from '../../common/types';
-import { values } from 'bundle/ramba';
+import values from 'ramda/src/values';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/themes/initial';

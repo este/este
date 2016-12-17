@@ -1,5 +1,5 @@
 /* @flow */
-import { compose } from 'bundle/ramba';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/themes/initial';

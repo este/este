@@ -1,6 +1,8 @@
 /* @flow */
 import type { Action, TodosState } from '../types';
-import { assocPath, dissocPath, filter } from 'bundle/ramba';
+import assocPath from 'ramda/src/assocPath';
+import dissocPath from 'ramda/src/dissocPath';
+import filter from 'ramda/src/filter';
 
 const initialState = {
   all: {},

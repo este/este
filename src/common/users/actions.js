@@ -1,6 +1,6 @@
 /* @flow */
 import type { Action, Deps } from '../types';
-import { dissoc } from 'bundle/ramba';
+import dissoc from 'ramda/src/dissoc';
 import createUserFirebase from './createUserFirebase';
 import { appError } from '../app/actions';
 import { Observable } from 'rxjs/Observable';

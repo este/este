@@ -1,7 +1,12 @@
 /* @flow */
 import type { Action, UsersState } from '../types';
-import { sortBy, prop, compose, map, last, values } from 'bundle/ramba';
 import createUserFirebase from './createUserFirebase';
+import compose from 'ramda/src/compose';
+import last from 'ramda/src/last';
+import map from 'ramda/src/map';
+import prop from 'ramda/src/prop';
+import sortBy from 'ramda/src/sortBy';
+import values from 'ramda/src/values';
 
 const initialState = {
   // Undefined is absence of evidence, null is evidence of absence.

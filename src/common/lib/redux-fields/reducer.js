@@ -1,6 +1,7 @@
 /* @flow weak */
 import * as actions from './actions';
-import { dissocPath, assocPath } from 'bundle/ramba';
+import assocPath from 'ramda/src/assocPath';
+import dissocPath from 'ramda/src/dissocPath';
 
 const initialState = {};
 

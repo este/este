@@ -4,7 +4,7 @@ import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
-import { compose } from 'bundle/ramba';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';

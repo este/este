@@ -1,6 +1,6 @@
 /* @flow */
 import type { Action, Deps, Todo } from '../types';
-import { range } from 'bundle/ramba';
+import range from 'ramda/src/range';
 
 export const addHundredTodos = () => ({ getUid, now }: Deps): Action => {
   const todos = range(0, 100).map(() => {
