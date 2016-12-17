@@ -44,6 +44,6 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
-}));
+}), 'span');
 
 export default Text;
