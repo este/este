@@ -8,6 +8,7 @@ import Box from "./Box";
 export type InputProps = TextProps & {
   name?: string,
   label?: string,
+  labelSize?: string,
   placeholder?: string,
   maxLength?: number,
   type?: InputTypes,
@@ -26,7 +27,7 @@ const CustomInput = styled((theme, props: InputProps) => ({
 const Input: Styled<InputProps> = (props: InputProps) => {
   return (
     <Box marginBottom={'0.5em'}>
-      {props.label ? <Text size={0}>{props.label}</Text> : null}
+      {props.label ? <Text size={props.labelSize ? props.labelSize : 0}>{props.label}</Text> : null}
       <CustomInput {...props}/>
     </Box>
   )

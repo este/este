@@ -10,6 +10,7 @@ import {
   Paragraph,
   Title,
   Button,
+  Input,
   Text,
 } from '../app/components';
 
@@ -60,6 +61,7 @@ const HomePage = () => (
         </Button>
       ))}
     </Box>
+    <Input label="Input" labelSize={1} placeholder="Lorem ipsum dolor"/>
     <SwitchTheme />
   </Box>
 );
