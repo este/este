@@ -44,14 +44,18 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    {/* primary: '#08e',
-    info: '#08e',
-    success: '#1c7',
-    warning: '#f70',
-    danger: '#f52', */}
     <Box marginBottom={1}>
-      {['Primary', 'Info'].map((color, i) => (
-        <Button key={color} marginLeft={i && '.75em'}>
+      {[
+        'primary',
+        'success',
+        'warning',
+        'danger',
+      ].map((color, i) => (
+        <Button
+          backgroundColor={color}
+          key={color}
+          marginLeft={i && '.75em'}
+        >
           {color}
         </Button>
       ))}

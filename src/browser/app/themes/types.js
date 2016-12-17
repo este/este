@@ -12,7 +12,6 @@ export type Exact<T> = T & $Shape<T>;
 
 type Colors = {
   primary: string,
-  info: string,
   success: string,
   warning: string,
   danger: string,

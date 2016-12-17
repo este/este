@@ -11,9 +11,7 @@ const theme: Theme = {
     lineHeight: 24,
   }),
   colors: {
-    // TODO: Leverage openColor.
     primary: '#08e',
-    info: '#08e',
     success: '#1c7',
     warning: '#f70',
     danger: '#f52',
