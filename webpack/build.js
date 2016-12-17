@@ -11,11 +11,10 @@ const build = (done) => {
     // We can save jsonStats to be analyzed with
     // github.com/robertknight/webpack-bundle-size-analyzer.
     // $ webpack-bundle-size-analyzer ./bundle-stats.json
-    // const fs = require('fs');
-    // fs.writeFileSync('./bundle-stats.json', JSON.stringify(jsonStats));
+    const fs = require('fs');
+    fs.writeFileSync('./bundle-stats.json', JSON.stringify(jsonStats));
 
-    const buildError = fatalError || jsonStats.errors[0] || jsonStats.warnings[0];
-
+    const buildError = fatalError || jsonStats.errors[0];
     if (buildError) {
       throw new gutil.PluginError('webpack', buildError);
     }

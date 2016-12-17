@@ -65,20 +65,20 @@ const makeConfig = (options) => {
           loader: 'url-loader',
           test: /\.(gif|jpg|png|svg)(\?.*)?$/,
           options: {
-            limit: 10000
-          }
+            limit: 10000,
+          },
         }, {
           loader: 'url-loader',
           test: /favicon\.ico$/,
           options: {
-            limit: 1
-          }
+            limit: 1,
+          },
         }, {
           loader: 'url-loader',
           test: /\.(ttf|eot|woff|woff2)(\?.*)?$/,
           options: {
-            limit: 100000
-          }
+            limit: 100000,
+          },
         }, {
           loader: 'babel-loader',
           test: /\.js$/,
@@ -123,7 +123,7 @@ const makeConfig = (options) => {
           debug: isDevelopment,
           // Webpack 2 no longer allows custom properties in configuration.
           // Loaders should be updated to allow passing options via loader options in module.rules.
-          // Until loaders are updated one can use the LoaderOptionsPlugin to pass options to the loaders
+          // Alternatively, LoaderOptionsPlugin can be used to pass options to loaders
           hotPort: constants.HOT_RELOAD_PORT,
           postcss: () => [autoprefixer({ browsers: 'last 2 version' })],
         }),
