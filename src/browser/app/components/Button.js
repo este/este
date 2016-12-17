@@ -14,7 +14,9 @@ const Button: Styled<TextProps> = styled((theme, props) => ({
   color: theme.colors.white,
   cursor: 'pointer',
   display: props.display || 'inline-block',
-  fontSize: theme.typography.fontSize(props.size || -1),
+  fontSize: theme.typography.fontSize(
+    props.size === undefined ? -1 : props.size
+  ),
   fontWeight: props.bold === undefined
     ? 'bold'
     : props.bold ? theme.text.bold : 'normal',
