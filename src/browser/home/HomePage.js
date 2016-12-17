@@ -21,7 +21,7 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    <Heading size={1}>
+    <Heading size={2}>
       Heading
     </Heading>
     <Paragraph>
@@ -49,12 +49,9 @@ const HomePage = () => (
     success: '#1c7',
     warning: '#f70',
     danger: '#f52', */}
-    <Box backgroundColor="primary">fok</Box>
-    <Box>
-      {/* List of buttons is just mapped array. */}
+    <Box marginBottom={1}>
       {['Primary', 'Info'].map((color, i) => (
-        // <Button outline marginLeft={i && '.75em'}>
-        <Button marginLeft={i && '.75em'} key={color}>
+        <Button key={color} marginLeft={i && '.75em'}>
           {color}
         </Button>
       ))}

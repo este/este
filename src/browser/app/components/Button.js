@@ -18,12 +18,8 @@ const Button: Styled<TextProps> = styled((theme, props) => ({
   fontWeight: props.bold === undefined
     ? 'bold'
     : props.bold ? theme.text.bold : 'normal',
-  // marginBottom: theme.sizes.step3,
-  // marginTop: theme.sizes.step3,
-  // paddingBottom: theme.sizes.smallest,
-  // paddingTop: {1 / 4},
-  paddingLeft: '1em',
-  paddingRight: '1em',
+  paddingLeft: '1.5em',
+  paddingRight: '1.5em',
 }), 'button', ['onClick']);
 
 export default Button;

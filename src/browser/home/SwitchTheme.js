@@ -21,8 +21,8 @@ const getSortedThemeKeysWithDefaultAsFirst = () => {
 };
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box marginTop="medium">
-    <Heading>Theme Switcher</Heading>
+  <Box marginBottom={.5}>
+    <Heading marginBottom={.5}>Switch Theme</Heading>
     {getSortedThemeKeysWithDefaultAsFirst().map((themeKey, i) => (
       <Button
         key={themeKey}

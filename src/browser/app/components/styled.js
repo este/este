@@ -1,6 +1,18 @@
 /* @flow */
 import type { BrowserStyle, Styled, Theme } from '../themes/types';
+import React from 'react';
 import { createComponent } from 'react-fela';
+
+// TODO: Configure via context for React Native.
+const getPlatformType = (type) => {
+  // Use View for div and Text for span.
+  if (type === 'button') {
+    return (props) => (
+      <div tabIndex="0" role="button" {...props} />
+    );
+  }
+  return type;
+};
 
 const createComponentRule = (rule) => (props) => {
   const { $extends, ...style } = typeof rule === 'function'
@@ -19,7 +31,8 @@ const styled = <Props>(
   passProps?: Array<string>,
 ): Styled<Props> => {
   const componentRule = createComponentRule(rule);
-  const Component = createComponent(componentRule, type, passProps);
+  const platformType = getPlatformType(type);
+  const Component = createComponent(componentRule, platformType, passProps);
   Component.rule = componentRule;
   return Component;
 };
