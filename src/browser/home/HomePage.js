@@ -11,6 +11,7 @@ import {
   Title,
   Button,
   Text,
+  Input
 } from '../app/components';
 
 const HomePage = () => (
@@ -46,6 +47,7 @@ const HomePage = () => (
     success: '#1c7',
     warning: '#f70',
     danger: '#f52', */}
+    <Input placeholder="This is a placeholder"/>
     <Button>Primary</Button>
     <Button>Info</Button>
     <SwitchTheme />
