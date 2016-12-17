@@ -15,6 +15,8 @@ import type {
 import styled from './styled';
 import warning from 'warning';
 
+type RhythmOrString = number | string;
+
 export type BoxProps = {
   // CSS
   alignContent?: AlignContent,
@@ -33,34 +35,35 @@ export type BoxProps = {
   flexGrow?: number,
   flexShrink?: number,
   flexWrap?: FlexWrap,
-  height?: number | string,
+  height?: RhythmOrString,
   justifyContent?: JustifyContent,
-  margin?: number | string,
-  marginBottom?: number | string,
-  marginLeft?: number | string,
-  marginRight?: number | string,
-  marginTop?: number | string,
-  maxHeight?: number | string,
-  maxWidth?: number | string,
-  minHeight?: number | string,
-  minWidth?: number | string,
+  margin?: RhythmOrString,
+  marginBottom?: RhythmOrString,
+  marginLeft?: RhythmOrString,
+  marginRight?: RhythmOrString,
+  marginTop?: RhythmOrString,
+  maxHeight?: RhythmOrString,
+  maxWidth?: RhythmOrString,
+  minHeight?: RhythmOrString,
+  minWidth?: RhythmOrString,
   order?: number,
-  padding?: number | string,
-  paddingBottom?: number | string,
-  paddingLeft?: number | string,
-  paddingRight?: number | string,
-  paddingTop?: number | string,
-  width?: number | string,
+  padding?: RhythmOrString,
+  paddingBottom?: RhythmOrString,
+  paddingLeft?: RhythmOrString,
+  paddingRight?: RhythmOrString,
+  paddingTop?: RhythmOrString,
+  width?: RhythmOrString,
   // Fela
   className?: string,
   id?: string,
   style?: any,
   // Custom
-  paddingHorizontal?: number | string,
-  marginHorizontal?: number | string,
-  paddingVertical?: number | string,
-  marginVertical?: number | string,
+  paddingHorizontal?: RhythmOrString,
+  marginHorizontal?: RhythmOrString,
+  paddingVertical?: RhythmOrString,
+  marginVertical?: RhythmOrString,
   noRhythm?: boolean,
+  spaceBetween?: RhythmOrString,
 };
 
 const rhythmOrString = (theme, value) =>
@@ -77,7 +80,7 @@ const directionMapping = {
 
 const propToStyle = (prop, value: any, theme) => {
   switch (prop) {
-    // Simple size props.
+    // Simple rhythmOrString props.
     case 'marginBottom':
     case 'marginLeft':
     case 'marginRight':
@@ -86,10 +89,16 @@ const propToStyle = (prop, value: any, theme) => {
     case 'paddingLeft':
     case 'paddingRight':
     case 'paddingTop':
+    case 'width':
+    case 'height':
+    case 'maxWidth':
+    case 'maxHeight':
+    case 'minWidth':
+    case 'minHeight':
       return {
         [prop]: rhythmOrString(theme, value),
       };
-    // Direction shorthand size props.
+    // Shorthand rhythmOrString props.
     case 'marginHorizontal':
     case 'marginVertical':
     case 'paddingHorizontal':
@@ -100,9 +109,9 @@ const propToStyle = (prop, value: any, theme) => {
         [d2]: rhythmOrString(theme, value),
       };
     }
-    // Split shorthand props to be computable.
     case 'margin': {
       return {
+        // Split margin shorthand to be easily computable.
         marginBottom: rhythmOrString(theme, value),
         marginLeft: rhythmOrString(theme, value),
         marginRight: rhythmOrString(theme, value),
@@ -111,6 +120,7 @@ const propToStyle = (prop, value: any, theme) => {
     }
     case 'padding': {
       return {
+        // Split padding shorthand to be easily computable.
         paddingBottom: rhythmOrString(theme, value),
         paddingLeft: rhythmOrString(theme, value),
         paddingRight: rhythmOrString(theme, value),
@@ -120,13 +130,7 @@ const propToStyle = (prop, value: any, theme) => {
     // Color props.
     case 'backgroundColor':
       return { backgroundColor: theme.colors[value] };
-    // Value props.
-    case 'width':
-    case 'height':
-    case 'maxWidth':
-    case 'maxHeight':
-    case 'minWidth':
-    case 'minHeight':
+    // Unmodified props.
     case 'display':
     case 'flex':
     case 'flexDirection':
@@ -141,6 +145,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'flexBasis':
     case 'alignSelf':
       return { [prop]: value };
+    // Namespaced props.
     case 'borderRadius':
       return { borderRadius: value || theme.border.radius };
     default:

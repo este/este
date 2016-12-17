@@ -13,9 +13,9 @@ const PageHeader = (props: PageHeaderProps) => (
   <Box
     border="bottom"
     borderWidth={2}
-    marginBottom={5/2}
+    marginBottom={5 / 2}
     marginTop={2}
-    paddingBottom={1/2}
+    paddingBottom={1 / 2}
   >
     <Heading size={2} marginBottom={0}>{props.heading}</Heading>
     <Paragraph marginBottom={0}>{props.description}</Paragraph>
