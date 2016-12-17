@@ -49,9 +49,15 @@ const HomePage = () => (
     success: '#1c7',
     warning: '#f70',
     danger: '#f52', */}
+    <Box backgroundColor="primary">fok</Box>
     <Box>
-      <Button>Primary</Button>
-      <Button>Info</Button>
+      {/* List of buttons is just mapped array. */}
+      {['Primary', 'Info'].map((color, i) => (
+        // <Button outline marginLeft={i && '.75em'}>
+        <Button marginLeft={i && '.75em'} key={color}>
+          {color}
+        </Button>
+      ))}
     </Box>
     <SwitchTheme />
   </Box>

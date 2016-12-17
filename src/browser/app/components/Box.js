@@ -15,7 +15,7 @@ import type {
 import styled from './styled';
 import warning from 'warning';
 
-type RhythmOrString = number | string;
+type RhythmOrString = number | string | false;
 
 export type BoxProps = {
   // CSS
@@ -63,13 +63,12 @@ export type BoxProps = {
   paddingVertical?: RhythmOrString,
   marginVertical?: RhythmOrString,
   noRhythm?: boolean,
-  spaceBetween?: RhythmOrString,
 };
 
-const rhythmOrString = (theme, value) =>
+const rhythmOrString = (theme, value: RhythmOrString) =>
   typeof value === 'number'
     ? theme.typography.lineHeight * value
-    : value;
+    : value || 0;
 
 const directionMapping = {
   marginHorizontal: ['marginLeft', 'marginRight'],
