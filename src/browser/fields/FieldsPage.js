@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { State } from '../../common/types';
 // import DynamicField from './DynamicField';
-// import R from 'ramda';
+// import R from 'bundle/ramba';
 // import React from 'react';
 // import buttonsMessages from '../../common/app/buttonsMessages';
 // import linksMessages from '../../common/app/linksMessages';

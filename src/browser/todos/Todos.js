@@ -1,6 +1,6 @@
 // /* @flow */
 // import type { State } from '../../common/types';
-// import R from 'ramda';
+// import R from 'bundle/ramba';
 // import React from 'react';
 // import Todo from './Todo';
 // import todosMessages from '../../common/todos/todosMessages';

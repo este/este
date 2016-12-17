@@ -1,6 +1,6 @@
 /* @flow */
 import type { Action, UsersState } from '../types';
-import R from 'ramda';
+import { sortBy, prop, compose, map, last, values } from 'bundle/ramba';
 import createUserFirebase from './createUserFirebase';
 
 const initialState = {
@@ -25,12 +25,12 @@ const reducer = (
       if (!presence) {
         return { ...state, online: null };
       }
-      const sortBylastSeenAt = R.sortBy(R.prop('lastSeenAt'));
-      const online = R.compose(
-        R.map(item => item.user),
-        R.sortBy(sortBylastSeenAt),
-        R.values,
-        R.map(R.compose(R.last, sortBylastSeenAt, R.values)),
+      const sortBylastSeenAt = sortBy(prop('lastSeenAt'));
+      const online = compose(
+        map(item => item.user),
+        sortBy(sortBylastSeenAt),
+        values,
+        map(compose(last, sortBylastSeenAt, values)),
       )(presence);
       return { ...state, online };
     }

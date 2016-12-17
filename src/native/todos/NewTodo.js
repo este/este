@@ -1,5 +1,5 @@
 /* @flow */
-import R from 'ramda';
+import { compose } from 'bundle/ramba';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/themes/initial';
@@ -53,7 +53,7 @@ NewTodo.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default R.compose(
+export default compose(
   connect(
     null,
     { addTodo },

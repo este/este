@@ -4,7 +4,7 @@ import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
-import R from 'ramda';
+import { compose } from 'bundle/ramba';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
@@ -76,7 +76,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
   </ThemeProvider>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       currentLocale: state.intl.currentLocale,

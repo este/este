@@ -1,6 +1,6 @@
 /* @flow */
 import type { Action, Deps } from '../types';
-import R from 'ramda';
+import { dissoc } from 'bundle/ramba';
 import createUserFirebase from './createUserFirebase';
 import { appError } from '../app/actions';
 import { Observable } from 'rxjs/Observable';
@@ -49,7 +49,7 @@ const usersPresenceEpic = (
       connectionRef = firebase.child(`users-presence/${user.id}`)
         .push({
           lastSeenAt: firebaseDatabase.ServerValue.TIMESTAMP,
-          user: R.dissoc('email', user),
+          user: dissoc('email', user),
         });
       connectionRef.onDisconnect().remove();
     };

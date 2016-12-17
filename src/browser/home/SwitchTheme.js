@@ -1,7 +1,7 @@
 /* @flow */
 import type { State } from '../../common/types';
 import * as themes from '../app/themes';
-import R from 'ramda';
+import { compose } from 'bundle/ramba';
 import React from 'react';
 import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
   </Box>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       currentTheme: state.themes.currentTheme || 'defaultTheme',

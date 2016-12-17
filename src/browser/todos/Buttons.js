@@ -1,6 +1,6 @@
 // /* @flow */
 // import type { State } from '../../common/types';
-// import R from 'ramda';
+// import R from 'bundle/ramba';
 // import React from 'react';
 // import buttonsMessages from '../../common/todos/buttonsMessages';
 // import { Button, Space, View } from '../app/components';

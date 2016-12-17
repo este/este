@@ -1,6 +1,6 @@
 /* @flow weak */
 import * as actions from './actions';
-import R from 'ramda';
+import { dissocPath, assocPath } from 'bundle/ramba';
 
 const initialState = {};
 
@@ -9,12 +9,12 @@ const fieldsReducer = (state = initialState, action) => {
 
     case actions.FIELDS_RESET_FIELDS: {
       const { path } = action.payload;
-      return R.dissocPath(path, state);
+      return dissocPath(path, state);
     }
 
     case actions.FIELDS_SET_FIELD: {
       const { path, value } = action.payload;
-      return R.assocPath(path, value, state);
+      return assocPath(path, value, state);
     }
 
     default:

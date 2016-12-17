@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { State } from '../../common/types';
 // import Email from './Email';
-// import R from 'ramda';
+// import R from 'bundle/ramba';
 // import React from 'react';
 // import SignInError from './SignInError';
 // import Social from './Social';

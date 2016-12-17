@@ -1,5 +1,5 @@
 // /* @flow */
-// import R from 'ramda';
+// import R from 'bundle/ramba';
 // import React from 'react';
 // import newTodoMessages from '../../common/todos/newTodoMessages';
 // import { Input, Form } from '../app/components';
