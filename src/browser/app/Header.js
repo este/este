@@ -14,10 +14,10 @@ type HeaderLinkProps = {
 
 const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
   <Link
-    antialiasing
     bold
     color="white"
     exactly={exactly}
+    fontSmoothing
     marginHorizontal="0.75em"
     to={to}
   >

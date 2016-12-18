@@ -39,7 +39,7 @@ const Button: Styled<ButtonProps> = styled((theme, props) => ({
 ]);
 
 Button.defaultProps = ({
-  antialiasing: true,
+  fontSmoothing: true,
 }: Exact<TextProps>);
 
 export default Button;

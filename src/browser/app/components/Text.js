@@ -11,7 +11,6 @@ import Box from './Box';
 import styled from './styled';
 
 export type TextProps = BoxProps & {
-  antialiasing?: boolean,
   // The lowest common denominator of:
   //  w3schools.com/css/css_text.asp
   //  facebook.github.io/react-native/releases/0.39/docs/text.html#text
@@ -21,6 +20,8 @@ export type TextProps = BoxProps & {
   decoration?: TextDecoration,
   size?: number,
   transform?: TextTransform,
+  // Custom stuff.
+  fontSmoothing?: boolean,
 };
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
@@ -38,8 +39,9 @@ const fontSizeAndLineHeight = (theme, props) => {
   };
 };
 
+// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// So we are use it only for elements with light text and dark background.
 const fontSmoothing = (antialiasing) => {
-  // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
   if (!antialiasing) return {};
   return {
     MozOsxFontSmoothing: 'grayscale',
@@ -57,7 +59,7 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
   ...fontSizeAndLineHeight(theme, props),
-  ...fontSmoothing(props.antialiasing),
+  ...fontSmoothing(props.fontSmoothing),
 }), 'span');
 
 export default Text;

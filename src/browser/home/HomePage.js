@@ -21,6 +21,7 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
+    {/* 0 is default text size. Increment or decrement it. */}
     <Heading size={1}>
       Heading
     </Heading>
@@ -36,7 +37,9 @@ const HomePage = () => (
     <Text size={0}>normal text</Text><br />
     <Text size={-1}>small text</Text><br />
     <Text size={5}>text 5</Text><br />
+    {/* 1 is the computed baseline. */}
     <Box marginVertical={1.5}>
+      {/* Image height is adjusted for the baseline. */}
       <Image
         alt="50x50 placeholder"
         height={50}
@@ -54,10 +57,9 @@ const HomePage = () => (
         <Button
           backgroundColor={color}
           key={color}
+          // Put some space between buttons only.
           marginLeft={i && '.75em'}
-        >
-          {color}
-        </Button>
+        >{color}</Button>
       ))}
       <Button
         backgroundColor="primary"
