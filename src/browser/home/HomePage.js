@@ -22,7 +22,7 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    <Heading size={2}>
+    <Heading size={1}>
       Heading
     </Heading>
     <Paragraph>
@@ -60,6 +60,11 @@ const HomePage = () => (
           {color}
         </Button>
       ))}
+      <Button
+        backgroundColor="primary"
+        disabled
+        marginLeft=".75em"
+      >disabled</Button>
     </Box>
     <Input label="Input" labelSize={1} placeholder="Lorem ipsum dolor"/>
     <SwitchTheme />
