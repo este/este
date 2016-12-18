@@ -7,10 +7,10 @@ import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
-type SwitchThemeProps = {
-  currentTheme: string,
-  setTheme: typeof setTheme, // This is so good. Flowtype ftw.
-};
+// type SwitchThemeProps = {
+//   currentTheme: string,
+//   setTheme: typeof setTheme, // This is so good. Flowtype ftw.
+// };
 
 const getSortedThemeKeysWithDefaultAsFirst = () => {
   const customThemesKeys = Object
@@ -20,9 +20,10 @@ const getSortedThemeKeysWithDefaultAsFirst = () => {
   return ['defaultTheme', ...customThemesKeys];
 };
 
-const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box marginBottom={.5}>
-    <Heading marginBottom={.5}>Switch Theme</Heading>
+// const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
+const SwitchTheme = () => (
+  <Box marginBottom={0.5}>
+    <Heading marginBottom={0.5}>Switch Theme</Heading>
     {getSortedThemeKeysWithDefaultAsFirst().map((themeKey, i) => (
       <Button
         key={themeKey}

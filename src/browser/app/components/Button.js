@@ -9,6 +9,11 @@ type ButtonProps = TextProps & {
   onClick?: (e: SyntheticMouseEvent) => void,
 };
 
+const userSelect = (disabled, stateDisabled) => {
+  if (!disabled) return {};
+  return stateDisabled;
+};
+
 const Button: Styled<ButtonProps> = styled((theme, props) => ({
   $extends: Text,
   backgroundColor: props.backgroundColor
@@ -20,14 +25,18 @@ const Button: Styled<ButtonProps> = styled((theme, props) => ({
   cursor: 'pointer',
   display: props.display || 'inline-block',
   fontSize: theme.typography.fontSize(
-    props.size === undefined ? -1 : props.size,
+    props.size === undefined ? -1 : props.size, // Small by default.
   ),
-  fontWeight: props.bold === undefined
+  fontWeight: props.bold === undefined // Bold by default.
     ? 'bold'
     : props.bold ? theme.text.bold : 'normal',
   paddingLeft: '1.5em',
   paddingRight: '1.5em',
-}), 'button', ['onClick']);
+  ...userSelect(props.disabled, theme.states.disabled),
+}), 'button', [
+  'disabled',
+  'onClick',
+]);
 
 Button.defaultProps = ({
   antialiasing: true,

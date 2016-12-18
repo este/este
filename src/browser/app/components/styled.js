@@ -3,12 +3,17 @@ import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import React from 'react';
 import { createComponent } from 'react-fela';
 
+type DivButtonProps = {
+  disabled?: boolean,
+};
+
 // TODO: Configure via context for React Native.
 const getPlatformType = (type) => {
-  // Use View for div and Text for span.
+  // TODO: Use View for div and Text for span. Etc.
   if (type === 'button') {
-    return (props) => (
-      <div tabIndex="0" role="button" {...props} />
+    // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+    return (props: DivButtonProps) => (
+      <div tabIndex={props.disabled ? -1 : 0} role="button" {...props} />
     );
   }
   return type;

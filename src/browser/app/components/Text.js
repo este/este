@@ -49,8 +49,6 @@ const fontSmoothing = (antialiasing) => {
 
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
-  ...fontSizeAndLineHeight(theme, props),
-  ...fontSmoothing(props.antialiasing),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
@@ -58,6 +56,8 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
+  ...fontSizeAndLineHeight(theme, props),
+  ...fontSmoothing(props.antialiasing),
 }), 'span');
 
 export default Text;
