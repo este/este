@@ -7,33 +7,31 @@ import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
-// type SwitchThemeProps = {
-//   currentTheme: string,
-//   setTheme: typeof setTheme, // This is so good. Flowtype ftw.
-// };
-
-const getSortedThemeKeysWithDefaultAsFirst = () => {
-  const customThemesKeys = Object
-    .keys(themes)
-    .filter(key => key !== 'defaultTheme')
-    .sort();
-  return ['defaultTheme', ...customThemesKeys];
+type SwitchThemeProps = {
+  currentTheme: string,
+  setTheme: typeof setTheme, // This is so good. Flowtype ftw.
 };
 
-// const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-const SwitchTheme = () => (
+const themesNames = [
+  'defaultTheme',
+  ...Object
+    .keys(themes)
+    .filter(key => key !== 'defaultTheme')
+    .sort()
+];
+
+const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
   <Box marginBottom={0.5}>
     <Heading marginBottom={0.5}>Switch Theme</Heading>
-    {getSortedThemeKeysWithDefaultAsFirst().map((themeKey, i) => (
+    {themesNames.map((themeName, i) => (
       <Button
-        key={themeKey}
+        key={themeName}
         marginLeft={i && '.75em'}
         // backgroundColor="warning"
-        // mr={1}
-        // onClick={() => setTheme(themeKey)}
-        // theme={themeKey === currentTheme ? 'primary' : 'secondary'}
+        // onClick={() => setTheme(themeName)}
+        backgroundColor={themeName === currentTheme ? 'success' : 'primary'}
       >
-        {themeKey.replace('Theme', ' theme')}
+        {themeName.replace('Theme', ' theme')}
       </Button>
     ))}
   </Box>

@@ -34,8 +34,9 @@ const HomePage = () => (
         github.com/este/este
       </Link>
     </Paragraph>
+    {/* <br /> and display="block" are the same. */}
     <Text size={0}>normal text</Text><br />
-    <Text size={-1}>small text</Text><br />
+    <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
     {/* 1 is the computed baseline. */}
     <Box marginVertical={1.5}>
@@ -47,18 +48,13 @@ const HomePage = () => (
         width={50}
       />
     </Box>
+    <Heading>Buttons</Heading>
     <Box marginBottom={1}>
-      {[
-        'primary',
-        'success',
-        'warning',
-        'danger',
-      ].map((color, i) => (
+      {['primary', 'success', 'warning', 'danger'].map((color, i) => (
         <Button
           backgroundColor={color}
           key={color}
-          // Put some space between buttons only.
-          marginLeft={i && '.75em'}
+          marginLeft={i && '.75em'} // Put some space between buttons only.
         >{color}</Button>
       ))}
       <Button
@@ -66,6 +62,30 @@ const HomePage = () => (
         disabled
         marginLeft=".75em"
       >disabled</Button>
+    </Box>
+    {/* Outline buttons. */}
+    <Box marginBottom={1}>
+      {['primary', 'success', 'warning', 'danger'].map((color, i) => (
+        <Button
+          backgroundColor={color}
+          key={color}
+          marginLeft={i && '.75em'}
+          outline
+        >{color}</Button>
+      ))}
+      <Button
+        backgroundColor="primary"
+        disabled
+        marginLeft=".75em"
+        outline
+      >disabled</Button>
+    </Box>
+    {/* Big outline primary by default button. */}
+    <Box marginBottom={1}>
+      <Button
+        outline
+        size={2}
+      >Big Outline</Button>
     </Box>
     <SwitchTheme />
   </Box>

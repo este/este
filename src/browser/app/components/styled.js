@@ -7,27 +7,33 @@ type DivButtonProps = {
   disabled?: boolean,
 };
 
-// TODO: Configure via context for React Native.
+// TODO: Add React Native support via context probably.
 const getPlatformType = (type) => {
-  // TODO: Use View for div and Text for span. Etc.
   if (type === 'button') {
     // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
     return (props: DivButtonProps) => (
-      <div tabIndex={props.disabled ? -1 : 0} role="button" {...props} />
+      <div
+        role="button"
+        tabIndex={props.disabled ? -1 : 0}
+        {...props}
+      />
     );
   }
   return type;
 };
 
 const createComponentRule = (rule) => (props) => {
-  const { $extends, ...style } = typeof rule === 'function'
+  const { $extends, $map, ...style } = typeof rule === 'function'
     ? rule(props.theme, props)
     : rule;
-  if (!$extends) return style;
-  const spread = []
-    .concat($extends)
-    .reduce((prev, next) => ({ ...prev, ...next.rule(props) }), {});
-  return { ...spread, ...style };
+  const extended = []
+    .concat($extends || [])
+    .reduce((prev, current) => ({
+      ...prev,
+      ...current.rule(props),
+    }), {});
+  const extendedStyle = { ...extended, ...style };
+  return $map ? $map(extendedStyle) : extendedStyle;
 };
 
 const styled = <Props>(

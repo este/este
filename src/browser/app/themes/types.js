@@ -172,8 +172,8 @@ export type TextTransform =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  // TODO: Leverage flow-style asap.
   $extends?: Styled<any> | Array<Styled<any>>,
+  $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,

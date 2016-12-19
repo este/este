@@ -6,7 +6,6 @@ import styled from './styled';
 
 const Heading: Styled<TextProps> = styled((theme, props) => ({
   $extends: Text,
-  display: props.display || 'block',
   fontFamily: theme.heading.fontFamily,
   ...(props.marginBottom == null ? {
     marginBottom: theme.typography.rhythm(theme.heading.marginBottom),
@@ -14,8 +13,8 @@ const Heading: Styled<TextProps> = styled((theme, props) => ({
 }));
 
 Heading.defaultProps = ({
+  display: 'block',
   bold: true,
 }: Exact<TextProps>);
-
 
 export default Heading;

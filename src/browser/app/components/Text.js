@@ -20,11 +20,32 @@ export type TextProps = BoxProps & {
   decoration?: TextDecoration,
   size?: number,
   transform?: TextTransform,
-  // Custom stuff.
-  fontSmoothing?: boolean,
+  // Custom
+  outline?: boolean,
 };
 
-// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
+// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// tldr; Fix font smoothing only on light text on dark background.
+const maybeFixFontSmoothing = ({ backgroundColor }) => {
+  // TODO: Compare color and backgroundColor values for black themes.
+  if (!backgroundColor || backgroundColor === 'none') return {};
+  return {
+    MozOsxFontSmoothing: 'grayscale',
+    WebkitFontSmoothing: 'antialiased',
+  };
+};
+
+const maybeOutline = (style, outline) => {
+  if (!outline) return {};
+  return {
+    // backgroundColor: 'none',
+    // color: style.backgroundColor || 'black',
+    // color: '#000',
+    // outline: `solid 1px ${style.backgroundColor}`,
+  }
+};
+
+// inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const rhythmLineHeight = (fontSize, baseline) => {
   const lines = Math.ceil(fontSize / baseline);
   return baseline * lines;
@@ -39,18 +60,13 @@ const fontSizeAndLineHeight = (theme, props) => {
   };
 };
 
-// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-// So we are use it only for elements with light text and dark background.
-const fontSmoothing = (antialiasing) => {
-  if (!antialiasing) return {};
-  return {
-    MozOsxFontSmoothing: 'grayscale',
-    WebkitFontSmoothing: 'antialiased',
-  };
-};
-
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
+  $map: style => ({
+    ...style,
+    ...maybeFixFontSmoothing(style),
+    ...maybeOutline(style, props.outline),
+  }),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
@@ -59,7 +75,6 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
   ...fontSizeAndLineHeight(theme, props),
-  ...fontSmoothing(props.fontSmoothing),
 }), 'span');
 
 export default Text;
