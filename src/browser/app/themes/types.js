@@ -59,7 +59,6 @@ export type Theme = {|
     fontFamily: string,
   |},
   heading: {|
-    bold: number,
     fontFamily: string,
     marginBottom: number,
   |},

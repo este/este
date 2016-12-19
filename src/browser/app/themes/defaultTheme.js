@@ -45,7 +45,6 @@ const theme: Theme = {
     fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
   },
   heading: {
-    bold: 700,
     fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
     marginBottom: 1,
   },
