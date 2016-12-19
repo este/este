@@ -40,12 +40,13 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    // https://medium.design/system-shock-6b1dc6d6596f
+    // fontFamily taken from facebook.com (19 December 2016)
+    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
   },
   heading: {
     bold: 700,
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
     marginBottom: 1,
   },
   paragraph: {
