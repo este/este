@@ -172,7 +172,7 @@ export type TextTransform =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  $extends?: Styled<any> | Array<Styled<any>>,
+  $extends?: Styled<any>,
   $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,

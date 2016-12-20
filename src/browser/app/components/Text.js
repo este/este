@@ -20,53 +20,37 @@ export type TextProps = BoxProps & {
   decoration?: TextDecoration,
   size?: number,
   transform?: TextTransform,
-  // Custom
+  // Custom stuff.
+  doNotFixFontSmoothing?: boolean,
+  // TODO: Finish
   outline?: boolean,
 };
 
 // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-// tldr; Fix font smoothing only on light text on dark background.
-const maybeFixFontSmoothing = ({ backgroundColor }) => {
-  // TODO: Compare color and backgroundColor values for black themes.
-  if (!backgroundColor || backgroundColor === 'none') return {};
+// tldr; Fix font smoothing only on the light text on the dark background.
+const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
+  if (doNotFixFontSmoothing) return style;
+  const hasColorAndBackgroundColor = style.color && style.backgroundColor;
+  // TODO: Check if color is brighter than backgroundColor or use theme flag.
+  if (!hasColorAndBackgroundColor) return style;
   return {
+    ...style,
     MozOsxFontSmoothing: 'grayscale',
     WebkitFontSmoothing: 'antialiased',
   };
 };
 
-const maybeOutline = (style, outline) => {
-  if (!outline) return {};
-  return {
-    // backgroundColor: 'none',
-    // color: style.backgroundColor || 'black',
-    // color: '#000',
-    // outline: `solid 1px ${style.backgroundColor}`,
-  }
-};
-
-// inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const rhythmLineHeight = (fontSize, baseline) => {
-  const lines = Math.ceil(fontSize / baseline);
-  return baseline * lines;
-};
-
-const fontSizeAndLineHeight = (theme, props) => {
-  const fontSize = theme.typography.fontSize(props.size || 0);
-  const lineHeight = rhythmLineHeight(fontSize, theme.typography.lineHeight);
-  return {
-    fontSize,
-    lineHeight: `${lineHeight}px`,
-  };
+const fontSizeAndLineHeight = (typography, size) => {
+  const fontSize = typography.fontSize(size || 0);
+  // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
+  const lines = Math.ceil(fontSize / typography.lineHeight);
+  const lineHeight = typography.lineHeight * lines;
+  return { fontSize, lineHeight: `${lineHeight}px` };
 };
 
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
-  $map: style => ({
-    ...style,
-    ...maybeFixFontSmoothing(style),
-    ...maybeOutline(style, props.outline),
-  }),
+  $map: maybeFixFontSmoothing(props.doNotFixFontSmoothing),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
@@ -74,7 +58,7 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
-  ...fontSizeAndLineHeight(theme, props),
+  ...fontSizeAndLineHeight(theme.typography, props.size),
 }), 'span');
 
 export default Text;

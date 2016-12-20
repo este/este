@@ -15,6 +15,7 @@ const altOrRolePresentation = (alt) => alt
   : { role: 'presentation' };
 
 // TODO: Use more sophisticated logic based on aspect ratio etc.
+// inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
 const ImageWrapper = styled((theme, props) => ({
   display: 'block',
   // width: ,
