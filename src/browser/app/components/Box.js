@@ -26,7 +26,7 @@ export type BoxProps = {
   alignContent?: AlignContent,
   alignItems?: AlignItems,
   alignSelf?: AlignSelf,
-  backgroundColor?: Color,
+  backgroundColor?: Color | 'transparent',
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
   borderRadius?: number,
@@ -167,23 +167,26 @@ const adjustPaddingForRhythm = (suppressRhythmWarning, border, borderWidth, styl
     const adjust = border === true || border === prop.toLowerCase();
     if (!adjust) return padding;
     const paddingProp = `padding${prop}`;
-    const canAdjust = style[paddingProp] && (style[paddingProp] - borderWidth) >= 0;
-    if (!canAdjust) {
+    const paddingValue = style[paddingProp];
+    if (typeof paddingValue === 'string') {
+      // If paddingValue is string, we can't compensate it.
+      return { ...padding, [paddingProp]: paddingValue };
+    }
+    const canCompensate = paddingValue && (paddingValue - borderWidth) >= 0;
+    if (!canCompensate) {
       if (suppressRhythmWarning) return {};
       const direction = prop === 'Left' || prop === 'Right'
         ? 'horizontal'
         : 'vertical';
       warning(false, [
         `Increase ${paddingProp} to ensure ${direction} rhythm. `,
-        'Use suppressRhythmWarning to suppress this warning.',
+        'Use suppressRhythmWarning prop to suppress this warning.',
       ].join(''));
-      return {
-        outline: 'solid 1px red',
-      };
     }
     return {
+      ...canCompensate ? {} : { outline: 'solid 1px red' },
       ...padding,
-      [paddingProp]: style[paddingProp] - borderWidth,
+      [paddingProp]: paddingValue - borderWidth,
     };
   }, {});
 };
