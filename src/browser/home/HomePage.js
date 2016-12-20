@@ -44,9 +44,6 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    <Heading>
-      Buttons
-    </Heading>
     <Box marginBottom={1}>
       {['primary', 'success', 'warning', 'danger'].map(color => (
         <Button
@@ -67,20 +64,6 @@ const HomePage = () => (
         marginHorizontal="0.5em"
       >black</Button>
     </Box>
-    {/* Big outline primary by default button. */}
-    {/* <Box marginBottom={1}>
-      <Button
-        // muzu mit? hmm
-        // {...Button.outline("primary")}
-        // padding={1}
-        color="primary"
-        backgroundColor="transparent"
-        border
-        borderColor="primary"
-        borderWidth={1}
-        size={2}
-      >Big Outline</Button>
-    </Box> */}
     <Heading>
       Switch Theme
     </Heading>

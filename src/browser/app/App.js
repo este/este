@@ -34,8 +34,7 @@ const theme = (currentTheme) =>
 
 const App = ({ currentLocale, currentTheme }: AppProps) => (
   <ThemeProvider
-    // TODO: Do we need it?
-    // key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
+    key={currentTheme} // Enforce rerender.
     theme={theme(currentTheme)}
   >
     <Container>

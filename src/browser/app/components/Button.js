@@ -6,7 +6,7 @@ import styled from './styled';
 
 type ButtonProps = TextProps & {
   disabled?: boolean,
-  onClick?: (e: SyntheticMouseEvent) => void,
+  onClick?: (e: SyntheticMouseEvent) => any,
 };
 
 const Button: Styled<ButtonProps> = styled((theme, props) => ({

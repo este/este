@@ -9,7 +9,7 @@ import { setTheme } from '../../common/themes/actions';
 
 type SwitchThemeProps = {
   currentTheme: string,
-  setTheme: typeof setTheme, // This is so good. Flowtype ftw.
+  setTheme: typeof setTheme,
 };
 
 const themesNames = [
@@ -17,19 +17,17 @@ const themesNames = [
   ...Object
     .keys(themes)
     .filter(key => key !== 'defaultTheme')
-    .sort()
+    .sort(),
 ];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
   <Box>
     {themesNames.map(themeName => (
       <Button
+        disabled={themeName === currentTheme}
         key={themeName}
         marginHorizontal="0.5em"
-        // marginLeft={i && '.75em'}
-        // backgroundColor="warning"
-        // onClick={() => setTheme(themeName)}
-        backgroundColor={themeName === currentTheme ? 'success' : 'primary'}
+        onClick={() => setTheme(themeName)}
       >
         {themeName.replace('Theme', '')}
       </Button>
