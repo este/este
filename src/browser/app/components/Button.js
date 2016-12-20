@@ -12,9 +12,8 @@ type ButtonProps = TextProps & {
 const Button: Styled<ButtonProps> = styled((theme, props) => ({
   $extends: Text,
   borderRadius: props.borderRadius || theme.border.radius,
-  color: theme.colors.white,
+  color: props.color ? theme.colors[props.color] : theme.colors.white,
   cursor: 'pointer',
-  fontSize: theme.typography.fontSize(props.size == null ? -1 : props.size),
   ...(props.disabled ? theme.states.disabled : {}),
 }), 'button', [
   'disabled',
@@ -25,7 +24,10 @@ Button.defaultProps = ({
   backgroundColor: 'primary',
   bold: true,
   display: 'inline-block',
+  marginVertical: 0.25,
   paddingHorizontal: '1.75em',
+  paddingVertical: 0.25,
+  transform: 'capitalize',
 }: Exact<TextProps>);
 
 export default Button;

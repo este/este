@@ -22,15 +22,15 @@ export type TextProps = BoxProps & {
   transform?: TextTransform,
   // Custom stuff.
   doNotFixFontSmoothing?: boolean,
-  // TODO: Finish
-  outline?: boolean,
 };
 
 // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
 // tldr; Fix font smoothing only on the light text on the dark background.
 const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
   if (doNotFixFontSmoothing) return style;
-  const hasColorAndBackgroundColor = style.color && style.backgroundColor;
+  const hasColorAndBackgroundColor =
+    style.color &&
+    style.backgroundColor && style.backgroundColor !== 'transparent';
   // TODO: Check if color is brighter than backgroundColor or use theme flag.
   if (!hasColorAndBackgroundColor) return style;
   return {
@@ -40,9 +40,9 @@ const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
   };
 };
 
+// inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const fontSizeAndLineHeight = (typography, size) => {
   const fontSize = typography.fontSize(size || 0);
-  // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
   const lines = Math.ceil(fontSize / typography.lineHeight);
   const lineHeight = typography.lineHeight * lines;
   return { fontSize, lineHeight: `${lineHeight}px` };

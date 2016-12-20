@@ -29,18 +29,14 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <Paragraph>
-      <Link to="https://github.com/este/este">
-        github.com/este/este
-      </Link>
-    </Paragraph>
+    <Link display="block" to="https://github.com/este/este">
+      github.com/este/este
+    </Link>
     {/* <br /> and display="block" are the same. */}
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
-    {/* 1 is the computed baseline. */}
-    <Box marginVertical={1.5}>
-      {/* Image height is adjusted for the baseline. */}
+    <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
         height={50}
@@ -48,45 +44,46 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    <Heading>Buttons</Heading>
+    <Heading>
+      Buttons
+    </Heading>
     <Box marginBottom={1}>
-      {['primary', 'success', 'warning', 'danger'].map((color, i) => (
+      {['primary', 'success', 'warning', 'danger'].map(color => (
         <Button
           backgroundColor={color}
           key={color}
-          marginLeft={i && '.75em'} // Put some space between buttons only.
+          marginHorizontal="0.5em"
         >{color}</Button>
       ))}
       <Button
         backgroundColor="primary"
         disabled
-        marginLeft=".75em"
+        marginHorizontal="0.5em"
       >disabled</Button>
-    </Box>
-    {/* Outline buttons. */}
-    <Box marginBottom={1}>
-      {['primary', 'success', 'warning', 'danger'].map((color, i) => (
-        <Button
-          backgroundColor={color}
-          key={color}
-          marginLeft={i && '.75em'}
-          outline
-        >{color}</Button>
-      ))}
       <Button
-        backgroundColor="primary"
-        disabled
-        marginLeft=".75em"
-        outline
-      >disabled</Button>
+        backgroundColor="transparent"
+        bold={false}
+        color="black"
+        marginHorizontal="0.5em"
+      >black</Button>
     </Box>
     {/* Big outline primary by default button. */}
-    <Box marginBottom={1}>
+    {/* <Box marginBottom={1}>
       <Button
-        outline
+        // muzu mit? hmm
+        // {...Button.outline("primary")}
+        // padding={1}
+        color="primary"
+        backgroundColor="transparent"
+        border
+        borderColor="primary"
+        borderWidth={1}
         size={2}
       >Big Outline</Button>
-    </Box>
+    </Box> */}
+    <Heading>
+      Switch Theme
+    </Heading>
     <SwitchTheme />
   </Box>
 );
