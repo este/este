@@ -1,29 +1,33 @@
 /* @flow */
-import type { Styled } from '../themes/types';
+import type { Exact, Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Text from './Text';
 import styled from './styled';
 
-const Button: Styled<TextProps> = styled((theme, props) => ({
+type ButtonProps = TextProps & {
+  disabled?: boolean,
+  onClick?: (e: SyntheticMouseEvent) => void,
+};
+
+const Button: Styled<ButtonProps> = styled((theme, props) => ({
   $extends: Text,
-  backgroundColor: props.backgroundColor
-    ? theme.colors[props.backgroundColor]
-    : theme.colors.primary,
   borderRadius: props.borderRadius || theme.border.radius,
-  borderWidth: 0,
-  color: theme.colors.white,
+  color: props.color ? theme.colors[props.color] : theme.colors.white,
   cursor: 'pointer',
-  display: props.display || 'inline-block',
-  fontSize: theme.typography.fontSize(props.size || -1),
-  fontWeight: props.bold === undefined
-    ? 'bold'
-    : props.bold ? theme.text.bold : 'normal',
-  // marginBottom: theme.sizes.step3,
-  // marginTop: theme.sizes.step3,
-  // paddingBottom: theme.sizes.smallest,
-  paddingLeft: '1em',
-  paddingRight: '1em',
-  // paddingTop: {1 / 4},
-}), 'button', ['onClick']);
+  ...(props.disabled ? theme.states.disabled : {}),
+}), 'button', [
+  'disabled',
+  'onClick',
+]);
+
+Button.defaultProps = ({
+  backgroundColor: 'primary',
+  bold: true,
+  display: 'inline-block',
+  marginVertical: 0.25,
+  paddingHorizontal: '1.75em',
+  paddingVertical: 0.25,
+  transform: 'capitalize',
+}: Exact<TextProps>);
 
 export default Button;

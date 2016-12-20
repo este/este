@@ -17,7 +17,7 @@ const PageHeader = (props: PageHeaderProps) => (
     marginTop={2}
     paddingBottom={1 / 2}
   >
-    <Heading size={2} marginBottom={0}>{props.heading}</Heading>
+    <Heading size={3} marginBottom={0}>{props.heading}</Heading>
     <Paragraph marginBottom={0}>{props.description}</Paragraph>
   </Box>
 );

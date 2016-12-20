@@ -3,7 +3,7 @@ import type { State } from '../../common/types';
 import * as themes from '../app/themes';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import { Box, Button, Heading } from '../app/components';
+import { Box, Button } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
@@ -12,27 +12,26 @@ type SwitchThemeProps = {
   setTheme: typeof setTheme, // This is so good. Flowtype ftw.
 };
 
-const getSortedThemeKeysWithDefaultAsFirst = () => {
-  const customThemesKeys = Object
+const themesNames = [
+  'defaultTheme',
+  ...Object
     .keys(themes)
     .filter(key => key !== 'defaultTheme')
-    .sort();
-  return ['defaultTheme', ...customThemesKeys];
-};
+    .sort()
+];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box marginTop="medium">
-    <Heading>Theme Switcher</Heading>
-    {getSortedThemeKeysWithDefaultAsFirst().map((themeKey, i) => (
+  <Box>
+    {themesNames.map(themeName => (
       <Button
-        key={themeKey}
-        marginLeft={i === 0 ? 'step0' : 'step1'}
+        key={themeName}
+        marginHorizontal="0.5em"
+        // marginLeft={i && '.75em'}
         // backgroundColor="warning"
-        // mr={1}
-        // onClick={() => setTheme(themeKey)}
-        // theme={themeKey === currentTheme ? 'primary' : 'secondary'}
+        // onClick={() => setTheme(themeName)}
+        backgroundColor={themeName === currentTheme ? 'success' : 'primary'}
       >
-        {themeKey.replace('Theme', ' theme')}
+        {themeName.replace('Theme', '')}
       </Button>
     ))}
   </Box>

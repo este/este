@@ -12,7 +12,6 @@ export type Exact<T> = T & $Shape<T>;
 
 type Colors = {
   primary: string,
-  info: string,
   success: string,
   warning: string,
   danger: string,
@@ -22,7 +21,12 @@ type Colors = {
 };
 
 export type Color = $Keys<Colors>;
+
+// TODO: It should be possible to use callable-objects for Styled type soon.
+// flowtype.org/docs/quick-reference.html#callable-objects
+// As result, defaultProps would be typed by default, no need for custom Exact.
 export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
+
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 export type Theme = {|
@@ -55,7 +59,6 @@ export type Theme = {|
     fontFamily: string,
   |},
   heading: {|
-    bold: number,
     fontFamily: string,
     marginBottom: number,
   |},
@@ -169,8 +172,8 @@ export type TextTransform =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  // TODO: Leverage flow-style asap.
-  $extends?: Styled<any> | Array<Styled<any>>,
+  $extends?: Styled<any>,
+  $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,
@@ -193,8 +196,23 @@ export type BrowserStyle = {|
   // animationName?: string,
   // animationPlayState?: string,
   // animationTimingFunction?: string,
+  MozOsxFontSmoothing?: 'auto' | 'grayscale',
+  MozTransform?: string,
+  MozTransformOrigin?: string,
+  MozTransitionDelay?: string,
+  MozTransitionDuration?: string,
+  MozTransitionProperty?: string,
+  MozTransitionTimingFunction?: string,
+  WebkitBackdropFilter?: string,
+  WebkitFontSmoothing?: 'none' | 'subpixel-antialiased' | 'antialiased',
+  WebkitOverflowScrolling?: string,
+  WebkitTransform?: string,
+  WebkitTransformOrigin?: string,
+  WebkitTransitionDelay?: string,
+  WebkitTransitionDuration?: string,
+  WebkitTransitionProperty?: string,
+  WebkitTransitionTimingFunction?: string,
   backdropFilter?: string,
-  webkitBackdropFilter?: string,
   backfaceVisibility?: string,
   background?: string,
   backgroundAttachment?: string,
@@ -268,7 +286,6 @@ export type BrowserStyle = {|
   clip?: string,
   clipPath?: string,
   color?: string,
-  columns?: string,
   columnCount?: string,
   columnFill?: string,
   columnGap?: string,
@@ -278,6 +295,7 @@ export type BrowserStyle = {|
   columnRuleWidth?: string,
   columnSpan?: string,
   columnWidth?: string,
+  columns?: string,
   contain?: string,
   content?: string,
   counterIncrement?: string,
@@ -321,20 +339,20 @@ export type BrowserStyle = {|
   gridAutoPosition?: string,
   gridAutoRows?: string,
   gridColumn?: string,
-  gridColumnStart?: string,
   gridColumnEnd?: string,
+  gridColumnStart?: string,
   gridRow?: string,
-  gridRowStart?: string,
   gridRowEnd?: string,
+  gridRowStart?: string,
   gridTemplate?: string,
   gridTemplateAreas?: string,
-  gridTemplateRows?: string,
   gridTemplateColumns?: string,
+  gridTemplateRows?: string,
   height?: number | string,
   hyphens?: string,
+  imageOrientation?: string,
   imageRendering?: string,
   imageResolution?: string,
-  imageOrientation?: string,
   imeMode?: string,
   inherit?: string,
   initial?: string,
@@ -370,19 +388,13 @@ export type BrowserStyle = {|
   minInlineSize?: string,
   minWidth?: number | string,
   mixBlendMode?: string,
-  mozTransform?: string,
-  mozTransformOrigin?: string,
-  mozTransitionDelay?: string,
-  mozTransitionDuration?: string,
-  mozTransitionProperty?: string,
-  mozTransitionTimingFunction?: string,
   objectFit?: string,
   objectPosition?: string,
   offsetBlockEnd?: string,
   offsetBlockStart?: string,
   offsetInlineEnd?: string,
   offsetInlineStart?: string,
-  opacity?: string,
+  opacity?: number,
   order?: number,
   orphans?: string,
   outline?: string,
@@ -426,8 +438,8 @@ export type BrowserStyle = {|
   shapeImageThreshold?: string,
   shapeMargin?: string,
   shapeOutside?: string,
-  tableLayout?: string,
   tabSize?: string,
+  tableLayout?: string,
   textAlign?: TextAlign,
   textAlignLast?: string,
   textCombineUpright?: string,
@@ -455,15 +467,9 @@ export type BrowserStyle = {|
   turn?: string,
   unicodeBidi?: string,
   unicodeRange?: string,
+  userSelect?: 'none' | 'auto' | 'text' | 'contain' | 'all',
   verticalAlign?: string,
   visibility?: string,
-  webkitOverflowScrolling?: string,
-  webkitTransform?: string,
-  webkitTransformOrigin?: string,
-  webkitTransitionDelay?: string,
-  webkitTransitionDuration?: string,
-  webkitTransitionProperty?: string,
-  webkitTransitionTimingFunction?: string,
   whiteSpace?: string,
   widows?: string,
   width?: number | string,
