@@ -25,16 +25,18 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
     <Heading marginBottom={0.5}>
       Switch Theme
     </Heading>
-    {themesNames.map(themeName => (
-      <Button
-        disabled={themeName === currentTheme}
-        key={themeName}
-        marginHorizontal="0.5em"
-        onClick={() => setTheme(themeName)}
-      >
-        {themeName.replace('Theme', '')}
-      </Button>
-    ))}
+    <Box marginHorizontal="-0.5em">
+      {themesNames.map(themeName => (
+        <Button
+          disabled={themeName === currentTheme}
+          key={themeName}
+          marginHorizontal="0.5em"
+          onClick={() => setTheme(themeName)}
+          >
+            {themeName.replace('Theme', '')}
+          </Button>
+        ))}
+    </Box>
   </Box>
 );
 

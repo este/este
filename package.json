@@ -86,7 +86,6 @@
     "react-addons-test-utils": "15.4.1",
     "react-dom": "15.4.1",
     "react-fela": "^4.0.1",
-    "react-gravatar": "^2.4.4",
     "react-helmet": "^3.0.0",
     "react-intl": "^2.1.2",
     "react-native": "0.39.0",

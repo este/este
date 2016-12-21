@@ -48,27 +48,30 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    <Box marginBottom={1}>
+    <Box marginBottom={2} marginHorizontal={-0.5}>
       {['primary', 'success', 'warning', 'danger'].map(color => (
         <Button
           backgroundColor={color}
           key={color}
-          marginHorizontal="0.5em"
+          marginHorizontal={0.5}
         >{color}</Button>
       ))}
       <Button
         backgroundColor="primary"
         disabled
-        marginHorizontal="0.5em"
+        marginHorizontal={0.5}
       >disabled</Button>
       <Button
         backgroundColor="transparent"
         bold={false}
         color="black"
-        marginHorizontal="0.5em"
+        marginHorizontal={0.5}
       >black</Button>
     </Box>
     <SwitchTheme />
+    <Paragraph>
+      And now try something interesting.
+    </Paragraph>
     <ToggleBaseline />
   </Box>
 );

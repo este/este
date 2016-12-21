@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
-// import UsersPage from '../users/UsersPage';
+import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
 // import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
@@ -62,8 +62,8 @@ const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
           flex={1} // make footer sticky
         >
           <Match exactly pattern="/" component={HomePage} />
+          <Match pattern="/users" component={UsersPage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
-            <Match pattern="/users" component={UsersPage} />
             <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
