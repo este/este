@@ -17,7 +17,6 @@ const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) 
     <Button
       backgroundColor="transparent"
       color="black"
-      key={baselineShown} // Remove focus outline after click. Still accessible.
       marginVertical={0}
       marginBottom={1}
       onClick={toggleBaseline}
