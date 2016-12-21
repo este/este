@@ -29,6 +29,6 @@ Button.defaultProps = ({
   paddingHorizontal: '1.75em',
   paddingVertical: 0.25,
   transform: 'capitalize',
-}: Exact<TextProps>);
+}: Exact<ButtonProps>);
 
 export default Button;
