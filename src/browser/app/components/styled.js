@@ -50,8 +50,8 @@ const styled = <Props>(
   const platformType = getPlatformType(type);
   const extendedRule = createExtendedRule(rule);
   const componentRule = (props) => {
-    // For debugging or post processing.
     const { style, maps } = extendedRule(props);
+    // For debugging or post processing.
     return maps.reduce((style, map) => map(style), style);
   };
   // TODO: Use new flow callable object type subclassed from Function.

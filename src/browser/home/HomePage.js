@@ -30,13 +30,16 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <ToggleBaseline />
+    <Link
+      display="block"
+      marginBottom={1}
+      to="https://github.com/este/este"
+    >
+      github.com/este/este
+    </Link>
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
-    <Link display="block" to="https://github.com/este/este">
-      github.com/este/este
-    </Link>
     <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
@@ -66,6 +69,7 @@ const HomePage = () => (
       >black</Button>
     </Box>
     <SwitchTheme />
+    <ToggleBaseline />
   </Box>
 );
 

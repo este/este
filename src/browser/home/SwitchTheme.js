@@ -21,7 +21,7 @@ const themesNames = [
 ];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box marginBottom={0.5}>
+  <Box marginBottom={1.5}>
     <Heading marginBottom={0.5}>
       Switch Theme
     </Heading>

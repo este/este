@@ -17,11 +17,11 @@ const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) 
     <Button
       backgroundColor="transparent"
       color="black"
-      marginVertical={0}
-      marginBottom={1}
+      border
+      bold={false}
+      marginVertical={0.25}
+      marginBottom={1.25}
       onClick={toggleBaseline}
-      paddingHorizontal={0}
-      paddingVertical={0}
     >
       {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
     </Button>
