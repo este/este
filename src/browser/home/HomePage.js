@@ -3,14 +3,15 @@ import React from 'react';
 import SwitchTheme from './SwitchTheme';
 import {
   Box,
+  Button,
   Heading,
   Image,
   Link,
   PageHeader,
   Paragraph,
-  Title,
-  Button,
   Text,
+  Title,
+  ToggleBaseline,
 } from '../app/components';
 
 const HomePage = () => (
@@ -29,13 +30,13 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <Link display="block" to="https://github.com/este/este">
-      github.com/este/este
-    </Link>
-    {/* <br /> and display="block" are the same. */}
+    <ToggleBaseline />
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
+    <Link display="block" to="https://github.com/este/este">
+      github.com/este/este
+    </Link>
     <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
@@ -64,9 +65,6 @@ const HomePage = () => (
         marginHorizontal="0.5em"
       >black</Button>
     </Box>
-    <Heading>
-      Switch Theme
-    </Heading>
     <SwitchTheme />
   </Box>
 );

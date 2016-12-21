@@ -3,7 +3,7 @@ import type { State } from '../../common/types';
 import * as themes from '../app/themes';
 import R from 'ramda';
 import React from 'react';
-import { Box, Button } from '../app/components';
+import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
@@ -21,7 +21,10 @@ const themesNames = [
 ];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box>
+  <Box marginBottom={0.5}>
+    <Heading marginBottom={0.5}>
+      Switch Theme
+    </Heading>
     {themesNames.map(themeName => (
       <Button
         disabled={themeName === currentTheme}

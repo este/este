@@ -14,6 +14,7 @@ const Button: Styled<ButtonProps> = styled((theme, props) => ({
   borderRadius: props.borderRadius || theme.border.radius,
   color: props.color ? theme.colors[props.color] : theme.colors.white,
   cursor: 'pointer',
+  userSelect: 'none',
   ...(props.disabled ? theme.states.disabled : {}),
 }), 'button', [
   'disabled',

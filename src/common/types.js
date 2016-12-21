@@ -38,6 +38,7 @@ export type User = {|
 // TODO: Wait for Flow.
 
 export type AppState = {
+  baselineShown: boolean,
   error: ?Error,
   menuShown: boolean,
   online: boolean,
@@ -125,4 +126,5 @@ export type Action =
   | { type: 'SIGN_UP_DONE', payload: { user: ?User } }
   | { type: 'SIGN_UP_FAIL', payload: { error: Error } }
   | { type: 'TOGGLE_TODO_COMPLETED', payload: { todo: Todo } }
+  | { type: 'TOGGLE_BASELINE' }
   ;
