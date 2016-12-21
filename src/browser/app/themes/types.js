@@ -21,7 +21,12 @@ type Colors = {
 };
 
 export type Color = $Keys<Colors>;
+
+// TODO: It should be possible to use callable-objects for Styled type soon.
+// flowtype.org/docs/quick-reference.html#callable-objects
+// As result, defaultProps would be typed by default, no need for custom Exact.
 export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
+
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 export type Theme = {|
@@ -54,7 +59,6 @@ export type Theme = {|
     fontFamily: string,
   |},
   heading: {|
-    bold: number,
     fontFamily: string,
     marginBottom: number,
   |},
@@ -194,8 +198,8 @@ export type TextTransform =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  // TODO: Leverage flow-style asap.
-  $extends?: Styled<any> | Array<Styled<any>>,
+  $extends?: Styled<any>,
+  $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
   ':focus'?: BrowserStyle,

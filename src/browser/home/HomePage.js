@@ -3,6 +3,7 @@ import React from 'react';
 import SwitchTheme from './SwitchTheme';
 import {
   Box,
+  Button,
   Heading,
   Image,
   Link,
@@ -12,6 +13,8 @@ import {
   Button,
   Input,
   Text,
+  Title,
+  ToggleBaseline,
 } from '../app/components';
 
 const HomePage = () => (
@@ -22,6 +25,7 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
+    {/* 0 is default text size. Increment or decrement it. */}
     <Heading size={1}>
       Heading
     </Heading>
@@ -29,15 +33,17 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <Paragraph>
-      <Link to="https://github.com/este/este">
-        github.com/este/este
-      </Link>
-    </Paragraph>
+    <Link
+      display="block"
+      marginBottom={1}
+      to="https://github.com/este/este"
+    >
+      github.com/este/este
+    </Link>
     <Text size={0}>normal text</Text><br />
-    <Text size={-1}>small text</Text><br />
+    <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
-    <Box marginVertical={1.5}>
+    <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
         height={50}
@@ -46,28 +52,28 @@ const HomePage = () => (
       />
     </Box>
     <Box marginBottom={1}>
-      {[
-        'primary',
-        'success',
-        'warning',
-        'danger',
-      ].map((color, i) => (
+      {['primary', 'success', 'warning', 'danger'].map(color => (
         <Button
           backgroundColor={color}
           key={color}
-          marginLeft={i && '.75em'}
-        >
-          {color}
-        </Button>
+          marginHorizontal="0.5em"
+        >{color}</Button>
       ))}
       <Button
         backgroundColor="primary"
         disabled
-        marginLeft=".75em"
+        marginHorizontal="0.5em"
       >disabled</Button>
+      <Button
+        backgroundColor="transparent"
+        bold={false}
+        color="black"
+        marginHorizontal="0.5em"
+      >black</Button>
     </Box>
     <Input label="Input" labelSize={1} placeholder="Lorem ipsum dolor"/>
     <SwitchTheme />
+    <ToggleBaseline />
   </Box>
 );
 

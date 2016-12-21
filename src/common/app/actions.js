@@ -32,6 +32,10 @@ export const appStop = (): Action => ({
   type: 'APP_STOP',
 });
 
+export const toggleBaseline = (): Action => ({
+  type: 'TOGGLE_BASELINE',
+});
+
 // TODO: Observable type.
 const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)

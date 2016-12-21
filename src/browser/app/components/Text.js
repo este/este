@@ -11,7 +11,6 @@ import Box from './Box';
 import styled from './styled';
 
 export type TextProps = BoxProps & {
-  antialiasing?: boolean,
   // The lowest common denominator of:
   //  w3schools.com/css/css_text.asp
   //  facebook.github.io/react-native/releases/0.39/docs/text.html#text
@@ -21,34 +20,37 @@ export type TextProps = BoxProps & {
   decoration?: TextDecoration,
   size?: number,
   transform?: TextTransform,
+  // Custom stuff.
+  doNotFixFontSmoothing?: boolean,
 };
 
-// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
-const rhythmLineHeight = (fontSize, baseline) => {
-  const lines = Math.ceil(fontSize / baseline);
-  return baseline * lines;
-};
-
-const fontSizeAndLineHeight = (theme, props) => {
-  const fontSize = theme.typography.fontSize(props.size || 0);
-  const lineHeight = rhythmLineHeight(fontSize, theme.typography.lineHeight);
+// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// tldr; Fix font smoothing only on the light text on the dark background.
+const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
+  if (doNotFixFontSmoothing) return style;
+  const hasColorAndBackgroundColor =
+    style.color &&
+    style.backgroundColor && style.backgroundColor !== 'transparent';
+  // TODO: Check if color is brighter than backgroundColor or use theme flag.
+  if (!hasColorAndBackgroundColor) return style;
   return {
-    fontSize,
-    lineHeight: `${lineHeight}px`,
-  };
-};
-
-const fontSmoothing = (antialiasing) => {
-  // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-  if (!antialiasing) return {};
-  return {
+    ...style,
     MozOsxFontSmoothing: 'grayscale',
     WebkitFontSmoothing: 'antialiased',
   };
 };
 
+// inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
+const fontSizeAndLineHeight = (typography, size) => {
+  const fontSize = typography.fontSize(size || 0);
+  const lines = Math.ceil(fontSize / typography.lineHeight);
+  const lineHeight = typography.lineHeight * lines;
+  return { fontSize, lineHeight: `${lineHeight}px` };
+};
+
 const Text: Styled<TextProps> = styled((theme, props) => ({
   $extends: Box,
+  $map: maybeFixFontSmoothing(props.doNotFixFontSmoothing),
   color: props.color ? theme.colors[props.color] : theme.colors.black,
   display: props.display || 'inline',
   fontFamily: theme.text.fontFamily,
@@ -56,8 +58,7 @@ const Text: Styled<TextProps> = styled((theme, props) => ({
   textAlign: props.align || 'left',
   textDecoration: props.decoration || 'none',
   textTransform: props.transform || 'none',
-  ...fontSizeAndLineHeight(theme, props),
-  ...fontSmoothing(props.antialiasing),
+  ...fontSizeAndLineHeight(theme.typography, props.size),
 }), 'span');
 
 export default Text;

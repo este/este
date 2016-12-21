@@ -11,6 +11,7 @@ export { default as PageHeader } from './PageHeader';
 export { default as Paragraph } from './Paragraph';
 export { default as Text } from './Text';
 export { default as Title } from './Title';
+export { default as ToggleBaseline } from './ToggleBaseline';
 export { default as fxbml } from './fxbml';
 export { default as styled } from './styled';
 

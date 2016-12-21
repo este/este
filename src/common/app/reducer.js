@@ -2,6 +2,7 @@
 import type { Action, AppState } from '../types';
 
 const initialState = {
+  baselineShown: false,
   error: null,
   menuShown: false,
   online: false,
@@ -34,6 +35,9 @@ const reducer = (
 
     case 'APP_STARTED':
       return { ...state, started: true };
+
+    case 'TOGGLE_BASELINE':
+      return { ...state, baselineShown: !state.baselineShown };
 
     default:
       return state;

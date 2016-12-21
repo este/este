@@ -5,29 +5,41 @@ import { createComponent } from 'react-fela';
 
 type DivButtonProps = {
   disabled?: boolean,
+  onClick?: Function,
 };
 
-// TODO: Configure via context for React Native.
+// TODO: Configure this via React context.
 const getPlatformType = (type) => {
-  // TODO: Use View for div and Text for span. Etc.
+  // developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
+  // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
   if (type === 'button') {
-    // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
     return (props: DivButtonProps) => (
-      <div tabIndex={props.disabled ? -1 : 0} role="button" {...props} />
+      <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+        role="button"
+        onKeyPress={e => {
+          const isSpacebar = e.key === ' ';
+          if (!isSpacebar) return;
+          e.preventDefault();
+          if (typeof props.onClick !== 'function') return;
+          props.onClick(e);
+        }}
+        tabIndex={props.disabled ? -1 : 0}
+        {...props}
+      />
     );
   }
   return type;
 };
 
-const createComponentRule = (rule) => (props) => {
-  const { $extends, ...style } = typeof rule === 'function'
+const createExtendedRule = (rule) => (props) => {
+  const { $extends, $map, ...style } = typeof rule === 'function'
     ? rule(props.theme, props)
     : rule;
-  if (!$extends) return style;
-  const spread = []
-    .concat($extends)
-    .reduce((prev, next) => ({ ...prev, ...next.rule(props) }), {});
-  return { ...spread, ...style };
+  const extended = $extends ? $extends.rule(props) : {};
+  return {
+    maps: [].concat($map || []).concat(extended.maps || []),
+    style: { ...extended.style, ...style },
+  };
 };
 
 const styled = <Props>(
@@ -35,10 +47,16 @@ const styled = <Props>(
   type?: string | Function,
   passProps?: Array<string>,
 ): Styled<Props> => {
-  const componentRule = createComponentRule(rule);
   const platformType = getPlatformType(type);
+  const extendedRule = createExtendedRule(rule);
+  const componentRule = (props) => {
+    const { style, maps } = extendedRule(props);
+    // For debugging or post processing.
+    return maps.reduce((style, map) => map(style), style);
+  };
+  // TODO: Use new flow callable object type subclassed from Function.
   const Component = createComponent(componentRule, platformType, passProps);
-  Component.rule = componentRule;
+  Component.rule = extendedRule;
   return Component;
 };
 

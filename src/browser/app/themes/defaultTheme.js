@@ -5,7 +5,6 @@ import typography from './typography';
 
 const theme: Theme = {
   typography: typography({
-    // For text 14px and small text 12px use 14px with 1,16666 fontSizeScale
     fontSize: 16,
     fontSizeScale: 'step5', // perfect fourth, modularscale.com
     lineHeight: 24,
@@ -40,12 +39,12 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    // www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    // https://medium.design/system-shock-6b1dc6d6596f
+    // fontFamily taken from facebook.com (19 December 2016)
+    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
   },
   heading: {
-    bold: 700,
-    fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
     marginBottom: 1,
   },
   paragraph: {
