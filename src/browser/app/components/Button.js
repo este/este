@@ -26,7 +26,7 @@ Button.defaultProps = ({
   bold: true,
   display: 'inline-block',
   marginVertical: 1 / 4,
-  paddingHorizontal: '1.75em',
+  paddingHorizontal: 1,
   paddingVertical: 1 / 4,
   transform: 'capitalize',
 }: Exact<ButtonProps>);
