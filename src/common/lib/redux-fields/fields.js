@@ -1,5 +1,5 @@
 /* @flow weak */
-import { path as ramdaPath } from 'ramda/src/path';
+import ramdaPath from 'ramda/src/path';
 import React from 'react';
 import invariant from 'invariant';
 import { resetFields, setField } from './actions';
