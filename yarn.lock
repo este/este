@@ -2327,6 +2327,10 @@ elliptic@^6.0.0:
     hash.js "^1.0.0"
     inherits "^2.0.1"
 
+email-validator@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/email-validator/-/email-validator-1.0.7.tgz#4621ca32fc741eb833ac98d5fb55670b7e056c95"
+
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -3418,13 +3422,14 @@ graceful-fs@~1.2.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-gravatar-api@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/gravatar-api/-/gravatar-api-1.4.0.tgz#1a38bbd3668505a8b065ce6f33d50fe4599e2105"
+gravatar@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/gravatar/-/gravatar-1.6.0.tgz#8bdc9b786ca725a8e7076416d1731f8d3331c976"
   dependencies:
     blueimp-md5 "^2.3.0"
-    lodash "^4.6.1"
+    email-validator "^1.0.7"
     querystring "0.2.0"
+    yargs "^6.0.0"
 
 growly@^1.2.0:
   version "1.3.0"
