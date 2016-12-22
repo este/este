@@ -117,7 +117,7 @@
     "uuid": "^3.0.0",
     "validator": "^6.0.0",
     "warning": "^3.0.0",
-    "webpack": "2.2.0-rc.0",
+    "webpack": "2.2.0-rc.2",
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-isomorphic-tools": "^2.6.5",
