@@ -66,6 +66,10 @@ export type Theme = {|
     marginBottom: number,
     maxWidth: number | string,
   |},
+  input: {|
+    border: string,
+    borderError: string,
+  |},
 |};
 
 // Browser types. Taken from cssreference.io.
@@ -139,6 +143,32 @@ export type FontWeight =
   | 'lighter'
   | 'normal'
   | number
+  ;
+
+export type InputTypes =
+    'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | number
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
   ;
 
 export type JustifyContent =
