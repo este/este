@@ -6,10 +6,10 @@ import React from 'react';
 
 type PageHeaderProps = {|
   heading: string,
-  description: string,
+  description?: string,
 |};
 
-const PageHeader = (props: PageHeaderProps) => (
+const PageHeader = ({ heading, description }: PageHeaderProps) => (
   <Box
     border="bottom"
     borderWidth={2}
@@ -17,8 +17,10 @@ const PageHeader = (props: PageHeaderProps) => (
     marginTop={2}
     paddingBottom={1 / 2}
   >
-    <Heading size={3} marginBottom={0}>{props.heading}</Heading>
-    <Paragraph marginBottom={0}>{props.description}</Paragraph>
+    <Heading size={3} marginBottom={0}>{heading}</Heading>
+    {description &&
+      <Paragraph marginBottom={0}>{description}</Paragraph>
+    }
   </Box>
 );
 
