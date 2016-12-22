@@ -21,7 +21,7 @@ const settleAllWithTimeout = promises => Promise
     if (inspection.isFulfilled()) return;
     console.log('Server fetch failed:', inspection.reason());
   })
-  .timeout(5000) // Do not block rendering forever.
+  .timeout(15000) // Do not block rendering forever.
   .catch((error) => {
     // $FlowFixMe
     if (error instanceof Promise.TimeoutError) {
