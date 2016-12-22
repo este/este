@@ -6,7 +6,7 @@ import styled from './styled';
 
 type ButtonProps = TextProps & {
   disabled?: boolean,
-  onClick?: (e: SyntheticMouseEvent) => void,
+  onClick?: (e: SyntheticMouseEvent) => any,
 };
 
 const Button: Styled<ButtonProps> = styled((theme, props) => ({
@@ -14,6 +14,7 @@ const Button: Styled<ButtonProps> = styled((theme, props) => ({
   borderRadius: props.borderRadius || theme.border.radius,
   color: props.color ? theme.colors[props.color] : theme.colors.white,
   cursor: 'pointer',
+  userSelect: 'none',
   ...(props.disabled ? theme.states.disabled : {}),
 }), 'button', [
   'disabled',
@@ -24,10 +25,10 @@ Button.defaultProps = ({
   backgroundColor: 'primary',
   bold: true,
   display: 'inline-block',
-  marginVertical: 0.25,
-  paddingHorizontal: '1.75em',
-  paddingVertical: 0.25,
+  marginVertical: 1 / 4,
+  paddingHorizontal: 1,
+  paddingVertical: 1 / 4,
   transform: 'capitalize',
-}: Exact<TextProps>);
+}: Exact<ButtonProps>);
 
 export default Button;

@@ -2,7 +2,7 @@
 import type { State } from '../../common/types';
 import React from 'react';
 import SignOut from '../auth/SignOut';
-import gravatar from 'gravatar-api';
+import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
 import { CenteredContainer, Text } from '../app/components';
 import { Image, StyleSheet, View } from 'react-native';
 import { Redirect } from 'react-router';
@@ -16,16 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const getImageSourceUri = viewer => viewer.photoURL || gravatar.imageUrl({
-  email: viewer.displayName,
-  parameters: {
-    default: 'retro',
-    rating: 'x',
-    size: 100,
-  },
-  secure: true,
-});
-
 const MePage = ({ viewer }) => (
   !viewer ?
     <Redirect to="/" />
@@ -35,7 +25,7 @@ const MePage = ({ viewer }) => (
         <Text>{viewer.displayName}</Text>
       </View>
       <Image
-        source={{ uri: getImageSourceUri(viewer) }}
+        source={{ uri: getUserPhotoUrl(viewer) }}
         style={styles.image}
       />
       <SignOut />

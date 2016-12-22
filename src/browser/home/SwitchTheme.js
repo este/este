@@ -3,13 +3,13 @@ import type { State } from '../../common/types';
 import * as themes from '../app/themes';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import { Box, Button } from '../app/components';
+import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
 import { setTheme } from '../../common/themes/actions';
 
 type SwitchThemeProps = {
   currentTheme: string,
-  setTheme: typeof setTheme, // This is so good. Flowtype ftw.
+  setTheme: typeof setTheme,
 };
 
 const themesNames = [
@@ -21,19 +21,22 @@ const themesNames = [
 ];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-  <Box>
-    {themesNames.map(themeName => (
-      <Button
-        key={themeName}
-        marginHorizontal="0.5em"
-        // marginLeft={i && '.75em'}
-        // backgroundColor="warning"
-        // onClick={() => setTheme(themeName)}
-        backgroundColor={themeName === currentTheme ? 'success' : 'primary'}
-      >
-        {themeName.replace('Theme', '')}
-      </Button>
-    ))}
+  <Box marginBottom={1.5}>
+    <Heading marginBottom={0.5}>
+      Switch Theme
+    </Heading>
+    <Box marginHorizontal={-0.25}>
+      {themesNames.map(themeName => (
+        <Button
+          disabled={themeName === currentTheme}
+          key={themeName}
+          marginHorizontal={0.25}
+          onClick={() => setTheme(themeName)}
+        >
+          {themeName.replace('Theme', '')}
+        </Button>
+      ))}
+    </Box>
   </Box>
 );
 

@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
-// import UsersPage from '../users/UsersPage';
+import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
 // import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
@@ -25,6 +25,7 @@ import HomePage from '../home/HomePage';
 // import TodosPage from '../todos/TodosPage';
 
 type AppProps = {
+  baselineShown: boolean,
   currentLocale: string,
   currentTheme: ?string,
 };
@@ -32,10 +33,9 @@ type AppProps = {
 const theme = (currentTheme) =>
   themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
 
-const App = ({ currentLocale, currentTheme }: AppProps) => (
+const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
   <ThemeProvider
-    // TODO: Do we need it?
-    // key={currentTheme} // github.com/yahoo/react-intl/issues/234#issuecomment-163366518
+    key={currentTheme} // Enforce rerender.
     theme={theme(currentTheme)}
   >
     <Container>
@@ -50,11 +50,11 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
         ]}
         link={[
           ...favicon.link,
-          // Test vertical rhythm.
-          {
+          // To test vertical rhythm visually.
+          ...(baselineShown ? [{
             href: `http://basehold.it/${theme(currentTheme).typography.lineHeight}/0/0/0/0.1`,
             rel: 'stylesheet',
-          },
+          }] : []),
         ]}
       />
         <Header />
@@ -62,8 +62,8 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
           flex={1} // make footer sticky
         >
           <Match exactly pattern="/" component={HomePage} />
+          <Match pattern="/users" component={UsersPage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
-            <Match pattern="/users" component={UsersPage} />
             <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
@@ -79,6 +79,7 @@ const App = ({ currentLocale, currentTheme }: AppProps) => (
 export default compose(
   connect(
     (state: State) => ({
+      baselineShown: state.app.baselineShown,
       currentLocale: state.intl.currentLocale,
       currentTheme: state.themes.currentTheme,
     }),

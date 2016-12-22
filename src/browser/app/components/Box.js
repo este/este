@@ -15,8 +15,6 @@ import type {
 import styled from './styled';
 import warning from 'warning';
 
-type RhythmOrString = number | string | false;
-
 export type BoxProps = {
   // Element
   className?: string,
@@ -39,36 +37,33 @@ export type BoxProps = {
   flexGrow?: number,
   flexShrink?: number,
   flexWrap?: FlexWrap,
-  height?: RhythmOrString,
+  height?: number,
   justifyContent?: JustifyContent,
-  margin?: RhythmOrString,
-  marginBottom?: RhythmOrString,
-  marginLeft?: RhythmOrString,
-  marginRight?: RhythmOrString,
-  marginTop?: RhythmOrString,
-  maxHeight?: RhythmOrString,
-  maxWidth?: RhythmOrString,
-  minHeight?: RhythmOrString,
-  minWidth?: RhythmOrString,
+  margin?: number,
+  marginBottom?: number,
+  marginLeft?: number,
+  marginRight?: number,
+  marginTop?: number,
+  maxHeight?: number,
+  maxWidth?: number,
+  minHeight?: number,
+  minWidth?: number,
   order?: number,
-  padding?: RhythmOrString,
-  paddingBottom?: RhythmOrString,
-  paddingLeft?: RhythmOrString,
-  paddingRight?: RhythmOrString,
-  paddingTop?: RhythmOrString,
-  width?: RhythmOrString,
+  padding?: number,
+  paddingBottom?: number,
+  paddingLeft?: number,
+  paddingRight?: number,
+  paddingTop?: number,
+  width?: number,
   // Custom
-  marginHorizontal?: RhythmOrString,
-  marginVertical?: RhythmOrString,
-  paddingHorizontal?: RhythmOrString,
-  paddingVertical?: RhythmOrString,
+  marginHorizontal?: number,
+  marginVertical?: number,
+  paddingHorizontal?: number,
+  paddingVertical?: number,
   suppressRhythmWarning?: boolean,
 };
 
-const rhythmOrString = (theme, value: RhythmOrString) =>
-  typeof value === 'number'
-    ? theme.typography.lineHeight * value
-    : value || 0;
+const rhythm = (theme, value) => theme.typography.lineHeight * value;
 
 const directionMapping = {
   marginHorizontal: ['marginLeft', 'marginRight'],
@@ -94,7 +89,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'flexBasis':
     case 'alignSelf':
       return { [prop]: value };
-    // Simple rhythmOrString props.
+    // Simple rhythm props.
     case 'marginBottom':
     case 'marginLeft':
     case 'marginRight':
@@ -110,35 +105,35 @@ const propToStyle = (prop, value: any, theme) => {
     case 'minWidth':
     case 'minHeight':
       return {
-        [prop]: rhythmOrString(theme, value),
+        [prop]: rhythm(theme, value),
       };
-    // Shorthand rhythmOrString props.
+    // Shorthand rhythm props.
     case 'marginHorizontal':
     case 'marginVertical':
     case 'paddingHorizontal':
     case 'paddingVertical': {
       const [d1, d2] = directionMapping[prop];
       return {
-        [d1]: rhythmOrString(theme, value),
-        [d2]: rhythmOrString(theme, value),
+        [d1]: rhythm(theme, value),
+        [d2]: rhythm(theme, value),
       };
     }
     // Split margin shorthand to be computable.
     case 'margin': {
       return {
-        marginBottom: rhythmOrString(theme, value),
-        marginLeft: rhythmOrString(theme, value),
-        marginRight: rhythmOrString(theme, value),
-        marginTop: rhythmOrString(theme, value),
+        marginBottom: rhythm(theme, value),
+        marginLeft: rhythm(theme, value),
+        marginRight: rhythm(theme, value),
+        marginTop: rhythm(theme, value),
       };
     }
     // Split padding shorthand to be computable.
     case 'padding': {
       return {
-        paddingBottom: rhythmOrString(theme, value),
-        paddingLeft: rhythmOrString(theme, value),
-        paddingRight: rhythmOrString(theme, value),
-        paddingTop: rhythmOrString(theme, value),
+        paddingBottom: rhythm(theme, value),
+        paddingLeft: rhythm(theme, value),
+        paddingRight: rhythm(theme, value),
+        paddingTop: rhythm(theme, value),
       };
     }
     // Other props.

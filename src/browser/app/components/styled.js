@@ -5,16 +5,24 @@ import { createComponent } from 'react-fela';
 
 type DivButtonProps = {
   disabled?: boolean,
+  onClick?: Function,
 };
 
-// TODO: Add React Native support via context probably.
-// TODO: This should be configurable via context.
+// TODO: Configure this via React context.
 const getPlatformType = (type) => {
+  // developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
+  // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
   if (type === 'button') {
-    // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
     return (props: DivButtonProps) => (
-      <div
+      <div // eslint-disable-line jsx-a11y/no-static-element-interactions
         role="button"
+        onKeyPress={e => {
+          const isSpacebar = e.key === ' ';
+          if (!isSpacebar) return;
+          e.preventDefault();
+          if (typeof props.onClick !== 'function') return;
+          props.onClick(e);
+        }}
         tabIndex={props.disabled ? -1 : 0}
         {...props}
       />
@@ -42,8 +50,8 @@ const styled = <Props>(
   const platformType = getPlatformType(type);
   const extendedRule = createExtendedRule(rule);
   const componentRule = (props) => {
-    // For debugging or post processing.
     const { style, maps } = extendedRule(props);
+    // For debugging or post processing.
     return maps.reduce((style, map) => map(style), style);
   };
   // TODO: Use new flow callable object type subclassed from Function.
