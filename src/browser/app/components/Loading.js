@@ -47,7 +47,6 @@ class Loading extends React.Component {
   render() {
     const { currentText } = this.state;
     if (!currentText) return null;
-    const { children } = this.props;
 
     return (
       <Box>
@@ -60,12 +59,5 @@ class Loading extends React.Component {
   }
 
 }
-
-Loading.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.func,
-    React.PropTypes.node,
-  ]),
-};
 
 export default Loading;

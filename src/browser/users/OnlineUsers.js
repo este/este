@@ -18,7 +18,7 @@ type OnlineUserProps = {
 };
 
 const OnlineUser = ({ user }: OnlineUserProps) => (
-  <Box display="inline-block">
+  <Box marginHorizontal={0.25}>
     <Image
       src={getUserPhotoUrl(user)}
       height={50}
@@ -34,16 +34,16 @@ type OnlineUsersProps = {|
 |};
 
 const OnlineUsers = ({ users }: OnlineUsersProps) => (
-  <Box>
-    { users === undefined ?
-      <Loading />
-    : users === null ?
-      <Text>No one is online.</Text>
-    :
-      users.map(user =>
+  users === undefined ?
+    <Loading />
+  : users === null ?
+    <Text>No one is online.</Text>
+  :
+    <Box display="flex" flexWrap="wrap" marginHorizontal={-0.25}>
+      {users.map(user =>
         <OnlineUser key={user.id} user={user} />,
       )}
-  </Box>
+    </Box>
 );
 
 export default R.compose(

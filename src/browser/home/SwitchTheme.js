@@ -32,10 +32,10 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
           key={themeName}
           marginHorizontal={0.25}
           onClick={() => setTheme(themeName)}
-          >
-            {themeName.replace('Theme', '')}
-          </Button>
-        ))}
+        >
+          {themeName.replace('Theme', '')}
+        </Button>
+      ))}
     </Box>
   </Box>
 );
