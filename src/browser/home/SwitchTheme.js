@@ -17,7 +17,7 @@ const themesNames = [
   ...Object
     .keys(themes)
     .filter(key => key !== 'defaultTheme')
-    .sort()
+    .sort(),
 ];
 
 const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (

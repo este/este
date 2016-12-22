@@ -171,6 +171,9 @@ const makeConfig = (options) => {
       }
       return plugins;
     })(),
+    performance: {
+      hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+    },
     resolve: {
       extensions: ['.js'], // .json is ommited to ignore ./firebase.json
       modules: [constants.SRC_DIR, 'node_modules'],
