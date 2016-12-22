@@ -36,7 +36,7 @@
 
 ## Libraries
 
-- [redux](http://rackt.github.io/redux/)
+- [redux](http://reactjs.github.io/redux/)
 - [redux-observable](https://github.com/redux-observable/redux-observable)
 - [ramda](http://ramdajs.com/)
 - [react-intl](https://github.com/yahoo/react-intl)
