@@ -21,7 +21,7 @@ const onSubmitWithPreventDefault = (onSubmit: OnSubmit) => e => {
   onSubmit(e);
 };
 
-const Wrapped: Styled<FormProps> = ({ onSubmit, ...props}) => (
+const Wrapped: Styled<FormProps> = ({ onSubmit, ...props }) => (
   <Form
     onSubmit={onSubmitWithPreventDefault(onSubmit)}
     {...props}
