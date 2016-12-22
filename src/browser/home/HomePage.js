@@ -9,6 +9,9 @@ import {
   Link,
   PageHeader,
   Paragraph,
+  Title,
+  Button,
+  Input,
   Text,
   Title,
   ToggleBaseline,
@@ -68,6 +71,7 @@ const HomePage = () => (
         marginHorizontal={0.25}
       >black</Button>
     </Box>
+    <Input label="Input" labelSize={1} placeholder="Lorem ipsum dolor"/>
     <SwitchTheme />
     <ToggleBaseline />
   </Box>
