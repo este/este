@@ -26,10 +26,15 @@ const configureStore = (options: Options) => {
     platformMiddleware,
   );
 
+  const composeEnhancers = process.env.NODE_ENV !== 'production' && process.env.IS_BROWSER
+    // eslint-disable-next-line no-underscore-dangle
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    : compose;
+
   const store = createStore(
     reducer,
     initialState,
-    compose(
+    composeEnhancers(
       applyMiddleware(...middleware),
       autoRehydrate(),
     ),

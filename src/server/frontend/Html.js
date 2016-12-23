@@ -20,6 +20,7 @@ GoogleAnalytics.propTypes = {
 
 type Props = {
   appCssFilename: string,
+  headStyles?: string,
   bodyHtml: string,
   googleAnalyticsId: string,
   helmet: Object,
@@ -28,6 +29,7 @@ type Props = {
 
 const Html = ({
   appCssFilename,
+  headStyles,
   bodyHtml,
   googleAnalyticsId,
   helmet,
@@ -40,6 +42,8 @@ const Html = ({
       {helmet.meta.toComponent()}
       {helmet.link.toComponent()}
       {helmet.script.toComponent()}
+      {headStyles &&
+        <style id="stylesheet">{headStyles}</style>}
       {appCssFilename &&
         <link href={appCssFilename} rel="stylesheet" />
       }

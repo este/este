@@ -8,7 +8,7 @@ import { setTheme } from '../../../common/themes/actions';
 
 const getSortedThemeKeys = () => {
   const customThemesKeys = Object.keys(themes)
-    .filter(key => key !== 'initial')
+    .filter(key => key !== 'initial' && key !== 'globalStyles')
     .sort();
   return ['initial', ...customThemesKeys];
 };
@@ -19,6 +19,7 @@ const SwitchTheme = ({ currentTheme, setTheme }) => (
       <Button
         key={themeKey}
         mr={1}
+        disabled
         onClick={() => setTheme(themeKey)}
         theme={themeKey === currentTheme ? 'primary' : 'secondary'}
       >
