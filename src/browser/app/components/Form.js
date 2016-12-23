@@ -5,17 +5,15 @@ import Box from './Box';
 import styled from './styled';
 import React from 'react';
 
-type OnSubmit = SyntheticEvent => void;
-
 type FormProps = BoxProps & {
-  onSubmit?: OnSubmit,
+  onSubmit?: SyntheticEvent => void,
 };
 
 const Form: Styled<FormProps> = styled(() => ({
   $extends: Box,
 }), 'form', ['onSubmit']);
 
-const onSubmitWithPreventDefault = (onSubmit: OnSubmit) => e => {
+const onSubmitWithPreventDefault = (onSubmit) => e => {
   if (!onSubmit) return;
   e.preventDefault();
   onSubmit(e);
