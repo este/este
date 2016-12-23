@@ -1,6 +1,6 @@
 /* @flow */
 import type { BoxProps } from './Box';
-import type { Styled } from '../themes/types';
+import type { Exact, Styled } from '../themes/types';
 import Box from './Box';
 import styled from './styled';
 import React from 'react';
@@ -9,21 +9,21 @@ type FormProps = BoxProps & {
   onSubmit?: SyntheticEvent => void,
 };
 
-const Form: Styled<FormProps> = styled(() => ({
+const onSubmitWithPreventDefault = onSubmit => event => {
+  if (!onSubmit) return;
+  event.preventDefault();
+  onSubmit(event);
+};
+
+const StyledForm: Styled<FormProps> = styled(() => ({
   $extends: Box,
 }), 'form', ['onSubmit']);
 
-const onSubmitWithPreventDefault = (onSubmit) => e => {
-  if (!onSubmit) return;
-  e.preventDefault();
-  onSubmit(e);
-};
-
-const Wrapped: Styled<FormProps> = ({ onSubmit, ...props }) => (
-  <Form
+const Form = ({ onSubmit, ...props }: Exact<FormProps>) => (
+  <StyledForm
     onSubmit={onSubmitWithPreventDefault(onSubmit)}
     {...props}
   />
 );
 
-export default Wrapped;
+export default Form;

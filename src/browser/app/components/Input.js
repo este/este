@@ -1,10 +1,10 @@
 /* @flow */
 import type { Styled, InputTypes } from '../themes/types';
 import type { TextProps } from './Text';
-import Box from './Box';
-import React from 'react';
-import Text from './Text';
-import styled from './styled';
+// import Box from './Box';
+// import React from 'react';
+// import Text from './Text';
+// import styled from './styled';
 
 export type InputProps = TextProps & {
   name?: string,
@@ -32,7 +32,8 @@ export default Input;
 // const Input: Styled<InputProps> = (props: InputProps) => {
 //   return (
 //     <Box marginBottom={'0.5em'}>
-//       {props.label ? <Text size={props.labelSize ? props.labelSize : 0}>{props.label}</Text> : null}
+//       {props.label ? <Text size={props.labelSize
+// ? props.labelSize : 0}>{props.label}</Text> : null}
 //       <CustomInput {...props}/>
 //     </Box>
 //   )

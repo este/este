@@ -22,6 +22,7 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
   <Form onSubmit={e => {
     // addTodo(1)
   }}>
+    <input />
     <Input
       // label="Input"
       // labelSize={1}
