@@ -22,7 +22,7 @@ import HomePage from '../home/HomePage';
 // import NotFoundPage from '../notfound/NotFoundPage';
 // import OfflinePage from '../offline/OfflinePage';
 // import SignInPage from '../auth/SignInPage';
-// import TodosPage from '../todos/TodosPage';
+import TodosPage from '../todos/TodosPage';
 
 type AppProps = {
   baselineShown: boolean,
@@ -63,11 +63,11 @@ const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
         >
           <Match exactly pattern="/" component={HomePage} />
           <Match pattern="/users" component={UsersPage} />
+          <Match pattern="/todos" component={TodosPage} />
           {/*  <Match pattern="/fields" component={FieldsPage} />
             <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
-            <Match pattern="/todos" component={TodosPage} />
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}
         </Box>

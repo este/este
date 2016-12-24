@@ -3,6 +3,19 @@ import type { Theme } from './types';
 import openColor from './openColor';
 import typography from './typography';
 
+// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
+// Taken from from Bootstrap 4.
+export const nativeFontFamily = [
+  '-apple-system',
+  'system-ui',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  'sans-serif',
+].join(', ');
+
 const theme: Theme = {
   typography: typography({
     fontSize: 16,
@@ -39,17 +52,19 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    // https://medium.design/system-shock-6b1dc6d6596f
-    // fontFamily taken from facebook.com (19 December 2016)
-    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
+    fontFamily: nativeFontFamily,
   },
   heading: {
-    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
+    fontFamily: nativeFontFamily,
     marginBottom: 1,
   },
   paragraph: {
     marginBottom: 1,
     maxWidth: '42em',
+  },
+  input: {
+    borderError: `solid 1px ${openColor.red7}`,
+    border: `solid 1px ${openColor.gray4}`,
   },
 };
 

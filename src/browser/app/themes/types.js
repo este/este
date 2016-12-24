@@ -1,33 +1,19 @@
 /* @flow */
 import type { OpenColor } from './openColor';
 
-// TODO: Import from /common/types
-// Exact is temp workaround until native exact will fix spread and intersection.
-// flowtype.org/docs/objects.html#exact-object-types
-// github.com/facebook/flow/issues/2405#issuecomment-256339492
-// github.com/facebook/flow/issues/2626
-export type Exact<T> = T & $Shape<T>;
-
 // Theme.
 
-type Colors = {
-  primary: string,
-  success: string,
-  warning: string,
-  danger: string,
-  black: string,
-  white: string,
-  gray: string,
+export type ColorProps = {
+  primary?: boolean,
+  success?: boolean,
+  warning?: boolean,
+  danger?: boolean,
+  black?: boolean,
+  white?: boolean,
+  gray?: boolean,
 };
 
-export type Color = $Keys<Colors>;
-
-// TODO: It should be possible to use callable-objects for Styled type soon.
-// flowtype.org/docs/quick-reference.html#callable-objects
-// As result, defaultProps would be typed by default, no need for custom Exact.
-export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
-
-export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
+export type Color = $Keys<ColorProps>;
 
 export type Theme = {|
   typography: {|
@@ -35,7 +21,10 @@ export type Theme = {|
     lineHeight: number,
     rhythm: (number) => number,
   |},
-  colors: Colors & { open: OpenColor },
+  colors: {
+    [color: Color]: string,
+    open: OpenColor,
+  },
   border: {|
     radius: number,
     width: number,
@@ -66,7 +55,19 @@ export type Theme = {|
     marginBottom: number,
     maxWidth: number | string,
   |},
+  input: {|
+    border: string,
+    borderError: string,
+  |},
 |};
+
+// Spread on flow exact types doesn't work, but we can use Strict type.
+// It breaks autocomplete, so we are using it only here. It's the must, because
+// it prevents typos like 'marginBotom'.
+// https://github.com/facebook/flow/issues/2405#issuecomment-256339492
+type Strict<T> = T & $Shape<T>;
+export type Styled<Props> = (props: Strict<Props>) => React$Element<any>;
+export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Browser types. Taken from cssreference.io.
 
@@ -139,6 +140,32 @@ export type FontWeight =
   | 'lighter'
   | 'normal'
   | number
+  ;
+
+export type InputTypes =
+    'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | number
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
   ;
 
 export type JustifyContent =

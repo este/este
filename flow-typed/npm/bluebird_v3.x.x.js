@@ -1,5 +1,5 @@
-// flow-typed signature: f7bf040869842c4af9aa8e5e72c252fa
-// flow-typed version: e1ccfebf85/bluebird_v3.x.x/flow_>=v0.32.x
+// flow-typed signature: b3c0e3a8c28bf373a91b2c095a64d617
+// flow-typed version: c4483dc8ea/bluebird_v3.x.x/flow_>=v0.32.x
 
 type Bluebird$RangeError = Error;
 type Bluebird$CancellationErrors = Error;
@@ -145,6 +145,7 @@ declare class Bluebird$Promise<R> {
   each<T, U>(iterator: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<T>>;
   asCallback<T>(callback: (error: ?any, value?: T) => any, options?: Bluebird$SpreadOption): void;
   return<T>(value: T): Bluebird$Promise<T>;
+  spread<T>(...args: Array<T>): Bluebird$Promise<*>;
 
   reflect(): Bluebird$Promise<Bluebird$PromiseInspection<*>>;
 
