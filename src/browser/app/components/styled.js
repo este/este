@@ -1,17 +1,6 @@
 /* @flow */
 import type { BrowserStyle, Styled, Theme } from '../themes/types';
-import React from 'react';
 import { createComponent } from 'react-fela';
-
-type DivButtonProps = {
-  disabled?: boolean,
-  onClick?: Function,
-};
-
-// TODO: Use React context to get platform specific types.
-const getPlatformType = (type) => {
-  return type;
-};
 
 const createExtendedRule = (rule) => (props) => {
   const { $extends, $map, ...style } = typeof rule === 'function'
@@ -29,7 +18,6 @@ const styled = <Props>(
   type?: string | Function,
   passProps?: Array<string>,
 ): Styled<Props> => {
-  const platformType = getPlatformType(type);
   const extendedRule = createExtendedRule(rule);
   const componentRule = (props) => {
     const { style, maps } = extendedRule(props);
@@ -37,7 +25,7 @@ const styled = <Props>(
     return maps.reduce((style, map) => map(style), style);
   };
   // TODO: Use new flow callable object type subclassed from Function.
-  const Component = createComponent(componentRule, platformType, passProps);
+  const Component = createComponent(componentRule, type, passProps);
   Component.rule = extendedRule;
   return Component;
 };
