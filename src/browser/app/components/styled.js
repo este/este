@@ -8,26 +8,8 @@ type DivButtonProps = {
   onClick?: Function,
 };
 
-// TODO: Configure this via React context.
+// TODO: Use React context to get platform specific types.
 const getPlatformType = (type) => {
-  // developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
-  // developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
-  if (type === 'button') {
-    return (props: DivButtonProps) => (
-      <div // eslint-disable-line jsx-a11y/no-static-element-interactions
-        role="button"
-        onKeyPress={e => {
-          const isSpacebar = e.key === ' ';
-          if (!isSpacebar) return;
-          e.preventDefault();
-          if (typeof props.onClick !== 'function') return;
-          props.onClick(e);
-        }}
-        tabIndex={props.disabled ? -1 : 0}
-        {...props}
-      />
-    );
-  }
   return type;
 };
 
