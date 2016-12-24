@@ -2,6 +2,7 @@
 import type { Theme } from './types';
 import openColor from './openColor';
 import typography from './typography';
+import { nativeFontFamily } from './defaultTheme';
 
 const theme: Theme = {
   typography: typography({
@@ -39,12 +40,10 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    // https://medium.design/system-shock-6b1dc6d6596f
-    // fontFamily taken from facebook.com (19 December 2016)
-    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
+    fontFamily: nativeFontFamily,
   },
   heading: {
-    fontFamily: '-apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif',
+    fontFamily: nativeFontFamily,
     marginBottom: 1,
   },
   paragraph: {
