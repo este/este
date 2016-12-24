@@ -34,7 +34,7 @@ export type User = {|
 
 // Reducers
 // We can't use exact object type, because spread is not supported yet.
-// We can't use Exact<T> = T & $Shape<T>, because it breaks autocomplete.
+// We can't use Strict<T> = T & $Shape<T>, because it breaks autocomplete.
 // TODO: Wait for Flow.
 
 export type AppState = {

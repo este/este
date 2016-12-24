@@ -61,13 +61,12 @@ export type Theme = {|
   |},
 |};
 
-// TODO: It should be possible to use callable-objects for Styled type soon.
-// flowtype.org/docs/quick-reference.html#callable-objects
-// As result, defaultProps would be typed by default, no need for custom Exact.
-// github.com/facebook/flow/blob/master/Changelog.md#v0370
-// "Things typed as "callable objects" now inherit from Function.prototype..."
-export type Exact<T> = T & $Shape<T>;
-export type Styled<Props> = (props: Exact<Props>) => React$Element<any>;
+// Spread on flow exact types doesn't work, but we can use Strict type.
+// It breaks autocomplete, so we are using it only here. It's the must, because
+// it prevents typos like 'marginBotom'.
+// https://github.com/facebook/flow/issues/2405#issuecomment-256339492
+type Strict<T> = T & $Shape<T>;
+export type Styled<Props> = (props: Strict<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
 // Browser types. Taken from cssreference.io.

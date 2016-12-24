@@ -1,5 +1,5 @@
 /* @flow */
-import type { ColorProps, Exact, Styled } from '../themes/types';
+import type { ColorProps, Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Text from './Text';
 import styled from './styled';
