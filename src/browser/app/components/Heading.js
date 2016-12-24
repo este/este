@@ -1,20 +1,19 @@
 /* @flow */
-import type { Exact, Styled } from '../themes/types';
+import type { Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Text from './Text';
 import styled from './styled';
 
-const Heading: Styled<TextProps> = styled((theme, props) => ({
+const Heading: Styled<TextProps> = styled((theme, {
+  bold = true,
+  display = 'block',
+  marginBottom = theme.heading.marginBottom,
+}) => ({
   $extends: Text,
+  display,
   fontFamily: theme.heading.fontFamily,
-  ...(props.marginBottom == null ? {
-    marginBottom: theme.typography.rhythm(theme.heading.marginBottom),
-  } : {}),
+  fontWeight: bold ? theme.text.bold : 'normal',
+  marginBottom: theme.typography.rhythm(marginBottom),
 }));
-
-Heading.defaultProps = ({
-  display: 'block',
-  bold: true,
-}: Exact<TextProps>);
 
 export default Heading;

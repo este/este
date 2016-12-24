@@ -1,19 +1,18 @@
 /* @flow */
-import type { Exact, Styled } from '../themes/types';
+import type { Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Text from './Text';
 import styled from './styled';
 
-const Paragraph: Styled<TextProps> = styled((theme, props) => ({
+const Paragraph: Styled<TextProps> = styled((theme, {
+  display = 'block',
+  marginBottom = theme.paragraph.marginBottom,
+  maxWidth = theme.paragraph.maxWidth,
+}) => ({
   $extends: Text,
-  maxWidth: props.maxWidth || theme.paragraph.maxWidth,
-  ...(props.marginBottom == null ? {
-    marginBottom: theme.typography.rhythm(theme.paragraph.marginBottom),
-  } : {}),
+  display,
+  marginBottom: theme.typography.rhythm(marginBottom),
+  maxWidth,
 }));
-
-Paragraph.defaultProps = ({
-  display: 'block',
-}: Exact<TextProps>);
 
 export default Paragraph;
