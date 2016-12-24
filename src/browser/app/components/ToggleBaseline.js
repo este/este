@@ -15,7 +15,7 @@ type ToggleBaselineProps = {
 const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) => (
   <Box>
     <Button
-      backgroundColor="transparent"
+      // backgroundColor="transparent"
       color="black"
       border
       bold={false}

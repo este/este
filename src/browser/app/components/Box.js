@@ -24,7 +24,7 @@ export type BoxProps = {
   alignContent?: AlignContent,
   alignItems?: AlignItems,
   alignSelf?: AlignSelf,
-  backgroundColor?: Color | 'transparent',
+  backgroundColor?: Color,
   border?: true | TopBottomLeftRight,
   borderColor?: Color,
   borderRadius?: number,

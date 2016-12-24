@@ -22,8 +22,16 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
   <Form onSubmit={e => {
     // addTodo(1)
   }}>
-    <input />
+    <Text>fok</Text>
     <Input
+      display="inline"
+      // label="Input"
+      // labelSize={1}
+      // placeholder="Lorem ipsum dolor"
+    /><br />
+    <Text>fok</Text>
+    <Input
+      display="inline"
       // label="Input"
       // labelSize={1}
       // placeholder="Lorem ipsum dolor"

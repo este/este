@@ -1,6 +1,6 @@
 /* @flow */
 import type { BoxProps } from './Box';
-import type { Exact, Styled } from '../themes/types';
+import type { Styled } from '../themes/types';
 import Box from './Box';
 import styled from './styled';
 import React from 'react';
@@ -19,7 +19,7 @@ const StyledForm: Styled<FormProps> = styled(() => ({
   $extends: Box,
 }), 'form', ['onSubmit']);
 
-const Form = ({ onSubmit, ...props }: Exact<FormProps>) => (
+const Form: Styled<FormProps> = ({ onSubmit, ...props }) => (
   <StyledForm
     onSubmit={onSubmitWithPreventDefault(onSubmit)}
     {...props}
