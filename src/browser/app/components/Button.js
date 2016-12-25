@@ -29,6 +29,8 @@ const Button: Styled<ButtonProps> = styled((theme, {
     paddingVertical,
     transform,
   }: Strict<TextProps>)],
+  cursor: 'pointer',
+  userSelect: 'none',
   // borderRadius,
   // color: color ? theme.colors[color] : theme.colors.white,
   // ...(disabled ? theme.states.disabled : {}),

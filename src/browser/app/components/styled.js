@@ -1,12 +1,34 @@
 /* @flow */
 import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
+import React from 'react';
 
-// const maps = [].concat($map || []);
-// const style = { ...style };
-// if (!$extends) {
-//   return { maps, style };
-// }
+// TODO: Use React context to define platform specific types.
+const getPlatformType = (type) => {
+  if (type === 'button') {
+    // developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
+    // developer.mozilla.org/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+    return (props: {
+      disabled?: boolean,
+      onClick?: Function,
+    }) => (
+      // Render div because button is not consistently rendered across browsers.
+      <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+        {...props}
+        role="button"
+        onKeyPress={e => {
+          const isSpacebar = e.key === ' ';
+          if (!isSpacebar) return;
+          e.preventDefault();
+          if (typeof props.onClick !== 'function') return;
+          props.onClick(e);
+        }}
+        tabIndex={props.disabled ? -1 : 0}
+      />
+    );
+  }
+  return type;
+}
 
 const createExtendedRule = (rule) => (props) => {
   const {
@@ -14,7 +36,7 @@ const createExtendedRule = (rule) => (props) => {
     $map = i => i,
     ...style
   } = typeof rule === 'function' ? rule(props.theme, props) : rule;
-  // Unfortunatelly, we need $extends helper because flow spread is broken.
+  // Unfortunatelly, we need $extends helper because Flowtype spread is broken.
   const extended = $extends
     ? Array.isArray($extends)
       ? $extends[0].rule({
@@ -40,8 +62,11 @@ const styled = <Props>(
     // For debugging or post processing.
     return maps.reduce((style, map) => map(style), style);
   };
-  // TODO: Use new flow callable object type subclassed from Function.
-  const Component = createComponent(componentRule, type, passProps);
+  const Component = createComponent(
+    componentRule,
+    getPlatformType(type),
+    passProps,
+  );
   Component.rule = extendedRule;
   return Component;
 };
