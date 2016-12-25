@@ -13,19 +13,20 @@ type ToggleBaselineProps = {
 };
 
 const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) => (
-  <Box>
-    <Button
-      // backgroundColor="transparent"
-      color="black"
-      border
-      bold={false}
-      marginVertical={0.25}
-      marginBottom={1.25}
-      onClick={toggleBaseline}
-    >
-      {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
-    </Button>
-  </Box>
+  null
+  // <Box>
+  //   <Button
+  //     // backgroundColor="transparent"
+  //     color="black"
+  //     border
+  //     bold={false}
+  //     marginVertical={0.25}
+  //     marginBottom={1.25}
+  //     onClick={toggleBaseline}
+  //   >
+  //     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
+  //   </Button>
+  // </Box>
 );
 
 export default R.compose(

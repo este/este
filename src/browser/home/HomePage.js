@@ -50,6 +50,10 @@ const HomePage = () => (
     </Box>
     <Box marginBottom={2} marginHorizontal={-0.25}>
       <Button
+        // default button? hmm? proc? uvidime
+
+        // primary
+        // disabled
         // color="primary"
         // backgroundColor="warning"
         marginHorizontal={0.25}
@@ -80,8 +84,8 @@ const HomePage = () => (
         marginHorizontal={0.25}
       >black</Button> */}
     </Box>
-    <SwitchTheme />
-    <ToggleBaseline />
+    {/* <SwitchTheme /> */}
+    {/* <ToggleBaseline /> */}
   </Box>
 );
 

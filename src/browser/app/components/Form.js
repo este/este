@@ -15,10 +15,12 @@ const onSubmitWithPreventDefault = onSubmit => event => {
   onSubmit(event);
 };
 
+// Look
 const StyledForm: Styled<FormProps> = styled(() => ({
   $extends: Box,
 }), 'form', ['onSubmit']);
 
+// Behaviour
 const Form: Styled<FormProps> = ({ onSubmit, ...props }) => (
   <StyledForm
     onSubmit={onSubmitWithPreventDefault(onSubmit)}

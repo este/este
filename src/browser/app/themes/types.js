@@ -3,6 +3,7 @@ import type { OpenColor } from './openColor';
 
 // Theme.
 
+// Because { [color: Color]?: boolean } doesn't work, we have to define props.
 export type ColorProps = {
   primary?: boolean,
   success?: boolean,
@@ -65,7 +66,7 @@ export type Theme = {|
 // It breaks autocomplete, so we are using it only here. It's the must, because
 // it prevents typos like 'marginBotom'.
 // https://github.com/facebook/flow/issues/2405#issuecomment-256339492
-type Strict<T> = T & $Shape<T>;
+export type Strict<T> = T & $Shape<T>;
 export type Styled<Props> = (props: Strict<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
@@ -199,7 +200,7 @@ export type TextTransform =
 
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  $extends?: Styled<any>,
+  $extends?: Styled<any> | [Styled<any>, any],
   $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,

@@ -2,13 +2,29 @@
 import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
 
+// const maps = [].concat($map || []);
+// const style = { ...style };
+// if (!$extends) {
+//   return { maps, style };
+// }
+
 const createExtendedRule = (rule) => (props) => {
-  const { $extends, $map, ...style } = typeof rule === 'function'
-    ? rule(props.theme, props)
-    : rule;
-  const extended = $extends ? $extends.rule(props) : {};
+  const {
+    $extends,
+    $map = i => i,
+    ...style
+  } = typeof rule === 'function' ? rule(props.theme, props) : rule;
+  // Unfortunatelly, we need $extends helper because flow spread is broken.
+  const extended = $extends
+    ? Array.isArray($extends)
+      ? $extends[0].rule({
+        ...props,
+        ...$extends[1],
+      })
+      : $extends.rule(props)
+    : {};
   return {
-    maps: [].concat($map || []).concat(extended.maps || []),
+    maps: [$map].concat(extended.maps || []),
     style: { ...extended.style, ...style },
   };
 };

@@ -18,6 +18,7 @@ export type TextProps = BoxProps & {
   bold?: boolean,
   color?: Color,
   decoration?: TextDecoration,
+  fontFamily?: string,
   size?: number,
   transform?: TextTransform,
   // Custom stuff.
@@ -41,24 +42,34 @@ const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
 };
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const fontSizeAndLineHeight = (typography, size) => {
-  const fontSize = typography.fontSize(size || 0);
+const fontSizeAndLineHeight = (typography, size: number) => {
+  const fontSize = typography.fontSize(size);
   const lines = Math.ceil(fontSize / typography.lineHeight);
   const lineHeight = typography.lineHeight * lines;
   return { fontSize, lineHeight: `${lineHeight}px` };
 };
 
-const Text: Styled<TextProps> = styled((theme, props) => ({
+const Text: Styled<TextProps> = styled((theme, {
+  align = 'left',
+  bold = false,
+  color = 'black',
+  decoration = 'none',
+  display = 'inline',
+  doNotFixFontSmoothing,
+  fontFamily = theme.text.fontFamily,
+  size = 0,
+  transform = 'none',
+}) => ({
   $extends: Box,
-  $map: maybeFixFontSmoothing(props.doNotFixFontSmoothing),
-  color: props.color ? theme.colors[props.color] : theme.colors.black,
-  display: props.display || 'inline',
-  fontFamily: theme.text.fontFamily,
-  fontWeight: props.bold ? theme.text.bold : 'normal',
-  textAlign: props.align || 'left',
-  textDecoration: props.decoration || 'none',
-  textTransform: props.transform || 'none',
-  ...fontSizeAndLineHeight(theme.typography, props.size),
+  $map: maybeFixFontSmoothing(doNotFixFontSmoothing),
+  color: theme.colors[color],
+  display,
+  fontFamily,
+  fontWeight: bold ? theme.text.bold : 'normal',
+  textAlign: align,
+  textDecoration: decoration,
+  textTransform: transform,
+  ...fontSizeAndLineHeight(theme.typography, size),
 }), 'span');
 
 export default Text;

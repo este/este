@@ -1,9 +1,9 @@
 /* @flow */
-import type { ColorProps, Styled } from '../themes/types';
+import type { ColorProps, Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
+import React from 'react';
 import Text from './Text';
 import styled from './styled';
-
 
 type ButtonProps = TextProps & ColorProps & {
   disabled?: boolean,
@@ -11,30 +11,30 @@ type ButtonProps = TextProps & ColorProps & {
 };
 
 const Button: Styled<ButtonProps> = styled((theme, {
-  borderRadius = theme.border.radius,
-  color,
-  disabled,
-  transform = "capitalize",
+  bold = true,
+  display = 'inline-block',
+  marginVertical = 1 / 4,
+  paddingHorizontal = 1,
+  paddingVertical = 1 / 4,
+  transform = 'capitalize',
+  // borderRadius = theme.border.radius,
+  // color,
+  // disabled,
 }) => ({
-  $extends: Text,
-  textTransform: transform,
-  // borderRadius: borderRadius || theme.border.radius,
+  $extends: [Text, ({
+    bold,
+    display,
+    marginVertical,
+    paddingHorizontal,
+    paddingVertical,
+    transform,
+  }: Strict<TextProps>)],
+  // borderRadius,
   // color: color ? theme.colors[color] : theme.colors.white,
   // ...(disabled ? theme.states.disabled : {}),
 }), 'button', [
   'disabled',
   'onClick',
 ]);
-
-// potrebuju? nepatri vse do theme?
-// Button.defaultProps = ({
-//   // backgroundColor: 'primary',
-//   // bold: true,
-//   // display: 'inline-block',
-//   // marginVertical: 1 / 4,
-//   // paddingHorizontal: 1,
-//   // paddingVertical: 1 / 4,
-//   // transform: 'capitalize',
-// }: Exact<ButtonProps>);
 
 export default Button;
