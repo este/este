@@ -20,7 +20,7 @@ const StyledForm: Styled<FormProps> = styled(() => ({
   $extends: Box,
 }), 'form', ['onSubmit']);
 
-// Behaviour
+// Feel
 const Form: Styled<FormProps> = ({ onSubmit, ...props }) => (
   <StyledForm
     onSubmit={onSubmitWithPreventDefault(onSubmit)}

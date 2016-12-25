@@ -22,7 +22,6 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    {/* 0 is default text size. Increment or decrement it. */}
     <Heading size={1}>
       Heading
     </Heading>
@@ -34,13 +33,11 @@ const HomePage = () => (
       display="block"
       marginBottom={1}
       to="https://github.com/este/este"
-    >
-      github.com/este/este
-    </Link>
+    >github.com/este/este</Link>
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
-    <Box marginVertical={2}>
+    <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
         height={50}

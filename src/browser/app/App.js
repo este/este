@@ -52,7 +52,7 @@ const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
           ...favicon.link,
           // To test vertical rhythm visually.
           ...(baselineShown ? [{
-            href: `http://basehold.it/${theme(currentTheme).typography.lineHeight}/0/0/0`,
+            href: `http://basehold.it/${theme(currentTheme).typography.lineHeight}/0/0/0/0.1`,
             rel: 'stylesheet',
           }] : []),
         ]}
