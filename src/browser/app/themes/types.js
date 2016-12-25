@@ -198,6 +198,17 @@ export type TextTransform =
   | 'uppercase'
   ;
 
+export type VerticalAlign =
+    'baseline'
+  | 'bottom'
+  | 'middle'
+  | 'sub'
+  | 'super'
+  | 'text-bottom'
+  | 'text-top'
+  | 'top'
+  ;
+
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
   $extends?: Styled<any> | [Styled<any>, any],
@@ -496,7 +507,7 @@ export type BrowserStyle = {|
   unicodeBidi?: string,
   unicodeRange?: string,
   userSelect?: 'none' | 'auto' | 'text' | 'contain' | 'all',
-  verticalAlign?: string,
+  verticalAlign?: VerticalAlign,
   visibility?: string,
   whiteSpace?: string,
   widows?: string,

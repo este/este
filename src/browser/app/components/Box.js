@@ -11,6 +11,7 @@ import type {
   JustifyContent,
   Styled,
   TopBottomLeftRight,
+  VerticalAlign,
 } from '../themes/types';
 import styled from './styled';
 import warning from 'warning';
@@ -54,6 +55,7 @@ export type BoxProps = {
   paddingLeft?: number,
   paddingRight?: number,
   paddingTop?: number,
+  verticalAlign?: VerticalAlign,
   width?: number,
   // Custom
   marginHorizontal?: number,
@@ -75,19 +77,20 @@ const directionMapping = {
 const propToStyle = (prop, value: any, theme) => {
   switch (prop) {
     // Plain props.
+    case 'alignContent':
+    case 'alignItems':
+    case 'alignSelf':
     case 'display':
     case 'flex':
+    case 'flexBasis':
     case 'flexDirection':
     case 'flexFlow':
     case 'flexGrow':
+    case 'flexShrink':
     case 'flexWrap':
-    case 'alignItems':
-    case 'alignContent':
     case 'justifyContent':
     case 'order':
-    case 'flexShrink':
-    case 'flexBasis':
-    case 'alignSelf':
+    case 'verticalAlign':
       return { [prop]: value };
     // Simple rhythm props.
     case 'marginBottom':
