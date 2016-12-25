@@ -139,8 +139,6 @@ const propToStyle = (prop, value: any, theme) => {
     // Other props.
     case 'backgroundColor':
       return { backgroundColor: theme.colors[value] };
-    case 'borderRadius':
-      return { borderRadius: value || theme.border.radius };
     default:
       return null;
   }
@@ -191,10 +189,13 @@ const borderWithRhythm = (theme, props, style) => {
   const borderProp = props.border === true
     ? 'border'
     : `border${props.border.charAt(0).toUpperCase()}${props.border.slice(1)}`;
-  const borderWidth = props.borderWidth || theme.border.width;
   const borderColor = props.borderColor
     ? theme.colors[props.borderColor]
     : theme.colors.gray;
+  const borderRadius = props.border === true ? {
+    borderRadius: props.borderRadius || theme.border.radius,
+  } : {};
+  const borderWidth = props.borderWidth || theme.border.width;
   const padding = adjustPaddingForRhythm(
     props.suppressRhythmWarning,
     props.border,
@@ -203,6 +204,7 @@ const borderWithRhythm = (theme, props, style) => {
   );
   return {
     ...padding,
+    ...borderRadius,
     [borderProp]: `solid ${borderWidth}px ${borderColor}`,
   };
 };

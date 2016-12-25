@@ -49,43 +49,15 @@ const HomePage = () => (
       />
     </Box>
     <Box marginBottom={2} marginHorizontal={-0.25}>
-      <Button
-        // default button? hmm? proc? uvidime
-
-        // primary
-        // disabled
-        // color="primary"
-        // backgroundColor="warning"
-        marginHorizontal={0.25}
-      >primary</Button>
-      {/* {['primary', 'success', 'warning', 'danger'].map(color => (
-        <Button
-          backgroundColor={color}
-          border
-          borderColor={color}
-          key={color}
-          marginHorizontal={0.25}
-        >{color}</Button>
-      ))}
-      <Button
-        backgroundColor="primary"
-        border
-        borderColor="primary"
-        disabled
-        marginHorizontal={0.25}
-      >disabled</Button>
-      <Button
-        backgroundColor="white"
-        bold={false}
-        border
-        borderWidth={0}
-        // borderColor="transparent"
-        color="black"
-        marginHorizontal={0.25}
-      >black</Button> */}
+      <Button primary marginHorizontal={0.25}>primary</Button>
+      <Button success marginHorizontal={0.25}>success</Button>
+      <Button warning marginHorizontal={0.25}>warning</Button>
+      <Button danger marginHorizontal={0.25}>danger</Button>
+      <Button primary disabled marginHorizontal={0.25}>disabled</Button>
+      <Button marginHorizontal={0.25}>text</Button>
     </Box>
-    {/* <SwitchTheme /> */}
-    {/* <ToggleBaseline /> */}
+    <SwitchTheme />
+    <ToggleBaseline />
   </Box>
 );
 

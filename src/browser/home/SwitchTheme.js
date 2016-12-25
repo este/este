@@ -29,6 +29,7 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
       {themesNames.map(themeName => (
         <Button
           disabled={themeName === currentTheme}
+          primary
           key={themeName}
           marginHorizontal={0.25}
           onClick={() => setTheme(themeName)}

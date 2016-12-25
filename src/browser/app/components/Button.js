@@ -1,25 +1,22 @@
 /* @flow */
-import type { ColorProps, Strict, Styled } from '../themes/types';
+import type { Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
-import React from 'react';
 import Text from './Text';
 import styled from './styled';
 
-type ButtonProps = TextProps & ColorProps & {
+type ButtonProps = TextProps & {
   disabled?: boolean,
   onClick?: (e: SyntheticMouseEvent) => any,
 };
 
 const Button: Styled<ButtonProps> = styled((theme, {
   bold = true,
+  disabled,
   display = 'inline-block',
   marginVertical = 1 / 4,
   paddingHorizontal = 1,
   paddingVertical = 1 / 4,
   transform = 'capitalize',
-  // borderRadius = theme.border.radius,
-  // color,
-  // disabled,
 }) => ({
   $extends: [Text, ({
     bold,
@@ -29,11 +26,8 @@ const Button: Styled<ButtonProps> = styled((theme, {
     paddingVertical,
     transform,
   }: Strict<TextProps>)],
-  cursor: 'pointer',
-  userSelect: 'none',
-  // borderRadius,
-  // color: color ? theme.colors[color] : theme.colors.white,
-  // ...(disabled ? theme.states.disabled : {}),
+  ...(disabled ? theme.states.disabled : {}),
+  userSelect: 'none', // Because button is rendered as div in browser.
 }), 'button', [
   'disabled',
   'onClick',

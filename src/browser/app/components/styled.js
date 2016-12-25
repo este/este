@@ -3,16 +3,17 @@ import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
 import React from 'react';
 
-// TODO: Use React context to define platform specific types.
+// TODO: Inject platform specific types via React context.
 const getPlatformType = (type) => {
   if (type === 'button') {
+    // Render button as div because button is not consistently rendered across
+    // browsers and it's hard and tricky to enforce the same look.
     // developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
     // developer.mozilla.org/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
     return (props: {
       disabled?: boolean,
       onClick?: Function,
     }) => (
-      // Render div because button is not consistently rendered across browsers.
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
         {...props}
         role="button"
@@ -28,7 +29,7 @@ const getPlatformType = (type) => {
     );
   }
   return type;
-}
+};
 
 const createExtendedRule = (rule) => (props) => {
   const {

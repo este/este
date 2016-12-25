@@ -2,6 +2,7 @@
 import type { BoxProps } from './Box';
 import type {
   Color,
+  ColorProps,
   Styled,
   TextAlign,
   TextDecoration,
@@ -10,7 +11,7 @@ import type {
 import Box from './Box';
 import styled from './styled';
 
-export type TextProps = BoxProps & {
+export type TextProps = BoxProps & ColorProps & {
   // The lowest common denominator of:
   //  w3schools.com/css/css_text.asp
   //  facebook.github.io/react-native/releases/0.39/docs/text.html#text
@@ -23,6 +24,20 @@ export type TextProps = BoxProps & {
   transform?: TextTransform,
   // Custom stuff.
   doNotFixFontSmoothing?: boolean,
+};
+
+// So we can have <Text primary or <Button danger etc.
+const maybeColorProps = (theme, props) => {
+  const color = Object.keys(props).find(item => item in theme.colors);
+  if (!color) return {};
+  return {
+    box: {
+      backgroundColor: color,
+      border: true,
+      borderColor: color,
+    },
+    color: 'white',
+  };
 };
 
 // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
@@ -59,17 +74,21 @@ const Text: Styled<TextProps> = styled((theme, {
   fontFamily = theme.text.fontFamily,
   size = 0,
   transform = 'none',
-}) => ({
-  $extends: Box,
-  $map: maybeFixFontSmoothing(doNotFixFontSmoothing),
-  color: theme.colors[color],
-  display,
-  fontFamily,
-  fontWeight: bold ? theme.text.bold : 'normal',
-  textAlign: align,
-  textDecoration: decoration,
-  textTransform: transform,
-  ...fontSizeAndLineHeight(theme.typography, size),
-}), 'span');
+  ...props
+}) => {
+  const colorProps = maybeColorProps(theme, props);
+  return {
+    $extends: [Box, colorProps.box],
+    $map: maybeFixFontSmoothing(doNotFixFontSmoothing),
+    color: colorProps.color || theme.colors[color],
+    display,
+    fontFamily,
+    fontWeight: bold ? theme.text.bold : 'normal',
+    textAlign: align,
+    textDecoration: decoration,
+    textTransform: transform,
+    ...fontSizeAndLineHeight(theme.typography, size),
+  };
+}, 'span');
 
 export default Text;
