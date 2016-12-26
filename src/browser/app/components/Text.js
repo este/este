@@ -9,6 +9,7 @@ import type {
   TextTransform,
 } from '../themes/types';
 import Box from './Box';
+import color from 'color';
 import styled from './styled';
 
 export type TextProps = BoxProps & ColorProps & {
@@ -46,9 +47,12 @@ const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
   if (doNotFixFontSmoothing) return style;
   const hasColorAndBackgroundColor =
     style.color &&
-    style.backgroundColor && style.backgroundColor !== 'transparent';
-  // TODO: Check if color is brighter than backgroundColor or use theme flag.
+    style.backgroundColor &&
+    style.backgroundColor !== 'transparent';
   if (!hasColorAndBackgroundColor) return style;
+  const colorIsLighterThanBackgroundColor =
+    color(style.color).luminosity() > color(style.backgroundColor).luminosity();
+  if (!colorIsLighterThanBackgroundColor) return style;
   return {
     ...style,
     MozOsxFontSmoothing: 'grayscale',
