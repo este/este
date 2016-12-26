@@ -28,7 +28,7 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
     <Box marginHorizontal={-0.25}>
       {themesNames.map(themeName => (
         <Button
-          disabled={themeName === currentTheme}
+          active={themeName === currentTheme}
           primary
           key={themeName}
           marginHorizontal={0.25}
