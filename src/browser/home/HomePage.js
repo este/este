@@ -31,12 +31,8 @@ const HomePage = () => (
     </Paragraph>
     <Link
       display="block"
-      marginBottom={1}
       to="https://github.com/este/este"
     >github.com/este/este</Link>
-    <Text size={0}>normal text</Text><br />
-    <Text display="block" size={-1}>small text</Text>
-    <Text size={5}>text 5</Text><br />
     <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
@@ -45,7 +41,10 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    <Box marginBottom={2} marginHorizontal={-0.25}>
+    <Text size={0}>normal text</Text><br />
+    <Text display="block" size={-1}>small text</Text>
+    <Text size={5}>text 5</Text><br />
+    <Box marginVertical={2} marginHorizontal={-0.25}>
       <Button primary marginHorizontal={0.25}>primary</Button>
       <Button success marginHorizontal={0.25}>success</Button>
       <Button warning marginHorizontal={0.25}>warning</Button>
