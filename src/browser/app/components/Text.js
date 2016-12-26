@@ -84,7 +84,7 @@ const Text: Styled<TextProps> = styled((theme, {
   return {
     $extends: [Box, colorProps.box],
     $map: maybeFixFontSmoothing(doNotFixFontSmoothing),
-    color: colorProps.color || theme.colors[color],
+    color: theme.colors[colorProps.color || color],
     display,
     fontFamily,
     fontWeight: bold ? theme.text.bold : 'normal',
