@@ -18,12 +18,13 @@ export type InputProps = TextProps & {
   onChange?: (SyntheticEvent) => void,
 };
 
-const StyledInput: Styled<InputProps> = styled((theme, props) => ({
+const StyledInput: Styled<InputProps> = styled(() => ({
   $extends: Text,
-  display: props.display || 'block',
+  // lineHeight: '16px',
+  // display: props.display || 'block',
   // width: '100%', ?? check bootstrap, ale imho asi jo, ne?
-  color: props.color ? theme.colors[props.color] : theme.colors.black,
-  border: props.invalid ? theme.input.borderError : theme.input.border,
+  // color: props.color ? theme.colors[props.color] : theme.colors.black,
+  // border: props.invalid ? theme.input.borderError : theme.input.border,
 }), 'input', ['name', 'placeholder', 'type', 'onKeyDown']);
 
 const Input: Styled<InputProps> = (props) => (

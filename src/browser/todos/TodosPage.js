@@ -1,5 +1,5 @@
 /* @flow */
-import NewTodo from './NewTodo';
+// import NewTodo from './NewTodo';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { injectIntl } from 'react-intl';
@@ -20,7 +20,7 @@ const TodosPage = ({ intl }: TodosPageProps) => (
   <Box>
     <Title message={linksMessages.todos} />
     <PageHeader heading={intl.formatMessage(linksMessages.todos)} />
-    <NewTodo />
+    {/* <NewTodo /> */}
     {/* <Todos />
     <Buttons /> */}
   </Box>

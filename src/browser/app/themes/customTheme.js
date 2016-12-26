@@ -26,6 +26,9 @@ const theme: Theme = {
     width: 1,
   },
   states: {
+    active: {
+      darken: 10,
+    },
     disabled: {
       cursor: 'default',
       opacity: 0.5,
@@ -52,8 +55,8 @@ const theme: Theme = {
     maxWidth: '42em',
   },
   input: {
-    borderError: `solid 1px ${openColor.red7}`,
-    border: `solid 1px ${openColor.gray4}`,
+    // borderError: `solid 1px ${openColor.red7}`,
+    // border: `solid 1px ${openColor.gray4}`,
   },
 };
 

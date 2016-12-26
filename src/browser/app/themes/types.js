@@ -60,8 +60,8 @@ export type Theme = {|
     maxWidth: number | string,
   |},
   input: {|
-    border: string,
-    borderError: string,
+    // border: string,
+    // borderError: string,
   |},
 |};
 
