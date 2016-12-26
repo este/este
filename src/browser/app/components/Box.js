@@ -159,7 +159,12 @@ const propsToStyle = (theme, props) => Object
   }, {});
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const adjustPaddingForRhythm = (suppressRhythmWarning, border, borderWidth, style) => {
+const adjustPaddingForRhythm = (
+  suppressRhythmWarning,
+  border,
+  borderWidth,
+  style,
+) => {
   if (!borderWidth) return {};
   return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, prop) => {
     const adjust = border === true || border === prop.toLowerCase();
