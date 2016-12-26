@@ -9,7 +9,7 @@ const theme: Theme = {
   typography: typography({
     fontSize: 18,
     fontSizeScale: 'step5',
-    lineHeight: 26, // 18 * 1.5a
+    lineHeight: 27, // 18 * 1.5
   }),
   colors: {
     primary: openColor.blue8,

@@ -5,9 +5,9 @@ import { createTransform } from 'redux-persist';
 // TODO: Add redux-persist-migrate.
 
 const paths = [
+  ['app', ['currentTheme']],
   ['fields'],
   ['intl', ['currentLocale']],
-  ['themes', ['currentTheme']],
   ['users', ['online', 'viewer']],
 ];
 

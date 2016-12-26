@@ -5,7 +5,6 @@ import auth from './auth/reducer';
 import config from './config/reducer';
 import device from './device/reducer';
 import intl from './intl/reducer';
-import themes from './themes/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
 import { combineReducers } from 'redux';
@@ -40,7 +39,6 @@ const configureReducer = (initialState: Object) => {
     device,
     fields,
     intl,
-    themes,
     todos,
     users,
   });

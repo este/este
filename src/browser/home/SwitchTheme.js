@@ -5,7 +5,7 @@ import R from 'ramda';
 import React from 'react';
 import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
-import { setTheme } from '../../common/themes/actions';
+import { setTheme } from '../../common/app/actions';
 
 type SwitchThemeProps = {
   currentTheme: string,
@@ -45,7 +45,7 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
 export default R.compose(
   connect(
     (state: State) => ({
-      currentTheme: state.themes.currentTheme || 'defaultTheme',
+      currentTheme: state.app.currentTheme,
     }),
     { setTheme },
   ),
