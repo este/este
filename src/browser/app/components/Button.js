@@ -17,28 +17,25 @@ const Button: Styled<ButtonProps> = styled((theme, {
   bold = true,
   disabled,
   display = 'inline-block',
-  marginVertical = 1 / 4,
-  paddingHorizontal = 1,
-  paddingVertical = 1 / 4,
+  paddingHorizontal = 0.8,
+  size = 0,
   transform = 'capitalize',
 }) => ({
   $extends: [Text, ({
     bold,
     display,
-    marginVertical,
     paddingHorizontal,
-    paddingVertical,
     transform,
+    ...(size >= 0 ? {
+      // Bigger button needs vertical space.
+      marginVertical: 0.25,
+      paddingVertical: 0.25,
+    } : {
+      // Smaller button can't have any border because it would break a rhythm.
+      // It's impossible to compute it because the text can be multiline.
+      borderWidth: 0,
+    }),
   }: Strict<TextProps>)],
-  $map: style => {
-    // if (active)
-    // potrebuju atomic rules, takze ne string border, pak muzu automaticky
-    // jen button, ok
-    // fakt vsechny barvy? jo
-    // proc to kresli border, kde
-    // console.log(style);
-    return style;
-  },
   ...(disabled ? theme.states.disabled : null),
   userSelect: 'none', // Because button is rendered as a div in the browser.
 }), 'button', [
