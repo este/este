@@ -1,9 +1,8 @@
 /* @flow */
 import type { Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
-// import Color from 'color';
-// import React from 'react';
 import Text from './Text';
+import color from 'color';
 import styled from './styled';
 
 type ButtonProps = TextProps & {
@@ -12,8 +11,30 @@ type ButtonProps = TextProps & {
   onClick?: (e: SyntheticMouseEvent) => any,
 };
 
+const maybeVerticalSpace = size => size >= 0 ? {
+  // Button needs vertical space. Sure it can be defined in the theme.
+  marginVertical: 0.25,
+  paddingVertical: 0.25,
+} : {
+  // But the smaller button can't have any padding nor border because it would
+  // break a rhythm. It's impossible to compute it since text can be multiline.
+  borderWidth: 0,
+};
+
+const activeStyle = (style, { darken }) => [
+  'backgroundColor',
+  'borderColor',
+].reduce((activeStyle, prop) => {
+  const value = activeStyle[prop];
+  if (!value) return activeStyle;
+  return {
+    ...activeStyle,
+    [prop]: color(value).darken(darken).hsl().string(),
+  };
+}, style);
+
 const Button: Styled<ButtonProps> = styled((theme, {
-  // active,
+  active,
   bold = true,
   disabled,
   display = 'inline-block',
@@ -26,18 +47,14 @@ const Button: Styled<ButtonProps> = styled((theme, {
     display,
     paddingHorizontal,
     transform,
-    ...(size >= 0 ? {
-      // Bigger button needs vertical space.
-      marginVertical: 0.25,
-      paddingVertical: 0.25,
-    } : {
-      // Smaller button can't have any border because it would break a rhythm.
-      // It's impossible to compute it because the text can be multiline.
-      borderWidth: 0,
-    }),
+    ...maybeVerticalSpace(size),
   }: Strict<TextProps>)],
-  ...(disabled ? theme.states.disabled : null),
+  $map: style => {
+    if (!active) return style;
+    return activeStyle(style, theme.states.active);
+  },
   userSelect: 'none', // Because button is rendered as a div in the browser.
+  ...(disabled ? theme.states.disabled : null),
 }), 'button', [
   'disabled',
   'onClick',

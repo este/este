@@ -9,15 +9,15 @@ const theme: Theme = {
   typography: typography({
     fontSize: 18,
     fontSizeScale: 'step5',
-    lineHeight: 27, // 18 * 1.5
+    lineHeight: 26, // 18 * 1.5a
   }),
   colors: {
-    primary: '#08e',
-    success: '#1c7',
-    warning: '#f70',
-    danger: '#f52',
+    primary: openColor.blue8,
+    success: openColor.green5,
+    warning: openColor.orange6,
+    danger: openColor.red6,
     black: openColor.gray8,
-    white: '#fff',
+    white: openColor.white,
     gray: openColor.gray4,
     open: openColor,
   },
@@ -27,7 +27,7 @@ const theme: Theme = {
   },
   states: {
     active: {
-      darken: 10,
+      darken: 0.2,
     },
     disabled: {
       cursor: 'default',

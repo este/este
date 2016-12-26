@@ -23,12 +23,12 @@ const theme: Theme = {
     lineHeight: 24,
   }),
   colors: {
-    primary: '#08e',
-    success: '#1c7',
-    warning: '#f70',
-    danger: '#f52',
+    primary: openColor.blue6,
+    success: openColor.green5,
+    warning: openColor.orange6,
+    danger: openColor.red6,
     black: openColor.gray8,
-    white: '#fff',
+    white: openColor.white,
     gray: openColor.gray4,
     open: openColor,
   },
@@ -38,7 +38,7 @@ const theme: Theme = {
   },
   states: {
     active: {
-      darken: 10,
+      darken: 0.2,
     },
     disabled: {
       cursor: 'default',
