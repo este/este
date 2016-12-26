@@ -31,6 +31,9 @@ export type Theme = {|
     width: number,
   |},
   states: {
+    active: {|
+      darken: number,
+    |},
     disabled: {|
       cursor: string,
       opacity: number,
@@ -96,6 +99,15 @@ export type AlignSelf =
   | 'flex-end'
   | 'flex-start'
   | 'stretch'
+  ;
+
+export type BorderStyle =
+    'none'
+  | 'dotted'
+  | 'dashed'
+  | 'solid'
+  | 'double'
+  | 'groove'
   ;
 
 export type Display =
@@ -277,7 +289,7 @@ export type BrowserStyle = {|
   borderBottomColor?: string,
   borderBottomLeftRadius?: string,
   borderBottomRightRadius?: string,
-  borderBottomStyle?: string,
+  borderBottomStyle?: BorderStyle,
   borderBottomWidth?: string,
   borderCollapse?: string,
   borderColor?: string,
@@ -297,20 +309,20 @@ export type BrowserStyle = {|
   borderInlineStartWidth?: string,
   borderLeft?: string,
   borderLeftColor?: string,
-  borderLeftStyle?: string,
+  borderLeftStyle?: BorderStyle,
   borderLeftWidth?: string,
   borderRadius?: number | string,
   borderRight?: string,
   borderRightColor?: string,
-  borderRightStyle?: string,
+  borderRightStyle?: BorderStyle,
   borderRightWidth?: string,
   borderSpacing?: string,
-  borderStyle?: string,
+  borderStyle?: BorderStyle,
   borderTop?: string,
   borderTopColor?: string,
   borderTopLeftRadius?: string,
   borderTopRightRadius?: string,
-  borderTopStyle?: string,
+  borderTopStyle?: BorderStyle,
   borderTopWidth?: string,
   borderWidth?: number | string,
   bottom?: string,
