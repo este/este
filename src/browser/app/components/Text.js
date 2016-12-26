@@ -57,7 +57,7 @@ const maybeFixFontSmoothing = doNotFixFontSmoothing => style => {
 };
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const fontSizeAndLineHeight = (typography, size: number) => {
+const fontSizeAndLineHeight = (typography, size) => {
   const fontSize = typography.fontSize(size);
   const lines = Math.ceil(fontSize / typography.lineHeight);
   const lineHeight = typography.lineHeight * lines;
