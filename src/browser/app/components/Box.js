@@ -110,6 +110,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'minWidth':
     case 'minHeight':
       return {
+        // We allow only number otherwise it would be easy to break rhythm.
         [prop]: rhythm(theme, value),
       };
     // Shorthand rhythm props.
