@@ -73,7 +73,7 @@ export type IntlState = {
 };
 
 export type TodosState = {
-  all: {[id: string]: Todo},
+  all: { [id: string]: Todo },
 };
 
 export type UsersState = {
