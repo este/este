@@ -57,13 +57,15 @@ const theme: Theme = {
     bold: 600,
     fontFamily: nativeFontFamily,
   },
+  block: {
+    maxWidth: '42em',
+  },
   heading: {
     fontFamily: nativeFontFamily,
     marginBottom: 1,
   },
   paragraph: {
     marginBottom: 1,
-    maxWidth: '42em',
   },
   input: {
     // // TODO: Must be states with separate color property.

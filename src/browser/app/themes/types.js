@@ -51,13 +51,15 @@ export type Theme = {|
     bold: number,
     fontFamily: string,
   |},
+  block: {|
+    maxWidth: number | string,
+  |},
   heading: {|
     fontFamily: string,
     marginBottom: number,
   |},
   paragraph: {|
     marginBottom: number,
-    maxWidth: number | string,
   |},
   input: {|
     // border: string,
@@ -356,7 +358,7 @@ export type BrowserStyle = {|
   display?: Display,
   emptyCells?: string,
   filter?: string,
-  flex?: number,
+  flex?: number, // facebook.github.io/react-native/docs/layout-props.html#flex
   flexBasis?: number | string,
   flexDirection?: FlexDirection,
   flexFlow?: FlexFlow,

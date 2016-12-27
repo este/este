@@ -7,7 +7,7 @@ import styled from './styled';
 const Paragraph: Styled<TextProps> = styled((theme, {
   display = 'block',
   marginBottom = theme.paragraph.marginBottom,
-  maxWidth = theme.paragraph.maxWidth,
+  maxWidth = theme.block.maxWidth,
 }) => ({
   $extends: [Text, ({
     display,
