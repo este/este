@@ -8,6 +8,7 @@ import styled from './styled';
 type ButtonProps = TextProps & {
   active?: boolean,
   disabled?: boolean,
+  inline?: boolean,
   onClick?: (e: SyntheticMouseEvent) => any,
 };
 
@@ -38,6 +39,7 @@ const Button: Styled<ButtonProps> = styled((theme, {
   bold = true,
   disabled,
   display = 'inline-block',
+  inline,
   paddingHorizontal = 0.8,
   size = 0,
   transform = 'capitalize',
@@ -47,7 +49,7 @@ const Button: Styled<ButtonProps> = styled((theme, {
     display,
     paddingHorizontal,
     transform,
-    ...maybeVerticalSpace(size),
+    ...(inline ? {} : maybeVerticalSpace(size)),
   }: Strict<TextProps>)],
   $map: style => {
     if (!active) return style;
