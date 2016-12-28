@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import type { State } from '../../common/types';
 // import Gravatar from 'react-gravatar';
 // import React from 'react';

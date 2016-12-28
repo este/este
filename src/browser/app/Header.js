@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State, User } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';

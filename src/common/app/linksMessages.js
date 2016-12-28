@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import { defineMessages } from 'react-intl';
 
 const LinkMessages = defineMessages({

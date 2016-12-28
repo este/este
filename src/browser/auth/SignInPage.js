@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import type { State } from '../../common/types';
 // import Email from './Email';
 // import R from 'ramda';

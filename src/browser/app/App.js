@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import type { Theme } from './themes/types';
 import * as themes from './themes';
@@ -63,8 +63,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match exactly pattern="/" component={HomePage} />
           <Match pattern="/users" component={UsersPage} />
           <Match pattern="/todos" component={TodosPage} />
-          {/*  <Match pattern="/fields" component={FieldsPage} />
-            <Match pattern="/intl" component={IntlPage} />
+          {/*    <Match pattern="/fields" component={FieldsPage} />
+          <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
             <Match authorized pattern="/me" component={MePage} />

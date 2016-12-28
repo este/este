@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../../common/types';
 import Box from './Box';
 import Button from './Button';

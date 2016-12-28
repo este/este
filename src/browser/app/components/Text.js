@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { BoxProps } from './Box';
 import type {
   Color,

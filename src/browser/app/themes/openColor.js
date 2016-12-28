@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 // These colors have been taken from open-color@1.4.0
 // We don't import them from NPM because they can change.

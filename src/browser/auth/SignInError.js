@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import type { State } from '../../common/types';
 // import React from 'react';
 // import errorMessages from '../../common/auth/errorMessages';

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { Box, Text, Link } from './components';

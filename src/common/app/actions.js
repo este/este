@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import React from 'react';

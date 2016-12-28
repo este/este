@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import authErrorMessages from '../auth/errorMessages';
 import { ValidationError } from '../lib/validation';
 import { firebaseMessages } from '../lib/redux-firebase';

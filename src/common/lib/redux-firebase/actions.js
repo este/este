@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 export const FIREBASE_OFF_QUERY = 'FIREBASE_OFF_QUERY';
 export const FIREBASE_ON_QUERY = 'FIREBASE_ON_QUERY';

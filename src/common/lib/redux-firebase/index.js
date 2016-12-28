@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import firebase from './firebase';
 import firebaseMessages from './messages';
 

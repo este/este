@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 // Higher order component for Facebook XFBML.
 // Examples
 //  https://gist.github.com/steida/04a39dfa1043e1451044ba8370743b0c

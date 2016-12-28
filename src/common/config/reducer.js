@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { ConfigState } from '../types';
 
 const initialState = {

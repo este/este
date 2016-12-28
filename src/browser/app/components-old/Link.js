@@ -1,4 +1,4 @@
-// /* @flow */
+// @flow
 // import React from 'react';
 // import pseudo from './pseudo';
 // import { Base } from 'rebass';

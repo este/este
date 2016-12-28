@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { BrowserStyle, Styled, Theme } from '../themes/types';
 import { createComponent } from 'react-fela';
 import React from 'react';

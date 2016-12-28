@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import React from 'react';
 // import linksMessages from '../../common/app/linksMessages';
 // import { Block, Title, View } from '../app/components';

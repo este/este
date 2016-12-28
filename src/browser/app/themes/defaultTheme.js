@@ -1,4 +1,4 @@
-/* @flow */
+
 import type { Theme } from './types';
 import openColor from './openColor';
 import typography from './typography';

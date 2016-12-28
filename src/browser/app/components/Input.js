@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Styled, InputTypes } from '../themes/types';
 import type { TextProps } from './Text';
 import Box from './Box';

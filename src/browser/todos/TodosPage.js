@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import Buttons from './Buttons';
 import NewTodo from './NewTodo';
 import React from 'react';

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { User } from '../types';
 
 const createUserFirebase = (json: ?Object): ?User => {

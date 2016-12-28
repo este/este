@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import configureMiddleware from './configureMiddleware';
 import configureReducer from './configureReducer';
 import configureStorage from './configureStorage';

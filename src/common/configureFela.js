@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 // import logger from 'fela-plugin-logger';
 import webPreset from 'fela-preset-web';
 import validator from 'fela-plugin-validator';

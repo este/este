@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State, Todo } from '../../common/types';
 import R from 'ramda';
 import React from 'react';

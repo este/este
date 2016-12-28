@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import OnlineUsers from './OnlineUsers';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';

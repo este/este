@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import Box from './Box';
 import Heading from './Heading';
 import Paragraph from './Paragraph';
@@ -14,7 +14,7 @@ const PageHeader = ({ heading, description }: PageHeaderProps) => (
     border="bottom"
     borderWidth={2}
     marginBottom={2.5}
-    marginTop={2}
+    marginTop={3}
     paddingBottom={0.5}
   >
     <Heading size={3} marginBottom={0}>{heading}</Heading>

@@ -1,4 +1,4 @@
-/* @flow */
+
 import initial, { compute as computeInitial } from './initial';
 
 const theme = computeInitial({

@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import React from 'react';
 // import { Input, View } from '../app/components';
 // import { fields } from '../../common/lib/redux-fields';

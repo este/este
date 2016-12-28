@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import React from 'react';
 // import linksMessages from '../../common/app/linksMessages';
 // import messages from '../../common/notfound/messages';

@@ -1,4 +1,4 @@
-// /* @flow */
+// @flow
 //
 // // jxnblk.com/writing/posts/patterns-for-style-composition-in-react
 //

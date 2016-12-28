@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import Box from './Box';
 import React from 'react';
 import Text from './Text';

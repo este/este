@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { OpenColor } from './openColor';
 
 // Theme.

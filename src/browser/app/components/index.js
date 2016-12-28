@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 export { ThemeProvider } from 'react-fela';
 export { default as Box } from './Box';
 export { default as Button } from './Button';

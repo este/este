@@ -1,4 +1,4 @@
-// /* @flow */
+//
 // import Locales from './SwitchLocale';
 // import React from 'react';
 // import linksMessages from '../../common/app/linksMessages';
