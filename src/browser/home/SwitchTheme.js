@@ -5,7 +5,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 import { Box, Button, Heading } from '../app/components';
 import { connect } from 'react-redux';
-import { setTheme } from '../../common/themes/actions';
+import { setTheme } from '../../common/app/actions';
 
 type SwitchThemeProps = {
   currentTheme: string,
@@ -28,7 +28,9 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
     <Box marginHorizontal={-0.25}>
       {themesNames.map(themeName => (
         <Button
-          disabled={themeName === currentTheme}
+          primary
+          size={-1}
+          active={themeName === currentTheme}
           key={themeName}
           marginHorizontal={0.25}
           onClick={() => setTheme(themeName)}
@@ -43,7 +45,7 @@ const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
 export default compose(
   connect(
     (state: State) => ({
-      currentTheme: state.themes.currentTheme || 'defaultTheme',
+      currentTheme: state.app.currentTheme,
     }),
     { setTheme },
   ),

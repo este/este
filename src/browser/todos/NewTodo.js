@@ -2,15 +2,11 @@
 import compose from 'ramda/src/compose';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
+import { Form, Input } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl } from 'react-intl';
-import {
-  Input,
-  Form,
-  Text,
-} from '../app/components';
 
 type NewTodoProps = {|
   addTodo: typeof addTodo,
@@ -19,32 +15,19 @@ type NewTodoProps = {|
 |};
 
 const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
-  <Form onSubmit={e => {
-    // addTodo(1)
-  }}>
-    <Text>fok</Text>
+  <Form
+    onSubmit={() => {
+      const title = fields.title.value.trim();
+      if (!title) return;
+      addTodo(title);
+      fields.$reset();
+    }}
+  >
     <Input
-      display="inline"
-      // label="Input"
-      // labelSize={1}
-      // placeholder="Lorem ipsum dolor"
-    /><br />
-    <Text>fok</Text>
-    <Input
-      display="inline"
-      // label="Input"
-      // labelSize={1}
-      // placeholder="Lorem ipsum dolor"
-    />
-    {/* Fok
-    {addTodo('d')} */}
-    {/* <Input
       {...fields.title}
-      // label=""
-      // maxLength={100}
-      // onKeyDown={onInputKeyDown}
-      // placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-    /> */}
+      maxLength={100}
+      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+    />
   </Form>
 );
 
@@ -59,12 +42,3 @@ export default compose(
     fields: ['title'],
   }),
 )(NewTodo);
-
-
-// const NewTodo = ({ addTodo, fields, intl }) => {
-//   const onInputKeyDown = (event) => {
-//     if (event.key !== 'Enter') return;
-//     if (!fields.title.value.trim()) return;
-//     addTodo(fields.title.value);
-//     fields.$reset();
-//   };

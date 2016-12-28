@@ -22,7 +22,6 @@ const HomePage = () => (
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
     />
-    {/* 0 is default text size. Increment or decrement it. */}
     <Heading size={1}>
       Heading
     </Heading>
@@ -32,15 +31,9 @@ const HomePage = () => (
     </Paragraph>
     <Link
       display="block"
-      marginBottom={1}
       to="https://github.com/este/este"
-    >
-      github.com/este/este
-    </Link>
-    <Text size={0}>normal text</Text><br />
-    <Text display="block" size={-1}>small text</Text>
-    <Text size={5}>text 5</Text><br />
-    <Box marginVertical={2}>
+    >github.com/este/este</Link>
+    <Box marginVertical={1}>
       <Image
         alt="50x50 placeholder"
         height={50}
@@ -48,37 +41,16 @@ const HomePage = () => (
         width={50}
       />
     </Box>
-    <Box marginBottom={2} marginHorizontal={-0.25}>
-      <Button
-        // color="primary"
-        // backgroundColor="warning"
-        marginHorizontal={0.25}
-      >primary</Button>
-      {/* {['primary', 'success', 'warning', 'danger'].map(color => (
-        <Button
-          backgroundColor={color}
-          border
-          borderColor={color}
-          key={color}
-          marginHorizontal={0.25}
-        >{color}</Button>
-      ))}
-      <Button
-        backgroundColor="primary"
-        border
-        borderColor="primary"
-        disabled
-        marginHorizontal={0.25}
-      >disabled</Button>
-      <Button
-        backgroundColor="white"
-        bold={false}
-        border
-        borderWidth={0}
-        // borderColor="transparent"
-        color="black"
-        marginHorizontal={0.25}
-      >black</Button> */}
+    <Text size={0}>normal text</Text><br />
+    <Text display="block" size={-1}>small text</Text>
+    <Text size={5}>text 5</Text><br />
+    <Box marginVertical={2} marginHorizontal={-0.25}>
+      <Button primary marginHorizontal={0.25}>primary</Button>
+      <Button success marginHorizontal={0.25}>success</Button>
+      <Button warning marginHorizontal={0.25}>warning</Button>
+      <Button danger marginHorizontal={0.25}>danger</Button>
+      <Button primary disabled marginHorizontal={0.25}>disabled</Button>
+      <Button marginHorizontal={0.25}>text</Button>
     </Box>
     <SwitchTheme />
     <ToggleBaseline />

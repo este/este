@@ -36,6 +36,7 @@
     "bluebird": "^3.4.6",
     "chroma-js": "^1.2.1",
     "classnames": "^2.1.1",
+    "color": "^1.0.3",
     "compression": "^1.4.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.0",

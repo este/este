@@ -27,9 +27,12 @@ const verticalRhythmSize = (height, width, lineHeight) => {
 };
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm/
-const Image: Styled<ImageProps> = styled((theme, props) => ({
+const Image: Styled<ImageProps> = styled((theme, {
+  height,
+  width,
+}) => ({
   display: 'block',
-  ...verticalRhythmSize(props.height, props.width, theme.typography.lineHeight),
+  ...verticalRhythmSize(height, width, theme.typography.lineHeight),
 }), 'img', ['alt', 'src', 'title']);
 
 export default Image;

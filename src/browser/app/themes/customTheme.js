@@ -4,6 +4,7 @@ import openColor from './openColor';
 import typography from './typography';
 import { nativeFontFamily } from './defaultTheme';
 
+// TODO: Please pull request for something more beautiful.
 const theme: Theme = {
   typography: typography({
     fontSize: 18,
@@ -11,12 +12,12 @@ const theme: Theme = {
     lineHeight: 27, // 18 * 1.5
   }),
   colors: {
-    primary: '#08e',
-    success: '#1c7',
-    warning: '#f70',
-    danger: '#f52',
+    primary: openColor.blue8,
+    success: openColor.green5,
+    warning: openColor.orange6,
+    danger: openColor.red6,
     black: openColor.gray8,
-    white: '#fff',
+    white: openColor.white,
     gray: openColor.gray4,
     open: openColor,
   },
@@ -25,6 +26,9 @@ const theme: Theme = {
     width: 1,
   },
   states: {
+    active: {
+      darken: 0.2,
+    },
     disabled: {
       cursor: 'default',
       opacity: 0.5,
@@ -42,17 +46,19 @@ const theme: Theme = {
     bold: 600,
     fontFamily: nativeFontFamily,
   },
+  block: {
+    maxWidth: '42em',
+  },
   heading: {
     fontFamily: nativeFontFamily,
     marginBottom: 1,
   },
   paragraph: {
     marginBottom: 1,
-    maxWidth: '42em',
   },
   input: {
-    borderError: `solid 1px ${openColor.red7}`,
-    border: `solid 1px ${openColor.gray4}`,
+    // borderError: `solid 1px ${openColor.red7}`,
+    // border: `solid 1px ${openColor.gray4}`,
   },
 };
 

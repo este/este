@@ -15,12 +15,9 @@ type ToggleBaselineProps = {
 const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) => (
   <Box>
     <Button
-      // backgroundColor="transparent"
-      color="black"
-      border
       bold={false}
-      marginVertical={0.25}
-      marginBottom={1.25}
+      border
+      key={baselineShown} // To enforce blur after click.
       onClick={toggleBaseline}
     >
       {baselineShown ? 'Hide Baseline' : 'Show Baseline'}

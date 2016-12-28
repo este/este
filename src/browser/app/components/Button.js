@@ -1,40 +1,63 @@
 /* @flow */
-import type { ColorProps, Styled } from '../themes/types';
+import type { Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Text from './Text';
+import color from 'color';
 import styled from './styled';
 
-
-type ButtonProps = TextProps & ColorProps & {
+type ButtonProps = TextProps & {
+  active?: boolean,
   disabled?: boolean,
   onClick?: (e: SyntheticMouseEvent) => any,
 };
 
+const maybeVerticalSpace = size => size >= 0 ? {
+  // Button needs vertical space. Sure it can be defined in the theme.
+  marginVertical: 0.25,
+  paddingVertical: 0.25,
+} : {
+  // But the smaller button can't have any padding nor border because it would
+  // break a rhythm. It's impossible to compute it since text can be multiline.
+  borderWidth: 0,
+};
+
+const activeStyle = (style, { darken }) => [
+  'backgroundColor',
+  'borderColor',
+].reduce((activeStyle, prop) => {
+  const value = activeStyle[prop];
+  if (!value) return activeStyle;
+  return {
+    ...activeStyle,
+    [prop]: color(value).darken(darken).hsl().string(),
+  };
+}, style);
+
 const Button: Styled<ButtonProps> = styled((theme, {
-  borderRadius = theme.border.radius,
-  color,
+  active,
+  bold = true,
   disabled,
-  transform = "capitalize",
+  display = 'inline-block',
+  paddingHorizontal = 0.8,
+  size = 0,
+  transform = 'capitalize',
 }) => ({
-  $extends: Text,
-  textTransform: transform,
-  // borderRadius: borderRadius || theme.border.radius,
-  // color: color ? theme.colors[color] : theme.colors.white,
-  // ...(disabled ? theme.states.disabled : {}),
+  $extends: [Text, ({
+    bold,
+    display,
+    paddingHorizontal,
+    transform,
+    ...maybeVerticalSpace(size),
+  }: Strict<TextProps>)],
+  $map: style => {
+    if (!active) return style;
+    return activeStyle(style, theme.states.active);
+  },
+  userSelect: 'none', // Because button is rendered as a div in the browser.
+  ...(disabled ? theme.states.disabled : null),
 }), 'button', [
   'disabled',
   'onClick',
 ]);
-
-// potrebuju? nepatri vse do theme?
-// Button.defaultProps = ({
-//   // backgroundColor: 'primary',
-//   // bold: true,
-//   // display: 'inline-block',
-//   // marginVertical: 1 / 4,
-//   // paddingHorizontal: 1,
-//   // paddingVertical: 1 / 4,
-//   // transform: 'capitalize',
-// }: Exact<ButtonProps>);
 
 export default Button;

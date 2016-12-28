@@ -1,5 +1,12 @@
-// /* @flow */
+/* @flow */
 // import React from 'react';
+
+const Todo = () => (
+  null
+);
+
+export default Todo;
+
 // import { Flex, Text } from '../app/components';
 //
 // type Props = {

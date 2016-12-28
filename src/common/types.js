@@ -39,6 +39,7 @@ export type User = {|
 
 export type AppState = {
   baselineShown: boolean,
+  currentTheme: string,
   error: ?Error,
   menuShown: boolean,
   online: boolean,
@@ -71,12 +72,8 @@ export type IntlState = {
   messages: ?Object,
 };
 
-export type ThemeState = {
-  currentTheme: ?string,
-};
-
 export type TodosState = {
-  all: {[id: string]: Todo},
+  all: { [id: string]: Todo },
 };
 
 export type UsersState = {
@@ -93,7 +90,6 @@ export type State = {
   device: DeviceState,
   fields: any,
   intl: IntlState,
-  themes: ThemeState,
   todos: TodosState,
   users: UsersState,
 };

@@ -3,6 +3,7 @@ import type { OpenColor } from './openColor';
 
 // Theme.
 
+// Because { [color: Color]?: boolean } doesn't work, we have to define props.
 export type ColorProps = {
   primary?: boolean,
   success?: boolean,
@@ -30,6 +31,9 @@ export type Theme = {|
     width: number,
   |},
   states: {
+    active: {|
+      darken: number,
+    |},
     disabled: {|
       cursor: string,
       opacity: number,
@@ -47,17 +51,19 @@ export type Theme = {|
     bold: number,
     fontFamily: string,
   |},
+  block: {|
+    maxWidth: number | string,
+  |},
   heading: {|
     fontFamily: string,
     marginBottom: number,
   |},
   paragraph: {|
     marginBottom: number,
-    maxWidth: number | string,
   |},
   input: {|
-    border: string,
-    borderError: string,
+    // border: string,
+    // borderError: string,
   |},
 |};
 
@@ -65,7 +71,7 @@ export type Theme = {|
 // It breaks autocomplete, so we are using it only here. It's the must, because
 // it prevents typos like 'marginBotom'.
 // https://github.com/facebook/flow/issues/2405#issuecomment-256339492
-type Strict<T> = T & $Shape<T>;
+export type Strict<T> = T & $Shape<T>;
 export type Styled<Props> = (props: Strict<Props>) => React$Element<any>;
 export type TopBottomLeftRight = 'top' | 'bottom' | 'left' | 'right';
 
@@ -95,6 +101,15 @@ export type AlignSelf =
   | 'flex-end'
   | 'flex-start'
   | 'stretch'
+  ;
+
+export type BorderStyle =
+    'none'
+  | 'dotted'
+  | 'dashed'
+  | 'solid'
+  | 'double'
+  | 'groove'
   ;
 
 export type Display =
@@ -197,9 +212,20 @@ export type TextTransform =
   | 'uppercase'
   ;
 
+export type VerticalAlign =
+    'baseline'
+  | 'bottom'
+  | 'middle'
+  | 'sub'
+  | 'super'
+  | 'text-bottom'
+  | 'text-top'
+  | 'top'
+  ;
+
 export type BrowserStyle = {|
   // Custom API for Fela and Este.
-  $extends?: Styled<any>,
+  $extends?: Styled<any> | [Styled<any>, any],
   $map?: BrowserStyle => BrowserStyle,
   ':active'?: BrowserStyle,
   ':first-child'?: BrowserStyle,
@@ -265,7 +291,7 @@ export type BrowserStyle = {|
   borderBottomColor?: string,
   borderBottomLeftRadius?: string,
   borderBottomRightRadius?: string,
-  borderBottomStyle?: string,
+  borderBottomStyle?: BorderStyle,
   borderBottomWidth?: string,
   borderCollapse?: string,
   borderColor?: string,
@@ -285,20 +311,20 @@ export type BrowserStyle = {|
   borderInlineStartWidth?: string,
   borderLeft?: string,
   borderLeftColor?: string,
-  borderLeftStyle?: string,
+  borderLeftStyle?: BorderStyle,
   borderLeftWidth?: string,
   borderRadius?: number | string,
   borderRight?: string,
   borderRightColor?: string,
-  borderRightStyle?: string,
+  borderRightStyle?: BorderStyle,
   borderRightWidth?: string,
   borderSpacing?: string,
-  borderStyle?: string,
+  borderStyle?: BorderStyle,
   borderTop?: string,
   borderTopColor?: string,
   borderTopLeftRadius?: string,
   borderTopRightRadius?: string,
-  borderTopStyle?: string,
+  borderTopStyle?: BorderStyle,
   borderTopWidth?: string,
   borderWidth?: number | string,
   bottom?: string,
@@ -332,7 +358,7 @@ export type BrowserStyle = {|
   display?: Display,
   emptyCells?: string,
   filter?: string,
-  flex?: number,
+  flex?: number, // facebook.github.io/react-native/docs/layout-props.html#flex
   flexBasis?: number | string,
   flexDirection?: FlexDirection,
   flexFlow?: FlexFlow,
@@ -495,7 +521,7 @@ export type BrowserStyle = {|
   unicodeBidi?: string,
   unicodeRange?: string,
   userSelect?: 'none' | 'auto' | 'text' | 'contain' | 'all',
-  verticalAlign?: string,
+  verticalAlign?: VerticalAlign,
   visibility?: string,
   whiteSpace?: string,
   widows?: string,

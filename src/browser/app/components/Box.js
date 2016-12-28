@@ -3,6 +3,7 @@ import type {
   AlignContent,
   AlignItems,
   AlignSelf,
+  BorderStyle,
   Color,
   Display,
   FlexDirection,
@@ -11,6 +12,7 @@ import type {
   JustifyContent,
   Styled,
   TopBottomLeftRight,
+  VerticalAlign,
 } from '../themes/types';
 import styled from './styled';
 import warning from 'warning';
@@ -25,9 +27,10 @@ export type BoxProps = {
   alignItems?: AlignItems,
   alignSelf?: AlignSelf,
   backgroundColor?: Color,
-  border?: true | TopBottomLeftRight,
+  border?: boolean | TopBottomLeftRight,
   borderColor?: Color,
   borderRadius?: number,
+  borderStyle?: BorderStyle,
   borderWidth?: number,
   display?: Display,
   flex?: number,
@@ -54,6 +57,7 @@ export type BoxProps = {
   paddingLeft?: number,
   paddingRight?: number,
   paddingTop?: number,
+  verticalAlign?: VerticalAlign,
   width?: number,
   // Custom
   marginHorizontal?: number,
@@ -75,19 +79,20 @@ const directionMapping = {
 const propToStyle = (prop, value: any, theme) => {
   switch (prop) {
     // Plain props.
+    case 'alignContent':
+    case 'alignItems':
+    case 'alignSelf':
     case 'display':
     case 'flex':
+    case 'flexBasis':
     case 'flexDirection':
     case 'flexFlow':
     case 'flexGrow':
+    case 'flexShrink':
     case 'flexWrap':
-    case 'alignItems':
-    case 'alignContent':
     case 'justifyContent':
     case 'order':
-    case 'flexShrink':
-    case 'flexBasis':
-    case 'alignSelf':
+    case 'verticalAlign':
       return { [prop]: value };
     // Simple rhythm props.
     case 'marginBottom':
@@ -105,6 +110,7 @@ const propToStyle = (prop, value: any, theme) => {
     case 'minWidth':
     case 'minHeight':
       return {
+        // We allow only number otherwise it would be easy to break rhythm.
         [prop]: rhythm(theme, value),
       };
     // Shorthand rhythm props.
@@ -139,8 +145,6 @@ const propToStyle = (prop, value: any, theme) => {
     // Other props.
     case 'backgroundColor':
       return { backgroundColor: theme.colors[value] };
-    case 'borderRadius':
-      return { borderRadius: value || theme.border.radius };
     default:
       return null;
   }
@@ -156,7 +160,12 @@ const propsToStyle = (theme, props) => Object
   }, {});
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const adjustPaddingForRhythm = (suppressRhythmWarning, border, borderWidth, style) => {
+const adjustPaddingForRhythm = (
+  suppressRhythmWarning,
+  border,
+  borderWidth,
+  style,
+) => {
   if (!borderWidth) return {};
   return ['Bottom', 'Left', 'Right', 'Top'].reduce((padding, prop) => {
     const adjust = border === true || border === prop.toLowerCase();
@@ -186,24 +195,28 @@ const adjustPaddingForRhythm = (suppressRhythmWarning, border, borderWidth, styl
   }, {});
 };
 
-const borderWithRhythm = (theme, props, style) => {
-  if (!props.border) return style;
-  const borderProp = props.border === true
-    ? 'border'
-    : `border${props.border.charAt(0).toUpperCase()}${props.border.slice(1)}`;
-  const borderWidth = props.borderWidth || theme.border.width;
-  const borderColor = props.borderColor
-    ? theme.colors[props.borderColor]
-    : theme.colors.gray;
+const borderWithRhythm = (theme, style, {
+  border,
+  borderColor = 'gray',
+  borderRadius = theme.border.radius,
+  borderStyle = 'solid',
+  borderWidth = theme.border.width,
+  suppressRhythmWarning,
+}) => {
+  if (!border) return style;
   const padding = adjustPaddingForRhythm(
-    props.suppressRhythmWarning,
-    props.border,
+    suppressRhythmWarning,
+    border,
     borderWidth,
     style,
   );
+  const prop = border === true ? '' : border.charAt(0).toUpperCase() + border.slice(1);
   return {
+    [`border${prop}Color`]: theme.colors[borderColor],
+    [`border${prop}Style`]: borderStyle,
+    [`border${prop}Width`]: borderWidth,
     ...padding,
-    [borderProp]: `solid ${borderWidth}px ${borderColor}`,
+    ...(border === true ? { borderRadius } : null),
   };
 };
 
@@ -211,7 +224,7 @@ const Box: Styled<BoxProps> = styled((theme, props) => {
   const style = propsToStyle(theme, props);
   return {
     ...style,
-    ...borderWithRhythm(theme, props, style),
+    ...borderWithRhythm(theme, style, props),
   };
 });
 

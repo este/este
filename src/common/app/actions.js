@@ -36,6 +36,11 @@ export const toggleBaseline = (): Action => ({
   type: 'TOGGLE_BASELINE',
 });
 
+export const setTheme = (theme: string): Action => ({
+  type: 'SET_THEME',
+  payload: { theme },
+});
+
 // TODO: Observable type.
 const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)

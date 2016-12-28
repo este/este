@@ -1,5 +1,5 @@
 /* @flow */
-import type { Styled } from '../themes/types';
+import type { Strict, Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import React from 'react';
 import Text from './Text';
@@ -13,9 +13,12 @@ type LinkProps = TextProps & {
   to: string,
 };
 
-const createLink = (tag, passProps) => styled((theme, props: LinkProps) => ({
-  $extends: Text,
-  color: props.color ? theme.colors[props.color] : theme.colors.primary,
+const createLink = (tag, passProps) => styled((theme, {
+  color = 'primary',
+}) => ({
+  $extends: [Text, ({
+    color,
+  }: Strict<TextProps>)],
   textDecoration: 'none',
   ':hover': {
     textDecoration: 'underline',
@@ -33,7 +36,7 @@ const RouterLink = createLink(ReactRouterLink, [
 const isExternalLink = to => to.includes('://');
 const routerLinkActiveStyle = { textDecoration: 'underline' };
 
-const Link: Styled<LinkProps> = (props: LinkProps) => (
+const Link: Styled<LinkProps> = props => (
   isExternalLink(props.to) ?
     <AnchorLink
       {...props}

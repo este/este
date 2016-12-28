@@ -1,5 +1,6 @@
 /* @flow */
 import type { State } from '../../common/types';
+import type { Theme } from './themes/types';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
@@ -27,16 +28,14 @@ import TodosPage from '../todos/TodosPage';
 type AppProps = {
   baselineShown: boolean,
   currentLocale: string,
-  currentTheme: ?string,
+  themeName: string,
+  theme: Theme,
 };
 
-const theme = (currentTheme) =>
-  themes[currentTheme || 'defaultTheme'] || themes.defaultTheme;
-
-const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
+const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
   <ThemeProvider
-    key={currentTheme} // Enforce rerender.
-    theme={theme(currentTheme)}
+    key={themeName} // Enforce rerender.
+    theme={theme}
   >
     <Container>
       <Helmet
@@ -52,7 +51,7 @@ const App = ({ baselineShown, currentLocale, currentTheme }: AppProps) => (
           ...favicon.link,
           // To test vertical rhythm visually.
           ...(baselineShown ? [{
-            href: `http://basehold.it/${theme(currentTheme).typography.lineHeight}/0/0/0/0.1`,
+            href: `http://basehold.it/${theme.typography.lineHeight}/0/0/0/0.1`,
             rel: 'stylesheet',
           }] : []),
         ]}
@@ -81,7 +80,8 @@ export default compose(
     (state: State) => ({
       baselineShown: state.app.baselineShown,
       currentLocale: state.intl.currentLocale,
-      currentTheme: state.themes.currentTheme,
+      themeName: state.app.currentTheme,
+      theme: themes[state.app.currentTheme] || themes.defaultTheme,
     }),
   ),
   start,

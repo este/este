@@ -9,7 +9,7 @@ const getUserPhotoUrl = (user: User) =>
     s: '100',
     r: 'x',
     d: 'retro',
-    protocol: 'https'
+    protocol: 'https',
   });
 
 export default getUserPhotoUrl;

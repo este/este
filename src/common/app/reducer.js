@@ -3,6 +3,7 @@ import type { Action, AppState } from '../types';
 
 const initialState = {
   baselineShown: false,
+  currentTheme: 'defaultTheme',
   error: null,
   menuShown: false,
   online: false,
@@ -38,6 +39,9 @@ const reducer = (
 
     case 'TOGGLE_BASELINE':
       return { ...state, baselineShown: !state.baselineShown };
+
+    case 'SET_THEME':
+      return { ...state, currentTheme: action.payload.theme };
 
     default:
       return state;

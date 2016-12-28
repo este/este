@@ -17,6 +17,8 @@
 // yellow - yellow0 - yellow9
 
 export type OpenColor = {
+  white: string,
+  black: string,
   blue0: string,
   blue1: string,
   blue2: string,
@@ -151,9 +153,8 @@ export type OpenColor = {
 
 // Copy pasted from open-color@1.4.0
 const openColorOriginal = {
-  // We don't need white nor black.
-  // "white": "#ffffff",
-  // "black": "#000000",
+  white: '#ffffff',
+  black: '#000000',
   gray: [
     '#f8f9fa',
     '#f1f3f5',
@@ -316,7 +317,11 @@ const openColorOriginal = {
 const openColor: OpenColor | any = Object
   .keys(openColorOriginal)
   .reduce((flatten, colorName) => {
-    const colors = openColorOriginal[colorName].reduce((values, colorValue, i) => ({
+    const values = openColorOriginal[colorName];
+    if (typeof values === 'string') {
+      return { ...flatten, [colorName]: values };
+    }
+    const colors = values.reduce((values, colorValue, i) => ({
       ...values,
       [colorName + i]: colorValue,
     }), {});
