@@ -1,5 +1,5 @@
-// flow-typed signature: b3c0e3a8c28bf373a91b2c095a64d617
-// flow-typed version: c4483dc8ea/bluebird_v3.x.x/flow_>=v0.32.x
+// flow-typed signature: b5b4d8699ea147027688e8afb97bde16
+// flow-typed version: 236f277b93/bluebird_v3.x.x/flow_>=v0.32.x
 
 type Bluebird$RangeError = Error;
 type Bluebird$CancellationErrors = Error;
@@ -90,7 +90,7 @@ declare class Bluebird$Promise<R> {
   static defer(): Bluebird$Defer;
   static setScheduler(scheduler: (callback: (...args: Array<any>) => void) => void): void;
   static promisify(nodeFunction: Function, receiver?: Bluebird$PromisifyOptions): Function;
-  static promisifyAll(target: Object, options?: Bluebird$PromisifyAllOptions): void;
+  static promisifyAll(target: Object|Array<Object>, options?: Bluebird$PromisifyAllOptions): void;
 
   static coroutine(generatorFunction: Function): Function;
   static spawn<T>(generatorFunction: Function): Promise<T>;
