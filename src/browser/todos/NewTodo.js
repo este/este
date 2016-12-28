@@ -27,6 +27,7 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
       {...fields.title}
       maxLength={100}
       placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+      size={1}
     />
   </Form>
 );

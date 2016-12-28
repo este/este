@@ -1,5 +1,5 @@
-// flow-typed signature: bddf56fc971f4aaa0fe019e679b192c8
-// flow-typed version: 048e379b9d/jest_v17.x.x/flow_>=v0.33.x
+// flow-typed signature: ad5f5c404d7e7026ea5b28412235dd5c
+// flow-typed version: c17c09b83f/jest_v17.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -189,6 +189,11 @@ type JestExpectType = {
    * specific arguments.
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
+  /**
+   * Check that an object has a .length property and it is set to a certain
+   * numeric value.
+   */
+  toHaveLength(number: number): void,
   /**
    * Use .toMatch to check that a string matches a regular expression.
    */
