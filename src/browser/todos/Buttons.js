@@ -1,6 +1,6 @@
 /* @flow */
 import type { State } from '../../common/types';
-import R from 'ramda';
+import isEmpty from 'ramda/src/isEmpty';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import { Box, Button } from '../app/components';
@@ -48,7 +48,7 @@ const Buttons = ({
 
 export default connect(
   (state: State) => ({
-    isEmpty: R.isEmpty(state.todos.all),
+    isEmpty: isEmpty(state.todos.all),
   }),
   { addHundredTodos, clearAllTodos },
 )(Buttons);

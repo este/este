@@ -2,7 +2,7 @@
 import type { State } from '../../../common/types';
 import Box from './Box';
 import Button from './Button';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import { connect } from 'react-redux';
 import { toggleBaseline } from '../../../common/app/actions';
@@ -25,7 +25,7 @@ const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) 
   </Box>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       baselineShown: state.app.baselineShown,

@@ -1,7 +1,12 @@
 /* @flow */
 import type { Action, UsersState } from '../types';
-import R from 'ramda';
 import createUserFirebase from './createUserFirebase';
+import compose from 'ramda/src/compose';
+import last from 'ramda/src/last';
+import map from 'ramda/src/map';
+import prop from 'ramda/src/prop';
+import sortBy from 'ramda/src/sortBy';
+import values from 'ramda/src/values';
 
 const initialState = {
   // Undefined is absence of evidence, null is evidence of absence.
@@ -25,12 +30,12 @@ const reducer = (
       if (!presence) {
         return { ...state, online: null };
       }
-      const sortBylastSeenAt = R.sortBy(R.prop('lastSeenAt'));
-      const online = R.compose(
-        R.map(item => item.user),
-        R.sortBy(sortBylastSeenAt),
-        R.values,
-        R.map(R.compose(R.last, sortBylastSeenAt, R.values)),
+      const sortBylastSeenAt = sortBy(prop('lastSeenAt'));
+      const online = compose(
+        map(item => item.user),
+        sortBy(sortBylastSeenAt),
+        values,
+        map(compose(last, sortBylastSeenAt, values)),
       )(presence);
       return { ...state, online };
     }

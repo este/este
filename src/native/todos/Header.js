@@ -1,6 +1,6 @@
 /* @flow */
 import type { State } from '../../common/types';
-import R from 'ramda';
+import values from 'ramda/src/values';
 import React from 'react';
 import theme from '../app/themes/initial';
 import { FormattedMessage } from '../app/components';
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const Header = ({ todos }) => {
-  const leftTodos = R.values(todos).filter(todo => !todo.completed).length;
+  const leftTodos = values(todos).filter(todo => !todo.completed).length;
   return (
     <View style={styles.header}>
       <FormattedMessage

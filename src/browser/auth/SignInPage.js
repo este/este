@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { State } from '../../common/types';
 // import Email from './Email';
-// import R from 'ramda';
+// import compose from 'ramda/src/compose';
 // import React from 'react';
 // import SignInError from './SignInError';
 // import Social from './Social';
@@ -53,7 +53,7 @@
 //   viewer: React.PropTypes.object,
 // };
 //
-// export default R.compose(
+// export default compose(
 //   connect(
 //     (state: State) => ({
 //       disabled: state.auth.formDisabled,

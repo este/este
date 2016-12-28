@@ -1,5 +1,5 @@
 /* @flow */
-import R from 'ramda';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { Form, Input } from '../app/components';
@@ -32,7 +32,7 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
   </Form>
 );
 
-export default R.compose(
+export default compose(
   connect(
     null,
     { addTodo },

@@ -5,7 +5,7 @@ import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
@@ -75,7 +75,7 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
   </ThemeProvider>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       baselineShown: state.app.baselineShown,

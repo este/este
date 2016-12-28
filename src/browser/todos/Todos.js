@@ -1,6 +1,11 @@
 /* @flow */
 import type { State, Todo } from '../../common/types';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
+import isEmpty from 'ramda/src/isEmpty';
+import prop from 'ramda/src/prop';
+import reverse from 'ramda/src/reverse';
+import sortBy from 'ramda/src/sortBy';
+import values from 'ramda/src/values';
 import React from 'react';
 import todosMessages from '../../common/todos/todosMessages';
 import { Box, Button, Text } from '../app/components';
@@ -47,7 +52,7 @@ const Todos = ({
   todos,
   toggleTodoCompleted,
 }: TodosProps) => {
-  if (R.isEmpty(todos)) {
+  if (isEmpty(todos)) {
     return (
       <Box>
         <FormattedMessage {...todosMessages.empty}>
@@ -59,10 +64,10 @@ const Todos = ({
 
   // It's ok and recommended to sort things in view, but for the bigger data
   // leverage reactjs/reselect or bvaughn/react-virtualized.
-  const sortedTodos: Array<Todo> = R.compose(
-    R.reverse,
-    R.sortBy(R.prop('createdAt')),
-    R.values,
+  const sortedTodos: Array<Todo> = compose(
+    reverse,
+    sortBy(prop('createdAt')),
+    values,
   )(todos);
 
   return (

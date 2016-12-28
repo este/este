@@ -1,6 +1,6 @@
 /* @flow */
 import type { State } from '../../common/types';
-import R from 'ramda';
+import values from 'ramda/src/values';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/themes/initial';
@@ -32,7 +32,7 @@ const TodoButtons = ({
   clearAllTodos,
   todos,
 }) => {
-  const completedTodos = R.values(todos).filter(todo => todo.completed).length;
+  const completedTodos = values(todos).filter(todo => todo.completed).length;
   return (
     <View style={styles.buttons}>
       {completedTodos > 0 ?

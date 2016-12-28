@@ -1,10 +1,7 @@
 /* @flow weak */
-// Damn, by feature importing doesn't work in Node.js.
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/database';
-// So we have to import everything.
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 import validate from './validate';
 
 // Ensure only one Firebase instance. I don't know how costly new instance is

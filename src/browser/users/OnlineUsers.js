@@ -1,6 +1,6 @@
 /* @flow */
 import type { State, User } from '../../common/types';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
 import { connect } from 'react-redux';
@@ -46,7 +46,7 @@ const OnlineUsers = ({ users }: OnlineUsersProps) => (
     </Box>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       users: state.users.online,

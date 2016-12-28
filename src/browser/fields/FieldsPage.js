@@ -1,7 +1,7 @@
 // /* @flow */
 // import type { State } from '../../common/types';
 // import DynamicField from './DynamicField';
-// import R from 'ramda';
+// import path from 'ramda/src/path';
 // import React from 'react';
 // import buttonsMessages from '../../common/app/buttonsMessages';
 // import linksMessages from '../../common/app/linksMessages';
@@ -223,6 +223,6 @@
 //
 // export default connect(
 //   (state: State) => ({
-//     dynamicFields: R.path(['fieldsPage', 'dynamic'], state.fields),
+//     dynamicFields: path(['fieldsPage', 'dynamic'], state.fields),
 //   }),
 // )(FieldsPage);

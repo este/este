@@ -1,7 +1,12 @@
 /* @flow */
 import type { State } from '../../common/types';
 import Buttons from './Buttons';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
+import isEmpty from 'ramda/src/isEmpty';
+import prop from 'ramda/src/prop';
+import reverse from 'ramda/src/reverse';
+import sortBy from 'ramda/src/sortBy';
+import values from 'ramda/src/values';
 import React from 'react';
 import Todo from './Todo';
 import theme from '../app/themes/initial';
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const Todos = ({ todos, toggleTodoCompleted }) => {
-  if (R.isEmpty(todos)) {
+  if (isEmpty(todos)) {
     return (
       <CenteredContainer>
         <Image
@@ -41,10 +46,10 @@ const Todos = ({ todos, toggleTodoCompleted }) => {
     );
   }
 
-  const sortedTodos = R.compose(
-    R.reverse,
-    R.sortBy(R.prop('createdAt')),
-    R.values, // object values to array
+  const sortedTodos = compose(
+    reverse,
+    sortBy(prop('createdAt')),
+    values, // object values to array
   )(todos);
 
   return (

@@ -2,7 +2,7 @@
 import type { State } from '../../common/types';
 import Menu from './Menu';
 import Page from './Page';
-import R from 'ramda';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
@@ -62,7 +62,7 @@ App.propTypes = {
   appStarted: React.PropTypes.bool.isRequired,
 };
 
-export default R.compose(
+export default compose(
   start,
   connect(
     (state: State) => ({
