@@ -3,28 +3,53 @@
 import React from 'react';
 import compose from 'ramda/src/compose';
 import linksMessages from '../../common/app/linksMessages';
-// import { fields } from '../../common/lib/redux-fields';
-import { injectIntl } from 'react-intl';
+import { fields } from '../../common/lib/redux-fields';
 import {
   Box,
+  Input,
+  Form,
   // Link,
+  Text,
+  Label,
   PageHeader,
   Title,
 } from '../app/components';
 
-const FieldsPage = () => (
+type FieldsPageProps = {
+  fields: any,
+};
+
+const FieldsPage = ({ fields }: FieldsPageProps) => (
   <Box>
     <Title message={linksMessages.fields} />
     <PageHeader
       heading="redux-fields"
-      description="Simple fields mapping to Redux. All we need for any form."
+      description="Simple and universal Redux forms without pitas."
     />
-    {/* <Input
-      {...fields.title}
-      maxLength={100}
-      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-      size={1}
-    /> */}
+    <Form
+      onSubmit={() => {
+        // const title = fields.title.value.trim();
+        // if (!title) return;
+        // addTodo(title);
+        // fields.$reset();
+      }}
+    >
+      <Label>Name</Label>
+      <Input
+        {...fields.name}
+        maxLength={100}
+        type="text"
+        placeholder="John Doe"
+      />
+      <Label>Name</Label>
+      <Input
+        {...fields.name}
+        maxLength={100}
+        type="text"
+        placeholder="Mrtka"
+      />
+      <Text>Fok</Text>
+    </Form>
     {/* <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
       Why validation libraries suck
     </Link> */}
@@ -32,7 +57,22 @@ const FieldsPage = () => (
 );
 
 export default compose(
-  injectIntl,
+  fields({
+    path: 'fieldsPage',
+    fields: [
+      // 'donation',
+      // 'gender',
+      // 'isAnarchist',
+      // 'isLibertarian',
+      'name',
+    ],
+    getInitialState: () => ({
+      // donation: '2',
+      // gender: 'male',
+      // isAnarchist: false,
+      // isLibertarian: false,
+    }),
+  }),
 )(FieldsPage);
 //
 // // import DynamicField from './DynamicField';

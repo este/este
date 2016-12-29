@@ -29,7 +29,7 @@ const theme: Theme = {
     danger: openColor.red6,
     black: openColor.gray8,
     white: openColor.white,
-    gray: openColor.gray4,
+    gray: openColor.gray5,
     open: openColor,
   },
   border: {
