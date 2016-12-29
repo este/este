@@ -12,8 +12,8 @@ const Paragraph: Styled<TextProps> = styled((theme, {
   $extends: [Text, ({
     display,
     marginBottom,
+    maxWidth,
   }: Strict<TextProps>)],
-  maxWidth,
 }));
 
 export default Paragraph;

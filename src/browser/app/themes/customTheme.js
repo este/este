@@ -47,7 +47,7 @@ const theme: Theme = {
     fontFamily: nativeFontFamily,
   },
   block: {
-    maxWidth: '42em',
+    maxWidth: 21,
   },
   heading: {
     fontFamily: nativeFontFamily,

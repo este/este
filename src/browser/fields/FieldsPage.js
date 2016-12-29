@@ -10,7 +10,6 @@ import {
   Form,
   // Link,
   Text,
-  Label,
   PageHeader,
   Title,
 } from '../app/components';
@@ -27,6 +26,7 @@ const FieldsPage = ({ fields }: FieldsPageProps) => (
       description="Simple and universal Redux forms without pitas."
     />
     <Form
+      maxWidth={21}
       onSubmit={() => {
         // const title = fields.title.value.trim();
         // if (!title) return;
@@ -34,21 +34,31 @@ const FieldsPage = ({ fields }: FieldsPageProps) => (
         // fields.$reset();
       }}
     >
-      <Label>Name</Label>
       <Input
         {...fields.name}
+        label="Name"
         maxLength={100}
-        type="text"
-        placeholder="John Doe"
+        placeholder="Jane Doe"
+        // error="Name is required"
       />
-      <Label>Name</Label>
       <Input
-        {...fields.name}
+        {...fields.description}
+        label="Description"
+        rows={3}
+        maxLength={1000}
+        placeholder="Some short description of..."
+      />
+      <Text>fok</Text>
+      {/* <Label>Description</Label>
+      <Input
+        {...fields.description}
         maxLength={100}
         type="text"
-        placeholder="Mrtka"
+        // rows={3}
+        // height={3}
+        placeholder="Multiline input"
       />
-      <Text>Fok</Text>
+       */}
     </Form>
     {/* <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
       Why validation libraries suck
@@ -65,6 +75,8 @@ export default compose(
       // 'isAnarchist',
       // 'isLibertarian',
       'name',
+      'description',
+      // 'description',
     ],
     getInitialState: () => ({
       // donation: '2',

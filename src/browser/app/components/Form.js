@@ -19,8 +19,9 @@ const onSubmitWithPreventDefault = onSubmit => event => {
 const StyledForm: Styled<FormProps> = styled((theme, {
   maxWidth = theme.block.maxWidth,
 }) => ({
-  $extends: Box,
-  maxWidth,
+  $extends: [Box, {
+    maxWidth,
+  }],
 }), 'form', ['onSubmit']);
 
 // Feel

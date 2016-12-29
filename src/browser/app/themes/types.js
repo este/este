@@ -52,7 +52,7 @@ export type Theme = {|
     fontFamily: string,
   |},
   block: {|
-    maxWidth: number | string,
+    maxWidth: number,
   |},
   heading: {|
     fontFamily: string,

@@ -7,23 +7,23 @@ import Text from './Text';
 import styled from './styled';
 
 export type InputProps = TextProps & {
-  inline?: boolean,
-  invalid?: boolean,
+  error?: string,
+  label?: string,
   maxLength?: number,
   name?: string,
   onChange?: (SyntheticEvent) => void,
   placeholder?: string,
-  type?: InputTypes,
+  rows?: number,
+  type: InputTypes,
   value?: string,
 };
 
 // This is gold. Input looks like exactly as Text in all modern browsers.
 // That's great for in place editing UI with vertical rhythm everywhere.
 const enforceTextLook = {
-  map: style => ({
+  map: rows => style => ({
     ...style,
-    // This fixes a lot of issues and it's ok. Input can't be multiline.
-    height: style.lineHeight,
+    height: rows * Number(style.lineHeight),
   }),
   // All these values are required. Otherwise, Edge or Firefox would break.
   style: {
@@ -36,42 +36,63 @@ const enforceTextLook = {
   },
 };
 
-const StyledInput: Styled<InputProps> = styled(() => ({
+const createField = (type, passProps = []) => styled((theme, {
+  rows,
+}) => ({
   $extends: Text,
-  $map: enforceTextLook.map,
+  $map: enforceTextLook.map(rows),
   ...enforceTextLook.style,
-}), 'input', [
+}), type, [
   'name',
   'onChange',
   'placeholder',
   'type',
   'value',
   'maxLength',
+  ...passProps,
 ]);
 
+const StyledInput: Styled<InputProps> = createField('input');
+const StyledTextarea: Styled<InputProps> = createField('textarea', ['rows']);
+
 const Input: Styled<InputProps> = ({
-  invalid,
-  // inline rendered input looks exactly as Text, ftw
-  inline,
-  // display flex 1 is like width 100%, but more configurable
-  display = 'flex',
-  flex = 1,
+  error,
+  label,
+  rows = 1,
+  size = 0,
+  type = 'text',
   ...props
 }) => (
-  <Box
-    display={display}
-    flex={flex}
-    {...props}
-    {...(inline ? {} : {
-      border: 'bottom',
-      borderColor: invalid ? 'danger' : 'gray', // TODO: primary on focus
-      borderWidth: 1,
-      paddingTop: 0.5,
-      paddingBottom: 0.25,
-      marginBottom: 1.25,
-    })}
-  >
-    <StyledInput {...props} />
+  <Box {...props}>
+    {label &&
+      <Text bold display="block" size={size - 1}>
+        {label}
+      </Text>
+    }
+    {rows === 1 ?
+      <StyledInput
+        {...props}
+        size={size}
+        type={type}
+      />
+    :
+      <StyledTextarea
+        {...props}
+        rows={rows}
+        size={size}
+        type={type}
+      />
+    }
+    <Text
+      bold
+      color="danger"
+      display="block"
+      marginBottom={0.25}
+      marginTop={-0.25}
+      size={size - 1}
+    >
+      {error || '\u00A0'}
+    </Text>
   </Box>
 );
 

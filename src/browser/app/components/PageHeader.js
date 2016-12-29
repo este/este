@@ -19,7 +19,10 @@ const PageHeader = ({ heading, description }: PageHeaderProps) => (
   >
     <Heading size={3} marginBottom={0}>{heading}</Heading>
     {description &&
-      <Paragraph marginBottom={0}>{description}</Paragraph>
+      <Paragraph
+        marginBottom={0}
+        maxWidth={28}
+      >{description}</Paragraph>
     }
   </Box>
 );
