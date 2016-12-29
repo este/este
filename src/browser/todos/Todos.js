@@ -1,5 +1,5 @@
 // @flow
-import type { State, Todo } from '../../common/types';
+import type { Intl, State, Todo } from '../../common/types';
 import React from 'react';
 import compose from 'ramda/src/compose';
 import isEmpty from 'ramda/src/isEmpty';
@@ -9,9 +9,9 @@ import sortBy from 'ramda/src/sortBy';
 import todosMessages from '../../common/todos/todosMessages';
 import values from 'ramda/src/values';
 import { Box, Button, Text } from '../app/components';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
+import { injectIntl } from 'react-intl';
 
 const itemStyle = {
   inline: true,
@@ -43,21 +43,23 @@ const TodosItem = ({
 
 type TodosProps = {
   deleteTodo: typeof deleteTodo,
-  toggleTodoCompleted: typeof toggleTodoCompleted,
+  intl: Intl,
   todos: Object,
+  toggleTodoCompleted: typeof toggleTodoCompleted,
 };
 
 const Todos = ({
   deleteTodo,
+  intl,
   todos,
   toggleTodoCompleted,
 }: TodosProps) => {
   if (isEmpty(todos)) {
     return (
       <Box>
-        <FormattedMessage {...todosMessages.empty}>
-          {message => <Text>{message}</Text>}
-        </FormattedMessage>
+        <Text>
+          {intl.formatMessage(todosMessages.empty)}
+        </Text>
       </Box>
     );
   }
@@ -84,9 +86,12 @@ const Todos = ({
   );
 };
 
-export default connect(
-  (state: State) => ({
-    todos: state.todos.all,
-  }),
-  { deleteTodo, toggleTodoCompleted },
+export default compose(
+  connect(
+    (state: State) => ({
+      todos: state.todos.all,
+    }),
+    { deleteTodo, toggleTodoCompleted },
+  ),
+  injectIntl,
 )(Todos);

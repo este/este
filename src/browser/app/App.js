@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 
 // import { Miss } from 'react-router';
 // Pages
-// import FieldsPage from '../fields/FieldsPage';
+import FieldsPage from '../fields/FieldsPage';
 import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
 // import IntlPage from '../intl/IntlPage';
@@ -63,8 +63,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match exactly pattern="/" component={HomePage} />
           <Match pattern="/users" component={UsersPage} />
           <Match pattern="/todos" component={TodosPage} />
-          {/*    <Match pattern="/fields" component={FieldsPage} />
-          <Match pattern="/intl" component={IntlPage} />
+          <Match pattern="/fields" component={FieldsPage} />
+          {/*    <Match pattern="/intl" component={IntlPage} />
             <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
             <Match authorized pattern="/me" component={MePage} />

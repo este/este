@@ -1,35 +1,39 @@
-//
+// @flow
 // import type { State } from '../../common/types';
-// import React from 'react';
+import React from 'react';
+import compose from 'ramda/src/compose';
+import linksMessages from '../../common/app/linksMessages';
 // import { fields } from '../../common/lib/redux-fields';
-// import linksMessages from '../../common/app/linksMessages';
-// import {
-//   Box,
-//   Link,
-//   PageHeader,
-//   Title,
-// } from '../app/components';
-//
-// const FieldsPage = () => (
-//   <Box>
-//     <Title message={linksMessages.fields} />
-//     <PageHeader
-//       heading="redux-fields"
-//       description="Simple fields mapping to Redux. All we need for any form."
-//     />
-//     <Input
-//       {...fields.title}
-//       maxLength={100}
-//       placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-//       size={1}
-//     />
-//     {/* <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
-//       Why validation libraries suck
-//     </Link> */}
-//   </Box>
-// );
-//
-// export default FieldsPage;
+import { injectIntl } from 'react-intl';
+import {
+  Box,
+  // Link,
+  PageHeader,
+  Title,
+} from '../app/components';
+
+const FieldsPage = () => (
+  <Box>
+    <Title message={linksMessages.fields} />
+    <PageHeader
+      heading="redux-fields"
+      description="Simple fields mapping to Redux. All we need for any form."
+    />
+    {/* <Input
+      {...fields.title}
+      maxLength={100}
+      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
+      size={1}
+    /> */}
+    {/* <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
+      Why validation libraries suck
+    </Link> */}
+  </Box>
+);
+
+export default compose(
+  injectIntl,
+)(FieldsPage);
 //
 // // import DynamicField from './DynamicField';
 // // import R from 'ramda';

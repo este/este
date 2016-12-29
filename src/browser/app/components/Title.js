@@ -1,20 +1,20 @@
 // @flow
+import type { Intl } from '../../../common/types';
 import Helmet from 'react-helmet';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 type TitleProps = {|
+  intl: Intl,
   message: string | Object,
   values?: Object,
 |};
 
-const Title = ({ message, values }: TitleProps) => (
+const Title = ({ intl, message, values }: TitleProps) => (
   typeof message === 'string' ?
     <Helmet title={message} />
   :
-    <FormattedMessage {...message} values={values}>
-      {message => <Helmet title={message} /> }
-    </FormattedMessage>
+    <Helmet title={intl.formatMessage(message, values)} />
 );
 
-export default Title;
+export default injectIntl(Title);

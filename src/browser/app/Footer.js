@@ -1,7 +1,8 @@
 // @flow
+import type { Intl } from '../../common/types';
 import React from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
 import { Box, Text, Link } from './components';
+import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
   madeByHtml: {
@@ -10,14 +11,18 @@ const messages = defineMessages({
   },
 });
 
-const Footer = () => (
+type FooterProps = {
+  intl: Intl,
+};
+
+const Footer = ({ intl }: FooterProps) => (
   <Box
     border="top"
     marginTop={1}
     paddingVertical={1}
   >
     <Text size={-1}>
-      <FormattedMessage {...messages.madeByHtml} />
+      {intl.formatMessage(messages.madeByHtml)}
     </Text>
     {'\u00a0'}
     <Link size={-1} to="https://twitter.com/steida">
@@ -26,4 +31,4 @@ const Footer = () => (
   </Box>
 );
 
-export default Footer;
+export default injectIntl(Footer);

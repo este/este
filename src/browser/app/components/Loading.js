@@ -1,9 +1,10 @@
 // @flow
+import type { Intl } from '../../../common/types';
 import Box from './Box';
 import React from 'react';
 import Text from './Text';
 import Title from './Title';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
   loadingText: {
@@ -16,13 +17,16 @@ const messages = defineMessages({
   },
 });
 
-type State = {
+type LoadingProps = {|
+  intl: Intl,
+|};
+
+type LoadingState = {|
   currentText: ?Object,
-};
+|};
 
 class Loading extends React.Component {
-
-  state: State = {
+  state: LoadingState = {
     currentText: null,
   };
 
@@ -43,21 +47,22 @@ class Loading extends React.Component {
 
   timer: number;
   longTimer: number;
+  props: LoadingProps;
 
   render() {
     const { currentText } = this.state;
     if (!currentText) return null;
+    const { intl } = this.props;
 
     return (
       <Box>
         <Title message={currentText} />
         <Text>
-          <FormattedMessage {...currentText} />...
+          {intl.formatMessage(currentText)}...
         </Text>
       </Box>
     );
   }
-
 }
 
-export default Loading;
+export default injectIntl(Loading);

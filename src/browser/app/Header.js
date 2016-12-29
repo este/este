@@ -1,18 +1,13 @@
 // @flow
-import type { State, User } from '../../common/types';
+import type { Intl, State, User } from '../../common/types';
 import React from 'react';
+import compose from 'ramda/src/compose';
 import linksMessages from '../../common/app/linksMessages';
-import { FormattedMessage } from 'react-intl';
 import { Box, Link } from '../app/components';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
-type HeaderLinkProps = {
-  exactly?: boolean,
-  to: string,
-  message: Object,
-};
-
-const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
+const HeaderLink = ({ exactly, to, children }) => (
   <Link
     backgroundColor="primary"
     bold
@@ -21,16 +16,18 @@ const HeaderLink = ({ exactly, to, message }: HeaderLinkProps) => (
     paddingHorizontal={0.5}
     paddingVertical={0.5}
     to={to}
-  >
-    <FormattedMessage {...message} />
-  </Link>
+  >{children}</Link>
 );
 
 type HeaderProps = {
+  intl: Intl,
   viewer: ?User,
 };
 
-const Header = ({ viewer }: HeaderProps) => (
+const Header = ({
+  intl: { formatMessage },
+  viewer,
+}: HeaderProps) => (
   <Box
     backgroundColor="primary"
     display="flex"
@@ -38,21 +35,24 @@ const Header = ({ viewer }: HeaderProps) => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderLink exactly to="/" message={linksMessages.home} />
-    <HeaderLink to="/users" message={linksMessages.users} />
-    <HeaderLink to="/todos" message={linksMessages.todos} />
-    <HeaderLink to="/fields" message={linksMessages.fields} />
-    <HeaderLink to="/intl" message={linksMessages.intl} />
-    <HeaderLink to="/offline" message={linksMessages.offline} />
-    <HeaderLink to="/me" message={linksMessages.me} />
+    <HeaderLink exactly to="/">{formatMessage(linksMessages.home)}</HeaderLink>
+    <HeaderLink to="/users">{formatMessage(linksMessages.users)}</HeaderLink>
+    <HeaderLink to="/todos">{formatMessage(linksMessages.todos)}</HeaderLink>
+    <HeaderLink to="/fields">{formatMessage(linksMessages.fields)}</HeaderLink>
+    <HeaderLink to="/intl">{formatMessage(linksMessages.intl)}</HeaderLink>
+    <HeaderLink to="/offline">{formatMessage(linksMessages.offline)}</HeaderLink>
+    <HeaderLink to="/me">{formatMessage(linksMessages.me)}</HeaderLink>
     {!viewer &&
-      <HeaderLink to="/signin" message={linksMessages.signIn} />
+      <HeaderLink to="/signin">{formatMessage(linksMessages.signIn)}</HeaderLink>
     }
   </Box>
 );
 
-export default connect(
-  (state: State) => ({
-    viewer: state.users.viewer,
-  }),
+export default compose(
+  connect(
+    (state: State) => ({
+      viewer: state.users.viewer,
+    }),
+  ),
+  injectIntl,
 )(Header);

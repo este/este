@@ -1,4 +1,5 @@
 // @flow
+import type { Intl } from '../../common/types';
 import React from 'react';
 import compose from 'ramda/src/compose';
 import newTodoMessages from '../../common/todos/newTodoMessages';
@@ -11,7 +12,7 @@ import { injectIntl } from 'react-intl';
 type NewTodoProps = {|
   addTodo: typeof addTodo,
   fields: any,
-  intl: any,
+  intl: Intl,
 |};
 
 const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
