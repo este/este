@@ -1,19 +1,19 @@
 // @flow
-import type { State } from '../../common/types';
-import type { Theme } from './themes/types';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
-import R from 'ramda';
 import React from 'react';
+import compose from 'ramda/src/compose';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Match } from '../../common/app/components';
-// import { Miss } from 'react-router';
+import type { State } from '../../common/types';
+import type { Theme } from './themes/types';
 import { Box, Container, ThemeProvider } from './components';
+import { Match } from '../../common/app/components';
 import { connect } from 'react-redux';
 
+// import { Miss } from 'react-router';
 // Pages
 // import FieldsPage from '../fields/FieldsPage';
 import UsersPage from '../users/UsersPage';
@@ -75,7 +75,7 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
   </ThemeProvider>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       baselineShown: state.app.baselineShown,

@@ -1,7 +1,7 @@
 // @flow
 import type { State, User } from '../../common/types';
-import R from 'ramda';
 import React from 'react';
+import compose from 'ramda/src/compose';
 import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
 import { connect } from 'react-redux';
 import { firebase } from '../../common/lib/redux-firebase';
@@ -46,7 +46,7 @@ const OnlineUsers = ({ users }: OnlineUsersProps) => (
     </Box>
 );
 
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       users: state.users.online,

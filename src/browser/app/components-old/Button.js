@@ -1,4 +1,4 @@
-// /* @flow */
+// @flow
 // import React from 'react';
 // import { Button as RebassButton } from 'rebass';
 //
