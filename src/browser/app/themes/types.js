@@ -52,6 +52,7 @@ export type Theme = {|
     fontFamily: string,
   |},
   block: {|
+    marginBottom: number,
     maxWidth: number,
   |},
   heading: {|
