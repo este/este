@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import SwitchTheme from './SwitchTheme';
 import {
   Box,
   Button,
@@ -9,6 +8,7 @@ import {
   Link,
   PageHeader,
   Paragraph,
+  SwitchTheme,
   Text,
   Title,
   ToggleBaseline,
