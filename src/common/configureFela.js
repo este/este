@@ -99,7 +99,7 @@ const browserStaticStyles = `
     -webkit-appearance: listbox;
   }
   textarea {
-    resize: vertical;
+    resize: none;
   }
   input[type="search"] {
     -webkit-appearance: none;
