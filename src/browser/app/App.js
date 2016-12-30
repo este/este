@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import FieldsPage from '../fields/FieldsPage';
 import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
-// import IntlPage from '../intl/IntlPage';
+import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
 // import NotFoundPage from '../notfound/NotFoundPage';
 // import OfflinePage from '../offline/OfflinePage';
@@ -64,8 +64,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match pattern="/users" component={UsersPage} />
           <Match pattern="/todos" component={TodosPage} />
           <Match pattern="/fields" component={FieldsPage} />
-          {/*    <Match pattern="/intl" component={IntlPage} />
-            <Match pattern="/offline" component={OfflinePage} />
+          <Match pattern="/intl" component={IntlPage} />
+          {/*      <Match pattern="/offline" component={OfflinePage} />
             <Match pattern="/signin" component={SignInPage} />
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}

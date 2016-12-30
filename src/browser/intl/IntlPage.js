@@ -1,7 +1,25 @@
-//
+// @flow
+import React from 'react';
+import linksMessages from '../../common/app/linksMessages';
+import {
+  Box,
+  Title,
+  PageHeader,
+} from '../app/components';
+
+
+const IntlPage = () => (
+  <Box>
+    <Title message={linksMessages.intl} />
+    <PageHeader
+      heading="react-intl"
+    />
+  </Box>
+);
+
+export default IntlPage;
+
 // import Locales from './SwitchLocale';
-// import React from 'react';
-// import linksMessages from '../../common/app/linksMessages';
 // import { Block, PageHeader, Text, Title, View } from '../app/components';
 // import {
 //   FormattedDate,
