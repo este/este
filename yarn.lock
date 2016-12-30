@@ -3992,6 +3992,10 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+iflow-react-intl@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/iflow-react-intl/-/iflow-react-intl-1.2.0.tgz#9c8b5eacd76a186eb90ffb65208dfa10e4b74050"
+
 ignore-by-default@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"

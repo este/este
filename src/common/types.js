@@ -16,20 +16,6 @@ export type Deps = {
   validate: (json: Object) => any,
 };
 
-// github.com/yahoo/react-intl/wiki/API#intlshape
-// github.com/yahoo/react-intl/issues/793
-export type Intl = {|
-  formatDate: (value: any, options?: Object) => string,
-  formatTime: (value: any, options?: Object) => string,
-  formatRelative: (value: any, options?: Object) => string,
-  formatNumber: (value: any, options?: Object) => string,
-  formatPlural: (value: any, options?: Object) => string,
-  formatMessage: (messageDescriptor: Object, values?: Object) => string,
-  formatHTMLMessage: (messageDescriptor: Object, values?: Object) => string,
-  // Now, because components must be pure aka without side-effects.
-  now: () => number
-|};
-
 // Models
 
 export type Todo = {|

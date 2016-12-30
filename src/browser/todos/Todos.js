@@ -1,5 +1,5 @@
 // @flow
-import type { Intl, State, Todo } from '../../common/types';
+import type { State, Todo } from '../../common/types';
 import React from 'react';
 import compose from 'ramda/src/compose';
 import isEmpty from 'ramda/src/isEmpty';
@@ -43,7 +43,7 @@ const TodosItem = ({
 
 type TodosProps = {
   deleteTodo: typeof deleteTodo,
-  intl: Intl,
+  intl: $IntlShape,
   todos: Object,
   toggleTodoCompleted: typeof toggleTodoCompleted,
 };

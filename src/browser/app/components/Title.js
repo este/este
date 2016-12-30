@@ -1,11 +1,10 @@
 // @flow
-import type { Intl } from '../../../common/types';
 import Helmet from 'react-helmet';
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
 type TitleProps = {|
-  intl: Intl,
+  intl: $IntlShape,
   message: string | Object,
   values?: Object,
 |};

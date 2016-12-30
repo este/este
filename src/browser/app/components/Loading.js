@@ -1,5 +1,4 @@
 // @flow
-import type { Intl } from '../../../common/types';
 import Box from './Box';
 import React from 'react';
 import Text from './Text';
@@ -18,7 +17,7 @@ const messages = defineMessages({
 });
 
 type LoadingProps = {|
-  intl: Intl,
+  intl: $IntlShape,
 |};
 
 type LoadingState = {|
