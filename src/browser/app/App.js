@@ -4,23 +4,23 @@ import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
 import React from 'react';
-import compose from 'ramda/src/compose';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import type { State } from '../../common/types';
 import type { Theme } from './themes/types';
 import { Box, Container, ThemeProvider } from './components';
 import { Match } from '../../common/app/components';
+import { Miss } from 'react-router';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
-// import { Miss } from 'react-router';
 // Pages
 import FieldsPage from '../fields/FieldsPage';
 import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
 import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
-// import NotFoundPage from '../notfound/NotFoundPage';
+import NotFoundPage from '../notfound/NotFoundPage';
 import OfflinePage from '../offline/OfflinePage';
 // import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
@@ -67,8 +67,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match pattern="/intl" component={IntlPage} />
           <Match pattern="/offline" component={OfflinePage} />
           {/*        <Match pattern="/signin" component={SignInPage} />
-            <Match authorized pattern="/me" component={MePage} />
-            <Miss component={NotFoundPage} />*/}
+            <Match authorized pattern="/me" component={MePage} />*/}
+          <Miss component={NotFoundPage} />
         </Box>
         <Footer />
     </Container>
