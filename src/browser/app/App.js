@@ -21,7 +21,7 @@ import HomePage from '../home/HomePage';
 import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
 // import NotFoundPage from '../notfound/NotFoundPage';
-// import OfflinePage from '../offline/OfflinePage';
+import OfflinePage from '../offline/OfflinePage';
 // import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 
@@ -65,8 +65,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match pattern="/todos" component={TodosPage} />
           <Match pattern="/fields" component={FieldsPage} />
           <Match pattern="/intl" component={IntlPage} />
-          {/*      <Match pattern="/offline" component={OfflinePage} />
-            <Match pattern="/signin" component={SignInPage} />
+          <Match pattern="/offline" component={OfflinePage} />
+          {/*        <Match pattern="/signin" component={SignInPage} />
             <Match authorized pattern="/me" component={MePage} />
             <Miss component={NotFoundPage} />*/}
         </Box>
