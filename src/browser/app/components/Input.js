@@ -8,13 +8,14 @@ import styled from './styled';
 
 export type InputProps = TextProps & {
   error?: string,
+  field?: Object,
   label?: string,
   maxLength?: number,
   name?: string,
   onChange?: (SyntheticEvent) => void,
   placeholder?: string,
   rows?: number,
-  type: InputTypes,
+  type?: InputTypes,
   value?: string,
 };
 
@@ -36,7 +37,7 @@ const enforceTextLook = {
   },
 };
 
-const createField = (type, passProps = []) => styled((theme, {
+const create = (type, passProps = []) => styled((theme, {
   rows,
 }) => ({
   $extends: Text,
@@ -52,15 +53,30 @@ const createField = (type, passProps = []) => styled((theme, {
   ...passProps,
 ]);
 
-const StyledInput: Styled<InputProps> = createField('input');
-const StyledTextarea: Styled<InputProps> = createField('textarea', ['rows']);
+const StyledInput = create('input');
+const StyledTextarea = create('textarea', ['rows']); // TODO: Autosize.
+
+const StyledInputOrTextArea: Styled<InputProps> = ({
+  field,
+  rows = 1,
+  type = 'text',
+  ...props
+}) => {
+  const InputOrTextArea = rows === 1 ? StyledInput : StyledTextarea;
+  return (
+    <InputOrTextArea
+      {...props}
+      {...field}
+      rows={rows}
+      type={type}
+    />
+  );
+};
 
 const Input: Styled<InputProps> = ({
   error,
   label,
-  rows = 1,
   size = 0,
-  type = 'text',
   ...props
 }) => (
   <Box {...props}>
@@ -69,29 +85,14 @@ const Input: Styled<InputProps> = ({
         {label}
       </Text>
     }
-    {rows === 1 ?
-      <StyledInput
-        {...props}
-        size={size}
-        type={type}
-      />
-    :
-      <StyledTextarea
-        {...props}
-        rows={rows}
-        size={size}
-        type={type}
-      />
-    }
+    <StyledInputOrTextArea size={size} {...props} />
     <Text
       bold
       color="danger"
       display="block"
-      marginBottom={0.25}
-      marginTop={-0.25}
       size={size - 1}
     >
-      {error || '\u00A0'}
+      {error || '\u00A0'/* Because we need to reserve real fontSize height */}
     </Text>
   </Box>
 );

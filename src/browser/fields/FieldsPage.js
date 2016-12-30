@@ -6,65 +6,63 @@ import linksMessages from '../../common/app/linksMessages';
 import { fields } from '../../common/lib/redux-fields';
 import {
   Box,
-  Input,
   Form,
-  // Link,
-  Text,
+  Input,
+  Button,
+  Link,
   PageHeader,
+  Paragraph,
+  Text,
   Title,
 } from '../app/components';
 
-type FieldsPageProps = {
-  fields: any,
-};
+const FieldsPage = ({ fields }) => {
+  const onSubmit = () => {
+    // console.log(fields.$values());
+    // const title = fields.title.value.trim();
+    // if (!title) return;
+    // addTodo(title);
+    // fields.$reset();
+  };
 
-const FieldsPage = ({ fields }: FieldsPageProps) => (
-  <Box>
-    <Title message={linksMessages.fields} />
-    <PageHeader
-      heading="redux-fields"
-      description="Simple and universal Redux forms without pitas."
-    />
-    <Form
-      maxWidth={21}
-      onSubmit={() => {
-        // const title = fields.title.value.trim();
-        // if (!title) return;
-        // addTodo(title);
-        // fields.$reset();
-      }}
-    >
-      <Input
-        {...fields.name}
-        label="Name"
-        maxLength={100}
-        placeholder="Jane Doe"
-        // error="Name is required"
+  return (
+    <Box>
+      <Title message={linksMessages.fields} />
+      <PageHeader
+        heading="redux-fields"
+        description="Simple and universal Redux forms without pitas"
       />
-      <Input
-        {...fields.description}
-        label="Description"
-        rows={3}
-        maxLength={1000}
-        placeholder="Some short description of..."
-      />
-      <Text>fok</Text>
-      {/* <Label>Description</Label>
-      <Input
-        {...fields.description}
-        maxLength={100}
-        type="text"
-        // rows={3}
-        // height={3}
-        placeholder="Multiline input"
-      />
-       */}
-    </Form>
-    {/* <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
-      Why validation libraries suck
-    </Link> */}
-  </Box>
-);
+      <Form
+        maxWidth={21}
+        onSubmit={onSubmit}
+      >
+        <Input
+          field={fields.name}
+          label="Name"
+          maxLength={100}
+          placeholder="Jane Doe"
+          error="Name is required"
+        />
+        <Input
+          field={fields.description}
+          label="Description"
+          maxLength={100}
+          placeholder="Some short description"
+          rows={2}
+        />
+        <Button onClick={onSubmit} primary>
+          fok
+        </Button>
+      </Form>
+      <Paragraph>
+        <Text display="block">TODO: Universal Checkbox, Radio, Select.</Text>
+        <Link to="https://medium.com/@steida/why-validation-libraries-suck-b63b5ff70df5">
+          Why validation libraries suck
+        </Link>
+      </Paragraph>
+    </Box>
+  );
+};
 
 export default compose(
   fields({
@@ -79,6 +77,7 @@ export default compose(
       // 'description',
     ],
     getInitialState: () => ({
+      // name: 'shit',
       // donation: '2',
       // gender: 'male',
       // isAnarchist: false,
