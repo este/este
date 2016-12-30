@@ -1,13 +1,13 @@
 // @flow
-import type { Intl, State, User } from '../../common/types';
+import type { State, User } from '../../common/types';
 import React from 'react';
 import compose from 'ramda/src/compose';
 import linksMessages from '../../common/app/linksMessages';
 import { Box, Link } from '../app/components';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 
-const HeaderLink = ({ exactly, to, children }) => (
+const HeaderLink = ({ exactly, to, message }) => (
   <Link
     backgroundColor="primary"
     bold
@@ -16,16 +16,16 @@ const HeaderLink = ({ exactly, to, children }) => (
     paddingHorizontal={0.5}
     paddingVertical={0.5}
     to={to}
-  >{children}</Link>
+  >
+    <FormattedMessage {...message} />
+  </Link>
 );
 
 type HeaderProps = {
-  intl: Intl,
   viewer: ?User,
 };
 
 const Header = ({
-  intl: { formatMessage },
   viewer,
 }: HeaderProps) => (
   <Box
@@ -35,15 +35,15 @@ const Header = ({
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderLink exactly to="/">{formatMessage(linksMessages.home)}</HeaderLink>
-    <HeaderLink to="/users">{formatMessage(linksMessages.users)}</HeaderLink>
-    <HeaderLink to="/todos">{formatMessage(linksMessages.todos)}</HeaderLink>
-    <HeaderLink to="/fields">{formatMessage(linksMessages.fields)}</HeaderLink>
-    <HeaderLink to="/intl">{formatMessage(linksMessages.intl)}</HeaderLink>
-    <HeaderLink to="/offline">{formatMessage(linksMessages.offline)}</HeaderLink>
-    <HeaderLink to="/me">{formatMessage(linksMessages.me)}</HeaderLink>
+    <HeaderLink exactly to="/" message={linksMessages.home} />
+    <HeaderLink to="/users" message={linksMessages.users} />
+    <HeaderLink to="/todos" message={linksMessages.todos} />
+    <HeaderLink to="/fields" message={linksMessages.fields} />
+    <HeaderLink to="/intl" message={linksMessages.intl} />
+    <HeaderLink to="/offline" message={linksMessages.offline} />
+    <HeaderLink to="/me" message={linksMessages.me} />
     {!viewer &&
-      <HeaderLink to="/signin">{formatMessage(linksMessages.signIn)}</HeaderLink>
+      <HeaderLink to="/signin" message={linksMessages.signIn} />
     }
   </Box>
 );
@@ -54,5 +54,4 @@ export default compose(
       viewer: state.users.viewer,
     }),
   ),
-  injectIntl,
 )(Header);

@@ -1,5 +1,5 @@
 // @flow
-import type { Intl, State } from '../../common/types';
+import type { State } from '../../common/types';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import compose from 'ramda/src/compose';
@@ -7,19 +7,17 @@ import isEmpty from 'ramda/src/isEmpty';
 import { Box, Button } from '../app/components';
 import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 type ButtonsProps = {
   addHundredTodos: typeof addHundredTodos,
   clearAllTodos: typeof clearAllTodos,
-  intl: Intl,
   isEmpty: boolean,
 };
 
 const Buttons = ({
   addHundredTodos,
   clearAllTodos,
-  intl,
   isEmpty,
 }: ButtonsProps) => (
   <Box
@@ -32,12 +30,16 @@ const Buttons = ({
       disabled={isEmpty}
       marginHorizontal={0.25}
       onClick={clearAllTodos}
-    >{intl.formatMessage(buttonsMessages.clearAll)}</Button>
+    >
+      <FormattedMessage {...buttonsMessages.clearAll} />
+    </Button>
     <Button
       primary
       marginHorizontal={0.25}
       onClick={addHundredTodos}
-    >{intl.formatMessage(buttonsMessages.add100)}</Button>
+    >
+      <FormattedMessage {...buttonsMessages.add100} />
+    </Button>
   </Box>
 );
 
@@ -48,5 +50,4 @@ export default compose(
     }),
     { addHundredTodos, clearAllTodos },
   ),
-  injectIntl,
 )(Buttons);
