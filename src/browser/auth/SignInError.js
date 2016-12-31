@@ -1,4 +1,9 @@
-//
+// @flow
+
+const SignInError = () => null;
+
+export default SignInError;
+
 // import type { State } from '../../common/types';
 // import React from 'react';
 // import errorMessages from '../../common/auth/errorMessages';
