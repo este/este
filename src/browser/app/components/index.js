@@ -16,6 +16,7 @@ export { default as SwitchTheme } from './SwitchTheme';
 export { default as Text } from './Text';
 export { default as Title } from './Title';
 export { default as ToggleBaseline } from './ToggleBaseline';
+export { default as focus } from './focus';
 export { default as fxbml } from './fxbml';
 export { default as styled } from './styled';
 
