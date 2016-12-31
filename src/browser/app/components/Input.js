@@ -7,6 +7,7 @@ import Text from './Text';
 import styled from './styled';
 
 export type InputProps = TextProps & {
+  disabled?: boolean,
   error?: string,
   field?: Object,
   label?: string,
@@ -38,12 +39,15 @@ const enforceTextLook = {
 };
 
 const create = (type, passProps = []) => styled((theme, {
+  disabled,
   rows,
 }) => ({
   $extends: Text,
   $map: enforceTextLook.map(rows),
   ...enforceTextLook.style,
+  ...(disabled ? theme.states.disabled : null),
 }), type, [
+  'disabled',
   'name',
   'onChange',
   'placeholder',
