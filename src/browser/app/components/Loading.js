@@ -1,5 +1,5 @@
 // @flow
-import Box from './Box';
+import type { TextProps } from './Text';
 import React from 'react';
 import Text from './Text';
 import Title from './Title';
@@ -16,14 +16,15 @@ const messages = defineMessages({
   },
 });
 
-type LoadingProps = {|
+type LoadingProps = TextProps & {
   intl: $IntlShape,
-|};
+};
 
 type LoadingState = {|
   currentText: ?Object,
 |};
 
+// TODO: Should be stateless component with lifted state. Recompose?
 class Loading extends React.Component {
   state: LoadingState = {
     currentText: null,
@@ -51,15 +52,17 @@ class Loading extends React.Component {
   render() {
     const { currentText } = this.state;
     if (!currentText) return null;
-    const { intl } = this.props;
+    const {
+      intl,
+      display = 'block',
+      ...props
+    } = this.props;
 
     return (
-      <Box>
+      <Text display={display} {...props}>
         <Title message={currentText} />
-        <Text>
-          {intl.formatMessage(currentText)}...
-        </Text>
-      </Box>
+        {intl.formatMessage(currentText)}...
+      </Text>
     );
   }
 }
