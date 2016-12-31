@@ -24,7 +24,7 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
     }}
   >
     <Input
-      {...fields.title}
+      field={fields.title}
       maxLength={100}
       placeholder={intl.formatMessage(newTodoMessages.placeholder)}
       size={1}
