@@ -1,47 +1,36 @@
 // @flow
+import type { State } from '../../common/types';
+import React from 'react';
+import errorMessages from '../../common/auth/errorMessages';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { firebaseMessages } from '../../common/lib/redux-firebase';
+import {
+  Message,
+} from '../app/components';
 
-const SignInError = () => null;
+const getMessage = error =>
+  errorMessages[error.name] ||
+  firebaseMessages[error.name] ||
+  error.toString();
 
-export default SignInError;
+const SignInError = ({ error }) => {
+  if (!error) return null;
+  const message = getMessage(error);
 
-// import type { State } from '../../common/types';
-// import React from 'react';
-// import errorMessages from '../../common/auth/errorMessages';
-// import { FormattedMessage } from 'react-intl';
-// import { Message } from '../app/components';
-// import { connect } from 'react-redux';
-// import { firebaseMessages } from '../../common/lib/redux-firebase';
-//
-// const styles = {
-//   message: {
-//     display: 'inline-block',
-//   },
-// };
-//
-// const SignInError = ({ error }) => {
-//   if (!error) return null;
-//
-//   const message =
-//     errorMessages[error.name] ||
-//     firebaseMessages[error.name];
-//
-//   return (
-//     <Message style={styles.message} theme="error">
-//       {message ?
-//         <FormattedMessage {...message} values={error.params} />
-//       :
-//         error.toString()
-//       }
-//     </Message>
-//   );
-// };
-//
-// SignInError.propTypes = {
-//   error: React.PropTypes.instanceOf(Error),
-// };
-//
-// export default connect(
-//   (state: State) => ({
-//     error: state.auth.error,
-//   }),
-// )(SignInError);
+  return (
+    <Message danger>
+      {typeof message !== 'string' ?
+        <FormattedMessage {...message} values={error.params} />
+      :
+        error.toString()
+      }
+    </Message>
+  );
+};
+
+export default connect(
+  (state: State) => ({
+    error: state.auth.error,
+  }),
+)(SignInError);

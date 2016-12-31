@@ -10,11 +10,11 @@ import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 import {
   Box,
-  Button,
+  Button as DefaultButton,
   Form,
   Heading,
   Input,
-  Text,
+  Message,
   focus,
 } from '../app/components';
 
@@ -37,6 +37,21 @@ const overrideWebkitYellowAutofill = {
   WebkitBoxShadow: 'inset 0 0 0px 9999px white',
 };
 
+const Button = ({ ...props }) => (
+  <DefaultButton
+    border
+    marginHorizontal={0.25}
+    {...props}
+  />
+);
+
+const Buttons = ({ ...props }) => (
+  <Box
+    marginHorizontal={-0.25}
+    {...props}
+  />
+);
+
 class Email extends React.Component {
 
   state: EmailState = {
@@ -52,6 +67,10 @@ class Email extends React.Component {
     }
   };
 
+  onSignInClick = () => {
+    this.signInViaPassword();
+  };
+
   onSignUpClick = () => {
     const { fields, signUp } = this.props;
     signUp('password', fields.$values());
@@ -60,6 +79,10 @@ class Email extends React.Component {
   onForgetPasswordClick = () => {
     const { forgetPasswordIsShown } = this.state;
     this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
+  };
+
+  onResetPasswordClick = () => {
+    this.resetPassword();
   };
 
   props: EmailProps;
@@ -88,7 +111,7 @@ class Email extends React.Component {
 
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <Heading marginTop={2} size={1}>
+        <Heading marginTop={2}>
           <FormattedMessage {...legendMessage} />
         </Heading>
         <Box>
@@ -112,33 +135,37 @@ class Email extends React.Component {
         </Box>
         {!forgetPasswordIsShown ?
           <Box>
-            <Button
-              disabled={disabled}
-            >
-              <FormattedMessage {...buttonsMessages.signIn} />
-            </Button>
-            <Button
-              disabled={disabled}
-              onClick={this.onSignUpClick}
-            >
-              <FormattedMessage {...buttonsMessages.signUp} />
-            </Button>
-            <Button
-              disabled={disabled}
-              onClick={this.onForgetPasswordClick}
-            >
-              <FormattedMessage {...emailMessages.passwordForgotten} />
-            </Button>
+            <Buttons>
+              <Button
+                disabled={disabled}
+                onClick={this.onSignInClick}
+              >
+                <FormattedMessage {...buttonsMessages.signIn} />
+              </Button>
+              <Button
+                disabled={disabled}
+                onClick={this.onSignUpClick}
+              >
+                <FormattedMessage {...buttonsMessages.signUp} />
+              </Button>
+              <Button
+                disabled={disabled}
+                onClick={this.onForgetPasswordClick}
+              >
+                <FormattedMessage {...emailMessages.passwordForgotten} />
+              </Button>
+            </Buttons>
             {recoveryEmailSent &&
-              <Text success>
+              <Message success marginTop={1}>
                 <FormattedMessage {...emailMessages.recoveryEmailSent} />
-              </Text>
+              </Message>
             }
           </Box>
         :
-          <Box>
+          <Buttons>
             <Button
               disabled={disabled}
+              onClick={this.onResetPasswordClick}
             >
               <FormattedMessage {...emailMessages.resetPassword} />
             </Button>
@@ -148,7 +175,7 @@ class Email extends React.Component {
             >
               <FormattedMessage {...buttonsMessages.dismiss} />
             </Button>
-          </Box>
+          </Buttons>
         }
       </Form>
     );
