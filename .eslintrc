@@ -20,7 +20,6 @@
     "import/no-duplicates": 2,
     "import/prefer-default-export": 0, // No. Actions can have just one action.
     "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
-    "no-class-assign": 0, // Class assign is used for higher order components.
     "no-confusing-arrow": 0, // This rule is super confusing.
     "no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848
     "no-nested-ternary": 0, // It's nice for JSX.
