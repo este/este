@@ -9,6 +9,7 @@ export { default as Image } from './Image';
 export { default as Input } from './Input';
 export { default as Link } from './Link';
 export { default as Loading } from './Loading';
+export { default as Message } from './Message';
 export { default as PageHeader } from './PageHeader';
 export { default as Paragraph } from './Paragraph';
 export { default as Pre } from './Pre';
