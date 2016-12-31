@@ -1,16 +1,20 @@
-//
-// import React from 'react';
-// import linksMessages from '../../common/app/linksMessages';
-// import { Block, Title, View } from '../app/components';
-// import { FormattedMessage } from 'react-intl';
-//
-// const SettingsPage = () => (
-//   <View>
-//     <Title message={linksMessages.settings} />
-//     <Block>
-//       <FormattedMessage {...linksMessages.settings} />
-//     </Block>
-//   </View>
-// );
-//
-// export default SettingsPage;
+// @flow
+import React from 'react';
+import linksMessages from '../../common/app/linksMessages';
+import { FormattedMessage } from 'react-intl';
+import {
+  Box,
+  Paragraph,
+  Title,
+} from '../app/components';
+
+const SettingsPage = () => (
+  <Box>
+    <Title message={linksMessages.settings} />
+    <Paragraph>
+      <FormattedMessage {...linksMessages.settings} />
+    </Paragraph>
+  </Box>
+);
+
+export default SettingsPage;

@@ -16,14 +16,14 @@ import { connect } from 'react-redux';
 
 // Pages
 import FieldsPage from '../fields/FieldsPage';
-import UsersPage from '../users/UsersPage';
 import HomePage from '../home/HomePage';
 import IntlPage from '../intl/IntlPage';
-// import MePage from '../me/MePage';
+import MePage from '../me/MePage';
 import NotFoundPage from '../notfound/NotFoundPage';
 import OfflinePage from '../offline/OfflinePage';
-// import SignInPage from '../auth/SignInPage';
+import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
+import UsersPage from '../users/UsersPage';
 
 type AppProps = {
   baselineShown: boolean,
@@ -32,7 +32,12 @@ type AppProps = {
   theme: Theme,
 };
 
-const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
+const App = ({
+  baselineShown,
+  currentLocale,
+  theme,
+  themeName,
+}: AppProps) => (
   <ThemeProvider
     key={themeName} // Enforce rerender.
     theme={theme}
@@ -51,7 +56,9 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           ...favicon.link,
           // To test vertical rhythm visually.
           ...(baselineShown ? [{
-            href: `http://basehold.it/${theme.typography.lineHeight}/0/0/0/0.05`, // for dev add /0.05
+            href: `http://basehold.it/${theme.typography.lineHeight}/0/0/0${
+              process.env.NODE_ENV === 'production' ? '' : '/0.05'
+            }`,
             rel: 'stylesheet',
           }] : []),
         ]}
@@ -66,8 +73,8 @@ const App = ({ baselineShown, currentLocale, theme, themeName }: AppProps) => (
           <Match pattern="/fields" component={FieldsPage} />
           <Match pattern="/intl" component={IntlPage} />
           <Match pattern="/offline" component={OfflinePage} />
-          {/*        <Match pattern="/signin" component={SignInPage} />
-            <Match authorized pattern="/me" component={MePage} />*/}
+          <Match pattern="/signin" component={SignInPage} />
+          <Match authorized pattern="/me" component={MePage} />
           <Miss component={NotFoundPage} />
         </Box>
         <Footer />
