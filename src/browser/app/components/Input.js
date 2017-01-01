@@ -6,7 +6,7 @@ import React from 'react';
 import Text from './Text';
 import styled from './styled';
 
-// Only HTML5 text inputs.
+// Only HTML5 text inputs. Checkbox and radio must be SVG to size scale.
 type InputTypes =
     'color'
   | 'date'
