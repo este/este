@@ -1,10 +1,28 @@
 // @flow
-import type { Styled, InputTypes } from '../themes/types';
+import type { Styled } from '../themes/types';
 import type { TextProps } from './Text';
 import Box from './Box';
 import React from 'react';
 import Text from './Text';
 import styled from './styled';
+
+// Only HTML5 text inputs.
+type InputTypes =
+    'color'
+  | 'date'
+  | 'datetime'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'month'
+  | 'password'
+  | 'search'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
+  ;
 
 export type InputProps = TextProps & {
   disabled?: boolean,
@@ -14,7 +32,7 @@ export type InputProps = TextProps & {
   maxLength?: number,
   name?: string,
   onChange?: (SyntheticEvent) => void,
-  placeholder?: string,
+  placeholder: string,
   rows?: number,
   type?: InputTypes,
   value?: string,
@@ -38,7 +56,7 @@ const enforceTextLook = {
   },
 };
 
-const create = (type, passProps = []) => styled((theme, {
+const create = (tag, passProps = []) => styled((theme, {
   disabled,
   rows,
 }) => ({
@@ -46,7 +64,7 @@ const create = (type, passProps = []) => styled((theme, {
   $map: enforceTextLook.map(rows),
   ...enforceTextLook.style,
   ...(disabled ? theme.states.disabled : null),
-}), type, [
+}), tag, [
   'disabled',
   'name',
   'onChange',
@@ -58,7 +76,9 @@ const create = (type, passProps = []) => styled((theme, {
 ]);
 
 const StyledInput = create('input');
-const StyledTextarea = create('textarea', ['rows']); // TODO: Autosize.
+// TODO: Auto size by default and maxRows.
+// github.com/callemall/material-ui/blob/master/src/TextField/EnhancedTextarea.js
+const StyledTextarea = create('textarea', ['rows']);
 
 const StyledInputOrTextArea: Styled<InputProps> = ({
   field,
@@ -80,6 +100,7 @@ const StyledInputOrTextArea: Styled<InputProps> = ({
 const Input: Styled<InputProps> = ({
   error,
   label,
+  placeholder,
   size = 0,
   ...props
 }) => (
@@ -89,14 +110,18 @@ const Input: Styled<InputProps> = ({
         {label}
       </Text>
     }
-    <StyledInputOrTextArea size={size} {...props} />
+    <StyledInputOrTextArea
+      placeholder={placeholder}
+      size={size}
+      {...props}
+    />
     <Text
       bold
       color="danger"
       display="block"
       size={size - 1}
     >
-      {error || '\u00A0'/* Because we need to reserve real fontSize height */}
+      {error || '\u00A0'/* Because we need to reserve real fontSize height. */}
     </Text>
   </Box>
 );

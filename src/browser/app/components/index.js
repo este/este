@@ -22,7 +22,7 @@ export { default as fxbml } from './fxbml';
 export { default as styled } from './styled';
 
 // For the inspiration, check:
-//  www.material-ui.com
+//  material-ui.com
 //  jxnblk.com/rebass
 //  vuetifyjs.com
 //  What else?
