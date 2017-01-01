@@ -73,7 +73,7 @@ export default compose(
       'description',
       'gender', // radios
       'likeCats', // checkbox
-      'likeDogs',// checkbox
+      'likeDogs', // checkbox
     ],
     getInitialState: () => ({
       // We can set initial state by props ofc.
