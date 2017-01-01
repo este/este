@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Sie haben Änderungen gemacht. Sind Sie sicher?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Erforderlich",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Fields",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Benutzer",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Aufgaben",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Benutzer",
   },
   {
     "id": "auth.email.emailLegend",

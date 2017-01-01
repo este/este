@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Você tem alterações não salvas. Você tem certeza?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Requeridos",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Campos",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Usuários",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Tarefas",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Usuários",
   },
   {
     "id": "auth.email.emailLegend",

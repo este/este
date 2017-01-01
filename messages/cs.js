@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Máte neuložené změny. Jste si jistý?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "{prop, select,\n      description {Prosím zadejte popis.}\n      email {Prosím zadejte email.}\n      name {Prosím zadejte jméno.}\n      password {Prosím zadejte heslo.}\n      other {Prosím vyplnit.}\n    }",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Fields",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Uživatelé",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Úkoly",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Uživatelé",
   },
   {
     "id": "auth.email.emailLegend",

@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Ai modificări nesalvate. Esti sigur?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Necesar",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Câmpuri",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Utilizatori",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Tasks",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Utilizatori",
   },
   {
     "id": "auth.email.emailLegend",
