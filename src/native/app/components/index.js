@@ -1,4 +1,6 @@
 /* @flow */
+// Remember, circular dependencies sucks. Never "import { foo } from './'".
+// TODO: Refactor by the browser design.
 import Alert from './Alert';
 import Button from './Button';
 import CenteredContainer from './CenteredContainer';

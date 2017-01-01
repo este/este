@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, TodosState } from '../types';
 import R from 'ramda';
 

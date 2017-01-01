@@ -20,6 +20,7 @@ GoogleAnalytics.propTypes = {
 
 type Props = {
   appCssFilename: string,
+  bodyCss: string,
   bodyHtml: string,
   googleAnalyticsId: string,
   helmet: Object,
@@ -28,6 +29,7 @@ type Props = {
 
 const Html = ({
   appCssFilename,
+  bodyCss,
   bodyHtml,
   googleAnalyticsId,
   helmet,
@@ -46,20 +48,10 @@ const Html = ({
       {isProduction && googleAnalyticsId !== 'UA-XXXXXXX-X' &&
         <GoogleAnalytics id={googleAnalyticsId} />
       }
+      <style dangerouslySetInnerHTML={{ __html: bodyCss }} id="stylesheet" />
     </head>
-    <body
-      dangerouslySetInnerHTML={{ __html: bodyHtml }}
-    />
+    <body dangerouslySetInnerHTML={{ __html: bodyHtml }} />
   </html>
 );
-
-// TODO: Use babel-plugin-flow-react-proptypes one day.
-Html.propTypes = {
-  appCssFilename: React.PropTypes.string,
-  bodyHtml: React.PropTypes.string.isRequired,
-  googleAnalyticsId: React.PropTypes.string.isRequired,
-  helmet: React.PropTypes.object.isRequired,
-  isProduction: React.PropTypes.bool.isRequired,
-};
 
 export default Html;

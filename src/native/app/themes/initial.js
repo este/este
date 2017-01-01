@@ -2,23 +2,6 @@
 import chroma from 'chroma-js';
 import { Platform } from 'react-native';
 
-/*
-Styling
-  facebook.github.io/react-native/docs/style.html
-  medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6
-  jxnblk.com/writing/posts/patterns-for-style-composition-in-react/
-
-Vocabulary
-  developer.apple.com/ios/human-interface-guidelines
-  developer.android.com/guide/practices/ui_guidelines
-  jxnblk.com/rebass
-
-Tips
-  Leverage theme.fontSize for responsive and rhythm sizing, check pxtoem.com
-
-TODO: In a long term, we need the universal github.com/jxnblk/rebass
-*/
-
 export default {
   fontSize: Platform.select({
     android: 18,

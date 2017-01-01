@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, UsersState } from '../types';
 import R from 'ramda';
 import createUserFirebase from './createUserFirebase';

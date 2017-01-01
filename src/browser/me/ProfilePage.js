@@ -1,16 +1,20 @@
-/* @flow */
+// @flow
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
-import { Block, Title, View } from '../app/components';
+import {
+  Box,
+  Paragraph,
+  Title,
+} from '../app/components';
 
 const ProfilePage = () => (
-  <View>
+  <Box>
     <Title message={linksMessages.profile} />
-    <Block>
+    <Paragraph>
       <FormattedMessage {...linksMessages.profile} />
-    </Block>
-  </View>
+    </Paragraph>
+  </Box>
 );
 
 export default ProfilePage;

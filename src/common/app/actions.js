@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';
@@ -32,9 +32,13 @@ export const appStop = (): Action => ({
   type: 'APP_STOP',
 });
 
-export const appStorageLoaded = (state: Object): Action => ({
-  type: 'APP_STORAGE_LOADED',
-  payload: { state },
+export const toggleBaseline = (): Action => ({
+  type: 'TOGGLE_BASELINE',
+});
+
+export const setTheme = (theme: string): Action => ({
+  type: 'SET_THEME',
+  payload: { theme },
 });
 
 // TODO: Observable type.

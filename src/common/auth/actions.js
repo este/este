@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, Deps } from '../types';
 import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';

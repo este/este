@@ -1,36 +1,50 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import React from 'react';
-import { Button, View } from '../app/components';
+import compose from 'ramda/src/compose';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
+import {
+  Box,
+  Button,
+} from '../app/components';
 
-const SwitchLocale = ({ currentLocale, locales, setCurrentLocale }) => (
-  <View>
+type SwitchLocaleProps = {
+  currentLocale: string,
+  locales: Array<string>,
+  setCurrentLocale: typeof setCurrentLocale,
+};
+
+const SwitchLocale = ({
+  currentLocale,
+  locales,
+  setCurrentLocale,
+}: SwitchLocaleProps) => (
+  <Box
+    marginBottom={1}
+    marginHorizontal={-0.25}
+  >
     {locales.map(locale =>
       <Button
+        active={locale === currentLocale}
+        display="inline-block"
         key={locale}
-        mb={1}
-        mr={1}
+        marginHorizontal={0.25}
         onClick={() => setCurrentLocale(locale)}
-        theme={locale === currentLocale ? 'primary' : 'secondary'}
+        primary
       >
         {locale}
       </Button>,
     )}
-  </View>
+  </Box>
 );
 
-SwitchLocale.propTypes = {
-  currentLocale: React.PropTypes.string.isRequired,
-  locales: React.PropTypes.arrayOf(React.PropTypes.string),
-  setCurrentLocale: React.PropTypes.func.isRequired,
-};
-
-export default connect(
-  (state: State) => ({
-    currentLocale: state.intl.currentLocale,
-    locales: state.intl.locales,
-  }),
-  { setCurrentLocale },
+export default compose(
+  connect(
+    (state: State) => ({
+      currentLocale: state.intl.currentLocale,
+      locales: state.intl.locales,
+    }),
+    { setCurrentLocale },
+  ),
 )(SwitchLocale);

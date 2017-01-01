@@ -26,11 +26,11 @@ export default [
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Authentification",
+    "defaultMessage": "Connexion",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Connexion",
+    "defaultMessage": "Authentification",
   },
   {
     "id": "app.buttons.signOut",
@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Vous avez effectué des modifications. Etes-vous sûr ?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Obligatoire",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Fields",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Utilisateurs",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Tâches",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Utilisateurs",
   },
   {
     "id": "auth.email.emailLegend",

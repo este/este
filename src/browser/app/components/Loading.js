@@ -1,7 +1,9 @@
-/* @flow */
+// @flow
+import type { TextProps } from './Text';
 import React from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
-import { Title, View } from './';
+import Text from './Text';
+import Title from './Title';
+import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
   loadingText: {
@@ -14,13 +16,17 @@ const messages = defineMessages({
   },
 });
 
-type State = {
-  currentText: ?Object,
+type LoadingProps = TextProps & {
+  intl: $IntlShape,
 };
 
-class Loading extends React.Component {
+type LoadingState = {|
+  currentText: ?Object,
+|};
 
-  state: State = {
+// TODO: Should be stateless component with lifted state. Recompose?
+class Loading extends React.Component {
+  state: LoadingState = {
     currentText: null,
   };
 
@@ -41,29 +47,24 @@ class Loading extends React.Component {
 
   timer: number;
   longTimer: number;
+  props: LoadingProps;
 
   render() {
     const { currentText } = this.state;
     if (!currentText) return null;
-    const { children } = this.props;
+    const {
+      intl,
+      display = 'block',
+      ...props
+    } = this.props;
 
     return (
-      <View>
+      <Text display={display} {...props}>
         <Title message={currentText} />
-        <FormattedMessage {...currentText}>
-          {children}
-        </FormattedMessage>
-      </View>
+        {intl.formatMessage(currentText)}...
+      </Text>
     );
   }
-
 }
 
-Loading.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.func,
-    React.PropTypes.node,
-  ]),
-};
-
-export default Loading;
+export default injectIntl(Loading);

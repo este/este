@@ -14,26 +14,27 @@
   },
   "rules": {
     // Soft some rules.
+    "arrow-parens": 0, // Does not work with Flow generic types.
     "global-require": 0, // Used by webpack-isomorphic-tools and React Native.
-    "no-class-assign": 0, // Class assign is used for higher order components.
+    "import/first": 0, // Este sorts by atom/sort-lines natural order.
+    "import/no-duplicates": 2,
+    "import/prefer-default-export": 0, // No. Actions can have just one action.
+    "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
+    "no-confusing-arrow": 0, // This rule is super confusing.
+    "no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848
     "no-nested-ternary": 0, // It's nice for JSX.
     "no-param-reassign": 0, // We love param reassignment. Naming is hard.
     "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
-    "import/first": 0, // Este sorts by atom/sort-lines natural order.
-    "react/jsx-filename-extension": 0, // No, JSX belongs to .js files
-    "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
-    "no-confusing-arrow": 0, // This rule is super confusing.
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
-    "react/no-unused-prop-types": 0, // Este is going to use Flow types.
+    "react/jsx-filename-extension": 0, // No, JSX belongs to .js files
     "react/jsx-indent": 0, // Damn. We need Yarn asap.
-    "import/prefer-default-export": 0, // No. Actions can have just one action.
-    "no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848
-    "import/no-duplicates": 2,
+    "react/no-unused-prop-types": 0, // Este is going to use Flow types.
+    "react/prop-types": 0, // Can't detect flowtype correctly.
     // React Native.
+    "react-native/no-color-literals": 2,
+    "react-native/no-inline-styles": 2,
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
-    "react-native/no-inline-styles": 2,
-    "react-native/no-color-literals": 2,
     // Rules for functional programming. We do not need Object.freeze.
     "fp/no-mutating-assign": 2
     // TODO: Can't be enabled now, it requires a lot of refactoring.

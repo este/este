@@ -1,6 +1,6 @@
-/* @flow */
+// @flow
 import React from 'react';
-import { Footer, Link } from '../app/components';
+import { Box, Text, Link } from './components';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -10,14 +10,20 @@ const messages = defineMessages({
   },
 });
 
-const AppFooter = () => (
-  <Footer>
-    <FormattedMessage {...messages.madeByHtml} />
+const Footer = () => (
+  <Box
+    border="top"
+    marginTop={1}
+    paddingVertical={1}
+  >
+    <Text size={-1}>
+      <FormattedMessage {...messages.madeByHtml} />
+    </Text>
     {'\u00a0'}
-    <Link to="https://twitter.com/steida">
+    <Link size={-1} to="https://twitter.com/steida">
       steida
     </Link>
-  </Footer>
+  </Box>
 );
 
-export default AppFooter;
+export default Footer;

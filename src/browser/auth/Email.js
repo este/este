@@ -1,41 +1,60 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import emailMessages from '../../common/auth/emailMessages';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 import {
-  ButtonOutline as Button,
+  Box,
+  Button as DefaultButton,
   Form,
+  Heading,
   Input,
   Message,
-  Panel,
-  PanelHeader,
-  Space,
-  View,
   focus,
 } from '../app/components';
 
-type LocalState = {
+type EmailState = {
   forgetPasswordIsShown: boolean,
   recoveryEmailSent: boolean,
 };
 
+type EmailProps = {
+  disabled: boolean,
+  fields: any,
+  intl: $IntlShape,
+  resetPassword: typeof resetPassword,
+  signIn: typeof signIn,
+  signUp: typeof signUp,
+};
+
+// blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
+const overrideWebkitYellowAutofill = {
+  WebkitBoxShadow: 'inset 0 0 0px 9999px white',
+};
+
+const Button = ({ ...props }) => (
+  <DefaultButton
+    border
+    marginHorizontal={0.25}
+    {...props}
+  />
+);
+
+const Buttons = ({ ...props }) => (
+  <Box
+    marginHorizontal={-0.25}
+    {...props}
+  />
+);
+
 class Email extends React.Component {
 
-  static propTypes = {
-    disabled: React.PropTypes.bool.isRequired,
-    fields: React.PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
-    resetPassword: React.PropTypes.func.isRequired,
-    signIn: React.PropTypes.func.isRequired,
-    signUp: React.PropTypes.func.isRequired,
-  };
-
-  state: LocalState = {
+  state: EmailState = {
     forgetPasswordIsShown: false,
     recoveryEmailSent: false,
   };
@@ -48,6 +67,10 @@ class Email extends React.Component {
     }
   };
 
+  onSignInClick = () => {
+    this.signInViaPassword();
+  };
+
   onSignUpClick = () => {
     const { fields, signUp } = this.props;
     signUp('password', fields.$values());
@@ -57,6 +80,12 @@ class Email extends React.Component {
     const { forgetPasswordIsShown } = this.state;
     this.setState({ forgetPasswordIsShown: !forgetPasswordIsShown });
   };
+
+  onResetPasswordClick = () => {
+    this.resetPassword();
+  };
+
+  props: EmailProps;
 
   resetPassword() {
     const { fields, resetPassword } = this.props;
@@ -74,98 +103,98 @@ class Email extends React.Component {
   }
 
   render() {
-    const { disabled, fields, intl } = this.props;
     const { forgetPasswordIsShown, recoveryEmailSent } = this.state;
     const legendMessage = forgetPasswordIsShown
       ? emailMessages.passwordRecoveryLegend
       : emailMessages.emailLegend;
+    const { disabled, fields, intl } = this.props;
 
     return (
-      <Form onSubmit={this.onFormSubmit} small>
-        <Panel theme="primary">
-          <PanelHeader>
-            <FormattedMessage {...legendMessage} />
-          </PanelHeader>
+      <Form onSubmit={this.onFormSubmit}>
+        <Heading marginTop={2}>
+          <FormattedMessage {...legendMessage} />
+        </Heading>
+        <Box>
           <Input
-            {...fields.email}
             disabled={disabled}
-            label=""
+            field={fields.email}
             maxLength={100}
             placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
+            size={1}
+            style={overrideWebkitYellowAutofill}
           />
-          {!forgetPasswordIsShown &&
-            <Input
-              {...fields.password}
-              disabled={disabled}
-              label=""
-              maxLength={1000}
-              placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
-              type="password"
-            />
-          }
-          {!forgetPasswordIsShown ?
-            <View>
-              <Button disabled={disabled}>
+          <Input
+            disabled={forgetPasswordIsShown || disabled}
+            field={fields.password}
+            maxLength={1000}
+            placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
+            size={1}
+            style={overrideWebkitYellowAutofill}
+            type="password"
+          />
+        </Box>
+        {!forgetPasswordIsShown ?
+          <Box>
+            <Buttons>
+              <Button
+                disabled={disabled}
+                onClick={this.onSignInClick}
+              >
                 <FormattedMessage {...buttonsMessages.signIn} />
               </Button>
-              <Space />
               <Button
                 disabled={disabled}
                 onClick={this.onSignUpClick}
-                type="button"
               >
                 <FormattedMessage {...buttonsMessages.signUp} />
               </Button>
-              <Space />
               <Button
                 disabled={disabled}
                 onClick={this.onForgetPasswordClick}
-                type="button"
               >
                 <FormattedMessage {...emailMessages.passwordForgotten} />
               </Button>
-              {recoveryEmailSent &&
-                <Message>
-                  <FormattedMessage {...emailMessages.recoveryEmailSent} />
-                </Message>
-              }
-            </View>
-          :
-            <View>
-              <Button disabled={disabled}>
-                <FormattedMessage {...emailMessages.resetPassword} />
-              </Button>
-              <Space />
-              <Button
-                disabled={disabled}
-                onClick={this.onForgetPasswordClick}
-                type="button"
-              >
-                <FormattedMessage {...buttonsMessages.dismiss} />
-              </Button>
-            </View>
-          }
-        </Panel>
+            </Buttons>
+            {recoveryEmailSent &&
+              <Message success marginTop={1}>
+                <FormattedMessage {...emailMessages.recoveryEmailSent} />
+              </Message>
+            }
+          </Box>
+        :
+          <Buttons>
+            <Button
+              disabled={disabled}
+              onClick={this.onResetPasswordClick}
+            >
+              <FormattedMessage {...emailMessages.resetPassword} />
+            </Button>
+            <Button
+              disabled={disabled}
+              onClick={this.onForgetPasswordClick}
+            >
+              <FormattedMessage {...buttonsMessages.dismiss} />
+            </Button>
+          </Buttons>
+        }
       </Form>
     );
   }
 
 }
 
-Email = focus(Email, 'error');
-
-Email = injectIntl(Email);
-
-Email = fields({
-  path: ['auth', 'email'],
-  // fok: 123,
-  fields: ['email', 'password'],
-})(Email);
-
-export default connect(
-  (state: State) => ({
-    disabled: state.auth.formDisabled,
-    error: state.auth.error,
+export default compose(
+  connect(
+    (state: State) => ({
+      disabled: state.auth.formDisabled,
+      error: state.auth.error,
+    }),
+    { resetPassword, signIn, signUp },
+  ),
+  injectIntl,
+  fields({
+    path: ['auth', 'email'],
+    fields: ['email', 'password'],
   }),
-  { resetPassword, signIn, signUp },
+  focus('error'),
 )(Email);

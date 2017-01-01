@@ -4,6 +4,5 @@
     "authDomain": "...",
     "databaseURL": "...",
     "storageBucket": "..."
-  },
-  "remoteHotReload": true
+  }
 }

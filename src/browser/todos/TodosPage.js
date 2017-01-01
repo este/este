@@ -1,24 +1,23 @@
-/* @flow */
+// @flow
 import Buttons from './Buttons';
 import NewTodo from './NewTodo';
 import React from 'react';
 import Todos from './Todos';
 import linksMessages from '../../common/app/linksMessages';
-import { PageHeader, Title, View } from '../app/components';
-import { injectIntl, intlShape } from 'react-intl';
+import { Box, PageHeader, Title } from '../app/components';
+import { FormattedMessage } from 'react-intl';
 
-const TodosPage = ({ intl }) => (
-  <View>
+const TodosPage = () => (
+  <Box>
     <Title message={linksMessages.todos} />
-    <PageHeader heading={intl.formatMessage(linksMessages.todos)} />
+    {/* This ugly wrapping syntax will be unneccessary with React fiber soon */}
+    <FormattedMessage {...linksMessages.todos}>
+      {message => <PageHeader heading={message} />}
+    </FormattedMessage>
     <NewTodo />
     <Todos />
     <Buttons />
-  </View>
+  </Box>
 );
 
-TodosPage.propTypes = {
-  intl: intlShape,
-};
-
-export default injectIntl(TodosPage);
+export default TodosPage;

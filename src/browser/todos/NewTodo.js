@@ -1,41 +1,39 @@
-/* @flow */
-import R from 'ramda';
+// @flow
 import React from 'react';
+import compose from 'ramda/src/compose';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import { Input, Form } from '../app/components';
+import { Form, Input } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
-const NewTodo = ({ addTodo, fields, intl }) => {
-  const onInputKeyDown = (event) => {
-    if (event.key !== 'Enter') return;
-    if (!fields.title.value.trim()) return;
-    addTodo(fields.title.value);
-    fields.$reset();
-  };
+type NewTodoProps = {|
+  addTodo: typeof addTodo,
+  fields: any,
+  intl: $IntlShape,
+|};
 
-  return (
-    <Form small>
-      <Input
-        {...fields.title}
-        label=""
-        maxLength={100}
-        onKeyDown={onInputKeyDown}
-        placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-      />
-    </Form>
-  );
-};
+const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
+  <Form
+    onSubmit={() => {
+      const title = fields.title.value.trim();
+      if (!title) return;
+      addTodo(title);
+      fields.$reset();
+    }}
+  >
+    <Input
+      field={fields.title}
+      maxLength={100}
+      label={intl.formatMessage(newTodoMessages.placeholder)}
+      placeholder="..."
+      size={2}
+    />
+  </Form>
+);
 
-NewTodo.propTypes = {
-  addTodo: React.PropTypes.func.isRequired,
-  fields: React.PropTypes.object.isRequired,
-  intl: intlShape.isRequired,
-};
-
-export default R.compose(
+export default compose(
   connect(
     null,
     { addTodo },

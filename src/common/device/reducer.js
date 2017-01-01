@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { DeviceState } from '../types';
 
 const initialState = {

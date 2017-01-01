@@ -1,75 +1,59 @@
-/* @flow */
-import type { State } from '../../common/types';
-import Gravatar from 'react-gravatar';
-import R from 'ramda';
+// @flow
+import type { State, User } from '../../common/types';
 import React from 'react';
-import { Image, Loading, Text, View } from '../app/components';
+import compose from 'ramda/src/compose';
+import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
 import { connect } from 'react-redux';
 import { firebase } from '../../common/lib/redux-firebase';
 import { onUsersPresence } from '../../common/users/actions';
+import {
+  Box,
+  Image,
+  Loading,
+  Text,
+} from '../app/components';
 
-const styles = {
-  user: {
-    display: 'inline-block',
-  },
-  gravatar: {
-    borderRadius: '25%',
-    margin: '.5em',
-    maxHeight: 50,
-  },
+type OnlineUserProps = {
+  user: User,
 };
 
-const User = ({ user }) => (
-  <View style={styles.user}>
-    {user.photoURL ?
-      <Image
-        role="presentation"
-        src={user.photoURL}
-        style={styles.gravatar}
-        title={user.displayName}
-      />
-    :
-      <Gravatar
-        default="retro"
-        email={user.displayName} // For users signed in via email.
-        rating="x"
-        style={styles.gravatar}
-        title={user.displayName}
-      />
-    }
-  </View>
+const OnlineUser = ({ user }: OnlineUserProps) => (
+  <Box marginHorizontal={0.25}>
+    <Image
+      src={getUserPhotoUrl(user)}
+      height={50}
+      width={50}
+      title={user.displayName}
+    />
+  </Box>
 );
 
-User.propTypes = {
-  user: React.PropTypes.object.isRequired,
-};
+type OnlineUsersProps = {|
+  onUsersPresence: typeof onUsersPresence,
+  users: Array<User>,
+|};
 
-const OnlineUsers = ({ users }) => (
-  <View>
-    { users === undefined ?
-      <Loading />
-    : users === null ?
-      <Text>No one is online.</Text>
-    :
-      users.map(user =>
-        <User key={user.id} user={user} />,
-      )
-    }
-  </View>
+const OnlineUsers = ({ users }: OnlineUsersProps) => (
+  users === undefined ?
+    <Loading />
+  : users === null ?
+    <Text>No one is online.</Text>
+  :
+    <Box display="flex" flexWrap="wrap" marginHorizontal={-0.25}>
+      {users.map(user =>
+        <OnlineUser key={user.id} user={user} />,
+      )}
+    </Box>
 );
 
-OnlineUsers.propTypes = {
-  users: React.PropTypes.array,
-};
-
-export default R.compose(
+export default compose(
   connect(
     (state: State) => ({
       users: state.users.online,
     }),
     { onUsersPresence },
   ),
-  firebase((database, props) => {
+  firebase((database, props: OnlineUsersProps) => {
     const usersPresenceRef = database.child('users-presence');
     return [
       [usersPresenceRef, 'on', 'value', props.onUsersPresence],

@@ -1,41 +1,52 @@
-/* @flow */
+// @flow
 import type { State } from '../../../common/types';
-import * as themes from '../themes';
+import * as themes from '../../app/themes';
 import React from 'react';
-import { Button, View } from './';
+import compose from 'ramda/src/compose';
+import { Box, Button, Heading } from '../../app/components';
 import { connect } from 'react-redux';
-import { setTheme } from '../../../common/themes/actions';
+import { setTheme } from '../../../common/app/actions';
 
-const getSortedThemeKeys = () => {
-  const customThemesKeys = Object.keys(themes)
-    .filter(key => key !== 'initial')
-    .sort();
-  return ['initial', ...customThemesKeys];
+type SwitchThemeProps = {
+  currentTheme: string,
+  setTheme: typeof setTheme,
 };
 
-const SwitchTheme = ({ currentTheme, setTheme }) => (
-  <View>
-    {getSortedThemeKeys().map(themeKey =>
-      <Button
-        key={themeKey}
-        mr={1}
-        onClick={() => setTheme(themeKey)}
-        theme={themeKey === currentTheme ? 'primary' : 'secondary'}
-      >
-        {themeKey} theme
-      </Button>,
-    )}
-  </View>
+const themesNames = [
+  'defaultTheme',
+  ...Object
+    .keys(themes)
+    .filter(key => key !== 'defaultTheme')
+    .sort(),
+];
+
+const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
+  <Box marginBottom={1.5}>
+    <Heading marginBottom={0.5}>
+      Switch Theme
+    </Heading>
+    <Box marginHorizontal={-0.25}>
+      {themesNames.map(themeName => (
+        <Button
+          primary
+          size={-1}
+          active={themeName === currentTheme}
+          key={themeName}
+          marginHorizontal={0.25}
+          onClick={() => setTheme(themeName)}
+        >
+          {themeName.replace('Theme', '')}
+        </Button>
+      ))}
+    </Box>
+  </Box>
 );
 
-SwitchTheme.propTypes = {
-  currentTheme: React.PropTypes.string,
-  setTheme: React.PropTypes.func.isRequired,
-};
-
-export default connect(
-  (state: State) => ({
-    currentTheme: state.themes.currentTheme || 'initial',
-  }),
-  { setTheme },
+export default compose(
+  connect(
+    (state: State) => ({
+      currentTheme: state.app.currentTheme,
+    }),
+    { setTheme },
+  ),
 )(SwitchTheme);

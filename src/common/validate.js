@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import { Validation, ValidationError } from './lib/validation';
 
 class AppValidation extends Validation {

@@ -1,5 +1,5 @@
-// flow-typed signature: 2741ab8bb4b6e3eaba6543ef6a55e131
-// flow-typed version: ce740e088d/uuid_v2.x.x/flow_>=v0.33.x
+// flow-typed signature: c07f382c8238bb78e545b60dd4f097a6
+// flow-typed version: 27f92307d3/uuid_v3.x.x/flow_>=v0.33.x
 
 declare module 'uuid' {
   declare function v1(options?: {|
@@ -10,8 +10,6 @@ declare module 'uuid' {
   |}, buffer?: number[] | Buffer, offset?: number): string;
   declare function v4(options?: {|
     random?: number[],
-    rng?: Function,
+    rng?: () => number[] | Buffer,
   |}, buffer?: number[] | Buffer, offset?: number): string;
-  declare function parse(id: string, buffer?: number[] | Buffer, offset?: number): Buffer;
-  declare function unparse(buffer?: number[] | Buffer, offset?: number): string;
 }

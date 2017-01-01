@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
@@ -45,14 +45,12 @@ const start = (WrappedComponent: Function) => {
 
   }
 
-  Start = connect(
+  return connect(
     (state: State) => ({
       intl: state.intl,
     }),
     { appStart, appStop },
   )(Start);
-
-  return Start;
 };
 
 

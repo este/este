@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { Action, AuthState } from '../types';
 
 const initialState = {

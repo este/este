@@ -1,3 +1,3 @@
-/* @flow */
-export { default as custom } from './custom';
-export { default as initial } from './initial';
+// @flow
+export { default as customTheme } from './customTheme';
+export { default as defaultTheme } from './defaultTheme';

@@ -53,16 +53,8 @@ export default [
     "defaultMessage": "Hay cambios sin guardar. ¿Estás seguro?",
   },
   {
-    "id": "app.FieldError.required",
-    "defaultMessage": "Necesario",
-  },
-  {
     "id": "app.links.fields",
     "defaultMessage": "Campos",
-  },
-  {
-    "id": "app.links.users",
-    "defaultMessage": "Usuarios",
   },
   {
     "id": "app.links.home",
@@ -99,6 +91,10 @@ export default [
   {
     "id": "app.links.todos",
     "defaultMessage": "Tareas",
+  },
+  {
+    "id": "app.links.users",
+    "defaultMessage": "Usuarios",
   },
   {
     "id": "auth.email.emailLegend",
