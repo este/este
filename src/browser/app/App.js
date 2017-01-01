@@ -1,4 +1,6 @@
 // @flow
+import type { State } from '../../common/types';
+import type { Theme } from './themes/types';
 import * as themes from './themes';
 import Footer from './Footer';
 import Header from './Header';
@@ -6,8 +8,6 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import type { State } from '../../common/types';
-import type { Theme } from './themes/types';
 import { Box, Container, ThemeProvider } from './components';
 import { Match } from '../../common/app/components';
 import { Miss } from 'react-router';
@@ -57,7 +57,7 @@ const App = ({
           // To test vertical rhythm visually.
           ...(baselineShown ? [{
             href: `http://basehold.it/${theme.typography.lineHeight}/0/0/0${
-              process.env.NODE_ENV === 'production' ? '' : '/0.05'
+              process.env.NODE_ENV === 'production' ? '' : '/0.1'
             }`,
             rel: 'stylesheet',
           }] : []),

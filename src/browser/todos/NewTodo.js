@@ -26,8 +26,9 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
     <Input
       field={fields.title}
       maxLength={100}
-      placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-      size={1}
+      label={intl.formatMessage(newTodoMessages.placeholder)}
+      placeholder="..."
+      size={2}
     />
   </Form>
 );
