@@ -12,6 +12,8 @@ type ToggleBaselineProps = {
   toggleBaseline: typeof toggleBaseline,
 };
 
+// Test vertical rhythm visually. Inspired by basehold.it
+
 const ToggleBaseline = ({ baselineShown, toggleBaseline }: ToggleBaselineProps) => (
   <Box>
     <Button

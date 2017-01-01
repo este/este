@@ -1,5 +1,6 @@
 // @flow
 export { ThemeProvider } from 'react-fela';
+export { default as Baseline } from './Baseline';
 export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Container } from './Container';
