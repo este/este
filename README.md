@@ -17,18 +17,17 @@
 
 ## Techniques
 
-- Universal architecture
+- universal architecture with immutable app state
   - code shared across platforms (browser, server, native mobile)
   - server side rendering or server-less pre-rendering to HTML files
   - universal internationalization
   - universal crash reporting
   - universal data fetching
   - universal forms with universal validation
-  - universal ftw
-- Immutable app state
-- Stateless functional UI components with JavaScript styles
-- Flowtype
-- Vanilla hot reloading makes everything hot reloadable
+  - universal components with universal styles (soon!)
+- stateless functional UI with dynamic typed styles
+- flowtype FTW
+- vanilla hot reloading makes everything hot reloadable
 - [Firebase](https://firebase.google.com/) integration ([este.firebaseapp.com](https://este.firebaseapp.com))
   - email and facebook login
   - declarative queryFirebase higher order component for Firebase imperative API
@@ -44,7 +43,6 @@
 - [formatjs](http://formatjs.io/)
 - [jest](https://facebook.github.io/jest/) Painless JavaScript Testing.
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
-- [rebass](https://github.com/jxnblk/rebass) Configurable React Stateless Functional UI Components
 - And much more. Explore the repository.
 
 ## Prerequisites
