@@ -1,4 +1,4 @@
-// flow-typed signature: a7dac15d1afe6c0cf19401fec4ea8916
+// flow-typed signature: e2acd8e98ea91f11fe0383391de225b2
 // flow-typed version: <<STUB>>/sinon_v^1.17.2/flow_v0.35.0
 
 /**
@@ -134,11 +134,11 @@ declare module 'sinon/lib/sinon/walk' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-1.17.6' {
+declare module 'sinon/pkg/sinon-1.17.7' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-ie-1.17.6' {
+declare module 'sinon/pkg/sinon-ie-1.17.7' {
   declare module.exports: any;
 }
 
@@ -146,7 +146,7 @@ declare module 'sinon/pkg/sinon-ie' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-server-1.17.6' {
+declare module 'sinon/pkg/sinon-server-1.17.7' {
   declare module.exports: any;
 }
 
@@ -243,17 +243,17 @@ declare module 'sinon/lib/sinon/util/xhr_ie.js' {
 declare module 'sinon/lib/sinon/walk.js' {
   declare module.exports: $Exports<'sinon/lib/sinon/walk'>;
 }
-declare module 'sinon/pkg/sinon-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-1.17.6'>;
+declare module 'sinon/pkg/sinon-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-1.17.7'>;
 }
-declare module 'sinon/pkg/sinon-ie-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-ie-1.17.6'>;
+declare module 'sinon/pkg/sinon-ie-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-ie-1.17.7'>;
 }
 declare module 'sinon/pkg/sinon-ie.js' {
   declare module.exports: $Exports<'sinon/pkg/sinon-ie'>;
 }
-declare module 'sinon/pkg/sinon-server-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-server-1.17.6'>;
+declare module 'sinon/pkg/sinon-server-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-server-1.17.7'>;
 }
 declare module 'sinon/pkg/sinon-server.js' {
   declare module.exports: $Exports<'sinon/pkg/sinon-server'>;

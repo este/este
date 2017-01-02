@@ -1,5 +1,5 @@
-// flow-typed signature: ad5f5c404d7e7026ea5b28412235dd5c
-// flow-typed version: c17c09b83f/jest_v17.x.x/flow_>=v0.33.x
+// flow-typed signature: f9adc1fe5500052e55205636d0f376a7
+// flow-typed version: c17c09b83f/jest_v18.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -195,13 +195,21 @@ type JestExpectType = {
    */
   toHaveLength(number: number): void,
   /**
+   *
+   */
+  toHaveProperty(propPath: string, value?: any): void,
+  /**
    * Use .toMatch to check that a string matches a regular expression.
    */
   toMatch(regexp: RegExp): void,
   /**
+   * Use .toMatchObject to check that a javascript object matches a subset of the properties of an object.
+   */
+  toMatchObject(object: Object): void,
+  /**
    * This ensures that a React component matches the most recent snapshot.
    */
-  toMatchSnapshot(): void,
+  toMatchSnapshot(name?: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
    */
@@ -400,6 +408,12 @@ declare var expect: {
   (value: any): JestExpectType,
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: {[name:string]: JestMatcher}): void,
+  assertions(expectedAssertions: number): void,
+  any(value: mixed): JestAsymmetricEqualityType,
+  anything(): void,
+  arrayContaining(value: Array<mixed>): void,
+  objectContaining(value: Object): void,
+  stringMatching(value: string): void,
 };
 
 // TODO handle return type
