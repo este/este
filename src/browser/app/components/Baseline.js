@@ -2,26 +2,10 @@
 import type { State } from '../../../common/types';
 import Box from './Box';
 import React from 'react';
-import { compose, times } from 'ramda';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
 // Test vertical rhythm visually. Inspired by basehold.it
-// We can't use original basehold.it, because it's http and browser only.
-
-const lineStyle = (lineHeight, count) => ({
-  borderTop: 'dotted 1px rgba(0, 0, 0, 0.2)',
-  height: '1px',
-  left: 0,
-  pointerEvents: 'none',
-  position: 'absolute',
-  right: 0,
-  top: `${(lineHeight * count) - 1}px`,
-  zIndex: 9999,
-});
-
-const Line = ({ lineHeight, count }) => (
-  <Box style={lineStyle(lineHeight, count)} />
-);
 
 type BaselineProps = {|
   baselineShown: boolean,
@@ -29,15 +13,29 @@ type BaselineProps = {|
   lineHeight: number,
 |};
 
+const styles = {
+  box: {
+    position: 'relative',
+  },
+  baseline: lineHeight => ({
+    backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px)',
+    backgroundSize: `auto ${lineHeight}px`,
+    bottom: 0,
+    left: 0,
+    marginTop: '-1px',
+    pointerEvents: 'none',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 9999,
+  }),
+};
+
 const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
-  <Box>
+  <Box style={styles.box}>
     {children}
     {baselineShown &&
-      <Box>
-        {times(count =>
-          <Line lineHeight={lineHeight} count={count} />
-        , 100)}
-      </Box>
+      <Box style={styles.baseline(lineHeight)} />
     }
   </Box>
 );
