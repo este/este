@@ -9,6 +9,7 @@ type ButtonProps = TextProps & {
   active?: boolean,
   disabled?: boolean,
   inline?: boolean,
+  noOutline?: boolean,
   onClick?: (e: SyntheticMouseEvent) => any,
 };
 
@@ -40,6 +41,7 @@ const Button: Styled<ButtonProps> = styled((theme, {
   disabled,
   display = 'inline-block',
   inline,
+  noOutline = false,
   paddingHorizontal = 0.8,
   size = 0,
   transform = 'capitalize',
@@ -56,7 +58,9 @@ const Button: Styled<ButtonProps> = styled((theme, {
     return activeStyle(style, theme.states.active);
   },
   userSelect: 'none', // Because button is rendered as a div in the browser.
+  pointerEvents: disabled ? 'none' : 'auto', // Ignore events when disabled.
   ...(disabled ? theme.states.disabled : null),
+  ...(noOutline ? { outline: 'none' } : null),
 }), 'button', [
   'disabled',
   'onClick',

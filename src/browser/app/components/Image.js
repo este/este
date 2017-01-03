@@ -32,6 +32,7 @@ const Image: Styled<ImageProps> = styled((theme, {
   width,
 }) => ({
   display: 'block',
+  // Waiting for Edge caniuse.com/#search=object-fit
   ...verticalRhythmSize(height, width, theme.typography.lineHeight),
 }), 'img', ['alt', 'src', 'title']);
 

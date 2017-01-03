@@ -62,10 +62,8 @@ export type Theme = {|
   paragraph: {|
     marginBottom: number,
   |},
-  input: {|
-    // border: string,
-    // borderError: string,
-  |},
+  // input: {| In case someone needs that.
+  // |},
 |};
 
 // Spread on flow exact types doesn't work, but we can use Strict type.

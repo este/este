@@ -8,6 +8,7 @@ import { fields } from '../../common/lib/redux-fields';
 import {
   Box,
   Button,
+  Checkbox,
   Form,
   Input,
   PageHeader,
@@ -22,6 +23,7 @@ const FieldsPage = ({ fields }) => {
     alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
     fields.$reset();
     // To see how to handle form validation and IO, check /auth.
+    // Simulate disabled.
   };
 
   return (
@@ -50,16 +52,31 @@ const FieldsPage = ({ fields }) => {
           placeholder="Some short description"
           rows={2}
         />
+        <Box marginBottom={1}>
+          <Checkbox
+            field={fields.likeDogs}
+            label="I like dogs"
+          />
+          <Checkbox
+            color="success"
+            field={fields.likeCats}
+            label="I like cats (no bias)"
+            size={2}
+          />
+        </Box>
         {/* TODO:
           <Radio checked={fields.gender.value === 'female'}
           <Checkbox checked={fields.likeCats.value}
         */}
-        <Button onClick={onSubmit} primary>
+        {/* <svg viewBox="0 0 10px 10px">
+          <circle cx={50} cy={50} r={10} fill="red" />
+        </svg> */}
+        <Button primary onClick={onSubmit}>
           <FormattedMessage {...buttonsMessages.submit} />
         </Button>
       </Form>
       <Paragraph>
-        <Text display="block">TODO: Universal SVG Radio, Checkbox, Select.</Text>
+        <Text display="block">TODO: SVG Radio, Select.</Text>
       </Paragraph>
     </Box>
   );
@@ -79,8 +96,8 @@ export default compose(
       // We can set initial state by props ofc.
       // name: props.name, gender: 'other', etc.
       gender: null,
-      likeCats: false,
       likeDogs: false,
+      likeCats: true,
     }),
   }),
 )(FieldsPage);
