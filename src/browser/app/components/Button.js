@@ -56,6 +56,7 @@ const Button: Styled<ButtonProps> = styled((theme, {
     return activeStyle(style, theme.states.active);
   },
   userSelect: 'none', // Because button is rendered as a div in the browser.
+  pointerEvents: disabled ? 'none' : 'auto', // Ignore events when disabled.
   ...(disabled ? theme.states.disabled : null),
 }), 'button', [
   'disabled',
