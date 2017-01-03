@@ -8,6 +8,7 @@ import { fields } from '../../common/lib/redux-fields';
 import {
   Box,
   Button,
+  Checkbox,
   Form,
   Input,
   PageHeader,
@@ -50,10 +51,26 @@ const FieldsPage = ({ fields }) => {
           placeholder="Some short description"
           rows={2}
         />
+        <Box marginBottom={1}>
+          <Checkbox
+            field={fields.likeCats}
+            label="I like cats"
+          />
+          <Checkbox
+            size={5}
+            // checkedIcon={<Svg}
+            // uncheckedIcon={<Svg}
+            field={fields.likeDogs}
+            label="I like dogs"
+          />
+        </Box>
         {/* TODO:
           <Radio checked={fields.gender.value === 'female'}
           <Checkbox checked={fields.likeCats.value}
         */}
+        {/* <svg viewBox="0 0 10px 10px">
+          <circle cx={50} cy={50} r={10} fill="red" />
+        </svg> */}
         <Button onClick={onSubmit} primary>
           <FormattedMessage {...buttonsMessages.submit} />
         </Button>
