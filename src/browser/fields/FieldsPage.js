@@ -12,8 +12,7 @@ import {
   Form,
   Input,
   PageHeader,
-  Paragraph,
-  Text,
+  Radio,
   Title,
 } from '../app/components';
 
@@ -23,7 +22,6 @@ const FieldsPage = ({ fields }) => {
     alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
     fields.$reset();
     // To see how to handle form validation and IO, check /auth.
-    // Simulate disabled.
   };
 
   return (
@@ -31,7 +29,7 @@ const FieldsPage = ({ fields }) => {
       <Title message={linksMessages.fields} />
       <PageHeader
         heading="redux-fields"
-        description="Simple and universal forms without pitas"
+        description="Simple and universal Redux forms"
       />
       <Form
         maxWidth={21}
@@ -58,26 +56,40 @@ const FieldsPage = ({ fields }) => {
             label="I like dogs"
           />
           <Checkbox
-            color="success"
             field={fields.likeCats}
-            label="I like cats (no bias)"
-            size={2}
+            label="I like cats"
           />
         </Box>
-        {/* TODO:
-          <Radio checked={fields.gender.value === 'female'}
-          <Checkbox checked={fields.likeCats.value}
-        */}
-        {/* <svg viewBox="0 0 10px 10px">
-          <circle cx={50} cy={50} r={10} fill="red" />
-        </svg> */}
+        <Box marginBottom={1}>
+          <Radio
+            field={fields.gender}
+            label="Male"
+            value="male"
+          />
+          <Radio
+            field={fields.gender}
+            label="Female"
+            value="female"
+          />
+          <Radio
+            field={fields.gender}
+            label="Other"
+            value="other"
+          />
+        </Box>
+        <Checkbox
+          checkboxStyle={{ marginBottom: 1 }}
+          color="warning"
+          field={fields.agree}
+          label="Agree"
+          labelPosition="left"
+          labelStyle={{ bold: true }}
+          size={1}
+        />
         <Button primary onClick={onSubmit}>
           <FormattedMessage {...buttonsMessages.submit} />
         </Button>
       </Form>
-      <Paragraph>
-        <Text display="block">TODO: SVG Radio, Select.</Text>
-      </Paragraph>
     </Box>
   );
 };
@@ -88,16 +100,15 @@ export default compose(
     fields: [
       'name',
       'description',
-      'gender', // radios
       'likeCats', // checkbox
       'likeDogs', // checkbox
+      'gender', // radios
+      'agree',
     ],
     getInitialState: () => ({
-      // We can set initial state by props ofc.
-      // name: props.name, gender: 'other', etc.
-      gender: null,
-      likeDogs: false,
-      likeCats: true,
+      // We can use props of course.
+      // likeCats: true,
+      // gender: 'female',
     }),
   }),
 )(FieldsPage);
