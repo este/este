@@ -32,7 +32,6 @@
     "react/prop-types": 0, // Can't detect flowtype correctly.
     // React Native.
     "react-native/no-color-literals": 2,
-    "react-native/no-inline-styles": 2,
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
     // Rules for functional programming. We do not need Object.freeze.
