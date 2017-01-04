@@ -15,6 +15,7 @@ export { default as Message } from './Message';
 export { default as PageHeader } from './PageHeader';
 export { default as Paragraph } from './Paragraph';
 export { default as Pre } from './Pre';
+export { default as Radio } from './Radio';
 export { default as SwitchTheme } from './SwitchTheme';
 export { default as Text } from './Text';
 export { default as Title } from './Title';

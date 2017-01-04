@@ -1,5 +1,7 @@
 // @flow
-import type { Color } from '../themes/types';
+import type { BoxProps } from './Box';
+import type { Color, Display, Strict } from '../themes/types';
+import type { TextProps } from './Text';
 import Button from './Button';
 import React from 'react';
 import Text from './Text';
@@ -9,19 +11,26 @@ import styled from './styled';
 //  - flaticon.com
 //  - thenounproject.com
 
-type CheckboxProps = {|
+export type CheckboxProps = {
+  checkboxStyle?: Strict<BoxProps>,
   color?: Color,
   disabled?: boolean,
+  display?: Display,
   field: Object, // TODO: Create type Field in fields.
   label?: string,
+  labelPosition?: 'left' | 'right',
+  labelStyle?: Strict<TextProps>,
   size?: number,
   svgIconChecked?: React$Element<any>,
   svgIconUnchecked?: React$Element<any>,
-|};
+};
 
-const SvgIcon = ({ color, size, svgIcon }) => {
-  // Note how we can create styled componets on the fly when we need that.
+const SvgIcon = ({ color, size, svgIcon, ...props }) => {
+  // Note how we can create styled componets on the fly when we need.
   const StyledSvgIcon = styled((theme, { size }) => ({
+    $extends: [Text, ({
+      ...props,
+    }: Strict<TextProps>)],
     // Note String() to bypass type checking. We don't have typed for SVG yet.
     [String('fill')]: theme.colors[color],
     height: theme.typography.fontSize(size),
@@ -39,41 +48,62 @@ const defaultSvgIconChecked = (
 );
 
 const defaultSvgIconUnchecked = (
-  <svg viewBox="0 0 512 512">
+  <svg viewBox="-16 -16 512 512">
     <path d="M405.333,106.667v298.666H106.667V106.667H405.333 M405.333,64H106.667C83.198,64,64,83.198,64,106.667v298.666    C64,428.802,83.198,448,106.667,448h298.666C428.802,448,448,428.802,448,405.333V106.667C448,83.198,428.802,64,405.333,64    L405.333,64z" />
   </svg>
 );
 
 const onClick = field => () => field.onChange({ value: !field.value });
 
+const margin = {
+  marginLeft: 0.4,
+  marginRight: 1.6,
+};
+
 const Checkbox = ({
+  checkboxStyle,
   color = 'black',
   disabled,
+  display = 'flex',
   field,
   label,
+  labelPosition = 'right',
+  labelStyle,
   size = 0,
   svgIconChecked = defaultSvgIconChecked,
   svgIconUnchecked = defaultSvgIconUnchecked,
-}: CheckboxProps) => (
+}: Strict<CheckboxProps>) => (
   <Button
     alignItems="center"
     disabled={disabled}
-    display="flex"
+    display={display}
     inline
+    noOutline // TODO: Fix accessibility somehow.
     onClick={onClick(field)}
     paddingHorizontal={0}
-    noOutline // TODO: Fix accessibility somehow.
+    {...checkboxStyle}
   >
+    {label && labelPosition === 'left' &&
+      <Text
+        color={color}
+        size={size}
+        {...labelStyle}
+      >{label}</Text>
+    }
     <SvgIcon
       color={color}
       size={size}
+      {...(label && labelPosition === 'left' ? margin : {})}
       svgIcon={field.value ? svgIconChecked : svgIconUnchecked}
     />
-    <Text
-      color={color}
-      marginLeft={0.5}
-      size={size}
-    >{label}</Text>
+    {label && labelPosition === 'right' &&
+      <Text
+        color={color}
+        size={size}
+        {...margin}
+        {...labelStyle}
+      >{label}</Text>
+    }
   </Button>
 );
 
