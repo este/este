@@ -22,7 +22,6 @@ const FieldsPage = ({ fields }) => {
     alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
     fields.$reset();
     // To see how to handle form validation and IO, check /auth.
-    // Simulate disabled.
   };
 
   return (
