@@ -14,8 +14,7 @@ const build = (done) => {
     // const fs = require('fs');
     // fs.writeFileSync('./bundle-stats.json', JSON.stringify(jsonStats));
 
-    const buildError = fatalError || jsonStats.errors[0] || jsonStats.warnings[0];
-
+    const buildError = fatalError || jsonStats.errors[0];
     if (buildError) {
       throw new gutil.PluginError('webpack', buildError);
     }
