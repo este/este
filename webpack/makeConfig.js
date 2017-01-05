@@ -172,7 +172,9 @@ const makeConfig = (options) => {
       return plugins;
     })(),
     performance: {
-      hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+      hints: false,
+      // TODO: Reenable it once Webpack 2 will complete dead code removing.
+      // hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
     },
     resolve: {
       extensions: ['.js'], // .json is ommited to ignore ./firebase.json

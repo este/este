@@ -6,10 +6,10 @@ const getUserPhotoUrl = (user: User) =>
   user.photoURL ||
   // Users signed in via email has displayName set to email.
   gravatar.url(user.displayName, {
-    s: '100',
-    r: 'x',
     d: 'retro',
-    protocol: 'https'
+    protocol: 'https',
+    r: 'x',
+    s: '100',
   });
 
 export default getUserPhotoUrl;
