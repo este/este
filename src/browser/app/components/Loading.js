@@ -24,7 +24,6 @@ type LoadingState = {|
   currentText: ?Object,
 |};
 
-// TODO: Should be stateless component with lifted state. Recompose?
 class Loading extends React.Component {
   state: LoadingState = {
     currentText: null,

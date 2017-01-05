@@ -17,7 +17,6 @@ const SignOut = ({ signOut }: SignOutProps, { router }) => {
   const onClick = () => {
     // We have to redirect to home before signOut.
     router.transitionTo({ pathname: '/' });
-    // TODO: Router should provide onCompleted callback.
     setImmediate(signOut);
   };
   return (

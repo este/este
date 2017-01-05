@@ -4,7 +4,6 @@ import openColor from './openColor';
 import typography from './typography';
 import { nativeFontFamily } from './defaultTheme';
 
-// TODO: Please pull request for something more beautiful.
 const theme: Theme = {
   typography: typography({
     fontSize: 18,

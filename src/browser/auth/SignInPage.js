@@ -31,8 +31,7 @@ const SignInPage = ({
 }: SignInPageProps) => (
   viewer ?
     <Redirect
-      // TODO: Fix redirect to from pathname with Found router, not with this
-      // RR shit (yes, foking race condition).
+      // TODO: Fix redirect, probably with upcoming react-navigation.
       to="/"
       // to={(
       //   location.state &&

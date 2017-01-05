@@ -41,7 +41,6 @@ export const setTheme = (theme: string): Action => ({
   payload: { theme },
 });
 
-// TODO: Observable type.
 const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)
     .map(appStarted);
