@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import configureDeps from './configureDeps';
 import configureEpics from './configureEpics';
 import createLoggerMiddleware from 'redux-logger';

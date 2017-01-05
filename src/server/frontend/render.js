@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import App from '../../browser/app/App';
 import Helmet from 'react-helmet';
 import Html from './Html';

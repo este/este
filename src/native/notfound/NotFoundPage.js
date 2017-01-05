@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import messages from '../../common/notfound/messages';
 import theme from '../app/themes/initial';

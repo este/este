@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import { CenteredContainer, Text } from '../app/components';
 import { Platform, StyleSheet } from 'react-native';

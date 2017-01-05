@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import { Button, FormattedMessage } from '../app/components';

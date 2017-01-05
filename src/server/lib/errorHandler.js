@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import config from '../config';
 
 const errorHandler = (err, req, res) => {

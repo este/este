@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import type { Action } from './types';
 import Raven from 'raven-js';
 

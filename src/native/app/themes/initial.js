@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import chroma from 'chroma-js';
 import { Platform } from 'react-native';
 

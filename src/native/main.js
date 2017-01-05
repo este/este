@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import FBSDK from 'react-native-fbsdk';
 import React from 'react';
 import ReactNativeI18n from 'react-native-i18n';

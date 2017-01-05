@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import Menu from './Menu';
 import Page from './Page';

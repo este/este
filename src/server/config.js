@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 // www.andrewsouthpaw.com/2015/02/08/environment-variables/
 import nconf from 'nconf';
 

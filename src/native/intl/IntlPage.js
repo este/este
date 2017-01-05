@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import React from 'react';
 import theme from '../app/themes/initial';

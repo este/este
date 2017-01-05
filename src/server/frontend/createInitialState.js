@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import config from '../config';
 import configReducer from '../../common/config/reducer';
 import deviceReducer from '../../common/device/reducer';

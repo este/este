@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import React from 'react';
 import { Match } from 'react-router';
 import { Text } from './';

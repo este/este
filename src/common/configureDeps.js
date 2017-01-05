@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 // By feature import doesn't work in Node.js.
 // firebase.google.com/docs/web/setup
 // Tested with 3.6.4, it still doesn't work.

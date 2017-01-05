@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import gutil from 'gulp-util';
 import makeWebpackConfig from './makeConfig';
 import webpack from 'webpack';

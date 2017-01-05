@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import Email from './Email';
 import React from 'react';

@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import type { Action, State } from './types';
 import app from './app/reducer';
 import auth from './auth/reducer';

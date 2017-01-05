@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 import React from 'react';
 import invariant from 'invariant';
 import { path as ramdaPath } from 'ramda';

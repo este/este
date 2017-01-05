@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import compression from 'compression';
 import express from 'express';
 import render from './render';

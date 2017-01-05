@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import theme from '../app/themes/initial';

@@ -1,4 +1,4 @@
-/* @flow weak */
+// @flow weak
 // Higher order component for focusing elements by ValidationError.
 import React from 'react';
 import { ValidationError } from '../../../common/lib/validation';

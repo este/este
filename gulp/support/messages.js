@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 // We store messages as code instead of as JSON because JSON sucks.
 // - We can use comments, they are useful for translations.
 // - Multiline strings ftw.

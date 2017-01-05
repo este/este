@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import theme from '../themes/initial';
 import { TouchableOpacity } from 'react-native';

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import { BaseError } from 'make-error';
 
 class ValidationError extends BaseError {

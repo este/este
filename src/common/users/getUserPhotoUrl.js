@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { User } from '../../common/types';
 import gravatar from 'gravatar';
 

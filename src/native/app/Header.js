@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';

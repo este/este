@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import { Container } from './';
 import { StyleSheet } from 'react-native';

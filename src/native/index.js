@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 /* eslint-disable react/require-extension */
 // Bootstrap environment
 const locales = require('./initialState').default.intl.locales;
