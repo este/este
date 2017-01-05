@@ -2,7 +2,6 @@
 import type { State } from '../../common/types';
 import Menu from './Menu';
 import Page from './Page';
-import R from 'ramda';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
@@ -10,6 +9,7 @@ import { Container } from './components';
 import { Match, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
 import { appShowMenu } from '../../common/app/actions';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
 // Pages
@@ -62,7 +62,7 @@ App.propTypes = {
   appStarted: React.PropTypes.bool.isRequired,
 };
 
-export default R.compose(
+export default compose(
   start,
   connect(
     (state: State) => ({

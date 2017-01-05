@@ -3,7 +3,7 @@ import type { State } from '../../../common/types';
 import Box from './Box';
 import Button from './Button';
 import React from 'react';
-import compose from 'ramda/src/compose';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { toggleBaseline } from '../../../common/app/actions';
 

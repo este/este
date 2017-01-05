@@ -1,9 +1,9 @@
 // @flow
 import type { Action, Deps } from '../types';
-import R from 'ramda';
 import createUserFirebase from './createUserFirebase';
-import { appError } from '../app/actions';
 import { Observable } from 'rxjs/Observable';
+import { appError } from '../app/actions';
+import { dissoc } from 'ramda';
 
 export const onUsersPresence = (snap: Object): Action => {
   const presence = snap.val();
@@ -49,7 +49,7 @@ const usersPresenceEpic = (
       connectionRef = firebase.child(`users-presence/${user.id}`)
         .push({
           lastSeenAt: firebaseDatabase.ServerValue.TIMESTAMP,
-          user: R.dissoc('email', user),
+          user: dissoc('email', user),
         });
       connectionRef.onDisconnect().remove();
     };

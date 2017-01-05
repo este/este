@@ -1,8 +1,8 @@
 // @flow
 import type { State, User } from '../../common/types';
 import React from 'react';
-import compose from 'ramda/src/compose';
 import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { firebase } from '../../common/lib/redux-firebase';
 import { onUsersPresence } from '../../common/users/actions';

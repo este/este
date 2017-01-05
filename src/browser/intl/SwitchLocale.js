@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../../common/types';
 import React from 'react';
-import compose from 'ramda/src/compose';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 import {

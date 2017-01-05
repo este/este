@@ -1,10 +1,10 @@
 // @flow
 import type { State, User } from '../../common/types';
 import React from 'react';
-import compose from 'ramda/src/compose';
 import linksMessages from '../../common/app/linksMessages';
 import { Box, Link } from '../app/components';
 import { FormattedMessage } from 'react-intl';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
 const HeaderLink = ({ exactly, to, message }) => (
