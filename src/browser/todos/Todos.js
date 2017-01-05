@@ -1,14 +1,9 @@
 // @flow
 import type { State, Todo } from '../../common/types';
 import React from 'react';
-import compose from 'ramda/src/compose';
-import isEmpty from 'ramda/src/isEmpty';
-import prop from 'ramda/src/prop';
-import reverse from 'ramda/src/reverse';
-import sortBy from 'ramda/src/sortBy';
 import todosMessages from '../../common/todos/todosMessages';
-import values from 'ramda/src/values';
 import { Box, Button, Text } from '../app/components';
+import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 import { injectIntl } from 'react-intl';

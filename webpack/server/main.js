@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import webpackDev from 'webpack-dev-middleware';
 import webpackHot from 'webpack-hot-middleware';
 import makeWebpackConfig from '../makeConfig';
+import constants from '../constants';
 import express from 'express';
 
 const app = express();
@@ -17,4 +18,4 @@ app.use(webpackDev(compiler, {
 
 app.use(webpackHot(compiler));
 
-app.listen(webpackConfig.hotPort);
+app.listen(constants.HOT_RELOAD_PORT);

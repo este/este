@@ -1,13 +1,13 @@
 /* @flow */
 import type { State } from '../../common/types';
 import Buttons from './Buttons';
-import R from 'ramda';
 import React from 'react';
 import Todo from './Todo';
 import theme from '../app/themes/initial';
 import todosMessages from '../../common/todos/todosMessages';
 import { CenteredContainer, FormattedMessage } from '../app/components';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
 import { connect } from 'react-redux';
 import { toggleTodoCompleted } from '../../common/todos/actions';
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 const Todos = ({ todos, toggleTodoCompleted }) => {
-  if (R.isEmpty(todos)) {
+  if (isEmpty(todos)) {
     return (
       <CenteredContainer>
         <Image
@@ -41,10 +41,10 @@ const Todos = ({ todos, toggleTodoCompleted }) => {
     );
   }
 
-  const sortedTodos = R.compose(
-    R.reverse,
-    R.sortBy(R.prop('createdAt')),
-    R.values, // object values to array
+  const sortedTodos = compose(
+    reverse,
+    sortBy(prop('createdAt')),
+    values, // object values to array
   )(todos);
 
   return (

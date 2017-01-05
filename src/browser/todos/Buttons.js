@@ -2,12 +2,11 @@
 import type { State } from '../../common/types';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
-import compose from 'ramda/src/compose';
-import isEmpty from 'ramda/src/isEmpty';
 import { Box, Button } from '../app/components';
-import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
+import { compose, isEmpty } from 'ramda';
+import { connect } from 'react-redux';
 
 type ButtonsProps = {
   addHundredTodos: typeof addHundredTodos,

@@ -1,6 +1,6 @@
 /* @flow weak */
-import R from 'ramda';
 import { createTransform } from 'redux-persist';
+import { pick } from 'ramda';
 
 // TODO: Add redux-persist-migrate.
 
@@ -19,7 +19,7 @@ const whitelist = [];
 paths.forEach(([feature, props]) => {
   whitelist.push(feature);
   if (!props) return;
-  const inOut = state => R.pick(props, state);
+  const inOut = state => pick(props, state);
   transforms.push(createTransform(inOut, inOut, { whitelist: [feature] }));
 });
 

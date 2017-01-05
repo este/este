@@ -1,9 +1,9 @@
 // @flow
 import type { Action, Deps, Todo } from '../types';
-import R from 'ramda';
+import { range } from 'ramda';
 
 export const addHundredTodos = () => ({ getUid, now }: Deps): Action => {
-  const todos = R.range(0, 100).map(() => {
+  const todos = range(0, 100).map(() => {
     const id = getUid();
     // Note how we can enforce shape with type annotation. This is a special
     // case because flowtype doesn't know Ramda. Nobody wrotes typedefs yet.

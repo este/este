@@ -2,8 +2,8 @@
 import type { State } from '../../../common/types';
 import * as themes from '../../app/themes';
 import React from 'react';
-import compose from 'ramda/src/compose';
 import { Box, Button, Heading } from '../../app/components';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setTheme } from '../../../common/app/actions';
 

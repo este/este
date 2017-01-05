@@ -56,7 +56,7 @@
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-react-native": "^2.0.0",
     "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
     "fela": "^4.1.0",
     "fela-plugin-logger": "^4.1.0",
     "fela-plugin-validator": "^4.1.0",
@@ -64,7 +64,7 @@
     "file-loader": "^0.9.0",
     "firebase": "^3.1.0",
     "flow-bin": "0.35.0",
-    "gravatar-api": "^1.4.0",
+    "gravatar": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-bg": "^0.0.8",
     "gulp-eslint": "^3.0.1",
@@ -122,10 +122,10 @@
     "uuid": "^3.0.0",
     "validator": "^6.0.0",
     "warning": "^3.0.0",
-    "webpack": "^1.12.3",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.8.1",
-    "webpack-isomorphic-tools": "^2.2.24",
+    "webpack": "2.2.0-rc.3",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0",
+    "webpack-isomorphic-tools": "^2.6.5",
     "yargs": "^6.0.0"
   }
 }

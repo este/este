@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import compose from 'ramda/src/compose';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { Form, Input } from '../app/components';
 import { addTodo } from '../../common/todos/actions';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { injectIntl } from 'react-intl';

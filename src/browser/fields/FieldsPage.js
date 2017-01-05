@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import compose from 'ramda/src/compose';
 import linksMessages from '../../common/app/linksMessages';
 import { FormattedMessage } from 'react-intl';
+import { compose } from 'ramda';
 import { fields } from '../../common/lib/redux-fields';
 import {
   Box,

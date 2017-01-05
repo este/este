@@ -1,12 +1,12 @@
 /* @flow */
 import type { State } from '../../common/types';
-import R from 'ramda';
 import React from 'react';
 import theme from '../app/themes/initial';
 import { FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { defineMessages } from 'react-intl';
+import { values } from 'ramda';
 
 const messages = defineMessages({
   leftTodos: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const Header = ({ todos }) => {
-  const leftTodos = R.values(todos).filter(todo => !todo.completed).length;
+  const leftTodos = values(todos).filter(todo => !todo.completed).length;
   return (
     <View style={styles.header}>
       <FormattedMessage

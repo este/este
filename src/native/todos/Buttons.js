@@ -1,11 +1,11 @@
 /* @flow */
 import type { State } from '../../common/types';
-import R from 'ramda';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
 import theme from '../app/themes/initial';
 import { Button, FormattedMessage } from '../app/components';
 import { StyleSheet, View } from 'react-native';
+import { values } from 'ramda';
 import {
   addHundredTodos,
   clearAllCompletedTodos,
@@ -32,7 +32,7 @@ const TodoButtons = ({
   clearAllTodos,
   todos,
 }) => {
-  const completedTodos = R.values(todos).filter(todo => todo.completed).length;
+  const completedTodos = values(todos).filter(todo => todo.completed).length;
   return (
     <View style={styles.buttons}>
       {completedTodos > 0 ?

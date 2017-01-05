@@ -1,7 +1,7 @@
 /* @flow weak */
-import R from 'ramda';
 import React from 'react';
 import invariant from 'invariant';
+import { path as ramdaPath } from 'ramda';
 import { resetFields, setField } from './actions';
 
 type Path = string | Array<string> | (props: Object) => Array<string>;
@@ -113,7 +113,7 @@ const fields = (options: Options) => (WrappedComponent) => {
 
     getModelFromState() {
       const normalizedPath = Fields.getNormalizePath(this.props);
-      return R.path(normalizedPath, this.context.store.getState().fields);
+      return ramdaPath(normalizedPath, this.context.store.getState().fields);
     }
 
     setModel(model) {
