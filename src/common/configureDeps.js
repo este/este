@@ -1,9 +1,10 @@
 /* @flow weak */
-// Damn, by feature importing doesn't work in Node.js.
+// By feature import doesn't work in Node.js.
+// firebase.google.com/docs/web/setup
+// Tested with 3.6.4, it still doesn't work.
 // import firebase from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/database';
-// So we have to import everything.
 import firebase from 'firebase';
 import validate from './validate';
 
