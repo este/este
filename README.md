@@ -43,6 +43,7 @@
 - [formatjs](http://formatjs.io/)
 - [jest](https://facebook.github.io/jest/) Painless JavaScript Testing.
 - [raven-js](https://github.com/getsentry/raven-js) Crash reporting client for [Sentry](https://getsentry.com).
+- [fela](https://github.com/rofrischmann/fela) Universal, Dynamic & High-Performance Styling in JavaScript
 - And much more. Explore the repository.
 
 ## Prerequisites
