@@ -1,15 +1,74 @@
 // @flow
+import type { State } from '../../common/types';
+import type { Theme } from '../../common/themes/types';
+import * as themes from '../themes';
 import React from 'react';
-import { Text, View } from 'react-native';
+import start from '../../common/app/start';
+import { Slider } from 'react-native';
+import { ThemeProvider } from 'react-fela';
+import { compose } from 'ramda';
+import { connect } from 'react-redux';
+import {
+  Box,
+  Text,
+} from '../../common/components';
 
-const App = () => (
-  <View>
-    <Text>fok</Text>
-  </View>
+type AppProps = {
+  themeName: string,
+  theme: Theme,
+};
+
+// TODO: Demonstrate elsewhere.
+const StyledSlider = (props) => (
+  <Box as={Slider} {...props} />
 );
 
-export default App;
+const App = ({
+  theme,
+  themeName,
+}: AppProps) => (
+  <ThemeProvider
+    key={themeName} // Enforce rerender.
+    theme={theme}
+  >
+    <Box
+      marginLeft={1}
+      // marginRight={3}
+      style={theme => ({
+        // marginTop: 100,
+        // marginLeft: 6,
+        marginTop: theme.typography.rhythm(3),
+      })}
+    >
+      <Text
+        // bold
+        color="warning"
+        // marginLeft={1}
+        // style={(theme) => ({
+        //   // color: 'green',
+        // })}
+      >fok</Text>
+      <StyledSlider
+        maximumValue={3}
+        marginLeft={0}
+        marginRight={2}
+        style={() => ({
+          marginTop: 100,
+        })}
+      />
+    </Box>
+  </ThemeProvider>
+);
 
+export default compose(
+  connect(
+    (state: State) => ({
+      themeName: state.app.currentTheme,
+      theme: themes[state.app.currentTheme] || themes.defaultTheme,
+    }),
+  ),
+  start,
+)(App);
 
 // import type { State } from '../../common/types';
 // import Menu from './Menu';

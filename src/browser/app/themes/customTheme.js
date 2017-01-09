@@ -1,7 +1,7 @@
 // @flow
 import type { Theme } from './types';
 import openColor from './openColor';
-import typography from './typography';
+import typography from '../../../common/themes/typography';
 import { nativeFontFamily } from './defaultTheme';
 
 const theme: Theme = {

@@ -58,6 +58,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "fela": "^4.1.0",
+    "fela-native": "^4.1.1",
     "fela-plugin-logger": "^4.1.0",
     "fela-plugin-validator": "^4.1.0",
     "fela-preset-web": "^4.1.0",

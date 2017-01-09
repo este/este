@@ -1,20 +1,7 @@
 // @flow
-import type { Theme } from './types';
-import openColor from './openColor';
-import typography from '../../../common/themes/typography';
-
-// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
-// Taken from from Bootstrap 4.
-export const nativeFontFamily = [
-  '-apple-system',
-  'system-ui',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  '"Helvetica Neue"',
-  'Arial',
-  'sans-serif',
-].join(', ');
+import type { Theme } from '../../common/themes/types';
+import openColor from '../../common/themes/openColor';
+import typography from '../../common/themes/typography';
 
 const theme: Theme = {
   typography: typography({
@@ -55,14 +42,14 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    fontFamily: nativeFontFamily,
+    fontFamily: 'System',
   },
   block: {
     marginBottom: 1,
     maxWidth: 21,
   },
   heading: {
-    fontFamily: nativeFontFamily,
+    fontFamily: 'System',
     marginBottom: 1,
   },
   paragraph: {

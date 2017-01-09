@@ -1,8 +1,11 @@
 // @flow
 import App from './App';
+import Fela from '../../common/components/FelaProvider';
 import React from 'react';
+import configureFela from '../configureFela';
 import { MemoryRouter } from 'react-router';
 import { Provider as Redux } from 'react-redux';
+import { Text, View } from 'react-native';
 
 type Props = {
   store: Object,
@@ -18,9 +21,15 @@ class Root extends React.Component {
     const { store } = this.props;
     return (
       <Redux store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <Fela
+          Text={Text}
+          View={View}
+          renderer={configureFela()}
+        >
+          <MemoryRouter>
+            <App />
+          </MemoryRouter>
+        </Fela>
       </Redux>
     );
   }

@@ -21,7 +21,7 @@ export type BoxProps = {
   // Element
   className?: string,
   id?: string,
-  style?: any,
+  style?: *,
   // CSS
   alignContent?: AlignContent,
   alignItems?: AlignItems,
