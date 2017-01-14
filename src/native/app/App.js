@@ -4,7 +4,7 @@ import type { Theme } from '../../common/themes/types';
 import * as themes from '../themes';
 import React from 'react';
 import start from '../../common/app/start';
-import { Slider } from 'react-native';
+import { ScrollView, Slider } from 'react-native';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -12,13 +12,16 @@ import {
   Box,
   Text,
 } from '../../common/components';
+import {
+  Baseline,
+} from '../components';
 
 type AppProps = {
   themeName: string,
   theme: Theme,
 };
 
-// TODO: Demonstrate elsewhere.
+// TODO: Demonstrate this pattern elsewhere.
 const StyledSlider = (props) => (
   <Box as={Slider} {...props} />
 );
@@ -31,32 +34,38 @@ const App = ({
     key={themeName} // Enforce rerender.
     theme={theme}
   >
-    <Box
-      marginLeft={1}
-      // marginRight={3}
-      style={theme => ({
-        // marginTop: 100,
-        // marginLeft: 6,
-        marginTop: theme.typography.rhythm(3),
-      })}
-    >
-      <Text
-        // bold
-        color="warning"
-        // marginLeft={1}
-        // style={(theme) => ({
-        //   // color: 'green',
-        // })}
-      >fok</Text>
-      <StyledSlider
-        maximumValue={3}
-        marginLeft={0}
-        marginRight={2}
-        style={() => ({
-          marginTop: 100,
-        })}
-      />
-    </Box>
+    <ScrollView>
+      <Baseline lineHeight={theme.typography.lineHeight}>
+        <Box
+          marginLeft={1}
+          marginRight={1}
+          style={theme => ({
+            // marginTop: 100,
+            // marginLeft: 1,
+            marginTop: theme.typography.rhythm(3),
+          })}
+        >
+          <Text
+            bold
+            color="warning"
+            // marginLeft={1}
+            style={() => ({
+              // color: 'green',
+              // margin: 30,
+              // marginHorizontal: 20,
+              // marginLeft: 10,
+            })}
+          >fok</Text>
+          <StyledSlider
+            maximumValue={3}
+            height={1}
+            style={() => ({
+              marginTop: 100,
+            })}
+          />
+        </Box>
+      </Baseline>
+    </ScrollView>
   </ThemeProvider>
 );
 

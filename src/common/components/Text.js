@@ -21,6 +21,7 @@ const textStyle = (theme, {
   color,
   ...props
 }) => {
+  // TODO: Use compose.
   let style = {};
   if (bold) {
     style = { ...style, fontWeight: bold ? String(theme.text.bold) : 'normal' };
@@ -42,6 +43,7 @@ const Text = ({
   Text,
   theme,
 }: TextContext) => {
+  // TODO: Jako to ma box.
   const component = textStyle(theme, props);
   return (
     <Box
