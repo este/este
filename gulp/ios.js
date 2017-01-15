@@ -6,5 +6,5 @@ import gulp from 'gulp';
 // 2) reset content and settings in iOS simulator
 gulp.task('ios', ['native'], bg(
   'node', 'node_modules/react-native/local-cli/cli.js',
-  'run-ios', '--simulator', 'iPhone 5s',
+  'run-ios', '--simulator', 'iPhone 7',
 ));
