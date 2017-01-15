@@ -21,7 +21,6 @@ const theme: Theme = {
   },
   border: {
     radius: 2,
-    width: 1,
   },
   states: {
     active: {

@@ -29,7 +29,6 @@ export type Theme = {|
   },
   border: {|
     radius: number,
-    width: number,
   |},
   states: {
     active: {|

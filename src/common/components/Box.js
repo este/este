@@ -8,6 +8,12 @@ import React from 'react';
 //  - default position is relative
 //  - default flex direction is column
 // Use style prop for platform specific styling.
+// For example:
+//  style={theme => ({
+//    // Set borderTopWidth to 1 to componsate padding.
+//    borderTopWidth: StyleSheet.hairlineWidth,
+//  })}
+// For RN backgroundColor with borderRadius, use overflow="hidden"
 
 const isReactNative =
   typeof navigator === 'object' &&
@@ -126,7 +132,7 @@ const computeBoxStyle = (theme, {
   borderColor,
   borderLeftColor,
   borderLeftWidth,
-  borderRadius,
+  borderRadius = theme.border.radius,
   borderRightColor,
   borderRightWidth,
   borderStyle,
@@ -299,6 +305,7 @@ const computeBoxStyle = (theme, {
     // Do not sort, borderRadius must be before borderXYRadius.
     borderRadius,
     borderStyle,
+    borderWidth,
     borderBottomLeftRadius,
     borderBottomRightRadius,
     borderTopLeftRadius,

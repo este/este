@@ -4,7 +4,7 @@ import type { Theme } from '../../common/themes/types';
 import * as themes from '../themes';
 import React from 'react';
 import start from '../../common/app/start';
-import { ScrollView, Slider } from 'react-native';
+import { ScrollView, Slider, StyleSheet } from 'react-native';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -56,25 +56,17 @@ const App = ({
           })}
         >
           <Box
-            borderBottomWidth={3}
+            backgroundColor="warning"
+            // overflow="hidden"
+            borderRadius={10}
             padding={0.5}
-          >
-            <Text>fok</Text>
-          </Box>
-          <Box
-            borderColor="primary"
-            borderTopWidth={3}
-            // paddingTop={3}
-            // height={2}
-            // paddingVertical={.5}
           >
             <Text
               // style={theme => ({
               //   lineHeight: theme.typography.lineHeight - 2,
               // })}
               // align="left"
-              // color="danger"
-              // backgroundColor="warning"
+              color="black"
               bold
               // borderBottomColor="primary"
               // borderBottomWidth={20}
