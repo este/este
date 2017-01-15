@@ -122,7 +122,6 @@
     "url-loader": "^0.5.5",
     "uuid": "^3.0.0",
     "validator": "^6.0.0",
-    "warning": "^3.0.0",
     "webpack": "2.2.0-rc.3",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0",

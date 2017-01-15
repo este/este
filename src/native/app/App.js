@@ -55,36 +55,35 @@ const App = ({
             marginTop: theme.typography.rhythm(3),
           })}
         >
-          <Text
-            bold
-            size={4}
-            italic
-            // borderRadius={6}
-            borderColor="warning"
-            // borderWidth={3}
-            overflow="hidden"
-            // borderTopWidth={1}
-
-            color="white"
-            backgroundColor="warning"
-            // marginLeft={1}
-            style={() => ({
-              // color: 'green',
-              // margin: 30,
-              // marginHorizontal: 20,
-              // marginLeft: 10,
-            })}
-          >fok</Text>
-          <Text
-            // align="left"
-            // color="danger"
-            backgroundColor="warning"
-            bold
-            size={-1}
-            // color="warning"
-            // marginLeft={1}
-          >fok</Text>
-          <Text>fok</Text>
+          <Box
+            borderBottomWidth={3}
+            padding={0.5}
+          >
+            <Text>fok</Text>
+          </Box>
+          <Box
+            borderColor="primary"
+            borderTopWidth={3}
+            // paddingTop={3}
+            // height={2}
+            // paddingVertical={.5}
+          >
+            <Text
+              // style={theme => ({
+              //   lineHeight: theme.typography.lineHeight - 2,
+              // })}
+              // align="left"
+              // color="danger"
+              // backgroundColor="warning"
+              bold
+              // borderBottomColor="primary"
+              // borderBottomWidth={20}
+              // size={-1}
+              // color="warning"
+              // marginLeft={1}
+            >wtd</Text>
+          </Box>
+          <Text>ddfok</Text>
           <StyledSlider
             maximumValue={3}
             height={2}

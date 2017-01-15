@@ -16,6 +16,7 @@ const isReactNative =
 export type BoxProps = {
   as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html
   style?: (theme: Theme) => Object, // Low level deliberately not typed.
+  suppressRhythmWarning?: boolean,
 
   // Maybe rhythm props.
   margin?: number | string,
@@ -86,6 +87,8 @@ type BoxContext = {
 };
 
 const computeBoxStyle = (theme, {
+  suppressRhythmWarning,
+
   // Maybe rhythm props.
   margin,
   marginHorizontal,
@@ -149,14 +152,12 @@ const computeBoxStyle = (theme, {
 
   ...props
 }) => {
-  let style = {
-    // That's React Native default.
-    flexDirection: 'column',
+  let style = isReactNative ? {} : {
+    // Enforce React Native behaviour for browsers.
     position: 'relative',
+    flexDirection: 'column',
+    display: 'flex',
   };
-  if (!isReactNative) {
-    style = { ...style, display: 'flex' }; // Enforce React Native behaviour.
-  }
 
   // Do not sort, margin can be overridden by marginHorizontal etc.
   const maybeRhythmProps = {
@@ -199,6 +200,16 @@ const computeBoxStyle = (theme, {
       case 'marginVertical':
         style = { ...style, marginTop: computedValue, marginBottom: computedValue };
         break;
+      case 'padding':
+        style = {
+          ...style,
+          // Split to be computable for border offset.
+          paddingBottom: computedValue,
+          paddingLeft: computedValue,
+          paddingRight: computedValue,
+          paddingTop: computedValue,
+        };
+        break;
       case 'paddingHorizontal':
         style = { ...style, paddingLeft: computedValue, paddingRight: computedValue };
         break;
@@ -215,9 +226,9 @@ const computeBoxStyle = (theme, {
     style = { ...style, flexBasis: 'auto', flexGrow: flex, flexShrink: 1 };
   }
 
-  // Do not sort.
   const colorProps = {
     backgroundColor,
+    // Do not sort.
     borderColor,
     borderBottomColor,
     borderLeftColor,
@@ -231,24 +242,67 @@ const computeBoxStyle = (theme, {
     style = { ...style, [prop]: theme.colors[value] };
   }
 
-  const borderProps = {
-    // Do not sort.
-    borderRadius,
-    borderStyle,
-    borderWidth,
+  const borderWidthProps = {
     borderBottomWidth,
     borderLeftWidth,
     borderRightWidth,
     borderTopWidth,
+  };
+
+  const borderWidthIsDefined = typeof borderWidth === 'number';
+
+  for (const prop in borderWidthProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+    const propValue = borderWidthProps[prop];
+    const propIsDefined = typeof propValue === 'number';
+    if (!borderWidthIsDefined && !propIsDefined) continue; // eslint-disable-line no-continue
+    const paddingProp =
+      prop === 'borderBottomWidth' ? 'paddingBottom' :
+      prop === 'borderLeftWidth' ? 'paddingLeft' :
+      prop === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
+    // $FlowFixMe We know prop could not be found, we check it.
+    const paddingValue = style[paddingProp];
+    // We can't compensate string padding.
+    if (typeof paddingValue === 'string') {
+      if (suppressRhythmWarning) continue; // eslint-disable-line no-continue
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn([ // eslint-disable-line no-console
+          `Please set ${paddingProp} for ${prop} to number to ensure rhythm.`,
+          'To suppress this warning, use suppressRhythmWarning prop.',
+        ].join(''));
+      }
+      continue; // eslint-disable-line no-continue
+    }
+    const borderValue = propIsDefined ? propValue : borderWidth;
+    // $FlowFixMe
+    const compensatedPaddingValue = paddingValue - borderValue;
+    const canCompensate = compensatedPaddingValue >= 0;
+    if (!canCompensate) {
+      if (suppressRhythmWarning) continue; // eslint-disable-line no-continue
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn([ // eslint-disable-line no-console
+          `Please increase ${paddingProp} for ${prop} to ensure rhythm. `,
+          'Suppress this warning via suppressRhythmWarning prop.',
+        ].join(''));
+      }
+      style = { ...style, borderWidth: 1, borderColor: 'red' };
+      continue; // eslint-disable-line no-continue
+    }
+    style = {
+      ...style,
+      [paddingProp]: compensatedPaddingValue,
+      [prop]: propValue,
+    };
+  }
+
+  // Just value props.
+  const justValueProps = {
+    // Do not sort, borderRadius must be before borderXYRadius.
+    borderRadius,
+    borderStyle,
     borderBottomLeftRadius,
     borderBottomRightRadius,
     borderTopLeftRadius,
     borderTopRightRadius,
-  };
-
-  // Just value props.
-  const justValueProps = {
-    ...borderProps,
     alignItems,
     alignSelf,
     flexBasis,

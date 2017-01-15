@@ -74,14 +74,15 @@ const computeTextStyle = (theme, {
 };
 
 const textPropsNotWorkingInReactNativeYet = [
- 'borderBottomLeftRadius',
- 'borderBottomRightRadius',
- 'borderBottomWidth',
- 'borderLeftWidth',
- 'borderRightWidth',
- 'borderTopLeftRadius',
- 'borderTopRightRadius',
- 'borderTopWidth',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomWidth',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopWidth',
+  'borderWidth',
 ];
 
 const Text = ({
@@ -95,7 +96,7 @@ const Text = ({
   if (process.env.NODE_ENV !== 'production') {
     textPropsNotWorkingInReactNativeYet.forEach(prop => {
       if (!(prop in props)) return;
-      console.warn(`${prop} is not allowed on Text. Use Box.`);
+      console.warn(`${prop} is not allowed on Text. Use Box.`); // eslint-disable-line no-console
     });
   }
 
