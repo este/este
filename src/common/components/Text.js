@@ -20,11 +20,7 @@ export type TextProps = BoxProps & {
   color?: Color,
   decoration?: 'none' | 'underline' | 'line-through',
   italic?: boolean,
-
-  // shadowColor
-  // shadowOffset
-  // shadowRadius
-  // // TODO: Text
+  // TODO: shadowColor, shadowOffset, shadowRadius.
 };
 
 type TextContext = {
@@ -77,6 +73,17 @@ const computeTextStyle = (theme, {
   return [style, props];
 };
 
+const textPropsNotWorkingInReactNativeYet = [
+ 'borderBottomLeftRadius',
+ 'borderBottomRightRadius',
+ 'borderBottomWidth',
+ 'borderLeftWidth',
+ 'borderRightWidth',
+ 'borderTopLeftRadius',
+ 'borderTopRightRadius',
+ 'borderTopWidth',
+];
+
 const Text = ({
   as,
   style,
@@ -85,7 +92,15 @@ const Text = ({
   Text: TextComponent,
   theme,
 }: TextContext) => {
+  if (process.env.NODE_ENV !== 'production') {
+    textPropsNotWorkingInReactNativeYet.forEach(prop => {
+      if (!(prop in props)) return;
+      console.warn(`${prop} is not allowed on Text. Use Box.`);
+    });
+  }
+
   const [textStyle, restProps] = computeTextStyle(theme, props);
+
   return (
     <Box
       as={as || TextComponent}

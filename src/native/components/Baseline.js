@@ -51,7 +51,7 @@ const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
 export default compose(
   connect(
     (state: State) => ({
-      baselineShown: state.app.baselineShown,
+      baselineShown: true || state.app.baselineShown,
     }),
   ),
 )(Baseline);

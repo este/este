@@ -9,6 +9,7 @@ export type ColorProps = {
   success?: boolean,
   warning?: boolean,
   danger?: boolean,
+  // Don't hesitate to add your own.
   black?: boolean,
   white?: boolean,
   gray?: boolean,

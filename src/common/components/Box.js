@@ -43,15 +43,26 @@ export type BoxProps = {
   right?: number | string,
   top?: number | string,
 
-  // Computed props.
   flex?: number,
   backgroundColor?: Color,
 
-  // borderWidth
-  // borderTopWidth
-  // borderRightWidth
-  // borderBottomWidth
-  // borderLeftWidth
+  // Border props.
+  borderBottomColor?: Color,
+  borderBottomLeftRadius?: number,
+  borderBottomRightRadius?: number,
+  borderBottomWidth?: number,
+  borderColor?: Color,
+  borderLeftColor?: Color,
+  borderLeftWidth?: number,
+  borderRadius?: number,
+  borderRightColor?: Color,
+  borderRightWidth?: number,
+  borderStyle?: 'solid' | 'dotted' | 'dashed',
+  borderTopColor?: Color,
+  borderTopLeftRadius?: number,
+  borderTopRightRadius?: number,
+  borderTopWidth?: number,
+  borderWidth?: number,
 
   // Just value props.
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline',
@@ -101,9 +112,26 @@ const computeBoxStyle = (theme, {
   right,
   top,
 
-  // Computed props.
   flex,
   backgroundColor,
+
+  // Border props.
+  borderBottomColor,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderBottomWidth,
+  borderColor,
+  borderLeftColor,
+  borderLeftWidth,
+  borderRadius,
+  borderRightColor,
+  borderRightWidth,
+  borderStyle,
+  borderTopColor,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderTopWidth,
+  borderWidth,
 
   // Just value props.
   alignItems,
@@ -130,8 +158,7 @@ const computeBoxStyle = (theme, {
     style = { ...style, display: 'flex' }; // Enforce React Native behaviour.
   }
 
-  // Maybe rhythm props.
-  // Don't sort it. Margin < marginHorizontal < marginLeft | marginRight.
+  // Do not sort, margin can be overridden by marginHorizontal etc.
   const maybeRhythmProps = {
     margin,
     marginHorizontal,
@@ -183,17 +210,45 @@ const computeBoxStyle = (theme, {
     }
   }
 
-  // Computed props.
   if (typeof flex === 'number') {
     // Enforce React Native flex behaviour. Can be overridden later.
     style = { ...style, flexBasis: 'auto', flexGrow: flex, flexShrink: 1 };
   }
-  if (backgroundColor) {
-    style = { ...style, backgroundColor: theme.colors[backgroundColor] };
+
+  // Do not sort.
+  const colorProps = {
+    backgroundColor,
+    borderColor,
+    borderBottomColor,
+    borderLeftColor,
+    borderRightColor,
+    borderTopColor,
+  };
+
+  for (const prop in colorProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+    const value = colorProps[prop];
+    if (!value) continue; // eslint-disable-line no-continue
+    style = { ...style, [prop]: theme.colors[value] };
   }
+
+  const borderProps = {
+    // Do not sort.
+    borderRadius,
+    borderStyle,
+    borderWidth,
+    borderBottomWidth,
+    borderLeftWidth,
+    borderRightWidth,
+    borderTopWidth,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+  };
 
   // Just value props.
   const justValueProps = {
+    ...borderProps,
     alignItems,
     alignSelf,
     flexBasis,
@@ -222,7 +277,7 @@ const Box = ({
   as,
   style,
   ...props
-}: BoxProps, { // Note no $Exact<BoxProps>. It's up to rendered component.
+}: BoxProps, { // Note no $Exact<BoxProps>. It's up to the rendered component.
   View,
   renderer,
   theme,

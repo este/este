@@ -10,6 +10,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import {
   Box,
+  ToggleBaseline,
   Text,
 } from '../../common/components';
 import {
@@ -39,9 +40,18 @@ const App = ({
         <Box
           marginLeft={1}
           marginRight={1}
+          // borderTopWidth={20}
+          // borderTopColor="danger"
+          // borderRadius={2}
+          // borderWidth={3}
+          // borderColor="warning"
           style={theme => ({
             // marginTop: 100,
             // marginLeft: 1,
+            // borderColor: 'red',
+            // borderWidth: 1,
+            // borderLeftWidth: 3,
+            // borderTopRightRadius: 10,
             marginTop: theme.typography.rhythm(3),
           })}
         >
@@ -49,7 +59,14 @@ const App = ({
             bold
             size={4}
             italic
-            color="warning"
+            // borderRadius={6}
+            borderColor="warning"
+            // borderWidth={3}
+            overflow="hidden"
+            // borderTopWidth={1}
+
+            color="white"
+            backgroundColor="warning"
             // marginLeft={1}
             style={() => ({
               // color: 'green',
@@ -59,20 +76,21 @@ const App = ({
             })}
           >fok</Text>
           <Text
-            align="left"
+            // align="left"
             // color="danger"
-            size={1}
+            backgroundColor="warning"
+            bold
+            size={-1}
             // color="warning"
             // marginLeft={1}
           >fok</Text>
+          <Text>fok</Text>
           <StyledSlider
             maximumValue={3}
-            height={1}
-            style={() => ({
-              marginTop: 100,
-            })}
+            height={2}
           />
           <Text>fok</Text>
+          <ToggleBaseline />
         </Box>
       </Baseline>
     </ScrollView>
