@@ -47,6 +47,8 @@ const App = ({
         >
           <Text
             bold
+            size={4}
+            italic
             color="warning"
             // marginLeft={1}
             style={() => ({
@@ -56,6 +58,13 @@ const App = ({
               // marginLeft: 10,
             })}
           >fok</Text>
+          <Text
+            align="left"
+            // color="danger"
+            size={1}
+            // color="warning"
+            // marginLeft={1}
+          >fok</Text>
           <StyledSlider
             maximumValue={3}
             height={1}
@@ -63,6 +72,7 @@ const App = ({
               marginTop: 100,
             })}
           />
+          <Text>fok</Text>
         </Box>
       </Baseline>
     </ScrollView>

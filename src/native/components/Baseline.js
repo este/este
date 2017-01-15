@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
   <View>
     {children}
-    {baselineShown || 1 &&
+    {baselineShown &&
       <View pointerEvents="none" style={styles.container}>
         {range(0, 100).map(i => (
           <View
