@@ -15,9 +15,7 @@ import { ThemeProvider } from 'react-fela';
 import { appShowMenu } from '../../common/app/actions';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-
-// import Page from './Page';
-// import { Container } from './components';
+import Page from './Page';
 
 // Pages
 import HomePage from '../home/HomePage';
@@ -59,9 +57,8 @@ const App = ({
           menu={<Menu />}
           onChange={appShowMenu}
         >
-          <Box flex={1} backgroundColor="white" />
-          {/* <Page exactly pattern="/" component={HomePage} />
-          <Page pattern="/intl" component={IntlPage} />
+          <Page exactly pattern="/" component={HomePage} />
+          {/* <Page pattern="/intl" component={IntlPage} />
           <Page pattern="/offline" component={OfflinePage} />
           <Page pattern="/signin" component={SignInPage} />
           <Page pattern="/todos" component={TodosPage} />

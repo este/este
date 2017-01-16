@@ -1,4 +1,8 @@
-// // @flow
+// @flow
+
+const HomePage = () => null;
+
+export default HomePage;
 
 // import { ScrollView, Slider, StyleSheet } from 'react-native';
 
@@ -6,7 +10,6 @@
 // const StyledSlider = (props) => (
 //   <Box as={Slider} {...props} />
 // );
-
 
 
 // import {

@@ -36,7 +36,7 @@ const fontSizeWithComputedLineHeight = (typography, size) => {
   return { fontSize, lineHeight };
 };
 
-const computeTextStyle = (theme, {
+export const computeTextStyle = (theme: Theme, {
   fontFamily = theme.text.fontFamily,
   size = 0,
   align,
@@ -45,7 +45,7 @@ const computeTextStyle = (theme, {
   decoration,
   italic,
   ...props
-}) => {
+}: TextProps) => {
   let style = {
     ...fontSizeWithComputedLineHeight(theme.typography, size),
     color: theme.colors[color],

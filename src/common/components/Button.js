@@ -1,22 +1,22 @@
 // @flow
 import type { Color, Theme } from '../themes/types';
+import type { TextProps } from './Text';
 import Box from './Box';
 import React from 'react';
-import Text from './Text';
+import Text, { computeTextStyle } from './Text';
 
 const isReactNative =
   typeof navigator === 'object' &&
   navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
-export type ButtonProps = {
+export type ButtonProps = TextProps & {
   accessibilityLabel?: string, // for blindness accessibility features
-  bold?: boolean,
-  color?: Color,
+  boxStyle?: (theme: Theme) => Object,
   disabled?: ?boolean,
   onPress?: (e?: SyntheticMouseEvent) => any,
   preset?: Color | 'outline',
-  size?: number,
-  title: string,
+  textStyle?: (theme: Theme) => Object,
+  title?: string,
 };
 
 type ButtonContext = {
@@ -26,13 +26,13 @@ type ButtonContext = {
 
 const capitalize = title => title[0].toUpperCase() + title.slice(1);
 
-const computePreset = (theme, preset, size) => {
+const computePreset = (theme, preset, size = 0) => {
   if (!preset) return [{}, {}];
   const isInline = size < 0;
   let boxProps = {
     paddingHorizontal: 0.8,
   };
-  let textProps = {};
+  const textProps = {};
   // Give button some vertical space, but only for positive size. Smaller button
   // can't have any padding nor border because it would break vertical rhythm.
   // It's impossible to compute because a text can be multiline.
@@ -52,17 +52,17 @@ const computePreset = (theme, preset, size) => {
   }
 
   return [boxProps, textProps];
-}
+};
 
 const Button = ({
   accessibilityLabel,
-  bold,
-  color,
+  boxStyle,
   disabled,
   onPress,
   preset,
-  size = 0,
+  textStyle,
   title,
+  ...props
 }: ButtonProps, {
   Button: BaseButton,
   theme,
@@ -76,28 +76,41 @@ const Button = ({
     onClick: onPress,
   };
 
-  const [boxProps, textProps] = computePreset(theme, preset, size);
+  const titleIsText = typeof title === 'string';
 
+  // Button has all Text props, but it consists of two components: Box and Text.
+  // Therefore, we have to split props for Box and props for Text. That's what
+  // computeTextStyle does by design. Without that, we would have verbose API
+  // like boxProps={{ margin: 1 }} textProps={{ color: 'primary' }}.
+  // Remember, we can always override anything via boxStyle and textStyle props.
+  const [computedTextStyle, boxProps] = computeTextStyle(theme, props);
+  const [presetBoxProps, presetTextProps] = computePreset(theme, preset, props.size);
+
+  // disabled={disabled}
   return (
-    <BaseButton
+    <Box
+      as={BaseButton}
+      flexDirection="row"
+      justifyContent="center"
       {...platformProps}
-      disabled={disabled}
+      {...boxProps}
+      {...presetBoxProps}
+      style={boxStyle}
     >
-      <Box
-        flexDirection="row"
-        justifyContent="center"
-        {...boxProps}
-      >
+      {titleIsText ?
         <Text
-          bold={bold}
-          color={color}
-          size={size}
-          {...textProps}
-        >{capitalize(title)}</Text>
-      </Box>
-    </BaseButton>
+          {...presetTextProps}
+          style={theme => ({
+            ...computedTextStyle,
+            ...(textStyle ? textStyle(theme) : null),
+          })}
+        >{title && capitalize(title)}</Text>
+      :
+        props.children
+      }
+    </Box>
   );
-}
+};
 
 Button.contextTypes = {
   Button: React.PropTypes.func,

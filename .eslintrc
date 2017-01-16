@@ -19,6 +19,7 @@
     "import/first": 0, // Este sorts by atom/sort-lines natural order.
     "import/no-duplicates": 2,
     "import/prefer-default-export": 0, // No. Actions can have just one action.
+    "jsx-a11y/anchor-has-content": 0, // Doesn't work with new components.
     "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
     "no-confusing-arrow": 0, // This rule is super confusing.
     "no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848

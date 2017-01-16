@@ -1,6 +1,13 @@
-{/* <ScrollView> */}
+// @flow
 
-// // @flow
+const Page = () => null;
+
+export default Page;
+
+{ /* <ScrollView> */ }
+
+{/* <Box flex={1} backgroundColor="white" /> */}
+
 // import Header from './Header';
 // import React from 'react';
 // import linksMessages from '../../common/app/linksMessages';
