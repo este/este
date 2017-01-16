@@ -5,7 +5,7 @@ import React from 'react';
 import configureFela from '../configureFela';
 import { MemoryRouter } from 'react-router';
 import { Provider as Redux } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   store: Object,
@@ -22,6 +22,7 @@ class Root extends React.Component {
     return (
       <Redux store={store}>
         <Fela
+          Button={TouchableOpacity}
           Text={Text}
           View={View}
           renderer={configureFela()}

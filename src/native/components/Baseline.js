@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 
 type BaselineProps = {|
   baselineShown: boolean,
-  children: any,
   lineHeight: number,
 |};
 
@@ -31,9 +30,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
+const Baseline = ({ baselineShown, lineHeight }: BaselineProps) => (
   <View>
-    {children}
     {baselineShown &&
       <View pointerEvents="none" style={styles.container}>
         {range(0, 100).map(i => (

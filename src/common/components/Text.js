@@ -90,7 +90,7 @@ const Text = ({
   style,
   ...props
 }: TextProps, {
-  Text: TextComponent,
+  Text: BaseText,
   theme,
 }: TextContext) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -104,7 +104,7 @@ const Text = ({
 
   return (
     <Box
-      as={as || TextComponent}
+      as={as || BaseText}
       {...restProps}
       style={theme => ({
         ...textStyle,

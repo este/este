@@ -7,19 +7,21 @@ import { Provider as Fela } from 'react-fela';
 
 export default class FelaProvider extends React.Component {
   static propTypes = {
+    Button: React.PropTypes.func.isRequired,
     Text: React.PropTypes.func.isRequired,
     View: React.PropTypes.func.isRequired,
     renderer: React.PropTypes.object.isRequired,
   };
 
   static childContextTypes = {
+    Button: React.PropTypes.func.isRequired,
     Text: React.PropTypes.func.isRequired,
     View: React.PropTypes.func.isRequired,
   };
 
   getChildContext() {
-    const { Text, View } = this.props;
-    return { Text, View };
+    const { Button, Text, View } = this.props;
+    return { Button, Text, View };
   }
 
   render() {

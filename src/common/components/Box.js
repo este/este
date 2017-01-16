@@ -227,9 +227,13 @@ const computeBoxStyle = (theme, {
     }
   }
 
+  // Enforce React Native flex behaviour. Can be overridden.
   if (typeof flex === 'number') {
-    // Enforce React Native flex behaviour. Can be overridden later.
-    style = { ...style, flexBasis: 'auto', flexGrow: flex, flexShrink: 1 };
+    if (isReactNative) {
+      style = { ...style, flex: 1 };
+    } else {
+      style = { ...style, flexBasis: 'auto', flexGrow: flex, flexShrink: 1 };
+    }
   }
 
   const colorProps = {
