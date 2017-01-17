@@ -14,7 +14,6 @@ let MenuLink = ({ appShowMenu, message, ...props }) => (
     {message => (
       <Link
         {...props}
-        title={message}
         onPress={() => setTimeout(() => appShowMenu(false), 0)}
         marginVertical={0.25}
         paddingVertical={0.25}
@@ -22,7 +21,7 @@ let MenuLink = ({ appShowMenu, message, ...props }) => (
         justifyContent="flex-start"
         activeStyle={theme => ({ backgroundColor: theme.colors.open.gray8 })}
         textStyle={theme => ({ color: theme.colors.open.gray2 })}
-      />
+      >{message}</Link>
     )}
   </FormattedMessage>
 );

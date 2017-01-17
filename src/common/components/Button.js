@@ -12,11 +12,11 @@ const isReactNative =
 export type ButtonProps = TextProps & {
   accessibilityLabel?: string, // for blindness accessibility features
   boxStyle?: (theme: Theme) => Object,
+  children?: any,
   disabled?: ?boolean,
   onPress?: (e?: SyntheticMouseEvent) => any,
   preset?: Color | 'outline',
   textStyle?: (theme: Theme) => Object,
-  title?: string,
 };
 
 type ButtonContext = {
@@ -57,11 +57,11 @@ const computePreset = (theme, preset, size = 0) => {
 const Button = ({
   accessibilityLabel,
   boxStyle,
+  children,
   disabled,
   onPress,
   preset,
   textStyle,
-  title,
   ...props
 }: ButtonProps, {
   Button: BaseButton,
@@ -76,8 +76,6 @@ const Button = ({
     onClick: onPress,
   };
 
-  const titleIsText = typeof title === 'string';
-
   // Button has all Text props, but it consists of two components: Box and Text.
   // Therefore, we have to split props for Box and props for Text. That's what
   // computeTextStyle does by design. Without that, we would have verbose API
@@ -85,6 +83,8 @@ const Button = ({
   // Remember, we can always override anything via boxStyle and textStyle props.
   const [computedTextStyle, boxProps] = computeTextStyle(theme, props);
   const [presetBoxProps, presetTextProps] = computePreset(theme, preset, props.size);
+
+  const childrenIsText = typeof children === 'string';
 
   // disabled={disabled}
   return (
@@ -97,16 +97,16 @@ const Button = ({
       {...presetBoxProps}
       style={boxStyle}
     >
-      {titleIsText ?
+      {childrenIsText ?
         <Text
           {...presetTextProps}
           style={theme => ({
             ...computedTextStyle,
             ...(textStyle ? textStyle(theme) : null),
           })}
-        >{title && capitalize(title)}</Text>
+        >{children && capitalize(children)}</Text>
       :
-        props.children
+        children
       }
     </Box>
   );
