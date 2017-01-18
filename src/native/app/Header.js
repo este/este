@@ -2,15 +2,11 @@
 import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import { Platform } from 'react-native';
+import color from 'color';
+import { Box, Button, Text } from '../../common/components';
+import { Platform, StyleSheet } from 'react-native';
 import { appShowMenu } from '../../common/app/actions';
 import { connect } from 'react-redux';
-import { Box, Button, Text } from '../../common/components';
-
-//     borderBottomColor: theme.bright(theme.brandPrimary),
-//     borderBottomWidth: StyleSheet.hairlineWidth,
-//     paddingBottom: theme.fontSize * 0.625,
-//     paddingTop: (theme.fontSize * 0.625) + paddingTopOffset,
 
 type HeaderProps = {
   appShowMenu: typeof appShowMenu,
@@ -18,11 +14,14 @@ type HeaderProps = {
   title: string,
 };
 
-const maybePaddingTopForIos = () => {
-  if (Platform.OS !== 'ios') return 0;
-  // iOS status bar is an overlay with default height 20px.
-  // Let's add one lineHeight line to preserve the vertical rhythm.
-  return 1;
+// iOS status bar is an overlay with default height 20px. We add one baseline
+// to preserve the vertical rhythm. We also set height to ensure hairline
+// border height (various) is included.
+const platformStyles = () => Platform.OS === 'ios' ? {
+  paddingTop: 1,
+  height: 3,
+} : {
+  height: 2,
 };
 
 const HeaderButton = ({
@@ -36,7 +35,7 @@ const HeaderButton = ({
     justifyContent={right ? 'flex-end' : 'flex-start'}
   >
     <Button
-      // backgroundColor="danger"
+      // backgroundColor="danger" // To test.
       color="white"
       flexDirection="column"
       paddingHorizontal={0.5}
@@ -60,18 +59,22 @@ const Header = ({
   title,
 }: HeaderProps) => (
   <Box
+    {...platformStyles()}
     backgroundColor="primary"
     flexDirection="row"
-    paddingTop={maybePaddingTopForIos()}
+    alignItems="center"
+    borderRadius={0}
+    style={theme => ({
+      borderBottomColor: color(theme.colors.primary).lighten(0.5).string(),
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    })}
   >
     <HeaderButton onPress={() => appShowMenu(!menuShown)}>
       <HeaderIcon name="ios-menu" />
     </HeaderButton>
-    <Text
-      color="white"
-      paddingVertical={0.5}
-      size={1}
-    >{title}</Text>
+    <Text color="white" size={1}>
+      {title}
+    </Text>
     <HeaderButton right>
       {/* A placeholder for the right side button. */}
       {/* <HeaderIcon name="ios-menu" /> */}
