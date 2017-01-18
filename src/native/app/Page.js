@@ -6,7 +6,7 @@ import { Box, Match } from '../../common/components';
 import { ScrollView } from 'react-native';
 import { injectIntl } from 'react-intl';
 
-// import { Alert, Container } from './components';
+// import { Alert } from './components';
 
 type PageProps = {
   component: () => React.Element<*>,
@@ -25,7 +25,7 @@ const titles = {
 };
 
 const Page = ({
-  component,
+  component: Component,
   exactly,
   intl,
   pattern,
@@ -43,10 +43,10 @@ const Page = ({
           {titles[pattern] &&
             <Header title={intl.formatMessage(titles[pattern])} />
           }
-          {/* <Alert />
+          {/* <Alert />*/}
           <ScrollView>
-          <Component {...renderProps} />
-          </ScrollView>*/}
+            <Component {...renderProps} />
+          </ScrollView>
         </Box>
       )}
     />

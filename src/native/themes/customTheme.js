@@ -10,7 +10,7 @@ const theme: Theme = {
     lineHeight: 27, // 18 * 1.5
   }),
   colors: {
-    primary: openColor.blue8,
+    primary: openColor.blue6,
     success: openColor.green5,
     warning: openColor.orange6,
     danger: openColor.red6,

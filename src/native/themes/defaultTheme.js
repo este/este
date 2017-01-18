@@ -6,11 +6,11 @@ import typography from '../../common/themes/typography';
 const theme: Theme = {
   typography: typography({
     fontSize: 16,
-    fontSizeScale: 'step5', // perfect fourth, modularscale.com
+    fontSizeScale: 'step3',
     lineHeight: 24,
   }),
   colors: {
-    primary: openColor.blue6,
+    primary: '#31AACC',
     success: openColor.green5,
     warning: openColor.orange6,
     danger: openColor.red6,
