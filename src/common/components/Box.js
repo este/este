@@ -22,7 +22,6 @@ const isReactNative =
 export type BoxProps = {
   as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html
   style?: (theme: Theme) => Object, // Low level deliberately not typed.
-  suppressRhythmWarning?: boolean,
 
   // Maybe rhythm props.
   margin?: number | string,
@@ -93,8 +92,6 @@ type BoxContext = {
 };
 
 const computeBoxStyle = (theme, {
-  suppressRhythmWarning,
-
   // Maybe rhythm props.
   margin,
   marginHorizontal,
@@ -273,11 +270,10 @@ const computeBoxStyle = (theme, {
     const paddingValue = style[paddingProp];
     // We can't compensate string padding.
     if (typeof paddingValue === 'string') {
-      if (suppressRhythmWarning) continue; // eslint-disable-line no-continue
       if (process.env.NODE_ENV !== 'production') {
         console.warn([ // eslint-disable-line no-console
-          `Please set ${paddingProp} for ${prop} to number to ensure rhythm.`,
-          'To suppress this warning, use suppressRhythmWarning prop.',
+          `Please set ${paddingProp} for ${prop} to number to ensure rhythm, `,
+          'or use style.',
         ].join(''));
       }
       continue; // eslint-disable-line no-continue
@@ -287,11 +283,10 @@ const computeBoxStyle = (theme, {
     const compensatedPaddingValue = paddingValue - borderValue;
     const canCompensate = compensatedPaddingValue >= 0;
     if (!canCompensate) {
-      if (suppressRhythmWarning) continue; // eslint-disable-line no-continue
       if (process.env.NODE_ENV !== 'production') {
         console.warn([ // eslint-disable-line no-console
-          `Please increase ${paddingProp} for ${prop} to ensure rhythm. `,
-          'Suppress this warning via suppressRhythmWarning prop.',
+          `Please increase ${paddingProp} for ${prop} to ensure rhythm, `,
+          'or use style.',
         ].join(''));
       }
       style = { ...style, borderWidth: 1, borderColor: 'red' };
