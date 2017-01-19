@@ -8,7 +8,7 @@ const SmallButton = ({
   marginVertical,
   paddingVertical,
   size = -1,
-  ...props,
+  ...props
 }: ButtonProps) => (
   <Button
     marginVertical={marginVertical || -0.1}

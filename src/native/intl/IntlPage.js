@@ -17,15 +17,13 @@ const Locales = ({
   locales,
   setCurrentLocale,
 }) => (
-  <Box>
+  <Box marginVertical={1}>
     {locales.map(locale =>
       <Button
-        // style={[styles.text, locale === currentLocale && styles.selected]}
         bold={locale === currentLocale}
-        size={1}
-        // paddingVertical={0.5}
         key={locale}
         onPress={() => setCurrentLocale(locale)}
+        size={1}
       >{locale.toLowerCase()}</Button>,
     )}
   </Box>
@@ -34,28 +32,32 @@ const Locales = ({
 const IntlPage = ({
   currentLocale,
   locales,
-  setCurrentLocale
+  setCurrentLocale,
 }: IntlPageProps) => {
   const componentRenderedAt = Date.now();
   return (
-    <Box>
+    <Box alignItems="center">
       <Locales
         currentLocale={currentLocale}
         locales={locales}
         setCurrentLocale={setCurrentLocale}
       />
-      {/* <FormattedDate
+      {/* This ugly wrapping will not be necessary soon with React Fiber */}
+      <FormattedDate
         day="numeric"
         month="short"
-        style={{ margin: theme.fontSize }}
         value={Date.now()}
         year="numeric"
-      />
+      >{message =>
+        <Text>{message}</Text>
+      }</FormattedDate>
       <FormattedRelative
         initialNow={componentRenderedAt}
         updateInterval={1000 * 1}
         value={componentRenderedAt}
-      /> */}
+      >{message =>
+        <Text>{message}</Text>
+      }</FormattedRelative>
     </Box>
   );
 };

@@ -10,7 +10,6 @@ import { Baseline } from '../components';
 import { Box } from '../../common/components';
 import { Match, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
-import { ScrollView } from 'react-native';
 import { ThemeProvider } from 'react-fela';
 import { appShowMenu } from '../../common/app/actions';
 import { compose } from 'ramda';
