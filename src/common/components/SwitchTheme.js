@@ -35,6 +35,7 @@ const SwitchTheme = ({
       Switch Theme
     </Text>
     <Box
+      alignItems="center"
       flexDirection="row"
       flexWrap="wrap"
       justifyContent="flex-start"

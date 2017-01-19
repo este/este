@@ -44,6 +44,7 @@ const HomePage = () => (
       Text Button
     </Button>
     <Box
+      alignItems="center"
       flexDirection="row"
       flexWrap="wrap"
       justifyContent="space-around"
