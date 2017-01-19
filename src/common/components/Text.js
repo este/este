@@ -3,10 +3,7 @@ import type { BoxProps } from './Box';
 import type { Color, Theme } from '../themes/types';
 import Box from './Box';
 import React from 'react';
-
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Text component. The same API for browsers and React Native.
 // Some props are ommited or limited or set to match React Native behaviour.
@@ -96,7 +93,7 @@ const Text = ({
   style,
   ...props
 }: TextProps, {
-  Text: BaseText,
+  Text: PlatformText,
   theme,
 }: TextContext) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -110,7 +107,7 @@ const Text = ({
 
   return (
     <Box
-      as={as || BaseText}
+      as={as || PlatformText}
       {...restProps}
       style={theme => ({
         ...textStyle,

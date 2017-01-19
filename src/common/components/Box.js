@@ -1,6 +1,7 @@
 // @flow
 import type { Color, Theme } from '../themes/types';
 import React from 'react';
+import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Box component. The same API for browsers and React Native.
 // Some props are ommited or limited or set to match React Native behaviour.
@@ -14,10 +15,6 @@ import React from 'react';
 //    borderTopWidth: StyleSheet.hairlineWidth,
 //  })}
 // For RN backgroundColor with borderRadius, sometimes we need overflow="hidden"
-
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 export type BoxProps = {
   as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html

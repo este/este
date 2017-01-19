@@ -4,10 +4,7 @@ import type { TextProps } from './Text';
 import Box from './Box';
 import React from 'react';
 import Text, { computeTextStyle } from './Text';
-
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
+import isReactNative from '../../common/app/isReactNative';
 
 export type ButtonProps = ColorProps & TextProps & {
   accessibilityLabel?: string, // for blindness accessibility features
@@ -33,7 +30,7 @@ const Button = ({
   textStyle,
   ...props
 }: ButtonProps, {
-  Button: BaseButton,
+  Button: PlatformButton,
   theme,
 }: ButtonContext) => {
   const platformProps = isReactNative ? {
@@ -106,7 +103,7 @@ const Button = ({
 
   return (
     <Box
-      as={BaseButton}
+      as={PlatformButton}
       borderRadius={borderRadius}
       disabled={disabled}
       flexDirection="row"
