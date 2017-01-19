@@ -1,55 +1,65 @@
 // @flow
+import type { State } from '../../common/types';
+import Box from './Box';
+import React from 'react';
+import SmallButton from './SmallButton';
+import Text from './Text';
+import { compose } from 'ramda';
+import { connect } from 'react-redux';
+import { setTheme } from '../app/actions';
 
+type SwitchThemeProps = {
+  currentTheme: string,
+  setTheme: typeof setTheme,
+  themes: { [themeName: string]: Object },
+};
 
+const getSortedThemeNames = themes => [
+  'defaultTheme',
+  ...Object
+    .keys(themes)
+    .filter(key => key !== 'defaultTheme')
+    .sort(),
+];
 
-// import type { State } from '../../../common/types';
-// import * as themes from '../../app/themes';
-// import React from 'react';
-// import { Box, Button, Heading } from '../../app/components';
-// import { compose } from 'ramda';
-// import { connect } from 'react-redux';
-// import { setTheme } from '../../../common/app/actions';
-//
-// type SwitchThemeProps = {
-//   currentTheme: string,
-//   setTheme: typeof setTheme,
-// };
-//
-// const themesNames = [
-//   'defaultTheme',
-//   ...Object
-//     .keys(themes)
-//     .filter(key => key !== 'defaultTheme')
-//     .sort(),
-// ];
-//
-// const SwitchTheme = ({ currentTheme, setTheme }: SwitchThemeProps) => (
-//   <Box marginBottom={1.5}>
-//     <Heading marginBottom={0.5}>
-//       Switch Theme
-//     </Heading>
-//     <Box marginHorizontal={-0.25}>
-//       {themesNames.map(themeName => (
-//         <Button
-//           primary
-//           size={-1}
-//           active={themeName === currentTheme}
-//           key={themeName}
-//           marginHorizontal={0.25}
-//           onClick={() => setTheme(themeName)}
-//         >
-//           {themeName.replace('Theme', '')}
-//         </Button>
-//       ))}
-//     </Box>
-//   </Box>
-// );
-//
-// export default compose(
-//   connect(
-//     (state: State) => ({
-//       currentTheme: state.app.currentTheme,
-//     }),
-//     { setTheme },
-//   ),
-// )(SwitchTheme);
+// This is just an example, but themes are useful. We can implement day / night
+// mode, or have web mobile, iOS, Android, whatever custom looks.
+
+const SwitchTheme = ({
+  currentTheme,
+  setTheme,
+  themes,
+}: SwitchThemeProps) => (
+  <Box marginBottom={1.5}>
+    <Text bold marginBottom={0.5}>
+      Switch Theme
+    </Text>
+    <Box
+      flexDirection="row"
+      flexWrap="wrap"
+      justifyContent="flex-start"
+      marginHorizontal={-0.25}
+    >
+      {getSortedThemeNames(themes).map(themeName => (
+        <SmallButton
+          primary
+          outline={themeName !== currentTheme}
+          marginHorizontal={0.25}
+          onPress={() => setTheme(themeName)}
+          key={themeName}
+        >
+          {themeName.replace('Theme', '')}
+        </SmallButton>
+      ))}
+    </Box>
+  </Box>
+);
+
+export default compose(
+  connect(
+    (state: State) => ({
+      currentTheme: state.app.currentTheme,
+    }),
+    { setTheme },
+  ),
+)(SwitchTheme);

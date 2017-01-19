@@ -24,8 +24,6 @@ type ButtonContext = {
   theme: Theme,
 };
 
-const capitalize = title => title[0].toUpperCase() + title.slice(1);
-
 const Button = ({
   accessibilityLabel,
   boxStyle,
@@ -104,7 +102,7 @@ const Button = ({
             ...computedTextStyle,
             ...(textStyle ? textStyle(theme) : null),
           })}
-        >{children && capitalize(children)}</Text>
+        >{children}</Text>
       :
         children
       }

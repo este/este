@@ -30,27 +30,25 @@ const Page = ({
   intl,
   pattern,
 }: PageProps) => (
-  <Box
-    // We need flex and backgroundColor to cover SideMenu.
-    backgroundColor="white"
-    flex={1}
-  >
-    <Match
-      exactly={exactly}
-      pattern={pattern}
-      render={renderProps => (
-        <Box flex={1}>
-          {titles[pattern] &&
-            <Header title={intl.formatMessage(titles[pattern])} />
-          }
-          {/* <Alert />*/}
-          <ScrollView>
-            <Component {...renderProps} />
-          </ScrollView>
-        </Box>
-      )}
-    />
-  </Box>
+  <Match
+    exactly={exactly}
+    pattern={pattern}
+    render={renderProps => (
+      <Box
+        // We need flex and backgroundColor to cover SideMenu.
+        backgroundColor="white"
+        flex={1}
+      >
+        {titles[pattern] &&
+          <Header title={intl.formatMessage(titles[pattern])} />
+        }
+        {/* <Alert />*/}
+        <ScrollView>
+          <Component {...renderProps} />
+        </ScrollView>
+      </Box>
+    )}
+  />
 );
 
 export default injectIntl(Page);

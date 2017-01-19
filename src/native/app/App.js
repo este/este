@@ -19,7 +19,7 @@ import Page from './Page';
 
 // Pages
 import HomePage from '../home/HomePage';
-// import IntlPage from '../intl/IntlPage';
+import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
 // import OfflinePage from '../offline/OfflinePage';
 // import SignInPage from '../auth/SignInPage';
@@ -58,13 +58,14 @@ const App = ({
           onChange={appShowMenu}
         >
           <Page exactly pattern="/" component={HomePage} />
-          {/* <Page pattern="/intl" component={IntlPage} />
-          <Page pattern="/offline" component={OfflinePage} />
+          <Page pattern="/intl" component={IntlPage} />
+          {/* <Page pattern="/offline" component={OfflinePage} />
           <Page pattern="/signin" component={SignInPage} />
           <Page pattern="/todos" component={TodosPage} />
           <Page authorized pattern="/me" component={MePage} />
           Miss does't work in React Native for some reason.
           <Miss render={() => <Redirect to="/" />} />
+          */}
           <Match
             pattern="/"
             render={({ location: { pathname } }) => {
@@ -74,7 +75,7 @@ const App = ({
                 <Redirect to="/" />
               );
             }}
-          /> */}
+          />
         </SideMenu>
         <Baseline lineHeight={theme.typography.lineHeight} />
       </Box>

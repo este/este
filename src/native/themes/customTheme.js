@@ -5,16 +5,16 @@ import typography from '../../common/themes/typography';
 
 const theme: Theme = {
   typography: typography({
-    fontSize: 18,
-    fontSizeScale: 'step5',
-    lineHeight: 27, // 18 * 1.5
+    fontSize: 16,
+    fontSizeScale: 'step2',
+    lineHeight: 20, // 16 * 1.25
   }),
   colors: {
-    primary: openColor.blue6,
-    success: openColor.green5,
-    warning: openColor.orange6,
-    danger: openColor.red6,
-    black: openColor.gray8,
+    primary: openColor.blue8,
+    success: openColor.grape7,
+    warning: openColor.orange5,
+    danger: openColor.red5,
+    black: openColor.gray7,
     white: openColor.white,
     gray: openColor.gray4,
     open: openColor,
