@@ -22,7 +22,7 @@ import IntlPage from '../intl/IntlPage';
 // import MePage from '../me/MePage';
 import OfflinePage from '../offline/OfflinePage';
 // import SignInPage from '../auth/SignInPage';
-// import TodosPage from '../todos/TodosPage';
+import TodosPage from '../todos/TodosPage';
 
 type AppProps = {
   appMenuShown: boolean,
@@ -59,10 +59,10 @@ const App = ({
           <Page exactly pattern="/" component={HomePage} />
           <Page pattern="/intl" component={IntlPage} />
           <Page pattern="/offline" component={OfflinePage} />
-          {/* <Page pattern="/signin" component={SignInPage} />
           <Page pattern="/todos" component={TodosPage} />
-          <Page authorized pattern="/me" component={MePage} />
-          Miss does't work in React Native for some reason.
+          {/* <Page pattern="/signin" component={SignInPage} />
+          <Page authorized pattern="/me" component={MePage} />*/}
+          {/* Miss does't work in React Native for some reason.
           <Miss render={() => <Redirect to="/" />} />
           */}
           <Match

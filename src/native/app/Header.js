@@ -63,9 +63,8 @@ const Header = ({
     backgroundColor="primary"
     flexDirection="row"
     alignItems="center"
-    borderRadius={0}
     style={theme => ({
-      borderBottomColor: color(theme.colors.primary).lighten(0.5).string(),
+      borderBottomColor: color(theme.colors.primary).lighten(0.25).string(),
       borderBottomWidth: StyleSheet.hairlineWidth,
     })}
   >

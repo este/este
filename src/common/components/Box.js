@@ -129,7 +129,7 @@ const computeBoxStyle = (theme, {
   borderColor,
   borderLeftColor,
   borderLeftWidth,
-  borderRadius = theme.border.radius,
+  borderRadius,
   borderRightColor,
   borderRightWidth,
   borderStyle,

@@ -39,7 +39,6 @@ const Menu = ({
   viewer,
 }: MenuProps) => (
   <Box
-    borderRadius={0}
     flex={1}
     paddingHorizontal={0.5}
     paddingVertical={1}

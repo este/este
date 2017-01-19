@@ -45,7 +45,7 @@ const Button = ({
     onClick: onPress,
   };
 
-  // <Button primary etc.
+  // <Button primary
   const propColor = Object.keys(theme.colors).find(color => props[color]);
   if (propColor) {
     props = {
@@ -58,7 +58,7 @@ const Button = ({
     };
   }
 
-  // <Button primary outline etc.
+  // <Button primary outline
   if (propColor && props.outline) {
     props = {
       ...props,
@@ -87,9 +87,14 @@ const Button = ({
   const [computedTextStyle, boxProps] = computeTextStyle(theme, props);
   const childrenIsText = typeof children === 'string';
 
+  const {
+    borderRadius = theme.button.borderRadius,
+  } = props;
+
   return (
     <Box
       as={BaseButton}
+      borderRadius={borderRadius}
       flexDirection="row"
       justifyContent="center"
       {...platformProps}

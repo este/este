@@ -47,6 +47,9 @@ const theme: Theme = {
     marginBottom: 1,
     maxWidth: 21,
   },
+  button: {
+    borderRadius: 2,
+  },
   heading: {
     fontFamily: 'System',
     marginBottom: 1,

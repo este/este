@@ -55,6 +55,9 @@ export type Theme = {|
     marginBottom: number,
     maxWidth: number,
   |},
+  button: {|
+    borderRadius: number,
+  |},
   heading: {|
     fontFamily: string,
     marginBottom: number,

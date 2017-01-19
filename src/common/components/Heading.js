@@ -3,12 +3,9 @@ import type { TextProps } from './Text';
 import Text from './Text';
 import React from 'react';
 
-const Heading = ({
-  bold = true,
-  ...props
-}: TextProps) => (
+const Heading = (props: TextProps) => (
   <Text
-    bold={bold}
+    bold={true} // eslint-disable-line react/jsx-boolean-value
     style={theme => ({
       fontFamily: theme.heading.fontFamily,
       marginBottom: theme.typography.rhythm(theme.heading.marginBottom),
