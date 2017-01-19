@@ -3,7 +3,7 @@ import Header from './Header';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { Box, Match } from '../../common/components';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { injectIntl } from 'react-intl';
 
 // import { Alert } from './components';
@@ -24,6 +24,12 @@ const titles = {
   '/me': linksMessages.me,
 };
 
+const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+});
+
 const Page = ({
   component: Component,
   exactly,
@@ -43,7 +49,7 @@ const Page = ({
           <Header title={intl.formatMessage(titles[pattern])} />
         }
         {/* <Alert />*/}
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           <Component {...renderProps} />
         </ScrollView>
       </Box>
