@@ -1,26 +1,93 @@
-// // @flow
-// import type { State } from '../../common/types';
+// @flow
+import type { State, Todo } from '../../common/types';
+import React from 'react';
+import todosMessages from '../../common/todos/todosMessages';
+import { Box, Text, TextInput } from '../../common/components';
+import { FormattedMessage } from 'react-intl';
+import { Image, ScrollView } from 'react-native';
+import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
+import { connect } from 'react-redux';
+import { toggleTodoCompleted } from '../../common/todos/actions';
+
 // import Buttons from './Buttons';
-// import React from 'react';
 // import Todo from './Todo';
-// import theme from '../app/themes/initial';
-// import todosMessages from '../../common/todos/todosMessages';
-// import { CenteredContainer, FormattedMessage } from '../app/components';
+
+type TodosProps = {
+  todos: Array<Todo>,
+  toggleTodoCompleted: typeof toggleTodoCompleted,
+};
+
+const IsEmpty = () => (
+  <Box alignItems="center" justifyContent="center" flex={1}>
+    <Image source={require('./img/EmptyState.png')} />
+    <FormattedMessage {...todosMessages.empty}>
+      {message =>
+        <Text
+          bold
+          color="gray"
+          marginTop={1}
+          size={1}
+        >{message}</Text>
+      }
+    </FormattedMessage>
+  </Box>
+);
+
+const Todos = ({
+  todos,
+  toggleTodoCompleted,
+}: TodosProps) => {
+  if (isEmpty(todos)) {
+    return <IsEmpty />;
+  }
+  return (
+    <ScrollView>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+      <Text>fok</Text>
+
+    </ScrollView>
+  )
+  return null;
+};
+
+export default connect(
+  (state: State) => ({
+    todos: state.todos.all,
+  }),
+  { toggleTodoCompleted },
+)(Todos);
+
+
 // import { Image, ScrollView, StyleSheet, View } from 'react-native';
-// import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
-// import { connect } from 'react-redux';
-// import { toggleTodoCompleted } from '../../common/todos/actions';
 //
-// const styles = StyleSheet.create({
-//   empty: {
-//     color: theme.placeholderTextColor,
-//     fontSize: theme.fontSizeH5,
-//   },
-//   icon: {
-//     height: 60,
-//     marginBottom: 10,
-//     width: 60,
-//   },
 //   row: {
 //     borderBottomColor: theme.separator,
 //     borderBottomWidth: 1,
@@ -59,14 +126,3 @@
 //   );
 // };
 //
-// Todos.propTypes = {
-//   todos: React.PropTypes.object.isRequired,
-//   toggleTodoCompleted: React.PropTypes.func.isRequired,
-// };
-//
-// export default connect(
-//   (state: State) => ({
-//     todos: state.todos.all,
-//   }),
-//   { toggleTodoCompleted },
-// )(Todos);

@@ -3,6 +3,7 @@ import type { State } from '../../common/types';
 import React from 'react';
 import { Box, Button, Text } from '../../common/components';
 import { FormattedDate, FormattedRelative } from 'react-intl';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
 
@@ -36,29 +37,34 @@ const IntlPage = ({
 }: IntlPageProps) => {
   const componentRenderedAt = Date.now();
   return (
-    <Box alignItems="center">
-      <Locales
-        currentLocale={currentLocale}
-        locales={locales}
-        setCurrentLocale={setCurrentLocale}
-      />
-      {/* This ugly wrapping will not be necessary soon with React Fiber */}
-      <FormattedDate
-        day="numeric"
-        month="short"
-        value={Date.now()}
-        year="numeric"
-      >{message =>
-        <Text>{message}</Text>
-      }</FormattedDate>
-      <FormattedRelative
-        initialNow={componentRenderedAt}
-        updateInterval={1000 * 1}
-        value={componentRenderedAt}
-      >{message =>
-        <Text>{message}</Text>
-      }</FormattedRelative>
-    </Box>
+    <ScrollView>
+      <Box
+        alignItems="center"
+        paddingVertical={1}
+      >
+        <Locales
+          currentLocale={currentLocale}
+          locales={locales}
+          setCurrentLocale={setCurrentLocale}
+        />
+        {/* This ugly wrapping will not be necessary soon with React Fiber */}
+        <FormattedDate
+          day="numeric"
+          month="short"
+          value={Date.now()}
+          year="numeric"
+        >{message =>
+          <Text>{message}</Text>
+        }</FormattedDate>
+        <FormattedRelative
+          initialNow={componentRenderedAt}
+          updateInterval={1000 * 1}
+          value={componentRenderedAt}
+        >{message =>
+          <Text>{message}</Text>
+        }</FormattedRelative>
+      </Box>
+    </ScrollView>
   );
 };
 
