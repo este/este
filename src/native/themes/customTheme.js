@@ -11,12 +11,12 @@ const theme: Theme = {
   }),
   colors: {
     primary: openColor.blue8,
-    success: openColor.grape7,
-    warning: openColor.orange5,
-    danger: openColor.red5,
-    black: openColor.gray7,
+    success: openColor.green6,
+    warning: openColor.orange7,
+    danger: openColor.red7,
+    black: openColor.gray9,
     white: openColor.white,
-    gray: openColor.gray4,
+    gray: openColor.gray6,
     open: openColor,
   },
   border: {

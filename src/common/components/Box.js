@@ -13,7 +13,7 @@ import React from 'react';
 //    // Set borderTopWidth to 1 to componsate padding.
 //    borderTopWidth: StyleSheet.hairlineWidth,
 //  })}
-// For RN backgroundColor with borderRadius, use overflow="hidden"
+// For RN backgroundColor with borderRadius, sometimes we need overflow="hidden"
 
 const isReactNative =
   typeof navigator === 'object' &&
@@ -89,6 +89,53 @@ type BoxContext = {
   View: () => React.Element<*>,
   renderer: any, // TODO: Type it.
   theme: Theme,
+};
+
+const setBorderTryEnsureRhythmWithPadding = (
+  style,
+  borderWidthProps,
+  borderWidth,
+) => {
+  // return style;
+  const borderWidthIsDefined = typeof borderWidth === 'number';
+  for (const prop in borderWidthProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+    const propValue = borderWidthProps[prop];
+    const propIsDefined = typeof propValue === 'number';
+    if (!borderWidthIsDefined && !propIsDefined) continue; // eslint-disable-line no-continue
+    const paddingProp =
+      prop === 'borderBottomWidth' ? 'paddingBottom' :
+      prop === 'borderLeftWidth' ? 'paddingLeft' :
+      prop === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
+    // $FlowFixMe We know prop could not be found, we check it.
+    const paddingValue = style[paddingProp];
+    // We can't compensate string padding.
+    if (typeof paddingValue === 'string') {
+      continue; // eslint-disable-line no-continue
+    }
+    const borderValue = propIsDefined ? propValue : borderWidth;
+    // $FlowFixMe Yes, we know it.
+    const compensatedPaddingValue = paddingValue - borderValue;
+    const canCompensate = compensatedPaddingValue >= 0;
+    if (!canCompensate) {
+      style = {
+        ...style,
+        [prop]: propValue,
+      };
+      // if (process.env.NODE_ENV !== 'production') {
+      //   console.warn([ // eslint-disable-line no-console
+      //     `Please increase ${paddingProp} for ${prop} to ensure rhythm, `,
+      //     'or use style.',
+      //   ].join(''));
+      // }
+      continue; // eslint-disable-line no-continue
+    }
+    style = {
+      ...style,
+      [paddingProp]: canCompensate ? compensatedPaddingValue : paddingValue,
+      [prop]: propValue,
+    };
+  }
+  return style;
 };
 
 const computeBoxStyle = (theme, {
@@ -197,6 +244,16 @@ const computeBoxStyle = (theme, {
     if (!isDefined) continue; // eslint-disable-line no-continue
     const computedValue = isNumber ? theme.typography.rhythm(value) : value;
     switch (prop) {
+      case 'margin':
+        style = {
+          ...style,
+          // Split to be computable.
+          marginBottom: computedValue,
+          marginLeft: computedValue,
+          marginRight: computedValue,
+          marginTop: computedValue,
+        };
+        break;
       case 'marginHorizontal':
         style = { ...style, marginLeft: computedValue, marginRight: computedValue };
         break;
@@ -206,7 +263,7 @@ const computeBoxStyle = (theme, {
       case 'padding':
         style = {
           ...style,
-          // Split to be computable for border offset.
+          // Split to be computable.
           paddingBottom: computedValue,
           paddingLeft: computedValue,
           paddingRight: computedValue,
@@ -256,48 +313,11 @@ const computeBoxStyle = (theme, {
     borderTopWidth,
   };
 
-  const borderWidthIsDefined = typeof borderWidth === 'number';
-
-  for (const prop in borderWidthProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
-    const propValue = borderWidthProps[prop];
-    const propIsDefined = typeof propValue === 'number';
-    if (!borderWidthIsDefined && !propIsDefined) continue; // eslint-disable-line no-continue
-    const paddingProp =
-      prop === 'borderBottomWidth' ? 'paddingBottom' :
-      prop === 'borderLeftWidth' ? 'paddingLeft' :
-      prop === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
-    // $FlowFixMe We know prop could not be found, we check it.
-    const paddingValue = style[paddingProp];
-    // We can't compensate string padding.
-    if (typeof paddingValue === 'string') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn([ // eslint-disable-line no-console
-          `Please set ${paddingProp} for ${prop} to number to ensure rhythm, `,
-          'or use style.',
-        ].join(''));
-      }
-      continue; // eslint-disable-line no-continue
-    }
-    const borderValue = propIsDefined ? propValue : borderWidth;
-    // $FlowFixMe
-    const compensatedPaddingValue = paddingValue - borderValue;
-    const canCompensate = compensatedPaddingValue >= 0;
-    if (!canCompensate) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn([ // eslint-disable-line no-console
-          `Please increase ${paddingProp} for ${prop} to ensure rhythm, `,
-          'or use style.',
-        ].join(''));
-      }
-      style = { ...style, borderWidth: 1, borderColor: 'red' };
-      continue; // eslint-disable-line no-continue
-    }
-    style = {
-      ...style,
-      [paddingProp]: compensatedPaddingValue,
-      [prop]: propValue,
-    };
-  }
+  style = setBorderTryEnsureRhythmWithPadding(
+    style,
+    borderWidthProps,
+    borderWidth,
+  );
 
   // Just value props.
   const justValueProps = {

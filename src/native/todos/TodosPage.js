@@ -1,6 +1,6 @@
 // @flow
 import Header from './Header';
-// import NewTodo from './NewTodo';
+import NewTodo from './NewTodo';
 import React from 'react';
 // import Todos from './Todos';
 import { Box } from '../../common/components';
@@ -8,7 +8,7 @@ import { Box } from '../../common/components';
 const TodosPage = () => (
   <Box>
     <Header />
-    {/* <NewTodo /> */}
+    <NewTodo />
     {/* <Todos /> */}
   </Box>
 );

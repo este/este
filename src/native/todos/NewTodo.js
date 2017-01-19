@@ -1,5 +1,19 @@
-// // @flow
-// import React from 'react';
+// @flow
+import React from 'react';
+import { Box, Button, Input, Text } from '../../common/components';
+
+const NewTodo = () => (
+  <Box>
+    <Text>fok</Text>
+    <Input />
+    <Button disabled onPress={() => {
+      console.warn('fok');
+    }}>Test</Button>
+  </Box>
+);
+
+export default NewTodo;
+
 // import newTodoMessages from '../../common/todos/newTodoMessages';
 // import theme from '../app/themes/initial';
 // import { StyleSheet, View } from 'react-native';

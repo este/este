@@ -64,7 +64,7 @@ const Header = ({
     flexDirection="row"
     alignItems="center"
     style={theme => ({
-      borderBottomColor: color(theme.colors.primary).lighten(0.25).string(),
+      borderBottomColor: color(theme.colors.primary).lighten(0.2).string(),
       borderBottomWidth: StyleSheet.hairlineWidth,
     })}
   >

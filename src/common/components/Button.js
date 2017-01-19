@@ -71,13 +71,26 @@ const Button = ({
     };
   }
 
-  // Give bigger button some vertical space.
+  // Give button some vertical space.
   if (props.size > 0) {
     props = {
+      marginVertical: 0.3,
+      paddingVertical: 0.2,
       ...props,
-      marginVertical: 0.25,
-      paddingVertical: 0.25,
     };
+  } else {
+    props = {
+      marginVertical: 0.5,
+      ...props,
+    };
+    if (props.borderWidth) {
+      props = {
+        // Ensure vertical Rhythm for Button size < 0. The lineHeight is the
+        // only possible way how to do it.
+        lineHeight: theme.typography.lineHeight - (2 * props.borderWidth),
+        ...props,
+      };
+    }
   }
 
   // Button has all Text props, but it consists of two components: Box and Text.
@@ -95,6 +108,7 @@ const Button = ({
     <Box
       as={BaseButton}
       borderRadius={borderRadius}
+      disabled={disabled}
       flexDirection="row"
       justifyContent="center"
       {...platformProps}
@@ -103,6 +117,7 @@ const Button = ({
     >
       {childrenIsText ?
         <Text
+          opacity={disabled ? theme.states.disabled.opacity : 1}
           style={theme => ({
             ...computedTextStyle,
             ...(textStyle ? textStyle(theme) : null),

@@ -1,8 +1,8 @@
 // @flow
 import type { State } from '../../common/types';
 import Box from './Box';
+import Button from './Button';
 import React from 'react';
-import SmallButton from './SmallButton';
 import Text from './Text';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -30,8 +30,8 @@ const SwitchTheme = ({
   setTheme,
   themes,
 }: SwitchThemeProps) => (
-  <Box marginBottom={1.5}>
-    <Text bold marginBottom={0.5}>
+  <Box>
+    <Text bold>
       Switch Theme
     </Text>
     <Box
@@ -42,15 +42,16 @@ const SwitchTheme = ({
       marginHorizontal={-0.25}
     >
       {getSortedThemeNames(themes).map(themeName => (
-        <SmallButton
+        <Button
           primary
           outline={themeName !== currentTheme}
+          size={-1}
           marginHorizontal={0.25}
           onPress={() => setTheme(themeName)}
           key={themeName}
         >
           {themeName.replace('Theme', '')}
-        </SmallButton>
+        </Button>
       ))}
     </Box>
   </Box>

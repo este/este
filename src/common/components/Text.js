@@ -20,6 +20,7 @@ export type TextProps = BoxProps & {
   color?: Color,
   decoration?: 'none' | 'underline' | 'line-through',
   italic?: boolean,
+  lineHeight?: number,
   // TODO: shadowColor, shadowOffset, shadowRadius.
 };
 
@@ -44,6 +45,7 @@ export const computeTextStyle = (theme: Theme, {
   color = 'black',
   decoration,
   italic,
+  lineHeight,
   ...props
 }: TextProps) => {
   let style = {
@@ -68,6 +70,10 @@ export const computeTextStyle = (theme: Theme, {
 
   if (italic) {
     style = { ...style, fontStyle: 'italic' };
+  }
+
+  if (lineHeight) {
+    style = { ...style, lineHeight };
   }
 
   return [style, props];
