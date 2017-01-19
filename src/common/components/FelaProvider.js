@@ -9,6 +9,7 @@ export default class FelaProvider extends React.Component {
   static propTypes = {
     Button: React.PropTypes.func.isRequired,
     Text: React.PropTypes.func.isRequired,
+    TextInput: React.PropTypes.func.isRequired,
     View: React.PropTypes.func.isRequired,
     renderer: React.PropTypes.object.isRequired,
   };
@@ -16,12 +17,13 @@ export default class FelaProvider extends React.Component {
   static childContextTypes = {
     Button: React.PropTypes.func.isRequired,
     Text: React.PropTypes.func.isRequired,
+    TextInput: React.PropTypes.func.isRequired,
     View: React.PropTypes.func.isRequired,
   };
 
   getChildContext() {
-    const { Button, Text, View } = this.props;
-    return { Button, Text, View };
+    const { Button, Text, TextInput, View } = this.props;
+    return { Button, Text, TextInput, View };
   }
 
   render() {
