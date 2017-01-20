@@ -1,21 +1,63 @@
 // @flow
 import type { State, Todo } from '../../common/types';
+import Checkbox from './Checkbox';
+import Footer from './Footer';
 import React from 'react';
 import todosMessages from '../../common/todos/todosMessages';
 import { Box, Text, TextInput } from '../../common/components';
 import { FormattedMessage } from 'react-intl';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
 import { connect } from 'react-redux';
 import { toggleTodoCompleted } from '../../common/todos/actions';
 
-// import Buttons from './Buttons';
-// import Todo from './Todo';
-
-type TodosProps = {
-  todos: Array<Todo>,
+type TodoItemProps = {
+  todo: Todo,
   toggleTodoCompleted: typeof toggleTodoCompleted,
 };
+
+const TodoItem = ({
+  todo,
+  toggleTodoCompleted,
+}: TodoItemProps) => (
+  <Box
+    borderBottomWidth={1}
+    flexDirection="row"
+    flexWrap="nowrap"
+    height={2}
+    style={theme => ({
+      borderBottomColor: theme.colors.open.gray3,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    })}
+  >
+    <Checkbox
+      alignItems="center"
+      checked={todo.completed}
+      height={2}
+      marginVertical={0}
+      onPress={() => toggleTodoCompleted(todo)}
+      width={2}
+    />
+    <TextInput
+      editable={false}
+      flex={1}
+      height={2}
+      marginHorizontal={0.5}
+      value={todo.title}
+    />
+  </Box>
+);
+
+//     <Checkbox
+//       checked={todo.completed}
+//       onPress={() => toggleTodoCompleted(todo)}
+//       style={styles.checkbox}
+//     />
+
+//     alignItems: 'center',
+//     flex: 1,
+//     flexDirection: 'row',
+
 
 const IsEmpty = () => (
   <Box alignItems="center" justifyContent="center" flex={1}>
@@ -33,6 +75,11 @@ const IsEmpty = () => (
   </Box>
 );
 
+type TodosProps = {
+  todos: Array<Todo>,
+  toggleTodoCompleted: typeof toggleTodoCompleted,
+};
+
 const Todos = ({
   todos,
   toggleTodoCompleted,
@@ -40,42 +87,25 @@ const Todos = ({
   if (isEmpty(todos)) {
     return <IsEmpty />;
   }
+
+  const sortedTodos = compose(
+    reverse,
+    sortBy(prop('createdAt')),
+    values, // object values to array
+  )(todos);
+
   return (
     <ScrollView>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-      <Text>fok</Text>
-
+      {sortedTodos.map(todo =>
+        <TodoItem
+          todo={todo}
+          toggleTodoCompleted={toggleTodoCompleted}
+          key={todo.id}
+        />,
+      )}
+      <Footer />
     </ScrollView>
-  )
-  return null;
+  );
 };
 
 export default connect(
@@ -84,45 +114,3 @@ export default connect(
   }),
   { toggleTodoCompleted },
 )(Todos);
-
-
-// import { Image, ScrollView, StyleSheet, View } from 'react-native';
-//
-//   row: {
-//     borderBottomColor: theme.separator,
-//     borderBottomWidth: 1,
-//     height: 53,
-//   },
-// });
-//
-// const Todos = ({ todos, toggleTodoCompleted }) => {
-//   if (isEmpty(todos)) {
-//     return (
-//       <CenteredContainer>
-//         <Image
-//           source={require('./img/EmptyState.png')}
-//           style={styles.icon}
-//         />
-//         <FormattedMessage {...todosMessages.empty} style={styles.empty} />
-//       </CenteredContainer>
-//     );
-//   }
-//
-//   const sortedTodos = compose(
-//     reverse,
-//     sortBy(prop('createdAt')),
-//     values, // object values to array
-//   )(todos);
-//
-//   return (
-//     <ScrollView>
-//       {sortedTodos.map(todo =>
-//         <View key={todo.id} style={styles.row}>
-//           <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
-//         </View>,
-//       )}
-//       <Buttons />
-//     </ScrollView>
-//   );
-// };
-//

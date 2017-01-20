@@ -14,7 +14,7 @@ const theme: Theme = {
     success: openColor.green5,
     warning: openColor.orange6,
     danger: openColor.red6,
-    black: openColor.gray8,
+    black: openColor.gray7,
     white: openColor.white,
     gray: openColor.gray5,
     open: openColor,

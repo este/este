@@ -22,6 +22,7 @@ type ButtonContext = {
 };
 
 const Button = ({
+  as,
   accessibilityLabel,
   boxStyle,
   children,
@@ -103,7 +104,7 @@ const Button = ({
 
   return (
     <Box
-      as={PlatformButton}
+      as={as || PlatformButton}
       borderRadius={borderRadius}
       disabled={disabled}
       flexDirection="row"
