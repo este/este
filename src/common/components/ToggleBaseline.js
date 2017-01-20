@@ -20,9 +20,9 @@ const ToggleBaseline = ({
 }: ToggleBaselineProps) => (
   <Box
     flexDirection="row"
-    justifyContent="center"
   >
     <OutlineButton
+      size={-1}
       key={baselineShown} // To enforce blur after click.
       onPress={toggleBaseline}
     >

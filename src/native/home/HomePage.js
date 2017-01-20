@@ -23,7 +23,7 @@ const HomePage = () => (
   <ScrollView>
     <Box
       paddingHorizontal={1}
-      paddingTop={3}
+      paddingTop={2}
     >
       <Text align="center" size={3}>
         Welcome to Este
@@ -41,16 +41,10 @@ const HomePage = () => (
           </Text>
         }
       </Box>
-      <Button bold color="warning">
+      <Button bold color="primary">
         Text Button
       </Button>
-      <Box
-        alignItems="center"
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="space-around"
-        marginVertical={1}
-      >
+      <Box marginBottom={1}>
         <Button primary>
           Primary
         </Button>
