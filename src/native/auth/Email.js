@@ -1,4 +1,9 @@
-// // @flow
+// @flow
+
+const Email = () => null;
+
+export default Email;
+
 // import type { State } from '../../common/types';
 // import React from 'react';
 // import buttonsMessages from '../../common/app/buttonsMessages';

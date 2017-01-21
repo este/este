@@ -3,6 +3,7 @@ import type { State } from '../../common/types';
 import type { Theme } from '../../common/themes/types';
 import * as themes from '../themes';
 import Menu from './Menu';
+import Page from './Page';
 import React from 'react';
 import SideMenu from 'react-native-side-menu';
 import start from '../../common/app/start';
@@ -14,14 +15,13 @@ import { ThemeProvider } from 'react-fela';
 import { appShowMenu } from '../../common/app/actions';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import Page from './Page';
 
 // Pages
 import HomePage from '../home/HomePage';
 import IntlPage from '../intl/IntlPage';
-// import MePage from '../me/MePage';
+import MePage from '../me/MePage';
 import OfflinePage from '../offline/OfflinePage';
-// import SignInPage from '../auth/SignInPage';
+import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 
 type AppProps = {
@@ -60,10 +60,10 @@ const App = ({
           <Page pattern="/intl" component={IntlPage} />
           <Page pattern="/offline" component={OfflinePage} />
           <Page pattern="/todos" component={TodosPage} />
-          {/* <Page pattern="/signin" component={SignInPage} />
-          <Page authorized pattern="/me" component={MePage} />*/}
+          <Page pattern="/signin" component={SignInPage} />
+          <Page authorized pattern="/me" component={MePage} />
           {/* Miss does't work in React Native for some reason.
-          <Miss render={() => <Redirect to="/" />} />
+            <Miss render={() => <Redirect to="/" />} />
           */}
           <Match
             pattern="/"
