@@ -38,6 +38,7 @@ const Button = ({
     accessibilityComponentType: 'button',
     accessibilityLabel,
     accessibilityTraits: ['button'],
+    activeOpacity: theme.states.active.opacity,
     onPress,
   } : {
     onClick: onPress,

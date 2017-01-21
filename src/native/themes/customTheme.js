@@ -25,6 +25,7 @@ const theme: Theme = {
   states: {
     active: {
       darken: 0.2,
+      opacity: 0.7,
     },
     disabled: {
       cursor: 'default',

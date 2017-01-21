@@ -33,6 +33,7 @@ export type Theme = {|
   states: {
     active: {|
       darken: number,
+      opacity: number,
     |},
     disabled: {|
       cursor: string,
