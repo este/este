@@ -5122,9 +5122,9 @@ koa-static@^3.0.0:
     debug "*"
     koa-send "^3.2.0"
 
-koa-webpack@^0.1.9:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/koa-webpack/-/koa-webpack-0.1.10.tgz#c3f076110a846b04601666fe6a5065d30d2841e1"
+koa-webpack@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/koa-webpack/-/koa-webpack-0.2.0.tgz#4f920e428c820627c9ed19f5143420c712393e6f"
   dependencies:
     app-root-path "^2.0.1"
     koa-compose "^3.1.0"
