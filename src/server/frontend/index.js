@@ -1,17 +1,12 @@
 // @flow
-import compress from 'koa-compress';
-import createRouter from 'koa-router';
+import compression from 'compression';
+import express from 'express';
 import render from './render';
-import serve from 'koa-static';
 
-const useFrontend = (app: Object) => {
-  app.use(compress());
-  app.use(serve('/assets', { maxAge: '200d' }));
+const app = express();
 
-  const router = createRouter();
-  router.get('*', render);
-  app.use(router.routes());
-  app.use(router.allowedMethods());
-};
+app.use(compression());
+app.use('/assets', express.static('build', { maxAge: '200d' }));
+app.get('*', render);
 
-export default useFrontend;
+export default app;

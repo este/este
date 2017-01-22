@@ -1,14 +1,14 @@
 // @flow
 import config from './config';
 import errorHandler from './lib/errorHandler';
-import Koa from 'koa';
-import useFrontend from './frontend';
+import express from 'express';
+import frontend from './frontend';
 
-const app = new Koa();
+const app = express();
 
-app.use(errorHandler);
-
-useFrontend(app);
+// $FlowFixMe
+app.use(frontend);
+app.get('*', errorHandler);
 
 app.listen(config.port, () => {
   console.log(`Server started at http://localhost:${config.port}`);

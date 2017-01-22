@@ -1,53 +1,36 @@
-// @flow
-import accepts from 'accepts';
+// @flow weak
 import config from '../config';
 
-const errorHandler = async (ctx: Object, next: Function) => {
-  try {
-    await next();
-  } catch (err) {
-    const errorDetails = err.stack || err;
+const errorHandler = (err, req, res) => {
+  const errorDetails = err.stack || err;
 
-    console.error('Error:', errorDetails);
+  console.error('Yay', errorDetails);
 
-    ctx.status = 500;
-    const accept = accepts(ctx.request);
-    // the order of this list is significant; should be server preferred order
-    switch (accept.type(['json', 'html'])) {
-      case 'json': {
-        ctx.set('Content-Type', 'application/json');
+  res.status(500).format({
+    json() {
+      const errorInfo = {
+        details: config.isProduction ? null : errorDetails,
+        error: err.toString(),
+      };
+      res.send(errorInfo);
+    },
 
-        const errorInfo = {
-          details: config.isProduction ? null : errorDetails,
-          error: err.toString(),
-        };
+    html() {
+      const message = config.isProduction
+        ? '<p>Something went wrong</p>'
+        : `<pre>${errorDetails}</pre>`;
 
-        ctx.body = errorInfo;
-        break;
-      }
-      case 'html': {
-        ctx.set('Content-Type', 'text/html');
+      res.send(`<h1>500 Internal server error</h1>\n${message}`);
+    },
 
-        const message = config.isProduction
-          ? '<p>Something went wrong</p>'
-          : `<pre>${errorDetails}</pre>`;
+    default() {
+      const message = config.isProduction
+        ? 'Something went wrong'
+        : `${errorDetails}`;
 
-        ctx.body = `<h1>500 Internal server error</h1>\n${message}`;
-        break;
-      }
-      default: {
-        // the fallback is text/plain, so no need to specify it above
-        ctx.set('Content-Type', 'text/plain');
-
-        const message = config.isProduction
-          ? 'Something went wrong'
-          : `${errorDetails}`;
-
-        ctx.body = `500 Internal server error:\n${message}`;
-        break;
-      }
-    }
-  }
+      res.send(`500 Internal server error:\n${message}`);
+    },
+  });
 };
 
 export default errorHandler;
