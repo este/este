@@ -15,7 +15,7 @@ import type {
   VerticalAlign,
 } from '../themes/types';
 import styled from './styled';
-import warning from 'warning';
+// import warning from 'warning';
 
 export type BoxProps = {
   // Element
@@ -182,10 +182,10 @@ const adjustPaddingForRhythm = (
       const direction = prop === 'Left' || prop === 'Right'
         ? 'horizontal'
         : 'vertical';
-      warning(false, [
-        `Increase ${paddingProp} to ensure ${direction} rhythm. `,
-        'Use suppressRhythmWarning prop to suppress this warning.',
-      ].join(''));
+      // warning(false, [
+      //   `Increase ${paddingProp} to ensure ${direction} rhythm. `,
+      //   'Use suppressRhythmWarning prop to suppress this warning.',
+      // ].join(''));
     }
     return {
       ...canCompensate ? {} : { outline: 'solid 1px red' },
