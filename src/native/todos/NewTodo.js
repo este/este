@@ -1,5 +1,4 @@
 // @flow
-import type { Theme } from '../../common/themes/types';
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
 import { Box, TextInput } from '../../common/components';
@@ -15,10 +14,6 @@ type NewTodoProps = {
   intl: $IntlShape,
 };
 
-type NewTodoContext = {
-  theme: Theme,
-};
-
 const onSubmitEditing = (fields, addTodo) => () => {
   if (!fields.title.value.trim()) return;
   addTodo(fields.title.value);
@@ -29,9 +24,7 @@ const NewTodo = ({
   addTodo,
   fields,
   intl,
-}: NewTodoProps, {
-  theme,
-}: NewTodoContext) => (
+}: NewTodoProps) => (
   <Box
     backgroundColor="primary"
     paddingVertical={0.5}
@@ -43,15 +36,10 @@ const NewTodo = ({
       maxLength={100}
       onSubmitEditing={onSubmitEditing(fields, addTodo)}
       placeholder={intl.formatMessage(newTodoMessages.placeholder)}
-      placeholderTextColor={theme.colors.open.blue1}
       size={1}
     />
   </Box>
 );
-
-NewTodo.contextTypes = {
-  theme: React.PropTypes.object,
-};
 
 export default compose(
   connect(

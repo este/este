@@ -48,17 +48,6 @@ const TodoItem = ({
   </Box>
 );
 
-//     <Checkbox
-//       checked={todo.completed}
-//       onPress={() => toggleTodoCompleted(todo)}
-//       style={styles.checkbox}
-//     />
-
-//     alignItems: 'center',
-//     flex: 1,
-//     flexDirection: 'row',
-
-
 const IsEmpty = () => (
   <Box alignItems="center" justifyContent="center" flex={1}>
     <Image source={require('./img/EmptyState.png')} />

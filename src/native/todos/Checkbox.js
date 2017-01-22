@@ -26,8 +26,8 @@ const Checkbox = ({
       as={Image}
       source={checked ? images.checked : images.unchecked}
       style={theme => ({
-        height: theme.typography.lineHeight * 0.8,
-        width: theme.typography.lineHeight * 0.8,
+        height: theme.typography.fontSize(0),
+        width: theme.typography.fontSize(0),
       })}
     />
   </Button>

@@ -18,7 +18,7 @@ import isReactNative from '../../common/app/isReactNative';
 
 export type BoxProps = {
   as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html
-  style?: (theme: Theme) => Object, // Low level deliberately not typed.
+  style?: (theme: Theme, style?: Object) => Object, // Low level deliberately not typed.
 
   // Maybe rhythm props.
   margin?: number | string,
@@ -93,7 +93,6 @@ const setBorderTryEnsureRhythmWithPadding = (
   borderWidthProps,
   borderWidth,
 ) => {
-  // return style;
   const borderWidthIsDefined = typeof borderWidth === 'number';
   for (const prop in borderWidthProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
     const propValue = borderWidthProps[prop];
@@ -118,6 +117,7 @@ const setBorderTryEnsureRhythmWithPadding = (
         ...style,
         [prop]: propValue,
       };
+      // TODO: Put warning back, allow to disable it.
       // if (process.env.NODE_ENV !== 'production') {
       //   console.warn([ // eslint-disable-line no-console
       //     `Please increase ${paddingProp} for ${prop} to ensure rhythm, `,
@@ -367,7 +367,7 @@ const Box = ({
       // TODO: Add the same logic for browser className.
       style={renderer.renderRule(() => ({
         ...boxStyle,
-        ...(style && style(theme)),
+        ...(style && style(theme, boxStyle)),
       }))}
     />
   );

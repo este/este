@@ -49,6 +49,7 @@ const Button = ({
   if (propColor) {
     props = {
       ...props,
+      // Note it overrides props.
       backgroundColor: propColor,
       bold: true,
       color: 'white',
@@ -61,6 +62,7 @@ const Button = ({
   if (propColor && props.outline) {
     props = {
       ...props,
+      // Note it overrides props.
       backgroundColor: null,
       bold: false,
       borderColor: props.backgroundColor,
@@ -85,7 +87,7 @@ const Button = ({
     if (props.borderWidth) {
       props = {
         // Ensure vertical Rhythm for Button size < 0. The lineHeight is the
-        // only possible way how to do it.
+        // only possible way how to do it. It doesn't work for multilines
         lineHeight: theme.typography.lineHeight - (2 * props.borderWidth),
         ...props,
       };

@@ -18,7 +18,7 @@ const Locales = ({
   locales,
   setCurrentLocale,
 }) => (
-  <Box marginVertical={1}>
+  <Box marginBottom={1}>
     {locales.map(locale =>
       <Button
         bold={locale === currentLocale}

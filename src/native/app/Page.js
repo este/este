@@ -1,11 +1,10 @@
 // @flow
+import Alert from './Alert';
 import Header from './Header';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { Box, Match } from '../../common/components';
 import { injectIntl } from 'react-intl';
-
-// import { Alert } from './components';
 
 type PageProps = {
   component: () => React.Element<*>,
@@ -41,8 +40,8 @@ const Page = ({
         {titles[pattern] &&
           <Header title={intl.formatMessage(titles[pattern])} />
         }
-        {/* <Alert />*/}
         <Box flex={1}>
+          <Alert />
           <Component {...renderProps} />
         </Box>
       </Box>

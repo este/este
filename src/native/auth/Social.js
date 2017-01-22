@@ -38,7 +38,7 @@ const Social = ({
     signIn('facebook', { isNative: true });
   };
   return (
-    <Box>
+    <Box height={2} justifyContent="center" alignItems="center">
       <SocialLoginButton
         backgroundColor="#3b5998"
         message={buttonsMessages.facebookSignIn}

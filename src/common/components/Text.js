@@ -26,6 +26,21 @@ type TextContext = {
   theme: Theme,
 };
 
+// github.com/facebook/react-native/issues/29#issuecomment-96588898
+// React Native doesn't support borders (except borderWidth) on Text-like
+// components, and we can't compensate them for the rhythm anyway. Use Box.
+const textPropsNotWorkingInReactNativeYet = [
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomWidth',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopWidth',
+  'borderWidth',
+];
+
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const fontSizeWithComputedLineHeight = (typography, size) => {
   const fontSize = typography.fontSize(size);
@@ -76,18 +91,6 @@ export const computeTextStyle = (theme: Theme, {
   return [style, props];
 };
 
-const textPropsNotWorkingInReactNativeYet = [
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
-  'borderBottomWidth',
-  'borderLeftWidth',
-  'borderRightWidth',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderTopWidth',
-  'borderWidth',
-];
-
 const Text = ({
   as,
   style,
@@ -99,10 +102,11 @@ const Text = ({
   if (process.env.NODE_ENV !== 'production') {
     textPropsNotWorkingInReactNativeYet.forEach(prop => {
       if (!(prop in props)) return;
-      console.warn(`${prop} is not allowed on Text. Use Box.`); // eslint-disable-line no-console
+      console.warn( // eslint-disable-line no-console
+        `${prop} is not allowed on Text-like component. Use Box wrapper.
+      `);
     });
   }
-
   const [textStyle, restProps] = computeTextStyle(theme, props);
 
   return (
@@ -111,7 +115,7 @@ const Text = ({
       {...restProps}
       style={theme => ({
         ...textStyle,
-        ...(style && style(theme)),
+        ...(style && style(theme, textStyle)),
       })}
     />
   );
