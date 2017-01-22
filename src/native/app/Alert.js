@@ -1,11 +1,24 @@
 // @flow
-import type { State } from '../../../common/types';
+import type { State } from '../../common/types';
 import React from 'react';
-import errorToMessage from '../../../common/app/errorToMessage';
-import theme from '../themes/initial';
-import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { FormattedMessage } from './';
+import errorToMessage from '../../common/app/errorToMessage';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Box, Text } from '../../common/components';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
+
+type AlertProps = {
+  duration: number,
+  error?: typeof Error,
+  hideTimeout: number,
+  intl: $IntlShape,
+};
+
+type AlertState = {
+  alertHeight: number,
+  animation: Object,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -16,42 +29,16 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 1,
   },
-  alert: {
-    borderBottomWidth: 1,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-  },
-  message: {
-    color: theme.bright(theme.inverseTextColor),
-    fontWeight: 'bold',
-    margin: theme.fontSize * 0.75,
-    textAlign: 'center',
-  },
 });
-
-type LocalState = {
-  alertHeight: number,
-  animation: any,
-};
 
 class Alert extends React.Component {
 
-  static propTypes = {
-    brand: React.PropTypes.string,
-    duration: React.PropTypes.number.isRequired,
-    error: React.PropTypes.instanceOf(Error),
-    hideTimeout: React.PropTypes.number.isRequired,
-  };
-
   static defaultProps = {
-    brand: theme.brandDanger,
     duration: 300,
     hideTimeout: 4000,
   };
 
-  state: LocalState = {
+  state: AlertState = {
     alertHeight: 0,
     animation: new Animated.Value(0),
   };
@@ -70,14 +57,6 @@ class Alert extends React.Component {
     this.animateTo(0);
   };
 
-  getAlertStyle() {
-    const { brand } = this.props;
-    return {
-      backgroundColor: brand,
-      borderBottomColor: theme.bright(brand),
-    };
-  }
-
   getContainerStyle() {
     const { alertHeight, animation } = this.state;
     return {
@@ -88,6 +67,8 @@ class Alert extends React.Component {
       opacity: animation,
     };
   }
+
+  props: AlertProps;
 
   animateTo(toValue, fromValue) {
     const { duration } = this.props;
@@ -112,28 +93,34 @@ class Alert extends React.Component {
   }
 
   render() {
-    const { error } = this.props;
+    const { error, intl: { formatMessage } } = this.props;
     if (!error) return null;
 
     const errorMessage = errorToMessage(error);
     if (!errorMessage || !errorMessage.message) return null;
 
-    const alertStyle = this.getAlertStyle();
     const containerStyle = this.getContainerStyle();
 
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
         <Animated.View style={[styles.container, containerStyle]}>
-          <View
-            style={[styles.alert, alertStyle]}
+          <Box
+            backgroundColor="danger"
+            bottom={0}
+            left={0}
             onLayout={e => this.onAlertLayout(e)}
+            position="absolute"
+            right={0}
           >
-            <FormattedMessage
-              {...errorMessage.message}
-              values={errorMessage.values || {}}
-              style={styles.message}
-            />
-          </View>
+            <Text
+              bold
+              color="white"
+              padding={0.5}
+              paddingHorizontal={1}
+            >
+              {formatMessage(errorMessage.message, errorMessage.values || {})}
+            </Text>
+          </Box>
         </Animated.View>
       </TouchableWithoutFeedback>
     );
@@ -141,8 +128,11 @@ class Alert extends React.Component {
 
 }
 
-export default connect(
-  (state: State) => ({
-    error: state.app.error,
-  }),
+export default compose(
+  connect(
+    (state: State) => ({
+      error: state.app.error,
+    }),
+  ),
+  injectIntl,
 )(Alert);

@@ -7,7 +7,7 @@ const emailMessages = defineMessages({
     id: 'auth.email.emailLegend',
   },
   passwordRecoveryLegend: {
-    defaultMessage: 'Email Password Recovery',
+    defaultMessage: 'Password Recovery',
     id: 'auth.email.passwordRecoveryLegend',
   },
   emailPlaceholder: {

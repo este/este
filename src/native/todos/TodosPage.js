@@ -3,14 +3,14 @@ import Header from './Header';
 import NewTodo from './NewTodo';
 import React from 'react';
 import Todos from './Todos';
-import { Container } from '../app/components';
+import { Box } from '../../common/components';
 
 const TodosPage = () => (
-  <Container>
+  <Box flex={1}>
     <Header />
     <NewTodo />
     <Todos />
-  </Container>
+  </Box>
 );
 
 export default TodosPage;

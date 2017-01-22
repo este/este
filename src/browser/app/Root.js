@@ -1,7 +1,7 @@
 // @flow
 import App from './App';
 import React from 'react';
-import configureFela from '../../common/configureFela';
+import configureFela from '../configureFela';
 import { BrowserRouter } from 'react-router';
 import { Provider as Fela } from 'react-fela';
 import { Provider as Redux } from 'react-redux';

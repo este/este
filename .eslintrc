@@ -19,6 +19,7 @@
     "import/first": 0, // Este sorts by atom/sort-lines natural order.
     "import/no-duplicates": 2,
     "import/prefer-default-export": 0, // No. Actions can have just one action.
+    "jsx-a11y/anchor-has-content": 0, // Doesn't work with new components.
     "jsx-a11y/html-has-lang": 0, // Can't recognize the Helmet.
     "no-confusing-arrow": 0, // This rule is super confusing.
     "no-duplicate-imports": 0, // github.com/babel/eslint-plugin-babel/issues/59#issuecomment-230118848
@@ -31,7 +32,6 @@
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
     "react/prop-types": 0, // Can't detect flowtype correctly.
     // React Native.
-    "react-native/no-color-literals": 2,
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
     // Rules for functional programming. We do not need Object.freeze.

@@ -1,28 +1,21 @@
-// @flow
-import type { State } from '../../common/types';
+ // @flow
+import type { State, User } from '../../common/types';
 import Email from './Email';
 import React from 'react';
 import Social from './Social';
-import theme from '../app/themes/initial';
-import { Container } from '../app/components';
 import { Redirect } from 'react-router';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-  email: {
-    marginBottom: theme.fontSize * 2,
-    width: theme.fontSize * 16,
-  },
-  social: {
-    alignSelf: 'center',
-  },
-});
+type SignInPageProps = {
+  location: Object,
+  viewer: User,
+};
 
-const SignInPage = ({ location, viewer }) => (
+const SignInPage = ({
+  location,
+  viewer,
+}: SignInPageProps) => (
   viewer ?
     <Redirect
       to={(
@@ -33,17 +26,10 @@ const SignInPage = ({ location, viewer }) => (
     />
   :
     <ScrollView>
-      <Container style={styles.container}>
-        <Email style={styles.email} />
-        <Social style={styles.social} />
-      </Container>
+      <Email />
+      <Social />
     </ScrollView>
 );
-
-SignInPage.propTypes = {
-  location: React.PropTypes.object.isRequired,
-  viewer: React.PropTypes.object,
-};
 
 export default connect(
   (state: State) => ({

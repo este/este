@@ -1,6 +1,8 @@
 // @flow
 import styled from './styled';
 
+// TODO: Rewrite to new Box.
+
 const Container = styled(theme => ({
   display: 'flex',
   flexDirection: 'column',
