@@ -1,5 +1,5 @@
-// flow-typed signature: f9adc1fe5500052e55205636d0f376a7
-// flow-typed version: c17c09b83f/jest_v18.x.x/flow_>=v0.33.x
+// flow-typed signature: e49570b0f5e396c7206dda452bd6f004
+// flow-typed version: 1590d813f4/jest_v18.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -434,6 +434,7 @@ declare var jasmine: {
   arrayContaining(value: Array<mixed>): void,
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
+  createSpyObj(baseName: string, methodNames: Array<string>): {[methodName: string]: JestSpyType},
   objectContaining(value: Object): void,
   stringMatching(value: string): void,
 }
