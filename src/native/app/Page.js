@@ -1,10 +1,17 @@
 // @flow
+import Alert from './Alert';
 import Header from './Header';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { Alert, Container } from './components';
-import { Match } from '../../common/app/components';
-import { injectIntl, intlShape } from 'react-intl';
+import { Box, Match } from '../../common/components';
+import { injectIntl } from 'react-intl';
+
+type PageProps = {
+  component: () => React.Element<*>,
+  exactly?: boolean,
+  intl: $IntlShape,
+  pattern: string,
+};
 
 const titles = {
   '/': linksMessages.home,
@@ -15,26 +22,31 @@ const titles = {
   '/me': linksMessages.me,
 };
 
-const Page = ({ component: Component, intl, pattern, ...props }) => (
+const Page = ({
+  component: Component,
+  exactly,
+  intl,
+  pattern,
+}: PageProps) => (
   <Match
-    {...props}
+    exactly={exactly}
     pattern={pattern}
     render={renderProps => (
-      <Container>
+      <Box
+        // We need flex and backgroundColor to cover SideMenu.
+        backgroundColor="white"
+        flex={1}
+      >
         {titles[pattern] &&
           <Header title={intl.formatMessage(titles[pattern])} />
         }
-        <Alert />
-        <Component {...renderProps} />
-      </Container>
+        <Box flex={1}>
+          <Alert />
+          <Component {...renderProps} />
+        </Box>
+      </Box>
     )}
   />
 );
-
-Page.propTypes = {
-  component: React.PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  pattern: React.PropTypes.string.isRequired,
-};
 
 export default injectIntl(Page);

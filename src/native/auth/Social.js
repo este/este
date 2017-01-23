@@ -3,12 +3,17 @@ import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
-import { FormattedMessage } from '../app/components';
-import { View } from 'react-native';
+import { Box } from '../../common/components';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { signIn } from '../../common/auth/actions';
 
-const SocialLoginButton = ({ backgroundColor, message, name, onPress }) =>
+const SocialLoginButton = ({
+  backgroundColor,
+  message,
+  name,
+  onPress,
+}) =>
   <FormattedMessage {...message}>
     {message =>
       <Icon.Button
@@ -19,35 +24,30 @@ const SocialLoginButton = ({ backgroundColor, message, name, onPress }) =>
     }
   </FormattedMessage>;
 
-SocialLoginButton.propTypes = {
-  backgroundColor: React.PropTypes.string.isRequired,
-  message: React.PropTypes.object.isRequired,
-  name: React.PropTypes.string.isRequired,
-  onPress: React.PropTypes.func.isRequired,
+type SocialProps = {
+  disabled: boolean,
+  signIn: typeof signIn,
 };
 
-const Social = ({ disabled, signIn, style }) => {
-  const onFacebookLoginPress = () => {
+const Social = ({
+  disabled,
+  signIn,
+}: SocialProps) => {
+  const onPress = () => {
     if (disabled) return;
     signIn('facebook', { isNative: true });
   };
   return (
-    <View style={style}>
+    <Box height={2} justifyContent="center" alignItems="center">
       <SocialLoginButton
         backgroundColor="#3b5998"
         message={buttonsMessages.facebookSignIn}
         name="facebook"
-        onPress={onFacebookLoginPress}
+        onPress={onPress}
       />
       {/* TODO: Add more social login buttons. */}
-    </View>
+    </Box>
   );
-};
-
-Social.propTypes = {
-  disabled: React.PropTypes.bool.isRequired,
-  signIn: React.PropTypes.func.isRequired,
-  style: View.propTypes.style,
 };
 
 export default connect(

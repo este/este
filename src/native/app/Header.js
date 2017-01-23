@@ -2,59 +2,85 @@
 import type { State } from '../../common/types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import theme from './themes/initial';
-import { Button, Text } from './components';
-import { Platform, StyleSheet, View } from 'react-native';
+import color from 'color';
+import { Box, Button, Text } from '../../common/components';
+import { Platform, StyleSheet } from 'react-native';
 import { appShowMenu } from '../../common/app/actions';
 import { connect } from 'react-redux';
 
-const iOSDefaultStatusBarHeight = 20;
-const paddingTopOffset = Platform.OS === 'ios' ? iOSDefaultStatusBarHeight : 0;
+type HeaderProps = {
+  appShowMenu: typeof appShowMenu,
+  menuShown: boolean,
+  title: string,
+};
 
-const styles = StyleSheet.create({
-  header: {
-    alignItems: 'center', // align items in the cross-axis flexDirection
-    backgroundColor: theme.brandPrimary,
-    borderBottomColor: theme.bright(theme.brandPrimary),
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between', // align items in the flexDirection
-    paddingBottom: theme.fontSize * 0.625,
-    paddingTop: (theme.fontSize * 0.625) + paddingTopOffset,
-  },
-  title: {
-    color: theme.inverseTextColor,
-    fontSize: theme.fontSizeH5,
-  },
-  button: {
-    alignItems: 'center',
-    top: 2,
-    width: theme.fontSize * 3,
-  },
-  icon: {
-    color: theme.inverseTextColor,
-    fontSize: theme.fontSizeH4,
-  },
-});
+// iOS status bar is an overlay with default height 20px. We add one baseline
+// to preserve the vertical rhythm. We also set height to ensure hairline
+// border height (various) is included.
+const platformStyles = () => Platform.OS === 'ios' ? {
+  paddingTop: 1,
+  height: 3,
+} : {
+  height: 2,
+};
 
-const Header = ({ menuShown, appShowMenu, title }) => (
-  <View style={styles.header}>
-    <Button onPress={() => appShowMenu(!menuShown)} style={styles.button}>
-      <Icon name="ios-menu" style={styles.icon} />
-    </Button>
-    <Text style={styles.title}>{title}</Text>
-    <Button style={styles.button}>
-      {/* This is a placeholder for the right side button. */}
-      {/* <Icon name="ios-menu" style={styles.icon} /> */}
-    </Button>
-  </View>
+const HeaderButton = ({
+  right,
+  ...props
+}) => (
+  <Box
+    alignSelf="stretch"
+    flex={1}
+    flexDirection="row"
+    justifyContent={right ? 'flex-end' : 'flex-start'}
+  >
+    <Button
+      // backgroundColor="danger" // To test.
+      color="white"
+      flexDirection="column"
+      paddingHorizontal={0.5}
+      {...props}
+    />
+  </Box>
 );
 
-Header.propTypes = {
-  appShowMenu: React.PropTypes.func.isRequired,
-  menuShown: React.PropTypes.bool.isRequired,
-  title: React.PropTypes.string.isRequired,
-};
+const HeaderIcon = (props) => (
+  <Text
+    as={Icon}
+    color="white"
+    size={1}
+    {...props}
+  />
+);
+
+const Header = ({
+  appShowMenu,
+  menuShown,
+  title,
+}: HeaderProps) => (
+  <Box
+    {...platformStyles()}
+    backgroundColor="primary"
+    flexDirection="row"
+    alignItems="center"
+    style={theme => ({
+      borderBottomColor: color(theme.colors.primary).lighten(0.2).string(),
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    })}
+  >
+    <HeaderButton onPress={() => appShowMenu(!menuShown)}>
+      <HeaderIcon name="ios-menu" />
+    </HeaderButton>
+    <Text color="white" size={1}>
+      {title}
+    </Text>
+    <HeaderButton right>
+      {/* A placeholder for the right side button. */}
+      {/* <HeaderIcon name="ios-menu" /> */}
+      {/* Foo */}
+    </HeaderButton>
+  </Box>
+);
 
 export default connect(
   (state: State) => ({

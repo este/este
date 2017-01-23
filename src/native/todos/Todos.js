@@ -1,44 +1,80 @@
 // @flow
-import type { State } from '../../common/types';
-import Buttons from './Buttons';
+import type { State, Todo } from '../../common/types';
+import Checkbox from './Checkbox';
+import Footer from './Footer';
 import React from 'react';
-import Todo from './Todo';
-import theme from '../app/themes/initial';
 import todosMessages from '../../common/todos/todosMessages';
-import { CenteredContainer, FormattedMessage } from '../app/components';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { Box, Text, TextInput } from '../../common/components';
+import { FormattedMessage } from 'react-intl';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
 import { connect } from 'react-redux';
 import { toggleTodoCompleted } from '../../common/todos/actions';
 
-const styles = StyleSheet.create({
-  empty: {
-    color: theme.placeholderTextColor,
-    fontSize: theme.fontSizeH5,
-  },
-  icon: {
-    height: 60,
-    marginBottom: 10,
-    width: 60,
-  },
-  row: {
-    borderBottomColor: theme.separator,
-    borderBottomWidth: 1,
-    height: 53,
-  },
-});
+type TodoItemProps = {
+  todo: Todo,
+  toggleTodoCompleted: typeof toggleTodoCompleted,
+};
 
-const Todos = ({ todos, toggleTodoCompleted }) => {
+const TodoItem = ({
+  todo,
+  toggleTodoCompleted,
+}: TodoItemProps) => (
+  <Box
+    borderBottomWidth={1}
+    flexDirection="row"
+    flexWrap="nowrap"
+    height={2}
+    style={theme => ({
+      borderBottomColor: theme.colors.open.gray3,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    })}
+  >
+    <Checkbox
+      alignItems="center"
+      checked={todo.completed}
+      height={2}
+      marginVertical={0}
+      onPress={() => toggleTodoCompleted(todo)}
+      width={2}
+    />
+    <TextInput
+      editable={false}
+      flex={1}
+      height={2}
+      marginHorizontal={0.5}
+      value={todo.title}
+    />
+  </Box>
+);
+
+const IsEmpty = () => (
+  <Box alignItems="center" justifyContent="center" flex={1}>
+    <Image source={require('./img/EmptyState.png')} />
+    <FormattedMessage {...todosMessages.empty}>
+      {message =>
+        <Text
+          bold
+          color="gray"
+          marginTop={1}
+          size={1}
+        >{message}</Text>
+      }
+    </FormattedMessage>
+  </Box>
+);
+
+type TodosProps = {
+  todos: Array<Todo>,
+  toggleTodoCompleted: typeof toggleTodoCompleted,
+};
+
+const Todos = ({
+  todos,
+  toggleTodoCompleted,
+}: TodosProps) => {
   if (isEmpty(todos)) {
-    return (
-      <CenteredContainer>
-        <Image
-          source={require('./img/EmptyState.png')}
-          style={styles.icon}
-        />
-        <FormattedMessage {...todosMessages.empty} style={styles.empty} />
-      </CenteredContainer>
-    );
+    return <IsEmpty />;
   }
 
   const sortedTodos = compose(
@@ -50,18 +86,15 @@ const Todos = ({ todos, toggleTodoCompleted }) => {
   return (
     <ScrollView>
       {sortedTodos.map(todo =>
-        <View key={todo.id} style={styles.row}>
-          <Todo todo={todo} toggleTodoCompleted={toggleTodoCompleted} />
-        </View>,
+        <TodoItem
+          todo={todo}
+          toggleTodoCompleted={toggleTodoCompleted}
+          key={todo.id}
+        />,
       )}
-      <Buttons />
+      <Footer />
     </ScrollView>
   );
-};
-
-Todos.propTypes = {
-  todos: React.PropTypes.object.isRequired,
-  toggleTodoCompleted: React.PropTypes.func.isRequired,
 };
 
 export default connect(

@@ -1,18 +1,24 @@
 // @flow
 import type { State } from '../../common/types';
 import React from 'react';
-import { CenteredContainer, Text } from '../app/components';
+import { Box, Text } from '../../common/components';
 import { connect } from 'react-redux';
 
-const OfflinePage = ({ online }) => (
-  <CenteredContainer>
-    <Text>state.app.online: {online.toString()}</Text>
-  </CenteredContainer>
-);
+type OfflinePageProps = {
+  online: boolean,
+}
 
-OfflinePage.propTypes = {
-  online: React.PropTypes.bool.isRequired,
-};
+const OfflinePage = ({
+  online,
+}: OfflinePageProps) => (
+  <Box
+    alignItems="center"
+    justifyContent="center"
+    flex={1}
+  >
+    <Text>state.app.online: {online.toString()}</Text>
+  </Box>
+);
 
 export default connect(
   (state: State) => ({

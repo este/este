@@ -1,12 +1,10 @@
 // @flow
-import type { State } from '../../common/types';
+import type { State, Todo } from '../../common/types';
 import React from 'react';
-import theme from '../app/themes/initial';
-import { FormattedMessage } from '../app/components';
-import { StyleSheet, View } from 'react-native';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
-import { defineMessages } from 'react-intl';
 import { values } from 'ramda';
+import { Box, Text } from '../../common/components';
 
 const messages = defineMessages({
   leftTodos: {
@@ -19,35 +17,32 @@ const messages = defineMessages({
   },
 });
 
-const styles = StyleSheet.create({
-  header: {
-    alignItems: 'center',
-    backgroundColor: theme.brandPrimary,
-    justifyContent: 'center',
-    paddingTop: theme.fontSize,
-    paddingBottom: theme.fontSize * 0.5,
-  },
-  text: {
-    color: theme.inverseTextColor,
-    fontSize: theme.fontSizeH5,
-  },
-});
-
-const Header = ({ todos }) => {
-  const leftTodos = values(todos).filter(todo => !todo.completed).length;
-  return (
-    <View style={styles.header}>
-      <FormattedMessage
-        {...messages.leftTodos}
-        style={styles.text}
-        values={{ leftTodos }}
-      />
-    </View>
-  );
+type HeaderProps = {
+  todos: Array<Todo>,
 };
 
-Header.propTypes = {
-  todos: React.PropTypes.object.isRequired,
+const computeLeftTodos = todos => values(todos)
+  .filter(todo => !todo.completed)
+  .length;
+
+const Header = ({
+  todos,
+}: HeaderProps) => {
+  const leftTodos = computeLeftTodos(todos);
+  return (
+    <Box
+      alignItems="center"
+      backgroundColor="primary"
+      padding={0.5}
+    >
+      <FormattedMessage
+        {...messages.leftTodos}
+        values={{ leftTodos }}
+      >{message =>
+        <Text color="white" size={1}>{message}</Text>
+      }</FormattedMessage>
+    </Box>
+  );
 };
 
 export default connect(

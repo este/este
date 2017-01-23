@@ -3,6 +3,7 @@ import React from 'react';
 import invariant from 'invariant';
 import { path as ramdaPath } from 'ramda';
 import { resetFields, setField } from './actions';
+import isReactNative from '../../app/isReactNative';
 
 type Path = string | Array<string> | (props: Object) => Array<string>;
 
@@ -11,10 +12,6 @@ type Options = {
   fields: Array<string>,
   getInitialState?: (props: Object) => Object,
 };
-
-const isReactNative =
-  typeof navigator === 'object' &&
-  navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
 const fields = (options: Options) => (WrappedComponent) => {

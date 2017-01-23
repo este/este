@@ -8,15 +8,15 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Match } from '../../common/app/components';
+import { Match } from '../../common/components';
 import { Miss } from 'react-router';
+import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import {
   Baseline,
   Box,
   Container,
-  ThemeProvider,
 } from './components';
 
 // Pages

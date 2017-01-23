@@ -1,25 +1,12 @@
 // @flow
-import type { Theme } from './types';
-import openColor from './openColor';
-import typography from '../../../common/themes/typography';
-
-// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
-// Taken from from Bootstrap 4.
-export const nativeFontFamily = [
-  '-apple-system',
-  'system-ui',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  '"Helvetica Neue"',
-  'Arial',
-  'sans-serif',
-].join(', ');
+import type { Theme } from '../../common/themes/types';
+import openColor from '../../common/themes/openColor';
+import typography from '../../common/themes/typography';
 
 const theme: Theme = {
   typography: typography({
     fontSize: 16,
-    fontSizeScale: 'step5', // perfect fourth, modularscale.com
+    fontSizeScale: 'step3',
     lineHeight: 24,
   }),
   colors: {
@@ -27,18 +14,18 @@ const theme: Theme = {
     success: openColor.green5,
     warning: openColor.orange6,
     danger: openColor.red6,
-    black: openColor.gray8,
+    black: openColor.gray7,
     white: openColor.white,
     gray: openColor.gray5,
     open: openColor,
   },
   border: {
     radius: 2,
-    width: 1,
   },
   states: {
     active: {
       darken: 0.2,
+      opacity: 0.7,
     },
     disabled: {
       cursor: 'default',
@@ -55,14 +42,17 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    fontFamily: nativeFontFamily,
+    fontFamily: 'System',
   },
   block: {
     marginBottom: 1,
     maxWidth: 21,
   },
+  button: {
+    borderRadius: 2,
+  },
   heading: {
-    fontFamily: nativeFontFamily,
+    fontFamily: 'System',
     marginBottom: 1,
   },
   paragraph: {
