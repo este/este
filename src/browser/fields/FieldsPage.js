@@ -77,6 +77,14 @@ const FieldsPage = ({ fields }) => {
             value="other"
           />
         </Box>
+        <Box marginBottom={1}>
+          <select multiple {...fields.skills}>
+            <option value="javascript">JavaScript</option>
+            <option value="react">React</option>
+            <option value="nodejs">Node.js</option>
+            <option value="este">Este</option>
+          </select>
+        </Box>
         <Checkbox
           checkboxStyle={{ marginBottom: 1 }}
           color="warning"
@@ -104,6 +112,7 @@ export default compose(
       'likeDogs', // checkbox
       'gender', // radios
       'agree',
+      'skills',
     ],
     getInitialState: () => ({
       // We can use props of course.

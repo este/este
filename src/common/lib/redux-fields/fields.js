@@ -1,7 +1,7 @@
 // @flow weak
 import React from 'react';
 import invariant from 'invariant';
-import { path as ramdaPath } from 'ramda';
+import { cond, map, path as ramdaPath, prop, pipe, T } from 'ramda';
 import { resetFields, setField } from './actions';
 import isReactNative from '../../app/isReactNative';
 
@@ -12,6 +12,16 @@ type Options = {
   fields: Array<string>,
   getInitialState?: (props: Object) => Object,
 };
+
+const isCheckbox = ({ type }) => type && type.toLowerCase() === 'checkbox';
+const isMultipleSelect = ({ multiple }) => multiple;
+
+// for given event target return proper value
+const getValueByEventTarget = cond([
+  [isCheckbox, prop('checked')],
+  [isMultipleSelect, pipe(prop('selectedOptions'), map(prop('value')))],
+  [T, prop('value')]
+]);
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
 const fields = (options: Options) => (WrappedComponent) => {
@@ -71,9 +81,7 @@ const fields = (options: Options) => (WrappedComponent) => {
         onChange: (event) => {
           // Some custom components like react-select pass the target directly.
           const target = event.target || event;
-          const { type, checked, value } = target;
-          const isCheckbox = type && type.toLowerCase() === 'checkbox';
-          onChange(field, isCheckbox ? checked : value);
+          onChange(field, getValueByEventTarget(target));
         },
       };
     }
