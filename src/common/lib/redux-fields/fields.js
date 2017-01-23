@@ -20,7 +20,7 @@ const isMultipleSelect = ({ multiple }) => multiple;
 const getValueByEventTarget = cond([
   [isCheckbox, prop('checked')],
   [isMultipleSelect, pipe(prop('selectedOptions'), map(prop('value')))],
-  [T, prop('value')]
+  [T, prop('value')],
 ]);
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
