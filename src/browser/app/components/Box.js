@@ -179,9 +179,9 @@ const adjustPaddingForRhythm = (
     const canCompensate = paddingValue && (paddingValue - borderWidth) >= 0;
     if (!canCompensate) {
       if (suppressRhythmWarning) return {};
-      const direction = prop === 'Left' || prop === 'Right'
-        ? 'horizontal'
-        : 'vertical';
+      // const direction = prop === 'Left' || prop === 'Right'
+      //   ? 'horizontal'
+      //   : 'vertical';
       // warning(false, [
       //   `Increase ${paddingProp} to ensure ${direction} rhythm. `,
       //   'Use suppressRhythmWarning prop to suppress this warning.',

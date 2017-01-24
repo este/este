@@ -19,9 +19,6 @@ const theme: Theme = {
     gray: openColor.gray5,
     open: openColor,
   },
-  border: {
-    radius: 2,
-  },
   states: {
     active: {
       darken: 0.2,

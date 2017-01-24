@@ -14,10 +14,15 @@ import {
   ToggleBaseline,
 } from '../app/components';
 
+import { Box as Box2 } from '../../common/components';
+
 const HomePage = () => (
   <Box>
     <Title message="Este.js" />
-    <PageHeader
+    <Box2>
+      fok
+    </Box2>
+    {/* <PageHeader
       heading="Este"
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
@@ -53,7 +58,7 @@ const HomePage = () => (
       <Button marginHorizontal={0.25}>text</Button>
     </Box>
     <SwitchTheme />
-    <ToggleBaseline />
+    <ToggleBaseline /> */}
   </Box>
 );
 

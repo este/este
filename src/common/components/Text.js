@@ -3,6 +3,7 @@ import type { BoxProps } from './Box';
 import type { Color, Theme } from '../themes/types';
 import Box from './Box';
 import React from 'react';
+import colorLib from 'color';
 import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Text component. The same API for browsers and React Native.
@@ -19,6 +20,8 @@ export type TextProps = BoxProps & {
   italic?: boolean,
   lineHeight?: number,
   // TODO: shadowColor, shadowOffset, shadowRadius.
+  // Custom
+  fixFontSmoothing?: boolean,
 };
 
 type TextContext = {
@@ -30,16 +33,19 @@ type TextContext = {
 // React Native doesn't support borders (except borderWidth) on Text-like
 // components, and we can't compensate them for the rhythm anyway. Use Box.
 const textPropsNotWorkingInReactNativeYet = [
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
-  'borderBottomWidth',
-  'borderLeftWidth',
-  'borderRightWidth',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderTopWidth',
-  'borderWidth',
+  'borderBottomLeftRadius', 'borderBottomRightRadius', 'borderBottomWidth',
+  'borderLeftWidth', 'borderRightWidth', 'borderTopLeftRadius',
+  'borderTopRightRadius', 'borderTopWidth', 'borderWidth',
 ];
+
+const maybeWarnAboutNotSupportedProps = props => {
+  textPropsNotWorkingInReactNativeYet.forEach(prop => {
+    if (!(prop in props)) return;
+    console.warn( // eslint-disable-line no-console
+      `${prop} is not allowed on Text-like component. Use Box wrapper.
+    `);
+  });
+};
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const fontSizeWithComputedLineHeight = (typography, size) => {
@@ -91,31 +97,58 @@ export const computeTextStyle = (theme: Theme, {
   return [style, props];
 };
 
+const computePlatformTextStyle = textStyle => isReactNative ? textStyle : {
+  ...textStyle,
+  lineHeight: `${textStyle.lineHeight}px`, // browsers need px lineHeight
+};
+
+// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// tldr; Fix font smoothing only for light text on dark background.
+const maybeFixFontSmoothing = (fixFontSmoothing, color, backgroundColor) => {
+  if (!fixFontSmoothing) return null;
+  const hasColorAndBackgroundColor =
+    color &&
+    color !== 'transparent' &&
+    backgroundColor &&
+    backgroundColor !== 'transparent';
+  if (!hasColorAndBackgroundColor) return null;
+  const colorIsLighterThanBackgroundColor =
+    colorLib(color).luminosity() >
+    colorLib(backgroundColor).luminosity();
+  if (!colorIsLighterThanBackgroundColor) return null;
+  return {
+    MozOsxFontSmoothing: 'grayscale',
+    WebkitFontSmoothing: 'antialiased',
+  };
+};
+
 const Text = ({
   as,
   style,
+  fixFontSmoothing = !isReactNative,
   ...props
 }: TextProps, {
   Text: PlatformText,
   theme,
 }: TextContext) => {
   if (process.env.NODE_ENV !== 'production') {
-    textPropsNotWorkingInReactNativeYet.forEach(prop => {
-      if (!(prop in props)) return;
-      console.warn( // eslint-disable-line no-console
-        `${prop} is not allowed on Text-like component. Use Box wrapper.
-      `);
-    });
+    maybeWarnAboutNotSupportedProps(props);
   }
   const [textStyle, restProps] = computeTextStyle(theme, props);
+  const platformTextStyle = computePlatformTextStyle(textStyle);
 
   return (
     <Box
       as={as || PlatformText}
       {...restProps}
-      style={theme => ({
-        ...textStyle,
-        ...(style && style(theme, textStyle)),
+      style={(theme, boxStyle) => ({
+        ...platformTextStyle,
+        ...maybeFixFontSmoothing(
+          fixFontSmoothing,
+          platformTextStyle.color,
+          boxStyle.backgroundColor,
+        ),
+        ...(style && style(theme, platformTextStyle)),
       })}
     />
   );

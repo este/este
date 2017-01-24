@@ -2,17 +2,18 @@
 import type { State, User } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import { Box, Link } from '../app/components';
+import { Box } from '../../common/components';
 import { FormattedMessage } from 'react-intl';
+import { Link } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
-const HeaderLink = ({ exactly, to, message }) => (
+const HeaderLink = ({ activeOnlyWhenExact, to, message }) => (
   <Link
+    activeOnlyWhenExact={activeOnlyWhenExact}
     backgroundColor="primary"
     bold
     color="white"
-    exactly={exactly}
     paddingHorizontal={0.5}
     paddingVertical={0.5}
     to={to}
@@ -30,12 +31,12 @@ const Header = ({
 }: HeaderProps) => (
   <Box
     backgroundColor="primary"
-    display="flex"
     flexWrap="wrap"
+    flexDirection="row"
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderLink exactly to="/" message={linksMessages.home} />
+    <HeaderLink activeOnlyWhenExact to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
     <HeaderLink to="/fields" message={linksMessages.fields} />
