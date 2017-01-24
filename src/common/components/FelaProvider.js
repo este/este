@@ -2,9 +2,7 @@
 import React from 'react';
 import { Provider as Fela } from 'react-fela';
 
-// Enhanced Fela provider for universal components.
-// TODO: Send PR to Fela.
-
+// Enhance Fela provider for universal base components.
 export default class FelaProvider extends React.Component {
   static propTypes = {
     Button: React.PropTypes.func.isRequired,
@@ -12,13 +10,14 @@ export default class FelaProvider extends React.Component {
     TextInput: React.PropTypes.func.isRequired,
     View: React.PropTypes.func.isRequired,
     renderer: React.PropTypes.object.isRequired,
+    mountNode: React.PropTypes.object,
   };
 
   static childContextTypes = {
-    Button: React.PropTypes.func.isRequired,
-    Text: React.PropTypes.func.isRequired,
-    TextInput: React.PropTypes.func.isRequired,
-    View: React.PropTypes.func.isRequired,
+    Button: React.PropTypes.func,
+    Text: React.PropTypes.func,
+    TextInput: React.PropTypes.func,
+    View: React.PropTypes.func,
   };
 
   getChildContext() {
@@ -27,9 +26,9 @@ export default class FelaProvider extends React.Component {
   }
 
   render() {
-    const { children, renderer } = this.props;
+    const { children, mountNode, renderer } = this.props;
     return (
-      <Fela renderer={renderer}>
+      <Fela mountNode={mountNode} renderer={renderer}>
         {React.Children.only(children)}
       </Fela>
     );
