@@ -9,7 +9,7 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Match } from '../../common/components';
+import { Box, Match } from '../../common/components';
 import { Miss } from 'react-router';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
@@ -59,24 +59,21 @@ const App = ({
           ]}
         />
         <Header />
-        <Footer />
-      </Container>
-      {/* <Container>
         <Box
           flex={1} // make footer sticky
         >
           <Match exactly pattern="/" component={HomePage} />
           <Match pattern="/users" component={UsersPage} />
-          <Match pattern="/todos" component={TodosPage} />
+          {/* <Match pattern="/todos" component={TodosPage} />
           <Match pattern="/fields" component={FieldsPage} />
           <Match pattern="/intl" component={IntlPage} />
           <Match pattern="/offline" component={OfflinePage} />
           <Match pattern="/signin" component={SignInPage} />
           <Match authorized pattern="/me" component={MePage} />
-          <Miss component={NotFoundPage} />
+          <Miss component={NotFoundPage} /> */}
         </Box>
         <Footer />
-      </Container> */}
+      </Container>
     {/* </Baseline> */}
   </ThemeProvider>
 );

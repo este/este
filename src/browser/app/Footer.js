@@ -13,7 +13,6 @@ const messages = defineMessages({
 
 const Footer = () => (
   <Box
-    borderTopColor="gray"
     borderTopWidth={1}
     flexDirection="row"
     marginTop={1}

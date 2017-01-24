@@ -136,7 +136,7 @@ const computeBoxStyle = (theme, {
   backgroundColor,
 
   // Border props.
-  borderColor,
+  borderColor = 'gray',
   borderBottomColor = borderColor,
   borderLeftColor = borderColor,
   borderRightColor = borderColor,

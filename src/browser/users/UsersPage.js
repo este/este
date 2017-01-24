@@ -2,11 +2,8 @@
 import OnlineUsers from './OnlineUsers';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
-import {
-  Box,
-  PageHeader,
-  Title,
-} from '../app/components';
+import { Box, PageHeader } from '../../common/components';
+import { Title } from '../components';
 
 const UsersPage = () => (
   <Box>
@@ -15,7 +12,7 @@ const UsersPage = () => (
       description="Online users."
       heading="Users"
     />
-    <OnlineUsers />
+    {/* <OnlineUsers /> */}
   </Box>
 );
 

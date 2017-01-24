@@ -2,27 +2,35 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Heading,
-  Image,
-  Link,
   PageHeader,
   Paragraph,
-  SwitchTheme,
   Text,
+} from '../../common/components';
+import {
+  Link,
   Title,
-  ToggleBaseline,
-} from '../app/components';
+} from '../components';
 
-import { Box as Box2 } from '../../common/components';
+
+// import {
+//   Box,
+//   Button,
+//   Heading,
+//   Image,
+//   Link,
+//   PageHeader,
+//   Paragraph,
+//   SwitchTheme,
+//   Text,
+//   Title,
+//   ToggleBaseline,
+// } from '../app/components';
 
 const HomePage = () => (
   <Box>
     <Title message="Este.js" />
-    <Box2>
-      fok
-    </Box2>
-    {/* <PageHeader
+    <PageHeader
       heading="Este"
       description="Starter kit for universal full–fledged React apps. One stack
         for browser, mobile, server."
@@ -39,17 +47,17 @@ const HomePage = () => (
       to="https://github.com/este/este"
     >github.com/este/este</Link>
     <Box marginVertical={1}>
-      <Image
+      {/* <Image
         alt="50x50 placeholder"
         height={50}
         src={require('./50x50.png')}
         width={50}
-      />
+      /> */}
     </Box>
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text><br />
-    <Box marginVertical={2} marginHorizontal={-0.25}>
+    {/* <Box marginVertical={2} marginHorizontal={-0.25}>
       <Button primary marginHorizontal={0.25}>primary</Button>
       <Button success marginHorizontal={0.25}>success</Button>
       <Button warning marginHorizontal={0.25}>warning</Button>
