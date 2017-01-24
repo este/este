@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Box,
   Heading,
+  Image,
   PageHeader,
   Paragraph,
   Text,
@@ -47,12 +48,11 @@ const HomePage = () => (
       to="https://github.com/este/este"
     >github.com/este/este</Link>
     <Box marginVertical={1}>
-      {/* <Image
-        alt="50x50 placeholder"
-        height={50}
+      <Image
         src={require('./50x50.png')}
-        width={50}
-      /> */}
+        alt="50x50 placeholder"
+        size={{ height: 50, width: 50 }}
+      />
     </Box>
     <Text size={0}>normal text</Text><br />
     <Text display="block" size={-1}>small text</Text>

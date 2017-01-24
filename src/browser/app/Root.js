@@ -38,6 +38,7 @@ export const BrowserRoot = ({
   <Redux store={store}>
     <Fela
       Button={(props) => <div {...props} />}
+      Image={(props) => <image {...props} />}
       Text={(props) => <span {...props} />}
       TextInput={(props) => <input {...props} />}
       View={(props) => <div {...props} />}

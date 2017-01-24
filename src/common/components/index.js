@@ -2,6 +2,7 @@
 export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Heading } from './Heading';
+export { default as Image } from './Image';
 export { default as Match } from './Match';
 export { default as OutlineButton } from './OutlineButton';
 export { default as PageHeader } from './PageHeader';
