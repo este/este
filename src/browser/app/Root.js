@@ -68,7 +68,7 @@ export const BrowserRoot = ({
   <Redux store={store}>
     <Fela
       Button={(props) => <DivButton {...props} />}
-      Image={(props) => <image {...props} />}
+      Image={(props) => <img {...props} />} // eslint-disable-line jsx-a11y/img-has-alt
       Text={(props) => <span {...props} />}
       TextInput={(props) => <input {...props} />}
       View={(props) => <div {...props} />}

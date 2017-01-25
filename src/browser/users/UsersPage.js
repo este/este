@@ -12,7 +12,7 @@ const UsersPage = () => (
       description="Online users."
       heading="Users"
     />
-    {/* <OnlineUsers /> */}
+    <OnlineUsers />
   </Box>
 );
 
