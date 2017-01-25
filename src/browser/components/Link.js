@@ -32,16 +32,19 @@ const Link = ({
   ...props
 }: LinkProps) => {
   const AnchorOrRouterLink = isExternalLink(props.to) ? Anchor : RouterLink;
+  const linkStyle = {
+    ':hover': {
+      textDecoration: 'underline',
+    },
+  };
   return (
     <Text
       as={AnchorOrRouterLink}
       color={color}
+      decoration="none"
       style={(theme, textStyle) => ({
-        textDecoration: 'none',
-        ':hover': {
-          textDecoration: 'underline',
-        },
-        ...(style && style(theme, textStyle)),
+        ...linkStyle,
+        ...(style && style(theme, { ...textStyle, ...linkStyle })),
       })}
       {...props}
     />

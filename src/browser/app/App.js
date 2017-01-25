@@ -9,13 +9,12 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Box, Match } from '../../common/components';
+import { Baseline } from '../components';
+import { Box, Match, Text } from '../../common/components';
 import { Miss } from 'react-router';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-
-// import { Baseline } from '../components';
 
 // Pages
 import FieldsPage from '../fields/FieldsPage';
@@ -43,7 +42,7 @@ const App = ({
     key={themeName} // Enforce rerender.
     theme={theme}
   >
-    {/* <Baseline lineHeight={theme.typography.lineHeight}> */}
+    <Baseline lineHeight={theme.typography.lineHeight}>
       <Container>
         <Helmet
           htmlAttributes={{ lang: currentLocale }}
@@ -74,7 +73,7 @@ const App = ({
         </Box>
         <Footer />
       </Container>
-    {/* </Baseline> */}
+    </Baseline>
   </ThemeProvider>
 );
 

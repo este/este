@@ -26,7 +26,6 @@ const theme: Theme = {
       opacity: 0.7,
     },
     disabled: {
-      cursor: 'default',
       opacity: 0.5,
     },
   },

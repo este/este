@@ -137,10 +137,12 @@ const computeBoxStyle = (theme, {
 
   // Border props.
   borderColor = 'gray',
-  borderBottomColor = borderColor,
-  borderLeftColor = borderColor,
-  borderRightColor = borderColor,
-  borderTopColor = borderColor,
+  // We can't use borderColor as default because some component in React Native,
+  // for example Image, doesn't support that.
+  borderBottomColor,
+  borderLeftColor,
+  borderRightColor,
+  borderTopColor,
   borderRadius,
   borderBottomLeftRadius = borderRadius,
   borderBottomRightRadius = borderRadius,
@@ -151,7 +153,7 @@ const computeBoxStyle = (theme, {
   borderLeftWidth = borderWidth,
   borderRightWidth = borderWidth,
   borderTopWidth = borderWidth,
-  borderStyle = 'solid', // Enfore React Native behaviour. Only shorthand prop.
+  borderStyle,
 
   // Just value props.
   alignItems,
@@ -217,6 +219,8 @@ const computeBoxStyle = (theme, {
 
   const colorProps = {
     backgroundColor,
+    // Do not sort, borderColor shorthand must be set first.
+    borderColor,
     borderBottomColor,
     borderLeftColor,
     borderRightColor,

@@ -1,18 +1,21 @@
 // @flow
+import * as themes from '../themes';
 import React from 'react';
 import {
   Box,
+  Button,
   Heading,
   Image,
   PageHeader,
   Paragraph,
+  SwitchTheme,
   Text,
+  ToggleBaseline,
 } from '../../common/components';
 import {
   Link,
   Title,
 } from '../components';
-
 
 // import {
 //   Box,
@@ -54,19 +57,23 @@ const HomePage = () => (
         size={{ height: 50, width: 50 }}
       />
     </Box>
-    <Text size={0}>normal text</Text><br />
+    <Text size={0}>normal text</Text>
     <Text display="block" size={-1}>small text</Text>
-    <Text size={5}>text 5</Text><br />
-    {/* <Box marginVertical={2} marginHorizontal={-0.25}>
-      <Button primary marginHorizontal={0.25}>primary</Button>
-      <Button success marginHorizontal={0.25}>success</Button>
-      <Button warning marginHorizontal={0.25}>warning</Button>
-      <Button danger marginHorizontal={0.25}>danger</Button>
-      <Button primary disabled marginHorizontal={0.25}>disabled</Button>
-      <Button marginHorizontal={0.25}>text</Button>
+    <Text size={5}>text 5</Text>
+    <Box
+      flexDirection="row"
+      marginVertical={2}
+      marginHorizontal={-0.25}
+    >
+      <Button primary marginHorizontal={0.25}>Primary</Button>
+      <Button success marginHorizontal={0.25}>Success</Button>
+      <Button warning marginHorizontal={0.25}>Warning</Button>
+      <Button danger marginHorizontal={0.25}>Danger</Button>
+      <Button primary disabled marginHorizontal={0.25}>Disabled</Button>
+      <Button marginHorizontal={0.25}>Text</Button>
     </Box>
-    <SwitchTheme />
-    <ToggleBaseline /> */}
+    <SwitchTheme themes={themes} />
+    <ToggleBaseline />
   </Box>
 );
 

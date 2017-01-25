@@ -14,6 +14,7 @@ const messages = defineMessages({
 const Footer = () => (
   <Box
     borderTopWidth={1}
+    borderStyle="solid"
     flexDirection="row"
     marginTop={1}
     paddingVertical={1}

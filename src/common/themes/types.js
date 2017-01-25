@@ -33,7 +33,6 @@ export type Theme = {|
       opacity: number,
     |},
     disabled: {|
-      cursor: string,
       opacity: number,
     |},
   },
