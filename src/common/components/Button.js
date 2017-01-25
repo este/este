@@ -120,16 +120,16 @@ const Button = ({
     <Box
       as={as || PlatformButton}
       borderRadius={borderRadius}
-      disabled={disabled}
+      disabled={disabled} // Do we need that?
       flexDirection="row"
       justifyContent="center"
+      opacity={disabled ? theme.states.disabled.opacity : 1}
       {...platformProps}
       {...boxProps}
       style={boxStyle}
     >
       {childrenIsText ?
         <Text
-          opacity={disabled ? theme.states.disabled.opacity : 1}
           // Pass backgroundColor to Text for maybeFixFontSmoothing function.
           backgroundColor={props.backgroundColor}
           style={theme => ({
