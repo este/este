@@ -31,7 +31,7 @@ const Match = ({
 
 Match.propTypes = {
   authorized: React.PropTypes.bool,
-  component: React.PropTypes.func,
+  component: React.PropTypes.any,
   render: React.PropTypes.func,
   viewer: React.PropTypes.object,
 };

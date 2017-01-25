@@ -63,13 +63,13 @@ const App = ({
         >
           <Match exactly pattern="/" component={HomePage} />
           <Match pattern="/users" component={UsersPage} />
-          {/* <Match pattern="/todos" component={TodosPage} />
-          <Match pattern="/fields" component={FieldsPage} />
+          <Match pattern="/todos" component={TodosPage} />
+          {/* <Match pattern="/fields" component={FieldsPage} /> */}
           <Match pattern="/intl" component={IntlPage} />
           <Match pattern="/offline" component={OfflinePage} />
-          <Match pattern="/signin" component={SignInPage} />
+          {/* <Match pattern="/signin" component={SignInPage} /> */}
           <Match authorized pattern="/me" component={MePage} />
-          <Miss component={NotFoundPage} /> */}
+          <Miss component={NotFoundPage} />
         </Box>
         <Footer />
       </Container>
