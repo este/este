@@ -12,24 +12,7 @@ import {
   Text,
   ToggleBaseline,
 } from '../../common/components';
-import {
-  Link,
-  Title,
-} from '../components';
-
-// import {
-//   Box,
-//   Button,
-//   Heading,
-//   Image,
-//   Link,
-//   PageHeader,
-//   Paragraph,
-//   SwitchTheme,
-//   Text,
-//   Title,
-//   ToggleBaseline,
-// } from '../app/components';
+import { Link, Title } from '../components';
 
 const HomePage = () => (
   <Box>
@@ -46,10 +29,9 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <Link
-      display="block"
-      to="https://github.com/este/este"
-    >github.com/este/este</Link>
+    <Link display="block" to="https://github.com/este/este">
+      github.com/este/este
+    </Link>
     <Box marginVertical={1}>
       <Image
         src={require('./50x50.png')}
@@ -60,11 +42,7 @@ const HomePage = () => (
     <Text size={0}>normal text</Text>
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text>
-    <Box
-      flexDirection="row"
-      marginVertical={2}
-      marginHorizontal={-0.25}
-    >
+    <Box flexDirection="row" marginVertical={2} marginHorizontal={-0.25}>
       <Button primary marginHorizontal={0.25}>Primary</Button>
       <Button success marginHorizontal={0.25}>Success</Button>
       <Button warning marginHorizontal={0.25}>Warning</Button>
