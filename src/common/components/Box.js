@@ -15,8 +15,10 @@ import isReactNative from '../../common/app/isReactNative';
 //  })}
 
 export type BoxProps = {
-  as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html
-  style?: (theme: Theme, style: Object) => Object, // Low level deliberately not typed.
+  // sitr.us/2017/01/03/flow-cookbook-react.html
+  as?: () => React.Element<*>,
+  // Low level deliberately not typed.
+  style?: (theme: Theme, style: Object) => Object,
 
   // Maybe rhythm props.
   margin?: number | string,

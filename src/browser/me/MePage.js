@@ -24,7 +24,7 @@
 //     marginBottom={1}
 //     marginHorizontal={-0.5}
 //   >
-//     <Link exactly to={pathname} paddingHorizontal={0.5}>
+//     <Link activeOnlyWhenExact to={pathname} paddingHorizontal={0.5}>
 //       <FormattedMessage {...linksMessages.me} />
 //     </Link>
 //     <Link to={`${pathname}/profile`} paddingHorizontal={0.5}>
@@ -49,7 +49,7 @@
 //       <Title message={linksMessages.me} />
 //       <Header pathname={pathname} />
 //       <Match
-//         exactly
+//         activeOnlyWhenExact
 //         pattern={pathname}
 //         render={() => (
 //           <Box>

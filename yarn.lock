@@ -3243,6 +3243,10 @@ fela-plugin-logger@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/fela-plugin-logger/-/fela-plugin-logger-4.1.2.tgz#ce6eafb9688425352bc1e5c47619cd414ea9dddb"
 
+fela-plugin-placeholder-prefixer@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-4.1.2.tgz#2df33ca65fac3ce6a5f3bc1e59cbb96686202fde"
+
 fela-plugin-validator@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/fela-plugin-validator/-/fela-plugin-validator-4.1.2.tgz#0374c497078cc8a52ab711f9f4d78248b5d20471"

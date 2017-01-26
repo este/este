@@ -2,7 +2,7 @@
 import type { State } from '../../common/types';
 import React from 'react';
 import buttonsMessages from '../../common/todos/buttonsMessages';
-import { Box, Button } from '../app/components';
+import { Box, Button } from '../../common/components';
 import { FormattedMessage } from 'react-intl';
 import { addHundredTodos, clearAllTodos } from '../../common/todos/actions';
 import { compose, isEmpty } from 'ramda';
@@ -14,39 +14,33 @@ type ButtonsProps = {
   isEmpty: boolean,
 };
 
-const Buttons = ({
-  addHundredTodos,
-  clearAllTodos,
-  isEmpty,
-}: ButtonsProps) => (
-  <Box
-    display="flex"
-    marginHorizontal={-0.25}
-    marginVertical={1}
-  >
-    <Button
-      primary
-      disabled={isEmpty}
-      marginHorizontal={0.25}
-      onClick={clearAllTodos}
-    >
-      <FormattedMessage {...buttonsMessages.clearAll} />
-    </Button>
-    <Button
-      primary
-      marginHorizontal={0.25}
-      onClick={addHundredTodos}
-    >
-      <FormattedMessage {...buttonsMessages.add100} />
-    </Button>
+const Buttons = ({ addHundredTodos, clearAllTodos, isEmpty }: ButtonsProps) => (
+  <Box flexDirection="row" marginHorizontal={-0.25} marginVertical={1}>
+    <FormattedMessage {...buttonsMessages.clearAll}>
+      {message => (
+        <Button
+          primary
+          disabled={isEmpty}
+          marginHorizontal={0.25}
+          onPress={clearAllTodos}
+        >
+          {message}
+        </Button>
+      )}
+    </FormattedMessage>
+    <FormattedMessage {...buttonsMessages.add100}>
+      {message => (
+        <Button primary marginHorizontal={0.25} onPress={addHundredTodos}>
+          {message}
+        </Button>
+      )}
+    </FormattedMessage>
   </Box>
 );
 
 export default compose(
-  connect(
-    (state: State) => ({
-      isEmpty: isEmpty(state.todos.all),
-    }),
-    { addHundredTodos, clearAllTodos },
-  ),
+  connect((state: State) => ({ isEmpty: isEmpty(state.todos.all) }), {
+    addHundredTodos,
+    clearAllTodos,
+  }),
 )(Buttons);

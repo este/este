@@ -9,7 +9,7 @@ export const nativeFontFamily = [
   '-apple-system',
   'system-ui',
   'BlinkMacSystemFont',
-  '"Segoe UI"',
+  '"Segoe UI"', // Segoe UI looks good but is not perfectly vertically aligned in Windows shit.
   'Roboto',
   '"Helvetica Neue"',
   'Arial',

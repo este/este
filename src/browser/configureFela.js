@@ -1,4 +1,5 @@
 // @flow
+import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
 import validator from 'fela-plugin-validator';
 import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
@@ -115,6 +116,7 @@ const devPreset = [
 const configureFela = () => {
   const renderer = createRenderer({
     plugins: [
+      placeholderPrefixer(),
       ...webPreset,
       ...(process.env.NODE_ENV !== 'production' ? devPreset : []),
     ],

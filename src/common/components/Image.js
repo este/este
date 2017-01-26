@@ -5,6 +5,8 @@ import Box from './Box';
 import React from 'react';
 import isReactNative from '../app/isReactNative';
 
+// TODO: Implement auto jsx-a11y/img-has-alt.
+
 type Size = {|
   height: number,
   width: number,

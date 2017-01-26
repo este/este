@@ -35,6 +35,7 @@ const TextInput = (props: TextInputProps, {
     disabled = false,
     height = textStyle.lineHeight / theme.typography.lineHeight,
     placeholderTextColor = computePlaceholderColor(textStyle.color),
+    style,
     ...restProps
   } = props;
 
@@ -42,15 +43,27 @@ const TextInput = (props: TextInputProps, {
     editable: !disabled,
     underlineColorAndroid: 'transparent',
     placeholderTextColor,
-    ...(disabled ? { opacity: theme.states.disabled.opacity } : null),
-  } : {}; // TODO: Browser placeholderTextColor etc.
+  } : {
+    disabled,
+  };
+  const platformStyle = isReactNative ? {} : {
+    outline: 'none',
+    '::placeholder': {
+      color: placeholderTextColor,
+    },
+  };
 
   return (
     <Text
       as={PlatformTextInput}
       height={height} // React Native TextInput needs explicit height.
+      {...(disabled ? { opacity: theme.states.disabled.opacity } : null)}
       {...platformProps}
       {...restProps}
+      style={(theme, textStyle) => ({
+        ...platformStyle,
+        ...(style && style(theme, textStyle)),
+      })}
     />
   );
 };
