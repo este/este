@@ -2,27 +2,11 @@
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
+import { Box, Button, Field, PageHeader } from '../../common/components';
+import { Checkbox, Form, Radio, Title } from '../components';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'ramda';
 import { fields } from '../../common/lib/redux-fields';
-import { Title, Form } from '../components';
-import {
-  Box,
-  Text,
-  PageHeader,
-  Field,
-} from '../../common/components';
-
-// import {
-//   Box,
-//   Button,
-//   Checkbox,
-//   Form,
-//   Input,
-//   PageHeader,
-//   Radio,
-//   Title,
-// } from '../app/components';
 
 const FieldsPage = ({ fields }) => {
   const onSubmit = () => {
@@ -57,45 +41,45 @@ const FieldsPage = ({ fields }) => {
           maxLength={100}
           placeholder="Some short description"
         />
-        {/* <Box marginBottom={1}>
+        <Box marginBottom={1}>
           <Checkbox
-            field={fields.likeDogs}
+            {...fields.likeDogs}
             label="I like dogs"
           />
           <Checkbox
-            field={fields.likeCats}
+            {...fields.likeCats}
             label="I like cats"
           />
         </Box>
-        <Box marginBottom={1}>
+        <Box flexDirection="row" marginBottom={1}>
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Male"
-            value="male"
+            selected="male"
           />
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Female"
-            value="female"
+            selected="female"
           />
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Other"
-            value="other"
+            selected="other"
           />
         </Box>
         <Checkbox
-          checkboxStyle={{ marginBottom: 1 }}
+          {...fields.agree}
           color="warning"
-          field={fields.agree}
           label="Agree"
           labelPosition="left"
-          labelStyle={{ bold: true }}
           size={1}
         />
-        <Button primary onClick={onSubmit}>
-          <FormattedMessage {...buttonsMessages.submit} />
-        </Button>*/}
+        <Box flexDirection="row" marginTop={1}>
+          <FormattedMessage {...buttonsMessages.submit}>
+            {message => <Button primary onPress={onSubmit}>{message}</Button>}
+          </FormattedMessage>
+        </Box>
       </Form>
     </Box>
   );

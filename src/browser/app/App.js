@@ -10,7 +10,7 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Baseline } from '../components';
-import { Box, Match, Text } from '../../common/components';
+import { Box, Match } from '../../common/components';
 import { Miss } from 'react-router';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
