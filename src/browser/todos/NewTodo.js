@@ -29,7 +29,6 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
     </Text>
     <TextInput
       {...fields.title}
-      marginBottom={0}
       maxLength={100}
       placeholder="..."
       size={2}
