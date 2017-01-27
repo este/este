@@ -1,6 +1,7 @@
 // @flow
 export { default as Box } from './Box';
 export { default as Button } from './Button';
+export { default as Field } from './Field';
 export { default as Heading } from './Heading';
 export { default as Image } from './Image';
 export { default as Loading } from './Loading';
