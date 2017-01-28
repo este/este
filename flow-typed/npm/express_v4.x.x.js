@@ -1,5 +1,5 @@
-// flow-typed signature: 08f7aa5e53d4472fa9bc75946fadaed0
-// flow-typed version: ec08171d82/express_v4.x.x/flow_>=v0.32.x
+// flow-typed signature: 3459d8f1a6ea584c1e0218bba4404f6d
+// flow-typed version: 84f02bfed7/express_v4.x.x/flow_>=v0.32.x
 
 import type { Server } from 'http';
 
@@ -83,7 +83,10 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   send(body?: mixed): this;
   sendFile(path: string, options?: express$SendFileOptions, callback?: (err?: ?Error) => mixed): this;
   sendStatus(statusCode: number): this;
+  header(field: string, value?: string): this;
+  header(headers: {[name: string]: string}): this;
   set(field: string, value?: string): this;
+  set(headers: {[name: string]: string}): this;
   status(statusCode: number): this;
   type(type: string): this;
   vary(field: string): this;
@@ -139,6 +142,9 @@ declare class express$Router extends express$Route {
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
+
+  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
+  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
@@ -162,9 +168,6 @@ declare class express$Application extends express$Router mixins events$EventEmit
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
-
-  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
-  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
 }
 
 declare module 'express' {
