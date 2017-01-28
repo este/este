@@ -123,7 +123,8 @@ const devPreset = [
 const configureFela = () => {
   const renderer = createRenderer({
     plugins: [
-      placeholderPrefixer(),
+      // TODO: https://github.com/rofrischmann/fela/issues/191
+      // placeholderPrefixer(),
       ...webPreset,
       ...(process.env.NODE_ENV !== 'production' ? devPreset : []),
     ],
