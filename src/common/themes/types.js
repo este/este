@@ -5,11 +5,11 @@ import type { OpenColor } from './openColor';
 
 // Because { [color: Color]?: boolean } doesn't work, we have to define props.
 export type ColorProps = {
+  // Don't hesitate to add your own.
   primary?: boolean,
   success?: boolean,
   warning?: boolean,
   danger?: boolean,
-  // Don't hesitate to add your own.
   black?: boolean,
   white?: boolean,
   gray?: boolean,
@@ -27,16 +27,12 @@ export type Theme = {|
     [color: Color]: string,
     open: OpenColor,
   },
-  border: {|
-    radius: number,
-  |},
   states: {
     active: {|
       darken: number,
       opacity: number,
     |},
     disabled: {|
-      cursor: string,
       opacity: number,
     |},
   },

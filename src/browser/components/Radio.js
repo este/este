@@ -1,11 +1,10 @@
 // @flow
 import type { CheckboxProps } from './Checkbox';
-import type { Strict } from '../themes/types';
 import Checkbox from './Checkbox';
 import React from 'react';
 
 export type RadioProps = CheckboxProps & {
-  value: string | number,
+  selected: any,
 };
 
 const defaultSvgIconChecked = (
@@ -30,24 +29,20 @@ const defaultSvgIconUnchecked = (
   </svg>
 );
 
-const mapField = (field, value) => ({
-  onChange: () => field.onChange({ value }),
-  value: value === field.value,
-});
-
 const Radio = ({
-  display = 'inline-flex',
-  field,
-  value,
+  onChange,
+  selected,
   svgIconChecked = defaultSvgIconChecked,
   svgIconUnchecked = defaultSvgIconUnchecked,
+  value,
   ...props
-}: Strict<RadioProps>) => (
+}: RadioProps) => (
   <Checkbox
-    display={display}
-    field={mapField(field, value)}
+    inline={true} // eslint-disable-line react/jsx-boolean-value
+    onChange={() => onChange && onChange({ value: selected })}
     svgIconChecked={svgIconChecked}
     svgIconUnchecked={svgIconUnchecked}
+    value={value === selected}
     {...props}
   />
 );

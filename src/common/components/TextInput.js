@@ -7,12 +7,12 @@ import color from 'color';
 import isReactNative from '../../common/app/isReactNative';
 
 // Universal text input component. By default, it looks like editable text.
-// For underline or the other effects, make a new component from this.
+// For underline or the other effects, make a new component. Check Field.
+// TODO: multiline and rows, use PlatformTextarea, react-autosize-textarea?
 
-type TextInputProps = TextProps & {
+export type TextInputProps = TextProps & {
   disabled?: boolean,
   placeholderTextColor?: string,
-  underlined?: boolean
 };
 
 type TextInputContext = {
@@ -21,9 +21,7 @@ type TextInputContext = {
 };
 
 const computePlaceholderColor = textColor =>
-  color(textColor).luminosity() > 0.5
-    ? color(textColor).darken(0.2).string()
-    : color(textColor).lighten(0.8).string();
+  color(textColor).fade(0.5).toString();
 
 const TextInput = (props: TextInputProps, {
   TextInput: PlatformTextInput,
@@ -35,6 +33,7 @@ const TextInput = (props: TextInputProps, {
     disabled = false,
     height = textStyle.lineHeight / theme.typography.lineHeight,
     placeholderTextColor = computePlaceholderColor(textStyle.color),
+    style,
     ...restProps
   } = props;
 
@@ -42,15 +41,29 @@ const TextInput = (props: TextInputProps, {
     editable: !disabled,
     underlineColorAndroid: 'transparent',
     placeholderTextColor,
-    ...(disabled ? { opacity: theme.states.disabled.opacity } : null),
-  } : {}; // TODO: Browser placeholderTextColor etc.
+  } : {
+    disabled,
+  };
+  const platformStyle = isReactNative ? {} : {
+    outline: 'none',
+    '::placeholder': {
+      color: placeholderTextColor,
+    },
+  };
 
   return (
     <Text
       as={PlatformTextInput}
-      height={height} // React Native TextInput needs explicit height.
+      // React Native TextInput needs explicit height.
+      // Browsers need explicit height for correct vertical align.
+      height={height}
+      {...(disabled ? { opacity: theme.states.disabled.opacity } : null)}
       {...platformProps}
       {...restProps}
+      style={(theme, textStyle) => ({
+        ...platformStyle,
+        ...(style && style(theme, textStyle)),
+      })}
     />
   );
 };

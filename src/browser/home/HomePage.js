@@ -1,18 +1,18 @@
 // @flow
+import * as themes from '../themes';
 import React from 'react';
 import {
   Box,
   Button,
   Heading,
   Image,
-  Link,
   PageHeader,
   Paragraph,
   SwitchTheme,
   Text,
-  Title,
   ToggleBaseline,
-} from '../app/components';
+} from '../../common/components';
+import { Link, Title } from '../components';
 
 const HomePage = () => (
   <Box>
@@ -29,30 +29,28 @@ const HomePage = () => (
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </Paragraph>
-    <Link
-      display="block"
-      to="https://github.com/este/este"
-    >github.com/este/este</Link>
+    <Link display="block" to="https://github.com/este/este">
+      github.com/este/este
+    </Link>
     <Box marginVertical={1}>
       <Image
-        alt="50x50 placeholder"
-        height={50}
         src={require('./50x50.png')}
-        width={50}
+        alt="50x50 placeholder"
+        size={{ height: 50, width: 50 }}
       />
     </Box>
-    <Text size={0}>normal text</Text><br />
+    <Text size={0}>normal text</Text>
     <Text display="block" size={-1}>small text</Text>
-    <Text size={5}>text 5</Text><br />
-    <Box marginVertical={2} marginHorizontal={-0.25}>
-      <Button primary marginHorizontal={0.25}>primary</Button>
-      <Button success marginHorizontal={0.25}>success</Button>
-      <Button warning marginHorizontal={0.25}>warning</Button>
-      <Button danger marginHorizontal={0.25}>danger</Button>
-      <Button primary disabled marginHorizontal={0.25}>disabled</Button>
-      <Button marginHorizontal={0.25}>text</Button>
+    <Text size={5}>text 5</Text>
+    <Box flexDirection="row" marginVertical={2} marginHorizontal={-0.25}>
+      <Button primary marginHorizontal={0.25}>Primary</Button>
+      <Button success marginHorizontal={0.25}>Success</Button>
+      <Button warning marginHorizontal={0.25}>Warning</Button>
+      <Button danger marginHorizontal={0.25}>Danger</Button>
+      <Button primary disabled marginHorizontal={0.25}>Disabled</Button>
+      <Button marginHorizontal={0.25}>Text</Button>
     </Box>
-    <SwitchTheme />
+    <SwitchTheme themes={themes} />
     <ToggleBaseline />
   </Box>
 );

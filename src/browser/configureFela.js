@@ -1,4 +1,5 @@
 // @flow
+import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
 import validator from 'fela-plugin-validator';
 import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
@@ -103,6 +104,13 @@ const staticStyles = `
   input[type="search"] {
     -webkit-appearance: none;
   }
+  ${/*
+    Este stuff
+    - for some reason, Chrome has default 1px padding for inputs.
+  */''}
+  input {
+    padding: 0;
+  }
 `;
 
 const devPreset = [
@@ -115,6 +123,7 @@ const devPreset = [
 const configureFela = () => {
   const renderer = createRenderer({
     plugins: [
+      placeholderPrefixer(),
       ...webPreset,
       ...(process.env.NODE_ENV !== 'production' ? devPreset : []),
     ],

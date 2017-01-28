@@ -3,10 +3,23 @@ import type { Theme } from '../../common/themes/types';
 import openColor from '../../common/themes/openColor';
 import typography from '../../common/themes/typography';
 
+// www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
+// Taken from from Bootstrap 4.
+export const nativeFontFamily = [
+  '-apple-system',
+  'system-ui',
+  'BlinkMacSystemFont',
+  '"Segoe UI"', // Segoe UI looks good but is not perfectly vertically aligned in Windows shit.
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  'sans-serif',
+].join(', ');
+
 const theme: Theme = {
   typography: typography({
     fontSize: 16,
-    fontSizeScale: 'step3',
+    fontSizeScale: 'step5', // perfect fourth, modularscale.com
     lineHeight: 24,
   }),
   colors: {
@@ -14,7 +27,7 @@ const theme: Theme = {
     success: openColor.green5,
     warning: openColor.orange6,
     danger: openColor.red6,
-    black: openColor.gray7,
+    black: openColor.gray8,
     white: openColor.white,
     gray: openColor.gray5,
     open: openColor,
@@ -38,7 +51,7 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    fontFamily: 'System',
+    fontFamily: nativeFontFamily,
   },
   block: {
     marginBottom: 1,
@@ -48,7 +61,7 @@ const theme: Theme = {
     borderRadius: 2,
   },
   heading: {
-    fontFamily: 'System',
+    fontFamily: nativeFontFamily,
     marginBottom: 1,
   },
   paragraph: {

@@ -1,37 +1,28 @@
 // @flow
-import type { State, Todo } from '../../common/types';
 import React from 'react';
 import todosMessages from '../../common/todos/todosMessages';
-import { Box, Button, Text } from '../app/components';
+import type { State, Todo } from '../../common/types';
+import { Box, Button, Text } from '../../common/components';
 import { compose, isEmpty, prop, reverse, sortBy, values } from 'ramda';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../../common/todos/actions';
 import { injectIntl } from 'react-intl';
-
-const itemStyle = {
-  inline: true,
-  paddingVertical: 0.5,
-};
 
 const TodosItem = ({
   deleteTodo,
   todo,
   toggleTodoCompleted,
 }) => (
-  <Box display="flex">
+  <Box flexDirection="row" marginHorizontal={-0.25}>
     <Button
-      {...itemStyle}
-      bold={false}
       decoration={todo.completed ? 'line-through' : 'none'}
+      marginHorizontal={0.25}
       onClick={() => toggleTodoCompleted(todo)}
-      paddingHorizontal={0}
-      transform="none"
     >{todo.title}</Button>
     <Button
-      {...itemStyle}
-      marginHorizontal={0.5}
+      bold
+      marginHorizontal={0.25}
       onClick={() => deleteTodo(todo.id)}
-      paddingHorizontal={0.25}
     >×</Button>
   </Box>
 );
@@ -51,11 +42,9 @@ const Todos = ({
 }: TodosProps) => {
   if (isEmpty(todos)) {
     return (
-      <Box>
-        <Text>
-          {intl.formatMessage(todosMessages.empty)}
-        </Text>
-      </Box>
+      <Text>
+        {intl.formatMessage(todosMessages.empty)}
+      </Text>
     );
   }
 

@@ -8,15 +8,14 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { fields } from '../../common/lib/redux-fields';
 import { resetPassword, signIn, signUp } from '../../common/auth/actions';
+import { Form, focus } from '../components';
 import {
   Box,
-  Button as DefaultButton,
-  Form,
   Heading,
-  Input,
   Message,
-  focus,
-} from '../app/components';
+  OutlineButton,
+  TextInput,
+} from '../../common/components';
 
 type EmailState = {
   forgetPasswordIsShown: boolean,
@@ -33,23 +32,22 @@ type EmailProps = {
 };
 
 // blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
-const overrideWebkitYellowAutofill = {
+const overrideWebkitYellowAutofill = () => ({
   WebkitBoxShadow: 'inset 0 0 0px 9999px white',
-};
+});
 
-const Button = ({ ...props }) => (
-  <DefaultButton
-    border
-    marginHorizontal={0.25}
-    {...props}
-  />
+const Button = ({ message, ...props }) => (
+  <FormattedMessage {...message}>
+    {msg =>
+      <OutlineButton marginHorizontal={0.25} {...props}>
+        {msg}
+      </OutlineButton>
+  }
+  </FormattedMessage>
 );
 
-const Buttons = ({ ...props }) => (
-  <Box
-    marginHorizontal={-0.25}
-    {...props}
-  />
+const Buttons = props => (
+  <Box flexDirection="row" marginVertical={1} marginHorizontal={-0.25} {...props} />
 );
 
 class Email extends React.Component {
@@ -111,21 +109,22 @@ class Email extends React.Component {
 
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <Heading marginTop={2}>
-          <FormattedMessage {...legendMessage} />
-        </Heading>
-        <Box>
-          <Input
+        <Box marginTop={1}>
+          <Heading size={1}>
+            {intl.formatMessage(legendMessage)}
+          </Heading>
+          <TextInput
+            {...fields.email}
             disabled={disabled}
-            field={fields.email}
+            marginBottom={1}
             maxLength={100}
             placeholder={intl.formatMessage(emailMessages.emailPlaceholder)}
             size={1}
             style={overrideWebkitYellowAutofill}
           />
-          <Input
+          <TextInput
+            {...fields.password}
             disabled={forgetPasswordIsShown || disabled}
-            field={fields.password}
             maxLength={1000}
             placeholder={intl.formatMessage(emailMessages.passwordPlaceholder)}
             size={1}
@@ -138,43 +137,42 @@ class Email extends React.Component {
             <Buttons>
               <Button
                 disabled={disabled}
+                message={buttonsMessages.signIn}
                 onClick={this.onSignInClick}
-              >
-                <FormattedMessage {...buttonsMessages.signIn} />
-              </Button>
+              />
               <Button
                 disabled={disabled}
+                message={buttonsMessages.signUp}
                 onClick={this.onSignUpClick}
-              >
-                <FormattedMessage {...buttonsMessages.signUp} />
-              </Button>
+              />
               <Button
                 disabled={disabled}
+                message={emailMessages.passwordForgotten}
                 onClick={this.onForgetPasswordClick}
-              >
-                <FormattedMessage {...emailMessages.passwordForgotten} />
-              </Button>
+              />
             </Buttons>
             {recoveryEmailSent &&
-              <Message success marginTop={1}>
-                <FormattedMessage {...emailMessages.recoveryEmailSent} />
-              </Message>
+              <FormattedMessage {...emailMessages.recoveryEmailSent}>
+                {message =>
+                  <Message backgroundColor="success" marginTop={1}>
+                    {message}
+                  </Message>
+                }
+              </FormattedMessage>
             }
           </Box>
         :
           <Buttons>
             <Button
               disabled={disabled}
+              message={emailMessages.resetPassword}
               onClick={this.onResetPasswordClick}
-            >
-              <FormattedMessage {...emailMessages.resetPassword} />
-            </Button>
+            />
             <Button
               disabled={disabled}
+              message={buttonsMessages.dismiss}
               onClick={this.onForgetPasswordClick}
-            >
-              <FormattedMessage {...buttonsMessages.dismiss} />
-            </Button>
+            />
           </Buttons>
         }
       </Form>

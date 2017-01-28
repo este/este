@@ -1,4 +1,4 @@
-// flow-typed signature: df421c20c037a2c3fa73775e7e433788
+// flow-typed signature: 344b727de24f5b905afd5d1d065585e1
 // flow-typed version: <<STUB>>/fela_v^4.1.0/flow_v0.35.0
 
 /**
@@ -27,6 +27,22 @@ declare module 'fela/dist/fela' {
 }
 
 declare module 'fela/dist/fela.min' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/bindings/inferno/connect' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/bindings/inferno/createComponent' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/bindings/inferno/index' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/bindings/inferno/Provider' {
   declare module.exports: any;
 }
 
@@ -142,6 +158,10 @@ declare module 'fela/lib/plugins/LVHA' {
   declare module.exports: any;
 }
 
+declare module 'fela/lib/plugins/namedMediaQuery' {
+  declare module.exports: any;
+}
+
 declare module 'fela/lib/plugins/placeholderPrefixer' {
   declare module.exports: any;
 }
@@ -171,6 +191,14 @@ declare module 'fela/lib/presets/dev' {
 }
 
 declare module 'fela/lib/presets/web' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/tools/index' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/tools/mapValueToMediaQuery' {
   declare module.exports: any;
 }
 
@@ -207,6 +235,10 @@ declare module 'fela/lib/utils/cssifyObject' {
 }
 
 declare module 'fela/lib/utils/cssifyStaticStyle' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/utils/extractPassThroughProps' {
   declare module.exports: any;
 }
 
@@ -250,6 +282,10 @@ declare module 'fela/lib/utils/isMediaQuery' {
   declare module.exports: any;
 }
 
+declare module 'fela/lib/utils/isNestedSelector' {
+  declare module.exports: any;
+}
+
 declare module 'fela/lib/utils/isPseudoSelector' {
   declare module.exports: any;
 }
@@ -266,7 +302,15 @@ declare module 'fela/lib/utils/minifyCSSString' {
   declare module.exports: any;
 }
 
+declare module 'fela/lib/utils/normalizeNestedProperty' {
+  declare module.exports: any;
+}
+
 declare module 'fela/lib/utils/processStyleWithPlugins' {
+  declare module.exports: any;
+}
+
+declare module 'fela/lib/utils/resolvePassThrough' {
   declare module.exports: any;
 }
 
@@ -294,6 +338,18 @@ declare module 'fela/index' {
 }
 declare module 'fela/index.js' {
   declare module.exports: $Exports<'fela'>;
+}
+declare module 'fela/lib/bindings/inferno/connect.js' {
+  declare module.exports: $Exports<'fela/lib/bindings/inferno/connect'>;
+}
+declare module 'fela/lib/bindings/inferno/createComponent.js' {
+  declare module.exports: $Exports<'fela/lib/bindings/inferno/createComponent'>;
+}
+declare module 'fela/lib/bindings/inferno/index.js' {
+  declare module.exports: $Exports<'fela/lib/bindings/inferno/index'>;
+}
+declare module 'fela/lib/bindings/inferno/Provider.js' {
+  declare module.exports: $Exports<'fela/lib/bindings/inferno/Provider'>;
 }
 declare module 'fela/lib/bindings/react/connect.js' {
   declare module.exports: $Exports<'fela/lib/bindings/react/connect'>;
@@ -379,6 +435,9 @@ declare module 'fela/lib/plugins/logger.js' {
 declare module 'fela/lib/plugins/LVHA.js' {
   declare module.exports: $Exports<'fela/lib/plugins/LVHA'>;
 }
+declare module 'fela/lib/plugins/namedMediaQuery.js' {
+  declare module.exports: $Exports<'fela/lib/plugins/namedMediaQuery'>;
+}
 declare module 'fela/lib/plugins/placeholderPrefixer.js' {
   declare module.exports: $Exports<'fela/lib/plugins/placeholderPrefixer'>;
 }
@@ -402,6 +461,12 @@ declare module 'fela/lib/presets/dev.js' {
 }
 declare module 'fela/lib/presets/web.js' {
   declare module.exports: $Exports<'fela/lib/presets/web'>;
+}
+declare module 'fela/lib/tools/index.js' {
+  declare module.exports: $Exports<'fela/lib/tools/index'>;
+}
+declare module 'fela/lib/tools/mapValueToMediaQuery.js' {
+  declare module.exports: $Exports<'fela/lib/tools/mapValueToMediaQuery'>;
 }
 declare module 'fela/lib/tools/StyleSheet.js' {
   declare module.exports: $Exports<'fela/lib/tools/StyleSheet'>;
@@ -429,6 +494,9 @@ declare module 'fela/lib/utils/cssifyObject.js' {
 }
 declare module 'fela/lib/utils/cssifyStaticStyle.js' {
   declare module.exports: $Exports<'fela/lib/utils/cssifyStaticStyle'>;
+}
+declare module 'fela/lib/utils/extractPassThroughProps.js' {
+  declare module.exports: $Exports<'fela/lib/utils/extractPassThroughProps'>;
 }
 declare module 'fela/lib/utils/generateAnimationName.js' {
   declare module.exports: $Exports<'fela/lib/utils/generateAnimationName'>;
@@ -460,6 +528,9 @@ declare module 'fela/lib/utils/isChildSelector.js' {
 declare module 'fela/lib/utils/isMediaQuery.js' {
   declare module.exports: $Exports<'fela/lib/utils/isMediaQuery'>;
 }
+declare module 'fela/lib/utils/isNestedSelector.js' {
+  declare module.exports: $Exports<'fela/lib/utils/isNestedSelector'>;
+}
 declare module 'fela/lib/utils/isPseudoSelector.js' {
   declare module.exports: $Exports<'fela/lib/utils/isPseudoSelector'>;
 }
@@ -472,8 +543,14 @@ declare module 'fela/lib/utils/isValidHTMLElement.js' {
 declare module 'fela/lib/utils/minifyCSSString.js' {
   declare module.exports: $Exports<'fela/lib/utils/minifyCSSString'>;
 }
+declare module 'fela/lib/utils/normalizeNestedProperty.js' {
+  declare module.exports: $Exports<'fela/lib/utils/normalizeNestedProperty'>;
+}
 declare module 'fela/lib/utils/processStyleWithPlugins.js' {
   declare module.exports: $Exports<'fela/lib/utils/processStyleWithPlugins'>;
+}
+declare module 'fela/lib/utils/resolvePassThrough.js' {
+  declare module.exports: $Exports<'fela/lib/utils/resolvePassThrough'>;
 }
 declare module 'fela/lib/utils/styleTypes.js' {
   declare module.exports: $Exports<'fela/lib/utils/styleTypes'>;

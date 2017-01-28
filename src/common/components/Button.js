@@ -7,7 +7,8 @@ import Text, { computeTextStyle } from './Text';
 import isReactNative from '../../common/app/isReactNative';
 
 export type ButtonProps = ColorProps & TextProps & {
-  accessibilityLabel?: string, // for blindness accessibility features
+  // For blindness accessibility features. Consider making it mandatory.
+  accessibilityLabel?: string,
   boxStyle?: (theme: Theme) => Object,
   children?: any,
   disabled?: boolean,
@@ -28,6 +29,7 @@ const Button = ({
   children,
   disabled,
   onPress,
+  outline,
   textStyle,
   ...props
 }: ButtonProps, {
@@ -44,8 +46,10 @@ const Button = ({
     onClick: onPress,
   };
 
+  const colorProps = Object.keys(theme.colors);
+
   // <Button primary
-  const propColor = Object.keys(theme.colors).find(color => props[color]);
+  const propColor = colorProps.find(color => props[color]);
   if (propColor) {
     props = {
       ...props,
@@ -54,18 +58,18 @@ const Button = ({
       bold: true,
       color: 'white',
       paddingHorizontal: 1,
-      size: props.size != null ? props.size : 1,
     };
   }
 
   // <Button primary outline
-  if (propColor && props.outline) {
+  if (propColor && outline) {
     props = {
       ...props,
       // Note it overrides props.
       backgroundColor: null,
       bold: false,
       borderColor: props.backgroundColor,
+      borderStyle: 'solid',
       borderWidth: 1,
       color: props.backgroundColor,
       paddingHorizontal: 1,
@@ -73,7 +77,8 @@ const Button = ({
   }
 
   // Give button some vertical space.
-  if (props.size > 0) {
+  const { size = 0 } = props;
+  if (size >= 0) {
     props = {
       marginVertical: 0.3,
       paddingVertical: 0.2,
@@ -94,13 +99,19 @@ const Button = ({
     }
   }
 
-  // Button has all Text props, but it consists of two components: Box and Text.
-  // Therefore, we have to split props for Box and props for Text. That's what
-  // computeTextStyle does by design.
-  // Remember, we can always override anything via boxStyle and textStyle props.
-  const [computedTextStyle, boxProps] = computeTextStyle(theme, props);
+  // Button consists of two components, Box and Text. That's because Button can
+  // render not only text, but any component, and React Native Text can't
+  // contain View based components.
+  // Therefore, we have to split props for Box and props for Text. Fortunately,
+  // that's what computeTextStyle does by design. It picks own props and return
+  // the rest. We can also use boxStyle and textStyle props for further styling.
+  const [computedTextStyle, allBoxProps] = computeTextStyle(theme, props);
+  // To prevent "Unknown prop" warning, we have to remove color props.
+  const boxProps = colorProps.reduce((props, prop) => {
+    delete props[prop];
+    return props;
+  }, allBoxProps);
   const childrenIsText = typeof children === 'string';
-
   const {
     borderRadius = theme.button.borderRadius,
   } = props;
@@ -109,19 +120,21 @@ const Button = ({
     <Box
       as={as || PlatformButton}
       borderRadius={borderRadius}
-      disabled={disabled}
+      disabled={disabled} // Do we need that?
       flexDirection="row"
       justifyContent="center"
+      opacity={disabled ? theme.states.disabled.opacity : 1}
       {...platformProps}
       {...boxProps}
       style={boxStyle}
     >
       {childrenIsText ?
         <Text
-          opacity={disabled ? theme.states.disabled.opacity : 1}
+          // Pass backgroundColor to Text for maybeFixFontSmoothing function.
+          backgroundColor={props.backgroundColor}
           style={theme => ({
             ...computedTextStyle,
-            ...(textStyle ? textStyle(theme) : null),
+            ...(textStyle && textStyle(theme, computedTextStyle)),
           })}
         >{children}</Text>
       :

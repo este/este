@@ -10,23 +10,6 @@ import { fields } from '../../common/lib/redux-fields';
 import { injectIntl } from 'react-intl';
 import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 
-// const styles = StyleSheet.create({
-//   legend: {
-//     fontSize: theme.fontSizeH4,
-//     marginVertical: theme.fontSize * 2,
-//     textAlign: 'center',
-//   },
-//   buttons: {
-//     flexDirection: 'row',
-//     flexWrap: 'wrap',
-//     justifyContent: 'space-between',
-//     marginVertical: theme.fontSize * 2,
-//   },
-//   recoveryEmailSent: {
-//     color: theme.brandInfo,
-//   },
-// });
-
 const Buttons = (props) => (
   <Box
     flexDirection="row"

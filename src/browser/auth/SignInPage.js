@@ -5,16 +5,12 @@ import React from 'react';
 import SignInError from './SignInError';
 import Social from './Social';
 import linksMessages from '../../common/app/linksMessages';
+import { Box, Loading, PageHeader } from '../../common/components';
 import { Redirect } from 'react-router';
+import { Title } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
-import {
-  Box,
-  Loading,
-  PageHeader,
-  Title,
-} from '../app/components';
 
 type SignInPageProps = {
   disabled: boolean,
@@ -44,9 +40,7 @@ const SignInPage = ({
       <Title message={linksMessages.signIn} />
       <PageHeader heading={intl.formatMessage(linksMessages.signIn)} />
       <Social />
-      <Box marginVertical={1}>
-        <Email />
-      </Box>
+      <Email />
       <SignInError />
       {disabled &&
         <Loading marginVertical={1} />

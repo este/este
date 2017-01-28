@@ -1,6 +1,5 @@
 // @flow
-import type { State } from '../../../common/types';
-import Box from './Box';
+import type { State } from '../../common/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -14,7 +13,7 @@ type BaselineProps = {|
 |};
 
 const styles = {
-  box: {
+  container: {
     position: 'relative',
   },
   baseline: lineHeight => ({
@@ -32,12 +31,12 @@ const styles = {
 };
 
 const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
-  <Box style={styles.box}>
+  <div style={styles.container}>
     {children}
     {baselineShown &&
-      <Box style={styles.baseline(lineHeight)} />
+      <div style={styles.baseline(lineHeight)} />
     }
-  </Box>
+  </div>
 );
 
 export default compose(

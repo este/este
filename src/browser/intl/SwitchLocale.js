@@ -1,13 +1,10 @@
 // @flow
 import type { State } from '../../common/types';
 import React from 'react';
+import { Box, Button } from '../../common/components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setCurrentLocale } from '../../common/intl/actions';
-import {
-  Box,
-  Button,
-} from '../app/components';
 
 type SwitchLocaleProps = {
   currentLocale: string,
@@ -15,27 +12,21 @@ type SwitchLocaleProps = {
   setCurrentLocale: typeof setCurrentLocale,
 };
 
-const SwitchLocale = ({
-  currentLocale,
-  locales,
-  setCurrentLocale,
-}: SwitchLocaleProps) => (
-  <Box
-    marginBottom={1}
-    marginHorizontal={-0.25}
-  >
-    {locales.map(locale =>
+const SwitchLocale = (
+  { currentLocale, locales, setCurrentLocale }: SwitchLocaleProps,
+) => (
+  <Box flexDirection="row" marginBottom={1} marginHorizontal={-0.25}>
+    {locales.map(locale => (
       <Button
-        active={locale === currentLocale}
-        display="inline-block"
+        outline={locale !== currentLocale}
         key={locale}
         marginHorizontal={0.25}
         onClick={() => setCurrentLocale(locale)}
         primary
       >
         {locale}
-      </Button>,
-    )}
+      </Button>
+    ))}
   </Box>
 );
 

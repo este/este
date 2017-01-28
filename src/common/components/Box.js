@@ -5,20 +5,20 @@ import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Box component. The same API for browsers and React Native.
 // Some props are ommited or limited or set to match React Native behaviour.
-//  - display is always set to flex
+//  - default display is flex
 //  - default position is relative
-//  - default flex direction is column
-// Use style prop for platform specific styling.
-// For example:
+//  - default flexDirection is column
+// We can use style prop for platform specific styling.
 //  style={theme => ({
 //    // Set borderTopWidth to 1 to componsate padding.
 //    borderTopWidth: StyleSheet.hairlineWidth,
 //  })}
-// For RN backgroundColor with borderRadius, sometimes we need overflow="hidden"
 
 export type BoxProps = {
-  as?: () => React.Element<*>, // sitr.us/2017/01/03/flow-cookbook-react.html
-  style?: (theme: Theme, style?: Object) => Object, // Low level deliberately not typed.
+  // sitr.us/2017/01/03/flow-cookbook-react.html
+  as?: () => React.Element<*>,
+  // Low level deliberately not typed.
+  style?: (theme: Theme, style: Object) => Object,
 
   // Maybe rhythm props.
   margin?: number | string,
@@ -88,69 +88,41 @@ type BoxContext = {
   theme: Theme,
 };
 
-const setBorderTryEnsureRhythmWithPadding = (
-  style,
-  borderWidthProps,
-  borderWidth,
-) => {
-  const borderWidthIsDefined = typeof borderWidth === 'number';
-  for (const prop in borderWidthProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
-    const propValue = borderWidthProps[prop];
-    const propIsDefined = typeof propValue === 'number';
-    if (!borderWidthIsDefined && !propIsDefined) continue; // eslint-disable-line no-continue
+const setBorderTryEnsureRhythmViaPadding = (style, borderWidthProps) => {
+  Object.keys(borderWidthProps).forEach(borderWidthProp => {
+    const borderWidthPropValue = borderWidthProps[borderWidthProp];
+    if (typeof borderWidthPropValue !== 'number') return;
+    style = { ...style, [borderWidthProp]: borderWidthPropValue };
     const paddingProp =
-      prop === 'borderBottomWidth' ? 'paddingBottom' :
-      prop === 'borderLeftWidth' ? 'paddingLeft' :
-      prop === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
-    // $FlowFixMe We know prop could not be found, we check it.
-    const paddingValue = style[paddingProp];
-    // We can't compensate string padding.
-    if (typeof paddingValue === 'string') {
-      continue; // eslint-disable-line no-continue
-    }
-    const borderValue = propIsDefined ? propValue : borderWidth;
-    // $FlowFixMe Yes, we know it.
-    const compensatedPaddingValue = paddingValue - borderValue;
-    const canCompensate = compensatedPaddingValue >= 0;
-    if (!canCompensate) {
-      style = {
-        ...style,
-        [prop]: propValue,
-      };
-      // TODO: Put warning back, allow to disable it.
-      // if (process.env.NODE_ENV !== 'production') {
-      //   console.warn([ // eslint-disable-line no-console
-      //     `Please increase ${paddingProp} for ${prop} to ensure rhythm, `,
-      //     'or use style.',
-      //   ].join(''));
-      // }
-      continue; // eslint-disable-line no-continue
-    }
-    style = {
-      ...style,
-      [paddingProp]: canCompensate ? compensatedPaddingValue : paddingValue,
-      [prop]: propValue,
-    };
-  }
+      borderWidthProp === 'borderBottomWidth' ? 'paddingBottom' :
+      borderWidthProp === 'borderLeftWidth' ? 'paddingLeft' :
+      borderWidthProp === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
+    const paddingPropValue = style[paddingProp];
+    if (typeof paddingPropValue !== 'number') return;
+    const compensatedPaddingPropValue = paddingPropValue - borderWidthPropValue;
+    const canCompensate = compensatedPaddingPropValue >= 0;
+    if (!canCompensate) return;
+    style = { ...style, [paddingProp]: compensatedPaddingPropValue };
+  });
   return style;
 };
 
 const computeBoxStyle = (theme, {
   // Maybe rhythm props.
   margin,
-  marginHorizontal,
-  marginVertical,
-  marginBottom,
-  marginLeft,
-  marginRight,
-  marginTop,
+  marginVertical = margin,
+  marginHorizontal = margin,
+  marginTop = marginVertical,
+  marginBottom = marginVertical,
+  marginLeft = marginHorizontal,
+  marginRight = marginHorizontal,
   padding,
-  paddingHorizontal,
-  paddingVertical,
-  paddingBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
+  paddingVertical = padding,
+  paddingHorizontal = padding,
+  paddingTop = paddingVertical,
+  paddingBottom = paddingVertical,
+  paddingLeft = paddingHorizontal,
+  paddingRight = paddingHorizontal,
   height,
   maxHeight,
   maxWidth,
@@ -166,22 +138,24 @@ const computeBoxStyle = (theme, {
   backgroundColor,
 
   // Border props.
+  borderColor = 'gray',
+  // We can't use borderColor as default because some component in React Native,
+  // for example Image, doesn't support that.
   borderBottomColor,
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
-  borderBottomWidth,
-  borderColor,
   borderLeftColor,
-  borderLeftWidth,
-  borderRadius,
   borderRightColor,
-  borderRightWidth,
-  borderStyle,
   borderTopColor,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-  borderTopWidth,
-  borderWidth,
+  borderRadius,
+  borderBottomLeftRadius = borderRadius,
+  borderBottomRightRadius = borderRadius,
+  borderTopLeftRadius = borderRadius,
+  borderTopRightRadius = borderRadius,
+  borderWidth = 0, // Enfore React Native behaviour. It also makes more sense.
+  borderBottomWidth = borderWidth,
+  borderLeftWidth = borderWidth,
+  borderRightWidth = borderWidth,
+  borderTopWidth = borderWidth,
+  borderStyle,
 
   // Just value props.
   alignItems,
@@ -206,77 +180,35 @@ const computeBoxStyle = (theme, {
     display: 'flex',
   };
 
-  // Do not sort, margin can be overridden by marginHorizontal etc.
   const maybeRhythmProps = {
-    margin,
-    marginHorizontal,
-    marginVertical,
+    bottom,
+    height,
+    left,
     marginBottom,
     marginLeft,
     marginRight,
     marginTop,
-    padding,
-    paddingHorizontal,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingVertical,
-    height,
     maxHeight,
     maxWidth,
     minHeight,
     minWidth,
-    width,
-    bottom,
-    left,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
     right,
     top,
+    width,
   };
 
-  for (const prop in maybeRhythmProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+  Object.keys(maybeRhythmProps).forEach(prop => {
     const value = maybeRhythmProps[prop];
-    const isNumber = typeof value === 'number';
-    const isDefined = isNumber || value;
-    if (!isDefined) continue; // eslint-disable-line no-continue
-    const computedValue = isNumber ? theme.typography.rhythm(value) : value;
-    switch (prop) {
-      case 'margin':
-        style = {
-          ...style,
-          // Split to be computable.
-          marginBottom: computedValue,
-          marginLeft: computedValue,
-          marginRight: computedValue,
-          marginTop: computedValue,
-        };
-        break;
-      case 'marginHorizontal':
-        style = { ...style, marginLeft: computedValue, marginRight: computedValue };
-        break;
-      case 'marginVertical':
-        style = { ...style, marginTop: computedValue, marginBottom: computedValue };
-        break;
-      case 'padding':
-        style = {
-          ...style,
-          // Split to be computable.
-          paddingBottom: computedValue,
-          paddingLeft: computedValue,
-          paddingRight: computedValue,
-          paddingTop: computedValue,
-        };
-        break;
-      case 'paddingHorizontal':
-        style = { ...style, paddingLeft: computedValue, paddingRight: computedValue };
-        break;
-      case 'paddingVertical':
-        style = { ...style, paddingTop: computedValue, paddingBottom: computedValue };
-        break;
-      default:
-        style = { ...style, [prop]: computedValue };
+    if (typeof value === 'number') {
+      style = { ...style, [prop]: theme.typography.rhythm(value) };
+    } else if (value) {
+      style = { ...style, [prop]: value };
     }
-  }
+  });
 
   // Enforce React Native flex behaviour. Can be overridden.
   if (typeof flex === 'number') {
@@ -289,7 +221,7 @@ const computeBoxStyle = (theme, {
 
   const colorProps = {
     backgroundColor,
-    // Do not sort.
+    // Do not sort, borderColor shorthand must be set first.
     borderColor,
     borderBottomColor,
     borderLeftColor,
@@ -297,37 +229,28 @@ const computeBoxStyle = (theme, {
     borderTopColor,
   };
 
-  for (const prop in colorProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+  Object.keys(colorProps).forEach(prop => {
     const value = colorProps[prop];
-    if (!value) continue; // eslint-disable-line no-continue
+    if (!value) return;
     style = { ...style, [prop]: theme.colors[value] };
-  }
+  });
 
-  const borderWidthProps = {
+  style = setBorderTryEnsureRhythmViaPadding(style, {
     borderBottomWidth,
     borderLeftWidth,
     borderRightWidth,
     borderTopWidth,
-  };
-
-  style = setBorderTryEnsureRhythmWithPadding(
-    style,
-    borderWidthProps,
-    borderWidth,
-  );
+  });
 
   // Just value props.
   const justValueProps = {
-    // Do not sort, borderRadius must be before borderXYRadius.
-    borderRadius,
-    borderStyle,
-    borderWidth,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
     alignItems,
     alignSelf,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderStyle,
+    borderTopLeftRadius,
+    borderTopRightRadius,
     flexBasis,
     flexDirection,
     flexGrow,
@@ -340,12 +263,12 @@ const computeBoxStyle = (theme, {
     zIndex,
   };
 
-  for (const prop in justValueProps) { // eslint-disable-line guard-for-in, no-restricted-syntax
+  Object.keys(justValueProps).forEach(prop => {
     const value = justValueProps[prop];
     const isDefined = typeof value === 'number' || value;
-    if (!isDefined) continue;  // eslint-disable-line no-continue
+    if (!isDefined) return;
     style = { ...style, [prop]: value };
-  }
+  });
 
   return [style, props];
 };
@@ -361,14 +284,14 @@ const Box = ({
 }: BoxContext) => {
   const Component = as || View;
   const [boxStyle, restProps] = computeBoxStyle(theme, props);
+  const rule = renderer.renderRule(() => ({
+    ...boxStyle,
+    ...(style && style(theme, boxStyle)),
+  }));
   return (
     <Component
       {...restProps}
-      // TODO: Add the same logic for browser className.
-      style={renderer.renderRule(() => ({
-        ...boxStyle,
-        ...(style && style(theme, boxStyle)),
-      }))}
+      {...{ [isReactNative ? 'style' : 'className']: rule }}
     />
   );
 };

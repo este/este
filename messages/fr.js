@@ -26,11 +26,11 @@ export default [
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Connexion",
+    "defaultMessage": "Authentification",
   },
   {
     "id": "app.buttons.signIn",
-    "defaultMessage": "Authentification",
+    "defaultMessage": "Connexion",
   },
   {
     "id": "app.buttons.signOut",

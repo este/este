@@ -1,23 +1,20 @@
 // @flow
 import type { State } from '../../common/types';
-import type { Theme } from './themes/types';
-import * as themes from './themes';
+import type { Theme } from '../../common/themes/types';
+import * as themes from '../themes';
+import Container from './Container';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';
 import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
-import { Match } from '../../common/components';
+import { Baseline } from '../components';
+import { Box, Match } from '../../common/components';
 import { Miss } from 'react-router';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import {
-  Baseline,
-  Box,
-  Container,
-} from './components';
 
 // Pages
 import FieldsPage from '../fields/FieldsPage';
@@ -84,8 +81,8 @@ export default compose(
   connect(
     (state: State) => ({
       currentLocale: state.intl.currentLocale,
-      themeName: state.app.currentTheme,
       theme: themes[state.app.currentTheme] || themes.defaultTheme,
+      themeName: state.app.currentTheme,
     }),
   ),
   start,

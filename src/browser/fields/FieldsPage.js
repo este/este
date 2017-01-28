@@ -2,19 +2,11 @@
 import React from 'react';
 import buttonsMessages from '../../common/app/buttonsMessages';
 import linksMessages from '../../common/app/linksMessages';
+import { Box, Button, Field, PageHeader } from '../../common/components';
+import { Checkbox, Form, Radio, Title } from '../components';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'ramda';
 import { fields } from '../../common/lib/redux-fields';
-import {
-  Box,
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  PageHeader,
-  Radio,
-  Title,
-} from '../app/components';
 
 const FieldsPage = ({ fields }) => {
   const onSubmit = () => {
@@ -35,60 +27,59 @@ const FieldsPage = ({ fields }) => {
         maxWidth={21}
         onSubmit={onSubmit}
       >
-        <Input
-          field={fields.name}
+        <Field
+          {...fields.name}
           label="Name"
           maxLength={100}
           placeholder="Jane Doe"
-          // That's how we can render field error.
+          // That's how we can show field error.
           // error="Name is required"
         />
-        <Input
-          field={fields.description}
+        <Field
+          {...fields.description}
           label="Description"
           maxLength={100}
           placeholder="Some short description"
-          rows={2}
         />
         <Box marginBottom={1}>
           <Checkbox
-            field={fields.likeDogs}
+            {...fields.likeDogs}
             label="I like dogs"
           />
           <Checkbox
-            field={fields.likeCats}
+            {...fields.likeCats}
             label="I like cats"
           />
         </Box>
-        <Box marginBottom={1}>
+        <Box flexDirection="row" marginBottom={1}>
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Male"
-            value="male"
+            selected="male"
           />
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Female"
-            value="female"
+            selected="female"
           />
           <Radio
-            field={fields.gender}
+            {...fields.gender}
             label="Other"
-            value="other"
+            selected="other"
           />
         </Box>
         <Checkbox
-          checkboxStyle={{ marginBottom: 1 }}
+          {...fields.agree}
           color="warning"
-          field={fields.agree}
           label="Agree"
           labelPosition="left"
-          labelStyle={{ bold: true }}
           size={1}
         />
-        <Button primary onClick={onSubmit}>
-          <FormattedMessage {...buttonsMessages.submit} />
-        </Button>
+        <Box flexDirection="row" marginTop={1}>
+          <FormattedMessage {...buttonsMessages.submit}>
+            {message => <Button primary onPress={onSubmit}>{message}</Button>}
+          </FormattedMessage>
+        </Box>
       </Form>
     </Box>
   );
@@ -106,7 +97,7 @@ export default compose(
       'agree',
     ],
     getInitialState: () => ({
-      // We can use props of course.
+      // Of course, we can use passed props if we want.
       // likeCats: true,
       // gender: 'female',
     }),

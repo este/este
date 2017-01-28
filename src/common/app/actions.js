@@ -95,6 +95,7 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
 
   return action$
     .filter((action: Action) => action.type === 'APP_STARTED')
+    // $FlowFixMe
     .mergeMap(() => Observable
       .merge(...streams)
       // takeUntil unsubscribes all merged streams on APP_STOP.

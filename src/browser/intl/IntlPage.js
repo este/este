@@ -2,6 +2,7 @@
 import React from 'react';
 import SwitchLocale from './SwitchLocale';
 import linksMessages from '../../common/app/linksMessages';
+import { Box, PageHeader, Paragraph, Text } from '../../common/components';
 import {
   FormattedDate,
   FormattedMessage,
@@ -9,12 +10,7 @@ import {
   FormattedRelative,
   defineMessages,
 } from 'react-intl';
-import {
-  Box,
-  PageHeader,
-  Paragraph,
-  Title,
-} from '../app/components';
+import { Title } from '../components';
 
 const messages = defineMessages({
   unreadCount: {
@@ -33,9 +29,7 @@ const IntlPage = () => {
   return (
     <Box>
       <Title message={linksMessages.intl} />
-      <PageHeader
-        heading="react-intl"
-      />
+      <PageHeader heading="react-intl" />
       <SwitchLocale />
       <Paragraph>
         <FormattedDate
@@ -45,9 +39,14 @@ const IntlPage = () => {
           year="numeric"
         />
       </Paragraph>
-      <Paragraph>
-        <FormattedNumber value={unreadCount} />{' '}
-        <FormattedMessage {...messages.unreadCount} values={{ unreadCount }} />
+      <Paragraph flexDirection="row">
+        <FormattedNumber value={unreadCount}>
+          {message => <Text>{message}</Text>}
+        </FormattedNumber>
+        &nbsp;
+        <FormattedMessage {...messages.unreadCount} values={{ unreadCount }}>
+          {message => <Text>{message}</Text>}
+        </FormattedMessage>
       </Paragraph>
       <Paragraph>
         <FormattedRelative

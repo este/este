@@ -3,27 +3,19 @@ import type { State } from '../../common/types';
 import React from 'react';
 import linksMessages from '../../common/app/linksMessages';
 import { connect } from 'react-redux';
-import {
-  Box,
-  PageHeader,
-  Pre,
-  Title,
-} from '../app/components';
+import { Box, PageHeader, Text } from '../../common/components';
+import { Title } from '../components';
 
-type OfflinePageProps = {
-  online: boolean,
-};
+type OfflinePageProps = { online: boolean };
 
 const OfflinePage = ({ online }: OfflinePageProps) => (
   <Box>
     <Title message={linksMessages.offline} />
     <PageHeader heading="Offline" />
-    <Pre>state.app.online: {online.toString()}</Pre>
+    <Text>state.app.online: {online.toString()}</Text>
   </Box>
 );
 
-export default connect(
-  (state: State) => ({
-    online: state.app.online,
-  }),
-)(OfflinePage);
+export default connect((state: State) => ({ online: state.app.online }))(
+  OfflinePage,
+);

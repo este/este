@@ -1,4 +1,4 @@
-// flow-typed signature: c3ea122a90b4bc74f7e8f6f03968960b
+// flow-typed signature: 6210706978460b08878a84b4b4633628
 // flow-typed version: <<STUB>>/react-intl_v^2.1.2/flow_v0.35.0
 
 /**
@@ -974,78 +974,6 @@ declare module 'react-intl/locale-data/zu' {
   declare module.exports: any;
 }
 
-declare module 'react-intl/src/components/date' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/html-message' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/message' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/number' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/plural' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/provider' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/relative' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/components/time' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/define-messages' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/en' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/format' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/index' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/inject' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/locale-data-registry' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/plural' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/react-intl' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/types' {
-  declare module.exports: any;
-}
-
-declare module 'react-intl/src/utils' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'react-intl/dist/react-intl.js' {
   declare module.exports: $Exports<'react-intl/dist/react-intl'>;
@@ -1760,58 +1688,4 @@ declare module 'react-intl/locale-data/zh.js' {
 }
 declare module 'react-intl/locale-data/zu.js' {
   declare module.exports: $Exports<'react-intl/locale-data/zu'>;
-}
-declare module 'react-intl/src/components/date.js' {
-  declare module.exports: $Exports<'react-intl/src/components/date'>;
-}
-declare module 'react-intl/src/components/html-message.js' {
-  declare module.exports: $Exports<'react-intl/src/components/html-message'>;
-}
-declare module 'react-intl/src/components/message.js' {
-  declare module.exports: $Exports<'react-intl/src/components/message'>;
-}
-declare module 'react-intl/src/components/number.js' {
-  declare module.exports: $Exports<'react-intl/src/components/number'>;
-}
-declare module 'react-intl/src/components/plural.js' {
-  declare module.exports: $Exports<'react-intl/src/components/plural'>;
-}
-declare module 'react-intl/src/components/provider.js' {
-  declare module.exports: $Exports<'react-intl/src/components/provider'>;
-}
-declare module 'react-intl/src/components/relative.js' {
-  declare module.exports: $Exports<'react-intl/src/components/relative'>;
-}
-declare module 'react-intl/src/components/time.js' {
-  declare module.exports: $Exports<'react-intl/src/components/time'>;
-}
-declare module 'react-intl/src/define-messages.js' {
-  declare module.exports: $Exports<'react-intl/src/define-messages'>;
-}
-declare module 'react-intl/src/en.js' {
-  declare module.exports: $Exports<'react-intl/src/en'>;
-}
-declare module 'react-intl/src/format.js' {
-  declare module.exports: $Exports<'react-intl/src/format'>;
-}
-declare module 'react-intl/src/index.js' {
-  declare module.exports: $Exports<'react-intl/src/index'>;
-}
-declare module 'react-intl/src/inject.js' {
-  declare module.exports: $Exports<'react-intl/src/inject'>;
-}
-declare module 'react-intl/src/locale-data-registry.js' {
-  declare module.exports: $Exports<'react-intl/src/locale-data-registry'>;
-}
-declare module 'react-intl/src/plural.js' {
-  declare module.exports: $Exports<'react-intl/src/plural'>;
-}
-declare module 'react-intl/src/react-intl.js' {
-  declare module.exports: $Exports<'react-intl/src/react-intl'>;
-}
-declare module 'react-intl/src/types.js' {
-  declare module.exports: $Exports<'react-intl/src/types'>;
-}
-declare module 'react-intl/src/utils.js' {
-  declare module.exports: $Exports<'react-intl/src/utils'>;
 }

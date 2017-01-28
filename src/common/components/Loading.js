@@ -2,7 +2,6 @@
 import type { TextProps } from './Text';
 import React from 'react';
 import Text from './Text';
-import Title from './Title';
 import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
@@ -51,15 +50,10 @@ class Loading extends React.Component {
   render() {
     const { currentText } = this.state;
     if (!currentText) return null;
-    const {
-      intl,
-      display = 'block',
-      ...props
-    } = this.props;
+    const { intl, ...restProps } = this.props;
 
     return (
-      <Text display={display} {...props}>
-        <Title message={currentText} />
+      <Text {...restProps}>
         {intl.formatMessage(currentText)}...
       </Text>
     );

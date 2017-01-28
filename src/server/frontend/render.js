@@ -9,8 +9,7 @@ import configureFela from '../../browser/configureFela';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
 import serialize from 'serialize-javascript';
-import { Provider as Fela } from 'react-fela';
-import { Provider as Redux } from 'react-redux';
+import { BrowserRoot } from '../../browser/app/Root';
 import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
@@ -59,15 +58,13 @@ const createStore = req => configureStore({
 const renderBody = (store, context, location, fetchPromises) => {
   const felaRenderer = configureFela();
   const html = renderToString(
-    <Redux store={store}>
-      <Fela renderer={felaRenderer}>
-        <ServerFetchProvider promises={fetchPromises}>
-          <ServerRouter context={context} location={location}>
-            <App />
-          </ServerRouter>
-        </ServerFetchProvider>
-      </Fela>
-    </Redux>,
+    <BrowserRoot felaRenderer={felaRenderer} store={store}>
+      <ServerFetchProvider promises={fetchPromises}>
+        <ServerRouter context={context} location={location}>
+          <App />
+        </ServerRouter>
+      </ServerFetchProvider>
+    </BrowserRoot>,
   );
   const helmet = Helmet.rewind();
   const css = felaRenderer.renderToString();

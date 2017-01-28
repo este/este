@@ -1,4 +1,4 @@
-// flow-typed signature: 51aac7d8000d650f3405562d85687407
+// flow-typed signature: 54379444b74892d5bd3b6476d8258743
 // flow-typed version: <<STUB>>/eslint_v^3.2.2/flow_v0.35.0
 
 /**
@@ -682,6 +682,10 @@ declare module 'eslint/lib/rules/no-mixed-spaces-and-tabs' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/rules/no-multi-assign' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/rules/no-multi-spaces' {
   declare module.exports: any;
 }
@@ -1018,7 +1022,15 @@ declare module 'eslint/lib/rules/prefer-const' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/rules/prefer-destructuring' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/rules/prefer-numeric-literals' {
+  declare module.exports: any;
+}
+
+declare module 'eslint/lib/rules/prefer-promise-reject-errors' {
   declare module.exports: any;
 }
 
@@ -1734,6 +1746,9 @@ declare module 'eslint/lib/rules/no-mixed-requires.js' {
 declare module 'eslint/lib/rules/no-mixed-spaces-and-tabs.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-mixed-spaces-and-tabs'>;
 }
+declare module 'eslint/lib/rules/no-multi-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-multi-assign'>;
+}
 declare module 'eslint/lib/rules/no-multi-spaces.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-multi-spaces'>;
 }
@@ -1986,8 +2001,14 @@ declare module 'eslint/lib/rules/prefer-arrow-callback.js' {
 declare module 'eslint/lib/rules/prefer-const.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-const'>;
 }
+declare module 'eslint/lib/rules/prefer-destructuring.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-destructuring'>;
+}
 declare module 'eslint/lib/rules/prefer-numeric-literals.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-numeric-literals'>;
+}
+declare module 'eslint/lib/rules/prefer-promise-reject-errors.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-promise-reject-errors'>;
 }
 declare module 'eslint/lib/rules/prefer-reflect.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-reflect'>;

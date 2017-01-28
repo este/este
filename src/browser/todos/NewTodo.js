@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import newTodoMessages from '../../common/todos/newTodoMessages';
-import { Form, Input } from '../app/components';
+import { Form } from '../components';
+import { Text, TextInput } from '../../common/components';
 import { addTodo } from '../../common/todos/actions';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -23,24 +24,21 @@ const NewTodo = ({ addTodo, fields, intl }: NewTodoProps) => (
       fields.$reset();
     }}
   >
-    <Input
-      field={fields.title}
+    <Text bold size={1}>
+      {intl.formatMessage(newTodoMessages.placeholder)}
+    </Text>
+    <TextInput
+      {...fields.title}
       maxLength={100}
-      label={intl.formatMessage(newTodoMessages.placeholder)}
       placeholder="..."
       size={2}
+      type="text"
     />
   </Form>
 );
 
 export default compose(
-  connect(
-    null,
-    { addTodo },
-  ),
+  connect(null, { addTodo }),
   injectIntl,
-  fields({
-    path: 'newTodo',
-    fields: ['title'],
-  }),
+  fields({ path: 'newTodo', fields: ['title'] }),
 )(NewTodo);

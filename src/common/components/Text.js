@@ -3,6 +3,7 @@ import type { BoxProps } from './Box';
 import type { Color, Theme } from '../themes/types';
 import Box from './Box';
 import React from 'react';
+import colorLib from 'color';
 import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Text component. The same API for browsers and React Native.
@@ -19,27 +20,14 @@ export type TextProps = BoxProps & {
   italic?: boolean,
   lineHeight?: number,
   // TODO: shadowColor, shadowOffset, shadowRadius.
+  // Custom
+  fixWebFontSmoothing?: boolean,
 };
 
 type TextContext = {
   Text: () => React.Element<*>,
   theme: Theme,
 };
-
-// github.com/facebook/react-native/issues/29#issuecomment-96588898
-// React Native doesn't support borders (except borderWidth) on Text-like
-// components, and we can't compensate them for the rhythm anyway. Use Box.
-const textPropsNotWorkingInReactNativeYet = [
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
-  'borderBottomWidth',
-  'borderLeftWidth',
-  'borderRightWidth',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderTopWidth',
-  'borderWidth',
-];
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const fontSizeWithComputedLineHeight = (typography, size) => {
@@ -72,12 +60,11 @@ export const computeTextStyle = (theme: Theme, {
 
   if (bold) {
     const bold = theme.text.bold;
-    style = { ...style, fontWeight: isReactNative ? String(bold) : bold };
+    style = { ...style, fontWeight: bold };
   }
 
   if (decoration) {
-    const prop = isReactNative ? 'textDecorationLine' : 'textDecoration';
-    style = { ...style, [prop]: decoration };
+    style = { ...style, textDecoration: decoration };
   }
 
   if (italic) {
@@ -91,32 +78,65 @@ export const computeTextStyle = (theme: Theme, {
   return [style, props];
 };
 
+// usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// tldr; Fix font smoothing only for light text on dark background.
+const maybeFixFontSmoothing = (color, backgroundColor) => {
+  const hasColorAndBackgroundColor =
+    color &&
+    color !== 'transparent' &&
+    backgroundColor &&
+    backgroundColor !== 'transparent';
+  // console.log(hasColorAndBackgroundColor);
+  if (!hasColorAndBackgroundColor) return null;
+  const colorIsLighterThanBackgroundColor =
+    colorLib(color).luminosity() >
+    colorLib(backgroundColor).luminosity();
+  if (!colorIsLighterThanBackgroundColor) return null;
+  return {
+    MozOsxFontSmoothing: 'grayscale',
+    WebkitFontSmoothing: 'antialiased',
+  };
+};
+
+const computePlatformTextStyle = (boxStyle, textStyle, fixWebFontSmoothing) => {
+  if (isReactNative) {
+    if (textStyle.fontWeight) {
+      textStyle = { ...textStyle, fontWeight: String(textStyle.fontWeight) };
+    }
+    if (textStyle.textDecoration) {
+      textStyle = { ...textStyle, textDecorationLine: textStyle.textDecoration };
+      delete textStyle.textDecoration;
+    }
+  } else {
+    textStyle = {
+      ...textStyle,
+      ...(fixWebFontSmoothing
+        ? maybeFixFontSmoothing(textStyle.color, boxStyle.backgroundColor)
+        : null),
+      lineHeight: `${textStyle.lineHeight}px`, // browsers need px
+    };
+  }
+  return textStyle;
+};
+
 const Text = ({
   as,
   style,
+  fixWebFontSmoothing = true,
   ...props
 }: TextProps, {
   Text: PlatformText,
   theme,
 }: TextContext) => {
-  if (process.env.NODE_ENV !== 'production') {
-    textPropsNotWorkingInReactNativeYet.forEach(prop => {
-      if (!(prop in props)) return;
-      console.warn( // eslint-disable-line no-console
-        `${prop} is not allowed on Text-like component. Use Box wrapper.
-      `);
-    });
-  }
   const [textStyle, restProps] = computeTextStyle(theme, props);
-
   return (
     <Box
       as={as || PlatformText}
       {...restProps}
-      style={theme => ({
+      style={(theme, boxStyle) => computePlatformTextStyle(boxStyle, {
         ...textStyle,
-        ...(style && style(theme, textStyle)),
-      })}
+        ...(style && style(theme, { ...boxStyle, ...textStyle })),
+      }, fixWebFontSmoothing)}
     />
   );
 };
