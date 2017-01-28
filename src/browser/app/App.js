@@ -67,7 +67,7 @@ const App = ({
           <Match pattern="/fields" component={FieldsPage} />
           <Match pattern="/intl" component={IntlPage} />
           <Match pattern="/offline" component={OfflinePage} />
-          {/* <Match pattern="/signin" component={SignInPage} /> */}
+          <Match pattern="/signin" component={SignInPage} />
           <Match authorized pattern="/me" component={MePage} />
           <Miss component={NotFoundPage} />
         </Box>

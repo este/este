@@ -6,6 +6,7 @@ export { default as Heading } from './Heading';
 export { default as Image } from './Image';
 export { default as Loading } from './Loading';
 export { default as Match } from './Match';
+export { default as Message } from './Message';
 export { default as OutlineButton } from './OutlineButton';
 export { default as PageHeader } from './PageHeader';
 export { default as Paragraph } from './Paragraph';
