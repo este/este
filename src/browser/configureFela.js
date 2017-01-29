@@ -1,8 +1,10 @@
 // @flow
 // import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
+import placeholderPrefixer from './felaPluginPlaceholderPrefixer';
 import validator from 'fela-plugin-validator';
 import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
+
 
 const staticStyles = `
   ${/*
@@ -123,8 +125,7 @@ const devPreset = [
 const configureFela = () => {
   const renderer = createRenderer({
     plugins: [
-      // TODO: https://github.com/rofrischmann/fela/issues/191
-      // placeholderPrefixer(),
+      placeholderPrefixer(),
       ...webPreset,
       ...(process.env.NODE_ENV !== 'production' ? devPreset : []),
     ],
