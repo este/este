@@ -2,11 +2,19 @@ machine:
   node:
     version: 6.9.4
 
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn install
+  cache_directories:
+    - ~/.cache/yarn
+
 # kb.imakewebsites.ca/2016/02/28/deploying-apps-from-circleci-to-firebase-hosting
 deployment:
   master:
     branch: master
     commands:
       - gulp to-html
-      - npm install -g firebase-tools firebase-bolt
+      - yarn global add firebase-tools firebase-bolt
       - firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive --project project-808488257248094054
