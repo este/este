@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 6.9.1
+    version: 6.9.4
 
 # kb.imakewebsites.ca/2016/02/28/deploying-apps-from-circleci-to-firebase-hosting
 deployment:
