@@ -15,6 +15,6 @@ deployment:
   master:
     branch: master
     commands:
+      - yarn global add gulp firebase-tools firebase-bolt
       - gulp to-html
-      - yarn global add firebase-tools firebase-bolt
       - firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive --project project-808488257248094054
