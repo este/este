@@ -24,7 +24,7 @@
   - universal crash reporting
   - universal data fetching
   - universal forms with universal validation
-  - universal components with universal styles (soon!)
+  - [universal components with universal styles](https://medium.com/@steida/css-in-js-the-argument-refined-471c7eb83955)
 - stateless functional UI with dynamic typed styles
 - flowtype FTW
 - vanilla hot reloading makes everything hot reloadable
