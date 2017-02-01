@@ -60,7 +60,7 @@
     "fela-plugin-placeholder-prefixer": "^4.1.2",
     "fela-plugin-validator": "^4.1.0",
     "fela-preset-web": "^4.1.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^0.10.0",
     "firebase": "^3.1.0",
     "flow-bin": "0.35.0",
     "gravatar": "^1.6.0",
