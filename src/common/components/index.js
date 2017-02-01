@@ -16,6 +16,7 @@ export { default as TextInput } from './TextInput';
 export { default as ToggleBaseline } from './ToggleBaseline';
 
 // For the inspiration, check:
+//  github.com/react-native-community/react-native-elements
 //  jxnblk.com/rebass
 //  vuetifyjs.com
 //  github.com/airyland/vux

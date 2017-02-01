@@ -38,20 +38,25 @@ const overrideWebkitYellowAutofill = () => ({
 
 const Button = ({ message, ...props }) => (
   <FormattedMessage {...message}>
-    {msg =>
+    {msg => (
       <OutlineButton marginHorizontal={0.25} {...props}>
         {msg}
       </OutlineButton>
-  }
+    )}
   </FormattedMessage>
 );
 
 const Buttons = props => (
-  <Box flexDirection="row" marginVertical={1} marginHorizontal={-0.25} {...props} />
+  <Box
+    flexDirection="row"
+    flexWrap="wrap"
+    marginVertical={1}
+    marginHorizontal={-0.25}
+    {...props}
+  />
 );
 
 class Email extends React.Component {
-
   state: EmailState = {
     forgetPasswordIsShown: false,
     recoveryEmailSent: false,
@@ -132,53 +137,49 @@ class Email extends React.Component {
             type="password"
           />
         </Box>
-        {!forgetPasswordIsShown ?
-          <Box>
-            <Buttons>
+        {!forgetPasswordIsShown
+          ? <Box>
+              <Buttons>
+                <Button
+                  disabled={disabled}
+                  message={buttonsMessages.signIn}
+                  onClick={this.onSignInClick}
+                />
+                <Button
+                  disabled={disabled}
+                  message={buttonsMessages.signUp}
+                  onClick={this.onSignUpClick}
+                />
+                <Button
+                  disabled={disabled}
+                  message={emailMessages.passwordForgotten}
+                  onClick={this.onForgetPasswordClick}
+                />
+              </Buttons>
+              {recoveryEmailSent &&
+                <FormattedMessage {...emailMessages.recoveryEmailSent}>
+                  {message => (
+                    <Message backgroundColor="success" marginTop={1}>
+                      {message}
+                    </Message>
+                  )}
+                </FormattedMessage>}
+            </Box>
+          : <Buttons>
               <Button
                 disabled={disabled}
-                message={buttonsMessages.signIn}
-                onClick={this.onSignInClick}
+                message={emailMessages.resetPassword}
+                onClick={this.onResetPasswordClick}
               />
               <Button
                 disabled={disabled}
-                message={buttonsMessages.signUp}
-                onClick={this.onSignUpClick}
-              />
-              <Button
-                disabled={disabled}
-                message={emailMessages.passwordForgotten}
+                message={buttonsMessages.dismiss}
                 onClick={this.onForgetPasswordClick}
               />
-            </Buttons>
-            {recoveryEmailSent &&
-              <FormattedMessage {...emailMessages.recoveryEmailSent}>
-                {message =>
-                  <Message backgroundColor="success" marginTop={1}>
-                    {message}
-                  </Message>
-                }
-              </FormattedMessage>
-            }
-          </Box>
-        :
-          <Buttons>
-            <Button
-              disabled={disabled}
-              message={emailMessages.resetPassword}
-              onClick={this.onResetPasswordClick}
-            />
-            <Button
-              disabled={disabled}
-              message={buttonsMessages.dismiss}
-              onClick={this.onForgetPasswordClick}
-            />
-          </Buttons>
-        }
+            </Buttons>}
       </Form>
     );
   }
-
 }
 
 export default compose(

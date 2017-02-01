@@ -15,7 +15,12 @@ type SwitchLocaleProps = {
 const SwitchLocale = (
   { currentLocale, locales, setCurrentLocale }: SwitchLocaleProps,
 ) => (
-  <Box flexDirection="row" marginBottom={1} marginHorizontal={-0.25}>
+  <Box
+    flexDirection="row"
+    flexWrap="wrap"
+    marginBottom={1}
+    marginHorizontal={-0.25}
+  >
     {locales.map(locale => (
       <Button
         outline={locale !== currentLocale}

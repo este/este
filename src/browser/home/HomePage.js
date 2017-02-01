@@ -42,7 +42,12 @@ const HomePage = () => (
     <Text size={0}>normal text</Text>
     <Text display="block" size={-1}>small text</Text>
     <Text size={5}>text 5</Text>
-    <Box flexDirection="row" marginVertical={2} marginHorizontal={-0.25}>
+    <Box
+      flexDirection="row"
+      flexWrap="wrap"
+      marginVertical={2}
+      marginHorizontal={-0.25}
+    >
       <Button primary marginHorizontal={0.25}>Primary</Button>
       <Button success marginHorizontal={0.25}>Success</Button>
       <Button warning marginHorizontal={0.25}>Warning</Button>
