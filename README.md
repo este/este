@@ -15,6 +15,8 @@
 
 > Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, podívejte se na [javascript-skoleni.cz](https://javascript-skoleni.cz/).
 
+> **Contact me, if you are looking for a technical cofounder.**
+
 ## Techniques
 
 - universal architecture with immutable app state
