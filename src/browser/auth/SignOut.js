@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 import { signOut } from '../../common/auth/actions';
 
 type SignOutProps = { signOut: typeof signOut };
+type SignOutContext = { router: any };
 
-const SignOut = ({ signOut }: SignOutProps, { router }) => (
+const SignOut = ({ signOut }: SignOutProps, { router }: SignOutContext) => (
   <FormattedMessage {...buttonsMessages.signOut}>
     {message => (
       <Button
@@ -27,4 +28,5 @@ const SignOut = ({ signOut }: SignOutProps, { router }) => (
 
 SignOut.contextTypes = { router: React.PropTypes.object };
 
+// $FlowFixMe SignOut Context does it.
 export default connect(null, { signOut })(SignOut);
