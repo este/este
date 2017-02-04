@@ -11,7 +11,7 @@ const fixBabel5RcFiles = () =>
 // There is a chance react-intl team will fix it, but we can't wait.
 // TODO: Remove once github.com/yahoo/react-intl/issues/620#issuecomment-247600683
 // will be released.
-// Still broken in RN 0.39.0
+// Still broken in RN 0.41.1
 const fixReactIntlLibraries = () => {
   [
     ['react-intl', './locale-data/index.js'],

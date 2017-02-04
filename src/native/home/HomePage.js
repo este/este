@@ -21,25 +21,20 @@ import {
 
 const HomePage = () => (
   <ScrollView>
-    <Box
-      paddingHorizontal={1}
-      paddingTop={2}
-    >
+    <Box paddingHorizontal={1} paddingTop={2}>
       <Text align="center" size={3}>
         Welcome to Este
       </Text>
       <Box marginVertical={1}>
-        {Platform.OS === 'ios' ?
-          <Text align="center">
-            Press Cmd+R to reload,{'\n'}
-            Cmd+D or shake for dev menu.
-          </Text>
-        :
-          <Text align="center">
-            Double tap R on your keyboard to reload,{'\n'}
-            Shake or press menu button for dev menu.
-          </Text>
-        }
+        {Platform.OS === 'ios'
+          ? <Box alignItems="center">
+              <Text>Press Cmd+R to reload,</Text>
+              <Text>Cmd+D or shake for dev menu.</Text>
+            </Box>
+          : <Box alignItems="center">
+              <Text>Double tap R to reload,</Text>
+              <Text>Cmd+M or shake for dev menu.</Text>
+            </Box>}
       </Box>
       <Button bold color="primary">
         Text Button

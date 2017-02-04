@@ -56,6 +56,7 @@
       <string>FontAwesome.ttf</string>
       <string>Foundation.ttf</string>
       <string>Ionicons.ttf</string>
+      <string>MaterialCommunityIcons.ttf</string>
       <string>MaterialIcons.ttf</string>
       <string>Octicons.ttf</string>
       <string>SimpleLineIcons.ttf</string>
@@ -66,12 +67,12 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb1695157000724071</string>
+          <string>fb396216394065378</string>
         </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>1695157000724071</string>
+    <string>396216394065378</string>
     <key>FacebookDisplayName</key>
     <string>Este</string>
     <key>LSApplicationQueriesSchemes</key>
@@ -82,6 +83,6 @@
       <string>fbshareextension</string>
     </array>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>TODO: write human-readable reason for photo access</string>
+    <string>TODO: human-readable reason for photo access</string>
   </dict>
 </plist>

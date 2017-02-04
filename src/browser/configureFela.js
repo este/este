@@ -106,13 +106,6 @@ const staticStyles = `
   input[type="search"] {
     -webkit-appearance: none;
   }
-  ${/*
-    Este stuff
-    - for some reason, Chrome has default 1px padding for inputs.
-  */''}
-  input {
-    padding: 0;
-  }
 `;
 
 const devPreset = [

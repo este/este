@@ -49,11 +49,11 @@ const Button = ({
   const colorProps = Object.keys(theme.colors);
 
   // <Button primary
-  const propColor = colorProps.find(color => props[color]);
+  // any is needed probably because Array find is not yet fully typed.
+  const propColor: any = colorProps.find(color => props[color]);
   if (propColor) {
     props = {
       ...props,
-      // Note it overrides props.
       backgroundColor: propColor,
       bold: true,
       color: 'white',
@@ -63,10 +63,9 @@ const Button = ({
 
   // <Button primary outline
   if (propColor && outline) {
+    delete props.backgroundColor;
     props = {
       ...props,
-      // Note it overrides props.
-      backgroundColor: null,
       bold: false,
       borderColor: props.backgroundColor,
       borderStyle: 'solid',

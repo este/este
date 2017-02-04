@@ -20,15 +20,14 @@ const onSubmitEditing = (fields, addTodo) => () => {
   fields.$reset();
 };
 
-const NewTodo = ({
-  addTodo,
-  fields,
-  intl,
-}: NewTodoProps) => (
-  <Box
-    backgroundColor="primary"
-    paddingVertical={0.5}
-  >
+const NewTodo = (
+  {
+    addTodo,
+    fields,
+    intl,
+  }: NewTodoProps,
+) => (
+  <Box backgroundColor="primary" paddingVertical={0.5}>
     <TextInput
       {...fields.title}
       color="white"
@@ -42,10 +41,7 @@ const NewTodo = ({
 );
 
 export default compose(
-  connect(
-    null,
-    { addTodo },
-  ),
+  connect(null, { addTodo }),
   fields({
     path: 'newTodo',
     fields: ['title'],

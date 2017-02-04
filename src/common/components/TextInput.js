@@ -32,6 +32,9 @@ const TextInput = (props: TextInputProps, {
   const {
     disabled = false,
     height = textStyle.lineHeight / theme.typography.lineHeight,
+    // Some user agents (Chrome, RN Android) have default input padding.
+    // We need to reset it to ensure consistent rendering across platforms.
+    padding = 0,
     placeholderTextColor = computePlaceholderColor(textStyle.color),
     style,
     ...restProps
@@ -50,13 +53,13 @@ const TextInput = (props: TextInputProps, {
       color: placeholderTextColor,
     },
   };
-
   return (
     <Text
       as={PlatformTextInput}
       // React Native TextInput needs explicit height.
       // Browsers need explicit height for correct vertical align.
       height={height}
+      padding={padding}
       {...(disabled ? { opacity: theme.states.disabled.opacity } : null)}
       {...platformProps}
       {...restProps}

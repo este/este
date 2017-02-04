@@ -30,26 +30,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const Baseline = ({ baselineShown, lineHeight }: BaselineProps) => (
-  <View>
-    {baselineShown &&
-      <View pointerEvents="none" style={styles.container}>
-        {range(0, 100).map(i => (
-          <View
-            key={i}
-            pointerEvents="none"
-            style={[styles.line, { top: (i * lineHeight) - 1 }]}
-          />
-        ))}
-      </View>
-    }
-  </View>
-);
+const Baseline = ({ baselineShown, lineHeight }: BaselineProps) => {
+  if (!baselineShown) return null;
+  return (
+    <View pointerEvents="none" style={styles.container}>
+      {range(0, 100).map(i => (
+        <View
+          key={i}
+          pointerEvents="none"
+          style={[styles.line, { top: (i * lineHeight) - 1 }]}
+        />
+      ))}
+    </View>
+  );
+};
 
 export default compose(
-  connect(
-    (state: State) => ({
-      baselineShown: state.app.baselineShown,
-    }),
-  ),
+  connect((state: State) => ({
+    baselineShown: state.app.baselineShown,
+  })),
 )(Baseline);

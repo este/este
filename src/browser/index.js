@@ -21,7 +21,7 @@ const onWindowIntl = () => {
 };
 
 // github.com/andyearnshaw/Intl.js/#intljs-and-browserifywebpack
-if (!window.Intl) {
+if (!window.Intl && typeof require.ensure === 'function') {
   require.ensure([
     'intl',
     'intl/locale-data/jsonp/cs.js',
