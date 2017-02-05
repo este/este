@@ -1,5 +1,6 @@
 // @flow
 import App from '../../browser/app/App';
+import BaseRoot from '../../browser/app/BaseRoot';
 import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
@@ -9,7 +10,6 @@ import configureFela from '../../browser/configureFela';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
 import serialize from 'serialize-javascript';
-import { BrowserRoot } from '../../browser/app/Root';
 import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
@@ -58,13 +58,13 @@ const createStore = req => configureStore({
 const renderBody = (store, context, location, fetchPromises) => {
   const felaRenderer = configureFela();
   const html = renderToString(
-    <BrowserRoot felaRenderer={felaRenderer} store={store}>
+    <BaseRoot felaRenderer={felaRenderer} store={store}>
       <ServerFetchProvider promises={fetchPromises}>
         <ServerRouter context={context} location={location}>
           <App />
         </ServerRouter>
       </ServerFetchProvider>
-    </BrowserRoot>,
+    </BaseRoot>,
   );
   const helmet = Helmet.rewind();
   const css = felaRenderer.renderToString();
