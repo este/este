@@ -60,9 +60,9 @@ const renderBody = (store, context, location, fetchPromises) => {
   const html = renderToString(
     <BaseRoot felaRenderer={felaRenderer} store={store}>
       <ServerFetchProvider promises={fetchPromises}>
-        <ServerRouter context={context} location={location}>
+        {/* <ServerRouter context={context} location={location}> */}
           <App />
-        </ServerRouter>
+        {/* </ServerRouter> */}
       </ServerFetchProvider>
     </BaseRoot>,
   );

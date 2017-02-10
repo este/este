@@ -10,34 +10,26 @@ import React from 'react';
 import favicon from '../../common/app/favicon';
 import start from '../../common/app/start';
 import { Baseline } from '../components';
-import { Box, Match } from '../../common/components';
-import { Miss } from 'react-router';
+import { Box } from '../../common/components';
 import { ThemeProvider } from 'react-fela';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
-// Pages
-import FieldsPage from '../fields/FieldsPage';
-import HomePage from '../home/HomePage';
-import IntlPage from '../intl/IntlPage';
-import MePage from '../me/MePage';
-import NotFoundPage from '../notfound/NotFoundPage';
-import OfflinePage from '../offline/OfflinePage';
-import SignInPage from '../auth/SignInPage';
-import TodosPage from '../todos/TodosPage';
-import UsersPage from '../users/UsersPage';
-
 type AppProps = {
+  children: any,
   currentLocale: string,
   themeName: string,
   theme: Theme,
 };
 
-const App = ({
-  currentLocale,
-  theme,
-  themeName,
-}: AppProps) => (
+const App = (
+  {
+    children,
+    currentLocale,
+    theme,
+    themeName,
+  }: AppProps,
+) => (
   <ThemeProvider
     key={themeName} // Enforce rerender.
     theme={theme}
@@ -49,27 +41,20 @@ const App = ({
           meta={[
             // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+            },
             { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
             ...favicon.meta,
           ]}
-          link={[
-            ...favicon.link,
-          ]}
+          link={[...favicon.link]}
         />
         <Header />
         <Box
           flex={1} // make footer sticky
         >
-          <Match exactly pattern="/" component={HomePage} />
-          <Match pattern="/users" component={UsersPage} />
-          <Match pattern="/todos" component={TodosPage} />
-          <Match pattern="/fields" component={FieldsPage} />
-          <Match pattern="/intl" component={IntlPage} />
-          <Match pattern="/offline" component={OfflinePage} />
-          <Match pattern="/signin" component={SignInPage} />
-          <Match authorized pattern="/me" component={MePage} />
-          <Miss component={NotFoundPage} />
+          {children}
         </Box>
         <Footer />
       </Container>
@@ -78,12 +63,10 @@ const App = ({
 );
 
 export default compose(
-  connect(
-    (state: State) => ({
-      currentLocale: state.intl.currentLocale,
-      theme: themes[state.app.currentTheme] || themes.defaultTheme,
-      themeName: state.app.currentTheme,
-    }),
-  ),
+  connect((state: State) => ({
+    currentLocale: state.intl.currentLocale,
+    theme: themes[state.app.currentTheme] || themes.defaultTheme,
+    themeName: state.app.currentTheme,
+  })),
   start,
 )(App);

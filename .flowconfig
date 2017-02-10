@@ -20,6 +20,7 @@
 .*/node_modules/react-native/local-cli/server/util/inspectorProxy.js
 ; https://github.com/react-community/react-navigation/issues/81
 .*/node_modules/react-navigation/.*
+.*/node_modules/react-static-container/.*
 
 [include]
 

@@ -1,20 +1,20 @@
 // @flow
-import App from './App';
 import BaseRoot from './BaseRoot';
+import Error from './Error';
 import React from 'react';
-import { BrowserRouter } from 'react-router';
+import routeConfig from './routeConfig';
+import { createConnectedRouter, createRender, resolveElements } from 'found';
 
-type RootProps = {
-  store: Object,
-};
+const ConnectedRouter = createConnectedRouter({
+  render: createRender({ renderError: Error }),
+});
 
-// We needs such Root also for vanilla hot reloading.
-const Root = ({ store }: RootProps) => (
+const Root = ({ store }: { store: Object }) => (
   <BaseRoot store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ConnectedRouter resolveElements={resolveElements} />
   </BaseRoot>
 );
+
+Root.routeConfig = routeConfig;
 
 export default Root;

@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './app/Root';
+import configureFound from './configureFound';
 import configureReporting from '../common/configureReporting';
 import configureStore from '../common/configureStore';
 import localforage from 'localforage';
@@ -15,18 +16,22 @@ const reportingMiddleware = configureReporting({
   unhandledRejection: fn => window.addEventListener('unhandledrejection', fn),
 });
 
+const found = configureFound(Root.routeConfig);
+
 const store = configureStore({
   initialState,
   platformDeps: { uuid, storageEngine: localforage },
+  platformReducers: { found: found.reducer },
   platformMiddleware: [reportingMiddleware],
+  platformStoreEnhancers: found.storeEnhancers,
 });
+
+found.init(store);
 
 const appElement = document.getElementById('app');
 
 // Initial render.
-ReactDOM.render(
-  <Root store={store} />
-, appElement);
+ReactDOM.render(<Root store={store} />, appElement);
 
 // Hot reload render.
 // gist.github.com/gaearon/06bd9e2223556cb0d841#file-naive-js
@@ -34,8 +39,7 @@ if (module.hot && typeof module.hot.accept === 'function') {
   module.hot.accept('./app/Root', () => {
     const NextRoot = require('./app/Root').default;
 
-    ReactDOM.render(
-      <NextRoot store={store} />
-    , appElement);
+    found.replaceRouteConfig(NextRoot.routeConfig);
+    ReactDOM.render(<NextRoot store={store} />, appElement);
   });
 }

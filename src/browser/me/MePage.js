@@ -26,7 +26,7 @@ const HeaderLink = ({ message, ...props }) => (
 
 const Header = ({ pathname }) => (
   <Box flexDirection="row" marginBottom={1} marginHorizontal={-0.5}>
-    <HeaderLink activeOnlyWhenExact to={pathname} message={linksMessages.me} />
+    <HeaderLink exact to={pathname} message={linksMessages.me} />
     <HeaderLink to={`${pathname}/profile`} message={linksMessages.profile} />
     <HeaderLink to={`${pathname}/settings`} message={linksMessages.settings} />
   </Box>
