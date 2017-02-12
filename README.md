@@ -69,7 +69,7 @@ If you are using different node versions on your machine, use [nvm](https://gith
 ```shell
 git clone
 cd este-app
-npm install
+yarn (or npm install)
 ``` 
 
 ## Start Development
