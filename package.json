@@ -65,6 +65,7 @@
     "firebase": "^3.1.0",
     "flow-bin": "^0.37.0",
     "found": "^0.2.1",
+    "found-scroll": "^0.1.1",
     "gravatar": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-bg": "^0.0.8",
