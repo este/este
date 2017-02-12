@@ -9,12 +9,22 @@ const ConnectedRouter = createConnectedRouter({
   render: createRender({ renderError: Error }),
 });
 
-const Root = ({ store }: { store: Object }) => (
+type RootProps = {
+  renderArgs: Object,
+  store: Object,
+};
+
+const Root = ({ renderArgs, store }: RootProps) => (
   <BaseRoot store={store}>
-    <ConnectedRouter resolveElements={resolveElements} />
+    <ConnectedRouter
+      initialRenderArgs={renderArgs}
+      matchContext={{ store }}
+      resolveElements={resolveElements}
+    />
   </BaseRoot>
 );
 
+// For hot reloading.
 Root.routeConfig = routeConfig;
 
 export default Root;
