@@ -1,7 +1,7 @@
 // @flow
+import HttpError from 'found/lib/HttpError';
 import React from 'react';
-import Route from 'found/lib/jsx/Route';
-import makeRouteConfig from 'found/lib/jsx/makeRouteConfig';
+import { makeRouteConfig, Route } from 'found/lib/jsx';
 
 // Pages
 import App from './App';

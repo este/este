@@ -67,8 +67,8 @@ ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
 
 ajv@^4.7.0:
-  version "4.11.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.2.tgz#f166c3c11cbc6cb9dcc102a5bcfe5b72c95287e6"
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.3.tgz#ce30bdb90d1254f762c75af915fb3a63e7183d22"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -1355,11 +1355,11 @@ browserify-zlib@^0.1.4:
     pako "~0.2.0"
 
 browserslist@^1.0.1, browserslist@^1.5.2, browserslist@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-1.7.1.tgz#cc9bd193979a2a4b09fdb3df6003fefe48ccefe1"
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-1.7.2.tgz#cf4977283c3e692d6dcc241192e9de91504ff331"
   dependencies:
-    caniuse-db "^1.0.30000617"
-    electron-to-chromium "^1.2.1"
+    caniuse-db "^1.0.30000622"
+    electron-to-chromium "^1.2.2"
 
 bser@1.0.2:
   version "1.0.2"
@@ -1458,7 +1458,7 @@ caniuse-api@^1.5.2:
     lodash.memoize "^4.1.0"
     lodash.uniq "^4.3.0"
 
-caniuse-db@^1.0.30000346, caniuse-db@^1.0.30000617, caniuse-db@^1.0.30000618:
+caniuse-db@^1.0.30000346, caniuse-db@^1.0.30000618, caniuse-db@^1.0.30000622:
   version "1.0.30000622"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000622.tgz#9d9690b577384990a58e33ebb903a14da735e5fd"
 
@@ -2334,7 +2334,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.2.1:
+electron-to-chromium@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.2.2.tgz#e41bc9488c88e3cfa1e94bde28e8420d7d47c47c"
 
@@ -2964,32 +2964,28 @@ fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-fela-native@^4.1.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela-native/-/fela-native-4.2.1.tgz#aed3893292c1d5e947dfa4bbf11e388b066f3447"
+fela-native@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fela-native/-/fela-native-4.2.2.tgz#a70a12a4352a0299d2f9d8a136e77bbf600efe5f"
 
-fela-plugin-logger@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela-plugin-logger/-/fela-plugin-logger-4.2.1.tgz#c61cac30645e314d879911037937a59b6043302c"
+fela-plugin-placeholder-prefixer@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-4.2.2.tgz#39e2df651ecf7ab3a2af1e9f54664fa62324bfcf"
 
-fela-plugin-placeholder-prefixer@^4.1.2:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-4.2.1.tgz#70a56a244b621fd1b31d6830bb4c45366bebbe78"
+fela-plugin-validator@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fela-plugin-validator/-/fela-plugin-validator-4.2.2.tgz#545333235151c57b09408e74fb2091c94e240d6a"
 
-fela-plugin-validator@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela-plugin-validator/-/fela-plugin-validator-4.2.1.tgz#c66922aa040d337f5bad21c89ce4067a709200d6"
-
-fela-preset-web@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela-preset-web/-/fela-preset-web-4.2.1.tgz#3ad03c59c8a440a81b62fb7b6ad7a59c153ea931"
+fela-preset-web@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fela-preset-web/-/fela-preset-web-4.2.2.tgz#a5433ed7ae2af8753486eec827e47a2235d8a8e0"
   dependencies:
     inline-style-prefixer "^2.0.5"
     unitless-css-property "1.0.2"
 
-fela@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fela/-/fela-4.2.1.tgz#7daf3ca23822a35bf527066aa8d50f1fc3677dff"
+fela@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fela/-/fela-4.2.2.tgz#0b93df4e19a0fa8c181930be97d914544ad368a3"
   dependencies:
     hyphenate-style-name "1.0.1"
 
@@ -4443,8 +4439,8 @@ js-yaml@~3.7.0:
     esprima "^2.6.0"
 
 jsbn@~0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.0.tgz#650987da0dd74f4ebf5a11377a2aa2d273e97dfd"
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
 jsdom@^9.9.1:
   version "9.11.0"
@@ -5166,11 +5162,11 @@ morgan@~1.6.1:
     on-finished "~2.3.0"
     on-headers "~1.0.0"
 
-ms@0.7.1:
+ms@0.7.1, ms@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2, ms@^0.7.1:
+ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
@@ -6186,8 +6182,8 @@ react-dom@^15.4.1:
     object-assign "^4.1.0"
 
 react-fela@^4.0.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-4.2.1.tgz#246aea54a8d5743d5596c97ebc2c2b2f42140d72"
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-4.2.2.tgz#74546eade272d1d23935404b6bef139225bcafcf"
 
 react-helmet@^4.0.0:
   version "4.0.0"

@@ -1,7 +1,7 @@
 // @flow
 import BaseRoot from './BaseRoot';
-import Error from './Error';
 import React from 'react';
+import renderError from './renderError';
 import routeConfig from './routeConfig';
 import { ScrollManager } from 'found-scroll';
 import { createConnectedRouter, createRender, resolveElements } from 'found';
@@ -9,7 +9,7 @@ import { createConnectedRouter, createRender, resolveElements } from 'found';
 const ConnectedRouter = createConnectedRouter({
   render: renderArgs => (
     <ScrollManager renderArgs={renderArgs}>
-      {createRender({ renderError: Error })(renderArgs)}
+      {createRender({ renderError })(renderArgs)}
     </ScrollManager>
   ),
 });

@@ -4,7 +4,6 @@ import validator from 'fela-plugin-validator';
 import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
 
-
 const staticStyles = `
   ${/*
     Selected rules from necolas.github.io/normalize.css/5.0.0/normalize.css

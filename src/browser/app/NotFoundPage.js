@@ -8,7 +8,6 @@ import { Link, Title } from '../components';
 
 type NotFoundPageProps = { intl: $IntlShape };
 
-// TODO: Make it universal once we will have universal Title and Link.
 const NotFoundPage = ({ intl }: NotFoundPageProps) => (
   <Box>
     <Title message={linksMessages.notFound} />
@@ -16,7 +15,7 @@ const NotFoundPage = ({ intl }: NotFoundPageProps) => (
       heading={intl.formatMessage(messages.h1)}
       description={intl.formatMessage(messages.p)}
     />
-    <Link activeOnlyWhenExact to="/">
+    <Link exact to="/">
       <FormattedMessage {...messages.continue} />
     </Link>
   </Box>

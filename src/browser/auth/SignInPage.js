@@ -6,7 +6,7 @@ import SignInError from './SignInError';
 import Social from './Social';
 import linksMessages from '../../common/app/linksMessages';
 import { Box, Loading, PageHeader } from '../../common/components';
-import { Redirect } from 'react-router';
+import { withRouter } from 'found/lib';
 import { Title } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -15,26 +15,27 @@ import { injectIntl } from 'react-intl';
 type SignInPageProps = {
   disabled: boolean,
   intl: $IntlShape,
-  // location: any,
+  router: Object,
   viewer: User,
 };
 
 const SignInPage = ({
   disabled,
   intl,
-  // location,
+  router,
   viewer,
 }: SignInPageProps) => (
   viewer ?
-    <Redirect
-      // TODO: Fix redirect, probably with upcoming react-navigation.
-      to="/"
-      // to={(
-      //   location.state &&
-      //   location.state.from &&
-      //   location.state.from.pathname
-      // ) || '/'}
-    />
+    null
+    // <Redirect
+    //   // TODO: Fix redirect, probably with upcoming react-navigation.
+    //   to="/"
+    //   // to={(
+    //   //   location.state &&
+    //   //   location.state.from &&
+    //   //   location.state.from.pathname
+    //   // ) || '/'}
+    // />
   :
     <Box>
       <Title message={linksMessages.signIn} />
@@ -56,4 +57,5 @@ export default compose(
     }),
   ),
   injectIntl,
+  withRouter,
 )(SignInPage);

@@ -4,36 +4,17 @@ import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
 import Root from '../../browser/app/Root';
-// import ServerFetchProvider from './ServerFetchProvider';
-import Error from '../../browser/app/Error';
 import config from '../config';
 import configureFela from '../../browser/configureFela';
 import configureFound from '../../browser/configureFound';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
+import renderError from '../../browser/app/renderError';
 import serialize from 'serialize-javascript';
 import { RedirectException, createRender } from 'found';
 import { RouterProvider } from 'found/lib/server';
 import { ServerProtocol } from 'farce';
-// import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-
-// // TODO: Remove
-// const settleAllWithTimeout = promises => Promise.all(
-//   promises.map(p => p.reflect()),
-// )
-//   .each(inspection => {
-//     if (inspection.isFulfilled()) return;
-//     console.log('Server fetch failed:', inspection.reason());
-//   })
-//   .timeout(15000) // Do not block rendering forever.
-//   .catch(error => {
-//     if (error instanceof Promise.TimeoutError) {
-//       console.log('Server fetch timeouted:', error);
-//       return;
-//     }
-//     throw error;
-//   });
 
 // createInitialState loads files, so it must be called once.
 const initialState = createInitialState();
@@ -68,7 +49,7 @@ const renderBody = (renderArgs, store) => {
   const html = renderToString(
     <BaseRoot felaRenderer={felaRenderer} store={store}>
       <RouterProvider router={renderArgs.router}>
-        {createRender({ renderError: Error })(renderArgs)}
+        {createRender({ renderError })(renderArgs)}
       </RouterProvider>
     </BaseRoot>,
   );
@@ -124,37 +105,6 @@ const render = async (req: Object, res: Object, next: Function) => {
     }
     next(error);
   }
-  // try {
-  //   const context = createServerRenderContext();
-  //   const store = createStore(req);
-  //   const fetchPromises = [];
-  //
-  //   let body = renderBody(store, context, req.url, fetchPromises);
-  //   const result = context.getResult();
-  //
-  //   if (result.redirect) {
-  //     res.redirect(301, result.redirect.pathname + result.redirect.search);
-  //     return;
-  //   }
-  //
-  //   if (result.missed) {
-  //     body = renderBody(store, context, req.url);
-  //     const html = renderHtml(store.getState(), body);
-  //     res.status(404).send(html);
-  //     return;
-  //   }
-  //
-  //   if (!process.env.IS_SERVERLESS && fetchPromises.length > 0) {
-  //     await settleAllWithTimeout(fetchPromises);
-  //     body = renderBody(store, context, req.url);
-  //   }
-  //
-  //   const html = renderHtml(store.getState(), body);
-  //   res.status(200).send(html);
-  // } catch (error) {
-  //   console.log(error);
-  //   next(error);
-  // }
 };
 
 export default render;
