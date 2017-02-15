@@ -2,6 +2,7 @@
 import type { Action, Deps } from '../types';
 import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';
+import cookie from 'js-cookie';
 import messages from '../lib/redux-firebase/messages';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
@@ -35,6 +36,7 @@ export const signInFail = (error: Error): Action => ({
 
 export const signOut = () => ({ firebaseAuth }: Deps): Action => {
   firebaseAuth().signOut();
+  cookie.remove('locale');
   return {
     type: 'SIGN_OUT',
   };

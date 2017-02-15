@@ -7,7 +7,6 @@ import { pick } from 'ramda';
 const paths = [
   ['app', ['baselineShown', 'currentTheme']],
   ['fields'],
-  ['intl', ['currentLocale']],
   ['users', ['online', 'viewer']],
 ];
 
