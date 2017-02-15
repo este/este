@@ -15,6 +15,8 @@ nconf.defaults({
   appName: require('../../package.json').name,
   // Use appVersion defined in gulp env task or Heroku dyno metadata.
   appVersion: process.env.appVersion || process.env.HEROKU_SLUG_COMMIT,
+  // Default language should be first in the array
+  locales: ['en', 'cs', 'de', 'es', 'fr', 'pt', 'ro'],
   defaultLocale: 'en',
   firebase: {
     // To get the config, just click Add web app from the overview page.
@@ -25,7 +27,6 @@ nconf.defaults({
   },
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',
-  locales: ['cs', 'de', 'en', 'es', 'fr', 'pt', 'ro'],
   port: process.env.PORT || 3000,
   // Enable hot reload on remote device. Note it prevents offline testing,
   // because it depends on ip.address(), which doesn't work with disabled wifi.
