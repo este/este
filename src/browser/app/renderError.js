@@ -2,30 +2,30 @@
 import App from './App';
 import NotFoundPage from './NotFoundPage';
 import React from 'react';
-
-const NotFound = () => (
-  <App>
-    <NotFoundPage />
-  </App>
-);
-
-const Error = () => (
-  <div>
-    <h1>500 error</h1>
-    <p>Something went wrong</p>
-  </div>
-);
+import SignInPage from '../auth/SignInPage';
 
 type ErrorProps = {
   error: { status: number },
 };
 
 const renderError = ({ error }: ErrorProps) => {
-  if (error.status === 404) {
-    return <NotFound />;
+  switch (error.status) {
+    case 404:
+      return <App><NotFoundPage /></App>;
+    case 401:
+      return <App><SignInPage /></App>;
+    case 500:
+      console.error('Yay', error); // eslint-disable-line no-console
+      // TODO: Improve it. Add link to root etc.
+      return (
+        <div>
+          <h1>500 error</h1>
+          <p>Something went wrong</p>
+        </div>
+      );
+    default:
+      return null;
   }
-  console.error('Yay', error); // eslint-disable-line no-console
-  return <Error />;
 };
 
 export default renderError;

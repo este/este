@@ -14,12 +14,20 @@ import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 import UsersPage from '../users/UsersPage';
 
+const requireViewer = {
+  getData({ context: { store } }) {
+    if (!store.getState().users.viewer) {
+      throw new HttpError(401);
+    }
+  },
+};
+
 const routeConfig = makeRouteConfig(
   <Route path="/" Component={App}>
     <Route Component={HomePage} />
     <Route path="fields" Component={FieldsPage} />
     <Route path="intl" Component={IntlPage} />
-    <Route path="me" Component={MePage} />
+    <Route {...requireViewer} path="me" Component={MePage} />
     <Route path="offline" Component={OfflinePage} />
     <Route path="signin" Component={SignInPage} />
     <Route path="todos" Component={TodosPage} />
