@@ -13,19 +13,19 @@ class Validation {
     this.promise = Promise.resolve();
   }
 
+  static isEmptyString(value) {
+    return !trim(value);
+  }
+
   validate(callback, { required } = {}) {
     const prop = this.currentProp;
     const value = this.object[prop];
     const object = this.object;
     this.promise = this.promise.then(() => {
-      if (required && !this.isEmptyString(value)) return;
+      if (required && !Validation.isEmptyString(value)) return;
       callback(value, prop, object);
     });
     return this;
-  }
-
-  isEmptyString(value) {
-    return !trim(value);
   }
 
   prop(prop) {

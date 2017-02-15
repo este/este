@@ -32,7 +32,7 @@ const localeData = {
   cs_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/cs.js', 'react-intl/locale-data/cs'], (require) => {
       require('intl/locale-data/jsonp/cs.js');
-      addLocale(require('react-intl/locale-data/cs'), callback)
+      addLocale(require('react-intl/locale-data/cs'), callback);
     }, 'intl-cs')),
 
   // German
@@ -42,7 +42,7 @@ const localeData = {
   de_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/de.js', 'react-intl/locale-data/de'], (require) => {
       require('intl/locale-data/jsonp/de.js');
-      addLocale(require('react-intl/locale-data/de'), callback)
+      addLocale(require('react-intl/locale-data/de'), callback);
     }, 'intl-de')),
 
   // English
@@ -52,7 +52,7 @@ const localeData = {
   en_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/en.js', 'react-intl/locale-data/en'], (require) => {
       require('intl/locale-data/jsonp/en.js');
-      addLocale(require('react-intl/locale-data/en'), callback)
+      addLocale(require('react-intl/locale-data/en'), callback);
     }, 'intl-en')),
 
   // Spanish
@@ -62,7 +62,7 @@ const localeData = {
   es_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/es.js', 'react-intl/locale-data/es'], (require) => {
       require('intl/locale-data/jsonp/es.js');
-      addLocale(require('react-intl/locale-data/es'), callback)
+      addLocale(require('react-intl/locale-data/es'), callback);
     }, 'intl-es')),
 
   // French
@@ -72,7 +72,7 @@ const localeData = {
   fr_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/fr.js', 'react-intl/locale-data/fr'], (require) => {
       require('intl/locale-data/jsonp/fr.js');
-      addLocale(require('react-intl/locale-data/fr'), callback)
+      addLocale(require('react-intl/locale-data/fr'), callback);
     }, 'intl-fr')),
 
   // Portuguese
@@ -82,7 +82,7 @@ const localeData = {
   pt_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/pt.js', 'react-intl/locale-data/pt'], (require) => {
       require('intl/locale-data/jsonp/pt.js');
-      addLocale(require('react-intl/locale-data/pt'), callback)
+      addLocale(require('react-intl/locale-data/pt'), callback);
     }, 'intl-pt')),
 
   // Romanian
@@ -92,7 +92,7 @@ const localeData = {
   ro_polyfill: (callback) => addIntl(() =>
     require.ensure(['intl/locale-data/jsonp/ro.js', 'react-intl/locale-data/ro'], (require) => {
       require('intl/locale-data/jsonp/ro.js');
-      addLocale(require('react-intl/locale-data/ro'), callback)
+      addLocale(require('react-intl/locale-data/ro'), callback);
     }, 'intl-ro')),
 };
 

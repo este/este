@@ -153,7 +153,7 @@ const makeConfig = (options) => {
             disable: false,
             allChunks: true,
           }),
-          new LodashModuleReplacementPlugin,
+          new LodashModuleReplacementPlugin(),
           new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {
