@@ -5,7 +5,7 @@ import { pick } from 'ramda';
 // TODO: Add redux-persist-migrate.
 
 const paths = [
-  ['app', ['baselineShown', 'currentTheme']],
+  ['app', ['baselineShown']],
   ['fields'],
   ['users', ['online', 'viewer']],
 ];

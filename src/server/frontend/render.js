@@ -36,16 +36,25 @@ const initialState = createInitialState();
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
+const getTheme = req =>
+  process.env.IS_SERVERLESS
+    ? config.defaultTheme // No SSR, use default theme
+    : (req.cookies && req.cookies.theme) // User set language explicitly in app
+      || config.defaultTheme // No preference, use default theme
+
 const getLocale = req =>
   process.env.IS_SERVERLESS
-    ? config.defaultLocale // No SSR, default to English
+    ? config.defaultLocale // No SSR, use default locale
     : (req.cookies && req.cookies.locale) // User set language explicitly in app
       || req.acceptsLanguages(config.locales) // Browser specified language
-      || config.defaultLocale; // No preference found, default to English
+      || config.defaultLocale; // No preference, use default locale
 
 const createStore = req => configureStore({
   initialState: {
     ...initialState,
+    app: {
+      currentTheme: getTheme(req),
+    },
     device: {
       ...initialState.device,
       host: getHost(req),

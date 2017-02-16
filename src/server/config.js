@@ -18,6 +18,7 @@ nconf.defaults({
   // Default language should be first in the array
   locales: ['en', 'cs', 'de', 'es', 'fr', 'pt', 'ro'],
   defaultLocale: 'en',
+  defaultTheme: 'defaultTheme',
   firebase: {
     // To get the config, just click Add web app from the overview page.
     apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
