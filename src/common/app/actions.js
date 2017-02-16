@@ -1,5 +1,6 @@
 // @flow
 import type { Action, Deps } from '../types';
+import cookie from 'js-cookie';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';
 import { onAuth, signInDone, signInFail } from '../auth/actions';
@@ -36,10 +37,13 @@ export const toggleBaseline = (): Action => ({
   type: 'TOGGLE_BASELINE',
 });
 
-export const setTheme = (theme: string): Action => ({
-  type: 'SET_THEME',
-  payload: { theme },
-});
+export const setTheme = (theme: string): Action => {
+  cookie.set('theme', theme);
+  return {
+    type: 'SET_THEME',
+    payload: { theme },
+  };
+};
 
 const appStartEpic = (action$: any) =>
   action$.ofType(REHYDRATE)

@@ -1,6 +1,7 @@
 // @flow weak
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import autoprefixer from 'autoprefixer';
 import config from '../src/server/config';
@@ -87,6 +88,8 @@ const makeConfig = (options) => {
             cacheDirectory: true,
             presets: [['es2015', { modules: false }], 'react', 'stage-1'],
             plugins: [
+              'ramda',
+              'lodash',
               ['transform-runtime', {
                 helpers: false,
                 polyfill: false,
@@ -150,6 +153,7 @@ const makeConfig = (options) => {
             disable: false,
             allChunks: true,
           }),
+          new LodashModuleReplacementPlugin(),
           new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {

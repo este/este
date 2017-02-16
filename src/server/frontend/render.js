@@ -24,7 +24,7 @@ const settleAllWithTimeout = promises => Promise
   .catch((error) => {
     // $FlowFixMe
     if (error instanceof Promise.TimeoutError) {
-      console.log('Server fetch timeouted:', error);
+      console.log('Server fetch timed out:', error);
       return;
     }
     throw error;
@@ -36,13 +36,25 @@ const initialState = createInitialState();
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
-const getLocale = req => process.env.IS_SERVERLESS
-  ? config.defaultLocale
-  : req.acceptsLanguages(config.locales) || config.defaultLocale;
+const getTheme = req =>
+  process.env.IS_SERVERLESS
+    ? config.defaultTheme // No SSR, use default theme
+    : (req.cookies && req.cookies.theme) // User set language explicitly in app
+      || config.defaultTheme // No preference, use default theme
+
+const getLocale = req =>
+  process.env.IS_SERVERLESS
+    ? config.defaultLocale // No SSR, use default locale
+    : (req.cookies && req.cookies.locale) // User set language explicitly in app
+      || req.acceptsLanguages(config.locales) // Browser specified language
+      || config.defaultLocale; // No preference, use default locale
 
 const createStore = req => configureStore({
   initialState: {
     ...initialState,
+    app: {
+      currentTheme: getTheme(req),
+    },
     device: {
       ...initialState.device,
       host: getHost(req),
@@ -104,6 +116,7 @@ const renderHtml = (state, body) => {
 };
 
 // react-router.now.sh/ServerRouter
+const localeList = config.locales.join(', ');
 const render = async (req: Object, res: Object, next: Function) => {
   try {
     const context = createServerRenderContext();
@@ -112,6 +125,8 @@ const render = async (req: Object, res: Object, next: Function) => {
 
     let body = renderBody(store, context, req.url, fetchPromises);
     const result = context.getResult();
+
+    res.header('Content-Language', localeList);
 
     if (result.redirect) {
       res.redirect(301, result.redirect.pathname + result.redirect.search);
