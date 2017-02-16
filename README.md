@@ -67,7 +67,7 @@ If you are using different node versions on your machine, use [nvm](https://gith
 ## Create App
 
 ```shell
-git clone
+git clone - make sure that the project is under Git repository
 cd este-app
 yarn (or npm install)
 ``` 
