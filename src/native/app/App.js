@@ -1,6 +1,5 @@
 // @flow
 import type { State } from '../../common/types';
-import type { Theme } from '../../common/themes/types';
 import * as themes from '../themes';
 import Menu from './Menu';
 import Page from './Page';
@@ -11,7 +10,6 @@ import { Baseline } from '../components';
 import { Box } from '../../common/components';
 import { Match, Redirect } from 'react-router';
 import { Platform, StatusBar } from 'react-native';
-import { ThemeProvider } from 'react-fela';
 import { appShowMenu } from '../../common/app/actions';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -28,7 +26,6 @@ type AppProps = {
   appMenuShown: boolean,
   appShowMenu: typeof appShowMenu,
   appStarted: boolean,
-  theme: Theme,
 };
 
 const App = (
@@ -36,8 +33,6 @@ const App = (
     appMenuShown,
     appShowMenu,
     appStarted,
-    theme,
-    themeName,
   }: AppProps,
 ) => {
   // TODO: Add splash screen.
@@ -63,19 +58,18 @@ const App = (
           }}
         />
       </SideMenu>
-      <Baseline lineHeight={theme.typography.lineHeight} />
+      <Baseline />
     </Box>
   );
 };
 
 export default compose(
+  common({ themes }),
   connect(
     (state: State) => ({
       appMenuShown: state.app.menuShown,
       appStarted: state.app.started,
-      theme: themes[state.app.currentTheme] || themes.defaultTheme,
     }),
     { appShowMenu },
   ),
-  common({ themes }),
 )(App);
