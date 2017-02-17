@@ -5,7 +5,7 @@ import { path as ramdaPath } from 'ramda';
 import { resetFields, setField } from './actions';
 import isReactNative from '../../app/isReactNative';
 
-type Path = string | Array<string> | (props: Object) => Array<string>;
+type Path = string | Array<string> | ((props: Object) => Array<string>);
 
 type Options = {
   path: Path,
@@ -14,7 +14,7 @@ type Options = {
 };
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-const fields = (options: Options) => (WrappedComponent) => {
+const fields = (options: Options) => WrappedComponent => {
   const {
     path = '',
     fields = [],
@@ -23,30 +23,33 @@ const fields = (options: Options) => (WrappedComponent) => {
 
   invariant(Array.isArray(fields), 'Fields must be an array.');
   invariant(
-    (typeof path === 'string') ||
-    (typeof path === 'function') ||
-    Array.isArray(path)
-  , 'Path must be a string, function, or an array.');
+    typeof path === 'string' ||
+      typeof path === 'function' ||
+      Array.isArray(path),
+    'Path must be a string, function, or an array.',
+  );
 
   return class Fields extends React.Component {
-
     static contextTypes = {
       store: React.PropTypes.object, // Redux store.
     };
 
     static getNormalizePath(props) {
       switch (typeof path) {
-        case 'function': return path(props);
-        case 'string': return [path];
-        default: return path;
+        case 'function':
+          return path(props);
+        case 'string':
+          return [path];
+        default:
+          return path;
       }
     }
 
     static getFieldValue(field, model, initialState) {
-      if (model && {}.hasOwnProperty.call(model, field)) {
+      if (model && ({}).hasOwnProperty.call(model, field)) {
         return model[field];
       }
-      if (initialState && {}.hasOwnProperty.call(initialState, field)) {
+      if (initialState && ({}).hasOwnProperty.call(initialState, field)) {
         return initialState[field];
       }
       return '';
@@ -55,27 +58,32 @@ const fields = (options: Options) => (WrappedComponent) => {
     static lazyJsonValuesOf(model, props) {
       const initialState = getInitialState && getInitialState(props);
       // http://www.devthought.com/2012/01/18/an-object-is-not-a-hash
-      return options.fields.reduce((fields, field) => ({
-        ...fields,
-        [field]: Fields.getFieldValue(field, model, initialState),
-      }), Object.create(null));
+      return options.fields.reduce(
+        (fields, field) => ({
+          ...fields,
+          [field]: Fields.getFieldValue(field, model, initialState),
+        }),
+        Object.create(null),
+      );
     }
 
     static createFieldObject(field, onChange) {
-      return isReactNative ? {
-        onChangeText: (text) => {
-          onChange(field, text);
-        },
-      } : {
-        name: field,
-        onChange: (event) => {
-          // Some custom components like react-select pass the target directly.
-          const target = event.target || event;
-          const { type, checked, value } = target;
-          const isCheckbox = type && type.toLowerCase() === 'checkbox';
-          onChange(field, isCheckbox ? checked : value);
-        },
-      };
+      return isReactNative
+        ? {
+            onChangeText: text => {
+              onChange(field, text);
+            },
+          }
+        : {
+            name: field,
+            onChange: event => {
+              // Some custom components like react-select pass the target directly.
+              const target = event.target || event;
+              const { type, checked, value } = target;
+              const isCheckbox = type && type.toLowerCase() === 'checkbox';
+              onChange(field, isCheckbox ? checked : value);
+            },
+          };
     }
 
     state = {
@@ -84,6 +92,7 @@ const fields = (options: Options) => (WrappedComponent) => {
 
     fields: Object;
     values: any;
+    _isMounted: boolean;
     unsubscribe: () => void;
 
     onFieldChange = (field, value) => {
@@ -92,10 +101,13 @@ const fields = (options: Options) => (WrappedComponent) => {
     };
 
     createFields() {
-      const formFields = options.fields.reduce((fields, field) => ({
-        ...fields,
-        [field]: Fields.createFieldObject(field, this.onFieldChange),
-      }), {});
+      const formFields = options.fields.reduce(
+        (fields, field) => ({
+          ...fields,
+          [field]: Fields.createFieldObject(field, this.onFieldChange),
+        }),
+        {},
+      );
 
       this.fields = {
         ...formFields,
@@ -115,7 +127,7 @@ const fields = (options: Options) => (WrappedComponent) => {
 
     setModel(model) {
       this.values = Fields.lazyJsonValuesOf(model, this.props);
-      options.fields.forEach((field) => {
+      options.fields.forEach(field => {
         this.fields[field].value = this.values[field];
       });
       this.fields = { ...this.fields }; // Ensure rerender for pure components.
@@ -128,8 +140,11 @@ const fields = (options: Options) => (WrappedComponent) => {
     }
 
     componentDidMount() {
+      this._isMounted = true;
       const { store } = this.context;
       this.unsubscribe = store.subscribe(() => {
+        // This is for very rare case when something is still dispatching.
+        if (!this._isMounted) return;
         const newModel = this.getModelFromState();
         if (newModel === this.state.model) return;
         this.setModel(newModel);
@@ -137,15 +152,13 @@ const fields = (options: Options) => (WrappedComponent) => {
     }
 
     componentWillUnmount() {
+      this._isMounted = false;
       this.unsubscribe();
     }
 
     render() {
-      return (
-        <WrappedComponent {...this.props} fields={this.fields} />
-      );
+      return <WrappedComponent {...this.props} fields={this.fields} />;
     }
-
   };
 };
 

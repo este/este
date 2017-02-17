@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 const HeaderLink = ({ to, message, ...props }) => (
   <FormattedMessage {...message}>
-     {message => (
+    {message => (
       <Link
         backgroundColor="primary"
         bold
@@ -27,7 +27,7 @@ const HeaderLink = ({ to, message, ...props }) => (
 );
 
 type HeaderProps = {
-  viewer: ?User
+  viewer: ?User,
 };
 
 const Header = ({ viewer }: HeaderProps) => (

@@ -1,5 +1,7 @@
 // @flow
 import type { State } from '../../common/types';
+import type { Theme } from '../../common/themes/types';
+import * as themes from '../themes';
 import React from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -9,7 +11,7 @@ import { connect } from 'react-redux';
 type BaselineProps = {|
   baselineShown: boolean,
   children: any,
-  lineHeight: number,
+  theme: Theme,
 |};
 
 const styles = {
@@ -30,19 +32,17 @@ const styles = {
   }),
 };
 
-const Baseline = ({ baselineShown, children, lineHeight }: BaselineProps) => (
+const Baseline = ({ baselineShown, children, theme }: BaselineProps) => (
   <div style={styles.container}>
     {children}
     {baselineShown &&
-      <div style={styles.baseline(lineHeight)} />
-    }
+      <div style={styles.baseline(theme.typography.lineHeight)} />}
   </div>
 );
 
 export default compose(
-  connect(
-    (state: State) => ({
-      baselineShown: state.app.baselineShown,
-    }),
-  ),
+  connect((state: State) => ({
+    baselineShown: state.app.baselineShown,
+    theme: themes[state.app.currentTheme] || themes.defaultTheme,
+  })),
 )(Baseline);

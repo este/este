@@ -1,5 +1,6 @@
 // @flow
 import type { Action, Deps } from '../types';
+import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';
 import { onAuth, signInDone, signInFail } from '../auth/actions';
@@ -19,17 +20,9 @@ export const appShowMenu = (menuShown: boolean): Action => ({
   payload: { menuShown },
 });
 
-// Called on componentDidMount aka only at the client (browser or native).
-export const appStart = (): Action => ({
-  type: 'APP_START',
-});
-
+// Called on REHYDRATE. Can be used to block rendering until data are loaded.
 export const appStarted = (): Action => ({
   type: 'APP_STARTED',
-});
-
-export const appStop = (): Action => ({
-  type: 'APP_STOP',
 });
 
 export const toggleBaseline = (): Action => ({
@@ -42,14 +35,13 @@ export const setTheme = (theme: string): Action => ({
 });
 
 const appStartEpic = (action$: any) =>
-  action$.ofType(REHYDRATE)
-    .map(appStarted);
+  action$.ofType(REHYDRATE).map(appStarted);
 
 const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
-  const appOnline$ = Observable.create((observer) => {
-    const onValue = (snap) => {
+  const appOnline$ = Observable.create(observer => {
+    const onValue = snap => {
       const online = snap.val();
       if (online === getState().app.online) return;
       observer.next(appOnline(online));
@@ -61,21 +53,28 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
   });
 
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
-  const onAuth$ = Observable.create((observer) => {
-    const unsubscribe = firebaseAuth().onAuthStateChanged((firebaseUser) => {
+  const onAuth$ = Observable.create(observer => {
+    console.log('register onAuthStateChanged');
+    const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
+      // Enforce rerender on auth change.
+      // observer.next(FarceActions.replace(getState().found.match.location));
     });
-    return unsubscribe;
+    return () => {
+      console.log('unsubscribe');
+      unsubscribe();
+    };
   });
 
-  const signInAfterRedirect$ = Observable.create((observer) => {
+  const signInAfterRedirect$ = Observable.create(observer => {
     let unsubscribed = false;
-    firebaseAuth().getRedirectResult()
+    firebaseAuth()
+      .getRedirectResult()
       .then(({ user: firebaseUser }) => {
         if (unsubscribed || !firebaseUser) return;
         observer.next(signInDone(firebaseUser));
       })
-      .catch((error) => {
+      .catch(error => {
         if (unsubscribed) return;
         observer.error(signInFail(error));
       });
@@ -84,10 +83,7 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
     };
   });
 
-  const streams = [
-    appOnline$,
-    onAuth$,
-  ];
+  const streams: Array<any> = [appOnline$, onAuth$];
 
   if (process.env.IS_BROWSER) {
     streams.push(signInAfterRedirect$);
@@ -95,17 +91,7 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
 
   return action$
     .filter((action: Action) => action.type === 'APP_STARTED')
-    // $FlowFixMe ...streams should be typed.
-    .mergeMap(() => Observable
-      .merge(...streams)
-      // takeUntil unsubscribes all merged streams on APP_STOP.
-      .takeUntil(
-        action$.filter((action: Action) => action.type === 'APP_STOP'),
-      ),
-    );
+    .mergeMap(() => Observable.merge(...streams));
 };
 
-export const epics = [
-  appStartEpic,
-  appStartedFirebaseEpic,
-];
+export const epics = [appStartEpic, appStartedFirebaseEpic];
