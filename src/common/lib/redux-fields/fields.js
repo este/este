@@ -68,22 +68,23 @@ const fields = (options: Options) => WrappedComponent => {
     }
 
     static createFieldObject(field, onChange) {
-      return isReactNative
-        ? {
-            onChangeText: text => {
-              onChange(field, text);
-            },
-          }
-        : {
-            name: field,
-            onChange: event => {
-              // Some custom components like react-select pass the target directly.
-              const target = event.target || event;
-              const { type, checked, value } = target;
-              const isCheckbox = type && type.toLowerCase() === 'checkbox';
-              onChange(field, isCheckbox ? checked : value);
-            },
-          };
+      if (isReactNative) {
+        return {
+          onChangeText: text => {
+            onChange(field, text);
+          },
+        };
+      }
+      return {
+        name: field,
+        onChange: event => {
+          // Some custom components like react-select pass the target directly.
+          const target = event.target || event;
+          const { type, checked, value } = target;
+          const isCheckbox = type && type.toLowerCase() === 'checkbox';
+          onChange(field, isCheckbox ? checked : value);
+        },
+      };
     }
 
     state = {
@@ -92,7 +93,6 @@ const fields = (options: Options) => WrappedComponent => {
 
     fields: Object;
     values: any;
-    _isMounted: boolean;
     unsubscribe: () => void;
 
     onFieldChange = (field, value) => {
@@ -140,11 +140,8 @@ const fields = (options: Options) => WrappedComponent => {
     }
 
     componentDidMount() {
-      this._isMounted = true;
       const { store } = this.context;
       this.unsubscribe = store.subscribe(() => {
-        // This is for very rare case when something is still dispatching.
-        if (!this._isMounted) return;
         const newModel = this.getModelFromState();
         if (newModel === this.state.model) return;
         this.setModel(newModel);
@@ -152,7 +149,6 @@ const fields = (options: Options) => WrappedComponent => {
     }
 
     componentWillUnmount() {
-      this._isMounted = false;
       this.unsubscribe();
     }
 
