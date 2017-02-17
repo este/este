@@ -10,10 +10,6 @@ import { Link, Title } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
-// Pages
-import Profile from './ProfilePage';
-import Settings from './SettingsPage';
-
 const HeaderLink = ({ message, ...props }) => (
   <FormattedMessage {...message}>
     {message => (
