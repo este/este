@@ -54,16 +54,13 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
 
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
   const onAuth$ = Observable.create(observer => {
-    console.log('register onAuthStateChanged');
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
-      // Enforce rerender on auth change.
-      // observer.next(FarceActions.replace(getState().found.match.location));
+      // Enforce rerender on auth change. Note we are using 401 instead of
+      // redirection, so we don't have to handle previous locations.
+      observer.next(FarceActions.replace(getState().found.match.location));
     });
-    return () => {
-      console.log('unsubscribe');
-      unsubscribe();
-    };
+    return unsubscribe;
   });
 
   const signInAfterRedirect$ = Observable.create(observer => {
