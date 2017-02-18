@@ -2,7 +2,9 @@
 import type { Action, Deps } from '../types';
 import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';
+import isReactNative from '../../common/app/isReactNative';
 import messages from '../lib/redux-firebase/messages';
+import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
 
@@ -33,12 +35,9 @@ export const signInFail = (error: Error): Action => ({
   payload: { error },
 });
 
-export const signOut = () => ({ firebaseAuth }: Deps): Action => {
-  firebaseAuth().signOut();
-  return {
-    type: 'SIGN_OUT',
-  };
-};
+export const signOut = (): Action => ({
+  type: 'SIGN_OUT',
+});
 
 export const signUp = (providerName: string, options?: Object): Action => ({
   type: 'SIGN_UP',
@@ -163,7 +162,7 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
         `${providerName} provider not supported.`,
       );
       const provider = new firebaseAuth.FacebookAuthProvider();
-      // Remember, a user can revoke anything.
+      // Remember, users can revoke anything.
       provider.addScope(facebookPermissions.join(','));
       if (isMobileFacebookApp()) {
         return signInWithRedirect(provider);
@@ -196,4 +195,13 @@ const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
       });
   });
 
-export const epics = [resetPasswordEpic, signInEpic, signUpEpic];
+const signOutEpic = (action$: any, { firebaseAuth }: Deps) =>
+  action$
+    .filter((action: Action) => action.type === 'SIGN_OUT')
+    .mergeMap(() => {
+      firebaseAuth().signOut();
+      if (isReactNative) throw new Error('todo');
+      return Observable.of(FarceActions.push('/'));
+    });
+
+export const epics = [resetPasswordEpic, signInEpic, signUpEpic, signOutEpic];

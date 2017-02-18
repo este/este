@@ -1,5 +1,6 @@
 // @flow
 import type { Action, Deps } from '../types';
+import isReactNative from '../../common/app/isReactNative';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
 import { REHYDRATE } from 'redux-persist/constants';
@@ -52,13 +53,20 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
     };
   });
 
+  const enforceRerenderAfterAuthMaybeWithRedirect = firebaseUser => {
+    const { pathname } = getState().found.match.location;
+    const nextPathname = firebaseUser && pathname === '/signin'
+      ? '/'
+      : pathname;
+    return FarceActions.replace(nextPathname);
+  };
+
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
   const onAuth$ = Observable.create(observer => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
-      // Enforce rerender on auth change. Note we are using 401 instead of
-      // redirection, so we don't have to handle previous locations.
-      observer.next(FarceActions.replace(getState().found.match.location));
+      if (isReactNative) throw new Error('todo');
+      observer.next(enforceRerenderAfterAuthMaybeWithRedirect(firebaseUser));
     });
     return unsubscribe;
   });
