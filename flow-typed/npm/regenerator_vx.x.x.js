@@ -1,4 +1,4 @@
-// flow-typed signature: 6aaa9abada9b4df1fe045d34dac7a02f
+// flow-typed signature: 73937d518a4d9c95b6724ecfeb663d85
 // flow-typed version: <<STUB>>/regenerator_v^0.9.5/flow_v0.37.0
 
 /**
@@ -22,26 +22,6 @@ declare module 'regenerator' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'regenerator/docs/bundle' {
-  declare module.exports: any;
-}
-
-declare module 'regenerator/docs/codemirror/lib/codemirror' {
-  declare module.exports: any;
-}
-
-declare module 'regenerator/docs/codemirror/mode/javascript' {
-  declare module.exports: any;
-}
-
-declare module 'regenerator/docs/promise-6.0.0' {
-  declare module.exports: any;
-}
-
-declare module 'regenerator/docs/sandbox' {
-  declare module.exports: any;
-}
-
 declare module 'regenerator/lib/util' {
   declare module.exports: any;
 }
@@ -63,21 +43,6 @@ declare module 'regenerator/runtime' {
 }
 
 // Filename aliases
-declare module 'regenerator/docs/bundle.js' {
-  declare module.exports: $Exports<'regenerator/docs/bundle'>;
-}
-declare module 'regenerator/docs/codemirror/lib/codemirror.js' {
-  declare module.exports: $Exports<'regenerator/docs/codemirror/lib/codemirror'>;
-}
-declare module 'regenerator/docs/codemirror/mode/javascript.js' {
-  declare module.exports: $Exports<'regenerator/docs/codemirror/mode/javascript'>;
-}
-declare module 'regenerator/docs/promise-6.0.0.js' {
-  declare module.exports: $Exports<'regenerator/docs/promise-6.0.0'>;
-}
-declare module 'regenerator/docs/sandbox.js' {
-  declare module.exports: $Exports<'regenerator/docs/sandbox'>;
-}
 declare module 'regenerator/lib/util.js' {
   declare module.exports: $Exports<'regenerator/lib/util'>;
 }
