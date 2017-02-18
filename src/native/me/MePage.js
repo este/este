@@ -9,16 +9,16 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 type MePageProps = {
-  viewer: User,
+  viewer: ?User,
 };
 
-const MePage = ({
-  viewer,
-}: MePageProps) => (
-  !viewer ?
-    <Redirect to="/" />
-  :
-    <Box alignItems="center">
+const MePage = (
+  {
+    viewer,
+  }: MePageProps,
+) => !viewer
+  ? <Redirect to="/" />
+  : <Box alignItems="center">
       <Text marginTop={4} size={1}>
         {viewer.displayName}
       </Text>
@@ -30,11 +30,8 @@ const MePage = ({
         marginVertical={2}
       />
       <SignOut />
-    </Box>
-);
+    </Box>;
 
-export default connect(
-  (state: State) => ({
-    viewer: state.users.viewer,
-  }),
-)(MePage);
+export default connect((state: State) => ({
+  viewer: state.users.viewer,
+}))(MePage);

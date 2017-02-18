@@ -8,17 +8,17 @@ import { Link } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 
-const HeaderLink = ({ activeOnlyWhenExact, to, message }) => (
+const HeaderLink = ({ to, message, ...props }) => (
   <FormattedMessage {...message}>
     {message => (
       <Link
-        activeOnlyWhenExact={activeOnlyWhenExact}
         backgroundColor="primary"
         bold
         color="white"
         paddingHorizontal={0.5}
         paddingVertical={0.5}
         to={to}
+        {...props}
       >
         {message}
       </Link>
@@ -26,7 +26,9 @@ const HeaderLink = ({ activeOnlyWhenExact, to, message }) => (
   </FormattedMessage>
 );
 
-type HeaderProps = { viewer: ?User };
+type HeaderProps = {
+  viewer: ?User,
+};
 
 const Header = ({ viewer }: HeaderProps) => (
   <Box
@@ -36,7 +38,7 @@ const Header = ({ viewer }: HeaderProps) => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderLink activeOnlyWhenExact to="/" message={linksMessages.home} />
+    <HeaderLink exact to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
     <HeaderLink to="/fields" message={linksMessages.fields} />

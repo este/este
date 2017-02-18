@@ -1,34 +1,20 @@
 // @flow
-import App from '../../browser/app/App';
+import BaseRoot from '../../browser/app/BaseRoot';
 import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
-import ServerFetchProvider from './ServerFetchProvider';
+import Root from '../../browser/app/Root';
 import config from '../config';
 import configureFela from '../../browser/configureFela';
+import configureFound from '../../browser/configureFound';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
+import renderError from '../../browser/app/renderError';
 import serialize from 'serialize-javascript';
-import { BrowserRoot } from '../../browser/app/Root';
-import { createServerRenderContext, ServerRouter } from 'react-router';
+import { RedirectException, createRender } from 'found';
+import { RouterProvider } from 'found/lib/server';
+import { ServerProtocol } from 'farce';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-
-const settleAllWithTimeout = promises => Promise
-  .all(promises.map(p => p.reflect()))
-  // $FlowFixMe
-  .each((inspection) => {
-    if (inspection.isFulfilled()) return;
-    console.log('Server fetch failed:', inspection.reason());
-  })
-  .timeout(15000) // Do not block rendering forever.
-  .catch((error) => {
-    // $FlowFixMe
-    if (error instanceof Promise.TimeoutError) {
-      console.log('Server fetch timeouted:', error);
-      return;
-    }
-    throw error;
-  });
 
 // createInitialState loads files, so it must be called once.
 const initialState = createInitialState();
@@ -36,11 +22,12 @@ const initialState = createInitialState();
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
-const getLocale = req => process.env.IS_SERVERLESS
-  ? config.defaultLocale
-  : req.acceptsLanguages(config.locales) || config.defaultLocale;
+const getLocale = req =>
+  process.env.IS_SERVERLESS
+    ? config.defaultLocale
+    : req.acceptsLanguages(config.locales) || config.defaultLocale;
 
-const createStore = req => configureStore({
+const createStore = (found, req): Object => configureStore({
   initialState: {
     ...initialState,
     device: {
@@ -53,18 +40,18 @@ const createStore = req => configureStore({
       initialNow: Date.now(),
     },
   },
+  platformReducers: { found: found.reducer },
+  platformStoreEnhancers: found.storeEnhancers,
 });
 
-const renderBody = (store, context, location, fetchPromises) => {
+const renderBody = (renderArgs, store) => {
   const felaRenderer = configureFela();
   const html = renderToString(
-    <BrowserRoot felaRenderer={felaRenderer} store={store}>
-      <ServerFetchProvider promises={fetchPromises}>
-        <ServerRouter context={context} location={location}>
-          <App />
-        </ServerRouter>
-      </ServerFetchProvider>
-    </BrowserRoot>,
+    <BaseRoot felaRenderer={felaRenderer} store={store}>
+      <RouterProvider router={renderArgs.router}>
+        {createRender({ renderError })(renderArgs)}
+      </RouterProvider>
+    </BaseRoot>,
   );
   const helmet = Helmet.rewind();
   const css = felaRenderer.renderToString();
@@ -73,7 +60,6 @@ const renderBody = (store, context, location, fetchPromises) => {
 
 const renderScripts = (state, appJsFilename) =>
   // github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
-  // TODO: Switch to CSP, https://github.com/este/este/pull/731
   `
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};
@@ -103,37 +89,20 @@ const renderHtml = (state, body) => {
   return `<!DOCTYPE html>${html}`;
 };
 
-// react-router.now.sh/ServerRouter
 const render = async (req: Object, res: Object, next: Function) => {
+  const found = configureFound(Root.routeConfig, new ServerProtocol(req.url));
+  const store = createStore(found, req);
   try {
-    const context = createServerRenderContext();
-    const store = createStore(req);
-    const fetchPromises = [];
-
-    let body = renderBody(store, context, req.url, fetchPromises);
-    const result = context.getResult();
-
-    if (result.redirect) {
-      res.redirect(301, result.redirect.pathname + result.redirect.search);
-      return;
-    }
-
-    if (result.missed) {
-      body = renderBody(store, context, req.url);
+    await found.getRenderArgs(store, renderArgs => {
+      const body = renderBody(renderArgs, store);
       const html = renderHtml(store.getState(), body);
-      res.status(404).send(html);
+      res.status(renderArgs.error ? renderArgs.error.status : 200).send(html);
+    });
+  } catch (error) {
+    if (error instanceof RedirectException) {
+      res.redirect(302, store.farce.createHref(error.location));
       return;
     }
-
-    if (!process.env.IS_SERVERLESS && fetchPromises.length > 0) {
-      await settleAllWithTimeout(fetchPromises);
-      body = renderBody(store, context, req.url);
-    }
-
-    const html = renderHtml(store.getState(), body);
-    res.status(200).send(html);
-  } catch (error) {
-    console.log(error);
     next(error);
   }
 };

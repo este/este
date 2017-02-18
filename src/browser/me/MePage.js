@@ -7,12 +7,8 @@ import linksMessages from '../../common/app/linksMessages';
 import { Box, Image, Text } from '../../common/components';
 import { FormattedMessage } from 'react-intl';
 import { Link, Title } from '../components';
-import { Match, Redirect } from 'react-router';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
-
-// Pages
-import Profile from './ProfilePage';
-import Settings from './SettingsPage';
 
 const HeaderLink = ({ message, ...props }) => (
   <FormattedMessage {...message}>
@@ -24,44 +20,42 @@ const HeaderLink = ({ message, ...props }) => (
   </FormattedMessage>
 );
 
-const Header = ({ pathname }) => (
+const Header = () => (
   <Box flexDirection="row" marginBottom={1} marginHorizontal={-0.5}>
-    <HeaderLink activeOnlyWhenExact to={pathname} message={linksMessages.me} />
-    <HeaderLink to={`${pathname}/profile`} message={linksMessages.profile} />
-    <HeaderLink to={`${pathname}/settings`} message={linksMessages.settings} />
+    <HeaderLink exact to="/me" message={linksMessages.me} />
+    <HeaderLink to="/me/profile" message={linksMessages.profile} />
+    <HeaderLink to="/me/settings" message={linksMessages.settings} />
   </Box>
 );
 
-type MePageProps = { pathname: string, viewer: User };
+type MePageProps = {
+  children: any,
+  viewer: ?User,
+};
 
-const MePage = ({ pathname, viewer }: MePageProps) => !viewer
-  ? <Redirect to="/" />
+const MePage = ({ children, viewer }: MePageProps) => !viewer
+  ? null
   : <Box>
       <Title message={linksMessages.me} />
-      <Header pathname={pathname} />
-      <Match
-        exactly
-        pattern={pathname}
-        render={() => (
-          <Box>
-            <Text>{viewer.displayName}</Text>
-            <Box marginVertical={1}>
-              <Image
-                src={getUserPhotoUrl(viewer)}
-                size={{ height: 100, width: 100 }}
-                title={viewer.displayName}
-              />
-            </Box>
-            <Box flexDirection="row">
-              <SignOut />
-            </Box>
+      <Header />
+      {children ||
+        <Box>
+          <Text>{viewer.displayName}</Text>
+          <Box marginVertical={1}>
+            <Image
+              src={getUserPhotoUrl(viewer)}
+              size={{ height: 100, width: 100 }}
+              title={viewer.displayName}
+            />
           </Box>
-        )}
-      />
-      <Match pattern={`${pathname}/profile`} component={Profile} />
-      <Match pattern={`${pathname}/settings`} component={Settings} />
+          <Box flexDirection="row">
+            <SignOut />
+          </Box>
+        </Box>}
     </Box>;
 
-export default connect((state: State) => ({ viewer: state.users.viewer }))(
-  MePage,
-);
+export default compose(
+  connect((state: State) => ({
+    viewer: state.users.viewer,
+  })),
+)(MePage);

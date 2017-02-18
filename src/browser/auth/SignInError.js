@@ -16,15 +16,13 @@ const SignInError = ({ error }) => {
 
   return (
     <Message backgroundColor="danger">
-      {
-        typeof message !== 'string'
-          ? <FormattedMessage {...message} values={error.params} />
-          : error.toString()
-      }
+      {typeof message !== 'string'
+        ? <FormattedMessage {...message} values={error.params} />
+        : error.toString()}
     </Message>
   );
 };
 
-export default connect((state: State) => ({ error: state.auth.error }))(
-  SignInError,
-);
+export default connect((state: State) => ({
+  error: state.auth.error,
+}))(SignInError);

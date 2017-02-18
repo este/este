@@ -1,10 +1,8 @@
 // @flow
-// import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
-import placeholderPrefixer from './felaPluginPlaceholderPrefixer';
+import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
 import validator from 'fela-plugin-validator';
 import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
-
 
 const staticStyles = `
   ${/*

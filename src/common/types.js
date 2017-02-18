@@ -89,6 +89,7 @@ export type State = {
   config: ConfigState,
   device: DeviceState,
   fields: any,
+  found: Object, // found router
   intl: IntlState,
   todos: TodosState,
   users: UsersState,
@@ -97,14 +98,12 @@ export type State = {
 // Actions
 
 export type Action =
-    { type: 'APP_ERROR', payload: { error: Error } }
+  | { type: 'APP_ERROR', payload: { error: Error } }
   | { type: 'ADD_HUNDRED_TODOS', payload: { todos: Array<Todo> } }
   | { type: 'ADD_TODO', payload: { todo: Todo } }
   | { type: 'APP_ONLINE', payload: { online: boolean } }
   | { type: 'APP_SHOW_MENU', payload: { menuShown: boolean } }
-  | { type: 'APP_START' }
   | { type: 'APP_STARTED' }
-  | { type: 'APP_STOP' }
   | { type: 'CLEAR_ALL_COMPLETED_TODOS' }
   | { type: 'CLEAR_ALL_TODOS' }
   | { type: 'DELETE_TODO', payload: { id: string } }
@@ -122,5 +121,4 @@ export type Action =
   | { type: 'SIGN_UP_DONE', payload: { user: ?User } }
   | { type: 'SIGN_UP_FAIL', payload: { error: Error } }
   | { type: 'TOGGLE_TODO_COMPLETED', payload: { todo: Todo } }
-  | { type: 'TOGGLE_BASELINE' }
-  ;
+  | { type: 'TOGGLE_BASELINE' };

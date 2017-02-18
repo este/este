@@ -1,8 +1,8 @@
 // @flow
 import type { TextProps } from '../../common/components/Text';
-import { Text } from '../../common/components';
 import React from 'react';
-import { Link as ReactRouterLink } from 'react-router';
+import { Link as FoundRouterLink } from 'found';
+import { Text } from '../../common/components';
 
 type LinkProps = TextProps & {
   to: string,
@@ -20,7 +20,7 @@ const Anchor = ({ to, ...props }) => (
 );
 
 const RouterLink = (props) => (
-  <ReactRouterLink
+  <FoundRouterLink
     activeStyle={{ textDecoration: 'underline' }}
     {...props}
   />

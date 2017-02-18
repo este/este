@@ -15,24 +15,31 @@ const resetStateOnSignOutReducer = (reducer, initialState) => (
   state: State,
   action: Action,
 ) => {
-  const userWasSignedOut =
-    action.type === 'ON_AUTH' &&
+  const userWasSignedOut = action.type === 'ON_AUTH' &&
     state.users.viewer &&
     !action.payload.firebaseUser;
   if (!userWasSignedOut) {
     return reducer(state, action);
   }
-  // Purge sensitive data, preserve only app and safe initial state.
-  return reducer({
+  // Note how we can purge sensitive data without hard reload easily.
+  let stateWithoutSensitiveData = {
     app: state.app,
     config: initialState.config,
     device: initialState.device,
     intl: initialState.intl,
-  }, action);
+  };
+  if (process.env.IS_BROWSER) {
+    stateWithoutSensitiveData = {
+      ...stateWithoutSensitiveData,
+      found: state.found,
+    };
+  }
+  return reducer(stateWithoutSensitiveData, action);
 };
 
-const configureReducer = (initialState: Object) => {
+const configureReducer = (platformReducers: Object, initialState: Object) => {
   let reducer = combineReducers({
+    ...platformReducers,
     app,
     auth,
     config,
