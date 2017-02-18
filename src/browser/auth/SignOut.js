@@ -10,7 +10,7 @@ type SignOutProps = {
   signOut: typeof signOut,
 };
 
-const SignOut = ({ signOut }: SignOutProps, { router }: any) => (
+const SignOut = ({ signOut }: SignOutProps) => (
   <FormattedMessage {...buttonsMessages.signOut}>
     {message => (
       <Button primary onPress={signOut}>

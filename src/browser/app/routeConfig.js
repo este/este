@@ -1,8 +1,8 @@
 // @flow
+import type { State } from '../../common/types';
 import HttpError from 'found/lib/HttpError';
 import React from 'react';
 import { makeRouteConfig, Route } from 'found/lib/jsx';
-import { RedirectException } from 'found';
 
 // Pages
 import App from './App';
@@ -17,44 +17,27 @@ import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 import UsersPage from '../users/UsersPage';
 
-// const AuthorizedRoute = () => {};
-//
-// AuthorizedRoute.createRoute = props => ({
-//   render: checkAuthorized,
-//   ...props,
-// });
-//
-// const requireViewer = {
-//   getData({ context: { store } }) {
-//     if (!store.getState().users.viewer) {
-//       throw new HttpError(401);
-//     }
-//   },
-// };
+const AuthorizedRoute = () => {};
+AuthorizedRoute.createRoute = props => ({
+  ...props,
+  render: ({ Component, match, props }) => {
+    const state: State = match.context.store.getState();
+    if (!state.users.viewer) {
+      throw new HttpError(401);
+    }
+    return <Component {...props} />;
+  },
+});
 
 const routeConfig = makeRouteConfig(
   <Route path="/" Component={App}>
     <Route Component={HomePage} />
     <Route path="fields" Component={FieldsPage} />
     <Route path="intl" Component={IntlPage} />
-    {/* <AuthorizedRoute path="me" Component={MePage} /> */}
-    <Route
-      path="me"
-      Component={MePage}
-      render={({ Component, match, props }) => {
-        if (!match.context.store.getState().users.viewer) {
-          throw new HttpError(401);
-          // throw new RedirectException({
-          //   pathname: '/signin'
-          //   // state: { previousLocation: location },,,,,
-          // });
-        }
-        return <Component {...props} />;
-      }}
-    >
+    <AuthorizedRoute path="me" Component={MePage}>
       <Route path="profile" Component={ProfilePage} />
       <Route path="settings" Component={SettingsPage} />
-    </Route>
+    </AuthorizedRoute>
     <Route path="offline" Component={OfflinePage} />
     <Route path="signin" Component={SignInPage} />
     <Route path="todos" Component={TodosPage} />

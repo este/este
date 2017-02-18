@@ -57,22 +57,22 @@ export const signUpFail = (error: Error): Action => ({
   payload: { error },
 });
 
-const validateEmailAndPassword = (validate, fields) => validate(fields)
-  .prop('email')
+const validateEmailAndPassword = (validate, fields) =>
+  validate(fields)
+    .prop('email')
     .required()
     .email()
-  .prop('password')
+    .prop('password')
     .required()
-    .simplePassword()
-  .promise;
+    .simplePassword().promise;
 
-const mapFirebaseErrorToEsteValidationError = (code) => {
-  const prop = {
+const mapFirebaseErrorToEsteValidationError = code => {
+  const prop = ({
     'auth/email-already-in-use': 'email',
     'auth/invalid-email': 'email',
     'auth/user-not-found': 'email',
     'auth/wrong-password': 'password',
-  }[code];
+  })[code];
   return new ValidationError(code, { prop });
 };
 
@@ -84,16 +84,9 @@ const resetPasswordEpic = (action$: any, { firebaseAuth }: Deps) =>
       return Observable.of();
     });
 
-const facebookPermissions = [
-  'email',
-  'public_profile',
-  'user_friends',
-];
+const facebookPermissions = ['email', 'public_profile', 'user_friends'];
 
-const signInEpic = (
-  action$: any,
-  { FBSDK, firebaseAuth, validate }: Deps,
-) => {
+const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
   // groups.google.com/forum/#!msg/firebase-talk/643d_lwUAMI/bfQyn8D-BQAJ
   // stackoverflow.com/a/33997042/233902
   // Workaround still needed with Firebase 3.6.8
@@ -102,13 +95,15 @@ const signInEpic = (
     return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
   };
 
-  const signInWithEmailAndPassword = (options) => {
+  const signInWithEmailAndPassword = options => {
     const { email, password } = options;
-    const promise = validateEmailAndPassword(validate, { email, password })
-      .then(() => firebaseAuth().signInWithEmailAndPassword(email, password));
+    const promise = validateEmailAndPassword(validate, {
+      email,
+      password,
+    }).then(() => firebaseAuth().signInWithEmailAndPassword(email, password));
     return Observable.from(promise)
       .map(firebaseUser => signInDone(firebaseUser))
-      .catch((error) => {
+      .catch(error => {
         if (messages[error.code]) {
           error = mapFirebaseErrorToEsteValidationError(error.code);
         }
@@ -124,31 +119,34 @@ const signInEpic = (
   const signInWithPopup = provider =>
     Observable.from(firebaseAuth().signInWithPopup(provider))
       .map(userCredential => signInDone(userCredential.user))
-      .catch((error) => {
+      .catch(error => {
         if (error.code === 'auth/popup-blocked') {
           return signInWithRedirect(provider);
         }
         return Observable.of(signInFail(error));
       });
 
-  const nativeSignIn = () =>
-    Observable.from(FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions))
-      .mergeMap((result) => {
-        if (result.isCancelled) {
-          // Mimic Firebase error to have the same universal API.
-          const error: any = new Error('auth/popup-closed-by-user');
-          error.code = 'auth/popup-closed-by-user';
-          throw error;
-        }
-        return Observable.from(FBSDK.AccessToken.getCurrentAccessToken());
-      })
-      .mergeMap(({ accessToken }) => {
-        const facebookCredential = firebaseAuth.FacebookAuthProvider
-          .credential(accessToken.toString());
-        return Observable.from(firebaseAuth().signInWithCredential(facebookCredential));
-      })
-      .map(firebaseUser => signInDone(firebaseUser))
-      .catch(error => Observable.of(signInFail(error)));
+  const nativeSignIn = () => Observable
+    .from(FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions))
+    .mergeMap(result => {
+      if (result.isCancelled) {
+        // Mimic Firebase error to have the same universal API.
+        const error: any = new Error('auth/popup-closed-by-user');
+        error.code = 'auth/popup-closed-by-user';
+        throw error;
+      }
+      return Observable.from(FBSDK.AccessToken.getCurrentAccessToken());
+    })
+    .mergeMap(({ accessToken }) => {
+      const facebookCredential = firebaseAuth.FacebookAuthProvider.credential(
+        accessToken.toString(),
+      );
+      return Observable.from(
+        firebaseAuth().signInWithCredential(facebookCredential),
+      );
+    })
+    .map(firebaseUser => signInDone(firebaseUser))
+    .catch(error => Observable.of(signInFail(error)));
 
   return action$
     .filter((action: Action) => action.type === 'SIGN_IN')
@@ -160,7 +158,10 @@ const signInEpic = (
         return signInWithEmailAndPassword(options);
       }
       // TODO: Add more providers.
-      invariant(providerName === 'facebook', `${providerName} provider not supported.`);
+      invariant(
+        providerName === 'facebook',
+        `${providerName} provider not supported.`,
+      );
       const provider = new firebaseAuth.FacebookAuthProvider();
       // Remember, a user can revoke anything.
       provider.addScope(facebookPermissions.join(','));
@@ -172,25 +173,27 @@ const signInEpic = (
 };
 
 const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === 'SIGN_UP')
-    .mergeMap(({ payload: { providerName, options } }) => {
-      invariant(providerName === 'password', `${providerName} provider not supported.`);
-      const { email, password } = options;
-      const promise = validateEmailAndPassword(validate, { email, password })
-        .then(() => firebaseAuth().createUserWithEmailAndPassword(email, password));
-      return Observable.from(promise)
-        .map(firebaseUser => signUpDone(firebaseUser))
-        .catch((error) => {
-          if (messages[error.code]) {
-            error = mapFirebaseErrorToEsteValidationError(error.code);
-          }
-          return Observable.of(signUpFail(error));
-        });
-    });
+  action$.filter((action: Action) => action.type === 'SIGN_UP').mergeMap((
+    { payload: { providerName, options } },
+  ) => {
+    invariant(
+      providerName === 'password',
+      `${providerName} provider not supported.`,
+    );
+    const { email, password } = options;
+    const promise = validateEmailAndPassword(validate, {
+      email,
+      password,
+    }).then(() =>
+      firebaseAuth().createUserWithEmailAndPassword(email, password));
+    return Observable.from(promise)
+      .map(firebaseUser => signUpDone(firebaseUser))
+      .catch(error => {
+        if (messages[error.code]) {
+          error = mapFirebaseErrorToEsteValidationError(error.code);
+        }
+        return Observable.of(signUpFail(error));
+      });
+  });
 
-export const epics = [
-  resetPasswordEpic,
-  signInEpic,
-  signUpEpic,
-];
+export const epics = [resetPasswordEpic, signInEpic, signUpEpic];

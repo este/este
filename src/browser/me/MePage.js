@@ -30,7 +30,7 @@ const Header = () => (
 
 type MePageProps = {
   children: any,
-  viewer: User,
+  viewer: ?User,
 };
 
 const MePage = ({ children, viewer }: MePageProps) => !viewer
