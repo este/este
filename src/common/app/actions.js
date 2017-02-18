@@ -65,8 +65,9 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
   const onAuth$ = Observable.create(observer => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
-      if (isReactNative) throw new Error('todo');
-      observer.next(enforceRerenderAfterAuthMaybeWithRedirect(firebaseUser));
+      if (!isReactNative) {
+        observer.next(enforceRerenderAfterAuthMaybeWithRedirect(firebaseUser));
+      }
     });
     return unsubscribe;
   });

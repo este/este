@@ -21,17 +21,20 @@ const resetStateOnSignOutReducer = (reducer, initialState) => (
   if (!userWasSignedOut) {
     return reducer(state, action);
   }
-  // Purge sensitive data, preserve only app and safe initial state.
-  return reducer(
-    {
-      app: state.app,
-      config: initialState.config,
-      device: initialState.device,
+  // Note how we can purge sensitive data without hard reload easily.
+  let stateWithoutSensitiveData = {
+    app: state.app,
+    config: initialState.config,
+    device: initialState.device,
+    intl: initialState.intl,
+  };
+  if (process.env.IS_BROWSER) {
+    stateWithoutSensitiveData = {
+      ...stateWithoutSensitiveData,
       found: state.found,
-      intl: initialState.intl,
-    },
-    action,
-  );
+    };
+  }
+  return reducer(stateWithoutSensitiveData, action);
 };
 
 const configureReducer = (platformReducers: Object, initialState: Object) => {

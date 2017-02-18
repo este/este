@@ -200,8 +200,9 @@ const signOutEpic = (action$: any, { firebaseAuth }: Deps) =>
     .filter((action: Action) => action.type === 'SIGN_OUT')
     .mergeMap(() => {
       firebaseAuth().signOut();
-      if (isReactNative) throw new Error('todo');
-      return Observable.of(FarceActions.push('/'));
+      return isReactNative
+        ? Observable.of()
+        : Observable.of(FarceActions.push('/'));
     });
 
 export const epics = [resetPasswordEpic, signInEpic, signUpEpic, signOutEpic];
