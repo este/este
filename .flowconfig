@@ -18,8 +18,6 @@
 ; I don't know why, but this file fails with "Server Property not found in
 ; module `http`" in Este. It's ok in clean React Native project.
 .*/node_modules/react-native/local-cli/server/util/inspectorProxy.js
-; https://github.com/react-community/react-navigation/issues/81
-.*/node_modules/react-navigation/.*
 .*/node_modules/react-static-container/.*
 
 [include]
