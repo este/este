@@ -33,8 +33,6 @@ node_modules/iflow-react-intl/index.js.flow
 
 [options]
 module.system=haste
-; https://github.com/react-community/react-navigation/issues/81
-module.name_mapper='^react-navigation$' -> 'emptyObject'
 
 experimental.strict_type_args=true
 
