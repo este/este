@@ -5,7 +5,7 @@ import React from 'react';
 import SignInPage from '../auth/SignInPage';
 
 type ErrorProps = {
-  error: { status: number },
+  error: Object,
 };
 
 const renderError = ({ error }: ErrorProps) => {

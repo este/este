@@ -10,17 +10,12 @@ import { fields } from '../../common/lib/redux-fields';
 import { injectIntl } from 'react-intl';
 import { resetPassword, signIn, signUp } from '../../common/auth/actions';
 
-const Buttons = (props) => (
-  <Box
-    flexDirection="row"
-    justifyContent="space-between"
-    {...props}
-  />
+const Buttons = props => (
+  <Box flexDirection="row" justifyContent="space-between" {...props} />
 );
 
 type EmailProps = {
   disabled: boolean,
-  error: typeof Error,
   fields: Object,
   intl: $IntlShape,
   resetPassword: typeof resetPassword,
@@ -34,7 +29,6 @@ type EmailState = {
 };
 
 class Email extends React.Component {
-
   state: EmailState = {
     forgetPasswordIsShown: false,
     recoveryEmailSent: false,
@@ -64,7 +58,7 @@ class Email extends React.Component {
       forgetPasswordIsShown: false,
       recoveryEmailSent: true,
     });
-  }
+  };
 
   props: EmailProps;
 
@@ -100,58 +94,59 @@ class Email extends React.Component {
           returnKeyType="next"
           secureTextEntry
         />
-        {!forgetPasswordIsShown ?
-          <Box>
-            <Buttons>
+        {!forgetPasswordIsShown
+          ? <Box>
+              <Buttons>
+                <Button
+                  bold
+                  disabled={disabled}
+                  onPress={this.onSignInViaPasswordPress}
+                >
+                  {formatMessage(buttonsMessages.signIn)}
+                </Button>
+                <Button bold disabled={disabled} onPress={this.onSignUpPress}>
+                  {formatMessage(buttonsMessages.signUp)}
+                </Button>
+              </Buttons>
+              <Box alignItems="flex-start">
+                <Button
+                  bold
+                  disabled={disabled}
+                  onPress={this.onForgetPasswordPress}
+                >
+                  {formatMessage(emailMessages.passwordForgotten)}
+                </Button>
+                {recoveryEmailSent &&
+                  <Text bold color="success">
+                    {formatMessage(emailMessages.recoveryEmailSent)}
+                  </Text>}
+              </Box>
+            </Box>
+          : <Buttons>
               <Button
                 bold
                 disabled={disabled}
-                onPress={this.onSignInViaPasswordPress}
-              >{formatMessage(buttonsMessages.signIn)}</Button>
-              <Button
-                bold
-                disabled={disabled}
-                onPress={this.onSignUpPress}
-              >{formatMessage(buttonsMessages.signUp)}</Button>
-            </Buttons>
-            <Box alignItems="flex-start">
+                onPress={this.onResetPasswordPress}
+              >
+                {formatMessage(emailMessages.resetPassword)}
+              </Button>
               <Button
                 bold
                 disabled={disabled}
                 onPress={this.onForgetPasswordPress}
-              >{formatMessage(emailMessages.passwordForgotten)}</Button>
-              {recoveryEmailSent &&
-                <Text bold color="success">
-                  {formatMessage(emailMessages.recoveryEmailSent)}
-                </Text>
-              }
-            </Box>
-          </Box>
-        :
-          <Buttons>
-            <Button
-              bold
-              disabled={disabled}
-              onPress={this.onResetPasswordPress}
-            >{formatMessage(emailMessages.resetPassword)}</Button>
-            <Button
-              bold
-              disabled={disabled}
-              onPress={this.onForgetPasswordPress}
-            >{formatMessage(buttonsMessages.dismiss)}</Button>
-          </Buttons>
-        }
+              >
+                {formatMessage(buttonsMessages.dismiss)}
+              </Button>
+            </Buttons>}
       </Box>
     );
   }
-
 }
 
 export default compose(
   connect(
     (state: State) => ({
       disabled: state.auth.formDisabled,
-      error: state.auth.error,
     }),
     { resetPassword, signIn, signUp },
   ),

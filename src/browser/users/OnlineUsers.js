@@ -22,22 +22,16 @@ const OnlineUser = ({ user }: OnlineUserProps) => (
 );
 
 type OnlineUsersProps = {|
-  onUsersPresence: typeof onUsersPresence,
   users: Array<User>,
 |};
 
-const OnlineUsers = ({ users }: OnlineUsersProps) => (
-  users === undefined ?
-    <Loading />
-  : users === null ?
-    <Text>No one is online.</Text>
-  :
-    <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
-      {users.map(user =>
-        <OnlineUser key={user.id} user={user} />,
-      )}
-    </Box>
-);
+const OnlineUsers = ({ users }: OnlineUsersProps) => users === undefined
+  ? <Loading />
+  : users === null
+      ? <Text>No one is online.</Text>
+      : <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
+          {users.map(user => <OnlineUser key={user.id} user={user} />)}
+        </Box>;
 
 export default compose(
   connect(
@@ -46,10 +40,8 @@ export default compose(
     }),
     { onUsersPresence },
   ),
-  firebase((database, props: OnlineUsersProps) => {
+  firebase((database, props: { onUsersPresence: typeof onUsersPresence }) => {
     const usersPresenceRef = database.child('users-presence');
-    return [
-      [usersPresenceRef, 'on', 'value', props.onUsersPresence],
-    ];
+    return [[usersPresenceRef, 'on', 'value', props.onUsersPresence]];
   }),
 )(OnlineUsers);
