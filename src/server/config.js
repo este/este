@@ -21,10 +21,10 @@ nconf.defaults({
   defaultTheme: 'defaultTheme',
   firebase: {
     // To get the config, just click Add web app from the overview page.
-    apiKey: 'AIzaSyDZRAOrDErAaC-TCKbr4cMzaohsPR4sWgU',
-    authDomain: 'este.firebaseapp.com',
-    databaseURL: 'https://este.firebaseio.com',
-    storageBucket: 'project-808488257248094054.appspot.com',
+    apiKey: 'AIzaSyBE9lhz3KGS9LA8R1FOJP1SSTElyhhOQco',
+    authDomain: 'este-b1107.firebaseapp.com',
+    databaseURL: 'https://este-b1107.firebaseio.com',
+    storageBucket: 'este-b1107.appspot.com',
   },
   googleAnalyticsId: 'UA-XXXXXXX-X',
   isProduction: process.env.NODE_ENV === 'production',

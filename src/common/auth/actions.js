@@ -1,16 +1,24 @@
 // @flow
 import type { Action, Deps } from '../types';
-import createUserFirebase from '../users/createUserFirebase';
 import invariant from 'invariant';
 import cookie from 'js-cookie';
+import createUserFirebase from '../users/createUserFirebase';
 import messages from '../lib/redux-firebase/messages';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
 
-export const onAuth = (firebaseUser: ?Object): Action => ({
-  type: 'ON_AUTH',
-  payload: { firebaseUser },
-});
+export const onAuth = (firebaseUser: ?Object) => ({ firebaseAuth }: Deps): Action => {
+  const user = firebaseAuth().currentUser;
+  if (user) {
+    user.getToken().then((jwtToken) => {
+      cookie.set('auth', jwtToken/* , { secure: true } */);
+    });
+  }
+  return {
+    type: 'ON_AUTH',
+    payload: { firebaseUser },
+  };
+};
 
 export const resetPassword = (email: string): Action => ({
   type: 'RESET_PASSWORD',
@@ -36,7 +44,9 @@ export const signInFail = (error: Error): Action => ({
 
 export const signOut = () => ({ firebaseAuth }: Deps): Action => {
   firebaseAuth().signOut();
+  cookie.remove('auth');
   cookie.remove('locale');
+  cookie.remove('theme');
   return {
     type: 'SIGN_OUT',
   };

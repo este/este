@@ -7,11 +7,24 @@ import ServerFetchProvider from './ServerFetchProvider';
 import config from '../config';
 import configureFela from '../../browser/configureFela';
 import configureStore from '../../common/configureStore';
+import createUserFirebase from '../../common/users/createUserFirebase';
 import createInitialState from './createInitialState';
 import serialize from 'serialize-javascript';
 import { BrowserRoot } from '../../browser/app/Root';
 import { createServerRenderContext, ServerRouter } from 'react-router';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+
+
+// TODO: move to ./createFirebaseConnection.js
+import firebaseAdmin from 'firebase-admin';
+import firebaseServiceAccount from '../../../../este-b1107-firebase-adminsdk-0e0p2-50e1061635.json';
+
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(firebaseServiceAccount),
+  databaseURL: config.firebase.databaseURL,
+});
+
+const firebaseAuth = firebaseAdmin.auth();
 
 const settleAllWithTimeout = promises => Promise
   .all(promises.map(p => p.reflect()))
@@ -36,11 +49,17 @@ const initialState = createInitialState();
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
+const getAuthToken = req =>
+  process.env.IS_SERVERLESS
+    ? false // No SSR, no auth token
+    : (req.cookies && req.cookies.auth)
+      || false;
+
 const getTheme = req =>
   process.env.IS_SERVERLESS
     ? config.defaultTheme // No SSR, use default theme
     : (req.cookies && req.cookies.theme) // User set language explicitly in app
-      || config.defaultTheme // No preference, use default theme
+      || config.defaultTheme; // No preference, use default theme
 
 const getLocale = req =>
   process.env.IS_SERVERLESS
@@ -49,23 +68,70 @@ const getLocale = req =>
       || req.acceptsLanguages(config.locales) // Browser specified language
       || config.defaultLocale; // No preference, use default locale
 
-const createStore = req => configureStore({
-  initialState: {
-    ...initialState,
-    app: {
-      currentTheme: getTheme(req),
+// TODO: make this async, make createStore async
+// Lookup firebase user
+// Change firebase config
+// Download security json
+// Server-side firebase calls (as user, not admin)
+const getUser = req => {
+  const jwtToken = getAuthToken(req);
+  console.log(jwtToken);
+  if (!jwtToken) {
+    return;
+  }
+
+  firebaseAuth.verifyIdToken(jwtToken)
+    .then((decodedToken) => {
+      const uid = decodedToken.uid;
+      // TODO
+      // const firebaseUser = firebaseAuth.fakeLookupFunction(uid);
+      // const user = createUserFirebase(firebaseUser);
+      console.log(decodedToken, uid, decodedToken.firebase.identities);
+      /*
+        token { iss: 'https://securetoken.google.com/este-b1107',
+          aud: 'este-b1107',
+          auth_time: 1487292563,
+          user_id: 'M7PDKFEkLOeEFBsgkRAnN1AoOvj1',
+          sub: 'M7PDKFEkLOeEFBsgkRAnN1AoOvj1',
+          iat: 1487292563,
+          exp: 1487296163,
+          email: 'cavitt.glover@gmail.com',
+          email_verified: false,
+          firebase:
+           { identities: { email: [Object] },
+             sign_in_provider: 'password' },
+          uid: 'M7PDKFEkLOeEFBsgkRAnN1AoOvj1' } M7PDKFEkLOeEFBsgkRAnN1AoOvj1
+      */
+    }).catch((error) => {
+      // Handle error
+    });
+}
+
+// TODO: make async
+const createStore = req => {
+  getUser(req);
+  return configureStore({
+    initialState: {
+      ...initialState,
+      app: {
+        currentTheme: getTheme(req),
+      },
+      device: {
+        ...initialState.device,
+        host: getHost(req),
+      },
+      intl: {
+        ...initialState.intl,
+        currentLocale: getLocale(req),
+        initialNow: Date.now(),
+      },
+      users: {
+        // viewer: getUser(req),
+        // TODO: online: ,
+      },
     },
-    device: {
-      ...initialState.device,
-      host: getHost(req),
-    },
-    intl: {
-      ...initialState.intl,
-      currentLocale: getLocale(req),
-      initialNow: Date.now(),
-    },
-  },
-});
+  });
+}
 
 const renderBody = (store, context, location, fetchPromises) => {
   const felaRenderer = configureFela();
