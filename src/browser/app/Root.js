@@ -7,6 +7,8 @@ import renderError from './renderError';
 import routeConfig from './routeConfig';
 import { ScrollManager } from 'found-scroll';
 import { createConnectedRouter, createRender, resolveElements } from 'found';
+import { ApolloProvider } from 'react-apollo';
+import client from '../../common/configureApollo';
 
 // StaticContainer ensures App is not rerendered on the pending state.
 // We can't use react-static-container because some type clashes with RN.
@@ -58,11 +60,13 @@ type RootProps = {
 
 const Root = ({ renderArgs, store }: RootProps) => (
   <BaseRoot store={store}>
+    <ApolloProvider client={client} store={store}>
     <ConnectedRouter
       initialRenderArgs={renderArgs}
       matchContext={{ store }}
       resolveElements={resolveElements}
     />
+    </ApolloProvider>
   </BaseRoot>
 );
 
