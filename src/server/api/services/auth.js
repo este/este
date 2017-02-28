@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findBy(id, (err, user) => {
+  User.findById(id, (err, user) => {
     done(err, user);
   });
 });
@@ -78,4 +78,4 @@ function login({ email, password, req }) {
   });
 }
 
-export default { signup, login }
+export default { signup, login };

@@ -1,14 +1,20 @@
 import {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLID,
 } from 'graphql';
+import { nodeInterface, globalIdField } from './node_interface';
+
+import User from '../../models/user';
 
 const UserType = new GraphQLObjectType({
-  name: 'UserType',
+  name: 'User',
   fields: {
-    id: { type: GraphQLID },
+    id: globalIdField(),
     email: { type: GraphQLString },
+  },
+  interfaces: () => [nodeInterface],
+  isTypeOf: (value) => {
+    return value instanceof User;
   },
 });
 

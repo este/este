@@ -8,12 +8,12 @@ import passportConfig from './services/auth';
 import connectMongo from 'connect-mongo';
 import schema from './schema';
 
+mongoose.Promise = global.Promise;
+
 const MongoStore = connectMongo(session);
 const MONGO_URI = 'mongodb://localhost:27017';
 
 const app = express();
-
-mongoose.Promise = global.Promise;
 
 mongoose.connect(MONGO_URI);
 
