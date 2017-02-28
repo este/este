@@ -17,6 +17,9 @@ const ViewerType = new GraphQLObjectType({
   fields: {
     id: globalIdField(),
     email: { type: GraphQLString },
+    username: { type: GraphQLString },
+    name: { type: GraphQLString },
+    dob: { type: GraphQLString },
     user: {
       description: 'Returns the currently logged in user',
       type: UserType,

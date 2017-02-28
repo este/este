@@ -13,8 +13,9 @@ const reducer = (
   action: Action,
 ): UsersState => {
   switch (action.type) {
-    case 'ON_AUTH': {
-      const user = createUserFirebase(action.payload.firebaseUser);
+    case 'SIGN_IN_DONE':
+    case 'SIGN_UP_DONE': {
+      const { user } = action.payload;
       return { ...state, viewer: user };
     }
 
@@ -31,6 +32,10 @@ const reducer = (
         map(compose(last, sortBylastSeenAt, values)),
       )(presence);
       return { ...state, online };
+    }
+
+    case 'SIGN_OUT': {
+      return { ...state, viewer: null };
     }
 
     default:

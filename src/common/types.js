@@ -27,10 +27,11 @@ export type Todo = {|
 |};
 
 export type User = {|
-  displayName: string,
-  email: ?string,
   id: string,
-  photoURL: ?string,
+  username: string,
+  dob: ?string,
+  email: ?string,
+  name: ?string,
 |};
 
 // Reducers

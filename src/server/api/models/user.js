@@ -64,8 +64,9 @@ User.remove().then(() => {
   }
 
   users.push(new User({
+    name: 'Adrian Perez',
     email: 'adrianperez.deb@gmail.com',
-    password: 'elite',
+    password: 'elite/2016',
     username: 'blackxored',
     dob: new Date('1989-10-02'),
   }));
