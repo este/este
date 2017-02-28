@@ -3,7 +3,6 @@ import type { Action, Deps } from '../types';
 import isReactNative from '../../common/app/isReactNative';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
-import { REHYDRATE } from 'redux-persist/constants';
 import { onAuth, signInDone, signInFail } from '../auth/actions';
 
 export const appError = (error: Object): Action => ({
@@ -21,11 +20,6 @@ export const appShowMenu = (menuShown: boolean): Action => ({
   payload: { menuShown },
 });
 
-// Called on REHYDRATE. Can be used to block rendering until data are loaded.
-export const appStarted = (): Action => ({
-  type: 'APP_STARTED',
-});
-
 export const toggleBaseline = (): Action => ({
   type: 'TOGGLE_BASELINE',
 });
@@ -35,10 +29,7 @@ export const setTheme = (theme: string): Action => ({
   payload: { theme },
 });
 
-const appStartEpic = (action$: any) =>
-  action$.ofType(REHYDRATE).map(appStarted);
-
-const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
+const appStartedEpic = (action$: any, deps: Deps) => {
   const { firebase, firebaseAuth, getState } = deps;
 
   const appOnline$ = Observable.create(observer => {
@@ -53,12 +44,10 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
     };
   });
 
-  const enforceRerenderAfterAuthMaybeWithRedirect = firebaseUser => {
+  const maybeUpdatePathnameOnAuthChange = firebaseUser => {
     const { pathname } = getState().found.match.location;
-    const nextPathname = firebaseUser && pathname === '/signin'
-      ? '/'
-      : pathname;
-    return FarceActions.replace(nextPathname);
+    const isSignIn = firebaseUser && pathname === '/signin';
+    return FarceActions.replace(isSignIn ? '/' : pathname);
   };
 
   // firebase.google.com/docs/reference/js/firebase.auth.Auth#onAuthStateChanged
@@ -66,7 +55,7 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       observer.next(onAuth(firebaseUser));
       if (!isReactNative) {
-        observer.next(enforceRerenderAfterAuthMaybeWithRedirect(firebaseUser));
+        observer.next(maybeUpdatePathnameOnAuthChange(firebaseUser));
       }
     });
     return unsubscribe;
@@ -100,4 +89,4 @@ const appStartedFirebaseEpic = (action$: any, deps: Deps) => {
     .mergeMap(() => Observable.merge(...streams));
 };
 
-export const epics = [appStartEpic, appStartedFirebaseEpic];
+export const epics = [appStartedEpic];

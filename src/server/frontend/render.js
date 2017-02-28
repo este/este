@@ -3,15 +3,14 @@ import BaseRoot from '../../browser/app/BaseRoot';
 import Helmet from 'react-helmet';
 import Html from './Html';
 import React from 'react';
-import Root from '../../browser/app/Root';
+import Root, { createRouterRender } from '../../browser/app/Root';
 import config from '../config';
 import configureFela from '../../browser/configureFela';
 import configureFound from '../../browser/configureFound';
 import configureStore from '../../common/configureStore';
 import createInitialState from './createInitialState';
-import renderError from '../../browser/app/renderError';
 import serialize from 'serialize-javascript';
-import { RedirectException, createRender } from 'found';
+import { RedirectException } from 'found';
 import { RouterProvider } from 'found/lib/server';
 import { ServerProtocol } from 'farce';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
@@ -49,7 +48,7 @@ const renderBody = (renderArgs, store) => {
   const html = renderToString(
     <BaseRoot felaRenderer={felaRenderer} store={store}>
       <RouterProvider router={renderArgs.router}>
-        {createRender({ renderError })(renderArgs)}
+        {createRouterRender(renderArgs)}
       </RouterProvider>
     </BaseRoot>,
   );

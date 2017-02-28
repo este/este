@@ -2,10 +2,10 @@
 import type { State } from '../../common/types';
 import React from 'react';
 import errorMessages from '../../common/auth/errorMessages';
+import firebaseMessages from '../../common/auth/firebaseMessages';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { firebaseMessages } from '../../common/lib/redux-firebase';
 import { Message } from '../../common/components';
+import { connect } from 'react-redux';
 
 const getMessage = error =>
   errorMessages[error.name] || firebaseMessages[error.name] || error.toString();

@@ -25,21 +25,21 @@ const App = (
   }: AppProps,
 ) => (
   <Baseline>
+    <Helmet
+      htmlAttributes={{ lang: currentLocale }}
+      meta={[
+        // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
+        { charset: 'utf-8' },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        },
+        { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
+        ...favicon.meta,
+      ]}
+      link={[...favicon.link]}
+    />
     <Container>
-      <Helmet
-        htmlAttributes={{ lang: currentLocale }}
-        meta={[
-          // v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template
-          { charset: 'utf-8' },
-          {
-            name: 'viewport',
-            content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-          },
-          { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
-          ...favicon.meta,
-        ]}
-        link={[...favicon.link]}
-      />
       <Header />
       <Box
         flex={1} // make footer sticky

@@ -28,6 +28,7 @@ const resetStateOnSignOutReducer = (reducer, initialState) => (
     device: initialState.device,
     intl: initialState.intl,
   };
+  // Preserve Found router reducer.
   if (process.env.IS_BROWSER) {
     stateWithoutSensitiveData = {
       ...stateWithoutSensitiveData,

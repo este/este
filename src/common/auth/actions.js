@@ -1,9 +1,9 @@
 // @flow
 import type { Action, Deps } from '../types';
 import createUserFirebase from '../users/createUserFirebase';
+import firebaseMessages from './firebaseMessages';
 import invariant from 'invariant';
 import isReactNative from '../../common/app/isReactNative';
-import messages from '../lib/redux-firebase/messages';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
@@ -103,7 +103,7 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
     return Observable.from(promise)
       .map(firebaseUser => signInDone(firebaseUser))
       .catch(error => {
-        if (messages[error.code]) {
+        if (firebaseMessages[error.code]) {
           error = mapFirebaseErrorToEsteValidationError(error.code);
         }
         return Observable.of(signInFail(error));
@@ -125,8 +125,9 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
         return Observable.of(signInFail(error));
       });
 
-  const nativeSignIn = () => Observable
-    .from(FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions))
+  const nativeSignIn = () => Observable.from(
+      FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions),
+    )
     .mergeMap(result => {
       if (result.isCancelled) {
         // Mimic Firebase error to have the same universal API.
@@ -188,7 +189,7 @@ const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
     return Observable.from(promise)
       .map(firebaseUser => signUpDone(firebaseUser))
       .catch(error => {
-        if (messages[error.code]) {
+        if (firebaseMessages[error.code]) {
           error = mapFirebaseErrorToEsteValidationError(error.code);
         }
         return Observable.of(signUpFail(error));

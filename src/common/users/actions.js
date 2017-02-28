@@ -17,19 +17,21 @@ export const saveUserDone = (): Action => ({
   type: 'SAVE_USER_DONE',
 });
 
-const saveUserEpic = (action$: any, { firebase }: Deps) => Observable.merge(
-  action$.filter((action: Action) => action.type === 'SIGN_IN_DONE'),
-  action$.filter((action: Action) => action.type === 'SIGN_UP_DONE'),
-).mergeMap(action => {
-  const { email, ...user } = action.payload.user;
-  const promise = firebase.update({
-    [`users/${user.id}`]: user,
-    [`users-emails/${user.id}`]: { email },
-  });
-  return Observable.from(promise)
-    .map(saveUserDone)
-    .catch(error => Observable.of(appError(error)));
-});
+const saveUserEpic = (action$: any, { firebase }: Deps) =>
+  Observable.merge(
+      action$.filter((action: Action) => action.type === 'SIGN_IN_DONE'),
+      action$.filter((action: Action) => action.type === 'SIGN_UP_DONE'),
+    )
+    .mergeMap(action => {
+      const { email, ...user } = action.payload.user;
+      const promise = firebase.update({
+        [`users/${user.id}`]: user,
+        [`users-emails/${user.id}`]: { email },
+      });
+      return Observable.from(promise)
+        .map(saveUserDone)
+        .catch(error => Observable.of(appError(error)));
+    });
 
 const usersPresenceEpic = (
   action$: any,

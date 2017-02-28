@@ -2,11 +2,8 @@
 import type { State, User } from '../../common/types';
 import React from 'react';
 import getUserPhotoUrl from '../../common/users/getUserPhotoUrl';
-import { Box, Image, Loading, Text } from '../../common/components';
-import { compose } from 'ramda';
+import { Box, Image, Text } from '../../common/components';
 import { connect } from 'react-redux';
-import { firebase } from '../../common/lib/redux-firebase';
-import { onUsersPresence } from '../../common/users/actions';
 
 type OnlineUserProps = {
   user: User,
@@ -21,27 +18,16 @@ const OnlineUser = ({ user }: OnlineUserProps) => (
   />
 );
 
-type OnlineUsersProps = {|
-  users: Array<User>,
-|};
+type OnlineUsersProps = {
+  users: ?Array<User>,
+};
 
-const OnlineUsers = ({ users }: OnlineUsersProps) => users === undefined
-  ? <Loading />
-  : users === null
-      ? <Text>No one is online.</Text>
-      : <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
-          {users.map(user => <OnlineUser key={user.id} user={user} />)}
-        </Box>;
+const OnlineUsers = ({ users }: OnlineUsersProps) => users == null
+  ? <Text>No one is online.</Text>
+  : <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
+      {users.map(user => <OnlineUser key={user.id} user={user} />)}
+    </Box>;
 
-export default compose(
-  connect(
-    (state: State) => ({
-      users: state.users.online,
-    }),
-    { onUsersPresence },
-  ),
-  firebase((database, props: { onUsersPresence: typeof onUsersPresence }) => {
-    const usersPresenceRef = database.child('users-presence');
-    return [[usersPresenceRef, 'on', 'value', props.onUsersPresence]];
-  }),
-)(OnlineUsers);
+export default connect((state: State) => ({
+  users: state.users.online,
+}))(OnlineUsers);

@@ -60,8 +60,6 @@ export type ConfigState = {
 
 export type DeviceState = {
   host: string,
-  isReactNative: boolean,
-  platform: string,
 };
 
 export type IntlState = {
@@ -121,4 +119,5 @@ export type Action =
   | { type: 'SIGN_UP_DONE', payload: { user: ?User } }
   | { type: 'SIGN_UP_FAIL', payload: { error: Error } }
   | { type: 'TOGGLE_TODO_COMPLETED', payload: { todo: Todo } }
-  | { type: 'TOGGLE_BASELINE' };
+  | { type: 'TOGGLE_BASELINE' }
+  | { type: 'QUERY_FIREBASE', payload: { ref: string } };

@@ -8,7 +8,7 @@ const staticStyles = `
   ${/*
     Selected rules from necolas.github.io/normalize.css/5.0.0/normalize.css
     I removed obsolete and normalizing stuff because we need only fixes.
-  */''}
+  */ ''}
   html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -63,7 +63,7 @@ const staticStyles = `
   }
   ${/*
     Selected rules from github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
-  */''}
+  */ ''}
   html {
     box-sizing: border-box;
   }

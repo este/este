@@ -4,9 +4,8 @@ import createUserFirebase from './createUserFirebase';
 import { compose, last, map, prop, sortBy, values } from 'ramda';
 
 const initialState = {
-  // Undefined is absence of evidence, null is evidence of absence.
-  online: undefined,
-  viewer: undefined,
+  online: null,
+  viewer: null,
 };
 
 const reducer = (
@@ -14,7 +13,6 @@ const reducer = (
   action: Action,
 ): UsersState => {
   switch (action.type) {
-
     case 'ON_AUTH': {
       const user = createUserFirebase(action.payload.firebaseUser);
       return { ...state, viewer: user };
@@ -37,7 +35,6 @@ const reducer = (
 
     default:
       return state;
-
   }
 };
 

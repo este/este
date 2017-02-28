@@ -1,4 +1,4 @@
-// flow-typed signature: 777f2f348a8be4620ca59277048dd114
+// flow-typed signature: 44165a341f0f601452240a5db24dc597
 // flow-typed version: <<STUB>>/firebase_v^3.1.0/flow_v0.37.0
 
 /**
@@ -59,6 +59,10 @@ declare module 'firebase/externs/firebase-client-auth-externs' {
 }
 
 declare module 'firebase/externs/firebase-database-externs' {
+  declare module.exports: any;
+}
+
+declare module 'firebase/externs/firebase-error-externs' {
   declare module.exports: any;
 }
 
@@ -164,6 +168,9 @@ declare module 'firebase/externs/firebase-client-auth-externs.js' {
 }
 declare module 'firebase/externs/firebase-database-externs.js' {
   declare module.exports: $Exports<'firebase/externs/firebase-database-externs'>;
+}
+declare module 'firebase/externs/firebase-error-externs.js' {
+  declare module.exports: $Exports<'firebase/externs/firebase-error-externs'>;
 }
 declare module 'firebase/externs/firebase-messaging-externs.js' {
   declare module.exports: $Exports<'firebase/externs/firebase-messaging-externs'>;

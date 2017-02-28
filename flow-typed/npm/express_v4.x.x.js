@@ -1,5 +1,5 @@
-// flow-typed signature: 3459d8f1a6ea584c1e0218bba4404f6d
-// flow-typed version: 84f02bfed7/express_v4.x.x/flow_>=v0.32.x
+// flow-typed signature: 5800b9dee6b8969ab2b5fa338d02a89f
+// flow-typed version: 473c121609/express_v4.x.x/flow_>=v0.32.x
 
 import type { Server } from 'http';
 
@@ -19,7 +19,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   body: mixed;
   cookies: {[cookie: string]: string};
   fresh: boolean;
-  hostname: boolean;
+  hostname: string;
   ip: string;
   ips: Array<string>;
   method: string;
