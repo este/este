@@ -39,6 +39,7 @@
 
 - [redux](http://reactjs.github.io/redux/)
 - [redux-observable](https://github.com/redux-observable/redux-observable)
+- [found](https://github.com/4Catalyzer/found)
 - [ramda](http://ramdajs.com/)
 - [react-intl](https://github.com/yahoo/react-intl)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
