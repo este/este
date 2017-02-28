@@ -1,12 +1,12 @@
-// @flow weak
-// Higher order component for focusing elements by ValidationError.
+// @flow
 import React from 'react';
 import { ValidationError } from '../../common/lib/validation';
 import { findDOMNode } from 'react-dom';
 
-const focus = errorProp =>
-  WrappedComponent => class Wrapper extends React.Component {
-    componentDidUpdate(prevProps) {
+// Higher order component for focusing elements by ValidationError.
+const focus = (errorProp: string) => (WrappedComponent: Function) =>
+  class Wrapper extends React.Component {
+    componentDidUpdate(prevProps: Object) {
       const error = this.props[errorProp];
       if (error === prevProps[errorProp]) return;
       if (!(error instanceof ValidationError)) return;

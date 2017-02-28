@@ -1,7 +1,7 @@
-// @flow weak
+// @flow
 import config from '../config';
 
-const errorHandler = (err, req, res) => {
+const errorHandler = (err: any, req: any, res: any) => {
   const errorDetails = err.stack || err;
 
   console.error('Yay', errorDetails);

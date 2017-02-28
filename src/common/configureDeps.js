@@ -1,7 +1,8 @@
-// @flow weak
-// By feature import doesn't work in Node.js.
+// @flow
+
+import type { Deps, State } from './types';
+// By feature import doesn't work in Node.js. Tested with 3.6.10.
 // firebase.google.com/docs/web/setup
-// Tested with 3.6.4, it still doesn't work.
 // import firebase from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/database';
@@ -12,7 +13,7 @@ import validate from './validate';
 // and how to dispose of it. Yes, firebase.initializeApp is weird API.
 let firebaseDeps = null;
 
-const createFirebaseDeps = (firebaseConfig) => {
+const createFirebaseDeps = firebaseConfig => {
   if (!firebaseDeps) {
     firebase.initializeApp(firebaseConfig);
     firebaseDeps = {
@@ -29,7 +30,7 @@ const createFirebaseDeps = (firebaseConfig) => {
   return firebaseDeps;
 };
 
-const configureDeps = (initialState, platformDeps) => ({
+const configureDeps = (initialState: State, platformDeps: Deps) => ({
   ...platformDeps,
   ...createFirebaseDeps(initialState.config.firebase),
   getUid: () => platformDeps.uuid.v4(),

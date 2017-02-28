@@ -1,4 +1,4 @@
-// @flow weak
+// @flow
 import 'rxjs';
 import { combineEpics } from 'redux-observable';
 import { epics as appEpics } from './app/actions';
@@ -8,7 +8,7 @@ import { epics as usersEpics } from './users/actions';
 const epics = [...appEpics, ...authEpics, ...usersEpics];
 
 const configureEpics = (deps: Object) =>
-  (action$, { getState }) =>
+  (action$: any, { getState }: any) =>
     combineEpics(...epics)(action$, { ...deps, getState });
 
 export default configureEpics;

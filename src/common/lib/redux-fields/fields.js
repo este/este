@@ -1,4 +1,4 @@
-// @flow weak
+// @flow
 import React from 'react';
 import invariant from 'invariant';
 import { path as ramdaPath } from 'ramda';
@@ -14,7 +14,7 @@ type Options = {
 };
 
 // Higher order component for huge fast dynamic deeply nested universal forms.
-const fields = (options: Options) => WrappedComponent => {
+const fields = (options: Options) => (WrappedComponent: Function) => {
   const {
     path = '',
     fields = [],
@@ -95,7 +95,7 @@ const fields = (options: Options) => WrappedComponent => {
     values: any;
     unsubscribe: () => void;
 
-    onFieldChange = (field, value) => {
+    onFieldChange = (field: any, value: any) => {
       const normalizedPath = Fields.getNormalizePath(this.props).concat(field);
       this.context.store.dispatch(setField(normalizedPath, value));
     };
@@ -125,7 +125,7 @@ const fields = (options: Options) => WrappedComponent => {
       return ramdaPath(normalizedPath, this.context.store.getState().fields);
     }
 
-    setModel(model) {
+    setModel(model: any) {
       this.values = Fields.lazyJsonValuesOf(model, this.props);
       options.fields.forEach(field => {
         this.fields[field].value = this.values[field];

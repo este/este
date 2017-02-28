@@ -1,4 +1,4 @@
-// @flow weak
+// @flow
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
@@ -10,7 +10,9 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackIsomorphicAssets from './assets';
 
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
+  webpackIsomorphicAssets,
+);
 
 // github.com/facebookincubator/create-react-app/issues/343#issuecomment-237241875
 // You may want 'cheap-module-source-map' instead if you prefer source maps.
@@ -24,20 +26,21 @@ const serverIp = config.remoteHotReload
   ? ip.address() // Dynamic IP address enables hot reload on remote devices.
   : 'localhost';
 
-const makeConfig = (options) => {
+// $FlowFixMe
+const makeConfig = options => {
   const {
     isDevelopment,
   } = options;
 
-  const stylesLoaders = Object.keys(loaders).map((ext) => {
+  const stylesLoaders = Object.keys(loaders).map(ext => {
     const prefix = 'css-loader!postcss-loader';
     const extLoaders = prefix + loaders[ext];
     const loader = isDevelopment
       ? `style-loader!${extLoaders}`
       : ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: extLoaders,
-      });
+          fallbackLoader: 'style-loader',
+          loader: extLoaders,
+        });
     return {
       loader,
       test: new RegExp(`\\.(${ext})$`),
@@ -48,12 +51,12 @@ const makeConfig = (options) => {
     cache: isDevelopment,
     devtool: isDevelopment ? devtools : '',
     entry: {
-      app: isDevelopment ? [
-        `webpack-hot-middleware/client?path=http://${serverIp}:${constants.HOT_RELOAD_PORT}/__webpack_hmr`,
-        path.join(constants.SRC_DIR, 'browser/index.js'),
-      ] : [
-        path.join(constants.SRC_DIR, 'browser/index.js'),
-      ],
+      app: isDevelopment
+        ? [
+            `webpack-hot-middleware/client?path=http://${serverIp}:${constants.HOT_RELOAD_PORT}/__webpack_hmr`,
+            path.join(constants.SRC_DIR, 'browser/index.js'),
+          ]
+        : [path.join(constants.SRC_DIR, 'browser/index.js')],
     },
     module: {
       noParse: [
@@ -67,19 +70,22 @@ const makeConfig = (options) => {
           options: {
             limit: 10000,
           },
-        }, {
+        },
+        {
           loader: 'url-loader',
           test: /favicon\.ico$/,
           options: {
             limit: 1,
           },
-        }, {
+        },
+        {
           loader: 'url-loader',
           test: /\.(ttf|eot|woff|woff2)(\?.*)?$/,
           options: {
             limit: 100000,
           },
-        }, {
+        },
+        {
           loader: 'babel-loader',
           test: /\.js$/,
           exclude: constants.NODE_MODULES_DIR,
@@ -87,17 +93,18 @@ const makeConfig = (options) => {
             cacheDirectory: true,
             presets: [['es2015', { modules: false }], 'react', 'stage-1'],
             plugins: [
-              ['transform-runtime', {
-                helpers: false,
-                polyfill: false,
-                regenerator: false,
-              }],
+              [
+                'transform-runtime',
+                {
+                  helpers: false,
+                  polyfill: false,
+                  regenerator: false,
+                },
+              ],
             ],
             env: {
               production: {
-                plugins: [
-                  'transform-react-constant-elements',
-                ],
+                plugins: ['transform-react-constant-elements'],
               },
             },
           },
@@ -105,17 +112,19 @@ const makeConfig = (options) => {
         ...stylesLoaders,
       ],
     },
-    output: isDevelopment ? {
-      path: constants.BUILD_DIR,
-      filename: '[name].js',
-      chunkFilename: '[name]-[chunkhash].js',
-      publicPath: `http://${serverIp}:${constants.HOT_RELOAD_PORT}/build/`,
-    } : {
-      path: constants.BUILD_DIR,
-      filename: '[name]-[hash].js',
-      chunkFilename: '[name]-[chunkhash].js',
-      publicPath: '/assets/',
-    },
+    output: isDevelopment
+      ? {
+          path: constants.BUILD_DIR,
+          filename: '[name].js',
+          chunkFilename: '[name]-[chunkhash].js',
+          publicPath: `http://${serverIp}:${constants.HOT_RELOAD_PORT}/build/`,
+        }
+      : {
+          path: constants.BUILD_DIR,
+          filename: '[name]-[hash].js',
+          chunkFilename: '[name]-[chunkhash].js',
+          publicPath: '/assets/',
+        },
     plugins: (() => {
       const plugins = [
         new webpack.LoaderOptionsPlugin({
@@ -131,7 +140,9 @@ const makeConfig = (options) => {
           'process.env': {
             IS_BROWSER: true, // Because webpack is used only for browser code.
             IS_SERVERLESS: JSON.stringify(process.env.IS_SERVERLESS || false),
-            NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+            NODE_ENV: JSON.stringify(
+              isDevelopment ? 'development' : 'production',
+            ),
           },
         }),
       ];
@@ -161,12 +172,17 @@ const makeConfig = (options) => {
             filename: '[file].map',
           }),
           webpackIsomorphicToolsPlugin,
-          new CopyWebpackPlugin([{
-            from: './src/common/app/favicons/',
-            to: 'favicons',
-          }], {
-            ignore: ['original/**'],
-          }),
+          new CopyWebpackPlugin(
+            [
+              {
+                from: './src/common/app/favicons/',
+                to: 'favicons',
+              },
+            ],
+            {
+              ignore: ['original/**'],
+            },
+          ),
         );
       }
       return plugins;

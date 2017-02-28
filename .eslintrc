@@ -30,6 +30,7 @@
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
     "react/prop-types": 0, // Can not detect flowtype correctly.
     "react/require-default-props": 0, // Checked by flowtype.
+    "indent": 0, // It is jlongster/prettier responsibility.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,

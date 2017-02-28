@@ -30,6 +30,7 @@ const configureStore = (options: Options) => {
     platformMiddleware,
   );
 
+  // $FlowFixMe
   const store = createStore(
     reducer,
     initialState,

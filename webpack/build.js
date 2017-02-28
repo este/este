@@ -1,9 +1,10 @@
-// @flow weak
+// @flow
 import gutil from 'gulp-util';
 import makeWebpackConfig from './makeConfig';
 import webpack from 'webpack';
 
-const build = (done) => {
+// $FlowFixMe
+const build = done => {
   const config = makeWebpackConfig({ isDevelopment: false });
   webpack(config, (fatalError, stats) => {
     const jsonStats = stats.toJson();
@@ -19,14 +20,17 @@ const build = (done) => {
       throw new gutil.PluginError('webpack', buildError);
     }
 
-    gutil.log('[webpack]', stats.toString({
-      colors: true,
-      version: false,
-      hash: false,
-      timings: false,
-      chunks: false,
-      chunkModules: false,
-    }));
+    gutil.log(
+      '[webpack]',
+      stats.toString({
+        colors: true,
+        version: false,
+        hash: false,
+        timings: false,
+        chunks: false,
+        chunkModules: false,
+      }),
+    );
 
     done();
   });

@@ -1,4 +1,4 @@
-// @flow weak
+// @flow
 import type { Action, State } from './types';
 import app from './app/reducer';
 import auth from './auth/reducer';
@@ -39,6 +39,7 @@ const resetStateOnSignOutReducer = (reducer, initialState) => (
 };
 
 const configureReducer = (platformReducers: Object, initialState: Object) => {
+  // $FlowFixMe
   let reducer = combineReducers({
     ...platformReducers,
     app,
