@@ -1,4 +1,4 @@
-// flow-typed signature: 5cc118bf54f582e12c263a7f5411b691
+// flow-typed signature: 68336d1389676eee634d6195513e7d61
 // flow-typed version: <<STUB>>/make-error_v^1.0.4/flow_v0.37.0
 
 /**
@@ -22,9 +22,14 @@ declare module 'make-error' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-
+declare module 'make-error/dist/make-error' {
+  declare module.exports: any;
+}
 
 // Filename aliases
+declare module 'make-error/dist/make-error.js' {
+  declare module.exports: $Exports<'make-error/dist/make-error'>;
+}
 declare module 'make-error/index' {
   declare module.exports: $Exports<'make-error'>;
 }

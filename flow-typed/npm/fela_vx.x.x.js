@@ -1,4 +1,4 @@
-// flow-typed signature: 1890a2325c5e6358f379400c7c69f2df
+// flow-typed signature: 130e2c5191373ef5f2f90a08b6d32d44
 // flow-typed version: <<STUB>>/fela_v^4.2.2/flow_v0.37.0
 
 /**
@@ -94,10 +94,6 @@ declare module 'fela/lib/enhancers/beautifier' {
   declare module.exports: any;
 }
 
-declare module 'fela/lib/enhancers/debugLayout' {
-  declare module.exports: any;
-}
-
 declare module 'fela/lib/enhancers/fontRenderer' {
   declare module.exports: any;
 }
@@ -118,6 +114,10 @@ declare module 'fela/lib/enhancers/perf' {
   declare module.exports: any;
 }
 
+declare module 'fela/lib/enhancers/statistics' {
+  declare module.exports: any;
+}
+
 declare module 'fela/lib/index' {
   declare module.exports: any;
 }
@@ -127,10 +127,6 @@ declare module 'fela/lib/native/createRenderer' {
 }
 
 declare module 'fela/lib/plugins/customProperty' {
-  declare module.exports: any;
-}
-
-declare module 'fela/lib/plugins/debugLayout' {
   declare module.exports: any;
 }
 
@@ -178,10 +174,6 @@ declare module 'fela/lib/plugins/removeUndefined' {
   declare module.exports: any;
 }
 
-declare module 'fela/lib/plugins/typeableSyntax' {
-  declare module.exports: any;
-}
-
 declare module 'fela/lib/plugins/unit' {
   declare module.exports: any;
 }
@@ -211,10 +203,6 @@ declare module 'fela/lib/tools/StyleSheet' {
 }
 
 declare module 'fela/lib/utils/applyMediaRulesInOrder' {
-  declare module.exports: any;
-}
-
-declare module 'fela/lib/utils/assign' {
   declare module.exports: any;
 }
 
@@ -278,23 +266,11 @@ declare module 'fela/lib/utils/generateStaticReference' {
   declare module.exports: any;
 }
 
-declare module 'fela/lib/utils/isAttributeSelector' {
-  declare module.exports: any;
-}
-
-declare module 'fela/lib/utils/isChildSelector' {
-  declare module.exports: any;
-}
-
 declare module 'fela/lib/utils/isMediaQuery' {
   declare module.exports: any;
 }
 
 declare module 'fela/lib/utils/isNestedSelector' {
-  declare module.exports: any;
-}
-
-declare module 'fela/lib/utils/isPseudoSelector' {
   declare module.exports: any;
 }
 
@@ -395,9 +371,6 @@ declare module 'fela/lib/enhance.js' {
 declare module 'fela/lib/enhancers/beautifier.js' {
   declare module.exports: $Exports<'fela/lib/enhancers/beautifier'>;
 }
-declare module 'fela/lib/enhancers/debugLayout.js' {
-  declare module.exports: $Exports<'fela/lib/enhancers/debugLayout'>;
-}
 declare module 'fela/lib/enhancers/fontRenderer.js' {
   declare module.exports: $Exports<'fela/lib/enhancers/fontRenderer'>;
 }
@@ -413,6 +386,9 @@ declare module 'fela/lib/enhancers/monolithic.js' {
 declare module 'fela/lib/enhancers/perf.js' {
   declare module.exports: $Exports<'fela/lib/enhancers/perf'>;
 }
+declare module 'fela/lib/enhancers/statistics.js' {
+  declare module.exports: $Exports<'fela/lib/enhancers/statistics'>;
+}
 declare module 'fela/lib/index.js' {
   declare module.exports: $Exports<'fela/lib/index'>;
 }
@@ -421,9 +397,6 @@ declare module 'fela/lib/native/createRenderer.js' {
 }
 declare module 'fela/lib/plugins/customProperty.js' {
   declare module.exports: $Exports<'fela/lib/plugins/customProperty'>;
-}
-declare module 'fela/lib/plugins/debugLayout.js' {
-  declare module.exports: $Exports<'fela/lib/plugins/debugLayout'>;
 }
 declare module 'fela/lib/plugins/dynamicPrefixer.js' {
   declare module.exports: $Exports<'fela/lib/plugins/dynamicPrefixer'>;
@@ -458,9 +431,6 @@ declare module 'fela/lib/plugins/prefixer.js' {
 declare module 'fela/lib/plugins/removeUndefined.js' {
   declare module.exports: $Exports<'fela/lib/plugins/removeUndefined'>;
 }
-declare module 'fela/lib/plugins/typeableSyntax.js' {
-  declare module.exports: $Exports<'fela/lib/plugins/typeableSyntax'>;
-}
 declare module 'fela/lib/plugins/unit.js' {
   declare module.exports: $Exports<'fela/lib/plugins/unit'>;
 }
@@ -484,9 +454,6 @@ declare module 'fela/lib/tools/StyleSheet.js' {
 }
 declare module 'fela/lib/utils/applyMediaRulesInOrder.js' {
   declare module.exports: $Exports<'fela/lib/utils/applyMediaRulesInOrder'>;
-}
-declare module 'fela/lib/utils/assign.js' {
-  declare module.exports: $Exports<'fela/lib/utils/assign'>;
 }
 declare module 'fela/lib/utils/assignStyles.js' {
   declare module.exports: $Exports<'fela/lib/utils/assignStyles'>;
@@ -533,20 +500,11 @@ declare module 'fela/lib/utils/generateCSSSelector.js' {
 declare module 'fela/lib/utils/generateStaticReference.js' {
   declare module.exports: $Exports<'fela/lib/utils/generateStaticReference'>;
 }
-declare module 'fela/lib/utils/isAttributeSelector.js' {
-  declare module.exports: $Exports<'fela/lib/utils/isAttributeSelector'>;
-}
-declare module 'fela/lib/utils/isChildSelector.js' {
-  declare module.exports: $Exports<'fela/lib/utils/isChildSelector'>;
-}
 declare module 'fela/lib/utils/isMediaQuery.js' {
   declare module.exports: $Exports<'fela/lib/utils/isMediaQuery'>;
 }
 declare module 'fela/lib/utils/isNestedSelector.js' {
   declare module.exports: $Exports<'fela/lib/utils/isNestedSelector'>;
-}
-declare module 'fela/lib/utils/isPseudoSelector.js' {
-  declare module.exports: $Exports<'fela/lib/utils/isPseudoSelector'>;
 }
 declare module 'fela/lib/utils/isUndefinedValue.js' {
   declare module.exports: $Exports<'fela/lib/utils/isUndefinedValue'>;
