@@ -6,6 +6,8 @@
     "build": "gulp build --production",
     "flow": "flow",
     "install": "gulp native-fix",
+    "postinstall": "gulp native",
+    "heroku-postbuild": "gulp build --production",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "start": "node src/server",
