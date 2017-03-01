@@ -1,19 +1,18 @@
 {
   "name": "este",
   "private": true,
-  "//": "Check all github.com/este/este#dev-tasks",
+  "//": "github.com/este/este#dev-tasks",
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp build --production",
     "flow": "flow",
     "install": "gulp native-fix",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "postinstall": "gulp native && gulp build --production",
-    "start": "gulp",
+    "start": "node src/server",
     "test": "gulp test"
   },
   "engines": {
-    "node": ">=6"
+    "node": "6.10.0"
   },
   "jest": {
     "rootDir": "src"
