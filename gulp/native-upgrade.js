@@ -17,7 +17,7 @@ gulp.task('native-upgrade', () => {
       - delete 'android' and 'ios' directories in your Este app
       - copy 'android' and 'ios' directories from some temp dir
       - merge React Native root files like .gitignore and .flowconfig
-      - run 'npm install'
+      - run 'yarn'
       - run 'react-native link'
       - fresh install
         - follow instruction from github.com/facebook/react-native-fbsdk

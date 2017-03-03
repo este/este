@@ -6,7 +6,7 @@ import { Provider as Redux } from 'react-redux';
 
 const getFelaMountNode = () => {
   const node = document.getElementById('stylesheet');
-  const parent = node.parentNode;
+  const parent = node && node.parentNode;
   if (!node || !parent) {
     throw new Error('missing stylesheet node for Fela');
   }
@@ -22,11 +22,13 @@ const getFelaMountNode = () => {
 // from regular div is much easier.
 // developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
 // developer.mozilla.org/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
-const DivButton = (props: {
-  disabled?: boolean,
-  onClick?: Function,
-  style?: Object,
-}) => (
+const DivButton = (
+  props: {
+    disabled?: boolean,
+    onClick?: Function,
+    style?: Object,
+  },
+) => (
   <div // eslint-disable-line jsx-a11y/no-static-element-interactions
     {...props}
     role="button"
@@ -54,18 +56,20 @@ type BaseRootProps = {
 };
 
 // This is reused in src/server/frontend/render.js
-const BaseRoot = ({
-  store,
-  felaRenderer = configureFela(),
-  children,
-}: BaseRootProps) => (
+const BaseRoot = (
+  {
+    store,
+    felaRenderer = configureFela(),
+    children,
+  }: BaseRootProps,
+) => (
   <Redux store={store}>
     <Fela
-      Button={(props) => <DivButton {...props} />}
-      Image={(props) => <img {...props} />} // eslint-disable-line jsx-a11y/img-has-alt
-      Text={(props) => <span {...props} />}
-      TextInput={(props) => <input {...props} />}
-      View={(props) => <div {...props} />}
+      Button={props => <DivButton {...props} />}
+      Image={props => <img {...props} />} // eslint-disable-line jsx-a11y/img-has-alt
+      Text={props => <span {...props} />}
+      TextInput={props => <input {...props} />}
+      View={props => <div {...props} />}
       mountNode={process.env.IS_BROWSER && getFelaMountNode()}
       renderer={felaRenderer}
     >

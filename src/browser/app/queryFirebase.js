@@ -9,9 +9,8 @@ import isClient from '../../common/app/isClient';
 // Server side rendering with data fetching is supported.
 
 type Ref = Object;
-type FirebaseRef = Object;
-type FirebaseSnap = Object;
-type ActionCreator = (snap: FirebaseSnap, params: Object) => Action;
+type Snap = Object;
+type ActionCreator = (snap: Snap, params: Object) => Action;
 
 type EventType =
   | 'value'
@@ -20,10 +19,7 @@ type EventType =
   | 'child_removed'
   | 'child_moved';
 
-type CreateRef = (
-  ref: Ref,
-  params: Object,
-) => [FirebaseRef, ActionCreator, ?EventType];
+type CreateRef = (ref: Ref, params: Object) => [Ref, EventType, ActionCreator];
 
 type CachedRef = {
   ref: Ref,
@@ -46,9 +42,8 @@ const queryFirebase = (...createRefs: CreateRef[]) => (
   const promises = createRefs.map(
     createRef => new Promise((resolve, reject) => {
       store.dispatch(({ firebase }) => {
-        const [ref, action, refEventType] = createRef(firebase, params);
-        const eventType = refEventType || 'value';
-        const successCallback = (snap: FirebaseSnap) => {
+        const [ref, eventType, action] = createRef(firebase, params);
+        const successCallback = (snap: Snap) => {
           store.dispatch(action(snap, params));
           resolve(null);
         };

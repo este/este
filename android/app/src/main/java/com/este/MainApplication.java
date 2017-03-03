@@ -53,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
     FacebookSdk.sdkInitialize(getApplicationContext());
     // If you want to use AppEventsLogger to log events.
     AppEventsLogger.activateApp(this);

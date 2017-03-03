@@ -50,8 +50,8 @@ const routeConfig = makeRouteConfig(
       path="users"
       Component={UsersPage}
       getData={queryFirebase(
-        ref => [ref.child('users-presence'), onUsersPresence],
-        // ref => [ref.child('what-ever').limitToFirst(1), onWhatEver],
+        ref => [ref.child('users-presence'), 'value', onUsersPresence],
+        // ref => [ref.child('what-ever').limitToFirst(1), 'value', onWhatEver],
       )}
     />
   </Route>,
