@@ -105,7 +105,7 @@
     "redbox-react": "^1.0.5",
     "redux": "^3.0.4",
     "redux-logger": "^2.7.4",
-    "redux-observable": "^0.13.0",
+    "redux-observable": "^0.14.0",
     "redux-persist": "^4.0.1",
     "regenerator": "^0.9.5",
     "regenerator-runtime": "^0.10.0",
@@ -124,6 +124,6 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0",
     "webpack-isomorphic-tools": "^3.0.0",
-    "yargs": "^6.0.0"
+    "yargs": "^7.0.1"
   }
 }
