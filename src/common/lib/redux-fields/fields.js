@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import invariant from 'invariant';
-import { path as ramdaPath } from 'ramda';
+import { compose, find, map, path as ramdaPath, prop } from 'ramda';
 import { resetFields, setField } from './actions';
 import isReactNative from '../../app/isReactNative';
 
@@ -80,9 +80,21 @@ const fields = (options: Options) => (WrappedComponent: Function) => {
         onChange: event => {
           // Some custom components like react-select pass the target directly.
           const target = event.target || event;
-          const { type, checked, value } = target;
+          const { type, checked, value, multiple: isMultipleSelect, selectedOptions } = target;
           const isCheckbox = type && type.toLowerCase() === 'checkbox';
-          onChange(field, isCheckbox ? checked : value);
+
+          const valuesByType = [
+            [isCheckbox, () => checked],
+            [isMultipleSelect, () => map(prop('value'), selectedOptions)],
+            [true, () => value],
+          ];
+
+          const findCurrentValue = compose(
+            prop(1),
+            find(prop(0)),
+          );
+
+          onChange(field, findCurrentValue(valuesByType)());
         },
       };
     }
