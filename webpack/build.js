@@ -7,7 +7,7 @@ import webpack from 'webpack';
 const build = done => {
   const config = makeWebpackConfig({ isDevelopment: false });
   webpack(config, (fatalError, stats) => {
-    const jsonStats = stats.toJson();
+    const jsonStats = stats.toJson({ chunkModules: true });
 
     // We can save jsonStats to be analyzed with
     // github.com/robertknight/webpack-bundle-size-analyzer.
