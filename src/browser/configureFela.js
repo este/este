@@ -1,8 +1,12 @@
 // @flow
 import placeholderPrefixer from 'fela-plugin-placeholder-prefixer';
+import fallbackValue from 'fela-plugin-fallback-value';
+import extend from 'fela-plugin-extend';
+import lvha from 'fela-plugin-lvha';
+import unit from 'fela-plugin-unit';
 import validator from 'fela-plugin-validator';
-import webPreset from 'fela-preset-web';
 import { createRenderer } from 'fela';
+import inlineStylePrefixer from './configurePrefixer';
 
 const staticStyles = `
   ${/*
@@ -113,11 +117,20 @@ const devPreset = [
   }),
 ];
 
-const configureFela = () => {
+const dynamicPrefixer = (options) => {
+  const prefixer = new inlineStylePrefixer(options);
+  return style => prefixer.prefix(style);
+};
+
+const configureFela = (userAgent) => {
   const renderer = createRenderer({
     plugins: [
+      extend(),
+      dynamicPrefixer({userAgent}),
       placeholderPrefixer(),
-      ...webPreset,
+      fallbackValue(),
+      lvha(),
+      unit(),
       ...(process.env.NODE_ENV !== 'production' ? devPreset : []),
     ],
   });

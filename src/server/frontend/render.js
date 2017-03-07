@@ -43,8 +43,8 @@ const createStore = (found, req): Object => configureStore({
   platformStoreEnhancers: found.storeEnhancers,
 });
 
-const renderBody = (renderArgs, store) => {
-  const felaRenderer = configureFela();
+const renderBody = (renderArgs, store, userAgent) => {
+  const felaRenderer = configureFela(userAgent);
   const html = renderToString(
     <BaseRoot felaRenderer={felaRenderer} store={store}>
       <RouterProvider router={renderArgs.router}>
@@ -91,9 +91,10 @@ const renderHtml = (state, body) => {
 const render = async (req: Object, res: Object, next: Function) => {
   const found = configureFound(Root.routeConfig, new ServerProtocol(req.url));
   const store = createStore(found, req);
+  const userAgent = req.headers['user-agent'];
   try {
     await found.getRenderArgs(store, renderArgs => {
-      const body = renderBody(renderArgs, store);
+      const body = renderBody(renderArgs, store, userAgent);
       const html = renderHtml(store.getState(), body);
       res.status(renderArgs.error ? renderArgs.error.status : 200).send(html);
     });

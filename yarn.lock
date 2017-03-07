@@ -2997,26 +2997,37 @@ fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-fela-native@^4.2.2:
+fela-native@^4.2.6:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/fela-native/-/fela-native-4.2.6.tgz#a881ff37f44ad8ed6c583e7c127534063257ed54"
 
-fela-plugin-placeholder-prefixer@^4.2.2:
+fela-plugin-extend@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-extend/-/fela-plugin-extend-4.2.6.tgz#3b7b70d3d540e68a15573aebb98ad0ecd7bbe3e4"
+
+fela-plugin-fallback-value@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-fallback-value/-/fela-plugin-fallback-value-4.2.6.tgz#d3af84677fb1fb4b63f161bc92d7b03e2056c0c7"
+
+fela-plugin-lvha@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-lvha/-/fela-plugin-lvha-4.2.6.tgz#6283a65f7c9edc6f3bf3a1392feb9a4e3ea38ced"
+
+fela-plugin-placeholder-prefixer@^4.2.6:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-4.2.6.tgz#3ea86c1c7878a53f9ace8d002f8e74184c032e39"
 
-fela-plugin-validator@^4.2.2:
+fela-plugin-unit@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-unit/-/fela-plugin-unit-4.2.6.tgz#cf8ec827d4e0b46653bd3a529740a09fc7116367"
+  dependencies:
+    unitless-css-property "1.0.2"
+
+fela-plugin-validator@^4.2.6:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/fela-plugin-validator/-/fela-plugin-validator-4.2.6.tgz#4a1a5bb086321cd76ceb2571f63afa0836a8ea63"
 
-fela-preset-web@^4.2.2:
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/fela-preset-web/-/fela-preset-web-4.2.6.tgz#203604b79cf71d7e6ea8ef9041f8195dee3e3e12"
-  dependencies:
-    inline-style-prefixer "^3.0.0"
-    unitless-css-property "1.0.2"
-
-fela@^4.2.2:
+fela@^4.2.6:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/fela/-/fela-4.2.6.tgz#093605c789fde268657859dc422234d3cf65afa9"
   dependencies:
