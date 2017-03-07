@@ -3,7 +3,7 @@
 // Bootstrap environment
 
 const onWindowIntl = () => {
-  require('babel-polyfill');
+  require('regenerator-runtime/runtime');
 
   // App locales are defined in src/server/config.js
   const { addLocaleData } = require('react-intl');

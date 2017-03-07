@@ -18,6 +18,24 @@ GoogleAnalytics.propTypes = {
   id: React.PropTypes.string.isRequired,
 };
 
+const polyfillFeatures = [
+  'default', // https://polyfill.io/v2/docs/features/#default-sets
+  'fetch',
+  'performance.now',
+  'Symbol',
+  'Array.prototype.find',
+  'Array.prototype.findIndex',
+  'Array.prototype.includes',
+];
+
+const Polyfill = ({ path }) => (
+  <script src={`${path}?features=${polyfillFeatures.join()}&unknown=polyfill`} />
+);
+
+Polyfill.propTypes = {
+  path: React.PropTypes.string.isRequired,
+};
+
 type Props = {
   appCssFilename: string,
   bodyCss: string,
@@ -41,6 +59,7 @@ const Html = ({
       {helmet.base.toComponent()}
       {helmet.meta.toComponent()}
       {helmet.link.toComponent()}
+      <Polyfill path={`https://cdn.polyfill.io/v2/polyfill${isProduction ? '.min' : ''}.js`} />
       {helmet.script.toComponent()}
       {appCssFilename &&
         <link href={appCssFilename} rel="stylesheet" />
