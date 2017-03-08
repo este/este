@@ -1,10 +1,4 @@
 // @flow
-// https://github.com/facebook/flow/issues/3217
-declare var require: {
-  (id: string): any;
-  ensure(ids: Array<string>, callback?: { (require: typeof require): void }, chunk?: string): void
-}
-
 import { addLocaleData } from 'react-intl';
 
 const addLocale = (locale, callback) => {
@@ -13,6 +7,7 @@ const addLocale = (locale, callback) => {
 };
 
 const addIntl = (callback) => {
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   require.ensure(['intl'], (require) => {
     if (!window.addIntl) {
       require('intl');
@@ -30,71 +25,78 @@ const addIntl = (callback) => {
 // in polyfilled browsers. Check the network tab to see it in action.
 
 const localeData = {
-  // Czech
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   cs: (callback) => require.ensure(['react-intl/locale-data/cs'], (require) =>
     addLocale(require('react-intl/locale-data/cs'), callback), 'cs'),
 
   cs_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/cs.js', 'react-intl/locale-data/cs'], (require) => {
       require('intl/locale-data/jsonp/cs.js');
       addLocale(require('react-intl/locale-data/cs'), callback);
     }, 'intl-cs')),
 
-  // German
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   de: (callback) => require.ensure(['react-intl/locale-data/de'], (require) =>
     addLocale(require('react-intl/locale-data/de'), callback), 'de'),
 
   de_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/de.js', 'react-intl/locale-data/de'], (require) => {
       require('intl/locale-data/jsonp/de.js');
       addLocale(require('react-intl/locale-data/de'), callback);
     }, 'intl-de')),
 
-  // English
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   en: (callback) => require.ensure(['react-intl/locale-data/en'], (require) =>
     addLocale(require('react-intl/locale-data/en'), callback), 'en'),
 
   en_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/en.js', 'react-intl/locale-data/en'], (require) => {
       require('intl/locale-data/jsonp/en.js');
       addLocale(require('react-intl/locale-data/en'), callback);
     }, 'intl-en')),
 
-  // Spanish
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   es: (callback) => require.ensure(['react-intl/locale-data/es'], (require) =>
     addLocale(require('react-intl/locale-data/es'), callback), 'es'),
 
   es_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/es.js', 'react-intl/locale-data/es'], (require) => {
       require('intl/locale-data/jsonp/es.js');
       addLocale(require('react-intl/locale-data/es'), callback);
     }, 'intl-es')),
 
-  // French
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   fr: (callback) => require.ensure(['react-intl/locale-data/fr'], (require) =>
     addLocale(require('react-intl/locale-data/fr'), callback), 'fr'),
 
   fr_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/fr.js', 'react-intl/locale-data/fr'], (require) => {
       require('intl/locale-data/jsonp/fr.js');
       addLocale(require('react-intl/locale-data/fr'), callback);
     }, 'intl-fr')),
 
-  // Portuguese
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   pt: (callback) => require.ensure(['react-intl/locale-data/pt'], (require) =>
     addLocale(require('react-intl/locale-data/pt'), callback), 'pt'),
 
   pt_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/pt.js', 'react-intl/locale-data/pt'], (require) => {
       require('intl/locale-data/jsonp/pt.js');
       addLocale(require('react-intl/locale-data/pt'), callback);
     }, 'intl-pt')),
 
-  // Romanian
+  // $FlowFixMe https://github.com/facebook/flow/issues/3217
   ro: (callback) => require.ensure(['react-intl/locale-data/ro'], (require) =>
     addLocale(require('react-intl/locale-data/ro'), callback), 'ro'),
 
   ro_polyfill: (callback) => addIntl(() =>
+    // $FlowFixMe https://github.com/facebook/flow/issues/3217
     require.ensure(['intl/locale-data/jsonp/ro.js', 'react-intl/locale-data/ro'], (require) => {
       require('intl/locale-data/jsonp/ro.js');
       addLocale(require('react-intl/locale-data/ro'), callback);
