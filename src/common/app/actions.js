@@ -1,5 +1,6 @@
 // @flow
 import type { Action, Deps } from '../types';
+import cookie from 'js-cookie';
 import isReactNative from '../../common/app/isReactNative';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
@@ -24,10 +25,13 @@ export const toggleBaseline = (): Action => ({
   type: 'TOGGLE_BASELINE',
 });
 
-export const setTheme = (theme: string): Action => ({
-  type: 'SET_THEME',
-  payload: { theme },
-});
+export const setTheme = (theme: string): Action => {
+  cookie.set('theme', theme);
+  return {
+    type: 'SET_THEME',
+    payload: { theme },
+  };
+};
 
 const appStartedEpic = (action$: any, deps: Deps) => {
   const { firebase, firebaseAuth, getState } = deps;
