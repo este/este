@@ -29,7 +29,7 @@ const polyfillFeatures = [
 ];
 
 const Polyfill = ({ path }) => (
-  <script src={`${path}?features=${polyfillFeatures.join()}&unknown=polyfill`} />
+  <script src={`${path}?features=${polyfillFeatures.join()}&unknown=polyfill&flags=gated`} />
 );
 
 Polyfill.propTypes = {
