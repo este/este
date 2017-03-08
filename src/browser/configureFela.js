@@ -6,7 +6,7 @@ import lvha from 'fela-plugin-lvha';
 import unit from 'fela-plugin-unit';
 import validator from 'fela-plugin-validator';
 import { createRenderer } from 'fela';
-import inlineStylePrefixer from './configurePrefixer';
+import InlineStylePrefixer from './configurePrefixer';
 
 const staticStyles = `
   ${/*
@@ -118,15 +118,15 @@ const devPreset = [
 ];
 
 const dynamicPrefixer = (options) => {
-  const prefixer = new inlineStylePrefixer(options);
+  const prefixer = new InlineStylePrefixer(options);
   return style => prefixer.prefix(style);
 };
 
-const configureFela = (userAgent) => {
+const configureFela = (userAgent?: String) => {
   const renderer = createRenderer({
     plugins: [
       extend(),
-      dynamicPrefixer({userAgent}),
+      dynamicPrefixer({ userAgent }),
       placeholderPrefixer(),
       fallbackValue(),
       lvha(),

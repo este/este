@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 type ButtonsProps = {
   addHundredTodos: typeof addHundredTodos,
   clearAllTodos: typeof clearAllTodos,
-  isEmpty: boolean,
+  isTodoEmpty: boolean,
 };
 
 const Buttons = ({ addHundredTodos, clearAllTodos, isTodoEmpty }: ButtonsProps) => (

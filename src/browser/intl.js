@@ -1,4 +1,9 @@
 // @flow
+// https://github.com/facebook/flow/issues/3217
+declare var require: {
+  (id: string): any;
+  ensure(ids: Array<string>, callback?: { (require: typeof require): void }, chunk?: string): void
+}
 
 import { addLocaleData } from 'react-intl';
 
@@ -96,7 +101,7 @@ const localeData = {
     }, 'intl-ro')),
 };
 
-export const loadLocale = (locale) => new Promise((resolve) => {
+export const loadLocale = (locale: string) => new Promise((resolve) => {
   if (!localeData[locale]) {
     locale = 'en';
   }

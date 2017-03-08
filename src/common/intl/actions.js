@@ -15,10 +15,10 @@ export const applyCurrentLocale = (locale: string): Action => ({
 
 const applyLocale = (action$: any) =>
   action$.ofType('LOAD_CURRENT_LOCALE')
-    .mergeMap(({ payload: { locale } }) => {
-      return Observable.from(loadLocale(locale))
-        .map(() => applyCurrentLocale(locale));
-    });
+    .mergeMap(({ payload: { locale } }) =>
+      // $FlowFixMe call of method `from` property `@@iterator` of $Iterable. Property not found in.
+      Observable.from(loadLocale(locale))
+        .map(() => applyCurrentLocale(locale)));
 
 export const epics = [
   applyLocale,

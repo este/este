@@ -32,7 +32,7 @@ const Prefixer = createPrefixer(
     prefixMap: dynamicData.prefixMap,
     plugins,
   },
-  prefixAll
+  prefixAll,
 );
 
 export default Prefixer;

@@ -27,7 +27,7 @@ export const toggleBaseline = (): Action => ({
 export const setTheme = (theme: string): Action => ({
   type: 'SET_THEME',
   payload: { theme },
-})
+});
 
 const appStartedEpic = (action$: any, deps: Deps) => {
   const { firebase, firebaseAuth, getState } = deps;
