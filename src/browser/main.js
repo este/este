@@ -9,7 +9,9 @@ import configureStorage from '../common/configureStorage';
 import configureStore from '../common/configureStore';
 import localforage from 'localforage';
 import uuid from 'uuid';
-import { persistStore } from 'redux-persist';
+import cookie from 'js-cookie';
+import { persistStore, createTransform } from 'redux-persist';
+import { pick } from 'ramda';
 
 const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 
@@ -32,6 +34,44 @@ const store = configureStore({
 });
 
 const appElement = document.getElementById('app');
+
+const cookiePaths = [
+  ['app', ['currentTheme']],
+  ['intl', ['currentLocale']],
+];
+
+const transforms = [];
+
+cookiePaths.forEach(([feature, props]) => {
+  if (!props) return;
+
+  const write = state => {
+    const values = pick(props, state);
+    Object.keys(values).forEach(prop => {
+      const newValue = values[prop];
+      const cookieKey = `${feature}.${prop}`;
+      if (typeof newValue !== 'undefined' && newValue !== '') {
+        cookie.set(cookieKey, newValue);
+      } else {
+        cookie.remove(cookieKey);
+      }
+    });
+    return values;
+  };
+
+  const read = state => {
+    const values = pick(props, state);
+    Object.keys(values).forEach(prop => {
+      const cookieValue = cookie.get(`${feature}.${prop}`);
+      if (cookieValue) {
+        values[prop] = cookieValue;
+      }
+    });
+    return values;
+  };
+
+  transforms.push(createTransform(write, read, { whitelist: [feature] }));
+});
 
 // 1. get found render args
 // 2. initial render (before rehydrate, to match client and server render)
@@ -61,7 +101,7 @@ found.getRenderArgs(store, renderArgs => {
     persistStore(
       store,
       {
-        ...configureStorage(initialState.config.appName),
+        ...configureStorage(initialState.config.appName, transforms),
         storage: localforage,
       },
       onRehydrate,

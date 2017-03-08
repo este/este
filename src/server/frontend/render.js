@@ -26,13 +26,13 @@ const getHost = req =>
 const getTheme = req =>
   process.env.IS_SERVERLESS
     ? config.defaultTheme // No SSR, use default theme
-    : (req.cookies && req.cookies.theme) // User set language explicitly in app
+    : (req.cookies && req.cookies['app.currentTheme']) // User set language explicitly in app
       || config.defaultTheme; // No preference, use default theme
 
 const getLocale = req =>
   process.env.IS_SERVERLESS
     ? config.defaultLocale // No SSR, use default locale
-    : (req.cookies && req.cookies.locale) // User set language explicitly in app
+    : (req.cookies && req.cookies['intl.currentLocale']) // User set language explicitly in app
       || req.acceptsLanguages(config.locales) // Browser specified language
       || config.defaultLocale; // No preference, use default locale
 

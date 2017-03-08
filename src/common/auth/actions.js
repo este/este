@@ -1,7 +1,6 @@
 // @flow
 import type { Action, Deps } from '../types';
 import invariant from 'invariant';
-import cookie from 'js-cookie';
 import createUserFirebase from '../users/createUserFirebase';
 import firebaseMessages from './firebaseMessages';
 import isReactNative from '../../common/app/isReactNative';
@@ -202,8 +201,6 @@ const signOutEpic = (action$: any, { firebaseAuth }: Deps) =>
     .filter((action: Action) => action.type === 'SIGN_OUT')
     .mergeMap(() => {
       firebaseAuth().signOut();
-      cookie.remove('locale');
-      cookie.remove('theme');
       return isReactNative
         ? Observable.of()
         : Observable.of(FarceActions.push('/'));
