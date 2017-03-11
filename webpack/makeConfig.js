@@ -91,7 +91,7 @@ const makeConfig = options => {
           exclude: constants.NODE_MODULES_DIR,
           options: {
             cacheDirectory: true,
-            presets: [['es2015', { modules: false }], 'react', 'stage-1'],
+            presets: [['env', { modules: false }], 'react', 'stage-1'],
             plugins: [
               [
                 'transform-runtime',

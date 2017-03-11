@@ -1,4 +1,4 @@
-// flow-typed signature: e683bc21095d1c0f78ccc97de8dfa740
+// flow-typed signature: 82949a23f970161303ef042bd239a79d
 // flow-typed version: <<STUB>>/eslint-plugin-babel_v^4.0.0/flow_v0.38.0
 
 /**
@@ -74,10 +74,6 @@ declare module 'eslint-plugin-babel/tests/rules/new-cap' {
   declare module.exports: any;
 }
 
-declare module 'eslint-plugin-babel/tests/rules/no-await-in-loop' {
-  declare module.exports: any;
-}
-
 declare module 'eslint-plugin-babel/tests/rules/no-invalid-this' {
   declare module.exports: any;
 }
@@ -139,9 +135,6 @@ declare module 'eslint-plugin-babel/rules/semi.js' {
 }
 declare module 'eslint-plugin-babel/tests/rules/new-cap.js' {
   declare module.exports: $Exports<'eslint-plugin-babel/tests/rules/new-cap'>;
-}
-declare module 'eslint-plugin-babel/tests/rules/no-await-in-loop.js' {
-  declare module.exports: $Exports<'eslint-plugin-babel/tests/rules/no-await-in-loop'>;
 }
 declare module 'eslint-plugin-babel/tests/rules/no-invalid-this.js' {
   declare module.exports: $Exports<'eslint-plugin-babel/tests/rules/no-invalid-this'>;

@@ -20,7 +20,7 @@ const mapAttributesToObject = (attributesList, obj = {}) => {
   return obj;
 };
 
-const toObject = (element) => {
+const toObject = element => {
   const attributes = extractAttributesFromElement(element);
   return mapAttributesToObject(attributes);
 };
@@ -34,11 +34,14 @@ const isLink = element => /^<link/.test(element);
 
 const injectFavicon = () => {
   const elements = faviconProcessingHtmlResultCode().split('\n');
-  return elements.reduce((acc, element) => {
-    const key = isLink(element) ? 'link' : 'meta';
-    acc[key].push(toObject(element));
-    return acc;
-  }, { link: [], meta: [] });
+  return elements.reduce(
+    (acc, element) => {
+      const key = isLink(element) ? 'link' : 'meta';
+      acc[key].push(toObject(element));
+      return acc;
+    },
+    { link: [], meta: [] },
+  );
 };
 
 export default injectFavicon;

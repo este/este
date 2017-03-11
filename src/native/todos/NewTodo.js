@@ -14,11 +14,12 @@ type NewTodoProps = {
   intl: $IntlShape,
 };
 
-const onSubmitEditing = (fields, addTodo) => () => {
-  if (!fields.title.value.trim()) return;
-  addTodo(fields.title.value);
-  fields.$reset();
-};
+const onSubmitEditing = (fields, addTodo) =>
+  () => {
+    if (!fields.title.value.trim()) return;
+    addTodo(fields.title.value);
+    fields.$reset();
+  };
 
 const NewTodo = (
   {

@@ -84,9 +84,10 @@ const Checkbox = (
       <Text
         color={color}
         size={size}
-        {...(inline ? marginVertical(labelPosition) : null)}
-      >{label}</Text>
-    }
+        {...inline ? marginVertical(labelPosition) : null}
+      >
+        {label}
+      </Text>}
   </Button>
 );
 

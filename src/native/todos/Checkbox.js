@@ -13,15 +13,14 @@ const images = {
   unchecked: require('./img/Checkbox.png'),
 };
 
-const Checkbox = ({
-  checked,
-  onPress,
-  ...props
-}: CheckboxProps) => (
-  <Button
-    onPress={onPress}
-    {...props}
-  >
+const Checkbox = (
+  {
+    checked,
+    onPress,
+    ...props
+  }: CheckboxProps,
+) => (
+  <Button onPress={onPress} {...props}>
     <Box
       as={Image}
       source={checked ? images.checked : images.unchecked}

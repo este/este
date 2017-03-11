@@ -12,23 +12,26 @@ import {
   clearAllTodos,
 } from '../../common/todos/actions';
 
-const allTodosAreCompleted = todos => values(todos)
-  .filter(todo => todo.completed)
-  .length > 0;
+const allTodosAreCompleted = todos =>
+  values(todos).filter(todo => todo.completed).length > 0;
 
-const FooterButton = ({
-  message,
-  onPress,
-}) => (
+const FooterButton = (
+  {
+    message,
+    onPress,
+  },
+) => (
   <FormattedMessage {...message}>
-    {msg =>
+    {msg => (
       <Button
         flex={1}
         marginVertical={0}
         onPress={onPress}
         paddingVertical={0.5}
-      >{msg}</Button>
-    }
+      >
+        {msg}
+      </Button>
+    )}
   </FormattedMessage>
 );
 
@@ -39,28 +42,25 @@ type FooterProps = {
   todos: Array<Todo>,
 };
 
-const Footer = ({
-  addHundredTodos,
-  clearAllCompletedTodos,
-  clearAllTodos,
-  todos,
-}: FooterProps) => (
+const Footer = (
+  {
+    addHundredTodos,
+    clearAllCompletedTodos,
+    clearAllTodos,
+    todos,
+  }: FooterProps,
+) => (
   <Box flexDirection="row">
-    {allTodosAreCompleted(todos) ?
-      <FooterButton
-        message={buttonsMessages.clearCompleted}
-        onPress={clearAllCompletedTodos}
-      />
-    :
-      <FooterButton
-        message={buttonsMessages.clearAll}
-        onPress={clearAllTodos}
-      />
-    }
-    <FooterButton
-      message={buttonsMessages.add100}
-      onPress={addHundredTodos}
-    />
+    {allTodosAreCompleted(todos)
+      ? <FooterButton
+          message={buttonsMessages.clearCompleted}
+          onPress={clearAllCompletedTodos}
+        />
+      : <FooterButton
+          message={buttonsMessages.clearAll}
+          onPress={clearAllTodos}
+        />}
+    <FooterButton message={buttonsMessages.add100} onPress={addHundredTodos} />
   </Box>
 );
 

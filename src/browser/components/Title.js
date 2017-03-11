@@ -9,11 +9,9 @@ type TitleProps = {|
   values?: Object,
 |};
 
-const Title = ({ intl, message, values }: TitleProps) => (
-  typeof message === 'string' ?
-    <Helmet title={message} />
-  :
-    <Helmet title={intl.formatMessage(message, values)} />
-);
+const Title = ({ intl, message, values }: TitleProps) =>
+  typeof message === 'string'
+    ? <Helmet title={message} />
+    : <Helmet title={intl.formatMessage(message, values)} />;
 
 export default injectIntl(Title);

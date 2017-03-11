@@ -36,55 +36,59 @@ const LRU_LIMIT_AKA_MAX_CONNECTIONS = 100;
 
 let refs: CachedRef[] = [];
 
-const queryFirebase = (...createRefs: CreateRef[]) => (
-  { context: { store }, params }: OnMatchArg,
-): Promise<any> => {
-  const promises = createRefs.map(
-    createRef => new Promise((resolve, reject) => {
-      store.dispatch(({ firebase }) => {
-        const [ref, eventType, action] = createRef(firebase, params);
-        const successCallback = (snap: Snap) => {
-          store.dispatch(action(snap, params));
-          resolve(null);
-        };
-        if (isClient) {
-          const cachedRefIndex = refs.findIndex(item => item.ref.isEqual(ref));
-          const cachedRef = refs[cachedRefIndex];
-          if (cachedRef) {
-            // LRU, move visited ref to the array end.
-            refs.splice(cachedRefIndex, 1);
-            refs.push(cachedRef);
-            resolve(null);
-          } else {
-            refs.push({ ref, eventType, successCallback });
-            // LRU, remove the first when the limit is hit.
-            if (refs.length > LRU_LIMIT_AKA_MAX_CONNECTIONS) {
-              const firstRef = refs.shift();
-              firstRef.ref.off(firstRef.eventType, firstRef.successCallback);
-            }
-            ref.on(eventType, successCallback, error => {
-              refs = refs.filter(item => !item.ref.isEqual(ref));
-              reject(error);
-            });
-            // Don't wait before the initial rendering.
-            // We can't skip the initial data fetching because we have to watch
-            // Firebase endpoints anyway, but we don't have to wait for them.
-            // This ensures client and server HTML match.
-            if (!store.getState().app.started) {
+const queryFirebase = (...createRefs: CreateRef[]) =>
+  ({ context: { store }, params }: OnMatchArg): Promise<any> => {
+    const promises = createRefs.map(
+      createRef =>
+        new Promise((resolve, reject) => {
+          store.dispatch(({ firebase }) => {
+            const [ref, eventType, action] = createRef(firebase, params);
+            const successCallback = (snap: Snap) => {
+              store.dispatch(action(snap, params));
               resolve(null);
+            };
+            if (isClient) {
+              const cachedRefIndex = refs.findIndex(item =>
+                item.ref.isEqual(ref));
+              const cachedRef = refs[cachedRefIndex];
+              if (cachedRef) {
+                // LRU, move visited ref to the array end.
+                refs.splice(cachedRefIndex, 1);
+                refs.push(cachedRef);
+                resolve(null);
+              } else {
+                refs.push({ ref, eventType, successCallback });
+                // LRU, remove the first when the limit is hit.
+                if (refs.length > LRU_LIMIT_AKA_MAX_CONNECTIONS) {
+                  const firstRef = refs.shift();
+                  firstRef.ref.off(
+                    firstRef.eventType,
+                    firstRef.successCallback,
+                  );
+                }
+                ref.on(eventType, successCallback, error => {
+                  refs = refs.filter(item => !item.ref.isEqual(ref));
+                  reject(error);
+                });
+                // Don't wait before the initial rendering.
+                // We can't skip the initial data fetching because we have to watch
+                // Firebase endpoints anyway, but we don't have to wait for them.
+                // This ensures client and server HTML match.
+                if (!store.getState().app.started) {
+                  resolve(null);
+                }
+              }
+            } else {
+              ref.once(eventType, successCallback, reject);
             }
-          }
-        } else {
-          ref.once(eventType, successCallback, reject);
-        }
-        return ({
-          type: 'QUERY_FIREBASE',
-          payload: { ref: ref.toString() },
-        }: Action);
-      });
-    }),
-  );
-  return Promise.all(promises);
-};
+            return ({
+              type: 'QUERY_FIREBASE',
+              payload: { ref: ref.toString() },
+            }: Action);
+          });
+        }),
+    );
+    return Promise.all(promises);
+  };
 
 export default queryFirebase;

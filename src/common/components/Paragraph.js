@@ -15,11 +15,7 @@ const Paragraph = (props: TextProps, { theme }: ParagraphContext) => {
     ...restProps
   } = props;
   return (
-    <Text
-      marginBottom={marginBottom}
-      maxWidth={maxWidth}
-      {...restProps}
-    />
+    <Text marginBottom={marginBottom} maxWidth={maxWidth} {...restProps} />
   );
 };
 

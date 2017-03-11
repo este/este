@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
 });
 
 class Alert extends React.Component {
-
   static defaultProps = {
     duration: 300,
     hideTimeout: 4000,
@@ -76,9 +75,7 @@ class Alert extends React.Component {
     if (fromValue !== undefined) {
       animation.setValue(fromValue);
     }
-    Animated
-      .timing(animation, { duration, toValue })
-      .start();
+    Animated.timing(animation, { duration, toValue }).start();
   }
 
   hideTimer: number;
@@ -87,9 +84,12 @@ class Alert extends React.Component {
     const { hideTimeout } = this.props;
     this.animateTo(1, 0);
     clearTimeout(this.hideTimer);
-    this.hideTimer = setTimeout(() => {
-      this.animateTo(0);
-    }, hideTimeout);
+    this.hideTimer = setTimeout(
+      () => {
+        this.animateTo(0);
+      },
+      hideTimeout,
+    );
   }
 
   render() {
@@ -112,12 +112,7 @@ class Alert extends React.Component {
             position="absolute"
             right={0}
           >
-            <Text
-              bold
-              color="white"
-              padding={0.5}
-              paddingHorizontal={1}
-            >
+            <Text bold color="white" padding={0.5} paddingHorizontal={1}>
               {formatMessage(errorMessage.message, errorMessage.values || {})}
             </Text>
           </Box>
@@ -125,14 +120,11 @@ class Alert extends React.Component {
       </TouchableWithoutFeedback>
     );
   }
-
 }
 
 export default compose(
-  connect(
-    (state: State) => ({
-      error: state.app.error,
-    }),
-  ),
+  connect((state: State) => ({
+    error: state.app.error,
+  })),
   injectIntl,
 )(Alert);

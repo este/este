@@ -2,7 +2,4 @@
 import fields from './fields';
 import fieldsReducer from './reducer';
 
-export {
-  fields,
-  fieldsReducer,
-};
+export { fields, fieldsReducer };

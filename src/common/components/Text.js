@@ -37,17 +37,20 @@ const fontSizeWithComputedLineHeight = (typography, size) => {
   return { fontSize, lineHeight };
 };
 
-export const computeTextStyle = (theme: Theme, {
-  fontFamily = theme.text.fontFamily,
-  size = 0,
-  align,
-  bold,
-  color = 'black',
-  decoration,
-  italic,
-  lineHeight,
-  ...props
-}: TextProps) => {
+export const computeTextStyle = (
+  theme: Theme,
+  {
+    fontFamily = theme.text.fontFamily,
+    size = 0,
+    align,
+    bold,
+    color = 'black',
+    decoration,
+    italic,
+    lineHeight,
+    ...props
+  }: TextProps,
+) => {
   let style = {
     ...fontSizeWithComputedLineHeight(theme.typography, size),
     color: theme.colors[color],
@@ -81,15 +84,13 @@ export const computeTextStyle = (theme: Theme, {
 // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
 // tldr; Fix font smoothing only for light text on dark background.
 const maybeFixFontSmoothing = (color, backgroundColor) => {
-  const hasColorAndBackgroundColor =
-    color &&
+  const hasColorAndBackgroundColor = color &&
     color !== 'transparent' &&
     backgroundColor &&
     backgroundColor !== 'transparent';
   // console.log(hasColorAndBackgroundColor);
   if (!hasColorAndBackgroundColor) return null;
-  const colorIsLighterThanBackgroundColor =
-    colorLib(color).luminosity() >
+  const colorIsLighterThanBackgroundColor = colorLib(color).luminosity() >
     colorLib(backgroundColor).luminosity();
   if (!colorIsLighterThanBackgroundColor) return null;
   return {
@@ -104,7 +105,10 @@ const computePlatformTextStyle = (boxStyle, textStyle, fixWebFontSmoothing) => {
       textStyle = { ...textStyle, fontWeight: String(textStyle.fontWeight) };
     }
     if (textStyle.textDecoration) {
-      textStyle = { ...textStyle, textDecorationLine: textStyle.textDecoration };
+      textStyle = {
+        ...textStyle,
+        textDecorationLine: textStyle.textDecoration,
+      };
       delete textStyle.textDecoration;
     }
   } else {
@@ -119,24 +123,32 @@ const computePlatformTextStyle = (boxStyle, textStyle, fixWebFontSmoothing) => {
   return textStyle;
 };
 
-const Text = ({
-  as,
-  style,
-  fixWebFontSmoothing = true,
-  ...props
-}: TextProps, {
-  Text: PlatformText,
-  theme,
-}: TextContext) => {
+const Text = (
+  {
+    as,
+    style,
+    fixWebFontSmoothing = true,
+    ...props
+  }: TextProps,
+  {
+    Text: PlatformText,
+    theme,
+  }: TextContext,
+) => {
   const [textStyle, restProps] = computeTextStyle(theme, props);
   return (
     <Box
       as={as || PlatformText}
       {...restProps}
-      style={(theme, boxStyle) => computePlatformTextStyle(boxStyle, {
-        ...textStyle,
-        ...(style && style(theme, { ...boxStyle, ...textStyle })),
-      }, fixWebFontSmoothing)}
+      style={(theme, boxStyle) =>
+        computePlatformTextStyle(
+          boxStyle,
+          {
+            ...textStyle,
+            ...(style && style(theme, { ...boxStyle, ...textStyle })),
+          },
+          fixWebFontSmoothing,
+        )}
     />
   );
 };

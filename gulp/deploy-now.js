@@ -1,3 +1,4 @@
+// @flow
 import childProcess from 'child_process';
 import gulp from 'gulp';
 

@@ -1,4 +1,4 @@
-// flow-typed signature: 15625b41b4bc8839bb63057293cab62c
+// flow-typed signature: f8c684e647031941189bd92711b032fa
 // flow-typed version: <<STUB>>/webpack-isomorphic-tools_v^3.0.0/flow_v0.38.0
 
 /**
@@ -70,42 +70,6 @@ declare module 'webpack-isomorphic-tools/plugin' {
   declare module.exports: any;
 }
 
-declare module 'webpack-isomorphic-tools/source/common' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/helpers' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/index' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/plugin/notify stats' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/plugin/plugin' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/plugin/write assets' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/tools/log' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/tools/serialize-javascript' {
-  declare module.exports: any;
-}
-
-declare module 'webpack-isomorphic-tools/source/tools/synchronous http' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'webpack-isomorphic-tools/babel-transpiled-modules/common.js' {
   declare module.exports: $Exports<'webpack-isomorphic-tools/babel-transpiled-modules/common'>;
@@ -142,31 +106,4 @@ declare module 'webpack-isomorphic-tools/ensure.js' {
 }
 declare module 'webpack-isomorphic-tools/plugin.js' {
   declare module.exports: $Exports<'webpack-isomorphic-tools/plugin'>;
-}
-declare module 'webpack-isomorphic-tools/source/common.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/common'>;
-}
-declare module 'webpack-isomorphic-tools/source/helpers.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/helpers'>;
-}
-declare module 'webpack-isomorphic-tools/source/index.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/index'>;
-}
-declare module 'webpack-isomorphic-tools/source/plugin/notify stats.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/plugin/notify stats'>;
-}
-declare module 'webpack-isomorphic-tools/source/plugin/plugin.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/plugin/plugin'>;
-}
-declare module 'webpack-isomorphic-tools/source/plugin/write assets.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/plugin/write assets'>;
-}
-declare module 'webpack-isomorphic-tools/source/tools/log.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/tools/log'>;
-}
-declare module 'webpack-isomorphic-tools/source/tools/serialize-javascript.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/tools/serialize-javascript'>;
-}
-declare module 'webpack-isomorphic-tools/source/tools/synchronous http.js' {
-  declare module.exports: $Exports<'webpack-isomorphic-tools/source/tools/synchronous http'>;
 }

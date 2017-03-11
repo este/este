@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015-node6/object-rest", "react", "stage-1"],
+  "presets": ["env", "react", "stage-1"],
   "plugins": [
     ["transform-runtime", {
       "helpers": false,

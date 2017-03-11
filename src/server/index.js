@@ -1,26 +1,22 @@
 // @flow
-/* eslint-disable comma-dangle */
 
 // Bootstrap environment
 require('babel-register');
 require('babel-polyfill');
 
-const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+const IsoTools = require('webpack-isomorphic-tools');
+const assets = require('../../webpack/assets').default;
 const config = require('./config').default;
 const polyfillLocales = require('./intl/polyfillLocales');
 const rootDir = require('path').resolve(__dirname, '..', '..');
-const webpackIsomorphicAssets = require('../../webpack/assets').default;
 
 if (!process.env.NODE_ENV) {
-  throw new Error(
-    'Environment variable NODE_ENV must be set to development or production.'
-  );
+  const message = 'Environment variable NODE_ENV must be set to development or production.';
+  throw new Error(message);
 }
 
 polyfillLocales(global, config.locales);
 
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(
-  webpackIsomorphicAssets
-).server(rootDir, () => {
+global.webpackIsomorphicTools = new IsoTools(assets).server(rootDir, () => {
   require('./main');
 });

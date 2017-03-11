@@ -1,3 +1,4 @@
+// @flow
 import gulp from 'gulp';
 import webpackBuild from '../webpack/build';
 

@@ -33,26 +33,27 @@ type MePageProps = {
   viewer: ?User,
 };
 
-const MePage = ({ children, viewer }: MePageProps) => !viewer
-  ? null
-  : <Box>
-      <Title message={linksMessages.me} />
-      <Header />
-      {children ||
-        <Box>
-          <Text>{viewer.displayName}</Text>
-          <Box marginVertical={1}>
-            <Image
-              src={getUserPhotoUrl(viewer)}
-              size={{ height: 100, width: 100 }}
-              title={viewer.displayName}
-            />
-          </Box>
-          <Box flexDirection="row">
-            <SignOut />
-          </Box>
-        </Box>}
-    </Box>;
+const MePage = ({ children, viewer }: MePageProps) =>
+  !viewer
+    ? null
+    : <Box>
+        <Title message={linksMessages.me} />
+        <Header />
+        {children ||
+          <Box>
+            <Text>{viewer.displayName}</Text>
+            <Box marginVertical={1}>
+              <Image
+                src={getUserPhotoUrl(viewer)}
+                size={{ height: 100, width: 100 }}
+                title={viewer.displayName}
+              />
+            </Box>
+            <Box flexDirection="row">
+              <SignOut />
+            </Box>
+          </Box>}
+      </Box>;
 
 export default compose(
   connect((state: State) => ({

@@ -314,18 +314,22 @@ const openColorOriginal = {
 };
 
 // I don't know why, but "| any" is required.
-const openColor: OpenColor | any = Object
-  .keys(openColorOriginal)
-  .reduce((flatten, colorName) => {
+const openColor: OpenColor | any = Object.keys(openColorOriginal).reduce(
+  (flatten, colorName) => {
     const values = openColorOriginal[colorName];
     if (typeof values === 'string') {
       return { ...flatten, [colorName]: values };
     }
-    const colors = values.reduce((values, colorValue, i) => ({
-      ...values,
-      [colorName + i]: colorValue,
-    }), {});
+    const colors = values.reduce(
+      (values, colorValue, i) => ({
+        ...values,
+        [colorName + i]: colorValue,
+      }),
+      {},
+    );
     return { ...flatten, ...colors };
-  }, {});
+  },
+  {},
+);
 
 export default openColor;

@@ -1,4 +1,4 @@
- // @flow
+// @flow
 import type { State, User } from '../../common/types';
 import Email from './Email';
 import React from 'react';
@@ -12,27 +12,26 @@ type SignInPageProps = {
   viewer: User,
 };
 
-const SignInPage = ({
-  location,
-  viewer,
-}: SignInPageProps) => (
-  viewer ?
-    <Redirect
-      to={(
-        location.state &&
-        location.state.from &&
-        location.state.from.pathname
-      ) || '/'}
-    />
-  :
-    <ScrollView>
-      <Email />
-      <Social />
-    </ScrollView>
-);
+const SignInPage = (
+  {
+    location,
+    viewer,
+  }: SignInPageProps,
+) =>
+  viewer
+    ? <Redirect
+        to={
+          (location.state &&
+            location.state.from &&
+            location.state.from.pathname) ||
+            '/'
+        }
+      />
+    : <ScrollView>
+        <Email />
+        <Social />
+      </ScrollView>;
 
-export default connect(
-  (state: State) => ({
-    viewer: state.users.viewer,
-  }),
-)(SignInPage);
+export default connect((state: State) => ({
+  viewer: state.users.viewer,
+}))(SignInPage);

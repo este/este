@@ -7,7 +7,6 @@ import React from 'react';
 
 const xfbml = (WrappedComponent: any) =>
   class Wrapper extends React.Component {
-
     el: Element;
     isMounted: boolean;
 
@@ -46,7 +45,6 @@ const xfbml = (WrappedComponent: any) =>
         />
       );
     }
-
   };
 
 export default xfbml;

@@ -15,7 +15,6 @@ class ValidationError extends BaseError {
     this.name = name;
     this.params = params;
   }
-
 }
 
 export default ValidationError;

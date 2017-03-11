@@ -23,10 +23,13 @@ type TextInputContext = {
 const computePlaceholderColor = textColor =>
   color(textColor).fade(0.5).toString();
 
-const TextInput = (props: TextInputProps, {
-  TextInput: PlatformTextInput,
-  theme,
-}: TextInputContext) => {
+const TextInput = (
+  props: TextInputProps,
+  {
+    TextInput: PlatformTextInput,
+    theme,
+  }: TextInputContext,
+) => {
   const [textStyle] = computeTextStyle(theme, props);
 
   const {
@@ -40,19 +43,23 @@ const TextInput = (props: TextInputProps, {
     ...restProps
   } = props;
 
-  const platformProps = isReactNative ? {
-    editable: !disabled,
-    underlineColorAndroid: 'transparent',
-    placeholderTextColor,
-  } : {
-    disabled,
-  };
-  const platformStyle = isReactNative ? {} : {
-    outline: 'none',
-    '::placeholder': {
-      color: placeholderTextColor,
-    },
-  };
+  const platformProps = isReactNative
+    ? {
+        editable: !disabled,
+        underlineColorAndroid: 'transparent',
+        placeholderTextColor,
+      }
+    : {
+        disabled,
+      };
+  const platformStyle = isReactNative
+    ? {}
+    : {
+        outline: 'none',
+        '::placeholder': {
+          color: placeholderTextColor,
+        },
+      };
   return (
     <Text
       as={PlatformTextInput}
@@ -60,7 +67,7 @@ const TextInput = (props: TextInputProps, {
       // Browsers need explicit height for correct vertical align.
       height={height}
       padding={padding}
-      {...(disabled ? { opacity: theme.states.disabled.opacity } : null)}
+      {...disabled ? { opacity: theme.states.disabled.opacity } : null}
       {...platformProps}
       {...restProps}
       style={(theme, textStyle) => ({

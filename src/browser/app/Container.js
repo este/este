@@ -3,7 +3,7 @@ import React from 'react';
 import { Box } from '../../common/components';
 
 type ContainerProps = {
-  children?: any
+  children?: any,
 };
 
 const Container = ({ children }: ContainerProps) => (
@@ -14,7 +14,9 @@ const Container = ({ children }: ContainerProps) => (
       maxWidth: theme.container.maxWidths.big,
       minHeight: '100vh', // make footer sticky
     })}
-  >{children}</Box>
+  >
+    {children}
+  </Box>
 );
 
 export default Container;

@@ -26,22 +26,23 @@ const getLocale = req =>
     ? config.defaultLocale
     : req.acceptsLanguages(config.locales) || config.defaultLocale;
 
-const createStore = (found, req): Object => configureStore({
-  initialState: {
-    ...initialState,
-    device: {
-      ...initialState.device,
-      host: getHost(req),
+const createStore = (found, req): Object =>
+  configureStore({
+    initialState: {
+      ...initialState,
+      device: {
+        ...initialState.device,
+        host: getHost(req),
+      },
+      intl: {
+        ...initialState.intl,
+        currentLocale: getLocale(req),
+        initialNow: Date.now(),
+      },
     },
-    intl: {
-      ...initialState.intl,
-      currentLocale: getLocale(req),
-      initialNow: Date.now(),
-    },
-  },
-  platformReducers: { found: found.reducer },
-  platformStoreEnhancers: found.storeEnhancers,
-});
+    platformReducers: { found: found.reducer },
+    platformStoreEnhancers: found.storeEnhancers,
+  });
 
 const renderBody = (renderArgs, store) => {
   const felaRenderer = configureFela();
@@ -57,8 +58,11 @@ const renderBody = (renderArgs, store) => {
   return { html, helmet, css };
 };
 
-const renderScripts = (state, appJsFilename) =>
+const renderScripts = (
+  state,
+  appJsFilename,
   // github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
+) =>
   `
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};

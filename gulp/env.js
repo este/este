@@ -1,3 +1,4 @@
+// @flow
 import args from './support/args';
 import gulp from 'gulp';
 import { execSync } from 'child_process';

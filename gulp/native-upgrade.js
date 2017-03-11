@@ -1,8 +1,10 @@
+// @flow
 /* eslint-disable no-console */
 import gulp from 'gulp';
 
 gulp.task('native-upgrade', () => {
-  console.log(`
+  console.log(
+    `
     Steps to upgrade React Native in Este
 
     - Update package.json
@@ -25,5 +27,6 @@ gulp.task('native-upgrade', () => {
         - check git diff
 
     Yeah, it's that easy.
-  `);
+  `,
+  );
 });

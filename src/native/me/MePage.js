@@ -16,21 +16,22 @@ const MePage = (
   {
     viewer,
   }: MePageProps,
-) => !viewer
-  ? <Redirect to="/" />
-  : <Box alignItems="center">
-      <Text marginTop={4} size={1}>
-        {viewer.displayName}
-      </Text>
-      <Box
-        as={Image}
-        source={{ uri: getUserPhotoUrl(viewer) }}
-        width={4}
-        height={4}
-        marginVertical={2}
-      />
-      <SignOut />
-    </Box>;
+) =>
+  !viewer
+    ? <Redirect to="/" />
+    : <Box alignItems="center">
+        <Text marginTop={4} size={1}>
+          {viewer.displayName}
+        </Text>
+        <Box
+          as={Image}
+          source={{ uri: getUserPhotoUrl(viewer) }}
+          width={4}
+          height={4}
+          marginVertical={2}
+        />
+        <SignOut />
+      </Box>;
 
 export default connect((state: State) => ({
   viewer: state.users.viewer,

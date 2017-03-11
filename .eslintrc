@@ -21,19 +21,25 @@
     "jsx-a11y/anchor-has-content": 0, // Does not work with new components.
     "jsx-a11y/html-has-lang": 0, // Can not recognize the Helmet.
     "no-confusing-arrow": 0, // This rule is confusing.
+    "no-mixed-operators": 0, // Prettier ftw.
     "no-nested-ternary": 0, // Nice for JSX.
     "no-param-reassign": 0, // We love param reassignment. Naming is hard.
     "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
+    "indent": 0, // Prettier ftw.
+    // React.
     "react/forbid-prop-types": 0, // Este is going to use Flow types.
     "react/jsx-filename-extension": 0, // No, JSX belongs to .js files.
+    "react/jsx-closing-bracket-location": 0, // Prettier ftw.
     "react/jsx-indent": 0, // Prettier ftw.
+    "react/jsx-indent-props": 0, // Prettier ftw.
     "react/no-unused-prop-types": 0, // Este is going to use Flow types.
     "react/prop-types": 0, // Can not detect flowtype correctly.
     "react/require-default-props": 0, // Checked by flowtype.
-    "indent": 0, // It is jlongster/prettier responsibility.
     // React Native.
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
+    // Flow.
+    "flowtype/space-after-type-colon": 0, // Prettier ftw.
     // Rules for functional programming. We do not need Object.freeze.
     "fp/no-mutating-assign": 2
     // Can not be enabled yet, it requires a lot of refactoring.

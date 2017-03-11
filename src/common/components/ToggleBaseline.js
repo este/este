@@ -14,13 +14,13 @@ type ToggleBaselineProps = {
   toggleBaseline: typeof toggleBaseline,
 };
 
-const ToggleBaseline = ({
-  baselineShown,
-  toggleBaseline,
-}: ToggleBaselineProps) => (
-  <Box
-    flexDirection="row"
-  >
+const ToggleBaseline = (
+  {
+    baselineShown,
+    toggleBaseline,
+  }: ToggleBaselineProps,
+) => (
+  <Box flexDirection="row">
     <OutlineButton
       size={-1}
       key={baselineShown} // To enforce blur after click.

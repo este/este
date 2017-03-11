@@ -3,7 +3,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   h1: {
-    defaultMessage: 'This page isn\'t available',
+    defaultMessage: "This page isn't available",
     id: 'notFound.h1',
   },
   p: {

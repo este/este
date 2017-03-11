@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-console */
 import args from './support/args';
 import fs from 'fs';
@@ -12,26 +13,29 @@ const urls = {
   '/404': '404.html',
 };
 
-gulp.task('to-html', (done) => {
+gulp.task('to-html', done => {
   args.production = true;
-  process.env.IS_SERVERLESS = true;
+  process.env.IS_SERVERLESS = 'true';
 
-  const fetch = url => new Promise((resolve, reject) => {
-    http.get({ host: 'localhost', path: url, port: 3000 }, (res) => {
-      // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
-      res.setEncoding('utf8');
-      let body = '';
-      res.on('data', (data) => {
-        body += data;
-      });
-      res.on('end', () => resolve(body));
-    }).on('error', reject);
-  });
+  const fetch = url =>
+    new Promise((resolve, reject) => {
+      http
+        .get({ host: 'localhost', path: url, port: 3000 }, res => {
+          // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
+          res.setEncoding('utf8');
+          let body = '';
+          res.on('data', data => {
+            body += data;
+          });
+          res.on('end', () => resolve(body));
+        })
+        .on('error', reject);
+    });
 
   const moveAssets = () => {
     const assets = fs.readdirSync('build');
     fs.mkdirSync(path.join('build', 'assets'));
-    assets.forEach((fileName) => {
+    assets.forEach(fileName => {
       fs.renameSync(
         path.join('build', fileName),
         path.join('build', 'assets', fileName),
@@ -40,16 +44,17 @@ gulp.task('to-html', (done) => {
   };
 
   const toHtml = () => {
-    const promises = Object.keys(urls).map(url => fetch(url).then((html) => {
-      fs.writeFile(path.join('build', urls[url]), html);
-    }));
+    const promises = Object.keys(urls).map(url =>
+      fetch(url).then(html => {
+        fs.writeFile(path.join('build', urls[url]), html);
+      }));
     return Promise.all(promises);
   };
 
   runSequence('eslint-ci', 'jest', 'flow', 'clean', 'build', () => {
     const proc = spawn('node', ['./src/server']);
     proc.stderr.on('data', data => console.log(data.toString()));
-    proc.stdout.on('data', async (data) => {
+    proc.stdout.on('data', async data => {
       data = data.toString();
       if (data.indexOf('Server started') === -1) return;
       try {

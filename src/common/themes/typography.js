@@ -31,14 +31,15 @@ type typographyProps = {|
   lineHeight: number,
 |};
 
-const typography = ({
-  fontSize,
-  fontSizeScale,
-  lineHeight,
-}: typographyProps) => ({
-  fontSize: (level: number) => Array
-    .from(Array(Math.abs(level)))
-    .reduce(
+const typography = (
+  {
+    fontSize,
+    fontSizeScale,
+    lineHeight,
+  }: typographyProps,
+) => ({
+  fontSize: (level: number) =>
+    Array.from(Array(Math.abs(level))).reduce(
       size => {
         const scaleRatio = typeof fontSizeScale === 'string'
           ? scale[fontSizeScale]

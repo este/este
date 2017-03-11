@@ -13,35 +13,38 @@ type IntlPageProps = {
   setCurrentLocale: typeof setCurrentLocale,
 };
 
-const Locales = ({
-  currentLocale,
-  locales,
-  setCurrentLocale,
-}) => (
+const Locales = (
+  {
+    currentLocale,
+    locales,
+    setCurrentLocale,
+  },
+) => (
   <Box marginBottom={1}>
-    {locales.map(locale =>
+    {locales.map(locale => (
       <Button
         bold={locale === currentLocale}
         key={locale}
         onPress={() => setCurrentLocale(locale)}
         size={1}
-      >{locale.toLowerCase()}</Button>,
-    )}
+      >
+        {locale.toLowerCase()}
+      </Button>
+    ))}
   </Box>
 );
 
-const IntlPage = ({
-  currentLocale,
-  locales,
-  setCurrentLocale,
-}: IntlPageProps) => {
+const IntlPage = (
+  {
+    currentLocale,
+    locales,
+    setCurrentLocale,
+  }: IntlPageProps,
+) => {
   const componentRenderedAt = Date.now();
   return (
     <ScrollView>
-      <Box
-        alignItems="center"
-        paddingVertical={1}
-      >
+      <Box alignItems="center" paddingVertical={1}>
         <Locales
           currentLocale={currentLocale}
           locales={locales}
@@ -53,16 +56,16 @@ const IntlPage = ({
           month="short"
           value={Date.now()}
           year="numeric"
-        >{message =>
-          <Text>{message}</Text>
-        }</FormattedDate>
+        >
+          {message => <Text>{message}</Text>}
+        </FormattedDate>
         <FormattedRelative
           initialNow={componentRenderedAt}
           updateInterval={1000 * 1}
           value={componentRenderedAt}
-        >{message =>
-          <Text>{message}</Text>
-        }</FormattedRelative>
+        >
+          {message => <Text>{message}</Text>}
+        </FormattedRelative>
       </Box>
     </ScrollView>
   );

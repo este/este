@@ -1,3 +1,4 @@
+// @flow
 import fs from 'fs';
 import gulp from 'gulp';
 import injectFavicon from './support/favicon/favicon';
