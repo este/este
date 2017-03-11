@@ -68,6 +68,14 @@ const FieldsPage = ({ fields }) => {
             selected="other"
           />
         </Box>
+        <Box marginBottom={1}>
+          <select multiple {...fields.skills}>
+            <option value="javascript">JavaScript</option>
+            <option value="react">React</option>
+            <option value="nodejs">Node.js</option>
+            <option value="este">Este</option>
+          </select>
+        </Box>
         <Checkbox
           {...fields.agree}
           color="warning"
@@ -95,6 +103,7 @@ export default compose(
       'likeDogs', // checkbox
       'gender', // radios
       'agree',
+      'skills',
     ],
     getInitialState: () => ({
       // Of course, we can use passed props if we want.
