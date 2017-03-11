@@ -48,12 +48,16 @@ const Todos = (
         {intl.formatMessage(todosMessages.empty)}
       </Text>
     );
-  } // It's ok and recommended to sort things in view, but for the bigger data // leverage reactjs/reselect or bvaughn/react-virtualized.
+  }
+
+  // It's ok and recommended to sort things in view, but for the bigger data
+  // leverage reactjs/reselect or bvaughn/react-virtualized.
   const sortedTodos: Array<Todo> = compose(
     reverse,
     sortBy(prop('createdAt')),
     values,
   )(todos);
+
   return (
     <Box>
       {sortedTodos.map(todo => (
@@ -67,6 +71,7 @@ const Todos = (
     </Box>
   );
 };
+
 export default compose(
   connect(
     (state: State) => ({
