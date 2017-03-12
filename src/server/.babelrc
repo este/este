@@ -1,6 +1,8 @@
 {
   "presets": ["env", "react", "stage-1"],
   "plugins": [
+    "ramda",
+    "lodash",
     ["transform-runtime", {
       "helpers": false,
       "polyfill": false,

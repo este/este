@@ -1,8 +1,8 @@
 // @flow
 import type { Action, Deps } from '../types';
+import invariant from 'invariant';
 import createUserFirebase from '../users/createUserFirebase';
 import firebaseMessages from './firebaseMessages';
-import invariant from 'invariant';
 import isReactNative from '../../common/app/isReactNative';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';

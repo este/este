@@ -1,6 +1,7 @@
 // Super simple sync / async validation based on chriso/validator.js
 import ValidationError from './ValidationError';
-import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
+import trim from 'validator/lib/trim';
 
 // Subclass to add custom validations.
 class Validation {
@@ -8,8 +9,11 @@ class Validation {
   constructor(object) {
     this.object = object;
     this.currentProp = null;
-    this.validator = validator;
     this.promise = Promise.resolve();
+  }
+
+  static isEmptyString(value) {
+    return !trim(value);
   }
 
   validate(callback, { required } = {}) {
@@ -17,14 +21,10 @@ class Validation {
     const value = this.object[prop];
     const object = this.object;
     this.promise = this.promise.then(() => {
-      if (required && !this.isEmptyString(value)) return;
+      if (required && !Validation.isEmptyString(value)) return;
       callback(value, prop, object);
     });
     return this;
-  }
-
-  isEmptyString(value) {
-    return !this.validator.toString(value).trim();
   }
 
   prop(prop) {
@@ -43,7 +43,7 @@ class Validation {
 
   email() {
     return this.validate((value, prop) => {
-      if (this.validator.isEmail(value)) return;
+      if (isEmail(value)) return;
       throw new ValidationError('email', { prop });
     });
   }

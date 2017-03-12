@@ -23,10 +23,10 @@ paths.forEach(([feature, props]) => {
   transforms.push(createTransform(inOut, inOut, { whitelist: [feature] }));
 });
 
-const configureStorage = (appName: string) => ({
+const configureStorage = (appName: string, platformTransforms?: Array<Function> = []) => ({
   debounce: 100,
   keyPrefix: `${appName}:`,
-  transforms,
+  transforms: [...transforms, ...platformTransforms],
   whitelist,
 });
 

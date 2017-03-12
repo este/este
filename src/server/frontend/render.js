@@ -18,18 +18,31 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 // createInitialState loads files, so it must be called once.
 const initialState = createInitialState();
 
+const localeList = config.locales.join(', ');
+
 const getHost = req =>
   `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
 
+const getTheme = req =>
+  process.env.IS_SERVERLESS
+    ? config.defaultTheme // No SSR, use default theme
+    : (req.cookies && req.cookies['app.currentTheme']) // User set language explicitly in app
+      || config.defaultTheme; // No preference, use default theme
+
 const getLocale = req =>
   process.env.IS_SERVERLESS
-    ? config.defaultLocale
-    : req.acceptsLanguages(config.locales) || config.defaultLocale;
+    ? config.defaultLocale // No SSR, use default locale
+    : (req.cookies && req.cookies['intl.currentLocale']) // User set language explicitly in app
+      || req.acceptsLanguages(config.locales) // Browser specified language
+      || config.defaultLocale; // No preference, use default locale
 
 const createStore = (found, req): Object =>
   configureStore({
     initialState: {
       ...initialState,
+      app: {
+        currentTheme: getTheme(req),
+      },
       device: {
         ...initialState.device,
         host: getHost(req),
@@ -44,8 +57,8 @@ const createStore = (found, req): Object =>
     platformStoreEnhancers: found.storeEnhancers,
   });
 
-const renderBody = (renderArgs, store) => {
-  const felaRenderer = configureFela();
+const renderBody = (renderArgs, store, userAgent) => {
+  const felaRenderer = configureFela(userAgent);
   const html = renderToString(
     <BaseRoot felaRenderer={felaRenderer} store={store}>
       <RouterProvider router={renderArgs.router}>
@@ -95,10 +108,12 @@ const renderHtml = (state, body) => {
 const render = async (req: Object, res: Object, next: Function) => {
   const found = configureFound(Root.routeConfig, new ServerProtocol(req.url));
   const store = createStore(found, req);
+  const userAgent = req.headers['user-agent'];
   try {
     await found.getRenderArgs(store, renderArgs => {
-      const body = renderBody(renderArgs, store);
+      const body = renderBody(renderArgs, store, userAgent);
       const html = renderHtml(store.getState(), body);
+      res.header('Content-Language', localeList);
       res.status(renderArgs.error ? renderArgs.error.status : 200).send(html);
     });
   } catch (error) {

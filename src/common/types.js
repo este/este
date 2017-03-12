@@ -111,6 +111,7 @@ export type Action =
   | { type: 'RESET_PASSWORD', payload: { email: string } }
   | { type: 'SAVE_USER_DONE' }
   | { type: 'SET_CURRENT_LOCALE', payload: { locale: string } }
+  | { type: 'LOAD_CURRENT_LOCALE', payload: { locale: string } }
   | { type: 'SET_THEME', payload: { theme: string } }
   | { type: 'SIGN_IN', payload: { providerName: string, options?: Object } }
   | { type: 'SIGN_IN_DONE', payload: { user: ?User } }

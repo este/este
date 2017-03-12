@@ -11,16 +11,16 @@ import { connect } from 'react-redux';
 type ButtonsProps = {
   addHundredTodos: typeof addHundredTodos,
   clearAllTodos: typeof clearAllTodos,
-  isEmpty: boolean,
+  isTodoEmpty: boolean,
 };
 
-const Buttons = ({ addHundredTodos, clearAllTodos, isEmpty }: ButtonsProps) => (
+const Buttons = ({ addHundredTodos, clearAllTodos, isTodoEmpty }: ButtonsProps) => (
   <Box flexDirection="row" marginHorizontal={-0.25} marginVertical={1}>
     <FormattedMessage {...buttonsMessages.clearAll}>
       {message => (
         <Button
           primary
-          disabled={isEmpty}
+          disabled={isTodoEmpty}
           marginHorizontal={0.25}
           onPress={clearAllTodos}
         >
@@ -39,7 +39,7 @@ const Buttons = ({ addHundredTodos, clearAllTodos, isEmpty }: ButtonsProps) => (
 );
 
 export default compose(
-  connect((state: State) => ({ isEmpty: isEmpty(state.todos.all) }), {
+  connect((state: State) => ({ isTodoEmpty: isEmpty(state.todos.all) }), {
     addHundredTodos,
     clearAllTodos,
   }),

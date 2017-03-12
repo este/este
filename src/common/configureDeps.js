@@ -1,12 +1,9 @@
 // @flow
 
 import type { Deps, State } from './types';
-// By feature import doesn't work in Node.js. Tested with 3.6.10.
-// firebase.google.com/docs/web/setup
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/database';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 import validate from './validate';
 
 // Ensure only one Firebase instance. I don't know how costly new instance is
