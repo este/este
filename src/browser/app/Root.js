@@ -23,24 +23,25 @@ class StaticContainer extends React.Component {
   }
 }
 
-export const createRouterRender = (renderArgs: any) => createRender({
-  renderPending: () => (
-    <div>
-      <StaticContainer>
-        {null}
-      </StaticContainer>
-      <LoadingBar />
-    </div>
-  ),
-  renderReady: ({ elements }) => (
-    <div>
-      <StaticContainer shouldUpdate>
-        <ElementsRenderer elements={elements} />
-      </StaticContainer>
-    </div>
-  ),
-  renderError,
-})(renderArgs);
+export const createRouterRender = (renderArgs: any) =>
+  createRender({
+    renderPending: () => (
+      <div>
+        <StaticContainer>
+          {null}
+        </StaticContainer>
+        <LoadingBar />
+      </div>
+    ),
+    renderReady: ({ elements }) => (
+      <div>
+        <StaticContainer shouldUpdate>
+          <ElementsRenderer elements={elements} />
+        </StaticContainer>
+      </div>
+    ),
+    renderError,
+  })(renderArgs);
 
 const ConnectedRouter = createConnectedRouter({
   render: renderArgs => (

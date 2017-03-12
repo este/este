@@ -30,12 +30,18 @@ class Loading extends React.Component {
 
   componentDidMount() {
     // www.nngroup.com/articles/response-times-3-important-limits
-    this.timer = setTimeout(() => {
-      this.setState({ currentText: messages.loadingText });
-    }, 1000);
-    this.longTimer = setTimeout(() => {
-      this.setState({ currentText: messages.longLoadingText });
-    }, 10000);
+    this.timer = setTimeout(
+      () => {
+        this.setState({ currentText: messages.loadingText });
+      },
+      1000,
+    );
+    this.longTimer = setTimeout(
+      () => {
+        this.setState({ currentText: messages.longLoadingText });
+      },
+      10000,
+    );
   }
 
   componentWillUnmount() {

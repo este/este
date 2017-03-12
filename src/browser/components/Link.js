@@ -11,26 +11,20 @@ type LinkProps = TextProps & {
 const isExternalLink = to => to.includes('://');
 
 const Anchor = ({ to, ...props }) => (
-  <a
-    href={to}
-    rel="noopener noreferrer"
-    target="_blank"
-    {...props}
-  />
+  <a href={to} rel="noopener noreferrer" target="_blank" {...props} />
 );
 
-const RouterLink = (props) => (
-  <FoundRouterLink
-    activeStyle={{ textDecoration: 'underline' }}
-    {...props}
-  />
+const RouterLink = props => (
+  <FoundRouterLink activeStyle={{ textDecoration: 'underline' }} {...props} />
 );
 
-const Link = ({
-  color = 'primary',
-  style,
-  ...props
-}: LinkProps) => {
+const Link = (
+  {
+    color = 'primary',
+    style,
+    ...props
+  }: LinkProps,
+) => {
   const AnchorOrRouterLink = isExternalLink(props.to) ? Anchor : RouterLink;
   const linkStyle = {
     ':hover': {

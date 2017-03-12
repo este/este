@@ -22,29 +22,34 @@ type ButtonContext = {
   theme: Theme,
 };
 
-const Button = ({
-  as,
-  accessibilityLabel,
-  boxStyle,
-  children,
-  disabled,
-  onPress,
-  outline,
-  textStyle,
-  ...props
-}: ButtonProps, {
-  Button: PlatformButton,
-  theme,
-}: ButtonContext) => {
-  const platformProps = isReactNative ? {
-    accessibilityComponentType: 'button',
+const Button = (
+  {
+    as,
     accessibilityLabel,
-    accessibilityTraits: ['button'],
-    activeOpacity: theme.states.active.opacity,
+    boxStyle,
+    children,
+    disabled,
     onPress,
-  } : {
-    onClick: onPress,
-  };
+    outline,
+    textStyle,
+    ...props
+  }: ButtonProps,
+  {
+    Button: PlatformButton,
+    theme,
+  }: ButtonContext,
+) => {
+  const platformProps = isReactNative
+    ? {
+        accessibilityComponentType: 'button',
+        accessibilityLabel,
+        accessibilityTraits: ['button'],
+        activeOpacity: theme.states.active.opacity,
+        onPress,
+      }
+    : {
+        onClick: onPress,
+      };
 
   const colorProps = Object.keys(theme.colors);
 
@@ -92,7 +97,7 @@ const Button = ({
       props = {
         // Ensure vertical Rhythm for Button size < 0. The lineHeight is the
         // only possible way how to do it. It doesn't work for multilines
-        lineHeight: theme.typography.lineHeight - (2 * props.borderWidth),
+        lineHeight: theme.typography.lineHeight - 2 * props.borderWidth,
         ...props,
       };
     }
@@ -106,10 +111,13 @@ const Button = ({
   // the rest. We can also use boxStyle and textStyle props for further styling.
   const [computedTextStyle, allBoxProps] = computeTextStyle(theme, props);
   // To prevent "Unknown prop" warning, we have to remove color props.
-  const boxProps = colorProps.reduce((props, prop) => {
-    delete props[prop];
-    return props;
-  }, allBoxProps);
+  const boxProps = colorProps.reduce(
+    (props, prop) => {
+      delete props[prop];
+      return props;
+    },
+    allBoxProps,
+  );
   const childrenIsText = typeof children === 'string';
   const {
     borderRadius = theme.button.borderRadius,
@@ -127,18 +135,18 @@ const Button = ({
       {...boxProps}
       style={boxStyle}
     >
-      {childrenIsText ?
-        <Text
-          // Pass backgroundColor to Text for maybeFixFontSmoothing function.
-          backgroundColor={props.backgroundColor}
-          style={theme => ({
-            ...computedTextStyle,
-            ...(textStyle && textStyle(theme, computedTextStyle)),
-          })}
-        >{children}</Text>
-      :
-        children
-      }
+      {childrenIsText
+        ? <Text
+            // Pass backgroundColor to Text for maybeFixFontSmoothing function.
+            backgroundColor={props.backgroundColor}
+            style={theme => ({
+              ...computedTextStyle,
+              ...(textStyle && textStyle(theme, computedTextStyle)),
+            })}
+          >
+            {children}
+          </Text>
+        : children}
     </Box>
   );
 };

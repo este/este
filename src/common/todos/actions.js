@@ -2,37 +2,39 @@
 import type { Action, Deps, Todo } from '../types';
 import { range } from 'ramda';
 
-export const addHundredTodos = () => ({ getUid, now }: Deps): Action => {
-  const todos = range(0, 100).map(() => {
-    const id = getUid();
-    // Note how we can enforce shape with type annotation. This is a special
-    // case because flowtype doesn't know Ramda. Nobody wrotes typedefs yet.
-    // Atom editor can show flow uncovered code on click.
-    const todo: Todo = {
-      completed: false,
-      createdAt: now(),
-      id,
-      title: `Item #${id}`,
+export const addHundredTodos = () =>
+  ({ getUid, now }: Deps): Action => {
+    const todos = range(0, 100).map(() => {
+      const id = getUid();
+      // Note how we can enforce shape with type annotation. This is a special
+      // case because flowtype doesn't know Ramda. Nobody wrotes typedefs yet.
+      // Atom editor can show flow uncovered code on click.
+      const todo: Todo = {
+        completed: false,
+        createdAt: now(),
+        id,
+        title: `Item #${id}`,
+      };
+      return todo;
+    });
+    return {
+      type: 'ADD_HUNDRED_TODOS',
+      payload: { todos },
     };
-    return todo;
-  });
-  return {
-    type: 'ADD_HUNDRED_TODOS',
-    payload: { todos },
   };
-};
 
-export const addTodo = (title: string) => ({ getUid, now }: Deps): Action => ({
-  type: 'ADD_TODO',
-  payload: {
-    todo: {
-      completed: false,
-      createdAt: now(),
-      id: getUid(),
-      title: title.trim(),
+export const addTodo = (title: string) =>
+  ({ getUid, now }: Deps): Action => ({
+    type: 'ADD_TODO',
+    payload: {
+      todo: {
+        completed: false,
+        createdAt: now(),
+        id: getUid(),
+        title: title.trim(),
+      },
     },
-  },
-});
+  });
 
 export const clearAllCompletedTodos = (): Action => ({
   type: 'CLEAR_ALL_COMPLETED_TODOS',

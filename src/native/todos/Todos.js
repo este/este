@@ -16,10 +16,12 @@ type TodoItemProps = {
   toggleTodoCompleted: typeof toggleTodoCompleted,
 };
 
-const TodoItem = ({
-  todo,
-  toggleTodoCompleted,
-}: TodoItemProps) => (
+const TodoItem = (
+  {
+    todo,
+    toggleTodoCompleted,
+  }: TodoItemProps,
+) => (
   <Box
     borderBottomWidth={1}
     flexDirection="row"
@@ -52,14 +54,9 @@ const IsEmpty = () => (
   <Box alignItems="center" justifyContent="center" flex={1}>
     <Image source={require('./img/EmptyState.png')} />
     <FormattedMessage {...todosMessages.empty}>
-      {message =>
-        <Text
-          bold
-          color="gray"
-          marginTop={1}
-          size={1}
-        >{message}</Text>
-      }
+      {message => (
+        <Text bold color="gray" marginTop={1} size={1}>{message}</Text>
+      )}
     </FormattedMessage>
   </Box>
 );
@@ -69,10 +66,12 @@ type TodosProps = {
   toggleTodoCompleted: typeof toggleTodoCompleted,
 };
 
-const Todos = ({
-  todos,
-  toggleTodoCompleted,
-}: TodosProps) => {
+const Todos = (
+  {
+    todos,
+    toggleTodoCompleted,
+  }: TodosProps,
+) => {
   if (isEmpty(todos)) {
     return <IsEmpty />;
   }
@@ -85,13 +84,13 @@ const Todos = ({
 
   return (
     <ScrollView>
-      {sortedTodos.map(todo =>
+      {sortedTodos.map(todo => (
         <TodoItem
           todo={todo}
           toggleTodoCompleted={toggleTodoCompleted}
           key={todo.id}
-        />,
-      )}
+        />
+      ))}
       <Footer />
     </ScrollView>
   );

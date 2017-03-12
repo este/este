@@ -1,3 +1,4 @@
+// @flow
 import bg from 'gulp-bg';
 import gulp from 'gulp';
 

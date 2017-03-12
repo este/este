@@ -1,3 +1,4 @@
+// @flow
 import del from 'del';
 import fs from 'fs';
 import gulp from 'gulp';

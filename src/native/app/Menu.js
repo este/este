@@ -21,23 +21,24 @@ let MenuLink = ({ appShowMenu, message, ...props }) => (
         justifyContent="flex-start"
         activeStyle={theme => ({ backgroundColor: theme.colors.open.gray8 })}
         textStyle={theme => ({ color: theme.colors.open.gray2 })}
-      >{message}</Link>
+      >
+        {message}
+      </Link>
     )}
   </FormattedMessage>
 );
 
-MenuLink = connect(
-  null,
-  { appShowMenu },
-)(MenuLink);
+MenuLink = connect(null, { appShowMenu })(MenuLink);
 
 type MenuProps = {
   viewer?: User,
 };
 
-const Menu = ({
-  viewer,
-}: MenuProps) => (
+const Menu = (
+  {
+    viewer,
+  }: MenuProps,
+) => (
   <Box
     flex={1}
     paddingHorizontal={0.5}
@@ -49,17 +50,13 @@ const Menu = ({
       <MenuLink to="/todos" message={linksMessages.todos} />
       <MenuLink to="/intl" message={linksMessages.intl} />
       <MenuLink to="/offline" message={linksMessages.offline} />
-      {viewer ?
-        <MenuLink to="/me" message={linksMessages.me} />
-      :
-        <MenuLink to="/signin" message={linksMessages.signIn} />
-      }
+      {viewer
+        ? <MenuLink to="/me" message={linksMessages.me} />
+        : <MenuLink to="/signin" message={linksMessages.signIn} />}
     </ScrollView>
   </Box>
 );
 
-export default connect(
-  (state: State) => ({
-    viewer: state.users.viewer,
-  }),
-)(Menu);
+export default connect((state: State) => ({
+  viewer: state.users.viewer,
+}))(Menu);

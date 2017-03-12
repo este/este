@@ -15,16 +15,19 @@ type LinkContext = {
   router: any,
 };
 
-const Link = ({
-  activeStyle,
-  boxStyle,
-  exactly,
-  onPress,
-  to,
-  ...props
-}: LinkProps, {
-  router,
-}: LinkContext) => (
+const Link = (
+  {
+    activeStyle,
+    boxStyle,
+    exactly,
+    onPress,
+    to,
+    ...props
+  }: LinkProps,
+  {
+    router,
+  }: LinkContext,
+) => (
   <Match exactly={exactly} pattern={to}>
     {({ matched }) => (
       <Button

@@ -43,21 +43,24 @@ const createReportingMiddleware = () => {
     Raven.setExtraContext(context);
   };
 
-  return (store: any) => (next: any) => (action: Action) => {
-    if (action.type === 'APP_ERROR') {
-      captureException(action.payload.error);
-    } else if (action.type === 'ON_AUTH') {
-      setRavenUserContext(action.payload.firebaseUser);
-    }
-    setExtraContext(store.getState(), action);
-    return next(action);
-  };
+  return (store: any) =>
+    (next: any) =>
+      (action: Action) => {
+        if (action.type === 'APP_ERROR') {
+          captureException(action.payload.error);
+        } else if (action.type === 'ON_AUTH') {
+          setRavenUserContext(action.payload.firebaseUser);
+        }
+        setExtraContext(store.getState(), action);
+        return next(action);
+      };
 };
 
-const register = unhandledRejection => unhandledRejection(event => {
-  event.preventDefault();
-  captureException(event.detail.reason);
-});
+const register = unhandledRejection =>
+  unhandledRejection(event => {
+    event.preventDefault();
+    captureException(event.detail.reason);
+  });
 
 const configureReporting = (options: any) => {
   const { appVersion, sentryUrl, unhandledRejection } = options;

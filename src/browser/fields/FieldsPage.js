@@ -23,10 +23,7 @@ const FieldsPage = ({ fields }) => {
         heading="redux-fields"
         description="Simple and universal Redux forms"
       />
-      <Form
-        maxWidth={21}
-        onSubmit={onSubmit}
-      >
+      <Form maxWidth={21} onSubmit={onSubmit}>
         <Field
           {...fields.name}
           label="Name"
@@ -42,31 +39,13 @@ const FieldsPage = ({ fields }) => {
           placeholder="Some short description"
         />
         <Box marginBottom={1}>
-          <Checkbox
-            {...fields.likeDogs}
-            label="I like dogs"
-          />
-          <Checkbox
-            {...fields.likeCats}
-            label="I like cats"
-          />
+          <Checkbox {...fields.likeDogs} label="I like dogs" />
+          <Checkbox {...fields.likeCats} label="I like cats" />
         </Box>
         <Box flexDirection="row" marginBottom={1}>
-          <Radio
-            {...fields.gender}
-            label="Male"
-            selected="male"
-          />
-          <Radio
-            {...fields.gender}
-            label="Female"
-            selected="female"
-          />
-          <Radio
-            {...fields.gender}
-            label="Other"
-            selected="other"
-          />
+          <Radio {...fields.gender} label="Male" selected="male" />
+          <Radio {...fields.gender} label="Female" selected="female" />
+          <Radio {...fields.gender} label="Other" selected="other" />
         </Box>
         <Checkbox
           {...fields.agree}

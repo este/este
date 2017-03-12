@@ -96,6 +96,7 @@ React Native: [Getting Started](https://facebook.github.io/react-native/docs/get
 - `gulp messages-check` check missing and unused translations
 - `gulp messages-clear` remove unused translations
 - `gulp favicon` create universal favicon
+- `gulp prettier` prettify source code
 
 ## Production Tasks
 

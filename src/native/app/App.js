@@ -40,8 +40,12 @@ const App = (
 
   return (
     <Box flex={1}>
-      {Platform.OS === 'ios' && // Because iOS StatusBar is an overlay.
-        <StatusBar hidden={appMenuShown} />}
+      {Platform.OS === 'ios' &&
+        <StatusBar
+          hidden={
+            appMenuShown // Because iOS StatusBar is an overlay.
+          }
+        />}
       <SideMenu isOpen={appMenuShown} menu={<Menu />} onChange={appShowMenu}>
         <Page exactly pattern="/" component={HomePage} />
         <Page pattern="/intl" component={IntlPage} />

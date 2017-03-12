@@ -17,17 +17,22 @@ type HeaderProps = {
 // iOS status bar is an overlay with default height 20px. We add one baseline
 // to preserve the vertical rhythm. We also set height to ensure hairline
 // border height (various) is included.
-const platformStyles = () => Platform.OS === 'ios' ? {
-  paddingTop: 1,
-  height: 3,
-} : {
-  height: 2,
-};
+const platformStyles = () =>
+  Platform.OS === 'ios'
+    ? {
+        paddingTop: 1,
+        height: 3,
+      }
+    : {
+        height: 2,
+      };
 
-const HeaderButton = ({
-  right,
-  ...props
-}) => (
+const HeaderButton = (
+  {
+    right,
+    ...props
+  },
+) => (
   <Box
     alignSelf="stretch"
     flex={1}
@@ -44,20 +49,17 @@ const HeaderButton = ({
   </Box>
 );
 
-const HeaderIcon = (props) => (
-  <Text
-    as={Icon}
-    color="white"
-    size={1}
-    {...props}
-  />
+const HeaderIcon = props => (
+  <Text as={Icon} color="white" size={1} {...props} />
 );
 
-const Header = ({
-  appShowMenu,
-  menuShown,
-  title,
-}: HeaderProps) => (
+const Header = (
+  {
+    appShowMenu,
+    menuShown,
+    title,
+  }: HeaderProps,
+) => (
   <Box
     {...platformStyles()}
     backgroundColor="primary"

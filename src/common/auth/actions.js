@@ -66,12 +66,12 @@ const validateEmailAndPassword = (validate, fields) =>
     .simplePassword().promise;
 
 const mapFirebaseErrorToEsteValidationError = code => {
-  const prop = ({
+  const prop = {
     'auth/email-already-in-use': 'email',
     'auth/invalid-email': 'email',
     'auth/user-not-found': 'email',
     'auth/wrong-password': 'password',
-  })[code];
+  }[code];
   return new ValidationError(code, { prop });
 };
 
@@ -125,28 +125,29 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
         return Observable.of(signInFail(error));
       });
 
-  const nativeSignIn = () => Observable.from(
+  const nativeSignIn = () =>
+    Observable.from(
       FBSDK.LoginManager.logInWithReadPermissions(facebookPermissions),
     )
-    .mergeMap(result => {
-      if (result.isCancelled) {
-        // Mimic Firebase error to have the same universal API.
-        const error: any = new Error('auth/popup-closed-by-user');
-        error.code = 'auth/popup-closed-by-user';
-        throw error;
-      }
-      return Observable.from(FBSDK.AccessToken.getCurrentAccessToken());
-    })
-    .mergeMap(({ accessToken }) => {
-      const facebookCredential = firebaseAuth.FacebookAuthProvider.credential(
-        accessToken.toString(),
-      );
-      return Observable.from(
-        firebaseAuth().signInWithCredential(facebookCredential),
-      );
-    })
-    .map(firebaseUser => signInDone(firebaseUser))
-    .catch(error => Observable.of(signInFail(error)));
+      .mergeMap(result => {
+        if (result.isCancelled) {
+          // Mimic Firebase error to have the same universal API.
+          const error: any = new Error('auth/popup-closed-by-user');
+          error.code = 'auth/popup-closed-by-user';
+          throw error;
+        }
+        return Observable.from(FBSDK.AccessToken.getCurrentAccessToken());
+      })
+      .mergeMap(({ accessToken }) => {
+        const facebookCredential = firebaseAuth.FacebookAuthProvider.credential(
+          accessToken.toString(),
+        );
+        return Observable.from(
+          firebaseAuth().signInWithCredential(facebookCredential),
+        );
+      })
+      .map(firebaseUser => signInDone(firebaseUser))
+      .catch(error => Observable.of(signInFail(error)));
 
   return action$
     .filter((action: Action) => action.type === 'SIGN_IN')
@@ -173,9 +174,9 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
 };
 
 const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
-  action$.filter((action: Action) => action.type === 'SIGN_UP').mergeMap((
-    { payload: { providerName, options } },
-  ) => {
+  action$.filter((action: Action) => action.type === 'SIGN_UP').mergeMap(({
+    payload: { providerName, options },
+  }) => {
     invariant(
       providerName === 'password',
       `${providerName} provider not supported.`,

@@ -19,7 +19,6 @@ export type BoxProps = {
   as?: () => React.Element<*>,
   // Low level deliberately not typed.
   style?: (theme: Theme, style: Object) => Object,
-
   // Maybe rhythm props.
   margin?: number | string,
   marginHorizontal?: number | string,
@@ -45,10 +44,8 @@ export type BoxProps = {
   left?: number | string,
   right?: number | string,
   top?: number | string,
-
   flex?: number,
   backgroundColor?: Color,
-
   // Border props.
   borderBottomColor?: Color,
   borderBottomLeftRadius?: number,
@@ -66,16 +63,26 @@ export type BoxProps = {
   borderTopRightRadius?: number,
   borderTopWidth?: number,
   borderWidth?: number,
-
   // Just value props.
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline',
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline',
+  alignSelf?:
+    | 'auto'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'stretch'
+    | 'baseline',
   flexBasis?: number | string,
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
   flexGrow?: number,
   flexShrink?: number,
   flexWrap?: 'wrap' | 'nowrap',
-  justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around',
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around',
   opacity?: number,
   overflow?: 'visible' | 'hidden' | 'scroll',
   position?: 'absolute' | 'relative',
@@ -93,10 +100,13 @@ const setBorderTryEnsureRhythmViaPadding = (style, borderWidthProps) => {
     const borderWidthPropValue = borderWidthProps[borderWidthProp];
     if (typeof borderWidthPropValue !== 'number') return;
     style = { ...style, [borderWidthProp]: borderWidthPropValue };
-    const paddingProp =
-      borderWidthProp === 'borderBottomWidth' ? 'paddingBottom' :
-      borderWidthProp === 'borderLeftWidth' ? 'paddingLeft' :
-      borderWidthProp === 'borderRightWidth' ? 'paddingRight' : 'paddingTop';
+    const paddingProp = borderWidthProp === 'borderBottomWidth'
+      ? 'paddingBottom'
+      : borderWidthProp === 'borderLeftWidth'
+          ? 'paddingLeft'
+          : borderWidthProp === 'borderRightWidth'
+              ? 'paddingRight'
+              : 'paddingTop';
     const paddingPropValue = style[paddingProp];
     if (typeof paddingPropValue !== 'number') return;
     const compensatedPaddingPropValue = paddingPropValue - borderWidthPropValue;
@@ -107,78 +117,83 @@ const setBorderTryEnsureRhythmViaPadding = (style, borderWidthProps) => {
   return style;
 };
 
-const computeBoxStyle = (theme, {
-  // Maybe rhythm props.
-  margin,
-  marginVertical = margin,
-  marginHorizontal = margin,
-  marginTop = marginVertical,
-  marginBottom = marginVertical,
-  marginLeft = marginHorizontal,
-  marginRight = marginHorizontal,
-  padding,
-  paddingVertical = padding,
-  paddingHorizontal = padding,
-  paddingTop = paddingVertical,
-  paddingBottom = paddingVertical,
-  paddingLeft = paddingHorizontal,
-  paddingRight = paddingHorizontal,
-  height,
-  maxHeight,
-  maxWidth,
-  minHeight,
-  minWidth,
-  width,
-  bottom,
-  left,
-  right,
-  top,
+const computeBoxStyle = (
+  theme,
+  {
+    // Maybe rhythm props.
+    margin,
+    marginVertical = margin,
+    marginHorizontal = margin,
+    marginTop = marginVertical,
+    marginBottom = marginVertical,
+    marginLeft = marginHorizontal,
+    marginRight = marginHorizontal,
+    padding,
+    paddingVertical = padding,
+    paddingHorizontal = padding,
+    paddingTop = paddingVertical,
+    paddingBottom = paddingVertical,
+    paddingLeft = paddingHorizontal,
+    paddingRight = paddingHorizontal,
+    height,
+    maxHeight,
+    maxWidth,
+    minHeight,
+    minWidth,
+    width,
+    bottom,
+    left,
+    right,
+    top,
 
-  flex,
-  backgroundColor,
+    flex,
+    backgroundColor,
 
-  // Border props.
-  borderColor = 'gray',
-  // We can't use borderColor as default because some component in React Native,
-  // for example Image, doesn't support that.
-  borderBottomColor,
-  borderLeftColor,
-  borderRightColor,
-  borderTopColor,
-  borderRadius,
-  borderBottomLeftRadius = borderRadius,
-  borderBottomRightRadius = borderRadius,
-  borderTopLeftRadius = borderRadius,
-  borderTopRightRadius = borderRadius,
-  borderWidth = 0, // Enfore React Native behaviour. It also makes more sense.
-  borderBottomWidth = borderWidth,
-  borderLeftWidth = borderWidth,
-  borderRightWidth = borderWidth,
-  borderTopWidth = borderWidth,
-  borderStyle,
+    // Border props.
+    borderColor = 'gray',
+    // We can't use borderColor as default because some component in React Native,
+    // for example Image, doesn't support that.
+    borderBottomColor,
+    borderLeftColor,
+    borderRightColor,
+    borderTopColor,
+    borderRadius,
+    borderBottomLeftRadius = borderRadius,
+    borderBottomRightRadius = borderRadius,
+    borderTopLeftRadius = borderRadius,
+    borderTopRightRadius = borderRadius,
+    borderWidth = 0, // Enfore React Native behaviour. It also makes more sense.
+    borderBottomWidth = borderWidth,
+    borderLeftWidth = borderWidth,
+    borderRightWidth = borderWidth,
+    borderTopWidth = borderWidth,
+    borderStyle,
 
-  // Just value props.
-  alignItems,
-  alignSelf,
-  flexBasis,
-  flexDirection,
-  flexGrow,
-  flexShrink,
-  flexWrap,
-  justifyContent,
-  opacity,
-  overflow,
-  position,
-  zIndex,
+    // Just value props.
+    alignItems,
+    alignSelf,
+    flexBasis,
+    flexDirection,
+    flexGrow,
+    flexShrink,
+    flexWrap,
+    justifyContent,
+    opacity,
+    overflow,
+    position,
+    zIndex,
 
-  ...props
-}) => {
-  let style = isReactNative ? {} : {
-    // Enforce React Native behaviour for browsers.
-    position: 'relative',
-    flexDirection: 'column',
-    display: 'flex',
-  };
+    ...props
+  },
+) => {
+  let style = isReactNative
+    ? {}
+    : {
+        // Enforce React Native behaviour for browsers.
+        position: 'relative',
+        flexDirection: 'column',
+        display: 'flex',
+      };
 
   const maybeRhythmProps = {
     bottom,
@@ -273,15 +288,19 @@ const computeBoxStyle = (theme, {
   return [style, props];
 };
 
-const Box = ({
-  as,
-  style,
-  ...props
-}: BoxProps, { // Note no $Exact<BoxProps>. It's up to the rendered component.
-  View,
-  renderer,
-  theme,
-}: BoxContext) => {
+const Box = (
+  {
+    as,
+    style,
+    ...props
+  }: BoxProps,
+  {
+    // Note no $Exact<BoxProps>. It's up to the rendered component.
+    View,
+    renderer,
+    theme,
+  }: BoxContext,
+) => {
   const Component = as || View;
   const [boxStyle, restProps] = computeBoxStyle(theme, props);
   const rule = renderer.renderRule(() => ({

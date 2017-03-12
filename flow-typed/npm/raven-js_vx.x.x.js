@@ -1,4 +1,4 @@
-// flow-typed signature: d4d44f49d03ac9303de2a1106b904d44
+// flow-typed signature: aa5d93d4cc74a8cb7b7092df398138bf
 // flow-typed version: <<STUB>>/raven-js_v^3.0.3/flow_v0.38.0
 
 /**
@@ -138,11 +138,27 @@ declare module 'raven-js/src/singleton' {
   declare module.exports: any;
 }
 
+declare module 'raven-js/src/utils' {
+  declare module.exports: any;
+}
+
 declare module 'raven-js/template/_copyright' {
   declare module.exports: any;
 }
 
 declare module 'raven-js/test/integration/test' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/test/integration/throw-error' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/test/integration/throw-object' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/test/integration/throw-string' {
   declare module.exports: any;
 }
 
@@ -274,11 +290,23 @@ declare module 'raven-js/src/raven.js' {
 declare module 'raven-js/src/singleton.js' {
   declare module.exports: $Exports<'raven-js/src/singleton'>;
 }
+declare module 'raven-js/src/utils.js' {
+  declare module.exports: $Exports<'raven-js/src/utils'>;
+}
 declare module 'raven-js/template/_copyright.js' {
   declare module.exports: $Exports<'raven-js/template/_copyright'>;
 }
 declare module 'raven-js/test/integration/test.js' {
   declare module.exports: $Exports<'raven-js/test/integration/test'>;
+}
+declare module 'raven-js/test/integration/throw-error.js' {
+  declare module.exports: $Exports<'raven-js/test/integration/throw-error'>;
+}
+declare module 'raven-js/test/integration/throw-object.js' {
+  declare module.exports: $Exports<'raven-js/test/integration/throw-object'>;
+}
+declare module 'raven-js/test/integration/throw-string.js' {
+  declare module.exports: $Exports<'raven-js/test/integration/throw-string'>;
 }
 declare module 'raven-js/test/plugins/angular.test.js' {
   declare module.exports: $Exports<'raven-js/test/plugins/angular.test'>;

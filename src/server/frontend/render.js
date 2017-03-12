@@ -36,25 +36,26 @@ const getLocale = req =>
       || req.acceptsLanguages(config.locales) // Browser specified language
       || config.defaultLocale; // No preference, use default locale
 
-const createStore = (found, req): Object => configureStore({
-  initialState: {
-    ...initialState,
-    app: {
-      currentTheme: getTheme(req),
+const createStore = (found, req): Object =>
+  configureStore({
+    initialState: {
+      ...initialState,
+      app: {
+        currentTheme: getTheme(req),
+      },
+      device: {
+        ...initialState.device,
+        host: getHost(req),
+      },
+      intl: {
+        ...initialState.intl,
+        currentLocale: getLocale(req),
+        initialNow: Date.now(),
+      },
     },
-    device: {
-      ...initialState.device,
-      host: getHost(req),
-    },
-    intl: {
-      ...initialState.intl,
-      currentLocale: getLocale(req),
-      initialNow: Date.now(),
-    },
-  },
-  platformReducers: { found: found.reducer },
-  platformStoreEnhancers: found.storeEnhancers,
-});
+    platformReducers: { found: found.reducer },
+    platformStoreEnhancers: found.storeEnhancers,
+  });
 
 const renderBody = (renderArgs, store, userAgent) => {
   const felaRenderer = configureFela(userAgent);
@@ -70,8 +71,11 @@ const renderBody = (renderArgs, store, userAgent) => {
   return { html, helmet, css };
 };
 
-const renderScripts = (state, appJsFilename) =>
+const renderScripts = (
+  state,
+  appJsFilename,
   // github.com/yahoo/serialize-javascript#user-content-automatic-escaping-of-html-characters
+) =>
   `
     <script>
       window.__INITIAL_STATE__ = ${serialize(state)};

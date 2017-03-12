@@ -36,7 +36,10 @@ const HomePage = () => (
       <Image
         src={require('./50x50.png')}
         alt="50x50 placeholder"
-        size={{ height: 50, width: 50 }}
+        size={{
+          height: 50,
+          width: 50,
+        }}
       />
     </Box>
     <Text size={0}>normal text</Text>
@@ -59,5 +62,4 @@ const HomePage = () => (
     <ToggleBaseline />
   </Box>
 );
-
 export default HomePage;

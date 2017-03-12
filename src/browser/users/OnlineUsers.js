@@ -22,11 +22,12 @@ type OnlineUsersProps = {
   users: ?Array<User>,
 };
 
-const OnlineUsers = ({ users }: OnlineUsersProps) => users == null
-  ? <Text>No one is online.</Text>
-  : <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
-      {users.map(user => <OnlineUser key={user.id} user={user} />)}
-    </Box>;
+const OnlineUsers = ({ users }: OnlineUsersProps) =>
+  users == null
+    ? <Text>No one is online.</Text>
+    : <Box flexDirection="row" flexWrap="wrap" marginHorizontal={-0.25}>
+        {users.map(user => <OnlineUser key={user.id} user={user} />)}
+      </Box>;
 
 export default connect((state: State) => ({
   users: state.users.online,

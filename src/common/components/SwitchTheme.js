@@ -16,20 +16,19 @@ type SwitchThemeProps = {
 
 const getSortedThemeNames = themes => [
   'defaultTheme',
-  ...Object
-    .keys(themes)
-    .filter(key => key !== 'defaultTheme')
-    .sort(),
+  ...Object.keys(themes).filter(key => key !== 'defaultTheme').sort(),
 ];
 
 // This is just an example, but themes are useful. We can implement day / night
 // mode, or have web mobile, iOS, Android, whatever custom looks.
 
-const SwitchTheme = ({
-  currentTheme,
-  setTheme,
-  themes,
-}: SwitchThemeProps) => (
+const SwitchTheme = (
+  {
+    currentTheme,
+    setTheme,
+    themes,
+  }: SwitchThemeProps,
+) => (
   <Box>
     <Text bold>
       Switch Theme

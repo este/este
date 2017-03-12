@@ -4,9 +4,10 @@ import type { Theme } from '../../common/themes/types';
 import React from 'react';
 import { Box } from '../../common/components';
 
-type FormProps =
-  & BoxProps
-  & { children?: any, onSubmit?: (SyntheticEvent) => void };
+type FormProps = BoxProps & {
+  children?: any,
+  onSubmit?: (SyntheticEvent) => void,
+};
 
 type FormContext = { theme: Theme };
 
@@ -15,11 +16,12 @@ type FormContext = { theme: Theme };
 // TODO: Consider PlatformForm, aka Form for the React Native. Do we need it?
 const BrowserForm = props => <form {...props} />;
 
-const onSubmitWithPreventDefault = onSubmit => event => {
-  if (!onSubmit) return;
-  event.preventDefault();
-  onSubmit(event);
-};
+const onSubmitWithPreventDefault = onSubmit =>
+  event => {
+    if (!onSubmit) return;
+    event.preventDefault();
+    onSubmit(event);
+  };
 
 // Hack allowing to submit a form on key enter in input.
 const SubmitOnInputEnter = () => (

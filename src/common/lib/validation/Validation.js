@@ -5,7 +5,6 @@ import trim from 'validator/lib/trim';
 
 // Subclass to add custom validations.
 class Validation {
-
   // JSON to be validated.
   constructor(object) {
     this.object = object;
@@ -34,9 +33,12 @@ class Validation {
   }
 
   required() {
-    return this.validate((value, prop) => {
-      throw new ValidationError('required', { prop });
-    }, { required: true });
+    return this.validate(
+      (value, prop) => {
+        throw new ValidationError('required', { prop });
+      },
+      { required: true },
+    );
   }
 
   email() {
@@ -54,7 +56,6 @@ class Validation {
       throw new ValidationError('simplePassword', { prop, minLength });
     });
   }
-
 }
 
 export default Validation;

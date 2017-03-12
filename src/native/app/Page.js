@@ -22,12 +22,14 @@ const titles = {
   '/me': linksMessages.me,
 };
 
-const Page = ({
-  component: Component,
-  exactly,
-  intl,
-  pattern,
-}: PageProps) => (
+const Page = (
+  {
+    component: Component,
+    exactly,
+    intl,
+    pattern,
+  }: PageProps,
+) => (
   <Match
     exactly={exactly}
     pattern={pattern}
@@ -38,8 +40,7 @@ const Page = ({
         flex={1}
       >
         {titles[pattern] &&
-          <Header title={intl.formatMessage(titles[pattern])} />
-        }
+          <Header title={intl.formatMessage(titles[pattern])} />}
         <Box flex={1}>
           <Alert />
           <Component {...renderProps} />

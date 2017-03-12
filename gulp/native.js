@@ -1,8 +1,9 @@
+// @flow
 import fs from 'fs';
 import gulp from 'gulp';
 
 // Native can't run Node code, so we need gulp task to pre-write initialState.
-gulp.task('native', ['env'], (done) => {
+gulp.task('native', ['env'], done => {
   const createInitialState = require('../src/server/frontend/createInitialState').default;
 
   const initialState = createInitialState();
