@@ -4,6 +4,8 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { connect } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
+import client from '../configureApollo';
 
 const common = ({ themes }: { themes: Object }) =>
   (WrappedComponent: Function) => {

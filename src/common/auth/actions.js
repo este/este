@@ -7,10 +7,12 @@ import isReactNative from '../../common/app/isReactNative';
 import { Actions as FarceActions } from 'farce';
 import { Observable } from 'rxjs/Observable';
 import { ValidationError } from '../lib/validation';
+import apollo from '../../common/configureApollo';
+import { createLoginMutation, createLogoutMutation } from './mutations';
 
-export const onAuth = (firebaseUser: ?Object): Action => ({
+export const onAuth = (user: ?Object): Action => ({
   type: 'ON_AUTH',
-  payload: { firebaseUser },
+  payload: { user },
 });
 
 export const resetPassword = (email: string): Action => ({
@@ -23,10 +25,10 @@ export const signIn = (providerName: string, options?: Object): Action => ({
   payload: { providerName, options },
 });
 
-export const signInDone = (firebaseUser: Object): Action => ({
+export const signInDone = (user: Object): Action => ({
   type: 'SIGN_IN_DONE',
   payload: {
-    user: createUserFirebase(firebaseUser),
+    user,
   },
 });
 
@@ -57,13 +59,13 @@ export const signUpFail = (error: Error): Action => ({
 });
 
 const validateEmailAndPassword = (validate, fields) =>
-  validate(fields)
-    .prop('email')
-    .required()
-    .email()
-    .prop('password')
-    .required()
-    .simplePassword().promise;
+  validate(fields).
+    prop('email').
+    required().
+    email().
+    prop('password').
+    required().
+    simplePassword().promise;
 
 const mapFirebaseErrorToEsteValidationError = code => {
   const prop = {
@@ -76,9 +78,8 @@ const mapFirebaseErrorToEsteValidationError = code => {
 };
 
 const resetPasswordEpic = (action$: any, { firebaseAuth }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === 'RESET_PASSWORD')
-    .mergeMap(({ payload: { email } }) => {
+  action$.filter((action: Action) => action.type === 'RESET_PASSWORD').
+    mergeMap(({ payload: { email } }) => {
       firebaseAuth().sendPasswordResetEmail(email);
       return Observable.of();
     });
@@ -98,27 +99,31 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
     const { email, password } = options;
     const promise = validateEmailAndPassword(validate, {
       email,
-      password,
-    }).then(() => firebaseAuth().signInWithEmailAndPassword(email, password));
-    return Observable.from(promise)
-      .map(firebaseUser => signInDone(firebaseUser))
-      .catch(error => {
-        if (firebaseMessages[error.code]) {
-          error = mapFirebaseErrorToEsteValidationError(error.code);
+      password
+    })
+    .then(() => apollo.mutate(createLoginMutation({ email, password })))
+    .then(({ data }) => data.login.user);
+
+    return Observable.from(promise).
+      map(user => signInDone(user)).
+      catch(error => {
+        if (error.message.startsWith('GraphQL error:')) {
+          error.message = error.message.replace('GraphQL error: ', '');
         }
+
         return Observable.of(signInFail(error));
       });
   };
 
-  const signInWithRedirect = provider =>
-    Observable.from(firebaseAuth().signInWithRedirect(provider))
-      .mergeMap(() => Observable.of()) // Don't return anything on redirect.
-      .catch(error => Observable.of(signInFail(error)));
+  // const signInWithRedirect = provider =>
+  //   Observable.from(firebaseAuth().signInWithRedirect(provider)).
+  //     mergeMap(() => Observable.of()) // Don't return anything on redirect.
+  //     .catch(error => Observable.of(signInFail(error)));
 
   const signInWithPopup = provider =>
-    Observable.from(firebaseAuth().signInWithPopup(provider))
-      .map(userCredential => signInDone(userCredential.user))
-      .catch(error => {
+    Observable.from(firebaseAuth().signInWithPopup(provider)).
+      map(userCredential => signInDone(userCredential.user)).
+      catch(error => {
         if (error.code === 'auth/popup-blocked') {
           return signInWithRedirect(provider);
         }
@@ -149,9 +154,8 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
       .map(firebaseUser => signInDone(firebaseUser))
       .catch(error => Observable.of(signInFail(error)));
 
-  return action$
-    .filter((action: Action) => action.type === 'SIGN_IN')
-    .mergeMap(({ payload: { providerName, options } }) => {
+  return action$.filter((action: Action) => action.type === 'SIGN_IN').
+    mergeMap(({ payload: { providerName, options } }) => {
       if (options && options.isNative) {
         return nativeSignIn('facebook');
       }
@@ -167,7 +171,7 @@ const signInEpic = (action$: any, { FBSDK, firebaseAuth, validate }: Deps) => {
       // Remember, users can revoke anything.
       provider.addScope(facebookPermissions.join(','));
       if (isMobileFacebookApp()) {
-        return signInWithRedirect(provider);
+        // FIXME: return signInWithRedirect(provider);
       }
       return signInWithPopup(provider);
     });
@@ -198,10 +202,9 @@ const signUpEpic = (action$: any, { firebaseAuth, validate }: Deps) =>
   });
 
 const signOutEpic = (action$: any, { firebaseAuth }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === 'SIGN_OUT')
-    .mergeMap(() => {
-      firebaseAuth().signOut();
+  action$.filter((action: Action) => action.type === 'SIGN_OUT').
+    mergeMap(() => {
+      Observable.fromPromise(apollo.mutate(createLogoutMutation()));
       return isReactNative
         ? Observable.of()
         : Observable.of(FarceActions.push('/'));

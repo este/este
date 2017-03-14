@@ -30,11 +30,16 @@ const configureStore = (options: Options) => {
     platformMiddleware,
   );
 
+  // Add Redux DevTools support
+  // TODO: use only on prod
+  const composeEnhancers = typeof(window) !== 'undefined' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
   // $FlowFixMe
   const store = createStore(
     reducer,
     initialState,
-    compose(
+    composeEnhancers(
       applyMiddleware(...middleware),
       autoRehydrate(),
       ...platformStoreEnhancers,

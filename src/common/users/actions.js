@@ -67,4 +67,6 @@ const usersPresenceEpic = (
   );
 };
 
-export const epics = [saveUserEpic, usersPresenceEpic];
+// TODO: remove all refs to this file
+//export const epics = [saveUserEpic, /*usersPresenceEpic*/];
+export const epics = [];
