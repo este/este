@@ -1,0 +1,53 @@
+{
+  "name": "este-next",
+  "private": true,
+  "engines": {
+    "node": "7.8.0"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "flow": "flow",
+    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages},__{tests,mocks}__}/**/*.js\"",
+    "test": "flow && next build"
+  },
+  "dependencies": {
+    "apollo-client": "^1.0.0",
+    "auth0-lock": "^10.14.0",
+    "graphql": "^0.9.1",
+    "graphql-tag": "^2.0.0",
+    "next": "^2.0.1",
+    "nprogress": "^0.2.0",
+    "ramda": "^0.23.0",
+    "react": "^15.4.2",
+    "react-apollo": "^1.0.0",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-loader": "^1.7.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "flow-bin": "^0.42.0",
+    "glob": "^7.1.1",
+    "prettier": "^0.22.0"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "rules": {
+      "arrow-parens": 0,
+      "comma-dangle": 0,
+      "import/first": 0,
+      "react/jsx-filename-extension": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/require-default-props": 0
+    }
+  }
+}

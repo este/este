@@ -1,0 +1,9 @@
+[ignore]
+; Probably not actual flow.
+.*/node_modules/auth0-lock/.*
+
+[include]
+
+[libs]
+
+[options]

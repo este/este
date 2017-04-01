@@ -1,0 +1,17 @@
+machine:
+  node:
+    version: 7.8.0
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn test
