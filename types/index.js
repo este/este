@@ -8,7 +8,6 @@ import type { AppState } from '../lib/app/reducer';
 
 export type State = {|
   +app: AppState,
-  // foo: boolean,
 |};
 
 export type Action = {|
