@@ -1,6 +1,6 @@
 // @flow
 import Head from 'next/head';
-import Link from 'next/link';
+import Header from './header';
 import LoadingBar from '../components/loading-bar';
 
 type PageProps = {|
@@ -31,10 +31,7 @@ const Page = ({ children, title }: PageProps) => (
       }
     </style>
     <LoadingBar />
-    <div>
-      <Link prefetch href="/"><a>home</a></Link>
-      <Link prefetch href="/about"><a>about</a></Link>
-    </div>
+    <Header />
     {children}
   </div>
 );
