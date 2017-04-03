@@ -1,5 +1,6 @@
 // @flow
 import Page from '../components/page';
+import withData from '../lib/with-data';
 
 const About = () => (
   <Page title="About">
@@ -9,7 +10,7 @@ const About = () => (
 
 About.getInitialProps = async () =>
   new Promise(resolve => {
-    setTimeout(() => resolve({ mrtka: 123 }), 2000);
+    setTimeout(() => resolve({ foo: 123 }), 1200);
   });
 
-export default About;
+export default withData(About);
