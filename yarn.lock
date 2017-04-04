@@ -99,8 +99,8 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
 
 apollo-client@^1.0.0, apollo-client@^1.0.0-rc.9:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.0.1.tgz#efcbe1e9bd6c6e01beb016eec0f7a40df41b4d77"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.0.2.tgz#4355bd49d53a1489bc91d9f56d5b3d0ffe33fb3c"
   dependencies:
     graphql "^0.9.1"
     graphql-anywhere "^3.0.1"
@@ -1853,9 +1853,9 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flow-bin@^0.42.0:
-  version "0.42.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.42.0.tgz#05dd754b6b052de7b150f9210e2160746961e3cf"
+flow-bin@^0.43.0:
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.43.0.tgz#5cd16696be4311c0b14f0932e89ba8661a39b1c1"
 
 flow-parser@0.40.0:
   version "0.40.0"
