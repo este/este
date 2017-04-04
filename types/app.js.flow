@@ -1,0 +1,8 @@
+/* @flow */
+declare var BACKEND_URL: string;
+
+// TODO: Add Next.js process.browser. This doesn't work.
+// declare class NextProcess extends Process {
+//   browser: boolean,
+// }
+// declare var process: Process;

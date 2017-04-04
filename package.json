@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
+    "babel-plugin-transform-define": "^1.2.0",
     "eslint": "^3.18.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.7.0",
@@ -41,8 +42,11 @@
     "prettier": "^0.22.0"
   },
   "eslintConfig": {
-    "parser": "babel-eslint",
     "extends": "airbnb",
+    "globals": {
+      "BACKEND_URL": true
+    },
+    "parser": "babel-eslint",
     "rules": {
       "arrow-parens": 0,
       "comma-dangle": 0,
