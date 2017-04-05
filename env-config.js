@@ -1,8 +1,8 @@
 // @flow
-const prod = process.env.NODE_ENV === 'production';
+const production = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  BACKEND_URL: prod
-    ? 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn'
-    : 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn',
+  BACKEND_URL: production
+    ? 'https://api.graph.cool/simple/v1/cj157d6lgacrd01553jnd34tv'
+    : 'https://api.graph.cool/simple/v1/cj157d6lgacrd01553jnd34tv',
 };
