@@ -1,12 +1,19 @@
 // @flow
 import type { State } from '../types';
 import Page from '../components/page';
-import withData from '../lib/with-data';
+import app from '../lib/app';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { setAppOnline } from '../lib/app/actions';
+import { setAppOnline } from '../lib/actions/app';
 
 import List from '../components/list';
+import { createComponent } from 'react-fela';
+
+const title = ({ size }) => ({
+  fontSize: `${size}px`,
+  color: '#228ae6',
+});
+const Title = createComponent(title, 'h1');
 
 type IndexProps = {
   online: boolean,
@@ -15,7 +22,7 @@ type IndexProps = {
 
 const Index = ({ online, setAppOnline }: IndexProps) => (
   <Page title="Home">
-    <h1>Este Next</h1>
+    <Title size={30}>Este Next</Title>
     <b>{online.toString()}</b>
     <button onClick={() => setAppOnline(!online)}>toggle</button>
     <List />
@@ -25,7 +32,7 @@ const Index = ({ online, setAppOnline }: IndexProps) => (
 );
 
 export default compose(
-  withData,
+  app,
   connect(
     (state: State) => ({
       online: state.app.online,

@@ -15,6 +15,9 @@
   "dependencies": {
     "apollo-client": "^1.0.0",
     "auth0-lock": "^10.14.0",
+    "fela": "^4.3.2",
+    "fela-plugin-placeholder-prefixer": "^4.3.2",
+    "fela-preset-web": "^4.3.2",
     "graphql": "^0.9.1",
     "graphql-tag": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
@@ -24,6 +27,7 @@
     "react": "^15.4.2",
     "react-apollo": "^1.0.0",
     "react-dom": "^15.4.2",
+    "react-fela": "^4.3.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1"
@@ -44,7 +48,8 @@
   "eslintConfig": {
     "extends": "airbnb",
     "globals": {
-      "BACKEND_URL": true
+      "BACKEND_URL": true,
+      "window": true
     },
     "parser": "babel-eslint",
     "rules": {

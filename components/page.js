@@ -11,25 +11,14 @@ type PageProps = {|
 const Page = ({ children, title }: PageProps) => (
   <div className="page">
     <Head>
-      <title>{title}</title>
       <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <title>{title}</title>
+      <meta
+        name="viewport"
+        // kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
     </Head>
-    <style jsx global>
-      {
-        `
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-          background: #eee;
-        }
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        `
-      }
-    </style>
     <LoadingBar />
     <Header />
     {children}

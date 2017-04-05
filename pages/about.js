@@ -1,6 +1,6 @@
 // @flow
 import Page from '../components/page';
-import withData from '../lib/with-data';
+import app from '../lib/app';
 
 const About = () => (
   <Page title="About">
@@ -13,4 +13,4 @@ About.getInitialProps = async () =>
     setTimeout(() => resolve({ foo: 123 }), 1200);
   });
 
-export default withData(About);
+export default app(About);
