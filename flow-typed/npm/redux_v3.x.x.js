@@ -1,11 +1,5 @@
-// flow-typed signature: ba132c96664f1a05288f3eb2272a3c35
-// flow-typed version: c4bbd91cfc/redux_v3.x.x/flow_>=v0.33.x
-
-// https://github.com/flowtype/flow-typed/pull/475/files
-// Not yet merged but fixing this bug:
-// "Covariant property `xyz` incompatible with invariant use in object type"
-// Redux repo contains the same typedef but we prefer flow-typed.
-// TODO: Remove custom fix once PR will be merged.
+// flow-typed signature: 7f1a115f75043c44385071ea3f33c586
+// flow-typed version: 358375125e/redux_v3.x.x/flow_>=v0.33.x
 
 declare module 'redux' {
 
