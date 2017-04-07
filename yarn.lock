@@ -448,9 +448,9 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-module-resolver@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-2.6.0.tgz#578a827a2740e2531e37cbc99801618f4e16f578"
+babel-plugin-module-resolver@2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-2.6.2.tgz#66845c8855865dd7fd4d5256be93272e3d16701d"
   dependencies:
     find-babel-config "^1.0.1"
     glob "^7.1.1"
@@ -1056,9 +1056,9 @@ camelcase@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
-case-sensitive-paths-webpack-plugin@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-1.1.4.tgz#8aaedd5699a86cac2b34cf40d9b4145758978472"
+case-sensitive-paths-webpack-plugin@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.0.0.tgz#60142d7d0beabdb35676ef0aeace3027da0578ba"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1439,8 +1439,8 @@ elliptic@^6.0.0:
     minimalistic-crypto-utils "^1.0.0"
 
 emoji-regex@^6.1.0:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.4.1.tgz#77486fe9cd45421d260a6238b88d721e2fad2050"
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.4.2.tgz#a30b6fee353d406d96cfb9fa765bdc82897eff6e"
 
 emojis-list@^2.0.0:
   version "2.1.0"
@@ -1883,8 +1883,8 @@ flat-cache@^1.2.1:
     write "^0.2.1"
 
 flow-bin@^0.43.0:
-  version "0.43.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.43.0.tgz#5cd16696be4311c0b14f0932e89ba8661a39b1c1"
+  version "0.43.1"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.43.1.tgz#0733958b448fb8ad4b1576add7e87c31794c81bc"
 
 flow-parser@0.40.0:
   version "0.40.0"
@@ -2814,8 +2814,8 @@ mz@2.6.0:
     thenify-all "^1.0.0"
 
 nan@^2.3.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.1.tgz#8c84f7b14c96b89f57fbc838012180ec8ca39a01"
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -2826,14 +2826,14 @@ ncp@~2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
 
 next@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/next/-/next-2.0.1.tgz#eb7d5c04a60869087312d687bd368091430e378c"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/next/-/next-2.1.0.tgz#7a94c7666f87064274d546c1f2574f01015e5023"
   dependencies:
     ansi-html "0.0.7"
     babel-core "6.24.0"
     babel-generator "6.24.0"
     babel-loader "6.4.1"
-    babel-plugin-module-resolver "2.6.0"
+    babel-plugin-module-resolver "2.6.2"
     babel-plugin-react-require "3.0.0"
     babel-plugin-transform-class-properties "6.22.0"
     babel-plugin-transform-es2015-modules-commonjs "6.24.0"
@@ -2844,10 +2844,11 @@ next@^2.0.1:
     babel-preset-latest "6.24.0"
     babel-preset-react "6.23.0"
     babel-runtime "6.23.0"
-    case-sensitive-paths-webpack-plugin "1.1.4"
+    case-sensitive-paths-webpack-plugin "2.0.0"
     cross-spawn "5.1.0"
     del "2.2.2"
     friendly-errors-webpack-plugin "1.5.0"
+    glob "^7.1.1"
     glob-promise "3.1.0"
     htmlescape "1.1.1"
     http-status "1.0.1"
@@ -2871,9 +2872,9 @@ next@^2.0.1:
     unfetch "2.1.2"
     url "0.11.0"
     uuid "3.0.1"
-    webpack "2.3.1"
+    webpack "2.3.3"
     webpack-dev-middleware "1.10.1"
-    webpack-hot-middleware "2.17.1"
+    webpack-hot-middleware "2.18.0"
     write-file-webpack-plugin "4.0.0"
 
 node-fetch@^1.0.1:
@@ -4075,25 +4076,25 @@ webpack-dev-middleware@1.10.1:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-hot-middleware@2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.17.1.tgz#0c8fbf6f93ff29c095d684b07ab6d6c0f2f951d7"
+webpack-hot-middleware@2.18.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.18.0.tgz#a16bb535b83a6ac94a78ac5ebce4f3059e8274d3"
   dependencies:
     ansi-html "0.0.7"
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-sources@^0.2.0:
+webpack-sources@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-0.2.3.tgz#17c62bfaf13c707f9d02c479e0dcdde8380697fb"
   dependencies:
     source-list-map "^1.1.1"
     source-map "~0.5.3"
 
-webpack@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.3.1.tgz#55bce8baffe7c1f9dc3029adc048643b448318a8"
+webpack@2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.3.3.tgz#eecc083c18fb7bf958ea4f40b57a6640c5a0cc78"
   dependencies:
     acorn "^4.0.4"
     acorn-dynamic-import "^2.0.0"
@@ -4113,7 +4114,7 @@ webpack@2.3.1:
     tapable "~0.2.5"
     uglify-js "^2.8.5"
     watchpack "^1.3.1"
-    webpack-sources "^0.2.0"
+    webpack-sources "^0.2.3"
     yargs "^6.0.0"
 
 whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.0:
