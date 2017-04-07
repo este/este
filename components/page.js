@@ -26,13 +26,7 @@ const Container = ({ children }) => (
 const Page = ({ children, title }: PageProps) => (
   <Box>
     <Head>
-      <meta charSet="utf-8" />
       <title>{title}</title>
-      <meta
-        name="viewport"
-        // kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
     </Head>
     <LoadingBar />
     <Container>

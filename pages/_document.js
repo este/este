@@ -15,27 +15,28 @@ export default class MyDocument extends Document {
 
   render() {
     const { css, currentLocale } = this.props;
-
     return (
       <html lang={currentLocale}>
         <Head>
+          <meta
+            name="viewport"
+            // kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           <style>
-            {//
-            // Remove the margin in all browsers.
-            // Set box-sizing to border-box so width is not affected by padding or border.
-            // Prevent adjustments of font size after orientation changes.
-            // Change the default tap highlight to be completely transparent in iOS.
-            // github.com/zeit/next.js/wiki/Global-styles-and-layouts
-            // github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
-            `
-              body {
-                margin: 0;
-              }
+            {/*
+              - github.com/zeit/next.js/wiki/Global-styles-and-layouts
+              - github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+            */}
+            {`
               html {
                 box-sizing: border-box;
                 -ms-text-size-adjust: 100%;
                 -webkit-text-size-adjust: 100%;
                 -webkit-tap-highlight-color: rgba(0,0,0,0);
+              }
+              body {
+                margin: 0;
               }
               *,
               *::before,
@@ -44,7 +45,10 @@ export default class MyDocument extends Document {
               }
             `.replace(/\s/g, '')}
           </style>
-          <style id="fela-stylesheet">{css}</style>
+          <style
+            dangerouslySetInnerHTML={{ __html: css }}
+            id="fela-stylesheet"
+          />
         </Head>
         <body>
           <Main />
