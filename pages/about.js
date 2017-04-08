@@ -10,7 +10,7 @@ const About = () => (
 
 About.getInitialProps = async () =>
   new Promise(resolve => {
-    setTimeout(() => resolve({ foo: 123 }), 1200);
+    setTimeout(() => resolve({ foo: 123 }), 750);
   });
 
 export default app(About);

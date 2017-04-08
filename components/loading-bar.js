@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 
 // Don't show progress for fast transitions.
-const startDelay = 1000;
+const startDelay = 500;
 let timer = null;
 
 Router.onRouteChangeStart = () => {
