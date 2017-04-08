@@ -6,7 +6,7 @@ import Text from '../components/text';
 import app from '../lib/app';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { setAppOnline } from '../lib/actions/app';
+import { setAppOnline } from '../lib/app/actions';
 
 type IndexProps = {
   online: boolean,
