@@ -43,27 +43,5 @@
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.43.0",
     "prettier": "^0.22.0"
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "globals": {
-      "BACKEND_URL": true,
-      "window": true
-    },
-    "parser": "babel-eslint",
-    "//": "Soft some rules. Feel free to add anything.",
-    "rules": {
-      "arrow-parens": 0,
-      "comma-dangle": 0,
-      "import/first": 0,
-      "import/prefer-default-export": 0,
-      "no-shadow": 0,
-      "no-underscore-dangle": 0,
-      "no-unused-expressions": 0,
-      "react/jsx-filename-extension": 0,
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": 0,
-      "react/require-default-props": 0
-    }
   }
 }
