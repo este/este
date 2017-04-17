@@ -5,7 +5,10 @@
     "APP_NAME": true,
     "APP_VERSION": true,
     "BACKEND_URL": true,
-    "window": true
+    "window": true,
+    // Flow. Probably bug, should not be detected.
+    "$Keys": true,
+    "$Exact": true,
   },
   // AirBnb is great, but grammar Nazi a bit. Feel free to add anything.
   "rules": {

@@ -104,33 +104,36 @@ test('padding', () => {
   expect(props).toEqual({});
 });
 
-// test('just value props', () => {
-//   [
-//     'height',
-//     'minHeight',
-//     'maxHeight',
-//     'width',
-//     'minWidth',
-//     'maxWidth',
-//     'bottom',
-//     'left',
-//     'right',
-//     'top',
-//     'alignItems',
-//     'alignSelf',
-//     'flexBasis',
-//     'flexDirection',
-//     'flexGrow',
-//     'flexShrink',
-//     'flexWrap',
-//     'justifyContent',
-//     'opacity',
-//     'overflow',
-//     'position',
-//     'zIndex',
-//   ].forEach(prop => {
-//     const { style, props } = computeBoxStyleAndProps({ [prop]: 1 });
-//     expect(style).toEqual({ [prop]: 1 });
-//     expect(props).toEqual({});
-//   });
-// });
+test('style props without transformation', () => {
+  [
+    'height',
+    'minHeight',
+    'maxHeight',
+    'width',
+    'minWidth',
+    'maxWidth',
+    'bottom',
+    'left',
+    'right',
+    'top',
+    'alignItems',
+    'alignSelf',
+    'flexBasis',
+    'flexDirection',
+    'flexGrow',
+    'flexShrink',
+    'flexWrap',
+    'justifyContent',
+    'opacity',
+    'overflow',
+    'position',
+    'zIndex',
+  ].forEach(prop => {
+    const { style, props } = computeBoxStyleAndProps({ [prop]: 1 });
+    expect(style).toEqual({ [prop]: 1 });
+    expect(props).toEqual({});
+  });
+});
+
+// rhythm
+// value => typeof value === 'number' ? rhythm(value) : value

@@ -1,5 +1,5 @@
 // @flow
-import type { Color, Theme } from '../themes/types';
+import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -136,10 +136,10 @@ const shorthandTransformation = shorthand => {
     vertical: ['Bottom', 'Top'],
   };
   const DirectionShorthands = {
-    Left: shorthand + 'Horizontal',
-    Right: shorthand + 'Horizontal',
-    Bottom: shorthand + 'Vertical',
-    Top: shorthand + 'Vertical',
+    Left: `${shorthand}Horizontal`,
+    Right: `${shorthand}Horizontal`,
+    Bottom: `${shorthand}Vertical`,
+    Top: `${shorthand}Vertical`,
   };
   const canSetDirectionShorthand = (props, direction) =>
     props[DirectionShorthands[direction]] === undefined;
@@ -162,9 +162,9 @@ const shorthandTransformation = shorthand => {
     switch (prop) {
       case shorthand:
         return maybeSet(props, prop, value, StyleProps.shorthand);
-      case shorthand + 'Horizontal':
+      case `${shorthand}Horizontal`:
         return maybeSet(props, prop, value, StyleProps.horizontal);
-      case shorthand + 'Vertical':
+      case `${shorthand}Vertical`:
         return maybeSet(props, prop, value, StyleProps.vertical);
       default:
         return { style: { [prop]: value } };
@@ -172,7 +172,7 @@ const shorthandTransformation = shorthand => {
   };
 };
 
-// const justValueTransformation = (props, prop, value) => ({ style: {} }),
+const noTransformation = (props, prop, value) => ({ style: { [prop]: value } });
 
 type Transformations = {
   [prop: string]: (
@@ -197,30 +197,30 @@ const transformations: Transformations = {
   paddingLeft: shorthandTransformation('padding'),
   paddingRight: shorthandTransformation('padding'),
   paddingTop: shorthandTransformation('padding'),
-  height: (props, prop, value) => ({ style: {} }),
-  minHeight: (props, prop, value) => ({ style: {} }),
-  maxHeight: (props, prop, value) => ({ style: {} }),
-  width: (props, prop, value) => ({ style: {} }),
-  minWidth: (props, prop, value) => ({ style: {} }),
-  maxWidth: (props, prop, value) => ({ style: {} }),
-  bottom: (props, prop, value) => ({ style: {} }),
-  left: (props, prop, value) => ({ style: {} }),
-  right: (props, prop, value) => ({ style: {} }),
-  top: (props, prop, value) => ({ style: {} }),
+  height: noTransformation,
+  minHeight: noTransformation,
+  maxHeight: noTransformation,
+  width: noTransformation,
+  minWidth: noTransformation,
+  maxWidth: noTransformation,
+  bottom: noTransformation,
+  left: noTransformation,
+  right: noTransformation,
+  top: noTransformation,
 
-  alignItems: (props, prop, value) => ({ style: {} }),
-  alignSelf: (props, prop, value) => ({ style: {} }),
-  flexBasis: (props, prop, value) => ({ style: {} }),
-  flexDirection: (props, prop, value) => ({ style: {} }),
-  flexGrow: (props, prop, value) => ({ style: {} }),
-  flexShrink: (props, prop, value) => ({ style: {} }),
-  flexWrap: (props, prop, value) => ({ style: {} }),
-  justifyContent: (props, prop, value) => ({ style: {} }),
+  alignItems: noTransformation,
+  alignSelf: noTransformation,
+  flexBasis: noTransformation,
+  flexDirection: noTransformation,
+  flexGrow: noTransformation,
+  flexShrink: noTransformation,
+  flexWrap: noTransformation,
+  justifyContent: noTransformation,
 
-  opacity: (props, prop, value) => ({ style: {} }),
-  overflow: (props, prop, value) => ({ style: {} }),
-  position: (props, prop, value) => ({ style: {} }),
-  zIndex: (props, prop, value) => ({ style: {} }),
+  opacity: noTransformation,
+  overflow: noTransformation,
+  position: noTransformation,
+  zIndex: noTransformation,
 };
 
 export const computeBoxStyleAndProps = (boxProps: TransformableBoxProps) => {

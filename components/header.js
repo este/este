@@ -1,6 +1,6 @@
 // @flow
-import Link from 'next/link';
-import A from './a';
+// import Link from 'next/link';
+// import A from './a';
 
 const Header = () => (
   <div>
