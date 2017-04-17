@@ -1,9 +1,8 @@
 // @flow
 import type { State } from '../types';
-import List from '../components/list';
-import Page from '../components/page';
-import Text from '../components/text';
+import Heading from '../components/heading';
 import app from '../lib/app';
+import { List, Page, Text, Box } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setAppOnline } from '../lib/app/actions';
@@ -15,12 +14,18 @@ type IndexProps = {
 
 const Index = ({ online, setAppOnline }: IndexProps) => (
   <Page title="Home">
-    <h1>Este Next je</h1>
-    <Text>{online.toString()}</Text>
+    <Heading>Este Next je</Heading>
+    <Text>juchu</Text>
+    <Text>
+      Text is container, except <Text color="primary">inner</Text> Text.
+      Just like in React Native.
+    </Text>
+    <Text color="warning">{online.toString()}</Text>
     <button onClick={() => setAppOnline(!online)}>toggle</button>
-    <List />
-    <Text>Playground</Text>
-    <img alt="static asset example" src="/static/50x50.png" />
+    {/* <List /> */}
+    <Box margin={2}>
+      <img alt="static asset example" src="/static/50x50.png" />
+    </Box>
   </Page>
 );
 
