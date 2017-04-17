@@ -2,7 +2,7 @@
 import type { State } from '../types';
 import Heading from '../components/heading';
 import app from '../lib/app';
-import { List, Page, Text, Box } from '../components';
+import { Page, Text, Box } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setAppOnline } from '../lib/app/actions';

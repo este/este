@@ -27,9 +27,9 @@ export type Color = $Keys<Colors>;
 
 export type Theme = {|
   typography: {|
-    fontSize: (number) => number,
+    fontSize: number => number,
     lineHeight: number,
-    rhythm: (number) => number,
+    rhythm: number => number,
   |},
   colors: Colors,
   text: {|

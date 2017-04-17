@@ -25,27 +25,22 @@ const scale = {
   step16: 1 / 4,
 };
 
-const typography = (
-  {
-    fontSize,
-    fontSizeScale,
-    lineHeight,
-  }: {|
-    fontSize: number,
-    fontSizeScale: number | $Keys<typeof scale>,
-    lineHeight: number,
-  |}
-) => ({
+const typography = ({
+  fontSize,
+  fontSizeScale,
+  lineHeight,
+}: {|
+  fontSize: number,
+  fontSizeScale: number | $Keys<typeof scale>,
+  lineHeight: number,
+|}) => ({
   fontSize: (level: number) =>
-    Array.from(Array(Math.abs(level))).reduce(
-      size => {
-        const scaleRatio = typeof fontSizeScale === 'string'
-          ? scale[fontSizeScale]
-          : fontSizeScale;
-        return level > 0 ? size * (1 / scaleRatio) : size / (1 / scaleRatio);
-      },
-      fontSize
-    ),
+    Array.from(Array(Math.abs(level))).reduce(size => {
+      const scaleRatio = typeof fontSizeScale === 'string'
+        ? scale[fontSizeScale]
+        : fontSizeScale;
+      return level > 0 ? size * (1 / scaleRatio) : size / (1 / scaleRatio);
+    }, fontSize),
   lineHeight,
   rhythm: (ratio: number) => lineHeight * ratio,
 });

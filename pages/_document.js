@@ -28,8 +28,7 @@ export default class MyDocument extends Document {
               - github.com/zeit/next.js/wiki/Global-styles-and-layouts
               - github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
             */}
-            {
-              `
+            {`
               html {
                 box-sizing: border-box;
                 -ms-text-size-adjust: 100%;
@@ -43,9 +42,7 @@ export default class MyDocument extends Document {
               *::before,
               *::after {
                 box-sizing: inherit;
-              }
-              `
-            }
+              }`}
           </style>
           <style
             dangerouslySetInnerHTML={{ __html: css }}

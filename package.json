@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "flow": "flow",
-    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages},__{tests,mocks}__}/**/*.js\"",
+    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages,themes},__{tests,mocks}__}/**/*.js\"",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "test": "flow && jest && next build"
