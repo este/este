@@ -21,11 +21,13 @@ const Index = ({ online, setAppOnline }: IndexProps) => (
       Just like in React Native.
     </Text>
     <Text color="warning">{online.toString()}</Text>
-    <button onClick={() => setAppOnline(!online)}>toggle</button>
-    {/* <List /> */}
-    <Box margin={2}>
-      <img alt="static asset example" src="/static/50x50.png" />
+    <Box flexDirection="row">
+      <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>
+    {/* <List /> */}
+    {/* <Box margin={2}>
+      <img alt="static asset example" src="/static/50x50.png" />
+    </Box> */}
   </Page>
 );
 

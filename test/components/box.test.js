@@ -1,6 +1,13 @@
 // @flow
 import { computeBoxStyleAndProps } from '../../components/box';
 
+const browserDefaultStyle = {
+  // Enforce React Native behaviour for browsers.
+  position: 'relative',
+  flexDirection: 'column',
+  display: 'flex',
+};
+
 const theme = {
   typography: {
     fontSize: level => level + 16,
@@ -18,8 +25,13 @@ const theme = {
   },
 };
 
-// $FlowFixMe Don't fix. We test real values, not types.
-const compute = (...args) => computeBoxStyleAndProps(theme, ...args);
+const compute = props =>
+  // $FlowFixMe Don't fix. We test real values, not types.
+  computeBoxStyleAndProps(props, { isReactNative: true, theme });
+
+const computeBrowser = props =>
+  // $FlowFixMe Don't fix. We test real values, not types.
+  computeBoxStyleAndProps(props, { isReactNative: false, theme });
 
 test('unknown prop is passed to a component', () => {
   const { style, props } = compute({ unknownProp: 1 });
@@ -27,7 +39,7 @@ test('unknown prop is passed to a component', () => {
   expect(props).toEqual({ unknownProp: 1 });
 });
 
-test('margin', () => {
+test('margin shorthand', () => {
   const { style, props } = compute({ margin: 1 });
   expect(style).toEqual({
     marginBottom: 24,
@@ -38,7 +50,7 @@ test('margin', () => {
   expect(props).toEqual({});
 });
 
-test('marginHorizontal', () => {
+test('marginHorizontal shorthand', () => {
   const { style, props } = compute({ marginHorizontal: 1 });
   expect(style).toEqual({
     marginLeft: 24,
@@ -47,7 +59,7 @@ test('marginHorizontal', () => {
   expect(props).toEqual({});
 });
 
-test('marginVertical', () => {
+test('marginVertical shorthand', () => {
   const { style, props } = compute({ marginVertical: 1 });
   expect(style).toEqual({
     marginBottom: 24,
@@ -99,6 +111,7 @@ test('margin shorthands are order independent', () => {
       marginTop: 48,
     });
   });
+
   const { style: style1 } = compute({
     marginLeft: 2,
     margin: 1,
@@ -109,6 +122,7 @@ test('margin shorthands are order independent', () => {
     marginRight: 24,
     marginTop: 24,
   });
+
   const { style: style2 } = compute({
     margin: 1,
     marginLeft: 2,
@@ -122,7 +136,7 @@ test('margin shorthands are order independent', () => {
 });
 
 // Just one test, because the implementation is the same as for margin.
-test('padding', () => {
+test('padding shorthand', () => {
   const { style, props } = compute({ padding: 1 });
   expect(style).toEqual({
     paddingBottom: 24,
@@ -137,6 +151,7 @@ test('just value style props', () => {
   [
     'alignItems',
     'alignSelf',
+    'flex',
     'flexBasis',
     'flexDirection',
     'flexGrow',
@@ -147,6 +162,7 @@ test('just value style props', () => {
     'overflow',
     'position',
     'zIndex',
+    'borderStyle',
   ].forEach(prop => {
     const { style, props } = compute({ [prop]: 'foo' });
     expect(style).toEqual({ [prop]: 'foo' });
@@ -172,3 +188,139 @@ test('not shorthand rhythm props', () => {
     expect(props).toEqual({});
   });
 });
+
+// Everything is display: flex by default. All the behaviors of block and
+// inline-block can be expressed in term of flex but not the opposite.
+// https://facebook.github.io/yoga
+// necolas/react-native-web
+test('React Native View behaviour for web', () => {
+  const { style, props } = computeBrowser({});
+  expect(style).toEqual(browserDefaultStyle);
+});
+
+// http://facebook.github.io/react-native/releases/0.43/docs/layout-props.html#flex
+test('flex throws for not yet supported value', () => {
+  const flex0 = () => compute({ flex: 0 });
+  expect(flex0).toThrowError();
+  const flexNegative1 = () => compute({ flex: -1 });
+  expect(flexNegative1).toThrowError();
+});
+
+test('flex shorthand for React Native', () => {
+  const { style, props } = compute({ flex: 1 });
+  expect(style).toEqual({ flex: 1 });
+});
+
+// https://github.com/necolas/react-native-web expandStyle-test.js
+test('flex shorthand for browser', () => {
+  const { style: style1 } = computeBrowser({ flex: 1 });
+  expect(style1).toEqual({
+    ...browserDefaultStyle,
+    flexBasis: 'auto',
+    flexGrow: 1,
+    flexShrink: 1,
+  });
+
+  const { style: style2 } = computeBrowser({ flexShrink: 2, flex: 1 });
+  expect(style2).toEqual({
+    ...browserDefaultStyle,
+    flexBasis: 'auto',
+    flexGrow: 1,
+    flexShrink: 2,
+  });
+
+  const { style: style3 } = computeBrowser({
+    flexBasis: '1px',
+    flexShrink: 2,
+    flex: 1,
+  });
+  expect(style3).toEqual({
+    ...browserDefaultStyle,
+    flexBasis: '1px',
+    flexGrow: 1,
+    flexShrink: 2,
+  });
+});
+
+test('backgroundColor', () => {
+  const { style } = compute({ backgroundColor: 'primary' });
+  expect(style).toEqual({ backgroundColor: 'blue' });
+});
+
+test('border width shorthand', () => {
+  const { style: style1 } = compute({ borderWidth: 1 });
+  expect(style1).toEqual({
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+  });
+
+  const { style: style2 } = compute({ borderBottomWidth: 2 });
+  expect(style2).toEqual({
+    borderBottomWidth: 2,
+  });
+
+  const { style: style3 } = compute({ borderWidth: 1, borderBottomWidth: 2 });
+  expect(style3).toEqual({
+    borderBottomWidth: 2,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+  });
+});
+
+test('border radius shorthand', () => {
+  const { style: style1 } = compute({ borderRadius: 1 });
+  expect(style1).toEqual({
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+  });
+
+  const { style: style2 } = compute({ borderBottomLeftRadius: 2 });
+  expect(style2).toEqual({
+    borderBottomLeftRadius: 2,
+  });
+
+  const { style: style3 } = compute({
+    borderRadius: 1,
+    borderBottomLeftRadius: 2,
+  });
+  expect(style3).toEqual({
+    borderBottomLeftRadius: 2,
+    borderBottomRightRadius: 1,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+  });
+});
+
+test('border color shorthand', () => {
+  const { style: style1 } = compute({ borderColor: 'primary' });
+  expect(style1).toEqual({
+    borderBottomColor: 'blue',
+    borderLeftColor: 'blue',
+    borderRightColor: 'blue',
+    borderTopColor: 'blue',
+  });
+
+  const { style: style2 } = compute({ borderBottomColor: 'success' });
+  expect(style2).toEqual({
+    borderBottomColor: 'green',
+  });
+
+  const { style: style3 } = compute({
+    borderColor: 'primary',
+    borderBottomColor: 'success',
+  });
+  expect(style3).toEqual({
+    borderBottomColor: 'green',
+    borderLeftColor: 'blue',
+    borderRightColor: 'blue',
+    borderTopColor: 'blue',
+  });
+});
+
+test('rhythm compensation');
+test('as');
