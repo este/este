@@ -11,13 +11,13 @@ type PageProps = {|
 
 const Container = ({ children }) => (
   <Box
-    // margin="auto"
-    // paddingHorizontal={1}
-    // style={theme => ({
-    //   maxWidth: theme.container.maxWidths.big,
-    //   minHeight: '100vh', // make footer sticky
-    // })}
-    style={{ margin: 'auto', width: 600 }}
+  // margin="auto"
+  // paddingHorizontal={1}
+  // style={theme => ({
+  //   maxWidth: theme.container.maxWidths.big,
+  //   minHeight: '100vh', // make footer sticky
+  // })}
+  // style={{ margin: 'auto', width: 600 }}
   >
     {children}
   </Box>

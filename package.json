@@ -1,5 +1,5 @@
 {
-  "name": "este-next",
+  "name": "este",
   "private": true,
   "engines": {
     "node": "7.8.0"
@@ -9,8 +9,10 @@
     "build": "next build",
     "start": "next start",
     "flow": "flow",
-    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages},__{tests,mocks}__}/**/*.js\"",
-    "test": "flow && next build"
+    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages,themes},__{tests,mocks}__}/**/*.js\"",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
+    "test": "flow && jest && next build"
   },
   "dependencies": {
     "apollo-client": "^1.0.0",
@@ -23,6 +25,7 @@
     "isomorphic-fetch": "^2.2.1",
     "next": "^2.0.1",
     "nprogress": "^0.2.0",
+    "prop-types": "^15.5.7",
     "ramda": "^0.23.0",
     "react": "~15.4.2",
     "react-apollo": "^1.0.0",
@@ -34,36 +37,18 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
+    "babel-jest": "^19.0.0",
     "babel-plugin-transform-define": "^1.2.0",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^3.18.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.7.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.43.0",
-    "prettier": "^0.22.0"
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "globals": {
-      "BACKEND_URL": true,
-      "window": true
-    },
-    "parser": "babel-eslint",
-    "//": "Soft some rules. Feel free to add anything.",
-    "rules": {
-      "arrow-parens": 0,
-      "comma-dangle": 0,
-      "import/first": 0,
-      "import/prefer-default-export": 0,
-      "no-shadow": 0,
-      "no-underscore-dangle": 0,
-      "no-unused-expressions": 0,
-      "react/jsx-filename-extension": 0,
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": 0,
-      "react/require-default-props": 0
-    }
+    "flow-bin": "^0.44.0",
+    "jest": "^19.0.2",
+    "prettier": "^1.1.0",
+    "react-test-renderer": "~15.4.2"
   }
 }

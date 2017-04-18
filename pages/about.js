@@ -1,10 +1,11 @@
 // @flow
 import Page from '../components/page';
+import Box from '../components/box';
 import app from '../lib/app';
 
 const About = () => (
   <Page title="About">
-    <div>about</div>
+    <Box>about</Box>
   </Page>
 );
 

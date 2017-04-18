@@ -23,8 +23,7 @@ Router.onRouteChangeError = () => {
 // TODO: Use theme primary color for bg.
 const LoadingBar = () => (
   <style jsx global>
-    {
-      `
+    {`
       #nprogress {
         pointer-events: none;
       }
@@ -46,9 +45,7 @@ const LoadingBar = () => (
         box-shadow: 0 0 10px #228ae6, 0 0 5px #228ae6;
         opacity: 1.0;
         transform: rotate(3deg) translate(0px, -4px);
-      }
-      `
-    }
+      }`}
   </style>
 );
 

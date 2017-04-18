@@ -42,8 +42,7 @@ export default class MyDocument extends Document {
               *::before,
               *::after {
                 box-sizing: inherit;
-              }
-            `.replace(/\s/g, '')}
+              }`}
           </style>
           <style
             dangerouslySetInnerHTML={{ __html: css }}

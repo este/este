@@ -4,5 +4,13 @@
   ],
   "plugins": [
     ["transform-define", "./env-config.js"]
-  ]
+  ],
+  "env": {
+    "test": {
+      // next/babel does not transpile import/export syntax.
+      // So, using es2015 in the beginning will fix that.
+      // github.com/zeit/next.js/tree/master/examples/with-jest
+      "presets": ["es2015", "next/babel"]
+    }
+  }
 }

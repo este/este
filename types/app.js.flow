@@ -1,4 +1,6 @@
 /* @flow */
+declare var APP_NAME: string;
+declare var APP_VERSION: string;
 declare var BACKEND_URL: string;
 
 // TODO: Add Next.js process.browser. This doesn't work for some reason:

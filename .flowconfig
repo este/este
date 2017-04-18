@@ -9,3 +9,5 @@
 types/app.js.flow
 
 [options]
+; TODO: github.com/facebook/flow/issues/3728
+;all=true
