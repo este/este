@@ -2,6 +2,7 @@
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { reject, isNil, map } from 'ramda';
 
 /*
   Box is the basic UI building block with typed and themed styles.
@@ -38,13 +39,15 @@ import React from 'react';
   And more, for example: vertical rhythm, font smoothing, etc.
 */
 
-const isReactNative =
-  typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
-
-// If value is typeof === 'number' then it's multiplied by rhythm constant.
 type MaybeRhythmProp = number | string;
 
-type TransformableBoxProps = {
+export type BoxProps = {
+  as?: () => React.Element<*>,
+  style?: (theme: Theme) => BoxProps,
+  universalStyle?: Object,
+  browserStyle?: Object,
+  nativeStyle?: Object,
+
   margin?: MaybeRhythmProp,
   marginHorizontal?: MaybeRhythmProp,
   marginVertical?: MaybeRhythmProp,
@@ -98,18 +101,22 @@ type TransformableBoxProps = {
   zIndex?: number,
 };
 
-export type BoxProps = TransformableBoxProps & {
-  as?: () => React.Element<*>,
-  style?: (theme: Theme) => BoxProps,
-  universalStyle?: Object,
-  browserStyle?: Object,
-  nativeStyle?: Object,
-};
-
 type BoxContext = {
   renderer: { renderRule: () => Object },
   theme: Theme,
 };
+
+type Transformations = {
+  [prop: string]: (
+    theme: Theme,
+    props: BoxProps,
+    prop: $Keys<BoxProps>,
+    value: mixed
+  ) => {| style?: Object, props?: Object |},
+};
+
+const isReactNative =
+  typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 const applyStylePropRecursive = (props, theme) => {
   const {
@@ -129,101 +136,85 @@ const applyStylePropRecursive = (props, theme) => {
   };
 };
 
-const shorthandTransformation = shorthand => {
-  const StyleProps = {
-    shorthand: ['Bottom', 'Left', 'Top', 'Right'],
-    horizontal: ['Left', 'Right'],
-    vertical: ['Bottom', 'Top'],
-  };
-  const DirectionShorthands = {
-    Left: `${shorthand}Horizontal`,
-    Right: `${shorthand}Horizontal`,
-    Bottom: `${shorthand}Vertical`,
-    Top: `${shorthand}Vertical`,
-  };
-  const canSetDirectionShorthand = (props, direction) =>
-    props[DirectionShorthands[direction]] === undefined;
-  // margin doesn't override marginVertical
-  // marginVertical doesn't override marginTop
-  const maybeSet = (props, prop, value, styleProps) => {
-    const isShorthand = prop === shorthand;
-    const style = styleProps.reduce((style, direction) => {
-      const stylePropName = shorthand + direction;
-      const canSetProp = props[stylePropName] === undefined;
-      const canSet =
-        canSetProp &&
-        (!isShorthand || canSetDirectionShorthand(props, direction));
-      if (!canSet) return style;
-      return { ...style, [stylePropName]: value };
-    }, {});
-    return { style };
-  };
-  return (props, prop, value) => {
-    switch (prop) {
-      case shorthand:
-        return maybeSet(props, prop, value, StyleProps.shorthand);
-      case `${shorthand}Horizontal`:
-        return maybeSet(props, prop, value, StyleProps.horizontal);
-      case `${shorthand}Vertical`:
-        return maybeSet(props, prop, value, StyleProps.vertical);
-      default:
-        return { style: { [prop]: value } };
-    }
-  };
+const maybeRhythm = theme => value =>
+  (typeof value === 'number' ? theme.typography.rhythm(value) : value);
+
+const createShorthandTransformation = destructure => (theme, props) => {
+  const style = map(maybeRhythm(theme), reject(isNil, destructure(props)));
+  return { style };
 };
 
-const noTransformation = (props, prop, value) => ({ style: { [prop]: value } });
+const marginTransformation = createShorthandTransformation(({
+  margin,
+  marginHorizontal = margin,
+  marginVertical = margin,
+  marginBottom = marginVertical,
+  marginLeft = marginHorizontal,
+  marginRight = marginHorizontal,
+  marginTop = marginVertical,
+}) => ({ marginBottom, marginLeft, marginRight, marginTop }));
 
-type Transformations = {
-  [prop: string]: (
-    props: TransformableBoxProps,
-    prop: $Keys<TransformableBoxProps>,
-    value: mixed
-  ) => {| style?: Object, props?: Object |},
-};
+const paddingTransformation = createShorthandTransformation(({
+  padding,
+  paddingHorizontal = padding,
+  paddingVertical = padding,
+  paddingBottom = paddingVertical,
+  paddingLeft = paddingHorizontal,
+  paddingRight = paddingHorizontal,
+  paddingTop = paddingVertical,
+}) => ({ paddingBottom, paddingLeft, paddingRight, paddingTop }));
+
+const maybeRhythmTransformation = (theme, props, prop, value) => ({
+  style: { [prop]: maybeRhythm(theme)(value) },
+});
+
+const justValueTransformation = (theme, props, prop, value) => ({
+  style: { [prop]: value },
+});
 
 const transformations: Transformations = {
-  margin: shorthandTransformation('margin'),
-  marginHorizontal: shorthandTransformation('margin'),
-  marginVertical: shorthandTransformation('margin'),
-  marginBottom: shorthandTransformation('margin'),
-  marginLeft: shorthandTransformation('margin'),
-  marginRight: shorthandTransformation('margin'),
-  marginTop: shorthandTransformation('margin'),
-  padding: shorthandTransformation('padding'),
-  paddingHorizontal: shorthandTransformation('padding'),
-  paddingVertical: shorthandTransformation('padding'),
-  paddingBottom: shorthandTransformation('padding'),
-  paddingLeft: shorthandTransformation('padding'),
-  paddingRight: shorthandTransformation('padding'),
-  paddingTop: shorthandTransformation('padding'),
-  height: noTransformation,
-  minHeight: noTransformation,
-  maxHeight: noTransformation,
-  width: noTransformation,
-  minWidth: noTransformation,
-  maxWidth: noTransformation,
-  bottom: noTransformation,
-  left: noTransformation,
-  right: noTransformation,
-  top: noTransformation,
+  margin: marginTransformation,
+  marginHorizontal: marginTransformation,
+  marginVertical: marginTransformation,
+  marginBottom: marginTransformation,
+  marginLeft: marginTransformation,
+  marginRight: marginTransformation,
+  marginTop: marginTransformation,
+  padding: paddingTransformation,
+  paddingHorizontal: paddingTransformation,
+  paddingVertical: paddingTransformation,
+  paddingBottom: paddingTransformation,
+  paddingLeft: paddingTransformation,
+  paddingRight: paddingTransformation,
+  paddingTop: paddingTransformation,
 
-  alignItems: noTransformation,
-  alignSelf: noTransformation,
-  flexBasis: noTransformation,
-  flexDirection: noTransformation,
-  flexGrow: noTransformation,
-  flexShrink: noTransformation,
-  flexWrap: noTransformation,
-  justifyContent: noTransformation,
+  height: maybeRhythmTransformation,
+  minHeight: maybeRhythmTransformation,
+  maxHeight: maybeRhythmTransformation,
+  width: maybeRhythmTransformation,
+  minWidth: maybeRhythmTransformation,
+  maxWidth: maybeRhythmTransformation,
+  bottom: maybeRhythmTransformation,
+  left: maybeRhythmTransformation,
+  right: maybeRhythmTransformation,
+  top: maybeRhythmTransformation,
 
-  opacity: noTransformation,
-  overflow: noTransformation,
-  position: noTransformation,
-  zIndex: noTransformation,
+  alignItems: justValueTransformation,
+  alignSelf: justValueTransformation,
+  flexBasis: justValueTransformation,
+  flexDirection: justValueTransformation,
+  flexGrow: justValueTransformation,
+  flexShrink: justValueTransformation,
+  flexWrap: justValueTransformation,
+  justifyContent: justValueTransformation,
+
+  opacity: justValueTransformation,
+  overflow: justValueTransformation,
+  position: justValueTransformation,
+  zIndex: justValueTransformation,
 };
 
-export const computeBoxStyleAndProps = (boxProps: TransformableBoxProps) => {
+export const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
   let style = {};
   let props = {};
   Object.keys(boxProps).forEach(prop => {
@@ -233,7 +224,9 @@ export const computeBoxStyleAndProps = (boxProps: TransformableBoxProps) => {
       props = { ...props, [prop]: value };
       return;
     }
-    const transformed = transformation(boxProps, prop, value);
+    // TODO: Skip already processed shorthands.
+    // if (transformation === marginTransformation) ...
+    const transformed = transformation(theme, boxProps, prop, value);
     if (transformed.style) style = { ...style, ...transformed.style };
     if (transformed.props) props = { ...props, ...transformed.props };
   });
@@ -250,9 +243,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
     ...restProps
   } = applyStylePropRecursive(props, theme);
 
-  const computed = computeBoxStyleAndProps(restProps);
-  // rhythm props
-  // compensate
+  const computed = computeBoxStyleAndProps(theme, restProps);
 
   const className = renderer.renderRule(() => ({
     ...computed.style,
