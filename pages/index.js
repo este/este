@@ -8,11 +8,12 @@ import { connect } from 'react-redux';
 import { setAppOnline } from '../lib/app/actions';
 
 type IndexProps = {
+  appVersion: string,
   online: boolean,
   setAppOnline: typeof setAppOnline,
 };
 
-const Index = ({ online, setAppOnline }: IndexProps) => (
+const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
   <Page title="Home">
     <Heading>Este Next je</Heading>
     <Text>juchu</Text>
@@ -21,6 +22,7 @@ const Index = ({ online, setAppOnline }: IndexProps) => (
       Just like in React Native.
     </Text>
     <Text color="warning">{online.toString()}</Text>
+    <Text>appVersion: {appVersion.toString()}</Text>
     <Box flexDirection="row">
       <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>
@@ -35,6 +37,7 @@ export default compose(
   app,
   connect(
     (state: State) => ({
+      appVersion: state.app.version,
       online: state.app.online,
     }),
     { setAppOnline }

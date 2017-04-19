@@ -4,7 +4,7 @@ module.exports = {
   globals: {
     APP_NAME: true,
     APP_VERSION: true,
-    BACKEND_URL: true,
+    GRAPHQL_ENDPOINT: true,
     window: true,
     // Flow. Probably bug, should not be detected.
     $Keys: true,

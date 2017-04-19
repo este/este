@@ -3,7 +3,7 @@
     "next/babel"
   ],
   "plugins": [
-    ["transform-define", "./env-config.js"]
+    ["transform-define", "./scripts/env-config.js"]
   ],
   "env": {
     "test": {
