@@ -1,18 +1,18 @@
 // @flow
-import type { Theme } from '../themes/types';
+import type { Color, Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { reject, isNil, map } from 'ramda';
 
 /*
   Box is the basic UI building block with typed and themed styles.
-    Box -> Container
-    Box -> Header
-    Box -> Text
-    Box -> Text -> Heading
-    Box -> Text -> Input
+    Box - Container
+    Box - Header
+    Box - Text
+    Box - Text - Heading
+    Box - Text - Input
 
-  Box picks universal styles and props, and pass the rest.
+  Box picks props to handle, and pass the rest. No white/black listing.
     <Box
       width="10%" // width is an universal style prop
       onTouch={onBoxTouch} // onClick in a browser
@@ -36,7 +36,10 @@ import { reject, isNil, map } from 'ramda';
   We can style any component via as property.
     <Box as={Slider} {...props} />
 
-  And more, for example: vertical rhythm, font smoothing, etc.
+  Box enforces vertical rhythm with borders via padding compensation.
+
+  Box styles follow https://facebook.github.io/yoga capabilities. For browser,
+  we restrict styles to enforce the same behaviour.
 */
 
 type MaybeRhythmProp = number | string;
@@ -83,6 +86,7 @@ export type BoxProps = {
     | 'center'
     | 'stretch'
     | 'baseline',
+  flex?: number,
   flexBasis?: number | string,
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
   flexGrow?: number,
@@ -95,10 +99,30 @@ export type BoxProps = {
     | 'space-between'
     | 'space-around',
 
+  backgroundColor?: Color,
   opacity?: number,
   overflow?: 'visible' | 'hidden' | 'scroll',
   position?: 'absolute' | 'relative',
   zIndex?: number,
+  borderStyle?: 'solid' | 'dotted' | 'dashed',
+
+  borderWidth?: number,
+  borderBottomWidth?: number,
+  borderLeftWidth?: number,
+  borderRightWidth?: number,
+  borderTopWidth?: number,
+
+  borderRadius?: number,
+  borderBottomLeftRadius?: number,
+  borderBottomRightRadius?: number,
+  borderTopLeftRadius?: number,
+  borderTopRightRadius?: number,
+
+  borderColor?: Color,
+  borderBottomColor?: Color,
+  borderLeftColor?: Color,
+  borderRightColor?: Color,
+  borderTopColor?: Color,
 };
 
 type BoxContext = {
@@ -106,12 +130,17 @@ type BoxContext = {
   theme: Theme,
 };
 
+type TransformationOptions = {|
+  isReactNative: boolean,
+  theme: Theme,
+|};
+
 type Transformations = {
   [prop: string]: (
-    theme: Theme,
+    options: TransformationOptions,
     props: BoxProps,
     prop: $Keys<BoxProps>,
-    value: mixed
+    value: any
   ) => {| style?: Object, props?: Object |},
 };
 
@@ -139,12 +168,21 @@ const applyStylePropRecursive = (props, theme) => {
 const maybeRhythm = theme => value =>
   (typeof value === 'number' ? theme.typography.rhythm(value) : value);
 
-const createShorthandTransformation = destructure => (theme, props) => {
-  const style = map(maybeRhythm(theme), reject(isNil, destructure(props)));
-  return { style };
-};
+const createShorthandTransformation = destructure => (options, props) => ({
+  style: reject(isNil, destructure(props)),
+});
 
-const marginTransformation = createShorthandTransformation(({
+const createMaybeRhythmShorthandTransformation = destructure => (
+  options,
+  props
+) => ({
+  style: map(
+    maybeRhythm(options.theme),
+    createShorthandTransformation(destructure)(options, props).style
+  ),
+});
+
+const marginTransformation = createMaybeRhythmShorthandTransformation(({
   margin,
   marginHorizontal = margin,
   marginVertical = margin,
@@ -154,7 +192,7 @@ const marginTransformation = createShorthandTransformation(({
   marginTop = marginVertical,
 }) => ({ marginBottom, marginLeft, marginRight, marginTop }));
 
-const paddingTransformation = createShorthandTransformation(({
+const paddingTransformation = createMaybeRhythmShorthandTransformation(({
   padding,
   paddingHorizontal = padding,
   paddingVertical = padding,
@@ -164,13 +202,74 @@ const paddingTransformation = createShorthandTransformation(({
   paddingTop = paddingVertical,
 }) => ({ paddingBottom, paddingLeft, paddingRight, paddingTop }));
 
-const maybeRhythmTransformation = (theme, props, prop, value) => ({
+const createColorShorthandTransformation = destructure => (options, props) => ({
+  style: map(
+    value => options.theme.colors[value],
+    createShorthandTransformation(destructure)(options, props).style
+  ),
+});
+
+const maybeRhythmTransformation = ({ theme }, props, prop, value) => ({
   style: { [prop]: maybeRhythm(theme)(value) },
 });
 
-const justValueTransformation = (theme, props, prop, value) => ({
+const justValueTransformation = (options, props, prop, value) => ({
   style: { [prop]: value },
 });
+
+// https://github.com/necolas/react-native-web expandStyle-test.js
+const flexTransformation = ({ isReactNative }, props, prop, value) => {
+  if (value < 1) throw new Error('Not implemented yet');
+  const { flexBasis = 'auto', flexShrink = 1 } = props;
+  return {
+    style: isReactNative
+      ? { [prop]: value }
+      : { flexBasis, flexGrow: value, flexShrink },
+  };
+};
+
+const colorTransformation = ({ theme }, props, prop, value) => ({
+  style: { [prop]: theme.colors[value] },
+});
+
+const borderWidthTransformation = createShorthandTransformation(({
+  borderWidth,
+  borderBottomWidth = borderWidth,
+  borderLeftWidth = borderWidth,
+  borderRightWidth = borderWidth,
+  borderTopWidth = borderWidth,
+}) => ({
+  borderBottomWidth,
+  borderLeftWidth,
+  borderRightWidth,
+  borderTopWidth,
+}));
+
+const borderRadiusTransformation = createShorthandTransformation(({
+  borderRadius,
+  borderBottomLeftRadius = borderRadius,
+  borderBottomRightRadius = borderRadius,
+  borderTopLeftRadius = borderRadius,
+  borderTopRightRadius = borderRadius,
+}) => ({
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+}));
+
+const borderColorTransformation = createColorShorthandTransformation(({
+  borderColor,
+  borderBottomColor = borderColor,
+  borderLeftColor = borderColor,
+  borderRightColor = borderColor,
+  borderTopColor = borderColor,
+}) => ({
+  borderBottomColor,
+  borderLeftColor,
+  borderRightColor,
+  borderTopColor,
+}));
 
 const transformations: Transformations = {
   margin: marginTransformation,
@@ -201,6 +300,7 @@ const transformations: Transformations = {
 
   alignItems: justValueTransformation,
   alignSelf: justValueTransformation,
+  flex: flexTransformation,
   flexBasis: justValueTransformation,
   flexDirection: justValueTransformation,
   flexGrow: justValueTransformation,
@@ -208,14 +308,44 @@ const transformations: Transformations = {
   flexWrap: justValueTransformation,
   justifyContent: justValueTransformation,
 
+  backgroundColor: colorTransformation,
   opacity: justValueTransformation,
   overflow: justValueTransformation,
   position: justValueTransformation,
   zIndex: justValueTransformation,
+  borderStyle: justValueTransformation,
+
+  borderWidth: borderWidthTransformation,
+  borderBottomWidth: borderWidthTransformation,
+  borderLeftWidth: borderWidthTransformation,
+  borderRightWidth: borderWidthTransformation,
+  borderTopWidth: borderWidthTransformation,
+
+  borderRadius: borderRadiusTransformation,
+  borderBottomLeftRadius: borderRadiusTransformation,
+  borderBottomRightRadius: borderRadiusTransformation,
+  borderTopLeftRadius: borderRadiusTransformation,
+  borderTopRightRadius: borderRadiusTransformation,
+
+  borderColor: borderColorTransformation,
+  borderBottomColor: borderColorTransformation,
+  borderLeftColor: borderColorTransformation,
+  borderRightColor: borderColorTransformation,
+  borderTopColor: borderColorTransformation,
 };
 
-export const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
-  let style = {};
+const browserDefaultStyle = {
+  // Enforce React Native behaviour.
+  position: 'relative',
+  flexDirection: 'column',
+  display: 'flex',
+};
+
+export const computeBoxStyleAndProps = (
+  boxProps: BoxProps,
+  options: TransformationOptions
+) => {
+  let style = options.isReactNative ? {} : browserDefaultStyle;
   let props = {};
   Object.keys(boxProps).forEach(prop => {
     const value = boxProps[prop];
@@ -224,9 +354,9 @@ export const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
       props = { ...props, [prop]: value };
       return;
     }
-    // TODO: Skip already processed shorthands.
+    // TODO: Skip already processed shorthands for better performance?
     // if (transformation === marginTransformation) ...
-    const transformed = transformation(theme, boxProps, prop, value);
+    const transformed = transformation(options, boxProps, prop, value);
     if (transformed.style) style = { ...style, ...transformed.style };
     if (transformed.props) props = { ...props, ...transformed.props };
   });
@@ -243,7 +373,10 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
     ...restProps
   } = applyStylePropRecursive(props, theme);
 
-  const computed = computeBoxStyleAndProps(theme, restProps);
+  const computed = computeBoxStyleAndProps(restProps, {
+    isReactNative,
+    theme,
+  });
 
   const className = renderer.renderRule(() => ({
     ...computed.style,
