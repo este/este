@@ -4,6 +4,7 @@ import Box from '../components/box';
 import Heading from '../components/heading';
 import Page from '../components/page';
 import Text from '../components/text';
+import ToggleBaseline from '../components/toggle-baseline';
 import app from '../lib/app';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -31,6 +32,7 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Box flexDirection="row">
       <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>
+    <ToggleBaseline />
     {/* <List /> */}
     {/* <Box margin={2}>
       <img alt="static asset example" src="/static/50x50.png" />

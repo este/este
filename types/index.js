@@ -10,16 +10,19 @@ import type { Middleware as ReduxMiddleware, Reducer } from 'redux';
 //    Exact type doesn't work with covariants yet.
 
 export type AppState = {
+  +baselineShown: boolean,
   +name: string,
-  +version: string,
   +online: boolean,
+  +version: string,
 };
 
 export type State = {
   +app: AppState,
 };
 
-export type Action = { type: 'SET_APP_ONLINE', +payload: { +online: boolean } };
+export type Action =
+  | { type: 'SET_APP_ONLINE', +payload: { +online: boolean } }
+  | { type: 'TOGGLE_BASELINE' };
 
 export type Reducers = { [reducerName: string]: Reducer<State, Action> };
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
