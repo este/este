@@ -1,8 +1,10 @@
 // @flow
 import type { State } from '../types';
+import Box from '../components/box';
 import Heading from '../components/heading';
+import Page from '../components/page';
+import Text from '../components/text';
 import app from '../lib/app';
-import { Page, Text, Box } from '../components';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { setAppOnline } from '../lib/app/actions';
@@ -23,6 +25,9 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     </Text>
     <Text color="warning">{online.toString()}</Text>
     <Text>appVersion: {appVersion.toString()}</Text>
+    <Box margin={1}>
+      <Text>Box</Text>
+    </Box>
     <Box flexDirection="row">
       <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>

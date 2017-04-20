@@ -1,6 +1,6 @@
 // @flow
-import Page from '../components/page';
 import Box from '../components/box';
+import Page from '../components/page';
 import app from '../lib/app';
 
 const About = () => (

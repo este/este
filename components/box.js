@@ -40,6 +40,13 @@ import { reject, isNil, map } from 'ramda';
 
   Box styles follow https://facebook.github.io/yoga capabilities. For browser,
   we restrict styles to enforce the same behaviour.
+
+  For an inspiration:
+    https://github.com/react-native-community/react-native-elements
+    https://jxnblk.com/rebass
+    https://vuetifyjs.com
+    https://github.com/airyland/vux
+    https://material-ui.com
 */
 
 type MaybeRhythmProp = number | string;
@@ -182,25 +189,29 @@ const createMaybeRhythmShorthandTransformation = destructure => (
   ),
 });
 
-const marginTransformation = createMaybeRhythmShorthandTransformation(({
-  margin,
-  marginHorizontal = margin,
-  marginVertical = margin,
-  marginBottom = marginVertical,
-  marginLeft = marginHorizontal,
-  marginRight = marginHorizontal,
-  marginTop = marginVertical,
-}) => ({ marginBottom, marginLeft, marginRight, marginTop }));
+const marginTransformation = createMaybeRhythmShorthandTransformation(
+  ({
+    margin,
+    marginHorizontal = margin,
+    marginVertical = margin,
+    marginBottom = marginVertical,
+    marginLeft = marginHorizontal,
+    marginRight = marginHorizontal,
+    marginTop = marginVertical,
+  }) => ({ marginBottom, marginLeft, marginRight, marginTop })
+);
 
-const paddingTransformation = createMaybeRhythmShorthandTransformation(({
-  padding,
-  paddingHorizontal = padding,
-  paddingVertical = padding,
-  paddingBottom = paddingVertical,
-  paddingLeft = paddingHorizontal,
-  paddingRight = paddingHorizontal,
-  paddingTop = paddingVertical,
-}) => ({ paddingBottom, paddingLeft, paddingRight, paddingTop }));
+const paddingTransformation = createMaybeRhythmShorthandTransformation(
+  ({
+    padding,
+    paddingHorizontal = padding,
+    paddingVertical = padding,
+    paddingBottom = paddingVertical,
+    paddingLeft = paddingHorizontal,
+    paddingRight = paddingHorizontal,
+    paddingTop = paddingVertical,
+  }) => ({ paddingBottom, paddingLeft, paddingRight, paddingTop })
+);
 
 const createColorShorthandTransformation = destructure => (options, props) => ({
   style: map(
@@ -232,44 +243,50 @@ const colorTransformation = ({ theme }, props, prop, value) => ({
   style: { [prop]: theme.colors[value] },
 });
 
-const borderWidthTransformation = createShorthandTransformation(({
-  borderWidth,
-  borderBottomWidth = borderWidth,
-  borderLeftWidth = borderWidth,
-  borderRightWidth = borderWidth,
-  borderTopWidth = borderWidth,
-}) => ({
-  borderBottomWidth,
-  borderLeftWidth,
-  borderRightWidth,
-  borderTopWidth,
-}));
+const borderWidthTransformation = createShorthandTransformation(
+  ({
+    borderWidth,
+    borderBottomWidth = borderWidth,
+    borderLeftWidth = borderWidth,
+    borderRightWidth = borderWidth,
+    borderTopWidth = borderWidth,
+  }) => ({
+    borderBottomWidth,
+    borderLeftWidth,
+    borderRightWidth,
+    borderTopWidth,
+  })
+);
 
-const borderRadiusTransformation = createShorthandTransformation(({
-  borderRadius,
-  borderBottomLeftRadius = borderRadius,
-  borderBottomRightRadius = borderRadius,
-  borderTopLeftRadius = borderRadius,
-  borderTopRightRadius = borderRadius,
-}) => ({
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-}));
+const borderRadiusTransformation = createShorthandTransformation(
+  ({
+    borderRadius,
+    borderBottomLeftRadius = borderRadius,
+    borderBottomRightRadius = borderRadius,
+    borderTopLeftRadius = borderRadius,
+    borderTopRightRadius = borderRadius,
+  }) => ({
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+  })
+);
 
-const borderColorTransformation = createColorShorthandTransformation(({
-  borderColor,
-  borderBottomColor = borderColor,
-  borderLeftColor = borderColor,
-  borderRightColor = borderColor,
-  borderTopColor = borderColor,
-}) => ({
-  borderBottomColor,
-  borderLeftColor,
-  borderRightColor,
-  borderTopColor,
-}));
+const borderColorTransformation = createColorShorthandTransformation(
+  ({
+    borderColor,
+    borderBottomColor = borderColor,
+    borderLeftColor = borderColor,
+    borderRightColor = borderColor,
+    borderTopColor = borderColor,
+  }) => ({
+    borderBottomColor,
+    borderLeftColor,
+    borderRightColor,
+    borderTopColor,
+  })
+);
 
 const transformations: Transformations = {
   margin: marginTransformation,
