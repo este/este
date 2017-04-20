@@ -5,7 +5,7 @@ import React from 'react';
 import { reject, isNil, map } from 'ramda';
 
 /*
-  Box is the basic UI building block with typed and themed styles.
+  Box is thin abstraction for universal, styled, typed, and themed components.
     Box - Container
     Box - Header
     Box - Text
@@ -26,12 +26,12 @@ import { reject, isNil, map } from 'ramda';
     />
     <Container style={theme => ({ padding: theme.container.padding })} />
 
-  Box supports ad-hoc (unchecked) universal, browser, and native styles.
-    <Box browserStyle={theme => ({ whateverFelaSupport: ... })} />
+  Box supports any platform styles via rawStyle to bypass type checking.
+    <Box rawStyle={theme => ({ whateverFelaOrReactNativeSupport: ... })} />
     <Box style={theme => ({
-      universalStyle: ... })}
-      nativeStyle: ... })}
-    />
+      margin: 1, // style prop
+      rawStyle: whateverFelaOrReactNativeSupport
+    })}/>
 
   We can style any component via as property.
     <Box as={Slider} {...props} />
@@ -40,6 +40,10 @@ import { reject, isNil, map } from 'ramda';
 
   Box styles follow https://facebook.github.io/yoga capabilities. For browser,
   we restrict styles to enforce the same behaviour.
+
+  For minimal builds, we recommend to use box.js, box.ios.js, etc.
+
+  Flow Theme type should be the same for all platforms to help maintenance.
 
   For an inspiration:
     https://github.com/react-native-community/react-native-elements
@@ -53,10 +57,8 @@ type MaybeRhythmProp = number | string;
 
 export type BoxProps = {
   as?: () => React.Element<*>,
-  style?: (theme: Theme) => BoxProps,
-  universalStyle?: Object,
-  browserStyle?: Object,
-  nativeStyle?: Object,
+  style?: (theme: Theme) => $Exact<BoxProps>,
+  rawStyle?: Object,
 
   margin?: MaybeRhythmProp,
   marginHorizontal?: MaybeRhythmProp,
@@ -155,20 +157,13 @@ const isReactNative =
   typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 const applyStylePropRecursive = (props, theme) => {
-  const {
-    universalStyle,
-    browserStyle,
-    nativeStyle,
-    ...recursiveProps
-  } = typeof props.style === 'function'
+  const { rawStyle, ...recursiveProps } = typeof props.style === 'function'
     ? applyStylePropRecursive(props.style(theme), theme)
     : {};
   return {
     ...props,
     ...recursiveProps,
-    universalStyle: { ...props.universalStyle, ...universalStyle },
-    browserStyle: { ...props.browserStyle, ...browserStyle },
-    nativeStyle: { ...props.nativeStyle, ...nativeStyle },
+    rawStyle: { ...props.rawStyle, ...rawStyle },
   };
 };
 
@@ -381,14 +376,10 @@ export const computeBoxStyleAndProps = (
 };
 
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
-  const {
-    as,
-    style,
-    universalStyle,
-    browserStyle,
-    nativeStyle,
-    ...restProps
-  } = applyStylePropRecursive(props, theme);
+  const { as, style, rawStyle, ...restProps } = applyStylePropRecursive(
+    props,
+    theme
+  );
 
   const computed = computeBoxStyleAndProps(restProps, {
     isReactNative,
@@ -397,8 +388,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
 
   const className = renderer.renderRule(() => ({
     ...computed.style,
-    ...universalStyle,
-    ...(isReactNative ? nativeStyle : browserStyle),
+    ...rawStyle,
   }));
 
   return <div {...computed.props} className={className} />;

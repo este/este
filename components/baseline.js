@@ -1,5 +1,4 @@
 // @flow
-import type { Connector } from 'react-redux';
 import type { State } from '../types';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';

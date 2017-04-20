@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
 import Box from '../components/box';
-import Heading from '../components/heading';
+// import Heading from '../components/heading';
 import Page from '../components/page';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
@@ -18,8 +18,10 @@ type IndexProps = {
 
 const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
   <Page title="Home">
-    <Heading>Este Next je</Heading>
-    <Text>juchu</Text>
+    {/* <Heading>Este Next je</Heading> */}
+    <Text>normal text</Text>
+    <Text size={-1}>small text</Text>
+    <Text size={5}>text 5</Text>
     <Text>
       Text is container, except <Text color="primary">inner</Text> Text.
       Just like in React Native.

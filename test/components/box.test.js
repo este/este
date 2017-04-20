@@ -324,3 +324,4 @@ test('border color shorthand', () => {
 
 test('rhythm compensation');
 test('as');
+test('rawStyle');

@@ -34,7 +34,9 @@ export type Theme = {|
   colors: Colors,
   text: {|
     bold: Bold,
+    color: Color,
     fontFamily: string,
+    rawStyle: { fixFontSmoothing: boolean } | {}, // Browser | React Native
   |},
 |};
 

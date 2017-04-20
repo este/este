@@ -2,7 +2,7 @@
   "name": "este",
   "private": true,
   "engines": {
-    "node": "7.8.0"
+    "node": "7.7.3"
   },
   "scripts": {
     "dev": "next",
@@ -18,6 +18,7 @@
   "dependencies": {
     "apollo-client": "^1.0.0",
     "auth0-lock": "^10.14.0",
+    "color": "^1.0.3",
     "fela": "^4.3.2",
     "fela-plugin-placeholder-prefixer": "^4.3.2",
     "fela-preset-web": "^4.3.2",

@@ -21,8 +21,12 @@ const browerTheme: Theme = {
   },
   text: {
     bold: 600,
+    color: 'black',
     // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    rawStyle: {
+      fixFontSmoothing: true,
+    },
   },
   // typography: typography({
   //   fontSize: 16,
