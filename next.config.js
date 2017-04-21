@@ -12,6 +12,9 @@ const eslintRule = {
 
 module.exports = {
   webpack: (config, { dev }) => {
+    // TODO: Figure out, how to render errors as warnings in dev mode.
+    // https://github.com/MoOx/eslint-loader/issues/174
+    if (dev) return config;
     const rules = [].concat(eslintRule, config.module.rules);
     return assocPath(['module', 'rules'], rules, config);
   },
