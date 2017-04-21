@@ -1,6 +1,7 @@
 // @flow
 import type { State } from '../types';
 import Box from '../components/box';
+import Image from '../components/image';
 // import Heading from '../components/heading';
 import Page from '../components/page';
 import Text from '../components/text';
@@ -36,14 +37,17 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Box margin={1}>
       <Text>Box</Text>
     </Box>
+    <Image
+      alt="50x50 placeholder"
+      marginVertical={1}
+      size={{ height: 50, width: 50 }}
+      src="/static/50x50.png"
+    />
     <Box flexDirection="row">
       <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>
     <ToggleBaseline />
     {/* <List /> */}
-    {/* <Box margin={2}>
-      <img alt="static asset example" src="/static/50x50.png" />
-    </Box> */}
   </Page>
 );
 
