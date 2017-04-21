@@ -45,6 +45,7 @@ export default class MyDocument extends Document {
               }`}
           </style>
           <style
+            // eslint-disable-next-line
             dangerouslySetInnerHTML={{ __html: css }}
             id="fela-stylesheet"
           />

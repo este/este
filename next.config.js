@@ -12,10 +12,6 @@ const eslintRule = {
 
 module.exports = {
   webpack: (config, { dev }) => {
-    // Don't eslint in dev mode.
-    // TODO: github.com/este/next/issues/7
-    if (dev) return config;
-    // Add eslint. No dev option, because we need to detect errros everywhere.
     const rules = [].concat(eslintRule, config.module.rules);
     return assocPath(['module', 'rules'], rules, config);
   },
