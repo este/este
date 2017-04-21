@@ -1,5 +1,9 @@
 // @flow
-import { computeBoxStyleAndProps } from '../../components/box';
+import Box, { computeBoxStyleAndProps } from '../../components/box';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import { Provider as FelaProvider, ThemeProvider } from 'react-fela';
+import { createRenderer as createFelaRenderer } from 'fela';
 
 const browserDefaultStyle = {
   // Enforce React Native behaviour for browsers.
@@ -33,6 +37,19 @@ const compute = props =>
 const computeBrowser = props =>
   // $FlowFixMe Don't fix. We test real values, not types.
   computeBoxStyleAndProps(props, { isReactNative: false, theme });
+
+test('render', () => {
+  const felaRenderer = createFelaRenderer();
+  const component = renderer.create(
+    <FelaProvider renderer={felaRenderer}>
+      <ThemeProvider theme={theme}>
+        <Box margin={1} />
+      </ThemeProvider>
+    </FelaProvider>
+  );
+  expect(felaRenderer.renderToString()).toMatchSnapshot();
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
 test('unknown prop is passed to a component', () => {
   const { style, props } = compute({ unknownProp: 1 });
@@ -323,6 +340,22 @@ test('border color shorthand', () => {
   });
 });
 
+test('as', () => {
+  const Component = jest.fn(() => null);
+  const StyledComponent = props => <Box as={Component} {...props} />;
+  renderer.create(
+    <FelaProvider renderer={createFelaRenderer()}>
+      <ThemeProvider theme={theme}>
+        <StyledComponent someProp="1" height={2} />
+      </ThemeProvider>
+    </FelaProvider>
+  );
+  expect(Component).toHaveBeenCalledTimes(1);
+  expect(Component.mock.calls[0][0]).toEqual({
+    className: 'a b c d e',
+    someProp: '1',
+  });
+});
+
 test('rhythm compensation');
-test('as');
 test('rawStyle');

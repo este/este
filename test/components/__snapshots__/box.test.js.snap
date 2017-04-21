@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}"`;
+
+exports[`render 2`] = `
+<div
+  className="a b c d e f g h"
+/>
+`;

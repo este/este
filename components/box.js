@@ -60,7 +60,7 @@ import { reject, isNil, map } from 'ramda';
 type MaybeRhythmProp = number | string;
 
 export type BoxProps = {
-  as?: () => React.Element<*>,
+  as?: string | ((props: BoxProps) => React.Element<*>),
   style?: (theme: Theme) => $Exact<BoxProps>,
   rawStyle?: Object,
 
@@ -392,7 +392,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
     ...computed.style,
     ...rawStyle,
   }));
-  return <div {...computed.props} className={className} />;
+  return React.createElement(as || 'div', { ...computed.props, className });
 };
 
 Box.contextTypes = {
