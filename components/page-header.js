@@ -22,7 +22,7 @@ const HeaderLink = ({ children }) => (
   </Text>
 );
 
-const Header = () => (
+const PageHeader = () => (
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -35,4 +35,4 @@ const Header = () => (
   </Box>
 );
 
-export default Header;
+export default PageHeader;

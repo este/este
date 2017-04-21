@@ -22,9 +22,11 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <Text size={5}>text 5</Text>
-    {/* <Text width={6} padding={1}>
-      aldkjhfa skdjfhal ksdjfh alksjdhfal ksjdfhal ksjdhf alksjdhflaks dfhl
-    </Text> */}
+    {/* TODO: Blockquote */}
+    <Text size={-1} paddingVertical={0.5} maxWidth={21}>
+      Blockquote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </Text>
     <Text>
       Text is container, except <Text color="primary">inner</Text> Text.
       Just like in React Native.
@@ -34,9 +36,9 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Box margin={1}>
       <Text>Box</Text>
     </Box>
-    {/* <Box flexDirection="row"> */}
-    <button onClick={() => setAppOnline(!online)}>toggle</button>
-    {/* </Box> */}
+    <Box flexDirection="row">
+      <button onClick={() => setAppOnline(!online)}>toggle</button>
+    </Box>
     <ToggleBaseline />
     {/* <List /> */}
     {/* <Box margin={2}>
