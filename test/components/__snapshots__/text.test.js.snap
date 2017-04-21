@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`browser text without props 1`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": "24px",
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`do not fix fontSmoothing for dark text on a light background 1`] = `
+Object {
+  "backgroundColor": "white",
+  "rawStyle": Object {
+    "color": "blue",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": "24px",
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`do not fix fontSmoothing for dark text without backgroundColor 1`] = `
+Object {
+  "rawStyle": Object {
+    "color": "blue",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": "24px",
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`fix fontSmoothing for light text on a dark background 1`] = `
+Object {
+  "backgroundColor": "black",
+  "rawStyle": Object {
+    "MozOsxFontSmoothing": "grayscale",
+    "WebkitFontSmoothing": "antialiased",
+    "color": "blue",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": "24px",
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 1`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "textAlign": "left",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 2`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "fontWeight": 600,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 3`] = `
+Object {
+  "rawStyle": Object {
+    "color": "blue",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 4`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "textDecoration": "underline",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 5`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "arial",
+    "fontSize": 16,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 6`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "fontStyle": "italic",
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 7`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": 10,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`props 8`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 18,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;
+
+exports[`text without props 1`] = `
+Object {
+  "rawStyle": Object {
+    "color": "black",
+    "display": "inline",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
+    "fontSize": 16,
+    "lineHeight": 24,
+    "msHyphens": "auto",
+    "overflowWrap": "break-word",
+    "whiteSpace": "pre-wrap",
+  },
+}
+`;

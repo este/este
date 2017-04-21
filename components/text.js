@@ -1,5 +1,5 @@
 // @flow
-import type { Color } from '../themes/types';
+import type { Color, Theme } from '../themes/types';
 import Box, { type BoxProps } from './box';
 import colorLib from 'color';
 
@@ -34,7 +34,7 @@ const computeFontSizeAndLineHeight = (typography, size) => {
 };
 
 // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-// tldr; Fix font smoothing only for light text on dark background.
+// tldr; Fix font smoothing only for light text on a dark background.
 const fixFontSmoothing = (color, backgroundColor) => {
   const hasColorAndBackgroundColor =
     color !== 'transparent' && backgroundColor !== 'transparent';
@@ -56,46 +56,44 @@ const emulateReactNativeStyle = (theme, rawStyle, { backgroundColor }) => ({
   lineHeight: `${rawStyle.lineHeight}px`, // browser needs px
 });
 
+export const computeStyle = (
+  props: TextProps,
+  { isReactNative }: { isReactNative: boolean }
+) => (theme: Theme) => {
+  const {
+    align,
+    bold,
+    color = theme.text.color,
+    decoration,
+    fontFamily = theme.text.fontFamily,
+    italic,
+    lineHeight,
+    size = 0,
+    ...boxProps
+  } = props;
+  let rawStyle = {
+    color: theme.colors[color],
+    display: 'inline', // React Native default Text display value.
+    // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word',
+    msHyphens: 'auto',
+    fontFamily,
+    ...computeFontSizeAndLineHeight(theme.typography, size),
+    ...(align ? { textAlign: align } : null),
+    ...(bold ? { fontWeight: theme.text.bold } : null),
+    ...(decoration ? { textDecoration: decoration } : null),
+    ...(italic ? { fontStyle: 'italic' } : null),
+    ...(lineHeight ? { lineHeight } : null),
+  };
+  if (!isReactNative) {
+    rawStyle = emulateReactNativeStyle(theme, rawStyle, boxProps);
+  }
+  return { ...boxProps, rawStyle };
+};
+
 const Text = (props: TextProps) => (
-  <Box
-    style={theme => {
-      const {
-        align,
-        bold,
-        color = theme.text.color,
-        decoration,
-        fontFamily = theme.text.fontFamily,
-        italic,
-        lineHeight,
-        size = 0,
-        ...boxProps
-      } = props;
-
-      // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
-      const rawStyle = {
-        color: theme.colors[color],
-        display: 'inline', // React Native default Text display value.
-        // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
-        whiteSpace: 'pre-wrap',
-        overflowWrap: 'break-word',
-        msHyphens: 'auto',
-        fontFamily,
-        ...computeFontSizeAndLineHeight(theme.typography, size),
-        ...(align ? { textAlign: align } : null),
-        ...(bold ? { fontWeight: theme.text.bold } : null),
-        ...(decoration ? { textDecoration: decoration } : null),
-        ...(italic ? { fontStyle: 'italic' } : null),
-        ...(lineHeight ? { lineHeight } : null),
-      };
-
-      return {
-        ...boxProps,
-        rawStyle: isReactNative
-          ? rawStyle
-          : emulateReactNativeStyle(theme, rawStyle, boxProps),
-      };
-    }}
-  />
+  <Box style={computeStyle(props, { isReactNative })} />
 );
 
 export default Text;
