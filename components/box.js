@@ -51,6 +51,10 @@ import { reject, isNil, map } from 'ramda';
     https://vuetifyjs.com
     https://github.com/airyland/vux
     https://material-ui.com
+
+  TODO:
+    - transform: https://microsoft.github.io/reactxp/docs/styles.html
+    - maybe, handle View in Text https://github.com/Microsoft/reactxp/blob/762abbe7450501fc6b1088d55ef5539dd51ff223/src/web/utils/restyleForInlineText.tsx
 */
 
 type MaybeRhythmProp = number | string;
@@ -346,18 +350,21 @@ const transformations: Transformations = {
   borderTopColor: borderColorTransformation,
 };
 
-const browserDefaultStyle = {
-  // Enforce React Native behaviour.
-  position: 'relative',
-  flexDirection: 'column',
-  display: 'flex',
+// Enforce React Native behaviour for browsers.
+// TODO: Consider once documented:
+// https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/View.tsx#L24
+const browserStyleToEmulateReactNative = {
+  display: 'flex', // React Native default View display value.
+  flexDirection: 'column', // React Native default flexDirection value.
+  position: 'relative', // React Native View has position relative by default.
+  overflow: 'hidden', // Android sucks. Google "react native android overflow".
 };
 
 export const computeBoxStyleAndProps = (
   boxProps: BoxProps,
   options: TransformationOptions
 ) => {
-  let style = options.isReactNative ? {} : browserDefaultStyle;
+  let style = options.isReactNative ? {} : browserStyleToEmulateReactNative;
   let props = {};
   Object.keys(boxProps).forEach(prop => {
     const value = boxProps[prop];
@@ -367,7 +374,7 @@ export const computeBoxStyleAndProps = (
       return;
     }
     // TODO: Skip already processed shorthands for better performance?
-    // if (transformation === marginTransformation) ...
+    // if (transformation === marginTransformation) etc.
     const transformed = transformation(options, boxProps, prop, value);
     if (transformed.style) style = { ...style, ...transformed.style };
     if (transformed.props) props = { ...props, ...transformed.props };
@@ -380,17 +387,11 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
     props,
     theme
   );
-
-  const computed = computeBoxStyleAndProps(restProps, {
-    isReactNative,
-    theme,
-  });
-
+  const computed = computeBoxStyleAndProps(restProps, { isReactNative, theme });
   const className = renderer.renderRule(() => ({
     ...computed.style,
     ...rawStyle,
   }));
-
   return <div {...computed.props} className={className} />;
 };
 

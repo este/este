@@ -3,9 +3,10 @@ import { computeBoxStyleAndProps } from '../../components/box';
 
 const browserDefaultStyle = {
   // Enforce React Native behaviour for browsers.
-  position: 'relative',
-  flexDirection: 'column',
   display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
+  overflow: 'hidden',
 };
 
 const theme = {

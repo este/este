@@ -8,9 +8,6 @@ import colorLib from 'color';
     Text -> Heading
     Text -> Button
     Text -> Input
-
-  Text works like React Native Text even in the browser.
-    facebook.github.io/react-native/releases/0.43/docs/text.html#containers
 */
 
 export type TextProps = BoxProps & {
@@ -36,7 +33,7 @@ const computeFontSizeAndLineHeight = (typography, size) => {
   return { fontSize, lineHeight };
 };
 
-// http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+// http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
 // tldr; Fix font smoothing only for light text on dark background.
 const fixFontSmoothing = (color, backgroundColor) => {
   const hasColorAndBackgroundColor =
@@ -51,7 +48,7 @@ const fixFontSmoothing = (color, backgroundColor) => {
   };
 };
 
-const browserify = (theme, rawStyle, { backgroundColor }) => ({
+const emulateReactNativeStyle = (theme, rawStyle, { backgroundColor }) => ({
   ...rawStyle,
   ...(theme.text.rawStyle.fixFontSmoothing && backgroundColor
     ? fixFontSmoothing(rawStyle.color, theme.colors[backgroundColor])
@@ -74,8 +71,14 @@ const Text = (props: TextProps) => (
         ...boxProps
       } = props;
 
+      // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
       const rawStyle = {
         color: theme.colors[color],
+        display: 'inline', // React Native default Text display value.
+        // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
+        whiteSpace: 'pre-wrap',
+        overflowWrap: 'break-word',
+        msHyphens: 'auto',
         fontFamily,
         ...computeFontSizeAndLineHeight(theme.typography, size),
         ...(align ? { textAlign: align } : null),
@@ -83,16 +86,13 @@ const Text = (props: TextProps) => (
         ...(decoration ? { textDecoration: decoration } : null),
         ...(italic ? { fontStyle: 'italic' } : null),
         ...(lineHeight ? { lineHeight } : null),
-        // Mimic React Native Text behavior. We can use context as well.
-        // facebook.github.io/react-native/releases/0.43/docs/text.html#containers
-        '> *': { display: 'inline' },
       };
 
       return {
         ...boxProps,
         rawStyle: isReactNative
           ? rawStyle
-          : browserify(theme, rawStyle, boxProps),
+          : emulateReactNativeStyle(theme, rawStyle, boxProps),
       };
     }}
   />
