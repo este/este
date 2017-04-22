@@ -1,5 +1,6 @@
 // @flow
 import { computeStyle } from '../../components/text';
+import { createMixStyles } from '../../components/box';
 
 const browserDefaultStyle = {
   // Enforce React Native behaviour for browsers.
@@ -35,12 +36,13 @@ const theme = {
   },
 };
 
-// $ FlowFixMe Don't fix. We test real values, not types.
-const compute = props => computeStyle(props, { isReactNative: true })(theme);
+// $ FlowFixMe
+const compute = props =>
+  computeStyle(props, { isReactNative: true })(theme, createMixStyles(theme));
 
-// $ FlowFixMe Don't fix. We test real values, not types.
+// $ FlowFixMe
 const computeBrowser = props =>
-  computeStyle(props, { isReactNative: false })(theme);
+  computeStyle(props, { isReactNative: false })(theme, createMixStyles(theme));
 
 test('text without props', () => {
   const boxProps = compute({});

@@ -59,7 +59,7 @@ const emulateReactNativeStyle = (theme, rawStyle, { backgroundColor }) => ({
 export const computeStyle = (
   props: TextProps,
   { isReactNative }: { isReactNative: boolean }
-) => (theme: Theme) => {
+) => (theme: Theme, mixStyles: Object => TextProps) => {
   const {
     align,
     bold,
@@ -69,8 +69,10 @@ export const computeStyle = (
     italic,
     lineHeight,
     size = 0,
-    ...boxProps
-  } = props;
+    rawStyle: propsRawStyle,
+    ...restProps
+  } = mixStyles(props);
+
   let rawStyle = {
     color: theme.colors[color],
     display: 'inline', // React Native default Text display value.
@@ -85,11 +87,13 @@ export const computeStyle = (
     ...(decoration ? { textDecoration: decoration } : null),
     ...(italic ? { fontStyle: 'italic' } : null),
     ...(lineHeight ? { lineHeight } : null),
+    ...propsRawStyle,
   };
+
   if (!isReactNative) {
-    rawStyle = emulateReactNativeStyle(theme, rawStyle, boxProps);
+    rawStyle = emulateReactNativeStyle(theme, rawStyle, restProps);
   }
-  return { ...boxProps, rawStyle };
+  return { ...restProps, rawStyle };
 };
 
 const Text = (props: TextProps) => (

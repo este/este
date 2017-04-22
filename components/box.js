@@ -60,8 +60,8 @@ import { reject, isNil, map } from 'ramda';
 type MaybeRhythmProp = number | string;
 
 export type BoxProps = {
-  as?: string | ((props: BoxProps) => React.Element<*>),
-  style?: (theme: Theme) => $Exact<BoxProps>,
+  as?: string | ((props: Object) => React.Element<*>),
+  style?: (theme: Theme, mixStyle: (Object) => Object) => BoxProps,
   rawStyle?: Object,
 
   margin?: MaybeRhythmProp,
@@ -159,17 +159,6 @@ type Transformations = {
 
 const isReactNative =
   typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
-
-const applyStylePropRecursive = (props, theme) => {
-  const { rawStyle, ...recursiveProps } = typeof props.style === 'function'
-    ? applyStylePropRecursive(props.style(theme), theme)
-    : {};
-  return {
-    ...props,
-    ...recursiveProps,
-    rawStyle: { ...props.rawStyle, ...rawStyle },
-  };
-};
 
 const maybeRhythm = theme => value =>
   (typeof value === 'number' ? theme.typography.rhythm(value) : value);
@@ -382,11 +371,15 @@ export const computeBoxStyleAndProps = (
   return { style, props };
 };
 
+export const createMixStyles = (theme: Theme) => (props: Object) => ({
+  ...props,
+  ...(typeof props.style === 'function'
+    ? props.style(theme, createMixStyles(theme))
+    : null),
+});
+
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
-  const { as, style, rawStyle, ...restProps } = applyStylePropRecursive(
-    props,
-    theme
-  );
+  const { as, style, rawStyle, ...restProps } = createMixStyles(theme)(props);
   const computed = computeBoxStyleAndProps(restProps, { isReactNative, theme });
   const className = renderer.renderRule(() => ({
     ...computed.style,

@@ -1,9 +1,7 @@
 // @flow
+import A from './a';
 import Box from './box';
-// import Link from 'next/link';
-// import A from './a';
-
-import Text from './text';
+import Link from './link';
 
 // {
 //   /* <Link prefetch href="/"><A>home</A></Link>
@@ -11,7 +9,7 @@ import Text from './text';
 // }
 
 const HeaderLink = ({ children }) => (
-  <Text
+  <A
     backgroundColor="primary"
     bold
     color="white"
@@ -19,7 +17,7 @@ const HeaderLink = ({ children }) => (
     paddingVertical={0.5}
   >
     {children}
-  </Text>
+  </A>
 );
 
 const PageHeader = () => (
@@ -29,6 +27,10 @@ const PageHeader = () => (
     flexWrap="wrap"
     marginVertical={0.5}
     paddingHorizontal={0.5}
+    // TODO: Demonstrate it.
+    // style={theme => ({
+    //   backgroundColor: theme.colors.gray,
+    // })}
   >
     <HeaderLink>Home</HeaderLink>
     <HeaderLink>About</HeaderLink>
