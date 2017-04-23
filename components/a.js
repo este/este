@@ -1,34 +1,37 @@
 // @flow
+import Link from 'next/link';
 import Text, { type TextProps } from './text';
 
 type AProps = TextProps & {
+  href: string,
   isActive?: boolean,
+  prefetch?: boolean,
 };
 
-const A = (props: AProps) => (
-  <Text
-    as="a" // render text as a
-    style={(theme, mixStyles) => {
-      // set default A props
-      const {
-        color = 'primary',
-        isActive = false,
-        rawStyle: propsRawStyle,
-        ...restProps
-      } = mixStyles(props);
-      return {
-        ...restProps, // Remember, A has all Text and Box props.
-        color,
-        ...(isActive ? { decoration: 'underline' } : null),
-        // raw styles are platform specific
-        rawStyle: {
-          ':hover': { textDecoration: 'underline' },
-          // Do not forget for raw styles from props.
-          ...propsRawStyle,
-        },
-      };
-    }}
-  />
+const A = ({ href, prefetch, ...props }: AProps) => (
+  <Link href={href} prefetch={prefetch}>
+    <Text
+      as="a"
+      href={href}
+      style={(theme, mixStyles) => {
+        const {
+          color = 'primary',
+          isActive,
+          rawStyle: propsRawStyle,
+          ...textProps
+        } = mixStyles(props);
+        return {
+          color,
+          decoration: isActive ? 'underline' : 'none',
+          rawStyle: {
+            ':hover': { textDecoration: 'underline' },
+            ...propsRawStyle,
+          },
+          ...textProps,
+        };
+      }}
+    />
+  </Link>
 );
 
 export default A;

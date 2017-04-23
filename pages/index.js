@@ -1,8 +1,9 @@
 // @flow
 import type { State } from '../types';
+import A from '../components/a';
 import Box from '../components/box';
 import Image from '../components/image';
-// import Heading from '../components/heading';
+import Link from '../components/link';
 import Page from '../components/page';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
@@ -23,7 +24,8 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <Text size={5}>text 5</Text>
-    {/* TODO: Blockquote */}
+    <A href="/foo" color="danger">404</A>
+    {/* TODO: Blockquote? */}
     <Text size={-1} paddingVertical={0.5} maxWidth={21}>
       Blockquote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -37,12 +39,14 @@ const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
     <Box margin={1}>
       <Text>Box</Text>
     </Box>
-    <Image
-      alt="50x50 placeholder"
-      marginVertical={1}
-      size={{ height: 50, width: 50 }}
-      src="/static/50x50.png"
-    />
+    <Link href="https://mises.org/library/anatomy-state">
+      <Image
+        alt="50x50 placeholder"
+        marginVertical={1}
+        size={{ height: 50, width: 50 }}
+        src="/static/50x50.png"
+      />
+    </Link>
     <Box flexDirection="row">
       <button onClick={() => setAppOnline(!online)}>toggle</button>
     </Box>

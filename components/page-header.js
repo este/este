@@ -1,20 +1,16 @@
 // @flow
 import A from './a';
 import Box from './box';
-import Link from './link';
 
-// {
-//   /* <Link prefetch href="/"><A>home</A></Link>
-// <Link prefetch href="/about"><A>about</A></Link> */
-// }
-
-const HeaderLink = ({ children }) => (
+const HeaderA = ({ children, href }) => (
   <A
     backgroundColor="primary"
     bold
+    href={href}
     color="white"
     paddingHorizontal={0.5}
     paddingVertical={0.5}
+    prefetch
   >
     {children}
   </A>
@@ -27,13 +23,9 @@ const PageHeader = () => (
     flexWrap="wrap"
     marginVertical={0.5}
     paddingHorizontal={0.5}
-    // TODO: Demonstrate it.
-    // style={theme => ({
-    //   backgroundColor: theme.colors.gray,
-    // })}
   >
-    <HeaderLink>Home</HeaderLink>
-    <HeaderLink>About</HeaderLink>
+    <HeaderA href="/">Home</HeaderA>
+    <HeaderA href="/about">About</HeaderA>
   </Box>
 );
 
