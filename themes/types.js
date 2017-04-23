@@ -38,6 +38,11 @@ export type Theme = {|
     fontFamily: string,
     rawStyle: { fixFontSmoothing: boolean } | {}, // Browser | React Native
   |},
+  heading: {|
+    bold: Bold,
+    fontFamily: string,
+    marginBottom: number,
+  |},
 |};
 
 // export type Color = $Keys<ColorProps>;

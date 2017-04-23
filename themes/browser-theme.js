@@ -28,21 +28,11 @@ const browerTheme: Theme = {
       fixFontSmoothing: true,
     },
   },
-  // typography: typography({
-  //   fontSize: 16,
-  //   fontSizeScale: 'step3',
-  //   lineHeight: 24,
-  // }),
-  // colors: {
-  //   primary: openColor.blue6,
-  //   success: openColor.green5,
-  //   warning: openColor.orange6,
-  //   danger: openColor.red6,
-  //   black: openColor.gray7,
-  //   white: openColor.white,
-  //   gray: openColor.gray5,
-  //   open: openColor,
-  // },
+  heading: {
+    bold: 'bold',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    marginBottom: 1,
+  },
   // states: {
   //   active: {
   //     darken: 0.2,
@@ -60,20 +50,12 @@ const browerTheme: Theme = {
   //     bigger: 1140,
   //   },
   // },
-  // text: {
-  //   bold: 600,
-  //   fontFamily: 'System',
-  // },
   // block: {
   //   marginBottom: 1,
   //   maxWidth: 21,
   // },
   // button: {
   //   borderRadius: 2,
-  // },
-  // heading: {
-  //   fontFamily: 'System',
-  //   marginBottom: 1,
   // },
   // paragraph: {
   //   marginBottom: 1,

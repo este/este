@@ -2,6 +2,7 @@
 import type { State } from '../types';
 import A from '../components/a';
 import Box from '../components/box';
+import Heading from '../components/heading';
 import Image from '../components/image';
 import Link from '../components/link';
 import Page from '../components/page';
@@ -20,7 +21,7 @@ type IndexProps = {
 
 const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
   <Page title="Home">
-    {/* <Heading>Este Next je</Heading> */}
+    <Heading size={1}>Este</Heading>
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <Text size={5}>text 5</Text>

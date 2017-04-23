@@ -3,12 +3,14 @@ import Text, { type TextProps } from './text';
 
 const Heading = (props: TextProps) => (
   <Text
-    style={() => {
+    style={theme => {
       const {
-        // color = 'black',
+        bold = true,
+        fontFamily = theme.heading.fontFamily,
+        marginBottom = theme.heading.marginBottom,
         ...restProps
       } = props;
-      return { ...restProps };
+      return { bold, fontFamily, marginBottom, ...restProps };
     }}
   />
 );

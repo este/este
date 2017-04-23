@@ -36,12 +36,12 @@ const theme = {
   },
 };
 
-// $ FlowFixMe
 const compute = props =>
+  // $FlowFixMe
   computeStyle(props, { isReactNative: true })(theme, createMixStyles(theme));
 
-// $ FlowFixMe
 const computeBrowser = props =>
+  // $FlowFixMe
   computeStyle(props, { isReactNative: false })(theme, createMixStyles(theme));
 
 test('text without props', () => {
