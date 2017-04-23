@@ -265,7 +265,7 @@ test('backgroundColor', () => {
   expect(style).toEqual({ backgroundColor: 'blue' });
 });
 
-test('border width shorthand', () => {
+test('border width', () => {
   const { style: style1 } = compute({ borderWidth: 1 });
   expect(style1).toEqual({
     borderBottomWidth: 1,
@@ -274,9 +274,12 @@ test('border width shorthand', () => {
     borderTopWidth: 1,
   });
 
-  const { style: style2 } = compute({ borderBottomWidth: 2 });
+  const { style: style2 } = compute({ borderBottomWidth: 1 });
   expect(style2).toEqual({
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderTopWidth: 0,
   });
 
   const { style: style3 } = compute({ borderWidth: 1, borderBottomWidth: 2 });

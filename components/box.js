@@ -233,7 +233,7 @@ const colorTransformation = ({ theme }, props, prop, value) => ({
 
 const borderWidthTransformation = createShorthandTransformation(
   ({
-    borderWidth,
+    borderWidth = 0, // Enfore React Native behaviour. It also makes more sense.
     borderBottomWidth = borderWidth,
     borderLeftWidth = borderWidth,
     borderRightWidth = borderWidth,
