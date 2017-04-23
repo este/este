@@ -2,7 +2,7 @@
 import A from './a';
 import Box from './box';
 
-const HeaderA = ({ children, href, title }) => (
+const NavA = ({ children, href, title }) => (
   <A
     backgroundColor="primary"
     bold
@@ -17,9 +17,9 @@ const HeaderA = ({ children, href, title }) => (
   </A>
 );
 
-type PageHeaderProps = { title: string };
+type MainNavProps = { title: string };
 
-const PageHeader = ({ title }: PageHeaderProps) => (
+const MainNav = ({ title }: MainNavProps) => (
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -27,9 +27,9 @@ const PageHeader = ({ title }: PageHeaderProps) => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderA href="/" title={title}>Home</HeaderA>
-    <HeaderA href="/about" title={title}>About</HeaderA>
+    <NavA href="/" title={title}>Home</NavA>
+    <NavA href="/about" title={title}>About</NavA>
   </Box>
 );
 
-export default PageHeader;
+export default MainNav;

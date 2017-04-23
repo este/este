@@ -47,7 +47,7 @@ import { reject, isNil, map } from 'ramda';
 
   For an inspiration:
     https://github.com/react-native-community/react-native-elements
-    https://jxnblk.com/rebass
+    http://jxnblk.com/rebass
     https://vuetifyjs.com
     https://github.com/airyland/vux
     https://material-ui.com
