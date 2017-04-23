@@ -2,12 +2,13 @@
 import A from './a';
 import Box from './box';
 
-const HeaderA = ({ children, href }) => (
+const HeaderA = ({ children, href, title }) => (
   <A
     backgroundColor="primary"
     bold
-    href={href}
     color="white"
+    href={href}
+    isActive={title === children}
     paddingHorizontal={0.5}
     paddingVertical={0.5}
     prefetch
@@ -16,7 +17,9 @@ const HeaderA = ({ children, href }) => (
   </A>
 );
 
-const PageHeader = () => (
+type PageHeaderProps = { title: string };
+
+const PageHeader = ({ title }: PageHeaderProps) => (
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -24,8 +27,8 @@ const PageHeader = () => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <HeaderA href="/">Home</HeaderA>
-    <HeaderA href="/about">About</HeaderA>
+    <HeaderA href="/" title={title}>Home</HeaderA>
+    <HeaderA href="/about" title={title}>About</HeaderA>
   </Box>
 );
 

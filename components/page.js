@@ -37,7 +37,7 @@ const Page = ({ children, title }: PageProps) => (
       </Head>
       <LoadingBar />
       <PageContainer>
-        <PageHeader />
+        <PageHeader title={title} />
         <PageBody>{children}</PageBody>
         <PageFooter />
       </PageContainer>
