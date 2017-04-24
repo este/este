@@ -356,6 +356,21 @@ export const createMixStyles = (theme: Theme) => (props: Object) => ({
     : null),
 });
 
+// Border breaks rhythm because it adds additional space.
+// We compensate it via padding automatically, if possible.
+const tryEnsureRhythmViaPaddingCompensation = style =>
+  ['Bottom', 'Left', 'Right', 'Top'].reduce((style, prop) => {
+    const borderXWidth = style[`border${prop}Width`];
+    const paddingProp = `padding${prop}`;
+    const paddingX = style[paddingProp];
+    const computableNumbers =
+      typeof borderXWidth === 'number' && typeof paddingX === 'number';
+    if (!computableNumbers) return style;
+    const compensatedPaddingX = paddingX - borderXWidth;
+    if (compensatedPaddingX < 0) return style;
+    return { ...style, [paddingProp]: compensatedPaddingX };
+  }, style);
+
 export const computeBoxStyleAndProps = (
   boxProps: BoxProps,
   options: TransformationOptions
@@ -375,30 +390,16 @@ export const computeBoxStyleAndProps = (
     if (transformed.style) style = { ...style, ...transformed.style };
     if (transformed.props) props = { ...props, ...transformed.props };
   });
-  return { style, props };
+  return { style: tryEnsureRhythmViaPaddingCompensation(style), props };
 };
-
-const tryEnsureRhythmViaPaddingCompensation = style =>
-  ['Bottom', 'Left', 'Right', 'Top'].reduce((style, prop) => {
-    const borderXWidth = style[`border${prop}Width`];
-    const paddingProp = `padding${prop}`;
-    const paddingX = style[paddingProp];
-    const computableNumbers =
-      typeof borderXWidth === 'number' && typeof paddingX === 'number';
-    if (!computableNumbers) return style;
-    const compensatedPaddingX = paddingX - borderXWidth;
-    if (compensatedPaddingX < 0) return style;
-    return { ...style, [paddingProp]: compensatedPaddingX };
-  }, style);
 
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const { as, style, rawStyle, ...restProps } = createMixStyles(theme)(props);
   const computed = computeBoxStyleAndProps(restProps, { isReactNative, theme });
-  const boxStyle = tryEnsureRhythmViaPaddingCompensation({
+  const className = renderer.renderRule(() => ({
     ...computed.style,
     ...rawStyle,
-  });
-  const className = renderer.renderRule(() => boxStyle);
+  }));
   return React.createElement(as || 'div', { ...computed.props, className });
 };
 

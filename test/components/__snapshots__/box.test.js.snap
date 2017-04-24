@@ -1,9 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`rawStyle from style overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:2}"`;
+
+exports[`rawStyle from style overrides props 2`] = `
+<div
+  className="a b c d e"
+/>
+`;
+
+exports[`rawStyle prop overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:2}"`;
+
+exports[`rawStyle prop overrides props 2`] = `
+<div
+  className="a b c d e"
+/>
+`;
+
 exports[`render 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}"`;
 
 exports[`render 2`] = `
 <div
   className="a b c d e f g h"
 />
+`;
+
+exports[`style overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:48}"`;
+
+exports[`style overrides props 2`] = `
+<div
+  className="a b c d e"
+/>
+`;
+
+exports[`try ensure rhythm via padding compensation 1`] = `
+Object {
+  "borderBottomWidth": 0,
+  "borderLeftWidth": 1,
+  "borderRightWidth": 0,
+  "borderTopWidth": 0,
+  "paddingLeft": 23,
+}
+`;
+
+exports[`try ensure rhythm via padding compensation 2`] = `
+Object {
+  "borderBottomWidth": 0,
+  "borderLeftWidth": 25,
+  "borderRightWidth": 0,
+  "borderTopWidth": 0,
+  "paddingLeft": 24,
+}
 `;

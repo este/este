@@ -38,15 +38,70 @@ const computeBrowser = props =>
   // $FlowFixMe Don't fix. We test real values, not types.
   computeBoxStyleAndProps(props, { isReactNative: false, theme });
 
-test('render', () => {
+const render = Component => {
   const felaRenderer = createFelaRenderer();
   const component = renderer.create(
     <FelaProvider renderer={felaRenderer}>
       <ThemeProvider theme={theme}>
-        <Box margin={1} />
+        <Component />
       </ThemeProvider>
     </FelaProvider>
   );
+  return { felaRenderer, component };
+};
+
+test('render', () => {
+  const { felaRenderer, component } = render(() => <Box margin={1} />);
+  expect(felaRenderer.renderToString()).toMatchSnapshot();
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('rawStyle prop overrides props', () => {
+  const { felaRenderer, component } = render(() => (
+    <Box
+      marginLeft={1}
+      rawStyle={{
+        marginLeft: 2,
+      }}
+    />
+  ));
+  expect(felaRenderer.renderToString()).toMatchSnapshot();
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('style gets theme', () => {
+  const style = jest.fn(() => {});
+  render(() => <Box style={style} />);
+  expect(style).toHaveBeenCalledTimes(1);
+  expect(style.mock.calls[0][0]).toEqual(theme);
+});
+
+test('style gets mixStyles');
+
+test('style overrides props', () => {
+  const { felaRenderer, component } = render(() => (
+    <Box
+      marginLeft={1}
+      style={() => ({
+        marginLeft: 2,
+      })}
+    />
+  ));
+  expect(felaRenderer.renderToString()).toMatchSnapshot();
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('rawStyle from style overrides props', () => {
+  const { felaRenderer, component } = render(() => (
+    <Box
+      marginLeft={1}
+      style={() => ({
+        rawStyle: {
+          marginLeft: 2,
+        },
+      })}
+    />
+  ));
   expect(felaRenderer.renderToString()).toMatchSnapshot();
   expect(component.toJSON()).toMatchSnapshot();
 });
@@ -346,13 +401,7 @@ test('border color shorthand', () => {
 test('as', () => {
   const Component = jest.fn(() => null);
   const StyledComponent = props => <Box as={Component} {...props} />;
-  renderer.create(
-    <FelaProvider renderer={createFelaRenderer()}>
-      <ThemeProvider theme={theme}>
-        <StyledComponent someProp="1" height={2} />
-      </ThemeProvider>
-    </FelaProvider>
-  );
+  render(() => <StyledComponent someProp="1" height={2} />);
   expect(Component).toHaveBeenCalledTimes(1);
   expect(Component.mock.calls[0][0]).toEqual({
     className: 'a b c d e',
@@ -360,5 +409,11 @@ test('as', () => {
   });
 });
 
-test('try ensure rhythm via padding compensation');
-test('rawStyle');
+test('try ensure rhythm via padding compensation', () => {
+  expect(
+    compute({ paddingLeft: 1, borderLeftWidth: 1 }).style
+  ).toMatchSnapshot();
+  expect(
+    compute({ paddingLeft: 1, borderLeftWidth: 25 }).style
+  ).toMatchSnapshot();
+});
