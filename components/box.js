@@ -349,6 +349,13 @@ const browserStyleToEmulateReactNative = {
   overflow: 'hidden', // Android sucks. Google "react native android overflow".
 };
 
+export const createMixStyles = (theme: Theme) => (props: Object) => ({
+  ...props,
+  ...(typeof props.style === 'function'
+    ? props.style(theme, createMixStyles(theme))
+    : null),
+});
+
 export const computeBoxStyleAndProps = (
   boxProps: BoxProps,
   options: TransformationOptions
@@ -371,20 +378,27 @@ export const computeBoxStyleAndProps = (
   return { style, props };
 };
 
-export const createMixStyles = (theme: Theme) => (props: Object) => ({
-  ...props,
-  ...(typeof props.style === 'function'
-    ? props.style(theme, createMixStyles(theme))
-    : null),
-});
+const tryEnsureRhythmViaPaddingCompensation = style =>
+  ['Bottom', 'Left', 'Right', 'Top'].reduce((style, prop) => {
+    const borderXWidth = style[`border${prop}Width`];
+    const paddingProp = `padding${prop}`;
+    const paddingX = style[paddingProp];
+    const computableNumbers =
+      typeof borderXWidth === 'number' && typeof paddingX === 'number';
+    if (!computableNumbers) return style;
+    const compensatedPaddingX = paddingX - borderXWidth;
+    if (compensatedPaddingX < 0) return style;
+    return { ...style, [paddingProp]: compensatedPaddingX };
+  }, style);
 
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const { as, style, rawStyle, ...restProps } = createMixStyles(theme)(props);
   const computed = computeBoxStyleAndProps(restProps, { isReactNative, theme });
-  const className = renderer.renderRule(() => ({
+  const boxStyle = tryEnsureRhythmViaPaddingCompensation({
     ...computed.style,
     ...rawStyle,
-  }));
+  });
+  const className = renderer.renderRule(() => boxStyle);
   return React.createElement(as || 'div', { ...computed.props, className });
 };
 

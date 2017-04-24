@@ -360,5 +360,5 @@ test('as', () => {
   });
 });
 
-test('rhythm compensation');
+test('try ensure rhythm via padding compensation');
 test('rawStyle');
