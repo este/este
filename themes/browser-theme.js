@@ -33,6 +33,9 @@ const browerTheme: Theme = {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     marginBottom: 1,
   },
+  p: {
+    marginBottom: 1,
+  },
   // states: {
   //   active: {
   //     darken: 0.2,
@@ -42,23 +45,8 @@ const browerTheme: Theme = {
   //     opacity: 0.5,
   //   },
   // },
-  // container: {
-  //   maxWidths: {
-  //     small: 540,
-  //     medium: 720,
-  //     big: 960,
-  //     bigger: 1140,
-  //   },
-  // },
-  // block: {
-  //   marginBottom: 1,
-  //   maxWidth: 21,
-  // },
   // button: {
   //   borderRadius: 2,
-  // },
-  // paragraph: {
-  //   marginBottom: 1,
   // },
 };
 

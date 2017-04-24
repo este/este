@@ -27,7 +27,7 @@ const MainNav = ({ title }: MainNavProps) => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <NavA href="/" title={title}>Home</NavA>
+    <NavA href="/" title={title}>Este</NavA>
     <NavA href="/about" title={title}>About</NavA>
   </Box>
 );

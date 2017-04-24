@@ -43,6 +43,9 @@ export type Theme = {|
     fontFamily: string,
     marginBottom: number,
   |},
+  p: {|
+    marginBottom: number,
+  |},
 |};
 
 // export type Color = $Keys<ColorProps>;

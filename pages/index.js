@@ -1,68 +1,45 @@
 // @flow
-import type { State } from '../types';
 import A from '../components/a';
-import Box from '../components/box';
+import Blockquote from '../components/blockquote';
 import Heading from '../components/heading';
 import Image from '../components/image';
 import Link from '../components/link';
+import P from '../components/p';
 import Page from '../components/page';
 import Text from '../components/text';
-import ToggleBaseline from '../components/toggle-baseline';
+// import ToggleBaseline from '../components/toggle-baseline';
 import app from '../lib/app';
-import { compose } from 'ramda';
-import { connect } from 'react-redux';
-import { setAppOnline } from '../lib/app/actions';
 
-type IndexProps = {
-  appVersion: string,
-  online: boolean,
-  setAppOnline: typeof setAppOnline,
-};
-
-const Index = ({ appVersion, online, setAppOnline }: IndexProps) => (
-  <Page title="Home">
-    <Heading size={1}>Este</Heading>
-    <Text>normal text</Text>
-    <Text size={-1}>small text</Text>
-    <Text size={5}>text 5</Text>
-    <A href="/foo" color="danger">404</A>
-    {/* TODO: Blockquote? */}
-    <Text size={-1} paddingVertical={0.5} maxWidth={21}>
-      Blockquote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </Text>
-    <Text>
-      Text is container, except <Text color="primary">inner</Text> Text.
-      Just like in React Native.
-    </Text>
-    <Text color="warning">{online.toString()}</Text>
-    <Text>appVersion: {appVersion.toString()}</Text>
-    <Box margin={1}>
-      <Text>Box</Text>
-    </Box>
+const Index = () => (
+  <Page title="Este">
+    <Heading size={3}>Este</Heading>
+    <P>
+      Starter kit for universal full–fledged React apps.
+    </P>
+    <P>
+      <A href="https://github.com/este/este">github.com/este/este</A>
+    </P>
     <Link href="https://mises.org/library/anatomy-state">
       <Image
         alt="50x50 placeholder"
-        marginVertical={1}
+        marginBottom={1}
         size={{ height: 50, width: 50 }}
         src="/static/50x50.png"
       />
     </Link>
-    <Box flexDirection="row">
-      <button onClick={() => setAppOnline(!online)}>toggle</button>
-    </Box>
-    <ToggleBaseline />
+    <Text>normal text</Text>
+    <Text size={-1}>small text</Text>
+    <Text size={5} marginBottom={1}>text 5</Text>
+    <Blockquote
+      href="https://en.wikipedia.org/wiki/Milton_Friedman"
+      source="Milton Friedman"
+    >
+      Most economic fallacies derive from the tendency to assume that there is
+      a fixed pie, that one party can gain only at the expense of another.
+    </Blockquote>
+    {/* <ToggleBaseline /> */}
     {/* <List /> */}
   </Page>
 );
 
-export default compose(
-  app,
-  connect(
-    (state: State) => ({
-      appVersion: state.app.version,
-      online: state.app.online,
-    }),
-    { setAppOnline }
-  )
-)(Index);
+export default app(Index);

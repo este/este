@@ -1,4 +1,5 @@
 // @flow
+import A from '../components/a';
 import Baseline from '../components/baseline';
 import Box from './box';
 import Head from 'next/head';
@@ -27,20 +28,24 @@ const PageContainer = ({ children }) => (
 );
 
 // Flex 1 to make footer sticky.
-const PageBody = ({ children }) => <Box flex={1}>{children}</Box>;
+const PageBody = ({ children }) => (
+  <Box flex={1} maxWidth={30} paddingTop={2}>{children}</Box>
+);
 
 const PageFooter = () => (
-  <Box
-    // borderTopWidth={1}
-    // borderStyle="solid"
+  <Text
+    borderColor="gray"
+    borderStyle="solid"
+    borderTopWidth={1}
     flexDirection="row"
     marginTop={1}
     paddingVertical={1}
+    size={-1}
   >
-    <Text size={-1}>Made with love by</Text>
-    {/* {'\u00a0'}
-    <Link size={-1} to="https://twitter.com/steida">steida</Link> */}
-  </Box>
+    Made with love by
+    {' '}
+    <A size={-1} href="https://twitter.com/steida">steida</A>
+  </Text>
 );
 
 const Page = ({ children, title }: PageProps) => (

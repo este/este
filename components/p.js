@@ -1,13 +1,13 @@
 // @flow
+import Text, { type TextProps } from './text';
 
-// const Paragraph = (props: TextProps) => (
-//   <Text
-//     style={theme => {
-//       const {
-//         color = theme.paragraph.color,
-//         ...restProps
-//       } = props;
-//       return { color, ...restProps };
-//     }}
-//   />
-// );
+const P = (props: TextProps) => (
+  <Text
+    style={theme => {
+      const { marginBottom = theme.p.marginBottom, ...restProps } = props;
+      return { marginBottom, ...restProps };
+    }}
+  />
+);
+
+export default P;
