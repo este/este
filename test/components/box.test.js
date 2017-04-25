@@ -69,14 +69,21 @@ test('rawStyle prop overrides props', () => {
   expect(component.toJSON()).toMatchSnapshot();
 });
 
-test('style gets theme', () => {
+test('style prop theme arg', () => {
   const style = jest.fn(() => {});
   render(() => <Box style={style} />);
   expect(style).toHaveBeenCalledTimes(1);
   expect(style.mock.calls[0][0]).toEqual(theme);
 });
 
-test('style gets mixStyles');
+test('style prop mixStyles arg', () => {
+  const Foo = props => <Box style={(theme, mixStyles) => mixStyles(props)} />;
+  const { felaRenderer, component } = render(() => (
+    <Foo style={() => ({ margin: 1 })} />
+  ));
+  expect(felaRenderer.renderToString()).toMatchSnapshot();
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
 test('style overrides props', () => {
   const { felaRenderer, component } = render(() => (

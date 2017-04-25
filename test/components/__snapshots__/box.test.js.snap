@@ -32,6 +32,14 @@ exports[`style overrides props 2`] = `
 />
 `;
 
+exports[`style prop mixStyles arg 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}"`;
+
+exports[`style prop mixStyles arg 2`] = `
+<div
+  className="a b c d e f g h"
+/>
+`;
+
 exports[`try ensure rhythm via padding compensation 1`] = `
 Object {
   "borderBottomWidth": 0,
