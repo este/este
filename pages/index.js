@@ -1,14 +1,18 @@
 // @flow
 import A from '../components/a';
 import Blockquote from '../components/blockquote';
+import Button from '../components/button';
+import Buttons from '../components/buttons';
 import Heading from '../components/heading';
 import Image from '../components/image';
 import Link from '../components/link';
 import P from '../components/p';
 import Page from '../components/page';
 import Text from '../components/text';
-// import ToggleBaseline from '../components/toggle-baseline';
+import ToggleBaseline from '../components/toggle-baseline';
 import app from '../lib/app';
+
+import Box from '../components/box';
 
 const Index = () => (
   <Page title="Este">
@@ -29,15 +33,23 @@ const Index = () => (
     </Link>
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
-    <Text size={5} marginBottom={1}>text 5</Text>
+    <P size={5}>text 5</P>
     <Blockquote
-      href="https://en.wikipedia.org/wiki/Milton_Friedman"
-      source="Milton Friedman"
+      source="Friedrich Hayek"
+      href="https://en.wikipedia.org/wiki/Friedrich_Hayek"
     >
-      Most economic fallacies derive from the tendency to assume that there is
-      a fixed pie, that one party can gain only at the expense of another.
+      The curious task of economics is to demonstrate to men how little they
+      really know about what they imagine they can design.
     </Blockquote>
-    {/* <ToggleBaseline /> */}
+    <Buttons>
+      <Button primary>Primary</Button>
+      <Button success>Success</Button>
+      <Button warning>Warning</Button>
+      <Button danger>Danger</Button>
+      <Button primary disabled>Disabled</Button>
+      <Button>Text</Button>
+    </Buttons>
+    <ToggleBaseline />
     {/* <List /> */}
   </Page>
 );
