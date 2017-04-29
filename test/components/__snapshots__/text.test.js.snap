@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`do not fix fontSmoothing for dark text on a light background 1`] = `
+exports[`do not fix fontSmoothing for dark text on light background 1`] = `
 Object {
   "component": <div
     className="a b c d e f g h i j k l"
@@ -18,17 +18,17 @@ Object {
 }
 `;
 
-exports[`do not fix fontSmoothing for light text on a dark background on native 1`] = `
+exports[`do not fix fontSmoothing for light text on dark background on native 1`] = `
 Object {
   "component": <div
     className="a b c d e f g h i j"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{background-color:black}.c{color:blue}.d{display:inline}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24}",
 }
 `;
 
-exports[`fix fontSmoothing for light text on a dark background 1`] = `
+exports[`fix fontSmoothing for light text on dark background 1`] = `
 Object {
   "component": <div
     className="a b c d e f g h i j k l m n"
@@ -158,7 +158,7 @@ exports[`text without props native 1`] = `
 Object {
   "component": <div
     className="a b c d e f g h i"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{color:black}.c{display:inline}.d{white-space:pre-wrap}.e{overflow-wrap:break-word}.f{-ms-hyphens:auto}.g{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.h{font-size:16}.i{line-height:24}",
 }

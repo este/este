@@ -35,7 +35,7 @@ test('text without props', () => {
 });
 
 test('text without props native', () => {
-  expectRender(() => <Text isNative />);
+  expectRender(() => <Text isReactNative />);
 });
 
 test('props', () => {
@@ -49,11 +49,11 @@ test('props', () => {
   expectRender(() => <Text size={1} />);
 });
 
-test('fix fontSmoothing for light text on a dark background', () => {
+test('fix fontSmoothing for light text on dark background', () => {
   expectRender(() => <Text color="primary" backgroundColor="black" />);
 });
 
-test('do not fix fontSmoothing for dark text on a light background', () => {
+test('do not fix fontSmoothing for dark text on light background', () => {
   expectRender(() => <Text color="primary" backgroundColor="white" />);
 });
 
@@ -61,8 +61,10 @@ test('do not fix fontSmoothing for dark text without backgroundColor', () => {
   expectRender(() => <Text color="primary" />);
 });
 
-test('do not fix fontSmoothing for light text on a dark background on native', () => {
-  expectRender(() => <Text color="primary" backgroundColor="black" isNative />);
+test('do not fix fontSmoothing for light text on dark background on native', () => {
+  expectRender(() => (
+    <Text color="primary" backgroundColor="black" isReactNative />
+  ));
 });
 
 test('lineHeight ensures vertical rhythm', () => {

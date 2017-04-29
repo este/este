@@ -24,9 +24,6 @@ const browerTheme: Theme = {
     color: 'black',
     // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    rawStyle: {
-      fixFontSmoothing: true,
-    },
   },
   heading: {
     bold: 'bold',
@@ -35,6 +32,10 @@ const browerTheme: Theme = {
   },
   p: {
     marginBottom: 1,
+  },
+  button: {
+    borderRadius: 2,
+    marginHorizontal: 0.25,
   },
   // states: {
   //   active: {

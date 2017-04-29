@@ -26,7 +26,7 @@ test('render', () => {
 });
 
 test('render native', () => {
-  expectRender(() => <Box margin={1} isNative />);
+  expectRender(() => <Box margin={1} isReactNative />);
 });
 
 test('rawStyle overrides props', () => {
@@ -181,10 +181,14 @@ test('flex shorthand', () => {
 });
 
 test('flex shorthand native', () => {
-  expectRender(() => <Box flex={1} isNative />);
-  expectRender(() => <Box flex={1} flexShrink={2} isNative />);
-  expectRender(() => <Box flex={1} flexShrink={2} flexBasis="3px" isNative />);
-  expectRender(() => <Box flex={3} flexShrink={2} flexBasis="1px" isNative />);
+  expectRender(() => <Box flex={1} isReactNative />);
+  expectRender(() => <Box flex={1} flexShrink={2} isReactNative />);
+  expectRender(() => (
+    <Box flex={1} flexShrink={2} flexBasis="3px" isReactNative />
+  ));
+  expectRender(() => (
+    <Box flex={3} flexShrink={2} flexBasis="1px" isReactNative />
+  ));
 });
 
 test('backgroundColor', () => {

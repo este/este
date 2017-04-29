@@ -47,7 +47,7 @@ const fixFontSmoothing = (color, backgroundColor) => {
 
 const emulateReactNativeStyle = (theme, rawStyle, { backgroundColor }) => ({
   ...rawStyle,
-  ...(theme.text.rawStyle.fixFontSmoothing && backgroundColor
+  ...(backgroundColor
     ? fixFontSmoothing(rawStyle.color, theme.colors[backgroundColor])
     : null),
   lineHeight: `${rawStyle.lineHeight}px`, // browser needs px
@@ -86,7 +86,7 @@ const Text = (props: TextProps) => (
         ...propsRawStyle,
       };
 
-      if (!restProps.isNative) {
+      if (!restProps.isReactNative) {
         rawStyle = emulateReactNativeStyle(theme, rawStyle, restProps);
       }
 

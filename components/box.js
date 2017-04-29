@@ -61,7 +61,7 @@ type MaybeRhythmProp = number | string;
 
 export type BoxProps = {
   as?: string | ((props: Object) => React.Element<*>),
-  isNative?: boolean,
+  isReactNative?: boolean,
   style?: (theme: Theme, mixStyle: (Object) => Object) => BoxProps,
   rawStyle?: Object,
 
@@ -214,7 +214,7 @@ const flexTransformation = (theme, props, prop, value) => {
   if (value < 1) throw new Error('Not implemented yet');
   const { flexBasis = 'auto', flexShrink = 1 } = props;
   return {
-    style: props.isNative
+    style: props.isReactNative
       ? { [prop]: value }
       : { flexBasis, flexGrow: value, flexShrink },
   };
@@ -367,12 +367,14 @@ const initialBrowserStyle = {
   flexDirection: 'column', // emulate React Native
   position: 'relative', // emulate React Native
 };
-const initialNativeStyle = {
+const initialReactNativeStyle = {
   ...initialUniversalStyle,
 };
 
 const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
-  let style = boxProps.isNative ? initialNativeStyle : initialBrowserStyle;
+  let style = boxProps.isReactNative
+    ? initialReactNativeStyle
+    : initialBrowserStyle;
   let props = {};
   Object.keys(boxProps).forEach(prop => {
     const value = boxProps[prop];

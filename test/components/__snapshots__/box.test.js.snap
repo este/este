@@ -155,7 +155,7 @@ exports[`flex shorthand native 1`] = `
 Object {
   "component": <div
     className="a b"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{flex:1}",
 }
@@ -165,7 +165,7 @@ exports[`flex shorthand native 2`] = `
 Object {
   "component": <div
     className="a b c"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{flex:1}.c{flex-shrink:2}",
 }
@@ -175,7 +175,7 @@ exports[`flex shorthand native 3`] = `
 Object {
   "component": <div
     className="a b c d"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{flex:1}.c{flex-shrink:2}.d{flex-basis:3px}",
 }
@@ -185,7 +185,7 @@ exports[`flex shorthand native 4`] = `
 Object {
   "component": <div
     className="a b c d"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{flex:3}.c{flex-shrink:2}.d{flex-basis:1px}",
 }
@@ -564,7 +564,7 @@ exports[`render native 1`] = `
 Object {
   "component": <div
     className="a b c d e"
-    isNative={true}
+    isReactNative={true}
 />,
   "fela": ".a{overflow:hidden}.b{margin-bottom:24}.c{margin-left:24}.d{margin-right:24}.e{margin-top:24}",
 }
