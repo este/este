@@ -1,204 +1,165 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`browser text without props 1`] = `
-Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": "24px",
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
-}
-`;
-
 exports[`do not fix fontSmoothing for dark text on a light background 1`] = `
 Object {
-  "backgroundColor": "white",
-  "rawStyle": Object {
-    "color": "blue",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": "24px",
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{background-color:white}.f{color:blue}.g{white-space:pre-wrap}.h{overflow-wrap:break-word}.i{-ms-hyphens:auto}.j{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.k{font-size:16}.l{line-height:24px}",
 }
 `;
 
 exports[`do not fix fontSmoothing for dark text without backgroundColor 1`] = `
 Object {
-  "rawStyle": Object {
-    "color": "blue",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": "24px",
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:blue}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}",
+}
+`;
+
+exports[`do not fix fontSmoothing for light text on a dark background on native 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{background-color:black}.c{color:blue}.d{display:inline}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24}",
 }
 `;
 
 exports[`fix fontSmoothing for light text on a dark background 1`] = `
 Object {
-  "backgroundColor": "black",
-  "rawStyle": Object {
-    "MozOsxFontSmoothing": "grayscale",
-    "WebkitFontSmoothing": "antialiased",
-    "color": "blue",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": "24px",
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{background-color:black}.f{color:blue}.g{white-space:pre-wrap}.h{overflow-wrap:break-word}.i{-ms-hyphens:auto}.j{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.k{font-size:16}.l{line-height:24px}.m{-moz-osx-font-smoothing:grayscale}.n{-webkit-font-smoothing:antialiased}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:24}.k{line-height:24px}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:26}.k{line-height:48px}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:48}.k{line-height:48px}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 4`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:50}.k{line-height:72px}",
 }
 `;
 
 exports[`props 1`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "textAlign": "left",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}.l{text-align:left}",
 }
 `;
 
 exports[`props 2`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "fontWeight": 600,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}.l{font-weight:600}",
 }
 `;
 
 exports[`props 3`] = `
 Object {
-  "rawStyle": Object {
-    "color": "blue",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:blue}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}",
 }
 `;
 
 exports[`props 4`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "textDecoration": "underline",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}.l{text-decoration:underline}",
 }
 `;
 
 exports[`props 5`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "arial",
-    "fontSize": 16,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:arial}.j{font-size:16}.k{line-height:24px}",
 }
 `;
 
 exports[`props 6`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "fontStyle": "italic",
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k l"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}.l{font-style:italic}",
 }
 `;
 
 exports[`props 7`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": 10,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:10px}",
 }
 `;
 
 exports[`props 8`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 18,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:18}.k{line-height:24px}",
 }
 `;
 
 exports[`text without props 1`] = `
 Object {
-  "rawStyle": Object {
-    "color": "black",
-    "display": "inline",
-    "fontFamily": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif",
-    "fontSize": 16,
-    "lineHeight": 24,
-    "msHyphens": "auto",
-    "overflowWrap": "break-word",
-    "whiteSpace": "pre-wrap",
-  },
+  "component": <div
+    className="a b c d e f g h i j k"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:inline}.c{flex-direction:column}.d{position:relative}.e{color:black}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}",
+}
+`;
+
+exports[`text without props native 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{color:black}.c{display:inline}.d{white-space:pre-wrap}.e{overflow-wrap:break-word}.f{-ms-hyphens:auto}.g{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.h{font-size:16}.i{line-height:24}",
 }
 `;

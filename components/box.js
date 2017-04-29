@@ -61,6 +61,7 @@ type MaybeRhythmProp = number | string;
 
 export type BoxProps = {
   as?: string | ((props: Object) => React.Element<*>),
+  isNative?: boolean,
   style?: (theme: Theme, mixStyle: (Object) => Object) => BoxProps,
   rawStyle?: Object,
 
@@ -143,22 +144,14 @@ type BoxContext = {
   theme: Theme,
 };
 
-type TransformationOptions = {|
-  isReactNative: boolean,
-  theme: Theme,
-|};
-
 type Transformations = {
   [prop: string]: (
-    options: TransformationOptions,
+    theme: Theme,
     props: BoxProps,
     prop: $Keys<BoxProps>,
     value: any
   ) => {| style?: Object, props?: Object |},
 };
-
-const isReactNative =
-  typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 const maybeRhythm = theme => value =>
   (typeof value === 'number' ? theme.typography.rhythm(value) : value);
@@ -168,12 +161,12 @@ const createShorthandTransformation = destructure => (options, props) => ({
 });
 
 const createMaybeRhythmShorthandTransformation = destructure => (
-  options,
+  theme,
   props
 ) => ({
   style: map(
-    maybeRhythm(options.theme),
-    createShorthandTransformation(destructure)(options, props).style
+    maybeRhythm(theme),
+    createShorthandTransformation(destructure)(theme, props).style
   ),
 });
 
@@ -201,14 +194,14 @@ const paddingTransformation = createMaybeRhythmShorthandTransformation(
   }) => ({ paddingBottom, paddingLeft, paddingRight, paddingTop })
 );
 
-const createColorShorthandTransformation = destructure => (options, props) => ({
+const createColorShorthandTransformation = destructure => (theme, props) => ({
   style: map(
-    value => options.theme.colors[value],
-    createShorthandTransformation(destructure)(options, props).style
+    value => theme.colors[value],
+    createShorthandTransformation(destructure)(theme, props).style
   ),
 });
 
-const maybeRhythmTransformation = ({ theme }, props, prop, value) => ({
+const maybeRhythmTransformation = (theme, props, prop, value) => ({
   style: { [prop]: maybeRhythm(theme)(value) },
 });
 
@@ -217,17 +210,17 @@ const justValueTransformation = (options, props, prop, value) => ({
 });
 
 // https://github.com/necolas/react-native-web expandStyle-test.js
-const flexTransformation = ({ isReactNative }, props, prop, value) => {
+const flexTransformation = (theme, props, prop, value) => {
   if (value < 1) throw new Error('Not implemented yet');
   const { flexBasis = 'auto', flexShrink = 1 } = props;
   return {
-    style: isReactNative
+    style: props.isNative
       ? { [prop]: value }
       : { flexBasis, flexGrow: value, flexShrink },
   };
 };
 
-const colorTransformation = ({ theme }, props, prop, value) => ({
+const colorTransformation = (theme, props, prop, value) => ({
   style: { [prop]: theme.colors[value] },
 });
 
@@ -339,16 +332,6 @@ const transformations: Transformations = {
   borderTopColor: borderColorTransformation,
 };
 
-// Enforce React Native behaviour for browsers.
-// TODO: Consider once documented:
-// https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/View.tsx#L24
-const browserStyleToEmulateReactNative = {
-  display: 'flex', // React Native default View display value.
-  flexDirection: 'column', // React Native default flexDirection value.
-  position: 'relative', // React Native View has position relative by default.
-  overflow: 'hidden', // Android sucks. Google "react native android overflow".
-};
-
 export const createMixStyles = (theme: Theme) => (props: Object) => ({
   ...props,
   ...(typeof props.style === 'function'
@@ -371,11 +354,25 @@ const tryEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-export const computeBoxStyleAndProps = (
-  boxProps: BoxProps,
-  options: TransformationOptions
-) => {
-  let style = options.isReactNative ? {} : browserStyleToEmulateReactNative;
+// Enforce the same styles for all platforms via React Native emulation.
+// https://facebook.github.io/yoga
+// https://github.com/Microsoft/reactxp
+// https://github.com/necolas/react-native-web
+const initialUniversalStyle = {
+  overflow: 'hidden', // google "react native android overflow"
+};
+const initialBrowserStyle = {
+  ...initialUniversalStyle,
+  display: 'flex', // emulate React Native
+  flexDirection: 'column', // emulate React Native
+  position: 'relative', // emulate React Native
+};
+const initialNativeStyle = {
+  ...initialUniversalStyle,
+};
+
+const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
+  let style = boxProps.isNative ? initialNativeStyle : initialBrowserStyle;
   let props = {};
   Object.keys(boxProps).forEach(prop => {
     const value = boxProps[prop];
@@ -386,7 +383,7 @@ export const computeBoxStyleAndProps = (
     }
     // TODO: Skip already processed shorthands for better performance?
     // if (transformation === marginTransformation) etc.
-    const transformed = transformation(options, boxProps, prop, value);
+    const transformed = transformation(theme, boxProps, prop, value);
     if (transformed.style) style = { ...style, ...transformed.style };
     if (transformed.props) props = { ...props, ...transformed.props };
   });
@@ -395,7 +392,7 @@ export const computeBoxStyleAndProps = (
 
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const { as, style, rawStyle, ...restProps } = createMixStyles(theme)(props);
-  const computed = computeBoxStyleAndProps(restProps, { isReactNative, theme });
+  const computed = computeBoxStyleAndProps(theme, restProps);
   const className = renderer.renderRule(() => ({
     ...computed.style,
     ...rawStyle,

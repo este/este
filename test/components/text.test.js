@@ -1,14 +1,6 @@
 // @flow
-import { computeStyle } from '../../components/text';
-import { createMixStyles } from '../../components/box';
-
-const browserDefaultStyle = {
-  // Enforce React Native behaviour for browsers.
-  // display: 'flex',
-  // flexDirection: 'column',
-  // position: 'relative',
-  // overflow: 'hidden',
-};
+import Text from '../../components/text';
+import { createExpectRender } from './utils';
 
 const theme = {
   typography: {
@@ -36,66 +28,46 @@ const theme = {
   },
 };
 
-const compute = props =>
-  // $FlowFixMe
-  computeStyle(props, { isReactNative: true })(theme, createMixStyles(theme));
-
-const computeBrowser = props =>
-  // $FlowFixMe
-  computeStyle(props, { isReactNative: false })(theme, createMixStyles(theme));
+const expectRender = createExpectRender(theme);
 
 test('text without props', () => {
-  const boxProps = compute({});
-  expect(boxProps).toMatchSnapshot();
+  expectRender(() => <Text />);
 });
 
-test('browser text without props', () => {
-  const boxProps = computeBrowser({});
-  expect(boxProps).toMatchSnapshot();
+test('text without props native', () => {
+  expectRender(() => <Text isNative />);
 });
 
 test('props', () => {
-  expect(compute({ align: 'left' })).toMatchSnapshot();
-  expect(compute({ bold: true })).toMatchSnapshot();
-  expect(compute({ color: 'primary' })).toMatchSnapshot();
-  expect(compute({ decoration: 'underline' })).toMatchSnapshot();
-  expect(compute({ fontFamily: 'arial' })).toMatchSnapshot();
-  expect(compute({ italic: true })).toMatchSnapshot();
-  expect(compute({ lineHeight: 10 })).toMatchSnapshot();
-  expect(compute({ size: 1 })).toMatchSnapshot();
+  expectRender(() => <Text align="left" />);
+  expectRender(() => <Text bold />);
+  expectRender(() => <Text color="primary" />);
+  expectRender(() => <Text decoration="underline" />);
+  expectRender(() => <Text fontFamily="arial" />);
+  expectRender(() => <Text italic />);
+  expectRender(() => <Text lineHeight={10} />);
+  expectRender(() => <Text size={1} />);
 });
 
 test('fix fontSmoothing for light text on a dark background', () => {
-  expect(
-    computeBrowser({ color: 'primary', backgroundColor: 'black' })
-  ).toMatchSnapshot();
+  expectRender(() => <Text color="primary" backgroundColor="black" />);
 });
 
 test('do not fix fontSmoothing for dark text on a light background', () => {
-  expect(
-    computeBrowser({ color: 'primary', backgroundColor: 'white' })
-  ).toMatchSnapshot();
+  expectRender(() => <Text color="primary" backgroundColor="white" />);
 });
 
 test('do not fix fontSmoothing for dark text without backgroundColor', () => {
-  expect(computeBrowser({ color: 'primary' })).toMatchSnapshot();
+  expectRender(() => <Text color="primary" />);
+});
+
+test('do not fix fontSmoothing for light text on a dark background on native', () => {
+  expectRender(() => <Text color="primary" backgroundColor="black" isNative />);
 });
 
 test('lineHeight ensures vertical rhythm', () => {
-  // $FlowFixMe
-  expect(compute({ size: 4 }).rawStyle.lineHeight).toBe(
-    theme.typography.lineHeight * 1
-  );
-  // $FlowFixMe
-  expect(compute({ size: 5 }).rawStyle.lineHeight).toBe(
-    theme.typography.lineHeight * 2
-  );
-  // $FlowFixMe
-  expect(compute({ size: 16 }).rawStyle.lineHeight).toBe(
-    theme.typography.lineHeight * 2
-  );
-  // $FlowFixMe
-  expect(compute({ size: 17 }).rawStyle.lineHeight).toBe(
-    theme.typography.lineHeight * 3
-  );
+  expectRender(() => <Text size={4} />);
+  expectRender(() => <Text size={5} />);
+  expectRender(() => <Text size={16} />);
+  expectRender(() => <Text size={17} />);
 });

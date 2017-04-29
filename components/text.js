@@ -1,5 +1,5 @@
 // @flow
-import type { Color, Theme } from '../themes/types';
+import type { Color } from '../themes/types';
 import Box, { type BoxProps } from './box';
 import colorLib from 'color';
 
@@ -21,9 +21,6 @@ export type TextProps = BoxProps & {
   size?: number,
   // TODO: shadowColor, shadowOffset, shadowRadius.
 };
-
-const isReactNative =
-  typeof navigator === 'object' && navigator.product === 'ReactNative'; // eslint-disable-line no-undef
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const computeFontSizeAndLineHeight = (typography, size) => {
@@ -56,48 +53,46 @@ const emulateReactNativeStyle = (theme, rawStyle, { backgroundColor }) => ({
   lineHeight: `${rawStyle.lineHeight}px`, // browser needs px
 });
 
-export const computeStyle = (
-  props: TextProps,
-  { isReactNative }: { isReactNative: boolean }
-) => (theme: Theme, mixStyles: Object => TextProps) => {
-  const {
-    align,
-    bold,
-    color = theme.text.color,
-    decoration,
-    fontFamily = theme.text.fontFamily,
-    italic,
-    lineHeight,
-    size = 0,
-    rawStyle: propsRawStyle,
-    ...restProps
-  } = mixStyles(props);
-
-  let rawStyle = {
-    color: theme.colors[color],
-    display: 'inline', // React Native default Text display value.
-    // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
-    whiteSpace: 'pre-wrap',
-    overflowWrap: 'break-word',
-    msHyphens: 'auto',
-    fontFamily,
-    ...computeFontSizeAndLineHeight(theme.typography, size),
-    ...(align ? { textAlign: align } : null),
-    ...(bold ? { fontWeight: theme.text.bold } : null),
-    ...(decoration ? { textDecoration: decoration } : null),
-    ...(italic ? { fontStyle: 'italic' } : null),
-    ...(lineHeight ? { lineHeight } : null),
-    ...propsRawStyle,
-  };
-
-  if (!isReactNative) {
-    rawStyle = emulateReactNativeStyle(theme, rawStyle, restProps);
-  }
-  return { ...restProps, rawStyle };
-};
-
 const Text = (props: TextProps) => (
-  <Box style={computeStyle(props, { isReactNative })} />
+  <Box
+    style={(theme, mixStyles) => {
+      const {
+        align,
+        bold,
+        color = theme.text.color,
+        decoration,
+        fontFamily = theme.text.fontFamily,
+        italic,
+        lineHeight,
+        size = 0,
+        rawStyle: propsRawStyle,
+        ...restProps
+      } = mixStyles(props);
+
+      let rawStyle = {
+        color: theme.colors[color],
+        display: 'inline', // React Native default Text display value.
+        // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
+        whiteSpace: 'pre-wrap',
+        overflowWrap: 'break-word',
+        msHyphens: 'auto',
+        fontFamily,
+        ...computeFontSizeAndLineHeight(theme.typography, size),
+        ...(align ? { textAlign: align } : null),
+        ...(bold ? { fontWeight: theme.text.bold } : null),
+        ...(decoration ? { textDecoration: decoration } : null),
+        ...(italic ? { fontStyle: 'italic' } : null),
+        ...(lineHeight ? { lineHeight } : null),
+        ...propsRawStyle,
+      };
+
+      if (!restProps.isNative) {
+        rawStyle = emulateReactNativeStyle(theme, rawStyle, restProps);
+      }
+
+      return { ...restProps, rawStyle };
+    }}
+  />
 );
 
 export default Text;

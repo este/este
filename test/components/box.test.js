@@ -1,17 +1,6 @@
 // @flow
-import Box, { computeBoxStyleAndProps } from '../../components/box';
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { Provider as FelaProvider, ThemeProvider } from 'react-fela';
-import { createRenderer as createFelaRenderer } from 'fela';
-
-const browserDefaultStyle = {
-  // Enforce React Native behaviour for browsers.
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'relative',
-  overflow: 'hidden',
-};
+import Box from '../../components/box';
+import { createExpectRender } from './utils';
 
 const theme = {
   typography: {
@@ -30,63 +19,34 @@ const theme = {
   },
 };
 
-const compute = props =>
-  // $FlowFixMe Don't fix. We test real values, not types.
-  computeBoxStyleAndProps(props, { isReactNative: true, theme });
-
-const computeBrowser = props =>
-  // $FlowFixMe Don't fix. We test real values, not types.
-  computeBoxStyleAndProps(props, { isReactNative: false, theme });
-
-const render = Component => {
-  const felaRenderer = createFelaRenderer();
-  const component = renderer.create(
-    <FelaProvider renderer={felaRenderer}>
-      <ThemeProvider theme={theme}>
-        <Component />
-      </ThemeProvider>
-    </FelaProvider>
-  );
-  return { felaRenderer, component };
-};
+const expectRender = createExpectRender(theme);
 
 test('render', () => {
-  const { felaRenderer, component } = render(() => <Box margin={1} />);
-  expect(felaRenderer.renderToString()).toMatchSnapshot();
-  expect(component.toJSON()).toMatchSnapshot();
+  expectRender(() => <Box margin={1} />);
 });
 
-test('rawStyle prop overrides props', () => {
-  const { felaRenderer, component } = render(() => (
-    <Box
-      marginLeft={1}
-      rawStyle={{
-        marginLeft: 2,
-      }}
-    />
-  ));
-  expect(felaRenderer.renderToString()).toMatchSnapshot();
-  expect(component.toJSON()).toMatchSnapshot();
+test('render native', () => {
+  expectRender(() => <Box margin={1} isNative />);
 });
 
-test('style prop theme arg', () => {
+test('rawStyle overrides props', () => {
+  expectRender(() => <Box marginLeft={1} rawStyle={{ marginLeft: 2 }} />);
+});
+
+test('style theme arg', () => {
   const style = jest.fn(() => {});
-  render(() => <Box style={style} />);
+  expectRender(() => <Box style={style} />);
   expect(style).toHaveBeenCalledTimes(1);
   expect(style.mock.calls[0][0]).toEqual(theme);
 });
 
-test('style prop mixStyles arg', () => {
+test('style mixStyles arg', () => {
   const Foo = props => <Box style={(theme, mixStyles) => mixStyles(props)} />;
-  const { felaRenderer, component } = render(() => (
-    <Foo style={() => ({ margin: 1 })} />
-  ));
-  expect(felaRenderer.renderToString()).toMatchSnapshot();
-  expect(component.toJSON()).toMatchSnapshot();
+  expectRender(() => <Foo style={() => ({ margin: 1 })} />);
 });
 
 test('style overrides props', () => {
-  const { felaRenderer, component } = render(() => (
+  expectRender(() => (
     <Box
       marginLeft={1}
       style={() => ({
@@ -94,12 +54,10 @@ test('style overrides props', () => {
       })}
     />
   ));
-  expect(felaRenderer.renderToString()).toMatchSnapshot();
-  expect(component.toJSON()).toMatchSnapshot();
 });
 
 test('rawStyle from style overrides props', () => {
-  const { felaRenderer, component } = render(() => (
+  expectRender(() => (
     <Box
       marginLeft={1}
       style={() => ({
@@ -109,72 +67,44 @@ test('rawStyle from style overrides props', () => {
       })}
     />
   ));
-  expect(felaRenderer.renderToString()).toMatchSnapshot();
-  expect(component.toJSON()).toMatchSnapshot();
 });
 
-test('unknown prop is passed to a component', () => {
-  const { style, props } = compute({ unknownProp: 1 });
-  expect(style).toEqual({});
-  expect(props).toEqual({ unknownProp: 1 });
+test('as to pass props to any component', () => {
+  const SomeComponent = jest.fn(() => null);
+  const SomeComponentStyledAsBox = props => (
+    <Box as={SomeComponent} {...props} />
+  );
+  expectRender(() => <SomeComponentStyledAsBox someProp="1" height={2} />);
+  expect(SomeComponent).toHaveBeenCalledTimes(1);
+  expect(SomeComponent.mock.calls[0][0]).toEqual({
+    className: 'a b c d e',
+    someProp: '1',
+  });
 });
 
 test('margin shorthand', () => {
-  const { style, props } = compute({ margin: 1 });
-  expect(style).toEqual({
-    marginBottom: 24,
-    marginLeft: 24,
-    marginRight: 24,
-    marginTop: 24,
-  });
-  expect(props).toEqual({});
+  expectRender(() => <Box margin={1} />);
 });
 
 test('marginHorizontal shorthand', () => {
-  const { style, props } = compute({ marginHorizontal: 1 });
-  expect(style).toEqual({
-    marginLeft: 24,
-    marginRight: 24,
-  });
-  expect(props).toEqual({});
+  expectRender(() => <Box marginHorizontal={1} />);
 });
 
 test('marginVertical shorthand', () => {
-  const { style, props } = compute({ marginVertical: 1 });
-  expect(style).toEqual({
-    marginBottom: 24,
-    marginTop: 24,
-  });
-  expect(props).toEqual({});
+  expectRender(() => <Box marginVertical={1} />);
 });
 
 test('marginBottom', () => {
-  const { style, props } = compute({
-    marginBottom: 1,
-  });
-  expect('marginLeft' in style).toBeFalsy();
-  expect(style).toEqual({ marginBottom: 24 });
-  expect(props).toEqual({});
+  expectRender(() => <Box marginBottom={1} />);
 });
 
 test('margin bottom left right top', () => {
-  const { style, props } = compute({
-    marginBottom: 1,
-    marginLeft: 2,
-    marginRight: 3,
-    marginTop: 4,
-  });
-  expect(style).toEqual({
-    marginBottom: 24,
-    marginLeft: 48,
-    marginRight: 72,
-    marginTop: 96,
-  });
-  expect(props).toEqual({});
+  expectRender(() => (
+    <Box marginBottom={1} marginLeft={2} marginRight={3} marginTop={4} />
+  ));
 });
 
 test('margin shorthands are order independent', () => {
-  // all permutations
   [
     { margin: 1, marginVertical: 2, marginBottom: 3 },
     { margin: 1, marginBottom: 3, marginVertical: 2 },
@@ -182,49 +112,16 @@ test('margin shorthands are order independent', () => {
     { marginVertical: 2, margin: 1, marginBottom: 3 },
     { marginBottom: 3, marginVertical: 2, margin: 1 },
     { marginBottom: 3, margin: 1, marginVertical: 2 },
+    { margin: 1, marginLeft: 2 },
+    { marginLeft: 2, margin: 1 },
   ].forEach(props => {
-    const { style } = compute(props);
-    expect(style).toEqual({
-      marginBottom: 72,
-      marginLeft: 24,
-      marginRight: 24,
-      marginTop: 48,
-    });
-  });
-
-  const { style: style1 } = compute({
-    marginLeft: 2,
-    margin: 1,
-  });
-  expect(style1).toEqual({
-    marginBottom: 24,
-    marginLeft: 48,
-    marginRight: 24,
-    marginTop: 24,
-  });
-
-  const { style: style2 } = compute({
-    margin: 1,
-    marginLeft: 2,
-  });
-  expect(style2).toEqual({
-    marginBottom: 24,
-    marginLeft: 48,
-    marginRight: 24,
-    marginTop: 24,
+    expectRender(() => <Box {...props} />);
   });
 });
 
-// Just one test, because the implementation is the same as for margin.
 test('padding shorthand', () => {
-  const { style, props } = compute({ padding: 1 });
-  expect(style).toEqual({
-    paddingBottom: 24,
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingTop: 24,
-  });
-  expect(props).toEqual({});
+  // Just one test, because the implementation is the same as for margin.
+  expectRender(() => <Box padding={1} />);
 });
 
 test('just value style props', () => {
@@ -244,9 +141,7 @@ test('just value style props', () => {
     'zIndex',
     'borderStyle',
   ].forEach(prop => {
-    const { style, props } = compute({ [prop]: 'foo' });
-    expect(style).toEqual({ [prop]: 'foo' });
-    expect(props).toEqual({});
+    expectRender(() => <Box {...{ [prop]: 'foo' }} />);
   });
 });
 
@@ -263,164 +158,58 @@ test('not shorthand rhythm props', () => {
     'right',
     'top',
   ].forEach(prop => {
-    const { style, props } = compute({ [prop]: 1 });
-    expect(style).toEqual({ [prop]: 24 });
-    expect(props).toEqual({});
+    expectRender(() => <Box {...{ [prop]: 1 }} />);
   });
-});
-
-// Everything is display: flex by default. All the behaviors of block and
-// inline-block can be expressed in term of flex but not the opposite.
-// https://facebook.github.io/yoga
-// necolas/react-native-web
-test('React Native View behaviour for web', () => {
-  const { style, props } = computeBrowser({});
-  expect(style).toEqual(browserDefaultStyle);
 });
 
 // http://facebook.github.io/react-native/releases/0.43/docs/layout-props.html#flex
 test('flex throws for not yet supported value', () => {
-  const flex0 = () => compute({ flex: 0 });
-  expect(flex0).toThrowError();
-  const flexNegative1 = () => compute({ flex: -1 });
-  expect(flexNegative1).toThrowError();
-});
-
-test('flex shorthand for React Native', () => {
-  const { style, props } = compute({ flex: 1 });
-  expect(style).toEqual({ flex: 1 });
+  expect(() => {
+    expectRender(() => <Box flex={0} />);
+  }).toThrowError();
+  expect(() => {
+    expectRender(() => <Box flex={-1} />);
+  }).toThrowError();
 });
 
 // https://github.com/necolas/react-native-web expandStyle-test.js
-test('flex shorthand for browser', () => {
-  const { style: style1 } = computeBrowser({ flex: 1 });
-  expect(style1).toEqual({
-    ...browserDefaultStyle,
-    flexBasis: 'auto',
-    flexGrow: 1,
-    flexShrink: 1,
-  });
+test('flex shorthand', () => {
+  expectRender(() => <Box flex={1} />);
+  expectRender(() => <Box flex={1} flexShrink={2} />);
+  expectRender(() => <Box flex={1} flexShrink={2} flexBasis="3px" />);
+  expectRender(() => <Box flex={3} flexShrink={2} flexBasis="1px" />);
+});
 
-  const { style: style2 } = computeBrowser({ flexShrink: 2, flex: 1 });
-  expect(style2).toEqual({
-    ...browserDefaultStyle,
-    flexBasis: 'auto',
-    flexGrow: 1,
-    flexShrink: 2,
-  });
-
-  const { style: style3 } = computeBrowser({
-    flexBasis: '1px',
-    flexShrink: 2,
-    flex: 1,
-  });
-  expect(style3).toEqual({
-    ...browserDefaultStyle,
-    flexBasis: '1px',
-    flexGrow: 1,
-    flexShrink: 2,
-  });
+test('flex shorthand native', () => {
+  expectRender(() => <Box flex={1} isNative />);
+  expectRender(() => <Box flex={1} flexShrink={2} isNative />);
+  expectRender(() => <Box flex={1} flexShrink={2} flexBasis="3px" isNative />);
+  expectRender(() => <Box flex={3} flexShrink={2} flexBasis="1px" isNative />);
 });
 
 test('backgroundColor', () => {
-  const { style } = compute({ backgroundColor: 'primary' });
-  expect(style).toEqual({ backgroundColor: 'blue' });
+  expectRender(() => <Box backgroundColor="primary" />);
 });
 
 test('border width', () => {
-  const { style: style1 } = compute({ borderWidth: 1 });
-  expect(style1).toEqual({
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
-  });
-
-  const { style: style2 } = compute({ borderBottomWidth: 1 });
-  expect(style2).toEqual({
-    borderBottomWidth: 1,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderTopWidth: 0,
-  });
-
-  const { style: style3 } = compute({ borderWidth: 1, borderBottomWidth: 2 });
-  expect(style3).toEqual({
-    borderBottomWidth: 2,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
-  });
+  expectRender(() => <Box borderWidth={1} />);
+  expectRender(() => <Box borderBottomWidth={1} />);
+  expectRender(() => <Box borderWidth={1} borderBottomWidth={2} />);
 });
 
 test('border radius shorthand', () => {
-  const { style: style1 } = compute({ borderRadius: 1 });
-  expect(style1).toEqual({
-    borderBottomLeftRadius: 1,
-    borderBottomRightRadius: 1,
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-  });
-
-  const { style: style2 } = compute({ borderBottomLeftRadius: 2 });
-  expect(style2).toEqual({
-    borderBottomLeftRadius: 2,
-  });
-
-  const { style: style3 } = compute({
-    borderRadius: 1,
-    borderBottomLeftRadius: 2,
-  });
-  expect(style3).toEqual({
-    borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 1,
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-  });
+  expectRender(() => <Box borderRadius={1} />);
+  expectRender(() => <Box borderBottomLeftRadius={2} />);
+  expectRender(() => <Box borderRadius={1} borderBottomLeftRadius={2} />);
 });
 
 test('border color shorthand', () => {
-  const { style: style1 } = compute({ borderColor: 'primary' });
-  expect(style1).toEqual({
-    borderBottomColor: 'blue',
-    borderLeftColor: 'blue',
-    borderRightColor: 'blue',
-    borderTopColor: 'blue',
-  });
-
-  const { style: style2 } = compute({ borderBottomColor: 'success' });
-  expect(style2).toEqual({
-    borderBottomColor: 'green',
-  });
-
-  const { style: style3 } = compute({
-    borderColor: 'primary',
-    borderBottomColor: 'success',
-  });
-  expect(style3).toEqual({
-    borderBottomColor: 'green',
-    borderLeftColor: 'blue',
-    borderRightColor: 'blue',
-    borderTopColor: 'blue',
-  });
+  expectRender(() => <Box borderColor="primary" />);
+  expectRender(() => <Box borderBottomColor="success" />);
+  expectRender(() => <Box borderColor="primary" borderBottomColor="success" />);
 });
 
-test('as', () => {
-  const Component = jest.fn(() => null);
-  const StyledComponent = props => <Box as={Component} {...props} />;
-  render(() => <StyledComponent someProp="1" height={2} />);
-  expect(Component).toHaveBeenCalledTimes(1);
-  expect(Component.mock.calls[0][0]).toEqual({
-    className: 'a b c d e',
-    someProp: '1',
-  });
-});
-
-test('try ensure rhythm via padding compensation', () => {
-  expect(
-    compute({ paddingLeft: 1, borderLeftWidth: 1 }).style
-  ).toMatchSnapshot();
-  expect(
-    compute({ paddingLeft: 1, borderLeftWidth: 25 }).style
-  ).toMatchSnapshot();
+test('ensure rhythm via padding compensation', () => {
+  expectRender(() => <Box paddingLeft={1} borderLeftWidth={1} />);
+  expectRender(() => <Box paddingLeft={1} borderLeftWidth={25} />);
 });

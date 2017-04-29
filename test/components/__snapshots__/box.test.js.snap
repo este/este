@@ -1,61 +1,598 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rawStyle from style overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:2}"`;
-
-exports[`rawStyle from style overrides props 2`] = `
-<div
-  className="a b c d e"
-/>
-`;
-
-exports[`rawStyle prop overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:2}"`;
-
-exports[`rawStyle prop overrides props 2`] = `
-<div
-  className="a b c d e"
-/>
-`;
-
-exports[`render 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}"`;
-
-exports[`render 2`] = `
-<div
-  className="a b c d e f g h"
-/>
-`;
-
-exports[`style overrides props 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-left:48}"`;
-
-exports[`style overrides props 2`] = `
-<div
-  className="a b c d e"
-/>
-`;
-
-exports[`style prop mixStyles arg 1`] = `".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:hidden}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}"`;
-
-exports[`style prop mixStyles arg 2`] = `
-<div
-  className="a b c d e f g h"
-/>
-`;
-
-exports[`try ensure rhythm via padding compensation 1`] = `
+exports[`as to pass props to any component 1`] = `
 Object {
-  "borderBottomWidth": 0,
-  "borderLeftWidth": 1,
-  "borderRightWidth": 0,
-  "borderTopWidth": 0,
-  "paddingLeft": 23,
+  "component": null,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{height:48}",
 }
 `;
 
-exports[`try ensure rhythm via padding compensation 2`] = `
+exports[`backgroundColor 1`] = `
 Object {
-  "borderBottomWidth": 0,
-  "borderLeftWidth": 25,
-  "borderRightWidth": 0,
-  "borderTopWidth": 0,
-  "paddingLeft": 24,
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{background-color:blue}",
+}
+`;
+
+exports[`border color shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-color:blue}.f{border-left-color:blue}.g{border-right-color:blue}.h{border-top-color:blue}",
+}
+`;
+
+exports[`border color shorthand 2`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-color:green}",
+}
+`;
+
+exports[`border color shorthand 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-color:green}.f{border-left-color:blue}.g{border-right-color:blue}.h{border-top-color:blue}",
+}
+`;
+
+exports[`border radius shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-left-radius:1}.f{border-bottom-right-radius:1}.g{border-top-left-radius:1}.h{border-top-right-radius:1}",
+}
+`;
+
+exports[`border radius shorthand 2`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-left-radius:2}",
+}
+`;
+
+exports[`border radius shorthand 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-left-radius:2}.f{border-bottom-right-radius:1}.g{border-top-left-radius:1}.h{border-top-right-radius:1}",
+}
+`;
+
+exports[`border width 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-width:1}.f{border-left-width:1}.g{border-right-width:1}.h{border-top-width:1}",
+}
+`;
+
+exports[`border width 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-width:1}.f{border-left-width:0}.g{border-right-width:0}.h{border-top-width:0}",
+}
+`;
+
+exports[`border width 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-bottom-width:2}.f{border-left-width:1}.g{border-right-width:1}.h{border-top-width:1}",
+}
+`;
+
+exports[`ensure rhythm via padding compensation 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{padding-left:23}.f{border-bottom-width:0}.g{border-left-width:1}.h{border-right-width:0}.i{border-top-width:0}",
+}
+`;
+
+exports[`ensure rhythm via padding compensation 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{padding-left:24}.f{border-bottom-width:0}.g{border-left-width:25}.h{border-right-width:0}.i{border-top-width:0}",
+}
+`;
+
+exports[`flex shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:auto}.f{flex-grow:1}.g{flex-shrink:1}",
+}
+`;
+
+exports[`flex shorthand 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:auto}.f{flex-grow:1}.g{flex-shrink:2}",
+}
+`;
+
+exports[`flex shorthand 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:3px}.f{flex-grow:1}.g{flex-shrink:2}",
+}
+`;
+
+exports[`flex shorthand 4`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:1px}.f{flex-grow:3}.g{flex-shrink:2}",
+}
+`;
+
+exports[`flex shorthand native 1`] = `
+Object {
+  "component": <div
+    className="a b"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{flex:1}",
+}
+`;
+
+exports[`flex shorthand native 2`] = `
+Object {
+  "component": <div
+    className="a b c"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{flex:1}.c{flex-shrink:2}",
+}
+`;
+
+exports[`flex shorthand native 3`] = `
+Object {
+  "component": <div
+    className="a b c d"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{flex:1}.c{flex-shrink:2}.d{flex-basis:3px}",
+}
+`;
+
+exports[`flex shorthand native 4`] = `
+Object {
+  "component": <div
+    className="a b c d"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{flex:3}.c{flex-shrink:2}.d{flex-basis:1px}",
+}
+`;
+
+exports[`just value style props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{align-items:foo}",
+}
+`;
+
+exports[`just value style props 2`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{align-self:foo}",
+}
+`;
+
+exports[`just value style props 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:auto}.f{flex-grow:foo}.g{flex-shrink:1}",
+}
+`;
+
+exports[`just value style props 4`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-basis:foo}",
+}
+`;
+
+exports[`just value style props 5`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:foo}.d{position:relative}",
+}
+`;
+
+exports[`just value style props 6`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-grow:foo}",
+}
+`;
+
+exports[`just value style props 7`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-shrink:foo}",
+}
+`;
+
+exports[`just value style props 8`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{flex-wrap:foo}",
+}
+`;
+
+exports[`just value style props 9`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{justify-content:foo}",
+}
+`;
+
+exports[`just value style props 10`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{opacity:foo}",
+}
+`;
+
+exports[`just value style props 11`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": ".a{overflow:foo}.b{display:flex}.c{flex-direction:column}.d{position:relative}",
+}
+`;
+
+exports[`just value style props 12`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:foo}",
+}
+`;
+
+exports[`just value style props 13`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{z-index:foo}",
+}
+`;
+
+exports[`just value style props 14`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{border-style:foo}",
+}
+`;
+
+exports[`margin bottom left right top 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:48}.g{margin-right:72}.h{margin-top:96}",
+}
+`;
+
+exports[`margin shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}",
+}
+`;
+
+exports[`margin shorthands are order independent 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 4`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 5`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 6`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:72}.f{margin-left:24}.g{margin-right:24}.h{margin-top:48}",
+}
+`;
+
+exports[`margin shorthands are order independent 7`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:48}.g{margin-right:24}.h{margin-top:24}",
+}
+`;
+
+exports[`margin shorthands are order independent 8`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:48}.g{margin-right:24}.h{margin-top:24}",
+}
+`;
+
+exports[`marginBottom 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}",
+}
+`;
+
+exports[`marginHorizontal shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-left:24}.f{margin-right:24}",
+}
+`;
+
+exports[`marginVertical shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-top:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{height:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 2`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{max-height:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 3`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{max-width:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 4`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{min-height:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 5`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{min-width:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 6`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{width:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 7`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{bottom:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 8`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{left:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 9`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{right:24}",
+}
+`;
+
+exports[`not shorthand rhythm props 10`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{top:24}",
+}
+`;
+
+exports[`padding shorthand 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{padding-bottom:24}.f{padding-left:24}.g{padding-right:24}.h{padding-top:24}",
+}
+`;
+
+exports[`rawStyle from style overrides props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-left:2}",
+}
+`;
+
+exports[`rawStyle overrides props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-left:2}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}",
+}
+`;
+
+exports[`render native 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+    isNative={true}
+/>,
+  "fela": ".a{overflow:hidden}.b{margin-bottom:24}.c{margin-left:24}.d{margin-right:24}.e{margin-top:24}",
+}
+`;
+
+exports[`style mixStyles arg 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-bottom:24}.f{margin-left:24}.g{margin-right:24}.h{margin-top:24}",
+}
+`;
+
+exports[`style overrides props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}.e{margin-left:48}",
+}
+`;
+
+exports[`style theme arg 1`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": ".a{overflow:hidden}.b{display:flex}.c{flex-direction:column}.d{position:relative}",
 }
 `;
