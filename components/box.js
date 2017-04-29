@@ -358,23 +358,14 @@ const tryEnsureRhythmViaPaddingCompensation = style =>
 // https://facebook.github.io/yoga
 // https://github.com/Microsoft/reactxp
 // https://github.com/necolas/react-native-web
-const initialUniversalStyle = {
-  overflow: 'hidden', // google "react native android overflow"
-};
-const initialBrowserStyle = {
-  ...initialUniversalStyle,
-  display: 'flex', // emulate React Native
-  flexDirection: 'column', // emulate React Native
-  position: 'relative', // emulate React Native
-};
-const initialReactNativeStyle = {
-  ...initialUniversalStyle,
+const browserReactNativeEmulation = {
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
 };
 
 const computeBoxStyleAndProps = (theme: Theme, boxProps: BoxProps) => {
-  let style = boxProps.isReactNative
-    ? initialReactNativeStyle
-    : initialBrowserStyle;
+  let style = boxProps.isReactNative ? {} : browserReactNativeEmulation;
   let props = {};
   Object.keys(boxProps).forEach(prop => {
     const value = boxProps[prop];
