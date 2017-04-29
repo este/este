@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
-import Box from './box';
-// import OutlineButton from './OutlineButton';
+import Button from './button';
+import Buttons from './buttons';
 import { connect } from 'react-redux';
 import { toggleBaseline } from '../lib/app/actions';
 
@@ -16,18 +16,11 @@ const ToggleBaseline = ({
   baselineShown,
   toggleBaseline,
 }: ToggleBaselineProps) => (
-  <Box flexDirection="row">
-    <button onClick={() => toggleBaseline()}>
+  <Buttons>
+    <Button primary outline size={-1} onPress={toggleBaseline}>
       {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
-    </button>
-    {/* <OutlineButton
-      size={-1}
-      key={baselineShown} // To enforce blur after click.
-      onPress={toggleBaseline}
-    >
-      {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
-    </OutlineButton> */}
-  </Box>
+    </Button>
+  </Buttons>
 );
 
 export default connect(

@@ -12,8 +12,6 @@ import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import app from '../lib/app';
 
-import Box from '../components/box';
-
 const Index = () => (
   <Page title="Este">
     <Heading size={3}>Este</Heading>

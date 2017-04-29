@@ -35,7 +35,11 @@ const browerTheme: Theme = {
   },
   button: {
     borderRadius: 2,
+    borderWidth: 1,
     marginHorizontal: 0.25,
+    marginVertical: 0.3,
+    paddingVertical: 0.2,
+    disabledOpacity: 0.5,
   },
   // states: {
   //   active: {
