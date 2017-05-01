@@ -47,9 +47,6 @@ const PageFooter = () => (
   </Text>
 );
 
-const htmlStyle = theme =>
-  `html { background-color: ${theme.colors[theme.page.backgroundColor]} }`;
-
 type PageProps = {|
   children?: any,
   darkEnabled: boolean,
@@ -58,12 +55,18 @@ type PageProps = {|
 
 const Page = ({ children, darkEnabled, title }: PageProps) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
+  const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
     <ThemeProvider theme={theme}>
       <Baseline>
         <Head>
           <title>{title}</title>
-          <style dangerouslySetInnerHTML={{ __html: htmlStyle(theme) }} />
+          <meta name="theme-color" content={pageBackgroundColor} />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `html { background-color: ${pageBackgroundColor} }`,
+            }}
+          />
         </Head>
         <LoadingBar />
         <PageContainer>

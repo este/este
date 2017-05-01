@@ -13,7 +13,8 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "test": "flow && jest && next build",
-    "deploy": "node ./scripts/deploy-now"
+    "deploy": "node ./scripts/deploy-now",
+    "favicon": "node ./scripts/favicon"
   },
   "dependencies": {
     "apollo-client": "^1.0.0",
