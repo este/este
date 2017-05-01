@@ -12,7 +12,7 @@ const BrowserDivButton = ({
   ...restProps
 }: {
   disabled?: boolean,
-  onPress?: EventHandler, // eslint-disable-line no-undef
+  onPress?: EventHandler,
   style?: Object,
 }) => (
   <div // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -37,16 +37,23 @@ const BrowserDivButton = ({
   />
 );
 
+type UniversalButtonElement = {
+  blur: () => void,
+  focus: () => void,
+};
+
 type ButtonProps = ColorProps &
   TextProps & {
     disabled?: boolean,
-    onPress?: EventHandler, // eslint-disable-line no-undef
+    onPress?: (
+      event: Event & { currentTarget: UniversalButtonElement }
+    ) => mixed,
     outline?: boolean,
   };
 
 const Button = (props: ButtonProps) => (
   <Text
-    style={theme => {
+    style={(theme, mixStyles) => {
       const {
         as = BrowserDivButton,
         size = 0,
@@ -60,7 +67,7 @@ const Button = (props: ButtonProps) => (
         paddingVertical = size < 0 ? 0 : theme.button.paddingVertical,
         outline,
         ...restProps
-      } = props;
+      } = mixStyles(props);
 
       // <Button primary etc. shorthand. It overrides defaults.
       const colorName = Object.keys(theme.colors).find(color => props[color]);

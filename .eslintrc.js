@@ -9,6 +9,8 @@ module.exports = {
     // Flow. Probably bug, should not be detected.
     $Keys: true,
     $Exact: true,
+    Event: true,
+    EventHandler: true,
   },
   // AirBnb is great, but very strict. Feel free to add anything.
   rules: {
@@ -22,6 +24,7 @@ module.exports = {
     'no-nested-ternary': 0, // Buggy for functional componenents.
     'no-param-reassign': 0, // We love param reassignment. Naming is hard.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
+    'no-underscore-dangle': 0, // Control freaky.
     'react/jsx-closing-bracket-location': 0, // Prettier.
     'react/jsx-filename-extension': 0, // JSX belongs to .js files.
     'react/jsx-indent': 0, // Prettier.

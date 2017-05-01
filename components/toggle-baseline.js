@@ -16,11 +16,13 @@ const ToggleBaseline = ({
   toggleBaseline,
 }: ToggleBaselineProps) => (
   <Button
-    key={baselineShown} // To enforce blur after click.
-    onPress={toggleBaseline}
-    outline
     primary
+    outline
     size={-1}
+    onPress={e => {
+      e.currentTarget.blur();
+      toggleBaseline();
+    }}
   >
     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
   </Button>

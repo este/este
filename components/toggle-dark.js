@@ -10,13 +10,7 @@ type ToggleDarkProps = {|
 |};
 
 const ToggleDark = ({ darkEnabled, toggleDark }: ToggleDarkProps) => (
-  <Button
-    key={darkEnabled} // To enforce blur after click.
-    onPress={toggleDark}
-    outline
-    primary
-    size={-1}
-  >
+  <Button primary outline size={-1} onPress={toggleDark}>
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
   </Button>
 );
