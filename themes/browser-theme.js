@@ -3,7 +3,7 @@ import type { Theme } from './types';
 import openColor from './open-color';
 import typography from './typography';
 
-const browerTheme: Theme = {
+export const browserTheme: Theme = {
   typography: typography({
     fontSize: 16,
     fontSizeScale: 'step5', // perfect fourth, modularscale.com
@@ -18,6 +18,9 @@ const browerTheme: Theme = {
     black: openColor.gray8,
     white: openColor.white,
     gray: openColor.gray5,
+  },
+  page: {
+    backgroundColor: 'white',
   },
   text: {
     bold: 600,
@@ -55,4 +58,24 @@ const browerTheme: Theme = {
   // },
 };
 
-export default browerTheme;
+// $FlowFixMe flow/issues/2405
+export const browserThemeDark: Theme = {
+  ...browserTheme,
+  colors: {
+    primary: openColor.blue6,
+    success: openColor.green5,
+    warning: openColor.orange6,
+    danger: openColor.red6,
+    black: openColor.gray8,
+    white: openColor.white,
+    gray: openColor.gray6,
+  },
+  page: {
+    ...browserTheme.page,
+    backgroundColor: 'black',
+  },
+  text: {
+    ...browserTheme.text,
+    color: 'white',
+  },
+};

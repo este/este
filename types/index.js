@@ -11,6 +11,7 @@ import type { Middleware as ReduxMiddleware, Reducer } from 'redux';
 
 export type AppState = {
   +baselineShown: boolean,
+  +darkEnabled: boolean,
   +name: string,
   +online: boolean,
   +version: string,
@@ -22,7 +23,8 @@ export type State = {
 
 export type Action =
   | { type: 'SET_APP_ONLINE', +payload: { +online: boolean } }
-  | { type: 'TOGGLE_BASELINE' };
+  | { type: 'TOGGLE_BASELINE' }
+  | { type: 'TOGGLE_DARK' };
 
 export type Reducers = { [reducerName: string]: Reducer<State, Action> };
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;

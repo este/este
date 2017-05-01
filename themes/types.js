@@ -50,6 +50,9 @@ export type Theme = {|
     rhythm: number => number,
   |},
   colors: Colors,
+  page: {|
+    backgroundColor: Color,
+  |},
   text: {|
     bold: Bold,
     color: Color,

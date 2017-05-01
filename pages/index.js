@@ -10,6 +10,7 @@ import P from '../components/p';
 import Page from '../components/page';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
+import ToggleDark from '../components/toggle-dark';
 import app from '../lib/app';
 
 const Index = () => (
@@ -47,7 +48,10 @@ const Index = () => (
       <Button primary disabled>Disabled</Button>
       <Button>Text</Button>
     </Buttons>
-    <ToggleBaseline />
+    <Buttons>
+      <ToggleBaseline />
+      <ToggleDark />
+    </Buttons>
     {/* <List /> */}
   </Page>
 );
