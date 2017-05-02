@@ -6,7 +6,16 @@ Object {
     className="a b c d e f g h i"
     isReactNative={true}
 />,
-  "fela": ".a{background-color:black}.b{color:blue}.c{display:inline}.d{white-space:pre-wrap}.e{overflow-wrap:break-word}.f{-ms-hyphens:auto}.g{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.h{font-size:16}.i{line-height:24}",
+  "fela": "
+    .a{background-color:black}
+    .b{color:blue}
+    .c{display:inline}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .h{font-size:16}
+    .i{line-height:24}",
 }
 `;
 
@@ -16,7 +25,15 @@ Object {
     className="a b c d e f g h"
     isReactNative={true}
 />,
-  "fela": ".a{color:black}.b{display:inline}.c{white-space:pre-wrap}.d{overflow-wrap:break-word}.e{-ms-hyphens:auto}.f{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.g{font-size:16}.h{line-height:24}",
+  "fela": "
+    .a{color:black}
+    .b{display:inline}
+    .c{white-space:pre-wrap}
+    .d{overflow-wrap:break-word}
+    .e{-ms-hyphens:auto}
+    .f{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .g{font-size:16}
+    .h{line-height:24}",
 }
 `;
 
@@ -25,7 +42,18 @@ Object {
   "component": <div
     className="a b c d e f g h i j k"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{background-color:white}.e{color:blue}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:white}
+    .e{color:blue}
+    .f{white-space:pre-wrap}
+    .g{overflow-wrap:break-word}
+    .h{-ms-hyphens:auto}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}",
 }
 `;
 
@@ -34,7 +62,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:blue}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:blue}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}",
 }
 `;
 
@@ -43,7 +81,20 @@ Object {
   "component": <div
     className="a b c d e f g h i j k l m"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{background-color:black}.e{color:blue}.f{white-space:pre-wrap}.g{overflow-wrap:break-word}.h{-ms-hyphens:auto}.i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.j{font-size:16}.k{line-height:24px}.l{-moz-osx-font-smoothing:grayscale}.m{-webkit-font-smoothing:antialiased}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:black}
+    .e{color:blue}
+    .f{white-space:pre-wrap}
+    .g{overflow-wrap:break-word}
+    .h{-ms-hyphens:auto}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}
+    .l{-moz-osx-font-smoothing:grayscale}
+    .m{-webkit-font-smoothing:antialiased}",
 }
 `;
 
@@ -52,7 +103,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:24}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:24}
+    .j{line-height:24px}",
 }
 `;
 
@@ -61,7 +122,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:26}.j{line-height:48px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:26}
+    .j{line-height:48px}",
 }
 `;
 
@@ -70,7 +141,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:48}.j{line-height:48px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:48}
+    .j{line-height:48px}",
 }
 `;
 
@@ -79,7 +160,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:50}.j{line-height:72px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:50}
+    .j{line-height:72px}",
 }
 `;
 
@@ -88,7 +179,18 @@ Object {
   "component": <div
     className="a b c d e f g h i j k"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}.k{text-align:left}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}",
 }
 `;
 
@@ -97,7 +199,18 @@ Object {
   "component": <div
     className="a b c d e f g h i j k"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}.k{font-weight:600}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{font-weight:600}",
 }
 `;
 
@@ -106,7 +219,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:blue}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:blue}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}",
 }
 `;
 
@@ -115,7 +238,18 @@ Object {
   "component": <div
     className="a b c d e f g h i j k"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}.k{text-decoration:underline}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-decoration:underline}",
 }
 `;
 
@@ -124,7 +258,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:arial}.i{font-size:16}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:arial}
+    .i{font-size:16}
+    .j{line-height:24px}",
 }
 `;
 
@@ -133,7 +277,18 @@ Object {
   "component": <div
     className="a b c d e f g h i j k"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}.k{font-style:italic}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{font-style:italic}",
 }
 `;
 
@@ -142,7 +297,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:10px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:10px}",
 }
 `;
 
@@ -151,7 +316,17 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:18}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:18}
+    .j{line-height:24px}",
 }
 `;
 
@@ -160,6 +335,16 @@ Object {
   "component": <div
     className="a b c d e f g h i j"
 />,
-  "fela": ".a{display:inline}.b{flex-direction:column}.c{position:relative}.d{color:black}.e{white-space:pre-wrap}.f{overflow-wrap:break-word}.g{-ms-hyphens:auto}.h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}.i{font-size:16}.j{line-height:24px}",
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}",
 }
 `;

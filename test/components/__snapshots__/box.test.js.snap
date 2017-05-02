@@ -6,7 +6,8 @@ Object {
     className="a"
     isReactNative={true}
 />,
-  "fela": ".a{flex:1}",
+  "fela": "
+    .a{flex:1}",
 }
 `;
 
@@ -16,7 +17,9 @@ Object {
     className="a b"
     isReactNative={true}
 />,
-  "fela": ".a{flex:1}.b{flex-shrink:2}",
+  "fela": "
+    .a{flex:1}
+    .b{flex-shrink:2}",
 }
 `;
 
@@ -26,7 +29,10 @@ Object {
     className="a b c"
     isReactNative={true}
 />,
-  "fela": ".a{flex:1}.b{flex-shrink:2}.c{flex-basis:3px}",
+  "fela": "
+    .a{flex:1}
+    .b{flex-shrink:2}
+    .c{flex-basis:3px}",
 }
 `;
 
@@ -36,7 +42,10 @@ Object {
     className="a b c"
     isReactNative={true}
 />,
-  "fela": ".a{flex:3}.b{flex-shrink:2}.c{flex-basis:1px}",
+  "fela": "
+    .a{flex:3}
+    .b{flex-shrink:2}
+    .c{flex-basis:1px}",
 }
 `;
 
@@ -46,14 +55,22 @@ Object {
     className="a b c d"
     isReactNative={true}
 />,
-  "fela": ".a{margin-bottom:24}.b{margin-left:24}.c{margin-right:24}.d{margin-top:24}",
+  "fela": "
+    .a{margin-bottom:24}
+    .b{margin-left:24}
+    .c{margin-right:24}
+    .d{margin-top:24}",
 }
 `;
 
 exports[`as to pass props to any component 1`] = `
 Object {
   "component": null,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{height:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{height:48}",
 }
 `;
 
@@ -62,7 +79,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{background-color:blue}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:blue}",
 }
 `;
 
@@ -71,7 +92,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-color:blue}.e{border-left-color:blue}.f{border-right-color:blue}.g{border-top-color:blue}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-color:blue}
+    .e{border-left-color:blue}
+    .f{border-right-color:blue}
+    .g{border-top-color:blue}",
 }
 `;
 
@@ -80,7 +108,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-color:green}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-color:green}",
 }
 `;
 
@@ -89,7 +121,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-color:green}.e{border-left-color:blue}.f{border-right-color:blue}.g{border-top-color:blue}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-color:green}
+    .e{border-left-color:blue}
+    .f{border-right-color:blue}
+    .g{border-top-color:blue}",
 }
 `;
 
@@ -98,7 +137,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-left-radius:1}.e{border-bottom-right-radius:1}.f{border-top-left-radius:1}.g{border-top-right-radius:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-left-radius:1}
+    .e{border-bottom-right-radius:1}
+    .f{border-top-left-radius:1}
+    .g{border-top-right-radius:1}",
 }
 `;
 
@@ -107,7 +153,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-left-radius:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-left-radius:2}",
 }
 `;
 
@@ -116,7 +166,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-left-radius:2}.e{border-bottom-right-radius:1}.f{border-top-left-radius:1}.g{border-top-right-radius:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-left-radius:2}
+    .e{border-bottom-right-radius:1}
+    .f{border-top-left-radius:1}
+    .g{border-top-right-radius:1}",
 }
 `;
 
@@ -125,7 +182,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-width:1}.e{border-left-width:1}.f{border-right-width:1}.g{border-top-width:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-width:1}
+    .e{border-left-width:1}
+    .f{border-right-width:1}
+    .g{border-top-width:1}",
 }
 `;
 
@@ -134,7 +198,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-width:1}.e{border-left-width:0}.f{border-right-width:0}.g{border-top-width:0}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-width:1}
+    .e{border-left-width:0}
+    .f{border-right-width:0}
+    .g{border-top-width:0}",
 }
 `;
 
@@ -143,7 +214,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-bottom-width:2}.e{border-left-width:1}.f{border-right-width:1}.g{border-top-width:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-bottom-width:2}
+    .e{border-left-width:1}
+    .f{border-right-width:1}
+    .g{border-top-width:1}",
 }
 `;
 
@@ -152,7 +230,15 @@ Object {
   "component": <div
     className="a b c d e f g h"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{padding-left:23}.e{border-bottom-width:0}.f{border-left-width:1}.g{border-right-width:0}.h{border-top-width:0}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-left:23}
+    .e{border-bottom-width:0}
+    .f{border-left-width:1}
+    .g{border-right-width:0}
+    .h{border-top-width:0}",
 }
 `;
 
@@ -161,7 +247,15 @@ Object {
   "component": <div
     className="a b c d e f g h"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{padding-left:24}.e{border-bottom-width:0}.f{border-left-width:25}.g{border-right-width:0}.h{border-top-width:0}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-left:24}
+    .e{border-bottom-width:0}
+    .f{border-left-width:25}
+    .g{border-right-width:0}
+    .h{border-top-width:0}",
 }
 `;
 
@@ -170,7 +264,13 @@ Object {
   "component": <div
     className="a b c d e f"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:auto}.e{flex-grow:1}.f{flex-shrink:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:auto}
+    .e{flex-grow:1}
+    .f{flex-shrink:1}",
 }
 `;
 
@@ -179,7 +279,13 @@ Object {
   "component": <div
     className="a b c d e f"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:auto}.e{flex-grow:1}.f{flex-shrink:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:auto}
+    .e{flex-grow:1}
+    .f{flex-shrink:2}",
 }
 `;
 
@@ -188,7 +294,13 @@ Object {
   "component": <div
     className="a b c d e f"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:3px}.e{flex-grow:1}.f{flex-shrink:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:3px}
+    .e{flex-grow:1}
+    .f{flex-shrink:2}",
 }
 `;
 
@@ -197,7 +309,13 @@ Object {
   "component": <div
     className="a b c d e f"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:1px}.e{flex-grow:3}.f{flex-shrink:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:1px}
+    .e{flex-grow:3}
+    .f{flex-shrink:2}",
 }
 `;
 
@@ -206,7 +324,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{align-items:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{align-items:foo}",
 }
 `;
 
@@ -215,7 +337,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{align-self:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{align-self:foo}",
 }
 `;
 
@@ -224,7 +350,13 @@ Object {
   "component": <div
     className="a b c d e f"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:auto}.e{flex-grow:foo}.f{flex-shrink:1}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:auto}
+    .e{flex-grow:foo}
+    .f{flex-shrink:1}",
 }
 `;
 
@@ -233,7 +365,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-basis:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-basis:foo}",
 }
 `;
 
@@ -242,7 +378,10 @@ Object {
   "component": <div
     className="a b c"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:foo}.c{position:relative}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:foo}
+    .c{position:relative}",
 }
 `;
 
@@ -251,7 +390,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-grow:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-grow:foo}",
 }
 `;
 
@@ -260,7 +403,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-shrink:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-shrink:foo}",
 }
 `;
 
@@ -269,7 +416,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{flex-wrap:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-wrap:foo}",
 }
 `;
 
@@ -278,7 +429,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{justify-content:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{justify-content:foo}",
 }
 `;
 
@@ -287,7 +442,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{opacity:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{opacity:foo}",
 }
 `;
 
@@ -296,7 +455,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{overflow:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{overflow:foo}",
 }
 `;
 
@@ -305,7 +468,10 @@ Object {
   "component": <div
     className="a b c"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:foo}",
 }
 `;
 
@@ -314,7 +480,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{z-index:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{z-index:foo}",
 }
 `;
 
@@ -323,7 +493,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{border-style:foo}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{border-style:foo}",
 }
 `;
 
@@ -332,7 +506,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:48}.f{margin-right:72}.g{margin-top:96}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:48}
+    .f{margin-right:72}
+    .g{margin-top:96}",
 }
 `;
 
@@ -341,7 +522,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:24}.f{margin-right:24}.g{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:24}",
 }
 `;
 
@@ -350,7 +538,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -359,7 +554,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -368,7 +570,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -377,7 +586,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -386,7 +602,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -395,7 +618,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:72}.e{margin-left:24}.f{margin-right:24}.g{margin-top:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:72}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:48}",
 }
 `;
 
@@ -404,7 +634,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:48}.f{margin-right:24}.g{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:48}
+    .f{margin-right:24}
+    .g{margin-top:24}",
 }
 `;
 
@@ -413,7 +650,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:48}.f{margin-right:24}.g{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:48}
+    .f{margin-right:24}
+    .g{margin-top:24}",
 }
 `;
 
@@ -422,7 +666,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}",
 }
 `;
 
@@ -431,7 +679,12 @@ Object {
   "component": <div
     className="a b c d e"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-left:24}.e{margin-right:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:24}
+    .e{margin-right:24}",
 }
 `;
 
@@ -440,7 +693,12 @@ Object {
   "component": <div
     className="a b c d e"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-top:24}",
 }
 `;
 
@@ -449,7 +707,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{height:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{height:24}",
 }
 `;
 
@@ -458,7 +720,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{max-height:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{max-height:24}",
 }
 `;
 
@@ -467,7 +733,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{max-width:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{max-width:24}",
 }
 `;
 
@@ -476,7 +746,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{min-height:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{min-height:24}",
 }
 `;
 
@@ -485,7 +759,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{min-width:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{min-width:24}",
 }
 `;
 
@@ -494,7 +772,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{width:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{width:24}",
 }
 `;
 
@@ -503,7 +785,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{bottom:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{bottom:24}",
 }
 `;
 
@@ -512,7 +798,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{left:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{left:24}",
 }
 `;
 
@@ -521,7 +811,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{right:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{right:24}",
 }
 `;
 
@@ -530,7 +824,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{top:24}",
 }
 `;
 
@@ -539,7 +837,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{padding-bottom:24}.e{padding-left:24}.f{padding-right:24}.g{padding-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-bottom:24}
+    .e{padding-left:24}
+    .f{padding-right:24}
+    .g{padding-top:24}",
 }
 `;
 
@@ -548,7 +853,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-left:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:2}",
 }
 `;
 
@@ -557,7 +866,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-left:2}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:2}",
 }
 `;
 
@@ -566,7 +879,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:24}.f{margin-right:24}.g{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:24}",
 }
 `;
 
@@ -575,7 +895,14 @@ Object {
   "component": <div
     className="a b c d e f g"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-bottom:24}.e{margin-left:24}.f{margin-right:24}.g{margin-top:24}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{margin-left:24}
+    .f{margin-right:24}
+    .g{margin-top:24}",
 }
 `;
 
@@ -584,7 +911,11 @@ Object {
   "component": <div
     className="a b c d"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}.d{margin-left:48}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:48}",
 }
 `;
 
@@ -593,6 +924,9 @@ Object {
   "component": <div
     className="a b c"
 />,
-  "fela": ".a{display:flex}.b{flex-direction:column}.c{position:relative}",
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}",
 }
 `;

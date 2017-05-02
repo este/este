@@ -3,6 +3,8 @@ import testRenderer from 'react-test-renderer';
 import { Provider as FelaProvider, ThemeProvider } from 'react-fela';
 import { createRenderer as createFelaRenderer } from 'fela';
 
+const prettifyFelaString = str => str.replace(/\.[a-z]+/g, '\n    $&');
+
 export const createTestRenderer = (theme: any) => (Component: any) => {
   const felaRenderer = createFelaRenderer();
   const component = testRenderer.create(
@@ -13,7 +15,7 @@ export const createTestRenderer = (theme: any) => (Component: any) => {
     </FelaProvider>
   );
   return {
-    fela: felaRenderer.renderToString(),
+    fela: prettifyFelaString(felaRenderer.renderToString()),
     component: component.toJSON(),
   };
 };
