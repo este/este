@@ -44,6 +44,13 @@ export const browserTheme: Theme = {
     paddingVertical: 0.2,
     disabledOpacity: 0.5,
   },
+  form: {
+    marginBottom: 1,
+    maxWidth: 21,
+  },
+  textInput: {
+    disabledOpacity: 0.5,
+  },
   // states: {
   //   active: {
   //     darken: 0.2,

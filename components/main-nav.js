@@ -28,7 +28,7 @@ const MainNav = ({ title }: MainNavProps) => (
     paddingHorizontal={0.5}
   >
     <NavA href="/" title={title}>Este</NavA>
-    <NavA href="/about" title={title}>About</NavA>
+    <NavA href="/fields" title={title}>Fields</NavA>
   </Box>
 );
 

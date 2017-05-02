@@ -1,17 +1,26 @@
-// // @flow
-// import Page from '../components/page';
-// import Text from '../components/text';
-// import app from '../lib/app';
-//
-// const About = () => (
-//   <Page title="About">
-//     <Text>about</Text>
-//   </Page>
-// );
-//
-// // About.getInitialProps = async () =>
-// //   new Promise(resolve => {
-// //     setTimeout(() => resolve({ foo: 123 }), 750);
-// //   });
-//
-// export default app(About);
+// @flow
+import Form from '../components/form';
+import Heading from '../components/heading';
+import P from '../components/p';
+import Page from '../components/page';
+import TextInput from '../components/text-input';
+import app from '../lib/app';
+
+const onFormSubmit = () => {
+  console.log('foo');
+};
+
+const About = () => (
+  <Page title="Fields">
+    <Heading size={3}>redux-fields</Heading>
+    <P>
+      Simple and universal Redux forms.
+    </P>
+    <Form onSubmit={onFormSubmit}>
+      <TextInput placeholder="fok" />
+    </Form>
+    <P>Shit man</P>
+  </Page>
+);
+
+export default app(About);

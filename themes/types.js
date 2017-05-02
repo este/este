@@ -74,6 +74,13 @@ export type Theme = {|
     paddingVertical: number,
     disabledOpacity: number,
   |},
+  form: {|
+    marginBottom: number,
+    maxWidth: number,
+  |},
+  textInput: {|
+    disabledOpacity: number,
+  |},
 |};
 
 //   states: {
