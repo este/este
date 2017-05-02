@@ -1,9 +1,9 @@
 // @flow
+import Field from '../components/field';
 import Form from '../components/form';
 import Heading from '../components/heading';
 import P from '../components/p';
 import Page from '../components/page';
-import TextInput from '../components/text-input';
 import app from '../lib/app';
 
 const onFormSubmit = () => {
@@ -17,9 +17,9 @@ const About = () => (
       Simple and universal Redux forms.
     </P>
     <Form onSubmit={onFormSubmit}>
-      <TextInput placeholder="fok" />
+      <Field label="Name" placeholder="Jane Doe" />
+      <Field label="Description" placeholder="Some short description" />
     </Form>
-    <P>Shit man</P>
   </Page>
 );
 

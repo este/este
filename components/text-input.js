@@ -6,7 +6,7 @@ import colorLib from 'color';
 // For underline or the other effects, make a new component. Check Field.
 // TODO: multiline and rows, use PlatformTextarea, react-autosize-textarea?
 
-type TextInputProps = TextProps & {
+export type TextInputProps = TextProps & {
   disabled?: boolean,
 };
 
