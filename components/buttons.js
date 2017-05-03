@@ -3,19 +3,25 @@ import Box, { type BoxProps } from '../components/box';
 
 // Horizontal container for buttons.
 
-const Buttons = (props: BoxProps) => (
+export type ButtonsProps = BoxProps & {
+  vertical?: boolean,
+};
+
+const Buttons = (props: ButtonsProps) => (
   <Box
     style={theme => {
       const {
-        flexDirection = 'row',
+        vertical,
+        flexDirection = vertical ? 'column' : 'row',
         flexWrap = 'wrap',
-        // Button has default horizontal margin, which is subtract on edges.
+        marginBottom = 1,
         marginHorizontal = -theme.button.marginHorizontal,
         ...restProps
       } = props;
       return {
         flexDirection,
         flexWrap,
+        marginBottom,
         marginHorizontal,
         ...restProps,
       };
