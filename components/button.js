@@ -26,12 +26,6 @@ const BrowserDivButton = ({
       e.preventDefault();
       onPress(e);
     }}
-    style={{
-      ...style,
-      cursor: 'pointer',
-      pointerEvents: disabled ? 'none' : 'auto',
-      userSelect: 'none',
-    }}
     tabIndex={disabled ? -1 : 0}
     {...restProps}
   />
@@ -42,7 +36,7 @@ type UniversalButtonElement = {
   focus: () => void,
 };
 
-type ButtonProps = ColorProps &
+export type ButtonProps = ColorProps &
   TextProps & {
     disabled?: boolean,
     onPress?: (
@@ -105,6 +99,12 @@ const Button = (props: ButtonProps) => (
         paddingHorizontal,
         paddingVertical,
         ...restProps,
+        rawStyle: {
+          cursor: 'pointer',
+          outline: 'none',
+          pointerEvents: restProps.disabled ? 'none' : 'auto',
+          userSelect: 'none',
+        },
       };
     }}
   />

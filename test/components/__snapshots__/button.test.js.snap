@@ -3,18 +3,11 @@
 exports[`disabled 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
     disabled={true}
     onClick={undefined}
     onKeyPress={[Function]}
     role="button"
-    style={
-        Object {
-            "cursor": "pointer",
-            "pointerEvents": "none",
-            "userSelect": "none",
-          }
-    }
     tabIndex={-1}
 />,
   "fela": "
@@ -40,25 +33,22 @@ Object {
     .t{-ms-hyphens:auto}
     .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .v{font-size:16}
-    .w{line-height:24px}",
+    .w{line-height:24px}
+    .x{cursor:pointer}
+    .y{outline:none}
+    .z{pointer-events:none}
+    .ab{user-select:none}",
 }
 `;
 
 exports[`primary 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae"
     disabled={undefined}
     onClick={undefined}
     onKeyPress={[Function]}
     role="button"
-    style={
-        Object {
-            "cursor": "pointer",
-            "pointerEvents": "auto",
-            "userSelect": "none",
-          }
-    }
     tabIndex={0}
 />,
   "fela": "
@@ -86,26 +76,23 @@ Object {
     .v{font-size:16}
     .w{line-height:24px}
     .x{font-weight:600}
-    .y{-moz-osx-font-smoothing:grayscale}
-    .z{-webkit-font-smoothing:antialiased}",
+    .y{cursor:pointer}
+    .z{outline:none}
+    .ab{pointer-events:auto}
+    .ac{user-select:none}
+    .ad{-moz-osx-font-smoothing:grayscale}
+    .ae{-webkit-font-smoothing:antialiased}",
 }
 `;
 
 exports[`primary outline 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag ah ai aj"
     disabled={undefined}
     onClick={undefined}
     onKeyPress={[Function]}
     role="button"
-    style={
-        Object {
-            "cursor": "pointer",
-            "pointerEvents": "auto",
-            "userSelect": "none",
-          }
-    }
     tabIndex={0}
 />,
   "fela": "
@@ -139,25 +126,22 @@ Object {
     .ac{-ms-hyphens:auto}
     .ad{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .ae{font-size:16}
-    .af{line-height:24px}",
+    .af{line-height:24px}
+    .ag{cursor:pointer}
+    .ah{outline:none}
+    .ai{pointer-events:auto}
+    .aj{user-select:none}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
     disabled={undefined}
     onClick={undefined}
     onKeyPress={[Function]}
     role="button"
-    style={
-        Object {
-            "cursor": "pointer",
-            "pointerEvents": "auto",
-            "userSelect": "none",
-          }
-    }
     tabIndex={0}
 />,
   "fela": "
@@ -182,6 +166,10 @@ Object {
     .s{-ms-hyphens:auto}
     .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .u{font-size:16}
-    .v{line-height:24px}",
+    .v{line-height:24px}
+    .w{cursor:pointer}
+    .x{outline:none}
+    .y{pointer-events:auto}
+    .z{user-select:none}",
 }
 `;
