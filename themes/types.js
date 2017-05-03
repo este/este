@@ -1,4 +1,5 @@
 // @flow
+import type { Element } from 'react';
 
 export type Bold =
   | 'normal'
@@ -80,6 +81,14 @@ export type Theme = {|
   |},
   textInput: {|
     disabledOpacity: number,
+  |},
+  checkbox: {|
+    checkedIcon: Element<*>,
+    uncheckedIcon: Element<*>,
+  |},
+  radio: {|
+    checkedIcon: Element<*>,
+    uncheckedIcon: Element<*>,
   |},
 |};
 
