@@ -15,15 +15,7 @@ const ToggleBaseline = ({
   baselineShown,
   toggleBaseline,
 }: ToggleBaselineProps) => (
-  <Button
-    primary
-    outline
-    size={-1}
-    onPress={e => {
-      e.currentTarget.blur();
-      toggleBaseline();
-    }}
-  >
+  <Button primary outline size={-1} onPress={toggleBaseline}>
     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
   </Button>
 );
