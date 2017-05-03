@@ -20,8 +20,10 @@ const Index = () => (
       Starter kit for universal full–fledged React apps.
     </P>
     <P>
+      {/* Styled text link. */}
       <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
+    {/* Just link, no styles. */}
     <Link href="https://mises.org/library/anatomy-state">
       <Image
         alt="50x50 placeholder"
