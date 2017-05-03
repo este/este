@@ -154,7 +154,7 @@ type Transformations = {
 };
 
 const maybeRhythm = theme => value =>
-  (typeof value === 'number' ? theme.typography.rhythm(value) : value);
+  typeof value === 'number' ? theme.typography.rhythm(value) : value;
 
 const createShorthandTransformation = destructure => (options, props) => ({
   style: reject(isNil, destructure(props)),
