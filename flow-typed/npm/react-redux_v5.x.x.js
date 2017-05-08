@@ -1,5 +1,5 @@
-// flow-typed signature: 0ed284c5a2e97a9e3c0e87af3dedc09d
-// flow-typed version: bdf1e66252/react-redux_v5.x.x/flow_>=v0.30.x
+// flow-typed signature: cfe423889942df70fd53fcaad18ef279
+// flow-typed version: 84d79be776/react-redux_v5.x.x/flow_>=v0.30.x
 
 import type { Dispatch, Store } from 'redux'
 
@@ -21,7 +21,9 @@ declare module 'react-redux' {
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (stateProps: SP, dispatchProps: DP, ownProps: OP) => P;
 
-  declare type StatelessComponent<P> = (props: P) => ?React$Element<any>;
+  declare type Context = { store: Store<*, *> };
+
+  declare type StatelessComponent<P> = (props: P, context: Context) => ?React$Element<any>;
 
   declare class ConnectedComponent<OP, P, Def, St> extends React$Component<void, OP, void> {
     static WrappedComponent: Class<React$Component<Def, P, St>>;

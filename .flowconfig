@@ -10,3 +10,5 @@ types/app.js.flow
 [options]
 ; TODO: github.com/facebook/flow/issues/3728
 ;all=true
+; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107#issuecomment-299516612
+module.ignore_non_literal_requires=true

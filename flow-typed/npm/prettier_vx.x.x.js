@@ -1,4 +1,4 @@
-// flow-typed signature: bb115548bc830270c29789b4f53723db
+// flow-typed signature: 1519da3358ef24d3bf68f9bbcf981ce1
 // flow-typed version: <<STUB>>/prettier_v^1.1.0/flow_v0.45.0
 
 /**
@@ -35,6 +35,10 @@ declare module 'prettier/docs/rollup.config' {
 }
 
 declare module 'prettier/scripts/sync-flow-tests' {
+  declare module.exports: any;
+}
+
+declare module 'prettier/src/ast-types' {
   declare module.exports: any;
 }
 
@@ -78,6 +82,10 @@ declare module 'prettier/src/printer' {
   declare module.exports: any;
 }
 
+declare module 'prettier/src/typescript-ast-nodes' {
+  declare module.exports: any;
+}
+
 declare module 'prettier/src/util' {
   declare module.exports: any;
 }
@@ -104,6 +112,9 @@ declare module 'prettier/index.js' {
 }
 declare module 'prettier/scripts/sync-flow-tests.js' {
   declare module.exports: $Exports<'prettier/scripts/sync-flow-tests'>;
+}
+declare module 'prettier/src/ast-types.js' {
+  declare module.exports: $Exports<'prettier/src/ast-types'>;
 }
 declare module 'prettier/src/comments.js' {
   declare module.exports: $Exports<'prettier/src/comments'>;
@@ -134,6 +145,9 @@ declare module 'prettier/src/parser.js' {
 }
 declare module 'prettier/src/printer.js' {
   declare module.exports: $Exports<'prettier/src/printer'>;
+}
+declare module 'prettier/src/typescript-ast-nodes.js' {
+  declare module.exports: $Exports<'prettier/src/typescript-ast-nodes'>;
 }
 declare module 'prettier/src/util.js' {
   declare module.exports: $Exports<'prettier/src/util'>;

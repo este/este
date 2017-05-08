@@ -1,4 +1,4 @@
-// flow-typed signature: 18fa9b2d1101dfc26ccc996683df1b94
+// flow-typed signature: d62f342da28de650917f9d25e37e2839
 // flow-typed version: <<STUB>>/apollo-client_v^1.0.0/flow_v0.45.0
 
 /**
@@ -182,6 +182,10 @@ declare module 'apollo-client/util/Observable' {
   declare module.exports: any;
 }
 
+declare module 'apollo-client/util/warnOnce' {
+  declare module.exports: any;
+}
+
 declare module 'apollo-client/version' {
   declare module.exports: any;
 }
@@ -312,6 +316,9 @@ declare module 'apollo-client/util/maybeDeepFreeze.js' {
 }
 declare module 'apollo-client/util/Observable.js' {
   declare module.exports: $Exports<'apollo-client/util/Observable'>;
+}
+declare module 'apollo-client/util/warnOnce.js' {
+  declare module.exports: $Exports<'apollo-client/util/warnOnce'>;
 }
 declare module 'apollo-client/version.js' {
   declare module.exports: $Exports<'apollo-client/version'>;
