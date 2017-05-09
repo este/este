@@ -11,6 +11,7 @@ module.exports = {
     $Exact: true,
     Event: true,
     EventHandler: true,
+    ReactClass: true,
   },
   // AirBnb is great, but very strict. Feel free to add anything.
   rules: {

@@ -8,30 +8,31 @@ type AProps = TextProps & {
   prefetch?: boolean,
 };
 
-const A = ({ href, prefetch, ...props }: AProps) => (
-  <Link href={href} prefetch={prefetch}>
-    <Text
-      as="a"
-      href={href}
-      style={(theme, mixStyles) => {
-        const {
-          color = 'primary',
-          isActive,
-          rawStyle: propsRawStyle,
-          ...textProps
-        } = mixStyles(props);
-        return {
+const A = ({ href, prefetch, ...props }: AProps) => {
+  const {
+    as = 'a',
+    color = 'primary',
+    isActive = false,
+    style,
+    ...restProps
+  } = props;
+  return (
+    <Link href={href} prefetch={prefetch}>
+      <Text
+        {...{
+          as,
           color,
           decoration: isActive ? 'underline' : 'none',
-          rawStyle: {
+          href,
+          style: {
             ':hover': { textDecoration: 'underline' },
-            ...propsRawStyle,
+            ...style,
           },
-          ...textProps,
-        };
-      }}
-    />
-  </Link>
-);
+          ...restProps,
+        }}
+      />
+    </Link>
+  );
+};
 
 export default A;

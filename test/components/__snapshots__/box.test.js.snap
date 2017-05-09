@@ -1,76 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReactNative flex shorthand 1`] = `
-Object {
-  "component": <div
-    className="a"
-    isReactNative={true}
-/>,
-  "fela": "
-    .a{flex:1}",
-}
-`;
-
-exports[`ReactNative flex shorthand 2`] = `
-Object {
-  "component": <div
-    className="a b"
-    isReactNative={true}
-/>,
-  "fela": "
-    .a{flex:1}
-    .b{flex-shrink:2}",
-}
-`;
-
-exports[`ReactNative flex shorthand 3`] = `
-Object {
-  "component": <div
-    className="a b c"
-    isReactNative={true}
-/>,
-  "fela": "
-    .a{flex:1}
-    .b{flex-shrink:2}
-    .c{flex-basis:3px}",
-}
-`;
-
-exports[`ReactNative flex shorthand 4`] = `
-Object {
-  "component": <div
-    className="a b c"
-    isReactNative={true}
-/>,
-  "fela": "
-    .a{flex:3}
-    .b{flex-shrink:2}
-    .c{flex-basis:1px}",
-}
-`;
-
-exports[`ReactNative render 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-    isReactNative={true}
-/>,
-  "fela": "
-    .a{margin-bottom:24}
-    .b{margin-left:24}
-    .c{margin-right:24}
-    .d{margin-top:24}",
-}
-`;
-
-exports[`as to pass props to any component 1`] = `
+exports[`as 1`] = `
 Object {
   "component": null,
   "fela": "
     .a{display:flex}
     .b{flex-direction:column}
-    .c{position:relative}
-    .d{height:48}",
+    .c{position:relative}",
 }
 `;
 
@@ -196,16 +132,13 @@ Object {
 exports[`border width 2`] = `
 Object {
   "component": <div
-    className="a b c d e f g"
+    className="a b c d"
 />,
   "fela": "
     .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{border-bottom-width:1}
-    .e{border-left-width:0}
-    .f{border-right-width:0}
-    .g{border-top-width:0}",
+    .d{border-bottom-width:1}",
 }
 `;
 
@@ -228,34 +161,76 @@ Object {
 exports[`ensure rhythm via padding compensation 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h"
+    className="a b c d e f g h i j k"
 />,
   "fela": "
     .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{padding-left:23}
-    .e{border-bottom-width:0}
-    .f{border-left-width:1}
-    .g{border-right-width:0}
-    .h{border-top-width:0}",
+    .d{padding-bottom:23}
+    .e{padding-left:23}
+    .f{padding-right:23}
+    .g{padding-top:23}
+    .h{border-bottom-width:1}
+    .i{border-left-width:1}
+    .j{border-right-width:1}
+    .k{border-top-width:1}",
 }
 `;
 
 exports[`ensure rhythm via padding compensation 2`] = `
 Object {
   "component": <div
-    className="a b c d e f g h"
+    className="a b c d e"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-top:23}
+    .e{border-top-width:1}",
+}
+`;
+
+exports[`ensure rhythm via padding compensation 3`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-top:24}
+    .e{border-top-width:25}",
+}
+`;
+
+exports[`ensure rhythm via padding compensation 4`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{padding-left:23}
+    .e{border-left-width:1}",
+}
+`;
+
+exports[`ensure rhythm via padding compensation 5`] = `
+Object {
+  "component": <div
+    className="a b c d e"
 />,
   "fela": "
     .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
     .d{padding-left:24}
-    .e{border-bottom-width:0}
-    .f{border-left-width:25}
-    .g{border-right-width:0}
-    .h{border-top-width:0}",
+    .e{border-left-width:25}",
 }
 `;
 
@@ -283,9 +258,9 @@ Object {
     .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{flex-basis:auto}
-    .e{flex-grow:1}
-    .f{flex-shrink:2}",
+    .d{flex-shrink:2}
+    .e{flex-basis:auto}
+    .f{flex-grow:1}",
 }
 `;
 
@@ -299,8 +274,8 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{flex-basis:3px}
-    .e{flex-grow:1}
-    .f{flex-shrink:2}",
+    .e{flex-shrink:2}
+    .f{flex-grow:1}",
 }
 `;
 
@@ -314,8 +289,8 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{flex-basis:1px}
-    .e{flex-grow:3}
-    .f{flex-shrink:2}",
+    .e{flex-shrink:2}
+    .f{flex-grow:3}",
 }
 `;
 
@@ -348,21 +323,6 @@ Object {
 exports[`just value style props 3`] = `
 Object {
   "component": <div
-    className="a b c d e f"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-basis:auto}
-    .e{flex-grow:foo}
-    .f{flex-shrink:1}",
-}
-`;
-
-exports[`just value style props 4`] = `
-Object {
-  "component": <div
     className="a b c d"
 />,
   "fela": "
@@ -373,7 +333,7 @@ Object {
 }
 `;
 
-exports[`just value style props 5`] = `
+exports[`just value style props 4`] = `
 Object {
   "component": <div
     className="a b c"
@@ -385,7 +345,7 @@ Object {
 }
 `;
 
-exports[`just value style props 6`] = `
+exports[`just value style props 5`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -398,7 +358,7 @@ Object {
 }
 `;
 
-exports[`just value style props 7`] = `
+exports[`just value style props 6`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -411,7 +371,7 @@ Object {
 }
 `;
 
-exports[`just value style props 8`] = `
+exports[`just value style props 7`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -424,7 +384,7 @@ Object {
 }
 `;
 
-exports[`just value style props 9`] = `
+exports[`just value style props 8`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -437,7 +397,7 @@ Object {
 }
 `;
 
-exports[`just value style props 10`] = `
+exports[`just value style props 9`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -450,7 +410,7 @@ Object {
 }
 `;
 
-exports[`just value style props 11`] = `
+exports[`just value style props 10`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -463,7 +423,7 @@ Object {
 }
 `;
 
-exports[`just value style props 12`] = `
+exports[`just value style props 11`] = `
 Object {
   "component": <div
     className="a b c"
@@ -475,7 +435,7 @@ Object {
 }
 `;
 
-exports[`just value style props 13`] = `
+exports[`just value style props 12`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -488,7 +448,7 @@ Object {
 }
 `;
 
-exports[`just value style props 14`] = `
+exports[`just value style props 13`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -517,7 +477,23 @@ Object {
 }
 `;
 
-exports[`margin shorthand 1`] = `
+exports[`margin explicit 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:auto}
+    .e{margin-left:auto}
+    .f{margin-right:auto}
+    .g{margin-top:auto}",
+}
+`;
+
+exports[`margin rhythm 1`] = `
 Object {
   "component": <div
     className="a b c d e f g"
@@ -661,20 +637,7 @@ Object {
 }
 `;
 
-exports[`marginBottom 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}",
-}
-`;
-
-exports[`marginHorizontal shorthand 1`] = `
+exports[`marginHorizontal 1`] = `
 Object {
   "component": <div
     className="a b c d e"
@@ -688,7 +651,33 @@ Object {
 }
 `;
 
-exports[`marginVertical shorthand 1`] = `
+exports[`marginLeft overriden by style marginLeft 1`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:2}",
+}
+`;
+
+exports[`marginLeft rhythm 1`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-left:24}",
+}
+`;
+
+exports[`marginVertical 1`] = `
 Object {
   "component": <div
     className="a b c d e"
@@ -702,7 +691,7 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 1`] = `
+exports[`other maybe rhythm props 1`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -715,7 +704,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 2`] = `
+exports[`other maybe rhythm props 2`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{height:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 3`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -728,7 +730,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 3`] = `
+exports[`other maybe rhythm props 4`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{max-height:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 5`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -741,7 +756,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 4`] = `
+exports[`other maybe rhythm props 6`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{max-width:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 7`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -754,7 +782,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 5`] = `
+exports[`other maybe rhythm props 8`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{min-height:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 9`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -767,7 +808,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 6`] = `
+exports[`other maybe rhythm props 10`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{min-width:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 11`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -780,7 +834,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 7`] = `
+exports[`other maybe rhythm props 12`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{width:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 13`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -793,7 +860,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 8`] = `
+exports[`other maybe rhythm props 14`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{bottom:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 15`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -806,7 +886,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 9`] = `
+exports[`other maybe rhythm props 16`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{left:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 17`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -819,7 +912,20 @@ Object {
 }
 `;
 
-exports[`not shorthand rhythm props 10`] = `
+exports[`other maybe rhythm props 18`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{right:1%}",
+}
+`;
+
+exports[`other maybe rhythm props 19`] = `
 Object {
   "component": <div
     className="a b c d"
@@ -832,7 +938,20 @@ Object {
 }
 `;
 
-exports[`padding shorthand 1`] = `
+exports[`other maybe rhythm props 20`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{top:1%}",
+}
+`;
+
+exports[`padding 1`] = `
 Object {
   "component": <div
     className="a b c d e f g"
@@ -848,78 +967,7 @@ Object {
 }
 `;
 
-exports[`rawStyle from style overrides props 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:2}",
-}
-`;
-
-exports[`rawStyle overrides props 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:2}",
-}
-`;
-
 exports[`render 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:24}",
-}
-`;
-
-exports[`style mixStyles arg 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:24}",
-}
-`;
-
-exports[`style overrides props 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:48}",
-}
-`;
-
-exports[`style theme arg 1`] = `
 Object {
   "component": <div
     className="a b c"
@@ -928,5 +976,43 @@ Object {
     .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}",
+}
+`;
+
+exports[`render with children 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div>
+        div
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}",
+}
+`;
+
+exports[`style 1`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:red}",
+}
+`;
+
+exports[`style ignores undefined values 1`] = `
+Object {
+  "component": <div
+    className=""
+/>,
+  "fela": "",
 }
 `;

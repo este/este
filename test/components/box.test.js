@@ -22,76 +22,64 @@ const theme = {
 const expectRender = createExpectRender(theme);
 
 test('render', () => {
-  expectRender(() => <Box margin={1} />);
+  expectRender(() => <Box />);
 });
 
-test('rawStyle overrides props', () => {
-  expectRender(() => <Box marginLeft={1} rawStyle={{ marginLeft: 2 }} />);
+test('render with children', () => {
+  expectRender(() => <Box><div>div</div></Box>);
 });
 
-test('style theme arg', () => {
-  const style = jest.fn(() => {});
-  expectRender(() => <Box style={style} />);
-  expect(style).toHaveBeenCalledTimes(1);
-  expect(style.mock.calls[0][0]).toEqual(theme);
-});
-
-test('style mixStyles arg', () => {
-  const Foo = props => <Box style={(theme, mixStyles) => mixStyles(props)} />;
-  expectRender(() => <Foo style={() => ({ margin: 1 })} />);
-});
-
-test('style overrides props', () => {
-  expectRender(() => (
-    <Box
-      marginLeft={1}
-      style={() => ({
-        marginLeft: 2,
-      })}
-    />
-  ));
-});
-
-test('rawStyle from style overrides props', () => {
-  expectRender(() => (
-    <Box
-      marginLeft={1}
-      style={() => ({
-        rawStyle: {
-          marginLeft: 2,
-        },
-      })}
-    />
-  ));
-});
-
-test('as to pass props to any component', () => {
+test('as', () => {
   const SomeComponent = jest.fn(() => null);
   const SomeComponentStyledAsBox = props => (
     <Box as={SomeComponent} {...props} />
   );
-  expectRender(() => <SomeComponentStyledAsBox someProp="1" height={2} />);
+  expectRender(() => <SomeComponentStyledAsBox someCustomProp="1" />);
   expect(SomeComponent).toHaveBeenCalledTimes(1);
   expect(SomeComponent.mock.calls[0][0]).toEqual({
-    className: 'a b c d',
-    someProp: '1',
+    className: 'a b c',
+    someCustomProp: '1',
   });
 });
 
-test('margin shorthand', () => {
+test('style', () => {
+  expectRender(() => <Box style={{ backgroundColor: 'red' }} />);
+});
+
+test('style ignores undefined values', () => {
+  expectRender(() => (
+    <Box
+      style={{
+        display: undefined,
+        flexDirection: undefined,
+        position: undefined,
+      }}
+    />
+  ));
+});
+
+test('margin explicit', () => {
+  expectRender(() => <Box margin="auto" />);
+});
+
+test('margin rhythm', () => {
   expectRender(() => <Box margin={1} />);
 });
 
-test('marginHorizontal shorthand', () => {
+test('marginLeft rhythm', () => {
+  expectRender(() => <Box marginLeft={1} />);
+});
+
+test('marginLeft overriden by style marginLeft', () => {
+  expectRender(() => <Box marginLeft={1} style={{ marginLeft: 2 }} />);
+});
+
+test('marginHorizontal', () => {
   expectRender(() => <Box marginHorizontal={1} />);
 });
 
-test('marginVertical shorthand', () => {
+test('marginVertical', () => {
   expectRender(() => <Box marginVertical={1} />);
-});
-
-test('marginBottom', () => {
-  expectRender(() => <Box marginBottom={1} />);
 });
 
 test('margin bottom left right top', () => {
@@ -115,16 +103,33 @@ test('margin shorthands are order independent', () => {
   });
 });
 
-test('padding shorthand', () => {
-  // Just one test, because the implementation is the same as for margin.
+// Only one test, because the implementation is the same as for margin.
+test('padding', () => {
   expectRender(() => <Box padding={1} />);
+});
+
+test('other maybe rhythm props', () => {
+  [
+    'height',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'width',
+    'bottom',
+    'left',
+    'right',
+    'top',
+  ].forEach(prop => {
+    expectRender(() => <Box {...{ [prop]: 1 }} />);
+    expectRender(() => <Box {...{ [prop]: '1%' }} />);
+  });
 });
 
 test('just value style props', () => {
   [
     'alignItems',
     'alignSelf',
-    'flex',
     'flexBasis',
     'flexDirection',
     'flexGrow',
@@ -141,21 +146,12 @@ test('just value style props', () => {
   });
 });
 
-test('not shorthand rhythm props', () => {
-  [
-    'height',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'width',
-    'bottom',
-    'left',
-    'right',
-    'top',
-  ].forEach(prop => {
-    expectRender(() => <Box {...{ [prop]: 1 }} />);
-  });
+// https://github.com/necolas/react-native-web expandStyle-test.js
+test('flex shorthand', () => {
+  expectRender(() => <Box flex={1} />);
+  expectRender(() => <Box flex={1} flexShrink={2} />);
+  expectRender(() => <Box flex={1} flexShrink={2} flexBasis="3px" />);
+  expectRender(() => <Box flex={3} flexShrink={2} flexBasis="1px" />);
 });
 
 // http://facebook.github.io/react-native/releases/0.43/docs/layout-props.html#flex
@@ -166,14 +162,6 @@ test('flex throws for not yet supported value', () => {
   expect(() => {
     expectRender(() => <Box flex={-1} />);
   }).toThrowError();
-});
-
-// https://github.com/necolas/react-native-web expandStyle-test.js
-test('flex shorthand', () => {
-  expectRender(() => <Box flex={1} />);
-  expectRender(() => <Box flex={1} flexShrink={2} />);
-  expectRender(() => <Box flex={1} flexShrink={2} flexBasis="3px" />);
-  expectRender(() => <Box flex={3} flexShrink={2} flexBasis="1px" />);
 });
 
 test('backgroundColor', () => {
@@ -199,23 +187,9 @@ test('border color shorthand', () => {
 });
 
 test('ensure rhythm via padding compensation', () => {
+  expectRender(() => <Box padding={1} borderWidth={1} />);
+  expectRender(() => <Box paddingTop={1} borderTopWidth={1} />);
+  expectRender(() => <Box paddingTop={1} borderTopWidth={25} />);
   expectRender(() => <Box paddingLeft={1} borderLeftWidth={1} />);
   expectRender(() => <Box paddingLeft={1} borderLeftWidth={25} />);
-});
-
-describe('ReactNative', () => {
-  test('render', () => {
-    expectRender(() => <Box margin={1} isReactNative />);
-  });
-
-  test('flex shorthand', () => {
-    expectRender(() => <Box flex={1} isReactNative />);
-    expectRender(() => <Box flex={1} flexShrink={2} isReactNative />);
-    expectRender(() => (
-      <Box flex={1} flexShrink={2} flexBasis="3px" isReactNative />
-    ));
-    expectRender(() => (
-      <Box flex={3} flexShrink={2} flexBasis="1px" isReactNative />
-    ));
-  });
 });

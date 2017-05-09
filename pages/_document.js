@@ -18,6 +18,8 @@ const globalStyle = `
   *::before,
   *::after {
     box-sizing: inherit;
+    ${/* Enforce React Native default border width. */ ''}
+    border-width: 0;
   }
 `;
 
