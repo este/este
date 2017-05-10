@@ -1,7 +1,7 @@
 // @flow
-import app from '../lib/app';
 import A from '../components/a';
 import Blockquote from '../components/blockquote';
+import Box from '../components/box';
 import Button from '../components/button';
 import Buttons from '../components/buttons';
 import Heading from '../components/heading';
@@ -12,6 +12,7 @@ import Page from '../components/page';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
+import app from '../lib/app';
 
 const Index = () => (
   <Page title="Este">
@@ -23,15 +24,17 @@ const Index = () => (
       {/* Styled text link. */}
       <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
-    {/* Just link, no styles. */}
-    <Link href="https://mises.org/library/anatomy-state">
-      <Image
-        alt="50x50 placeholder"
-        marginBottom={1}
-        size={{ height: 50, width: 50 }}
-        src="/static/50x50.png"
-      />
-    </Link>
+    <Box flexDirection="row">
+      {/* Just link, no styles. */}
+      <Link href="https://mises.org/library/anatomy-state">
+        <Image
+          alt="50x50 placeholder"
+          marginBottom={1}
+          size={{ height: 50, width: 50 }}
+          src="/static/50x50.png"
+        />
+      </Link>
+    </Box>
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <P size={5}>text 5</P>
