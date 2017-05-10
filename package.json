@@ -28,7 +28,7 @@
     "isomorphic-fetch": "^2.2.1",
     "next": "^2.0.1",
     "nprogress": "^0.2.0",
-    "prop-types": "^15.5.7",
+    "prop-types": "^15.5.9",
     "ramda": "^0.23.0",
     "react": "^15.4.2",
     "react-apollo": "^1.0.0",
@@ -50,7 +50,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.45.0",
+    "flow-bin": "^0.46.0",
     "jest": "^19.0.2",
     "prettier": "^1.1.0",
     "react-test-renderer": "^15.4.2"
