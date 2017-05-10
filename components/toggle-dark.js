@@ -4,20 +4,13 @@ import Button from './button';
 import { connect } from 'react-redux';
 import { toggleDark } from '../lib/app/actions';
 
-type ToggleDarkProps = {|
-  darkEnabled: boolean,
-  toggleDark: typeof toggleDark,
-|};
-
-const ToggleDark = ({ darkEnabled, toggleDark }: ToggleDarkProps) => (
+const ToggleDark = ({ darkEnabled, toggleDark }) => (
   <Button primary outline size={-1} onPress={toggleDark}>
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
   </Button>
 );
 
 export default connect(
-  (state: State) => ({
-    darkEnabled: state.app.darkEnabled,
-  }),
+  (state: State) => ({ darkEnabled: state.app.darkEnabled }),
   { toggleDark }
 )(ToggleDark);
