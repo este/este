@@ -4,7 +4,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 const P = (props: TextProps, { theme }: ThemeContext) => {
   const { marginBottom = theme.p.marginBottom, ...restProps } = props;
-  return <Text {...{ marginBottom, ...restProps }} />;
+  return <Text marginBottom={marginBottom} {...restProps} />;
 };
 
 withTheme(P);

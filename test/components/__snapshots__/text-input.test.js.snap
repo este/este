@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color 1`] = `
+Object {
+  "component": <input
+    className="a b c d e f g h i j k l m"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .l{background-color:transparent}
+    .m{outline:none}",
+}
+`;
+
+exports[`disabled 1`] = `
+Object {
+  "component": <input
+    className="a b c d e f g h i j k l m n"
+    disabled={true}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{opacity:0.5}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:black}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}
+    .l::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .m{background-color:transparent}
+    .n{outline:none}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <input
+    className="a b c d e f g h i j k l m"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .l{background-color:transparent}
+    .m{outline:none}",
+}
+`;

@@ -35,5 +35,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0, // Next.js injects it. Should be default.
     'react/require-default-props': 0, // We don't need it with Flow.
     'react/no-danger': 0, // Control freaky.
+    'template-curly-spacing': 0, // Prettier.
+    'react/jsx-boolean-value': 0, // Control freaky.
   },
 };

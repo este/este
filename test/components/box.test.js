@@ -193,3 +193,20 @@ test('ensure rhythm via padding compensation', () => {
   expectRender(() => <Box paddingLeft={1} borderLeftWidth={1} />);
   expectRender(() => <Box paddingLeft={1} borderLeftWidth={25} />);
 });
+
+describe('ReactNative', () => {
+  test('render', () => {
+    expectRender(() => <Box margin={1} isReactNative />);
+  });
+
+  test('flex shorthand', () => {
+    expectRender(() => <Box flex={1} isReactNative />);
+    expectRender(() => <Box flex={1} flexShrink={2} isReactNative />);
+    expectRender(() => (
+      <Box flex={1} flexShrink={2} flexBasis="3px" isReactNative />
+    ));
+    expectRender(() => (
+      <Box flex={3} flexShrink={2} flexBasis="1px" isReactNative />
+    ));
+  });
+});

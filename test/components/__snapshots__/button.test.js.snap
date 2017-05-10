@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`disabled 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
+    disabled={true}
+    onClick={undefined}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={-1}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-left:6}
+    .f{margin-right:6}
+    .g{margin-top:7.199999999999999}
+    .h{padding-bottom:4.800000000000001}
+    .i{padding-left:24}
+    .j{padding-right:24}
+    .k{padding-top:4.800000000000001}
+    .l{opacity:0.5}
+    .m{border-bottom-left-radius:2}
+    .n{border-bottom-right-radius:2}
+    .o{border-top-left-radius:2}
+    .p{border-top-right-radius:2}
+    .q{white-space:pre-wrap}
+    .r{overflow-wrap:break-word}
+    .s{-ms-hyphens:auto}
+    .t{color:black}
+    .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .v{font-size:16}
+    .w{line-height:24px}
+    .x{cursor:pointer}
+    .y{outline:none}
+    .z{pointer-events:none}
+    .ab{user-select:none}",
+}
+`;
+
+exports[`primary 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae"
+    disabled={undefined}
+    onClick={undefined}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-left:6}
+    .f{margin-right:6}
+    .g{margin-top:7.199999999999999}
+    .h{padding-bottom:4.800000000000001}
+    .i{padding-left:24}
+    .j{padding-right:24}
+    .k{padding-top:4.800000000000001}
+    .l{border-bottom-left-radius:2}
+    .m{border-bottom-right-radius:2}
+    .n{border-top-left-radius:2}
+    .o{border-top-right-radius:2}
+    .p{background-color:blue}
+    .q{white-space:pre-wrap}
+    .r{overflow-wrap:break-word}
+    .s{-ms-hyphens:auto}
+    .t{-moz-osx-font-smoothing:grayscale}
+    .u{-webkit-font-smoothing:antialiased}
+    .v{color:white}
+    .w{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .x{font-size:16}
+    .y{line-height:24px}
+    .z{font-weight:600}
+    .ab{cursor:pointer}
+    .ac{outline:none}
+    .ad{pointer-events:auto}
+    .ae{user-select:none}",
+}
+`;
+
+exports[`primary outline 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag ah ai aj"
+    disabled={undefined}
+    onClick={undefined}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-left:6}
+    .f{margin-right:6}
+    .g{margin-top:7.199999999999999}
+    .h{padding-bottom:3.8000000000000007}
+    .i{padding-left:23}
+    .j{padding-right:23}
+    .k{padding-top:3.8000000000000007}
+    .l{border-style:solid}
+    .m{border-bottom-width:1}
+    .n{border-left-width:1}
+    .o{border-right-width:1}
+    .p{border-top-width:1}
+    .q{border-bottom-left-radius:2}
+    .r{border-bottom-right-radius:2}
+    .s{border-top-left-radius:2}
+    .t{border-top-right-radius:2}
+    .u{border-bottom-color:blue}
+    .v{border-left-color:blue}
+    .w{border-right-color:blue}
+    .x{border-top-color:blue}
+    .y{white-space:pre-wrap}
+    .z{overflow-wrap:break-word}
+    .ab{-ms-hyphens:auto}
+    .ac{color:blue}
+    .ad{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .ae{font-size:16}
+    .af{line-height:24px}
+    .ag{cursor:pointer}
+    .ah{outline:none}
+    .ai{pointer-events:auto}
+    .aj{user-select:none}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+    disabled={undefined}
+    onClick={undefined}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-left:6}
+    .f{margin-right:6}
+    .g{margin-top:7.199999999999999}
+    .h{padding-bottom:4.800000000000001}
+    .i{padding-left:24}
+    .j{padding-right:24}
+    .k{padding-top:4.800000000000001}
+    .l{border-bottom-left-radius:2}
+    .m{border-bottom-right-radius:2}
+    .n{border-top-left-radius:2}
+    .o{border-top-right-radius:2}
+    .p{white-space:pre-wrap}
+    .q{overflow-wrap:break-word}
+    .r{-ms-hyphens:auto}
+    .s{color:black}
+    .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .u{font-size:16}
+    .v{line-height:24px}
+    .w{cursor:pointer}
+    .x{outline:none}
+    .y{pointer-events:auto}
+    .z{user-select:none}",
+}
+`;

@@ -1,5 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ReactNative flex shorthand 1`] = `
+Object {
+  "component": <div
+    className="a"
+/>,
+  "fela": "
+    .a{flex:1}",
+}
+`;
+
+exports[`ReactNative flex shorthand 2`] = `
+Object {
+  "component": <div
+    className="a b"
+/>,
+  "fela": "
+    .a{flex-shrink:2}
+    .b{flex:1}",
+}
+`;
+
+exports[`ReactNative flex shorthand 3`] = `
+Object {
+  "component": <div
+    className="a b c"
+/>,
+  "fela": "
+    .a{flex-basis:3px}
+    .b{flex-shrink:2}
+    .c{flex:1}",
+}
+`;
+
+exports[`ReactNative flex shorthand 4`] = `
+Object {
+  "component": <div
+    className="a b c"
+/>,
+  "fela": "
+    .a{flex-basis:1px}
+    .b{flex-shrink:2}
+    .c{flex:3}",
+}
+`;
+
+exports[`ReactNative render 1`] = `
+Object {
+  "component": <div
+    className="a b c d"
+/>,
+  "fela": "
+    .a{margin-bottom:24}
+    .b{margin-left:24}
+    .c{margin-right:24}
+    .d{margin-top:24}",
+}
+`;
+
 exports[`as 1`] = `
 Object {
   "component": null,

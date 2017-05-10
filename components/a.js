@@ -8,14 +8,8 @@ type AProps = TextProps & {
   prefetch?: boolean,
 };
 
-const A = ({ href, prefetch, ...props }: AProps) => {
-  const {
-    as = 'a',
-    color = 'primary',
-    isActive = false,
-    style,
-    ...restProps
-  } = props;
+const A = ({ href, isActive, prefetch, ...props }: AProps) => {
+  const { as = 'a', color = 'primary', style, ...restProps } = props;
   return (
     <Link href={href} prefetch={prefetch}>
       <Text

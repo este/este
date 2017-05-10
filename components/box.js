@@ -31,6 +31,7 @@ type MaybeRhythm = number | string;
 
 export type BoxProps = {
   as?: string | ((props: Object) => React.Element<*>),
+  isReactNative?: boolean,
   style?: Object,
 
   margin?: MaybeRhythm,
@@ -139,10 +140,15 @@ const justValue = props => reduce(props, value => value);
 
 // https://facebook.github.io/react-native/releases/0.44/docs/layout-props.html#flex
 // https://github.com/necolas/react-native-web expandStyle-test.js
-const restrictedFlex = (flex, flexBasis = 'auto', flexShrink = 1) => {
+const restrictedFlex = (
+  flex,
+  flexBasis = 'auto',
+  flexShrink = 1,
+  isReactNative
+) => {
   if (flex === undefined) return null;
   if (flex < 1) throw new Error('Not implemented yet');
-  return { flexBasis, flexGrow: flex, flexShrink };
+  return isReactNative ? { flex } : { flexBasis, flexGrow: flex, flexShrink };
 };
 
 // Color any type, because Flow can't infere props for some reason.
@@ -166,6 +172,7 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const {
     as,
+    isReactNative,
     style,
 
     margin,
@@ -233,7 +240,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   } = props;
 
   const boxStyle = {
-    ...reactNativeEmulationForBrowsers,
+    ...(isReactNative ? null : reactNativeEmulationForBrowsers),
     ...maybeRhythm(theme.typography.rhythm, {
       marginBottom,
       marginLeft,
@@ -279,7 +286,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
       borderTopLeftRadius,
       borderTopRightRadius,
     }),
-    ...restrictedFlex(flex, flexBasis, flexShrink),
+    ...restrictedFlex(flex, flexBasis, flexShrink, isReactNative),
     ...themeColor(theme.colors, {
       backgroundColor,
       borderBottomColor,

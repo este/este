@@ -1,5 +1,5 @@
 // @flow
-import type { Color } from '../themes/types';
+import type { Color, Theme } from '../themes/types';
 import Box, { type BoxProps } from './box';
 import colorLib from 'color';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -25,7 +25,10 @@ export type TextProps = BoxProps & {
 };
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-const computeFontSizeAndLineHeight = (typography, size) => {
+export const computeFontSizeAndLineHeight = (
+  { typography }: Theme,
+  size: number
+) => {
   const fontSize = typography.fontSize(size);
   const lines = Math.ceil(fontSize / typography.lineHeight);
   const lineHeight = lines * typography.lineHeight;
@@ -48,10 +51,17 @@ const fixBrowserFontSmoothing = (color, backgroundColor) => {
 };
 
 const emulateReactNative = (theme, style, backgroundColor) => ({
-  ...style,
+  ...{
+    display: 'inline',
+    // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
+    whiteSpace: 'pre-wrap',
+    overflowWrap: 'break-word',
+    msHyphens: 'auto',
+  },
   ...(backgroundColor
     ? fixBrowserFontSmoothing(style.color, theme.colors[backgroundColor])
     : null),
+  ...style,
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
@@ -70,13 +80,8 @@ const Text = (props: TextProps, { theme }: ThemeContext) => {
 
   let style = {
     color: theme.colors[color],
-    display: 'inline', // React Native default Text display value.
-    // https://github.com/Microsoft/reactxp/blob/328a54affdd573aa99b348e5b60e65e3d4ba57a3/src/web/Text.tsx#L24
-    whiteSpace: 'pre-wrap',
-    overflowWrap: 'break-word',
-    msHyphens: 'auto',
     fontFamily,
-    ...computeFontSizeAndLineHeight(theme.typography, size),
+    ...computeFontSizeAndLineHeight(theme, size),
     ...(align ? { textAlign: align } : null),
     ...(bold ? { fontWeight: theme.text.bold } : null),
     ...(decoration ? { textDecoration: decoration } : null),
@@ -85,7 +90,9 @@ const Text = (props: TextProps, { theme }: ThemeContext) => {
     ...restProps.style,
   };
 
-  style = emulateReactNative(theme, style, restProps.backgroundColor);
+  if (!restProps.isReactNative) {
+    style = emulateReactNative(theme, style, restProps.backgroundColor);
+  }
 
   return <Box {...restProps} style={style} />;
 };

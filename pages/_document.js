@@ -2,22 +2,21 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import { getRenderer } from '../lib/fela';
 
-// github.com/zeit/next.js/wiki/Global-styles-and-layouts
-// github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+// https://github.com/zeit/next.js/wiki/Global-styles-and-layouts
+// Only modern CSS subset with React Native emulation.
+// https://github.com/necolas/normalize.css
 const globalStyle = `
   html {
-    box-sizing: border-box;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
-  body {
+  * {
+    box-sizing: border-box;
+    ${/*  Reset form fields margin in Firefox and Safari. */ ''}
     margin: 0;
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
+    ${/*  Reset padding just to be sure. */ ''}
+    padding: 0;
     ${/* Enforce React Native default border width. */ ''}
     border-width: 0;
   }

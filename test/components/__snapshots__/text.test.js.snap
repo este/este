@@ -10,15 +10,15 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{background-color:black}
-    .e{color:blue}
-    .f{white-space:pre-wrap}
-    .g{overflow-wrap:break-word}
-    .h{-ms-hyphens:auto}
-    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .j{font-size:16}
-    .k{line-height:24px}
-    .l{-moz-osx-font-smoothing:grayscale}
-    .m{-webkit-font-smoothing:antialiased}",
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{-moz-osx-font-smoothing:grayscale}
+    .i{-webkit-font-smoothing:antialiased}
+    .j{color:blue}
+    .k{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .l{font-size:16}
+    .m{line-height:24px}",
 }
 `;
 
@@ -32,10 +32,10 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{background-color:white}
-    .e{color:blue}
-    .f{white-space:pre-wrap}
-    .g{overflow-wrap:break-word}
-    .h{-ms-hyphens:auto}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:blue}
     .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .j{font-size:16}
     .k{line-height:24px}",
@@ -51,10 +51,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:blue}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}",
@@ -70,10 +70,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:24}
     .j{line-height:24px}",
@@ -89,10 +89,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:26}
     .j{line-height:48px}",
@@ -108,10 +108,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:48}
     .j{line-height:48px}",
@@ -127,10 +127,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:50}
     .j{line-height:72px}",
@@ -146,10 +146,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}
@@ -166,10 +166,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}
@@ -186,10 +186,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:blue}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}",
@@ -205,10 +205,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}
@@ -225,10 +225,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:arial}
     .i{font-size:16}
     .j{line-height:24px}",
@@ -244,10 +244,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}
@@ -264,10 +264,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:10px}",
@@ -283,10 +283,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:18}
     .j{line-height:24px}",
@@ -302,10 +302,10 @@ Object {
     .a{display:inline}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{color:black}
-    .e{white-space:pre-wrap}
-    .f{overflow-wrap:break-word}
-    .g{-ms-hyphens:auto}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
     .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .i{font-size:16}
     .j{line-height:24px}",
