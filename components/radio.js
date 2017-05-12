@@ -9,7 +9,7 @@ export type RadioProps = ButtonProps & {
   labelOnLeft?: boolean,
   onChange?: ({ value: string }) => mixed,
   select: string,
-  value: string,
+  value: ?string,
 };
 
 const Radio = (
@@ -31,9 +31,10 @@ const Radio = (
     paddingVertical = 0,
     ...restProps
   } = props;
+  const checked = value === select;
   return (
     <Button
-      aria-checked={value === select}
+      aria-checked={checked}
       onPress={() => onChange && onChange({ value: select })}
       role="radio"
       size={size}
@@ -43,7 +44,7 @@ const Radio = (
       <SvgIcon
         color={color}
         size={size}
-        svg={value ? theme.radio.checkedIcon : theme.radio.uncheckedIcon}
+        svg={checked ? theme.radio.checkedIcon : theme.radio.uncheckedIcon}
         {...{ [labelOnLeft ? 'marginLeft' : 'marginRight']: 0.5 }}
       />
       {!labelOnLeft && <Text color={color} size={size}>{label}</Text>}
