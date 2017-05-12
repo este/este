@@ -2,13 +2,10 @@
 
 exports[`disabled 1`] = `
 Object {
-  "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
+  "component": <button
+    className="a b c d e f g h i j k l m n o p q r s t u v w"
     disabled={true}
     onClick={undefined}
-    onKeyPress={[Function]}
-    role="button"
-    tabIndex={-1}
 />,
   "fela": "
     .a{display:inline}
@@ -33,23 +30,15 @@ Object {
     .t{color:black}
     .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .v{font-size:16}
-    .w{line-height:24px}
-    .x{cursor:pointer}
-    .y{outline:none}
-    .z{pointer-events:none}
-    .ab{user-select:none}",
+    .w{line-height:24px}",
 }
 `;
 
 exports[`primary 1`] = `
 Object {
-  "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae"
-    disabled={undefined}
+  "component": <button
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
     onClick={undefined}
-    onKeyPress={[Function]}
-    role="button"
-    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
@@ -77,23 +66,15 @@ Object {
     .w{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .x{font-size:16}
     .y{line-height:24px}
-    .z{font-weight:600}
-    .ab{cursor:pointer}
-    .ac{outline:none}
-    .ad{pointer-events:auto}
-    .ae{user-select:none}",
+    .z{font-weight:600}",
 }
 `;
 
 exports[`primary outline 1`] = `
 Object {
-  "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag ah ai aj"
-    disabled={undefined}
+  "component": <button
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af"
     onClick={undefined}
-    onKeyPress={[Function]}
-    role="button"
-    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
@@ -126,23 +107,15 @@ Object {
     .ac{color:blue}
     .ad{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .ae{font-size:16}
-    .af{line-height:24px}
-    .ag{cursor:pointer}
-    .ah{outline:none}
-    .ai{pointer-events:auto}
-    .aj{user-select:none}",
+    .af{line-height:24px}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
-  "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
-    disabled={undefined}
+  "component": <button
+    className="a b c d e f g h i j k l m n o p q r s t u v"
     onClick={undefined}
-    onKeyPress={[Function]}
-    role="button"
-    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
@@ -166,10 +139,6 @@ Object {
     .s{color:black}
     .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .u{font-size:16}
-    .v{line-height:24px}
-    .w{cursor:pointer}
-    .x{outline:none}
-    .y{pointer-events:auto}
-    .z{user-select:none}",
+    .v{line-height:24px}",
 }
 `;

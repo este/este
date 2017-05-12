@@ -3,32 +3,12 @@ import Text, { type TextProps } from './text';
 import type { ColorProps } from '../themes/types';
 import withTheme, { type ThemeContext } from './withTheme';
 
-// Use a div instead of a button because a div has no default weird styles.
-// https://www.w3.org/TR/wai-aria-practices-1.1/#button
-// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role#Keyboard_and_focus
-const BrowserDivButton = ({
-  disabled,
+const BrowserButton = ({
   onPress,
   ...restProps
 }: {
-  disabled?: boolean,
   onPress?: EventHandler,
-}) => (
-  <div // eslint-disable-line jsx-a11y/no-static-element-interactions
-    role="button"
-    disabled={disabled}
-    onClick={onPress}
-    onKeyPress={(e: Event) => {
-      if (disabled) return;
-      const activation = e.key === 'Enter' || e.key === ' ';
-      if (!activation || !onPress) return;
-      e.preventDefault();
-      onPress(e);
-    }}
-    tabIndex={disabled ? -1 : 0}
-    {...restProps}
-  />
-);
+}) => <button onClick={onPress} {...restProps} />;
 
 type UniversalButtonElement = {
   blur: () => void,
@@ -46,7 +26,7 @@ export type ButtonProps = ColorProps &
 
 const Button = (props: ButtonProps, { theme }: ThemeContext) => {
   const {
-    as = BrowserDivButton,
+    as = BrowserButton,
     size = 0,
     borderRadius = theme.button.borderRadius,
     marginHorizontal = theme.button.marginHorizontal,
@@ -87,18 +67,6 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
     restProps.opacity = theme.button.disabledOpacity;
   }
 
-  const style = {
-    ...(restProps.isReactNative
-      ? null
-      : {
-          cursor: 'pointer',
-          outline: 'none',
-          pointerEvents: restProps.disabled ? 'none' : 'auto',
-          userSelect: 'none',
-        }),
-    ...restProps.style,
-  };
-
   return (
     <Text
       {...{
@@ -110,7 +78,6 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
         paddingHorizontal,
         paddingVertical,
         ...restProps,
-        style,
       }}
     />
   );

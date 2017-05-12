@@ -2,8 +2,8 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import { getRenderer } from '../lib/fela';
 
-// https://github.com/zeit/next.js/wiki/Global-styles-and-layouts
 // Only modern CSS subset with React Native emulation.
+// https://github.com/zeit/next.js/wiki/Global-styles-and-layouts
 // https://github.com/necolas/normalize.css
 const globalStyle = `
   html {
@@ -13,12 +13,20 @@ const globalStyle = `
   }
   * {
     box-sizing: border-box;
-    ${/*  Reset form fields margin in Firefox and Safari. */ ''}
+    ${/* Reset body and form fields margin in Firefox and Safari. */ ''}
     margin: 0;
-    ${/*  Reset padding just to be sure. */ ''}
+    ${/* Reset padding just to be sure. */ ''}
     padding: 0;
     ${/* Enforce React Native default border width. */ ''}
     border-width: 0;
+  }
+  button {
+    ${/* Reset default background color. */ ''}
+    background-color: transparent;
+    ${/* Should be default. */ ''}
+    cursor: pointer;
+    ${/* Not supported in React Native. */ ''}
+    outline: none;
   }
 `;
 
