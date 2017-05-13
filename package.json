@@ -14,11 +14,14 @@
     "jest:watch": "jest --watch",
     "test": "flow && jest && next build",
     "deploy": "node ./scripts/deploy-now",
-    "favicon": "node ./scripts/favicon"
+    "favicon": "node ./scripts/favicon",
+    "relay": "relay-compiler --src ./pages/ --schema data/schema.graphql",
+    "get-schema": "node scripts/get-schema.js"
   },
   "dependencies": {
     "apollo-client": "^1.0.0",
     "auth0-lock": "^10.14.0",
+    "caniuse-api": "^1.5.2",
     "color": "^1.0.3",
     "fela": "^4.3.2",
     "fela-plugin-placeholder-prefixer": "^4.3.2",
