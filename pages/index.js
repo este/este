@@ -9,6 +9,7 @@ import Image from '../components/image';
 import Link from '../components/link';
 import P from '../components/p';
 import Page from '../components/page';
+import PostList from '../components/post-list';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
@@ -57,7 +58,7 @@ const Index = () => (
       <ToggleBaseline />
       <ToggleDark />
     </Buttons>
-    {/* <List /> */}
+    <PostList />
   </Page>
 );
 
