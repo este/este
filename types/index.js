@@ -17,12 +17,28 @@ export type AppState = {
   +version: string,
 };
 
+export type Fields = {
+  +userName: string,
+  +userDescription: string,
+  +userLikesCats: boolean,
+  +userLikesDogs: boolean,
+  +userGender: null | 'male' | 'female' | 'other',
+  +userWantsKing: boolean,
+};
+
+export type FieldsState = {
+  initial: Fields,
+  changed: { [id: string]: Fields },
+};
+
 export type State = {
   +app: AppState,
+  +fields: FieldsState,
 };
 
 export type Action =
-  | { type: 'SET_APP_ONLINE', +payload: { +online: boolean } }
+  | { type: 'SET_APP_ONLINE', +payload: {| +online: boolean |} }
+  | { type: 'SET_FIELD', +payload: {| +id: string, +fields: Fields |} }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };
 

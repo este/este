@@ -1,10 +1,11 @@
 // @flow
+import Text from './text';
 import { gql, graphql } from 'react-apollo';
 
 const PostList = ({ data: { allPosts } }: any) => (
-  <pre>
+  <Text>
     {JSON.stringify(allPosts, null, 2)}
-  </pre>
+  </Text>
 );
 
 // query allPosts($first: Int!, $skip: Int!) {
