@@ -13,7 +13,7 @@ import PostList from '../components/post-list';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
-import app from '../lib/app';
+import app from '../components/app';
 
 const Index = () => (
   <Page title="Este">

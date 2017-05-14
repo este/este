@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import createApolloClient from './create-apollo-client';
-import createReduxStore from './create-redux-store';
+import createApolloClient from '../lib/create-apollo-client';
+import createReduxStore from '../lib/create-redux-store';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { Provider as FelaProvider } from 'react-fela';
-import { getRenderer, getMountNode } from './fela';
+import { getRenderer, getMountNode } from '../lib/fela';
 
 // App composition root.
 // blog.ploeh.dk/2011/07/28/CompositionRoot
