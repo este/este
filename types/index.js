@@ -1,9 +1,13 @@
 // @flow
-import type { Middleware as ReduxMiddleware, Reducer } from 'redux';
+import type {
+  Middleware as ReduxMiddleware,
+  Reducer as ReduxReducer,
+  // Store as ReduxStore,
+} from 'redux';
 
 // Algebraic types ftw.
 // https://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
-// Using covariants to enforce immutability.
+// Immutability ftw.
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
 // TODO:
 //  - Make all types exact: https://github.com/facebook/flow/issues/2405
@@ -17,6 +21,7 @@ export type AppState = {
   +version: string,
 };
 
+// Use $PropertyType when we will have models to reuse their types.
 export type Fields = {
   +userName: string,
   +userDescription: string,
@@ -27,8 +32,8 @@ export type Fields = {
 };
 
 export type FieldsState = {
-  initial: Fields,
-  changed: { [id: string]: Fields },
+  +initial: Fields,
+  +changed: { +[id: string]: Fields },
 };
 
 export type State = {
@@ -37,10 +42,14 @@ export type State = {
 };
 
 export type Action =
+  // | { type: 'RESET_FIELDS', +payload: {| +id: string |} }
   | { type: 'SET_APP_ONLINE', +payload: {| +online: boolean |} }
-  | { type: 'SET_FIELD', +payload: {| +id: string, +fields: Fields |} }
+  | { type: 'SET_FIELDS', +payload: {| +id: string, +fields: Fields |} }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };
 
-export type Reducers = { [reducerName: string]: Reducer<State, Action> };
+export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
+// export type Store = ReduxStore<State, Action>;
+//
+// const foo = (s: Store) => s

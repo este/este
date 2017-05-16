@@ -1,5 +1,5 @@
 // @flow
-import type { State } from '../types';
+// import type { Fields as FieldsType } from '../types';
 import Button from '../components/button';
 import Buttons from '../components/buttons';
 import Checkbox from '../components/checkbox';
@@ -9,9 +9,8 @@ import Heading from '../components/heading';
 import P from '../components/p';
 import Page from '../components/page';
 import Radio from '../components/radio';
-import app from '../lib/app';
-import { connect } from 'react-redux';
-import { setField } from '../lib/fields/actions';
+import app from '../components/app';
+import fields from '../components/fields';
 
 const onFormSubmit = () => {
   // console.log('fok');
@@ -19,28 +18,27 @@ const onFormSubmit = () => {
   // alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
   // fields.$reset();
   // // To see how to handle form validation and IO, check /auth.
-  // // strom, pres name?
-  console.log('foo');
 };
 
-// const fok =
-
-const UserForm = ({ userName, userDescription, setField }) => (
+// TODO: onChange, read name, the same for React Native
+const UserForm = ({ fields }) => (
   <Form onSubmit={onFormSubmit}>
     <Field
       label="Name"
       name="name"
-      onChange={e => setField('1', { userName: e.currentTarget.value })}
+      // onChange={(e: Event & { currentTarget: { value: * } }) =>
+      //   setFields('1', { userName: e.currentTarget.value })}
       placeholder="Jane Doe"
-      value={userName}
+      value={fields.userName}
     />
-    <Field
+    {/* <Field
       label="Description"
       name="description"
-      onChange={e => setField('1', { userDescription: e.currentTarget.value })}
+      onChange={(e: Event & { currentTarget: { value: * } }) =>
+        setFields('1', { userDescription: e.currentTarget.value })}
       placeholder="..."
       value={userDescription}
-    />
+    /> */}
     {/* <Buttons vertical>
       <Checkbox value={user.likeCats} label="I like cats" />
       <Checkbox value={user.likeDogs} label="I like dogs" />
@@ -65,27 +63,10 @@ const UserForm = ({ userName, userDescription, setField }) => (
   </Form>
 );
 
-// TODO: Custom hoc, dostane array strings, sama resi merge, a reset i values.
-//
-const NewUserForm = connect(
-  // merge props z initial, a z changed
-  // idealne v komponente, imho... hmm
-  (state: State) => ({
-    userName: state.fields.initial.userName,
-    userDescription: state.fields.initial.userDescription,
-  }),
-  // kdykoliv je zmena...
-  // mixovat zde, pak v hoc
-  // (state: State) => {
-  //   return ['userName', 'userDescription'].reduce((props, fieldName) => {
-  //     return {
-  //       ...props,
-  //       [fieldName]: state.fields.initial[fieldName],
-  //     };
-  //   }, {});
-  // },
-  { setField }
-)(UserForm);
+const NewUserForm = fields({
+  fields: ['userName', 'userDescription'],
+  // id: props =>
+})(UserForm);
 
 const Fields = () => (
   <Page title="Fields">
