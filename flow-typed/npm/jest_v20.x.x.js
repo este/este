@@ -1,5 +1,5 @@
-// flow-typed signature: 2b0e172fa5655d6ae10387616943ccc3
-// flow-typed version: 4539f4f195/jest_v20.x.x/flow_>=v0.33.x
+// flow-typed signature: eb392bde0440325fce2421d18447acde
+// flow-typed version: 0786be2fed/jest_v20.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -93,12 +93,12 @@ type JestPromiseType = {
    * Use rejects to unwrap the reason of a rejected promise so any other
    * matcher can be chained. If the promise is fulfilled the assertion fails.
    */
-  rejects(): JestExpectType,
+  rejects: JestExpectType,
   /**
    * Use resolves to unwrap the value of a fulfilled promise so any other
    * matcher can be chained. If the promise is rejected the assertion fails.
    */
-  resolves(): JestExpectType
+  resolves: JestExpectType
 };
 
 type JestExpectType = {

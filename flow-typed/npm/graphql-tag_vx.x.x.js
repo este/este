@@ -1,4 +1,4 @@
-// flow-typed signature: 34d1b996a6af74921b0a209b99804347
+// flow-typed signature: d085dde6eec8bd5dfae9767aceb82f47
 // flow-typed version: <<STUB>>/graphql-tag_v^2.0.0/flow_v0.46.0
 
 /**
@@ -30,10 +30,6 @@ declare module 'graphql-tag/loader' {
   declare module.exports: any;
 }
 
-declare module 'graphql-tag/package/lib/graphql-tag.umd' {
-  declare module.exports: any;
-}
-
 declare module 'graphql-tag/src/index' {
   declare module.exports: any;
 }
@@ -44,9 +40,6 @@ declare module 'graphql-tag/lib/graphql-tag.umd.js' {
 }
 declare module 'graphql-tag/loader.js' {
   declare module.exports: $Exports<'graphql-tag/loader'>;
-}
-declare module 'graphql-tag/package/lib/graphql-tag.umd.js' {
-  declare module.exports: $Exports<'graphql-tag/package/lib/graphql-tag.umd'>;
 }
 declare module 'graphql-tag/src/index.js' {
   declare module.exports: $Exports<'graphql-tag/src/index'>;

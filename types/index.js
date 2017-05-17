@@ -2,7 +2,7 @@
 import type {
   Middleware as ReduxMiddleware,
   Reducer as ReduxReducer,
-  // Store as ReduxStore,
+  Store as ReduxStore,
 } from 'redux';
 
 // Algebraic types ftw.
@@ -44,12 +44,17 @@ export type State = {
 export type Action =
   // | { type: 'RESET_FIELDS', +payload: {| +id: string |} }
   | { type: 'SET_APP_ONLINE', +payload: {| +online: boolean |} }
-  | { type: 'SET_FIELDS', +payload: {| +id: string, +fields: Fields |} }
+  | {
+      type: 'SET_FIELD',
+      +payload: {| +id: string, +name: $Keys<Fields>, value: any |},
+    }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };
 
 export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };
+
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
-// export type Store = ReduxStore<State, Action>;
-//
-// const foo = (s: Store) => s
+
+export type Store = ReduxStore<State, Action>;
+
+export type FunctionalComponent<P> = (props: P) => ?React$Element<any>;

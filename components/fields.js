@@ -1,44 +1,79 @@
 // @flow
-import type { Fields, State } from '../types';
+import type { Fields, FunctionalComponent, State, Store } from '../types';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { setFields } from '../lib/fields/actions';
+import { setField } from '../lib/fields/actions';
 
-type Options = {|
-  +fields: Array<$Keys<Fields>>,
-|};
+type FieldNames = Array<$Keys<Fields>>;
 
-type StatelessComponent<P> = (props: P) => ?React$Element<any>;
+type GetId = (props: Object) => string;
 
-// TODO: This is cheating. We should generate only selected fields types.
-type WrappedComponent = StatelessComponent<{ fields: Fields }>;
+type WrappedComponent = FunctionalComponent<{
+  // TODO: Restrict type Fields by passed fieldNames somehow.
+  fields: {
+    [$Keys<Fields>]: {
+      name: $Keys<Fields>,
+      value: any,
+      onChange: any,
+    },
+  },
+}>;
 
-const fields = (options: Options) => (WrappedComponent: WrappedComponent) =>
+type FieldsContext = { store: Store };
+
+const fields = (fieldNames: FieldNames, getId: GetId = props => '') => (
+  WrappedComponent: WrappedComponent
+) =>
   class Fields extends React.Component {
     static contextTypes = {
       store: PropTypes.object, // Redux store.
     };
 
-    state: { fields: Fields };
+    state: { fields: Object };
 
     unsubscribe: () => void;
 
-    constructor(props: *, context: *) {
+    context: FieldsContext;
+
+    static createFieldsProps = (props: Object, context: FieldsContext) => {
+      const { initial, changed } = context.store.getState().fields;
+      const id = getId(props);
+      const idChanged = changed[id];
+      return fieldNames.reduce((props, fieldName) => {
+        const fieldValue = idChanged && idChanged.hasOwnProperty(fieldName)
+          ? idChanged[fieldName]
+          : initial[fieldName];
+        return {
+          ...props,
+          [fieldName]: {
+            name: fieldName,
+            value: fieldValue,
+            onChange: (e: Event & { currentTarget: { value: mixed } }) => {
+              const action = setField(id, fieldName, e.currentTarget.value);
+              context.store.dispatch(action);
+            },
+          },
+        };
+      }, {});
+    };
+
+    constructor(props: Object, context: FieldsContext) {
       super(props);
       this.state = {
-        fields: context.store.getState().fields,
+        fields: Fields.createFieldsProps(props, context),
       };
-    }
-
-    shouldComponentUpdate(nextProps: any, nextState: any) {
-      // TODO: Check via options.fields.
-      return true;
     }
 
     componentDidMount() {
       const { store } = this.context;
       this.unsubscribe = store.subscribe(() => {
-        this.setState({ fields: store.getState().fields });
+        // const changed = store.getState().fields.changed[getId];
+        // if (!changed) return;
+        // porovnat fieldNames se state vysledkem, pokud nesedi..
+        // pokud ma id changed, a prop se nerovna initial...
+        this.setState({
+          fields: Fields.createFieldsProps(this.props, this.context),
+        });
       });
     }
 
@@ -47,50 +82,8 @@ const fields = (options: Options) => (WrappedComponent: WrappedComponent) =>
     }
 
     render() {
-      // const fields = options.fields.reduce((props, fieldName) => ({
-      //   ...props,
-      //   [fieldName]:
-      // }), {})
-
-      // const { store } = this.context;
-      // console.log(store.getState().fields);
-      //     // const changed = state.fields.changed['1'];
-      //     // const fields = [
-      //     //   'userName',
-      //     //   'userDescription',
-      //     // ].reduce((props, fieldName) => {
-      //     //   return {
-      //     //     ...props,
-      //     //     [fieldName]: (changed &&
-      //     //       // proc? je to ok?
-      //     //       typeof changed[fieldName] !== undefined &&
-      //     //       changed[fieldName]) ||
-      //     //       state.fields.initial[fieldName],
-      //     //     // [fieldName]: changed && typeof changed[fieldName] !== undefined
-      //     //     //   ? changed[fieldName]
-      //     //     //   : state.fields.initial[fieldName],
-      //     //   };
-      //     // }, {});
-
-      const props = {
-        ...this.props,
-      };
-      return <WrappedComponent {...props} />;
+      return <WrappedComponent {...this.props} fields={this.state.fields} />;
     }
   };
 
 export default fields;
-
-// declare class HTMLButtonElement extends HTMLElement {
-//   disabled: boolean;
-//   form: HTMLFormElement | null;
-//   name: string;
-//   type: string;
-//   value: string;
-// }
-
-// const NewUserForm = connect(
-//   (state: State) => {
-//   },
-//   { setFields }
-// )(UserForm);

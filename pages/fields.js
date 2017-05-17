@@ -1,5 +1,4 @@
 // @flow
-// import type { Fields as FieldsType } from '../types';
 import Button from '../components/button';
 import Buttons from '../components/buttons';
 import Checkbox from '../components/checkbox';
@@ -20,25 +19,10 @@ const onFormSubmit = () => {
   // // To see how to handle form validation and IO, check /auth.
 };
 
-// TODO: onChange, read name, the same for React Native
 const UserForm = ({ fields }) => (
   <Form onSubmit={onFormSubmit}>
-    <Field
-      label="Name"
-      name="name"
-      // onChange={(e: Event & { currentTarget: { value: * } }) =>
-      //   setFields('1', { userName: e.currentTarget.value })}
-      placeholder="Jane Doe"
-      value={fields.userName}
-    />
-    {/* <Field
-      label="Description"
-      name="description"
-      onChange={(e: Event & { currentTarget: { value: * } }) =>
-        setFields('1', { userDescription: e.currentTarget.value })}
-      placeholder="..."
-      value={userDescription}
-    /> */}
+    <Field label="Name" placeholder="Jane Doe" {...fields.userName} />
+    <Field label="Description" placeholder="..." {...fields.userDescription} />
     {/* <Buttons vertical>
       <Checkbox value={user.likeCats} label="I like cats" />
       <Checkbox value={user.likeDogs} label="I like dogs" />
@@ -63,10 +47,7 @@ const UserForm = ({ fields }) => (
   </Form>
 );
 
-const NewUserForm = fields({
-  fields: ['userName', 'userDescription'],
-  // id: props =>
-})(UserForm);
+const NewUserForm = fields(['userName', 'userDescription'])(UserForm);
 
 const Fields = () => (
   <Page title="Fields">
