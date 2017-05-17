@@ -13,6 +13,7 @@ import app from '../components/app';
 import fields from '../components/fields';
 
 const onFormSubmit = () => {
+  // ze by reset a values dostal form?
   // console.log('fok');
   // const values = fields.$values();
   // alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
@@ -22,7 +23,9 @@ const onFormSubmit = () => {
 
 const UserForm = ({ fields }) => (
   <Form onSubmit={onFormSubmit}>
+    {/* <Field name="name"> */}
     <TextInput label="Name" placeholder="Jane Doe" {...fields.userName} />
+    {/* </Field> */}
     <TextInput
       label="Description"
       placeholder="..."

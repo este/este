@@ -44,3 +44,11 @@ test('disabled', () => {
 test('color', () => {
   expectRender(() => <TextInput color="primary" />);
 });
+
+test('label', () => {
+  expectRender(() => <TextInput label="label" />);
+});
+
+test('error', () => {
+  expectRender(() => <TextInput error="error" />);
+});

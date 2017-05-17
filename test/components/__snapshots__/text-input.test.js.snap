@@ -2,37 +2,95 @@
 
 exports[`color 1`] = `
 Object {
-  "component": <input
-    className="a b c d e f g h i j k l m"
-/>,
+  "component": <div
+    className="a b c"
+>
+    <input
+        className="d b c e f g h i j k l m n"
+    />
+    <div
+        className="d b c e f g o i p k q"
+    >
+         
+    </div>
+</div>,
   "fela": "
-    .a{display:inline}
+    .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{white-space:pre-wrap}
-    .e{overflow-wrap:break-word}
-    .f{-ms-hyphens:auto}
-    .g{color:blue}
-    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .i{font-size:16}
-    .j{line-height:24px}
-    .k::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .l{background-color:transparent}
-    .m{outline:none}",
+    .d{display:inline}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:blue}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}
+    .l::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .m{background-color:transparent}
+    .n{outline:none}
+    .o{color:red}
+    .p{font-size:14}
+    .q{font-weight:600}",
 }
 `;
 
 exports[`disabled 1`] = `
 Object {
-  "component": <input
-    className="a b c d e f g h i j k l m n"
-    disabled={true}
-/>,
+  "component": <div
+    className="a b c"
+>
+    <input
+        className="d b c e f g h i j k l m n o"
+        disabled={true}
+    />
+    <div
+        className="d b c f g h p j q l r"
+    >
+         
+    </div>
+</div>,
   "fela": "
-    .a{display:inline}
+    .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{opacity:0.5}
+    .d{display:inline}
+    .e{opacity:0.5}
+    .f{white-space:pre-wrap}
+    .g{overflow-wrap:break-word}
+    .h{-ms-hyphens:auto}
+    .i{color:black}
+    .j{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .k{font-size:16}
+    .l{line-height:24px}
+    .m::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .n{background-color:transparent}
+    .o{outline:none}
+    .p{color:red}
+    .q{font-size:14}
+    .r{font-weight:600}",
+}
+`;
+
+exports[`error 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <input
+        className="d b c e f g h i j k l m n"
+    />
+    <div
+        className="d b c e f g o i p k q"
+    >
+        error
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{display:inline}
     .e{white-space:pre-wrap}
     .f{overflow-wrap:break-word}
     .g{-ms-hyphens:auto}
@@ -42,28 +100,84 @@ Object {
     .k{line-height:24px}
     .l::placeholder{color:rgba(0, 0, 0, 0.5)}
     .m{background-color:transparent}
-    .n{outline:none}",
+    .n{outline:none}
+    .o{color:red}
+    .p{font-size:14}
+    .q{font-weight:600}",
+}
+`;
+
+exports[`label 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="d b c e f g h i j k l"
+    >
+        label
+    </div>
+    <input
+        className="d b c e f g h i m k n o p"
+    />
+    <div
+        className="d b c e f g q i j k l"
+    >
+         
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{display:inline}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:black}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:14}
+    .k{line-height:24px}
+    .l{font-weight:600}
+    .m{font-size:16}
+    .n::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .o{background-color:transparent}
+    .p{outline:none}
+    .q{color:red}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
-  "component": <input
-    className="a b c d e f g h i j k l m"
-/>,
+  "component": <div
+    className="a b c"
+>
+    <input
+        className="d b c e f g h i j k l m n"
+    />
+    <div
+        className="d b c e f g o i p k q"
+    >
+         
+    </div>
+</div>,
   "fela": "
-    .a{display:inline}
+    .a{display:flex}
     .b{flex-direction:column}
     .c{position:relative}
-    .d{white-space:pre-wrap}
-    .e{overflow-wrap:break-word}
-    .f{-ms-hyphens:auto}
-    .g{color:black}
-    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .i{font-size:16}
-    .j{line-height:24px}
-    .k::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .l{background-color:transparent}
-    .m{outline:none}",
+    .d{display:inline}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:black}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}
+    .l::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .m{background-color:transparent}
+    .n{outline:none}
+    .o{color:red}
+    .p{font-size:14}
+    .q{font-weight:600}",
 }
 `;
