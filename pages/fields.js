@@ -1,8 +1,9 @@
 // @flow
+import type { State } from '../types';
 import Button from '../components/button';
-import Buttons from '../components/buttons';
 import Checkbox from '../components/checkbox';
 import Field from '../components/field';
+import Fieldset from '../components/fieldset';
 import Form from '../components/form';
 import Heading from '../components/heading';
 import P from '../components/p';
@@ -23,31 +24,38 @@ const UserForm = ({ fields }) => (
   <Form onSubmit={onFormSubmit}>
     <Field label="Name" placeholder="Jane Doe" {...fields.userName} />
     <Field label="Description" placeholder="..." {...fields.userDescription} />
-    {/* <Buttons vertical>
-      <Checkbox value={user.likeCats} label="I like cats" />
-      <Checkbox value={user.likeDogs} label="I like dogs" />
-    </Buttons>
-    <Buttons>
-      <Radio value={user.gender} label="Female" select="female" />
-      <Radio value={user.gender} label="Male" select="male" />
-      <Radio value={user.gender} label="Other" select="other" />
-    </Buttons>
-    <Buttons>
+    <Fieldset vertical>
+      <Checkbox label="I like cats" {...fields.userLikesCats} />
+      <Checkbox label="I like dogs" {...fields.userLikesDogs} />
+    </Fieldset>
+    <Fieldset>
+      <Radio label="Female" select="female" {...fields.userGender} />
+      <Radio label="Male" select="male" {...fields.userGender} />
+      <Radio label="Other" select="other" {...fields.userGender} />
+    </Fieldset>
+    <Fieldset>
       <Checkbox
-        value={user.doWeNeedKing}
         color="warning"
         label="Do we need a king?"
         labelOnLeft
         size={1}
+        {...fields.userWantsKing}
       />
-    </Buttons>
-    <Buttons>
+    </Fieldset>
+    <Fieldset>
       <Button primary>Submit</Button>
-    </Buttons> */}
+    </Fieldset>
   </Form>
 );
 
-const NewUserForm = fields(['userName', 'userDescription'])(UserForm);
+const NewUserForm = fields([
+  'userName',
+  'userDescription',
+  'userLikesCats',
+  'userLikesDogs',
+  'userGender',
+  'userWantsKing',
+])(UserForm);
 
 const Fields = () => (
   <Page title="Fields">

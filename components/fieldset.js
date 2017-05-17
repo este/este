@@ -2,11 +2,11 @@
 import Box, { type BoxProps } from '../components/box';
 import withTheme, { type ThemeContext } from './withTheme';
 
-export type ButtonsProps = BoxProps & {
+export type FieldsetProps = BoxProps & {
   vertical?: boolean,
 };
 
-const Buttons = (props: ButtonsProps, { theme }: ThemeContext) => {
+const Fieldset = (props: FieldsetProps, { theme }: ThemeContext) => {
   const {
     vertical,
     flexDirection = vertical ? 'column' : 'row',
@@ -28,6 +28,6 @@ const Buttons = (props: ButtonsProps, { theme }: ThemeContext) => {
   );
 };
 
-withTheme(Buttons);
+withTheme(Fieldset);
 
-export default Buttons;
+export default Fieldset;

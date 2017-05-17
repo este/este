@@ -31,6 +31,8 @@ export type Fields = {
   +userWantsKing: boolean,
 };
 
+export type FieldName = $Keys<Fields>;
+
 export type FieldsState = {
   +initial: Fields,
   +changed: { +[id: string]: Fields },
@@ -46,7 +48,7 @@ export type Action =
   | { type: 'SET_APP_ONLINE', +payload: {| +online: boolean |} }
   | {
       type: 'SET_FIELD',
-      +payload: {| +id: string, +name: $Keys<Fields>, value: any |},
+      +payload: {| +id: string, +name: FieldName, +value: any |},
     }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };
