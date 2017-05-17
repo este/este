@@ -2,13 +2,13 @@
 import type { State } from '../types';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
-import Field from '../components/field';
 import Fieldset from '../components/fieldset';
 import Form from '../components/form';
 import Heading from '../components/heading';
 import P from '../components/p';
 import Page from '../components/page';
 import Radio from '../components/radio';
+import TextInput from '../components/text-input';
 import app from '../components/app';
 import fields from '../components/fields';
 
@@ -22,8 +22,12 @@ const onFormSubmit = () => {
 
 const UserForm = ({ fields }) => (
   <Form onSubmit={onFormSubmit}>
-    <Field label="Name" placeholder="Jane Doe" {...fields.userName} />
-    <Field label="Description" placeholder="..." {...fields.userDescription} />
+    <TextInput label="Name" placeholder="Jane Doe" {...fields.userName} />
+    <TextInput
+      label="Description"
+      placeholder="..."
+      {...fields.userDescription}
+    />
     <Fieldset vertical>
       <Checkbox label="I like cats" {...fields.userLikesCats} />
       <Checkbox label="I like dogs" {...fields.userLikesDogs} />

@@ -1,4 +1,5 @@
 // @flow
+import Box from './box';
 import Text, { type TextProps } from './text';
 import colorLib from 'color';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -9,13 +10,21 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,
+  error?: string,
+  label?: string,
 };
 
 const computePlaceholderTextColor = (colors, color) =>
   colorLib(colors[color]).fade(0.5).toString();
 
 const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
-  const { color = theme.text.color, ...restProps } = props;
+  const {
+    color = theme.text.color,
+    error = '\u00A0', // Preserve vertical space for an error.
+    label,
+    size = 0,
+    ...restProps
+  } = props;
 
   const style = {
     ...(restProps.isReactNative
@@ -31,15 +40,20 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   };
 
   return (
-    <Text
-      as="input"
-      color={color}
-      {...(restProps.disabled
-        ? { opacity: theme.textInput.disabledOpacity }
-        : null)}
-      {...restProps}
-      style={style}
-    />
+    <Box>
+      {label && <Text bold size={size - 1}>{label}</Text>}
+      <Text
+        as="input"
+        color={color}
+        size={size}
+        {...(restProps.disabled
+          ? { opacity: theme.textInput.disabledOpacity }
+          : null)}
+        {...restProps}
+        style={style}
+      />
+      <Text bold color="danger" size={size - 1}>{error}</Text>
+    </Box>
   );
 };
 
