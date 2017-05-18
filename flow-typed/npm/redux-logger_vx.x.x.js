@@ -1,4 +1,4 @@
-// flow-typed signature: 8507fdfe23a4300b3cd60f0d599c8e42
+// flow-typed signature: 91cac3fef36557c3249f8d13c5a015b7
 // flow-typed version: <<STUB>>/redux-logger_v^3.0.1/flow_v0.46.0
 
 /**
@@ -22,31 +22,7 @@ declare module 'redux-logger' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'redux-logger/dist/index' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/dist/index.min' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/lib/core' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/lib/defaults' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/lib/diff' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/lib/helpers' {
-  declare module.exports: any;
-}
-
-declare module 'redux-logger/lib/index' {
+declare module 'redux-logger/dist/redux-logger' {
   declare module.exports: any;
 }
 
@@ -71,26 +47,8 @@ declare module 'redux-logger/src/index' {
 }
 
 // Filename aliases
-declare module 'redux-logger/dist/index.js' {
-  declare module.exports: $Exports<'redux-logger/dist/index'>;
-}
-declare module 'redux-logger/dist/index.min.js' {
-  declare module.exports: $Exports<'redux-logger/dist/index.min'>;
-}
-declare module 'redux-logger/lib/core.js' {
-  declare module.exports: $Exports<'redux-logger/lib/core'>;
-}
-declare module 'redux-logger/lib/defaults.js' {
-  declare module.exports: $Exports<'redux-logger/lib/defaults'>;
-}
-declare module 'redux-logger/lib/diff.js' {
-  declare module.exports: $Exports<'redux-logger/lib/diff'>;
-}
-declare module 'redux-logger/lib/helpers.js' {
-  declare module.exports: $Exports<'redux-logger/lib/helpers'>;
-}
-declare module 'redux-logger/lib/index.js' {
-  declare module.exports: $Exports<'redux-logger/lib/index'>;
+declare module 'redux-logger/dist/redux-logger.js' {
+  declare module.exports: $Exports<'redux-logger/dist/redux-logger'>;
 }
 declare module 'redux-logger/src/core.js' {
   declare module.exports: $Exports<'redux-logger/src/core'>;
