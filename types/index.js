@@ -21,26 +21,23 @@ export type AppState = {
   +version: string,
 };
 
-// Use $PropertyType when we will have models to reuse their types.
-export type Fields = {
-  +userName: string,
-  +userDescription: string,
-  +userLikesCats: boolean,
-  +userLikesDogs: boolean,
-  +userGender: null | 'male' | 'female' | 'other',
-  +userWantsKing: boolean,
-};
-
-export type FieldName = $Keys<Fields>;
-
-export type FieldsState = {
-  +initial: Fields,
-  +changed: { +[id: string]: Fields },
+// Leverage $PropertyType<T, x>
+// Potrebuju initialState a any change pres id, ktere je dynamic
+export type FormsState = {
+  +newUser: {
+    +name: string,
+    +description: string,
+    +likesCats: boolean,
+    +likesDogs: boolean,
+    +gender: null | 'male' | 'female' | 'other',
+    +wantsKing: boolean,
+  },
+  // +changed: { +[id: string]: Fields },
 };
 
 export type State = {
   +app: AppState,
-  +fields: FieldsState,
+  +forms: FormsState,
 };
 
 export type Action =
@@ -48,7 +45,7 @@ export type Action =
   | { type: 'SET_APP_ONLINE', +payload: {| +online: boolean |} }
   | {
       type: 'SET_FIELD',
-      +payload: {| +id: string, +name: FieldName, +value: any |},
+      +payload: {| +id: string, +name: any, +value: any |},
     }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };

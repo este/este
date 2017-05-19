@@ -38,18 +38,20 @@ const theme = {
 
 const expectRender = createExpectRender(theme);
 
+const onPress = () => {};
+
 test('render', () => {
-  expectRender(() => <Button />);
+  expectRender(() => <Button onPress={onPress} />);
 });
 
 test('primary', () => {
-  expectRender(() => <Button primary />);
+  expectRender(() => <Button primary onPress={onPress} />);
 });
 
 test('primary outline', () => {
-  expectRender(() => <Button primary outline />);
+  expectRender(() => <Button primary outline onPress={onPress} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <Button disabled />);
+  expectRender(() => <Button disabled onPress={onPress} />);
 });

@@ -1,7 +1,7 @@
 // @flow
 import A from '../components/a';
 import Blockquote from '../components/blockquote';
-import Box from '../components/box';
+// import Box from '../components/box';
 import Button from '../components/button';
 import Fieldset from '../components/fieldset';
 import Heading from '../components/heading';
@@ -15,6 +15,20 @@ import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
 import app from '../components/app';
 
+const onButtonPress = [
+  'primary',
+  'success',
+  'warning',
+  'danger',
+  'text',
+].reduce(
+  (buttons, name) => ({
+    ...buttons,
+    [name]: () => console.log(name), // eslint-disable-line no-console
+  }),
+  {}
+);
+
 const Index = () => (
   <Page title="Este">
     <Heading size={3}>Este</Heading>
@@ -25,17 +39,15 @@ const Index = () => (
       {/* Styled text link. */}
       <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
-    <Fieldset flexDirection="row">
-      {/* Just link, no styles. */}
-      <Link href="https://mises.org/library/anatomy-state">
-        <Image
-          alt="50x50 placeholder"
-          marginBottom={1}
-          size={{ height: 50, width: 50 }}
-          src="/static/50x50.png"
-        />
-      </Link>
-    </Fieldset>
+    {/* Just link, no styles. */}
+    <Link href="https://mises.org/library/anatomy-state">
+      <Image
+        alt="50x50 placeholder"
+        marginBottom={1}
+        size={{ height: 50, width: 50 }}
+        src="/static/50x50.png"
+      />
+    </Link>
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <P size={5}>text 5</P>
@@ -47,12 +59,12 @@ const Index = () => (
       really know about what they imagine they can design.
     </Blockquote>
     <Fieldset>
-      <Button primary>Primary</Button>
-      <Button success>Success</Button>
-      <Button warning>Warning</Button>
-      <Button danger>Danger</Button>
-      <Button primary disabled>Disabled</Button>
-      <Button>Text</Button>
+      <Button primary onPress={onButtonPress.primary}>Primary</Button>
+      <Button success onPress={onButtonPress.success}>Success</Button>
+      <Button warning onPress={onButtonPress.warning}>Warning</Button>
+      <Button danger onPress={onButtonPress.danger}>Danger</Button>
+      <Button primary disabled onPress={() => {}}>Disabled</Button>
+      <Button onPress={onButtonPress.text}>Text</Button>
     </Fieldset>
     <Fieldset>
       <ToggleBaseline />

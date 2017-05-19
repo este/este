@@ -1,6 +1,29 @@
 // @flow
 import type { Element } from 'react';
 
+type Colors = {|
+  primary: string,
+  success: string,
+  warning: string,
+  danger: string,
+  black: string,
+  white: string,
+  gray: string,
+|};
+
+export type Color = $Keys<Colors>;
+
+// TODO: Derive it from Colors. $Shape doesn't work, $ObjMap is buggy.
+export type ColorProps = {
+  primary?: boolean,
+  success?: boolean,
+  warning?: boolean,
+  danger?: boolean,
+  black?: boolean,
+  white?: boolean,
+  gray?: boolean,
+};
+
 export type Bold =
   | 'normal'
   | 'bold'
@@ -13,36 +36,6 @@ export type Bold =
   | 700
   | 800
   | 900;
-
-export type Color =
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'black'
-  | 'white'
-  | 'gray';
-
-// I wish I know how to reuse Color for ColorProps and Colors, if possible.
-export type ColorProps = {
-  primary?: boolean,
-  success?: boolean,
-  warning?: boolean,
-  danger?: boolean,
-  black?: boolean,
-  white?: boolean,
-  gray?: boolean,
-};
-
-type Colors = {|
-  primary: string,
-  success: string,
-  warning: string,
-  danger: string,
-  black: string,
-  white: string,
-  gray: string,
-|};
 
 export type Theme = {|
   typography: {|

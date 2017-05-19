@@ -12,6 +12,7 @@ export type TextInputProps = TextProps & {
   disabled?: boolean,
   error?: string,
   label?: string,
+  onChange: (text: string) => void,
 };
 
 const computePlaceholderTextColor = (colors, color) =>
@@ -22,6 +23,7 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     color = theme.text.color,
     error = '\u00A0', // Preserve vertical space for an error.
     label,
+    onChange,
     size = 0,
     ...restProps
   } = props;
@@ -42,9 +44,11 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   return (
     <Box>
       {label && <Text bold size={size - 1}>{label}</Text>}
+      {/* TODO: Native ofc */}
       <Text
         as="input"
         color={color}
+        onChange={({ currentTarget: { value } }) => onChange(value)}
         size={size}
         {...(restProps.disabled
           ? { opacity: theme.textInput.disabledOpacity }

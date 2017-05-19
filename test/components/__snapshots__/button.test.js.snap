@@ -5,7 +5,7 @@ Object {
   "component": <button
     className="a b c d e f g h i j k l m n o p q r s t u v w"
     disabled={true}
-    onClick={undefined}
+    onClick={[Function]}
 />,
   "fela": "
     .a{display:inline}
@@ -38,7 +38,7 @@ exports[`primary 1`] = `
 Object {
   "component": <button
     className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
-    onClick={undefined}
+    onClick={[Function]}
 />,
   "fela": "
     .a{display:inline}
@@ -74,7 +74,7 @@ exports[`primary outline 1`] = `
 Object {
   "component": <button
     className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af"
-    onClick={undefined}
+    onClick={[Function]}
 />,
   "fela": "
     .a{display:inline}
@@ -115,7 +115,7 @@ exports[`render 1`] = `
 Object {
   "component": <button
     className="a b c d e f g h i j k l m n o p q r s t u v"
-    onClick={undefined}
+    onClick={[Function]}
 />,
   "fela": "
     .a{display:inline}

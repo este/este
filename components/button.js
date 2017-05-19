@@ -3,12 +3,9 @@ import Text, { type TextProps } from './text';
 import type { ColorProps } from '../themes/types';
 import withTheme, { type ThemeContext } from './withTheme';
 
-const BrowserButton = ({
-  onPress,
-  ...restProps
-}: {
-  onPress?: EventHandler,
-}) => <button onClick={onPress} {...restProps} />;
+const BrowserButton = ({ onPress, ...restProps }) => (
+  <button onClick={() => onPress()} {...restProps} />
+);
 
 type UniversalButtonElement = {
   blur: () => void,
@@ -18,9 +15,7 @@ type UniversalButtonElement = {
 export type ButtonProps = ColorProps &
   TextProps & {
     disabled?: boolean,
-    onPress?: (
-      event: Event & { currentTarget: UniversalButtonElement }
-    ) => mixed,
+    onPress: () => void,
     outline?: boolean,
   };
 

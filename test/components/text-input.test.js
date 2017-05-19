@@ -33,22 +33,24 @@ const theme = {
 
 const expectRender = createExpectRender(theme);
 
+const onChange = () => {};
+
 test('render', () => {
-  expectRender(() => <TextInput />);
+  expectRender(() => <TextInput onChange={onChange} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <TextInput disabled />);
+  expectRender(() => <TextInput onChange={onChange} disabled />);
 });
 
 test('color', () => {
-  expectRender(() => <TextInput color="primary" />);
+  expectRender(() => <TextInput onChange={onChange} color="primary" />);
 });
 
 test('label', () => {
-  expectRender(() => <TextInput label="label" />);
+  expectRender(() => <TextInput onChange={onChange} label="label" />);
 });
 
 test('error', () => {
-  expectRender(() => <TextInput error="error" />);
+  expectRender(() => <TextInput onChange={onChange} error="error" />);
 });

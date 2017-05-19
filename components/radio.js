@@ -7,7 +7,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 export type RadioProps = ButtonProps & {
   label: string,
   labelOnLeft?: boolean,
-  // onChange?: ({ value: string }) => mixed,
+  onChange?: (value: string) => void,
   select: string,
   value: ?string,
 };
@@ -16,7 +16,7 @@ const Radio = (
   {
     label,
     labelOnLeft = false,
-    // onChange,
+    onChange,
     select,
     value,
     color,
@@ -35,7 +35,7 @@ const Radio = (
   return (
     <Button
       aria-checked={checked}
-      // onPress={() => onChange && onChange({ value: select })}
+      onPress={() => onChange && onChange(select)}
       role="radio"
       size={size}
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
