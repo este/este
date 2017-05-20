@@ -7,11 +7,6 @@ const BrowserButton = ({ onPress, ...restProps }) => (
   <button onClick={() => onPress()} {...restProps} />
 );
 
-type UniversalButtonElement = {
-  blur: () => void,
-  focus: () => void,
-};
-
 export type ButtonProps = ColorProps &
   TextProps & {
     disabled?: boolean,
