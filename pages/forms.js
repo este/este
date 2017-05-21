@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { setUserForm } from '../lib/forms/actions';
 
 const UserForm = ({ id, user, setUserForm }) => {
-  // TODO: set and submit and connect as well should be abstracted.
+  // TODO: set and submit and connect as well could be abstracted.
   const set = prop => state => setUserForm(id, { ...user, [prop]: state });
   const reset = () => setUserForm(id, null);
   const submit = () => {
