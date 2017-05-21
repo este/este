@@ -16,7 +16,8 @@
     "deploy": "node ./scripts/deploy-now",
     "favicon": "node ./scripts/favicon",
     "relay": "relay-compiler --src ./pages/ --schema data/schema.graphql",
-    "get-schema": "node scripts/get-schema.js"
+    "get-schema": "node scripts/get-schema.js",
+    "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install"
   },
   "dependencies": {
     "apollo-client": "^1.0.0",
