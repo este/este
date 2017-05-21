@@ -1,105 +1,103 @@
 // @flow
 import type { State } from '../types';
-// import Button from '../components/button';
+import Button from '../components/button';
 import Checkbox from '../components/checkbox';
 import Fieldset from '../components/fieldset';
 import Form from '../components/form';
 import Heading from '../components/heading';
 import P from '../components/p';
 import Page from '../components/page';
-// import Radio from '../components/radio';
+import Radio from '../components/radio';
 import TextInput from '../components/text-input';
 import app from '../components/app';
 import { connect } from 'react-redux';
 import { setUserForm } from '../lib/forms/actions';
 
-const onFormSubmit = () => {
-  // TODO: values and reset
-  // alert(JSON.stringify(values, null, 2)); // eslint-disable-line no-alert
+const UserForm = ({ id, user, setUserForm }) => {
+  // TODO: set and submit and connect as well should be abstracted.
+  const set = prop => state => setUserForm(id, { ...user, [prop]: state });
+  const reset = () => setUserForm(id, null);
+  const submit = () => {
+    // eslint-disable-next-line no-console
+    console.log(user);
+    // reset after save
+    reset();
+  };
+  return (
+    <Form>
+      <TextInput
+        // Note we are not using name attribute. It's useful probably only for
+        // browser auth pre-filling. Also, it's not universal.
+        label="Name"
+        placeholder="Jane Doe"
+        value={user.name}
+        onChange={set('name')}
+      />
+      <TextInput
+        label="Description"
+        placeholder="..."
+        value={user.description}
+        onChange={set('description')}
+      />
+      <Fieldset vertical>
+        <Checkbox
+          label="I like cats"
+          value={user.likesCats}
+          onChange={set('likesCats')}
+        />
+        <Checkbox
+          label="I like dogs"
+          value={user.likesDogs}
+          onChange={set('likesDogs')}
+        />
+      </Fieldset>
+      <Fieldset>
+        <Radio
+          label="Female"
+          select="female"
+          value={user.gender}
+          onChange={set('gender')}
+        />
+        <Radio
+          label="Male"
+          select="male"
+          value={user.gender}
+          onChange={set('gender')}
+        />
+        <Radio
+          label="Other"
+          select="other"
+          value={user.gender}
+          onChange={set('gender')}
+        />
+      </Fieldset>
+      <Fieldset>
+        <Checkbox
+          label="Do we need a king?"
+          labelOnLeft
+          color="warning"
+          size={1}
+          value={user.wantsKing}
+          onChange={set('wantsKing')}
+        />
+      </Fieldset>
+      <Fieldset>
+        <Button
+          primary
+          onPress={submit}
+          type="submit" // Submit on key enter in browser. TODO: React Native.
+        >
+          Submit
+        </Button>
+      </Fieldset>
+    </Form>
+  );
 };
 
-// mix here, becase we want to set one or more or all props in one action.
-// it just belongs here, it's fast, blabla
-// const theHelper:
-
-const UserForm = ({ id, user, setUserForm }) => (
-  <Form onSubmit={onFormSubmit}>
-    <TextInput
-      label="Name"
-      placeholder="Jane Doe"
-      value={user.name}
-      onChange={value => {
-        // TODO: Adhoc factory.
-        const newState = {
-          ...user,
-          name: value,
-        };
-        setUserForm(id, newState);
-      }}
-    />
-    <TextInput
-      label="Description"
-      placeholder="..."
-      value={user.description}
-      onChange={value => {
-        // TODO: Adhoc factory.
-        const newState = {
-          ...user,
-          description: value,
-        };
-        setUserForm(id, newState);
-      }}
-    />
-    {/* <Fieldset vertical>
-      <Checkbox
-        label="I like cats"
-        value={user.likesCats}
-        onChange={value => {
-          // TODO: Adhoc factory.
-          const newState = {
-            ...user,
-            likesCats: value,
-          };
-          setUserForm(id, newState);
-        }}
-      />
-      <Checkbox
-        label="I like dogs"
-        value={user.likesDogs}
-        onChange={value => {
-          // TODO: Adhoc factory.
-          const newState = {
-            ...user,
-            likesDogs: value,
-          };
-          setUserForm(id, newState);
-        }}
-      />
-    </Fieldset> */}
-    {/* <Fieldset>
-      <Radio label="Female" select="female" onChange={onUserChange} />
-      <Radio label="Male" select="male" onChange={onUserChange} />
-      <Radio label="Other" select="other" onChange={onUserChange} />
-    </Fieldset> */}
-    {/* <Fieldset>
-      <Checkbox
-        color="warning"
-        label="Do we need a king?"
-        labelOnLeft
-        size={1}
-        {...fields.userWantsKing}
-      />
-    </Fieldset>
-    <Fieldset>
-      <Button primary>Submit</Button>
-    </Fieldset> */}
-  </Form>
-);
-
 const EditableUserForm = connect(
-  ({ forms: { user } }: State) => ({
-    id: '',
-    user: user.changes[''] || user.initialState,
+  ({ forms: { user } }: State, { id = '' }) => ({
+    id,
+    user: user.changedState[id] || user.initialState,
   }),
   { setUserForm }
 )(UserForm);

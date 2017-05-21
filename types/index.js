@@ -5,6 +5,12 @@ import type {
   Store as ReduxStore,
 } from 'redux';
 
+// Algebraic data types make domain modelling easy.
+// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types/
+// Redux state is meant to be immutable.
+// https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
+// TODO: Exact state, once Flow fix spread syntax.
+
 export type Id = string;
 
 export type AppState = {
@@ -26,21 +32,17 @@ export type UserForm = {
 export type FormsState = {
   +user: {
     +initialState: UserForm,
-    +changes: { +[id: Id]: UserForm },
+    +changedState: { +[id: Id]: UserForm },
   },
 };
 
-// Algebraic data types make domain modelling easy.
-// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types/
-// Redux state is meant to be immutable.
-// https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
 export type State = {
   +app: AppState,
   +forms: FormsState,
 };
 
 export type Action =
-  | { type: 'SET_USER_FORM', id: Id, state: UserForm }
+  | { type: 'SET_USER_FORM', id: Id, state: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' };
 

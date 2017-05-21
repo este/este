@@ -2,19 +2,16 @@
 import Box, { type BoxProps } from './box';
 import withTheme, { type ThemeContext } from './withTheme';
 
-type FormProps = BoxProps & {
-  onSubmit?: EventHandler,
-};
+// Render form as form in browser, because auth data or whatever pre-filling.
+const BrowserForm = props => (
+  <form {...props} onSubmit={(e: Event) => e.preventDefault()} />
+);
 
-const onSubmitWithPreventDefault = onSubmit => event => {
-  event.preventDefault();
-  if (!onSubmit) return;
-  onSubmit(event);
-};
+type FormProps = BoxProps;
 
-const Form = ({ onSubmit, ...props }: FormProps, { theme }: ThemeContext) => {
+const Form = (props: FormProps, { theme }: ThemeContext) => {
   const {
-    as = 'form',
+    as = BrowserForm,
     marginBottom = theme.form.marginBottom,
     maxWidth = theme.form.maxWidth,
     ...restProps
@@ -24,7 +21,6 @@ const Form = ({ onSubmit, ...props }: FormProps, { theme }: ThemeContext) => {
       as={as}
       marginBottom={marginBottom}
       maxWidth={maxWidth}
-      onSubmit={onSubmitWithPreventDefault(onSubmit)}
       {...restProps}
     />
   );
