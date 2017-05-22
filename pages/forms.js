@@ -14,10 +14,10 @@ import { connect } from 'react-redux';
 import { setUserForm } from '../lib/forms/actions';
 
 const UserForm = ({ id, user, setUserForm }) => {
-  // Can't figure out how to type it better :( This doesn't work:
-  // type Prop = $Keys<typeof user>;
-  const onChange = (prop: string) => state =>
+  // Can't figure out how to type it better.
+  const onChange = (prop: $Keys<typeof user>) => state => {
     setUserForm(id, { ...user, [(prop: string)]: state });
+  };
 
   const submit = () => {
     // eslint-disable-next-line no-console
