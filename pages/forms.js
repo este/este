@@ -14,15 +14,17 @@ import { connect } from 'react-redux';
 import { setUserForm } from '../lib/forms/actions';
 
 const UserForm = ({ id, user, setUserForm }) => {
-  // TODO: set and submit and connect as well could be abstracted.
-  const set = prop => state => setUserForm(id, { ...user, [prop]: state });
-  const reset = () => setUserForm(id, null);
+  // Can't figure out how to type it better :( This doesn't work:
+  // type Prop = $Keys<typeof user>;
+  const onChange = (prop: string) => state =>
+    setUserForm(id, { ...user, [(prop: string)]: state });
+
   const submit = () => {
     // eslint-disable-next-line no-console
     console.log(user);
-    // reset after save
-    reset();
+    setUserForm(id, null);
   };
+
   return (
     <Form>
       <TextInput
@@ -31,24 +33,24 @@ const UserForm = ({ id, user, setUserForm }) => {
         label="Name"
         placeholder="Jane Doe"
         value={user.name}
-        onChange={set('name')}
+        onChange={onChange('name')}
       />
       <TextInput
         label="Description"
         placeholder="..."
         value={user.description}
-        onChange={set('description')}
+        onChange={onChange('description')}
       />
       <Fieldset vertical>
         <Checkbox
           label="I like cats"
           value={user.likesCats}
-          onChange={set('likesCats')}
+          onChange={onChange('likesCats')}
         />
         <Checkbox
           label="I like dogs"
           value={user.likesDogs}
-          onChange={set('likesDogs')}
+          onChange={onChange('likesDogs')}
         />
       </Fieldset>
       <Fieldset>
@@ -56,19 +58,19 @@ const UserForm = ({ id, user, setUserForm }) => {
           label="Female"
           select="female"
           value={user.gender}
-          onChange={set('gender')}
+          onChange={onChange('gender')}
         />
         <Radio
           label="Male"
           select="male"
           value={user.gender}
-          onChange={set('gender')}
+          onChange={onChange('gender')}
         />
         <Radio
           label="Other"
           select="other"
           value={user.gender}
-          onChange={set('gender')}
+          onChange={onChange('gender')}
         />
       </Fieldset>
       <Fieldset>
@@ -78,7 +80,7 @@ const UserForm = ({ id, user, setUserForm }) => {
           color="warning"
           size={1}
           value={user.wantsKing}
-          onChange={set('wantsKing')}
+          onChange={onChange('wantsKing')}
         />
       </Fieldset>
       <Fieldset>
@@ -94,6 +96,8 @@ const UserForm = ({ id, user, setUserForm }) => {
   );
 };
 
+// Don't abstract this. It's good as is. We can't predict the future, so we
+// can't abstract it. For example, we can compose many forms and actions here.
 const EditableUserForm = connect(
   ({ forms: { user } }: State, { id = '' }) => ({
     id,
