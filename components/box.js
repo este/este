@@ -1,5 +1,6 @@
 // @flow
 import type { Color } from '../themes/types';
+import type { FunctionalComponent } from '../types';
 import PropTypes from 'prop-types';
 import React from 'react';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -30,7 +31,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 type MaybeRhythm = number | string;
 
 export type BoxProps = {
-  as?: string | ((props: Object) => React.Element<*>),
+  as?: string | FunctionalComponent<Object>,
   isReactNative?: boolean,
   style?: Object,
 
