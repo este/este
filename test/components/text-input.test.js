@@ -29,6 +29,11 @@ const theme = {
   textInput: {
     disabledOpacity: 0.5,
   },
+  set: {
+    marginBottom: 1,
+    horizontalSpaceBetween: 0.5,
+    verticalSpaceBetween: 1,
+  },
 };
 
 const expectRender = createExpectRender(theme);

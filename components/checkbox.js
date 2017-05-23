@@ -1,5 +1,6 @@
 // @flow
 import Button, { type ButtonProps } from './button';
+import Set from './set';
 import SvgIcon from './svg-icon';
 import Text from './text';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -40,14 +41,17 @@ const Checkbox = (
       size={size}
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
     >
-      {labelOnLeft && <Text color={color} size={size}>{label}</Text>}
-      <SvgIcon
-        color={color}
-        size={size}
-        svg={value ? theme.checkbox.checkedIcon : theme.checkbox.uncheckedIcon}
-        {...{ [labelOnLeft ? 'marginLeft' : 'marginRight']: 0.5 }}
-      />
-      {!labelOnLeft && <Text color={color} size={size}>{label}</Text>}
+      <Set marginBottom={0}>
+        {labelOnLeft && <Text color={color} size={size}>{label}</Text>}
+        <SvgIcon
+          color={color}
+          size={size}
+          svg={
+            value ? theme.checkbox.checkedIcon : theme.checkbox.uncheckedIcon
+          }
+        />
+        {!labelOnLeft && <Text color={color} size={size}>{label}</Text>}
+      </Set>
     </Button>
   );
 };

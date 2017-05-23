@@ -36,15 +36,25 @@ export type FormsState = {
   },
 };
 
+export type User = UserForm & {
+  +id: Id,
+};
+
+export type UsersState = {
+  local: { +[id: Id]: User },
+};
+
 export type State = {
   +app: AppState,
   +forms: FormsState,
+  +users: UsersState,
 };
 
 export type Action =
   | { type: 'SET_USER_FORM', id: Id, state: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }
-  | { type: 'TOGGLE_DARK' };
+  | { type: 'TOGGLE_DARK' }
+  | { type: 'ADD_USER', user: User };
 
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
 export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };

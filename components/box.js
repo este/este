@@ -34,6 +34,7 @@ export type BoxProps = {
   as?: string | FunctionalComponent<Object>,
   isReactNative?: boolean,
   style?: Object,
+  children?: ?any,
 
   margin?: MaybeRhythm,
   marginHorizontal?: MaybeRhythm,

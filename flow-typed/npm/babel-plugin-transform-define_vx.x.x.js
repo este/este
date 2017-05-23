@@ -1,4 +1,4 @@
-// flow-typed signature: 5f9416c8b570eb32b8bbda8f0833733e
+// flow-typed signature: 8a1c1f50c01db7ba68e6bd41d8c8467e
 // flow-typed version: <<STUB>>/babel-plugin-transform-define_v^1.2.0/flow_v0.46.0
 
 /**
@@ -27,6 +27,30 @@ declare module 'babel-plugin-transform-define/lib/index' {
 }
 
 declare module 'babel-plugin-transform-define/src/index' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/0/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/0/expected' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/emptyString/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/emptyString/expected' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/false/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/false/expected' {
   declare module.exports: any;
 }
 
@@ -62,11 +86,27 @@ declare module 'babel-plugin-transform-define/test/member-expression/expected' {
   declare module.exports: any;
 }
 
+declare module 'babel-plugin-transform-define/test/null/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/null/expected' {
+  declare module.exports: any;
+}
+
 declare module 'babel-plugin-transform-define/test/unary-expression/actual' {
   declare module.exports: any;
 }
 
 declare module 'babel-plugin-transform-define/test/unary-expression/expected' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/undefined/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-define/test/undefined/expected' {
   declare module.exports: any;
 }
 
@@ -76,6 +116,24 @@ declare module 'babel-plugin-transform-define/lib/index.js' {
 }
 declare module 'babel-plugin-transform-define/src/index.js' {
   declare module.exports: $Exports<'babel-plugin-transform-define/src/index'>;
+}
+declare module 'babel-plugin-transform-define/test/0/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/0/actual'>;
+}
+declare module 'babel-plugin-transform-define/test/0/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/0/expected'>;
+}
+declare module 'babel-plugin-transform-define/test/emptyString/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/emptyString/actual'>;
+}
+declare module 'babel-plugin-transform-define/test/emptyString/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/emptyString/expected'>;
+}
+declare module 'babel-plugin-transform-define/test/false/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/false/actual'>;
+}
+declare module 'babel-plugin-transform-define/test/false/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/false/expected'>;
 }
 declare module 'babel-plugin-transform-define/test/identifier/actual.js' {
   declare module.exports: $Exports<'babel-plugin-transform-define/test/identifier/actual'>;
@@ -101,9 +159,21 @@ declare module 'babel-plugin-transform-define/test/member-expression/actual.js' 
 declare module 'babel-plugin-transform-define/test/member-expression/expected.js' {
   declare module.exports: $Exports<'babel-plugin-transform-define/test/member-expression/expected'>;
 }
+declare module 'babel-plugin-transform-define/test/null/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/null/actual'>;
+}
+declare module 'babel-plugin-transform-define/test/null/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/null/expected'>;
+}
 declare module 'babel-plugin-transform-define/test/unary-expression/actual.js' {
   declare module.exports: $Exports<'babel-plugin-transform-define/test/unary-expression/actual'>;
 }
 declare module 'babel-plugin-transform-define/test/unary-expression/expected.js' {
   declare module.exports: $Exports<'babel-plugin-transform-define/test/unary-expression/expected'>;
+}
+declare module 'babel-plugin-transform-define/test/undefined/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/undefined/actual'>;
+}
+declare module 'babel-plugin-transform-define/test/undefined/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-define/test/undefined/expected'>;
 }

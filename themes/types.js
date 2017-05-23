@@ -60,10 +60,14 @@ export type Theme = {|
   p: {|
     marginBottom: number,
   |},
+  set: {|
+    marginBottom: number,
+    horizontalSpaceBetween: number,
+    verticalSpaceBetween: number,
+  |},
   button: {|
     borderRadius: number,
     borderWidth: number,
-    marginHorizontal: number,
     marginVertical: number,
     paddingVertical: number,
     disabledOpacity: number,

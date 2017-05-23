@@ -36,10 +36,14 @@ export const browserTheme: Theme = {
   p: {
     marginBottom: 1,
   },
+  set: {
+    marginBottom: 1,
+    horizontalSpaceBetween: 0.5,
+    verticalSpaceBetween: 1,
+  },
   button: {
     borderRadius: 2,
     borderWidth: 1,
-    marginHorizontal: 0.25,
     marginVertical: 0.3,
     paddingVertical: 0.2,
     disabledOpacity: 0.5,

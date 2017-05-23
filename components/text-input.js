@@ -1,5 +1,6 @@
 // @flow
 import Box from './box';
+import Set from './set';
 import Text, { type TextProps } from './text';
 import colorLib from 'color';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -21,7 +22,7 @@ const computePlaceholderTextColor = (colors, color) =>
 const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   const {
     color = theme.text.color,
-    error = '\u00A0', // Preserve vertical space for an error.
+    error = '',
     label,
     onChange,
     size = 0,
@@ -43,8 +44,13 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
 
   return (
     <Box>
-      {label && <Text bold size={size - 1}>{label}</Text>}
-      {/* TODO: Native ofc */}
+      <Set marginBottom={0}>
+        {label && <Text bold size={size - 1}>{label}</Text>}
+        {error &&
+          <Text bold color="danger" size={size - 1}>
+            {error}
+          </Text>}
+      </Set>
       <Text
         as="input"
         color={color}
@@ -56,7 +62,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         {...restProps}
         style={style}
       />
-      <Text bold color="danger" size={size - 1}>{error}</Text>
     </Box>
   );
 };

@@ -1,15 +1,14 @@
 // @flow
 import A from '../components/a';
 import Blockquote from '../components/blockquote';
-// import Box from '../components/box';
 import Button from '../components/button';
-import Fieldset from '../components/fieldset';
 import Heading from '../components/heading';
 import Image from '../components/image';
 import Link from '../components/link';
 import P from '../components/p';
 import Page from '../components/page';
 import PostList from '../components/post-list';
+import Set from '../components/set';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
@@ -58,18 +57,18 @@ const Index = () => (
       The curious task of economics is to demonstrate to men how little they
       really know about what they imagine they can design.
     </Blockquote>
-    <Fieldset>
+    <Set>
       <Button primary onPress={onButtonPress.primary}>Primary</Button>
       <Button success onPress={onButtonPress.success}>Success</Button>
       <Button warning onPress={onButtonPress.warning}>Warning</Button>
       <Button danger onPress={onButtonPress.danger}>Danger</Button>
       <Button primary disabled onPress={() => {}}>Disabled</Button>
       <Button onPress={onButtonPress.text}>Text</Button>
-    </Fieldset>
-    <Fieldset>
+    </Set>
+    <Set>
       <ToggleBaseline />
       <ToggleDark />
-    </Fieldset>
+    </Set>
     <PostList />
   </Page>
 );

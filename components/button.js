@@ -24,7 +24,6 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
     as = BrowserButton,
     size = 0,
     borderRadius = theme.button.borderRadius,
-    marginHorizontal = theme.button.marginHorizontal,
     marginVertical = size < 0
       ? theme.button.marginVertical + theme.button.paddingVertical
       : theme.button.marginVertical,
@@ -68,7 +67,6 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
         as,
         size,
         borderRadius,
-        marginHorizontal,
         marginVertical,
         paddingHorizontal,
         paddingVertical,
