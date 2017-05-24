@@ -1,4 +1,4 @@
-// flow-typed signature: d16205e9600ac68b60904ee1aabbb393
+// flow-typed signature: ee46dd421ccce7140ee8af6f66fa9238
 // flow-typed version: <<STUB>>/eslint-plugin-import_v^2.2.0/flow_v0.46.0
 
 /**
@@ -111,6 +111,10 @@ declare module 'eslint-plugin-import/lib/rules/no-absolute-path' {
 }
 
 declare module 'eslint-plugin-import/lib/rules/no-amd' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-import/lib/rules/no-anonymous-default-export' {
   declare module.exports: any;
 }
 
@@ -263,6 +267,9 @@ declare module 'eslint-plugin-import/lib/rules/no-absolute-path.js' {
 }
 declare module 'eslint-plugin-import/lib/rules/no-amd.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-amd'>;
+}
+declare module 'eslint-plugin-import/lib/rules/no-anonymous-default-export.js' {
+  declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-anonymous-default-export'>;
 }
 declare module 'eslint-plugin-import/lib/rules/no-commonjs.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-commonjs'>;

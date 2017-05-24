@@ -1,5 +1,6 @@
 // @flow
 import type { State } from '../types';
+// import Box from '../components/box';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
 import Form from '../components/form';
@@ -125,10 +126,10 @@ const ConnectedUserForm = connect(
 //     borderColor="gray"
 //     borderStyle="solid"
 //     // borderBottomWidth={1}
-//     // borderWidth={1}
+//     borderWidth={1}
 //   >
-//     <TextInput value={user.name} onChange={() => {}} />
-//     <TextInput value={user.description} onChange={() => {}} />
+//     <TextInput size={-1} value={user.name} onChange={() => {}} />
+//     <TextInput size={-1} value={user.description} onChange={() => {}} />
 //     <Button primary outline size={-1}>
 //       edit
 //     </Button>
@@ -143,7 +144,7 @@ const ConnectedUserForm = connect(
 //     </Box>
 //   );
 // };
-//
+
 // const ConnectedUsers = connect(({ users: { local } }: State) => ({
 //   users: local,
 // }))(Users);

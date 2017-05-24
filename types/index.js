@@ -45,6 +45,7 @@ export type UsersState = {
 };
 
 export type State = {
+  +apollo: Object,
   +app: AppState,
   +forms: FormsState,
   +users: UsersState,

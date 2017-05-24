@@ -45,6 +45,7 @@ export default class MyDocument extends Document {
     const { css, currentLocale } = this.props;
     return (
       <html lang={currentLocale}>
+        {/* yarn run favicon */}
         <Head>
           <link
             rel="apple-touch-icon"

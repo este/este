@@ -30,6 +30,7 @@
     "graphql": "^0.9.1",
     "graphql-tag": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "localforage": "^1.5.0",
     "next": "^2.0.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.5.9",
@@ -41,6 +42,7 @@
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
+    "redux-persist": "^4.8.0",
     "rimraf": "^2.6.1"
   },
   "devDependencies": {
