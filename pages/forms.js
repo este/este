@@ -1,6 +1,6 @@
 // @flow
 import type { State } from '../types';
-// import Box from '../components/box';
+import Box from '../components/box';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
 import Form from '../components/form';
@@ -9,6 +9,7 @@ import P from '../components/p';
 import Page from '../components/page';
 import Radio from '../components/radio';
 import Set from '../components/set';
+import Text from '../components/text';
 import TextInput from '../components/text-input';
 import app from '../components/app';
 import { addUser } from '../lib/users/actions';
@@ -22,16 +23,21 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
   };
 
   const add = () => {
-    addUser({ ...user, id: Date.now().toString(36) });
+    addUser({
+      ...user,
+      id: Date.now().toString(36),
+      createdAt: Date.now(),
+      updatedAt: null,
+    });
     setUserForm(id, null);
   };
 
-  // const add100 = () => {
-  //   for (let i = 0; i < 100; i++) {
-  //     addUser({ ...user, id: Date.now().toString(36) });
-  //   }
-  //   setUserForm(id, null);
-  // };
+  const add100 = () => {
+    // for (let i = 0; i < 100; i++) {
+    //   addUser({ ...user, id: Date.now().toString(36) });
+    // }
+    // setUserForm(id, null);
+  };
 
   return (
     <Form>
@@ -54,12 +60,12 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
       </Set>
       <Set vertical spaceBetween={0}>
         <Checkbox
-          label="I like cats"
+          label="Likes cats"
           value={user.likesCats}
           onChange={onChange('likesCats')}
         />
         <Checkbox
-          label="I like dogs"
+          label="Likes dogs"
           value={user.likesDogs}
           onChange={onChange('likesDogs')}
         />
@@ -102,9 +108,9 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
         >
           Add
         </Button>
-        {/* <Button primary onPress={add100}>
+        <Button primary onPress={add100}>
           Add 100x
-        </Button> */}
+        </Button>
       </Set>
     </Form>
   );
@@ -126,35 +132,83 @@ const ConnectedUserForm = connect(
 //     borderColor="gray"
 //     borderStyle="solid"
 //     // borderBottomWidth={1}
-//     borderWidth={1}
+//     marginBottom={0}
+//     // borderWidth={1}
 //   >
-//     <TextInput size={-1} value={user.name} onChange={() => {}} />
-//     <TextInput size={-1} value={user.description} onChange={() => {}} />
-//     <Button primary outline size={-1}>
+//     <TextInput value={user.name} onChange={() => {}} />
+//     <Checkbox
+//       label="Likes cats"
+//       value={user.likesCats}
+//       onChange={() => {}}
+//       labelOnLeft
+//     />
+//     <Checkbox
+//       label="Likes dogs"
+//       value={user.likesDogs}
+//       onChange={() => {}}
+//       labelOnLeft
+//     />
+//     {/* <Button primary outline size={-1}>
 //       edit
-//     </Button>
+//     </Button> */}
 //   </Set>
 // );
-//
-// const Users = ({ users }) => {
-//   const list = Object.keys(users).map(id => users[id]);
-//   return (
-//     <Box>
-//       {list.map(user => <UserInlineForm key={user.id} user={user} />)}
-//     </Box>
-//   );
-// };
 
-// const ConnectedUsers = connect(({ users: { local } }: State) => ({
-//   users: local,
-// }))(Users);
+// {/* {list.map(user => <UserInlineForm key={user.id} user={user} />)} */}
+const UsersListForm = ({ field, user }) => {
+  switch (field) {
+    case 'name':
+      return <TextInput value={user[field]} onChange={() => {}} />;
+    case 'likesCats':
+      return <Checkbox value={user[field]} onChange={() => {}} />;
+    case 'likesDogs':
+      return <Checkbox value={user[field]} onChange={() => {}} />;
+    default:
+      // TODO: actions, delete, or save | cancel
+      return null;
+  }
+};
+
+const UsersList = ({ users }) => {
+  const usersSortedByCreatedAt = Object.keys(users)
+    .map(id => users[id])
+    .sort((a, b) => a.createdAt - b.createdAt)
+    .reverse();
+
+  const Column = ({ headerText, field }) => (
+    <Box>
+      <Text height={1}>{headerText}</Text>
+      {usersSortedByCreatedAt.map(user => (
+        <UsersListForm field={field} user={user} key={user.id} />
+      ))}
+    </Box>
+  );
+
+  // Yep, this is a table without <table>. The table layout below is created
+  // with flexboxes only. React Native (https://facebook.github.io/yoga) does
+  // not support table layout, and honestly, I never liked it.
+  // Tableless tables allow us to do fancy things easily. For example:
+  // https://bvaughn.github.io/react-virtualized/#/components/Table
+  return (
+    <Set>
+      <Column field="name" headerText="Name" />
+      <Column field="likesCats" headerText="Likes cats" />
+      <Column field="likesDogs" headerText="Likes dogs" />
+      <Column field="saveOnCancel" />
+    </Set>
+  );
+};
+
+const ConnectedUsersList = connect(({ users: { local } }: State) => ({
+  users: local,
+}))(UsersList);
 
 const Forms = () => (
   <Page title="Forms">
     <Heading size={3}>Forms</Heading>
     <P>Simple, fast, and dynamic Redux forms.</P>
     <ConnectedUserForm />
-    {/* <ConnectedUsers /> */}
+    <ConnectedUsersList />
   </Page>
 );
 

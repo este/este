@@ -38,6 +38,8 @@ export type FormsState = {
 
 export type User = UserForm & {
   +id: Id,
+  +createdAt: number,
+  +updatedAt: ?number,
 };
 
 export type UsersState = {
