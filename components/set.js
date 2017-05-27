@@ -3,6 +3,8 @@ import Box, { type BoxProps } from '../components/box';
 import withTheme, { type ThemeContext } from './withTheme';
 import { Children } from 'react';
 
+// Something like Fieldset, but for any component and with axis and spacing.
+
 export type SetProps = BoxProps & {
   spaceBetween?: number,
   vertical?: boolean,

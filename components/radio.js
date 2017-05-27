@@ -6,7 +6,7 @@ import Text from './text';
 import withTheme, { type ThemeContext } from './withTheme';
 
 export type RadioProps = ButtonProps & {
-  label: string,
+  label?: string,
   labelOnLeft?: boolean,
   onChange: (value: string) => void,
   select: string,
@@ -44,14 +44,13 @@ const Radio = (
       size={size}
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
     >
-      <Set marginBottom={0}>
-        {labelOnLeft && <Text color={color} size={size}>{label}</Text>}
+      <Set marginBottom={0} flexDirection={labelOnLeft ? 'row' : 'row-reverse'}>
+        {label && <Text color={color} size={size}>{label}</Text>}
         <SvgIcon
           color={color}
           size={size}
           svg={checked ? theme.radio.checkedIcon : theme.radio.uncheckedIcon}
         />
-        {!labelOnLeft && <Text color={color} size={size}>{label}</Text>}
       </Set>
     </Button>
   );

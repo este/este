@@ -6,7 +6,7 @@ import Text from './text';
 import withTheme, { type ThemeContext } from './withTheme';
 
 export type CheckboxProps = ButtonProps & {
-  label: string,
+  label?: string,
   labelOnLeft?: boolean,
   onChange: (value: boolean) => void,
   value: boolean,
@@ -41,8 +41,8 @@ const Checkbox = (
       size={size}
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
     >
-      <Set marginBottom={0}>
-        {labelOnLeft && <Text color={color} size={size}>{label}</Text>}
+      <Set marginBottom={0} flexDirection={labelOnLeft ? 'row' : 'row-reverse'}>
+        {label && <Text color={color} size={size}>{label}</Text>}
         <SvgIcon
           color={color}
           size={size}
@@ -50,7 +50,6 @@ const Checkbox = (
             value ? theme.checkbox.checkedIcon : theme.checkbox.uncheckedIcon
           }
         />
-        {!labelOnLeft && <Text color={color} size={size}>{label}</Text>}
       </Set>
     </Button>
   );
