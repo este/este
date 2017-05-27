@@ -171,6 +171,7 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
+// $FlowFixMe Probably Flow 0.47 bug
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const {
     as,

@@ -1,5 +1,5 @@
-// flow-typed signature: eb392bde0440325fce2421d18447acde
-// flow-typed version: 0786be2fed/jest_v20.x.x/flow_>=v0.33.x
+// flow-typed signature: 35c401f960504bd1f63fa0a32ac8e1f2
+// flow-typed version: 2c1a67b827/jest_v20.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -307,7 +307,7 @@ type JestObjectType = {
    * The third argument can be used to create virtual mocks -- mocks of modules
    * that don't exist anywhere in the system.
    */
-  mock(moduleName: string, moduleFactory?: any): JestObjectType,
+  mock(moduleName: string, moduleFactory?: any, options?: Object): JestObjectType,
   /**
    * Resets the module registry - the cache of all required modules. This is
    * useful to isolate modules where local state might conflict between tests.
