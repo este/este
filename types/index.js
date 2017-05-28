@@ -57,9 +57,9 @@ export type Action =
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'ADD_USER', user: User }
+  | { type: 'SAVE_USER', user: User }
   | { type: 'TOGGLE_SELECTED_USERS', users: Array<User> }
-  | { type: 'REMOVE_SELECTED_USERS' }
-  | { type: 'SAVE_USER', user: User };
+  | { type: 'DELETE_SELECTED_USERS' };
 
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
 export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };

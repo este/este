@@ -15,16 +15,14 @@ import app from '../components/app';
 import { connect } from 'react-redux';
 import { range } from 'ramda';
 import {
+  setUserForm,
   addUser,
   saveUser,
-  setUserForm,
   toggleSelectedUsers,
+  deleteSelectedUsers,
 } from '../lib/users/actions';
 
-// TODO: Inject. Blocked by broken flow-typed
-// import uuid from 'uuid';
-// createUuid()
-
+// TODO: Inject deps, import uuid from 'uuid'
 const createUuid = () => Math.random().toString(36);
 
 const UserForm = ({ id, form, setUserForm, addUser }) => {
@@ -236,11 +234,19 @@ const ConnectedUsersListForm = connect(
 // not support table layout, and honestly, I never liked it.
 // Tableless tables allow us to do fancy things easily. For example:
 // https://bvaughn.github.io/react-virtualized/#/components/Table
-const UsersList = ({ users, toggleSelectedUsers }) => {
+const UsersList = ({
+  users,
+  selected,
+  toggleSelectedUsers,
+  deleteSelectedUsers,
+}) => {
   const usersSortedByCreatedAt = Object.keys(users)
     .map(id => users[id])
     .sort((a, b) => a.createdAt - b.createdAt)
     .reverse();
+  const allSelected =
+    usersSortedByCreatedAt.length > 0 &&
+    usersSortedByCreatedAt.every(user => selected[user.id]);
 
   const Column = ({ header, field }) => (
     <Box>
@@ -255,35 +261,52 @@ const UsersList = ({ users, toggleSelectedUsers }) => {
     </Box>
   );
 
-  const ToggleSelectedUsers = (
+  const ToggleSelected = (
     <Checkbox
       alignItems="center"
       height={1}
       opacity={0.25}
       onChange={() => toggleSelectedUsers(usersSortedByCreatedAt)}
-      value={false}
+      value={allSelected}
     />
   );
 
+  const DeleteSelected = () => (
+    <Button
+      color="warning"
+      disabled={!allSelected}
+      size={-1}
+      onPress={deleteSelectedUsers}
+      paddingHorizontal={0}
+      marginVertical={0}
+    >
+      Delete Selected
+    </Button>
+  );
+
   return (
-    <Set spaceBetween={1}>
-      {/* Group first two columns to set default spaceBetween. */}
-      <Set>
-        <Column header={ToggleSelectedUsers} field="select" />
-        <Column header="Name" field="name" />
+    <Box>
+      <DeleteSelected />
+      <Set spaceBetween={1}>
+        {/* Group first two columns to set default spaceBetween. */}
+        <Set>
+          <Column header={ToggleSelected} field="select" />
+          <Column header="Name" field="name" />
+        </Set>
+        <Column header="Likes cats" field="likesCats" />
+        <Column header="Likes dogs" field="likesDogs" />
+        <Column header="" field="saveOnCancel" />
       </Set>
-      <Column header="Likes cats" field="likesCats" />
-      <Column header="Likes dogs" field="likesDogs" />
-      <Column header="" field="saveOnCancel" />
-    </Set>
+    </Box>
   );
 };
 
 const ConnectedUsersList = connect(
-  ({ users: { local } }: State) => ({
-    users: local,
+  ({ users }: State) => ({
+    users: users.local,
+    selected: users.selected,
   }),
-  { toggleSelectedUsers }
+  { toggleSelectedUsers, deleteSelectedUsers }
 )(UsersList);
 
 const Forms = () => (
