@@ -9,7 +9,7 @@ import type {
 // http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types/
 // Redux state is meant to be immutable.
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
-// TODO: Exact state, once Flow fix spread syntax.
+// TODO: Exact state, once Flow fix spread on exact types.
 
 export type Id = string;
 
@@ -29,27 +29,26 @@ export type UserForm = {
   +wantsKing: boolean,
 };
 
-export type FormsState = {
-  +user: {
-    +initialState: UserForm,
-    +changedState: { +[id: Id]: UserForm },
-  },
-};
-
 export type User = UserForm & {
   +id: Id,
   +createdAt: number,
-  +updatedAt: ?number,
+  +updatedAt?: number,
+};
+
+type Form<T> = {
+  +initialState: T,
+  +changedState: { +[id: Id]: T },
 };
 
 export type UsersState = {
-  local: { +[id: Id]: User },
+  +form: Form<UserForm>,
+  +local: { +[id: Id]: User },
+  +selected: { +[id: Id]: true },
 };
 
 export type State = {
   +apollo: Object,
   +app: AppState,
-  +forms: FormsState,
   +users: UsersState,
 };
 
@@ -57,7 +56,10 @@ export type Action =
   | { type: 'SET_USER_FORM', id: Id, state: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
-  | { type: 'ADD_USER', user: User };
+  | { type: 'ADD_USER', user: User }
+  | { type: 'TOGGLE_SELECTED_USERS', users: Array<User> }
+  | { type: 'REMOVE_SELECTED_USERS' }
+  | { type: 'SAVE_USER', user: User };
 
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;
 export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };

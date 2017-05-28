@@ -12,31 +12,54 @@ import Set from '../components/set';
 import Text from '../components/text';
 import TextInput from '../components/text-input';
 import app from '../components/app';
-import { addUser } from '../lib/users/actions';
 import { connect } from 'react-redux';
-import { setUserForm } from '../lib/forms/actions';
+import { range } from 'ramda';
+import {
+  addUser,
+  saveUser,
+  setUserForm,
+  toggleSelectedUsers,
+} from '../lib/users/actions';
 
-const UserForm = ({ id, user, setUserForm, addUser }) => {
+// TODO: Inject. Blocked by broken flow-typed
+// import uuid from 'uuid';
+// createUuid()
+
+const createUuid = () => Math.random().toString(36);
+
+const UserForm = ({ id, form, setUserForm, addUser }) => {
   // If you know how to type it better, please let me know.
-  const onChange = (prop: $Keys<typeof user>) => state => {
-    setUserForm(id, { ...user, [(prop: string)]: state });
+  const onChange = (prop: $Keys<typeof form>) => value => {
+    setUserForm(id, { ...form, [(prop: string)]: value });
   };
 
-  const add = () => {
+  // TODO: Inject id and now factories via Este dependency injection.
+
+  const onAddPress = () => {
     addUser({
-      ...user,
-      id: Date.now().toString(36),
+      ...form,
+      id: createUuid(),
       createdAt: Date.now(),
-      updatedAt: null,
     });
     setUserForm(id, null);
   };
 
-  const add100 = () => {
-    // for (let i = 0; i < 100; i++) {
-    //   addUser({ ...user, id: Date.now().toString(36) });
-    // }
-    // setUserForm(id, null);
+  const onAdd100RandomUsersPress = () => {
+    range(0, 100)
+      .map(() => {
+        const id = createUuid();
+        return {
+          id,
+          createdAt: Date.now(),
+          name: id.split('-')[0],
+          description: '',
+          likesCats: false,
+          likesDogs: false,
+          gender: 'other',
+          wantsKing: false,
+        };
+      })
+      .forEach(form => addUser(form));
   };
 
   return (
@@ -47,26 +70,26 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
           // browser auth pre-filling. Also, it's not universal.
           label="Name"
           placeholder="Jane Doe"
-          value={user.name}
+          value={form.name}
           onChange={onChange('name')}
           // error="Please enter your full name"
         />
         <TextInput
           label="Description"
           placeholder="..."
-          value={user.description}
+          value={form.description}
           onChange={onChange('description')}
         />
       </Set>
       <Set vertical spaceBetween={0}>
         <Checkbox
           label="Likes cats"
-          value={user.likesCats}
+          value={form.likesCats}
           onChange={onChange('likesCats')}
         />
         <Checkbox
           label="Likes dogs"
-          value={user.likesDogs}
+          value={form.likesDogs}
           onChange={onChange('likesDogs')}
         />
       </Set>
@@ -74,19 +97,19 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
         <Radio
           label="Female"
           select="female"
-          value={user.gender}
+          value={form.gender}
           onChange={onChange('gender')}
         />
         <Radio
           label="Male"
           select="male"
-          value={user.gender}
+          value={form.gender}
           onChange={onChange('gender')}
         />
         <Radio
           label="Other"
           select="other"
-          value={user.gender}
+          value={form.gender}
           onChange={onChange('gender')}
         />
       </Set>
@@ -96,20 +119,20 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
           labelOnLeft
           color="warning"
           size={1}
-          value={user.wantsKing}
+          value={form.wantsKing}
           onChange={onChange('wantsKing')}
         />
       </Set>
       <Set>
         <Button
           primary
-          onPress={add}
-          type="submit" // Submit on key enter in browser. TODO: React Native.
+          onPress={onAddPress}
+          type="submit" // Submit on key enter in browser. TODO: React Native?
         >
           Add
         </Button>
-        <Button primary onPress={add100}>
-          Add 100x
+        <Button primary onPress={onAdd100RandomUsersPress}>
+          Add 100 random users
         </Button>
       </Set>
     </Form>
@@ -119,95 +142,157 @@ const UserForm = ({ id, user, setUserForm, addUser }) => {
 // Don't abstract this. It's good as is. We can't predict the future, so we
 // can't abstract it. For example, we can compose many forms and actions here.
 const ConnectedUserForm = connect(
-  ({ forms: { user } }: State, { id = '' }) => ({
+  // id is '' for create form and real id probably from url for edit form
+  ({ users: { form } }: State, { id = '' }) => ({
     id,
-    user: user.changedState[id] || user.initialState,
+    form: form.changedState[id] || form.initialState,
   }),
   { setUserForm, addUser }
 )(UserForm);
 
-// const UserInlineForm = ({ user }) => (
-//   <Set
-//     // justifyContent="center"
-//     borderColor="gray"
-//     borderStyle="solid"
-//     // borderBottomWidth={1}
-//     marginBottom={0}
-//     // borderWidth={1}
-//   >
-//     <TextInput value={user.name} onChange={() => {}} />
-//     <Checkbox
-//       label="Likes cats"
-//       value={user.likesCats}
-//       onChange={() => {}}
-//       labelOnLeft
-//     />
-//     <Checkbox
-//       label="Likes dogs"
-//       value={user.likesDogs}
-//       onChange={() => {}}
-//       labelOnLeft
-//     />
-//     {/* <Button primary outline size={-1}>
-//       edit
-//     </Button> */}
-//   </Set>
-// );
+const UsersListInlineForm = ({
+  changedState,
+  data,
+  field,
+  saveUser,
+  selected,
+  setUserForm,
+}) => {
+  const user = { ...data, ...changedState };
 
-// {/* {list.map(user => <UserInlineForm key={user.id} user={user} />)} */}
-const UsersListForm = ({ field, user }) => {
+  const onChange = (prop: $Keys<typeof user>) => value => {
+    setUserForm(user.id, { ...user, [(prop: string)]: value });
+  };
+  const onSavePress = () => {
+    saveUser(user);
+    setUserForm(user.id, null);
+  };
+  const onCancelPress = () => setUserForm(user.id, null);
+
   switch (field) {
+    case 'select':
+      return (
+        <Checkbox
+          alignItems="center"
+          height={1}
+          opacity={selected ? 1 : 0.25}
+          onChange={() => {}}
+          value={selected}
+        />
+      );
     case 'name':
-      return <TextInput value={user[field]} onChange={() => {}} />;
+      return <TextInput value={user[field]} onChange={onChange('name')} />;
     case 'likesCats':
-      return <Checkbox value={user[field]} onChange={() => {}} />;
     case 'likesDogs':
-      return <Checkbox value={user[field]} onChange={() => {}} />;
+      return (
+        <Checkbox
+          alignItems="center"
+          height={1}
+          onChange={onChange(field)}
+          value={user[field]}
+        />
+      );
+    case 'saveOnCancel': {
+      if (!changedState) return null;
+      return (
+        <Set>
+          <Button
+            color="primary"
+            size={-1}
+            height={1}
+            marginVertical={0}
+            onPress={onSavePress}
+            paddingHorizontal={0}
+          >
+            save
+          </Button>
+          <Button
+            color="warning"
+            size={-1}
+            marginVertical={0}
+            onPress={onCancelPress}
+            paddingHorizontal={0}
+          >
+            cancel
+          </Button>
+        </Set>
+      );
+    }
     default:
-      // TODO: actions, delete, or save | cancel
       return null;
   }
 };
 
-const UsersList = ({ users }) => {
+const ConnectedUsersListForm = connect(
+  ({ users }: State, { data }) => ({
+    changedState: users.form.changedState[data.id],
+    selected: users.selected[data.id],
+  }),
+  { setUserForm, saveUser }
+)(UsersListInlineForm);
+
+// Yep, this is a table without <table>. The table layout below is created
+// with flexboxes only. React Native (https://facebook.github.io/yoga) does
+// not support table layout, and honestly, I never liked it.
+// Tableless tables allow us to do fancy things easily. For example:
+// https://bvaughn.github.io/react-virtualized/#/components/Table
+const UsersList = ({ users, toggleSelectedUsers }) => {
   const usersSortedByCreatedAt = Object.keys(users)
     .map(id => users[id])
     .sort((a, b) => a.createdAt - b.createdAt)
     .reverse();
 
-  const Column = ({ headerText, field }) => (
+  const Column = ({ header, field }) => (
     <Box>
-      <Text height={1}>{headerText}</Text>
+      {typeof header === 'string'
+        ? <Text bold height={1}>{header}</Text>
+        : header}
       {usersSortedByCreatedAt.map(user => (
-        <UsersListForm field={field} user={user} key={user.id} />
+        <Box height={1} key={user.id}>
+          <ConnectedUsersListForm field={field} data={user} />
+        </Box>
       ))}
     </Box>
   );
 
-  // Yep, this is a table without <table>. The table layout below is created
-  // with flexboxes only. React Native (https://facebook.github.io/yoga) does
-  // not support table layout, and honestly, I never liked it.
-  // Tableless tables allow us to do fancy things easily. For example:
-  // https://bvaughn.github.io/react-virtualized/#/components/Table
+  const ToggleSelectedUsers = (
+    <Checkbox
+      alignItems="center"
+      height={1}
+      opacity={0.25}
+      onChange={() => toggleSelectedUsers(usersSortedByCreatedAt)}
+      value={false}
+    />
+  );
+
   return (
-    <Set>
-      <Column field="name" headerText="Name" />
-      <Column field="likesCats" headerText="Likes cats" />
-      <Column field="likesDogs" headerText="Likes dogs" />
-      <Column field="saveOnCancel" />
+    <Set spaceBetween={1}>
+      {/* Group first two columns to set default spaceBetween. */}
+      <Set>
+        <Column header={ToggleSelectedUsers} field="select" />
+        <Column header="Name" field="name" />
+      </Set>
+      <Column header="Likes cats" field="likesCats" />
+      <Column header="Likes dogs" field="likesDogs" />
+      <Column header="" field="saveOnCancel" />
     </Set>
   );
 };
 
-const ConnectedUsersList = connect(({ users: { local } }: State) => ({
-  users: local,
-}))(UsersList);
+const ConnectedUsersList = connect(
+  ({ users: { local } }: State) => ({
+    users: local,
+  }),
+  { toggleSelectedUsers }
+)(UsersList);
 
 const Forms = () => (
   <Page title="Forms">
     <Heading size={3}>Forms</Heading>
     <P>Simple, fast, and dynamic Redux forms.</P>
     <ConnectedUserForm />
+    <Heading size={1}>A table made from Flexbox only</Heading>
+    <P>Check how fast editation is even with hunderds of items.</P>
     <ConnectedUsersList />
   </Page>
 );
