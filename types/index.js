@@ -58,7 +58,7 @@ export type Action =
   | { type: 'TOGGLE_DARK' }
   | { type: 'ADD_USER', user: User }
   | { type: 'SAVE_USER', user: User }
-  | { type: 'TOGGLE_SELECTED_USERS', users: Array<User> }
+  | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> }
   | { type: 'DELETE_SELECTED_USERS' };
 
 export type Middlewares = Array<ReduxMiddleware<State, Action>>;

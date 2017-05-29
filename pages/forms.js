@@ -18,7 +18,7 @@ import {
   setUserForm,
   addUser,
   saveUser,
-  toggleSelectedUsers,
+  toggleUsersSelection,
   deleteSelectedUsers,
 } from '../lib/users/actions';
 
@@ -30,9 +30,6 @@ const UserForm = ({ id, form, setUserForm, addUser }) => {
   const onChange = (prop: $Keys<typeof form>) => value => {
     setUserForm(id, { ...form, [(prop: string)]: value });
   };
-
-  // TODO: Inject id and now factories via Este dependency injection.
-
   const onAddPress = () => {
     addUser({
       ...form,
@@ -41,7 +38,6 @@ const UserForm = ({ id, form, setUserForm, addUser }) => {
     });
     setUserForm(id, null);
   };
-
   const onAdd100RandomUsersPress = () => {
     range(0, 100)
       .map(() => {
@@ -193,7 +189,7 @@ const UsersListInlineForm = ({
     case 'saveOnCancel': {
       if (!changedState) return null;
       return (
-        <Set>
+        <Set flexWrap="nowrap">
           <Button
             color="primary"
             size={-1}
@@ -237,7 +233,7 @@ const ConnectedUsersListForm = connect(
 const UsersList = ({
   users,
   selected,
-  toggleSelectedUsers,
+  toggleUsersSelection,
   deleteSelectedUsers,
 }) => {
   const usersSortedByCreatedAt = Object.keys(users)
@@ -251,7 +247,7 @@ const UsersList = ({
   const Column = ({ header, field }) => (
     <Box>
       {typeof header === 'string'
-        ? <Text bold height={1}>{header}</Text>
+        ? <Text bold height={1} style={{ whiteSpace: 'nowrap' }}>{header}</Text>
         : header}
       {usersSortedByCreatedAt.map(user => (
         <Box height={1} key={user.id}>
@@ -260,18 +256,7 @@ const UsersList = ({
       ))}
     </Box>
   );
-
-  const ToggleSelected = (
-    <Checkbox
-      alignItems="center"
-      height={1}
-      opacity={0.25}
-      onChange={() => toggleSelectedUsers(usersSortedByCreatedAt)}
-      value={allSelected}
-    />
-  );
-
-  const DeleteSelected = () => (
+  const DeleteSelectedUsers = () => (
     <Button
       color="warning"
       disabled={!allSelected}
@@ -283,18 +268,27 @@ const UsersList = ({
       Delete Selected
     </Button>
   );
+  const ToggleUsersSelection = (
+    <Checkbox
+      alignItems="center"
+      height={1}
+      opacity={0.25}
+      onChange={() => toggleUsersSelection(usersSortedByCreatedAt)}
+      value={allSelected}
+    />
+  );
 
   return (
     <Box>
-      <DeleteSelected />
-      <Set spaceBetween={1}>
-        {/* Group first two columns to set default spaceBetween. */}
-        <Set>
-          <Column header={ToggleSelected} field="select" />
+      <DeleteSelectedUsers />
+      <Set spaceBetween={1} flexWrap="nowrap">
+        {/* Set can be nested for custom spaceBetween */}
+        <Set spaceBetween={0.5} flexWrap="nowrap">
+          <Column header={ToggleUsersSelection} field="select" />
           <Column header="Name" field="name" />
         </Set>
-        <Column header="Likes cats" field="likesCats" />
-        <Column header="Likes dogs" field="likesDogs" />
+        <Column header="🐈" field="likesCats" />
+        <Column header="🐕" field="likesDogs" />
         <Column header="" field="saveOnCancel" />
       </Set>
     </Box>
@@ -306,13 +300,15 @@ const ConnectedUsersList = connect(
     users: users.local,
     selected: users.selected,
   }),
-  { toggleSelectedUsers, deleteSelectedUsers }
+  { toggleUsersSelection, deleteSelectedUsers }
 )(UsersList);
 
 const Forms = () => (
   <Page title="Forms">
     <Heading size={3}>Forms</Heading>
-    <P>Simple, fast, and dynamic Redux forms.</P>
+    <P>
+      Simple and fast Redux forms without unnecessary abstraction.
+    </P>
     <ConnectedUserForm />
     <Heading size={1}>A table made from Flexbox only</Heading>
     <P>Check how fast editation is even with hunderds of items.</P>
