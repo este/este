@@ -28,6 +28,9 @@ const globalStyle = `
     ${/* Not supported in React Native. */ ''}
     outline: none;
   }
+  button[disabled] {
+    cursor: default;
+  }
 `;
 
 export default class MyDocument extends Document {

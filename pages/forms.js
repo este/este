@@ -123,6 +123,7 @@ const UsersListInlineForm = ({
   saveUser,
   selected,
   setUserForm,
+  toggleUsersSelection,
 }) => {
   const user = { ...data, ...changedState };
 
@@ -139,7 +140,7 @@ const UsersListInlineForm = ({
           alignItems="center"
           height={1}
           opacity={selected ? 1 : 0.25}
-          onChange={() => {}}
+          onChange={() => toggleUsersSelection([user])}
           value={selected}
         />
       );
@@ -191,7 +192,7 @@ const ConnectedUsersListForm = connect(
     changedState: users.form.changedState[data.id],
     selected: users.selected[data.id],
   }),
-  { setUserForm, saveUser }
+  { setUserForm, saveUser, toggleUsersSelection }
 )(UsersListInlineForm);
 
 // Yep, this is a table without <table>. The table layout below is created
@@ -205,20 +206,18 @@ const UsersList = ({
   toggleUsersSelection,
   deleteSelectedUsers,
 }) => {
-  const usersSortedByCreatedAt = Object.keys(users)
+  const sortedUsers = Object.keys(users)
     .map(id => users[id])
     .sort((a, b) => a.createdAt - b.createdAt)
     .reverse();
-  const allSelected =
-    usersSortedByCreatedAt.length > 0 &&
-    usersSortedByCreatedAt.every(user => selected[user.id]);
+  const selectedLength = sortedUsers.filter(user => selected[user.id]).length;
 
   const Column = ({ header, field }) => (
     <Box>
       {typeof header === 'string'
         ? <Text bold height={1} style={{ whiteSpace: 'nowrap' }}>{header}</Text>
         : header}
-      {usersSortedByCreatedAt.map(user => (
+      {sortedUsers.map(user => (
         <Box height={1} key={user.id}>
           <ConnectedUsersListForm field={field} data={user} />
         </Box>
@@ -228,7 +227,7 @@ const UsersList = ({
   const DeleteSelectedUsers = () => (
     <Button
       color="warning"
-      disabled={!allSelected}
+      disabled={selectedLength === 0}
       size={-1}
       onPress={deleteSelectedUsers}
       paddingHorizontal={0}
@@ -242,8 +241,8 @@ const UsersList = ({
       alignItems="center"
       height={1}
       opacity={0.25}
-      onChange={() => toggleUsersSelection(usersSortedByCreatedAt)}
-      value={allSelected}
+      onChange={() => toggleUsersSelection(sortedUsers)}
+      value={selectedLength === sortedUsers.length}
     />
   );
 
