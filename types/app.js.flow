@@ -3,8 +3,4 @@ declare var APP_NAME: string;
 declare var APP_VERSION: string;
 declare var GRAPHQL_ENDPOINT: string;
 
-// TODO: Add Next.js process.browser. This doesn't work for some reason:
-// declare class NextProcess extends Process {
-//   browser: boolean,
-// }
-// declare var process: Process;
+// TODO: Add Next.js process.browser, if possible.

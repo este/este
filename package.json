@@ -41,8 +41,10 @@
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
+    "redux-observable": "^0.14.1",
     "redux-persist": "^4.8.0",
     "rimraf": "^2.6.1",
+    "rxjs": "^5.4.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {

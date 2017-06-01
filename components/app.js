@@ -5,12 +5,14 @@ import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
 import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
+import uuid from 'uuid';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { Provider as FelaProvider } from 'react-fela';
 import { getRenderer, getMountNode } from '../lib/fela';
 
 // App composition root.
 // blog.ploeh.dk/2011/07/28/CompositionRoot
+// TODO: Make it multi-platform probably via app.ios.js and app.android.js
 
 const singletonOnClient = (create: Function) => {
   // $FlowFixMe Add process.browser to app.js.flow somehow.
@@ -29,12 +31,17 @@ const getApolloClient: () => ApolloClient = singletonOnClient(() =>
   createApolloClient(GRAPHQL_ENDPOINT)
 );
 
+const platformDependencies = {
+  createUuid: uuid.v4,
+};
+
 const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
   const platformReducers = { apollo: apolloClient.reducer() };
-  const platformMiddlewares = [apolloClient.middleware()];
+  const platformMiddleware = [apolloClient.middleware()];
   return createReduxStore(initialState, {
+    platformDependencies,
     platformReducers,
-    platformMiddlewares,
+    platformMiddleware,
   });
 });
 

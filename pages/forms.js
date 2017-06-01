@@ -13,47 +13,22 @@ import Text from '../components/text';
 import TextInput from '../components/text-input';
 import app from '../components/app';
 import { connect } from 'react-redux';
-import { range } from 'ramda';
 import {
   setUserForm,
   addUser,
+  add100RandomUsers,
   saveUser,
   toggleUsersSelection,
   deleteSelectedUsers,
 } from '../lib/users/actions';
 
-// TODO: Inject deps, import uuid from 'uuid'
-const createUuid = () => Math.random().toString(36);
-
-const UserForm = ({ id, form, setUserForm, addUser }) => {
-  // If you know how to type it better, please let me know.
+const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
+  // Wish I know to type it better. PR anyone?
   const onChange = (prop: $Keys<typeof form>) => value => {
     setUserForm(id, { ...form, [(prop: string)]: value });
   };
-  const onAddPress = () => {
-    addUser({
-      ...form,
-      id: createUuid(),
-      createdAt: Date.now(),
-    });
-    setUserForm(id, null);
-  };
-  const onAdd100RandomUsersPress = () => {
-    range(0, 100)
-      .map(() => {
-        const id = createUuid();
-        return {
-          id,
-          createdAt: Date.now(),
-          name: id.split('-')[0],
-          description: '',
-          likesCats: false,
-          likesDogs: false,
-          gender: 'other',
-          wantsKing: false,
-        };
-      })
-      .forEach(form => addUser(form));
+  const onSubmit = () => {
+    addUser(form);
   };
 
   return (
@@ -120,12 +95,12 @@ const UserForm = ({ id, form, setUserForm, addUser }) => {
       <Set>
         <Button
           primary
-          onPress={onAddPress}
+          onPress={onSubmit}
           type="submit" // Submit on key enter in browser. TODO: React Native?
         >
           Add
         </Button>
-        <Button primary onPress={onAdd100RandomUsersPress}>
+        <Button primary onPress={add100RandomUsers}>
           Add 100 random users
         </Button>
       </Set>
@@ -133,15 +108,12 @@ const UserForm = ({ id, form, setUserForm, addUser }) => {
   );
 };
 
-// Don't abstract this. It's good as is. We can't predict the future, so we
-// can't abstract it. For example, we can compose many forms and actions here.
 const ConnectedUserForm = connect(
-  // id is '' for create form and real id probably from url for edit form
   ({ users: { form } }: State, { id = '' }) => ({
     id,
     form: form.changedState[id] || form.initialState,
   }),
-  { setUserForm, addUser }
+  { setUserForm, addUser, add100RandomUsers }
 )(UserForm);
 
 const UsersListInlineForm = ({
@@ -157,10 +129,7 @@ const UsersListInlineForm = ({
   const onChange = (prop: $Keys<typeof user>) => value => {
     setUserForm(user.id, { ...user, [(prop: string)]: value });
   };
-  const onSavePress = () => {
-    saveUser(user);
-    setUserForm(user.id, null);
-  };
+  const onSavePress = () => saveUser(user);
   const onCancelPress = () => setUserForm(user.id, null);
 
   switch (field) {
@@ -307,7 +276,7 @@ const Forms = () => (
   <Page title="Forms">
     <Heading size={3}>Forms</Heading>
     <P>
-      Simple and fast Redux forms without unnecessary abstraction.
+      Simple and fast Redux forms without unnecessary abstractions.
     </P>
     <ConnectedUserForm />
     <Heading size={1}>A table made from Flexbox only</Heading>
