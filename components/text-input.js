@@ -7,7 +7,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check Field.
-// TODO: multiline and rows, use PlatformTextarea, react-autosize-textarea?
+// TODO: multiline and rows, use content editable because links.
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,

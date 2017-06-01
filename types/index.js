@@ -15,9 +15,8 @@ import type { Observable } from 'rxjs';
 export type FunctionalComponent<P> = (props: P) => ?React$Element<any>;
 
 export type Form<T> = {
-  // TODO: Immutable +
-  initialState: T,
-  changedState: { [id: Id]: T },
+  +initialState: T,
+  +changedState: { +[id: Id]: T },
 };
 
 // '' is used for not yet created objects, for example in create Foo form.
