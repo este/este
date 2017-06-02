@@ -89,7 +89,7 @@ Object {
         </div>
     </div>
     <input
-        className="g b c h i j p l q n r s t"
+        className="g b c h i j p l m n q r s"
         onChange={[Function]}
     />
 </div>,
@@ -106,14 +106,13 @@ Object {
     .j{-ms-hyphens:auto}
     .k{color:red}
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .m{font-size:14}
+    .m{font-size:16}
     .n{line-height:24px}
     .o{font-weight:600}
     .p{color:black}
-    .q{font-size:16}
-    .r::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .s{background-color:transparent}
-    .t{outline:none}",
+    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .r{background-color:transparent}
+    .s{outline:none}",
 }
 `;
 
@@ -136,7 +135,7 @@ Object {
         
     </div>
     <input
-        className="g b c h i j k l r n s t u"
+        className="g b c h i j k l m n r s t"
         onChange={[Function]}
     />
 </div>,
@@ -153,15 +152,14 @@ Object {
     .j{-ms-hyphens:auto}
     .k{color:black}
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .m{font-size:14}
+    .m{font-size:16}
     .n{line-height:24px}
     .o{font-weight:600}
     .p{height:12}
     .q{width:12}
-    .r{font-size:16}
-    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .t{background-color:transparent}
-    .u{outline:none}",
+    .r::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .s{background-color:transparent}
+    .t{outline:none}",
 }
 `;
 

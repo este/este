@@ -45,9 +45,9 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   return (
     <Box>
       <Set marginBottom={0}>
-        {label && <Text bold size={size - 1}>{label}</Text>}
+        {label && <Text bold size={size}>{label}</Text>}
         {error &&
-          <Text bold color="danger" size={size - 1}>
+          <Text bold color="danger" size={size}>
             {error}
           </Text>}
       </Set>
