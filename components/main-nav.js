@@ -2,7 +2,7 @@
 import A from './a';
 import Box from './box';
 
-const NavA = ({ children, href, title }) => (
+const NavA = ({ children, href, title }) =>
   <A
     backgroundColor="primary"
     bold
@@ -14,12 +14,11 @@ const NavA = ({ children, href, title }) => (
     prefetch
   >
     {children}
-  </A>
-);
+  </A>;
 
 type MainNavProps = { title: string };
 
-const MainNav = ({ title }: MainNavProps) => (
+const MainNav = ({ title }: MainNavProps) =>
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -29,7 +28,6 @@ const MainNav = ({ title }: MainNavProps) => (
   >
     <NavA href="/" title={title}>Este</NavA>
     <NavA href="/forms" title={title}>Forms</NavA>
-  </Box>
-);
+  </Box>;
 
 export default MainNav;

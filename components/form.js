@@ -3,9 +3,8 @@ import Box, { type BoxProps } from './box';
 import withTheme, { type ThemeContext } from './withTheme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
-const BrowserForm = props => (
-  <form {...props} onSubmit={(e: Event) => e.preventDefault()} />
-);
+const BrowserForm = props =>
+  <form {...props} onSubmit={(e: Event) => e.preventDefault()} />;
 
 type FormProps = BoxProps;
 

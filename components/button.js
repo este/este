@@ -3,14 +3,13 @@ import Text, { type TextProps } from './text';
 import type { ColorProps } from '../themes/types';
 import withTheme, { type ThemeContext } from './withTheme';
 
-const BrowserButton = ({ onPress = Function, ...restProps }) => (
+const BrowserButton = ({ onPress = Function, ...restProps }) =>
   <button
     onClick={onPress}
     // Type button to prevent auto-submit on enter by default.
     type="button"
     {...restProps}
-  />
-);
+  />;
 
 export type ButtonProps = ColorProps &
   TextProps & {

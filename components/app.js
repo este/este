@@ -47,13 +47,12 @@ const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
 
 // renderApp as separated function, because it's used for Apollo getDataFromTree
 // ApolloProvider provides also react-redux Provider.
-const renderApp = (Page, apolloClient, reduxStore, props) => (
+const renderApp = (Page, apolloClient, reduxStore, props) =>
   <ApolloProvider client={apolloClient} store={reduxStore}>
     <FelaProvider renderer={getRenderer()} mountNode={getMountNode()}>
       <Page {...props} />
     </FelaProvider>
-  </ApolloProvider>
-);
+  </ApolloProvider>;
 
 // facebook.github.io/react/docs/higher-order-components.html
 // We need Component, because we need a componentDidMount.

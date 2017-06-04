@@ -96,7 +96,7 @@ const ConnectedForm = connect(
   { setUserForm, saveUser, toggleUsersSelection }
 )(Form);
 
-const DeleteSelected = ({ selected, deleteSelectedUsers }) => (
+const DeleteSelected = ({ selected, deleteSelectedUsers }) =>
   <Button
     color="warning"
     disabled={Object.keys(selected).length === 0}
@@ -106,22 +106,20 @@ const DeleteSelected = ({ selected, deleteSelectedUsers }) => (
     marginVertical={0}
   >
     Delete Selected
-  </Button>
-);
+  </Button>;
 
 const ConnectedDeleteSelected = connect(
   ({ users }: State) => ({ selected: users.selected }),
   { deleteSelectedUsers }
 )(DeleteSelected);
 
-const ToggleUsersSelection = ({ selected, toggleUsersSelection, users }) => (
+const ToggleUsersSelection = ({ selected, toggleUsersSelection, users }) =>
   <Checkbox
     alignItems="center"
     opacity={0.25}
     onChange={() => toggleUsersSelection(users)}
     value={users.every(user => selected[user.id])}
-  />
-);
+  />;
 
 const ConnectedToggleUsersSelection = connect(
   ({ users }: State) => ({ selected: users.selected }),
@@ -139,7 +137,15 @@ const UsersList = ({ users }) => {
     .sort((a, b) => a.createdAt - b.createdAt)
     .reverse();
 
-  const Column = ({ header, field }) => (
+  if (sortedUsers.length === 0) {
+    return (
+      <Box>
+        <Text>Empty</Text>
+      </Box>
+    );
+  }
+
+  const Column = ({ header, field }) =>
     <Box>
       {/* Header */}
       <Box height={1}>
@@ -147,13 +153,12 @@ const UsersList = ({ users }) => {
           ? <Text bold style={{ whiteSpace: 'nowrap' }}>{header}</Text>
           : header}
       </Box>
-      {sortedUsers.map(user => (
+      {sortedUsers.map(user =>
         <Box height={1} key={user.id}>
           <ConnectedForm field={field} data={user} />
         </Box>
-      ))}
-    </Box>
-  );
+      )}
+    </Box>;
 
   return (
     <Box>

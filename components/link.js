@@ -10,8 +10,7 @@ type LinkProps = {|
   prefetch?: boolean,
 |};
 
-const Link = ({ children, ...props }: LinkProps) => (
-  <NextLink {...props}><a>{children}</a></NextLink>
-);
+const Link = ({ children, ...props }: LinkProps) =>
+  <NextLink {...props}><a>{children}</a></NextLink>;
 
 export default Link;

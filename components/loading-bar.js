@@ -21,7 +21,7 @@ Router.onRouteChangeError = () => {
 };
 
 // TODO: Use theme primary color for bg.
-const LoadingBar = () => (
+const LoadingBar = () =>
   <style jsx global>
     {`
       #nprogress {
@@ -46,7 +46,6 @@ const LoadingBar = () => (
         opacity: 1.0;
         transform: rotate(3deg) translate(0px, -4px);
       }`}
-  </style>
-);
+  </style>;
 
 export default LoadingBar;

@@ -20,7 +20,8 @@ const styles = {
     position: 'relative',
   },
   baseline: lineHeight => ({
-    backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px)',
+    backgroundImage:
+      'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px)',
     backgroundSize: `auto ${lineHeight}px`,
     bottom: 0,
     left: 0,
@@ -36,13 +37,12 @@ const styles = {
 const Baseline = (
   { baselineShown, children }: BaselineProps,
   { theme }: BaselineContext
-) => (
+) =>
   <div style={styles.container}>
     {children}
     {baselineShown &&
       <div style={styles.baseline(theme.typography.lineHeight)} />}
-  </div>
-);
+  </div>;
 
 Baseline.contextTypes = {
   theme: PropTypes.object,

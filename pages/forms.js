@@ -6,7 +6,7 @@ import UserForm from '../components/user-form';
 import UsersForm from '../components/users-form';
 import app from '../components/app';
 
-const Forms = () => (
+const Forms = () =>
   <Page title="Forms">
     <Heading size={3}>Forms</Heading>
     <P>
@@ -20,7 +20,6 @@ const Forms = () => (
       long lists.
     </P>
     <UsersForm />
-  </Page>
-);
+  </Page>;
 
 export default app(Forms);

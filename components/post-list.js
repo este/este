@@ -2,11 +2,10 @@
 import Text from './text';
 import { gql, graphql } from 'react-apollo';
 
-const PostList = ({ data: { allPosts } }: any) => (
+const PostList = ({ data: { allPosts } }: any) =>
   <Text>
     {JSON.stringify(allPosts, null, 2)}
-  </Text>
-);
+  </Text>;
 
 // query allPosts($first: Int!, $skip: Int!) {
 const allPosts = gql`

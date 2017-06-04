@@ -28,7 +28,7 @@ const onButtonPress = [
   {}
 );
 
-const Index = () => (
+const Index = () =>
   <Page title="Este">
     <Heading size={3}>Este</Heading>
     <P>
@@ -70,7 +70,6 @@ const Index = () => (
       <ToggleDark />
     </Set>
     <PostList />
-  </Page>
-);
+  </Page>;
 
 export default app(Index);

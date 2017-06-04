@@ -11,7 +11,7 @@ import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browser-theme';
 import { connect } from 'react-redux';
 
-const PageContainer = ({ children }) => (
+const PageContainer = ({ children }) =>
   <Box
     margin="auto"
     paddingHorizontal={1}
@@ -21,15 +21,13 @@ const PageContainer = ({ children }) => (
     }}
   >
     {children}
-  </Box>
-);
+  </Box>;
 
 // Flex 1 to make footer sticky.
-const PageBody = ({ children }) => (
-  <Box flex={1} maxWidth={30} paddingTop={2}>{children}</Box>
-);
+const PageBody = ({ children }) =>
+  <Box flex={1} maxWidth={30} paddingTop={2}>{children}</Box>;
 
-const PageFooter = () => (
+const PageFooter = () =>
   <Text
     borderColor="gray"
     borderStyle="solid"
@@ -42,8 +40,7 @@ const PageFooter = () => (
     Made with love by
     {' '}
     <A size={-1} href="https://twitter.com/steida">steida</A>
-  </Text>
-);
+  </Text>;
 
 type PageProps = {|
   children?: any,

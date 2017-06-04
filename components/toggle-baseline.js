@@ -6,11 +6,10 @@ import { toggleBaseline } from '../lib/app/actions';
 
 // Test vertical rhythm visually. Inspired by basehold.it
 
-const ToggleBaseline = ({ baselineShown, toggleBaseline }) => (
+const ToggleBaseline = ({ baselineShown, toggleBaseline }) =>
   <Button primary outline size={-1} onPress={toggleBaseline}>
     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
-  </Button>
-);
+  </Button>;
 
 export default connect(
   (state: State) => ({ baselineShown: state.app.baselineShown }),

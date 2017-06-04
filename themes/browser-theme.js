@@ -26,11 +26,13 @@ export const browserTheme: Theme = {
     bold: 600,
     color: 'black',
     // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
   heading: {
     bold: 'bold',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     marginBottom: 1,
   },
   p: {
