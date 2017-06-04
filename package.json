@@ -33,7 +33,7 @@
     "next": "^2.0.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.5.9",
-    "ramda": "^0.23.0",
+    "ramda": "^0.24.1",
     "react": "^15.4.2",
     "react-apollo": "^1.0.0",
     "react-dom": "^15.4.2",

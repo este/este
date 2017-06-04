@@ -1,4 +1,4 @@
-// flow-typed signature: 7984c64cff5df9dc0e6ccc74623d1b60
+// flow-typed signature: fa05e0eb98d8d394c38182f9a58a1b96
 // flow-typed version: <<STUB>>/eslint-config-airbnb_v^15.0.1/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

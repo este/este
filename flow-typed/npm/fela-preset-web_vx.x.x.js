@@ -1,4 +1,4 @@
-// flow-typed signature: 62fc2d5f263626f8de320dc43e7a3ad3
+// flow-typed signature: f2407e4309946ac2258d5d9e5881cd62
 // flow-typed version: <<STUB>>/fela-preset-web_v^4.3.2/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

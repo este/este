@@ -1,3 +1,6 @@
+// flow-typed signature: 8bc27ef0ed168765f4241cf75bfb2160
+// flow-typed version: d9c17ab8e9/rxjs_v5.0.x/flow_>=v0.34.x
+
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
 // FIXME(samgoldman) Remove this once rxjs$Subject<T> can mixin rxjs$Observer<T>

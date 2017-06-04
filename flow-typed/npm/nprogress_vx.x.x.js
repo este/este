@@ -1,4 +1,4 @@
-// flow-typed signature: 35da6eed2d6f3dfdee0352f6e0cedce6
+// flow-typed signature: 95a5eb8e4751de06c073039172fff4ad
 // flow-typed version: <<STUB>>/nprogress_v^0.2.0/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

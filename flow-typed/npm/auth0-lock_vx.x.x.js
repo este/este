@@ -1,4 +1,4 @@
-// flow-typed signature: e199b1f076feab2c3932d80622f2d367
+// flow-typed signature: 86680ce668b059ef6c25913fc9b7f2d7
 // flow-typed version: <<STUB>>/auth0-lock_v^10.14.0/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

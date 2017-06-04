@@ -1,4 +1,4 @@
-// flow-typed signature: b9c717b48400c0790102351d4f98c345
+// flow-typed signature: ddb25b6f135a8d6aa3c4c1f056a4e3fa
 // flow-typed version: <<STUB>>/prettier_v^1.1.0/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -26,71 +26,19 @@ declare module 'prettier/bin/prettier' {
   declare module.exports: any;
 }
 
-declare module 'prettier/docs/prettier.min' {
+declare module 'prettier/src/parser-babylon' {
   declare module.exports: any;
 }
 
-declare module 'prettier/docs/rollup.config' {
+declare module 'prettier/src/parser-flow' {
   declare module.exports: any;
 }
 
-declare module 'prettier/scripts/sync-flow-tests' {
+declare module 'prettier/src/parser-postcss' {
   declare module.exports: any;
 }
 
-declare module 'prettier/src/ast-types' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/comments' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/deprecated' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/doc-builders' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/doc-debug' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/doc-printer' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/doc-utils' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/fast-path' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/options' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/parser' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/printer' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/typescript-ast-nodes' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/src/util' {
-  declare module.exports: any;
-}
-
-declare module 'prettier/test' {
+declare module 'prettier/src/parser-typescript' {
   declare module.exports: any;
 }
 
@@ -98,60 +46,21 @@ declare module 'prettier/test' {
 declare module 'prettier/bin/prettier.js' {
   declare module.exports: $Exports<'prettier/bin/prettier'>;
 }
-declare module 'prettier/docs/prettier.min.js' {
-  declare module.exports: $Exports<'prettier/docs/prettier.min'>;
-}
-declare module 'prettier/docs/rollup.config.js' {
-  declare module.exports: $Exports<'prettier/docs/rollup.config'>;
-}
 declare module 'prettier/index' {
   declare module.exports: $Exports<'prettier'>;
 }
 declare module 'prettier/index.js' {
   declare module.exports: $Exports<'prettier'>;
 }
-declare module 'prettier/scripts/sync-flow-tests.js' {
-  declare module.exports: $Exports<'prettier/scripts/sync-flow-tests'>;
+declare module 'prettier/src/parser-babylon.js' {
+  declare module.exports: $Exports<'prettier/src/parser-babylon'>;
 }
-declare module 'prettier/src/ast-types.js' {
-  declare module.exports: $Exports<'prettier/src/ast-types'>;
+declare module 'prettier/src/parser-flow.js' {
+  declare module.exports: $Exports<'prettier/src/parser-flow'>;
 }
-declare module 'prettier/src/comments.js' {
-  declare module.exports: $Exports<'prettier/src/comments'>;
+declare module 'prettier/src/parser-postcss.js' {
+  declare module.exports: $Exports<'prettier/src/parser-postcss'>;
 }
-declare module 'prettier/src/deprecated.js' {
-  declare module.exports: $Exports<'prettier/src/deprecated'>;
-}
-declare module 'prettier/src/doc-builders.js' {
-  declare module.exports: $Exports<'prettier/src/doc-builders'>;
-}
-declare module 'prettier/src/doc-debug.js' {
-  declare module.exports: $Exports<'prettier/src/doc-debug'>;
-}
-declare module 'prettier/src/doc-printer.js' {
-  declare module.exports: $Exports<'prettier/src/doc-printer'>;
-}
-declare module 'prettier/src/doc-utils.js' {
-  declare module.exports: $Exports<'prettier/src/doc-utils'>;
-}
-declare module 'prettier/src/fast-path.js' {
-  declare module.exports: $Exports<'prettier/src/fast-path'>;
-}
-declare module 'prettier/src/options.js' {
-  declare module.exports: $Exports<'prettier/src/options'>;
-}
-declare module 'prettier/src/parser.js' {
-  declare module.exports: $Exports<'prettier/src/parser'>;
-}
-declare module 'prettier/src/printer.js' {
-  declare module.exports: $Exports<'prettier/src/printer'>;
-}
-declare module 'prettier/src/typescript-ast-nodes.js' {
-  declare module.exports: $Exports<'prettier/src/typescript-ast-nodes'>;
-}
-declare module 'prettier/src/util.js' {
-  declare module.exports: $Exports<'prettier/src/util'>;
-}
-declare module 'prettier/test.js' {
-  declare module.exports: $Exports<'prettier/test'>;
+declare module 'prettier/src/parser-typescript.js' {
+  declare module.exports: $Exports<'prettier/src/parser-typescript'>;
 }

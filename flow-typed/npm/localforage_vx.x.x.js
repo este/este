@@ -1,4 +1,4 @@
-// flow-typed signature: 592737745023ad2d86025f4e0f22bab9
+// flow-typed signature: 41908e77923c93183dc51e672db8eb6a
 // flow-typed version: <<STUB>>/localforage_v^1.5.0/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

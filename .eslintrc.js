@@ -26,16 +26,18 @@ module.exports = {
     'no-param-reassign': 0, // We love param reassignment. Naming is hard.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
     'no-underscore-dangle': 0, // Control freaky.
+    'react/jsx-boolean-value': 0, // Control freaky.
     'react/jsx-closing-bracket-location': 0, // Prettier.
     'react/jsx-filename-extension': 0, // JSX belongs to .js files.
     'react/jsx-indent': 0, // Prettier.
     'react/jsx-indent-props': 0, // Prettier.
+    'react/jsx-wrap-multilines': 0, // Prettier.
+    'react/no-danger': 0, // Control freaky.
+    'react/no-unescaped-entities': 0, // Prettier.
     'react/no-unused-prop-types': 0, // Buggy and we don't need it with Flow.
     'react/prop-types': 0, // We don't need it with Flow.
     'react/react-in-jsx-scope': 0, // Next.js injects it. Should be default.
     'react/require-default-props': 0, // We don't need it with Flow.
-    'react/no-danger': 0, // Control freaky.
     'template-curly-spacing': 0, // Prettier.
-    'react/jsx-boolean-value': 0, // Control freaky.
   },
 };

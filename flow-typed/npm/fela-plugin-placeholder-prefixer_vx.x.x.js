@@ -1,4 +1,4 @@
-// flow-typed signature: 93a86f53e1c9eb8d266ff575913a91ab
+// flow-typed signature: f9ec7a9d20161ac934efab8fb18d2a2f
 // flow-typed version: <<STUB>>/fela-plugin-placeholder-prefixer_v^4.3.2/flow_v0.47.0
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
