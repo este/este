@@ -3,6 +3,8 @@ import type { State } from '../types';
 import Box from '../components/box';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
+import Heading from '../components/heading';
+import P from '../components/p';
 import Set from '../components/set';
 import Text from '../components/text';
 import TextInput from '../components/text-input';
@@ -126,6 +128,20 @@ const ConnectedToggleUsersSelection = connect(
   { toggleUsersSelection }
 )(ToggleUsersSelection);
 
+const Column = ({ header, field, users }) =>
+  <Box>
+    <Box height={1}>
+      {typeof header === 'string'
+        ? <Text bold style={{ whiteSpace: 'nowrap' }}>{header}</Text>
+        : header}
+    </Box>
+    {users.map(user =>
+      <Box height={1} key={user.id}>
+        <ConnectedForm field={field} data={user} />
+      </Box>
+    )}
+  </Box>;
+
 // Yep, this is a table without <table>. The table layout below is created
 // with flexboxes only. React Native (https://facebook.github.io/yoga) does
 // not support table layout, and honestly, I never liked it.
@@ -137,31 +153,16 @@ const UsersList = ({ users }) => {
     .sort((a, b) => a.createdAt - b.createdAt)
     .reverse();
 
-  if (sortedUsers.length === 0) {
-    return (
-      <Box>
-        <Text>Empty</Text>
-      </Box>
-    );
-  }
-
-  const Column = ({ header, field }) =>
-    <Box>
-      {/* Header */}
-      <Box height={1}>
-        {typeof header === 'string'
-          ? <Text bold style={{ whiteSpace: 'nowrap' }}>{header}</Text>
-          : header}
-      </Box>
-      {sortedUsers.map(user =>
-        <Box height={1} key={user.id}>
-          <ConnectedForm field={field} data={user} />
-        </Box>
-      )}
-    </Box>;
+  if (sortedUsers.length === 0) return null;
 
   return (
     <Box>
+      <Heading size={1}>A table made from Flexbox only</Heading>
+      <P>
+        Note it's fast even with hundred of users. How? Just two rules. Do not
+        nest connected selected states and use react-virtualized for super
+        long lists.
+      </P>
       <ConnectedDeleteSelected />
       <Set spaceBetween={1} flexWrap="nowrap">
         {/* Set can be nested for custom spaceBetween */}
@@ -169,12 +170,13 @@ const UsersList = ({ users }) => {
           <Column
             header={<ConnectedToggleUsersSelection users={sortedUsers} />}
             field="select"
+            users={sortedUsers}
           />
-          <Column header="Name" field="name" />
+          <Column header="Name" field="name" users={sortedUsers} />
         </Set>
-        <Column header="🐈" field="likesCats" />
-        <Column header="🐕" field="likesDogs" />
-        <Column header="" field="saveOnCancel" />
+        <Column header="🐈" field="likesCats" users={sortedUsers} />
+        <Column header="🐕" field="likesDogs" users={sortedUsers} />
+        <Column header="" field="saveOnCancel" users={sortedUsers} />
       </Set>
     </Box>
   );
