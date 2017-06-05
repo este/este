@@ -3,7 +3,7 @@ import Heading from '../components/heading';
 import P from '../components/p';
 import Page from '../components/page';
 import UserForm from '../components/user-form';
-import UsersForm from '../components/users-form';
+import UsersTable from '../components/users-table';
 import app from '../components/app';
 
 const Forms = () =>
@@ -13,7 +13,7 @@ const Forms = () =>
       Simple, fast, and typed Redux forms without unnecessary abstractions.
     </P>
     <UserForm />
-    <UsersForm />
+    <UsersTable />
   </Page>;
 
 export default app(Forms);

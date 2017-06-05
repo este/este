@@ -19,7 +19,6 @@ export type Form<T> = {
   +changedState: { +[id: Id]: T },
 };
 
-// '' is used for not yet created objects, for example in create Foo form.
 export type Id = string;
 
 export type UserForm = {

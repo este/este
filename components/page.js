@@ -33,7 +33,7 @@ const PageFooter = () =>
     borderStyle="solid"
     borderTopWidth={1}
     flexDirection="row"
-    marginTop={1}
+    marginTop={2}
     paddingVertical={1}
     size={-1}
   >

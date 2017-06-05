@@ -6,11 +6,12 @@ import Form from '../components/form';
 import Radio from '../components/radio';
 import Set from '../components/set';
 import TextInput from '../components/text-input';
+import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
 import { setUserForm, addUser, add100RandomUsers } from '../lib/users/actions';
 
 const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
-  // Wish I know to type it better. PR anyone?
+  // TODO: form/createOnChange
   const onChange = (prop: $Keys<typeof form>) => value => {
     setUserForm(id, { ...form, [(prop: string)]: value });
   };
@@ -96,7 +97,7 @@ const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
 };
 
 export default connect(
-  ({ users: { form } }: State, { id = '' }) => ({
+  ({ users: { form } }: State, { id = addFormId }) => ({
     id,
     form: form.changedState[id] || form.initialState,
   }),
