@@ -1,4 +1,5 @@
 // @flow
+import type { Children } from 'react';
 import type { Color } from '../themes/types';
 import type { FunctionalComponent } from '../types';
 import PropTypes from 'prop-types';
@@ -34,7 +35,7 @@ export type BoxProps = {
   as?: string | FunctionalComponent<Object>,
   isReactNative?: boolean,
   style?: Object,
-  children?: ?any,
+  children?: Children,
 
   margin?: MaybeRhythm,
   marginHorizontal?: MaybeRhythm,

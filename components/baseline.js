@@ -1,4 +1,5 @@
 // @flow
+import type { Children } from 'react';
 import type { State } from '../types';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
@@ -8,7 +9,7 @@ import { connect } from 'react-redux';
 
 type BaselineProps = {|
   baselineShown: boolean,
-  children: any,
+  children?: Children,
 |};
 
 type BaselineContext = {
