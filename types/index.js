@@ -12,7 +12,10 @@ import type { Observable } from 'rxjs';
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
 // TODO: Exact state, once Flow fixes spread on exact types.
 
-export type FunctionalComponent<P> = (props: P) => ?React$Element<any>;
+export type FunctionalComponent<P> = (
+  props: P,
+  context: any
+) => ?React$Element<any>;
 
 export type Form<T> = {
   +initialState: T,
@@ -56,7 +59,7 @@ export type State = {
 };
 
 export type Action =
-  | { type: 'ADD_100_RANDOM_USERS' }
+  | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', form: UserForm }
   // | { type: 'ADD_USER_CANCEL', user: User }
   // | { type: 'ADD_USER_ERROR', user: User }

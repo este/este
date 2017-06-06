@@ -1,13 +1,42 @@
 // @flow
-import Text, { type TextProps } from './text';
 import type { ColorProps } from '../themes/types';
+import Text, { type TextProps } from './text';
 import withTheme, { type ThemeContext } from './withTheme';
 
-const BrowserButton = ({ onPress = Function, ...restProps }) =>
-  <button
+// Browser button is rendered as div with button role because button element is
+// hard to style consistently in Firefox and maybe elsewhere. Div is just fine.
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
+const BrowserButton = ({
+  disabled,
+  onPress,
+  style,
+  ...restProps
+}: {
+  disabled?: boolean,
+  onPress: () => void,
+  style?: Object,
+}) =>
+  <div // eslint-disable-line jsx-a11y/no-static-element-interactions
     onClick={onPress}
-    // Type button to prevent auto-submit on enter by default.
-    type="button"
+    onKeyPress={(e: KeyboardEvent) => {
+      if (disabled) return;
+      // Buttons are expected to be triggered using the Space or Enter key.
+      const isTriggered = e.key === ' ' || e.key === 'Enter';
+      if (!isTriggered) return;
+      // Prevent scroll on spacebar press.
+      e.preventDefault();
+      onPress();
+    }}
+    role="button"
+    tabIndex={disabled ? -1 : 0}
+    style={{
+      ...(style || {}),
+      cursor: disabled ? 'default' : 'pointer',
+      pointerEvents: disabled ? 'none' : 'auto',
+      userSelect: 'none',
+      MozUserSelect: 'none',
+      WebkitUserSelect: 'none',
+    }}
     {...restProps}
   />;
 

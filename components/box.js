@@ -113,7 +113,9 @@ export type BoxProps = {
   borderTopColor?: Color,
 };
 
-type BoxContext = ThemeContext & { renderer: { renderRule: () => Object } };
+type BoxContext = ThemeContext & {
+  renderer: { renderRule: (rule: () => Object) => string },
+};
 
 // Emulate React Native to ensure the same styles for all platforms.
 // https://facebook.github.io/yoga
@@ -171,7 +173,6 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-// $FlowFixMe Probably Flow 0.47 bug
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const {
     as,

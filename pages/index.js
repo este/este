@@ -4,7 +4,6 @@ import Blockquote from '../components/blockquote';
 import Button from '../components/button';
 import Heading from '../components/heading';
 import Image from '../components/image';
-import Link from '../components/link';
 import P from '../components/p';
 import Page from '../components/page';
 import PostList from '../components/post-list';
@@ -38,15 +37,12 @@ const Index = () =>
       {/* Styled text link. */}
       <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
-    {/* Just link, no styles. */}
-    <Link href="https://mises.org/library/anatomy-state">
-      <Image
-        alt="50x50 placeholder"
-        marginBottom={1}
-        size={{ height: 50, width: 50 }}
-        src="/static/50x50.png"
-      />
-    </Link>
+    <Image
+      alt="50x50 placeholder"
+      marginBottom={1}
+      size={{ height: 50, width: 50 }}
+      src="/static/50x50.png"
+    />
     <Text>normal text</Text>
     <Text size={-1}>small text</Text>
     <P size={5}>text 5</P>

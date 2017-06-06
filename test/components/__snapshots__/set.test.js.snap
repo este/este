@@ -3,21 +3,22 @@
 exports[`empty set has default marginBottom 1 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 />,
   "fela": "
     .a{display:flex}
     .b{flex-direction:row}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}",
 }
 `;
 
 exports[`set with one item 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     a
 </div>,
@@ -26,25 +27,26 @@ Object {
     .b{flex-direction:row}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}",
 }
 `;
 
 exports[`set with two items 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     <div
-        className="a f c"
+        className="a g c"
     >
         a
     </div>
     <div
-        className="a f c g h"
+        className="a g c h i"
     />
     <div
-        className="a f c"
+        className="a g c"
     >
         b
     </div>
@@ -54,28 +56,29 @@ Object {
     .b{flex-direction:row}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{flex-direction:column}
-    .g{height:12}
-    .h{width:12}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}
+    .g{flex-direction:column}
+    .h{height:12}
+    .i{width:12}",
 }
 `;
 
 exports[`set with two items and custom spaceBetween 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     <div
-        className="a f c"
+        className="a g c"
     >
         a
     </div>
     <div
-        className="a f c g h"
+        className="a g c h i"
     />
     <div
-        className="a f c"
+        className="a g c"
     >
         b
     </div>
@@ -85,17 +88,18 @@ Object {
     .b{flex-direction:row}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{flex-direction:column}
-    .g{height:48}
-    .h{width:48}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}
+    .g{flex-direction:column}
+    .h{height:48}
+    .i{width:48}",
 }
 `;
 
 exports[`vertical set with one item 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     a
 </div>,
@@ -104,14 +108,15 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}",
 }
 `;
 
 exports[`vertical set with two items 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     <div
         className="a b c"
@@ -119,7 +124,7 @@ Object {
         a
     </div>
     <div
-        className="a b c f g"
+        className="a b c g h"
     />
     <div
         className="a b c"
@@ -132,16 +137,17 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{height:24}
-    .g{width:24}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}
+    .g{height:24}
+    .h{width:24}",
 }
 `;
 
 exports[`vertical set with two items and custom spaceBetween 1`] = `
 Object {
   "component": <div
-    className="a b c d e"
+    className="a b c d e f"
 >
     <div
         className="a b c"
@@ -149,7 +155,7 @@ Object {
         a
     </div>
     <div
-        className="a b c f g"
+        className="a b c g h"
     />
     <div
         className="a b c"
@@ -162,8 +168,9 @@ Object {
     .b{flex-direction:column}
     .c{position:relative}
     .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{height:48}
-    .g{width:48}",
+    .e{align-items:flex-start}
+    .f{flex-wrap:wrap}
+    .g{height:48}
+    .h{width:48}",
 }
 `;

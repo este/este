@@ -34,6 +34,7 @@ const Set = (props: SetProps, { theme }: ThemeContext) => {
     spaceBetween = vertical
       ? theme.set.verticalSpaceBetween
       : theme.set.horizontalSpaceBetween,
+    alignItems = 'flex-start',
     flexDirection = vertical ? 'column' : 'row',
     flexWrap = 'wrap',
     marginBottom = theme.set.marginBottom,
@@ -42,6 +43,7 @@ const Set = (props: SetProps, { theme }: ThemeContext) => {
   return (
     <Box
       {...{
+        alignItems,
         flexDirection,
         flexWrap,
         marginBottom,

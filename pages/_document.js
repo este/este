@@ -20,17 +20,6 @@ const globalStyle = `
     ${/* Enforce React Native default border width. */ ''}
     border-width: 0;
   }
-  button {
-    ${/* Reset default background color. */ ''}
-    background-color: transparent;
-    ${/* Should be default. */ ''}
-    cursor: pointer;
-    ${/* Not supported in React Native. */ ''}
-    outline: none;
-  }
-  button[disabled] {
-    cursor: default;
-  }
 `;
 
 export default class MyDocument extends Document {

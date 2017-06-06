@@ -8,9 +8,9 @@ import Set from '../components/set';
 import TextInput from '../components/text-input';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
-import { setUserForm, addUser, add100RandomUsers } from '../lib/users/actions';
+import { setUserForm, addUser, add10RandomUsers } from '../lib/users/actions';
 
-const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
+const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
   // TODO: form/createOnChange
   const onChange = (prop: $Keys<typeof form>) => value => {
     setUserForm(id, { ...form, [(prop: string)]: value });
@@ -20,7 +20,7 @@ const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
   };
 
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Set vertical>
         <TextInput
           // Note we are not using name attribute. It's useful probably only for
@@ -81,15 +81,11 @@ const UserForm = ({ id, form, setUserForm, addUser, add100RandomUsers }) => {
         />
       </Set>
       <Set>
-        <Button
-          primary
-          onPress={onSubmit}
-          type="submit" // Submit on key enter in browser. TODO: React Native?
-        >
+        <Button primary onPress={onSubmit}>
           Add
         </Button>
-        <Button primary onPress={add100RandomUsers}>
-          Add 100 random users
+        <Button primary onPress={add10RandomUsers}>
+          Add 10 random users
         </Button>
       </Set>
     </Form>
@@ -101,5 +97,5 @@ export default connect(
     id,
     form: form.changedState[id] || form.initialState,
   }),
-  { setUserForm, addUser, add100RandomUsers }
+  { setUserForm, addUser, add10RandomUsers }
 )(UserForm);

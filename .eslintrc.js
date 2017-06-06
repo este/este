@@ -6,11 +6,12 @@ module.exports = {
     APP_VERSION: true,
     GRAPHQL_ENDPOINT: true,
     window: true,
-    // Flow. Probably bug, should not be detected.
-    $Keys: true,
+    // Flow
     $Exact: true,
+    $Keys: true,
     Event: true,
     EventHandler: true,
+    KeyboardEvent: true,
     ReactClass: true,
   },
   // AirBnb is great, but very strict. Feel free to add anything.

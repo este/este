@@ -2,11 +2,21 @@
 
 exports[`disabled 1`] = `
 Object {
-  "component": <button
+  "component": <div
     className="a b c d e f g h i j k l m n o p q r s t u"
-    disabled={true}
     onClick={[Function]}
-    type="button"
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "default",
+            "pointerEvents": "none",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={-1}
 />,
   "fela": "
     .a{display:inline}
@@ -35,10 +45,21 @@ Object {
 
 exports[`primary 1`] = `
 Object {
-  "component": <button
+  "component": <div
     className="a b c d e f g h i j k l m n o p q r s t u v w x"
     onClick={[Function]}
-    type="button"
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
@@ -70,10 +91,21 @@ Object {
 
 exports[`primary outline 1`] = `
 Object {
-  "component": <button
+  "component": <div
     className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad"
     onClick={[Function]}
-    type="button"
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
@@ -110,10 +142,21 @@ Object {
 
 exports[`render 1`] = `
 Object {
-  "component": <button
+  "component": <div
     className="a b c d e f g h i j k l m n o p q r s t"
     onClick={[Function]}
-    type="button"
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
 />,
   "fela": "
     .a{display:inline}
