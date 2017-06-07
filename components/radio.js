@@ -8,7 +8,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 export type RadioProps = ButtonProps & {
   label?: string,
   labelOnLeft?: boolean,
-  onChange: (value: string) => void,
+  onChange: (value: string) => any,
   select: string,
   value: ?string,
 };

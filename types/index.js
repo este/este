@@ -1,5 +1,6 @@
 // @flow
 import type {
+  Dispatch as ReduxDispatch,
   Middleware as ReduxMiddleware,
   Reducer as ReduxReducer,
   Store as ReduxStore,
@@ -67,7 +68,7 @@ export type Action =
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_SUCCESS', user: User }
-  | { type: 'SET_USER_FORM', id: Id, state: ?UserForm }
+  | { type: 'SET_USER_FORM', id: Id, form: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
@@ -75,6 +76,7 @@ export type Action =
 export type Middleware = Array<ReduxMiddleware<State, Action>>;
 export type Reducers = { +[reducerName: string]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
+export type Dispatch = ReduxDispatch<Action>;
 
 export type PlatformDependencies = {
   createUuid: () => string, // Because React Native needs different lib.
@@ -87,7 +89,7 @@ export type Dependencies = PlatformDependencies & {
 };
 
 // TODO: Bummer. There are no redux-observable flow definitions yet. Therefore,
-// we have to use .filter instead of .ofType and we have to use
+// we have to use .filter instead of .ofType and
 // https://flow.org/en/docs/lang/refinements.
 export type Epic = (
   actions$: Observable<Action>,

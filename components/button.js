@@ -43,7 +43,7 @@ const BrowserButton = ({
 export type ButtonProps = ColorProps &
   TextProps & {
     disabled?: boolean,
-    onPress?: () => void,
+    onPress?: () => any,
     outline?: boolean,
   };
 

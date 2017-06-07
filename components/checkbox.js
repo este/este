@@ -8,7 +8,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 export type CheckboxProps = ButtonProps & {
   label?: string,
   labelOnLeft?: boolean,
-  onChange: (value: boolean) => void,
+  onChange: (value: boolean) => any,
   value: boolean,
 };
 

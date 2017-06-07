@@ -1,5 +1,5 @@
 // @flow
-import type { State } from '../types';
+import type { State, Dispatch } from '../types';
 import Box from '../components/box';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
@@ -9,33 +9,40 @@ import Set from '../components/set';
 import Text from '../components/text';
 import TextInput from '../components/text-input';
 import { connect } from 'react-redux';
-import {
-  saveUser,
-  setUserForm,
-  toggleUsersSelection,
-  deleteSelectedUsers,
-} from '../lib/users/actions';
 
 // This is pretty fast editable lists. Just follow this two simple rules:
 // 1) Do not nest the same redux connect selected states.
 // 2) For huge lists, use react-virtualized.
 
-const Form = ({
-  changedState,
-  data,
-  field,
-  saveUser,
-  selected,
-  setUserForm,
-  toggleUsersSelection,
-}) => {
+const Form = ({ data, changedState, field, selected, dispatch }) => {
   const user = { ...data, ...changedState };
-  // TODO: form/createOnChange
-  const onChange = (prop: $Keys<typeof user>) => value => {
-    setUserForm(user.id, { ...user, [(prop: string)]: value });
+  const set = (prop: $Keys<typeof user>) => value => {
+    (dispatch: Dispatch)({
+      type: 'SET_USER_FORM',
+      id: user.id,
+      form: { ...user, [prop]: value },
+    });
   };
-  const onSavePress = () => saveUser(user);
-  const onCancelPress = () => setUserForm(user.id, null);
+  const toggleUsersSelection = () => {
+    (dispatch: Dispatch)({
+      type: 'TOGGLE_USERS_SELECTION',
+      users: [user],
+    });
+  };
+  const saveUser = () => {
+    (dispatch: Dispatch)({ type: 'SAVE_USER', user });
+  };
+  const cancelEditation = () => {
+    (dispatch: Dispatch)({
+      type: 'SET_USER_FORM',
+      id: user.id,
+      form: null,
+    });
+  };
+  const onNameKeyPress = (e: KeyboardEvent) => {
+    if (e.key !== 'Enter') return;
+    saveUser();
+  };
 
   switch (field) {
     case 'select':
@@ -44,7 +51,7 @@ const Form = ({
           alignItems="center"
           height={1}
           opacity={selected ? 1 : 0.25}
-          onChange={() => toggleUsersSelection([user])}
+          onChange={toggleUsersSelection}
           value={selected}
         />
       );
@@ -55,7 +62,8 @@ const Form = ({
           borderColor="gray"
           borderStyle="solid"
           width={10}
-          onChange={onChange('name')}
+          onKeyPress={onNameKeyPress}
+          onChange={set('name')}
           value={user[field]}
         />
       );
@@ -65,7 +73,7 @@ const Form = ({
         <Checkbox
           alignItems="center"
           height={1}
-          onChange={onChange(field)}
+          onChange={set(field)}
           value={user[field]}
         />
       );
@@ -78,7 +86,7 @@ const Form = ({
             size={-1}
             height={1}
             marginVertical={0}
-            onPress={onSavePress}
+            onPress={saveUser}
             paddingHorizontal={0}
           >
             save
@@ -87,7 +95,7 @@ const Form = ({
             color="warning"
             size={-1}
             marginVertical={0}
-            onPress={onCancelPress}
+            onPress={cancelEditation}
             paddingHorizontal={0}
           >
             cancel
@@ -100,43 +108,39 @@ const Form = ({
   }
 };
 
-const ConnectedForm = connect(
-  ({ users }: State, { data }) => ({
-    changedState: users.form.changedState[data.id],
-    selected: users.selected[data.id],
-  }),
-  { setUserForm, saveUser, toggleUsersSelection }
-)(Form);
+const ConnectedForm = connect(({ users }: State, { data }) => ({
+  changedState: users.form.changedState[data.id],
+  selected: users.selected[data.id],
+}))(Form);
 
-const DeleteSelected = ({ selected, deleteSelectedUsers }) =>
+const DeleteSelected = ({ selected, dispatch }) =>
   <Button
     color="warning"
     disabled={Object.keys(selected).length === 0}
     size={-1}
-    onPress={deleteSelectedUsers}
+    onPress={() => (dispatch: Dispatch)({ type: 'DELETE_SELECTED_USERS' })}
     paddingHorizontal={0}
     marginVertical={0}
   >
     Delete Selected
   </Button>;
 
-const ConnectedDeleteSelected = connect(
-  ({ users }: State) => ({ selected: users.selected }),
-  { deleteSelectedUsers }
-)(DeleteSelected);
+const ConnectedDeleteSelected = connect(({ users }: State) => ({
+  selected: users.selected,
+}))(DeleteSelected);
 
-const ToggleUsersSelection = ({ selected, toggleUsersSelection, users }) =>
+const ToggleUsersSelection = ({ selected, users, dispatch }) =>
   <Checkbox
     alignItems="center"
     opacity={0.25}
-    onChange={() => toggleUsersSelection(users)}
+    onChange={() =>
+      (dispatch: Dispatch)({ type: 'TOGGLE_USERS_SELECTION', users })}
     value={users.every(user => selected[user.id])}
   />;
 
-const ConnectedToggleUsersSelection = connect(
-  ({ users }: State) => ({ selected: users.selected }),
-  { toggleUsersSelection }
-)(ToggleUsersSelection);
+const ConnectedToggleUsersSelection = connect(({ users }: State) => ({
+  selected: users.selected,
+}))(ToggleUsersSelection);
 
 const Column = ({ header, field, users }) =>
   <Box>

@@ -1,5 +1,5 @@
 // @flow
-import type { State } from '../types';
+import type { State, Dispatch } from '../types';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
 import Form from '../components/form';
@@ -8,19 +8,23 @@ import Set from '../components/set';
 import TextInput from '../components/text-input';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
-import { setUserForm, addUser, add10RandomUsers } from '../lib/users/actions';
 
-const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
-  // TODO: form/createOnChange
-  const onChange = (prop: $Keys<typeof form>) => value => {
-    setUserForm(id, { ...form, [(prop: string)]: value });
+const UserForm = ({ id, initialState, changedState, dispatch }) => {
+  const form = changedState || initialState;
+  // TODO: $Keys<typeof form> doesn't work. Why? Use generic? PR anyone?
+  const set = (prop: $Keys<typeof form>) => value => {
+    (dispatch: Dispatch)({
+      type: 'SET_USER_FORM',
+      id,
+      form: { ...form, [prop]: value },
+    });
   };
-  const onSubmit = () => {
-    addUser(form);
-  };
+  const addUser = () => (dispatch: Dispatch)({ type: 'ADD_USER', form });
+  const add10RandomUsers = () =>
+    (dispatch: Dispatch)({ type: 'ADD_10_RANDOM_USERS' });
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={addUser}>
       <Set vertical>
         <TextInput
           // Note we are not using name attribute. It's useful probably only for
@@ -28,26 +32,28 @@ const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
           label="Name"
           placeholder="Jane Doe"
           value={form.name}
-          onChange={onChange('name')}
+          onChange={set('name')}
+          width={10}
           // error="Please enter your full name"
         />
         <TextInput
           label="Description"
           placeholder="..."
           value={form.description}
-          onChange={onChange('description')}
+          onChange={set('description')}
+          width={10}
         />
       </Set>
       <Set vertical spaceBetween={0}>
         <Checkbox
           label="Likes cats"
           value={form.likesCats}
-          onChange={onChange('likesCats')}
+          onChange={set('likesCats')}
         />
         <Checkbox
           label="Likes dogs"
           value={form.likesDogs}
-          onChange={onChange('likesDogs')}
+          onChange={set('likesDogs')}
         />
       </Set>
       <Set>
@@ -55,19 +61,19 @@ const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
           label="Female"
           select="female"
           value={form.gender}
-          onChange={onChange('gender')}
+          onChange={set('gender')}
         />
         <Radio
           label="Male"
           select="male"
           value={form.gender}
-          onChange={onChange('gender')}
+          onChange={set('gender')}
         />
         <Radio
           label="Other"
           select="other"
           value={form.gender}
-          onChange={onChange('gender')}
+          onChange={set('gender')}
         />
       </Set>
       <Set>
@@ -77,11 +83,11 @@ const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
           color="warning"
           size={1}
           value={form.wantsKing}
-          onChange={onChange('wantsKing')}
+          onChange={set('wantsKing')}
         />
       </Set>
       <Set>
-        <Button primary onPress={onSubmit}>
+        <Button primary onPress={addUser}>
           Add
         </Button>
         <Button primary onPress={add10RandomUsers}>
@@ -92,10 +98,8 @@ const UserForm = ({ id, form, setUserForm, addUser, add10RandomUsers }) => {
   );
 };
 
-export default connect(
-  ({ users: { form } }: State, { id = addFormId }) => ({
-    id,
-    form: form.changedState[id] || form.initialState,
-  }),
-  { setUserForm, addUser, add10RandomUsers }
-)(UserForm);
+export default connect(({ users: { form } }: State, { id = addFormId }) => ({
+  id,
+  initialState: form.initialState,
+  changedState: form.changedState[id],
+}))(UserForm);
