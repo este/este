@@ -228,7 +228,7 @@ const computeBoxStyle = (
   // Enforce React Native flex behaviour. Can be overridden.
   if (typeof flex === 'number') {
     if (isReactNative) {
-      style = { ...style, flex: 1 };
+      style = { ...style, flex: flex };
     } else {
       style = { ...style, flexBasis: 'auto', flexGrow: flex, flexShrink: 1 };
     }
