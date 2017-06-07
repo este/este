@@ -16,5 +16,5 @@ const ToggleDark = ({ darkEnabled, dispatch }) =>
   </Button>;
 
 export default connect((state: State) => ({
-  darkEnabled: state.app.darkEnabled,
+  darkEnabled: state.config.darkEnabled,
 }))(ToggleDark);

@@ -51,5 +51,5 @@ Baseline.contextTypes = {
 
 // $FlowFixMe react-redux doesn't support context on StatelessComponent
 export default connect((state: State) => ({
-  baselineShown: state.app.baselineShown,
+  baselineShown: state.config.baselineShown,
 }))(Baseline);

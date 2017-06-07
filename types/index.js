@@ -13,17 +13,12 @@ import type { Observable } from 'rxjs';
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
 // TODO: Exact state, once Flow fixes spread on exact types.
 
-export type FunctionalComponent<P> = (
-  props: P,
-  context: any
-) => ?React$Element<any>;
+export type Id = string;
 
 export type Form<T> = {
   +initialState: T,
   +changedState: { +[id: Id]: T },
 };
-
-export type Id = string;
 
 export type UserForm = {
   +name: string,
@@ -40,7 +35,7 @@ export type User = UserForm & {
   +updatedAt: number,
 };
 
-export type AppState = {
+export type ConfigState = {
   +baselineShown: boolean,
   +darkEnabled: boolean,
   +name: string,
@@ -55,7 +50,7 @@ export type UsersState = {
 
 export type State = {
   +apollo: Object,
-  +app: AppState,
+  +config: ConfigState,
   +users: UsersState,
 };
 
@@ -88,10 +83,15 @@ export type Dependencies = PlatformDependencies & {
   // validate: (json: Object) => any,
 };
 
-// TODO: Bummer. There are no redux-observable flow definitions yet. Therefore,
+// TODO: Bummer, there are no redux-observable flow definitions yet. Therefore,
 // we have to use .filter instead of .ofType and
 // https://flow.org/en/docs/lang/refinements.
 export type Epic = (
   actions$: Observable<Action>,
   dependencies: Dependencies
 ) => Observable<Action>;
+
+export type FunctionalComponent<P> = (
+  props: P,
+  context: any
+) => ?React$Element<any>;

@@ -75,5 +75,5 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
 };
 
 export default connect((state: State) => ({
-  darkEnabled: state.app.darkEnabled,
+  darkEnabled: state.config.darkEnabled,
 }))(Page);
