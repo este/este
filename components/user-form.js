@@ -9,19 +9,27 @@ import TextInput from '../components/text-input';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
 
-const UserForm = ({ id, initialState, changedState, dispatch }) => {
-  const form = changedState || initialState;
-  // TODO: $Keys<typeof form> doesn't work. Why? Use generic? PR anyone?
-  const set = (prop: $Keys<typeof form>) => value => {
-    (dispatch: Dispatch)({
+// const errorToMessage = error => {
+//   return '';
+//   // switch (error.name) {
+//   //   case 'isRequired':
+//   //     return '';
+//   //   default:
+//   //   // ten flow trick?
+//   // }
+// };
+
+const UserForm = ({ id, form, /*errors,*/ dispatch }) => {
+  // For some reason, prop must be string for 100% Flow coverage.
+  const set = (prop: string) => value => {
+    dispatch({
       type: 'SET_USER_FORM',
       id,
       form: { ...form, [prop]: value },
     });
   };
-  const addUser = () => (dispatch: Dispatch)({ type: 'ADD_USER', form });
-  const add10RandomUsers = () =>
-    (dispatch: Dispatch)({ type: 'ADD_10_RANDOM_USERS' });
+  const addUser = () => dispatch({ type: 'ADD_USER', form });
+  const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
 
   return (
     <Form onSubmit={addUser}>
@@ -34,7 +42,8 @@ const UserForm = ({ id, initialState, changedState, dispatch }) => {
           value={form.name}
           onChange={set('name')}
           width={10}
-          // error="Please enter your full name"
+          // error={errorToMessage(errors)}
+          error="Please enter your full name"
         />
         <TextInput
           label="Description"
@@ -42,6 +51,7 @@ const UserForm = ({ id, initialState, changedState, dispatch }) => {
           value={form.description}
           onChange={set('description')}
           width={10}
+          // error={errorToMessage(errors)}
         />
       </Set>
       <Set vertical spaceBetween={0}>
@@ -98,8 +108,12 @@ const UserForm = ({ id, initialState, changedState, dispatch }) => {
   );
 };
 
-export default connect(({ users: { form } }: State, { id = addFormId }) => ({
-  id,
-  initialState: form.initialState,
-  changedState: form.changedState[id],
-}))(UserForm);
+export default connect(
+  ({ users: { form } }: State, { id = addFormId }) => ({
+    id,
+    form: form.changedState[id] || form.initialState,
+    errors: form.errors[id],
+  }),
+  // Trick to inject dispatch type. Flow is both awesome and terrible.
+  (dispatch: Dispatch) => ({ dispatch })
+)(UserForm);

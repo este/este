@@ -10,11 +10,14 @@ const ToggleBaseline = ({ baselineShown, dispatch }) =>
     primary
     outline
     size={-1}
-    onPress={() => (dispatch: Dispatch)({ type: 'TOGGLE_BASELINE' })}
+    onPress={() => dispatch({ type: 'TOGGLE_BASELINE' })}
   >
     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
   </Button>;
 
-export default connect((state: State) => ({
-  baselineShown: state.config.baselineShown,
-}))(ToggleBaseline);
+export default connect(
+  (state: State) => ({
+    baselineShown: state.config.baselineShown,
+  }),
+  (dispatch: Dispatch) => ({ dispatch })
+)(ToggleBaseline);

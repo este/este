@@ -10,11 +10,14 @@ const ToggleDark = ({ darkEnabled, dispatch }) =>
     primary
     outline
     size={-1}
-    onPress={() => (dispatch: Dispatch)({ type: 'TOGGLE_DARK' })}
+    onPress={() => dispatch({ type: 'TOGGLE_DARK' })}
   >
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
   </Button>;
 
-export default connect((state: State) => ({
-  darkEnabled: state.config.darkEnabled,
-}))(ToggleDark);
+export default connect(
+  (state: State) => ({
+    darkEnabled: state.config.darkEnabled,
+  }),
+  (dispatch: Dispatch) => ({ dispatch })
+)(ToggleDark);

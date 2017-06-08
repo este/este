@@ -16,24 +16,24 @@ import { connect } from 'react-redux';
 
 const Form = ({ data, changedState, field, selected, dispatch }) => {
   const user = { ...data, ...changedState };
-  const set = (prop: $Keys<typeof user>) => value => {
-    (dispatch: Dispatch)({
+  const set = (prop: string) => value => {
+    dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
       form: { ...user, [prop]: value },
     });
   };
   const toggleUsersSelection = () => {
-    (dispatch: Dispatch)({
+    dispatch({
       type: 'TOGGLE_USERS_SELECTION',
       users: [user],
     });
   };
   const saveUser = () => {
-    (dispatch: Dispatch)({ type: 'SAVE_USER', user });
+    dispatch({ type: 'SAVE_USER', user });
   };
   const cancelEditation = () => {
-    (dispatch: Dispatch)({
+    dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
       form: null,
@@ -108,39 +108,47 @@ const Form = ({ data, changedState, field, selected, dispatch }) => {
   }
 };
 
-const ConnectedForm = connect(({ users }: State, { data }) => ({
-  changedState: users.form.changedState[data.id],
-  selected: users.selected[data.id],
-}))(Form);
+const ConnectedForm = connect(
+  ({ users }: State, { data }) => ({
+    changedState: users.form.changedState[data.id],
+    selected: users.selected[data.id],
+  }),
+  (dispatch: Dispatch) => ({ dispatch })
+)(Form);
 
 const DeleteSelected = ({ selected, dispatch }) =>
   <Button
     color="warning"
     disabled={Object.keys(selected).length === 0}
     size={-1}
-    onPress={() => (dispatch: Dispatch)({ type: 'DELETE_SELECTED_USERS' })}
+    onPress={() => dispatch({ type: 'DELETE_SELECTED_USERS' })}
     paddingHorizontal={0}
     marginVertical={0}
   >
     Delete Selected
   </Button>;
 
-const ConnectedDeleteSelected = connect(({ users }: State) => ({
-  selected: users.selected,
-}))(DeleteSelected);
+const ConnectedDeleteSelected = connect(
+  ({ users }: State) => ({
+    selected: users.selected,
+  }),
+  (dispatch: Dispatch) => ({ dispatch })
+)(DeleteSelected);
 
 const ToggleUsersSelection = ({ selected, users, dispatch }) =>
   <Checkbox
     alignItems="center"
     opacity={0.25}
-    onChange={() =>
-      (dispatch: Dispatch)({ type: 'TOGGLE_USERS_SELECTION', users })}
+    onChange={() => dispatch({ type: 'TOGGLE_USERS_SELECTION', users })}
     value={users.every(user => selected[user.id])}
   />;
 
-const ConnectedToggleUsersSelection = connect(({ users }: State) => ({
-  selected: users.selected,
-}))(ToggleUsersSelection);
+const ConnectedToggleUsersSelection = connect(
+  ({ users }: State) => ({
+    selected: users.selected,
+  }),
+  (dispatch: Dispatch) => ({ dispatch })
+)(ToggleUsersSelection);
 
 const Column = ({ header, field, users }) =>
   <Box>
