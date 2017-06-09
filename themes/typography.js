@@ -42,8 +42,8 @@ const typography = ({
       return fontSize;
     }
     return level > 1
-      ? Math.pow(1 / scaleRatio, level) * fontSize
-      : Math.pow(scaleRatio, 1 / level) * fontSize;
+      ? ((1 / scaleRatio) ** level) * fontSize
+      : (scaleRatio ** (1 / level)) * fontSize;
   },
   lineHeight,
   rhythm: (ratio: number) => lineHeight * ratio,
