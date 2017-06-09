@@ -6,20 +6,11 @@ import Form from '../components/form';
 import Radio from '../components/radio';
 import Set from '../components/set';
 import TextInput from '../components/text-input';
+import ValidationError from '../components/validation-error';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
 
-// const errorToMessage = error => {
-//   return '';
-//   // switch (error.name) {
-//   //   case 'isRequired':
-//   //     return '';
-//   //   default:
-//   //   // ten flow trick?
-//   // }
-// };
-
-const UserForm = ({ id, form, /*errors,*/ dispatch }) => {
+const UserForm = ({ id, form, errors, dispatch }) => {
   // For some reason, prop must be string for 100% Flow coverage.
   const set = (prop: string) => value => {
     dispatch({
@@ -39,19 +30,20 @@ const UserForm = ({ id, form, /*errors,*/ dispatch }) => {
           // browser auth pre-filling. Also, it's not universal.
           label="Name"
           placeholder="Jane Doe"
+          maxLength={100}
           value={form.name}
           onChange={set('name')}
           width={10}
-          // error={errorToMessage(errors)}
-          error="Please enter your full name"
+          error={<ValidationError prop="name" errors={errors} />}
         />
         <TextInput
           label="Description"
+          maxLength={100}
+          onChange={set('description')}
           placeholder="..."
           value={form.description}
-          onChange={set('description')}
           width={10}
-          // error={errorToMessage(errors)}
+          error={<ValidationError prop="description" errors={errors} />}
         />
       </Set>
       <Set vertical spaceBetween={0}>
@@ -111,7 +103,7 @@ const UserForm = ({ id, form, /*errors,*/ dispatch }) => {
 export default connect(
   ({ users: { form } }: State, { id = addFormId }) => ({
     id,
-    form: form.changedState[id] || form.initialState,
+    form: form.changed[id] || form.initial,
     errors: form.errors[id],
   }),
   // Trick to inject dispatch type. Flow is both awesome and terrible.

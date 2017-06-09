@@ -7,11 +7,10 @@ Object {
 >
     <div
         className="a d c e f g"
-    >
-        
-    </div>
+    />
     <input
         className="h b c i j k l m n o p q r"
+        maxLength={1}
         onChange={[Function]}
     />
 </div>,
@@ -44,12 +43,11 @@ Object {
 >
     <div
         className="a d c e f g"
-    >
-        
-    </div>
+    />
     <input
         className="h b c i j k l m n o p q r s"
         disabled={true}
+        maxLength={1}
         onChange={[Function]}
     />
 </div>,
@@ -92,6 +90,7 @@ Object {
     </div>
     <input
         className="h b c i j k q m n o r s t"
+        maxLength={1}
         onChange={[Function]}
     />
 </div>,
@@ -132,13 +131,10 @@ Object {
         >
             label
         </div>
-        <div
-            className="a b c q r"
-        />
-        
     </div>
     <input
-        className="h b c i j k l m n o s t u"
+        className="h b c i j k l m n o q r s"
+        maxLength={1}
         onChange={[Function]}
     />
 </div>,
@@ -159,11 +155,9 @@ Object {
     .n{font-size:16}
     .o{line-height:24px}
     .p{font-weight:600}
-    .q{height:12}
-    .r{width:12}
-    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .t{background-color:transparent}
-    .u{outline:none}",
+    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .r{background-color:transparent}
+    .s{outline:none}",
 }
 `;
 
@@ -174,11 +168,10 @@ Object {
 >
     <div
         className="a d c e f g"
-    >
-        
-    </div>
+    />
     <input
         className="h b c i j k l m n o p q r"
+        maxLength={1}
         onChange={[Function]}
     />
 </div>,

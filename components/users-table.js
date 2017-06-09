@@ -14,8 +14,8 @@ import { connect } from 'react-redux';
 // 1) Do not nest the same redux connect selected states.
 // 2) For huge lists, use react-virtualized.
 
-const Form = ({ data, changedState, field, selected, dispatch }) => {
-  const user = { ...data, ...changedState };
+const Form = ({ data, changed, field, selected, dispatch }) => {
+  const user = { ...data, ...changed };
   const set = (prop: string) => value => {
     dispatch({
       type: 'SET_USER_FORM',
@@ -61,10 +61,11 @@ const Form = ({ data, changedState, field, selected, dispatch }) => {
           borderBottomWidth={1}
           borderColor="gray"
           borderStyle="solid"
-          width={10}
-          onKeyPress={onNameKeyPress}
+          maxLength={100}
           onChange={set('name')}
+          onKeyPress={onNameKeyPress}
           value={user[field]}
+          width={10}
         />
       );
     case 'likesCats':
@@ -78,7 +79,7 @@ const Form = ({ data, changedState, field, selected, dispatch }) => {
         />
       );
     case 'saveOnCancel': {
-      if (!changedState) return null;
+      if (!changed) return null;
       return (
         <Set flexWrap="nowrap">
           <Button
@@ -110,7 +111,7 @@ const Form = ({ data, changedState, field, selected, dispatch }) => {
 
 const ConnectedForm = connect(
   ({ users }: State, { data }) => ({
-    changedState: users.form.changedState[data.id],
+    changed: users.form.changed[data.id],
     selected: users.selected[data.id],
   }),
   (dispatch: Dispatch) => ({ dispatch })
@@ -182,9 +183,9 @@ const UsersTable = ({ users }) => {
     <Box>
       <Heading size={2}>A table made from Flexbox only</Heading>
       <P>
-        Note it's fast even with hundred of users. How? Just two rules. Do not
-        nest connected selected states and use react-virtualized for super
-        long lists.
+        Note it's fast even with hundred of rows. How? Just two rules. Do not
+        nest connected selected states. And for very long lists, use
+        react-virtualized.
       </P>
       {sortedUsers.length === 0
         ? <EmptyTable />

@@ -21,7 +21,8 @@ const theme = {
     bold: 600,
     color: 'black',
     // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     rawStyle: {
       fixFontSmoothing: true,
     },
@@ -41,21 +42,29 @@ const expectRender = createExpectRender(theme);
 const onChange = () => {};
 
 test('render', () => {
-  expectRender(() => <TextInput onChange={onChange} />);
+  expectRender(() => <TextInput maxLength={1} onChange={onChange} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <TextInput onChange={onChange} disabled />);
+  expectRender(() => <TextInput maxLength={1} onChange={onChange} disabled />);
 });
 
 test('color', () => {
-  expectRender(() => <TextInput onChange={onChange} color="primary" />);
+  expectRender(() =>
+    <TextInput maxLength={1} onChange={onChange} color="primary" />
+  );
 });
 
 test('label', () => {
-  expectRender(() => <TextInput onChange={onChange} label="label" />);
+  expectRender(() =>
+    <TextInput maxLength={1} onChange={onChange} label="label" />
+  );
 });
 
 test('error', () => {
-  expectRender(() => <TextInput onChange={onChange} error="error" />);
+  expectRender(() =>
+    <TextInput maxLength={1} onChange={onChange} error="error" />
+  );
 });
+
+// TODO: label and error as components

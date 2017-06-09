@@ -15,9 +15,18 @@ import type { Observable } from 'rxjs';
 
 export type Id = string;
 
+export type ValidationError =
+  | { type: 'required' }
+  | { type: 'email' }
+  | { type: 'minLength', minLength: number };
+
+export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
+
 export type Form<T> = {
-  +initialState: T,
-  +changedState: { +[id: Id]: T },
+  +initial: T,
+  +changed: { +[id: Id]: T },
+  +errors: { +[id: Id]: ValidationErrors<T> },
+  // +disabled or pending
 };
 
 export type UserForm = {
@@ -54,16 +63,20 @@ export type State = {
   +users: UsersState,
 };
 
+// Async naming: ADD_USER, ADD_USER_CANCEL, ADD_USER_ERROR, ADD_USER_SUCCESS
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', form: UserForm }
-  // | { type: 'ADD_USER_CANCEL', user: User }
-  // | { type: 'ADD_USER_ERROR', user: User }
+  | {
+      type: 'ADD_USER_ERROR',
+      id: Id,
+      validationErrors: ValidationErrors<UserForm>,
+    }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_SUCCESS', user: User }
-  | { type: 'SET_USER_FORM', id: Id, form: ?UserForm }
+  | { type: 'SET_USER_FORM', id: Id, form: UserForm }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
@@ -83,9 +96,10 @@ export type Dependencies = PlatformDependencies & {
   // validate: (json: Object) => any,
 };
 
-// TODO: Bummer, there are no redux-observable flow definitions yet. Therefore,
-// we have to use .filter instead of .ofType and
+// TODO: There are no redux-observable flow definitions yet. Therefore, we have
+// to use .filter instead of .ofType and
 // https://flow.org/en/docs/lang/refinements.
+// https://github.com/redux-observable/redux-observable/issues/258
 export type Epic = (
   actions$: Observable<Action>,
   dependencies: Dependencies

@@ -1,4 +1,4 @@
-// flow-typed signature: ddb25b6f135a8d6aa3c4c1f056a4e3fa
+// flow-typed signature: 8c4c6c8df81cc1ff559eb441cb7b9413
 // flow-typed version: <<STUB>>/prettier_v^1.1.0/flow_v0.47.0
 
 /**
@@ -26,19 +26,23 @@ declare module 'prettier/bin/prettier' {
   declare module.exports: any;
 }
 
-declare module 'prettier/src/parser-babylon' {
+declare module 'prettier/parser-babylon' {
   declare module.exports: any;
 }
 
-declare module 'prettier/src/parser-flow' {
+declare module 'prettier/parser-flow' {
   declare module.exports: any;
 }
 
-declare module 'prettier/src/parser-postcss' {
+declare module 'prettier/parser-graphql' {
   declare module.exports: any;
 }
 
-declare module 'prettier/src/parser-typescript' {
+declare module 'prettier/parser-postcss' {
+  declare module.exports: any;
+}
+
+declare module 'prettier/parser-typescript' {
   declare module.exports: any;
 }
 
@@ -52,15 +56,18 @@ declare module 'prettier/index' {
 declare module 'prettier/index.js' {
   declare module.exports: $Exports<'prettier'>;
 }
-declare module 'prettier/src/parser-babylon.js' {
-  declare module.exports: $Exports<'prettier/src/parser-babylon'>;
+declare module 'prettier/parser-babylon.js' {
+  declare module.exports: $Exports<'prettier/parser-babylon'>;
 }
-declare module 'prettier/src/parser-flow.js' {
-  declare module.exports: $Exports<'prettier/src/parser-flow'>;
+declare module 'prettier/parser-flow.js' {
+  declare module.exports: $Exports<'prettier/parser-flow'>;
 }
-declare module 'prettier/src/parser-postcss.js' {
-  declare module.exports: $Exports<'prettier/src/parser-postcss'>;
+declare module 'prettier/parser-graphql.js' {
+  declare module.exports: $Exports<'prettier/parser-graphql'>;
 }
-declare module 'prettier/src/parser-typescript.js' {
-  declare module.exports: $Exports<'prettier/src/parser-typescript'>;
+declare module 'prettier/parser-postcss.js' {
+  declare module.exports: $Exports<'prettier/parser-postcss'>;
+}
+declare module 'prettier/parser-typescript.js' {
+  declare module.exports: $Exports<'prettier/parser-typescript'>;
 }

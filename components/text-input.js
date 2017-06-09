@@ -1,4 +1,5 @@
 // @flow
+import type { Element } from 'react';
 import Box from './box';
 import Set from './set';
 import Text, { type TextProps } from './text';
@@ -11,8 +12,9 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,
-  error?: string,
-  label?: string,
+  error?: string | Element<*>,
+  label?: string | Element<*>,
+  maxLength: number, // maxLength must be enforced via UI in React Native
   onChange: (text: string) => void,
 };
 
@@ -22,7 +24,7 @@ const computePlaceholderTextColor = (colors, color) =>
 const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   const {
     color = theme.text.color,
-    error = '',
+    error,
     label,
     onChange,
     size = 0,
@@ -45,11 +47,14 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   return (
     <Box>
       <Set marginBottom={0}>
-        {label && <Text bold size={size}>{label}</Text>}
+        {label &&
+          (typeof label === 'string'
+            ? <Text bold size={size}>{label}</Text>
+            : label)}
         {error &&
-          <Text bold color="danger" size={size}>
-            {error}
-          </Text>}
+          (typeof error === 'string'
+            ? <Text bold color="danger" size={size}>{error}</Text>
+            : error)}
       </Set>
       <Text
         as="input"
