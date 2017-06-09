@@ -1,5 +1,5 @@
-// flow-typed signature: 336a37cc59a5628d581d11f98d1d94ab
-// flow-typed version: ef52b40a4e/jest_v20.x.x/flow_>=v0.33.x
+// flow-typed signature: 4a17c39f87ff2e03571b7c8dd220d801
+// flow-typed version: fd46f49e63/jest_v20.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -210,6 +210,11 @@ type JestExpectType = {
    * specific arguments.
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
+  /**
+   * Use .toHaveBeenLastCalledWith to ensure that a mock function was last called
+   * with specific arguments.
+   */
+  toHaveBeenLastCalledWith(...args: Array<any>): void,
   /**
    * Check that an object has a .length property and it is set to a certain
    * numeric value.

@@ -1,5 +1,5 @@
-// flow-typed signature: 8bc27ef0ed168765f4241cf75bfb2160
-// flow-typed version: d9c17ab8e9/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: 895ed894aed6b279c4bc031efc2e2554
+// flow-typed version: 321cce7f01/rxjs_v5.0.x/flow_>=v0.34.x
 
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
@@ -263,7 +263,7 @@ declare class rxjs$Observable<+T> {
 
   sample(notifier: rxjs$Observable<any>): rxjs$Observable<T>;
 
-  sampleTime(delay: number): rxjs$Observable<T>;
+  sampleTime(delay: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   publishReplay(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): rxjs$ConnectableObservable<T>;
 
@@ -791,5 +791,11 @@ declare module 'rxjs/Subject' {
 declare module 'rxjs/Subscription' {
   declare module.exports: {
     Subscription: typeof rxjs$Subscription
+  }
+}
+
+declare module 'rxjs/testing/TestScheduler' {
+  declare module.exports: {
+    TestScheduler: typeof rxjs$SchedulerClass
   }
 }
