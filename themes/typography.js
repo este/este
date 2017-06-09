@@ -34,7 +34,7 @@ const typography = ({
   fontSizeScale: number | $Keys<typeof scale>,
   lineHeight: number,
 |}) => ({
-  fontSize: (level: number) =>
+  fontSize: (level: number) => {
     const scaleRatio = typeof fontSizeScale === 'string'
       ? scale[fontSizeScale]
       : fontSizeScale;
