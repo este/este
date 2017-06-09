@@ -82,9 +82,7 @@ export type Action =
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
 
 export type Middleware = Array<ReduxMiddleware<State, Action>>;
-export type Reducers = {
-  +[reducer: $Keys<State>]: ReduxReducer<State, Action>,
-};
+export type Reducers = { +[name: $Keys<State>]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
