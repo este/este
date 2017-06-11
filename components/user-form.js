@@ -23,41 +23,30 @@ const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
   const addUser = () => dispatch({ type: 'ADD_USER', form });
   const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
 
-  // najdi prvni key, a...
-  // dat name, at ho muzu najit na focus?
-  // ale stejne nemam instanci, hmm
-  // nejlepsi by bylo, mit to pres error
-  // ale obecne, kazdej element?
-  // hmm, vse je box, neco do boxu?
-
   return (
     <Form onSubmit={addUser}>
       <Set vertical>
         <TextInput
           // Note we are not using name attribute. It's useful probably only for
           // browser auth pre-filling. Also, it's not universal.
-          label="Name"
-          placeholder="Jane Doe"
-          maxLength={100}
-          // universalni, ok
-          // nebo autoFocus? hmm, asi jeste lepsi, tak
           autoFocus={validationErrors && validationErrors.name}
-          value={form.name}
-          onChange={set('name')}
-          width={10}
-          // tohle by slo, ok
-          // error={[validationErrors, 'name']}
           error={<ValidationError prop="name" errors={validationErrors} />}
+          label="Name"
+          maxLength={100}
+          onChange={set('name')}
+          placeholder="Jane Doe"
+          value={form.name}
+          width={10}
         />
         <TextInput
+          autoFocus={validationErrors && validationErrors.email}
+          error={<ValidationError prop="email" errors={validationErrors} />}
           label="Email"
           maxLength={100}
           onChange={set('email')}
           placeholder="jane@doe.com"
           value={form.email}
           width={10}
-          autoFocus={validationErrors && validationErrors.email}
-          error={<ValidationError prop="email" errors={validationErrors} />}
         />
       </Set>
       <Set vertical spaceBetween={0}>
