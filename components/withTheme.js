@@ -16,7 +16,7 @@ export type ThemeContext = { theme: Theme };
 // };
 // TODO: Make higher order component.
 
-const withTheme = (Component: ReactClass<mixed>) => {
+const withTheme = (Component: ReactClass<*>) => {
   Component.contextTypes = {
     ...Component.contextTypes,
     theme: PropTypes.object,

@@ -16,22 +16,27 @@ import type { Observable } from 'rxjs';
 export type Id = string;
 
 export type ValidationError =
-  | { type: 'required' }
+  | { type: 'required' } // Use prop?: 'name' | 'email' for custom messages.
   | { type: 'email' }
   | { type: 'minLength', minLength: number };
 
-export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
+export type ValidationErrors<T> = {
+  [key: $Keys<T>]: ValidationError,
+};
+
+export type AppError = { type: 'insufficientStorage', limit: number };
 
 export type Form<T> = {
   +initial: T,
   +changed: { +[id: Id]: T },
-  +errors: { +[id: Id]: ValidationErrors<T> },
+  +validationErrors: { +[id: Id]: ValidationErrors<T> },
+  +error: { +[id: Id]: AppError },
   // +disabled or pending
 };
 
 export type UserForm = {
   +name: string,
-  +description: string,
+  +email: string,
   +likesCats: boolean,
   +likesDogs: boolean,
   +gender: null | 'male' | 'female' | 'other',
@@ -70,13 +75,14 @@ export type Action =
   | {
       type: 'ADD_USER_ERROR',
       id: Id,
-      validationErrors: ValidationErrors<UserForm>,
+      validationErrors?: ValidationErrors<UserForm>,
+      error?: AppError,
     }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_SUCCESS', user: User }
-  | { type: 'SET_USER_FORM', id: Id, form: UserForm }
+  | { type: 'SET_USER_FORM', id: Id, form: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };

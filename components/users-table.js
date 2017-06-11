@@ -39,9 +39,15 @@ const Form = ({ data, changed, field, selected, dispatch }) => {
       form: null,
     });
   };
-  const onNameKeyPress = (e: KeyboardEvent) => {
-    if (e.key !== 'Enter') return;
-    saveUser();
+  const onNameKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'Enter':
+        saveUser();
+        break;
+      case 'Escape':
+        cancelEditation();
+        break;
+    }
   };
 
   switch (field) {
@@ -63,7 +69,7 @@ const Form = ({ data, changed, field, selected, dispatch }) => {
           borderStyle="solid"
           maxLength={100}
           onChange={set('name')}
-          onKeyPress={onNameKeyPress}
+          onKeyDown={onNameKeyDown}
           value={user[field]}
           width={10}
         />

@@ -1,5 +1,6 @@
 // @flow
 import type { State, Dispatch } from '../types';
+import AppError from '../components/app-error';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
 import Form from '../components/form';
@@ -10,7 +11,7 @@ import ValidationError from '../components/validation-error';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
 
-const UserForm = ({ id, form, errors, dispatch }) => {
+const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
   // For some reason, prop must be string for 100% Flow coverage.
   const set = (prop: string) => value => {
     dispatch({
@@ -22,6 +23,13 @@ const UserForm = ({ id, form, errors, dispatch }) => {
   const addUser = () => dispatch({ type: 'ADD_USER', form });
   const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
 
+  // najdi prvni key, a...
+  // dat name, at ho muzu najit na focus?
+  // ale stejne nemam instanci, hmm
+  // nejlepsi by bylo, mit to pres error
+  // ale obecne, kazdej element?
+  // hmm, vse je box, neco do boxu?
+
   return (
     <Form onSubmit={addUser}>
       <Set vertical>
@@ -31,19 +39,25 @@ const UserForm = ({ id, form, errors, dispatch }) => {
           label="Name"
           placeholder="Jane Doe"
           maxLength={100}
+          // universalni, ok
+          // nebo autoFocus? hmm, asi jeste lepsi, tak
+          autoFocus={validationErrors && validationErrors.name}
           value={form.name}
           onChange={set('name')}
           width={10}
-          error={<ValidationError prop="name" errors={errors} />}
+          // tohle by slo, ok
+          // error={[validationErrors, 'name']}
+          error={<ValidationError prop="name" errors={validationErrors} />}
         />
         <TextInput
-          label="Description"
+          label="Email"
           maxLength={100}
-          onChange={set('description')}
-          placeholder="..."
-          value={form.description}
+          onChange={set('email')}
+          placeholder="jane@doe.com"
+          value={form.email}
           width={10}
-          error={<ValidationError prop="description" errors={errors} />}
+          autoFocus={validationErrors && validationErrors.email}
+          error={<ValidationError prop="email" errors={validationErrors} />}
         />
       </Set>
       <Set vertical spaceBetween={0}>
@@ -84,6 +98,7 @@ const UserForm = ({ id, form, errors, dispatch }) => {
           labelOnLeft
           color="warning"
           size={1}
+          // focus={validationErrors.wantsKing}
           value={form.wantsKing}
           onChange={set('wantsKing')}
         />
@@ -96,6 +111,7 @@ const UserForm = ({ id, form, errors, dispatch }) => {
           Add 10 random users
         </Button>
       </Set>
+      <AppError error={error} />
     </Form>
   );
 };
@@ -104,8 +120,9 @@ export default connect(
   ({ users: { form } }: State, { id = addFormId }) => ({
     id,
     form: form.changed[id] || form.initial,
-    errors: form.errors[id],
+    validationErrors: form.validationErrors[id],
+    error: form.error[id],
   }),
-  // Trick to inject dispatch type. Flow is both awesome and terrible.
+  // Inject dispatch with its type.
   (dispatch: Dispatch) => ({ dispatch })
 )(UserForm);

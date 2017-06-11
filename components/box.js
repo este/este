@@ -1,9 +1,9 @@
 // @flow
-import type { Children } from 'react';
 import type { Color } from '../themes/types';
 import type { FunctionalComponent } from '../types';
+import Focused from './focused';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type Children } from 'react';
 import withTheme, { type ThemeContext } from './withTheme';
 
 /*
@@ -32,10 +32,12 @@ import withTheme, { type ThemeContext } from './withTheme';
 type MaybeRhythm = number | string;
 
 export type BoxProps = {
+  children?: Children,
+
   as?: string | FunctionalComponent<Object>,
+  autoFocus?: ?Object,
   isReactNative?: boolean,
   style?: Object,
-  children?: Children,
 
   margin?: MaybeRhythm,
   marginHorizontal?: MaybeRhythm,
@@ -177,6 +179,7 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
 const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const {
     as,
+    autoFocus,
     isReactNative,
     style,
 
@@ -305,7 +308,11 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const rhythmBoxStyle = tryToEnsureRhythmViaPaddingCompensation(boxStyle);
 
   const className = renderer.renderRule(() => rhythmBoxStyle);
-  return React.createElement(as || 'div', { ...restProps, className });
+
+  const element = React.createElement(as || 'div', { ...restProps, className });
+
+  if (autoFocus) return <Focused autoFocus={autoFocus}>{element}</Focused>;
+  return element;
 };
 
 Box.contextTypes = {

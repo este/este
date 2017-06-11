@@ -18,9 +18,9 @@ module.exports = {
   rules: {
     'arrow-parens': 0, // Does not work with Flow generic types.
     'comma-dangle': 0, // Because some files are still in ES5.
+    'default-case': 0, // We don't need it with Flow.
     'import/first': 0, // Este sorts by atom/sort lines natural order.
     'import/prefer-default-export': 0, // Actions can have just one action.
-    indent: 0, // Prettier.
     'no-confusing-arrow': 0, // This rule is confusing.
     'no-mixed-operators': 0, // Prettier.
     'no-nested-ternary': 0, // Buggy for functional componenents.
@@ -40,5 +40,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0, // Next.js injects it. Should be default.
     'react/require-default-props': 0, // We don't need it with Flow.
     'template-curly-spacing': 0, // Prettier.
+    curly: 0, // Prettier.
+    indent: 0, // Prettier.
   },
 };
