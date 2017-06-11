@@ -1,16 +1,13 @@
 // @flow
-import type { ValidationErrors } from '../types';
+import type { ValidationError as ValidationErrorType } from '../types';
 import Text, { type TextProps } from './text';
 
 type ValidationErrorProps = TextProps & {
-  errors: ?ValidationErrors<*>,
-  prop: string,
+  error: ?ValidationErrorType,
 };
 
 const ValidationError = (props: ValidationErrorProps) => {
-  const { errors, prop, bold = true, color = 'danger', ...restProps } = props;
-  if (!errors) return null;
-  const error = errors[prop];
+  const { error, bold = true, color = 'danger', ...restProps } = props;
   if (!error) return null;
 
   // TODO: Return translated message only by error.

@@ -11,7 +11,7 @@ import ValidationError from '../components/validation-error';
 import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
 
-const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
+const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
   // For some reason, prop must be string for 100% Flow coverage.
   const set = (prop: string) => value => {
     dispatch({
@@ -29,8 +29,8 @@ const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
         <TextInput
           // Note we are not using name attribute. It's useful probably only for
           // browser auth pre-filling. Also, name prop is not universal.
-          autoFocus={validationErrors && validationErrors.name}
-          error={<ValidationError prop="name" errors={validationErrors} />}
+          autoFocus={validationErrors.name}
+          error={<ValidationError error={validationErrors.name} />}
           label="Name"
           maxLength={100}
           onChange={set('name')}
@@ -39,8 +39,8 @@ const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
           width={10}
         />
         <TextInput
-          autoFocus={validationErrors && validationErrors.email}
-          error={<ValidationError prop="email" errors={validationErrors} />}
+          autoFocus={validationErrors.email}
+          error={<ValidationError error={validationErrors.email} />}
           label="Email"
           maxLength={100}
           onChange={set('email')}
