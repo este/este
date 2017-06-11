@@ -28,7 +28,7 @@ const UserForm = ({ id, form, validationErrors, error, dispatch }) => {
       <Set vertical>
         <TextInput
           // Note we are not using name attribute. It's useful probably only for
-          // browser auth pre-filling. Also, it's not universal.
+          // browser auth pre-filling. Also, name prop is not universal.
           autoFocus={validationErrors && validationErrors.name}
           error={<ValidationError prop="name" errors={validationErrors} />}
           label="Name"

@@ -1,7 +1,7 @@
 // @flow
 import type { Color } from '../themes/types';
 import type { FunctionalComponent } from '../types';
-import Focused from './focused';
+import AutoFocus from './auto-focus';
 import PropTypes from 'prop-types';
 import React, { type Children } from 'react';
 import withTheme, { type ThemeContext } from './withTheme';
@@ -311,7 +311,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
 
   const element = React.createElement(as || 'div', { ...restProps, className });
 
-  if (autoFocus) return <Focused autoFocus={autoFocus}>{element}</Focused>;
+  if (autoFocus) return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
 };
 

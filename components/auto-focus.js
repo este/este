@@ -2,30 +2,28 @@
 import React, { type Element } from 'react';
 import ReactDOM from 'react-dom';
 
-// Declarative (and soon universal) component focus.
-// Stateful helper for Box to avoid stateful Box.
+// Declarative (and soon universal) focus.
 // https://twitter.com/estejs/status/873650760420085760
 
-type FocusedProps = {
-  autoFocus?: ?Object,
+type AutoFocusProps = {
+  autoFocus?: any,
   children: Element<*>,
 };
 
-class Focused extends React.Component {
-  // autoFocus doesn't always work. This helps.
+class AutoFocus extends React.Component {
   componentDidMount() {
     this.focus();
   }
 
-  componentDidUpdate(prevProps: FocusedProps) {
-    // Focus element only on autoFocus change. Yep, the trick is autoFocus
-    // must be unique value per form submit.
+  componentDidUpdate(prevProps: AutoFocusProps) {
+    // Refocus after new validation. For example:
+    // autoFocus={validationErrors && validationErrors.name}
     const autoFocusChanged = prevProps.autoFocus !== this.props.autoFocus;
     if (!autoFocusChanged) return;
     this.focus();
   }
 
-  props: FocusedProps;
+  props: AutoFocusProps;
 
   focus() {
     // eslint-disable-next-line react/no-find-dom-node
@@ -40,4 +38,4 @@ class Focused extends React.Component {
   }
 }
 
-export default Focused;
+export default AutoFocus;
