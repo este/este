@@ -16,7 +16,7 @@ import type { Observable } from 'rxjs';
 export type Id = string;
 
 export type ValidationError =
-  | { type: 'required' } // Use prop?: 'name' | 'email' for custom messages.
+  | { type: 'required', prop?: 'agree' } // Use prop for custom messages.
   | { type: 'email' }
   | { type: 'minLength', minLength: number };
 
@@ -40,7 +40,7 @@ export type UserForm = {
   +likesCats: boolean,
   +likesDogs: boolean,
   +gender: null | 'male' | 'female' | 'other',
-  +wantsKing: boolean,
+  +isAnarchist: boolean,
 };
 
 export type User = UserForm & {

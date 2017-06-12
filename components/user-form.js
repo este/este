@@ -52,45 +52,46 @@ const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
       <Set vertical spaceBetween={0}>
         <Checkbox
           label="Likes cats"
-          value={form.likesCats}
           onChange={set('likesCats')}
+          value={form.likesCats}
         />
         <Checkbox
           label="Likes dogs"
-          value={form.likesDogs}
           onChange={set('likesDogs')}
+          value={form.likesDogs}
         />
       </Set>
       <Set>
         <Radio
           label="Female"
+          onChange={set('gender')}
           select="female"
           value={form.gender}
-          onChange={set('gender')}
         />
         <Radio
           label="Male"
+          onChange={set('gender')}
           select="male"
           value={form.gender}
-          onChange={set('gender')}
         />
         <Radio
           label="Other"
+          onChange={set('gender')}
           select="other"
           value={form.gender}
-          onChange={set('gender')}
         />
       </Set>
-      <Set>
+      <Set vertical>
         <Checkbox
-          label="Do we need a king?"
-          labelOnLeft
+          autoFocus={validationErrors.isAnarchist}
           color="warning"
+          label="I agree we don't need a king"
+          labelOnLeft
+          onChange={set('isAnarchist')}
           size={1}
-          // focus={validationErrors.wantsKing}
-          value={form.wantsKing}
-          onChange={set('wantsKing')}
+          value={form.isAnarchist}
         />
+        <ValidationError error={validationErrors.isAnarchist} />
       </Set>
       <Set>
         <Button primary onPress={addUser}>
