@@ -12,7 +12,11 @@ const AppError = (props: AppErrorProps) => {
 
   // TODO: Return translated message.
   const msg = JSON.stringify(error);
-  return <Text bold={bold} color={color} {...restProps}>{msg}</Text>;
+  return (
+    <Text autoFocus={error} bold={bold} color={color} {...restProps}>
+      {msg}
+    </Text>
+  );
 };
 
 export default AppError;

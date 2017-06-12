@@ -10,30 +10,33 @@ import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { Provider as FelaProvider } from 'react-fela';
 import { getRenderer, getMountNode } from '../lib/fela';
 
+if (process.browser) {
+  // eslint-disable-next-line global-require
+  require('smoothscroll-polyfill').polyfill();
+}
+
 // App composition root.
-// blog.ploeh.dk/2011/07/28/CompositionRoot
+// http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform probably via app.ios.js and app.android.js
 
+type ApolloClient = any;
+
+const platformDependencies = {
+  createUuid: uuid.v4,
+};
+
 const singletonOnClient = (create: Function) => {
-  // $FlowFixMe Add process.browser to app.js.flow somehow.
-  const isServer = !process.browser;
   let singleton;
   return (...args) => {
-    if (isServer) return create(...args);
+    if (!process.browser) return create(...args);
     if (!singleton) singleton = create(...args);
     return singleton;
   };
 };
 
-type ApolloClient = any;
-
 const getApolloClient: () => ApolloClient = singletonOnClient(() =>
   createApolloClient(GRAPHQL_ENDPOINT)
 );
-
-const platformDependencies = {
-  createUuid: uuid.v4,
-};
 
 const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
   const platformReducers = { apollo: apolloClient.reducer() };

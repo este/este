@@ -29,8 +29,12 @@ class AutoFocus extends React.Component {
     // eslint-disable-next-line react/no-find-dom-node
     const el = ReactDOM.findDOMNode(this);
     if (!el) return;
-    if (typeof el.focus !== 'function') return;
-    el.focus();
+    const focusable = el.tagName === 'INPUT' || el.tagName === 'BUTTON';
+    if (focusable && typeof el.focus === 'function') {
+      el.focus();
+    } else if (typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   render() {
