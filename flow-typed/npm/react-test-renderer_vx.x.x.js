@@ -1,4 +1,4 @@
-// flow-typed signature: 786a802d84fd2ae7262ed98ca06ecebe
+// flow-typed signature: 24747785f0d19bee180c39b1aed7a72f
 // flow-typed version: <<STUB>>/react-test-renderer_v^15.4.2/flow_v0.48.0
 
 /**
@@ -95,6 +95,10 @@ declare module 'react-test-renderer/lib/isTextInputElement' {
 }
 
 declare module 'react-test-renderer/lib/KeyEscapeUtils' {
+  declare module.exports: any;
+}
+
+declare module 'react-test-renderer/lib/lowPriorityWarning' {
   declare module.exports: any;
 }
 
@@ -498,6 +502,10 @@ declare module 'react-test-renderer/lib/shallow/HTMLDOMPropertyConfig' {
   declare module.exports: any;
 }
 
+declare module 'react-test-renderer/lib/shallow/inputValueTracking' {
+  declare module.exports: any;
+}
+
 declare module 'react-test-renderer/lib/shallow/instantiateReactComponent' {
   declare module.exports: any;
 }
@@ -515,6 +523,10 @@ declare module 'react-test-renderer/lib/shallow/KeyEscapeUtils' {
 }
 
 declare module 'react-test-renderer/lib/shallow/LinkedValueUtils' {
+  declare module.exports: any;
+}
+
+declare module 'react-test-renderer/lib/shallow/lowPriorityWarning' {
   declare module.exports: any;
 }
 
@@ -1074,6 +1086,9 @@ declare module 'react-test-renderer/lib/isTextInputElement.js' {
 declare module 'react-test-renderer/lib/KeyEscapeUtils.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/KeyEscapeUtils'>;
 }
+declare module 'react-test-renderer/lib/lowPriorityWarning.js' {
+  declare module.exports: $Exports<'react-test-renderer/lib/lowPriorityWarning'>;
+}
 declare module 'react-test-renderer/lib/PluginModuleType.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/PluginModuleType'>;
 }
@@ -1374,6 +1389,9 @@ declare module 'react-test-renderer/lib/shallow/getVendorPrefixedEventName.js' {
 declare module 'react-test-renderer/lib/shallow/HTMLDOMPropertyConfig.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/shallow/HTMLDOMPropertyConfig'>;
 }
+declare module 'react-test-renderer/lib/shallow/inputValueTracking.js' {
+  declare module.exports: $Exports<'react-test-renderer/lib/shallow/inputValueTracking'>;
+}
 declare module 'react-test-renderer/lib/shallow/instantiateReactComponent.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/shallow/instantiateReactComponent'>;
 }
@@ -1388,6 +1406,9 @@ declare module 'react-test-renderer/lib/shallow/KeyEscapeUtils.js' {
 }
 declare module 'react-test-renderer/lib/shallow/LinkedValueUtils.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/shallow/LinkedValueUtils'>;
+}
+declare module 'react-test-renderer/lib/shallow/lowPriorityWarning.js' {
+  declare module.exports: $Exports<'react-test-renderer/lib/shallow/lowPriorityWarning'>;
 }
 declare module 'react-test-renderer/lib/shallow/PluginModuleType.js' {
   declare module.exports: $Exports<'react-test-renderer/lib/shallow/PluginModuleType'>;

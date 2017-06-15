@@ -1,4 +1,4 @@
-// flow-typed signature: 6d4f68ccfebee5f2cb15c54bed464b65
+// flow-typed signature: dbc8c84a69db366ae09e77c437d54c54
 // flow-typed version: <<STUB>>/auth0-lock_v^10.14.0/flow_v0.48.0
 
 /**
@@ -27,6 +27,10 @@ declare module 'auth0-lock/lib/__tests__/auth_button' {
 }
 
 declare module 'auth0-lock/lib/__tests__/core/tenant' {
+  declare module.exports: any;
+}
+
+declare module 'auth0-lock/lib/__tests__/core/web_api/helper' {
   declare module.exports: any;
 }
 
@@ -95,6 +99,10 @@ declare module 'auth0-lock/lib/__tests__/field/vcode_pane' {
 }
 
 declare module 'auth0-lock/lib/__tests__/testUtils' {
+  declare module.exports: any;
+}
+
+declare module 'auth0-lock/lib/__tests__/ui/box/global_message' {
   declare module.exports: any;
 }
 
@@ -657,6 +665,9 @@ declare module 'auth0-lock/lib/__tests__/auth_button.js' {
 declare module 'auth0-lock/lib/__tests__/core/tenant.js' {
   declare module.exports: $Exports<'auth0-lock/lib/__tests__/core/tenant'>;
 }
+declare module 'auth0-lock/lib/__tests__/core/web_api/helper.js' {
+  declare module.exports: $Exports<'auth0-lock/lib/__tests__/core/web_api/helper'>;
+}
 declare module 'auth0-lock/lib/__tests__/core/web_api/legacy_api.js' {
   declare module.exports: $Exports<'auth0-lock/lib/__tests__/core/web_api/legacy_api'>;
 }
@@ -707,6 +718,9 @@ declare module 'auth0-lock/lib/__tests__/field/vcode_pane.js' {
 }
 declare module 'auth0-lock/lib/__tests__/testUtils.js' {
   declare module.exports: $Exports<'auth0-lock/lib/__tests__/testUtils'>;
+}
+declare module 'auth0-lock/lib/__tests__/ui/box/global_message.js' {
+  declare module.exports: $Exports<'auth0-lock/lib/__tests__/ui/box/global_message'>;
 }
 declare module 'auth0-lock/lib/avatar.js' {
   declare module.exports: $Exports<'auth0-lock/lib/avatar'>;
