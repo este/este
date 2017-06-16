@@ -36,6 +36,7 @@ class AutoFocus extends React.Component {
     if (focusable && typeof el.focus === 'function') {
       el.focus();
     } else if (typeof el.scrollIntoView === 'function') {
+      // TODO: Scroll as minimal as possible to ensure visibility only.
       el.scrollIntoView({ behavior: 'smooth' });
     }
   }
