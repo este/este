@@ -11,7 +11,7 @@ import ValidationError from '../components/validation-error';
 import { connect } from 'react-redux';
 import { newFormId } from '../lib/form';
 
-const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
+const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
   // For some reason, prop must be string for 100% Flow coverage.
   const set = (prop: string) => value => {
     dispatch({
@@ -106,7 +106,7 @@ const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
           Add 10 random users
         </Button>
       </Set>
-      <AppError error={error} />
+      <AppError error={appError} />
     </Form>
   );
 };
@@ -115,8 +115,8 @@ export default connect(
   ({ users: { form } }: State, { id = newFormId }) => ({
     id,
     form: form.changed[id] || form.initial,
+    appError: form.appError[id],
     validationErrors: form.validationErrors[id],
-    error: form.error[id],
   }),
   // Inject dispatch with its type.
   (dispatch: Dispatch) => ({ dispatch }),

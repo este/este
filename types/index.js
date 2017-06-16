@@ -1,6 +1,6 @@
 // @flow
 import type { Observable } from 'rxjs';
-import type { ValidationError } from '../lib/validate';
+import type { ValidationErrors } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
   Middleware as ReduxMiddleware,
@@ -18,11 +18,9 @@ export type Id = string;
 
 export type AppError = { type: 'insufficientStorage', limit: number };
 
-export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
-
-export type FormError<Form> = {|
+export type Errors<T> = {|
   appError?: AppError,
-  validationErrors?: ValidationErrors<Form>,
+  validationErrors?: ValidationErrors<T>,
 |};
 
 export type UserForm = {
@@ -43,8 +41,8 @@ export type User = UserForm & {
 export type FormState<T> = {
   +initial: T,
   +changed: { +[id: Id]: T },
+  +appError: { +[id: Id]: AppError },
   +validationErrors: { +[id: Id]: ValidationErrors<T> },
-  +error: { +[id: Id]: AppError },
   // +disabled or pending
 };
 
@@ -71,7 +69,7 @@ export type State = {
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', form: UserForm }
-  | { type: 'ADD_USER_ERROR', id: Id, error: FormError<UserForm> }
+  | { type: 'ADD_USER_ERROR', id: Id, errors: Errors<UserForm> }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
