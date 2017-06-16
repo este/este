@@ -8,8 +8,8 @@ import Radio from '../components/radio';
 import Set from '../components/set';
 import TextInput from '../components/text-input';
 import ValidationError from '../components/validation-error';
-import { addFormId } from '../lib/form';
 import { connect } from 'react-redux';
+import { newFormId } from '../lib/form';
 
 const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
   // For some reason, prop must be string for 100% Flow coverage.
@@ -23,16 +23,22 @@ const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
   const addUser = () => dispatch({ type: 'ADD_USER', form });
   const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
 
+  // That's how we can render validation error immediately.
+  const nameMaxLengthValidationError = null;
+
   return (
     <Form onSubmit={addUser}>
       <Set vertical>
         <TextInput
-          // Note we are not using name attribute. It's useful probably only for
-          // browser auth pre-filling. Also, name prop is not universal.
+          // Note we are not using name attribute. It's useful probably only
+          // for browser signIn form prefill.
           autoFocus={validationErrors.name}
-          error={<ValidationError error={validationErrors.name} />}
+          error={
+            <ValidationError
+              error={nameMaxLengthValidationError || validationErrors.name}
+            />
+          }
           label="Name"
-          maxLength={100}
           onChange={set('name')}
           placeholder="Jane Doe"
           value={form.name}
@@ -42,7 +48,6 @@ const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
           autoFocus={validationErrors.email}
           error={<ValidationError error={validationErrors.email} />}
           label="Email"
-          maxLength={100}
           onChange={set('email')}
           placeholder="jane@doe.com"
           value={form.email}
@@ -107,7 +112,7 @@ const UserForm = ({ id, form, validationErrors = {}, error, dispatch }) => {
 };
 
 export default connect(
-  ({ users: { form } }: State, { id = addFormId }) => ({
+  ({ users: { form } }: State, { id = newFormId }) => ({
     id,
     form: form.changed[id] || form.initial,
     validationErrors: form.validationErrors[id],

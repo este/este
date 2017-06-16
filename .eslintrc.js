@@ -9,6 +9,7 @@ module.exports = {
     // Flow
     $Exact: true,
     $Keys: true,
+    $PropertyType: true,
     Event: true,
     EventHandler: true,
     KeyboardEvent: true,
@@ -21,10 +22,12 @@ module.exports = {
     'default-case': 0, // We don't need it with Flow.
     'import/first': 0, // Este sorts by atom/sort lines natural order.
     'import/prefer-default-export': 0, // Actions can have just one action.
+    'guard-for-in': 0, // It's not a bug, it's a feature.
     'no-confusing-arrow': 0, // This rule is confusing.
     'no-mixed-operators': 0, // Prettier.
     'no-nested-ternary': 0, // Buggy for functional componenents.
     'no-param-reassign': 0, // We love param reassignment. Naming is hard.
+    'no-restricted-syntax': 0, // Not needed with modern browsers.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
     'no-underscore-dangle': 0, // Control freaky.
     'react/jsx-boolean-value': 0, // Control freaky.

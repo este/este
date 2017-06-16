@@ -1,5 +1,5 @@
 // @flow
-import type { ValidationError as ValidationErrorType } from '../types';
+import type { ValidationError as ValidationErrorType } from '../lib/validate';
 import Text, { type TextProps } from './text';
 
 type ValidationErrorProps = TextProps & {

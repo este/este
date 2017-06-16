@@ -1,38 +1,29 @@
 // @flow
+import type { Observable } from 'rxjs';
+import type { ValidationError } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
   Middleware as ReduxMiddleware,
   Reducer as ReduxReducer,
   Store as ReduxStore,
 } from 'redux';
-import type { Observable } from 'rxjs';
 
 // Algebraic data types make domain modelling easy.
-// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types/
+// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 // Redux state is meant to be immutable.
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
 // TODO: Exact state, once Flow fixes spread on exact types.
 
 export type Id = string;
 
-export type ValidationError =
-  | { type: 'required', prop?: 'agree' } // Use prop for custom messages.
-  | { type: 'email' }
-  | { type: 'minLength', minLength: number };
-
-export type ValidationErrors<T> = {
-  [key: $Keys<T>]: ValidationError,
-};
-
 export type AppError = { type: 'insufficientStorage', limit: number };
 
-export type Form<T> = {
-  +initial: T,
-  +changed: { +[id: Id]: T },
-  +validationErrors: { +[id: Id]: ValidationErrors<T> },
-  +error: { +[id: Id]: AppError },
-  // +disabled or pending
-};
+export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
+
+export type FormError<Form> = {|
+  appError?: AppError,
+  validationErrors?: ValidationErrors<Form>,
+|};
 
 export type UserForm = {
   +name: string,
@@ -49,6 +40,14 @@ export type User = UserForm & {
   +updatedAt: number,
 };
 
+export type FormState<T> = {
+  +initial: T,
+  +changed: { +[id: Id]: T },
+  +validationErrors: { +[id: Id]: ValidationErrors<T> },
+  +error: { +[id: Id]: AppError },
+  // +disabled or pending
+};
+
 export type ConfigState = {
   +baselineShown: boolean,
   +darkEnabled: boolean,
@@ -57,7 +56,7 @@ export type ConfigState = {
 };
 
 export type UsersState = {
-  +form: Form<UserForm>,
+  +form: FormState<UserForm>,
   +local: { +[id: Id]: User },
   +selected: { +[id: Id]: true },
 };
@@ -72,12 +71,7 @@ export type State = {
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', form: UserForm }
-  | {
-      type: 'ADD_USER_ERROR',
-      id: Id,
-      validationErrors?: ValidationErrors<UserForm>,
-      error?: AppError,
-    }
+  | { type: 'ADD_USER_ERROR', id: Id, error: FormError<UserForm> }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
@@ -99,7 +93,6 @@ export type PlatformDependencies = {
 export type Dependencies = PlatformDependencies & {
   getState: () => State,
   getNow: () => number,
-  // validate: (json: Object) => any,
 };
 
 // TODO: There are no redux-observable flow definitions yet. Therefore, we have
