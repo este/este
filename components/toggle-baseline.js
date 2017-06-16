@@ -17,7 +17,7 @@ const ToggleBaseline = ({ baselineShown, dispatch }) =>
 
 export default connect(
   (state: State) => ({
-    baselineShown: state.config.baselineShown,
+    baselineShown: state.app.baselineShown,
   }),
   (dispatch: Dispatch) => ({ dispatch }),
 )(ToggleBaseline);

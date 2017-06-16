@@ -16,8 +16,12 @@ import type {
 
 export type Id = string;
 
-export type AppError = { type: 'insufficientStorage', limit: number };
+// just some examples
+export type AppError =
+  | { type: 'insufficientStorage', limit: number }
+  | { type: 'xhrError' };
 
+// We need to define all possible errors per anything.
 export type Errors<T> = {|
   appError?: AppError,
   validationErrors?: ValidationErrors<T>,
@@ -46,7 +50,7 @@ export type FormState<T> = {
   // +disabled or pending
 };
 
-export type ConfigState = {
+export type AppState = {
   +baselineShown: boolean,
   +darkEnabled: boolean,
   +name: string,
@@ -61,7 +65,7 @@ export type UsersState = {
 
 export type State = {
   +apollo: Object,
-  +config: ConfigState,
+  +app: AppState,
   +users: UsersState,
 };
 
