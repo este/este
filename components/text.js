@@ -27,7 +27,7 @@ export type TextProps = BoxProps & {
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 export const computeFontSizeAndLineHeight = (
   { typography }: Theme,
-  size: number
+  size: number,
 ) => {
   const fontSize = typography.fontSize(size);
   const lines = Math.ceil(fontSize / typography.lineHeight);

@@ -19,5 +19,5 @@ export default connect(
   (state: State) => ({
     baselineShown: state.config.baselineShown,
   }),
-  (dispatch: Dispatch) => ({ dispatch })
+  (dispatch: Dispatch) => ({ dispatch }),
 )(ToggleBaseline);

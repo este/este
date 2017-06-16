@@ -35,7 +35,7 @@ const singletonOnClient = (create: Function) => {
 };
 
 const getApolloClient: () => ApolloClient = singletonOnClient(() =>
-  createApolloClient(GRAPHQL_ENDPOINT)
+  createApolloClient(GRAPHQL_ENDPOINT),
 );
 
 const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {

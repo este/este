@@ -22,7 +22,7 @@ const Checkbox = (
     size,
     ...props
   }: CheckboxProps,
-  { theme }: ThemeContext
+  { theme }: ThemeContext,
 ) => {
   const {
     marginVertical = 0,

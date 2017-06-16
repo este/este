@@ -1,8 +1,6 @@
 // @flow
 const { execSync } = require('child_process');
 
-// We need script to get commitSha for app/version.
-
 let commitSha = 'dev';
 
 try {

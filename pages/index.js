@@ -24,7 +24,7 @@ const onButtonPress = [
     ...buttons,
     [name]: () => console.log(name), // eslint-disable-line no-console
   }),
-  {}
+  {},
 );
 
 const Index = () =>

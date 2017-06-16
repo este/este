@@ -101,10 +101,10 @@ export type Dependencies = PlatformDependencies & {
 // https://github.com/redux-observable/redux-observable/issues/258
 export type Epic = (
   actions$: Observable<Action>,
-  dependencies: Dependencies
+  dependencies: Dependencies,
 ) => Observable<Action>;
 
 export type FunctionalComponent<P> = (
   props: P,
-  context: any
+  context: any,
 ) => ?React$Element<any>;

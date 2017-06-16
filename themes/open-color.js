@@ -315,7 +315,7 @@ const openColorOriginal = {
 
 // I don't know why, but "| any" is required.
 const openColor: OpenColor | any = Object.keys(
-  openColorOriginal
+  openColorOriginal,
 ).reduce((flatten, colorName) => {
   const values = openColorOriginal[colorName];
   if (typeof values === 'string') {
@@ -326,7 +326,7 @@ const openColor: OpenColor | any = Object.keys(
       ...values,
       [colorName + i]: colorValue,
     }),
-    {}
+    {},
   );
   return { ...flatten, ...colors };
 }, {});

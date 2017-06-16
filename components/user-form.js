@@ -119,5 +119,5 @@ export default connect(
     error: form.error[id],
   }),
   // Inject dispatch with its type.
-  (dispatch: Dispatch) => ({ dispatch })
+  (dispatch: Dispatch) => ({ dispatch }),
 )(UserForm);

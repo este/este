@@ -24,7 +24,7 @@ const Radio = (
     size,
     ...props
   }: RadioProps,
-  { theme }: ThemeContext
+  { theme }: ThemeContext,
 ) => {
   const {
     marginVertical = 0,

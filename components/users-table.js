@@ -120,7 +120,7 @@ const ConnectedForm = connect(
     changed: users.form.changed[data.id],
     selected: users.selected[data.id],
   }),
-  (dispatch: Dispatch) => ({ dispatch })
+  (dispatch: Dispatch) => ({ dispatch }),
 )(Form);
 
 const DeleteSelected = ({ selected, dispatch }) =>
@@ -139,7 +139,7 @@ const ConnectedDeleteSelected = connect(
   ({ users }: State) => ({
     selected: users.selected,
   }),
-  (dispatch: Dispatch) => ({ dispatch })
+  (dispatch: Dispatch) => ({ dispatch }),
 )(DeleteSelected);
 
 const ToggleUsersSelection = ({ selected, users, dispatch }) =>
@@ -154,7 +154,7 @@ const ConnectedToggleUsersSelection = connect(
   ({ users }: State) => ({
     selected: users.selected,
   }),
-  (dispatch: Dispatch) => ({ dispatch })
+  (dispatch: Dispatch) => ({ dispatch }),
 )(ToggleUsersSelection);
 
 const Column = ({ header, field, users }) =>
@@ -167,7 +167,7 @@ const Column = ({ header, field, users }) =>
     {users.map(user =>
       <Box height={2} paddingVertical={0.5} key={user.id}>
         <ConnectedForm field={field} data={user} />
-      </Box>
+      </Box>,
     )}
   </Box>;
 
@@ -217,5 +217,5 @@ const UsersTable = ({ users }) => {
 };
 
 export default connect(({ users }: State) => ({ users: users.local }))(
-  UsersTable
+  UsersTable,
 );

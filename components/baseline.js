@@ -37,7 +37,7 @@ const styles = {
 
 const Baseline = (
   { baselineShown, children }: BaselineProps,
-  { theme }: BaselineContext
+  { theme }: BaselineContext,
 ) =>
   <div style={styles.container}>
     {children}

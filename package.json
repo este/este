@@ -9,7 +9,7 @@
     "build": "rimraf node_modules/.cache/babel-loader && next build",
     "start": "next start",
     "flow": "flow",
-    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma es5 --parser babylon --print-width 80  --write \"{{components,lib,pages,scripts,themes},__{tests,mocks}__}/**/*.js\"",
+    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,lib,pages,scripts,themes,types},__{tests,mocks}__}/**/*.js\"",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "test": "flow && jest && next build",
