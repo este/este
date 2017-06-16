@@ -30,7 +30,7 @@
     "graphql-tag": "^2.2.0",
     "isomorphic-fetch": "^2.2.1",
     "localforage": "^1.5.0",
-    "next": "^3.0.0-beta14",
+    "next": "^3.0.0-beta15",
     "nprogress": "^0.2.0",
     "prop-types": "^15.5.9",
     "ramda": "^0.24.1",
