@@ -2321,7 +2321,7 @@ glob-promise@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-3.1.0.tgz#198882a3817be7dc2c55f92623aa9e7b3f82d1eb"
 
-glob@7.1.1:
+glob@7.1.1, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
   dependencies:
@@ -2339,17 +2339,6 @@ glob@^6.0.1:
     inflight "^1.0.4"
     inherits "2"
     minimatch "2 || 3"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
-  dependencies:
-    fs.realpath "^1.0.0"
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "^3.0.4"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
@@ -2384,8 +2373,8 @@ graphql-anywhere@^3.0.0, graphql-anywhere@^3.0.1:
   resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-3.1.0.tgz#3ea0d8e8646b5cee68035016a9a7557c15c21e96"
 
 graphql-tag@^2.0.0, graphql-tag@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.3.0.tgz#b3e528f7ab9af865512d7fe15384e67c1386a3ca"
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.4.0.tgz#0fe137348d4db2efaf29b52ba4c1cbf84ac138cb"
 
 graphql@^0.10.0, graphql@^0.10.1:
   version "0.10.1"
@@ -3455,7 +3444,7 @@ minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
 
-"minimatch@2 || 3", minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.3, minimatch@^3.0.4:
+"minimatch@2 || 3", minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.3:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
@@ -3530,7 +3519,7 @@ ncp@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
 
-next@^3.0.0-beta15:
+next@^3.0.0-beta16:
   version "3.0.0-beta9"
   resolved "https://registry.yarnpkg.com/next/-/next-3.0.0-beta9.tgz#313cb7a8bbc114019464938399910c1abd893ef4"
   dependencies:
@@ -3979,8 +3968,8 @@ progress@^1.1.8:
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
 promise@^7.0.1, promise@^7.0.3, promise@^7.1.1:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/promise/-/promise-7.2.0.tgz#67075a5fc537b39d66b87cdeb3732cf75867dbe2"
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.0.tgz#e7feec5aa87a2cbb81acf47d9a3adbd9d4642d7b"
   dependencies:
     asap "~2.0.3"
 
@@ -4982,9 +4971,13 @@ util@0.10.3, util@^0.10.3:
   dependencies:
     inherits "2.0.1"
 
-uuid@3.0.1, uuid@^3.0.0, uuid@^3.0.1:
+uuid@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
+
+uuid@^3.0.0, uuid@^3.0.1:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
