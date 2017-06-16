@@ -14,7 +14,6 @@ export type TextInputProps = TextProps & {
   disabled?: boolean,
   error?: string | Element<*>,
   label?: string | Element<*>,
-  maxLength: number, // maxLength must be enforced via UI in React Native
   onChange: (text: string) => void,
 };
 
