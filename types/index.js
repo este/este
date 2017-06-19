@@ -47,7 +47,7 @@ export type FormState<T> = {
   +changed: { +[id: Id]: T },
   +appError: { +[id: Id]: AppError },
   +validationErrors: { +[id: Id]: ValidationErrors<T> },
-  // +disabled or pending
+  +disabled: { +[id: Id]: true },
 };
 
 export type AppState = {

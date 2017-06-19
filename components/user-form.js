@@ -11,7 +11,14 @@ import ValidationError from '../components/validation-error';
 import { connect } from 'react-redux';
 import { newFormId } from '../lib/form';
 
-const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
+const UserForm = ({
+  id,
+  form,
+  appError,
+  validationErrors = {},
+  disabled,
+  dispatch,
+}) => {
   // For some reason, prop must be string for 100% Flow coverage.
   const set = (prop: string) => value => {
     dispatch({
@@ -23,9 +30,6 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
   const addUser = () => dispatch({ type: 'ADD_USER', form });
   const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
 
-  // That's how we can render validation error immediately.
-  const nameMaxLengthValidationError = null;
-
   return (
     <Form onSubmit={addUser}>
       <Set vertical>
@@ -33,11 +37,8 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
           // Note we are not using name attribute. It's useful probably only
           // for browser signIn form prefill.
           autoFocus={validationErrors.name}
-          error={
-            <ValidationError
-              error={nameMaxLengthValidationError || validationErrors.name}
-            />
-          }
+          disabled={disabled}
+          error={<ValidationError error={validationErrors.name} />}
           label="Name"
           onChange={set('name')}
           placeholder="Jane Doe"
@@ -46,6 +47,7 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
         />
         <TextInput
           autoFocus={validationErrors.email}
+          disabled={disabled}
           error={<ValidationError error={validationErrors.email} />}
           label="Email"
           onChange={set('email')}
@@ -56,11 +58,13 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
       </Set>
       <Set vertical spaceBetween={0}>
         <Checkbox
+          disabled={disabled}
           label="Likes cats"
           onChange={set('likesCats')}
           value={form.likesCats}
         />
         <Checkbox
+          disabled={disabled}
           label="Likes dogs"
           onChange={set('likesDogs')}
           value={form.likesDogs}
@@ -68,18 +72,21 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
       </Set>
       <Set>
         <Radio
+          disabled={disabled}
           label="Female"
           onChange={set('gender')}
           select="female"
           value={form.gender}
         />
         <Radio
+          disabled={disabled}
           label="Male"
           onChange={set('gender')}
           select="male"
           value={form.gender}
         />
         <Radio
+          disabled={disabled}
           label="Other"
           onChange={set('gender')}
           select="other"
@@ -90,6 +97,7 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
         <Checkbox
           autoFocus={validationErrors.isAnarchist}
           color="warning"
+          disabled={disabled}
           label="I agree we don't need a king"
           labelOnLeft
           onChange={set('isAnarchist')}
@@ -99,10 +107,10 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
         <ValidationError error={validationErrors.isAnarchist} />
       </Set>
       <Set>
-        <Button primary onPress={addUser}>
+        <Button primary onPress={addUser} disabled={disabled}>
           Add
         </Button>
-        <Button primary onPress={add10RandomUsers}>
+        <Button primary onPress={add10RandomUsers} disabled={disabled}>
           Add 10 random users
         </Button>
       </Set>
@@ -111,12 +119,14 @@ const UserForm = ({ id, form, appError, validationErrors = {}, dispatch }) => {
   );
 };
 
+// connectForm?
 export default connect(
   ({ users: { form } }: State, { id = newFormId }) => ({
     id,
     form: form.changed[id] || form.initial,
     appError: form.appError[id],
     validationErrors: form.validationErrors[id],
+    disabled: form.disabled[id],
   }),
   // Inject dispatch with its type.
   (dispatch: Dispatch) => ({ dispatch }),
