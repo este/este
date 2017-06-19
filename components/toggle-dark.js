@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 
 // Toggle dark mode.
 
-const ToggleDark = ({ darkEnabled, dispatch }) =>
+type ToggleDarkProps = {
+  darkEnabled: *,
+  dispatch: Dispatch,
+};
+
+const ToggleDark = ({ darkEnabled, dispatch }: ToggleDarkProps) =>
   <Button
     primary
     outline
@@ -15,9 +20,6 @@ const ToggleDark = ({ darkEnabled, dispatch }) =>
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
   </Button>;
 
-export default connect(
-  (state: State) => ({
-    darkEnabled: state.app.darkEnabled,
-  }),
-  (dispatch: Dispatch) => ({ dispatch }),
-)(ToggleDark);
+export default connect((state: State) => ({
+  darkEnabled: state.app.darkEnabled,
+}))(ToggleDark);

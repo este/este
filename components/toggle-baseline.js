@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 
 // Test vertical rhythm visually. Inspired by basehold.it
 
-const ToggleBaseline = ({ baselineShown, dispatch }) =>
+type ToggleBaselineProps = {
+  baselineShown: *,
+  dispatch: Dispatch,
+};
+
+const ToggleBaseline = ({ baselineShown, dispatch }: ToggleBaselineProps) =>
   <Button
     primary
     outline
@@ -15,9 +20,6 @@ const ToggleBaseline = ({ baselineShown, dispatch }) =>
     {baselineShown ? 'Hide Baseline' : 'Show Baseline'}
   </Button>;
 
-export default connect(
-  (state: State) => ({
-    baselineShown: state.app.baselineShown,
-  }),
-  (dispatch: Dispatch) => ({ dispatch }),
-)(ToggleBaseline);
+export default connect((state: State) => ({
+  baselineShown: state.app.baselineShown,
+}))(ToggleBaseline);

@@ -1,5 +1,10 @@
 // @flow
-import type { State, Dispatch } from '../types';
+import type {
+  State,
+  Dispatch,
+  UserForm as UserFormType,
+  ValidationErrors,
+} from '../types';
 import AppError from '../components/app-error';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
@@ -11,6 +16,15 @@ import ValidationError from '../components/validation-error';
 import { connect } from 'react-redux';
 import { newFormId } from '../lib/form';
 
+type UserFormProps = {
+  id: *,
+  form: UserFormType,
+  appError: *,
+  validationErrors: ValidationErrors<UserFormType>,
+  disabled: *,
+  dispatch: Dispatch,
+};
+
 const UserForm = ({
   id,
   form,
@@ -18,12 +32,12 @@ const UserForm = ({
   validationErrors = {},
   disabled,
   dispatch,
-}) => {
-  // For some reason, prop must be string for 100% Flow coverage.
-  const set = (prop: string) => value => {
+}: UserFormProps) => {
+  const set = (prop: $Keys<UserFormType>) => value => {
     dispatch({
       type: 'SET_USER_FORM',
       id,
+      // $FlowFixMe I don't know how to get value type form prop. PR anyone?
       form: { ...form, [prop]: value },
     });
   };
@@ -120,14 +134,10 @@ const UserForm = ({
 };
 
 // connectForm?
-export default connect(
-  ({ users: { form } }: State, { id = newFormId }) => ({
-    id,
-    form: form.changed[id] || form.initial,
-    appError: form.appError[id],
-    validationErrors: form.validationErrors[id],
-    disabled: form.disabled[id],
-  }),
-  // Inject dispatch with its type.
-  (dispatch: Dispatch) => ({ dispatch }),
-)(UserForm);
+export default connect(({ users: { form } }: State, { id = newFormId }) => ({
+  id,
+  form: form.changed[id] || form.initial,
+  appError: form.appError[id],
+  validationErrors: form.validationErrors[id],
+  disabled: form.disabled[id],
+}))(UserForm);
