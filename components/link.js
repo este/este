@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 
 // Generic link without styles.
 // For texts, use A.
+// Test
 
 type LinkProps = {|
   children?: Children,
