@@ -1,7 +1,8 @@
 // @flow
-import type { State, Dispatch } from '../types';
+import type { State, Dispatch, User, UserForm } from '../types';
 import Box from '../components/box';
 import Button from '../components/button';
+import AlertErrors from '../components/alert-errors';
 import Checkbox from '../components/checkbox';
 import Heading from '../components/heading';
 import P from '../components/p';
@@ -14,30 +15,44 @@ import { connect } from 'react-redux';
 // 1) Do not nest the same redux connect selected states.
 // 2) For huge lists, use react-virtualized.
 
-const Form = ({ data, changed, field, selected, dispatch }) => {
-  const user = { ...data, ...changed };
-  const set = (prop: string) => value => {
+type RowFormProps = {
+  data: *,
+  changed: *,
+  field: 'select' | 'name' | 'likesCats' | 'likesDogs',
+  selected: *,
+  dispatch: Dispatch,
+  appError: *,
+  validationErrors: *,
+  disabled: *,
+};
+
+const RowForm = ({
+  data,
+  changed,
+  field,
+  selected,
+  dispatch,
+  appError,
+  validationErrors,
+  disabled,
+}: RowFormProps) => {
+  const user: User = { ...data, ...changed };
+  const set = (prop: $Keys<UserForm>) => value => {
     dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
+      // $FlowFixMe
       form: { ...user, [prop]: value },
     });
   };
   const toggleUsersSelection = () => {
-    dispatch({
-      type: 'TOGGLE_USERS_SELECTION',
-      users: [user],
-    });
+    dispatch({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
   };
   const saveUser = () => {
     dispatch({ type: 'SAVE_USER', user });
   };
   const cancelEditation = () => {
-    dispatch({
-      type: 'SET_USER_FORM',
-      id: user.id,
-      form: null,
-    });
+    dispatch({ type: 'SET_USER_FORM', id: user.id, form: null });
   };
   const onNameKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
@@ -49,44 +64,51 @@ const Form = ({ data, changed, field, selected, dispatch }) => {
         break;
     }
   };
-
-  switch (field) {
-    case 'select':
-      return (
-        <Checkbox
-          alignItems="center"
-          height={1}
-          opacity={selected ? 1 : 0.25}
-          onChange={toggleUsersSelection}
-          value={selected}
-        />
-      );
-    case 'name':
-      return (
-        <TextInput
-          borderBottomWidth={1}
-          borderColor="gray"
-          borderStyle="solid"
-          maxLength={100}
-          onChange={set('name')}
-          onKeyDown={onNameKeyDown}
-          value={user[field]}
-          width={10}
-        />
-      );
-    case 'likesCats':
-    case 'likesDogs':
-      return (
-        <Checkbox
-          alignItems="center"
-          height={1}
-          onChange={set(field)}
-          value={user[field]}
-        />
-      );
-    case 'saveOnCancel': {
-      if (!changed) return null;
-      return (
+  const renderField = () => {
+    switch (field) {
+      case 'select':
+        return (
+          <Checkbox
+            alignItems="center"
+            height={1}
+            opacity={selected ? 1 : 0.25}
+            onChange={toggleUsersSelection}
+            value={selected}
+            disabled={disabled}
+          />
+        );
+      case 'name':
+        return (
+          <TextInput
+            borderBottomWidth={1}
+            borderColor="gray"
+            borderStyle="solid"
+            maxLength={100}
+            onChange={set('name')}
+            onKeyDown={onNameKeyDown}
+            value={user[field]}
+            width={10}
+            disabled={disabled}
+          />
+        );
+      case 'likesCats':
+      case 'likesDogs':
+        return (
+          <Checkbox
+            alignItems="center"
+            height={1}
+            onChange={set(field)}
+            value={user[field]}
+            disabled={disabled}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+  const renderEditActions = () =>
+    <Box height={1}>
+      {field === 'name' &&
         <Set flexWrap="nowrap">
           <Button
             color="primary"
@@ -95,6 +117,7 @@ const Form = ({ data, changed, field, selected, dispatch }) => {
             marginVertical={0}
             onPress={saveUser}
             paddingHorizontal={0}
+            disabled={disabled}
           >
             save
           </Button>
@@ -104,26 +127,43 @@ const Form = ({ data, changed, field, selected, dispatch }) => {
             marginVertical={0}
             onPress={cancelEditation}
             paddingHorizontal={0}
+            disabled={disabled}
           >
             cancel
           </Button>
-        </Set>
-      );
-    }
-    default:
-      return null;
-  }
+          <AlertErrors
+            appError={appError}
+            validationErrors={validationErrors}
+          />
+        </Set>}
+    </Box>;
+
+  return (
+    <Box>
+      <Box height={2} paddingVertical={0.5}>
+        {renderField()}
+      </Box>
+      {changed && renderEditActions()}
+    </Box>
+  );
 };
 
-const ConnectedForm = connect(
-  ({ users }: State, { data }) => ({
-    changed: users.form.changed[data.id],
-    selected: users.selected[data.id],
+const ConnectedRowForm = connect(
+  ({ users: { form, selected } }: State, { data: { id } }) => ({
+    changed: form.changed[id],
+    selected: selected[id],
+    appError: form.appError[id],
+    validationErrors: form.validationErrors[id],
+    disabled: form.disabled[id],
   }),
-  (dispatch: Dispatch) => ({ dispatch }),
-)(Form);
+)(RowForm);
 
-const DeleteSelected = ({ selected, dispatch }) =>
+type DeleteSelectedProps = {
+  selected: *,
+  dispatch: Dispatch,
+};
+
+const DeleteSelected = ({ selected, dispatch }: DeleteSelectedProps) =>
   <Button
     color="warning"
     disabled={Object.keys(selected).length === 0}
@@ -135,14 +175,21 @@ const DeleteSelected = ({ selected, dispatch }) =>
     Delete Selected
   </Button>;
 
-const ConnectedDeleteSelected = connect(
-  ({ users }: State) => ({
-    selected: users.selected,
-  }),
-  (dispatch: Dispatch) => ({ dispatch }),
-)(DeleteSelected);
+const ConnectedDeleteSelected = connect(({ users }: State) => ({
+  selected: users.selected,
+}))(DeleteSelected);
 
-const ToggleUsersSelection = ({ selected, users, dispatch }) =>
+type ToggleUsersSelectionProps = {
+  selected: *,
+  users: *,
+  dispatch: Dispatch,
+};
+
+const ToggleUsersSelection = ({
+  selected,
+  users,
+  dispatch,
+}: ToggleUsersSelectionProps) =>
   <Checkbox
     alignItems="center"
     opacity={0.25}
@@ -150,12 +197,9 @@ const ToggleUsersSelection = ({ selected, users, dispatch }) =>
     value={users.every(user => selected[user.id])}
   />;
 
-const ConnectedToggleUsersSelection = connect(
-  ({ users }: State) => ({
-    selected: users.selected,
-  }),
-  (dispatch: Dispatch) => ({ dispatch }),
-)(ToggleUsersSelection);
+const ConnectedToggleUsersSelection = connect(({ users }: State) => ({
+  selected: users.selected,
+}))(ToggleUsersSelection);
 
 const Column = ({ header, field, users }) =>
   <Box>
@@ -165,9 +209,7 @@ const Column = ({ header, field, users }) =>
         : header}
     </Box>
     {users.map(user =>
-      <Box height={2} paddingVertical={0.5} key={user.id}>
-        <ConnectedForm field={field} data={user} />
-      </Box>,
+      <ConnectedRowForm field={field} data={user} key={user.id} />,
     )}
   </Box>;
 
@@ -175,10 +217,14 @@ const EmptyTable = () =>
   <Text italic>Some friendly empty table message here...</Text>;
 
 // Yep, this is a table without <table>. The table layout below is created
-// with flexboxes only. React Native (https://facebook.github.io/yoga) does
-// not support table layout, and honestly, I never liked it.
-// Tableless tables allow us to do fancy things easily. For example:
+// with Flexbox only. React Native (https://facebook.github.io/yoga) does
+// not support table layout anyway. Tableless tables allow us to do fancy
+// things. For example:
 // https://bvaughn.github.io/react-virtualized/#/components/Table
+// The only caveat: Row can not have dynamic height. Still it can have reserved
+// rhythm vertical space, for example one ad-hoc line for action buttons.
+// For sophisticated validation errors, we can use some popup Alert component.
+// For mobiles, we have no other choice anyway.
 const UsersTable = ({ users }) => {
   const sortedUsers = Object.keys(users)
     .map(id => users[id])
@@ -209,7 +255,6 @@ const UsersTable = ({ users }) => {
               </Set>
               <Column header="🐈" field="likesCats" users={sortedUsers} />
               <Column header="🐕" field="likesDogs" users={sortedUsers} />
-              <Column header="" field="saveOnCancel" users={sortedUsers} />
             </Set>
           </Box>}
     </Box>

@@ -1,6 +1,6 @@
 // @flow
 import type { Observable } from 'rxjs';
-import type { ValidationErrors } from '../lib/validate';
+import type { ValidationError } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
   Middleware as ReduxMiddleware,
@@ -20,6 +20,8 @@ export type Id = string;
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' };
+
+export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
 
 // We need to define all possible errors per anything.
 export type Errors<T> = {|
@@ -73,10 +75,11 @@ export type State = {
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', form: UserForm }
-  | { type: 'ADD_USER_ERROR', id: Id, errors: Errors<UserForm> }
+  | { type: 'ADD_USER_ERROR', errors: Errors<UserForm> }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
+  | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserForm> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_USER_FORM', id: Id, form: ?UserForm }
   | { type: 'TOGGLE_BASELINE' }

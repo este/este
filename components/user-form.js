@@ -133,7 +133,6 @@ const UserForm = ({
   );
 };
 
-// connectForm?
 export default connect(({ users: { form } }: State, { id = newFormId }) => ({
   id,
   form: form.changed[id] || form.initial,

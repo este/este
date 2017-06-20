@@ -10,6 +10,7 @@ type AutoFocusProps = {
   children: Element<*>,
 };
 
+// Class, because we focus only when focus prop has changed.
 class AutoFocus extends React.Component {
   componentDidMount() {
     this.focus();
@@ -17,7 +18,7 @@ class AutoFocus extends React.Component {
 
   componentDidUpdate(prevProps: AutoFocusProps) {
     // Refocus after new validation. For example:
-    // autoFocus={validationErrors && validationErrors.name}
+    // autoFocus={validationErrors.name}
     const autoFocusChanged = prevProps.autoFocus !== this.props.autoFocus;
     if (!autoFocusChanged) return;
     this.focus();
