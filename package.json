@@ -13,7 +13,7 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "test": "flow && jest && next build",
-    "deploy": "node ./scripts/deploy-now",
+    "deploy": "node ./scripts/deploy",
     "favicon": "node ./scripts/favicon",
     "relay": "relay-compiler --src ./pages/ --schema data/schema.graphql",
     "get-schema": "node scripts/get-schema.js",
