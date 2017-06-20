@@ -1,6 +1,7 @@
 // @flow
 import Document, { Head, Main, NextScript } from 'next/document';
-import { getRenderer } from '../lib/fela';
+import felaRenderer from '../lib/fela';
+import { renderToSheetList } from 'fela-dom';
 
 // Only modern CSS subset with React Native emulation.
 // https://github.com/zeit/next.js/wiki/Global-styles-and-layouts
@@ -25,16 +26,27 @@ const globalStyle = `
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const page = renderPage();
-    const renderer = getRenderer();
-    const css = renderer.renderToString();
-    renderer.clear();
+    const sheetList = renderToSheetList(felaRenderer);
+    felaRenderer.clear();
     // TODO: Use next/example with-react-intl.
     const currentLocale = 'en';
-    return { ...page, css, currentLocale };
+    return {
+      ...page,
+      currentLocale,
+      sheetList,
+    };
   }
 
   render() {
-    const { css, currentLocale } = this.props;
+    const { currentLocale, sheetList } = this.props;
+    const styleNodes = sheetList.map(({ type, media, css }) =>
+      <style
+        data-fela-type={type}
+        media={media}
+        dangerouslySetInnerHTML={{ __html: css }}
+      />,
+    );
+
     return (
       <html lang={currentLocale}>
         {/* yarn run favicon */}
@@ -73,7 +85,7 @@ export default class MyDocument extends Document {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <style dangerouslySetInnerHTML={{ __html: globalStyle }} />
-          <style dangerouslySetInnerHTML={{ __html: css }} id="fela-style" />
+          {styleNodes}
         </Head>
         <body>
           <Main />

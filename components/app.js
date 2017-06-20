@@ -3,12 +3,12 @@ import type { Store } from '../types';
 import React from 'react';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
+import felaRenderer from '../lib/fela';
 import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
 import uuid from 'uuid';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { Provider as FelaProvider } from 'react-fela';
-import { getRenderer, getMountNode } from '../lib/fela';
 
 if (process.browser) {
   // eslint-disable-next-line global-require
@@ -52,7 +52,7 @@ const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
 // ApolloProvider provides also react-redux Provider.
 const renderApp = (Page, apolloClient, reduxStore, props) =>
   <ApolloProvider client={apolloClient} store={reduxStore}>
-    <FelaProvider renderer={getRenderer()} mountNode={getMountNode()}>
+    <FelaProvider renderer={felaRenderer}>
       <Page {...props} />
     </FelaProvider>
   </ApolloProvider>;
