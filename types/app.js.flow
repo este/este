@@ -1,6 +1,11 @@
 /* @flow */
+
+// env-config
 declare var APP_NAME: string;
 declare var APP_VERSION: string;
 declare var GRAPHQL_ENDPOINT: string;
+
+// intl polyfill
+declare var Intl: object;
 
 // TODO: Add Next.js process.browser, if possible.

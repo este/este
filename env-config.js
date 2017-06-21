@@ -1,6 +1,6 @@
 // @flow
 const { execSync } = require('child_process');
-const { name: appName } = require('../package.json');
+const { name: appName } = require('./package.json');
 
 // github.com/FormidableLabs/babel-plugin-transform-define
 // Note this file is cached in node-modules dir.

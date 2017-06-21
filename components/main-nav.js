@@ -18,6 +18,8 @@ const NavA = ({ children, href, title }) =>
 
 type MainNavProps = { title: string };
 
+// <FormattedMessage id='nav.home' defaultMessage='Home' />
+
 const MainNav = ({ title }: MainNavProps) =>
   <Box
     backgroundColor="primary"

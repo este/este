@@ -12,6 +12,7 @@ import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
 import app from '../components/app';
+import { FormattedMessage } from 'react-intl';
 
 const onButtonPress = [
   'primary',
@@ -31,7 +32,10 @@ const Index = () =>
   <Page title="Este">
     <Heading size={3}>Este</Heading>
     <P>
-      Starter kit for universal full–fledged React apps.
+      <FormattedMessage
+        defaultMessage="Starter kit for universal apps."
+        id="app.description"
+      />
     </P>
     <P>
       {/* Styled text link. */}

@@ -1,23 +1,25 @@
 {
+  "presets": [
+    "next/babel"
+  ],
   "env": {
     "development": {
-      "presets": ["next/babel"],
       "plugins": [
-        ["transform-define", "./scripts/env-config.js"]
+        ["transform-define", "./env-config.js"],
+        "react-intl"
       ]
     },
     "production": {
-      "presets": ["next/babel"],
       "plugins": [
-        ["transform-define", "./scripts/env-config.js"]
+        ["transform-define", "./env-config.js"],
+        ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
     "test": {
-      // next/babel does not transpile import/export syntax.
-      // github.com/zeit/next.js/tree/master/examples/with-jest
-      "presets": [["env", { "modules": "commonjs" }], "next/babel"],
+      "presets": [["env", { "modules": "commonjs" }]],
       "plugins": [
-        ["transform-define", "./scripts/env-config.js"]
+        ["transform-define", "./env-config.js"],
+        "react-intl"
       ]
     }
   }

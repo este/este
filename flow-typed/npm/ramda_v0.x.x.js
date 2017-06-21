@@ -1,5 +1,5 @@
-// flow-typed signature: dfe9e7dd59fee10f50e3604dd5cab0f8
-// flow-typed version: a9e64f6272/ramda_v0.x.x/flow_>=v0.34.x
+// flow-typed signature: 5c31ea0cda4ec35904c11f0a46273dd8
+// flow-typed version: 8a02163f2e/ramda_v0.x.x/flow_>=v0.34.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -617,8 +617,8 @@ declare module ramda {
   // *Function
   declare var __: *;
 
-  declare var T: (_: any) => boolean;
-  declare var F: (_: any) => boolean;
+  declare var T: (_: any) => true;
+  declare var F: (_: any) => false;
 
   declare function addIndex<A,B>(iterFn:(fn:(x:A) => B, xs: Array<A>) => Array<B>): (fn: (x: A, idx: number, xs: Array<A>) => B, xs: Array<A>) => Array<B>;
 

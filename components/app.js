@@ -8,16 +8,26 @@ import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
 import uuid from 'uuid';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
+import { IntlProvider, addLocaleData } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
-
-if (process.browser) {
-  // eslint-disable-next-line global-require
-  require('smoothscroll-polyfill').polyfill();
-}
 
 // App composition root.
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform probably via app.ios.js and app.android.js
+
+if (typeof window !== 'undefined') {
+  // eslint-disable-next-line global-require
+  require('smoothscroll-polyfill').polyfill();
+
+  // Register React Intl's locale data for the user's locale in the browser. This
+  // locale data was added to the page by `pages/_document.js`. This only happens
+  // once, on initial page load in the browser.
+  if (window.ReactIntlLocaleData) {
+    Object.keys(window.ReactIntlLocaleData).forEach(lang => {
+      addLocaleData(window.ReactIntlLocaleData[lang]);
+    });
+  }
+}
 
 type ApolloClient = any;
 
@@ -50,10 +60,20 @@ const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
 
 // renderApp as separated function, because it's used for Apollo getDataFromTree
 // ApolloProvider provides also react-redux Provider.
-const renderApp = (Page, apolloClient, reduxStore, props) =>
+const renderApp = (
+  Page,
+  apolloClient,
+  reduxStore,
+  locale,
+  messages,
+  initialNow,
+  props,
+) =>
   <ApolloProvider client={apolloClient} store={reduxStore}>
     <FelaProvider renderer={felaRenderer}>
-      <Page {...props} />
+      <IntlProvider locale={locale} messages={messages} initialNow={initialNow}>
+        <Page {...props} />
+      </IntlProvider>
     </FelaProvider>
   </ApolloProvider>;
 
@@ -63,25 +83,43 @@ const renderApp = (Page, apolloClient, reduxStore, props) =>
 // the initial render, to match client and server HTML.
 const app = (Page: any) =>
   class App extends React.Component {
-    static async getInitialProps(ctx) {
+    static async getInitialProps(context) {
       let serverState = {};
+
       // Evaluate the composed component's getInitialProps()
       let composedInitialProps = {};
       if (Page.getInitialProps) {
-        composedInitialProps = await Page.getInitialProps(ctx);
+        composedInitialProps = await Page.getInitialProps(context);
       }
+
+      // Get the `locale` and `messages` from the request object on the server.
+      // In the browser, use the same values that the server serialized.
+      const { req } = context;
+      const { locale, messages } = req || window.__NEXT_DATA__.props;
+      // Always update the current time on page load/transition because the
+      // <IntlProvider> will be a new instance even with pushState routing.
+      const initialNow = Date.now();
+
       // Run all graphql queries in the component tree
       // and extract the resulting data
       if (!process.browser) {
         const apolloClient: ApolloClient = getApolloClient();
         const reduxStore: Store = getReduxStore(apolloClient);
         // Provide the `url` prop data in case a graphql query uses it
-        const url = { query: ctx.query, pathname: ctx.pathname };
+        const url = { query: context.query, pathname: context.pathname };
         // Run all graphql queries
-        const app = renderApp(Page, apolloClient, reduxStore, {
-          url,
-          ...composedInitialProps,
-        });
+        const app = renderApp(
+          Page,
+          apolloClient,
+          reduxStore,
+          locale,
+          messages,
+          initialNow,
+          {
+            url,
+            ...composedInitialProps,
+          },
+        );
         await getDataFromTree(app);
         // Extract query data from the reduxStore
         const state = reduxStore.getState();
@@ -98,6 +136,9 @@ const app = (Page: any) =>
       return {
         serverState,
         ...composedInitialProps,
+        locale,
+        messages,
+        initialNow,
       };
     }
 
@@ -116,7 +157,16 @@ const app = (Page: any) =>
     }
 
     render() {
-      return renderApp(Page, this.apolloClient, this.reduxStore, this.props);
+      const { locale, messages, initialNow, ...props } = this.props;
+      return renderApp(
+        Page,
+        this.apolloClient,
+        this.reduxStore,
+        locale,
+        messages,
+        initialNow,
+        props,
+      );
     }
   };
 

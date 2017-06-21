@@ -24,31 +24,32 @@ const globalStyle = `
 `;
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
-    const page = renderPage();
+  static async getInitialProps(context) {
+    const props = await super.getInitialProps(context);
+    const { req: { locale, localeDataScript } } = context;
     const sheetList = renderToSheetList(felaRenderer);
     felaRenderer.clear();
-    // TODO: Use next/example with-react-intl.
-    const currentLocale = 'en';
     return {
-      ...page,
-      currentLocale,
+      ...props,
+      locale,
+      localeDataScript,
       sheetList,
     };
   }
 
   render() {
-    const { currentLocale, sheetList } = this.props;
+    const { locale, localeDataScript, sheetList } = this.props;
     const styleNodes = sheetList.map(({ type, media, css }) =>
       <style
-        data-fela-type={type}
-        media={media}
         dangerouslySetInnerHTML={{ __html: css }}
+        data-fela-type={type}
+        key={`${type}-${media}`}
+        media={media}
       />,
     );
 
     return (
-      <html lang={currentLocale}>
+      <html lang={locale}>
         {/* yarn run favicon */}
         <Head>
           <link
@@ -89,6 +90,11 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          {/* Polyfill Intl API for older browsers */}
+          <script
+            src={`https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${locale}`}
+          />
+          <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
           <NextScript />
         </body>
       </html>
