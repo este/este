@@ -3,7 +3,7 @@ import type { Store } from '../types';
 import React from 'react';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
-import felaRenderer from '../lib/fela';
+import felaRenderer from '../lib/fela-renderer';
 import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
 import uuid from 'uuid';

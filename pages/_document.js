@@ -1,6 +1,6 @@
 // @flow
 import Document, { Head, Main, NextScript } from 'next/document';
-import felaRenderer from '../lib/fela';
+import felaRenderer from '../lib/fela-renderer';
 import { renderToSheetList } from 'fela-dom';
 
 // Only modern CSS subset with React Native emulation.
