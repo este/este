@@ -1,8 +1,9 @@
 // @flow
 const package = require('./package.json');
 
-// github.com/FormidableLabs/babel-plugin-transform-define
-// This file is cached in node-modules. That's why we rimraf cache before build.
+// https://github.com/FormidableLabs/babel-plugin-transform-define
+// This file is cached in node-modules. To refresh cache, run:
+// yarn run rimraf-babel-cache
 
 const production = process.env.NODE_ENV === 'production';
 
