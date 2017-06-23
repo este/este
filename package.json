@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "build": "npm run rimraf-babel-cache && next build && npm run default-lang",
+    "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "default-lang": "node ./scripts/default-lang",
