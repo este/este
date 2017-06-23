@@ -19,9 +19,9 @@ if (typeof window !== 'undefined') {
   // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
 
-  // Register React Intl's locale data for the user's locale in the browser. This
-  // locale data was added to the page by `pages/_document.js`. This only happens
-  // once, on initial page load in the browser.
+  // Register React Intl's locale data for the user's locale in the browser.
+  // This locale data was added to the page by `pages/_document.js`. This only
+  // happens once, on initial page load in the browser.
   if (window.ReactIntlLocaleData) {
     Object.keys(window.ReactIntlLocaleData).forEach(lang => {
       addLocaleData(window.ReactIntlLocaleData[lang]);
@@ -48,7 +48,7 @@ const getApolloClient: () => ApolloClient = singletonOnClient(() =>
   createApolloClient(GRAPHQL_ENDPOINT),
 );
 
-const getReduxStore = singletonOnClient((apolloClient, initialState = {}) => {
+const getReduxStore = singletonOnClient((apolloClient, initialState) => {
   const platformReducers = { apollo: apolloClient.reducer() };
   const platformMiddleware = [apolloClient.middleware()];
   return createReduxStore(initialState, {
@@ -84,9 +84,7 @@ const renderApp = (
 const app = (Page: any) =>
   class App extends React.Component {
     static async getInitialProps(context) {
-      let serverState = {};
-
-      // Evaluate the composed component's getInitialProps()
+      // Evaluate the composed component's getInitialProps().
       let composedInitialProps = {};
       if (Page.getInitialProps) {
         composedInitialProps = await Page.getInitialProps(context);
@@ -96,15 +94,28 @@ const app = (Page: any) =>
       const { req } = context;
       const { locale, messages, supportedLocales } =
         req || window.__NEXT_DATA__.props;
+
       // Always update the current time on page load/transition because the
       // <IntlProvider> will be a new instance even with pushState routing.
       const initialNow = Date.now();
+
+      let serverState = {
+        app: ({
+          baselineShown: false,
+          darkEnabled: false,
+          name: APP_NAME,
+          version: APP_VERSION,
+          locale,
+          defaultLocale: DEFAULT_LOCALE,
+          supportedLocales,
+        }: AppState),
+      };
 
       // Run all graphql queries in the component tree
       // and extract the resulting data.
       if (!process.browser) {
         const apolloClient: ApolloClient = getApolloClient();
-        const reduxStore: Store = getReduxStore(apolloClient);
+        const reduxStore: Store = getReduxStore(apolloClient, serverState);
 
         // Provide the `url` prop data in case a graphql query uses it.
         const url = { query: context.query, pathname: context.pathname };
@@ -124,21 +135,16 @@ const app = (Page: any) =>
         );
         await getDataFromTree(app);
 
-        // Extract query data from the reduxStore
+        // Clear felaRenderer after every render because it's stateful.
+        felaRenderer.clear();
+
+        // Extract query data from the reduxStore.
         const state = reduxStore.getState();
 
         // No need to include other initial Redux state because when it
         // initialises on the client-side it'll create it again anyway.
         serverState = {
-          app: ({
-            baselineShown: false,
-            darkEnabled: false,
-            name: APP_NAME,
-            version: APP_VERSION,
-            locale,
-            defaultLocale: DEFAULT_LOCALE,
-            supportedLocales,
-          }: AppState),
+          ...serverState,
           apollo: {
             // Make sure to only include Apollo's data state
             data: state.apollo.data,
