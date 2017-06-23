@@ -1,5 +1,5 @@
-// flow-typed signature: 5fea44cc4b74e03b45bd39839c91ee2f
-// flow-typed version: c0702c8e54/jest_v20.x.x/flow_>=v0.33.x
+// flow-typed signature: 599948fccaf9881f9a36213f63311213
+// flow-typed version: 50ddf2f004/jest_v20.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -117,7 +117,7 @@ type EnzymeMatchersType = {
   toBeDisabled(): void,
   toBeEmpty(): void,
   toBePresent(): void,
-  toContainReact(component: React$Element<any>): void,
+  toContainReact(element: React$Element<any>): void,
   toHaveClassName(className: string): void,
   toHaveHTML(html: string): void,
   toHaveProp(propKey: string, propValue?: any): void,
@@ -128,6 +128,7 @@ type EnzymeMatchersType = {
   toHaveText(text: string): void,
   toIncludeText(text: string): void,
   toHaveValue(value: any): void,
+  toMatchElement(element: React$Element<any>): void,
   toMatchSelector(selector: string): void,
 };
 

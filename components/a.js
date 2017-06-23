@@ -1,5 +1,5 @@
 // @flow
-import Link from 'next/link';
+import LocaleLink from './locale-link';
 import Text, { type TextProps } from './text';
 
 type AProps = TextProps & {
@@ -11,13 +11,12 @@ type AProps = TextProps & {
 const A = ({ href, isActive, prefetch, ...props }: AProps) => {
   const { as = 'a', color = 'primary', style, ...restProps } = props;
   return (
-    <Link href={href} prefetch={prefetch}>
+    <LocaleLink href={href} prefetch={prefetch}>
       <Text
         {...{
           as,
           color,
           decoration: isActive ? 'underline' : 'none',
-          href,
           style: {
             ':hover': { textDecoration: 'underline' },
             ...style,
@@ -25,7 +24,7 @@ const A = ({ href, isActive, prefetch, ...props }: AProps) => {
           ...restProps,
         }}
       />
-    </Link>
+    </LocaleLink>
   );
 };
 

@@ -1,5 +1,5 @@
 // @flow
-import type { Store } from '../types';
+import type { Store, AppState } from '../types';
 import React from 'react';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
@@ -78,7 +78,7 @@ const renderApp = (
   </ApolloProvider>;
 
 // facebook.github.io/react/docs/higher-order-components.html
-// We need Component, because we need a componentDidMount.
+// We need Class, because we need a componentDidMount.
 // We need a componentDidMount, because client state must be loaded after
 // the initial render, to match client and server HTML.
 const app = (Page: any) =>
@@ -92,22 +92,24 @@ const app = (Page: any) =>
         composedInitialProps = await Page.getInitialProps(context);
       }
 
-      // Get the `locale` and `messages` from the request object on the server.
-      // In the browser, use the same values that the server serialized.
+      // Get props from the request object on the server.
       const { req } = context;
-      const { locale, messages } = req || window.__NEXT_DATA__.props;
+      const { locale, messages, supportedLocales } =
+        req || window.__NEXT_DATA__.props;
       // Always update the current time on page load/transition because the
       // <IntlProvider> will be a new instance even with pushState routing.
       const initialNow = Date.now();
 
       // Run all graphql queries in the component tree
-      // and extract the resulting data
+      // and extract the resulting data.
       if (!process.browser) {
         const apolloClient: ApolloClient = getApolloClient();
         const reduxStore: Store = getReduxStore(apolloClient);
-        // Provide the `url` prop data in case a graphql query uses it
+
+        // Provide the `url` prop data in case a graphql query uses it.
         const url = { query: context.query, pathname: context.pathname };
-        // Run all graphql queries
+
+        // Run all graphql queries.
         const app = renderApp(
           Page,
           apolloClient,
@@ -121,11 +123,22 @@ const app = (Page: any) =>
           },
         );
         await getDataFromTree(app);
+
         // Extract query data from the reduxStore
         const state = reduxStore.getState();
+
         // No need to include other initial Redux state because when it
-        // initialises on the client-side it'll create it again anyway
+        // initialises on the client-side it'll create it again anyway.
         serverState = {
+          app: ({
+            baselineShown: false,
+            darkEnabled: false,
+            name: APP_NAME,
+            version: APP_VERSION,
+            locale,
+            defaultLocale: DEFAULT_LOCALE,
+            supportedLocales,
+          }: AppState),
           apollo: {
             // Make sure to only include Apollo's data state
             data: state.apollo.data,
@@ -138,6 +151,7 @@ const app = (Page: any) =>
         ...composedInitialProps,
         locale,
         messages,
+        supportedLocales,
         initialNow,
       };
     }

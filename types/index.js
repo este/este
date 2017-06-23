@@ -57,6 +57,9 @@ export type AppState = {
   +darkEnabled: boolean,
   +name: string,
   +version: string,
+  +locale: string,
+  +defaultLocale: string,
+  +supportedLocales: Array<string>,
 };
 
 export type UsersState = {

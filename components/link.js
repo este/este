@@ -1,9 +1,10 @@
 // @flow
 import type { Children } from 'react';
-import NextLink from 'next/link';
+import LocaleLink from './locale-link';
 
 // Generic link without styles.
-// For texts, use A.
+// Use it for image or any other non text component.
+// For text, use A.
 
 type LinkProps = {|
   children?: Children,
@@ -12,6 +13,6 @@ type LinkProps = {|
 |};
 
 const Link = ({ children, ...props }: LinkProps) =>
-  <NextLink {...props}><a>{children}</a></NextLink>;
+  <LocaleLink {...props}><a>{children}</a></LocaleLink>;
 
 export default Link;

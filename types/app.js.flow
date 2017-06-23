@@ -3,6 +3,8 @@
 // env-config
 declare var APP_NAME: string;
 declare var APP_VERSION: string;
+declare var DEFAULT_LOCALE: string;
+declare var DOMAIN: string;
 declare var GRAPHQL_ENDPOINT: string;
 
 // intl polyfill

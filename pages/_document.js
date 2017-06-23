@@ -26,19 +26,26 @@ const globalStyle = `
 export default class MyDocument extends Document {
   static async getInitialProps(context) {
     const props = await super.getInitialProps(context);
-    const { req: { locale, localeDataScript } } = context;
+    const { req: { locale, localeDataScript, supportedLocales } } = context;
     const sheetList = renderToSheetList(felaRenderer);
     felaRenderer.clear();
     return {
       ...props,
       locale,
       localeDataScript,
+      supportedLocales,
       sheetList,
     };
   }
 
   render() {
-    const { locale, localeDataScript, sheetList } = this.props;
+    const {
+      locale,
+      localeDataScript,
+      supportedLocales,
+      sheetList,
+    } = this.props;
+
     const styleNodes = sheetList.map(({ type, media, css }) =>
       <style
         dangerouslySetInnerHTML={{ __html: css }}
@@ -47,11 +54,19 @@ export default class MyDocument extends Document {
         media={media}
       />,
     );
+    const alternateHreflangLinks = supportedLocales.map(locale =>
+      <link
+        href={`https://${locale}.${DOMAIN}`}
+        hrefLang={locale}
+        key={locale}
+        rel="alternate"
+      />,
+    );
 
     return (
       <html lang={locale}>
-        {/* yarn run favicon */}
         <Head>
+          {/* yarn run favicon */}
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -85,6 +100,7 @@ export default class MyDocument extends Document {
             // kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          {alternateHreflangLinks}
           <style dangerouslySetInnerHTML={{ __html: globalStyle }} />
           {styleNodes}
         </Head>

@@ -11,14 +11,13 @@ const glob = require('glob');
 const next = require('next');
 const { basename } = require('path');
 const { createServer } = require('http');
+const { parse } = require('url');
 const { readFileSync } = require('fs');
+const { DEFAULT_LOCALE } = require('./env-config');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
-// Get the supported languages by looking for translations in the `lang/` dir.
-const languages = glob.sync('./lang/*.json').map(f => basename(f, '.json'));
 
 // We need to expose React Intl's locale data on the request for the user's
 // locale. This function will also cache the scripts by lang in memory.
@@ -41,17 +40,35 @@ const getMessages = locale => {
   return require(`./lang/${locale}.json`);
 };
 
+// Get the supported locales by looking for translations in the `lang/` dir.
+const supportedLocales = glob
+  .sync('./lang/*.json')
+  .map(f => basename(f, '.json'));
+
+// TODO: ?locale=cs is for dev, we need subdomain or /en-CZ/ for production.
+const getAcceptedOrDefaultLocale = (req, locale) => {
+  // locale=* overrides auto detection.
+  // For example: http://localhost:3000/?locale=cs
+  if (locale) {
+    return supportedLocales.indexOf(locale) !== -1 ? locale : DEFAULT_LOCALE;
+  }
+  return accepts(req).language(supportedLocales) || DEFAULT_LOCALE;
+};
+
 app.prepare().then(() => {
-  // $FlowFixMe Probably stale definitions.
+  // $FlowFixMe Probably wrong defs.
   createServer((req, res) => {
-    const accept = accepts(req);
-    const locale = accept.language(dev ? ['en'] : languages);
+    const parseQueryString = true;
+    const { query = {} } = parse(req.url, parseQueryString);
+    const locale = getAcceptedOrDefaultLocale(req, query.locale);
     // $FlowFixMe How to extend req type?
     req.locale = locale;
     // $FlowFixMe How to extend req type?
+    req.supportedLocales = supportedLocales;
+    // $FlowFixMe How to extend req type?
     req.localeDataScript = getLocaleDataScript(locale);
     // $FlowFixMe How to extend req type?
-    req.messages = dev ? {} : getMessages(locale);
+    req.messages = getMessages(locale);
     handle(req, res);
   }).listen(3000, err => {
     if (err) throw err;

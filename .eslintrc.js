@@ -4,6 +4,8 @@ module.exports = {
   globals: {
     APP_NAME: true,
     APP_VERSION: true,
+    DEFAULT_LOCALE: true,
+    DOMAIN: true,
     GRAPHQL_ENDPOINT: true,
     window: true,
     // Flow
@@ -14,6 +16,7 @@ module.exports = {
     EventHandler: true,
     KeyboardEvent: true,
     ReactClass: true,
+    React$Element: true,
   },
   // AirBnb is great, but very strict. Feel free to add anything.
   rules: {

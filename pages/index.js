@@ -39,7 +39,9 @@ const Index = () =>
     </P>
     <P>
       {/* Styled text link. */}
-      <A href="https://github.com/este/este">github.com/este/este</A>
+      <A href="https://github.com/este/este">
+        github.com/este/este
+      </A>
     </P>
     <Image
       alt="50x50 placeholder"
