@@ -11,6 +11,7 @@ type PageProps = {
   exactly?: boolean,
   intl: $IntlShape,
   pattern: string,
+  authorized: boolean,
 };
 
 const titles = {
@@ -28,11 +29,13 @@ const Page = (
     exactly,
     intl,
     pattern,
+    authorized,
   }: PageProps,
 ) => (
   <Match
     exactly={exactly}
     pattern={pattern}
+    authorized={authorized}
     render={renderProps => (
       <Box
         // We need flex and backgroundColor to cover SideMenu.
