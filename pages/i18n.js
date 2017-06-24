@@ -4,8 +4,8 @@ import Page from '../components/page';
 import SwitchLocale from '../components/switch-locale';
 import app from '../components/app';
 
-// This should be typed by Next.js
 type FormsProps = {
+  // This should be typed by Next.js
   url: { pathname: string },
 };
 

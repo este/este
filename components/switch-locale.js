@@ -5,16 +5,19 @@ import Set from './set';
 import { connect, type Connector } from 'react-redux';
 
 // TODO: i18n subdomain for production.
-const getLocaleHref = (pathname, locale) => `${pathname}?locale=${locale}`;
+const getLocaleHref = (pathname, defaultLocale, locale) => {
+  if (defaultLocale === locale) return pathname;
+  return `${pathname}?locale=${locale}`;
+};
 
-const SwitchLocale = ({ pathname, locale, supportedLocales }) =>
+const SwitchLocale = ({ pathname, defaultLocale, locale, supportedLocales }) =>
   <Set spaceBetween={1}>
     {supportedLocales.map(supportedLocale =>
       <Text
         as="a"
         color="primary"
         decoration={supportedLocale === locale ? 'underline' : 'none'}
-        href={getLocaleHref(pathname, supportedLocale)}
+        href={getLocaleHref(pathname, defaultLocale, supportedLocale)}
         key={supportedLocale}
         size={2}
       >
@@ -28,6 +31,7 @@ type ConnectorProps = {
 };
 
 const connector: Connector<ConnectorProps, *> = connect((state: State) => ({
+  defaultLocale: state.app.defaultLocale,
   locale: state.app.locale,
   supportedLocales: state.app.supportedLocales,
 }));
