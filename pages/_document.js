@@ -20,6 +20,8 @@ const globalStyle = `
     padding: 0;
     ${/* Enforce React Native default border width. */ ''}
     border-width: 0;
+    ${/* Reset user agent default style. */ ''}
+    text-decoration: none;
   }
 `;
 

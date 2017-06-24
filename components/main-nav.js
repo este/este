@@ -30,6 +30,7 @@ const MainNav = ({ title }: MainNavProps) =>
   >
     <NavA href="/" title={title}>Este</NavA>
     <NavA href="/forms" title={title}>Forms</NavA>
+    <NavA href="/i18n" title={title}>i18n</NavA>
   </Box>;
 
 export default MainNav;

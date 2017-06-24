@@ -1,4 +1,4 @@
-// flow-typed signature: dbc8c84a69db366ae09e77c437d54c54
+// flow-typed signature: cc3b8b58821428399b2ebd34ff181d17
 // flow-typed version: <<STUB>>/auth0-lock_v^10.14.0/flow_v0.48.0
 
 /**
@@ -370,6 +370,10 @@ declare module 'auth0-lock/lib/field/phone-number/phone_number_pane' {
   declare module.exports: any;
 }
 
+declare module 'auth0-lock/lib/field/social/event' {
+  declare module.exports: any;
+}
+
 declare module 'auth0-lock/lib/field/social/social_buttons_pane' {
   declare module.exports: any;
 }
@@ -391,6 +395,10 @@ declare module 'auth0-lock/lib/field/vcode/vcode_pane' {
 }
 
 declare module 'auth0-lock/lib/i18n' {
+  declare module.exports: any;
+}
+
+declare module 'auth0-lock/lib/i18n/af' {
   declare module.exports: any;
 }
 
@@ -920,6 +928,9 @@ declare module 'auth0-lock/lib/field/phone-number/locations.js' {
 declare module 'auth0-lock/lib/field/phone-number/phone_number_pane.js' {
   declare module.exports: $Exports<'auth0-lock/lib/field/phone-number/phone_number_pane'>;
 }
+declare module 'auth0-lock/lib/field/social/event.js' {
+  declare module.exports: $Exports<'auth0-lock/lib/field/social/event'>;
+}
 declare module 'auth0-lock/lib/field/social/social_buttons_pane.js' {
   declare module.exports: $Exports<'auth0-lock/lib/field/social/social_buttons_pane'>;
 }
@@ -937,6 +948,9 @@ declare module 'auth0-lock/lib/field/vcode/vcode_pane.js' {
 }
 declare module 'auth0-lock/lib/i18n.js' {
   declare module.exports: $Exports<'auth0-lock/lib/i18n'>;
+}
+declare module 'auth0-lock/lib/i18n/af.js' {
+  declare module.exports: $Exports<'auth0-lock/lib/i18n/af'>;
 }
 declare module 'auth0-lock/lib/i18n/ca.js' {
   declare module.exports: $Exports<'auth0-lock/lib/i18n/ca'>;

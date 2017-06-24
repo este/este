@@ -45,6 +45,7 @@ const supportedLocales = glob
   .sync('./lang/*.json')
   .map(f => basename(f, '.json'));
 
+// TODO: i18n subdomain for production.
 // TODO: ?locale=cs is for dev, we need subdomain or /en-CZ/ for production.
 const getAcceptedOrDefaultLocale = (req, locale) => {
   // locale=* overrides auto detection.

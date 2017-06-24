@@ -14,23 +14,15 @@ type LocaleLinkProps = {
   href: string,
   prefetch?: boolean,
   locale: *,
-  defaultLocale: *,
 };
 
-const LocaleLink = ({
-  children,
-  href,
-  prefetch,
-  locale,
-  defaultLocale,
-}: LocaleLinkProps) => {
+const LocaleLink = ({ children, href, prefetch, locale }: LocaleLinkProps) => {
   let localeHref = href;
   const parsed = parse(href, true);
   const isRelative = href.charAt(0) === '/';
-  const isNotDefault = locale !== defaultLocale;
+  // TODO: i18n subdomain for production.
   const hasNoLocale = !parsed.query.locale;
-  const setLocale = isRelative && isNotDefault && hasNoLocale;
-  // TODO: Subdomain for production.
+  const setLocale = isRelative && hasNoLocale;
   if (setLocale) {
     parsed.set('query', { ...parsed.query, locale });
     localeHref = parsed.href.replace(parsed.origin, '');
@@ -44,5 +36,4 @@ const LocaleLink = ({
 
 export default connect(({ app }: State) => ({
   locale: app.locale,
-  defaultLocale: app.defaultLocale,
 }))(LocaleLink);

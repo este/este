@@ -157,7 +157,6 @@ const app = (Page: any) =>
         ...composedInitialProps,
         locale,
         messages,
-        supportedLocales,
         initialNow,
       };
     }
