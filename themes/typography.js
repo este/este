@@ -34,13 +34,17 @@ const typography = ({
   fontSizeScale: number | $Keys<typeof scale>,
   lineHeight: number,
 |}) => ({
-  fontSize: (level: number) =>
-    Array.from(Array(Math.abs(level))).reduce(size => {
-      const scaleRatio = typeof fontSizeScale === 'string'
-        ? scale[fontSizeScale]
-        : fontSizeScale;
-      return level > 0 ? size * (1 / scaleRatio) : size / (1 / scaleRatio);
-    }, fontSize),
+  fontSize: (level: number) => {
+    const scaleRatio = typeof fontSizeScale === 'string'
+      ? scale[fontSizeScale]
+      : fontSizeScale;
+    if (level === 0) {
+      return fontSize;
+    }
+    return level > 1
+      ? ((1 / scaleRatio) ** level) * fontSize
+      : (scaleRatio ** (1 / level)) * fontSize;
+  },
   lineHeight,
   rhythm: (ratio: number) => lineHeight * ratio,
 });
