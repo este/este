@@ -1,7 +1,10 @@
 // @flow
+const glob = require('glob');
+const { DEFAULT_LOCALE } = require('../env-config');
 const { readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
-const glob = require('glob');
+
+// TODO: Show missing translations and optionally delete unused.
 
 const defaultMessages = glob
   .sync('./lang/.messages/**/*.json')
@@ -17,5 +20,10 @@ const defaultMessages = glob
     return messages;
   }, {});
 
-writeFileSync('./lang/en.json', JSON.stringify(defaultMessages, null, 2));
-console.log(`> Wrote default messages to: "${resolve('./lang/en.json')}"`);
+writeFileSync(
+  `./lang/${DEFAULT_LOCALE}.json`,
+  JSON.stringify(defaultMessages, null, 2),
+);
+console.log(
+  `> Wrote default messages to: "${resolve(`./lang/${DEFAULT_LOCALE}.json`)}"`,
+);

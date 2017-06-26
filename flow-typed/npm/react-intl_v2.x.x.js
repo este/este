@@ -1,5 +1,5 @@
-// flow-typed signature: de198a4f097f71208263378c360f6a13
-// flow-typed version: 952ad5231e/react-intl_v2.x.x/flow_>=v0.48.x
+// flow-typed signature: 3ea785afae2c069c2aa13a6794a7b0f9
+// flow-typed version: 6da74cc042/react-intl_v2.x.x/flow_>=v0.48.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -20,6 +20,8 @@ type MessageDescriptor = {
   defaultMessage: string,
   description?: string,
 };
+
+type MessageDescriptorMap = { [key: string]: MessageDescriptor };
 
 type IntlConfig = {
   locale: string,

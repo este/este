@@ -12,7 +12,8 @@ import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
 import app from '../components/app';
-import { FormattedMessage } from 'react-intl';
+import sitemap from '../lib/sitemap';
+import { defineMessages } from 'react-intl';
 
 const onButtonPress = [
   'primary',
@@ -28,14 +29,18 @@ const onButtonPress = [
   {},
 );
 
-const Index = () =>
-  <Page title="Este">
-    <Heading size={3}>Este</Heading>
+export const messages = defineMessages({
+  description: {
+    defaultMessage: 'Starter kit for universal apps.',
+    id: 'app.description',
+  },
+});
+
+const Index = ({ intl }) =>
+  <Page title={intl.formatMessage(sitemap.index.title)}>
+    <Heading size={3}>{intl.formatMessage(sitemap.index.title)}</Heading>
     <P>
-      <FormattedMessage
-        defaultMessage="Starter kit for universal apps."
-        id="app.description"
-      />
+      {intl.formatMessage(messages.description)}
     </P>
     <P>
       {/* Styled text link. */}

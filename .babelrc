@@ -3,8 +3,7 @@
     "development": {
       "presets": ["next/babel"],
       "plugins": [
-        ["transform-define", "./env-config.js"],
-        "react-intl"
+        ["transform-define", "./env-config.js"]
       ]
     },
     "production": {
@@ -17,8 +16,7 @@
     "test": {
       "presets": [["env", { "modules": "commonjs" }], "next/babel"],
       "plugins": [
-        ["transform-define", "./env-config.js"],
-        "react-intl"
+        ["transform-define", "./env-config.js"]
       ]
     }
   }

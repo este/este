@@ -1,24 +1,22 @@
 // @flow
 import A from './a';
 import Box from './box';
+import sitemap from '../lib/sitemap';
+import { FormattedMessage } from 'react-intl';
 
-const NavA = ({ children, href, title }) =>
+const NavA = ({ href, ...props }) =>
   <A
     backgroundColor="primary"
     bold
     color="white"
     href={href}
-    isActive={title === children}
     paddingHorizontal={0.5}
     paddingVertical={0.5}
     prefetch
-  >
-    {children}
-  </A>;
+    {...props}
+  />;
 
 type MainNavProps = { title: string };
-
-// <FormattedMessage id='nav.home' defaultMessage='Home' />
 
 const MainNav = ({ title }: MainNavProps) =>
   <Box
@@ -28,9 +26,16 @@ const MainNav = ({ title }: MainNavProps) =>
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <NavA href="/" title={title}>Este</NavA>
-    <NavA href="/forms" title={title}>Forms</NavA>
-    <NavA href="/i18n" title={title}>i18n</NavA>
+    {Object.keys(sitemap).map(pageName => {
+      const page = sitemap[pageName];
+      // TODO: Solve via reverse routing or wait for Next.js withRouter HOC.
+      const isActive = page.title.defaultMessage === title;
+      return (
+        <NavA href={page.path} isActive={isActive} key={pageName}>
+          <FormattedMessage {...page.title} />
+        </NavA>
+      );
+    })}
   </Box>;
 
 export default MainNav;

@@ -1,5 +1,6 @@
 // @flow
-import type { Store, AppState } from '../types';
+import type { IntlShape } from 'react-intl';
+import type { Store, AppState, FunctionalComponent } from '../types';
 import React from 'react';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
@@ -8,12 +9,13 @@ import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
 import uuid from 'uuid';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 
 // App composition root.
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform probably via app.ios.js and app.android.js
+// TODO: Add Flow types.
 
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line global-require
@@ -61,7 +63,7 @@ const getReduxStore = singletonOnClient((apolloClient, initialState) => {
 // renderApp as separated function, because it's used for Apollo getDataFromTree
 // ApolloProvider provides also react-redux Provider.
 const renderApp = (
-  Page,
+  IntlPage,
   apolloClient,
   reduxStore,
   locale,
@@ -72,17 +74,26 @@ const renderApp = (
   <ApolloProvider client={apolloClient} store={reduxStore}>
     <FelaProvider renderer={felaRenderer}>
       <IntlProvider locale={locale} messages={messages} initialNow={initialNow}>
-        <Page {...props} />
+        <IntlPage {...props} />
       </IntlProvider>
     </FelaProvider>
   </ApolloProvider>;
 
-// facebook.github.io/react/docs/higher-order-components.html
-// We need Class, because we need a componentDidMount.
-// We need a componentDidMount, because client state must be loaded after
-// the initial render, to match client and server HTML.
-const app = (Page: any) =>
-  class App extends React.Component {
+type PageProps = {
+  // TODO: Waiting for Next.js 3 type definitions.
+  url: {
+    pathname: string,
+  },
+  intl: IntlShape,
+};
+type Page = FunctionalComponent<PageProps>;
+
+const app = (Page: Page) => {
+  const IntlPage = injectIntl(Page);
+  // We need Class because we need a componentDidMount.
+  // We need a componentDidMount because client state must be rendered after
+  // the initial render, to prevent client and server HTML mismatch.
+  return class App extends React.Component {
     static async getInitialProps(context) {
       // Evaluate the composed component's getInitialProps().
       let composedInitialProps = {};
@@ -122,7 +133,7 @@ const app = (Page: any) =>
 
         // Run all graphql queries.
         const app = renderApp(
-          Page,
+          IntlPage,
           apolloClient,
           reduxStore,
           locale,
@@ -178,7 +189,7 @@ const app = (Page: any) =>
     render() {
       const { locale, messages, initialNow, ...props } = this.props;
       return renderApp(
-        Page,
+        IntlPage,
         this.apolloClient,
         this.reduxStore,
         locale,
@@ -188,5 +199,6 @@ const app = (Page: any) =>
       );
     }
   };
+};
 
 export default app;

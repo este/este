@@ -32,12 +32,14 @@ const getLocaleDataScript = locale => {
   return localeDataCache.get(lang);
 };
 
-// We need to load and expose the translations on the request for the user's
-// locale. These will only be used in production, in dev the `defaultMessage` in
-// each message description in the source code will be used.
 const getMessages = locale => {
+  const localePath = `./lang/${locale}.json`;
+  // Reset cache for dev with alternate locales so we don't have to restart.
+  if (dev) {
+    delete require.cache[require.resolve(localePath)];
+  }
   // $FlowFixMe This is special case.
-  return require(`./lang/${locale}.json`);
+  return require(localePath);
 };
 
 // Get the supported locales by looking for translations in the `lang/` dir.
@@ -62,6 +64,12 @@ app.prepare().then(() => {
     const parseQueryString = true;
     const { query = {} } = parse(req.url, parseQueryString);
     const locale = getAcceptedOrDefaultLocale(req, query.locale);
+
+    // Use messages defined in code for dev with default locale.
+    const messages = dev && locale === DEFAULT_LOCALE
+      ? {}
+      : getMessages(locale);
+
     // $FlowFixMe How to extend req type?
     req.locale = locale;
     // $FlowFixMe How to extend req type?
@@ -69,7 +77,8 @@ app.prepare().then(() => {
     // $FlowFixMe How to extend req type?
     req.localeDataScript = getLocaleDataScript(locale);
     // $FlowFixMe How to extend req type?
-    req.messages = getMessages(locale);
+    req.messages = messages;
+
     handle(req, res);
   }).listen(3000, err => {
     if (err) throw err;
