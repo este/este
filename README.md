@@ -11,7 +11,7 @@
 
 > Starter kit for universal full–fledged React apps. One stack for browser, mobile, server.
 
-> *Next Este is in the next brach.*
+> **Next Este is in the next brach. Check issues need to be done.**
 
 > You don't have to start with everything. Este is perfect even for plain static pages. You can gracefully add any platform later. Este mission is simple: **Help startups to deliver minimum viable product asap with the state of the art real-time universal app stack**.
 
