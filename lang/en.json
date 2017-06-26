@@ -1,3 +1,6 @@
 {
-  "app.description": "Starter kit for universal apps."
+  "app.description": "Starter kit for universal apps.",
+  "sitemap.title.forms": "Forms",
+  "sitemap.title.i18n": "i18n",
+  "sitemap.title.index": "Este"
 }

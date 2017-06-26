@@ -1,3 +1,6 @@
 {
-  "app.description": "Starter kit pro univerzální aplikace."
+  "app.description": "Starter kit pro univerzální aplikace.",
+  "sitemap.title.forms": "Formuláře",
+  "sitemap.title.i18n": "i18n",
+  "sitemap.title.index": "Este"
 }
