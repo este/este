@@ -164,11 +164,11 @@ const app = (Page: Page) => {
       }
 
       return {
-        serverState,
         ...composedInitialProps,
+        initialNow,
         locale,
         messages,
-        initialNow,
+        serverState,
       };
     }
 
@@ -187,7 +187,13 @@ const app = (Page: Page) => {
     }
 
     render() {
-      const { locale, messages, initialNow, ...props } = this.props;
+      const {
+        initialNow,
+        locale,
+        messages,
+        serverState,
+        ...props
+      } = this.props;
       return renderApp(
         IntlPage,
         this.apolloClient,
