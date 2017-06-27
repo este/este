@@ -7,11 +7,12 @@ type AlertErrorsProps = {
   validationErrors?: ValidationErrors<*>,
 };
 
+// TODO: Compose AppError And ValidationError into popup.
+
 class AlertErrors extends React.PureComponent {
   props: AlertErrorsProps;
 
   alert() {
-    // TODO: Translate etc.
     const { appError, validationErrors } = this.props;
     if (appError) {
       // eslint-disable-next-line no-alert, no-undef
