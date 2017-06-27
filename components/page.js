@@ -7,6 +7,7 @@ import Head from 'next/head';
 import LoadingBar from '../components/loading-bar';
 import MainNav from '../components/main-nav';
 import Text from '../components/text';
+import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browser-theme';
 import { connect } from 'react-redux';
@@ -37,7 +38,7 @@ const PageFooter = () =>
     paddingVertical={1}
     size={-1}
   >
-    Made with love by
+    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />
     {' '}
     <A size={-1} href="https://twitter.com/steida">steida</A>
   </Text>;

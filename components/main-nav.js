@@ -1,8 +1,9 @@
 // @flow
+import type { IntlShape } from 'react-intl';
 import A from './a';
 import Box from './box';
 import sitemap from '../lib/sitemap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const NavA = ({ href, ...props }) =>
   <A
@@ -16,9 +17,12 @@ const NavA = ({ href, ...props }) =>
     {...props}
   />;
 
-type MainNavProps = { title: string };
+type MainNavProps = {
+  intl: IntlShape,
+  title: string,
+};
 
-const MainNav = ({ title }: MainNavProps) =>
+const MainNav = ({ intl, title }: MainNavProps) =>
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -28,8 +32,7 @@ const MainNav = ({ title }: MainNavProps) =>
   >
     {Object.keys(sitemap).map(pageName => {
       const page = sitemap[pageName];
-      // TODO: Solve via reverse routing or wait for Next.js withRouter HOC.
-      const isActive = page.title.defaultMessage === title;
+      const isActive = title === intl.formatMessage(page.title);
       return (
         <NavA href={page.path} isActive={isActive} key={pageName}>
           <FormattedMessage {...page.title} />
@@ -38,4 +41,4 @@ const MainNav = ({ title }: MainNavProps) =>
     })}
   </Box>;
 
-export default MainNav;
+export default injectIntl(MainNav);

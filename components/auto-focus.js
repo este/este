@@ -10,7 +10,7 @@ type AutoFocusProps = {
   children: Element<*>,
 };
 
-// Class, because we focus only when focus prop has changed.
+// Class, because we focus only when focus prop has been changed.
 class AutoFocus extends React.Component {
   componentDidMount() {
     this.focus();

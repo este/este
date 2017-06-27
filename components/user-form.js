@@ -5,6 +5,7 @@ import type {
   UserForm as UserFormType,
   ValidationErrors,
 } from '../types';
+import type { IntlShape } from 'react-intl';
 import AppError from '../components/app-error';
 import Button from '../components/button';
 import Checkbox from '../components/checkbox';
@@ -13,7 +14,9 @@ import Radio from '../components/radio';
 import Set from '../components/set';
 import TextInput from '../components/text-input';
 import ValidationError from '../components/validation-error';
+import { AddButton } from '../components/buttons';
 import { connect } from 'react-redux';
+import { defineMessages } from 'react-intl';
 import { newFormId } from '../lib/form';
 
 type UserFormProps = {
@@ -23,7 +26,51 @@ type UserFormProps = {
   validationErrors: ValidationErrors<UserFormType>,
   disabled: *,
   dispatch: Dispatch,
+  intl: IntlShape,
 };
+
+const messages = defineMessages({
+  name: {
+    defaultMessage: 'Name',
+    id: 'userForm.name',
+  },
+  namePlaceholder: {
+    defaultMessage: 'Jane Doe',
+    id: 'userForm.namePlaceholder',
+  },
+  email: {
+    defaultMessage: 'Email',
+    id: 'userForm.email',
+  },
+  emailPlaceholder: {
+    defaultMessage: 'jane@doe.com',
+    id: 'userForm.emailPlaceholder',
+  },
+  likesCats: {
+    defaultMessage: 'Likes Cats',
+    id: 'userForm.likesCats',
+  },
+  likesDogs: {
+    defaultMessage: 'Likes Dogs',
+    id: 'userForm.likesDogs',
+  },
+  female: {
+    defaultMessage: 'Female',
+    id: 'userForm.female',
+  },
+  male: {
+    defaultMessage: 'Male',
+    id: 'userForm.male',
+  },
+  other: {
+    defaultMessage: 'Other',
+    id: 'userForm.other',
+  },
+  agreedWithAnarchy: {
+    defaultMessage: "I agree we don't need a king",
+    id: 'userForm.agreedWithAnarchy',
+  },
+});
 
 const UserForm = ({
   id,
@@ -32,6 +79,7 @@ const UserForm = ({
   validationErrors = {},
   disabled,
   dispatch,
+  intl,
 }: UserFormProps) => {
   const set = (prop: $Keys<UserFormType>) => value => {
     dispatch({
@@ -53,9 +101,9 @@ const UserForm = ({
           autoFocus={validationErrors.name}
           disabled={disabled}
           error={<ValidationError error={validationErrors.name} />}
-          label="Name"
+          label={intl.formatMessage(messages.name)}
           onChange={set('name')}
-          placeholder="Jane Doe"
+          placeholder={intl.formatMessage(messages.namePlaceholder)}
           value={form.name}
           width={10}
         />
@@ -63,9 +111,9 @@ const UserForm = ({
           autoFocus={validationErrors.email}
           disabled={disabled}
           error={<ValidationError error={validationErrors.email} />}
-          label="Email"
+          label={intl.formatMessage(messages.email)}
           onChange={set('email')}
-          placeholder="jane@doe.com"
+          placeholder={intl.formatMessage(messages.emailPlaceholder)}
           value={form.email}
           width={10}
         />
@@ -73,13 +121,13 @@ const UserForm = ({
       <Set vertical spaceBetween={0}>
         <Checkbox
           disabled={disabled}
-          label="Likes cats"
+          label={intl.formatMessage(messages.likesCats)}
           onChange={set('likesCats')}
           value={form.likesCats}
         />
         <Checkbox
           disabled={disabled}
-          label="Likes dogs"
+          label={intl.formatMessage(messages.likesDogs)}
           onChange={set('likesDogs')}
           value={form.likesDogs}
         />
@@ -87,21 +135,21 @@ const UserForm = ({
       <Set>
         <Radio
           disabled={disabled}
-          label="Female"
+          label={intl.formatMessage(messages.female)}
           onChange={set('gender')}
           select="female"
           value={form.gender}
         />
         <Radio
           disabled={disabled}
-          label="Male"
+          label={intl.formatMessage(messages.male)}
           onChange={set('gender')}
           select="male"
           value={form.gender}
         />
         <Radio
           disabled={disabled}
-          label="Other"
+          label={intl.formatMessage(messages.other)}
           onChange={set('gender')}
           select="other"
           value={form.gender}
@@ -112,7 +160,7 @@ const UserForm = ({
           autoFocus={validationErrors.isAnarchist}
           color="warning"
           disabled={disabled}
-          label="I agree we don't need a king"
+          label={intl.formatMessage(messages.agreedWithAnarchy)}
           labelOnLeft
           onChange={set('isAnarchist')}
           size={1}
@@ -121,9 +169,7 @@ const UserForm = ({
         <ValidationError error={validationErrors.isAnarchist} />
       </Set>
       <Set>
-        <Button primary onPress={addUser} disabled={disabled}>
-          Add
-        </Button>
+        <AddButton primary onPress={addUser} disabled={disabled} />
         <Button primary onPress={add10RandomUsers} disabled={disabled}>
           Add 10 random users
         </Button>

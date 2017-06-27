@@ -13,7 +13,7 @@ import ToggleBaseline from '../components/toggle-baseline';
 import ToggleDark from '../components/toggle-dark';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
-import { defineMessages } from 'react-intl';
+import { defineMessages, FormattedMessage } from 'react-intl';
 
 const onButtonPress = [
   'primary',
@@ -54,9 +54,15 @@ const Index = ({ intl }) =>
       size={{ height: 50, width: 50 }}
       src="/static/50x50.png"
     />
-    <Text>normal text</Text>
-    <Text size={-1}>small text</Text>
-    <P size={5}>text 5</P>
+    <Text>
+      <FormattedMessage defaultMessage="normal text" id="index.normalText" />
+    </Text>
+    <Text size={-1}>
+      <FormattedMessage defaultMessage="small text" id="index.smallText" />
+    </Text>
+    <P size={5}>
+      <FormattedMessage defaultMessage="text 5" id="index.text5" />
+    </P>
     <Blockquote
       source="Friedrich Hayek"
       href="https://en.wikipedia.org/wiki/Friedrich_Hayek"
