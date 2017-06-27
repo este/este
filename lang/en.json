@@ -10,6 +10,8 @@
   "button.signOut": "Sign Out",
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
+  "error.insufficientStorage": "Insufficient storage.",
+  "error.xhrError": "Network error. Please try it later.",
   "footer.madeBy": "made by",
   "forms.description": "Simple, fast, and typed Redux forms without unnecessary abstractions.",
   "index.normalText": "normal text",
@@ -28,9 +30,9 @@
   "userForm.name": "Name",
   "userForm.namePlaceholder": "Jane Doe",
   "userForm.other": "Other",
-  "validation.email": "Email address is not valid",
+  "validation.email": "Email address is not valid.",
   "validation.maxLength": "{maxLength} characters maximum",
   "validation.minLength": "{minLength} characters minimum",
   "validation.required": "Please fill out this field",
-  "validation.requiredAgree": "Please, think about it."
+  "validation.requiredAgree": "Please think about it."
 }

@@ -10,6 +10,8 @@
   "button.signOut": "Odhlásit se",
   "button.signUp": "Vytvořit účet",
   "button.submit": "Odeslat",
+  "error.insufficientStorage": "Nedostatečné úložiště.",
+  "error.xhrError": "Chyba sítě. Zkuste to prosím později.",
   "footer.madeBy": "vytvořil",
   "forms.description": "Jednoduché, rychlé, a typové Redux formuláře bez zbytečných abstrakcí.",
   "index.normalText": "normální text",
