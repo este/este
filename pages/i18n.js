@@ -11,7 +11,9 @@ const Forms = ({ intl, url: { pathname } }) => {
   const now = Date.now();
   return (
     <Page title={intl.formatMessage(sitemap.i18n.title)}>
-      <Heading size={3}>{intl.formatMessage(sitemap.i18n.title)}</Heading>
+      <Heading size={3}>
+        {intl.formatMessage(sitemap.i18n.title)}
+      </Heading>
       <SwitchLocale pathname={pathname} />
       <P>
         <FormattedNumber value={1024} />

@@ -58,7 +58,11 @@ const ValidationError = (props: ValidationErrorProps) => {
   const { error, bold = true, color = 'danger', ...restProps } = props;
   if (!error) return null;
   const message = getValidationErrorMessage(error);
-  return <Text bold={bold} color={color} {...restProps}>{message}</Text>;
+  return (
+    <Text bold={bold} color={color} {...restProps}>
+      {message}
+    </Text>
+  );
 };
 
 export default ValidationError;

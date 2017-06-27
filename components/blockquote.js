@@ -15,7 +15,9 @@ const Blockquote = ({ children, href, source }: BlockquoteProps) =>
     <Text italic>
       {children}
     </Text>
-    <Text> — <A href={href}>{source}</A></Text>
+    <Text>
+      {' '}— <A href={href}>{source}</A>
+    </Text>
   </P>;
 
 export default Blockquote;

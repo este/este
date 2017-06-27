@@ -42,7 +42,10 @@ const Checkbox = (
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
     >
       <Set marginBottom={0} flexDirection={labelOnLeft ? 'row' : 'row-reverse'}>
-        {label && <Text color={color} size={size}>{label}</Text>}
+        {label &&
+          <Text color={color} size={size}>
+            {label}
+          </Text>}
         <SvgIcon
           color={color}
           size={size}

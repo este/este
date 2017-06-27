@@ -10,7 +10,9 @@ import { FormattedMessage } from 'react-intl';
 
 const Forms = ({ intl }) =>
   <Page title={intl.formatMessage(sitemap.forms.title)}>
-    <Heading size={3}>{intl.formatMessage(sitemap.forms.title)}</Heading>
+    <Heading size={3}>
+      {intl.formatMessage(sitemap.forms.title)}
+    </Heading>
     <P>
       <FormattedMessage
         defaultMessage="Simple, fast, and typed Redux forms without unnecessary abstractions."

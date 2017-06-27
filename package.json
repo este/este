@@ -71,7 +71,7 @@
     "eslint-plugin-react": "^7.0.1",
     "flow-bin": "^0.48.0",
     "jest": "^20.0.1",
-    "prettier": "^1.1.0",
+    "prettier": "^1.5.1",
     "react-test-renderer": "^15.4.2"
   }
 }

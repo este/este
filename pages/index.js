@@ -38,15 +38,15 @@ export const messages = defineMessages({
 
 const Index = ({ intl }) =>
   <Page title={intl.formatMessage(sitemap.index.title)}>
-    <Heading size={3}>{intl.formatMessage(sitemap.index.title)}</Heading>
+    <Heading size={3}>
+      {intl.formatMessage(sitemap.index.title)}
+    </Heading>
     <P>
       {intl.formatMessage(messages.description)}
     </P>
     <P>
       {/* Styled text link. */}
-      <A href="https://github.com/este/este">
-        github.com/este/este
-      </A>
+      <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
     <Image
       alt="50x50 placeholder"
@@ -71,11 +71,21 @@ const Index = ({ intl }) =>
       really know about what they imagine they can design.
     </Blockquote>
     <Set>
-      <Button primary onPress={onButtonPress.primary}>Primary</Button>
-      <Button success onPress={onButtonPress.success}>Success</Button>
-      <Button warning onPress={onButtonPress.warning}>Warning</Button>
-      <Button danger onPress={onButtonPress.danger}>Danger</Button>
-      <Button primary disabled onPress={() => {}}>Disabled</Button>
+      <Button primary onPress={onButtonPress.primary}>
+        Primary
+      </Button>
+      <Button success onPress={onButtonPress.success}>
+        Success
+      </Button>
+      <Button warning onPress={onButtonPress.warning}>
+        Warning
+      </Button>
+      <Button danger onPress={onButtonPress.danger}>
+        Danger
+      </Button>
+      <Button primary disabled onPress={() => {}}>
+        Disabled
+      </Button>
       <Button onPress={onButtonPress.text}>Text</Button>
     </Set>
     <Set>

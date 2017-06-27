@@ -205,7 +205,9 @@ const Column = ({ header, field, users }) =>
   <Box>
     <Box height={2} paddingVertical={0.5}>
       {typeof header === 'string'
-        ? <Text bold style={{ whiteSpace: 'nowrap' }}>{header}</Text>
+        ? <Text bold style={{ whiteSpace: 'nowrap' }}>
+            {header}
+          </Text>
         : header}
     </Box>
     {users.map(user =>

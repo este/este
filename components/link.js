@@ -13,6 +13,10 @@ type LinkProps = {|
 |};
 
 const Link = ({ children, ...props }: LinkProps) =>
-  <LocaleLink {...props}><a>{children}</a></LocaleLink>;
+  <LocaleLink {...props}>
+    <a>
+      {children}
+    </a>
+  </LocaleLink>;
 
 export default Link;

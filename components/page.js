@@ -26,7 +26,9 @@ const PageContainer = ({ children }) =>
 
 // Flex 1 to make footer sticky.
 const PageBody = ({ children }) =>
-  <Box flex={1} maxWidth={30} paddingTop={2}>{children}</Box>;
+  <Box flex={1} maxWidth={30} paddingTop={2}>
+    {children}
+  </Box>;
 
 const PageFooter = () =>
   <Text
@@ -38,9 +40,10 @@ const PageFooter = () =>
     paddingVertical={1}
     size={-1}
   >
-    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />
-    {' '}
-    <A size={-1} href="https://twitter.com/steida">steida</A>
+    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
+    <A size={-1} href="https://twitter.com/steida">
+      steida
+    </A>
   </Text>;
 
 type PageProps = {|
@@ -56,7 +59,9 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
     <ThemeProvider theme={theme}>
       <Baseline>
         <Head>
-          <title>{title}</title>
+          <title>
+            {title}
+          </title>
           <meta name="theme-color" content={pageBackgroundColor} />
           <style
             dangerouslySetInnerHTML={{
@@ -67,7 +72,9 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
         <LoadingBar />
         <PageContainer>
           <MainNav title={title} />
-          <PageBody>{children}</PageBody>
+          <PageBody>
+            {children}
+          </PageBody>
           <PageFooter />
         </PageContainer>
       </Baseline>
