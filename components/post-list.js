@@ -1,5 +1,6 @@
 // @flow
 import Text from './text';
+// $FlowFixMe gql should be fixed soon
 import { gql, graphql } from 'react-apollo';
 
 const PostList = ({ data: { allPosts } }: any) =>

@@ -1,7 +1,6 @@
 [ignore]
 ; Probably not actual library definitions
 .*/node_modules/auth0-lock/.*
-.*/node_modules/apollo-client/.*
 .*/node_modules/mitt/.*
 ; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
@@ -9,6 +8,8 @@
 [include]
 
 [libs]
+types/react-apollo.js.flow
+types/apollo-client.js.flow
 types/app.js.flow
 
 [options]
