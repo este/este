@@ -1,5 +1,4 @@
 [ignore]
-; Probably not actual library definitions
 .*/node_modules/auth0-lock/.*
 .*/node_modules/mitt/.*
 ; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107
