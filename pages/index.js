@@ -6,7 +6,6 @@ import Heading from '../components/heading';
 import Image from '../components/image';
 import P from '../components/p';
 import Page from '../components/page';
-import PostList from '../components/post-list';
 import Set from '../components/set';
 import Text from '../components/text';
 import ToggleBaseline from '../components/toggle-baseline';
@@ -92,7 +91,6 @@ const Index = ({ intl }) =>
       <ToggleBaseline />
       <ToggleDark />
     </Set>
-    <PostList />
   </Page>;
 
 export default app(Index);
