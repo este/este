@@ -1,5 +1,5 @@
-// flow-typed signature: 5c31ea0cda4ec35904c11f0a46273dd8
-// flow-typed version: 8a02163f2e/ramda_v0.x.x/flow_>=v0.34.x
+// flow-typed signature: 373d57b7a52b25cdc8ff4edbd14ed99a
+// flow-typed version: a3ee7800c2/ramda_v0.x.x/flow_>=v0.34.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -152,7 +152,9 @@ declare module ramda {
   declare var propIs: CurriedFunction3<any,string,Object,boolean>;
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
-  declare function isNil(x: ?any): boolean;
+
+  declare function isNil(x: void|null): true;
+  declare function isNil(x: mixed): false;
 
   // *List
   declare function adjust<T>(fn:(a: T) => T, ...rest: Array<void>): (index: number, ...rest: Array<void>) => (src: Array<T>) => Array<T>;
@@ -560,8 +562,19 @@ declare module ramda {
 
   // TODO over
 
-  declare function path<V,A:?NestedObject<V>>(p: Array<string>, ...rest: Array<void>): (o: A) => ?V;
-  declare function path<V,A:?NestedObject<V>>(p: Array<string>, o: A): ?V;
+  declare function path<V>(p: Array<mixed>, ...rest: Array<void>): (o: NestedObject<V>) => V;
+  declare function path<V>(p: Array<mixed>, ...rest: Array<void>): (o: null|void) => void;
+  declare function path<V>(p: Array<mixed>, ...rest: Array<void>): (o: mixed) => ?V;
+  declare function path<V,A:NestedObject<V>>(p: Array<mixed>, o: A): V;
+  declare function path<V,A:null|void>(p: Array<mixed>, o: A): void;
+  declare function path<V,A:mixed>(p: Array<mixed>, o: A): ?V;
+
+  declare function path<V>(p: Array<string>, ...rest: Array<void>): (o: NestedObject<V>) => V;
+  declare function path<V>(p: Array<string>, ...rest: Array<void>): (o: null|void) => void;
+  declare function path<V>(p: Array<string>, ...rest: Array<void>): (o: mixed) => ?V;
+  declare function path<V,A:NestedObject<V>>(p: Array<string>, o: A): V;
+  declare function path<V,A:null|void>(p: Array<string>, o: A): void;
+  declare function path<V,A:mixed>(p: Array<string>, o: A): ?V;
 
   declare function pathOr<T,V,A:NestedObject<V>>(or: T, ...rest: Array<void>):
   ((p: Array<string>, ...rest: Array<void>) => (o: ?A) => V|T)
@@ -723,8 +736,8 @@ declare module ramda {
   declare function defaultTo<T,V>(d: T, ...rest: Array<void>): (x: ?V) => V|T;
   declare function defaultTo<T,V>(d: T, x: ?V): V|T;
 
-  declare function either(x: (...args: Array<any>) => boolean, ...rest: Array<void>): (y: (...args: Array<any>) => boolean) => (...args: Array<any>) => boolean;
-  declare function either(x: (...args: Array<any>) => boolean, y: (...args: Array<any>) => boolean): (...args: Array<any>) => boolean;
+  declare function either(x: (...args: Array<any>) => *, ...rest: Array<void>): (y: (...args: Array<any>) => *) => (...args: Array<any>) => *;
+  declare function either(x: (...args: Array<any>) => *, y: (...args: Array<any>) => *): (...args: Array<any>) => *;
 
   declare function ifElse<A,B,C>(cond:(...args: Array<A>) => boolean, ...rest: Array<void>):
   ((f1: (...args: Array<A>) => B, ...rest: Array<void>) => (f2: (...args: Array<A>) => C) => (...args: Array<A>) => B|C)

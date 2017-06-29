@@ -7,8 +7,8 @@
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.40.tgz#ac02de68e66c004a61b7cb16df8b1db3a254cca9"
 
 "@types/graphql@^0.9.0":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.2.tgz#5e3a2919a998d0bd9bb86b4b23e9630425bff1b2"
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.3.tgz#4a2a888e110c796eb7671bf8f9ecef229ad67749"
 
 "@types/isomorphic-fetch@0.0.34":
   version "0.0.34"
@@ -137,8 +137,8 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
 
 apollo-client@^1.0.0, apollo-client@^1.4.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.6.0.tgz#d2b831fd8e6e6c045ce91dc8b86a920d44fd77a9"
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.6.1.tgz#1b82e02ae5082c5e43b09daffdeced5a56e7128f"
   dependencies:
     graphql "^0.10.0"
     graphql-anywhere "^3.0.1"
@@ -1699,8 +1699,8 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
 electron-to-chromium@^1.3.14:
-  version "1.3.14"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.14.tgz#64af0f9efd3c3c6acd57d71f83b49ca7ee9c4b43"
+  version "1.3.15"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.15.tgz#08397934891cbcfaebbd18b82a95b5a481138369"
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -1884,13 +1884,12 @@ eslint-config-airbnb@^15.0.1:
   dependencies:
     eslint-config-airbnb-base "^11.2.0"
 
-eslint-import-resolver-node@^0.2.0:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.2.3.tgz#5add8106e8c928db2cba232bcd9efa846e3da16c"
+eslint-import-resolver-node@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.1.tgz#4422574cde66a9a7b099938ee4d508a199e0e3cc"
   dependencies:
-    debug "^2.2.0"
-    object-assign "^4.0.1"
-    resolve "^1.1.6"
+    debug "^2.6.8"
+    resolve "^1.2.0"
 
 eslint-loader@^1.7.0:
   version "1.8.0"
@@ -1910,14 +1909,14 @@ eslint-module-utils@^2.0.0:
     pkg-dir "^1.0.0"
 
 eslint-plugin-import@^2.2.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.6.0.tgz#2a4bbad36a078e052a3c830ce3dfbd6b8a12c6e5"
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.6.1.tgz#f580be62bb809421d46e338372764afcc9f59bf6"
   dependencies:
     builtin-modules "^1.1.1"
     contains-path "^0.1.0"
     debug "^2.6.8"
     doctrine "1.5.0"
-    eslint-import-resolver-node "^0.2.0"
+    eslint-import-resolver-node "^0.3.1"
     eslint-module-utils "^2.0.0"
     has "^1.0.1"
     lodash.cond "^4.3.0"
@@ -3284,8 +3283,8 @@ jest@^20.0.1:
     jest-cli "^20.0.4"
 
 js-tokens@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.5.1, js-yaml@^3.7.0:
   version "3.8.4"
@@ -4150,8 +4149,8 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
 prettier@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.1.tgz#3d6e60e5e7078ec218fe32867a3a66e946c01938"
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.2.tgz#7ea0751da27b93bfb6cecfcec509994f52d83bb3"
 
 pretty-format@^20.0.3:
   version "20.0.3"
@@ -4219,7 +4218,11 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-qs@^6.1.0, qs@^6.4.0, qs@~6.4.0:
+qs@^6.1.0, qs@^6.4.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
+
+qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
@@ -4616,7 +4619,7 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.6, resolve@^1.3.2:
+resolve@^1.1.6, resolve@^1.2.0, resolve@^1.3.2:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
   dependencies:
@@ -5239,8 +5242,8 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "~1.0.0"
 
 validator@^7.0.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-7.1.0.tgz#331695afc7e6d72f980bddd68aa296d6b3d6c8b6"
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-7.2.0.tgz#a63dcbaba51d4350bf8df20988e0d5a54d711791"
 
 verror@1.3.6:
   version "1.3.6"
