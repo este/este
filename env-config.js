@@ -13,6 +13,6 @@ module.exports = {
   DEFAULT_LOCALE: 'en',
   DOMAIN: production ? 'example.com' : 'localhost:3000/',
   GRAPHQL_ENDPOINT: production
-    ? 'https://api.graph.cool/simple/v1/cj157d6lgacrd01553jnd34tv'
-    : 'https://api.graph.cool/simple/v1/cj157d6lgacrd01553jnd34tv',
+    ? 'https://api.graph.cool/simple/v1/cj4iytrfz6tgx0192svkjh324'
+    : 'https://api.graph.cool/simple/v1/cj4iytrfz6tgx0192svkjh324',
 };
