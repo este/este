@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
     "extract-messages": "yarn run rimraf-babel-cache && next build && node ./scripts/extract-messages",
     "favicon": "node ./scripts/favicon",
@@ -19,7 +19,8 @@
     "relay": "relay-compiler --src ./pages/ --schema data/schema.graphql",
     "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
-    "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install"
+    "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
+    "analyze": "cross-env ANALYZE=1 next build"
   },
   "dependencies": {
     "accepts": "^1.3.3",
@@ -27,6 +28,7 @@
     "auth0-lock": "^10.14.0",
     "babel-plugin-react-intl": "^2.3.1",
     "color": "^1.0.3",
+    "cross-env": "^5.0.1",
     "fela": "^5.0.1",
     "fela-dom": "^5.0.2",
     "fela-plugin-placeholder-prefixer": "^5.0.1",
@@ -56,7 +58,8 @@
     "smoothscroll-polyfill": "^0.3.5",
     "url-parse": "^1.1.9",
     "uuid": "^3.0.1",
-    "validator": "^7.0.0"
+    "validator": "^7.0.0",
+    "webpack-bundle-analyzer": "^2.8.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
