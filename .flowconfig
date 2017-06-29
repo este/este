@@ -7,8 +7,6 @@
 [include]
 
 [libs]
-types/react-apollo.js.flow
-types/apollo-client.js.flow
 types/app.js.flow
 
 [options]
