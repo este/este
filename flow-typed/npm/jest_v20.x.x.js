@@ -1,5 +1,5 @@
-// flow-typed signature: f017cfa0d764a8fabdc4c53717562b38
-// flow-typed version: ad7f5fee21/jest_v20.x.x/flow_>=v0.33.x
+// flow-typed signature: a0369c11661f437ec4ccdd805579ddcf
+// flow-typed version: c4b9fea7c9/jest_v20.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -248,9 +248,9 @@ type JestExpectType = {
    */
   toHaveProperty(propPath: string, value?: any): void,
   /**
-   * Use .toMatch to check that a string matches a regular expression.
+   * Use .toMatch to check that a string matches a regular expression or string.
    */
-  toMatch(regexp: RegExp): void,
+  toMatch(regexpOrString: RegExp | string): void,
   /**
    * Use .toMatchObject to check that a javascript object matches a subset of the properties of an object.
    */
