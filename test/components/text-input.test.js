@@ -39,32 +39,24 @@ const theme = {
 
 const expectRender = createExpectRender(theme);
 
-const onChange = () => {};
-
 test('render', () => {
-  expectRender(() => <TextInput maxLength={1} onChange={onChange} />);
+  expectRender(() => <TextInput maxLength={1} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <TextInput maxLength={1} onChange={onChange} disabled />);
+  expectRender(() => <TextInput maxLength={1} disabled />);
 });
 
 test('color', () => {
-  expectRender(() =>
-    <TextInput maxLength={1} onChange={onChange} color="primary" />
-  );
+  expectRender(() => <TextInput maxLength={1} color="primary" />);
 });
 
 test('label', () => {
-  expectRender(() =>
-    <TextInput maxLength={1} onChange={onChange} label="label" />
-  );
+  expectRender(() => <TextInput maxLength={1} label="label" />);
 });
 
 test('error', () => {
-  expectRender(() =>
-    <TextInput maxLength={1} onChange={onChange} error="error" />
-  );
+  expectRender(() => <TextInput maxLength={1} error="error" />);
 });
 
 // TODO: label and error as components

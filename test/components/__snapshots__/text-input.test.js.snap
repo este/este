@@ -11,7 +11,6 @@ Object {
     <input
         className="h b c i j k l m n o p q r"
         maxLength={1}
-        onChange={[Function]}
     />
 </div>,
   "fela": "
@@ -48,7 +47,6 @@ Object {
         className="h b c i j k l m n o p q r s"
         disabled={true}
         maxLength={1}
-        onChange={[Function]}
     />
 </div>,
   "fela": "
@@ -91,7 +89,6 @@ Object {
     <input
         className="h b c i j k q m n o r s t"
         maxLength={1}
-        onChange={[Function]}
     />
 </div>,
   "fela": "
@@ -135,7 +132,6 @@ Object {
     <input
         className="h b c i j k l m n o q r s"
         maxLength={1}
-        onChange={[Function]}
     />
 </div>,
   "fela": "
@@ -172,7 +168,6 @@ Object {
     <input
         className="h b c i j k l m n o p q r"
         maxLength={1}
-        onChange={[Function]}
     />
 </div>,
   "fela": "

@@ -14,7 +14,8 @@ export type TextInputProps = TextProps & {
   disabled?: boolean,
   error?: string | Element<*>,
   label?: string | Element<*>,
-  onChange: (text: string) => void,
+  onChange?: (text: string) => void,
+  onSubmitEditing?: () => void,
 };
 
 const computePlaceholderTextColor = (colors, color) =>
@@ -26,6 +27,7 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     error,
     label,
     onChange,
+    onSubmitEditing,
     size = 0,
     ...restProps
   } = props;
@@ -62,8 +64,21 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
       <Text
         as="input"
         color={color}
-        onChange={({ currentTarget: { value } }) => onChange(value)}
         size={size}
+        {...(onChange
+          ? {
+              onChange: (e: { currentTarget: HTMLInputElement }) =>
+                onChange(e.currentTarget.value),
+            }
+          : null)}
+        {...(onSubmitEditing
+          ? {
+              onKeyDown: (e: SyntheticKeyboardEvent) => {
+                if (e.key !== 'Enter') return;
+                onSubmitEditing();
+              },
+            }
+          : null)}
         {...(restProps.disabled
           ? { opacity: theme.textInput.disabledOpacity }
           : null)}
