@@ -124,6 +124,7 @@ const app = (Page: Page) => {
 
       // Run all graphql queries in the component tree
       // and extract the resulting data.
+      // TODO: https://github.com/apollographql/react-apollo/issues/631#issuecomment-312451587
       if (!process.browser) {
         const apolloClient: ApolloClient = getApolloClient();
         const reduxStore: Store = getReduxStore(apolloClient, serverState);

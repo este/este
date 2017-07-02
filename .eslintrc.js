@@ -14,11 +14,13 @@ module.exports = {
     $PropertyType: true,
     Event: true,
     EventHandler: true,
+    HTMLInputElement: true,
     KeyboardEvent: true,
-    ReactClass: true,
     React$Element: true,
+    ReactClass: true,
+    SyntheticKeyboardEvent: true,
   },
-  // AirBnb is great, but very strict. Feel free to add anything.
+  // AirBnb is great, but very strict. Feel free to relax any rule.
   rules: {
     'arrow-parens': 0, // Does not work with Flow generic types.
     'comma-dangle': 0, // Because some files are still in ES5.
