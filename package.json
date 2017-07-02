@@ -39,7 +39,7 @@
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "localforage": "^1.5.0",
-    "next": "3.0.1-beta.2",
+    "next": "3.0.1-beta.6",
     "nprogress": "^0.2.0",
     "prop-types": "^15.5.9",
     "ramda": "^0.24.1",
