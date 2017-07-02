@@ -4,13 +4,6 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { assocPath } = require('ramda');
 
-const eslintRule = {
-  test: /\.js$/,
-  enforce: 'pre',
-  exclude: /node_modules/,
-  loader: 'eslint-loader',
-};
-
 module.exports = {
   webpack: (config, { dev }) => {
     if (process.env.ANALYZE) {
@@ -22,9 +15,19 @@ module.exports = {
         }),
       );
     }
-    // TODO: Figure out, how to render errors as warnings in dev mode.
-    // https://github.com/MoOx/eslint-loader/issues/174
-    if (dev) return config;
+
+    const eslintRule = {
+      test: /\.js$/,
+      enforce: 'pre',
+      exclude: /node_modules/,
+      loader: 'eslint-loader',
+      options: {
+        // Emit errors as warnings for dev to not break webpack build.
+        // Eslint errors are shown in console for dev, yay :-)
+        emitWarning: dev,
+      },
+    };
+
     const rules = [].concat(eslintRule, config.module.rules);
     return assocPath(['module', 'rules'], rules, config);
   },
