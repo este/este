@@ -44,7 +44,11 @@ const Radio = (
       size={size}
       {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
     >
-      <Set marginBottom={0} flexDirection={labelOnLeft ? 'row' : 'row-reverse'}>
+      <Set
+        marginBottom={0}
+        flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
+        justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
+      >
         {label &&
           <Text color={color} size={size}>
             {label}

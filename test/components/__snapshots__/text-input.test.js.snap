@@ -6,10 +6,10 @@ Object {
     className="a b c"
 >
     <div
-        className="a d c e f g"
+        className="a d c e f"
     />
     <input
-        className="h b c i j k l m n o p q r"
+        className="g b c h i j k l m n o p q"
         maxLength={1}
     />
 </div>,
@@ -19,19 +19,18 @@ Object {
     .c{position:relative}
     .d{flex-direction:row}
     .e{margin-bottom:0}
-    .f{align-items:flex-start}
-    .g{flex-wrap:wrap}
-    .h{display:inline}
-    .i{white-space:pre-wrap}
-    .j{overflow-wrap:break-word}
-    .k{-ms-hyphens:auto}
-    .l{color:blue}
-    .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .n{font-size:16}
-    .o{line-height:24px}
-    .p::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .q{background-color:transparent}
-    .r{outline:none}",
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:blue}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .p{background-color:transparent}
+    .q{outline:none}",
 }
 `;
 
@@ -41,10 +40,10 @@ Object {
     className="a b c"
 >
     <div
-        className="a d c e f g"
+        className="a d c e f"
     />
     <input
-        className="h b c i j k l m n o p q r s"
+        className="g b c h i j k l m n o p q r"
         disabled={true}
         maxLength={1}
     />
@@ -55,130 +54,9 @@ Object {
     .c{position:relative}
     .d{flex-direction:row}
     .e{margin-bottom:0}
-    .f{align-items:flex-start}
-    .g{flex-wrap:wrap}
-    .h{display:inline}
-    .i{opacity:0.5}
-    .j{white-space:pre-wrap}
-    .k{overflow-wrap:break-word}
-    .l{-ms-hyphens:auto}
-    .m{color:black}
-    .n{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .o{font-size:16}
-    .p{line-height:24px}
-    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .r{background-color:transparent}
-    .s{outline:none}",
-}
-`;
-
-exports[`error 1`] = `
-Object {
-  "component": <div
-    className="a b c"
->
-    <div
-        className="a d c e f g"
-    >
-        <div
-            className="h b c i j k l m n o p"
-        >
-            error
-        </div>
-    </div>
-    <input
-        className="h b c i j k q m n o r s t"
-        maxLength={1}
-    />
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-direction:row}
-    .e{margin-bottom:0}
-    .f{align-items:flex-start}
-    .g{flex-wrap:wrap}
-    .h{display:inline}
-    .i{white-space:pre-wrap}
-    .j{overflow-wrap:break-word}
-    .k{-ms-hyphens:auto}
-    .l{color:red}
-    .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .n{font-size:16}
-    .o{line-height:24px}
-    .p{font-weight:600}
-    .q{color:black}
-    .r::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .s{background-color:transparent}
-    .t{outline:none}",
-}
-`;
-
-exports[`label 1`] = `
-Object {
-  "component": <div
-    className="a b c"
->
-    <div
-        className="a d c e f g"
-    >
-        <div
-            className="h b c i j k l m n o p"
-        >
-            label
-        </div>
-    </div>
-    <input
-        className="h b c i j k l m n o q r s"
-        maxLength={1}
-    />
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-direction:row}
-    .e{margin-bottom:0}
-    .f{align-items:flex-start}
-    .g{flex-wrap:wrap}
-    .h{display:inline}
-    .i{white-space:pre-wrap}
-    .j{overflow-wrap:break-word}
-    .k{-ms-hyphens:auto}
-    .l{color:black}
-    .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
-    .n{font-size:16}
-    .o{line-height:24px}
-    .p{font-weight:600}
-    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .r{background-color:transparent}
-    .s{outline:none}",
-}
-`;
-
-exports[`render 1`] = `
-Object {
-  "component": <div
-    className="a b c"
->
-    <div
-        className="a d c e f g"
-    />
-    <input
-        className="h b c i j k l m n o p q r"
-        maxLength={1}
-    />
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-direction:row}
-    .e{margin-bottom:0}
-    .f{align-items:flex-start}
-    .g{flex-wrap:wrap}
-    .h{display:inline}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{opacity:0.5}
     .i{white-space:pre-wrap}
     .j{overflow-wrap:break-word}
     .k{-ms-hyphens:auto}
@@ -189,5 +67,122 @@ Object {
     .p::placeholder{color:rgba(0, 0, 0, 0.5)}
     .q{background-color:transparent}
     .r{outline:none}",
+}
+`;
+
+exports[`error 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o"
+        >
+            error
+        </div>
+    </div>
+    <input
+        className="g b c h i j p l m n q r s"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:red}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{font-weight:600}
+    .p{color:black}
+    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .r{background-color:transparent}
+    .s{outline:none}",
+}
+`;
+
+exports[`label 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o"
+        >
+            label
+        </div>
+    </div>
+    <input
+        className="g b c h i j k l m n p q r"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{font-weight:600}
+    .p::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .q{background-color:transparent}
+    .r{outline:none}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .p{background-color:transparent}
+    .q{outline:none}",
 }
 `;
