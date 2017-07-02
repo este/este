@@ -4,6 +4,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 import { Children } from 'react';
 
 // Something like Fieldset, but for any component and with axis and spacing.
+// It's Box with flexDirection, flexWrap, spacing, and default marginBottom.
 
 export type SetProps = BoxProps & {
   spaceBetween?: number,
@@ -34,7 +35,6 @@ const Set = (props: SetProps, { theme }: ThemeContext) => {
     spaceBetween = vertical
       ? theme.set.verticalSpaceBetween
       : theme.set.horizontalSpaceBetween,
-    alignItems = 'flex-start',
     flexDirection = vertical ? 'column' : 'row',
     flexWrap = 'wrap',
     marginBottom = theme.set.marginBottom,
@@ -43,7 +43,6 @@ const Set = (props: SetProps, { theme }: ThemeContext) => {
   return (
     <Box
       {...{
-        alignItems,
         flexDirection,
         flexWrap,
         marginBottom,
