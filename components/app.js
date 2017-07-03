@@ -86,6 +86,7 @@ type PageProps = {
   },
   intl: IntlShape,
 };
+
 type Page = FunctionalComponent<PageProps>;
 
 const app = (Page: Page) => {
