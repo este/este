@@ -1,5 +1,7 @@
 {
   "app.description": "Starter kit pro univerzální aplikace.",
+  "authForm.emailPlaceholder": "email",
+  "authForm.passowordPlaceholder": "heslo",
   "button.add": "Add",
   "button.cancel": "Cancel",
   "button.delete": "Delete",
@@ -22,6 +24,7 @@
   "sitemap.title.forms": "Formuláře",
   "sitemap.title.i18n": "i18n",
   "sitemap.title.index": "Este",
+  "sitemap.title.signIn": "Přihlášení",
   "userForm.agreedWithAnarchy": "Souhlasím, že lidi nepotřebují krále.",
   "userForm.email": "Email",
   "userForm.emailPlaceholder": "jana@novakova.cz",

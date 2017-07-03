@@ -1,5 +1,7 @@
 {
   "app.description": "Starter kit for universal apps.",
+  "authForm.emailPlaceholder": "email",
+  "authForm.passowordPlaceholder": "password",
   "button.add": "Add",
   "button.cancel": "Cancel",
   "button.delete": "Delete",
@@ -22,6 +24,7 @@
   "sitemap.title.forms": "Forms",
   "sitemap.title.i18n": "i18n",
   "sitemap.title.index": "Este",
+  "sitemap.title.signIn": "Sign In",
   "userForm.agreedWithAnarchy": "I agree we don't need a king",
   "userForm.email": "Email",
   "userForm.emailPlaceholder": "jane@doe.com",

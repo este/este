@@ -1,11 +1,12 @@
 // @flow
 import Box from './box';
-import Button from './button';
 import Form from './form';
 import Set from './set';
 import Text from './text';
 import TextInput from './text-input';
 import withTheme, { type ThemeContext } from './withTheme';
+import { SignInButton, SignUpButton } from './buttons';
+import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
 
 // https://blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
 const overrideWebkitYellowAutofill = theme => ({
@@ -15,7 +16,18 @@ const overrideWebkitYellowAutofill = theme => ({
   WebkitTextFillColor: theme.colors[theme.text.color],
 });
 
-const TextInputBig = ({ error, theme, ...props }) =>
+const messages = defineMessages({
+  emailPlaceholder: {
+    defaultMessage: 'email',
+    id: 'authForm.emailPlaceholder',
+  },
+  passowordPlaceholder: {
+    defaultMessage: 'password',
+    id: 'authForm.passowordPlaceholder',
+  },
+});
+
+const TextInputAuth = ({ error, theme, ...props }) =>
   <Box>
     <TextInput
       {...props}
@@ -33,30 +45,34 @@ const TextInputBig = ({ error, theme, ...props }) =>
       </Text>}
   </Box>;
 
-const AuthForm = (props: {}, { theme }: ThemeContext) =>
+type AuthFormProps = {
+  intl: IntlShape,
+};
+
+const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
   <Form>
     <Set vertical spaceBetween={0}>
-      <TextInputBig
+      <TextInputAuth
         error=""
         name="email"
-        placeholder="Email"
+        placeholder={intl.formatMessage(messages.emailPlaceholder)}
         theme={theme}
         type="email"
       />
-      <TextInputBig
+      <TextInputAuth
         error=""
         name="password"
-        placeholder="Password"
+        placeholder={intl.formatMessage(messages.passowordPlaceholder)}
         theme={theme}
         type="password"
       />
     </Set>
     <Set>
-      <Button primary>Sign In</Button>
-      <Button primary>Sign Up</Button>
+      <SignInButton primary />
+      <SignUpButton primary />
     </Set>
   </Form>;
 
 withTheme(AuthForm);
 
-export default AuthForm;
+export default injectIntl(AuthForm);
