@@ -67,7 +67,14 @@ export type BoxProps = {
   width?: MaybeRhythm,
 
   // Flexbox. Only what's compatible with React Native.
-  // github.com/facebook/react-native/blob/master/Libraries/StyleSheet/LayoutPropTypes.js
+  // https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/LayoutPropTypes.js
+  alignContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'stretch'
+    | 'space-between'
+    | 'space-around',
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline',
   alignSelf?:
     | 'auto'
@@ -210,6 +217,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
     top,
     width,
 
+    alignContent,
     alignItems,
     alignSelf,
     flex,
@@ -272,6 +280,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
       width,
     }),
     ...justValue({
+      alignContent,
       alignItems,
       alignSelf,
       flexBasis,
