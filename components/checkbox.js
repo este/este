@@ -8,7 +8,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 export type CheckboxProps = ButtonProps & {
   label?: string,
   labelOnLeft?: boolean,
-  onChange: (value: boolean) => any,
+  onChange?: (value: boolean) => any,
   value: boolean,
 };
 
@@ -35,6 +35,7 @@ const Checkbox = (
       aria-checked={value}
       onPress={() => {
         if (restProps.onPress) restProps.onPress();
+        if (!onChange) return;
         onChange(!value);
       }}
       role="checkbox"
