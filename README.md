@@ -15,7 +15,7 @@
 
 > **Next Este is in the next brach. Check issues need to be done.**
 
-> **Please support Este via Bitcoin: 15H9wHuJk7RPHfWPPCRtiUEBb7vX1iD7ui**
+> **Please support Este via Bitcoin: [15H9wHuJk7RPHfWPPCRtiUEBb7vX1iD7ui](https://blockchain.info/address/15H9wHuJk7RPHfWPPCRtiUEBb7vX1iD7ui)**
 
 > Pokud máte zájem o školení JavaScript, React.js, nebo Este.js, podívejte se na [javascript-skoleni.cz](https://javascript-skoleni.cz/).
 
