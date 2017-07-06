@@ -1,5 +1,5 @@
 // @flow
-import type { State, Dispatch, User, UserForm } from '../types';
+import type { State, Dispatch, UserFormFields } from '../types';
 import Box from '../components/box';
 import Button from '../components/button';
 import AlertErrors from '../components/alert-errors';
@@ -10,49 +10,47 @@ import Set from '../components/set';
 import Text from '../components/text';
 import TextInput from '../components/text-input';
 import { connect } from 'react-redux';
+import { temp } from '../lib/temp';
 
 // This is pretty fast editable lists. Just follow this two simple rules:
 // 1) Do not nest the same redux connect selected states.
 // 2) For huge lists, use react-virtualized.
 
 type RowFormProps = {
-  data: *,
-  changed: *,
-  field: 'select' | 'name' | 'likesCats' | 'likesDogs',
-  selected: *,
   dispatch: Dispatch,
-  appError: *,
-  validationErrors: *,
-  disabled: *,
+  field: 'select' | 'name' | 'likesCats' | 'likesDogs',
+  form: *,
+  isDirty: *,
+  selected: *,
+  user: *,
 };
 
 const RowForm = ({
-  data,
-  changed,
-  field,
-  selected,
   dispatch,
-  appError,
-  validationErrors,
-  disabled,
+  field,
+  form,
+  isDirty,
+  selected,
+  user,
 }: RowFormProps) => {
-  const user: User = { ...data, ...changed };
-  const set = (prop: $Keys<UserForm>) => value => {
+  const fields = isDirty ? form.fields : user;
+  const disabled = temp(form.disabled);
+  const set = (prop: $Keys<UserFormFields>) => value => {
     dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
-      // $FlowFixMe
-      form: { ...user, [prop]: value },
+      // $FlowFixMe Probably Flow bug.
+      fields: { ...fields, [prop]: value },
     });
   };
   const toggleUsersSelection = () => {
     dispatch({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
   };
   const saveUser = () => {
-    dispatch({ type: 'SAVE_USER', user });
+    dispatch({ type: 'SAVE_USER', user: fields });
   };
   const cancelEditation = () => {
-    dispatch({ type: 'SET_USER_FORM', id: user.id, form: null });
+    dispatch({ type: 'SET_USER_FORM', id: user.id, fields: null });
   };
   const onNameKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
@@ -86,7 +84,7 @@ const RowForm = ({
             maxLength={100}
             onChange={set('name')}
             onKeyDown={onNameKeyDown}
-            value={user[field]}
+            value={fields[field]}
             width={10}
             disabled={disabled}
           />
@@ -98,7 +96,7 @@ const RowForm = ({
             alignItems="center"
             height={1}
             onChange={set(field)}
-            value={user[field]}
+            value={fields[field]}
             disabled={disabled}
           />
         );
@@ -107,6 +105,7 @@ const RowForm = ({
     }
   };
   const renderEditActions = () =>
+    // Always render fixed height container for all columns to ensure row.
     <Box height={1}>
       {field === 'name' &&
         <Set flexWrap="nowrap">
@@ -132,8 +131,8 @@ const RowForm = ({
             cancel
           </Button>
           <AlertErrors
-            appError={appError}
-            validationErrors={validationErrors}
+            appError={form.appError}
+            validationErrors={form.validationErrors}
           />
         </Set>}
     </Box>;
@@ -143,18 +142,16 @@ const RowForm = ({
       <Box height={2} paddingVertical={0.5}>
         {renderField()}
       </Box>
-      {changed && renderEditActions()}
+      {isDirty && renderEditActions()}
     </Box>
   );
 };
 
 const ConnectedRowForm = connect(
-  ({ users: { form, selected } }: State, { data: { id } }) => ({
-    changed: form.changed[id],
+  ({ users: { form, selected } }: State, { user: { id } }) => ({
+    form: form.changed[id] || form.initial,
+    isDirty: !!form.changed[id],
     selected: selected[id],
-    appError: form.appError[id],
-    validationErrors: form.validationErrors[id],
-    disabled: form.disabled[id],
   }),
 )(RowForm);
 
@@ -201,8 +198,8 @@ const ConnectedToggleUsersSelection = connect(({ users }: State) => ({
   selected: users.selected,
 }))(ToggleUsersSelection);
 
-const Column = ({ header, field, users }) =>
-  <Box>
+const Column = ({ header, field, users, ...props }) =>
+  <Box {...props}>
     <Box height={2} paddingVertical={0.5}>
       {typeof header === 'string'
         ? <Text bold style={{ whiteSpace: 'nowrap' }}>
@@ -211,7 +208,7 @@ const Column = ({ header, field, users }) =>
         : header}
     </Box>
     {users.map(user =>
-      <ConnectedRowForm field={field} data={user} key={user.id} />,
+      <ConnectedRowForm field={field} user={user} key={user.id} />,
     )}
   </Box>;
 
@@ -255,8 +252,18 @@ const UsersTable = ({ users }) => {
                 />
                 <Column header="Name" field="name" users={sortedUsers} />
               </Set>
-              <Column header="🐈" field="likesCats" users={sortedUsers} />
-              <Column header="🐕" field="likesDogs" users={sortedUsers} />
+              <Column
+                header="🐈"
+                alignItems="center"
+                field="likesCats"
+                users={sortedUsers}
+              />
+              <Column
+                header="🐕"
+                alignItems="center"
+                field="likesDogs"
+                users={sortedUsers}
+              />
             </Set>
           </Box>}
     </Box>

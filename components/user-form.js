@@ -2,8 +2,8 @@
 import type {
   State,
   Dispatch,
-  UserForm as UserFormType,
-  ValidationErrors,
+  Form as FormType,
+  UserFormFields,
 } from '../types';
 import type { IntlShape } from 'react-intl';
 import AppError from '../components/app-error';
@@ -14,20 +14,12 @@ import Radio from '../components/radio';
 import Set from '../components/set';
 import TextInput from '../components/text-input';
 import ValidationError from '../components/validation-error';
+import gender from '../lib/users/gender';
 import { AddButton } from '../components/buttons';
 import { connect } from 'react-redux';
 import { defineMessages } from 'react-intl';
-import { newFormId } from '../lib/form';
-
-type UserFormProps = {
-  id: *,
-  form: UserFormType,
-  appError: *,
-  validationErrors: ValidationErrors<UserFormType>,
-  disabled: *,
-  dispatch: Dispatch,
-  intl: IntlShape,
-};
+import { noFormId } from '../lib/form';
+import { temp } from '../lib/temp';
 
 const messages = defineMessages({
   name: {
@@ -72,25 +64,23 @@ const messages = defineMessages({
   },
 });
 
-const UserForm = ({
-  id,
-  form,
-  appError,
-  validationErrors = {},
-  disabled,
-  dispatch,
-  intl,
-}: UserFormProps) => {
-  const set = (prop: $Keys<UserFormType>) => value => {
+type UserFormProps = {
+  intl: IntlShape,
+  form: FormType<UserFormFields>,
+  dispatch: Dispatch,
+};
+
+const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
+  const setUserForm = (prop: $Keys<UserFormFields>) => value => {
     dispatch({
       type: 'SET_USER_FORM',
-      id,
-      // $FlowFixMe I don't know how to get value type form prop. PR anyone?
-      form: { ...form, [prop]: value },
+      // $FlowFixMe Probably Flow bug.
+      fields: { ...form.fields, [prop]: value },
     });
   };
-  const addUser = () => dispatch({ type: 'ADD_USER', form });
+  const addUser = () => dispatch({ type: 'ADD_USER', fields: form.fields });
   const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
+  const disabled = temp(form.disabled);
 
   return (
     <Form onSubmit={addUser}>
@@ -98,23 +88,23 @@ const UserForm = ({
         <TextInput
           // Note we are not using name attribute. It's useful probably only
           // for browser signIn form prefill.
-          autoFocus={validationErrors.name}
+          autoFocus={form.validationErrors.name}
           disabled={disabled}
-          error={<ValidationError error={validationErrors.name} />}
+          error={<ValidationError error={form.validationErrors.name} />}
           label={intl.formatMessage(messages.name)}
-          onChange={set('name')}
+          onChange={setUserForm('name')}
           placeholder={intl.formatMessage(messages.namePlaceholder)}
-          value={form.name}
+          value={form.fields.name}
           width={10}
         />
         <TextInput
-          autoFocus={validationErrors.email}
+          autoFocus={form.validationErrors.email}
           disabled={disabled}
-          error={<ValidationError error={validationErrors.email} />}
+          error={<ValidationError error={form.validationErrors.email} />}
           label={intl.formatMessage(messages.email)}
-          onChange={set('email')}
+          onChange={setUserForm('email')}
           placeholder={intl.formatMessage(messages.emailPlaceholder)}
-          value={form.email}
+          value={form.fields.email}
           width={10}
         />
       </Set>
@@ -122,51 +112,51 @@ const UserForm = ({
         <Checkbox
           disabled={disabled}
           label={intl.formatMessage(messages.likesCats)}
-          onChange={set('likesCats')}
-          value={form.likesCats}
+          onChange={setUserForm('likesCats')}
+          value={form.fields.likesCats}
         />
         <Checkbox
           disabled={disabled}
           label={intl.formatMessage(messages.likesDogs)}
-          onChange={set('likesDogs')}
-          value={form.likesDogs}
+          onChange={setUserForm('likesDogs')}
+          value={form.fields.likesDogs}
         />
       </Set>
       <Set>
         <Radio
           disabled={disabled}
           label={intl.formatMessage(messages.female)}
-          onChange={set('gender')}
-          select="female"
-          value={form.gender}
+          onChange={setUserForm('gender')}
+          select={gender.female}
+          value={form.fields.gender}
         />
         <Radio
           disabled={disabled}
           label={intl.formatMessage(messages.male)}
-          onChange={set('gender')}
-          select="male"
-          value={form.gender}
+          onChange={setUserForm('gender')}
+          select={gender.male}
+          value={form.fields.gender}
         />
         <Radio
           disabled={disabled}
           label={intl.formatMessage(messages.other)}
-          onChange={set('gender')}
-          select="other"
-          value={form.gender}
+          onChange={setUserForm('gender')}
+          select={gender.other}
+          value={form.fields.gender}
         />
       </Set>
       <Set vertical>
         <Checkbox
-          autoFocus={validationErrors.isAnarchist}
+          autoFocus={form.validationErrors.isAnarchist}
           color="warning"
           disabled={disabled}
           label={intl.formatMessage(messages.agreedWithAnarchy)}
           labelOnLeft
-          onChange={set('isAnarchist')}
+          onChange={setUserForm('isAnarchist')}
           size={1}
-          value={form.isAnarchist}
+          value={form.fields.isAnarchist}
         />
-        <ValidationError error={validationErrors.isAnarchist} />
+        <ValidationError error={form.validationErrors.isAnarchist} />
       </Set>
       <Set>
         <AddButton primary onPress={addUser} disabled={disabled} />
@@ -174,15 +164,11 @@ const UserForm = ({
           Add 10 random users
         </Button>
       </Set>
-      <AppError error={appError} />
+      <AppError error={form.appError} />
     </Form>
   );
 };
 
-export default connect(({ users: { form } }: State, { id = newFormId }) => ({
-  id,
+export default connect(({ users: { form } }: State, { id = noFormId }) => ({
   form: form.changed[id] || form.initial,
-  appError: form.appError[id],
-  validationErrors: form.validationErrors[id],
-  disabled: form.disabled[id],
 }))(UserForm);

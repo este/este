@@ -1,5 +1,7 @@
 // @flow
 import type { Observable } from 'rxjs';
+import type { Temp } from '../lib/temp';
+import type { UserGender } from '../lib/users/gender';
 import type { ValidationError } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
@@ -16,40 +18,27 @@ import type {
 
 export type Id = string;
 
-// just some examples
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' };
 
-export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
+export type ValidationErrors<T> = { +[key: $Keys<T>]: ValidationError };
 
-// We need to define all possible errors per anything.
-export type Errors<T> = {|
-  appError?: AppError,
-  validationErrors?: ValidationErrors<T>,
-|};
-
-export type UserForm = {
-  +name: string,
-  +email: string,
-  +likesCats: boolean,
-  +likesDogs: boolean,
-  +gender: null | 'male' | 'female' | 'other',
-  +isAnarchist: boolean,
+export type Errors<T> = {
+  +appError?: AppError,
+  +validationErrors?: ValidationErrors<T>,
 };
 
-export type User = UserForm & {
-  +id: Id,
-  +createdAt: number,
-  +updatedAt: number,
+export type Form<Fields> = {
+  +fields: Fields,
+  +disabled: Temp<boolean>,
+  +appError: ?AppError,
+  +validationErrors: ValidationErrors<Fields>,
 };
 
-export type FormState<T> = {
-  +initial: T,
-  +changed: { +[id: Id]: T },
-  +appError: { +[id: Id]: AppError },
-  +validationErrors: { +[id: Id]: ValidationErrors<T> },
-  +disabled: { +[id: Id]: true },
+export type FormState<Fields> = {
+  +initial: Form<Fields>,
+  +changed: { +[id: Id]: Form<Fields> },
 };
 
 export type AppState = {
@@ -62,8 +51,34 @@ export type AppState = {
   +supportedLocales: Array<string>,
 };
 
+// TODO: Fields
+export type AuthForm = {
+  +email: string,
+  +password: string,
+};
+
+export type AuthState = {
+  // +form: Form<AuthForm>,
+};
+
+export type UserFormFields = {
+  +name: string,
+  +email: string,
+  +likesCats: boolean,
+  +likesDogs: boolean,
+  +gender: ?$Keys<UserGender>,
+  +gender: ?string,
+  +isAnarchist: boolean,
+};
+
+export type User = UserFormFields & {
+  +id: Id,
+  +createdAt: number,
+  +updatedAt: number,
+};
+
 export type UsersState = {
-  +form: FormState<UserForm>,
+  +form: FormState<UserFormFields>,
   +local: { +[id: Id]: User },
   +selected: { +[id: Id]: true },
 };
@@ -71,20 +86,21 @@ export type UsersState = {
 export type State = {
   +apollo: Object,
   +app: AppState,
+  +auth: AuthState,
   +users: UsersState,
 };
 
 // Async naming: ADD_USER, ADD_USER_CANCEL, ADD_USER_ERROR, ADD_USER_SUCCESS
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
-  | { type: 'ADD_USER', form: UserForm }
-  | { type: 'ADD_USER_ERROR', errors: Errors<UserForm> }
+  | { type: 'ADD_USER', fields: UserFormFields }
+  | { type: 'ADD_USER_ERROR', errors: Errors<UserFormFields> }
   | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
-  | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserForm> }
+  | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
-  | { type: 'SET_USER_FORM', id: Id, form: ?UserForm }
+  | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
