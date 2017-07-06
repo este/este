@@ -1,5 +1,5 @@
-// flow-typed signature: 373d57b7a52b25cdc8ff4edbd14ed99a
-// flow-typed version: a3ee7800c2/ramda_v0.x.x/flow_>=v0.34.x
+// flow-typed signature: 5aadf9f28a59c4403c4f0d1cbb80c416
+// flow-typed version: c9ee287fa6/ramda_v0.x.x/flow_>=v0.34.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -367,9 +367,9 @@ declare module ramda {
   declare function reduceRight<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => A;
   declare function reduceRight<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): A;
 
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, ...rest: Array<void>): ((init: A, xs: Array<B>) => A) & ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => A;
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): A;
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, ...rest: Array<void>): ((init: A, xs: Array<B>) => Array<A>) & ((init: A, ...rest: Array<void>) => (xs: Array<B>) => Array<A>);
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => Array<A>;
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): Array<A>;
 
   declare function splitAt<V,T:Array<V>|string>(i: number, xs: T): [T,T];
   declare function splitAt<V,T:Array<V>|string>(i: number): (xs: T) => [T,T];

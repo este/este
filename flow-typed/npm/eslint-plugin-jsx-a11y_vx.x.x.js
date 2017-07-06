@@ -1,4 +1,4 @@
-// flow-typed signature: be1e593a96905930bf8bb748da562616
+// flow-typed signature: 74997c4765d910171e7a59b23fc16b66
 // flow-typed version: <<STUB>>/eslint-plugin-jsx-a11y_v^5.0.3/flow_v0.49.1
 
 /**
@@ -63,6 +63,10 @@ declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test' {
 }
 
 declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-has-content-test' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-is-valid-test' {
   declare module.exports: any;
 }
 
@@ -251,6 +255,10 @@ declare module 'eslint-plugin-jsx-a11y/lib/rules/alt-text' {
 }
 
 declare module 'eslint-plugin-jsx-a11y/lib/rules/anchor-has-content' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-jsx-a11y/lib/rules/anchor-is-valid' {
   declare module.exports: any;
 }
 
@@ -614,6 +622,10 @@ declare module 'eslint-plugin-jsx-a11y/src/rules/anchor-has-content' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-jsx-a11y/src/rules/anchor-is-valid' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-jsx-a11y/src/rules/aria-activedescendant-has-tabindex' {
   declare module.exports: any;
 }
@@ -972,6 +984,9 @@ declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js' {
 declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-has-content-test.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-has-content-test'>;
 }
+declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-is-valid-test.js' {
+  declare module.exports: $Exports<'eslint-plugin-jsx-a11y/__tests__/src/rules/anchor-is-valid-test'>;
+}
 declare module 'eslint-plugin-jsx-a11y/__tests__/src/rules/aria-activedescendant-has-tabindex-test.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/__tests__/src/rules/aria-activedescendant-has-tabindex-test'>;
 }
@@ -1112,6 +1127,9 @@ declare module 'eslint-plugin-jsx-a11y/lib/rules/alt-text.js' {
 }
 declare module 'eslint-plugin-jsx-a11y/lib/rules/anchor-has-content.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/rules/anchor-has-content'>;
+}
+declare module 'eslint-plugin-jsx-a11y/lib/rules/anchor-is-valid.js' {
+  declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/rules/anchor-is-valid'>;
 }
 declare module 'eslint-plugin-jsx-a11y/lib/rules/aria-activedescendant-has-tabindex.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/rules/aria-activedescendant-has-tabindex'>;
@@ -1382,6 +1400,9 @@ declare module 'eslint-plugin-jsx-a11y/src/rules/alt-text.js' {
 }
 declare module 'eslint-plugin-jsx-a11y/src/rules/anchor-has-content.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/rules/anchor-has-content'>;
+}
+declare module 'eslint-plugin-jsx-a11y/src/rules/anchor-is-valid.js' {
+  declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/rules/anchor-is-valid'>;
 }
 declare module 'eslint-plugin-jsx-a11y/src/rules/aria-activedescendant-has-tabindex.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/rules/aria-activedescendant-has-tabindex'>;
