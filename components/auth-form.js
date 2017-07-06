@@ -1,15 +1,13 @@
 // @flow
-import type {} from // State,
-// Dispatch,
-// UserForm as UserFormType,
-// ValidationErrors,
-'../types';
+// import type {} from // State,
+// // Dispatch,
+// // UserForm as UserFormType,
+// // ValidationErrors,
+// '../types';
 
-import Box from './box';
 import Form from './form';
 import Set from './set';
-import Text from './text';
-import TextInput from './text-input';
+import TextInputBig from './text-input-big';
 import withTheme, { type ThemeContext } from './withTheme';
 import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
@@ -36,23 +34,12 @@ const messages = defineMessages({
   },
 });
 
-const TextInputAuth = ({ error, theme, ...props }) =>
-  <Box>
-    <TextInput
-      {...props}
-      borderBottomWidth={1}
-      borderColor="gray"
-      borderStyle="solid"
-      marginBottom={error ? 0 : 1}
-      maxWidth={26}
-      paddingVertical={0.5}
-      style={overrideWebkitYellowAutofill(theme)}
-    />
-    {error &&
-      <Text color="danger" size={-1}>
-        {/* {error} */}
-      </Text>}
-  </Box>;
+const TextInputBigAuth = ({ theme, ...props }) =>
+  <TextInputBig
+    {...props}
+    maxWidth={26}
+    style={overrideWebkitYellowAutofill(theme)}
+  />;
 
 type AuthFormProps = {
   intl: IntlShape,
@@ -63,14 +50,14 @@ type AuthFormProps = {
 const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
   <Form>
     <Set vertical spaceBetween={0}>
-      <TextInputAuth
+      <TextInputBigAuth
         error=""
         name="email"
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         theme={theme}
         type="email"
       />
-      <TextInputAuth
+      <TextInputBigAuth
         error=""
         name="password"
         placeholder={intl.formatMessage(messages.passowordPlaceholder)}
