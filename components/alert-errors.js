@@ -3,8 +3,8 @@ import type { AppError, ValidationErrors } from '../types';
 import React from 'react';
 
 type AlertErrorsProps = {
-  appError?: AppError,
-  validationErrors?: ValidationErrors<*>,
+  appError?: ?AppError,
+  validationErrors?: ?ValidationErrors<*>,
 };
 
 // TODO: Compose AppError And ValidationError into popup.
@@ -17,7 +17,7 @@ class AlertErrors extends React.PureComponent {
     if (appError) {
       // eslint-disable-next-line no-alert, no-undef
       alert(JSON.stringify(appError));
-    } else if (validationErrors) {
+    } else if (validationErrors && Object.keys(validationErrors).length > 0) {
       // eslint-disable-next-line no-alert, no-undef
       alert(JSON.stringify(validationErrors));
     }
