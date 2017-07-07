@@ -14,7 +14,7 @@ import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
-import { noFormId } from '../lib/form';
+import { initialFormId } from '../lib/form';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -79,6 +79,6 @@ export default compose(
   injectTheme,
   // Connect must be the last until React fixes context update.
   connect(({ auth: { form } }: State) => ({
-    form: form.changed[noFormId] || form.initial,
+    form: form.changed[initialFormId] || form.initial,
   })),
 )(AuthForm);

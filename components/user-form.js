@@ -18,7 +18,7 @@ import gender from '../lib/users/gender';
 import { AddButton } from '../components/buttons';
 import { connect } from 'react-redux';
 import { defineMessages } from 'react-intl';
-import { noFormId } from '../lib/form';
+import { initialFormId } from '../lib/form';
 import { temp } from '../lib/temp';
 
 const messages = defineMessages({
@@ -169,6 +169,8 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
   );
 };
 
-export default connect(({ users: { form } }: State, { id = noFormId }) => ({
-  form: form.changed[id] || form.initial,
-}))(UserForm);
+export default connect(
+  ({ users: { form } }: State, { id = initialFormId }) => ({
+    form: form.changed[id] || form.initial,
+  }),
+)(UserForm);
