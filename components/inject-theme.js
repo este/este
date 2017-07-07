@@ -2,7 +2,7 @@
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
-export type ThemeProps = {
+export type ThemeProp = {
   theme: Theme,
 };
 

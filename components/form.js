@@ -1,6 +1,6 @@
 // @flow
 import Box, { type BoxProps } from './box';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
 const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) =>
@@ -20,7 +20,7 @@ type FormProps = BoxProps & {
   onSubmit?: () => any,
 };
 
-const Form = (props: FormProps & ThemeProps) => {
+const Form = (props: FormProps & ThemeProp) => {
   const {
     theme,
     as = BrowserForm,

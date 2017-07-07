@@ -1,8 +1,8 @@
 // @flow
 import Text, { type TextProps } from './text';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
-const P = (props: TextProps & ThemeProps) => {
+const P = (props: TextProps & ThemeProp) => {
   const { theme, marginBottom = theme.p.marginBottom, ...restProps } = props;
   return <Text marginBottom={marginBottom} {...restProps} />;
 };

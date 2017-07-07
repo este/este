@@ -3,7 +3,7 @@ import Button, { type ButtonProps } from './button';
 import Set from './set';
 import SvgIcon from './svg-icon';
 import Text from './text';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 export type CheckboxProps = ButtonProps & {
   label?: string,
@@ -21,7 +21,7 @@ const Checkbox = ({
   color,
   size,
   ...props
-}: CheckboxProps & ThemeProps) => {
+}: CheckboxProps & ThemeProp) => {
   const {
     marginVertical = 0,
     paddingHorizontal = 0,

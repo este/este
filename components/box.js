@@ -4,7 +4,7 @@ import type { FunctionalComponent } from '../types';
 import AutoFocus from './auto-focus';
 import PropTypes from 'prop-types';
 import React, { type Children } from 'react';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.
@@ -183,7 +183,7 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-const Box = (props: BoxProps & ThemeProps, { renderer }: BoxContext) => {
+const Box = (props: BoxProps & ThemeProp, { renderer }: BoxContext) => {
   const {
     theme,
 

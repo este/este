@@ -1,6 +1,6 @@
 // @flow
 import Box, { type BoxProps } from './box';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 // Image requires size to prevents flash of unloaded content.
 // TODO: Make it responsive.
@@ -29,7 +29,7 @@ const verticalRhythmSize = ({ height, width }, lineHeight) => {
   };
 };
 
-const Image = (props: ImageProps & ThemeProps) => {
+const Image = (props: ImageProps & ThemeProp) => {
   const { theme, as = 'img', size, ...restProps } = props;
   return (
     <Box

@@ -1,8 +1,8 @@
 // @flow
 import Text, { type TextProps } from './text';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
-const Heading = (props: TextProps & ThemeProps) => {
+const Heading = (props: TextProps & ThemeProp) => {
   const {
     theme,
     bold = true,

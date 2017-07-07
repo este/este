@@ -3,7 +3,7 @@ import Button, { type ButtonProps } from './button';
 import Set from './set';
 import SvgIcon from './svg-icon';
 import Text from './text';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 export type RadioProps = ButtonProps & {
   label?: string,
@@ -22,7 +22,7 @@ const Radio = ({
   color,
   size,
   ...props
-}: RadioProps & ThemeProps) => {
+}: RadioProps & ThemeProp) => {
   const {
     theme,
     marginVertical = 0,

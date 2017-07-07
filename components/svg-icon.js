@@ -1,7 +1,7 @@
 // @flow
 import Text, { computeFontSizeAndLineHeight, type TextProps } from './text';
 import React, { type Element } from 'react';
-import injectTheme, { type ThemeProps } from './inject-theme';
+import injectTheme, { type ThemeProp } from './inject-theme';
 
 //  - flaticon.com
 //  - thenounproject.com
@@ -10,7 +10,7 @@ export type SvgIconProps = TextProps & {
   svg: Element<*>,
 };
 
-const SvgIcon = (props: SvgIconProps & ThemeProps) => {
+const SvgIcon = (props: SvgIconProps & ThemeProp) => {
   const {
     theme,
     svg,
