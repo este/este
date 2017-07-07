@@ -14,6 +14,7 @@ export type TextInputProps = TextProps & {
   disabled?: boolean,
   error?: string | Element<*>,
   label?: string | Element<*>,
+  maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
 };
@@ -27,6 +28,7 @@ const TextInput = (props: TextInputProps & ThemeProp) => {
     color = theme.text.color,
     error,
     label,
+    maxLength = 256,
     onChange,
     onSubmitEditing,
     size = 0,
@@ -66,6 +68,7 @@ const TextInput = (props: TextInputProps & ThemeProp) => {
         as="input"
         color={color}
         size={size}
+        maxLength={maxLength}
         {...(onChange
           ? {
               onChange: (e: { currentTarget: HTMLInputElement }) =>
