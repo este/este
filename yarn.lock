@@ -79,11 +79,11 @@ ajv@^4.7.0, ajv@^4.9.1:
     json-stable-stringify "^1.0.1"
 
 ajv@^5.1.5:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.0.tgz#c1735024c5da2ef75cc190713073d44f098bf486"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.1.tgz#dcd03045175883ba1b636e5ae9ec3df9ab85323a"
   dependencies:
     co "^4.6.0"
-    fast-deep-equal "^0.1.0"
+    fast-deep-equal "^1.0.0"
     json-schema-traverse "^0.3.0"
     json-stable-stringify "^1.0.1"
 
@@ -819,9 +819,9 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-preset-env@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.5.2.tgz#cd4ae90a6e94b709f97374b33e5f8b983556adef"
+babel-preset-env@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.6.0.tgz#2de1c782a780a0a5d605d199c957596da43c44e4"
   dependencies:
     babel-plugin-check-es2015-constants "^6.22.0"
     babel-plugin-syntax-trailing-function-commas "^6.22.0"
@@ -2066,9 +2066,9 @@ falafel@^1.0.1:
     isarray "0.0.1"
     object-keys "^1.0.6"
 
-fast-deep-equal@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-0.1.0.tgz#5c6f4599aba6b333ee3342e2ed978672f1001f8d"
+fast-deep-equal@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -3600,10 +3600,6 @@ minimist@1.2.0, minimist@^1.1.1, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
-mitt@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/mitt/-/mitt-1.1.2.tgz#380e61480d6a615b660f07abb60d51e0a4e4bed6"
-
 mkdirp-then@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mkdirp-then/-/mkdirp-then-1.2.0.tgz#a492c879ca4d873f5ee45008f8f55fd0150de3c5"
@@ -3661,9 +3657,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-next@3.0.1-beta.8:
-  version "3.0.1-beta.8"
-  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.8.tgz#125f6fff81a353d7d7bf68711a04b9550288fa1b"
+next@3.0.1-beta.9:
+  version "3.0.1-beta.9"
+  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.9.tgz#f80494d83ce1d08a071f5cd25109863c3bcaf640"
   dependencies:
     ansi-html "0.0.7"
     babel-core "6.25.0"
@@ -3678,7 +3674,7 @@ next@3.0.1-beta.8:
     babel-plugin-transform-react-jsx-source "6.22.0"
     babel-plugin-transform-react-remove-prop-types "0.4.5"
     babel-plugin-transform-runtime "6.22.0"
-    babel-preset-env "1.5.2"
+    babel-preset-env "1.6.0"
     babel-preset-react "6.24.1"
     babel-runtime "6.23.0"
     babel-template "6.25.0"
@@ -3696,7 +3692,6 @@ next@3.0.1-beta.8:
     loader-utils "1.1.0"
     md5-file "3.1.1"
     minimist "1.2.0"
-    mitt "1.1.2"
     mkdirp-then "1.2.0"
     mv "2.1.1"
     mz "2.6.0"
