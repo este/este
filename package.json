@@ -58,7 +58,7 @@
     "smoothscroll-polyfill": "^0.3.5",
     "url-parse": "^1.1.9",
     "uuid": "^3.0.1",
-    "validator": "^7.0.0",
+    "validator": "^8.0.0",
     "webpack-bundle-analyzer": "^2.8.2"
   },
   "devDependencies": {
