@@ -3,7 +3,7 @@ import Button, { type ButtonProps } from './button';
 import Set from './set';
 import SvgIcon from './svg-icon';
 import Text from './text';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme, { type ThemeProps } from './inject-theme';
 
 export type CheckboxProps = ButtonProps & {
   label?: string,
@@ -12,18 +12,16 @@ export type CheckboxProps = ButtonProps & {
   value: boolean,
 };
 
-const Checkbox = (
-  {
-    label,
-    labelOnLeft = false,
-    onChange,
-    value,
-    color,
-    size,
-    ...props
-  }: CheckboxProps,
-  { theme }: ThemeContext,
-) => {
+const Checkbox = ({
+  theme,
+  label,
+  labelOnLeft = false,
+  onChange,
+  value,
+  color,
+  size,
+  ...props
+}: CheckboxProps & ThemeProps) => {
   const {
     marginVertical = 0,
     paddingHorizontal = 0,
@@ -63,6 +61,4 @@ const Checkbox = (
   );
 };
 
-withTheme(Checkbox);
-
-export default Checkbox;
+export default injectTheme(Checkbox);

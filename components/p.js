@@ -1,12 +1,10 @@
 // @flow
 import Text, { type TextProps } from './text';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme, { type ThemeProps } from './inject-theme';
 
-const P = (props: TextProps, { theme }: ThemeContext) => {
-  const { marginBottom = theme.p.marginBottom, ...restProps } = props;
+const P = (props: TextProps & ThemeProps) => {
+  const { theme, marginBottom = theme.p.marginBottom, ...restProps } = props;
   return <Text marginBottom={marginBottom} {...restProps} />;
 };
 
-withTheme(P);
-
-export default P;
+export default injectTheme(P);

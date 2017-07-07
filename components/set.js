@@ -1,6 +1,6 @@
 // @flow
 import Box, { type BoxProps } from '../components/box';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme, { type ThemeProps } from './inject-theme';
 import { Children } from 'react';
 
 // Something like Fieldset, but for any component and with axis and spacing.
@@ -28,9 +28,10 @@ const addSpaceBetween = (children, spaceBetween) => {
   return spacedArray;
 };
 
-const Set = (props: SetProps, { theme }: ThemeContext) => {
+const Set = (props: SetProps & ThemeProps) => {
   const {
     children,
+    theme,
     vertical = false,
     spaceBetween = vertical
       ? theme.set.verticalSpaceBetween
@@ -54,6 +55,4 @@ const Set = (props: SetProps, { theme }: ThemeContext) => {
   );
 };
 
-withTheme(Set);
-
-export default Set;
+export default injectTheme(Set);

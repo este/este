@@ -1,7 +1,7 @@
 // @flow
 import type { ColorProps } from '../themes/types';
 import Text, { type TextProps } from './text';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme, { type ThemeProps } from './inject-theme';
 
 // Browser button is rendered as div with button role because button element is
 // hard to style consistently in Firefox and maybe elsewhere. Div is just fine.
@@ -47,9 +47,10 @@ export type ButtonProps = ColorProps &
     outline?: boolean,
   };
 
-const Button = (props: ButtonProps, { theme }: ThemeContext) => {
+const Button = (props: ButtonProps & ThemeProps) => {
   const {
     as = BrowserButton,
+    theme,
     size = 0,
     borderRadius = theme.button.borderRadius,
     marginVertical = size < 0
@@ -104,6 +105,4 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
   );
 };
 
-withTheme(Button);
-
-export default Button;
+export default injectTheme(Button);

@@ -1,27 +1,20 @@
 // @flow
-// import type {} from // State,
-// // Dispatch,
-// // UserForm as UserFormType,
-// // ValidationErrors,
-// '../types';
-
+import type {
+  State,
+  // Dispatch,
+  Form as FormType,
+  AuthFormFields,
+} from '../types';
+import type { Theme } from '../themes/types';
 import Form from './form';
 import Set from './set';
 import TextInputBig from './text-input-big';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme from './inject-theme';
 import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
-// import { noFormId } from '../lib/form';
-
-// https://blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
-const overrideWebkitYellowAutofill = theme => ({
-  WebkitBoxShadow: `inset 0 0 0px 9999px ${theme.colors[
-    theme.page.backgroundColor
-  ]}`,
-  WebkitTextFillColor: theme.colors[theme.text.color],
-});
+import { noFormId } from '../lib/form';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -34,6 +27,14 @@ const messages = defineMessages({
   },
 });
 
+// https://blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
+const overrideWebkitYellowAutofill = theme => ({
+  WebkitBoxShadow: `inset 0 0 0px 9999px ${theme.colors[
+    theme.page.backgroundColor
+  ]}`,
+  WebkitTextFillColor: theme.colors[theme.text.color],
+});
+
 const TextInputBigAuth = ({ theme, ...props }) =>
   <TextInputBig
     {...props}
@@ -42,12 +43,12 @@ const TextInputBigAuth = ({ theme, ...props }) =>
   />;
 
 type AuthFormProps = {
+  form: FormType<AuthFormFields>,
   intl: IntlShape,
+  theme: Theme,
 };
 
-// const addUser = () => dispatch({ type: 'ADD_USER', form });
-
-const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
+const AuthForm = ({ form, intl, theme }: AuthFormProps) =>
   <Form>
     <Set vertical spaceBetween={0}>
       <TextInputBigAuth
@@ -56,6 +57,7 @@ const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         theme={theme}
         type="email"
+        value={form.fields.email}
       />
       <TextInputBigAuth
         error=""
@@ -63,6 +65,7 @@ const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
         placeholder={intl.formatMessage(messages.passowordPlaceholder)}
         theme={theme}
         type="password"
+        value={form.fields.password}
       />
     </Set>
     <Set>
@@ -71,26 +74,11 @@ const AuthForm = ({ intl }: AuthFormProps, { theme }: ThemeContext) =>
     </Set>
   </Form>;
 
-withTheme(AuthForm);
-
 export default compose(
-  // connect(({ auth: { form } }: State) => ({
-  //   form: form.changed[noFormId] || form.initial,
-  // })),
   injectIntl,
+  injectTheme,
+  // Connect must be the last until React fixes context update.
+  connect(({ auth: { form } }: State) => ({
+    form: form.changed[noFormId] || form.initial,
+  })),
 )(AuthForm);
-//
-// const connectedAuthForm = connect(state => ({
-//
-// }))(AuthForm)
-//
-// // Object define compose?
-// export default connect(({ users: { form } }: State, { id = noFormId }) => ({
-//   id,
-//   form: form.changed[id] || form.initial,
-//   appError: form.appError[id],
-//   validationErrors: form.validationErrors[id],
-//   disabled: form.disabled[id],
-// }))(UserForm);
-
-// export default injectIntl(AuthForm);

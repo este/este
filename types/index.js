@@ -51,14 +51,13 @@ export type AppState = {
   +supportedLocales: Array<string>,
 };
 
-// TODO: Fields
-export type AuthForm = {
+export type AuthFormFields = {
   +email: string,
   +password: string,
 };
 
 export type AuthState = {
-  // +form: Form<AuthForm>,
+  +form: FormState<AuthFormFields>,
 };
 
 export type UserFormFields = {

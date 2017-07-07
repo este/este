@@ -2,7 +2,7 @@
 import type { Color, Theme } from '../themes/types';
 import Box, { type BoxProps } from './box';
 import colorLib from 'color';
-import withTheme, { type ThemeContext } from './withTheme';
+import injectTheme, { type ThemeProps } from './inject-theme';
 
 /*
   Text is the basic UI primitive for all text components.
@@ -65,8 +65,9 @@ const emulateReactNative = (theme, style, backgroundColor) => ({
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
-const Text = (props: TextProps, { theme }: ThemeContext) => {
+const Text = (props: TextProps & ThemeProps) => {
   const {
+    theme,
     align,
     bold,
     color = theme.text.color,
@@ -97,6 +98,4 @@ const Text = (props: TextProps, { theme }: ThemeContext) => {
   return <Box {...restProps} style={style} />;
 };
 
-withTheme(Text);
-
-export default Text;
+export default injectTheme(Text);
