@@ -39,7 +39,7 @@ const RowForm = ({
     dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
-      // $FlowFixMe Probably Flow bug.
+      // $FlowFixMe Flow bug.
       fields: { ...fields, [prop]: value },
     });
   };

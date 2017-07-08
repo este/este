@@ -54,7 +54,7 @@ const AuthForm = (
   const setUserForm = (prop: $Keys<AuthFormFields>) => value => {
     dispatch({
       type: 'SET_AUTH_FORM',
-      // $FlowFixMe Probably Flow bug.
+      // $FlowFixMe Flow bug.
       fields: { ...form.fields, [prop]: value },
     });
   };
