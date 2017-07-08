@@ -44,6 +44,7 @@ export type FormState<Fields> = {
 export type AppState = {
   +baselineShown: boolean,
   +darkEnabled: boolean,
+  +errors: ?Errors<Object>,
   +name: string,
   +version: string,
   +locale: string,
@@ -101,6 +102,9 @@ export type Action =
   | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
   | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
+  | { type: 'SIGN_IN', fields: AuthFormFields }
+  | { type: 'SIGN_IN_ERROR', errors: Errors<AuthFormFields> }
+  | { type: 'SIGN_IN_SUCCESS' }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };

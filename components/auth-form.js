@@ -5,9 +5,11 @@ import type {
   Form as FormType,
   State,
 } from '../types';
+import AppError from './app-error';
 import Form from './form';
 import Set from './set';
 import TextInputBig from './text-input-big';
+import ValidationError from '../components/validation-error';
 import withTheme, { type ThemeContext } from './with-theme';
 import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
@@ -58,12 +60,16 @@ const AuthForm = (
       fields: { ...form.fields, [prop]: value },
     });
   };
+  const signIn = () => {
+    dispatch({ type: 'SIGN_IN', fields: form.fields });
+  };
 
   return (
-    <Form>
+    <Form onSubmit={signIn}>
       <Set vertical spaceBetween={0}>
         <TextInputBigAuth
-          error=""
+          autoFocus={form.validationErrors.email}
+          error={<ValidationError error={form.validationErrors.email} />}
           name="email"
           onChange={setUserForm('email')}
           placeholder={intl.formatMessage(messages.emailPlaceholder)}
@@ -72,7 +78,8 @@ const AuthForm = (
           value={form.fields.email}
         />
         <TextInputBigAuth
-          error=""
+          autoFocus={form.validationErrors.password}
+          error={<ValidationError error={form.validationErrors.password} />}
           name="password"
           onChange={setUserForm('password')}
           placeholder={intl.formatMessage(messages.passowordPlaceholder)}
@@ -82,9 +89,10 @@ const AuthForm = (
         />
       </Set>
       <Set>
-        <SignInButton primary />
+        <SignInButton onPress={signIn} primary />
         <SignUpButton primary />
       </Set>
+      <AppError error={form.appError} />
     </Form>
   );
 };

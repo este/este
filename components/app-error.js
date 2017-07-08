@@ -34,7 +34,8 @@ const AppError = (props: AppErrorProps) => {
   const { error, bold = true, color = 'danger', ...restProps } = props;
   if (!error) return null;
 
-  // TODO: Report unknown error to server.
+  // TODO: Report unknown error to server. Probably via errors epic catching
+  // all errors like in app reducer.
   const message = getAppErrorMessage(error);
   return (
     <Text autoFocus={error} bold={bold} color={color} {...restProps}>

@@ -115,6 +115,7 @@ const app = (Page: Page) => {
         app: ({
           baselineShown: false,
           darkEnabled: false,
+          errors: null,
           name: APP_NAME,
           version: APP_VERSION,
           locale,
