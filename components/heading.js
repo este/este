@@ -1,10 +1,9 @@
 // @flow
 import Text, { type TextProps } from './text';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
-const Heading = (props: TextProps & ThemeProp) => {
+const Heading = (props: TextProps, { theme }: ThemeContext) => {
   const {
-    theme,
     bold = true,
     fontFamily = theme.heading.fontFamily,
     marginBottom = theme.heading.marginBottom,
@@ -20,4 +19,6 @@ const Heading = (props: TextProps & ThemeProp) => {
   );
 };
 
-export default injectTheme(Heading);
+withTheme(Heading);
+
+export default Heading;

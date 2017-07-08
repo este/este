@@ -3,7 +3,7 @@ import Button, { type ButtonProps } from './button';
 import Set from './set';
 import SvgIcon from './svg-icon';
 import Text from './text';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
 export type RadioProps = ButtonProps & {
   label?: string,
@@ -13,18 +13,20 @@ export type RadioProps = ButtonProps & {
   value: ?string,
 };
 
-const Radio = ({
-  label,
-  labelOnLeft = false,
-  onChange,
-  select,
-  value,
-  color,
-  size,
-  ...props
-}: RadioProps & ThemeProp) => {
+const Radio = (
+  {
+    label,
+    labelOnLeft = false,
+    onChange,
+    select,
+    value,
+    color,
+    size,
+    ...props
+  }: RadioProps,
+  { theme }: ThemeContext,
+) => {
   const {
-    theme,
     marginVertical = 0,
     paddingHorizontal = 0,
     paddingVertical = 0,
@@ -62,4 +64,6 @@ const Radio = ({
   );
 };
 
-export default injectTheme(Radio);
+withTheme(Radio);
+
+export default Radio;

@@ -1,15 +1,14 @@
 // @flow
 import type {
-  State,
-  // Dispatch,
-  Form as FormType,
   AuthFormFields,
+  Dispatch,
+  Form as FormType,
+  State,
 } from '../types';
-import type { Theme } from '../themes/types';
 import Form from './form';
 import Set from './set';
 import TextInputBig from './text-input-big';
-import injectTheme from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -43,42 +42,58 @@ const TextInputBigAuth = ({ theme, ...props }) =>
   />;
 
 type AuthFormProps = {
+  dispatch: Dispatch,
   form: FormType<AuthFormFields>,
   intl: IntlShape,
-  theme: Theme,
 };
 
-const AuthForm = ({ form, intl, theme }: AuthFormProps) =>
-  <Form>
-    <Set vertical spaceBetween={0}>
-      <TextInputBigAuth
-        error=""
-        name="email"
-        placeholder={intl.formatMessage(messages.emailPlaceholder)}
-        theme={theme}
-        type="email"
-        value={form.fields.email}
-      />
-      <TextInputBigAuth
-        error=""
-        name="password"
-        placeholder={intl.formatMessage(messages.passowordPlaceholder)}
-        theme={theme}
-        type="password"
-        value={form.fields.password}
-      />
-    </Set>
-    <Set>
-      <SignInButton primary />
-      <SignUpButton primary />
-    </Set>
-  </Form>;
+const AuthForm = (
+  { dispatch, form, intl }: AuthFormProps,
+  { theme }: ThemeContext,
+) => {
+  const setUserForm = (prop: $Keys<AuthFormFields>) => value => {
+    dispatch({
+      type: 'SET_AUTH_FORM',
+      // $FlowFixMe Probably Flow bug.
+      fields: { ...form.fields, [prop]: value },
+    });
+  };
+
+  return (
+    <Form>
+      <Set vertical spaceBetween={0}>
+        <TextInputBigAuth
+          error=""
+          name="email"
+          onChange={setUserForm('email')}
+          placeholder={intl.formatMessage(messages.emailPlaceholder)}
+          theme={theme}
+          type="email"
+          value={form.fields.email}
+        />
+        <TextInputBigAuth
+          error=""
+          name="password"
+          onChange={setUserForm('password')}
+          placeholder={intl.formatMessage(messages.passowordPlaceholder)}
+          theme={theme}
+          type="password"
+          value={form.fields.password}
+        />
+      </Set>
+      <Set>
+        <SignInButton primary />
+        <SignUpButton primary />
+      </Set>
+    </Form>
+  );
+};
+
+withTheme(AuthForm);
 
 export default compose(
-  injectIntl,
-  injectTheme,
-  // Connect must be the last until React fixes context update.
   connect(({ auth: { form } }: State) => ({
     form: form.changed[initialFormId] || form.initial,
   })),
+  injectIntl,
 )(AuthForm);

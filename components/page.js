@@ -52,11 +52,15 @@ type PageProps = {|
   title: string,
 |};
 
+// Because context is like dependency injection.
+// https://facebook.github.io/react/docs/context.html#updating-context
+const forceRenderOnThemeChange = theme => ({ key: JSON.stringify(theme) });
+
 const Page = ({ children, darkEnabled, title }: PageProps) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} {...forceRenderOnThemeChange(theme)}>
       <Baseline>
         <Head>
           <title>

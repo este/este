@@ -1,6 +1,6 @@
 // @flow
 import Box, { type BoxProps } from './box';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
 const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) =>
@@ -20,9 +20,8 @@ type FormProps = BoxProps & {
   onSubmit?: () => any,
 };
 
-const Form = (props: FormProps & ThemeProp) => {
+const Form = (props: FormProps, { theme }: ThemeContext) => {
   const {
-    theme,
     as = BrowserForm,
     marginBottom = theme.form.marginBottom,
     maxWidth = theme.form.maxWidth,
@@ -38,4 +37,6 @@ const Form = (props: FormProps & ThemeProp) => {
   );
 };
 
-export default injectTheme(Form);
+withTheme(Form);
+
+export default Form;

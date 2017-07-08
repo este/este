@@ -4,7 +4,7 @@ import Box from './box';
 import Set from './set';
 import Text, { type TextProps } from './text';
 import colorLib from 'color';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check Field.
@@ -22,9 +22,8 @@ export type TextInputProps = TextProps & {
 const computePlaceholderTextColor = (colors, color) =>
   colorLib(colors[color]).fade(0.5).toString();
 
-const TextInput = (props: TextInputProps & ThemeProp) => {
+const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   const {
-    theme,
     color = theme.text.color,
     error,
     label,
@@ -93,4 +92,6 @@ const TextInput = (props: TextInputProps & ThemeProp) => {
   );
 };
 
-export default injectTheme(TextInput);
+withTheme(TextInput);
+
+export default TextInput;

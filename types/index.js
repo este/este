@@ -99,6 +99,7 @@ export type Action =
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
+  | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
   | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }

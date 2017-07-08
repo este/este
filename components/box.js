@@ -4,7 +4,7 @@ import type { FunctionalComponent } from '../types';
 import AutoFocus from './auto-focus';
 import PropTypes from 'prop-types';
 import React, { type Children } from 'react';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.
@@ -123,7 +123,7 @@ export type BoxProps = {
   borderTopColor?: Color,
 };
 
-type BoxContext = {
+type BoxContext = ThemeContext & {
   renderer: { renderRule: (rule: () => Object) => string },
 };
 
@@ -183,10 +183,8 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-const Box = (props: BoxProps & ThemeProp, { renderer }: BoxContext) => {
+const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
   const {
-    theme,
-
     as,
     autoFocus,
     isReactNative,
@@ -335,4 +333,6 @@ Box.contextTypes = {
   renderer: PropTypes.object,
 };
 
-export default injectTheme(Box);
+withTheme(Box);
+
+export default Box;

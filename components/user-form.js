@@ -92,6 +92,7 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
           disabled={disabled}
           error={<ValidationError error={form.validationErrors.name} />}
           label={intl.formatMessage(messages.name)}
+          maxLength={256}
           onChange={setUserForm('name')}
           placeholder={intl.formatMessage(messages.namePlaceholder)}
           value={form.fields.name}
@@ -102,6 +103,7 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
           disabled={disabled}
           error={<ValidationError error={form.validationErrors.email} />}
           label={intl.formatMessage(messages.email)}
+          maxLength={256}
           onChange={setUserForm('email')}
           placeholder={intl.formatMessage(messages.emailPlaceholder)}
           value={form.fields.email}

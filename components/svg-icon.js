@@ -1,7 +1,7 @@
 // @flow
 import Text, { computeFontSizeAndLineHeight, type TextProps } from './text';
 import React, { type Element } from 'react';
-import injectTheme, { type ThemeProp } from './inject-theme';
+import withTheme, { type ThemeContext } from './with-theme';
 
 //  - flaticon.com
 //  - thenounproject.com
@@ -10,14 +10,8 @@ export type SvgIconProps = TextProps & {
   svg: Element<*>,
 };
 
-const SvgIcon = (props: SvgIconProps & ThemeProp) => {
-  const {
-    theme,
-    svg,
-    color = theme.text.color,
-    size = 0,
-    ...restProps
-  } = props;
+const SvgIcon = (props: SvgIconProps, { theme }: ThemeContext) => {
+  const { svg, color = theme.text.color, size = 0, ...restProps } = props;
   const { fontSize, lineHeight } = computeFontSizeAndLineHeight(theme, size);
   const top = (lineHeight - fontSize) / 2;
 
@@ -40,4 +34,6 @@ const SvgIcon = (props: SvgIconProps & ThemeProp) => {
   );
 };
 
-export default injectTheme(SvgIcon);
+withTheme(SvgIcon);
+
+export default SvgIcon;
