@@ -17,7 +17,7 @@ Object {
         />
     </div>
     <div
-        className="g b c z p q r ab t ac v"
+        className="a b c z"
     />
 </div>,
   "fela": "
@@ -46,9 +46,7 @@ Object {
     .w::placeholder{color:rgba(0, 0, 255, 0.5)}
     .x{background-color:transparent}
     .y{outline:none}
-    .z{min-height:24}
-    .ab{color:red}
-    .ac{font-size:16}",
+    .z{min-height:24}",
 }
 `;
 
@@ -70,7 +68,7 @@ Object {
         />
     </div>
     <div
-        className="g b c ab q r s ac u ad w"
+        className="a b c ab"
     />
 </div>,
   "fela": "
@@ -100,9 +98,7 @@ Object {
     .x::placeholder{color:rgba(0, 0, 0, 0.5)}
     .y{background-color:transparent}
     .z{outline:none}
-    .ab{min-height:24}
-    .ac{color:red}
-    .ad{font-size:16}",
+    .ab{min-height:24}",
 }
 `;
 
@@ -123,9 +119,13 @@ Object {
         />
     </div>
     <div
-        className="g b c z p q r ab t ac v"
+        className="a b c z"
     >
-        error
+        <div
+            className="g b c p q r ab t ac v"
+        >
+            error
+        </div>
     </div>
 </div>,
   "fela": "
@@ -183,7 +183,7 @@ Object {
         />
     </div>
     <div
-        className="g b c ab h i j ac l ad n"
+        className="a b c ab"
     />
 </div>,
   "fela": "
@@ -213,9 +213,7 @@ Object {
     .x::placeholder{color:rgba(0, 0, 0, 0.5)}
     .y{background-color:transparent}
     .z{outline:none}
-    .ab{min-height:24}
-    .ac{color:red}
-    .ad{font-size:16}",
+    .ab{min-height:24}",
 }
 `;
 
@@ -236,7 +234,7 @@ Object {
         />
     </div>
     <div
-        className="g b c z p q r ab t ac v"
+        className="a b c z"
     />
 </div>,
   "fela": "
@@ -265,8 +263,6 @@ Object {
     .w::placeholder{color:rgba(0, 0, 0, 0.5)}
     .x{background-color:transparent}
     .y{outline:none}
-    .z{min-height:24}
-    .ab{color:red}
-    .ac{font-size:16}",
+    .z{min-height:24}",
 }
 `;
