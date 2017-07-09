@@ -38,7 +38,7 @@ const AllPosts = ({
   );
 };
 
-const AllPostsQuery = gql`
+const allPostsQuery = gql`
   query allPosts {
     allPosts(orderBy: createdAt_DESC) {
       createdAt
@@ -49,7 +49,7 @@ const AllPostsQuery = gql`
   }
 `;
 
-const AllPostsWithData = graphql(AllPostsQuery)(AllPosts);
+const AllPostsWithData = graphql(allPostsQuery)(AllPosts);
 
 // Class, because we are using local state for this example.
 // It's explicit as fuck for demonstration purposes.
@@ -99,7 +99,7 @@ class CreatePost extends React.Component {
   }
 }
 
-const CreatePostMutation = gql`
+const createPostMutation = gql`
   mutation createPost($text: String!) {
     createPost(text: $text) {
       id
@@ -107,12 +107,12 @@ const CreatePostMutation = gql`
   }
 `;
 
-const CreatePostWithData = graphql(CreatePostMutation, {
+const CreatePostWithData = graphql(createPostMutation, {
   props: ({ mutate }) => ({
     createPost: text =>
       mutate({
         variables: { text },
-        refetchQueries: [{ query: AllPostsQuery }],
+        refetchQueries: [{ query: allPostsQuery }],
       }),
   }),
 })(CreatePost);
@@ -128,7 +128,7 @@ const DeletePost = ({ deletePost }) =>
     delete
   </Button>;
 
-const DeletePostMutation = gql`
+const deletePostMutation = gql`
   mutation deletePost($id: ID!) {
     deletePost(id: $id) {
       id
@@ -136,18 +136,18 @@ const DeletePostMutation = gql`
   }
 `;
 
-const DeletePostWithData = graphql(DeletePostMutation, {
+const DeletePostWithData = graphql(deletePostMutation, {
   props: ({ mutate, ownProps: { id } }) => ({
     deletePost: () =>
       mutate({
         variables: { id },
         update: (proxy, { data: { deletePost } }) => {
-          const data = proxy.readQuery({ query: AllPostsQuery });
+          const data = proxy.readQuery({ query: allPostsQuery });
           const idx = data.allPosts.findIndex(
             post => post.id === deletePost.id,
           );
           data.allPosts.splice(idx, 1);
-          proxy.writeQuery({ query: AllPostsQuery, data });
+          proxy.writeQuery({ query: allPostsQuery, data });
         },
       }),
   }),
