@@ -4,6 +4,8 @@ const { DEFAULT_LOCALE } = require('../env-config');
 const { readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
+// TODO: Detect missing and unused translations. PR please.
+
 const defaultMessages = glob
   .sync('./lang/.messages/**/*.json')
   .map(filename => readFileSync(filename, 'utf8'))

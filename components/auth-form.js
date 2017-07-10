@@ -6,7 +6,9 @@ import type {
   State,
 } from '../types';
 import AppError from './app-error';
+import Box from './box';
 import Form from './form';
+import Heading from './heading';
 import Set from './set';
 import TextInputBig from './text-input-big';
 import ValidationError from '../components/validation-error';
@@ -16,6 +18,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
 import { initialFormId } from '../lib/form';
+import { temp } from '../lib/temp';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -53,6 +56,7 @@ const AuthForm = (
   { dispatch, form, intl }: AuthFormProps,
   { theme }: ThemeContext,
 ) => {
+  const disabled = temp(form.disabled);
   const setUserForm = (prop: $Keys<AuthFormFields>) => value => {
     dispatch({
       type: 'SET_AUTH_FORM',
@@ -60,40 +64,46 @@ const AuthForm = (
       fields: { ...form.fields, [prop]: value },
     });
   };
-  const signIn = () => {
-    dispatch({ type: 'SIGN_IN', fields: form.fields });
-  };
+  const auth = signUp =>
+    dispatch({ type: 'AUTH', fields: { ...form.fields, signUp } });
+  const signIn = () => auth(false);
+  const signUp = () => auth(true);
 
   return (
-    <Form onSubmit={signIn}>
-      <Set vertical spaceBetween={0}>
-        <TextInputBigAuth
-          autoFocus={form.validationErrors.email}
-          error={<ValidationError error={form.validationErrors.email} />}
-          name="email"
-          onChange={setUserForm('email')}
-          placeholder={intl.formatMessage(messages.emailPlaceholder)}
-          theme={theme}
-          type="email"
-          value={form.fields.email}
-        />
-        <TextInputBigAuth
-          autoFocus={form.validationErrors.password}
-          error={<ValidationError error={form.validationErrors.password} />}
-          name="password"
-          onChange={setUserForm('password')}
-          placeholder={intl.formatMessage(messages.passowordPlaceholder)}
-          theme={theme}
-          type="password"
-          value={form.fields.password}
-        />
-      </Set>
-      <Set>
-        <SignInButton onPress={signIn} primary />
-        <SignUpButton primary />
-      </Set>
-      <AppError error={form.appError} />
-    </Form>
+    <Box>
+      <Heading size={3}>Auth</Heading>
+      <Form onSubmit={signIn}>
+        <Set vertical spaceBetween={0}>
+          <TextInputBigAuth
+            autoFocus={form.validationErrors.email}
+            disabled={disabled}
+            error={<ValidationError error={form.validationErrors.email} />}
+            name="email"
+            onChange={setUserForm('email')}
+            placeholder={intl.formatMessage(messages.emailPlaceholder)}
+            theme={theme}
+            type="email"
+            value={form.fields.email}
+          />
+          <TextInputBigAuth
+            autoFocus={form.validationErrors.password}
+            disabled={disabled}
+            error={<ValidationError error={form.validationErrors.password} />}
+            name="password"
+            onChange={setUserForm('password')}
+            placeholder={intl.formatMessage(messages.passowordPlaceholder)}
+            theme={theme}
+            type="password"
+            value={form.fields.password}
+          />
+        </Set>
+        <Set>
+          <SignInButton disabled={disabled} onPress={signIn} primary />
+          <SignUpButton disabled={disabled} onPress={signUp} />
+        </Set>
+        <AppError error={form.appError} />
+      </Form>
+    </Box>
   );
 };
 

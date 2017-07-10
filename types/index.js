@@ -13,34 +13,40 @@ import type {
 
 // Algebraic data types make domain modelling easy.
 // http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
+
 // Redux state is meant to be immutable.
 // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
-// TODO: Exact state, once Flow fixes spread on exact types.
+
+// Use exact object type as much as possible, but not where ... spread is used,
+// because Flow doesn't support spread with exact types yet.
+// https://flow.org/en/docs/types/objects/#toc-exact-object-types
 
 export type Id = string;
 
+// AppError could be composed as well. Type composition ftw.
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
-  | { type: 'xhrError' };
+  | { type: 'xhrError' }
+  | { type: 'unknown', message: string };
 
 export type ValidationErrors<T> = { +[key: $Keys<T>]: ValidationError };
 
-export type Errors<T> = {
+export type Errors<T> = {|
   +appError?: AppError,
   +validationErrors?: ValidationErrors<T>,
-};
+|};
 
-export type Form<Fields> = {
+export type Form<Fields> = {|
   +fields: Fields,
   +disabled: Temp<boolean>,
   +appError: ?AppError,
   +validationErrors: ValidationErrors<Fields>,
-};
+|};
 
-export type FormState<Fields> = {
+export type FormState<Fields> = {|
   +initial: Form<Fields>,
   +changed: { +[id: Id]: Form<Fields> },
-};
+|};
 
 export type AppState = {
   +baselineShown: boolean,
@@ -53,14 +59,15 @@ export type AppState = {
   +supportedLocales: Array<string>,
 };
 
-export type AuthFormFields = {
+export type AuthFormFields = {|
   +email: string,
   +password: string,
-};
+  +signUp: boolean,
+|};
 
-export type AuthState = {
+export type AuthState = {|
   +form: FormState<AuthFormFields>,
-};
+|};
 
 export type UserFormFields = {
   +name: string,
@@ -84,32 +91,33 @@ export type UsersState = {
   +selected: { +[id: Id]: true },
 };
 
-export type State = {
+export type State = {|
   +apollo: Object,
   +app: AppState,
   +auth: AuthState,
   +users: UsersState,
-};
+|};
 
-export type ServerState = {
+export type ServerState = {|
   +app: AppState,
-};
+|};
 
 // Async naming: ADD_USER, ADD_USER_CANCEL, ADD_USER_ERROR, ADD_USER_SUCCESS
+// Note no exact nor imutable types here yet until Flow fix spread syntax.
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
   | { type: 'ADD_USER', fields: UserFormFields }
   | { type: 'ADD_USER_ERROR', errors: Errors<UserFormFields> }
   | { type: 'ADD_USER_SUCCESS', user: User }
+  | { type: 'AUTH', fields: AuthFormFields }
+  | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
+  | { type: 'AUTH_SUCCESS' }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
   | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
-  | { type: 'SIGN_IN', fields: AuthFormFields }
-  | { type: 'SIGN_IN_ERROR', errors: Errors<AuthFormFields> }
-  | { type: 'SIGN_IN_SUCCESS' }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
@@ -131,7 +139,6 @@ export type Dependencies = PlatformDependencies & {
 
 // TODO: There are no redux-observable flow definitions yet. Therefore, we have
 // to use .filter instead of .ofType and
-// https://flow.org/en/docs/lang/refinements.
 // https://github.com/redux-observable/redux-observable/issues/258
 export type Epic = (
   actions$: Observable<Action>,

@@ -1,5 +1,8 @@
 {
   "app.description": "Starter kit for universal apps.",
+  "appError.insufficientStorage": "Insufficient storage.",
+  "appError.unknown": "{errorMessage}",
+  "appError.xhrError": "Network error. Please try it later.",
   "authForm.emailPlaceholder": "email",
   "authForm.passowordPlaceholder": "password",
   "button.add": "Add",
@@ -12,8 +15,6 @@
   "button.signOut": "Sign Out",
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
-  "error.insufficientStorage": "Insufficient storage.",
-  "error.xhrError": "Network error. Please try it later.",
   "footer.madeBy": "made by",
   "forms.description": "Simple, fast, and typed Redux forms without unnecessary abstractions.",
   "index.normalText": "normal text",
@@ -35,9 +36,10 @@
   "userForm.name": "Name",
   "userForm.namePlaceholder": "Jane Doe",
   "userForm.other": "Other",
-  "validation.email": "Email address is not valid.",
-  "validation.maxLength": "{maxLength} characters maximum",
-  "validation.minLength": "{minLength} characters minimum",
-  "validation.required": "Please fill out this field",
-  "validation.requiredAgree": "Please think about it."
+  "validationError.alreadyExists": "Already exists.",
+  "validationError.email": "Email address is not valid.",
+  "validationError.maxLength": "{maxLength} characters maximum.",
+  "validationError.minLength": "{minLength} characters minimum.",
+  "validationError.required": "Please fill out this field.",
+  "validationError.requiredAgree": "Please think about it."
 }

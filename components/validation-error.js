@@ -12,30 +12,30 @@ const getValidationErrorMessage = error => {
     case 'required':
       return (
         <FormattedMessage
-          defaultMessage="Please fill out this field"
-          id="validation.required"
+          defaultMessage="Please fill out this field."
+          id="validationError.required"
         />
       );
     case 'requiredAgree':
       return (
         <FormattedMessage
           defaultMessage="Please think about it."
-          id="validation.requiredAgree"
+          id="validationError.requiredAgree"
         />
       );
     case 'minLength':
       return (
         <FormattedMessage
-          defaultMessage="{minLength} characters minimum"
-          id="validation.minLength"
+          defaultMessage="{minLength} characters minimum."
+          id="validationError.minLength"
           values={{ minLength: error.minLength }}
         />
       );
     case 'maxLength':
       return (
         <FormattedMessage
-          defaultMessage="{maxLength} characters maximum"
-          id="validation.maxLength"
+          defaultMessage="{maxLength} characters maximum."
+          id="validationError.maxLength"
           values={{ maxLength: error.maxLength }}
         />
       );
@@ -43,7 +43,14 @@ const getValidationErrorMessage = error => {
       return (
         <FormattedMessage
           defaultMessage="Email address is not valid."
-          id="validation.email"
+          id="validationError.email"
+        />
+      );
+    case 'alreadyExists':
+      return (
+        <FormattedMessage
+          defaultMessage="Already exists."
+          id="validationError.alreadyExists"
         />
       );
     default:

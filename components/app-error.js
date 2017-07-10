@@ -7,25 +7,35 @@ type AppErrorProps = TextProps & {
   error: ?AppErrorType,
 };
 
-const getAppErrorMessage = error => {
-  switch (error.type) {
+const getAppErrorMessage = appError => {
+  switch (appError.type) {
     case 'insufficientStorage':
       return (
         <FormattedMessage
           defaultMessage="Insufficient storage."
-          id="error.insufficientStorage"
+          id="appError.insufficientStorage"
         />
       );
     case 'xhrError':
       return (
         <FormattedMessage
           defaultMessage="Network error. Please try it later."
-          id="error.xhrError"
+          id="appError.xhrError"
+        />
+      );
+    case 'unknown':
+      return (
+        <FormattedMessage
+          defaultMessage={'{errorMessage}'}
+          id="appError.unknown"
+          values={{
+            errorMessage: appError.message,
+          }}
         />
       );
     default:
       // eslint-disable-next-line no-unused-expressions
-      (error: empty);
+      (appError: empty);
       return null;
   }
 };
