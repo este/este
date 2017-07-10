@@ -1,6 +1,7 @@
 // @flow
+import type { ApolloClient } from 'apollo-client';
 import type { IntlShape } from 'react-intl';
-import type { Store, AppState, FunctionalComponent } from '../types';
+import type { Store, ServerState, FunctionalComponent } from '../types';
 import React from 'react';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
@@ -31,12 +32,6 @@ if (typeof window !== 'undefined') {
   }
 }
 
-type ApolloClient = any;
-
-const platformDependencies = {
-  createUuid: uuid.v4,
-};
-
 const singletonOnClient = (create: Function) => {
   let singleton;
   return (...args) => {
@@ -50,7 +45,11 @@ const getApolloClient: () => ApolloClient = singletonOnClient(() =>
   createApolloClient(),
 );
 
-const getReduxStore = singletonOnClient((apolloClient, initialState) => {
+const getReduxStore: (
+  apolloClient: ApolloClient,
+  serverState: ServerState,
+) => Store = singletonOnClient((apolloClient, initialState) => {
+  const platformDependencies = { apolloClient, createUuid: uuid.v4 };
   const platformReducers = { apollo: apolloClient.reducer() };
   const platformMiddleware = [apolloClient.middleware()];
   return createReduxStore(initialState, {
@@ -112,7 +111,7 @@ const app = (Page: Page) => {
       const initialNow = Date.now();
 
       let serverState = {
-        app: ({
+        app: {
           baselineShown: false,
           darkEnabled: false,
           errors: null,
@@ -121,15 +120,22 @@ const app = (Page: Page) => {
           locale,
           defaultLocale: DEFAULT_LOCALE,
           supportedLocales,
-        }: AppState),
+        },
       };
 
       // Run all graphql queries in the component tree
       // and extract the resulting data.
       // TODO: https://github.com/apollographql/react-apollo/issues/631#issuecomment-312451587
       if (!process.browser) {
-        const apolloClient: ApolloClient = getApolloClient();
-        const reduxStore: Store = getReduxStore(apolloClient, serverState);
+        // TODO: Verify.
+        // https://github.com/zeit/next.js/blob/d7d4b7c332a30b13ddf78ef45772a46ec52ac4de/examples/with-apollo-auth/lib/with-data.js#L42
+        // if (context.res && context.res.finished) {
+        //   // When redirecting, the response is finished.
+        //   // No point in continuing to render
+        //   return;
+        // }
+        const apolloClient = getApolloClient();
+        const reduxStore = getReduxStore(apolloClient, serverState);
 
         // Provide the `url` prop data in case a graphql query uses it.
         const url = { query: context.query, pathname: context.pathname };
@@ -180,6 +186,7 @@ const app = (Page: Page) => {
 
     constructor(props: any) {
       super(props);
+      // getToken: () => parseCookies().token
       this.apolloClient = getApolloClient();
       this.reduxStore = getReduxStore(this.apolloClient, props.serverState);
     }
