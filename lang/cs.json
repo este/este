@@ -1,5 +1,6 @@
 {
   "app.description": "Starter kit pro univerzální aplikace.",
+  "appError.cannotSignInCredentialsInvalid": "Špatný email nebo heslo.",
   "appError.insufficientStorage": "Nedostatečné úložiště.",
   "appError.unknown": "{errorMessage}",
   "appError.xhrError": "Chyba sítě. Zkuste to prosím později.",

@@ -27,6 +27,7 @@ export type Id = string;
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' }
+  | { type: 'cannotSignInCredentialsInvalid' }
   | { type: 'unknown', message: string };
 
 export type ValidationErrors<T> = { +[key: $Keys<T>]: ValidationError };

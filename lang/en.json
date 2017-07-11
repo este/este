@@ -1,5 +1,6 @@
 {
   "app.description": "Starter kit for universal apps.",
+  "appError.cannotSignInCredentialsInvalid": "Wrong email or password.",
   "appError.insufficientStorage": "Insufficient storage.",
   "appError.unknown": "{errorMessage}",
   "appError.xhrError": "Network error. Please try it later.",

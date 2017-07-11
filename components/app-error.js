@@ -23,6 +23,13 @@ const getAppErrorMessage = appError => {
           id="appError.xhrError"
         />
       );
+    case 'cannotSignInCredentialsInvalid':
+      return (
+        <FormattedMessage
+          defaultMessage="Wrong email or password."
+          id="appError.cannotSignInCredentialsInvalid"
+        />
+      );
     case 'unknown':
       return (
         <FormattedMessage
