@@ -1,5 +1,5 @@
-// flow-typed signature: 3ea785afae2c069c2aa13a6794a7b0f9
-// flow-typed version: 6da74cc042/react-intl_v2.x.x/flow_>=v0.48.x
+// flow-typed signature: d70c2a346165c23a73a5071fbf91f7ff
+// flow-typed version: 0b3a13b666/react-intl_v2.x.x/flow_>=v0.48.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -17,8 +17,8 @@ type LocaleData = {
 
 type MessageDescriptor = {
   id: string,
-  defaultMessage: string,
   description?: string,
+  defaultMessage?: string,
 };
 
 type MessageDescriptorMap = { [key: string]: MessageDescriptor };

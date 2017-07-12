@@ -1,5 +1,5 @@
 # project: Este
-# version: 4
+# version: 7
 
 type File implements Node {
   contentType: String!

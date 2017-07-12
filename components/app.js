@@ -3,6 +3,7 @@ import type { ApolloClient } from 'apollo-client';
 import type { IntlShape } from 'react-intl';
 import type { Store, ServerState, FunctionalComponent } from '../types';
 import React from 'react';
+import cookie from 'cookie';
 import createApolloClient from '../lib/create-apollo-client';
 import createReduxStore from '../lib/create-redux-store';
 import felaRenderer from '../lib/fela-renderer';
@@ -41,8 +42,10 @@ const singletonOnClient = (create: Function) => {
   };
 };
 
-const getApolloClient: () => ApolloClient = singletonOnClient(() =>
-  createApolloClient(),
+const getApolloClient: (getToken: {
+  getToken: () => string,
+}) => ApolloClient = singletonOnClient(({ getToken }) =>
+  createApolloClient({ getToken }),
 );
 
 const getReduxStore: (
@@ -88,6 +91,13 @@ type PageProps = {
 
 type Page = FunctionalComponent<PageProps>;
 
+const parseCookie = (context = {}) =>
+  cookie.parse(
+    process.browser
+      ? document.cookie // eslint-disable-line
+      : context.req && context.req.headers.cookie,
+  );
+
 const app = (Page: Page) => {
   const IntlPage = injectIntl(Page);
   // We need Class because we need a componentDidMount.
@@ -123,8 +133,7 @@ const app = (Page: Page) => {
         },
       };
 
-      // Run all graphql queries in the component tree
-      // and extract the resulting data.
+      // Run all graphql queries in the component tree and extract the result.
       // TODO: https://github.com/apollographql/react-apollo/issues/631#issuecomment-312451587
       if (!process.browser) {
         // TODO: Verify.
@@ -134,7 +143,9 @@ const app = (Page: Page) => {
         //   // No point in continuing to render
         //   return;
         // }
-        const apolloClient = getApolloClient();
+        const apolloClient = getApolloClient({
+          getToken: () => parseCookie(context).token,
+        });
         const reduxStore = getReduxStore(apolloClient, serverState);
 
         // Provide the `url` prop data in case a graphql query uses it.
@@ -186,8 +197,9 @@ const app = (Page: Page) => {
 
     constructor(props: any) {
       super(props);
-      // getToken: () => parseCookies().token
-      this.apolloClient = getApolloClient();
+      this.apolloClient = getApolloClient({
+        getToken: () => parseCookie().token,
+      });
       this.reduxStore = getReduxStore(this.apolloClient, props.serverState);
     }
 
