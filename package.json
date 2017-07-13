@@ -20,7 +20,8 @@
     "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
-    "analyze": "cross-env ANALYZE=1 next build"
+    "analyze": "cross-env ANALYZE=1 next build",
+    "postinstall": "rimraf node_modules/react-apollo/node_modules/react-dom"
   },
   "dependencies": {
     "accepts": "^1.3.3",

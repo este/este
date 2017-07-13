@@ -1,5 +1,5 @@
-// flow-typed signature: 5aadf9f28a59c4403c4f0d1cbb80c416
-// flow-typed version: c9ee287fa6/ramda_v0.x.x/flow_>=v0.34.x
+// flow-typed signature: fb41b34bb0832bbf65201e563f3ca56c
+// flow-typed version: ef808615f5/ramda_v0.x.x/flow_>=v0.39.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -24,35 +24,52 @@ declare module ramda {
     (value: any, key: string): boolean;
   }
 
-  declare type CurriedFunction2<T1, T2, R> =
-    & ((t1: T1, t2: T2) => R)
-    & ((t1: T1, ...rest: Array<void>) => (t2: T2) => R)
+  declare type __CurriedFunction1<A, R, AA: A> =
+    & ((...r: [AA]) => R)
+  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>
 
-  declare type CurriedFunction3<T1, T2, T3, R> =
-    & ((t1: T1, t2: T2, t3: T3) => R)
-    & ((t1: T1, t2: T2, ...rest: Array<void>) => (t3: T3) => R)
-    & ((t1: T1, ...rest: Array<void>) => CurriedFunction2<T2, T3, R>)
+  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> =
+    & ((...r: [AA]) => CurriedFunction1<BB, R>)
+    & ((...r: [AA, BB]) => R)
+  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>
 
-  declare type CurriedFunction4<T1, T2, T3, T4, R> =
-    & ((t1: T1, t2: T2, t3: T3, t4: T4) => R)
-    & ((t1: T1, t2: T2, t3: T3, ...rest: Array<void>) => (t4: T4) => R)
-    & ((t1: T1, t2: T2, ...rest: Array<void>) => CurriedFunction2<T3, T4, R>)
-    & ((t1: T1, ...rest: Array<void>) => CurriedFunction3<T2, T3, T4, R>)
+  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> =
+    & ((...r: [AA]) => CurriedFunction2<BB, CC, R>)
+    & ((...r: [AA, BB]) => CurriedFunction1<CC, R>)
+    & ((...r: [AA, BB, CC]) => R)
+  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<A, B, C, R, *, *, *>
 
-  declare type CurriedFunction5<T1, T2, T3, T4, T5, R> =
-    & ((t1: T1) => CurriedFunction4<T2, T3, T4, T5, R>)
-    & ((t1: T1, t2: T2) => CurriedFunction3<T3, T4, T5, R>)
-    & ((t1: T1, t2: T2, t3: T3) => CurriedFunction2<T4, T5, R>)
-    & ((t1: T1, t2: T2, t3: T3, t4: T4) => (t5: T5) => R)
-    & ((t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R)
+  declare type __CurriedFunction4<A, B, C, D, R, AA: A, BB: B, CC: C, DD: D> =
+    & ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>)
+    & ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>)
+    & ((...r: [AA, BB, CC, DD]) => R)
+  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<A, B, C, D, R, *, *, *, *>
 
-  declare type CurriedFunction6<T1, T2, T3, T4, T5, T6, R> =
-    & ((t1: T1) => CurriedFunction5<T2, T3, T4, T5, T6, R>)
-    & ((t1: T1, t2: T2) => CurriedFunction4<T3, T4, T5, T6, R>)
-    & ((t1: T1, t2: T2, t3: T3) => CurriedFunction3<T4, T5, T6, R>)
-    & ((t1: T1, t2: T2, t3: T3, t4: T4) => CurriedFunction2<T5, T6, R>)
-    & ((t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => (t6: T6) => R)
-    & ((t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => R)
+  declare type __CurriedFunction5<A, B, C, D, E, R, AA: A, BB: B, CC: C, DD: D, EE: E> =
+    & ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>)
+    & ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>)
+    & ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>)
+    & ((...r: [AA, BB, CC, DD, EE]) => R)
+  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<A, B, C, D, E, R, *, *, *, *, *>
+
+  declare type __CurriedFunction6<A, B, C, D, E, F, R, AA: A, BB: B, CC: C, DD: D, EE: E, FF: F> =
+    & ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>)
+    & ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>)
+    & ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>)
+    & ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>)
+    & ((...r: [AA, BB, CC, DD, EE, FF]) => R)
+  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<A, B, C, D, E, F, R, *, *, *, *, *, *>
+
+  declare type Curry =
+    & (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>)
+    & (<A, B, R>((...r: [A, B]) => R) => CurriedFunction2<A, B, R>)
+    & (<A, B, C, R>((...r: [A, B, C]) => R) => CurriedFunction3<A, B, C, R>)
+    & (<A, B, C, D, R>((...r: [A, B, C, D]) => R) => CurriedFunction4<A, B, C, D, R>)
+    & (<A, B, C, D, E, R>((...r: [A, B, C, D, E]) => R) => CurriedFunction5<A, B, C, D, E, R>)
+    & (<A, B, C, D, E, F, R>((...r: [A, B, C, D, E, F]) => R) => CurriedFunction6<A, B, C, D, E, F, R>)
 
   declare type Pipe = (<A,B,C,D,E,F,G>(ab: UnaryFn<A,B>, bc: UnaryFn<B,C>, cd: UnaryFn<C,D>, de: UnaryFn<D,E>, ef: UnaryFn<E,F>, fg: UnaryFn<F,G>, ...rest: Array<void>) => UnaryFn<A,G>)
     & (<A,B,C,D,E,F>(ab: UnaryFn<A,B>, bc: UnaryFn<B,C>, cd: UnaryFn<C,D>, de: UnaryFn<D,E>, ef: UnaryFn<E,F>, ...rest: Array<void>) => UnaryFn<A,F>)
@@ -67,13 +84,6 @@ declare module ramda {
     & (<A,B,C,D>(cd: UnaryFn<C,D>, bc: UnaryFn<B,C>, ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,D>)
     & (<A,B,C>(bc: UnaryFn<B,C>, ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,C>)
     & (<A,B>(ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,B>)
-
-  declare type Curry = & (<T1, T2, TResult>(fn: (a: T1, b: T2) => TResult) => CurriedFunction2<T1,T2, TResult>)
-    & (<T1, T2, T3, TResult>(fn: (a: T1, b: T2, c: T3) => TResult) => CurriedFunction3<T1,T2, T3, TResult>)
-    & (<T1, T2, T3, T4, TResult>(fn: (a: T1, b: T2, c: T3, d: T4) => TResult) => CurriedFunction4<T1,T2, T3, T4, TResult>)
-    & (<T1, T2, T3, T4, T5, TResult>(fn: (a: T1, b: T2, c: T3, d: T4, e: T5) => TResult) => CurriedFunction5<T1,T2, T3, T4, T5, TResult>)
-    & (<T1, T2, T3, T4, T5, T6, TResult>(fn: (a: T1, b: T2, c: T3, d: T4, e: T5, f: T6) => TResult) => CurriedFunction6<T1,T2, T3, T4, T5, T6, TResult>)
-    & ((fn: Function) => Function)
 
   declare type Filter =
     & (<K,V,T:Array<V>|{[key:K]:V}>(fn: UnaryPredicateFn<V>, xs:T) => T)
@@ -643,7 +653,7 @@ declare module ramda {
   declare function apply<T,V>(fn: (...args: Array<T>) => V, ...rest: Array<void>): (xs: Array<T>) => V;
   declare function apply<T,V>(fn: (...args: Array<T>) => V, xs: Array<T>): V;
 
-  declare function applySpec<S,V,T:NestedObject<(...args: Array<V>) => S>>(spec: T): (...args: Array<V>) => NestedObject<S>;
+  declare function applySpec<V, S, A: Array<V>, T: NestedObject<(...args: A) => S>>(spec: T): (...args: A) => NestedObject<S>
 
   declare function binary<T>(fn:(...args: Array<any>) => T): (x: any, y: any) => T;
 
