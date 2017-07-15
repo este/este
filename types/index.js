@@ -1,5 +1,4 @@
 // @flow
-import type { ApolloClient } from 'apollo-client';
 import type { Observable } from 'rxjs';
 import type { Temp } from '../lib/temp';
 import type { UserGender } from '../lib/users/gender';
@@ -129,7 +128,6 @@ export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
 export type PlatformDependencies = {
-  apolloClient: ApolloClient,
   createUuid: () => string, // Because React Native needs different lib.
 };
 

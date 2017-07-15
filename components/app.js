@@ -1,18 +1,16 @@
 // @flow
-import type { ApolloClient } from 'apollo-client';
 import type { IntlShape } from 'react-intl';
 import type { Store, ServerState, FunctionalComponent } from '../types';
 import React from 'react';
-import cookie from 'cookie';
-import createApolloClient from '../lib/create-apollo-client';
+// import cookie from 'cookie';
 import createReduxStore from '../lib/create-redux-store';
 import felaRenderer from '../lib/fela-renderer';
 import localForage from 'localforage';
 import persistStore from '../lib/persist-store';
 import uuid from 'uuid';
-import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
+import { Provider as ReduxProvider } from 'react-redux';
 
 // App composition root.
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
@@ -42,44 +40,27 @@ const singletonOnClient = (create: Function) => {
   };
 };
 
-const getApolloClient: (getToken: {
-  getToken: () => string,
-}) => ApolloClient = singletonOnClient(({ getToken }) =>
-  createApolloClient({ getToken }),
-);
+// const getApolloClient: (getToken: {
+//   getToken: () => string,
+// }) => ApolloClient = singletonOnClient(({ getToken }) =>
+//   createApolloClient({ getToken }),
+// );
 
 const getReduxStore: (
-  apolloClient: ApolloClient,
   serverState: ServerState,
-) => Store = singletonOnClient((apolloClient, initialState) => {
-  const platformDependencies = { apolloClient, createUuid: uuid.v4 };
-  const platformReducers = { apollo: apolloClient.reducer() };
-  const platformMiddleware = [apolloClient.middleware()];
-  return createReduxStore(initialState, {
-    platformDependencies,
-    platformReducers,
-    platformMiddleware,
-  });
+) => Store = singletonOnClient(initialState => {
+  const platformDependencies = { createUuid: uuid.v4 };
+  return createReduxStore(initialState, { platformDependencies });
 });
 
-// renderApp as separated function, because it's used for Apollo getDataFromTree
-// ApolloProvider provides also react-redux Provider.
-const renderApp = (
-  IntlPage,
-  apolloClient,
-  reduxStore,
-  locale,
-  messages,
-  initialNow,
-  props,
-) =>
-  <ApolloProvider client={apolloClient} store={reduxStore}>
+const renderApp = (IntlPage, reduxStore, locale, messages, initialNow, props) =>
+  <ReduxProvider store={reduxStore}>
     <FelaProvider renderer={felaRenderer}>
       <IntlProvider locale={locale} messages={messages} initialNow={initialNow}>
         <IntlPage {...props} />
       </IntlProvider>
     </FelaProvider>
-  </ApolloProvider>;
+  </ReduxProvider>;
 
 type PageProps = {
   // TODO: Waiting for Next.js 3 type definitions.
@@ -91,12 +72,12 @@ type PageProps = {
 
 type Page = FunctionalComponent<PageProps>;
 
-const parseCookie = (context = {}) =>
-  cookie.parse(
-    process.browser
-      ? document.cookie // eslint-disable-line
-      : (context.req && context.req.headers.cookie) || '',
-  );
+// const parseCookie = (context = {}) =>
+//   cookie.parse(
+//     process.browser
+//       ? document.cookie // eslint-disable-line
+//       : (context.req && context.req.headers.cookie) || '',
+//   );
 
 const app = (Page: Page) => {
   const IntlPage = injectIntl(Page);
@@ -120,7 +101,7 @@ const app = (Page: Page) => {
       // <IntlProvider> will be a new instance even with pushState routing.
       const initialNow = Date.now();
 
-      let serverState = {
+      const serverState = {
         app: {
           baselineShown: false,
           darkEnabled: false,
@@ -133,55 +114,55 @@ const app = (Page: Page) => {
         },
       };
 
-      // Run all graphql queries in the component tree and extract the result.
-      // TODO: https://github.com/apollographql/react-apollo/issues/631#issuecomment-312451587
-      if (!process.browser) {
-        // TODO: Verify.
-        // https://github.com/zeit/next.js/blob/d7d4b7c332a30b13ddf78ef45772a46ec52ac4de/examples/with-apollo-auth/lib/with-data.js#L42
-        // if (context.res && context.res.finished) {
-        //   // When redirecting, the response is finished.
-        //   // No point in continuing to render
-        //   return;
-        // }
-        const apolloClient = getApolloClient({
-          getToken: () => parseCookie(context).token,
-        });
-        const reduxStore = getReduxStore(apolloClient, serverState);
-
-        // Provide the `url` prop data in case a graphql query uses it.
-        const url = { query: context.query, pathname: context.pathname };
-
-        // Run all graphql queries.
-        const app = renderApp(
-          IntlPage,
-          apolloClient,
-          reduxStore,
-          locale,
-          messages,
-          initialNow,
-          {
-            url,
-            ...composedInitialProps,
-          },
-        );
-        await getDataFromTree(app);
-
-        // Clear felaRenderer after every render because it's stateful.
-        felaRenderer.clear();
-
-        // Extract query data from the reduxStore.
-        const state = reduxStore.getState();
-
-        // No need to include other initial Redux state because when it
-        // initialises on the client-side it'll create it again anyway.
-        serverState = {
-          ...serverState,
-          apollo: {
-            // Make sure to only include Apollo's data state
-            data: state.apollo.data,
-          },
-        };
-      }
+      // // Run all graphql queries in the component tree and extract the result.
+      // // TODO: https://github.com/apollographql/react-apollo/issues/631#issuecomment-312451587
+      // if (!process.browser) {
+      //   // TODO: Verify.
+      //   // https://github.com/zeit/next.js/blob/d7d4b7c332a30b13ddf78ef45772a46ec52ac4de/examples/with-apollo-auth/lib/with-data.js#L42
+      //   // if (context.res && context.res.finished) {
+      //   //   // When redirecting, the response is finished.
+      //   //   // No point in continuing to render
+      //   //   return;
+      //   // }
+      //   const apolloClient = getApolloClient({
+      //     getToken: () => parseCookie(context).token,
+      //   });
+      //   const reduxStore = getReduxStore(apolloClient, serverState);
+      //
+      //   // Provide the `url` prop data in case a graphql query uses it.
+      //   const url = { query: context.query, pathname: context.pathname };
+      //
+      //   // Run all graphql queries.
+      //   const app = renderApp(
+      //     IntlPage,
+      //     apolloClient,
+      //     reduxStore,
+      //     locale,
+      //     messages,
+      //     initialNow,
+      //     {
+      //       url,
+      //       ...composedInitialProps,
+      //     },
+      //   );
+      //   await getDataFromTree(app);
+      //
+      //   // Clear felaRenderer after every render because it's stateful.
+      //   felaRenderer.clear();
+      //
+      //   // Extract query data from the reduxStore.
+      //   const state = reduxStore.getState();
+      //
+      //   // No need to include other initial Redux state because when it
+      //   // initialises on the client-side it'll create it again anyway.
+      //   serverState = {
+      //     ...serverState,
+      //     apollo: {
+      //       // Make sure to only include Apollo's data state
+      //       data: state.apollo.data,
+      //     },
+      //   };
+      // }
 
       return {
         ...composedInitialProps,
@@ -192,15 +173,11 @@ const app = (Page: Page) => {
       };
     }
 
-    apolloClient: ApolloClient;
     reduxStore: Store;
 
     constructor(props: any) {
       super(props);
-      this.apolloClient = getApolloClient({
-        getToken: () => parseCookie().token,
-      });
-      this.reduxStore = getReduxStore(this.apolloClient, props.serverState);
+      this.reduxStore = getReduxStore(props.serverState);
     }
 
     componentDidMount() {
@@ -218,7 +195,6 @@ const app = (Page: Page) => {
       } = this.props;
       return renderApp(
         IntlPage,
-        this.apolloClient,
         this.reduxStore,
         locale,
         messages,

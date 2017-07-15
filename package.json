@@ -20,12 +20,10 @@
     "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
-    "analyze": "cross-env ANALYZE=1 next build",
-    "postinstall": "rimraf node_modules/react-apollo/node_modules/react-dom"
+    "analyze": "cross-env ANALYZE=1 next build"
   },
   "dependencies": {
     "accepts": "^1.3.3",
-    "apollo-client": "^1.0.0",
     "babel-plugin-react-intl": "^2.3.1",
     "color": "^2.0.0",
     "cookie": "^0.3.1",
@@ -35,8 +33,6 @@
     "fela-plugin-placeholder-prefixer": "^5.0.1",
     "fela-preset-web": "^5.0.2",
     "glob": "^7.1.2",
-    "graphql": "^0.10.1",
-    "graphql-tag": "^2.2.0",
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "localforage": "^1.5.0",
@@ -45,7 +41,6 @@
     "prop-types": "^15.5.9",
     "ramda": "^0.24.1",
     "react": "^15.6.0",
-    "react-apollo": "^1.0.0",
     "react-dom": "^15.6.0",
     "react-fela": "^5.0.3",
     "react-intl": "^2.3.0",
