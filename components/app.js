@@ -95,7 +95,7 @@ const parseCookie = (context = {}) =>
   cookie.parse(
     process.browser
       ? document.cookie // eslint-disable-line
-      : context.req && context.req.headers.cookie,
+      : (context.req && context.req.headers.cookie) || '',
   );
 
 const app = (Page: Page) => {
