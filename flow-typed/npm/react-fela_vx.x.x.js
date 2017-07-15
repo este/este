@@ -1,4 +1,4 @@
-// flow-typed signature: 934375f040fbde1c90ab73e48705d3e1
+// flow-typed signature: c826c7794eb221596ea20f441b7d17e4
 // flow-typed version: <<STUB>>/react-fela_v^5.0.3/flow_v0.50.0
 
 /**
@@ -30,6 +30,10 @@ declare module 'react-fela/es/createComponent' {
   declare module.exports: any;
 }
 
+declare module 'react-fela/es/createComponentWithProxy' {
+  declare module.exports: any;
+}
+
 declare module 'react-fela/es/index' {
   declare module.exports: any;
 }
@@ -47,6 +51,10 @@ declare module 'react-fela/lib/connect' {
 }
 
 declare module 'react-fela/lib/createComponent' {
+  declare module.exports: any;
+}
+
+declare module 'react-fela/lib/createComponentWithProxy' {
   declare module.exports: any;
 }
 
@@ -69,6 +77,9 @@ declare module 'react-fela/es/connect.js' {
 declare module 'react-fela/es/createComponent.js' {
   declare module.exports: $Exports<'react-fela/es/createComponent'>;
 }
+declare module 'react-fela/es/createComponentWithProxy.js' {
+  declare module.exports: $Exports<'react-fela/es/createComponentWithProxy'>;
+}
 declare module 'react-fela/es/index.js' {
   declare module.exports: $Exports<'react-fela/es/index'>;
 }
@@ -83,6 +94,9 @@ declare module 'react-fela/lib/connect.js' {
 }
 declare module 'react-fela/lib/createComponent.js' {
   declare module.exports: $Exports<'react-fela/lib/createComponent'>;
+}
+declare module 'react-fela/lib/createComponentWithProxy.js' {
+  declare module.exports: $Exports<'react-fela/lib/createComponentWithProxy'>;
 }
 declare module 'react-fela/lib/index.js' {
   declare module.exports: $Exports<'react-fela/lib/index'>;
