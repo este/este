@@ -14,16 +14,6 @@ import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { defineMessages, FormattedMessage } from 'react-intl';
 
-// import { graphql } from 'react-relay';
-//
-// const shit = graphql`
-//   fragment pagesUserEmail on User {
-//     email
-//   }
-// `;
-// // eslint-disable-next-line
-// console.log(shit);
-
 const onButtonPress = [
   'primary',
   'success',

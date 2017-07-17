@@ -3098,8 +3098,8 @@ jest-environment-node@^20.0.3:
     jest-util "^20.0.3"
 
 jest-haste-map@^20.0.4:
-  version "20.0.4"
-  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-20.0.4.tgz#653eb55c889ce3c021f7b94693f20a4159badf03"
+  version "20.0.5"
+  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-20.0.5.tgz#abad74efb1a005974a7b6517e11010709cab9112"
   dependencies:
     fb-watchman "^2.0.0"
     graceful-fs "^4.1.11"
@@ -3634,9 +3634,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-next@3.0.1-beta.14:
-  version "3.0.1-beta.14"
-  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.14.tgz#ba3646f3903537d24426a55491fd8bfea03179d8"
+next@3.0.1-beta.16:
+  version "3.0.1-beta.16"
+  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.16.tgz#a972a1bf39c78cd4c1bcb7d41ebda4a128718fac"
   dependencies:
     ansi-html "0.0.7"
     babel-core "6.25.0"
@@ -3688,7 +3688,7 @@ next@3.0.1-beta.14:
     url "0.11.0"
     uuid "3.1.0"
     walk "^2.3.9"
-    webpack "3.2.0"
+    webpack "3.3.0"
     webpack-dev-middleware "1.11.0"
     webpack-hot-middleware "2.18.2"
     write-file-webpack-plugin "4.1.0"
@@ -5231,7 +5231,7 @@ watch@~0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/watch/-/watch-0.10.0.tgz#77798b2da0f9910d595f1ace5b0c2258521f21dc"
 
-watchpack@^1.3.1:
+watchpack@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.4.0.tgz#4a1472bcbb952bd0a9bb4036801f954dfb39faac"
   dependencies:
@@ -5288,9 +5288,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.2.0.tgz#8b0cae0e1a9fd76bfbf0eab61a8c2ada848c312f"
+webpack@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.3.0.tgz#ce2f9e076566aba91f74887133a883fd7da187bc"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
@@ -5311,7 +5311,7 @@ webpack@3.2.0:
     supports-color "^3.1.0"
     tapable "~0.2.5"
     uglifyjs-webpack-plugin "^0.4.6"
-    watchpack "^1.3.1"
+    watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^6.0.0"
 
