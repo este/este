@@ -6,7 +6,6 @@
 
 [libs]
 types/app.js.flow
-types/apollo-client.js.flow
 
 [options]
 ; TODO: https://github.com/facebook/flow/issues/3728
