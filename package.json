@@ -12,15 +12,15 @@
     "extract-messages": "yarn run rimraf-babel-cache && next build && node ./scripts/extract-messages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
-    "get-schema": "node scripts/get-schema.js",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,lib,pages,scripts,themes,types},__{tests,mocks}__}/**/*.js\"",
-    "relay": "relay-compiler --src ./pages/ --schema data/schema.graphql",
     "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
-    "analyze": "cross-env ANALYZE=1 next build"
+    "analyze": "cross-env ANALYZE=1 next build",
+    "relay": "relay-compiler --src ./{components,pages}/ --schema data/schema.graphql",
+    "relay-schema": "node scripts/relay-schema.js"
   },
   "dependencies": {
     "accepts": "^1.3.3",
@@ -33,6 +33,7 @@
     "fela-plugin-placeholder-prefixer": "^5.0.1",
     "fela-preset-web": "^5.0.2",
     "glob": "^7.1.2",
+    "graphql": "^0.10.4",
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "localforage": "^1.5.0",
@@ -45,6 +46,7 @@
     "react-fela": "^5.0.3",
     "react-intl": "^2.3.0",
     "react-redux": "^5.0.3",
+    "react-relay": "^1.1.0",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "redux-observable": "^0.14.1",
@@ -60,6 +62,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.1",
     "babel-jest": "^20.0.1",
+    "babel-plugin-relay": "^1.1.0",
     "babel-plugin-transform-define": "^1.2.0",
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^3.18.0",
@@ -71,6 +74,7 @@
     "flow-bin": "^0.50.0",
     "jest": "^20.0.1",
     "prettier": "^1.5.1",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^15.4.2",
+    "relay-compiler": "^1.1.0"
   }
 }

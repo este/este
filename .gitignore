@@ -1,6 +1,7 @@
 .DS_Store
 .next
+__generated__/
+lang/.messages/
 node_modules
 npm-debug.log
 yarn-error.log
-lang/.messages/
