@@ -1,3 +1,5 @@
+// $flow
+// TODO: Use https://github.com/graphcool/get-graphql-schema
 const fetch = require('node-fetch');
 const fs = require('fs');
 const { GRAPHQL_ENDPOINT } = require('../env-config');
