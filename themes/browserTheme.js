@@ -1,6 +1,6 @@
 // @flow
 import type { Theme } from './types';
-import openColor from './open-color';
+import openColor from './openColor';
 import typography from './typography';
 
 export const browserTheme: Theme = {

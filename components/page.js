@@ -1,15 +1,15 @@
 // @flow
 import type { State } from '../types';
-import A from '../components/a';
-import Baseline from '../components/baseline';
-import Box from './box';
+import A from '../components/A';
+import Baseline from '../components/Baseline';
+import Box from './Box';
 import Head from 'next/head';
-import LoadingBar from '../components/loading-bar';
-import MainNav from '../components/main-nav';
-import Text from '../components/text';
+import LoadingBar from '../components/LoadingBar';
+import MainNav from '../components/MainNav';
+import Text from '../components/Text';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
-import { browserTheme, browserThemeDark } from '../themes/browser-theme';
+import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect } from 'react-redux';
 
 const PageContainer = ({ children }) =>

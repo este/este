@@ -9,18 +9,18 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
-    "extract-messages": "yarn run rimraf-babel-cache && next build && node ./scripts/extract-messages",
+    "extractMessages": "yarn run rimrafBabelCache && next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,lib,pages,scripts,themes,types},__{tests,mocks}__}/**/*.js\"",
-    "rimraf-babel-cache": "rimraf node_modules/.cache/babel-loader",
+    "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,lib,pages,scripts,test,themes,types},__{tests,mocks,generated}__}/**/*.js\"",
+    "rimrafBabelCache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
     "relay": "relay-compiler --src ./{components,pages}/ --schema data/schema.graphql",
-    "relay-schema": "node scripts/relay-schema.js"
+    "relaySchema": "node scripts/relaySchema.js"
   },
   "dependencies": {
     "accepts": "^1.3.3",

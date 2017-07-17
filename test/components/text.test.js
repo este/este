@@ -1,5 +1,5 @@
 // @flow
-import Text from '../../components/text';
+import Text from '../../components/Text';
 import { createExpectRender } from './utils';
 
 const theme = {
@@ -21,7 +21,8 @@ const theme = {
     bold: 600,
     color: 'black',
     // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     rawStyle: {
       fixFontSmoothing: true,
     },

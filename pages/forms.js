@@ -1,9 +1,9 @@
 // @flow
-import Heading from '../components/heading';
-import P from '../components/p';
-import Page from '../components/page';
-import UserForm from '../components/user-form';
-import UsersTable from '../components/users-table';
+import Heading from '../components/Heading';
+import P from '../components/P';
+import Page from '../components/Page';
+import UserForm from '../components/UserForm';
+import UsersTable from '../components/UsersTable';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';

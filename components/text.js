@@ -1,8 +1,8 @@
 // @flow
 import type { Color, Theme } from '../themes/types';
-import Box, { type BoxProps } from './box';
+import Box, { type BoxProps } from './Box';
 import colorLib from 'color';
-import withTheme, { type ThemeContext } from './with-theme';
+import withTheme, { type ThemeContext } from './withTheme';
 
 /*
   Text is the basic UI primitive for all text components.

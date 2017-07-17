@@ -1,8 +1,8 @@
 // @flow
-import Heading from '../components/heading';
-import P from '../components/p';
-import Page from '../components/page';
-import SwitchLocale from '../components/switch-locale';
+import Heading from '../components/Heading';
+import P from '../components/P';
+import Page from '../components/Page';
+import SwitchLocale from '../components/SwitchLocale';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { FormattedDate, FormattedNumber, FormattedRelative } from 'react-intl';

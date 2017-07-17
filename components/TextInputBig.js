@@ -1,7 +1,7 @@
 // @flow
-import Box from './box';
-import Text from './text';
-import TextInput, { type TextInputProps } from './text-input';
+import Box from './Box';
+import Text from './Text';
+import TextInput, { type TextInputProps } from './TextInput';
 
 const TextInputBig = (props: TextInputProps) => {
   // Note pattern for default dynamic typed props:

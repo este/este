@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Text, { type TextProps } from './text';
+import Text, { type TextProps } from './Text';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
 
 type LoadingProps = TextProps & {

@@ -1,6 +1,6 @@
 // @flow
 import type { AppError as AppErrorType } from '../types';
-import Text, { type TextProps } from './text';
+import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
 type AppErrorProps = TextProps & {

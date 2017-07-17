@@ -1,6 +1,6 @@
 // @flow
 import type { State, Dispatch } from '../types';
-import Button from './button';
+import Button from './Button';
 import { connect } from 'react-redux';
 
 // Test vertical rhythm visually. Inspired by basehold.it

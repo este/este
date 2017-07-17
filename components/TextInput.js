@@ -1,10 +1,10 @@
 // @flow
 import type { Element } from 'react';
-import Box from './box';
-import Set from './set';
-import Text, { type TextProps } from './text';
+import Box from './Box';
+import Set from './Set';
+import Text, { type TextProps } from './Text';
 import colorLib from 'color';
-import withTheme, { type ThemeContext } from './with-theme';
+import withTheme, { type ThemeContext } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check Field.

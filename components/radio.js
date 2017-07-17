@@ -1,9 +1,9 @@
 // @flow
-import Button, { type ButtonProps } from './button';
-import Set from './set';
-import SvgIcon from './svg-icon';
-import Text from './text';
-import withTheme, { type ThemeContext } from './with-theme';
+import Button, { type ButtonProps } from './Button';
+import Set from './Set';
+import SvgIcon from './SvgIcon';
+import Text from './Text';
+import withTheme, { type ThemeContext } from './withTheme';
 
 export type RadioProps = ButtonProps & {
   label?: string,

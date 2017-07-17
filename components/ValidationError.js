@@ -1,6 +1,6 @@
 // @flow
 import type { ValidationError as ValidationErrorType } from '../lib/validate';
-import Text, { type TextProps } from './text';
+import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
 type ValidationErrorProps = TextProps & {

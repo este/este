@@ -1,10 +1,10 @@
 // @flow
 import type { Color } from '../themes/types';
 import type { FunctionalComponent } from '../types';
-import AutoFocus from './auto-focus';
+import AutoFocus from './AutoFocus';
 import PropTypes from 'prop-types';
 import React, { type Children } from 'react';
-import withTheme, { type ThemeContext } from './with-theme';
+import withTheme, { type ThemeContext } from './withTheme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.

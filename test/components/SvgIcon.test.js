@@ -1,5 +1,5 @@
 // @flow
-import TextInputBig from '../../components/text-input-big';
+import SvgIcon from '../../components/SvgIcon';
 import { createExpectRender } from './utils';
 
 const theme = {
@@ -27,36 +27,14 @@ const theme = {
       fixFontSmoothing: true,
     },
   },
-  textInput: {
-    disabledOpacity: 0.5,
-  },
-  set: {
-    marginBottom: 1,
-    horizontalSpaceBetween: 0.5,
-    verticalSpaceBetween: 1,
-  },
 };
 
 const expectRender = createExpectRender(theme);
 
 test('render', () => {
-  expectRender(() => <TextInputBig maxLength={1} />);
+  expectRender(() => <SvgIcon svg={<svg />} />);
 });
 
-test('disabled', () => {
-  expectRender(() => <TextInputBig maxLength={1} disabled />);
+test('color and size', () => {
+  expectRender(() => <SvgIcon color="primary" size={1} svg={<svg />} />);
 });
-
-test('color', () => {
-  expectRender(() => <TextInputBig maxLength={1} color="primary" />);
-});
-
-test('label', () => {
-  expectRender(() => <TextInputBig maxLength={1} label="label" />);
-});
-
-test('error', () => {
-  expectRender(() => <TextInputBig maxLength={1} error="error" />);
-});
-
-// TODO: label and error as components

@@ -1,6 +1,6 @@
 // @flow
 import type { Children } from 'react';
-import LocaleLink from './locale-link';
+import LocaleLink from './LocaleLink';
 
 // Generic link without styles.
 // Use it for image or any other non text component.

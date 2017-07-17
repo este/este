@@ -1,6 +1,6 @@
 // @flow
-import AuthForm from '../components/auth-form';
-import Page from '../components/page';
+import AuthForm from '../components/AuthForm';
+import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 

@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
-import Text from './text';
-import Set from './set';
+import Text from './Text';
+import Set from './Set';
 import { connect, type Connector } from 'react-redux';
 
 // TODO: i18n subdomain for production.

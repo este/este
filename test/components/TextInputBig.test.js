@@ -1,5 +1,5 @@
 // @flow
-import TextInput from '../../components/text-input';
+import TextInputBig from '../../components/TextInputBig';
 import { createExpectRender } from './utils';
 
 const theme = {
@@ -40,23 +40,23 @@ const theme = {
 const expectRender = createExpectRender(theme);
 
 test('render', () => {
-  expectRender(() => <TextInput maxLength={1} />);
+  expectRender(() => <TextInputBig maxLength={1} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <TextInput maxLength={1} disabled />);
+  expectRender(() => <TextInputBig maxLength={1} disabled />);
 });
 
 test('color', () => {
-  expectRender(() => <TextInput maxLength={1} color="primary" />);
+  expectRender(() => <TextInputBig maxLength={1} color="primary" />);
 });
 
 test('label', () => {
-  expectRender(() => <TextInput maxLength={1} label="label" />);
+  expectRender(() => <TextInputBig maxLength={1} label="label" />);
 });
 
 test('error', () => {
-  expectRender(() => <TextInput maxLength={1} error="error" />);
+  expectRender(() => <TextInputBig maxLength={1} error="error" />);
 });
 
 // TODO: label and error as components

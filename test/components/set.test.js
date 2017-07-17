@@ -1,6 +1,6 @@
 // @flow
-import Box from '../../components/box';
-import Set from '../../components/set';
+import Box from '../../components/Box';
+import Set from '../../components/Set';
 import { createExpectRender } from './utils';
 
 const theme = {
@@ -38,11 +38,21 @@ test('set with one item', () => {
 });
 
 test('set with two items', () => {
-  expectRender(() => <Set><Box>a</Box><Box>b</Box></Set>);
+  expectRender(() =>
+    <Set>
+      <Box>a</Box>
+      <Box>b</Box>
+    </Set>,
+  );
 });
 
 test('set with two items and custom spaceBetween', () => {
-  expectRender(() => <Set spaceBetween={2}><Box>a</Box><Box>b</Box></Set>);
+  expectRender(() =>
+    <Set spaceBetween={2}>
+      <Box>a</Box>
+      <Box>b</Box>
+    </Set>,
+  );
 });
 
 test('vertical set with one item', () => {
@@ -50,11 +60,19 @@ test('vertical set with one item', () => {
 });
 
 test('vertical set with two items', () => {
-  expectRender(() => <Set vertical><Box>a</Box><Box>b</Box></Set>);
+  expectRender(() =>
+    <Set vertical>
+      <Box>a</Box>
+      <Box>b</Box>
+    </Set>,
+  );
 });
 
 test('vertical set with two items and custom spaceBetween', () => {
-  expectRender(() => (
-    <Set vertical spaceBetween={2}><Box>a</Box><Box>b</Box></Set>
-  ));
+  expectRender(() =>
+    <Set vertical spaceBetween={2}>
+      <Box>a</Box>
+      <Box>b</Box>
+    </Set>,
+  );
 });

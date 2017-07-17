@@ -1,6 +1,6 @@
 // @flow
-import LocaleLink from './locale-link';
-import Text, { type TextProps } from './text';
+import LocaleLink from './LocaleLink';
+import Text, { type TextProps } from './Text';
 
 type AProps = TextProps & {
   href: string,

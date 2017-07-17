@@ -5,14 +5,14 @@ import type {
   Form as FormType,
   State,
 } from '../types';
-import AppError from './app-error';
-import Box from './box';
-import Form from './form';
-import Heading from './heading';
-import Set from './set';
-import TextInputBig from './text-input-big';
-import ValidationError from '../components/validation-error';
-import withTheme, { type ThemeContext } from './with-theme';
+import AppError from './AppError';
+import Box from './Box';
+import Form from './Form';
+import Heading from './Heading';
+import Set from './Set';
+import TextInputBig from './TextInputBig';
+import ValidationError from './ValidationError';
+import withTheme, { type ThemeContext } from './withTheme';
 import { SignInButton, SignUpButton } from './buttons';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';

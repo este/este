@@ -1,7 +1,7 @@
 // @flow
 import type { IntlShape } from 'react-intl';
-import A from './a';
-import Box from './box';
+import A from './A';
+import Box from './Box';
 import sitemap from '../lib/sitemap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 

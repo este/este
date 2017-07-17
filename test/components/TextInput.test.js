@@ -1,5 +1,5 @@
 // @flow
-import Button from '../../components/Button';
+import TextInput from '../../components/TextInput';
 import { createExpectRender } from './utils';
 
 const theme = {
@@ -27,32 +27,36 @@ const theme = {
       fixFontSmoothing: true,
     },
   },
-  button: {
-    borderRadius: 2,
-    borderWidth: 1,
-    marginHorizontal: 0.25,
-    marginVertical: 0.3,
-    paddingVertical: 0.2,
+  textInput: {
     disabledOpacity: 0.5,
+  },
+  set: {
+    marginBottom: 1,
+    horizontalSpaceBetween: 0.5,
+    verticalSpaceBetween: 1,
   },
 };
 
 const expectRender = createExpectRender(theme);
 
-const onPress = () => {};
-
 test('render', () => {
-  expectRender(() => <Button onPress={onPress} />);
-});
-
-test('primary', () => {
-  expectRender(() => <Button primary onPress={onPress} />);
-});
-
-test('primary outline', () => {
-  expectRender(() => <Button primary outline onPress={onPress} />);
+  expectRender(() => <TextInput maxLength={1} />);
 });
 
 test('disabled', () => {
-  expectRender(() => <Button disabled onPress={onPress} />);
+  expectRender(() => <TextInput maxLength={1} disabled />);
 });
+
+test('color', () => {
+  expectRender(() => <TextInput maxLength={1} color="primary" />);
+});
+
+test('label', () => {
+  expectRender(() => <TextInput maxLength={1} label="label" />);
+});
+
+test('error', () => {
+  expectRender(() => <TextInput maxLength={1} error="error" />);
+});
+
+// TODO: label and error as components

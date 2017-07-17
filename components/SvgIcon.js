@@ -1,7 +1,7 @@
 // @flow
-import Text, { computeFontSizeAndLineHeight, type TextProps } from './text';
+import Text, { computeFontSizeAndLineHeight, type TextProps } from './Text';
 import React, { type Element } from 'react';
-import withTheme, { type ThemeContext } from './with-theme';
+import withTheme, { type ThemeContext } from './withTheme';
 
 //  - flaticon.com
 //  - thenounproject.com

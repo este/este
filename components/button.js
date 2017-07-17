@@ -1,7 +1,7 @@
 // @flow
 import type { ColorProps } from '../themes/types';
-import Text, { type TextProps } from './text';
-import withTheme, { type ThemeContext } from './with-theme';
+import Text, { type TextProps } from './Text';
+import withTheme, { type ThemeContext } from './withTheme';
 
 // Browser button is rendered as div with button role because button element is
 // hard to style consistently in Firefox and maybe elsewhere. Div is just fine.

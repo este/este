@@ -1,6 +1,6 @@
 // @flow
-import Box, { type BoxProps } from './box';
-import withTheme, { type ThemeContext } from './with-theme';
+import Box, { type BoxProps } from './Box';
+import withTheme, { type ThemeContext } from './withTheme';
 
 // Image requires size to prevents flash of unloaded content.
 // TODO: Make it responsive.

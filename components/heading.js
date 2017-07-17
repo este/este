@@ -1,6 +1,6 @@
 // @flow
-import Text, { type TextProps } from './text';
-import withTheme, { type ThemeContext } from './with-theme';
+import Text, { type TextProps } from './Text';
+import withTheme, { type ThemeContext } from './withTheme';
 
 const Heading = (props: TextProps, { theme }: ThemeContext) => {
   const {

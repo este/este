@@ -1,5 +1,5 @@
 // @flow
-import Button, { type ButtonProps } from '../components/button';
+import Button, { type ButtonProps } from '../components/Button';
 import { FormattedMessage } from 'react-intl';
 
 export const AddButton = (props: ButtonProps) =>

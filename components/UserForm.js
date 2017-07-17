@@ -6,14 +6,14 @@ import type {
   UserFormFields,
 } from '../types';
 import type { IntlShape } from 'react-intl';
-import AppError from '../components/app-error';
-import Button from '../components/button';
-import Checkbox from '../components/checkbox';
-import Form from '../components/form';
-import Radio from '../components/radio';
-import Set from '../components/set';
-import TextInput from '../components/text-input';
-import ValidationError from '../components/validation-error';
+import AppError from '../components/AppError';
+import Button from '../components/Button';
+import Checkbox from '../components/Checkbox';
+import Form from '../components/Form';
+import Radio from '../components/Radio';
+import Set from '../components/Set';
+import TextInput from '../components/TextInput';
+import ValidationError from '../components/ValidationError';
 import gender from '../lib/users/gender';
 import { AddButton } from '../components/buttons';
 import { connect } from 'react-redux';

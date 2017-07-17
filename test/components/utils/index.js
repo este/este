@@ -12,7 +12,7 @@ export const createTestRenderer = (theme: any) => (Component: any) => {
       <ThemeProvider theme={theme}>
         <Component />
       </ThemeProvider>
-    </FelaProvider>
+    </FelaProvider>,
   );
   return {
     fela: prettifyFelaString(felaRenderer.renderToString()),

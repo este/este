@@ -1,15 +1,15 @@
 // @flow
-import A from '../components/a';
-import Blockquote from '../components/blockquote';
-import Button from '../components/button';
-import Heading from '../components/heading';
-import Image from '../components/image';
-import P from '../components/p';
-import Page from '../components/page';
-import Set from '../components/set';
-import Text from '../components/text';
-import ToggleBaseline from '../components/toggle-baseline';
-import ToggleDark from '../components/toggle-dark';
+import A from '../components/A';
+import Blockquote from '../components/Blockquote';
+import Button from '../components/Button';
+import Heading from '../components/Heading';
+import Image from '../components/Image';
+import P from '../components/P';
+import Page from '../components/Page';
+import Set from '../components/Set';
+import Text from '../components/Text';
+import ToggleBaseline from '../components/ToggleBaseline';
+import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { defineMessages, FormattedMessage } from 'react-intl';
