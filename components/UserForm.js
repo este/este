@@ -1,9 +1,10 @@
 // @flow
 import type {
-  State,
   Dispatch,
   Form as FormType,
+  State,
   UserFormFields,
+  UserGender,
 } from '../types';
 import type { IntlShape } from 'react-intl';
 import AppError from '../components/AppError';
@@ -14,7 +15,6 @@ import Radio from '../components/Radio';
 import Set from '../components/Set';
 import TextInput from '../components/TextInput';
 import ValidationError from '../components/ValidationError';
-import gender from '../lib/users/gender';
 import { AddButton } from '../components/buttons';
 import { connect } from 'react-redux';
 import { defineMessages } from 'react-intl';
@@ -127,21 +127,21 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
           disabled={disabled}
           label={intl.formatMessage(messages.female)}
           onChange={setUserForm('gender')}
-          select={gender.female}
+          select={('female': UserGender)}
           value={form.fields.gender}
         />
         <Radio
           disabled={disabled}
           label={intl.formatMessage(messages.male)}
           onChange={setUserForm('gender')}
-          select={gender.male}
+          select={('male': UserGender)}
           value={form.fields.gender}
         />
         <Radio
           disabled={disabled}
           label={intl.formatMessage(messages.other)}
           onChange={setUserForm('gender')}
-          select={gender.other}
+          select={('other': UserGender)}
           value={form.fields.gender}
         />
       </Set>

@@ -1,7 +1,6 @@
 // @flow
 import type { Observable } from 'rxjs';
 import type { Temp } from '../lib/temp';
-import type { UserGender } from '../lib/users/gender';
 import type { ValidationError } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
@@ -69,12 +68,14 @@ export type AuthState = {|
   +form: FormState<AuthFormFields>,
 |};
 
+export type UserGender = 'male' | 'female' | 'other';
+
 export type UserFormFields = {
   +name: string,
   +email: string,
   +likesCats: boolean,
   +likesDogs: boolean,
-  +gender: ?$Keys<UserGender>,
+  +gender: UserGender,
   +gender: ?string,
   +isAnarchist: boolean,
 };
