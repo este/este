@@ -1,5 +1,5 @@
 // @flow
-import type { Action, AppState } from '../../types';
+import type { Action, AppState } from '../types';
 
 // This is defined by server in app.js
 const initialState = {

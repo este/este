@@ -1,5 +1,5 @@
 // @flow
-import type { Epic, Errors, User } from '../../types';
+import type { Epic, Errors, User } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { range } from 'ramda';
 import validate, {
@@ -8,7 +8,7 @@ import validate, {
   minLength,
   maxLength,
   email,
-} from '../validate';
+} from '../lib/validate';
 
 const createUser = (getNow, createUuid, form): User => {
   const now = getNow();

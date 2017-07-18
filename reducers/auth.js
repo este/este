@@ -1,7 +1,7 @@
 // @flow
-import type { Action, AuthState } from '../../types';
-import { createTemp } from '../temp';
-import { setForm, setFormErrors, disableForm, resetForm } from '../form';
+import type { Action, AuthState } from '../types';
+import { createTemp } from '../lib/temp';
+import { setForm, setFormErrors, disableForm, resetForm } from '../lib/form';
 
 const initialState = {
   form: {
