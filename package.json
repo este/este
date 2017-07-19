@@ -9,18 +9,18 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
-    "extractMessages": "yarn run rimrafBabelCache && next build && node ./scripts/extractMessages",
+    "extractMessages": "next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types},__{tests,mocks,generated}__}/**/*.js\"",
-    "rimrafBabelCache": "rimraf node_modules/.cache/babel-loader",
+    "rimrafBabelCache": "# Delete babel cache, env-config needs it sometimes.\nrimraf node_modules/.cache/babel-loader",
     "test": "flow && jest && next build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay": "relay-compiler --src ./{components,mutations,pages}/ --schema data/schema.graphql",
-    "relaySchema": "node scripts/relaySchema.js"
+    "relay": "# Delete .next dir because relay-compiler --exclude does not work.\nrimraf .next && relay-compiler --src ./ --schema data/schema.graphql",
+    "schema": "node scripts/schema.js"
   },
   "dependencies": {
     "accepts": "^1.3.3",
