@@ -23,6 +23,7 @@ module.exports = {
   // AirBnb is great, but very strict. Feel free to relax any rule.
   rules: {
     'arrow-parens': 0, // Does not work with Flow generic types.
+    camelcase: 0, // Post_post can be Relay compiler generated type.
     'comma-dangle': 0, // Because some files are still in ES5.
     'default-case': 0, // We don't need it with Flow.
     'import/first': 0, // Este sorts by atom/sort lines natural order.
