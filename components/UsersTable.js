@@ -52,7 +52,7 @@ const RowForm = ({
   const cancelEditation = () => {
     dispatch({ type: 'SET_USER_FORM', id: user.id, fields: null });
   };
-  const onNameKeyDown = (e: KeyboardEvent) => {
+  const handleNameKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'Enter':
         saveUser();
@@ -83,7 +83,7 @@ const RowForm = ({
             borderStyle="solid"
             maxLength={100}
             onChange={set('name')}
-            onKeyDown={onNameKeyDown}
+            onKeyDown={handleNameKeyDown}
             value={fields[field]}
             width={10}
             disabled={disabled}
