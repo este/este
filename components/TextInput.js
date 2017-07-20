@@ -8,6 +8,8 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check Field.
+// As for optional maxLength, I believe it belongs to validation and user should
+// have an option to write or paste more text and edit it later.
 // TODO: multiline and rows, use content editable because links.
 
 export type TextInputProps = TextProps & {
