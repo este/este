@@ -15,11 +15,12 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types},__{tests,mocks,generated}__}/**/*.js\"",
-    "rimrafBabelCache": "# Delete babel cache, env-config needs it sometimes.\nrimraf node_modules/.cache/babel-loader",
-    "test": "flow && jest && next build",
+    "rimrafBabelCache": "rimraf node_modules/.cache/babel-loader",
+    "test": "flow && jest && npm build",
     "upgrade": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay": "# Delete .next dir because relay-compiler --exclude does not work.\nrimraf .next && relay-compiler --src ./ --schema data/schema.graphql",
+    "relay": "relay-compiler --src ./ --exclude **/.next/** **/flow-typed/** **/node_modules/** **/test/**  **/__generated__/** --schema data/schema.graphql",
+    "relay:watch": "npm run relay -- --watch",
     "schema": "node scripts/schema.js"
   },
   "dependencies": {
@@ -46,12 +47,12 @@
     "react-fela": "^5.0.3",
     "react-intl": "^2.3.0",
     "react-redux": "^5.0.3",
-    "react-relay": "^1.1.0",
+    "react-relay": "^1.2.0-rc.1",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "redux-observable": "^0.14.1",
     "redux-persist": "^4.8.0",
-    "relay-runtime": "^1.1.0",
+    "relay-runtime": "^1.2.0-rc.1",
     "rimraf": "^2.6.1",
     "rxjs": "^5.4.0",
     "smoothscroll-polyfill": "^0.3.5",
@@ -63,7 +64,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.1",
     "babel-jest": "^20.0.1",
-    "babel-plugin-relay": "^1.1.0",
+    "babel-plugin-relay": "^1.2.0-rc.1",
     "babel-plugin-transform-define": "^1.2.0",
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^3.18.0",
@@ -76,6 +77,6 @@
     "jest": "^20.0.1",
     "prettier": "^1.5.1",
     "react-test-renderer": "^15.4.2",
-    "relay-compiler": "^1.1.0"
+    "relay-compiler": "^1.2.0-rc.1"
   }
 }
