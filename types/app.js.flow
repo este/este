@@ -4,8 +4,8 @@
 declare var APP_NAME: string;
 declare var APP_VERSION: string;
 declare var DEFAULT_LOCALE: string;
-declare var DOMAIN: string;
 declare var GRAPHQL_ENDPOINT: string;
+declare var HOSTNAME: string;
 
 // intl polyfill
 declare var Intl: object;

@@ -58,7 +58,7 @@ export default class MyDocument extends Document {
     );
     const alternateHreflangLinks = supportedLocales.map(locale =>
       <link
-        href={`https://${locale}.${DOMAIN}`}
+        href={`https://${locale}.${HOSTNAME}`}
         hrefLang={locale}
         key={locale}
         rel="alternate"

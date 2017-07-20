@@ -5,8 +5,8 @@ module.exports = {
     APP_NAME: true,
     APP_VERSION: true,
     DEFAULT_LOCALE: true,
-    DOMAIN: true,
     GRAPHQL_ENDPOINT: true,
+    HOSTNAME: true,
     window: true,
     // Flow
     $Exact: true,
