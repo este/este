@@ -4,6 +4,8 @@ import Box from '../components/Box';
 import Post from '../components/Post';
 import { createFragmentContainer, graphql } from 'react-relay';
 
+// Why edges and nodes? tldr; metadata
+// https://www.learnrelay.org/connections/what-is-a-connection#nodes
 // Why 'edges &&'' and 'edge &&'' existence checking?
 // https://github.com/facebook/relay/issues/1935
 const AllPosts = ({ viewer }: { viewer: AllPosts_viewer }) =>
@@ -17,9 +19,10 @@ const AllPosts = ({ viewer }: { viewer: AllPosts_viewer }) =>
 export default createFragmentContainer(
   AllPosts,
   graphql`
+    # FileName_propName
     fragment AllPosts_viewer on Viewer {
       allPosts(last: 100, orderBy: createdAt_DESC)
-        # connection key: FileName_propName
+        # FileName_propName
         @connection(key: "AllPosts_allPosts") {
         edges {
           node {

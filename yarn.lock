@@ -1166,8 +1166,8 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
 caniuse-lite@^1.0.30000701:
-  version "1.0.30000703"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000703.tgz#666e8c3f1e4f7abb1d16d48e04e7e9e8df934925"
+  version "1.0.30000704"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000704.tgz#adb6ea01134515663682db93abab291d4c02946b"
 
 case-sensitive-paths-webpack-plugin@2.1.1:
   version "2.1.1"
@@ -3635,9 +3635,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-next@3.0.1-beta.16:
-  version "3.0.1-beta.16"
-  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.16.tgz#a972a1bf39c78cd4c1bcb7d41ebda4a128718fac"
+next@3.0.1-beta.18:
+  version "3.0.1-beta.18"
+  resolved "https://registry.yarnpkg.com/next/-/next-3.0.1-beta.18.tgz#fa09e59c54a2c1ed23bbc89746ed74545bebcaa0"
   dependencies:
     ansi-html "0.0.7"
     babel-core "6.25.0"
@@ -4781,8 +4781,8 @@ source-map@~0.2.0:
     amdefine ">=0.0.4"
 
 sourcemapped-stacktrace@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/sourcemapped-stacktrace/-/sourcemapped-stacktrace-1.1.6.tgz#112d8749c942c3cd3b630dfac9514577b86a3a51"
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/sourcemapped-stacktrace/-/sourcemapped-stacktrace-1.1.7.tgz#17e05374ff78b71a9d89ad3975a49f22725ba935"
   dependencies:
     source-map "0.5.6"
 
@@ -4913,8 +4913,8 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 styled-jsx@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-1.0.8.tgz#459480e618af4b65591ad01365b81ab90dcaddce"
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-1.0.9.tgz#f4c4df5c124c15dbdd34b97a5b9acf9226c64d54"
   dependencies:
     babel-plugin-syntax-jsx "6.18.0"
     babel-traverse "6.21.0"
@@ -4925,11 +4925,11 @@ styled-jsx@^1.0.8:
     escape-string-regexp "1.0.5"
     source-map "0.5.6"
     string-hash "1.1.1"
-    stylis "3.1.5"
+    stylis "3.2.6"
 
-stylis@3.1.5:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.1.5.tgz#c585186286aaa79856c9ac62bbb38113923edda3"
+stylis@3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.6.tgz#6291df64aae62e9f537ab24b7d8a62b2428a34e9"
 
 supports-color@^2.0.0:
   version "2.0.0"
@@ -4961,8 +4961,8 @@ table@^3.7.8:
     string-width "^2.0.0"
 
 tapable@^0.2.5, tapable@~0.2.5:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.6.tgz#206be8e188860b514425375e6f1ae89bfb01fd8d"
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.7.tgz#e46c0daacbb2b8a98b9b0cea0f4052105817ed5c"
 
 tar-pack@^3.4.0:
   version "3.4.0"

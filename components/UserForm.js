@@ -78,8 +78,12 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
       fields: { ...form.fields, [prop]: value },
     });
   };
-  const addUser = () => dispatch({ type: 'ADD_USER', fields: form.fields });
-  const add10RandomUsers = () => dispatch({ type: 'ADD_10_RANDOM_USERS' });
+  const addUser = () => {
+    dispatch({ type: 'ADD_USER', fields: form.fields });
+  };
+  const add10RandomUsers = () => {
+    dispatch({ type: 'ADD_10_RANDOM_USERS' });
+  };
   const disabled = temp(form.disabled);
 
   return (

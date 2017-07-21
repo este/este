@@ -1,7 +1,8 @@
 // @flow
 import A from '../components/A';
 import AllPosts from '../components/AllPosts';
-// import Box from '../components/Box';
+import CreatePost from '../components/CreatePost';
+import Box from '../components/Box';
 import Heading from '../components/Heading';
 // import Loading from '../components/Loading';
 import P from '../components/P';
@@ -27,7 +28,6 @@ const GraphQL = ({ intl }) =>
       <A href="https://facebook.github.io/relay/">Relay</A> and{' '}
       <A href="https://www.graph.cool/">graph.cool</A>.
     </P>
-    {/* QueryRenderer can be placed everywhere. */}
     <QueryRenderer
       environment={environment}
       query={graphql`
@@ -42,9 +42,18 @@ const GraphQL = ({ intl }) =>
       variables={{}}
       render={({ error, props }) => {
         if (error) {
-          return <div>Error, asi 500 page? Redirect?</div>;
+          return (
+            <div>
+              Error, asi 500 page? Redirect? jo, proto to patri do Next.
+            </div>
+          );
         } else if (props) {
-          return <AllPosts viewer={props.viewer} />;
+          return (
+            <Box>
+              <CreatePost />
+              <AllPosts viewer={props.viewer} />
+            </Box>
+          );
         }
         return <div>Loading</div>;
       }}

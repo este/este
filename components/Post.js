@@ -7,7 +7,7 @@ import Text from '../components/Text';
 import { FormattedRelative } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-const RemovePost = () =>
+const RemovePostButton = () =>
   <Button
     color="warning"
     marginVertical={0}
@@ -41,7 +41,7 @@ const RemovePost = () =>
 //         },
 //       }),
 //   }),
-// })(RemovePost);
+// })(RemovePostButton);
 
 const Post = ({ post }: { post: Post_post }) =>
   <Box marginBottom={1}>
@@ -49,7 +49,7 @@ const Post = ({ post }: { post: Post_post }) =>
       <Text color="gray" size={-1}>
         <FormattedRelative value={post.createdAt} />
       </Text>
-      <RemovePost id={post.id} />
+      <RemovePostButton id={post.id} />
     </Set>
     <Text>
       {post.text}

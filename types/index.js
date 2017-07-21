@@ -68,6 +68,14 @@ export type AuthState = {|
   +form: FormState<AuthFormFields>,
 |};
 
+export type PostFormFields = {|
+  +text: string,
+|};
+
+export type PostsState = {|
+  +form: FormState<PostFormFields>,
+|};
+
 export type UserGender = 'male' | 'female' | 'other';
 
 export type UserFormFields = {
@@ -96,6 +104,7 @@ export type State = {|
   +apollo: Object,
   +app: AppState,
   +auth: AuthState,
+  +posts: PostsState,
   +users: UsersState,
 |};
 
@@ -107,6 +116,9 @@ export type ServerState = {|
 // Note no exact nor imutable types here yet until Flow fix spread syntax.
 export type Action =
   | { type: 'ADD_10_RANDOM_USERS' }
+  | { type: 'ADD_POST', fields: PostFormFields }
+  | { type: 'ADD_POST_ERROR', errors: Errors<PostFormFields> }
+  | { type: 'ADD_POST_SUCCESS' }
   | { type: 'ADD_USER', fields: UserFormFields }
   | { type: 'ADD_USER_ERROR', errors: Errors<UserFormFields> }
   | { type: 'ADD_USER_SUCCESS', user: User }
@@ -118,6 +130,7 @@ export type Action =
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
+  | { type: 'SET_POST_FORM', id?: Id, fields: ?PostFormFields }
   | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
