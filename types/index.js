@@ -19,9 +19,11 @@ import type {
 // because Flow doesn't support spread with exact types yet.
 // https://flow.org/en/docs/types/objects/#toc-exact-object-types
 
+// I would love to collocate types, for example reducer types, but:
+// https://twitter.com/steida/status/888534322613035009
+
 export type Id = string;
 
-// AppError could be composed as well. Type composition ftw.
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' }
@@ -112,19 +114,17 @@ export type ServerState = {|
   +app: AppState,
 |};
 
-// Async naming: ADD_USER, ADD_USER_CANCEL, ADD_USER_ERROR, ADD_USER_SUCCESS
-// Note no exact nor imutable types here yet until Flow fix spread syntax.
 export type Action =
-  | { type: 'ADD_10_RANDOM_USERS' }
-  | { type: 'ADD_POST', fields: PostFormFields }
-  | { type: 'ADD_POST_ERROR', errors: Errors<PostFormFields> }
-  | { type: 'ADD_POST_SUCCESS' }
-  | { type: 'ADD_USER', fields: UserFormFields }
-  | { type: 'ADD_USER_ERROR', errors: Errors<UserFormFields> }
-  | { type: 'ADD_USER_SUCCESS', user: User }
   | { type: 'AUTH', fields: AuthFormFields }
   | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
   | { type: 'AUTH_SUCCESS' }
+  | { type: 'CREATE_10_RANDOM_USERS' }
+  | { type: 'CREATE_POST', fields: PostFormFields }
+  | { type: 'CREATE_POST_ERROR', errors: Errors<PostFormFields> }
+  | { type: 'CREATE_POST_SUCCESS' }
+  | { type: 'CREATE_USER', fields: UserFormFields }
+  | { type: 'CREATE_USER_ERROR', errors: Errors<UserFormFields> }
+  | { type: 'CREATE_USER_SUCCESS', user: User }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }

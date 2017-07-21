@@ -33,15 +33,15 @@ const reducer = (
   switch (action.type) {
     case 'SET_USER_FORM':
       return setForm(state, 'form', action.fields, action.id);
-    case 'ADD_USER':
+    case 'CREATE_USER':
       return disableForm(state, 'form');
-    case 'ADD_USER_ERROR':
+    case 'CREATE_USER_ERROR':
       return setFormErrors(state, 'form', action.errors);
     case 'SAVE_USER':
       return disableForm(state, 'form', action.user.id);
     case 'SAVE_USER_ERROR':
       return setFormErrors(state, 'form', action.errors, action.user.id);
-    case 'ADD_USER_SUCCESS': {
+    case 'CREATE_USER_SUCCESS': {
       const { user } = action;
       return {
         ...resetForm(state, 'form'),

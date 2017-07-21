@@ -78,16 +78,16 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
       fields: { ...form.fields, [prop]: value },
     });
   };
-  const addUser = () => {
-    dispatch({ type: 'ADD_USER', fields: form.fields });
+  const createUser = () => {
+    dispatch({ type: 'CREATE_USER', fields: form.fields });
   };
-  const add10RandomUsers = () => {
-    dispatch({ type: 'ADD_10_RANDOM_USERS' });
+  const create10RandomUsers = () => {
+    dispatch({ type: 'CREATE_10_RANDOM_USERS' });
   };
   const disabled = temp(form.disabled);
 
   return (
-    <Form onSubmit={addUser}>
+    <Form onSubmit={createUser}>
       <Set vertical>
         <TextInput
           // Note we are not using name attribute. It's useful probably only
@@ -163,8 +163,8 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
         <ValidationError error={form.validationErrors.isAnarchist} />
       </Set>
       <Set>
-        <AddButton primary onPress={addUser} disabled={disabled} />
-        <Button primary onPress={add10RandomUsers} disabled={disabled}>
+        <AddButton primary onPress={createUser} disabled={disabled} />
+        <Button primary onPress={create10RandomUsers} disabled={disabled}>
           Add 10 random users
         </Button>
       </Set>

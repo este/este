@@ -28,19 +28,21 @@ import { Observable } from 'rxjs/Observable';
 //   return Observable.throw(errors);
 // };
 
-export const addPost: Epic = (
+export const createPost: Epic = (
   action$ /* , { createUuid, getNow, getState } */,
 ) =>
-  action$.filter(action => action.type === 'ADD_POST').mergeMap(action => {
+  action$.filter(action => action.type === 'CREATE_POST').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
-    if (action.type !== 'ADD_POST') throw Error();
+    if (action.type !== 'CREATE_POST') throw Error();
+
+    // rename to create post
 
     // environment jako deps, pac vse pujde pres action, protoze async, ok
     // import CreatePostMutation from '../mutations/CreatePostMutation';
     // odpalit akci, a v epicu handlovat mutation
     // CreatePostMutation.commit(environment, text)
 
-    return Observable.of(action.fields).mapTo({ type: 'ADD_POST_SUCCESS' });
+    return Observable.of(action.fields).mapTo({ type: 'CREATE_POST_SUCCESS' });
     // const user = createUser(getNow, createUuid, action.fields);
     //
     // // Validate object first, then app rules, then do async.
@@ -48,8 +50,8 @@ export const addPost: Epic = (
     //   .mergeMap(validateUser)
     //   .mergeMap(validateUsersLocalLength(getState().users.local))
     //   .mergeMap(simulateUserSave)
-    //   .mapTo({ type: 'ADD_USER_SUCCESS', user })
+    //   .mapTo({ type: 'CREATE_USER_SUCCESS', user })
     //   .catch((errors: Errors<User>) =>
-    //     Observable.of({ type: 'ADD_USER_ERROR', errors }),
+    //     Observable.of({ type: 'CREATE_USER_ERROR', errors }),
     //   );
   });

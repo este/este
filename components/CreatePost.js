@@ -21,7 +21,7 @@ const CreatePost = ({ form, dispatch }: CreatePostProps) => {
     });
   };
   const handleSubmitEditing = () => {
-    dispatch({ type: 'ADD_POST', fields: form.fields });
+    dispatch({ type: 'CREATE_POST', fields: form.fields });
   };
   return (
     <Box marginBottom={1}>

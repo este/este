@@ -14,13 +14,16 @@ const mutation = graphql`
   }
 `;
 
+// fakt vracetet asi createPostMutation, ten commit je divnej,ok
+// snad to nikde nepouziva object, ok
 const commit = (environment: Object, text: string) =>
   commitMutation(environment, {
     mutation,
     variables: ({
       input: {
         text,
-        clientMutationId: Date.now().toString(),
+        // https://github.com/facebook/relay/issues/1556#issuecomment-283424459
+        clientMutationId: '0',
       },
     }: CreatePostMutationVariables),
   });

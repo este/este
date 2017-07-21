@@ -56,9 +56,9 @@ const simulateUserSave = user =>
   });
 
 export const addUser: Epic = (action$, { createUuid, getNow, getState }) =>
-  action$.filter(action => action.type === 'ADD_USER').mergeMap(action => {
+  action$.filter(action => action.type === 'CREATE_USER').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
-    if (action.type !== 'ADD_USER') throw Error();
+    if (action.type !== 'CREATE_USER') throw Error();
 
     const user = createUser(getNow, createUuid, action.fields);
 
@@ -67,18 +67,18 @@ export const addUser: Epic = (action$, { createUuid, getNow, getState }) =>
       .mergeMap(validateUser)
       .mergeMap(validateUsersLocalLength(getState().users.local))
       .mergeMap(simulateUserSave)
-      .mapTo({ type: 'ADD_USER_SUCCESS', user })
+      .mapTo({ type: 'CREATE_USER_SUCCESS', user })
       .catch((errors: Errors<User>) =>
-        Observable.of({ type: 'ADD_USER_ERROR', errors }),
+        Observable.of({ type: 'CREATE_USER_ERROR', errors }),
       );
   });
 
 export const add10RandomUsers: Epic = (action$, { createUuid, getNow }) =>
   action$
-    .filter(action => action.type === 'ADD_10_RANDOM_USERS')
+    .filter(action => action.type === 'CREATE_10_RANDOM_USERS')
     .mergeMap(action => {
       // https://flow.org/en/docs/lang/refinements
-      if (action.type !== 'ADD_10_RANDOM_USERS') throw Error();
+      if (action.type !== 'CREATE_10_RANDOM_USERS') throw Error();
 
       const actions = range(0, 10).map(i => {
         const id = createUuid();

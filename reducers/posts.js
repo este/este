@@ -1,13 +1,7 @@
 // @flow
 import type { Action, PostsState } from '../types';
 import { createTemp } from '../lib/temp';
-import {
-  setForm,
-  // disableForm,
-  // resetForm,
-  // setFormErrors
-} from '../lib/form';
-// import { reject, isNil, omit } from 'ramda';
+import { setForm, disableForm, resetForm, setFormErrors } from '../lib/form';
 
 const initialState = {
   form: {
@@ -30,28 +24,12 @@ const reducer = (
   switch (action.type) {
     case 'SET_POST_FORM':
       return setForm(state, 'form', action.fields, action.id);
-    // case 'ADD_USER':
-    //   return disableForm(state, 'form');
-    // case 'ADD_USER_ERROR':
-    //   return setFormErrors(state, 'form', action.errors);
-    // case 'SAVE_USER':
-    //   return disableForm(state, 'form', action.user.id);
-    // case 'SAVE_USER_ERROR':
-    //   return setFormErrors(state, 'form', action.errors, action.user.id);
-    // case 'ADD_USER_SUCCESS': {
-    //   const { user } = action;
-    //   return {
-    //     ...resetForm(state, 'form'),
-    //     local: { ...state.local, [user.id]: user },
-    //   };
-    // }
-    // case 'SAVE_USER_SUCCESS': {
-    //   const { user } = action;
-    //   return {
-    //     ...resetForm(state, 'form', user.id),
-    //     local: { ...state.local, [user.id]: user },
-    //   };
-    // }
+    case 'CREATE_POST':
+      return disableForm(state, 'form');
+    case 'CREATE_USER_ERROR':
+      return setFormErrors(state, 'form', action.errors);
+    case 'CREATE_POST_SUCCESS':
+      return resetForm(state, 'form');
     default:
       return state;
   }
