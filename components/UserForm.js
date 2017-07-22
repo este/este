@@ -1,11 +1,6 @@
 // @flow
-import type {
-  Dispatch,
-  Form as FormType,
-  State,
-  UserFormFields,
-  UserGender,
-} from '../types';
+import type { Dispatch, Form as FormType, State } from '../types';
+import type { UserFormFields, UserGender } from '../reducers/users';
 import type { IntlShape } from 'react-intl';
 import AppError from '../components/AppError';
 import Button from '../components/Button';
@@ -74,7 +69,7 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
   const setUserForm = (prop: $Keys<UserFormFields>) => value => {
     dispatch({
       type: 'SET_USER_FORM',
-      // $FlowFixMe Flow bug.
+      // $FlowFixMe
       fields: { ...form.fields, [prop]: value },
     });
   };

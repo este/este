@@ -1,5 +1,16 @@
 // @flow
-import type { Action, AppState } from '../types';
+import type { Action, Errors } from '../types';
+
+export type AppState = {
+  baselineShown: boolean,
+  darkEnabled: boolean,
+  errors: ?Errors<Object>,
+  name: string,
+  version: string,
+  locale: string,
+  defaultLocale: string,
+  supportedLocales: Array<string>,
+};
 
 // This is defined by server in app.js
 const initialState = {
@@ -22,7 +33,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
     action.errors.appError &&
     action.errors.validationErrors
   ) {
-    // $FlowFixMe Use type refinement or type casting.
+    // $FlowFixMe
     return { ...state, errors: action.errors };
   }
 

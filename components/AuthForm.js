@@ -1,10 +1,6 @@
 // @flow
-import type {
-  AuthFormFields,
-  Dispatch,
-  Form as FormType,
-  State,
-} from '../types';
+import type { Dispatch, Form as FormType, State } from '../types';
+import type { AuthFormFields } from '../reducers/auth';
 import AppError from './AppError';
 import Box from './Box';
 import Form from './Form';
@@ -57,10 +53,9 @@ const AuthForm = (
   { theme }: ThemeContext,
 ) => {
   const disabled = temp(form.disabled);
-  const setUserForm = (prop: $Keys<AuthFormFields>) => value => {
+  const setUserForm = prop => value => {
     dispatch({
       type: 'SET_AUTH_FORM',
-      // $FlowFixMe Flow bug.
       fields: { ...form.fields, [prop]: value },
     });
   };

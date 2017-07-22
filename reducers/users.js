@@ -1,8 +1,40 @@
 // @flow
-import type { Action, UsersState } from '../types';
+import type { Action, Id, FormState } from '../types';
 import { createTemp } from '../lib/temp';
 import { setForm, disableForm, resetForm, setFormErrors } from '../lib/form';
 import { reject, isNil, omit } from 'ramda';
+
+export type UserGender = 'male' | 'female' | 'other';
+
+export type UserFormFields = {
+  name: string,
+  email: string,
+  likesCats: boolean,
+  likesDogs: boolean,
+  gender: UserGender,
+  gender: ?string,
+  isAnarchist: boolean,
+};
+
+export type User = {
+  name: string,
+  email: string,
+  likesCats: boolean,
+  likesDogs: boolean,
+  gender: UserGender,
+  gender: ?string,
+  isAnarchist: boolean,
+
+  id: Id,
+  createdAt: number,
+  updatedAt: number,
+};
+
+export type UsersState = {
+  form: FormState<UserFormFields>,
+  local: { [id: Id]: User },
+  selected: { [id: Id]: true },
+};
 
 const initialState = {
   form: {

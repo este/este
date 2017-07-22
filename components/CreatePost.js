@@ -1,5 +1,6 @@
 // @flow
-import type { Dispatch, Form, PostFormFields, State } from '../types';
+import type { Dispatch, Form, State } from '../types';
+import type { PostFormFields } from '../reducers/posts';
 import Box from './Box';
 import TextInput from './TextInput';
 import { connect } from 'react-redux';
@@ -13,10 +14,9 @@ type CreatePostProps = {
 
 const CreatePost = ({ form, dispatch }: CreatePostProps) => {
   const disabled = temp(form.disabled);
-  const setPostForm = (prop: $Keys<PostFormFields>) => value => {
+  const setPostForm = prop => value => {
     dispatch({
       type: 'SET_POST_FORM',
-      // $FlowFixMe Flow bug.
       fields: { ...form.fields, [prop]: value },
     });
   };

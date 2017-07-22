@@ -88,7 +88,6 @@ export const browserTheme: Theme = {
   },
 };
 
-// $FlowFixMe flow/issues/2405
 export const browserThemeDark: Theme = {
   ...browserTheme,
   colors: {

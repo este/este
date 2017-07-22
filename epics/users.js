@@ -1,5 +1,6 @@
 // @flow
-import type { Epic, Errors, User } from '../types';
+import type { Epic, Errors } from '../types';
+import type { User } from '../reducers/users';
 import { Observable } from 'rxjs/Observable';
 import { range } from 'ramda';
 import validate, {

@@ -14,6 +14,7 @@ type Colors = {|
 export type Color = $Keys<Colors>;
 
 // TODO: Derive it from Colors. $Shape doesn't work, $ObjMap is buggy.
+// $Values? optinal keys
 export type ColorProps = {
   primary?: boolean,
   success?: boolean,
@@ -37,54 +38,54 @@ export type Bold =
   | 800
   | 900;
 
-export type Theme = {|
-  typography: {|
+export type Theme = {
+  typography: {
     fontSize: number => number,
     lineHeight: number,
     rhythm: number => number,
-  |},
+  },
   colors: Colors,
-  page: {|
+  page: {
     backgroundColor: Color,
-  |},
-  text: {|
+  },
+  text: {
     bold: Bold,
     color: Color,
     fontFamily: string,
-  |},
-  heading: {|
+  },
+  heading: {
     bold: Bold,
     fontFamily: string,
     marginBottom: number,
-  |},
-  p: {|
+  },
+  p: {
     marginBottom: number,
-  |},
-  set: {|
+  },
+  set: {
     marginBottom: number,
     horizontalSpaceBetween: number,
     verticalSpaceBetween: number,
-  |},
-  button: {|
+  },
+  button: {
     borderRadius: number,
     borderWidth: number,
     marginVertical: number,
     paddingVertical: number,
     disabledOpacity: number,
-  |},
-  form: {|
+  },
+  form: {
     marginBottom: number,
     maxWidth: number,
-  |},
-  textInput: {|
+  },
+  textInput: {
     disabledOpacity: number,
-  |},
-  checkbox: {|
+  },
+  checkbox: {
     checkedIcon: Element<*>,
     uncheckedIcon: Element<*>,
-  |},
-  radio: {|
+  },
+  radio: {
     checkedIcon: Element<*>,
     uncheckedIcon: Element<*>,
-  |},
-|};
+  },
+};

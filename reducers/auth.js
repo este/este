@@ -1,7 +1,17 @@
 // @flow
-import type { Action, AuthState } from '../types';
+import type { Action, FormState } from '../types';
 import { createTemp } from '../lib/temp';
 import { setForm, setFormErrors, disableForm, resetForm } from '../lib/form';
+
+export type AuthFormFields = {|
+  email: string,
+  password: string,
+  signUp: boolean,
+|};
+
+export type AuthState = {|
+  form: FormState<AuthFormFields>,
+|};
 
 const initialState = {
   form: {

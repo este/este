@@ -1,4 +1,14 @@
 // @flow
+
+// Algebraic data types make domain modelling easy.
+// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
+
+// IMPORTANT ADVICE!
+// Think twice before using covariants and exact type. It's buggy as hell and
+// Flow errors are misleading. Life is hard and short. Don't fight with Flow.
+// If something doesn't work, check Flow issues and probably don't use it.
+// Feel free to use 'FlowFixMe Describe why' anytime. Favour it over any type.
+
 import type { Observable } from 'rxjs';
 import type { Temp } from '../lib/temp';
 import type { ValidationError } from '../lib/validate';
@@ -9,18 +19,10 @@ import type {
   Store as ReduxStore,
 } from 'redux';
 
-// Algebraic data types make domain modelling easy.
-// http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
-
-// Redux state is meant to be immutable.
-// https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-state-immutability
-
-// Use exact object type as much as possible, but not where ... spread is used,
-// because Flow doesn't support spread with exact types yet.
-// https://flow.org/en/docs/types/objects/#toc-exact-object-types
-
-// I would love to collocate types, for example reducer types, but:
-// https://twitter.com/steida/status/888534322613035009
+import type { AppState } from '../reducers/app';
+import type { AuthFormFields, AuthState } from '../reducers/auth';
+import type { PostFormFields, PostsState } from '../reducers/posts';
+import type { UserFormFields, UsersState, User } from '../reducers/users';
 
 export type Id = string;
 
@@ -30,89 +32,36 @@ export type AppError =
   | { type: 'cannotSignInCredentialsInvalid' }
   | { type: 'unknown', message: string };
 
-export type ValidationErrors<T> = { +[key: $Keys<T>]: ValidationError };
+export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
 
-export type Errors<T> = {|
-  +appError?: AppError,
-  +validationErrors?: ValidationErrors<T>,
-|};
-
-export type Form<Fields> = {|
-  +fields: Fields,
-  +disabled: Temp<boolean>,
-  +appError: ?AppError,
-  +validationErrors: ValidationErrors<Fields>,
-|};
-
-export type FormState<Fields> = {|
-  +initial: Form<Fields>,
-  +changed: { +[id: Id]: Form<Fields> },
-|};
-
-export type AppState = {
-  +baselineShown: boolean,
-  +darkEnabled: boolean,
-  +errors: ?Errors<Object>,
-  +name: string,
-  +version: string,
-  +locale: string,
-  +defaultLocale: string,
-  +supportedLocales: Array<string>,
+export type Errors<T> = {
+  appError?: AppError,
+  validationErrors?: ValidationErrors<T>,
 };
 
-export type AuthFormFields = {|
-  +email: string,
-  +password: string,
-  +signUp: boolean,
-|};
-
-export type AuthState = {|
-  +form: FormState<AuthFormFields>,
-|};
-
-export type PostFormFields = {|
-  +text: string,
-|};
-
-export type PostsState = {|
-  +form: FormState<PostFormFields>,
-|};
-
-export type UserGender = 'male' | 'female' | 'other';
-
-export type UserFormFields = {
-  +name: string,
-  +email: string,
-  +likesCats: boolean,
-  +likesDogs: boolean,
-  +gender: UserGender,
-  +gender: ?string,
-  +isAnarchist: boolean,
+export type Form<Fields> = {
+  fields: Fields,
+  disabled: Temp<boolean>,
+  appError: ?AppError,
+  validationErrors: ValidationErrors<Fields>,
 };
 
-export type User = UserFormFields & {
-  +id: Id,
-  +createdAt: number,
-  +updatedAt: number,
+export type FormState<Fields> = {
+  initial: Form<Fields>,
+  changed: { [id: Id]: Form<Fields> },
 };
 
-export type UsersState = {
-  +form: FormState<UserFormFields>,
-  +local: { +[id: Id]: User },
-  +selected: { +[id: Id]: true },
+export type State = {
+  apollo: Object,
+  app: AppState,
+  auth: AuthState,
+  posts: PostsState,
+  users: UsersState,
 };
 
-export type State = {|
-  +apollo: Object,
-  +app: AppState,
-  +auth: AuthState,
-  +posts: PostsState,
-  +users: UsersState,
-|};
-
-export type ServerState = {|
-  +app: AppState,
-|};
+export type ServerState = {
+  app: AppState,
+};
 
 export type Action =
   | { type: 'AUTH', fields: AuthFormFields }
@@ -130,14 +79,14 @@ export type Action =
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
   | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
-  | { type: 'SET_POST_FORM', id?: Id, fields: ?PostFormFields }
-  | { type: 'SET_USER_FORM', id?: Id, fields: ?UserFormFields }
+  | { type: 'SET_POST_FORM', fields: ?PostFormFields, id?: Id }
+  | { type: 'SET_USER_FORM', fields: ?UserFormFields, id?: Id }
   | { type: 'TOGGLE_BASELINE' }
   | { type: 'TOGGLE_DARK' }
   | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
 
 export type Middleware = Array<ReduxMiddleware<State, Action>>;
-export type Reducers = { +[name: $Keys<State>]: ReduxReducer<State, Action> };
+export type Reducers = { [name: $Keys<State>]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
@@ -145,10 +94,10 @@ export type Dispatch = ReduxDispatch<Action>;
 // https://gist.github.com/rosskevin/3025518628b16f80c11a2b7385f56169
 export type RelayEnvironment = Object;
 
-export type PlatformDependencies = {|
+export type PlatformDependencies = {
   createUuid: () => string, // Because React Native needs different lib.
   environment: RelayEnvironment,
-|};
+};
 
 export type Dependencies = PlatformDependencies & {
   getState: () => State,

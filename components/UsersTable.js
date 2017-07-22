@@ -1,5 +1,6 @@
 // @flow
-import type { State, Dispatch, UserFormFields } from '../types';
+import type { State, Dispatch } from '../types';
+import type { UserFormFields } from '../reducers/users';
 import Box from '../components/Box';
 import Button from '../components/Button';
 import AlertErrors from '../components/AlertErrors';
@@ -39,7 +40,7 @@ const RowForm = ({
     dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
-      // $FlowFixMe Flow bug.
+      // $FlowFixMe
       fields: { ...fields, [prop]: value },
     });
   };
@@ -47,6 +48,7 @@ const RowForm = ({
     dispatch({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
   };
   const saveUser = () => {
+    // $FlowFixMe
     dispatch({ type: 'SAVE_USER', user: fields });
   };
   const cancelEditation = () => {
