@@ -12,6 +12,3 @@ Other notes
 - __generated__ dirs are stored in repo because deployment to Zeit Now. I don't
 know how to set Now deploy to add git ignored files. I also don't know how to
 run npm relay in Now cloud, because it depends on watchman.
-
-- '$FlowFixMe Flow bug' for connected components, type inference should work,
-but HOCs breaks it. Leave it as is for now.
