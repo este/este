@@ -14,11 +14,7 @@ import sitemap from '../lib/sitemap';
 // import { FormattedRelative } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 
-import createRelayEnvironment from '../lib/createRelayEnvironment';
-
-const environment = createRelayEnvironment();
-
-const GraphQL = ({ intl }) =>
+const GraphQL = ({ environment, intl }) =>
   <Page title={intl.formatMessage(sitemap.graphql.title)}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.graphql.title)}
@@ -32,9 +28,9 @@ const GraphQL = ({ intl }) =>
       environment={environment}
       query={graphql`
         query graphqlQuery {
-          # For some reason, Relay uses viewer prop for data.
+          # Relay uses viewer for data, for some reason.
           viewer {
-            # Whole query is statically composed from fragments.
+            # Query is statically composed from fragments.
             ...AllPosts_viewer
           }
         }

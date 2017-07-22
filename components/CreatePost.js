@@ -21,6 +21,7 @@ const CreatePost = ({ form, dispatch }: CreatePostProps) => {
     });
   };
   const handleSubmitEditing = () => {
+    if (!form.fields.text.trim()) return;
     dispatch({ type: 'CREATE_POST', fields: form.fields });
   };
   return (

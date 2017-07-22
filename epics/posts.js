@@ -28,14 +28,16 @@ import { Observable } from 'rxjs/Observable';
 //   return Observable.throw(errors);
 // };
 
-export const createPost: Epic = (
-  action$ /* , { createUuid, getNow, getState } */,
-) =>
+export const createPost: Epic = (action$ /* , { environment } */) =>
   action$.filter(action => action.type === 'CREATE_POST').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
     if (action.type !== 'CREATE_POST') throw Error();
 
-    // rename to create post
+    // console.log(environment);
+    // environment.
+    // potrebuju environment nejak spravne injectovat
+    // CreatePostMutation.commit? proc?
+    // vracet promisu?
 
     // environment jako deps, pac vse pujde pres action, protoze async, ok
     // import CreatePostMutation from '../mutations/CreatePostMutation';

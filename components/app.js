@@ -1,9 +1,14 @@
 // @flow
 import type { IntlShape } from 'react-intl';
-import type { Store, ServerState, FunctionalComponent } from '../types';
+import type {
+  RelayEnvironment,
+  Store,
+  ServerState,
+  FunctionalComponent,
+} from '../types';
 import React from 'react';
-// import cookie from 'cookie';
 import createReduxStore from '../lib/createReduxStore';
+import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
 import localForage from 'localforage';
 import persistStore from '../lib/persistStore';
@@ -12,10 +17,11 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { Provider as ReduxProvider } from 'react-redux';
 
+// import cookie from 'cookie';
+
 // App composition root.
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform probably via app.ios.js and app.android.js
-// TODO: Add Flow types.
 
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line global-require
@@ -40,34 +46,52 @@ const singletonOnClient = (create: Function) => {
   };
 };
 
-// const getApolloClient: (getToken: {
-//   getToken: () => string,
-// }) => ApolloClient = singletonOnClient(({ getToken }) =>
-//   createApolloClient({ getToken }),
-// );
+const getRelayEnvironment = singletonOnClient(() => createRelayEnvironment());
 
 const getReduxStore: (
   serverState: ServerState,
 ) => Store = singletonOnClient(initialState => {
-  const platformDependencies = { createUuid: uuid.v4 };
+  const platformDependencies = {
+    createUuid: uuid.v4,
+    environment: getRelayEnvironment(),
+  };
   return createReduxStore(initialState, { platformDependencies });
 });
 
-const renderApp = (IntlPage, reduxStore, locale, messages, initialNow, props) =>
-  <ReduxProvider store={reduxStore}>
-    <FelaProvider renderer={felaRenderer}>
-      <IntlProvider locale={locale} messages={messages} initialNow={initialNow}>
-        <IntlPage {...props} />
-      </IntlProvider>
-    </FelaProvider>
-  </ReduxProvider>;
+const renderPageWithProviders = (
+  Page,
+  reduxStore,
+  relayEnvironment,
+  locale,
+  messages,
+  initialNow,
+  props,
+) => {
+  // This is fine. We are rerendering everything on page change anyway.
+  // https://facebook.github.io/react/docs/higher-order-components.html#dont-use-hocs-inside-the-render-method
+  Page = injectIntl(Page);
+  return (
+    <ReduxProvider store={reduxStore}>
+      <FelaProvider renderer={felaRenderer}>
+        <IntlProvider
+          locale={locale}
+          messages={messages}
+          initialNow={initialNow}
+        >
+          <Page {...props} environment={relayEnvironment} />
+        </IntlProvider>
+      </FelaProvider>
+    </ReduxProvider>
+  );
+};
 
 type PageProps = {
+  environment: RelayEnvironment,
+  intl: IntlShape,
   // TODO: Waiting for Next.js 3 type definitions.
   url: {
     pathname: string,
   },
-  intl: IntlShape,
 };
 
 type Page = FunctionalComponent<PageProps>;
@@ -79,12 +103,11 @@ type Page = FunctionalComponent<PageProps>;
 //       : (context.req && context.req.headers.cookie) || '',
 //   );
 
-const app = (Page: Page) => {
-  const IntlPage = injectIntl(Page);
-  // We need Class because we need a componentDidMount.
-  // We need a componentDidMount because client state must be rendered after
-  // the initial render, to prevent client and server HTML mismatch.
-  return class App extends React.Component {
+// We need Class because we need a componentDidMount.
+// We need a componentDidMount because client state must be rendered after
+// the initial render, to prevent client and server HTML mismatch.
+const app = (Page: Page) =>
+  class App extends React.Component {
     static async getInitialProps(context) {
       // Evaluate the composed component's getInitialProps().
       let composedInitialProps = {};
@@ -101,7 +124,7 @@ const app = (Page: Page) => {
       // <IntlProvider> will be a new instance even with pushState routing.
       const initialNow = Date.now();
 
-      const serverState = {
+      const serverState: ServerState = {
         app: {
           baselineShown: false,
           darkEnabled: false,
@@ -133,8 +156,8 @@ const app = (Page: Page) => {
       //   const url = { query: context.query, pathname: context.pathname };
       //
       //   // Run all graphql queries.
-      //   const app = renderApp(
-      //     IntlPage,
+      //   const app = renderPageWithProviders(
+      //     Page,
       //     apolloClient,
       //     reduxStore,
       //     locale,
@@ -174,10 +197,12 @@ const app = (Page: Page) => {
     }
 
     reduxStore: Store;
+    relayEnvironment: RelayEnvironment;
 
     constructor(props: any) {
       super(props);
       this.reduxStore = getReduxStore(props.serverState);
+      this.relayEnvironment = getRelayEnvironment();
     }
 
     componentDidMount() {
@@ -193,9 +218,11 @@ const app = (Page: Page) => {
         serverState,
         ...props
       } = this.props;
-      return renderApp(
-        IntlPage,
-        this.reduxStore,
+      const { reduxStore, relayEnvironment } = this;
+      return renderPageWithProviders(
+        Page,
+        reduxStore,
+        relayEnvironment,
         locale,
         messages,
         initialNow,
@@ -203,6 +230,5 @@ const app = (Page: Page) => {
       );
     }
   };
-};
 
 export default app;
