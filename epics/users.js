@@ -27,9 +27,9 @@ const validateUser = user => {
     email: [email(), maxLength()],
     isAnarchist: [requiredAgree()],
   });
-  if (!validationErrors) return Observable.of(user);
-  const errors: Errors<User> = { validationErrors };
-  return Observable.throw(errors);
+  return validationErrors
+    ? Observable.throw(({ validationErrors }: Errors<User>))
+    : Observable.of(user);
 };
 
 const validateUsersLocalLength = local => user => {
@@ -48,10 +48,11 @@ const simulateUserSave = user =>
       if (Math.random() > 0.1) {
         observer.next(user);
       } else {
-        const errors: Errors<User> = {
-          appError: { type: 'xhrError' },
-        };
-        observer.error(errors);
+        observer.error(
+          ({
+            appError: { type: 'xhrError' },
+          }: Errors<User>),
+        );
       }
     }, 500);
   });

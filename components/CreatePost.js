@@ -3,6 +3,7 @@ import type { Dispatch, Form, State } from '../types';
 import type { PostFormFields } from '../reducers/posts';
 import Box from './Box';
 import TextInput from './TextInput';
+import ValidationError from '../components/ValidationError';
 import { connect } from 'react-redux';
 import { initialFormId } from '../lib/form';
 import { temp } from '../lib/temp';
@@ -14,7 +15,7 @@ type CreatePostProps = {
 
 const CreatePost = ({ form, dispatch }: CreatePostProps) => {
   const disabled = temp(form.disabled);
-  const setPostForm = prop => value => {
+  const setPostForm = (prop: $Keys<PostFormFields>) => value => {
     dispatch({
       type: 'SET_POST_FORM',
       fields: { ...form.fields, [prop]: value },
@@ -27,7 +28,9 @@ const CreatePost = ({ form, dispatch }: CreatePostProps) => {
   return (
     <Box marginBottom={1}>
       <TextInput
+        autoFocus={form.validationErrors.text}
         disabled={disabled}
+        error={<ValidationError error={form.validationErrors.text} />}
         label="New Post"
         onChange={setPostForm('text')}
         onSubmitEditing={handleSubmitEditing}
