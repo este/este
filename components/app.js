@@ -1,11 +1,6 @@
 // @flow
 import type { IntlShape } from 'react-intl';
-import type {
-  RelayEnvironment,
-  Store,
-  ServerState,
-  FunctionalComponent,
-} from '../types';
+import type { Store, ServerState, FunctionalComponent } from '../types';
 import React from 'react';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
@@ -86,7 +81,7 @@ const renderPageWithProviders = (
 };
 
 type PageProps = {
-  environment: RelayEnvironment,
+  environment: Object,
   intl: IntlShape,
   // TODO: Waiting for Next.js 3 type definitions.
   url: {
@@ -197,7 +192,7 @@ const app = (Page: Page) =>
     }
 
     reduxStore: Store;
-    relayEnvironment: RelayEnvironment;
+    relayEnvironment: Object;
 
     constructor(props: any) {
       super(props);

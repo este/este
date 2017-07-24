@@ -1,9 +1,10 @@
 // @flow
 import type { CreatePostMutationVariables } from './__generated__/CreatePostMutation.graphql';
 import type { PostFormFields } from '../reducers/posts';
-import type { Id, RelayEnvironment } from '../types';
+import type { Id } from '../types';
+import createCommit from './createCommit';
 import { ConnectionHandler } from 'relay-runtime';
-import { commitMutation, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 
 const mutation = graphql`
   mutation CreatePostMutation($input: CreatePostInput!) {
@@ -29,29 +30,21 @@ const updater = (store, viewerId, edge) => {
   ConnectionHandler.insertEdgeBefore(connection, edge);
 };
 
-const commit = (
-  environment: RelayEnvironment,
-  viewerId: Id,
-  fields: PostFormFields,
-) =>
-  new Promise((resolve, reject) => {
-    commitMutation(environment, {
-      mutation,
-      variables: ({
-        input: {
-          ...fields,
-          // no-op, https://github.com/facebook/relay/issues/1985
-          clientMutationId: '',
-        },
-      }: CreatePostMutationVariables),
-      onCompleted: () => resolve(),
-      onError: error => reject({ appError: error }),
-      updater: store => {
-        const payload = store.getRootField('createPost');
-        const edge = payload.getLinkedRecord('edge');
-        updater(store, viewerId, edge);
+const commit = (environment: Object, viewerId: Id, fields: PostFormFields) =>
+  createCommit(environment, {
+    mutation,
+    variables: ({
+      input: {
+        ...fields,
+        // no-op, https://github.com/facebook/relay/issues/1985
+        clientMutationId: '',
       },
-    });
+    }: CreatePostMutationVariables),
+    updater: store => {
+      const payload = store.getRootField('createPost');
+      const edge = payload.getLinkedRecord('edge');
+      updater(store, viewerId, edge);
+    },
   });
 
 export default { commit };

@@ -91,13 +91,9 @@ export type Reducers = { [name: $Keys<State>]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
-// TODO: Use Relay types once released.
-// https://gist.github.com/rosskevin/3025518628b16f80c11a2b7385f56169
-export type RelayEnvironment = Object;
-
 export type PlatformDependencies = {
   createUuid: () => string, // Because React Native needs different lib.
-  environment: RelayEnvironment,
+  environment: Object,
 };
 
 export type Dependencies = PlatformDependencies & {
