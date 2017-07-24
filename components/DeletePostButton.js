@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 // TODO: Use Delete button
-import Button from '../components/Button';
+import Button from './Button';
 
 const DeletePostButton = () =>
   <Button

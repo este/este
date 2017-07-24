@@ -1,7 +1,7 @@
 // @flow
 import type { AllPosts_viewer } from './__generated__/AllPosts_viewer.graphql';
-import Box from '../components/Box';
-import Post from '../components/Post';
+import Box from './Box';
+import Post from './Post';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 // Why edges and nodes? tldr; metadata

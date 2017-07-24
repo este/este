@@ -1,15 +1,15 @@
 // @flow
 import type { State, Dispatch } from '../types';
 import type { UserFormFields } from '../reducers/users';
-import Box from '../components/Box';
-import Button from '../components/Button';
-import AlertErrors from '../components/AlertErrors';
-import Checkbox from '../components/Checkbox';
-import Heading from '../components/Heading';
-import P from '../components/P';
-import Set from '../components/Set';
-import Text from '../components/Text';
-import TextInput from '../components/TextInput';
+import Box from './Box';
+import Button from './Button';
+import AlertErrors from './AlertErrors';
+import Checkbox from './Checkbox';
+import Heading from './Heading';
+import P from './P';
+import Set from './Set';
+import Text from './Text';
+import TextInput from './TextInput';
 import { connect } from 'react-redux';
 import { temp } from '../lib/temp';
 

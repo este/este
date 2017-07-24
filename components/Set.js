@@ -1,5 +1,5 @@
 // @flow
-import Box, { type BoxProps } from '../components/Box';
+import Box, { type BoxProps } from './Box';
 import withTheme, { type ThemeContext } from './withTheme';
 import { Children } from 'react';
 

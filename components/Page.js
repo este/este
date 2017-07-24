@@ -1,12 +1,12 @@
 // @flow
 import type { State } from '../types';
-import A from '../components/A';
-import Baseline from '../components/Baseline';
+import A from './A';
+import Baseline from './Baseline';
 import Box from './Box';
 import Head from 'next/head';
-import LoadingBar from '../components/LoadingBar';
-import MainNav from '../components/MainNav';
-import Text from '../components/Text';
+import LoadingBar from './LoadingBar';
+import MainNav from './MainNav';
+import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';

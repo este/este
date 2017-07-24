@@ -5,7 +5,7 @@ import type { PostFormFields } from '../reducers/posts';
 import AppError from './AppError';
 import Box from './Box';
 import TextInput from './TextInput';
-import ValidationError from '../components/ValidationError';
+import ValidationError from './ValidationError';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { initialFormId } from '../lib/form';
