@@ -1,4 +1,14 @@
 // @flow
+
+// mutation DeletePost($input: DeletePostInput!) {
+//   deletePost(input: $input) {
+//     post {
+//       id
+//       text
+//     }
+//   }
+// }
+
 //
 // import {
 //   commitMutation,
