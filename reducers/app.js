@@ -30,8 +30,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
   // It's useful for global errors popup alert for small devices, for example.
   if (
     action.errors &&
-    action.errors.appError &&
-    action.errors.validationErrors
+    (action.errors.appError || action.errors.validationErrors)
   ) {
     // $FlowFixMe
     return { ...state, errors: action.errors };

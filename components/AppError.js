@@ -3,6 +3,8 @@ import type { AppError as AppErrorType } from '../types';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
+// TODO: Make it global and read app error from app reducer.
+
 type AppErrorProps = TextProps & {
   error: ?AppErrorType,
 };
@@ -30,20 +32,8 @@ const getAppErrorMessage = appError => {
           id="appError.cannotSignInCredentialsInvalid"
         />
       );
-    case 'unknown':
-      return (
-        <FormattedMessage
-          defaultMessage={'{errorMessage}'}
-          id="appError.unknown"
-          values={{
-            errorMessage: appError.message,
-          }}
-        />
-      );
     default:
-      // eslint-disable-next-line no-unused-expressions
-      (appError: empty);
-      return null;
+      return appError.message;
   }
 };
 
@@ -54,8 +44,15 @@ const AppError = (props: AppErrorProps) => {
   // TODO: Report unknown error to server. Probably via errors epic catching
   // all errors like in app reducer.
   const message = getAppErrorMessage(error);
+  const title = process.env.NODE_ENV === 'production' ? '' : error.stack || '';
   return (
-    <Text autoFocus={error} bold={bold} color={color} {...restProps}>
+    <Text
+      autoFocus={error}
+      bold={bold}
+      color={color}
+      title={title}
+      {...restProps}
+    >
       {message}
     </Text>
   );
