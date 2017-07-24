@@ -28,9 +28,8 @@ const GraphQL = ({ environment, intl }) =>
       environment={environment}
       query={graphql`
         query graphqlQuery {
-          # Relay uses viewer for data, for some reason.
           viewer {
-            # Query is statically composed from fragments.
+            ...CreatePost_viewer
             ...AllPosts_viewer
           }
         }
@@ -46,7 +45,7 @@ const GraphQL = ({ environment, intl }) =>
         } else if (props) {
           return (
             <Box>
-              <CreatePost />
+              <CreatePost viewer={props.viewer} />
               <AllPosts viewer={props.viewer} />
             </Box>
           );

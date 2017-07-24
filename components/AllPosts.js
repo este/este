@@ -22,7 +22,6 @@ export default createFragmentContainer(
     # FileName_propName
     fragment AllPosts_viewer on Viewer {
       allPosts(last: 100, orderBy: createdAt_DESC)
-        # FileName_propName
         @connection(key: "AllPosts_allPosts") {
         edges {
           node {

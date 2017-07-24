@@ -1,19 +1,23 @@
 // @flow
+import type { CreatePost_viewer } from './__generated__/CreatePost_viewer.graphql';
 import type { Dispatch, Form, State } from '../types';
 import type { PostFormFields } from '../reducers/posts';
+import AppError from './AppError';
 import Box from './Box';
 import TextInput from './TextInput';
 import ValidationError from '../components/ValidationError';
 import { connect } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { initialFormId } from '../lib/form';
 import { temp } from '../lib/temp';
 
 type CreatePostProps = {
   form: Form<PostFormFields>,
   dispatch: Dispatch,
+  viewer: CreatePost_viewer,
 };
 
-const CreatePost = ({ form, dispatch }: CreatePostProps) => {
+let CreatePost = ({ form, dispatch, viewer }: CreatePostProps) => {
   const disabled = temp(form.disabled);
   const setPostForm = (prop: $Keys<PostFormFields>) => value => {
     dispatch({
@@ -23,7 +27,7 @@ const CreatePost = ({ form, dispatch }: CreatePostProps) => {
   };
   const handleSubmitEditing = () => {
     if (!form.fields.text.trim()) return;
-    dispatch({ type: 'CREATE_POST', fields: form.fields });
+    dispatch({ type: 'CREATE_POST', fields: form.fields, viewerId: viewer.id });
   };
   return (
     <Box marginBottom={1}>
@@ -37,12 +41,20 @@ const CreatePost = ({ form, dispatch }: CreatePostProps) => {
         placeholder="Say thing"
         value={form.fields.text}
       />
+      <AppError error={form.appError} />
     </Box>
   );
 };
 
-export default connect(
-  ({ posts: { form } }: State, { id = initialFormId }) => ({
-    form: form.changed[id] || form.initial,
-  }),
-)(CreatePost);
+CreatePost = connect(({ posts: { form } }: State, { id = initialFormId }) => ({
+  form: form.changed[id] || form.initial,
+}))(CreatePost);
+
+export default createFragmentContainer(
+  CreatePost,
+  graphql`
+    fragment CreatePost_viewer on Viewer {
+      id
+    }
+  `,
+);

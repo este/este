@@ -1,32 +1,57 @@
 // @flow
 import type { CreatePostMutationVariables } from './__generated__/CreatePostMutation.graphql';
-import { commitMutation, graphql } from 'react-relay';
+import type { PostFormFields } from '../reducers/posts';
+import type { Id, RelayEnvironment } from '../types';
 import { ConnectionHandler } from 'relay-runtime';
+import { commitMutation, graphql } from 'react-relay';
 
 const mutation = graphql`
   mutation CreatePostMutation($input: CreatePostInput!) {
     createPost(input: $input) {
-      post {
-        id
-        text
+      # Don't know what to return? Check data/schema.graphql!
+      edge {
+        node {
+          ...Post_post
+        }
       }
     }
   }
 `;
 
-// fakt vracetet asi createPostMutation, ten commit je divnej,ok
-// snad to nikde nepouziva object, ok
-const commit = (environment: Object, text: string) =>
-  commitMutation(environment, {
-    mutation,
-    variables: ({
-      input: {
-        text,
-        // https://github.com/facebook/relay/issues/1556#issuecomment-283424459
-        clientMutationId: '0',
+const updater = (store, viewerId, edge) => {
+  const viewer = store.get(viewerId);
+  const connection = ConnectionHandler.getConnection(
+    viewer,
+    'AllPosts_allPosts',
+    // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
+    { orderBy: 'createdAt_DESC' },
+  );
+  ConnectionHandler.insertEdgeBefore(connection, edge);
+};
+
+const commit = (
+  environment: RelayEnvironment,
+  viewerId: Id,
+  fields: PostFormFields,
+) =>
+  new Promise((resolve, reject) => {
+    commitMutation(environment, {
+      mutation,
+      variables: ({
+        input: {
+          ...fields,
+          // no-op, https://github.com/facebook/relay/issues/1985
+          clientMutationId: '',
+        },
+      }: CreatePostMutationVariables),
+      onCompleted: () => resolve(),
+      onError: error => reject({ appError: error }),
+      updater: store => {
+        const payload = store.getRootField('createPost');
+        const edge = payload.getLinkedRecord('edge');
+        updater(store, viewerId, edge);
       },
-    }: CreatePostMutationVariables),
+    });
   });
 
-// Not sure why Relay Modern examples exports object with commit method.
 export default { commit };

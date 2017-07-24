@@ -9,7 +9,7 @@
 // If something doesn't work, check Flow issues and probably don't use it.
 // Feel free to use 'FlowFixMe Describe why' anytime. Favour it over any type.
 
-import type { Observable } from 'rxjs';
+import type { Observable as RxObservable } from 'rxjs';
 import type { Temp } from '../lib/temp';
 import type { ValidationError } from '../lib/validate';
 import type {
@@ -26,6 +26,7 @@ import type { UserFormFields, UsersState, User } from '../reducers/users';
 
 export type Id = string;
 
+// TODO: Add graph.cool Relay errors.
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' }
@@ -68,7 +69,7 @@ export type Action =
   | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
   | { type: 'AUTH_SUCCESS' }
   | { type: 'CREATE_10_RANDOM_USERS' }
-  | { type: 'CREATE_POST', fields: PostFormFields }
+  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: string }
   | { type: 'CREATE_POST_ERROR', errors: Errors<PostFormFields> }
   | { type: 'CREATE_POST_SUCCESS' }
   | { type: 'CREATE_USER', fields: UserFormFields }
@@ -104,13 +105,15 @@ export type Dependencies = PlatformDependencies & {
   getNow: () => number,
 };
 
+export type Observable = RxObservable<Action>;
+
 // TODO: There are no redux-observable flow definitions yet. Therefore, we have
 // to use .filter instead of .ofType and
 // https://github.com/redux-observable/redux-observable/issues/258
 export type Epic = (
-  actions$: Observable<Action>,
+  actions$: Observable,
   dependencies: Dependencies,
-) => Observable<Action>;
+) => Observable;
 
 export type FunctionalComponent<P> = (
   props: P,
