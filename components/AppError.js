@@ -1,13 +1,9 @@
 // @flow
-import type { AppError as AppErrorType } from '../types';
+import type { State } from '../types';
+import Box from './Box';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
-
-// TODO: Make it global and read app error from app reducer.
-
-type AppErrorProps = TextProps & {
-  error: ?AppErrorType,
-};
+import { connect } from 'react-redux';
 
 const getAppErrorMessage = appError => {
   switch (appError.type) {
@@ -37,25 +33,36 @@ const getAppErrorMessage = appError => {
   }
 };
 
-const AppError = (props: AppErrorProps) => {
-  const { error, bold = true, color = 'danger', ...restProps } = props;
-  if (!error) return null;
+// There is no position fixed for React Native. Use commponent tree instead.
+const browserOnlyStyle = {
+  position: 'fixed',
+};
 
-  // TODO: Report unknown error to server. Probably via errors epic catching
-  // all errors like in app reducer.
-  const message = getAppErrorMessage(error);
-  const title = process.env.NODE_ENV === 'production' ? '' : error.stack || '';
+const AppError = ({ errors }) => {
+  if (!errors || !errors.appError) return null;
+  const { appError } = errors;
+
+  const message = getAppErrorMessage(appError);
+  const titleWithStackForDevMode =
+    process.env.NODE_ENV === 'production' ? '' : appError.stack || '';
   return (
-    <Text
-      autoFocus={error}
-      bold={bold}
-      color={color}
-      title={title}
-      {...restProps}
-    >
-      {message}
-    </Text>
+    <Box style={browserOnlyStyle} top={0} left={0} right={0} zIndex={1}>
+      <Text
+        alignSelf="center"
+        backgroundColor="warning"
+        bold
+        color="white"
+        display="inline"
+        paddingHorizontal={1}
+        paddingVertical={0.5}
+        title={titleWithStackForDevMode}
+      >
+        {message}
+      </Text>
+    </Box>
   );
 };
 
-export default AppError;
+export default connect((state: State) => ({
+  errors: state.app.errors,
+}))(AppError);

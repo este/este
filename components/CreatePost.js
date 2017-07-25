@@ -2,7 +2,6 @@
 import type { CreatePost_viewer } from './__generated__/CreatePost_viewer.graphql';
 import type { Dispatch, Form, State } from '../types';
 import type { PostFormFields } from '../reducers/posts';
-import AppError from './AppError';
 import Box from './Box';
 import TextInput from './TextInput';
 import ValidationError from './ValidationError';
@@ -41,7 +40,6 @@ let CreatePost = ({ form, dispatch, viewer }: CreatePostProps) => {
         placeholder="Say thing"
         value={form.fields.text}
       />
-      <AppError error={form.appError} />
     </Box>
   );
 };

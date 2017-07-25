@@ -1,6 +1,7 @@
 // @flow
 import type { State } from '../types';
 import A from './A';
+import AppError from './AppError';
 import Baseline from './Baseline';
 import Box from './Box';
 import Head from 'next/head';
@@ -74,6 +75,7 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
           />
         </Head>
         <LoadingBar />
+        <AppError />
         <PageContainer>
           <MainNav title={title} />
           <PageBody>

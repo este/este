@@ -2,7 +2,6 @@
 import type { Dispatch, Form as FormType, State } from '../types';
 import type { UserFormFields, UserGender } from '../reducers/users';
 import type { IntlShape } from 'react-intl';
-import AppError from './AppError';
 import Button from './Button';
 import Checkbox from './Checkbox';
 import Form from './Form';
@@ -163,7 +162,6 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
           Add 10 random users
         </Button>
       </Set>
-      <AppError error={form.appError} />
     </Form>
   );
 };

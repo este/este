@@ -1,7 +1,6 @@
 // @flow
 import type { Dispatch, Form as FormType, State } from '../types';
 import type { AuthFormFields } from '../reducers/auth';
-import AppError from './AppError';
 import Box from './Box';
 import Form from './Form';
 import Heading from './Heading';
@@ -96,7 +95,6 @@ const AuthForm = (
           <SignInButton disabled={disabled} onPress={signIn} primary />
           <SignUpButton disabled={disabled} onPress={signUp} />
         </Set>
-        <AppError error={form.appError} />
       </Form>
     </Box>
   );

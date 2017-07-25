@@ -28,12 +28,15 @@ const initialState = {
 const reducer = (state: AppState = initialState, action: Action): AppState => {
   // Errors are stored per forms in their states, but also here.
   // It's useful for global errors popup alert for small devices, for example.
+  // Strings are good enough here.
   if (
+    action.type.endsWith('_ERROR') &&
     action.errors &&
     (action.errors.appError || action.errors.validationErrors)
   ) {
-    // $FlowFixMe
-    return { ...state, errors: action.errors };
+    return { ...state, errors: (action.errors: any) }; // Flow can't infer.
+  } else if (action.type.endsWith('_SUCCESS')) {
+    return { ...state, errors: null };
   }
 
   switch (action.type) {

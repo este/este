@@ -132,10 +132,7 @@ const RowForm = ({
           >
             cancel
           </Button>
-          <AlertErrors
-            appError={form.appError}
-            validationErrors={form.validationErrors}
-          />
+          <AlertErrors validationErrors={form.validationErrors} />
         </Set>}
     </Box>;
 
