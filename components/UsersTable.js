@@ -3,13 +3,13 @@ import type { State, Dispatch } from '../types';
 import type { UserFormFields } from '../reducers/users';
 import Box from './Box';
 import Button from './Button';
-import AlertErrors from './AlertErrors';
 import Checkbox from './Checkbox';
 import Heading from './Heading';
 import P from './P';
 import Set from './Set';
 import Text from './Text';
 import TextInput from './TextInput';
+import ValidationError from './ValidationError';
 import { connect } from 'react-redux';
 import { temp } from '../lib/temp';
 
@@ -106,7 +106,7 @@ const RowForm = ({
         return null;
     }
   };
-  const renderEditActions = () =>
+  const renderEdit = () =>
     // Always render fixed height container for all columns to ensure row.
     <Box height={1}>
       {field === 'name' &&
@@ -114,7 +114,6 @@ const RowForm = ({
           <Button
             color="primary"
             size={-1}
-            height={1}
             marginVertical={0}
             onPress={saveUser}
             paddingHorizontal={0}
@@ -132,7 +131,7 @@ const RowForm = ({
           >
             cancel
           </Button>
-          <AlertErrors validationErrors={form.validationErrors} />
+          <ValidationError size={-1} error={form.validationErrors.name} />
         </Set>}
     </Box>;
 
@@ -141,7 +140,7 @@ const RowForm = ({
       <Box height={2} paddingVertical={0.5}>
         {renderField()}
       </Box>
-      {isDirty && renderEditActions()}
+      {isDirty && renderEdit()}
     </Box>
   );
 };

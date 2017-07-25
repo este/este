@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
 import Box from './Box';
-import Text, { type TextProps } from './Text';
+import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
