@@ -48,6 +48,7 @@ const getReduxStore: (
 ) => Store = singletonOnClient(initialState => {
   const platformDependencies = {
     createUuid: uuid.v4,
+    // TODO: Should be getRelayEnvironment because reset on signIn, signOut.
     environment: getRelayEnvironment(),
   };
   return createReduxStore(initialState, { platformDependencies });

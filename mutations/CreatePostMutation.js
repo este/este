@@ -10,6 +10,7 @@ const mutation = graphql`
   mutation CreatePostMutation($input: CreatePostInput!) {
     createPost(input: $input) {
       # Don't know what to return? Check data/schema.graphql.
+      # Remember, ask for data needed for the updater.
       edge {
         node {
           ...Post_post

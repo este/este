@@ -7,7 +7,7 @@ import { graphql } from 'react-relay';
 
 const mutation = graphql`
   mutation DeletePostMutation($input: DeletePostInput!) {
-    # Don't know what to return? Check data/schema.graphql.
+    # Ask for data used in updater.
     deletePost(input: $input) {
       deletedId
     }
@@ -39,7 +39,9 @@ const commit = (environment: Object, viewerId: Id, id: Id) =>
       const payload = store.getRootField('deletePost');
       updater(store, viewerId, payload.getValue('deletedId'));
     },
-    // TODO: Try optimistic.
+    optimisticUpdater: store => {
+      updater(store, viewerId, id);
+    },
   });
 
 export default { commit };
