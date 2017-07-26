@@ -88,6 +88,11 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "storageKey": "__AllPosts_allPosts_connection{\"orderBy\":\"createdAt_DESC\"}"
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Post_viewer",
+      "args": null
     }
   ],
   "type": "Viewer"

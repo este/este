@@ -1,66 +1,45 @@
 // @flow
+import type { DeletePostMutationVariables } from './__generated__/DeletePostMutation.graphql';
+import type { Id } from '../types';
+import createCommit from './createCommit';
+import { ConnectionHandler } from 'relay-runtime';
+import { graphql } from 'react-relay';
 
-// mutation DeletePost($input: DeletePostInput!) {
-//   deletePost(input: $input) {
-//     post {
-//       id
-//       text
-//     }
-//   }
-// }
+const mutation = graphql`
+  mutation DeletePostMutation($input: DeletePostInput!) {
+    # Don't know what to return? Check data/schema.graphql.
+    deletePost(input: $input) {
+      deletedId
+    }
+  }
+`;
 
-//
-// import {
-//   commitMutation,
-//   graphql,
-// } from 'react-relay';
-// import {ConnectionHandler} from 'relay-runtime';
-//
-// const mutation = graphql`
-//   mutation RemoveTodoMutation($input: RemoveTodoInput!) {
-//     removeTodo(input: $input) {
-//       deletedTodoId,
-//       viewer {
-//         completedCount,
-//         totalCount,
-//       },
-//     }
-//   }
-// `;
-//
-// function sharedUpdater(store, user, deletedID) {
-//   const userProxy = store.get(user.id);
-//   const conn = ConnectionHandler.getConnection(
-//     userProxy,
-//     'TodoList_todos',
-//   );
-//   ConnectionHandler.deleteNode(
-//     conn,
-//     deletedID,
-//   );
-// }
-//
-// function commit(
-//   environment,
-//   todo,
-//   user,
-// ) {
-//   return commitMutation(
-//     environment,
-//     {
-//       mutation,
-//       variables: {
-//         input: {id: todo.id},
-//       },
-//       updater: (store) => {
-//         const payload = store.getRootField('removeTodo');
-//         sharedUpdater(store, user, payload.getValue('deletedTodoId'));
-//       },
-//       optimisticUpdater: (store) => {
-//         sharedUpdater(store, user, todo.id);
-//       },
-//     }
-//   );
-// }
-//
-// export default {commit};
+const updater = (store, viewerId, deletedId) => {
+  const userProxy = store.get(viewerId);
+  const connection = ConnectionHandler.getConnection(
+    userProxy,
+    'AllPosts_allPosts',
+    // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
+    { orderBy: 'createdAt_DESC' },
+  );
+  ConnectionHandler.deleteNode(connection, deletedId);
+};
+
+const commit = (environment: Object, viewerId: Id, id: Id) =>
+  createCommit(environment, {
+    mutation,
+    variables: ({
+      input: {
+        id,
+        // no-op, https://github.com/facebook/relay/issues/1985
+        clientMutationId: '',
+      },
+    }: DeletePostMutationVariables),
+    updater: store => {
+      const payload = store.getRootField('deletePost');
+      updater(store, viewerId, payload.getValue('deletedId'));
+    },
+    // TODO: Try optimistic.
+  });
+
+export default { commit };

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ede55ab1398adf276e14564d8db57746
+ * @relayHash 9f57f7ffee80aea56cc79e890643dfb3
  */
 
 /* eslint-disable */
@@ -52,12 +52,17 @@ fragment AllPosts_viewer on Viewer {
       }
     }
   }
+  ...Post_viewer
 }
 
 fragment Post_post on Post {
   createdAt
   id
   text
+}
+
+fragment Post_viewer on Viewer {
+  id
 }
 */
 
@@ -306,7 +311,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query graphqlQuery {\n  viewer {\n    ...CreatePost_viewer\n    ...AllPosts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment AllPosts_viewer on Viewer {\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n"
+  "text": "query graphqlQuery {\n  viewer {\n    ...CreatePost_viewer\n    ...AllPosts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment AllPosts_viewer on Viewer {\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
 };
 
 module.exports = batch;

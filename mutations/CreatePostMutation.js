@@ -9,7 +9,7 @@ import { graphql } from 'react-relay';
 const mutation = graphql`
   mutation CreatePostMutation($input: CreatePostInput!) {
     createPost(input: $input) {
-      # Don't know what to return? Check data/schema.graphql!
+      # Don't know what to return? Check data/schema.graphql.
       edge {
         node {
           ...Post_post
@@ -20,9 +20,9 @@ const mutation = graphql`
 `;
 
 const updater = (store, viewerId, edge) => {
-  const viewer = store.get(viewerId);
+  const userProxy = store.get(viewerId);
   const connection = ConnectionHandler.getConnection(
-    viewer,
+    userProxy,
     'AllPosts_allPosts',
     // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
     { orderBy: 'createdAt_DESC' },

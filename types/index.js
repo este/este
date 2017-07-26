@@ -69,12 +69,15 @@ export type Action =
   | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
   | { type: 'AUTH_SUCCESS' }
   | { type: 'CREATE_10_RANDOM_USERS' }
-  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: string }
+  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: Id }
   | { type: 'CREATE_POST_ERROR', errors: Errors<PostFormFields> }
   | { type: 'CREATE_POST_SUCCESS' }
   | { type: 'CREATE_USER', fields: UserFormFields }
   | { type: 'CREATE_USER_ERROR', errors: Errors<UserFormFields> }
   | { type: 'CREATE_USER_SUCCESS', user: User }
+  | { type: 'DELETE_POST', id: Id, viewerId: Id }
+  | { type: 'DELETE_POST_ERROR', id: Id, errors: Errors<{}> }
+  | { type: 'DELETE_POST_SUCCESS', id: Id }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }

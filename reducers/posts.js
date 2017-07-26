@@ -40,7 +40,7 @@ const reducer = (
       return resetForm(state, 'form');
     case 'DELETE_POST':
       return disableForm(state, 'form', action.id);
-    case 'DELETE_USER_ERROR':
+    case 'DELETE_POST_ERROR':
       return setFormErrors(state, 'form', action.errors, action.id);
     case 'DELETE_POST_SUCCESS':
       return resetForm(state, 'form', action.id);

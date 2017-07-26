@@ -6,6 +6,7 @@ import { temp } from '../lib/temp';
 
 type DeletePostButtonOwnProps = {
   id: Id,
+  viewerId: Id,
 };
 
 type DeletePostButtonProps = DeletePostButtonOwnProps & {
@@ -13,8 +14,8 @@ type DeletePostButtonProps = DeletePostButtonOwnProps & {
   form: *,
 };
 
-const DeletePostButton = ({ dispatch, id, form }) => {
-  const deletePost = () => dispatch({ type: 'DELETE_POST', id });
+const DeletePostButton = ({ form, id, viewerId, dispatch }) => {
+  const deletePost = () => dispatch({ type: 'DELETE_POST', id, viewerId });
   return (
     <DeleteButton
       disabled={temp(form.disabled)}

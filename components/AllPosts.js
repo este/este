@@ -12,7 +12,8 @@ const AllPosts = ({ viewer }: { viewer: AllPosts_viewer }) =>
   <Box>
     {viewer.allPosts.edges &&
       viewer.allPosts.edges.map(
-        edge => edge && <Post post={edge.node} key={edge.node.id} />,
+        edge =>
+          edge && <Post post={edge.node} viewer={viewer} key={edge.node.id} />,
       )}
   </Box>;
 
@@ -30,6 +31,9 @@ export default createFragmentContainer(
           }
         }
       }
+      # To understand what's happening here:
+      # Post_viewer fragment will be attached to viewer.__fragments for Post.js
+      ...Post_viewer
     }
   `,
 );

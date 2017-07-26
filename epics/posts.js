@@ -2,6 +2,7 @@
 import type { Epic, Errors } from '../types';
 import type { PostFormFields } from '../reducers/posts';
 import CreatePostMutation from '../mutations/CreatePostMutation';
+import DeletePostMutation from '../mutations/DeletePostMutation';
 import validate, { required, minLength, maxLength } from '../lib/validate';
 import { Observable } from 'rxjs/Observable';
 
@@ -26,6 +27,20 @@ export const createPost: Epic = (action$, { environment }) =>
       )
       .mapTo({ type: 'CREATE_POST_SUCCESS' })
       .catch((errors: Errors<PostFormFields>) =>
-        Observable.of({ type: 'CREATE_USER_ERROR', errors }),
+        Observable.of({ type: 'CREATE_POST_ERROR', errors }),
+      );
+  });
+
+export const deletePost: Epic = (action$, { environment }) =>
+  action$.filter(action => action.type === 'DELETE_POST').mergeMap(action => {
+    // https://flow.org/en/docs/lang/refinements
+    if (action.type !== 'DELETE_POST') throw Error();
+    const { id, viewerId } = action;
+    return Observable.fromPromise(
+      DeletePostMutation.commit(environment, viewerId, id),
+    )
+      .mapTo({ type: 'DELETE_POST_SUCCESS', id })
+      .catch((errors: Errors<PostFormFields>) =>
+        Observable.of({ type: 'DELETE_POST_ERROR', id, errors }),
       );
   });
