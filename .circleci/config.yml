@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/este
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+
+      - run: yarn
+      - run: sudo apt-get install jq
+      - run: sudo yarn global add now now-realias now-no-alias
+
+      - run: yarn test
+
+      # - run: npm run build
+      # - store_artifacts:
+      #     path: build
+
+
+    # environment:
+    #   PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+# dependencies:
+#   pre:
+#     - curl -o- -L https://yarnpkg.com/install.sh | bash
+#     # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
+#     - if [[ ! -e watchman ]]; then git clone https://github.com/facebook/watchman.git && cd watchman/ && git checkout v4.7.0 && ./autogen.sh && ./configure && make; fi
+#     - cd watchman && sudo make install
+#     - sudo sysctl fs.inotify.max_user_watches=524288
+#     - sudo sysctl -p
+#   override:
+#     - yarn
+#   cache_directories:
+#     - ~/.cache/yarn
+#     - watchman
+#
+# test:
+#   override:
+#     - yarn test
