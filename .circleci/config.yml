@@ -8,17 +8,10 @@ jobs:
       - checkout
 
       - run: yarn
-      - run: sudo apt-get install jq
-      - run: sudo yarn global add now now-realias now-no-alias
 
-      # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
       # TODO: Update workaround for Circle CI 2
+      # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
       - run: yarn test-without-relay
 
-      - run: yarn build
-      - store_artifacts:
-          path: .next
-
-      - run: now .next -t ${NOW_TOKEN} --name=este-next --static --public
-      - run: now-realias
-      - run: now rm -t ${NOW_TOKEN} $(now-no-alias | jq -r '.[] | .uid') -y
+      # TODO: Doesn't work, investigate why.
+      # http://macklin.underdown.me/2017/07/27/deploy-to-now-from-circleci
