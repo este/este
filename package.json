@@ -16,7 +16,7 @@
     "jest:watch": "jest --watch",
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write '{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types}/**/*.js'",
     "rimrafBabelCache": "rimraf node_modules/.cache/babel-loader",
-    "test": "flow && jest && yarn relay && yarn build",
+    "test": "flow && jest --updateSnapshot && yarn relay && yarn build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
     "relay": "relay-compiler --src ./ --exclude **/.next/** **/flow-typed/** **/node_modules/** **/test/**  **/__generated__/** --schema data/schema.graphql",
