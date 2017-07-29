@@ -23,12 +23,11 @@ module.exports = {
   // AirBnb is great, but very strict. Feel free to relax any rule.
   rules: {
     'arrow-parens': 0, // Does not work with Flow generic types.
-    camelcase: 0, // Post_post can be Relay compiler generated type.
     'comma-dangle': 0, // Because some files are still in ES5.
     'default-case': 0, // We don't need it with Flow.
+    'guard-for-in': 0, // It's not a bug, it's a feature.
     'import/first': 0, // Este sorts by atom/sort lines natural order.
     'import/prefer-default-export': 0, // Actions can have just one action.
-    'guard-for-in': 0, // It's not a bug, it's a feature.
     'no-confusing-arrow': 0, // This rule is confusing.
     'no-mixed-operators': 0, // Prettier.
     'no-nested-ternary': 0, // Buggy for functional componenents.
@@ -36,6 +35,7 @@ module.exports = {
     'no-restricted-syntax': 0, // Not needed with modern browsers.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
     'no-underscore-dangle': 0, // Control freaky.
+    'react/forbid-prop-types': 0, // Control freaky.
     'react/jsx-boolean-value': 0, // Control freaky.
     'react/jsx-closing-bracket-location': 0, // Prettier.
     'react/jsx-filename-extension': 0, // JSX belongs to .js files.
@@ -49,6 +49,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0, // Next.js injects it. Should be default.
     'react/require-default-props': 0, // We don't need it with Flow.
     'template-curly-spacing': 0, // Prettier.
+    camelcase: 0, // Post_post can be Relay compiler generated type.
     curly: 0, // Prettier.
     indent: 0, // Prettier.
   },

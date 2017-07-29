@@ -1,20 +1,16 @@
 // @flow
 import A from '../components/A';
 import AllPosts from '../components/AllPosts';
-import CreatePost from '../components/CreatePost';
 import Box from '../components/Box';
+import CreatePost from '../components/CreatePost';
 import Heading from '../components/Heading';
-// import Loading from '../components/Loading';
 import P from '../components/P';
 import Page from '../components/Page';
-// import Set from '../components/Set';
-// import Text from '../components/Text';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
-// import { FormattedRelative } from 'react-intl';
-import { QueryRenderer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 
-const GraphQL = ({ environment, intl }) =>
+const GraphQL = ({ intl, queryProps }) =>
   <Page title={intl.formatMessage(sitemap.graphql.title)}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.graphql.title)}
@@ -24,35 +20,19 @@ const GraphQL = ({ environment, intl }) =>
       <A href="https://facebook.github.io/relay/">Relay</A> and{' '}
       <A href="https://www.graph.cool/">graph.cool</A>.
     </P>
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query graphqlQuery {
-          viewer {
-            ...CreatePost_viewer
-            ...AllPosts_viewer
-          }
-        }
-      `}
-      variables={{}}
-      render={({ error, props }) => {
-        if (error) {
-          return (
-            <div>
-              Error, asi 500 page? Redirect? jo, proto to patri do Next.
-            </div>
-          );
-        } else if (props) {
-          return (
-            <Box>
-              <CreatePost viewer={props.viewer} />
-              <AllPosts viewer={props.viewer} />
-            </Box>
-          );
-        }
-        return <div>Loading</div>;
-      }}
-    />
+    <Box>
+      <CreatePost viewer={queryProps.viewer} />
+      <AllPosts viewer={queryProps.viewer} />
+    </Box>
   </Page>;
 
-export default app(GraphQL);
+export default app(GraphQL, {
+  query: graphql`
+    query graphqlQuery {
+      viewer {
+        ...CreatePost_viewer
+        ...AllPosts_viewer
+      }
+    }
+  `,
+});
