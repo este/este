@@ -11,6 +11,12 @@ jobs:
       - run: sudo apt-get install jq
       - run: sudo yarn global add now now-realias now-no-alias
 
+      # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
+      - run: if [[ ! -e watchman ]]; then git clone https://github.com/facebook/watchman.git && cd watchman/ && git checkout v4.7.0 && ./autogen.sh && ./configure && make; fi
+      - run: cd watchman && sudo make install
+      - run: sudo sysctl fs.inotify.max_user_watches=524288
+      - run: sudo sysctl -p
+
       - run: yarn test
 
       # - run: npm run build
