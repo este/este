@@ -1,38 +1,28 @@
 // @flow
-import type { Dispatch, Id, State } from '../types';
+import type { Environment, Id } from '../types';
+import DeletePostMutation from '../mutations/DeletePostMutation';
 import { DeleteButton } from './buttons';
-import { connect, type Connector } from 'react-redux';
-import { temp } from '../lib/temp';
 
-type DeletePostButtonOwnProps = {
+type DeletePostButtonProps = {
+  environment: Environment,
   id: Id,
   viewerId: Id,
 };
 
-type DeletePostButtonProps = DeletePostButtonOwnProps & {
-  dispatch: Dispatch,
-  form: *,
-};
+// Note we don't have to handle async action via Redux with observables if
+// the mutation is optimistic. Great not only for UX but DX as well.
+const DeletePostButton = ({
+  environment,
+  id,
+  viewerId,
+}: DeletePostButtonProps) =>
+  <DeleteButton
+    color="warning"
+    marginVertical={0}
+    onPress={() => DeletePostMutation.commit(environment, viewerId, id)}
+    paddingHorizontal={0}
+    size={-1}
+  />;
 
-const DeletePostButton = ({ form, id, viewerId, dispatch }) => {
-  const deletePost = () => dispatch({ type: 'DELETE_POST', id, viewerId });
-  return (
-    <DeleteButton
-      disabled={temp(form.disabled)}
-      color="warning"
-      marginVertical={0}
-      onPress={deletePost}
-      paddingHorizontal={0}
-      size={-1}
-    />
-  );
-};
-
-const connector: Connector<
-  DeletePostButtonOwnProps,
-  DeletePostButtonProps,
-> = connect(({ posts: { form } }: State, { id }) => ({
-  form: form.changed[id] || form.initial,
-}));
-
-export default connector(DeletePostButton);
+// TODO: Create and use environment HOC once Flow reveal how to type it. Soon!
+export default DeletePostButton;

@@ -38,12 +38,6 @@ const reducer = (
       return setFormErrors(state, 'form', action.errors);
     case 'CREATE_POST_SUCCESS':
       return resetForm(state, 'form');
-    case 'DELETE_POST':
-      return disableForm(state, 'form', action.id);
-    case 'DELETE_POST_ERROR':
-      return setFormErrors(state, 'form', action.errors, action.id);
-    case 'DELETE_POST_SUCCESS':
-      return resetForm(state, 'form', action.id);
     default:
       return state;
   }

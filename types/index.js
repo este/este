@@ -75,9 +75,6 @@ export type Action =
   | { type: 'CREATE_USER', fields: UserFormFields }
   | { type: 'CREATE_USER_ERROR', errors: Errors<UserFormFields> }
   | { type: 'CREATE_USER_SUCCESS', user: User }
-  | { type: 'DELETE_POST', id: Id, viewerId: Id }
-  | { type: 'DELETE_POST_ERROR', id: Id, errors: Errors<{}> }
-  | { type: 'DELETE_POST_SUCCESS', id: Id }
   | { type: 'DELETE_SELECTED_USERS' }
   | { type: 'SAVE_USER', user: User }
   | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
@@ -118,3 +115,6 @@ export type FunctionalComponent<P> = (
   props: P,
   context: any,
 ) => ?React$Element<any>;
+
+// Replace once Relay Modern will have flow-typed typedefs.
+export type Environment = Object;
