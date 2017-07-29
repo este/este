@@ -14,7 +14,7 @@ jobs:
       # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
       # TODO: Update for Circle CI 2
 
-      - run: yarn test-without-flow
+      - run: yarn test-without-relay
 
       # - run: npm run build
       # - store_artifacts:
