@@ -31,8 +31,7 @@ const commit = (environment: Object, viewerId: Id, id: Id) =>
     variables: ({
       input: {
         id,
-        // no-op, https://github.com/facebook/relay/issues/1985
-        clientMutationId: '',
+        clientMutationId: Date.now().toString(32),
       },
     }: DeletePostMutationVariables),
     updater: store => {
