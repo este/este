@@ -12,32 +12,13 @@ jobs:
       - run: sudo yarn global add now now-realias now-no-alias
 
       # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
-      # TODO: Update for Circle CI 2
-
+      # TODO: Update workaround for Circle CI 2
       - run: yarn test-without-relay
 
-      # - run: npm run build
-      # - store_artifacts:
-      #     path: build
+      - run: yarn build
+      - store_artifacts:
+          path: build
 
-
-    # environment:
-    #   PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-
-# dependencies:
-#   pre:
-#     - curl -o- -L https://yarnpkg.com/install.sh | bash
-#     # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
-#     - if [[ ! -e watchman ]]; then git clone https://github.com/facebook/watchman.git && cd watchman/ && git checkout v4.7.0 && ./autogen.sh && ./configure && make; fi
-#     - cd watchman && sudo make install
-#     - sudo sysctl fs.inotify.max_user_watches=524288
-#     - sudo sysctl -p
-#   override:
-#     - yarn
-#   cache_directories:
-#     - ~/.cache/yarn
-#     - watchman
-#
-# test:
-#   override:
-#     - yarn test
+      - run: now build -t ${NOW_TOKEN} --name=este-next --static --public
+      - run: now-realias
+      - run: now rm -t ${NOW_TOKEN} $(now-no-alias | jq -r '.[] | .uid') -y

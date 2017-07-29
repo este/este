@@ -1,0 +1,6 @@
+{
+  "alias": ["este-next"],
+  "files": ["build"],
+  "name": "este-next",
+  "public": true
+}
