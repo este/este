@@ -12,12 +12,9 @@ jobs:
       - run: sudo yarn global add now now-realias now-no-alias
 
       # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
-      - run: if [[ ! -e watchman ]]; then git clone https://github.com/facebook/watchman.git && cd watchman/ && git checkout v4.7.0 && ./autogen.sh && ./configure && make; fi
-      - run: cd watchman && sudo make install
-      - run: sudo sysctl fs.inotify.max_user_watches=524288
-      - run: sudo sysctl -p
+      # TODO: Update for Circle CI 2
 
-      - run: yarn test
+      - run: yarn test-without-flow
 
       # - run: npm run build
       # - store_artifacts:
