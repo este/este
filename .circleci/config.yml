@@ -17,8 +17,8 @@ jobs:
 
       - run: yarn build
       - store_artifacts:
-          path: build
+          path: .next
 
-      - run: now build -t ${NOW_TOKEN} --name=este-next --static --public
+      - run: now .next -t ${NOW_TOKEN} --name=este-next --static --public
       - run: now-realias
       - run: now rm -t ${NOW_TOKEN} $(now-no-alias | jq -r '.[] | .uid') -y
