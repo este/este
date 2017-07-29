@@ -15,7 +15,7 @@ const validatePost = fields => {
     : Observable.of(fields);
 };
 
-export const createPost: Epic = (action$, { environment }) =>
+export const createPost: Epic = (action$, { getEnvironment }) =>
   action$.filter(action => action.type === 'CREATE_POST').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
     if (action.type !== 'CREATE_POST') throw Error();
@@ -23,7 +23,7 @@ export const createPost: Epic = (action$, { environment }) =>
     return Observable.of(action.fields)
       .mergeMap(validatePost)
       .mergeMap(fields =>
-        CreatePostMutation.commit(environment, viewerId, fields),
+        CreatePostMutation.commit(getEnvironment(), viewerId, fields),
       )
       .mapTo({ type: 'CREATE_POST_SUCCESS' })
       .catch((errors: Errors<PostFormFields>) =>
@@ -31,13 +31,13 @@ export const createPost: Epic = (action$, { environment }) =>
       );
   });
 
-export const deletePost: Epic = (action$, { environment }) =>
+export const deletePost: Epic = (action$, { getEnvironment }) =>
   action$.filter(action => action.type === 'DELETE_POST').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
     if (action.type !== 'DELETE_POST') throw Error();
     const { id, viewerId } = action;
     return Observable.fromPromise(
-      DeletePostMutation.commit(environment, viewerId, id),
+      DeletePostMutation.commit(getEnvironment(), viewerId, id),
     )
       .mapTo({ type: 'DELETE_POST_SUCCESS', id })
       .catch((errors: Errors<PostFormFields>) =>

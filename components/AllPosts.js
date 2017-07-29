@@ -22,7 +22,7 @@ export default createFragmentContainer(
   graphql`
     # FileName_propName
     fragment AllPosts_viewer on Viewer {
-      allPosts(last: 100, orderBy: createdAt_DESC)
+      allPosts(first: $first, orderBy: createdAt_DESC)
         @connection(key: "AllPosts_allPosts") {
         edges {
           node {

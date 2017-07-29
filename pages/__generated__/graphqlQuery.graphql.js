@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9f57f7ffee80aea56cc79e890643dfb3
+ * @relayHash 1e1f4ee2519b6b60f2a006c1de5c2977
  */
 
 /* eslint-disable */
@@ -16,7 +16,9 @@ export type graphqlQueryResponse = {|
 
 
 /*
-query graphqlQuery {
+query graphqlQuery(
+  $first: Int
+) {
   viewer {
     ...CreatePost_viewer
     ...AllPosts_viewer
@@ -29,7 +31,7 @@ fragment CreatePost_viewer on Viewer {
 }
 
 fragment AllPosts_viewer on Viewer {
-  allPosts(last: 100, orderBy: createdAt_DESC) {
+  allPosts(first: $first, orderBy: createdAt_DESC) {
     edges {
       node {
         id
@@ -68,7 +70,14 @@ fragment Post_viewer on Viewer {
 
 const batch /*: ConcreteBatch*/ = {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "first",
+        "type": "Int",
+        "defaultValue": null
+      }
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "graphqlQuery",
@@ -102,7 +111,14 @@ const batch /*: ConcreteBatch*/ = {
   "metadata": {},
   "name": "graphqlQuery",
   "query": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "first",
+        "type": "Int",
+        "defaultValue": null
+      }
+    ],
     "kind": "Root",
     "name": "graphqlQuery",
     "operation": "query",
@@ -131,9 +147,9 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": [
                   {
-                    "kind": "Literal",
-                    "name": "last",
-                    "value": 100,
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "first",
                     "type": "Int"
                   },
                   {
@@ -278,16 +294,16 @@ const batch /*: ConcreteBatch*/ = {
                     ]
                   }
                 ],
-                "storageKey": "allPosts{\"last\":100,\"orderBy\":\"createdAt_DESC\"}"
+                "storageKey": null
               },
               {
                 "kind": "LinkedHandle",
                 "alias": null,
                 "args": [
                   {
-                    "kind": "Literal",
-                    "name": "last",
-                    "value": 100,
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "first",
                     "type": "Int"
                   },
                   {
@@ -311,7 +327,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query graphqlQuery {\n  viewer {\n    ...CreatePost_viewer\n    ...AllPosts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment AllPosts_viewer on Viewer {\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
+  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...AllPosts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment AllPosts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
 };
 
 module.exports = batch;

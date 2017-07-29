@@ -21,14 +21,20 @@ export type AllPosts_viewer = {|
 
 
 const fragment /*: ConcreteFragment*/ = {
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "RootArgument",
+      "name": "first",
+      "type": "Int"
+    }
+  ],
   "kind": "Fragment",
   "metadata": {
     "connection": [
       {
-        "count": null,
+        "count": "first",
         "cursor": null,
-        "direction": "backward",
+        "direction": "forward",
         "path": [
           "allPosts"
         ]

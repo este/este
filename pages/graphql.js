@@ -10,7 +10,9 @@ import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { graphql } from 'react-relay';
 
-const GraphQL = ({ intl, queryProps }) =>
+const prepareQuery = ({ first }) => ({ first: Number(first) || 100 });
+
+const GraphQL = ({ intl, data, url: { query } }) =>
   <Page title={intl.formatMessage(sitemap.graphql.title)}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.graphql.title)}
@@ -21,18 +23,25 @@ const GraphQL = ({ intl, queryProps }) =>
       <A href="https://www.graph.cool/">graph.cool</A>.
     </P>
     <Box>
-      <CreatePost viewer={queryProps.viewer} />
-      <AllPosts viewer={queryProps.viewer} />
+      <CreatePost viewer={data.viewer} />
+      <AllPosts viewer={data.viewer} />
+      <P size={-1}>
+        Show first {prepareQuery(query).first} posts. Try{' '}
+        <A size={-1} href={'/graphql?first=2'}>
+          /graphql?first=2
+        </A>
+      </P>
     </Box>
   </Page>;
 
 export default app(GraphQL, {
-  query: graphql`
-    query graphqlQuery {
+  fetch: graphql`
+    query graphqlQuery($first: Int) {
       viewer {
         ...CreatePost_viewer
         ...AllPosts_viewer
       }
     }
   `,
+  prepareQuery,
 });
