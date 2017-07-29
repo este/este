@@ -1,6 +1,6 @@
 // @flow
 import A from '../components/A';
-import AllPosts from '../components/AllPosts';
+import Posts from '../components/Posts';
 import Box from '../components/Box';
 import CreatePost from '../components/CreatePost';
 import Heading from '../components/Heading';
@@ -24,7 +24,7 @@ const GraphQL = ({ intl, data, url: { query } }) =>
     </P>
     <Box>
       <CreatePost viewer={data.viewer} />
-      <AllPosts viewer={data.viewer} />
+      <Posts viewer={data.viewer} />
       <P size={-1}>
         Show first {prepareQuery(query).first} posts. Try{' '}
         <A size={-1} href={'/graphql?first=2'}>
@@ -39,7 +39,7 @@ export default app(GraphQL, {
     query graphqlQuery($first: Int) {
       viewer {
         ...CreatePost_viewer
-        ...AllPosts_viewer
+        ...Posts_viewer
       }
     }
   `,

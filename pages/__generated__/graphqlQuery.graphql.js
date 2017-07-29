@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1e1f4ee2519b6b60f2a006c1de5c2977
+ * @relayHash a87d36e291f6ece51e2158b0636cd491
  */
 
 /* eslint-disable */
@@ -21,7 +21,7 @@ query graphqlQuery(
 ) {
   viewer {
     ...CreatePost_viewer
-    ...AllPosts_viewer
+    ...Posts_viewer
     id
   }
 }
@@ -30,7 +30,7 @@ fragment CreatePost_viewer on Viewer {
   id
 }
 
-fragment AllPosts_viewer on Viewer {
+fragment Posts_viewer on Viewer {
   allPosts(first: $first, orderBy: createdAt_DESC) {
     edges {
       node {
@@ -97,7 +97,7 @@ const batch /*: ConcreteBatch*/ = {
           },
           {
             "kind": "FragmentSpread",
-            "name": "AllPosts_viewer",
+            "name": "Posts_viewer",
             "args": null
           }
         ],
@@ -315,7 +315,7 @@ const batch /*: ConcreteBatch*/ = {
                 ],
                 "handle": "connection",
                 "name": "allPosts",
-                "key": "AllPosts_allPosts",
+                "key": "Posts_allPosts",
                 "filters": [
                   "orderBy"
                 ]
@@ -327,7 +327,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...AllPosts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment AllPosts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
+  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...Posts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment Posts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
 };
 
 module.exports = batch;

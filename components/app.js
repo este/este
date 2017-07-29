@@ -88,7 +88,6 @@ const app = (
         pageInitialProps = await Page.getInitialProps(context);
       }
 
-      // TODO: Handle throw new Error('shit');
       const { locale, messages, supportedLocales } =
         context.req || window.__NEXT_DATA__.props;
 

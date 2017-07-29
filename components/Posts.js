@@ -1,5 +1,5 @@
 // @flow
-import type { AllPosts_viewer } from './__generated__/AllPosts_viewer.graphql';
+import type { Posts_viewer } from './__generated__/Posts_viewer.graphql';
 import Box from './Box';
 import Post from './Post';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -8,7 +8,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 // https://www.learnrelay.org/connections/what-is-a-connection#nodes
 // Why 'edges &&'' and 'edge &&'' existence checking?
 // https://github.com/facebook/relay/issues/1935
-const AllPosts = ({ viewer }: { viewer: AllPosts_viewer }) =>
+const Posts = ({ viewer }: { viewer: Posts_viewer }) =>
   <Box>
     {viewer.allPosts.edges &&
       viewer.allPosts.edges.map(
@@ -18,12 +18,12 @@ const AllPosts = ({ viewer }: { viewer: AllPosts_viewer }) =>
   </Box>;
 
 export default createFragmentContainer(
-  AllPosts,
+  Posts,
   graphql`
     # FileName_propName
-    fragment AllPosts_viewer on Viewer {
+    fragment Posts_viewer on Viewer {
       allPosts(first: $first, orderBy: createdAt_DESC)
-        @connection(key: "AllPosts_allPosts") {
+        @connection(key: "Posts_allPosts") {
         edges {
           node {
             id

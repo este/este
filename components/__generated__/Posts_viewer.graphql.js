@@ -8,7 +8,7 @@
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type AllPosts_viewer = {|
+export type Posts_viewer = {|
   +allPosts: {|
     +edges: ?$ReadOnlyArray<?{|
       +node: {|
@@ -41,7 +41,7 @@ const fragment /*: ConcreteFragment*/ = {
       }
     ]
   },
-  "name": "AllPosts_viewer",
+  "name": "Posts_viewer",
   "selections": [
     {
       "kind": "LinkedField",
@@ -55,7 +55,7 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "concreteType": "PostConnection",
-      "name": "__AllPosts_allPosts_connection",
+      "name": "__Posts_allPosts_connection",
       "plural": false,
       "selections": [
         {
@@ -93,7 +93,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "__AllPosts_allPosts_connection{\"orderBy\":\"createdAt_DESC\"}"
+      "storageKey": "__Posts_allPosts_connection{\"orderBy\":\"createdAt_DESC\"}"
     },
     {
       "kind": "FragmentSpread",

@@ -18,7 +18,7 @@ const updater = (store, viewerId, deletedId) => {
   const userProxy = store.get(viewerId);
   const connection = ConnectionHandler.getConnection(
     userProxy,
-    'AllPosts_allPosts',
+    'Posts_allPosts',
     // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
     { orderBy: 'createdAt_DESC' },
   );
