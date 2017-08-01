@@ -1,6 +1,5 @@
 // @flow
 import type { State } from '../types';
-import Box from './Box';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -36,6 +35,7 @@ const getAppErrorMessage = appError => {
 // There is no position fixed for React Native. Use commponent tree instead.
 const browserOnlyStyle = {
   position: 'fixed',
+  transform: 'translateX(-50%)',
 };
 
 const AppError = ({ errors }) => {
@@ -46,20 +46,22 @@ const AppError = ({ errors }) => {
   const titleWithStackForDevMode =
     process.env.NODE_ENV === 'production' ? '' : appError.stack || '';
   return (
-    <Box style={browserOnlyStyle} top={0} left={0} right={0} zIndex={1}>
-      <Text
-        alignSelf="center"
-        backgroundColor="warning"
-        bold
-        color="white"
-        display="inline"
-        paddingHorizontal={1}
-        paddingVertical={0.5}
-        title={titleWithStackForDevMode}
-      >
-        {message}
-      </Text>
-    </Box>
+    <Text
+      backgroundColor="warning"
+      bold
+      color="white"
+      display="inline"
+      left="50%"
+      margin="auto"
+      paddingHorizontal={1}
+      paddingVertical={0.25}
+      style={browserOnlyStyle}
+      title={titleWithStackForDevMode}
+      top={0}
+      zIndex={1}
+    >
+      {message}
+    </Text>
   );
 };
 
