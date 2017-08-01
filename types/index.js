@@ -91,9 +91,12 @@ export type Reducers = { [name: $Keys<State>]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
+// Replace once Relay Modern will have flow-typed typedefs.
+export type Environment = Object;
+
 export type PlatformDependencies = {
   createUuid: () => string, // Because React Native needs different lib.
-  getEnvironment: () => Object,
+  getEnvironment: () => Environment,
 };
 
 export type Dependencies = PlatformDependencies & {
@@ -115,6 +118,3 @@ export type FunctionalComponent<P> = (
   props: P,
   context: any,
 ) => ?React$Element<any>;
-
-// Replace once Relay Modern will have flow-typed typedefs.
-export type Environment = Object;

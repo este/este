@@ -15,7 +15,7 @@ const validatePost = fields => {
 };
 
 // Not all mutations need to be handled with Redux and observables.
-// Take a look at DeletePostButton. Because mutation is an optimistic, we don't
+// Take a look at DeletePostButton. Because mutation is optimistic, we don't
 // have to handle async states.
 export const createPost: Epic = (action$, { getEnvironment }) =>
   action$.filter(action => action.type === 'CREATE_POST').mergeMap(action => {

@@ -1,8 +1,11 @@
 // @flow
-import type { CreatePostMutationVariables } from './__generated__/CreatePostMutation.graphql';
+import type {
+  CreatePostMutationResponse,
+  CreatePostMutationVariables,
+} from './__generated__/CreatePostMutation.graphql';
+import type { Environment, Id } from '../types';
 import type { PostFormFields } from '../reducers/posts';
-import type { Id } from '../types';
-import createCommit from './createCommit';
+import commitMutation from './_commitMutation';
 import { ConnectionHandler } from 'relay-runtime';
 import { graphql } from 'react-relay';
 
@@ -31,13 +34,22 @@ const updater = (store, viewerId, edge) => {
   ConnectionHandler.insertEdgeBefore(connection, edge);
 };
 
-const commit = (environment: Object, viewerId: Id, fields: PostFormFields) =>
-  createCommit(environment, {
+// Should not be required, but it is. Relay Modern always sends "0", but it
+// can't be a constant, because it's used for optimistic mutations.
+// Hope Relay Modern will remove it soon.
+let clientMutationId = 0;
+
+const commit = (
+  environment: Environment,
+  viewerId: Id,
+  fields: PostFormFields,
+): Promise<CreatePostMutationResponse> =>
+  commitMutation(environment, {
     mutation,
     variables: ({
       input: {
         ...fields,
-        clientMutationId: Date.now().toString(32),
+        clientMutationId: (clientMutationId++).toString(),
       },
     }: CreatePostMutationVariables),
     updater: store => {

@@ -9,6 +9,7 @@ module.exports = {
     HOSTNAME: true,
     window: true,
     // Flow
+    $Diff: true,
     $Exact: true,
     $Keys: true,
     $PropertyType: true,
@@ -32,6 +33,7 @@ module.exports = {
     'no-mixed-operators': 0, // Prettier.
     'no-nested-ternary': 0, // Buggy for functional componenents.
     'no-param-reassign': 0, // We love param reassignment. Naming is hard.
+    'no-plusplus': 0, // Control freaky.
     'no-restricted-syntax': 0, // Not needed with modern browsers.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
     'no-underscore-dangle': 0, // Control freaky.

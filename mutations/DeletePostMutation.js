@@ -1,7 +1,7 @@
 // @flow
 import type { DeletePostMutationVariables } from './__generated__/DeletePostMutation.graphql';
-import type { Id } from '../types';
-import createCommit from './createCommit';
+import type { Environment, Id } from '../types';
+import commitMutation from './_commitMutation';
 import { ConnectionHandler } from 'relay-runtime';
 import { graphql } from 'react-relay';
 
@@ -25,13 +25,16 @@ const updater = (store, viewerId, deletedId) => {
   ConnectionHandler.deleteNode(connection, deletedId);
 };
 
-const commit = (environment: Object, viewerId: Id, id: Id) =>
-  createCommit(environment, {
+// Should not be required, but it is. Probably graph.cool issue.
+let clientMutationId = 0;
+
+const commit = (environment: Environment, viewerId: Id, id: Id) =>
+  commitMutation(environment, {
     mutation,
     variables: ({
       input: {
         id,
-        clientMutationId: Date.now().toString(32),
+        clientMutationId: (clientMutationId++).toString(),
       },
     }: DeletePostMutationVariables),
     updater: store => {
