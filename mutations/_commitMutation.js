@@ -12,12 +12,16 @@ type Config = {
 };
 
 const mapGraphCoolErrorToAppErrors = (error: Object) => {
+  // https://facebook.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html
   const code =
     error &&
     error.source &&
     error.source.errors &&
     error.source.errors[0] &&
     error.source.errors[0].code;
+  // I believe global graph.cool errors handling belongs here.
+  // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo/
+  // TODO: Handle other meaningful codes.
   switch (code) {
     case 3022:
       return { appError: { type: 'cannotSignInCredentialsInvalid' } };
