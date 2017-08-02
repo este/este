@@ -3,6 +3,7 @@ import type { IntlShape } from 'react-intl';
 import type { Store, ServerState, FunctionalComponent } from '../types';
 import React from 'react';
 import RelayProvider from './RelayProvider';
+import cookie from 'cookie';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
@@ -70,12 +71,22 @@ const getReduxStore = (serverState, getEnvironment) => {
   return clientReduxStore;
 };
 
+// req is server side only
+const getToken = req => {
+  const clientOrServerCookie = req
+    ? req.headers && req.headers.cookie
+    : // eslint-disable-next-line no-undef
+      typeof document !== 'undefined' && document.cookie;
+  if (!clientOrServerCookie) return null;
+  return cookie.parse(clientOrServerCookie).token;
+};
+
 const app = (
   Page: FunctionalComponent<PageProps>,
-  options?: {
+  options?: {|
     fetch?: Object,
     prepareQuery?: Object => Object,
-  },
+  |},
 ) => {
   const { fetch, prepareQuery = object => object } = options || {};
   const PageWithDefaultHOCs = injectIntl(Page);
@@ -94,10 +105,13 @@ const app = (
       // Note we call fetchQuery for client page transitions as well to enable
       // pending navigations. Finally possible with Next.js and Relay.
       // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
+
       let data = {};
       let records = {};
       if (fetch) {
-        const environment = createRelayEnvironment();
+        // req is server side only
+        const token = getToken(context.req);
+        const environment = createRelayEnvironment({ token });
         const variables = prepareQuery(context.query);
         // TODO: Consider RelayQueryResponseCache
         // https://github.com/facebook/relay/issues/1687#issuecomment-302931855
@@ -145,7 +159,9 @@ const app = (
     }
 
     createRelayEnvironment(records: Object) {
-      this.environment = createRelayEnvironment({ records });
+      // client side only
+      const token = getToken();
+      this.environment = createRelayEnvironment({ records, token });
     }
 
     componentDidMount() {
