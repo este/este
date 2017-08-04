@@ -1,5 +1,5 @@
 // @flow
-import type { State } from '../types';
+import type { State, Viewer } from '../types';
 import A from './A';
 import AppError from './AppError';
 import Baseline from './Baseline';
@@ -11,7 +11,7 @@ import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect } from 'react-redux';
+import { connect, type Connector } from 'react-redux';
 
 const PageContainer = ({ children }) =>
   <Box
@@ -47,17 +47,11 @@ const PageFooter = () =>
     </A>
   </Text>;
 
-type PageProps = {|
-  children?: any,
-  darkEnabled: boolean,
-  title: string,
-|};
-
 // Because context is like dependency injection.
 // https://facebook.github.io/react/docs/context.html#updating-context
 const forceRenderOnThemeChange = theme => ({ key: JSON.stringify(theme) });
 
-const Page = ({ children, darkEnabled, title }: PageProps) => {
+const Page = ({ children, darkEnabled, title, viewer }) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
@@ -77,7 +71,7 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
         <LoadingBar />
         <AppError />
         <PageContainer>
-          <MainNav title={title} />
+          <MainNav title={title} isAuthenticated={!!viewer} />
           <PageBody>
             {children}
           </PageBody>
@@ -88,6 +82,21 @@ const Page = ({ children, darkEnabled, title }: PageProps) => {
   );
 };
 
-export default connect((state: State) => ({
+type PageOwnProps = {|
+  children?: ?any,
+  title: string,
+  viewer: Viewer,
+|};
+
+type PageProps = PageOwnProps & {|
+  darkEnabled: boolean,
+|};
+
+const connector: Connector<
+  PageOwnProps,
+  PageProps,
+> = connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}))(Page);
+}));
+
+export default connector(Page);

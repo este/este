@@ -9,6 +9,7 @@
 // If something doesn't work, check Flow issues and probably don't use it.
 // Feel free to use 'FlowFixMe Describe why' anytime. Favour it over any type.
 
+import type { appQueryResponse } from '../components/__generated__/appQuery.graphql';
 import type { Observable as RxObservable } from 'rxjs';
 import type { Temp } from '../lib/temp';
 import type { ValidationError } from '../lib/validate';
@@ -118,3 +119,9 @@ export type FunctionalComponent<P> = (
   props: P,
   context: any,
 ) => ?React$Element<any>;
+
+// Viewer is logged-in user.
+export type Viewer = $PropertyType<
+  $PropertyType<appQueryResponse, 'viewer'>,
+  'user',
+>;

@@ -12,8 +12,8 @@ import { graphql } from 'react-relay';
 
 const prepareQuery = ({ first }) => ({ first: Number(first) || 100 });
 
-const GraphQL = ({ intl, data, url: { query } }) =>
-  <Page title={intl.formatMessage(sitemap.graphql.title)}>
+const GraphQL = ({ data, intl, url: { query }, viewer }) =>
+  <Page title={intl.formatMessage(sitemap.graphql.title)} viewer={viewer}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.graphql.title)}
     </Heading>
@@ -35,6 +35,7 @@ const GraphQL = ({ intl, data, url: { query } }) =>
   </Page>;
 
 export default app(GraphQL, {
+  requireAuth: true,
   fetch: graphql`
     query graphqlQuery($first: Int) {
       viewer {

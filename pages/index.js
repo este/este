@@ -35,8 +35,8 @@ export const messages = defineMessages({
   },
 });
 
-const Index = ({ intl }) =>
-  <Page title={intl.formatMessage(sitemap.index.title)}>
+const Index = ({ intl, viewer }) =>
+  <Page title={intl.formatMessage(sitemap.index.title)} viewer={viewer}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.index.title)}
     </Heading>

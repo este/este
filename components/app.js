@@ -1,23 +1,27 @@
 // @flow
 import type { IntlShape } from 'react-intl';
-import type { Store, ServerState, FunctionalComponent } from '../types';
+import type { Store, ServerState, FunctionalComponent, Viewer } from '../types';
+import type { appQueryResponse } from './__generated__/appQuery.graphql';
 import React from 'react';
 import RelayProvider from './RelayProvider';
+import Router from 'next/router';
 import cookie from 'cookie';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
 import localForage from 'localforage';
 import persistStore from '../lib/persistStore';
+import sitemap from '../lib/sitemap';
 import uuid from 'uuid';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { Provider as ReduxProvider } from 'react-redux';
-import { fetchQuery } from 'react-relay';
+import { fetchQuery, graphql } from 'react-relay';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform via app.ios.js and app.android.js probably.
 
+// polyfill browser stuff
 if (process.browser) {
   // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
@@ -25,11 +29,9 @@ if (process.browser) {
   // Register React Intl's locale data for the user's locale in the browser.
   // This locale data was added to the page by `pages/_document.js`. This only
   // happens once, on initial page load in the browser.
-  if (window.ReactIntlLocaleData) {
-    Object.keys(window.ReactIntlLocaleData).forEach(lang => {
-      addLocaleData(window.ReactIntlLocaleData[lang]);
-    });
-  }
+  Object.keys(window.ReactIntlLocaleData).forEach(lang => {
+    addLocaleData(window.ReactIntlLocaleData[lang]);
+  });
 }
 
 // TODO: Waiting for Next.js 3 type definitions.
@@ -47,6 +49,7 @@ type InitialProps = {
   messages: Object,
   records: Object,
   serverState: ServerState,
+  viewer: Viewer,
 };
 
 type AppProps = NextProps & InitialProps;
@@ -54,7 +57,7 @@ type AppProps = NextProps & InitialProps;
 type PageProps = NextProps & {
   data: Object,
   intl: IntlShape,
-  serverState: ServerState,
+  viewer: Viewer,
 };
 
 // Cache client Redux store to preserve app state across page transitions.
@@ -71,8 +74,7 @@ const getReduxStore = (serverState, getEnvironment) => {
   return clientReduxStore;
 };
 
-// req is server side only
-const getToken = req => {
+const tryGetClientOrServerTokenFromCookie = req => {
   const clientOrServerCookie = req
     ? req.headers && req.headers.cookie
     : // eslint-disable-next-line no-undef
@@ -81,37 +83,68 @@ const getToken = req => {
   return cookie.parse(clientOrServerCookie).token;
 };
 
+const appQuery = graphql`
+  query appQuery {
+    viewer {
+      user {
+        id
+      }
+    }
+  }
+`;
+
+export const redirectUrlKey = 'redirectUrl';
+
 const app = (
   Page: FunctionalComponent<PageProps>,
   options?: {|
     fetch?: Object,
     prepareQuery?: Object => Object,
+    requireAuth?: boolean,
   |},
 ) => {
-  const { fetch, prepareQuery = object => object } = options || {};
+  const { fetch, prepareQuery = object => object, requireAuth } = options || {};
   const PageWithDefaultHOCs = injectIntl(Page);
 
   return class App extends React.Component {
-    // TODO: Handle getInitialProps error.
     static async getInitialProps(context) {
       let pageInitialProps = {};
       if (Page.getInitialProps) {
         pageInitialProps = await Page.getInitialProps(context);
       }
 
-      const { locale, messages, supportedLocales } =
-        context.req || window.__NEXT_DATA__.props;
+      const environment = createRelayEnvironment({
+        token: tryGetClientOrServerTokenFromCookie(context.req),
+      });
+
+      // Viewer is must for requireAuth or page header.
+      // This additional request can be cached ofc.
+      const { viewer: { user: viewer } }: appQueryResponse = await fetchQuery(
+        environment,
+        appQuery,
+      );
+
+      if (requireAuth && !viewer) {
+        // We should probably use universal URL builder.
+        const path = `${sitemap.signIn
+          .path}?${redirectUrlKey}=${encodeURIComponent(context.pathname)}`;
+        if (process.browser) {
+          Router.replace(path);
+        } else {
+          context.res.writeHead(303, { Location: path });
+          context.res.end();
+        }
+        // No need to do anything else in case of redirect.
+        // Component will not be rendered anyway.
+        return {};
+      }
 
       // Note we call fetchQuery for client page transitions as well to enable
       // pending navigations. Finally possible with Next.js and Relay.
       // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
-
       let data = {};
       let records = {};
       if (fetch) {
-        // req is server side only
-        const token = getToken(context.req);
-        const environment = createRelayEnvironment({ token });
         const variables = prepareQuery(context.query);
         // TODO: Consider RelayQueryResponseCache
         // https://github.com/facebook/relay/issues/1687#issuecomment-302931855
@@ -123,12 +156,15 @@ const app = (
       // <IntlProvider> will be a new instance even with pushState routing.
       const initialNow = Date.now();
 
+      const { locale, messages, supportedLocales } =
+        context.req || window.__NEXT_DATA__.props;
+
       return ({
         ...pageInitialProps,
+        data,
         initialNow,
         locale,
         messages,
-        data,
         records,
         serverState: {
           app: {
@@ -142,6 +178,7 @@ const app = (
             supportedLocales,
           },
         },
+        viewer,
       }: InitialProps);
     }
 
@@ -159,9 +196,10 @@ const app = (
     }
 
     createRelayEnvironment(records: Object) {
-      // client side only
-      const token = getToken();
-      this.environment = createRelayEnvironment({ records, token });
+      this.environment = createRelayEnvironment({
+        records,
+        token: tryGetClientOrServerTokenFromCookie(),
+      });
     }
 
     componentDidMount() {
