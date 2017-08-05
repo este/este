@@ -86,7 +86,7 @@ const Text = (props: TextProps, { theme }: ThemeContext) => {
     ...(bold ? { fontWeight: theme.text.bold } : null),
     ...(decoration ? { textDecoration: decoration } : null),
     ...(italic ? { fontStyle: 'italic' } : null),
-    ...(lineHeight ? { lineHeight } : null),
+    ...(lineHeight != null ? { lineHeight } : null),
     ...restProps.style,
   };
 
