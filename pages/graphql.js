@@ -18,18 +18,21 @@ const GraphQL = ({ data, intl, url: { query }, viewer }) =>
       {intl.formatMessage(sitemap.graphql.title)}
     </Heading>
     <P>
-      GraphQL with auth demonstrated on{' '}
-      <A href="https://facebook.github.io/relay/">Relay</A> and{' '}
+      Implemented with <A href="https://facebook.github.io/relay/">Relay</A> and{' '}
       <A href="https://www.graph.cool/">graph.cool</A>.
     </P>
     <Box>
       <CreatePost viewer={data.viewer} />
       <Posts viewer={data.viewer} />
       <P size={-1}>
-        Show first {prepareQuery(query).first} posts. Try{' '}
-        <A size={-1} href={'/graphql?first=2'}>
-          /graphql?first=2
-        </A>
+        First {prepareQuery(query).first} posts {' '}
+        {query.first
+          ? <A size={-1} href={'/graphql'}>
+              /graphql
+            </A>
+          : <A size={-1} href={'/graphql?first=2'}>
+              /graphql?first=2
+            </A>}
       </P>
     </Box>
   </Page>;

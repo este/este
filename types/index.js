@@ -54,7 +54,6 @@ export type FormState<Fields> = {
 };
 
 export type State = {
-  apollo: Object,
   app: AppState,
   auth: AuthState,
   posts: PostsState,

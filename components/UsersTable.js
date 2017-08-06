@@ -10,6 +10,7 @@ import Set from './Set';
 import Text from './Text';
 import TextInput from './TextInput';
 import ValidationError from './ValidationError';
+import { CancelButton, SaveButton } from './buttons';
 import { connect } from 'react-redux';
 import { temp } from '../lib/temp';
 
@@ -111,26 +112,22 @@ const RowForm = ({
     <Box height={1}>
       {field === 'name' &&
         <Set flexWrap="nowrap">
-          <Button
+          <SaveButton
             color="primary"
             size={-1}
             marginVertical={0}
             onPress={saveUser}
             paddingHorizontal={0}
             disabled={disabled}
-          >
-            save
-          </Button>
-          <Button
+          />
+          <CancelButton
             color="warning"
             size={-1}
             marginVertical={0}
             onPress={cancelEditation}
             paddingHorizontal={0}
             disabled={disabled}
-          >
-            cancel
-          </Button>
+          />
           <ValidationError size={-1} error={form.validationErrors.name} />
         </Set>}
     </Box>;

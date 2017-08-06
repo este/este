@@ -47,7 +47,6 @@ const Me = ({ data, intl, viewer }) => {
         title={user.email}
       />
       <Set>
-        {/* {data.viewer.user && data.viewer.user.email} */}
         <SignOutButton danger onPress={signOut} />
       </Set>
     </Page>
