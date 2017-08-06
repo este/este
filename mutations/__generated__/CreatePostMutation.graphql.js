@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7c0a2ac027eaebe91b6b7659511e9183
+ * @relayHash a574b135ac37c69e9d8d4c74939de015
  */
 
 /* eslint-disable */
@@ -12,6 +12,7 @@ import type {ConcreteBatch} from 'relay-runtime';
 export type CreatePostMutationVariables = {|
   input: {
     text: string;
+    authorId?: ?string;
     clientMutationId: string;
   };
 |};
@@ -41,6 +42,10 @@ mutation CreatePostMutation(
 }
 
 fragment Post_post on Post {
+  author {
+    email
+    id
+  }
   createdAt
   id
   text
@@ -169,6 +174,31 @@ const batch /*: ConcreteBatch*/ = {
                     "type": "Post",
                     "selections": [
                       {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "name": "author",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "email",
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
                         "kind": "ScalarField",
                         "alias": null,
                         "args": null,
@@ -195,7 +225,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation CreatePostMutation(\n  $input: CreatePostInput!\n) {\n  createPost(input: $input) {\n    edge {\n      node {\n        ...Post_post\n        id\n      }\n    }\n  }\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n"
+  "text": "mutation CreatePostMutation(\n  $input: CreatePostInput!\n) {\n  createPost(input: $input) {\n    edge {\n      node {\n        ...Post_post\n        id\n      }\n    }\n  }\n}\n\nfragment Post_post on Post {\n  author {\n    email\n    id\n  }\n  createdAt\n  id\n  text\n}\n"
 };
 
 module.exports = batch;

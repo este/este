@@ -1,3 +1,18 @@
+type AddToPostAuthorPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  postsPost: Post
+  authorUser: User
+  postsPostEdge: PostEdge
+  authorUserEdge: UserEdge
+}
+
+input AddToPostAuthorPostInput {
+  authorUserId: ID!
+  postsPostId: ID!
+  clientMutationId: String!
+}
+
 input AUTH_PROVIDER_EMAIL {
   email: String!
   password: String!
@@ -31,10 +46,12 @@ type CreateFilePayload {
 
 input CreatePost {
   text: String!
+  authorId: ID
 }
 
 input CreatePostInput {
   text: String!
+  authorId: ID
   clientMutationId: String!
 }
 
@@ -43,6 +60,12 @@ type CreatePostPayload {
   clientMutationId: String!
   post: Post
   edge: PostEdge
+  author: User
+}
+
+input CreateUser {
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
 }
 
 # If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
@@ -77,6 +100,7 @@ type DeletePostPayload {
   clientMutationId: String!
   post: Post
   edge: PostEdge
+  author: User
   deletedId: ID
 }
 
@@ -434,6 +458,7 @@ type Mutation {
   deleteFile(input: DeleteFileInput!): DeleteFilePayload
   deletePost(input: DeletePostInput!): DeletePostPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  addToPostAuthor(input: AddToPostAuthorPostInput!): AddToPostAuthorPayload
   signinUser(input: SigninUserInput!): SigninPayload!
   createUser(input: SignupUserInput!): CreateUserPayload!
 }
@@ -460,6 +485,7 @@ type PageInfo {
 }
 
 type Post implements Node {
+  author(filter: UserFilter): User!
   createdAt: DateTime!
   id: ID!
   text: String!
@@ -617,6 +643,7 @@ input PostFilter {
 
   # All values greater than or equal the given value.
   updatedAt_gte: DateTime
+  author: UserFilter
 }
 
 enum PostOrderBy {
@@ -654,6 +681,8 @@ input SigninUserInput {
 }
 
 input SignupUserInput {
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
   clientMutationId: String!
   authProvider: AuthProviderSignupData!
 }
@@ -700,10 +729,12 @@ type UpdateOrCreatePostPayload {
   clientMutationId: String!
   post: Post
   edge: PostEdge
+  author: User
 }
 
 input UpdateOrCreateUserInput {
   update: UpdateUser!
+  create: CreateUser!
   clientMutationId: String!
 }
 
@@ -717,11 +748,13 @@ type UpdateOrCreateUserPayload {
 input UpdatePost {
   id: ID!
   text: String
+  authorId: ID
 }
 
 input UpdatePostInput {
   id: ID!
   text: String
+  authorId: ID
   clientMutationId: String!
 }
 
@@ -730,14 +763,19 @@ type UpdatePostPayload {
   clientMutationId: String!
   post: Post
   edge: PostEdge
+  author: User
 }
 
 input UpdateUser {
   id: ID!
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
 }
 
 input UpdateUserInput {
   id: ID!
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
   clientMutationId: String!
 }
 
@@ -753,6 +791,7 @@ type User implements Node {
   email: String
   id: ID!
   password: String
+  posts(filter: PostFilter, orderBy: PostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection
   updatedAt: DateTime!
 }
 
@@ -947,6 +986,9 @@ input UserFilter {
 
   # All values greater than or equal the given value.
   updatedAt_gte: DateTime
+  posts_every: PostFilter
+  posts_some: PostFilter
+  posts_none: PostFilter
 }
 
 enum UserOrderBy {
@@ -960,6 +1002,10 @@ enum UserOrderBy {
   password_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input UserpostsPost {
+  text: String!
 }
 
 # This is the famous Relay viewer object

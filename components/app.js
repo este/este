@@ -117,7 +117,7 @@ const app = (
         token: tryGetClientOrServerTokenFromCookie(context.req),
       });
 
-      // Viewer is must for requireAuth or page header.
+      // Always try to fetch viewer to render correct auth state in page header.
       // This additional request can be cached ofc.
       const { viewer: { user: viewer } }: appQueryResponse = await fetchQuery(
         environment,

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a87d36e291f6ece51e2158b0636cd491
+ * @relayHash a50d602cac357feff79a6f42015339a6
  */
 
 /* eslint-disable */
@@ -28,6 +28,9 @@ query graphqlQuery(
 
 fragment CreatePost_viewer on Viewer {
   id
+  user {
+    id
+  }
 }
 
 fragment Posts_viewer on Viewer {
@@ -58,6 +61,10 @@ fragment Posts_viewer on Viewer {
 }
 
 fragment Post_post on Post {
+  author {
+    email
+    id
+  }
   createdAt
   id
   text
@@ -65,6 +72,9 @@ fragment Post_post on Post {
 
 fragment Post_viewer on Viewer {
   id
+  user {
+    id
+  }
 }
 */
 
@@ -145,6 +155,24 @@ const batch /*: ConcreteBatch*/ = {
               {
                 "kind": "LinkedField",
                 "alias": null,
+                "args": null,
+                "concreteType": "User",
+                "name": "user",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
                 "args": [
                   {
                     "kind": "Variable",
@@ -190,6 +218,31 @@ const batch /*: ConcreteBatch*/ = {
                             "kind": "InlineFragment",
                             "type": "Post",
                             "selections": [
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "User",
+                                "name": "author",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "email",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "id",
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              },
                               {
                                 "kind": "ScalarField",
                                 "alias": null,
@@ -327,7 +380,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...Posts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n}\n\nfragment Posts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n"
+  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...Posts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n\nfragment Posts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  author {\n    email\n    id\n  }\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

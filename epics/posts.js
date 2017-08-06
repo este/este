@@ -21,11 +21,11 @@ export const createPost: Epic = (action$, { getEnvironment }) =>
   action$.filter(action => action.type === 'CREATE_POST').mergeMap(action => {
     // https://flow.org/en/docs/lang/refinements
     if (action.type !== 'CREATE_POST') throw Error();
-    const { viewerId } = action; // type refinement
+    const { authorId, viewerId } = action; // type refinement
     return Observable.of(action.fields)
       .mergeMap(validatePost)
       .mergeMap(fields =>
-        CreatePostMutation.commit(getEnvironment(), viewerId, fields),
+        CreatePostMutation.commit(getEnvironment(), viewerId, authorId, fields),
       )
       .mapTo({ type: 'CREATE_POST_SUCCESS' })
       .catch((errors: Errors<PostFormFields>) =>

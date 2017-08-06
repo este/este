@@ -22,13 +22,15 @@ const Post = ({
   <Box marginBottom={1}>
     <Set marginBottom={0}>
       <Text color="gray" size={-1}>
-        <FormattedRelative value={post.createdAt} />
+        {post.author.email}, <FormattedRelative value={post.createdAt} />
       </Text>
-      <DeletePostButton
-        environment={environment}
-        id={post.id}
-        viewerId={viewer.id}
-      />
+      {viewer.user &&
+        viewer.user.id === post.author.id &&
+        <DeletePostButton
+          environment={environment}
+          id={post.id}
+          viewerId={viewer.id}
+        />}
     </Set>
     <Text>
       {post.text}
@@ -38,6 +40,10 @@ const Post = ({
 export default createFragmentContainer(Post, {
   post: graphql`
     fragment Post_post on Post {
+      author {
+        email
+        id
+      }
       createdAt
       id
       text
@@ -46,6 +52,9 @@ export default createFragmentContainer(Post, {
   viewer: graphql`
     fragment Post_viewer on Viewer {
       id
+      user {
+        id
+      }
     }
   `,
 });

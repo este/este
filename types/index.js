@@ -70,7 +70,7 @@ export type Action =
   | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
   | { type: 'AUTH_SUCCESS' }
   | { type: 'CREATE_10_RANDOM_USERS' }
-  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: Id }
+  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: Id, authorId: Id }
   | { type: 'CREATE_POST_ERROR', errors: Errors<PostFormFields> }
   | { type: 'CREATE_POST_SUCCESS' }
   | { type: 'CREATE_USER', fields: UserFormFields }

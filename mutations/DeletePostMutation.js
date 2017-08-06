@@ -15,9 +15,9 @@ const mutation = graphql`
 `;
 
 const updater = (store, viewerId, deletedId) => {
-  const userProxy = store.get(viewerId);
+  const viewerProxy = store.get(viewerId);
   const connection = ConnectionHandler.getConnection(
-    userProxy,
+    viewerProxy,
     'Posts_allPosts',
     // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
     { orderBy: 'createdAt_DESC' },

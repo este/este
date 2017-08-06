@@ -24,9 +24,9 @@ const mutation = graphql`
 `;
 
 const updater = (store, viewerId, edge) => {
-  const userProxy = store.get(viewerId);
+  const viewerProxy = store.get(viewerId);
   const connection = ConnectionHandler.getConnection(
-    userProxy,
+    viewerProxy,
     'Posts_allPosts',
     // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
     { orderBy: 'createdAt_DESC' },
@@ -42,6 +42,7 @@ let clientMutationId = 0;
 const commit = (
   environment: Environment,
   viewerId: Id,
+  authorId: Id,
   fields: PostFormFields,
 ): Promise<CreatePostMutationResponse> =>
   commitMutation(environment, {
@@ -49,6 +50,10 @@ const commit = (
     variables: ({
       input: {
         ...fields,
+        // To see how to prevent authorId, check graph.cool permission queries.
+        // https://www.graph.cool/docs/reference/auth/permission-queries-iox3aqu0ee
+        // https://www.graph.cool/docs/tutorials/authorization-content-management-system-miesho4goo
+        authorId,
         clientMutationId: (clientMutationId++).toString(),
       },
     }: CreatePostMutationVariables),
