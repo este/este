@@ -1,10 +1,12 @@
 // @flow
 import type { meQueryResponse } from './__generated__/meQuery.graphql';
-import Page from '../components/Page';
+import Image from '../components/Image';
 import P from '../components/P';
+import Page from '../components/Page';
 import Set from '../components/Set';
 import app from '../components/app';
 import cookie from 'cookie';
+import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
@@ -21,14 +23,29 @@ const signOut = () => {
   location.href = '/';
 };
 
+const getGravatarUrl = email =>
+  gravatar.url(email, {
+    d: 'retro',
+    protocol: 'https',
+    r: 'x',
+    s: '100',
+  });
+
 const Me = ({ data, intl, viewer }) => {
   // Force type via any cast.
   const { viewer: { user } } = ((data: any): meQueryResponse);
+  if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)} viewer={viewer}>
-      <P>
-        {user && user.email}
+      <P bold>
+        {user.email}
       </P>
+      <Image
+        marginBottom={1}
+        size={{ height: 100, width: 100 }}
+        src={getGravatarUrl(user.email)}
+        title={user.email}
+      />
       <Set>
         {/* {data.viewer.user && data.viewer.user.email} */}
         <SignOutButton danger onPress={signOut} />
