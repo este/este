@@ -1,5 +1,6 @@
 // @flow
 import type { Environment, Id } from '../types';
+import AreYouSureConfirm from './AreYouSureConfirm';
 import DeletePostMutation from '../mutations/DeletePostMutation';
 import { DeleteButton } from './buttons';
 
@@ -16,12 +17,18 @@ const DeletePostButton = ({
   id,
   viewerId,
 }: DeletePostButtonProps) =>
-  <DeleteButton
-    color="warning"
-    marginVertical={0}
-    onPress={() => DeletePostMutation.commit(environment, viewerId, id)}
-    paddingHorizontal={0}
-    size={-1}
+  <AreYouSureConfirm
+    render={confirm =>
+      <DeleteButton
+        color="warning"
+        marginVertical={0}
+        onPress={() => {
+          if (!confirm()) return;
+          DeletePostMutation.commit(environment, viewerId, id);
+        }}
+        paddingHorizontal={0}
+        size={-1}
+      />}
   />;
 
 // TODO: Create and use environment HOC once Flow reveal how to type it. Soon!

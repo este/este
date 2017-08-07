@@ -15,6 +15,7 @@
   "button.signOut": "Odhlásit se",
   "button.signUp": "Vytvořit účet",
   "button.submit": "Odeslat",
+  "confirm.areYouSure": "Opravdu?",
   "footer.madeBy": "vytvořil",
   "forms.description": "Jednoduché, rychlé, a typové Redux formuláře bez zbytečných abstrakcí.",
   "index.normalText": "normální text",

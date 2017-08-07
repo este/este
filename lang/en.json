@@ -15,6 +15,7 @@
   "button.signOut": "Sign Out",
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
+  "confirm.areYouSure": "Are you sure?",
   "footer.madeBy": "made by",
   "forms.description": "Simple, fast, and typed Redux forms without unnecessary abstractions.",
   "index.normalText": "normal text",
