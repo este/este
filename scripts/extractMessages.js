@@ -7,6 +7,8 @@ const { resolve } = require('path');
 // TODO: Detect missing and unused translations. PR please.
 
 const defaultMessages = glob
+  // Remember babel plugin generates only required / imported components.
+  // That's why application has to be built before extraction.
   .sync('./lang/.messages/**/*.json')
   .map(filename => readFileSync(filename, 'utf8'))
   .map(file => JSON.parse(file))

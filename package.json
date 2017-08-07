@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
-    "extractMessages": "next build && node ./scripts/extractMessages",
+    "extractMessages": "yarn rimrafBabelCache && next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
     "jest": "jest",
