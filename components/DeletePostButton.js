@@ -24,6 +24,10 @@ const DeletePostButton = ({
         marginVertical={0}
         onPress={() => {
           if (!confirm()) return;
+          // TODO: Not sure what to do on error. It can be caused by stale
+          // client data or app bug. Should we rerender page? Or move it to epic
+          // and render special error message? Per case or global?
+          // https://github.com/este/este/issues/1381
           DeletePostMutation.commit(environment, viewerId, id);
         }}
         paddingHorizontal={0}
