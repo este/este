@@ -7,6 +7,8 @@ module.exports = {
     DEFAULT_LOCALE: true,
     GRAPHQL_ENDPOINT: true,
     HOSTNAME: true,
+    SENTRY_CLIENT_DNS: true,
+    SENTRY_SERVER_DNS: true,
     window: true,
     // Flow
     $Diff: true,

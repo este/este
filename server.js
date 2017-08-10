@@ -66,9 +66,8 @@ app.prepare().then(() => {
     const locale = getAcceptedOrDefaultLocale(req, query.locale);
 
     // Use messages defined in code for dev with default locale.
-    const messages = dev && locale === DEFAULT_LOCALE
-      ? {}
-      : getMessages(locale);
+    const messages =
+      dev && locale === DEFAULT_LOCALE ? {} : getMessages(locale);
 
     // $FlowFixMe How to extend req type?
     req.locale = locale;
@@ -78,6 +77,8 @@ app.prepare().then(() => {
     req.localeDataScript = getLocaleDataScript(locale);
     // $FlowFixMe How to extend req type?
     req.messages = messages;
+
+    // TODO: Handle errors (probably via Koa) and report them.
 
     handle(req, res);
   }).listen(3000, err => {

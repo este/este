@@ -27,7 +27,6 @@ import type { UserFormFields, UsersState, User } from '../reducers/users';
 
 export type Id = string;
 
-// TODO: Add graph.cool Relay errors.
 export type AppError =
   | { type: 'insufficientStorage', limit: number }
   | { type: 'xhrError' }
@@ -36,10 +35,10 @@ export type AppError =
 
 export type ValidationErrors<T> = { [key: $Keys<T>]: ValidationError };
 
-export type Errors<T> = {
+export type Errors<T> = {|
   appError?: AppError,
   validationErrors?: ValidationErrors<T>,
-};
+|};
 
 export type Form<Fields> = {
   fields: Fields,

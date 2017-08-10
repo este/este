@@ -43,8 +43,11 @@ const AppError = ({ errors }) => {
   const { appError } = errors;
 
   const message = getAppErrorMessage(appError);
+  if (!message) return null;
+
   const titleWithStackForDevMode =
     process.env.NODE_ENV === 'production' ? '' : appError.stack || '';
+
   return (
     <Text
       backgroundColor="warning"

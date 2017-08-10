@@ -17,6 +17,7 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { Provider as ReduxProvider } from 'react-redux';
 import { fetchQuery, graphql } from 'react-relay';
+import { reportRelayFetchError } from '../lib/raven';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 // TODO: Make it multi-platform via app.ios.js and app.android.js probably.
@@ -61,7 +62,7 @@ type PageProps = NextProps & {
 };
 
 // Cache client Redux store to preserve app state across page transitions.
-let clientReduxStore = null;
+let clientReduxStore: ?Store = null;
 
 const getReduxStore = (serverState, getEnvironment) => {
   const platformDependencies = { createUuid: uuid.v4, getEnvironment };
@@ -95,6 +96,20 @@ const appQuery = graphql`
 
 export const redirectUrlKey = 'redirectUrl';
 
+const redirectToSignIn = context => {
+  const pathname = encodeURIComponent(context.pathname);
+  const path = `${sitemap.signIn.path}?${redirectUrlKey}=${pathname}`;
+  if (process.browser) {
+    Router.replace(path);
+  } else {
+    context.res.writeHead(303, { Location: path });
+    context.res.end();
+  }
+  // No need to do anything else in case of redirect.
+  // Component will not be rendered.
+  return {};
+};
+
 const app = (
   Page: FunctionalComponent<PageProps>,
   options?: {|
@@ -114,6 +129,7 @@ const app = (
       }
 
       const environment = createRelayEnvironment({
+        reportRelayFetchError,
         token: tryGetClientOrServerTokenFromCookie(context.req),
       });
 
@@ -125,18 +141,7 @@ const app = (
       );
 
       if (requireAuth && !viewer) {
-        // We should probably use universal URL builder.
-        const path = `${sitemap.signIn
-          .path}?${redirectUrlKey}=${encodeURIComponent(context.pathname)}`;
-        if (process.browser) {
-          Router.replace(path);
-        } else {
-          context.res.writeHead(303, { Location: path });
-          context.res.end();
-        }
-        // No need to do anything else in case of redirect.
-        // Component will not be rendered anyway.
-        return {};
+        return redirectToSignIn(context);
       }
 
       // Note we call fetchQuery for client page transitions as well to enable
@@ -198,6 +203,7 @@ const app = (
     createRelayEnvironment(records: Object) {
       this.environment = createRelayEnvironment({
         records,
+        reportRelayFetchError,
         token: tryGetClientOrServerTokenFromCookie(),
       });
     }

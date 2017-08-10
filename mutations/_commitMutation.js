@@ -1,5 +1,5 @@
 // @flow
-import type { Environment } from '../types';
+import type { Environment, Errors } from '../types';
 import { commitMutation as relayCommitMutation } from 'react-relay';
 
 // Custom commitMutation.
@@ -11,7 +11,7 @@ type Config = {
   variables: ?Object,
 };
 
-const mapGraphCoolErrorToAppErrors = (error: Object) => {
+const mapGraphCoolMutationErrorToAppErrors = (error: Object): Errors<*> => {
   // https://facebook.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html
   const code =
     error &&
@@ -19,9 +19,8 @@ const mapGraphCoolErrorToAppErrors = (error: Object) => {
     error.source.errors &&
     error.source.errors[0] &&
     error.source.errors[0].code;
-  // I believe global graph.cool errors handling belongs here.
-  // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo/
-  // TODO: Handle other meaningful codes.
+
+  // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
   switch (code) {
     case 3022:
       return { appError: { type: 'cannotSignInCredentialsInvalid' } };
@@ -37,7 +36,7 @@ const commitMutation = (environment: Environment, config: Config) =>
     relayCommitMutation(environment, {
       ...config,
       onCompleted: response => resolve(response),
-      onError: error => reject(mapGraphCoolErrorToAppErrors(error)),
+      onError: error => reject(mapGraphCoolMutationErrorToAppErrors(error)),
     });
   });
 
