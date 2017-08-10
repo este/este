@@ -1,4 +1,4 @@
-// flow-typed signature: 9a158e654759d6169af5287e4cc875ac
+// flow-typed signature: 87805d4e660e330f9d2b533c9e07046e
 // flow-typed version: <<STUB>>/eslint-plugin-react_v^7.0.1/flow_v0.52.0
 
 /**
@@ -22,6 +22,10 @@ declare module 'eslint-plugin-react' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
+declare module 'eslint-plugin-react/lib/rules/boolean-prop-naming' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/default-props-match-prop-types' {
   declare module.exports: any;
 }
@@ -206,6 +210,10 @@ declare module 'eslint-plugin-react/lib/rules/no-string-refs' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/rules/no-typos' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/no-unescaped-entities' {
   declare module.exports: any;
 }
@@ -215,6 +223,10 @@ declare module 'eslint-plugin-react/lib/rules/no-unknown-property' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/no-unused-prop-types' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/no-unused-state' {
   declare module.exports: any;
 }
 
@@ -304,6 +316,9 @@ declare module 'eslint-plugin-react/index' {
 }
 declare module 'eslint-plugin-react/index.js' {
   declare module.exports: $Exports<'eslint-plugin-react'>;
+}
+declare module 'eslint-plugin-react/lib/rules/boolean-prop-naming.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/boolean-prop-naming'>;
 }
 declare module 'eslint-plugin-react/lib/rules/default-props-match-prop-types.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/default-props-match-prop-types'>;
@@ -443,6 +458,9 @@ declare module 'eslint-plugin-react/lib/rules/no-set-state.js' {
 declare module 'eslint-plugin-react/lib/rules/no-string-refs.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-string-refs'>;
 }
+declare module 'eslint-plugin-react/lib/rules/no-typos.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-typos'>;
+}
 declare module 'eslint-plugin-react/lib/rules/no-unescaped-entities.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unescaped-entities'>;
 }
@@ -451,6 +469,9 @@ declare module 'eslint-plugin-react/lib/rules/no-unknown-property.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/no-unused-prop-types.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-prop-types'>;
+}
+declare module 'eslint-plugin-react/lib/rules/no-unused-state.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-state'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-will-update-set-state.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-will-update-set-state'>;

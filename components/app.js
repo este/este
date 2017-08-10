@@ -187,10 +187,6 @@ const app = (
       }: InitialProps);
     }
 
-    props: AppProps;
-    environment: Object;
-    reduxStore: Store;
-
     constructor(props: AppProps) {
       super(props);
       this.createRelayEnvironment(props.records);
@@ -198,14 +194,6 @@ const app = (
         props.serverState,
         () => this.environment,
       );
-    }
-
-    createRelayEnvironment(records: Object) {
-      this.environment = createRelayEnvironment({
-        records,
-        reportRelayFetchError,
-        token: tryGetClientOrServerTokenFromCookie(),
-      });
     }
 
     componentDidMount() {
@@ -219,6 +207,18 @@ const app = (
         this.createRelayEnvironment(records);
       }
     }
+
+    createRelayEnvironment(records: Object) {
+      this.environment = createRelayEnvironment({
+        records,
+        reportRelayFetchError,
+        token: tryGetClientOrServerTokenFromCookie(),
+      });
+    }
+
+    props: AppProps;
+    environment: Object;
+    reduxStore: Store;
 
     render() {
       const { initialNow, locale, messages, records, ...props } = this.props;
