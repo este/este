@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color and size 1`] = `
+Object {
+  "component": <svg
+    className="a b c d e f g h i j k l m n o"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:18}
+    .j{line-height:24px}
+    .k{top:3}
+    .l{vertical-align:top}
+    .m{fill:blue}
+    .n{height:18}
+    .o{width:18}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <svg
+    className="a b c d e f g h i j k l m n o"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{top:4}
+    .l{vertical-align:top}
+    .m{fill:black}
+    .n{height:16}
+    .o{width:16}",
+}
+`;

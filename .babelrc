@@ -1,15 +1,20 @@
-// This .babelrc is for react-native, webpack server, and gulpfile.babel.js.
-// It's trade-off for super simple React Native integration into Este.
-// Browser babel configuration is in ./webpack/makeConfig.js.
-// Server .babelrc is in ./src/server directory.
-// https://github.com/facebook/react-native/tree/master/babel-preset
 {
-  "presets": ["react-native"],
   "env": {
+    "development": {
+      "presets": ["next/babel"],
+      "plugins": ["relay", ["transform-define", "./env-config.js"]]
+    },
     "production": {
+      "presets": ["next/babel"],
       "plugins": [
-        "transform-react-constant-elements"
+        "relay",
+        ["transform-define", "./env-config.js"],
+        ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
+    },
+    "test": {
+      "presets": [["env", { "modules": "commonjs" }], "next/babel"],
+      "plugins": ["relay", ["transform-define", "./env-config.js"]]
     }
   }
 }

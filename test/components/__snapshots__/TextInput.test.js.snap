@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:blue}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .p{background-color:transparent}
+    .q{outline:none}",
+}
+`;
+
+exports[`disabled 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q r"
+        disabled={true}
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{opacity:0.5}
+    .i{white-space:pre-wrap}
+    .j{overflow-wrap:break-word}
+    .k{-ms-hyphens:auto}
+    .l{color:black}
+    .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .n{font-size:16}
+    .o{line-height:24px}
+    .p::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .q{background-color:transparent}
+    .r{outline:none}",
+}
+`;
+
+exports[`error 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o"
+        >
+            error
+        </div>
+    </div>
+    <input
+        className="g b c h i j p l m n q r s"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:red}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{font-weight:600}
+    .p{color:black}
+    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .r{background-color:transparent}
+    .s{outline:none}",
+}
+`;
+
+exports[`label 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o"
+        >
+            label
+        </div>
+    </div>
+    <input
+        className="g b c h i j k l m n p q r"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{font-weight:600}
+    .p::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .q{background-color:transparent}
+    .r{outline:none}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .p{background-color:transparent}
+    .q{outline:none}",
+}
+`;

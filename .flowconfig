@@ -1,61 +1,19 @@
 [ignore]
-; We fork some components by platform
-.*/*[.]android.js
-
-; Ignore "BUCK" generated dirs
-<PROJECT_ROOT>/\.buckd/
-
-; Ignore unexpected extra "@providesModule"
-.*/node_modules/.*/node_modules/fbjs/.*
-
-; Ignore duplicate module providers
-; For RN Apps installed via npm, "Libraries" folder is inside
-; "node_modules/react-native" but in the source repo it is in the root
-.*/Libraries/react-native/React.js
-.*/Libraries/react-native/ReactNative.js
-
-; Este
-; I don't know why, but this file fails with "Server Property not found in
-; module `http`" in Este. It's ok in clean React Native project.
-.*/node_modules/react-native/local-cli/server/util/inspectorProxy.js
-.*/node_modules/react-static-container/.*
+; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107
+.*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 
 [include]
 
 [libs]
-node_modules/react-native/Libraries/react-native/react-native-interface.js
-node_modules/react-native/flow
-flow/
+types/app.js.flow
 
-; Este
-; github.com/marudor/flowInterfaces/issues/6
-node_modules/iflow-react-intl/index.js.flow
+[lints]
+all=warn
+sketchy-null-bool=off
+sketchy-null-mixed=off
+sketchy-null-string=off
 
 [options]
-emoji=true
-
-module.system=haste
-
-experimental.strict_type_args=true
-
-munge_underscores=true
-
-module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
-
-suppress_type=$FlowIssue
-suppress_type=$FlowFixMe
-suppress_type=$FixMe
-
-; Este, a temp fix for:
-; https://github.com/facebook/react-native/commit/e2ce98b7c6f4f2fc7011c214f9edc1301ff30572
-; TODO: Remove after React Native 0.43
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
-
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(3[0-7]\\|[1-2][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(3[0-7]\\|1[0-9]\\|[1-2][0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
-
-unsafe.enable_getters_and_setters=true
-
-[version]
-^0.38.0
+include_warnings=true
+; TODO: https://github.com/facebook/flow/issues/3728
+;all=true

@@ -1,0 +1,15 @@
+/* @flow */
+
+// env-config
+declare var APP_NAME: string;
+declare var APP_VERSION: string;
+declare var DEFAULT_LOCALE: string;
+declare var GRAPHQL_ENDPOINT: string;
+declare var HOSTNAME: string;
+declare var SENTRY_CLIENT_DNS: string;
+declare var SENTRY_SERVER_DNS: string;
+
+// intl polyfill
+declare var Intl: object;
+
+// TODO: Add Next.js process.browser, if possible.
