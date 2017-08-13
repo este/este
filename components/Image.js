@@ -2,15 +2,17 @@
 import Box, { type BoxProps } from './Box';
 import withTheme, { type ThemeContext } from './withTheme';
 
-// Image requires size to prevents flash of unloaded content.
-// TODO: Make it responsive.
+// For UI images, use size prop to enforce size and vertical rhythm.
+// For responsive content images like photos, use relative % width.
+
+// It’s impossible to ensure vertical rhythm on responsive images without
+// runtime measurement with predefined aspect ratio.
+// Perfectionism kills productivity. It's good enough as is.
 
 type ImageProps = BoxProps & {
-  size: {|
-    height: number,
-    width: number,
-  |},
+  size?: {| height: number, width: number |},
   src: string,
+  srcset?: string,
 };
 
 const heightToNearestBaseline = (height, lineHeight) => {
@@ -34,7 +36,7 @@ const Image = (props: ImageProps, { theme }: ThemeContext) => {
   return (
     <Box
       as={as}
-      {...verticalRhythmSize(size, theme.typography.lineHeight)}
+      {...(size ? verticalRhythmSize(size, theme.typography.lineHeight) : null)}
       {...restProps}
     />
   );

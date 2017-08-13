@@ -99,7 +99,7 @@ export default class MyDocument extends Document {
           />
           <meta
             name="viewport"
-            // kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9
+            // http://kihlstrom.com/2015/shrink-to-fit-no-fixes-zoom-problem-in-ios-9/
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           {alternateHreflangLinks}

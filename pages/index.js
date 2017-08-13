@@ -47,12 +47,17 @@ const Index = ({ intl, viewer }) =>
       {/* Styled text link. */}
       <A href="https://github.com/este/este">github.com/este/este</A>
     </P>
-    <Image
-      alt="50x50 placeholder"
-      marginBottom={1}
-      size={{ height: 50, width: 50 }}
-      src="/static/50x50.png"
-    />
+    <P>
+      <Image
+        alt="50x50 placeholder"
+        marginBottom={1}
+        // For UI images, use size prop to enforce size and vertical rhythm.
+        size={{ height: 50, width: 50 }}
+        // For responsive content images like photos, use relative % width.
+        // width="4%"
+        src="/static/50x50.png"
+      />
+    </P>
     <Text>
       <FormattedMessage defaultMessage="normal text" id="index.normalText" />
     </Text>
