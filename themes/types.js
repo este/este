@@ -60,6 +60,7 @@ export type Theme = {
   },
   p: {
     marginBottom: number,
+    maxWidth: number,
   },
   set: {
     marginBottom: number,

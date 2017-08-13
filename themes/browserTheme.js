@@ -3,6 +3,8 @@ import type { Theme } from './types';
 import openColor from './openColor';
 import typography from './typography';
 
+// TODO: Use exact types, they will work with spread soon.
+
 export const browserTheme: Theme = {
   typography: typography({
     fontSize: 16,
@@ -37,6 +39,7 @@ export const browserTheme: Theme = {
   },
   p: {
     marginBottom: 1,
+    maxWidth: 28,
   },
   set: {
     marginBottom: 1,
