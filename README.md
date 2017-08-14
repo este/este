@@ -15,18 +15,17 @@ Universal React. Explore the source code.
 - [yarn](https://yarnpkg.com/)
 - [graphql-cli](https://github.com/graphcool/graphql-cli)
 
-## Start Development
+## Try it
 
 - `git clone https://github.com/este/este.git este`
 - `cd este`
 - `yarn`
 - `yarn dev`
 
-## Customize
+## Create New Project
 
-- set name in `package.json`
-- update `env-config.js`
-- `yarn favicon`
+- `yarn init` in project dir
+- copy paste file by file from Este, think about it
 
 ## Links
 
