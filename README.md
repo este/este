@@ -25,8 +25,10 @@ Universal React. Explore the source code.
 ## Customize
 
 - set name in `package.json`
-- update `env-config.js`
+- update `.circleci/config.yml`, `.graphqlconfig`, `env-config.js`
 - `yarn favicon`
+- remove examples from `mutations`, `pages`, `reducers`, `pages`
+- etc.
 
 ## Links
 
