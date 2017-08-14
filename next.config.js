@@ -12,7 +12,7 @@ module.exports = {
           analyzerMode: 'server',
           analyzerPort: 8888,
           openAnalyzer: true,
-        }),
+        })
       );
     }
 
