@@ -22,7 +22,7 @@
     "analyze": "cross-env ANALYZE=1 next build",
     "relay": "relay-compiler --src ./ --exclude **/.next/** **/flow-typed/** **/node_modules/** **/test/**  **/__generated__/** --schema data/schema.graphql",
     "relay:watch": "yarn relay -- --watch",
-    "schema": "node scripts/schema.js"
+    "schema": "graphql get-schema prod"
   },
   "dependencies": {
     "accepts": "^1.3.3",
