@@ -14,6 +14,7 @@ Universal React. Explore the source code.
 - [node.js](http://nodejs.org/) Node 8+
 - [yarn](https://yarnpkg.com/)
 - [graphql-cli](https://github.com/graphcool/graphql-cli)
+- [flow-typed](https://github.com/flowtype/flow-typed)
 
 ## Start Development
 
