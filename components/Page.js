@@ -1,5 +1,5 @@
 // @flow
-import type { State, Viewer } from '../types';
+import type { State } from '../types';
 import A from './A';
 import AppError from './AppError';
 import Baseline from './Baseline';
@@ -51,7 +51,7 @@ const PageFooter = () =>
 // https://facebook.github.io/react/docs/context.html#updating-context
 const forceRenderOnThemeChange = theme => ({ key: JSON.stringify(theme) });
 
-const Page = ({ children, darkEnabled, title, viewer }) => {
+const Page = ({ children, darkEnabled, title }) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
@@ -71,7 +71,7 @@ const Page = ({ children, darkEnabled, title, viewer }) => {
         <LoadingBar />
         <AppError />
         <PageContainer>
-          <MainNav title={title} isAuthenticated={!!viewer} />
+          <MainNav title={title} />
           <PageBody>
             {children}
           </PageBody>
@@ -85,7 +85,6 @@ const Page = ({ children, darkEnabled, title, viewer }) => {
 type PageOwnProps = {|
   children?: ?any,
   title: string,
-  viewer: Viewer,
 |};
 
 type PageProps = PageOwnProps & {|

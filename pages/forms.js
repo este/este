@@ -8,8 +8,8 @@ import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';
 
-const Forms = ({ intl, viewer }) =>
-  <Page title={intl.formatMessage(sitemap.forms.title)} viewer={viewer}>
+const Forms = ({ intl }) =>
+  <Page title={intl.formatMessage(sitemap.forms.title)}>
     <Heading size={3}>
       {intl.formatMessage(sitemap.forms.title)}
     </Heading>

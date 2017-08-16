@@ -7,10 +7,10 @@ import app from '../components/app';
 import sitemap from '../lib/sitemap';
 import { FormattedDate, FormattedNumber, FormattedRelative } from 'react-intl';
 
-const Forms = ({ intl, url: { pathname }, viewer }) => {
+const Forms = ({ intl, url: { pathname } }) => {
   const now = Date.now();
   return (
-    <Page title={intl.formatMessage(sitemap.i18n.title)} viewer={viewer}>
+    <Page title={intl.formatMessage(sitemap.i18n.title)}>
       <Heading size={3}>
         {intl.formatMessage(sitemap.i18n.title)}
       </Heading>

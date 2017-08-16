@@ -4,8 +4,8 @@ import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 
-const SignIn = ({ intl, viewer }) =>
-  <Page title={intl.formatMessage(sitemap.signIn.title)} viewer={viewer}>
+const SignIn = ({ intl }) =>
+  <Page title={intl.formatMessage(sitemap.signIn.title)}>
     <AuthForm />
   </Page>;
 

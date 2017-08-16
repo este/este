@@ -5,18 +5,22 @@ import P from '../components/P';
 import Page from '../components/Page';
 import Set from '../components/Set';
 import app from '../components/app';
-import cookie from 'cookie';
 import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
+import { serialize as serializeCookie } from 'cookie';
 
-const signOut = () => {
+const deleteCookie = () => {
   // eslint-disable-next-line no-undef
-  document.cookie = cookie.serialize('token', '', {
+  document.cookie = serializeCookie('token', '', {
     // Expire the cookie immediately.
     maxAge: -1,
   });
+};
+
+export const signOut = () => {
+  deleteCookie();
   // Force full reload. Purging Relay environment and Redux store is not enough.
   // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
   // eslint-disable-next-line no-undef
@@ -31,12 +35,12 @@ const getGravatarUrl = email =>
     s: '100',
   });
 
-const Me = ({ data, intl, viewer }) => {
-  // Force type via any cast.
+const Me = ({ data, intl }) => {
+  // Force type via any cast. Can we do it better?
   const { viewer: { user } } = ((data: any): meQueryResponse);
   if (!user) return null;
   return (
-    <Page title={intl.formatMessage(sitemap.me.title)} viewer={viewer}>
+    <Page title={intl.formatMessage(sitemap.me.title)}>
       <P bold>
         {user.email}
       </P>

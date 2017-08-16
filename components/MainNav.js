@@ -1,9 +1,10 @@
 // @flow
-import type { FunctionalComponent } from '../types';
-import type { IntlShape } from 'react-intl';
 import A from './A';
 import Box from './Box';
+import PropTypes from 'prop-types';
 import sitemap from '../lib/sitemap';
+import type { FunctionalComponent } from '../types';
+import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 const { me, signIn, ...pages } = sitemap;
@@ -25,11 +26,10 @@ const NavA = ({ intl, page, title, ...props }) =>
 
 type MainNavProps = {|
   intl: IntlShape,
-  isAuthenticated: boolean,
   title: string,
 |};
 
-const MainNav = ({ intl, title, isAuthenticated }: MainNavProps) => {
+const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
   const authPage = isAuthenticated ? me : signIn;
   return (
     <Box
@@ -48,8 +48,9 @@ const MainNav = ({ intl, title, isAuthenticated }: MainNavProps) => {
   );
 };
 
+MainNav.contextTypes = { isAuthenticated: PropTypes.bool };
+
 // Should be handled by injectIntl type.
 export default (injectIntl(MainNav): FunctionalComponent<{|
-  isAuthenticated: boolean,
   title: string,
 |}>);
