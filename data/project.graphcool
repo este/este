@@ -1,5 +1,5 @@
-# project: Este
-# version: 11
+# projectId: cj4iytrfz6tgx0192svkjh324
+# version: 55
 
 type File implements Node {
   contentType: String!
@@ -18,6 +18,7 @@ type User implements Node {
   updatedAt: DateTime!
   email: String @isUnique
   password: String
+  posts: [Post!]! @relation(name: "PostAuthor")
 }
 
 type Post implements Node {
@@ -25,4 +26,5 @@ type Post implements Node {
   id: ID! @isUnique
   text: String!
   updatedAt: DateTime!
+  author: User! @relation(name: "PostAuthor")
 }
