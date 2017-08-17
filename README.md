@@ -31,6 +31,10 @@ Universal React. Explore the source code.
 - remove examples from `mutations`, `pages`, `reducers`, `pages`
 - etc.
 
+## Random Notes
+
+- [Internet Explorer is not supported](https://www.microsoft.com/en-us/windowsforbusiness/end-of-ie-support). 
+
 ## Links
 
 - [medium.com/@steida](https://medium.com/@steida/)
