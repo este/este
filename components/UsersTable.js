@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { State, Dispatch } from '../types';
 import type { UserFormFields } from '../reducers/users';
 import Box from './Box';
@@ -41,7 +42,6 @@ const RowForm = ({
     dispatch({
       type: 'SET_USER_FORM',
       id: user.id,
-      // $FlowFixMe
       fields: { ...fields, [prop]: value },
     });
   };
@@ -49,7 +49,6 @@ const RowForm = ({
     dispatch({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
   };
   const saveUser = () => {
-    // $FlowFixMe
     dispatch({ type: 'SAVE_USER', user: fields });
   };
   const cancelEditation = () => {

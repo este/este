@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Posts_viewer } from './__generated__/Posts_viewer.graphql';
 import Box from './Box';
 import Post from './Post';
@@ -20,7 +21,6 @@ const Posts = ({ viewer }: { viewer: Posts_viewer }) =>
 export default createFragmentContainer(
   Posts,
   graphql`
-    # FileName_propName
     fragment Posts_viewer on Viewer {
       allPosts(first: $first, orderBy: createdAt_DESC)
         @connection(key: "Posts_allPosts") {

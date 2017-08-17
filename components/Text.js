@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Color, Theme } from '../themes/types';
 import Box, { type BoxProps } from './Box';
 import colorLib from 'color';

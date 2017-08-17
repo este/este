@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import testRenderer from 'react-test-renderer';
 import { Provider as FelaProvider, ThemeProvider } from 'react-fela';
 import { createRenderer as createFelaRenderer } from 'fela';

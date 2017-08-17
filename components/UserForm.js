@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Dispatch, Form as FormType, State } from '../types';
 import type { UserFormFields, UserGender } from '../reducers/users';
 import type { IntlShape } from 'react-intl';

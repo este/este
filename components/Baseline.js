@@ -1,7 +1,7 @@
 // @flow
-import type { Children } from 'react';
 import type { State } from '../types';
 import type { Theme } from '../themes/types';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 type BaselineProps = {|
   baselineShown: boolean,
-  children?: Children,
+  children?: React.Node,
 |};
 
 type BaselineContext = {
@@ -49,7 +49,6 @@ Baseline.contextTypes = {
   theme: PropTypes.object,
 };
 
-// $FlowFixMe react-redux doesn't support context on StatelessComponent
 export default connect((state: State) => ({
   baselineShown: state.app.baselineShown,
 }))(Baseline);

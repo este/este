@@ -1,13 +1,8 @@
 // @flow
 import type { IntlShape } from 'react-intl';
-import type {
-  Store,
-  ServerState,
-  FunctionalComponent,
-  GraphCoolError,
-} from '../types';
+import type { Store, ServerState, GraphCoolError } from '../types';
+import * as React from 'react';
 import IsAuthenticatedProvider from './IsAuthenticatedProvider';
-import React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
@@ -19,7 +14,6 @@ import sitemap from '../lib/sitemap';
 import uuid from 'uuid';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
-// $FlowFixMe Bug in type definitions.
 import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { parse as parseCookie } from 'cookie';
@@ -108,7 +102,7 @@ const onRelayError = error => {
 };
 
 const app = (
-  Page: FunctionalComponent<PageProps>,
+  Page: React.ComponentType<PageProps>,
   options?: {|
     fetch?: Object,
     prepareQuery?: Object => Object,
@@ -159,7 +153,7 @@ const app = (
 
   App.getInitialProps = async context => {
     let pageInitialProps = {};
-    if (Page.getInitialProps) {
+    if (typeof Page.getInitialProps === 'function') {
       pageInitialProps = await Page.getInitialProps(context);
     }
 

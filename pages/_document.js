@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import felaRenderer from '../lib/felaRenderer';
 import { renderToSheetList } from 'fela-dom';

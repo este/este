@@ -1,8 +1,9 @@
 // @flow
+import React from 'react';
 import type { State } from '../types';
 import Text from './Text';
 import Set from './Set';
-import { connect, type Connector } from 'react-redux';
+import { connect } from 'react-redux';
 
 // TODO: i18n subdomain for production.
 const getLocaleHref = (pathname, defaultLocale, locale) => {
@@ -26,14 +27,12 @@ const SwitchLocale = ({ pathname, defaultLocale, locale, supportedLocales }) =>
     )}
   </Set>;
 
-type ConnectorProps = {
-  pathname: string,
-};
+// type ConnectorProps = {
+//   pathname: string,
+// };
 
-const connector: Connector<ConnectorProps, *> = connect((state: State) => ({
+export default connect((state: State) => ({
   defaultLocale: state.app.defaultLocale,
   locale: state.app.locale,
   supportedLocales: state.app.supportedLocales,
-}));
-
-export default connector(SwitchLocale);
+}))(SwitchLocale);

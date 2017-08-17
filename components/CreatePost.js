@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { CreatePost_viewer } from './__generated__/CreatePost_viewer.graphql';
 import type { Dispatch, Form, State } from '../types';
 import type { PostFormFields } from '../reducers/posts';

@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { State } from '../types';
 import A from './A';
 import AppError from './AppError';
@@ -11,7 +12,7 @@ import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect, type Connector } from 'react-redux';
+import { connect } from 'react-redux';
 
 const PageContainer = ({ children }) =>
   <Box
@@ -82,20 +83,15 @@ const Page = ({ children, darkEnabled, title }) => {
   );
 };
 
-type PageOwnProps = {|
-  children?: ?any,
-  title: string,
-|};
+// type PageOwnProps = {|
+//   children?: ?any,
+//   title: string,
+// |};
+//
+// type PageProps = PageOwnProps & {|
+//   darkEnabled: boolean,
+// |};
 
-type PageProps = PageOwnProps & {|
-  darkEnabled: boolean,
-|};
-
-const connector: Connector<
-  PageOwnProps,
-  PageProps,
-> = connect((state: State) => ({
+export default connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}));
-
-export default connector(Page);
+}))(Page);

@@ -1,5 +1,5 @@
 // @flow
-import React, { type Element } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 // Declarative (and soon universal) focus.
@@ -7,11 +7,11 @@ import ReactDOM from 'react-dom';
 
 type AutoFocusProps = {
   autoFocus?: any,
-  children: Element<*>,
+  children: React.Element<any>,
 };
 
 // Class, because we focus only when focus prop has been changed.
-class AutoFocus extends React.Component {
+class AutoFocus extends React.Component<AutoFocusProps> {
   componentDidMount() {
     this.focus();
   }
@@ -23,8 +23,6 @@ class AutoFocus extends React.Component {
     if (!autoFocusChanged) return;
     this.focus();
   }
-
-  props: AutoFocusProps;
 
   focus() {
     // eslint-disable-next-line react/no-find-dom-node

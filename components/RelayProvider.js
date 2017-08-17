@@ -1,11 +1,17 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // Thank you https://github.com/robrichard
 // https://github.com/robrichard/relay-context-provider
 
-class RelayProvider extends React.Component {
+type Props = {
+  children: React.Element<any>,
+  environment: Object,
+  variables: Object,
+};
+
+class RelayProvider extends React.Component<Props> {
   getChildContext() {
     return {
       relay: {

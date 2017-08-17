@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { ValidationError as ValidationErrorType } from '../lib/validate';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';

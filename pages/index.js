@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import A from '../components/A';
 import Blockquote from '../components/Blockquote';
 import Button from '../components/Button';

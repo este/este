@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Heading from '../components/Heading';
 import P from '../components/P';
 import Page from '../components/Page';

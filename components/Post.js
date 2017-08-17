@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Post_post } from './__generated__/Post_post.graphql';
 import type { Post_viewer } from './__generated__/Post_viewer.graphql';
 import Box from './Box';

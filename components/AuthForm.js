@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Dispatch, Form as FormType, State } from '../types';
 import type { AuthFormFields } from '../reducers/auth';
 import Box from './Box';

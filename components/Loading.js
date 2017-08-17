@@ -1,11 +1,7 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Text, { type TextProps } from './Text';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
-
-type LoadingProps = TextProps & {
-  intl: IntlShape,
-};
 
 const messages = defineMessages({
   loading: {
@@ -14,7 +10,15 @@ const messages = defineMessages({
   },
 });
 
-class Loading extends React.Component {
+type LoadingProps = TextProps & {
+  intl: IntlShape,
+};
+
+type LoadingState = {
+  messageShown: boolean,
+};
+
+class Loading extends React.Component<LoadingProps, LoadingState> {
   state = {
     messageShown: false,
   };
@@ -30,7 +34,6 @@ class Loading extends React.Component {
   }
 
   timer: number;
-  props: LoadingProps;
 
   render() {
     const { messageShown } = this.state;

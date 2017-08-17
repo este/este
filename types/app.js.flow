@@ -9,7 +9,7 @@ declare var HOSTNAME: string;
 declare var SENTRY_CLIENT_DNS: string;
 declare var SENTRY_SERVER_DNS: string;
 
-// intl polyfill
-declare var Intl: object;
+// server.js
+declare var Intl: Object;
 
 // TODO: Add Next.js process.browser, if possible.

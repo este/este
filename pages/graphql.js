@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { graphqlQueryResponse } from './__generated__/graphqlQuery.graphql';
 import A from '../components/A';
 import Posts from '../components/Posts';

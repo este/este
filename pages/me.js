@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import Image from '../components/Image';
 import P from '../components/P';

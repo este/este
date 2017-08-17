@@ -1,9 +1,8 @@
 // @flow
 import type { Color } from '../themes/types';
-import type { FunctionalComponent } from '../types';
+import * as React from 'react';
 import AutoFocus from './AutoFocus';
 import PropTypes from 'prop-types';
-import React, { type Children } from 'react';
 import withTheme, { type ThemeContext } from './withTheme';
 
 /*
@@ -32,9 +31,9 @@ import withTheme, { type ThemeContext } from './withTheme';
 type MaybeRhythm = number | string;
 
 export type BoxProps = {
-  children?: Children,
+  children?: React.Node,
 
-  as?: string | FunctionalComponent<Object>,
+  as?: React.ElementType,
   autoFocus?: ?Object,
   isReactNative?: boolean,
   style?: Object,

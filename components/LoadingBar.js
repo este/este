@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 

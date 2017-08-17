@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import TextInputBig from '../../components/TextInputBig';
 import { createExpectRender } from './utils';
 

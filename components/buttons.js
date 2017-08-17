@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Button, { type ButtonProps } from './Button';
 import { FormattedMessage } from 'react-intl';
 

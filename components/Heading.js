@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Text, { type TextProps } from './Text';
 import withTheme, { type ThemeContext } from './withTheme';
 

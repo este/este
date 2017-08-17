@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { State, Dispatch } from '../types';
 import Button from './Button';
 import { connect } from 'react-redux';

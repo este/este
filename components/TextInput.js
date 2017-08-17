@@ -1,5 +1,5 @@
 // @flow
-import type { Element } from 'react';
+import * as React from 'react';
 import Box from './Box';
 import Set from './Set';
 import Text, { type TextProps } from './Text';
@@ -14,8 +14,8 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,
-  error?: string | Element<*>,
-  label?: string | Element<*>,
+  error?: string | React$Element<any>,
+  label?: string | React$Element<any>,
   maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
@@ -78,7 +78,7 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
           : null)}
         {...(onSubmitEditing
           ? {
-              onKeyDown: (e: SyntheticKeyboardEvent) => {
+              onKeyDown: (e: SyntheticKeyboardEvent<>) => {
                 if (e.key !== 'Enter') return;
                 onSubmitEditing();
               },

@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import type { Environment, Id } from '../types';
 import AreYouSureConfirm from './AreYouSureConfirm';
 import DeletePostMutation from '../mutations/DeletePostMutation';

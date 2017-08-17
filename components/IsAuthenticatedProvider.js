@@ -1,11 +1,18 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // isAuthenticated is a cross-cutting concern. It's the same for the whole app
 // so it doesn't make sense to pass it via props, which are component specific.
 
-class IsAuthenticatedProvider extends React.Component {
+type IsAuthenticatedProviderProps = {
+  children: React.Node,
+  isAuthenticated: boolean,
+};
+
+class IsAuthenticatedProvider extends React.Component<
+  IsAuthenticatedProviderProps,
+> {
   getChildContext() {
     return { isAuthenticated: this.props.isAuthenticated };
   }

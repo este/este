@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Box from '../../components/Box';
 import { createExpectRender } from './utils';
 
@@ -36,6 +37,7 @@ test('render with children', () => {
 test('as', () => {
   const SomeComponent = jest.fn(() => null);
   const SomeComponentStyledAsBox = props =>
+    // $FlowFixMe
     <Box as={SomeComponent} {...props} />;
   expectRender(() => <SomeComponentStyledAsBox someCustomProp="1" />);
   expect(SomeComponent).toHaveBeenCalledTimes(1);

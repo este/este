@@ -112,11 +112,6 @@ export type Epic = (
   dependencies: Dependencies,
 ) => Observable;
 
-export type FunctionalComponent<P> = (
-  props: P,
-  context: any,
-) => ?React$Element<any>;
-
 // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo/
 export type GraphCoolError = Array<{
   code: number,

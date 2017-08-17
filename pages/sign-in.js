@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import AuthForm from '../components/AuthForm';
 import Page from '../components/Page';
 import app from '../components/app';
