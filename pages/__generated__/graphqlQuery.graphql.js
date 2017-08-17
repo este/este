@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a50d602cac357feff79a6f42015339a6
+ * @relayHash cbba1dc4dc2c3c40f752ac6074c27737
  */
 
 /* eslint-disable */
@@ -52,8 +52,6 @@ fragment Posts_viewer on Viewer {
       pageInfo {
         endCursor
         hasNextPage
-        hasPreviousPage
-        startCursor
       }
     }
   }
@@ -326,20 +324,6 @@ const batch /*: ConcreteBatch*/ = {
                             "args": null,
                             "name": "hasNextPage",
                             "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "hasPreviousPage",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "startCursor",
-                            "storageKey": null
                           }
                         ],
                         "storageKey": null
@@ -380,7 +364,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...Posts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n\nfragment Posts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  author {\n    email\n    id\n  }\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n"
+  "text": "query graphqlQuery(\n  $first: Int\n) {\n  viewer {\n    ...CreatePost_viewer\n    ...Posts_viewer\n    id\n  }\n}\n\nfragment CreatePost_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n\nfragment Posts_viewer on Viewer {\n  allPosts(first: $first, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...Post_post\n      }\n    }\n    ... on PostConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n  ...Post_viewer\n}\n\nfragment Post_post on Post {\n  author {\n    email\n    id\n  }\n  createdAt\n  id\n  text\n}\n\nfragment Post_viewer on Viewer {\n  id\n  user {\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

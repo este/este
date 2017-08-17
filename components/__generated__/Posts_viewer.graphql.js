@@ -91,6 +91,73 @@ const fragment /*: ConcreteFragment*/ = {
             }
           ],
           "storageKey": null
+        },
+        {
+          "kind": "InlineFragment",
+          "type": "PostConnection",
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "PostEdge",
+              "name": "edges",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "cursor",
+                  "storageKey": null
+                },
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "Post",
+                  "name": "node",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "__typename",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            },
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "args": null,
+              "concreteType": "PageInfo",
+              "name": "pageInfo",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "endCursor",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "hasNextPage",
+                  "storageKey": null
+                }
+              ],
+              "storageKey": null
+            }
+          ]
         }
       ],
       "storageKey": "__Posts_allPosts_connection{\"orderBy\":\"createdAt_DESC\"}"
