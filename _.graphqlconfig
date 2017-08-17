@@ -1,0 +1,12 @@
+// It's super awesome to have live linting and auto-complete in Atom!
+// Unfortunately, it warns about perfect valid connection directive:
+// Error GraphQL: Validation components/Posts.js 26 Unknown directive "connection".
+// So, let's wait for fix.
+{
+  "schemaPath": "data/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "prod": "https://api.graph.cool/relay/v1/Este"
+    }
+  }
+}
