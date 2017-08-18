@@ -10,7 +10,7 @@ module.exports = {
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
     window: true,
-    // Flow
+    // Flow. TODO: There must be a better way.
     $Diff: true,
     $Exact: true,
     $Keys: true,

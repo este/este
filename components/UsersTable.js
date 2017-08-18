@@ -141,6 +141,7 @@ const RowForm = ({
   );
 };
 
+// $FlowFixMe
 const ConnectedRowForm = connect(
   ({ users: { form, selected } }: State, { user: { id } }) => ({
     form: form.changed[id] || form.initial,

@@ -16,6 +16,7 @@ module.exports = {
       );
     }
 
+    // We are using eslint-loader in webpack to lint only imported modules.
     const eslintRule = {
       test: /\.js$/,
       enforce: 'pre',

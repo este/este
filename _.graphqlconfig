@@ -2,6 +2,7 @@
 // Unfortunately, it warns about perfect valid connection directive:
 // Error GraphQL: Validation components/Posts.js 26 Unknown directive "connection".
 // So, let's wait for fix.
+// https://github.com/facebook/nuclide/issues/1268
 {
   "schemaPath": "data/schema.graphql",
   "extensions": {

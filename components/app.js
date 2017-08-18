@@ -14,6 +14,7 @@ import sitemap from '../lib/sitemap';
 import uuid from 'uuid';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
+// $FlowFixMe https://github.com/flowtype/flow-typed/issues/1154
 import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { parse as parseCookie } from 'cookie';
@@ -128,7 +129,7 @@ const app = (
       token,
     });
     const reduxStore = getReduxStore(serverState, () => environment);
-    // Workaround for obsolete warning.
+    // Workaround for obsolete warning. We don't want to cache reduxStore.
     // https://github.com/reactjs/react-redux/blob/master/src/components/Provider.js#L13
     const ReduxProvider = createReduxProvider();
 
