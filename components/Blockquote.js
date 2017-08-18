@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
+import React, { type Node } from 'react';
 import A from './A';
 import P from './P';
 import Text from './Text';
 
 type BlockquoteProps = {|
-  children: React.Node,
+  children: Node,
   href: string,
   source: string,
 |};

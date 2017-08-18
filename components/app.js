@@ -1,8 +1,8 @@
 // @flow
 import type { IntlShape } from 'react-intl';
 import type { Store, ServerState, GraphCoolError } from '../types';
-import * as React from 'react';
 import IsAuthenticatedProvider from './IsAuthenticatedProvider';
+import React, { type ComponentType } from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
@@ -102,7 +102,7 @@ const onRelayError = error => {
 };
 
 const app = (
-  Page: React.ComponentType<PageProps>,
+  Page: ComponentType<PageProps>,
   options?: {|
     fetch?: Object,
     prepareQuery?: Object => Object,

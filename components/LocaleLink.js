@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
 import NextLink from 'next/link';
-import * as React from 'react';
+import React, { type Element } from 'react';
 import parse from 'url-parse';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 // TODO: Use subdomain for production.
 
 type LocaleLinkProps = {
-  children: React.Element<any>,
+  children: Element<any>,
   href: string,
   prefetch?: boolean,
   locale: *,

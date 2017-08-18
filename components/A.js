@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import LocaleLink from './LocaleLink';
 import Text, { type TextProps } from './Text';
 

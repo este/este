@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { type Node } from 'react';
 import LocaleLink from './LocaleLink';
 
 // Generic link without styles.
@@ -7,7 +7,7 @@ import LocaleLink from './LocaleLink';
 // For text, use A.
 
 type LinkProps = {|
-  children?: React.Node,
+  children: Node,
   href: string,
   prefetch?: boolean,
 |};
