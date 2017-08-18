@@ -82,11 +82,11 @@ export type Theme = {
     disabledOpacity: number,
   },
   checkbox: {
-    checkedIcon: React$Element<any>,
-    uncheckedIcon: React$Element<any>,
+    checkedIcon: Element<'svg'>,
+    uncheckedIcon: Element<'svg'>,
   },
   radio: {
-    checkedIcon: React$Element<any>,
-    uncheckedIcon: React$Element<any>,
+    checkedIcon: Element<'svg'>,
+    uncheckedIcon: Element<'svg'>,
   },
 };

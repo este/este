@@ -19,8 +19,6 @@ module.exports = {
     EventHandler: true,
     HTMLInputElement: true,
     KeyboardEvent: true,
-    React$Element: true,
-    ReactClass: true,
     SyntheticKeyboardEvent: true,
   },
   // AirBnb is great, but very strict. Feel free to relax any rule.

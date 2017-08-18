@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type Element } from 'react';
 import Box from './Box';
 import Set from './Set';
 import Text, { type TextProps } from './Text';
@@ -14,8 +14,8 @@ import withTheme, { type ThemeContext } from './withTheme';
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,
-  error?: string | React$Element<any>,
-  label?: string | React$Element<any>,
+  error?: string | Element<any>,
+  label?: string | Element<any>,
   maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,

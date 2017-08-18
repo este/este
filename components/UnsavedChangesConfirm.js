@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
+import React, { type Node } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 type UnsavedChangesConfirmProps = {|
-  render: (() => boolean) => React$Element<any>,
+  render: (() => boolean) => Node,
 |};
 
 const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) =>
