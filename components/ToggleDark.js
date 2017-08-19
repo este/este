@@ -1,22 +1,17 @@
 // @flow
-import React from 'react';
 import type { State, Dispatch } from '../types';
 import Button from './Button';
+import React from 'react';
 import { connect } from 'react-redux';
 
 // Toggle dark mode.
 
-type ToggleDarkProps = {
-  darkEnabled: *,
-  dispatch: Dispatch,
-};
-
-const ToggleDark = ({ darkEnabled, dispatch }: ToggleDarkProps) =>
+const ToggleDark = ({ darkEnabled, dispatch }) =>
   <Button
     primary
     outline
     size={-1}
-    onPress={() => dispatch({ type: 'TOGGLE_DARK' })}
+    onPress={() => (dispatch: Dispatch)({ type: 'TOGGLE_DARK' })}
   >
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
   </Button>;

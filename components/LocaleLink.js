@@ -3,27 +3,12 @@ import type { State } from '../types';
 import NextLink from 'next/link';
 import React, { type Element } from 'react';
 import parse from 'url-parse';
-import { connect } from 'react-redux';
+import { connect, type Connector } from 'react-redux';
 
-// For domain example.com, do not anything with a link.
-// For i18n domain example.com?locale=foo, add locale=foo to a link.
+// Link with current locale in query.
 // TODO: Use subdomain for production.
 
-type LocaleLinkProps = {
-  children: Element<any>,
-  href: string,
-  prefetch?: boolean,
-  locale: *,
-  defaultLocale: *,
-};
-
-const LocaleLink = ({
-  children,
-  href,
-  prefetch,
-  locale,
-  defaultLocale,
-}: LocaleLinkProps) => {
+const LocaleLink = ({ children, href, prefetch, locale, defaultLocale }) => {
   let localeHref = href;
   const parsed = parse(href, true);
   const isRelative = href.charAt(0) === '/';
@@ -42,7 +27,20 @@ const LocaleLink = ({
   );
 };
 
-export default connect(({ app }: State) => ({
+type OwnProps = {
+  href: string,
+  children: Element<any>,
+  prefetch?: boolean,
+};
+
+type Props = OwnProps & {
+  locale: string,
+  defaultLocale: string,
+};
+
+const connector: Connector<OwnProps, Props> = connect(({ app }: State) => ({
   locale: app.locale,
   defaultLocale: app.defaultLocale,
-}))(LocaleLink);
+}));
+
+export default connector(LocaleLink);

@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
 import type { IntlShape } from 'react-intl';
 import A from './A';
 import Box from './Box';
 import PropTypes from 'prop-types';
+import React from 'react';
 import sitemap from '../lib/sitemap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -50,5 +50,5 @@ const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
 
 MainNav.contextTypes = { isAuthenticated: PropTypes.bool };
 
-// TODO: Enforce title.
+// TODO: Enforce title. Blocked by obsolete react-intl types.
 export default injectIntl(MainNav);

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 export type ThemeContext = { theme: Theme };
 
-// TODO: It should be higher order component. We are waiting for Flow update.
 const withTheme = (Component: ComponentType<*>) => {
   // $FlowFixMe
   Component.contextTypes = {

@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import type { State, Dispatch } from '../types';
 import type { UserFormFields } from '../reducers/users';
 import Box from './Box';
@@ -7,6 +6,7 @@ import Button from './Button';
 import Checkbox from './Checkbox';
 import Heading from './Heading';
 import P from './P';
+import React from 'react';
 import Set from './Set';
 import Text from './Text';
 import TextInput from './TextInput';
@@ -19,23 +19,7 @@ import { temp } from '../lib/temp';
 // 1) Do not nest the same redux connect selected states.
 // 2) For huge lists, use react-virtualized.
 
-type RowFormProps = {
-  dispatch: Dispatch,
-  field: 'select' | 'name' | 'likesCats' | 'likesDogs',
-  form: *,
-  isDirty: *,
-  selected: *,
-  user: *,
-};
-
-const RowForm = ({
-  dispatch,
-  field,
-  form,
-  isDirty,
-  selected,
-  user,
-}: RowFormProps) => {
+const RowForm = ({ dispatch, field, form, isDirty, selected, user }) => {
   const fields = isDirty ? form.fields : user;
   const disabled = temp(form.disabled);
   const set = (prop: $Keys<UserFormFields>) => value => {
@@ -46,7 +30,7 @@ const RowForm = ({
     });
   };
   const toggleUsersSelection = () => {
-    dispatch({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
+    (dispatch: Dispatch)({ type: 'TOGGLE_USERS_SELECTION', users: [user] });
   };
   const saveUser = () => {
     dispatch({ type: 'SAVE_USER', user: fields });
@@ -141,7 +125,6 @@ const RowForm = ({
   );
 };
 
-// $FlowFixMe
 const ConnectedRowForm = connect(
   ({ users: { form, selected } }: State, { user: { id } }) => ({
     form: form.changed[id] || form.initial,
@@ -150,12 +133,7 @@ const ConnectedRowForm = connect(
   }),
 )(RowForm);
 
-type DeleteSelectedProps = {
-  selected: *,
-  dispatch: Dispatch,
-};
-
-const DeleteSelected = ({ selected, dispatch }: DeleteSelectedProps) =>
+const DeleteSelected = ({ selected, dispatch }) =>
   <Button
     color="warning"
     disabled={Object.keys(selected).length === 0}
@@ -171,17 +149,7 @@ const ConnectedDeleteSelected = connect(({ users }: State) => ({
   selected: users.selected,
 }))(DeleteSelected);
 
-type ToggleUsersSelectionProps = {
-  selected: *,
-  users: *,
-  dispatch: Dispatch,
-};
-
-const ToggleUsersSelection = ({
-  selected,
-  users,
-  dispatch,
-}: ToggleUsersSelectionProps) =>
+const ToggleUsersSelection = ({ selected, users, dispatch }) =>
   <Checkbox
     alignItems="center"
     opacity={0.25}
