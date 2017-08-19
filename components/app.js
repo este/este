@@ -169,21 +169,21 @@ const app = (
     }
 
     let graphCoolError: ?GraphCoolError = null;
-    const environment = createRelayEnvironment({
-      onRelayError: error => {
-        // Because fetchQuery does not return graph.cool error.
-        graphCoolError = error;
-        onRelayError(error);
-      },
-      token,
-    });
+    let data = {};
+    let records = {};
 
     // Note we call fetchQuery for client page transitions as well to enable
     // pending navigations. Finally possible with Next.js and Relay.
     // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
-    let data = {};
-    let records = {};
     if (fetch) {
+      const environment = createRelayEnvironment({
+        onRelayError: error => {
+          // Because fetchQuery does not return graph.cool error.
+          graphCoolError = error;
+          onRelayError(error);
+        },
+        token,
+      });
       const variables = prepareQuery(context.query);
       data = await fetchQuery(environment, fetch, variables);
       records = environment.getStore().getSource().toJSON();
