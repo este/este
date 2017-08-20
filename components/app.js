@@ -92,13 +92,15 @@ const redirectToSignIn = context => {
   return {};
 };
 
+// We can ignore some innocent errors.
 // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-export const isInsufficientPermissionsError = (error: GraphCoolError) =>
-  error.every(error => error.code === 3008);
+export const isInnocentError = (error: GraphCoolError) =>
+  error.every(
+    error => error.code === 3008 || error.code === 3022 || error.code === 3023,
+  );
 
 const onRelayError = error => {
-  // It can happen, no reason to report it as app error.
-  if (isInsufficientPermissionsError(error)) return;
+  if (isInnocentError(error)) return;
   reportRelayError(error);
 };
 
@@ -193,7 +195,7 @@ const app = (
       // If a user has insufficient permissions only, do nothing. It can happen
       // and probably that's why Relay generated Flow types are optional.
       // Better to render something than nothing I guess.
-      if (!isInsufficientPermissionsError(graphCoolError)) {
+      if (!isInnocentError(graphCoolError)) {
         // Probably serious error here so there is not much else we can do.
         const message = graphCoolError.map(error => error.message).join(', ');
         throw new Error(message);
