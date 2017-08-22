@@ -1,27 +1,32 @@
 // @flow
-
-// Polyfill Node with `Intl` that has data for all locales.
-// See: https://formatjs.io/guides/runtime-environments/#server
 const IntlPolyfill = require('intl');
-Intl.NumberFormat = IntlPolyfill.NumberFormat;
-Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
-
 const accepts = require('accepts');
 const glob = require('glob');
 const next = require('next');
+const { DEFAULT_LOCALE } = require('./env-config');
 const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
 const { readFileSync } = require('fs');
-const { DEFAULT_LOCALE } = require('./env-config');
+
+// Note this file is not transpiled.
+
+// Polyfill Node with `Intl` that has data for all locales.
+// See: https://formatjs.io/guides/runtime-environments/#server
+Intl.NumberFormat = IntlPolyfill.NumberFormat;
+Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const localeDataCache = new Map();
+const supportedLocales = glob
+  .sync('./lang/*.json')
+  .map(f => basename(f, '.json'));
+
 // We need to expose React Intl's locale data on the request for the user's
 // locale. This function will also cache the scripts by lang in memory.
-const localeDataCache = new Map();
 const getLocaleDataScript = locale => {
   const lang = locale.split('-')[0];
   if (!localeDataCache.has(lang)) {
@@ -38,17 +43,12 @@ const getMessages = locale => {
   if (dev) {
     delete require.cache[require.resolve(localePath)];
   }
-  // $FlowFixMe This is special case.
+  // $FlowFixMe This is fine.
   return require(localePath);
 };
 
-// Get the supported locales by looking for translations in the `lang/` dir.
-const supportedLocales = glob
-  .sync('./lang/*.json')
-  .map(f => basename(f, '.json'));
-
-// TODO: i18n subdomain for production.
-// TODO: ?locale=cs is for dev, we need subdomain or /en-CZ/ for production.
+// TODO: ?locale=cs is for dev, use subdirectories with gTLDs for production.
+// https://support.google.com/webmasters/answer/182192?hl=en
 const getAcceptedOrDefaultLocale = (req, locale) => {
   // locale=* overrides auto detection.
   // For example: http://localhost:3000/?locale=cs
@@ -58,30 +58,26 @@ const getAcceptedOrDefaultLocale = (req, locale) => {
   return accepts(req).language(supportedLocales) || DEFAULT_LOCALE;
 };
 
+const intlReq = req => {
+  const { query = {} } = parse(req.url, true);
+  const locale = getAcceptedOrDefaultLocale(req, query.locale);
+  // Use messages defined in code for dev with default locale.
+  const messages = dev && locale === DEFAULT_LOCALE ? {} : getMessages(locale);
+  // $FlowFixMe This is fine.
+  req.locale = locale;
+  // $FlowFixMe This is fine.
+  req.supportedLocales = supportedLocales;
+  // $FlowFixMe This is fine.
+  req.localeDataScript = getLocaleDataScript(locale);
+  // $FlowFixMe This is fine.
+  req.messages = messages;
+};
+
 app.prepare().then(() => {
-  // $FlowFixMe Probably wrong defs.
   createServer((req, res) => {
-    const parseQueryString = true;
-    const { query = {} } = parse(req.url, parseQueryString);
-    const locale = getAcceptedOrDefaultLocale(req, query.locale);
-
-    // Use messages defined in code for dev with default locale.
-    const messages =
-      dev && locale === DEFAULT_LOCALE ? {} : getMessages(locale);
-
-    // $FlowFixMe How to extend req type?
-    req.locale = locale;
-    // $FlowFixMe How to extend req type?
-    req.supportedLocales = supportedLocales;
-    // $FlowFixMe How to extend req type?
-    req.localeDataScript = getLocaleDataScript(locale);
-    // $FlowFixMe How to extend req type?
-    req.messages = messages;
-
-    // TODO: Handle errors (probably via Koa) and report them.
-
+    intlReq(req);
     handle(req, res);
-  }).listen(3000, err => {
+  }).listen('3000', err => {
     if (err) throw err;
     console.log('> Read on http://localhost:3000');
   });
