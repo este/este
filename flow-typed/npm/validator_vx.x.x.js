@@ -1,4 +1,4 @@
-// flow-typed signature: 0080d2816aab49062315fed71908c6d4
+// flow-typed signature: 4d83a63835cb0635cb7b65f4cbfb8d19
 // flow-typed version: <<STUB>>/validator_v^8.0.0/flow_v0.53.0
 
 /**
@@ -166,6 +166,10 @@ declare module 'validator/lib/isJSON' {
   declare module.exports: any;
 }
 
+declare module 'validator/lib/isLatLong' {
+  declare module.exports: any;
+}
+
 declare module 'validator/lib/isLength' {
   declare module.exports: any;
 }
@@ -195,6 +199,10 @@ declare module 'validator/lib/isMultibyte' {
 }
 
 declare module 'validator/lib/isNumeric' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isPostalCode' {
   declare module.exports: any;
 }
 
@@ -405,6 +413,9 @@ declare module 'validator/lib/isISSN.js' {
 declare module 'validator/lib/isJSON.js' {
   declare module.exports: $Exports<'validator/lib/isJSON'>;
 }
+declare module 'validator/lib/isLatLong.js' {
+  declare module.exports: $Exports<'validator/lib/isLatLong'>;
+}
 declare module 'validator/lib/isLength.js' {
   declare module.exports: $Exports<'validator/lib/isLength'>;
 }
@@ -428,6 +439,9 @@ declare module 'validator/lib/isMultibyte.js' {
 }
 declare module 'validator/lib/isNumeric.js' {
   declare module.exports: $Exports<'validator/lib/isNumeric'>;
+}
+declare module 'validator/lib/isPostalCode.js' {
+  declare module.exports: $Exports<'validator/lib/isPostalCode'>;
 }
 declare module 'validator/lib/isSurrogatePair.js' {
   declare module.exports: $Exports<'validator/lib/isSurrogatePair'>;

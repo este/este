@@ -1388,8 +1388,8 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
 caniuse-lite@^1.0.30000715:
-  version "1.0.30000716"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000716.tgz#2b40dd4a7edb7f0c468643b899b832b315988e6a"
+  version "1.0.30000717"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000717.tgz#4539b126af787c1d4851944de22b2bd8780d3612"
 
 case-sensitive-paths-webpack-plugin@2.1.1:
   version "2.1.1"
@@ -1471,8 +1471,8 @@ cli-cursor@^2.1.0:
     restore-cursor "^2.0.0"
 
 cli-width@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.1.0.tgz#b234ca209b29ef66fc518d9b98d5847b00edf00a"
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
 
 cliui@^2.1.0:
   version "2.1.0"
@@ -1629,7 +1629,7 @@ create-ecdh@^4.0.0:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
 
-create-hash@^1.1.0, create-hash@^1.1.1, create-hash@^1.1.2:
+create-hash@^1.1.0, create-hash@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/create-hash/-/create-hash-1.1.3.tgz#606042ac8b9262750f483caddab0f5819172d8fd"
   dependencies:
@@ -2139,12 +2139,13 @@ eslint-plugin-jsx-a11y@^5.0.3:
     jsx-ast-utils "^1.4.0"
 
 eslint-plugin-react@^7.0.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.2.1.tgz#c2673526ed6571b08c69c5f453d03f5f13e8ddbe"
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.3.0.tgz#ca9368da36f733fbdc05718ae4e91f778f38e344"
   dependencies:
     doctrine "^2.0.0"
     has "^1.0.1"
     jsx-ast-utils "^2.0.0"
+    prop-types "^15.5.10"
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
@@ -2267,10 +2268,11 @@ events@^1.0.0:
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
 evp_bytestokey@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/evp_bytestokey/-/evp_bytestokey-1.0.0.tgz#497b66ad9fef65cd7c08a6180824ba1476b66e53"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/evp_bytestokey/-/evp_bytestokey-1.0.2.tgz#f66bb88ecd57f71a766821e20283ea38c68bf80a"
   dependencies:
-    create-hash "^1.1.1"
+    md5.js "^1.3.4"
+    safe-buffer "^5.1.1"
 
 exec-sh@^0.2.0:
   version "0.2.0"
@@ -2426,93 +2428,93 @@ fbjs@^0.8.1, fbjs@^0.8.9:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-fela-dom@^5.0.2, fela-dom@^5.0.6:
+fela-dom@^5.0.2, fela-dom@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/fela-dom/-/fela-dom-5.0.7.tgz#c423d0cc24804efbdfa620a8a89405df9084ccd1"
+  dependencies:
+    fela-tools "^5.0.6"
+    fela-utils "^6.0.0"
+
+fela-plugin-custom-property@^5.0.6:
   version "5.0.6"
-  resolved "https://registry.yarnpkg.com/fela-dom/-/fela-dom-5.0.6.tgz#371fc395812cd64e21929e71bdc5d074780b91f4"
-  dependencies:
-    fela-tools "^5.0.5"
-    fela-utils "^5.0.5"
-
-fela-plugin-custom-property@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-plugin-custom-property/-/fela-plugin-custom-property-5.0.5.tgz#78090fbaf7a4578334b7d02dd844fda3718e766a"
+  resolved "https://registry.yarnpkg.com/fela-plugin-custom-property/-/fela-plugin-custom-property-5.0.6.tgz#d8a35448ad9afebbb3ef1b87b2389f8f82889e3c"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-utils "^5.0.5"
+    fela-utils "^6.0.0"
 
-fela-plugin-extend@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-plugin-extend/-/fela-plugin-extend-5.0.5.tgz#6f91b92dee35a6e025c5dcb1e24b8c2cb06844c3"
-  dependencies:
-    css-in-js-utils "^1.0.3"
-    fela-utils "^5.0.5"
-
-fela-plugin-fallback-value@^5.0.6:
+fela-plugin-extend@^5.0.6:
   version "5.0.6"
-  resolved "https://registry.yarnpkg.com/fela-plugin-fallback-value/-/fela-plugin-fallback-value-5.0.6.tgz#245f53c85e1b2124d0fe14f5ef17ce656ba10ffe"
+  resolved "https://registry.yarnpkg.com/fela-plugin-extend/-/fela-plugin-extend-5.0.6.tgz#8d54661f20fc42a7f18566db764d21919f89e7de"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-utils "^5.0.5"
+    fela-utils "^6.0.0"
 
-fela-plugin-lvha@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-plugin-lvha/-/fela-plugin-lvha-5.0.5.tgz#893d96a2852f091b2945a052f05634da3855ea28"
+fela-plugin-fallback-value@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/fela-plugin-fallback-value/-/fela-plugin-fallback-value-5.0.7.tgz#f5d6eaaf409e260f5007bc3da45e407d3ae5eccf"
   dependencies:
-    fela-utils "^5.0.5"
+    css-in-js-utils "^1.0.3"
+    fela-utils "^6.0.0"
+
+fela-plugin-lvha@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-lvha/-/fela-plugin-lvha-5.0.6.tgz#4e6bc7653b6cd0645738ea74686d4610669f3d63"
+  dependencies:
+    fela-utils "^6.0.0"
 
 fela-plugin-placeholder-prefixer@^5.0.1:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-5.0.5.tgz#00ae58a24aab8095672ee0958639b036fabe7846"
-  dependencies:
-    fela-plugin-custom-property "^5.0.5"
-    fela-utils "^5.0.5"
-
-fela-plugin-prefixer@^5.0.6:
   version "5.0.6"
-  resolved "https://registry.yarnpkg.com/fela-plugin-prefixer/-/fela-plugin-prefixer-5.0.6.tgz#ed65356e18b72802e1b084a72624d26533a60856"
+  resolved "https://registry.yarnpkg.com/fela-plugin-placeholder-prefixer/-/fela-plugin-placeholder-prefixer-5.0.6.tgz#f8cffbae3090c27fe6a8a7edd56cf78c30e5adb1"
+  dependencies:
+    fela-plugin-custom-property "^5.0.6"
+    fela-utils "^6.0.0"
+
+fela-plugin-prefixer@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/fela-plugin-prefixer/-/fela-plugin-prefixer-5.0.7.tgz#56d088e7b394e5fdc7854405cf122232b87f9553"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-plugin-fallback-value "^5.0.6"
-    fela-utils "^5.0.5"
+    fela-plugin-fallback-value "^5.0.7"
+    fela-utils "^6.0.0"
     inline-style-prefixer "^3.0.0"
 
-fela-plugin-unit@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-plugin-unit/-/fela-plugin-unit-5.0.5.tgz#5a4fd1ccbb71697177c747253501bc278ab3135f"
+fela-plugin-unit@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/fela-plugin-unit/-/fela-plugin-unit-5.0.6.tgz#3a26c9e9cd5b9489936662697122eb9bb7e5b1c5"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-utils "^5.0.5"
+    fela-utils "^6.0.0"
 
 fela-preset-web@^5.0.2:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/fela-preset-web/-/fela-preset-web-5.0.7.tgz#bf7da8e8fac075b20ad2d78e691130bc502c8478"
+  dependencies:
+    fela-plugin-extend "^5.0.6"
+    fela-plugin-fallback-value "^5.0.7"
+    fela-plugin-lvha "^5.0.6"
+    fela-plugin-prefixer "^5.0.7"
+    fela-plugin-unit "^5.0.6"
+
+fela-tools@^5.0.6:
   version "5.0.6"
-  resolved "https://registry.yarnpkg.com/fela-preset-web/-/fela-preset-web-5.0.6.tgz#edb1d175a925a77dd87bc04fa7391814ce49531c"
-  dependencies:
-    fela-plugin-extend "^5.0.5"
-    fela-plugin-fallback-value "^5.0.6"
-    fela-plugin-lvha "^5.0.5"
-    fela-plugin-prefixer "^5.0.6"
-    fela-plugin-unit "^5.0.5"
-
-fela-tools@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-tools/-/fela-tools-5.0.5.tgz#b6529967a77b9d70b79da0286cad5fc4baeab2f1"
+  resolved "https://registry.yarnpkg.com/fela-tools/-/fela-tools-5.0.6.tgz#001ccca06e69328ffc7cbb48789164f033a2a112"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-utils "^5.0.5"
+    fela-utils "^6.0.0"
 
-fela-utils@^5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/fela-utils/-/fela-utils-5.0.5.tgz#6a89290c8aa6866d9a0b98f41408485edc454ada"
+fela-utils@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/fela-utils/-/fela-utils-6.0.0.tgz#b765e9de8f9c39745e466b0daee6a31a6341ebdb"
   dependencies:
     css-in-js-utils "^1.0.3"
 
-fela@^5.0.1, fela@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/fela/-/fela-5.1.0.tgz#fe80321ce5384a9c5a65cd4896481d879332dff3"
+fela@^5.0.1, fela@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/fela/-/fela-5.1.1.tgz#9775b4e6df30fa0225408cf8f1952003e17292e8"
   dependencies:
     css-in-js-utils "^1.0.3"
-    fela-tools "^5.0.5"
-    fela-utils "^5.0.5"
+    fela-tools "^5.0.6"
+    fela-utils "^6.0.0"
 
 figures@^2.0.0:
   version "2.0.0"
@@ -2920,6 +2922,13 @@ hash-base@^2.0.0:
   resolved "https://registry.yarnpkg.com/hash-base/-/hash-base-2.0.2.tgz#66ea1d856db4e8a5470cadf6fce23ae5244ef2e1"
   dependencies:
     inherits "^2.0.1"
+
+hash-base@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/hash-base/-/hash-base-3.0.4.tgz#5fc8686847ecd73499403319a6b0a3f3f6ae4918"
+  dependencies:
+    inherits "^2.0.1"
+    safe-buffer "^5.0.1"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
   version "1.1.3"
@@ -3943,6 +3952,13 @@ md5-file@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.1.1.tgz#db3c92c09bbda5c2de883fa5490dd711fddbbab9"
 
+md5.js@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.4.tgz#e9bdbde94a20a5ac18b04340fc5764d5b09d901d"
+  dependencies:
+    hash-base "^3.0.0"
+    inherits "^2.0.1"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -4775,11 +4791,11 @@ react-dom@^15.6.0:
     prop-types "^15.5.10"
 
 react-fela@^5.0.3:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-5.2.0.tgz#d52d5006f7bae3981300ae7c946d9e9751adf4f8"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-5.2.1.tgz#b7bbc7e5187029f94302fb12e842f7262a54d1aa"
   dependencies:
-    fela "^5.1.0"
-    fela-dom "^5.0.6"
+    fela "^5.1.1"
+    fela-dom "^5.0.7"
     prop-types "^15.5.8"
 
 react-hot-loader@3.0.0-beta.7:
@@ -4962,8 +4978,8 @@ redux-observable@^0.16.0:
   resolved "https://registry.yarnpkg.com/redux-observable/-/redux-observable-0.16.0.tgz#dc431d0f47a9c3af232639d6bdd70d80c1b620d9"
 
 redux-persist@^4.8.0:
-  version "4.8.3"
-  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.8.3.tgz#fbad95e7582483635c91a3dd83da4789e7a09107"
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.9.1.tgz#271fa31d1c782ebf9082fb5174e829db24faf59e"
   dependencies:
     json-stringify-safe "^5.0.1"
     lodash "^4.17.4"
@@ -5198,7 +5214,7 @@ rxjs@^5.4.0:
   dependencies:
     symbol-observable "^1.0.1"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
@@ -5398,7 +5414,7 @@ source-map@0.1.31:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@0.5.6, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3:
+source-map@0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
 
@@ -5407,6 +5423,10 @@ source-map@^0.4.4:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
   dependencies:
     amdefine ">=0.0.4"
+
+source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
 source-map@~0.2.0:
   version "0.2.0"
@@ -5924,8 +5944,8 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "~1.0.0"
 
 validator@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-8.0.0.tgz#00d6ec230ab5d3353ab1174162a96462b947bdbd"
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-8.1.0.tgz#89cf6b512ff71eba886afd8d10d47f8dc800eac0"
 
 vary@~1.1.1:
   version "1.1.1"

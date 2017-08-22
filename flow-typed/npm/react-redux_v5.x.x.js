@@ -1,5 +1,5 @@
-// flow-typed signature: c32cee7feb0968b1fb0c4fc5e755610b
-// flow-typed version: aff2bf770e/react-redux_v5.x.x/flow_>=v0.53.x
+// flow-typed signature: c5fac64666f9589a0c1b2de956dc7919
+// flow-typed version: 81d6274128/react-redux_v5.x.x/flow_>=v0.53.x
 
 // flow-typed signature: 8db7b853f57c51094bf0ab8b2650fd9c
 // flow-typed version: ab8db5f14d/react-redux_v5.x.x/flow_>=v0.30.x
@@ -53,6 +53,11 @@ declare module "react-redux" {
     store: Store<S, A>,
     children?: any
   }> {}
+
+  declare function createProvider(
+    storeKey?: string,
+    subKey?: string
+  ): Provider<*, *>;
 
   declare type ConnectOptions = {
     pure?: boolean,
