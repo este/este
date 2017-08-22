@@ -1,0 +1,8 @@
+{
+  "schemaPath": "data/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "prod": "https://api.graph.cool/relay/v1/Este"
+    }
+  }
+}
