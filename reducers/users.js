@@ -1,6 +1,5 @@
 // @flow
 import type { Action, Id, FormState } from '../types';
-import { createTemp } from '../lib/temp';
 import { setForm, disableForm, resetForm, setFormErrors } from '../lib/form';
 import { reject, isNil, omit } from 'ramda';
 
@@ -47,7 +46,7 @@ const initialState = {
         gender: null,
         isAnarchist: false,
       },
-      disabled: createTemp(false),
+      disabled: false,
       appError: null,
       validationErrors: {},
     },

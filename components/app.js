@@ -6,8 +6,6 @@ import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
-import localForage from 'localforage';
-import persistStore from '../lib/persistStore';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import type { Req, Store, ServerState, GraphCoolError } from '../types';
@@ -21,7 +19,7 @@ import { reportRelayError } from '../lib/raven';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
-// polyfill browser stuff
+// Polyfill browser stuff.
 if (process.browser) {
   // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
@@ -44,7 +42,6 @@ const getReduxStore = (serverState, getEnvironment) => {
   // Preserve Redux state across page transitions.
   const state = clientReduxStore ? clientReduxStore.getState() : serverState;
   clientReduxStore = createReduxStore(state, { platformDependencies });
-  persistStore(clientReduxStore, localForage);
   return clientReduxStore;
 };
 

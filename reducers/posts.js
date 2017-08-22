@@ -1,6 +1,5 @@
 // @flow
 import type { Action, FormState } from '../types';
-import { createTemp } from '../lib/temp';
 import { setForm, disableForm, resetForm, setFormErrors } from '../lib/form';
 
 export type PostFormFields = {|
@@ -17,7 +16,7 @@ const initialState = {
       fields: {
         text: '',
       },
-      disabled: createTemp(false),
+      disabled: false,
       appError: null,
       validationErrors: {},
     },

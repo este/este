@@ -14,7 +14,6 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
 import { initialFormId } from '../lib/form';
-import { temp } from '../lib/temp';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -52,7 +51,7 @@ const AuthForm = (
   { dispatch, form, intl }: AuthFormProps,
   { theme }: ThemeContext,
 ) => {
-  const disabled = temp(form.disabled);
+  const disabled = form.disabled;
   const setUserForm = prop => value => {
     dispatch({
       type: 'SET_AUTH_FORM',

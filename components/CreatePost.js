@@ -9,7 +9,6 @@ import ValidationError from './ValidationError';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { initialFormId } from '../lib/form';
-import { temp } from '../lib/temp';
 
 type CreatePostProps = {
   form: Form<PostFormFields>,
@@ -18,7 +17,7 @@ type CreatePostProps = {
 };
 
 let CreatePost = ({ form, dispatch, viewer }: CreatePostProps) => {
-  const disabled = temp(form.disabled);
+  const disabled = form.disabled;
   const setPostForm = (prop: $Keys<PostFormFields>) => value => {
     dispatch({
       type: 'SET_POST_FORM',

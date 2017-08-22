@@ -10,7 +10,6 @@
 // Feel free to use 'FlowFixMe Describe why' anytime. Favour it over any type.
 
 import type { Observable as RxObservable } from 'rxjs';
-import type { Temp } from '../lib/temp';
 import type { ValidationError } from '../lib/validate';
 import type {
   Dispatch as ReduxDispatch,
@@ -41,7 +40,7 @@ export type Errors<T> = {|
 
 export type Form<Fields> = {
   fields: Fields,
-  disabled: Temp<boolean>,
+  disabled: boolean,
   appError: ?AppError,
   validationErrors: ValidationErrors<Fields>,
 };

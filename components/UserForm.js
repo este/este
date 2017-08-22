@@ -14,7 +14,6 @@ import { AddButton } from './buttons';
 import { connect } from 'react-redux';
 import { defineMessages } from 'react-intl';
 import { initialFormId } from '../lib/form';
-import { temp } from '../lib/temp';
 
 const messages = defineMessages({
   name: {
@@ -79,7 +78,7 @@ const UserForm = ({ intl, form, dispatch }: UserFormProps) => {
   const create10RandomUsers = () => {
     dispatch({ type: 'CREATE_10_RANDOM_USERS' });
   };
-  const disabled = temp(form.disabled);
+  const disabled = form.disabled;
 
   return (
     <Form onSubmit={createUser}>

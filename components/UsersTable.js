@@ -13,7 +13,6 @@ import TextInput from './TextInput';
 import ValidationError from './ValidationError';
 import { CancelButton, SaveButton } from './buttons';
 import { connect } from 'react-redux';
-import { temp } from '../lib/temp';
 
 // This is pretty fast editable lists. Just follow this two simple rules:
 // 1) Do not nest the same redux connect selected states.
@@ -21,7 +20,7 @@ import { temp } from '../lib/temp';
 
 const RowForm = ({ dispatch, field, form, isDirty, selected, user }) => {
   const fields = isDirty ? form.fields : user;
-  const disabled = temp(form.disabled);
+  const disabled = form.disabled;
   const set = (prop: $Keys<UserFormFields>) => value => {
     dispatch({
       type: 'SET_USER_FORM',

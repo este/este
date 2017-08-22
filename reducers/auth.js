@@ -1,6 +1,5 @@
 // @flow
 import type { Action, FormState } from '../types';
-import { createTemp } from '../lib/temp';
 import { setForm, setFormErrors, disableForm, resetForm } from '../lib/form';
 
 export type AuthFormFields = {|
@@ -21,7 +20,7 @@ const initialState = {
         password: '',
         signUp: false,
       },
-      disabled: createTemp(false),
+      disabled: false,
       appError: null,
       validationErrors: {},
     },
