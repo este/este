@@ -11,5 +11,3 @@ declare var SENTRY_SERVER_DNS: string;
 
 // server.js
 declare var Intl: Object;
-
-// TODO: Add Next.js process.browser, if possible.

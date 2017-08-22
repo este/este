@@ -1,15 +1,15 @@
 // @flow
-import React from 'react';
-import type { graphqlQueryResponse } from './__generated__/graphqlQuery.graphql';
 import A from '../components/A';
-import Posts from '../components/Posts';
 import Box from '../components/Box';
 import CreatePost from '../components/CreatePost';
 import Heading from '../components/Heading';
 import P from '../components/P';
 import Page from '../components/Page';
+import Posts from '../components/Posts';
+import React from 'react';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
+import type { graphqlQueryResponse } from './__generated__/graphqlQuery.graphql';
 import { graphql } from 'react-relay';
 
 const prepareQuery = ({ first }) => ({ first: Number(first) || 100 });

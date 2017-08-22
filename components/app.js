@@ -1,6 +1,4 @@
 // @flow
-import type { IntlShape } from 'react-intl';
-import type { Store, ServerState, GraphCoolError } from '../types';
 import IsAuthenticatedProvider from './IsAuthenticatedProvider';
 import React, { type ComponentType } from 'react';
 import RelayProvider from './RelayProvider';
@@ -11,6 +9,8 @@ import felaRenderer from '../lib/felaRenderer';
 import localForage from 'localforage';
 import persistStore from '../lib/persistStore';
 import sitemap from '../lib/sitemap';
+import type { IntlShape } from 'react-intl';
+import type { Req, Store, ServerState, GraphCoolError } from '../types';
 import uuid from 'uuid';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
@@ -20,7 +20,6 @@ import { parse as parseCookie } from 'cookie';
 import { reportRelayError } from '../lib/raven';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
-// TODO: Make it multi-platform via app.ios.js and app.android.js probably.
 
 // polyfill browser stuff
 if (process.browser) {
@@ -34,32 +33,6 @@ if (process.browser) {
     addLocaleData(window.ReactIntlLocaleData[lang]);
   });
 }
-
-// TODO: Waiting for Next.js 3 type definitions.
-type NextProps = {
-  url: {
-    pathname: string,
-    query: Object,
-  },
-};
-
-type InitialAppProps = {
-  data: Object,
-  initialNow: number,
-  locale: string,
-  messages: Object,
-  records: Object,
-  serverState: ServerState,
-  token: ?string,
-};
-
-type AppProps = NextProps & InitialAppProps;
-
-type PageProps = NextProps & {
-  data: Object,
-  intl: IntlShape,
-  token: ?string,
-};
 
 let clientReduxStore: ?Store = null;
 
@@ -77,18 +50,16 @@ const getReduxStore = (serverState, getEnvironment) => {
 
 export const redirectUrlKey = 'redirectUrl';
 
-const redirectToSignIn = context => {
-  const pathname = encodeURIComponent(context.pathname);
-  const path = `${sitemap.signIn.path}?${redirectUrlKey}=${pathname}`;
-  if (process.browser) {
-    Router.replace(path);
+const redirectToSignIn = ({ pathname, res }) => {
+  const path = `${sitemap.signIn.path}?${redirectUrlKey}=${encodeURIComponent(
+    pathname,
+  )}`;
+  if (res) {
+    res.writeHead(303, { Location: path });
+    res.end();
   } else {
-    context.res.writeHead(303, { Location: path });
-    context.res.end();
+    Router.replace(path);
   }
-  // No need to do anything else in case of redirect.
-  // Component will not be rendered.
-  return {};
 };
 
 // We can ignore some innocent errors.
@@ -103,6 +74,41 @@ const onRelayError = error => {
   reportRelayError(error);
 };
 
+// https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
+type NextContext = {
+  pathname: string,
+  query: Object,
+  asPath: string,
+  req: ?Req,
+  res: ?http$ServerResponse,
+  jsonPageRes: Object,
+  err: Object,
+};
+
+type NextProps = {|
+  url: {
+    pathname: string,
+    query: Object,
+  },
+|};
+
+type InitialAppProps = {|
+  data: Object,
+  initialNow: number,
+  locale: string,
+  messages: Object,
+  records: Object,
+  serverState: ServerState,
+  token: ?string,
+|};
+
+type AppProps = NextProps & InitialAppProps;
+
+type PageProps = NextProps & {|
+  data: Object,
+  intl: IntlShape,
+|};
+
 const app = (
   Page: ComponentType<PageProps>,
   options?: {|
@@ -115,15 +121,16 @@ const app = (
   const PageWithHigherOrderComponents = injectIntl(Page);
 
   const App = ({
+    data,
     initialNow,
     locale,
     messages,
     records,
     serverState,
     token,
-    ...props
+    url,
   }: AppProps) => {
-    const variables = prepareQuery(props.url.query);
+    const variables = prepareQuery(url.query);
     const environment = createRelayEnvironment({
       records,
       onRelayError,
@@ -145,7 +152,7 @@ const app = (
               initialNow={initialNow}
             >
               <IsAuthenticatedProvider isAuthenticated={!!token}>
-                <PageWithHigherOrderComponents {...props} />
+                <PageWithHigherOrderComponents {...{ data, url }} />
               </IsAuthenticatedProvider>
             </IntlProvider>
           </FelaProvider>
@@ -154,20 +161,17 @@ const app = (
     );
   };
 
-  App.getInitialProps = async context => {
-    let pageInitialProps = {};
-    if (typeof Page.getInitialProps === 'function') {
-      pageInitialProps = await Page.getInitialProps(context);
-    }
-
-    const cookie = process.browser
-      ? // eslint-disable-next-line no-undef
-        typeof document !== 'undefined' && document.cookie
-      : context.req.headers && context.req.headers.cookie;
+  App.getInitialProps = async (context: NextContext) => {
+    const cookie = context.req
+      ? (context.req.headers && context.req.headers.cookie) || ''
+      : // eslint-disable-next-line no-undef
+        document.cookie;
     const token = cookie ? parseCookie(cookie).token : null;
 
     if (requireAuth && !token) {
-      return redirectToSignIn(context);
+      redirectToSignIn(context);
+      // Return nothing because component will not be rendered on redirect.
+      return {};
     }
 
     let graphCoolError: ?GraphCoolError = null;
@@ -210,7 +214,6 @@ const app = (
       context.req || window.__NEXT_DATA__.props;
 
     return ({
-      ...pageInitialProps,
       data,
       initialNow,
       locale,

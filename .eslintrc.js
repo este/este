@@ -10,7 +10,7 @@ module.exports = {
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
     window: true,
-    // Flow. TODO: There must be a better way.
+    // Flow. TODO: There must be a better way. Strip types before linting?
     $Diff: true,
     $Exact: true,
     $Keys: true,
@@ -20,6 +20,7 @@ module.exports = {
     HTMLInputElement: true,
     KeyboardEvent: true,
     SyntheticKeyboardEvent: true,
+    http$ServerResponse: true,
   },
   // AirBnb is great, but very strict. Feel free to relax any rule.
   rules: {

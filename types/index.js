@@ -120,3 +120,11 @@ export type GraphCoolError = Array<{
   path: Array<Object>,
   requestId: string,
 }>;
+
+export type Req = {
+  ...http$IncomingMessage,
+  locale: string,
+  localeDataScript: string,
+  messages: Object,
+  supportedLocales: Array<string>,
+};
