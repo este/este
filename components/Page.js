@@ -1,6 +1,4 @@
 // @flow
-import React from 'react';
-import type { State } from '../types';
 import A from './A';
 import AppError from './AppError';
 import Baseline from './Baseline';
@@ -8,11 +6,14 @@ import Box from './Box';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
+import React, { type Node } from 'react';
+import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
+import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect } from 'react-redux';
+import { connect, type Connector } from 'react-redux';
 
 const PageContainer = ({ children }) =>
   <Box
@@ -46,6 +47,8 @@ const PageFooter = () =>
     <A size={-1} href="https://twitter.com/steida">
       steida
     </A>
+    {', '}
+    <SwitchLocale size={-1} />
   </Text>;
 
 // Because context is like dependency injection.
@@ -83,15 +86,17 @@ const Page = ({ children, darkEnabled, title }) => {
   );
 };
 
-// type PageOwnProps = {|
-//   children?: ?any,
-//   title: string,
-// |};
-//
-// type PageProps = PageOwnProps & {|
-//   darkEnabled: boolean,
-// |};
+type OwnProps = {|
+  title: string,
+  children?: Node,
+|};
 
-export default connect((state: State) => ({
+type Props = OwnProps & {
+  darkEnabled: boolean,
+};
+
+const connector: Connector<OwnProps, Props> = connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}))(Page);
+}));
+
+export default connector(Page);

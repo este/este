@@ -1,13 +1,11 @@
 // @flow
-import type { IntlShape } from 'react-intl';
 import A from './A';
 import Box from './Box';
 import PropTypes from 'prop-types';
 import React from 'react';
 import sitemap from '../lib/sitemap';
+import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
-const { me, signIn, ...pages } = sitemap;
 
 const NavA = ({ intl, page, title, ...props }) =>
   <A
@@ -30,7 +28,8 @@ type MainNavProps = {|
 |};
 
 const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
-  const authPage = isAuthenticated ? me : signIn;
+  const { index, me, signIn } = sitemap;
+  const auth = isAuthenticated ? me : signIn;
   return (
     <Box
       backgroundColor="primary"
@@ -39,16 +38,12 @@ const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
       marginVertical={0.5}
       paddingHorizontal={0.5}
     >
-      {Object.keys(pages).map(pageName => {
-        const page = pages[pageName];
-        return <NavA intl={intl} key={page.path} page={page} title={title} />;
-      })}
-      <NavA intl={intl} key={authPage.path} page={authPage} title={title} />
+      <NavA intl={intl} key={index.path} page={index} title={title} />
+      <NavA intl={intl} key={auth.path} page={auth} title={title} />
     </Box>
   );
 };
 
 MainNav.contextTypes = { isAuthenticated: PropTypes.bool };
 
-// TODO: Enforce title. Blocked by obsolete react-intl types.
 export default injectIntl(MainNav);

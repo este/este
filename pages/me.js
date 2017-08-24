@@ -1,13 +1,15 @@
 // @flow
-import React from 'react';
-import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import Image from '../components/Image';
 import P from '../components/P';
 import Page from '../components/Page';
+import React from 'react';
 import Set from '../components/Set';
+import ToggleBaseline from '../components/ToggleBaseline';
+import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
+import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import { serialize as serializeCookie } from 'cookie';
@@ -53,6 +55,10 @@ const Me = ({ data, intl }) => {
       />
       <Set>
         <SignOutButton danger onPress={signOut} />
+      </Set>
+      <Set>
+        <ToggleBaseline />
+        <ToggleDark />
       </Set>
     </Page>
   );
