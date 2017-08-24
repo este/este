@@ -3,11 +3,7 @@
 // Algebraic data types make domain modelling easy.
 // http://blog.ploeh.dk/2016/11/28/easy-domain-modelling-with-types
 
-// IMPORTANT ADVICE!
-// Think twice before using covariants and exact type. It's buggy as hell and
-// Flow errors are misleading. Life is hard and short. Don't fight with Flow.
-// If something doesn't work, check Flow issues and probably don't use it.
-// Feel free to use 'FlowFixMe Describe why' anytime. Favour it over any type.
+// TODO: Use covariants and exact types once Flow fixes them. Should be soon.
 
 import type { Observable as RxObservable } from 'rxjs';
 import type { ValidationError } from '../lib/validate';
@@ -20,8 +16,6 @@ import type {
 
 import type { AppState } from '../reducers/app';
 import type { AuthFormFields, AuthState } from '../reducers/auth';
-import type { PostFormFields, PostsState } from '../reducers/posts';
-import type { UserFormFields, UsersState, User } from '../reducers/users';
 
 export type Id = string;
 
@@ -53,8 +47,6 @@ export type FormState<Fields> = {
 export type State = {
   app: AppState,
   auth: AuthState,
-  posts: PostsState,
-  users: UsersState,
 };
 
 export type ServerState = {
@@ -65,23 +57,9 @@ export type Action =
   | { type: 'AUTH', fields: AuthFormFields }
   | { type: 'AUTH_ERROR', errors: Errors<AuthFormFields> }
   | { type: 'AUTH_SUCCESS' }
-  | { type: 'CREATE_10_RANDOM_USERS' }
-  | { type: 'CREATE_POST', fields: PostFormFields, viewerId: Id, authorId: Id }
-  | { type: 'CREATE_POST_ERROR', errors: Errors<PostFormFields> }
-  | { type: 'CREATE_POST_SUCCESS' }
-  | { type: 'CREATE_USER', fields: UserFormFields }
-  | { type: 'CREATE_USER_ERROR', errors: Errors<UserFormFields> }
-  | { type: 'CREATE_USER_SUCCESS', user: User }
-  | { type: 'DELETE_SELECTED_USERS' }
-  | { type: 'SAVE_USER', user: User }
-  | { type: 'SAVE_USER_ERROR', user: User, errors: Errors<UserFormFields> }
-  | { type: 'SAVE_USER_SUCCESS', user: User }
   | { type: 'SET_AUTH_FORM', fields: ?AuthFormFields }
-  | { type: 'SET_POST_FORM', fields: ?PostFormFields, id?: Id }
-  | { type: 'SET_USER_FORM', fields: ?UserFormFields, id?: Id }
   | { type: 'TOGGLE_BASELINE' }
-  | { type: 'TOGGLE_DARK' }
-  | { type: 'TOGGLE_USERS_SELECTION', users: Array<User> };
+  | { type: 'TOGGLE_DARK' };
 
 export type Middleware = Array<ReduxMiddleware<State, Action>>;
 export type Reducers = { [name: $Keys<State>]: ReduxReducer<State, Action> };
