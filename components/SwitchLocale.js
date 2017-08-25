@@ -20,7 +20,6 @@ const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) =>
           color="primary"
           href={getLocaleHref('/', defaultLocale, supportedLocale)}
           key={supportedLocale}
-          size={-1}
         >
           {supportedLocale}
           {supportedLocale.length > 1 && index < locales.length - 1 && ', '}

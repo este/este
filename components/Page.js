@@ -44,11 +44,9 @@ const PageFooter = () =>
     size={-1}
   >
     <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-    <A size={-1} href="https://twitter.com/steida">
-      steida
-    </A>
+    <A href="https://twitter.com/steida">steida</A>
     {', '}
-    <SwitchLocale size={-1} />
+    <SwitchLocale />
   </Text>;
 
 // Because context is like dependency injection.

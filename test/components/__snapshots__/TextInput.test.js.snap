@@ -9,7 +9,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q"
+        className="g b c h i j k l m n o p q r s t"
         maxLength={1}
     />
 </div>,
@@ -28,9 +28,12 @@ Object {
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .m{font-size:16}
     .n{line-height:24px}
-    .o::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .p{background-color:transparent}
-    .q{outline:none}",
+    .o{text-align:left}
+    .p{font-weight:normal}
+    .q{font-style:normal}
+    .r::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .s{background-color:transparent}
+    .t{outline:none}",
 }
 `;
 
@@ -43,7 +46,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q r"
+        className="g b c h i j k l m n o p q r s t u"
         disabled={true}
         maxLength={1}
     />
@@ -64,9 +67,12 @@ Object {
     .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .n{font-size:16}
     .o{line-height:24px}
-    .p::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .q{background-color:transparent}
-    .r{outline:none}",
+    .p{text-align:left}
+    .q{font-weight:normal}
+    .r{font-style:normal}
+    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
 }
 `;
 
@@ -79,13 +85,13 @@ Object {
         className="a d c e f"
     >
         <div
-            className="g b c h i j k l m n o"
+            className="g b c h i j k l m n o p q"
         >
             error
         </div>
     </div>
     <input
-        className="g b c h i j p l m n q r s"
+        className="g b c h i j r l m n o s q t u v"
         maxLength={1}
     />
 </div>,
@@ -104,11 +110,14 @@ Object {
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .m{font-size:16}
     .n{line-height:24px}
-    .o{font-weight:600}
-    .p{color:black}
-    .q::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .r{background-color:transparent}
-    .s{outline:none}",
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{font-style:normal}
+    .r{color:black}
+    .s{font-weight:normal}
+    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .u{background-color:transparent}
+    .v{outline:none}",
 }
 `;
 
@@ -121,13 +130,13 @@ Object {
         className="a d c e f"
     >
         <div
-            className="g b c h i j k l m n o"
+            className="g b c h i j k l m n o p q"
         >
             label
         </div>
     </div>
     <input
-        className="g b c h i j k l m n p q r"
+        className="g b c h i j k l m n o r q s t u"
         maxLength={1}
     />
 </div>,
@@ -146,10 +155,13 @@ Object {
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .m{font-size:16}
     .n{line-height:24px}
-    .o{font-weight:600}
-    .p::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .q{background-color:transparent}
-    .r{outline:none}",
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{font-style:normal}
+    .r{font-weight:normal}
+    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
 }
 `;
 
@@ -162,7 +174,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q"
+        className="g b c h i j k l m n o p q r s t"
         maxLength={1}
     />
 </div>,
@@ -181,8 +193,11 @@ Object {
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .m{font-size:16}
     .n{line-height:24px}
-    .o::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .p{background-color:transparent}
-    .q{outline:none}",
+    .o{text-align:left}
+    .p{font-weight:normal}
+    .q{font-style:normal}
+    .r::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .s{background-color:transparent}
+    .t{outline:none}",
 }
 `;
