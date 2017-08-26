@@ -3,7 +3,7 @@
 exports[`color and size 1`] = `
 Object {
   "component": <svg
-    className="a b c d e f g h i j k l m n o p q r"
+    className="a b c d e f g h i j k l m n o p q r s"
 />,
   "fela": "
     .a{display:inline}
@@ -18,19 +18,20 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}
-    .n{top:3}
-    .o{vertical-align:top}
-    .p{fill:blue}
-    .q{height:18}
-    .r{width:18}",
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{top:3}
+    .p{vertical-align:top}
+    .q{fill:blue}
+    .r{height:18}
+    .s{width:18}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
   "component": <svg
-    className="a b c d e f g h i j k l m n o p q r"
+    className="a b c d e f g h i j k l m n o p q r s"
 />,
   "fela": "
     .a{display:inline}
@@ -45,11 +46,12 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}
-    .n{top:4}
-    .o{vertical-align:top}
-    .p{fill:black}
-    .q{height:16}
-    .r{width:16}",
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{top:4}
+    .p{vertical-align:top}
+    .q{fill:black}
+    .r{height:16}
+    .s{width:16}",
 }
 `;

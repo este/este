@@ -3,7 +3,7 @@
 exports[`fix fontSmoothing 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p"
+    className="a b c d e f g h i j k l m n o p q"
 />,
   "fela": "
     .a{display:inline}
@@ -21,14 +21,15 @@ Object {
     .m{line-height:24px}
     .n{text-align:left}
     .o{font-weight:normal}
-    .p{font-style:normal}",
+    .p{text-decoration:none}
+    .q{font-style:normal}",
 }
 `;
 
 exports[`fix fontSmoothing 2`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n"
+    className="a b c d e f g h i j k l m n o"
 />,
   "fela": "
     .a{display:inline}
@@ -44,14 +45,15 @@ Object {
     .k{line-height:24px}
     .l{text-align:left}
     .m{font-weight:normal}
-    .n{font-style:normal}",
+    .n{text-decoration:none}
+    .o{font-style:normal}",
 }
 `;
 
 exports[`fix fontSmoothing 3`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -66,14 +68,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`lineHeight ensures vertical rhythm 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -88,14 +91,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`lineHeight ensures vertical rhythm 2`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -110,14 +114,15 @@ Object {
     .j{line-height:48px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`lineHeight ensures vertical rhythm 3`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -132,14 +137,15 @@ Object {
     .j{line-height:48px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`lineHeight ensures vertical rhythm 4`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -154,14 +160,15 @@ Object {
     .j{line-height:72px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -176,14 +183,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 2`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -198,14 +206,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:600}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 3`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -220,14 +229,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 4`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -242,14 +252,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:underline}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 5`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -264,14 +275,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 6`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -286,14 +298,15 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:italic}",
+    .m{text-decoration:none}
+    .n{font-style:italic}",
 }
 `;
 
 exports[`props 7`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -308,14 +321,15 @@ Object {
     .j{line-height:10px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`props 8`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -330,31 +344,32 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;
 
 exports[`styles are inherited 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 >
     <div
-        className="a b c d e f n o p q"
+        className="a b c d e f o p q r"
     >
         hi
          
         <div
-            className="a b c d e f l m"
+            className="a b c d e f l n"
         >
             <div
-                className="a b c d e f p"
+                className="a b c d e f q"
             >
                 w
             </div>
             orl
             <div
-                className="a b c d e f r"
+                className="a b c d e f s"
             >
                 d
             </div>
@@ -379,19 +394,20 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}
-    .n{color:orange}
-    .o{font-size:14}
-    .p{font-weight:600}
-    .q{font-style:italic}
-    .r{color:blue}",
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{color:orange}
+    .p{font-size:14}
+    .q{font-weight:600}
+    .r{font-style:italic}
+    .s{color:blue}",
 }
 `;
 
 exports[`text without props 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m"
+    className="a b c d e f g h i j k l m n"
 />,
   "fela": "
     .a{display:inline}
@@ -406,6 +422,7 @@ Object {
     .j{line-height:24px}
     .k{text-align:left}
     .l{font-weight:normal}
-    .m{font-style:normal}",
+    .m{text-decoration:none}
+    .n{font-style:normal}",
 }
 `;

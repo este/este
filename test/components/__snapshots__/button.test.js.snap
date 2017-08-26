@@ -3,7 +3,7 @@
 exports[`disabled 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -42,14 +42,15 @@ Object {
     .u{line-height:24px}
     .v{text-align:left}
     .w{font-weight:normal}
-    .x{font-style:normal}",
+    .x{text-decoration:none}
+    .y{font-style:normal}",
 }
 `;
 
 exports[`primary 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -90,14 +91,15 @@ Object {
     .w{line-height:24px}
     .x{text-align:left}
     .y{font-weight:600}
-    .z{font-style:normal}",
+    .z{text-decoration:none}
+    .ab{font-style:normal}",
 }
 `;
 
 exports[`primary outline 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag ah"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -144,14 +146,15 @@ Object {
     .ad{line-height:24px}
     .ae{text-align:left}
     .af{font-weight:normal}
-    .ag{font-style:normal}",
+    .ag{text-decoration:none}
+    .ah{font-style:normal}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -189,6 +192,7 @@ Object {
     .t{line-height:24px}
     .u{text-align:left}
     .v{font-weight:normal}
-    .w{font-style:normal}",
+    .w{text-decoration:none}
+    .x{font-style:normal}",
 }
 `;

@@ -12,12 +12,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ad"
+        className="a b c ae"
     />
 </div>,
   "fela": "
@@ -45,11 +45,12 @@ Object {
     .v{line-height:24px}
     .w{text-align:left}
     .x{font-weight:normal}
-    .y{font-style:normal}
-    .z::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .ab{background-color:transparent}
-    .ac{outline:none}
-    .ad{min-height:24}",
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .ac{background-color:transparent}
+    .ad{outline:none}
+    .ae{min-height:24}",
 }
 `;
 
@@ -65,13 +66,13 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad ae"
             disabled={true}
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ae"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -100,11 +101,12 @@ Object {
     .w{line-height:24px}
     .x{text-align:left}
     .y{font-weight:normal}
-    .z{font-style:normal}
-    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ac{background-color:transparent}
-    .ad{outline:none}
-    .ae{min-height:24}",
+    .z{text-decoration:none}
+    .ab{font-style:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ad{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;
 
@@ -120,15 +122,15 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ad"
+        className="a b c ae"
     >
         <div
-            className="g b c p q r ae t af v w x y"
+            className="g b c p q r af t ag v w x y z"
         >
             error
         </div>
@@ -159,13 +161,14 @@ Object {
     .v{line-height:24px}
     .w{text-align:left}
     .x{font-weight:normal}
-    .y{font-style:normal}
-    .z::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ab{background-color:transparent}
-    .ac{outline:none}
-    .ad{min-height:24}
-    .ae{color:red}
-    .af{font-size:16}",
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ad{outline:none}
+    .ae{min-height:24}
+    .af{color:red}
+    .ag{font-size:16}",
 }
 `;
 
@@ -181,18 +184,18 @@ Object {
             className="a d c e f"
         >
             <div
-                className="g b c h i j k l m n o p q"
+                className="g b c h i j k l m n o p q r"
             >
                 label
             </div>
         </div>
         <input
-            className="g b c r s t u v w x y h i j k l m n o z q ab ac ad"
+            className="g b c s t u v w x y z h i j k l m n o ab q r ac ad ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ae"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -212,20 +215,21 @@ Object {
     .n{line-height:24px}
     .o{text-align:left}
     .p{font-weight:600}
-    .q{font-style:normal}
-    .r{padding-bottom:11}
-    .s{padding-top:12}
-    .t{border-style:solid}
-    .u{border-bottom-width:1}
-    .v{border-bottom-color:gray}
-    .w{border-left-color:gray}
-    .x{border-right-color:gray}
-    .y{border-top-color:gray}
-    .z{font-weight:normal}
-    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ac{background-color:transparent}
-    .ad{outline:none}
-    .ae{min-height:24}",
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{padding-bottom:11}
+    .t{padding-top:12}
+    .u{border-style:solid}
+    .v{border-bottom-width:1}
+    .w{border-bottom-color:gray}
+    .x{border-left-color:gray}
+    .y{border-right-color:gray}
+    .z{border-top-color:gray}
+    .ab{font-weight:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ad{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;
 
@@ -241,12 +245,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ad"
+        className="a b c ae"
     />
 </div>,
   "fela": "
@@ -274,10 +278,11 @@ Object {
     .v{line-height:24px}
     .w{text-align:left}
     .x{font-weight:normal}
-    .y{font-style:normal}
-    .z::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ab{background-color:transparent}
-    .ac{outline:none}
-    .ad{min-height:24}",
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ad{outline:none}
+    .ae{min-height:24}",
 }
 `;

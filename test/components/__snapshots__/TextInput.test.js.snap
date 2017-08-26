@@ -9,7 +9,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q r s t"
+        className="g b c h i j k l m n o p q r s t u"
         maxLength={1}
     />
 </div>,
@@ -30,10 +30,11 @@ Object {
     .n{line-height:24px}
     .o{text-align:left}
     .p{font-weight:normal}
-    .q{font-style:normal}
-    .r::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .s{background-color:transparent}
-    .t{outline:none}",
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
 }
 `;
 
@@ -46,7 +47,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q r s t u"
+        className="g b c h i j k l m n o p q r s t u v"
         disabled={true}
         maxLength={1}
     />
@@ -69,10 +70,11 @@ Object {
     .o{line-height:24px}
     .p{text-align:left}
     .q{font-weight:normal}
-    .r{font-style:normal}
-    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .t{background-color:transparent}
-    .u{outline:none}",
+    .r{text-decoration:none}
+    .s{font-style:normal}
+    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .u{background-color:transparent}
+    .v{outline:none}",
 }
 `;
 
@@ -85,13 +87,13 @@ Object {
         className="a d c e f"
     >
         <div
-            className="g b c h i j k l m n o p q"
+            className="g b c h i j k l m n o p q r"
         >
             error
         </div>
     </div>
     <input
-        className="g b c h i j r l m n o s q t u v"
+        className="g b c h i j s l m n o t q r u v w"
         maxLength={1}
     />
 </div>,
@@ -112,12 +114,13 @@ Object {
     .n{line-height:24px}
     .o{text-align:left}
     .p{font-weight:600}
-    .q{font-style:normal}
-    .r{color:black}
-    .s{font-weight:normal}
-    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .u{background-color:transparent}
-    .v{outline:none}",
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{color:black}
+    .t{font-weight:normal}
+    .u::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .v{background-color:transparent}
+    .w{outline:none}",
 }
 `;
 
@@ -130,13 +133,13 @@ Object {
         className="a d c e f"
     >
         <div
-            className="g b c h i j k l m n o p q"
+            className="g b c h i j k l m n o p q r"
         >
             label
         </div>
     </div>
     <input
-        className="g b c h i j k l m n o r q s t u"
+        className="g b c h i j k l m n o s q r t u v"
         maxLength={1}
     />
 </div>,
@@ -157,11 +160,12 @@ Object {
     .n{line-height:24px}
     .o{text-align:left}
     .p{font-weight:600}
-    .q{font-style:normal}
-    .r{font-weight:normal}
-    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .t{background-color:transparent}
-    .u{outline:none}",
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{font-weight:normal}
+    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .u{background-color:transparent}
+    .v{outline:none}",
 }
 `;
 
@@ -174,7 +178,7 @@ Object {
         className="a d c e f"
     />
     <input
-        className="g b c h i j k l m n o p q r s t"
+        className="g b c h i j k l m n o p q r s t u"
         maxLength={1}
     />
 </div>,
@@ -195,9 +199,10 @@ Object {
     .n{line-height:24px}
     .o{text-align:left}
     .p{font-weight:normal}
-    .q{font-style:normal}
-    .r::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .s{background-color:transparent}
-    .t{outline:none}",
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
 }
 `;

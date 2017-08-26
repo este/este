@@ -118,7 +118,7 @@ class Text extends React.Component<TextProps> {
       ...computeFontSizeAndLineHeight(theme, size),
       textAlign: align,
       fontWeight: bold ? theme.text.bold : 'normal',
-      fontStyle: decoration,
+      textDecoration: decoration,
       fontStyle: italic ? 'italic' : 'normal',
       ...(lineHeight != null ? { lineHeight } : null),
       ...restProps.style,
