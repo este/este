@@ -10,6 +10,17 @@ const getLocaleHref = (pathname, defaultLocale, locale) => {
   return `${pathname}?locale=${locale}`;
 };
 
+const localeToLanguageName = locale => {
+  switch (locale) {
+    case 'cs':
+      return 'čeština';
+    case 'en':
+      return 'english';
+    default:
+      return locale;
+  }
+};
+
 const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) =>
   <Text>
     {supportedLocales
@@ -21,7 +32,7 @@ const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) =>
           href={getLocaleHref('/', defaultLocale, supportedLocale)}
           key={supportedLocale}
         >
-          {supportedLocale}
+          {localeToLanguageName(supportedLocale)}
           {supportedLocale.length > 1 && index < locales.length - 1 && ', '}
         </Text>,
       )}
