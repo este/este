@@ -82,12 +82,12 @@ type NextContext = {
   err: Object,
 };
 
-type NextProps = {|
+type NextProps = {
   url: {
     pathname: string,
     query: Object,
   },
-|};
+};
 
 type InitialAppProps = {|
   data: Object,
@@ -101,10 +101,10 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type PageProps = NextProps & {|
+type PageProps = NextProps & {
   data: Object,
   intl: IntlShape,
-|};
+};
 
 const app = (
   Page: ComponentType<PageProps>,
@@ -149,7 +149,7 @@ const app = (
               initialNow={initialNow}
             >
               <IsAuthenticatedProvider isAuthenticated={!!token}>
-                <PageWithHigherOrderComponents {...{ data, url }} />
+                <PageWithHigherOrderComponents data={data} url={url} />
               </IsAuthenticatedProvider>
             </IntlProvider>
           </FelaProvider>

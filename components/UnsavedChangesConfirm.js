@@ -14,7 +14,7 @@ const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) =>
     {message =>
       render(() =>
         // eslint-disable-next-line no-alert, no-undef
-        confirm(message),
+        confirm((message: any)),
       )}
   </FormattedMessage>;
 
