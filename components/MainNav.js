@@ -1,11 +1,13 @@
 // @flow
 import A from './A';
 import Box from './Box';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import withIsAuthenticated, {
+  type IsAuthenticatedContext,
+} from './withIsAuthenticated';
 
 const NavA = ({ intl, page, title, ...props }) =>
   <A
@@ -22,12 +24,18 @@ const NavA = ({ intl, page, title, ...props }) =>
     <FormattedMessage {...page.title} />
   </A>;
 
-type MainNavProps = {|
-  intl: IntlShape,
+type MainNavOwnProps = {
   title: string,
-|};
+};
 
-const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
+type MainNavProps = MainNavOwnProps & {
+  intl: IntlShape,
+};
+
+const MainNav = (
+  { intl, title }: MainNavProps,
+  { isAuthenticated }: IsAuthenticatedContext,
+) => {
   const { index, me, signIn } = sitemap;
   const auth = isAuthenticated ? me : signIn;
   return (
@@ -44,6 +52,8 @@ const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
   );
 };
 
-MainNav.contextTypes = { isAuthenticated: PropTypes.bool };
+withIsAuthenticated(MainNav);
 
-export default injectIntl(MainNav);
+const MainNavIntl: ComponentType<MainNavOwnProps> = injectIntl(MainNav);
+
+export default MainNavIntl;

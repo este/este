@@ -8,6 +8,11 @@ export const AddButton = (props: ButtonProps) =>
     <FormattedMessage defaultMessage="Add" id="button.add" />
   </Button>;
 
+export const CreateButton = (props: ButtonProps) =>
+  <Button {...props}>
+    <FormattedMessage defaultMessage="Create" id="button.create" />
+  </Button>;
+
 export const SaveButton = (props: ButtonProps) =>
   <Button {...props}>
     <FormattedMessage defaultMessage="Save" id="button.save" />
