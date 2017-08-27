@@ -1,5 +1,5 @@
 # projectId: cj6cs45nx2bg50121ylh22x7b
-# version: 8
+# version: 9
 
 type File implements Node {
   contentType: String!
@@ -17,15 +17,15 @@ type User implements Node {
   email: String @isUnique
   id: ID! @isUnique
   password: String
-  apps: [App!]! @relation(name: "AppOwner")
+  webs: [Web!]! @relation(name: "WebOwner")
   updatedAt: DateTime!
 }
 
-type App implements Node {
+type Web implements Node {
   id: ID! @isUnique
   name: String!
   domain: String!
-  owner: User! @relation(name: "AppOwner")
+  owner: User! @relation(name: "WebOwner")
   createdAt: DateTime!
   updatedAt: DateTime!
 }

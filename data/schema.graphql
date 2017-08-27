@@ -1,235 +1,19 @@
 # source: https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b
-# timestamp: Sun Aug 27 2017 03:17:42 GMT+0200 (CEST)
+# timestamp: Sun Aug 27 2017 04:45:40 GMT+0200 (CEST)
 
-type AddToAppOwnerPayload {
+type AddToWebOwnerPayload {
   viewer: Viewer!
   clientMutationId: String!
   ownerUser: User
-  appsApp: App
+  websWeb: Web
   ownerUserEdge: UserEdge
-  appsAppEdge: AppEdge
+  websWebEdge: WebEdge
 }
 
-input AddToAppOwnerUserInput {
-  appsAppId: ID!
+input AddToWebOwnerUserInput {
+  websWebId: ID!
   ownerUserId: ID!
   clientMutationId: String!
-}
-
-type App implements Node {
-  createdAt: DateTime!
-  domain: String!
-  id: ID!
-  name: String!
-  owner(filter: UserFilter): User!
-  updatedAt: DateTime!
-}
-
-# A connection to a list of items.
-type AppConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [AppEdge]
-
-  # Count of filtered result set without considering pagination arguments
-  count: Int!
-}
-
-# An edge in a connection.
-type AppEdge {
-  # The item at the end of the edge.
-  node: App!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-input AppFilter {
-  # Logical AND on all given filters.
-  AND: [AppFilter!]
-
-  # Logical OR on all given filters.
-  OR: [AppFilter!]
-  createdAt: DateTime
-
-  # All values that are not equal to given value.
-  createdAt_not: DateTime
-
-  # All values that are contained in given list.
-  createdAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  createdAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  createdAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  createdAt_lte: DateTime
-
-  # All values greater than the given value.
-  createdAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  createdAt_gte: DateTime
-  domain: String
-
-  # All values that are not equal to given value.
-  domain_not: String
-
-  # All values that are contained in given list.
-  domain_in: [String!]
-
-  # All values that are not contained in given list.
-  domain_not_in: [String!]
-
-  # All values less than the given value.
-  domain_lt: String
-
-  # All values less than or equal the given value.
-  domain_lte: String
-
-  # All values greater than the given value.
-  domain_gt: String
-
-  # All values greater than or equal the given value.
-  domain_gte: String
-
-  # All values containing the given string.
-  domain_contains: String
-
-  # All values not containing the given string.
-  domain_not_contains: String
-
-  # All values starting with the given string.
-  domain_starts_with: String
-
-  # All values not starting with the given string.
-  domain_not_starts_with: String
-
-  # All values ending with the given string.
-  domain_ends_with: String
-
-  # All values not ending with the given string.
-  domain_not_ends_with: String
-  id: ID
-
-  # All values that are not equal to given value.
-  id_not: ID
-
-  # All values that are contained in given list.
-  id_in: [ID!]
-
-  # All values that are not contained in given list.
-  id_not_in: [ID!]
-
-  # All values less than the given value.
-  id_lt: ID
-
-  # All values less than or equal the given value.
-  id_lte: ID
-
-  # All values greater than the given value.
-  id_gt: ID
-
-  # All values greater than or equal the given value.
-  id_gte: ID
-
-  # All values containing the given string.
-  id_contains: ID
-
-  # All values not containing the given string.
-  id_not_contains: ID
-
-  # All values starting with the given string.
-  id_starts_with: ID
-
-  # All values not starting with the given string.
-  id_not_starts_with: ID
-
-  # All values ending with the given string.
-  id_ends_with: ID
-
-  # All values not ending with the given string.
-  id_not_ends_with: ID
-  name: String
-
-  # All values that are not equal to given value.
-  name_not: String
-
-  # All values that are contained in given list.
-  name_in: [String!]
-
-  # All values that are not contained in given list.
-  name_not_in: [String!]
-
-  # All values less than the given value.
-  name_lt: String
-
-  # All values less than or equal the given value.
-  name_lte: String
-
-  # All values greater than the given value.
-  name_gt: String
-
-  # All values greater than or equal the given value.
-  name_gte: String
-
-  # All values containing the given string.
-  name_contains: String
-
-  # All values not containing the given string.
-  name_not_contains: String
-
-  # All values starting with the given string.
-  name_starts_with: String
-
-  # All values not starting with the given string.
-  name_not_starts_with: String
-
-  # All values ending with the given string.
-  name_ends_with: String
-
-  # All values not ending with the given string.
-  name_not_ends_with: String
-  updatedAt: DateTime
-
-  # All values that are not equal to given value.
-  updatedAt_not: DateTime
-
-  # All values that are contained in given list.
-  updatedAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  updatedAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  updatedAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  updatedAt_lte: DateTime
-
-  # All values greater than the given value.
-  updatedAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  updatedAt_gte: DateTime
-  owner: UserFilter
-}
-
-enum AppOrderBy {
-  createdAt_ASC
-  createdAt_DESC
-  domain_ASC
-  domain_DESC
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 input AUTH_PROVIDER_EMAIL {
@@ -239,27 +23,6 @@ input AUTH_PROVIDER_EMAIL {
 
 input AuthProviderSignupData {
   email: AUTH_PROVIDER_EMAIL
-}
-
-input CreateApp {
-  domain: String!
-  name: String!
-  ownerId: ID
-}
-
-input CreateAppInput {
-  domain: String!
-  name: String!
-  ownerId: ID
-  clientMutationId: String!
-}
-
-type CreateAppPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  app: App
-  edge: AppEdge
-  owner: User
 }
 
 input CreateFile {
@@ -279,8 +42,8 @@ type CreateFilePayload {
 }
 
 input CreateUser {
-  appsIds: [ID!]
-  apps: [UserappsApp!]
+  websIds: [ID!]
+  webs: [UserwebsWeb!]
 }
 
 # If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
@@ -290,21 +53,28 @@ type CreateUserPayload {
   viewer: Viewer!
 }
 
-scalar DateTime
+input CreateWeb {
+  domain: String!
+  name: String!
+  ownerId: ID
+}
 
-input DeleteAppInput {
-  id: ID!
+input CreateWebInput {
+  domain: String!
+  name: String!
+  ownerId: ID
   clientMutationId: String!
 }
 
-type DeleteAppPayload {
+type CreateWebPayload {
   viewer: Viewer!
   clientMutationId: String!
-  app: App
-  edge: AppEdge
+  web: Web
+  edge: WebEdge
   owner: User
-  deletedId: ID
 }
+
+scalar DateTime
 
 input DeleteFileInput {
   id: ID!
@@ -329,6 +99,20 @@ type DeleteUserPayload {
   clientMutationId: String!
   user: User
   edge: UserEdge
+  deletedId: ID
+}
+
+input DeleteWebInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteWebPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  web: Web
+  edge: WebEdge
+  owner: User
   deletedId: ID
 }
 
@@ -658,18 +442,18 @@ enum FileOrderBy {
 }
 
 type Mutation {
-  createApp(input: CreateAppInput!): CreateAppPayload
   createFile(input: CreateFileInput!): CreateFilePayload
-  updateApp(input: UpdateAppInput!): UpdateAppPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
   updateFile(input: UpdateFileInput!): UpdateFilePayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
-  updateOrCreateApp(input: UpdateOrCreateAppInput!): UpdateOrCreateAppPayload
+  updateWeb(input: UpdateWebInput!): UpdateWebPayload
   updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
-  deleteApp(input: DeleteAppInput!): DeleteAppPayload
+  updateOrCreateWeb(input: UpdateOrCreateWebInput!): UpdateOrCreateWebPayload
   deleteFile(input: DeleteFileInput!): DeleteFilePayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
-  addToAppOwner(input: AddToAppOwnerUserInput!): AddToAppOwnerPayload
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
+  addToWebOwner(input: AddToWebOwnerUserInput!): AddToWebOwnerPayload
   signinUser(input: SigninUserInput!): SigninPayload!
   createUser(input: SignupUserInput!): CreateUserPayload!
 }
@@ -719,33 +503,10 @@ input SigninUserInput {
 }
 
 input SignupUserInput {
-  appsIds: [ID!]
-  apps: [UserappsApp!]
+  websIds: [ID!]
+  webs: [UserwebsWeb!]
   clientMutationId: String!
   authProvider: AuthProviderSignupData!
-}
-
-input UpdateApp {
-  domain: String
-  id: ID!
-  name: String
-  ownerId: ID
-}
-
-input UpdateAppInput {
-  domain: String
-  id: ID!
-  name: String
-  ownerId: ID
-  clientMutationId: String!
-}
-
-type UpdateAppPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  app: App
-  edge: AppEdge
-  owner: User
 }
 
 input UpdateFile {
@@ -764,20 +525,6 @@ type UpdateFilePayload {
   clientMutationId: String!
   file: File
   edge: FileEdge
-}
-
-input UpdateOrCreateAppInput {
-  update: UpdateApp!
-  create: CreateApp!
-  clientMutationId: String!
-}
-
-type UpdateOrCreateAppPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  app: App
-  edge: AppEdge
-  owner: User
 }
 
 input UpdateOrCreateFileInput {
@@ -806,16 +553,30 @@ type UpdateOrCreateUserPayload {
   edge: UserEdge
 }
 
+input UpdateOrCreateWebInput {
+  update: UpdateWeb!
+  create: CreateWeb!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateWebPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  web: Web
+  edge: WebEdge
+  owner: User
+}
+
 input UpdateUser {
   id: ID!
-  appsIds: [ID!]
-  apps: [UserappsApp!]
+  websIds: [ID!]
+  webs: [UserwebsWeb!]
 }
 
 input UpdateUserInput {
   id: ID!
-  appsIds: [ID!]
-  apps: [UserappsApp!]
+  websIds: [ID!]
+  webs: [UserwebsWeb!]
   clientMutationId: String!
 }
 
@@ -826,18 +587,36 @@ type UpdateUserPayload {
   edge: UserEdge
 }
 
+input UpdateWeb {
+  domain: String
+  id: ID!
+  name: String
+  ownerId: ID
+}
+
+input UpdateWebInput {
+  domain: String
+  id: ID!
+  name: String
+  ownerId: ID
+  clientMutationId: String!
+}
+
+type UpdateWebPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  web: Web
+  edge: WebEdge
+  owner: User
+}
+
 type User implements Node {
-  apps(filter: AppFilter, orderBy: AppOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AppConnection
   createdAt: DateTime!
   email: String
   id: ID!
   password: String
   updatedAt: DateTime!
-}
-
-input UserappsApp {
-  domain: String!
-  name: String!
+  webs(filter: WebFilter, orderBy: WebOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection
 }
 
 # A connection to a list of items.
@@ -1031,9 +810,9 @@ input UserFilter {
 
   # All values greater than or equal the given value.
   updatedAt_gte: DateTime
-  apps_every: AppFilter
-  apps_some: AppFilter
-  apps_none: AppFilter
+  webs_every: WebFilter
+  webs_some: WebFilter
+  webs_none: WebFilter
 }
 
 enum UserOrderBy {
@@ -1049,14 +828,235 @@ enum UserOrderBy {
   updatedAt_DESC
 }
 
+input UserwebsWeb {
+  domain: String!
+  name: String!
+}
+
 # This is the famous Relay viewer object
 type Viewer {
-  allApps(filter: AppFilter, orderBy: AppOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AppConnection!
   allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
   allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  allWebs(filter: WebFilter, orderBy: WebOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   user: User
-  App(id: ID): App
   File(id: ID, secret: String, url: String): File
   User(email: String, id: ID): User
+  Web(id: ID): Web
   id: ID!
+}
+
+type Web implements Node {
+  createdAt: DateTime!
+  domain: String!
+  id: ID!
+  name: String!
+  owner(filter: UserFilter): User!
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type WebConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [WebEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type WebEdge {
+  # The item at the end of the edge.
+  node: Web!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input WebFilter {
+  # Logical AND on all given filters.
+  AND: [WebFilter!]
+
+  # Logical OR on all given filters.
+  OR: [WebFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  domain: String
+
+  # All values that are not equal to given value.
+  domain_not: String
+
+  # All values that are contained in given list.
+  domain_in: [String!]
+
+  # All values that are not contained in given list.
+  domain_not_in: [String!]
+
+  # All values less than the given value.
+  domain_lt: String
+
+  # All values less than or equal the given value.
+  domain_lte: String
+
+  # All values greater than the given value.
+  domain_gt: String
+
+  # All values greater than or equal the given value.
+  domain_gte: String
+
+  # All values containing the given string.
+  domain_contains: String
+
+  # All values not containing the given string.
+  domain_not_contains: String
+
+  # All values starting with the given string.
+  domain_starts_with: String
+
+  # All values not starting with the given string.
+  domain_not_starts_with: String
+
+  # All values ending with the given string.
+  domain_ends_with: String
+
+  # All values not ending with the given string.
+  domain_not_ends_with: String
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  owner: UserFilter
+}
+
+enum WebOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  domain_ASC
+  domain_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
