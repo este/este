@@ -1,5 +1,5 @@
-# projectId: cj4iytrfz6tgx0192svkjh324
-# version: 55
+# projectId: cj6cs45nx2bg50121ylh22x7b
+# version: 8
 
 type File implements Node {
   contentType: String!
@@ -14,17 +14,18 @@ type File implements Node {
 
 type User implements Node {
   createdAt: DateTime!
-  id: ID! @isUnique
-  updatedAt: DateTime!
   email: String @isUnique
+  id: ID! @isUnique
   password: String
-  posts: [Post!]! @relation(name: "PostAuthor")
+  apps: [App!]! @relation(name: "AppOwner")
+  updatedAt: DateTime!
 }
 
-type Post implements Node {
-  createdAt: DateTime!
+type App implements Node {
   id: ID! @isUnique
-  text: String!
+  name: String!
+  domain: String!
+  owner: User! @relation(name: "AppOwner")
+  createdAt: DateTime!
   updatedAt: DateTime!
-  author: User! @relation(name: "PostAuthor")
 }

@@ -1,16 +1,235 @@
-type AddToPostAuthorPayload {
+# source: https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b
+# timestamp: Sun Aug 27 2017 03:17:42 GMT+0200 (CEST)
+
+type AddToAppOwnerPayload {
   viewer: Viewer!
   clientMutationId: String!
-  postsPost: Post
-  authorUser: User
-  postsPostEdge: PostEdge
-  authorUserEdge: UserEdge
+  ownerUser: User
+  appsApp: App
+  ownerUserEdge: UserEdge
+  appsAppEdge: AppEdge
 }
 
-input AddToPostAuthorPostInput {
-  authorUserId: ID!
-  postsPostId: ID!
+input AddToAppOwnerUserInput {
+  appsAppId: ID!
+  ownerUserId: ID!
   clientMutationId: String!
+}
+
+type App implements Node {
+  createdAt: DateTime!
+  domain: String!
+  id: ID!
+  name: String!
+  owner(filter: UserFilter): User!
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type AppConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AppEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type AppEdge {
+  # The item at the end of the edge.
+  node: App!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input AppFilter {
+  # Logical AND on all given filters.
+  AND: [AppFilter!]
+
+  # Logical OR on all given filters.
+  OR: [AppFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  domain: String
+
+  # All values that are not equal to given value.
+  domain_not: String
+
+  # All values that are contained in given list.
+  domain_in: [String!]
+
+  # All values that are not contained in given list.
+  domain_not_in: [String!]
+
+  # All values less than the given value.
+  domain_lt: String
+
+  # All values less than or equal the given value.
+  domain_lte: String
+
+  # All values greater than the given value.
+  domain_gt: String
+
+  # All values greater than or equal the given value.
+  domain_gte: String
+
+  # All values containing the given string.
+  domain_contains: String
+
+  # All values not containing the given string.
+  domain_not_contains: String
+
+  # All values starting with the given string.
+  domain_starts_with: String
+
+  # All values not starting with the given string.
+  domain_not_starts_with: String
+
+  # All values ending with the given string.
+  domain_ends_with: String
+
+  # All values not ending with the given string.
+  domain_not_ends_with: String
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  owner: UserFilter
+}
+
+enum AppOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  domain_ASC
+  domain_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 input AUTH_PROVIDER_EMAIL {
@@ -22,11 +241,26 @@ input AuthProviderSignupData {
   email: AUTH_PROVIDER_EMAIL
 }
 
-# The `BigDecimal` scalar type represents signed fractional values with arbitrary precision.
-scalar BigDecimal
+input CreateApp {
+  domain: String!
+  name: String!
+  ownerId: ID
+}
 
-# The `BigInt` scalar type represents non-fractional signed whole numeric values. BigInt can represent arbitrary big values.
-scalar BigInt
+input CreateAppInput {
+  domain: String!
+  name: String!
+  ownerId: ID
+  clientMutationId: String!
+}
+
+type CreateAppPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  app: App
+  edge: AppEdge
+  owner: User
+}
 
 input CreateFile {
   name: String!
@@ -44,28 +278,9 @@ type CreateFilePayload {
   edge: FileEdge
 }
 
-input CreatePost {
-  text: String!
-  authorId: ID
-}
-
-input CreatePostInput {
-  text: String!
-  authorId: ID
-  clientMutationId: String!
-}
-
-type CreatePostPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  post: Post
-  edge: PostEdge
-  author: User
-}
-
 input CreateUser {
-  postsIds: [ID!]
-  posts: [UserpostsPost!]
+  appsIds: [ID!]
+  apps: [UserappsApp!]
 }
 
 # If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
@@ -77,6 +292,20 @@ type CreateUserPayload {
 
 scalar DateTime
 
+input DeleteAppInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteAppPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  app: App
+  edge: AppEdge
+  owner: User
+  deletedId: ID
+}
+
 input DeleteFileInput {
   id: ID!
   clientMutationId: String!
@@ -87,20 +316,6 @@ type DeleteFilePayload {
   clientMutationId: String!
   file: File
   edge: FileEdge
-  deletedId: ID
-}
-
-input DeletePostInput {
-  id: ID!
-  clientMutationId: String!
-}
-
-type DeletePostPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  post: Post
-  edge: PostEdge
-  author: User
   deletedId: ID
 }
 
@@ -442,23 +657,19 @@ enum FileOrderBy {
   url_DESC
 }
 
-# The `Long` scalar type represents non-fractional signed whole numeric values.
-# Long can represent values between -(2^63) and 2^63 - 1.
-scalar Long
-
 type Mutation {
+  createApp(input: CreateAppInput!): CreateAppPayload
   createFile(input: CreateFileInput!): CreateFilePayload
-  createPost(input: CreatePostInput!): CreatePostPayload
+  updateApp(input: UpdateAppInput!): UpdateAppPayload
   updateFile(input: UpdateFileInput!): UpdateFilePayload
-  updatePost(input: UpdatePostInput!): UpdatePostPayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateApp(input: UpdateOrCreateAppInput!): UpdateOrCreateAppPayload
   updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
-  updateOrCreatePost(input: UpdateOrCreatePostInput!): UpdateOrCreatePostPayload
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteApp(input: DeleteAppInput!): DeleteAppPayload
   deleteFile(input: DeleteFileInput!): DeleteFilePayload
-  deletePost(input: DeletePostInput!): DeletePostPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
-  addToPostAuthor(input: AddToPostAuthorPostInput!): AddToPostAuthorPayload
+  addToAppOwner(input: AddToAppOwnerUserInput!): AddToAppOwnerPayload
   signinUser(input: SigninUserInput!): SigninPayload!
   createUser(input: SignupUserInput!): CreateUserPayload!
 }
@@ -482,179 +693,6 @@ type PageInfo {
 
   # When paginating forwards, the cursor to continue.
   endCursor: String
-}
-
-type Post implements Node {
-  author(filter: UserFilter): User!
-  createdAt: DateTime!
-  id: ID!
-  text: String!
-  updatedAt: DateTime!
-}
-
-# A connection to a list of items.
-type PostConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [PostEdge]
-
-  # Count of filtered result set without considering pagination arguments
-  count: Int!
-}
-
-# An edge in a connection.
-type PostEdge {
-  # The item at the end of the edge.
-  node: Post!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-input PostFilter {
-  # Logical AND on all given filters.
-  AND: [PostFilter!]
-
-  # Logical OR on all given filters.
-  OR: [PostFilter!]
-  createdAt: DateTime
-
-  # All values that are not equal to given value.
-  createdAt_not: DateTime
-
-  # All values that are contained in given list.
-  createdAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  createdAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  createdAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  createdAt_lte: DateTime
-
-  # All values greater than the given value.
-  createdAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  createdAt_gte: DateTime
-  id: ID
-
-  # All values that are not equal to given value.
-  id_not: ID
-
-  # All values that are contained in given list.
-  id_in: [ID!]
-
-  # All values that are not contained in given list.
-  id_not_in: [ID!]
-
-  # All values less than the given value.
-  id_lt: ID
-
-  # All values less than or equal the given value.
-  id_lte: ID
-
-  # All values greater than the given value.
-  id_gt: ID
-
-  # All values greater than or equal the given value.
-  id_gte: ID
-
-  # All values containing the given string.
-  id_contains: ID
-
-  # All values not containing the given string.
-  id_not_contains: ID
-
-  # All values starting with the given string.
-  id_starts_with: ID
-
-  # All values not starting with the given string.
-  id_not_starts_with: ID
-
-  # All values ending with the given string.
-  id_ends_with: ID
-
-  # All values not ending with the given string.
-  id_not_ends_with: ID
-  text: String
-
-  # All values that are not equal to given value.
-  text_not: String
-
-  # All values that are contained in given list.
-  text_in: [String!]
-
-  # All values that are not contained in given list.
-  text_not_in: [String!]
-
-  # All values less than the given value.
-  text_lt: String
-
-  # All values less than or equal the given value.
-  text_lte: String
-
-  # All values greater than the given value.
-  text_gt: String
-
-  # All values greater than or equal the given value.
-  text_gte: String
-
-  # All values containing the given string.
-  text_contains: String
-
-  # All values not containing the given string.
-  text_not_contains: String
-
-  # All values starting with the given string.
-  text_starts_with: String
-
-  # All values not starting with the given string.
-  text_not_starts_with: String
-
-  # All values ending with the given string.
-  text_ends_with: String
-
-  # All values not ending with the given string.
-  text_not_ends_with: String
-  updatedAt: DateTime
-
-  # All values that are not equal to given value.
-  updatedAt_not: DateTime
-
-  # All values that are contained in given list.
-  updatedAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  updatedAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  updatedAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  updatedAt_lte: DateTime
-
-  # All values greater than the given value.
-  updatedAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  updatedAt_gte: DateTime
-  author: UserFilter
-}
-
-enum PostOrderBy {
-  createdAt_ASC
-  createdAt_DESC
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type Query {
@@ -681,10 +719,33 @@ input SigninUserInput {
 }
 
 input SignupUserInput {
-  postsIds: [ID!]
-  posts: [UserpostsPost!]
+  appsIds: [ID!]
+  apps: [UserappsApp!]
   clientMutationId: String!
   authProvider: AuthProviderSignupData!
+}
+
+input UpdateApp {
+  domain: String
+  id: ID!
+  name: String
+  ownerId: ID
+}
+
+input UpdateAppInput {
+  domain: String
+  id: ID!
+  name: String
+  ownerId: ID
+  clientMutationId: String!
+}
+
+type UpdateAppPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  app: App
+  edge: AppEdge
+  owner: User
 }
 
 input UpdateFile {
@@ -705,6 +766,20 @@ type UpdateFilePayload {
   edge: FileEdge
 }
 
+input UpdateOrCreateAppInput {
+  update: UpdateApp!
+  create: CreateApp!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateAppPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  app: App
+  edge: AppEdge
+  owner: User
+}
+
 input UpdateOrCreateFileInput {
   update: UpdateFile!
   create: CreateFile!
@@ -716,20 +791,6 @@ type UpdateOrCreateFilePayload {
   clientMutationId: String!
   file: File
   edge: FileEdge
-}
-
-input UpdateOrCreatePostInput {
-  update: UpdatePost!
-  create: CreatePost!
-  clientMutationId: String!
-}
-
-type UpdateOrCreatePostPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  post: Post
-  edge: PostEdge
-  author: User
 }
 
 input UpdateOrCreateUserInput {
@@ -745,37 +806,16 @@ type UpdateOrCreateUserPayload {
   edge: UserEdge
 }
 
-input UpdatePost {
-  id: ID!
-  text: String
-  authorId: ID
-}
-
-input UpdatePostInput {
-  id: ID!
-  text: String
-  authorId: ID
-  clientMutationId: String!
-}
-
-type UpdatePostPayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  post: Post
-  edge: PostEdge
-  author: User
-}
-
 input UpdateUser {
   id: ID!
-  postsIds: [ID!]
-  posts: [UserpostsPost!]
+  appsIds: [ID!]
+  apps: [UserappsApp!]
 }
 
 input UpdateUserInput {
   id: ID!
-  postsIds: [ID!]
-  posts: [UserpostsPost!]
+  appsIds: [ID!]
+  apps: [UserappsApp!]
   clientMutationId: String!
 }
 
@@ -787,12 +827,17 @@ type UpdateUserPayload {
 }
 
 type User implements Node {
+  apps(filter: AppFilter, orderBy: AppOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AppConnection
   createdAt: DateTime!
   email: String
   id: ID!
   password: String
-  posts(filter: PostFilter, orderBy: PostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection
   updatedAt: DateTime!
+}
+
+input UserappsApp {
+  domain: String!
+  name: String!
 }
 
 # A connection to a list of items.
@@ -986,9 +1031,9 @@ input UserFilter {
 
   # All values greater than or equal the given value.
   updatedAt_gte: DateTime
-  posts_every: PostFilter
-  posts_some: PostFilter
-  posts_none: PostFilter
+  apps_every: AppFilter
+  apps_some: AppFilter
+  apps_none: AppFilter
 }
 
 enum UserOrderBy {
@@ -1004,18 +1049,14 @@ enum UserOrderBy {
   updatedAt_DESC
 }
 
-input UserpostsPost {
-  text: String!
-}
-
 # This is the famous Relay viewer object
 type Viewer {
+  allApps(filter: AppFilter, orderBy: AppOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AppConnection!
   allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
-  allPosts(filter: PostFilter, orderBy: PostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   user: User
+  App(id: ID): App
   File(id: ID, secret: String, url: String): File
-  Post(id: ID): Post
   User(email: String, id: ID): User
   id: ID!
 }
