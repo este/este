@@ -34,7 +34,7 @@ export type BoxProps = {
   children?: Node,
 
   as?: ElementType,
-  autoFocus?: ?Object,
+  autoFocus?: ?Object | boolean,
   isReactNative?: boolean,
   style?: Object,
 
