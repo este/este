@@ -1,4 +1,4 @@
-// flow-typed signature: f1b4399e44c9a4a4331dece099759185
+// flow-typed signature: 04838a4a274bcabb21f1a87f83777e65
 // flow-typed version: <<STUB>>/prettier_v^1.5.1/flow_v0.53.0
 
 /**
@@ -38,10 +38,6 @@ declare module 'prettier/parser-graphql' {
   declare module.exports: any;
 }
 
-declare module 'prettier/parser-json' {
-  declare module.exports: any;
-}
-
 declare module 'prettier/parser-parse5' {
   declare module.exports: any;
 }
@@ -72,9 +68,6 @@ declare module 'prettier/parser-flow.js' {
 }
 declare module 'prettier/parser-graphql.js' {
   declare module.exports: $Exports<'prettier/parser-graphql'>;
-}
-declare module 'prettier/parser-json.js' {
-  declare module.exports: $Exports<'prettier/parser-json'>;
 }
 declare module 'prettier/parser-parse5.js' {
   declare module.exports: $Exports<'prettier/parser-parse5'>;
