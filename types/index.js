@@ -70,7 +70,6 @@ export type Dispatch = ReduxDispatch<Action>;
 export type Environment = Object;
 
 export type PlatformDependencies = {
-  createUuid: () => string, // Because React Native needs different lib.
   getEnvironment: () => Environment,
 };
 
