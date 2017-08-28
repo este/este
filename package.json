@@ -9,22 +9,18 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
-    "extract-messages":
-      "yarn clean-babel-cache && rimraf lang/.messages && next build && node ./scripts/extractMessages",
+    "extract-messages": "yarn clean-babel-cache && rimraf lang/.messages && next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "prettier":
-      "prettier --single-quote --trailing-comma all --write '{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types}/**/*.js'",
+    "prettier": "prettier --single-quote --trailing-comma all --write '{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types}/**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest --updateSnapshot && yarn relay && yarn build",
     "test-without-relay": "flow && jest --updateSnapshot && yarn build",
-    "deps":
-      "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
+    "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay":
-      "rimraf **/__generated__ && relay-compiler --src ./ --exclude **/.next/** **/flow-typed/** **/node_modules/** **/test/**  **/__generated__/** --schema data/schema.graphql",
+    "relay": "rimraf **/__generated__ && relay-compiler --src ./ --exclude **/.next/** **/flow-typed/** **/node_modules/** **/test/**  **/__generated__/** --schema data/schema.graphql",
     "relay:watch": "yarn relay -- --watch",
     "schema": "graphql get-schema dev"
   },
@@ -34,6 +30,7 @@
     "color": "^2.0.0",
     "cookie": "^0.3.1",
     "cross-env": "^5.0.1",
+    "diacritics-map": "^0.1.0",
     "fela": "^5.0.1",
     "fela-dom": "^5.0.2",
     "fela-plugin-placeholder-prefixer": "^5.0.1",
