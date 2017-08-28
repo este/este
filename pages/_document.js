@@ -49,22 +49,22 @@ export default class MyDocument extends Document {
       sheetList,
     } = this.props;
 
-    const styleNodes = sheetList.map(({ type, media, css }) =>
+    const styleNodes = sheetList.map(({ type, media, css }) => (
       <style
         dangerouslySetInnerHTML={{ __html: css }}
         data-fela-type={type}
         key={`${type}-${media}`}
         media={media}
-      />,
-    );
-    const alternateHreflangLinks = supportedLocales.map(locale =>
+      />
+    ));
+    const alternateHreflangLinks = supportedLocales.map(locale => (
       <link
         href={`https://${locale}.${HOSTNAME}`}
         hrefLang={locale}
         key={locale}
         rel="alternate"
-      />,
-    );
+      />
+    ));
 
     return (
       <html lang={locale}>

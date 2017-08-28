@@ -16,7 +16,7 @@ const BrowserButton = ({
   disabled?: boolean,
   onPress: () => void,
   style?: Object,
-}) =>
+}) => (
   <div // eslint-disable-line jsx-a11y/no-static-element-interactions
     onClick={onPress}
     onKeyPress={(e: KeyboardEvent) => {
@@ -39,7 +39,8 @@ const BrowserButton = ({
       WebkitUserSelect: 'none',
     }}
     {...restProps}
-  />;
+  />
+);
 
 export type ButtonProps = ColorProps &
   TextProps & {

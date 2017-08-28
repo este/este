@@ -63,7 +63,7 @@ test('lineHeight ensures vertical rhythm', () => {
 });
 
 test('styles are inherited', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Text>
       <Text color="warning" bold italic size={-1}>
         hi{' '}
@@ -72,6 +72,6 @@ test('styles are inherited', () => {
         </Text>
       </Text>
       <Text>.</Text>
-    </Text>,
-  );
+    </Text>
+  ));
 });

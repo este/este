@@ -46,9 +46,7 @@ const Me = ({ data, intl }) => {
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
       <CreateApp />
-      <P bold>
-        {user.email}
-      </P>
+      <P bold>{user.email}</P>
       <Image
         marginBottom={1}
         size={{ height: 100, width: 100 }}

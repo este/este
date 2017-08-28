@@ -189,7 +189,10 @@ const app = (
       });
       const variables = prepareQuery(context.query);
       data = await fetchQuery(environment, fetch, variables);
-      records = environment.getStore().getSource().toJSON();
+      records = environment
+        .getStore()
+        .getSource()
+        .toJSON();
     }
 
     if (graphCoolError != null) {

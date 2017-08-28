@@ -4,7 +4,7 @@ import Box, { type BoxProps } from './Box';
 import withTheme, { type ThemeContext } from './withTheme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
-const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) =>
+const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) => (
   // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
   <form
     {...restProps}
@@ -15,7 +15,8 @@ const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) =>
       onSubmit();
     }}
     onSubmit={(e: Event) => e.preventDefault()}
-  />;
+  />
+);
 
 type FormProps = BoxProps & {
   onSubmit?: () => any,

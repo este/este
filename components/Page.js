@@ -15,7 +15,7 @@ import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector } from 'react-redux';
 
-const PageContainer = ({ children }) =>
+const PageContainer = ({ children }) => (
   <Box
     margin="auto"
     paddingHorizontal={1}
@@ -25,15 +25,17 @@ const PageContainer = ({ children }) =>
     }}
   >
     {children}
-  </Box>;
+  </Box>
+);
 
 // Flex 1 to make footer sticky.
-const PageBody = ({ children }) =>
+const PageBody = ({ children }) => (
   <Box flex={1} maxWidth={30} paddingTop={2}>
     {children}
-  </Box>;
+  </Box>
+);
 
-const PageFooter = () =>
+const PageFooter = () => (
   <Text
     borderColor="gray"
     borderStyle="solid"
@@ -47,7 +49,8 @@ const PageFooter = () =>
     <A href="https://twitter.com/steida">steida</A>
     {', '}
     <SwitchLocale />
-  </Text>;
+  </Text>
+);
 
 // Because context is like dependency injection.
 // https://facebook.github.io/react/docs/context.html#updating-context
@@ -60,9 +63,7 @@ const Page = ({ children, darkEnabled, title }) => {
     <ThemeProvider theme={theme} {...forceRenderOnThemeChange(theme)}>
       <Baseline>
         <Head>
-          <title>
-            {title}
-          </title>
+          <title>{title}</title>
           <meta name="theme-color" content={pageBackgroundColor} />
           <style
             dangerouslySetInnerHTML={{
@@ -74,9 +75,7 @@ const Page = ({ children, darkEnabled, title }) => {
         <AppError />
         <PageContainer>
           <MainNav title={title} />
-          <PageBody>
-            {children}
-          </PageBody>
+          <PageBody>{children}</PageBody>
           <PageFooter />
         </PageContainer>
       </Baseline>

@@ -21,11 +21,11 @@ const localeToLanguageName = locale => {
   }
 };
 
-const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) =>
+const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) => (
   <Text>
     {supportedLocales
       .filter(supportedLocale => supportedLocale !== locale)
-      .map((supportedLocale, index, locales) =>
+      .map((supportedLocale, index, locales) => (
         <Text
           as="a"
           color="primary"
@@ -34,9 +34,10 @@ const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) =>
         >
           {localeToLanguageName(supportedLocale)}
           {supportedLocale.length > 1 && index < locales.length - 1 && ', '}
-        </Text>,
-      )}
-  </Text>;
+        </Text>
+      ))}
+  </Text>
+);
 
 export default connect((state: State) => ({
   defaultLocale: state.app.defaultLocale,

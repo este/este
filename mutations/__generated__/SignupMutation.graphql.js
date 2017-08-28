@@ -45,7 +45,6 @@ export type SignupMutationResponse = {|
 |};
 */
 
-
 /*
 mutation SignupMutation(
   $signupInput: SignupUserInput!
@@ -63,176 +62,177 @@ mutation SignupMutation(
 */
 
 const batch /*: ConcreteBatch*/ = {
-  "fragment": {
-    "argumentDefinitions": [
+  fragment: {
+    argumentDefinitions: [
       {
-        "kind": "LocalArgument",
-        "name": "signupInput",
-        "type": "SignupUserInput!",
-        "defaultValue": null
+        kind: 'LocalArgument',
+        name: 'signupInput',
+        type: 'SignupUserInput!',
+        defaultValue: null,
       },
       {
-        "kind": "LocalArgument",
-        "name": "signinInput",
-        "type": "SigninUserInput!",
-        "defaultValue": null
-      }
+        kind: 'LocalArgument',
+        name: 'signinInput',
+        type: 'SigninUserInput!',
+        defaultValue: null,
+      },
     ],
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "SignupMutation",
-    "selections": [
+    kind: 'Fragment',
+    metadata: null,
+    name: 'SignupMutation',
+    selections: [
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+        kind: 'LinkedField',
+        alias: null,
+        args: [
           {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "signupInput",
-            "type": "SignupUserInput!"
-          }
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'signupInput',
+            type: 'SignupUserInput!',
+          },
         ],
-        "concreteType": "CreateUserPayload",
-        "name": "createUser",
-        "plural": false,
-        "selections": [
+        concreteType: 'CreateUserPayload',
+        name: 'createUser',
+        plural: false,
+        selections: [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
+            kind: 'LinkedField',
+            alias: null,
+            args: null,
+            concreteType: 'User',
+            name: 'user',
+            plural: false,
+            selections: [
               {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
+                kind: 'ScalarField',
+                alias: null,
+                args: null,
+                name: 'id',
+                storageKey: null,
+              },
             ],
-            "storageKey": null
-          }
+            storageKey: null,
+          },
         ],
-        "storageKey": null
+        storageKey: null,
       },
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+        kind: 'LinkedField',
+        alias: null,
+        args: [
           {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "signinInput",
-            "type": "SigninUserInput!"
-          }
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'signinInput',
+            type: 'SigninUserInput!',
+          },
         ],
-        "concreteType": "SigninPayload",
-        "name": "signinUser",
-        "plural": false,
-        "selections": [
+        concreteType: 'SigninPayload',
+        name: 'signinUser',
+        plural: false,
+        selections: [
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "token",
-            "storageKey": null
-          }
+            kind: 'ScalarField',
+            alias: null,
+            args: null,
+            name: 'token',
+            storageKey: null,
+          },
         ],
-        "storageKey": null
-      }
+        storageKey: null,
+      },
     ],
-    "type": "Mutation"
+    type: 'Mutation',
   },
-  "id": null,
-  "kind": "Batch",
-  "metadata": {},
-  "name": "SignupMutation",
-  "query": {
-    "argumentDefinitions": [
+  id: null,
+  kind: 'Batch',
+  metadata: {},
+  name: 'SignupMutation',
+  query: {
+    argumentDefinitions: [
       {
-        "kind": "LocalArgument",
-        "name": "signupInput",
-        "type": "SignupUserInput!",
-        "defaultValue": null
+        kind: 'LocalArgument',
+        name: 'signupInput',
+        type: 'SignupUserInput!',
+        defaultValue: null,
       },
       {
-        "kind": "LocalArgument",
-        "name": "signinInput",
-        "type": "SigninUserInput!",
-        "defaultValue": null
-      }
+        kind: 'LocalArgument',
+        name: 'signinInput',
+        type: 'SigninUserInput!',
+        defaultValue: null,
+      },
     ],
-    "kind": "Root",
-    "name": "SignupMutation",
-    "operation": "mutation",
-    "selections": [
+    kind: 'Root',
+    name: 'SignupMutation',
+    operation: 'mutation',
+    selections: [
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+        kind: 'LinkedField',
+        alias: null,
+        args: [
           {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "signupInput",
-            "type": "SignupUserInput!"
-          }
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'signupInput',
+            type: 'SignupUserInput!',
+          },
         ],
-        "concreteType": "CreateUserPayload",
-        "name": "createUser",
-        "plural": false,
-        "selections": [
+        concreteType: 'CreateUserPayload',
+        name: 'createUser',
+        plural: false,
+        selections: [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
+            kind: 'LinkedField',
+            alias: null,
+            args: null,
+            concreteType: 'User',
+            name: 'user',
+            plural: false,
+            selections: [
               {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
+                kind: 'ScalarField',
+                alias: null,
+                args: null,
+                name: 'id',
+                storageKey: null,
+              },
             ],
-            "storageKey": null
-          }
+            storageKey: null,
+          },
         ],
-        "storageKey": null
+        storageKey: null,
       },
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+        kind: 'LinkedField',
+        alias: null,
+        args: [
           {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "signinInput",
-            "type": "SigninUserInput!"
-          }
+            kind: 'Variable',
+            name: 'input',
+            variableName: 'signinInput',
+            type: 'SigninUserInput!',
+          },
         ],
-        "concreteType": "SigninPayload",
-        "name": "signinUser",
-        "plural": false,
-        "selections": [
+        concreteType: 'SigninPayload',
+        name: 'signinUser',
+        plural: false,
+        selections: [
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "token",
-            "storageKey": null
-          }
+            kind: 'ScalarField',
+            alias: null,
+            args: null,
+            name: 'token',
+            storageKey: null,
+          },
         ],
-        "storageKey": null
-      }
-    ]
+        storageKey: null,
+      },
+    ],
   },
-  "text": "mutation SignupMutation(\n  $signupInput: SignupUserInput!\n  $signinInput: SigninUserInput!\n) {\n  createUser(input: $signupInput) {\n    user {\n      id\n    }\n  }\n  signinUser(input: $signinInput) {\n    token\n  }\n}\n"
+  text:
+    'mutation SignupMutation(\n  $signupInput: SignupUserInput!\n  $signinInput: SigninUserInput!\n) {\n  createUser(input: $signupInput) {\n    user {\n      id\n    }\n  }\n  signinUser(input: $signinInput) {\n    token\n  }\n}\n',
 };
 
 module.exports = batch;

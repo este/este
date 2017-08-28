@@ -9,7 +9,7 @@ import withIsAuthenticated, {
   type IsAuthenticatedContext,
 } from './withIsAuthenticated';
 
-const NavA = ({ intl, page, title, ...props }) =>
+const NavA = ({ intl, page, title, ...props }) => (
   <A
     backgroundColor="primary"
     bold
@@ -22,7 +22,8 @@ const NavA = ({ intl, page, title, ...props }) =>
     {...props}
   >
     <FormattedMessage {...page.title} />
-  </A>;
+  </A>
+);
 
 type MainNavOwnProps = {
   title: string,

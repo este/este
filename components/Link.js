@@ -12,11 +12,10 @@ type LinkProps = {|
   prefetch?: boolean,
 |};
 
-const Link = ({ children, ...props }: LinkProps) =>
+const Link = ({ children, ...props }: LinkProps) => (
   <LocaleLink {...props}>
-    <a>
-      {children}
-    </a>
-  </LocaleLink>;
+    <a>{children}</a>
+  </LocaleLink>
+);
 
 export default Link;

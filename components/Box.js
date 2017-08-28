@@ -319,12 +319,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
 
   const element = React.createElement(as || 'div', { ...restProps, className });
 
-  if (autoFocus)
-    return (
-      <AutoFocus autoFocus={autoFocus}>
-        {element}
-      </AutoFocus>
-    );
+  if (autoFocus) return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
 };
 

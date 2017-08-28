@@ -6,7 +6,7 @@ type UnsavedChangesConfirmProps = {|
   render: (() => boolean) => Node,
 |};
 
-const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) =>
+const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) => (
   <FormattedMessage
     defaultMessage="You have unsaved changes. Are you sure?"
     id="confirm.unsavedChanges"
@@ -16,6 +16,7 @@ const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) =>
         // eslint-disable-next-line no-alert, no-undef
         confirm((message: any)),
       )}
-  </FormattedMessage>;
+  </FormattedMessage>
+);
 
 export default UnsavedChangesConfirm;

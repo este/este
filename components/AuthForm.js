@@ -34,12 +34,13 @@ const overrideWebkitYellowAutofill = theme => ({
   WebkitTextFillColor: theme.colors[theme.text.color],
 });
 
-const TextInputBigAuth = ({ theme, ...props }) =>
+const TextInputBigAuth = ({ theme, ...props }) => (
   <TextInputBig
     {...props}
     maxWidth={26}
     style={overrideWebkitYellowAutofill(theme)}
-  />;
+  />
+);
 
 type AuthFormProps = {
   dispatch: Dispatch,

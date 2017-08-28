@@ -22,7 +22,9 @@ export type TextInputProps = TextProps & {
 };
 
 const computePlaceholderTextColor = (colors, color) =>
-  colorLib(colors[color]).fade(0.5).toString();
+  colorLib(colors[color])
+    .fade(0.5)
+    .toString();
 
 const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   const {
@@ -53,17 +55,21 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     <Box>
       <Set marginBottom={0}>
         {label &&
-          (typeof label === 'string'
-            ? <Text bold size={size}>
-                {label}
-              </Text>
-            : label)}
+          (typeof label === 'string' ? (
+            <Text bold size={size}>
+              {label}
+            </Text>
+          ) : (
+            label
+          ))}
         {error &&
-          (typeof error === 'string'
-            ? <Text bold color="danger" size={size}>
-                {error}
-              </Text>
-            : error)}
+          (typeof error === 'string' ? (
+            <Text bold color="danger" size={size}>
+              {error}
+            </Text>
+          ) : (
+            error
+          ))}
       </Set>
       <Text
         as="input"

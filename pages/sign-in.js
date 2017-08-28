@@ -5,9 +5,10 @@ import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 
-const SignIn = ({ intl }) =>
+const SignIn = ({ intl }) => (
   <Page title={intl.formatMessage(sitemap.signIn.title)}>
     <AuthForm />
-  </Page>;
+  </Page>
+);
 
 export default app(SignIn);

@@ -25,11 +25,13 @@ const TextInputBig = (props: TextInputProps) => {
         {...restProps}
       />
       <Box minHeight={1}>
-        {typeof error === 'string'
-          ? <Text color="danger" size={size - 1}>
-              {error}
-            </Text>
-          : error}
+        {typeof error === 'string' ? (
+          <Text color="danger" size={size - 1}>
+            {error}
+          </Text>
+        ) : (
+          error
+        )}
       </Box>
     </Box>
   );

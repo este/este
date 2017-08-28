@@ -11,8 +11,9 @@ export type SetProps = BoxProps & {
   vertical?: boolean,
 };
 
-const Space = ({ spaceBetween }) =>
-  <Box height={spaceBetween} width={spaceBetween} />;
+const Space = ({ spaceBetween }) => (
+  <Box height={spaceBetween} width={spaceBetween} />
+);
 
 // Believe or not, this is the most easy and robust approach for inner spacing.
 const addSpaceBetween = (children, spaceBetween) => {

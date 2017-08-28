@@ -6,11 +6,12 @@ import React from 'react';
 // http://caniemoji.com
 
 // TODO: Return string with React 16
-const CountryFlag = ({ code }: { code: string }) =>
+const CountryFlag = ({ code }: { code: string }) => (
   <span style={{ verticalAlign: 'middle' }}>
     {code
       .toUpperCase()
       .replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))}
-  </span>;
+  </span>
+);
 
 export default CountryFlag;

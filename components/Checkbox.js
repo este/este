@@ -48,10 +48,11 @@ const Checkbox = (
         flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
         justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
       >
-        {label &&
+        {label && (
           <Text color={color} size={size}>
             {label}
-          </Text>}
+          </Text>
+        )}
         <SvgIcon
           color={color}
           size={size}

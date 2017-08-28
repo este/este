@@ -39,12 +39,14 @@ const styles = {
 const Baseline = (
   { baselineShown, children }: BaselineProps,
   { theme }: BaselineContext,
-) =>
+) => (
   <div style={styles.container}>
     {children}
-    {baselineShown &&
-      <div style={styles.baseline(theme.typography.lineHeight)} />}
-  </div>;
+    {baselineShown && (
+      <div style={styles.baseline(theme.typography.lineHeight)} />
+    )}
+  </div>
+);
 
 Baseline.contextTypes = {
   theme: PropTypes.object,
