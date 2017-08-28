@@ -16,7 +16,7 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prettier":
-      "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write '{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types}/**/*.js'",
+      "prettier --single-quote --trailing-comma all --write '{components,epics,lib,mutations,pages,reducers,scripts,test,themes,types}/**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "flow && jest --updateSnapshot && yarn relay && yarn build",
     "test-without-relay": "flow && jest --updateSnapshot && yarn build",
