@@ -13,6 +13,7 @@ import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import { serialize as serializeCookie } from 'cookie';
+import CreateApp from '../components/CreateApp';
 
 const deleteCookie = () => {
   // eslint-disable-next-line no-undef
@@ -44,6 +45,7 @@ const Me = ({ data, intl }) => {
   if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
+      <CreateApp />
       <P bold>
         {user.email}
       </P>
