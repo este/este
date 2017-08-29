@@ -9,7 +9,6 @@ import felaRenderer from '../lib/felaRenderer';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import type { Req, Store, ServerState, GraphCoolError } from '../types';
-import uuid from 'uuid';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { createProvider as createReduxProvider } from 'react-redux';
@@ -35,7 +34,7 @@ if (process.browser) {
 let clientReduxStore: ?Store = null;
 
 const getReduxStore = (serverState, getEnvironment) => {
-  const platformDependencies = { createUuid: uuid.v4, getEnvironment };
+  const platformDependencies = { getEnvironment };
   if (!process.browser) {
     return createReduxStore(serverState, { platformDependencies });
   }
@@ -222,7 +221,7 @@ const app = (
       serverState: {
         app: {
           baselineShown: false,
-          darkEnabled: false,
+          darkEnabled: true,
           errors: null,
           name: APP_NAME,
           version: APP_VERSION,

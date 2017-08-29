@@ -13,7 +13,10 @@ import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import { serialize as serializeCookie } from 'cookie';
-import CreateApp from '../components/CreateApp';
+import CreateWeb from '../components/CreateWeb';
+import Heading from '../components/Heading';
+import { FormattedMessage } from 'react-intl';
+import ViewerWebs from '../components/ViewerWebs';
 
 const deleteCookie = () => {
   // eslint-disable-next-line no-undef
@@ -45,17 +48,27 @@ const Me = ({ data, intl }) => {
   if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
-      <CreateApp />
-      <P bold>{user.email}</P>
+      <Heading size={1}>
+        <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
+      </Heading>
+      <ViewerWebs />
+      <CreateWeb />
+      <Heading size={1}>
+        <FormattedMessage id="profile" defaultMessage="Profile" />
+      </Heading>
       <Image
         marginBottom={1}
         size={{ height: 100, width: 100 }}
         src={getGravatarUrl(user.email)}
         title={user.email}
       />
+      <P bold>{user.email}</P>
       <Set>
         <SignOutButton danger onPress={signOut} />
       </Set>
+      <Heading size={1}>
+        <FormattedMessage id="devTools" defaultMessage="Dev Tools" />
+      </Heading>
       <Set>
         <ToggleBaseline />
         <ToggleDark />

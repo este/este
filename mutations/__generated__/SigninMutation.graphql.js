@@ -26,6 +26,7 @@ export type SigninMutationResponse = {|
 |};
 */
 
+
 /*
 mutation SigninMutation(
   $signinInput: SigninUserInput!
@@ -37,93 +38,92 @@ mutation SigninMutation(
 */
 
 const batch /*: ConcreteBatch*/ = {
-  fragment: {
-    argumentDefinitions: [
+  "fragment": {
+    "argumentDefinitions": [
       {
-        kind: 'LocalArgument',
-        name: 'signinInput',
-        type: 'SigninUserInput!',
-        defaultValue: null,
-      },
+        "kind": "LocalArgument",
+        "name": "signinInput",
+        "type": "SigninUserInput!",
+        "defaultValue": null
+      }
     ],
-    kind: 'Fragment',
-    metadata: null,
-    name: 'SigninMutation',
-    selections: [
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "SigninMutation",
+    "selections": [
       {
-        kind: 'LinkedField',
-        alias: null,
-        args: [
+        "kind": "LinkedField",
+        "alias": null,
+        "args": [
           {
-            kind: 'Variable',
-            name: 'input',
-            variableName: 'signinInput',
-            type: 'SigninUserInput!',
-          },
+            "kind": "Variable",
+            "name": "input",
+            "variableName": "signinInput",
+            "type": "SigninUserInput!"
+          }
         ],
-        concreteType: 'SigninPayload',
-        name: 'signinUser',
-        plural: false,
-        selections: [
+        "concreteType": "SigninPayload",
+        "name": "signinUser",
+        "plural": false,
+        "selections": [
           {
-            kind: 'ScalarField',
-            alias: null,
-            args: null,
-            name: 'token',
-            storageKey: null,
-          },
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "token",
+            "storageKey": null
+          }
         ],
-        storageKey: null,
-      },
+        "storageKey": null
+      }
     ],
-    type: 'Mutation',
+    "type": "Mutation"
   },
-  id: null,
-  kind: 'Batch',
-  metadata: {},
-  name: 'SigninMutation',
-  query: {
-    argumentDefinitions: [
+  "id": null,
+  "kind": "Batch",
+  "metadata": {},
+  "name": "SigninMutation",
+  "query": {
+    "argumentDefinitions": [
       {
-        kind: 'LocalArgument',
-        name: 'signinInput',
-        type: 'SigninUserInput!',
-        defaultValue: null,
-      },
+        "kind": "LocalArgument",
+        "name": "signinInput",
+        "type": "SigninUserInput!",
+        "defaultValue": null
+      }
     ],
-    kind: 'Root',
-    name: 'SigninMutation',
-    operation: 'mutation',
-    selections: [
+    "kind": "Root",
+    "name": "SigninMutation",
+    "operation": "mutation",
+    "selections": [
       {
-        kind: 'LinkedField',
-        alias: null,
-        args: [
+        "kind": "LinkedField",
+        "alias": null,
+        "args": [
           {
-            kind: 'Variable',
-            name: 'input',
-            variableName: 'signinInput',
-            type: 'SigninUserInput!',
-          },
+            "kind": "Variable",
+            "name": "input",
+            "variableName": "signinInput",
+            "type": "SigninUserInput!"
+          }
         ],
-        concreteType: 'SigninPayload',
-        name: 'signinUser',
-        plural: false,
-        selections: [
+        "concreteType": "SigninPayload",
+        "name": "signinUser",
+        "plural": false,
+        "selections": [
           {
-            kind: 'ScalarField',
-            alias: null,
-            args: null,
-            name: 'token',
-            storageKey: null,
-          },
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "token",
+            "storageKey": null
+          }
         ],
-        storageKey: null,
-      },
-    ],
+        "storageKey": null
+      }
+    ]
   },
-  text:
-    'mutation SigninMutation(\n  $signinInput: SigninUserInput!\n) {\n  signinUser(input: $signinInput) {\n    token\n  }\n}\n',
+  "text": "mutation SigninMutation(\n  $signinInput: SigninUserInput!\n) {\n  signinUser(input: $signinInput) {\n    token\n  }\n}\n"
 };
 
 module.exports = batch;
