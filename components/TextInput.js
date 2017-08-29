@@ -7,10 +7,8 @@ import colorLib from 'color';
 import withTheme, { type ThemeContext } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
-// For underline or the other effects, make a new component. Check Field.
-// As for optional maxLength, I believe it belongs to validation and user should
-// have an option to write or paste more text and edit it later.
-// TODO: multiline and rows, use content editable because links.
+// For underline or the other effects, make a new component. Check TextInputBig.
+// TODO: Multiline and rows. Use content editable rather because of links?
 
 export type TextInputProps = TextProps & {
   disabled?: boolean,
@@ -20,6 +18,9 @@ export type TextInputProps = TextProps & {
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
 };
+
+// Like Twitter.
+const defaultMaxLength = 140;
 
 const computePlaceholderTextColor = (colors, color) =>
   colorLib(colors[color])
@@ -31,7 +32,7 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     color = theme.text.color,
     error,
     label,
-    maxLength = 256,
+    maxLength = defaultMaxLength,
     onChange,
     onSubmitEditing,
     size = 0,
