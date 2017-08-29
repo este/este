@@ -1,4 +1,4 @@
-// flow-typed signature: 3053b06604259a1bc4782975ea6a02d5
+// flow-typed signature: 2aec58ba90be936500740b3bd57c5aa1
 // flow-typed version: <<STUB>>/relay-compiler_v^1.2.0/flow_v0.53.0
 
 /**
@@ -43,6 +43,10 @@ declare module 'relay-compiler/lib/dedent' {
 }
 
 declare module 'relay-compiler/lib/deepFreeze' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/DefaultHandleKey' {
   declare module.exports: any;
 }
 
@@ -210,10 +214,6 @@ declare module 'relay-compiler/lib/RelayConnectionConstants' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayConnectionInterface' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayConnectionTransform' {
   declare module.exports: any;
 }
@@ -223,10 +223,6 @@ declare module 'relay-compiler/lib/RelayConsoleReporter' {
 }
 
 declare module 'relay-compiler/lib/RelayDefaultHandleKey' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayDefaultHandleKeyOSS' {
   declare module.exports: any;
 }
 
@@ -299,14 +295,6 @@ declare module 'relay-compiler/lib/RelayMultiReporter' {
 }
 
 declare module 'relay-compiler/lib/RelayNetworkDebug' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayNodeInterface' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayOSSConnectionInterface' {
   declare module.exports: any;
 }
 
@@ -455,6 +443,9 @@ declare module 'relay-compiler/lib/dedent.js' {
 declare module 'relay-compiler/lib/deepFreeze.js' {
   declare module.exports: $Exports<'relay-compiler/lib/deepFreeze'>;
 }
+declare module 'relay-compiler/lib/DefaultHandleKey.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/DefaultHandleKey'>;
+}
 declare module 'relay-compiler/lib/FileParser.js' {
   declare module.exports: $Exports<'relay-compiler/lib/FileParser'>;
 }
@@ -578,9 +569,6 @@ declare module 'relay-compiler/lib/RelayConcreteNode.js' {
 declare module 'relay-compiler/lib/RelayConnectionConstants.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayConnectionConstants'>;
 }
-declare module 'relay-compiler/lib/RelayConnectionInterface.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayConnectionInterface'>;
-}
 declare module 'relay-compiler/lib/RelayConnectionTransform.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayConnectionTransform'>;
 }
@@ -589,9 +577,6 @@ declare module 'relay-compiler/lib/RelayConsoleReporter.js' {
 }
 declare module 'relay-compiler/lib/RelayDefaultHandleKey.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayDefaultHandleKey'>;
-}
-declare module 'relay-compiler/lib/RelayDefaultHandleKeyOSS.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayDefaultHandleKeyOSS'>;
 }
 declare module 'relay-compiler/lib/RelayError.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayError'>;
@@ -646,12 +631,6 @@ declare module 'relay-compiler/lib/RelayMultiReporter.js' {
 }
 declare module 'relay-compiler/lib/RelayNetworkDebug.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayNetworkDebug'>;
-}
-declare module 'relay-compiler/lib/RelayNodeInterface.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayNodeInterface'>;
-}
-declare module 'relay-compiler/lib/RelayOSSConnectionInterface.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayOSSConnectionInterface'>;
 }
 declare module 'relay-compiler/lib/RelayParser.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayParser'>;

@@ -1,4 +1,4 @@
-// flow-typed signature: bbb1a24380cc995565e29f3031d793a6
+// flow-typed signature: 67a987161032f1b89373a9dbdd8480c0
 // flow-typed version: <<STUB>>/react-relay_v^1.2.0/flow_v0.53.0
 
 /**
@@ -362,10 +362,6 @@ declare module 'react-relay/lib/RelayConcreteNode' {
   declare module.exports: any;
 }
 
-declare module 'react-relay/lib/RelayConnectionInterface' {
-  declare module.exports: any;
-}
-
 declare module 'react-relay/lib/RelayContainer' {
   declare module.exports: any;
 }
@@ -518,10 +514,6 @@ declare module 'react-relay/lib/RelayOptimisticMutationUtils' {
   declare module.exports: any;
 }
 
-declare module 'react-relay/lib/RelayOSSConnectionInterface' {
-  declare module.exports: any;
-}
-
 declare module 'react-relay/lib/RelayPendingQueryTracker' {
   declare module.exports: any;
 }
@@ -559,10 +551,6 @@ declare module 'react-relay/lib/RelayQueryPath' {
 }
 
 declare module 'react-relay/lib/RelayQueryRequest' {
-  declare module.exports: any;
-}
-
-declare module 'react-relay/lib/RelayQueryResultObservable' {
   declare module.exports: any;
 }
 
@@ -1012,9 +1000,6 @@ declare module 'react-relay/lib/RelayCompatTypes.js' {
 declare module 'react-relay/lib/RelayConcreteNode.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayConcreteNode'>;
 }
-declare module 'react-relay/lib/RelayConnectionInterface.js' {
-  declare module.exports: $Exports<'react-relay/lib/RelayConnectionInterface'>;
-}
 declare module 'react-relay/lib/RelayContainer.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayContainer'>;
 }
@@ -1129,9 +1114,6 @@ declare module 'react-relay/lib/RelayOperationSelector.js' {
 declare module 'react-relay/lib/RelayOptimisticMutationUtils.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayOptimisticMutationUtils'>;
 }
-declare module 'react-relay/lib/RelayOSSConnectionInterface.js' {
-  declare module.exports: $Exports<'react-relay/lib/RelayOSSConnectionInterface'>;
-}
 declare module 'react-relay/lib/RelayPendingQueryTracker.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayPendingQueryTracker'>;
 }
@@ -1161,9 +1143,6 @@ declare module 'react-relay/lib/RelayQueryPath.js' {
 }
 declare module 'react-relay/lib/RelayQueryRequest.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayQueryRequest'>;
-}
-declare module 'react-relay/lib/RelayQueryResultObservable.js' {
-  declare module.exports: $Exports<'react-relay/lib/RelayQueryResultObservable'>;
 }
 declare module 'react-relay/lib/RelayQueryTracker.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayQueryTracker'>;

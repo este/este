@@ -1,5 +1,5 @@
-// flow-typed signature: fb41b34bb0832bbf65201e563f3ca56c
-// flow-typed version: ef808615f5/ramda_v0.x.x/flow_>=v0.39.x
+// flow-typed signature: 2fa6de90548cf1e7e3a373e690fcedf5
+// flow-typed version: 5ce92b31f3/ramda_v0.x.x/flow_>=v0.39.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -8,6 +8,8 @@ type Transformer<A,B> = {
   '@@transducer/init': () => A,
   '@@transducer/result': (result: *) => B
 }
+
+declare type $npm$ramda$Placeholder = {'@@functional/placeholder': true};
 
 
 declare module ramda {
@@ -605,6 +607,7 @@ declare module ramda {
   declare function project<T>(keys: Array<string>, val: Array<{[key:string]: T}>): Array<{[key:string]: T}>;
 
   declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, ...rest: Array<void>): (o: O) => ?T;
+  declare function prop<T,O:{[k:string]:T}>(__: $npm$ramda$Placeholder, o: O): (key: $Keys<O>) => ?T;
   declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, o: O): ?T;
 
   declare function propOr<T,V,A:{[k:string]:V}>(or: T, ...rest: Array<void>):
@@ -638,7 +641,7 @@ declare module ramda {
   // TODO view
 
   // *Function
-  declare var __: *;
+  declare var __: $npm$ramda$Placeholder;
 
   declare var T: (_: any) => true;
   declare var F: (_: any) => false;

@@ -1,4 +1,4 @@
-// flow-typed signature: 53205d1e1488c54aede7c1e8ba3e6652
+// flow-typed signature: beda284fe9273294d88356f680d4b8c8
 // flow-typed version: <<STUB>>/babel-plugin-relay_v^1.2.0/flow_v0.53.0
 
 /**
@@ -134,10 +134,6 @@ declare module 'babel-plugin-relay/lib/RelayConcreteNode' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-relay/lib/RelayConnectionInterface' {
-  declare module.exports: any;
-}
-
 declare module 'babel-plugin-relay/lib/RelayDefaultHandleKey' {
   declare module.exports: any;
 }
@@ -163,14 +159,6 @@ declare module 'babel-plugin-relay/lib/RelayMockRenderer' {
 }
 
 declare module 'babel-plugin-relay/lib/RelayNetworkDebug' {
-  declare module.exports: any;
-}
-
-declare module 'babel-plugin-relay/lib/RelayNodeInterface' {
-  declare module.exports: any;
-}
-
-declare module 'babel-plugin-relay/lib/RelayOSSConnectionInterface' {
   declare module.exports: any;
 }
 
@@ -329,9 +317,6 @@ declare module 'babel-plugin-relay/lib/recycleNodesInto.js' {
 declare module 'babel-plugin-relay/lib/RelayConcreteNode.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/RelayConcreteNode'>;
 }
-declare module 'babel-plugin-relay/lib/RelayConnectionInterface.js' {
-  declare module.exports: $Exports<'babel-plugin-relay/lib/RelayConnectionInterface'>;
-}
 declare module 'babel-plugin-relay/lib/RelayDefaultHandleKey.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/RelayDefaultHandleKey'>;
 }
@@ -352,12 +337,6 @@ declare module 'babel-plugin-relay/lib/RelayMockRenderer.js' {
 }
 declare module 'babel-plugin-relay/lib/RelayNetworkDebug.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/RelayNetworkDebug'>;
-}
-declare module 'babel-plugin-relay/lib/RelayNodeInterface.js' {
-  declare module.exports: $Exports<'babel-plugin-relay/lib/RelayNodeInterface'>;
-}
-declare module 'babel-plugin-relay/lib/RelayOSSConnectionInterface.js' {
-  declare module.exports: $Exports<'babel-plugin-relay/lib/RelayOSSConnectionInterface'>;
 }
 declare module 'babel-plugin-relay/lib/RelayProfiler.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/RelayProfiler'>;
