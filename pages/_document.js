@@ -109,10 +109,10 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          {/* Polyfill Intl API for older browsers */}
-          <script
+          {/* Polyfill Intl API for older browsers. Only for old Safari end Android. */}
+          {/* <script
             src={`https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${locale}`}
-          />
+          /> */}
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
           <NextScript />
         </body>
