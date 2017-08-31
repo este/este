@@ -17,6 +17,7 @@ export type TextInputProps = TextProps & {
   maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
+  removeWebkitYellowAutofill?: boolean,
 };
 
 // Like Twitter.
@@ -36,19 +37,33 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     onChange,
     onSubmitEditing,
     size = 0,
+    removeWebkitYellowAutofill,
     ...restProps
   } = props;
 
+  const reactNativeEmulation = restProps.isReactNative
+    ? null
+    : {
+        '::placeholder': {
+          color: computePlaceholderTextColor(theme.colors, color),
+        },
+        backgroundColor: 'transparent',
+        outline: 'none',
+      };
+
+  // https://blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
+  const removeWebkitYellowAutofillStyle = removeWebkitYellowAutofill
+    ? {
+        WebkitBoxShadow: `inset 0 0 0px 9999px ${theme.colors[
+          theme.page.backgroundColor
+        ]}`,
+        WebkitTextFillColor: theme.colors[color],
+      }
+    : null;
+
   const style = {
-    ...(restProps.isReactNative
-      ? null
-      : {
-          '::placeholder': {
-            color: computePlaceholderTextColor(theme.colors, color),
-          },
-          backgroundColor: 'transparent',
-          outline: 'none',
-        }),
+    ...reactNativeEmulation,
+    ...removeWebkitYellowAutofillStyle,
     ...restProps.style,
   };
 
