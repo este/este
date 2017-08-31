@@ -1,4 +1,4 @@
-// flow-typed signature: 5b6a066afb6b2180b908eae7d5c58899
+// flow-typed signature: 7a0fcbd3d66bde21076713ed344929cf
 // flow-typed version: <<STUB>>/next_v^3.0.3/flow_v0.53.0
 
 /**
@@ -103,6 +103,10 @@ declare module 'next/dist/lib/router/index' {
 }
 
 declare module 'next/dist/lib/router/router' {
+  declare module.exports: any;
+}
+
+declare module 'next/dist/lib/router/with-router' {
   declare module.exports: any;
 }
 
@@ -325,6 +329,9 @@ declare module 'next/dist/lib/router/index.js' {
 }
 declare module 'next/dist/lib/router/router.js' {
   declare module.exports: $Exports<'next/dist/lib/router/router'>;
+}
+declare module 'next/dist/lib/router/with-router.js' {
+  declare module.exports: $Exports<'next/dist/lib/router/with-router'>;
 }
 declare module 'next/dist/lib/shallow-equals.js' {
   declare module.exports: $Exports<'next/dist/lib/shallow-equals'>;

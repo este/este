@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7c5717f234078af85f1b24d9a405e896
+ * @relayHash c27bc7942aacc1fbfbaa1844d472a9db
  */
 
 /* eslint-disable */
@@ -26,6 +26,13 @@ query meQuery {
       email
       id
     }
+    ...CreateWeb_viewer
+    id
+  }
+}
+
+fragment CreateWeb_viewer on Viewer {
+  user {
     id
   }
 }
@@ -63,6 +70,11 @@ const batch /*: ConcreteBatch*/ = {
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "FragmentSpread",
+            "name": "CreateWeb_viewer",
+            "args": null
           }
         ],
         "storageKey": null
@@ -125,7 +137,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query meQuery {\n  viewer {\n    user {\n      email\n      id\n    }\n    id\n  }\n}\n"
+  "text": "query meQuery {\n  viewer {\n    user {\n      email\n      id\n    }\n    ...CreateWeb_viewer\n    id\n  }\n}\n\nfragment CreateWeb_viewer on Viewer {\n  user {\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

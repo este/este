@@ -2,6 +2,9 @@
 import type { Environment, Errors } from '../types';
 import { commitMutation as relayCommitMutation } from 'react-relay';
 
+// TODO: This is wrong approach. Remove it.
+// Why? Promise sucks, because it can't be cancelled. Also error handling fml.
+
 // Custom commitMutation.
 //  - map commitMutation callbacks to promise for epics
 //  - map graph.cool errors to app errors

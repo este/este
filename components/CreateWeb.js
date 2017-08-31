@@ -7,36 +7,61 @@ import { FormattedMessage } from 'react-intl';
 import Text from './Text';
 import Set from './Set';
 import nameToDomain from '../lib/nameToDomain';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
+import CreateWebMutation from '../mutations/CreateWebMutation';
+import type { Subscription } from 'rxjs';
 
-// const signIn = () => null;
-
-// {nameToDomain(name)}
-// const isV
-
-class CreateWeb extends React.Component<{}, { name: string }> {
+class CreateWeb extends React.Component<
+  { viewer: CreateWeb_viewer, relay: { environment: Object } },
+  { name: string, pending: boolean },
+> {
   state = {
     name: '',
+    pending: false,
   };
+
+  componentWillUnmount() {
+    // Doing this manually sucks. We deserve a better design.
+    if (this.mutationObserver) this.mutationObserver.unsubscribe();
+  }
 
   getDomain() {
     return nameToDomain(this.state.name);
+  }
+
+  canSubmit() {
+    return !this.state.pending && this.getDomain().length >= 3;
   }
 
   handleNameChange = (name: string) => {
     this.setState({ name });
   };
 
-  handleSubmit = () => {
-    // const domain = this.getDomain();
-    // console.log(domain);
+  mutationObserver: ?Subscription;
+
+  createWeb = () => {
+    const { user } = this.props.viewer;
+    if (!user) return;
+    if (!this.canSubmit()) return;
+    this.setState({ pending: true });
+    this.mutationObserver = CreateWebMutation.commit(
+      this.props.relay.environment,
+      {
+        input: {
+          domain: this.getDomain(),
+          name: this.state.name,
+          ownerId: user.id,
+          // https://github.com/facebook/relay/issues/2077
+          clientMutationId: Date.now().toString(36),
+        },
+      },
+    ).subscribe(() => this.setState({ name: '', pending: false }));
   };
 
   render() {
-    const domain = this.getDomain();
-    const { name } = this.state;
-
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.createWeb}>
         <TextInputBig
           label={
             <Text>
@@ -49,14 +74,27 @@ class CreateWeb extends React.Component<{}, { name: string }> {
           autoFocus
           onChange={this.handleNameChange}
           type="text"
-          value={name}
+          value={this.state.name}
+          disabled={this.state.pending}
         />
         <Set>
-          <CreateButton primary disabled={!domain} />
+          <CreateButton
+            primary
+            disabled={!this.canSubmit()}
+            onPress={this.createWeb}
+          />
         </Set>
       </Form>
     );
   }
 }
 
-export default CreateWeb;
+export default createFragmentContainer(CreateWeb, {
+  viewer: graphql`
+    fragment CreateWeb_viewer on Viewer {
+      user {
+        id
+      }
+    }
+  `,
+});

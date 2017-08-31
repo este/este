@@ -52,7 +52,7 @@ const Me = ({ data, intl }) => {
         <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
       </Heading>
       <ViewerWebs />
-      <CreateWeb />
+      <CreateWeb viewer={data.viewer} />
       <Heading size={1}>
         <FormattedMessage id="profile" defaultMessage="Profile" />
       </Heading>
@@ -67,7 +67,7 @@ const Me = ({ data, intl }) => {
         <SignOutButton danger onPress={signOut} />
       </Set>
       <Heading size={1}>
-        <FormattedMessage id="devTools" defaultMessage="Dev Tools" />
+        <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
       </Heading>
       <Set>
         <ToggleBaseline />
@@ -85,6 +85,7 @@ export default app(Me, {
         user {
           email
         }
+        ...CreateWeb_viewer
       }
     }
   `,

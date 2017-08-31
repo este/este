@@ -78,6 +78,7 @@ export type Dependencies = PlatformDependencies & {
   getNow: () => number,
 };
 
+// TODO: Remove
 export type Observable = RxObservable<Action>;
 
 // TODO: There are no redux-observable flow definitions yet. Therefore, we have
