@@ -9,6 +9,14 @@ import withIsAuthenticated, {
   type IsAuthenticatedContext,
 } from './withIsAuthenticated';
 
+type OwnProps = {
+  title: string,
+};
+
+type Props = OwnProps & {
+  intl: IntlShape,
+};
+
 const NavA = ({ intl, page, title, ...props }) => (
   <A
     backgroundColor="primary"
@@ -25,16 +33,8 @@ const NavA = ({ intl, page, title, ...props }) => (
   </A>
 );
 
-type MainNavOwnProps = {
-  title: string,
-};
-
-type MainNavProps = MainNavOwnProps & {
-  intl: IntlShape,
-};
-
 const MainNav = (
-  { intl, title }: MainNavProps,
+  { intl, title }: Props,
   { isAuthenticated }: IsAuthenticatedContext,
 ) => {
   const { index, me, signIn } = sitemap;
@@ -55,6 +55,6 @@ const MainNav = (
 
 withIsAuthenticated(MainNav);
 
-const MainNavIntl: ComponentType<MainNavOwnProps> = injectIntl(MainNav);
+const MainNavIntl: ComponentType<OwnProps> = injectIntl(MainNav);
 
 export default MainNavIntl;
