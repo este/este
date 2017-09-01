@@ -12,17 +12,26 @@ import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql'
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import type { Subscription } from 'rxjs';
 
-class CreateWeb extends React.Component<
-  { viewer: CreateWeb_viewer, relay: { environment: Object } },
-  { name: string, pending: boolean },
-> {
+type Props = {
+  viewer: CreateWeb_viewer,
+  relay: { environment: Object },
+};
+
+type State = {
+  name: string,
+  pending: boolean,
+};
+
+class CreateWeb extends React.Component<Props, State> {
   state = {
     name: '',
     pending: false,
   };
 
+  mutationObserver: ?Subscription;
+
   componentWillUnmount() {
-    // Doing this manually sucks. We deserve a better design.
+    // TODO: In future, we will use higher order component for that.
     if (this.mutationObserver) this.mutationObserver.unsubscribe();
   }
 
@@ -30,20 +39,14 @@ class CreateWeb extends React.Component<
     return nameToDomain(this.state.name);
   }
 
-  canSubmit() {
+  isValid() {
     return !this.state.pending && this.getDomain().length >= 3;
   }
-
-  handleNameChange = (name: string) => {
-    this.setState({ name });
-  };
-
-  mutationObserver: ?Subscription;
 
   createWeb = () => {
     const { user } = this.props.viewer;
     if (!user) return;
-    if (!this.canSubmit()) return;
+    if (!this.isValid()) return;
     this.setState({ pending: true });
     this.mutationObserver = CreateWebMutation.commit(
       this.props.relay.environment,
@@ -72,7 +75,7 @@ class CreateWeb extends React.Component<
             </Text>
           }
           autoFocus
-          onChange={this.handleNameChange}
+          onChange={name => this.setState({ name })}
           type="text"
           value={this.state.name}
           disabled={this.state.pending}
@@ -80,7 +83,7 @@ class CreateWeb extends React.Component<
         <Set>
           <CreateButton
             primary
-            disabled={!this.canSubmit()}
+            disabled={!this.isValid()}
             onPress={this.createWeb}
           />
         </Set>
