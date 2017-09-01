@@ -57,7 +57,9 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         WebkitBoxShadow: `inset 0 0 0px 9999px ${theme.colors[
           theme.page.backgroundColor
         ]}`,
-        WebkitTextFillColor: theme.colors[color],
+        // This recolor also placeholder. Idk how to fix it.
+        // Autofill text should be white, but how? CSS doesn't work.
+        // WebkitTextFillColor: theme.colors[color],
       }
     : null;
 
