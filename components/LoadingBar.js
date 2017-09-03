@@ -21,15 +21,18 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-// TODO: Use theme primary color for bg.
-const LoadingBar = () =>
-  <style jsx global>
+type LoadingBarProps = {
+  color: string,
+}
+
+const LoadingBar = ({ color } : LoadingBarProps) =>
+  <style jsx>
     {`
       #nprogress {
         pointer-events: none;
       }
       #nprogress .bar {
-        background: #228ae6;
+        background: ${color};
         position: fixed;
         z-index: 1031;
         top: 0;
@@ -43,7 +46,7 @@ const LoadingBar = () =>
         right: 0px;
         width: 100px;
         height: 100%;
-        box-shadow: 0 0 10px #228ae6, 0 0 5px #228ae6;
+        box-shadow: 0 0 10px ${color}, 0 0 5px ${color};
         opacity: 1.0;
         transform: rotate(3deg) translate(0px, -4px);
       }
