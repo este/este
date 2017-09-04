@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q r s t u"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:blue}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{text-align:left}
+    .p{font-weight:normal}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
+}
+`;
+
+exports[`disabled 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q r s t u v"
+        disabled={true}
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{opacity:0.5}
+    .i{white-space:pre-wrap}
+    .j{overflow-wrap:break-word}
+    .k{-ms-hyphens:auto}
+    .l{color:black}
+    .m{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .n{font-size:16}
+    .o{line-height:24px}
+    .p{text-align:left}
+    .q{font-weight:normal}
+    .r{text-decoration:none}
+    .s{font-style:normal}
+    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .u{background-color:transparent}
+    .v{outline:none}",
+}
+`;
+
+exports[`error 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o p q r"
+        >
+            error
+        </div>
+    </div>
+    <input
+        className="g b c h i j s l m n o t q r u v w"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:red}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{color:black}
+    .t{font-weight:normal}
+    .u::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .v{background-color:transparent}
+    .w{outline:none}",
+}
+`;
+
+exports[`label 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    >
+        <div
+            className="g b c h i j k l m n o p q r"
+        >
+            label
+        </div>
+    </div>
+    <input
+        className="g b c h i j k l m n o s q r t u v"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{font-weight:normal}
+    .t::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .u{background-color:transparent}
+    .v{outline:none}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a d c e f"
+    />
+    <input
+        className="g b c h i j k l m n o p q r s t u"
+        maxLength={1}
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:16}
+    .n{line-height:24px}
+    .o{text-align:left}
+    .p{font-weight:normal}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .t{background-color:transparent}
+    .u{outline:none}",
+}
+`;

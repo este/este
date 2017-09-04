@@ -1,0 +1,428 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fix fontSmoothing 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:black}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{-moz-osx-font-smoothing:grayscale}
+    .i{-webkit-font-smoothing:antialiased}
+    .j{color:blue}
+    .k{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .l{font-size:16}
+    .m{line-height:24px}
+    .n{text-align:left}
+    .o{font-weight:normal}
+    .p{text-decoration:none}
+    .q{font-style:normal}",
+}
+`;
+
+exports[`fix fontSmoothing 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{background-color:white}
+    .e{white-space:pre-wrap}
+    .f{overflow-wrap:break-word}
+    .g{-ms-hyphens:auto}
+    .h{color:blue}
+    .i{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .j{font-size:16}
+    .k{line-height:24px}
+    .l{text-align:left}
+    .m{font-weight:normal}
+    .n{text-decoration:none}
+    .o{font-style:normal}",
+}
+`;
+
+exports[`fix fontSmoothing 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:24}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:26}
+    .j{line-height:48px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:48}
+    .j{line-height:48px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`lineHeight ensures vertical rhythm 4`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:50}
+    .j{line-height:72px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 2`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:600}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 3`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 4`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:underline}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 5`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:arial}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 6`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:italic}",
+}
+`;
+
+exports[`props 7`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:10px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`props 8`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:18}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;
+
+exports[`styles are inherited 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+>
+    <div
+        className="a b c d e f o p q r"
+    >
+        hi
+         
+        <div
+            className="a b c d e f l n"
+        >
+            <div
+                className="a b c d e f q"
+            >
+                w
+            </div>
+            orl
+            <div
+                className="a b c d e f s"
+            >
+                d
+            </div>
+        </div>
+    </div>
+    <div
+        className="a b c d e f"
+    >
+        .
+    </div>
+</div>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{color:orange}
+    .p{font-size:14}
+    .q{font-weight:600}
+    .r{font-style:italic}
+    .s{color:blue}",
+}
+`;
+
+exports[`text without props 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}",
+}
+`;

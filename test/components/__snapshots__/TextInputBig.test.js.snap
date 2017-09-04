@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a b c"
+    >
+        <div
+            className="a d c e f"
+        />
+        <input
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
+            maxLength={1}
+        />
+    </div>
+    <div
+        className="a b c af"
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{padding-bottom:11}
+    .i{padding-top:12}
+    .j{border-style:solid}
+    .k{border-bottom-width:1}
+    .l{border-bottom-color:gray}
+    .m{border-left-color:gray}
+    .n{border-right-color:gray}
+    .o{border-top-color:gray}
+    .p{white-space:pre-wrap}
+    .q{overflow-wrap:break-word}
+    .r{-ms-hyphens:auto}
+    .s{color:blue}
+    .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .u{font-size:18}
+    .v{line-height:24px}
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
+}
+`;
+
+exports[`disabled 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a b c"
+    >
+        <div
+            className="a d c e f"
+        />
+        <input
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae af"
+            disabled={true}
+            maxLength={1}
+        />
+    </div>
+    <div
+        className="a b c ag"
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{padding-bottom:11}
+    .i{padding-top:12}
+    .j{opacity:0.5}
+    .k{border-style:solid}
+    .l{border-bottom-width:1}
+    .m{border-bottom-color:gray}
+    .n{border-left-color:gray}
+    .o{border-right-color:gray}
+    .p{border-top-color:gray}
+    .q{white-space:pre-wrap}
+    .r{overflow-wrap:break-word}
+    .s{-ms-hyphens:auto}
+    .t{color:black}
+    .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .v{font-size:18}
+    .w{line-height:24px}
+    .x{text-align:left}
+    .y{font-weight:normal}
+    .z{text-decoration:none}
+    .ab{font-style:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
+}
+`;
+
+exports[`error 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a b c"
+    >
+        <div
+            className="a d c e f"
+        />
+        <input
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
+            maxLength={1}
+        />
+    </div>
+    <div
+        className="a b c af"
+    >
+        <div
+            className="g b c p q r ag t ah v w x y z"
+        >
+            error
+        </div>
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{padding-bottom:11}
+    .i{padding-top:12}
+    .j{border-style:solid}
+    .k{border-bottom-width:1}
+    .l{border-bottom-color:gray}
+    .m{border-left-color:gray}
+    .n{border-right-color:gray}
+    .o{border-top-color:gray}
+    .p{white-space:pre-wrap}
+    .q{overflow-wrap:break-word}
+    .r{-ms-hyphens:auto}
+    .s{color:black}
+    .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .u{font-size:18}
+    .v{line-height:24px}
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}
+    .ag{color:red}
+    .ah{font-size:16}",
+}
+`;
+
+exports[`label 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a b c"
+    >
+        <div
+            className="a d c e f"
+        >
+            <div
+                className="g b c h i j k l m n o p q r"
+            >
+                label
+            </div>
+        </div>
+        <input
+            className="g b c s t u v w x y z h i j k l m n o ab q r ac ae af"
+            maxLength={1}
+        />
+    </div>
+    <div
+        className="a b c ag"
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{white-space:pre-wrap}
+    .i{overflow-wrap:break-word}
+    .j{-ms-hyphens:auto}
+    .k{color:black}
+    .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .m{font-size:18}
+    .n{line-height:24px}
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{padding-bottom:11}
+    .t{padding-top:12}
+    .u{border-style:solid}
+    .v{border-bottom-width:1}
+    .w{border-bottom-color:gray}
+    .x{border-left-color:gray}
+    .y{border-right-color:gray}
+    .z{border-top-color:gray}
+    .ab{font-weight:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c"
+>
+    <div
+        className="a b c"
+    >
+        <div
+            className="a d c e f"
+        />
+        <input
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
+            maxLength={1}
+        />
+    </div>
+    <div
+        className="a b c af"
+    />
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{flex-direction:row}
+    .e{margin-bottom:0}
+    .f{flex-wrap:wrap}
+    .g{display:inline}
+    .h{padding-bottom:11}
+    .i{padding-top:12}
+    .j{border-style:solid}
+    .k{border-bottom-width:1}
+    .l{border-bottom-color:gray}
+    .m{border-left-color:gray}
+    .n{border-right-color:gray}
+    .o{border-top-color:gray}
+    .p{white-space:pre-wrap}
+    .q{overflow-wrap:break-word}
+    .r{-ms-hyphens:auto}
+    .s{color:black}
+    .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .u{font-size:18}
+    .v{line-height:24px}
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
+}
+`;

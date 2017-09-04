@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`disabled 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "default",
+            "pointerEvents": "none",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={-1}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-top:7.199999999999999}
+    .f{padding-bottom:4.800000000000001}
+    .g{padding-left:24}
+    .h{padding-right:24}
+    .i{padding-top:4.800000000000001}
+    .j{opacity:0.5}
+    .k{border-bottom-left-radius:2}
+    .l{border-bottom-right-radius:2}
+    .m{border-top-left-radius:2}
+    .n{border-top-right-radius:2}
+    .o{white-space:pre-wrap}
+    .p{overflow-wrap:break-word}
+    .q{-ms-hyphens:auto}
+    .r{color:black}
+    .s{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .t{font-size:16}
+    .u{line-height:24px}
+    .v{text-align:left}
+    .w{font-weight:normal}
+    .x{text-decoration:none}
+    .y{font-style:normal}",
+}
+`;
+
+exports[`primary 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-top:7.199999999999999}
+    .f{padding-bottom:4.800000000000001}
+    .g{padding-left:24}
+    .h{padding-right:24}
+    .i{padding-top:4.800000000000001}
+    .j{border-bottom-left-radius:2}
+    .k{border-bottom-right-radius:2}
+    .l{border-top-left-radius:2}
+    .m{border-top-right-radius:2}
+    .n{background-color:blue}
+    .o{white-space:pre-wrap}
+    .p{overflow-wrap:break-word}
+    .q{-ms-hyphens:auto}
+    .r{-moz-osx-font-smoothing:grayscale}
+    .s{-webkit-font-smoothing:antialiased}
+    .t{color:white}
+    .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .v{font-size:16}
+    .w{line-height:24px}
+    .x{text-align:left}
+    .y{font-weight:600}
+    .z{text-decoration:none}
+    .ab{font-style:normal}",
+}
+`;
+
+exports[`primary outline 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-top:7.199999999999999}
+    .f{padding-bottom:3.8000000000000007}
+    .g{padding-left:23}
+    .h{padding-right:23}
+    .i{padding-top:3.8000000000000007}
+    .j{border-style:solid}
+    .k{border-bottom-width:1}
+    .l{border-left-width:1}
+    .m{border-right-width:1}
+    .n{border-top-width:1}
+    .o{border-bottom-left-radius:2}
+    .p{border-bottom-right-radius:2}
+    .q{border-top-left-radius:2}
+    .r{border-top-right-radius:2}
+    .s{border-bottom-color:blue}
+    .t{border-left-color:blue}
+    .u{border-right-color:blue}
+    .v{border-top-color:blue}
+    .w{white-space:pre-wrap}
+    .x{overflow-wrap:break-word}
+    .y{-ms-hyphens:auto}
+    .z{color:blue}
+    .ab{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .ac{font-size:16}
+    .ae{line-height:24px}
+    .af{text-align:left}
+    .ag{font-weight:normal}
+    .ah{text-decoration:none}
+    .ai{font-style:normal}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <div
+    className="a b c d e f g h i j k l m n o p q r s t u v w x"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    style={
+        Object {
+            "MozUserSelect": "none",
+            "WebkitUserSelect": "none",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "userSelect": "none",
+          }
+    }
+    tabIndex={0}
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:7.199999999999999}
+    .e{margin-top:7.199999999999999}
+    .f{padding-bottom:4.800000000000001}
+    .g{padding-left:24}
+    .h{padding-right:24}
+    .i{padding-top:4.800000000000001}
+    .j{border-bottom-left-radius:2}
+    .k{border-bottom-right-radius:2}
+    .l{border-top-left-radius:2}
+    .m{border-top-right-radius:2}
+    .n{white-space:pre-wrap}
+    .o{overflow-wrap:break-word}
+    .p{-ms-hyphens:auto}
+    .q{color:black}
+    .r{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .s{font-size:16}
+    .t{line-height:24px}
+    .u{text-align:left}
+    .v{font-weight:normal}
+    .w{text-decoration:none}
+    .x{font-style:normal}",
+}
+`;

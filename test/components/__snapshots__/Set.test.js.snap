@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`empty set has default marginBottom 1 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+/>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:row}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}",
+}
+`;
+
+exports[`set with one item 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    a
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:row}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}",
+}
+`;
+
+exports[`set with two items 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    <div
+        className="a f c"
+    >
+        a
+    </div>
+    <div
+        className="a f c g h"
+    />
+    <div
+        className="a f c"
+    >
+        b
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:row}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}
+    .f{flex-direction:column}
+    .g{height:12}
+    .h{width:12}",
+}
+`;
+
+exports[`set with two items and custom spaceBetween 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    <div
+        className="a f c"
+    >
+        a
+    </div>
+    <div
+        className="a f c g h"
+    />
+    <div
+        className="a f c"
+    >
+        b
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:row}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}
+    .f{flex-direction:column}
+    .g{height:48}
+    .h{width:48}",
+}
+`;
+
+exports[`vertical set with one item 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    a
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}",
+}
+`;
+
+exports[`vertical set with two items 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    <div
+        className="a b c"
+    >
+        a
+    </div>
+    <div
+        className="a b c f g"
+    />
+    <div
+        className="a b c"
+    >
+        b
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}
+    .f{height:24}
+    .g{width:24}",
+}
+`;
+
+exports[`vertical set with two items and custom spaceBetween 1`] = `
+Object {
+  "component": <div
+    className="a b c d e"
+>
+    <div
+        className="a b c"
+    >
+        a
+    </div>
+    <div
+        className="a b c f g"
+    />
+    <div
+        className="a b c"
+    >
+        b
+    </div>
+</div>,
+  "fela": "
+    .a{display:flex}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{margin-bottom:24}
+    .e{flex-wrap:wrap}
+    .f{height:48}
+    .g{width:48}",
+}
+`;

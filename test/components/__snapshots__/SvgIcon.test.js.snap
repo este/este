@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color and size 1`] = `
+Object {
+  "component": <svg
+    className="a b c d e f g h i j k l m n o p q r s"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:blue}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:18}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{top:3}
+    .p{vertical-align:top}
+    .q{fill:blue}
+    .r{height:18}
+    .s{width:18}",
+}
+`;
+
+exports[`render 1`] = `
+Object {
+  "component": <svg
+    className="a b c d e f g h i j k l m n o p q r s"
+/>,
+  "fela": "
+    .a{display:inline}
+    .b{flex-direction:column}
+    .c{position:relative}
+    .d{white-space:pre-wrap}
+    .e{overflow-wrap:break-word}
+    .f{-ms-hyphens:auto}
+    .g{color:black}
+    .h{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
+    .i{font-size:16}
+    .j{line-height:24px}
+    .k{text-align:left}
+    .l{font-weight:normal}
+    .m{text-decoration:none}
+    .n{font-style:normal}
+    .o{top:4}
+    .p{vertical-align:top}
+    .q{fill:black}
+    .r{height:16}
+    .s{width:16}",
+}
+`;
