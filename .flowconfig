@@ -1,6 +1,8 @@
 [ignore]
 ; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
+; https://github.com/graphql/graphql-js/issues/1020
+.*/node_modules/graphql/.*
 
 [include]
 

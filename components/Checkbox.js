@@ -13,29 +13,25 @@ export type CheckboxProps = ButtonProps & {
   value: boolean,
 };
 
-const Checkbox = (
-  {
+const Checkbox = (props: CheckboxProps, { theme }: ThemeContext) => {
+  const {
     label,
     labelOnLeft = false,
     onChange,
     value,
     color,
-    size,
-    ...props
-  }: CheckboxProps,
-  { theme }: ThemeContext,
-) => {
-  const {
     marginVertical = 0,
+    onPress,
     paddingHorizontal = 0,
     paddingVertical = 0,
+    size,
     ...restProps
   } = props;
   return (
     <Button
       aria-checked={value}
       onPress={() => {
-        if (restProps.onPress) restProps.onPress();
+        if (onPress) onPress();
         if (!onChange) return;
         onChange(!value);
       }}

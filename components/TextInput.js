@@ -36,8 +36,9 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     maxLength = defaultMaxLength,
     onChange,
     onSubmitEditing,
-    size = 0,
     removeWebkitYellowAutofill,
+    size = 0,
+    style,
     ...restProps
   } = props;
 
@@ -62,12 +63,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         // WebkitTextFillColor: theme.colors[color],
       }
     : null;
-
-  const style = {
-    ...reactNativeEmulation,
-    ...removeWebkitYellowAutofillStyle,
-    ...restProps.style,
-  };
 
   return (
     <Box>
@@ -112,7 +107,11 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
           ? { opacity: theme.textInput.disabledOpacity }
           : null)}
         {...restProps}
-        style={style}
+        style={{
+          ...reactNativeEmulation,
+          ...removeWebkitYellowAutofillStyle,
+          ...style,
+        }}
       />
     </Box>
   );

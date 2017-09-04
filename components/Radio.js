@@ -14,23 +14,18 @@ export type RadioProps = ButtonProps & {
   value: ?string,
 };
 
-const Radio = (
-  {
+const Radio = (props: RadioProps, { theme }: ThemeContext) => {
+  const {
     label,
     labelOnLeft = false,
     onChange,
     select,
     value,
     color,
-    size,
-    ...props
-  }: RadioProps,
-  { theme }: ThemeContext,
-) => {
-  const {
     marginVertical = 0,
     paddingHorizontal = 0,
     paddingVertical = 0,
+    size,
     ...restProps
   } = props;
   const checked = value === select;

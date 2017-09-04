@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 export type ThemeContext = { theme: Theme };
 
 const withTheme = (Component: ComponentType<any>) => {
-  // $FlowFixMe
   Component.contextTypes = {
-    // $FlowFixMe
     ...Component.contextTypes,
     theme: PropTypes.object,
   };
