@@ -10,7 +10,6 @@ import nameToDomain from '../lib/nameToDomain';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
 import CreateWebMutation from '../mutations/CreateWebMutation';
-import type { Subscription } from 'rxjs';
 
 type Props = {
   viewer: CreateWeb_viewer,
@@ -22,18 +21,13 @@ type State = {
   pending: boolean,
 };
 
+const initialState = {
+  name: '',
+  pending: false,
+};
+
 class CreateWeb extends React.Component<Props, State> {
-  state = {
-    name: '',
-    pending: false,
-  };
-
-  mutationObserver: ?Subscription;
-
-  componentWillUnmount() {
-    // TODO: In future, we will use higher order component for that.
-    if (this.mutationObserver) this.mutationObserver.unsubscribe();
-  }
+  state = initialState;
 
   getDomain() {
     return nameToDomain(this.state.name);
@@ -48,7 +42,8 @@ class CreateWeb extends React.Component<Props, State> {
     if (!user) return;
     if (!this.isValid()) return;
     this.setState({ pending: true });
-    this.mutationObserver = CreateWebMutation.commit(
+    // TODO: Make better API. Handling global errors, unlisten on unmount, etc.
+    CreateWebMutation.commit(
       this.props.relay.environment,
       {
         input: {
@@ -59,7 +54,17 @@ class CreateWeb extends React.Component<Props, State> {
           clientMutationId: Date.now().toString(36),
         },
       },
-    ).subscribe(() => this.setState({ name: '', pending: false }));
+      (response, payloadError) => {
+        if (payloadError) {
+          this.setState({ pending: false });
+        } else {
+          this.setState(initialState);
+        }
+      },
+      () => {
+        this.setState({ pending: false });
+      },
+    );
   };
 
   render() {
@@ -91,6 +96,8 @@ class CreateWeb extends React.Component<Props, State> {
     );
   }
 }
+
+// const CreateWebWithMutation = withMutation(CreateWeb);
 
 export default createFragmentContainer(CreateWeb, {
   viewer: graphql`

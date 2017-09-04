@@ -99,7 +99,7 @@ Object {
 exports[`primary outline 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad ae af ag ah"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -143,11 +143,11 @@ Object {
     .z{color:blue}
     .ab{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .ac{font-size:16}
-    .ad{line-height:24px}
-    .ae{text-align:left}
-    .af{font-weight:normal}
-    .ag{text-decoration:none}
-    .ah{font-style:normal}",
+    .ae{line-height:24px}
+    .af{text-align:left}
+    .ag{font-weight:normal}
+    .ah{text-decoration:none}
+    .ai{font-style:normal}",
 }
 `;
 

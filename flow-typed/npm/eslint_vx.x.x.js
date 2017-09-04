@@ -1,4 +1,4 @@
-// flow-typed signature: 326beaf5bb29d9b2bf48ced33c9fadd7
+// flow-typed signature: db9f0f468db730ddcfb895df3e481b2f
 // flow-typed version: <<STUB>>/eslint_v^4.4.1/flow_v0.53.0
 
 /**
@@ -214,7 +214,7 @@ declare module 'eslint/lib/options' {
   declare module.exports: any;
 }
 
-declare module 'eslint/lib/rule-context' {
+declare module 'eslint/lib/report-translator' {
   declare module.exports: any;
 }
 
@@ -355,6 +355,10 @@ declare module 'eslint/lib/rules/func-names' {
 }
 
 declare module 'eslint/lib/rules/func-style' {
+  declare module.exports: any;
+}
+
+declare module 'eslint/lib/rules/function-paren-newline' {
   declare module.exports: any;
 }
 
@@ -1234,15 +1238,7 @@ declare module 'eslint/lib/rules/yoda' {
   declare module.exports: any;
 }
 
-declare module 'eslint/lib/testers/event-generator-tester' {
-  declare module.exports: any;
-}
-
 declare module 'eslint/lib/testers/rule-tester' {
-  declare module.exports: any;
-}
-
-declare module 'eslint/lib/testers/test-parser' {
   declare module.exports: any;
 }
 
@@ -1515,8 +1511,8 @@ declare module 'eslint/lib/logging.js' {
 declare module 'eslint/lib/options.js' {
   declare module.exports: $Exports<'eslint/lib/options'>;
 }
-declare module 'eslint/lib/rule-context.js' {
-  declare module.exports: $Exports<'eslint/lib/rule-context'>;
+declare module 'eslint/lib/report-translator.js' {
+  declare module.exports: $Exports<'eslint/lib/report-translator'>;
 }
 declare module 'eslint/lib/rules.js' {
   declare module.exports: $Exports<'eslint/lib/rules'>;
@@ -1622,6 +1618,9 @@ declare module 'eslint/lib/rules/func-names.js' {
 }
 declare module 'eslint/lib/rules/func-style.js' {
   declare module.exports: $Exports<'eslint/lib/rules/func-style'>;
+}
+declare module 'eslint/lib/rules/function-paren-newline.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/function-paren-newline'>;
 }
 declare module 'eslint/lib/rules/generator-star-spacing.js' {
   declare module.exports: $Exports<'eslint/lib/rules/generator-star-spacing'>;
@@ -2280,14 +2279,8 @@ declare module 'eslint/lib/rules/yield-star-spacing.js' {
 declare module 'eslint/lib/rules/yoda.js' {
   declare module.exports: $Exports<'eslint/lib/rules/yoda'>;
 }
-declare module 'eslint/lib/testers/event-generator-tester.js' {
-  declare module.exports: $Exports<'eslint/lib/testers/event-generator-tester'>;
-}
 declare module 'eslint/lib/testers/rule-tester.js' {
   declare module.exports: $Exports<'eslint/lib/testers/rule-tester'>;
-}
-declare module 'eslint/lib/testers/test-parser.js' {
-  declare module.exports: $Exports<'eslint/lib/testers/test-parser'>;
 }
 declare module 'eslint/lib/timing.js' {
   declare module.exports: $Exports<'eslint/lib/timing'>;

@@ -4,7 +4,7 @@ import type { ValidationError as ValidationErrorType } from '../lib/validate';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
-type ValidationErrorProps = TextProps & {
+type Props = TextProps & {
   error: ?ValidationErrorType,
 };
 
@@ -62,7 +62,7 @@ const getValidationErrorMessage = error => {
   }
 };
 
-const ValidationError = (props: ValidationErrorProps) => {
+const ValidationError = (props: Props) => {
   const { error, bold = true, color = 'danger', ...restProps } = props;
   if (!error) return null;
   const message = getValidationErrorMessage(error);

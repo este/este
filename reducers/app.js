@@ -1,10 +1,9 @@
 // @flow
-import type { Action, Errors } from '../types';
+import type { Action } from '../types';
 
 export type AppState = {
   baselineShown: boolean,
   darkEnabled: boolean,
-  errors: ?Errors<Object>,
   name: string,
   version: string,
   locale: string,
@@ -16,7 +15,6 @@ export type AppState = {
 const initialState = {
   baselineShown: false,
   darkEnabled: false,
-  errors: null,
   name: '',
   version: '',
   locale: 'en',

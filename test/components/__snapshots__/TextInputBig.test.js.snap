@@ -12,12 +12,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ae"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -49,8 +49,8 @@ Object {
     .z{font-style:normal}
     .ab::placeholder{color:rgba(0, 0, 255, 0.5)}
     .ac{background-color:transparent}
-    .ad{outline:none}
-    .ae{min-height:24}",
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;
 
@@ -66,13 +66,13 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad ae"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae af"
             disabled={true}
             maxLength={1}
         />
     </div>
     <div
-        className="a b c af"
+        className="a b c ag"
     />
 </div>,
   "fela": "
@@ -104,9 +104,9 @@ Object {
     .z{text-decoration:none}
     .ab{font-style:normal}
     .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ad{background-color:transparent}
-    .ae{outline:none}
-    .af{min-height:24}",
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
 }
 `;
 
@@ -122,15 +122,15 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ae"
+        className="a b c af"
     >
         <div
-            className="g b c p q r af t ag v w x y z"
+            className="g b c p q r ag t ah v w x y z"
         >
             error
         </div>
@@ -165,10 +165,10 @@ Object {
     .z{font-style:normal}
     .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
     .ac{background-color:transparent}
-    .ad{outline:none}
-    .ae{min-height:24}
-    .af{color:red}
-    .ag{font-size:16}",
+    .ae{outline:none}
+    .af{min-height:24}
+    .ag{color:red}
+    .ah{font-size:16}",
 }
 `;
 
@@ -190,12 +190,12 @@ Object {
             </div>
         </div>
         <input
-            className="g b c s t u v w x y z h i j k l m n o ab q r ac ad ae"
+            className="g b c s t u v w x y z h i j k l m n o ab q r ac ae af"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c af"
+        className="a b c ag"
     />
 </div>,
   "fela": "
@@ -227,9 +227,9 @@ Object {
     .z{border-top-color:gray}
     .ab{font-weight:normal}
     .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .ad{background-color:transparent}
-    .ae{outline:none}
-    .af{min-height:24}",
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
 }
 `;
 
@@ -245,12 +245,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ad"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ae"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -282,7 +282,7 @@ Object {
     .z{font-style:normal}
     .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
     .ac{background-color:transparent}
-    .ad{outline:none}
-    .ae{min-height:24}",
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;

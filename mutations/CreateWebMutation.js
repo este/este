@@ -1,8 +1,10 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Environment, Id } from '../types';
-import { Observable } from 'rxjs/Observable';
-import type { CreateWebMutationVariables } from './__generated__/CreateWebMutation.graphql';
+import type { Environment, PayloadError } from '../types';
+import type {
+  CreateWebMutationVariables,
+  CreateWebMutationResponse,
+} from './__generated__/CreateWebMutation.graphql';
 
 const mutation = graphql`
   mutation CreateWebMutation($input: CreateWebInput!) {
@@ -17,16 +19,17 @@ const mutation = graphql`
 const commit = (
   environment: Environment,
   variables: CreateWebMutationVariables,
+  onCompleted: (
+    response: CreateWebMutationResponse,
+    payloadError: PayloadError,
+  ) => void,
+  onError: (error: any) => void,
 ) =>
-  Observable.create(observer => {
-    commitMutation(environment, {
-      mutation,
-      variables,
-      onCompleted: () => observer.next(),
-      // Do not handle onError yet. Happy day scenarios only for now.
-      // TODO: Handle global errors globally, probably via alert and Raven.
-    });
+  commitMutation(environment, {
+    mutation,
+    variables,
+    onCompleted,
+    onError,
   });
 
-// Why CreateWebMutation.commit? Because it's explicit side-effect.
 export default { commit };

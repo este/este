@@ -1,5 +1,5 @@
 # source: https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b
-# timestamp: Sun Aug 27 2017 04:45:40 GMT+0200 (CEST)
+# timestamp: Fri Sep 01 2017 19:11:49 GMT+0200 (CEST)
 
 type AddToWebOwnerPayload {
   viewer: Viewer!
@@ -841,7 +841,7 @@ type Viewer {
   user: User
   File(id: ID, secret: String, url: String): File
   User(email: String, id: ID): User
-  Web(id: ID): Web
+  Web(domain: String, id: ID): Web
   id: ID!
 }
 

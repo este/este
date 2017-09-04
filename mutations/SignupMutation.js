@@ -1,13 +1,10 @@
 // @flow
+import { graphql, commitMutation } from 'react-relay';
+import type { Environment, PayloadError } from '../types';
 import type {
   SignupMutationResponse,
   SignupMutationVariables,
 } from './__generated__/SignupMutation.graphql';
-import type { Environment } from '../types';
-import commitMutation from './_commitMutation';
-import { graphql } from 'react-relay';
-
-let clientMutationId = 0;
 
 const mutation = graphql`
   mutation SignupMutation(
@@ -27,21 +24,18 @@ const mutation = graphql`
 
 const commit = (
   environment: Environment,
-  email: string,
-  password: string,
-): Promise<SignupMutationResponse> =>
+  variables: SignupMutationVariables,
+  onCompleted: (
+    response: SignupMutationResponse,
+    payloadError: PayloadError,
+  ) => void,
+  onError: (error: any) => void,
+) =>
   commitMutation(environment, {
     mutation,
-    variables: ({
-      signupInput: {
-        authProvider: { email: { email, password } },
-        clientMutationId: (clientMutationId++).toString(),
-      },
-      signinInput: {
-        email: { email, password },
-        clientMutationId: (clientMutationId++).toString(),
-      },
-    }: SignupMutationVariables),
+    variables,
+    onCompleted,
+    onError,
   });
 
 export default { commit };
