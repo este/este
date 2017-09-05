@@ -1,42 +1,29 @@
 // @flow
 import type { Action } from '../types';
 
+// Can't be exact type yet. Flow will fix it soon.
 export type AppState = {
-  baselineShown: boolean,
-  darkEnabled: boolean,
-  name: string,
-  version: string,
-  locale: string,
-  defaultLocale: string,
-  supportedLocales: Array<string>,
+  +baselineShown: boolean,
+  +darkEnabled: boolean,
+  +defaultLocale: string,
+  +locale: string,
+  +name: string,
+  +supportedLocales: Array<string>,
+  +version: string,
 };
 
 // This is defined by server in app.js
 const initialState = {
   baselineShown: false,
   darkEnabled: false,
-  name: '',
-  version: '',
-  locale: 'en',
   defaultLocale: 'en',
+  locale: 'en',
+  name: '',
   supportedLocales: ['en'],
+  version: '',
 };
 
-// flow.org/en/docs/frameworks/redux/#toc-typing-redux-reducers
 const reducer = (state: AppState = initialState, action: Action): AppState => {
-  // Errors are stored per forms in their states, but also here.
-  // It's useful for global errors popup alert for small devices, for example.
-  // Strings are good enough here.
-  if (
-    action.type.endsWith('_ERROR') &&
-    action.errors &&
-    (action.errors.appError || action.errors.validationErrors)
-  ) {
-    return { ...state, errors: (action.errors: any) }; // Flow can't infer.
-  } else if (action.type.endsWith('_SUCCESS')) {
-    return { ...state, errors: null };
-  }
-
   switch (action.type) {
     case 'TOGGLE_BASELINE':
       return { ...state, baselineShown: !state.baselineShown };

@@ -1,20 +1,17 @@
 // @flow
 import type { Element } from 'react';
 
-type Colors = {|
-  primary: string,
-  success: string,
-  warning: string,
-  danger: string,
-  black: string,
-  white: string,
-  gray: string,
-|};
+// TODO: Define ColorName once. Flow is still buggy for that imho.
 
-export type Color = $Keys<Colors>;
+export type ColorName =
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'black'
+  | 'white'
+  | 'gray';
 
-// TODO: Derive it from Colors. $Shape doesn't work, $ObjMap is buggy.
-// $Values? optinal keys
 export type ColorProps = {
   primary?: boolean,
   success?: boolean,
@@ -23,6 +20,16 @@ export type ColorProps = {
   black?: boolean,
   white?: boolean,
   gray?: boolean,
+};
+
+type Colors = {
+  primary: string,
+  success: string,
+  warning: string,
+  danger: string,
+  black: string,
+  white: string,
+  gray: string,
 };
 
 export type Bold =
@@ -39,54 +46,54 @@ export type Bold =
   | 900;
 
 export type Theme = {
-  typography: {
+  typography: {|
     fontSize: number => number,
     lineHeight: number,
     rhythm: number => number,
-  },
+  |},
   colors: Colors,
-  page: {
-    backgroundColor: Color,
-  },
-  text: {
+  page: {|
+    backgroundColor: ColorName,
+  |},
+  text: {|
     bold: Bold,
-    color: Color,
+    color: ColorName,
     fontFamily: string,
-  },
-  heading: {
+  |},
+  heading: {|
     bold: Bold,
     fontFamily: string,
     marginBottom: number,
-  },
-  p: {
+  |},
+  p: {|
     marginBottom: number,
     maxWidth: number,
-  },
-  set: {
+  |},
+  set: {|
     marginBottom: number,
     horizontalSpaceBetween: number,
     verticalSpaceBetween: number,
-  },
-  button: {
+  |},
+  button: {|
     borderRadius: number,
     borderWidth: number,
     marginVertical: number,
     paddingVertical: number,
     disabledOpacity: number,
-  },
-  form: {
+  |},
+  form: {|
     marginBottom: number,
     maxWidth: number,
-  },
-  textInput: {
+  |},
+  textInput: {|
     disabledOpacity: number,
-  },
-  checkbox: {
+  |},
+  checkbox: {|
     checkedIcon: Element<'svg'>,
     uncheckedIcon: Element<'svg'>,
-  },
-  radio: {
+  |},
+  radio: {|
     checkedIcon: Element<'svg'>,
     uncheckedIcon: Element<'svg'>,
-  },
+  |},
 };

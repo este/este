@@ -3,7 +3,7 @@ import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
 import React from 'react';
 import colorLib from 'color';
-import type { Color, Theme } from '../themes/types';
+import type { ColorName, Theme } from '../themes/types';
 import withTheme, { type ThemeContext } from './withTheme';
 
 /*
@@ -23,7 +23,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 export type TextProps = BoxProps & {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
-  color?: Color,
+  color?: ColorName,
   decoration?: 'none' | 'underline' | 'line-through',
   fontFamily?: string,
   italic?: boolean,

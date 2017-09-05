@@ -222,7 +222,6 @@ const app = (
         app: {
           baselineShown: false,
           darkEnabled: true,
-          errors: null,
           name: APP_NAME,
           version: APP_VERSION,
           locale,
