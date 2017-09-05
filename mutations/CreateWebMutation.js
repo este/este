@@ -1,6 +1,6 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Environment, PayloadError } from '../types';
+import type { Commit } from '../types';
 import type {
   CreateWebMutationVariables,
   CreateWebMutationResponse,
@@ -16,14 +16,11 @@ const mutation = graphql`
   }
 `;
 
-const commit = (
-  environment: Environment,
-  variables: CreateWebMutationVariables,
-  onCompleted: (
-    response: CreateWebMutationResponse,
-    payloadError: PayloadError,
-  ) => void,
-  onError: (error: any) => void,
+const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
+  environment,
+  variables,
+  onCompleted,
+  onError,
 ) =>
   commitMutation(environment, {
     mutation,

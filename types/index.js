@@ -46,3 +46,10 @@ export type Req = {
   messages: Object,
   supportedLocales: Array<string>,
 };
+
+export type Commit<Variables, Response> = (
+  environment: Environment,
+  variables: Variables,
+  onCompleted: (response: Response, payloadError: PayloadError) => void,
+  onError: (error: any) => void,
+) => void;
