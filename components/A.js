@@ -3,11 +3,11 @@ import React from 'react';
 import LocaleLink from './LocaleLink';
 import Text, { type TextProps } from './Text';
 
-type AProps = TextProps & {
+type AProps = {
   href: string,
   isActive?: boolean,
   prefetch?: boolean,
-};
+} & TextProps;
 
 const A = (props: AProps) => {
   const {

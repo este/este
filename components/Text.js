@@ -20,7 +20,7 @@ import withTheme, { type ThemeContext } from './withTheme';
   browser style via style property directly.
 */
 
-export type TextProps = BoxProps & {
+export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
@@ -30,7 +30,7 @@ export type TextProps = BoxProps & {
   lineHeight?: number,
   size?: number,
   // TODO: shadowColor, shadowOffset, shadowRadius.
-};
+} & BoxProps;
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 export const computeFontSizeAndLineHeight = (

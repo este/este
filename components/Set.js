@@ -6,10 +6,10 @@ import withTheme, { type ThemeContext } from './withTheme';
 // Something like Fieldset, but for any component and with axis and spacing.
 // It's Box with flexDirection, flexWrap, spacing, and default marginBottom.
 
-export type SetProps = BoxProps & {
+export type SetProps = {
   spaceBetween?: number,
   vertical?: boolean,
-};
+} & BoxProps;
 
 const Space = ({ spaceBetween }) => (
   <Box height={spaceBetween} width={spaceBetween} />

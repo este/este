@@ -10,9 +10,9 @@ const messages = defineMessages({
   },
 });
 
-type Props = TextProps & {
+type Props = {
   intl: IntlShape,
-};
+} & TextProps;
 
 type State = {
   messageShown: boolean,

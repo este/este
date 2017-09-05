@@ -10,11 +10,11 @@ import withTheme, { type ThemeContext } from './withTheme';
 // runtime measurement with predefined aspect ratio.
 // Perfectionism kills productivity. It's good enough as is.
 
-type ImageProps = BoxProps & {
+type ImageProps = {
   size?: {| height: number, width: number |},
   src: string,
   srcset?: string,
-};
+} & BoxProps;
 
 const heightToNearestBaseline = (height, lineHeight) => {
   const baselineHeight1 = Math.floor(height / lineHeight) * lineHeight;

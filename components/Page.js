@@ -88,9 +88,9 @@ type OwnProps = {|
   children?: Node,
 |};
 
-type Props = OwnProps & {
+type Props = {
   darkEnabled: boolean,
-};
+} & OwnProps;
 
 const connector: Connector<OwnProps, Props> = connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,

@@ -100,10 +100,10 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type PageProps = NextProps & {
+type PageProps = {
   data: Object,
   intl: IntlShape,
-};
+} & NextProps;
 
 const app = (
   Page: ComponentType<PageProps>,

@@ -18,9 +18,9 @@ const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) => (
   />
 );
 
-type FormProps = BoxProps & {
+type FormProps = {
   onSubmit?: () => any,
-};
+} & BoxProps;
 
 const Form = (props: FormProps, { theme }: ThemeContext) => {
   const {

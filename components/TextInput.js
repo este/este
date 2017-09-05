@@ -10,7 +10,7 @@ import withTheme, { type ThemeContext } from './withTheme';
 // For underline or the other effects, make a new component. Check TextInputBig.
 // TODO: Multiline and rows. Use content editable rather because of links?
 
-export type TextInputProps = TextProps & {
+export type TextInputProps = {
   disabled?: boolean,
   error?: string | Element<any>,
   label?: string | Element<any>,
@@ -18,7 +18,7 @@ export type TextInputProps = TextProps & {
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
   removeWebkitYellowAutofill?: boolean,
-};
+} & TextProps;
 
 // Like Twitter.
 const defaultMaxLength = 140;

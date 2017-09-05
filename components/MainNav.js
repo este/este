@@ -13,9 +13,9 @@ type OwnProps = {
   title: string,
 };
 
-type Props = OwnProps & {
+type Props = {
   intl: IntlShape,
-};
+} & OwnProps;
 
 const NavA = ({ intl, page, title, ...props }) => (
   <A

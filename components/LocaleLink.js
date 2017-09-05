@@ -33,10 +33,10 @@ type OwnProps = {
   prefetch?: boolean,
 };
 
-type Props = OwnProps & {
+type Props = {
   locale: string,
   defaultLocale: string,
-};
+} & OwnProps;
 
 const connector: Connector<OwnProps, Props> = connect(({ app }: State) => ({
   locale: app.locale,

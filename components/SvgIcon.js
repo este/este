@@ -6,9 +6,9 @@ import withTheme, { type ThemeContext } from './withTheme';
 //  - flaticon.com
 //  - thenounproject.com
 
-export type SvgIconProps = TextProps & {
+export type SvgIconProps = {
   svg: Element<any>,
-};
+} & TextProps;
 
 const SvgIcon = (props: SvgIconProps, { theme }: ThemeContext) => {
   const {

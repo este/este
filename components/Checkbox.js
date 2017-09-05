@@ -6,12 +6,12 @@ import SvgIcon from './SvgIcon';
 import Text from './Text';
 import withTheme, { type ThemeContext } from './withTheme';
 
-export type CheckboxProps = ButtonProps & {
+export type CheckboxProps = {
   label?: string,
   labelOnLeft?: boolean,
   onChange?: (value: boolean) => any,
   value: boolean,
-};
+} & ButtonProps;
 
 const Checkbox = (props: CheckboxProps, { theme }: ThemeContext) => {
   const {

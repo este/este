@@ -6,13 +6,13 @@ import SvgIcon from './SvgIcon';
 import Text from './Text';
 import withTheme, { type ThemeContext } from './withTheme';
 
-export type RadioProps = ButtonProps & {
+export type RadioProps = {
   label?: string,
   labelOnLeft?: boolean,
   onChange?: (value: string) => any,
   select: string,
   value: ?string,
-};
+} & ButtonProps;
 
 const Radio = (props: RadioProps, { theme }: ThemeContext) => {
   const {
