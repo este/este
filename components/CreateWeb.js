@@ -42,7 +42,33 @@ class CreateWeb extends React.Component<Props, State> {
     if (!user) return;
     if (!this.isValid()) return;
     this.setState({ pending: true });
+
     // TODO: Make better API. Handling global errors, unlisten on unmount, etc.
+    // this.props.commitMutation(CreateWebMutation.commit, {
+    //   variables: {
+    //     input: {
+    //       domain: this.getDomain(),
+    //       name: this.state.name,
+    //       ownerId: user.id,
+    //       // https://github.com/facebook/relay/issues/2077
+    //       clientMutationId: Date.now().toString(36),
+    //     },
+    //   }
+    // }, (response, error) => {
+    //   if (error) {
+    //     this.setState({ pending: false });
+    //     return;
+    //   }
+    //   this.setState(initialState);
+    // })
+    //
+
+    // Naive explicit usage. There are several issues with that.
+    // - setState can be called within unmounted component
+    // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+    // - Developer can forged to handle errors.
+    // - Known global errors had to be handled manually.
+    // - The environment has to be injected manually.
     CreateWebMutation.commit(
       this.props.relay.environment,
       {
