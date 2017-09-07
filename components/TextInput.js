@@ -17,7 +17,6 @@ export type TextInputProps = {
   maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
-  removeWebkitYellowAutofill?: boolean,
 } & TextProps;
 
 // Like Twitter.
@@ -36,7 +35,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     maxLength = defaultMaxLength,
     onChange,
     onSubmitEditing,
-    removeWebkitYellowAutofill,
     size = 0,
     style,
     ...restProps
@@ -51,18 +49,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         backgroundColor: 'transparent',
         outline: 'none',
       };
-
-  // https://blog.mariusschulz.com/2016/03/20/how-to-remove-webkits-banana-yellow-autofill-background
-  const removeWebkitYellowAutofillStyle = removeWebkitYellowAutofill
-    ? {
-        WebkitBoxShadow: `inset 0 0 0px 9999px ${theme.colors[
-          theme.page.backgroundColor
-        ]}`,
-        // This recolor also placeholder. Idk how to fix it.
-        // Autofill text should be white, but how? CSS doesn't work.
-        // WebkitTextFillColor: theme.colors[color],
-      }
-    : null;
 
   return (
     <Box>
@@ -109,7 +95,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         {...restProps}
         style={{
           ...reactNativeEmulation,
-          ...removeWebkitYellowAutofillStyle,
           ...style,
         }}
       />

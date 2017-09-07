@@ -24,6 +24,16 @@ const globalStyle = `
     ${/* Reset user agent default style. */ ''}
     text-decoration: none;
   }
+  ${/*
+    https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530
+  */ ''}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+      -webkit-transition-delay: 9999s;
+  }
 `;
 
 export default class MyDocument extends Document {

@@ -163,7 +163,6 @@ class Auth extends React.Component<Props, State> {
               name="email"
               onChange={email => this.setState({ email })}
               placeholder={intl.formatMessage(messages.emailPlaceholder)}
-              removeWebkitYellowAutofill
               type="email"
               value={this.state.email}
             />
@@ -175,7 +174,6 @@ class Auth extends React.Component<Props, State> {
               name="password"
               onChange={password => this.setState({ password })}
               placeholder={intl.formatMessage(messages.passwordPlaceholder)}
-              removeWebkitYellowAutofill
               type="password"
               value={this.state.password}
             />
