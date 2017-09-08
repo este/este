@@ -10,10 +10,11 @@ import nameToDomain from '../lib/nameToDomain';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
 import CreateWebMutation from '../mutations/CreateWebMutation';
+import withMutation from './withMutation';
 
 type Props = {
+  mutate: *,
   viewer: CreateWeb_viewer,
-  relay: { environment: Object },
 };
 
 type State = {
@@ -43,34 +44,8 @@ class CreateWeb extends React.Component<Props, State> {
     if (!this.isValid()) return;
     this.setState({ pending: true });
 
-    // TODO: Make better API. Handling global errors, unlisten on unmount, etc.
-    // this.props.commitMutation(CreateWebMutation.commit, {
-    //   variables: {
-    //     input: {
-    //       domain: this.getDomain(),
-    //       name: this.state.name,
-    //       ownerId: user.id,
-    //       // https://github.com/facebook/relay/issues/2077
-    //       clientMutationId: Date.now().toString(36),
-    //     },
-    //   }
-    // }, (response, error) => {
-    //   if (error) {
-    //     this.setState({ pending: false });
-    //     return;
-    //   }
-    //   this.setState(initialState);
-    // })
-    //
-
-    // Naive explicit usage. There are several issues with that.
-    // - setState can be called within unmounted component
-    // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
-    // - Developer can forged to handle errors.
-    // - Known global errors had to be handled manually.
-    // - The environment has to be injected manually.
-    CreateWebMutation.commit(
-      this.props.relay.environment,
+    this.props.mutate(
+      CreateWebMutation.commit,
       {
         input: {
           domain: this.getDomain(),
@@ -80,12 +55,8 @@ class CreateWeb extends React.Component<Props, State> {
           clientMutationId: Date.now().toString(36),
         },
       },
-      (response, payloadError) => {
-        if (payloadError) {
-          this.setState({ pending: false });
-        } else {
-          this.setState(initialState);
-        }
+      () => {
+        this.setState(initialState);
       },
       () => {
         this.setState({ pending: false });
@@ -94,6 +65,7 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   render() {
+    const { pending } = this.state;
     return (
       <Form onSubmit={this.createWeb}>
         <TextInputBig
@@ -109,23 +81,19 @@ class CreateWeb extends React.Component<Props, State> {
           onChange={name => this.setState({ name })}
           type="text"
           value={this.state.name}
-          disabled={this.state.pending}
+          disabled={pending}
         />
         <Set>
-          <CreateButton
-            primary
-            disabled={!this.isValid()}
-            onPress={this.createWeb}
-          />
+          <CreateButton primary disabled={pending} onPress={this.createWeb} />
         </Set>
       </Form>
     );
   }
 }
 
-// const CreateWebWithMutation = withMutation(CreateWeb);
+const CreateWebWithMutation = withMutation(CreateWeb);
 
-export default createFragmentContainer(CreateWeb, {
+export default createFragmentContainer(CreateWebWithMutation, {
   viewer: graphql`
     fragment CreateWeb_viewer on Viewer {
       user {

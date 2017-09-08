@@ -7,20 +7,20 @@ import Set from './Set';
 import TextInputBig from './TextInputBig';
 import ValidationError from './ValidationError';
 import { SignInButton, SignUpButton } from './buttons';
-import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import validate, {
   type ValidationErrors,
   required,
   minLength,
   email,
 } from '../lib/validate';
-import withRelay, { type RelayContext } from './withRelay';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import cookie from 'cookie';
 import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
+import withMutation from './withMutation';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -34,7 +34,8 @@ const messages = defineMessages({
 });
 
 type Props = {
-  intl: IntlShape,
+  intl: *,
+  mutate: *,
 };
 
 type State = {
@@ -81,19 +82,6 @@ const mapRelayErrorToValidationError = error => {
 class Auth extends React.Component<Props, State> {
   state = initialState;
 
-  onCompleted = (response, payloadError) => {
-    if (payloadError) {
-      this.setState({ pending: false });
-    } else {
-      setCookieThenRedirect(response.signinUser.token);
-    }
-  };
-
-  onError = error => {
-    const validationErrors = mapRelayErrorToValidationError(error);
-    this.setState({ pending: false, validationErrors });
-  };
-
   validate() {
     return validate(this.state, {
       email: [required(), email()],
@@ -101,50 +89,78 @@ class Auth extends React.Component<Props, State> {
     });
   }
 
-  context: RelayContext;
-
   auth(isSignUp) {
     const validationErrors = this.validate();
     this.setState({ validationErrors });
     if (Object.keys(validationErrors).length > 0) return;
     this.setState({ pending: true });
 
-    const { environment } = this.context.relay;
-    const { email, password } = this.state;
+    const email = { email: this.state.email, password: this.state.password };
     const signinInput = {
-      email: { email, password },
+      email,
       clientMutationId: Date.now().toString(36),
     };
 
+    const onCompleted = response => {
+      setCookieThenRedirect(response.signinUser.token);
+    };
+
+    const onError = error => {
+      const validationErrors = mapRelayErrorToValidationError(error);
+      this.setState({ pending: false, validationErrors });
+    };
+
+    // "if (isSignUp) {" breaks Flow. Both mutations type inference works well,
+    // until if is used :-( I believe it's Flow error.
+
+    // class type: Auth
+    // This type is incompatible with
+    // union: type application of polymorphic type: type
+    // `React$StatelessFunctionalComponent` | class type: type application of
+    // polymorphic type: class type: React$Component: components/withMutation.js:14
+    // Member 1:
+    // type application of polymorphic type: type
+    // `React$StatelessFunctionalComponent`: /private/tmp/flow/flowlib_2b67ccc1/react.js:140
+    // Error:
+    // property `$call`: /private/tmp/flow/flowlib_2b67ccc1/react.js:140
+    // Callable signature not found in
+    // statics of Auth: components/Auth.js:188
+    // Member 2:
+    // class type: type application of polymorphic type: class type:
+    // React$Component: /private/tmp/flow/flowlib_2b67ccc1/react.js:141
+    // Error:
+    // property `signupInput`: mutations/__generated__/SignupMutation.graphql.js:12
+    // Property not found in
+    // object type: mutations/SigninMutation.js:17
     if (isSignUp) {
-      SignupMutation.commit(
-        environment,
+      this.props.mutate(
+        SignupMutation.commit,
         {
           signupInput: {
-            authProvider: { email: { email, password } },
+            authProvider: { email },
             clientMutationId: Date.now().toString(36),
           },
           signinInput,
         },
-        this.onCompleted,
-        this.onError,
+        onCompleted,
+        onError,
       );
     } else {
-      SigninMutation.commit(
-        environment,
+      this.props.mutate(
+        SigninMutation.commit,
         { signinInput },
-        this.onCompleted,
-        this.onError,
+        onCompleted,
+        onError,
       );
     }
   }
 
-  signIn = () => {
-    this.auth(false);
-  };
-
   signUp = () => {
     this.auth(true);
+  };
+
+  signIn = () => {
+    this.auth(false);
   };
 
   render() {
@@ -188,8 +204,10 @@ class Auth extends React.Component<Props, State> {
   }
 }
 
-withRelay(Auth);
+// $FlowFixMe I believe it's Flow bug because error message doesn't make sense.
+const AuthWithMutation = withMutation(Auth);
 
-const AuthFormIntl: ComponentType<{}> = injectIntl(Auth);
+// injectIntl should infers props type.
+const AuthIntl: ComponentType<{}> = injectIntl(AuthWithMutation);
 
-export default AuthFormIntl;
+export default AuthIntl;

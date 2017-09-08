@@ -23,10 +23,7 @@ const Index = ({ intl }, { isAuthenticated }: IsAuthenticatedContext) => (
             id="index.manageYourWebs"
           />
         ) : (
-          <FormattedMessage
-            defaultMessage="Create your first web"
-            id="index.createYourFirstWeb"
-          />
+          <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
         )}
       </A>
     </P>
