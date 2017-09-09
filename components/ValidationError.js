@@ -10,6 +10,36 @@ type Props = TextProps & {
 
 const getValidationErrorMessage = error => {
   switch (error.type) {
+    case 'alreadyExists':
+      return (
+        <FormattedMessage
+          defaultMessage="Already exists."
+          id="validationError.alreadyExists"
+        />
+      );
+    case 'email':
+      return (
+        <FormattedMessage
+          defaultMessage="Email address is not valid."
+          id="validationError.email"
+        />
+      );
+    case 'maxLength':
+      return (
+        <FormattedMessage
+          defaultMessage="{maxLength} characters maximum."
+          id="validationError.maxLength"
+          values={{ maxLength: error.maxLength }}
+        />
+      );
+    case 'minLength':
+      return (
+        <FormattedMessage
+          defaultMessage="{minLength} characters minimum."
+          id="validationError.minLength"
+          values={{ minLength: error.minLength }}
+        />
+      );
     case 'required':
       return (
         <FormattedMessage
@@ -24,34 +54,11 @@ const getValidationErrorMessage = error => {
           id="validationError.requiredAgree"
         />
       );
-    case 'minLength':
+    case 'wrongPassword':
       return (
         <FormattedMessage
-          defaultMessage="{minLength} characters minimum."
-          id="validationError.minLength"
-          values={{ minLength: error.minLength }}
-        />
-      );
-    case 'maxLength':
-      return (
-        <FormattedMessage
-          defaultMessage="{maxLength} characters maximum."
-          id="validationError.maxLength"
-          values={{ maxLength: error.maxLength }}
-        />
-      );
-    case 'email':
-      return (
-        <FormattedMessage
-          defaultMessage="Email address is not valid."
-          id="validationError.email"
-        />
-      );
-    case 'alreadyExists':
-      return (
-        <FormattedMessage
-          defaultMessage="Already exists."
-          id="validationError.alreadyExists"
+          defaultMessage="The password you have entered is invalid."
+          id="validationError.wrongPassword"
         />
       );
     default:

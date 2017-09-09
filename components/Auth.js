@@ -53,11 +53,10 @@ class Auth extends React.Component<Props, State> {
       error.source &&
       error.source.errors &&
       error.source.errors[0].code) {
+      // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
       case 3022:
-        // No user found with that information
-        return { password: { type: 'required' } };
+        return { password: { type: 'wrongPassword' } };
       case 3023:
-        // User already exists with that information
         return { email: { type: 'alreadyExists' } };
       default:
         return {};

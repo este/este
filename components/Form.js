@@ -14,7 +14,9 @@ const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) => (
       if (typeof onSubmit !== 'function') return;
       onSubmit();
     }}
-    onSubmit={(e: Event) => e.preventDefault()}
+    onSubmit={(e: Event) => {
+      e.preventDefault();
+    }}
   />
 );
 
