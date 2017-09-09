@@ -4,7 +4,6 @@ import Text from './Text';
 import type { State } from '../types';
 import { connect } from 'react-redux';
 
-// TODO: i18n subdomain for production.
 const getLocaleHref = (pathname, defaultLocale, locale) => {
   if (defaultLocale === locale) return pathname;
   return `${pathname}?locale=${locale}`;

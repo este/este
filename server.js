@@ -47,8 +47,6 @@ const getMessages = locale => {
   return require(localePath);
 };
 
-// TODO: ?locale=cs is for dev, use subdirectories with gTLDs for production.
-// https://support.google.com/webmasters/answer/182192?hl=en
 const getAcceptedOrDefaultLocale = (req, locale) => {
   // locale=* overrides auto detection.
   // For example: http://localhost:3000/?locale=cs

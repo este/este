@@ -4,8 +4,6 @@ const { DEFAULT_LOCALE } = require('../env-config');
 const { readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
-// TODO: Detect missing and unused translations. PR please.
-
 const defaultMessages = glob
   // Remember babel plugin generates only required / imported components.
   // That's why application has to be built before extraction.

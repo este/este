@@ -1,8 +1,6 @@
 // @flow
 import type { Element } from 'react';
 
-// TODO: Define ColorName once. Flow is still buggy for that imho.
-
 export type ColorName =
   | 'primary'
   | 'success'
