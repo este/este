@@ -71,7 +71,7 @@ const Page = ({ children, darkEnabled, title }) => {
             }}
           />
         </Head>
-        <LoadingBar />
+        <LoadingBar color={theme.colors.primary} />
         {/* <AppError /> */}
         <PageContainer>
           <MainNav title={title} />

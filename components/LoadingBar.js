@@ -2,6 +2,7 @@
 import React from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import Head from 'next/head';
 
 // Don't show progress for fast transitions.
 const startDelay = 1000;
@@ -21,34 +22,38 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-// TODO: Use theme primary color for bg.
-const LoadingBar = () => (
-  <style jsx global>
-    {`
-      #nprogress {
-        pointer-events: none;
-      }
-      #nprogress .bar {
-        background: #228ae6;
-        position: fixed;
-        z-index: 1031;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-      }
-      #nprogress .peg {
-        display: block;
-        position: absolute;
-        right: 0px;
-        width: 100px;
-        height: 100%;
-        box-shadow: 0 0 10px #228ae6, 0 0 5px #228ae6;
-        opacity: 1;
-        transform: rotate(3deg) translate(0px, -4px);
-      }
-    `}
-  </style>
+type Props = {
+  color: string,
+};
+
+const getStyle = color => `
+  #nprogress {
+    pointer-events: none;
+  }
+  #nprogress .bar {
+    background: ${color};
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+  #nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px ${color}, 0 0 5px ${color};
+    opacity: 1;
+    transform: rotate(3deg) translate(0px, -4px);
+}`;
+
+const LoadingBar = ({ color }: Props) => (
+  <Head>
+    <style dangerouslySetInnerHTML={{ __html: getStyle(color) }} />
+  </Head>
 );
 
 export default LoadingBar;
