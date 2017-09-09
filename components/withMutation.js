@@ -3,17 +3,17 @@ import React, { type ComponentType } from 'react';
 import type { Commit, Environment } from '../types';
 import PropTypes from 'prop-types';
 
-type Mutate<V, R> = (
-  commit: Commit<V, R>,
-  variables: V,
-  onCompleted: (response: R) => void,
+type Mutate = <Variables, Response>(
+  commit: Commit<Variables, Response>,
+  variables: Variables,
+  onCompleted: (response: Response) => void,
   onError: (error: any) => void,
 ) => void;
 
-const withMutation = <Props: {}, Variables, Response>(
+const withMutation = <Props: {}>(
   Component: ComponentType<
     {
-      mutate: Mutate<Variables, Response>,
+      mutate: Mutate,
     } & Props,
   >,
 ): ComponentType<Props> =>
@@ -30,14 +30,20 @@ const withMutation = <Props: {}, Variables, Response>(
       this._isMounted = false;
     }
 
-    // It's always better to unsubscribe, but Relay commit doesn't support that,
-    // so we have to track _isMounted.
+    // We have to track _isMounted, because Relay doesn't support unsubscribe.
     // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
     _isMounted: boolean;
 
     context: { relay: { environment: Environment } };
 
-    mutate = (commit, variables, onCompleted, onError) =>
+    // We can't reuse Mutate type here.
+    // https://twitter.com/calebmer/status/906561429129502720
+    mutate = <Variables, Response>(
+      commit: Commit<Variables, Response>,
+      variables: Variables,
+      onCompleted: (response: Response) => void,
+      onError: (error: any) => void,
+    ) =>
       commit(
         this.context.relay.environment,
         variables,
