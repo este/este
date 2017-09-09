@@ -1,9 +1,6 @@
 {
-  "appError.cannotSignInCredentialsInvalid": "Wrong email or password.",
-  "appError.insufficientStorage": "Insufficient storage.",
-  "appError.xhrError": "Network error. Please try it later.",
   "authForm.emailPlaceholder": "email",
-  "authForm.passowordPlaceholder": "password",
+  "authForm.passwordPlaceholder": "password",
   "button.add": "Add",
   "button.cancel": "Cancel",
   "button.create": "Create",
@@ -16,9 +13,11 @@
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
   "createApp.label": "Web Name",
+  "devTools": "Dev Tools",
   "footer.madeBy": "made by",
-  "index.createYourFirstWeb": "Create your first web",
+  "index.createWeb": "Create web",
   "index.manageYourWebs": "Manage your webs",
+  "profile": "Profile",
   "sitemap.title.index": "Este",
   "sitemap.title.me": "Me",
   "sitemap.title.signIn": "Sign In",
@@ -27,5 +26,8 @@
   "validationError.maxLength": "{maxLength} characters maximum.",
   "validationError.minLength": "{minLength} characters minimum.",
   "validationError.required": "Please fill out this field.",
-  "validationError.requiredAgree": "Please think about it."
+  "validationError.requiredAgree": "Please think about it.",
+  "validationError.wrongPassword": "The password you have entered is invalid.",
+  "viewerWebs.noWebCreatedYet": "You don't have any web yet. Create a new one.",
+  "yourWebs": "Your Webs"
 }

@@ -1,9 +1,6 @@
 {
-  "appError.cannotSignInCredentialsInvalid": "Špatný email nebo heslo.",
-  "appError.insufficientStorage": "Nedostatečné úložiště.",
-  "appError.xhrError": "Chyba sítě. Zkuste to prosím později.",
   "authForm.emailPlaceholder": "email",
-  "authForm.passowordPlaceholder": "heslo",
+  "authForm.passwordPlaceholder": "heslo",
   "button.add": "Přidat",
   "button.cancel": "Zrušit",
   "button.create": "Vytvořit",
@@ -16,16 +13,23 @@
   "button.signUp": "Vytvořit účet",
   "button.submit": "Odeslat",
   "createApp.label": "Název webu",
+  "devTools": "Vývojářské nástroje",
   "footer.madeBy": "vytvořil",
-  "index.createYourFirstWeb": "Vytvoř si svůj web",
+  "index.createWeb": "Vytvoř si svůj web",
   "index.manageYourWebs": "Správa webů",
+  "profile": "Profil",
   "sitemap.title.index": "Este",
   "sitemap.title.me": "Já",
   "sitemap.title.signIn": "Přihlášení",
   "validationError.alreadyExists": "Už existuje.",
   "validationError.email": "Chybný email",
-  "validationError.maxLength": "Maximálně {maxLength} {maxLength, plural, one {znak} few {znaky} other {znaků} }",
-  "validationError.minLength": "Minimálně {minLength} {minLength, plural, one {znak} few {znaky} other {znaků} }",
+  "validationError.maxLength":
+    "Maximálně {maxLength} {maxLength, plural, one {znak} few {znaky} other {znaků} }",
+  "validationError.minLength":
+    "Minimálně {minLength} {minLength, plural, one {znak} few {znaky} other {znaků} }",
   "validationError.required": "Toto políčko je povinné",
-  "validationError.requiredAgree": "Prosím, zapřemýšlejte o tom."
+  "validationError.requiredAgree": "Prosím, zapřemýšlejte o tom.",
+  "validationError.wrongPassword": "Nesprávné heslo",
+  "viewerWebs.noWebCreatedYet": "Nemáte žádný web. Vytvořte si nějaký.",
+  "yourWebs": "Your Webs"
 }
