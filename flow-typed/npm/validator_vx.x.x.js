@@ -1,4 +1,4 @@
-// flow-typed signature: 0da08af487376114aea383df8012daf3
+// flow-typed signature: c9ec26237eae5abef2606f50bb9ddc1d
 // flow-typed version: <<STUB>>/validator_v^8.0.0/flow_v0.54.0
 
 /**
@@ -119,6 +119,10 @@ declare module 'validator/lib/isFullWidth' {
 }
 
 declare module 'validator/lib/isHalfWidth' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isHash' {
   declare module.exports: any;
 }
 
@@ -379,6 +383,9 @@ declare module 'validator/lib/isFullWidth.js' {
 }
 declare module 'validator/lib/isHalfWidth.js' {
   declare module.exports: $Exports<'validator/lib/isHalfWidth'>;
+}
+declare module 'validator/lib/isHash.js' {
+  declare module.exports: $Exports<'validator/lib/isHash'>;
 }
 declare module 'validator/lib/isHexadecimal.js' {
   declare module.exports: $Exports<'validator/lib/isHexadecimal'>;

@@ -1,6 +1,7 @@
 module.exports = {
-  extends: ['airbnb'],
+  extends: ['airbnb', 'plugin:flowtype/recommended'],
   parser: 'babel-eslint',
+  plugins: ['flowtype'],
   globals: {
     APP_NAME: true,
     APP_VERSION: true,
@@ -10,17 +11,6 @@ module.exports = {
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
     window: true,
-    // Flow. TODO: There must be a better way. Strip types before linting?
-    $Diff: true,
-    $Exact: true,
-    $Keys: true,
-    $PropertyType: true,
-    Event: true,
-    EventHandler: true,
-    HTMLInputElement: true,
-    KeyboardEvent: true,
-    SyntheticKeyboardEvent: true,
-    http$ServerResponse: true,
   },
   // AirBnb is great, but very strict. Feel free to relax any rule.
   rules: {
@@ -55,5 +45,7 @@ module.exports = {
     camelcase: 0, // Post_post can be Relay compiler generated type.
     curly: 0, // Prettier.
     indent: 0, // Prettier.
+    'flowtype/space-after-type-colon': 0, // Prettier.
+    'flowtype/generic-spacing': 0, // Prettier.
   },
 };
