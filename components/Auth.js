@@ -8,12 +8,6 @@ import TextInputBig from './TextInputBig';
 import ValidationError from './ValidationError';
 import { SignInButton, SignUpButton } from './buttons';
 import { defineMessages, injectIntl } from 'react-intl';
-import validate, {
-  type ValidationErrors,
-  required,
-  minLength,
-  email,
-} from '../lib/validate';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import cookie from 'cookie';
@@ -21,6 +15,7 @@ import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
 import withMutation from './withMutation';
+import * as validation from '../lib/validation';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -42,7 +37,7 @@ type State = {
   pending: boolean,
   email: string,
   password: string,
-  validationErrors: ValidationErrors<State>,
+  validationErrors: validation.ValidationErrors<State>,
 };
 
 const initialState = {
@@ -88,17 +83,16 @@ class Auth extends React.Component<Props, State> {
   };
 
   validate() {
-    return validate(this.state, {
-      email: [required(), email()],
-      password: [required(), minLength(5)],
+    const validationErrors = validation.validate(this.state, {
+      email: [validation.required(), validation.email()],
+      password: [validation.required(), validation.minLength(5)],
     });
+    this.setState({ validationErrors });
+    return validation.isValid(validationErrors);
   }
 
   auth(isSignUp) {
-    const validationErrors = this.validate();
-    this.setState({ validationErrors });
-    if (Object.keys(validationErrors).length > 0) return;
-
+    if (!this.validate()) return;
     this.setState({ pending: true });
 
     const email = { email: this.state.email, password: this.state.password };
@@ -130,9 +124,13 @@ class Auth extends React.Component<Props, State> {
     }
   }
 
-  signUp = () => this.auth(true);
+  signUp = () => {
+    this.auth(true);
+  };
 
-  signIn = () => this.auth(false);
+  signIn = () => {
+    this.auth(false);
+  };
 
   render() {
     const { intl } = this.props;
