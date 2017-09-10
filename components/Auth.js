@@ -14,7 +14,7 @@ import cookie from 'cookie';
 import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
-import withMutation from './withMutation';
+import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../lib/validation';
 
 const messages = defineMessages({
@@ -27,6 +27,20 @@ const messages = defineMessages({
     id: 'authForm.passwordPlaceholder',
   },
 });
+
+// https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
+export const mapAuthErrorToValidationError = (error: any) => {
+  const code =
+    error && error.source && error.source.errors && error.source.errors[0].code;
+  switch (code) {
+    case 3022:
+      return { password: { type: 'wrongPassword' } };
+    case 3023:
+      return { email: { type: 'alreadyExists' } };
+    default:
+      return {};
+  }
+};
 
 type Props = {
   intl: *,
@@ -48,21 +62,6 @@ const initialState = {
 };
 
 class Auth extends React.Component<Props, State> {
-  static mapRelayErrorToValidationError = error => {
-    switch (error &&
-      error.source &&
-      error.source.errors &&
-      error.source.errors[0].code) {
-      // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-      case 3022:
-        return { password: { type: 'wrongPassword' } };
-      case 3023:
-        return { email: { type: 'alreadyExists' } };
-      default:
-        return {};
-    }
-  };
-
   state = initialState;
 
   onCompleted = response => {
@@ -77,7 +76,7 @@ class Auth extends React.Component<Props, State> {
   };
 
   onError = error => {
-    const validationErrors = Auth.mapRelayErrorToValidationError(error);
+    const validationErrors = mapAuthErrorToValidationError(error);
     this.setState({ pending: false, validationErrors });
   };
 
@@ -97,7 +96,7 @@ class Auth extends React.Component<Props, State> {
     const email = { email: this.state.email, password: this.state.password };
     const signinInput = {
       email,
-      clientMutationId: Date.now().toString(36),
+      clientMutationId: getClientMutationId(),
     };
 
     if (isSignUp) {
@@ -106,7 +105,7 @@ class Auth extends React.Component<Props, State> {
         {
           signupInput: {
             authProvider: { email },
-            clientMutationId: Date.now().toString(36),
+            clientMutationId: getClientMutationId(),
           },
           signinInput,
         },

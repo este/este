@@ -9,7 +9,7 @@ import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
-import type { Req, Store, State, PayloadError } from '../types';
+import type { Store, State, PayloadError } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { createProvider as createReduxProvider } from 'react-redux';
@@ -58,17 +58,18 @@ const redirectToSignIn = ({ pathname, res }) => {
   }
 };
 
-// // We can ignore some innocent errors.
-// // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-// export const isInnocentError = (error: PayloadError) =>
-//   error.every(
-//     error => error.code === 3008 || error.code === 3022 || error.code === 3023,
-//   );
-
 // const onRelayError = error => {
 //   if (isInnocentError(error)) return;
 //   reportRelayError(error);
 // };
+
+export type Req = {
+  ...http$IncomingMessage,
+  locale: string,
+  localeDataScript: string,
+  messages: Object,
+  supportedLocales: Array<string>,
+};
 
 // https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
 type NextContext = {
@@ -222,11 +223,12 @@ const app = (
         app: {
           baselineShown: false,
           darkEnabled: true,
-          name: APP_NAME,
-          version: APP_VERSION,
-          locale,
           defaultLocale: DEFAULT_LOCALE,
+          error: null,
+          locale,
+          name: APP_NAME,
           supportedLocales,
+          version: APP_VERSION,
         },
       },
       token,

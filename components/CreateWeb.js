@@ -10,7 +10,7 @@ import nameToDomain from '../lib/nameToDomain';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
 import CreateWebMutation from '../mutations/CreateWebMutation';
-import withMutation from './withMutation';
+import withMutation, { getClientMutationId } from './withMutation';
 
 type Props = {
   mutate: *,
@@ -51,8 +51,7 @@ class CreateWeb extends React.Component<Props, State> {
           domain: this.getDomain(),
           name: this.state.name,
           ownerId: user.id,
-          // https://github.com/facebook/relay/issues/2077
-          clientMutationId: Date.now().toString(36),
+          clientMutationId: getClientMutationId(),
         },
       },
       () => {

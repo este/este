@@ -4,8 +4,6 @@ import Button from './Button';
 import React from 'react';
 import { connect } from 'react-redux';
 
-// Toggle dark mode.
-
 const ToggleDark = ({ darkEnabled, dispatch }) => (
   <Button
     primary

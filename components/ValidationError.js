@@ -62,7 +62,7 @@ const getValidationErrorMessage = error => {
         />
       );
     default:
-      // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-reducers
+      // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
       (error: empty);
       return null;

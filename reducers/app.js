@@ -1,11 +1,13 @@
 // @flow
 import type { Action } from '../types';
+import type { AppError } from '../lib/errors';
 
 // Can't be exact type yet. Flow will fix it soon.
 export type AppState = {
   +baselineShown: boolean,
   +darkEnabled: boolean,
   +defaultLocale: string,
+  +error: ?AppError,
   +locale: string,
   +name: string,
   +supportedLocales: Array<string>,
@@ -14,6 +16,7 @@ export type AppState = {
 
 // This is defined by server in app.js
 const initialState = {
+  error: null,
   baselineShown: false,
   darkEnabled: false,
   defaultLocale: 'en',
@@ -25,6 +28,8 @@ const initialState = {
 
 const reducer = (state: AppState = initialState, action: Action): AppState => {
   switch (action.type) {
+    case 'APP_ERROR':
+      return { ...state, error: action };
     case 'TOGGLE_BASELINE':
       return { ...state, baselineShown: !state.baselineShown };
     case 'TOGGLE_DARK':

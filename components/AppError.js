@@ -1,74 +1,108 @@
-// // @flow
-// import React from 'react';
-// import type { State } from '../types';
-// import Text from './Text';
-// import { FormattedMessage } from 'react-intl';
-// import { connect } from 'react-redux';
-//
-// const getAppErrorMessage = appError => {
-//   switch (appError.type) {
-//     case 'insufficientStorage':
-//       return (
-//         <FormattedMessage
-//           defaultMessage="Insufficient storage."
-//           id="appError.insufficientStorage"
-//         />
-//       );
-//     case 'xhrError':
-//       return (
-//         <FormattedMessage
-//           defaultMessage="Network error. Please try it later."
-//           id="appError.xhrError"
-//         />
-//       );
-//     case 'cannotSignInCredentialsInvalid':
-//       return (
-//         <FormattedMessage
-//           defaultMessage="Wrong email or password."
-//           id="appError.cannotSignInCredentialsInvalid"
-//         />
-//       );
-//     default:
-//       return appError.message;
-//   }
-// };
-//
-// // There is no position fixed for React Native. Use commponent tree instead.
-// const browserOnlyStyle = {
-//   position: 'fixed',
-//   transform: 'translateX(-50%)',
-// };
-//
-// const AppError = ({ errors }) => {
-//   if (!errors || !errors.appError) return null;
-//   const { appError } = errors;
-//
-//   const message = getAppErrorMessage(appError);
-//   if (!message) return null;
-//
-//   const titleWithStackForDevMode =
-//     process.env.NODE_ENV === 'production' ? '' : appError.stack || '';
-//
-//   return (
-//     <Text
-//       backgroundColor="warning"
-//       bold
-//       color="white"
-//       display="inline"
-//       left="50%"
-//       margin="auto"
-//       paddingHorizontal={1}
-//       paddingVertical={0.25}
-//       style={browserOnlyStyle}
-//       title={titleWithStackForDevMode}
-//       top={0}
-//       zIndex={1}
-//     >
-//       {message}
-//     </Text>
-//   );
-// };
-//
-// export default connect((state: State) => ({
-//   errors: state.app.errors,
-// }))(AppError);
+// @flow
+import React from 'react';
+import type { State as AppState } from '../types';
+import Text from './Text';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import * as errors from '../lib/errors';
+import { mapAuthErrorToValidationError } from './Auth';
+
+const getAppErrorMessage = error => {
+  switch (error.name) {
+    case 'failedToFetch':
+      return (
+        <FormattedMessage
+          defaultMessage="Network error. Please check your connection."
+          id="appError.failedToFetch"
+        />
+      );
+    case 'insufficientPermissions':
+      return (
+        <FormattedMessage
+          defaultMessage="Insufficient permissions."
+          id="appError.insufficientPermissions"
+        />
+      );
+    case 'unknown':
+      return (
+        <FormattedMessage
+          defaultMessage="Unknown error."
+          id="appError.unknown"
+        />
+      );
+    default:
+      // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
+      // eslint-disable-next-line no-unused-expressions
+      (error: empty);
+      return null;
+  }
+};
+
+type Props = {
+  appError: ?errors.AppError,
+};
+
+type State = {
+  shown: boolean,
+};
+
+class AppError extends React.Component<Props, State> {
+  state = {
+    shown: false,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.appError !== this.props.appError) {
+      this.flashError();
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.shownTimer);
+  }
+
+  flashError() {
+    this.setState({ shown: true });
+    clearTimeout(this.shownTimer);
+    const timeToHide = 5000;
+    this.shownTimer = setTimeout(() => {
+      this.setState({ shown: false });
+    }, timeToHide);
+  }
+
+  shownTimer: number;
+
+  render() {
+    const { appError } = this.props;
+    if (!appError || !this.state.shown) return null;
+    if (appError.name === 'unknown') {
+      const validationErrors = mapAuthErrorToValidationError(appError.error);
+      if (Object.keys(validationErrors).length > 0) return null;
+    }
+    const message = getAppErrorMessage(appError);
+    return (
+      <Text
+        backgroundColor="warning"
+        bold
+        color="white"
+        display="inline"
+        left="50%"
+        margin="auto"
+        paddingHorizontal={1}
+        paddingVertical={0.25}
+        style={{
+          position: 'fixed',
+          transform: 'translateX(-50%)',
+        }}
+        top={0}
+        zIndex={1}
+      >
+        {message}
+      </Text>
+    );
+  }
+}
+
+export default connect((state: AppState) => ({
+  appError: state.app.error,
+}))(AppError);

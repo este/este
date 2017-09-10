@@ -1,6 +1,6 @@
 // @flow
 import A from './A';
-// import AppError from './AppError';
+import AppError from './AppError';
 import Baseline from './Baseline';
 import Box from './Box';
 import Head from 'next/head';
@@ -72,7 +72,7 @@ const Page = ({ children, darkEnabled, title }) => {
           />
         </Head>
         <LoadingBar color={theme.colors.primary} />
-        {/* <AppError /> */}
+        <AppError />
         <PageContainer>
           <MainNav title={title} />
           <PageBody>{children}</PageBody>

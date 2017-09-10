@@ -1,7 +1,11 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import type { Commit, Environment } from '../types';
+import type { Commit, Environment, Store } from '../types';
 import PropTypes from 'prop-types';
+import { mapErrorToAppError } from '../lib/errors';
+
+// https://github.com/facebook/relay/issues/2077
+export const getClientMutationId = () => Date.now().toString(36);
 
 type Mutate = <Variables, Response>(
   commit: Commit<Variables, Response>,
@@ -20,6 +24,7 @@ const withMutation = <Props: {}>(
   class WrapperComponent extends React.Component<Props> {
     static contextTypes = {
       relay: PropTypes.object,
+      store: PropTypes.object,
     };
 
     componentDidMount() {
@@ -34,9 +39,22 @@ const withMutation = <Props: {}>(
     // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
     _isMounted: boolean;
 
-    context: { relay: { environment: Environment } };
+    context: {
+      relay: { environment: Environment },
+      store: Store,
+    };
 
-    // We can't reuse Mutate type here.
+    handleError(error, onError) {
+      // Some errors are innocent and expected. For example, wrongPassword.
+      // Such errors should be handled in a component.
+      // Some errors are serious and global. For example, failedToFetch.
+      // Such errors should be handled in AppError component.
+      const appError = mapErrorToAppError(error);
+      this.context.store.dispatch(appError);
+      onError(error);
+    }
+
+    // We probably can't reuse Mutate type here.
     // https://twitter.com/calebmer/status/906561429129502720
     mutate = <Variables, Response>(
       commit: Commit<Variables, Response>,
@@ -50,13 +68,14 @@ const withMutation = <Props: {}>(
         (response, payloadError) => {
           if (!this._isMounted) return;
           if (payloadError) {
-            onError(payloadError);
+            this.handleError(payloadError, onError);
+            return;
           }
           onCompleted(response);
         },
         error => {
           if (!this._isMounted) return;
-          onError(error);
+          this.handleError(error, onError);
         },
       );
 
