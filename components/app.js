@@ -103,12 +103,13 @@ type PageProps = {
 const app = (
   Page: ComponentType<PageProps>,
   options?: {|
-    fetch?: Object,
-    prepareQuery?: Object => Object,
+    query?: Object,
+    queryVariables?: Object => Object,
     requireAuth?: boolean,
   |},
 ) => {
-  const { fetch, prepareQuery = object => object, requireAuth } = options || {};
+  const { query, queryVariables = object => object, requireAuth } =
+    options || {};
   const PageWithHigherOrderComponents = injectIntl(Page);
 
   const App = ({
@@ -121,7 +122,7 @@ const app = (
     token,
     url,
   }: AppProps) => {
-    const variables = prepareQuery(url.query);
+    const variables = queryVariables(url.query);
     const environment = createRelayEnvironment(token, records);
     const reduxStore = getReduxStore(serverState);
     // createReduxProvider, because exported Provider has an obsolete check.
@@ -167,12 +168,12 @@ const app = (
     // Note we call fetchQuery for client page transitions as well to enable
     // pending navigations. Finally possible with Next.js and Relay.
     // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
-    if (fetch) {
+    if (query) {
       const environment = createRelayEnvironment(token);
-      const variables = prepareQuery(context.query);
+      const variables = queryVariables(context.query);
       // It can throw "Failed to fetch" error when offline, but it should be
       // solved with service workers I believe.
-      data = await fetchQuery(environment, fetch, variables);
+      data = await fetchQuery(environment, query, variables);
       records = environment
         .getStore()
         .getSource()

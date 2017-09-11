@@ -78,7 +78,7 @@ const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
 
 export default app(Me, {
   requireAuth: true,
-  fetch: graphql`
+  query: graphql`
     query meQuery {
       viewer {
         user {
