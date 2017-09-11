@@ -42,9 +42,8 @@ const getGravatarUrl = email =>
     s: '100',
   });
 
-const Me = ({ data, intl }) => {
-  // Force type via any cast. Can we do it better?
-  const { viewer: { user } } = ((data: any): meQueryResponse);
+const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
+  const { viewer: { user } } = data;
   if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>

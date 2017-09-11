@@ -9,13 +9,12 @@ import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
-import type { Store, State, PayloadError } from '../types';
+import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { parse as parseCookie } from 'cookie';
-// import { reportRelayError } from '../lib/raven';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
@@ -57,11 +56,6 @@ const redirectToSignIn = ({ pathname, res }) => {
     Router.replace(path);
   }
 };
-
-// const onRelayError = error => {
-//   if (isInnocentError(error)) return;
-//   reportRelayError(error);
-// };
 
 export type Req = {
   ...http$IncomingMessage,
@@ -128,11 +122,7 @@ const app = (
     url,
   }: AppProps) => {
     const variables = prepareQuery(url.query);
-    const environment = createRelayEnvironment({
-      records,
-      onRelayError: () => {},
-      token,
-    });
+    const environment = createRelayEnvironment(token, records);
     const reduxStore = getReduxStore(serverState);
     // createReduxProvider, because exported Provider has an obsolete check.
     // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
@@ -171,7 +161,6 @@ const app = (
       return {};
     }
 
-    let payloadError: ?PayloadError = null;
     let data = {};
     let records = {};
 
@@ -179,31 +168,15 @@ const app = (
     // pending navigations. Finally possible with Next.js and Relay.
     // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
     if (fetch) {
-      const environment = createRelayEnvironment({
-        onRelayError: error => {
-          // Because fetchQuery does not return graph.cool error.
-          payloadError = error;
-          // onRelayError(error);
-        },
-        token,
-      });
+      const environment = createRelayEnvironment(token);
       const variables = prepareQuery(context.query);
+      // It can throw "Failed to fetch" error when offline, but it should be
+      // solved with service workers I believe.
       data = await fetchQuery(environment, fetch, variables);
       records = environment
         .getStore()
         .getSource()
         .toJSON();
-    }
-
-    if (payloadError != null) {
-      // If a user has insufficient permissions only, do nothing. It can happen
-      // and probably that's why Relay generated Flow types are optional.
-      // Better to render something than nothing I guess.
-      // if (!isInnocentError(payloadError)) {
-      //   // Probably serious error here so there is not much else we can do.
-      //   const message = payloadError.map(error => error.message).join(', ');
-      //   throw new Error(message);
-      // }
     }
 
     // Always update the current time on page load/transition because the
