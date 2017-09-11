@@ -1,4 +1,6 @@
 {
+  "appError.failedToFetch": "Chyba sítě. Zkontrolujte prosím spojení.",
+  "appError.insufficientPermissions": "Nedostatečná práva.",
   "authForm.emailPlaceholder": "email",
   "authForm.passwordPlaceholder": "heslo",
   "button.add": "Přidat",

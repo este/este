@@ -1,4 +1,6 @@
 {
+  "appError.failedToFetch": "Network error. Please check your connection.",
+  "appError.insufficientPermissions": "Insufficient permissions.",
   "authForm.emailPlaceholder": "email",
   "authForm.passwordPlaceholder": "password",
   "button.add": "Add",

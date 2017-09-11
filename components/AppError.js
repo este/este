@@ -5,7 +5,6 @@ import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as errors from '../lib/errors';
-import { mapAuthErrorToValidationError } from './Auth';
 
 const getAppErrorMessage = error => {
   switch (error.name) {
@@ -21,13 +20,6 @@ const getAppErrorMessage = error => {
         <FormattedMessage
           defaultMessage="Insufficient permissions."
           id="appError.insufficientPermissions"
-        />
-      );
-    case 'unknown':
-      return (
-        <FormattedMessage
-          defaultMessage="Unknown error."
-          id="appError.unknown"
         />
       );
     default:
@@ -75,10 +67,6 @@ class AppError extends React.Component<Props, State> {
   render() {
     const { appError } = this.props;
     if (!appError || !this.state.shown) return null;
-    if (appError.name === 'unknown') {
-      const validationErrors = mapAuthErrorToValidationError(appError.error);
-      if (Object.keys(validationErrors).length > 0) return null;
-    }
     const message = getAppErrorMessage(appError);
     return (
       <Text

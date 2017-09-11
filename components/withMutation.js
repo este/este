@@ -50,7 +50,7 @@ const withMutation = <Props: {}>(
       // Some errors are serious and global. For example, failedToFetch.
       // Such errors should be handled in AppError component.
       const appError = mapErrorToAppError(error);
-      this.context.store.dispatch(appError);
+      if (appError) this.context.store.dispatch(appError);
       onError(error);
     }
 
