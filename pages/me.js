@@ -16,7 +16,6 @@ import { serialize as serializeCookie } from 'cookie';
 import CreateWeb from '../components/CreateWeb';
 import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
-import ViewerWebs from '../components/ViewerWebs';
 
 const deleteCookie = () => {
   // eslint-disable-next-line no-undef
@@ -50,8 +49,7 @@ const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
       <Heading size={1}>
         <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
       </Heading>
-      <ViewerWebs />
-      <CreateWeb viewer={data.viewer} />
+      <CreateWeb ownerId={user.id} />
       <Heading size={1}>
         <FormattedMessage id="profile" defaultMessage="Profile" />
       </Heading>
@@ -83,8 +81,8 @@ export default app(Me, {
       viewer {
         user {
           email
+          id
         }
-        ...CreateWeb_viewer
       }
     }
   `,

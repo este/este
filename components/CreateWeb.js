@@ -7,14 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import Text from './Text';
 import Set from './Set';
 import nameToDomain from '../lib/nameToDomain';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { type CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
 
 type Props = {
   mutate: *,
-  viewer: CreateWeb_viewer,
+  ownerId: string,
 };
 
 type State = {
@@ -27,6 +25,7 @@ const initialState = {
   pending: false,
 };
 
+// $FlowFixMe Let's Caleb investigate.
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
 
@@ -39,8 +38,8 @@ class CreateWeb extends React.Component<Props, State> {
   }
 
   createWeb = () => {
-    const { user } = this.props.viewer;
-    if (!user) return;
+    // const { user } = this.props.viewer;
+    // if (!user) return;
     if (!this.isValid()) return;
     this.setState({ pending: true });
 
@@ -50,7 +49,7 @@ class CreateWeb extends React.Component<Props, State> {
         input: {
           domain: this.getDomain(),
           name: this.state.name,
-          ownerId: user.id,
+          ownerId: this.props.ownerId,
           clientMutationId: getClientMutationId(),
         },
       },
@@ -92,12 +91,14 @@ class CreateWeb extends React.Component<Props, State> {
 
 const CreateWebWithMutation = withMutation(CreateWeb);
 
-export default createFragmentContainer(CreateWebWithMutation, {
-  viewer: graphql`
-    fragment CreateWeb_viewer on Viewer {
-      user {
-        id
-      }
-    }
-  `,
-});
+export default CreateWebWithMutation;
+
+// export default createFragmentContainer(CreateWebWithMutation, {
+//   viewer: graphql`
+//     fragment CreateWeb_viewer on Viewer {
+//       user {
+//         id
+//       }
+//     }
+//   `,
+// });
