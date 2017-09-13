@@ -24,6 +24,16 @@ const globalStyle = `
     ${/* Reset user agent default style. */ ''}
     text-decoration: none;
   }
+  ${/*
+    https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530
+  */ ''}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+      -webkit-transition-delay: 9999s;
+  }
 `;
 
 export default class MyDocument extends Document {
@@ -49,22 +59,22 @@ export default class MyDocument extends Document {
       sheetList,
     } = this.props;
 
-    const styleNodes = sheetList.map(({ type, media, css }) =>
+    const styleNodes = sheetList.map(({ type, media, css }) => (
       <style
         dangerouslySetInnerHTML={{ __html: css }}
         data-fela-type={type}
         key={`${type}-${media}`}
         media={media}
-      />,
-    );
-    const alternateHreflangLinks = supportedLocales.map(locale =>
+      />
+    ));
+    const alternateHreflangLinks = supportedLocales.map(locale => (
       <link
         href={`https://${locale}.${HOSTNAME}`}
         hrefLang={locale}
         key={locale}
         rel="alternate"
-      />,
-    );
+      />
+    ));
 
     return (
       <html lang={locale}>
@@ -109,10 +119,10 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          {/* Polyfill Intl API for older browsers */}
-          <script
+          {/* Polyfill Intl API for older browsers. Only for old Safari end Android. */}
+          {/* <script
             src={`https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${locale}`}
-          />
+          /> */}
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
           <NextScript />
         </body>

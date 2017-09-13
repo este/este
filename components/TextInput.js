@@ -7,63 +7,68 @@ import colorLib from 'color';
 import withTheme, { type ThemeContext } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
-// For underline or the other effects, make a new component. Check Field.
-// As for optional maxLength, I believe it belongs to validation and user should
-// have an option to write or paste more text and edit it later.
-// TODO: multiline and rows, use content editable because links.
+// For underline or the other effects, make a new component. Check TextInputBig.
+// TODO: Multiline and rows. Use content editable rather because of links?
 
-export type TextInputProps = TextProps & {
+export type TextInputProps = {
   disabled?: boolean,
   error?: string | Element<any>,
   label?: string | Element<any>,
   maxLength?: number,
   onChange?: (text: string) => void,
   onSubmitEditing?: () => void,
-};
+} & TextProps;
+
+// Like Twitter.
+const defaultMaxLength = 140;
 
 const computePlaceholderTextColor = (colors, color) =>
-  colorLib(colors[color]).fade(0.5).toString();
+  colorLib(colors[color])
+    .fade(0.5)
+    .toString();
 
 const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   const {
     color = theme.text.color,
     error,
     label,
-    maxLength = 256,
+    maxLength = defaultMaxLength,
     onChange,
     onSubmitEditing,
     size = 0,
+    style,
     ...restProps
   } = props;
 
-  const style = {
-    ...(restProps.isReactNative
-      ? null
-      : {
-          '::placeholder': {
-            color: computePlaceholderTextColor(theme.colors, color),
-          },
-          backgroundColor: 'transparent',
-          outline: 'none',
-        }),
-    ...restProps.style,
-  };
+  const reactNativeEmulation = restProps.isReactNative
+    ? null
+    : {
+        '::placeholder': {
+          color: computePlaceholderTextColor(theme.colors, color),
+        },
+        backgroundColor: 'transparent',
+        outline: 'none',
+      };
 
   return (
     <Box>
       <Set marginBottom={0}>
         {label &&
-          (typeof label === 'string'
-            ? <Text bold size={size}>
-                {label}
-              </Text>
-            : label)}
+          (typeof label === 'string' ? (
+            <Text bold size={size}>
+              {label}
+            </Text>
+          ) : (
+            label
+          ))}
         {error &&
-          (typeof error === 'string'
-            ? <Text bold color="danger" size={size}>
-                {error}
-              </Text>
-            : error)}
+          (typeof error === 'string' ? (
+            <Text bold color="danger" size={size}>
+              {error}
+            </Text>
+          ) : (
+            error
+          ))}
       </Set>
       <Text
         as="input"
@@ -88,7 +93,10 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
           ? { opacity: theme.textInput.disabledOpacity }
           : null)}
         {...restProps}
-        style={style}
+        style={{
+          ...reactNativeEmulation,
+          ...style,
+        }}
       />
     </Box>
   );

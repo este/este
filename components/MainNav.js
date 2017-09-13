@@ -1,15 +1,23 @@
 // @flow
-import type { IntlShape } from 'react-intl';
 import A from './A';
 import Box from './Box';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import sitemap from '../lib/sitemap';
+import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import withIsAuthenticated, {
+  type IsAuthenticatedContext,
+} from './withIsAuthenticated';
 
-const { me, signIn, ...pages } = sitemap;
+type OwnProps = {
+  title: string,
+};
 
-const NavA = ({ intl, page, title, ...props }) =>
+type Props = {
+  intl: IntlShape,
+} & OwnProps;
+
+const NavA = ({ intl, page, title, ...props }) => (
   <A
     backgroundColor="primary"
     bold
@@ -22,15 +30,15 @@ const NavA = ({ intl, page, title, ...props }) =>
     {...props}
   >
     <FormattedMessage {...page.title} />
-  </A>;
+  </A>
+);
 
-type MainNavProps = {|
-  intl: IntlShape,
-  title: string,
-|};
-
-const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
-  const authPage = isAuthenticated ? me : signIn;
+const MainNav = (
+  { intl, title }: Props,
+  { isAuthenticated }: IsAuthenticatedContext,
+) => {
+  const { index, me, signIn } = sitemap;
+  const auth = isAuthenticated ? me : signIn;
   return (
     <Box
       backgroundColor="primary"
@@ -39,16 +47,14 @@ const MainNav = ({ intl, title }: MainNavProps, { isAuthenticated }) => {
       marginVertical={0.5}
       paddingHorizontal={0.5}
     >
-      {Object.keys(pages).map(pageName => {
-        const page = pages[pageName];
-        return <NavA intl={intl} key={page.path} page={page} title={title} />;
-      })}
-      <NavA intl={intl} key={authPage.path} page={authPage} title={title} />
+      <NavA intl={intl} key={index.path} page={index} title={title} />
+      <NavA intl={intl} key={auth.path} page={auth} title={title} />
     </Box>
   );
 };
 
-MainNav.contextTypes = { isAuthenticated: PropTypes.bool };
+withIsAuthenticated(MainNav);
 
-// TODO: Enforce title. Blocked by obsolete react-intl types.
-export default injectIntl(MainNav);
+const MainNavIntl: ComponentType<OwnProps> = injectIntl(MainNav);
+
+export default MainNavIntl;

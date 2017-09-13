@@ -61,3 +61,17 @@ test('lineHeight ensures vertical rhythm', () => {
   expectRender(() => <Text size={16} />);
   expectRender(() => <Text size={17} />);
 });
+
+test('styles are inherited', () => {
+  expectRender(() => (
+    <Text>
+      <Text color="warning" bold italic size={-1}>
+        hi{' '}
+        <Text bold={false} italic={false}>
+          <Text bold>w</Text>orl<Text color="primary">d</Text>
+        </Text>
+      </Text>
+      <Text>.</Text>
+    </Text>
+  ));
+});

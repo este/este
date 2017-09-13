@@ -10,14 +10,14 @@ type BlockquoteProps = {|
   source: string,
 |};
 
-const Blockquote = ({ children, href, source }: BlockquoteProps) =>
+const Blockquote = ({ children, href, source }: BlockquoteProps) => (
   <P>
-    <Text italic>
-      {children}
-    </Text>
+    <Text italic>{children}</Text>
     <Text>
-      {' '}— <A href={href}>{source}</A>
+      {' '}
+      — <A href={href}>{source}</A>
     </Text>
-  </P>;
+  </P>
+);
 
 export default Blockquote;

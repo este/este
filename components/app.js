@@ -1,4 +1,5 @@
 // @flow
+import 'rxjs'; // This imports the entire core set of functionality.
 import IsAuthenticatedProvider from './IsAuthenticatedProvider';
 import React, { type ComponentType } from 'react';
 import RelayProvider from './RelayProvider';
@@ -8,14 +9,12 @@ import createRelayEnvironment from '../lib/createRelayEnvironment';
 import felaRenderer from '../lib/felaRenderer';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
-import type { Req, Store, ServerState, GraphCoolError } from '../types';
-import uuid from 'uuid';
+import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { Provider as FelaProvider } from 'react-fela';
 import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { parse as parseCookie } from 'cookie';
-import { reportRelayError } from '../lib/raven';
 
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
@@ -34,14 +33,13 @@ if (process.browser) {
 
 let clientReduxStore: ?Store = null;
 
-const getReduxStore = (serverState, getEnvironment) => {
-  const platformDependencies = { createUuid: uuid.v4, getEnvironment };
+const getReduxStore = serverState => {
   if (!process.browser) {
-    return createReduxStore(serverState, { platformDependencies });
+    return createReduxStore(serverState);
   }
   // Preserve Redux state across page transitions.
   const state = clientReduxStore ? clientReduxStore.getState() : serverState;
-  clientReduxStore = createReduxStore(state, { platformDependencies });
+  clientReduxStore = createReduxStore(state);
   return clientReduxStore;
 };
 
@@ -59,16 +57,12 @@ const redirectToSignIn = ({ pathname, res }) => {
   }
 };
 
-// We can ignore some innocent errors.
-// https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-export const isInnocentError = (error: GraphCoolError) =>
-  error.every(
-    error => error.code === 3008 || error.code === 3022 || error.code === 3023,
-  );
-
-const onRelayError = error => {
-  if (isInnocentError(error)) return;
-  reportRelayError(error);
+export type Req = {
+  ...http$IncomingMessage,
+  locale: string,
+  localeDataScript: string,
+  messages: Object,
+  supportedLocales: Array<string>,
 };
 
 // https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
@@ -82,12 +76,12 @@ type NextContext = {
   err: Object,
 };
 
-type NextProps = {|
+type NextProps = {
   url: {
     pathname: string,
     query: Object,
   },
-|};
+};
 
 type InitialAppProps = {|
   data: Object,
@@ -95,26 +89,27 @@ type InitialAppProps = {|
   locale: string,
   messages: Object,
   records: Object,
-  serverState: ServerState,
+  serverState: State,
   token: ?string,
 |};
 
 type AppProps = NextProps & InitialAppProps;
 
-type PageProps = NextProps & {|
+type PageProps = {
   data: Object,
   intl: IntlShape,
-|};
+} & NextProps;
 
 const app = (
   Page: ComponentType<PageProps>,
   options?: {|
-    fetch?: Object,
-    prepareQuery?: Object => Object,
+    query?: Object,
+    queryVariables?: Object => Object,
     requireAuth?: boolean,
   |},
 ) => {
-  const { fetch, prepareQuery = object => object, requireAuth } = options || {};
+  const { query, queryVariables = object => object, requireAuth } =
+    options || {};
   const PageWithHigherOrderComponents = injectIntl(Page);
 
   const App = ({
@@ -127,13 +122,9 @@ const app = (
     token,
     url,
   }: AppProps) => {
-    const variables = prepareQuery(url.query);
-    const environment = createRelayEnvironment({
-      records,
-      onRelayError,
-      token,
-    });
-    const reduxStore = getReduxStore(serverState, () => environment);
+    const variables = queryVariables(url.query);
+    const environment = createRelayEnvironment(token, records);
+    const reduxStore = getReduxStore(serverState);
     // createReduxProvider, because exported Provider has an obsolete check.
     // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
     // $FlowFixMe https://github.com/flowtype/flow-typed/issues/1154#issuecomment-324156744
@@ -149,7 +140,7 @@ const app = (
               initialNow={initialNow}
             >
               <IsAuthenticatedProvider isAuthenticated={!!token}>
-                <PageWithHigherOrderComponents {...{ data, url }} />
+                <PageWithHigherOrderComponents data={data} url={url} />
               </IsAuthenticatedProvider>
             </IntlProvider>
           </FelaProvider>
@@ -171,36 +162,22 @@ const app = (
       return {};
     }
 
-    let graphCoolError: ?GraphCoolError = null;
     let data = {};
     let records = {};
 
     // Note we call fetchQuery for client page transitions as well to enable
     // pending navigations. Finally possible with Next.js and Relay.
     // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
-    if (fetch) {
-      const environment = createRelayEnvironment({
-        onRelayError: error => {
-          // Because fetchQuery does not return graph.cool error.
-          graphCoolError = error;
-          onRelayError(error);
-        },
-        token,
-      });
-      const variables = prepareQuery(context.query);
-      data = await fetchQuery(environment, fetch, variables);
-      records = environment.getStore().getSource().toJSON();
-    }
-
-    if (graphCoolError != null) {
-      // If a user has insufficient permissions only, do nothing. It can happen
-      // and probably that's why Relay generated Flow types are optional.
-      // Better to render something than nothing I guess.
-      if (!isInnocentError(graphCoolError)) {
-        // Probably serious error here so there is not much else we can do.
-        const message = graphCoolError.map(error => error.message).join(', ');
-        throw new Error(message);
-      }
+    if (query) {
+      const environment = createRelayEnvironment(token);
+      const variables = queryVariables(context.query);
+      // It can throw "Failed to fetch" error when offline, but it should be
+      // solved with service workers I believe.
+      data = await fetchQuery(environment, query, variables);
+      records = environment
+        .getStore()
+        .getSource()
+        .toJSON();
     }
 
     // Always update the current time on page load/transition because the
@@ -219,13 +196,13 @@ const app = (
       serverState: {
         app: {
           baselineShown: false,
-          darkEnabled: false,
-          errors: null,
-          name: APP_NAME,
-          version: APP_VERSION,
-          locale,
+          darkEnabled: true,
           defaultLocale: DEFAULT_LOCALE,
+          error: null,
+          locale,
+          name: APP_NAME,
           supportedLocales,
+          version: APP_VERSION,
         },
       },
       token,

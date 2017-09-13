@@ -1,16 +1,21 @@
 // @flow
-import React from 'react';
-import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import Image from '../components/Image';
 import P from '../components/P';
 import Page from '../components/Page';
+import React from 'react';
 import Set from '../components/Set';
+import ToggleBaseline from '../components/ToggleBaseline';
+import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
+import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import { serialize as serializeCookie } from 'cookie';
+import CreateWeb from '../components/CreateWeb';
+import Heading from '../components/Heading';
+import { FormattedMessage } from 'react-intl';
 
 const deleteCookie = () => {
   // eslint-disable-next-line no-undef
@@ -36,23 +41,34 @@ const getGravatarUrl = email =>
     s: '100',
   });
 
-const Me = ({ data, intl }) => {
-  // Force type via any cast. Can we do it better?
-  const { viewer: { user } } = ((data: any): meQueryResponse);
+const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
+  const { viewer: { user } } = data;
   if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
-      <P bold>
-        {user.email}
-      </P>
+      <Heading size={1}>
+        <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
+      </Heading>
+      <CreateWeb ownerId={user.id} />
+      <Heading size={1}>
+        <FormattedMessage id="profile" defaultMessage="Profile" />
+      </Heading>
       <Image
         marginBottom={1}
         size={{ height: 100, width: 100 }}
         src={getGravatarUrl(user.email)}
         title={user.email}
       />
+      <P bold>{user.email}</P>
       <Set>
         <SignOutButton danger onPress={signOut} />
+      </Set>
+      <Heading size={1}>
+        <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
+      </Heading>
+      <Set>
+        <ToggleBaseline />
+        <ToggleDark />
       </Set>
     </Page>
   );
@@ -60,11 +76,12 @@ const Me = ({ data, intl }) => {
 
 export default app(Me, {
   requireAuth: true,
-  fetch: graphql`
+  query: graphql`
     query meQuery {
       viewer {
         user {
           email
+          id
         }
       }
     }

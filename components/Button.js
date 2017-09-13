@@ -16,7 +16,7 @@ const BrowserButton = ({
   disabled?: boolean,
   onPress: () => void,
   style?: Object,
-}) =>
+}) => (
   <div // eslint-disable-line jsx-a11y/no-static-element-interactions
     onClick={onPress}
     onKeyPress={(e: KeyboardEvent) => {
@@ -31,7 +31,7 @@ const BrowserButton = ({
     role="button"
     tabIndex={disabled ? -1 : 0}
     style={{
-      ...(style || {}),
+      ...style,
       cursor: disabled ? 'default' : 'pointer',
       pointerEvents: disabled ? 'none' : 'auto',
       userSelect: 'none',
@@ -39,7 +39,8 @@ const BrowserButton = ({
       WebkitUserSelect: 'none',
     }}
     {...restProps}
-  />;
+  />
+);
 
 export type ButtonProps = ColorProps &
   TextProps & {
@@ -53,6 +54,7 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
     as = BrowserButton,
     size = 0,
     borderRadius = theme.button.borderRadius,
+    // For size < 0, there is no space for a padding.
     marginVertical = size < 0
       ? theme.button.marginVertical + theme.button.paddingVertical
       : theme.button.marginVertical,
@@ -63,44 +65,44 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
     ...restProps
   } = props;
 
-  // <Button primary etc. shorthand. It overrides defaults.
+  const defaultProps = {};
+
+  // <Button primary shorthand.
   const colorName = Object.keys(theme.colors).find(color => props[color]);
   if (colorName) {
     delete restProps[colorName];
     if (outline) {
-      restProps.borderColor = colorName;
-      restProps.borderStyle = 'solid';
-      restProps.borderWidth = theme.button.borderWidth;
-      restProps.color = colorName;
+      defaultProps.borderColor = colorName;
+      defaultProps.borderStyle = 'solid';
+      defaultProps.borderWidth = theme.button.borderWidth;
+      defaultProps.color = colorName;
+      if (size < 0) {
+        // Ensure vertical rhythm for small outline button. The lineHeight
+        // is the only possible way to do it. It doesn't work for multilines.
+        defaultProps.lineHeight =
+          theme.typography.lineHeight - 2 * defaultProps.borderWidth;
+      }
     } else {
-      restProps.backgroundColor = colorName;
-      restProps.bold = true;
-      restProps.color = 'white';
+      defaultProps.backgroundColor = colorName;
+      defaultProps.bold = true;
+      defaultProps.color = 'white';
     }
   }
 
-  // Ensure vertical rhythm for small button with border. The lineHeight
-  // is the only possible way how to do it. It doesn't work for multilines.
-  if (size < 0 && restProps.borderWidth) {
-    restProps.lineHeight =
-      theme.typography.lineHeight - 2 * restProps.borderWidth;
-  }
-
   if (restProps.disabled) {
-    restProps.opacity = theme.button.disabledOpacity;
+    defaultProps.opacity = theme.button.disabledOpacity;
   }
 
   return (
     <Text
-      {...{
-        as,
-        size,
-        borderRadius,
-        marginVertical,
-        paddingHorizontal,
-        paddingVertical,
-        ...restProps,
-      }}
+      as={as}
+      size={size}
+      borderRadius={borderRadius}
+      marginVertical={marginVertical}
+      paddingHorizontal={paddingHorizontal}
+      paddingVertical={paddingVertical}
+      {...defaultProps}
+      {...restProps}
     />
   );
 };

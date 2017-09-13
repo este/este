@@ -6,12 +6,18 @@ import withTheme, { type ThemeContext } from './withTheme';
 //  - flaticon.com
 //  - thenounproject.com
 
-export type SvgIconProps = TextProps & {
+export type SvgIconProps = {
   svg: Element<any>,
-};
+} & TextProps;
 
 const SvgIcon = (props: SvgIconProps, { theme }: ThemeContext) => {
-  const { svg, color = theme.text.color, size = 0, ...restProps } = props;
+  const {
+    svg,
+    color = theme.text.color,
+    size = 0,
+    style,
+    ...restProps
+  } = props;
   const { fontSize, lineHeight } = computeFontSizeAndLineHeight(theme, size);
   const top = (lineHeight - fontSize) / 2;
 
@@ -28,7 +34,7 @@ const SvgIcon = (props: SvgIconProps, { theme }: ThemeContext) => {
         fill: theme.colors[color],
         height: theme.typography.fontSize(size),
         width: theme.typography.fontSize(size),
-        ...restProps.style,
+        ...style,
       }}
     />
   );

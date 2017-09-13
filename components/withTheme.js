@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 
 export type ThemeContext = { theme: Theme };
 
-const withTheme = (Component: ComponentType<*>) => {
-  // $FlowFixMe
+const withTheme = (Component: ComponentType<any>) => {
   Component.contextTypes = {
-    // $FlowFixMe
     ...Component.contextTypes,
     theme: PropTypes.object,
   };

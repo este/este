@@ -6,36 +6,32 @@ import SvgIcon from './SvgIcon';
 import Text from './Text';
 import withTheme, { type ThemeContext } from './withTheme';
 
-export type CheckboxProps = ButtonProps & {
+export type CheckboxProps = {
   label?: string,
   labelOnLeft?: boolean,
   onChange?: (value: boolean) => any,
   value: boolean,
-};
+} & ButtonProps;
 
-const Checkbox = (
-  {
+const Checkbox = (props: CheckboxProps, { theme }: ThemeContext) => {
+  const {
     label,
     labelOnLeft = false,
     onChange,
     value,
     color,
-    size,
-    ...props
-  }: CheckboxProps,
-  { theme }: ThemeContext,
-) => {
-  const {
     marginVertical = 0,
+    onPress,
     paddingHorizontal = 0,
     paddingVertical = 0,
+    size,
     ...restProps
   } = props;
   return (
     <Button
       aria-checked={value}
       onPress={() => {
-        if (restProps.onPress) restProps.onPress();
+        if (onPress) onPress();
         if (!onChange) return;
         onChange(!value);
       }}
@@ -48,10 +44,11 @@ const Checkbox = (
         flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
         justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
       >
-        {label &&
+        {label && (
           <Text color={color} size={size}>
             {label}
-          </Text>}
+          </Text>
+        )}
         <SvgIcon
           color={color}
           size={size}

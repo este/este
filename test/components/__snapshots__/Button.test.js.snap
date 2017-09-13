@@ -3,7 +3,7 @@
 exports[`disabled 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -39,14 +39,18 @@ Object {
     .r{color:black}
     .s{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .t{font-size:16}
-    .u{line-height:24px}",
+    .u{line-height:24px}
+    .v{text-align:left}
+    .w{font-weight:normal}
+    .x{text-decoration:none}
+    .y{font-style:normal}",
 }
 `;
 
 exports[`primary 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -85,14 +89,17 @@ Object {
     .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .v{font-size:16}
     .w{line-height:24px}
-    .x{font-weight:600}",
+    .x{text-align:left}
+    .y{font-weight:600}
+    .z{text-decoration:none}
+    .ab{font-style:normal}",
 }
 `;
 
 exports[`primary outline 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ad"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -136,14 +143,18 @@ Object {
     .z{color:blue}
     .ab{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .ac{font-size:16}
-    .ad{line-height:24px}",
+    .ae{line-height:24px}
+    .af{text-align:left}
+    .ag{font-weight:normal}
+    .ah{text-decoration:none}
+    .ai{font-style:normal}",
 }
 `;
 
 exports[`render 1`] = `
 Object {
   "component": <div
-    className="a b c d e f g h i j k l m n o p q r s t"
+    className="a b c d e f g h i j k l m n o p q r s t u v w x"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -178,6 +189,10 @@ Object {
     .q{color:black}
     .r{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .s{font-size:16}
-    .t{line-height:24px}",
+    .t{line-height:24px}
+    .u{text-align:left}
+    .v{font-weight:normal}
+    .w{text-decoration:none}
+    .x{font-style:normal}",
 }
 `;

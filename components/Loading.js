@@ -10,15 +10,15 @@ const messages = defineMessages({
   },
 });
 
-type LoadingProps = TextProps & {
+type Props = {
   intl: IntlShape,
-};
+} & TextProps;
 
-type LoadingState = {
+type State = {
   messageShown: boolean,
 };
 
-class Loading extends React.Component<LoadingProps, LoadingState> {
+class Loading extends React.Component<Props, State> {
   state = {
     messageShown: false,
   };
@@ -40,11 +40,7 @@ class Loading extends React.Component<LoadingProps, LoadingState> {
     if (!messageShown) return null;
     const { intl, ...restProps } = this.props;
 
-    return (
-      <Text {...restProps}>
-        {intl.formatMessage(messages.loading)}
-      </Text>
-    );
+    return <Text {...restProps}>{intl.formatMessage(messages.loading)}</Text>;
   }
 }
 

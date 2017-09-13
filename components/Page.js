@@ -1,6 +1,4 @@
 // @flow
-import React from 'react';
-import type { State } from '../types';
 import A from './A';
 import AppError from './AppError';
 import Baseline from './Baseline';
@@ -8,13 +6,16 @@ import Box from './Box';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
+import React, { type Node } from 'react';
+import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
+import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect } from 'react-redux';
+import { connect, type Connector } from 'react-redux';
 
-const PageContainer = ({ children }) =>
+const PageContainer = ({ children }) => (
   <Box
     margin="auto"
     paddingHorizontal={1}
@@ -24,15 +25,17 @@ const PageContainer = ({ children }) =>
     }}
   >
     {children}
-  </Box>;
+  </Box>
+);
 
 // Flex 1 to make footer sticky.
-const PageBody = ({ children }) =>
+const PageBody = ({ children }) => (
   <Box flex={1} maxWidth={30} paddingTop={2}>
     {children}
-  </Box>;
+  </Box>
+);
 
-const PageFooter = () =>
+const PageFooter = () => (
   <Text
     borderColor="gray"
     borderStyle="solid"
@@ -43,10 +46,11 @@ const PageFooter = () =>
     size={-1}
   >
     <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-    <A size={-1} href="https://twitter.com/steida">
-      steida
-    </A>
-  </Text>;
+    <A href="https://twitter.com/steida">steida</A>
+    {', '}
+    <SwitchLocale />
+  </Text>
+);
 
 // Because context is like dependency injection.
 // https://facebook.github.io/react/docs/context.html#updating-context
@@ -59,9 +63,7 @@ const Page = ({ children, darkEnabled, title }) => {
     <ThemeProvider theme={theme} {...forceRenderOnThemeChange(theme)}>
       <Baseline>
         <Head>
-          <title>
-            {title}
-          </title>
+          <title>{title}</title>
           <meta name="theme-color" content={pageBackgroundColor} />
           <style
             dangerouslySetInnerHTML={{
@@ -73,9 +75,7 @@ const Page = ({ children, darkEnabled, title }) => {
         <AppError />
         <PageContainer>
           <MainNav title={title} />
-          <PageBody>
-            {children}
-          </PageBody>
+          <PageBody>{children}</PageBody>
           <PageFooter />
         </PageContainer>
       </Baseline>
@@ -83,15 +83,17 @@ const Page = ({ children, darkEnabled, title }) => {
   );
 };
 
-// type PageOwnProps = {|
-//   children?: ?any,
-//   title: string,
-// |};
-//
-// type PageProps = PageOwnProps & {|
-//   darkEnabled: boolean,
-// |};
+type OwnProps = {|
+  title: string,
+  children?: Node,
+|};
 
-export default connect((state: State) => ({
+type Props = {
+  darkEnabled: boolean,
+} & OwnProps;
+
+const connector: Connector<OwnProps, Props> = connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}))(Page);
+}));
+
+export default connector(Page);

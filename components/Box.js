@@ -1,5 +1,5 @@
 // @flow
-import type { Color } from '../themes/types';
+import type { ColorName } from '../themes/types';
 import React, { type Node, type ElementType } from 'react';
 import AutoFocus from './AutoFocus';
 import PropTypes from 'prop-types';
@@ -34,7 +34,7 @@ export type BoxProps = {
   children?: Node,
 
   as?: ElementType,
-  autoFocus?: ?Object,
+  autoFocus?: ?Object | boolean,
   isReactNative?: boolean,
   style?: Object,
 
@@ -95,7 +95,7 @@ export type BoxProps = {
     | 'space-between'
     | 'space-around',
 
-  backgroundColor?: Color,
+  backgroundColor?: ColorName,
   opacity?: number,
   overflow?: 'visible' | 'hidden' | 'scroll',
   position?: 'absolute' | 'relative',
@@ -115,11 +115,11 @@ export type BoxProps = {
   borderTopLeftRadius?: number,
   borderTopRightRadius?: number,
 
-  borderColor?: Color,
-  borderBottomColor?: Color,
-  borderLeftColor?: Color,
-  borderRightColor?: Color,
-  borderTopColor?: Color,
+  borderColor?: ColorName,
+  borderBottomColor?: ColorName,
+  borderLeftColor?: ColorName,
+  borderRightColor?: ColorName,
+  borderTopColor?: ColorName,
 };
 
 type BoxContext = ThemeContext & {
@@ -164,7 +164,7 @@ const restrictedFlex = (
   return isReactNative ? { flex } : { flexBasis, flexGrow: flex, flexShrink };
 };
 
-// Color any type, because Flow can't infere props for some reason.
+// ColorName any type, because Flow can't infere props for some reason.
 const themeColor = (colors: any, props) =>
   reduce(props, value => colors[value]);
 
@@ -319,12 +319,7 @@ const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
 
   const element = React.createElement(as || 'div', { ...restProps, className });
 
-  if (autoFocus)
-    return (
-      <AutoFocus autoFocus={autoFocus}>
-        {element}
-      </AutoFocus>
-    );
+  if (autoFocus) return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
 };
 

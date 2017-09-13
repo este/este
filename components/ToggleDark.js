@@ -4,9 +4,7 @@ import Button from './Button';
 import React from 'react';
 import { connect } from 'react-redux';
 
-// Toggle dark mode.
-
-const ToggleDark = ({ darkEnabled, dispatch }) =>
+const ToggleDark = ({ darkEnabled, dispatch }) => (
   <Button
     primary
     outline
@@ -14,7 +12,8 @@ const ToggleDark = ({ darkEnabled, dispatch }) =>
     onPress={() => (dispatch: Dispatch)({ type: 'TOGGLE_DARK' })}
   >
     {darkEnabled ? 'Disable Dark' : 'Enable dark'}
-  </Button>;
+  </Button>
+);
 
 export default connect((state: State) => ({
   darkEnabled: state.app.darkEnabled,

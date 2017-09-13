@@ -6,14 +6,12 @@ import parse from 'url-parse';
 import { connect, type Connector } from 'react-redux';
 
 // Link with current locale in query.
-// TODO: Use subdomain for production.
 
 const LocaleLink = ({ children, href, prefetch, locale, defaultLocale }) => {
   let localeHref = href;
   const parsed = parse(href, true);
   const isRelative = href.charAt(0) === '/';
   const isNotDefault = locale !== defaultLocale;
-  // TODO: i18n subdomain for production.
   const hasNoLocale = !parsed.query.locale;
   const setLocale = isRelative && isNotDefault && hasNoLocale;
   if (setLocale) {
@@ -33,10 +31,10 @@ type OwnProps = {
   prefetch?: boolean,
 };
 
-type Props = OwnProps & {
+type Props = {
   locale: string,
   defaultLocale: string,
-};
+} & OwnProps;
 
 const connector: Connector<OwnProps, Props> = connect(({ app }: State) => ({
   locale: app.locale,

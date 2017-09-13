@@ -6,31 +6,26 @@ import SvgIcon from './SvgIcon';
 import Text from './Text';
 import withTheme, { type ThemeContext } from './withTheme';
 
-export type RadioProps = ButtonProps & {
+export type RadioProps = {
   label?: string,
   labelOnLeft?: boolean,
   onChange?: (value: string) => any,
   select: string,
   value: ?string,
-};
+} & ButtonProps;
 
-const Radio = (
-  {
+const Radio = (props: RadioProps, { theme }: ThemeContext) => {
+  const {
     label,
     labelOnLeft = false,
     onChange,
     select,
     value,
     color,
-    size,
-    ...props
-  }: RadioProps,
-  { theme }: ThemeContext,
-) => {
-  const {
     marginVertical = 0,
     paddingHorizontal = 0,
     paddingVertical = 0,
+    size,
     ...restProps
   } = props;
   const checked = value === select;
@@ -51,10 +46,11 @@ const Radio = (
         flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
         justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
       >
-        {label &&
+        {label && (
           <Text color={color} size={size}>
             {label}
-          </Text>}
+          </Text>
+        )}
         <SvgIcon
           color={color}
           size={size}

@@ -3,27 +3,33 @@ import React from 'react';
 import LocaleLink from './LocaleLink';
 import Text, { type TextProps } from './Text';
 
-type AProps = TextProps & {
+type AProps = {
   href: string,
   isActive?: boolean,
   prefetch?: boolean,
-};
+} & TextProps;
 
-const A = ({ href, isActive, prefetch, ...props }: AProps) => {
-  const { as = 'a', color = 'primary', style, ...restProps } = props;
+const A = (props: AProps) => {
+  const {
+    as = 'a',
+    color = 'primary',
+    href,
+    isActive,
+    prefetch,
+    style,
+    ...restProps,
+  } = props;
   return (
     <LocaleLink href={href} prefetch={prefetch}>
       <Text
-        {...{
-          as,
-          color,
-          decoration: isActive ? 'underline' : 'none',
-          style: {
-            ':hover': { textDecoration: 'underline' },
-            ...style,
-          },
-          ...restProps,
+        as={as}
+        color={color}
+        decoration={isActive ? 'underline' : 'none'}
+        style={{
+          ':hover': { textDecoration: 'underline' },
+          ...style,
         }}
+        {...restProps}
       />
     </LocaleLink>
   );

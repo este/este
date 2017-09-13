@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 87144c7a316fc81a4b1198f37a577633
+ * @relayHash a736c73b2b2051830f4e9dc7e5abe4e4
  */
 
 /* eslint-disable */
@@ -11,9 +11,10 @@
 import type {ConcreteBatch} from 'relay-runtime';
 export type SignupMutationVariables = {|
   signupInput: {
-    postsIds?: ?$ReadOnlyArray<string>;
-    posts?: ?$ReadOnlyArray<{
-      text: string;
+    websIds?: ?$ReadOnlyArray<string>;
+    webs?: ?$ReadOnlyArray<{
+      domain: string;
+      name: string;
     }>;
     clientMutationId: string;
     authProvider: {

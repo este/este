@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1b6770db094e7ecb56d81d0fb71375d9
+ * @relayHash 8bed67b3f234719de5b113c84e4b9498
  */
 
 /* eslint-disable */
@@ -9,27 +9,33 @@
 
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
-export type DeletePostMutationVariables = {|
+export type CreateWebMutationVariables = {|
   input: {
-    id: string;
+    domain: string;
+    name: string;
+    ownerId?: ?string;
     clientMutationId: string;
   };
 |};
 
-export type DeletePostMutationResponse = {|
-  +deletePost: ?{|
-    +deletedId: ?string;
+export type CreateWebMutationResponse = {|
+  +createWeb: ?{|
+    +web: ?{|
+      +id: string;
+    |};
   |};
 |};
 */
 
 
 /*
-mutation DeletePostMutation(
-  $input: DeletePostInput!
+mutation CreateWebMutation(
+  $input: CreateWebInput!
 ) {
-  deletePost(input: $input) {
-    deletedId
+  createWeb(input: $input) {
+    web {
+      id
+    }
   }
 }
 */
@@ -40,13 +46,13 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LocalArgument",
         "name": "input",
-        "type": "DeletePostInput!",
+        "type": "CreateWebInput!",
         "defaultValue": null
       }
     ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "DeletePostMutation",
+    "name": "CreateWebMutation",
     "selections": [
       {
         "kind": "LinkedField",
@@ -56,18 +62,29 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "Variable",
             "name": "input",
             "variableName": "input",
-            "type": "DeletePostInput!"
+            "type": "CreateWebInput!"
           }
         ],
-        "concreteType": "DeletePostPayload",
-        "name": "deletePost",
+        "concreteType": "CreateWebPayload",
+        "name": "createWeb",
         "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "name": "deletedId",
+            "concreteType": "Web",
+            "name": "web",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           }
         ],
@@ -79,18 +96,18 @@ const batch /*: ConcreteBatch*/ = {
   "id": null,
   "kind": "Batch",
   "metadata": {},
-  "name": "DeletePostMutation",
+  "name": "CreateWebMutation",
   "query": {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
         "name": "input",
-        "type": "DeletePostInput!",
+        "type": "CreateWebInput!",
         "defaultValue": null
       }
     ],
     "kind": "Root",
-    "name": "DeletePostMutation",
+    "name": "CreateWebMutation",
     "operation": "mutation",
     "selections": [
       {
@@ -101,18 +118,29 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "Variable",
             "name": "input",
             "variableName": "input",
-            "type": "DeletePostInput!"
+            "type": "CreateWebInput!"
           }
         ],
-        "concreteType": "DeletePostPayload",
-        "name": "deletePost",
+        "concreteType": "CreateWebPayload",
+        "name": "createWeb",
         "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "name": "deletedId",
+            "concreteType": "Web",
+            "name": "web",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           }
         ],
@@ -120,7 +148,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation DeletePostMutation(\n  $input: DeletePostInput!\n) {\n  deletePost(input: $input) {\n    deletedId\n  }\n}\n"
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

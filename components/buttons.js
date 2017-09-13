@@ -3,55 +3,71 @@ import React from 'react';
 import Button, { type ButtonProps } from './Button';
 import { FormattedMessage } from 'react-intl';
 
-export const AddButton = (props: ButtonProps) =>
+export const AddButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Add" id="button.add" />
-  </Button>;
+  </Button>
+);
 
-export const SaveButton = (props: ButtonProps) =>
+export const CreateButton = (props: ButtonProps) => (
+  <Button {...props}>
+    <FormattedMessage defaultMessage="Create" id="button.create" />
+  </Button>
+);
+
+export const SaveButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Save" id="button.save" />
-  </Button>;
+  </Button>
+);
 
-export const CancelButton = (props: ButtonProps) =>
+export const CancelButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Cancel" id="button.cancel" />
-  </Button>;
+  </Button>
+);
 
-export const DeleteButton = (props: ButtonProps) =>
+export const DeleteButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Delete" id="button.delete" />
-  </Button>;
+  </Button>
+);
 
-export const EditButton = (props: ButtonProps) =>
+export const EditButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Edit" id="button.edit" />
-  </Button>;
+  </Button>
+);
 
-export const FacebookSignInButton = (props: ButtonProps) =>
+export const FacebookSignInButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage
       defaultMessage="Login with Facebook"
       id="button.facebookSignIn"
     />
-  </Button>;
+  </Button>
+);
 
-export const SignInButton = (props: ButtonProps) =>
+export const SignInButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Sign In" id="button.signIn" />
-  </Button>;
+  </Button>
+);
 
-export const SignOutButton = (props: ButtonProps) =>
+export const SignOutButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Sign Out" id="button.signOut" />
-  </Button>;
+  </Button>
+);
 
-export const SignUpButton = (props: ButtonProps) =>
+export const SignUpButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Sign Up" id="button.signUp" />
-  </Button>;
+  </Button>
+);
 
-export const SubmitButton = (props: ButtonProps) =>
+export const SubmitButton = (props: ButtonProps) => (
   <Button {...props}>
     <FormattedMessage defaultMessage="Submit" id="button.submit" />
-  </Button>;
+  </Button>
+);

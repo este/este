@@ -27,18 +27,19 @@ test('render', () => {
 });
 
 test('render with children', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Box>
       <div>div</div>
-    </Box>,
-  );
+    </Box>
+  ));
 });
 
 test('as', () => {
   const SomeComponent = jest.fn(() => null);
-  const SomeComponentStyledAsBox = props =>
+  const SomeComponentStyledAsBox = props => (
     // $FlowFixMe
-    <Box as={SomeComponent} {...props} />;
+    <Box as={SomeComponent} {...props} />
+  );
   expectRender(() => <SomeComponentStyledAsBox someCustomProp="1" />);
   expect(SomeComponent).toHaveBeenCalledTimes(1);
   expect(SomeComponent.mock.calls[0][0]).toEqual({
@@ -52,15 +53,15 @@ test('style', () => {
 });
 
 test('style ignores undefined values', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Box
       style={{
         display: undefined,
         flexDirection: undefined,
         position: undefined,
       }}
-    />,
-  );
+    />
+  ));
 });
 
 test('margin explicit', () => {
@@ -88,9 +89,9 @@ test('marginVertical', () => {
 });
 
 test('margin bottom left right top', () => {
-  expectRender(() =>
-    <Box marginBottom={1} marginLeft={2} marginRight={3} marginTop={4} />,
-  );
+  expectRender(() => (
+    <Box marginBottom={1} marginLeft={2} marginRight={3} marginTop={4} />
+  ));
 });
 
 test('margin shorthands are order independent', () => {
@@ -207,11 +208,11 @@ describe('ReactNative', () => {
   test('flex shorthand', () => {
     expectRender(() => <Box flex={1} isReactNative />);
     expectRender(() => <Box flex={1} flexShrink={2} isReactNative />);
-    expectRender(() =>
-      <Box flex={1} flexShrink={2} flexBasis="3px" isReactNative />,
-    );
-    expectRender(() =>
-      <Box flex={3} flexShrink={2} flexBasis="1px" isReactNative />,
-    );
+    expectRender(() => (
+      <Box flex={1} flexShrink={2} flexBasis="3px" isReactNative />
+    ));
+    expectRender(() => (
+      <Box flex={3} flexShrink={2} flexBasis="1px" isReactNative />
+    ));
   });
 });

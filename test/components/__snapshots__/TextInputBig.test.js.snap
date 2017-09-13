@@ -12,12 +12,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c z"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -43,10 +43,14 @@ Object {
     .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .u{font-size:18}
     .v{line-height:24px}
-    .w::placeholder{color:rgba(0, 0, 255, 0.5)}
-    .x{background-color:transparent}
-    .y{outline:none}
-    .z{min-height:24}",
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 255, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;
 
@@ -62,13 +66,13 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y z"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae af"
             disabled={true}
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ab"
+        className="a b c ag"
     />
 </div>,
   "fela": "
@@ -95,10 +99,14 @@ Object {
     .u{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .v{font-size:18}
     .w{line-height:24px}
-    .x::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .y{background-color:transparent}
-    .z{outline:none}
-    .ab{min-height:24}",
+    .x{text-align:left}
+    .y{font-weight:normal}
+    .z{text-decoration:none}
+    .ab{font-style:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
 }
 `;
 
@@ -114,15 +122,15 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c z"
+        className="a b c af"
     >
         <div
-            className="g b c p q r ab t ac v"
+            className="g b c p q r ag t ah v w x y z"
         >
             error
         </div>
@@ -151,12 +159,16 @@ Object {
     .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .u{font-size:18}
     .v{line-height:24px}
-    .w::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .x{background-color:transparent}
-    .y{outline:none}
-    .z{min-height:24}
-    .ab{color:red}
-    .ac{font-size:16}",
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}
+    .ag{color:red}
+    .ah{font-size:16}",
 }
 `;
 
@@ -172,18 +184,18 @@ Object {
             className="a d c e f"
         >
             <div
-                className="g b c h i j k l m n o"
+                className="g b c h i j k l m n o p q r"
             >
                 label
             </div>
         </div>
         <input
-            className="g b c p q r s t u v w h i j k l m n x y z"
+            className="g b c s t u v w x y z h i j k l m n o ab q r ac ae af"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c ab"
+        className="a b c ag"
     />
 </div>,
   "fela": "
@@ -201,19 +213,23 @@ Object {
     .l{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .m{font-size:18}
     .n{line-height:24px}
-    .o{font-weight:600}
-    .p{padding-bottom:11}
-    .q{padding-top:12}
-    .r{border-style:solid}
-    .s{border-bottom-width:1}
-    .t{border-bottom-color:gray}
-    .u{border-left-color:gray}
-    .v{border-right-color:gray}
-    .w{border-top-color:gray}
-    .x::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .y{background-color:transparent}
-    .z{outline:none}
-    .ab{min-height:24}",
+    .o{text-align:left}
+    .p{font-weight:600}
+    .q{text-decoration:none}
+    .r{font-style:normal}
+    .s{padding-bottom:11}
+    .t{padding-top:12}
+    .u{border-style:solid}
+    .v{border-bottom-width:1}
+    .w{border-bottom-color:gray}
+    .x{border-left-color:gray}
+    .y{border-right-color:gray}
+    .z{border-top-color:gray}
+    .ab{font-weight:normal}
+    .ac::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ae{background-color:transparent}
+    .af{outline:none}
+    .ag{min-height:24}",
 }
 `;
 
@@ -229,12 +245,12 @@ Object {
             className="a d c e f"
         />
         <input
-            className="g b c h i j k l m n o p q r s t u v w x y"
+            className="g b c h i j k l m n o p q r s t u v w x y z ab ac ae"
             maxLength={1}
         />
     </div>
     <div
-        className="a b c z"
+        className="a b c af"
     />
 </div>,
   "fela": "
@@ -260,9 +276,13 @@ Object {
     .t{font-family:-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, \\"Helvetica Neue\\", Arial, sans-serif}
     .u{font-size:18}
     .v{line-height:24px}
-    .w::placeholder{color:rgba(0, 0, 0, 0.5)}
-    .x{background-color:transparent}
-    .y{outline:none}
-    .z{min-height:24}",
+    .w{text-align:left}
+    .x{font-weight:normal}
+    .y{text-decoration:none}
+    .z{font-style:normal}
+    .ab::placeholder{color:rgba(0, 0, 0, 0.5)}
+    .ac{background-color:transparent}
+    .ae{outline:none}
+    .af{min-height:24}",
 }
 `;

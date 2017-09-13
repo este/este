@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import AuthForm from '../components/AuthForm';
+import Auth from '../components/Auth';
 import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 
-const SignIn = ({ intl }) =>
+const SignIn = ({ intl }) => (
   <Page title={intl.formatMessage(sitemap.signIn.title)}>
-    <AuthForm />
-  </Page>;
+    <Auth />
+  </Page>
+);
 
 export default app(SignIn);

@@ -1,15 +1,45 @@
 // @flow
 import React from 'react';
-import type { ValidationError as ValidationErrorType } from '../lib/validate';
+import * as validation from '../lib/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
-type ValidationErrorProps = TextProps & {
-  error: ?ValidationErrorType,
+type Props = TextProps & {
+  error: ?validation.ValidationError,
 };
 
 const getValidationErrorMessage = error => {
   switch (error.type) {
+    case 'alreadyExists':
+      return (
+        <FormattedMessage
+          defaultMessage="Already exists."
+          id="validationError.alreadyExists"
+        />
+      );
+    case 'email':
+      return (
+        <FormattedMessage
+          defaultMessage="Email address is not valid."
+          id="validationError.email"
+        />
+      );
+    case 'maxLength':
+      return (
+        <FormattedMessage
+          defaultMessage="{maxLength} characters maximum."
+          id="validationError.maxLength"
+          values={{ maxLength: error.maxLength }}
+        />
+      );
+    case 'minLength':
+      return (
+        <FormattedMessage
+          defaultMessage="{minLength} characters minimum."
+          id="validationError.minLength"
+          values={{ minLength: error.minLength }}
+        />
+      );
     case 'required':
       return (
         <FormattedMessage
@@ -24,45 +54,22 @@ const getValidationErrorMessage = error => {
           id="validationError.requiredAgree"
         />
       );
-    case 'minLength':
+    case 'wrongPassword':
       return (
         <FormattedMessage
-          defaultMessage="{minLength} characters minimum."
-          id="validationError.minLength"
-          values={{ minLength: error.minLength }}
-        />
-      );
-    case 'maxLength':
-      return (
-        <FormattedMessage
-          defaultMessage="{maxLength} characters maximum."
-          id="validationError.maxLength"
-          values={{ maxLength: error.maxLength }}
-        />
-      );
-    case 'email':
-      return (
-        <FormattedMessage
-          defaultMessage="Email address is not valid."
-          id="validationError.email"
-        />
-      );
-    case 'alreadyExists':
-      return (
-        <FormattedMessage
-          defaultMessage="Already exists."
-          id="validationError.alreadyExists"
+          defaultMessage="The password you have entered is invalid."
+          id="validationError.wrongPassword"
         />
       );
     default:
-      // https://flow.org/en/docs/frameworks/redux/#toc-typing-redux-reducers
+      // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
       (error: empty);
       return null;
   }
 };
 
-const ValidationError = (props: ValidationErrorProps) => {
+const ValidationError = (props: Props) => {
   const { error, bold = true, color = 'danger', ...restProps } = props;
   if (!error) return null;
   const message = getValidationErrorMessage(error);

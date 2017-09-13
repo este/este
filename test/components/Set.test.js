@@ -39,21 +39,21 @@ test('set with one item', () => {
 });
 
 test('set with two items', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Set>
       <Box>a</Box>
       <Box>b</Box>
-    </Set>,
-  );
+    </Set>
+  ));
 });
 
 test('set with two items and custom spaceBetween', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Set spaceBetween={2}>
       <Box>a</Box>
       <Box>b</Box>
-    </Set>,
-  );
+    </Set>
+  ));
 });
 
 test('vertical set with one item', () => {
@@ -61,19 +61,19 @@ test('vertical set with one item', () => {
 });
 
 test('vertical set with two items', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Set vertical>
       <Box>a</Box>
       <Box>b</Box>
-    </Set>,
-  );
+    </Set>
+  ));
 });
 
 test('vertical set with two items and custom spaceBetween', () => {
-  expectRender(() =>
+  expectRender(() => (
     <Set vertical spaceBetween={2}>
       <Box>a</Box>
       <Box>b</Box>
-    </Set>,
-  );
+    </Set>
+  ));
 });
