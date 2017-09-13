@@ -3,6 +3,13 @@
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 ; https://github.com/graphql/graphql-js/issues/1020
 .*/node_modules/graphql/.*
+.*/node_modules/graphql-language-service-utils/.*
+.*/node_modules/graphql-language-service-interface/.*
+.*/node_modules/graphql-language-service-types/.*
+.*/node_modules/graphql-language-service-config/.*
+.*/node_modules/graphql-language-service-parser/.*
+.*/node_modules/graphql-tag/.*
+
 
 [include]
 

@@ -13,8 +13,6 @@ Universal React. Explore the source code.
 
 - [node.js](http://nodejs.org/) Node 8+
 - [yarn](https://yarnpkg.com/)
-- [graphql-cli](https://github.com/graphcool/graphql-cli)
-- [flow-typed](https://github.com/flowtype/flow-typed)
 
 ## Start Development
 
@@ -23,17 +21,9 @@ Universal React. Explore the source code.
 - `yarn`
 - `yarn dev`
 
-## Customize
-
-- set name in `package.json`
-- update `.circleci/config.yml`, `.graphqlconfig`, `env-config.js`
-- `yarn favicon`
-- remove examples from `mutations`, `pages`, `reducers`, `pages`
-- etc.
-
 ## Random Notes
 
-- [Internet Explorer is not supported](https://www.microsoft.com/en-us/windowsforbusiness/end-of-ie-support). 
+- [Internet Explorer is not supported](https://www.microsoft.com/en-us/windowsforbusiness/end-of-ie-support).
 
 ## Links
 
