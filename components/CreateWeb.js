@@ -9,6 +9,8 @@ import Set from './Set';
 import nameToDomain from '../lib/nameToDomain';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
+import * as validation from '../lib/validation';
+import ValidationError from './ValidationError';
 
 type Props = {
   mutate: *,
@@ -18,52 +20,60 @@ type Props = {
 type State = {
   name: string,
   pending: boolean,
+  validationErrors: validation.ValidationErrors<State>,
 };
 
 const initialState = {
   name: '',
   pending: false,
+  validationErrors: {},
 };
 
-// $FlowFixMe Let's Caleb investigate.
+// $FlowFixMe https://github.com/este/este/issues/1404#issuecomment-328968006
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
 
-  getDomain() {
-    return nameToDomain(this.state.name);
-  }
+  handleCompleted = () => {
+    this.setState(initialState);
+  };
 
-  isValid() {
-    return !this.state.pending && this.getDomain().length >= 3;
-  }
+  handleError = () => {
+    this.setState({ pending: false });
+  };
 
   createWeb = () => {
-    // const { user } = this.props.viewer;
-    // if (!user) return;
-    if (!this.isValid()) return;
+    const fields = {
+      name: this.state.name,
+    };
+
+    const validationErrors = validation.validate(fields, {
+      name: [validation.required(), validation.minLength(3)],
+    });
+
+    if (!validation.isValid(validationErrors)) {
+      this.setState({ validationErrors });
+      return;
+    }
+
     this.setState({ pending: true });
 
     this.props.mutate(
       CreateWebMutation.commit,
       {
         input: {
-          domain: this.getDomain(),
+          domain: nameToDomain(this.state.name),
           name: this.state.name,
           ownerId: this.props.ownerId,
           clientMutationId: getClientMutationId(),
         },
       },
-      () => {
-        this.setState(initialState);
-      },
-      () => {
-        this.setState({ pending: false });
-      },
+      this.handleCompleted,
+      this.handleError,
     );
   };
 
   render() {
-    const { pending } = this.state;
+    const { pending, validationErrors } = this.state;
     return (
       <Form onSubmit={this.createWeb}>
         <TextInputBig
@@ -75,11 +85,12 @@ class CreateWeb extends React.Component<Props, State> {
               />
             </Text>
           }
-          autoFocus
+          autoFocus={validationErrors.name}
+          disabled={pending}
+          error={<ValidationError error={validationErrors.name} />}
           onChange={name => this.setState({ name })}
           type="text"
           value={this.state.name}
-          disabled={pending}
         />
         <Set>
           <CreateButton primary disabled={pending} onPress={this.createWeb} />
@@ -92,13 +103,3 @@ class CreateWeb extends React.Component<Props, State> {
 const CreateWebWithMutation = withMutation(CreateWeb);
 
 export default CreateWebWithMutation;
-
-// export default createFragmentContainer(CreateWebWithMutation, {
-//   viewer: graphql`
-//     fragment CreateWeb_viewer on Viewer {
-//       user {
-//         id
-//       }
-//     }
-//   `,
-// });

@@ -28,43 +28,29 @@ const messages = defineMessages({
   },
 });
 
-// https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-export const mapAuthErrorToValidationError = (error: any) => {
-  const code =
-    error && error.source && error.source.errors && error.source.errors[0].code;
-  switch (code) {
-    case 3022:
-      return { password: { type: 'wrongPassword' } };
-    case 3023:
-      return { email: { type: 'alreadyExists' } };
-    default:
-      return {};
-  }
-};
-
 type Props = {
   intl: *,
   mutate: *,
 };
 
 type State = {
-  pending: boolean,
   email: string,
   password: string,
+  pending: boolean,
   validationErrors: validation.ValidationErrors<State>,
 };
 
 const initialState = {
-  pending: false,
   email: '',
   password: '',
+  pending: false,
   validationErrors: {},
 };
 
 class Auth extends React.Component<Props, State> {
   state = initialState;
 
-  onCompleted = response => {
+  handleCompleted = response => {
     // eslint-disable-next-line
     document.cookie = cookie.serialize('token', response.signinUser.token, {
       maxAge: 30 * 24 * 60 * 60, // one month, it's graph.cool default
@@ -75,27 +61,45 @@ class Auth extends React.Component<Props, State> {
     Router.replace(redirectPath || '/');
   };
 
-  onError = error => {
-    const validationErrors = mapAuthErrorToValidationError(error);
+  handleError = error => {
+    // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
+    const code =
+      error &&
+      error.source &&
+      error.source.errors &&
+      error.source.errors[0].code;
+    let validationErrors = {};
+    switch (code) {
+      case 3022:
+        validationErrors = { password: { type: 'wrongPassword' } };
+        break;
+      case 3023:
+        validationErrors = { email: { type: 'alreadyExists' } };
+        break;
+    }
     this.setState({ pending: false, validationErrors });
   };
 
-  validate() {
-    const validationErrors = validation.validate(this.state, {
+  auth(isSignUp) {
+    const fields = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    const validationErrors = validation.validate(fields, {
       email: [validation.required(), validation.email()],
       password: [validation.required(), validation.minLength(5)],
     });
-    this.setState({ validationErrors });
-    return validation.isValid(validationErrors);
-  }
 
-  auth(isSignUp) {
-    if (!this.validate()) return;
+    if (!validation.isValid(validationErrors)) {
+      this.setState({ validationErrors });
+      return;
+    }
+
     this.setState({ pending: true });
 
-    const email = { email: this.state.email, password: this.state.password };
     const signinInput = {
-      email,
+      email: fields,
       clientMutationId: getClientMutationId(),
     };
 
@@ -104,20 +108,20 @@ class Auth extends React.Component<Props, State> {
         SignupMutation.commit,
         {
           signupInput: {
-            authProvider: { email },
+            authProvider: { email: fields },
             clientMutationId: getClientMutationId(),
           },
           signinInput,
         },
-        this.onCompleted,
-        this.onError,
+        this.handleCompleted,
+        this.handleError,
       );
     } else {
       this.props.mutate(
         SigninMutation.commit,
         { signinInput },
-        this.onCompleted,
-        this.onError,
+        this.handleCompleted,
+        this.handleError,
       );
     }
   }
@@ -173,7 +177,7 @@ class Auth extends React.Component<Props, State> {
 
 const AuthWithMutation = withMutation(Auth);
 
-// injectIntl should infers props type.
+// TODO: injectIntl should infers props type.
 const AuthIntl: ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;
