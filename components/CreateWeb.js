@@ -42,11 +42,7 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
-    const fields = {
-      name: this.state.name,
-    };
-
-    const validationErrors = validation.validate(fields, {
+    const validationErrors = validation.validate(this.state, {
       name: [validation.required(), validation.minLength(3)],
     });
 

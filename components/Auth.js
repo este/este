@@ -81,12 +81,7 @@ class Auth extends React.Component<Props, State> {
   };
 
   auth(isSignUp) {
-    const fields = {
-      email: this.state.email,
-      password: this.state.password,
-    };
-
-    const validationErrors = validation.validate(fields, {
+    const validationErrors = validation.validate(this.state, {
       email: [validation.required(), validation.email()],
       password: [validation.required(), validation.minLength(5)],
     });
@@ -98,17 +93,19 @@ class Auth extends React.Component<Props, State> {
 
     this.setState({ pending: true });
 
-    const signinInput = {
-      email: fields,
-      clientMutationId: getClientMutationId(),
+    const email = {
+      email: this.state.email,
+      password: this.state.password,
     };
+
+    const signinInput = { email, clientMutationId: getClientMutationId() };
 
     if (isSignUp) {
       this.props.mutate(
         SignupMutation.commit,
         {
           signupInput: {
-            authProvider: { email: fields },
+            authProvider: { email },
             clientMutationId: getClientMutationId(),
           },
           signinInput,
