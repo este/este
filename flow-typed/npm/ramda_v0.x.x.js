@@ -1,5 +1,5 @@
-// flow-typed signature: 850c3fb3afcf0b1de8c938874692fff4
-// flow-typed version: ec8e214d3d/ramda_v0.x.x/flow_>=v0.39.x
+// flow-typed signature: c887a7b496ef397e09ebfa1970188ef8
+// flow-typed version: 3ea96609cc/ramda_v0.x.x/flow_>=v0.39.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -72,6 +72,79 @@ declare module ramda {
     & (<A, B, C, D, R>((...r: [A, B, C, D]) => R) => CurriedFunction4<A, B, C, D, R>)
     & (<A, B, C, D, E, R>((...r: [A, B, C, D, E]) => R) => CurriedFunction5<A, B, C, D, E, R>)
     & (<A, B, C, D, E, F, R>((...r: [A, B, C, D, E, F]) => R) => CurriedFunction6<A, B, C, D, E, F, R>)
+
+  declare type Partial = (<A, R>((...r: [A]) => R, args: [A]) => () => R) &
+  (<A, B, R>((...r: [A, B]) => R, args: [A]) => CurriedFunction1<B, R>) &
+  (<A, B, R>((...r: [A, B]) => R, args: [A, B]) => () => R) &
+  (<A, B, C, R>(
+    (...r: [A, B, C]) => R,
+    args: [A]
+  ) => CurriedFunction2<B, C, R>) &
+  (<A, B, C, R>(
+    (...r: [A, B, C]) => R,
+    args: [A, B]
+  ) => CurriedFunction1<C, R>) &
+  (<A, B, C, R>((...r: [A, B, C]) => R, args: [A, B, C]) => () => R) &
+  (<A, B, C, D, R>(
+    (...r: [A, B, C, D]) => R,
+    args: [A]
+  ) => CurriedFunction3<B, C, D, R>) &
+  (<A, B, C, D, R>(
+    (...r: [A, B, C, D]) => R,
+    args: [A, B]
+  ) => CurriedFunction2<C, D, R>) &
+  (<A, B, C, D, R>(
+    (...r: [A, B, C, D]) => R,
+    args: [A, B, C]
+  ) => CurriedFunction1<D, R>) &
+  (<A, B, C, D, R>(
+    (...r: [A, B, C, D]) => R,
+    args: [A, B, C, D]
+  ) => () => R) &
+  (<A, B, C, D, E, R>(
+    (...r: [A, B, C, D, E]) => R,
+    args: [A]
+  ) => CurriedFunction4<B, C, D, E, R>) &
+  (<A, B, C, D, E, R>(
+    (...r: [A, B, C, D, E]) => R,
+    args: [A, B]
+  ) => CurriedFunction3<C, D, E, R>) &
+  (<A, B, C, D, E, R>(
+    (...r: [A, B, C, D, E]) => R,
+    args: [A, B, C]
+  ) => CurriedFunction2<D, E, R>) &
+  (<A, B, C, D, E, R>(
+    (...r: [A, B, C, D, E]) => R,
+    args: [A, B, C, D]
+  ) => CurriedFunction1<E, R>) &
+  (<A, B, C, D, E, R>(
+    (...r: [A, B, C, D, E]) => R,
+    args: [A, B, C, D, E]
+  ) => () => R) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A]
+  ) => CurriedFunction5<B, C, D, E, F, R>) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A, B]
+  ) => CurriedFunction4<C, D, E, F, R>) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A, B, C]
+  ) => CurriedFunction3<D, E, F, R>) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A, B, C, D]
+  ) => CurriedFunction2<E, F, R>) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A, B, C, D, E]
+  ) => CurriedFunction1<F, R>) &
+  (<A, B, C, D, E, F, R>(
+    (...r: [A, B, C, D, E, F]) => R,
+    args: [A, B, C, D, E, F]
+  ) => () => R);
 
   declare type Pipe = (<A,B,C,D,E,F,G>(ab: UnaryFn<A,B>, bc: UnaryFn<B,C>, cd: UnaryFn<C,D>, de: UnaryFn<D,E>, ef: UnaryFn<E,F>, fg: UnaryFn<F,G>, ...rest: Array<void>) => UnaryFn<A,G>)
     & (<A,B,C,D,E,F>(ab: UnaryFn<A,B>, bc: UnaryFn<B,C>, cd: UnaryFn<C,D>, de: UnaryFn<D,E>, ef: UnaryFn<E,F>, ...rest: Array<void>) => UnaryFn<A,F>)
@@ -697,7 +770,7 @@ declare module ramda {
 
   declare function once<A,B,T:(...args: Array<A>) => B>(fn:T):T;
 
-  // TODO partial
+  declare var partial: Partial;
   // TODO partialRight
   // TODO pipeK
   // TODO pipeP

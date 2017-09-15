@@ -17,7 +17,7 @@ const A = (props: AProps) => {
     isActive,
     prefetch,
     style,
-    ...restProps,
+    ...restProps
   } = props;
   return (
     <LocaleLink href={href} prefetch={prefetch}>

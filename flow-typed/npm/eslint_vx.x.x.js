@@ -1,4 +1,4 @@
-// flow-typed signature: 2c28b489f260f36a382c8e8ffc187492
+// flow-typed signature: acbcf10e625d84ce4a3b2d01fd88ddc2
 // flow-typed version: <<STUB>>/eslint_v^4.4.1/flow_v0.54.0
 
 /**
@@ -1302,6 +1302,10 @@ declare module 'eslint/lib/util/ajv' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/util/apply-disable-directives' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/util/fix-tracker' {
   declare module.exports: any;
 }
@@ -2326,6 +2330,9 @@ declare module 'eslint/lib/token-store/utils.js' {
 }
 declare module 'eslint/lib/util/ajv.js' {
   declare module.exports: $Exports<'eslint/lib/util/ajv'>;
+}
+declare module 'eslint/lib/util/apply-disable-directives.js' {
+  declare module.exports: $Exports<'eslint/lib/util/apply-disable-directives'>;
 }
 declare module 'eslint/lib/util/fix-tracker.js' {
   declare module.exports: $Exports<'eslint/lib/util/fix-tracker'>;
