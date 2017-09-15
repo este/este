@@ -19,9 +19,6 @@ export type TextInputProps = {
   onSubmitEditing?: () => void,
 } & TextProps;
 
-// Like Twitter.
-const defaultMaxLength = 140;
-
 const computePlaceholderTextColor = (colors, color) =>
   colorLib(colors[color])
     .fade(0.5)
@@ -32,7 +29,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
     color = theme.text.color,
     error,
     label,
-    maxLength = defaultMaxLength,
     onChange,
     onSubmitEditing,
     size = 0,
@@ -74,7 +70,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         as="input"
         color={color}
         size={size}
-        maxLength={maxLength}
         {...(onChange
           ? {
               onChange: (e: { currentTarget: HTMLInputElement }) =>
