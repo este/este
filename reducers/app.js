@@ -1,6 +1,6 @@
 // @flow
 import type { Action } from '../types';
-import type { AppError } from '../lib/errors';
+import type { AppError } from '../lib/appError';
 
 // Can't be exact type yet. Flow will fix it soon.
 export type AppState = {

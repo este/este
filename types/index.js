@@ -7,7 +7,7 @@ import type {
 } from 'redux';
 
 import type { AppState } from '../reducers/app';
-import type { AppError } from '../lib/errors';
+import type { AppError } from '../lib/appError';
 
 export type Id = string;
 

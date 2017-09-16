@@ -4,7 +4,7 @@ import type { State as AppState } from '../types';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import * as errors from '../lib/errors';
+import { type AppError as AppErrorType } from '../lib/appError';
 
 const getAppErrorMessage = error => {
   switch (error.name) {
@@ -31,7 +31,7 @@ const getAppErrorMessage = error => {
 };
 
 type Props = {
-  appError: ?errors.AppError,
+  appError: ?AppErrorType,
 };
 
 type State = {
