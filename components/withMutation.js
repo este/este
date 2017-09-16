@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import type { Commit, Environment, Store } from '../types';
 import PropTypes from 'prop-types';
-import { errorToAppError } from '../lib/appError';
+import { maybeMutationErrorToAppError } from '../lib/appError';
 
 // https://github.com/facebook/relay/issues/2077
 export const getClientMutationId = () => Date.now().toString(36);
@@ -45,7 +45,7 @@ const withMutation = <Props: {}>(
       // Such errors should be handled in a component.
       // Some errors are serious and global. For example, failedToFetch.
       // Such errors should be handled in AppError component.
-      const appError = errorToAppError(error);
+      const appError = maybeMutationErrorToAppError(error);
       if (appError) this.context.store.dispatch(appError);
       onError(error);
     }
