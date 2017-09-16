@@ -1,12 +1,11 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import Form from './Form';
 import { CreateButton } from './buttons';
 import TextInputBig from './TextInputBig';
 import { FormattedMessage } from 'react-intl';
 import Text from './Text';
 import Set from './Set';
-import nameToDomain from '../lib/nameToDomain';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../lib/validation';
@@ -17,10 +16,14 @@ type Props = {
   ownerId: string,
 };
 
-type State = {
+type Fields = {
   name: string,
+};
+
+// ...Fields still buggy, https://twitter.com/estejs/status/908785884765540353
+type State = Fields & {
   pending: boolean,
-  validationErrors: validation.ValidationErrors<State>,
+  validationErrors: validation.ValidationErrors<Fields>,
 };
 
 const initialState = {
@@ -29,7 +32,17 @@ const initialState = {
   validationErrors: {},
 };
 
-// $FlowFixMe https://github.com/este/este/issues/1404#issuecomment-328968006
+// // This is used in graph.cool function by copy paste, but soon it should be
+// // possible to have a better deploy scenario.
+// import diacritics from 'diacritics-map';
+// const nameToDomain = name =>
+//   name
+//     .toLowerCase()
+//     .split('')
+//     .map(char => diacritics[char] || char)
+//     .join('')
+//     .replace(/[^a-z0-9]/g, '');
+
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
 
@@ -42,27 +55,30 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
-    const validationErrors = validation.validate(this.state, {
-      name: [validation.required(), validation.minLength(3)],
-    });
+    const variables = {
+      input: {
+        domain: '', // Is computed in graph.cool function.
+        name: this.state.name.trim(),
+        ownerId: this.props.ownerId,
+        clientMutationId: getClientMutationId(),
+      },
+    };
 
-    if (!validation.isValid(validationErrors)) {
+    const validate = ({ input }) => {
+      const name = validation.shortText(input.name);
+      if (name) return { name };
+    };
+
+    const validationErrors = validate(variables);
+    if (validationErrors) {
       this.setState({ validationErrors });
       return;
     }
 
     this.setState({ pending: true });
-
     this.props.mutate(
       CreateWebMutation.commit,
-      {
-        input: {
-          domain: nameToDomain(this.state.name),
-          name: this.state.name,
-          ownerId: this.props.ownerId,
-          clientMutationId: getClientMutationId(),
-        },
-      },
+      variables,
       this.handleCompleted,
       this.handleError,
     );
@@ -96,6 +112,9 @@ class CreateWeb extends React.Component<Props, State> {
   }
 }
 
-const CreateWebWithMutation = withMutation(CreateWeb);
+// https://github.com/este/este/issues/1404#issuecomment-328968006
+const CreateWebWithMutation: ComponentType<{ ownerId: string }> = withMutation(
+  CreateWeb,
+);
 
 export default CreateWebWithMutation;

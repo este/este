@@ -33,11 +33,15 @@ type Props = {
   mutate: *,
 };
 
-type State = {
+type Fields = {
   email: string,
   password: string,
+};
+
+// ...Fields still buggy, https://twitter.com/estejs/status/908785884765540353
+type State = Fields & {
   pending: boolean,
-  validationErrors: validation.ValidationErrors<State>,
+  validationErrors: validation.ValidationErrors<Fields>,
 };
 
 const initialState = {
@@ -81,31 +85,37 @@ class Auth extends React.Component<Props, State> {
   };
 
   auth(isSignUp) {
-    const validationErrors = validation.validate(this.state, {
-      email: [validation.required(), validation.email()],
-      password: [validation.required(), validation.minLength(5)],
-    });
+    const fields = {
+      email: this.state.email.trim(),
+      password: this.state.password.trim(),
+    };
 
-    if (!validation.isValid(validationErrors)) {
+    const validate = fields => {
+      const email = validation.email(fields.email);
+      if (email) return { email };
+      const password = validation.password(fields.password);
+      if (password) return { password };
+    };
+
+    const validationErrors = validate(fields);
+    if (validationErrors) {
       this.setState({ validationErrors });
       return;
     }
 
     this.setState({ pending: true });
 
-    const email = {
-      email: this.state.email,
-      password: this.state.password,
+    const signinInput = {
+      email: fields,
+      clientMutationId: getClientMutationId(),
     };
-
-    const signinInput = { email, clientMutationId: getClientMutationId() };
 
     if (isSignUp) {
       this.props.mutate(
         SignupMutation.commit,
         {
           signupInput: {
-            authProvider: { email },
+            authProvider: { email: fields },
             clientMutationId: getClientMutationId(),
           },
           signinInput,
@@ -174,7 +184,7 @@ class Auth extends React.Component<Props, State> {
 
 const AuthWithMutation = withMutation(Auth);
 
-// TODO: injectIntl should infers props type.
+// https://github.com/este/este/issues/1404#issuecomment-328968006
 const AuthIntl: ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;
