@@ -122,9 +122,9 @@ export type BoxProps = {
   borderTopColor?: ColorName,
 };
 
-type BoxContext = ThemeContext & {
+type BoxContext = {
   renderer: { renderRule: (rule: () => Object) => string },
-};
+} & ThemeContext;
 
 // Emulate React Native to ensure the same styles for all platforms.
 // https://facebook.github.io/yoga

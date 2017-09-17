@@ -95,7 +95,7 @@ class Text extends React.Component<TextProps> {
     return { hasParentEsteText: true };
   }
 
-  context: ThemeContext & { hasParentEsteText: boolean };
+  context: { hasParentEsteText: boolean } & ThemeContext;
 
   render() {
     const { theme, hasParentEsteText } = this.context;

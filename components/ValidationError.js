@@ -4,9 +4,9 @@ import * as validation from '../lib/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
-type Props = TextProps & {
+type Props = {
   error: ?validation.ValidationError,
-};
+} & TextProps;
 
 const getValidationErrorMessage = error => {
   switch (error.type) {
