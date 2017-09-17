@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b1ecfe7ca415d424a4c7e485c90efdf5
+ * @relayHash 6df0a4db90c0b421b6e4e08dbe65e43b
  */
 
 /* eslint-disable */
@@ -22,6 +22,9 @@ export type SigninMutationVariables = {|
 export type SigninMutationResponse = {|
   +signinUser: {|
     +token: ?string;
+    +user: ?{|
+      +id: string;
+    |};
   |};
 |};
 */
@@ -33,6 +36,9 @@ mutation SigninMutation(
 ) {
   signinUser(input: $signinInput) {
     token
+    user {
+      id
+    }
   }
 }
 */
@@ -71,6 +77,24 @@ const batch /*: ConcreteBatch*/ = {
             "alias": null,
             "args": null,
             "name": "token",
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": null,
+            "concreteType": "User",
+            "name": "user",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           }
         ],
@@ -117,13 +141,31 @@ const batch /*: ConcreteBatch*/ = {
             "args": null,
             "name": "token",
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": null,
+            "concreteType": "User",
+            "name": "user",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
       }
     ]
   },
-  "text": "mutation SigninMutation(\n  $signinInput: SigninUserInput!\n) {\n  signinUser(input: $signinInput) {\n    token\n  }\n}\n"
+  "text": "mutation SigninMutation(\n  $signinInput: SigninUserInput!\n) {\n  signinUser(input: $signinInput) {\n    token\n    user {\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

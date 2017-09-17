@@ -18,6 +18,9 @@ const mutation = graphql`
     }
     signinUser(input: $signinInput) {
       token
+      user {
+        id
+      }
     }
   }
 `;

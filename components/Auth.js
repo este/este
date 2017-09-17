@@ -10,12 +10,12 @@ import { SignInButton, SignUpButton } from './buttons';
 import { defineMessages, injectIntl } from 'react-intl';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
-import cookie from 'cookie';
 import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
 import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../lib/validation';
+import { setCookie } from '../lib/cookie';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -54,11 +54,14 @@ const initialState = {
 class Auth extends React.Component<Props, State> {
   state = initialState;
 
-  handleCompleted = response => {
-    // eslint-disable-next-line
-    document.cookie = cookie.serialize('token', response.signinUser.token, {
-      maxAge: 30 * 24 * 60 * 60, // one month, it's graph.cool default
-    });
+  handleCompleted = ({ signinUser: { user, token } }) => {
+    // Relay generated types are often optional for smooth update in case of
+    // schema change. Not yet updated clients will not fail.
+    if (!user || !token) {
+      this.setState({ pending: false });
+      return;
+    }
+    setCookie({ token, userId: user.id });
     const redirectPath = new URLSearchParams(window.location.search).get(
       redirectUrlKey,
     );

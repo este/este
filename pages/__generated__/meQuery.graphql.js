@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f5984d4dfe2d9dd48fd577dd04587f0e
+ * @relayHash 76b94181c5da3b3e45f9fd97f43919a7
  */
 
 /* eslint-disable */
@@ -15,17 +15,43 @@ export type meQueryResponse = {|
       +email: ?string;
       +id: string;
     |};
+    +allWebs: {|
+      +edges: ?$ReadOnlyArray<?{|
+        +node: {|
+          +id: string;
+          +domain: string;
+          +name: string;
+          +owner: {|
+            +id: string;
+          |};
+        |};
+      |}>;
+    |};
   |};
 |};
 */
 
 
 /*
-query meQuery {
+query meQuery(
+  $filter: WebFilter
+) {
   viewer {
     user {
       email
       id
+    }
+    allWebs(filter: $filter, orderBy: updatedAt_DESC) {
+      edges {
+        node {
+          id
+          domain
+          name
+          owner {
+            id
+          }
+        }
+      }
     }
     id
   }
@@ -34,7 +60,14 @@ query meQuery {
 
 const batch /*: ConcreteBatch*/ = {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "filter",
+        "type": "WebFilter",
+        "defaultValue": null
+      }
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "meQuery",
@@ -71,6 +104,91 @@ const batch /*: ConcreteBatch*/ = {
               }
             ],
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "filter",
+                "variableName": "filter",
+                "type": "WebFilter"
+              },
+              {
+                "kind": "Literal",
+                "name": "orderBy",
+                "value": "updatedAt_DESC",
+                "type": "WebOrderBy"
+              }
+            ],
+            "concreteType": "WebConnection",
+            "name": "allWebs",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "WebEdge",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Web",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "domain",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "name",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -83,7 +201,14 @@ const batch /*: ConcreteBatch*/ = {
   "metadata": {},
   "name": "meQuery",
   "query": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "filter",
+        "type": "WebFilter",
+        "defaultValue": null
+      }
+    ],
     "kind": "Root",
     "name": "meQuery",
     "operation": "query",
@@ -122,6 +247,91 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           },
           {
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "filter",
+                "variableName": "filter",
+                "type": "WebFilter"
+              },
+              {
+                "kind": "Literal",
+                "name": "orderBy",
+                "value": "updatedAt_DESC",
+                "type": "WebOrderBy"
+              }
+            ],
+            "concreteType": "WebConnection",
+            "name": "allWebs",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "args": null,
+                "concreteType": "WebEdge",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Web",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "domain",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "name",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
@@ -133,7 +343,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query meQuery {\n  viewer {\n    user {\n      email\n      id\n    }\n    id\n  }\n}\n"
+  "text": "query meQuery(\n  $filter: WebFilter\n) {\n  viewer {\n    user {\n      email\n      id\n    }\n    allWebs(filter: $filter, orderBy: updatedAt_DESC) {\n      edges {\n        node {\n          id\n          domain\n          name\n          owner {\n            id\n          }\n        }\n      }\n    }\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

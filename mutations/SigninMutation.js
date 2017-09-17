@@ -10,6 +10,9 @@ const mutation = graphql`
   mutation SigninMutation($signinInput: SigninUserInput!) {
     signinUser(input: $signinInput) {
       token
+      user {
+        id
+      }
     }
   }
 `;

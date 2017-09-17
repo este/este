@@ -12,26 +12,10 @@ import sitemap from '../lib/sitemap';
 import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
-import { serialize as serializeCookie } from 'cookie';
 import CreateWeb from '../components/CreateWeb';
 import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
-
-const deleteCookie = () => {
-  // eslint-disable-next-line no-undef
-  document.cookie = serializeCookie('token', '', {
-    // Expire the cookie immediately.
-    maxAge: -1,
-  });
-};
-
-export const signOut = () => {
-  deleteCookie();
-  // Force full reload. Purging Relay environment and Redux store is not enough.
-  // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
-  // eslint-disable-next-line no-undef
-  location.href = '/';
-};
+import { deleteCookie } from '../lib/cookie';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -41,7 +25,20 @@ const getGravatarUrl = email =>
     s: '100',
   });
 
-const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
+const signOut = () => {
+  deleteCookie();
+  // Force full reload. Purging Relay environment and Redux store is not enough.
+  // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
+  // eslint-disable-next-line no-undef
+  location.href = '/';
+};
+
+type Props = {
+  data: meQueryResponse,
+  intl: *,
+};
+
+const Me = ({ data, intl }: Props) => {
   const { viewer: { user } } = data;
   if (!user) return null;
   return (
@@ -77,13 +74,32 @@ const Me = ({ data, intl }: { data: meQueryResponse, intl: * }) => {
 export default app(Me, {
   requireAuth: true,
   query: graphql`
-    query meQuery {
+    query meQuery($filter: WebFilter) {
       viewer {
         user {
           email
           id
         }
+        allWebs(filter: $filter, orderBy: updatedAt_DESC) {
+          edges {
+            node {
+              id
+              domain
+              name
+              owner {
+                id
+              }
+            }
+          }
+        }
       }
     }
   `,
+  queryVariables: (query, userId) => ({
+    filter: {
+      owner: {
+        id: userId,
+      },
+    },
+  }),
 });
