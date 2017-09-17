@@ -97,6 +97,7 @@ type AppProps = NextProps & InitialAppProps;
 type PageProps = {
   data: Object,
   intl: IntlShape,
+  userId: ?string,
 } & NextProps;
 
 const app = (
@@ -120,10 +121,10 @@ const app = (
     serverState,
     url,
   }: AppProps) => {
-    const environment = createRelayEnvironment(cookie && cookie.token, records);
-    const variables = queryVariables
-      ? queryVariables(url.query, cookie && cookie.userId)
-      : {};
+    const token = cookie && cookie.token;
+    const environment = createRelayEnvironment(token, records);
+    const userId = cookie && cookie.userId;
+    const variables = queryVariables ? queryVariables(url.query, userId) : {};
     // createReduxProvider, because exported Provider has an obsolete check.
     // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
     // $FlowFixMe https://github.com/flowtype/flow-typed/issues/1154#issuecomment-324156744
@@ -140,7 +141,11 @@ const app = (
               initialNow={initialNow}
             >
               <IsAuthenticatedProvider isAuthenticated={!!cookie}>
-                <PageWithHigherOrderComponents data={data} url={url} />
+                <PageWithHigherOrderComponents
+                  data={data}
+                  url={url}
+                  userId={userId}
+                />
               </IsAuthenticatedProvider>
             </IntlProvider>
           </FelaProvider>

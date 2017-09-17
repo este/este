@@ -36,17 +36,19 @@ const signOut = () => {
 type Props = {
   data: meQueryResponse,
   intl: *,
+  userId: *,
 };
 
-const Me = ({ data, intl }: Props) => {
+const Me = ({ data, intl, userId }: Props) => {
   const { viewer: { user } } = data;
-  if (!user) return null;
+  // Note we can get current userId from cookie.
+  if (!user || !userId) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
       <Heading size={1}>
         <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
       </Heading>
-      <CreateWeb ownerId={user.id} />
+      <CreateWeb ownerId={userId} />
       <Heading size={1}>
         <FormattedMessage id="profile" defaultMessage="Profile" />
       </Heading>
@@ -78,7 +80,6 @@ export default app(Me, {
       viewer {
         user {
           email
-          id
         }
         allWebs(filter: $filter, orderBy: updatedAt_DESC) {
           edges {

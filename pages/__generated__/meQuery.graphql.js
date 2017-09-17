@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 76b94181c5da3b3e45f9fd97f43919a7
+ * @relayHash 10c69de2e6d2ed9db903d7e507945fdb
  */
 
 /* eslint-disable */
@@ -13,7 +13,6 @@ export type meQueryResponse = {|
   +viewer: {|
     +user: ?{|
       +email: ?string;
-      +id: string;
     |};
     +allWebs: {|
       +edges: ?$ReadOnlyArray<?{|
@@ -93,13 +92,6 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": null,
                 "name": "email",
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
                 "storageKey": null
               }
             ],
