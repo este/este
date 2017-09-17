@@ -1,5 +1,4 @@
 // @flow
-import 'rxjs'; // This imports the entire core set of functionality.
 import IsAuthenticatedProvider from './IsAuthenticatedProvider';
 import React, { type ComponentType } from 'react';
 import RelayProvider from './RelayProvider';
