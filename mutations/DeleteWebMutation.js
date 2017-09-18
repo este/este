@@ -2,26 +2,23 @@
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../types';
 import type {
-  CreateWebMutationVariables,
-  CreateWebMutationResponse,
-} from './__generated__/CreateWebMutation.graphql';
+  DeleteWebMutationVariables,
+  DeleteWebMutationResponse,
+} from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
 import { createFilter } from '../pages/me';
 
 const mutation = graphql`
-  mutation CreateWebMutation($input: CreateWebInput!) {
-    createWeb(input: $input) {
+  mutation DeleteWebMutation($input: DeleteWebInput!) {
+    deleteWeb(input: $input) {
       # Request payload data needed for store update.
-      edge {
-        node {
-          ...WebListItem_web
-        }
-      }
+      deletedId
     }
   }
 `;
 
-const sharedUpdater = (store, edge, viewerId, userId) => {
+// https://github.com/relayjs/relay-examples
+const sharedUpdater = (store, deletedId, viewerId, userId) => {
   const viewerProxy = store.get(viewerId);
   const connection = ConnectionHandler.getConnection(
     viewerProxy,
@@ -36,13 +33,13 @@ const sharedUpdater = (store, edge, viewerId, userId) => {
     // eslint-disable-next-line no-console
     console.warn('Undefined connection. Check getConnection arguments.');
   }
-  ConnectionHandler.insertEdgeAfter(connection, edge);
+  ConnectionHandler.deleteNode(connection, deletedId);
 };
 
 type CommitWithArgs = (
   viewerId: string,
   userId: string,
-) => Commit<CreateWebMutationVariables, CreateWebMutationResponse>;
+) => Commit<DeleteWebMutationVariables, DeleteWebMutationResponse>;
 
 const commit: CommitWithArgs = (viewerId, userId) => (
   environment,
@@ -56,9 +53,9 @@ const commit: CommitWithArgs = (viewerId, userId) => (
     onCompleted,
     onError,
     updater: store => {
-      const payload = store.getRootField('createWeb');
-      const edge = payload.getLinkedRecord('edge');
-      sharedUpdater(store, edge, viewerId, userId);
+      const payload = store.getRootField('deleteWeb');
+      const deletedId = payload.getValue('deletedId');
+      sharedUpdater(store, deletedId, viewerId, userId);
     },
   });
 

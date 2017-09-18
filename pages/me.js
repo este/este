@@ -9,13 +9,14 @@ import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
-import type { meQueryResponse } from './__generated__/meQuery.graphql';
+import type { meQueryResponse } from './__generated__/mePageQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import CreateWeb from '../components/CreateWeb';
 import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
 import { deleteCookie } from '../lib/cookie';
+import WebList from '../components/WebList';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -36,19 +37,18 @@ const signOut = () => {
 type Props = {
   data: meQueryResponse,
   intl: *,
-  userId: *,
 };
 
-const Me = ({ data, intl, userId }: Props) => {
-  const { viewer: { user } } = data;
-  // Note we can get current userId from cookie.
-  if (!user || !userId) return null;
+const Me = ({ data, intl }: Props) => {
+  const { user } = data.viewer;
+  if (!user) return null;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
       <Heading size={1}>
         <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
       </Heading>
-      <CreateWeb ownerId={userId} />
+      <WebList viewer={data.viewer} />
+      <CreateWeb viewer={data.viewer} />
       <Heading size={1}>
         <FormattedMessage id="profile" defaultMessage="Profile" />
       </Heading>
@@ -73,34 +73,26 @@ const Me = ({ data, intl, userId }: Props) => {
   );
 };
 
+export const createFilter = (userId: ?string) => ({
+  filter: { owner: { id: userId } },
+});
+
 export default app(Me, {
   requireAuth: true,
   query: graphql`
-    query meQuery($filter: WebFilter) {
+    query mePageQuery($filter: WebFilter) {
       viewer {
+        id
         user {
+          id
           email
         }
-        allWebs(filter: $filter, orderBy: updatedAt_DESC) {
-          edges {
-            node {
-              id
-              domain
-              name
-              owner {
-                id
-              }
-            }
-          }
-        }
+        ...WebList_viewer
+        ...CreateWeb_viewer
       }
     }
   `,
   queryVariables: (query, userId) => ({
-    filter: {
-      owner: {
-        id: userId,
-      },
-    },
+    ...createFilter(userId),
   }),
 });

@@ -97,7 +97,6 @@ type AppProps = NextProps & InitialAppProps;
 type PageProps = {
   data: Object,
   intl: IntlShape,
-  userId: ?string,
 } & NextProps;
 
 const app = (
@@ -141,11 +140,7 @@ const app = (
               initialNow={initialNow}
             >
               <IsAuthenticatedProvider isAuthenticated={!!cookie}>
-                <PageWithHigherOrderComponents
-                  data={data}
-                  url={url}
-                  userId={userId}
-                />
+                <PageWithHigherOrderComponents data={data} url={url} />
               </IsAuthenticatedProvider>
             </IntlProvider>
           </FelaProvider>

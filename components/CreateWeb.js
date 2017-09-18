@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import Form from './Form';
 import { CreateButton } from './buttons';
 import TextInputBig from './TextInputBig';
@@ -10,10 +10,12 @@ import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../lib/validation';
 import ValidationError from './ValidationError';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
 
 type Props = {
   mutate: *,
-  ownerId: string,
+  viewer: CreateWeb_viewer,
 };
 
 type Fields = {
@@ -55,11 +57,14 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
+    const { viewer } = this.props;
+    const { user } = viewer;
+    if (!user) return; // Because user is maybe type.
     const variables = {
       input: {
         domain: '', // Is computed in graph.cool function.
         name: this.state.name.trim(),
-        ownerId: this.props.ownerId,
+        ownerId: user.id,
         clientMutationId: getClientMutationId(),
       },
     };
@@ -77,7 +82,7 @@ class CreateWeb extends React.Component<Props, State> {
 
     this.setState({ pending: true });
     this.props.mutate(
-      CreateWebMutation.commit,
+      CreateWebMutation.commit(viewer.id, user.id),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -112,9 +117,15 @@ class CreateWeb extends React.Component<Props, State> {
   }
 }
 
-// https://github.com/este/este/issues/1404#issuecomment-328968006
-const CreateWebWithMutation: ComponentType<{ ownerId: string }> = withMutation(
-  CreateWeb,
-);
+const CreateWebWithMutation = withMutation(CreateWeb);
 
-export default CreateWebWithMutation;
+export default createFragmentContainer(CreateWebWithMutation, {
+  viewer: graphql`
+    fragment CreateWeb_viewer on Viewer {
+      id
+      user {
+        id
+      }
+    }
+  `,
+});

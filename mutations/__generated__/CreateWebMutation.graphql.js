@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8bed67b3f234719de5b113c84e4b9498
+ * @relayHash 34ba000936cf79260f6cefacb8517c52
  */
 
 /* eslint-disable */
@@ -20,8 +20,8 @@ export type CreateWebMutationVariables = {|
 
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
-    +web: ?{|
-      +id: string;
+    +edge: ?{|
+      +node: {| |};
     |};
   |};
 |};
@@ -33,10 +33,20 @@ mutation CreateWebMutation(
   $input: CreateWebInput!
 ) {
   createWeb(input: $input) {
-    web {
-      id
+    edge {
+      node {
+        ...WebListItem_web
+        id
+      }
     }
   }
+}
+
+fragment WebListItem_web on Web {
+  updatedAt
+  domain
+  id
+  name
 }
 */
 
@@ -73,15 +83,24 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "concreteType": "Web",
-            "name": "web",
+            "concreteType": "WebEdge",
+            "name": "edge",
             "plural": false,
             "selections": [
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "name": "id",
+                "concreteType": "Web",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "FragmentSpread",
+                    "name": "WebListItem_web",
+                    "args": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -129,15 +148,53 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": null,
-            "concreteType": "Web",
-            "name": "web",
+            "concreteType": "WebEdge",
+            "name": "edge",
             "plural": false,
             "selections": [
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "name": "id",
+                "concreteType": "Web",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "type": "Web",
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "updatedAt",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "domain",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "name",
+                        "storageKey": null
+                      }
+                    ]
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -148,7 +205,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n"
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebListItem_web\n        id\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  id\n  name\n}\n"
 };
 
 module.exports = batch;

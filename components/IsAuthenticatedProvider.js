@@ -2,8 +2,9 @@
 import React, { type Node } from 'react';
 import PropTypes from 'prop-types';
 
-// isAuthenticated is a cross-cutting concern. It's the same for the whole app
-// so it doesn't make sense to pass it via props, which are component specific.
+// We can detect whether user is authenticated or not via Viewer.user query.
+// But because we need such information in Page for menu etc., it would require
+// the server side roundtrip for all pages. We can safely use cookie instead.
 
 type IsAuthenticatedProviderProps = {
   children: Node,
