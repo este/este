@@ -1,5 +1,5 @@
-// flow-typed signature: c887a7b496ef397e09ebfa1970188ef8
-// flow-typed version: 3ea96609cc/ramda_v0.x.x/flow_>=v0.39.x
+// flow-typed signature: 1e0fed933bfdeb41e6d10e140a5e55c7
+// flow-typed version: d53fb09dcc/ramda_v0.x.x/flow_>=v0.39.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -547,9 +547,8 @@ declare module ramda {
   declare function minBy<T,V>(fn: (x:T) => V, x: T, ...rest: Array<void>): (y: T) => T;
   declare function minBy<T,V>(fn: (x:T) => V, x: T, y: T): T;
 
-  // TODO: sortBy: Started failing in v38...
-  // declare function sortBy<T,V>(fn: (x:T) => V, ...rest: Array<void>): (x: Array<T>) => Array<T>;
-  // declare function sortBy<T,V>(fn: (x:T) => V, x: Array<T>): Array<T>;
+  declare function sortBy<T,V>(fn: (x:T) => V, ...rest: Array<void>): (x: Array<T>) => Array<T>;
+  declare function sortBy<T,V>(fn: (x:T) => V, x: Array<T>): Array<T>;
 
   declare function symmetricDifference<T>(x: Array<T>, ...rest: Array<void>): (y: Array<T>) => Array<T>;
   declare function symmetricDifference<T>(x: Array<T>, y: Array<T>): Array<T>;
