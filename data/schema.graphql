@@ -1,5 +1,5 @@
 # source: https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b
-# timestamp: Tue Sep 19 2017 00:55:52 GMT+0200 (CEST)
+# timestamp: Tue Sep 19 2017 17:21:13 GMT+0200 (CEST)
 
 type AddToWebOwnerPayload {
   viewer: Viewer!
@@ -426,7 +426,7 @@ enum FileOrderBy {
   contentType_ASC
   contentType_DESC
   createdAt_ASC
-  createdAt_ASC
+  createdAt_DESC
   id_ASC
   id_DESC
   name_ASC
@@ -817,7 +817,7 @@ input UserFilter {
 
 enum UserOrderBy {
   createdAt_ASC
-  createdAt_ASC
+  createdAt_DESC
   email_ASC
   email_DESC
   id_ASC
@@ -1050,7 +1050,7 @@ input WebFilter {
 
 enum WebOrderBy {
   createdAt_ASC
-  createdAt_ASC
+  createdAt_DESC
   domain_ASC
   domain_DESC
   id_ASC
