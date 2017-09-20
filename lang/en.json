@@ -14,13 +14,13 @@
   "button.signOut": "Sign Out",
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
+  "confirm.areYouSure": "Are you sure?",
   "createApp.label": "Web Name",
   "devTools": "Dev Tools",
   "footer.madeBy": "made by",
   "index.createWeb": "Create web",
   "index.manageYourWebs": "Manage your webs",
-  "profile": "Profile",
-  "sitemap.title.index": "Este",
+  "sitemap.title.index": "Home",
   "sitemap.title.me": "Me",
   "sitemap.title.signIn": "Sign In",
   "validationError.alreadyExists": "Already exists.",
@@ -30,6 +30,5 @@
   "validationError.required": "Please fill out this field.",
   "validationError.requiredAgree": "Please think about it.",
   "validationError.wrongPassword": "The password you have entered is invalid.",
-  "viewerWebs.noWebCreatedYet": "You don't have any web yet. Create a new one.",
   "yourWebs": "Your Webs"
 }

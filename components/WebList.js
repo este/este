@@ -16,7 +16,8 @@ type Props = {
 // updated client code will not fail. Babel 7 optional chaining operator ftw.
 const WebList = ({ viewer }: Props) => (
   <Box>
-    {viewer.allWebs.edges &&
+    {viewer.allWebs &&
+      viewer.allWebs.edges &&
       viewer.allWebs.edges.map(
         edge =>
           edge && (
@@ -33,7 +34,8 @@ export default createFragmentContainer(
   graphql`
     fragment WebList_viewer on Viewer {
       allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100)
-        @connection(key: "WebList_allWebs") {
+        @connection(key: "WebList_allWebs")
+        @include(if: $isAuthenticated) {
         edges {
           node {
             id

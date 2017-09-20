@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import Form from './Form';
 import { CreateButton } from './buttons';
 import TextInputBig from './TextInputBig';
@@ -119,4 +119,7 @@ class CreateWeb extends React.Component<Props, State> {
 
 withAuth(CreateWeb);
 
-export default withMutation(CreateWeb);
+// TODO: Remove ComponentType<{}> once Flow will fix HOC. Soon.
+const CreateWebWithMutation: ComponentType<{}> = withMutation(CreateWeb);
+
+export default CreateWebWithMutation;
