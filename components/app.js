@@ -99,11 +99,17 @@ type Page = ComponentType<
   } & NextProps,
 >;
 
+type QueryVariables = ({|
+  isAuthenticated: boolean,
+  query: Object,
+  userId: ?string,
+|}) => Object;
+
 const app = (
   Page: Page,
   options?: {|
     query?: Object,
-    queryVariables?: (urlQuery: Object, userId: ?string) => Object,
+    queryVariables?: QueryVariables,
     requireAuth?: boolean,
   |},
 ) => {
@@ -123,7 +129,14 @@ const app = (
     const token = cookie && cookie.token;
     const environment = createRelayEnvironment(token, records);
     const userId = cookie && cookie.userId;
-    const variables = queryVariables ? queryVariables(url.query, userId) : {};
+    const isAuthenticated = !!cookie;
+    const variables = queryVariables
+      ? queryVariables({
+          isAuthenticated,
+          query: url.query,
+          userId,
+        })
+      : {};
     // createReduxProvider, because exported Provider has an obsolete check.
     // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
     // $FlowFixMe https://github.com/flowtype/flow-typed/issues/1154#issuecomment-324156744
@@ -139,7 +152,7 @@ const app = (
               messages={messages}
               initialNow={initialNow}
             >
-              <AuthProvider isAuthenticated={!!cookie} userId={userId}>
+              <AuthProvider isAuthenticated={isAuthenticated} userId={userId}>
                 <PageWithHigherOrderComponents data={data} url={url} />
               </AuthProvider>
             </IntlProvider>
@@ -151,8 +164,9 @@ const app = (
 
   App.getInitialProps = async (context: NextContext) => {
     const cookie = getCookie(context.req);
+    const isAuthenticated = !!cookie;
 
-    if (requireAuth && !cookie) {
+    if (requireAuth && !isAuthenticated) {
       redirectToSignIn(context);
       // Return nothing because component will not be rendered on redirect.
       return {};
@@ -167,7 +181,11 @@ const app = (
     if (query) {
       const environment = createRelayEnvironment(cookie && cookie.token);
       const variables = queryVariables
-        ? queryVariables(context.query, cookie && cookie.userId)
+        ? queryVariables({
+            isAuthenticated,
+            query: context.query,
+            userId: cookie && cookie.userId,
+          })
         : {};
       // It can throw "Failed to fetch" error when offline, but it should be
       // solved with service workers I believe.
@@ -175,6 +193,7 @@ const app = (
       // because payload errors are not real errors. They are expected when the
       // scheme is updated and an app is not yet updated. That's why Relay
       // generated Flow types are optional. Don't crash, just don't show data.
+      // Another mechanism should invoke app update.
       data = await fetchQuery(environment, query, variables);
       records = environment
         .getStore()

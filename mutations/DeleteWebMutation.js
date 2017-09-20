@@ -6,7 +6,7 @@ import type {
   DeleteWebMutationResponse,
 } from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import { queryFilter } from '../pages/me';
+import { queryFilters } from '../pages/index';
 
 const mutation = graphql`
   mutation DeleteWebMutation($input: DeleteWebInput!) {
@@ -24,7 +24,7 @@ const sharedUpdater = (store, deletedId, userId) => {
     viewerProxy,
     'WebList_allWebs',
     {
-      ...queryFilter(userId),
+      ...queryFilters(userId),
       orderBy: 'createdAt_ASC',
     },
   );
