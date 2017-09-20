@@ -146,8 +146,8 @@ append-transform@^0.4.0:
     default-require-extensions "^1.0.0"
 
 aproba@^1.0.3:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.2.tgz#45c6629094de4e96f693ef7eab74ae079c240fc1"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
 are-we-there-yet@~1.1.2:
   version "1.1.4"
@@ -1613,8 +1613,8 @@ codemirror-graphql@^0.6.11:
     graphql-language-service-parser "0.0.15"
 
 codemirror@^5.26.0, codemirror@^5.27.4:
-  version "5.29.0"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.29.0.tgz#e68de1350e2f0ce804a3930576d0ae318736e967"
+  version "5.30.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.30.0.tgz#86e57dd5ea5535acbcf9c720797b4cefe05b5a70"
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -3265,8 +3265,8 @@ graceful-fs@~3.0.2:
     natives "^1.1.0"
 
 graphcool-styles@^0.1.31:
-  version "0.1.42"
-  resolved "https://registry.yarnpkg.com/graphcool-styles/-/graphcool-styles-0.1.42.tgz#1f50c4adc09d250cd32bf134673d667fcbb3a6e3"
+  version "0.1.43"
+  resolved "https://registry.yarnpkg.com/graphcool-styles/-/graphcool-styles-0.1.43.tgz#da6b72118c890923ef5c4a964405aa3e4541dc82"
   dependencies:
     html-webpack-plugin "^2.24.1"
     interactive "^0.1.9"
