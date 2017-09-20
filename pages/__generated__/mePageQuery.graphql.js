@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3b9f665551e1fbd09d20c31c9a066806
+ * @relayHash e0c8b037574bd4079ad69d5cb1af3df2
  */
 
 /* eslint-disable */
@@ -60,6 +60,9 @@ fragment WebList_viewer on Viewer {
 fragment WebListItem_web on Web {
   updatedAt
   domain
+  owner {
+    id
+  }
   id
   name
 }
@@ -246,6 +249,24 @@ const batch /*: ConcreteBatch*/ = {
                                 "storageKey": null
                               },
                               {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "User",
+                                "name": "owner",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "id",
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              },
+                              {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
@@ -368,7 +389,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query mePageQuery(\n  $filter: WebFilter\n) {\n  viewer {\n    user {\n      email\n      id\n    }\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  id\n  name\n}\n"
+  "text": "query mePageQuery(\n  $filter: WebFilter\n) {\n  viewer {\n    user {\n      email\n      id\n    }\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n"
 };
 
 module.exports = batch;

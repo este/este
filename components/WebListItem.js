@@ -76,6 +76,7 @@ class WebListItem extends React.Component<Props, State> {
   render() {
     const { web } = this.props;
     const { pending } = this.state;
+    const userIsOwner = this.context.userId === web.owner.id;
     return (
       <Box>
         <Text>{web.name}</Text>
@@ -83,9 +84,13 @@ class WebListItem extends React.Component<Props, State> {
           <Text color="gray" size={-1}>
             <Text>{web.domain}</Text>
             {', '}
-            <DeleteWeb disabled={pending} onPress={this.deleteWeb} />
-            {', '}
             <FormattedRelative value={web.updatedAt} />
+            {userIsOwner && (
+              <Text>
+                {', '}
+                <DeleteWeb disabled={pending} onPress={this.deleteWeb} />
+              </Text>
+            )}
           </Text>
         </Set>
       </Box>
@@ -102,6 +107,9 @@ export default createFragmentContainer(WebListItemWithMutation, {
     fragment WebListItem_web on Web {
       updatedAt
       domain
+      owner {
+        id
+      }
       id
       name
     }

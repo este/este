@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 34ba000936cf79260f6cefacb8517c52
+ * @relayHash fd481754836c4418ac7acfa435f9d817
  */
 
 /* eslint-disable */
@@ -45,6 +45,9 @@ mutation CreateWebMutation(
 fragment WebListItem_web on Web {
   updatedAt
   domain
+  owner {
+    id
+  }
   id
   name
 }
@@ -186,6 +189,24 @@ const batch /*: ConcreteBatch*/ = {
                         "storageKey": null
                       },
                       {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "name": "owner",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "args": null,
+                            "name": "id",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
                         "kind": "ScalarField",
                         "alias": null,
                         "args": null,
@@ -205,7 +226,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebListItem_web\n        id\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  id\n  name\n}\n"
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebListItem_web\n        id\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n"
 };
 
 module.exports = batch;

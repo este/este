@@ -38,7 +38,6 @@ type Fields = {
   password: string,
 };
 
-// ...Fields still buggy, https://twitter.com/estejs/status/908785884765540353
 type State = {
   pending: boolean,
   validationErrors: validation.ValidationErrors<Fields>,
