@@ -6,7 +6,7 @@ import type {
   DeleteWebMutationResponse,
 } from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import { createFilter } from '../pages/me';
+import { queryFilter } from '../pages/me';
 
 const mutation = graphql`
   mutation DeleteWebMutation($input: DeleteWebInput!) {
@@ -18,13 +18,13 @@ const mutation = graphql`
 `;
 
 // https://github.com/relayjs/relay-examples
-const sharedUpdater = (store, deletedId, viewerId, userId) => {
-  const viewerProxy = store.get(viewerId);
+const sharedUpdater = (store, deletedId, userId) => {
+  const viewerProxy = store.get('viewer-fixed');
   const connection = ConnectionHandler.getConnection(
     viewerProxy,
     'WebList_allWebs',
     {
-      ...createFilter(userId),
+      ...queryFilter(userId),
       orderBy: 'createdAt_ASC',
     },
   );
@@ -37,11 +37,10 @@ const sharedUpdater = (store, deletedId, viewerId, userId) => {
 };
 
 type CommitWithArgs = (
-  viewerId: string,
   userId: string,
 ) => Commit<DeleteWebMutationVariables, DeleteWebMutationResponse>;
 
-const commit: CommitWithArgs = (viewerId, userId) => (
+const commit: CommitWithArgs = userId => (
   environment,
   variables,
   onCompleted,
@@ -55,7 +54,7 @@ const commit: CommitWithArgs = (viewerId, userId) => (
     updater: store => {
       const payload = store.getRootField('deleteWeb');
       const deletedId = payload.getValue('deletedId');
-      sharedUpdater(store, deletedId, viewerId, userId);
+      sharedUpdater(store, deletedId, userId);
     },
   });
 

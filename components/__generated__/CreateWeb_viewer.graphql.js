@@ -9,7 +9,6 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type CreateWeb_viewer = {|
-  +id: string;
   +user: ?{|
     +id: string;
   |};
@@ -23,13 +22,6 @@ const fragment /*: ConcreteFragment*/ = {
   "metadata": null,
   "name": "CreateWeb_viewer",
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "args": null,
-      "name": "id",
-      "storageKey": null
-    },
     {
       "kind": "LinkedField",
       "alias": null,

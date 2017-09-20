@@ -56,20 +56,18 @@ const redirectToSignIn = ({ pathname, res }) => {
   }
 };
 
-export type Req = {
-  ...http$IncomingMessage,
-  locale: string,
-  localeDataScript: string,
-  messages: Object,
-  supportedLocales: Array<string>,
-};
-
 // https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
 type NextContext = {
   pathname: string,
   query: Object,
   asPath: string,
-  req: ?Req,
+  req: ?{
+    ...http$IncomingMessage,
+    locale: string,
+    localeDataScript: string,
+    messages: Object,
+    supportedLocales: Array<string>,
+  },
   res: ?http$ServerResponse,
   jsonPageRes: Object,
   err: Object,
@@ -94,13 +92,15 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type PageProps = {
-  data: Object,
-  intl: IntlShape,
-} & NextProps;
+type Page = ComponentType<
+  {
+    data: Object,
+    intl: IntlShape,
+  } & NextProps,
+>;
 
 const app = (
-  Page: ComponentType<PageProps>,
+  Page: Page,
   options?: {|
     query?: Object,
     queryVariables?: (urlQuery: Object, userId: ?string) => Object,

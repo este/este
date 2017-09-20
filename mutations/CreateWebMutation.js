@@ -6,7 +6,7 @@ import type {
   CreateWebMutationResponse,
 } from './__generated__/CreateWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import { createFilter } from '../pages/me';
+import { queryFilter } from '../pages/me';
 
 const mutation = graphql`
   mutation CreateWebMutation($input: CreateWebInput!) {
@@ -21,13 +21,13 @@ const mutation = graphql`
   }
 `;
 
-const sharedUpdater = (store, edge, viewerId, userId) => {
-  const viewerProxy = store.get(viewerId);
+const sharedUpdater = (store, edge, userId) => {
+  const viewerProxy = store.get('viewer-fixed');
   const connection = ConnectionHandler.getConnection(
     viewerProxy,
     'WebList_allWebs',
     {
-      ...createFilter(userId),
+      ...queryFilter(userId),
       orderBy: 'createdAt_ASC',
     },
   );
@@ -40,11 +40,10 @@ const sharedUpdater = (store, edge, viewerId, userId) => {
 };
 
 type CommitWithArgs = (
-  viewerId: string,
   userId: string,
 ) => Commit<CreateWebMutationVariables, CreateWebMutationResponse>;
 
-const commit: CommitWithArgs = (viewerId, userId) => (
+const commit: CommitWithArgs = userId => (
   environment,
   variables,
   onCompleted,
@@ -58,7 +57,7 @@ const commit: CommitWithArgs = (viewerId, userId) => (
     updater: store => {
       const payload = store.getRootField('createWeb');
       const edge = payload.getLinkedRecord('edge');
-      sharedUpdater(store, edge, viewerId, userId);
+      sharedUpdater(store, edge, userId);
     },
   });
 

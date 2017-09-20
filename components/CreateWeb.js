@@ -57,8 +57,7 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
-    const { viewer } = this.props;
-    const { user } = viewer;
+    const { viewer: { user } } = this.props;
     if (!user) return; // Because user is maybe type.
     const variables = {
       input: {
@@ -82,7 +81,7 @@ class CreateWeb extends React.Component<Props, State> {
 
     this.setState({ pending: true });
     this.props.mutate(
-      CreateWebMutation.commit(viewer.id, user.id),
+      CreateWebMutation.commit(user.id),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -122,7 +121,6 @@ const CreateWebWithMutation = withMutation(CreateWeb);
 export default createFragmentContainer(CreateWebWithMutation, {
   viewer: graphql`
     fragment CreateWeb_viewer on Viewer {
-      id
       user {
         id
       }

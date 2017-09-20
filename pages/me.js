@@ -9,7 +9,7 @@ import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import sitemap from '../lib/sitemap';
-import type { meQueryResponse } from './__generated__/mePageQuery.graphql';
+import type { mePageQueryResponse } from './__generated__/mePageQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import CreateWeb from '../components/CreateWeb';
@@ -17,6 +17,7 @@ import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
 import { deleteCookie } from '../lib/cookie';
 import WebList from '../components/WebList';
+import Box from '../components/Box';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -34,31 +35,27 @@ const signOut = () => {
   location.href = '/';
 };
 
-type Props = {
-  data: meQueryResponse,
-  intl: *,
-};
-
-const Me = ({ data, intl }: Props) => {
-  const { user } = data.viewer;
-  if (!user) return null;
+const Me = ({ data, intl }) => {
+  const { viewer }: mePageQueryResponse = data;
+  const email = viewer.user && viewer.user.email;
   return (
     <Page title={intl.formatMessage(sitemap.me.title)}>
       <Heading size={1}>
         <FormattedMessage id="yourWebs" defaultMessage="Your Webs" />
       </Heading>
-      <WebList viewer={data.viewer} />
-      <CreateWeb viewer={data.viewer} />
-      <Heading size={1}>
-        <FormattedMessage id="profile" defaultMessage="Profile" />
-      </Heading>
-      <Image
-        marginBottom={1}
-        size={{ height: 100, width: 100 }}
-        src={getGravatarUrl(user.email)}
-        title={user.email}
-      />
-      <P bold>{user.email}</P>
+      <WebList viewer={viewer} />
+      <CreateWeb viewer={viewer} />
+      {email && (
+        <Box>
+          <Image
+            marginBottom={1}
+            size={{ height: 100, width: 100 }}
+            src={getGravatarUrl(email)}
+            title={email}
+          />
+          <P bold>{email}</P>
+        </Box>
+      )}
       <Set>
         <SignOutButton danger onPress={signOut} />
       </Set>
@@ -73,7 +70,7 @@ const Me = ({ data, intl }: Props) => {
   );
 };
 
-export const createFilter = (userId: ?string) => ({
+export const queryFilter = (userId: ?string) => ({
   filter: { owner: { id: userId } },
 });
 
@@ -82,9 +79,7 @@ export default app(Me, {
   query: graphql`
     query mePageQuery($filter: WebFilter) {
       viewer {
-        id
         user {
-          id
           email
         }
         ...WebList_viewer
@@ -93,6 +88,6 @@ export default app(Me, {
     }
   `,
   queryVariables: (query, userId) => ({
-    ...createFilter(userId),
+    ...queryFilter(userId),
   }),
 });

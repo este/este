@@ -54,8 +54,7 @@ class WebListItem extends React.Component<Props, State> {
   };
 
   deleteWeb = () => {
-    const { viewer } = this.props;
-    const { user } = viewer;
+    const { viewer: { user } } = this.props;
     if (!user) return; // Because user is maybe type.
     const variables = {
       input: {
@@ -65,7 +64,7 @@ class WebListItem extends React.Component<Props, State> {
     };
     this.setState({ pending: true });
     this.props.mutate(
-      DeleteWebMutation.commit(viewer.id, user.id),
+      DeleteWebMutation.commit(user.id),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -105,7 +104,6 @@ export default createFragmentContainer(WebListItemWithMutation, {
   `,
   viewer: graphql`
     fragment WebListItem_viewer on Viewer {
-      id
       user {
         id
       }
