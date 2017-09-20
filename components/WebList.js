@@ -41,7 +41,6 @@ export default createFragmentContainer(
           }
         }
       }
-      ...WebListItem_viewer
     }
   `,
 );

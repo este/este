@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 98c198421b46a430e15a7da3cf670c68
+ * @relayHash 3b9f665551e1fbd09d20c31c9a066806
  */
 
 /* eslint-disable */
@@ -29,7 +29,6 @@ query mePageQuery(
       id
     }
     ...WebList_viewer
-    ...CreateWeb_viewer
     id
   }
 }
@@ -56,13 +55,6 @@ fragment WebList_viewer on Viewer {
       }
     }
   }
-  ...WebListItem_viewer
-}
-
-fragment CreateWeb_viewer on Viewer {
-  user {
-    id
-  }
 }
 
 fragment WebListItem_web on Web {
@@ -70,12 +62,6 @@ fragment WebListItem_web on Web {
   domain
   id
   name
-}
-
-fragment WebListItem_viewer on Viewer {
-  user {
-    id
-  }
 }
 */
 
@@ -122,11 +108,6 @@ const batch /*: ConcreteBatch*/ = {
           {
             "kind": "FragmentSpread",
             "name": "WebList_viewer",
-            "args": null
-          },
-          {
-            "kind": "FragmentSpread",
-            "name": "CreateWeb_viewer",
             "args": null
           }
         ],
@@ -387,7 +368,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query mePageQuery(\n  $filter: WebFilter\n) {\n  viewer {\n    user {\n      email\n      id\n    }\n    ...WebList_viewer\n    ...CreateWeb_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n  ...WebListItem_viewer\n}\n\nfragment CreateWeb_viewer on Viewer {\n  user {\n    id\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  id\n  name\n}\n\nfragment WebListItem_viewer on Viewer {\n  user {\n    id\n  }\n}\n"
+  "text": "query mePageQuery(\n  $filter: WebFilter\n) {\n  viewer {\n    user {\n      email\n      id\n    }\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  id\n  name\n}\n"
 };
 
 module.exports = batch;

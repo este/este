@@ -83,7 +83,6 @@ export default app(Me, {
           email
         }
         ...WebList_viewer
-        ...CreateWeb_viewer
       }
     }
   `,

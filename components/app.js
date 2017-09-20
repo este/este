@@ -1,5 +1,5 @@
 // @flow
-import IsAuthenticatedProvider from './IsAuthenticatedProvider';
+import AuthProvider from './AuthProvider';
 import React, { type ComponentType } from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
@@ -139,9 +139,9 @@ const app = (
               messages={messages}
               initialNow={initialNow}
             >
-              <IsAuthenticatedProvider isAuthenticated={!!cookie}>
+              <AuthProvider isAuthenticated={!!cookie} userId={userId}>
                 <PageWithHigherOrderComponents data={data} url={url} />
-              </IsAuthenticatedProvider>
+              </AuthProvider>
             </IntlProvider>
           </FelaProvider>
         </ReduxProvider>

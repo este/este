@@ -2,7 +2,6 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type WebListItem_web } from './__generated__/WebListItem_web.graphql';
-import { type WebListItem_viewer } from './__generated__/WebListItem_viewer.graphql';
 import Text from './Text';
 import Box from './Box';
 import { FormattedRelative } from 'react-intl';
@@ -11,6 +10,7 @@ import { DeleteButton } from './buttons';
 import AreYouSureConfirm from './AreYouSureConfirm';
 import withMutation, { getClientMutationId } from './withMutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
+import withAuth, { type AuthContext } from './withAuth';
 
 const DeleteWeb = ({ onPress, disabled }) => (
   <AreYouSureConfirm
@@ -30,7 +30,6 @@ const DeleteWeb = ({ onPress, disabled }) => (
 
 type Props = {
   web: WebListItem_web,
-  viewer: WebListItem_viewer,
   mutate: *,
 };
 
@@ -45,6 +44,8 @@ const initialState = {
 class WebListItem extends React.Component<Props, State> {
   state = initialState;
 
+  context: AuthContext;
+
   handleCompleted = () => {
     this.setState(initialState);
   };
@@ -54,8 +55,9 @@ class WebListItem extends React.Component<Props, State> {
   };
 
   deleteWeb = () => {
-    const { viewer: { user } } = this.props;
-    if (!user) return; // Because user is maybe type.
+    const { userId } = this.context;
+    if (!userId) return;
+
     const variables = {
       input: {
         id: this.props.web.id,
@@ -64,7 +66,7 @@ class WebListItem extends React.Component<Props, State> {
     };
     this.setState({ pending: true });
     this.props.mutate(
-      DeleteWebMutation.commit(user.id),
+      DeleteWebMutation.commit(userId),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -91,6 +93,8 @@ class WebListItem extends React.Component<Props, State> {
   }
 }
 
+withAuth(WebListItem);
+
 const WebListItemWithMutation = withMutation(WebListItem);
 
 export default createFragmentContainer(WebListItemWithMutation, {
@@ -100,13 +104,6 @@ export default createFragmentContainer(WebListItemWithMutation, {
       domain
       id
       name
-    }
-  `,
-  viewer: graphql`
-    fragment WebListItem_viewer on Viewer {
-      user {
-        id
-      }
     }
   `,
 });

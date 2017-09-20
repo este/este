@@ -4,15 +4,13 @@ import sitemap from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
 import app from '../components/app';
-import withIsAuthenticated, {
-  type IsAuthenticatedContext,
-} from '../components/withIsAuthenticated';
+import withAuth, { type AuthContext } from '../components/withAuth';
 import A from '../components/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
 import P from '../components/P';
 
-const Index = ({ intl }, { isAuthenticated }: IsAuthenticatedContext) => (
+const Index = ({ intl }, { isAuthenticated }: AuthContext) => (
   <Page title={intl.formatMessage(sitemap.index.title)}>
     <Heading size={3}>{intl.formatMessage(sitemap.index.title)}</Heading>
     <P>
@@ -37,6 +35,6 @@ const Index = ({ intl }, { isAuthenticated }: IsAuthenticatedContext) => (
   </Page>
 );
 
-withIsAuthenticated(Index);
+withAuth(Index);
 
 export default app(Index);

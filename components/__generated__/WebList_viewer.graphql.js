@@ -167,11 +167,6 @@ const fragment /*: ConcreteFragment*/ = {
         }
       ],
       "storageKey": null
-    },
-    {
-      "kind": "FragmentSpread",
-      "name": "WebListItem_viewer",
-      "args": null
     }
   ],
   "type": "Viewer"

@@ -2,13 +2,17 @@
 import type { ComponentType } from 'react';
 import PropTypes from 'prop-types';
 
-export type IsAuthenticatedContext = { isAuthenticated: boolean };
+export type AuthContext = {
+  isAuthenticated: boolean,
+  userId: ?string,
+};
 
-const withIsAuthenticated = (Component: ComponentType<any>) => {
+const withAuth = (Component: ComponentType<any>) => {
   Component.contextTypes = {
     ...Component.contextTypes,
     isAuthenticated: PropTypes.bool,
+    userId: PropTypes.string,
   };
 };
 
-export default withIsAuthenticated;
+export default withAuth;

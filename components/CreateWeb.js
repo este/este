@@ -10,12 +10,10 @@ import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../lib/validation';
 import ValidationError from './ValidationError';
-import { createFragmentContainer, graphql } from 'react-relay';
-import type { CreateWeb_viewer } from './__generated__/CreateWeb_viewer.graphql';
+import withAuth, { type AuthContext } from './withAuth';
 
 type Props = {
   mutate: *,
-  viewer: CreateWeb_viewer,
 };
 
 type Fields = {
@@ -48,6 +46,8 @@ const initialState = {
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
 
+  context: AuthContext;
+
   handleCompleted = () => {
     this.setState(initialState);
   };
@@ -57,13 +57,14 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
-    const { viewer: { user } } = this.props;
-    if (!user) return; // Because user is maybe type.
+    const { userId } = this.context;
+    if (!userId) return;
+
     const variables = {
       input: {
         domain: '', // Is computed in graph.cool function.
         name: this.state.name.trim(),
-        ownerId: user.id,
+        ownerId: userId,
         clientMutationId: getClientMutationId(),
       },
     };
@@ -81,7 +82,7 @@ class CreateWeb extends React.Component<Props, State> {
 
     this.setState({ pending: true });
     this.props.mutate(
-      CreateWebMutation.commit(user.id),
+      CreateWebMutation.commit(userId),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -116,14 +117,6 @@ class CreateWeb extends React.Component<Props, State> {
   }
 }
 
-const CreateWebWithMutation = withMutation(CreateWeb);
+withAuth(CreateWeb);
 
-export default createFragmentContainer(CreateWebWithMutation, {
-  viewer: graphql`
-    fragment CreateWeb_viewer on Viewer {
-      user {
-        id
-      }
-    }
-  `,
-});
+export default withMutation(CreateWeb);
