@@ -1,4 +1,4 @@
-// flow-typed signature: 952ae40aa9886bd8e1625515ed59a103
+// flow-typed signature: 43044c58a4793e6057bc2f01699e66d1
 // flow-typed version: <<STUB>>/relay-runtime_v^1.2.0/flow_v0.54.0
 
 /**
@@ -38,7 +38,7 @@ declare module 'relay-runtime/lib/commitRelayModernMutation' {
   declare module.exports: any;
 }
 
-declare module 'relay-runtime/lib/ConvertToObserveFunction' {
+declare module 'relay-runtime/lib/ConvertToExecuteFunction' {
   declare module.exports: any;
 }
 
@@ -361,8 +361,8 @@ declare module 'relay-runtime/lib/commitLocalUpdate.js' {
 declare module 'relay-runtime/lib/commitRelayModernMutation.js' {
   declare module.exports: $Exports<'relay-runtime/lib/commitRelayModernMutation'>;
 }
-declare module 'relay-runtime/lib/ConvertToObserveFunction.js' {
-  declare module.exports: $Exports<'relay-runtime/lib/ConvertToObserveFunction'>;
+declare module 'relay-runtime/lib/ConvertToExecuteFunction.js' {
+  declare module.exports: $Exports<'relay-runtime/lib/ConvertToExecuteFunction'>;
 }
 declare module 'relay-runtime/lib/createRelayNetworkLogger.js' {
   declare module.exports: $Exports<'relay-runtime/lib/createRelayNetworkLogger'>;
