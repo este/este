@@ -9,9 +9,7 @@ jobs:
 
       - run: yarn
 
-      # TODO: For some reason, it still does not work with Relay 1.2.0
-      # https://github.com/facebook/relay/issues/1644#issuecomment-315998313
-      - run: yarn test-without-relay
+      - run: yarn test
 
       # TODO: Doesn't work, investigate why.
       # http://macklin.underdown.me/2017/07/27/deploy-to-now-from-circleci
