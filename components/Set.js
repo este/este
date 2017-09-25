@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 // Something like Fieldset, but for any component and with axis and spacing.
 // It's Box with flexDirection, flexWrap, spacing, and default marginBottom.
@@ -29,32 +29,28 @@ const addSpaceBetween = (children, spaceBetween) => {
   return spacedArray;
 };
 
-const Set = (props: SetProps, { theme }: ThemeContext) => {
-  const {
-    children,
-    vertical = false,
-    spaceBetween = vertical
-      ? theme.set.verticalSpaceBetween
-      : theme.set.horizontalSpaceBetween,
-    flexDirection = vertical ? 'column' : 'row',
-    flexWrap = 'wrap',
-    marginBottom = theme.set.marginBottom,
-    ...restProps
-  } = props;
-  return (
-    <Box
-      {...{
-        flexDirection,
-        flexWrap,
-        marginBottom,
-        ...restProps,
-      }}
-    >
-      {spaceBetween === 0 ? children : addSpaceBetween(children, spaceBetween)}
-    </Box>
-  );
-};
+const Set = ({
+  theme,
+  children,
+  vertical = false,
+  spaceBetween = vertical
+    ? theme.set.verticalSpaceBetween
+    : theme.set.horizontalSpaceBetween,
+  flexDirection = vertical ? 'column' : 'row',
+  flexWrap = 'wrap',
+  marginBottom = theme.set.marginBottom,
+  ...props
+}) => (
+  <Box
+    flexDirection={flexDirection}
+    flexWrap={flexWrap}
+    marginBottom={marginBottom}
+    {...props}
+  >
+    {spaceBetween === 0 ? children : addSpaceBetween(children, spaceBetween)}
+  </Box>
+);
 
-withTheme(Set);
+const SetWithTheme: WithTheme<SetProps> = withTheme(Set);
 
-export default Set;
+export default SetWithTheme;

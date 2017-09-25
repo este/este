@@ -1,15 +1,17 @@
 // @flow
-import type { ComponentType } from 'react';
+import React, { type ComponentType } from 'react';
 import type { Theme } from '../themes/types';
-import PropTypes from 'prop-types';
+import { withTheme as felaWithTheme } from 'react-fela';
 
-export type ThemeContext = { theme: Theme };
+// WithTheme is workaround for Flow 0.54.
+// TODO: Rethink it after Flow 0.56 with improved $Diff type. Inference or not?
+export type WithTheme<T> = ComponentType<T>;
 
-const withTheme = (Component: ComponentType<any>) => {
-  Component.contextTypes = {
-    ...Component.contextTypes,
-    theme: PropTypes.object,
-  };
+const withTheme = <Props: {}>(
+  Component: ComponentType<{ theme: Theme } & Props>,
+): ComponentType<Props> => {
+  const ComponentWithTheme = felaWithTheme(Component);
+  return (props: Props) => <ComponentWithTheme {...props} />;
 };
 
 export default withTheme;

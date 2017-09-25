@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from './Button';
 import Set from './Set';
 import SvgIcon from './SvgIcon';
 import Text from './Text';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 export type RadioProps = {
   label?: string,
@@ -14,53 +14,55 @@ export type RadioProps = {
   value: ?string,
 } & ButtonProps;
 
-const Radio = (props: RadioProps, { theme }: ThemeContext) => {
-  const {
-    label,
-    labelOnLeft = false,
-    onChange,
-    select,
-    value,
-    color,
-    marginVertical = 0,
-    paddingHorizontal = 0,
-    paddingVertical = 0,
-    size,
-    ...restProps
-  } = props;
-  const checked = value === select;
-  return (
-    <Button
-      aria-checked={checked}
-      onPress={() => {
-        if (restProps.onPress) restProps.onPress();
-        if (!onChange) return;
-        onChange(select);
-      }}
-      role="radio"
-      size={size}
-      {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
+const Radio = ({
+  theme,
+  label,
+  labelOnLeft = false,
+  onChange,
+  select,
+  value,
+  color,
+  marginVertical = 0,
+  paddingHorizontal = 0,
+  paddingVertical = 0,
+  size,
+  ...props
+}) => (
+  <Button
+    aria-checked={value === select}
+    onPress={() => {
+      if (props.onPress) props.onPress();
+      if (!onChange) return;
+      onChange(select);
+    }}
+    role="radio"
+    size={size}
+    marginVertical={marginVertical}
+    paddingHorizontal={paddingHorizontal}
+    paddingVertical={paddingVertical}
+    {...props}
+  >
+    <Set
+      marginBottom={0}
+      flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
+      justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
     >
-      <Set
-        marginBottom={0}
-        flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
-        justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
-      >
-        {label && (
-          <Text color={color} size={size}>
-            {label}
-          </Text>
-        )}
-        <SvgIcon
-          color={color}
-          size={size}
-          svg={checked ? theme.radio.checkedIcon : theme.radio.uncheckedIcon}
-        />
-      </Set>
-    </Button>
-  );
-};
+      {label && (
+        <Text color={color} size={size}>
+          {label}
+        </Text>
+      )}
+      <SvgIcon
+        color={color}
+        size={size}
+        svg={
+          value === select ? theme.radio.checkedIcon : theme.radio.uncheckedIcon
+        }
+      />
+    </Set>
+  </Button>
+);
 
-withTheme(Radio);
+const RadioWithTheme: WithTheme<RadioProps> = withTheme(Radio);
 
-export default Radio;
+export default RadioWithTheme;

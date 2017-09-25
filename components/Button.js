@@ -2,7 +2,7 @@
 import React from 'react';
 import type { ColorProps } from '../themes/types';
 import Text, { type TextProps } from './Text';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 // Browser button is rendered as div with button role because button element is
 // hard to style consistently in Firefox and maybe elsewhere. Div is just fine.
@@ -11,7 +11,7 @@ const BrowserButton = ({
   disabled,
   onPress,
   style,
-  ...restProps
+  ...props
 }: {
   disabled?: boolean,
   onPress: () => void,
@@ -38,7 +38,7 @@ const BrowserButton = ({
       MozUserSelect: 'none',
       WebkitUserSelect: 'none',
     }}
-    {...restProps}
+    {...props}
   />
 );
 
@@ -49,28 +49,27 @@ export type ButtonProps = ColorProps &
     outline?: boolean,
   };
 
-const Button = (props: ButtonProps, { theme }: ThemeContext) => {
-  const {
-    as = BrowserButton,
-    size = 0,
-    borderRadius = theme.button.borderRadius,
-    // For size < 0, there is no space for a padding.
-    marginVertical = size < 0
-      ? theme.button.marginVertical + theme.button.paddingVertical
-      : theme.button.marginVertical,
-    paddingHorizontal = 1,
-    // For size < 0, there is no space for a padding.
-    paddingVertical = size < 0 ? 0 : theme.button.paddingVertical,
-    outline,
-    ...restProps
-  } = props;
-
+const Button = ({
+  theme,
+  as = BrowserButton,
+  size = 0,
+  borderRadius = theme.button.borderRadius,
+  // For size < 0, there is no space for a padding.
+  marginVertical = size < 0
+    ? theme.button.marginVertical + theme.button.paddingVertical
+    : theme.button.marginVertical,
+  paddingHorizontal = 1,
+  // For size < 0, there is no space for a padding.
+  paddingVertical = size < 0 ? 0 : theme.button.paddingVertical,
+  outline,
+  ...props
+}) => {
   const defaultProps = {};
 
   // <Button primary shorthand.
   const colorName = Object.keys(theme.colors).find(color => props[color]);
   if (colorName) {
-    delete restProps[colorName];
+    delete props[colorName];
     if (outline) {
       defaultProps.borderColor = colorName;
       defaultProps.borderStyle = 'solid';
@@ -89,7 +88,7 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
     }
   }
 
-  if (restProps.disabled) {
+  if (props.disabled) {
     defaultProps.opacity = theme.button.disabledOpacity;
   }
 
@@ -102,11 +101,11 @@ const Button = (props: ButtonProps, { theme }: ThemeContext) => {
       paddingHorizontal={paddingHorizontal}
       paddingVertical={paddingVertical}
       {...defaultProps}
-      {...restProps}
+      {...props}
     />
   );
 };
 
-withTheme(Button);
+const ButtonWithTheme: WithTheme<ButtonProps> = withTheme(Button);
 
-export default Button;
+export default ButtonWithTheme;

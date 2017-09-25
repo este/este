@@ -1,10 +1,9 @@
 // @flow
 import type { Node } from 'react';
 import type { State } from '../types';
-import type { Theme } from '../themes/types';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import withTheme, { type WithTheme } from './withTheme';
 
 // Test vertical rhythm visually. Inspired by basehold.it
 
@@ -12,10 +11,6 @@ type BaselineProps = {|
   baselineShown: boolean,
   children?: Node,
 |};
-
-type BaselineContext = {
-  theme: Theme,
-};
 
 const styles = {
   container: {
@@ -36,10 +31,7 @@ const styles = {
   }),
 };
 
-const Baseline = (
-  { baselineShown, children }: BaselineProps,
-  { theme }: BaselineContext,
-) => (
+const Baseline = ({ theme, baselineShown, children }) => (
   <div style={styles.container}>
     {children}
     {baselineShown && (
@@ -48,10 +40,8 @@ const Baseline = (
   </div>
 );
 
-Baseline.contextTypes = {
-  theme: PropTypes.object,
-};
+const BaselineWithTheme: WithTheme<BaselineProps> = withTheme(Baseline);
 
 export default connect((state: State) => ({
   baselineShown: state.app.baselineShown,
-}))(Baseline);
+}))(BaselineWithTheme);

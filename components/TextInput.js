@@ -4,7 +4,7 @@ import Box from './Box';
 import Set from './Set';
 import Text, { type TextProps } from './Text';
 import colorLib from 'color';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check TextInputBig.
@@ -24,19 +24,19 @@ const computePlaceholderTextColor = (colors, color) =>
     .fade(0.5)
     .toString();
 
-const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
-  const {
-    color = theme.text.color,
-    error,
-    label,
-    onChange,
-    onSubmitEditing,
-    size = 0,
-    style,
-    ...restProps
-  } = props;
-
-  const reactNativeEmulation = restProps.isReactNative
+const TextInput = ({
+  theme,
+  color = theme.text.color,
+  error,
+  label,
+  onChange,
+  onSubmitEditing,
+  size = 0,
+  style,
+  isReactNative,
+  ...props
+}) => {
+  const reactNativeEmulation = isReactNative
     ? null
     : {
         '::placeholder': {
@@ -72,22 +72,24 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
         size={size}
         {...(onChange
           ? {
-              onChange: (e: { currentTarget: HTMLInputElement }) =>
-                onChange(e.currentTarget.value),
+              onChange: (e: { currentTarget: HTMLInputElement }) => {
+                if (!onChange) return;
+                onChange(e.currentTarget.value);
+              },
             }
           : null)}
         {...(onSubmitEditing
           ? {
               onKeyDown: (e: SyntheticKeyboardEvent<>) => {
-                if (e.key !== 'Enter') return;
+                if (e.key !== 'Enter' || !onSubmitEditing) return;
                 onSubmitEditing();
               },
             }
           : null)}
-        {...(restProps.disabled
+        {...(props.disabled
           ? { opacity: theme.textInput.disabledOpacity }
           : null)}
-        {...restProps}
+        {...props}
         style={{
           ...reactNativeEmulation,
           ...style,
@@ -97,6 +99,6 @@ const TextInput = (props: TextInputProps, { theme }: ThemeContext) => {
   );
 };
 
-withTheme(TextInput);
+const TextInputWithTheme: WithTheme<TextInputProps> = withTheme(TextInput);
 
-export default TextInput;
+export default TextInputWithTheme;

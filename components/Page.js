@@ -52,15 +52,11 @@ const PageFooter = () => (
   </Text>
 );
 
-// Because context is like dependency injection.
-// https://facebook.github.io/react/docs/context.html#updating-context
-const forceRenderOnThemeChange = theme => ({ key: JSON.stringify(theme) });
-
 const Page = ({ children, darkEnabled, title }) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
-    <ThemeProvider theme={theme} {...forceRenderOnThemeChange(theme)}>
+    <ThemeProvider theme={theme}>
       <Baseline>
         <Head>
           <title>{title}</title>

@@ -3,7 +3,7 @@ import type { ColorName } from '../themes/types';
 import React, { type Node, type ElementType } from 'react';
 import AutoFocus from './AutoFocus';
 import PropTypes from 'prop-types';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.
@@ -124,7 +124,7 @@ export type BoxProps = {
 
 type BoxContext = {
   renderer: { renderRule: (rule: () => Object) => string },
-} & ThemeContext;
+};
 
 // Emulate React Native to ensure the same styles for all platforms.
 // https://facebook.github.io/yoga
@@ -182,12 +182,14 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-const Box = (props: BoxProps, { renderer, theme }: BoxContext) => {
+const Box = (props, { renderer }: BoxContext) => {
   const {
     as,
     autoFocus,
     isReactNative,
     style,
+
+    theme,
 
     margin,
     marginHorizontal = margin,
@@ -327,6 +329,6 @@ Box.contextTypes = {
   renderer: PropTypes.object,
 };
 
-withTheme(Box);
+const BoxWithTheme: WithTheme<BoxProps> = withTheme(Box);
 
-export default Box;
+export default BoxWithTheme;

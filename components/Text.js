@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import colorLib from 'color';
 import type { ColorName, Theme } from '../themes/types';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 /*
   Text is the basic UI primitive for all text components.
@@ -16,7 +16,7 @@ import withTheme, { type ThemeContext } from './withTheme';
   Text inherits its styles.
   https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
 
-  Text styles are restricted to work with React Native, but we can set any
+  Text styles are restricted to React Native Text styles, but we can set any
   browser style via style property directly.
 */
 
@@ -81,7 +81,8 @@ const emulateReactNative = (theme, style, backgroundColor) => ({
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
-class Text extends React.Component<TextProps> {
+// TODO: * does not work for HOCed class via ComponentType. Check with Flow 56.
+class Text extends React.Component<{ theme: Theme } & TextProps> {
   static childContextTypes = {
     hasParentEsteText: PropTypes.bool.isRequired,
   };
@@ -95,11 +96,12 @@ class Text extends React.Component<TextProps> {
     return { hasParentEsteText: true };
   }
 
-  context: { hasParentEsteText: boolean } & ThemeContext;
+  context: { hasParentEsteText: boolean };
 
   render() {
-    const { theme, hasParentEsteText } = this.context;
+    const { hasParentEsteText } = this.context;
     const {
+      theme,
       align = 'left',
       bold = false,
       color = theme.text.color,
@@ -108,7 +110,7 @@ class Text extends React.Component<TextProps> {
       italic = false,
       lineHeight,
       size = 0,
-      ...restProps
+      ...props
     } = this.props;
 
     // Set all styles to ensure styles are isolated.
@@ -121,7 +123,7 @@ class Text extends React.Component<TextProps> {
       textDecoration: decoration,
       fontStyle: italic ? 'italic' : 'normal',
       ...(lineHeight != null ? { lineHeight } : null),
-      ...restProps.style,
+      ...props.style,
     };
 
     // Enforce inheritance in a browser. All props are inherited by default.
@@ -137,14 +139,14 @@ class Text extends React.Component<TextProps> {
       if (this.props.italic == null) delete style.fontStyle;
     }
 
-    if (!restProps.isReactNative) {
-      style = emulateReactNative(theme, style, restProps.backgroundColor);
+    if (!props.isReactNative) {
+      style = emulateReactNative(theme, style, props.backgroundColor);
     }
 
-    return <Box {...restProps} style={style} />;
+    return <Box {...props} style={style} />;
   }
 }
 
-withTheme(Text);
+const TextWithTheme: WithTheme<TextProps> = withTheme(Text);
 
-export default Text;
+export default TextWithTheme;

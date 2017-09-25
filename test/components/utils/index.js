@@ -1,24 +1,24 @@
 // @flow
 import React from 'react';
 import testRenderer from 'react-test-renderer';
-import { Provider as FelaProvider, ThemeProvider } from 'react-fela';
-import { createRenderer as createFelaRenderer } from 'fela';
+import { Provider, ThemeProvider } from 'react-fela';
+import { createRenderer } from 'fela';
+import { renderToString } from 'fela-tools';
 
 const prettifyFelaString = str => str.replace(/\.[a-z]+/g, '\n    $&');
 
 export const createTestRenderer = (theme: any) => (Component: any) => {
-  const felaRenderer = createFelaRenderer();
+  const renderer = createRenderer();
   const component = testRenderer.create(
-    <FelaProvider renderer={felaRenderer}>
+    <Provider renderer={renderer}>
       <ThemeProvider theme={theme}>
         <Component />
       </ThemeProvider>
-    </FelaProvider>,
+    </Provider>,
   );
-  return {
-    fela: prettifyFelaString(felaRenderer.renderToString()),
-    component: component.toJSON(),
-  };
+  const fela = prettifyFelaString(renderToString(renderer));
+  renderer.clear();
+  return { fela, component: component.toJSON() };
 };
 
 export const createExpectRender = (theme: any) => {

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
 const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) => (
@@ -24,23 +24,16 @@ type FormProps = {
   onSubmit?: () => any,
 } & BoxProps;
 
-const Form = (props: FormProps, { theme }: ThemeContext) => {
-  const {
-    as = BrowserForm,
-    marginBottom = theme.form.marginBottom,
-    maxWidth = theme.form.maxWidth,
-    ...restProps
-  } = props;
-  return (
-    <Box
-      as={as}
-      marginBottom={marginBottom}
-      maxWidth={maxWidth}
-      {...restProps}
-    />
-  );
-};
+const Form = ({
+  theme,
+  as = BrowserForm,
+  marginBottom = theme.form.marginBottom,
+  maxWidth = theme.form.maxWidth,
+  ...props
+}) => (
+  <Box as={as} marginBottom={marginBottom} maxWidth={maxWidth} {...props} />
+);
 
-withTheme(Form);
+const FormWithTheme: WithTheme<FormProps> = withTheme(Form);
 
-export default Form;
+export default FormWithTheme;

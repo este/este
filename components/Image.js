@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 // For UI images, use size prop to enforce size and vertical rhythm.
 // For responsive content images like photos, use relative % width.
@@ -32,17 +32,14 @@ const verticalRhythmSize = ({ height, width }, lineHeight) => {
   };
 };
 
-const Image = (props: ImageProps, { theme }: ThemeContext) => {
-  const { as = 'img', size, ...restProps } = props;
-  return (
-    <Box
-      as={as}
-      {...(size ? verticalRhythmSize(size, theme.typography.lineHeight) : null)}
-      {...restProps}
-    />
-  );
-};
+const Image = ({ theme, as = 'img', size, ...props }) => (
+  <Box
+    as={as}
+    {...(size ? verticalRhythmSize(size, theme.typography.lineHeight) : null)}
+    {...props}
+  />
+);
 
-withTheme(Image);
+const ImageWithTheme: WithTheme<ImageProps> = withTheme(Image);
 
-export default Image;
+export default ImageWithTheme;

@@ -4,6 +4,7 @@
   "engines": {
     "node": ">= 8.0.0"
   },
+  "license": "MIT",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -30,10 +31,10 @@
     "cookie": "^0.3.1",
     "cross-env": "^5.0.1",
     "diacritics-map": "^0.1.0",
-    "fela": "5.2.0",
-    "fela-dom": "5.0.8",
-    "fela-plugin-placeholder-prefixer": "5.0.7",
-    "fela-preset-web": "5.0.8",
+    "fela": "^6.0.0",
+    "fela-dom": "^6.0.0",
+    "fela-plugin-placeholder-prefixer": "^5.0.8",
+    "fela-preset-web": "^5.0.9",
     "glob": "^7.1.2",
     "gravatar": "^1.6.0",
     "intl": "^1.2.5",
@@ -46,7 +47,7 @@
     "raven-js": "^3.17.0",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
-    "react-fela": "5.3.0",
+    "react-fela": "^6.0.0",
     "react-intl": "^2.3.0",
     "react-redux": "^5.0.3",
     "react-relay": "^1.2.0",

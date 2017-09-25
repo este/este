@@ -1,25 +1,25 @@
 // @flow
 import React from 'react';
 import Text, { type TextProps } from './Text';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
-const Heading = (props: TextProps, { theme }: ThemeContext) => {
-  const {
-    bold = true,
-    fontFamily = theme.heading.fontFamily,
-    marginBottom = theme.heading.marginBottom,
-    ...restProps
-  } = props;
-  return (
-    <Text
-      bold={bold}
-      fontFamily={fontFamily}
-      marginBottom={marginBottom}
-      {...restProps}
-    />
-  );
-};
+type HeadingProps = TextProps;
 
-withTheme(Heading);
+const Heading = ({
+  theme,
+  bold = true,
+  fontFamily = theme.heading.fontFamily,
+  marginBottom = theme.heading.marginBottom,
+  ...props
+}) => (
+  <Text
+    bold={bold}
+    fontFamily={fontFamily}
+    marginBottom={marginBottom}
+    {...props}
+  />
+);
 
-export default Heading;
+const HeadingWithTheme: WithTheme<HeadingProps> = withTheme(Heading);
+
+export default HeadingWithTheme;

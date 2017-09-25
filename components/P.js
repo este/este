@@ -1,19 +1,17 @@
 // @flow
 import React from 'react';
 import Text, { type TextProps } from './Text';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
-const P = (props: TextProps, { theme }: ThemeContext) => {
-  const {
-    marginBottom = theme.p.marginBottom,
-    maxWidth = theme.p.maxWidth,
-    ...restProps
-  } = props;
-  return (
-    <Text marginBottom={marginBottom} maxWidth={maxWidth} {...restProps} />
-  );
-};
+type PProps = TextProps;
 
-withTheme(P);
+const P = ({
+  theme,
+  marginBottom = theme.p.marginBottom,
+  maxWidth = theme.p.maxWidth,
+  ...props
+}) => <Text marginBottom={marginBottom} maxWidth={maxWidth} {...props} />;
 
-export default P;
+const PWithTheme: WithTheme<PProps> = withTheme(P);
+
+export default PWithTheme;

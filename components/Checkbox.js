@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from './Button';
 import Set from './Set';
 import SvgIcon from './SvgIcon';
 import Text from './Text';
-import withTheme, { type ThemeContext } from './withTheme';
+import withTheme, { type WithTheme } from './withTheme';
 
 export type CheckboxProps = {
   label?: string,
@@ -13,54 +13,53 @@ export type CheckboxProps = {
   value: boolean,
 } & ButtonProps;
 
-const Checkbox = (props: CheckboxProps, { theme }: ThemeContext) => {
-  const {
-    label,
-    labelOnLeft = false,
-    onChange,
-    value,
-    color,
-    marginVertical = 0,
-    onPress,
-    paddingHorizontal = 0,
-    paddingVertical = 0,
-    size,
-    ...restProps
-  } = props;
-  return (
-    <Button
-      aria-checked={value}
-      onPress={() => {
-        if (onPress) onPress();
-        if (!onChange) return;
-        onChange(!value);
-      }}
-      role="checkbox"
-      size={size}
-      {...{ marginVertical, paddingHorizontal, paddingVertical, ...restProps }}
+const Checkbox = ({
+  theme,
+  label,
+  labelOnLeft = false,
+  onChange,
+  value,
+  color,
+  marginVertical = 0,
+  onPress,
+  paddingHorizontal = 0,
+  paddingVertical = 0,
+  size,
+  ...props
+}) => (
+  <Button
+    aria-checked={value}
+    onPress={() => {
+      if (onPress) onPress();
+      if (!onChange) return;
+      onChange(!value);
+    }}
+    role="checkbox"
+    size={size}
+    marginVertical={marginVertical}
+    paddingHorizontal={paddingHorizontal}
+    paddingVertical={paddingVertical}
+    {...props}
+  >
+    <Set
+      marginBottom={0}
+      flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
+      justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
     >
-      <Set
-        marginBottom={0}
-        flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
-        justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
-      >
-        {label && (
-          <Text color={color} size={size}>
-            {label}
-          </Text>
-        )}
-        <SvgIcon
-          color={color}
-          size={size}
-          svg={
-            value ? theme.checkbox.checkedIcon : theme.checkbox.uncheckedIcon
-          }
-        />
-      </Set>
-    </Button>
-  );
-};
+      {label && (
+        <Text color={color} size={size}>
+          {label}
+        </Text>
+      )}
+      <SvgIcon
+        color={color}
+        size={size}
+        svg={value ? theme.checkbox.checkedIcon : theme.checkbox.uncheckedIcon}
+      />
+    </Set>
+  </Button>
+);
 
-withTheme(Checkbox);
+const CheckBoxWithTheme: WithTheme<CheckboxProps> = withTheme(Checkbox);
 
-export default Checkbox;
+export default CheckBoxWithTheme;
