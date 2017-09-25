@@ -1,4 +1,4 @@
-// flow-typed signature: 352b7bee0297eb04d66adab1db942629
+// flow-typed signature: 7157fd2eaafd3f6b9c50da1c1ce465b4
 // flow-typed version: <<STUB>>/react-relay_v^1.2.0/flow_v0.54.0
 
 /**
@@ -622,6 +622,10 @@ declare module 'react-relay/lib/RelayShallowMock' {
   declare module.exports: any;
 }
 
+declare module 'react-relay/lib/RelayStaticContainer' {
+  declare module.exports: any;
+}
+
 declare module 'react-relay/lib/RelayStore' {
   declare module.exports: any;
 }
@@ -1194,6 +1198,9 @@ declare module 'react-relay/lib/RelaySelector.js' {
 }
 declare module 'react-relay/lib/RelayShallowMock.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayShallowMock'>;
+}
+declare module 'react-relay/lib/RelayStaticContainer.js' {
+  declare module.exports: $Exports<'react-relay/lib/RelayStaticContainer'>;
 }
 declare module 'react-relay/lib/RelayStore.js' {
   declare module.exports: $Exports<'react-relay/lib/RelayStore'>;

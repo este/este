@@ -1,4 +1,4 @@
-// flow-typed signature: d612cdb9e8508c47b799eadf5632a666
+// flow-typed signature: e0153184c0097aec8d17b03e062fdef1
 // flow-typed version: <<STUB>>/relay-compiler_v^1.2.0/flow_v0.54.0
 
 /**
@@ -26,6 +26,10 @@ declare module 'relay-compiler/lib/areEqualOSS' {
   declare module.exports: any;
 }
 
+declare module 'relay-compiler/lib/ASTCache' {
+  declare module.exports: any;
+}
+
 declare module 'relay-compiler/lib/ASTConvert' {
   declare module.exports: any;
 }
@@ -35,6 +39,18 @@ declare module 'relay-compiler/lib/AutoAliasTransform' {
 }
 
 declare module 'relay-compiler/lib/CodegenDirectory' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/CodegenRunner' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/CodegenTypes' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/CodegenWatcher' {
   declare module.exports: any;
 }
 
@@ -50,7 +66,7 @@ declare module 'relay-compiler/lib/DefaultHandleKey' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/FileParser' {
+declare module 'relay-compiler/lib/DotGraphQLParser' {
   declare module.exports: any;
 }
 
@@ -66,6 +82,10 @@ declare module 'relay-compiler/lib/FindGraphQLTags' {
   declare module.exports: any;
 }
 
+declare module 'relay-compiler/lib/FlattenTransform' {
+  declare module.exports: any;
+}
+
 declare module 'relay-compiler/lib/formatGeneratedModule' {
   declare module.exports: any;
 }
@@ -74,11 +94,15 @@ declare module 'relay-compiler/lib/formatStorageKey' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/getIdentifierForRelayArgumentValue' {
+declare module 'relay-compiler/lib/getIdentifierForArgumentValue' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/getIdentifierForRelaySelection' {
+declare module 'relay-compiler/lib/getIdentifierForSelection' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/getLiteralArgumentValues' {
   declare module.exports: any;
 }
 
@@ -90,7 +114,11 @@ declare module 'relay-compiler/lib/getRelayHandleKey' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/getRelayLiteralArgumentValues' {
+declare module 'relay-compiler/lib/GraphQLCompiler' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLCompilerContext' {
   declare module.exports: any;
 }
 
@@ -98,7 +126,23 @@ declare module 'relay-compiler/lib/GraphQLCompilerPublic' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/GraphQLFileParser' {
+declare module 'relay-compiler/lib/GraphQLCompilerUserError' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLConsoleReporter' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLIR' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLIRPrinter' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLIRTransformer' {
   declare module.exports: any;
 }
 
@@ -106,15 +150,31 @@ declare module 'relay-compiler/lib/GraphQLIRTransforms' {
   declare module.exports: any;
 }
 
+declare module 'relay-compiler/lib/GraphQLIRVisitor' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLMultiReporter' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLParser' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/GraphQLReporter' {
+  declare module.exports: any;
+}
+
 declare module 'relay-compiler/lib/GraphQLSchemaUtils' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/GraphQLTextParser' {
+declare module 'relay-compiler/lib/GraphQLValidator' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/GraphQLValidator' {
+declare module 'relay-compiler/lib/GraphQLWatchmanClient' {
   declare module.exports: any;
 }
 
@@ -146,10 +206,6 @@ declare module 'relay-compiler/lib/prettyStringify' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/printFlowTypes' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/recycleNodesInto' {
   declare module.exports: any;
 }
@@ -159,18 +215,6 @@ declare module 'relay-compiler/lib/RelayApplyFragmentArgumentTransform' {
 }
 
 declare module 'relay-compiler/lib/RelayCodeGenerator' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayCodegenRunner' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayCodegenTypes' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayCodegenWatcher' {
   declare module.exports: any;
 }
 
@@ -190,19 +234,11 @@ declare module 'relay-compiler/lib/RelayCompilerCache' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayCompilerContext' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayCompilerPublic' {
   declare module.exports: any;
 }
 
 declare module 'relay-compiler/lib/RelayCompilerScope' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayCompilerUserError' {
   declare module.exports: any;
 }
 
@@ -218,10 +254,6 @@ declare module 'relay-compiler/lib/RelayConnectionTransform' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayConsoleReporter' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayDefaultHandleKey' {
   declare module.exports: any;
 }
@@ -234,15 +266,11 @@ declare module 'relay-compiler/lib/RelayFieldHandleTransform' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayFileIRParser' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayFileWriter' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayFlattenTransform' {
+declare module 'relay-compiler/lib/RelayFlowBabelFactories' {
   declare module.exports: any;
 }
 
@@ -250,11 +278,15 @@ declare module 'relay-compiler/lib/RelayFlowGenerator' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayFlowParser' {
+declare module 'relay-compiler/lib/RelayFlowTypeTransformers' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayGenerateRequisiteFieldsTransform' {
+declare module 'relay-compiler/lib/RelayGenerateIDFieldTransform' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/RelayGenerateTypeNameTransform' {
   declare module.exports: any;
 }
 
@@ -266,19 +298,11 @@ declare module 'relay-compiler/lib/RelayInternalTypes' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayIR' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayIRTransformer' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayIRTransforms' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayIRVisitor' {
+declare module 'relay-compiler/lib/RelayJSModuleParser' {
   declare module.exports: any;
 }
 
@@ -290,19 +314,11 @@ declare module 'relay-compiler/lib/RelayMockRenderer' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/RelayMultiReporter' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/RelayNetworkDebug' {
   declare module.exports: any;
 }
 
 declare module 'relay-compiler/lib/RelayParser' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayPrinter' {
   declare module.exports: any;
 }
 
@@ -315,10 +331,6 @@ declare module 'relay-compiler/lib/RelayQueryCaching' {
 }
 
 declare module 'relay-compiler/lib/RelayRelayDirectiveTransform' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayReporter' {
   declare module.exports: any;
 }
 
@@ -335,6 +347,10 @@ declare module 'relay-compiler/lib/RelayTaskQueue' {
 }
 
 declare module 'relay-compiler/lib/RelayTestSchema' {
+  declare module.exports: any;
+}
+
+declare module 'relay-compiler/lib/RelayTransformUtils' {
   declare module.exports: any;
 }
 
@@ -355,10 +371,6 @@ declare module 'relay-compiler/lib/RelayValidator' {
 }
 
 declare module 'relay-compiler/lib/RelayViewerHandleTransform' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/RelayWatchmanClient' {
   declare module.exports: any;
 }
 
@@ -398,14 +410,6 @@ declare module 'relay-compiler/lib/throwFailedPromise' {
   declare module.exports: any;
 }
 
-declare module 'relay-compiler/lib/transformInputObjectToIR' {
-  declare module.exports: any;
-}
-
-declare module 'relay-compiler/lib/writeLegacyFlowFile' {
-  declare module.exports: any;
-}
-
 declare module 'relay-compiler/lib/writeRelayGeneratedFile' {
   declare module.exports: any;
 }
@@ -428,6 +432,9 @@ declare module 'relay-compiler/index.js' {
 declare module 'relay-compiler/lib/areEqualOSS.js' {
   declare module.exports: $Exports<'relay-compiler/lib/areEqualOSS'>;
 }
+declare module 'relay-compiler/lib/ASTCache.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/ASTCache'>;
+}
 declare module 'relay-compiler/lib/ASTConvert.js' {
   declare module.exports: $Exports<'relay-compiler/lib/ASTConvert'>;
 }
@@ -436,6 +443,15 @@ declare module 'relay-compiler/lib/AutoAliasTransform.js' {
 }
 declare module 'relay-compiler/lib/CodegenDirectory.js' {
   declare module.exports: $Exports<'relay-compiler/lib/CodegenDirectory'>;
+}
+declare module 'relay-compiler/lib/CodegenRunner.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/CodegenRunner'>;
+}
+declare module 'relay-compiler/lib/CodegenTypes.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/CodegenTypes'>;
+}
+declare module 'relay-compiler/lib/CodegenWatcher.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/CodegenWatcher'>;
 }
 declare module 'relay-compiler/lib/dedent.js' {
   declare module.exports: $Exports<'relay-compiler/lib/dedent'>;
@@ -446,8 +462,8 @@ declare module 'relay-compiler/lib/deepFreeze.js' {
 declare module 'relay-compiler/lib/DefaultHandleKey.js' {
   declare module.exports: $Exports<'relay-compiler/lib/DefaultHandleKey'>;
 }
-declare module 'relay-compiler/lib/FileParser.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/FileParser'>;
+declare module 'relay-compiler/lib/DotGraphQLParser.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/DotGraphQLParser'>;
 }
 declare module 'relay-compiler/lib/filterContextForNode.js' {
   declare module.exports: $Exports<'relay-compiler/lib/filterContextForNode'>;
@@ -458,17 +474,23 @@ declare module 'relay-compiler/lib/FilterDirectivesTransform.js' {
 declare module 'relay-compiler/lib/FindGraphQLTags.js' {
   declare module.exports: $Exports<'relay-compiler/lib/FindGraphQLTags'>;
 }
+declare module 'relay-compiler/lib/FlattenTransform.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/FlattenTransform'>;
+}
 declare module 'relay-compiler/lib/formatGeneratedModule.js' {
   declare module.exports: $Exports<'relay-compiler/lib/formatGeneratedModule'>;
 }
 declare module 'relay-compiler/lib/formatStorageKey.js' {
   declare module.exports: $Exports<'relay-compiler/lib/formatStorageKey'>;
 }
-declare module 'relay-compiler/lib/getIdentifierForRelayArgumentValue.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/getIdentifierForRelayArgumentValue'>;
+declare module 'relay-compiler/lib/getIdentifierForArgumentValue.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/getIdentifierForArgumentValue'>;
 }
-declare module 'relay-compiler/lib/getIdentifierForRelaySelection.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/getIdentifierForRelaySelection'>;
+declare module 'relay-compiler/lib/getIdentifierForSelection.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/getIdentifierForSelection'>;
+}
+declare module 'relay-compiler/lib/getLiteralArgumentValues.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/getLiteralArgumentValues'>;
 }
 declare module 'relay-compiler/lib/getModuleName.js' {
   declare module.exports: $Exports<'relay-compiler/lib/getModuleName'>;
@@ -476,26 +498,53 @@ declare module 'relay-compiler/lib/getModuleName.js' {
 declare module 'relay-compiler/lib/getRelayHandleKey.js' {
   declare module.exports: $Exports<'relay-compiler/lib/getRelayHandleKey'>;
 }
-declare module 'relay-compiler/lib/getRelayLiteralArgumentValues.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/getRelayLiteralArgumentValues'>;
+declare module 'relay-compiler/lib/GraphQLCompiler.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLCompiler'>;
+}
+declare module 'relay-compiler/lib/GraphQLCompilerContext.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLCompilerContext'>;
 }
 declare module 'relay-compiler/lib/GraphQLCompilerPublic.js' {
   declare module.exports: $Exports<'relay-compiler/lib/GraphQLCompilerPublic'>;
 }
-declare module 'relay-compiler/lib/GraphQLFileParser.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/GraphQLFileParser'>;
+declare module 'relay-compiler/lib/GraphQLCompilerUserError.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLCompilerUserError'>;
+}
+declare module 'relay-compiler/lib/GraphQLConsoleReporter.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLConsoleReporter'>;
+}
+declare module 'relay-compiler/lib/GraphQLIR.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLIR'>;
+}
+declare module 'relay-compiler/lib/GraphQLIRPrinter.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLIRPrinter'>;
+}
+declare module 'relay-compiler/lib/GraphQLIRTransformer.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLIRTransformer'>;
 }
 declare module 'relay-compiler/lib/GraphQLIRTransforms.js' {
   declare module.exports: $Exports<'relay-compiler/lib/GraphQLIRTransforms'>;
 }
+declare module 'relay-compiler/lib/GraphQLIRVisitor.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLIRVisitor'>;
+}
+declare module 'relay-compiler/lib/GraphQLMultiReporter.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLMultiReporter'>;
+}
+declare module 'relay-compiler/lib/GraphQLParser.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLParser'>;
+}
+declare module 'relay-compiler/lib/GraphQLReporter.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLReporter'>;
+}
 declare module 'relay-compiler/lib/GraphQLSchemaUtils.js' {
   declare module.exports: $Exports<'relay-compiler/lib/GraphQLSchemaUtils'>;
 }
-declare module 'relay-compiler/lib/GraphQLTextParser.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/GraphQLTextParser'>;
-}
 declare module 'relay-compiler/lib/GraphQLValidator.js' {
   declare module.exports: $Exports<'relay-compiler/lib/GraphQLValidator'>;
+}
+declare module 'relay-compiler/lib/GraphQLWatchmanClient.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/GraphQLWatchmanClient'>;
 }
 declare module 'relay-compiler/lib/isCompatibleRelayFragmentType.js' {
   declare module.exports: $Exports<'relay-compiler/lib/isCompatibleRelayFragmentType'>;
@@ -518,9 +567,6 @@ declare module 'relay-compiler/lib/parseGraphQLText.js' {
 declare module 'relay-compiler/lib/prettyStringify.js' {
   declare module.exports: $Exports<'relay-compiler/lib/prettyStringify'>;
 }
-declare module 'relay-compiler/lib/printFlowTypes.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/printFlowTypes'>;
-}
 declare module 'relay-compiler/lib/recycleNodesInto.js' {
   declare module.exports: $Exports<'relay-compiler/lib/recycleNodesInto'>;
 }
@@ -529,15 +575,6 @@ declare module 'relay-compiler/lib/RelayApplyFragmentArgumentTransform.js' {
 }
 declare module 'relay-compiler/lib/RelayCodeGenerator.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayCodeGenerator'>;
-}
-declare module 'relay-compiler/lib/RelayCodegenRunner.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayCodegenRunner'>;
-}
-declare module 'relay-compiler/lib/RelayCodegenTypes.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayCodegenTypes'>;
-}
-declare module 'relay-compiler/lib/RelayCodegenWatcher.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayCodegenWatcher'>;
 }
 declare module 'relay-compiler/lib/RelayCompiledTypes.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayCompiledTypes'>;
@@ -551,17 +588,11 @@ declare module 'relay-compiler/lib/RelayCompilerBin.js' {
 declare module 'relay-compiler/lib/RelayCompilerCache.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayCompilerCache'>;
 }
-declare module 'relay-compiler/lib/RelayCompilerContext.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayCompilerContext'>;
-}
 declare module 'relay-compiler/lib/RelayCompilerPublic.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayCompilerPublic'>;
 }
 declare module 'relay-compiler/lib/RelayCompilerScope.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayCompilerScope'>;
-}
-declare module 'relay-compiler/lib/RelayCompilerUserError.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayCompilerUserError'>;
 }
 declare module 'relay-compiler/lib/RelayConcreteNode.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayConcreteNode'>;
@@ -572,9 +603,6 @@ declare module 'relay-compiler/lib/RelayConnectionConstants.js' {
 declare module 'relay-compiler/lib/RelayConnectionTransform.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayConnectionTransform'>;
 }
-declare module 'relay-compiler/lib/RelayConsoleReporter.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayConsoleReporter'>;
-}
 declare module 'relay-compiler/lib/RelayDefaultHandleKey.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayDefaultHandleKey'>;
 }
@@ -584,23 +612,23 @@ declare module 'relay-compiler/lib/RelayError.js' {
 declare module 'relay-compiler/lib/RelayFieldHandleTransform.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayFieldHandleTransform'>;
 }
-declare module 'relay-compiler/lib/RelayFileIRParser.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayFileIRParser'>;
-}
 declare module 'relay-compiler/lib/RelayFileWriter.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayFileWriter'>;
 }
-declare module 'relay-compiler/lib/RelayFlattenTransform.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayFlattenTransform'>;
+declare module 'relay-compiler/lib/RelayFlowBabelFactories.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayFlowBabelFactories'>;
 }
 declare module 'relay-compiler/lib/RelayFlowGenerator.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayFlowGenerator'>;
 }
-declare module 'relay-compiler/lib/RelayFlowParser.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayFlowParser'>;
+declare module 'relay-compiler/lib/RelayFlowTypeTransformers.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayFlowTypeTransformers'>;
 }
-declare module 'relay-compiler/lib/RelayGenerateRequisiteFieldsTransform.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayGenerateRequisiteFieldsTransform'>;
+declare module 'relay-compiler/lib/RelayGenerateIDFieldTransform.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayGenerateIDFieldTransform'>;
+}
+declare module 'relay-compiler/lib/RelayGenerateTypeNameTransform.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayGenerateTypeNameTransform'>;
 }
 declare module 'relay-compiler/lib/RelayInternals.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayInternals'>;
@@ -608,17 +636,11 @@ declare module 'relay-compiler/lib/RelayInternals.js' {
 declare module 'relay-compiler/lib/RelayInternalTypes.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayInternalTypes'>;
 }
-declare module 'relay-compiler/lib/RelayIR.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayIR'>;
-}
-declare module 'relay-compiler/lib/RelayIRTransformer.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayIRTransformer'>;
-}
 declare module 'relay-compiler/lib/RelayIRTransforms.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayIRTransforms'>;
 }
-declare module 'relay-compiler/lib/RelayIRVisitor.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayIRVisitor'>;
+declare module 'relay-compiler/lib/RelayJSModuleParser.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayJSModuleParser'>;
 }
 declare module 'relay-compiler/lib/RelayMetricsRecorder.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayMetricsRecorder'>;
@@ -626,17 +648,11 @@ declare module 'relay-compiler/lib/RelayMetricsRecorder.js' {
 declare module 'relay-compiler/lib/RelayMockRenderer.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayMockRenderer'>;
 }
-declare module 'relay-compiler/lib/RelayMultiReporter.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayMultiReporter'>;
-}
 declare module 'relay-compiler/lib/RelayNetworkDebug.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayNetworkDebug'>;
 }
 declare module 'relay-compiler/lib/RelayParser.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayParser'>;
-}
-declare module 'relay-compiler/lib/RelayPrinter.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayPrinter'>;
 }
 declare module 'relay-compiler/lib/RelayProfiler.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayProfiler'>;
@@ -646,9 +662,6 @@ declare module 'relay-compiler/lib/RelayQueryCaching.js' {
 }
 declare module 'relay-compiler/lib/RelayRelayDirectiveTransform.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayRelayDirectiveTransform'>;
-}
-declare module 'relay-compiler/lib/RelayReporter.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayReporter'>;
 }
 declare module 'relay-compiler/lib/RelayShallowMock.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayShallowMock'>;
@@ -661,6 +674,9 @@ declare module 'relay-compiler/lib/RelayTaskQueue.js' {
 }
 declare module 'relay-compiler/lib/RelayTestSchema.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayTestSchema'>;
+}
+declare module 'relay-compiler/lib/RelayTransformUtils.js' {
+  declare module.exports: $Exports<'relay-compiler/lib/RelayTransformUtils'>;
 }
 declare module 'relay-compiler/lib/RelayTypes.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayTypes'>;
@@ -676,9 +692,6 @@ declare module 'relay-compiler/lib/RelayValidator.js' {
 }
 declare module 'relay-compiler/lib/RelayViewerHandleTransform.js' {
   declare module.exports: $Exports<'relay-compiler/lib/RelayViewerHandleTransform'>;
-}
-declare module 'relay-compiler/lib/RelayWatchmanClient.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/RelayWatchmanClient'>;
 }
 declare module 'relay-compiler/lib/simpleClone.js' {
   declare module.exports: $Exports<'relay-compiler/lib/simpleClone'>;
@@ -706,12 +719,6 @@ declare module 'relay-compiler/lib/testEditDistance.js' {
 }
 declare module 'relay-compiler/lib/throwFailedPromise.js' {
   declare module.exports: $Exports<'relay-compiler/lib/throwFailedPromise'>;
-}
-declare module 'relay-compiler/lib/transformInputObjectToIR.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/transformInputObjectToIR'>;
-}
-declare module 'relay-compiler/lib/writeLegacyFlowFile.js' {
-  declare module.exports: $Exports<'relay-compiler/lib/writeLegacyFlowFile'>;
 }
 declare module 'relay-compiler/lib/writeRelayGeneratedFile.js' {
   declare module.exports: $Exports<'relay-compiler/lib/writeRelayGeneratedFile'>;
