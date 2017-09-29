@@ -3,6 +3,9 @@
   "extensions": {
     "endpoints": {
       "dev": "https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b"
-    }
+    },
+    "customDirectives": [
+      "directive @connection(key: String!, filters: [String]) on FIELD"
+    ]
   }
 }
