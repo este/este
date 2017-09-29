@@ -52,5 +52,8 @@ module.exports = {
     'react/prop-types': 0, // Flow.
     'react/require-default-props': 0, // Flow.
     'template-curly-spacing': 0, // Prettier.
+    // allow console and debugger in development
+    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
 };
