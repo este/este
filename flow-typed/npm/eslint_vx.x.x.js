@@ -1,4 +1,4 @@
-// flow-typed signature: acbcf10e625d84ce4a3b2d01fd88ddc2
+// flow-typed signature: 53424df31dae9d6c47f03654c1f9816e
 // flow-typed version: <<STUB>>/eslint_v^4.4.1/flow_v0.54.0
 
 /**
@@ -1350,6 +1350,10 @@ declare module 'eslint/lib/util/rule-fixer' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/util/safe-emitter' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/util/source-code-fixer' {
   declare module.exports: any;
 }
@@ -2366,6 +2370,9 @@ declare module 'eslint/lib/util/patterns/letters.js' {
 }
 declare module 'eslint/lib/util/rule-fixer.js' {
   declare module.exports: $Exports<'eslint/lib/util/rule-fixer'>;
+}
+declare module 'eslint/lib/util/safe-emitter.js' {
+  declare module.exports: $Exports<'eslint/lib/util/safe-emitter'>;
 }
 declare module 'eslint/lib/util/source-code-fixer.js' {
   declare module.exports: $Exports<'eslint/lib/util/source-code-fixer'>;
