@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import felaRenderer from '../lib/felaRenderer';
-import { renderToSheetList } from 'fela-dom';
 
 // Only modern CSS subset with React Native emulation.
 // https://github.com/zeit/next.js/wiki/Global-styles-and-layouts
@@ -40,33 +38,17 @@ export default class MyDocument extends Document {
   static async getInitialProps(context) {
     const props = await super.getInitialProps(context);
     const { req: { locale, localeDataScript, supportedLocales } } = context;
-    const sheetList = renderToSheetList(felaRenderer);
-    felaRenderer.clear();
     return {
       ...props,
       locale,
       localeDataScript,
       supportedLocales,
-      sheetList,
     };
   }
 
   render() {
-    const {
-      locale,
-      localeDataScript,
-      supportedLocales,
-      sheetList,
-    } = this.props;
+    const { locale, localeDataScript, supportedLocales } = this.props;
 
-    const styleNodes = sheetList.map(({ type, media, css }) => (
-      <style
-        dangerouslySetInnerHTML={{ __html: css }}
-        data-fela-type={type}
-        key={`${type}-${media}`}
-        media={media}
-      />
-    ));
     const alternateHreflangLinks = supportedLocales.map(locale => (
       <link
         href={`https://${locale}.${HOSTNAME}`}
@@ -115,7 +97,6 @@ export default class MyDocument extends Document {
           />
           {alternateHreflangLinks}
           <style dangerouslySetInnerHTML={{ __html: globalStyle }} />
-          {styleNodes}
         </Head>
         <body>
           <Main />

@@ -1,169 +1,239 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`empty set has default marginBottom 1 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:row}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`set with one item 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    a
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:row}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
-}
+  a
+</div>
 `;
 
 exports[`set with two items 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    <div
-        className="a f c"
-    >
-        a
-    </div>
-    <div
-        className="a f c g h"
-    />
-    <div
-        className="a f c"
-    >
-        b
-    </div>
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:row}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{flex-direction:column}
-    .g{height:12}
-    .h{width:12}",
-}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    a
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": 12,
+        "position": "relative",
+        "width": 12,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    b
+  </div>
+</div>
 `;
 
 exports[`set with two items and custom spaceBetween 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    <div
-        className="a f c"
-    >
-        a
-    </div>
-    <div
-        className="a f c g h"
-    />
-    <div
-        className="a f c"
-    >
-        b
-    </div>
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:row}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{flex-direction:column}
-    .g{height:48}
-    .h{width:48}",
-}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    a
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": 48,
+        "position": "relative",
+        "width": 48,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    b
+  </div>
+</div>
 `;
 
 exports[`vertical set with one item 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    a
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}",
-}
+  a
+</div>
 `;
 
 exports[`vertical set with two items 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    <div
-        className="a b c"
-    >
-        a
-    </div>
-    <div
-        className="a b c f g"
-    />
-    <div
-        className="a b c"
-    >
-        b
-    </div>
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{height:24}
-    .g{width:24}",
-}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    a
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": 24,
+        "position": "relative",
+        "width": 24,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    b
+  </div>
+</div>
 `;
 
 exports[`vertical set with two items and custom spaceBetween 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexWrap": "wrap",
+      "marginBottom": 24,
+      "position": "relative",
+    }
+  }
 >
-    <div
-        className="a b c"
-    >
-        a
-    </div>
-    <div
-        className="a b c f g"
-    />
-    <div
-        className="a b c"
-    >
-        b
-    </div>
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{flex-wrap:wrap}
-    .f{height:48}
-    .g{width:48}",
-}
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    a
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "height": 48,
+        "position": "relative",
+        "width": 48,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "position": "relative",
+      }
+    }
+  >
+    b
+  </div>
+</div>
 `;

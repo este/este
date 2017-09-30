@@ -42,10 +42,7 @@ test('as', () => {
   );
   expectRender(() => <SomeComponentStyledAsBox someCustomProp="1" />);
   expect(SomeComponent).toHaveBeenCalledTimes(1);
-  expect(SomeComponent.mock.calls[0][0]).toEqual({
-    className: 'a b c',
-    someCustomProp: '1',
-  });
+  expect(SomeComponent.mock.calls[0][0]).toMatchSnapshot();
 });
 
 test('style', () => {

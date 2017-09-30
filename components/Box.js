@@ -2,7 +2,6 @@
 import type { ColorName } from '../themes/types';
 import React, { type Node, type ElementType } from 'react';
 import AutoFocus from './AutoFocus';
-import PropTypes from 'prop-types';
 import withTheme, { type WithTheme } from './withTheme';
 
 /*
@@ -122,10 +121,6 @@ export type BoxProps = {
   borderTopColor?: ColorName,
 };
 
-type BoxContext = {
-  renderer: { renderRule: (rule: () => Object) => string },
-};
-
 // Emulate React Native to ensure the same styles for all platforms.
 // https://facebook.github.io/yoga
 // https://github.com/Microsoft/reactxp
@@ -182,7 +177,7 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-const Box = (props, { renderer }: BoxContext) => {
+const Box = props => {
   const {
     as,
     autoFocus,
@@ -315,18 +310,15 @@ const Box = (props, { renderer }: BoxContext) => {
     ...style,
   };
 
-  const rhythmBoxStyle = tryToEnsureRhythmViaPaddingCompensation(boxStyle);
+  const boxStyleWithRhythm = tryToEnsureRhythmViaPaddingCompensation(boxStyle);
 
-  const className = renderer.renderRule(() => rhythmBoxStyle);
-
-  const element = React.createElement(as || 'div', { ...restProps, className });
+  const element = React.createElement(as || 'div', {
+    ...restProps,
+    style: boxStyleWithRhythm,
+  });
 
   if (autoFocus) return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
-};
-
-Box.contextTypes = {
-  renderer: PropTypes.object,
 };
 
 const BoxWithTheme: WithTheme<BoxProps> = withTheme(Box);

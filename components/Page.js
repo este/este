@@ -11,7 +11,7 @@ import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
 import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
-import { ThemeProvider } from 'react-fela';
+import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector } from 'react-redux';
 

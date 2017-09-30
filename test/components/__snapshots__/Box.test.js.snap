@@ -1,1076 +1,1082 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ReactNative flex shorthand 1`] = `
-Object {
-  "component": <div
-    className="a"
-/>,
-  "fela": "
-    .a{flex:1}",
-}
+<div
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
 `;
 
 exports[`ReactNative flex shorthand 2`] = `
-Object {
-  "component": <div
-    className="a b"
-/>,
-  "fela": "
-    .a{flex-shrink:2}
-    .b{flex:1}",
-}
+<div
+  style={
+    Object {
+      "flex": 1,
+      "flexShrink": 2,
+    }
+  }
+/>
 `;
 
 exports[`ReactNative flex shorthand 3`] = `
-Object {
-  "component": <div
-    className="a b c"
-/>,
-  "fela": "
-    .a{flex-basis:3px}
-    .b{flex-shrink:2}
-    .c{flex:1}",
-}
+<div
+  style={
+    Object {
+      "flex": 1,
+      "flexBasis": "3px",
+      "flexShrink": 2,
+    }
+  }
+/>
 `;
 
 exports[`ReactNative flex shorthand 4`] = `
-Object {
-  "component": <div
-    className="a b c"
-/>,
-  "fela": "
-    .a{flex-basis:1px}
-    .b{flex-shrink:2}
-    .c{flex:3}",
-}
+<div
+  style={
+    Object {
+      "flex": 3,
+      "flexBasis": "1px",
+      "flexShrink": 2,
+    }
+  }
+/>
 `;
 
 exports[`ReactNative render 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{margin-bottom:24}
-    .b{margin-left:24}
-    .c{margin-right:24}
-    .d{margin-top:24}",
-}
+<div
+  style={
+    Object {
+      "marginBottom": 24,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 24,
+    }
+  }
+/>
 `;
 
-exports[`as 1`] = `
+exports[`as 1`] = `null`;
+
+exports[`as 2`] = `
 Object {
-  "component": null,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}",
+  "someCustomProp": "1",
+  "style": Object {
+    "display": "flex",
+    "flexDirection": "column",
+    "position": "relative",
+  },
 }
 `;
 
 exports[`backgroundColor 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{background-color:blue}",
-}
+<div
+  style={
+    Object {
+      "backgroundColor": "blue",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border color shorthand 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-color:blue}
-    .e{border-left-color:blue}
-    .f{border-right-color:blue}
-    .g{border-top-color:blue}",
-}
+<div
+  style={
+    Object {
+      "borderBottomColor": "blue",
+      "borderLeftColor": "blue",
+      "borderRightColor": "blue",
+      "borderTopColor": "blue",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border color shorthand 2`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-color:green}",
-}
+<div
+  style={
+    Object {
+      "borderBottomColor": "green",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border color shorthand 3`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-color:green}
-    .e{border-left-color:blue}
-    .f{border-right-color:blue}
-    .g{border-top-color:blue}",
-}
+<div
+  style={
+    Object {
+      "borderBottomColor": "green",
+      "borderLeftColor": "blue",
+      "borderRightColor": "blue",
+      "borderTopColor": "blue",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border radius shorthand 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-left-radius:1}
-    .e{border-bottom-right-radius:1}
-    .f{border-top-left-radius:1}
-    .g{border-top-right-radius:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomLeftRadius": 1,
+      "borderBottomRightRadius": 1,
+      "borderTopLeftRadius": 1,
+      "borderTopRightRadius": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border radius shorthand 2`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-left-radius:2}",
-}
+<div
+  style={
+    Object {
+      "borderBottomLeftRadius": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border radius shorthand 3`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-left-radius:2}
-    .e{border-bottom-right-radius:1}
-    .f{border-top-left-radius:1}
-    .g{border-top-right-radius:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomLeftRadius": 2,
+      "borderBottomRightRadius": 1,
+      "borderTopLeftRadius": 1,
+      "borderTopRightRadius": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border width 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-width:1}
-    .e{border-left-width:1}
-    .f{border-right-width:1}
-    .g{border-top-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomWidth": 1,
+      "borderLeftWidth": 1,
+      "borderRightWidth": 1,
+      "borderTopWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border width 2`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`border width 3`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-bottom-width:2}
-    .e{border-left-width:1}
-    .f{border-right-width:1}
-    .g{border-top-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomWidth": 2,
+      "borderLeftWidth": 1,
+      "borderRightWidth": 1,
+      "borderTopWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`ensure rhythm via padding compensation 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g h i j k"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-bottom:23}
-    .e{padding-left:23}
-    .f{padding-right:23}
-    .g{padding-top:23}
-    .h{border-bottom-width:1}
-    .i{border-left-width:1}
-    .j{border-right-width:1}
-    .k{border-top-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderBottomWidth": 1,
+      "borderLeftWidth": 1,
+      "borderRightWidth": 1,
+      "borderTopWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingBottom": 23,
+      "paddingLeft": 23,
+      "paddingRight": 23,
+      "paddingTop": 23,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`ensure rhythm via padding compensation 2`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-top:23}
-    .e{border-top-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderTopWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingTop": 23,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`ensure rhythm via padding compensation 3`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-top:24}
-    .e{border-top-width:25}",
-}
+<div
+  style={
+    Object {
+      "borderTopWidth": 25,
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`ensure rhythm via padding compensation 4`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-left:23}
-    .e{border-left-width:1}",
-}
+<div
+  style={
+    Object {
+      "borderLeftWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingLeft": 23,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`ensure rhythm via padding compensation 5`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-left:24}
-    .e{border-left-width:25}",
-}
+<div
+  style={
+    Object {
+      "borderLeftWidth": 25,
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingLeft": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`flex shorthand 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-basis:auto}
-    .e{flex-grow:1}
-    .f{flex-shrink:1}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexBasis": "auto",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`flex shorthand 2`] = `
-Object {
-  "component": <div
-    className="a b c d e f"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-shrink:2}
-    .e{flex-basis:auto}
-    .f{flex-grow:1}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexBasis": "auto",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 2,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`flex shorthand 3`] = `
-Object {
-  "component": <div
-    className="a b c d e f"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-basis:3px}
-    .e{flex-shrink:2}
-    .f{flex-grow:1}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexBasis": "3px",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 2,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`flex shorthand 4`] = `
-Object {
-  "component": <div
-    className="a b c d e f"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-basis:1px}
-    .e{flex-shrink:2}
-    .f{flex-grow:3}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexBasis": "1px",
+      "flexDirection": "column",
+      "flexGrow": 3,
+      "flexShrink": 2,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{align-items:foo}",
-}
+<div
+  style={
+    Object {
+      "alignItems": "foo",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 2`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{align-self:foo}",
-}
+<div
+  style={
+    Object {
+      "alignSelf": "foo",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 3`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-basis:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexBasis": "foo",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 4`] = `
-Object {
-  "component": <div
-    className="a b c"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:foo}
-    .c{position:relative}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 5`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-grow:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexGrow": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 6`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-shrink:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexShrink": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 7`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{flex-wrap:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "flexWrap": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 8`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{justify-content:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 9`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{opacity:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "opacity": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 10`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{overflow:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "overflow": "foo",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 11`] = `
-Object {
-  "component": <div
-    className="a b c"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "foo",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 12`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{z-index:foo}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "zIndex": "foo",
+    }
+  }
+/>
 `;
 
 exports[`just value style props 13`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{border-style:foo}",
-}
+<div
+  style={
+    Object {
+      "borderStyle": "foo",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin bottom left right top 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:48}
-    .f{margin-right:72}
-    .g{margin-top:96}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 24,
+      "marginLeft": 48,
+      "marginRight": 72,
+      "marginTop": 96,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin explicit 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:auto}
-    .e{margin-left:auto}
-    .f{margin-right:auto}
-    .g{margin-top:auto}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": "auto",
+      "marginLeft": "auto",
+      "marginRight": "auto",
+      "marginTop": "auto",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin rhythm 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 24,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 2`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 3`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 4`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 5`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 6`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:72}
-    .e{margin-left:24}
-    .f{margin-right:24}
-    .g{margin-top:48}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 72,
+      "marginLeft": 24,
+      "marginRight": 24,
+      "marginTop": 48,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 7`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:48}
-    .f{margin-right:24}
-    .g{margin-top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 24,
+      "marginLeft": 48,
+      "marginRight": 24,
+      "marginTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`margin shorthands are order independent 8`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-left:48}
-    .f{margin-right:24}
-    .g{margin-top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 24,
+      "marginLeft": 48,
+      "marginRight": 24,
+      "marginTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`marginHorizontal 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:24}
-    .e{margin-right:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": 24,
+      "marginRight": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`marginLeft overriden by style marginLeft 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:2}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": 2,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`marginLeft rhythm 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-left:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`marginVertical 1`] = `
-Object {
-  "component": <div
-    className="a b c d e"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{margin-bottom:24}
-    .e{margin-top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": 24,
+      "marginTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{height:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "height": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 2`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{height:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 3`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{max-height:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "maxHeight": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 4`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{max-height:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "maxHeight": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 5`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{max-width:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "maxWidth": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 6`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{max-width:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "maxWidth": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 7`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{min-height:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "minHeight": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 8`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{min-height:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "minHeight": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 9`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{min-width:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "minWidth": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 10`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{min-width:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "minWidth": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 11`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{width:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "width": 24,
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 12`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{width:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "width": "1%",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 13`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{bottom:24}",
-}
+<div
+  style={
+    Object {
+      "bottom": 24,
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 14`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{bottom:1%}",
-}
+<div
+  style={
+    Object {
+      "bottom": "1%",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 15`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{left:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "left": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 16`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{left:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "left": "1%",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 17`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{right:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "right": 24,
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 18`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{right:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "right": "1%",
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 19`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "top": 24,
+    }
+  }
+/>
 `;
 
 exports[`other maybe rhythm props 20`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{top:1%}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+      "top": "1%",
+    }
+  }
+/>
 `;
 
 exports[`padding 1`] = `
-Object {
-  "component": <div
-    className="a b c d e f g"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{padding-bottom:24}
-    .e{padding-left:24}
-    .f{padding-right:24}
-    .g{padding-top:24}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "paddingTop": 24,
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`render 1`] = `
-Object {
-  "component": <div
-    className="a b c"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}",
-}
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`render with children 1`] = `
-Object {
-  "component": <div
-    className="a b c"
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
 >
-    <div>
-        div
-    </div>
-</div>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}",
-}
+  <div>
+    div
+  </div>
+</div>
 `;
 
 exports[`style 1`] = `
-Object {
-  "component": <div
-    className="a b c d"
-/>,
-  "fela": "
-    .a{display:flex}
-    .b{flex-direction:column}
-    .c{position:relative}
-    .d{background-color:red}",
-}
+<div
+  style={
+    Object {
+      "backgroundColor": "red",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
 `;
 
 exports[`style ignores undefined values 1`] = `
-Object {
-  "component": <div
-    className=""
-/>,
-  "fela": "",
-}
+<div
+  style={
+    Object {
+      "display": undefined,
+      "flexDirection": undefined,
+      "position": undefined,
+    }
+  }
+/>
 `;

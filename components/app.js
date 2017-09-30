@@ -5,12 +5,10 @@ import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
-import felaRenderer from '../lib/felaRenderer';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
-import { Provider as FelaProvider } from 'react-fela';
 import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
@@ -146,17 +144,15 @@ const app = (
     return (
       <RelayProvider environment={environment} variables={variables}>
         <ReduxProvider store={reduxStore}>
-          <FelaProvider renderer={felaRenderer}>
-            <IntlProvider
-              locale={locale}
-              messages={messages}
-              initialNow={initialNow}
-            >
-              <AuthProvider isAuthenticated={isAuthenticated} userId={userId}>
-                <PageWithHigherOrderComponents data={data} url={url} />
-              </AuthProvider>
-            </IntlProvider>
-          </FelaProvider>
+          <IntlProvider
+            locale={locale}
+            messages={messages}
+            initialNow={initialNow}
+          >
+            <AuthProvider isAuthenticated={isAuthenticated} userId={userId}>
+              <PageWithHigherOrderComponents data={data} url={url} />
+            </AuthProvider>
+          </IntlProvider>
         </ReduxProvider>
       </RelayProvider>
     );

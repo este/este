@@ -9,6 +9,8 @@
 .*/node_modules/graphql-language-service-config/.*
 .*/node_modules/graphql-language-service-parser/.*
 .*/node_modules/graphql-tag/.*
+.*/node_modules/npmconf/.*
+.*/node_modules/config-chain/.*
 
 
 [include]
