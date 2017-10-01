@@ -1,9 +1,9 @@
 // @flow
-import React, { type Node } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 type Props = {
-  children: Node,
+  children: React.Node,
   isAuthenticated: boolean,
   userId: ?string,
 };

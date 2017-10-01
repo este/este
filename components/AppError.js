@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { State } from '../types';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';

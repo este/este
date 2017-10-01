@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Box from './Box';
 import Text from './Text';
 import TextInput, { type TextInputProps } from './TextInput';

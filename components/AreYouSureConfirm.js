@@ -1,9 +1,9 @@
 // @flow
-import React, { type Node } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 type AreYouSureConfirmProps = {|
-  render: (() => boolean) => Node,
+  render: (() => boolean) => React.Node,
 |};
 
 const AreYouSureConfirm = ({ render }: AreYouSureConfirmProps) => (

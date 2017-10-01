@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Text from './Text';
 import type { State } from '../types';
 import { connect, type MapStateToProps } from 'react-redux';

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { State, Dispatch } from '../types';
 import Button from './Button';
 import { connect, type MapStateToProps } from 'react-redux';

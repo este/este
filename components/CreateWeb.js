@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Form from './Form';
 import { CreateButton } from './buttons';
 import TextInputBig from './TextInputBig';

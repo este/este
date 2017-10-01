@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6df0a4db90c0b421b6e4e08dbe65e43b
+ * @relayHash 418bce7fdd5695c9676a5bc0b7b22056
  */
 
 /* eslint-disable */
@@ -18,7 +18,6 @@ export type SigninMutationVariables = {|
     clientMutationId: string;
   };
 |};
-
 export type SigninMutationResponse = {|
   +signinUser: {|
     +token: ?string;

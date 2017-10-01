@@ -1,7 +1,7 @@
 // @flow
 import type { State } from '../types';
 import NextLink from 'next/link';
-import React, { type Element } from 'react';
+import * as React from 'react';
 import parse from 'url-parse';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
 
@@ -27,7 +27,7 @@ const LocaleLink = ({ children, href, prefetch, locale, defaultLocale }) => {
 
 type OwnProps = {
   href: string,
-  children: Element<any>,
+  children: React.Element<any>,
   prefetch?: boolean,
 };
 

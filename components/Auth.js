@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import * as React from 'react';
 import Box from './Box';
 import Form from './Form';
 import Heading from './Heading';
@@ -187,6 +187,6 @@ class Auth extends React.Component<Props, State> {
 const AuthWithMutation = withMutation(Auth);
 
 // ComponentType<{}> is required probably because injectIntl
-const AuthIntl: ComponentType<{}> = injectIntl(AuthWithMutation);
+const AuthIntl: React.ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;

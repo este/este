@@ -1,11 +1,11 @@
 // @flow
-import React, { type Node } from 'react';
+import * as React from 'react';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
 type Props = {
   theme: Theme,
-  children?: Node,
+  children?: React.Node,
 };
 
 class ThemeProvider extends React.Component<Props> {

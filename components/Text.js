@@ -1,7 +1,7 @@
 // @flow
 import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import colorLib from 'color';
 import type { ColorName, Theme } from '../themes/types';
 import withTheme, { type WithTheme } from './withTheme';

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
 // There is detect-emoji-support lib, but it does not work on the server.
 // We don't need it, emoji is well supported.

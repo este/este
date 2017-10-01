@@ -1,7 +1,7 @@
 // @flow
 import type { Node } from 'react';
 import type { State } from '../types';
-import React from 'react';
+import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import withTheme, { type WithTheme } from './withTheme';
 

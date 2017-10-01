@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fd481754836c4418ac7acfa435f9d817
+ * @relayHash ebd771558c9faeae369d1e43d6f94d6b
  */
 
 /* eslint-disable */
@@ -17,7 +17,6 @@ export type CreateWebMutationVariables = {|
     clientMutationId: string;
   };
 |};
-
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
     +edge: ?{|

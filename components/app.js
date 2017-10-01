@@ -1,6 +1,6 @@
 // @flow
 import AuthProvider from './AuthProvider';
-import React, { type ComponentType } from 'react';
+import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
@@ -90,7 +90,7 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type Page = ComponentType<
+type Page = React.ComponentType<
   {
     data: Object,
     intl: IntlShape,

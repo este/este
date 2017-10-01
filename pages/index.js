@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import sitemap from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';

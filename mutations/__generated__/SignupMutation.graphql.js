@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1e14b26d687203e39f69233a9d2f9ca1
+ * @relayHash 2bfb18d2d2b9648d5d716d8de8d9b3f7
  */
 
 /* eslint-disable */
@@ -32,7 +32,6 @@ export type SignupMutationVariables = {|
     clientMutationId: string;
   };
 |};
-
 export type SignupMutationResponse = {|
   +createUser: {|
     +user: ?{|

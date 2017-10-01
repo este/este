@@ -1,5 +1,5 @@
 // @flow
-import React, { type Element } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 // Declarative (and soon universal) focus.
@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 type AutoFocusProps = {
   autoFocus?: any,
-  children: Element<any>,
+  children: React.Element<any>,
 };
 
 // Class, because we focus only when focus prop has been changed.

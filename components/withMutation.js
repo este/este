@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import * as React from 'react';
 import type { Commit, Environment, Store } from '../types';
 import PropTypes from 'prop-types';
 import { maybeMutationErrorToAppError } from '../lib/appError';
@@ -15,8 +15,8 @@ type Mutate = <Variables, Response>(
 ) => void;
 
 const withMutation = <Props: {}>(
-  Component: ComponentType<{ mutate: Mutate } & Props>,
-): ComponentType<Props> =>
+  Component: React.ComponentType<{ mutate: Mutate } & Props>,
+): React.ComponentType<Props> =>
   class WrapperComponent extends React.Component<Props> {
     static contextTypes = {
       relay: PropTypes.object,

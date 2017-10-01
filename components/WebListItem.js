@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type WebListItem_web } from './__generated__/WebListItem_web.graphql';
 import Text from './Text';

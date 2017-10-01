@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import testRenderer from 'react-test-renderer';
 import ThemeProvider from '../../../components/ThemeProvider';
 

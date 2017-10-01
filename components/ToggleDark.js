@@ -1,7 +1,7 @@
 // @flow
 import type { State, Dispatch } from '../types';
 import Button from './Button';
-import React from 'react';
+import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 
 const ToggleDark = ({ darkEnabled, dispatch }) => (

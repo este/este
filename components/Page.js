@@ -6,7 +6,7 @@ import Box from './Box';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
-import React, { type Node } from 'react';
+import * as React from 'react';
 import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
 import type { State } from '../types';
@@ -81,7 +81,7 @@ const Page = ({ children, darkEnabled, title }) => {
 
 type OwnProps = {|
   title: string,
-  children?: Node,
+  children?: React.Node,
 |};
 
 type Props = {

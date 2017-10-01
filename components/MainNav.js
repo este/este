@@ -1,7 +1,7 @@
 // @flow
 import A from './A';
 import Box from './Box';
-import React, { type ComponentType } from 'react';
+import * as React from 'react';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -51,6 +51,6 @@ const MainNav = ({ intl, title }: Props, { isAuthenticated }: AuthContext) => {
 withAuth(MainNav);
 
 // ComponentType<{}> is required probably because injectIntl
-const MainNavIntl: ComponentType<OwnProps> = injectIntl(MainNav);
+const MainNavIntl: React.ComponentType<OwnProps> = injectIntl(MainNav);
 
 export default MainNavIntl;

@@ -1,12 +1,12 @@
 // @flow
-import React, { type Element } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // Thank you https://github.com/robrichard
 // https://github.com/robrichard/relay-context-provider
 
 type Props = {
-  children: Element<any>,
+  children: React.Element<any>,
   environment: Object,
   variables: Object,
 };

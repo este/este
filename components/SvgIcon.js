@@ -1,5 +1,5 @@
 // @flow
-import React, { type Element } from 'react';
+import * as React from 'react';
 import Text, { computeFontSizeAndLineHeight, type TextProps } from './Text';
 import withTheme, { type WithTheme } from './withTheme';
 
@@ -7,7 +7,7 @@ import withTheme, { type WithTheme } from './withTheme';
 //  - thenounproject.com
 
 export type SvgIconProps = {
-  svg: Element<any>,
+  svg: React.Element<any>,
 } & TextProps;
 
 const SvgIcon = ({

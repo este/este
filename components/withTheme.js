@@ -1,14 +1,14 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import * as React from 'react';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
 // Explicit type enables Atom Nuclide autocomplete.
-export type WithTheme<T> = ComponentType<T>;
+export type WithTheme<T> = React.ComponentType<T>;
 
 const withTheme = <Props: {}>(
-  Component: ComponentType<{ theme: Theme } & Props>,
-): ComponentType<Props> => {
+  Component: React.ComponentType<{ theme: Theme } & Props>,
+): React.ComponentType<Props> => {
   const WrapperComponent = (props: Props, { theme }: { theme: Theme }) => (
     <Component {...props} theme={theme} />
   );

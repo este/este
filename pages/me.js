@@ -2,7 +2,7 @@
 import Image from '../components/Image';
 import P from '../components/P';
 import Page from '../components/Page';
-import React from 'react';
+import * as React from 'react';
 import Set from '../components/Set';
 import ToggleBaseline from '../components/ToggleBaseline';
 import ToggleDark from '../components/ToggleDark';

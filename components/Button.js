@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { ColorProps } from '../themes/types';
 import Text, { type TextProps } from './Text';
 import withTheme, { type WithTheme } from './withTheme';

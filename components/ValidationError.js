@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import * as validation from '../lib/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
