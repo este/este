@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import Text from '../../components/Text';
 import { createExpectRender } from './utils';

@@ -26,5 +26,3 @@ sketchy-null-string=off
 
 [options]
 include_warnings=true
-; TODO: https://github.com/facebook/flow/issues/3728
-;all=true

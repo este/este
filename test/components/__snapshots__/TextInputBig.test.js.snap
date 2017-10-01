@@ -23,12 +23,12 @@ exports[`color 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-            .placeholderColor255::-webkit-input-placeholder { color: rgba(0, 0, 255, 0.5) };
-            .placeholderColor255::-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
-            .placeholderColor255:-ms-input-placeholder { color: rgba(0, 0, 255, 0.5) };
-            .placeholderColor255:-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
-            .placeholderColor255::placeholder { color: rgba(0, 0, 255, 0.5) };
-          ",
+    .placeholderColor255::-webkit-input-placeholder { color: rgba(0, 0, 255, 0.5) };
+    .placeholderColor255::-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
+    .placeholderColor255:-ms-input-placeholder { color: rgba(0, 0, 255, 0.5) };
+    .placeholderColor255:-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
+    .placeholderColor255::placeholder { color: rgba(0, 0, 255, 0.5) };
+  ",
         }
       }
     />
@@ -112,12 +112,12 @@ exports[`disabled 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-            .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-          ",
+    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
+  ",
         }
       }
     />
@@ -203,12 +203,12 @@ exports[`error 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-            .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-          ",
+    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
+  ",
         }
       }
     />
@@ -315,12 +315,12 @@ exports[`label 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-            .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-          ",
+    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
+  ",
         }
       }
     />
@@ -427,12 +427,12 @@ exports[`render 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-            .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-            .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-          ",
+    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
+    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
+  ",
         }
       }
     />
