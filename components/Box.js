@@ -155,7 +155,8 @@ const restrictedFlex = (
   isReactNative,
 ) => {
   if (flex === undefined) return null;
-  if (flex < 1) throw new Error('Not implemented yet');
+  // TODO: Not implemented yet
+  if (flex < 1) return null;
   return isReactNative ? { flex } : { flexBasis, flexGrow: flex, flexShrink };
 };
 

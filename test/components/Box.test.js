@@ -157,12 +157,8 @@ test('flex shorthand', () => {
 
 // http://facebook.github.io/react-native/releases/0.43/docs/layout-props.html#flex
 test('flex throws for not yet supported value', () => {
-  expect(() => {
-    expectRender(() => <Box flex={0} />);
-  }).toThrowError();
-  expect(() => {
-    expectRender(() => <Box flex={-1} />);
-  }).toThrowError();
+  expectRender(() => <Box flex={0} />);
+  expectRender(() => <Box flex={-1} />);
 });
 
 test('backgroundColor', () => {

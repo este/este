@@ -355,6 +355,30 @@ exports[`flex shorthand 4`] = `
 />
 `;
 
+exports[`flex throws for not yet supported value 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
+`;
+
+exports[`flex throws for not yet supported value 2`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative",
+    }
+  }
+/>
+`;
+
 exports[`just value style props 1`] = `
 <div
   style={

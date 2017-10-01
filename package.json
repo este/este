@@ -59,7 +59,7 @@
     "webpack-bundle-analyzer": "^2.8.2"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^8.0.1",
     "babel-jest": "^21.2.0",
     "babel-plugin-relay": "^1.2.0",
     "babel-plugin-transform-define": "^1.2.0",
