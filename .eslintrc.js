@@ -52,7 +52,6 @@ module.exports = {
     'react/prop-types': 0, // Flow.
     'react/require-default-props': 0, // Flow.
     'template-curly-spacing': 0, // Prettier.
-    'jsx-a11y/href-no-hash': 0, // https://github.com/facebookincubator/create-react-app/issues/2631#issuecomment-312894470
     // allow console and debugger in development
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
