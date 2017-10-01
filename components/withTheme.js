@@ -3,6 +3,7 @@ import React, { type ComponentType } from 'react';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
+// Explicit type enables Atom Nuclide autocomplete.
 export type WithTheme<T> = ComponentType<T>;
 
 const withTheme = <Props: {}>(
