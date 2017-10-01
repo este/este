@@ -3,8 +3,6 @@ import React, { type ComponentType } from 'react';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
-// WithTheme is workaround for Flow 0.54.
-// TODO: Rethink it after Flow 0.56 with improved $Diff type. Inference or not?
 export type WithTheme<T> = ComponentType<T>;
 
 const withTheme = <Props: {}>(

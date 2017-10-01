@@ -13,7 +13,7 @@ import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
 import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect, type Connector } from 'react-redux';
+import { connect, type Connector, type MapStateToProps } from 'react-redux';
 
 const PageContainer = ({ children }) => (
   <Box
@@ -88,8 +88,10 @@ type Props = {
   darkEnabled: boolean,
 } & OwnProps;
 
-const connector: Connector<OwnProps, Props> = connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}));
+});
+
+const connector: Connector<OwnProps, Props> = connect(mapStateToProps);
 
 export default connector(Page);

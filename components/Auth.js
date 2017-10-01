@@ -186,7 +186,7 @@ class Auth extends React.Component<Props, State> {
 
 const AuthWithMutation = withMutation(Auth);
 
-// https://github.com/este/este/issues/1404#issuecomment-328968006
+// ComponentType<{}> is required probably because injectIntl
 const AuthIntl: ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;

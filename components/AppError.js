@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import type { State as AppState } from '../types';
+import type { State } from '../types';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { type AppError as AppErrorType } from '../lib/appError';
 
 const getAppErrorMessage = error => {
@@ -30,15 +30,15 @@ const getAppErrorMessage = error => {
   }
 };
 
-type Props = {
+type AppErrorProps = {
   appError: ?AppErrorType,
 };
 
-type State = {
+type AppErrorState = {
   shown: boolean,
 };
 
-class AppError extends React.Component<Props, State> {
+class AppError extends React.Component<AppErrorProps, AppErrorState> {
   state = {
     shown: false,
   };
@@ -91,6 +91,8 @@ class AppError extends React.Component<Props, State> {
   }
 }
 
-export default connect((state: AppState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   appError: state.app.error,
-}))(AppError);
+});
+
+export default connect(mapStateToProps)(AppError);

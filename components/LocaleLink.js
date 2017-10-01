@@ -3,7 +3,7 @@ import type { State } from '../types';
 import NextLink from 'next/link';
 import React, { type Element } from 'react';
 import parse from 'url-parse';
-import { connect, type Connector } from 'react-redux';
+import { connect, type Connector, type MapStateToProps } from 'react-redux';
 
 // Link with current locale in query.
 
@@ -36,9 +36,11 @@ type Props = {
   defaultLocale: string,
 } & OwnProps;
 
-const connector: Connector<OwnProps, Props> = connect(({ app }: State) => ({
-  locale: app.locale,
-  defaultLocale: app.defaultLocale,
-}));
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  locale: state.app.locale,
+  defaultLocale: state.app.defaultLocale,
+});
+
+const connector: Connector<OwnProps, Props> = connect(mapStateToProps);
 
 export default connector(LocaleLink);

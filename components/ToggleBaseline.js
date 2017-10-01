@@ -2,7 +2,7 @@
 import React from 'react';
 import type { State, Dispatch } from '../types';
 import Button from './Button';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 
 // Test vertical rhythm visually. Inspired by basehold.it
 
@@ -17,6 +17,8 @@ const ToggleBaseline = ({ baselineShown, dispatch }) => (
   </Button>
 );
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   baselineShown: state.app.baselineShown,
-}))(ToggleBaseline);
+});
+
+export default connect(mapStateToProps)(ToggleBaseline);

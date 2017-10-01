@@ -2,7 +2,7 @@
 import React from 'react';
 import Text from './Text';
 import type { State } from '../types';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 
 const getLocaleHref = (pathname, defaultLocale, locale) => {
   if (defaultLocale === locale) return pathname;
@@ -38,8 +38,10 @@ const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) => (
   </Text>
 );
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   defaultLocale: state.app.defaultLocale,
   locale: state.app.locale,
   supportedLocales: state.app.supportedLocales,
-}))(SwitchLocale);
+});
+
+export default connect(mapStateToProps)(SwitchLocale);

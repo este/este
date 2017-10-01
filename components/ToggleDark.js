@@ -2,7 +2,7 @@
 import type { State, Dispatch } from '../types';
 import Button from './Button';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 
 const ToggleDark = ({ darkEnabled, dispatch }) => (
   <Button
@@ -15,6 +15,8 @@ const ToggleDark = ({ darkEnabled, dispatch }) => (
   </Button>
 );
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   darkEnabled: state.app.darkEnabled,
-}))(ToggleDark);
+});
+
+export default connect(mapStateToProps)(ToggleDark);

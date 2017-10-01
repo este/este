@@ -7,6 +7,7 @@ export type AuthContext = {
   userId: ?string,
 };
 
+// TODO: Make higher order component, check new $Compose type.
 const withAuth = (Component: ComponentType<any>) => {
   Component.contextTypes = {
     ...Component.contextTypes,
