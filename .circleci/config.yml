@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/este
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.6.0
     steps:
       - checkout
 
