@@ -315,6 +315,7 @@ const Box = props => {
 
   const element = React.createElement(as || 'div', {
     ...restProps,
+    // http://shouldiprefix.com
     style: boxStyleWithRhythm,
   });
 
