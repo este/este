@@ -1,5 +1,5 @@
-// flow-typed signature: bd48d806c9e2313cb2a98d5149b3bd58
-// flow-typed version: 01716df816/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: 66ee67bfee3a22c91cd67105e456fc64
+// flow-typed version: da8c817f1e/rxjs_v5.0.x/flow_>=v0.34.x
 
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
@@ -338,6 +338,8 @@ declare class rxjs$Observable<+T> {
   repeat(count?: number): rxjs$Observable<T>,
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>,
+
+  bufferCount(bufferSize: number, startBufferEvery?: number): rxjs$Observable<Array<T>>;
 
   catch<U>(
     selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
