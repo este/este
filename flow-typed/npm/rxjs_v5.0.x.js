@@ -1,5 +1,5 @@
-// flow-typed signature: 66ee67bfee3a22c91cd67105e456fc64
-// flow-typed version: da8c817f1e/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: f998e895a1b69a158bfdbd4c08f89006
+// flow-typed version: 8b9804dad4/rxjs_v5.0.x/flow_>=v0.34.x
 
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
@@ -628,6 +628,11 @@ declare class rxjs$Observable<+T> {
     g: rxjs$Observable<G>,
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
   ): rxjs$Observable<H>,
+
+  static combineLatest<A>(
+    a: rxjs$Observable<A>,
+    _: void,
+  ): rxjs$Observable<[A]>;
 
   static combineLatest<A, B>(
     a: rxjs$Observable<A>,
