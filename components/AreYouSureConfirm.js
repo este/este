@@ -11,7 +11,7 @@ const AreYouSureConfirm = ({ render }: AreYouSureConfirmProps) => (
     {message =>
       render(() =>
         // eslint-disable-next-line no-alert, no-undef
-        confirm((message: any)),
+        window.confirm((message: any)),
       )}
   </FormattedMessage>
 );

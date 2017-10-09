@@ -27,6 +27,7 @@ module.exports = {
     'default-case': 0, // Flow.
     'flowtype/generic-spacing': 0, // Prettier.
     'flowtype/space-after-type-colon': 0, // Prettier.
+    'function-paren-newline': 0, // Prettier.
     'guard-for-in': 0, // It's not a bug it's a feature.
     'import/first': 0, // Nobody cares about imports order.
     'import/prefer-default-export': 0, // Control freaky.
@@ -39,6 +40,8 @@ module.exports = {
     'no-restricted-syntax': 0, // Not needed with modern browsers.
     'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
     'no-underscore-dangle': 0, // Control freaky.
+    'object-curly-newline': 0, // Prettier.
+    'react/default-props-match-prop-types': 0, // Buggy.
     'react/forbid-prop-types': 0, // Control freaky.
     'react/jsx-boolean-value': 0, // Control freaky.
     'react/jsx-closing-bracket-location': 0, // Prettier.

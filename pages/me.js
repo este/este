@@ -30,7 +30,7 @@ const signOut = () => {
   // Force full reload. Purging Relay environment and Redux store is not enough.
   // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
   // eslint-disable-next-line no-undef
-  location.href = '/';
+  window.location.href = '/';
 };
 
 const Me = ({ data, intl }) => {
