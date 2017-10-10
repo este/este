@@ -33,16 +33,17 @@ const typography = ({
   fontSize: number,
   fontSizeScale: number | $Keys<typeof scale>,
   lineHeight: number,
-|}) => {
-  const scaleRatio =
-    typeof fontSizeScale === 'string'
-      ? scale[fontSizeScale]
-      : fontSizeScale;
-  return {
-    fontSize: (level: number) => fontSize ** (scaleRatio, -level),
-    lineHeight,
-    rhythm: (ratio: number) => lineHeight * ratio,
-  };
-};
+|}) => ({
+  fontSize: (level: number) =>
+    Array.from(Array(Math.abs(level))).reduce(size => {
+      const scaleRatio =
+        typeof fontSizeScale === 'string'
+          ? scale[fontSizeScale]
+          : fontSizeScale;
+      return level > 0 ? size * (1 / scaleRatio) : size / (1 / scaleRatio);
+    }, fontSize),
+  lineHeight,
+  rhythm: (ratio: number) => lineHeight * ratio,
+});
 
 export default typography;
