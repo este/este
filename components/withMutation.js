@@ -17,7 +17,7 @@ type Mutate = <Variables, Response>(
 const withMutation = <Props: {}>(
   Component: React.ComponentType<{ mutate: Mutate } & Props>,
 ): React.ComponentType<Props> =>
-  class WrapperComponent extends React.Component<Props> {
+  class WithMutation extends React.Component<Props> {
     static contextTypes = {
       relay: PropTypes.object,
       store: PropTypes.object,

@@ -9,13 +9,13 @@ export type WithTheme<T> = React.ComponentType<T>;
 const withTheme = <Props: {}>(
   Component: React.ComponentType<{ theme: Theme } & Props>,
 ): React.ComponentType<Props> => {
-  const WrapperComponent = (props: Props, { theme }: { theme: Theme }) => (
+  const WithTheme = (props: Props, { theme }: { theme: Theme }) => (
     <Component {...props} theme={theme} />
   );
-  WrapperComponent.contextTypes = {
+  WithTheme.contextTypes = {
     theme: PropTypes.object,
   };
-  return WrapperComponent;
+  return WithTheme;
 };
 
 export default withTheme;
