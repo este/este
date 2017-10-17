@@ -1,5 +1,5 @@
-// flow-typed signature: f998e895a1b69a158bfdbd4c08f89006
-// flow-typed version: 8b9804dad4/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: add3ff5f2569a7f16467320b68e41487
+// flow-typed version: d84438608c/rxjs_v5.0.x/flow_>=v0.34.x
 
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
@@ -41,6 +41,8 @@ type rxjs$EventListenerOptions =
       once?: boolean
     }
   | boolean;
+
+type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
 
 declare class rxjs$Observable<+T> {
   static bindCallback(
@@ -268,7 +270,10 @@ declare class rxjs$Observable<+T> {
     observableFactory: () => rxjs$Observable<T> | Promise<T>
   ): rxjs$Observable<T>,
 
-  static from(iterable: Iterable<T>): rxjs$Observable<T>,
+  static from(
+    input: rxjs$ObservableInput<T>,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<T>,
 
   static fromEvent(
     element: any,
@@ -327,6 +332,12 @@ declare class rxjs$Observable<+T> {
 
   static of(...values: T[]): rxjs$Observable<T>,
 
+  static range(
+    start?: number,
+    count?: number,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<number>,
+
   static throw(error: any): rxjs$Observable<any>,
 
   audit(
@@ -339,7 +350,17 @@ declare class rxjs$Observable<+T> {
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>,
 
-  bufferCount(bufferSize: number, startBufferEvery?: number): rxjs$Observable<Array<T>>;
+  bufferCount(
+    bufferSize: number,
+    startBufferEvery?: number
+  ): rxjs$Observable<Array<T>>,
+
+  bufferTime(
+    bufferTimeSpan: number,
+    bufferCreationInterval?: number,
+    maxBufferSize?: number,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<Array<T>>,
 
   catch<U>(
     selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
@@ -350,13 +371,25 @@ declare class rxjs$Observable<+T> {
   concatAll<U>(): rxjs$Observable<U>,
 
   concatMap<U>(
-    f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    f: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
   ): rxjs$Observable<U>,
+  concatMap<U, V>(
+    f: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   debounceTime(
     dueTime: number,
     scheduler?: rxjs$SchedulerClass
   ): rxjs$Observable<T>,
+
+  defaultIfEmpty<U>(defaultValue: U): rxjs$Observable<T | U>,
 
   delay(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>,
 
@@ -373,6 +406,20 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<T>,
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>,
+
+  exhaustMap<U>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
+  ): rxjs$Observable<U>,
+  exhaustMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   expand(
     project: (value: T, index: number) => rxjs$Observable<T>,
@@ -408,11 +455,17 @@ declare class rxjs$Observable<+T> {
     defaultValue: U
   ): rxjs$Observable<U>,
 
-  groupBy(
-    keySelector: (value: T) => mixed,
-    elementSelector?: (value: T) => T,
-    compare?: (x: T, y: T) => boolean
-  ): rxjs$Observable<rxjs$Observable<T>>,
+  groupBy<K>(
+    keySelector: (value: T) => K,
+    _: void
+  ): rxjs$Observable<rxjs$GroupedObservable<K, T>>,
+  groupBy<K, V>(
+    keySelector: (value: T) => K,
+    elementSelector: (value: T) => V,
+    durationSelector?: (
+      grouped: rxjs$GroupedObservable<K, V>
+    ) => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$GroupedObservable<K, V>>,
 
   ignoreElements<U>(): rxjs$Observable<U>,
 
@@ -429,9 +482,19 @@ declare class rxjs$Observable<+T> {
 
   // Alias for `mergeMap`
   flatMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    concurrency?: number
   ): rxjs$Observable<U>,
+  flatMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V,
+    concurrency?: number
+  ): rxjs$Observable<V>,
 
   flatMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
@@ -447,9 +510,18 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<V>,
 
   switchMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
   ): rxjs$Observable<U>,
+  switchMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   switchMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
@@ -462,12 +534,19 @@ declare class rxjs$Observable<+T> {
   mergeAll<U>(): rxjs$Observable<U>,
 
   mergeMap<U>(
-    project: (
-      value: T,
-      index?: number
-    ) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    concurrency?: number
   ): rxjs$Observable<U>,
+  mergeMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V,
+    concurrency?: number
+  ): rxjs$Observable<V>,
 
   mergeMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
@@ -562,6 +641,12 @@ declare class rxjs$Observable<+T> {
 
   timeout(due: number | Date, _: void): rxjs$Observable<T>,
 
+  timeoutWith<U>(
+    due: number | Date,
+    withObservable: rxjs$Observable<U>,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<T | U>,
+
   toArray(): rxjs$Observable<T[]>,
 
   toPromise(): Promise<T>,
@@ -629,10 +714,7 @@ declare class rxjs$Observable<+T> {
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
   ): rxjs$Observable<H>,
 
-  static combineLatest<A>(
-    a: rxjs$Observable<A>,
-    _: void,
-  ): rxjs$Observable<[A]>;
+  static combineLatest<A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<[A]>,
 
   static combineLatest<A, B>(
     a: rxjs$Observable<A>,
@@ -947,6 +1029,10 @@ declare class rxjs$Observable<+T> {
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
   connect(): rxjs$Subscription,
   refCount(): rxjs$Observable<T>
+}
+
+declare class rxjs$GroupedObservable<K, V> extends rxjs$Observable<V> {
+  key: K
 }
 
 declare class rxjs$Observer<T> {
