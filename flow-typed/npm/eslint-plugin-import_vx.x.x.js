@@ -1,4 +1,4 @@
-// flow-typed signature: 1b1a3d6b215fde60941282b26738cb6d
+// flow-typed signature: 4f832ffc1fef632933327fe70cb2471d
 // flow-typed version: <<STUB>>/eslint-plugin-import_v^2.2.0/flow_v0.57.3
 
 /**
@@ -75,6 +75,10 @@ declare module 'eslint-plugin-import/lib/rules/default' {
 }
 
 declare module 'eslint-plugin-import/lib/rules/export' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-import/lib/rules/exports-last' {
   declare module.exports: any;
 }
 
@@ -240,6 +244,9 @@ declare module 'eslint-plugin-import/lib/rules/default.js' {
 }
 declare module 'eslint-plugin-import/lib/rules/export.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/export'>;
+}
+declare module 'eslint-plugin-import/lib/rules/exports-last.js' {
+  declare module.exports: $Exports<'eslint-plugin-import/lib/rules/exports-last'>;
 }
 declare module 'eslint-plugin-import/lib/rules/extensions.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/extensions'>;
