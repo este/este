@@ -36,6 +36,7 @@ module.exports = {
     'react/default-props-match-prop-types': 0, // Buggy.
     'react/forbid-prop-types': 0, // Control freaky.
     'react/jsx-boolean-value': 0, // Control freaky.
+    'react/jsx-curly-brace-presence': 0, // styled-jsx
     'react/jsx-filename-extension': 0, // JSX belongs to .js files.
     'react/no-danger': 0, // Control freaky.
     'react/no-unused-prop-types': 0, // Flow.
