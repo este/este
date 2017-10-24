@@ -76,6 +76,7 @@
     "jest": "^21.2.1",
     "prettier": "^1.5.1",
     "react-test-renderer": "^16.0.0",
-    "relay-compiler": "^1.2.0"
+    "relay-compiler": "^1.2.0",
+    "relay-devtools": "^1.4.0"
   }
 }

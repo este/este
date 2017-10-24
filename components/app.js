@@ -13,6 +13,9 @@ import { createProvider as createReduxProvider } from 'react-redux';
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 
+// import { installRelayDevTools } from 'relay-devtools';
+// installRelayDevTools();
+
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
 // Polyfill browser stuff.
