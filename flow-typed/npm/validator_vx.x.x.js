@@ -1,4 +1,4 @@
-// flow-typed signature: f2b545dee057a0d4ed29e48a2cf91ff1
+// flow-typed signature: 97cbf97bdc34a8cdeb2e2ddfac24f61d
 // flow-typed version: <<STUB>>/validator_v^9.0.0/flow_v0.57.3
 
 /**
@@ -151,6 +151,10 @@ declare module 'validator/lib/isISBN' {
 }
 
 declare module 'validator/lib/isISIN' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isISO31661Alpha2' {
   declare module.exports: any;
 }
 
@@ -411,6 +415,9 @@ declare module 'validator/lib/isISBN.js' {
 }
 declare module 'validator/lib/isISIN.js' {
   declare module.exports: $Exports<'validator/lib/isISIN'>;
+}
+declare module 'validator/lib/isISO31661Alpha2.js' {
+  declare module.exports: $Exports<'validator/lib/isISO31661Alpha2'>;
 }
 declare module 'validator/lib/isISO8601.js' {
   declare module.exports: $Exports<'validator/lib/isISO8601'>;
