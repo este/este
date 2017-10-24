@@ -19,19 +19,6 @@ exports[`color 1`] = `
       }
     }
   >
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-    .placeholderColor255::-webkit-input-placeholder { color: rgba(0, 0, 255, 0.5) };
-    .placeholderColor255::-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
-    .placeholderColor255:-ms-input-placeholder { color: rgba(0, 0, 255, 0.5) };
-    .placeholderColor255:-moz-placeholder { color: rgba(0, 0, 255, 0.5) };
-    .placeholderColor255::placeholder { color: rgba(0, 0, 255, 0.5) };
-  ",
-        }
-      }
-    />
     <div
       style={
         Object {
@@ -108,19 +95,6 @@ exports[`disabled 1`] = `
       }
     }
   >
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-  ",
-        }
-      }
-    />
     <div
       style={
         Object {
@@ -199,19 +173,6 @@ exports[`error 1`] = `
       }
     }
   >
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-  ",
-        }
-      }
-    />
     <div
       style={
         Object {
@@ -311,19 +272,6 @@ exports[`label 1`] = `
       }
     }
   >
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-  ",
-        }
-      }
-    />
     <div
       style={
         Object {
@@ -423,19 +371,6 @@ exports[`render 1`] = `
       }
     }
   >
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-    .placeholderColor0::-webkit-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-ms-input-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0:-moz-placeholder { color: rgba(0, 0, 0, 0.5) };
-    .placeholderColor0::placeholder { color: rgba(0, 0, 0, 0.5) };
-  ",
-        }
-      }
-    />
     <div
       style={
         Object {

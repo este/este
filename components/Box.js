@@ -313,9 +313,11 @@ const Box = props => {
 
   const boxStyleWithRhythm = tryToEnsureRhythmViaPaddingCompensation(boxStyle);
 
+  // We can't use styled-jsx yet since it works only with JSX via Babel plugin.
+  // Style prop just works and it's future compatible with React Native.
   const element = React.createElement(as || 'div', {
     ...restProps,
-    // http://shouldiprefix.com
+    // http://shouldiprefix.com? No.
     style: boxStyleWithRhythm,
   });
 

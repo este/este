@@ -20,9 +20,7 @@ if (process.browser) {
   // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
 
-  // Register React Intl's locale data for the user's locale in the browser.
-  // This locale data was added to the page by `pages/_document.js`. This only
-  // happens once, on initial page load in the browser.
+  // Add locale data injected in pages/_document.js
   Object.keys(window.ReactIntlLocaleData).forEach(lang => {
     addLocaleData(window.ReactIntlLocaleData[lang]);
   });

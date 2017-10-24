@@ -15,7 +15,55 @@ import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
 
-const PageContainer = ({ children }) => (
+// yarn favicon
+const Favicons = () => [
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/static/favicons/apple-touch-icon.png"
+  />,
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/static/favicons/favicon-32x32.png"
+  />,
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/static/favicons/favicon-16x16.png"
+  />,
+  <link rel="manifest" href="/static/favicons/manifest.json" />,
+  <link
+    rel="mask-icon"
+    href="/static/favicons/safari-pinned-tab.svg"
+    color="#5bbad5"
+  />,
+  <link rel="shortcut icon" href="/static/favicons/favicon.ico" />,
+  <meta
+    name="msapplication-config"
+    content="/static/favicons/browserconfig.xml"
+  />,
+];
+
+// Set html background-color and emulate React Native default styles.
+// Margin 0 is needef for body and some form fields according to normalize.css.
+const GlobalStyles = ({ pageBackgroundColor }) => (
+  <style jsx global>{`
+    html {
+      background-color: ${pageBackgroundColor};
+    }
+    * {
+      border-width: 0;
+      box-sizing: border-box;
+      margin: 0;
+      text-decoration: none;
+    }
+  `}</style>
+);
+
+const Container = ({ children }) => (
   <Box
     margin="auto"
     paddingHorizontal={1}
@@ -29,13 +77,13 @@ const PageContainer = ({ children }) => (
 );
 
 // Flex 1 to make footer sticky.
-const PageBody = ({ children }) => (
+const Body = ({ children }) => (
   <Box flex={1} maxWidth={30} paddingTop={2}>
     {children}
   </Box>
 );
 
-const PageFooter = () => (
+const Footer = () => (
   <Text
     borderColor="gray"
     borderStyle="solid"
@@ -57,23 +105,25 @@ const Page = ({ children, darkEnabled, title }) => {
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <title>{title}</title>
+        <meta
+          name="viewport"
+          // https://bitsofco.de/ios-safari-and-shrink-to-fit
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="theme-color" content={pageBackgroundColor} />
+        <Favicons />
+      </Head>
+      <GlobalStyles pageBackgroundColor={pageBackgroundColor} />
       <Baseline>
-        <Head>
-          <title>{title}</title>
-          <meta name="theme-color" content={pageBackgroundColor} />
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `html { background-color: ${pageBackgroundColor} }`,
-            }}
-          />
-        </Head>
         <LoadingBar color={theme.colors.primary} />
         <AppError />
-        <PageContainer>
+        <Container>
           <MainNav title={title} />
-          <PageBody>{children}</PageBody>
-          <PageFooter />
-        </PageContainer>
+          <Body>{children}</Body>
+          <Footer />
+        </Container>
       </Baseline>
     </ThemeProvider>
   );
@@ -84,14 +134,10 @@ type OwnProps = {|
   children?: React.Node,
 |};
 
-type Props = {
-  darkEnabled: boolean,
-} & OwnProps;
-
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   darkEnabled: state.app.darkEnabled,
 });
 
-const connector: Connector<OwnProps, Props> = connect(mapStateToProps);
+const connector: Connector<OwnProps, *> = connect(mapStateToProps);
 
 export default connector(Page);

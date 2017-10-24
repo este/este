@@ -179,6 +179,16 @@ class Auth extends React.Component<Props, State> {
             <SignUpButton disabled={pending} onPress={this.signUp} />
           </Set>
         </Form>
+        {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
+        <style jsx global>{`
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
+            -webkit-transition-delay: 9999s;
+          }
+        `}</style>
       </Box>
     );
   }
@@ -186,7 +196,7 @@ class Auth extends React.Component<Props, State> {
 
 const AuthWithMutation = withMutation(Auth);
 
-// ComponentType<{}> is required probably because injectIntl
+// ComponentType is required for injectIntl. It should work like withMutation.
 const AuthIntl: React.ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;

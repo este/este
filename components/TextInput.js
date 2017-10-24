@@ -24,21 +24,6 @@ const reactNativeEmulation = {
   outline: 'none',
 };
 
-const createPlaceholderColor = (colors, color) => {
-  const placeholderColor = colorLib(colors[color]).fade(0.5);
-  const className = `placeholderColor${placeholderColor.rgbNumber()}`;
-  const placeholderStyle = `{ color: ${placeholderColor.toString()} }`;
-  const styleHtml = `
-    .${className}::-webkit-input-placeholder ${placeholderStyle};
-    .${className}::-moz-placeholder ${placeholderStyle};
-    .${className}:-ms-input-placeholder ${placeholderStyle};
-    .${className}:-moz-placeholder ${placeholderStyle};
-    .${className}::placeholder ${placeholderStyle};
-  `;
-  const style = <style dangerouslySetInnerHTML={{ __html: styleHtml }} />;
-  return { style, className };
-};
-
 const TextInput = ({
   theme,
   color = theme.text.color,
@@ -50,10 +35,16 @@ const TextInput = ({
   style,
   ...props
 }) => {
-  const placeholderColor = createPlaceholderColor(theme.colors, color);
+  const placeholderColor = colorLib(theme.colors[color]).fade(0.5);
+  const placeholderClassName = `placeholderColor${placeholderColor.rgbNumber()}`;
+
   return (
     <Box>
-      {placeholderColor.style}
+      <style jsx global>{`
+        :global(.${placeholderClassName})::placeholder {
+          color: ${placeholderColor.toString()};
+        }
+      `}</style>
       <Set marginBottom={0}>
         {label &&
           (typeof label === 'string' ? (
@@ -74,7 +65,7 @@ const TextInput = ({
       </Set>
       <Text
         as="input"
-        className={placeholderColor.className}
+        className={placeholderClassName}
         color={color}
         size={size}
         {...(onChange

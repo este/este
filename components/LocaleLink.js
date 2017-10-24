@@ -26,21 +26,16 @@ const LocaleLink = ({ children, href, prefetch, locale, defaultLocale }) => {
 };
 
 type OwnProps = {
-  href: string,
   children: React.Element<any>,
+  href: string,
   prefetch?: boolean,
 };
-
-type Props = {
-  locale: string,
-  defaultLocale: string,
-} & OwnProps;
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   locale: state.app.locale,
   defaultLocale: state.app.defaultLocale,
 });
 
-const connector: Connector<OwnProps, Props> = connect(mapStateToProps);
+const connector: Connector<OwnProps, *> = connect(mapStateToProps);
 
 export default connector(LocaleLink);
