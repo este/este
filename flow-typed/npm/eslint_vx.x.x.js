@@ -1,4 +1,4 @@
-// flow-typed signature: 94b4b04298211931c62af2370559a466
+// flow-typed signature: c0d5aea19ee8245ba97cba3e1dea3e29
 // flow-typed version: <<STUB>>/eslint_v^4.4.1/flow_v0.57.3
 
 /**
@@ -187,14 +187,6 @@ declare module 'eslint/lib/formatters/visualstudio' {
 }
 
 declare module 'eslint/lib/ignored-paths' {
-  declare module.exports: any;
-}
-
-declare module 'eslint/lib/internal-rules/internal-consistent-docs-description' {
-  declare module.exports: any;
-}
-
-declare module 'eslint/lib/internal-rules/internal-no-invalid-meta' {
   declare module.exports: any;
 }
 
@@ -1508,12 +1500,6 @@ declare module 'eslint/lib/formatters/visualstudio.js' {
 }
 declare module 'eslint/lib/ignored-paths.js' {
   declare module.exports: $Exports<'eslint/lib/ignored-paths'>;
-}
-declare module 'eslint/lib/internal-rules/internal-consistent-docs-description.js' {
-  declare module.exports: $Exports<'eslint/lib/internal-rules/internal-consistent-docs-description'>;
-}
-declare module 'eslint/lib/internal-rules/internal-no-invalid-meta.js' {
-  declare module.exports: $Exports<'eslint/lib/internal-rules/internal-no-invalid-meta'>;
 }
 declare module 'eslint/lib/linter.js' {
   declare module.exports: $Exports<'eslint/lib/linter'>;

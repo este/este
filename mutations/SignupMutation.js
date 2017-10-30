@@ -7,20 +7,10 @@ import type {
 } from './__generated__/SignupMutation.graphql';
 
 const mutation = graphql`
-  mutation SignupMutation(
-    $signupInput: SignupUserInput!
-    $signinInput: SigninUserInput!
-  ) {
-    createUser(input: $signupInput) {
-      user {
-        id
-      }
-    }
-    signinUser(input: $signinInput) {
+  mutation SignupMutation($email: String!, $password: String!) {
+    signupUser(email: $email, password: $password) {
+      id
       token
-      user {
-        id
-      }
     }
   }
 `;

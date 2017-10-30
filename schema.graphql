@@ -1,7 +1,7 @@
-# source: https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b
-# timestamp: Tue Sep 19 2017 17:21:13 GMT+0200 (CEST)
+# source: https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu
+# timestamp: Mon Oct 30 2017 04:11:49 GMT+0100 (CET)
 
-type AddToWebOwnerPayload {
+type AddToUserWebsPayload {
   viewer: Viewer!
   clientMutationId: String!
   ownerUser: User
@@ -10,38 +10,21 @@ type AddToWebOwnerPayload {
   websWebEdge: WebEdge
 }
 
-input AddToWebOwnerUserInput {
+input AddToUserWebsUserInput {
   websWebId: ID!
   ownerUserId: ID!
   clientMutationId: String!
 }
 
-input AUTH_PROVIDER_EMAIL {
-  email: String!
-  password: String!
-}
-
-input AuthProviderSignupData {
-  email: AUTH_PROVIDER_EMAIL
-}
-
-input CreateFile {
-  name: String!
-}
-
-input CreateFileInput {
-  name: String!
-  clientMutationId: String!
-}
-
-type CreateFilePayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  file: File
-  edge: FileEdge
+# AuthenticateUserPayload
+type AuthenticateUserPayload {
+  id: ID!
+  token: String!
 }
 
 input CreateUser {
+  email: String
+  password: String
   websIds: [ID!]
   webs: [UserwebsWeb!]
 }
@@ -57,12 +40,14 @@ input CreateWeb {
   domain: String!
   name: String!
   ownerId: ID
+  owner: WebownerUser
 }
 
 input CreateWebInput {
   domain: String!
   name: String!
   ownerId: ID
+  owner: WebownerUser
   clientMutationId: String!
 }
 
@@ -75,19 +60,6 @@ type CreateWebPayload {
 }
 
 scalar DateTime
-
-input DeleteFileInput {
-  id: ID!
-  clientMutationId: String!
-}
-
-type DeleteFilePayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  file: File
-  edge: FileEdge
-  deletedId: ID
-}
 
 input DeleteUserInput {
   id: ID!
@@ -116,346 +88,27 @@ type DeleteWebPayload {
   deletedId: ID
 }
 
-type File implements Node {
-  contentType: String!
-  createdAt: DateTime!
+# LoggedInUserPayload
+type LoggedInUserPayload {
   id: ID!
-  name: String!
-  secret: String!
-  size: Int!
-  updatedAt: DateTime!
-  url: String!
-}
-
-# A connection to a list of items.
-type FileConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [FileEdge]
-
-  # Count of filtered result set without considering pagination arguments
-  count: Int!
-}
-
-# An edge in a connection.
-type FileEdge {
-  # The item at the end of the edge.
-  node: File!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-input FileFilter {
-  # Logical AND on all given filters.
-  AND: [FileFilter!]
-
-  # Logical OR on all given filters.
-  OR: [FileFilter!]
-  contentType: String
-
-  # All values that are not equal to given value.
-  contentType_not: String
-
-  # All values that are contained in given list.
-  contentType_in: [String!]
-
-  # All values that are not contained in given list.
-  contentType_not_in: [String!]
-
-  # All values less than the given value.
-  contentType_lt: String
-
-  # All values less than or equal the given value.
-  contentType_lte: String
-
-  # All values greater than the given value.
-  contentType_gt: String
-
-  # All values greater than or equal the given value.
-  contentType_gte: String
-
-  # All values containing the given string.
-  contentType_contains: String
-
-  # All values not containing the given string.
-  contentType_not_contains: String
-
-  # All values starting with the given string.
-  contentType_starts_with: String
-
-  # All values not starting with the given string.
-  contentType_not_starts_with: String
-
-  # All values ending with the given string.
-  contentType_ends_with: String
-
-  # All values not ending with the given string.
-  contentType_not_ends_with: String
-  createdAt: DateTime
-
-  # All values that are not equal to given value.
-  createdAt_not: DateTime
-
-  # All values that are contained in given list.
-  createdAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  createdAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  createdAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  createdAt_lte: DateTime
-
-  # All values greater than the given value.
-  createdAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  createdAt_gte: DateTime
-  id: ID
-
-  # All values that are not equal to given value.
-  id_not: ID
-
-  # All values that are contained in given list.
-  id_in: [ID!]
-
-  # All values that are not contained in given list.
-  id_not_in: [ID!]
-
-  # All values less than the given value.
-  id_lt: ID
-
-  # All values less than or equal the given value.
-  id_lte: ID
-
-  # All values greater than the given value.
-  id_gt: ID
-
-  # All values greater than or equal the given value.
-  id_gte: ID
-
-  # All values containing the given string.
-  id_contains: ID
-
-  # All values not containing the given string.
-  id_not_contains: ID
-
-  # All values starting with the given string.
-  id_starts_with: ID
-
-  # All values not starting with the given string.
-  id_not_starts_with: ID
-
-  # All values ending with the given string.
-  id_ends_with: ID
-
-  # All values not ending with the given string.
-  id_not_ends_with: ID
-  name: String
-
-  # All values that are not equal to given value.
-  name_not: String
-
-  # All values that are contained in given list.
-  name_in: [String!]
-
-  # All values that are not contained in given list.
-  name_not_in: [String!]
-
-  # All values less than the given value.
-  name_lt: String
-
-  # All values less than or equal the given value.
-  name_lte: String
-
-  # All values greater than the given value.
-  name_gt: String
-
-  # All values greater than or equal the given value.
-  name_gte: String
-
-  # All values containing the given string.
-  name_contains: String
-
-  # All values not containing the given string.
-  name_not_contains: String
-
-  # All values starting with the given string.
-  name_starts_with: String
-
-  # All values not starting with the given string.
-  name_not_starts_with: String
-
-  # All values ending with the given string.
-  name_ends_with: String
-
-  # All values not ending with the given string.
-  name_not_ends_with: String
-  secret: String
-
-  # All values that are not equal to given value.
-  secret_not: String
-
-  # All values that are contained in given list.
-  secret_in: [String!]
-
-  # All values that are not contained in given list.
-  secret_not_in: [String!]
-
-  # All values less than the given value.
-  secret_lt: String
-
-  # All values less than or equal the given value.
-  secret_lte: String
-
-  # All values greater than the given value.
-  secret_gt: String
-
-  # All values greater than or equal the given value.
-  secret_gte: String
-
-  # All values containing the given string.
-  secret_contains: String
-
-  # All values not containing the given string.
-  secret_not_contains: String
-
-  # All values starting with the given string.
-  secret_starts_with: String
-
-  # All values not starting with the given string.
-  secret_not_starts_with: String
-
-  # All values ending with the given string.
-  secret_ends_with: String
-
-  # All values not ending with the given string.
-  secret_not_ends_with: String
-  size: Int
-
-  # All values that are not equal to given value.
-  size_not: Int
-
-  # All values that are contained in given list.
-  size_in: [Int!]
-
-  # All values that are not contained in given list.
-  size_not_in: [Int!]
-
-  # All values less than the given value.
-  size_lt: Int
-
-  # All values less than or equal the given value.
-  size_lte: Int
-
-  # All values greater than the given value.
-  size_gt: Int
-
-  # All values greater than or equal the given value.
-  size_gte: Int
-  updatedAt: DateTime
-
-  # All values that are not equal to given value.
-  updatedAt_not: DateTime
-
-  # All values that are contained in given list.
-  updatedAt_in: [DateTime!]
-
-  # All values that are not contained in given list.
-  updatedAt_not_in: [DateTime!]
-
-  # All values less than the given value.
-  updatedAt_lt: DateTime
-
-  # All values less than or equal the given value.
-  updatedAt_lte: DateTime
-
-  # All values greater than the given value.
-  updatedAt_gt: DateTime
-
-  # All values greater than or equal the given value.
-  updatedAt_gte: DateTime
-  url: String
-
-  # All values that are not equal to given value.
-  url_not: String
-
-  # All values that are contained in given list.
-  url_in: [String!]
-
-  # All values that are not contained in given list.
-  url_not_in: [String!]
-
-  # All values less than the given value.
-  url_lt: String
-
-  # All values less than or equal the given value.
-  url_lte: String
-
-  # All values greater than the given value.
-  url_gt: String
-
-  # All values greater than or equal the given value.
-  url_gte: String
-
-  # All values containing the given string.
-  url_contains: String
-
-  # All values not containing the given string.
-  url_not_contains: String
-
-  # All values starting with the given string.
-  url_starts_with: String
-
-  # All values not starting with the given string.
-  url_not_starts_with: String
-
-  # All values ending with the given string.
-  url_ends_with: String
-
-  # All values not ending with the given string.
-  url_not_ends_with: String
-}
-
-enum FileOrderBy {
-  contentType_ASC
-  contentType_DESC
-  createdAt_ASC
-  createdAt_DESC
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  secret_ASC
-  secret_DESC
-  size_ASC
-  size_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  url_ASC
-  url_DESC
 }
 
 type Mutation {
-  createFile(input: CreateFileInput!): CreateFilePayload
   createWeb(input: CreateWebInput!): CreateWebPayload
-  updateFile(input: UpdateFileInput!): UpdateFilePayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   updateWeb(input: UpdateWebInput!): UpdateWebPayload
-  updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
   updateOrCreateWeb(input: UpdateOrCreateWebInput!): UpdateOrCreateWebPayload
-  deleteFile(input: DeleteFileInput!): DeleteFilePayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
-  addToWebOwner(input: AddToWebOwnerUserInput!): AddToWebOwnerPayload
-  signinUser(input: SigninUserInput!): SigninPayload!
+  addToUserWebs(input: AddToUserWebsUserInput!): AddToUserWebsPayload
   createUser(input: SignupUserInput!): CreateUserPayload!
+
+  # authenticate
+  authenticateUser(email: String!, password: String!): AuthenticateUserPayload
+
+  # signup
+  signupUser(email: String!, password: String!): SignupUserPayload
 }
 
 # An object with an ID
@@ -489,55 +142,18 @@ type Query {
   ): Node
 }
 
-# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
-type SigninPayload {
-  token: String
-  user: User
-  clientMutationId: String
-  viewer: Viewer!
-}
-
-input SigninUserInput {
-  email: AUTH_PROVIDER_EMAIL
-  clientMutationId: String!
-}
-
 input SignupUserInput {
+  email: String
+  password: String
   websIds: [ID!]
   webs: [UserwebsWeb!]
   clientMutationId: String!
-  authProvider: AuthProviderSignupData!
 }
 
-input UpdateFile {
+# SignupUserPayload
+type SignupUserPayload {
   id: ID!
-  name: String
-}
-
-input UpdateFileInput {
-  id: ID!
-  name: String
-  clientMutationId: String!
-}
-
-type UpdateFilePayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  file: File
-  edge: FileEdge
-}
-
-input UpdateOrCreateFileInput {
-  update: UpdateFile!
-  create: CreateFile!
-  clientMutationId: String!
-}
-
-type UpdateOrCreateFilePayload {
-  viewer: Viewer!
-  clientMutationId: String!
-  file: File
-  edge: FileEdge
+  token: String!
 }
 
 input UpdateOrCreateUserInput {
@@ -568,13 +184,17 @@ type UpdateOrCreateWebPayload {
 }
 
 input UpdateUser {
+  email: String
   id: ID!
+  password: String
   websIds: [ID!]
   webs: [UserwebsWeb!]
 }
 
 input UpdateUserInput {
+  email: String
   id: ID!
+  password: String
   websIds: [ID!]
   webs: [UserwebsWeb!]
   clientMutationId: String!
@@ -592,6 +212,7 @@ input UpdateWeb {
   id: ID!
   name: String
   ownerId: ID
+  owner: WebownerUser
 }
 
 input UpdateWebInput {
@@ -599,6 +220,7 @@ input UpdateWebInput {
   id: ID!
   name: String
   ownerId: ID
+  owner: WebownerUser
   clientMutationId: String!
 }
 
@@ -835,13 +457,14 @@ input UserwebsWeb {
 
 # This is the famous Relay viewer object
 type Viewer {
-  allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
   allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   allWebs(filter: WebFilter, orderBy: WebOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   user: User
-  File(id: ID, secret: String, url: String): File
   User(email: String, id: ID): User
-  Web(domain: String, id: ID): Web
+  Web(id: ID): Web
+
+  # loggedInUser
+  loggedInUser: LoggedInUserPayload
   id: ID!
 }
 
@@ -1059,4 +682,11 @@ enum WebOrderBy {
   name_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input WebownerUser {
+  email: String
+  password: String
+  websIds: [ID!]
+  webs: [UserwebsWeb!]
 }

@@ -4,7 +4,7 @@ const { URL } = require('url');
 
 // https://github.com/FormidableLabs/babel-plugin-transform-define
 // This file is cached in node-modules. To refresh cache, run:
-// yarn rimrafBabelCache
+// yarn clean-babel-cache
 
 // Remember, never put secrets here. This is for development.
 // For secrets, use environment variables exclusively.
@@ -18,9 +18,11 @@ module.exports = {
   APP_NAME: package.name,
   APP_VERSION: process.env.APP_VERSION || 'dev', // Git commit SHA.
   DEFAULT_LOCALE: 'en',
+  // TODO: Read it from graphcool/.graphcoolrc and copy it here and to
+  // .graphqlconfig as well.
   GRAPHQL_ENDPOINT: production
-    ? 'https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b'
-    : 'https://api.graph.cool/relay/v1/cj6cs45nx2bg50121ylh22x7b',
+    ? 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu'
+    : 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu',
   HOSTNAME: process.env.NOW_URL
     ? new URL(process.env.NOW_URL).hostname
     : 'localhost:3000/',

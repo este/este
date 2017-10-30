@@ -28,7 +28,6 @@ export type Dispatch = ReduxDispatch<Action>;
 // Replace once Relay Modern will have flow-typed typedefs.
 export type Environment = Object;
 
-// https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
 export type PayloadError = Array<{|
   code: number,
   locations: Array<Object>,

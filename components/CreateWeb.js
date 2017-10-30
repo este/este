@@ -20,7 +20,6 @@ type Fields = {
   name: string,
 };
 
-// ...Fields still buggy, https://twitter.com/estejs/status/908785884765540353
 type State = {
   pending: boolean,
   validationErrors: validation.ValidationErrors<Fields>,
@@ -31,17 +30,6 @@ const initialState = {
   pending: false,
   validationErrors: {},
 };
-
-// // This is used in graph.cool function by copy paste, but soon it should be
-// // possible to have a better deploy scenario.
-// import diacritics from 'diacritics-map';
-// const nameToDomain = name =>
-//   name
-//     .toLowerCase()
-//     .split('')
-//     .map(char => diacritics[char] || char)
-//     .join('')
-//     .replace(/[^a-z0-9]/g, '');
 
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
@@ -62,7 +50,7 @@ class CreateWeb extends React.Component<Props, State> {
 
     const variables = {
       input: {
-        domain: '', // Is computed in graph.cool function.
+        domain: '', // computed by hook function
         name: this.state.name.trim(),
         ownerId: userId,
         clientMutationId: getClientMutationId(),

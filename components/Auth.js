@@ -13,7 +13,7 @@ import SignupMutation from '../mutations/SignupMutation';
 import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
-import withMutation, { getClientMutationId } from './withMutation';
+import withMutation from './withMutation';
 import * as validation from '../lib/validation';
 import { setCookie } from '../lib/cookie';
 
@@ -53,14 +53,10 @@ const initialState = {
 class Auth extends React.Component<Props, State> {
   state = initialState;
 
-  handleCompleted = ({ signinUser: { user, token } }) => {
-    // Relay generated types are often optional for smooth update in case of
-    // schema change. Not yet updated clients will not fail.
-    if (!user || !token) {
-      this.setState({ pending: false });
-      return;
-    }
-    setCookie({ token, userId: user.id });
+  handleCompleted = idAndToken => {
+    this.setState({ pending: false });
+    if (!idAndToken) return;
+    setCookie({ token: idAndToken.token, userId: idAndToken.id });
     const redirectPath = new URLSearchParams(window.location.search).get(
       redirectUrlKey,
     );
@@ -68,38 +64,35 @@ class Auth extends React.Component<Props, State> {
   };
 
   handleError = error => {
-    // https://www.graph.cool/docs/reference/relay-api/error-management-looxoo7avo
-    const code =
-      error &&
-      error.source &&
-      error.source.errors &&
-      error.source.errors[0].code;
+    const functionError = error && error[0] && error[0].functionError;
     let validationErrors = {};
-    switch (code) {
-      case 3022:
-        validationErrors = { password: { type: 'wrongPassword' } };
-        break;
-      case 3023:
+    switch (functionError) {
+      case 'Email already in use':
         validationErrors = { email: { type: 'alreadyExists' } };
+        break;
+      case 'Invalid credentials!':
+        validationErrors = { password: { type: 'wrongPassword' } };
         break;
     }
     this.setState({ pending: false, validationErrors });
+    const handled = Object.keys(validationErrors).length > 0;
+    return handled;
   };
 
   auth(isSignUp) {
-    const fields = {
+    const variables = {
       email: this.state.email.trim(),
       password: this.state.password.trim(),
     };
 
-    const validate = fields => {
-      const email = validation.email(fields.email);
+    const validate = variables => {
+      const email = validation.email(variables.email);
       if (email) return { email };
-      const password = validation.password(fields.password);
+      const password = validation.password(variables.password);
       if (password) return { password };
     };
 
-    const validationErrors = validate(fields);
+    const validationErrors = validate(variables);
     if (validationErrors) {
       this.setState({ validationErrors });
       return;
@@ -107,29 +100,18 @@ class Auth extends React.Component<Props, State> {
 
     this.setState({ pending: true });
 
-    const signinInput = {
-      email: fields,
-      clientMutationId: getClientMutationId(),
-    };
-
     if (isSignUp) {
       this.props.mutate(
         SignupMutation.commit,
-        {
-          signupInput: {
-            authProvider: { email: fields },
-            clientMutationId: getClientMutationId(),
-          },
-          signinInput,
-        },
-        this.handleCompleted,
+        variables,
+        response => this.handleCompleted(response.signupUser),
         this.handleError,
       );
     } else {
       this.props.mutate(
         SigninMutation.commit,
-        { signinInput },
-        this.handleCompleted,
+        variables,
+        response => this.handleCompleted(response.authenticateUser),
         this.handleError,
       );
     }

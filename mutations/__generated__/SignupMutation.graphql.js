@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2bfb18d2d2b9648d5d716d8de8d9b3f7
+ * @relayHash b2b1a9098be93db2f44053318b69ca75
  */
 
 /* eslint-disable */
@@ -10,39 +10,13 @@
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
 export type SignupMutationVariables = {|
-  signupInput: {
-    websIds?: ?$ReadOnlyArray<string>;
-    webs?: ?$ReadOnlyArray<{
-      domain: string;
-      name: string;
-    }>;
-    clientMutationId: string;
-    authProvider: {
-      email?: ?{
-        email: string;
-        password: string;
-      };
-    };
-  };
-  signinInput: {
-    email?: ?{
-      email: string;
-      password: string;
-    };
-    clientMutationId: string;
-  };
+  email: string;
+  password: string;
 |};
 export type SignupMutationResponse = {|
-  +createUser: {|
-    +user: ?{|
-      +id: string;
-    |};
-  |};
-  +signinUser: {|
-    +token: ?string;
-    +user: ?{|
-      +id: string;
-    |};
+  +signupUser: ?{|
+    +id: string;
+    +token: string;
   |};
 |};
 */
@@ -50,19 +24,12 @@ export type SignupMutationResponse = {|
 
 /*
 mutation SignupMutation(
-  $signupInput: SignupUserInput!
-  $signinInput: SigninUserInput!
+  $email: String!
+  $password: String!
 ) {
-  createUser(input: $signupInput) {
-    user {
-      id
-    }
-  }
-  signinUser(input: $signinInput) {
+  signupUser(email: $email, password: $password) {
+    id
     token
-    user {
-      id
-    }
   }
 }
 */
@@ -72,14 +39,14 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "signupInput",
-        "type": "SignupUserInput!",
+        "name": "email",
+        "type": "String!",
         "defaultValue": null
       },
       {
         "kind": "LocalArgument",
-        "name": "signinInput",
-        "type": "SigninUserInput!",
+        "name": "password",
+        "type": "String!",
         "defaultValue": null
       }
     ],
@@ -93,74 +60,33 @@ const batch /*: ConcreteBatch*/ = {
         "args": [
           {
             "kind": "Variable",
-            "name": "input",
-            "variableName": "signupInput",
-            "type": "SignupUserInput!"
-          }
-        ],
-        "concreteType": "CreateUserPayload",
-        "name": "createUser",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+            "name": "email",
+            "variableName": "email",
+            "type": "String!"
+          },
           {
             "kind": "Variable",
-            "name": "input",
-            "variableName": "signinInput",
-            "type": "SigninUserInput!"
+            "name": "password",
+            "variableName": "password",
+            "type": "String!"
           }
         ],
-        "concreteType": "SigninPayload",
-        "name": "signinUser",
+        "concreteType": "SignupUserPayload",
+        "name": "signupUser",
         "plural": false,
         "selections": [
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "token",
+            "name": "id",
             "storageKey": null
           },
           {
-            "kind": "LinkedField",
+            "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
-            ],
+            "name": "token",
             "storageKey": null
           }
         ],
@@ -177,14 +103,14 @@ const batch /*: ConcreteBatch*/ = {
     "argumentDefinitions": [
       {
         "kind": "LocalArgument",
-        "name": "signupInput",
-        "type": "SignupUserInput!",
+        "name": "email",
+        "type": "String!",
         "defaultValue": null
       },
       {
         "kind": "LocalArgument",
-        "name": "signinInput",
-        "type": "SigninUserInput!",
+        "name": "password",
+        "type": "String!",
         "defaultValue": null
       }
     ],
@@ -198,74 +124,33 @@ const batch /*: ConcreteBatch*/ = {
         "args": [
           {
             "kind": "Variable",
-            "name": "input",
-            "variableName": "signupInput",
-            "type": "SignupUserInput!"
-          }
-        ],
-        "concreteType": "CreateUserPayload",
-        "name": "createUser",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
+            "name": "email",
+            "variableName": "email",
+            "type": "String!"
+          },
           {
             "kind": "Variable",
-            "name": "input",
-            "variableName": "signinInput",
-            "type": "SigninUserInput!"
+            "name": "password",
+            "variableName": "password",
+            "type": "String!"
           }
         ],
-        "concreteType": "SigninPayload",
-        "name": "signinUser",
+        "concreteType": "SignupUserPayload",
+        "name": "signupUser",
         "plural": false,
         "selections": [
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "token",
+            "name": "id",
             "storageKey": null
           },
           {
-            "kind": "LinkedField",
+            "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "concreteType": "User",
-            "name": "user",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
-            ],
+            "name": "token",
             "storageKey": null
           }
         ],
@@ -273,7 +158,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation SignupMutation(\n  $signupInput: SignupUserInput!\n  $signinInput: SigninUserInput!\n) {\n  createUser(input: $signupInput) {\n    user {\n      id\n    }\n  }\n  signinUser(input: $signinInput) {\n    token\n    user {\n      id\n    }\n  }\n}\n"
+  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signupUser(email: $email, password: $password) {\n    id\n    token\n  }\n}\n"
 };
 
 module.exports = batch;

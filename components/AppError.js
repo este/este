@@ -22,6 +22,13 @@ const getAppErrorMessage = error => {
           id="appError.insufficientPermissions"
         />
       );
+    case 'unknownError':
+      return (
+        <FormattedMessage
+          defaultMessage="Unknown error. Please try it later."
+          id="appError.unknownError"
+        />
+      );
     default:
       // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions

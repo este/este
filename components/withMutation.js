@@ -2,16 +2,20 @@
 import * as React from 'react';
 import type { Commit, Environment, Store } from '../types';
 import PropTypes from 'prop-types';
-import { maybeMutationErrorToAppError } from '../lib/appError';
+import { mutationErrorToAppError } from '../lib/appError';
 
 // https://github.com/facebook/relay/issues/2077
 export const getClientMutationId = () => Date.now().toString(36);
 
+type OnCompleted<Response> = (response: Response) => void;
+
+type OnError = (error: any) => void | boolean;
+
 type Mutate = <Variables, Response>(
   commit: Commit<Variables, Response>,
   variables: Variables,
-  onCompleted: (response: Response) => void,
-  onError: (error: any) => void,
+  onCompleted: OnCompleted<Response>,
+  onError: OnError,
 ) => void;
 
 const withMutation = <Props: {}>(
@@ -41,22 +45,19 @@ const withMutation = <Props: {}>(
     };
 
     handleError(error, onError) {
-      // Some errors are innocent and expected. For example, wrongPassword.
-      // Such errors should be handled in a component.
-      // Some errors are serious and global. For example, failedToFetch.
-      // Such errors should be handled in AppError component.
-      const appError = maybeMutationErrorToAppError(error);
-      if (appError) this.context.store.dispatch(appError);
-      onError(error);
+      const handled = onError(error);
+      if (handled) return;
+      const appError = mutationErrorToAppError(error);
+      this.context.store.dispatch(appError);
     }
 
-    // We probably can't reuse Mutate type here.
+    // We can't reuse Mutate type here.
     // https://twitter.com/calebmer/status/906561429129502720
     mutate = <Variables, Response>(
       commit: Commit<Variables, Response>,
       variables: Variables,
-      onCompleted: (response: Response) => void,
-      onError: (error: any) => void,
+      onCompleted: OnCompleted<Response>,
+      onError: OnError,
     ) =>
       commit(
         this.context.relay.environment,

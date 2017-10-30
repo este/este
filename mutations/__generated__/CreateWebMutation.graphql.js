@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ebd771558c9faeae369d1e43d6f94d6b
+ * @relayHash 6cfe71aa86afe71a99b07f92a6945fa7
  */
 
 /* eslint-disable */
@@ -14,6 +14,15 @@ export type CreateWebMutationVariables = {|
     domain: string;
     name: string;
     ownerId?: ?string;
+    owner?: ?{
+      email?: ?string;
+      password?: ?string;
+      websIds?: ?$ReadOnlyArray<string>;
+      webs?: ?$ReadOnlyArray<{
+        domain: string;
+        name: string;
+      }>;
+    };
     clientMutationId: string;
   };
 |};
