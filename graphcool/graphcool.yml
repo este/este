@@ -26,4 +26,21 @@ functions:
       code: src/createWeb.ts
 
 permissions:
-  - operation: "*"
+  - operation: User.create
+  - operation: User.read
+    authenticated: true
+    query: src/permissions/User.graphql:read
+
+  - operation: Web.create
+    authenticated: true
+    query: ./src/permissions/Web.graphql:create
+  - operation: Web.read
+    authenticated: true
+    query: ./src/permissions/Web.graphql:read
+  - operation: Web.update
+    authenticated: true
+    query: ./src/permissions/Web.graphql:update
+  - operation: Web.delete
+    authenticated: true
+    query: ./src/permissions/Web.graphql:delete
+  - operation: UserWebs.*
