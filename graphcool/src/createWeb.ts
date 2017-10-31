@@ -1,9 +1,5 @@
 // @flow
-const diacritics = require('diacritics-map');
-
-// This file must be plain JavaScript, because with TypeScript
-// import diacritics from 'diacritics-map';
-// doesn't work.
+import * as diacritics from 'diacritics-map';
 
 const nameToDomain = name =>
   name
@@ -21,6 +17,7 @@ const requiredShortText = value => {
   if (value.length > 140) return { type: 'maxLength', maxLength: 140 };
 };
 
+// https://flow.org/en/docs/types/comments
 /*::
 type Event = {
   data: {
@@ -30,7 +27,7 @@ type Event = {
 };
 */
 
-module.exports = async (event /*: Event */) => {
+export default async (event /*: Event */) => {
   // Prepare.
   event.data.name = event.data.name.trim();
 

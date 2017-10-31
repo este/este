@@ -23,7 +23,7 @@ functions:
     type: operationBefore
     operation: Web.create
     handler:
-      code: src/createWeb.js
+      code: src/createWeb.ts
 
 permissions:
   - operation: "*"
