@@ -1,5 +1,5 @@
-// flow-typed signature: 3df9907bbe7831a5c2c03eb838f6b3c0
-// flow-typed version: 0fd239bfe0/jest_v21.x.x/flow_>=v0.39.x
+// flow-typed signature: 65527f14a5f7e89fb28d0a29f45dc848
+// flow-typed version: c7c67b81c1/jest_v21.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -560,7 +560,7 @@ declare function spyOn(value: mixed, method: string): Object;
 declare var jest: JestObjectType;
 
 /**
- * The global Jamine object, this is generally not exposed as the public API,
+ * The global Jasmine object, this is generally not exposed as the public API,
  * using features inside here could break in later versions of Jest.
  */
 declare var jasmine: {
