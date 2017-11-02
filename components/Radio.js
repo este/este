@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from './Button';
 import Set from './Set';
 import SvgIcon from './SvgIcon';
 import Text from './Text';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 export type RadioProps = {
   label?: string,
@@ -63,6 +63,6 @@ const Radio = ({
   </Button>
 );
 
-const RadioWithTheme: WithTheme<RadioProps> = withTheme(Radio);
+const RadioWithTheme: React.ComponentType<RadioProps> = withTheme(Radio);
 
 export default RadioWithTheme;

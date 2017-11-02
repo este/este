@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import colorLib from 'color';
 import type { ColorName, Theme } from '../themes/types';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 /*
   Text is the basic UI primitive for all text components.
@@ -147,6 +147,6 @@ class Text extends React.Component<{ theme: Theme } & TextProps> {
   }
 }
 
-const TextWithTheme: WithTheme<TextProps> = withTheme(Text);
+const TextWithTheme: React.ComponentType<TextProps> = withTheme(Text);
 
 export default TextWithTheme;

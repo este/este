@@ -2,7 +2,7 @@
 import type { ColorName } from '../themes/types';
 import * as React from 'react';
 import AutoFocus from './AutoFocus';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.
@@ -325,6 +325,6 @@ const Box = props => {
   return element;
 };
 
-const BoxWithTheme: WithTheme<BoxProps> = withTheme(Box);
+const BoxWithTheme: React.ComponentType<BoxProps> = withTheme(Box);
 
 export default BoxWithTheme;

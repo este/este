@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 type HeadingProps = TextProps;
 
@@ -20,6 +20,6 @@ const Heading = ({
   />
 );
 
-const HeadingWithTheme: WithTheme<HeadingProps> = withTheme(Heading);
+const HeadingWithTheme: React.ComponentType<HeadingProps> = withTheme(Heading);
 
 export default HeadingWithTheme;

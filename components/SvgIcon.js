@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Text, { computeFontSizeAndLineHeight, type TextProps } from './Text';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 //  - flaticon.com
 //  - thenounproject.com
@@ -40,6 +40,6 @@ const SvgIcon = ({
   );
 };
 
-const SvgIconWithTheme: WithTheme<SvgIconProps> = withTheme(SvgIcon);
+const SvgIconWithTheme: React.ComponentType<SvgIconProps> = withTheme(SvgIcon);
 
 export default SvgIconWithTheme;

@@ -4,7 +4,7 @@ import Box from './Box';
 import Set from './Set';
 import Text, { type TextProps } from './Text';
 import colorLib from 'color';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 // Universal text input component. By default, it looks like editable text.
 // For underline or the other effects, make a new component. Check TextInputBig.
@@ -97,6 +97,8 @@ const TextInput = ({
   );
 };
 
-const TextInputWithTheme: WithTheme<TextInputProps> = withTheme(TextInput);
+const TextInputWithTheme: React.ComponentType<TextInputProps> = withTheme(
+  TextInput,
+);
 
 export default TextInputWithTheme;

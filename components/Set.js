@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 // Something like Fieldset, but for any component and with axis and spacing.
 // It's Box with flexDirection, flexWrap, spacing, and default marginBottom.
@@ -51,6 +51,6 @@ const Set = ({
   </Box>
 );
 
-const SetWithTheme: WithTheme<SetProps> = withTheme(Set);
+const SetWithTheme: React.ComponentType<SetProps> = withTheme(Set);
 
 export default SetWithTheme;

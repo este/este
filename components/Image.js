@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 // For UI images, use size prop to enforce size and vertical rhythm.
 // For responsive content images like photos, use relative % width.
@@ -40,6 +40,6 @@ const Image = ({ theme, as = 'img', size, ...props }) => (
   />
 );
 
-const ImageWithTheme: WithTheme<ImageProps> = withTheme(Image);
+const ImageWithTheme: React.ComponentType<ImageProps> = withTheme(Image);
 
 export default ImageWithTheme;

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { ColorProps } from '../themes/types';
 import Text, { type TextProps } from './Text';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 // Browser button is rendered as div with button role because button element is
 // hard to style consistently in Firefox and maybe elsewhere. Div is just fine.
@@ -106,6 +106,6 @@ const Button = ({
   );
 };
 
-const ButtonWithTheme: WithTheme<ButtonProps> = withTheme(Button);
+const ButtonWithTheme: React.ComponentType<ButtonProps> = withTheme(Button);
 
 export default ButtonWithTheme;

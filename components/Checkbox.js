@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from './Button';
 import Set from './Set';
 import SvgIcon from './SvgIcon';
 import Text from './Text';
-import withTheme, { type WithTheme } from './withTheme';
+import withTheme from './withTheme';
 
 export type CheckboxProps = {
   label?: string,
@@ -60,6 +60,8 @@ const Checkbox = ({
   </Button>
 );
 
-const CheckBoxWithTheme: WithTheme<CheckboxProps> = withTheme(Checkbox);
+const CheckBoxWithTheme: React.ComponentType<CheckboxProps> = withTheme(
+  Checkbox,
+);
 
 export default CheckBoxWithTheme;
