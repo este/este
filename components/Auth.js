@@ -14,7 +14,7 @@ import URLSearchParams from 'url-search-params';
 import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
 import withMutation from './withMutation';
-import * as validation from '../lib/validation';
+import * as validation from '../graphcool/lib/validation';
 import { setCookie } from '../lib/cookie';
 
 const messages = defineMessages({
@@ -178,7 +178,9 @@ class Auth extends React.Component<Props, State> {
 
 const AuthWithMutation = withMutation(Auth);
 
-// ComponentType is required for injectIntl. It should work like withMutation.
+// React.ComponentType<{}> is a workaround. New injectIntl type defs are much
+// better, but somehow clash with mutate prop for some reason.
+// $FlowFixMe
 const AuthIntl: React.ComponentType<{}> = injectIntl(AuthWithMutation);
 
 export default AuthIntl;

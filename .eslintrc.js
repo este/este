@@ -42,6 +42,7 @@ module.exports = {
     'react/no-unused-prop-types': 0, // Flow.
     'react/prop-types': 0, // Flow.
     'react/require-default-props': 0, // Flow.
+    'spaced-comment': 0, // We don't care.
     // allow console and debugger in development
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,

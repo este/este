@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as validation from '../lib/validation';
+import * as validation from '../graphcool/lib/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 

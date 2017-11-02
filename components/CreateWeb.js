@@ -8,9 +8,10 @@ import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
-import * as validation from '../lib/validation';
+import * as validation from '../graphcool/lib/validation';
 import ValidationError from './ValidationError';
 import withAuth, { type AuthContext } from './withAuth';
+import { validateWeb } from '../graphcool/functions/createWeb';
 
 type Props = {
   mutate: *,
@@ -57,12 +58,7 @@ class CreateWeb extends React.Component<Props, State> {
       },
     };
 
-    const validate = ({ input }) => {
-      const name = validation.shortText(input.name);
-      if (name) return { name };
-    };
-
-    const validationErrors = validate(variables);
+    const validationErrors = validateWeb(variables.input);
     if (validationErrors) {
       this.setState({ validationErrors });
       return;

@@ -50,7 +50,6 @@ const MainNav = ({ intl, title }: Props, { isAuthenticated }: AuthContext) => {
 
 withAuth(MainNav);
 
-// ComponentType<{}> is required probably because injectIntl
 const MainNavIntl: React.ComponentType<OwnProps> = injectIntl(MainNav);
 
 export default MainNavIntl;
