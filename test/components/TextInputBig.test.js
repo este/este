@@ -58,5 +58,3 @@ test('label', () => {
 test('error', () => {
   expectRender(() => <TextInputBig maxLength={1} error="error" />);
 });
-
-// TODO: label and error as components

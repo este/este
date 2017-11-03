@@ -1,4 +1,4 @@
-// flow-typed signature: c1860d76cc8af75807b0a487fa6b8376
+// flow-typed signature: db7f2cd847e7e837d279ea4102c623b2
 // flow-typed version: <<STUB>>/url-parse_v^1.1.9/flow_v0.58.0
 
 /**
@@ -22,9 +22,21 @@ declare module 'url-parse' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
+declare module 'url-parse/dist/url-parse' {
+  declare module.exports: any;
+}
 
+declare module 'url-parse/dist/url-parse.min' {
+  declare module.exports: any;
+}
 
 // Filename aliases
+declare module 'url-parse/dist/url-parse.js' {
+  declare module.exports: $Exports<'url-parse/dist/url-parse'>;
+}
+declare module 'url-parse/dist/url-parse.min.js' {
+  declare module.exports: $Exports<'url-parse/dist/url-parse.min'>;
+}
 declare module 'url-parse/index' {
   declare module.exports: $Exports<'url-parse'>;
 }

@@ -81,7 +81,6 @@ const emulateReactNative = (theme, style, backgroundColor) => ({
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
-// TODO: * does not work for HOCed class via ComponentType. Check with Flow 56.
 class Text extends React.Component<{ theme: Theme } & TextProps> {
   static childContextTypes = {
     hasParentEsteText: PropTypes.bool.isRequired,
