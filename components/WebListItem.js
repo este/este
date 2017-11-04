@@ -10,7 +10,6 @@ import { DeleteButton } from './buttons';
 import AreYouSureConfirm from './AreYouSureConfirm';
 import withMutation, { getClientMutationId } from './withMutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
-import withAuth, { type AuthContext } from './withAuth';
 
 const DeleteWeb = ({ onPress, disabled }) => (
   <AreYouSureConfirm
@@ -31,6 +30,7 @@ const DeleteWeb = ({ onPress, disabled }) => (
 type Props = {
   web: WebListItem_web,
   mutate: *,
+  userId: string,
 };
 
 type State = {
@@ -44,8 +44,6 @@ const initialState = {
 class WebListItem extends React.Component<Props, State> {
   state = initialState;
 
-  context: AuthContext;
-
   handleCompleted = () => {
     this.setState(initialState);
   };
@@ -55,9 +53,6 @@ class WebListItem extends React.Component<Props, State> {
   };
 
   deleteWeb = () => {
-    const { userId } = this.context;
-    if (!userId) return;
-
     const variables = {
       input: {
         id: this.props.web.id,
@@ -66,7 +61,7 @@ class WebListItem extends React.Component<Props, State> {
     };
     this.setState({ pending: true });
     this.props.mutate(
-      DeleteWebMutation.commit(userId),
+      DeleteWebMutation.commit(this.props.userId),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -76,7 +71,7 @@ class WebListItem extends React.Component<Props, State> {
   render() {
     const { web } = this.props;
     const { pending } = this.state;
-    const userIsOwner = this.context.userId === web.owner.id;
+    const userIsOwner = this.props.userId === web.owner.id;
     return (
       <Box>
         <Text>{web.name}</Text>
@@ -97,8 +92,6 @@ class WebListItem extends React.Component<Props, State> {
     );
   }
 }
-
-withAuth(WebListItem);
 
 const WebListItemWithMutation = withMutation(WebListItem);
 

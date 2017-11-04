@@ -5,8 +5,11 @@ import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 
-const SignIn = ({ intl }) => (
-  <Page title={intl.formatMessage(sitemap.signIn.title)}>
+const SignIn = ({ intl, isAuthenticated }) => (
+  <Page
+    title={intl.formatMessage(sitemap.signIn.title)}
+    isAuthenticated={isAuthenticated}
+  >
     <Auth />
   </Page>
 );

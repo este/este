@@ -10,11 +10,11 @@ import CreateWebMutation from '../mutations/CreateWebMutation';
 import withMutation, { getClientMutationId } from './withMutation';
 import * as validation from '../graphcool/lib/validation';
 import ValidationError from './ValidationError';
-import withAuth, { type AuthContext } from './withAuth';
 import { validateWeb } from '../graphcool/functions/createWeb';
 
 type Props = {
   mutate: *,
+  userId: string,
 };
 
 type Fields = {
@@ -35,8 +35,6 @@ const initialState = {
 class CreateWeb extends React.Component<Props, State> {
   state = initialState;
 
-  context: AuthContext;
-
   handleCompleted = () => {
     this.setState(initialState);
   };
@@ -46,14 +44,11 @@ class CreateWeb extends React.Component<Props, State> {
   };
 
   createWeb = () => {
-    const { userId } = this.context;
-    if (!userId) return;
-
     const variables = {
       input: {
         domain: '', // computed by hook function
         name: this.state.name.trim(),
-        ownerId: userId,
+        ownerId: this.props.userId,
         clientMutationId: getClientMutationId(),
       },
     };
@@ -66,7 +61,7 @@ class CreateWeb extends React.Component<Props, State> {
 
     this.setState({ pending: true });
     this.props.mutate(
-      CreateWebMutation.commit(userId),
+      CreateWebMutation.commit(this.props.userId),
       variables,
       this.handleCompleted,
       this.handleError,
@@ -100,8 +95,6 @@ class CreateWeb extends React.Component<Props, State> {
     );
   }
 }
-
-withAuth(CreateWeb);
 
 const CreateWebWithMutation = withMutation(CreateWeb);
 

@@ -4,7 +4,6 @@ import sitemap from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
 import app from '../components/app';
-import withAuth, { type AuthContext } from '../components/withAuth';
 import A from '../components/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
@@ -32,7 +31,7 @@ const NotAuthenticated = () => (
   </Box>
 );
 
-const Authenticated = ({ viewer }) => (
+const Authenticated = ({ viewer, userId }) => (
   <Box>
     <Heading size={1}>
       <FormattedMessage
@@ -40,26 +39,27 @@ const Authenticated = ({ viewer }) => (
         id="index.manageYourWebs"
       />
     </Heading>
-    <WebList viewer={viewer} />
-    <CreateWeb />
+    <WebList viewer={viewer} userId={userId} />
+    <CreateWeb userId={userId} />
   </Box>
 );
 
-const Index = ({ data, intl }, { isAuthenticated }: AuthContext) => {
+const Index = ({ data, intl, isAuthenticated, userId }) => {
   const { viewer }: pagesQueryResponse = data;
   return (
-    <Page title={intl.formatMessage(sitemap.index.title)}>
+    <Page
+      title={intl.formatMessage(sitemap.index.title)}
+      isAuthenticated={isAuthenticated}
+    >
       <Heading size={3}>Este</Heading>
-      {isAuthenticated ? (
-        <Authenticated viewer={viewer} />
+      {isAuthenticated && userId ? (
+        <Authenticated viewer={viewer} userId={userId} />
       ) : (
         <NotAuthenticated />
       )}
     </Page>
   );
 };
-
-withAuth(Index);
 
 export const queryFilters = (userId: ?string) => ({
   filter: { owner: { id: userId } },

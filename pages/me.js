@@ -33,11 +33,14 @@ const signOut = () => {
   window.location.href = '/';
 };
 
-const Me = ({ data, intl }) => {
+const Me = ({ data, intl, isAuthenticated }) => {
   const { viewer }: mePageQueryResponse = data;
   const email = viewer.user && viewer.user.email;
   return (
-    <Page title={intl.formatMessage(sitemap.me.title)}>
+    <Page
+      title={intl.formatMessage(sitemap.me.title)}
+      isAuthenticated={isAuthenticated}
+    >
       {email && (
         <Box>
           <Image

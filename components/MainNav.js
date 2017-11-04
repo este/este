@@ -5,9 +5,9 @@ import * as React from 'react';
 import sitemap from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import withAuth, { type AuthContext } from './withAuth';
 
 type OwnProps = {
+  isAuthenticated: boolean,
   title: string,
 };
 
@@ -31,7 +31,7 @@ const NavA = ({ intl, page, title, ...props }) => (
   </A>
 );
 
-const MainNav = ({ intl, title }: Props, { isAuthenticated }: AuthContext) => {
+const MainNav = ({ intl, title, isAuthenticated }: Props) => {
   const { index, me, signIn } = sitemap;
   const auth = isAuthenticated ? me : signIn;
   return (
@@ -47,8 +47,6 @@ const MainNav = ({ intl, title }: Props, { isAuthenticated }: AuthContext) => {
     </Box>
   );
 };
-
-withAuth(MainNav);
 
 const MainNavIntl: React.ComponentType<OwnProps> = injectIntl(MainNav);
 

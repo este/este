@@ -100,7 +100,7 @@ const Footer = () => (
   </Text>
 );
 
-const Page = ({ children, darkEnabled, title }) => {
+const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
@@ -120,7 +120,7 @@ const Page = ({ children, darkEnabled, title }) => {
         <LoadingBar color={theme.colors.primary} />
         <AppError />
         <Container>
-          <MainNav title={title} />
+          <MainNav title={title} isAuthenticated={isAuthenticated} />
           <Body>{children}</Body>
           <Footer />
         </Container>
@@ -130,8 +130,9 @@ const Page = ({ children, darkEnabled, title }) => {
 };
 
 type OwnProps = {|
-  title: string,
   children?: React.Node,
+  isAuthenticated: boolean,
+  title: string,
 |};
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({

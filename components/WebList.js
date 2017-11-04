@@ -7,6 +7,7 @@ import WebListItem from './WebListItem';
 
 type Props = {
   viewer: WebList_viewer,
+  userId: string,
 };
 
 // Why edges and nodes? Because Relay does not mix meta data with data.
@@ -14,14 +15,19 @@ type Props = {
 // Why "edges &&" and "edge &&" existence checking?
 // Because schema can be and will be updated. With such approach, not yet
 // updated client code will not fail. Babel 7 optional chaining operator ftw.
-const WebList = ({ viewer }: Props) => (
+const WebList = ({ viewer, userId }: Props) => (
   <Box>
     {viewer.allWebs &&
       viewer.allWebs.edges &&
       viewer.allWebs.edges.map(
         edge =>
           edge && (
-            <WebListItem web={edge.node} viewer={viewer} key={edge.node.id} />
+            <WebListItem
+              web={edge.node}
+              viewer={viewer}
+              key={edge.node.id}
+              userId={userId}
+            />
           ),
       )}
   </Box>

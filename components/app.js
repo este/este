@@ -1,5 +1,4 @@
 // @flow
-import AuthProvider from './AuthProvider';
 import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
@@ -95,6 +94,8 @@ type Page = React.ComponentType<
   {
     data: Object,
     intl: IntlShape,
+    isAuthenticated: boolean,
+    userId: ?string,
   } & NextProps,
 >;
 
@@ -150,9 +151,12 @@ const app = (
             messages={messages}
             initialNow={initialNow}
           >
-            <AuthProvider isAuthenticated={isAuthenticated} userId={userId}>
-              <PageWithHigherOrderComponents data={data} url={url} />
-            </AuthProvider>
+            <PageWithHigherOrderComponents
+              data={data}
+              isAuthenticated={isAuthenticated}
+              url={url}
+              userId={userId}
+            />
           </IntlProvider>
         </ReduxProvider>
       </RelayProvider>
