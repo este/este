@@ -4,7 +4,7 @@ import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
-import sitemap from '../lib/sitemap';
+import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
@@ -40,17 +40,20 @@ const getReduxStore = serverState => {
   return clientReduxStore;
 };
 
-export const redirectUrlKey = 'redirectUrl';
-
 const redirectToSignIn = ({ pathname, res }) => {
-  const path = `${sitemap.signIn.path}?${redirectUrlKey}=${encodeURIComponent(
-    pathname,
-  )}`;
+  const redirectUrlKey = 'redirectUrl';
+  const redirectUrl = encodeURIComponent(pathname);
+  const href: Href = {
+    pathname: '/sign-in',
+    query: { [redirectUrlKey]: redirectUrl },
+  };
   if (res) {
-    res.writeHead(303, { Location: path });
+    res.writeHead(303, {
+      Location: `${href.pathname}?${redirectUrlKey}=${redirectUrl}`,
+    });
     res.end();
   } else {
-    Router.replace(path);
+    Router.replace(href);
   }
 };
 
@@ -74,7 +77,7 @@ type NextContext = {
 type NextProps = {
   url: {
     pathname: string,
-    query: Object,
+    query: { [key: string]: ?string },
   },
 };
 

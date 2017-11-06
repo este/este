@@ -25,6 +25,8 @@ const SwitchLocale = ({ defaultLocale, locale, supportedLocales }) => (
     {supportedLocales
       .filter(supportedLocale => supportedLocale !== locale)
       .map((supportedLocale, index, locales) => (
+        // We can't use Next.js Link because we have to enforce full reload.
+        // Check server.js getAcceptedOrDefaultLocale.
         <Text
           as="a"
           color="primary"

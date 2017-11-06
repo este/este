@@ -5,12 +5,12 @@ import Page from '../components/Page';
 import app from '../components/app';
 import sitemap from '../lib/sitemap';
 
-const SignIn = ({ intl, isAuthenticated }) => (
+const SignIn = ({ intl, isAuthenticated, url }) => (
   <Page
-    title={intl.formatMessage(sitemap.signIn.title)}
+    title={intl.formatMessage(sitemap.titles.signIn)}
     isAuthenticated={isAuthenticated}
   >
-    <Auth />
+    <Auth intl={intl} redirectUrl={url.query.redirectUrl} />
   </Page>
 );
 

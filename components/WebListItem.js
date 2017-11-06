@@ -10,6 +10,7 @@ import { DeleteButton } from './buttons';
 import AreYouSureConfirm from './AreYouSureConfirm';
 import withMutation, { getClientMutationId } from './withMutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
+import A from './A';
 
 const DeleteWeb = ({ onPress, disabled }) => (
   <AreYouSureConfirm
@@ -77,7 +78,9 @@ class WebListItem extends React.Component<Props, State> {
         <Text>{web.name}</Text>
         <Set>
           <Text color="gray" size={-1}>
-            <Text>{web.domain}</Text>
+            <A href={{ pathname: '/edit', query: { webDomain: web.domain } }}>
+              {web.domain}
+            </A>
             {', '}
             <FormattedRelative value={web.updatedAt} />
             {userIsOwner && (

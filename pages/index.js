@@ -17,7 +17,7 @@ import { type pagesQueryResponse } from './__generated__/pagesQuery.graphql';
 const NotAuthenticated = () => (
   <Box>
     <P>
-      <A href={sitemap.signIn.path}>
+      <A href={{ pathname: '/sign-in' }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
       </A>
     </P>
@@ -48,7 +48,7 @@ const Index = ({ data, intl, isAuthenticated, userId }) => {
   const { viewer }: pagesQueryResponse = data;
   return (
     <Page
-      title={intl.formatMessage(sitemap.index.title)}
+      title={intl.formatMessage(sitemap.titles.index)}
       isAuthenticated={isAuthenticated}
     >
       <Heading size={3}>Este</Heading>

@@ -52,8 +52,7 @@
     "relay-runtime": "^1.2.0",
     "rimraf": "^2.4.5",
     "smoothscroll-polyfill": "^0.4.0",
-    "url-parse": "^1.1.9",
-    "url-search-params": "^0.10.0",
+    "url": "^0.11.0",
     "validator": "^9.0.0",
     "webpack-bundle-analyzer": "^2.8.2"
   },

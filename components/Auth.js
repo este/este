@@ -7,11 +7,9 @@ import Set from './Set';
 import TextInputBig from './TextInputBig';
 import ValidationError from './ValidationError';
 import { SignInButton, SignUpButton } from './buttons';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages } from 'react-intl';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
-import URLSearchParams from 'url-search-params';
-import { redirectUrlKey } from '../components/app';
 import Router from 'next/router';
 import withMutation from './withMutation';
 import * as validation from '../graphcool/lib/validation';
@@ -31,6 +29,7 @@ const messages = defineMessages({
 type Props = {
   intl: *,
   mutate: *,
+  redirectUrl: *,
 };
 
 type Fields = {
@@ -57,10 +56,10 @@ class Auth extends React.Component<Props, State> {
     this.setState({ pending: false });
     if (!idAndToken) return;
     setCookie({ token: idAndToken.token, userId: idAndToken.id });
-    const redirectPath = new URLSearchParams(window.location.search).get(
-      redirectUrlKey,
-    );
-    Router.replace(redirectPath || '/');
+    const redirectUrl = this.props.redirectUrl
+      ? decodeURIComponent(this.props.redirectUrl)
+      : '/';
+    Router.replace(redirectUrl);
   };
 
   handleError = error => {
@@ -176,11 +175,9 @@ class Auth extends React.Component<Props, State> {
   }
 }
 
-const AuthWithMutation = withMutation(Auth);
+const AuthWithMutation: React.ComponentType<{
+  redirectUrl: ?string,
+  intl: *,
+}> = withMutation(Auth);
 
-// React.ComponentType<{}> is a workaround. New injectIntl type defs are much
-// better, but somehow clash with mutate prop for some reason.
-// $FlowFixMe
-const AuthIntl: React.ComponentType<{}> = injectIntl(AuthWithMutation);
-
-export default AuthIntl;
+export default AuthWithMutation;

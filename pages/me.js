@@ -38,7 +38,7 @@ const Me = ({ data, intl, isAuthenticated }) => {
   const email = viewer.user && viewer.user.email;
   return (
     <Page
-      title={intl.formatMessage(sitemap.me.title)}
+      title={intl.formatMessage(sitemap.titles.me)}
       isAuthenticated={isAuthenticated}
     >
       {email && (

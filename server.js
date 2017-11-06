@@ -8,6 +8,7 @@ const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
 const { readFileSync } = require('fs');
+const pathMatch = require('path-match');
 
 // Note this file is not transpiled.
 
@@ -58,6 +59,7 @@ const getAcceptedOrDefaultLocale = (req, locale) => {
 
 const intlReq = req => {
   const { query = {} } = parse(req.url, true);
+  // TODO: https://github.com/este/este/issues/1399
   const locale = getAcceptedOrDefaultLocale(req, query.locale);
   // Use messages defined in code for dev with default locale.
   const messages = dev && locale === DEFAULT_LOCALE ? {} : getMessages(locale);

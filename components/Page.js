@@ -120,7 +120,7 @@ const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
         <LoadingBar color={theme.colors.primary} />
         <AppError />
         <Container>
-          <MainNav title={title} isAuthenticated={isAuthenticated} />
+          <MainNav isAuthenticated={isAuthenticated} />
           <Body>{children}</Body>
           <Footer />
         </Container>

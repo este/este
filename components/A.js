@@ -1,19 +1,16 @@
 // @flow
 import * as React from 'react';
-import LocaleLink from './LocaleLink';
+import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 import Text, { type TextProps } from './Text';
+import { withRouter } from 'next/router';
 
-type Props = {
-  href: string,
-  isActive?: boolean,
-  prefetch?: boolean,
-} & TextProps;
+type Props = LocaleLinkBaseProps & TextProps;
 
 type State = {
   hover: boolean,
 };
 
-class A extends React.Component<Props, State> {
+class A extends React.Component<Props & { router: Object }, State> {
   state = { hover: false };
 
   handleMouseEnter = () => {
@@ -28,14 +25,17 @@ class A extends React.Component<Props, State> {
     const {
       color = 'primary',
       href,
-      isActive,
       prefetch,
+      replace,
+      router,
       ...props
     } = this.props;
+    const isActive =
+      typeof href === 'object' && href.pathname === router.pathname;
     const decoration = this.state.hover || isActive ? 'underline' : 'none';
 
     return (
-      <LocaleLink href={href} prefetch={prefetch}>
+      <LocaleLink href={href} prefetch={prefetch} replace={replace}>
         <Text
           as="a"
           color={color}
@@ -49,4 +49,6 @@ class A extends React.Component<Props, State> {
   }
 }
 
-export default A;
+const AWithRouter: React.ComponentType<Props> = withRouter(A);
+
+export default AWithRouter;
