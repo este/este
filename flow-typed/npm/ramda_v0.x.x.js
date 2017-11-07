@@ -1,5 +1,5 @@
-// flow-typed signature: e8520478a85102cbb9fecbd6d2fde0e1
-// flow-typed version: f5b09baf37/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: fcc135f165045de8b8cca9e6c2d699c8
+// flow-typed version: c652b546a4/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -947,17 +947,17 @@ declare module ramda {
   ): { [key: string]: B };
 
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     ...rest: Array<void>
   ): ((init: A, xs: Array<B>) => A) &
     ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     ...rest: Array<void>
   ): (xs: Array<B>) => A;
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     xs: Array<B>
   ): A;
