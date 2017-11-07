@@ -38,18 +38,19 @@ const maybeAddLocaleToHref = (defaultLocale, locale, href: any) => {
 
 const LocaleLink = ({
   children,
-  href,
+  href: hrefWithoutLocale,
   prefetch,
   replace,
   locale,
   defaultLocale,
 }) => {
-  const localeHref = maybeAddLocaleToHref(defaultLocale, locale, href);
+  const href = maybeAddLocaleToHref(defaultLocale, locale, hrefWithoutLocale);
   return (
-    <NextLink href={localeHref} prefetch={prefetch} replace={replace}>
+    <NextLink href={href} prefetch={prefetch} replace={replace}>
       {/* Add href manually because Next.js does it only for browser anchor. */}
+      {/* Ensure href is string because custom components. */}
       {React.cloneElement(children, {
-        href: typeof localeHref === 'object' ? format(localeHref) : localeHref,
+        href: typeof href === 'object' ? format(href) : href,
       })}
     </NextLink>
   );
