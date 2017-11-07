@@ -2,7 +2,7 @@
 import * as React from 'react';
 import A from './A';
 import Box from './Box';
-import sitemap from '../lib/sitemap';
+import { titles } from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';
 
 type MainNavProps = {|
@@ -31,11 +31,11 @@ const MainNav = ({ isAuthenticated }: MainNavProps) => (
     marginVertical={0.5}
     paddingHorizontal={0.5}
   >
-    <MainNavA href={{ pathname: '/' }} title={sitemap.titles.index} />
+    <MainNavA href={{ pathname: '/' }} title={titles.index} />
     {isAuthenticated ? (
-      <MainNavA href={{ pathname: '/me' }} title={sitemap.titles.me} />
+      <MainNavA href={{ pathname: '/me' }} title={titles.me} />
     ) : (
-      <MainNavA href={{ pathname: '/sign-in' }} title={sitemap.titles.signIn} />
+      <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
     )}
   </Box>
 );

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import sitemap from '../lib/sitemap';
+import { titles } from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
 import app from '../components/app';
@@ -48,7 +48,7 @@ const Index = ({ data, intl, isAuthenticated, userId }) => {
   const { viewer }: pagesQueryResponse = data;
   return (
     <Page
-      title={intl.formatMessage(sitemap.titles.index)}
+      title={intl.formatMessage(titles.index)}
       isAuthenticated={isAuthenticated}
     >
       <Heading size={3}>Este</Heading>

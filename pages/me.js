@@ -8,7 +8,7 @@ import ToggleBaseline from '../components/ToggleBaseline';
 import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
-import sitemap from '../lib/sitemap';
+import { titles } from '../lib/sitemap';
 import type { mePageQueryResponse } from './__generated__/mePageQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
@@ -38,7 +38,7 @@ const Me = ({ data, intl, isAuthenticated }) => {
   const email = viewer.user && viewer.user.email;
   return (
     <Page
-      title={intl.formatMessage(sitemap.titles.me)}
+      title={intl.formatMessage(titles.me)}
       isAuthenticated={isAuthenticated}
     >
       {email && (

@@ -18,7 +18,10 @@ export type LocaleLinkBaseProps = {
 
 type LocaleLinkProps = LocaleLinkBaseProps & { children: React.Element<any> };
 
-const maybeAddLocaleToHref = (defaultLocale, locale, href) => {
+// href: any, because Href does not specify query locale, and that's right.
+// query locale is an implementation detail. Unfortunately, I don't know why
+// Flow checks it here. Therefore, I had to disable type checking via any type.
+const maybeAddLocaleToHref = (defaultLocale, locale, href: any) => {
   if (typeof href === 'string') return href;
   const isAppLink = href.pathname.charAt(0) === '/';
   const isDefault = defaultLocale === locale;
@@ -35,7 +38,6 @@ const maybeAddLocaleToHref = (defaultLocale, locale, href) => {
 
 const LocaleLink = ({
   children,
-  // $FlowFixMe Href does not define query locale.
   href,
   prefetch,
   replace,
