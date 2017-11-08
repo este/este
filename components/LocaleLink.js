@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { State } from '../types';
 import NextLink from 'next/link';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
-import type { Href } from '../lib/sitemap';
+import { maybeMapLinkHref, type Href } from '../lib/sitemap';
 import { format } from 'url';
 
 // Link with current locale in query.
@@ -18,11 +18,10 @@ export type LocaleLinkBaseProps = {
 
 type LocaleLinkProps = LocaleLinkBaseProps & { children: React.Element<any> };
 
-// href: any, because Href does not specify query locale, and that's right.
-// query locale is an implementation detail. Unfortunately, I don't know why
-// Flow checks it here. Therefore, I had to disable type checking via any type.
-const maybeAddLocaleToHref = (defaultLocale, locale, href: any) => {
-  if (typeof href === 'string') return href;
+// href: any, because Href type does not specify locale query.
+// That's fine, because locale is an implementation detail.
+// I don't know how to type it correctly.
+const maybeAddLocaleToHref = (href: any, defaultLocale, locale) => {
   const isAppLink = href.pathname.charAt(0) === '/';
   const isDefault = defaultLocale === locale;
   const addLocale = isAppLink && !isDefault;
@@ -38,19 +37,33 @@ const maybeAddLocaleToHref = (defaultLocale, locale, href: any) => {
 
 const LocaleLink = ({
   children,
-  href: hrefWithoutLocale,
+  href: originalHref,
   prefetch,
   replace,
   locale,
   defaultLocale,
 }) => {
-  const href = maybeAddLocaleToHref(defaultLocale, locale, hrefWithoutLocale);
+  let href;
+  let as;
+
+  if (typeof originalHref === 'string') {
+    // We don't process string URLs. They are considered as constants.
+    href = originalHref;
+  } else {
+    href = maybeAddLocaleToHref(originalHref, defaultLocale, locale);
+    as = maybeMapLinkHref(href);
+  }
   return (
-    <NextLink href={href} prefetch={prefetch} replace={replace}>
+    <NextLink
+      {...(as ? { as } : null)}
+      href={href}
+      prefetch={prefetch}
+      replace={replace}
+    >
       {/* Add href manually because Next.js does it only for browser anchor. */}
       {/* Ensure href is string because custom components. */}
       {React.cloneElement(children, {
-        href: typeof href === 'object' ? format(href) : href,
+        href: as || (typeof href === 'object' ? format(href) : href),
       })}
     </NextLink>
   );

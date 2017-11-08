@@ -37,6 +37,7 @@
     "isomorphic-fetch": "^2.2.1",
     "next": "^4.0.0",
     "nprogress": "^0.2.0",
+    "path-match": "^1.2.4",
     "prop-types": "^15.6.0",
     "raf": "^3.3.2",
     "ramda": "^0.25.0",
