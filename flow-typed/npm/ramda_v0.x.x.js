@@ -1,5 +1,5 @@
-// flow-typed signature: 7148114ea9c5c7db459f97d3679080d9
-// flow-typed version: a78b8c9fe3/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: 106415dc58d30c897568a31edee04404
+// flow-typed version: 8f69fdbf49/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -433,8 +433,8 @@ declare module ramda {
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
 
-  declare function isNil(x: void | null): true;
-  declare function isNil(x: mixed): false;
+  declare function isNil(x: mixed): boolean %checks(x === undefined ||
+    x === null);
 
   // *List
   declare function adjust<T>(
@@ -1526,14 +1526,14 @@ declare module ramda {
 
   declare function keysIn(o: Object): Array<string>;
 
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  declare function props<T: string, O>(
+    keys: Array<T>,
     ...rest: Array<void>
-  ): (o: O) => Array<?T>;
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  ): (o: O) => Array<$ElementType<O, T>>;
+  declare function props<T: string, O>(
+    keys: Array<T>,
     o: O
-  ): Array<?T>;
+  ): Array<$ElementType<O, T>>;
 
   // TODO set
 

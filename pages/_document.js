@@ -3,7 +3,7 @@ import * as React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(context) {
+  static async getInitialProps(context: Object) {
     const props = await super.getInitialProps(context);
     const { req: { locale, localeDataScript, supportedLocales } } = context;
     return {
