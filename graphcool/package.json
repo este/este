@@ -1,5 +1,8 @@
 {
   "name": "graphcool",
+  "scripts": {
+    "deps": "rimraf node_modules yarn.lock && yarn"
+  },
   "dependencies": {
     "@types/bcryptjs": "^2.4.1",
     "@types/validator": "^6.3.0",
@@ -8,5 +11,8 @@
     "graphcool-lib": "^0.1.0",
     "graphql-request": "^1.4.0",
     "validator": "^9.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
   }
 }

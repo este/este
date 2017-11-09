@@ -51,7 +51,6 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "relay-runtime": "^1.2.0",
-    "rimraf": "^2.4.5",
     "smoothscroll-polyfill": "^0.4.0",
     "url": "^0.11.0",
     "validator": "^9.0.0",
@@ -77,6 +76,7 @@
     "prettier": "^1.5.1",
     "react-test-renderer": "^16.0.0",
     "relay-compiler": "^1.2.0",
-    "relay-devtools": "^1.4.0"
+    "relay-devtools": "^1.4.0",
+    "rimraf": "^2.4.5"
   }
 }
