@@ -40,9 +40,10 @@ const getReduxStore = serverState => {
   return clientReduxStore;
 };
 
-const redirectToSignIn = ({ pathname, res }) => {
+const redirectToSignIn = context => {
+  const { asPath, res } = context;
   const redirectUrlKey = 'redirectUrl';
-  const redirectUrl = encodeURIComponent(pathname);
+  const redirectUrl = encodeURIComponent(asPath);
   const href: Href = {
     pathname: '/sign-in',
     query: { [redirectUrlKey]: redirectUrl },
@@ -102,17 +103,17 @@ type Page = React.ComponentType<
   } & NextProps,
 >;
 
-type QueryVariables = ({|
+export type QueryVariables<Query> = {|
   isAuthenticated: boolean,
-  query: Object,
+  query: Query,
   userId: ?string,
-|}) => Object;
+|};
 
 const app = (
   Page: Page,
   options?: {|
     query?: Object,
-    queryVariables?: QueryVariables,
+    queryVariables?: (variables: QueryVariables<Object>) => Object,
     requireAuth?: boolean,
   |},
 ) => {

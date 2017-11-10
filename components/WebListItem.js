@@ -78,7 +78,7 @@ class WebListItem extends React.Component<Props, State> {
         <Text>{web.name}</Text>
         <Set>
           <Text color="gray" size={-1}>
-            <A href={{ pathname: '/edit', query: { webDomain: web.domain } }}>
+            <A href={{ pathname: '/edit', query: { domain: web.domain } }}>
               {web.domain}
             </A>
             {', '}

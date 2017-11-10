@@ -1,5 +1,5 @@
 # source: https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu
-# timestamp: Mon Oct 30 2017 04:11:49 GMT+0100 (CET)
+# timestamp: Fri Nov 10 2017 00:57:29 GMT+0100 (CET)
 
 type AddToUserWebsPayload {
   viewer: Viewer!
@@ -461,7 +461,7 @@ type Viewer {
   allWebs(filter: WebFilter, orderBy: WebOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   user: User
   User(email: String, id: ID): User
-  Web(id: ID): Web
+  Web(domain: String, id: ID): Web
 
   # loggedInUser
   loggedInUser: LoggedInUserPayload

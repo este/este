@@ -3,7 +3,7 @@ import * as React from 'react';
 import { titles } from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
-import app from '../components/app';
+import app, { type QueryVariables } from '../components/app';
 import A from '../components/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
@@ -73,7 +73,7 @@ export default app(Index, {
       }
     }
   `,
-  queryVariables: ({ isAuthenticated, userId }) => ({
+  queryVariables: ({ isAuthenticated, userId }: QueryVariables<{}>) => ({
     ...queryFilters(userId),
     isAuthenticated,
   }),
