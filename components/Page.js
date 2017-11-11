@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
+import PageStyle from './PageStyle';
 
 // yarn favicon
 const Favicons = () => [
@@ -46,22 +47,6 @@ const Favicons = () => [
     content="/static/favicons/browserconfig.xml"
   />,
 ];
-
-// Set html background-color and emulate React Native default styles.
-// Margin 0 is needef for body and some form fields according to normalize.css.
-const GlobalStyles = ({ pageBackgroundColor }) => (
-  <style jsx global>{`
-    html {
-      background-color: ${pageBackgroundColor};
-    }
-    * {
-      border-width: 0;
-      box-sizing: border-box;
-      margin: 0;
-      text-decoration: none;
-    }
-  `}</style>
-);
 
 const Container = ({ children }) => (
   <Box
@@ -112,10 +97,9 @@ const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
           // https://bitsofco.de/ios-safari-and-shrink-to-fit
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <meta name="theme-color" content={pageBackgroundColor} />
         <Favicons />
       </Head>
-      <GlobalStyles pageBackgroundColor={pageBackgroundColor} />
+      <PageStyle backgroundColor={pageBackgroundColor} />
       <Baseline>
         <LoadingBar color={theme.colors.primary} />
         <AppError />
