@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7168b59b4421be25b65040f2969d9c51
+ * @relayHash b40389fc4cff8b50fb9ec1c836c1d0fc
  */
 
 /* eslint-disable */
@@ -12,7 +12,6 @@ import type {ConcreteBatch} from 'relay-runtime';
 export type editQueryResponse = {|
   +viewer: {|
     +Web: ?{|
-      +domain: string;
       +name: string;
     |};
   |};
@@ -26,7 +25,6 @@ query editQuery(
 ) {
   viewer {
     Web(domain: $domain) {
-      domain
       name
       id
     }
@@ -72,13 +70,6 @@ const batch /*: ConcreteBatch*/ = {
             "name": "Web",
             "plural": false,
             "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "domain",
-                "storageKey": null
-              },
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -139,13 +130,6 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "domain",
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
                 "name": "name",
                 "storageKey": null
               },
@@ -171,7 +155,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query editQuery(\n  $domain: String\n) {\n  viewer {\n    Web(domain: $domain) {\n      domain\n      name\n      id\n    }\n    id\n  }\n}\n"
+  "text": "query editQuery(\n  $domain: String\n) {\n  viewer {\n    Web(domain: $domain) {\n      name\n      id\n    }\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

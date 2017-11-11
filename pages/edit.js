@@ -5,6 +5,7 @@ import { graphql } from 'react-relay';
 import type { editQueryResponse } from './__generated__/editQuery.graphql';
 import type { EditQuery } from '../lib/sitemap';
 import Error from 'next/error';
+import Editor from '../components/Editor';
 
 const Edit = ({ data }) => {
   const { viewer: { Web } }: editQueryResponse = data;
@@ -15,12 +16,8 @@ const Edit = ({ data }) => {
   // for example. Therefore, it's up to the page to decide. In this case, we
   // return Next.js error page until we will have something better.
   if (!Web) return <Error statusCode={404} />;
-  return (
-    <div>
-      <h1>{Web.name}</h1>
-      <h2>{Web.domain}</h2>
-    </div>
-  );
+
+  return <Editor name={Web.name} />;
 };
 
 export default app(Edit, {
@@ -29,7 +26,6 @@ export default app(Edit, {
     query editQuery($domain: String) {
       viewer {
         Web(domain: $domain) {
-          domain
           name
         }
       }
