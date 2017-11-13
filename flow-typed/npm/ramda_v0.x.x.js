@@ -1,5 +1,5 @@
-// flow-typed signature: 106415dc58d30c897568a31edee04404
-// flow-typed version: 8f69fdbf49/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: e49131b589fd6cf5b00e33d898f0ff34
+// flow-typed version: 55bef7ff62/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -664,6 +664,16 @@ declare module ramda {
     ...rest: Array<void>
   ): (xs: Array<T>) => Array<T>;
 
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    o: { [key: string]: A }
+  ): O;
+
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    ...args: Array<void>
+  ): (o: { [key: string]: A }) => O;
+
   declare function lastIndexOf<E>(x: E, xs: Array<E>): number;
   declare function lastIndexOf<E>(
     x: E,
@@ -1037,24 +1047,21 @@ declare module ramda {
   ): (y: A) => boolean;
   declare function eqBy<A, B>(fn: (x: A) => B, x: A, y: A): boolean;
 
-  // Workaround for $ElementType.
-  // See https://github.com/facebook/flow/issues/4804
-  declare type $Ramda_ElementType<A, B> = $ElementType<A, B>;
   // Flow cares about the order in which these appear. Generally function
   // siguatures should go from smallest arity to largest arity.
   declare type PropEq = (<T>(
     prop: $Keys<T>
-  ) => ((val: $ElementType<T, $Keys<T>>) => (obj: T) => boolean) &
-    ((val: $ElementType<T, $Keys<T>>, obj: T) => boolean)) &
+  ) => ((val: mixed) => (obj: T) => boolean) &
+    ((val: mixed, obj: T) => boolean)) &
+    (<T>(prop: $Keys<T>, val: mixed) => (obj: T) => boolean) &
+    (<T>(prop: $Keys<T>, val: mixed, obj: T) => boolean) &
+    // Array variants.
     (<T>(
-      prop: $Keys<T>,
-      val: $ElementType<T, $Keys<T>>
-    ) => (obj: T) => boolean) &
-    (<T>(
-      prop: $Keys<T>,
-      val: $Ramda_ElementType<T, $Keys<T>>,
-      obj: T
-    ) => boolean);
+      prop: number
+    ) => ((val: mixed) => (obj: Array<*>) => boolean) &
+      ((val: mixed, obj: Array<*>) => boolean)) &
+    (<T>(prop: number, val: mixed) => (obj: Array<*>) => boolean) &
+    (<T>(prop: number, val: mixed, obj: Array<*>) => boolean);
   declare var propEq: PropEq;
 
   declare function pathEq(

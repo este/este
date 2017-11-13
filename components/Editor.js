@@ -5,7 +5,7 @@ import { browserTheme } from '../themes/browserTheme';
 import Head from 'next/head';
 import PageStyle from './PageStyle';
 import AppError from './AppError';
-import EditorContent, { type Content } from './EditorContent';
+import EditorElement, { type Element } from './EditorElement';
 
 type EditorProps = {|
   name: string,
@@ -20,7 +20,7 @@ type EditorState = {|
       fontSizeScale: number,
       lineHeight: number,
     },
-    content: Content,
+    element: Element,
   |},
 |};
 
@@ -34,8 +34,8 @@ const initialState = {
       fontSizeScale: 0.75,
       lineHeight: 24,
     },
-    content: {
-      type: 'View',
+    element: {
+      type: 'Box',
       props: {
         children: [
           {
@@ -81,7 +81,8 @@ class Editor extends React.Component<EditorProps, EditorState> {
         </Head>
         <PageStyle backgroundColor={this.state.page.backgroundColor} />
         <AppError />
-        <EditorContent content={this.state.page.content} />
+        <EditorElement element={this.state.page.element} />
+        {/* <Controls? /> */}
       </ThemeProvider>
     );
   }

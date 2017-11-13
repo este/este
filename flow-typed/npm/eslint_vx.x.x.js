@@ -1,4 +1,4 @@
-// flow-typed signature: 61f65a2e0f2e4fe1ed481290824c9e65
+// flow-typed signature: 01f723404269882842f32fdb7f1d7804
 // flow-typed version: <<STUB>>/eslint_v^4.4.1/flow_v0.59.0
 
 /**
@@ -1330,6 +1330,10 @@ declare module 'eslint/lib/util/module-resolver' {
   declare module.exports: any;
 }
 
+declare module 'eslint/lib/util/naming' {
+  declare module.exports: any;
+}
+
 declare module 'eslint/lib/util/node-event-generator' {
   declare module.exports: any;
 }
@@ -2355,6 +2359,9 @@ declare module 'eslint/lib/util/keywords.js' {
 }
 declare module 'eslint/lib/util/module-resolver.js' {
   declare module.exports: $Exports<'eslint/lib/util/module-resolver'>;
+}
+declare module 'eslint/lib/util/naming.js' {
+  declare module.exports: $Exports<'eslint/lib/util/naming'>;
 }
 declare module 'eslint/lib/util/node-event-generator.js' {
   declare module.exports: $Exports<'eslint/lib/util/node-event-generator'>;
