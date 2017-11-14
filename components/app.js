@@ -196,7 +196,7 @@ const app = (
       // solved with service workers I believe.
       // It does not throw on payload errors like insufficient permissions etc.,
       // because payload errors are not real errors. They are expected when the
-      // scheme is updated and an app is not yet updated. That's why Relay
+      // schema is updated and an app is not yet updated. That's why Relay
       // generated Flow types are optional. Don't crash, just don't show data.
       // Another mechanism should invoke app update.
       data = await fetchQuery(environment, query, variables);

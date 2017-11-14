@@ -11,15 +11,17 @@ type EditorProps = {|
   name: string,
 |};
 
+export type Typography = {|
+  fontFamily: string,
+  fontSize: number,
+  fontSizeScale: number,
+  lineHeight: number,
+|};
+
 type EditorState = {|
   page: {|
     backgroundColor: string,
-    typography: {
-      fontFamily: string,
-      fontSize: number,
-      fontSizeScale: number,
-      lineHeight: number,
-    },
+    typography: Typography,
     element: Element,
   |},
 |};
@@ -34,9 +36,16 @@ const initialState = {
       fontSizeScale: 0.75,
       lineHeight: 24,
     },
+    // colors: {
+    //   brand1: 'blue'
+    // },
     element: {
       type: 'Box',
       props: {
+        style: {
+          // marginLeft: 1,
+          // backgroundColor: 'green',
+        },
         children: [
           {
             type: 'Text',
@@ -68,7 +77,10 @@ const initialState = {
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
+  // TODO: Validate page.element JSON schema via Ajv before render.
+
   render() {
+    const { page } = this.state;
     return (
       <ThemeProvider theme={browserTheme}>
         <Head>
@@ -79,9 +91,9 @@ class Editor extends React.Component<EditorProps, EditorState> {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
         </Head>
-        <PageStyle backgroundColor={this.state.page.backgroundColor} />
+        <PageStyle backgroundColor={page.backgroundColor} />
         <AppError />
-        <EditorElement element={this.state.page.element} />
+        <EditorElement element={page.element} typography={page.typography} />
         {/* <Controls? /> */}
       </ThemeProvider>
     );

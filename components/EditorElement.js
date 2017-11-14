@@ -1,10 +1,15 @@
 // @flow
 import * as React from 'react';
+import EditorElementBox from './EditorElementBox';
+import type { Typography } from './Editor';
 
-// Just a basic shape. We need a JSON Schema for validation anyway.
-// Doesn't make sense to use Flow checking for DB data.
+// Just a basic shape. We need a JSON Schema for validation.
+// Doesn't make sense to use Flow for dynamic data.
+// TODO: | 'Input' | 'Button',
+type ElementType = 'Box' | 'Text';
+
 export type Element = {|
-  type: 'Box' | 'Text', // TODO: | 'Input' | 'Button',
+  type: ElementType,
   props: {|
     children: Array<Element | string>,
     style?: Object,
@@ -14,19 +19,39 @@ export type Element = {|
   |},
 |};
 
-type EditorElementProps = {
+type EditorElementProps = {|
   element: Element,
-};
+  typography: Typography,
+|};
 
 class EditorElement extends React.PureComponent<EditorElementProps> {
+  static getElementComponent(type: ElementType) {
+    switch (type) {
+      case 'Box':
+        return EditorElementBox;
+      case 'Text':
+        // TODO: EditorElementText ofc.
+        return EditorElementBox;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (type: empty);
+        return null;
+    }
+  }
+
   render() {
-    const { props: { children, style } } = this.props.element;
-    const props = style ? { style } : null;
-    const childrenComponents = children.map(child => {
+    const { typography, element } = this.props;
+    const Component = EditorElement.getElementComponent(element.type);
+    if (!Component) return null;
+
+    const children = element.props.children.map(child => {
       if (typeof child === 'string') return child;
-      return <EditorElement element={child} />;
+      return <EditorElement element={child} typography={typography} />;
     });
-    return React.createElement('div', props, ...childrenComponents);
+    const props = { typography, style: element.props.style };
+
+    // createElement with ...children, and we don't have to add artificial keys.
+    return React.createElement(Component, props, ...children);
   }
 }
 
