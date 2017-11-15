@@ -20,7 +20,7 @@
     "test": "flow && jest && yarn build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay": "rimraf **/__generated__ && relay-compiler --src ./ --schema schema.graphql",
+    "relay": "rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema schema.graphql",
     "relay:watch": "yarn relay -- --watch",
     "schema": "graphql get-schema dev"
   },
