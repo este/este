@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/npmconf/.*
 .*/node_modules/bcryptjs/.*
+.*/node_modules/cosmiconfig/.*
 .*/node_modules/config-chain/.*
 
 [include]

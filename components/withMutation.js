@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import type { Commit, Environment, Store } from '../types';
+import type { Commit, Store } from '../types';
 import PropTypes from 'prop-types';
 import { mutationErrorToAppError } from '../lib/appError';
+import type { Disposable, Environment } from 'react-relay';
 
 // https://github.com/facebook/relay/issues/2077
 export const getClientMutationId = () => Date.now().toString(36);
@@ -16,7 +17,7 @@ type Mutate = <Variables, Response>(
   variables: Variables,
   onCompleted: OnCompleted<Response>,
   onError: OnError,
-) => void;
+) => Disposable;
 
 const withMutation = <Props: {}>(
   Component: React.ComponentType<{ mutate: Mutate } & Props>,
@@ -37,6 +38,7 @@ const withMutation = <Props: {}>(
 
     // We have to track _isMounted, because Relay doesn't support unsubscribe.
     // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+    // TODO: Use Disposable dispose from commit. Probably stored in an array.
     _isMounted: boolean;
 
     context: {

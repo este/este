@@ -39,6 +39,7 @@ const Authenticated = ({ viewer, userId }) => (
         id="index.manageYourWebs"
       />
     </Heading>
+    {/* $FlowFixMe viewer is {||} but {} is required. Probably typedef bug. */}
     <WebList viewer={viewer} userId={userId} />
     <CreateWeb userId={userId} />
   </Box>

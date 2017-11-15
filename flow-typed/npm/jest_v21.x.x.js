@@ -1,5 +1,5 @@
-// flow-typed signature: c123175962df1025f859e5b9b4d9de28
-// flow-typed version: 8651382b52/jest_v21.x.x/flow_>=v0.39.x
+// flow-typed signature: 8a6d495ef15f96f0d0c836b6aa70a1cd
+// flow-typed version: cfa05a2b8e/jest_v21.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -258,7 +258,7 @@ type JestExpectType = {
   /**
    * Use .toMatchObject to check that a javascript object matches a subset of the properties of an object.
    */
-  toMatchObject(object: Object): void,
+  toMatchObject(object: Object | Array<Object>): void,
   /**
    * This ensures that a React component matches the most recent snapshot.
    */

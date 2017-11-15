@@ -1,4 +1,4 @@
-// flow-typed signature: ccdd93a45486e25e77257218b6f39e41
+// flow-typed signature: 4f8c4ad9d7e282b1cb51b8c7c561a635
 // flow-typed version: <<STUB>>/graphql-cli_v^1.0.1/flow_v0.59.0
 
 /**
@@ -46,6 +46,10 @@ declare module 'graphql-cli/dist/cmds/init' {
   declare module.exports: any;
 }
 
+declare module 'graphql-cli/dist/cmds/lint' {
+  declare module.exports: any;
+}
+
 declare module 'graphql-cli/dist/cmds/ping' {
   declare module.exports: any;
 }
@@ -88,6 +92,9 @@ declare module 'graphql-cli/dist/cmds/index.js' {
 }
 declare module 'graphql-cli/dist/cmds/init.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/init'>;
+}
+declare module 'graphql-cli/dist/cmds/lint.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/lint'>;
 }
 declare module 'graphql-cli/dist/cmds/ping.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/ping'>;

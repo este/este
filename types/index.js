@@ -5,6 +5,7 @@ import type {
   Reducer as ReduxReducer,
   Store as ReduxStore,
 } from 'redux';
+import type { Disposable, Environment, PayloadError } from 'react-relay';
 
 import type { AppState } from '../reducers/app';
 import type { AppError } from '../lib/appError';
@@ -25,20 +26,10 @@ export type Reducers = { [name: $Keys<State>]: ReduxReducer<State, Action> };
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
-// Replace once Relay Modern will have flow-typed typedefs.
-export type Environment = Object;
-
-export type PayloadError = Array<{|
-  code: number,
-  locations: Array<Object>,
-  message: string,
-  path: Array<string>,
-  requestId: string,
-|}>;
-
 export type Commit<Variables, Response> = (
   environment: Environment,
   variables: Variables,
-  onCompleted: (response: Response, payloadError: PayloadError) => void,
-  onError: (error: any) => void,
-) => void;
+  // More typed than flow-typed/npm/react-relay_v1.x.x.js
+  onCompleted: (response: Response, errors: ?Array<PayloadError>) => void,
+  onError: (error: Error) => void,
+) => Disposable;

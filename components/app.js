@@ -9,6 +9,7 @@ import type { IntlShape } from 'react-intl';
 import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { createProvider as createReduxProvider } from 'react-redux';
+// $FlowFixMe Missing in flow-typed.
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 
