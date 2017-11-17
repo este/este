@@ -7,6 +7,7 @@ import {
   computeBoxStyle,
   type EditorElementBoxProps,
 } from './EditorElementBox';
+import colorLib from 'color';
 
 // Simplified components/Text.js
 // - less props and logic
@@ -112,6 +113,13 @@ class EditorElementText extends React.Component<EditorElementTextProps> {
       ...computedStyle
     } = computeTextStyle(hasParentText, theme, style);
 
+    // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+    // tldr; Fix font smoothing only for light text on a dark background.
+    // We check only color luminosity for now. It's good enough. An ideal
+    // solution would have to propagate backgroundColor from parents through
+    // context. That's would allow to compare luminosities.
+    const fixBrowserFontSmoothing = color && colorLib(color).luminosity() > 0.5;
+
     return (
       <div style={computedStyle}>
         {children}
@@ -140,6 +148,9 @@ class EditorElementText extends React.Component<EditorElementTextProps> {
             ${fontFamily ? `font-family: ${fontFamily}` : ''};
             ${fontSize ? `font-size: ${fontSize}` : ''};
             ${lineHeight ? `line-height: ${lineHeight}px` : ''};
+            ${fixBrowserFontSmoothing
+              ? `-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;`
+              : ''};
           }
         `}</style>
       </div>

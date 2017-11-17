@@ -58,6 +58,23 @@ const initialState = {
         },
         children: [
           {
+            type: 'Box',
+            props: {
+              style: { backgroundColor: '#434' },
+              children: [
+                {
+                  type: 'Text',
+                  props: {
+                    style: {
+                      color: '#fff',
+                    },
+                    children: ['Test'],
+                  },
+                },
+              ],
+            },
+          },
+          {
             type: 'Text',
             props: {
               style: { fontSize: 2 },
