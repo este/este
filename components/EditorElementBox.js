@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
-import type { Typography } from './Editor';
+import type { Theme } from './Editor';
 
-// This is simplified components/Box.js
+// Simplified components/Box.js
 // - less props and logic
 // - any color, it's up to the editor UI to build theme lazily
-// - use style props instead of Box props
+// - use style prop for styling
+// - JSON schema instead of Flow
 
-// TODO: Add rgb/rgba regex.
-const colorType = { type: 'string' };
+// TODO: Add rgb/rgba regex or validate manually via Color lib.
+export const colorSchemaType = { type: 'string' };
 
-// Only React and React Native common styles.
 // TODO: Improve with JSON Schema draft 6 for full CSS compliance.
 export const boxStyleSchema = {
   type: 'object',
@@ -90,23 +90,24 @@ export const boxStyleSchema = {
     borderTopLeftRadius: { type: 'number' },
     borderTopRightRadius: { type: 'number' },
 
-    borderBottomColor: colorType,
-    borderLeftColor: colorType,
-    borderRightColor: colorType,
-    borderTopColor: colorType,
+    borderBottomColor: colorSchemaType,
+    borderLeftColor: colorSchemaType,
+    borderRightColor: colorSchemaType,
+    borderTopColor: colorSchemaType,
 
-    backgroundColor: colorType,
+    backgroundColor: colorSchemaType,
     opacity: { type: 'number' },
     overflow: { type: 'string', enum: ['visible', 'hidden', 'scroll'] },
   },
 };
 
-type EditorElementBoxProps = {|
+export type EditorElementBoxProps = {|
   children?: React.Node,
   style?: Object,
-  typography: Typography,
+  theme: Theme,
 |};
 
+// Use plain number for vertical and horizontal rhythm based on lineHeight.
 const rhythmProps = [
   'marginBottom',
   'marginLeft',
@@ -128,44 +129,57 @@ const rhythmProps = [
   'right',
 ];
 
-const computeBoxStyle = (style, lineHeight) =>
-  Object.keys(style).reduce((boxStyle, prop) => {
+// Enforce React Native Flexbox behavior.
+// https://microsoft.github.io/reactxp/docs/styles.html#flexbox-style-attributes
+// https://github.com/Microsoft/reactxp/blob/master/src/web/Styles.ts
+const computeFlex = value => {
+  // p 1 auto
+  if (value > 0) return [value, 1];
+  // 0 -n auto
+  if (value < 0) return [0, -value];
+  // 0 0 auto
+  return [0, 0];
+};
+
+export const computeBoxStyle = (theme: Theme, style: Object) =>
+  Object.keys(style).reduce((computedStyle, prop) => {
     let value = style[prop];
-    // Use plain number for vertical and horizontal rhythm based on lineHeight.
-    if (typeof value === 'number' && rhythmProps.indexOf(prop) !== -1) {
-      value *= lineHeight;
+
+    if (prop === 'flex') {
+      const [grow, shrink] = computeFlex(value);
+      const { flexGrow = grow, flexShrink = shrink } = style;
+      return { ...computedStyle, flexGrow, flexShrink };
     }
-    return { ...boxStyle, [prop]: value };
+
+    const isRhythmProp =
+      typeof value === 'number' && rhythmProps.indexOf(prop) !== -1;
+    if (isRhythmProp) {
+      value *= theme.typography.lineHeight;
+    }
+
+    return { ...computedStyle, [prop]: value };
   }, {});
 
-// TODO: Check current react-native-web and reactxp implementation.
-// http://facebook.github.io/react-native/releases/0.49/docs/layout-props.html#flex
-// https://github.com/necolas/react-native-web
-const restrictFlex = style => style;
-
 const EditorElementBox = (props: EditorElementBoxProps) => {
-  let { style } = props;
-
-  if (style) style = computeBoxStyle(style, props.typography.lineHeight);
-  if (style) style = restrictFlex(style);
-
-  // TODO: tryToEnsureRhythmViaPaddingCompensation
+  const { style, theme, children } = props;
+  const computedStyle = style && computeBoxStyle(theme, style);
 
   return (
-    <div style={style}>
-      {props.children}
+    <div style={computedStyle}>
+      {children}
       {/*
         Emulate React Native to ensure the same styling for all platforms.
-        https://facebook.github.io/yoga
-        https://github.com/Microsoft/reactxp
-        https://github.com/necolas/react-native-web
-        // TODO: Check current react-native-web and reactxp implementation.
+        https://github.com/Microsoft/reactxp/blob/master/src/web/View.tsx
       */}
       <style jsx>{`
         div {
+          position: relative;
           display: flex;
           flex-direction: column;
-          position: relative;
+          flex-grow: 0;
+          flex-shrink: 0;
+          overflow: hidden; /* Because Android */
+          align-items: stretch;
         }
       `}</style>
     </div>

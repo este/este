@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
-import type { Typography } from './Editor';
+import EditorElementText from './EditorElementText';
+import type { Theme } from './Editor';
 
 // Just a basic shape. We need a JSON Schema for validation.
 // Doesn't make sense to use Flow for dynamic data.
-// TODO: | 'Input' | 'Button',
+// TODO: | 'TextInput' | 'Button',
 type ElementType = 'Box' | 'Text';
 
 export type Element = {|
@@ -13,7 +14,7 @@ export type Element = {|
   props: {|
     children: Array<Element | string>,
     style?: Object,
-    // browserStyle?: Object,
+    // browserStyle?: string,
     // iosStyle?: Object,
     // androidStyle?: Object,
   |},
@@ -21,7 +22,7 @@ export type Element = {|
 
 type EditorElementProps = {|
   element: Element,
-  typography: Typography,
+  theme: Theme,
 |};
 
 class EditorElement extends React.PureComponent<EditorElementProps> {
@@ -30,8 +31,7 @@ class EditorElement extends React.PureComponent<EditorElementProps> {
       case 'Box':
         return EditorElementBox;
       case 'Text':
-        // TODO: EditorElementText ofc.
-        return EditorElementBox;
+        return EditorElementText;
       default:
         // eslint-disable-next-line no-unused-expressions
         (type: empty);
@@ -40,15 +40,15 @@ class EditorElement extends React.PureComponent<EditorElementProps> {
   }
 
   render() {
-    const { typography, element } = this.props;
+    const { theme, element } = this.props;
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
     const children = element.props.children.map(child => {
       if (typeof child === 'string') return child;
-      return <EditorElement element={child} typography={typography} />;
+      return <EditorElement element={child} theme={theme} />;
     });
-    const props = { typography, style: element.props.style };
+    const props = { theme, style: element.props.style };
 
     // createElement with ...children, and we don't have to add artificial keys.
     return React.createElement(Component, props, ...children);

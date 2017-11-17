@@ -11,34 +11,44 @@ type EditorProps = {|
   name: string,
 |};
 
-export type Typography = {|
-  fontFamily: string,
-  fontSize: number,
-  fontSizeScale: number,
-  lineHeight: number,
+export type Theme = {|
+  backgroundColor: string,
+  color: string,
+  typography: {|
+    fontFamily: string,
+    fontSize: number,
+    fontSizeScale: number,
+    lineHeight: number,
+  |},
 |};
 
 type EditorState = {|
   page: {|
-    backgroundColor: string,
-    typography: Typography,
+    theme: Theme,
     element: Element,
   |},
 |};
 
 const initialState = {
   page: {
-    backgroundColor: '#eee',
-    typography: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      fontSize: 16,
-      fontSizeScale: 0.75,
-      lineHeight: 24,
+    theme: {
+      backgroundColor: '#eee',
+      color: '#333',
+      typography: {
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        fontSize: 16,
+        fontSizeScale: 0.75,
+        lineHeight: 24,
+      },
+      // colors: {
+      //   brand1: 'blue'
+      // },
     },
-    // colors: {
-    //   brand1: 'blue'
-    // },
+    // fragmentsOrElementsOrTypesOrComponents: {
+    //   Heading
+    //   MainNav
+    // }
     element: {
       type: 'Box',
       props: {
@@ -49,22 +59,33 @@ const initialState = {
         children: [
           {
             type: 'Text',
-            props: { children: ['Ahoj '] },
+            props: {
+              style: { fontSize: 2 },
+              children: ['Jo!'],
+            },
           },
           {
             type: 'Text',
             props: {
-              style: { fontStyle: 'italic' },
               children: [
-                'sv',
+                'Ahoj ',
                 {
                   type: 'Text',
                   props: {
-                    style: { fontWeight: 'bold' },
-                    children: ['ě'],
+                    style: { fontStyle: 'italic' },
+                    children: [
+                      'sv',
+                      {
+                        type: 'Text',
+                        props: {
+                          style: { fontWeight: 'bold' },
+                          children: ['ě'],
+                        },
+                      },
+                      'te.',
+                    ],
                   },
                 },
-                'te',
               ],
             },
           },
@@ -91,9 +112,9 @@ class Editor extends React.Component<EditorProps, EditorState> {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
         </Head>
-        <PageStyle backgroundColor={page.backgroundColor} />
+        <PageStyle backgroundColor={page.theme.backgroundColor} />
         <AppError />
-        <EditorElement element={page.element} typography={page.typography} />
+        <EditorElement element={page.element} theme={page.theme} />
         {/* <Controls? /> */}
       </ThemeProvider>
     );
