@@ -23,14 +23,17 @@ export type Theme = {|
 |};
 
 type EditorState = {|
-  page: {|
+  web: {|
     theme: Theme,
-    element: Element,
+    pages: {
+      [pageName: string]: [Element],
+      index: [Element],
+    },
   |},
 |};
 
 const initialState = {
-  page: {
+  web: {
     theme: {
       backgroundColor: '#eee',
       color: '#333',
@@ -49,65 +52,79 @@ const initialState = {
     //   Heading
     //   MainNav
     // }
-    element: {
-      type: 'Box',
-      props: {
-        style: {
-          // marginLeft: 1,
-          // backgroundColor: 'green',
-        },
-        children: [
-          {
-            type: 'Box',
-            props: {
-              style: { backgroundColor: '#434' },
-              children: [
-                {
-                  type: 'Text',
-                  props: {
-                    style: {
-                      color: '#fff',
-                    },
-                    children: ['Test'],
+    pages: {
+      index: [
+        // {
+        //   type: 'Title',
+        //   props: 'Home',
+        // },
+        {
+          type: 'Box',
+          props: {
+            style: {
+              // marginLeft: 1,
+            },
+            children: [
+              {
+                type: 'Box',
+                props: {
+                  style: {
+                    backgroundColor: '#643ab7',
+                    paddingBottom: 0.5,
+                    paddingLeft: 0.5,
+                    paddingRight: 0.5,
+                    paddingTop: 0.5,
                   },
-                },
-              ],
-            },
-          },
-          {
-            type: 'Text',
-            props: {
-              style: { fontSize: 2 },
-              children: ['Jo!'],
-            },
-          },
-          {
-            type: 'Text',
-            props: {
-              children: [
-                'Ahoj ',
-                {
-                  type: 'Text',
-                  props: {
-                    style: { fontStyle: 'italic' },
-                    children: [
-                      'sv',
-                      {
-                        type: 'Text',
-                        props: {
-                          style: { fontWeight: 'bold' },
-                          children: ['ě'],
+                  children: [
+                    {
+                      type: 'Text',
+                      props: {
+                        style: {
+                          fontSize: 1,
+                          color: '#fff',
                         },
+                        children: ['Test'],
                       },
-                      'te.',
-                    ],
-                  },
+                    },
+                  ],
                 },
-              ],
-            },
+              },
+              {
+                type: 'Text',
+                props: {
+                  style: { fontSize: 2 },
+                  children: ['Jo!'],
+                },
+              },
+              {
+                type: 'Text',
+                props: {
+                  children: [
+                    'Ahoj ',
+                    {
+                      type: 'Text',
+                      props: {
+                        style: { fontStyle: 'italic' },
+                        children: [
+                          'sv',
+                          {
+                            type: 'Text',
+                            props: {
+                              style: { fontWeight: 'bold' },
+                              children: ['ě'],
+                            },
+                          },
+                          'te.',
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
           },
-        ],
-      },
+        },
+      ],
     },
   },
 };
@@ -115,23 +132,27 @@ const initialState = {
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
-  // TODO: Validate page.element JSON schema via Ajv before render.
-
   render() {
-    const { page } = this.state;
+    const { web } = this.state;
     return (
       <ThemeProvider theme={browserTheme}>
         <Head>
-          <title>{this.props.name}</title>
+          {/* <title>{this.props.name}</title> */}
           <meta
             name="viewport"
             // https://bitsofco.de/ios-safari-and-shrink-to-fit
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
         </Head>
-        <PageStyle backgroundColor={page.theme.backgroundColor} />
+        <PageStyle backgroundColor={web.theme.backgroundColor} />
         <AppError />
-        <EditorElement element={page.element} theme={page.theme} />
+        {web.pages.index.map(element => (
+          <EditorElement
+            element={element}
+            theme={web.theme}
+            key={JSON.stringify(element)}
+          />
+        ))}
         {/* <Controls? /> */}
       </ThemeProvider>
     );
