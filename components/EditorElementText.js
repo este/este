@@ -57,7 +57,7 @@ const computeTextStyle = (hasParentText, theme, style) => {
     ...(hasParentText
       ? null
       : {
-          color: theme.color,
+          color: theme.colors.foreground,
           fontFamily: theme.typography.fontFamily,
           fontSize: 0,
           lineHeight: theme.typography.lineHeight,

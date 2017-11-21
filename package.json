@@ -72,7 +72,7 @@
     "eslint-plugin-react": "^7.0.1",
     "flow-bin": "^0.59.0",
     "flow-typed": "^2.1.5",
-    "graphql-cli": "^1.0.1",
+    "graphql-cli": "^2.0.1",
     "jest": "^21.2.1",
     "prettier": "^1.5.1",
     "react-test-renderer": "^16.0.0",

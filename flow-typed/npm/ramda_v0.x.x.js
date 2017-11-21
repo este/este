@@ -1,5 +1,5 @@
-// flow-typed signature: c98ab630ca1653817fb3e561a8571a8b
-// flow-typed version: 5701a11906/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: dd2357aff6f42ced42e26a99698511ae
+// flow-typed version: 0b355a9cab/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1368,12 +1368,8 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  // TODO: Started failing in v31... (Attempt to fix below)
-  // declare type __UnwrapNestedObjectR<T, U, V: NestedObject<(t: T) => U>> = U
-  // declare type UnwrapNestedObjectR<T> = UnwrapNestedObjectR<*, *, T>
-  //
-  // declare function evolve<R, T: NestedObject<(x:any) => R>>(fn: T, ...rest: Array<void>): (src: NestedObject<any>) => UnwrapNestedObjectR<T>;
-  // declare function evolve<R: NestedObject<(x:any) => R>>(fn: T, src: NestedObject<any>): UnwrapNestedObjectR<T>;
+  declare function evolve<A: Object>(NestedObject<Function>, A): A;
+  declare function evolve<A: Object>(NestedObject<Function>): A => A;
 
   declare function eqProps(
     key: string,

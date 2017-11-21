@@ -1,19 +1,24 @@
 // @flow
 import * as React from 'react';
 import ThemeProvider from './ThemeProvider';
-import { browserTheme } from '../themes/browserTheme';
+import { browserThemeDark } from '../themes/browserTheme';
 import Head from 'next/head';
 import PageStyle from './PageStyle';
 import AppError from './AppError';
 import EditorElement, { type Element } from './EditorElement';
+import Box from './Box';
+import EditorMenu from './EditorMenu';
 
 type EditorProps = {|
   name: string,
 |};
 
+// TODO: Generate JSON schema.
 export type Theme = {|
-  backgroundColor: string,
-  color: string,
+  colors: {
+    background: string,
+    foreground: string,
+  },
   typography: {|
     fontFamily: string,
     fontSize: number,
@@ -22,21 +27,26 @@ export type Theme = {|
   |},
 |};
 
+export type Web = {|
+  theme: Theme,
+  pages: {
+    [pageName: string]: [Element],
+    index: [Element],
+  },
+|};
+
 type EditorState = {|
-  web: {|
-    theme: Theme,
-    pages: {
-      [pageName: string]: [Element],
-      index: [Element],
-    },
-  |},
+  web: Web,
 |};
 
 const initialState = {
   web: {
     theme: {
-      backgroundColor: '#eee',
-      color: '#333',
+      colors: {
+        background: '#F9FAFB',
+        foreground: '#333',
+        // brand1: 'blue'
+      },
       typography: {
         fontFamily:
           '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -44,9 +54,6 @@ const initialState = {
         fontSizeScale: 0.75,
         lineHeight: 24,
       },
-      // colors: {
-      //   brand1: 'blue'
-      // },
     },
     // fragmentsOrElementsOrTypesOrComponents: {
     //   Heading
@@ -129,31 +136,40 @@ const initialState = {
   },
 };
 
+const EditorPage = ({ web, webName, pageName }) => (
+  <Box>
+    <Head>
+      <title>{webName}</title>
+      <meta
+        name="viewport"
+        // https://bitsofco.de/ios-safari-and-shrink-to-fit
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+    </Head>
+    <PageStyle backgroundColor={web.theme.colors.background} />
+    {React.createElement(
+      Box,
+      null,
+      ...web.pages[pageName].map(element => (
+        <EditorElement element={element} theme={web.theme} />
+      )),
+    )}
+  </Box>
+);
+
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
   render() {
     const { web } = this.state;
+    const webName = this.props.name;
+    const pageName = 'index';
+
     return (
-      <ThemeProvider theme={browserTheme}>
-        <Head>
-          {/* <title>{this.props.name}</title> */}
-          <meta
-            name="viewport"
-            // https://bitsofco.de/ios-safari-and-shrink-to-fit
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-        </Head>
-        <PageStyle backgroundColor={web.theme.backgroundColor} />
+      <ThemeProvider theme={browserThemeDark}>
         <AppError />
-        {web.pages.index.map(element => (
-          <EditorElement
-            element={element}
-            theme={web.theme}
-            key={JSON.stringify(element)}
-          />
-        ))}
-        {/* <Controls? /> */}
+        <EditorPage web={web} webName={webName} pageName={pageName} />
+        <EditorMenu web={web} webName={webName} pageName={pageName} />
       </ThemeProvider>
     );
   }
