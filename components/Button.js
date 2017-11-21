@@ -14,12 +14,13 @@ const BrowserButton = ({
   ...props
 }: {
   disabled?: boolean,
-  onPress: () => void,
+  onPress?: () => void,
   style?: Object,
 }) => (
   <div // eslint-disable-line jsx-a11y/no-static-element-interactions
     onClick={onPress}
     onKeyPress={(e: KeyboardEvent) => {
+      if (!onPress) return;
       if (disabled) return;
       // Buttons are expected to be triggered using the Space or Enter key.
       const isTriggered = e.key === ' ' || e.key === 'Enter';
