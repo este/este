@@ -31,13 +31,17 @@ const NotAuthenticated = () => (
   </Box>
 );
 
+export const ManageYourWebsMessage = () => (
+  <FormattedMessage
+    defaultMessage="Manage your webs"
+    id="index.manageYourWebs"
+  />
+);
+
 const Authenticated = ({ viewer, userId }) => (
   <Box>
     <Heading size={1}>
-      <FormattedMessage
-        defaultMessage="Manage your webs"
-        id="index.manageYourWebs"
-      />
+      <ManageYourWebsMessage />
     </Heading>
     {/* $FlowFixMe viewer is {||} but {} is required. Probably typedef bug. */}
     <WebList viewer={viewer} userId={userId} />
