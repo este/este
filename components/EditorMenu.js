@@ -2,9 +2,9 @@
 import * as React from 'react';
 import type { Web } from './Editor';
 import Box from './Box';
-import Text from './Text';
 import Button, { type ButtonProps } from './Button';
 import EditorMenuHamburger from './EditorMenuHamburger';
+import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 
 type EditorMenuProps = {
   web: Web,
@@ -37,20 +37,6 @@ export const EditorMenuButton = (props: ButtonProps) => {
   );
 };
 
-const Arrow = () => <Text paddingHorizontal={0.5}>▸</Text>;
-
-// const Circle = () => <Text paddingHorizontal={0.5}>•</Text>;
-
-const Breadcrumbs = ({ webName, pageName }) => (
-  <Box flexDirection="row">
-    <EditorMenuButton>{webName}</EditorMenuButton>
-    <Arrow />
-    <EditorMenuButton>{pageName}</EditorMenuButton>
-    {/* <Circle />
-    <EditorMenuButton>publish</EditorMenuButton> */}
-  </Box>
-);
-
 // const Hide = props => <Button {...props}>&times;</Button>;
 
 class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
@@ -72,7 +58,7 @@ class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
         flexDirection="row"
         justifyContent="space-between"
       >
-        <Breadcrumbs webName={webName} pageName={pageName} />
+        <EditorMenuBreadcrumbs webName={webName} pageName={pageName} />
         <EditorMenuHamburger />
       </Box>
     );
