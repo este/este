@@ -10,6 +10,7 @@ type EditorMenuProps = {
   web: Web,
   webName: string,
   pageName: string,
+  paddingVertical: number,
 };
 
 type EditorMenuState = {
@@ -43,18 +44,17 @@ class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
   state = initialState;
 
   render() {
-    const { webName, pageName } = this.props;
+    const { webName, pageName, paddingVertical } = this.props;
 
     return (
       <Box
         backgroundColor="black"
-        paddingVertical={0.5}
+        paddingVertical={paddingVertical}
         paddingHorizontal={0.5}
-        position="absolute"
         bottom={0}
         left={0}
         right={0}
-        style={{ boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)' }}
+        style={{ position: 'fixed', boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)' }}
         flexDirection="row"
         justifyContent="space-between"
       >

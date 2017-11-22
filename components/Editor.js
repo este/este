@@ -2,12 +2,10 @@
 import * as React from 'react';
 import ThemeProvider from './ThemeProvider';
 import { browserThemeDark } from '../themes/browserTheme';
-import Head from 'next/head';
-import PageStyle from './PageStyle';
 import AppError from './AppError';
-import EditorElement, { type Element } from './EditorElement';
-import Box from './Box';
+import type { Element } from './EditorElement';
 import EditorMenu from './EditorMenu';
+import EditorPage from './EditorPage';
 
 type EditorProps = {|
   name: string,
@@ -70,6 +68,7 @@ const initialState = {
           props: {
             style: {
               // marginLeft: 1,
+              flex: 1, // Flex 1 to make footer sticky.
             },
             children: [
               {
@@ -86,10 +85,7 @@ const initialState = {
                     {
                       type: 'Text',
                       props: {
-                        style: {
-                          fontSize: 1,
-                          color: '#fff',
-                        },
+                        style: { fontSize: 1, color: '#fff' },
                         children: ['Test'],
                       },
                     },
@@ -97,32 +93,61 @@ const initialState = {
                 },
               },
               {
-                type: 'Text',
+                type: 'Box',
                 props: {
-                  style: { fontSize: 2 },
-                  children: ['Jo!'],
-                },
-              },
-              {
-                type: 'Text',
-                props: {
+                  style: { flex: 1 },
                   children: [
-                    'Ahoj ',
+                    ...Array.from({ length: 20 }).map(() => ({
+                      type: 'Text',
+                      props: { style: { fontSize: 2 }, children: ['Jo!'] },
+                    })),
+                    {
+                      type: 'Text',
+                      props: { style: { fontSize: 2 }, children: ['Jo!'] },
+                    },
                     {
                       type: 'Text',
                       props: {
-                        style: { fontStyle: 'italic' },
                         children: [
-                          'sv',
+                          'Ahoj ',
                           {
                             type: 'Text',
                             props: {
-                              style: { fontWeight: 'bold' },
-                              children: ['ě'],
+                              style: { fontStyle: 'italic' },
+                              children: [
+                                'sv',
+                                {
+                                  type: 'Text',
+                                  props: {
+                                    style: { fontWeight: 'bold' },
+                                    children: ['ě'],
+                                  },
+                                },
+                                'te.',
+                              ],
                             },
                           },
-                          'te.',
                         ],
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                type: 'Box',
+                props: {
+                  style: {
+                    paddingBottom: 0.5,
+                    paddingLeft: 0.5,
+                    paddingRight: 0.5,
+                    paddingTop: 0.5,
+                  },
+                  children: [
+                    {
+                      type: 'Text',
+                      props: {
+                        style: { fontSize: -1, color: '#333' },
+                        children: ['footer'],
                       },
                     },
                   ],
@@ -136,26 +161,11 @@ const initialState = {
   },
 };
 
-const EditorPage = ({ web, webName, pageName }) => (
-  <Box>
-    <Head>
-      <title>{webName}</title>
-      <meta
-        name="viewport"
-        // https://bitsofco.de/ios-safari-and-shrink-to-fit
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
-    </Head>
-    <PageStyle backgroundColor={web.theme.colors.background} />
-    {React.createElement(
-      Box,
-      null,
-      ...web.pages[pageName].map(element => (
-        <EditorElement element={element} theme={web.theme} />
-      )),
-    )}
-  </Box>
-);
+const computeMenuStyle = lineHeight => {
+  const paddingVertical = 0.5;
+  const defaultHeight = lineHeight + 2 * (paddingVertical * lineHeight);
+  return { paddingVertical, defaultHeight };
+};
 
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
@@ -164,12 +174,23 @@ class Editor extends React.Component<EditorProps, EditorState> {
     const { web } = this.state;
     const webName = this.props.name;
     const pageName = 'index';
+    const menuStyle = computeMenuStyle(browserThemeDark.typography.lineHeight);
 
     return (
       <ThemeProvider theme={browserThemeDark}>
         <AppError />
-        <EditorPage web={web} webName={webName} pageName={pageName} />
-        <EditorMenu web={web} webName={webName} pageName={pageName} />
+        <EditorPage
+          web={web}
+          webName={webName}
+          pageName={pageName}
+          paddingBottomPx={menuStyle.defaultHeight}
+        />
+        <EditorMenu
+          web={web}
+          webName={webName}
+          pageName={pageName}
+          paddingVertical={menuStyle.paddingVertical}
+        />
       </ThemeProvider>
     );
   }

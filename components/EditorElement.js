@@ -44,13 +44,21 @@ class EditorElement extends React.PureComponent<EditorElementProps> {
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
+    const props = {
+      onClick: (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // console.log(e.currentTarget);
+      },
+      theme,
+      style: element.props.style,
+    };
+
     const children = element.props.children.map(child => {
       if (typeof child === 'string') return child;
       return <EditorElement element={child} theme={theme} />;
     });
-    const props = { theme, style: element.props.style };
 
-    // createElement with ...children, and we don't have to add artificial keys.
     return React.createElement(Component, props, ...children);
   }
 }
