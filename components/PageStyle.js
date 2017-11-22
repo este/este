@@ -2,8 +2,8 @@
 import * as React from 'react';
 import Head from 'next/head';
 
-// Set html background-color and emulate React Native styles. Margin 0 is needed
-// for body and some form fields according to normalize.css.
+// - Emulate React Native
+// - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
 
 type PageStyleProps = {
   backgroundColor: string,
@@ -17,6 +17,7 @@ const PageStyle = ({ backgroundColor }: PageStyleProps) => (
     <style jsx global>{`
       html {
         background-color: ${backgroundColor};
+        -webkit-text-size-adjust: 100%;
       }
       * {
         border-width: 0;
