@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
-import type { Web } from './Editor';
+// import type { Web } from './Editor';
 import Box from './Box';
 import Button, { type ButtonProps } from './Button';
 import EditorMenuHamburger from './EditorMenuHamburger';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 
 type EditorMenuProps = {
-  web: Web,
+  // web: Web,
   webName: string,
   pageName: string,
   paddingVertical: number,
@@ -40,7 +40,7 @@ export const EditorMenuButton = (props: ButtonProps) => {
 
 // const Hide = props => <Button {...props}>&times;</Button>;
 
-class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
+class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
   state = initialState;
 
   render() {

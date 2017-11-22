@@ -6,6 +6,8 @@ import AppError from './AppError';
 import type { Element } from './EditorElement';
 import EditorMenu from './EditorMenu';
 import EditorPage from './EditorPage';
+// import { assocPath } from 'ramda';
+// import XRay from 'react-x-ray';
 
 type EditorProps = {|
   name: string,
@@ -57,6 +59,7 @@ const initialState = {
     //   Heading
     //   MainNav
     // }
+    // Reconsider immutable-js later. It shines on shallow cloning.
     pages: {
       index: [
         // {
@@ -97,7 +100,7 @@ const initialState = {
                 props: {
                   style: { flex: 1 },
                   children: [
-                    ...Array.from({ length: 20 }).map(() => ({
+                    ...Array.from({ length: 2 }).map(() => ({
                       type: 'Text',
                       props: { style: { fontSize: 2 }, children: ['Jo!'] },
                     })),
@@ -170,6 +173,33 @@ const computeMenuStyle = lineHeight => {
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
+  // testHighlightUpdates() {
+  //   const path = [
+  //     'web',
+  //     'pages',
+  //     'index',
+  //     0,
+  //     'props',
+  //     'children',
+  //     0,
+  //     'props',
+  //     'children',
+  //     0,
+  //     'props',
+  //     'children',
+  //   ];
+  //   setInterval(() => {
+  //     this.setState(prevState =>
+  //       // $FlowFixMe Wrong typedefs imho. Number shall be supported.
+  //       assocPath(path, [Date.now().toString(36)], prevState),
+  //     );
+  //   }, 1000);
+  // }
+
+  // dispatch(action) {
+  //   this.setState(prevState => counter(prevState, action));
+  // }
+
   render() {
     const { web } = this.state;
     const webName = this.props.name;
@@ -178,6 +208,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
     return (
       <ThemeProvider theme={browserThemeDark}>
+        {/* <XRay grid={web.theme.typography.lineHeight}> */}
         <AppError />
         <EditorPage
           web={web}
@@ -186,11 +217,12 @@ class Editor extends React.Component<EditorProps, EditorState> {
           paddingBottomPx={menuStyle.defaultHeight}
         />
         <EditorMenu
-          web={web}
+          // web={web}
           webName={webName}
           pageName={pageName}
           paddingVertical={menuStyle.paddingVertical}
         />
+        {/* </XRay> */}
       </ThemeProvider>
     );
   }

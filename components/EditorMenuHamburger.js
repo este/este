@@ -18,7 +18,7 @@ const initialState = {
 
 const ToggleButton = props => <EditorMenuButton {...props}>☰</EditorMenuButton>;
 
-class EditorMenuHamburger extends React.Component<
+class EditorMenuHamburger extends React.PureComponent<
   EditorMenuHamburgerProps,
   EditorMenuHamburgerState,
 > {

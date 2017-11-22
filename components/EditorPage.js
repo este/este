@@ -37,8 +37,8 @@ const EditorPage = ({
       />
     </Head>,
     <PageStyle backgroundColor={web.theme.colors.background} />,
-    ...web.pages[pageName].map(element => (
-      <EditorElement element={element} theme={web.theme} />
+    ...web.pages[pageName].map((element, i) => (
+      <EditorElement element={element} theme={web.theme} path={[i]} />
     )),
   ];
 

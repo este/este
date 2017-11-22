@@ -23,9 +23,10 @@ export type Element = {|
 type EditorElementProps = {|
   element: Element,
   theme: Theme,
+  path: Array<number>,
 |};
 
-class EditorElement extends React.PureComponent<EditorElementProps> {
+class EditorElement extends React.Component<EditorElementProps> {
   static getElementComponent(type: ElementType) {
     switch (type) {
       case 'Box':
@@ -39,24 +40,35 @@ class EditorElement extends React.PureComponent<EditorElementProps> {
     }
   }
 
+  shouldComponentUpdate(nextProps: EditorElementProps) {
+    const shouldUpdate =
+      this.props.element !== nextProps.element ||
+      this.props.theme !== nextProps.theme;
+    return shouldUpdate;
+  }
+
+  handleClick = (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // this.props.dispatch({ type: 'SET_FOCUS', path: this.props.path })
+  };
+
   render() {
-    const { theme, element } = this.props;
+    const { theme, element, path } = this.props;
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
     const props = {
-      onClick: (e: Event) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // console.log(e.currentTarget);
-      },
+      onClick: this.handleClick,
       theme,
       style: element.props.style,
     };
 
-    const children = element.props.children.map(child => {
+    const children = element.props.children.map((child, i) => {
       if (typeof child === 'string') return child;
-      return <EditorElement element={child} theme={theme} />;
+      return (
+        <EditorElement element={child} theme={theme} path={path.concat(i)} />
+      );
     });
 
     return React.createElement(Component, props, ...children);
