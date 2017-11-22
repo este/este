@@ -103,7 +103,7 @@ class EditorElementText extends React.Component<EditorElementTextProps> {
   context: { hasParentText: boolean };
 
   render() {
-    const { style, theme, children } = this.props;
+    const { style, theme, children, ...props } = this.props;
     const { hasParentText } = this.context;
     const {
       color,
@@ -121,7 +121,7 @@ class EditorElementText extends React.Component<EditorElementTextProps> {
     const fixBrowserFontSmoothing = color && colorLib(color).luminosity() > 0.5;
 
     return (
-      <div style={computedStyle}>
+      <div {...props} style={computedStyle}>
         {children}
         {/*
           Emulate React Native to ensure the same styling for all platforms.

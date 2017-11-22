@@ -101,11 +101,11 @@ export const boxStyleSchema = {
   },
 };
 
-export type EditorElementBoxProps = {|
+export type EditorElementBoxProps = {
   children?: React.Node,
   style?: Object,
   theme: Theme,
-|};
+};
 
 // Use plain number for vertical and horizontal rhythm based on lineHeight.
 const rhythmProps = [
@@ -160,12 +160,16 @@ export const computeBoxStyle = (theme: Theme, style: Object) =>
     return { ...computedStyle, [prop]: value };
   }, {});
 
-const EditorElementBox = (props: EditorElementBoxProps) => {
-  const { style, theme, children } = props;
+const EditorElementBox = ({
+  style,
+  theme,
+  children,
+  ...props
+}: EditorElementBoxProps) => {
   const computedStyle = style && computeBoxStyle(theme, style);
 
   return (
-    <div style={computedStyle}>
+    <div {...props} style={computedStyle}>
       {children}
       {/*
         Emulate React Native to ensure the same styling for all platforms.
