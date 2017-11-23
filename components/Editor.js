@@ -6,6 +6,7 @@ import AppError from './AppError';
 import type { Element } from './EditorElement';
 import EditorMenu from './EditorMenu';
 import EditorPage from './EditorPage';
+import { pageIndexFixture, themeFixture } from './EditorFixtures';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -35,192 +36,100 @@ export type Web = {|
   },
 |};
 
+export type Path = Array<number>;
+
 type EditorState = {|
   web: Web,
+  activePath: Path,
 |};
+
+type EditorAction = {| type: 'SET_ACTIVE_PATH', path: Path |};
+
+export type Dispatch = (action: EditorAction) => void;
 
 const initialState = {
   web: {
-    theme: {
-      colors: {
-        background: '#F9FAFB',
-        foreground: '#333',
-        // brand1: 'blue'
-      },
-      typography: {
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        fontSize: 16,
-        fontSizeScale: 0.75,
-        lineHeight: 24,
-      },
-    },
+    theme: themeFixture,
     // fragmentsOrElementsOrTypesOrComponents: {
     //   Heading
     //   MainNav
     // }
-    // Reconsider immutable-js later. It shines on shallow cloning.
-    pages: {
-      index: [
-        // {
-        //   type: 'Title',
-        //   props: 'Home',
-        // },
-        {
-          type: 'Box',
-          props: {
-            style: {
-              // marginLeft: 1,
-              flex: 1, // Flex 1 to make footer sticky.
-            },
-            children: [
-              {
-                type: 'Box',
-                props: {
-                  style: {
-                    backgroundColor: '#643ab7',
-                    paddingBottom: 0.5,
-                    paddingLeft: 0.5,
-                    paddingRight: 0.5,
-                    paddingTop: 0.5,
-                  },
-                  children: [
-                    {
-                      type: 'Text',
-                      props: {
-                        style: { fontSize: 1, color: '#fff' },
-                        children: ['Test'],
-                      },
-                    },
-                  ],
-                },
-              },
-              {
-                type: 'Box',
-                props: {
-                  style: { flex: 1 },
-                  children: [
-                    ...Array.from({ length: 2 }).map(() => ({
-                      type: 'Text',
-                      props: { style: { fontSize: 2 }, children: ['Jo!'] },
-                    })),
-                    {
-                      type: 'Text',
-                      props: { style: { fontSize: 2 }, children: ['Jo!'] },
-                    },
-                    {
-                      type: 'Text',
-                      props: {
-                        children: [
-                          'Ahoj ',
-                          {
-                            type: 'Text',
-                            props: {
-                              style: { fontStyle: 'italic' },
-                              children: [
-                                'sv',
-                                {
-                                  type: 'Text',
-                                  props: {
-                                    style: { fontWeight: 'bold' },
-                                    children: ['ě'],
-                                  },
-                                },
-                                'te.',
-                              ],
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-              {
-                type: 'Box',
-                props: {
-                  style: {
-                    paddingBottom: 0.5,
-                    paddingLeft: 0.5,
-                    paddingRight: 0.5,
-                    paddingTop: 0.5,
-                  },
-                  children: [
-                    {
-                      type: 'Text',
-                      props: {
-                        style: { fontSize: -1, color: '#333' },
-                        children: ['footer'],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-      ],
-    },
+    pages: { index: pageIndexFixture },
   },
+  activePath: [],
 };
 
-const computeMenuStyle = lineHeight => {
+const computeEditorMenuStyle = lineHeight => {
   const paddingVertical = 0.5;
   const defaultHeight = lineHeight + 2 * (paddingVertical * lineHeight);
   return { paddingVertical, defaultHeight };
 };
 
+const editorReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_ACTIVE_PATH':
+      return { ...state, activePath: action.path };
+    default:
+      // eslint-disable-next-line no-unused-expressions
+      (action: empty);
+      return state;
+  }
+};
+
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
-  // testHighlightUpdates() {
-  //   const path = [
-  //     'web',
-  //     'pages',
-  //     'index',
-  //     0,
-  //     'props',
-  //     'children',
-  //     0,
-  //     'props',
-  //     'children',
-  //     0,
-  //     'props',
-  //     'children',
-  //   ];
-  //   setInterval(() => {
-  //     this.setState(prevState =>
-  //       // $FlowFixMe Wrong typedefs imho. Number shall be supported.
-  //       assocPath(path, [Date.now().toString(36)], prevState),
-  //     );
-  //   }, 1000);
-  // }
-
-  // dispatch(action) {
-  //   this.setState(prevState => counter(prevState, action));
-  // }
+  dispatch: Dispatch = action => {
+    const dev = process.env.NODE_ENV !== 'production';
+    /* eslint-disable no-console */
+    this.setState(prevState => {
+      if (dev) {
+        console.groupCollapsed(`action ${action.type}`);
+        console.log('prev state', prevState);
+        console.log('action', action);
+      }
+      const nextState = editorReducer(prevState, action);
+      if (dev) {
+        console.log('next state', nextState);
+        console.groupEnd();
+      }
+      return nextState;
+    });
+    /* eslint-enable no-console */
+  };
 
   render() {
-    const { web } = this.state;
+    const { web, activePath } = this.state;
     const webName = this.props.name;
     const pageName = 'index';
-    const menuStyle = computeMenuStyle(browserThemeDark.typography.lineHeight);
+    const editorMenuStyle = computeEditorMenuStyle(
+      browserThemeDark.typography.lineHeight,
+    );
 
     return (
       <ThemeProvider theme={browserThemeDark}>
         {/* <XRay grid={web.theme.typography.lineHeight}> */}
         <AppError />
+        <style jsx global>{`
+          @keyframes activated {
+            0% {
+              opacity: 0.5;
+            }
+          }
+        `}</style>
         <EditorPage
           web={web}
           webName={webName}
           pageName={pageName}
-          paddingBottomPx={menuStyle.defaultHeight}
+          paddingBottomPx={editorMenuStyle.defaultHeight}
+          dispatch={this.dispatch}
+          activePath={activePath}
         />
         <EditorMenu
           // web={web}
           webName={webName}
           pageName={pageName}
-          paddingVertical={menuStyle.paddingVertical}
+          paddingVertical={editorMenuStyle.paddingVertical}
         />
         {/* </XRay> */}
       </ThemeProvider>

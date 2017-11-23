@@ -1,23 +1,27 @@
 // @flow
 import * as React from 'react';
-import type { Web } from './Editor';
+import type { Web, Dispatch, Path } from './Editor';
 import Head from 'next/head';
 import Box from './Box';
 import PageStyle from './PageStyle';
 import EditorElement from './EditorElement';
 
-type EditorPageProps = {
+type EditorPageProps = {|
   web: Web,
   webName: string,
   pageName: string,
   paddingBottomPx: number,
-};
+  dispatch: Dispatch,
+  activePath: Path,
+|};
 
 const EditorPage = ({
   web,
   webName,
   pageName,
   paddingBottomPx,
+  dispatch,
+  activePath,
 }: EditorPageProps) => {
   const props = {
     minHeight: '100vh', // Emulate React Native so flex 1 works as expected.
@@ -38,7 +42,13 @@ const EditorPage = ({
     </Head>,
     <PageStyle backgroundColor={web.theme.colors.background} />,
     ...web.pages[pageName].map((element, i) => (
-      <EditorElement element={element} theme={web.theme} path={[i]} />
+      <EditorElement
+        element={element}
+        theme={web.theme}
+        path={[i]}
+        dispatch={dispatch}
+        activePath={activePath}
+      />
     )),
   ];
 
