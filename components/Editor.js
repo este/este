@@ -65,6 +65,7 @@ const computeEditorMenuStyle = lineHeight => {
   return { paddingVertical, defaultHeight };
 };
 
+// const editorReducer = (state: EditorState, action: EditorAction) => {
 const editorReducer = (state, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_PATH':
@@ -76,26 +77,24 @@ const editorReducer = (state, action) => {
   }
 };
 
+const logReducer =
+  process.env.NODE_ENV === 'production'
+    ? reducer => reducer
+    : reducer => (prevState, action) => {
+        console.groupCollapsed(`action ${action.type}`);
+        console.log('prev state', prevState);
+        console.log('action', action);
+        const nextState = reducer(prevState, action);
+        console.log('next state', nextState);
+        console.groupEnd();
+        return nextState;
+      };
+
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
   dispatch: Dispatch = action => {
-    const dev = process.env.NODE_ENV !== 'production';
-    /* eslint-disable no-console */
-    this.setState(prevState => {
-      if (dev) {
-        console.groupCollapsed(`action ${action.type}`);
-        console.log('prev state', prevState);
-        console.log('action', action);
-      }
-      const nextState = editorReducer(prevState, action);
-      if (dev) {
-        console.log('next state', nextState);
-        console.groupEnd();
-      }
-      return nextState;
-    });
-    /* eslint-enable no-console */
+    this.setState(prevState => logReducer(editorReducer)(prevState, action));
   };
 
   render() {
@@ -126,10 +125,11 @@ class Editor extends React.Component<EditorProps, EditorState> {
           activePath={activePath}
         />
         <EditorMenu
-          // web={web}
+          web={web}
           webName={webName}
           pageName={pageName}
           paddingVertical={editorMenuStyle.paddingVertical}
+          activePath={activePath}
         />
         {/* </XRay> */}
       </ThemeProvider>

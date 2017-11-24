@@ -62,7 +62,6 @@ class EditorElement extends React.Component<EditorElementProps> {
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
-    // nema to bejt bokem?
     const style = arrayEqual(activePath, path)
       ? { ...element.props.style, animation: 'activated 1s' }
       : element.props.style;
