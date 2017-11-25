@@ -29,6 +29,20 @@ type EditorElementProps = {|
   activePath: Path,
 |};
 
+// React key prop has to be unique string. No cheating. But for arbitrary JSON,
+// we don't have any unique id and JSON.stringify is too slow.
+// Fortunatelly, we use immutable data, so we can leverage WeakMap.
+export const getElementKey = (() => {
+  const map = new WeakMap();
+  let idx = 0;
+  return (element: Element) => {
+    if (map.has(element)) return map.get(element);
+    idx++;
+    map.set(element, idx.toString());
+    return idx;
+  };
+})();
+
 class EditorElement extends React.Component<EditorElementProps> {
   static getElementComponent(type: ElementType) {
     switch (type) {
@@ -73,6 +87,7 @@ class EditorElement extends React.Component<EditorElementProps> {
       if (typeof child === 'string') return child;
       return (
         <EditorElement
+          key={getElementKey(child)}
           element={child}
           theme={theme}
           path={path.concat(i)}
@@ -82,7 +97,7 @@ class EditorElement extends React.Component<EditorElementProps> {
       );
     });
 
-    return React.createElement(Component, props, ...childrenElements);
+    return <Component {...props}>{childrenElements}</Component>;
   }
 }
 

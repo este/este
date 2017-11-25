@@ -4,7 +4,7 @@ import type { Web, Dispatch, Path } from './Editor';
 import Head from 'next/head';
 import Box from './Box';
 import PageStyle from './PageStyle';
-import EditorElement from './EditorElement';
+import EditorElement, { getElementKey } from './EditorElement';
 
 type EditorPageProps = {|
   web: Web,
@@ -22,13 +22,11 @@ const EditorPage = ({
   paddingBottomPx,
   dispatch,
   activePath,
-}: EditorPageProps) => {
-  const props = {
-    minHeight: '100vh', // Emulate React Native so flex 1 works as expected.
-    paddingBottom: `${paddingBottomPx}px`, // Reserve space for EditorMenu.
-  };
-
-  const children = [
+}: EditorPageProps) => (
+  <Box
+    minHeight="100vh" // Emulate React Native so flex 1 works as expected.
+    paddingBottom={`${paddingBottomPx}px`} // Reserve space for EditorMenu.
+  >
     <Head>
       <title>{webName}</title>
       <meta
@@ -36,21 +34,19 @@ const EditorPage = ({
         // https://bitsofco.de/ios-safari-and-shrink-to-fit
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-    </Head>,
-    <PageStyle backgroundColor={web.theme.colors.background} />,
-    ...web.pages[pageName].map((element, i) => (
+    </Head>
+    <PageStyle backgroundColor={web.theme.colors.background} />
+    {web.pages[pageName].map((element, i) => (
       <EditorElement
+        key={getElementKey(element)}
         element={element}
         theme={web.theme}
         path={[i]}
         dispatch={dispatch}
         activePath={activePath}
       />
-    )),
-  ];
-
-  // createElement, so we don't need keys.
-  return React.createElement(Box, props, ...children);
-};
+    ))}
+  </Box>
+);
 
 export default EditorPage;

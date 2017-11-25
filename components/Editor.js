@@ -81,6 +81,7 @@ const logReducer =
   process.env.NODE_ENV === 'production'
     ? reducer => reducer
     : reducer => (prevState, action) => {
+        /* eslint-disable no-console */
         console.groupCollapsed(`action ${action.type}`);
         console.log('prev state', prevState);
         console.log('action', action);
@@ -88,6 +89,7 @@ const logReducer =
         console.log('next state', nextState);
         console.groupEnd();
         return nextState;
+        /* eslint-enable no-console */
       };
 
 class Editor extends React.Component<EditorProps, EditorState> {
