@@ -26,9 +26,6 @@ const EditorPage = ({
   const props = {
     minHeight: '100vh', // Emulate React Native so flex 1 works as expected.
     paddingBottom: `${paddingBottomPx}px`, // Reserve space for EditorMenu.
-    // // TODO: Handle empty page action.
-    // onClick: () => {
-    // },
   };
 
   const children = [
@@ -52,6 +49,7 @@ const EditorPage = ({
     )),
   ];
 
+  // createElement, so we don't need keys.
   return React.createElement(Box, props, ...children);
 };
 

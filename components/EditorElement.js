@@ -52,6 +52,7 @@ class EditorElement extends React.Component<EditorElementProps> {
   }
 
   handleClick = (e: Event) => {
+    // To handle only the innermost element.
     e.preventDefault();
     e.stopPropagation();
     this.props.dispatch({ type: 'SET_ACTIVE_PATH', path: this.props.path });
