@@ -1,24 +1,17 @@
 // @flow
 import * as React from 'react';
-// import type { Web } from './Editor';
+import type { Web, Path } from './Editor';
 import Box from './Box';
 import Button, { type ButtonProps } from './Button';
 import EditorMenuHamburger from './EditorMenuHamburger';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 
 type EditorMenuProps = {
-  // web: Web,
+  web: Web,
   webName: string,
   pageName: string,
   paddingVertical: number,
-};
-
-type EditorMenuState = {
-  shown: boolean,
-};
-
-const initialState = {
-  shown: true,
+  activePath: Path,
 };
 
 export const EditorMenuButton = (props: ButtonProps) => {
@@ -38,31 +31,36 @@ export const EditorMenuButton = (props: ButtonProps) => {
   );
 };
 
-// const Hide = props => <Button {...props}>&times;</Button>;
+const styles = {
+  box: { position: 'fixed', boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)' },
+};
 
-class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
-  state = initialState;
-
-  render() {
-    const { webName, pageName, paddingVertical } = this.props;
-
-    return (
-      <Box
-        backgroundColor="black"
-        paddingVertical={paddingVertical}
-        paddingHorizontal={0.5}
-        bottom={0}
-        left={0}
-        right={0}
-        style={{ position: 'fixed', boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)' }}
-        flexDirection="row"
-        justifyContent="space-between"
-      >
-        <EditorMenuBreadcrumbs webName={webName} pageName={pageName} />
-        <EditorMenuHamburger />
-      </Box>
-    );
-  }
-}
+const EditorMenu = ({
+  web,
+  webName,
+  pageName,
+  paddingVertical,
+  activePath,
+}: EditorMenuProps) => (
+  <Box
+    backgroundColor="black"
+    paddingVertical={paddingVertical}
+    paddingHorizontal={0.5}
+    bottom={0}
+    left={0}
+    right={0}
+    style={styles.box}
+    flexDirection="row"
+    justifyContent="space-between"
+  >
+    <EditorMenuBreadcrumbs
+      web={web}
+      webName={webName}
+      pageName={pageName}
+      activePath={activePath}
+    />
+    <EditorMenuHamburger />
+  </Box>
+);
 
 export default EditorMenu;
