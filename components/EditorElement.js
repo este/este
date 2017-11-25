@@ -31,15 +31,16 @@ type EditorElementProps = {|
 
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
 // we don't have any unique id and JSON.stringify is too slow.
-// Fortunatelly, we use immutable data, so we can leverage WeakMap.
+// Fortunately, we use immutable data, so we can leverage WeakMap.
 export const getElementKey = (() => {
   const map = new WeakMap();
   let idx = 0;
-  return (element: Element) => {
-    if (map.has(element)) return map.get(element);
-    idx++;
-    map.set(element, idx.toString());
-    return idx;
+  return (element: Element): string => {
+    const maybeValue = map.get(element);
+    if (typeof maybeValue === 'string') return maybeValue;
+    const value = (idx++).toString();
+    map.set(element, value);
+    return value;
   };
 })();
 
