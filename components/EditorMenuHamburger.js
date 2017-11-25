@@ -18,8 +18,7 @@ const initialState = {
 
 const ToggleButton = props => <EditorMenuButton {...props}>☰</EditorMenuButton>;
 
-// PureComponent, when we don't have to tune shouldComponentUpdate.
-class EditorMenuHamburger extends React.PureComponent<
+class EditorMenuHamburger extends React.Component<
   EditorMenuHamburgerProps,
   EditorMenuHamburgerState,
 > {
