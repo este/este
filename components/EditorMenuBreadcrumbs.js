@@ -6,9 +6,14 @@ import { EditorMenuButton } from './EditorMenu';
 import type { Web, Path } from './Editor';
 import { getElementKey } from './EditorElement';
 
-const Arrow = () => <Text paddingHorizontal={0.5}>▸</Text>;
+// backgroundColor="black", because fixBrowserFontSmoothing
+const Arrow = () => (
+  <Text backgroundColor="black" marginHorizontal={0.25}>
+    ▸
+  </Text>
+);
 
-// const Circle = () => <Text paddingHorizontal={0.5}>•</Text>;
+// const Circle = () => <Text backgroundColor="black" paddingHorizontal={0.5}>•</Text>;
 
 type EditorMenuBreadcrumbsProps = {|
   web: Web,
@@ -22,6 +27,7 @@ const PathButtons = ({ activePath, elements }) => {
   let children = elements;
   return activePath.reduce((elements, pathIndex) => {
     const child = children[pathIndex];
+    // Skip text.
     if (typeof child === 'string') return elements;
     // eslint-disable-next-line prefer-destructuring
     children = child.props.children;

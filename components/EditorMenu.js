@@ -14,15 +14,18 @@ type EditorMenuProps = {
   activePath: Path,
 };
 
+const backgroundColor = 'black';
+
 export const EditorMenuButton = (props: ButtonProps) => {
   const {
     paddingVertical = 0,
     marginVertical = 0,
-    paddingHorizontal = 0,
+    paddingHorizontal = 0.25,
     ...restProps
   } = props;
   return (
     <Button
+      backgroundColor={backgroundColor} // because fixBrowserFontSmoothing
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
@@ -43,7 +46,7 @@ const EditorMenu = ({
   activePath,
 }: EditorMenuProps) => (
   <Box
-    backgroundColor="black"
+    backgroundColor={backgroundColor}
     paddingVertical={paddingVertical}
     paddingHorizontal={0.5}
     bottom={0}
