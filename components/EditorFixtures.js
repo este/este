@@ -56,14 +56,12 @@ export const pageIndexFixture = [
           props: {
             style: { flex: 1 },
             children: [
-              ...Array.from({ length: 2 }).map(() => ({
-                type: 'Text',
-                props: { style: { fontSize: 2 }, children: ['Jo!'] },
-              })),
-              {
-                type: 'Text',
-                props: { style: { fontSize: 2 }, children: ['Jo!'] },
-              },
+              ...Array(1) // Just for overflow scroll test.
+                .fill()
+                .map(() => ({
+                  type: 'Text',
+                  props: { style: { fontSize: 2 }, children: ['Jo!'] },
+                })),
               {
                 type: 'Text',
                 props: {
