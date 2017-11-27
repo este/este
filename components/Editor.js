@@ -111,13 +111,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
       <ThemeProvider theme={browserThemeDark}>
         {/* <XRay grid={web.theme.typography.lineHeight}> */}
         <AppError />
-        <style jsx global>{`
-          @keyframes activated {
-            0% {
-              opacity: 0.5;
-            }
-          }
-        `}</style>
         <EditorPage
           web={web}
           webName={webName}

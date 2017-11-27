@@ -44,6 +44,34 @@ export const getElementKey = (() => {
   };
 })();
 
+const maxCssZIndex = 2147483647;
+
+const ActiveOverlay = () => (
+  <div
+    style={{
+      animation: 'activated 1s',
+      position: 'absolute',
+      zIndex: maxCssZIndex,
+      backgroundColor: '#fff',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    }}
+    onAnimationEnd={(e: SyntheticEvent<HTMLButtonElement>) => {
+      e.currentTarget.style.display = 'none';
+    }}
+  >
+    <style jsx global>{`
+      @keyframes activated {
+        100% {
+          opacity: 0;
+        }
+      }
+    `}</style>
+  </div>
+);
+
 class EditorElement extends React.Component<EditorElementProps> {
   static getElementComponent(type: ElementType) {
     switch (type) {
@@ -78,13 +106,13 @@ class EditorElement extends React.Component<EditorElementProps> {
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
-    const style = arrayEqual(activePath, path)
-      ? { ...element.props.style, animation: 'activated 1s' }
-      : element.props.style;
+    const componentProps = {
+      style: element.props.style,
+      theme,
+      onClick: this.handleClick,
+    };
 
-    const props = { onClick: this.handleClick, theme, style };
-
-    const childrenElements = element.props.children.map((child, i) => {
+    const componentChildren = element.props.children.map((child, i) => {
       if (typeof child === 'string') return child;
       return (
         <EditorElement
@@ -98,7 +126,14 @@ class EditorElement extends React.Component<EditorElementProps> {
       );
     });
 
-    return <Component {...props}>{childrenElements}</Component>;
+    const isActive = arrayEqual(activePath, path);
+
+    return (
+      <Component {...componentProps}>
+        {componentChildren}
+        {isActive && <ActiveOverlay />}
+      </Component>
+    );
   }
 }
 

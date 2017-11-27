@@ -1,5 +1,5 @@
-// flow-typed signature: b2c5584525357db0529e998438eda437
-// flow-typed version: 8cd387e8be/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: 0c4298604331ed66060f8faf01656da2
+// flow-typed version: 426a81c8ee/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -704,14 +704,13 @@ declare module ramda {
   ): ((xs: string) => string) & ((xs: T) => ?V);
   declare function nth<T: string>(i: number, xs: T): T;
 
-  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
-    fn: UnaryPredicateFn<V>,
-    ...rest: Array<void>
-  ): (xs: T | O) => ?V | O;
-  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
-    fn: UnaryPredicateFn<V>,
-    xs: T | O
-  ): ?V | O;
+  declare type Find = (<V, T: Array<V>>(
+    fn: UnaryPredicateFn<V>
+  ) => (xs: T) => ?V) &
+    (<V, T: Array<V>>(fn: UnaryPredicateFn<V>, xs: T) => ?V);
+
+  declare var find: Find;
+
   declare function findLast<V, O: { [key: string]: * }, T: Array<V> | O>(
     fn: UnaryPredicateFn<V>,
     ...rest: Array<void>
