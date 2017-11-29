@@ -19,9 +19,9 @@ Universal React. Explore the source code.
 
 ### Start custom Graph.cool backend
 
-* Be sure you have installed Graphcool CLI globally on your machine: `$ npm install graphcool -g`
+Before you start be sure you have installed Graphcool CLI globally on your machine: `$ npm install graphcool -g`
 * `cd graphcool`
-* `npm install`
+* `npm install` - to install required dependencies for Graphcool
 * `graphcool login`
 * Add your Graph.cool endpoint to .graphcoolrc and update it also in project root files .graphqlconfig and env-config.js. Note: In order to deploy the service from the CLI, you need to upgrade your Graph.cool project in the project settings.
 * `graphcool deploy --force`
