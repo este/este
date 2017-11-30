@@ -113,8 +113,8 @@ graphql-request@^1.3.4, graphql-request@^1.4.0:
     cross-fetch "0.0.8"
 
 graphql-tools@^2.4.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.8.0.tgz#1a248ec6be62b0b77607bba6f7470e7a651425fa"
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.10.0.tgz#d2bade5dfe08fcf9fb524897d001f05a69b9a951"
   dependencies:
     apollo-utilities "^1.0.1"
     deprecated-decorator "^0.1.6"
@@ -200,8 +200,8 @@ uuid@^3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 validator@^9.0.0:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-9.1.1.tgz#3bdd1065cbd28f9d96ac806dee01030d32fd97ef"
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-9.1.2.tgz#5711b6413f78bd9d56003130c81b47c39e86546c"
 
 whatwg-fetch@2.0.3, whatwg-fetch@>=0.10.0:
   version "2.0.3"
