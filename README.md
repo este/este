@@ -17,18 +17,15 @@ Universal React. Explore the source code.
 * `yarn`
 * `yarn dev`
 
-### Start custom Graph.cool backend
+### Set up custom graph.cool backend
 
-Before you start be sure you have installed Graphcool CLI globally on your machine: `$ npm install graphcool -g`
+Add your graph.cool endpoint to graphcool/.graphcoolrc and update it also in .graphqlconfig and env-config.js files.
+
+* `npm install graphcool -g`
 * `cd graphcool`
-* `npm install` - to install required dependencies for Graphcool
+* `yarn install`
 * `graphcool login`
-* Add your Graph.cool endpoint to .graphcoolrc and update it also in project root files .graphqlconfig and env-config.js. Note: In order to deploy the service from the CLI, you need to upgrade your Graph.cool project in the project settings.
-* `graphcool deploy --force`
-
-## Random Notes
-
-* [Internet Explorer is not supported](https://www.microsoft.com/en-us/windowsforbusiness/end-of-ie-support).
+* `graphcool deploy`
 
 ## Links
 
