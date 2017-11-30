@@ -7,7 +7,6 @@ import type { Element } from './EditorElement';
 import EditorMenu from './EditorMenu';
 import EditorPage from './EditorPage';
 import { pageIndexFixture, themeFixture } from './EditorFixtures';
-import logReducer from '../lib/logReducer';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -77,6 +76,23 @@ const editorReducer = (state, action) => {
       return state;
   }
 };
+
+// I don't know how to Flow type this shit out of this module without losing
+// types. PR anyone?
+const logReducer =
+  process.env.NODE_ENV === 'production'
+    ? reducer => reducer
+    : reducer => (prevState, action) => {
+        /* eslint-disable no-console */
+        console.groupCollapsed(`action ${action.type}`);
+        console.log('prev state', prevState);
+        console.log('action', action);
+        const nextState = reducer(prevState, action);
+        console.log('next state', nextState);
+        console.groupEnd();
+        return nextState;
+        /* eslint-enable no-console */
+      };
 
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
