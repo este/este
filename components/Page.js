@@ -15,6 +15,7 @@ import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import PageStyle from './PageStyle';
+import MetaViewport from './MetaViewport';
 
 // yarn favicon
 const Favicons = () => [
@@ -92,11 +93,7 @@ const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
     <ThemeProvider theme={theme}>
       <Head>
         <title>{title}</title>
-        <meta
-          name="viewport"
-          // https://bitsofco.de/ios-safari-and-shrink-to-fit
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+        <MetaViewport />
         <Favicons />
       </Head>
       <PageStyle backgroundColor={pageBackgroundColor} />

@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Box from './Box';
 import PageStyle from './PageStyle';
 import EditorElement, { getElementKey } from './EditorElement';
+import MetaViewport from './MetaViewport';
 
 type EditorPageProps = {|
   web: Web,
@@ -29,11 +30,7 @@ const EditorPage = ({
   >
     <Head>
       <title>{webName}</title>
-      <meta
-        name="viewport"
-        // https://bitsofco.de/ios-safari-and-shrink-to-fit
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
+      <MetaViewport />
     </Head>
     <PageStyle backgroundColor={web.theme.colors.background} />
     {web.pages[pageName].map((element, i) => (
