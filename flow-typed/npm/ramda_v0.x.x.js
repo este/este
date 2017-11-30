@@ -1,5 +1,5 @@
-// flow-typed signature: 0c4298604331ed66060f8faf01656da2
-// flow-typed version: 426a81c8ee/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: a336604fc39e7934f8153f0496da10eb
+// flow-typed version: 656f69c1c8/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -20,6 +20,7 @@ declare module ramda {
   declare type BinarySameTypeFn<T> = BinaryFn<T, T, T>;
   declare type NestedObject<T> = { [k: string]: T | NestedObject<T> };
   declare type UnaryPredicateFn<T> = (x: T) => boolean;
+  declare type MapUnaryPredicateFn = <V>(V) => V => boolean;
   declare type BinaryPredicateFn<T> = (x: T, y: T) => boolean;
   declare type BinaryPredicateFn2<T, S> = (x: T, y: S) => boolean;
 
@@ -331,6 +332,7 @@ declare module ramda {
     (<A, B, C, D, E>(
       ab: UnaryFn<A, B>,
       bc: UnaryFn<B, C>,
+      cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ...rest: Array<void>
     ) => UnaryFn<A, E>) &
@@ -1631,14 +1633,13 @@ declare module ramda {
 
   declare function valuesIn<T, O: { [k: string]: T }>(o: O): Array<T | any>;
 
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    ...rest: Array<void>
-  ): (o: { [k: string]: T }) => boolean;
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    o: { [k: string]: T }
+  declare function where<O>(
+    predObj: $ObjMap<O, MapUnaryPredicateFn>,
+    o: O
   ): boolean;
+  declare function where<O>(
+    predObj: $ObjMap<O, MapUnaryPredicateFn>
+  ): O => boolean;
 
   declare function whereEq<T, S, O: { [k: string]: T }, Q: { [k: string]: S }>(
     predObj: O,
