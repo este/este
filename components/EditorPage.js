@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { Web, Dispatch, Path } from './Editor';
+import type { Web, EditorDispatch, Path } from './Editor';
 import Head from 'next/head';
 import Box from './Box';
 import PageStyle from './PageStyle';
@@ -11,7 +11,7 @@ type EditorPageProps = {|
   webName: string,
   pageName: string,
   paddingBottomPx: number,
-  dispatch: Dispatch,
+  dispatch: EditorDispatch,
   activePath: Path,
 |};
 

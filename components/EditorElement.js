@@ -2,7 +2,7 @@
 import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
-import type { Theme, Dispatch, Path } from './Editor';
+import type { Theme, EditorDispatch, Path } from './Editor';
 import arrayEqual from 'array-equal';
 
 // Just a basic shape. We need a JSON Schema for validation.
@@ -25,7 +25,7 @@ type EditorElementProps = {|
   element: Element,
   theme: Theme,
   path: Path,
-  dispatch: Dispatch,
+  dispatch: EditorDispatch,
   activePath: Path,
 |};
 

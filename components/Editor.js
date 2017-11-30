@@ -45,7 +45,7 @@ type EditorState = {|
 
 type EditorAction = {| type: 'SET_ACTIVE_PATH', path: Path |};
 
-export type Dispatch = (action: EditorAction) => void;
+export type EditorDispatch = (action: EditorAction) => void;
 
 const initialState = {
   web: {
@@ -95,7 +95,7 @@ const logReducer =
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
-  dispatch: Dispatch = action => {
+  dispatch: EditorDispatch = action => {
     this.setState(prevState => logReducer(editorReducer)(prevState, action));
   };
 
