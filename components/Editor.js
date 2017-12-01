@@ -119,7 +119,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
           pageName={pageName}
           paddingBottomPx={editorMenuStyle.defaultHeight}
           dispatch={this.dispatch}
-          activePath={activePath}
         />
         <EditorMenu
           web={web}

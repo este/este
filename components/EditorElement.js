@@ -3,7 +3,7 @@ import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
 import type { Theme, EditorDispatch, Path } from './Editor';
-import arrayEqual from 'array-equal';
+import Color from 'color';
 
 // Just a basic shape. We need a JSON Schema for validation.
 // Doesn't make sense to use Flow for dynamic data.
@@ -19,14 +19,6 @@ export type Element = {|
     // iosStyle?: Object,
     // androidStyle?: Object,
   |},
-|};
-
-type EditorElementProps = {|
-  element: Element,
-  theme: Theme,
-  path: Path,
-  dispatch: EditorDispatch,
-  activePath: Path,
 |};
 
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
@@ -46,24 +38,33 @@ export const getElementKey = (() => {
 
 const maxCssZIndex = 2147483647;
 
-const ActiveOverlay = () => (
+const getInheritedBackgroundColor = (elements, themeBackgroundColor) => {
+  for (const { props } of elements.reverse()) {
+    if (props.style && props.style.backgroundColor)
+      return props.style.backgroundColor;
+  }
+  return themeBackgroundColor;
+};
+
+const FlashAnimation = ({ color, onEnd }) => (
   <div
+    onAnimationEnd={onEnd}
     style={{
-      animation: 'activated 1s',
+      animation: 'activated 0.5s',
       position: 'absolute',
       zIndex: maxCssZIndex,
-      backgroundColor: '#fff',
+      backgroundColor: color,
       left: 0,
       right: 0,
       top: 0,
       bottom: 0,
     }}
-    onAnimationEnd={(e: SyntheticEvent<HTMLButtonElement>) => {
-      e.currentTarget.style.display = 'none';
-    }}
   >
     <style jsx global>{`
       @keyframes activated {
+        0% {
+          opacity: 0.5;
+        }
         100% {
           opacity: 0;
         }
@@ -72,7 +73,20 @@ const ActiveOverlay = () => (
   </div>
 );
 
-class EditorElement extends React.Component<EditorElementProps> {
+type Props = {|
+  element: Element,
+  theme: Theme,
+  path: Path,
+  dispatch: EditorDispatch,
+  parents: Array<Element>,
+|};
+
+type State = {|
+  flashAnimationShown: boolean,
+  flashAnimationColor: string,
+|};
+
+class EditorElement extends React.Component<Props, State> {
   static getElementComponent(type: ElementType) {
     switch (type) {
       case 'Box':
@@ -86,23 +100,44 @@ class EditorElement extends React.Component<EditorElementProps> {
     }
   }
 
-  shouldComponentUpdate(nextProps: EditorElementProps) {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      flashAnimationShown: false,
+      flashAnimationColor: props.theme.colors.background,
+    };
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     const shouldUpdate =
       nextProps.element !== this.props.element ||
       nextProps.theme !== this.props.theme ||
-      nextProps.activePath !== this.props.activePath;
+      nextState.flashAnimationShown !== this.state.flashAnimationShown;
     return shouldUpdate;
   }
 
   handleClick = (e: Event) => {
-    // To handle only the innermost element.
     e.preventDefault();
     e.stopPropagation();
+    const backgroundColor = getInheritedBackgroundColor(
+      [...this.props.parents, this.props.element],
+      this.props.theme.colors.background,
+    );
+    this.setState({
+      flashAnimationShown: true,
+      flashAnimationColor: Color(backgroundColor)
+        .grayscale()
+        .negate(),
+    });
     this.props.dispatch({ type: 'SET_ACTIVE_PATH', path: this.props.path });
   };
 
+  handleFlashAnimationEnd = () => {
+    this.setState({ flashAnimationShown: false });
+  };
+
   render() {
-    const { theme, element, path, dispatch, activePath } = this.props;
+    const { theme, element, path, dispatch, parents } = this.props;
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
@@ -121,17 +156,20 @@ class EditorElement extends React.Component<EditorElementProps> {
           theme={theme}
           path={path.concat(i)}
           dispatch={dispatch}
-          activePath={activePath}
+          parents={parents.concat(element)}
         />
       );
     });
 
-    const isActive = arrayEqual(activePath, path);
-
     return (
       <Component {...componentProps}>
         {componentChildren}
-        {isActive && <ActiveOverlay />}
+        {this.state.flashAnimationShown && (
+          <FlashAnimation
+            color={this.state.flashAnimationColor}
+            onEnd={this.handleFlashAnimationEnd}
+          />
+        )}
       </Component>
     );
   }
