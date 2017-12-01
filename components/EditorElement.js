@@ -47,20 +47,8 @@ const getInheritedBackgroundColor = (elements, themeBackgroundColor) => {
 };
 
 const FlashAnimation = ({ color, onEnd }) => (
-  <div
-    onAnimationEnd={onEnd}
-    style={{
-      animation: 'activated 0.5s',
-      position: 'absolute',
-      zIndex: maxCssZIndex,
-      backgroundColor: color,
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-    }}
-  >
-    <style jsx global>{`
+  <div onAnimationEnd={onEnd}>
+    <style jsx>{`
       @keyframes activated {
         0% {
           opacity: 0.5;
@@ -68,6 +56,16 @@ const FlashAnimation = ({ color, onEnd }) => (
         100% {
           opacity: 0;
         }
+      }
+      div {
+        position: absolute;
+        z-index: ${maxCssZIndex};
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color: ${color};
+        animation: activated 0.5s;
       }
     `}</style>
   </div>
