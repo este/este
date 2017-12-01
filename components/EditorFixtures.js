@@ -26,7 +26,12 @@ export const pageIndexFixture = [
     type: 'Box',
     props: {
       style: {
-        // marginLeft: 1,
+        // // Container with max-width
+        // // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss#L5
+        // maxWidth: '980px',
+        // marginLeft: 'auto',
+        // marginRight: 'auto',
+        // width: '100%',
         flex: 1, // Flex 1 to make footer sticky.
       },
       children: [
