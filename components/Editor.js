@@ -4,7 +4,7 @@ import ThemeProvider from './ThemeProvider';
 import { browserThemeDark } from '../themes/browserTheme';
 import AppError from './AppError';
 import type { Element } from './EditorElement';
-import EditorMenu from './EditorMenu';
+import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { pageIndexFixture, themeFixture } from './EditorFixtures';
 // import { assocPath } from 'ramda';
@@ -41,11 +41,8 @@ export type Path = Array<number>;
 type EditorState = {|
   web: Web,
   activePath: Path,
+  menuHeight: ?number,
 |};
-
-type EditorAction = {| type: 'SET_ACTIVE_PATH', path: Path |};
-
-export type EditorDispatch = (action: EditorAction) => void;
 
 const initialState = {
   web: {
@@ -57,19 +54,21 @@ const initialState = {
     pages: { index: pageIndexFixture },
   },
   activePath: [],
+  menuHeight: null,
 };
 
-const computeEditorMenuStyle = lineHeight => {
-  const paddingVertical = 0.5;
-  const defaultHeight = lineHeight + 2 * (paddingVertical * lineHeight);
-  return { paddingVertical, defaultHeight };
-};
+type EditorAction =
+  | { type: 'SET_ACTIVE_PATH', path: Path }
+  | { type: 'SET_MENU_HEIGHT', height: number };
 
-// const editorReducer = (state: EditorState, action: EditorAction) => {
+export type EditorDispatch = (action: EditorAction) => void;
+
 const editorReducer = (state, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_PATH':
       return { ...state, activePath: action.path };
+    case 'SET_MENU_HEIGHT':
+      return { ...state, menuHeight: action.height };
     default:
       // eslint-disable-next-line no-unused-expressions
       (action: empty);
@@ -101,13 +100,17 @@ class Editor extends React.Component<EditorProps, EditorState> {
     this.setState(prevState => logReducer(editorReducer)(prevState, action));
   };
 
+  handleEditorMenuHeightChange = (height: number) => {
+    this.dispatch({ type: 'SET_MENU_HEIGHT', height });
+  };
+
   render() {
     const { web, activePath } = this.state;
     const webName = this.props.name;
     const pageName = 'index';
-    const editorMenuStyle = computeEditorMenuStyle(
-      browserThemeDark.typography.lineHeight,
-    );
+    const menuHeight =
+      this.state.menuHeight ||
+      getDefaultMenuHeight(browserThemeDark.typography.lineHeight);
 
     return (
       <ThemeProvider theme={browserThemeDark}>
@@ -117,14 +120,14 @@ class Editor extends React.Component<EditorProps, EditorState> {
           web={web}
           webName={webName}
           pageName={pageName}
-          paddingBottomPx={editorMenuStyle.defaultHeight}
+          paddingBottomPx={menuHeight}
           dispatch={this.dispatch}
         />
         <EditorMenu
           web={web}
           webName={webName}
           pageName={pageName}
-          paddingVertical={editorMenuStyle.paddingVertical}
+          onHeightChange={this.handleEditorMenuHeightChange}
           activePath={activePath}
         />
         {/* </XRay> */}

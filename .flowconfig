@@ -12,7 +12,9 @@ types/app.js.flow
 all=warn
 sketchy-null-bool=off
 sketchy-null-mixed=off
+sketchy-null-number=off
 sketchy-null-string=off
+unclear-type=off
 
 [options]
 include_warnings=true

@@ -1,4 +1,5 @@
 // @flow
+// $FlowFixMe
 const package = require('./package.json');
 const { URL } = require('url');
 

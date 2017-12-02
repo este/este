@@ -18,6 +18,7 @@ module.exports = {
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
     window: true,
+    HTMLElement: true,
   },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {

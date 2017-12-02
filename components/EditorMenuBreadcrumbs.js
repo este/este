@@ -46,7 +46,7 @@ const EditorMenuBreadcrumbs = ({
   pageName,
   activePath,
 }: EditorMenuBreadcrumbsProps) => (
-  <Box flexDirection="row">
+  <Box flexDirection="row" flexWrap="wrap">
     <EditorMenuButton>{webName}</EditorMenuButton>
     <Arrow />
     <EditorMenuButton>{pageName}</EditorMenuButton>
