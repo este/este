@@ -10,6 +10,9 @@ import { pageIndexFixture, themeFixture } from './EditorFixtures';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
+// Escape hatch for scroll measurement. Only browsers need it.
+export const activeElementProp = 'data-active-element';
+
 type EditorProps = {|
   name: string,
 |};
@@ -61,7 +64,10 @@ type EditorAction =
   | { type: 'SET_ACTIVE_PATH', path: Path }
   | { type: 'SET_MENU_HEIGHT', height: number };
 
-export type EditorDispatch = (action: EditorAction) => void;
+export type EditorDispatch = (
+  action: EditorAction,
+  callback?: () => void,
+) => void;
 
 const editorReducer = (state, action) => {
   switch (action.type) {
@@ -96,12 +102,30 @@ const logReducer =
 class Editor extends React.Component<EditorProps, EditorState> {
   state = initialState;
 
-  dispatch: EditorDispatch = action => {
-    this.setState(prevState => logReducer(editorReducer)(prevState, action));
+  dispatch: EditorDispatch = (action, callback) => {
+    this.setState(
+      prevState => logReducer(editorReducer)(prevState, action),
+      callback,
+    );
   };
 
-  handleEditorMenuHeightChange = (height: number) => {
-    this.dispatch({ type: 'SET_MENU_HEIGHT', height });
+  handleEditorMenuHeightChange = (menu: HTMLElement) => {
+    const height = menu.offsetHeight;
+    const maybeScrollByToEnsureActiveElementVisibility = () => {
+      const activeElement = window.document.querySelector(
+        `[${activeElementProp}]`,
+      );
+      if (!activeElement) return;
+      const activeElementBottom = activeElement.getBoundingClientRect().bottom;
+      const menuTop = menu.getBoundingClientRect().top;
+      const scrollBy = activeElementBottom - menuTop;
+      if (scrollBy <= 0) return;
+      window.scrollBy({ top: scrollBy, left: 0, behavior: 'smooth' });
+    };
+    this.dispatch(
+      { type: 'SET_MENU_HEIGHT', height },
+      maybeScrollByToEnsureActiveElementVisibility,
+    );
   };
 
   render() {

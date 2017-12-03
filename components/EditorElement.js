@@ -5,6 +5,7 @@ import EditorElementText from './EditorElementText';
 import type { Theme, EditorDispatch, Path } from './Editor';
 import Color from 'color';
 import arrayEqual from 'array-equal';
+import { activeElementProp } from './Editor';
 
 // Just a basic shape. We need a JSON Schema for validation.
 // Doesn't make sense to use Flow for dynamic data.
@@ -109,10 +110,10 @@ class EditorElement extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const runFlashAnimation =
-      arrayEqual(nextProps.activePath, this.props.path) &&
-      !arrayEqual(nextProps.activePath, this.props.activePath);
-    if (runFlashAnimation) this.runFlashAnimation();
+    const isGoingToBeActive =
+      !arrayEqual(nextProps.activePath, this.props.activePath) &&
+      arrayEqual(nextProps.activePath, this.props.path);
+    if (isGoingToBeActive) this.runFlashAnimation();
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -138,14 +139,14 @@ class EditorElement extends React.Component<Props, State> {
     });
   }
 
+  isActive() {
+    return arrayEqual(this.props.path, this.props.activePath);
+  }
+
   handleClick = (e: Event) => {
     e.preventDefault();
     e.stopPropagation();
-    const runManuallyIfActivePathAlreadySet = arrayEqual(
-      this.props.path,
-      this.props.activePath,
-    );
-    if (runManuallyIfActivePathAlreadySet) this.runFlashAnimation();
+    if (this.isActive()) this.runFlashAnimation();
     this.props.dispatch({ type: 'SET_ACTIVE_PATH', path: this.props.path });
   };
 
@@ -162,6 +163,7 @@ class EditorElement extends React.Component<Props, State> {
       style: element.props.style,
       theme,
       onClick: this.handleClick,
+      ...(this.isActive() ? { [activeElementProp]: true } : null),
     };
 
     const componentChildren = element.props.children.map((child, i) => {

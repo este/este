@@ -13,7 +13,7 @@ type EditorMenuProps = {|
   webName: string,
   pageName: string,
   activePath: Path,
-  onHeightChange: (height: number) => void,
+  onHeightChange: (menu: HTMLElement) => void,
 |};
 
 const backgroundColor = 'black';
@@ -48,16 +48,12 @@ class EditorMenu extends React.Component<EditorMenuProps> {
   };
 
   componentDidMount() {
-    this.resizeObserver = new ResizeObserver(entries => {
-      const { top, bottom } = entries[0].contentRect;
-      const height = top + bottom;
-      this.props.onHeightChange(height);
-    });
     // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this);
-    if (node instanceof HTMLElement) {
-      this.resizeObserver.observe(node);
-    }
+    const node = ((ReactDOM.findDOMNode(this): any): HTMLElement);
+    this.resizeObserver = new ResizeObserver(() => {
+      this.props.onHeightChange(node);
+    });
+    this.resizeObserver.observe(node);
   }
 
   componentWillUnmount() {
