@@ -4,6 +4,7 @@ import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
 import type { Theme, EditorDispatch, Path } from './Editor';
 import Color from 'color';
+import arrayEqual from 'array-equal';
 
 // Just a basic shape. We need a JSON Schema for validation.
 // Doesn't make sense to use Flow for dynamic data.
@@ -77,6 +78,7 @@ type Props = {|
   path: Path,
   dispatch: EditorDispatch,
   parents: Array<Element>,
+  activePath: Path,
 |};
 
 type State = {|
@@ -106,17 +108,24 @@ class EditorElement extends React.Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    const runFlashAnimation =
+      arrayEqual(nextProps.activePath, this.props.path) &&
+      !arrayEqual(nextProps.activePath, this.props.activePath);
+    if (runFlashAnimation) this.runFlashAnimation();
+  }
+
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     const shouldUpdate =
       nextProps.element !== this.props.element ||
       nextProps.theme !== this.props.theme ||
-      nextState.flashAnimationShown !== this.state.flashAnimationShown;
+      nextState.flashAnimationShown !== this.state.flashAnimationShown ||
+      nextState.flashAnimationColor !== this.state.flashAnimationColor ||
+      !arrayEqual(nextProps.activePath, this.props.activePath);
     return shouldUpdate;
   }
 
-  handleClick = (e: Event) => {
-    e.preventDefault();
-    e.stopPropagation();
+  runFlashAnimation() {
     const backgroundColor = getInheritedBackgroundColor(
       [...this.props.parents, this.props.element],
       this.props.theme.colors.background,
@@ -127,6 +136,16 @@ class EditorElement extends React.Component<Props, State> {
         .grayscale()
         .negate(),
     });
+  }
+
+  handleClick = (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const runManuallyIfActivePathAlreadySet = arrayEqual(
+      this.props.path,
+      this.props.activePath,
+    );
+    if (runManuallyIfActivePathAlreadySet) this.runFlashAnimation();
     this.props.dispatch({ type: 'SET_ACTIVE_PATH', path: this.props.path });
   };
 
@@ -135,7 +154,7 @@ class EditorElement extends React.Component<Props, State> {
   };
 
   render() {
-    const { theme, element, path, dispatch, parents } = this.props;
+    const { theme, element, path, dispatch, parents, activePath } = this.props;
     const Component = EditorElement.getElementComponent(element.type);
     if (!Component) return null;
 
@@ -155,6 +174,7 @@ class EditorElement extends React.Component<Props, State> {
           path={path.concat(i)}
           dispatch={dispatch}
           parents={parents.concat(element)}
+          activePath={activePath}
         />
       );
     });

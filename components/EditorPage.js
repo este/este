@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { Web, EditorDispatch } from './Editor';
+import type { Web, EditorDispatch, Path } from './Editor';
 import Head from 'next/head';
 import Box from './Box';
 import PageStyle from './PageStyle';
@@ -13,6 +13,7 @@ type EditorPageProps = {|
   pageName: string,
   paddingBottomPx: number,
   dispatch: EditorDispatch,
+  activePath: Path,
 |};
 
 const EditorPage = ({
@@ -21,6 +22,7 @@ const EditorPage = ({
   pageName,
   paddingBottomPx,
   dispatch,
+  activePath,
 }: EditorPageProps) => (
   <Box
     minHeight="100vh" // Emulate React Native so flex 1 works as expected.
@@ -39,6 +41,7 @@ const EditorPage = ({
         path={[i]}
         dispatch={dispatch}
         parents={[]}
+        activePath={activePath}
       />
     ))}
   </Box>
