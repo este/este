@@ -28,11 +28,20 @@ class EditorMenuHamburger extends React.Component<
     this.setState(state => ({ open: !state.open }));
   };
 
+  handleToggleButtonKeyDown = (
+    event: SyntheticKeyboardEvent<HTMLButtonElement>,
+  ) => {
+    if (event.key === 'Escape') {
+      this.setState(state => ({ open: false }));
+    }
+  };
+
   render() {
     return (
       <Box paddingLeft={1} alignItems="flex-end">
         <ToggleButton
           onPress={this.handleToggleButtonPress}
+          onKeyDown={this.handleToggleButtonKeyDown}
           opacity={this.state.open ? 0.5 : 1}
         />
         {this.state.open && (
