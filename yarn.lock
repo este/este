@@ -1477,8 +1477,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000770:
-  version "1.0.30000777"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000777.tgz#31c18a4a8cd49782ebb305c8e8a93e6b3b3e4f13"
+  version "1.0.30000778"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000778.tgz#f1e7cb8b13b1f6744402291d75f0bcd4c3160369"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -3426,17 +3426,17 @@ graceful-fs@~3.0.2:
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 graphql-cli@^2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.0.3.tgz#d7a29a3d5eab69c9fdef0d6f9417dd7cb6a5f6f8"
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.0.4.tgz#8c7a4dd53261966e61277346e271d237c85dede1"
   dependencies:
     chalk "^2.3.0"
     disparity "^2.0.0"
     express "^4.16.2"
     express-request-proxy "^2.0.0"
     graphql "^0.11.7"
-    graphql-config "^1.0.8"
-    graphql-playground-middleware-express "^1.3.0-beta.2"
-    graphql-schema-linter "^0.0.21"
+    graphql-config "^1.0.9"
+    graphql-playground-middleware-express "^1.3.1"
+    graphql-schema-linter "^0.0.24"
     inquirer "^3.2.0"
     js-yaml "^3.9.0"
     lodash "^4.17.4"
@@ -3446,9 +3446,9 @@ graphql-cli@^2.0.1:
     ora "^1.3.0"
     yargs "^9.0.1"
 
-graphql-config@^1.0.0, graphql-config@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-1.0.8.tgz#6dd1cd76ff6fbb01662704f8bddc403f6b0c24d9"
+graphql-config@^1.0.0, graphql-config@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-1.0.9.tgz#8fa416a7c2bdb8f62f441324775dd3ff8a266652"
   dependencies:
     graphql "^0.11.7"
     graphql-request "^1.4.0"
@@ -3456,10 +3456,17 @@ graphql-config@^1.0.0, graphql-config@^1.0.8:
     minimatch "^3.0.4"
     rimraf "^2.6.2"
 
-graphql-playground-middleware-express@^1.3.0-beta.2:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.3.1.tgz#dae7e523c332cb8eb96dc355f97413c2a15cec29"
+graphql-playground-html@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.3.5.tgz#962ea7b39682e2285712feb481ff06ea560cf900"
   dependencies:
+    graphql-config "^1.0.9"
+
+graphql-playground-middleware-express@^1.3.1:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.3.5.tgz#b1b7a11b51c29b088e47e30bed894323226a2d4b"
+  dependencies:
+    graphql-playground-html "^1.3.5"
     graphql-playground-middleware "^1.2.1-beta.6"
 
 graphql-playground-middleware@^1.2.1-beta.6:
@@ -3474,9 +3481,9 @@ graphql-request@^1.4.0:
   dependencies:
     cross-fetch "0.0.8"
 
-graphql-schema-linter@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/graphql-schema-linter/-/graphql-schema-linter-0.0.21.tgz#3faac55111407d8a54fc8276551b34bea077e787"
+graphql-schema-linter@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/graphql-schema-linter/-/graphql-schema-linter-0.0.24.tgz#7da2e1ad543e5b8c98e6c003e47926cfef731d0f"
   dependencies:
     chalk "^2.0.1"
     columnify "^1.5.4"

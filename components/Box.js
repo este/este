@@ -33,7 +33,7 @@ export type BoxProps = {
   children?: React.Node,
 
   as?: React.ElementType,
-  autoFocus?: ?Object | boolean,
+  autoFocus?: ?any | boolean, // any, because  object identity. Check form example.
   isReactNative?: boolean,
   style?: Object,
 

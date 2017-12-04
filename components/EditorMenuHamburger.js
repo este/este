@@ -32,7 +32,7 @@ class EditorMenuHamburger extends React.Component<
     event: SyntheticKeyboardEvent<HTMLButtonElement>,
   ) => {
     if (event.key === 'Escape') {
-      this.setState(state => ({ open: false }));
+      this.setState({ open: false });
     }
   };
 

@@ -27,7 +27,7 @@ const PathButtons = ({ activePath, elements }) => {
   let children = elements;
   return activePath.reduce((elements, pathIndex) => {
     const child = children[pathIndex];
-    // Skip text.
+    // Skip text. Editor will be shown instead.
     if (typeof child === 'string') return elements;
     // eslint-disable-next-line prefer-destructuring
     children = child.props.children;
@@ -35,7 +35,10 @@ const PathButtons = ({ activePath, elements }) => {
     return [
       ...elements,
       <Arrow key={`${key}-arrow`} />,
-      <EditorMenuButton key={key}>{child.type}</EditorMenuButton>,
+      // autoFocus is smart. Is will focus only on different activePath.
+      <EditorMenuButton autoFocus={activePath} key={key}>
+        {child.type}
+      </EditorMenuButton>,
     ];
   }, []);
 };
