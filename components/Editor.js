@@ -10,9 +10,6 @@ import { pageIndexFixture, themeFixture } from './EditorFixtures';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
-// Escape hatch for scroll measurement. Only browsers need it.
-export const activeElementProp = 'data-active-element';
-
 type EditorProps = {|
   name: string,
 |};
@@ -47,6 +44,18 @@ type EditorState = {|
   menuHeight: ?number,
 |};
 
+type EditorAction =
+  | { type: 'SET_ACTIVE_PATH', path: Path }
+  | { type: 'SET_MENU_HEIGHT', height: number };
+
+export type EditorDispatch = (
+  action: EditorAction,
+  callback?: () => void,
+) => void;
+
+// Escape hatch for scroll measurement. Only browsers need it.
+export const activeElementProp = 'data-active-element';
+
 const initialState = {
   web: {
     theme: themeFixture,
@@ -59,15 +68,6 @@ const initialState = {
   activePath: [],
   menuHeight: null,
 };
-
-type EditorAction =
-  | { type: 'SET_ACTIVE_PATH', path: Path }
-  | { type: 'SET_MENU_HEIGHT', height: number };
-
-export type EditorDispatch = (
-  action: EditorAction,
-  callback?: () => void,
-) => void;
 
 const editorReducer = (state, action) => {
   switch (action.type) {

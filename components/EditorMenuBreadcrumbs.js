@@ -6,6 +6,13 @@ import { EditorMenuButton } from './EditorMenu';
 import type { Web, Path } from './Editor';
 import { getElementKey } from './EditorElement';
 
+type EditorMenuBreadcrumbsProps = {|
+  web: Web,
+  webName: string,
+  pageName: string,
+  activePath: Path,
+|};
+
 // backgroundColor="black", because fixBrowserFontSmoothing
 const Arrow = () => (
   <Text backgroundColor="black" marginHorizontal={0.25}>
@@ -14,13 +21,6 @@ const Arrow = () => (
 );
 
 // const Circle = () => <Text backgroundColor="black" paddingHorizontal={0.5}>•</Text>;
-
-type EditorMenuBreadcrumbsProps = {|
-  web: Web,
-  webName: string,
-  pageName: string,
-  activePath: Path,
-|};
 
 const PathButtons = ({ activePath, elements }) => {
   if (activePath.length === 0) return null;

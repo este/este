@@ -23,6 +23,20 @@ export type Element = {|
   |},
 |};
 
+type EditorElementProps = {|
+  element: Element,
+  theme: Theme,
+  path: Path,
+  dispatch: EditorDispatch,
+  parents: Array<Element>,
+  activePath: Path,
+|};
+
+type EditorElementState = {|
+  flashAnimationShown: boolean,
+  flashAnimationColor: string,
+|};
+
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
 // we don't have any unique id and JSON.stringify is too slow.
 // Fortunately, we use immutable data, so we can leverage WeakMap.
@@ -73,21 +87,10 @@ const FlashAnimation = ({ color, onEnd }) => (
   </div>
 );
 
-type Props = {|
-  element: Element,
-  theme: Theme,
-  path: Path,
-  dispatch: EditorDispatch,
-  parents: Array<Element>,
-  activePath: Path,
-|};
-
-type State = {|
-  flashAnimationShown: boolean,
-  flashAnimationColor: string,
-|};
-
-class EditorElement extends React.Component<Props, State> {
+class EditorElement extends React.Component<
+  EditorElementProps,
+  EditorElementState,
+> {
   static getElementComponent(type: ElementType) {
     switch (type) {
       case 'Box':
@@ -101,7 +104,7 @@ class EditorElement extends React.Component<Props, State> {
     }
   }
 
-  constructor(props: Props) {
+  constructor(props: EditorElementProps) {
     super(props);
     this.state = {
       flashAnimationShown: false,
@@ -109,14 +112,17 @@ class EditorElement extends React.Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: EditorElementProps) {
     const isGoingToBeActive =
       !arrayEqual(nextProps.activePath, this.props.activePath) &&
       arrayEqual(nextProps.activePath, this.props.path);
     if (isGoingToBeActive) this.runFlashAnimation();
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
+  shouldComponentUpdate(
+    nextProps: EditorElementProps,
+    nextState: EditorElementState,
+  ) {
     const shouldUpdate =
       nextProps.element !== this.props.element ||
       nextProps.theme !== this.props.theme ||

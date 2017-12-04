@@ -15,6 +15,8 @@ import colorLib from 'color';
 // - use style prop for styling
 // - JSON schema instead of Flow
 
+type EditorElementTextProps = EditorElementBoxProps;
+
 // TODO: Improve with JSON Schema draft 6 for full CSS compliance.
 export const textStyleSchema = {
   ...boxStyleSchema,
@@ -48,8 +50,6 @@ export const textStyleSchema = {
     color: colorSchemaType,
   },
 };
-
-type EditorElementTextProps = EditorElementBoxProps;
 
 const computeTextStyle = (hasParentText, theme, style) => {
   style = {

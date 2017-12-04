@@ -8,6 +8,12 @@ import type { Theme } from './Editor';
 // - use style prop for styling
 // - JSON schema instead of Flow
 
+export type EditorElementBoxProps = {
+  children?: React.Node,
+  style?: Object,
+  theme: Theme,
+};
+
 // TODO: Add rgb/rgba regex or validate manually via Color lib.
 export const colorSchemaType = { type: 'string' };
 
@@ -99,12 +105,6 @@ export const boxStyleSchema = {
     opacity: { type: 'number' },
     overflow: { type: 'string', enum: ['visible', 'hidden', 'scroll'] },
   },
-};
-
-export type EditorElementBoxProps = {
-  children?: React.Node,
-  style?: Object,
-  theme: Theme,
 };
 
 // Use plain number for vertical and horizontal rhythm based on lineHeight.
