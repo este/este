@@ -1,4 +1,4 @@
-// flow-typed signature: 0063f2806b75e8fb24d1ef81b77224e6
+// flow-typed signature: 94f0897b865d7b87d4c0e12a69cc0d47
 // flow-typed version: <<STUB>>/next_v^4.0.0/flow_v0.60.0
 
 /**
@@ -23,6 +23,10 @@ declare module 'next' {
  * needed.
  */
 declare module 'next/babel' {
+  declare module.exports: any;
+}
+
+declare module 'next/client' {
   declare module.exports: any;
 }
 
@@ -269,6 +273,9 @@ declare module 'next/router' {
 // Filename aliases
 declare module 'next/babel.js' {
   declare module.exports: $Exports<'next/babel'>;
+}
+declare module 'next/client.js' {
+  declare module.exports: $Exports<'next/client'>;
 }
 declare module 'next/css.js' {
   declare module.exports: $Exports<'next/css'>;
