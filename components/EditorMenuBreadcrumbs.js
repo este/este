@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box from './Box';
-import Text from './Text';
-import { EditorMenuButton } from './EditorMenu';
+import { EditorMenuButton, Separator, type Section } from './EditorMenu';
 import type { Web, Path } from './Editor';
 import { getElementKey } from './EditorElement';
 
@@ -11,16 +10,9 @@ type EditorMenuBreadcrumbsProps = {|
   webName: string,
   pageName: string,
   activePath: Path,
+  onSelectSection: (section: Section) => void,
+  shownSection: ?Section,
 |};
-
-// backgroundColor="black", because fixBrowserFontSmoothing
-const Arrow = () => (
-  <Text backgroundColor="black" marginHorizontal={0.25}>
-    ▸
-  </Text>
-);
-
-// const Circle = () => <Text backgroundColor="black" paddingHorizontal={0.5}>•</Text>;
 
 const PathButtons = ({ activePath, elements }) => {
   if (activePath.length === 0) return null;
@@ -34,7 +26,7 @@ const PathButtons = ({ activePath, elements }) => {
     const key = getElementKey(child);
     return [
       ...elements,
-      <Arrow key={`${key}-arrow`} />,
+      <Separator key={`${key}-arrow`} />,
       // autoFocus is smart. Is will focus only on different activePath.
       <EditorMenuButton autoFocus={activePath} key={key}>
         {child.type}
@@ -43,19 +35,31 @@ const PathButtons = ({ activePath, elements }) => {
   }, []);
 };
 
+const HamburgerButton = props => (
+  <EditorMenuButton {...props}>☰</EditorMenuButton>
+);
+
 const EditorMenuBreadcrumbs = ({
   web,
   webName,
   pageName,
   activePath,
+  onSelectSection,
+  shownSection,
 }: EditorMenuBreadcrumbsProps) => (
-  <Box flexDirection="row" flexWrap="wrap">
-    <EditorMenuButton>{webName}</EditorMenuButton>
-    <Arrow />
-    <EditorMenuButton>{pageName}</EditorMenuButton>
-    <PathButtons activePath={activePath} elements={web.pages[pageName]} />
-    {/* <Circle />
-      <EditorMenuButton>publish</EditorMenuButton> */}
+  <Box flexDirection="row" justifyContent="space-between">
+    <Box flexDirection="row" flexWrap="wrap">
+      <EditorMenuButton>{webName}</EditorMenuButton>
+      <Separator />
+      <EditorMenuButton>{pageName}</EditorMenuButton>
+      <PathButtons activePath={activePath} elements={web.pages[pageName]} />
+    </Box>
+    <Box flexDirection="row">
+      <HamburgerButton
+        active={shownSection === 'hamburger'}
+        onPress={() => onSelectSection('hamburger')}
+      />
+    </Box>
   </Box>
 );
 
