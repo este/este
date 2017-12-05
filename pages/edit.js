@@ -5,7 +5,7 @@ import { graphql } from 'react-relay';
 import type { editQueryResponse } from './__generated__/editQuery.graphql';
 import type { EditQuery } from '../lib/sitemap';
 import Error from 'next/error';
-import Editor from '../components/Editor';
+import Editor from '../components/editor/Editor';
 
 const Edit = ({ data }) => {
   const { viewer: { Web } }: editQueryResponse = data;

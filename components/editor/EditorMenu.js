@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import type { Web, Path } from './Editor';
-import Box from './Box';
-import Button, { type ButtonProps } from './Button';
+import Box from '../Box';
+import Button, { type ButtonProps } from '../Button';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import Text from './Text';
+import Text from '../Text';
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 
 type EditorMenuProps = {|

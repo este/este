@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import Box from './Box';
-import Set from './Set';
-import A from './A';
-import { ManageYourWebsMessage } from '../pages';
+import Box from '../Box';
+import Set from '../Set';
+import A from '../A';
+import { ManageYourWebsMessage } from '../../pages';
 
 const EditorMenuSectionHamburger = () => (
   <Box alignItems="flex-end">

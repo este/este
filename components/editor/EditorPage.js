@@ -2,10 +2,10 @@
 import * as React from 'react';
 import type { Web, EditorDispatch, Path } from './Editor';
 import Head from 'next/head';
-import Box from './Box';
-import PageStyle from './PageStyle';
+import Box from '../Box';
+import PageStyle from '../PageStyle';
 import EditorElement, { getElementKey } from './EditorElement';
-import MetaViewport from './MetaViewport';
+import MetaViewport from '../MetaViewport';
 
 type EditorPageProps = {|
   web: Web,

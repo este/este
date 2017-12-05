@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import ThemeProvider from './ThemeProvider';
-import { browserThemeDark } from '../themes/browserTheme';
-import AppError from './AppError';
+import ThemeProvider from '../ThemeProvider';
+import { browserThemeDark } from '../../themes/browserTheme';
+import AppError from '../AppError';
 import type { Element } from './EditorElement';
 import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
