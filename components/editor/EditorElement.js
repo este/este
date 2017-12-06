@@ -139,6 +139,8 @@ class EditorElement extends React.Component<
     );
     this.setState({
       flashAnimationShown: true,
+      // Wow. I didn't know I can use CSS filter effects grayscale and invert.
+      // But keep current JS approach. I will reuse it for React Native.
       flashAnimationColor: Color(backgroundColor)
         .grayscale()
         .negate(),
