@@ -34,10 +34,11 @@ export const Section = (props: SetProps) => {
   );
 };
 
-const sections: { [name: SectionName]: () => React.Element<typeof Section> } = {
+const sections = {
   hamburger: EditorMenuSectionHamburger,
   web: EditorMenuSectionWeb,
   page: EditorMenuSectionPage,
+  children: EditorMenuSectionPage,
 };
 
 export const EditorMenuButton = (props: EditorMenuButtonProps) => {

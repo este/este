@@ -69,13 +69,10 @@ const FlashAnimation = ({ color, onEnd }) => (
   </div>
 );
 
-// TODO: | 'TextInput' | 'Button',
-const EditorElements = {
+const editorElements = {
   Box: EditorElementBox,
   Text: EditorElementText,
 };
-
-export type ElementType = $Keys<typeof EditorElements>;
 
 class EditorElement extends React.Component<
   EditorElementProps,
@@ -141,7 +138,7 @@ class EditorElement extends React.Component<
 
   render() {
     const { theme, element, path, dispatch, parents, activePath } = this.props;
-    const Component = EditorElements[element.type];
+    const Component = editorElements[element.type];
     if (!Component) return null;
 
     const componentProps = {

@@ -6,7 +6,6 @@ import AppError from '../AppError';
 import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { pageIndexFixture, themeFixture } from './EditorFixtures';
-import type { ElementType } from './EditorElement';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -27,6 +26,8 @@ export type Theme = {|
     lineHeight: number,
   |},
 |};
+
+export type ElementType = 'Box' | 'Text';
 
 // Just basic shape. We need JSON Schema for dynamic data.
 export type Element = {|
@@ -50,7 +51,7 @@ export type Web = {|
 
 export type Path = Array<number>;
 
-export type SectionName = 'web' | 'page' | 'hamburger';
+export type SectionName = 'web' | 'page' | 'hamburger' | 'children';
 
 type EditorState = {|
   activePath: Path,

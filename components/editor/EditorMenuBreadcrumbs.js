@@ -46,7 +46,24 @@ const PathButtons = ({ activePath, elements, dispatch }) => {
     ];
   }, []);
 
-  return buttons;
+  const hasElementChildren =
+    pathChildren.length > 0 &&
+    pathChildren.every(child => typeof child === 'object');
+
+  if (!hasElementChildren) return buttons;
+
+  return buttons.concat(
+    <React.Fragment key="children">
+      <Separator />
+      <EditorMenuButton
+        onPress={() =>
+          dispatch({ type: 'SET_ACTIVE_SECTION', section: 'children' })
+        }
+      >
+        …
+      </EditorMenuButton>
+    </React.Fragment>,
+  );
 };
 
 const EditorMenuBreadcrumbs = ({
