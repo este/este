@@ -3,10 +3,10 @@ import * as React from 'react';
 import ThemeProvider from '../ThemeProvider';
 import { browserThemeDark } from '../../themes/browserTheme';
 import AppError from '../AppError';
-import type { Element } from './EditorElement';
 import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { pageIndexFixture, themeFixture } from './EditorFixtures';
+import type { ElementType } from './EditorElement';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -28,6 +28,18 @@ export type Theme = {|
   |},
 |};
 
+// Just basic shape. We need JSON Schema for dynamic data.
+export type Element = {|
+  type: ElementType,
+  props: {|
+    children: Array<Element | string>,
+    style?: Object,
+    // browserStyle?: string,
+    // iosStyle?: Object,
+    // androidStyle?: Object,
+  |},
+|};
+
 export type Web = {|
   theme: Theme,
   pages: {
@@ -38,14 +50,18 @@ export type Web = {|
 
 export type Path = Array<number>;
 
+export type SectionName = 'web' | 'page' | 'hamburger';
+
 type EditorState = {|
-  web: Web,
   activePath: Path,
+  activeSection: SectionName,
   menuHeight: ?number,
+  web: Web,
 |};
 
 type EditorAction =
   | { type: 'SET_ACTIVE_PATH', path: Path }
+  | { type: 'SET_ACTIVE_SECTION', section: SectionName }
   | { type: 'SET_MENU_HEIGHT', height: number };
 
 export type EditorDispatch = (
@@ -57,6 +73,9 @@ export type EditorDispatch = (
 export const activeElementProp = 'data-active-element';
 
 const initialState = {
+  activePath: [],
+  activeSection: 'web',
+  menuHeight: null,
   web: {
     theme: themeFixture,
     // fragmentsOrElementsOrTypesOrComponents: {
@@ -65,14 +84,14 @@ const initialState = {
     // }
     pages: { index: pageIndexFixture },
   },
-  activePath: [],
-  menuHeight: null,
 };
 
 const editorReducer = (state, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_PATH':
       return { ...state, activePath: action.path };
+    case 'SET_ACTIVE_SECTION':
+      return { ...state, activeSection: action.section };
     case 'SET_MENU_HEIGHT':
       return { ...state, menuHeight: action.height };
     default:
@@ -129,7 +148,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
   };
 
   render() {
-    const { web, activePath } = this.state;
+    const { activePath, activeSection, web } = this.state;
     const webName = this.props.name;
     const pageName = 'index';
     const menuHeight =
@@ -141,19 +160,21 @@ class Editor extends React.Component<EditorProps, EditorState> {
         {/* <XRay grid={web.theme.typography.lineHeight}> */}
         <AppError />
         <EditorPage
+          activePath={activePath}
+          dispatch={this.dispatch}
+          paddingBottomPx={menuHeight}
+          pageName={pageName}
           web={web}
           webName={webName}
-          pageName={pageName}
-          paddingBottomPx={menuHeight}
-          dispatch={this.dispatch}
-          activePath={activePath}
         />
         <EditorMenu
+          activePath={activePath}
+          activeSection={activeSection}
+          dispatch={this.dispatch}
+          onHeightChange={this.handleEditorMenuHeightChange}
+          pageName={pageName}
           web={web}
           webName={webName}
-          pageName={pageName}
-          onHeightChange={this.handleEditorMenuHeightChange}
-          activePath={activePath}
         />
         {/* </XRay> */}
       </ThemeProvider>

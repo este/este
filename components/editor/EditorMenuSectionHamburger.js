@@ -1,19 +1,15 @@
 // @flow
 import * as React from 'react';
-import Box from '../Box';
-import Set from '../Set';
+import { Section } from './EditorMenu';
 import A from '../A';
 import { ManageYourWebsMessage } from '../../pages';
 
 const EditorMenuSectionHamburger = () => (
-  <Box alignItems="flex-end">
-    <Set marginBottom={0}>
-      {/* autoFocus is good for UX. Every EditorMenuSection should set it. */}
-      <A autoFocus href={{ pathname: '/' }}>
-        <ManageYourWebsMessage />
-      </A>
-    </Set>
-  </Box>
+  <Section justifyContent="flex-end">
+    <A href={{ pathname: '/' }}>
+      <ManageYourWebsMessage />
+    </A>
+  </Section>
 );
 
 export default EditorMenuSectionHamburger;

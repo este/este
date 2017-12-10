@@ -1,66 +1,84 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuButton, Separator, type Section } from './EditorMenu';
-import type { Web, Path } from './Editor';
+import { EditorMenuButton, Separator } from './EditorMenu';
+import type { Web, Path, EditorDispatch, SectionName } from './Editor';
 import { getElementKey } from './EditorElement';
 
 type EditorMenuBreadcrumbsProps = {|
+  activePath: Path,
+  activeSection: SectionName,
+  dispatch: EditorDispatch,
+  pageName: string,
   web: Web,
   webName: string,
-  pageName: string,
-  activePath: Path,
-  onSelectSection: (section: Section) => void,
-  shownSection: ?Section,
 |};
 
-const PathButtons = ({ activePath, elements }) => {
+const PathButtons = ({ activePath, elements, dispatch }) => {
   if (activePath.length === 0) return null;
-  let children = elements;
-  return activePath.reduce((elements, pathIndex) => {
-    const child = children[pathIndex];
-    // Skip text. Editor will be shown instead.
-    if (typeof child === 'string') return elements;
-    // eslint-disable-next-line prefer-destructuring
-    children = child.props.children;
+  let pathChildren = elements;
+  let textFound = false;
+  let buttonPath = [];
+
+  const buttons = activePath.reduce((buttons, pathIndex, index) => {
+    const child = pathChildren[pathIndex];
+    // Have to be written like this, because of Flow type refinements.
+    if (textFound || typeof child === 'string') {
+      textFound = true;
+      return buttons;
+    }
+    pathChildren = child.props.children;
     const key = getElementKey(child);
+    const isLast = index === activePath.length - 1;
+    buttonPath = buttonPath.concat(pathIndex);
+    const path = buttonPath; // Yep, closure.
     return [
-      ...elements,
-      <Separator key={`${key}-arrow`} />,
-      // autoFocus is smart. Is will focus only on different activePath.
-      <EditorMenuButton autoFocus={activePath} key={key}>
-        {child.type}
-      </EditorMenuButton>,
+      ...buttons,
+      <React.Fragment key={key}>
+        <Separator />
+        <EditorMenuButton
+          autoFocus={isLast ? activePath : false}
+          onPress={() => dispatch({ type: 'SET_ACTIVE_PATH', path })}
+        >
+          {child.type}
+        </EditorMenuButton>
+      </React.Fragment>,
     ];
   }, []);
+
+  return buttons;
 };
 
-const HamburgerButton = props => (
-  <EditorMenuButton {...props}>☰</EditorMenuButton>
-);
-
 const EditorMenuBreadcrumbs = ({
+  activePath,
+  activeSection,
+  dispatch,
+  pageName,
   web,
   webName,
-  pageName,
-  activePath,
-  onSelectSection,
-  shownSection,
-}: EditorMenuBreadcrumbsProps) => (
-  <Box flexDirection="row" justifyContent="space-between">
-    <Box flexDirection="row" flexWrap="wrap">
-      <EditorMenuButton>{webName}</EditorMenuButton>
-      <Separator />
-      <EditorMenuButton>{pageName}</EditorMenuButton>
-      <PathButtons activePath={activePath} elements={web.pages[pageName]} />
+}: EditorMenuBreadcrumbsProps) => {
+  const button = section => ({
+    active: activeSection === section,
+    onPress: () => dispatch({ type: 'SET_ACTIVE_SECTION', section }),
+  });
+
+  return (
+    <Box flexDirection="row" justifyContent="space-between">
+      <Box flexDirection="row" flexWrap="wrap">
+        <EditorMenuButton {...button('web')}>{webName}</EditorMenuButton>
+        <Separator />
+        <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
+        <PathButtons
+          activePath={activePath}
+          elements={web.pages[pageName]}
+          dispatch={dispatch}
+        />
+      </Box>
+      <EditorMenuButton flexDirection="row" {...button('hamburger')}>
+        ☰
+      </EditorMenuButton>
     </Box>
-    <Box flexDirection="row">
-      <HamburgerButton
-        active={shownSection === 'hamburger'}
-        onPress={() => onSelectSection('hamburger')}
-      />
-    </Box>
-  </Box>
-);
+  );
+};
 
 export default EditorMenuBreadcrumbs;

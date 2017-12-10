@@ -1,26 +1,25 @@
 // @flow
 import * as React from 'react';
-import type { Web, Path } from './Editor';
+import type { Web, Path, EditorDispatch, SectionName } from './Editor';
 import Box from '../Box';
 import Button, { type ButtonProps } from '../Button';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import Text from '../Text';
+import Set, { type SetProps } from '../Set';
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
+import EditorMenuSectionWeb from './EditorMenuSectionWeb';
+import EditorMenuSectionPage from './EditorMenuSectionPage';
 
 type EditorMenuProps = {|
+  activePath: Path,
+  activeSection: SectionName,
+  dispatch: EditorDispatch,
+  onHeightChange: (menu: HTMLElement) => void,
+  pageName: string,
   web: Web,
   webName: string,
-  pageName: string,
-  activePath: Path,
-  onHeightChange: (menu: HTMLElement) => void,
-|};
-
-export type Section = 'hamburger';
-
-type EditorMenuState = {|
-  shownSection: ?Section,
 |};
 
 type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
@@ -28,8 +27,17 @@ type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
 // It's used at multiple places because of fixBrowserFontSmoothing.
 const backgroundColor = 'black';
 
-const sections = {
+export const Section = (props: SetProps) => {
+  const { marginBottom = 0, paddingTop = 0.5, ...restProps } = props;
+  return (
+    <Set marginBottom={marginBottom} paddingTop={paddingTop} {...restProps} />
+  );
+};
+
+const sections: { [name: SectionName]: () => React.Element<typeof Section> } = {
   hamburger: EditorMenuSectionHamburger,
+  web: EditorMenuSectionWeb,
+  page: EditorMenuSectionPage,
 };
 
 export const EditorMenuButton = (props: EditorMenuButtonProps) => {
@@ -43,7 +51,7 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
   return (
     <Button
       backgroundColor={backgroundColor} // because fixBrowserFontSmoothing
-      opacity={active ? 0.5 : 1}
+      decoration={active ? 'underline' : 'none'}
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
@@ -63,14 +71,10 @@ const menuPaddingVertical = 0.5;
 export const getDefaultMenuHeight = (lineHeight: number) =>
   lineHeight + 2 * (menuPaddingVertical * lineHeight);
 
-class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
+class EditorMenu extends React.Component<EditorMenuProps> {
   static style = {
     position: 'fixed',
     boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)',
-  };
-
-  state = {
-    shownSection: null,
   };
 
   componentDidMount() {
@@ -92,47 +96,36 @@ class EditorMenu extends React.Component<EditorMenuProps, EditorMenuState> {
     this.resizeObserver.observe(node);
   }
 
-  handleEditorMenuBreadcrumbsSelectSection = (section: Section) => {
-    this.setState(state => ({
-      shownSection: state.shownSection !== section ? section : null,
-    }));
-  };
-
-  handleKeyDown = (event: SyntheticKeyboardEvent<*>) => {
-    if (event.key === 'Escape') {
-      this.setState({ shownSection: null });
-    }
-  };
-
   render() {
-    const { web, webName, pageName, activePath } = this.props;
-    const { shownSection } = this.state;
-    const Section = shownSection && sections[shownSection];
+    const {
+      activePath,
+      activeSection,
+      dispatch,
+      pageName,
+      web,
+      webName,
+    } = this.props;
+    const ActiveSection = sections[activeSection];
 
     return (
       <Box
         backgroundColor={backgroundColor}
-        paddingVertical={menuPaddingVertical}
-        paddingHorizontal={0.5}
         bottom={0}
         left={0}
+        paddingHorizontal={0.5}
+        paddingVertical={menuPaddingVertical}
         right={0}
         style={EditorMenu.style}
-        onKeyDown={this.handleKeyDown}
       >
         <EditorMenuBreadcrumbs
+          activePath={activePath}
+          activeSection={activeSection}
+          dispatch={dispatch}
+          pageName={pageName}
           web={web}
           webName={webName}
-          pageName={pageName}
-          activePath={activePath}
-          onSelectSection={this.handleEditorMenuBreadcrumbsSelectSection}
-          shownSection={shownSection}
         />
-        {Section && (
-          <Box paddingTop={0.5}>
-            <Section />
-          </Box>
-        )}
+        <ActiveSection />
       </Box>
     );
   }

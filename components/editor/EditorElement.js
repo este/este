@@ -2,26 +2,10 @@
 import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
-import type { Theme, EditorDispatch, Path } from './Editor';
+import type { EditorDispatch, Element, Path, Theme } from './Editor';
 import Color from 'color';
 import arrayEqual from 'array-equal';
 import { activeElementProp } from './Editor';
-
-// Just a basic shape. We need a JSON Schema for validation.
-// Doesn't make sense to use Flow for dynamic data.
-// TODO: | 'TextInput' | 'Button',
-type ElementType = 'Box' | 'Text';
-
-export type Element = {|
-  type: ElementType,
-  props: {|
-    children: Array<Element | string>,
-    style?: Object,
-    // browserStyle?: string,
-    // iosStyle?: Object,
-    // androidStyle?: Object,
-  |},
-|};
 
 type EditorElementProps = {|
   element: Element,
@@ -52,8 +36,6 @@ export const getElementKey = (() => {
   };
 })();
 
-const maxCssZIndex = 2147483647;
-
 const getInheritedBackgroundColor = (elements, themeBackgroundColor) => {
   for (const { props } of elements.reverse()) {
     if (props.style && props.style.backgroundColor)
@@ -75,7 +57,7 @@ const FlashAnimation = ({ color, onEnd }) => (
       }
       div {
         position: absolute;
-        z-index: ${maxCssZIndex};
+        z-index: 2147483647; /* max */
         bottom: 0;
         left: 0;
         right: 0;
@@ -87,23 +69,18 @@ const FlashAnimation = ({ color, onEnd }) => (
   </div>
 );
 
+// TODO: | 'TextInput' | 'Button',
+const EditorElements = {
+  Box: EditorElementBox,
+  Text: EditorElementText,
+};
+
+export type ElementType = $Keys<typeof EditorElements>;
+
 class EditorElement extends React.Component<
   EditorElementProps,
   EditorElementState,
 > {
-  static getElementComponent(type: ElementType) {
-    switch (type) {
-      case 'Box':
-        return EditorElementBox;
-      case 'Text':
-        return EditorElementText;
-      default:
-        // eslint-disable-next-line no-unused-expressions
-        (type: empty);
-        return null;
-    }
-  }
-
   constructor(props: EditorElementProps) {
     super(props);
     this.state = {
@@ -164,7 +141,7 @@ class EditorElement extends React.Component<
 
   render() {
     const { theme, element, path, dispatch, parents, activePath } = this.props;
-    const Component = EditorElement.getElementComponent(element.type);
+    const Component = EditorElements[element.type];
     if (!Component) return null;
 
     const componentProps = {
