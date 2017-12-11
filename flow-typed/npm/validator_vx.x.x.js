@@ -1,4 +1,4 @@
-// flow-typed signature: 4896d3b77e2ca0d7e24244ec6eeb429e
+// flow-typed signature: 68f164b2325c9b7671587e092861b2b4
 // flow-typed version: <<STUB>>/validator_v^9.0.0/flow_v0.61.0
 
 /**
@@ -191,6 +191,10 @@ declare module 'validator/lib/isMACAddress' {
 }
 
 declare module 'validator/lib/isMD5' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isMimeType' {
   declare module.exports: any;
 }
 
@@ -445,6 +449,9 @@ declare module 'validator/lib/isMACAddress.js' {
 }
 declare module 'validator/lib/isMD5.js' {
   declare module.exports: $Exports<'validator/lib/isMD5'>;
+}
+declare module 'validator/lib/isMimeType.js' {
+  declare module.exports: $Exports<'validator/lib/isMimeType'>;
 }
 declare module 'validator/lib/isMobilePhone.js' {
   declare module.exports: $Exports<'validator/lib/isMobilePhone'>;

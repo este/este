@@ -11,6 +11,7 @@ import Set, { type SetProps } from '../Set';
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
 import EditorMenuSectionPage from './EditorMenuSectionPage';
+import maybeMoveFocusOnKey from '../../lib/maybeMoveFocusOnKey';
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -27,6 +28,7 @@ type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
 // It's used at multiple places because of fixBrowserFontSmoothing.
 const backgroundColor = 'black';
 
+// TODO: Probably layout props: buttons and content.
 export const Section = (props: SetProps) => {
   const { marginBottom = 0, paddingTop = 0.5, ...restProps } = props;
   return (
@@ -97,6 +99,10 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     this.resizeObserver.observe(node);
   }
 
+  handleKeyDown = (event: SyntheticKeyboardEvent<HTMLElement>) => {
+    maybeMoveFocusOnKey(event.key, event.currentTarget, event.target);
+  };
+
   render() {
     const {
       activePath,
@@ -117,6 +123,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
         paddingVertical={menuPaddingVertical}
         right={0}
         style={EditorMenu.style}
+        onKeyDown={this.handleKeyDown}
       >
         <EditorMenuBreadcrumbs
           activePath={activePath}
