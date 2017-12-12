@@ -51,7 +51,7 @@ export type Web = {|
 
 export type Path = Array<number>;
 
-export type SectionName = 'web' | 'page' | 'hamburger' | 'children';
+export type SectionName = 'web' | 'page' | 'hamburger';
 
 type EditorState = {|
   activePath: Path,

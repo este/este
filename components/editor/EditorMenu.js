@@ -8,10 +8,11 @@ import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import Text from '../Text';
 import Set, { type SetProps } from '../Set';
+import maybeMoveFocusOnKey from '../../lib/maybeMoveFocusOnKey';
+
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
 import EditorMenuSectionPage from './EditorMenuSectionPage';
-import maybeMoveFocusOnKey from '../../lib/maybeMoveFocusOnKey';
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -40,7 +41,7 @@ const sections = {
   hamburger: EditorMenuSectionHamburger,
   web: EditorMenuSectionWeb,
   page: EditorMenuSectionPage,
-  children: EditorMenuSectionPage,
+  // children: EditorMenuSectionChildren,
 };
 
 export const EditorMenuButton = (props: EditorMenuButtonProps) => {
@@ -63,9 +64,13 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
   );
 };
 
-export const Separator = ({ circle }: { circle?: boolean }) => (
+type SeparatorProps = {|
+  type?: 'arrow' | 'circle' | 'empty',
+|};
+
+export const Separator = ({ type }: SeparatorProps) => (
   <Text backgroundColor="black" marginHorizontal={0.25}>
-    {circle ? '•' : '▸'}
+    {{ arrow: '▸', circle: '•', empty: '\xa0' }[type || 'arrow']}
   </Text>
 );
 
@@ -133,7 +138,12 @@ class EditorMenu extends React.Component<EditorMenuProps> {
           web={web}
           webName={webName}
         />
-        <ActiveSection />
+        <ActiveSection
+        // activePath={activePath}
+        // dispatch={dispatch}
+        // pageName={pageName}
+        // web={web}
+        />
       </Box>
     );
   }
