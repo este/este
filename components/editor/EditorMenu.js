@@ -13,6 +13,7 @@ import maybeMoveFocusOnKey from '../../lib/maybeMoveFocusOnKey';
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
 import EditorMenuSectionPage from './EditorMenuSectionPage';
+import EditorMenuSectionElement from './EditorMenuSectionElement';
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -41,7 +42,7 @@ const sections = {
   hamburger: EditorMenuSectionHamburger,
   web: EditorMenuSectionWeb,
   page: EditorMenuSectionPage,
-  // children: EditorMenuSectionChildren,
+  element: EditorMenuSectionElement,
 };
 
 export const EditorMenuButton = (props: EditorMenuButtonProps) => {

@@ -4,8 +4,7 @@ import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
 import type { EditorDispatch, Element, Path, Theme } from './Editor';
 import Color from 'color';
-import arrayEqual from 'array-equal';
-import { activeElementProp } from './Editor';
+import { activeElementProp, pathEqual } from './Editor';
 
 type EditorElementProps = {|
   element: Element,
@@ -89,8 +88,8 @@ class EditorElement extends React.Component<
 
   componentWillReceiveProps(nextProps: EditorElementProps) {
     const isGoingToBeActive =
-      !arrayEqual(nextProps.activePath, this.props.activePath) &&
-      arrayEqual(nextProps.activePath, this.props.path);
+      !pathEqual(nextProps.activePath, this.props.activePath) &&
+      pathEqual(nextProps.activePath, this.props.path);
     if (isGoingToBeActive) this.runFlashAnimation();
   }
 
@@ -103,7 +102,7 @@ class EditorElement extends React.Component<
       nextProps.theme !== this.props.theme ||
       nextState.flashAnimationShown !== this.state.flashAnimationShown ||
       nextState.flashAnimationColor !== this.state.flashAnimationColor ||
-      !arrayEqual(nextProps.activePath, this.props.activePath);
+      !pathEqual(nextProps.activePath, this.props.activePath);
     return shouldUpdate;
   }
 
@@ -123,7 +122,7 @@ class EditorElement extends React.Component<
   }
 
   isActive() {
-    return arrayEqual(this.props.path, this.props.activePath);
+    return pathEqual(this.props.path, this.props.activePath);
   }
 
   handleClick = (e: Event) => {

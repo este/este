@@ -6,6 +6,7 @@ import AppError from '../AppError';
 import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
+import arrayEqual from 'array-equal';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -51,7 +52,7 @@ export type Web = {|
 
 export type Path = Array<number>;
 
-export type SectionName = 'web' | 'page' | 'hamburger';
+export type SectionName = 'web' | 'page' | 'hamburger' | 'element';
 
 type EditorState = {|
   activePath: Path,
@@ -72,6 +73,8 @@ export type EditorDispatch = (
 
 // Escape hatch for scroll measurement. Only browsers need it.
 export const activeElementProp = 'data-active-element';
+
+export const pathEqual = (path1: Path, path2: Path) => arrayEqual(path1, path2);
 
 const initialState = {
   activePath: [],
