@@ -32,24 +32,25 @@ class Children extends React.Component<ChildrenProps, ChildrenState> {
       this.setState({ expanded: false });
   }
 
+  getChildPath(child) {
+    const index = this.props.pathChildren.findIndex(item => item === child);
+    return this.props.activePath.concat(index);
+  }
+
   handleToggleOnPress = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
   handleChildrenButtonOnPress = child => () => {
-    const index = this.props.pathChildren.findIndex(item => item === child);
-    const path = this.props.activePath.concat(index);
+    const path = this.getChildPath(child);
     this.props.dispatch({ type: 'SET_ACTIVE_PATH', path });
   };
 
   renderElementChildren(elementChildren) {
-    return elementChildren.map((child, index) => (
+    return elementChildren.map(child => (
       <React.Fragment key={getElementKey(child)}>
-        {index <= elementChildren.length - 1 && (
-          <Separator type={index === 0 ? 'arrow' : 'circle'} />
-        )}
         <EditorMenuButton
-          autoFocus={index === 0}
+          marginHorizontal={0.25}
           onPress={this.handleChildrenButtonOnPress(child)}
         >
           {child.type}

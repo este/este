@@ -2418,8 +2418,8 @@ enhanced-resolve@^3.4.0:
     tapable "^0.2.7"
 
 errno@^0.1.1, errno@^0.1.2, errno@^0.1.3, errno@^0.1.4:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.5.tgz#a563781a6052bc2c9ccd89e8cef0eb9506e0c321"
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.6.tgz#c386ce8a6283f14fc09563b71560908c9bf53026"
   dependencies:
     prr "~1.0.1"
 
@@ -2645,8 +2645,8 @@ eslint-scope@^3.7.1:
     estraverse "^4.1.1"
 
 eslint@^4.4.1:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.13.0.tgz#1991aa359586af83877bde59de9d41f53e20826d"
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.13.1.tgz#0055e0014464c7eb7878caf549ef2941992b444f"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -3567,13 +3567,14 @@ graceful-fs@~3.0.2:
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 graphql-cli@^2.0.1:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.0.9.tgz#a2a1bc821c216a7e4cee02d04ff8a226d065ff73"
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.0.11.tgz#1fddfad1c3963f909fd1b06760a509e294da3dbf"
   dependencies:
     "@types/inquirer" "^0.0.35"
     "@types/yargs" "^10.0.0"
     chalk "^2.3.0"
     disparity "^2.0.0"
+    dotenv "^4.0.0"
     express "^4.16.2"
     express-request-proxy "^2.0.0"
     graphql "^0.11.7"
@@ -6071,8 +6072,8 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
 prettier@^1.5.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.9.1.tgz#41638a0d47c1efbd1b7d5a742aaa5548eab86d70"
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.9.2.tgz#96bc2132f7a32338e6078aeb29727178c6335827"
 
 pretty-bytes@^1.0.2:
   version "1.0.4"

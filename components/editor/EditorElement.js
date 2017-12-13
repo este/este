@@ -49,7 +49,7 @@ const FlashAnimation = ({ color, onEnd }) => (
     <style jsx>{`
       @keyframes activated {
         0% {
-          opacity: 0.5;
+          opacity: 0.25;
         }
         100% {
           opacity: 0;
@@ -62,8 +62,9 @@ const FlashAnimation = ({ color, onEnd }) => (
         left: 0;
         right: 0;
         top: 0;
-        background-color: ${color};
-        animation: activated 0.5s;
+        border: dashed 3px ${color};
+        /* background-color: ${color}; */
+        animation: activated 1s;
       }
     `}</style>
   </div>
