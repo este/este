@@ -5,7 +5,7 @@ import { browserThemeDark } from '../../themes/browserTheme';
 import AppError from '../AppError';
 import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
 import EditorPage from './EditorPage';
-import { pageIndexFixture, themeFixture } from './EditorFixtures';
+import { webFixture } from './EditorFixtures';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -77,14 +77,7 @@ const initialState = {
   activePath: [],
   activeSection: 'web',
   menuHeight: null,
-  web: {
-    theme: themeFixture,
-    // fragmentsOrElementsOrTypesOrComponents: {
-    //   Heading
-    //   MainNav
-    // }
-    pages: { index: pageIndexFixture },
-  },
+  web: webFixture,
 };
 
 const editorReducer = (state, action) => {

@@ -1,23 +1,6 @@
 // @flow
 
-// TODO: Load from DB.
-
-export const themeFixture = {
-  colors: {
-    background: '#F9FAFB',
-    foreground: '#333',
-    // brand1: 'blue'
-  },
-  typography: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    fontSize: 16,
-    fontSizeScale: 0.75,
-    lineHeight: 24,
-  },
-};
-
-export const pageIndexFixture = [
+const pageIndexFixture = [
   // {
   //   type: 'Title',
   //   props: 'Home',
@@ -119,3 +102,25 @@ export const pageIndexFixture = [
     },
   },
 ];
+
+export const webFixture = {
+  theme: {
+    colors: {
+      background: '#F9FAFB',
+      foreground: '#333',
+      // brand1: 'blue'
+    },
+    typography: {
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      fontSize: 16,
+      fontSizeScale: 0.75,
+      lineHeight: 24,
+    },
+  },
+  // fragmentsOrElementsOrTypesOrComponents: {
+  //   Heading
+  //   MainNav
+  // }
+  pages: { index: pageIndexFixture },
+};
