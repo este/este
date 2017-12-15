@@ -86,7 +86,7 @@ const initialState = {
 const editorReducer = (state, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_PATH':
-      return { ...state, activePath: action.path };
+      return { ...state, activePath: action.path, activeSection: 'element' };
     case 'SET_ACTIVE_SECTION':
       return { ...state, activeSection: action.section };
     case 'SET_MENU_HEIGHT':

@@ -117,10 +117,8 @@ const PathButtons = ({ activePath, elements, dispatch, button }) => {
   let stringFound = false;
   let buttonPath = [];
 
-  const handleOnPress = path => () => {
-    button.onPress();
+  const handleOnPress = path => () =>
     dispatch({ type: 'SET_ACTIVE_PATH', path });
-  };
 
   const buttons = activePath.reduce((buttons, pathIndex, index) => {
     const child = pathChildren[pathIndex];
@@ -173,20 +171,12 @@ const EditorMenuBreadcrumbs = ({
     onPress: () => dispatch({ type: 'SET_ACTIVE_SECTION', section }),
   });
 
-  const pageButton = section => ({
-    active: activeSection === section,
-    onPress: () => {
-      dispatch({ type: 'SET_ACTIVE_PATH', path: [] });
-      dispatch({ type: 'SET_ACTIVE_SECTION', section });
-    },
-  });
-
   return (
     <Box flexDirection="row" justifyContent="space-between">
       <Box flexDirection="row" flexWrap="wrap">
         <EditorMenuButton {...button('web')}>{webName}</EditorMenuButton>
         <Separator />
-        <EditorMenuButton {...pageButton('page')}>{pageName}</EditorMenuButton>
+        <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
         <PathButtons
           activePath={activePath}
           elements={web.pages[pageName]}
