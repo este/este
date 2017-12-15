@@ -116,8 +116,8 @@
     "@types/through" "*"
 
 "@types/lodash@^4.14.85":
-  version "4.14.90"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.90.tgz#c853f6747080215372aca5a3770fc62d65a05186"
+  version "4.14.91"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.91.tgz#794611b28056d16b5436059c6d800b39d573cd3a"
 
 "@types/node@*":
   version "8.5.1"
@@ -3590,8 +3590,8 @@ graceful-fs@~3.0.2:
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 graphcool-json-schema@^1.0.1-alpha.2:
-  version "1.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/graphcool-json-schema/-/graphcool-json-schema-1.0.1-alpha.2.tgz#14dd7c880d9df9045b8e658896948522c89f4f49"
+  version "1.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/graphcool-json-schema/-/graphcool-json-schema-1.0.1-beta.2.tgz#59db6749abb7b59708b77bb2c24a8d64e7d92d3b"
 
 graphcool-yml@^0.0.6:
   version "0.0.6"
