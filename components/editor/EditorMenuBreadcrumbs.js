@@ -47,11 +47,21 @@ class Children extends React.Component<ChildrenProps, ChildrenState> {
     this.props.handleOnPress(path)();
   };
 
-  renderElementChildren(elementChildren) {
-    return elementChildren.map(child => (
+  renderElementChildren(
+    elementChildren,
+    {
+      separatorType = 'circle',
+      autoFocusFirst = false,
+    }: {|
+      separatorType?: *,
+      autoFocusFirst?: *,
+    |},
+  ) {
+    return elementChildren.map((child, index) => (
       <React.Fragment key={getElementKey(child)}>
+        <Separator type={separatorType} />
         <EditorMenuButton
-          marginHorizontal={0.25}
+          autoFocus={autoFocusFirst && index === 0}
           onPress={this.handleChildrenButtonOnPress(child)}
         >
           {child.type}
@@ -60,19 +70,43 @@ class Children extends React.Component<ChildrenProps, ChildrenState> {
     ));
   }
 
+  renderChildren(children) {
+    if (children.length === 0) return null;
+
+    return (
+      <React.Fragment>
+        {this.state.expanded ? (
+          this.renderElementChildren(children, {
+            autoFocusFirst: true,
+            separatorType: 'empty',
+          })
+        ) : (
+          <React.Fragment>
+            <Separator type="empty" />
+            <EditorMenuButton onPress={this.handleToggleOnPress}>
+              …
+            </EditorMenuButton>
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }
+
   render() {
+    // Render only elements, not strings.
     const elementChildren = this.props.pathChildren.filter(
       item => typeof item !== 'string',
     );
     if (elementChildren.length === 0) return null;
 
+    const [firstElementChildren, ...restElementChildren] = elementChildren;
+
     return (
       <React.Fragment>
-        <Separator />
-        <EditorMenuButton onPress={this.handleToggleOnPress}>
-          …
-        </EditorMenuButton>
-        {this.state.expanded && this.renderElementChildren(elementChildren)}
+        {this.renderElementChildren([firstElementChildren], {
+          separatorType: 'arrow',
+        })}
+        {this.renderChildren(restElementChildren)}
       </React.Fragment>
     );
   }
@@ -139,12 +173,20 @@ const EditorMenuBreadcrumbs = ({
     onPress: () => dispatch({ type: 'SET_ACTIVE_SECTION', section }),
   });
 
+  const pageButton = section => ({
+    active: activeSection === section,
+    onPress: () => {
+      dispatch({ type: 'SET_ACTIVE_PATH', path: [] });
+      dispatch({ type: 'SET_ACTIVE_SECTION', section });
+    },
+  });
+
   return (
     <Box flexDirection="row" justifyContent="space-between">
       <Box flexDirection="row" flexWrap="wrap">
         <EditorMenuButton {...button('web')}>{webName}</EditorMenuButton>
         <Separator />
-        <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
+        <EditorMenuButton {...pageButton('page')}>{pageName}</EditorMenuButton>
         <PathButtons
           activePath={activePath}
           elements={web.pages[pageName]}
