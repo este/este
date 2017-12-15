@@ -1,4 +1,4 @@
-// flow-typed signature: b814f7778bfe4bebe77bf727a6a7fdd2
+// flow-typed signature: 25297c7efbcdfc0fad23ebff44643489
 // flow-typed version: <<STUB>>/react-x-ray_v^1.0.0-3/flow_v0.61.0
 
 /**
@@ -42,10 +42,6 @@ declare module 'react-x-ray/test' {
   declare module.exports: any;
 }
 
-declare module 'react-x-ray/webpack.config' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'react-x-ray/dist/util.js' {
   declare module.exports: $Exports<'react-x-ray/dist/util'>;
@@ -61,7 +57,4 @@ declare module 'react-x-ray/src/XRay.js' {
 }
 declare module 'react-x-ray/test.js' {
   declare module.exports: $Exports<'react-x-ray/test'>;
-}
-declare module 'react-x-ray/webpack.config.js' {
-  declare module.exports: $Exports<'react-x-ray/webpack.config'>;
 }
