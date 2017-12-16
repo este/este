@@ -61,7 +61,7 @@ const FlashAnimation = ({ color, onEnd }) => (
         left: 0;
         right: 0;
         top: 0;
-        border: dashed 2px ${color};
+        border: dashed 3px ${color};
         animation: activated 1s;
       }
     `}</style>
@@ -107,9 +107,10 @@ class EditorElement extends React.Component<
     return shouldUpdate;
   }
 
+  // TODO: Should be JS only multi platform animation.
   runFlashAnimation() {
     if (this.state.flashAnimationRunning) {
-      // jak na restart, odebrat, a pak zavolat?
+      // We have to remove then add element to restart CSS animation. Yep.
       this.setState({ flashAnimationRunning: false }, () => {
         this.setState({ flashAnimationRunning: true });
       });
@@ -122,7 +123,7 @@ class EditorElement extends React.Component<
     this.setState({
       flashAnimationRunning: true,
       // Wow. I didn't know I can use CSS filter effects grayscale and invert.
-      // But keep current JS approach. I will reuse it for React Native.
+      // But keep current JS approach. We will reuse it for React Native.
       flashAnimationColor: Color(backgroundColor)
         .grayscale()
         .negate(),

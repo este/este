@@ -66,12 +66,12 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
 };
 
 type SeparatorProps = {|
-  type?: 'arrow' | 'circle' | 'empty',
+  type?: 'arrow' | 'circle',
 |};
 
 export const Separator = ({ type }: SeparatorProps) => (
   <Text backgroundColor="black" marginHorizontal={0.25}>
-    {{ arrow: '▸', circle: '•', empty: '\xa0' }[type || 'arrow']}
+    {{ arrow: '▸', circle: '•' }[type || 'arrow']}
   </Text>
 );
 

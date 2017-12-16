@@ -21,92 +21,39 @@ type ChildrenProps = {
   activePath: Path,
 };
 
-type ChildrenState = {
-  expanded: boolean,
-};
-
-class Children extends React.Component<ChildrenProps, ChildrenState> {
-  state = { expanded: false };
-
-  componentWillReceiveProps(nextProps: ChildrenProps) {
-    if (nextProps.pathChildren !== this.props.pathChildren)
-      this.setState({ expanded: false });
-  }
-
+class Children extends React.Component<ChildrenProps> {
   getChildPath(child) {
     const index = this.props.pathChildren.findIndex(item => item === child);
     return this.props.activePath.concat(index);
   }
-
-  handleToggleOnPress = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
 
   handleChildrenButtonOnPress = child => () => {
     const path = this.getChildPath(child);
     this.props.handleOnPress(path)();
   };
 
-  renderElementChildren(
-    elementChildren,
-    {
-      separatorType = 'circle',
-      autoFocusFirst = false,
-    }: {|
-      separatorType?: *,
-      autoFocusFirst?: *,
-    |},
-  ) {
+  renderChildren(elementChildren) {
     return elementChildren.map((child, index) => (
       <React.Fragment key={getElementKey(child)}>
-        <Separator type={separatorType} />
-        <EditorMenuButton
-          autoFocus={autoFocusFirst && index === 0}
-          onPress={this.handleChildrenButtonOnPress(child)}
-        >
+        {index !== 0 && <Separator type="circle" />}
+        <EditorMenuButton onPress={this.handleChildrenButtonOnPress(child)}>
           {child.type}
         </EditorMenuButton>
       </React.Fragment>
     ));
   }
 
-  renderChildren(children) {
-    if (children.length === 0) return null;
-
-    return (
-      <React.Fragment>
-        {this.state.expanded ? (
-          this.renderElementChildren(children, {
-            autoFocusFirst: true,
-            separatorType: 'empty',
-          })
-        ) : (
-          <React.Fragment>
-            <Separator type="empty" />
-            <EditorMenuButton onPress={this.handleToggleOnPress}>
-              …
-            </EditorMenuButton>
-          </React.Fragment>
-        )}
-      </React.Fragment>
-    );
-  }
-
   render() {
-    // Render only elements, not strings.
+    // Only elements, not strings.
     const elementChildren = this.props.pathChildren.filter(
       item => typeof item !== 'string',
     );
     if (elementChildren.length === 0) return null;
 
-    const [firstElementChildren, ...restElementChildren] = elementChildren;
-
     return (
       <React.Fragment>
-        {this.renderElementChildren([firstElementChildren], {
-          separatorType: 'arrow',
-        })}
-        {this.renderChildren(restElementChildren)}
+        <Separator />
+        {this.renderChildren(elementChildren)}
       </React.Fragment>
     );
   }

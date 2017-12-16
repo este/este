@@ -88,7 +88,11 @@ const editorReducer = (state, action) => {
     case 'SET_ACTIVE_PATH':
       return { ...state, activePath: action.path, activeSection: 'element' };
     case 'SET_ACTIVE_SECTION':
-      return { ...state, activeSection: action.section };
+      return {
+        ...state,
+        activeSection: action.section,
+        ...(action.section === 'page' ? { activePath: [] } : null),
+      };
     case 'SET_MENU_HEIGHT':
       return { ...state, menuHeight: action.height };
     default:
