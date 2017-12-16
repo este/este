@@ -16,7 +16,7 @@ type EditorElementProps = {|
 |};
 
 type EditorElementState = {|
-  flashAnimationShown: boolean,
+  flashAnimationRunning: boolean,
   flashAnimationColor: string,
 |};
 
@@ -61,8 +61,7 @@ const FlashAnimation = ({ color, onEnd }) => (
         left: 0;
         right: 0;
         top: 0;
-        border: dashed 3px ${color};
-        /* background-color: ${color}; */
+        border: dashed 2px ${color};
         animation: activated 1s;
       }
     `}</style>
@@ -81,16 +80,18 @@ class EditorElement extends React.Component<
   constructor(props: EditorElementProps) {
     super(props);
     this.state = {
-      flashAnimationShown: false,
+      flashAnimationRunning: false,
       flashAnimationColor: props.theme.colors.background,
     };
   }
 
   componentWillReceiveProps(nextProps: EditorElementProps) {
-    const isGoingToBeActive =
-      !pathEqual(nextProps.activePath, this.props.activePath) &&
-      pathEqual(nextProps.activePath, this.props.path);
-    if (isGoingToBeActive) this.runFlashAnimation();
+    const thisPathIsActivePathAndHasBeenUpdated =
+      pathEqual(nextProps.activePath, this.props.path) &&
+      nextProps.activePath !== this.props.activePath;
+    if (thisPathIsActivePathAndHasBeenUpdated) {
+      this.runFlashAnimation();
+    }
   }
 
   shouldComponentUpdate(
@@ -100,19 +101,26 @@ class EditorElement extends React.Component<
     const shouldUpdate =
       nextProps.element !== this.props.element ||
       nextProps.theme !== this.props.theme ||
-      nextState.flashAnimationShown !== this.state.flashAnimationShown ||
+      nextState.flashAnimationRunning !== this.state.flashAnimationRunning ||
       nextState.flashAnimationColor !== this.state.flashAnimationColor ||
-      !pathEqual(nextProps.activePath, this.props.activePath);
+      nextProps.activePath !== this.props.activePath;
     return shouldUpdate;
   }
 
   runFlashAnimation() {
+    if (this.state.flashAnimationRunning) {
+      // jak na restart, odebrat, a pak zavolat?
+      this.setState({ flashAnimationRunning: false }, () => {
+        this.setState({ flashAnimationRunning: true });
+      });
+      return;
+    }
     const backgroundColor = getInheritedBackgroundColor(
       [...this.props.parents, this.props.element],
       this.props.theme.colors.background,
     );
     this.setState({
-      flashAnimationShown: true,
+      flashAnimationRunning: true,
       // Wow. I didn't know I can use CSS filter effects grayscale and invert.
       // But keep current JS approach. I will reuse it for React Native.
       flashAnimationColor: Color(backgroundColor)
@@ -128,12 +136,13 @@ class EditorElement extends React.Component<
   handleClick = (e: Event) => {
     e.preventDefault();
     e.stopPropagation();
-    if (this.isActive()) this.runFlashAnimation();
-    this.props.dispatch({ type: 'SET_ACTIVE_PATH', path: this.props.path });
+    // Make a clone to enforce flash animation restart.
+    const path = this.props.path.slice(0);
+    this.props.dispatch({ type: 'SET_ACTIVE_PATH', path });
   };
 
   handleFlashAnimationEnd = () => {
-    this.setState({ flashAnimationShown: false });
+    this.setState({ flashAnimationRunning: false });
   };
 
   render() {
@@ -166,7 +175,7 @@ class EditorElement extends React.Component<
     return (
       <Component {...componentProps}>
         {componentChildren}
-        {this.state.flashAnimationShown && (
+        {this.state.flashAnimationRunning && (
           <FlashAnimation
             color={this.state.flashAnimationColor}
             onEnd={this.handleFlashAnimationEnd}
