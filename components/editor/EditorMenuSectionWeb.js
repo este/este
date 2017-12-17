@@ -1,12 +1,21 @@
 // @flow
 import * as React from 'react';
-import { Section, EditorMenuButton } from './EditorMenu';
+import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
+import type { EditorDispatch } from './Editor';
 
-const EditorMenuSectionWeb = () => (
-  <Section>
-    <EditorMenuButton>theme</EditorMenuButton>
+type Props = {
+  dispatch: EditorDispatch,
+};
+
+const EditorMenuSectionWeb = ({ dispatch }: Props) => (
+  <EditorMenuSection>
+    <EditorMenuButton
+      onPress={() => dispatch({ type: 'SET_ACTIVE_SECTION', section: 'theme' })}
+    >
+      theme
+    </EditorMenuButton>
     <EditorMenuButton>pages</EditorMenuButton>
-  </Section>
+  </EditorMenuSection>
 );
 
 export default EditorMenuSectionWeb;

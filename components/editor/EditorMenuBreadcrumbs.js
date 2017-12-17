@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuButton, Separator } from './EditorMenu';
+import { EditorMenuButton, EditorMenuSeparator } from './EditorMenu';
 import type { Web, Path, EditorDispatch, SectionName } from './Editor';
 import { getElementKey } from './EditorElement';
 import { pathEqual } from './Editor';
@@ -35,7 +35,7 @@ class Children extends React.Component<ChildrenProps> {
   renderChildren(elementChildren) {
     return elementChildren.map((child, index) => (
       <React.Fragment key={getElementKey(child)}>
-        {index !== 0 && <Separator type="circle" />}
+        {index !== 0 && <EditorMenuSeparator type="circle" />}
         <EditorMenuButton onPress={this.handleChildrenButtonOnPress(child)}>
           {child.type}
         </EditorMenuButton>
@@ -52,7 +52,7 @@ class Children extends React.Component<ChildrenProps> {
 
     return (
       <React.Fragment>
-        <Separator />
+        <EditorMenuSeparator />
         {this.renderChildren(elementChildren)}
       </React.Fragment>
     );
@@ -82,7 +82,7 @@ const PathButtons = ({ activePath, elements, dispatch, button }) => {
     return [
       ...buttons,
       <React.Fragment key={key}>
-        <Separator />
+        <EditorMenuSeparator />
         <EditorMenuButton
           active={active}
           autoFocus={isLast ? activePath : false}
@@ -124,7 +124,7 @@ const EditorMenuBreadcrumbs = ({
         <EditorMenuButton autoFocus {...button('web')}>
           {webName}
         </EditorMenuButton>
-        <Separator />
+        <EditorMenuSeparator />
         <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
         <PathButtons
           activePath={activePath}

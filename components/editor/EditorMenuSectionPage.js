@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import { Section, EditorMenuButton } from './EditorMenu';
+import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
 const EditorMenuSectionPage = () => (
-  <Section>
+  <EditorMenuSection>
     <EditorMenuButton>title</EditorMenuButton>
     <EditorMenuButton>publish</EditorMenuButton>
-  </Section>
+  </EditorMenuSection>
 );
 
 export default EditorMenuSectionPage;

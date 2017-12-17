@@ -52,7 +52,7 @@ export type Web = {|
 
 export type Path = Array<number>;
 
-export type SectionName = 'web' | 'page' | 'hamburger' | 'element';
+export type SectionName = 'web' | 'page' | 'hamburger' | 'element' | 'theme';
 
 type EditorState = {|
   activePath: Path,

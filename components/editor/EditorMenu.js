@@ -15,6 +15,7 @@ import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
 import EditorMenuSectionPage from './EditorMenuSectionPage';
 import EditorMenuSectionElement from './EditorMenuSectionElement';
+import EditorMenuSectionTheme from './EditorMenuSectionTheme';
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -29,8 +30,7 @@ type EditorMenuProps = {|
 // It's used at multiple places because of fixBrowserFontSmoothing.
 const backgroundColor = 'black';
 
-// TODO: Probably layout props: buttons and content.
-export const Section = (props: SetProps) => {
+export const EditorMenuSection = (props: SetProps) => {
   const { marginBottom = 0, paddingTop = 0.5, ...restProps } = props;
   return (
     <Set marginBottom={marginBottom} paddingTop={paddingTop} {...restProps} />
@@ -42,6 +42,7 @@ const sections = {
   web: EditorMenuSectionWeb,
   page: EditorMenuSectionPage,
   element: EditorMenuSectionElement,
+  theme: EditorMenuSectionTheme,
 };
 
 type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
@@ -69,11 +70,11 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
 
 export const EditorMenuA = (props: AProps) => <A tabIndex={-1} {...props} />;
 
-type SeparatorProps = {|
+type EditorMenuSeparatorProps = {|
   type?: 'arrow' | 'circle',
 |};
 
-export const Separator = ({ type }: SeparatorProps) => (
+export const EditorMenuSeparator = ({ type }: EditorMenuSeparatorProps) => (
   <Text backgroundColor="black" marginHorizontal={0.25}>
     {{ arrow: '▸', circle: '•' }[type || 'arrow']}
   </Text>
@@ -151,10 +152,10 @@ class EditorMenu extends React.Component<EditorMenuProps> {
           webName={webName}
         />
         <ActiveSection
-        // activePath={activePath}
-        // dispatch={dispatch}
-        // pageName={pageName}
-        // web={web}
+          dispatch={dispatch}
+          // activePath={activePath}
+          // pageName={pageName}
+          // web={web}
         />
       </Box>
     );

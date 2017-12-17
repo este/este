@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import { Section, EditorMenuButton } from './EditorMenu';
+import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
 const EditorMenuSectionElement = () => (
-  <Section>
+  <EditorMenuSection>
     <EditorMenuButton>style</EditorMenuButton>
     <EditorMenuButton>clone</EditorMenuButton>
-  </Section>
+  </EditorMenuSection>
 );
 
 export default EditorMenuSectionElement;
