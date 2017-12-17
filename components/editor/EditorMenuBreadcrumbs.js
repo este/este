@@ -121,7 +121,9 @@ const EditorMenuBreadcrumbs = ({
   return (
     <Box flexDirection="row" justifyContent="space-between">
       <Box flexDirection="row" flexWrap="wrap">
-        <EditorMenuButton {...button('web')}>{webName}</EditorMenuButton>
+        <EditorMenuButton autoFocus {...button('web')}>
+          {webName}
+        </EditorMenuButton>
         <Separator />
         <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
         <PathButtons
