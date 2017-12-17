@@ -4,13 +4,13 @@ import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 import Text, { type TextProps } from './Text';
 import { withRouter } from 'next/router';
 
-type Props = LocaleLinkBaseProps & TextProps;
+export type AProps = LocaleLinkBaseProps & TextProps;
 
 type State = {
   hover: boolean,
 };
 
-class A extends React.Component<Props & { router: Object }, State> {
+class A extends React.Component<AProps & { router: Object }, State> {
   state = { hover: false };
 
   handleMouseEnter = () => {
@@ -49,6 +49,6 @@ class A extends React.Component<Props & { router: Object }, State> {
   }
 }
 
-const AWithRouter: React.ComponentType<Props> = withRouter(A);
+const AWithRouter: React.ComponentType<AProps> = withRouter(A);
 
 export default AWithRouter;

@@ -1,14 +1,13 @@
 // @flow
 import * as React from 'react';
-import { Section } from './EditorMenu';
-import A from '../A';
+import { Section, EditorMenuA } from './EditorMenu';
 import { ManageYourWebsMessage } from '../../pages';
 
 const EditorMenuSectionHamburger = () => (
   <Section justifyContent="flex-end">
-    <A href={{ pathname: '/' }}>
+    <EditorMenuA href={{ pathname: '/' }}>
       <ManageYourWebsMessage />
-    </A>
+    </EditorMenuA>
   </Section>
 );
 

@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import Text from '../Text';
 import Set, { type SetProps } from '../Set';
 import maybeMoveFocus, { getDirection } from '../../lib/maybeMoveFocus';
+import A, { type AProps } from '../A';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -24,8 +25,6 @@ type EditorMenuProps = {|
   web: Web,
   webName: string,
 |};
-
-type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
 
 // It's used at multiple places because of fixBrowserFontSmoothing.
 const backgroundColor = 'black';
@@ -44,6 +43,8 @@ const sections = {
   page: EditorMenuSectionPage,
   element: EditorMenuSectionElement,
 };
+
+type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
 
 export const EditorMenuButton = (props: EditorMenuButtonProps) => {
   const {
@@ -65,6 +66,8 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
     />
   );
 };
+
+export const EditorMenuA = (props: AProps) => <A tabIndex={-1} {...props} />;
 
 type SeparatorProps = {|
   type?: 'arrow' | 'circle',
