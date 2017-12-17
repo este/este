@@ -8,7 +8,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import Text from '../Text';
 import Set, { type SetProps } from '../Set';
-import maybeMoveFocusOnKey from '../../lib/maybeMoveFocusOnKey';
+import maybeMoveFocus, { getDirection } from '../../lib/maybeMoveFocus';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -60,6 +60,7 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
+      tabIndex={active ? 0 : -1}
       {...restProps}
     />
   );
@@ -105,8 +106,15 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     this.resizeObserver.observe(node);
   }
 
-  handleKeyDown = (event: SyntheticKeyboardEvent<HTMLElement>) => {
-    maybeMoveFocusOnKey(event.key, event.currentTarget, event.target);
+  handleKeyDown = ({
+    key,
+    currentTarget,
+    target,
+  }: SyntheticKeyboardEvent<HTMLElement>) => {
+    if (target instanceof HTMLElement) {
+      const direction = getDirection(key);
+      if (direction) maybeMoveFocus(currentTarget, target, direction);
+    }
   };
 
   render() {

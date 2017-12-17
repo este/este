@@ -99,11 +99,11 @@ class EditorElement extends React.Component<
     nextState: EditorElementState,
   ) {
     const shouldUpdate =
+      nextProps.activePath !== this.props.activePath ||
       nextProps.element !== this.props.element ||
       nextProps.theme !== this.props.theme ||
       nextState.flashAnimationRunning !== this.state.flashAnimationRunning ||
-      nextState.flashAnimationColor !== this.state.flashAnimationColor ||
-      nextProps.activePath !== this.props.activePath;
+      nextState.flashAnimationColor !== this.state.flashAnimationColor;
     return shouldUpdate;
   }
 
