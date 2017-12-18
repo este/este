@@ -58,7 +58,6 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
   return (
     <Button
       backgroundColor={backgroundColor} // because fixBrowserFontSmoothing
-      decoration={active ? 'underline' : 'none'}
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
@@ -71,12 +70,12 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
 export const EditorMenuA = (props: AProps) => <A tabIndex={-1} {...props} />;
 
 type EditorMenuSeparatorProps = {|
-  type?: 'arrow' | 'circle',
+  type?: 'descendant' | 'sibling',
 |};
 
 export const EditorMenuSeparator = ({ type }: EditorMenuSeparatorProps) => (
   <Text backgroundColor="black" marginHorizontal={0.25}>
-    {{ arrow: '▸', circle: '•' }[type || 'arrow']}
+    {{ descendant: '▸', sibling: '•' }[type || 'descendant']}
   </Text>
 );
 

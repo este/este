@@ -35,7 +35,7 @@ class Children extends React.Component<ChildrenProps> {
   renderChildren(elementChildren) {
     return elementChildren.map((child, index) => (
       <React.Fragment key={getElementKey(child)}>
-        {index !== 0 && <EditorMenuSeparator type="circle" />}
+        {index !== 0 && <EditorMenuSeparator type="sibling" />}
         <EditorMenuButton onPress={this.handleChildrenButtonOnPress(child)}>
           {child.type}
         </EditorMenuButton>
