@@ -62,7 +62,7 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
-      tabIndex={active ? 0 : -1}
+      tabIndex={restProps.autoFocus || active ? 0 : -1}
       {...restProps}
     />
   );
