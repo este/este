@@ -120,6 +120,10 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     }
   };
 
+  setActiveSection = (section: SectionName) => {
+    this.props.dispatch({ type: 'SET_ACTIVE_SECTION', section });
+  };
+
   render() {
     const {
       activePath,
@@ -149,9 +153,10 @@ class EditorMenu extends React.Component<EditorMenuProps> {
           pageName={pageName}
           web={web}
           webName={webName}
+          setActiveSection={this.setActiveSection}
         />
         <ActiveSection
-          dispatch={dispatch}
+          setActiveSection={this.setActiveSection}
           // activePath={activePath}
           // pageName={pageName}
           // web={web}

@@ -6,15 +6,6 @@ import type { Web, Path, EditorDispatch, SectionName } from './Editor';
 import { getElementKey } from './EditorElement';
 import { pathEqual } from './Editor';
 
-type EditorMenuBreadcrumbsProps = {|
-  activePath: Path,
-  activeSection: SectionName,
-  dispatch: EditorDispatch,
-  pageName: string,
-  web: Web,
-  webName: string,
-|};
-
 type ChildrenProps = {
   pathChildren: *,
   handleOnPress: *,
@@ -105,6 +96,16 @@ const PathButtons = ({ activePath, elements, dispatch, button }) => {
   ];
 };
 
+type EditorMenuBreadcrumbsProps = {|
+  activePath: Path,
+  activeSection: SectionName,
+  dispatch: EditorDispatch,
+  pageName: string,
+  web: Web,
+  webName: string,
+  setActiveSection: *,
+|};
+
 const EditorMenuBreadcrumbs = ({
   activePath,
   activeSection,
@@ -112,10 +113,11 @@ const EditorMenuBreadcrumbs = ({
   pageName,
   web,
   webName,
+  setActiveSection,
 }: EditorMenuBreadcrumbsProps) => {
   const button = section => ({
     active: activeSection === section,
-    onPress: () => dispatch({ type: 'SET_ACTIVE_SECTION', section }),
+    onPress: () => setActiveSection(section),
   });
 
   return (
