@@ -50,7 +50,7 @@ class Children extends React.Component<ChildrenProps> {
   }
 }
 
-const PathButtons = ({ activePath, elements, dispatch, button }) => {
+const PathButtons = ({ activePath, elements, dispatch, buttonProps }) => {
   let pathChildren = elements;
   let stringFound = false;
   let buttonPath = [];
@@ -69,7 +69,7 @@ const PathButtons = ({ activePath, elements, dispatch, button }) => {
     const key = getElementKey(child);
     const isLast = index === activePath.length - 1;
     buttonPath = buttonPath.concat(pathIndex);
-    const active = button.active && pathEqual(activePath, buttonPath);
+    const active = buttonProps.active && pathEqual(activePath, buttonPath);
     return [
       ...buttons,
       <React.Fragment key={key}>
@@ -115,7 +115,7 @@ const EditorMenuBreadcrumbs = ({
   webName,
   setActiveSection,
 }: EditorMenuBreadcrumbsProps) => {
-  const button = section => ({
+  const buttonProps = section => ({
     active: activeSection === section,
     onPress: () => setActiveSection(section),
   });
@@ -123,19 +123,19 @@ const EditorMenuBreadcrumbs = ({
   return (
     <Box flexDirection="row" justifyContent="space-between">
       <Box flexDirection="row" flexWrap="wrap">
-        <EditorMenuButton autoFocus {...button('web')}>
+        <EditorMenuButton autoFocus {...buttonProps('web')}>
           {webName}
         </EditorMenuButton>
         <EditorMenuSeparator />
-        <EditorMenuButton {...button('page')}>{pageName}</EditorMenuButton>
+        <EditorMenuButton {...buttonProps('page')}>{pageName}</EditorMenuButton>
         <PathButtons
           activePath={activePath}
           elements={web.pages[pageName]}
           dispatch={dispatch}
-          button={button('element')}
+          buttonProps={buttonProps('element')}
         />
       </Box>
-      <EditorMenuButton flexDirection="row" {...button('hamburger')}>
+      <EditorMenuButton flexDirection="row" {...buttonProps('hamburger')}>
         ☰
       </EditorMenuButton>
     </Box>

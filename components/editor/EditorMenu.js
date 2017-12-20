@@ -155,12 +155,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
           webName={webName}
           setActiveSection={this.setActiveSection}
         />
-        <ActiveSection
-          setActiveSection={this.setActiveSection}
-          // activePath={activePath}
-          // pageName={pageName}
-          // web={web}
-        />
+        <ActiveSection setActiveSection={this.setActiveSection} />
       </Box>
     );
   }

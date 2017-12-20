@@ -2,18 +2,12 @@
 import * as React from 'react';
 import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
-type EditorMenuSectionWebProps = {|
-  setActiveSection: *,
-|};
-
-const EditorMenuSectionWeb = ({
-  setActiveSection,
-}: EditorMenuSectionWebProps) => (
+const EditorMenuSectionWeb = ({ setActiveSection }: *) => (
   <EditorMenuSection>
     <EditorMenuButton onPress={() => setActiveSection('theme')}>
       theme
     </EditorMenuButton>
-    {/* <EditorMenuButton onPress={() => setActiveSection('pages')}>
+    {/* <EditorMenuButton section="pages" dispatch={dispatch}>
       pages
     </EditorMenuButton> */}
   </EditorMenuSection>
