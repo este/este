@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { mutationErrorToAppError } from '../lib/appError';
 import type { Disposable, Environment } from 'react-relay';
 
+// TODO: https://twitter.com/estejs/status/943304119388950528
+
 // https://github.com/facebook/relay/issues/2077
 export const getClientMutationId = () => Date.now().toString(36);
 
