@@ -102,16 +102,9 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     this.resizeObserver.disconnect();
   }
 
-  resizeObserver: ResizeObserver;
-
-  observeMenuSize() {
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ((ReactDOM.findDOMNode(this): any): HTMLElement);
-    this.resizeObserver = new ResizeObserver(() => {
-      this.props.onHeightChange(node);
-    });
-    this.resizeObserver.observe(node);
-  }
+  setActiveSection = (section: SectionName) => {
+    this.props.dispatch({ type: 'SET_ACTIVE_SECTION', section });
+  };
 
   handleKeyDown = ({
     key,
@@ -124,9 +117,26 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     }
   };
 
-  setActiveSection = (section: SectionName) => {
-    this.props.dispatch({ type: 'SET_ACTIVE_SECTION', section });
+  // Roving tabindex technique. Note handleFocus to track the current focus.
+  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+  lastFocusTarget: *;
+
+  handleFocus = ({ target }: { target: { tabIndex: number } }) => {
+    if (this.lastFocusTarget) this.lastFocusTarget.tabIndex = -1;
+    this.lastFocusTarget = target;
+    this.lastFocusTarget.tabIndex = 0;
   };
+
+  resizeObserver: ResizeObserver;
+
+  observeMenuSize() {
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = ((ReactDOM.findDOMNode(this): any): HTMLElement);
+    this.resizeObserver = new ResizeObserver(() => {
+      this.props.onHeightChange(node);
+    });
+    this.resizeObserver.observe(node);
+  }
 
   render() {
     const {
@@ -149,6 +159,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
         right={0}
         style={EditorMenu.style}
         onKeyDown={this.handleKeyDown}
+        onFocus={this.handleFocus}
       >
         <EditorMenuBreadcrumbs
           activePath={activePath}
