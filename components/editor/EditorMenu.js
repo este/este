@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { Web, Path, EditorDispatch, SectionName } from './Editor';
+import type { Web, Path, EditorDispatch } from './Editor';
 import Box from '../Box';
 import Button, { type ButtonProps } from '../Button';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
@@ -16,6 +16,18 @@ import EditorMenuSectionWeb from './EditorMenuSectionWeb';
 import EditorMenuSectionPage from './EditorMenuSectionPage';
 import EditorMenuSectionElement from './EditorMenuSectionElement';
 import EditorMenuSectionTheme from './EditorMenuSectionTheme';
+import EditorMenuSectionTypography from './EditorMenuSectionTypography';
+
+const sections = {
+  hamburger: EditorMenuSectionHamburger,
+  web: EditorMenuSectionWeb,
+  page: EditorMenuSectionPage,
+  element: EditorMenuSectionElement,
+  theme: EditorMenuSectionTheme,
+  typography: EditorMenuSectionTypography,
+};
+
+export type SectionName = $Keys<typeof sections>;
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -35,14 +47,6 @@ export const EditorMenuSection = (props: SetProps) => {
   return (
     <Set marginBottom={marginBottom} paddingTop={paddingTop} {...restProps} />
   );
-};
-
-const sections = {
-  hamburger: EditorMenuSectionHamburger,
-  web: EditorMenuSectionWeb,
-  page: EditorMenuSectionPage,
-  element: EditorMenuSectionElement,
-  theme: EditorMenuSectionTheme,
 };
 
 type EditorMenuButtonProps = { active?: boolean } & ButtonProps;

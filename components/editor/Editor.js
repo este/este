@@ -3,7 +3,10 @@ import * as React from 'react';
 import ThemeProvider from '../ThemeProvider';
 import { browserThemeDark } from '../../themes/browserTheme';
 import AppError from '../AppError';
-import EditorMenu, { getDefaultMenuHeight } from './EditorMenu';
+import EditorMenu, {
+  getDefaultMenuHeight,
+  type SectionName,
+} from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import arrayEqual from 'array-equal';
@@ -51,8 +54,6 @@ export type Web = {|
 |};
 
 export type Path = Array<number>;
-
-export type SectionName = 'web' | 'page' | 'hamburger' | 'element' | 'theme';
 
 type EditorState = {|
   activePath: Path,

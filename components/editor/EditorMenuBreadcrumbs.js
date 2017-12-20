@@ -1,8 +1,12 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuButton, EditorMenuSeparator } from './EditorMenu';
-import type { Web, Path, EditorDispatch, SectionName } from './Editor';
+import {
+  EditorMenuButton,
+  EditorMenuSeparator,
+  type SectionName,
+} from './EditorMenu';
+import type { Web, Path, EditorDispatch } from './Editor';
 import { getElementKey } from './EditorElement';
 import { pathEqual } from './Editor';
 
