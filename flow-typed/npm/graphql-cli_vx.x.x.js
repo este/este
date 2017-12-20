@@ -1,4 +1,4 @@
-// flow-typed signature: f2bdf53bd8759a9e09d2e6a465fdb754
+// flow-typed signature: 9c55b2b881ced445d60f7d815f3a5f15
 // flow-typed version: <<STUB>>/graphql-cli_v^2.0.1/flow_v0.61.0
 
 /**
@@ -27,6 +27,22 @@ declare module 'graphql-cli/dist/bin' {
 }
 
 declare module 'graphql-cli/dist/cmds/add-endpoint' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/create/boilerplates' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/create/index' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/create/utils' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/create/utils.test' {
   declare module.exports: any;
 }
 
@@ -84,6 +100,18 @@ declare module 'graphql-cli/dist/bin.js' {
 }
 declare module 'graphql-cli/dist/cmds/add-endpoint.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/add-endpoint'>;
+}
+declare module 'graphql-cli/dist/cmds/create/boilerplates.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/create/boilerplates'>;
+}
+declare module 'graphql-cli/dist/cmds/create/index.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/create/index'>;
+}
+declare module 'graphql-cli/dist/cmds/create/utils.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/create/utils'>;
+}
+declare module 'graphql-cli/dist/cmds/create/utils.test.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/create/utils.test'>;
 }
 declare module 'graphql-cli/dist/cmds/diff.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/diff'>;

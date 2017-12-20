@@ -49,11 +49,8 @@ export const EditorMenuSection = (props: SetProps) => {
   );
 };
 
-type EditorMenuButtonProps = { active?: boolean } & ButtonProps;
-
-export const EditorMenuButton = (props: EditorMenuButtonProps) => {
+export const EditorMenuButton = (props: ButtonProps) => {
   const {
-    active,
     paddingVertical = 0,
     marginVertical = 0,
     paddingHorizontal = 0.25,
@@ -65,7 +62,7 @@ export const EditorMenuButton = (props: EditorMenuButtonProps) => {
       paddingVertical={paddingVertical}
       marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
-      tabIndex={restProps.autoFocus || active ? 0 : -1}
+      tabIndex={restProps.autoFocus ? 0 : -1}
       {...restProps}
     />
   );
@@ -163,7 +160,6 @@ class EditorMenu extends React.Component<EditorMenuProps> {
       >
         <EditorMenuBreadcrumbs
           activePath={activePath}
-          activeSection={activeSection}
           dispatch={dispatch}
           pageName={pageName}
           web={web}
