@@ -6,20 +6,6 @@ import type { EditorDispatch, Element, Path, Theme } from './Editor';
 import Color from 'color';
 import { activeElementProp, pathEqual } from './Editor';
 
-type EditorElementProps = {|
-  element: Element,
-  theme: Theme,
-  path: Path,
-  dispatch: EditorDispatch,
-  parents: Array<Element>,
-  activePath: Path,
-|};
-
-type EditorElementState = {|
-  flashAnimationRunning: boolean,
-  flashAnimationColor: string,
-|};
-
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
 // we don't have any unique id and JSON.stringify is too slow.
 // Fortunately, we use immutable data, so we can leverage WeakMap.
@@ -72,6 +58,20 @@ const editorElements = {
   Box: EditorElementBox,
   Text: EditorElementText,
 };
+
+type EditorElementProps = {|
+  element: Element,
+  theme: Theme,
+  path: Path,
+  dispatch: EditorDispatch,
+  parents: Array<Element>,
+  activePath: Path,
+|};
+
+type EditorElementState = {|
+  flashAnimationRunning: boolean,
+  flashAnimationColor: string,
+|};
 
 class EditorElement extends React.Component<
   EditorElementProps,

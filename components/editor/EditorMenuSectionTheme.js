@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
-const EditorMenuSectionTheme = ({ setActiveSection }: *) => (
+const EditorMenuSectionTheme = () => (
   <EditorMenuSection>
-    <EditorMenuButton autoFocus onPress={() => setActiveSection('typography')}>
+    <EditorMenuButton autoFocus section="typography">
       typography
     </EditorMenuButton>
     <EditorMenuButton>colors</EditorMenuButton>

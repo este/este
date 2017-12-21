@@ -15,6 +15,7 @@ sketchy-null-mixed=off
 sketchy-null-number=off
 sketchy-null-string=off
 unclear-type=off
+untyped-import=off
 
 [options]
 include_warnings=true

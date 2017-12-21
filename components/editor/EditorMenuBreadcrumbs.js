@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuButton, EditorMenuSeparator } from './EditorMenu';
-import type { Web, Path, EditorDispatch } from './Editor';
+import { EditorMenuSeparator } from './EditorMenu';
+import EditorMenuButton from './EditorMenuButton';
+import type { Web, Path } from './Editor';
 import { getElementKey } from './EditorElement';
 
 type ChildrenProps = {
   pathChildren: *,
-  onPress: *,
   activePath: Path,
 };
 
@@ -17,16 +17,11 @@ class Children extends React.Component<ChildrenProps> {
     return this.props.activePath.concat(index);
   }
 
-  handleChildrenButtonOnPress = child => () => {
-    const path = this.getChildPath(child);
-    this.props.onPress(path)();
-  };
-
   renderChildren(elementChildren) {
     return elementChildren.map((child, index) => (
       <React.Fragment key={getElementKey(child)}>
         {index !== 0 && <EditorMenuSeparator type="sibling" />}
-        <EditorMenuButton onPress={this.handleChildrenButtonOnPress(child)}>
+        <EditorMenuButton path={this.getChildPath(child)}>
           {child.type}
         </EditorMenuButton>
       </React.Fragment>
@@ -49,12 +44,10 @@ class Children extends React.Component<ChildrenProps> {
   }
 }
 
-const PathButtons = ({ activePath, elements, dispatch }) => {
+const PathButtons = ({ activePath, elements }) => {
   let pathChildren = elements;
   let stringFound = false;
   let buttonPath = [];
-
-  const onPress = path => () => dispatch({ type: 'SET_ACTIVE_PATH', path });
 
   const buttons = activePath.reduce((buttons, pathIndex, index) => {
     const child = pathChildren[pathIndex];
@@ -73,7 +66,7 @@ const PathButtons = ({ activePath, elements, dispatch }) => {
         <EditorMenuSeparator />
         <EditorMenuButton
           autoFocus={isLast ? activePath : false}
-          onPress={onPress(buttonPath)}
+          path={buttonPath}
         >
           {child.type}
         </EditorMenuButton>
@@ -85,7 +78,6 @@ const PathButtons = ({ activePath, elements, dispatch }) => {
     ...buttons,
     <Children
       key="children"
-      onPress={onPress}
       pathChildren={pathChildren}
       activePath={activePath}
     />,
@@ -94,44 +86,30 @@ const PathButtons = ({ activePath, elements, dispatch }) => {
 
 type EditorMenuBreadcrumbsProps = {|
   activePath: Path,
-  dispatch: EditorDispatch,
   pageName: string,
   web: Web,
   webName: string,
-  setActiveSection: *,
 |};
 
 const EditorMenuBreadcrumbs = ({
   activePath,
-  dispatch,
   pageName,
   web,
   webName,
-  setActiveSection,
-}: EditorMenuBreadcrumbsProps) => {
-  const onPress = section => () => setActiveSection(section);
-
-  return (
-    <Box flexDirection="row" justifyContent="space-between">
-      <Box flexDirection="row" flexWrap="wrap">
-        <EditorMenuButton autoFocus onPress={onPress('web')}>
-          {webName}
-        </EditorMenuButton>
-        <EditorMenuSeparator />
-        <EditorMenuButton onPress={onPress('page')}>
-          {pageName}
-        </EditorMenuButton>
-        <PathButtons
-          activePath={activePath}
-          elements={web.pages[pageName]}
-          dispatch={dispatch}
-        />
-      </Box>
-      <EditorMenuButton flexDirection="row" onPress={onPress('hamburger')}>
-        ☰
+}: EditorMenuBreadcrumbsProps) => (
+  <Box flexDirection="row" justifyContent="space-between">
+    <Box flexDirection="row" flexWrap="wrap">
+      <EditorMenuButton autoFocus section="web">
+        {webName}
       </EditorMenuButton>
+      <EditorMenuSeparator />
+      <EditorMenuButton section="page">{pageName}</EditorMenuButton>
+      <PathButtons activePath={activePath} elements={web.pages[pageName]} />
     </Box>
-  );
-};
+    <EditorMenuButton flexDirection="row" section="hamburger">
+      ☰
+    </EditorMenuButton>
+  </Box>
+);
 
 export default EditorMenuBreadcrumbs;

@@ -2,14 +2,10 @@
 import * as React from 'react';
 import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
-const EditorMenuSectionWeb = ({ setActiveSection }: *) => (
+const EditorMenuSectionWeb = () => (
   <EditorMenuSection>
-    <EditorMenuButton onPress={() => setActiveSection('theme')}>
-      theme
-    </EditorMenuButton>
-    {/* <EditorMenuButton section="pages" dispatch={dispatch}>
-      pages
-    </EditorMenuButton> */}
+    <EditorMenuButton section="theme">theme</EditorMenuButton>
+    <EditorMenuButton>pages</EditorMenuButton>
   </EditorMenuSection>
 );
 

@@ -1,15 +1,14 @@
 // @flow
 import * as React from 'react';
-import type { Web, Path, EditorDispatch } from './Editor';
+import type { Web, Path } from './Editor';
 import Box from '../Box';
-import Button, { type ButtonProps } from '../Button';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import Text from '../Text';
-import Set, { type SetProps } from '../Set';
 import maybeMoveFocus, { getDirection } from '../../lib/maybeMoveFocus';
 import A, { type AProps } from '../A';
+import Set, { type SetProps } from '../Set';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -17,6 +16,8 @@ import EditorMenuSectionPage from './EditorMenuSectionPage';
 import EditorMenuSectionElement from './EditorMenuSectionElement';
 import EditorMenuSectionTheme from './EditorMenuSectionTheme';
 import EditorMenuSectionTypography from './EditorMenuSectionTypography';
+
+export { default as EditorMenuButton } from './EditorMenuButton';
 
 const sections = {
   hamburger: EditorMenuSectionHamburger,
@@ -29,42 +30,13 @@ const sections = {
 
 export type SectionName = $Keys<typeof sections>;
 
-type EditorMenuProps = {|
-  activePath: Path,
-  activeSection: SectionName,
-  dispatch: EditorDispatch,
-  onHeightChange: (menu: HTMLElement) => void,
-  pageName: string,
-  web: Web,
-  webName: string,
-|};
-
 // It's used at multiple places because of fixBrowserFontSmoothing.
-const backgroundColor = 'black';
+export const backgroundColor = 'black';
 
 export const EditorMenuSection = (props: SetProps) => {
   const { marginBottom = 0, paddingTop = 0.5, ...restProps } = props;
   return (
     <Set marginBottom={marginBottom} paddingTop={paddingTop} {...restProps} />
-  );
-};
-
-export const EditorMenuButton = (props: ButtonProps) => {
-  const {
-    paddingVertical = 0,
-    marginVertical = 0,
-    paddingHorizontal = 0.25,
-    ...restProps
-  } = props;
-  return (
-    <Button
-      backgroundColor={backgroundColor} // because fixBrowserFontSmoothing
-      paddingVertical={paddingVertical}
-      marginVertical={marginVertical}
-      paddingHorizontal={paddingHorizontal}
-      tabIndex={restProps.autoFocus ? 0 : -1}
-      {...restProps}
-    />
   );
 };
 
@@ -85,6 +57,15 @@ const menuPaddingVertical = 0.5;
 export const getDefaultMenuHeight = (lineHeight: number) =>
   lineHeight + 2 * (menuPaddingVertical * lineHeight);
 
+type EditorMenuProps = {|
+  activePath: Path,
+  activeSection: SectionName,
+  onHeightChange: (menu: HTMLElement) => void,
+  pageName: string,
+  web: Web,
+  webName: string,
+|};
+
 class EditorMenu extends React.Component<EditorMenuProps> {
   static style = {
     position: 'fixed',
@@ -98,10 +79,6 @@ class EditorMenu extends React.Component<EditorMenuProps> {
   componentWillUnmount() {
     this.resizeObserver.disconnect();
   }
-
-  setActiveSection = (section: SectionName) => {
-    this.props.dispatch({ type: 'SET_ACTIVE_SECTION', section });
-  };
 
   handleKeyDown = ({
     key,
@@ -136,14 +113,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
   }
 
   render() {
-    const {
-      activePath,
-      activeSection,
-      dispatch,
-      pageName,
-      web,
-      webName,
-    } = this.props;
+    const { activePath, activeSection, pageName, web, webName } = this.props;
     const ActiveSection = sections[activeSection];
 
     return (
@@ -160,13 +130,11 @@ class EditorMenu extends React.Component<EditorMenuProps> {
       >
         <EditorMenuBreadcrumbs
           activePath={activePath}
-          dispatch={dispatch}
           pageName={pageName}
           web={web}
           webName={webName}
-          setActiveSection={this.setActiveSection}
         />
-        <ActiveSection setActiveSection={this.setActiveSection} />
+        <ActiveSection />
       </Box>
     );
   }

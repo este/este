@@ -10,6 +10,7 @@ import EditorMenu, {
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import arrayEqual from 'array-equal';
+import PropTypes from 'prop-types';
 // import { assocPath } from 'ramda';
 // import XRay from 'react-x-ray';
 
@@ -121,7 +122,15 @@ const logReducer =
       };
 
 class Editor extends React.Component<EditorProps, EditorState> {
+  static childContextTypes = {
+    dispatch: PropTypes.func,
+  };
+
   state = initialState;
+
+  getChildContext() {
+    return { dispatch: this.dispatch };
+  }
 
   dispatch: EditorDispatch = (action, callback) => {
     this.setState(
@@ -172,7 +181,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
         <EditorMenu
           activePath={activePath}
           activeSection={activeSection}
-          dispatch={this.dispatch}
           onHeightChange={this.handleEditorMenuHeightChange}
           pageName={pageName}
           web={web}
