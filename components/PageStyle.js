@@ -23,6 +23,7 @@ const PageStyle = ({ backgroundColor }: PageStyleProps) => (
         border-width: 0;
         box-sizing: border-box;
         margin: 0;
+        padding: 0;
         text-decoration: none;
       }
     `}</style>
