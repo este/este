@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Button, { type ButtonProps } from '../Button';
-import { backgroundColor, type SectionName } from './EditorMenu';
+import { editorMenuItemProps, type SectionName } from './EditorMenu';
 import type { Path } from './Editor';
 import withDispatch from './withDispatch';
 
@@ -19,15 +19,13 @@ const EditorMenuButton = props => {
     section,
     back,
     paddingVertical = 0,
-    marginVertical = 0,
     paddingHorizontal = 0.25,
     ...restProps
   } = props;
   return (
     <Button
-      backgroundColor={backgroundColor} // because fixBrowserFontSmoothing
+      {...editorMenuItemProps}
       paddingVertical={paddingVertical}
-      marginVertical={marginVertical}
       paddingHorizontal={paddingHorizontal}
       tabIndex={restProps.autoFocus || back ? 0 : -1}
       onPress={() => {

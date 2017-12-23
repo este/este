@@ -30,32 +30,42 @@ const sections = {
 
 export type SectionName = $Keys<typeof sections>;
 
+export const EditorMenuSection = (props: SetProps) => {
+  const { marginBottom = 0, ...restProps } = props;
+  return <Set marginBottom={marginBottom} {...restProps} />;
+};
+
 // It's used at multiple places because of fixBrowserFontSmoothing.
 export const backgroundColor = 'black';
 
-export const EditorMenuSection = (props: SetProps) => {
-  const { marginBottom = 0, paddingTop = 0.5, ...restProps } = props;
-  return (
-    <Set marginBottom={marginBottom} paddingTop={paddingTop} {...restProps} />
-  );
+export const menuPadding = 0.25;
+
+export const editorMenuItemProps = {
+  backgroundColor,
+  marginVertical: menuPadding,
 };
 
-export const EditorMenuA = (props: AProps) => <A tabIndex={-1} {...props} />;
+export const EditorMenuA = (props: AProps) => (
+  <A {...editorMenuItemProps} tabIndex={-1} {...props} />
+);
 
 type EditorMenuSeparatorProps = {|
   type?: 'descendant' | 'sibling',
 |};
 
-export const EditorMenuSeparator = ({ type }: EditorMenuSeparatorProps) => (
-  <Text backgroundColor="black" marginHorizontal={0.25}>
-    {{ descendant: '▸', sibling: '•' }[type || 'descendant']}
-  </Text>
-);
-
-const menuPaddingVertical = 0.5;
-
-export const getDefaultMenuHeight = (lineHeight: number) =>
-  lineHeight + 2 * (menuPaddingVertical * lineHeight);
+export const EditorMenuSeparator = (props: EditorMenuSeparatorProps) => {
+  const { type = 'descendant' } = props;
+  return (
+    <Text
+      {...editorMenuItemProps}
+      color="gray"
+      marginVertical={menuPadding}
+      marginHorizontal={0.25}
+    >
+      {{ descendant: '▸', sibling: '•' }[type]}
+    </Text>
+  );
+};
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -85,10 +95,10 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     currentTarget,
     target,
   }: SyntheticKeyboardEvent<HTMLElement>) => {
-    if (target instanceof HTMLElement) {
-      const direction = getDirection(key);
-      if (direction) maybeMoveFocus(currentTarget, target, direction);
-    }
+    if (!(target instanceof HTMLElement)) return;
+    const direction = getDirection(key);
+    if (!direction) return;
+    maybeMoveFocus(currentTarget, target, direction);
   };
 
   // Roving tabindex technique. Note handleFocus to track the current focus.
@@ -122,7 +132,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
         bottom={0}
         left={0}
         paddingHorizontal={0.5}
-        paddingVertical={menuPaddingVertical}
+        paddingVertical={menuPadding}
         right={0}
         style={EditorMenu.style}
         onKeyDown={this.handleKeyDown}
@@ -134,7 +144,7 @@ class EditorMenu extends React.Component<EditorMenuProps> {
           web={web}
           webName={webName}
         />
-        <ActiveSection />
+        <ActiveSection web={web} />
       </Box>
     );
   }

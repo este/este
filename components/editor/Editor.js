@@ -3,10 +3,7 @@ import * as React from 'react';
 import ThemeProvider from '../ThemeProvider';
 import { browserThemeDark } from '../../themes/browserTheme';
 import AppError from '../AppError';
-import EditorMenu, {
-  getDefaultMenuHeight,
-  type SectionName,
-} from './EditorMenu';
+import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import arrayEqual from 'array-equal';
@@ -18,7 +15,6 @@ type EditorProps = {|
   name: string,
 |};
 
-// TODO: Generate JSON schema.
 export type Theme = {|
   colors: {
     background: string,
@@ -59,7 +55,7 @@ export type Path = Array<number>;
 type EditorState = {|
   activePath: Path,
   activeSection: SectionName,
-  menuHeight: ?number,
+  menuHeight: number,
   web: Web,
 |};
 
@@ -78,10 +74,18 @@ export const activeElementProp = 'data-active-element';
 
 export const pathEqual = (path1: Path, path2: Path) => arrayEqual(path1, path2);
 
+// Hard coded, because we can't compute menu height on the server nor we can
+// hack it on the client because JavaScript is async loaded.
+// This is special case which can't be solved with plain CSS as far I know.
+// TODO: Breadcrumbs and sections should not wrap. It should be horizontally
+// scrollable instead.
+const initialMenuHeight = lineHeight =>
+  2 * lineHeight + 6 * lineHeight * menuPadding;
+
 const initialState = {
   activePath: [],
   activeSection: 'web',
-  menuHeight: null,
+  menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
   web: webFixture,
 };
 
@@ -162,9 +166,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
     const { activePath, activeSection, web } = this.state;
     const webName = this.props.name;
     const pageName = 'index';
-    const menuHeight =
-      this.state.menuHeight ||
-      getDefaultMenuHeight(browserThemeDark.typography.lineHeight);
 
     return (
       <ThemeProvider theme={browserThemeDark}>
@@ -173,7 +174,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
         <EditorPage
           activePath={activePath}
           dispatch={this.dispatch}
-          paddingBottomPx={menuHeight}
+          paddingBottomPx={this.state.menuHeight}
           pageName={pageName}
           web={web}
           webName={webName}
