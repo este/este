@@ -1,4 +1,4 @@
-// flow-typed signature: 66c3103af108e41f19a932a81c7ee1dc
+// flow-typed signature: 4100019228c3603a6285c7358baa0d89
 // flow-typed version: <<STUB>>/babel-eslint_v^8.0.1/flow_v0.61.0
 
 /**
@@ -22,59 +22,95 @@ declare module 'babel-eslint' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'babel-eslint/babylon-to-espree/attachComments' {
+declare module 'babel-eslint/lib/analyze-scope' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/convertComments' {
+declare module 'babel-eslint/lib/babylon-to-espree/attachComments' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/convertTemplateType' {
+declare module 'babel-eslint/lib/babylon-to-espree/convertComments' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/index' {
+declare module 'babel-eslint/lib/babylon-to-espree/convertTemplateType' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/toAST' {
+declare module 'babel-eslint/lib/babylon-to-espree/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/toToken' {
+declare module 'babel-eslint/lib/babylon-to-espree/toAST' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/babylon-to-espree/toTokens' {
+declare module 'babel-eslint/lib/babylon-to-espree/toToken' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/babylon-to-espree/toTokens' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/index' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/parse-with-patch' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/parse-with-scope' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/parse' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/lib/visitor-keys' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'babel-eslint/babylon-to-espree/attachComments.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/attachComments'>;
+declare module 'babel-eslint/lib/analyze-scope.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/analyze-scope'>;
 }
-declare module 'babel-eslint/babylon-to-espree/convertComments.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/convertComments'>;
+declare module 'babel-eslint/lib/babylon-to-espree/attachComments.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/attachComments'>;
 }
-declare module 'babel-eslint/babylon-to-espree/convertTemplateType.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/convertTemplateType'>;
+declare module 'babel-eslint/lib/babylon-to-espree/convertComments.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/convertComments'>;
 }
-declare module 'babel-eslint/babylon-to-espree/index.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/index'>;
+declare module 'babel-eslint/lib/babylon-to-espree/convertTemplateType.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/convertTemplateType'>;
 }
-declare module 'babel-eslint/babylon-to-espree/toAST.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toAST'>;
+declare module 'babel-eslint/lib/babylon-to-espree/index.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/index'>;
 }
-declare module 'babel-eslint/babylon-to-espree/toToken.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toToken'>;
+declare module 'babel-eslint/lib/babylon-to-espree/toAST.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/toAST'>;
 }
-declare module 'babel-eslint/babylon-to-espree/toTokens.js' {
-  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toTokens'>;
+declare module 'babel-eslint/lib/babylon-to-espree/toToken.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/toToken'>;
 }
-declare module 'babel-eslint/index' {
-  declare module.exports: $Exports<'babel-eslint'>;
+declare module 'babel-eslint/lib/babylon-to-espree/toTokens.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/babylon-to-espree/toTokens'>;
 }
-declare module 'babel-eslint/index.js' {
-  declare module.exports: $Exports<'babel-eslint'>;
+declare module 'babel-eslint/lib/index.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/index'>;
+}
+declare module 'babel-eslint/lib/parse-with-patch.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/parse-with-patch'>;
+}
+declare module 'babel-eslint/lib/parse-with-scope.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/parse-with-scope'>;
+}
+declare module 'babel-eslint/lib/parse.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/parse'>;
+}
+declare module 'babel-eslint/lib/visitor-keys.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/visitor-keys'>;
 }

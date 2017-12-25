@@ -5,10 +5,10 @@ import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import Text from '../Text';
 import maybeMoveFocus, { getDirection } from '../../lib/maybeMoveFocus';
 import A, { type AProps } from '../A';
 import Set, { type SetProps } from '../Set';
+import Text, { type TextProps } from '../Text';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -18,6 +18,7 @@ import EditorMenuSectionTheme from './EditorMenuSectionTheme';
 import EditorMenuSectionTypography from './EditorMenuSectionTypography';
 
 export { default as EditorMenuButton } from './EditorMenuButton';
+export { default as EditorMenuInput } from './EditorMenuInput';
 
 const sections = {
   hamburger: EditorMenuSectionHamburger,
@@ -29,11 +30,6 @@ const sections = {
 };
 
 export type SectionName = $Keys<typeof sections>;
-
-export const EditorMenuSection = (props: SetProps) => {
-  const { marginBottom = 0, ...restProps } = props;
-  return <Set marginBottom={marginBottom} {...restProps} />;
-};
 
 // It's used at multiple places because of fixBrowserFontSmoothing.
 export const backgroundColor = 'black';
@@ -47,6 +43,15 @@ export const editorMenuItemProps = {
 
 export const EditorMenuA = (props: AProps) => (
   <A {...editorMenuItemProps} tabIndex={-1} {...props} />
+);
+
+export const EditorMenuSection = (props: SetProps) => {
+  const { marginBottom = 0, ...restProps } = props;
+  return <Set marginBottom={marginBottom} {...restProps} />;
+};
+
+export const EditorMenuText = (props: TextProps) => (
+  <Text {...editorMenuItemProps} {...props} />
 );
 
 type EditorMenuSeparatorProps = {|

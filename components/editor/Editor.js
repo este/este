@@ -8,7 +8,7 @@ import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import arrayEqual from 'array-equal';
 import PropTypes from 'prop-types';
-// import { assocPath } from 'ramda';
+import draftCss from './draftCss';
 // import XRay from 'react-x-ray';
 
 type EditorProps = {|
@@ -84,7 +84,7 @@ const initialMenuHeight = lineHeight =>
 
 const initialState = {
   activePath: [],
-  activeSection: 'web',
+  activeSection: 'typography',
   menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
   web: webFixture,
 };
@@ -169,6 +169,9 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
     return (
       <ThemeProvider theme={browserThemeDark}>
+        <style jsx global>
+          {draftCss}
+        </style>
         {/* <XRay grid={web.theme.typography.lineHeight}> */}
         <AppError />
         <EditorPage

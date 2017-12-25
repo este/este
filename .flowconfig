@@ -2,6 +2,7 @@
 .*/node_modules/npmconf/.*
 .*/node_modules/bcryptjs/.*
 .*/node_modules/config-chain/.*
+.*/node_modules/draft-js/lib/DraftEditor.react.js.flow
 
 [include]
 
