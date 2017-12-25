@@ -1,4 +1,4 @@
-// flow-typed signature: 4100019228c3603a6285c7358baa0d89
+// flow-typed signature: 4a69c408a991ba95d83e3894f58d265f
 // flow-typed version: <<STUB>>/babel-eslint_v^8.0.1/flow_v0.61.0
 
 /**
@@ -70,6 +70,10 @@ declare module 'babel-eslint/lib/parse' {
   declare module.exports: any;
 }
 
+declare module 'babel-eslint/lib/patch-eslint-scope' {
+  declare module.exports: any;
+}
+
 declare module 'babel-eslint/lib/visitor-keys' {
   declare module.exports: any;
 }
@@ -110,6 +114,9 @@ declare module 'babel-eslint/lib/parse-with-scope.js' {
 }
 declare module 'babel-eslint/lib/parse.js' {
   declare module.exports: $Exports<'babel-eslint/lib/parse'>;
+}
+declare module 'babel-eslint/lib/patch-eslint-scope.js' {
+  declare module.exports: $Exports<'babel-eslint/lib/patch-eslint-scope'>;
 }
 declare module 'babel-eslint/lib/visitor-keys.js' {
   declare module.exports: $Exports<'babel-eslint/lib/visitor-keys'>;

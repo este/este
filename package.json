@@ -68,7 +68,7 @@
     "babel-jest": "^22.0.1",
     "babel-plugin-relay": "^1.2.0",
     "babel-plugin-transform-define": "^1.2.0",
-    "eslint": "4.13.1",
+    "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-loader": "^1.7.0",
