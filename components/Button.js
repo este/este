@@ -21,7 +21,7 @@ const BrowserButton = ({
     onClick={onPress}
     onKeyPress={(e: KeyboardEvent) => {
       if (!onPress) return;
-      if (disabled) return;
+      if (disabled === true) return;
       // Buttons are expected to be triggered using the Space or Enter key.
       const isTriggered = e.key === ' ' || e.key === 'Enter';
       if (!isTriggered) return;
@@ -30,11 +30,11 @@ const BrowserButton = ({
       onPress();
     }}
     role="button"
-    tabIndex={disabled ? -1 : 0}
+    tabIndex={disabled === true ? -1 : 0}
     style={{
       ...style,
-      cursor: disabled ? 'default' : 'pointer',
-      pointerEvents: disabled ? 'none' : 'auto',
+      cursor: disabled === true ? 'default' : 'pointer',
+      pointerEvents: disabled === true ? 'none' : 'auto',
       userSelect: 'none',
       MozUserSelect: 'none',
       WebkitUserSelect: 'none',
@@ -71,7 +71,7 @@ const Button = ({
   const colorName = Object.keys(theme.colors).find(color => props[color]);
   if (colorName) {
     delete props[colorName];
-    if (outline) {
+    if (outline === true) {
       defaultProps.borderColor = colorName;
       defaultProps.borderStyle = 'solid';
       defaultProps.borderWidth = theme.button.borderWidth;
@@ -89,7 +89,7 @@ const Button = ({
     }
   }
 
-  if (props.disabled) {
+  if (props.disabled === true) {
     defaultProps.opacity = theme.button.disabledOpacity;
   }
 

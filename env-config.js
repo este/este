@@ -17,16 +17,18 @@ const SENTRY_SERVER_DNS = process.env.SENTRY_SERVER_DNS || '';
 
 module.exports = {
   APP_NAME: package.name,
-  APP_VERSION: process.env.APP_VERSION || 'dev', // Git commit SHA.
+  APP_VERSION:
+    process.env.APP_VERSION != null ? process.env.APP_VERSION : 'dev', // Git commit SHA.
   DEFAULT_LOCALE: 'en',
   // TODO: Read it from graphcool/.graphcoolrc and copy it here and to
   // .graphqlconfig as well.
   GRAPHQL_ENDPOINT: production
     ? 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu'
     : 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu',
-  HOSTNAME: process.env.NOW_URL
-    ? new URL(process.env.NOW_URL).hostname
-    : 'localhost:3000/',
+  HOSTNAME:
+    process.env.NOW_URL != null
+      ? new URL(process.env.NOW_URL).hostname
+      : 'localhost:3000/',
   SENTRY_CLIENT_DNS:
     'https://a4e0be7d7bbf415b99ce482d20bc425b@sentry.io/200324',
   SENTRY_SERVER_DNS,

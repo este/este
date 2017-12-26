@@ -64,10 +64,7 @@ const PathButtons = ({ activePath, elements }) => {
       ...buttons,
       <React.Fragment key={key}>
         <EditorMenuSeparator />
-        <EditorMenuButton
-          autoFocus={isLast ? activePath : false}
-          path={buttonPath}
-        >
+        <EditorMenuButton autoFocus={isLast} path={buttonPath}>
           {child.type}
         </EditorMenuButton>
       </React.Fragment>,

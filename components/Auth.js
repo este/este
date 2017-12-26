@@ -56,9 +56,10 @@ class Auth extends React.Component<Props, State> {
     this.setState({ pending: false });
     if (!idAndToken) return;
     setCookie({ token: idAndToken.token, userId: idAndToken.id });
-    const redirectUrl = this.props.redirectUrl
-      ? decodeURIComponent(this.props.redirectUrl)
-      : '/';
+    const redirectUrl =
+      this.props.redirectUrl != null
+        ? decodeURIComponent(this.props.redirectUrl)
+        : '/';
     Router.replace(redirectUrl);
   };
 

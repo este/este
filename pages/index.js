@@ -57,7 +57,7 @@ const Index = ({ data, intl, isAuthenticated, userId }) => {
       isAuthenticated={isAuthenticated}
     >
       <Heading size={3}>Este</Heading>
-      {isAuthenticated && userId ? (
+      {isAuthenticated && userId != null ? (
         <Authenticated viewer={viewer} userId={userId} />
       ) : (
         <NotAuthenticated />

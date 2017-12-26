@@ -138,6 +138,7 @@ class Text extends React.Component<{ theme: Theme } & TextProps> {
       if (this.props.italic == null) delete style.fontStyle;
     }
 
+    // flowlint sketchy-null:off
     if (!props.isReactNative) {
       style = emulateReactNative(theme, style, props.backgroundColor);
     }

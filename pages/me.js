@@ -41,7 +41,7 @@ const Me = ({ data, intl, isAuthenticated }) => {
       title={intl.formatMessage(titles.me)}
       isAuthenticated={isAuthenticated}
     >
-      {email && (
+      {email != null && (
         <Box>
           <Image
             marginBottom={1}

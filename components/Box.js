@@ -33,7 +33,7 @@ export type BoxProps = {
   children?: React.Node,
 
   as?: React.ElementType,
-  autoFocus?: ?any | boolean,
+  autoFocus?: boolean | Object | null,
   isReactNative?: boolean,
   style?: Object,
 
@@ -157,7 +157,9 @@ const restrictedFlex = (
   if (flex === undefined) return null;
   // TODO: Not implemented yet
   if (flex < 1) return null;
-  return isReactNative ? { flex } : { flexBasis, flexGrow: flex, flexShrink };
+  return isReactNative === true
+    ? { flex }
+    : { flexBasis, flexGrow: flex, flexShrink };
 };
 
 // ColorName any type, because Flow can't infere props for some reason.
@@ -253,7 +255,7 @@ const Box = props => {
   } = props;
 
   const boxStyle = {
-    ...(isReactNative ? null : reactNativeEmulationForBrowsers),
+    ...(isReactNative === true ? null : reactNativeEmulationForBrowsers),
     ...maybeRhythm(theme.typography.rhythm, {
       marginBottom,
       marginLeft,
@@ -315,13 +317,15 @@ const Box = props => {
 
   // We can't use styled-jsx yet since it works only with JSX via Babel plugin.
   // Style prop just works and it's future compatible with React Native.
-  const element = React.createElement(as || 'div', {
+  const element = React.createElement(as != null ? as : 'div', {
     ...restProps,
     // http://shouldiprefix.com? No.
     style: boxStyleWithRhythm,
   });
 
-  if (autoFocus) return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
+  // Enforce truthy check.
+  if (Boolean(autoFocus))
+    return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
 };
 

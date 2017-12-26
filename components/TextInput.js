@@ -46,7 +46,7 @@ const TextInput = ({
         }
       `}</style>
       <Set marginBottom={0}>
-        {label &&
+        {label != null &&
           (typeof label === 'string' ? (
             <Text bold size={size}>
               {label}
@@ -54,7 +54,7 @@ const TextInput = ({
           ) : (
             label
           ))}
-        {error &&
+        {error != null &&
           (typeof error === 'string' ? (
             <Text bold color="danger" size={size}>
               {error}
@@ -84,7 +84,7 @@ const TextInput = ({
               },
             }
           : null)}
-        {...(props.disabled
+        {...(props.disabled === true
           ? { opacity: theme.textInput.disabledOpacity }
           : null)}
         {...props}

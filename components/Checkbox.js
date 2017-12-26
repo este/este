@@ -46,7 +46,7 @@ const Checkbox = ({
       flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
       justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
     >
-      {label && (
+      {label != null && (
         <Text color={color} size={size}>
           {label}
         </Text>

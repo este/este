@@ -50,7 +50,7 @@ const withMutation = <Props: {}>(
 
     handleError(error, onError) {
       const handled = onError(error);
-      if (handled) return;
+      if (handled === true) return;
       const appError = mutationErrorToAppError(error);
       this.context.store.dispatch(appError);
     }

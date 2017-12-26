@@ -31,7 +31,7 @@ const Radio = ({
   <Button
     aria-checked={value === select}
     onPress={() => {
-      if (props.onPress) props.onPress();
+      if (typeof props.onPress === 'function') props.onPress();
       if (!onChange) return;
       onChange(select);
     }}
@@ -47,7 +47,7 @@ const Radio = ({
       flexDirection={labelOnLeft ? 'row' : 'row-reverse'}
       justifyContent={labelOnLeft ? 'flex-start' : 'flex-end'}
     >
-      {label && (
+      {label != null && (
         <Text color={color} size={size}>
           {label}
         </Text>

@@ -27,13 +27,13 @@ const EditorMenuButton = props => {
       {...editorMenuItemProps}
       paddingVertical={paddingVertical}
       paddingHorizontal={paddingHorizontal}
-      tabIndex={restProps.autoFocus || back ? 0 : -1}
+      tabIndex={Boolean(restProps.autoFocus) || back === true ? 0 : -1}
       onPress={() => {
         if (path) dispatch({ type: 'SET_ACTIVE_PATH', path });
         if (section) dispatch({ type: 'SET_ACTIVE_SECTION', section });
         if (onPress) onPress();
       }}
-      {...(back ? { autoFocus: true, children: '…' } : null)}
+      {...(back === true ? { autoFocus: true, children: '…' } : null)}
       {...restProps}
     />
   );

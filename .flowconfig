@@ -10,13 +10,8 @@
 types/app.js.flow
 
 [lints]
-all=warn
-sketchy-null-bool=off
-sketchy-null-mixed=off
-sketchy-null-number=off
-sketchy-null-string=off
+all=error
 unclear-type=off
-untyped-import=off
 
 [options]
 include_warnings=true

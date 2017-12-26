@@ -19,7 +19,7 @@ import { getCookie, type Cookie } from '../lib/cookie';
 // http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
 // Polyfill browser stuff.
-if (process.browser) {
+if (process.browser === true) {
   // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
 
@@ -32,6 +32,7 @@ if (process.browser) {
 let clientReduxStore: ?Store = null;
 
 const getReduxStore = serverState => {
+  // flowlint sketchy-null:off
   if (!process.browser) {
     return createReduxStore(serverState);
   }
@@ -172,7 +173,7 @@ const app = (
     const cookie = getCookie(context.req);
     const isAuthenticated = !!cookie;
 
-    if (requireAuth && !isAuthenticated) {
+    if (requireAuth === true && !isAuthenticated) {
       redirectToSignIn(context);
       // Return nothing because component will not be rendered on redirect.
       return {};
