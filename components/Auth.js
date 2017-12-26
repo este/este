@@ -129,49 +129,51 @@ class Auth extends React.Component<Props, State> {
     const { intl } = this.props;
     const { pending, validationErrors } = this.state;
     return (
-      <Box>
-        <Heading size={3}>Auth</Heading>
-        <Form onSubmit={this.signIn}>
-          <Set vertical spaceBetween={0}>
-            <TextInputBig
-              autoFocus={validationErrors.email}
-              disabled={pending}
-              error={<ValidationError error={validationErrors.email} />}
-              maxWidth={26}
-              name="email"
-              onChange={email => this.setState({ email })}
-              placeholder={intl.formatMessage(messages.emailPlaceholder)}
-              type="email"
-              value={this.state.email}
-            />
-            <TextInputBig
-              autoFocus={validationErrors.password}
-              disabled={pending}
-              error={<ValidationError error={validationErrors.password} />}
-              maxWidth={26}
-              name="password"
-              onChange={password => this.setState({ password })}
-              placeholder={intl.formatMessage(messages.passwordPlaceholder)}
-              type="password"
-              value={this.state.password}
-            />
-          </Set>
-          <Set>
-            <SignInButton disabled={pending} onPress={this.signIn} primary />
-            <SignUpButton disabled={pending} onPress={this.signUp} />
-          </Set>
-        </Form>
+      <div>
         {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
-        <style jsx global>{`
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active {
+        <style jsx>{`
+          div :global(input:-webkit-autofill),
+          div :global(input:-webkit-autofill:hover),
+          div :global(input:-webkit-autofill:focus),
+          div :global(input:-webkit-autofill:active) {
             -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
             -webkit-transition-delay: 9999s;
           }
         `}</style>
-      </Box>
+        <Box>
+          <Heading size={3}>Auth</Heading>
+          <Form onSubmit={this.signIn}>
+            <Set vertical spaceBetween={0}>
+              <TextInputBig
+                autoFocus={validationErrors.email}
+                disabled={pending}
+                error={<ValidationError error={validationErrors.email} />}
+                maxWidth={26}
+                name="email"
+                onChange={email => this.setState({ email })}
+                placeholder={intl.formatMessage(messages.emailPlaceholder)}
+                type="email"
+                value={this.state.email}
+              />
+              <TextInputBig
+                autoFocus={validationErrors.password}
+                disabled={pending}
+                error={<ValidationError error={validationErrors.password} />}
+                maxWidth={26}
+                name="password"
+                onChange={password => this.setState({ password })}
+                placeholder={intl.formatMessage(messages.passwordPlaceholder)}
+                type="password"
+                value={this.state.password}
+              />
+            </Set>
+            <Set>
+              <SignInButton disabled={pending} onPress={this.signIn} primary />
+              <SignUpButton disabled={pending} onPress={this.signUp} />
+            </Set>
+          </Form>
+        </Box>
+      </div>
     );
   }
 }
