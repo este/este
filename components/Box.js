@@ -324,6 +324,7 @@ const Box = props => {
   });
 
   // Enforce truthy check.
+  // eslint-disable-next-line no-extra-boolean-cast
   if (Boolean(autoFocus))
     return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
   return element;
