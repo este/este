@@ -36,6 +36,7 @@ const EditorMenuSectionTypography = () => (
     <EditorMenuButton back section="theme" />
     <Box flexDirection="row">
       <EditorMenuInput name="fontSize" value="16" />
+      <EditorMenuInput name="fontSizeScale" value="0.75" />
       {/* <EditorMenuText>;</EditorMenuText>
       <EditorMenuText>fontSizeScale: </EditorMenuText>
       <EditorMenuTextInput defaultValue="0.75" />

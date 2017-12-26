@@ -35,13 +35,19 @@ class EditorMenuInput extends React.Component<
     });
   }
 
-  static getCaretEdge(selection: Draft.SelectionState, valueLength: number) {
-    if (selection.isCollapsed()) {
-      const offset = selection.getFocusOffset();
-      if (offset === 0) return 'left';
-      if (offset === valueLength) return 'right';
-    }
+  static getCaretEdge(editorState: Draft.EditorState): CaretEdge {
+    const start = editorState.isSelectionAtStartOfContent();
+    const end = editorState.isSelectionAtEndOfContent();
+    if (start && end) return 'both';
+    if (start) return 'start';
+    if (end) return 'end';
     return 'none';
+  }
+
+  // Enforce editor is single line.
+  // Stop new lines being inserted by always handling the return.
+  static handleReturn() {
+    return 'handled';
   }
 
   constructor(props: EditorMenuInputProps) {
@@ -52,38 +58,42 @@ class EditorMenuInput extends React.Component<
       this.props.value,
     );
     const editorState = Draft.EditorState.createWithContent(contentState);
-    const caretEdge = this.getCaretEdge(editorState);
+    const caretEdge = EditorMenuInput.getCaretEdge(editorState);
     this.state = { editorState, caretEdge };
   }
 
   onChange = (editorState: Draft.EditorState) => {
-    const caretEdge = this.getCaretEdge(editorState);
+    const caretEdge = EditorMenuInput.getCaretEdge(editorState);
     this.setState({ editorState, caretEdge });
   };
 
-  getCaretEdge(editorState) {
-    return EditorMenuInput.getCaretEdge(
-      editorState.getSelection(),
-      this.props.value.length,
-    );
-  }
-
   render() {
+    // https://github.com/zeit/styled-jsx/issues/329
+    const caretEdgeProps = { [dataCaretEdge]: this.state.caretEdge };
     return (
       <Box flexDirection="row">
         <EditorMenuText>{this.props.name}: </EditorMenuText>
-        <EditorMenuText {...{ [dataCaretEdge]: this.state.caretEdge }}>
-          <Draft.Editor
-            autoCapitalize="none"
-            autoComplete="off"
-            autoCorrect="off"
-            stripPastedStyles={true}
-            tabIndex={-1}
-            editorKey={this.props.name} // SSR
-            editorState={this.state.editorState}
-            onChange={this.onChange}
-          />
+        <EditorMenuText>
+          <div {...caretEdgeProps}>
+            <style jsx>{`
+              div :global(.public-DraftEditor-content) {
+                min-width: 1em;
+              }
+            `}</style>
+            <Draft.Editor
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              stripPastedStyles={true}
+              tabIndex={-1}
+              editorKey={this.props.name} // SSR
+              editorState={this.state.editorState}
+              onChange={this.onChange}
+              handleReturn={EditorMenuInput.handleReturn}
+            />
+          </div>
         </EditorMenuText>
+        <EditorMenuText>; </EditorMenuText>
       </Box>
     );
   }
