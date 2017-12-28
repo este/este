@@ -3,11 +3,13 @@ import * as React from 'react';
 import Box from '../Box';
 import { EditorMenuText } from './EditorMenu';
 import * as Draft from 'draft-js';
-import { dataCaretEdge, type CaretEdge } from '../../lib/maybeMoveFocus';
+import { dataCaretEdgeAttr, type CaretEdge } from '../../lib/maybeMoveFocus';
+import { validate } from './jsonSchema';
 
 type EditorMenuInputProps = {|
   name: string,
   value: string,
+  schema: Object,
 |};
 
 type EditorMenuInputState = {|
@@ -62,22 +64,51 @@ class EditorMenuInput extends React.Component<
     this.state = { editorState, caretEdge };
   }
 
-  onChange = (editorState: Draft.EditorState) => {
+  getValue() {
+    const value = this.state.editorState.getCurrentContent().getPlainText();
+    const { type } = this.props.schema;
+    if (type === 'number' || type === 'integer') return Number(value);
+    return value;
+  }
+
+  editor: *;
+
+  handleLabelClick = () => {
+    if (this.editor) this.editor.focus();
+  };
+
+  handleEditorChange = (editorState: Draft.EditorState) => {
     const caretEdge = EditorMenuInput.getCaretEdge(editorState);
     this.setState({ editorState, caretEdge });
   };
 
+  handleEditorRef = (ref: *) => {
+    this.editor = ref;
+  };
+
+  isValid() {
+    const value = this.getValue();
+    return validate(this.props.schema, value);
+  }
+
   render() {
     // https://github.com/zeit/styled-jsx/issues/329
-    const caretEdgeProps = { [dataCaretEdge]: this.state.caretEdge };
+    const caretEdgeProps = { [dataCaretEdgeAttr]: this.state.caretEdge };
+    const isValid = this.isValid();
+
     return (
       <Box flexDirection="row">
-        <EditorMenuText>{this.props.name}: </EditorMenuText>
+        <EditorMenuText
+          color={isValid ? 'white' : 'warning'}
+          onClick={this.handleLabelClick}
+        >
+          {this.props.name}:{' '}
+        </EditorMenuText>
         <EditorMenuText>
           <div {...caretEdgeProps}>
             <style jsx>{`
               div :global(.public-DraftEditor-content) {
-                min-width: 1em;
+                min-width: 1px;
               }
             `}</style>
             <Draft.Editor
@@ -88,8 +119,9 @@ class EditorMenuInput extends React.Component<
               tabIndex={-1}
               editorKey={this.props.name} // SSR
               editorState={this.state.editorState}
-              onChange={this.onChange}
+              onChange={this.handleEditorChange}
               handleReturn={EditorMenuInput.handleReturn}
+              ref={this.handleEditorRef}
             />
           </div>
         </EditorMenuText>

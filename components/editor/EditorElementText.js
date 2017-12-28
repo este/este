@@ -8,6 +8,7 @@ import {
   type EditorElementBoxProps,
 } from './EditorElementBox';
 import colorLib from 'color';
+import { validateSchema } from './jsonSchema';
 
 // Simplified components/Text.js
 // - less props and logic
@@ -17,8 +18,8 @@ import colorLib from 'color';
 
 type EditorElementTextProps = EditorElementBoxProps;
 
-// TODO: Improve with JSON Schema draft 6 for full CSS compliance.
-export const textStyleSchema = {
+// TODO: Improve with JSON Schema draft 7 for full CSS compliance.
+const textStyleSchema = {
   ...boxStyleSchema,
   properties: {
     ...boxStyleSchema.properties,
@@ -51,6 +52,8 @@ export const textStyleSchema = {
   },
 };
 
+validateSchema(textStyleSchema);
+
 const computeTextStyle = (hasParentText, theme, style) => {
   style = {
     // Set default styles only for not nested Text.
@@ -69,7 +72,7 @@ const computeTextStyle = (hasParentText, theme, style) => {
   // Use modular scale for fontSize typeof number.
   if (typeof style.fontSize === 'number') {
     style.fontSize = `${theme.typography.fontSize *
-      theme.typography.fontSizeScale ** -style.fontSize}px`;
+      theme.typography.fontSizeScale ** style.fontSize}px`;
   }
 
   // Set rhythm lineHeight by fontSize and theme.typography.lineHeight.

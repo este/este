@@ -19,6 +19,7 @@ import EditorMenuSectionTypography from './EditorMenuSectionTypography';
 
 export { default as EditorMenuButton } from './EditorMenuButton';
 export { default as EditorMenuInput } from './EditorMenuInput';
+export { default as EditorMenuInputs } from './EditorMenuInputs';
 
 const sections = {
   hamburger: EditorMenuSectionHamburger,

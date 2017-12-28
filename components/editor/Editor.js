@@ -30,7 +30,7 @@ export type Theme = {|
 
 export type ElementType = 'Box' | 'Text';
 
-// Just basic shape. We need JSON Schema for dynamic data.
+// TODO: JSON schema.
 export type Element = {|
   type: ElementType,
   props: {|
@@ -42,6 +42,7 @@ export type Element = {|
   |},
 |};
 
+// TODO: JSON schema. Import typography, Box, Text, etc. from their modules.
 export type Web = {|
   theme: Theme,
   pages: {

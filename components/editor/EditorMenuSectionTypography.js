@@ -3,64 +3,34 @@ import * as React from 'react';
 import {
   EditorMenuSection,
   EditorMenuButton,
-  EditorMenuInput,
+  EditorMenuInputs,
 } from './EditorMenu';
-import Box from '../Box';
-// import type { Web } from './Editor';
+import type { Web } from './Editor';
+import { validateSchema } from './jsonSchema';
 
-// Should be used for scheme validation in Editor.
-export const TypographySchema = {
+// TODO: Naplno.
+const typographySchema = {
   type: 'object',
   properties: {
-    fontFamily: { type: 'string' },
-    fontSize: { type: 'number' },
-    fontSizeScale: { type: 'number' },
-    lineHeight: { type: 'number' },
+    fontSize: { type: 'integer', minimum: 1, maximum: 64 },
+    fontSizeScale: { type: 'number', minimum: 1, maximum: 4 },
+    lineHeight: { type: 'integer', minimum: 1, maximum: 512 },
+    fontFamily: { type: 'string', minLength: 2, maxLength: 256 },
   },
 };
 
-// fontFamily:
-//   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-// fontSize: 16,
-// fontSizeScale: 0.75,
-// lineHeight: 24,
-// style="flex-grow:1;flex-shrink:1"
+validateSchema(typographySchema);
 
-// type EditorMenuSectionTypographyProps = {
-//   web: Web,
-// };
+type EditorMenuSectionTypographyProps = {
+  web: Web,
+};
 
-// web: { theme: { typography } },
-const EditorMenuSectionTypography = () => (
+const EditorMenuSectionTypography = ({
+  web: { theme: { typography } },
+}: EditorMenuSectionTypographyProps) => (
   <EditorMenuSection>
     <EditorMenuButton back section="theme" />
-    <Box flexDirection="row">
-      <EditorMenuInput name="fontSize" value="16" />
-      <EditorMenuInput name="fontSizeScale" value="0.75" />
-      {/* <EditorMenuText>;</EditorMenuText>
-      <EditorMenuText>fontSizeScale: </EditorMenuText>
-      <EditorMenuTextInput defaultValue="0.75" />
-      <EditorMenuText>;</EditorMenuText>
-      <EditorMenuText>fontSizeScale: </EditorMenuText>
-      <EditorMenuTextInput defaultValue="0.75" />
-      <EditorMenuText>;</EditorMenuText>
-      <EditorMenuText>fontSizeScale: </EditorMenuText>
-      <EditorMenuTextInput defaultValue="0.75" />
-      <EditorMenuText>;</EditorMenuText> */}
-    </Box>
-    {/* <Text backgroundColor="black">
-      fontSize: 16; fontSizeScale: 0.75; lineHeight: 24; fontFamily:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-      Arial, sans-serif;
-    </Text> */}
-    {/* <EditorMenuButton>fontSize</EditorMenuButton>
-    {typography.fontSize}
-    <EditorMenuButton>fontSizeScale</EditorMenuButton>
-    {typography.fontSizeScale}
-    <EditorMenuButton>lineHeight</EditorMenuButton>
-    {typography.lineHeight}
-    <EditorMenuButton>fontFamily</EditorMenuButton>
-    {typography.fontFamily} */}
+    <EditorMenuInputs schema={typographySchema} object={typography} />
   </EditorMenuSection>
 );
 

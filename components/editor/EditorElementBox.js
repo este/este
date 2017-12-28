@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import type { Theme } from './Editor';
+import { validateSchema } from './jsonSchema';
 
 // Simplified components/Box.js
 // - less props and logic
@@ -17,7 +18,7 @@ export type EditorElementBoxProps = {
 // TODO: Add rgb/rgba regex or validate manually via Color lib.
 export const colorSchemaType = { type: 'string' };
 
-// TODO: Improve with JSON Schema draft 6 for full CSS compliance.
+// TODO: Improve with JSON Schema draft 7 for full CSS compliance.
 export const boxStyleSchema = {
   type: 'object',
   properties: {
@@ -106,6 +107,8 @@ export const boxStyleSchema = {
     overflow: { type: 'string', enum: ['visible', 'hidden', 'scroll'] },
   },
 };
+
+validateSchema(boxStyleSchema);
 
 // Use plain number for vertical and horizontal rhythm based on lineHeight.
 const rhythmProps = [
