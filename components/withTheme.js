@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { Theme } from '../themes/types';
 import PropTypes from 'prop-types';
 
-// TODO: https://twitter.com/estejs/status/943304119388950528
+// TODO: Try https://github.com/facebook/flow/issues/5382#issuecomment-354512813
 
 type ThemeProps = {
   theme: Theme,
