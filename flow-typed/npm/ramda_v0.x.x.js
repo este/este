@@ -1,5 +1,5 @@
-// flow-typed signature: 8bbe3ee6230acc562372680de6ed5dbc
-// flow-typed version: 58587b23bb/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: bd8e51b6c0c8ba360e9621e1661849f0
+// flow-typed version: dd2e8d3c25/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -643,9 +643,9 @@ declare module ramda {
     input: A
   ): R;
 
-  declare function indexOf<E>(x: E, xs: Array<E>): number;
+  declare function indexOf<E>(x: ?E, xs: Array<E>): number;
   declare function indexOf<E>(
-    x: E,
+    x: ?E,
     ...rest: Array<void>
   ): (xs: Array<E>) => number;
 

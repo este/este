@@ -9,6 +9,7 @@ export const validateSchema = (schema: Schema) => {
   const ajv = new Ajv();
   const isValid = ajv.validateSchema(schema);
   if (isValid) return;
+  // eslint-disable-next-line no-console
   console.error(ajv.errorsText());
 };
 

@@ -145,12 +145,12 @@ const app = (
       : {};
     // createReduxProvider, because exported Provider has an obsolete check.
     // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
-    // $FlowFixMe https://github.com/flowtype/flow-typed/issues/1154#issuecomment-324156744
     const ReduxProvider = createReduxProvider();
     const reduxStore = getReduxStore(serverState);
 
     return (
       <RelayProvider environment={environment} variables={variables}>
+        {/* $FlowFixMe Probably flow-typed bug.*/}
         <ReduxProvider store={reduxStore}>
           <IntlProvider
             locale={locale}
