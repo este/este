@@ -3,18 +3,18 @@ import * as React from 'react';
 import Box from '../Box';
 import { EditorMenuText } from './EditorMenu';
 import * as Draft from 'draft-js';
-import { dataCaretEdgeAttr, type CaretEdge } from '../../lib/maybeMoveFocus';
 import { validate } from './jsonSchema';
+import * as RovingTabIndex from '../RovingTabIndex';
 
 type EditorMenuInputProps = {|
   name: string,
   value: string,
   schema: Object,
+  last: boolean,
 |};
 
 type EditorMenuInputState = {|
   editorState: Draft.EditorState,
-  caretEdge: CaretEdge,
 |};
 
 class EditorMenuInput extends React.Component<
@@ -37,16 +37,7 @@ class EditorMenuInput extends React.Component<
     });
   }
 
-  static getCaretEdge(editorState: Draft.EditorState): CaretEdge {
-    const start = editorState.isSelectionAtStartOfContent();
-    const end = editorState.isSelectionAtEndOfContent();
-    if (start && end) return 'both';
-    if (start) return 'start';
-    if (end) return 'end';
-    return 'none';
-  }
-
-  // Enforce editor is single line.
+  // Enforce single line editor.
   // Stop new lines being inserted by always handling the return.
   static handleReturn() {
     return 'handled';
@@ -60,8 +51,7 @@ class EditorMenuInput extends React.Component<
       this.props.value,
     );
     const editorState = Draft.EditorState.createWithContent(contentState);
-    const caretEdge = EditorMenuInput.getCaretEdge(editorState);
-    this.state = { editorState, caretEdge };
+    this.state = { editorState };
   }
 
   getValue() {
@@ -73,13 +63,20 @@ class EditorMenuInput extends React.Component<
 
   editor: *;
 
+  focusToEnd() {
+    if (!this.editor) return;
+    const editorState = Draft.EditorState.moveFocusToEnd(
+      this.state.editorState,
+    );
+    this.setState({ editorState });
+  }
+
   handleLabelClick = () => {
-    if (this.editor) this.editor.focus();
+    this.focusToEnd();
   };
 
   handleEditorChange = (editorState: Draft.EditorState) => {
-    const caretEdge = EditorMenuInput.getCaretEdge(editorState);
-    this.setState({ editorState, caretEdge });
+    this.setState({ editorState });
   };
 
   handleEditorRef = (ref: *) => {
@@ -92,40 +89,55 @@ class EditorMenuInput extends React.Component<
   }
 
   render() {
-    // https://github.com/zeit/styled-jsx/issues/329
-    const caretEdgeProps = { [dataCaretEdgeAttr]: this.state.caretEdge };
-    const isValid = this.isValid();
-
     return (
       <Box flexDirection="row">
         <EditorMenuText
-          color={isValid ? 'white' : 'warning'}
+          color={this.isValid() ? 'white' : 'warning'}
           onClick={this.handleLabelClick}
         >
           {this.props.name}:{' '}
         </EditorMenuText>
         <EditorMenuText>
-          <div {...caretEdgeProps}>
+          <div>
+            {/* min-width: 1px; ensures caret visibility for empty text */}
             <style jsx>{`
               div :global(.public-DraftEditor-content) {
                 min-width: 1px;
               }
             `}</style>
-            <Draft.Editor
-              autoCapitalize="none"
-              autoComplete="off"
-              autoCorrect="off"
-              stripPastedStyles={true}
-              tabIndex={-1}
-              editorKey={this.props.name} // SSR
-              editorState={this.state.editorState}
-              onChange={this.handleEditorChange}
-              handleReturn={EditorMenuInput.handleReturn}
-              ref={this.handleEditorRef}
+            <RovingTabIndex.Consumer
+              // onFocus={this.jooTohleJeVono}
+              render={(tabIndex, onFocus, onKeyDown) => (
+                <Draft.Editor
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  stripPastedStyles={true}
+                  tabIndex={tabIndex}
+                  editorKey={this.props.name} // SSR
+                  editorState={this.state.editorState}
+                  onChange={this.handleEditorChange}
+                  handleReturn={EditorMenuInput.handleReturn}
+                  ref={this.handleEditorRef}
+                  onFocus={onFocus}
+                  onUpArrow={onKeyDown}
+                  onDownArrow={onKeyDown}
+                  onLeftArrow={e => {
+                    if (this.state.editorState.isSelectionAtStartOfContent()) {
+                      onKeyDown(e);
+                    }
+                  }}
+                  onRightArrow={e => {
+                    if (this.state.editorState.isSelectionAtEndOfContent()) {
+                      onKeyDown(e);
+                    }
+                  }}
+                />
+              )}
             />
           </div>
         </EditorMenuText>
-        <EditorMenuText>; </EditorMenuText>
+        {!this.props.last && <EditorMenuText>, </EditorMenuText>}
       </Box>
     );
   }

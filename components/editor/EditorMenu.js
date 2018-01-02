@@ -5,10 +5,10 @@ import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import maybeMoveFocus, { getDirection } from '../../lib/maybeMoveFocus';
 import A, { type AProps } from '../A';
 import Set, { type SetProps } from '../Set';
 import Text, { type TextProps } from '../Text';
+import * as RovingTabIndex from '../RovingTabIndex';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -21,17 +21,6 @@ export { default as EditorMenuButton } from './EditorMenuButton';
 export { default as EditorMenuInput } from './EditorMenuInput';
 export { default as EditorMenuInputs } from './EditorMenuInputs';
 
-const sections = {
-  hamburger: EditorMenuSectionHamburger,
-  web: EditorMenuSectionWeb,
-  page: EditorMenuSectionPage,
-  element: EditorMenuSectionElement,
-  theme: EditorMenuSectionTheme,
-  typography: EditorMenuSectionTypography,
-};
-
-export type SectionName = $Keys<typeof sections>;
-
 // It's used at multiple places because of fixBrowserFontSmoothing.
 export const backgroundColor = 'black';
 
@@ -43,8 +32,29 @@ export const editorMenuItemProps = {
 };
 
 export const EditorMenuA = (props: AProps) => (
-  <A {...editorMenuItemProps} tabIndex={-1} {...props} />
+  <RovingTabIndex.Consumer
+    render={(tabIndex, onFocus, onKeyDown) => (
+      <A
+        {...editorMenuItemProps}
+        tabIndex={tabIndex}
+        onFocus={onFocus}
+        onKeyDown={onKeyDown}
+        {...props}
+      />
+    )}
+  />
 );
+
+const sections = {
+  hamburger: EditorMenuSectionHamburger,
+  web: EditorMenuSectionWeb,
+  page: EditorMenuSectionPage,
+  element: EditorMenuSectionElement,
+  theme: EditorMenuSectionTheme,
+  typography: EditorMenuSectionTypography,
+};
+
+export type SectionName = $Keys<typeof sections>;
 
 export const EditorMenuSection = (props: SetProps) => {
   const { marginBottom = 0, ...restProps } = props;
@@ -96,36 +106,16 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     this.resizeObserver.disconnect();
   }
 
-  handleKeyDown = ({
-    key,
-    currentTarget,
-    target,
-  }: SyntheticKeyboardEvent<HTMLElement>) => {
-    if (!(target instanceof HTMLElement)) return;
-    const direction = getDirection(key);
-    if (!direction) return;
-    maybeMoveFocus(currentTarget, target, direction);
-  };
-
-  // Roving tabindex technique. Note handleFocus to track the current focus.
-  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
-  lastFocusTarget: *;
-
-  handleFocus = ({ target }: { target: { tabIndex: number } }) => {
-    if (this.lastFocusTarget) this.lastFocusTarget.tabIndex = -1;
-    this.lastFocusTarget = target;
-    this.lastFocusTarget.tabIndex = 0;
-  };
-
   resizeObserver: ResizeObserver;
 
   observeMenuSize() {
+    // Type casting through any, because we know it is an element.
     // eslint-disable-next-line react/no-find-dom-node
-    const node = ((ReactDOM.findDOMNode(this): any): HTMLElement);
+    const element = ((ReactDOM.findDOMNode(this): any): HTMLElement);
     this.resizeObserver = new ResizeObserver(() => {
-      this.props.onHeightChange(node);
+      this.props.onHeightChange(element);
     });
-    this.resizeObserver.observe(node);
+    this.resizeObserver.observe(element);
   }
 
   render() {
@@ -133,25 +123,25 @@ class EditorMenu extends React.Component<EditorMenuProps> {
     const ActiveSection = sections[activeSection];
 
     return (
-      <Box
-        backgroundColor={backgroundColor}
-        bottom={0}
-        left={0}
-        paddingHorizontal={0.5}
-        paddingVertical={menuPadding}
-        right={0}
-        style={EditorMenu.style}
-        onKeyDown={this.handleKeyDown}
-        onFocus={this.handleFocus}
-      >
-        <EditorMenuBreadcrumbs
-          activePath={activePath}
-          pageName={pageName}
-          web={web}
-          webName={webName}
-        />
-        <ActiveSection web={web} />
-      </Box>
+      <RovingTabIndex.Provider>
+        <Box
+          backgroundColor={backgroundColor}
+          bottom={0}
+          left={0}
+          paddingHorizontal={0.5}
+          paddingVertical={menuPadding}
+          right={0}
+          style={EditorMenu.style}
+        >
+          <EditorMenuBreadcrumbs
+            activePath={activePath}
+            pageName={pageName}
+            web={web}
+            webName={webName}
+          />
+          <ActiveSection web={web} />
+        </Box>
+      </RovingTabIndex.Provider>
     );
   }
 }

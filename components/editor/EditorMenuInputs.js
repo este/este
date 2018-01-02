@@ -10,12 +10,13 @@ type EditorMenuInputsProps = {|
 const EditorMenuInputs = ({ schema, object }: EditorMenuInputsProps) =>
   Object.keys(schema.properties)
     .filter(key => key in object)
-    .map(key => (
+    .map((key, index, array) => (
       <EditorMenuInput
         name={key}
         value={object[key].toString()}
         key={key}
         schema={schema.properties[key]}
+        last={index === array.length - 1}
       />
     ));
 
