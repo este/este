@@ -8,7 +8,6 @@ import {
 import type { Web } from './Editor';
 import { validateSchema } from './jsonSchema';
 
-// TODO: Naplno.
 const typographySchema = {
   type: 'object',
   properties: {

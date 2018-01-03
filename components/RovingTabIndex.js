@@ -13,7 +13,7 @@ type TabIndex = -1 | 0;
 
 type ConsumerProps = {|
   onFocus?: (focusToEnd: boolean) => void,
-  render: (
+  children: (
     tabIndex: TabIndex,
     onFocus: FocusEventHandler,
     onKeyDown: KeyboardEventHandler,
@@ -76,7 +76,11 @@ export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
   context: Context;
 
   render() {
-    return this.props.render(this.state.tabIndex, this.onFocus, this.onKeyDown);
+    return this.props.children(
+      this.state.tabIndex,
+      this.onFocus,
+      this.onKeyDown,
+    );
   }
 }
 

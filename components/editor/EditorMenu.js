@@ -32,8 +32,8 @@ export const editorMenuItemProps = {
 };
 
 export const EditorMenuA = (props: AProps) => (
-  <RovingTabIndex.Consumer
-    render={(tabIndex, onFocus, onKeyDown) => (
+  <RovingTabIndex.Consumer>
+    {(tabIndex, onFocus, onKeyDown) => (
       <A
         {...editorMenuItemProps}
         tabIndex={tabIndex}
@@ -42,7 +42,7 @@ export const EditorMenuA = (props: AProps) => (
         {...props}
       />
     )}
-  />
+  </RovingTabIndex.Consumer>
 );
 
 const sections = {

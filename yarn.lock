@@ -5527,8 +5527,8 @@ nan@^2.0.5, nan@^2.3.0:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.8.0.tgz#ed715f3fe9de02b57a5e6252d90a96675e1f085a"
 
 nano-style@^1.0.0-20:
-  version "1.0.0-20"
-  resolved "https://registry.yarnpkg.com/nano-style/-/nano-style-1.0.0-20.tgz#34bf5ad8a4a7c18285663c79689a9ef2a5e6371d"
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nano-style/-/nano-style-1.0.0.tgz#608bc0613bf0af5d966a59d5dbb8b55bf6bd62a9"
   dependencies:
     objss "^1.0.3"
     prop-types "^15.6.0"

@@ -28,8 +28,8 @@ const EditorMenuButton = props => {
   const buttonAutoFocus = back ? true : autoFocus;
   const buttonChildren = back ? '…' : children;
   return (
-    <RovingTabIndex.Consumer
-      render={(tabIndex, onFocus, onKeyDown) => (
+    <RovingTabIndex.Consumer>
+      {(tabIndex, onFocus, onKeyDown) => (
         <Button
           {...editorMenuItemProps}
           paddingVertical={paddingVertical}
@@ -48,7 +48,7 @@ const EditorMenuButton = props => {
           {buttonChildren}
         </Button>
       )}
-    />
+    </RovingTabIndex.Consumer>
   );
 };
 

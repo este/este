@@ -151,9 +151,8 @@ class EditorMenuInput extends React.Component<
                 min-width: 1px;
               }
             `}</style>
-            <RovingTabIndex.Consumer
-              onFocus={this.handleRovingTabIndexFocus}
-              render={(tabIndex, onFocus, onKeyDown) => (
+            <RovingTabIndex.Consumer onFocus={this.handleRovingTabIndexFocus}>
+              {(tabIndex, onFocus, onKeyDown) => (
                 <Draft.Editor
                   autoCapitalize="none"
                   autoComplete="off"
@@ -178,7 +177,7 @@ class EditorMenuInput extends React.Component<
                   }}
                 />
               )}
-            />
+            </RovingTabIndex.Consumer>
           </div>
         </EditorMenuText>
         {!this.props.last && <EditorMenuText>, </EditorMenuText>}

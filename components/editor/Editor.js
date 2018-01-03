@@ -85,7 +85,7 @@ const initialMenuHeight = lineHeight =>
 
 const initialState = {
   activePath: [],
-  activeSection: 'typography',
+  activeSection: 'web',
   menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
   web: webFixture,
 };
