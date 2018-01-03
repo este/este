@@ -12,6 +12,19 @@ type EditorMenuButtonProps = {
   back?: boolean,
 } & ButtonProps;
 
+// This is just an example how we can compose components to avoid nesting.
+const DispatchWithRovingTabIndex = ({ children }) => (
+  <EditorDispatch>
+    {dispatch => (
+      <RovingTabIndex.Consumer>
+        {(tabIndex, onFocus, onKeyDown) =>
+          children(dispatch, tabIndex, onFocus, onKeyDown)
+        }
+      </RovingTabIndex.Consumer>
+    )}
+  </EditorDispatch>
+);
+
 const EditorMenuButton = (props: EditorMenuButtonProps) => {
   const {
     onPress,
@@ -26,33 +39,28 @@ const EditorMenuButton = (props: EditorMenuButtonProps) => {
   } = props;
   const buttonAutoFocus = back ? true : autoFocus;
   const buttonChildren = back ? '…' : children;
-
   return (
-    <EditorDispatch>
-      {dispatch => (
-        <RovingTabIndex.Consumer>
-          {(tabIndex, onFocus, onKeyDown) => (
-            <Button
-              {...editorMenuItemProps}
-              paddingVertical={paddingVertical}
-              paddingHorizontal={paddingHorizontal}
-              autoFocus={buttonAutoFocus}
-              tabIndex={tabIndex}
-              onPress={() => {
-                if (path) dispatch({ type: 'SET_ACTIVE_PATH', path });
-                if (section) dispatch({ type: 'SET_ACTIVE_SECTION', section });
-                if (onPress) onPress();
-              }}
-              onFocus={onFocus}
-              onKeyDown={onKeyDown}
-              {...restProps}
-            >
-              {buttonChildren}
-            </Button>
-          )}
-        </RovingTabIndex.Consumer>
+    <DispatchWithRovingTabIndex>
+      {(dispatch, tabIndex, onFocus, onKeyDown) => (
+        <Button
+          {...editorMenuItemProps}
+          paddingVertical={paddingVertical}
+          paddingHorizontal={paddingHorizontal}
+          autoFocus={buttonAutoFocus}
+          tabIndex={tabIndex}
+          onPress={() => {
+            if (path) dispatch({ type: 'SET_ACTIVE_PATH', path });
+            if (section) dispatch({ type: 'SET_ACTIVE_SECTION', section });
+            if (onPress) onPress();
+          }}
+          onFocus={onFocus}
+          onKeyDown={onKeyDown}
+          {...restProps}
+        >
+          {buttonChildren}
+        </Button>
       )}
-    </EditorDispatch>
+    </DispatchWithRovingTabIndex>
   );
 };
 
