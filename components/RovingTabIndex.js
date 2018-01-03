@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 type TabIndex = -1 | 0;
 
 type ConsumerProps = {|
+  onFocus?: (focusToEnd: boolean) => void,
   render: (
     tabIndex: TabIndex,
     onFocus: FocusEventHandler,
@@ -30,9 +31,15 @@ const contextTypes = {
 export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
   static contextTypes = contextTypes;
 
+  static selector = '[tabindex="-1"], [tabindex="0"]';
+
   state = {
     tabIndex: -1,
   };
+
+  componentDidMount() {
+    this.context.esteRovingTabIndex.onMount(this);
+  }
 
   componentWillUnmount() {
     this.context.esteRovingTabIndex.onUnmount(this);
@@ -45,6 +52,26 @@ export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
   onKeyDown: KeyboardEventHandler = event => {
     this.context.esteRovingTabIndex.onKeyDown(this, event);
   };
+
+  getFocusable(): ?Element {
+    // eslint-disable-next-line react/no-find-dom-node
+    const element = ReactDOM.findDOMNode(this);
+    if (!(element instanceof HTMLElement)) return null;
+    const tabIndex = element.getAttribute('tabindex');
+    if (tabIndex === '-1' || tabIndex === '0') return element;
+    return element.querySelector(Consumer.selector);
+  }
+
+  focus(focusToEnd: boolean) {
+    if (this.props.onFocus) {
+      this.props.onFocus(focusToEnd);
+      return;
+    }
+    const element = this.getFocusable();
+    if (!element) return;
+    if (typeof element.focus !== 'function') return;
+    element.focus();
+  }
 
   context: Context;
 
@@ -59,6 +86,7 @@ type ConsumerWithKeyboardEventHandler = (Consumer, KeyboardEvent) => void;
 
 type Context = {|
   esteRovingTabIndex: {|
+    onMount: ConsumerHandler,
     onUnmount: ConsumerHandler,
     onFocus: ConsumerHandler,
     onKeyDown: ConsumerWithKeyboardEventHandler,
@@ -82,21 +110,61 @@ type ProviderProps = {|
 export class Provider extends React.Component<ProviderProps> {
   static childContextTypes = contextTypes;
 
-  static focus(element: ?Element) {
+  getChildContext() {
+    return ({
+      esteRovingTabIndex: {
+        onMount: this.handleMount,
+        onUnmount: this.handleUnmount,
+        onFocus: this.handleFocus,
+        onKeyDown: this.handleKeyDown,
+      },
+    }: Context);
+  }
+
+  // We have to query DOM to get all focusables in the right order.
+  getFocusables(): Array<Element> {
+    // eslint-disable-next-line react/no-find-dom-node
+    const element = ReactDOM.findDOMNode(this);
+    if (element instanceof HTMLElement) {
+      return Array.from(element.querySelectorAll(Consumer.selector));
+    }
+    return [];
+  }
+
+  handleMount: ConsumerHandler = consumer => {
+    this.consumers.push(consumer);
+  };
+
+  handleUnmount: ConsumerHandler = consumer => {
+    const index = this.consumers.indexOf(consumer);
+    if (index !== -1) this.consumers.splice(index, 1);
+
+    // Prevent setting state on removed component.
+    if (consumer === this.consumer) {
+      this.consumer = null;
+    }
+  };
+
+  handleFocus: ConsumerHandler = consumer => {
+    if (this.consumer) {
+      this.consumer.setState({ tabIndex: -1 });
+    }
+    this.consumer = consumer;
+    this.consumer.setState({ tabIndex: 0 });
+  };
+
+  focus(focusToEnd: boolean, element: ?Element) {
     if (!element) return;
-    if (typeof element.focus !== 'function') return;
-    element.focus();
+    const consumer = this.consumers.find(c => c.getFocusable() === element);
+    if (!consumer) return;
+    consumer.focus(focusToEnd);
   }
 
-  static moveHorizontal(
-    left: boolean,
-    index: number,
-    focusables: Array<Element>,
-  ) {
-    Provider.focus(focusables[index + (left ? -1 : 1)]);
+  moveHorizontal(left: boolean, index: number, focusables: Array<Element>) {
+    this.focus(!left, focusables[index + (left ? -1 : 1)]);
   }
 
-  static moveVertical(
+  moveVertical(
     up: boolean,
     index: number,
     focusables: Array<Element>,
@@ -140,66 +208,22 @@ export class Provider extends React.Component<ProviderProps> {
         return d1 - d2;
       });
 
-    Provider.focus(focusables[byHorizontalCenter[0].index]);
+    this.focus(true, focusables[byHorizontalCenter[0].index]);
   }
-
-  getChildContext() {
-    return ({
-      esteRovingTabIndex: {
-        onUnmount: this.handleUnmount,
-        onFocus: this.handleFocus,
-        onKeyDown: this.handleKeyDown,
-      },
-    }: Context);
-  }
-
-  // We have to query DOM to get all focusables in the right order.
-  getFocusables(): Array<Element> {
-    // eslint-disable-next-line react/no-find-dom-node
-    const element = ReactDOM.findDOMNode(this);
-    if (element instanceof HTMLElement) {
-      const selector = '[tabindex="-1"], [tabindex="0"]';
-      return Array.from(element.querySelectorAll(selector));
-    }
-    return [];
-  }
-
-  getCurrentFocusable(): ?Element {
-    if (!this.consumer) return null;
-    // eslint-disable-next-line react/no-find-dom-node
-    const element = ReactDOM.findDOMNode(this.consumer);
-    if (!(element instanceof HTMLElement)) return null;
-    if (element.tabIndex === 0) return element;
-    return element.querySelector('[tabindex="0"]');
-  }
-
-  handleUnmount: ConsumerHandler = consumer => {
-    // Prevent setting state on removed component.
-    if (consumer === this.consumer) {
-      this.consumer = null;
-    }
-  };
-
-  handleFocus: ConsumerHandler = consumer => {
-    if (this.consumer) {
-      this.consumer.setState({ tabIndex: -1 });
-    }
-    this.consumer = consumer;
-    this.consumer.setState({ tabIndex: 0 });
-  };
 
   move(direction: Direction) {
+    if (!this.consumer) return;
+    const focusable = this.consumer.getFocusable();
     const focusables = this.getFocusables();
-    const focusable = this.getCurrentFocusable();
     if (!focusable) return;
     const index = focusables.indexOf(focusable);
     if (index === -1) return null;
 
     const isHorizontal = direction === 'left' || direction === 'right';
     if (isHorizontal) {
-      Provider.moveHorizontal(direction === 'left', index, focusables);
+      this.moveHorizontal(direction === 'left', index, focusables);
     } else {
-      Provider.moveVertical(direction === 'up', index, focusables, focusable);
+      this.moveVertical(direction === 'up', index, focusables, focusable);
     }
   }
 
@@ -210,6 +234,8 @@ export class Provider extends React.Component<ProviderProps> {
   };
 
   consumer: ?Consumer = null;
+
+  consumers: Array<Consumer> = [];
 
   render() {
     return this.props.children;

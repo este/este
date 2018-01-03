@@ -6,6 +6,44 @@ import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
 import * as RovingTabIndex from '../RovingTabIndex';
 
+// from draft.js keyCommandMoveSelectionToEndOfBlock
+function moveSelectionToEndOfBlock(
+  editorState: Draft.EditorState,
+): Draft.EditorState {
+  const selection = editorState.getSelection();
+  const endKey = selection.getEndKey();
+  const content = editorState.getCurrentContent();
+  const textLength = content.getBlockForKey(endKey).getLength();
+  return Draft.EditorState.set(editorState, {
+    selection: selection.merge({
+      anchorKey: endKey,
+      anchorOffset: textLength,
+      focusKey: endKey,
+      focusOffset: textLength,
+      isBackward: false,
+    }),
+    forceSelection: true,
+  });
+}
+
+// from draft.js keyCommandMoveSelectionToStartOfBlock
+function moveSelectionToStartOfBlock(
+  editorState: Draft.EditorState,
+): Draft.EditorState {
+  const selection = editorState.getSelection();
+  const startKey = selection.getStartKey();
+  return Draft.EditorState.set(editorState, {
+    selection: selection.merge({
+      anchorKey: startKey,
+      anchorOffset: 0,
+      focusKey: startKey,
+      focusOffset: 0,
+      isBackward: false,
+    }),
+    forceSelection: true,
+  });
+}
+
 type EditorMenuInputProps = {|
   name: string,
   value: string,
@@ -63,16 +101,24 @@ class EditorMenuInput extends React.Component<
 
   editor: *;
 
-  focusToEnd() {
+  focus(focusToEnd: boolean) {
     if (!this.editor) return;
-    const editorState = Draft.EditorState.moveFocusToEnd(
-      this.state.editorState,
-    );
-    this.setState({ editorState });
+    this.editor.focus();
+    const moveSelection = focusToEnd
+      ? moveSelectionToEndOfBlock
+      : moveSelectionToStartOfBlock;
+    this.setState(({ editorState }) => ({
+      editorState: moveSelection(editorState),
+    }));
+  }
+
+  isValid() {
+    const value = this.getValue();
+    return validate(this.props.schema, value);
   }
 
   handleLabelClick = () => {
-    this.focusToEnd();
+    this.focus(true);
   };
 
   handleEditorChange = (editorState: Draft.EditorState) => {
@@ -83,12 +129,12 @@ class EditorMenuInput extends React.Component<
     this.editor = ref;
   };
 
-  isValid() {
-    const value = this.getValue();
-    return validate(this.props.schema, value);
-  }
+  handleRovingTabIndexFocus = (focusToEnd: boolean) => {
+    this.focus(focusToEnd);
+  };
 
   render() {
+    const { editorState } = this.state;
     return (
       <Box flexDirection="row">
         <EditorMenuText
@@ -106,7 +152,7 @@ class EditorMenuInput extends React.Component<
               }
             `}</style>
             <RovingTabIndex.Consumer
-              // onFocus={this.jooTohleJeVono}
+              onFocus={this.handleRovingTabIndexFocus}
               render={(tabIndex, onFocus, onKeyDown) => (
                 <Draft.Editor
                   autoCapitalize="none"
@@ -115,7 +161,7 @@ class EditorMenuInput extends React.Component<
                   stripPastedStyles={true}
                   tabIndex={tabIndex}
                   editorKey={this.props.name} // SSR
-                  editorState={this.state.editorState}
+                  editorState={editorState}
                   onChange={this.handleEditorChange}
                   handleReturn={EditorMenuInput.handleReturn}
                   ref={this.handleEditorRef}
@@ -123,14 +169,12 @@ class EditorMenuInput extends React.Component<
                   onUpArrow={onKeyDown}
                   onDownArrow={onKeyDown}
                   onLeftArrow={e => {
-                    if (this.state.editorState.isSelectionAtStartOfContent()) {
-                      onKeyDown(e);
-                    }
+                    if (!editorState.isSelectionAtStartOfContent()) return;
+                    onKeyDown(e);
                   }}
                   onRightArrow={e => {
-                    if (this.state.editorState.isSelectionAtEndOfContent()) {
-                      onKeyDown(e);
-                    }
+                    if (!editorState.isSelectionAtEndOfContent()) return;
+                    onKeyDown(e);
                   }}
                 />
               )}
