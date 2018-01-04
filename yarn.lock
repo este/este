@@ -121,8 +121,8 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.91.tgz#794611b28056d16b5436059c6d800b39d573cd3a"
 
 "@types/node@*":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.2.tgz#83b8103fa9a2c2e83d78f701a9aa7c9539739aa5"
+  version "8.5.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.5.tgz#6f9e8164ae1a55a9beb1d2571cfb7acf9d720c61"
 
 "@types/node@^7.0.18":
   version "7.0.51"
@@ -1395,8 +1395,8 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^2.1.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.10.2.tgz#0838eec4b3db2d860cee13bf6c0691e7e8133822"
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.11.0.tgz#50350d6873a82ebe0f3ae5483658c571ae5f9d7d"
   dependencies:
     caniuse-lite "^1.0.30000784"
     electron-to-chromium "^1.3.30"
@@ -1533,8 +1533,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000784:
-  version "1.0.30000784"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000784.tgz#129ced74e9a1280a441880b6cd2bce30ef59e6c0"
+  version "1.0.30000786"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000786.tgz#1b425cd8568d805bc5638bde4905cd8635687746"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -3567,9 +3567,9 @@ graphcool-json-schema@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/graphcool-json-schema/-/graphcool-json-schema-1.2.0.tgz#6c7a9de36a130c5048fa8d9817dff2b5a88bc226"
 
-graphcool-yml@^0.1.7:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/graphcool-yml/-/graphcool-yml-0.1.10.tgz#4c52ef71f0f8b143c4a53c86fdec7b8f11202ed6"
+graphcool-yml@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/graphcool-yml/-/graphcool-yml-0.2.1.tgz#3f5b53c64e917550830a62d3a87bb64ee3ce3e66"
   dependencies:
     ajv "^5.5.1"
     bluebird "^3.5.1"
@@ -3586,9 +3586,9 @@ graphcool-yml@^0.1.7:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-graphql-cli-prepare@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/graphql-cli-prepare/-/graphql-cli-prepare-1.4.3.tgz#8a2205a4cbc0941fd8f7819b5d52ff110bc76513"
+graphql-cli-prepare@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/graphql-cli-prepare/-/graphql-cli-prepare-1.4.4.tgz#16284b2d3cf8c4e0c4c86f177541a038522330cd"
   dependencies:
     chalk "2.3.0"
     fs-extra "5.0.0"
@@ -3597,8 +3597,8 @@ graphql-cli-prepare@1.4.3:
     lodash "4.17.4"
 
 graphql-cli@^2.0.1:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.4.0.tgz#30165311a92149a0837935712a18b8e733660e50"
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.8.0.tgz#2705190eb9bf61895ff3f78d921678144bbbaf73"
   dependencies:
     adm-zip "^0.4.7"
     chalk "^2.3.0"
@@ -3609,9 +3609,9 @@ graphql-cli@^2.0.1:
     express "^4.16.2"
     express-request-proxy "^2.0.0"
     graphql "0.12.3"
-    graphql-cli-prepare "1.4.3"
+    graphql-cli-prepare "1.4.4"
     graphql-config "1.1.4"
-    graphql-config-extension-graphcool "0.3.1"
+    graphql-config-extension-graphcool "1.0.0"
     graphql-playground-middleware-express "1.3.13"
     graphql-schema-linter "0.0.25"
     inquirer "^4.0.1"
@@ -3625,19 +3625,12 @@ graphql-cli@^2.0.1:
     request "^2.83.0"
     yargs "^10.0.3"
 
-graphql-config-extension-graphcool@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-0.3.1.tgz#87ca71f6d9e91a8670fc81eff7831dc6b68b1066"
+graphql-config-extension-graphcool@1.0.0, graphql-config-extension-graphcool@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-1.0.0.tgz#aeac68bc54126f17f263058893b556529ec46f94"
   dependencies:
-    graphcool-yml "^0.1.7"
+    graphcool-yml "0.2.1"
     graphql-config "^1.1.4"
-
-graphql-config-extension-graphcool@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-0.2.0.tgz#ac5b70bb88bb56ce6897ae4ce56d6189cae360c1"
-  dependencies:
-    graphcool-yml "^0.1.7"
-    graphql-config "^1.1.1"
 
 graphql-config@1.1.4, graphql-config@^1.0.0, graphql-config@^1.1.1, graphql-config@^1.1.4:
   version "1.1.4"
@@ -3660,12 +3653,12 @@ graphql-import@0.1.9, graphql-import@^0.1.7:
     lodash "^4.17.4"
 
 graphql-playground-html@^1.3.13:
-  version "1.3.13"
-  resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.3.13.tgz#ac1b0491af1052fb0cbb090e054f6f6fa2797486"
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.4.2.tgz#af97a84ea6cf6ba18e8ff148a6a8b17eef40aa46"
   dependencies:
     dotenv "^4.0.0"
     graphql-config "^1.1.1"
-    graphql-config-extension-graphcool "^0.2.0"
+    graphql-config-extension-graphcool "^1.0.0"
 
 graphql-playground-middleware-express@1.3.13:
   version "1.3.13"
@@ -4191,8 +4184,8 @@ is-callable@^1.1.1, is-callable@^1.1.3:
   resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.1.3.tgz#86eb75392805ddc33af71c92a0eedf74ee7604b2"
 
 is-ci@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-1.0.10.tgz#f739336b2632365061a9d48270cd56ae3369318e"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-1.1.0.tgz#247e4162e7860cebbdaf30b774d6b0ac7dcfe7a5"
   dependencies:
     ci-info "^1.0.0"
 
@@ -6256,8 +6249,8 @@ pluralize@^7.0.0:
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
 pn@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pn/-/pn-1.0.0.tgz#1cf5a30b0d806cd18f88fc41a6b5d4ad615b3ba9"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"

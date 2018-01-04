@@ -84,7 +84,7 @@ const initialMenuHeight = lineHeight =>
   2 * lineHeight + 6 * lineHeight * menuPadding;
 
 const initialState = {
-  activePath: [],
+  activePath: [], // Maybe consider using context for that.
   activeSection: 'web',
   menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
   web: webFixture,
@@ -126,7 +126,7 @@ const logReducer =
         /* eslint-enable no-console */
       };
 
-class Editor extends React.Component<EditorProps, EditorState> {
+class Editor extends React.PureComponent<EditorProps, EditorState> {
   static childContextTypes = {
     dispatch: PropTypes.func,
   };

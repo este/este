@@ -2,11 +2,15 @@
 import * as React from 'react';
 import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
 
-const EditorMenuSectionPage = () => (
-  <EditorMenuSection>
-    <EditorMenuButton>title</EditorMenuButton>
-    <EditorMenuButton>publish</EditorMenuButton>
-  </EditorMenuSection>
-);
+class EditorMenuSectionPage extends React.PureComponent<{}> {
+  render() {
+    return (
+      <EditorMenuSection>
+        <EditorMenuButton>title</EditorMenuButton>
+        <EditorMenuButton>publish</EditorMenuButton>
+      </EditorMenuSection>
+    );
+  }
+}
 
 export default EditorMenuSectionPage;

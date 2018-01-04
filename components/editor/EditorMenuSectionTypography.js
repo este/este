@@ -24,13 +24,20 @@ type EditorMenuSectionTypographyProps = {
   web: Web,
 };
 
-const EditorMenuSectionTypography = ({
-  web: { theme: { typography } },
-}: EditorMenuSectionTypographyProps) => (
-  <EditorMenuSection>
-    <EditorMenuButton back section="theme" />
-    <EditorMenuInputs schema={typographySchema} object={typography} />
-  </EditorMenuSection>
-);
+class EditorMenuSectionTypography extends React.PureComponent<
+  EditorMenuSectionTypographyProps,
+> {
+  render() {
+    return (
+      <EditorMenuSection>
+        <EditorMenuButton back section="theme" />
+        <EditorMenuInputs
+          schema={typographySchema}
+          object={this.props.web.theme.typography}
+        />
+      </EditorMenuSection>
+    );
+  }
+}
 
 export default EditorMenuSectionTypography;

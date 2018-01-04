@@ -5,9 +5,6 @@ import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import A, { type AProps } from '../A';
-import Set, { type SetProps } from '../Set';
-import Text, { type TextProps } from '../Text';
 import * as RovingTabIndex from '../RovingTabIndex';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
@@ -20,6 +17,10 @@ import EditorMenuSectionTypography from './EditorMenuSectionTypography';
 export { default as EditorMenuButton } from './EditorMenuButton';
 export { default as EditorMenuInput } from './EditorMenuInput';
 export { default as EditorMenuInputs } from './EditorMenuInputs';
+export { default as EditorMenuA } from './EditorMenuA';
+export { default as EditorMenuSection } from './EditorMenuSection';
+export { default as EditorMenuText } from './EditorMenuText';
+export { default as EditorMenuSeparator } from './EditorMenuSeparator';
 
 // It's used at multiple places because of fixBrowserFontSmoothing.
 export const backgroundColor = 'black';
@@ -30,20 +31,6 @@ export const editorMenuItemProps = {
   backgroundColor,
   marginVertical: menuPadding,
 };
-
-export const EditorMenuA = (props: AProps) => (
-  <RovingTabIndex.Consumer>
-    {(tabIndex, onFocus, onKeyDown) => (
-      <A
-        {...editorMenuItemProps}
-        tabIndex={tabIndex}
-        onFocus={onFocus}
-        onKeyDown={onKeyDown}
-        {...props}
-      />
-    )}
-  </RovingTabIndex.Consumer>
-);
 
 const sections = {
   hamburger: EditorMenuSectionHamburger,
@@ -56,33 +43,6 @@ const sections = {
 
 export type SectionName = $Keys<typeof sections>;
 
-export const EditorMenuSection = (props: SetProps) => {
-  const { marginBottom = 0, ...restProps } = props;
-  return <Set marginBottom={marginBottom} {...restProps} />;
-};
-
-export const EditorMenuText = (props: TextProps) => (
-  <Text {...editorMenuItemProps} {...props} />
-);
-
-type EditorMenuSeparatorProps = {|
-  type?: 'descendant' | 'sibling',
-|};
-
-export const EditorMenuSeparator = (props: EditorMenuSeparatorProps) => {
-  const { type = 'descendant' } = props;
-  return (
-    <Text
-      {...editorMenuItemProps}
-      color="gray"
-      marginVertical={menuPadding}
-      marginHorizontal={0.25}
-    >
-      {{ descendant: '▸', sibling: '•' }[type]}
-    </Text>
-  );
-};
-
 type EditorMenuProps = {|
   activePath: Path,
   activeSection: SectionName,
@@ -92,7 +52,7 @@ type EditorMenuProps = {|
   webName: string,
 |};
 
-class EditorMenu extends React.Component<EditorMenuProps> {
+class EditorMenu extends React.PureComponent<EditorMenuProps> {
   static style = {
     position: 'fixed',
     boxShadow: '0 0 13px 2px rgba(0,0,0,0.3)',

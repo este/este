@@ -16,35 +16,40 @@ type EditorPageProps = {|
   activePath: Path,
 |};
 
-const EditorPage = ({
-  web,
-  webName,
-  pageName,
-  paddingBottomPx,
-  dispatch,
-  activePath,
-}: EditorPageProps) => (
-  <Box
-    minHeight="100vh" // Emulate React Native so flex 1 works as expected.
-    paddingBottom={`${paddingBottomPx}px`} // Reserve space for EditorMenu.
-  >
-    <Head>
-      <title>{webName}</title>
-      <MetaViewport />
-    </Head>
-    <PageStyle backgroundColor={web.theme.colors.background} />
-    {web.pages[pageName].map((element, i) => (
-      <EditorElement
-        key={getElementKey(element)}
-        element={element}
-        theme={web.theme}
-        path={[i]}
-        dispatch={dispatch}
-        parents={[]}
-        activePath={activePath}
-      />
-    ))}
-  </Box>
-);
+class EditorPage extends React.PureComponent<EditorPageProps> {
+  render() {
+    const {
+      web,
+      webName,
+      pageName,
+      paddingBottomPx,
+      dispatch,
+      activePath,
+    } = this.props;
+    return (
+      <Box
+        minHeight="100vh" // Emulate React Native so flex 1 works as expected.
+        paddingBottom={`${paddingBottomPx}px`} // Reserve space for EditorMenu.
+      >
+        <Head>
+          <title>{webName}</title>
+          <MetaViewport />
+        </Head>
+        <PageStyle backgroundColor={web.theme.colors.background} />
+        {web.pages[pageName].map((element, i) => (
+          <EditorElement
+            key={getElementKey(element)}
+            element={element}
+            theme={web.theme}
+            path={[i]}
+            dispatch={dispatch}
+            parents={[]}
+            activePath={activePath}
+          />
+        ))}
+      </Box>
+    );
+  }
+}
 
 export default EditorPage;

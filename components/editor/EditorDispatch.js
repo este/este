@@ -7,13 +7,16 @@ type Props = {
   children: (dispatch: Editor.EditorDispatch) => React.Node,
 };
 
-type Context = {
-  dispatch: Editor.EditorDispatch,
-};
+class EditorDispatch extends React.PureComponent<Props> {
+  static contextTypes = { dispatch: PropTypes.func };
 
-const EditorDispatch = (props: Props, context: Context) =>
-  props.children(context.dispatch);
+  context: {
+    dispatch: Editor.EditorDispatch,
+  };
 
-EditorDispatch.contextTypes = { dispatch: PropTypes.func };
+  render() {
+    return this.props.children(this.context.dispatch);
+  }
+}
 
 export default EditorDispatch;

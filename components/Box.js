@@ -33,7 +33,7 @@ export type BoxProps = {
   children?: React.Node,
 
   as?: React.ElementType,
-  autoFocus?: boolean | Object | null,
+  autoFocus?: any,
   isReactNative?: boolean,
   style?: Object,
 

@@ -7,17 +7,23 @@ type EditorMenuInputsProps = {|
   object: Object,
 |};
 
-const EditorMenuInputs = ({ schema, object }: EditorMenuInputsProps) =>
-  Object.keys(schema.properties)
-    .filter(key => key in object)
-    .map((key, index, array) => (
-      <EditorMenuInput
-        name={key}
-        value={object[key].toString()}
-        key={key}
-        schema={schema.properties[key]}
-        last={index === array.length - 1}
-      />
-    ));
+class EditorMenuInputs extends React.PureComponent<EditorMenuInputsProps> {
+  render() {
+    const { schema, object } = this.props;
+    return (
+      Object.keys(schema.properties)
+        // .filter(key => key in object)
+        .map((key, index, array) => (
+          <EditorMenuInput
+            name={key}
+            value={object[key].toString()}
+            key={key}
+            schema={schema.properties[key]}
+            last={index === array.length - 1}
+          />
+        ))
+    );
+  }
+}
 
 export default EditorMenuInputs;

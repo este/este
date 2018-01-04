@@ -84,12 +84,10 @@ const computeTextStyle = (hasParentText, theme, style) => {
     style.lineHeight = lines * theme.typography.lineHeight;
   }
 
-  // TODO: Consider fixBrowserFontSmoothing.
-
   return style;
 };
 
-class EditorElementText extends React.Component<EditorElementTextProps> {
+class EditorElementText extends React.PureComponent<EditorElementTextProps> {
   static childContextTypes = {
     hasParentText: PropTypes.bool,
   };

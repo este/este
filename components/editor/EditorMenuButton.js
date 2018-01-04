@@ -25,43 +25,45 @@ const DispatchWithRovingTabIndex = ({ children }) => (
   </EditorDispatch>
 );
 
-const EditorMenuButton = (props: EditorMenuButtonProps) => {
-  const {
-    onPress,
-    path,
-    section,
-    back = false,
-    paddingVertical = 0,
-    paddingHorizontal = 0.25,
-    autoFocus,
-    children,
-    ...restProps
-  } = props;
-  const buttonAutoFocus = back ? true : autoFocus;
-  const buttonChildren = back ? '…' : children;
-  return (
-    <DispatchWithRovingTabIndex>
-      {(dispatch, tabIndex, onFocus, onKeyDown) => (
-        <Button
-          {...editorMenuItemProps}
-          paddingVertical={paddingVertical}
-          paddingHorizontal={paddingHorizontal}
-          autoFocus={buttonAutoFocus}
-          tabIndex={tabIndex}
-          onPress={() => {
-            if (path) dispatch({ type: 'SET_ACTIVE_PATH', path });
-            if (section) dispatch({ type: 'SET_ACTIVE_SECTION', section });
-            if (onPress) onPress();
-          }}
-          onFocus={onFocus}
-          onKeyDown={onKeyDown}
-          {...restProps}
-        >
-          {buttonChildren}
-        </Button>
-      )}
-    </DispatchWithRovingTabIndex>
-  );
-};
+class EditorMenuButton extends React.PureComponent<EditorMenuButtonProps> {
+  render() {
+    const {
+      onPress,
+      path,
+      section,
+      back = false,
+      paddingVertical = 0,
+      paddingHorizontal = 0.25,
+      autoFocus,
+      children,
+      ...restProps
+    } = this.props;
+    const buttonAutoFocus = back ? true : autoFocus;
+    const buttonChildren = back ? '…' : children;
+    return (
+      <DispatchWithRovingTabIndex>
+        {(dispatch, tabIndex, onFocus, onKeyDown) => (
+          <Button
+            {...editorMenuItemProps}
+            paddingVertical={paddingVertical}
+            paddingHorizontal={paddingHorizontal}
+            autoFocus={buttonAutoFocus}
+            tabIndex={tabIndex}
+            onPress={() => {
+              if (path) dispatch({ type: 'SET_ACTIVE_PATH', path });
+              if (section) dispatch({ type: 'SET_ACTIVE_SECTION', section });
+              if (onPress) onPress();
+            }}
+            onFocus={onFocus}
+            onKeyDown={onKeyDown}
+            {...restProps}
+          >
+            {buttonChildren}
+          </Button>
+        )}
+      </DispatchWithRovingTabIndex>
+    );
+  }
+}
 
 export default EditorMenuButton;

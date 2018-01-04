@@ -9,12 +9,6 @@ import { validateSchema } from './jsonSchema';
 // - use style prop for styling
 // - JSON schema instead of Flow
 
-export type EditorElementBoxProps = {
-  children?: React.Node,
-  style?: Object,
-  theme: Theme,
-};
-
 // TODO: Add rgb/rgba regex or validate manually via Color lib.
 export const colorSchemaType = { type: 'string' };
 
@@ -163,34 +157,38 @@ export const computeBoxStyle = (theme: Theme, style: Object) =>
     return { ...computedStyle, [prop]: value };
   }, {});
 
-const EditorElementBox = ({
-  style,
-  theme,
-  children,
-  ...props
-}: EditorElementBoxProps) => {
-  const computedStyle = style && computeBoxStyle(theme, style);
+export type EditorElementBoxProps = {
+  children?: React.Node,
+  style?: Object,
+  theme: Theme,
+};
 
-  return (
-    <div {...props} style={computedStyle}>
-      {children}
-      {/*
+class EditorElementBox extends React.PureComponent<EditorElementBoxProps> {
+  render() {
+    const { style, theme, children, ...props } = this.props;
+    const computedStyle = style && computeBoxStyle(theme, style);
+
+    return (
+      <div {...props} style={computedStyle}>
+        {children}
+        {/*
         Emulate React Native to ensure the same styling for all platforms.
         https://github.com/Microsoft/reactxp/blob/master/src/web/View.tsx
       */}
-      <style jsx>{`
-        div {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          flex-grow: 0;
-          flex-shrink: 0;
-          overflow: hidden; /* Because Android */
-          align-items: stretch;
-        }
-      `}</style>
-    </div>
-  );
-};
+        <style jsx>{`
+          div {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 0;
+            flex-shrink: 0;
+            overflow: hidden; /* Because Android */
+            align-items: stretch;
+          }
+        `}</style>
+      </div>
+    );
+  }
+}
 
 export default EditorElementBox;

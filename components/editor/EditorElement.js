@@ -29,30 +29,35 @@ const getInheritedBackgroundColor = (elements, themeBackgroundColor) => {
   return themeBackgroundColor;
 };
 
-const FlashAnimation = ({ color, onEnd }) => (
-  <div onAnimationEnd={onEnd}>
-    <style jsx>{`
-      @keyframes activated {
-        0% {
-          opacity: 0.25;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-      div {
-        position: absolute;
-        z-index: 2147483647; /* max */
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-        border: dashed 3px ${color};
-        animation: activated 1s;
-      }
-    `}</style>
-  </div>
-);
+class FlashAnimation extends React.PureComponent<*> {
+  render() {
+    const { color, onEnd } = this.props;
+    return (
+      <div onAnimationEnd={onEnd}>
+        <style jsx>{`
+          @keyframes activated {
+            0% {
+              opacity: 0.5;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+          div {
+            position: absolute;
+            z-index: 2147483647; /* max */
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            border: dashed 2px ${color};
+            animation: activated 1s;
+          }
+        `}</style>
+      </div>
+    );
+  }
+}
 
 const editorElements = {
   Box: EditorElementBox,
@@ -73,7 +78,7 @@ type EditorElementState = {|
   flashAnimationColor: string,
 |};
 
-class EditorElement extends React.Component<
+class EditorElement extends React.PureComponent<
   EditorElementProps,
   EditorElementState,
 > {
@@ -92,19 +97,6 @@ class EditorElement extends React.Component<
     if (thisPathIsActivePathAndHasBeenUpdated) {
       this.runFlashAnimation();
     }
-  }
-
-  shouldComponentUpdate(
-    nextProps: EditorElementProps,
-    nextState: EditorElementState,
-  ) {
-    const shouldUpdate =
-      nextProps.activePath !== this.props.activePath ||
-      nextProps.element !== this.props.element ||
-      nextProps.theme !== this.props.theme ||
-      nextState.flashAnimationRunning !== this.state.flashAnimationRunning ||
-      nextState.flashAnimationColor !== this.state.flashAnimationColor;
-    return shouldUpdate;
   }
 
   // TODO: Should be JS only multi platform animation.

@@ -45,6 +45,7 @@ module.exports = {
     'react/require-default-props': 0, // Flow.
     'spaced-comment': 0, // We don't care.
     'react/no-multi-comp': 0, // Control freaky.
+    'react/prefer-stateless-function': 0, // PureComponents ftw.
     // allow console and debugger in development
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,

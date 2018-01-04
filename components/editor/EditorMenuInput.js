@@ -7,9 +7,9 @@ import { validate } from './jsonSchema';
 import * as RovingTabIndex from '../RovingTabIndex';
 
 // from draft.js keyCommandMoveSelectionToEndOfBlock
-function moveSelectionToEndOfBlock(
+const moveSelectionToEndOfBlock = (
   editorState: Draft.EditorState,
-): Draft.EditorState {
+): Draft.EditorState => {
   const selection = editorState.getSelection();
   const endKey = selection.getEndKey();
   const content = editorState.getCurrentContent();
@@ -24,12 +24,12 @@ function moveSelectionToEndOfBlock(
     }),
     forceSelection: true,
   });
-}
+};
 
 // from draft.js keyCommandMoveSelectionToStartOfBlock
-function moveSelectionToStartOfBlock(
+const moveSelectionToStartOfBlock = (
   editorState: Draft.EditorState,
-): Draft.EditorState {
+): Draft.EditorState => {
   const selection = editorState.getSelection();
   const startKey = selection.getStartKey();
   return Draft.EditorState.set(editorState, {
@@ -42,6 +42,23 @@ function moveSelectionToStartOfBlock(
     }),
     forceSelection: true,
   });
+};
+
+type LabelProps = {
+  isValid: *,
+  onClick: *,
+  name: *,
+};
+
+class Label extends React.PureComponent<LabelProps> {
+  render() {
+    const { isValid, onClick, name } = this.props;
+    return (
+      <EditorMenuText color={isValid ? 'white' : 'warning'} onClick={onClick}>
+        {name}:{' '}
+      </EditorMenuText>
+    );
+  }
 }
 
 type EditorMenuInputProps = {|
@@ -55,7 +72,7 @@ type EditorMenuInputState = {|
   editorState: Draft.EditorState,
 |};
 
-class EditorMenuInput extends React.Component<
+class EditorMenuInput extends React.PureComponent<
   EditorMenuInputProps,
   EditorMenuInputState,
 > {
@@ -135,14 +152,14 @@ class EditorMenuInput extends React.Component<
 
   render() {
     const { editorState } = this.state;
+
     return (
       <Box flexDirection="row">
-        <EditorMenuText
-          color={this.isValid() ? 'white' : 'warning'}
+        <Label
+          name={this.props.name}
+          isValid={this.isValid()}
           onClick={this.handleLabelClick}
-        >
-          {this.props.name}:{' '}
-        </EditorMenuText>
+        />
         <EditorMenuText>
           <div>
             {/* min-width: 1px; ensures caret visibility for empty text */}

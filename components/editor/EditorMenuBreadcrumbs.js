@@ -11,7 +11,7 @@ type ChildrenProps = {
   activePath: Path,
 };
 
-class Children extends React.Component<ChildrenProps> {
+class Children extends React.PureComponent<ChildrenProps> {
   getChildPath(child) {
     const index = this.props.pathChildren.findIndex(item => item === child);
     return this.props.activePath.concat(index);
@@ -44,42 +44,51 @@ class Children extends React.Component<ChildrenProps> {
   }
 }
 
-const PathButtons = ({ activePath, elements }) => {
-  let pathChildren = elements;
-  let stringFound = false;
-  let buttonPath = [];
+type PathButtonsProps = {
+  activePath: Path,
+  elements: *,
+};
 
-  const buttons = activePath.reduce((buttons, pathIndex, index) => {
-    const child = pathChildren[pathIndex];
-    // Written like this because of Flow type refinements.
-    if (stringFound || typeof child === 'string') {
-      stringFound = true;
-      return buttons;
-    }
-    pathChildren = child.props.children;
-    const key = getElementKey(child);
-    const isLast = index === activePath.length - 1;
-    buttonPath = buttonPath.concat(pathIndex);
+class PathButtons extends React.PureComponent<PathButtonsProps> {
+  render() {
+    const { activePath, elements } = this.props;
+    let pathChildren = elements;
+    let stringFound = false;
+    let buttonPath = [];
+
+    const buttons = activePath.reduce((buttons, pathIndex, index) => {
+      const child = pathChildren[pathIndex];
+      // Written like this because of Flow type refinements.
+      if (stringFound || typeof child === 'string') {
+        stringFound = true;
+        return buttons;
+      }
+      pathChildren = child.props.children;
+      const key = getElementKey(child);
+      // Enforce autoFocus via activePath. Remember autoFocus uses identity.
+      const autoFocus = index === activePath.length - 1 && activePath;
+      buttonPath = buttonPath.concat(pathIndex);
+      return [
+        ...buttons,
+        <React.Fragment key={key}>
+          <EditorMenuSeparator />
+          <EditorMenuButton autoFocus={autoFocus} path={buttonPath}>
+            {child.type}
+          </EditorMenuButton>
+        </React.Fragment>,
+      ];
+    }, []);
+
     return [
       ...buttons,
-      <React.Fragment key={key}>
-        <EditorMenuSeparator />
-        <EditorMenuButton autoFocus={isLast} path={buttonPath}>
-          {child.type}
-        </EditorMenuButton>
-      </React.Fragment>,
+      <Children
+        key="children"
+        pathChildren={pathChildren}
+        activePath={activePath}
+      />,
     ];
-  }, []);
-
-  return [
-    ...buttons,
-    <Children
-      key="children"
-      pathChildren={pathChildren}
-      activePath={activePath}
-    />,
-  ];
-};
+  }
+}
 
 type EditorMenuBreadcrumbsProps = {|
   activePath: Path,
@@ -88,25 +97,27 @@ type EditorMenuBreadcrumbsProps = {|
   webName: string,
 |};
 
-const EditorMenuBreadcrumbs = ({
-  activePath,
-  pageName,
-  web,
-  webName,
-}: EditorMenuBreadcrumbsProps) => (
-  <Box flexDirection="row" justifyContent="space-between">
-    <Box flexDirection="row" flexWrap="wrap">
-      <EditorMenuButton autoFocus section="web">
-        {webName}
-      </EditorMenuButton>
-      <EditorMenuSeparator />
-      <EditorMenuButton section="page">{pageName}</EditorMenuButton>
-      <PathButtons activePath={activePath} elements={web.pages[pageName]} />
-    </Box>
-    <EditorMenuButton flexDirection="row" section="hamburger">
-      ☰
-    </EditorMenuButton>
-  </Box>
-);
+class EditorMenuBreadcrumbs extends React.PureComponent<
+  EditorMenuBreadcrumbsProps,
+> {
+  render() {
+    const { activePath, pageName, web, webName } = this.props;
+    return (
+      <Box flexDirection="row" justifyContent="space-between">
+        <Box flexDirection="row" flexWrap="wrap">
+          <EditorMenuButton autoFocus section="web">
+            {webName}
+          </EditorMenuButton>
+          <EditorMenuSeparator />
+          <EditorMenuButton section="page">{pageName}</EditorMenuButton>
+          <PathButtons activePath={activePath} elements={web.pages[pageName]} />
+        </Box>
+        <EditorMenuButton flexDirection="row" section="hamburger">
+          ☰
+        </EditorMenuButton>
+      </Box>
+    );
+  }
+}
 
 export default EditorMenuBreadcrumbs;
