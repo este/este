@@ -4,8 +4,9 @@ import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
 import type { Element, Path, Theme } from './Editor';
 import Color from 'color';
-import { activeElementProp, pathEqual } from './Editor';
+import { activeElementProp } from './Editor';
 import EditorDispatch from './EditorDispatch';
+import arrayEqual from 'array-equal';
 
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
 // we don't have any unique id and JSON.stringify is too slow.
@@ -82,6 +83,8 @@ class EditorElement extends React.PureComponent<
   EditorElementProps,
   EditorElementState,
 > {
+  static pathEqual = (path1: Path, path2: Path) => arrayEqual(path1, path2);
+
   constructor(props: EditorElementProps) {
     super(props);
     this.state = {
@@ -92,7 +95,7 @@ class EditorElement extends React.PureComponent<
 
   componentWillReceiveProps(nextProps: EditorElementProps) {
     const thisPathIsActivePathAndHasBeenUpdated =
-      pathEqual(nextProps.activePath, this.props.path) &&
+      EditorElement.pathEqual(nextProps.activePath, this.props.path) &&
       nextProps.activePath !== this.props.activePath;
     if (thisPathIsActivePathAndHasBeenUpdated) {
       this.runFlashAnimation();
@@ -123,7 +126,7 @@ class EditorElement extends React.PureComponent<
   }
 
   isActive() {
-    return pathEqual(this.props.path, this.props.activePath);
+    return EditorElement.pathEqual(this.props.path, this.props.activePath);
   }
 
   handleClick = (dispatch: *) => (e: Event) => {

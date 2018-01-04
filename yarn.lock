@@ -3055,8 +3055,8 @@ find-up@^2.0.0, find-up@^2.1.0:
     locate-path "^2.0.0"
 
 find@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/find/-/find-0.2.7.tgz#7afbd00f8f08c5b622f97cda6f714173d547bb3f"
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/find/-/find-0.2.8.tgz#7440e9faf53cec3256e2641aa1ebce183bc59050"
   dependencies:
     traverse-chain "~0.1.0"
 
@@ -3567,9 +3567,9 @@ graphcool-json-schema@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/graphcool-json-schema/-/graphcool-json-schema-1.2.0.tgz#6c7a9de36a130c5048fa8d9817dff2b5a88bc226"
 
-graphcool-yml@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/graphcool-yml/-/graphcool-yml-0.2.1.tgz#3f5b53c64e917550830a62d3a87bb64ee3ce3e66"
+graphcool-yml@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/graphcool-yml/-/graphcool-yml-0.2.2.tgz#b9f67b6581e149d573f631afdd938cb5f44f9813"
   dependencies:
     ajv "^5.5.1"
     bluebird "^3.5.1"
@@ -3586,19 +3586,19 @@ graphcool-yml@0.2.1:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-graphql-cli-prepare@1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/graphql-cli-prepare/-/graphql-cli-prepare-1.4.4.tgz#16284b2d3cf8c4e0c4c86f177541a038522330cd"
+graphql-cli-prepare@1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/graphql-cli-prepare/-/graphql-cli-prepare-1.4.6.tgz#3e6bdd605fb671524ed45a5008a81488d287962b"
   dependencies:
     chalk "2.3.0"
     fs-extra "5.0.0"
-    graphql-import "0.1.9"
-    graphql-static-binding "0.5.0"
+    graphql-import "0.2.0"
+    graphql-static-binding "0.6.0"
     lodash "4.17.4"
 
 graphql-cli@^2.0.1:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.9.0.tgz#a85a64a585a44ab63e9805c11e5c55bfb2caefd5"
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.9.4.tgz#2b073f62ae0d59963dcd85ff820e2d6d450c4925"
   dependencies:
     adm-zip "^0.4.7"
     chalk "^2.3.0"
@@ -3609,9 +3609,9 @@ graphql-cli@^2.0.1:
     express "^4.16.2"
     express-request-proxy "^2.0.0"
     graphql "0.12.3"
-    graphql-cli-prepare "1.4.4"
+    graphql-cli-prepare "1.4.6"
     graphql-config "1.1.4"
-    graphql-config-extension-graphcool "1.0.0"
+    graphql-config-extension-graphcool "1.0.1"
     graphql-playground-middleware-express "1.4.3"
     graphql-schema-linter "0.0.25"
     inquirer "^4.0.1"
@@ -3626,11 +3626,11 @@ graphql-cli@^2.0.1:
     request "^2.83.0"
     yargs "^10.0.3"
 
-graphql-config-extension-graphcool@1.0.0, graphql-config-extension-graphcool@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-1.0.0.tgz#aeac68bc54126f17f263058893b556529ec46f94"
+graphql-config-extension-graphcool@1.0.1, graphql-config-extension-graphcool@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-1.0.1.tgz#841210ddac9ea43d97a3c1faf65555ec5fb6fcbf"
   dependencies:
-    graphcool-yml "0.2.1"
+    graphcool-yml "0.2.2"
     graphql-config "^1.1.4"
 
 graphql-config@1.1.4, graphql-config@^1.0.0, graphql-config@^1.1.1, graphql-config@^1.1.4:
@@ -3644,7 +3644,16 @@ graphql-config@1.1.4, graphql-config@^1.0.0, graphql-config@^1.1.1, graphql-conf
     minimatch "^3.0.4"
     rimraf "^2.6.2"
 
-graphql-import@0.1.9, graphql-import@^0.1.7:
+graphql-import@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.2.0.tgz#4877fef467d8a9255e6760c3988f6c00018e94af"
+  dependencies:
+    "@types/graphql" "0.11.7"
+    "@types/lodash" "^4.14.85"
+    graphql "^0.12.3"
+    lodash "^4.17.4"
+
+graphql-import@^0.1.7:
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.1.9.tgz#9161f4f7ea92337b60fd40e22e64d3a68c212729"
   dependencies:
@@ -3693,9 +3702,9 @@ graphql-schema-linter@0.0.25:
     graphql "^0.10.1"
     graphql-config "^1.0.0"
 
-graphql-static-binding@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/graphql-static-binding/-/graphql-static-binding-0.5.0.tgz#2aecdcd289800bb60b95f7785ec42ab6117eef6b"
+graphql-static-binding@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/graphql-static-binding/-/graphql-static-binding-0.6.0.tgz#9990a11f445a6fde798d71f49611d6cd97a407e6"
   dependencies:
     cucumber-html-reporter "^3.0.4"
     graphql "0.12.3"

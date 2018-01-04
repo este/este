@@ -6,9 +6,9 @@ import AppError from '../AppError';
 import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
-import arrayEqual from 'array-equal';
 import PropTypes from 'prop-types';
 import draftCss from './draftCss';
+import logReducer from '../../lib/logReducer';
 // import XRay from 'react-x-ray';
 
 type EditorProps = {|
@@ -27,6 +27,8 @@ export type Theme = {|
     lineHeight: number,
   |},
 |};
+
+export type Path = Array<number>;
 
 export type ElementType = 'Box' | 'Text';
 
@@ -51,8 +53,6 @@ export type Web = {|
   },
 |};
 
-export type Path = Array<number>;
-
 type EditorState = {|
   activePath: Path,
   activeSection: SectionName,
@@ -73,8 +73,6 @@ export type EditorDispatch = (
 // Escape hatch for scroll measurement. Only browsers need it.
 export const activeElementProp = 'data-active-element';
 
-export const pathEqual = (path1: Path, path2: Path) => arrayEqual(path1, path2);
-
 // Hard coded, because we can't compute menu height on the server nor we can
 // hack it on the client because JavaScript is async loaded.
 // This is special case which can't be solved with plain CSS as far I know.
@@ -83,55 +81,36 @@ export const pathEqual = (path1: Path, path2: Path) => arrayEqual(path1, path2);
 const initialMenuHeight = lineHeight =>
   2 * lineHeight + 6 * lineHeight * menuPadding;
 
-const initialState = {
-  activePath: [], // Maybe consider using context for that.
-  activeSection: 'web',
-  menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
-  web: webFixture,
-};
-
-const editorReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_ACTIVE_PATH':
-      return { ...state, activePath: action.path, activeSection: 'element' };
-    case 'SET_ACTIVE_SECTION':
-      return {
-        ...state,
-        activeSection: action.section,
-        ...(action.section === 'page' ? { activePath: [] } : null),
-      };
-    case 'SET_MENU_HEIGHT':
-      return { ...state, menuHeight: action.height };
-    default:
-      // eslint-disable-next-line no-unused-expressions
-      (action: empty);
-      return state;
-  }
-};
-
-// I don't know how to Flow type this shit out of this module without losing
-// types. PR anyone?
-const logReducer =
-  process.env.NODE_ENV === 'production'
-    ? reducer => reducer
-    : reducer => (prevState, action) => {
-        /* eslint-disable no-console */
-        console.groupCollapsed(`action ${action.type}`);
-        console.log('prev state', prevState);
-        console.log('action', action);
-        const nextState = reducer(prevState, action);
-        console.log('next state', nextState);
-        console.groupEnd();
-        return nextState;
-        /* eslint-enable no-console */
-      };
-
 class Editor extends React.PureComponent<EditorProps, EditorState> {
   static childContextTypes = {
     dispatch: PropTypes.func,
   };
 
-  state = initialState;
+  static reducer = (state: EditorState, action: EditorAction) => {
+    switch (action.type) {
+      case 'SET_ACTIVE_PATH':
+        return { ...state, activePath: action.path, activeSection: 'element' };
+      case 'SET_ACTIVE_SECTION':
+        return {
+          ...state,
+          activeSection: action.section,
+          ...(action.section === 'page' ? { activePath: [] } : null),
+        };
+      case 'SET_MENU_HEIGHT':
+        return { ...state, menuHeight: action.height };
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (action: empty);
+        return state;
+    }
+  };
+
+  state = {
+    activePath: [], // Maybe consider using context for that.
+    activeSection: 'web',
+    menuHeight: initialMenuHeight(browserThemeDark.typography.lineHeight),
+    web: webFixture,
+  };
 
   getChildContext() {
     return { dispatch: this.dispatch };
@@ -139,7 +118,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   dispatch: EditorDispatch = (action, callback) => {
     this.setState(
-      prevState => logReducer(editorReducer)(prevState, action),
+      prevState => logReducer(Editor.reducer)(prevState, action),
       callback,
     );
   };
