@@ -2,9 +2,10 @@
 import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
-import type { EditorDispatch, Element, Path, Theme } from './Editor';
+import type { Element, Path, Theme } from './Editor';
 import Color from 'color';
 import { activeElementProp, pathEqual } from './Editor';
+import EditorDispatch from './EditorDispatch';
 
 // React key prop has to be unique string. No cheating. But for arbitrary JSON,
 // we don't have any unique id and JSON.stringify is too slow.
@@ -68,7 +69,6 @@ type EditorElementProps = {|
   element: Element,
   theme: Theme,
   path: Path,
-  dispatch: EditorDispatch,
   parents: Array<Element>,
   activePath: Path,
 |};
@@ -126,12 +126,12 @@ class EditorElement extends React.PureComponent<
     return pathEqual(this.props.path, this.props.activePath);
   }
 
-  handleClick = (e: Event) => {
+  handleClick = (dispatch: *) => (e: Event) => {
     e.preventDefault();
     e.stopPropagation();
     // Make a clone to enforce flash animation restart.
     const path = this.props.path.slice(0);
-    this.props.dispatch({ type: 'SET_ACTIVE_PATH', path });
+    dispatch({ type: 'SET_ACTIVE_PATH', path });
   };
 
   handleFlashAnimationEnd = () => {
@@ -139,16 +139,9 @@ class EditorElement extends React.PureComponent<
   };
 
   render() {
-    const { theme, element, path, dispatch, parents, activePath } = this.props;
+    const { theme, element, path, parents, activePath } = this.props;
     const Component = editorElements[element.type];
     if (!Component) return null;
-
-    const componentProps = {
-      style: element.props.style,
-      theme,
-      onClick: this.handleClick,
-      ...(this.isActive() ? { [activeElementProp]: true } : null),
-    };
 
     const componentChildren = element.props.children.map((child, i) => {
       if (typeof child === 'string') return child;
@@ -158,7 +151,6 @@ class EditorElement extends React.PureComponent<
           element={child}
           theme={theme}
           path={path.concat(i)}
-          dispatch={dispatch}
           parents={parents.concat(element)}
           activePath={activePath}
         />
@@ -166,15 +158,24 @@ class EditorElement extends React.PureComponent<
     });
 
     return (
-      <Component {...componentProps}>
-        {componentChildren}
-        {this.state.flashAnimationRunning && (
-          <FlashAnimation
-            color={this.state.flashAnimationColor}
-            onEnd={this.handleFlashAnimationEnd}
-          />
+      <EditorDispatch>
+        {dispatch => (
+          <Component
+            style={element.props.style}
+            theme={theme}
+            onClick={this.handleClick(dispatch)}
+            {...(this.isActive() ? { [activeElementProp]: true } : null)}
+          >
+            {componentChildren}
+            {this.state.flashAnimationRunning && (
+              <FlashAnimation
+                color={this.state.flashAnimationColor}
+                onEnd={this.handleFlashAnimationEnd}
+              />
+            )}
+          </Component>
         )}
-      </Component>
+      </EditorDispatch>
     );
   }
 }

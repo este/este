@@ -177,7 +177,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         <AppError />
         <EditorPage
           activePath={activePath}
-          dispatch={this.dispatch}
           paddingBottomPx={this.state.menuHeight}
           pageName={pageName}
           web={web}
