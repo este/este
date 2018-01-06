@@ -9,7 +9,7 @@ type EditorMenuInputsProps<O> = {|
 |};
 
 class EditorMenuInputs extends React.PureComponent<EditorMenuInputsProps<*>> {
-  handleChange = (value: string, name: string) => {
+  handleChange = (value: *, name: string) => {
     this.props.onChange({ ...this.props.object, [name]: value });
   };
 
@@ -18,7 +18,7 @@ class EditorMenuInputs extends React.PureComponent<EditorMenuInputsProps<*>> {
     return Object.keys(schema.properties).map((key, index, array) => (
       <EditorMenuInput
         name={key}
-        value={object[key].toString()}
+        value={object[key]}
         key={key}
         schema={schema.properties[key]}
         last={index === array.length - 1}

@@ -65,12 +65,14 @@ class Label extends React.PureComponent<LabelProps> {
   }
 }
 
+type Value = string | number;
+
 type EditorMenuInputProps = {|
   name: string,
-  value: string,
+  value: Value,
   schema: Object,
   last: boolean,
-  onChange: (value: string, name: string) => void,
+  onChange: (value: Value, name: string) => void,
 |};
 
 type EditorMenuInputState = {|
@@ -81,12 +83,12 @@ class EditorMenuInput extends React.PureComponent<
   EditorMenuInputProps,
   EditorMenuInputState,
 > {
-  static createContentState(name: string, value: string) {
+  static createContentState(name: string, value: Value) {
     return Draft.convertFromRaw({
       entityMap: {},
       blocks: [
         {
-          text: value,
+          text: value.toString(),
           key: name,
           type: 'unstyled',
           depth: 0,
@@ -151,7 +153,7 @@ class EditorMenuInput extends React.PureComponent<
     clearTimeout(this.delayedChangeTimer);
     this.delayedChangeTimer = setTimeout(() => {
       if (!this.isValid()) return;
-      const value = this.state.editorState.getCurrentContent().getPlainText();
+      const value = this.getValue();
       if (value === this.props.value) return;
       this.props.onChange(value, this.props.name);
     }, delay);

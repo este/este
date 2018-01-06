@@ -35,13 +35,11 @@ class EditorMenuSectionTypography extends React.PureComponent<
           <EditorMenuSection>
             <EditorMenuButton back section="theme" />
             <EditorMenuInputs
-              onChange={object => {
-                // console.log(object);
-                // dispatch({
-                //   type: 'SET_WEB',
-                //   path: ['theme', 'typography'],
-                //   value: object,
-                // });
+              onChange={typography => {
+                dispatch({
+                  type: 'SET_WEB_THEME_TYPOGRAPHY',
+                  typography,
+                });
               }}
               schema={typographySchema}
               object={this.props.web.theme.typography}

@@ -63,7 +63,11 @@ type EditorState = {|
 type EditorAction =
   | { type: 'SET_ACTIVE_PATH', path: Path }
   | { type: 'SET_ACTIVE_SECTION', section: SectionName }
-  | { type: 'SET_MENU_HEIGHT', height: number };
+  | { type: 'SET_MENU_HEIGHT', height: number }
+  | {
+      type: 'SET_WEB_THEME_TYPOGRAPHY',
+      typography: $PropertyType<$PropertyType<Web, 'theme'>, 'typography'>,
+    };
 
 export type EditorDispatch = (
   action: EditorAction,
@@ -98,6 +102,14 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         };
       case 'SET_MENU_HEIGHT':
         return { ...state, menuHeight: action.height };
+      case 'SET_WEB_THEME_TYPOGRAPHY':
+        return {
+          ...state,
+          web: {
+            ...state.web,
+            theme: { ...state.web.theme, typography: action.typography },
+          },
+        };
       default:
         // eslint-disable-next-line no-unused-expressions
         (action: empty);
