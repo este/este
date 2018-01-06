@@ -6,6 +6,10 @@ import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
 import * as RovingTabIndex from '../RovingTabIndex';
 
+// Note we don't update editor by prop value. I don't think we have to.
+// Also, I don't know how to update editor state without losing caret position.
+// TODO: Investigate whether it's safe.
+
 // from draft.js keyCommandMoveSelectionToEndOfBlock
 const moveSelectionToEndOfBlock = (
   editorState: Draft.EditorState,
@@ -66,6 +70,7 @@ type EditorMenuInputProps = {|
   value: string,
   schema: Object,
   last: boolean,
+  onChange: (value: string, name: string) => void,
 |};
 
 type EditorMenuInputState = {|
@@ -138,7 +143,22 @@ class EditorMenuInput extends React.PureComponent<
     this.focus(true);
   };
 
+  delayedChangeTimer: number;
+
+  dispatchChange() {
+    // Delay it's good for UX. We don't want to update UI for any key stroke.
+    const delay = 500;
+    clearTimeout(this.delayedChangeTimer);
+    this.delayedChangeTimer = setTimeout(() => {
+      if (!this.isValid()) return;
+      const value = this.state.editorState.getCurrentContent().getPlainText();
+      if (value === this.props.value) return;
+      this.props.onChange(value, this.props.name);
+    }, delay);
+  }
+
   handleEditorChange = (editorState: Draft.EditorState) => {
+    this.dispatchChange();
     this.setState({ editorState });
   };
 
@@ -182,8 +202,14 @@ class EditorMenuInput extends React.PureComponent<
                   handleReturn={EditorMenuInput.handleReturn}
                   ref={this.handleEditorRef}
                   onFocus={onFocus}
-                  onUpArrow={onKeyDown}
-                  onDownArrow={onKeyDown}
+                  onUpArrow={e => {
+                    if (e.shiftKey) return;
+                    onKeyDown(e);
+                  }}
+                  onDownArrow={e => {
+                    if (e.shiftKey) return;
+                    onKeyDown(e);
+                  }}
                   onLeftArrow={e => {
                     if (!editorState.isSelectionAtStartOfContent()) return;
                     onKeyDown(e);

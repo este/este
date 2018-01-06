@@ -7,6 +7,7 @@ import {
 } from './EditorMenu';
 import type { Web } from './Editor';
 import { validateSchema } from './jsonSchema';
+import EditorDispatch from './EditorDispatch';
 
 const typographySchema = {
   type: 'object',
@@ -29,13 +30,25 @@ class EditorMenuSectionTypography extends React.PureComponent<
 > {
   render() {
     return (
-      <EditorMenuSection>
-        <EditorMenuButton back section="theme" />
-        <EditorMenuInputs
-          schema={typographySchema}
-          object={this.props.web.theme.typography}
-        />
-      </EditorMenuSection>
+      <EditorDispatch>
+        {dispatch => (
+          <EditorMenuSection>
+            <EditorMenuButton back section="theme" />
+            <EditorMenuInputs
+              onChange={object => {
+                // console.log(object);
+                // dispatch({
+                //   type: 'SET_WEB',
+                //   path: ['theme', 'typography'],
+                //   value: object,
+                // });
+              }}
+              schema={typographySchema}
+              object={this.props.web.theme.typography}
+            />
+          </EditorMenuSection>
+        )}
+      </EditorDispatch>
     );
   }
 }
