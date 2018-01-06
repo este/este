@@ -99,7 +99,7 @@ export const browserThemeDark: Theme = {
     danger: openColor.red6,
     black: openColor.gray8,
     white: openColor.white,
-    gray: openColor.gray6,
+    gray: openColor.gray5,
   },
   page: {
     ...browserTheme.page,

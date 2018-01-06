@@ -58,7 +58,7 @@ class Label extends React.PureComponent<LabelProps> {
   render() {
     const { isValid, onClick, name } = this.props;
     return (
-      <EditorMenuText color={isValid ? 'white' : 'warning'} onClick={onClick}>
+      <EditorMenuText color={isValid ? 'gray' : 'warning'} onClick={onClick}>
         {name}:{' '}
       </EditorMenuText>
     );
