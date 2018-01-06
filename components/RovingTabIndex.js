@@ -232,8 +232,6 @@ export class Provider extends React.Component<ProviderProps> {
   }
 
   handleKeyDown: ConsumerWithKeyboardEventHandler = (consumer, event) => {
-    // cmd + left/right is for navigation in URL history
-    if (event.metaKey) return;
     const direction = getDirection(event.key);
     if (direction == null) return;
     this.move(direction);
