@@ -202,6 +202,26 @@ class EditorMenuInput extends React.PureComponent<
                   handleReturn={EditorMenuInput.handleReturn}
                   ref={this.handleEditorRef}
                   onFocus={onFocus}
+                  keyBindingFn={(event: SyntheticKeyboardEvent<*>) => {
+                    // Redo must be handled manually to prevent opening browser
+                    // history on key shortcut.
+                    const isRedoKeyShortcut =
+                      event.key === 'y' &&
+                      Draft.KeyBindingUtil.hasCommandModifier(event);
+                    if (isRedoKeyShortcut) {
+                      return 'myeditor-redo';
+                    }
+                    return Draft.getDefaultKeyBinding(event);
+                  }}
+                  handleKeyCommand={command => {
+                    if (command === 'myeditor-redo') {
+                      this.handleEditorChange(
+                        Draft.EditorState.redo(this.state.editorState),
+                      );
+                      return 'handled';
+                    }
+                    return 'not-handled';
+                  }}
                   onUpArrow={e => {
                     if (e.shiftKey) return;
                     onKeyDown(e);
