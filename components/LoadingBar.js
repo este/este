@@ -5,19 +5,19 @@ import Router from 'next/router';
 
 // Don't show progress for fast transitions.
 const startDelay = 1000;
-let timer = null;
+let timeoutID = null;
 
 Router.onRouteChangeStart = () => {
-  timer = setTimeout(() => NProgress.start(), startDelay);
+  timeoutID = setTimeout(() => NProgress.start(), startDelay);
 };
 
 Router.onRouteChangeComplete = () => {
-  clearTimeout(timer);
+  if (timeoutID) clearTimeout(timeoutID);
   NProgress.done();
 };
 
 Router.onRouteChangeError = () => {
-  clearTimeout(timer);
+  if (timeoutID) clearTimeout(timeoutID);
   NProgress.done();
 };
 

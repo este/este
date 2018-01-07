@@ -57,19 +57,19 @@ class AppError extends React.Component<AppErrorProps, AppErrorState> {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.shownTimer);
+    if (this.shownTimeoutID) clearTimeout(this.shownTimeoutID);
   }
 
   flashError() {
     this.setState({ shown: true });
-    clearTimeout(this.shownTimer);
+    if (this.shownTimeoutID) clearTimeout(this.shownTimeoutID);
     const timeToHide = 5000;
-    this.shownTimer = setTimeout(() => {
+    this.shownTimeoutID = setTimeout(() => {
       this.setState({ shown: false });
     }, timeToHide);
   }
 
-  shownTimer: number;
+  shownTimeoutID: ?TimeoutID;
 
   render() {
     const { appError } = this.props;

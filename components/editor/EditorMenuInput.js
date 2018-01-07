@@ -161,11 +161,11 @@ class EditorMenuInput extends React.PureComponent<
     this.focus(true);
   };
 
-  delayedChangeTimer: number;
+  changeTimeoutID: ?TimeoutID;
 
   dispatchChange(delay: Delay) {
-    clearTimeout(this.delayedChangeTimer);
-    this.delayedChangeTimer = setTimeout(() => {
+    if (this.changeTimeoutID) clearTimeout(this.changeTimeoutID);
+    this.changeTimeoutID = setTimeout(() => {
       if (!this.isValid()) return;
       const value = this.getValue();
       if (value === this.props.value) return;

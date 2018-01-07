@@ -24,16 +24,16 @@ class Loading extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    this.timer = setTimeout(() => {
+    this.timeoutID = setTimeout(() => {
       this.setState({ messageShown: true });
     }, 1000);
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timer);
+    if (this.timeoutID) clearTimeout(this.timeoutID);
   }
 
-  timer: number;
+  timeoutID: ?TimeoutID;
 
   render() {
     const { messageShown } = this.state;
