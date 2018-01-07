@@ -12,18 +12,38 @@ import EditorDispatch from './EditorDispatch';
 export const lineHeightSchema = {
   type: 'number',
   minimum: 1,
-  maximum: 4,
+  maximum: 2,
+  // multipleOf does not work, for example 1.2 is inValid. Weird.
+  // multipleOf: 0.1,
+  // multipleOfPrecision does not work as well. 1.25 is valid. Wtf.
+  multipleOfPrecision: 0.1,
 };
 
 const typographySchema = {
   type: 'object',
   properties: {
     fontSize: { type: 'integer', minimum: 1, maximum: 64 },
-    // TODO: Add enum with modular scale values.
     fontSizeScale: {
       type: 'number',
       minimum: 1,
-      maximum: 4,
+      maximum: 2,
+      // http://www.modularscale.com/
+      examples: [
+        1,
+        1.067,
+        1.125,
+        1.2,
+        1.25,
+        1.333,
+        1.414,
+        1.5,
+        1.6,
+        1.618,
+        1.667,
+        1.778,
+        1.875,
+        2,
+      ],
     },
     lineHeight: lineHeightSchema,
     fontFamily: { type: 'string', minLength: 2, maxLength: 256 },

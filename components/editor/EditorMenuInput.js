@@ -5,6 +5,8 @@ import { EditorMenuText } from './EditorMenu';
 import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
 import * as RovingTabIndex from '../RovingTabIndex';
+import Big from 'big.js';
+import { clamp } from 'ramda';
 
 // Note we don't update editor by prop value. I don't think we have to.
 // Also, I don't know how to update editor state without losing caret position.
@@ -217,15 +219,27 @@ class EditorMenuInput extends React.PureComponent<
       const text = editorState.getCurrentContent().getPlainText();
       const match = text.match(numberRegEx);
       if (!match) return;
+      // Could be refactored but I have more interesting things to do.
       const value = Number(match[0]);
-      // TODO: Handle float somehow. Probably read enums for fontSizeScale.
-      if (!Number.isInteger(value)) return;
-      const step = 1;
-      const newValue = Math.max(
-        0,
-        value + (event.key === 'ArrowUp' ? step : -step),
-      );
-      const newText = text.replace(numberRegEx, newValue.toString());
+      const isUp = event.key === 'ArrowUp';
+      let newValue;
+      const { examples } = this.props.schema;
+      if (examples) {
+        const index = examples.indexOf(value);
+        if (index !== -1) {
+          const newIndex = index + (isUp ? 1 : -1);
+          newValue = examples[clamp(0, examples.length - 1, newIndex)];
+        } else {
+          // eslint-disable-next-line prefer-destructuring
+          newValue = examples[0];
+        }
+      } else {
+        const step = this.props.schema.multipleOfPrecision || 1;
+        const newStep = isUp ? step : -step;
+        const bigValue = Number(new Big(value).plus(newStep).toString());
+        newValue = Math.max(0, bigValue).toString();
+      }
+      const newText = text.replace(numberRegEx, newValue);
       const contentState = Draft.ContentState.createFromText(newText);
       // This works well, except it does not maintain caret position.
       // But undo/redo works, so it's good enough.

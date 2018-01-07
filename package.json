@@ -29,6 +29,7 @@
     "ajv": "^6.0.0-rc.1",
     "array-equal": "^1.0.0",
     "babel-plugin-react-intl": "^2.3.1",
+    "big.js": "^5.0.3",
     "color": "^2.0.0",
     "cookie": "^0.3.1",
     "cross-env": "^5.0.1",
