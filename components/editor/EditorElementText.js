@@ -9,6 +9,7 @@ import {
 } from './EditorElementBox';
 import colorLib from 'color';
 import { validateSchema } from './jsonSchema';
+import { lineHeightSchema } from './EditorMenuSectionTypography';
 
 // Simplified components/Text.js
 // - less props and logic
@@ -42,7 +43,7 @@ const textStyleSchema = {
         '900',
       ],
     },
-    lineHeight: { type: 'number' },
+    lineHeight: lineHeightSchema,
     textAlign: { type: 'string', enum: ['left', 'right', 'center'] },
     textDecoration: {
       type: 'string',
@@ -62,7 +63,7 @@ const computeTextStyle = (hasParentText, theme, style) => {
       : {
           color: theme.colors.foreground,
           fontFamily: theme.typography.fontFamily,
-          fontSize: 0,
+          fontSize: 0, // This is default relative size value.
           lineHeight: theme.typography.lineHeight,
         }),
     ...style,
@@ -78,10 +79,10 @@ const computeTextStyle = (hasParentText, theme, style) => {
   // Set rhythm lineHeight by fontSize and theme.typography.lineHeight.
   // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
   if (style.fontSize) {
-    const lines = Math.ceil(
-      parseInt(style.fontSize, 10) / theme.typography.lineHeight,
-    );
-    style.lineHeight = lines * theme.typography.lineHeight;
+    const absoluteLineHeight =
+      theme.typography.fontSize * theme.typography.lineHeight;
+    const lines = Math.ceil(parseInt(style.fontSize, 10) / absoluteLineHeight);
+    style.lineHeight = lines * absoluteLineHeight;
   }
 
   return style;

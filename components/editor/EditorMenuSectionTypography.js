@@ -9,6 +9,12 @@ import type { Web } from './Editor';
 import { validateSchema } from './jsonSchema';
 import EditorDispatch from './EditorDispatch';
 
+export const lineHeightSchema = {
+  type: 'number',
+  minimum: 1,
+  maximum: 4,
+};
+
 const typographySchema = {
   type: 'object',
   properties: {
@@ -19,7 +25,7 @@ const typographySchema = {
       minimum: 1,
       maximum: 4,
     },
-    lineHeight: { type: 'integer', minimum: 1, maximum: 512 },
+    lineHeight: lineHeightSchema,
     fontFamily: { type: 'string', minLength: 2, maxLength: 256 },
   },
 };

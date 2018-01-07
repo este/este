@@ -115,7 +115,7 @@ export const webFixture = {
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       fontSize: 16,
       fontSizeScale: 1.5,
-      lineHeight: 24,
+      lineHeight: 1.5,
     },
   },
   // fragmentsOrElementsOrTypesOrComponents: {

@@ -151,7 +151,7 @@ export const computeBoxStyle = (theme: Theme, style: Object) =>
     const isRhythmProp =
       typeof value === 'number' && rhythmProps.indexOf(prop) !== -1;
     if (isRhythmProp) {
-      value *= theme.typography.lineHeight;
+      value *= theme.typography.fontSize * theme.typography.lineHeight;
     }
 
     return { ...computedStyle, [prop]: value };
