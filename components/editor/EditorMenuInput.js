@@ -79,10 +79,13 @@ type EditorMenuInputState = {|
   editorState: Draft.EditorState,
 |};
 
+type Delay = 0 | 500;
+
 class EditorMenuInput extends React.PureComponent<
   EditorMenuInputProps,
   EditorMenuInputState,
 > {
+  // https://github.com/facebook/draft-js/issues/1199#issuecomment-331677160
   static createContentState(name: string, value: Value) {
     return Draft.convertFromRaw({
       entityMap: {},
@@ -105,9 +108,20 @@ class EditorMenuInput extends React.PureComponent<
     return 'handled';
   }
 
+  static keyBindingFn = (event: SyntheticKeyboardEvent<*>) => {
+    if (Draft.KeyBindingUtil.hasCommandModifier(event)) {
+      // For some reason, draft.js bubbles cmd y (redo) which is opening browser
+      // history tab. Custom binding can stop event propagation.
+      switch (event.key) {
+        case 'y':
+          return 'myeditor-redo';
+      }
+    }
+    return Draft.getDefaultKeyBinding(event);
+  };
+
   constructor(props: EditorMenuInputProps) {
     super(props);
-    // https://github.com/facebook/draft-js/issues/1199#issuecomment-331677160
     const contentState = EditorMenuInput.createContentState(
       this.props.name,
       this.props.value,
@@ -147,9 +161,7 @@ class EditorMenuInput extends React.PureComponent<
 
   delayedChangeTimer: number;
 
-  dispatchChange() {
-    // Delay it's good for UX. We don't want to update UI for any key stroke.
-    const delay = 500;
+  dispatchChange(delay: Delay) {
     clearTimeout(this.delayedChangeTimer);
     this.delayedChangeTimer = setTimeout(() => {
       if (!this.isValid()) return;
@@ -159,8 +171,9 @@ class EditorMenuInput extends React.PureComponent<
     }, delay);
   }
 
-  handleEditorChange = (editorState: Draft.EditorState) => {
-    this.dispatchChange();
+  // Delay it's good for UX. We don't want to update UI for any key stroke.
+  handleEditorChange = (editorState: Draft.EditorState, delay: Delay = 500) => {
+    this.dispatchChange(delay);
     this.setState({ editorState });
   };
 
@@ -170,6 +183,64 @@ class EditorMenuInput extends React.PureComponent<
 
   handleRovingTabIndexFocus = (focusToEnd: boolean) => {
     this.focus(focusToEnd);
+  };
+
+  handleKeyCommand = (command: string) => {
+    if (command === 'myeditor-redo') {
+      // For some reason, it must be handled manually. Check keyBindingFn.
+      this.handleEditorChange(Draft.EditorState.redo(this.state.editorState));
+      return 'handled';
+    }
+    return 'not-handled';
+  };
+
+  handleKeyArrow = (onKeyDown: *) => (event: *) => {
+    const { editorState } = this.state;
+    const isHorizontal =
+      event.key === 'ArrowLeft' || event.key === 'ArrowRight';
+
+    if (isHorizontal) {
+      const atEnd =
+        event.key === 'ArrowLeft'
+          ? editorState.isSelectionAtStartOfContent()
+          : editorState.isSelectionAtEndOfContent();
+      if (atEnd) onKeyDown(event);
+      return;
+    }
+
+    if (event.shiftKey) return;
+
+    // Handiness. Vertical key with command for number inc / dec.
+    if (Draft.KeyBindingUtil.hasCommandModifier(event)) {
+      event.preventDefault();
+      const numberRegEx = /[.0-9]+/;
+      const text = editorState.getCurrentContent().getPlainText();
+      const match = text.match(numberRegEx);
+      if (!match) return;
+      const value = Number(match[0]);
+      // TODO: Handle float somehow. Probably read examples or multipleOf.
+      // const step = Number.isInteger(value)
+      //   ? 1
+      //   : this.props.schema.multipleOf || 1;
+      if (!Number.isInteger(value)) return;
+      const step = 1;
+      const newValue = Math.max(
+        0,
+        value + (event.key === 'ArrowUp' ? step : -step),
+      );
+      const newText = text.replace(numberRegEx, newValue.toString());
+      const contentState = Draft.ContentState.createFromText(newText);
+      // This works well, except it does not maintain caret position.
+      // But undo/redo works, so it's good enough.
+      const nextEditorState = Draft.EditorState.push(
+        editorState,
+        contentState,
+        'apply-entity',
+      );
+      this.handleEditorChange(nextEditorState, 0);
+      return;
+    }
+    onKeyDown(event);
   };
 
   render() {
@@ -204,42 +275,12 @@ class EditorMenuInput extends React.PureComponent<
                   handleReturn={EditorMenuInput.handleReturn}
                   ref={this.handleEditorRef}
                   onFocus={onFocus}
-                  keyBindingFn={(event: SyntheticKeyboardEvent<*>) => {
-                    // Redo must be handled manually to prevent opening browser
-                    // history on key shortcut.
-                    const isRedoKeyShortcut =
-                      event.key === 'y' &&
-                      Draft.KeyBindingUtil.hasCommandModifier(event);
-                    if (isRedoKeyShortcut) {
-                      return 'myeditor-redo';
-                    }
-                    return Draft.getDefaultKeyBinding(event);
-                  }}
-                  handleKeyCommand={command => {
-                    if (command === 'myeditor-redo') {
-                      this.handleEditorChange(
-                        Draft.EditorState.redo(this.state.editorState),
-                      );
-                      return 'handled';
-                    }
-                    return 'not-handled';
-                  }}
-                  onUpArrow={e => {
-                    if (e.shiftKey) return;
-                    onKeyDown(e);
-                  }}
-                  onDownArrow={e => {
-                    if (e.shiftKey) return;
-                    onKeyDown(e);
-                  }}
-                  onLeftArrow={e => {
-                    if (!editorState.isSelectionAtStartOfContent()) return;
-                    onKeyDown(e);
-                  }}
-                  onRightArrow={e => {
-                    if (!editorState.isSelectionAtEndOfContent()) return;
-                    onKeyDown(e);
-                  }}
+                  keyBindingFn={EditorMenuInput.keyBindingFn}
+                  handleKeyCommand={this.handleKeyCommand}
+                  onUpArrow={this.handleKeyArrow(onKeyDown)}
+                  onDownArrow={this.handleKeyArrow(onKeyDown)}
+                  onLeftArrow={this.handleKeyArrow(onKeyDown)}
+                  onRightArrow={this.handleKeyArrow(onKeyDown)}
                 />
               )}
             </RovingTabIndex.Consumer>

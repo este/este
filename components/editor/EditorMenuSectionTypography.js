@@ -13,7 +13,7 @@ const typographySchema = {
   type: 'object',
   properties: {
     fontSize: { type: 'integer', minimum: 1, maximum: 64 },
-    fontSizeScale: { type: 'number', minimum: 1, maximum: 4 },
+    fontSizeScale: { type: 'number', minimum: 1, maximum: 4, multipleOf: 0.1 },
     lineHeight: { type: 'integer', minimum: 1, maximum: 512 },
     fontFamily: { type: 'string', minLength: 2, maxLength: 256 },
   },

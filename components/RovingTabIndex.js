@@ -16,6 +16,7 @@ type ConsumerProps = {|
   children: (
     tabIndex: TabIndex,
     onFocus: FocusEventHandler,
+    // Not sure whether SyntheticKeyboardEventHandler isn't better.
     onKeyDown: KeyboardEventHandler,
   ) => React.Node,
 |};
