@@ -218,10 +218,7 @@ class EditorMenuInput extends React.PureComponent<
       const match = text.match(numberRegEx);
       if (!match) return;
       const value = Number(match[0]);
-      // TODO: Handle float somehow. Probably read examples or multipleOf.
-      // const step = Number.isInteger(value)
-      //   ? 1
-      //   : this.props.schema.multipleOf || 1;
+      // TODO: Handle float somehow. Probably read enums for fontSizeScale.
       if (!Number.isInteger(value)) return;
       const step = 1;
       const newValue = Math.max(
