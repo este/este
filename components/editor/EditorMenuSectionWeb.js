@@ -8,6 +8,8 @@ class EditorMenuSectionWeb extends React.PureComponent<{}> {
       <EditorMenuSection>
         <EditorMenuButton section="theme">theme</EditorMenuButton>
         <EditorMenuButton>pages</EditorMenuButton>
+        {/* History timeline with quick review, jump, etc. */}
+        {/* <EditorMenuButton>history</EditorMenuButton> */}
       </EditorMenuSection>
     );
   }
