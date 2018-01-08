@@ -7,6 +7,7 @@ import EditorDispatch from './EditorDispatch';
 import * as RovingTabIndex from '../RovingTabIndex';
 
 type EditorMenuButtonProps = {
+  active?: boolean,
   path?: Path,
   section?: SectionName,
   back?: boolean,
@@ -35,6 +36,7 @@ class EditorMenuButton extends React.PureComponent<EditorMenuButtonProps> {
       paddingVertical = 0,
       paddingHorizontal = 0.25,
       autoFocus,
+      active = false,
       children,
       ...restProps
     } = this.props;
@@ -56,6 +58,7 @@ class EditorMenuButton extends React.PureComponent<EditorMenuButtonProps> {
             }}
             onFocus={onFocus}
             onKeyDown={onKeyDown}
+            decoration={active ? 'underline' : 'none'}
             {...restProps}
           >
             {buttonChildren}

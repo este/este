@@ -94,6 +94,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
           style={EditorMenu.style}
         >
           <EditorMenuBreadcrumbs
+            activeSection={activeSection}
             activePath={activePath}
             pageName={pageName}
             web={web}

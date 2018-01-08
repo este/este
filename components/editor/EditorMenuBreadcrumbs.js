@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuSeparator } from './EditorMenu';
+import { EditorMenuSeparator, type SectionName } from './EditorMenu';
 import EditorMenuButton from './EditorMenuButton';
 import type { Web, Path } from './Editor';
 import { getElementKey } from './EditorElement';
+import arrayEqual from 'array-equal';
 
 type ChildrenProps = {
   pathChildren: *,
@@ -45,13 +46,14 @@ class Children extends React.PureComponent<ChildrenProps> {
 }
 
 type PathButtonsProps = {
+  activeSection: SectionName,
   activePath: Path,
   elements: *,
 };
 
 class PathButtons extends React.PureComponent<PathButtonsProps> {
   render() {
-    const { activePath, elements } = this.props;
+    const { activeSection, activePath, elements } = this.props;
     let pathChildren = elements;
     let stringFound = false;
     let buttonPath = [];
@@ -68,11 +70,18 @@ class PathButtons extends React.PureComponent<PathButtonsProps> {
       // Enforce autoFocus via activePath. Remember autoFocus uses identity.
       const autoFocus = index === activePath.length - 1 && activePath;
       buttonPath = buttonPath.concat(pathIndex);
+      const active =
+        activeSection === 'element' && arrayEqual(activePath, buttonPath);
+
       return [
         ...buttons,
         <React.Fragment key={key}>
           <EditorMenuSeparator />
-          <EditorMenuButton autoFocus={autoFocus} path={buttonPath}>
+          <EditorMenuButton
+            active={active}
+            autoFocus={autoFocus}
+            path={buttonPath}
+          >
             {child.type}
           </EditorMenuButton>
         </React.Fragment>,
@@ -91,6 +100,7 @@ class PathButtons extends React.PureComponent<PathButtonsProps> {
 }
 
 type EditorMenuBreadcrumbsProps = {|
+  activeSection: SectionName,
   activePath: Path,
   pageName: string,
   web: Web,
@@ -101,7 +111,7 @@ class EditorMenuBreadcrumbs extends React.PureComponent<
   EditorMenuBreadcrumbsProps,
 > {
   render() {
-    const { activePath, pageName, web, webName } = this.props;
+    const { activeSection, activePath, pageName, web, webName } = this.props;
     return (
       <Box flexDirection="row" justifyContent="space-between">
         <Box flexDirection="row" flexWrap="wrap">
@@ -111,6 +121,7 @@ class EditorMenuBreadcrumbs extends React.PureComponent<
           <EditorMenuSeparator />
           <EditorMenuButton section="page">{pageName}</EditorMenuButton>
           <PathButtons
+            activeSection={activeSection}
             activePath={activePath}
             elements={web.pages[pageName].elements}
           />
