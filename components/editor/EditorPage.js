@@ -28,7 +28,7 @@ class EditorPage extends React.PureComponent<EditorPageProps> {
           <MetaViewport />
         </Head>
         <PageStyle backgroundColor={web.theme.colors.background} />
-        {web.pages[pageName].map((element, i) => (
+        {web.pages[pageName].elements.map((element, i) => (
           <EditorElement
             key={getElementKey(element)}
             element={element}

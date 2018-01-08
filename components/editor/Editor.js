@@ -44,12 +44,16 @@ export type Element = {|
   |},
 |};
 
+type Page = {|
+  elements: Array<Element>,
+|};
+
 // TODO: JSON schema. Import typography, Box, Text, etc. from their modules.
 export type Web = {|
   theme: Theme,
   pages: {
-    [pageName: string]: [Element],
-    index: [Element],
+    [pageName: string]: Page,
+    index: Page,
   },
 |};
 
@@ -164,7 +168,9 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         <style jsx global>
           {draftCss}
         </style>
-        {/* <XRay grid={web.theme.typography.lineHeight}> */}
+        {/* <XRay
+          grid={web.theme.typography.fontSize * web.theme.typography.lineHeight}
+        > */}
         <AppError />
         <EditorPage
           activePath={activePath}

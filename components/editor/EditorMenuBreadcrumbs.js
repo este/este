@@ -110,7 +110,10 @@ class EditorMenuBreadcrumbs extends React.PureComponent<
           </EditorMenuButton>
           <EditorMenuSeparator />
           <EditorMenuButton section="page">{pageName}</EditorMenuButton>
-          <PathButtons activePath={activePath} elements={web.pages[pageName]} />
+          <PathButtons
+            activePath={activePath}
+            elements={web.pages[pageName].elements}
+          />
         </Box>
         <EditorMenuButton flexDirection="row" section="hamburger">
           ☰

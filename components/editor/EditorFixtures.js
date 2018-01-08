@@ -122,5 +122,9 @@ export const webFixture = {
   //   Heading
   //   MainNav
   // }
-  pages: { index: pageIndexFixture },
+  pages: {
+    index: {
+      elements: pageIndexFixture,
+    },
+  },
 };
