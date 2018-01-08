@@ -15,17 +15,19 @@ type EditorProps = {|
   name: string,
 |};
 
+type Typography = {|
+  fontFamily: string,
+  fontSize: number,
+  fontSizeScale: number,
+  lineHeight: number,
+|};
+
 export type Theme = {|
   colors: {
     background: string,
     foreground: string,
   },
-  typography: {|
-    fontFamily: string,
-    fontSize: number,
-    fontSizeScale: number,
-    lineHeight: number,
-  |},
+  typography: Typography,
 |};
 
 export type Path = Array<number>;
@@ -45,6 +47,8 @@ export type Element = {|
 |};
 
 type Page = {|
+  createdAt: number,
+  updatedAt: number,
   elements: Array<Element>,
 |};
 
@@ -68,10 +72,7 @@ type EditorAction =
   | { type: 'SET_ACTIVE_PATH', path: Path }
   | { type: 'SET_ACTIVE_SECTION', section: SectionName }
   | { type: 'SET_MENU_HEIGHT', height: number }
-  | {
-      type: 'SET_WEB_THEME_TYPOGRAPHY',
-      typography: $PropertyType<$PropertyType<Web, 'theme'>, 'typography'>,
-    };
+  | { type: 'SET_WEB_THEME_TYPOGRAPHY', typography: Typography };
 
 export type EditorDispatch = (
   action: EditorAction,

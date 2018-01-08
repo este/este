@@ -1,10 +1,6 @@
 // @flow
 
 const pageIndexFixture = [
-  // {
-  //   type: 'Title',
-  //   props: 'Home',
-  // },
   {
     type: 'Box',
     props: {
@@ -124,6 +120,9 @@ export const webFixture = {
   // }
   pages: {
     index: {
+      // title:
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
       elements: pageIndexFixture,
     },
   },
