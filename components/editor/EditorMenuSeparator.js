@@ -19,7 +19,7 @@ class EditorMenuSeparator extends React.PureComponent<
         marginVertical={menuPadding}
         marginHorizontal={0.25}
       >
-        {{ descendant: '▸', sibling: '•' }[type]}
+        {{ descendant: '▸', sibling: '|' }[type]}
       </Text>
     );
   }
