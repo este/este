@@ -32,16 +32,40 @@ export const editorMenuItemProps = {
   marginVertical: menuPadding,
 };
 
-const sections = {
-  hamburger: EditorMenuSectionHamburger,
-  web: EditorMenuSectionWeb,
-  page: EditorMenuSectionPage,
-  element: EditorMenuSectionElement,
-  theme: EditorMenuSectionTheme,
-  typography: EditorMenuSectionTypography,
+export type SectionName =
+  | 'hamburger'
+  | 'web'
+  | 'page'
+  | 'element'
+  | 'theme'
+  | 'typography';
+
+type ActiveSectionProps = {
+  activeSection: SectionName,
+  web: Web,
 };
 
-export type SectionName = $Keys<typeof sections>;
+// I tried sections object with $Keys, but it wasn't type safe. Explicit ftw.
+const ActiveSection = ({ activeSection, web }: ActiveSectionProps) => {
+  switch (activeSection) {
+    case 'hamburger':
+      return <EditorMenuSectionHamburger />;
+    case 'web':
+      return <EditorMenuSectionWeb />;
+    case 'page':
+      return <EditorMenuSectionPage />;
+    case 'element':
+      return <EditorMenuSectionElement web={web} />;
+    case 'theme':
+      return <EditorMenuSectionTheme />;
+    case 'typography':
+      return <EditorMenuSectionTypography web={web} />;
+    default:
+      // eslint-disable-next-line no-unused-expressions
+      (activeSection: empty);
+      return null;
+  }
+};
 
 type EditorMenuProps = {|
   activePath: Path,
@@ -80,7 +104,6 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
 
   render() {
     const { activePath, activeSection, pageName, web, webName } = this.props;
-    const ActiveSection = sections[activeSection];
 
     return (
       <RovingTabIndex.Provider>
@@ -100,7 +123,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
             web={web}
             webName={webName}
           />
-          <ActiveSection web={web} />
+          <ActiveSection activeSection={activeSection} web={web} />
         </Box>
       </RovingTabIndex.Provider>
     );
