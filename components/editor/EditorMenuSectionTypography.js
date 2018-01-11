@@ -13,7 +13,7 @@ export const lineHeightSchema = {
   type: 'number',
   minimum: 1,
   maximum: 2,
-  // multipleOf does not work, for example 1.2 is inValid. Weird.
+  // multipleOf does not work, for example 1.2 is invalid. Weird.
   // multipleOf: 0.1,
   // multipleOfPrecision does not work as well. 1.25 is valid. Wtf.
   multipleOfPrecision: 0.1,

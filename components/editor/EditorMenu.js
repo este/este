@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
-import type { Web, Path } from './Editor';
+import * as Editor from './Editor';
 import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import * as RovingTabIndex from '../RovingTabIndex';
+import EditorDispatch from './EditorDispatch';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
 import EditorMenuSectionWeb from './EditorMenuSectionWeb';
@@ -42,11 +43,18 @@ export type SectionName =
 
 type ActiveSectionProps = {
   activeSection: SectionName,
-  web: Web,
+  activePath: Editor.Path,
+  web: Editor.Web,
+  dispatch: Editor.EditorDispatch,
 };
 
 // I tried sections object with $Keys, but it wasn't type safe. Explicit ftw.
-const ActiveSection = ({ activeSection, web }: ActiveSectionProps) => {
+const ActiveSection = ({
+  activeSection,
+  activePath,
+  web,
+  dispatch,
+}: ActiveSectionProps) => {
   switch (activeSection) {
     case 'hamburger':
       return <EditorMenuSectionHamburger />;
@@ -55,7 +63,9 @@ const ActiveSection = ({ activeSection, web }: ActiveSectionProps) => {
     case 'page':
       return <EditorMenuSectionPage />;
     case 'element':
-      return <EditorMenuSectionElement web={web} />;
+      return (
+        <EditorMenuSectionElement activePath={activePath} dispatch={dispatch} />
+      );
     case 'theme':
       return <EditorMenuSectionTheme />;
     case 'typography':
@@ -68,11 +78,11 @@ const ActiveSection = ({ activeSection, web }: ActiveSectionProps) => {
 };
 
 type EditorMenuProps = {|
-  activePath: Path,
+  activePath: Editor.Path,
   activeSection: SectionName,
   onHeightChange: (menu: HTMLElement) => void,
   pageName: string,
-  web: Web,
+  web: Editor.Web,
   webName: string,
 |};
 
@@ -123,7 +133,16 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
             web={web}
             webName={webName}
           />
-          <ActiveSection activeSection={activeSection} web={web} />
+          <EditorDispatch>
+            {dispatch => (
+              <ActiveSection
+                activeSection={activeSection}
+                web={web}
+                activePath={activePath}
+                dispatch={dispatch}
+              />
+            )}
+          </EditorDispatch>
         </Box>
       </RovingTabIndex.Provider>
     );

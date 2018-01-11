@@ -6,7 +6,7 @@ import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
 import * as RovingTabIndex from '../RovingTabIndex';
 import Big from 'big.js';
-import { clamp } from 'ramda';
+import * as R from 'ramda';
 
 // Note we don't update editor by prop value. I don't think we have to.
 // Also, I don't know how to update editor state without losing caret position.
@@ -228,7 +228,7 @@ class EditorMenuInput extends React.PureComponent<
         const index = examples.indexOf(value);
         if (index !== -1) {
           const newIndex = index + (isUp ? 1 : -1);
-          newValue = examples[clamp(0, examples.length - 1, newIndex)];
+          newValue = examples[R.clamp(0, examples.length - 1, newIndex)];
         } else {
           // eslint-disable-next-line prefer-destructuring
           newValue = examples[0];

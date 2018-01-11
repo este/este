@@ -1,24 +1,29 @@
 // @flow
 import * as React from 'react';
 import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
-import type { Web, Path } from './Editor';
+import type { Path, EditorDispatch } from './Editor';
 
 type Props = {|
-  web: Web,
-  // path: Path,
+  activePath: Path,
+  dispatch: EditorDispatch,
 |};
 
 class EditorMenuSectionElement extends React.PureComponent<Props> {
+  handleDeletePress = () => {
+    this.props.dispatch({ type: 'DELETE_PATH', path: this.props.activePath });
+  };
+
   render() {
-    // this.props.web;
-    // this.props.path;
-    // console.log(this.props.path);
     return (
       <EditorMenuSection>
-        <EditorMenuButton>style</EditorMenuButton>
+        {/* <EditorMenuButton>style</EditorMenuButton> */}
         {/* <EditorMenuButton>clone</EditorMenuButton> */}
-        <EditorMenuButton>add</EditorMenuButton>
-        <EditorMenuButton>delete</EditorMenuButton>
+        {/* <EditorMenuButton>add</EditorMenuButton> */}
+        <EditorMenuButton onPress={this.handleDeletePress}>
+          delete
+        </EditorMenuButton>
+        {/* Consider
+        <EditorMenuButton>undo</EditorMenuButton> */}
       </EditorMenuSection>
     );
   }

@@ -115,11 +115,13 @@ class EditorMenuBreadcrumbs extends React.PureComponent<
     return (
       <Box flexDirection="row" justifyContent="space-between">
         <Box flexDirection="row" flexWrap="wrap">
-          <EditorMenuButton autoFocus section="web">
+          <EditorMenuButton autoFocus={activeSection === 'web'} section="web">
             {webName}
           </EditorMenuButton>
           <EditorMenuSeparator />
-          <EditorMenuButton section="page">{pageName}</EditorMenuButton>
+          <EditorMenuButton autoFocus={activeSection === 'page'} section="page">
+            {pageName}
+          </EditorMenuButton>
           <PathButtons
             activeSection={activeSection}
             activePath={activePath}

@@ -1,4 +1,4 @@
-// flow-typed signature: 66034e934c99bef4a8798e50e78865ca
+// flow-typed signature: b0b7e4d523804b5969db5351aad63e13
 // flow-typed version: <<STUB>>/prettier_v^1.5.1/flow_v0.63.1
 
 /**
@@ -34,6 +34,10 @@ declare module 'prettier/parser-flow' {
   declare module.exports: any;
 }
 
+declare module 'prettier/parser-glimmer' {
+  declare module.exports: any;
+}
+
 declare module 'prettier/parser-graphql' {
   declare module.exports: any;
 }
@@ -51,6 +55,10 @@ declare module 'prettier/parser-postcss' {
 }
 
 declare module 'prettier/parser-typescript' {
+  declare module.exports: any;
+}
+
+declare module 'prettier/parser-vue' {
   declare module.exports: any;
 }
 
@@ -74,6 +82,9 @@ declare module 'prettier/parser-babylon.js' {
 declare module 'prettier/parser-flow.js' {
   declare module.exports: $Exports<'prettier/parser-flow'>;
 }
+declare module 'prettier/parser-glimmer.js' {
+  declare module.exports: $Exports<'prettier/parser-glimmer'>;
+}
 declare module 'prettier/parser-graphql.js' {
   declare module.exports: $Exports<'prettier/parser-graphql'>;
 }
@@ -88,6 +99,9 @@ declare module 'prettier/parser-postcss.js' {
 }
 declare module 'prettier/parser-typescript.js' {
   declare module.exports: $Exports<'prettier/parser-typescript'>;
+}
+declare module 'prettier/parser-vue.js' {
+  declare module.exports: $Exports<'prettier/parser-vue'>;
 }
 declare module 'prettier/third-party.js' {
   declare module.exports: $Exports<'prettier/third-party'>;
