@@ -14,6 +14,7 @@ import EditorMenuSectionPage from './EditorMenuSectionPage';
 import EditorMenuSectionElement from './EditorMenuSectionElement';
 import EditorMenuSectionTheme from './EditorMenuSectionTheme';
 import EditorMenuSectionTypography from './EditorMenuSectionTypography';
+import EditorMenuSectionAdd from './EditorMenuSectionAdd';
 
 export { default as EditorMenuButton } from './EditorMenuButton';
 export { default as EditorMenuInput } from './EditorMenuInput';
@@ -39,7 +40,8 @@ export type SectionName =
   | 'page'
   | 'element'
   | 'theme'
-  | 'typography';
+  | 'typography'
+  | 'add';
 
 type ActiveSectionProps = {
   activeSection: SectionName,
@@ -70,6 +72,8 @@ const ActiveSection = ({
       return <EditorMenuSectionTheme />;
     case 'typography':
       return <EditorMenuSectionTypography web={web} dispatch={dispatch} />;
+    case 'add':
+      return <EditorMenuSectionAdd activePath={activePath} />;
     default:
       // eslint-disable-next-line no-unused-expressions
       (activeSection: empty);

@@ -51,10 +51,10 @@ const typographySchema = {
 
 validateSchema(typographySchema);
 
-type EditorMenuSectionTypographyProps = {
+type EditorMenuSectionTypographyProps = {|
   web: Web,
   dispatch: EditorDispatch,
-};
+|};
 
 class EditorMenuSectionTypography extends React.PureComponent<
   EditorMenuSectionTypographyProps,

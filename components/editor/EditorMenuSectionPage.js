@@ -8,6 +8,7 @@ class EditorMenuSectionPage extends React.PureComponent<{}> {
       <EditorMenuSection>
         <EditorMenuButton>title</EditorMenuButton>
         <EditorMenuButton>publish</EditorMenuButton>
+        <EditorMenuButton section="add">add</EditorMenuButton>
       </EditorMenuSection>
     );
   }

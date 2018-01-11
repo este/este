@@ -18,12 +18,11 @@ class EditorMenuSectionElement extends React.PureComponent<Props> {
       <EditorMenuSection>
         {/* <EditorMenuButton>style</EditorMenuButton> */}
         {/* <EditorMenuButton>clone</EditorMenuButton> */}
-        {/* <EditorMenuButton>add</EditorMenuButton> */}
+        {/* <EditorMenuButton>unwrap?</EditorMenuButton> */}
         <EditorMenuButton onPress={this.handleDeletePress}>
           delete
         </EditorMenuButton>
-        {/* Consider
-        <EditorMenuButton>undo</EditorMenuButton> */}
+        <EditorMenuButton section="add">add</EditorMenuButton>
       </EditorMenuSection>
     );
   }
