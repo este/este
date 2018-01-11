@@ -5,9 +5,8 @@ import {
   EditorMenuButton,
   EditorMenuInputs,
 } from './EditorMenu';
-import type { Web } from './Editor';
+import type { Web, Typography, EditorDispatch } from './Editor';
 import { validateSchema } from './jsonSchema';
-import EditorDispatch from './EditorDispatch';
 
 export const lineHeightSchema = {
   type: 'number',
@@ -54,30 +53,29 @@ validateSchema(typographySchema);
 
 type EditorMenuSectionTypographyProps = {
   web: Web,
+  dispatch: EditorDispatch,
 };
 
 class EditorMenuSectionTypography extends React.PureComponent<
   EditorMenuSectionTypographyProps,
 > {
+  handleEditorMenuInputsChange = (typography: Typography) => {
+    this.props.dispatch({
+      type: 'SET_WEB_THEME_TYPOGRAPHY',
+      typography,
+    });
+  };
+
   render() {
     return (
-      <EditorDispatch>
-        {dispatch => (
-          <EditorMenuSection>
-            <EditorMenuButton back section="theme" />
-            <EditorMenuInputs
-              onChange={typography => {
-                dispatch({
-                  type: 'SET_WEB_THEME_TYPOGRAPHY',
-                  typography,
-                });
-              }}
-              schema={typographySchema}
-              object={this.props.web.theme.typography}
-            />
-          </EditorMenuSection>
-        )}
-      </EditorDispatch>
+      <EditorMenuSection>
+        <EditorMenuButton back section="theme" />
+        <EditorMenuInputs
+          onChange={this.handleEditorMenuInputsChange}
+          schema={typographySchema}
+          object={this.props.web.theme.typography}
+        />
+      </EditorMenuSection>
     );
   }
 }

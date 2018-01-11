@@ -16,7 +16,7 @@ type EditorProps = {|
   name: string,
 |};
 
-type Typography = {|
+export type Typography = {|
   fontFamily: string,
   fontSize: number,
   fontSizeScale: number,

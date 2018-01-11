@@ -69,7 +69,7 @@ const ActiveSection = ({
     case 'theme':
       return <EditorMenuSectionTheme />;
     case 'typography':
-      return <EditorMenuSectionTypography web={web} />;
+      return <EditorMenuSectionTypography web={web} dispatch={dispatch} />;
     default:
       // eslint-disable-next-line no-unused-expressions
       (activeSection: empty);
