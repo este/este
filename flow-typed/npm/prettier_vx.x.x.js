@@ -1,4 +1,4 @@
-// flow-typed signature: b0b7e4d523804b5969db5351aad63e13
+// flow-typed signature: 3adc2b5e5b85013363739999516592c6
 // flow-typed version: <<STUB>>/prettier_v^1.5.1/flow_v0.63.1
 
 /**
@@ -22,7 +22,7 @@ declare module 'prettier' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'prettier/bin/prettier' {
+declare module 'prettier/bin-prettier' {
   declare module.exports: any;
 }
 
@@ -67,8 +67,8 @@ declare module 'prettier/third-party' {
 }
 
 // Filename aliases
-declare module 'prettier/bin/prettier.js' {
-  declare module.exports: $Exports<'prettier/bin/prettier'>;
+declare module 'prettier/bin-prettier.js' {
+  declare module.exports: $Exports<'prettier/bin-prettier'>;
 }
 declare module 'prettier/index' {
   declare module.exports: $Exports<'prettier'>;

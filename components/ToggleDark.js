@@ -1,22 +1,12 @@
 // @flow
-import type { State, Dispatch } from '../types';
-import Button from './Button';
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import Button from './Button';
 
-const ToggleDark = ({ darkEnabled, dispatch }) => (
-  <Button
-    primary
-    outline
-    size={-1}
-    onPress={() => (dispatch: Dispatch)({ type: 'TOGGLE_DARK' })}
-  >
-    {darkEnabled ? 'Disable Dark' : 'Enable dark'}
+const ToggleDark = () => (
+  <Button primary outline size={-1} disabled>
+    {/* {darkEnabled ? 'Disable Dark' : 'Enable dark'} */}
+    Disable dark
   </Button>
 );
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  darkEnabled: state.app.darkEnabled,
-});
-
-export default connect(mapStateToProps)(ToggleDark);
+export default ToggleDark;

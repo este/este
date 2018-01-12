@@ -9,8 +9,8 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype'],
+  // TODO: Should be local, app.js.flow as well.
   globals: {
-    APP_NAME: true,
     APP_VERSION: true,
     DEFAULT_LOCALE: true,
     GRAPHQL_ENDPOINT: true,

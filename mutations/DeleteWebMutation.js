@@ -1,6 +1,6 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Commit } from '../types';
+import type { Commit } from './types';
 import type {
   DeleteWebMutationVariables,
   DeleteWebMutationResponse,

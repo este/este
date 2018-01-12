@@ -2,21 +2,19 @@
 import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
-import createReduxStore from '../lib/createReduxStore';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
+import type { AppError } from '../lib/appError';
 import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
-import type { Store, State } from '../types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
-import { createProvider as createReduxProvider } from 'react-redux';
-// $FlowFixMe Missing in flow-typed.
+// $FlowFixMe Wrong libdef.
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
+import LocaleContext from './LocaleContext';
+import AppErrorContext from './AppErrorContext';
 
 // import { installRelayDevTools } from 'relay-devtools';
 // installRelayDevTools();
-
-// http://blog.ploeh.dk/2011/07/28/CompositionRoot
 
 // Polyfill browser stuff.
 if (process.browser === true) {
@@ -28,19 +26,6 @@ if (process.browser === true) {
     addLocaleData(window.ReactIntlLocaleData[lang]);
   });
 }
-
-let clientReduxStore: ?Store = null;
-
-const getReduxStore = serverState => {
-  // flowlint sketchy-null:off
-  if (!process.browser) {
-    return createReduxStore(serverState);
-  }
-  // Preserve Redux state across page transitions.
-  const state = clientReduxStore ? clientReduxStore.getState() : serverState;
-  clientReduxStore = createReduxStore(state);
-  return clientReduxStore;
-};
 
 const redirectToSignIn = context => {
   const { asPath, res } = context;
@@ -91,10 +76,14 @@ type InitialAppProps = {|
   locale: string,
   messages: Object,
   records: Object,
-  serverState: State,
+  supportedLocales: Array<string>,
 |};
 
 type AppProps = NextProps & InitialAppProps;
+
+type AppState = {|
+  appError: ?AppError,
+|};
 
 type Page = React.ComponentType<
   {
@@ -122,120 +111,140 @@ const app = (
   const { query, queryVariables, requireAuth } = options || {};
   const PageWithHigherOrderComponents = injectIntl(Page);
 
-  const App = ({
-    cookie,
-    data,
-    initialNow,
-    locale,
-    messages,
-    records,
-    serverState,
-    url,
-  }: AppProps) => {
-    const token = cookie && cookie.token;
-    const environment = createRelayEnvironment(token, records);
-    const userId = cookie && cookie.userId;
-    const isAuthenticated = !!cookie;
-    const variables = queryVariables
-      ? queryVariables({
-          isAuthenticated,
-          query: url.query,
-          userId,
-        })
-      : {};
-    // createReduxProvider, because exported Provider has an obsolete check.
-    // https://github.com/reactjs/react-redux/blob/fd81f1812c2420aa72805b61f1d06754cb5bfb43/src/components/Provider.js#L13
-    const ReduxProvider = createReduxProvider();
-    const reduxStore = getReduxStore(serverState);
+  class App extends React.PureComponent<AppProps, AppState> {
+    static getInitialProps = async (context: NextContext) => {
+      const cookie = getCookie(context.req);
+      const isAuthenticated = !!cookie;
 
-    return (
-      <RelayProvider environment={environment} variables={variables}>
-        {/* $FlowFixMe Probably flow-typed bug.*/}
-        <ReduxProvider store={reduxStore}>
-          <IntlProvider
-            locale={locale}
-            messages={messages}
-            initialNow={initialNow}
-          >
-            <PageWithHigherOrderComponents
-              data={data}
-              isAuthenticated={isAuthenticated}
-              url={url}
-              userId={userId}
-            />
-          </IntlProvider>
-        </ReduxProvider>
-      </RelayProvider>
-    );
-  };
+      if (requireAuth === true && !isAuthenticated) {
+        redirectToSignIn(context);
+        // Return nothing because component will not be rendered on redirect.
+        return {};
+      }
 
-  App.getInitialProps = async (context: NextContext) => {
-    const cookie = getCookie(context.req);
-    const isAuthenticated = !!cookie;
+      let data = {};
+      let records = {};
 
-    if (requireAuth === true && !isAuthenticated) {
-      redirectToSignIn(context);
-      // Return nothing because component will not be rendered on redirect.
-      return {};
+      // Note we call fetchQuery for client page transitions as well to enable
+      // pending navigations. Finally possible with Next.js and Relay.
+      // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
+      if (query) {
+        const environment = createRelayEnvironment(cookie && cookie.token);
+        const variables = queryVariables
+          ? queryVariables({
+              isAuthenticated,
+              query: context.query,
+              userId: cookie && cookie.userId,
+            })
+          : {};
+        // It can throw "Failed to fetch" error when offline, but it should be
+        // solved with service workers I believe.
+        // It does not throw on payload errors like insufficient permissions etc.,
+        // because payload errors are not real errors. They are expected when the
+        // schema is updated and an app is not yet updated. That's why Relay
+        // generated Flow types are optional. Don't crash, just don't show data.
+        // Another mechanism should invoke app update.
+        data = await fetchQuery(environment, query, variables);
+        records = environment
+          .getStore()
+          .getSource()
+          .toJSON();
+      }
+
+      // Always update the current time on page load/transition because the
+      // <IntlProvider> will be a new instance even with pushState routing.
+      const initialNow = Date.now();
+
+      const { locale, messages, supportedLocales } =
+        context.req || window.__NEXT_DATA__.props;
+
+      return ({
+        cookie,
+        data,
+        initialNow,
+        locale,
+        messages,
+        records,
+        supportedLocales,
+      }: InitialAppProps);
+    };
+
+    state = {
+      appError: null,
+    };
+
+    componentWillUnmount() {
+      if (this.setAppErrorToNullAfterAWhileTimeoutID)
+        clearTimeout(this.setAppErrorToNullAfterAWhileTimeoutID);
     }
 
-    let data = {};
-    let records = {};
+    setAppErrorToNullAfterAWhileTimeoutID: ?TimeoutID;
 
-    // Note we call fetchQuery for client page transitions as well to enable
-    // pending navigations. Finally possible with Next.js and Relay.
-    // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
-    if (query) {
-      const environment = createRelayEnvironment(cookie && cookie.token);
+    setAppErrorToNullAfterAWhile() {
+      const fiveSecs = 5000;
+      if (this.setAppErrorToNullAfterAWhileTimeoutID)
+        clearTimeout(this.setAppErrorToNullAfterAWhileTimeoutID);
+      this.setAppErrorToNullAfterAWhileTimeoutID = setTimeout(() => {
+        this.setState({ appError: null });
+      }, fiveSecs);
+    }
+
+    dispatchAppError = (appError: AppError) => {
+      this.setAppErrorToNullAfterAWhile();
+      this.setState({ appError });
+    };
+
+    render() {
+      const {
+        cookie,
+        data,
+        initialNow,
+        locale,
+        messages,
+        records,
+        supportedLocales,
+        url,
+      } = this.props;
+
+      const token = cookie && cookie.token;
+      const environment = createRelayEnvironment(token, records);
+      const userId = cookie && cookie.userId;
+      const isAuthenticated = !!cookie;
       const variables = queryVariables
         ? queryVariables({
             isAuthenticated,
-            query: context.query,
-            userId: cookie && cookie.userId,
+            query: url.query,
+            userId,
           })
         : {};
-      // It can throw "Failed to fetch" error when offline, but it should be
-      // solved with service workers I believe.
-      // It does not throw on payload errors like insufficient permissions etc.,
-      // because payload errors are not real errors. They are expected when the
-      // schema is updated and an app is not yet updated. That's why Relay
-      // generated Flow types are optional. Don't crash, just don't show data.
-      // Another mechanism should invoke app update.
-      data = await fetchQuery(environment, query, variables);
-      records = environment
-        .getStore()
-        .getSource()
-        .toJSON();
+
+      return (
+        <IntlProvider
+          locale={locale}
+          messages={messages}
+          initialNow={initialNow}
+        >
+          <LocaleContext.Provider value={{ locale, supportedLocales }}>
+            <RelayProvider environment={environment} variables={variables}>
+              <AppErrorContext.Provider
+                value={{
+                  appError: this.state.appError,
+                  dispatchAppError: this.dispatchAppError,
+                }}
+              >
+                <PageWithHigherOrderComponents
+                  data={data}
+                  isAuthenticated={isAuthenticated}
+                  url={url}
+                  userId={userId}
+                />
+              </AppErrorContext.Provider>
+            </RelayProvider>
+          </LocaleContext.Provider>
+        </IntlProvider>
+      );
     }
-
-    // Always update the current time on page load/transition because the
-    // <IntlProvider> will be a new instance even with pushState routing.
-    const initialNow = Date.now();
-
-    const { locale, messages, supportedLocales } =
-      context.req || window.__NEXT_DATA__.props;
-
-    return ({
-      cookie,
-      data,
-      initialNow,
-      locale,
-      messages,
-      records,
-      serverState: {
-        app: {
-          baselineShown: false,
-          darkEnabled: true,
-          defaultLocale: DEFAULT_LOCALE,
-          error: null,
-          locale,
-          name: APP_NAME,
-          supportedLocales,
-          version: APP_VERSION,
-        },
-      },
-    }: InitialAppProps);
-  };
+  }
 
   return App;
 };

@@ -1,7 +1,6 @@
 // @flow
 import A from './A';
 import AppError from './AppError';
-import Baseline from './Baseline';
 import Box from './Box';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
@@ -9,11 +8,9 @@ import MainNav from './MainNav';
 import * as React from 'react';
 import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
-import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
 import ThemeProvider from './ThemeProvider';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
 
@@ -86,7 +83,15 @@ const Footer = () => (
   </Text>
 );
 
-const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
+type PageProps = {|
+  title: string,
+  isAuthenticated: boolean,
+  children?: React.Node,
+|};
+
+const Page = ({ title, isAuthenticated, children }: PageProps) => {
+  // TODO: Persist in user settings.
+  const darkEnabled = true;
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
@@ -97,29 +102,15 @@ const Page = ({ children, darkEnabled, title, isAuthenticated }) => {
         <Favicons />
       </Head>
       <PageStyle backgroundColor={pageBackgroundColor} />
-      <Baseline>
-        <LoadingBar color={theme.colors.primary} />
-        <AppError />
-        <Container>
-          <MainNav isAuthenticated={isAuthenticated} />
-          <Body>{children}</Body>
-          <Footer />
-        </Container>
-      </Baseline>
+      <LoadingBar color={theme.colors.primary} />
+      <AppError />
+      <Container>
+        <MainNav isAuthenticated={isAuthenticated} />
+        <Body>{children}</Body>
+        <Footer />
+      </Container>
     </ThemeProvider>
   );
 };
 
-type OwnProps = {|
-  children?: React.Node,
-  isAuthenticated: boolean,
-  title: string,
-|};
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  darkEnabled: state.app.darkEnabled,
-});
-
-const connector: Connector<OwnProps, *> = connect(mapStateToProps);
-
-export default connector(Page);
+export default Page;

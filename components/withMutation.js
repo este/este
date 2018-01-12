@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
-import type { Commit, Store } from '../types';
+import type { Commit } from '../mutations/types';
 import PropTypes from 'prop-types';
 import { mutationErrorToAppError } from '../lib/appError';
 import type { Disposable, Environment } from 'react-relay';
+import AppErrorContext from './AppErrorContext';
 
-// TODO: Try https://github.com/facebook/flow/issues/5382#issuecomment-354512813
+// TODO: Use create-react-context.
 
 // https://github.com/facebook/relay/issues/2077
 export const getClientMutationId = () => Date.now().toString(36);
@@ -27,8 +28,14 @@ const withMutation = <Props: {}>(
   class WithMutation extends React.Component<Props> {
     static contextTypes = {
       relay: PropTypes.object,
-      store: PropTypes.object,
     };
+
+    static handleError(error, onError, dispatchAppError) {
+      const handled = onError(error);
+      if (handled === true) return;
+      const appError = mutationErrorToAppError(error);
+      dispatchAppError(appError);
+    }
 
     componentDidMount() {
       this._isMounted = true;
@@ -45,19 +52,11 @@ const withMutation = <Props: {}>(
 
     context: {
       relay: { environment: Environment },
-      store: Store,
     };
-
-    handleError(error, onError) {
-      const handled = onError(error);
-      if (handled === true) return;
-      const appError = mutationErrorToAppError(error);
-      this.context.store.dispatch(appError);
-    }
 
     // We can't reuse Mutate type here.
     // https://twitter.com/calebmer/status/906561429129502720
-    mutate = <Variables, Response>(
+    mutate = (dispatchAppError: *) => <Variables, Response>(
       commit: Commit<Variables, Response>,
       variables: Variables,
       onCompleted: OnCompleted<Response>,
@@ -69,19 +68,25 @@ const withMutation = <Props: {}>(
         (response, payloadError) => {
           if (!this._isMounted) return;
           if (payloadError) {
-            this.handleError(payloadError, onError);
+            WithMutation.handleError(payloadError, onError, dispatchAppError);
             return;
           }
           onCompleted(response);
         },
         error => {
           if (!this._isMounted) return;
-          this.handleError(error, onError);
+          WithMutation.handleError(error, onError, dispatchAppError);
         },
       );
 
     render() {
-      return <Component {...this.props} mutate={this.mutate} />;
+      return (
+        <AppErrorContext.Consumer>
+          {({ dispatchAppError }) => (
+            <Component {...this.props} mutate={this.mutate(dispatchAppError)} />
+          )}
+        </AppErrorContext.Consumer>
+      );
     }
   };
 

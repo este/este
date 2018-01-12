@@ -1,13 +1,11 @@
 // @flow
 import * as React from 'react';
-import type { State } from '../types';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
-import { type AppError as AppErrorType } from '../lib/appError';
+import AppErrorContext from './AppErrorContext';
 
-const getAppErrorMessage = error => {
-  switch (error.name) {
+const getAppErrorMessage = appError => {
+  switch (appError.name) {
     case 'failedToFetch':
       return (
         <FormattedMessage
@@ -32,74 +30,38 @@ const getAppErrorMessage = error => {
     default:
       // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
-      (error: empty);
+      (appError: empty);
       return null;
   }
 };
 
-type AppErrorProps = {
-  appError: ?AppErrorType,
-};
-
-type AppErrorState = {
-  shown: boolean,
-};
-
-class AppError extends React.Component<AppErrorProps, AppErrorState> {
-  state = {
-    shown: false,
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.appError !== this.props.appError) {
-      this.flashError();
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.shownTimeoutID) clearTimeout(this.shownTimeoutID);
-  }
-
-  flashError() {
-    this.setState({ shown: true });
-    if (this.shownTimeoutID) clearTimeout(this.shownTimeoutID);
-    const timeToHide = 5000;
-    this.shownTimeoutID = setTimeout(() => {
-      this.setState({ shown: false });
-    }, timeToHide);
-  }
-
-  shownTimeoutID: ?TimeoutID;
-
+class AppError extends React.Component<{}> {
   render() {
-    const { appError } = this.props;
-    if (!appError || !this.state.shown) return null;
-    const message = getAppErrorMessage(appError);
     return (
-      <Text
-        backgroundColor="warning"
-        bold
-        color="white"
-        display="inline"
-        left="50%"
-        margin="auto"
-        paddingHorizontal={1}
-        paddingVertical={0.25}
-        style={{
-          position: 'fixed',
-          transform: 'translateX(-50%)',
+      <AppErrorContext.Consumer>
+        {({ appError }) => {
+          if (!appError) return null;
+          return (
+            <Text
+              backgroundColor="warning"
+              bold
+              color="white"
+              display="inline"
+              left="50%"
+              margin="auto"
+              paddingHorizontal={1}
+              paddingVertical={0.25}
+              style={{ position: 'fixed', transform: 'translateX(-50%)' }}
+              top={0}
+              zIndex={1}
+            >
+              {getAppErrorMessage(appError)}
+            </Text>
+          );
         }}
-        top={0}
-        zIndex={1}
-      >
-        {message}
-      </Text>
+      </AppErrorContext.Consumer>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  appError: state.app.error,
-});
-
-export default connect(mapStateToProps)(AppError);
+export default AppError;
