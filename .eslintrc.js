@@ -9,7 +9,6 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype'],
-  // TODO: Should be local, app.js.flow as well.
   globals: {
     APP_VERSION: true,
     DEFAULT_LOCALE: true,
@@ -18,7 +17,6 @@ module.exports = {
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
     window: true,
-    HTMLElement: true,
   },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {

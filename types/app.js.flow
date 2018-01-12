@@ -1,7 +1,5 @@
 /* @flow */
 
-// TODO: Remove this file. Move globals somewhere.
-
 // env-config
 declare var APP_VERSION: string;
 declare var DEFAULT_LOCALE: string;

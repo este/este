@@ -57,6 +57,7 @@ export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
   getFocusable(): ?Element {
     // eslint-disable-next-line react/no-find-dom-node
     const element = ReactDOM.findDOMNode(this);
+    // eslint-disable-next-line no-undef
     if (!(element instanceof HTMLElement)) return null;
     const tabIndex = element.getAttribute('tabindex');
     if (tabIndex === '-1' || tabIndex === '0') return element;
@@ -130,6 +131,7 @@ export class Provider extends React.Component<ProviderProps> {
   getFocusables(): Array<Element> {
     // eslint-disable-next-line react/no-find-dom-node
     const element = ReactDOM.findDOMNode(this);
+    // eslint-disable-next-line no-undef
     if (element instanceof HTMLElement) {
       return Array.from(element.querySelectorAll(Consumer.selector));
     }
