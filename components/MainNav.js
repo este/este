@@ -4,7 +4,7 @@ import A from './A';
 import Box from './Box';
 import { titles } from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';
-import IsAuthenticatedContext from '../components/IsAuthenticatedContext';
+import IsAuthenticatedContext from './IsAuthenticatedContext';
 
 const MainNavA = ({ href, title }) => (
   <A

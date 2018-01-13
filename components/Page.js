@@ -6,7 +6,7 @@ import Head from 'next/head';
 import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
 import * as React from 'react';
-import SwitchLocale from '../components/SwitchLocale';
+import SwitchLocale from './SwitchLocale';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import ThemeProvider from './ThemeProvider';

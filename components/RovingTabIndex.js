@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 // For initial focus, set tabIndex 0. It can be set via autoFocus as well.
 // Provider/Consumer API inspired by new React context proposal.
+// TODO: Refactor to create-react-context
 
 // http://adrianroselli.com/2014/11/dont-use-tabindex-greater-than-0.html
 type TabIndex = -1 | 0;
