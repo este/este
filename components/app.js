@@ -11,7 +11,7 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 import LocaleContext from './LocaleContext';
-import AppErrorContext from './AppErrorContext';
+import { AppErrorProvider } from './AppError';
 import IsAuthenticatedContext from './IsAuthenticatedContext';
 
 // import { installRelayDevTools } from 'relay-devtools';
@@ -225,7 +225,7 @@ const app = (
         >
           <LocaleContext.Provider value={{ locale, supportedLocales }}>
             <RelayProvider environment={environment} variables={variables}>
-              <AppErrorContext.Provider
+              <AppErrorProvider
                 value={{
                   appError: this.state.appError,
                   dispatchAppError: this.dispatchAppError,
@@ -236,7 +236,7 @@ const app = (
                 >
                   <PageWithHigherOrderComponents data={data} url={url} />
                 </IsAuthenticatedContext.Provider>
-              </AppErrorContext.Provider>
+              </AppErrorProvider>
             </RelayProvider>
           </LocaleContext.Provider>
         </IntlProvider>

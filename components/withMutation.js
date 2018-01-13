@@ -4,7 +4,7 @@ import type { Commit } from '../mutations/types';
 import PropTypes from 'prop-types';
 import { mutationErrorToAppError } from '../lib/appError';
 import type { Disposable, Environment } from 'react-relay';
-import AppErrorContext from './AppErrorContext';
+import { AppErrorConsumer } from './AppError';
 
 // TODO: Use create-react-context.
 
@@ -81,11 +81,11 @@ const withMutation = <Props: {}>(
 
     render() {
       return (
-        <AppErrorContext.Consumer>
+        <AppErrorConsumer>
           {({ dispatchAppError }) => (
             <Component {...this.props} mutate={this.mutate(dispatchAppError)} />
           )}
-        </AppErrorContext.Consumer>
+        </AppErrorConsumer>
       );
     }
   };
