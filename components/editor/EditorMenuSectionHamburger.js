@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { EditorMenuSection, EditorMenuA } from './EditorMenu';
+import EditorMenuSection from './EditorMenuSection';
+import EditorMenuA from './EditorMenuA';
 import { ManageYourWebsMessage } from '../../pages';
 
 class EditorMenuSectionHamburger extends React.PureComponent<{}> {

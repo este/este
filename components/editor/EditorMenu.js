@@ -8,15 +8,6 @@ import ReactDOM from 'react-dom';
 import { RovingTabIndexProvider } from '../RovingTabIndex';
 import EditorMenuActiveSection from './EditorMenuActiveSection';
 
-// TODO: Zrusit
-export { default as EditorMenuButton } from './EditorMenuButton';
-export { default as EditorMenuInput } from './EditorMenuInput';
-export { default as EditorMenuInputs } from './EditorMenuInputs';
-export { default as EditorMenuA } from './EditorMenuA';
-export { default as EditorMenuSection } from './EditorMenuSection';
-export { default as EditorMenuText } from './EditorMenuText';
-export { default as EditorMenuSeparator } from './EditorMenuSeparator';
-
 export type SectionName =
   | 'hamburger'
   | 'web'

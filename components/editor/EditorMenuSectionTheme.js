@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { EditorMenuSection, EditorMenuButton } from './EditorMenu';
+import EditorMenuSection from './EditorMenuSection';
+import EditorMenuButton from './EditorMenuButton';
 
 class EditorMenuSectionTheme extends React.PureComponent<{}> {
   render() {

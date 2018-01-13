@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box from '../Box';
-import { EditorMenuText } from './EditorMenu';
+import EditorMenuText from './EditorMenuText';
 import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
 import RovingTabIndex from '../RovingTabIndex';

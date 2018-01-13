@@ -1,10 +1,8 @@
 // @flow
 import * as React from 'react';
-import {
-  EditorMenuSection,
-  EditorMenuButton,
-  EditorMenuInputs,
-} from './EditorMenu';
+import EditorMenuSection from './EditorMenuSection';
+import EditorMenuButton from './EditorMenuButton';
+import EditorMenuInputs from './EditorMenuInputs';
 import type { Web, Typography, EditorDispatch } from './Editor';
 import { validateSchema } from './jsonSchema';
 

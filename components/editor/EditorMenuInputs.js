@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { EditorMenuInput } from './EditorMenu';
+import EditorMenuInput from './EditorMenuInput';
 
 type EditorMenuInputsProps<O> = {|
   schema: Object,
