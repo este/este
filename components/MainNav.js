@@ -4,10 +4,7 @@ import A from './A';
 import Box from './Box';
 import { titles } from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';
-
-type MainNavProps = {|
-  isAuthenticated: boolean,
-|};
+import IsAuthenticatedContext from '../components/IsAuthenticatedContext';
 
 const MainNavA = ({ href, title }) => (
   <A
@@ -23,7 +20,7 @@ const MainNavA = ({ href, title }) => (
   </A>
 );
 
-const MainNav = ({ isAuthenticated }: MainNavProps) => (
+const MainNav = () => (
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -32,11 +29,15 @@ const MainNav = ({ isAuthenticated }: MainNavProps) => (
     paddingHorizontal={0.5}
   >
     <MainNavA href={{ pathname: '/' }} title={titles.index} />
-    {isAuthenticated ? (
-      <MainNavA href={{ pathname: '/me' }} title={titles.me} />
-    ) : (
-      <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
-    )}
+    <IsAuthenticatedContext.Consumer>
+      {({ isAuthenticated }) =>
+        isAuthenticated ? (
+          <MainNavA href={{ pathname: '/me' }} title={titles.me} />
+        ) : (
+          <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
+        )
+      }
+    </IsAuthenticatedContext.Consumer>
   </Box>
 );
 

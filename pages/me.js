@@ -33,14 +33,11 @@ const signOut = () => {
   window.location.href = '/';
 };
 
-const Me = ({ data, intl, isAuthenticated }) => {
+const Me = ({ data, intl }) => {
   const { viewer }: mePageQueryResponse = data;
   const email = viewer.user && viewer.user.email;
   return (
-    <Page
-      title={intl.formatMessage(titles.me)}
-      isAuthenticated={isAuthenticated}
-    >
+    <Page title={intl.formatMessage(titles.me)}>
       {email != null && (
         <Box>
           <Image

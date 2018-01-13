@@ -85,11 +85,10 @@ const Footer = () => (
 
 type PageProps = {|
   title: string,
-  isAuthenticated: boolean,
   children?: React.Node,
 |};
 
-const Page = ({ title, isAuthenticated, children }: PageProps) => {
+const Page = ({ title, children }: PageProps) => {
   // TODO: Persist in user settings.
   const darkEnabled = true;
   const theme = darkEnabled ? browserThemeDark : browserTheme;
@@ -105,7 +104,7 @@ const Page = ({ title, isAuthenticated, children }: PageProps) => {
       <LoadingBar color={theme.colors.primary} />
       <AppError />
       <Container>
-        <MainNav isAuthenticated={isAuthenticated} />
+        <MainNav />
         <Body>{children}</Body>
         <Footer />
       </Container>

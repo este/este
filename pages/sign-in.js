@@ -5,11 +5,8 @@ import Page from '../components/Page';
 import app from '../components/app';
 import { titles } from '../lib/sitemap';
 
-const SignIn = ({ intl, isAuthenticated, url }) => (
-  <Page
-    title={intl.formatMessage(titles.signIn)}
-    isAuthenticated={isAuthenticated}
-  >
+const SignIn = ({ intl, url }) => (
+  <Page title={intl.formatMessage(titles.signIn)}>
     <Auth intl={intl} redirectUrl={url.query.redirectUrl} />
   </Page>
 );

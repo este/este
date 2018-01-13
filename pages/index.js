@@ -13,6 +13,7 @@ import CreateWeb from '../components/CreateWeb';
 import WebList from '../components/WebList';
 import { graphql } from 'react-relay';
 import { type pagesQueryResponse } from './__generated__/pagesQuery.graphql';
+import IsAuthenticatedContext from '../components/IsAuthenticatedContext';
 
 const NotAuthenticated = () => (
   <Box>
@@ -43,25 +44,26 @@ const Authenticated = ({ viewer, userId }) => (
     <Heading size={1}>
       <ManageYourWebsMessage />
     </Heading>
-    {/* $FlowFixMe viewer is {||} but {} is required. Probably typedef bug. */}
+    {/* $FlowFixMe viewer is {||} but {} is required. Probably libdef bug. */}
     <WebList viewer={viewer} userId={userId} />
     <CreateWeb userId={userId} />
   </Box>
 );
 
-const Index = ({ data, intl, isAuthenticated, userId }) => {
+const Index = ({ data, intl }) => {
   const { viewer }: pagesQueryResponse = data;
   return (
-    <Page
-      title={intl.formatMessage(titles.index)}
-      isAuthenticated={isAuthenticated}
-    >
+    <Page title={intl.formatMessage(titles.index)}>
       <Heading size={3}>Este</Heading>
-      {isAuthenticated && userId != null ? (
-        <Authenticated viewer={viewer} userId={userId} />
-      ) : (
-        <NotAuthenticated />
-      )}
+      <IsAuthenticatedContext.Consumer>
+        {({ userId }) =>
+          userId != null ? (
+            <Authenticated viewer={viewer} userId={userId} />
+          ) : (
+            <NotAuthenticated />
+          )
+        }
+      </IsAuthenticatedContext.Consumer>
     </Page>
   );
 };
