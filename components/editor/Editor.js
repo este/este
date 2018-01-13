@@ -6,10 +6,10 @@ import AppError from '../AppError';
 import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
-import PropTypes from 'prop-types';
 import draftCss from './draftCss';
 import logReducer from '../../lib/logReducer';
 import * as R from 'ramda';
+import { EditorDispatchProvider } from './EditorDispatch';
 // import XRay from 'react-x-ray';
 
 type EditorProps = {|
@@ -86,10 +86,6 @@ export type EditorDispatch = (
 export const activeElementProp = 'data-active-element';
 
 class Editor extends React.PureComponent<EditorProps, EditorState> {
-  static childContextTypes = {
-    dispatch: PropTypes.func,
-  };
-
   // [1] to [1]
   // [0, 2] to [0, 'props', 'children', 2]
   static childrenPath = (path: Path) => {
@@ -170,17 +166,13 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     2 * lineHeight + 6 * lineHeight * menuPadding;
 
   state = {
-    activePath: [], // Maybe consider using context for that.
+    activePath: [],
     activeSection: 'web',
     menuHeight: Editor.initialMenuHeight(
       browserThemeDark.typography.lineHeight,
     ),
     web: webFixture,
   };
-
-  getChildContext() {
-    return { dispatch: this.dispatch };
-  }
 
   dispatch: EditorDispatch = (action, callback) => {
     this.setState(
@@ -214,31 +206,33 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     const pageName = 'index';
 
     return (
-      <ThemeProvider theme={browserThemeDark}>
-        <style jsx global>
-          {draftCss}
-        </style>
-        {/* <XRay
-          grid={web.theme.typography.fontSize * web.theme.typography.lineHeight}
-        > */}
-        <AppError />
-        <EditorPage
-          activePath={activePath}
-          paddingBottomPx={this.state.menuHeight}
-          pageName={pageName}
-          web={web}
-          webName={webName}
-        />
-        <EditorMenu
-          activePath={activePath}
-          activeSection={activeSection}
-          onHeightChange={this.handleEditorMenuHeightChange}
-          pageName={pageName}
-          web={web}
-          webName={webName}
-        />
-        {/* </XRay> */}
-      </ThemeProvider>
+      <EditorDispatchProvider value={this.dispatch}>
+        <ThemeProvider theme={browserThemeDark}>
+          <style jsx global>
+            {draftCss}
+          </style>
+          {/* <XRay
+                grid={web.theme.typography.fontSize * web.theme.typography.lineHeight}
+              > */}
+          <AppError />
+          <EditorPage
+            activePath={activePath}
+            paddingBottomPx={this.state.menuHeight}
+            pageName={pageName}
+            web={web}
+            webName={webName}
+          />
+          <EditorMenu
+            activePath={activePath}
+            activeSection={activeSection}
+            onHeightChange={this.handleEditorMenuHeightChange}
+            pageName={pageName}
+            web={web}
+            webName={webName}
+          />
+          {/* </XRay> */}
+        </ThemeProvider>
+      </EditorDispatchProvider>
     );
   }
 }

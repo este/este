@@ -1,22 +1,13 @@
 // @flow
-import * as React from 'react';
-import * as Editor from './Editor';
-import PropTypes from 'prop-types';
+import createReactContext, { type Context } from 'create-react-context';
+import type { EditorDispatch } from './Editor';
 
-type Props = {
-  children: (dispatch: Editor.EditorDispatch) => React.Node,
-};
+type Value = EditorDispatch;
 
-class EditorDispatch extends React.PureComponent<Props> {
-  static contextTypes = { dispatch: PropTypes.func };
+const value = () => {};
 
-  context: {
-    dispatch: Editor.EditorDispatch,
-  };
+const EditorDispatchContext: Context<Value> = createReactContext(value);
 
-  render() {
-    return this.props.children(this.context.dispatch);
-  }
-}
+export const EditorDispatchProvider = EditorDispatchContext.Provider;
 
-export default EditorDispatch;
+export default EditorDispatchContext.Consumer;
