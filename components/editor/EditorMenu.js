@@ -1,21 +1,14 @@
 // @flow
 import * as React from 'react';
-import * as Editor from './Editor';
+import type { Path, Web } from './Editor';
 import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
 import { RovingTabIndexProvider } from '../RovingTabIndex';
-import EditorDispatch from './EditorDispatch';
+import EditorMenuActiveSection from './EditorMenuActiveSection';
 
-import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
-import EditorMenuSectionWeb from './EditorMenuSectionWeb';
-import EditorMenuSectionPage from './EditorMenuSectionPage';
-import EditorMenuSectionElement from './EditorMenuSectionElement';
-import EditorMenuSectionTheme from './EditorMenuSectionTheme';
-import EditorMenuSectionTypography from './EditorMenuSectionTypography';
-import EditorMenuSectionAdd from './EditorMenuSectionAdd';
-
+// TODO: Zrusit
 export { default as EditorMenuButton } from './EditorMenuButton';
 export { default as EditorMenuInput } from './EditorMenuInput';
 export { default as EditorMenuInputs } from './EditorMenuInputs';
@@ -23,6 +16,15 @@ export { default as EditorMenuA } from './EditorMenuA';
 export { default as EditorMenuSection } from './EditorMenuSection';
 export { default as EditorMenuText } from './EditorMenuText';
 export { default as EditorMenuSeparator } from './EditorMenuSeparator';
+
+export type SectionName =
+  | 'hamburger'
+  | 'web'
+  | 'page'
+  | 'element'
+  | 'theme'
+  | 'typography'
+  | 'add';
 
 // It's used at multiple places because of fixBrowserFontSmoothing.
 export const backgroundColor = 'black';
@@ -34,59 +36,12 @@ export const editorMenuItemProps = {
   marginVertical: menuPadding,
 };
 
-export type SectionName =
-  | 'hamburger'
-  | 'web'
-  | 'page'
-  | 'element'
-  | 'theme'
-  | 'typography'
-  | 'add';
-
-type ActiveSectionProps = {
-  activeSection: SectionName,
-  activePath: Editor.Path,
-  web: Editor.Web,
-  dispatch: Editor.EditorDispatch,
-};
-
-// I tried sections object with $Keys, but it wasn't type safe. Explicit ftw.
-const ActiveSection = ({
-  activeSection,
-  activePath,
-  web,
-  dispatch,
-}: ActiveSectionProps) => {
-  switch (activeSection) {
-    case 'hamburger':
-      return <EditorMenuSectionHamburger />;
-    case 'web':
-      return <EditorMenuSectionWeb />;
-    case 'page':
-      return <EditorMenuSectionPage />;
-    case 'element':
-      return (
-        <EditorMenuSectionElement activePath={activePath} dispatch={dispatch} />
-      );
-    case 'theme':
-      return <EditorMenuSectionTheme />;
-    case 'typography':
-      return <EditorMenuSectionTypography web={web} dispatch={dispatch} />;
-    case 'add':
-      return <EditorMenuSectionAdd activePath={activePath} />;
-    default:
-      // eslint-disable-next-line no-unused-expressions
-      (activeSection: empty);
-      return null;
-  }
-};
-
 type EditorMenuProps = {|
-  activePath: Editor.Path,
+  activePath: Path,
   activeSection: SectionName,
   onHeightChange: (menu: HTMLElement) => void,
   pageName: string,
-  web: Editor.Web,
+  web: Web,
   webName: string,
 |};
 
@@ -137,16 +92,11 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
             web={web}
             webName={webName}
           />
-          <EditorDispatch>
-            {dispatch => (
-              <ActiveSection
-                activeSection={activeSection}
-                web={web}
-                activePath={activePath}
-                dispatch={dispatch}
-              />
-            )}
-          </EditorDispatch>
+          <EditorMenuActiveSection
+            activeSection={activeSection}
+            web={web}
+            activePath={activePath}
+          />
         </Box>
       </RovingTabIndexProvider>
     );
