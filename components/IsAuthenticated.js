@@ -13,4 +13,6 @@ const value = {
 
 const IsAuthenticatedContext: Context<Value> = createReactContext(value);
 
-export default IsAuthenticatedContext;
+export const IsAuthenticatedProvider = IsAuthenticatedContext.Provider;
+
+export default IsAuthenticatedContext.Consumer;

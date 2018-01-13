@@ -13,7 +13,7 @@ import CreateWeb from '../components/CreateWeb';
 import WebList from '../components/WebList';
 import { graphql } from 'react-relay';
 import { type pagesQueryResponse } from './__generated__/pagesQuery.graphql';
-import IsAuthenticatedContext from '../components/IsAuthenticatedContext';
+import IsAuthenticated from '../components/IsAuthenticated';
 
 const NotAuthenticated = () => (
   <Box>
@@ -55,7 +55,7 @@ const Index = ({ data, intl }) => {
   return (
     <Page title={intl.formatMessage(titles.index)}>
       <Heading size={3}>Este</Heading>
-      <IsAuthenticatedContext.Consumer>
+      <IsAuthenticated>
         {({ userId }) =>
           userId != null ? (
             <Authenticated viewer={viewer} userId={userId} />
@@ -63,7 +63,7 @@ const Index = ({ data, intl }) => {
             <NotAuthenticated />
           )
         }
-      </IsAuthenticatedContext.Consumer>
+      </IsAuthenticated>
     </Page>
   );
 };

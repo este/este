@@ -12,7 +12,7 @@ import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 import { LocaleProvider } from './Locale';
 import { AppErrorProvider } from './AppError';
-import IsAuthenticatedContext from './IsAuthenticatedContext';
+import { IsAuthenticatedProvider } from './IsAuthenticated';
 
 // import { installRelayDevTools } from 'relay-devtools';
 // installRelayDevTools();
@@ -231,11 +231,9 @@ const app = (
                   dispatchAppError: this.dispatchAppError,
                 }}
               >
-                <IsAuthenticatedContext.Provider
-                  value={{ isAuthenticated, userId }}
-                >
+                <IsAuthenticatedProvider value={{ isAuthenticated, userId }}>
                   <PageWithHigherOrderComponents data={data} url={url} />
-                </IsAuthenticatedContext.Provider>
+                </IsAuthenticatedProvider>
               </AppErrorProvider>
             </RelayProvider>
           </LocaleProvider>

@@ -4,7 +4,7 @@ import A from './A';
 import Box from './Box';
 import { titles } from '../lib/sitemap';
 import { FormattedMessage } from 'react-intl';
-import IsAuthenticatedContext from './IsAuthenticatedContext';
+import IsAuthenticated from './IsAuthenticated';
 
 const MainNavA = ({ href, title }) => (
   <A
@@ -29,7 +29,7 @@ const MainNav = () => (
     paddingHorizontal={0.5}
   >
     <MainNavA href={{ pathname: '/' }} title={titles.index} />
-    <IsAuthenticatedContext.Consumer>
+    <IsAuthenticated>
       {({ isAuthenticated }) =>
         isAuthenticated ? (
           <MainNavA href={{ pathname: '/me' }} title={titles.me} />
@@ -37,7 +37,7 @@ const MainNav = () => (
           <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
         )
       }
-    </IsAuthenticatedContext.Consumer>
+    </IsAuthenticated>
   </Box>
 );
 
