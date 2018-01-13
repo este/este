@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Text from './Text';
-import LocaleContext from './LocaleContext';
+import Locale from './Locale';
 
 class SwitchLocale extends React.PureComponent<{}> {
   static getLocaleHref = (pathname: string, locale: string) => {
@@ -22,8 +22,8 @@ class SwitchLocale extends React.PureComponent<{}> {
 
   render() {
     return (
-      <LocaleContext.Consumer>
-        {({ supportedLocales, locale }) => (
+      <Locale>
+        {({ locale, supportedLocales }) => (
           <Text>
             {supportedLocales
               .filter(supportedLocale => supportedLocale !== locale)
@@ -44,7 +44,7 @@ class SwitchLocale extends React.PureComponent<{}> {
               ))}
           </Text>
         )}
-      </LocaleContext.Consumer>
+      </Locale>
     );
   }
 }

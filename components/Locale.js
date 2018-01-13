@@ -13,4 +13,6 @@ const value = {
 
 const LocaleContext: Context<Value> = createReactContext(value);
 
-export default LocaleContext;
+export const LocaleProvider = LocaleContext.Provider;
+
+export default LocaleContext.Consumer;

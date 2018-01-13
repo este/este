@@ -10,7 +10,7 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 // $FlowFixMe Wrong libdef.
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
-import LocaleContext from './LocaleContext';
+import { LocaleProvider } from './Locale';
 import { AppErrorProvider } from './AppError';
 import IsAuthenticatedContext from './IsAuthenticatedContext';
 
@@ -223,7 +223,7 @@ const app = (
           messages={messages}
           initialNow={initialNow}
         >
-          <LocaleContext.Provider value={{ locale, supportedLocales }}>
+          <LocaleProvider value={{ locale, supportedLocales }}>
             <RelayProvider environment={environment} variables={variables}>
               <AppErrorProvider
                 value={{
@@ -238,7 +238,7 @@ const app = (
                 </IsAuthenticatedContext.Provider>
               </AppErrorProvider>
             </RelayProvider>
-          </LocaleContext.Provider>
+          </LocaleProvider>
         </IntlProvider>
       );
     }

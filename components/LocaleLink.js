@@ -3,7 +3,7 @@ import * as React from 'react';
 import NextLink from 'next/link';
 import { maybeMapLinkHref, type Href } from '../lib/sitemap';
 import { format } from 'url';
-import LocaleContext from './LocaleContext';
+import Locale from './Locale';
 
 // Link with current locale in query.
 // This component is used by A and Link, no need to use it directly.
@@ -45,7 +45,7 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
     const { children, prefetch, replace } = this.props;
 
     return (
-      <LocaleContext.Consumer>
+      <Locale>
         {({ locale }) => {
           const [as, href] = this.getAsAndHref(locale);
           return (
@@ -63,7 +63,7 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
             </NextLink>
           );
         }}
-      </LocaleContext.Consumer>
+      </Locale>
     );
   }
 }
