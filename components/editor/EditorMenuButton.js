@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from '../Button';
 import { editorMenuItemProps, type SectionName } from './EditorMenu';
 import type { Path } from './Editor';
 import EditorDispatch from './EditorDispatch';
-import * as RovingTabIndex from '../RovingTabIndex';
+import RovingTabIndex from '../RovingTabIndex';
 
 type EditorMenuButtonProps = {
   active?: boolean,
@@ -17,11 +17,11 @@ type EditorMenuButtonProps = {
 const DispatchWithRovingTabIndex = ({ children }) => (
   <EditorDispatch>
     {dispatch => (
-      <RovingTabIndex.Consumer>
+      <RovingTabIndex>
         {(tabIndex, onFocus, onKeyDown) =>
           children(dispatch, tabIndex, onFocus, onKeyDown)
         }
-      </RovingTabIndex.Consumer>
+      </RovingTabIndex>
     )}
   </EditorDispatch>
 );

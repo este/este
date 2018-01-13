@@ -5,7 +5,7 @@ import Box from '../Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import * as RovingTabIndex from '../RovingTabIndex';
+import { RovingTabIndexProvider } from '../RovingTabIndex';
 import EditorDispatch from './EditorDispatch';
 
 import EditorMenuSectionHamburger from './EditorMenuSectionHamburger';
@@ -120,7 +120,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
     const { activePath, activeSection, pageName, web, webName } = this.props;
 
     return (
-      <RovingTabIndex.Provider>
+      <RovingTabIndexProvider>
         <Box
           backgroundColor={backgroundColor}
           bottom={0}
@@ -148,7 +148,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps> {
             )}
           </EditorDispatch>
         </Box>
-      </RovingTabIndex.Provider>
+      </RovingTabIndexProvider>
     );
   }
 }

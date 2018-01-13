@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import A, { type AProps } from '../A';
-import * as RovingTabIndex from '../RovingTabIndex';
+import RovingTabIndex from '../RovingTabIndex';
 import { editorMenuItemProps } from './EditorMenu';
 
 class EditorMenuA extends React.PureComponent<AProps> {
   render() {
     return (
-      <RovingTabIndex.Consumer>
+      <RovingTabIndex>
         {(tabIndex, onFocus, onKeyDown) => (
           <A
             {...editorMenuItemProps}
@@ -17,7 +17,7 @@ class EditorMenuA extends React.PureComponent<AProps> {
             {...this.props}
           />
         )}
-      </RovingTabIndex.Consumer>
+      </RovingTabIndex>
     );
   }
 }

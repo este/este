@@ -6,13 +6,12 @@ import PropTypes from 'prop-types';
 // Roving tabindex.
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 // For initial focus, set tabIndex 0. It can be set via autoFocus as well.
-// Provider/Consumer API inspired by new React context proposal.
 // TODO: Refactor to create-react-context
 
 // http://adrianroselli.com/2014/11/dont-use-tabindex-greater-than-0.html
 type TabIndex = -1 | 0;
 
-type ConsumerProps = {|
+type RovingTabIndexProps = {|
   onFocus?: (focusToEnd: boolean) => void,
   children: (
     tabIndex: TabIndex,
@@ -22,7 +21,7 @@ type ConsumerProps = {|
   ) => React.Node,
 |};
 
-type ConsumerState = {|
+type RovingTabIndexState = {|
   tabIndex: TabIndex,
 |};
 
@@ -30,7 +29,10 @@ const contextTypes = {
   esteRovingTabIndex: PropTypes.object,
 };
 
-export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
+class RovingTabIndex extends React.Component<
+  RovingTabIndexProps,
+  RovingTabIndexState,
+> {
   static contextTypes = contextTypes;
 
   static selector = '[tabindex="-1"], [tabindex="0"]';
@@ -62,7 +64,7 @@ export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
     if (!(element instanceof HTMLElement)) return null;
     const tabIndex = element.getAttribute('tabindex');
     if (tabIndex === '-1' || tabIndex === '0') return element;
-    return element.querySelector(Consumer.selector);
+    return element.querySelector(RovingTabIndex.selector);
   }
 
   focus(focusToEnd: boolean) {
@@ -87,16 +89,21 @@ export class Consumer extends React.Component<ConsumerProps, ConsumerState> {
   }
 }
 
-type ConsumerHandler = Consumer => void;
+export default RovingTabIndex;
 
-type ConsumerWithKeyboardEventHandler = (Consumer, KeyboardEvent) => void;
+type RovingTabIndexHandler = RovingTabIndex => void;
+
+type RovingTabIndexWithKeyboardEventHandler = (
+  RovingTabIndex,
+  KeyboardEvent,
+) => void;
 
 type Context = {|
   esteRovingTabIndex: {|
-    onMount: ConsumerHandler,
-    onUnmount: ConsumerHandler,
-    onFocus: ConsumerHandler,
-    onKeyDown: ConsumerWithKeyboardEventHandler,
+    onMount: RovingTabIndexHandler,
+    onUnmount: RovingTabIndexHandler,
+    onFocus: RovingTabIndexHandler,
+    onKeyDown: RovingTabIndexWithKeyboardEventHandler,
   |},
 |};
 
@@ -110,11 +117,13 @@ export const getDirection = (key: string): ?Direction =>
     ArrowDown: 'down',
   }[key] || null);
 
-type ProviderProps = {|
+type RovingTabIndexProviderProps = {|
   children?: React.Node,
 |};
 
-export class Provider extends React.Component<ProviderProps> {
+export class RovingTabIndexProvider extends React.Component<
+  RovingTabIndexProviderProps,
+> {
   static childContextTypes = contextTypes;
 
   getChildContext() {
@@ -134,16 +143,16 @@ export class Provider extends React.Component<ProviderProps> {
     const element = ReactDOM.findDOMNode(this);
     // eslint-disable-next-line no-undef
     if (element instanceof HTMLElement) {
-      return Array.from(element.querySelectorAll(Consumer.selector));
+      return Array.from(element.querySelectorAll(RovingTabIndex.selector));
     }
     return [];
   }
 
-  handleMount: ConsumerHandler = consumer => {
+  handleMount: RovingTabIndexHandler = consumer => {
     this.consumers.push(consumer);
   };
 
-  handleUnmount: ConsumerHandler = consumer => {
+  handleUnmount: RovingTabIndexHandler = consumer => {
     const index = this.consumers.indexOf(consumer);
     if (index !== -1) this.consumers.splice(index, 1);
 
@@ -153,7 +162,7 @@ export class Provider extends React.Component<ProviderProps> {
     }
   };
 
-  handleFocus: ConsumerHandler = consumer => {
+  handleFocus: RovingTabIndexHandler = consumer => {
     if (this.consumer) {
       this.consumer.setState({ tabIndex: -1 });
     }
@@ -235,15 +244,15 @@ export class Provider extends React.Component<ProviderProps> {
     }
   }
 
-  handleKeyDown: ConsumerWithKeyboardEventHandler = (consumer, event) => {
+  handleKeyDown: RovingTabIndexWithKeyboardEventHandler = (consumer, event) => {
     const direction = getDirection(event.key);
     if (direction == null) return;
     this.move(direction);
   };
 
-  consumer: ?Consumer = null;
+  consumer: ?RovingTabIndex = null;
 
-  consumers: Array<Consumer> = [];
+  consumers: Array<RovingTabIndex> = [];
 
   render() {
     return this.props.children;

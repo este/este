@@ -4,7 +4,7 @@ import Box from '../Box';
 import { EditorMenuText } from './EditorMenu';
 import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
-import * as RovingTabIndex from '../RovingTabIndex';
+import RovingTabIndex from '../RovingTabIndex';
 import Big from 'big.js';
 import * as R from 'ramda';
 
@@ -272,7 +272,7 @@ class EditorMenuInput extends React.PureComponent<
                 min-width: 1px;
               }
             `}</style>
-            <RovingTabIndex.Consumer onFocus={this.handleRovingTabIndexFocus}>
+            <RovingTabIndex onFocus={this.handleRovingTabIndexFocus}>
               {(tabIndex, onFocus, onKeyDown) => (
                 <Draft.Editor
                   autoCapitalize="none"
@@ -294,7 +294,7 @@ class EditorMenuInput extends React.PureComponent<
                   onRightArrow={this.handleKeyArrow(onKeyDown)}
                 />
               )}
-            </RovingTabIndex.Consumer>
+            </RovingTabIndex>
           </div>
         </EditorMenuText>
         {!this.props.last && <EditorMenuText>, </EditorMenuText>}
