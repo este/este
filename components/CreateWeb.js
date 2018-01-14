@@ -32,7 +32,7 @@ const initialState = {
   validationErrors: {},
 };
 
-class CreateWeb extends React.Component<Props, State> {
+class CreateWeb extends React.PureComponent<Props, State> {
   state = initialState;
 
   handleCompleted = () => {

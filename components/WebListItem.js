@@ -42,7 +42,7 @@ const initialState = {
   pending: false,
 };
 
-class WebListItem extends React.Component<Props, State> {
+class WebListItem extends React.PureComponent<Props, State> {
   state = initialState;
 
   handleCompleted = () => {

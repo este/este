@@ -20,7 +20,7 @@ const AppErrorContext: Context<Value> = createReactContext(value);
 export const AppErrorProvider = AppErrorContext.Provider;
 export const AppErrorConsumer = AppErrorContext.Consumer;
 
-class AppError extends React.Component<{}> {
+class AppError extends React.PureComponent<{}> {
   static getAppErrorMessage = (appError: appError.AppError) => {
     switch (appError.name) {
       case 'failedToFetch':

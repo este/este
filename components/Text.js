@@ -81,7 +81,7 @@ const emulateReactNative = (theme, style, backgroundColor) => ({
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
-class Text extends React.Component<TextProps> {
+class Text extends React.PureComponent<TextProps> {
   static childContextTypes = {
     hasParentEsteText: PropTypes.bool.isRequired,
   };

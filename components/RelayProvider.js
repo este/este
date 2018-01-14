@@ -11,7 +11,7 @@ type Props = {
   variables: Object,
 };
 
-class RelayProvider extends React.Component<Props> {
+class RelayProvider extends React.PureComponent<Props> {
   getChildContext() {
     return {
       relay: {

@@ -25,7 +25,7 @@ type Mutate = <Variables, Response>(
 const withMutation = <Props: {}>(
   Component: React.ComponentType<{ mutate: Mutate } & Props>,
 ): React.ComponentType<Props> =>
-  class WithMutation extends React.Component<Props> {
+  class WithMutation extends React.PureComponent<Props> {
     static contextTypes = {
       relay: PropTypes.object,
     };

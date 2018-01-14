@@ -29,7 +29,7 @@ const contextTypes = {
   esteRovingTabIndex: PropTypes.object,
 };
 
-class RovingTabIndex extends React.Component<
+class RovingTabIndex extends React.PureComponent<
   RovingTabIndexProps,
   RovingTabIndexState,
 > {
@@ -121,7 +121,7 @@ type RovingTabIndexProviderProps = {|
   children?: React.Node,
 |};
 
-export class RovingTabIndexProvider extends React.Component<
+export class RovingTabIndexProvider extends React.PureComponent<
   RovingTabIndexProviderProps,
 > {
   static childContextTypes = contextTypes;

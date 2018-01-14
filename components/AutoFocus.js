@@ -11,6 +11,7 @@ type AutoFocusProps = {
 };
 
 // Class, because we focus only when focus prop has been changed.
+// Not pure, because we want to rerender.
 class AutoFocus extends React.Component<AutoFocusProps> {
   componentDidMount() {
     this.focus();

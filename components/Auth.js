@@ -49,7 +49,7 @@ const initialState = {
   validationErrors: {},
 };
 
-class Auth extends React.Component<Props, State> {
+class Auth extends React.PureComponent<Props, State> {
   state = initialState;
 
   handleCompleted = idAndToken => {

@@ -10,6 +10,7 @@ type State = {
   hover: boolean,
 };
 
+// Not pure, because I am not sure how withRouter works.
 class A extends React.Component<AProps & { router: Object }, State> {
   state = { hover: false };
 
