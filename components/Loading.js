@@ -38,9 +38,9 @@ class Loading extends React.Component<Props, State> {
   render() {
     const { messageShown } = this.state;
     if (!messageShown) return null;
-    const { intl, ...restProps } = this.props;
+    const { intl, ...props } = this.props;
 
-    return <Text {...restProps}>{intl.formatMessage(messages.loading)}</Text>;
+    return <Text {...props}>{intl.formatMessage(messages.loading)}</Text>;
   }
 }
 

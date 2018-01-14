@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import ThemeProvider from '../ThemeProvider';
+import { ThemeProvider } from '../Theme';
 import { browserThemeDark } from '../../themes/browserTheme';
 import AppError from '../AppError';
 import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
@@ -207,7 +207,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
 
     return (
       <EditorDispatchProvider value={this.dispatch}>
-        <ThemeProvider theme={browserThemeDark}>
+        <ThemeProvider value={browserThemeDark}>
           <style jsx global>
             {draftCss}
           </style>

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { ColorProps } from '../themes/types';
 import Text, { type TextProps } from './Text';
-import withTheme from './withTheme';
+import Theme from './Theme';
 
 // Browser button is rendered as div with button role because button element is
 // hard to style consistently in Firefox and maybe elsewhere. Div is just fine.
@@ -50,63 +50,71 @@ export type ButtonProps = ColorProps &
     outline?: boolean,
   };
 
-const Button = ({
-  theme,
-  as = BrowserButton,
-  size = 0,
-  borderRadius = theme.button.borderRadius,
-  // For size < 0, there is no space for a padding.
-  marginVertical = size < 0
-    ? theme.button.marginVertical + theme.button.paddingVertical
-    : theme.button.marginVertical,
-  paddingHorizontal = 1,
-  // For size < 0, there is no space for a padding.
-  paddingVertical = size < 0 ? 0 : theme.button.paddingVertical,
-  outline,
-  ...props
-}) => {
-  const defaultProps = {};
+class Button extends React.PureComponent<ButtonProps> {
+  render() {
+    return (
+      <Theme>
+        {theme => {
+          const {
+            as = BrowserButton,
+            size = 0,
+            borderRadius = theme.button.borderRadius,
+            // For size < 0, there is no space for a padding.
+            marginVertical = size < 0
+              ? theme.button.marginVertical + theme.button.paddingVertical
+              : theme.button.marginVertical,
+            paddingHorizontal = 1,
+            // For size < 0, there is no space for a padding.
+            paddingVertical = size < 0 ? 0 : theme.button.paddingVertical,
+            outline,
+            ...props
+          } = this.props;
+          const defaultProps = {};
 
-  // <Button primary shorthand.
-  const colorName = Object.keys(theme.colors).find(color => props[color]);
-  if (colorName) {
-    delete props[colorName];
-    if (outline === true) {
-      defaultProps.borderColor = colorName;
-      defaultProps.borderStyle = 'solid';
-      defaultProps.borderWidth = theme.button.borderWidth;
-      defaultProps.color = colorName;
-      if (size < 0) {
-        // Ensure vertical rhythm for small outline button. The lineHeight
-        // is the only possible way to do it. It doesn't work for multilines.
-        defaultProps.lineHeight =
-          theme.typography.lineHeight - 2 * defaultProps.borderWidth;
-      }
-    } else {
-      defaultProps.backgroundColor = colorName;
-      defaultProps.bold = true;
-      defaultProps.color = 'white';
-    }
+          // <Button primary shorthand.
+          const colorName = Object.keys(theme.colors).find(
+            color => props[color],
+          );
+          if (colorName) {
+            delete props[colorName];
+            if (outline === true) {
+              defaultProps.borderColor = colorName;
+              defaultProps.borderStyle = 'solid';
+              defaultProps.borderWidth = theme.button.borderWidth;
+              defaultProps.color = colorName;
+              if (size < 0) {
+                // Ensure vertical rhythm for small outline button. The lineHeight
+                // is the only possible way to do it. It doesn't work for multilines.
+                defaultProps.lineHeight =
+                  theme.typography.lineHeight - 2 * defaultProps.borderWidth;
+              }
+            } else {
+              defaultProps.backgroundColor = colorName;
+              defaultProps.bold = true;
+              defaultProps.color = 'white';
+            }
+          }
+
+          if (props.disabled === true) {
+            defaultProps.opacity = theme.button.disabledOpacity;
+          }
+
+          return (
+            <Text
+              as={as}
+              size={size}
+              borderRadius={borderRadius}
+              marginVertical={marginVertical}
+              paddingHorizontal={paddingHorizontal}
+              paddingVertical={paddingVertical}
+              {...defaultProps}
+              {...props}
+            />
+          );
+        }}
+      </Theme>
+    );
   }
+}
 
-  if (props.disabled === true) {
-    defaultProps.opacity = theme.button.disabledOpacity;
-  }
-
-  return (
-    <Text
-      as={as}
-      size={size}
-      borderRadius={borderRadius}
-      marginVertical={marginVertical}
-      paddingHorizontal={paddingHorizontal}
-      paddingVertical={paddingVertical}
-      {...defaultProps}
-      {...props}
-    />
-  );
-};
-
-const ButtonWithTheme: React.ComponentType<ButtonProps> = withTheme(Button);
-
-export default ButtonWithTheme;
+export default Button;

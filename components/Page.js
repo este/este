@@ -9,7 +9,7 @@ import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
-import ThemeProvider from './ThemeProvider';
+import { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
@@ -94,7 +94,7 @@ const Page = ({ title, children }: PageProps) => {
   const theme = darkEnabled ? browserThemeDark : browserTheme;
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider value={theme}>
       <Head>
         <title>{title}</title>
         <MetaViewport />

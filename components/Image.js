@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme from './withTheme';
+import Theme from './Theme';
 
 // For UI images, use size prop to enforce size and vertical rhythm.
 // For responsive content images like photos, use relative % width.
@@ -16,30 +16,41 @@ type ImageProps = {
   srcset?: string,
 } & BoxProps;
 
-const heightToNearestBaseline = (height, lineHeight) => {
-  const baselineHeight1 = Math.floor(height / lineHeight) * lineHeight;
-  const baselineHeight2 = Math.ceil(height / lineHeight) * lineHeight;
-  const use1 =
-    Math.abs(baselineHeight1 - height) < Math.abs(baselineHeight2 - height);
-  return use1 ? baselineHeight1 : baselineHeight2;
-};
-
-const verticalRhythmSize = ({ height, width }, lineHeight) => {
-  const rhythmHeight = heightToNearestBaseline(height, lineHeight);
-  return {
-    height: rhythmHeight / lineHeight,
-    width: width * (rhythmHeight / height) / lineHeight,
+class Image extends React.PureComponent<ImageProps> {
+  static heightToNearestBaseline = (height: *, lineHeight: *) => {
+    const baselineHeight1 = Math.floor(height / lineHeight) * lineHeight;
+    const baselineHeight2 = Math.ceil(height / lineHeight) * lineHeight;
+    const use1 =
+      Math.abs(baselineHeight1 - height) < Math.abs(baselineHeight2 - height);
+    return use1 ? baselineHeight1 : baselineHeight2;
   };
-};
 
-const Image = ({ theme, as = 'img', size, ...props }) => (
-  <Box
-    as={as}
-    {...(size ? verticalRhythmSize(size, theme.typography.lineHeight) : null)}
-    {...props}
-  />
-);
+  static verticalRhythmSize = ({ height, width }: *, lineHeight: *) => {
+    const rhythmHeight = Image.heightToNearestBaseline(height, lineHeight);
+    return {
+      height: rhythmHeight / lineHeight,
+      width: width * (rhythmHeight / height) / lineHeight,
+    };
+  };
 
-const ImageWithTheme: React.ComponentType<ImageProps> = withTheme(Image);
+  render() {
+    return (
+      <Theme>
+        {theme => {
+          const { as = 'img', size, ...props } = this.props;
+          return (
+            <Box
+              as={as}
+              {...(size
+                ? Image.verticalRhythmSize(size, theme.typography.lineHeight)
+                : null)}
+              {...props}
+            />
+          );
+        }}
+      </Theme>
+    );
+  }
+}
 
-export default ImageWithTheme;
+export default Image;

@@ -3,8 +3,8 @@ import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import colorLib from 'color';
-import type { ColorName, Theme } from '../themes/types';
-import withTheme from './withTheme';
+import type { ColorName, Theme as ThemeType } from '../themes/types';
+import Theme from './Theme';
 
 /*
   Text is the basic UI primitive for all text components.
@@ -34,7 +34,7 @@ export type TextProps = {
 
 // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 export const computeFontSizeAndLineHeight = (
-  { typography }: Theme,
+  { typography }: ThemeType,
   size: number,
 ) => {
   const fontSize = typography.fontSize(size);
@@ -81,7 +81,7 @@ const emulateReactNative = (theme, style, backgroundColor) => ({
   lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
-class Text extends React.Component<{ theme: Theme } & TextProps> {
+class Text extends React.Component<TextProps> {
   static childContextTypes = {
     hasParentEsteText: PropTypes.bool.isRequired,
   };
@@ -98,55 +98,58 @@ class Text extends React.Component<{ theme: Theme } & TextProps> {
   context: { hasParentEsteText: boolean };
 
   render() {
-    const { hasParentEsteText } = this.context;
-    const {
-      theme,
-      align = 'left',
-      bold = false,
-      color = theme.text.color,
-      decoration = 'none',
-      fontFamily = theme.text.fontFamily,
-      italic = false,
-      lineHeight,
-      size = 0,
-      ...props
-    } = this.props;
+    return (
+      <Theme>
+        {theme => {
+          const { hasParentEsteText } = this.context;
+          const {
+            align = 'left',
+            bold = false,
+            color = theme.text.color,
+            decoration = 'none',
+            fontFamily = theme.text.fontFamily,
+            italic = false,
+            lineHeight,
+            size = 0,
+            ...props
+          } = this.props;
 
-    // Set all styles to ensure styles are isolated.
-    let style = {
-      color: theme.colors[color],
-      fontFamily,
-      ...computeFontSizeAndLineHeight(theme, size),
-      textAlign: align,
-      fontWeight: bold ? theme.text.bold : 'normal',
-      textDecoration: decoration,
-      fontStyle: italic ? 'italic' : 'normal',
-      ...(lineHeight != null ? { lineHeight } : null),
-      ...props.style,
-    };
+          // Set all styles to ensure styles are isolated.
+          let style = {
+            color: theme.colors[color],
+            fontFamily,
+            ...computeFontSizeAndLineHeight(theme, size),
+            textAlign: align,
+            fontWeight: bold ? theme.text.bold : 'normal',
+            textDecoration: decoration,
+            fontStyle: italic ? 'italic' : 'normal',
+            ...(lineHeight != null ? { lineHeight } : null),
+            ...props.style,
+          };
 
-    // Enforce inheritance in a browser. All props are inherited by default.
-    // https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
-    if (hasParentEsteText) {
-      if (this.props.color == null) delete style.color;
-      if (this.props.fontFamily == null) delete style.fontFamily;
-      if (this.props.size == null) delete style.fontSize;
-      if (this.props.lineHeight == null) delete style.lineHeight;
-      if (this.props.align == null) delete style.textAlign;
-      if (this.props.bold == null) delete style.fontWeight;
-      if (this.props.decoration == null) delete style.textDecoration;
-      if (this.props.italic == null) delete style.fontStyle;
-    }
+          // Enforce inheritance in a browser. All props are inherited by default.
+          // https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
+          if (hasParentEsteText) {
+            if (this.props.color == null) delete style.color;
+            if (this.props.fontFamily == null) delete style.fontFamily;
+            if (this.props.size == null) delete style.fontSize;
+            if (this.props.lineHeight == null) delete style.lineHeight;
+            if (this.props.align == null) delete style.textAlign;
+            if (this.props.bold == null) delete style.fontWeight;
+            if (this.props.decoration == null) delete style.textDecoration;
+            if (this.props.italic == null) delete style.fontStyle;
+          }
 
-    // flowlint sketchy-null:off
-    if (!props.isReactNative) {
-      style = emulateReactNative(theme, style, props.backgroundColor);
-    }
+          // flowlint sketchy-null:off
+          if (!props.isReactNative) {
+            style = emulateReactNative(theme, style, props.backgroundColor);
+          }
 
-    return <Box {...props} style={style} />;
+          return <Box {...props} style={style} />;
+        }}
+      </Theme>
+    );
   }
 }
 
-const TextWithTheme: React.ComponentType<TextProps> = withTheme(Text);
-
-export default TextWithTheme;
+export default Text;

@@ -38,7 +38,7 @@ class EditorMenuButton extends React.PureComponent<EditorMenuButtonProps> {
       autoFocus,
       active = false,
       children,
-      ...restProps
+      ...props
     } = this.props;
     const buttonAutoFocus = back ? true : autoFocus;
     const buttonChildren = back ? '…' : children;
@@ -59,7 +59,7 @@ class EditorMenuButton extends React.PureComponent<EditorMenuButtonProps> {
             onFocus={onFocus}
             onKeyDown={onKeyDown}
             decoration={active ? 'underline' : 'none'}
-            {...restProps}
+            {...props}
           >
             {buttonChildren}
           </Button>

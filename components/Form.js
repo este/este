@@ -1,39 +1,64 @@
 // @flow
 import * as React from 'react';
 import Box, { type BoxProps } from './Box';
-import withTheme from './withTheme';
+import Theme from './Theme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
-const BrowserForm = ({ onSubmit, ...restProps }: { onSubmit: () => void }) => (
-  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-  <form
-    {...restProps}
-    onKeyPress={(e: KeyboardEvent) => {
-      if (e.target.tagName !== 'INPUT') return;
-      if (e.key !== 'Enter') return;
-      if (typeof onSubmit !== 'function') return;
-      onSubmit();
-    }}
-    onSubmit={(e: Event) => {
-      e.preventDefault();
-    }}
-  />
-);
+type BrowserFormProps = {
+  onSubmit: () => void,
+};
+
+class BrowserForm extends React.PureComponent<BrowserFormProps> {
+  static handleSubmit = (e: Event) => {
+    e.preventDefault();
+  };
+
+  handleKeyPress = (e: KeyboardEvent) => {
+    if (e.target.tagName !== 'INPUT') return;
+    if (e.key !== 'Enter') return;
+    if (typeof this.props.onSubmit !== 'function') return;
+    this.props.onSubmit();
+  };
+
+  render() {
+    return (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <form
+        {...this.props}
+        onKeyPress={this.handleKeyPress}
+        onSubmit={BrowserForm.handleSubmit}
+      />
+    );
+  }
+}
 
 type FormProps = {
   onSubmit?: () => any,
 } & BoxProps;
 
-const Form = ({
-  theme,
-  as = BrowserForm,
-  marginBottom = theme.form.marginBottom,
-  maxWidth = theme.form.maxWidth,
-  ...props
-}) => (
-  <Box as={as} marginBottom={marginBottom} maxWidth={maxWidth} {...props} />
-);
+class Form extends React.PureComponent<FormProps> {
+  render() {
+    return (
+      <Theme>
+        {theme => {
+          const {
+            as = BrowserForm,
+            marginBottom = theme.form.marginBottom,
+            maxWidth = theme.form.maxWidth,
+            ...props
+          } = this.props;
+          return (
+            <Box
+              as={as}
+              marginBottom={marginBottom}
+              maxWidth={maxWidth}
+              {...props}
+            />
+          );
+        }}
+      </Theme>
+    );
+  }
+}
 
-const FormWithTheme: React.ComponentType<FormProps> = withTheme(Form);
-
-export default FormWithTheme;
+export default Form;

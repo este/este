@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import Box from '../../components/Box';
 import Set from '../../components/Set';

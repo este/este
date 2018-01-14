@@ -1,25 +1,32 @@
 // @flow
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
-import withTheme from './withTheme';
+import Theme from './Theme';
 
-type HeadingProps = TextProps;
+class Heading extends React.PureComponent<TextProps> {
+  render() {
+    return (
+      <Theme>
+        {theme => {
+          const {
+            bold = true,
+            fontFamily = theme.heading.fontFamily,
+            marginBottom = theme.heading.marginBottom,
+            ...props
+          } = this.props;
 
-const Heading = ({
-  theme,
-  bold = true,
-  fontFamily = theme.heading.fontFamily,
-  marginBottom = theme.heading.marginBottom,
-  ...props
-}) => (
-  <Text
-    bold={bold}
-    fontFamily={fontFamily}
-    marginBottom={marginBottom}
-    {...props}
-  />
-);
+          return (
+            <Text
+              bold={bold}
+              fontFamily={fontFamily}
+              marginBottom={marginBottom}
+              {...props}
+            />
+          );
+        }}
+      </Theme>
+    );
+  }
+}
 
-const HeadingWithTheme: React.ComponentType<HeadingProps> = withTheme(Heading);
-
-export default HeadingWithTheme;
+export default Heading;

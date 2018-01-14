@@ -2,7 +2,7 @@
 import type { ColorName } from '../themes/types';
 import * as React from 'react';
 import AutoFocus from './AutoFocus';
-import withTheme from './withTheme';
+import Theme from './Theme';
 
 /*
   Box is the basic UI primitive for all universal themed UI components.
@@ -180,156 +180,164 @@ const tryToEnsureRhythmViaPaddingCompensation = style =>
     return { ...style, [paddingProp]: compensatedPaddingX };
   }, style);
 
-const Box = props => {
-  const {
-    as,
-    autoFocus,
-    isReactNative,
-    style,
+class Box extends React.PureComponent<BoxProps> {
+  render() {
+    return (
+      <Theme>
+        {theme => {
+          const {
+            as,
+            autoFocus,
+            isReactNative,
+            style,
 
-    theme,
+            margin,
+            marginHorizontal = margin,
+            marginVertical = margin,
+            marginBottom = marginVertical,
+            marginLeft = marginHorizontal,
+            marginRight = marginHorizontal,
+            marginTop = marginVertical,
 
-    margin,
-    marginHorizontal = margin,
-    marginVertical = margin,
-    marginBottom = marginVertical,
-    marginLeft = marginHorizontal,
-    marginRight = marginHorizontal,
-    marginTop = marginVertical,
+            padding,
+            paddingHorizontal = padding,
+            paddingVertical = padding,
+            paddingBottom = paddingVertical,
+            paddingLeft = paddingHorizontal,
+            paddingRight = paddingHorizontal,
+            paddingTop = paddingVertical,
 
-    padding,
-    paddingHorizontal = padding,
-    paddingVertical = padding,
-    paddingBottom = paddingVertical,
-    paddingLeft = paddingHorizontal,
-    paddingRight = paddingHorizontal,
-    paddingTop = paddingVertical,
+            bottom,
+            height,
+            left,
+            maxHeight,
+            maxWidth,
+            minHeight,
+            minWidth,
+            right,
+            top,
+            width,
 
-    bottom,
-    height,
-    left,
-    maxHeight,
-    maxWidth,
-    minHeight,
-    minWidth,
-    right,
-    top,
-    width,
+            alignContent,
+            alignItems,
+            alignSelf,
+            flex,
+            flexBasis,
+            flexDirection,
+            flexGrow,
+            flexShrink,
+            flexWrap,
+            justifyContent,
+            backgroundColor,
+            opacity,
+            overflow,
+            position,
+            zIndex,
+            borderStyle,
 
-    alignContent,
-    alignItems,
-    alignSelf,
-    flex,
-    flexBasis,
-    flexDirection,
-    flexGrow,
-    flexShrink,
-    flexWrap,
-    justifyContent,
-    backgroundColor,
-    opacity,
-    overflow,
-    position,
-    zIndex,
-    borderStyle,
+            borderWidth,
+            borderBottomWidth = borderWidth,
+            borderLeftWidth = borderWidth,
+            borderRightWidth = borderWidth,
+            borderTopWidth = borderWidth,
 
-    borderWidth,
-    borderBottomWidth = borderWidth,
-    borderLeftWidth = borderWidth,
-    borderRightWidth = borderWidth,
-    borderTopWidth = borderWidth,
+            borderRadius,
+            borderBottomLeftRadius = borderRadius,
+            borderBottomRightRadius = borderRadius,
+            borderTopLeftRadius = borderRadius,
+            borderTopRightRadius = borderRadius,
 
-    borderRadius,
-    borderBottomLeftRadius = borderRadius,
-    borderBottomRightRadius = borderRadius,
-    borderTopLeftRadius = borderRadius,
-    borderTopRightRadius = borderRadius,
+            borderColor,
+            borderBottomColor = borderColor,
+            borderLeftColor = borderColor,
+            borderRightColor = borderColor,
+            borderTopColor = borderColor,
 
-    borderColor,
-    borderBottomColor = borderColor,
-    borderLeftColor = borderColor,
-    borderRightColor = borderColor,
-    borderTopColor = borderColor,
+            ...props
+          } = this.props;
 
-    ...restProps
-  } = props;
+          const boxStyle = {
+            ...(isReactNative === true
+              ? null
+              : reactNativeEmulationForBrowsers),
+            ...maybeRhythm(theme.typography.rhythm, {
+              marginBottom,
+              marginLeft,
+              marginRight,
+              marginTop,
 
-  const boxStyle = {
-    ...(isReactNative === true ? null : reactNativeEmulationForBrowsers),
-    ...maybeRhythm(theme.typography.rhythm, {
-      marginBottom,
-      marginLeft,
-      marginRight,
-      marginTop,
+              paddingBottom,
+              paddingLeft,
+              paddingRight,
+              paddingTop,
 
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-      paddingTop,
+              bottom,
+              height,
+              left,
+              maxHeight,
+              maxWidth,
+              minHeight,
+              minWidth,
+              right,
+              top,
+              width,
+            }),
+            ...justValue({
+              alignContent,
+              alignItems,
+              alignSelf,
+              flexBasis,
+              flexDirection,
+              flexGrow,
+              flexShrink,
+              flexWrap,
+              justifyContent,
+              opacity,
+              overflow,
+              position,
+              zIndex,
+              borderStyle,
+              borderBottomWidth,
+              borderLeftWidth,
+              borderRightWidth,
+              borderTopWidth,
+              borderBottomLeftRadius,
+              borderBottomRightRadius,
+              borderTopLeftRadius,
+              borderTopRightRadius,
+            }),
+            ...restrictedFlex(flex, flexBasis, flexShrink, isReactNative),
+            ...themeColor(theme.colors, {
+              backgroundColor,
+              borderBottomColor,
+              borderLeftColor,
+              borderRightColor,
+              borderTopColor,
+            }),
+            ...style,
+          };
 
-      bottom,
-      height,
-      left,
-      maxHeight,
-      maxWidth,
-      minHeight,
-      minWidth,
-      right,
-      top,
-      width,
-    }),
-    ...justValue({
-      alignContent,
-      alignItems,
-      alignSelf,
-      flexBasis,
-      flexDirection,
-      flexGrow,
-      flexShrink,
-      flexWrap,
-      justifyContent,
-      opacity,
-      overflow,
-      position,
-      zIndex,
-      borderStyle,
-      borderBottomWidth,
-      borderLeftWidth,
-      borderRightWidth,
-      borderTopWidth,
-      borderBottomLeftRadius,
-      borderBottomRightRadius,
-      borderTopLeftRadius,
-      borderTopRightRadius,
-    }),
-    ...restrictedFlex(flex, flexBasis, flexShrink, isReactNative),
-    ...themeColor(theme.colors, {
-      backgroundColor,
-      borderBottomColor,
-      borderLeftColor,
-      borderRightColor,
-      borderTopColor,
-    }),
-    ...style,
-  };
+          const boxStyleWithRhythm = tryToEnsureRhythmViaPaddingCompensation(
+            boxStyle,
+          );
 
-  const boxStyleWithRhythm = tryToEnsureRhythmViaPaddingCompensation(boxStyle);
+          // We can't use styled-jsx yet since it works only with JSX via Babel plugin.
+          // Style prop just works and it's future compatible with React Native.
+          const element = React.createElement(as != null ? as : 'div', {
+            ...props,
+            // http://shouldiprefix.com? No.
+            style: boxStyleWithRhythm,
+          });
 
-  // We can't use styled-jsx yet since it works only with JSX via Babel plugin.
-  // Style prop just works and it's future compatible with React Native.
-  const element = React.createElement(as != null ? as : 'div', {
-    ...restProps,
-    // http://shouldiprefix.com? No.
-    style: boxStyleWithRhythm,
-  });
+          // Enforce truthy check.
+          // eslint-disable-next-line no-extra-boolean-cast
+          if (Boolean(autoFocus))
+            return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
+          return element;
+        }}
+      </Theme>
+    );
+  }
+}
 
-  // Enforce truthy check.
-  // eslint-disable-next-line no-extra-boolean-cast
-  if (Boolean(autoFocus))
-    return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
-  return element;
-};
-
-const BoxWithTheme: React.ComponentType<BoxProps> = withTheme(Box);
-
-export default BoxWithTheme;
+export default Box;

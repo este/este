@@ -1,12 +1,11 @@
+// @flow
 import * as React from 'react';
 import testRenderer from 'react-test-renderer';
-import ThemeProvider from '../../../components/ThemeProvider';
-
-const prettifyFelaString = str => str.replace(/\.[a-z]+/g, '\n    $&');
+import { ThemeProvider } from '../../../components/Theme';
 
 export const createTestRenderer = (theme: any) => (Component: any) => {
   const component = testRenderer.create(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider value={theme}>
       <Component />
     </ThemeProvider>,
   );
