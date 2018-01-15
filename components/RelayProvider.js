@@ -2,11 +2,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-// Thank you https://github.com/robrichard
+// RelayProvider sets Relay context manually for SSR and pending navigations.
+// Check app.js, note "await fetchQuery". It replaces QueryRenderer.
+// This is a hack. I hope Relay will provide an official API soon.
 // https://github.com/robrichard/relay-context-provider
 
 type Props = {
-  children: React.Element<any>,
+  children: React.Node,
   environment: Object,
   variables: Object,
 };

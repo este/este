@@ -1,4 +1,4 @@
-// flow-typed signature: a6d7b4a1c387a0e4ffec1861c0f02f6c
+// flow-typed signature: 3049f4d8d166a7db56ad03be0eb0a2bb
 // flow-typed version: <<STUB>>/graphql-cli_v^2.0.1/flow_v0.63.1
 
 /**
@@ -27,6 +27,10 @@ declare module 'graphql-cli/dist/bin' {
 }
 
 declare module 'graphql-cli/dist/cmds/add-endpoint' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/add-project' {
   declare module.exports: any;
 }
 
@@ -100,6 +104,9 @@ declare module 'graphql-cli/dist/bin.js' {
 }
 declare module 'graphql-cli/dist/cmds/add-endpoint.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/add-endpoint'>;
+}
+declare module 'graphql-cli/dist/cmds/add-project.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/add-project'>;
 }
 declare module 'graphql-cli/dist/cmds/create/boilerplates.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/create/boilerplates'>;

@@ -7,13 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
-import withMutation, { getClientMutationId } from './withMutation';
+import Mutate, { clientMutationId } from './Mutate';
 import * as validation from '../graphcool/lib/validation';
 import ValidationError from './ValidationError';
 import { validateWeb } from '../graphcool/functions/createWeb';
 
 type Props = {
-  mutate: *,
   userId: string,
 };
 
@@ -43,13 +42,13 @@ class CreateWeb extends React.PureComponent<Props, State> {
     this.setState({ pending: false });
   };
 
-  createWeb = () => {
+  createWeb = (mutate: *) => () => {
     const variables = {
       input: {
         domain: '', // computed by hook function
         name: this.state.name.trim(),
         ownerId: this.props.userId,
-        clientMutationId: getClientMutationId(),
+        clientMutationId: clientMutationId(),
       },
     };
 
@@ -60,7 +59,7 @@ class CreateWeb extends React.PureComponent<Props, State> {
     }
 
     this.setState({ pending: true });
-    this.props.mutate(
+    mutate(
       CreateWebMutation.commit(this.props.userId),
       variables,
       this.handleCompleted,
@@ -69,33 +68,41 @@ class CreateWeb extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { pending, validationErrors } = this.state;
     return (
-      <Form onSubmit={this.createWeb}>
-        <TextInputBig
-          label={
-            <Text>
-              <FormattedMessage
-                defaultMessage="Web Name"
-                id="createApp.label"
+      <Mutate>
+        {mutate => {
+          const { pending, validationErrors } = this.state;
+          return (
+            <Form onSubmit={this.createWeb(mutate)}>
+              <TextInputBig
+                label={
+                  <Text>
+                    <FormattedMessage
+                      defaultMessage="Web Name"
+                      id="createApp.label"
+                    />
+                  </Text>
+                }
+                autoFocus={validationErrors.name}
+                disabled={pending}
+                error={<ValidationError error={validationErrors.name} />}
+                onChange={name => this.setState({ name })}
+                type="text"
+                value={this.state.name}
               />
-            </Text>
-          }
-          autoFocus={validationErrors.name}
-          disabled={pending}
-          error={<ValidationError error={validationErrors.name} />}
-          onChange={name => this.setState({ name })}
-          type="text"
-          value={this.state.name}
-        />
-        <Set>
-          <CreateButton primary disabled={pending} onPress={this.createWeb} />
-        </Set>
-      </Form>
+              <Set>
+                <CreateButton
+                  primary
+                  disabled={pending}
+                  onPress={this.createWeb(mutate)}
+                />
+              </Set>
+            </Form>
+          );
+        }}
+      </Mutate>
     );
   }
 }
 
-const CreateWebWithMutation = withMutation(CreateWeb);
-
-export default CreateWebWithMutation;
+export default CreateWeb;

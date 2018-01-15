@@ -3620,8 +3620,8 @@ graphql-cli-prepare@1.4.10:
     lodash "4.17.4"
 
 graphql-cli@^2.0.1:
-  version "2.11.5"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.11.5.tgz#defe549c1f3c76002f649d5bbad9682a17b2475d"
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.12.1.tgz#c19ec8049473b058a956770a898bc1a29ace322e"
   dependencies:
     adm-zip "^0.4.7"
     chalk "^2.3.0"
