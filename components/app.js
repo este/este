@@ -28,24 +28,6 @@ if (process.browser === true) {
   });
 }
 
-const redirectToSignIn = context => {
-  const { asPath, res } = context;
-  const redirectUrlKey = 'redirectUrl';
-  const redirectUrl = encodeURIComponent(asPath);
-  const href: Href = {
-    pathname: '/sign-in',
-    query: { [redirectUrlKey]: redirectUrl },
-  };
-  if (res) {
-    res.writeHead(303, {
-      Location: `${href.pathname}?${redirectUrlKey}=${redirectUrl}`,
-    });
-    res.end();
-  } else {
-    Router.replace(href);
-  }
-};
-
 // https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
 type NextContext = {
   pathname: string,
@@ -111,12 +93,30 @@ const app = (
   const PageWithHigherOrderComponents = injectIntl(Page);
 
   class App extends React.PureComponent<AppProps, AppState> {
+    static redirectToSignIn = (context: NextContext) => {
+      const { asPath, res } = context;
+      const redirectUrlKey = 'redirectUrl';
+      const redirectUrl = encodeURIComponent(asPath);
+      const href: Href = {
+        pathname: '/sign-in',
+        query: { [redirectUrlKey]: redirectUrl },
+      };
+      if (res) {
+        res.writeHead(303, {
+          Location: `${href.pathname}?${redirectUrlKey}=${redirectUrl}`,
+        });
+        res.end();
+      } else {
+        Router.replace(href);
+      }
+    };
+
     static getInitialProps = async (context: NextContext) => {
       const cookie = getCookie(context.req);
       const isAuthenticated = !!cookie;
 
       if (requireAuth === true && !isAuthenticated) {
-        redirectToSignIn(context);
+        App.redirectToSignIn(context);
         // Return nothing because component will not be rendered on redirect.
         return {};
       }
