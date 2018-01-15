@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 128920fd4e6f4787962806fb61b69c47
+ * @relayHash 5985e34790b1847dd3a0f5e9362577d5
  */
 
 /* eslint-disable */
@@ -31,12 +31,6 @@ fragment WebList_viewer on Viewer {
     edges {
       node {
         id
-        updatedAt
-        domain
-        owner {
-          id
-        }
-        name
         ...WebListItem_web
       }
     }
@@ -204,43 +198,49 @@ const batch /*: ConcreteBatch*/ = {
                                 "storageKey": null
                               },
                               {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "updatedAt",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "domain",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "LinkedField",
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "User",
-                                "name": "owner",
-                                "plural": false,
+                                "kind": "InlineFragment",
+                                "type": "Web",
                                 "selections": [
                                   {
                                     "kind": "ScalarField",
                                     "alias": null,
                                     "args": null,
-                                    "name": "id",
+                                    "name": "updatedAt",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "domain",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "LinkedField",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "name": "owner",
+                                    "plural": false,
+                                    "selections": [
+                                      {
+                                        "kind": "ScalarField",
+                                        "alias": null,
+                                        "args": null,
+                                        "name": "id",
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "name",
                                     "storageKey": null
                                   }
-                                ],
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "name",
-                                "storageKey": null
+                                ]
                               }
                             ],
                             "storageKey": null
@@ -358,7 +358,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query pagesQuery(\n  $filter: WebFilter\n  $isAuthenticated: Boolean!\n) {\n  viewer {\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) @include(if: $isAuthenticated) {\n    edges {\n      node {\n        id\n        updatedAt\n        domain\n        owner {\n          id\n        }\n        name\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n"
+  "text": "query pagesQuery(\n  $filter: WebFilter\n  $isAuthenticated: Boolean!\n) {\n  viewer {\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) @include(if: $isAuthenticated) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n"
 };
 
 module.exports = batch;

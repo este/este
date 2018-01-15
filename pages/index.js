@@ -44,8 +44,11 @@ const Authenticated = ({ viewer, userId }) => (
     <Heading size={1}>
       <ManageYourWebsMessage />
     </Heading>
-    {/* $FlowFixMe viewer is {||} but {} is required. Probably libdef bug. */}
-    <WebList viewer={viewer} userId={userId} />
+    <WebList
+      // $FlowFixMe https://github.com/este/este/issues/1442
+      viewer={viewer}
+      userId={userId}
+    />
     <CreateWeb userId={userId} />
   </Box>
 );

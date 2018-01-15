@@ -24,6 +24,7 @@ const WebList = ({ viewer, userId }: Props) => (
         edge =>
           edge && (
             <WebListItem
+              // $FlowFixMe https://github.com/este/este/issues/1442
               web={edge.node}
               viewer={viewer}
               key={edge.node.id}
@@ -36,8 +37,6 @@ const WebList = ({ viewer, userId }: Props) => (
 
 // Always use first or last on connections.
 // https://github.com/facebook/relay/issues/1201#issuecomment-224366807
-// TODO: Remove Flow workaround fields.
-// https://github.com/este/este/issues/1442
 export default createFragmentContainer(
   WebList,
   graphql`
@@ -48,12 +47,6 @@ export default createFragmentContainer(
         edges {
           node {
             id
-            updatedAt
-            domain
-            owner {
-              id
-            }
-            name
             ...WebListItem_web
           }
         }
