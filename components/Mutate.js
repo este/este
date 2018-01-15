@@ -51,7 +51,7 @@ class Mutate extends React.PureComponent<MutateProps> {
     relay: { environment: Environment },
   };
 
-  // We can't reuse Mutate type here, probably.
+  // We can't reuse Mutate type here, probably. PR anyone?
   // https://twitter.com/calebmer/status/906561429129502720
   mutate = (dispatchAppError: *) => <Variables, Response>(
     commit: Commit<Variables, Response>,

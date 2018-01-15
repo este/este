@@ -42,10 +42,11 @@ class CreateWeb extends React.PureComponent<Props, State> {
     this.setState({ pending: false });
   };
 
+  // Using an existential type is ok. It works well.
   createWeb = (mutate: *) => () => {
     const variables = {
       input: {
-        domain: '', // computed by hook function
+        domain: '', // computed by graphcool/functions/createWeb.js nameToDomain
         name: this.state.name.trim(),
         ownerId: this.props.userId,
         clientMutationId: clientMutationId(),

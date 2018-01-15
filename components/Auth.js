@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-
 import Box from './Box';
 import Form from './Form';
 import Heading from './Heading';
@@ -15,6 +14,7 @@ import Router from 'next/router';
 import Mutate from './Mutate';
 import * as validation from '../graphcool/lib/validation';
 import { setCookie } from '../lib/cookie';
+import type { IntlShape } from 'react-intl';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -28,8 +28,8 @@ const messages = defineMessages({
 });
 
 type Props = {
-  intl: *,
-  redirectUrl: *,
+  intl: IntlShape,
+  redirectUrl: ?string,
 };
 
 type Fields = {
@@ -79,7 +79,7 @@ class Auth extends React.PureComponent<Props, State> {
     return handled;
   };
 
-  auth(mutate: *, isSignUp: boolean) {
+  auth = (mutate: *, isSignUp?: boolean) => () => {
     const variables = {
       email: this.state.email.trim(),
       password: this.state.password.trim(),
@@ -100,7 +100,7 @@ class Auth extends React.PureComponent<Props, State> {
 
     this.setState({ pending: true });
 
-    if (isSignUp) {
+    if (isSignUp === true) {
       mutate(
         SignupMutation.commit,
         variables,
@@ -115,14 +115,6 @@ class Auth extends React.PureComponent<Props, State> {
         this.handleError,
       );
     }
-  }
-
-  signUp = (mutate: *) => () => {
-    this.auth(mutate, true);
-  };
-
-  signIn = (mutate: *) => () => {
-    this.auth(mutate, false);
   };
 
   render() {
@@ -145,7 +137,7 @@ class Auth extends React.PureComponent<Props, State> {
               `}</style>
               <Box>
                 <Heading size={3}>Auth</Heading>
-                <Form onSubmit={this.signIn(mutate)}>
+                <Form onSubmit={this.auth(mutate)}>
                   <Set vertical spaceBetween={0}>
                     <TextInputBig
                       autoFocus={validationErrors.email}
@@ -179,12 +171,12 @@ class Auth extends React.PureComponent<Props, State> {
                   <Set>
                     <SignInButton
                       disabled={pending}
-                      onPress={this.signIn(mutate)}
+                      onPress={this.auth(mutate)}
                       primary
                     />
                     <SignUpButton
                       disabled={pending}
-                      onPress={this.signUp(mutate)}
+                      onPress={this.auth(mutate, true)}
                     />
                   </Set>
                 </Form>
