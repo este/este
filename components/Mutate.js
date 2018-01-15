@@ -18,7 +18,7 @@ type MutateAction = <Variables, Response>(
   variables: Variables,
   onCompleted: OnCompleted<Response>,
   onError: OnError,
-) => Disposable;
+) => void;
 
 type MutateProps = {|
   children: (action: MutateAction) => React.Node,
@@ -36,34 +36,28 @@ class Mutate extends React.PureComponent<MutateProps> {
     dispatchAppError(appError);
   }
 
-  componentDidMount() {
-    this._isMounted = true;
-  }
-
   componentWillUnmount() {
-    this._isMounted = false;
+    this.disposables.forEach(disposable => disposable.dispose());
   }
 
-  // TODO: Consider Disposable dispose.
-  _isMounted: boolean;
+  disposables: Array<Disposable> = [];
 
   context: {
     relay: { environment: Environment },
   };
 
-  // We can't reuse Mutate type here, probably. PR anyone?
+  // We can't reuse MutateAction type here as far I know. PR anyone?
   // https://twitter.com/calebmer/status/906561429129502720
   mutate = (dispatchAppError: *) => <Variables, Response>(
     commit: Commit<Variables, Response>,
     variables: Variables,
     onCompleted: OnCompleted<Response>,
     onError: OnError,
-  ) =>
-    commit(
+  ) => {
+    const disposable = commit(
       this.context.relay.environment,
       variables,
       (response, payloadError) => {
-        if (!this._isMounted) return;
         if (payloadError) {
           Mutate.handleError(payloadError, onError, dispatchAppError);
           return;
@@ -71,10 +65,11 @@ class Mutate extends React.PureComponent<MutateProps> {
         onCompleted(response);
       },
       error => {
-        if (!this._isMounted) return;
         Mutate.handleError(error, onError, dispatchAppError);
       },
     );
+    this.disposables.push(disposable);
+  };
 
   render() {
     return (
