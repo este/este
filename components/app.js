@@ -222,6 +222,8 @@ const app = (
           locale={locale}
           messages={messages}
           initialNow={initialNow}
+          // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
+          textComponent={({ children }) => children}
         >
           <LocaleProvider value={{ locale, supportedLocales }}>
             <RelayProvider environment={environment} variables={variables}>
