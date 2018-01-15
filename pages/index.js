@@ -32,6 +32,7 @@ const NotAuthenticated = () => (
   </Box>
 );
 
+// This is a pattern. Export message to be reusable elsewhere.
 export const ManageYourWebsMessage = () => (
   <FormattedMessage
     defaultMessage="Manage your webs"
