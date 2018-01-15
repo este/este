@@ -13,8 +13,8 @@ import DeleteWebMutation from '../mutations/DeleteWebMutation';
 import A from './A';
 
 const DeleteWeb = ({ onPress, disabled }) => (
-  <AreYouSureConfirm
-    render={confirm => (
+  <AreYouSureConfirm>
+    {confirm => (
       <DeleteButton
         color="warning"
         disabled={disabled}
@@ -25,7 +25,7 @@ const DeleteWeb = ({ onPress, disabled }) => (
         size={-1}
       />
     )}
-  />
+  </AreYouSureConfirm>
 );
 
 type Props = {
