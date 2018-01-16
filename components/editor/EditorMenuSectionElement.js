@@ -24,6 +24,7 @@ class EditorMenuSectionElement extends React.PureComponent<Props> {
           delete
         </EditorMenuButton>
         <EditorMenuButton section="add">add</EditorMenuButton>
+        <EditorMenuButton>style</EditorMenuButton>
       </EditorMenuSection>
     );
   }

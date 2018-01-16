@@ -10,6 +10,7 @@ import SwitchLocale from './SwitchLocale';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from './Theme';
+import { BaselineProvider } from './Baseline';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
@@ -95,19 +96,21 @@ const Page = ({ title, children }: PageProps) => {
   const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
   return (
     <ThemeProvider value={theme}>
-      <Head>
-        <title>{title}</title>
-        <MetaViewport />
-        <Favicons />
-      </Head>
-      <PageStyle backgroundColor={pageBackgroundColor} />
-      <LoadingBar color={theme.colors.primary} />
-      <AppError />
-      <Container>
-        <MainNav />
-        <Body>{children}</Body>
-        <Footer />
-      </Container>
+      <BaselineProvider>
+        <Head>
+          <title>{title}</title>
+          <MetaViewport />
+          <Favicons />
+        </Head>
+        <PageStyle backgroundColor={pageBackgroundColor} />
+        <LoadingBar color={theme.colors.primary} />
+        <AppError />
+        <Container>
+          <MainNav />
+          <Body>{children}</Body>
+          <Footer />
+        </Container>
+      </BaselineProvider>
     </ThemeProvider>
   );
 };

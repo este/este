@@ -4,7 +4,8 @@ import P from '../components/P';
 import Page from '../components/Page';
 import * as React from 'react';
 import Set from '../components/Set';
-import ToggleBaseline from '../components/ToggleBaseline';
+import Button from '../components/Button';
+import Baseline from '../components/Baseline';
 import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
@@ -56,7 +57,13 @@ const Me = ({ data, intl }) => {
         <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
       </Heading>
       <Set>
-        <ToggleBaseline />
+        <Baseline>
+          {({ toggle, shown }) => (
+            <Button primary outline size={-1} onPress={toggle}>
+              {shown ? 'Hide Baseline' : 'Show Baseline'}
+            </Button>
+          )}
+        </Baseline>
         <ToggleDark />
       </Set>
     </Page>
