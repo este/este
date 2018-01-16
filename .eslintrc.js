@@ -10,13 +10,13 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['flowtype'],
   globals: {
+    // The same as flow-typed/app.js
     APP_VERSION: true,
     DEFAULT_LOCALE: true,
     GRAPHQL_ENDPOINT: true,
     HOSTNAME: true,
     SENTRY_CLIENT_DNS: true,
     SENTRY_SERVER_DNS: true,
-    window: true,
   },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {

@@ -9,9 +9,6 @@
 
 [include]
 
-[libs]
-types/app.js.flow
-
 [lints]
 all=error
 unclear-type=off

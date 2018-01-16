@@ -1,4 +1,5 @@
 // @flow
+/* global window */
 import * as React from 'react';
 import { ThemeProvider } from '../Theme';
 import { browserThemeDark } from '../../themes/browserTheme';

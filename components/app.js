@@ -1,4 +1,5 @@
 // @flow
+/* global window */
 import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
