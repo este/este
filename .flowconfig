@@ -6,6 +6,9 @@
 [untyped]
 ; https://github.com/facebook/draft-js/issues/1496#issuecomment-353895318
 .*/node_modules/draft-js/lib/DraftEditor.react.js.flow
+; https://github.com/facebook/draft-js/issues/1621
+.*/node_modules/draft-js/lib/ContentBlock.js.flow
+.*/node_modules/draft-js/lib/ContentBlockNode.js.flow
 
 [include]
 
