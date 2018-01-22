@@ -17,8 +17,6 @@ module.exports = {
   APP_VERSION:
     process.env.APP_VERSION != null ? process.env.APP_VERSION : 'dev', // Git commit SHA.
   DEFAULT_LOCALE: 'en',
-  // TODO: Read it from graphcool/.graphcoolrc and copy it here and to
-  // .graphqlconfig as well.
   GRAPHQL_ENDPOINT: production
     ? 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu'
     : 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu',

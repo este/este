@@ -1,5 +1,4 @@
 {
-  "name": "graphcool",
   "scripts": {
     "deps": "rimraf node_modules yarn.lock && yarn"
   },
@@ -13,6 +12,7 @@
     "validator": "^9.0.0"
   },
   "devDependencies": {
+    "graphcool": "^0.11.5",
     "rimraf": "^2.6.2"
   }
 }

@@ -10,7 +10,7 @@ Universal React. Explore the source code.
 
 ## Starting a project
 
-### Start Development
+### Start development
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
@@ -19,16 +19,16 @@ Universal React. Explore the source code.
 
 ### Set up custom graph.cool backend
 
-Add your graph.cool endpoint to graphcool/.graphcoolrc and update it also in .graphqlconfig and env-config.js files.
-
-* `npm install graphcool -g`
 * `cd graphcool`
-* `yarn install`
-* `graphcool login`
-* `graphcool deploy`
+* `yarn`
+* `yarn graphcool login`
+* `yarn graphcool deploy`
+* `yarn graphcool playground` In URL, replace `simple` with `relay`.
+
+Add endpoint to env-config.js, .graphqlconfig, and graphcool/.graphcoolrc files.
 
 ## Links
 
-* [medium.com/@steida](https://medium.com/@steida/)
 * [twitter.com/estejs](https://twitter.com/estejs)
+* [medium.com/@steida](https://medium.com/@steida/)
 * [wiki](https://github.com/este/este/wiki)
