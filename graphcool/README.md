@@ -2,7 +2,7 @@
 
 1. Update `/graphcool`
 2. `yarn graphcool deploy`
-3. `cd ..``
+3. `cd ..`
 4. `yarn scheme`
 5. `yarn relay`
 
