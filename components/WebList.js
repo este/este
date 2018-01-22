@@ -24,7 +24,6 @@ const WebList = ({ viewer, userId }: Props) => (
         edge =>
           edge && (
             <WebListItem
-              // $FlowFixMe https://github.com/este/este/issues/1442
               web={edge.node}
               viewer={viewer}
               key={edge.node.id}

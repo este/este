@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5985e34790b1847dd3a0f5e9362577d5
+ * @relayHash 95271006909160804b324543be06021f
  */
 
 /* eslint-disable */
@@ -8,9 +8,140 @@
 'use strict';
 
 /*::
-import type {ConcreteBatch} from 'relay-runtime';
+import type { ConcreteRequest } from 'relay-runtime';
+type WebList_viewer$ref = any;
+export type pagesQueryVariables = {|
+  filter?: ?{
+    AND?: ?$ReadOnlyArray<{
+      AND?: $ReadOnlyArray<any>,
+      OR?: $ReadOnlyArray<any>,
+      createdAt?: ?any,
+      createdAt_not?: ?any,
+      createdAt_in?: ?$ReadOnlyArray<any>,
+      createdAt_not_in?: ?$ReadOnlyArray<any>,
+      createdAt_lt?: ?any,
+      createdAt_lte?: ?any,
+      createdAt_gt?: ?any,
+      createdAt_gte?: ?any,
+      domain?: ?string,
+      domain_not?: ?string,
+      domain_in?: ?$ReadOnlyArray<string>,
+      domain_not_in?: ?$ReadOnlyArray<string>,
+      domain_lt?: ?string,
+      domain_lte?: ?string,
+      domain_gt?: ?string,
+      domain_gte?: ?string,
+      domain_contains?: ?string,
+      domain_not_contains?: ?string,
+      domain_starts_with?: ?string,
+      domain_not_starts_with?: ?string,
+      domain_ends_with?: ?string,
+      domain_not_ends_with?: ?string,
+      id?: ?string,
+      id_not?: ?string,
+      id_in?: ?$ReadOnlyArray<string>,
+      id_not_in?: ?$ReadOnlyArray<string>,
+      id_lt?: ?string,
+      id_lte?: ?string,
+      id_gt?: ?string,
+      id_gte?: ?string,
+      id_contains?: ?string,
+      id_not_contains?: ?string,
+      id_starts_with?: ?string,
+      id_not_starts_with?: ?string,
+      id_ends_with?: ?string,
+      id_not_ends_with?: ?string,
+      name?: ?string,
+      name_not?: ?string,
+      name_in?: ?$ReadOnlyArray<string>,
+      name_not_in?: ?$ReadOnlyArray<string>,
+      name_lt?: ?string,
+      name_lte?: ?string,
+      name_gt?: ?string,
+      name_gte?: ?string,
+      name_contains?: ?string,
+      name_not_contains?: ?string,
+      name_starts_with?: ?string,
+      name_not_starts_with?: ?string,
+      name_ends_with?: ?string,
+      name_not_ends_with?: ?string,
+      updatedAt?: ?any,
+      updatedAt_not?: ?any,
+      updatedAt_in?: ?$ReadOnlyArray<any>,
+      updatedAt_not_in?: ?$ReadOnlyArray<any>,
+      updatedAt_lt?: ?any,
+      updatedAt_lte?: ?any,
+      updatedAt_gt?: ?any,
+      updatedAt_gte?: ?any,
+      owner?: any,
+    }>,
+    OR?: $ReadOnlyArray<any>,
+    createdAt?: ?any,
+    createdAt_not?: ?any,
+    createdAt_in?: ?$ReadOnlyArray<any>,
+    createdAt_not_in?: ?$ReadOnlyArray<any>,
+    createdAt_lt?: ?any,
+    createdAt_lte?: ?any,
+    createdAt_gt?: ?any,
+    createdAt_gte?: ?any,
+    domain?: ?string,
+    domain_not?: ?string,
+    domain_in?: ?$ReadOnlyArray<string>,
+    domain_not_in?: ?$ReadOnlyArray<string>,
+    domain_lt?: ?string,
+    domain_lte?: ?string,
+    domain_gt?: ?string,
+    domain_gte?: ?string,
+    domain_contains?: ?string,
+    domain_not_contains?: ?string,
+    domain_starts_with?: ?string,
+    domain_not_starts_with?: ?string,
+    domain_ends_with?: ?string,
+    domain_not_ends_with?: ?string,
+    id?: ?string,
+    id_not?: ?string,
+    id_in?: ?$ReadOnlyArray<string>,
+    id_not_in?: ?$ReadOnlyArray<string>,
+    id_lt?: ?string,
+    id_lte?: ?string,
+    id_gt?: ?string,
+    id_gte?: ?string,
+    id_contains?: ?string,
+    id_not_contains?: ?string,
+    id_starts_with?: ?string,
+    id_not_starts_with?: ?string,
+    id_ends_with?: ?string,
+    id_not_ends_with?: ?string,
+    name?: ?string,
+    name_not?: ?string,
+    name_in?: ?$ReadOnlyArray<string>,
+    name_not_in?: ?$ReadOnlyArray<string>,
+    name_lt?: ?string,
+    name_lte?: ?string,
+    name_gt?: ?string,
+    name_gte?: ?string,
+    name_contains?: ?string,
+    name_not_contains?: ?string,
+    name_starts_with?: ?string,
+    name_not_starts_with?: ?string,
+    name_ends_with?: ?string,
+    name_not_ends_with?: ?string,
+    updatedAt?: ?any,
+    updatedAt_not?: ?any,
+    updatedAt_in?: ?$ReadOnlyArray<any>,
+    updatedAt_not_in?: ?$ReadOnlyArray<any>,
+    updatedAt_lt?: ?any,
+    updatedAt_lte?: ?any,
+    updatedAt_gt?: ?any,
+    updatedAt_gte?: ?any,
+    owner?: any,
+  },
+  isAuthenticated: boolean,
+|};
 export type pagesQueryResponse = {|
-  +viewer: {| |};
+  +viewer: {|
+    +$fragmentRefs: WebList_viewer$ref,
+  |},
 |};
 */
 
@@ -32,20 +163,13 @@ fragment WebList_viewer on Viewer {
       node {
         id
         ...WebListItem_web
+        __typename
       }
+      cursor
     }
-    ... on WebConnection {
-      edges {
-        cursor
-        node {
-          __typename
-          id
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
@@ -61,32 +185,49 @@ fragment WebListItem_web on Web {
 }
 */
 
-const batch /*: ConcreteBatch*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "filter",
+    "type": "WebFilter",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "isAuthenticated",
+    "type": "Boolean!",
+    "defaultValue": null
+  }
+],
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
+  "kind": "Request",
+  "operationKind": "query",
+  "name": "pagesQuery",
+  "id": null,
+  "text": "query pagesQuery(\n  $filter: WebFilter\n  $isAuthenticated: Boolean!\n) {\n  viewer {\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) @include(if: $isAuthenticated) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n",
+  "metadata": {},
   "fragment": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "filter",
-        "type": "WebFilter",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "isAuthenticated",
-        "type": "Boolean!",
-        "defaultValue": null
-      }
-    ],
     "kind": "Fragment",
-    "metadata": null,
     "name": "pagesQuery",
+    "type": "Query",
+    "metadata": null,
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
+        "name": "viewer",
+        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
-        "name": "viewer",
         "plural": false,
         "selections": [
           {
@@ -94,271 +235,193 @@ const batch /*: ConcreteBatch*/ = {
             "name": "WebList_viewer",
             "args": null
           }
-        ],
-        "storageKey": null
+        ]
       }
-    ],
-    "type": "Query"
+    ]
   },
-  "id": null,
-  "kind": "Batch",
-  "metadata": {},
-  "name": "pagesQuery",
-  "query": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "filter",
-        "type": "WebFilter",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "isAuthenticated",
-        "type": "Boolean!",
-        "defaultValue": null
-      }
-    ],
-    "kind": "Root",
+  "operation": {
+    "kind": "Operation",
     "name": "pagesQuery",
-    "operation": "query",
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
+        "name": "viewer",
+        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
-        "name": "viewer",
         "plural": false,
         "selections": [
+          v1,
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "kind": "InlineFragment",
-            "type": "Viewer",
+            "kind": "Condition",
+            "passingValue": true,
+            "condition": "isAuthenticated",
             "selections": [
               {
-                "kind": "Condition",
-                "passingValue": true,
-                "condition": "isAuthenticated",
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "allWebs",
+                "storageKey": null,
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "filter",
+                    "variableName": "filter",
+                    "type": "WebFilter"
+                  },
+                  {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 100,
+                    "type": "Int"
+                  },
+                  {
+                    "kind": "Literal",
+                    "name": "orderBy",
+                    "value": "createdAt_ASC",
+                    "type": "WebOrderBy"
+                  }
+                ],
+                "concreteType": "WebConnection",
+                "plural": false,
                 "selections": [
                   {
                     "kind": "LinkedField",
                     "alias": null,
-                    "args": [
-                      {
-                        "kind": "Variable",
-                        "name": "filter",
-                        "variableName": "filter",
-                        "type": "WebFilter"
-                      },
-                      {
-                        "kind": "Literal",
-                        "name": "first",
-                        "value": 100,
-                        "type": "Int"
-                      },
-                      {
-                        "kind": "Literal",
-                        "name": "orderBy",
-                        "value": "createdAt_ASC",
-                        "type": "WebOrderBy"
-                      }
-                    ],
-                    "concreteType": "WebConnection",
-                    "name": "allWebs",
-                    "plural": false,
+                    "name": "edges",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "WebEdge",
+                    "plural": true,
                     "selections": [
                       {
                         "kind": "LinkedField",
                         "alias": null,
+                        "name": "node",
+                        "storageKey": null,
                         "args": null,
-                        "concreteType": "WebEdge",
-                        "name": "edges",
-                        "plural": true,
+                        "concreteType": "Web",
+                        "plural": false,
                         "selections": [
+                          v1,
                           {
-                            "kind": "LinkedField",
+                            "kind": "ScalarField",
                             "alias": null,
+                            "name": "updatedAt",
                             "args": null,
-                            "concreteType": "Web",
-                            "name": "node",
-                            "plural": false,
-                            "selections": [
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "id",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "InlineFragment",
-                                "type": "Web",
-                                "selections": [
-                                  {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "updatedAt",
-                                    "storageKey": null
-                                  },
-                                  {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "domain",
-                                    "storageKey": null
-                                  },
-                                  {
-                                    "kind": "LinkedField",
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "User",
-                                    "name": "owner",
-                                    "plural": false,
-                                    "selections": [
-                                      {
-                                        "kind": "ScalarField",
-                                        "alias": null,
-                                        "args": null,
-                                        "name": "id",
-                                        "storageKey": null
-                                      }
-                                    ],
-                                    "storageKey": null
-                                  },
-                                  {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "name",
-                                    "storageKey": null
-                                  }
-                                ]
-                              }
-                            ],
                             "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "InlineFragment",
-                        "type": "WebConnection",
-                        "selections": [
+                          },
                           {
-                            "kind": "LinkedField",
+                            "kind": "ScalarField",
                             "alias": null,
+                            "name": "domain",
                             "args": null,
-                            "concreteType": "WebEdge",
-                            "name": "edges",
-                            "plural": true,
-                            "selections": [
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "cursor",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "LinkedField",
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "Web",
-                                "name": "node",
-                                "plural": false,
-                                "selections": [
-                                  {
-                                    "kind": "ScalarField",
-                                    "alias": null,
-                                    "args": null,
-                                    "name": "__typename",
-                                    "storageKey": null
-                                  }
-                                ],
-                                "storageKey": null
-                              }
-                            ],
                             "storageKey": null
                           },
                           {
                             "kind": "LinkedField",
                             "alias": null,
+                            "name": "owner",
+                            "storageKey": null,
                             "args": null,
-                            "concreteType": "PageInfo",
-                            "name": "pageInfo",
+                            "concreteType": "User",
                             "plural": false,
                             "selections": [
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "endCursor",
-                                "storageKey": null
-                              },
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "hasNextPage",
-                                "storageKey": null
-                              }
-                            ],
+                              v1
+                            ]
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "name",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "__typename",
+                            "args": null,
                             "storageKey": null
                           }
                         ]
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "cursor",
+                        "args": null,
+                        "storageKey": null
                       }
-                    ],
-                    "storageKey": null
+                    ]
                   },
                   {
-                    "kind": "LinkedHandle",
+                    "kind": "LinkedField",
                     "alias": null,
-                    "args": [
+                    "name": "pageInfo",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "plural": false,
+                    "selections": [
                       {
-                        "kind": "Variable",
-                        "name": "filter",
-                        "variableName": "filter",
-                        "type": "WebFilter"
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "endCursor",
+                        "args": null,
+                        "storageKey": null
                       },
                       {
-                        "kind": "Literal",
-                        "name": "first",
-                        "value": 100,
-                        "type": "Int"
-                      },
-                      {
-                        "kind": "Literal",
-                        "name": "orderBy",
-                        "value": "createdAt_ASC",
-                        "type": "WebOrderBy"
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "hasNextPage",
+                        "args": null,
+                        "storageKey": null
                       }
-                    ],
-                    "handle": "connection",
-                    "name": "allWebs",
-                    "key": "WebList_allWebs",
-                    "filters": [
-                      "filter",
-                      "orderBy"
                     ]
                   }
+                ]
+              },
+              {
+                "kind": "LinkedHandle",
+                "alias": null,
+                "name": "allWebs",
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "filter",
+                    "variableName": "filter",
+                    "type": "WebFilter"
+                  },
+                  {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 100,
+                    "type": "Int"
+                  },
+                  {
+                    "kind": "Literal",
+                    "name": "orderBy",
+                    "value": "createdAt_ASC",
+                    "type": "WebOrderBy"
+                  }
+                ],
+                "handle": "connection",
+                "key": "WebList_allWebs",
+                "filters": [
+                  "filter",
+                  "orderBy"
                 ]
               }
             ]
           }
-        ],
-        "storageKey": null
+        ]
       }
     ]
-  },
-  "text": "query pagesQuery(\n  $filter: WebFilter\n  $isAuthenticated: Boolean!\n) {\n  viewer {\n    ...WebList_viewer\n    id\n  }\n}\n\nfragment WebList_viewer on Viewer {\n  allWebs(filter: $filter, orderBy: createdAt_ASC, first: 100) @include(if: $isAuthenticated) {\n    edges {\n      node {\n        id\n        ...WebListItem_web\n      }\n    }\n    ... on WebConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n"
+  }
 };
-
-module.exports = batch;
+})();
+(node/*: any*/).hash = '40c8516ee6a77d2f8217d53661db110a';
+module.exports = node;

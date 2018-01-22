@@ -45,11 +45,7 @@ const Authenticated = ({ viewer, userId }) => (
     <Heading size={1}>
       <ManageYourWebsMessage />
     </Heading>
-    <WebList
-      // $FlowFixMe https://github.com/este/este/issues/1442
-      viewer={viewer}
-      userId={userId}
-    />
+    <WebList viewer={viewer} userId={userId} />
     <CreateWeb userId={userId} />
   </Box>
 );

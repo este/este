@@ -20,7 +20,7 @@
     "test": "flow && jest && yarn build",
     "deps": "rimraf node_modules yarn.lock flow-typed/npm && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay": "rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema schema.graphql",
+    "relay": "rimraf **/__generated__ && hotfixes/relay-compiler-temp --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema schema.graphql",
     "relay:watch": "yarn relay -- --watch",
     "schema": "graphql get-schema dev"
   },
@@ -52,9 +52,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-intl": "^2.3.0",
-    "react-relay": "^1.2.0",
+    "react-relay": "^1.5.0-rc.1",
     "react-x-ray": "^1.0.0-3",
-    "relay-runtime": "^1.2.0",
+    "relay-runtime": "^1.5.0-rc.1",
     "resize-observer-polyfill": "^1.5.0",
     "smoothscroll-polyfill": "^0.4.0",
     "styled-jsx": "^2.2.1",
@@ -65,7 +65,7 @@
   "devDependencies": {
     "babel-eslint": "^8.0.1",
     "babel-jest": "^22.0.1",
-    "babel-plugin-relay": "^1.2.0",
+    "babel-plugin-relay": "^1.5.0-rc.1",
     "babel-plugin-transform-define": "^1.2.0",
     "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.0.0",
@@ -81,7 +81,7 @@
     "jest": "^22.0.1",
     "prettier": "^1.5.1",
     "react-test-renderer": "^16.0.0",
-    "relay-compiler": "^1.2.0",
+    "relay-compiler": "^1.5.0-rc.1",
     "relay-devtools": "^1.4.0",
     "rimraf": "^2.4.5"
   }

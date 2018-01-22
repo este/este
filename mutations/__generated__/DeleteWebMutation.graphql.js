@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8aa7e606e6f78a0496f9a7185390b6fd
+ * @relayHash f0f9a79439e63e9c4880b01359595599
  */
 
 /* eslint-disable */
@@ -8,17 +8,17 @@
 'use strict';
 
 /*::
-import type {ConcreteBatch} from 'relay-runtime';
+import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteWebMutationVariables = {|
   input: {
-    id: string;
-    clientMutationId: string;
-  };
+    id: string,
+    clientMutationId: string,
+  },
 |};
 export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
-    +deletedId: ?string;
-  |};
+    +deletedId: ?string,
+  |},
 |};
 */
 
@@ -33,93 +33,64 @@ mutation DeleteWebMutation(
 }
 */
 
-const batch /*: ConcreteBatch*/ = {
-  "fragment": {
-    "argumentDefinitions": [
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "input",
+    "type": "DeleteWebInput!",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "deleteWeb",
+    "storageKey": null,
+    "args": [
       {
-        "kind": "LocalArgument",
+        "kind": "Variable",
         "name": "input",
-        "type": "DeleteWebInput!",
-        "defaultValue": null
+        "variableName": "input",
+        "type": "DeleteWebInput!"
       }
     ],
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "DeleteWebMutation",
+    "concreteType": "DeleteWebPayload",
+    "plural": false,
     "selections": [
       {
-        "kind": "LinkedField",
+        "kind": "ScalarField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "input",
-            "type": "DeleteWebInput!"
-          }
-        ],
-        "concreteType": "DeleteWebPayload",
-        "name": "deleteWeb",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "deletedId",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "type": "Mutation"
-  },
-  "id": null,
-  "kind": "Batch",
-  "metadata": {},
-  "name": "DeleteWebMutation",
-  "query": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "input",
-        "type": "DeleteWebInput!",
-        "defaultValue": null
-      }
-    ],
-    "kind": "Root",
-    "name": "DeleteWebMutation",
-    "operation": "mutation",
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "input",
-            "variableName": "input",
-            "type": "DeleteWebInput!"
-          }
-        ],
-        "concreteType": "DeleteWebPayload",
-        "name": "deleteWeb",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "deletedId",
-            "storageKey": null
-          }
-        ],
+        "name": "deletedId",
+        "args": null,
         "storageKey": null
       }
     ]
+  }
+];
+return {
+  "kind": "Request",
+  "operationKind": "mutation",
+  "name": "DeleteWebMutation",
+  "id": null,
+  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    deletedId\n  }\n}\n",
+  "metadata": {},
+  "fragment": {
+    "kind": "Fragment",
+    "name": "DeleteWebMutation",
+    "type": "Mutation",
+    "metadata": null,
+    "argumentDefinitions": v0,
+    "selections": v1
   },
-  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    deletedId\n  }\n}\n"
+  "operation": {
+    "kind": "Operation",
+    "name": "DeleteWebMutation",
+    "argumentDefinitions": v0,
+    "selections": v1
+  }
 };
-
-module.exports = batch;
+})();
+(node/*: any*/).hash = 'bbad62e9ed566ffdea0d808e57d34c0e';
+module.exports = node;

@@ -8,7 +8,6 @@ import type { AppError } from '../lib/appError';
 import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
-// $FlowFixMe Wrong libdef.
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 import { LocaleProvider } from './Locale';

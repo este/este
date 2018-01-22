@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b2b1a9098be93db2f44053318b69ca75
+ * @relayHash 3046380e004bcd1e59f7aea901d034c7
  */
 
 /* eslint-disable */
@@ -8,16 +8,16 @@
 'use strict';
 
 /*::
-import type {ConcreteBatch} from 'relay-runtime';
+import type { ConcreteRequest } from 'relay-runtime';
 export type SignupMutationVariables = {|
-  email: string;
-  password: string;
+  email: string,
+  password: string,
 |};
 export type SignupMutationResponse = {|
   +signupUser: ?{|
-    +id: string;
-    +token: string;
-  |};
+    +id: string,
+    +token: string,
+  |},
 |};
 */
 
@@ -34,131 +34,83 @@ mutation SignupMutation(
 }
 */
 
-const batch /*: ConcreteBatch*/ = {
-  "fragment": {
-    "argumentDefinitions": [
-      {
-        "kind": "LocalArgument",
-        "name": "email",
-        "type": "String!",
-        "defaultValue": null
-      },
-      {
-        "kind": "LocalArgument",
-        "name": "password",
-        "type": "String!",
-        "defaultValue": null
-      }
-    ],
-    "kind": "Fragment",
-    "metadata": null,
-    "name": "SignupMutation",
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "email",
-            "variableName": "email",
-            "type": "String!"
-          },
-          {
-            "kind": "Variable",
-            "name": "password",
-            "variableName": "password",
-            "type": "String!"
-          }
-        ],
-        "concreteType": "SignupUserPayload",
-        "name": "signupUser",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "token",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ],
-    "type": "Mutation"
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "email",
+    "type": "String!",
+    "defaultValue": null
   },
-  "id": null,
-  "kind": "Batch",
-  "metadata": {},
-  "name": "SignupMutation",
-  "query": {
-    "argumentDefinitions": [
+  {
+    "kind": "LocalArgument",
+    "name": "password",
+    "type": "String!",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "signupUser",
+    "storageKey": null,
+    "args": [
       {
-        "kind": "LocalArgument",
+        "kind": "Variable",
         "name": "email",
-        "type": "String!",
-        "defaultValue": null
+        "variableName": "email",
+        "type": "String!"
       },
       {
-        "kind": "LocalArgument",
+        "kind": "Variable",
         "name": "password",
-        "type": "String!",
-        "defaultValue": null
+        "variableName": "password",
+        "type": "String!"
       }
     ],
-    "kind": "Root",
-    "name": "SignupMutation",
-    "operation": "mutation",
+    "concreteType": "SignupUserPayload",
+    "plural": false,
     "selections": [
       {
-        "kind": "LinkedField",
+        "kind": "ScalarField",
         "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "email",
-            "variableName": "email",
-            "type": "String!"
-          },
-          {
-            "kind": "Variable",
-            "name": "password",
-            "variableName": "password",
-            "type": "String!"
-          }
-        ],
-        "concreteType": "SignupUserPayload",
-        "name": "signupUser",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "token",
-            "storageKey": null
-          }
-        ],
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "token",
+        "args": null,
         "storageKey": null
       }
     ]
+  }
+];
+return {
+  "kind": "Request",
+  "operationKind": "mutation",
+  "name": "SignupMutation",
+  "id": null,
+  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signupUser(email: $email, password: $password) {\n    id\n    token\n  }\n}\n",
+  "metadata": {},
+  "fragment": {
+    "kind": "Fragment",
+    "name": "SignupMutation",
+    "type": "Mutation",
+    "metadata": null,
+    "argumentDefinitions": v0,
+    "selections": v1
   },
-  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signupUser(email: $email, password: $password) {\n    id\n    token\n  }\n}\n"
+  "operation": {
+    "kind": "Operation",
+    "name": "SignupMutation",
+    "argumentDefinitions": v0,
+    "selections": v1
+  }
 };
-
-module.exports = batch;
+})();
+(node/*: any*/).hash = '9d89320c81c07c2ee94a442630e55867';
+module.exports = node;
