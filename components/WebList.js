@@ -23,12 +23,7 @@ const WebList = ({ viewer, userId }: Props) => (
       viewer.allWebs.edges.map(
         edge =>
           edge && (
-            <WebListItem
-              web={edge.node}
-              viewer={viewer}
-              key={edge.node.id}
-              userId={userId}
-            />
+            <WebListItem web={edge.node} userId={userId} key={edge.node.id} />
           ),
       )}
   </Box>
