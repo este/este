@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as validation from '../backend/src/validation';
+import * as validation from '../backend/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 

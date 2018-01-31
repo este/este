@@ -3,7 +3,7 @@ import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import Text from './Text';
 import { FormattedMessage } from 'react-intl';
-import type { ValidationError } from '../backend/src/validation';
+import type { ValidationError } from '../backend/validation';
 
 type Value = {|
   appError: ?ValidationError,

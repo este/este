@@ -12,7 +12,7 @@ import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import Router from 'next/router';
 import Mutate from './Mutate';
-import * as validation from '../backend/src/validation';
+import * as validation from '../backend/validation';
 import { setCookie } from '../lib/cookie';
 import type { IntlShape } from 'react-intl';
 
