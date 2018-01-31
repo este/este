@@ -8,9 +8,9 @@ import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import Mutate, { clientMutationId } from './Mutate';
-import * as validation from '../graphcool/lib/validation';
+import { type ValidationErrors } from '../backend/src/validation';
 import ValidationError from './ValidationError';
-import { validateWeb } from '../graphcool/functions/createWeb';
+import { validateNewWeb } from '../backend/src/validation/index';
 
 type Props = {
   userId: string,
@@ -22,7 +22,7 @@ type Fields = {
 
 type State = {
   pending: boolean,
-  validationErrors: validation.ValidationErrors<Fields>,
+  validationErrors: ValidationErrors<Fields>,
 } & Fields;
 
 const initialState = {
@@ -44,28 +44,28 @@ class CreateWeb extends React.PureComponent<Props, State> {
 
   // Using an existential type is ok. It works well.
   createWeb = (mutate: *) => () => {
-    const variables = {
-      input: {
-        domain: '', // computed by graphcool/functions/createWeb.js nameToDomain
-        name: this.state.name.trim(),
-        ownerId: this.props.userId,
-        clientMutationId: clientMutationId(),
-      },
-    };
-
-    const validationErrors = validateWeb(variables.input);
-    if (validationErrors) {
-      this.setState({ validationErrors });
-      return;
-    }
-
-    this.setState({ pending: true });
-    mutate(
-      CreateWebMutation.commit(this.props.userId),
-      variables,
-      this.handleCompleted,
-      this.handleError,
-    );
+    // const variables = {
+    //   input: {
+    //     domain: '', // computed by g r a p h c o o l/functions/createWeb.js nameToDomain
+    //     name: this.state.name,
+    //     ownerId: this.props.userId,
+    //     clientMutationId: clientMutationId(),
+    //   },
+    // };
+    //
+    // const validationErrors = validateNewWeb(variables.input);
+    // if (validationErrors) {
+    //   this.setState({ validationErrors });
+    //   return;
+    // }
+    //
+    // this.setState({ pending: true });
+    // mutate(
+    //   CreateWebMutation.commit(this.props.userId),
+    //   variables,
+    //   this.handleCompleted,
+    //   this.handleError,
+    // );
   };
 
   render() {

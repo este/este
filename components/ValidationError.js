@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as validation from '../graphcool/lib/validation';
+import * as validation from '../backend/src/validation';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 
@@ -11,26 +11,11 @@ type ValidationErrorProps = {
 class ValidationError extends React.PureComponent<ValidationErrorProps> {
   static getValidationErrorMessage = (error: validation.ValidationError) => {
     switch (error.type) {
-      case 'alreadyExists':
+      case 'required':
         return (
           <FormattedMessage
-            defaultMessage="Already exists."
-            id="validationError.alreadyExists"
-          />
-        );
-      case 'email':
-        return (
-          <FormattedMessage
-            defaultMessage="Email address is not valid."
-            id="validationError.email"
-          />
-        );
-      case 'maxLength':
-        return (
-          <FormattedMessage
-            defaultMessage="{maxLength} characters maximum."
-            id="validationError.maxLength"
-            values={{ maxLength: error.maxLength }}
+            defaultMessage="Please fill out this field."
+            id="validationError.required"
           />
         );
       case 'minLength':
@@ -41,25 +26,47 @@ class ValidationError extends React.PureComponent<ValidationErrorProps> {
             values={{ minLength: error.minLength }}
           />
         );
-      case 'required':
+      case 'maxLength':
         return (
           <FormattedMessage
-            defaultMessage="Please fill out this field."
-            id="validationError.required"
+            defaultMessage="{maxLength} characters maximum."
+            id="validationError.maxLength"
+            values={{ maxLength: error.maxLength }}
           />
         );
-      case 'requiredAgree':
+      case 'email':
         return (
           <FormattedMessage
-            defaultMessage="Please think about it."
-            id="validationError.requiredAgree"
+            defaultMessage="Email address is not valid."
+            id="validationError.email"
           />
         );
-      case 'wrongPassword':
+      case 'alreadyExists':
         return (
           <FormattedMessage
-            defaultMessage="The password you have entered is invalid."
-            id="validationError.wrongPassword"
+            defaultMessage="Already exists."
+            id="validationError.alreadyExists"
+          />
+        );
+      case 'notExists':
+        return (
+          <FormattedMessage
+            defaultMessage="Not exists."
+            id="validationError.notExists"
+          />
+        );
+      case 'invalid':
+        return (
+          <FormattedMessage
+            defaultMessage="Invalid."
+            id="validationError.invalid"
+          />
+        );
+      case 'notAuthorized':
+        return (
+          <FormattedMessage
+            defaultMessage="Not authorized."
+            id="validationError.notAuthorized"
           />
         );
       default:

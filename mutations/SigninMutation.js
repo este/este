@@ -8,9 +8,11 @@ import type {
 
 const mutation = graphql`
   mutation SigninMutation($email: String!, $password: String!) {
-    authenticateUser(email: $email, password: $password) {
-      id
+    signin(email: $email, password: $password) {
       token
+      user {
+        id
+      }
     }
   }
 `;

@@ -10,7 +10,7 @@ import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import { titles } from '../lib/sitemap';
-import type { mePageQueryResponse } from './__generated__/mePageQuery.graphql';
+import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import Heading from '../components/Heading';
@@ -35,8 +35,8 @@ const signOut = () => {
 };
 
 const Me = ({ data, intl }) => {
-  const { viewer }: mePageQueryResponse = data;
-  const email = viewer.user && viewer.user.email;
+  const { me }: meQueryResponse = data;
+  const email = me && me.email;
   return (
     <Page title={intl.formatMessage(titles.me)}>
       {email != null && (
@@ -73,11 +73,10 @@ const Me = ({ data, intl }) => {
 export default app(Me, {
   requireAuth: true,
   query: graphql`
-    query mePageQuery {
-      viewer {
-        user {
-          email
-        }
+    # query name is enforced via Relay compiler.
+    query meQuery {
+      me {
+        email
       }
     }
   `,

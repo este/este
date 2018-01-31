@@ -1,4 +1,4 @@
-// flow-typed signature: 64621d974a70da142e03227336028ff0
+// flow-typed signature: 722893c8065f7020ce7995d5f78e6941
 // flow-typed version: <<STUB>>/eslint-plugin-react_v^7.0.1/flow_v0.64.0
 
 /**
@@ -46,6 +46,10 @@ declare module 'eslint-plugin-react/lib/rules/forbid-component-props' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/rules/forbid-dom-props' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/forbid-elements' {
   declare module.exports: any;
 }
@@ -59,6 +63,10 @@ declare module 'eslint-plugin-react/lib/rules/forbid-prop-types' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/jsx-boolean-value' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/jsx-child-element-spacing' {
   declare module.exports: any;
 }
 
@@ -139,6 +147,10 @@ declare module 'eslint-plugin-react/lib/rules/jsx-one-expression-per-line' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/jsx-pascal-case' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/jsx-sort-default-props' {
   declare module.exports: any;
 }
 
@@ -230,6 +242,10 @@ declare module 'eslint-plugin-react/lib/rules/no-string-refs' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/rules/no-this-in-sfc' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/no-typos' {
   declare module.exports: any;
 }
@@ -314,6 +330,10 @@ declare module 'eslint-plugin-react/lib/util/Components' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/util/docsUrl' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/util/getTokenBeforeClosingBracket' {
   declare module.exports: any;
 }
@@ -363,6 +383,9 @@ declare module 'eslint-plugin-react/lib/rules/display-name.js' {
 declare module 'eslint-plugin-react/lib/rules/forbid-component-props.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/forbid-component-props'>;
 }
+declare module 'eslint-plugin-react/lib/rules/forbid-dom-props.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/forbid-dom-props'>;
+}
 declare module 'eslint-plugin-react/lib/rules/forbid-elements.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/forbid-elements'>;
 }
@@ -374,6 +397,9 @@ declare module 'eslint-plugin-react/lib/rules/forbid-prop-types.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-boolean-value.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-boolean-value'>;
+}
+declare module 'eslint-plugin-react/lib/rules/jsx-child-element-spacing.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-child-element-spacing'>;
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-closing-bracket-location.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-closing-bracket-location'>;
@@ -434,6 +460,9 @@ declare module 'eslint-plugin-react/lib/rules/jsx-one-expression-per-line.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-pascal-case.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-pascal-case'>;
+}
+declare module 'eslint-plugin-react/lib/rules/jsx-sort-default-props.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-sort-default-props'>;
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-sort-props.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-sort-props'>;
@@ -501,6 +530,9 @@ declare module 'eslint-plugin-react/lib/rules/no-set-state.js' {
 declare module 'eslint-plugin-react/lib/rules/no-string-refs.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-string-refs'>;
 }
+declare module 'eslint-plugin-react/lib/rules/no-this-in-sfc.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-this-in-sfc'>;
+}
 declare module 'eslint-plugin-react/lib/rules/no-typos.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-typos'>;
 }
@@ -563,6 +595,9 @@ declare module 'eslint-plugin-react/lib/util/ast.js' {
 }
 declare module 'eslint-plugin-react/lib/util/Components.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/util/Components'>;
+}
+declare module 'eslint-plugin-react/lib/util/docsUrl.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/util/docsUrl'>;
 }
 declare module 'eslint-plugin-react/lib/util/getTokenBeforeClosingBracket.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/util/getTokenBeforeClosingBracket'>;

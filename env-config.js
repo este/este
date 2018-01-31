@@ -18,8 +18,8 @@ module.exports = {
     process.env.APP_VERSION != null ? process.env.APP_VERSION : 'dev', // Git commit SHA.
   DEFAULT_LOCALE: 'en',
   GRAPHQL_ENDPOINT: production
-    ? 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu'
-    : 'https://api.graph.cool/relay/v1/cj9dlwn7x1s9s01572c1qfriu',
+    ? 'http://localhost:4000'
+    : 'http://localhost:4000',
   HOSTNAME:
     process.env.NOW_URL != null
       ? new URL(process.env.NOW_URL).hostname

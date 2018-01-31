@@ -10,8 +10,7 @@ const { parse } = require('url');
 const { readFileSync } = require('fs');
 const { maybeMapReqUrl } = require('./lib/sitemap');
 
-// Note this file is not transpiled because it's custom server.
-// Next.js does not transpile custom servers for good reason.
+// TODO: https://github.com/este/este/issues/1450
 
 // Polyfill Node with `Intl` that has data for all locales.
 // See: https://formatjs.io/guides/runtime-environments/#server

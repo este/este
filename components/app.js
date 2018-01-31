@@ -4,7 +4,7 @@ import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
-import type { AppError } from '../lib/appError';
+import type { ValidationError } from '../backend/src/validation';
 import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
@@ -65,7 +65,7 @@ type InitialAppProps = {|
 type AppProps = NextProps & InitialAppProps;
 
 type AppState = {|
-  appError: ?AppError,
+  appError: ?ValidationError,
 |};
 
 type Page = React.ComponentType<
@@ -188,7 +188,7 @@ const app = (
       }, fiveSecs);
     }
 
-    dispatchAppError = (appError: AppError) => {
+    dispatchAppError = (appError: ValidationError) => {
       this.setAppErrorToNullAfterAWhile();
       this.setState({ appError });
     };

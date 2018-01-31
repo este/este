@@ -1,0 +1,31 @@
+{
+  "name": "prisma",
+  "scripts": {
+    "start": "nodemon -e js,graphql -x node -r dotenv/config src/index.js",
+    "debug": "nodemon -e js,graphql -x node --inspect -r dotenv/config src/index.js",
+    "playground": "graphql playground --port 5000",
+    "dev": "npm-run-all --parallel start playground",
+    "deps": "rimraf node_modules yarn.lock && yarn",
+    "schema": "yarn graphql get-schema -p app -o schema.graphql"
+  },
+  "dependencies": {
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "bcryptjs": "2.4.3",
+    "diacritics-map": "^0.1.0",
+    "graphql-yoga": "1.2.0",
+    "jsonwebtoken": "8.1.1",
+    "prisma-binding": "1.4.0",
+    "validator": "^9.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.0",
+    "graphql-cli": "^2.12.5",
+    "nodemon": "1.14.11",
+    "npm-run-all": "4.1.2",
+    "prisma": "^1.0.10",
+    "rimraf": "^2.6.2"
+  }
+}

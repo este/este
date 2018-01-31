@@ -8,9 +8,11 @@ import type {
 
 const mutation = graphql`
   mutation SignupMutation($email: String!, $password: String!) {
-    signupUser(email: $email, password: $password) {
-      id
+    signup(email: $email, password: $password) {
       token
+      user {
+        id
+      }
     }
   }
 `;

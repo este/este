@@ -1,6 +1,8 @@
 // @flow
 const { execSync } = require('child_process');
 
+console.log('TODO: Deploy DB with config etc.');
+
 let commitSha = 'dev';
 
 try {

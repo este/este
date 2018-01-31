@@ -12,7 +12,7 @@ import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import Router from 'next/router';
 import Mutate from './Mutate';
-import * as validation from '../graphcool/lib/validation';
+import * as validation from '../backend/src/validation';
 import { setCookie } from '../lib/cookie';
 import type { IntlShape } from 'react-intl';
 
@@ -52,10 +52,11 @@ const initialState = {
 class Auth extends React.PureComponent<Props, State> {
   state = initialState;
 
-  handleCompleted = (idAndToken: *) => {
+  handleCompleted = (response: *) => {
     this.setState({ pending: false });
-    if (!idAndToken) return;
-    setCookie({ token: idAndToken.token, userId: idAndToken.id });
+    if (response == null) return;
+    const { token, user: { id: userId } } = response;
+    setCookie({ token, userId });
     const redirectUrl =
       this.props.redirectUrl != null
         ? decodeURIComponent(this.props.redirectUrl)
@@ -63,36 +64,17 @@ class Auth extends React.PureComponent<Props, State> {
     Router.replace(redirectUrl);
   };
 
-  handleError = (error: *) => {
-    const functionError = error && error[0] && error[0].functionError;
-    let validationErrors = {};
-    switch (functionError) {
-      case 'Email already in use':
-        validationErrors = { email: { type: 'alreadyExists' } };
-        break;
-      case 'Invalid credentials!':
-        validationErrors = { password: { type: 'wrongPassword' } };
-        break;
-    }
+  handleError = (validationErrors: *) => {
     this.setState({ pending: false, validationErrors });
-    const handled = Object.keys(validationErrors).length > 0;
-    return handled;
   };
 
   auth = (mutate: *, isSignUp?: boolean) => () => {
     const variables = {
-      email: this.state.email.trim(),
-      password: this.state.password.trim(),
+      email: this.state.email,
+      password: this.state.password,
     };
 
-    const validate = variables => {
-      const email = validation.email(variables.email);
-      if (email) return { email };
-      const password = validation.password(variables.password);
-      if (password) return { password };
-    };
-
-    const validationErrors = validate(variables);
+    const validationErrors = validation.validateEmailPassword(variables);
     if (validationErrors) {
       this.setState({ validationErrors });
       return;
@@ -104,14 +86,14 @@ class Auth extends React.PureComponent<Props, State> {
       mutate(
         SignupMutation.commit,
         variables,
-        response => this.handleCompleted(response.signupUser),
+        ({ signup }) => this.handleCompleted(signup),
         this.handleError,
       );
     } else {
       mutate(
         SigninMutation.commit,
         variables,
-        response => this.handleCompleted(response.authenticateUser),
+        ({ signin }) => this.handleCompleted(signin),
         this.handleError,
       );
     }

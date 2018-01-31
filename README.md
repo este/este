@@ -10,22 +10,17 @@ Universal React. Explore the source code.
 
 ## Starting a project
 
-### Start development
-
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
+* `cd backend`
+* `yarn`
+* `cd ..`
 * `yarn dev`
 
-### Set up custom graph.cool backend
+* `yarn relay`
 
-* `cd graphcool`
-* `yarn`
-* `yarn graphcool login`
-* `yarn graphcool deploy`
-* `yarn graphcool playground` In URL, replace `simple` with `relay`.
-
-Add endpoint to env-config.js, .graphqlconfig, and graphcool/.graphcoolrc files.
+TODO: Custom Prisma, update deploy, explain endpoints, etc.
 
 ## Links
 

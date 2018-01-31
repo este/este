@@ -1,0 +1,36 @@
+# import Web from "./generated/prisma.graphql"
+
+# https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+
+# Like database/datamodel User, but without password, webs, and DB directives.
+# User webs is a special query with server defined sorting etc.
+# Remember, expose only API you really need aka as minimal as possible.
+# Remember, database/datamodel.graphql defines low level DB while schema.graphql
+# defines high level API for clients based on the actual usage.
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  signup(email: String!, password: String!): AuthPayload
+  signin(email: String!, password: String!): AuthPayload
+  createWeb(name: String!): Web!
+  deleteWeb(id: ID!): Web!
+}
+
+type Query {
+  me: User
+  # Define only API you need for now. For example, we need logged in user webs.
+  # All we need is:
+  webs: [Web!]
+  # Later, we can extend API to get any user webs, custom sorting, etc.
+  # webs(ownerId: ID!): [Web!]
+}

@@ -6,7 +6,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "node server.js",
+    "backend": "cd backend && yarn dev",
+    "server": "node server.js",
+    "dev": "npm-run-all --parallel backend server",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
@@ -17,12 +19,11 @@
     "jest:watch": "jest --watch",
     "prettier": "prettier --write '**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
-    "test": "flow && jest && yarn build",
+    "test": "npm-run-all flow jest build",
     "deps": "rimraf node_modules yarn.lock flow-typed/npm && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "relay": "rimraf **/__generated__ && hotfixes/relay-compiler-temp --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema schema.graphql",
-    "relay:watch": "yarn relay -- --watch",
-    "schema": "graphql get-schema dev"
+    "relay": "cd backend && yarn schema && cd .. && rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema backend/schema.graphql",
+    "relay:watch": "TODO: yarn relay -- --watch"
   },
   "dependencies": {
     "accepts": "^1.3.3",
@@ -59,7 +60,7 @@
     "smoothscroll-polyfill": "^0.4.0",
     "styled-jsx": "^2.2.1",
     "url": "^0.11.0",
-    "validator": "^9.0.0",
+    "validator": "^9.4.0",
     "webpack-bundle-analyzer": "^2.8.2"
   },
   "devDependencies": {
@@ -77,8 +78,8 @@
     "eslint-plugin-react": "^7.0.1",
     "flow-bin": "^0.64.0",
     "flow-typed": "^2.1.5",
-    "graphql-cli": "^2.0.1",
     "jest": "^22.0.1",
+    "npm-run-all": "^4.1.2",
     "prettier": "^1.5.1",
     "react-test-renderer": "^16.0.0",
     "relay-compiler": "^1.5.0-rc.1",
