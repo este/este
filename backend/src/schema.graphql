@@ -20,8 +20,8 @@ type AuthPayload {
 }
 
 type Mutation {
-  signup(email: String!, password: String!): AuthPayload
-  signin(email: String!, password: String!): AuthPayload
+  signup(email: String!, password: String!): AuthPayload!
+  signin(email: String!, password: String!): AuthPayload!
   createWeb(name: String!): Web!
   deleteWeb(id: ID!): Web!
 }

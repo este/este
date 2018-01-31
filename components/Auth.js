@@ -54,7 +54,6 @@ class Auth extends React.PureComponent<Props, State> {
 
   handleCompleted = (response: *) => {
     this.setState({ pending: false });
-    if (response == null) return;
     const { token, user: { id: userId } } = response;
     setCookie({ token, userId });
     const redirectUrl =
