@@ -1,8 +1,8 @@
-# import Web from "./generated/prisma.graphql"
+# import Web from "./database/schema.graphql"
 
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
 
-# Like database/datamodel User, but without password, webs, and DB directives.
+# Like database/model User, but without password, webs, and DB directives.
 # User webs is a special query with server defined sorting etc.
 # Remember, expose only API you really need aka as minimal as possible.
 # Remember, database/datamodel.graphql defines low level DB while schema.graphql

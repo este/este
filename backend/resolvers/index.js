@@ -10,9 +10,9 @@ import diacriticsMap from 'diacritics-map';
 // Write first, refactor later, FTW.
 
 // Steps to create a new mutation:
-// - update database/datamodel.graphql and "yarn prisma deploy" if needed
+// - update database/model.graphql and "yarn prisma deploy" if needed
 // - test database mutation in playground
-// - update appmodel.graphql
+// - update model.graphql
 // - add mutation resolver here
 // - test app mutation in playground
 
