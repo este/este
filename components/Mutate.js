@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import type { Commit } from '../mutations/types';
 import PropTypes from 'prop-types';
 import type { Disposable, Environment } from 'react-relay';
 import { AppErrorConsumer } from './AppError';
@@ -9,24 +8,51 @@ import type { ValidationErrors } from '../backend/validation';
 // https://github.com/facebook/relay/issues/2077
 export const clientMutationId = () => Date.now().toString(36);
 
-type OnCompleted<Response> = (response: Response) => void;
+// TODO: Type it with Relay 1.5 improved PayloadError.
+type PayloadErrors = Array<any>;
 
-type OnError<Variables> = (error: ValidationErrors<Variables>) => void;
-
-type MutateAction = <Variables, Response>(
-  commit: Commit<Variables, Response>,
+export type Commit<Variables, Response> = (
+  environment: Environment,
   variables: Variables,
-  onCompleted: OnCompleted<Response>,
-  onError: OnError<Variables>,
-) => void;
+  onCompleted: (response: Response, payloadErrors: ?PayloadErrors) => void,
+  onError: (error: Error) => void,
+) => Disposable;
 
-type MutateProps = {|
-  children: (action: MutateAction) => React.Node,
+type Props = {|
+  children: (mutate: *) => React.Node,
 |};
 
-class Mutate extends React.PureComponent<MutateProps> {
+class Mutate extends React.PureComponent<Props> {
   static contextTypes = {
     relay: PropTypes.object,
+  };
+
+  // Check 'type BackendError'.
+  static parse = (payloadErrors: PayloadErrors) => {
+    let validationErrors = {};
+    let appError = null;
+    payloadErrors.forEach(payloadError => {
+      // GraphQL spec plans typed errors, meanwhile we use JSON.
+      let error;
+      // TODO: There must be a better way to handle this shit.
+      try {
+        error = JSON.parse(payloadError.message);
+      } catch (e) {
+        appError = { type: 'unknownError', message: payloadError.message };
+        return;
+      }
+      // App error is one validationError, for example, notAuthorized.
+      const isAppError = typeof error.type === 'string';
+      if (isAppError) {
+        appError = error;
+      } else {
+        validationErrors = {
+          ...validationErrors,
+          ...error,
+        };
+      }
+    });
+    return { validationErrors, appError };
   };
 
   componentWillUnmount() {
@@ -39,13 +65,11 @@ class Mutate extends React.PureComponent<MutateProps> {
     relay: { environment: Environment },
   };
 
-  // We can't reuse MutateAction type here as far I know. PR anyone?
-  // https://twitter.com/calebmer/status/906561429129502720
   mutate = (dispatchAppError: *) => <Variables, Response>(
     commit: Commit<Variables, Response>,
     variables: Variables,
-    onCompleted: OnCompleted<Response>,
-    onError: OnError<Variables>,
+    onCompleted: (response: Response) => void,
+    onError: (error: ValidationErrors<Variables>) => void,
   ) => {
     const disposable = commit(
       this.context.relay.environment,
@@ -55,41 +79,13 @@ class Mutate extends React.PureComponent<MutateProps> {
           onCompleted(response);
           return;
         }
-
-        let validationErrors = {};
-        let appError = null;
-
-        payloadErrors.forEach(payloadError => {
-          // GraphQL spec plans typed errors, meanwhile we use JSON.
-          const error = JSON.parse(payloadError.message);
-          // App error is one validationError, for example, notAuthorized.
-          const isAppError = typeof error.type === 'string';
-          if (isAppError) {
-            appError = error;
-          } else {
-            validationErrors = {
-              ...validationErrors,
-              ...error,
-            };
-          }
-        });
-
+        const { validationErrors, appError } = Mutate.parse(payloadErrors);
         onError(validationErrors);
         if (appError) dispatchAppError(appError);
       },
       error => {
-        // Tady musim zavolat onError s {}
-        // a zbytek do appError
-        // a pokud nezna, tak string, ok
-        // Co je tohle za chyby? global, zavolat handleError prazdne
-        // a dispatch apperror
-        // TODO: Vyvolat takovou, asi fetch na offline, co dal? asi ni
-        // console.log('error');
-        // console.log(error);
-        // TODO: Should we pass error, onError, dispatchAppError? Why?
-        // imho ne, imho to je globalni vec, a lokal to nezajima
-        // imho jo, imho takhle
-        // Mutate.handleError({}, error, onError, dispatchAppError);
+        onError({});
+        dispatchAppError({ type: 'unknownError', message: error.message });
       },
     );
     this.disposables.push(disposable);
