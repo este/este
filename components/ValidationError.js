@@ -78,6 +78,13 @@ export const getValidationErrorMessage = (
           values={{ message: error.message }}
         />
       );
+    case 'trim':
+      return (
+        <FormattedMessage
+          defaultMessage="Please remove trailing whitespaces."
+          id="validationError.trim"
+        />
+      );
     default:
       // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
