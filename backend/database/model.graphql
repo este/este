@@ -1,3 +1,6 @@
+# Use non-nullable types. The database is not public, we don't need versioning.
+# http://graphql.org/learn/best-practices/#versioning
+
 type User {
   id: ID! @unique
   createdAt: DateTime!

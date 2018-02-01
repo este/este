@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Feb 01 2018 03:08:53 GMT+0100 (CET)
+# timestamp: Thu Feb 01 2018 23:22:20 GMT+0100 (CET)
 
 type AuthPayload {
   token: String!
@@ -9,10 +9,10 @@ type AuthPayload {
 scalar DateTime
 
 type Mutation {
-  signup(email: String!, password: String!): AuthPayload!
-  signin(email: String!, password: String!): AuthPayload!
-  createWeb(name: String!): Web!
-  deleteWeb(id: ID!): Web!
+  signup(email: String!, password: String!): AuthPayload
+  signin(email: String!, password: String!): AuthPayload
+  createWeb(name: String!): Web
+  deleteWeb(id: ID!): Web
 }
 
 interface Node {

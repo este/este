@@ -1,12 +1,10 @@
 # import Web from "./database/schema.graphql"
 
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+# http://graphql.org/learn/best-practices/#nullability
 
 # Like database/model User, but without password, webs, and DB directives.
-# User webs is a special query with server defined sorting etc.
-# Remember, expose only API you really need aka as minimal as possible.
-# Remember, database/datamodel.graphql defines low level DB while schema.graphql
-# defines high level API for clients based on the actual usage.
+# Remember, expose only API you need aka as minimal as possible.
 type User {
   id: ID!
   createdAt: DateTime!
@@ -20,10 +18,10 @@ type AuthPayload {
 }
 
 type Mutation {
-  signup(email: String!, password: String!): AuthPayload!
-  signin(email: String!, password: String!): AuthPayload!
-  createWeb(name: String!): Web!
-  deleteWeb(id: ID!): Web!
+  signup(email: String!, password: String!): AuthPayload
+  signin(email: String!, password: String!): AuthPayload
+  createWeb(name: String!): Web
+  deleteWeb(id: ID!): Web
 }
 
 type Query {

@@ -54,7 +54,11 @@ class Auth extends React.PureComponent<Props, State> {
 
   handleCompleted = (response: *) => {
     this.setState({ pending: false });
-    const { token, user: { id: userId } } = response;
+    // http://graphql.org/learn/best-practices/#nullability
+    const payload = response.signin || response.signup || null;
+    // https://flow.org/en/docs/lang/refinements
+    if (payload == null) return;
+    const { token, user: { id: userId } } = payload;
     setCookie({ token, userId });
     const redirectUrl =
       this.props.redirectUrl != null
@@ -85,14 +89,14 @@ class Auth extends React.PureComponent<Props, State> {
       mutate(
         SignupMutation.commit,
         variables,
-        ({ signup }) => this.handleCompleted(signup),
+        this.handleCompleted,
         this.handleError,
       );
     } else {
       mutate(
         SigninMutation.commit,
         variables,
-        ({ signin }) => this.handleCompleted(signin),
+        this.handleCompleted,
         this.handleError,
       );
     }
