@@ -21,13 +21,7 @@ const createAuthPayload = user => ({
   user,
 });
 
-// So here is a thing. The backend can return ValidationErrors, which are used
-// for forms or wherever we have object with props. Great for local errors.
-// But backend can also return a single error, like notAuthorized or notExists
-// or whatever ValidationError. That's for app errors.
-// The idea is simple. When we can't render UI specific ValidationError, we
-// render it as AppError via popup or flash message.
-// I think this is a good simplification. Let's see.
+// Check Mutate.parse.
 type BackendError = validation.ValidationError | validation.ValidationErrors<*>;
 
 const throwError = (error: BackendError) => {
