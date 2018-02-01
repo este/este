@@ -12,6 +12,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "deploy": "node ./scripts/deploy",
+    "deploy-database": "cd backend && yarn prisma deploy",
     "extract-messages": "yarn clean-babel-cache && rimraf lang/.messages && next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
