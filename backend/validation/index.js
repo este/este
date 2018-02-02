@@ -7,7 +7,7 @@ export type ValidationError =
   // Validated elsewhere.
   | { type: 'alreadyExists' }
   | { type: 'notExists' }
-  | { type: 'invalid' }
+  | { type: 'wrongPassword' }
   | { type: 'notAuthorized' }
   | { type: 'unknownError', message: string }
   | { type: 'requestFailed' }

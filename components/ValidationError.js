@@ -56,11 +56,11 @@ export const getValidationErrorMessage = (
           id="validationError.notExists"
         />
       );
-    case 'invalid':
+    case 'wrongPassword':
       return (
         <FormattedMessage
-          defaultMessage="Invalid."
-          id="validationError.invalid"
+          defaultMessage="Wrong password."
+          id="validationError.wrongPassword"
         />
       );
     case 'notAuthorized':

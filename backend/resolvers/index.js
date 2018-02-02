@@ -66,7 +66,7 @@ const resolvers = {
       if (!user) throwError({ email: { type: 'notExists' } });
 
       const valid = await bcrypt.compare(args.password, user.password);
-      if (!valid) throwError({ password: { type: 'invalid' } });
+      if (!valid) throwError({ password: { type: 'wrongPassword' } });
       return createAuthPayload(user);
     },
 
