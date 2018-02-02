@@ -4,16 +4,18 @@ import isEmail from 'validator/lib/isEmail';
 // Your app is the validation library you are looking for.
 
 export type ValidationError =
-  | { type: 'trim' }
-  | { type: 'required' }
-  | { type: 'email' }
-  | { type: 'minLength', minLength: number }
-  | { type: 'maxLength', maxLength: number }
+  // Validated elsewhere.
   | { type: 'alreadyExists' }
   | { type: 'notExists' }
   | { type: 'invalid' }
   | { type: 'notAuthorized' }
-  | { type: 'unknownError', message: string };
+  | { type: 'unknownError', message: string }
+  // Validated here.
+  | { type: 'trim' }
+  | { type: 'required' }
+  | { type: 'email' }
+  | { type: 'minLength', minLength: number }
+  | { type: 'maxLength', maxLength: number };
 
 export type ValidationErrors<Variables> = {
   [prop: $Keys<Variables>]: ?ValidationError,
