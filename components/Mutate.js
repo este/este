@@ -37,8 +37,15 @@ class Mutate extends React.PureComponent<Props> {
       // TODO: There must be a better way to handle this shit.
       try {
         error = JSON.parse(payloadError.message);
-      } catch (e) {
-        appError = { type: 'unknownError', message: payloadError.message };
+      } catch (error) {
+        // TODO: This is probably a bug workaround, not sure yet.
+        const requestFailed =
+          payloadError.message.indexOf(
+            'failed, reason: getaddrinfo ENOTFOUND',
+          ) !== -1;
+        appError = requestFailed
+          ? { type: 'requestFailed' }
+          : { type: 'unknownError', message: payloadError.message };
         return;
       }
       // App error is one validationError, for example, notAuthorized.

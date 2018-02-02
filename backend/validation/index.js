@@ -10,6 +10,7 @@ export type ValidationError =
   | { type: 'invalid' }
   | { type: 'notAuthorized' }
   | { type: 'unknownError', message: string }
+  | { type: 'requestFailed' }
   // Validated here.
   | { type: 'trim' }
   | { type: 'required' }

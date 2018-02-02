@@ -85,6 +85,14 @@ export const getValidationErrorMessage = (
           id="validationError.trim"
         />
       );
+    case 'requestFailed':
+      return (
+        <FormattedMessage
+          defaultMessage="Network error. Please try it later."
+          id="validationError.requestFailed"
+        />
+      );
+
     default:
       // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
