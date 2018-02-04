@@ -1,5 +1,4 @@
 projects:
-  schemaPath: "schemagenerated.graphql",
   app:
     schemaPath: "schema.graphql"
     extensions:
