@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-// $FlowFixMe
 import testRenderer from 'react-test-renderer';
 import { ThemeProvider } from '../../../components/Theme';
 
