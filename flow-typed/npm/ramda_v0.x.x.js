@@ -1,5 +1,5 @@
-// flow-typed signature: 24cd36702219a09ebb747f8db11f048d
-// flow-typed version: bd76b9301b/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: faac0f4abd84249ad0a0cb24383e72d3
+// flow-typed version: 03a0733eae/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -497,12 +497,13 @@ declare module ramda {
   declare var match: CurriedFunction2<RegExp, string, Array<string | void>>;
   declare var replace: CurriedFunction3<
     RegExp | string,
-    string,
+    string | ((substring: string, ...args: Array<string>) => string),
     string,
     string
   >;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
+  declare var startsWith: CurriedFunction2<string | Array<string>, string, boolean>;
   declare function toLower(a: string): string;
   declare function toString(a: any): string;
   declare function toUpper(a: string): string;

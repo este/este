@@ -2,7 +2,7 @@
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import Text from './Text';
-import type { ValidationError } from '../backend/validation';
+import type { ValidationError } from '../validation';
 import { getValidationErrorMessage } from './ValidationError';
 
 type Value = {|

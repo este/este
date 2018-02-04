@@ -3,7 +3,8 @@ import * as React from 'react';
 import { titles } from '../lib/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
-import app, { type QueryVariables } from '../components/app';
+// import app, { type QueryVariables } from '../components/app';
+import app from '../components/app';
 import A from '../components/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
@@ -11,7 +12,7 @@ import P from '../components/P';
 import Box from '../components/Box';
 // import CreateWeb from '../components/CreateWeb';
 // import WebList from '../components/WebList';
-import { graphql } from 'react-relay';
+// import { graphql } from 'react-relay';
 // import { type pagesQueryResponse } from './__generated__/pagesQuery.graphql';
 import IsAuthenticated from '../components/IsAuthenticated';
 
@@ -40,23 +41,23 @@ export const ManageYourWebsMessage = () => (
   />
 );
 
-const Authenticated = ({ viewer, userId }) => (
-  <Box>
-    <Heading size={1}>
-      <ManageYourWebsMessage />
-    </Heading>
-    {/* <WebList viewer={viewer} userId={userId} />
-    <CreateWeb userId={userId} /> */}
-  </Box>
-);
+// const Authenticated = ({ viewer, userId }) => (
+//   <Box>
+//     <Heading size={1}>
+//       <ManageYourWebsMessage />
+//     </Heading>
+//     {/* <WebList viewer={viewer} userId={userId} />
+//     <CreateWeb userId={userId} /> */}
+//   </Box>
+// );
 
-const Index = ({ data, intl }) => {
+const Index = ({ intl }) => {
   // const { viewer }: pagesQueryResponse = data;
   return (
     <Page title={intl.formatMessage(titles.index)}>
       <Heading size={3}>Este</Heading>
       <IsAuthenticated>
-        {({ userId }) => (
+        {() => (
           // userId != null ? (
           //   <Authenticated viewer={viewer} userId={userId} />
           // ) : (
@@ -69,9 +70,9 @@ const Index = ({ data, intl }) => {
   );
 };
 
-export const queryFilters = (userId: ?string) => ({
-  filter: { owner: { id: userId } },
-});
+// export const queryFilters = (userId: ?string) => ({
+//   filter: { owner: { id: userId } },
+// });
 
 export default app(Index, {
   // query: graphql`

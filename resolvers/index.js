@@ -1,10 +1,13 @@
 // @flow
-// $FlowFixMe
-import bcrypt from 'bcryptjs';
-// $FlowFixMe
-import jwt from 'jsonwebtoken';
-import * as validation from '../validation';
-import diacriticsMap from 'diacritics-map';
+const bcrypt = require('bcryptjs');
+const jsonwebtoken = require('jsonwebtoken');
+const diacriticsMap = require('diacritics-map');
+const validation = require('../validation');
+/*::
+// Flow understands only ES6 modules it seems.
+// This is temp workaround until Next.js 5.
+import type { ValidationError, ValidationErrors } from '../validation';
+*/
 
 // Everything in one file until I recognize emerging patterns.
 // Write first, refactor later, FTW.
@@ -17,14 +20,16 @@ import diacriticsMap from 'diacritics-map';
 // - test app mutation in playground
 
 const createAuthPayload = user => ({
-  token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+  token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET),
   user,
 });
 
 // Check Mutate.parse.
-type BackendError = validation.ValidationError | validation.ValidationErrors<*>;
+/*::
+type BackendError = ValidationError | ValidationErrors<*>;
+*/
 
-const throwError = (error: BackendError) => {
+const throwError = (error /*: BackendError */) => {
   throw new Error(JSON.stringify(error));
 };
 
@@ -36,7 +41,7 @@ const getUserId = ctx => {
   const Authorization = ctx.request.get('Authorization');
   if (!Authorization) throwNotAuthorizedError();
   const token = Authorization.replace('Bearer ', '');
-  const { userId } = jwt.verify(token, process.env.APP_SECRET);
+  const { userId } = jsonwebtoken.verify(token, process.env.APP_SECRET);
   return userId;
 };
 
@@ -135,4 +140,4 @@ const resolvers = {
   },
 };
 
-export default resolvers;
+module.exports = resolvers;

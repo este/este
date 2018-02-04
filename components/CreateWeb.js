@@ -8,9 +8,8 @@ import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import Mutate, { clientMutationId } from './Mutate';
-import { type ValidationErrors } from '../backend/validation';
+import { validateNewWeb, type ValidationErrors } from '../validation';
 import ValidationError from './ValidationError';
-import { validateNewWeb } from '../backend/validation/index';
 
 type Props = {
   userId: string,

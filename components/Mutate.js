@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import type { Disposable, Environment } from 'react-relay';
 import { AppErrorConsumer } from './AppError';
-import type { ValidationErrors } from '../backend/validation';
+import type { ValidationErrors } from '../validation';
 
 // https://github.com/facebook/relay/issues/2077
 export const clientMutationId = () => Date.now().toString(36);

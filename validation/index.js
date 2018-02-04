@@ -1,8 +1,10 @@
 // @flow
-import isEmail from 'validator/lib/isEmail';
+const isEmail = require('validator/lib/isEmail');
 
 // Your app is the validation library you are looking for.
+// https://github.com/este/este/issues/1450
 
+/*::
 export type ValidationError =
   // Validated elsewhere.
   | { type: 'alreadyExists' }
@@ -21,6 +23,7 @@ export type ValidationError =
 export type ValidationErrors<Variables> = {
   [prop: $Keys<Variables>]: ?ValidationError,
 };
+*/
 
 // Helpers.
 
@@ -50,23 +53,30 @@ const validateShortText = validateTrim(shortText => {
 
 // Validations.
 
+/*::
 type Validate<Variables> = (
   variables: Variables,
 ) => ?ValidationErrors<Variables>;
+*/
 
-export const validateEmailPassword: Validate<{
+const validateEmailPassword /*: Validate<{
   email: string,
   password: string,
-}> = variables => {
+}> */ = variables => {
   const email = validateEmail(variables.email);
   if (email) return { email };
   const password = validatePassword(variables.password);
   if (password) return { password };
 };
 
-export const validateNewWeb: Validate<{
+const validateNewWeb /*: Validate<{
   name: string,
-}> = variables => {
+}> */ = variables => {
   const name = validateShortText(variables.name);
   if (name) return { name };
+};
+
+module.exports = {
+  validateEmailPassword,
+  validateNewWeb,
 };

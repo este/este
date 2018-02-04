@@ -4,7 +4,7 @@ import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
-import type { ValidationError } from '../backend/validation';
+import type { ValidationError } from '../validation';
 import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';

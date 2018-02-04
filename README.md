@@ -1,7 +1,7 @@
 [![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 
-Universal React. Explore the source code.
+Universal React.
 
 ## Prerequisites
 
@@ -13,14 +13,15 @@ Universal React. Explore the source code.
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
-* `cd backend`
-* `yarn`
-* `cd ..`
+* `yarn prisma init foo` create GraphQL server to get `.env` file
+* move `.env` file to root, delete `/foo`
 * `yarn dev`
 
-* `yarn relay`
+In a second terminal:
 
-TODO: Custom Prisma, update deploy, explain endpoints, etc.
+* `yarn deploy`
+* `yarn deploy:db`
+* `yarn relay`
 
 ## Links
 

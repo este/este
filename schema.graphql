@@ -1,4 +1,4 @@
-# import Web from "./database/schema.graphql"
+# import Web from "./database/schemagenerated.graphql"
 
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
 # http://graphql.org/learn/best-practices/#nullability
