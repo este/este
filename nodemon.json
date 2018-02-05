@@ -1,3 +1,8 @@
 {
-  "watch": ["server.js", "servergraphql.js", "resolvers/**/*.js"]
+  "watch": [
+    "server.js",
+    "servergraphql.js",
+    "resolvers/**/*.js",
+    "validation/**/*.js"
+  ]
 }

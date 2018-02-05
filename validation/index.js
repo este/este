@@ -4,6 +4,9 @@ const isEmail = require('validator/lib/isEmail');
 // Your app is the validation library you are looking for.
 // https://github.com/este/este/issues/1450
 
+// TODO: Optional validation. Something like:
+// const validateEmailOptional = optional(validateEmail)
+
 /*::
 export type ValidationError =
   // Validated elsewhere.
@@ -19,41 +22,61 @@ export type ValidationError =
   | { type: 'email' }
   | { type: 'minLength', minLength: number }
   | { type: 'maxLength', maxLength: number };
-
-export type ValidationErrors<Variables> = {
-  [prop: $Keys<Variables>]: ?ValidationError,
-};
 */
 
-// Helpers.
+// Validate one by one, aka fail on the first error.
+const chain = (...validators) => value => {
+  for (const validator of validators) {
+    const error = validator(value);
+    if (error != null) return error;
+  }
+};
 
-// Texts with trailing whitespaces are bad for user experience.
-// But manual trimming everywhere is bad for developer experience.
-// If you really care about UX, trim texts explicitly.
-// But validateTrim is good enough for almost all cases.
-const validateTrim = validate => text =>
-  text !== text.trim() ? { type: 'trim' } : validate(text);
+// How to trim, the ultimate guide:
+// 1. Use validateTrim to ensure a value is valid.
+// 2. For the better UX, trim values before the validation.
+// 3. A client can trim automatically on validateTrim error.
+const validateTrim = value => {
+  if (value !== value.trim()) return { type: 'trim' };
+};
 
-const validateEmail = validateTrim(email => {
-  if (email.length === 0) return { type: 'required' };
-  if (!isEmail(email)) return { type: 'email' };
+// Always trim before length check.
+const validateLength = (predicate, error) =>
+  chain(validateTrim, value => {
+    if (predicate(value)) return error;
+  });
+
+const validateRequired = validateLength(value => value.length === 0, {
+  type: 'required',
 });
 
-const validatePassword = validateTrim(password => {
-  if (password.length === 0) return { type: 'required' };
-  if (password.length < 6) return { type: 'minLength', minLength: 6 };
-  if (password.length > 1024) return { type: 'maxLength', maxLength: 1024 };
+const validateEmail = chain(validateRequired, value => {
+  if (!isEmail(value)) return { type: 'email' };
 });
 
-const validateShortText = validateTrim(shortText => {
-  if (shortText.length === 0) return { type: 'required' };
-  if (shortText.length < 3) return { type: 'minLength', minLength: 3 };
-  if (shortText.length > 140) return { type: 'maxLength', maxLength: 140 };
-});
+const validateRange = (minLength, maxLength) =>
+  chain(
+    validateRequired,
+    validateLength(value => value.length < minLength, {
+      type: 'minLength',
+      minLength,
+    }),
+    validateLength(value => value.length > maxLength, {
+      type: 'maxLength',
+      maxLength,
+    }),
+  );
+
+const validatePassword = validateRange(6, 1024);
+const validateShortText = validateRange(3, 140);
 
 // Validations.
 
 /*::
+export type ValidationErrors<Variables> = {
+  [prop: $Keys<Variables>]: ?ValidationError,
+};
+
 type Validate<Variables> = (
   variables: Variables,
 ) => ?ValidationErrors<Variables>;
