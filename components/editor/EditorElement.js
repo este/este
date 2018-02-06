@@ -3,7 +3,7 @@ import * as React from 'react';
 import EditorElementBox from './EditorElementBox';
 import EditorElementText from './EditorElementText';
 import type { Element, Path, Theme } from './Editor';
-import Color from 'color';
+import colorLib from 'color';
 import { activeElementProp } from './Editor';
 import EditorDispatch from './EditorDispatch';
 import arrayEqual from 'array-equal';
@@ -119,7 +119,7 @@ class EditorElement extends React.PureComponent<
       flashAnimationRunning: true,
       // Wow. I didn't know I can use CSS filter effects grayscale and invert.
       // But keep current JS approach. We will reuse it for React Native.
-      flashAnimationColor: Color(backgroundColor)
+      flashAnimationColor: colorLib(backgroundColor)
         .grayscale()
         .negate(),
     });

@@ -46,6 +46,7 @@ const validateLength = (predicate, error) =>
     if (predicate(value)) return error;
   });
 
+// Everything should be required by default.
 const validateRequired = validateLength(value => value.length === 0, {
   type: 'required',
 });
