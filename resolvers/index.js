@@ -2,7 +2,7 @@
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
 const diacriticsMap = require('diacritics-map');
-const validation = require('../validation');
+const validation = require('../lib/validation');
 /*::
 // Flow understands only ES6 modules
 // This is temp workaround until Next.js 5.
