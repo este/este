@@ -4,15 +4,14 @@ import * as React from 'react';
 import RelayProvider from './RelayProvider';
 import Router from 'next/router';
 import createRelayEnvironment from '../lib/createRelayEnvironment';
-import type { ValidationError } from '../validation';
 import type { Href } from '../lib/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from '../lib/cookie';
 import { LocaleProvider } from './Locale';
-import { AppErrorProvider } from './AppError';
 import { IsAuthenticatedProvider } from './IsAuthenticated';
+import { ErrorPopupProvider } from './ErrorPopup';
 
 // import { installRelayDevTools } from 'relay-devtools';
 // installRelayDevTools();
@@ -64,10 +63,6 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type AppState = {|
-  appError: ?ValidationError,
-|};
-
 type Page = React.ComponentType<
   {
     data: Object,
@@ -92,7 +87,7 @@ const app = (
   const { query, queryVariables, requireAuth } = options || {};
   const PageWithHigherOrderComponents = injectIntl(Page);
 
-  class App extends React.PureComponent<AppProps, AppState> {
+  class App extends React.PureComponent<AppProps> {
     static redirectToSignIn = (context: NextContext) => {
       const { asPath, res } = context;
       const redirectUrlKey = 'redirectUrl';
@@ -168,31 +163,6 @@ const app = (
       }: InitialAppProps);
     };
 
-    state = {
-      appError: null,
-    };
-
-    componentWillUnmount() {
-      if (this.setAppErrorToNullAfterAWhileTimeoutID)
-        clearTimeout(this.setAppErrorToNullAfterAWhileTimeoutID);
-    }
-
-    setAppErrorToNullAfterAWhileTimeoutID: ?TimeoutID;
-
-    setAppErrorToNullAfterAWhile() {
-      const fiveSecs = 5000;
-      if (this.setAppErrorToNullAfterAWhileTimeoutID)
-        clearTimeout(this.setAppErrorToNullAfterAWhileTimeoutID);
-      this.setAppErrorToNullAfterAWhileTimeoutID = setTimeout(() => {
-        this.setState({ appError: null });
-      }, fiveSecs);
-    }
-
-    dispatchAppError = (appError: ValidationError) => {
-      this.setAppErrorToNullAfterAWhile();
-      this.setState({ appError });
-    };
-
     render() {
       const {
         cookie,
@@ -227,16 +197,11 @@ const app = (
         >
           <LocaleProvider value={{ locale, supportedLocales }}>
             <RelayProvider environment={environment} variables={variables}>
-              <AppErrorProvider
-                value={{
-                  appError: this.state.appError,
-                  dispatchAppError: this.dispatchAppError,
-                }}
-              >
-                <IsAuthenticatedProvider value={{ isAuthenticated, userId }}>
+              <IsAuthenticatedProvider value={{ isAuthenticated, userId }}>
+                <ErrorPopupProvider>
                   <PageWithHigherOrderComponents data={data} url={url} />
-                </IsAuthenticatedProvider>
-              </AppErrorProvider>
+                </ErrorPopupProvider>
+              </IsAuthenticatedProvider>
             </RelayProvider>
           </LocaleProvider>
         </IntlProvider>

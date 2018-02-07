@@ -1,6 +1,6 @@
 // @flow
 import A from './A';
-import AppError from './AppError';
+import ErrorPopup from './ErrorPopup';
 import Box from './Box';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
@@ -104,7 +104,7 @@ const Page = ({ title, children }: PageProps) => {
         </Head>
         <PageStyle backgroundColor={pageBackgroundColor} />
         <LoadingBar color={theme.colors.primary} />
-        <AppError />
+        <ErrorPopup />
         <Container>
           <MainNav />
           <Body>{children}</Body>

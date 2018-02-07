@@ -4,9 +4,9 @@ const jsonwebtoken = require('jsonwebtoken');
 const diacriticsMap = require('diacritics-map');
 const validation = require('../validation');
 /*::
-// Flow understands only ES6 modules it seems.
+// Flow understands only ES6 modules
 // This is temp workaround until Next.js 5.
-import type { ValidationError, ValidationErrors } from '../validation';
+import type { BackendError } from '../lib/error';
 */
 
 // Everything in one file until I recognize emerging patterns.
@@ -23,11 +23,6 @@ const createAuthPayload = user => ({
   token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET),
   user,
 });
-
-// Check Mutate.parse.
-/*::
-type BackendError = ValidationError | ValidationErrors<*>;
-*/
 
 const throwError = (error /*: BackendError */) => {
   throw new Error(JSON.stringify(error));
@@ -68,6 +63,7 @@ const resolvers = {
       if (validationErrors) throwError(validationErrors);
 
       const user = await ctx.db.query.user({ where: { email: args.email } });
+      // I don't know how to easily type email prop. Switch to ReasonML asap.
       if (!user) throwError({ email: { type: 'notExists' } });
 
       const valid = await bcrypt.compare(args.password, user.password);

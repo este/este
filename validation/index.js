@@ -2,8 +2,8 @@
 const isEmail = require('validator/lib/isEmail');
 
 // Your app is the validation library you are looking for.
-// https://github.com/este/este/issues/1450
 
+// TODO: https://github.com/este/este/issues/1450
 // TODO: Optional validation. Something like:
 // const validateEmailOptional = optional(validateEmail)
 
@@ -74,7 +74,7 @@ const validateShortText = validateRange(3, 140);
 // Validations.
 
 /*::
-export type ValidationErrors<Variables> = {
+type ValidationErrors<Variables> = {
   [prop: $Keys<Variables>]: ?ValidationError,
 };
 

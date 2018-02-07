@@ -5,7 +5,7 @@ import Form from './Form';
 import Heading from './Heading';
 import Set from './Set';
 import TextInputBig from './TextInputBig';
-import ValidationError from './ValidationError';
+import Error from './Error';
 import { SignInButton, SignUpButton } from './buttons';
 import { defineMessages } from 'react-intl';
 import SigninMutation from '../mutations/SigninMutation';
@@ -15,6 +15,7 @@ import Mutate from './Mutate';
 import * as validation from '../validation';
 import { setCookie } from '../lib/cookie';
 import type { IntlShape } from 'react-intl';
+import type { Errors } from '../lib/error';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -39,14 +40,14 @@ type Fields = {
 
 type State = {
   pending: boolean,
-  validationErrors: validation.ValidationErrors<Fields>,
+  errors: Errors<Fields>,
 } & Fields;
 
 const initialState = {
   email: '',
   password: '',
   pending: false,
-  validationErrors: {},
+  errors: {},
 };
 
 class Auth extends React.PureComponent<Props, State> {
@@ -67,8 +68,8 @@ class Auth extends React.PureComponent<Props, State> {
     Router.replace(redirectUrl);
   };
 
-  handleError = (validationErrors: *) => {
-    this.setState({ pending: false, validationErrors });
+  handleError = (errors: *) => {
+    this.setState({ pending: false, errors });
   };
 
   auth = (mutate: *, isSignUp?: boolean) => () => {
@@ -77,9 +78,9 @@ class Auth extends React.PureComponent<Props, State> {
       password: this.state.password,
     };
 
-    const validationErrors = validation.validateEmailPassword(variables);
-    if (validationErrors) {
-      this.setState({ validationErrors });
+    const errors = validation.validateEmailPassword(variables);
+    if (errors) {
+      this.setState({ errors });
       return;
     }
 
@@ -107,7 +108,7 @@ class Auth extends React.PureComponent<Props, State> {
       <Mutate>
         {mutate => {
           const { intl } = this.props;
-          const { pending, validationErrors } = this.state;
+          const { pending, errors } = this.state;
           return (
             <div>
               {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
@@ -125,9 +126,9 @@ class Auth extends React.PureComponent<Props, State> {
                 <Form onSubmit={this.auth(mutate)}>
                   <Set vertical spaceBetween={0}>
                     <TextInputBig
-                      autoFocus={validationErrors.email}
+                      autoFocus={errors.email}
                       disabled={pending}
-                      error={<ValidationError error={validationErrors.email} />}
+                      error={<Error>{errors.email}</Error>}
                       maxWidth={26}
                       name="email"
                       onChange={email => this.setState({ email })}
@@ -138,11 +139,9 @@ class Auth extends React.PureComponent<Props, State> {
                       value={this.state.email}
                     />
                     <TextInputBig
-                      autoFocus={validationErrors.password}
+                      autoFocus={errors.password}
                       disabled={pending}
-                      error={
-                        <ValidationError error={validationErrors.password} />
-                      }
+                      error={<Error>{errors.password}</Error>}
                       maxWidth={26}
                       name="password"
                       onChange={password => this.setState({ password })}

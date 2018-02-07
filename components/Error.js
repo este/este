@@ -1,16 +1,10 @@
 // @flow
 import * as React from 'react';
-import * as validation from '../validation';
-import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
+import type { Error as ErrorType } from '../lib/error';
+import Text, { type TextProps } from './Text';
 
-type ValidationErrorProps = {
-  error: ?validation.ValidationError,
-} & TextProps;
-
-export const getValidationErrorMessage = (
-  error: validation.ValidationError,
-) => {
+export const errorToMessage = (error: ErrorType) => {
   switch (error.type) {
     case 'required':
       return (
@@ -94,23 +88,32 @@ export const getValidationErrorMessage = (
       );
 
     default:
-      // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions
       (error: empty);
       return null;
   }
 };
 
-class ValidationError extends React.PureComponent<ValidationErrorProps> {
+type ErrorProps = {
+  ...TextProps,
+  children: ?ErrorType,
+};
+
+class Error extends React.PureComponent<ErrorProps> {
   render() {
-    const { error, bold = true, color = 'danger', ...props } = this.props;
+    const {
+      bold = true,
+      color = 'danger',
+      children: error,
+      ...props
+    } = this.props;
     if (!error) return null;
     return (
       <Text bold={bold} color={color} {...props}>
-        {getValidationErrorMessage(error)}
+        {errorToMessage(error)}
       </Text>
     );
   }
 }
 
-export default ValidationError;
+export default Error;
