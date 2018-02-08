@@ -15,19 +15,19 @@ export default class MyDocument extends Document {
   }
 
   render() {
-    const { locale, localeDataScript, supportedLocales } = this.props;
+    const { locale, localeDataScript /*, supportedLocales */ } = this.props;
 
     return (
       <html lang={locale}>
         <Head>
-          {supportedLocales.map(locale => (
+          {/* {supportedLocales.map(locale => (
             <link
-              href={`https://${locale}.${HOSTNAME}`}
+              href={`https://${locale}.${TODO process.env.NOW_URL}`}
               hrefLang={locale}
               key={locale}
               rel="alternate"
             />
-          ))}
+          ))} */}
         </Head>
         <body>
           <Main />

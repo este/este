@@ -11,7 +11,6 @@ module.exports = {
   plugins: ['flowtype'],
   globals: {
     GRAPHQL_ENDPOINT: true,
-    HOSTNAME: true,
   },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {
