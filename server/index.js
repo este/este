@@ -3,12 +3,12 @@ const IntlPolyfill = require('intl');
 const accepts = require('accepts');
 const glob = require('glob');
 const next = require('next');
-const { DEFAULT_LOCALE } = require('./env-config');
+const { DEFAULT_LOCALE } = require('../env-config');
 const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
 const { readFileSync } = require('fs');
-const { maybeMapReqUrl } = require('./lib/sitemap');
+const { maybeMapReqUrl } = require('./sitemap');
 
 // Polyfill Node with `Intl` that has data for all locales.
 // See: https://formatjs.io/guides/runtime-environments/#server
@@ -37,13 +37,8 @@ const getLocaleDataScript = locale => {
 };
 
 const getMessages = locale => {
-  const localePath = `./lang/${locale}.json`;
-  // Reset cache for dev with alternate locales so we don't have to restart.
-  if (dev) {
-    delete require.cache[require.resolve(localePath)];
-  }
   // $FlowFixMe This is fine.
-  return require(localePath);
+  return require(`../lang/${locale}.json`);
 };
 
 const getAcceptedOrDefaultLocale = (req, locale) => {

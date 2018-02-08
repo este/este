@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { titles } from '../lib/sitemap';
+import { titles } from '../server/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
 // import app, { type QueryVariables } from '../components/app';

@@ -2,11 +2,9 @@
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
 const diacriticsMap = require('diacritics-map');
-const validation = require('../lib/validation');
+const validation = require('../validation');
 /*::
-// Flow understands only ES6 modules
-// This is temp workaround until Next.js 5.
-import type { BackendError } from '../lib/error';
+import type { ServerError } from '../error';
 */
 
 // Everything in one file until I recognize emerging patterns.
@@ -24,7 +22,7 @@ const createAuthPayload = user => ({
   user,
 });
 
-const throwError = (error /*: BackendError */) => {
+const throwError = (error /*: ServerError */) => {
   throw new Error(JSON.stringify(error));
 };
 

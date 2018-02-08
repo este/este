@@ -7,7 +7,7 @@
 // http://blog.ploeh.dk/2017/01/03/decoupling-application-errors-from-domain-models
 
 /*::
-import type { ValidationError } from '../lib/validation';
+import type { ValidationError } from './validation';
 
 type DomainError =
   | { type: 'alreadyExists' }
@@ -23,17 +23,17 @@ export type Errors<T> = {
   [prop: $Keys<T>]: ?Error,
 };
 
-// Backend can return one or many errors. For example:
+// Server can return one or many errors. For example:
 // { type: 'notAuthorized' }; // when user has no rights
 // { type: { type: 'alreadyExists' } }; // when type prop value already exists
 // Note we can safely distinguish them via type === 'string'.
-export type BackendError = Error | Errors<*>;
+export type ServerError = Error | Errors<*>;
 
-type SerializedBackendError = string;
+type SerializedServerError = string;
 
 // TODO: Use Relay 1.5 type when released.
 export type PayloadErrors = Array<{
-  message: SerializedBackendError,
+  message: SerializedServerError,
 }>;
 */
 

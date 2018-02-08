@@ -1,17 +1,17 @@
 // @flow
 /* global window */
 import * as React from 'react';
-import RelayProvider from './RelayProvider';
+import RelayProvider from '../RelayProvider';
 import Router from 'next/router';
-import createRelayEnvironment from '../lib/createRelayEnvironment';
-import type { Href } from '../lib/sitemap';
+import createRelayEnvironment from './createRelayEnvironment';
+import type { Href } from '../../server/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
-import { getCookie, type Cookie } from '../lib/cookie';
-import { LocaleProvider } from './Locale';
-import { IsAuthenticatedProvider } from './IsAuthenticated';
-import { ErrorPopupProvider } from './ErrorPopup';
+import { getCookie, type Cookie } from './cookie';
+import { LocaleProvider } from '../Locale';
+import { IsAuthenticatedProvider } from '../IsAuthenticated';
+import { ErrorPopupProvider } from '../ErrorPopup';
 
 // import { installRelayDevTools } from 'relay-devtools';
 // installRelayDevTools();

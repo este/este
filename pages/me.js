@@ -9,13 +9,13 @@ import Baseline from '../components/Baseline';
 import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
-import { titles } from '../lib/sitemap';
+import { titles } from '../server/sitemap';
 import type { meQueryResponse } from './__generated__/meQuery.graphql';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
-import { deleteCookie } from '../lib/cookie';
+import { deleteCookie } from '../components/app/cookie';
 import Box from '../components/Box';
 
 const getGravatarUrl = email =>

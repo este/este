@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import NextLink from 'next/link';
-import { maybeMapLinkHref, type Href } from '../lib/sitemap';
+import { maybeMapLinkHref, type Href } from '../server/sitemap';
 import { format } from 'url';
 import Locale from './Locale';
 

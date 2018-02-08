@@ -8,7 +8,7 @@ import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import draftCss from './draftCss';
-import logReducer from '../../lib/logReducer';
+import logReducer from './logReducer';
 import * as R from 'ramda';
 import { EditorDispatchProvider } from './EditorDispatch';
 // import XRay from 'react-x-ray';

@@ -6,7 +6,7 @@ import {
   parsePayloadErrors,
   type Errors,
   type PayloadErrors,
-} from '../lib/error';
+} from '../server/error';
 import { ErrorPopupConsumer } from './ErrorPopup';
 
 export type Commit<Variables, Response> = (

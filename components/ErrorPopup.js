@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
-import type { Error } from '../lib/error';
+import type { Error } from '../server/error';
 import ErrorComponent from './Error';
 
 type Value = {|
