@@ -10,8 +10,6 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['flowtype'],
   globals: {
-    // The same as flow-typed/app.js
-    APP_VERSION: true,
     GRAPHQL_ENDPOINT: true,
     HOSTNAME: true,
   },
