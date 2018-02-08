@@ -12,7 +12,7 @@
     "dev": "run-p dev:server dev:server:graphql dev:playground",
     "build": "next build",
     "production:server": "cross-env NODE_ENV=production node server/index.js",
-    "production:server:graphql": "node -r dotenv/config server/graphql.js",
+    "production:server:graphql": "cross-env NODE_ENV=production node -r dotenv/config server/graphql.js",
     "start": "run-p production:server production:server:graphql",
     "deploy": "node ./scripts/deploy",
     "deploy:db": "yarn prisma deploy",
