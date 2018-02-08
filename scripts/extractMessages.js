@@ -1,6 +1,6 @@
 // @flow
 const glob = require('glob');
-const { DEFAULT_LOCALE } = require('../env-config');
+const { defaultLocale } = require('../server/constants');
 const { readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
@@ -24,9 +24,9 @@ const defaultMessages = glob
   }, {});
 
 writeFileSync(
-  `./lang/${DEFAULT_LOCALE}.json`,
+  `./lang/${defaultLocale}.json`,
   JSON.stringify(defaultMessages, null, 2),
 );
 console.log(
-  `> Wrote default messages to: "${resolve(`./lang/${DEFAULT_LOCALE}.json`)}"`,
+  `> Wrote default messages to: "${resolve(`./lang/${defaultLocale}.json`)}"`,
 );

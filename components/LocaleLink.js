@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import { maybeMapLinkHref, type Href } from '../server/sitemap';
 import { format } from 'url';
 import Locale from './Locale';
+import { defaultLocale } from '../server/constants';
 
 // Link with current locale in query.
 // This component is used by A and Link, no need to use it directly.
@@ -20,7 +21,7 @@ type LocaleLinkProps = LocaleLinkBaseProps & { children: React.Element<any> };
 class LocaleLink extends React.PureComponent<LocaleLinkProps> {
   static maybeAddLocaleToHref = (href: Href, locale: string) => {
     const isAppLink = href.pathname.charAt(0) === '/';
-    const isDefault = DEFAULT_LOCALE === locale;
+    const isDefault = defaultLocale === locale;
     const addLocale = isAppLink && !isDefault;
     if (!addLocale) return href;
     return {

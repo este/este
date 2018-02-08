@@ -3,7 +3,7 @@ const IntlPolyfill = require('intl');
 const accepts = require('accepts');
 const glob = require('glob');
 const next = require('next');
-const { DEFAULT_LOCALE } = require('../env-config');
+const { defaultLocale } = require('./constants');
 const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
@@ -45,9 +45,9 @@ const getAcceptedOrDefaultLocale = (req, locale) => {
   // locale=* overrides auto detection.
   // For example: http://localhost:3000/?locale=cs
   if (locale) {
-    return supportedLocales.indexOf(locale) !== -1 ? locale : DEFAULT_LOCALE;
+    return supportedLocales.indexOf(locale) !== -1 ? locale : defaultLocale;
   }
-  return accepts(req).language(supportedLocales) || DEFAULT_LOCALE;
+  return accepts(req).language(supportedLocales) || defaultLocale;
 };
 
 const intlReq = req => {
@@ -55,7 +55,7 @@ const intlReq = req => {
   // TODO: https://github.com/este/este/issues/1399
   const locale = getAcceptedOrDefaultLocale(req, query.locale);
   // Use messages defined in code for dev with default locale.
-  const messages = dev && locale === DEFAULT_LOCALE ? {} : getMessages(locale);
+  const messages = dev && locale === defaultLocale ? {} : getMessages(locale);
   // $FlowFixMe This is fine.
   req.locale = locale;
   // $FlowFixMe This is fine.

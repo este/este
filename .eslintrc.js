@@ -12,7 +12,6 @@ module.exports = {
   globals: {
     // The same as flow-typed/app.js
     APP_VERSION: true,
-    DEFAULT_LOCALE: true,
     GRAPHQL_ENDPOINT: true,
     HOSTNAME: true,
   },

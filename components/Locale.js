@@ -1,5 +1,6 @@
 // @flow
 import createReactContext, { type Context } from 'create-react-context';
+import { defaultLocale } from '../server/constants';
 
 type Value = {|
   locale: string,
@@ -7,8 +8,8 @@ type Value = {|
 |};
 
 const value = {
-  locale: DEFAULT_LOCALE,
-  supportedLocales: [DEFAULT_LOCALE],
+  locale: defaultLocale,
+  supportedLocales: [defaultLocale],
 };
 
 const LocaleContext: Context<Value> = createReactContext(value);

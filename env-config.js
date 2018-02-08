@@ -13,7 +13,6 @@ const production = process.env.NODE_ENV === 'production';
 module.exports = {
   APP_VERSION:
     process.env.APP_VERSION != null ? process.env.APP_VERSION : 'dev', // Git commit SHA.
-  DEFAULT_LOCALE: 'en',
   GRAPHQL_ENDPOINT: production
     ? 'http://localhost:4000'
     : 'http://localhost:4000',
