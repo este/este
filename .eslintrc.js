@@ -9,9 +9,6 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype'],
-  globals: {
-    GRAPHQL_ENDPOINT: true,
-  },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {
     camelcase: 0, // Foo_foo can be Relay compiler generated type.

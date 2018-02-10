@@ -1,4 +1,4 @@
-// flow-typed signature: 47579cb2fee2d2af648ab023dc3e6de7
+// flow-typed signature: 4fb06bcf78173f317871f9d499fca3fd
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^2.35.1/flow_v0.65.0
 
 /**
@@ -43,6 +43,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/delimiterDangle' {
 }
 
 declare module 'eslint-plugin-flowtype/dist/rules/genericSpacing' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/rules/newlineAfterFlowAnnotation' {
   declare module.exports: any;
 }
 
@@ -228,6 +232,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/delimiterDangle.js' {
 }
 declare module 'eslint-plugin-flowtype/dist/rules/genericSpacing.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/genericSpacing'>;
+}
+declare module 'eslint-plugin-flowtype/dist/rules/newlineAfterFlowAnnotation.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/newlineAfterFlowAnnotation'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/noDupeKeys.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/noDupeKeys'>;
