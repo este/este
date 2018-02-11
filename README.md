@@ -14,19 +14,21 @@ Universal React.
 * `cd este`
 * `yarn`
 * `yarn prisma init foo` create GraphQL server to get `.env` file
-* move `foo/.env` file to `.env.dev`, delete `/foo`, run `yarn env dev`
+* merge `foo/.env` to `.env.dev`, then delete `/foo`
+* `yarn env dev`
 * `yarn dev`
 
 ## Dev tasks
 
-* `yarn dev` - start dev
-* `yarn env production` - copy `.env.production` to `.env`
+* `yarn dev` - start development
 * `yarn env dev` - copy `.env.dev` to `.env`
-* `yarn start:local` - run built app
+* `yarn env production` - copy `.env.production` to `.env`
+* `yarn production`
 * `yarn test`
 * `yarn relay`
-* `yarn deploy`
 * `yarn deploy:db`
+* `yarn deploy:api`
+* `yarn deploy:web`
 
 ## Links
 
