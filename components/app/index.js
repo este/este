@@ -1,7 +1,6 @@
 // @flow
 /* global window */
 import * as React from 'react';
-import RelayProvider from '../RelayProvider';
 import Router from 'next/router';
 import createRelayEnvironment from './createRelayEnvironment';
 import type { Href } from '../../server/sitemap';
@@ -10,6 +9,7 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
 import { getCookie, type Cookie } from './cookie';
 import { LocaleProvider } from '../Locale';
+import { MutationProvider } from '../Mutation';
 import { IsAuthenticatedProvider } from '../IsAuthenticated';
 import { ErrorPopupProvider } from '../ErrorPopup';
 
@@ -127,13 +127,6 @@ const app = (
     const environment = createRelayEnvironment(token, records);
     const userId = cookie && cookie.userId;
     const isAuthenticated = !!cookie;
-    const variables = queryVariables
-      ? queryVariables({
-          isAuthenticated,
-          query: url.query,
-          userId,
-        })
-      : {};
 
     return (
       <IntlProvider
@@ -144,19 +137,25 @@ const app = (
         textComponent={({ children }) => children}
       >
         <LocaleProvider value={{ locale, supportedLocales }}>
-          <RelayProvider environment={environment} variables={variables}>
+          <MutationProvider value={{ environment }}>
             <IsAuthenticatedProvider value={{ isAuthenticated, userId }}>
               <ErrorPopupProvider>
                 <PageWithHigherOrderComponents data={data} url={url} />
               </ErrorPopupProvider>
             </IsAuthenticatedProvider>
-          </RelayProvider>
+          </MutationProvider>
         </LocaleProvider>
       </IntlProvider>
     );
   };
 
-  // SSR data fetching with pending navigation FTW.
+  // Universal data fetching with pending navigation FTW.
+  // For many years, JavaScript apps sucked socks.
+  // Async data with spinners were everywhere. Terrible UX and DX.
+  // Relay and Next.js solved it.
+  // Relay, because we can declaratively describe data.
+  // Next.js, becase of its router with getInitialProps.
+  // Panacea. Finally.
   App.getInitialProps = async (context: NextContext) => {
     const cookie = getCookie(context.req);
     const isAuthenticated = !!cookie;

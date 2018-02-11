@@ -1,13 +1,23 @@
 // @flow
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import createReactContext, { type Context } from 'create-react-context';
 import type { Disposable, Environment } from 'react-relay';
+import { ErrorPopupConsumer } from './ErrorPopup';
 import {
   parsePayloadErrors,
   type Errors,
   type PayloadErrors,
 } from '../server/error';
-import { ErrorPopupConsumer } from './ErrorPopup';
+
+type Value = {|
+  environment: Environment,
+|};
+
+const MutationContext: Context<Value> = createReactContext({
+  environment: null,
+});
+
+export const MutationProvider = MutationContext.Provider;
 
 export type Commit<Variables, Response> = (
   environment: Environment,
@@ -16,33 +26,25 @@ export type Commit<Variables, Response> = (
   onError: (error: any) => void,
 ) => Disposable;
 
-type Props = {|
+type MutationProps = {|
   children: (mutate: *) => React.Node,
 |};
 
-class Mutate extends React.PureComponent<Props> {
-  static contextTypes = {
-    relay: PropTypes.object,
-  };
-
+class Mutation extends React.PureComponent<MutationProps> {
   componentWillUnmount() {
     this.disposables.forEach(disposable => disposable.dispose());
   }
 
   disposables: Array<Disposable> = [];
 
-  context: {
-    relay: { environment: Environment },
-  };
-
-  mutate = (showError: *) => <Variables, Response>(
+  mutate = (environment: *, showError: *) => <Variables, Response>(
     commit: Commit<Variables, Response>,
     variables: Variables,
     onCompleted: (response: Response) => void,
     onError: (errors: Errors<Variables>) => void,
   ) => {
     const disposable = commit(
-      this.context.relay.environment,
+      environment,
       variables,
       (response, payloadErrors) => {
         if (!payloadErrors) {
@@ -54,7 +56,6 @@ class Mutate extends React.PureComponent<Props> {
         if (error) showError(error);
       },
       error => {
-        // TODO: Investigate when it can happen.
         onError({});
         showError({ type: 'unknownError', message: error.message });
       },
@@ -64,11 +65,17 @@ class Mutate extends React.PureComponent<Props> {
 
   render() {
     return (
-      <ErrorPopupConsumer>
-        {({ showError }) => this.props.children(this.mutate(showError))}
-      </ErrorPopupConsumer>
+      <MutationContext.Consumer>
+        {({ environment }) => (
+          <ErrorPopupConsumer>
+            {({ showError }) =>
+              this.props.children(this.mutate(environment, showError))
+            }
+          </ErrorPopupConsumer>
+        )}
+      </MutationContext.Consumer>
     );
   }
 }
 
-export default Mutate;
+export default Mutation;

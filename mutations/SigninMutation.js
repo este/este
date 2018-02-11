@@ -1,6 +1,6 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Commit } from '../components/Mutate';
+import type { Commit } from '../components/Mutation';
 import type {
   SigninMutationResponse,
   SigninMutationVariables,

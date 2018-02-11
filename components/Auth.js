@@ -11,7 +11,7 @@ import { defineMessages } from 'react-intl';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import Router from 'next/router';
-import Mutate from './Mutate';
+import Mutation from './Mutation';
 import * as validation from '../server/validation';
 import { setCookie } from '../components/app/cookie';
 import type { IntlShape } from 'react-intl';
@@ -105,7 +105,7 @@ class Auth extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <Mutate>
+      <Mutation>
         {mutate => {
           const { intl } = this.props;
           const { pending, errors } = this.state;
@@ -168,7 +168,7 @@ class Auth extends React.PureComponent<Props, State> {
             </div>
           );
         }}
-      </Mutate>
+      </Mutation>
     );
   }
 }
