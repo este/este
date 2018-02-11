@@ -6192,9 +6192,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-next@5.0.1-canary.4:
-  version "5.0.1-canary.4"
-  resolved "https://registry.yarnpkg.com/next/-/next-5.0.1-canary.4.tgz#3fd2d8ff25c88ef9e6f94bd3a93720372fbaae0e"
+next@5.0.1-canary.2:
+  version "5.0.1-canary.2"
+  resolved "https://registry.yarnpkg.com/next/-/next-5.0.1-canary.2.tgz#7266ba703e459f54806da6501c4990b8056545d2"
   dependencies:
     "@zeit/check-updates" "1.1.0"
     "@zeit/source-map-support" "0.6.2"
@@ -6236,7 +6236,7 @@ next@5.0.1-canary.4:
     pkg-up "2.0.0"
     prop-types "15.6.0"
     prop-types-exact "1.1.1"
-    react-hot-loader "4.0.0-beta.21"
+    react-hot-loader "4.0.0-beta.18"
     recursive-copy "2.0.6"
     resolve "1.5.0"
     send "0.16.1"
@@ -7376,15 +7376,14 @@ react-dom@^16.0.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-hot-loader@4.0.0-beta.21:
-  version "4.0.0-beta.21"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.0.0-beta.21.tgz#46a0345621f1a03cb3c1c6dc130f153fa66e5bae"
+react-hot-loader@4.0.0-beta.18:
+  version "4.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.0.0-beta.18.tgz#5a3d1b5bd813633380b88c0c660019dbf638975d"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
     hoist-non-react-statics "^2.3.1"
-    prop-types "^15.6.0"
-    react-stand-in "^4.0.0-beta.21"
+    react-stand-in "^4.0.0-beta.18"
 
 react-intl@^2.3.0:
   version "2.4.0"
@@ -7404,7 +7403,7 @@ react-relay@^1.5.0-rc.1:
     prop-types "^15.5.8"
     relay-runtime "1.5.0-rc.1"
 
-react-stand-in@^4.0.0-beta.21:
+react-stand-in@^4.0.0-beta.18:
   version "4.0.0-beta.21"
   resolved "https://registry.yarnpkg.com/react-stand-in/-/react-stand-in-4.0.0-beta.21.tgz#fb694e465cb20fab7f36d3284f82b68bbd7a657e"
   dependencies:
