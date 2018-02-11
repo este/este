@@ -63,7 +63,11 @@ type InitialAppProps = {|
 
 type AppProps = NextProps & InitialAppProps;
 
-type Page = React.ComponentType<
+// Stateless, because:
+// 1) Page should not contain state. Page state comes from URL or GraphQL API.
+// 2) StatelessFunctionalComponent works well with HOC and Flow. Component not.
+// 3) We don't have to type props, they are inferred.
+type StatelessPage = React.StatelessFunctionalComponent<
   {
     data: Object,
     intl: IntlShape,
@@ -77,7 +81,7 @@ export type QueryVariables<Query> = {|
 |};
 
 const app = (
-  Page: Page,
+  Page: StatelessPage,
   options?: {|
     query?: Object,
     queryVariables?: (variables: QueryVariables<Object>) => Object,
