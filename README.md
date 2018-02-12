@@ -13,8 +13,6 @@ Universal React.
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
-* `yarn prisma init foo` create GraphQL server to get `.env` file
-* merge `foo/.env` to `.env.dev`, then delete `/foo`
 * `yarn env dev`
 * `yarn dev`
 
