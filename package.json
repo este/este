@@ -47,7 +47,6 @@
     "cross-env": "^5.0.1",
     "diacritics-map": "^0.1.0",
     "draft-js": "^0.10.4",
-    "glamor": "^2.20.40",
     "glob": "^7.1.2",
     "graphql-yoga": "1.2.4",
     "gravatar": "^1.6.0",
