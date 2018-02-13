@@ -8,13 +8,22 @@ Universal React.
 * [node.js](http://nodejs.org/) Node 8+
 * [yarn](https://yarnpkg.com/)
 
-## Starting a project
+## Create project
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
+
+## Create Prisma DB
+
+* `yarn prisma init appName` choose node-advanced boilerplate
+* set `database/prisma.yml` service to appName
+* merge `appName/.env` to `.env.dev` (without quotes)
+* delete `/appName`
+* `yarn prisma deploy`
 * `yarn env dev`
-* `yarn dev`
+
+TODO: Deploy.
 
 ## Dev tasks
 
