@@ -14,7 +14,7 @@
     "build": "next build",
     "production:api": "cross-env NODE_ENV=production node server/api.js",
     "production:web": "cross-env NODE_ENV=production node server/web.js",
-    "production": "env-cmd .env npm-run-all build --parallel production:api production:web",
+    "production": "yarn clean:babel:cache && env-cmd .env npm-run-all build --parallel production:api production:web",
     "start": "yarn $DEPLOY_TARGET",
     "deploy:db": "yarn prisma deploy",
     "deploy:api": "now -e DEPLOY_TARGET=production:api --dotenv .env.production",
