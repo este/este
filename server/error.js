@@ -1,14 +1,11 @@
 // @flow
 
 // So here is a thing. We have only one Error type in the app.
-// It's union type for all various different errors.
 // Note, it overrides JavaScript Error when imported. That's fine.
 // https://github.com/facebook/flow/blob/v0.64.0/lib/core.js#L439
 // http://blog.ploeh.dk/2017/01/03/decoupling-application-errors-from-domain-models
 
 /*::
-import type { ValidationError } from './validation';
-
 type DomainError =
   | { type: 'alreadyExists' }
   | { type: 'notExists' }
@@ -16,6 +13,13 @@ type DomainError =
   | { type: 'notAuthorized' }
   | { type: 'requestFailed' }
   | { type: 'unknownError', message: string };
+
+type ValidationError =
+  | { type: 'trim' }
+  | { type: 'required' }
+  | { type: 'email' }
+  | { type: 'minLength', minLength: number }
+  | { type: 'maxLength', maxLength: number };
 
 export type Error = DomainError | ValidationError;
 

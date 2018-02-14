@@ -6,23 +6,6 @@ const isEmail = require('validator/lib/isEmail');
 // TODO: Optional validation. Something like:
 // const validateEmailOptional = optional(validateEmail)
 
-/*::
-export type ValidationError =
-  // Validated elsewhere.
-  | { type: 'alreadyExists' }
-  | { type: 'notExists' }
-  | { type: 'wrongPassword' }
-  | { type: 'notAuthorized' }
-  | { type: 'unknownError', message: string }
-  | { type: 'requestFailed' }
-  // Validated here.
-  | { type: 'trim' }
-  | { type: 'required' }
-  | { type: 'email' }
-  | { type: 'minLength', minLength: number }
-  | { type: 'maxLength', maxLength: number };
-*/
-
 // Validate one by one, aka fail on the first error.
 const chain = (...validators) => value => {
   for (const validator of validators) {
@@ -73,13 +56,11 @@ const validateShortText = validateRange(3, 140);
 // Validations.
 
 /*::
-type ValidationErrors<Variables> = {
-  [prop: $Keys<Variables>]: ?ValidationError,
-};
+import type { Error, Errors } from './error';
 
 type Validate<Variables> = (
   variables: Variables,
-) => ?ValidationErrors<Variables>;
+) => ?Errors<Variables>;
 */
 
 const validateEmailPassword /*: Validate<{
