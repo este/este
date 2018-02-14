@@ -26,11 +26,19 @@ export type Commit<Variables, Response> = (
   onError: (error: any) => void,
 ) => Disposable;
 
+type Pending = boolean;
+
 type MutationProps = {|
-  children: (mutate: *) => React.Node,
+  children: (*) => React.Node,
 |};
 
-class Mutation extends React.PureComponent<MutationProps> {
+type MutationState = {|
+  pending: Pending,
+|};
+
+class Mutation extends React.PureComponent<MutationProps, MutationState> {
+  state = { pending: false };
+
   componentWillUnmount() {
     this.disposables.forEach(disposable => disposable.dispose());
   }
@@ -43,10 +51,13 @@ class Mutation extends React.PureComponent<MutationProps> {
     onCompleted: (response: Response) => void,
     onError: (errors: Errors<Variables>) => void,
   ) => {
+    this.setState({ pending: true });
+
     const disposable = commit(
       environment,
       variables,
       (response, payloadErrors) => {
+        this.setState({ pending: false });
         if (!payloadErrors) {
           onCompleted(response);
           return;
@@ -56,6 +67,7 @@ class Mutation extends React.PureComponent<MutationProps> {
         if (error) showError(error);
       },
       error => {
+        this.setState({ pending: false });
         onError({});
         showError({ type: 'unknownError', message: error.message });
       },
@@ -69,7 +81,10 @@ class Mutation extends React.PureComponent<MutationProps> {
         {({ environment }) => (
           <ErrorPopupConsumer>
             {({ showError }) =>
-              this.props.children(this.mutate(environment, showError))
+              this.props.children({
+                mutate: this.mutate(environment, showError),
+                pending: this.state.pending,
+              })
             }
           </ErrorPopupConsumer>
         )}

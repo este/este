@@ -28,25 +28,24 @@ const messages = defineMessages({
   },
 });
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   redirectUrl: ?string,
-};
+|};
 
-type Fields = {
+type Fields = {|
   email: string,
   password: string,
-};
+|};
 
-type State = {
-  pending: boolean,
+type State = {|
+  ...Fields,
   errors: Errors<Fields>,
-} & Fields;
+|};
 
 const initialState = {
   email: '',
   password: '',
-  pending: false,
   errors: {},
 };
 
@@ -54,7 +53,6 @@ class Auth extends React.PureComponent<Props, State> {
   state = initialState;
 
   handleCompleted = (response: *) => {
-    this.setState({ pending: false });
     // http://graphql.org/learn/best-practices/#nullability
     const payload = response.signin || response.signup || null;
     // https://flow.org/en/docs/lang/refinements
@@ -69,7 +67,7 @@ class Auth extends React.PureComponent<Props, State> {
   };
 
   handleError = (errors: *) => {
-    this.setState({ pending: false, errors });
+    this.setState({ errors });
   };
 
   auth = (mutate: *, isSignUp?: boolean) => () => {
@@ -83,8 +81,6 @@ class Auth extends React.PureComponent<Props, State> {
       this.setState({ errors });
       return;
     }
-
-    this.setState({ pending: true });
 
     if (isSignUp === true) {
       mutate(
@@ -106,69 +102,65 @@ class Auth extends React.PureComponent<Props, State> {
   render() {
     return (
       <Mutation>
-        {mutate => {
-          const { intl } = this.props;
-          const { pending, errors } = this.state;
-          return (
-            <div>
-              {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
-              <style jsx>{`
-                div :global(input:-webkit-autofill),
-                div :global(input:-webkit-autofill:hover),
-                div :global(input:-webkit-autofill:focus),
-                div :global(input:-webkit-autofill:active) {
-                  -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
-                  -webkit-transition-delay: 9999s;
-                }
-              `}</style>
-              <Box>
-                <Heading size={3}>Auth</Heading>
-                <Form onSubmit={this.auth(mutate)}>
-                  <Set vertical spaceBetween={0}>
-                    <TextInputBig
-                      autoFocus={errors.email}
-                      disabled={pending}
-                      error={<Error>{errors.email}</Error>}
-                      maxWidth={26}
-                      name="email"
-                      onChange={email => this.setState({ email })}
-                      placeholder={intl.formatMessage(
-                        messages.emailPlaceholder,
-                      )}
-                      type="email"
-                      value={this.state.email}
-                    />
-                    <TextInputBig
-                      autoFocus={errors.password}
-                      disabled={pending}
-                      error={<Error>{errors.password}</Error>}
-                      maxWidth={26}
-                      name="password"
-                      onChange={password => this.setState({ password })}
-                      placeholder={intl.formatMessage(
-                        messages.passwordPlaceholder,
-                      )}
-                      type="password"
-                      value={this.state.password}
-                    />
-                  </Set>
-                  <Set>
-                    <SignInButton
-                      disabled={pending}
-                      onPress={this.auth(mutate)}
-                      primary
-                    />
-                    <SignUpButton
-                      disabled={pending}
-                      onPress={this.auth(mutate, true)}
-                    />
-                  </Set>
-                </Form>
-              </Box>
-            </div>
-          );
-        }}
-      </Mutation>
+        {({ mutate, pending }) => (
+          <div>
+            {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
+            <style jsx>{`
+              div :global(input:-webkit-autofill),
+              div :global(input:-webkit-autofill:hover),
+              div :global(input:-webkit-autofill:focus),
+              div :global(input:-webkit-autofill:active) {
+                -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
+                -webkit-transition-delay: 9999s;
+              }
+            `}</style>
+            <Box>
+              <Heading size={3}>Auth</Heading>
+              <Form onSubmit={this.auth(mutate)}>
+                <Set vertical spaceBetween={0}>
+                  <TextInputBig
+                    autoFocus={this.state.errors.email}
+                    disabled={pending}
+                    error={<Error>{this.state.errors.email}</Error>}
+                    maxWidth={26}
+                    name="email"
+                    onChange={email => this.setState({ email })}
+                    placeholder={this.props.intl.formatMessage(
+                      messages.emailPlaceholder,
+                    )}
+                    type="email"
+                    value={this.state.email}
+                  />
+                  <TextInputBig
+                    autoFocus={this.state.errors.password}
+                    disabled={pending}
+                    error={<Error>{this.state.errors.password}</Error>}
+                    maxWidth={26}
+                    name="password"
+                    onChange={password => this.setState({ password })}
+                    placeholder={this.props.intl.formatMessage(
+                      messages.passwordPlaceholder,
+                    )}
+                    type="password"
+                    value={this.state.password}
+                  />
+                </Set>
+                <Set>
+                  <SignInButton
+                    disabled={pending}
+                    onPress={this.auth(mutate)}
+                    primary
+                  />
+                  <SignUpButton
+                    disabled={pending}
+                    onPress={this.auth(mutate, true)}
+                  />
+                </Set>
+              </Form>
+            </Box>
+          </div>
+        )}
+        </Mutation>
     );
   }
 }
