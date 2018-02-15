@@ -1,5 +1,5 @@
-// flow-typed signature: b206035942ab6c638641fdd1fc2c2dc4
-// flow-typed version: 41bf41381b/react-intl_v2.x.x/flow_>=v0.57.x
+// flow-typed signature: 8358abfe36b0dfd8b1cf96f6fea03f72
+// flow-typed version: 8d18f671e6/react-intl_v2.x.x/flow_>=v0.57.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -158,7 +158,7 @@ declare module "react-intl" {
     options?: InjectIntlOtions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
-  
+
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
@@ -256,7 +256,7 @@ declare module "react-intl" {
   > {}
   declare class IntlProvider extends React$Component<
     $npm$ReactIntl$IntlProviderConfig & {
-      children: React$Node,
+      children?: React$Node,
       initialNow?: $npm$ReactIntl$DateParseable
     }
   > {}
