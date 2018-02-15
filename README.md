@@ -16,7 +16,7 @@ Universal React.
 
 ## Create Prisma DB
 
-* `yarn prisma init appName` choose node-advanced boilerplate
+* `yarn prisma init appName` choose node-advanced boilerplate and docker
 * set `database/prisma.yml` service to appName
 * merge `appName/.env` to `.env.dev` (without quotes)
 * delete `/appName`
