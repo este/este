@@ -23,7 +23,11 @@ Universal React.
 * `yarn prisma deploy`
 * `yarn env dev`
 
-TODO: Deploy.
+## Deploy
+
+* `yarn deploy:db`, TODO: Deploy docker, wait for Prisma Cloud.
+* `yarn deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
+* `yarn deploy:web`
 
 ## Dev tasks
 
