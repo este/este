@@ -2959,9 +2959,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.14.0:
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.17.0.tgz#dc24bb51ede48df629be7031c71d9dc0ee4f3ddf"
+eslint@^4.18.0:
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.18.0.tgz#ebd0ba795af6dc59aa5cee17938160af5950e051"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -5919,8 +5919,8 @@ mem@^1.1.0:
     mimic-fn "^1.0.0"
 
 memfs@^2.5.3:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/memfs/-/memfs-2.7.0.tgz#2476bda2e5696d76220cf33e9526e0fd495315e2"
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/memfs/-/memfs-2.7.1.tgz#eaa0f5fb9682688ad1ab21e747eace0b441d9bc1"
   dependencies:
     fast-extend "0.0.2"
     fs-monkey "^0.3.0"
