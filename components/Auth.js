@@ -160,7 +160,7 @@ class Auth extends React.PureComponent<Props, State> {
             </Box>
           </div>
         )}
-        </Mutation>
+      </Mutation>
     );
   }
 }
