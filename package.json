@@ -29,8 +29,8 @@
     "test": "run-s flow jest build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "schema": "yarn graphql get-schema -p app -o schemagenerated.graphql",
-    "relay": "yarn schema && rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema schemagenerated.graphql"
+    "schema": "yarn graphql get-schema -p app -o server/schema.graphql",
+    "relay": "yarn schema && rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema server/schema.graphql"
   },
   "dependencies": {
     "accepts": "^1.3.3",

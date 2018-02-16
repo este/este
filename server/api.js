@@ -6,12 +6,12 @@ const resolvers = require('./resolvers');
 const dev = process.env.NODE_ENV !== 'production';
 
 const server = new GraphQLServer({
-  typeDefs: 'schema.graphql',
+  typeDefs: 'server/model.graphql',
   resolvers,
   context: req => ({
     ...req,
     db: new Prisma({
-      typeDefs: 'database/schemagenerated.graphql',
+      typeDefs: 'database/schema.graphql',
       endpoint: process.env.PRISMA_ENDPOINT, // the endpoint of the Prisma DB service (value is set in .env)
       secret: process.env.PRISMA_SECRET, // taken from database/prisma.yml (value is set in .env)
       debug: dev, // log all GraphQL queries & mutations

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Feb 11 2018 21:21:46 GMT+0100 (CET)
+# timestamp: Fri Feb 16 2018 03:48:44 GMT+0100 (CET)
 
 type AuthPayload {
   token: String!

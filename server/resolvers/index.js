@@ -7,15 +7,15 @@ const validation = require('../validation');
 import type { ServerError } from '../error';
 */
 
-// Everything in one file until I recognize emerging patterns.
-// Write first, refactor later, FTW.
-
-// Steps to create a new mutation:
-// - update database/model.graphql and "yarn prisma deploy" if needed
-// - test database mutation in playground
-// - update model.graphql
-// - add mutation resolver here
-// - test app mutation in playground
+// Steps:
+// - update database/model.graphql
+// - yarn prisma deploy
+// - test it in playground
+// - update server/model.graphql
+// - add resolver here
+// - test it in playground
+// - yarn relay
+// - now we can use it in client code
 
 const createAuthPayload = user => ({
   token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET),
