@@ -1,7 +1,6 @@
 module.exports = {
   extends: [
     'airbnb',
-    // It removes global Flow types so we don’t have to.
     'plugin:flowtype/recommended',
     'prettier',
     'prettier/flowtype',
