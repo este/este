@@ -126,9 +126,9 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/graphql@^0.11.8":
-  version "0.11.8"
-  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.11.8.tgz#53ff3604e99db810dd43347f19fcd1c59725a7bb"
+"@types/graphql@^0.12.0":
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.12.4.tgz#d43bb55d45c6de0178bbd11dd59d04fd42138d94"
 
 "@types/mime@*":
   version "2.0.0"
@@ -3900,13 +3900,12 @@ graphcool-yml@0.4.15:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-graphql-binding@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/graphql-binding/-/graphql-binding-1.2.0.tgz#0876318735fb469631586d7721a2189eff7a8532"
+graphql-binding@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/graphql-binding/-/graphql-binding-1.2.2.tgz#81a0439c3e951333d0cebde1887f418297a9193e"
   dependencies:
-    graphql "0.12.3"
-    graphql-tools "2.18.0"
-    iterall "1.1.3"
+    graphql-tools "2.21.0"
+    iterall "1.2.0"
 
 graphql-cli-prepare@1.4.11:
   version "1.4.11"
@@ -4084,14 +4083,7 @@ graphql-import@0.4.1:
     graphql "^0.12.3"
     lodash "^4.17.4"
 
-graphql-import@0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.4.2.tgz#e4925e838cf41d69d81d3879788ef8ee77532977"
-  dependencies:
-    graphql "^0.12.3"
-    lodash "^4.17.4"
-
-graphql-import@^0.4.0, graphql-import@^0.4.1:
+graphql-import@0.4.3, graphql-import@^0.4.0, graphql-import@^0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.4.3.tgz#5fc68244e0908d6d8f2b91658a82be3d11f4ec62"
   dependencies:
@@ -4101,12 +4093,6 @@ graphql-import@^0.4.0, graphql-import@^0.4.1:
 graphql-playground-html@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.5.0.tgz#bfe1a53e8e7df563bdbd20077e0ac6bf9aaf0f64"
-
-graphql-playground-html@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.5.2.tgz#ccd97ac1960cfb1872b314bafb1957e7a6df7984"
-  dependencies:
-    graphql-config "1.1.7"
 
 graphql-playground-html@1.5.4:
   version "1.5.4"
@@ -4120,23 +4106,17 @@ graphql-playground-middleware-express@1.5.2:
   dependencies:
     graphql-playground-html "1.5.0"
 
-graphql-playground-middleware-express@1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.5.3.tgz#5fd5c42d5cba8b24107ececfaf4e6b68690551fe"
-  dependencies:
-    graphql-playground-html "1.5.2"
-
 graphql-playground-middleware-express@1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.5.6.tgz#db3c4b0ab5fd999cd9ed0ee16460dca321878afd"
   dependencies:
     graphql-playground-html "1.5.4"
 
-graphql-playground-middleware-lambda@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-lambda/-/graphql-playground-middleware-lambda-1.4.0.tgz#6fc450b16b67f8e9a9c41bd108cb9a4fa75abd27"
+graphql-playground-middleware-lambda@1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-lambda/-/graphql-playground-middleware-lambda-1.4.2.tgz#6954ed6e7166049468287d730810942e288b5b98"
   dependencies:
-    graphql-playground-html "1.5.0"
+    graphql-playground-html "1.5.4"
 
 graphql-request@^1.3.4, graphql-request@^1.4.0:
   version "1.4.1"
@@ -4191,16 +4171,6 @@ graphql-subscriptions@^0.5.6:
   dependencies:
     iterall "^1.1.3"
 
-graphql-tools@2.18.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.18.0.tgz#8e2d6436f9adba1d579c1a1710ae95e7f5e7248b"
-  dependencies:
-    apollo-link "^1.0.0"
-    apollo-utilities "^1.0.1"
-    deprecated-decorator "^0.1.6"
-    graphql-subscriptions "^0.5.6"
-    uuid "^3.1.0"
-
 graphql-tools@2.20.2:
   version "2.20.2"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.20.2.tgz#b953ce7d62bbf6a1ca947101883ae725e1f58e02"
@@ -4210,7 +4180,7 @@ graphql-tools@2.20.2:
     deprecated-decorator "^0.1.6"
     uuid "^3.1.0"
 
-graphql-tools@^2.18.0:
+graphql-tools@2.21.0, graphql-tools@^2.18.0:
   version "2.21.0"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.21.0.tgz#c0d0fbda6f40a87c8d267a2989ade2ae8b9a288e"
   dependencies:
@@ -4220,13 +4190,13 @@ graphql-tools@^2.18.0:
     iterall "^1.1.3"
     uuid "^3.1.0"
 
-graphql-yoga@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.2.4.tgz#6212b9c12984b9d6afdb2adab6d30d81fee84bc8"
+graphql-yoga@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.3.2.tgz#1d50f95054c2337c85f3a1817070c65954295d3f"
   dependencies:
     "@types/cors" "^2.8.3"
     "@types/express" "^4.0.39"
-    "@types/graphql" "^0.11.8"
+    "@types/graphql" "^0.12.0"
     "@types/zen-observable" "^0.5.3"
     apollo-server-express "^1.3.2"
     apollo-server-lambda "1.3.2"
@@ -4234,15 +4204,15 @@ graphql-yoga@1.2.4:
     body-parser-graphql "1.0.0"
     cors "^2.8.4"
     express "^4.16.2"
-    graphql "^0.12.0"
+    graphql "^0.13.0"
     graphql-import "^0.4.1"
-    graphql-playground-middleware-express "1.5.3"
-    graphql-playground-middleware-lambda "1.4.0"
+    graphql-playground-middleware-express "1.5.6"
+    graphql-playground-middleware-lambda "1.4.2"
     graphql-subscriptions "^0.5.6"
     graphql-tools "^2.18.0"
     subscriptions-transport-ws "^0.9.5"
 
-graphql@0.12.3, graphql@^0.12.0, graphql@^0.12.3:
+graphql@0.12.3, graphql@^0.12.3:
   version "0.12.3"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.12.3.tgz#11668458bbe28261c0dcb6e265f515ba79f6ce07"
   dependencies:
@@ -4266,7 +4236,7 @@ graphql@^0.11.7:
   dependencies:
     iterall "1.1.3"
 
-graphql@^0.13.0:
+graphql@^0.13.0, graphql@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.1.tgz#9b3db3d8e40d1827e4172404bfdd2e4e17a58b55"
   dependencies:
@@ -5093,7 +5063,7 @@ iterall@1.1.x:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.4.tgz#0db40d38fdcf53ae14dc8ec674e62ab190d52cfc"
 
-iterall@^1.1.0, iterall@^1.1.1, iterall@^1.1.3, iterall@^1.2.0:
+iterall@1.2.0, iterall@^1.1.0, iterall@^1.1.1, iterall@^1.1.3, iterall@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.0.tgz#434e9f41f0b99911ab9c3d49d95f0e079176a2a2"
 
@@ -6976,25 +6946,24 @@ pretty-format@^22.1.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-prisma-binding@1.5.7:
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/prisma-binding/-/prisma-binding-1.5.7.tgz#1d907d51d5ae605dea5599f1eaf165ff16895684"
+prisma-binding@^1.5.12:
+  version "1.5.12"
+  resolved "https://registry.yarnpkg.com/prisma-binding/-/prisma-binding-1.5.12.tgz#33122e408ebacd7e49fd0615bbecde9a0acaeddf"
   dependencies:
     apollo-link "1.0.7"
     apollo-link-error "1.0.3"
     apollo-link-ws "1.0.4"
     cross-fetch "1.1.1"
-    graphql "0.12.3"
-    graphql-binding "1.2.0"
-    graphql-import "0.4.2"
+    graphql-binding "1.2.2"
+    graphql-import "0.4.3"
     graphql-tools "2.20.2"
     http-link-dataloader "^0.1.1"
     jsonwebtoken "^8.1.0"
     subscriptions-transport-ws "0.9.5"
 
-prisma-cli-core@1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.14.tgz#8763d53ed78778fb84682e5a7c1324f163db8fc3"
+prisma-cli-core@1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.15.tgz#133107c8ac6ecf07c1a8dbdb7e2a2c4c3c092715"
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -7025,7 +6994,7 @@ prisma-cli-core@1.0.14:
     pause "^0.1.0"
     portfinder "^1.0.13"
     prisma-json-schema "^0.0.1"
-    prisma-yml "1.0.23"
+    prisma-yml "1.0.24"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -7034,9 +7003,9 @@ prisma-cli-core@1.0.14:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.12.tgz#ae5f8911b32288b1900a0139022be1d028ef7119"
+prisma-cli-engine@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.13.tgz#4c0ee70d554a07a2727a57a86a056d3e534d0da7"
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -7078,7 +7047,7 @@ prisma-cli-engine@1.0.12:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "^0.0.1"
-    prisma-yml "1.0.23"
+    prisma-yml "1.0.24"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -7138,9 +7107,9 @@ prisma-yml@1.0.21:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma-yml@1.0.23:
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.23.tgz#f49c8c027e321d9af312bdc3093637e5a07af975"
+prisma-yml@1.0.24:
+  version "1.0.24"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.24.tgz#ba8fa6d4b36b4b85090a72ed2c0fb8d670b578f0"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -7158,13 +7127,13 @@ prisma-yml@1.0.23:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma@^1.1.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.2.3.tgz#9c0612da1016edfca8af59671bca5faf58be3697"
+prisma@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.2.4.tgz#a3d8b28286fa40858c48b9c41bc57b4cd50966ac"
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.0.14"
-    prisma-cli-engine "1.0.12"
+    prisma-cli-core "1.0.15"
+    prisma-cli-engine "1.0.13"
     semver "^5.4.1"
     source-map-support "^0.4.18"
 
@@ -8464,8 +8433,8 @@ stylis@3.4.5:
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.5.tgz#d7b9595fc18e7b9c8775eca8270a9a1d3e59806e"
 
 stylis@^3.3.2:
-  version "3.4.9"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.9.tgz#2e1403c06264bde8dbf1eb8fd82b2cfd1c4b31cc"
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.10.tgz#a135cab4b9ff208e327fbb5a6fde3fa991c638ee"
 
 subscriptions-transport-ws@0.9.5, subscriptions-transport-ws@^0.9.5:
   version "0.9.5"
