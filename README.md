@@ -34,9 +34,9 @@ Universal React.
 * `yarn dev` - start development
 * `yarn env dev` - copy `.env.dev` to `.env`
 * `yarn env production` - copy `.env.production` to `.env`
-* `yarn production`
+* `yarn production` - test production build locally
 * `yarn test`
-* `yarn relay`
+* `yarn schema`
 * `yarn deploy:db`
 * `yarn deploy:api`
 * `yarn deploy:web`
