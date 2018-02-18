@@ -1,10 +1,11 @@
 # import Web from "../database/schema.graphql"
+# import WebConnection from "../database/schema.graphql"
 
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
 # http://graphql.org/learn/best-practices/#nullability
 
 # Like database/model User, but without password, webs, and DB directives.
-# Remember, expose only API you need aka as minimal as possible.
+# Expose the only API we need.
 type User {
   id: ID!
   createdAt: DateTime!
@@ -26,9 +27,8 @@ type Mutation {
 
 type Query {
   me: User
-  # Define only API you need for now. For example, we need logged in user webs.
-  # All we need is:
-  webs: [Web!]
-  # Later, we can extend API to get any user webs, custom sorting, etc.
-  # webs(ownerId: ID!): [Web!]
+  # Expose the only API we need, logged-in user webs for now.
+  webs: WebConnection
+  # Later, we can extend API for any user.
+  # webs(ownerId: ID!): WebConnection
 }

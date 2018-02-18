@@ -14,7 +14,7 @@ import type { ServerError } from '../error';
 // - update server/model.graphql
 // - add resolver here
 // - test it in playground
-// - yarn relay
+// - yarn schema
 // - now we can use it in client code
 
 const createAuthPayload = user => ({
@@ -38,9 +38,17 @@ const getUserId = ctx => {
   return userId;
 };
 
-const resolvers = {
+/*::
+// Will be generated one day.
+type Resolvers = {
+  ['Mutation' | 'Query']: {
+    [string]: (Object, Object, Object, Object) => Object,
+  },
+};
+*/
+
+const resolvers /*: Resolvers */ = {
   Mutation: {
-    // $FlowFixMe
     async signup(parent, args, ctx, info) {
       const validationErrors = validation.validateEmailPassword(args);
       if (validationErrors) throwError(validationErrors);
@@ -55,7 +63,6 @@ const resolvers = {
       return createAuthPayload(user);
     },
 
-    // $FlowFixMe
     async signin(parent, args, ctx, info) {
       const validationErrors = validation.validateEmailPassword(args);
       if (validationErrors) throwError(validationErrors);
@@ -69,7 +76,6 @@ const resolvers = {
       return createAuthPayload(user);
     },
 
-    // $FlowFixMe
     async createWeb(parent, args, ctx, info) {
       // Only an authorized user can create a web.
       const userId = getUserId(ctx);
@@ -99,7 +105,6 @@ const resolvers = {
       );
     },
 
-    // $FlowFixMe
     async deleteWeb(parent, { id }, ctx, info) {
       const userId = getUserId(ctx);
       const webExists = await ctx.db.exists.Web({
@@ -112,21 +117,16 @@ const resolvers = {
   },
 
   Query: {
-    // $FlowFixMe
     async me(parent, args, ctx, info) {
       const userId = getUserId(ctx);
       const user = await ctx.db.query.user({ where: { id: userId } }, info);
       return user;
     },
 
-    // $FlowFixMe
     async webs(parent, args, ctx, info) {
       const userId = getUserId(ctx);
-      const webs = await ctx.db.query.webs(
-        {
-          where: { owner: { id: userId } },
-          orderBy: 'updatedAt_ASC',
-        },
+      const webs = await ctx.db.query.websConnection(
+        { where: { owner: { id: userId } } },
         info,
       );
       return webs;

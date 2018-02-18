@@ -1,5 +1,9 @@
 # source: http://localhost:4000
-# timestamp: Fri Feb 16 2018 03:48:44 GMT+0100 (CET)
+# timestamp: Sun Feb 18 2018 03:13:01 GMT+0100 (CET)
+
+type AggregateWeb {
+  count: Int!
+}
 
 type AuthPayload {
   token: String!
@@ -19,9 +23,16 @@ interface Node {
   id: ID!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
 type Query {
   me: User
-  webs: [Web!]
+  webs: WebConnection
 }
 
 type User {
@@ -105,6 +116,17 @@ type Web implements Node {
   domain: String!
   isPublished: Boolean!
   owner(where: UserWhereInput): User!
+}
+
+type WebConnection {
+  pageInfo: PageInfo!
+  edges: [WebEdge]!
+  aggregate: AggregateWeb!
+}
+
+type WebEdge {
+  node: Web!
+  cursor: String!
 }
 
 input WebWhereInput {
