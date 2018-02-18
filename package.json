@@ -9,7 +9,8 @@
     "dev:api": "nodemon --exec node --require dotenv/config server/api.js",
     "dev:web": "nodemon --exec node --require dotenv/config server/web.js",
     "dev:playground": "graphql playground --port 5000",
-    "dev": "run-p dev:api dev:web dev:playground",
+    "dev:relay": "relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema server/schema.graphql --watch",
+    "dev": "run-p dev:api dev:web dev:playground dev:relay",
     "env": "node ./scripts/env",
     "build": "next build",
     "production:api": "cross-env NODE_ENV=production node server/api.js",
@@ -29,8 +30,7 @@
     "test": "run-s flow jest build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
-    "schema": "yarn graphql get-schema -p app -o server/schema.graphql",
-    "relay": "yarn schema && rimraf **/__generated__ && relay-compiler --exclude '**/node_modules/**' '**/__mocks__/**' '**/__tests__/**' '**/__generated__/**' '**/flow-typed/**' --src ./ --schema server/schema.graphql"
+    "schema": "yarn graphql get-schema -p app -o server/schema.graphql"
   },
   "dependencies": {
     "accepts": "^1.3.3",
