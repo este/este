@@ -138,6 +138,16 @@ const resolvers /*: Resolvers */ = {
       );
       return webs;
     },
+
+    async web(parent, args, ctx, info) {
+      const webs = await ctx.db.query.web(
+        {
+          where: { domain: args.domain },
+        },
+        info,
+      );
+      return webs;
+    },
   },
 };
 

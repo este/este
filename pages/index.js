@@ -68,6 +68,8 @@ export default app(Index, {
       }
     }
   `,
-  queryVariables: ({ isAuthenticated }) =>
-    ({ isAuthenticated }: generated.pagesQueryVariables),
+  queryVariables: args =>
+    ({
+      isAuthenticated: args.isAuthenticated,
+    }: generated.pagesQueryVariables),
 });

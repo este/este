@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Feb 18 2018 21:31:29 GMT+0100 (CET)
+# timestamp: Mon Feb 19 2018 04:05:33 GMT+0100 (CET)
 
 type AggregateWeb {
   count: Int!
@@ -33,6 +33,7 @@ type PageInfo {
 type Query {
   me: User
   webs: WebConnection
+  web(domain: String!): Web
 }
 
 type User {

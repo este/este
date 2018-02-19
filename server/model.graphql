@@ -27,8 +27,9 @@ type Mutation {
 
 type Query {
   me: User
-  # Expose the only API we need, logged-in user webs for now.
-  webs: WebConnection
+  # Expose only API we need, webs of logged-in user for now.
   # Later, we can extend API for any user.
   # webs(ownerId: ID!): WebConnection
+  webs: WebConnection
+  web(domain: String!): Web
 }

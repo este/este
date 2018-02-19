@@ -26,10 +26,8 @@ const titles = defineMessages({
 
 /*::
 export type EditQuery = {| domain: string |};
-*/
 
 // With Href type, we can ensure all app links are correct at build time.
-/*::
 export type Href =
   | {|
       pathname: '/',

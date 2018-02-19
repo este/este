@@ -1,41 +1,29 @@
 // @flow
-// import * as React from 'react';
+import * as React from 'react';
+import app from '../components/app';
+import { graphql } from 'react-relay';
+import * as generated from './__generated__/editQuery.graphql';
+import type { EditQuery } from '../server/sitemap';
+import Error from 'next/error';
+import Editor from '../components/editor/Editor';
 
-export default () => null;
+const Edit = ({ data }) => {
+  const { web }: generated.editQueryResponse = data;
+  if (!web) return <Error statusCode={404} />;
+  return <Editor name={web.name} />;
+};
 
-// import app, { type QueryVariables } from '../components/app';
-// import { graphql } from 'react-relay';
-// // import type { editQueryResponse } from './__generated__/editQuery.graphql';
-// import type { EditQuery } from '../lib/sitemap';
-// import Error from 'next/error';
-// import Editor from '../components/editor/Editor';
-//
-// const Edit = ({ data }) => {
-//   return null;
-//   // const { viewer: { Web } }: editQueryResponse = data;
-//   // // Why Web is maybe type? https://flow.org/en/docs/types/maybe
-//   // // Because we never know whether data were removed, user lost permissions,
-//   // // or something else happen. App also can't generally decide which data are
-//   // // considered critical and which are missing due to the schema change
-//   // // for example. Therefore, it's up to the page to decide. In this case, we
-//   // // return Next.js error page until we will have something better.
-//   // if (!Web) return <Error statusCode={404} />;
-//   //
-//   // return <Editor name={Web.name} />;
-// };
-//
-// export default app(Edit, {
-//   requireAuth: true,
-//   // query: graphql`
-//   //   query editQuery($domain: String) {
-//   //     viewer {
-//   //       Web(domain: $domain) {
-//   //         name
-//   //       }
-//   //     }
-//   //   }
-//   // `,
-//   // queryVariables: ({ query: { domain } }: QueryVariables<EditQuery>) => ({
-//   //   domain,
-//   // }),
-// });
+export default app(Edit, {
+  requireAuth: true,
+  query: graphql`
+    query editQuery($domain: String!) {
+      web(domain: $domain) {
+        name
+      }
+    }
+  `,
+  queryVariables: args =>
+    ({
+      domain: (args.urlQuery: EditQuery).domain,
+    }: generated.editQueryVariables),
+});

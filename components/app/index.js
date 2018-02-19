@@ -28,7 +28,7 @@ if (process.browser === true) {
   });
 }
 
-type UrlQuery = { [key: string]: ?string };
+type UrlQuery = Object;
 
 type NextProps = {|
   url: {
