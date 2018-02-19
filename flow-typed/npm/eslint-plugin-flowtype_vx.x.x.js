@@ -1,4 +1,4 @@
-// flow-typed signature: 02d32a7cb6b79352c92266cbd40adb82
+// flow-typed signature: cbd9e5043cf221e6a209afd20928609d
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^2.35.1/flow_v0.66.0
 
 /**
@@ -95,6 +95,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/requireParameterType' {
 }
 
 declare module 'eslint-plugin-flowtype/dist/rules/requireReturnType' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/rules/requireTypesAtTop' {
   declare module.exports: any;
 }
 
@@ -275,6 +279,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/requireParameterType.js' {
 }
 declare module 'eslint-plugin-flowtype/dist/rules/requireReturnType.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/requireReturnType'>;
+}
+declare module 'eslint-plugin-flowtype/dist/rules/requireTypesAtTop.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/requireTypesAtTop'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/requireValidFileAnnotation.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/requireValidFileAnnotation'>;
