@@ -125,8 +125,15 @@ const resolvers /*: Resolvers */ = {
 
     async webs(parent, args, ctx, info) {
       const userId = getUserId(ctx);
+      // Note we limit what a client can request on the server.
+      // Otherwise, a client could request first 10000000000000 items.
+      // For pagination, we can use args.
       const webs = await ctx.db.query.websConnection(
-        { where: { owner: { id: userId } } },
+        {
+          where: { owner: { id: userId } },
+          orderBy: 'updatedAt_ASC',
+          first: 100,
+        },
         info,
       );
       return webs;

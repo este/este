@@ -1,4 +1,5 @@
 // @flow
+// $FlowFixMe Technically, it should be explicit dependency, but it breaks SSR.
 import css from 'styled-jsx/css';
 
 // Copy pasted from node_modules/draft-js/dist/Draft.css

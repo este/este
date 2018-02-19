@@ -12,6 +12,7 @@ import { LocaleProvider } from '../Locale';
 import { MutationProvider } from '../Mutation';
 import { IsAuthenticatedProvider } from '../IsAuthenticated';
 import { ErrorPopupProvider } from '../ErrorPopup';
+import RelayProvider from '../RelayProvider';
 
 // import { installRelayDevTools } from 'relay-devtools';
 // installRelayDevTools();
@@ -27,40 +28,14 @@ if (process.browser === true) {
   });
 }
 
-// https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
-type NextContext = {
-  pathname: string,
-  query: Object,
-  asPath: string,
-  req: ?{
-    ...http$IncomingMessage,
-    locale: string,
-    localeDataScript: string,
-    messages: Object,
-    supportedLocales: Array<string>,
-  },
-  res: ?http$ServerResponse,
-  jsonPageRes: Object,
-  err: Object,
-};
+type UrlQuery = { [key: string]: ?string };
 
-type NextProps = {
+type NextProps = {|
   url: {
     pathname: string,
-    query: { [key: string]: ?string },
+    query: UrlQuery,
   },
-};
-
-// Stateless, because:
-// 1) Page should not have a state. Page state comes from URL or Relay.
-// 2) StatelessFunctionalComponent works well with HOC and Flow. Component not.
-// 3) We don't have to type props, they are inferred.
-type StatelessPage = React.StatelessFunctionalComponent<
-  {
-    data: Object,
-    intl: IntlShape,
-  } & NextProps,
->;
+|};
 
 type InitialAppProps = {|
   cookie: ?Cookie,
@@ -72,15 +47,7 @@ type InitialAppProps = {|
   supportedLocales: Array<string>,
 |};
 
-type AppProps = NextProps & InitialAppProps;
-
-export type QueryVariables<Query> = {|
-  isAuthenticated: boolean,
-  query: Query,
-  userId: ?string,
-|};
-
-const redirectToSignIn = (context: NextContext) => {
+const redirectToSignIn = context => {
   const { asPath, res } = context;
   const redirectUrlKey = 'redirectUrl';
   const redirectUrl = encodeURIComponent(asPath);
@@ -98,20 +65,34 @@ const redirectToSignIn = (context: NextContext) => {
   }
 };
 
-// https://reactjs.org/docs/higher-order-components.html
+// TODO: Add generic type so data is Response and queryVariables returns
+// Variables and everything is type checked out of the box.
 const app = (
-  Page: StatelessPage,
+  // Stateless because of easier typing.
+  Page: React.StatelessFunctionalComponent<
+    {
+      data: Object,
+      intl: IntlShape,
+    } & NextProps,
+  >,
   options?: {|
-    query?: Object,
-    queryVariables?: (variables: QueryVariables<Object>) => Object,
+    query?: Object, // TODO: Allow to pass function for conditional query.
+    queryVariables?: ({|
+      isAuthenticated: boolean,
+      urlQuery: UrlQuery,
+      userId: ?string,
+    |}) => Object,
     requireAuth?: boolean,
   |},
 ) => {
   const { query, queryVariables, requireAuth } = options || {};
   const PageWithHigherOrderComponents = injectIntl(Page);
+  const createQueryVariables = (isAuthenticated, urlQuery, userId) => {
+    if (!queryVariables) return {};
+    return queryVariables({ isAuthenticated, urlQuery, userId });
+  };
 
-  // Stateless, because App state belongs to providers.
-  const App = (props: AppProps) => {
+  const App = (props: { ...NextProps, ...InitialAppProps }) => {
     const {
       cookie,
       data,
@@ -125,8 +106,9 @@ const app = (
 
     const token = cookie && cookie.token;
     const environment = createRelayEnvironment(token, records);
-    const userId = cookie && cookie.userId;
     const isAuthenticated = !!cookie;
+    const userId = cookie && cookie.userId;
+    const variables = createQueryVariables(isAuthenticated, url.query, userId);
 
     return (
       <IntlProvider
@@ -140,7 +122,9 @@ const app = (
           <MutationProvider value={{ environment }}>
             <IsAuthenticatedProvider value={{ isAuthenticated, userId }}>
               <ErrorPopupProvider>
-                <PageWithHigherOrderComponents data={data} url={url} />
+                <RelayProvider environment={environment} variables={variables}>
+                  <PageWithHigherOrderComponents data={data} url={url} />
+                </RelayProvider>
               </ErrorPopupProvider>
             </IsAuthenticatedProvider>
           </MutationProvider>
@@ -156,7 +140,22 @@ const app = (
   // Relay, because we can declaratively describe data.
   // Next.js, becase of its router with getInitialProps.
   // Panacea. Finally.
-  App.getInitialProps = async (context: NextContext) => {
+  // https://github.com/zeit/next.js#fetching-data-and-component-lifecycle
+  App.getInitialProps = async (context: {
+    pathname: string,
+    query: UrlQuery,
+    asPath: string,
+    req: ?{
+      ...http$IncomingMessage,
+      locale: string,
+      localeDataScript: string,
+      messages: Object,
+      supportedLocales: Array<string>,
+    },
+    res: ?http$ServerResponse,
+    jsonPageRes: Object,
+    err: Object,
+  }) => {
     const cookie = getCookie(context.req);
     const isAuthenticated = !!cookie;
 
@@ -174,19 +173,18 @@ const app = (
     // https://writing.pupius.co.uk/beyond-pushstate-building-single-page-applications-4353246f4480
     if (query) {
       const environment = createRelayEnvironment(cookie && cookie.token);
-      const variables = queryVariables
-        ? queryVariables({
-            isAuthenticated,
-            query: context.query,
-            userId: cookie && cookie.userId,
-          })
-        : {};
+      const userId = cookie && cookie.userId;
+      const variables = createQueryVariables(
+        isAuthenticated,
+        context.query,
+        userId,
+      );
       // It can throw "Failed to fetch" error when offline, but it should be
       // solved with service workers I believe.
       // It does not throw on payload errors like insufficient permissions etc.,
       // because payload errors are not real errors. They are expected when the
       // schema is updated and an app is not yet updated. That's why Relay
-      // generated Flow types are optional. Don't crash, just don't show data.
+      // compiler generates maybe types. Don't crash, just don't show data.
       // Another mechanism should invoke app update.
       data = await fetchQuery(environment, query, variables);
       records = environment
