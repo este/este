@@ -1,110 +1,94 @@
 // @flow
 import * as React from 'react';
+import Form from './Form';
+import { CreateButton } from './buttons';
+import TextInputBig from './TextInputBig';
+import { FormattedMessage } from 'react-intl';
+import Text from './Text';
+import Set from './Set';
+import CreateWebMutation from '../mutations/CreateWebMutation';
+import type { Errors } from '../server/error';
+import Mutation from './Mutation';
+import Error from './Error';
+import * as validation from '../server/validation';
 
-// import Form from './Form';
-// import { CreateButton } from './buttons';
-// import TextInputBig from './TextInputBig';
-// import { FormattedMessage } from 'react-intl';
-// import Text from './Text';
-// import Set from './Set';
-// import CreateWebMutation from '../mutations/CreateWebMutation';
-// import Mutate, { clientMutationId } from './Mutate';
-// import { validateNewWeb } from '../validation';
-// import type { Errors } from '../lib/error';
-// import ValidationError from './ValidationError';
-//
-// type Props = {
-//   userId: string,
-// };
-//
-// type Fields = {
-//   name: string,
-// };
-//
-// type State = {
-//   pending: boolean,
-//   errors: Errors<Fields>,
-// } & Fields;
-//
-// const initialState = {
-//   name: '',
-//   pending: false,
-//   errors: {},
-// };
-//
-// class CreateWeb extends React.PureComponent<Props, State> {
-//   state = initialState;
-//
-//   handleCompleted = () => {
-//     this.setState(initialState);
-//   };
-//
-//   handleError = () => {
-//     this.setState({ pending: false });
-//   };
-//
-//   // Using an existential type is ok. It works well.
-//   createWeb = (mutate: *) => () => {
-//     // const variables = {
-//     //   input: {
-//     //     domain: '', // computed by g r a p h c o o l/functions/createWeb.js nameToDomain
-//     //     name: this.state.name,
-//     //     ownerId: this.props.userId,
-//     //     clientMutationId: clientMutationId(),
-//     //   },
-//     // };
-//     //
-//     // const errors = validateNewWeb(variables.input);
-//     // if (errors) {
-//     //   this.setState({ errors });
-//     //   return;
-//     // }
-//     //
-//     // this.setState({ pending: true });
-//     // mutate(
-//     //   CreateWebMutation.commit(this.props.userId),
-//     //   variables,
-//     //   this.handleCompleted,
-//     //   this.handleError,
-//     // );
-//   };
-//
-//   render() {
-//     return (
-//       <Mutate>
-//         {mutate => {
-//           const { pending, errors } = this.state;
-//           return (
-//             <Form onSubmit={this.createWeb(mutate)}>
-//               <TextInputBig
-//                 label={
-//                   <Text>
-//                     <FormattedMessage
-//                       defaultMessage="Web Name"
-//                       id="createApp.label"
-//                     />
-//                   </Text>
-//                 }
-//                 autoFocus={errors.name}
-//                 disabled={pending}
-//                 error={<ValidationError error={errors.name} />}
-//                 onChange={name => this.setState({ name })}
-//                 type="text"
-//                 value={this.state.name}
-//               />
-//               <Set>
-//                 <CreateButton
-//                   primary
-//                   disabled={pending}
-//                   onPress={this.createWeb(mutate)}
-//                 />
-//               </Set>
-//             </Form>
-//           );
-//         }}
-//       </Mutate>
-//     );
-//   }
-// }
-//
-// export default CreateWeb;
+type Fields = {|
+  name: string,
+|};
+
+type State = {|
+  ...Fields,
+  errors: Errors<Fields>,
+|};
+
+const initialState = {
+  name: '',
+  errors: {},
+};
+
+class CreateWeb extends React.PureComponent<{}, State> {
+  state = initialState;
+
+  handleCompleted = () => {
+    this.setState(initialState);
+  };
+
+  handleError = (errors: *) => {
+    this.setState({ errors });
+  };
+
+  createWeb = (mutate: *) => () => {
+    const variables = {
+      name: this.state.name,
+    };
+
+    const errors = validation.validateNewWeb(variables);
+    if (errors) {
+      this.setState({ errors });
+      return;
+    }
+
+    mutate(
+      CreateWebMutation.commit,
+      variables,
+      this.handleCompleted,
+      this.handleError,
+    );
+  };
+
+  render() {
+    return (
+      <Mutation>
+        {({ mutate, pending }) => (
+          <Form onSubmit={this.createWeb(mutate)}>
+            <TextInputBig
+              label={
+                <Text>
+                  <FormattedMessage
+                    defaultMessage="Web Name"
+                    id="createApp.label"
+                  />
+                </Text>
+              }
+              autoFocus={this.state.errors.name}
+              disabled={pending}
+              error={<Error>{this.state.errors.name}</Error>}
+              onChange={name => this.setState({ name })}
+              type="text"
+              value={this.state.name}
+            />
+            <Set>
+              <CreateButton
+                primary
+                disabled={pending}
+                onPress={this.createWeb(mutate)}
+              />
+            </Set>
+          </Form>
+        )}
+      </Mutation>
+    );
+  }
+}
+
+export default CreateWeb;

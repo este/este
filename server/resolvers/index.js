@@ -93,16 +93,19 @@ const resolvers /*: Resolvers */ = {
       const timestamp = Date.now().toString(36);
       const domain = `${domainName}-${timestamp}`;
 
-      return await ctx.db.mutation.createWeb(
-        {
-          data: {
-            name: args.name,
-            domain,
-            owner: { connect: { id: userId } },
-          },
+      const web = await ctx.db.mutation.createWeb({
+        data: {
+          name: args.name,
+          domain,
+          owner: { connect: { id: userId } },
         },
-        info,
-      );
+      });
+      return {
+        webEdge: {
+          node: web,
+          cursor: '', // WTF I should return here? Nepujde se toho zbavit? Nebo tu budu srat prazdnej string?
+        },
+      };
     },
 
     async deleteWeb(parent, { id }, ctx, info) {
@@ -125,14 +128,11 @@ const resolvers /*: Resolvers */ = {
 
     async webs(parent, args, ctx, info) {
       const userId = getUserId(ctx);
-      // Note we limit what a client can request on the server.
-      // Otherwise, a client could request first 10000000000000 items.
-      // For pagination, we can use args.
       const webs = await ctx.db.query.websConnection(
         {
           where: { owner: { id: userId } },
           orderBy: 'updatedAt_ASC',
-          first: 100,
+          first: args.first,
         },
         info,
       );

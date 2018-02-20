@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Mon Feb 19 2018 04:05:33 GMT+0100 (CET)
+# timestamp: Tue Feb 20 2018 03:58:20 GMT+0100 (CET)
 
 type AggregateWeb {
   count: Int!
@@ -10,12 +10,16 @@ type AuthPayload {
   user: User!
 }
 
+type CreateWebPayload {
+  webEdge: WebEdge!
+}
+
 scalar DateTime
 
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): Web
+  createWeb(name: String!): CreateWebPayload
   deleteWeb(id: ID!): Web
 }
 
@@ -32,7 +36,7 @@ type PageInfo {
 
 type Query {
   me: User
-  webs: WebConnection
+  webs(first: Int!): WebConnection
   web(domain: String!): Web
 }
 

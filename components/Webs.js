@@ -11,9 +11,12 @@ type Props = {
 
 class Webs extends React.PureComponent<Props> {
   render() {
+    const { webs } = this.props.data;
+    // https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+    if (!webs) return null;
     return (
       <Box>
-        {this.props.data.edges.map(
+        {webs.edges.map(
           edge => edge && <WebsItem data={edge.node} key={edge.node.id} />,
         )}
       </Box>
@@ -24,11 +27,19 @@ class Webs extends React.PureComponent<Props> {
 export default createFragmentContainer(
   Webs,
   graphql`
-    fragment Webs on WebConnection {
-      edges {
-        node {
-          id
-          ...WebsItem
+    fragment Webs on Query
+      @argumentDefinitions(
+        first: { type: "Int!", defaultValue: 100 }
+        isAuthenticated: { type: "Boolean" }
+      ) {
+      webs(first: $first)
+        @connection(key: "Webs_webs")
+        @include(if: $isAuthenticated) {
+        edges {
+          node {
+            id
+            ...WebsItem
+          }
         }
       }
     }

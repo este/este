@@ -9,13 +9,13 @@ import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
 import P from '../components/P';
 import Box from '../components/Box';
-// import CreateWeb from '../components/CreateWeb';
+import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 import IsAuthenticated from '../components/IsAuthenticated';
 import * as generated from './__generated__/pagesQuery.graphql';
 
-const Authenticated = ({ webs }) => (
+const Authenticated = ({ data }) => (
   <Box>
     <Heading size={1}>
       <FormattedMessage
@@ -23,9 +23,8 @@ const Authenticated = ({ webs }) => (
         id="index.manageYourWebs"
       />
     </Heading>
-    <Webs data={webs} />
-    {/* <WebList viewer={viewer} userId={userId} />
-    <CreateWeb userId={userId} /> */}
+    <Webs data={data} />
+    <CreateWeb />
   </Box>
 );
 
@@ -46,14 +45,14 @@ const NotAuthenticated = () => (
   </Box>
 );
 
-const Index = ({ data, intl }) => {
-  const { webs }: generated.pagesQueryResponse = data;
+const Index = props => {
+  const data: generated.pagesQueryResponse = props.data;
   return (
-    <Page title={intl.formatMessage(titles.index)}>
+    <Page title={props.intl.formatMessage(titles.index)}>
       <Heading size={3}>Este</Heading>
       <IsAuthenticated>
         {({ isAuthenticated }) =>
-          isAuthenticated ? <Authenticated webs={webs} /> : <NotAuthenticated />
+          isAuthenticated ? <Authenticated data={data} /> : <NotAuthenticated />
         }
       </IsAuthenticated>
     </Page>
@@ -63,9 +62,7 @@ const Index = ({ data, intl }) => {
 export default app(Index, {
   query: graphql`
     query pagesQuery($isAuthenticated: Boolean!) {
-      webs @include(if: $isAuthenticated) {
-        ...Webs
-      }
+      ...Webs @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   queryVariables: args =>

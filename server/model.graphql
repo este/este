@@ -1,8 +1,11 @@
 # import Web from "../database/schema.graphql"
+# import WebEdge from "../database/schema.graphql"
 # import WebConnection from "../database/schema.graphql"
 
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
 # http://graphql.org/learn/best-practices/#nullability
+
+# If model has been changed, we have to restart server API for `yarn schema`
 
 # Like database/model User, but without password, webs, and DB directives.
 # Expose the only API we need.
@@ -13,15 +16,29 @@ type User {
   email: String!
 }
 
+# The same as User.
+# type Web {
+#   id: ID!
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+#   name: String!
+#   domain: String!
+#   isPublished: Boolean!
+# }
+
 type AuthPayload {
   token: String!
   user: User!
 }
 
+type CreateWebPayload {
+  webEdge: WebEdge!
+}
+
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): Web
+  createWeb(name: String!): CreateWebPayload
   deleteWeb(id: ID!): Web
 }
 
@@ -29,7 +46,7 @@ type Query {
   me: User
   # Expose only API we need, webs of logged-in user for now.
   # Later, we can extend API for any user.
-  # webs(ownerId: ID!): WebConnection
-  webs: WebConnection
+  # webs(first: Int!, ownerId: ID!): WebConnection
+  webs(first: Int!): WebConnection
   web(domain: String!): Web
 }

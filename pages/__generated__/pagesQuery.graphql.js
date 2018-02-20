@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e051e3ca8d70d32dfcf6235edcc5a17b
+ * @relayHash b294c9e2cdd91feb58816361c8d7f59b
  */
 
 /* eslint-disable */
@@ -14,9 +14,7 @@ export type pagesQueryVariables = {|
   isAuthenticated: boolean,
 |};
 export type pagesQueryResponse = {|
-  +webs?: ?{|
-    +__fragments: Webs$ref,
-  |},
+  +__fragments: Webs$ref,
 |};
 */
 
@@ -25,16 +23,22 @@ export type pagesQueryResponse = {|
 query pagesQuery(
   $isAuthenticated: Boolean!
 ) {
-  webs @include(if: $isAuthenticated) {
-    ...Webs
-  }
+  ...Webs_39ngnn
 }
 
-fragment Webs on WebConnection {
-  edges {
-    node {
-      id
-      ...WebsItem
+fragment Webs_39ngnn on Query {
+  webs(first: 100) @include(if: $isAuthenticated) {
+    edges {
+      node {
+        id
+        ...WebsItem
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
@@ -61,7 +65,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery(\n  $isAuthenticated: Boolean!\n) {\n  webs @include(if: $isAuthenticated) {\n    ...Webs\n  }\n}\n\nfragment Webs on WebConnection {\n  edges {\n    node {\n      id\n      ...WebsItem\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "query pagesQuery(\n  $isAuthenticated: Boolean!\n) {\n  ...Webs_39ngnn\n}\n\nfragment Webs_39ngnn on Query {\n  webs(first: 100) @include(if: $isAuthenticated) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -71,25 +75,14 @@ return {
     "argumentDefinitions": v0,
     "selections": [
       {
-        "kind": "Condition",
-        "passingValue": true,
-        "condition": "isAuthenticated",
-        "selections": [
+        "kind": "FragmentSpread",
+        "name": "Webs",
+        "args": [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "webs",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "WebConnection",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "FragmentSpread",
-                "name": "Webs",
-                "args": null
-              }
-            ]
+            "kind": "Variable",
+            "name": "isAuthenticated",
+            "variableName": "isAuthenticated",
+            "type": null
           }
         ]
       }
@@ -109,8 +102,15 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "webs",
-            "storageKey": null,
-            "args": null,
+            "storageKey": "webs(first:100)",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "first",
+                "value": 100,
+                "type": "Int!"
+              }
+            ],
             "concreteType": "WebConnection",
             "plural": false,
             "selections": [
@@ -159,12 +159,67 @@ return {
                         "name": "domain",
                         "args": null,
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "__typename",
+                        "args": null,
+                        "storageKey": null
                       }
                     ]
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "cursor",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "pageInfo",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "endCursor",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "hasNextPage",
+                    "args": null,
+                    "storageKey": null
                   }
                 ]
               }
             ]
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "name": "webs",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "first",
+                "value": 100,
+                "type": "Int!"
+              }
+            ],
+            "handle": "connection",
+            "key": "Webs_webs",
+            "filters": null
           }
         ]
       }
@@ -172,5 +227,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '447587a4b8ef4ae08cb03139ab9904b3';
+(node/*: any*/).hash = '29a5134f3dba2c440532af5a61948a25';
 module.exports = node;
