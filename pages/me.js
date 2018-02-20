@@ -34,11 +34,11 @@ const signOut = () => {
   window.location.href = '/';
 };
 
-const Me = ({ data, intl }) => {
-  const { me }: generated.meQueryResponse = data;
+const Me = props => {
+  const { me }: generated.meQueryResponse = props.data;
   const email = me && me.email;
   return (
-    <Page title={intl.formatMessage(titles.me)}>
+    <Page title={props.intl.formatMessage(titles.me)}>
       {email != null && (
         <Box>
           <Image

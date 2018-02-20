@@ -7,8 +7,8 @@ import type { EditQuery } from '../server/sitemap';
 import Error from 'next/error';
 import Editor from '../components/editor/Editor';
 
-const Edit = ({ data }) => {
-  const { web }: generated.editQueryResponse = data;
+const Edit = props => {
+  const { web }: generated.editQueryResponse = props.data;
   if (!web) return <Error statusCode={404} />;
   return <Editor name={web.name} />;
 };
