@@ -35,8 +35,10 @@ module.exports = {
     'react/no-multi-comp': 0, // Control freaky.
     'react/prefer-stateless-function': 0, // PureComponents ftw.
     'arrow-body-style': 0, // Control freaky.
-    // allow console and debugger in development
+    'prefer-destructuring': 0, // We can't always, because of Flow casting.
+    // For production build
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-unused-vars': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
 };
