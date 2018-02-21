@@ -18,6 +18,7 @@ import type { ServerError } from '../error';
 // - now we can use it in client code
 
 const createAuthPayload = user => ({
+  // $FlowFixMe
   token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET),
   user,
 });
@@ -34,6 +35,7 @@ const getUserId = ctx => {
   const Authorization = ctx.request.get('Authorization');
   if (!Authorization) throwNotAuthorizedError();
   const token = Authorization.replace('Bearer ', '');
+  // $FlowFixMe
   const { userId } = jsonwebtoken.verify(token, process.env.APP_SECRET);
   return userId;
 };
