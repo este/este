@@ -100,10 +100,11 @@ const resolvers /*: Resolvers */ = {
           owner: { connect: { id: userId } },
         },
       });
+
       return {
-        webEdge: {
+        edge: {
           node: web,
-          cursor: '', // WTF I should return here? Nepujde se toho zbavit? Nebo tu budu srat prazdnej string?
+          cursor: '', // WTF I should return here?
         },
       };
     },

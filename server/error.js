@@ -3,9 +3,10 @@
 // So here is a thing. We have only one Error type in the app.
 // Note, it overrides JavaScript Error when imported. That's fine.
 // https://github.com/facebook/flow/blob/v0.64.0/lib/core.js#L439
-// http://blog.ploeh.dk/2017/01/03/decoupling-application-errors-from-domain-models
 
 /*::
+import type { PayloadError } from 'react-relay'
+
 type DomainError =
   | { type: 'alreadyExists' }
   | { type: 'notExists' }
@@ -33,15 +34,11 @@ export type Errors<T> = {
 // Note we can safely distinguish them via type === 'string'.
 export type ServerError = Error | Errors<*>;
 
-type SerializedServerError = string;
-
-// TODO: Use Relay 1.5 type when released.
-export type PayloadErrors = Array<{
-  message: SerializedServerError,
-}>;
 */
 
-export const parsePayloadErrors = (payloadErrors: PayloadErrors) => {
+export const parsePayloadErrors = (
+  payloadErrors /*: Array<PayloadError> */,
+) => {
   let errors = {};
   let error = null;
 

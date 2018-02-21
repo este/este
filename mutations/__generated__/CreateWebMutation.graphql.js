@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 86ba7eab889118318d9dfa0974c5009a
+ * @relayHash d2964f877526a4e0c2308ea530ee13d2
  */
 
 /* eslint-disable */
@@ -15,7 +15,7 @@ export type CreateWebMutationVariables = {|
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
-    +webEdge: {|
+    +edge: {|
       +node: {|
         +__fragments: WebsItem$ref,
       |},
@@ -30,7 +30,7 @@ mutation CreateWebMutation(
   $name: String!
 ) {
   createWeb(name: $name) {
-    webEdge {
+    edge {
       node {
         ...WebsItem
         id
@@ -69,7 +69,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $name: String!\n) {\n  createWeb(name: $name) {\n    webEdge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "mutation CreateWebMutation(\n  $name: String!\n) {\n  createWeb(name: $name) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -90,7 +90,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "webEdge",
+            "name": "edge",
             "storageKey": null,
             "args": null,
             "concreteType": "WebEdge",
@@ -135,7 +135,7 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "webEdge",
+            "name": "edge",
             "storageKey": null,
             "args": null,
             "concreteType": "WebEdge",
@@ -188,5 +188,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '24dcdaa908e4cb6d716da7c8c5749ea5';
+(node/*: any*/).hash = '3868392819f73fafd1e4ce1ff657ffac';
 module.exports = node;

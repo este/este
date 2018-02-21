@@ -1,20 +1,17 @@
 // @flow
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
-import type { Disposable, Environment } from 'react-relay';
+import type { Disposable, Environment, PayloadError } from 'react-relay';
 import { ErrorPopupConsumer } from './ErrorPopup';
-import {
-  parsePayloadErrors,
-  type Errors,
-  type PayloadErrors,
-} from '../server/error';
+import createRelayEnvironment from './app/createRelayEnvironment';
+import { parsePayloadErrors, type Errors } from '../server/error';
 
 type Value = {|
   environment: Environment,
 |};
 
 const MutationContext: Context<Value> = createReactContext({
-  environment: null,
+  environment: createRelayEnvironment(),
 });
 
 export const MutationProvider = MutationContext.Provider;
@@ -22,18 +19,19 @@ export const MutationProvider = MutationContext.Provider;
 export type Commit<Variables, Response> = (
   environment: Environment,
   variables: Variables,
-  onCompleted: (response: Response, payloadErrors: ?PayloadErrors) => void,
+  onCompleted: (
+    response: Response,
+    payloadErrors: ?Array<PayloadError>,
+  ) => void,
   onError: (error: any) => void,
 ) => Disposable;
-
-type Pending = boolean;
 
 type MutationProps = {|
   children: (*) => React.Node,
 |};
 
 type MutationState = {|
-  pending: Pending,
+  pending: boolean,
 |};
 
 class Mutation extends React.PureComponent<MutationProps, MutationState> {

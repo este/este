@@ -9,7 +9,7 @@ import type {
 const mutation = graphql`
   mutation CreateWebMutation($name: String!) {
     createWeb(name: $name) {
-      webEdge {
+      edge {
         node {
           ...WebsItem
         }
@@ -28,7 +28,7 @@ const configs = [
         rangeBehavior: 'append',
       },
     ],
-    edgeName: 'webEdge',
+    edgeName: 'edge',
   },
 ];
 

@@ -7,6 +7,7 @@ import type { Href } from '../../server/sitemap';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
+import type { GraphQLTaggedNode } from 'react-relay';
 import { getCookie, type Cookie } from './cookie';
 import { LocaleProvider } from '../Locale';
 import { MutationProvider } from '../Mutation';
@@ -76,7 +77,7 @@ const app = (
     } & NextProps,
   >,
   options?: {|
-    query?: Object, // TODO: Allow to pass function for conditional query.
+    query?: GraphQLTaggedNode,
     queryVariables?: ({|
       isAuthenticated: boolean,
       urlQuery: UrlQuery,

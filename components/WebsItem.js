@@ -8,9 +8,9 @@ import Set from './Set';
 import A from './A';
 import { FormattedRelative } from 'react-intl';
 
-type Props = {
+type Props = {|
   data: generated.WebsItem,
-};
+|};
 
 class WebsItem extends React.PureComponent<Props> {
   render() {

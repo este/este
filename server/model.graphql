@@ -32,7 +32,7 @@ type AuthPayload {
 }
 
 type CreateWebPayload {
-  webEdge: WebEdge!
+  edge: WebEdge!
 }
 
 type Mutation {

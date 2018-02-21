@@ -5,9 +5,9 @@ import Box from './Box';
 import * as generated from './__generated__/Webs.graphql';
 import WebsItem from './WebsItem';
 
-type Props = {
+type Props = {|
   data: generated.Webs,
-};
+|};
 
 class Webs extends React.PureComponent<Props> {
   render() {
