@@ -55,7 +55,7 @@
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.1.1",
-    "next": "5.0.1-canary.2",
+    "next": "5.0.1-canary.7",
     "nprogress": "^0.2.0",
     "path-match": "^1.2.4",
     "prisma-binding": "^1.5.12",

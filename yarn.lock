@@ -613,8 +613,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.199.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.199.0.tgz#94c2484b030f299dda494c94bacc4f66e4b32de9"
+  version "2.200.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.200.0.tgz#f460c96408725b0eb8c658fddea6e0bfe0ef5a44"
   dependencies:
     buffer "4.9.1"
     events "^1.1.1"
@@ -4442,7 +4442,7 @@ hoist-non-react-statics@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
 
-hoist-non-react-statics@^2.3.1:
+hoist-non-react-statics@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
 
@@ -5084,9 +5084,13 @@ iterall@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
 
-iterall@1.2.0, iterall@^1.1.0, iterall@^1.1.1, iterall@^1.1.3, iterall@^1.2.0:
+iterall@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.0.tgz#434e9f41f0b99911ab9c3d49d95f0e079176a2a2"
+
+iterall@^1.1.0, iterall@^1.1.1, iterall@^1.1.3, iterall@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.1.tgz#59a347ae8001d2d4bc546b8487ca755d61849965"
 
 jest-changed-files@^22.2.0:
   version "22.2.0"
@@ -6236,9 +6240,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-next@5.0.1-canary.2:
-  version "5.0.1-canary.2"
-  resolved "https://registry.yarnpkg.com/next/-/next-5.0.1-canary.2.tgz#7266ba703e459f54806da6501c4990b8056545d2"
+next@5.0.1-canary.7:
+  version "5.0.1-canary.7"
+  resolved "https://registry.yarnpkg.com/next/-/next-5.0.1-canary.7.tgz#694019d303737bcfd29bd6b34c65223b559eeb1a"
   dependencies:
     "@zeit/check-updates" "1.1.0"
     "@zeit/source-map-support" "0.6.2"
@@ -6280,12 +6284,12 @@ next@5.0.1-canary.2:
     pkg-up "2.0.0"
     prop-types "15.6.0"
     prop-types-exact "1.1.1"
-    react-hot-loader "4.0.0-beta.18"
+    react-hot-loader "4.0.0-beta.23"
     recursive-copy "2.0.6"
     resolve "1.5.0"
     send "0.16.1"
     strip-ansi "3.0.1"
-    styled-jsx "2.2.4"
+    styled-jsx "2.2.5"
     touch "3.1.0"
     uglifyjs-webpack-plugin "1.1.6"
     unfetch "3.0.0"
@@ -6295,8 +6299,8 @@ next@5.0.1-canary.2:
     webpack "3.10.0"
     webpack-dev-middleware "1.12.0"
     webpack-hot-middleware "2.21.0"
+    webpack-sources "1.1.0"
     write-file-webpack-plugin "4.2.0"
-    xss-filters "1.2.7"
 
 nice-try@^1.0.4:
   version "1.0.4"
@@ -7020,9 +7024,9 @@ prisma-binding@^1.5.12:
     jsonwebtoken "^8.1.0"
     subscriptions-transport-ws "0.9.5"
 
-prisma-cli-core@1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.15.tgz#133107c8ac6ecf07c1a8dbdb7e2a2c4c3c092715"
+prisma-cli-core@1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.16.tgz#c12a14ccfa02cb3d14557bf85e61a15834842951"
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -7053,7 +7057,7 @@ prisma-cli-core@1.0.15:
     pause "^0.1.0"
     portfinder "^1.0.13"
     prisma-json-schema "^0.0.1"
-    prisma-yml "1.0.24"
+    prisma-yml "1.0.25"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -7062,9 +7066,9 @@ prisma-cli-core@1.0.15:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.13.tgz#4c0ee70d554a07a2727a57a86a056d3e534d0da7"
+prisma-cli-engine@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.14.tgz#4189762a8b7e91a512685ddcdaa2c2ae6b2c7de2"
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -7106,7 +7110,7 @@ prisma-cli-engine@1.0.13:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "^0.0.1"
-    prisma-yml "1.0.24"
+    prisma-yml "1.0.25"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -7166,9 +7170,9 @@ prisma-yml@1.0.21:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma-yml@1.0.24:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.24.tgz#ba8fa6d4b36b4b85090a72ed2c0fb8d670b578f0"
+prisma-yml@1.0.25:
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.25.tgz#e7989efa85320d7f7695d2280ba305abe5262f75"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -7187,12 +7191,12 @@ prisma-yml@1.0.24:
     yaml-ast-parser "^0.0.40"
 
 prisma@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.2.4.tgz#a3d8b28286fa40858c48b9c41bc57b4cd50966ac"
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.2.5.tgz#0143307c676328716660397f44046e6b1be20938"
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.0.15"
-    prisma-cli-engine "1.0.13"
+    prisma-cli-core "1.0.16"
+    prisma-cli-engine "1.0.14"
     semver "^5.4.1"
     source-map-support "^0.4.18"
 
@@ -7416,14 +7420,15 @@ react-dom@^16.0.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-hot-loader@4.0.0-beta.18:
-  version "4.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.0.0-beta.18.tgz#5a3d1b5bd813633380b88c0c660019dbf638975d"
+react-hot-loader@4.0.0-beta.23:
+  version "4.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.0.0-beta.23.tgz#dced27e8e2400adb1690eb5b3a0a39b4e0b90615"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
-    hoist-non-react-statics "^2.3.1"
-    react-stand-in "^4.0.0-beta.18"
+    hoist-non-react-statics "^2.5.0"
+    prop-types "^15.6.0"
+    shallowequal "^1.0.2"
 
 react-intl@^2.3.0:
   version "2.4.0"
@@ -7442,12 +7447,6 @@ react-relay@^1.5.0:
     fbjs "^0.8.14"
     prop-types "^15.5.8"
     relay-runtime "1.5.0"
-
-react-stand-in@^4.0.0-beta.18:
-  version "4.0.0-beta.21"
-  resolved "https://registry.yarnpkg.com/react-stand-in/-/react-stand-in-4.0.0-beta.21.tgz#fb694e465cb20fab7f36d3284f82b68bbd7a657e"
-  dependencies:
-    shallowequal "^1.0.2"
 
 react-test-renderer@^16.0.0:
   version "16.2.0"
@@ -8478,27 +8477,23 @@ strip-outer@^1.0.0:
   dependencies:
     escape-string-regexp "^1.0.2"
 
-styled-jsx@2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.4.tgz#aac903fd0a4240c356af335261183aa8f8673075"
+styled-jsx@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.5.tgz#3eb98418720655421bfc1a680e2add581726a5e6"
   dependencies:
     babel-plugin-syntax-jsx "6.18.0"
     babel-types "6.26.0"
     convert-source-map "1.5.1"
     source-map "0.6.1"
     string-hash "1.1.3"
-    stylis "3.4.5"
-    stylis-rule-sheet "0.0.7"
+    stylis "3.4.10"
+    stylis-rule-sheet "0.0.8"
 
-stylis-rule-sheet@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/stylis-rule-sheet/-/stylis-rule-sheet-0.0.7.tgz#5c51dc879141a61821c2094ba91d2cbcf2469c6c"
+stylis-rule-sheet@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/stylis-rule-sheet/-/stylis-rule-sheet-0.0.8.tgz#b0d0a126c945b1f3047447a3aae0647013e8d166"
 
-stylis@3.4.5:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.5.tgz#d7b9595fc18e7b9c8775eca8270a9a1d3e59806e"
-
-stylis@^3.3.2:
+stylis@3.4.10, stylis@^3.3.2:
   version "3.4.10"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.10.tgz#a135cab4b9ff208e327fbb5a6fde3fa991c638ee"
 
@@ -9144,7 +9139,7 @@ webpack-hot-middleware@2.21.0:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-sources@^1.0.1, webpack-sources@^1.1.0:
+webpack-sources@1.1.0, webpack-sources@^1.0.1, webpack-sources@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.1.0.tgz#a101ebae59d6507354d71d8013950a3a8b7a5a54"
   dependencies:
@@ -9321,10 +9316,6 @@ xmlbuilder@4.2.1, xmlbuilder@^4.1.0:
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
   dependencies:
     lodash "^4.0.0"
-
-xss-filters@1.2.7:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/xss-filters/-/xss-filters-1.2.7.tgz#59fa1de201f36f2f3470dcac5f58ccc2830b0a9a"
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"
