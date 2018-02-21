@@ -9,7 +9,7 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from 'relay-runtime';
-export opaque type WebsItem$ref: FragmentReference = FragmentReference;
+declare export opaque type WebsItem$ref: FragmentReference;
 export type WebsItem = {|
   +updatedAt: any,
   +name: string,

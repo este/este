@@ -10,13 +10,13 @@
 import type { ConcreteFragment } from 'relay-runtime';
 type WebsItem$ref = any;
 import type { FragmentReference } from 'relay-runtime';
-export opaque type Webs$ref: FragmentReference = FragmentReference;
+declare export opaque type Webs$ref: FragmentReference;
 export type Webs = {|
   +webs?: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: {|
         +id: string,
-        +__fragments: WebsItem$ref,
+        +$fragmentRefs: WebsItem$ref,
       |},
     |}>,
   |},

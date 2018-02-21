@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d2964f877526a4e0c2308ea530ee13d2
+ * @relayHash 50f1014addb9489b21cd6159d1e6e33d
  */
 
 /* eslint-disable */
@@ -17,7 +17,7 @@ export type CreateWebMutationResponse = {|
   +createWeb: ?{|
     +edge: {|
       +node: {|
-        +__fragments: WebsItem$ref,
+        +$fragmentRefs: WebsItem$ref,
       |},
     |},
   |},

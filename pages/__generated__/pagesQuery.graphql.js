@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b294c9e2cdd91feb58816361c8d7f59b
+ * @relayHash 2979d3e5dd11e57cf281ceea991a541c
  */
 
 /* eslint-disable */
@@ -14,7 +14,7 @@ export type pagesQueryVariables = {|
   isAuthenticated: boolean,
 |};
 export type pagesQueryResponse = {|
-  +__fragments: Webs$ref,
+  +$fragmentRefs: Webs$ref,
 |};
 */
 
