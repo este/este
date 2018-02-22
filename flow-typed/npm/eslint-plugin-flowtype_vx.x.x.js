@@ -1,4 +1,4 @@
-// flow-typed signature: cbd9e5043cf221e6a209afd20928609d
+// flow-typed signature: d31939acabda56c14b9a47185983e2b6
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^2.35.1/flow_v0.66.0
 
 /**
@@ -166,6 +166,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/typeIdMatch' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-flowtype/dist/rules/typeImportStyle' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-flowtype/dist/rules/unionIntersectionSpacing' {
   declare module.exports: any;
 }
@@ -330,6 +334,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/reporter.js' 
 }
 declare module 'eslint-plugin-flowtype/dist/rules/typeIdMatch.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/typeIdMatch'>;
+}
+declare module 'eslint-plugin-flowtype/dist/rules/typeImportStyle.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/typeImportStyle'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/unionIntersectionSpacing.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/unionIntersectionSpacing'>;
