@@ -8,7 +8,7 @@ import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import type { Errors } from '../server/error';
-import Mutation from './Mutation';
+import Mutation, { clientMutationId } from './Mutation';
 import Error from './Error';
 import * as validation from '../server/validation';
 
@@ -41,7 +41,7 @@ class CreateWeb extends React.PureComponent<{}, State> {
     const variables = {
       input: {
         name: this.state.name,
-        clientMutationId: Date.now().toString(36),
+        clientMutationId: clientMutationId(),
       },
     };
 

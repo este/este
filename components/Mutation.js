@@ -16,6 +16,9 @@ const MutationContext: Context<Value> = createReactContext({
 
 export const MutationProvider = MutationContext.Provider;
 
+// https://github.com/facebook/relay/issues/2077
+export const clientMutationId = () => Date.now().toString(36);
+
 export type Commit<Variables, Response> = (
   environment: Environment,
   variables: Variables,
