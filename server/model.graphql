@@ -6,7 +6,7 @@
 # http://graphql.org/learn/best-practices/#nullability
 
 # TODO: Remove clientMutationId.
-# clientMutationId is FBISM which will be removed from OSS version soon.
+# clientMutationId is FBISM which will be removed from Relay soon.
 
 # Workflow:
 #   - update model.graphql
@@ -15,24 +15,13 @@
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-# Like database/model User, but without password, webs, and DB directives.
-# Expose the only API we need.
+# Like database/model User, but without password, webs, and directives.
 type User {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
 }
-
-# The same as User.
-# type Web {
-#   id: ID!
-#   createdAt: DateTime!
-#   updatedAt: DateTime!
-#   name: String!
-#   domain: String!
-#   isPublished: Boolean!
-# }
 
 type AuthPayload {
   token: String!
