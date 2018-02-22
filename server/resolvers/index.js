@@ -142,14 +142,14 @@ const resolvers /*: Resolvers */ = {
       return webs;
     },
 
-    async web(parent, args, ctx, info) {
-      const webs = await ctx.db.query.web(
-        {
-          where: { domain: args.domain },
-        },
-        info,
-      );
-      return webs;
+    async web(parent, { domain }, ctx, info) {
+      const userId = getUserId(ctx);
+      const requestingUserIsOwner = await ctx.db.exists.Web({
+        domain,
+        owner: { id: userId },
+      });
+      if (!requestingUserIsOwner) throwNotAuthorizedError();
+      return ctx.db.query.web({ where: { domain } }, info);
     },
   },
 };
