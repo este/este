@@ -7,14 +7,14 @@ const validation = require('../validation');
 import type { ServerError } from '../error';
 */
 
-// Steps:
+// Workflow
 // - update database/model.graphql
 // - yarn prisma deploy
 // - test it in playground
 // - update server/model.graphql
 // - add resolver here
 // - test it in playground
-// - yarn schema
+// - yarn schema && yarn relay
 // - now we can use it in client code
 
 const createAuthPayload = user => ({
@@ -78,15 +78,15 @@ const resolvers /*: Resolvers */ = {
       return createAuthPayload(user);
     },
 
-    async createWeb(parent, args, ctx, info) {
+    async createWeb(parent, { input }, ctx, info) {
       // Only an authorized user can create a web.
       const userId = getUserId(ctx);
 
       // The same logic as on clients.
-      const validationErrors = validation.validateNewWeb(args);
+      const validationErrors = validation.validateNewWeb(input);
       if (validationErrors) throwError(validationErrors);
 
-      const domainName = args.name
+      const domainName = input.name
         .toLowerCase()
         .split('')
         .map(char => diacriticsMap[char] || char)
@@ -97,7 +97,7 @@ const resolvers /*: Resolvers */ = {
 
       const web = await ctx.db.mutation.createWeb({
         data: {
-          name: args.name,
+          name: input.name,
           domain,
           owner: { connect: { id: userId } },
         },

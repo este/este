@@ -7,8 +7,8 @@ import type {
 } from './__generated__/CreateWebMutation.graphql';
 
 const mutation = graphql`
-  mutation CreateWebMutation($name: String!) {
-    createWeb(name: $name) {
+  mutation CreateWebMutation($input: CreateWebInput!) {
+    createWeb(input: $input) {
       edge {
         node {
           ...WebsItem

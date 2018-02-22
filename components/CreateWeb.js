@@ -39,10 +39,13 @@ class CreateWeb extends React.PureComponent<{}, State> {
 
   createWeb = (mutate: *) => () => {
     const variables = {
-      name: this.state.name,
+      input: {
+        name: this.state.name,
+        clientMutationId: Date.now().toString(36),
+      },
     };
 
-    const errors = validation.validateNewWeb(variables);
+    const errors = validation.validateNewWeb(variables.input);
     if (errors) {
       this.setState({ errors });
       return;

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Feb 21 2018 03:53:35 GMT+0100 (CET)
+# timestamp: Thu Feb 22 2018 04:28:31 GMT+0100 (CET)
 
 type AggregateWeb {
   count: Int!
@@ -8,6 +8,11 @@ type AggregateWeb {
 type AuthPayload {
   token: String!
   user: User!
+}
+
+input CreateWebInput {
+  name: String!
+  clientMutationId: String!
 }
 
 type CreateWebPayload {
@@ -19,7 +24,7 @@ scalar DateTime
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): CreateWebPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(id: ID!): Web
 }
 

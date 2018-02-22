@@ -5,7 +5,15 @@
 # https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
 # http://graphql.org/learn/best-practices/#nullability
 
-# If model has been changed, we have to restart server API for `yarn schema`
+# TODO: Remove clientMutationId.
+# clientMutationId is FBISM which will be removed from OSS version soon.
+
+# Workflow:
+#   - update model.graphql
+#   - run `yarn schema && yarn relay` in another terminal window
+
+# TODO: Ideally, run `yarn schema && yarn relay` after nodemon.api.json restart
+# invoked by model.graphql change. PR anyone?
 
 # Like database/model User, but without password, webs, and DB directives.
 # Expose the only API we need.
@@ -31,6 +39,11 @@ type AuthPayload {
   user: User!
 }
 
+input CreateWebInput {
+  name: String!
+  clientMutationId: String!
+}
+
 type CreateWebPayload {
   edge: WebEdge!
 }
@@ -38,7 +51,7 @@ type CreateWebPayload {
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): CreateWebPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(id: ID!): Web
 }
 
