@@ -1,0 +1,6 @@
+{
+  "watch": ["server"],
+  "exec": "node --require dotenv/config server/api.js",
+  "ext": "js graphql",
+  "ignore": ["server/schema.graphql"]
+}
