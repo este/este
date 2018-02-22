@@ -14,7 +14,7 @@ import type { ServerError } from '../error';
 // - update server/model.graphql
 // - add resolver here
 // - test it in playground
-// - yarn schema && yarn relay
+// - yarn schema-relay
 // - now we can use it in client code
 
 const createAuthPayload = user => ({

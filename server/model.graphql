@@ -10,9 +10,9 @@
 
 # Workflow:
 #   - update model.graphql
-#   - run `yarn schema && yarn relay` in another terminal window
+#   - run `yarn schema-relay` in another terminal window
 
-# TODO: Ideally, run `yarn schema && yarn relay` after nodemon.api.json restart
+# TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
 # Like database/model User, but without password, webs, and DB directives.
