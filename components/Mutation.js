@@ -49,8 +49,8 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
   mutate = (environment: *, showError: *) => <Variables, Response>(
     commit: Commit<Variables, Response>,
     variables: Variables,
-    onCompleted: (response: Response) => void,
-    onError: (errors: Errors<Variables>) => void,
+    onCompleted?: (response: Response) => void,
+    onError?: (errors: Errors<Variables>) => void,
   ) => {
     this.setState({ pending: true });
 
@@ -60,16 +60,16 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
       (response, payloadErrors) => {
         this.setState({ pending: false });
         if (!payloadErrors) {
-          onCompleted(response);
+          if (onCompleted) onCompleted(response);
           return;
         }
         const { errors, error } = parsePayloadErrors(payloadErrors);
-        onError(errors);
+        if (onError) onError(errors);
         if (error) showError(error);
       },
       error => {
         this.setState({ pending: false });
-        onError({});
+        if (onError) onError({});
         showError({ type: 'unknownError', message: error.message });
       },
     );

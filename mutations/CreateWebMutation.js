@@ -5,6 +5,8 @@ import type {
   CreateWebMutationVariables,
   CreateWebMutationResponse,
 } from './__generated__/CreateWebMutation.graphql';
+import { ConnectionHandler } from 'relay-runtime';
+import ensureConnection from './ensureConnection';
 
 const mutation = graphql`
   mutation CreateWebMutation($input: CreateWebInput!) {
@@ -18,19 +20,12 @@ const mutation = graphql`
   }
 `;
 
-const configs = [
-  {
-    type: 'RANGE_ADD',
-    parentID: 'client:root',
-    connectionInfo: [
-      {
-        key: 'Webs_webs',
-        rangeBehavior: 'append',
-      },
-    ],
-    edgeName: 'edge',
-  },
-];
+const sharedUpdater = (store, recordEdge) => {
+  const clientRoot = store.get('client:root');
+  const connection = ConnectionHandler.getConnection(clientRoot, 'Webs_webs');
+  ensureConnection(connection);
+  ConnectionHandler.insertEdgeAfter(connection, recordEdge);
+};
 
 const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
   environment,
@@ -43,7 +38,11 @@ const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
     variables,
     onCompleted,
     onError,
-    configs,
+    updater: store => {
+      const payload = store.getRootField('createWeb');
+      const recordEdge = payload.getLinkedRecord('edge');
+      sharedUpdater(store, recordEdge);
+    },
   });
 
 export default { commit };

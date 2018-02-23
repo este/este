@@ -7,6 +7,7 @@
 
 # TODO: Remove clientMutationId.
 # clientMutationId is FBISM which will be removed from Relay soon.
+# It seems Relay needs it for all mutations.
 
 # Workflow:
 #   - update model.graphql
@@ -37,11 +38,20 @@ type CreateWebPayload {
   edge: WebEdge!
 }
 
+input DeleteWebInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteWebPayload {
+  id: ID!
+}
+
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
-  deleteWeb(id: ID!): Web
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
 }
 
 type Query {

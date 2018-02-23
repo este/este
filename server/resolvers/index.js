@@ -111,14 +111,14 @@ const resolvers /*: Resolvers */ = {
       };
     },
 
-    async deleteWeb(parent, { id }, ctx, info) {
+    async deleteWeb(parent, { input }, ctx, info) {
       const userId = getUserId(ctx);
       const webExists = await ctx.db.exists.Web({
-        id,
+        id: input.id,
         owner: { id: userId },
       });
       if (!webExists) throwNotAuthorizedError();
-      return ctx.db.mutation.deleteWeb({ where: { id } });
+      return ctx.db.mutation.deleteWeb({ where: { id: input.id } });
     },
   },
 

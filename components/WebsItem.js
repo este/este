@@ -1,12 +1,40 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import AreYouSureConfirm from './AreYouSureConfirm';
 import Box from './Box';
 import * as generated from './__generated__/WebsItem.graphql';
+import { DeleteButton } from './buttons';
 import Text from './Text';
 import Set from './Set';
 import A from './A';
 import { FormattedRelative } from 'react-intl';
+import Mutation, { clientMutationId } from './Mutation';
+import DeleteWebMutation from '../mutations/DeleteWebMutation';
+
+const DeleteWeb = ({ id }) => (
+  <Mutation>
+    {({ mutate, pending }) => (
+      <AreYouSureConfirm>
+        {confirm => (
+          <DeleteButton
+            color="warning"
+            disabled={pending}
+            onPress={() => {
+              if (!confirm()) return;
+              const variables = {
+                input: { id, clientMutationId: clientMutationId() },
+              };
+              mutate(DeleteWebMutation.commit, variables);
+            }}
+            paddingHorizontal={0}
+            size={-1}
+          />
+        )}
+      </AreYouSureConfirm>
+    )}
+  </Mutation>
+);
 
 type Props = {|
   data: generated.WebsItem,
@@ -25,13 +53,10 @@ class WebsItem extends React.PureComponent<Props> {
             </A>
             {', '}
             <FormattedRelative value={data.updatedAt} />
-            {/* <Text>
+            <Text>
               {', '}
-              <DeleteWeb
-                disabled={this.state.pending}
-                onPress={this.deleteWeb(mutate)}
-              />
-            </Text> */}
+              <DeleteWeb id={data.id} />
+            </Text>
           </Text>
         </Set>
       </Box>
