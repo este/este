@@ -6,7 +6,7 @@ import type {
   DeleteWebMutationResponse,
 } from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import ensureConnection from './ensureConnection';
+import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
   mutation DeleteWebMutation($input: DeleteWebInput!) {
@@ -17,8 +17,10 @@ const mutation = graphql`
 `;
 
 const sharedUpdater = (store, id) => {
-  const clientRoot = store.get('client:root');
-  const connection = ConnectionHandler.getConnection(clientRoot, 'Webs_webs');
+  const connection = ConnectionHandler.getConnection(
+    store.get(clientRoot),
+    'Webs_webs',
+  );
   ensureConnection(connection);
   ConnectionHandler.deleteNode(connection, id);
 };

@@ -6,7 +6,7 @@ import type {
   CreateWebMutationResponse,
 } from './__generated__/CreateWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import ensureConnection from './ensureConnection';
+import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
   mutation CreateWebMutation($input: CreateWebInput!) {
@@ -21,8 +21,10 @@ const mutation = graphql`
 `;
 
 const sharedUpdater = (store, recordEdge) => {
-  const clientRoot = store.get('client:root');
-  const connection = ConnectionHandler.getConnection(clientRoot, 'Webs_webs');
+  const connection = ConnectionHandler.getConnection(
+    store.get(clientRoot),
+    'Webs_webs',
+  );
   ensureConnection(connection);
   ConnectionHandler.insertEdgeAfter(connection, recordEdge);
 };
