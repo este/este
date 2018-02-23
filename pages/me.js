@@ -1,22 +1,22 @@
 // @flow
+import * as React from 'react';
 import Image from '../components/Image';
 import P from '../components/P';
 import Page from '../components/Page';
-import * as React from 'react';
 import Set from '../components/Set';
 import Button from '../components/Button';
 import Baseline from '../components/Baseline';
 import ToggleDark from '../components/ToggleDark';
 import app from '../components/app';
 import gravatar from 'gravatar';
-import { titles } from '../lib/sitemap';
-import type { mePageQueryResponse } from './__generated__/mePageQuery.graphql';
+import { titles } from '../server/sitemap';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import Heading from '../components/Heading';
 import { FormattedMessage } from 'react-intl';
-import { deleteCookie } from '../lib/cookie';
+import { deleteCookie } from '../components/app/cookie';
 import Box from '../components/Box';
+import * as generated from './__generated__/meQuery.graphql';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -34,11 +34,11 @@ const signOut = () => {
   window.location.href = '/';
 };
 
-const Me = ({ data, intl }) => {
-  const { viewer }: mePageQueryResponse = data;
-  const email = viewer.user && viewer.user.email;
+const Me = props => {
+  const { me }: generated.meQueryResponse = props.data;
+  const email = me && me.email;
   return (
-    <Page title={intl.formatMessage(titles.me)}>
+    <Page title={props.intl.formatMessage(titles.me)}>
       {email != null && (
         <Box>
           <Image
@@ -73,11 +73,9 @@ const Me = ({ data, intl }) => {
 export default app(Me, {
   requireAuth: true,
   query: graphql`
-    query mePageQuery {
-      viewer {
-        user {
-          email
-        }
+    query meQuery {
+      me {
+        email
       }
     }
   `,

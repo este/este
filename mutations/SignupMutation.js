@@ -1,6 +1,6 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Commit } from './types';
+import type { Commit } from '../components/Mutation';
 import type {
   SignupMutationVariables,
   SignupMutationResponse,
@@ -8,9 +8,11 @@ import type {
 
 const mutation = graphql`
   mutation SignupMutation($email: String!, $password: String!) {
-    signupUser(email: $email, password: $password) {
-      id
+    signup(email: $email, password: $password) {
       token
+      user {
+        id
+      }
     }
   }
 `;

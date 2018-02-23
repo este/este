@@ -2,19 +2,19 @@
   "env": {
     "development": {
       "presets": ["next/babel"],
-      "plugins": ["relay", ["transform-define", "./env-config.js"]]
+      "plugins": ["inline-dotenv", "relay"]
     },
     "production": {
       "presets": ["next/babel"],
       "plugins": [
+        "transform-inline-environment-variables",
         "relay",
-        ["transform-define", "./env-config.js"],
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
     "test": {
       "presets": [["env", { "modules": "commonjs" }], "next/babel"],
-      "plugins": ["relay", ["transform-define", "./env-config.js"]]
+      "plugins": ["relay"]
     }
   }
 }

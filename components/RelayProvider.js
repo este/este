@@ -1,19 +1,23 @@
 // @flow
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import type { Environment } from 'react-relay';
 
 // RelayProvider sets Relay context manually for SSR and pending navigations.
-// Check app.js, note "await fetchQuery". It replaces QueryRenderer.
-// This is a hack. I hope Relay will provide an official API soon.
+// Check App.getInitialProps, note "await fetchQuery". It replaces QueryRenderer.
 // https://github.com/robrichard/relay-context-provider
 
 type Props = {
-  children: React.Node,
-  environment: Object,
+  environment: Environment,
   variables: Object,
+  children: React.Node,
 };
 
 class RelayProvider extends React.PureComponent<Props> {
+  static childContextTypes = {
+    relay: PropTypes.object.isRequired,
+  };
+
   getChildContext() {
     return {
       relay: {
@@ -22,19 +26,10 @@ class RelayProvider extends React.PureComponent<Props> {
       },
     };
   }
+
   render() {
     return this.props.children;
   }
 }
-
-RelayProvider.childContextTypes = {
-  relay: PropTypes.object.isRequired,
-};
-
-RelayProvider.propTypes = {
-  environment: PropTypes.object.isRequired,
-  variables: PropTypes.object.isRequired,
-  children: PropTypes.node,
-};
 
 export default RelayProvider;

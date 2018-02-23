@@ -1,31 +1,45 @@
 [![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 
-Universal React. Explore the source code.
+Universal React.
 
 ## Prerequisites
 
 * [node.js](http://nodejs.org/) Node 8+
 * [yarn](https://yarnpkg.com/)
 
-## Starting a project
-
-### Start development
+## Create project
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
-* `yarn dev`
 
-### Set up custom graph.cool backend
+## Create Prisma DB
 
-* `cd graphcool`
-* `yarn`
-* `yarn graphcool login`
-* `yarn graphcool deploy`
-* `yarn graphcool playground` In URL, replace `simple` with `relay`.
+* `yarn prisma init appName` choose node-advanced boilerplate and docker
+* set `database/prisma.yml` service to appName
+* merge `appName/.env` to `.env.dev` (without quotes)
+* delete `/appName`
+* `yarn prisma deploy`
+* `yarn env dev`
 
-Add endpoint to env-config.js, .graphqlconfig, and graphcool/.graphcoolrc files.
+## Deploy
+
+* `yarn deploy:db`, TODO: Deploy docker, wait for Prisma Cloud.
+* `yarn deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
+* `yarn deploy:web`
+
+## Dev tasks
+
+* `yarn dev` - start development
+* `yarn env dev` - copy `.env.dev` to `.env`
+* `yarn env production` - copy `.env.production` to `.env`
+* `yarn production` - test production build locally
+* `yarn test`
+* `yarn schema-relay`
+* `yarn deploy:db`
+* `yarn deploy:api`
+* `yarn deploy:web`
 
 ## Links
 

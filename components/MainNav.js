@@ -2,7 +2,7 @@
 import * as React from 'react';
 import A from './A';
 import Box from './Box';
-import { titles } from '../lib/sitemap';
+import { titles } from '../server/sitemap';
 import { FormattedMessage } from 'react-intl';
 import IsAuthenticated from './IsAuthenticated';
 

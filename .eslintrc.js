@@ -1,7 +1,6 @@
 module.exports = {
   extends: [
     'airbnb',
-    // It removes global Flow types so we don’t have to.
     'plugin:flowtype/recommended',
     'prettier',
     'prettier/flowtype',
@@ -9,15 +8,6 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype'],
-  globals: {
-    // The same as flow-typed/app.js
-    APP_VERSION: true,
-    DEFAULT_LOCALE: true,
-    GRAPHQL_ENDPOINT: true,
-    HOSTNAME: true,
-    SENTRY_CLIENT_DNS: true,
-    SENTRY_SERVER_DNS: true,
-  },
   // Airbnb is great but very strict. Feel free to relax any rule.
   rules: {
     camelcase: 0, // Foo_foo can be Relay compiler generated type.
@@ -44,8 +34,11 @@ module.exports = {
     'spaced-comment': 0, // We don't care.
     'react/no-multi-comp': 0, // Control freaky.
     'react/prefer-stateless-function': 0, // PureComponents ftw.
-    // allow console and debugger in development
+    'arrow-body-style': 0, // Control freaky.
+    'prefer-destructuring': 0, // We can't always, because of Flow casting.
+    // For production build
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-unused-vars': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
 };

@@ -15,26 +15,22 @@ export default class MyDocument extends Document {
   }
 
   render() {
-    const { locale, localeDataScript, supportedLocales } = this.props;
+    const { locale, localeDataScript /*, supportedLocales */ } = this.props;
 
     return (
       <html lang={locale}>
         <Head>
-          {supportedLocales.map(locale => (
+          {/* {supportedLocales.map(locale => (
             <link
-              href={`https://${locale}.${HOSTNAME}`}
+              href={`https://${locale}.${TODO process.env.NOW_URL}`}
               hrefLang={locale}
               key={locale}
               rel="alternate"
             />
-          ))}
+          ))} */}
         </Head>
         <body>
           <Main />
-          {/* Polyfill Intl API for older browsers. Only for old Safari end Android. */}
-          {/* <script
-            src={`https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${locale}`}
-          /> */}
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
           <NextScript />
         </body>

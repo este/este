@@ -1,5 +1,5 @@
 [ignore]
-.*/node_modules/npmconf/.*
+.*/node_modules/iterall/.*
 .*/node_modules/bcryptjs/.*
 .*/node_modules/config-chain/.*
 

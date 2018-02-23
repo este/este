@@ -1,19 +1,32 @@
 // @flow
 import * as React from 'react';
-import { titles } from '../lib/sitemap';
+import { titles } from '../server/sitemap';
 import Page from '../components/Page';
 import Heading from '../components/Heading';
-import app, { type QueryVariables } from '../components/app';
+import app from '../components/app';
 import A from '../components/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/Blockquote';
 import P from '../components/P';
 import Box from '../components/Box';
 import CreateWeb from '../components/CreateWeb';
-import WebList from '../components/WebList';
+import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
-import { type pagesQueryResponse } from './__generated__/pagesQuery.graphql';
 import IsAuthenticated from '../components/IsAuthenticated';
+import * as generated from './__generated__/pagesQuery.graphql';
+
+const Authenticated = ({ data }) => (
+  <Box>
+    <Heading size={1}>
+      <FormattedMessage
+        defaultMessage="Manage your webs"
+        id="index.manageYourWebs"
+      />
+    </Heading>
+    <Webs data={data} />
+    <CreateWeb />
+  </Box>
+);
 
 const NotAuthenticated = () => (
   <Box>
@@ -32,56 +45,28 @@ const NotAuthenticated = () => (
   </Box>
 );
 
-// This is a pattern. Export message to be reusable elsewhere.
-export const ManageYourWebsMessage = () => (
-  <FormattedMessage
-    defaultMessage="Manage your webs"
-    id="index.manageYourWebs"
-  />
-);
-
-const Authenticated = ({ viewer, userId }) => (
-  <Box>
-    <Heading size={1}>
-      <ManageYourWebsMessage />
-    </Heading>
-    <WebList viewer={viewer} userId={userId} />
-    <CreateWeb userId={userId} />
-  </Box>
-);
-
-const Index = ({ data, intl }) => {
-  const { viewer }: pagesQueryResponse = data;
+const Index = props => {
+  const data: generated.pagesQueryResponse = props.data;
   return (
-    <Page title={intl.formatMessage(titles.index)}>
+    <Page title={props.intl.formatMessage(titles.index)}>
       <Heading size={3}>Este</Heading>
       <IsAuthenticated>
-        {({ userId }) =>
-          userId != null ? (
-            <Authenticated viewer={viewer} userId={userId} />
-          ) : (
-            <NotAuthenticated />
-          )
+        {({ isAuthenticated }) =>
+          isAuthenticated ? <Authenticated data={data} /> : <NotAuthenticated />
         }
       </IsAuthenticated>
     </Page>
   );
 };
 
-export const queryFilters = (userId: ?string) => ({
-  filter: { owner: { id: userId } },
-});
-
 export default app(Index, {
   query: graphql`
-    query pagesQuery($filter: WebFilter, $isAuthenticated: Boolean!) {
-      viewer {
-        ...WebList_viewer
-      }
+    query pagesQuery($isAuthenticated: Boolean!) {
+      ...Webs @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
-  queryVariables: ({ isAuthenticated, userId }: QueryVariables<{}>) => ({
-    ...queryFilters(userId),
-    isAuthenticated,
-  }),
+  queryVariables: args =>
+    ({
+      isAuthenticated: args.isAuthenticated,
+    }: generated.pagesQueryVariables),
 });

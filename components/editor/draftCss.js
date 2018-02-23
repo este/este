@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable import/no-extraneous-dependencies */
+// $FlowFixMe Wait for Next.jx 5.x release, then add styled-jsx in deps. Recheck style SSR.
 import css from 'styled-jsx/css';
 
 // Copy pasted from node_modules/draft-js/dist/Draft.css

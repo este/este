@@ -2,10 +2,11 @@
 import * as React from 'react';
 import Text from './Text';
 import Locale from './Locale';
+import { defaultLocale } from '../server/constants';
 
 class SwitchLocale extends React.PureComponent<{}> {
   static getLocaleHref = (pathname: string, locale: string) => {
-    if (DEFAULT_LOCALE === locale) return pathname;
+    if (defaultLocale === locale) return pathname;
     return `${pathname}?locale=${locale}`;
   };
 

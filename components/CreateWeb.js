@@ -7,61 +7,52 @@ import { FormattedMessage } from 'react-intl';
 import Text from './Text';
 import Set from './Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
-import Mutate, { clientMutationId } from './Mutate';
-import * as validation from '../graphcool/lib/validation';
-import ValidationError from './ValidationError';
-import { validateWeb } from '../graphcool/functions/createWeb';
+import type { Errors } from '../server/error';
+import Mutation, { clientMutationId } from './Mutation';
+import Error from './Error';
+import * as validation from '../server/validation';
 
-type Props = {
-  userId: string,
-};
-
-type Fields = {
+type Fields = {|
   name: string,
-};
+|};
 
-type State = {
-  pending: boolean,
-  validationErrors: validation.ValidationErrors<Fields>,
-} & Fields;
+type State = {|
+  ...Fields,
+  errors: Errors<Fields>,
+|};
 
 const initialState = {
   name: '',
-  pending: false,
-  validationErrors: {},
+  errors: {},
 };
 
-class CreateWeb extends React.PureComponent<Props, State> {
+class CreateWeb extends React.PureComponent<{}, State> {
   state = initialState;
 
   handleCompleted = () => {
     this.setState(initialState);
   };
 
-  handleError = () => {
-    this.setState({ pending: false });
+  handleError = (errors: *) => {
+    this.setState({ errors });
   };
 
-  // Using an existential type is ok. It works well.
   createWeb = (mutate: *) => () => {
     const variables = {
       input: {
-        domain: '', // computed by graphcool/functions/createWeb.js nameToDomain
-        name: this.state.name.trim(),
-        ownerId: this.props.userId,
+        name: this.state.name,
         clientMutationId: clientMutationId(),
       },
     };
 
-    const validationErrors = validateWeb(variables.input);
-    if (validationErrors) {
-      this.setState({ validationErrors });
+    const errors = validation.validateNewWeb(variables.input);
+    if (errors) {
+      this.setState({ errors });
       return;
     }
 
-    this.setState({ pending: true });
     mutate(
-      CreateWebMutation.commit(this.props.userId),
+      CreateWebMutation.commit,
       variables,
       this.handleCompleted,
       this.handleError,
@@ -70,38 +61,35 @@ class CreateWeb extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <Mutate>
-        {mutate => {
-          const { pending, validationErrors } = this.state;
-          return (
-            <Form onSubmit={this.createWeb(mutate)}>
-              <TextInputBig
-                label={
-                  <Text>
-                    <FormattedMessage
-                      defaultMessage="Web Name"
-                      id="createApp.label"
-                    />
-                  </Text>
-                }
-                autoFocus={validationErrors.name}
+      <Mutation>
+        {({ mutate, pending }) => (
+          <Form onSubmit={this.createWeb(mutate)}>
+            <TextInputBig
+              label={
+                <Text>
+                  <FormattedMessage
+                    defaultMessage="Web Name"
+                    id="createApp.label"
+                  />
+                </Text>
+              }
+              autoFocus={this.state.errors.name}
+              disabled={pending}
+              error={<Error>{this.state.errors.name}</Error>}
+              onChange={name => this.setState({ name })}
+              type="text"
+              value={this.state.name}
+            />
+            <Set>
+              <CreateButton
+                primary
                 disabled={pending}
-                error={<ValidationError error={validationErrors.name} />}
-                onChange={name => this.setState({ name })}
-                type="text"
-                value={this.state.name}
+                onPress={this.createWeb(mutate)}
               />
-              <Set>
-                <CreateButton
-                  primary
-                  disabled={pending}
-                  onPress={this.createWeb(mutate)}
-                />
-              </Set>
-            </Form>
-          );
-        }}
-      </Mutate>
+            </Set>
+          </Form>
+        )}
+      </Mutation>
     );
   }
 }

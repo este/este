@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 62de23f0c447c58a683cc4d6a2310d5d
+ * @relayHash dd90af67e91d2b7564aad74e46a78f37
  */
 
 /* eslint-disable */
@@ -10,13 +10,11 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type editQueryVariables = {|
-  domain?: ?string,
+  domain: string,
 |};
 export type editQueryResponse = {|
-  +viewer: {|
-    +Web: ?{|
-      +name: string,
-    |},
+  +web: ?{|
+    +name: string,
   |},
 |};
 */
@@ -24,13 +22,10 @@ export type editQueryResponse = {|
 
 /*
 query editQuery(
-  $domain: String
+  $domain: String!
 ) {
-  viewer {
-    Web(domain: $domain) {
-      name
-      id
-    }
+  web(domain: $domain) {
+    name
     id
   }
 }
@@ -41,7 +36,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "domain",
-    "type": "String",
+    "type": "String!",
     "defaultValue": null
   }
 ],
@@ -50,7 +45,7 @@ v1 = [
     "kind": "Variable",
     "name": "domain",
     "variableName": "domain",
-    "type": "String"
+    "type": "String!"
   }
 ],
 v2 = {
@@ -59,20 +54,13 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery(\n  $domain: String\n) {\n  viewer {\n    Web(domain: $domain) {\n      name\n      id\n    }\n    id\n  }\n}\n",
+  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -84,24 +72,13 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "viewer",
+        "name": "web",
         "storageKey": null,
-        "args": null,
-        "concreteType": "Viewer",
+        "args": v1,
+        "concreteType": "Web",
         "plural": false,
         "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "Web",
-            "storageKey": null,
-            "args": v1,
-            "concreteType": "Web",
-            "plural": false,
-            "selections": [
-              v2
-            ]
-          }
+          v2
         ]
       }
     ]
@@ -114,31 +91,25 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "viewer",
+        "name": "web",
         "storageKey": null,
-        "args": null,
-        "concreteType": "Viewer",
+        "args": v1,
+        "concreteType": "Web",
         "plural": false,
         "selections": [
+          v2,
           {
-            "kind": "LinkedField",
+            "kind": "ScalarField",
             "alias": null,
-            "name": "Web",
-            "storageKey": null,
-            "args": v1,
-            "concreteType": "Web",
-            "plural": false,
-            "selections": [
-              v2,
-              v3
-            ]
-          },
-          v3
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '6a57316321760796bfb73d8095610538';
+(node/*: any*/).hash = '93da25a514396eb252c01bab272f5920';
 module.exports = node;

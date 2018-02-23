@@ -1,0 +1,21 @@
+# Use non-nullable types. The database is not public, we don't need versioning.
+# http://graphql.org/learn/best-practices/#versioning
+
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String! @unique
+  password: String!
+  webs: [Web!]!
+}
+
+type Web {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  domain: String! @unique
+  isPublished: Boolean! @default(value: "false")
+  owner: User!
+}

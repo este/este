@@ -1,49 +1,35 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
-import type { Commit } from './types';
+import type { Commit } from '../components/Mutation';
 import type {
   CreateWebMutationVariables,
   CreateWebMutationResponse,
 } from './__generated__/CreateWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import { queryFilters } from '../pages/index';
+import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
   mutation CreateWebMutation($input: CreateWebInput!) {
     createWeb(input: $input) {
-      # Request payload data needed for store update.
       edge {
         node {
-          ...WebListItem_web
+          ...WebsItem
         }
       }
     }
   }
 `;
 
-const sharedUpdater = (store, edge, userId) => {
-  const viewerProxy = store.get('viewer-fixed');
+const sharedUpdater = (store, recordEdge) => {
   const connection = ConnectionHandler.getConnection(
-    viewerProxy,
-    'WebList_allWebs',
-    {
-      ...queryFilters(userId),
-      orderBy: 'createdAt_ASC',
-    },
+    store.get(clientRoot),
+    'Webs_webs',
   );
-  // https://github.com/facebook/relay/issues/1808#issuecomment-304519883
-  if (!connection) {
-    // eslint-disable-next-line no-console
-    console.warn('Undefined connection. Check getConnection arguments.');
-  }
-  ConnectionHandler.insertEdgeAfter(connection, edge);
+  ensureConnection(connection);
+  ConnectionHandler.insertEdgeAfter(connection, recordEdge);
 };
 
-type CommitWithArgs = (
-  userId: string,
-) => Commit<CreateWebMutationVariables, CreateWebMutationResponse>;
-
-const commit: CommitWithArgs = userId => (
+const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
   environment,
   variables,
   onCompleted,
@@ -56,8 +42,8 @@ const commit: CommitWithArgs = userId => (
     onError,
     updater: store => {
       const payload = store.getRootField('createWeb');
-      const edge = payload.getLinkedRecord('edge');
-      sharedUpdater(store, edge, userId);
+      const recordEdge = payload.getLinkedRecord('edge');
+      sharedUpdater(store, recordEdge);
     },
   });
 

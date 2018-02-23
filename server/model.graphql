@@ -1,0 +1,64 @@
+# import Web from "../database/schema.graphql"
+# import WebEdge from "../database/schema.graphql"
+# import WebConnection from "../database/schema.graphql"
+
+# https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+# http://graphql.org/learn/best-practices/#nullability
+
+# TODO: Remove clientMutationId.
+# clientMutationId is FBISM which will be removed from Relay soon.
+# It seems Relay needs it for all mutations.
+
+# Workflow:
+#   - update model.graphql
+#   - run `yarn schema-relay` in another terminal window
+
+# TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
+# invoked by model.graphql change. PR anyone?
+
+# Like database/model User, but without password, webs, and directives.
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input CreateWebInput {
+  name: String!
+  clientMutationId: String!
+}
+
+type CreateWebPayload {
+  edge: WebEdge!
+}
+
+input DeleteWebInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteWebPayload {
+  id: ID!
+}
+
+type Mutation {
+  signup(email: String!, password: String!): AuthPayload
+  signin(email: String!, password: String!): AuthPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
+}
+
+type Query {
+  me: User
+  # Expose only API we need, webs of logged-in user for now.
+  # Later, we can extend API for any user.
+  # webs(first: Int!, ownerId: ID!): WebConnection
+  webs(first: Int!): WebConnection
+  web(domain: String!): Web
+}

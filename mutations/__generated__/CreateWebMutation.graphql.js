@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e65faea0d1cca859cc54779b28c7e340
+ * @relayHash b4734a127c8d883d3690e08334b28e0a
  */
 
 /* eslint-disable */
@@ -9,29 +9,18 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type WebListItem_web$ref = any;
+type WebsItem$ref = any;
 export type CreateWebMutationVariables = {|
   input: {
-    domain: string,
     name: string,
-    ownerId?: ?string,
-    owner?: ?{
-      email?: ?string,
-      password?: ?string,
-      websIds?: ?$ReadOnlyArray<string>,
-      webs?: ?$ReadOnlyArray<{
-        domain: string,
-        name: string,
-      }>,
-    },
     clientMutationId: string,
   },
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
-    +edge: ?{|
+    +edge: {|
       +node: {|
-        +$fragmentRefs: WebListItem_web$ref,
+        +$fragmentRefs: WebsItem$ref,
       |},
     |},
   |},
@@ -46,21 +35,18 @@ mutation CreateWebMutation(
   createWeb(input: $input) {
     edge {
       node {
-        ...WebListItem_web
+        ...WebsItem
         id
       }
     }
   }
 }
 
-fragment WebListItem_web on Web {
+fragment WebsItem on Web {
   updatedAt
-  domain
-  owner {
-    id
-  }
-  id
   name
+  domain
+  id
 }
 */
 
@@ -80,20 +66,13 @@ v1 = [
     "variableName": "input",
     "type": "CreateWebInput!"
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebListItem_web\n        id\n      }\n    }\n  }\n}\n\nfragment WebListItem_web on Web {\n  updatedAt\n  domain\n  owner {\n    id\n  }\n  id\n  name\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -131,7 +110,7 @@ return {
                 "selections": [
                   {
                     "kind": "FragmentSpread",
-                    "name": "WebListItem_web",
+                    "name": "WebsItem",
                     "args": null
                   }
                 ]
@@ -184,27 +163,21 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
+                    "name": "name",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
                     "name": "domain",
                     "args": null,
                     "storageKey": null
                   },
                   {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "owner",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "User",
-                    "plural": false,
-                    "selections": [
-                      v2
-                    ]
-                  },
-                  v2,
-                  {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "name",
+                    "name": "id",
                     "args": null,
                     "storageKey": null
                   }
@@ -218,5 +191,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '9e91e7c5b96e6d9a50e526500da3da7d';
+(node/*: any*/).hash = '865f52f79821b920823ab4e455c92e46';
 module.exports = node;

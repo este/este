@@ -1,5 +1,5 @@
-// flow-typed signature: f73eea0966eb5d83ff1954e38a6cd053
-// flow-typed version: cc3eacb5a2/react-intl_v2.x.x/flow_>=v0.57.x
+// flow-typed signature: 8358abfe36b0dfd8b1cf96f6fea03f72
+// flow-typed version: 8d18f671e6/react-intl_v2.x.x/flow_>=v0.57.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -7,6 +7,8 @@
  * https://github.com/marudor/flowInterfaces/issues/6
  */
 // Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-api
+
+import type { Element, ChildrenArray } from "react";
 
 type $npm$ReactIntl$LocaleData = {
   locale: string,
@@ -131,8 +133,10 @@ declare module "react-intl" {
   }
 
   declare type ComponentWithDefaultProps<DefaultProps: {}, Props: {}> =
-    React$ComponentType<Props> & { defaultProps: DefaultProps };
-  
+    | React$ComponentType<Props>
+    | React$StatelessFunctionalComponent<Props>
+    | ChildrenArray<void | null | boolean | string | number | Element<any>>;
+
   declare type InjectIntlOtions = {
     intlPropName?: string,
     withRef?: boolean
@@ -154,7 +158,7 @@ declare module "react-intl" {
     options?: InjectIntlOtions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
-  
+
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
@@ -252,7 +256,7 @@ declare module "react-intl" {
   > {}
   declare class IntlProvider extends React$Component<
     $npm$ReactIntl$IntlProviderConfig & {
-      children: React$Node,
+      children?: React$Node,
       initialNow?: $npm$ReactIntl$DateParseable
     }
   > {}

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3046380e004bcd1e59f7aea901d034c7
+ * @relayHash 85a260dff9efce84813e26af743e09e1
  */
 
 /* eslint-disable */
@@ -14,9 +14,11 @@ export type SignupMutationVariables = {|
   password: string,
 |};
 export type SignupMutationResponse = {|
-  +signupUser: ?{|
-    +id: string,
+  +signup: ?{|
     +token: string,
+    +user: {|
+      +id: string,
+    |},
   |},
 |};
 */
@@ -27,9 +29,11 @@ mutation SignupMutation(
   $email: String!
   $password: String!
 ) {
-  signupUser(email: $email, password: $password) {
-    id
+  signup(email: $email, password: $password) {
     token
+    user {
+      id
+    }
   }
 }
 */
@@ -53,7 +57,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "signupUser",
+    "name": "signup",
     "storageKey": null,
     "args": [
       {
@@ -69,22 +73,33 @@ v1 = [
         "type": "String!"
       }
     ],
-    "concreteType": "SignupUserPayload",
+    "concreteType": "AuthPayload",
     "plural": false,
     "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "id",
-        "args": null,
-        "storageKey": null
-      },
       {
         "kind": "ScalarField",
         "alias": null,
         "name": "token",
         "args": null,
         "storageKey": null
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "user",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
+        ]
       }
     ]
   }
@@ -94,7 +109,7 @@ return {
   "operationKind": "mutation",
   "name": "SignupMutation",
   "id": null,
-  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signupUser(email: $email, password: $password) {\n    id\n    token\n  }\n}\n",
+  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signup(email: $email, password: $password) {\n    token\n    user {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -112,5 +127,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '9d89320c81c07c2ee94a442630e55867';
+(node/*: any*/).hash = '178e627d73a54e072e83841b3a3da1a9';
 module.exports = node;

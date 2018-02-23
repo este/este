@@ -3,11 +3,11 @@ import * as React from 'react';
 import Auth from '../components/Auth';
 import Page from '../components/Page';
 import app from '../components/app';
-import { titles } from '../lib/sitemap';
+import { titles } from '../server/sitemap';
 
-const SignIn = ({ intl, url }) => (
-  <Page title={intl.formatMessage(titles.signIn)}>
-    <Auth intl={intl} redirectUrl={url.query.redirectUrl} />
+const SignIn = props => (
+  <Page title={props.intl.formatMessage(titles.signIn)}>
+    <Auth intl={props.intl} redirectUrl={props.url.query.redirectUrl} />
   </Page>
 );
 

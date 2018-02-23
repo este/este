@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f0f9a79439e63e9c4880b01359595599
+ * @relayHash 797470dea4d89b0e6ab1d74179efd56f
  */
 
 /* eslint-disable */
@@ -17,7 +17,7 @@ export type DeleteWebMutationVariables = {|
 |};
 export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
-    +deletedId: ?string,
+    +id: string,
   |},
 |};
 */
@@ -28,7 +28,7 @@ mutation DeleteWebMutation(
   $input: DeleteWebInput!
 ) {
   deleteWeb(input: $input) {
-    deletedId
+    id
   }
 }
 */
@@ -62,7 +62,7 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "deletedId",
+        "name": "id",
         "args": null,
         "storageKey": null
       }
@@ -74,7 +74,7 @@ return {
   "operationKind": "mutation",
   "name": "DeleteWebMutation",
   "id": null,
-  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    deletedId\n  }\n}\n",
+  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -92,5 +92,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = 'bbad62e9ed566ffdea0d808e57d34c0e';
+(node/*: any*/).hash = '581a9fdd6e54b1f4a95543d5616cf309';
 module.exports = node;

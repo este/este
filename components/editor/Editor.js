@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { ThemeProvider } from '../Theme';
 import { browserThemeDark } from '../../themes/browserTheme';
-import AppError from '../AppError';
+import ErrorPopup from '../ErrorPopup';
 import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';
 import draftCss from './draftCss';
-import logReducer from '../../lib/logReducer';
+import logReducer from './logReducer';
 import * as R from 'ramda';
 import { EditorDispatchProvider } from './EditorDispatch';
 // import XRay from 'react-x-ray';
@@ -213,9 +213,9 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
             {draftCss}
           </style>
           {/* <XRay
-                grid={web.theme.typography.fontSize * web.theme.typography.lineHeight}
-              > */}
-          <AppError />
+            grid={web.theme.typography.fontSize * web.theme.typography.lineHeight}
+          > */}
+          <ErrorPopup />
           <EditorPage
             activePath={activePath}
             paddingBottomPx={this.state.menuHeight}
