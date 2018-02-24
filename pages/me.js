@@ -66,6 +66,7 @@ export default app(Me, {
   query: graphql`
     query meQuery {
       me {
+        theme
         email
       }
     }
