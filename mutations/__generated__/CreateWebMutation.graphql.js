@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b4734a127c8d883d3690e08334b28e0a
+ * @relayHash eba463b01b54cb09c78a2777e513aa76
  */
 
 /* eslint-disable */
@@ -13,12 +13,12 @@ type WebsItem$ref = any;
 export type CreateWebMutationVariables = {|
   input: {
     name: string,
-    clientMutationId: string,
+    clientMutationId?: ?string,
   },
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
-    +edge: {|
+    +edge: ?{|
       +node: {|
         +$fragmentRefs: WebsItem$ref,
       |},

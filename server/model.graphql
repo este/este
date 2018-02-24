@@ -16,6 +16,9 @@
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
+# non-nullable are only in arguments, inputs, and types that will never change.
+# http://graphql.org/learn/schema/
+
 # Like database/model User, but without password, webs, and directives.
 type User {
   id: ID!
@@ -29,22 +32,25 @@ type AuthPayload {
   user: User!
 }
 
+# non-nullable in input
 input CreateWebInput {
   name: String!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
+# nullable in payload
 type CreateWebPayload {
-  edge: WebEdge!
+  edge: WebEdge
 }
 
 input DeleteWebInput {
   id: ID!
-  clientMutationId: String!
+  # will be removed
+  clientMutationId: String
 }
 
 type DeleteWebPayload {
-  id: ID!
+  id: ID
 }
 
 type Mutation {

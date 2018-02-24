@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 797470dea4d89b0e6ab1d74179efd56f
+ * @relayHash 9f23533eabe78f6dad38a015092a92bd
  */
 
 /* eslint-disable */
@@ -12,12 +12,12 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteWebMutationVariables = {|
   input: {
     id: string,
-    clientMutationId: string,
+    clientMutationId?: ?string,
   },
 |};
 export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
-    +id: string,
+    +id: ?string,
   |},
 |};
 */

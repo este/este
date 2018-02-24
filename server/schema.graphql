@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Feb 22 2018 23:04:39 GMT+0100 (CET)
+# timestamp: Sat Feb 24 2018 01:32:10 GMT+0100 (CET)
 
 type AggregateWeb {
   count: Int!
@@ -12,22 +12,22 @@ type AuthPayload {
 
 input CreateWebInput {
   name: String!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type CreateWebPayload {
-  edge: WebEdge!
+  edge: WebEdge
 }
 
 scalar DateTime
 
 input DeleteWebInput {
   id: ID!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type DeleteWebPayload {
-  id: ID!
+  id: ID
 }
 
 type Mutation {
