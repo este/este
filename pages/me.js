@@ -4,8 +4,7 @@ import Image from '../components/Image';
 import P from '../components/P';
 import Page from '../components/Page';
 import Set from '../components/Set';
-import Button from '../components/Button';
-import ToggleDark from '../components/ToggleDark';
+import { ToggleTheme } from '../components/Theme';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import { titles } from '../server/sitemap';
@@ -56,7 +55,7 @@ const Me = props => {
         <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
       </Heading>
       <Set>
-        <ToggleDark />
+        <ToggleTheme />
       </Set>
     </Page>
   );
@@ -67,6 +66,7 @@ export default app(Me, {
   query: graphql`
     query meQuery {
       me {
+        theme
         email
       }
     }
