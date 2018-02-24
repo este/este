@@ -30,7 +30,7 @@
     "jest:watch": "jest --watch",
     "prettier": "prettier --write '**/*.js'",
     "clean:babel:cache": "rimraf node_modules/.cache/babel-loader",
-    "test": "run-s flow jest build",
+    "test": "run-s flow jest relay build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build"
   },
