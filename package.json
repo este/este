@@ -9,7 +9,7 @@
     "api": "nodemon --config nodemon.api.json",
     "web": "nodemon --config nodemon.web.json",
     "schema": "yarn graphql get-schema -p app -o server/schema.graphql",
-    "relay": "relay-compiler --watchman false --include components/** mutations/** pages/** --src ./ --schema server/schema.graphql",
+    "relay": "relay-compiler --include components/** mutations/** pages/** --src ./ --schema server/schema.graphql",
     "schema-relay": "yarn schema && yarn relay",
     "relay:watch": "yarn relay --watch",
     "playground": "graphql playground --port 5000",
