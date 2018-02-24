@@ -67,7 +67,6 @@
     "react-dom": "^16.0.0",
     "react-intl": "^2.3.0",
     "react-relay": "^1.5.0",
-    "react-x-ray": "^1.0.0-3",
     "relay-runtime": "^1.5.0",
     "resize-observer-polyfill": "^1.5.0",
     "smoothscroll-polyfill": "^0.4.0",
