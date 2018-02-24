@@ -30,7 +30,7 @@
     "jest:watch": "jest --watch",
     "prettier": "prettier --write '**/*.js'",
     "clean:babel:cache": "rimraf node_modules/.cache/babel-loader",
-    "relay:ci": "relay-compiler --schema server/schema.graphql --src ./ --watchman 'false' --include components/** mutations/** pages/**",
+    "relay:ci": "relay-compiler --schema server/schema.graphql --src ./ --include components/** mutations/** pages/**",
     "test": "run-s flow jest relay:ci build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build"
