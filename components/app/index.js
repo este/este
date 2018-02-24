@@ -1,5 +1,10 @@
 // @flow
 /* global window */
+
+// https://github.com/facebook/relay/issues/2347
+// const { installRelayDevTools } = require('relay-devtools');
+// installRelayDevTools();
+
 import * as React from 'react';
 import Router from 'next/router';
 import createRelayEnvironment from './createRelayEnvironment';
@@ -14,9 +19,6 @@ import { MutationProvider } from '../Mutation';
 import { IsAuthenticatedProvider } from '../IsAuthenticated';
 import { ErrorPopupProvider } from '../ErrorPopup';
 import RelayProvider from '../RelayProvider';
-
-// import { installRelayDevTools } from 'relay-devtools';
-// installRelayDevTools();
 
 // Polyfill browser stuff.
 if (process.browser === true) {
