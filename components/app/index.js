@@ -65,16 +65,22 @@ const redirectToSignIn = context => {
   }
 };
 
+type PageProps = {
+  ...NextProps,
+  data: Object,
+  intl: IntlShape,
+};
+
+type AppProps = {
+  ...NextProps,
+  ...InitialAppProps,
+};
+
 // TODO: Add generic type so data is Response and queryVariables returns
 // Variables and everything is type checked out of the box.
 const app = (
-  // Stateless because of easier typing.
-  Page: React.StatelessFunctionalComponent<
-    {
-      data: Object,
-      intl: IntlShape,
-    } & NextProps,
-  >,
+  // Stateless, because state belongs elsewhere.
+  Page: React.StatelessFunctionalComponent<PageProps>,
   options?: {|
     query?: GraphQLTaggedNode,
     queryVariables?: ({|
@@ -92,7 +98,7 @@ const app = (
     return queryVariables({ isAuthenticated, urlQuery, userId });
   };
 
-  const App = (props: { ...NextProps, ...InitialAppProps }) => {
+  const App = (props: AppProps) => {
     const {
       cookie,
       data,
