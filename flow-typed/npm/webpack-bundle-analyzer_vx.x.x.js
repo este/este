@@ -1,4 +1,4 @@
-// flow-typed signature: 11141f228a398a676c341bcdc52c73c4
+// flow-typed signature: b647b5b65362803102ac8b23289b9c8f
 // flow-typed version: <<STUB>>/webpack-bundle-analyzer_v^2.8.2/flow_v0.66.0
 
 /**
@@ -46,7 +46,35 @@ declare module 'webpack-bundle-analyzer/lib/parseUtils' {
   declare module.exports: any;
 }
 
-declare module 'webpack-bundle-analyzer/lib/tree' {
+declare module 'webpack-bundle-analyzer/lib/tree/BaseFolder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/ConcatenatedModule' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/ContentFolder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/ContentModule' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/Folder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/Module' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/Node' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/lib/tree/utils' {
   declare module.exports: any;
 }
 
@@ -82,7 +110,35 @@ declare module 'webpack-bundle-analyzer/src/parseUtils' {
   declare module.exports: any;
 }
 
-declare module 'webpack-bundle-analyzer/src/tree' {
+declare module 'webpack-bundle-analyzer/src/tree/BaseFolder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/ConcatenatedModule' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/ContentFolder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/ContentModule' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/Folder' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/Module' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/Node' {
+  declare module.exports: any;
+}
+
+declare module 'webpack-bundle-analyzer/src/tree/utils' {
   declare module.exports: any;
 }
 
@@ -109,8 +165,29 @@ declare module 'webpack-bundle-analyzer/lib/Logger.js' {
 declare module 'webpack-bundle-analyzer/lib/parseUtils.js' {
   declare module.exports: $Exports<'webpack-bundle-analyzer/lib/parseUtils'>;
 }
-declare module 'webpack-bundle-analyzer/lib/tree.js' {
-  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree'>;
+declare module 'webpack-bundle-analyzer/lib/tree/BaseFolder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/BaseFolder'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/ConcatenatedModule.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/ConcatenatedModule'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/ContentFolder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/ContentFolder'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/ContentModule.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/ContentModule'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/Folder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/Folder'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/Module.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/Module'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/Node.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/Node'>;
+}
+declare module 'webpack-bundle-analyzer/lib/tree/utils.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/lib/tree/utils'>;
 }
 declare module 'webpack-bundle-analyzer/lib/viewer.js' {
   declare module.exports: $Exports<'webpack-bundle-analyzer/lib/viewer'>;
@@ -136,8 +213,29 @@ declare module 'webpack-bundle-analyzer/src/Logger.js' {
 declare module 'webpack-bundle-analyzer/src/parseUtils.js' {
   declare module.exports: $Exports<'webpack-bundle-analyzer/src/parseUtils'>;
 }
-declare module 'webpack-bundle-analyzer/src/tree.js' {
-  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree'>;
+declare module 'webpack-bundle-analyzer/src/tree/BaseFolder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/BaseFolder'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/ConcatenatedModule.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/ConcatenatedModule'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/ContentFolder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/ContentFolder'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/ContentModule.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/ContentModule'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/Folder.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/Folder'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/Module.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/Module'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/Node.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/Node'>;
+}
+declare module 'webpack-bundle-analyzer/src/tree/utils.js' {
+  declare module.exports: $Exports<'webpack-bundle-analyzer/src/tree/utils'>;
 }
 declare module 'webpack-bundle-analyzer/src/viewer.js' {
   declare module.exports: $Exports<'webpack-bundle-analyzer/src/viewer'>;
