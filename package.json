@@ -69,6 +69,7 @@
     "react-relay": "^1.5.0",
     "relay-runtime": "^1.5.0",
     "resize-observer-polyfill": "^1.5.0",
+    "smoothscroll-polyfill": "^0.4.3",
     "url": "^0.11.0",
     "validator": "^9.4.0",
     "webpack-bundle-analyzer": "^2.8.2"
