@@ -13,6 +13,8 @@ import { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/Page.graphql';
 
 // yarn favicon
 const Favicons = () => [
@@ -85,31 +87,56 @@ const Footer = () => (
 
 type PageProps = {|
   title: string,
-  children?: React.Node,
+  children: React.Node | ((isAuthenticated: boolean) => React.Node),
+  data: *,
 |};
 
-const Page = ({ title, children }: PageProps) => {
-  // TODO: Persist in user settings.
-  const darkEnabled = false;
-  const theme = darkEnabled ? browserThemeDark : browserTheme;
-  const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
-  return (
-    <ThemeProvider value={theme}>
-      <Head>
-        <title>{title}</title>
-        <MetaViewport />
-        <Favicons />
-      </Head>
-      <PageStyle backgroundColor={pageBackgroundColor} />
-      <LoadingBar color={theme.colors.primary} />
-      <ErrorPopup />
-      <Container>
-        <MainNav />
-        <Body>{children}</Body>
-        <Footer />
-      </Container>
-    </ThemeProvider>
-  );
-};
+class Page extends React.PureComponent<PageProps> {
+  render() {
+    // This is hack. We need Relay typed createFragmentContainer. Soon.
+    const data = ((this.props.data: any): generated.Page);
+    const isAuthenticated = data.me != null;
+    console.log(data);
 
-export default Page;
+    // TODO: Persist in user settings. Soon.
+    const darkEnabled = false;
+    const theme = darkEnabled ? browserThemeDark : browserTheme;
+    const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
+
+    return (
+      <ThemeProvider value={theme}>
+        <Head>
+          <title>{this.props.title}</title>
+          <MetaViewport />
+          <Favicons />
+        </Head>
+        <PageStyle backgroundColor={pageBackgroundColor} />
+        <LoadingBar color={theme.colors.primary} />
+        <ErrorPopup />
+        <Container>
+          <MainNav isAuthenticated={isAuthenticated} />
+          <Body>
+            {typeof this.props.children === 'function'
+              ? this.props.children(isAuthenticated)
+              : this.props.children}
+          </Body>
+          <Footer />
+        </Container>
+      </ThemeProvider>
+    );
+  }
+}
+
+// TODO: Relay will release types for it soon.
+const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
+  Page,
+  graphql`
+    fragment Page on Query {
+      me {
+        id
+      }
+    }
+  `,
+);
+
+export default PageContainer;

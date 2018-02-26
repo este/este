@@ -35,34 +35,34 @@ const signOut = () => {
 const Me = props => {
   const { me }: generated.meQueryResponse = props.data;
   const email = me && me.email;
-  return (
-    <Page title={props.intl.formatMessage(titles.me)}>
-      {email != null && (
-        <Box>
-          <Image
-            marginBottom={1}
-            size={{ height: 100, width: 100 }}
-            src={getGravatarUrl(email)}
-            title={email}
-          />
-          <P bold>{email}</P>
-        </Box>
-      )}
-      <Set>
-        <SignOutButton danger onPress={signOut} />
-      </Set>
-      <Heading size={1}>
-        <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
-      </Heading>
-      <Set>
-        <ToggleTheme />
-      </Set>
-    </Page>
-  );
+  return null;
+  // return (
+  //   <Page title={props.intl.formatMessage(titles.me)}>
+  //     {email != null && (
+  //       <Box>
+  //         <Image
+  //           marginBottom={1}
+  //           size={{ height: 100, width: 100 }}
+  //           src={getGravatarUrl(email)}
+  //           title={email}
+  //         />
+  //         <P bold>{email}</P>
+  //       </Box>
+  //     )}
+  //     <Set>
+  //       <SignOutButton danger onPress={signOut} />
+  //     </Set>
+  //     <Heading size={1}>
+  //       <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
+  //     </Heading>
+  //     <Set>
+  //       <ToggleTheme />
+  //     </Set>
+  //   </Page>
+  // );
 };
 
 export default app(Me, {
-  requireAuth: true,
   query: graphql`
     query meQuery {
       me {

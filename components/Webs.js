@@ -28,13 +28,8 @@ export default createFragmentContainer(
   Webs,
   graphql`
     fragment Webs on Query
-      @argumentDefinitions(
-        first: { type: "Int!", defaultValue: 100 }
-        isAuthenticated: { type: "Boolean" }
-      ) {
-      webs(first: $first)
-        @connection(key: "Webs_webs")
-        @include(if: $isAuthenticated) {
+      @argumentDefinitions(first: { type: "Int!", defaultValue: 100 }) {
+      webs(first: $first) @connection(key: "Webs_webs") {
         edges {
           node {
             id

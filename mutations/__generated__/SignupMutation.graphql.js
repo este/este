@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 85a260dff9efce84813e26af743e09e1
+ * @relayHash 85c2d8abd9431e8c9202c6a6e6347a70
  */
 
 /* eslint-disable */
@@ -16,9 +16,6 @@ export type SignupMutationVariables = {|
 export type SignupMutationResponse = {|
   +signup: ?{|
     +token: string,
-    +user: {|
-      +id: string,
-    |},
   |},
 |};
 */
@@ -31,9 +28,6 @@ mutation SignupMutation(
 ) {
   signup(email: $email, password: $password) {
     token
-    user {
-      id
-    }
   }
 }
 */
@@ -82,24 +76,6 @@ v1 = [
         "name": "token",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "User",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
       }
     ]
   }
@@ -109,7 +85,7 @@ return {
   "operationKind": "mutation",
   "name": "SignupMutation",
   "id": null,
-  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signup(email: $email, password: $password) {\n    token\n    user {\n      id\n    }\n  }\n}\n",
+  "text": "mutation SignupMutation(\n  $email: String!\n  $password: String!\n) {\n  signup(email: $email, password: $password) {\n    token\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -127,5 +103,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '178e627d73a54e072e83841b3a3da1a9';
+(node/*: any*/).hash = 'c7f5e59113390d4d301ac382d93ffcb3';
 module.exports = node;

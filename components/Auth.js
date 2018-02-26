@@ -57,8 +57,8 @@ class Auth extends React.PureComponent<Props, State> {
     const payload = response.signin || response.signup || null;
     // https://flow.org/en/docs/lang/refinements
     if (payload == null) return;
-    const { token, user: { id: userId } } = payload;
-    setCookie({ token, userId });
+    const { token } = payload;
+    setCookie({ token });
     const redirectUrl =
       this.props.redirectUrl != null
         ? decodeURIComponent(this.props.redirectUrl)

@@ -27,17 +27,26 @@ const throwError = (error /*: ServerError */) => {
   throw new Error(JSON.stringify(error));
 };
 
-const throwNotAuthorizedError = () => {
-  throwError({ type: 'notAuthorized' });
-};
+const throwNotAuthorizedError = () => throwError({ type: 'notAuthorized' });
 
+// This is how we read values from process.env.
+// Fail as soon as possible, aka when module is loaded.
+const appSecret = process.env.APP_SECRET;
+if (appSecret == null) throw new Error('Missing process.env.APP_SECRET');
+
+// throwNotAuthorizedError means client will get null, so it will not render.
+// Better stale / not loaded than dead. That's very nice design pattern.
 const getUserId = ctx => {
-  const Authorization = ctx.request.get('Authorization');
-  if (!Authorization) throwNotAuthorizedError();
-  const token = Authorization.replace('Bearer ', '');
-  // $FlowFixMe
-  const { userId } = jsonwebtoken.verify(token, process.env.APP_SECRET);
-  return userId;
+  const authorization = ctx.request.get('authorization');
+  if (!authorization) throwNotAuthorizedError();
+  const token = authorization.replace('Bearer ', '');
+  const decoded = jsonwebtoken.verify(token, appSecret);
+  // https://flow.org/en/docs/lang/refinements
+  // Note refinement must be gradual within if statement because of Flow.
+  if (decoded != null && typeof decoded.userId === 'string') {
+    return decoded.userId;
+  }
+  throwNotAuthorizedError();
 };
 
 /*::

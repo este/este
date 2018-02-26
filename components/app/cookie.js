@@ -4,40 +4,42 @@ import { serialize, parse } from 'cookie';
 
 export type Cookie = {|
   +token: string,
-  +userId: string,
 |};
 
-const tokenKey = 'este_auth_token';
-const userIdKey = 'este_user_id';
+// TODO: The key should be package.json name prop for better DX. Probaly via
+// process.env.APP_NAME or something else. PR anyone?
+const key = 'este';
 
 export const setCookie = (cookie: Cookie) => {
   const options = {
-    maxAge: 30 * 24 * 60 * 60, // One month, it's graph.cool default.
+    // One month.
+    maxAge: 30 * 24 * 60 * 60,
     path: '/',
   };
 
-  document.cookie = serialize(tokenKey, cookie.token, options);
-  document.cookie = serialize(userIdKey, cookie.userId, options);
+  const value = JSON.stringify(cookie);
+  document.cookie = serialize(key, value, options);
 };
 
 export const deleteCookie = () => {
   const options = {
-    maxAge: -1, // Expire the cookie immediately.
+    // Expire the cookie immediately.
+    maxAge: -1,
     path: '/',
   };
 
-  document.cookie = serialize(tokenKey, '', options);
-  document.cookie = serialize(userIdKey, '', options);
+  document.cookie = serialize(key, '', options);
 };
 
 export const getCookie = (serverReq: ?Object): ?Cookie => {
-  const cookie = parse(
+  const value = parse(
     serverReq
       ? (serverReq.headers && serverReq.headers.cookie) || ''
       : document.cookie,
   );
-  if (!cookie || !cookie[tokenKey] || !cookie[userIdKey]) {
+  try {
+    return JSON.parse(value);
+  } catch (e) {
     return null;
   }
-  return { token: cookie[tokenKey], userId: cookie[userIdKey] };
 };

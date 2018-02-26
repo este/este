@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e50b2a80097701c91ae3a62db53384c0
+ * @relayHash c61f53d675799989f47f28b9cee5b5c9
  */
 
 /* eslint-disable */
@@ -10,15 +10,15 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Page$ref = any;
-export type pagesQueryVariables = {| |};
-export type pagesQueryResponse = {|
+export type signInQueryVariables = {| |};
+export type signInQueryResponse = {|
   +$fragmentRefs: Page$ref,
 |};
 */
 
 
 /*
-query pagesQuery {
+query signInQuery {
   ...Page
 }
 
@@ -32,13 +32,13 @@ fragment Page on Query {
 const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "operationKind": "query",
-  "name": "pagesQuery",
+  "name": "signInQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
+  "text": "query signInQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "pagesQuery",
+    "name": "signInQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -52,7 +52,7 @@ const node/*: ConcreteRequest*/ = {
   },
   "operation": {
     "kind": "Operation",
-    "name": "pagesQuery",
+    "name": "signInQuery",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -76,5 +76,5 @@ const node/*: ConcreteRequest*/ = {
     ]
   }
 };
-(node/*: any*/).hash = 'e1f17438ff061c64d0e1f4a3ce64a141';
+(node/*: any*/).hash = '27b8c2f4d973b7c447f8c510f9253bc8';
 module.exports = node;

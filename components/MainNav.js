@@ -4,7 +4,6 @@ import A from './A';
 import Box from './Box';
 import { titles } from '../server/sitemap';
 import { FormattedMessage } from 'react-intl';
-import IsAuthenticated from './IsAuthenticated';
 
 const MainNavA = ({ href, title }) => (
   <A
@@ -20,7 +19,11 @@ const MainNavA = ({ href, title }) => (
   </A>
 );
 
-const MainNav = () => (
+type MainNavProps = {|
+  isAuthenticated: boolean,
+|};
+
+const MainNav = ({ isAuthenticated }: MainNavProps) => (
   <Box
     backgroundColor="primary"
     flexDirection="row"
@@ -29,15 +32,11 @@ const MainNav = () => (
     paddingHorizontal={0.5}
   >
     <MainNavA href={{ pathname: '/' }} title={titles.index} />
-    <IsAuthenticated>
-      {({ isAuthenticated }) =>
-        isAuthenticated ? (
-          <MainNavA href={{ pathname: '/me' }} title={titles.me} />
-        ) : (
-          <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
-        )
-      }
-    </IsAuthenticated>
+    {isAuthenticated ? (
+      <MainNavA href={{ pathname: '/me' }} title={titles.me} />
+    ) : (
+      <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
+    )}
   </Box>
 );
 

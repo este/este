@@ -12,7 +12,7 @@ type WebsItem$ref = any;
 import type { FragmentReference } from 'relay-runtime';
 declare export opaque type Webs$ref: FragmentReference;
 export type Webs = {|
-  +webs?: ?{|
+  +webs: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: {|
         +id: string,
@@ -47,101 +47,88 @@ const node/*: ConcreteFragment*/ = {
       "name": "first",
       "type": "Int!",
       "defaultValue": 100
-    },
-    {
-      "kind": "LocalArgument",
-      "name": "isAuthenticated",
-      "type": "Boolean",
-      "defaultValue": null
     }
   ],
   "selections": [
     {
-      "kind": "Condition",
-      "passingValue": true,
-      "condition": "isAuthenticated",
+      "kind": "LinkedField",
+      "alias": "webs",
+      "name": "__Webs_webs_connection",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "WebConnection",
+      "plural": false,
       "selections": [
         {
           "kind": "LinkedField",
-          "alias": "webs",
-          "name": "__Webs_webs_connection",
+          "alias": null,
+          "name": "edges",
           "storageKey": null,
           "args": null,
-          "concreteType": "WebConnection",
-          "plural": false,
+          "concreteType": "WebEdge",
+          "plural": true,
           "selections": [
             {
               "kind": "LinkedField",
               "alias": null,
-              "name": "edges",
+              "name": "node",
               "storageKey": null,
               "args": null,
-              "concreteType": "WebEdge",
-              "plural": true,
+              "concreteType": "Web",
+              "plural": false,
               "selections": [
                 {
-                  "kind": "LinkedField",
+                  "kind": "ScalarField",
                   "alias": null,
-                  "name": "node",
-                  "storageKey": null,
+                  "name": "id",
                   "args": null,
-                  "concreteType": "Web",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "name": "id",
-                      "args": null,
-                      "storageKey": null
-                    },
-                    {
-                      "kind": "FragmentSpread",
-                      "name": "WebsItem",
-                      "args": null
-                    },
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "name": "__typename",
-                      "args": null,
-                      "storageKey": null
-                    }
-                  ]
+                  "storageKey": null
+                },
+                {
+                  "kind": "FragmentSpread",
+                  "name": "WebsItem",
+                  "args": null
                 },
                 {
                   "kind": "ScalarField",
                   "alias": null,
-                  "name": "cursor",
+                  "name": "__typename",
                   "args": null,
                   "storageKey": null
                 }
               ]
             },
             {
-              "kind": "LinkedField",
+              "kind": "ScalarField",
               "alias": null,
-              "name": "pageInfo",
-              "storageKey": null,
+              "name": "cursor",
               "args": null,
-              "concreteType": "PageInfo",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "name": "endCursor",
-                  "args": null,
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "name": "hasNextPage",
-                  "args": null,
-                  "storageKey": null
-                }
-              ]
+              "storageKey": null
+            }
+          ]
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "pageInfo",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "endCursor",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "hasNextPage",
+              "args": null,
+              "storageKey": null
             }
           ]
         }
@@ -149,5 +136,5 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
-(node/*: any*/).hash = '8d82bf3d5955391326a1d560eed794f3';
+(node/*: any*/).hash = '6aef6cd1ab7eee4dc0d8558f92fba04b';
 module.exports = node;
