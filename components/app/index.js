@@ -5,7 +5,7 @@ import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { fetchQuery } from 'react-relay';
 import type { GraphQLTaggedNode } from 'react-relay';
-import { getCookie, type Cookie } from './cookie';
+import { getCookie } from './cookie';
 import { LocaleProvider } from '../Locale';
 import { MutationProvider } from '../Mutation';
 import { ErrorPopupProvider } from '../ErrorPopup';
