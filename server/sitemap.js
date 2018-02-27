@@ -34,6 +34,7 @@ export type Href =
     |}
   | {|
       pathname: '/sign-in',
+      query?: {| redirectUrl: string |},
     |}
   | {|
       pathname: '/me',

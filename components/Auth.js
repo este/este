@@ -57,10 +57,15 @@ class Auth extends React.PureComponent<Props, State> {
     if (payload == null) return;
     const { token } = payload;
     setCookie({ token });
-    Router.replace({
-      pathname: Router.pathname,
-      query: Router.query,
-    });
+    const { redirectUrl } = Router.query;
+    if (redirectUrl) {
+      Router.replace(redirectUrl);
+    } else {
+      Router.replace({
+        pathname: Router.pathname,
+        query: Router.query,
+      });
+    }
   };
 
   handleError = (errors: *) => {

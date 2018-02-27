@@ -21,15 +21,15 @@ const Authenticated = ({ data }) => (
         id="index.manageYourWebs"
       />
     </Heading>
-    {/* <Webs data={data} />
-    <CreateWeb /> */}
+    <Webs data={data} />
+    <CreateWeb />
   </Box>
 );
 
 const NotAuthenticated = () => (
   <Box>
     <P>
-      <A href={{ pathname: '/sign-in' }}>
+      <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
       </A>
     </P>
@@ -66,7 +66,7 @@ export default app(Index, {
   query: graphql`
     query pagesQuery {
       ...Page
-      # ...Webs @arguments(isAuthenticated: $isAuthenticated)
+      ...Webs
     }
   `,
 });
