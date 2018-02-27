@@ -9,7 +9,7 @@
     "api": "nodemon --config nodemon.api.json",
     "web": "nodemon --config nodemon.web.json",
     "schema": "yarn graphql get-schema -p app -o server/schema.graphql",
-    "relay": "relay-compiler --src . --include components/** mutations/** pages/** --schema server/schema.graphql --watchman false",
+    "relay": "relay-compiler --src . --include components/** mutations/** pages/** --schema server/schema.graphql",
     "schema-relay": "yarn schema && yarn relay",
     "relay:watch": "yarn relay --watch",
     "playground": "graphql playground --port 5000",
@@ -30,7 +30,8 @@
     "jest:watch": "jest --watch",
     "prettier": "prettier --write '**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
-    "test": "run-s flow jest relay build",
+    "test": "run-s flow jest build",
+    "test:local": "run-s flow jest relay build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
     "analyze": "cross-env ANALYZE=1 next build",
     "nuke-local-cluster": "yarn prisma local nuke && yarn prisma deploy"
