@@ -88,15 +88,12 @@ const Footer = () => (
 type PageProps = {|
   title: string,
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
-  data: *,
+  data: generated.Page,
 |};
 
 class Page extends React.PureComponent<PageProps> {
   render() {
-    // This is hack. We need Relay typed createFragmentContainer. Soon.
-    const data = ((this.props.data: any): generated.Page);
-    const isAuthenticated = data.me != null;
-    console.log(data);
+    const isAuthenticated = this.props.data.me != null;
 
     // TODO: Persist in user settings. Soon.
     const darkEnabled = false;
@@ -127,7 +124,7 @@ class Page extends React.PureComponent<PageProps> {
   }
 }
 
-// TODO: Relay will release types for it soon.
+// TODO: This is workaround. Relay will release proper type for it soon.
 const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
   Page,
   graphql`
