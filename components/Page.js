@@ -15,6 +15,7 @@ import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
+import Auth from '../components/Auth';
 
 // yarn favicon
 const Favicons = () => [
@@ -89,9 +90,19 @@ type PageProps = {|
   title: string,
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
+  requireAuth?: boolean,
 |};
 
 class Page extends React.PureComponent<PageProps> {
+  renderChildren(isAuthenticated) {
+    const authRequired = this.props.requireAuth === true && !isAuthenticated;
+    if (!authRequired)
+      return typeof this.props.children === 'function'
+        ? this.props.children(isAuthenticated)
+        : this.props.children;
+    return <Auth />;
+  }
+
   render() {
     const isAuthenticated = this.props.data.me != null;
 
@@ -112,11 +123,7 @@ class Page extends React.PureComponent<PageProps> {
         <ErrorPopup />
         <Container>
           <MainNav isAuthenticated={isAuthenticated} />
-          <Body>
-            {typeof this.props.children === 'function'
-              ? this.props.children(isAuthenticated)
-              : this.props.children}
-          </Body>
+          <Body>{this.renderChildren(isAuthenticated)}</Body>
           <Footer />
         </Container>
       </ThemeProvider>
@@ -124,7 +131,7 @@ class Page extends React.PureComponent<PageProps> {
   }
 }
 
-// TODO: This is workaround. Relay will release proper type for it soon.
+// https://github.com/este/este/issues/1484
 const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
   Page,
   graphql`

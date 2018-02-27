@@ -8,7 +8,7 @@ import { graphql } from 'react-relay';
 
 const SignIn = props => (
   <Page title={props.intl.formatMessage(titles.signIn)} data={props.data}>
-    <Auth intl={props.intl} redirectUrl={props.url.query.redirectUrl} />
+    <Auth />
   </Page>
 );
 

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5613aaa84f045ca231abefabbf1b9d30
+ * @relayHash c82b058f7b41d056dfaec6f71513b7ab
  */
 
 /* eslint-disable */
@@ -9,19 +9,28 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type Page$ref = any;
 export type meQueryVariables = {| |};
 export type meQueryResponse = {|
   +me: ?{|
     +email: string,
   |},
+  +$fragmentRefs: Page$ref,
 |};
 */
 
 
 /*
 query meQuery {
+  ...Page
   me {
     email
+    id
+  }
+}
+
+fragment Page on Query {
+  me {
     id
   }
 }
@@ -40,7 +49,7 @@ return {
   "operationKind": "query",
   "name": "meQuery",
   "id": null,
-  "text": "query meQuery {\n  me {\n    email\n    id\n  }\n}\n",
+  "text": "query meQuery {\n  ...Page\n  me {\n    email\n    id\n  }\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -49,6 +58,11 @@ return {
     "metadata": null,
     "argumentDefinitions": [],
     "selections": [
+      {
+        "kind": "FragmentSpread",
+        "name": "Page",
+        "args": null
+      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -77,19 +91,19 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v0,
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "id",
             "args": null,
             "storageKey": null
-          }
+          },
+          v0
         ]
       }
     ]
   }
 };
 })();
-(node/*: any*/).hash = '9046cae36aebd0f8d1e59543a9d96ae0';
+(node/*: any*/).hash = '1497b4f763901f71af0634a46a6e18c4';
 module.exports = node;

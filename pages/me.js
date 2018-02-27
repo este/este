@@ -26,7 +26,7 @@ const getGravatarUrl = email =>
 
 const signOut = () => {
   deleteCookie();
-  // Force full reload. Purging Relay environment and Redux store is not enough.
+  // Force full reload.
   // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
   // eslint-disable-next-line no-undef
   window.location.href = '/';
@@ -34,37 +34,42 @@ const signOut = () => {
 
 const Me = props => {
   const { me }: generated.meQueryResponse = props.data;
-  const email = me && me.email;
-  return null;
-  // return (
-  //   <Page title={props.intl.formatMessage(titles.me)}>
-  //     {email != null && (
-  //       <Box>
-  //         <Image
-  //           marginBottom={1}
-  //           size={{ height: 100, width: 100 }}
-  //           src={getGravatarUrl(email)}
-  //           title={email}
-  //         />
-  //         <P bold>{email}</P>
-  //       </Box>
-  //     )}
-  //     <Set>
-  //       <SignOutButton danger onPress={signOut} />
-  //     </Set>
-  //     <Heading size={1}>
-  //       <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
-  //     </Heading>
-  //     <Set>
-  //       <ToggleTheme />
-  //     </Set>
-  //   </Page>
-  // );
+  return (
+    <Page
+      requireAuth
+      title={props.intl.formatMessage(titles.me)}
+      // Pass props.data as object, not casted.
+      // https://twitter.com/estejs/status/968312335797497856
+      data={props.data}
+    >
+      {me != null && (
+        <Box>
+          <Image
+            marginBottom={1}
+            size={{ height: 100, width: 100 }}
+            src={getGravatarUrl(me.email)}
+            title={me.email}
+          />
+          <P bold>{me.email}</P>
+        </Box>
+      )}
+      <Set>
+        <SignOutButton danger onPress={signOut} />
+      </Set>
+      <Heading size={1}>
+        <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
+      </Heading>
+      <Set>
+        <ToggleTheme />
+      </Set>
+    </Page>
+  );
 };
 
 export default app(Me, {
   query: graphql`
     query meQuery {
+      ...Page
       me {
         email
       }
