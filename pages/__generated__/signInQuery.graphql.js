@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c82b058f7b41d056dfaec6f71513b7ab
+ * @relayHash c61f53d675799989f47f28b9cee5b5c9
  */
 
 /* eslint-disable */
@@ -10,23 +10,16 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Page$ref = any;
-export type meQueryVariables = {| |};
-export type meQueryResponse = {|
-  +me: ?{|
-    +email: string,
-  |},
+export type signInQueryVariables = {| |};
+export type signInQueryResponse = {|
   +$fragmentRefs: Page$ref,
 |};
 */
 
 
 /*
-query meQuery {
+query signInQuery {
   ...Page
-  me {
-    email
-    id
-  }
 }
 
 fragment Page on Query {
@@ -36,24 +29,16 @@ fragment Page on Query {
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "operationKind": "query",
-  "name": "meQuery",
+  "name": "signInQuery",
   "id": null,
-  "text": "query meQuery {\n  ...Page\n  me {\n    email\n    id\n  }\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
+  "text": "query signInQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "meQuery",
+    "name": "signInQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -62,24 +47,12 @@ return {
         "kind": "FragmentSpread",
         "name": "Page",
         "args": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "me",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "User",
-        "plural": false,
-        "selections": [
-          v0
-        ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "meQuery",
+    "name": "signInQuery",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -97,13 +70,11 @@ return {
             "name": "id",
             "args": null,
             "storageKey": null
-          },
-          v0
+          }
         ]
       }
     ]
   }
 };
-})();
-(node/*: any*/).hash = '1497b4f763901f71af0634a46a6e18c4';
+(node/*: any*/).hash = '27b8c2f4d973b7c447f8c510f9253bc8';
 module.exports = node;

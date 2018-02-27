@@ -12,8 +12,6 @@ import Box from '../components/Box';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
-import IsAuthenticated from '../components/IsAuthenticated';
-import * as generated from './__generated__/pagesQuery.graphql';
 
 const Authenticated = ({ data }) => (
   <Box>
@@ -31,7 +29,7 @@ const Authenticated = ({ data }) => (
 const NotAuthenticated = () => (
   <Box>
     <P>
-      <A href={{ pathname: '/sign-in' }}>
+      <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
       </A>
     </P>
@@ -46,27 +44,29 @@ const NotAuthenticated = () => (
 );
 
 const Index = props => {
-  const data: generated.pagesQueryResponse = props.data;
   return (
-    <Page title={props.intl.formatMessage(titles.index)}>
-      <Heading size={3}>Este</Heading>
-      <IsAuthenticated>
-        {({ isAuthenticated }) =>
-          isAuthenticated ? <Authenticated data={data} /> : <NotAuthenticated />
-        }
-      </IsAuthenticated>
+    <Page title={props.intl.formatMessage(titles.index)} data={props.data}>
+      {isAuthenticated => {
+        return (
+          <React.Fragment>
+            <Heading size={3}>Este</Heading>
+            {isAuthenticated ? (
+              <Authenticated data={props.data} />
+            ) : (
+              <NotAuthenticated />
+            )}
+          </React.Fragment>
+        );
+      }}
     </Page>
   );
 };
 
 export default app(Index, {
   query: graphql`
-    query pagesQuery($isAuthenticated: Boolean!) {
-      ...Webs @arguments(isAuthenticated: $isAuthenticated)
+    query pagesQuery {
+      ...Page
+      ...Webs
     }
   `,
-  queryVariables: args =>
-    ({
-      isAuthenticated: args.isAuthenticated,
-    }: generated.pagesQueryVariables),
 });

@@ -7,15 +7,14 @@ import Set from './Set';
 import TextInputBig from './TextInputBig';
 import Error from './Error';
 import { SignInButton, SignUpButton } from './buttons';
-import { defineMessages } from 'react-intl';
 import SigninMutation from '../mutations/SigninMutation';
 import SignupMutation from '../mutations/SignupMutation';
 import Router from 'next/router';
 import Mutation from './Mutation';
 import * as validation from '../server/validation';
 import { setCookie } from '../components/app/cookie';
-import type { IntlShape } from 'react-intl';
 import type { Errors } from '../server/error';
+import { defineMessages, injectIntl, type IntlShape } from 'react-intl';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -30,7 +29,6 @@ const messages = defineMessages({
 
 type Props = {|
   intl: IntlShape,
-  redirectUrl: ?string,
 |};
 
 type Fields = {|
@@ -57,13 +55,17 @@ class Auth extends React.PureComponent<Props, State> {
     const payload = response.signin || response.signup || null;
     // https://flow.org/en/docs/lang/refinements
     if (payload == null) return;
-    const { token, user: { id: userId } } = payload;
-    setCookie({ token, userId });
-    const redirectUrl =
-      this.props.redirectUrl != null
-        ? decodeURIComponent(this.props.redirectUrl)
-        : '/';
-    Router.replace(redirectUrl);
+    const { token } = payload;
+    setCookie({ token });
+    const { redirectUrl } = Router.query;
+    if (redirectUrl) {
+      Router.replace(redirectUrl);
+    } else {
+      Router.replace({
+        pathname: Router.pathname,
+        query: Router.query,
+      });
+    }
   };
 
   handleError = (errors: *) => {
@@ -165,4 +167,4 @@ class Auth extends React.PureComponent<Props, State> {
   }
 }
 
-export default Auth;
+export default injectIntl(Auth);

@@ -13,6 +13,9 @@ import { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import PageStyle from './PageStyle';
 import MetaViewport from './MetaViewport';
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/Page.graphql';
+import Auth from '../components/Auth';
 
 // yarn favicon
 const Favicons = () => [
@@ -85,31 +88,59 @@ const Footer = () => (
 
 type PageProps = {|
   title: string,
-  children?: React.Node,
+  children: React.Node | ((isAuthenticated: boolean) => React.Node),
+  data: generated.Page,
+  requireAuth?: boolean,
 |};
 
-const Page = ({ title, children }: PageProps) => {
-  // TODO: Persist in user settings.
-  const darkEnabled = false;
-  const theme = darkEnabled ? browserThemeDark : browserTheme;
-  const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
-  return (
-    <ThemeProvider value={theme}>
-      <Head>
-        <title>{title}</title>
-        <MetaViewport />
-        <Favicons />
-      </Head>
-      <PageStyle backgroundColor={pageBackgroundColor} />
-      <LoadingBar color={theme.colors.primary} />
-      <ErrorPopup />
-      <Container>
-        <MainNav />
-        <Body>{children}</Body>
-        <Footer />
-      </Container>
-    </ThemeProvider>
-  );
-};
+class Page extends React.PureComponent<PageProps> {
+  renderChildren(isAuthenticated) {
+    const authRequired = this.props.requireAuth === true && !isAuthenticated;
+    if (!authRequired)
+      return typeof this.props.children === 'function'
+        ? this.props.children(isAuthenticated)
+        : this.props.children;
+    return <Auth />;
+  }
 
-export default Page;
+  render() {
+    const isAuthenticated = this.props.data.me != null;
+
+    // TODO: Persist in user settings. Soon.
+    const darkEnabled = false;
+    const theme = darkEnabled ? browserThemeDark : browserTheme;
+    const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
+
+    return (
+      <ThemeProvider value={theme}>
+        <Head>
+          <title>{this.props.title}</title>
+          <MetaViewport />
+          <Favicons />
+        </Head>
+        <PageStyle backgroundColor={pageBackgroundColor} />
+        <LoadingBar color={theme.colors.primary} />
+        <ErrorPopup />
+        <Container>
+          <MainNav isAuthenticated={isAuthenticated} />
+          <Body>{this.renderChildren(isAuthenticated)}</Body>
+          <Footer />
+        </Container>
+      </ThemeProvider>
+    );
+  }
+}
+
+// https://github.com/este/este/issues/1484
+const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
+  Page,
+  graphql`
+    fragment Page on Query {
+      me {
+        id
+      }
+    }
+  `,
+);
+
+export default PageContainer;

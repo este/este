@@ -2,22 +2,20 @@
 /* eslint-disable no-undef */
 import { serialize, parse } from 'cookie';
 
+// Do not add another values to cookie until it's absolutely necessary.
+// Use user settings instead.
 export type Cookie = {|
   +token: string,
-  +userId: string,
 |};
 
-const tokenKey = 'este_auth_token';
-const userIdKey = 'este_user_id';
+const name = 'este';
 
 export const setCookie = (cookie: Cookie) => {
   const options = {
-    maxAge: 30 * 24 * 60 * 60, // One month, it's graph.cool default.
+    maxAge: 30 * 24 * 60 * 60,
     path: '/',
   };
-
-  document.cookie = serialize(tokenKey, cookie.token, options);
-  document.cookie = serialize(userIdKey, cookie.userId, options);
+  document.cookie = serialize(name, cookie.token, options);
 };
 
 export const deleteCookie = () => {
@@ -25,9 +23,7 @@ export const deleteCookie = () => {
     maxAge: -1, // Expire the cookie immediately.
     path: '/',
   };
-
-  document.cookie = serialize(tokenKey, '', options);
-  document.cookie = serialize(userIdKey, '', options);
+  document.cookie = serialize(name, '', options);
 };
 
 export const getCookie = (serverReq: ?Object): ?Cookie => {
@@ -36,8 +32,6 @@ export const getCookie = (serverReq: ?Object): ?Cookie => {
       ? (serverReq.headers && serverReq.headers.cookie) || ''
       : document.cookie,
   );
-  if (!cookie || !cookie[tokenKey] || !cookie[userIdKey]) {
-    return null;
-  }
-  return { token: cookie[tokenKey], userId: cookie[userIdKey] };
+  if (!cookie || !cookie[name]) return null;
+  return { token: cookie[name] };
 };

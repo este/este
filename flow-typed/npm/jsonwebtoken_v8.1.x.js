@@ -1,5 +1,5 @@
-// flow-typed signature: 14b11b281de00f1bd6cb96f21dcaac4c
-// flow-typed version: 9b13ab3bf9/jsonwebtoken_v8.1.x/flow_>=v0.56.x
+// flow-typed signature: a2d5ea66c7bcab10e48b4d9cf6fcbcb0
+// flow-typed version: 40e00ed01a/jsonwebtoken_v8.1.x/flow_>=v0.56.x
 
 declare module "jsonwebtoken" {
   declare module.exports: {
@@ -92,7 +92,7 @@ declare interface jwt$Decode {
 declare interface jwt$Verify {
   (jwt: string, secretOrPrivateKey: string | Buffer): mixed;
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions): mixed;
+  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions | jwt$Callback): mixed;
 
   (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions, callback: jwt$Callback): mixed;
 

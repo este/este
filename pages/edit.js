@@ -3,7 +3,6 @@ import * as React from 'react';
 import app from '../components/app';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/editQuery.graphql';
-import type { EditQuery } from '../server/sitemap';
 import Error from 'next/error';
 import Editor from '../components/editor/Editor';
 
@@ -14,7 +13,6 @@ const Edit = props => {
 };
 
 export default app(Edit, {
-  requireAuth: true,
   query: graphql`
     query editQuery($domain: String!) {
       web(domain: $domain) {
@@ -22,8 +20,4 @@ export default app(Edit, {
       }
     }
   `,
-  queryVariables: args =>
-    ({
-      domain: (args.urlQuery: EditQuery).domain,
-    }: generated.editQueryVariables),
 });
