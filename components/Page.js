@@ -132,7 +132,7 @@ class Page extends React.PureComponent<PageProps> {
 }
 
 // https://github.com/este/este/issues/1484
-const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
+export default createFragmentContainer(
   Page,
   graphql`
     fragment Page on Query {
@@ -142,5 +142,3 @@ const PageContainer: React.ComponentType<PageProps> = createFragmentContainer(
     }
   `,
 );
-
-export default PageContainer;
