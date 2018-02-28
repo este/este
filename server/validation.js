@@ -1,13 +1,14 @@
 // @flow
 const isEmail = require('validator/lib/isEmail');
+/*::
+import type { Error, Errors } from './error';
+type Validate<Variables> = (variables: Variables) => ?Errors<Variables>;
+*/
 
 // Your app is the validation library you are looking for.
+// TODO: optional(emailValidator)
 
-// TODO: Optional validation. Something like:
-// const validateEmailOptional = optional(validateEmail)
-
-// Validate one by one, aka fail on the first error.
-const chain = (...validators) => value => {
+const failOnFirst = (...validators) => value => {
   for (const validator of validators) {
     const error = validator(value);
     if (error != null) return error;
@@ -15,68 +16,59 @@ const chain = (...validators) => value => {
 };
 
 // How to trim, the ultimate guide:
-// 1. Use validateTrim to ensure a value is valid.
-// 2. For the better UX, trim values before the validation.
-// 3. A client can trim automatically on validateTrim error.
-const validateTrim = value => {
+// 1. Use trimValidator to ensure a value is valid for the other validations.
+// 2. For better UX, we can trim values in UI manually, still, 1. is the must.
+const trimValidator = value => {
+  if (typeof value !== 'string') return;
   if (value !== value.trim()) return { type: 'trim' };
 };
 
-// Always trim before length check.
-const validateLength = (predicate, error) =>
-  chain(validateTrim, value => {
+const createLengthValidator = (predicate, error) =>
+  failOnFirst(trimValidator, value => {
     if (predicate(value)) return error;
   });
 
-// Everything should be required by default.
-const validateRequired = validateLength(value => value.length === 0, {
+const requiredValidator = createLengthValidator(value => value.length === 0, {
   type: 'required',
 });
 
-const validateEmail = chain(validateRequired, value => {
+const emailValidator = failOnFirst(requiredValidator, value => {
   if (!isEmail(value)) return { type: 'email' };
 });
 
-const validateRange = (minLength, maxLength) =>
-  chain(
-    validateRequired,
-    validateLength(value => value.length < minLength, {
+const createRangeValidator = (minLength, maxLength) =>
+  failOnFirst(
+    requiredValidator,
+    createLengthValidator(value => value.length < minLength, {
       type: 'minLength',
       minLength,
     }),
-    validateLength(value => value.length > maxLength, {
+    createLengthValidator(value => value.length > maxLength, {
       type: 'maxLength',
       maxLength,
     }),
   );
 
-const validatePassword = validateRange(6, 1024);
-const validateShortText = validateRange(3, 140);
+const passwordValidator = createRangeValidator(6, 1024);
 
-// Validations.
+const shortTextValidator = createRangeValidator(3, 140);
 
-/*::
-import type { Error, Errors } from './error';
-
-type Validate<Variables> = (
-  variables: Variables,
-) => ?Errors<Variables>;
-*/
+// Exported validations.
 
 const validateEmailPassword /*: Validate<{
   email: string,
   password: string,
 }> */ = variables => {
-  const email = validateEmail(variables.email);
+  const email = emailValidator(variables.email);
   if (email) return { email };
-  const password = validatePassword(variables.password);
+  const password = passwordValidator(variables.password);
   if (password) return { password };
 };
 
 const validateNewWeb /*: Validate<{
   name: string,
 }> */ = variables => {
-  const name = validateShortText(variables.name);
+  const name = shortTextValidator(variables.name);
   if (name) return { name };
 };
 
