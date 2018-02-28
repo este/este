@@ -5,9 +5,9 @@ import Head from 'next/head';
 // - Emulate React Native
 // - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
 
-type PageStyleProps = {
+type PageStyleProps = {|
   backgroundColor: string,
-};
+|};
 
 const PageStyle = ({ backgroundColor }: PageStyleProps) => (
   <div>

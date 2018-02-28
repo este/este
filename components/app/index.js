@@ -47,16 +47,16 @@ type InitialAppProps = {|
   supportedLocales: Array<string>,
 |};
 
-type PageProps = {
+type PageProps = {|
   ...NextProps,
   data: Object,
   intl: IntlShape,
-};
+|};
 
-type AppProps = {
+type AppProps = {|
   ...NextProps,
   ...InitialAppProps,
-};
+|};
 
 const app = (
   // Stateless, because state belongs elsewhere.

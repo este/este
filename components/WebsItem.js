@@ -36,11 +36,11 @@ const DeleteWeb = ({ id }) => (
   </Mutation>
 );
 
-type Props = {|
+type WebsItemProps = {|
   data: generated.WebsItem,
 |};
 
-class WebsItem extends React.PureComponent<Props> {
+class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
     return (

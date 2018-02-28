@@ -27,7 +27,7 @@ const messages = defineMessages({
   },
 });
 
-type Props = {|
+type AuthProps = {|
   intl: IntlShape,
 |};
 
@@ -36,19 +36,19 @@ type Fields = {|
   password: string,
 |};
 
-type State = {|
+type AuthState = {|
   ...Fields,
   errors: Errors<Fields>,
 |};
 
-const initialState = {
-  email: '',
-  password: '',
-  errors: {},
-};
+class Auth extends React.PureComponent<AuthProps, AuthState> {
+  static initialState = {
+    email: '',
+    password: '',
+    errors: {},
+  };
 
-class Auth extends React.PureComponent<Props, State> {
-  state = initialState;
+  state = Auth.initialState;
 
   handleCompleted = (response: *) => {
     // http://graphql.org/learn/best-practices/#nullability

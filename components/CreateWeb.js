@@ -16,21 +16,21 @@ type Fields = {|
   name: string,
 |};
 
-type State = {|
+type CreateWebState = {|
   ...Fields,
   errors: Errors<Fields>,
 |};
 
-const initialState = {
-  name: '',
-  errors: {},
-};
+class CreateWeb extends React.PureComponent<{}, CreateWebState> {
+  static initialState = {
+    name: '',
+    errors: {},
+  };
 
-class CreateWeb extends React.PureComponent<{}, State> {
-  state = initialState;
+  state = CreateWeb.initialState;
 
   handleCompleted = () => {
-    this.setState(initialState);
+    this.setState(CreateWeb.initialState);
   };
 
   handleError = (errors: *) => {

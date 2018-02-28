@@ -6,12 +6,12 @@ import { withRouter } from 'next/router';
 
 export type AProps = LocaleLinkBaseProps & TextProps;
 
-type State = {
+type AState = {
   hover: boolean,
 };
 
 // Not pure, because I am not sure how withRouter works.
-class A extends React.Component<AProps & { router: Object }, State> {
+class A extends React.Component<AProps & { router: Object }, AState> {
   state = { hover: false };
 
   handleMouseEnter = () => {

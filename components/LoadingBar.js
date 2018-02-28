@@ -21,11 +21,11 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-type Props = {
+type LoadingBarProps = {
   color: string,
 };
 
-const LoadingBar = ({ color }: Props) => (
+const LoadingBar = ({ color }: LoadingBarProps) => (
   <style jsx global>{`
     #nprogress {
       pointer-events: none;

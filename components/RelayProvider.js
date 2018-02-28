@@ -7,13 +7,13 @@ import type { Environment } from 'react-relay';
 // Check App.getInitialProps, note "await fetchQuery". It replaces QueryRenderer.
 // https://github.com/robrichard/relay-context-provider
 
-type Props = {
+type RelayProviderProps = {
   environment: Environment,
   variables: Object,
   children: React.Node,
 };
 
-class RelayProvider extends React.PureComponent<Props> {
+class RelayProvider extends React.PureComponent<RelayProviderProps> {
   static childContextTypes = {
     relay: PropTypes.object.isRequired,
   };

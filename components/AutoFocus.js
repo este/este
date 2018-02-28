@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom';
 // Declarative (and soon universal) focus.
 // https://twitter.com/estejs/status/873650760420085760
 
-type AutoFocusProps = {
+type AutoFocusProps = {|
   autoFocus?: any,
   children: React.Element<any>,
-};
+|};
 
 // Class, because we focus only when focus prop has been changed.
 // Not pure, because we want to rerender.

@@ -4,9 +4,9 @@ import Box, { type BoxProps } from './Box';
 import Theme from './Theme';
 
 // Render form as form in browser, because auth data or whatever pre-filling.
-type BrowserFormProps = {
+type BrowserFormProps = {|
   onSubmit: () => void,
-};
+|};
 
 class BrowserForm extends React.PureComponent<BrowserFormProps> {
   static handleSubmit = (e: Event) => {
