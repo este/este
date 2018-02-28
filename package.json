@@ -28,7 +28,7 @@
     "flow": "flow",
     "jest": "jest",
     "jest:watch": "jest --watch",
-    "prettier": "prettier --write '**/*.js'",
+    "format": "prettier --write '**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "run-s flow jest build",
     "test:local": "run-s flow jest relay build",
