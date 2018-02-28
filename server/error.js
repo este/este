@@ -46,7 +46,7 @@ export const parsePayloadErrors = (
     // GraphQL spec plans typed errors, meanwhile we use JSON.
     let parsedError;
     // Try parse, otherwise it's not a JSON.
-    // TODO: There must be a better way.
+    // TODO: https://github.com/este/este/issues/1488
     try {
       parsedError = JSON.parse(payloadError.message);
     } catch (_) {

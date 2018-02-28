@@ -8,6 +8,7 @@
 # TODO: Remove clientMutationId.
 # clientMutationId is FBISM which will be removed from Relay soon.
 # It seems Relay needs it for all mutations.
+# TODO: https://github.com/facebook/relay/issues/2077
 
 # Workflow:
 #   - update model.graphql

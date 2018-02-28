@@ -23,6 +23,7 @@ const createAuthPayload = user => ({
   user,
 });
 
+// TODO: https://github.com/este/este/issues/1488
 const throwError = (error /*: ServerError */) => {
   throw new Error(JSON.stringify(error));
 };
