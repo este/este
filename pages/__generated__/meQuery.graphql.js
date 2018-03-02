@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c82b058f7b41d056dfaec6f71513b7ab
+ * @relayHash ffebb8fd4f3526703cafbf17ac3644bf
  */
 
 /* eslint-disable */
@@ -32,6 +32,7 @@ query meQuery {
 fragment Page on Query {
   me {
     id
+    themeName
   }
 }
 */
@@ -49,7 +50,7 @@ return {
   "operationKind": "query",
   "name": "meQuery",
   "id": null,
-  "text": "query meQuery {\n  ...Page\n  me {\n    email\n    id\n  }\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
+  "text": "query meQuery {\n  ...Page\n  me {\n    email\n    id\n  }\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -95,6 +96,13 @@ return {
             "kind": "ScalarField",
             "alias": null,
             "name": "id",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "themeName",
             "args": null,
             "storageKey": null
           },

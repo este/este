@@ -94,6 +94,17 @@ type PageProps = {|
 |};
 
 class Page extends React.PureComponent<PageProps> {
+  static getTheme = themeName => {
+    switch (themeName) {
+      case 'light':
+        return browserTheme;
+      case 'dark':
+        return browserThemeDark;
+      default:
+        return browserTheme;
+    }
+  };
+
   renderChildren(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
     if (!authRequired)
@@ -104,11 +115,12 @@ class Page extends React.PureComponent<PageProps> {
   }
 
   render() {
-    const isAuthenticated = this.props.data.me != null;
-
-    // TODO: Persist in user settings. Soon.
-    const darkEnabled = false;
-    const theme = darkEnabled ? browserThemeDark : browserTheme;
+    const { me } = this.props.data;
+    const isAuthenticated = me != null;
+    const themeName =
+      // That's how we gradually check nullable types.
+      (me != null && me.themeName != null && me.themeName) || 'light';
+    const theme = Page.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
 
     return (
@@ -138,6 +150,7 @@ export default createFragmentContainer(
     fragment Page on Query {
       me {
         id
+        themeName
       }
     }
   `,

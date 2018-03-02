@@ -2,23 +2,25 @@
 # import WebEdge from "../database/schema.graphql"
 # import WebConnection from "../database/schema.graphql"
 
-# https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+# http://graphql.org/learn/best-practices/#versioning
 # http://graphql.org/learn/best-practices/#nullability
+# https://medium.com/@calebmer/when-to-use-graphql-non-null-fields-4059337f6fc8
+# http://graphql.org/learn/schema/
+# tldr; Use non-nullable only when you are sure API will never change.
 
 # TODO: Remove clientMutationId.
 # clientMutationId is FBISM which will be removed from Relay soon.
-# It seems Relay needs it for all mutations.
+# Unfortunately, Relay needs it for all mutations.
 # TODO: https://github.com/facebook/relay/issues/2077
 
 # Workflow:
 #   - update model.graphql
+#   - add resolver
+#   - test it in playground
 #   - run `yarn schema-relay` in another terminal window
-
+#   - restart `yarn dev` in first terminal window
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
-
-# non-nullable are only in arguments, inputs, and types that will never change.
-# http://graphql.org/learn/schema/
 
 # Like database/model User, but without password, webs, and directives.
 type User {
@@ -26,6 +28,8 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
+  # nullable, because it will be changed to Theme later
+  themeName: String
 }
 
 type AuthPayload {
@@ -33,20 +37,23 @@ type AuthPayload {
   user: User!
 }
 
-# non-nullable in input
+# Note FooInput and FooPayload pattern.
+# Objects are good for further scheme updates aka versioning.
+# Inputs are non-nullable, because the server has to support obsolete clients.
+# Payloads are nullable, because mutation can fail or be removed.
+# clientMutationId is nullable, because it will be removed.
+
 input CreateWebInput {
   name: String!
   clientMutationId: String
 }
 
-# nullable in payload
 type CreateWebPayload {
   edge: WebEdge
 }
 
 input DeleteWebInput {
   id: ID!
-  # will be removed
   clientMutationId: String
 }
 
@@ -54,11 +61,21 @@ type DeleteWebPayload {
   id: ID
 }
 
+input UpdateUserInput {
+  themeName: String!
+  clientMutationId: String
+}
+
+type UpdateUserPayload {
+  user: User
+}
+
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 type Query {

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c61f53d675799989f47f28b9cee5b5c9
+ * @relayHash 57535266522befae03e5820d9e4c39d1
  */
 
 /* eslint-disable */
@@ -25,6 +25,7 @@ query signInQuery {
 fragment Page on Query {
   me {
     id
+    themeName
   }
 }
 */
@@ -34,7 +35,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "signInQuery",
   "id": null,
-  "text": "query signInQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n",
+  "text": "query signInQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -68,6 +69,13 @@ const node/*: ConcreteRequest*/ = {
             "kind": "ScalarField",
             "alias": null,
             "name": "id",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "themeName",
             "args": null,
             "storageKey": null
           }

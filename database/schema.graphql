@@ -12,6 +12,7 @@ type User implements Node {
   email: String!
   password: String!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  themeName: String!
 }
 
 type Web implements Node {
@@ -144,6 +145,7 @@ type UserConnection {
 input UserCreateInput {
   email: String!
   password: String!
+  themeName: String!
   webs: WebCreateManyWithoutOwnerInput
 }
 
@@ -155,6 +157,7 @@ input UserCreateOneWithoutWebsInput {
 input UserCreateWithoutWebsInput {
   email: String!
   password: String!
+  themeName: String!
 }
 
 """
@@ -182,6 +185,8 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  themeName_ASC
+  themeName_DESC
 }
 
 type UserPreviousValues {
@@ -190,6 +195,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   email: String!
   password: String!
+  themeName: String!
 }
 
 type UserSubscriptionPayload {
@@ -230,6 +236,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   email: String
   password: String
+  themeName: String
   webs: WebUpdateManyWithoutOwnerInput
 }
 
@@ -245,6 +252,7 @@ input UserUpdateOneWithoutWebsInput {
 input UserUpdateWithoutWebsDataInput {
   email: String
   password: String
+  themeName: String
 }
 
 input UserUpdateWithoutWebsInput {
@@ -484,6 +492,59 @@ input UserWhereInput {
   All values not ending with the given string.
   """
   password_not_ends_with: String
+  themeName: String
+  """
+  All values that are not equal to given value.
+  """
+  themeName_not: String
+  """
+  All values that are contained in given list.
+  """
+  themeName_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  themeName_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  themeName_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  themeName_lte: String
+  """
+  All values greater than the given value.
+  """
+  themeName_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  themeName_gte: String
+  """
+  All values containing the given string.
+  """
+  themeName_contains: String
+  """
+  All values not containing the given string.
+  """
+  themeName_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  themeName_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  themeName_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  themeName_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  themeName_not_ends_with: String
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 12de35c06fcab0f9d6731a5f055bd1a9
+ * @relayHash 65a0c388e3906199404c64a4b4d0c8f4
  */
 
 /* eslint-disable */
@@ -27,6 +27,7 @@ query pagesQuery {
 fragment Page on Query {
   me {
     id
+    themeName
   }
 }
 
@@ -68,7 +69,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -103,7 +104,14 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v0
+          v0,
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "themeName",
+            "args": null,
+            "storageKey": null
+          }
         ]
       },
       {

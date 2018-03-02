@@ -9,17 +9,17 @@ import type { ServerError } from '../error';
 
 // Workflow
 // - update database/model.graphql
-// - yarn prisma deploy
+// - yarn deploy:db
 // - test it in playground
 // - update server/model.graphql
 // - add resolver here
 // - test it in playground
 // - yarn schema-relay
+// - restart `yarn dev`
 // - now we can use it in client code
 
 const createAuthPayload = user => ({
-  // $FlowFixMe
-  token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET),
+  token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET || ''),
   user,
 });
 
@@ -30,18 +30,11 @@ const throwError = (error /*: ServerError */) => {
 
 const throwNotAuthorizedError = () => throwError({ type: 'notAuthorized' });
 
-// This is how we read values from process.env.
-// Fail as soon as possible, aka when module is loaded.
-const appSecret = process.env.APP_SECRET;
-if (appSecret == null) throw new Error('Missing process.env.APP_SECRET');
-
-// throwNotAuthorizedError means client will get null, so it will not render.
-// Better stale / not loaded than dead. That's very nice design pattern.
 const getUserId = ctx => {
   const authorization = ctx.request.get('authorization');
   if (!authorization) throwNotAuthorizedError();
   const token = authorization.replace('Bearer ', '');
-  const decoded = jsonwebtoken.verify(token, appSecret);
+  const decoded = jsonwebtoken.verify(token, process.env.APP_SECRET || '');
   // https://flow.org/en/docs/lang/refinements
   // Note refinement must be gradual within if statement because of Flow.
   if (decoded != null && typeof decoded.userId === 'string') {
@@ -130,6 +123,15 @@ const resolvers /*: Resolvers */ = {
       if (!webExists) throwNotAuthorizedError();
       await ctx.db.mutation.deleteWeb({ where: { id } });
       return { id };
+    },
+
+    async updateUser(parent, { input: { themeName } }, ctx, info) {
+      const userId = getUserId(ctx);
+      const user = await ctx.db.mutation.updateUser({
+        data: { themeName },
+        where: { id: userId },
+      });
+      return { user };
     },
   },
 
