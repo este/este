@@ -7,7 +7,7 @@ import { titles } from '../server/sitemap';
 import { graphql } from 'react-relay';
 
 const SignIn = props => (
-  <Page title={props.intl.formatMessage(titles.signIn)} data={props.data}>
+  <Page title={intl => intl.formatMessage(titles.signIn)} data={props.data}>
     <Auth />
   </Page>
 );

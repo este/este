@@ -45,7 +45,7 @@ const NotAuthenticated = () => (
 
 const Index = props => {
   return (
-    <Page title={props.intl.formatMessage(titles.index)} data={props.data}>
+    <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
       {isAuthenticated => {
         return (
           <React.Fragment>

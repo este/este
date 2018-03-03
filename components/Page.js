@@ -8,7 +8,7 @@ import MainNav from './MainNav';
 import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
 import Text from './Text';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import PageStyle from './PageStyle';
@@ -16,6 +16,7 @@ import MetaViewport from './MetaViewport';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import Auth from '../components/Auth';
+import Intl from './Intl';
 
 // yarn favicon
 const Favicons = () => [
@@ -87,7 +88,7 @@ const Footer = () => (
 );
 
 type PageProps = {|
-  title: string,
+  title: string | ((intl: IntlShape) => string),
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
   requireAuth?: boolean,
@@ -124,21 +125,29 @@ class Page extends React.PureComponent<PageProps> {
     const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
 
     return (
-      <ThemeProvider value={theme}>
-        <Head>
-          <title>{this.props.title}</title>
-          <MetaViewport />
-          <Favicons />
-        </Head>
-        <PageStyle backgroundColor={pageBackgroundColor} />
-        <LoadingBar color={theme.colors.primary} />
-        <ErrorPopup />
-        <Container>
-          <MainNav isAuthenticated={isAuthenticated} />
-          <Body>{this.renderChildren(isAuthenticated)}</Body>
-          <Footer />
-        </Container>
-      </ThemeProvider>
+      <Intl>
+        {intl => (
+          <ThemeProvider value={theme}>
+            <Head>
+              <title>
+                {typeof this.props.title === 'function'
+                  ? this.props.title(intl)
+                  : this.props.title}
+              </title>
+              <MetaViewport />
+              <Favicons />
+            </Head>
+            <PageStyle backgroundColor={pageBackgroundColor} />
+            <LoadingBar color={theme.colors.primary} />
+            <ErrorPopup />
+            <Container>
+              <MainNav isAuthenticated={isAuthenticated} />
+              <Body>{this.renderChildren(isAuthenticated)}</Body>
+              <Footer />
+            </Container>
+          </ThemeProvider>
+        )}
+      </Intl>
     );
   }
 }

@@ -37,9 +37,7 @@ const Me = props => {
   return (
     <Page
       requireAuth
-      title={props.intl.formatMessage(titles.me)}
-      // Pass props.data as object, not casted.
-      // https://twitter.com/estejs/status/968312335797497856
+      title={intl => intl.formatMessage(titles.me)}
       data={props.data}
     >
       {me != null && (

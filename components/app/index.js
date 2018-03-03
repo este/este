@@ -1,11 +1,9 @@
 // @flow
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
-import type { IntlShape } from 'react-intl';
-import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
+import { IntlProvider, addLocaleData } from 'react-intl';
 // $FlowFixMe Wrong libdef.
-import { fetchQuery } from 'react-relay';
-import type { GraphQLTaggedNode } from 'react-relay';
+import { fetchQuery, type GraphQLTaggedNode } from 'react-relay';
 import { getCookie } from './cookie';
 import { LocaleProvider } from '../Locale';
 import { MutationProvider } from '../Mutation';
@@ -51,7 +49,6 @@ type InitialAppProps = {|
 type PageProps = {|
   ...NextProps,
   data: Object,
-  intl: IntlShape,
 |};
 
 type AppProps = {|
@@ -67,7 +64,6 @@ const app = (
   |},
 ) => {
   const { query } = options || {};
-  const PageWithHigherOrderComponents = injectIntl(Page);
 
   const App = (props: AppProps) => {
     const {
@@ -95,7 +91,7 @@ const app = (
           <MutationProvider value={{ environment }}>
             <ErrorPopupProvider>
               <RelayProvider environment={environment} variables={url.query}>
-                <PageWithHigherOrderComponents data={data} url={url} />
+                <Page data={data} url={url} />
               </RelayProvider>
             </ErrorPopupProvider>
           </MutationProvider>
