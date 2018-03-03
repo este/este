@@ -16,6 +16,7 @@ import { setCookie } from '../components/app/cookie';
 import type { Errors } from '../server/error';
 import { defineMessages } from 'react-intl';
 import Intl from './Intl';
+import type { Href } from '../server/sitemap';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -29,7 +30,7 @@ const messages = defineMessages({
 });
 
 type AuthProps = {|
-  // intl: IntlShape,
+  redirectUrl?: Href,
 |};
 
 type Fields = {|
@@ -58,9 +59,10 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     if (payload == null) return;
     const { token } = payload;
     setCookie({ token });
-    const { redirectUrl } = Router.query;
-    if (redirectUrl) {
-      Router.replace(redirectUrl);
+    if (Router.query.redirectUrl) {
+      Router.replace(Router.query.redirectUrl);
+    } else if (this.props.redirectUrl) {
+      Router.replace(this.props.redirectUrl);
     } else {
       Router.replace({
         pathname: Router.pathname,
