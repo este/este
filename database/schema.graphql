@@ -12,7 +12,7 @@ type User implements Node {
   email: String!
   password: String!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  themeName: String!
+  themeName: String
 }
 
 type Web implements Node {
@@ -145,7 +145,7 @@ type UserConnection {
 input UserCreateInput {
   email: String!
   password: String!
-  themeName: String!
+  themeName: String
   webs: WebCreateManyWithoutOwnerInput
 }
 
@@ -157,7 +157,7 @@ input UserCreateOneWithoutWebsInput {
 input UserCreateWithoutWebsInput {
   email: String!
   password: String!
-  themeName: String!
+  themeName: String
 }
 
 """
@@ -195,7 +195,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   email: String!
   password: String!
-  themeName: String!
+  themeName: String
 }
 
 type UserSubscriptionPayload {
