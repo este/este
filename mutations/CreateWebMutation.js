@@ -37,6 +37,7 @@ const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
 ) =>
   commitMutation(environment, {
     mutation,
+    // $FlowFixMe Wrong libdef.
     variables,
     onCompleted,
     onError,

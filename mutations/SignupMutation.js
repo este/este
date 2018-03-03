@@ -22,6 +22,7 @@ const commit: Commit<SignupMutationVariables, SignupMutationResponse> = (
 ) =>
   commitMutation(environment, {
     mutation,
+    // $FlowFixMe Wrong libdef.
     variables,
     onCompleted,
     onError,

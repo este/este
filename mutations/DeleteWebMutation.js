@@ -33,6 +33,7 @@ const commit: Commit<DeleteWebMutationVariables, DeleteWebMutationResponse> = (
 ) =>
   commitMutation(environment, {
     mutation,
+    // $FlowFixMe Wrong libdef.
     variables,
     onCompleted,
     onError,

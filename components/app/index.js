@@ -3,6 +3,7 @@ import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import type { IntlShape } from 'react-intl';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
+// $FlowFixMe Wrong libdef.
 import { fetchQuery } from 'react-relay';
 import type { GraphQLTaggedNode } from 'react-relay';
 import { getCookie } from './cookie';

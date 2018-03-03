@@ -17,6 +17,7 @@ class Webs extends React.PureComponent<WebsProps> {
     return (
       <Box>
         {webs.edges.map(
+          // $FlowFixMe Wrong libdef.
           edge => edge && <WebsItem data={edge.node} key={edge.node.id} />,
         )}
       </Box>

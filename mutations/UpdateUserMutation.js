@@ -22,6 +22,7 @@ const commit: Commit<
 > = (environment, variables, onCompleted, onError) =>
   commitMutation(environment, {
     mutation,
+    // $FlowFixMe Wrong libdef.
     variables,
     onCompleted,
     onError,
