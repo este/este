@@ -109,7 +109,6 @@ const resolvers /*: Resolvers */ = {
       return {
         edge: {
           node: web,
-          cursor: '', // WTF I should return here?
         },
       };
     },
