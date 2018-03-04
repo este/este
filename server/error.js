@@ -13,7 +13,7 @@ type DomainError =
   | { type: 'wrongPassword' }
   | { type: 'notAuthorized' }
   | { type: 'requestFailed' }
-  | { type: 'unknownError', message: string };
+  | { type: 'unknown', message: string };
 
 type ValidationError =
   | { type: 'trim' }
@@ -58,7 +58,7 @@ export const parsePayloadErrors = (
         ) !== -1;
       error = requestFailed
         ? { type: 'requestFailed' }
-        : { type: 'unknownError', message: payloadError.message };
+        : { type: 'unknown', message: payloadError.message };
       return;
     }
     const isOneError = typeof parsedError.type === 'string';

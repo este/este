@@ -61,11 +61,11 @@ export const errorToMessage = (error: ErrorType) => {
           id="error.notAuthorized"
         />
       );
-    case 'unknownError':
+    case 'unknown':
       return (
         <FormattedMessage
           defaultMessage="Unknown error: {message}"
-          id="error.unknownError"
+          id="error.unknown"
           values={{ message: error.message }}
         />
       );

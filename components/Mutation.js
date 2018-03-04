@@ -70,7 +70,7 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
       error => {
         this.setState({ pending: false });
         if (onError) onError({});
-        showError({ type: 'unknownError', message: error.message });
+        showError({ type: 'unknown', message: error.message });
       },
     );
     this.disposables.push(disposable);

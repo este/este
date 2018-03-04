@@ -24,7 +24,7 @@
   "error.requestFailed": "Network error. Please try it later.",
   "error.required": "Please fill out this field.",
   "error.trim": "Please remove trailing whitespaces.",
-  "error.unknownError": "Unknown error: {message}",
+  "error.unknown": "Unknown error: {message}",
   "error.wrongPassword": "Wrong password.",
   "footer.madeBy": "made by",
   "index.createWeb": "Create web",
