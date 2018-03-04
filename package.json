@@ -24,7 +24,7 @@
     "deploy:db": "yarn prisma deploy",
     "deploy:api": "now -e DEPLOY_TARGET=production:api --dotenv .env.production",
     "deploy:web": "now -e DEPLOY_TARGET=production:web --dotenv .env.production",
-    "extract-messages": "yarn clean-babel-cache && rimraf lang/.messages && next build && node ./scripts/extractMessages",
+    "messages:extract": "yarn clean-babel-cache && rimraf lang/.messages && next build && node ./scripts/extractMessages",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
     "jest": "jest",

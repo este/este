@@ -1,6 +1,4 @@
 {
-  "appError.failedToFetch": "Network error. Please check your connection.",
-  "appError.insufficientPermissions": "Insufficient permissions.",
   "authForm.emailPlaceholder": "email",
   "authForm.passwordPlaceholder": "password",
   "button.add": "Add",
@@ -20,6 +18,7 @@
   "footer.madeBy": "made by",
   "index.createWeb": "Create web",
   "index.manageYourWebs": "Manage your webs",
+  "sitemap.title.edit": "Edit",
   "sitemap.title.index": "Home",
   "sitemap.title.me": "Me",
   "sitemap.title.signIn": "Sign In",
@@ -27,8 +26,11 @@
   "validationError.email": "Email address is not valid.",
   "validationError.maxLength": "{maxLength} characters maximum.",
   "validationError.minLength": "{minLength} characters minimum.",
+  "validationError.notAuthorized": "Not authorized.",
+  "validationError.notExists": "Not exists.",
+  "validationError.requestFailed": "Network error. Please try it later.",
   "validationError.required": "Please fill out this field.",
-  "validationError.requiredAgree": "Please think about it.",
-  "validationError.wrongPassword": "The password you have entered is invalid.",
-  "yourWebs": "Your Webs"
+  "validationError.trim": "Please remove trailing whitespaces.",
+  "validationError.unknownError": "Unknown error: {message}",
+  "validationError.wrongPassword": "Wrong password."
 }
