@@ -14,9 +14,9 @@ import Mutation from './Mutation';
 import * as validation from '../server/validation';
 import { setCookie } from '../components/app/cookie';
 import type { Errors } from '../server/error';
-import { defineMessages } from 'react-intl';
-import Intl from './Intl';
+import { defineMessages, type IntlShape } from 'react-intl';
 import type { Href } from '../server/sitemap';
+import withIntl from './withIntl';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -31,6 +31,7 @@ const messages = defineMessages({
 
 type AuthProps = {|
   redirectUrl?: Href,
+  intl: IntlShape,
 |};
 
 type Fields = {|
@@ -106,72 +107,68 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
   render() {
     return (
-      <Intl>
-        {intl => (
-          <Mutation>
-            {({ mutate, pending }) => (
-              <div>
-                {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
-                <style jsx>{`
-                  div :global(input:-webkit-autofill),
-                  div :global(input:-webkit-autofill:hover),
-                  div :global(input:-webkit-autofill:focus),
-                  div :global(input:-webkit-autofill:active) {
-                    -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
-                    -webkit-transition-delay: 9999s;
-                  }
-                `}</style>
-                <Box>
-                  <Heading size={3}>Auth</Heading>
-                  <Form onSubmit={this.auth(mutate)}>
-                    <Set vertical spaceBetween={0}>
-                      <TextInputBig
-                        autoFocus={this.state.errors.email}
-                        disabled={pending}
-                        error={<Error>{this.state.errors.email}</Error>}
-                        maxWidth={26}
-                        name="email"
-                        onChange={email => this.setState({ email })}
-                        placeholder={intl.formatMessage(
-                          messages.emailPlaceholder,
-                        )}
-                        type="email"
-                        value={this.state.email}
-                      />
-                      <TextInputBig
-                        autoFocus={this.state.errors.password}
-                        disabled={pending}
-                        error={<Error>{this.state.errors.password}</Error>}
-                        maxWidth={26}
-                        name="password"
-                        onChange={password => this.setState({ password })}
-                        placeholder={intl.formatMessage(
-                          messages.passwordPlaceholder,
-                        )}
-                        type="password"
-                        value={this.state.password}
-                      />
-                    </Set>
-                    <Set>
-                      <SignInButton
-                        disabled={pending}
-                        onPress={this.auth(mutate)}
-                        primary
-                      />
-                      <SignUpButton
-                        disabled={pending}
-                        onPress={this.auth(mutate, true)}
-                      />
-                    </Set>
-                  </Form>
-                </Box>
-              </div>
-            )}
-          </Mutation>
+      <Mutation>
+        {({ mutate, pending }) => (
+          <div>
+            {/* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete/32505530#32505530 */}
+            <style jsx>{`
+              div :global(input:-webkit-autofill),
+              div :global(input:-webkit-autofill:hover),
+              div :global(input:-webkit-autofill:focus),
+              div :global(input:-webkit-autofill:active) {
+                -webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
+                -webkit-transition-delay: 9999s;
+              }
+            `}</style>
+            <Box>
+              <Heading size={3}>Auth</Heading>
+              <Form onSubmit={this.auth(mutate)}>
+                <Set vertical spaceBetween={0}>
+                  <TextInputBig
+                    autoFocus={this.state.errors.email}
+                    disabled={pending}
+                    error={<Error>{this.state.errors.email}</Error>}
+                    maxWidth={26}
+                    name="email"
+                    onChange={email => this.setState({ email })}
+                    placeholder={this.props.intl.formatMessage(
+                      messages.emailPlaceholder,
+                    )}
+                    type="email"
+                    value={this.state.email}
+                  />
+                  <TextInputBig
+                    autoFocus={this.state.errors.password}
+                    disabled={pending}
+                    error={<Error>{this.state.errors.password}</Error>}
+                    maxWidth={26}
+                    name="password"
+                    onChange={password => this.setState({ password })}
+                    placeholder={this.props.intl.formatMessage(
+                      messages.passwordPlaceholder,
+                    )}
+                    type="password"
+                    value={this.state.password}
+                  />
+                </Set>
+                <Set>
+                  <SignInButton
+                    disabled={pending}
+                    onPress={this.auth(mutate)}
+                    primary
+                  />
+                  <SignUpButton
+                    disabled={pending}
+                    onPress={this.auth(mutate, true)}
+                  />
+                </Set>
+              </Form>
+            </Box>
+          </div>
         )}
-      </Intl>
+      </Mutation>
     );
   }
 }
 
-export default Auth;
+export default withIntl(Auth);

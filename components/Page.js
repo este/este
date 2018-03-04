@@ -16,7 +16,7 @@ import MetaViewport from './MetaViewport';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import Auth from '../components/Auth';
-import Intl from './Intl';
+import withIntl from './withIntl';
 
 // yarn favicon
 const Favicons = () => [
@@ -92,6 +92,7 @@ type PageProps = {|
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
   requireAuth?: boolean,
+  intl: IntlShape,
 |};
 
 class Page extends React.PureComponent<PageProps> {
@@ -125,36 +126,34 @@ class Page extends React.PureComponent<PageProps> {
     const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
 
     return (
-      <Intl>
-        {intl => (
-          <ThemeProvider value={theme}>
-            <Head>
-              <title>
-                {typeof this.props.title === 'function'
-                  ? this.props.title(intl)
-                  : this.props.title}
-              </title>
-              <MetaViewport />
-              <Favicons />
-            </Head>
-            <PageStyle backgroundColor={pageBackgroundColor} />
-            <LoadingBar color={theme.colors.primary} />
-            <ErrorPopup />
-            <Container>
-              <MainNav isAuthenticated={isAuthenticated} />
-              <Body>{this.renderChildren(isAuthenticated)}</Body>
-              <Footer />
-            </Container>
-          </ThemeProvider>
-        )}
-      </Intl>
+      <ThemeProvider value={theme}>
+        <Head>
+          <title>
+            {typeof this.props.title === 'function'
+              ? this.props.title(this.props.intl)
+              : this.props.title}
+          </title>
+          <MetaViewport />
+          <Favicons />
+        </Head>
+        <PageStyle backgroundColor={pageBackgroundColor} />
+        <LoadingBar color={theme.colors.primary} />
+        <ErrorPopup />
+        <Container>
+          <MainNav isAuthenticated={isAuthenticated} />
+          <Body>{this.renderChildren(isAuthenticated)}</Body>
+          <Footer />
+        </Container>
+      </ThemeProvider>
     );
   }
 }
 
+const PageWithIntl = withIntl(Page);
+
 // https://github.com/este/este/issues/1484
 export default createFragmentContainer(
-  Page,
+  PageWithIntl,
   graphql`
     fragment Page on Query {
       me {
