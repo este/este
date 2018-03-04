@@ -13,14 +13,17 @@ import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 
+// That's how message are reused.
+export const ManageYourWebsMessage = () => (
+  <FormattedMessage
+    defaultMessage="Manage your webs"
+    id="index.manageYourWebs"
+  />
+);
+
 const Authenticated = ({ data }) => (
   <Box>
-    <Heading size={1}>
-      <FormattedMessage
-        defaultMessage="Manage your webs"
-        id="index.manageYourWebs"
-      />
-    </Heading>
+    <Heading size={1}>{<ManageYourWebsMessage />}</Heading>
     <Webs data={data} />
     <CreateWeb />
   </Box>
