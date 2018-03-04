@@ -10,14 +10,14 @@ export const errorToMessage = (error: ErrorType) => {
       return (
         <FormattedMessage
           defaultMessage="Please fill out this field."
-          id="validationError.required"
+          id="error.required"
         />
       );
     case 'minLength':
       return (
         <FormattedMessage
           defaultMessage="{minLength} characters minimum."
-          id="validationError.minLength"
+          id="error.minLength"
           values={{ minLength: error.minLength }}
         />
       );
@@ -25,7 +25,7 @@ export const errorToMessage = (error: ErrorType) => {
       return (
         <FormattedMessage
           defaultMessage="{maxLength} characters maximum."
-          id="validationError.maxLength"
+          id="error.maxLength"
           values={{ maxLength: error.maxLength }}
         />
       );
@@ -33,42 +33,39 @@ export const errorToMessage = (error: ErrorType) => {
       return (
         <FormattedMessage
           defaultMessage="Email address is not valid."
-          id="validationError.email"
+          id="error.email"
         />
       );
     case 'alreadyExists':
       return (
         <FormattedMessage
           defaultMessage="Already exists."
-          id="validationError.alreadyExists"
+          id="error.alreadyExists"
         />
       );
     case 'notExists':
       return (
-        <FormattedMessage
-          defaultMessage="Not exists."
-          id="validationError.notExists"
-        />
+        <FormattedMessage defaultMessage="Not exists." id="error.notExists" />
       );
     case 'wrongPassword':
       return (
         <FormattedMessage
           defaultMessage="Wrong password."
-          id="validationError.wrongPassword"
+          id="error.wrongPassword"
         />
       );
     case 'notAuthorized':
       return (
         <FormattedMessage
           defaultMessage="Not authorized."
-          id="validationError.notAuthorized"
+          id="error.notAuthorized"
         />
       );
     case 'unknownError':
       return (
         <FormattedMessage
           defaultMessage="Unknown error: {message}"
-          id="validationError.unknownError"
+          id="error.unknownError"
           values={{ message: error.message }}
         />
       );
@@ -76,14 +73,14 @@ export const errorToMessage = (error: ErrorType) => {
       return (
         <FormattedMessage
           defaultMessage="Please remove trailing whitespaces."
-          id="validationError.trim"
+          id="error.trim"
         />
       );
     case 'requestFailed':
       return (
         <FormattedMessage
           defaultMessage="Network error. Please try it later."
-          id="validationError.requestFailed"
+          id="error.requestFailed"
         />
       );
 
