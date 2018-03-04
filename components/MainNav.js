@@ -2,7 +2,7 @@
 import * as React from 'react';
 import A from './A';
 import Box from './Box';
-import { titles } from '../server/sitemap';
+import { titles } from '../components/app/sitemap';
 import { FormattedMessage } from 'react-intl';
 
 const MainNavA = ({ href, title }) => (

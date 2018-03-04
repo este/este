@@ -7,7 +7,7 @@ import Set from '../components/Set';
 import { ToggleTheme } from '../components/Theme';
 import app from '../components/app';
 import gravatar from 'gravatar';
-import { titles } from '../server/sitemap';
+import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
 import Heading from '../components/Heading';

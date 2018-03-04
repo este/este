@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import NextLink from 'next/link';
-import { maybeMapLinkHref, type Href } from '../server/sitemap';
+import { maybeLinkHref } from '../server/prettyUrl';
+import type { Href } from './app/sitemap';
 import { format } from 'url';
 import Locale from './Locale';
 import { defaultLocale } from '../server/constants';
@@ -38,7 +39,7 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
     // We don't process string URLs. They are considered as constants.
     if (typeof href === 'string') return [null, href];
     const localeHref = LocaleLink.maybeAddLocaleToHref(href, locale);
-    const as = maybeMapLinkHref(href);
+    const as = maybeLinkHref(href);
     return [as, localeHref];
   }
 

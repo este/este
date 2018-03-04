@@ -15,7 +15,7 @@ import * as validation from '../server/validation';
 import { setCookie } from '../components/app/cookie';
 import type { Errors } from '../server/error';
 import { defineMessages, type IntlShape } from 'react-intl';
-import type { Href } from '../server/sitemap';
+import type { Href } from './app/sitemap';
 import withIntl from './withIntl';
 
 const messages = defineMessages({
