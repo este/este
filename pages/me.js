@@ -10,8 +10,6 @@ import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/buttons';
 import { graphql } from 'react-relay';
-import Heading from '../components/Heading';
-import { FormattedMessage } from 'react-intl';
 import { deleteCookie } from '../components/app/cookie';
 import Box from '../components/Box';
 import * as generated from './__generated__/meQuery.graphql';
@@ -54,9 +52,6 @@ const Me = props => {
       <Set>
         <SignOutButton danger onPress={signOut} />
       </Set>
-      <Heading size={1}>
-        <FormattedMessage defaultMessage="Dev Tools" id="devTools" />
-      </Heading>
       <Set>
         <ToggleTheme />
       </Set>
