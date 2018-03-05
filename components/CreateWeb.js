@@ -69,7 +69,7 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
                 <Text>
                   <FormattedMessage
                     defaultMessage="Web Name"
-                    id="createApp.label"
+                    id="createWeb.name.label"
                   />
                 </Text>
               }

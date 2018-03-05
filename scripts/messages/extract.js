@@ -1,14 +1,14 @@
 // @flow
 const glob = require('glob');
-const { defaultLocale } = require('../server/constants');
-const { readFileSync, writeFileSync } = require('fs');
+const fs = require('fs');
+const { defaultLocale } = require('../../server/constants');
 const { resolve } = require('path');
 
 const defaultMessages = glob
   // Remember babel plugin generates only required / imported components.
   // That's why application has to be built before extraction.
   .sync('./lang/.messages/**/*.json')
-  .map(filename => readFileSync(filename, 'utf8'))
+  .map(filename => fs.readFileSync(filename, 'utf8'))
   .map(file => JSON.parse(file))
   .reduce(
     (descriptors, fileDescriptors) => [...descriptors, ...fileDescriptors],
@@ -23,10 +23,11 @@ const defaultMessages = glob
     return messages;
   }, {});
 
-writeFileSync(
+fs.writeFileSync(
   `./lang/${defaultLocale}.json`,
   JSON.stringify(defaultMessages, null, 2),
 );
+
 console.log(
-  `> Wrote default messages to: "${resolve(`./lang/${defaultLocale}.json`)}"`,
+  `Wrote default messages to: "${resolve(`./lang/${defaultLocale}.json`)}"`,
 );

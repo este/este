@@ -1,6 +1,6 @@
 {
-  "authForm.emailPlaceholder": "email",
-  "authForm.passwordPlaceholder": "password",
+  "auth.emailPlaceholder": "email",
+  "auth.passwordPlaceholder": "password",
   "button.add": "Add",
   "button.cancel": "Cancel",
   "button.create": "Create",
@@ -13,8 +13,7 @@
   "button.signUp": "Sign Up",
   "button.submit": "Submit",
   "confirm.areYouSure": "Are you sure?",
-  "createApp.label": "Web Name",
-  "devTools": "Dev Tools",
+  "createWeb.name.label": "Web Name",
   "error.alreadyExists": "Already exists.",
   "error.email": "Email address is not valid.",
   "error.maxLength": "{maxLength} characters maximum.",

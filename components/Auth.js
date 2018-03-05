@@ -21,11 +21,11 @@ import withIntl from './withIntl';
 const messages = defineMessages({
   emailPlaceholder: {
     defaultMessage: 'email',
-    id: 'authForm.emailPlaceholder',
+    id: 'auth.emailPlaceholder',
   },
   passwordPlaceholder: {
     defaultMessage: 'password',
-    id: 'authForm.passwordPlaceholder',
+    id: 'auth.passwordPlaceholder',
   },
 });
 
