@@ -88,6 +88,7 @@ const Footer = () => (
 );
 
 type PageProps = {|
+  // Prop as function pattern.
   title: string | ((intl: IntlShape) => string),
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,

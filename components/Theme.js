@@ -38,4 +38,6 @@ export const ToggleTheme = () => (
   </Mutation>
 );
 
+// Maybe one day I will rewrite it to higher order component, but not today.
+// Function as child component is easier to write, use, and Flow type.
 export default ThemeContext.Consumer;

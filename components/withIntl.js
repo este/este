@@ -8,6 +8,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 // https://flow.org/en/docs/react/hoc/#toc-injecting-props-with-a-higher-order-component
 // This works:
 // https://github.com/facebook/flow/issues/5908#issuecomment-370246840
+// Why HOC? Ideally, all side-effects should be HOC.
 
 const withIntl = <C: React.ComponentType<*>>(
   Component: C,

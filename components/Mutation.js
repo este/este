@@ -37,6 +37,8 @@ type MutationState = {|
   pending: boolean,
 |};
 
+// Maybe one day I will rewrite it to higher order component, but not today.
+// Function as child component is easier to write, use, and Flow type.
 class Mutation extends React.PureComponent<MutationProps, MutationState> {
   state = { pending: false };
 
