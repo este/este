@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { Web, Path } from './Editor';
 import Head from 'next/head';
 import Box from '../Box';
-import PageStyle from '../PageStyle';
+import PageBackgroundColor from '../PageBackgroundColor';
 import EditorElement, { getElementKey } from './EditorElement';
 import MetaViewport from '../MetaViewport';
 
@@ -27,7 +27,7 @@ class EditorPage extends React.PureComponent<EditorPageProps> {
           <title>{webName}</title>
           <MetaViewport />
         </Head>
-        <PageStyle backgroundColor={web.theme.colors.background} />
+        <PageBackgroundColor color={web.theme.colors.background} />
         {web.pages[pageName].elements.map((element, i) => (
           <EditorElement
             key={getElementKey(element)}

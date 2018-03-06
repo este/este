@@ -11,7 +11,7 @@ import Text from './Text';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import PageStyle from './PageStyle';
+import PageBackgroundColor from './PageBackgroundColor';
 import MetaViewport from './MetaViewport';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
@@ -137,7 +137,7 @@ class Page extends React.PureComponent<PageProps> {
           <MetaViewport />
           <Favicons />
         </Head>
-        <PageStyle backgroundColor={pageBackgroundColor} />
+        <PageBackgroundColor color={pageBackgroundColor} />
         <LoadingBar color={theme.colors.primary} />
         <ErrorPopup />
         <Container>
