@@ -41,6 +41,7 @@ Universal React.
 * `yarn deploy:api`
 * `yarn deploy:web`
 * `yarn messages`
+* `yarn prisma --help`
 
 ## Links
 
