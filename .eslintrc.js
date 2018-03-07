@@ -36,6 +36,8 @@ module.exports = {
     'react/prefer-stateless-function': 0, // PureComponents ftw.
     'arrow-body-style': 0, // Control freaky.
     'prefer-destructuring': 0, // We can't always, because of Flow casting.
+    'import/no-unresolved': 0, // It's handled by Flow.
+    'import/extensions': 0, // It's handled by Flow.
     // For production build
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
