@@ -2,19 +2,20 @@
   "env": {
     "development": {
       "presets": ["next/babel"],
-      "plugins": ["inline-dotenv", "relay"]
+      "plugins": ["inline-dotenv", "relay", "react-native-web"]
     },
     "production": {
       "presets": ["next/babel"],
       "plugins": [
         "transform-inline-environment-variables",
         "relay",
+        "react-native-web",
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
     "test": {
       "presets": [["env", { "modules": "commonjs" }], "next/babel"],
-      "plugins": ["relay"]
+      "plugins": ["relay", "react-native-web"]
     }
   }
 }

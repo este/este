@@ -71,6 +71,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-intl": "^2.3.0",
+    "react-native-web": "^0.5.1",
     "react-relay": "^1.5.0",
     "relay-runtime": "^1.5.0",
     "resize-observer-polyfill": "^1.5.0",
@@ -82,6 +83,7 @@
   "devDependencies": {
     "babel-eslint": "^8.0.1",
     "babel-jest": "^22.0.1",
+    "babel-plugin-react-native-web": "^0.5.1",
     "babel-plugin-relay": "^1.5.0",
     "dotenv": "^5.0.0",
     "env-cmd": "^7.0.0",
