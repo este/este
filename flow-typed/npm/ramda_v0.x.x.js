@@ -1,5 +1,5 @@
-// flow-typed signature: faac0f4abd84249ad0a0cb24383e72d3
-// flow-typed version: 03a0733eae/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 22d2fa0a8d2c9c0011f49eed98f4f323
+// flow-typed version: 5ea3674b71/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1602,16 +1602,16 @@ declare module ramda {
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
     ...rest: Array<void>
-  ): ((p: $Keys<A>, ...rest: Array<void>) => (o: A) => V | T) &
-    ((p: $Keys<A>, o: A) => V | T);
+  ): ((p: string, ...rest: Array<void>) => (o: A) => V | T) &
+    ((p: string, o: A) => V | T);
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
-    p: $Keys<A>,
+    p: string,
     ...rest: Array<void>
   ): (o: A) => V | T;
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
-    p: $Keys<A>,
+    p: string,
     o: A
   ): V | T;
 
