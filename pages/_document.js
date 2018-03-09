@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Document, { /* Head ,*/ Main, NextScript } from 'next/document';
+import Document, { Head, Main, NextScript } from 'next/document';
 import { AppRegistry } from 'react-native-web';
 
 // https://github.com/zeit/next.js/tree/master/examples/with-react-native-web
@@ -23,7 +23,9 @@ export default class MyDocument extends Document {
     AppRegistry.registerComponent('Main', () => Main);
     const { getStyleElement } = AppRegistry.getApplication('Main');
     const props = await super.getInitialProps(context);
-    const { req: { locale, localeDataScript, supportedLocales } } = context;
+    const {
+      req: { locale, localeDataScript /*, supportedLocales */ },
+    } = context;
     const styles = [
       <style
         key={index++}
@@ -36,28 +38,29 @@ export default class MyDocument extends Document {
       ...props,
       locale,
       localeDataScript,
-      supportedLocales,
+      // supportedLocales,
       styles,
     };
   }
 
   render() {
-    const { locale, localeDataScript, supportedLocales } = this.props;
+    const { locale, localeDataScript /*, supportedLocales */ } = this.props;
 
     return (
       <html lang={locale} style={{ height: '100%', width: '100%' }}>
-        {/* <Head>
-          {supportedLocales.map(() => {
-            // // TODO: https://github.com/este/este/issues/1399
-            // <link
-            //   href={`https://${locale}.${'deployDomainHere'}`}
-            //   hrefLang={locale}
-            //   key={locale}
-            //   rel="alternate"
-            // />
-            return null;
-          })}
-        </Head> */}
+        <Head>
+          {/* {supportedLocales.map(() => {
+            // TODO: https://github.com/este/este/issues/1399
+            return (
+              <link
+            href={`https://${locale}.${'deployDomainHere'}`}
+            hrefLang={locale}
+            key={locale}
+            rel="alternate"
+              />
+            );
+          })} */}
+        </Head>
         <body style={{ height: '100%', width: '100%', overflowY: 'scroll' }}>
           <Main />
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
