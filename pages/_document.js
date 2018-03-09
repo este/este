@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { /* Head ,*/ Main, NextScript } from 'next/document';
 import { AppRegistry } from 'react-native-web';
 
 // https://github.com/zeit/next.js/tree/master/examples/with-react-native-web
@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
 
     return (
       <html lang={locale} style={{ height: '100%', width: '100%' }}>
-        <Head>
+        {/* <Head>
           {supportedLocales.map(() => {
             // // TODO: https://github.com/este/este/issues/1399
             // <link
@@ -57,7 +57,7 @@ export default class MyDocument extends Document {
             // />
             return null;
           })}
-        </Head>
+        </Head> */}
         <body style={{ height: '100%', width: '100%', overflowY: 'scroll' }}>
           <Main />
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
