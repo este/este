@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
         key={index++}
         dangerouslySetInnerHTML={{ __html: normalizeNextElements }}
       />,
-      getStyleElement(),
+      ...React.Children.toArray(getStyleElement()),
     ];
 
     return {
