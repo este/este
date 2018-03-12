@@ -71,6 +71,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-intl": "^2.3.0",
+    "react-native": "^0.54.1",
     "react-native-web": "^0.5.1",
     "react-relay": "^1.5.0",
     "relay-runtime": "^1.5.0",

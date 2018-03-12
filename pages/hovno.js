@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-// $FlowFixMe https://github.com/necolas/react-native-web/issues/857
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
