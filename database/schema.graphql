@@ -243,9 +243,8 @@ input UserUpdateInput {
 input UserUpdateOneWithoutWebsInput {
   create: UserCreateWithoutWebsInput
   connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  delete: UserWhereUniqueInput
-  update: UserUpdateWithoutWebsInput
+  delete: Boolean
+  update: UserUpdateWithoutWebsDataInput
   upsert: UserUpsertWithoutWebsInput
 }
 
@@ -255,13 +254,7 @@ input UserUpdateWithoutWebsDataInput {
   themeName: String
 }
 
-input UserUpdateWithoutWebsInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutWebsDataInput!
-}
-
 input UserUpsertWithoutWebsInput {
-  where: UserWhereUniqueInput!
   update: UserUpdateWithoutWebsDataInput!
   create: UserCreateWithoutWebsInput!
 }
@@ -673,8 +666,8 @@ input WebUpdateManyWithoutOwnerInput {
   connect: [WebWhereUniqueInput!]
   disconnect: [WebWhereUniqueInput!]
   delete: [WebWhereUniqueInput!]
-  update: [WebUpdateWithoutOwnerInput!]
-  upsert: [WebUpsertWithoutOwnerInput!]
+  update: [WebUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [WebUpsertWithWhereUniqueWithoutOwnerInput!]
 }
 
 input WebUpdateWithoutOwnerDataInput {
@@ -683,12 +676,12 @@ input WebUpdateWithoutOwnerDataInput {
   isPublished: Boolean
 }
 
-input WebUpdateWithoutOwnerInput {
+input WebUpdateWithWhereUniqueWithoutOwnerInput {
   where: WebWhereUniqueInput!
   data: WebUpdateWithoutOwnerDataInput!
 }
 
-input WebUpsertWithoutOwnerInput {
+input WebUpsertWithWhereUniqueWithoutOwnerInput {
   where: WebWhereUniqueInput!
   update: WebUpdateWithoutOwnerDataInput!
   create: WebCreateWithoutOwnerInput!
