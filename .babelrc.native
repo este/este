@@ -1,0 +1,21 @@
+{
+  "env": {
+    "development": {
+      "presets": ["react-native"],
+      "plugins": ["inline-dotenv", "relay"]
+    },
+    "production": {
+      "presets": ["react-native"],
+      "plugins": [
+        "transform-inline-environment-variables",
+        "relay",
+        "react-native-web",
+        ["react-intl", { "messagesDir": "lang/.messages/" }]
+      ]
+    },
+    "test": {
+      "presets": [["env", { "modules": "commonjs" }], "react-native"],
+      "plugins": ["relay"]
+    }
+  }
+}

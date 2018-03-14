@@ -1,7 +1,7 @@
 [![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 
-Universal React.
+Universal React. React + React Native February 2018.
 
 ## Prerequisites
 
@@ -31,12 +31,15 @@ Universal React.
 
 ## Dev tasks
 
-* `yarn dev` - start development
+* `yarn dev` - start web development
+* `yarn dev:ios`
+* `yarn dev:android`
 * `yarn env dev` - copy `.env.dev` to `.env`
 * `yarn env production` - copy `.env.production` to `.env`
 * `yarn production` - test production build locally
 * `yarn test`
-* `yarn schema-relay` - when `yarn dev` is running
+* `yarn prisma-local-upgrade`
+* `yarn schema-relay` - when `yarn dev` is running to update schema and Relay
 * `yarn deploy:db`
 * `yarn deploy:api`
 * `yarn deploy:web`
