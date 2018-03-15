@@ -3,7 +3,7 @@ import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import colorLib from 'color';
-import type { ColorName, Theme as ThemeType } from '../themes/types';
+import type { ColorName, Theme as ThemeType } from '../../themes/types';
 import Theme from './Theme';
 
 /*

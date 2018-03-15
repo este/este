@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
-import Image from '../components/Image';
-import P from '../components/P';
-import Page from '../components/Page';
-import Set from '../components/Set';
-import { ToggleTheme } from '../components/Theme';
+import Image from '../components/core/Image';
+import P from '../components/core/P';
+import Page from '../components/core/Page';
+import Set from '../components/core/Set';
+import { ToggleTheme } from '../components/core/Theme';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';
-import { SignOutButton } from '../components/buttons';
+import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
 import { deleteCookie } from '../components/app/cookie';
-import Box from '../components/Box';
+import Box from '../components/core/Box';
 import * as generated from './__generated__/meQuery.graphql';
 
 const getGravatarUrl = email =>

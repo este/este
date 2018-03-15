@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import A, { type AProps } from '../A';
-import RovingTabIndex from '../RovingTabIndex';
+import A, { type AProps } from '../core/A';
+import RovingTabIndex from '../core/RovingTabIndex';
 import { editorMenuItemProps } from './EditorMenu';
 
 class EditorMenuA extends React.PureComponent<AProps> {

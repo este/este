@@ -3,8 +3,19 @@ import * as React from 'react';
 import type { Theme } from './types';
 import openColor from './openColor';
 import typography from './typography';
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  pageContainer: {
+    maxWidth: 960,
+  },
+});
+
+export type Styles = typeof styles;
 
 export const browserTheme: Theme = {
+  styles,
+
   typography: typography({
     fontSize: 16,
     fontSizeScale: 'step5', // perfect fourth, modularscale.com

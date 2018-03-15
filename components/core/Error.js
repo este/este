@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import type { Error as ErrorType } from '../server/error';
+import type { Error as ErrorType } from '../../server/error';
 import Text, { type TextProps } from './Text';
 
 export const errorToMessage = (error: ErrorType) => {

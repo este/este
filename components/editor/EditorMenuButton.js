@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import Button, { type ButtonProps } from '../Button';
+import Button, { type ButtonProps } from '../core/Button';
 import { editorMenuItemProps, type SectionName } from './EditorMenu';
 import type { Path } from './Editor';
 import EditorDispatch from './EditorDispatch';
-import RovingTabIndex from '../RovingTabIndex';
+import RovingTabIndex from '../core/RovingTabIndex';
 
 type EditorMenuButtonProps = {
   active?: boolean,

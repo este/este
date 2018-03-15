@@ -1,9 +1,9 @@
 // @flow
 /* global window */
 import * as React from 'react';
-import { ThemeProvider } from '../Theme';
+import { ThemeProvider } from '../core/Theme';
 import { browserThemeDark } from '../../themes/browserTheme';
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../core/ErrorPopup';
 import EditorMenu, { menuPadding, type SectionName } from './EditorMenu';
 import EditorPage from './EditorPage';
 import { webFixture } from './EditorFixtures';

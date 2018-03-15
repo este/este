@@ -3,8 +3,8 @@ import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import type { Disposable, Environment, PayloadError } from 'react-relay';
 import { ErrorPopupConsumer } from './ErrorPopup';
-import createRelayEnvironment from './app/createRelayEnvironment';
-import { parsePayloadErrors, type Errors } from '../server/error';
+import createRelayEnvironment from '../app/createRelayEnvironment';
+import { parsePayloadErrors, type Errors } from '../../server/error';
 
 type Value = {|
   environment: Environment,

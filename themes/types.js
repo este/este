@@ -1,5 +1,6 @@
 // @flow
 import type { Element } from 'react';
+import type { Styles } from './browserTheme';
 
 export type ColorName =
   | 'primary'
@@ -44,6 +45,8 @@ export type Bold =
   | 900;
 
 export type Theme = {
+  styles: Styles,
+  // remove and refactor
   typography: {|
     fontSize: number => number,
     lineHeight: number,

@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
-import type { Theme } from '../themes/types';
+import type { Theme } from '../../themes/types';
 import Button from './Button';
-import { browserTheme } from '../themes/browserTheme';
+import { browserTheme } from '../../themes/browserTheme';
 import Mutation from './Mutation';
-import UpdateUserMutation from '../mutations/UpdateUserMutation';
+import UpdateUserMutation from '../../mutations/UpdateUserMutation';
 
 type Value = Theme;
 

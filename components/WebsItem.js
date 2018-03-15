@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import AreYouSureConfirm from './AreYouSureConfirm';
-import Box from './Box';
+import AreYouSureConfirm from './core/AreYouSureConfirm';
+import Box from './core/Box';
 import * as generated from './__generated__/WebsItem.graphql';
-import { DeleteButton } from './buttons';
-import Text from './Text';
-import Set from './Set';
-import A from './A';
+import { DeleteButton } from './core/buttons';
+import Text from './core/Text';
+import Set from './core/Set';
+import A from './core/A';
 import { FormattedRelative } from 'react-intl';
-import Mutation, { clientMutationId } from './Mutation';
+import Mutation, { clientMutationId } from './core/Mutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
 
 const DeleteWeb = ({ id }) => (

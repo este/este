@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
-import A from './A';
-import Box from './Box';
+import A from './core/A';
+import Box from './core/Box';
 import { titles } from '../components/app/sitemap';
 import { FormattedMessage } from 'react-intl';
+
+// TODO: margin bottom 2 lineHeight
 
 const MainNavA = ({ href, title }) => (
   <A

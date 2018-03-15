@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
 import { titles } from '../components/app/sitemap';
-import Page from '../components/Page';
-import Heading from '../components/Heading';
+import Page from '../components/core/Page';
+import Heading from '../components/core/Heading';
 import app from '../components/app';
-import A from '../components/A';
+import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
-import Blockquote from '../components/Blockquote';
-import P from '../components/P';
-import Box from '../components/Box';
+import Blockquote from '../components/core/Blockquote';
+import P from '../components/core/P';
+import Box from '../components/core/Box';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';

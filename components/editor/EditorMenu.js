@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import type { Path, Web } from './Editor';
-import Box from '../Box';
+import Box from '../core/Box';
 import EditorMenuBreadcrumbs from './EditorMenuBreadcrumbs';
 import ResizeObserver from 'resize-observer-polyfill';
 import ReactDOM from 'react-dom';
-import { RovingTabIndexProvider } from '../RovingTabIndex';
+import { RovingTabIndexProvider } from '../core/RovingTabIndex';
 import EditorMenuActiveSection from './EditorMenuActiveSection';
 
 export type SectionName =

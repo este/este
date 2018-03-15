@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import Box from '../Box';
+import Box from '../core/Box';
 import EditorMenuText from './EditorMenuText';
 import * as Draft from 'draft-js';
 import { validate } from './jsonSchema';
-import RovingTabIndex from '../RovingTabIndex';
+import RovingTabIndex from '../core/RovingTabIndex';
 import Big from 'big.js';
 import * as R from 'ramda';
 

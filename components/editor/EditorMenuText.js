@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Text, { type TextProps } from '../Text';
+import Text, { type TextProps } from '../core/Text';
 import { editorMenuItemProps } from './EditorMenu';
 
 const EditorMenuText = (props: TextProps) => (

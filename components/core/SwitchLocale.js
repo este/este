@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Text from './Text';
 import Locale from './Locale';
-import { defaultLocale } from '../server/constants';
+import { defaultLocale } from '../../server/constants';
 
 class SwitchLocale extends React.PureComponent<{}> {
   static getLocaleHref = (pathname: string, locale: string) => {

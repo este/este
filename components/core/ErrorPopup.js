@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
-import type { Error } from '../server/error';
+import type { Error } from '../../server/error';
 import ErrorComponent from './Error';
 
 type Value = {|
@@ -63,7 +63,7 @@ export class ErrorPopupProvider extends React.PureComponent<
   }
 }
 
-export default class ErrorPopup extends React.PureComponent<{}> {
+class ErrorPopup extends React.PureComponent<{}> {
   render() {
     return (
       <ErrorPopupContext.Consumer>
@@ -91,3 +91,5 @@ export default class ErrorPopup extends React.PureComponent<{}> {
     );
   }
 }
+
+export default ErrorPopup;

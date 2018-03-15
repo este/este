@@ -7,15 +7,15 @@ import Set from './Set';
 import TextInputBig from './TextInputBig';
 import Error from './Error';
 import { SignInButton, SignUpButton } from './buttons';
-import SigninMutation from '../mutations/SigninMutation';
-import SignupMutation from '../mutations/SignupMutation';
+import SigninMutation from '../../mutations/SigninMutation';
+import SignupMutation from '../../mutations/SignupMutation';
 import Router from 'next/router';
 import Mutation from './Mutation';
-import * as validation from '../server/validation';
-import { setCookie } from '../components/app/cookie';
-import type { Errors } from '../server/error';
+import * as validation from '../../server/validation';
+import { setCookie } from '../app/cookie';
+import type { Errors } from '../../server/error';
 import { defineMessages, type IntlShape } from 'react-intl';
-import type { Href } from './app/sitemap';
+import type { Href } from '../app/sitemap';
 import withIntl from './withIntl';
 
 const messages = defineMessages({

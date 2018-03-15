@@ -5,10 +5,10 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 // $FlowFixMe Wrong libdef.
 import { fetchQuery, type GraphQLTaggedNode } from 'react-relay';
 import { getCookie } from './cookie';
-import { LocaleProvider } from '../Locale';
-import { MutationProvider } from '../Mutation';
-import { ErrorPopupProvider } from '../ErrorPopup';
-import RelayProvider from '../RelayProvider';
+import { LocaleProvider } from '../core/Locale';
+import { MutationProvider } from '../core/Mutation';
+import { ErrorPopupProvider } from '../core/ErrorPopup';
+import RelayProvider from '../core/RelayProvider';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');

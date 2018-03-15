@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Set, { type SetProps } from '../Set';
+import Set, { type SetProps } from '../core/Set';
 
 class EditorMenuSection extends React.PureComponent<SetProps> {
   render() {

@@ -1,5 +1,5 @@
 // @flow
-import type { ColorName } from '../themes/types';
+import type { ColorName } from '../../themes/types';
 import * as React from 'react';
 import AutoFocus from './AutoFocus';
 import Theme from './Theme';

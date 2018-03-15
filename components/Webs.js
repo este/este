@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Box from './Box';
+import Box from './core/Box';
 import * as generated from './__generated__/Webs.graphql';
 import WebsItem from './WebsItem';
 

@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
-import Form from './Form';
-import { CreateButton } from './buttons';
-import TextInputBig from './TextInputBig';
+import Form from './core/Form';
+import { CreateButton } from './core/buttons';
+import TextInputBig from './core/TextInputBig';
 import { FormattedMessage } from 'react-intl';
-import Text from './Text';
-import Set from './Set';
+import Text from './core/Text';
+import Set from './core/Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import type { Errors } from '../server/error';
-import Mutation, { clientMutationId } from './Mutation';
-import Error from './Error';
+import Mutation, { clientMutationId } from './core/Mutation';
+import Error from './core/Error';
 import * as validation from '../server/validation';
 
 type Fields = {|

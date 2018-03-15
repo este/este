@@ -1,6 +1,6 @@
 // @flow
 import createReactContext, { type Context } from 'create-react-context';
-import { defaultLocale } from '../server/constants';
+import { defaultLocale } from '../../server/constants';
 
 type Value = {|
   locale: string,

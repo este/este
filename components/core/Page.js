@@ -1,22 +1,31 @@
 // @flow
+import { View } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Box from './Box';
 import Head from 'next/head';
-import LoadingBar from './LoadingBar';
-import MainNav from './MainNav';
+import PageLoadingBar from './PageLoadingBar';
+import MainNav from '../MainNav';
 import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
 import Text from './Text';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { ThemeProvider } from './Theme';
-import { browserTheme, browserThemeDark } from '../themes/browserTheme';
+import { browserTheme, browserThemeDark } from '../../themes/browserTheme';
 import PageBackgroundColor from './PageBackgroundColor';
-import MetaViewport from './MetaViewport';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
-import Auth from '../components/Auth';
+import Auth from './Auth';
 import withIntl from './withIntl';
+import PageContainer from './PageContainer';
+
+// https://bitsofco.de/ios-safari-and-shrink-to-fit
+export const MetaViewport = () => (
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+);
 
 // yarn favicon
 const Favicons = () => [
@@ -50,24 +59,15 @@ const Favicons = () => [
   />,
 ];
 
-const Container = ({ children }) => (
-  <Box
-    margin="auto"
-    paddingHorizontal={1}
+const PageBody = ({ children }) => (
+  <View
     style={{
-      maxWidth: 960,
-      minHeight: '100vh', // make footer sticky
+      // flex 1 to align Footer to bottom.
+      flex: 1,
     }}
   >
     {children}
-  </Box>
-);
-
-// Flex 1 to make footer sticky.
-const Body = ({ children }) => (
-  <Box flex={1} maxWidth={30} paddingTop={2}>
-    {children}
-  </Box>
+  </View>
 );
 
 const Footer = () => (
@@ -87,7 +87,7 @@ const Footer = () => (
   </Text>
 );
 
-type PageProps = {|
+type Props = {|
   // Prop as function pattern.
   title: string | ((intl: IntlShape) => string),
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
@@ -96,7 +96,7 @@ type PageProps = {|
   intl: IntlShape,
 |};
 
-class Page extends React.PureComponent<PageProps> {
+class Page extends React.PureComponent<Props> {
   static getTheme = themeName => {
     switch (themeName) {
       case 'light':
@@ -138,13 +138,13 @@ class Page extends React.PureComponent<PageProps> {
           <Favicons />
         </Head>
         <PageBackgroundColor color={pageBackgroundColor} />
-        <LoadingBar color={theme.colors.primary} />
+        <PageLoadingBar color={theme.colors.primary} />
         <ErrorPopup />
-        <Container>
+        <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
-          <Body>{this.renderChildren(isAuthenticated)}</Body>
+          <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
           <Footer />
-        </Container>
+        </PageContainer>
       </ThemeProvider>
     );
   }
