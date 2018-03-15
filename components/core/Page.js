@@ -2,7 +2,6 @@
 import { View } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
-import Box from './Box';
 import Head from 'next/head';
 import PageLoadingBar from './PageLoadingBar';
 import MainNav from '../MainNav';
@@ -70,7 +69,7 @@ const PageBody = ({ children }) => (
   </View>
 );
 
-const Footer = () => (
+const PageFooter = () => (
   <Text
     borderColor="gray"
     borderStyle="solid"
@@ -143,7 +142,7 @@ class Page extends React.PureComponent<Props> {
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
           <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
-          <Footer />
+          <PageFooter />
         </PageContainer>
       </ThemeProvider>
     );
