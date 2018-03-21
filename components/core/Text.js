@@ -83,6 +83,7 @@ class Text extends React.PureComponent<TextProps> {
             <NativeText
               style={[
                 !isInAParentText && theme.styles.text.font,
+                style,
                 align != null && alignStyles[align],
                 bold != null &&
                   (bold
@@ -97,7 +98,6 @@ class Text extends React.PureComponent<TextProps> {
                   : !isInAParentText &&
                     theme.typography.fontSizeWithLineHeight(0),
                 fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
-                this.props.style,
               ]}
               {...props}
             />
