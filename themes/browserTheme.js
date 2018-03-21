@@ -43,6 +43,13 @@ const styles = {
     gray: { color: colors.gray },
   }),
 
+  heading: StyleSheet.create({
+    text: {
+      fontWeight: '600',
+      marginBottom: rhythm(1),
+    },
+  }),
+
   page: StyleSheet.create({
     container: {
       width: 960,
@@ -78,7 +85,7 @@ export const browserTheme: Theme = {
   typography,
   colors,
   styles,
-  // TODO: Remove
+  // TODO: Remove. Merge styles to root? Remove typography and colors?
   text: {
     bold: '600',
     color: 'black',

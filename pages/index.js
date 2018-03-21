@@ -59,7 +59,7 @@ const Index = props => {
           )}
         </React.Fragment>
       )}
-      </Page>
+    </Page>
   );
 };
 
