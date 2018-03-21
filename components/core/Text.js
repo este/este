@@ -6,10 +6,8 @@ import type { ColorName } from '../../themes/types';
 import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-import { createElement } from 'react-native-web';
 
 export type TextProps = {
-  asWeb?: string,
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
@@ -66,7 +64,6 @@ class Text extends React.PureComponent<TextProps> {
 
   render() {
     const {
-      asWeb,
       align,
       bold,
       color,
@@ -78,41 +75,32 @@ class Text extends React.PureComponent<TextProps> {
       ...props
     } = this.props;
     const { isInAParentText } = this.context;
-    const isWebComponent = typeof asWeb === 'string';
 
     return (
       <Theme>
         {theme => {
-          const componentProps = {
-            style: [
-              !isInAParentText && theme.styles.text.font,
-              align != null && alignStyles[align],
-              bold != null &&
-                (bold
-                  ? theme.styles.text.weightBold
-                  : theme.styles.text.weightNormal),
-              color != null && theme.styles.text[color],
-              decoration != null && decorationStyles[decoration],
-              italic != null &&
-                (italic ? italicStyles.italic : italicStyles.normal),
-              size != null
-                ? theme.typography.fontSizeWithLineHeight(size)
-                : !isInAParentText &&
-                  theme.typography.fontSizeWithLineHeight(0),
-              fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
-              this.props.style,
-            ],
-            ...props,
-          };
-
-          // This works.
-          // return <NativeText {...componentProps} />;
-          // return createElement('as', componentProps);
-          // This does not work. Why?
-          return isWebComponent ? (
-            createElement(asWeb, componentProps)
-          ) : (
-            <NativeText {...componentProps} />
+          return (
+            <NativeText
+              style={[
+                !isInAParentText && theme.styles.text.font,
+                align != null && alignStyles[align],
+                bold != null &&
+                  (bold
+                    ? theme.styles.text.weightBold
+                    : theme.styles.text.weightNormal),
+                color != null && theme.styles.text[color],
+                decoration != null && decorationStyles[decoration],
+                italic != null &&
+                  (italic ? italicStyles.italic : italicStyles.normal),
+                size != null
+                  ? theme.typography.fontSizeWithLineHeight(size)
+                  : !isInAParentText &&
+                    theme.typography.fontSizeWithLineHeight(0),
+                fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
+                this.props.style,
+              ]}
+              {...props}
+            />
           );
         }}
       </Theme>

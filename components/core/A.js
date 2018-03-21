@@ -37,7 +37,7 @@ class A extends React.PureComponent<AProps & { router: Object }, AState> {
     return (
       <LocaleLink href={href} prefetch={prefetch} replace={replace}>
         <Text
-          asWeb="a"
+          accessibilityRole="link"
           color={color}
           decoration={decoration}
           onMouseEnter={this.handleMouseEnter}
