@@ -6,8 +6,10 @@ import type { ColorName } from '../../themes/types';
 import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import { createElement } from 'react-native-web';
 
 export type TextProps = {
+  asWeb?: string,
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
@@ -64,6 +66,7 @@ class Text extends React.PureComponent<TextProps> {
 
   render() {
     const {
+      asWeb,
       align,
       bold,
       color,
@@ -72,16 +75,16 @@ class Text extends React.PureComponent<TextProps> {
       size,
       fixWebFontSmoothing,
       style,
-      children,
       ...props
     } = this.props;
     const { isInAParentText } = this.context;
+    const isWebComponent = typeof asWeb === 'string';
 
     return (
       <Theme>
-        {theme => (
-          <NativeText
-            style={[
+        {theme => {
+          const componentProps = {
+            style: [
               !isInAParentText && theme.styles.text.font,
               align != null && alignStyles[align],
               bold != null &&
@@ -98,12 +101,16 @@ class Text extends React.PureComponent<TextProps> {
                   theme.typography.fontSizeWithLineHeight(0),
               fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
               this.props.style,
-            ]}
-            {...props}
-          >
-            {this.props.children}
-          </NativeText>
-        )}
+            ],
+            ...props,
+          };
+
+          return isWebComponent ? (
+            createElement(asWeb, componentProps)
+          ) : (
+            <NativeText {...componentProps} />
+          );
+        }}
       </Theme>
     );
   }

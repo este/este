@@ -1,5 +1,5 @@
 // @flow
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Head from 'next/head';
@@ -17,7 +17,6 @@ import Auth from './Auth';
 import withIntl from './withIntl';
 import PageContainer from './PageContainer';
 import Text from './Text';
-import { StyleSheet } from 'react-native';
 
 // https://bitsofco.de/ios-safari-and-shrink-to-fit
 export const MetaViewport = () => (
@@ -145,11 +144,6 @@ class Page extends React.PureComponent<Props> {
           <MainNav isAuthenticated={isAuthenticated} />
           <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
           <PageFooter />
-          <Text color="primary">
-            f
-            <Text>o</Text>
-            k
-          </Text>
         </PageContainer>
       </ThemeProvider>
     );

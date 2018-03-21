@@ -11,16 +11,13 @@ import { defaultLocale } from '../../server/constants';
 // This component is used by A and Link, no need to use it directly.
 // TODO: https://github.com/este/este/issues/1399
 
-export type LocaleLinkBaseProps = {|
+export type LocaleLinkBaseProps = {
   href: string | Href,
   prefetch?: boolean,
   replace?: boolean,
-|};
+};
 
-type LocaleLinkProps = {|
-  ...LocaleLinkBaseProps,
-  children: React.Element<any>,
-|};
+type LocaleLinkProps = LocaleLinkBaseProps & { children: React.Element<any> };
 
 class LocaleLink extends React.PureComponent<LocaleLinkProps> {
   static maybeAddLocaleToHref = (href: Href, locale: string) => {
