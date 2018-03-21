@@ -4,22 +4,35 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
 import Theme from './Theme';
-import { StyleSheet, Text as NativeText } from 'react-native';
+import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
-  decoration?: 'none' | 'underline' | 'line-through',
+  decoration?: 'none' | 'underline' | 'line-through' | 'underline line-through',
   italic?: boolean,
   size?: number,
-  fixBrowserFontSmoothing?: boolean,
+  fixWebFontSmoothing?: boolean,
   style?: StyleObj,
   children?: React.Node,
 };
 
 // Strutural aka non-themeable styles.
+
+const styles = StyleSheet.create({
+  // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+  // tl;dr Enable font smoothing only for the light text on the dark background.
+  fixFontSmoothing:
+    Platform.OS === 'web'
+      ? // $FlowFixMe Nothing to fix, it's only for the web.
+        {
+          MozOsxFontSmoothing: 'grayscale',
+          WebkitFontSmoothing: 'antialiased',
+        }
+      : {},
+});
 
 const alignStyles = StyleSheet.create({
   left: { textAlign: 'left' },
@@ -40,16 +53,6 @@ const italicStyles = StyleSheet.create({
   italic: { fontStyle: 'italic' },
 });
 
-const browserStyles = StyleSheet.create({
-  // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-  // tldr; Fix font smoothing only for the light text on the dark background.
-  // $FlowFixMe Nothing to fix, it's only for browsers.
-  fixFontSmoothing: {
-    MozOsxFontSmoothing: 'grayscale',
-    WebkitFontSmoothing: 'antialiased',
-  },
-});
-
 class Text extends React.PureComponent<TextProps> {
   render() {
     const {
@@ -59,9 +62,10 @@ class Text extends React.PureComponent<TextProps> {
       decoration,
       italic,
       size = 0,
-      fixBrowserFontSmoothing,
+      fixWebFontSmoothing,
       style,
       children,
+      ...props
     } = this.props;
 
     return (
@@ -80,11 +84,10 @@ class Text extends React.PureComponent<TextProps> {
               italic != null &&
                 (italic ? italicStyles.italic : italicStyles.normal),
               theme.typography.fontSizeWithLineHeight(size),
-              fixBrowserFontSmoothing === true &&
-                process.browser === true &&
-                browserStyles.fixFontSmoothing,
+              fixWebFontSmoothing === true && styles.fixFontSmoothing,
               this.props.style,
             ]}
+            {...props}
           >
             {this.props.children}
           </NativeText>
