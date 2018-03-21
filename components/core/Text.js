@@ -105,6 +105,10 @@ class Text extends React.PureComponent<TextProps> {
             ...props,
           };
 
+          // This works.
+          // return <NativeText {...componentProps} />;
+          // return createElement('as', componentProps);
+          // This does not work. Why?
           return isWebComponent ? (
             createElement(asWeb, componentProps)
           ) : (
