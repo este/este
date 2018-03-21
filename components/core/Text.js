@@ -15,7 +15,7 @@ export type TextProps = {
   decoration?: 'none' | 'underline' | 'line-through' | 'underline line-through',
   italic?: boolean,
   size?: number,
-  fixWebFontSmoothing?: boolean,
+  fixWebFontSmoothing?: true,
   style?: StyleObj,
   children?: React.Node,
 };
@@ -25,7 +25,7 @@ export type TextProps = {
 const styles = StyleSheet.create({
   // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
   // tl;dr Enable font smoothing only for the light text on the dark background.
-  fixFontSmoothing:
+  fixWebFontSmoothing:
     Platform.OS === 'web'
       ? // $FlowFixMe Nothing to fix, it's only for the web.
         {
@@ -85,7 +85,7 @@ class Text extends React.PureComponent<TextProps> {
               italic != null &&
                 (italic ? italicStyles.italic : italicStyles.normal),
               theme.typography.fontSizeWithLineHeight(size),
-              fixWebFontSmoothing === true && styles.fixFontSmoothing,
+              fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
               this.props.style,
             ]}
             {...props}
