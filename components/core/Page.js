@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const PageBody = ({ children }) => <View style={styles.body}>{children}</View>;
-
 const PageFooter = () => (
   <Theme>
     {theme => (
@@ -107,7 +105,6 @@ class Page extends React.PureComponent<Props> {
     }
   };
 
-  // TODO: Move logic to PageBody. PR anyone?
   renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
     if (!authRequired)
@@ -142,7 +139,9 @@ class Page extends React.PureComponent<Props> {
         <ErrorPopup />
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
+          <View style={[styles.body, theme.styles.page.body]}>
+            {this.renderChildrenOrAuth(isAuthenticated)}
+          </View>
           <PageFooter />
         </PageContainer>
       </ThemeProvider>

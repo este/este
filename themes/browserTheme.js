@@ -47,6 +47,9 @@ const styles = {
     container: {
       width: 960,
     },
+    body: {
+      paddingTop: rhythm(2),
+    },
     footer: {
       borderColor: colors.gray,
       borderTopWidth: 1,
