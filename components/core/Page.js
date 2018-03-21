@@ -88,7 +88,6 @@ const PageFooter = () => (
 
 type Props = {|
   // Prop as function pattern.
-  // TODO: Fakt to potrebujeme?
   title: string | ((intl: IntlShape) => string),
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,

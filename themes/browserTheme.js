@@ -10,6 +10,7 @@ const typography = createTypography({
   fontSizeScale: 'step5', // perfect fourth, modularscale.com
   lineHeight: 24,
 });
+const { rhythm } = typography;
 
 const colors = {
   primary: openColor.blue[6],
@@ -40,7 +41,6 @@ const styles = {
     black: { color: colors.black },
     white: { color: colors.white },
     gray: { color: colors.gray },
-    // color: colors.black,
   }),
 
   page: StyleSheet.create({
@@ -51,8 +51,20 @@ const styles = {
       borderColor: colors.gray,
       borderTopWidth: 1,
       borderStyle: 'solid',
-      marginTop: typography.rhythm(2),
-      paddingVertical: typography.rhythm(1),
+      marginTop: rhythm(2),
+      paddingVertical: rhythm(1),
+    },
+  }),
+
+  mainNav: StyleSheet.create({
+    view: {
+      backgroundColor: colors.primary,
+      marginVertical: rhythm(0.5),
+      paddingHorizontal: rhythm(0.5),
+    },
+    a: {
+      paddingHorizontal: rhythm(0.5),
+      paddingVertical: rhythm(0.5),
     },
   }),
 };
