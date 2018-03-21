@@ -8,7 +8,6 @@ import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
 import P from '../components/core/P';
-import Box from '../components/core/Box';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
@@ -22,15 +21,15 @@ export const ManageYourWebsMessage = () => (
 );
 
 const Authenticated = ({ data }) => (
-  <Box>
+  <React.Fragment>
     <Heading size={1}>{<ManageYourWebsMessage />}</Heading>
     <Webs data={data} />
     <CreateWeb />
-  </Box>
+  </React.Fragment>
 );
 
 const NotAuthenticated = () => (
-  <Box>
+  <React.Fragment>
     <P>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
@@ -43,7 +42,7 @@ const NotAuthenticated = () => (
       The curious task of economics is to demonstrate to men how little they
       really know about what they imagine they can design.
     </Blockquote>
-  </Box>
+  </React.Fragment>
 );
 
 const Index = props => {
