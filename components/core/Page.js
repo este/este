@@ -107,7 +107,8 @@ class Page extends React.PureComponent<Props> {
     }
   };
 
-  renderChildren(isAuthenticated) {
+  // TODO: Move logic to PageBody. PR anyone?
+  renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
     if (!authRequired)
       return typeof this.props.children === 'function'
@@ -141,7 +142,7 @@ class Page extends React.PureComponent<Props> {
         <ErrorPopup />
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
+          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           <PageFooter />
         </PageContainer>
       </ThemeProvider>
