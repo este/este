@@ -7,7 +7,6 @@ import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
-// Not exact, because Text supports many props.
 export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
@@ -55,6 +54,14 @@ const italicStyles = StyleSheet.create({
 });
 
 class Text extends React.PureComponent<TextProps> {
+  static contextTypes = {
+    isInAParentText: PropTypes.bool,
+  };
+
+  context: {
+    isInAParentText: ?true,
+  };
+
   render() {
     const {
       align,
@@ -62,19 +69,20 @@ class Text extends React.PureComponent<TextProps> {
       color,
       decoration,
       italic,
-      size = 0,
+      size,
       fixWebFontSmoothing,
       style,
       children,
       ...props
     } = this.props;
+    const { isInAParentText } = this.context;
 
     return (
       <Theme>
         {theme => (
           <NativeText
             style={[
-              theme.styles.text.font,
+              !isInAParentText && theme.styles.text.font,
               align != null && alignStyles[align],
               bold != null &&
                 (bold
@@ -84,7 +92,10 @@ class Text extends React.PureComponent<TextProps> {
               decoration != null && decorationStyles[decoration],
               italic != null &&
                 (italic ? italicStyles.italic : italicStyles.normal),
-              theme.typography.fontSizeWithLineHeight(size),
+              size != null
+                ? theme.typography.fontSizeWithLineHeight(size)
+                : !isInAParentText &&
+                  theme.typography.fontSizeWithLineHeight(0),
               fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
               this.props.style,
             ]}
