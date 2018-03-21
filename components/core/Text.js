@@ -7,6 +7,7 @@ import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
+// Not exact, because Text supports many props.
 export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
