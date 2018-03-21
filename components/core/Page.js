@@ -79,7 +79,7 @@ const PageFooter = () => (
           <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
           <A href="https://twitter.com/steida">steida</A>
           {', '}
-          {/* <SwitchLocale /> */}
+          <SwitchLocale />
         </Text>
       </View>
     )}
