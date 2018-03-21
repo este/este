@@ -4,14 +4,17 @@ import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 import Text, { type TextProps } from './Text';
 import { withRouter } from 'next/router';
 
-export type AProps = LocaleLinkBaseProps & TextProps;
-
-type AState = {
-  hover: boolean,
+export type AProps = {
+  ...TextProps,
+  ...LocaleLinkBaseProps,
 };
 
+type AState = {|
+  hover: boolean,
+|};
+
 // Not pure, because I am not sure how withRouter works.
-class A extends React.Component<AProps & { router: Object }, AState> {
+class A extends React.Component<{ ...AProps, router: Object }, AState> {
   state = { hover: false };
 
   handleMouseEnter = () => {
@@ -35,18 +38,27 @@ class A extends React.Component<AProps & { router: Object }, AState> {
       typeof href === 'object' && href.pathname === router.pathname;
     const decoration = this.state.hover || isActive ? 'underline' : 'none';
 
-    return (
-      <LocaleLink href={href} prefetch={prefetch} replace={replace}>
-        <Text
-          as="a"
-          color={color}
-          decoration={decoration}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          {...props}
-        />
-      </LocaleLink>
-    );
+    // jde to fixnout? imho ne, ok, tak explicit
+    // ale, pak do textu neco pridam, a nebude fungovat
+    // shit, ale to se tak casto nebude stavat
+    // jinak explicit ale to by melo byt ok, imho
+    // dale, co s custom props? je jich tuna...
+    // predat dal?
+
+    return null;
+    // return (
+    //   <LocaleLink href={href} prefetch={prefetch} replace={replace}>
+    //     <Text
+    //       // as="a"
+    //       // render={}
+    //       color={color}
+    //       decoration={decoration}
+    //       // onMouseEnter={this.handleMouseEnter}
+    //       // onMouseLeave={this.handleMouseLeave}
+    //       // {...foo}
+    //     />
+    //   </LocaleLink>
+    // );
   }
 }
 

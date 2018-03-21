@@ -1,6 +1,7 @@
 // @flow
 import type { Element } from 'react';
 import type { Styles } from './browserTheme';
+import type { StyleSheetStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export type ColorName =
   | 'primary'
@@ -11,7 +12,8 @@ export type ColorName =
   | 'white'
   | 'gray';
 
-export type ColorProps = {
+// TODO: Tohle imho nebudu potrebovat, pac to bude taky color. Yop.
+export type ColorProps = {|
   primary?: boolean,
   success?: boolean,
   warning?: boolean,
@@ -19,9 +21,9 @@ export type ColorProps = {
   black?: boolean,
   white?: boolean,
   gray?: boolean,
-};
+|};
 
-type Colors = {
+type Colors = {|
   primary: string,
   success: string,
   warning: string,
@@ -29,38 +31,41 @@ type Colors = {
   black: string,
   white: string,
   gray: string,
-};
+|};
 
 export type Bold =
   | 'normal'
   | 'bold'
-  | 100
-  | 200
-  | 300
-  | 400
-  | 500
-  | 600
-  | 700
-  | 800
-  | 900;
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900';
 
 export type Theme = {
-  styles: Styles,
-  // remove and refactor
   typography: {|
     fontSize: number => number,
     lineHeight: number,
     rhythm: number => number,
+    fontSizeWithLineHeight: number => StyleSheetStyle,
   |},
+  styles: Styles,
   colors: Colors,
-  page: {|
-    backgroundColor: ColorName,
-  |},
+  // TODO: Probably remove all.
   text: {|
     bold: Bold,
     color: ColorName,
     fontFamily: string,
   |},
+  page: {|
+    backgroundColor: ColorName,
+  |},
+  pageContainer: { maxWidth: number },
+
   heading: {|
     bold: Bold,
     fontFamily: string,

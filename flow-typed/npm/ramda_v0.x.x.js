@@ -1,5 +1,5 @@
-// flow-typed signature: 0bfb497b3c0b55eb42ce36e313be23a2
-// flow-typed version: 973a250339/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 8bfc0e33f86ebe32d86c99cffd432404
+// flow-typed version: fa010af930/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1708,7 +1708,7 @@ declare module ramda {
     o: O
   ): Array<[string, T]>;
 
-  declare function values<T, O: { [k: string]: T }>(o: O): Array<T>;
+  declare function values<T>(o: T): Array<$Values<T>>;
 
   declare function valuesIn<T, O: { [k: string]: T }>(o: O): Array<T | any>;
 

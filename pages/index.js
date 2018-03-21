@@ -49,19 +49,17 @@ const NotAuthenticated = () => (
 const Index = props => {
   return (
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
-      {isAuthenticated => {
-        return (
-          <React.Fragment>
-            <Heading size={3}>Este</Heading>
-            {isAuthenticated ? (
-              <Authenticated data={props.data} />
-            ) : (
-              <NotAuthenticated />
-            )}
-          </React.Fragment>
-        );
-      }}
-    </Page>
+      {isAuthenticated => (
+        <React.Fragment>
+          <Heading size={3}>Este</Heading>
+          {isAuthenticated ? (
+            <Authenticated data={props.data} />
+          ) : (
+            <NotAuthenticated />
+          )}
+        </React.Fragment>
+      )}
+      </Page>
   );
 };
 

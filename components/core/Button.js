@@ -43,12 +43,14 @@ const BrowserButton = ({
   />
 );
 
-export type ButtonProps = ColorProps &
-  TextProps & {
-    disabled?: boolean,
-    onPress?: () => any,
-    outline?: boolean,
-  };
+export type ButtonProps = any;
+
+// export type ButtonProps = ColorProps &
+//   TextProps & {
+//     disabled?: boolean,
+//     onPress?: () => any,
+//     outline?: boolean,
+//   };
 
 class Button extends React.PureComponent<ButtonProps> {
   render() {

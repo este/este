@@ -1,46 +1,81 @@
 // @flow
 import * as React from 'react';
 import type { Theme } from './types';
-import openColor from './openColor';
-import typography from './typography';
+import createTypography from './createTypography';
+import openColor from 'open-color';
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  pageContainer: {
-    maxWidth: 960,
-  },
+const typography = createTypography({
+  fontSize: 16,
+  fontSizeScale: 'step5', // perfect fourth, modularscale.com
+  lineHeight: 24,
 });
+
+const colors = {
+  primary: openColor.blue[6],
+  success: openColor.green[5],
+  warning: openColor.orange[6],
+  danger: openColor.red[6],
+  black: openColor.gray[8],
+  white: openColor.white,
+  gray: openColor.gray[5],
+};
+
+// Namespaced styles ftw.
+
+const styles = {
+  text: StyleSheet.create({
+    // https://css-tricks.com/snippets/css/system-font-stack
+    font: {
+      color: colors.black,
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    },
+    weightNormal: { fontWeight: 'normal' },
+    weightBold: { fontWeight: '600' },
+    primary: { color: colors.primary },
+    success: { color: colors.success },
+    warning: { color: colors.warning },
+    danger: { color: colors.danger },
+    black: { color: colors.black },
+    white: { color: colors.white },
+    gray: { color: colors.gray },
+    // color: colors.black,
+  }),
+
+  page: StyleSheet.create({
+    container: {
+      width: 960,
+    },
+    footer: {
+      borderColor: colors.gray,
+      borderTopWidth: 1,
+      borderStyle: 'solid',
+      marginTop: typography.rhythm(2),
+      paddingVertical: typography.rhythm(1),
+    },
+  }),
+};
 
 export type Styles = typeof styles;
 
 export const browserTheme: Theme = {
+  typography,
+  colors,
   styles,
-
-  typography: typography({
-    fontSize: 16,
-    fontSizeScale: 'step5', // perfect fourth, modularscale.com
-    lineHeight: 24,
-  }),
-  colors: {
-    // yeun.github.io/open-color
-    primary: openColor.blue6,
-    success: openColor.green5,
-    warning: openColor.orange6,
-    danger: openColor.red6,
-    black: openColor.gray8,
-    white: openColor.white,
-    gray: openColor.gray5,
+  // TODO: Remove
+  text: {
+    bold: '600',
+    color: 'black',
+    // https://css-tricks.com/snippets/css/system-font-stack
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
+  // TODO: Remove
   page: {
     backgroundColor: 'white',
   },
-  text: {
-    bold: 600,
-    color: 'black',
-    // github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  },
+  pageContainer: { maxWidth: 960 },
   heading: {
     bold: 'bold',
     fontFamily:
@@ -104,13 +139,13 @@ export const browserTheme: Theme = {
 export const browserThemeDark: Theme = {
   ...browserTheme,
   colors: {
-    primary: openColor.blue6,
-    success: openColor.green5,
-    warning: openColor.orange6,
-    danger: openColor.red6,
-    black: openColor.gray8,
+    primary: openColor.blue[6],
+    success: openColor.green[5],
+    warning: openColor.orange[6],
+    danger: openColor.red[6],
+    black: openColor.gray[8],
     white: openColor.white,
-    gray: openColor.gray5,
+    gray: openColor.gray[5],
   },
   page: {
     ...browserTheme.page,

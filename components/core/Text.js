@@ -2,151 +2,93 @@
 import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import colorLib from 'color';
-import type { ColorName, Theme as ThemeType } from '../../themes/types';
+import type { ColorName } from '../../themes/types';
 import Theme from './Theme';
-
-/*
-  Text is the basic UI primitive for all text components.
-    Text -> Heading
-    Text -> Button
-    Text -> TextInput
-    etc.
-
-  Text inherits its styles.
-  https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
-
-  Text styles are restricted to React Native Text styles, but we can set any
-  browser style via style property directly.
-*/
+import { StyleSheet, Text as NativeText } from 'react-native';
+import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
   decoration?: 'none' | 'underline' | 'line-through',
-  fontFamily?: string,
   italic?: boolean,
-  lineHeight?: number,
   size?: number,
-  // TODO: shadowColor, shadowOffset, shadowRadius.
-} & BoxProps;
-
-// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
-export const computeFontSizeAndLineHeight = (
-  { typography }: ThemeType,
-  size: number,
-) => {
-  const fontSize = typography.fontSize(size);
-  const lines = Math.ceil(fontSize / typography.lineHeight);
-  const lineHeight = lines * typography.lineHeight;
-  return { fontSize, lineHeight };
+  fixBrowserFontSmoothing?: boolean,
+  style?: StyleObj,
+  children?: React.Node,
 };
 
-// http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-// tldr; Fix font smoothing only for light text on a dark background.
-const fixBrowserFontSmoothing = (color, backgroundColor) => {
-  const hasColorAndBackgroundColor =
-    color !== 'transparent' && backgroundColor !== 'transparent';
-  if (!hasColorAndBackgroundColor) return null;
-  const colorIsLighterThanBackgroundColor =
-    colorLib(color).luminosity() > colorLib(backgroundColor).luminosity();
-  if (!colorIsLighterThanBackgroundColor) return null;
-  return {
+// Strutural aka non-themeable styles.
+
+const alignStyles = StyleSheet.create({
+  left: { textAlign: 'left' },
+  right: { textAlign: 'right' },
+  center: { textAlign: 'center' },
+  justify: { textAlign: 'justify' },
+});
+
+const decorationStyles = StyleSheet.create({
+  none: { textDecorationLine: 'none' },
+  underline: { textDecorationLine: 'underline' },
+  'line-through': { textDecorationLine: 'line-through' },
+  'underline line-through': { textDecorationLine: 'underline line-through' },
+});
+
+const italicStyles = StyleSheet.create({
+  normal: { fontStyle: 'normal' },
+  italic: { fontStyle: 'italic' },
+});
+
+const browserStyles = StyleSheet.create({
+  // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+  // tldr; Fix font smoothing only for the light text on the dark background.
+  // $FlowFixMe Nothing to fix, it's only for browsers.
+  fixFontSmoothing: {
     MozOsxFontSmoothing: 'grayscale',
     WebkitFontSmoothing: 'antialiased',
-  };
-};
-
-// React Native rethinked styles and web should follow that. By that, we can
-// have multiplatform components. Check previous Este, I will re-add it soon.
-// https://github.com/Microsoft/reactxp/blob/master/src/web/Text.tsx
-const emulateReactNative = (theme, style, backgroundColor) => ({
-  ...{
-    position: 'relative',
-    display: 'inline',
-    // Why ReactXP uses it?
-    // flexGrow: 0,
-    // flexShrink: 0,
-    // That's because Android.
-    // overflow: 'hidden',
-    whiteSpace: 'pre-wrap',
-    overflowWrap: 'break-word',
-    msHyphens: 'auto',
   },
-  ...(backgroundColor
-    ? fixBrowserFontSmoothing(style.color, theme.colors[backgroundColor])
-    : null),
-  ...style,
-  lineHeight: `${style.lineHeight}px`, // browser needs px
 });
 
 class Text extends React.PureComponent<TextProps> {
-  static childContextTypes = {
-    hasParentEsteText: PropTypes.bool.isRequired,
-  };
-
-  static contextTypes = {
-    hasParentEsteText: PropTypes.bool,
-  };
-
-  getChildContext() {
-    // Let descendant components know that their nearest ancestor is Text.
-    return { hasParentEsteText: true };
-  }
-
-  context: { hasParentEsteText: boolean };
-
   render() {
+    const {
+      align,
+      bold,
+      color,
+      decoration,
+      italic,
+      size = 0,
+      fixBrowserFontSmoothing,
+      style,
+      children,
+    } = this.props;
+
     return (
       <Theme>
-        {theme => {
-          const { hasParentEsteText } = this.context;
-          const {
-            align = 'left',
-            bold = false,
-            color = theme.text.color,
-            decoration = 'none',
-            fontFamily = theme.text.fontFamily,
-            italic = false,
-            lineHeight,
-            size = 0,
-            ...props
-          } = this.props;
-
-          // Set all styles to ensure styles are isolated.
-          let style = {
-            color: theme.colors[color],
-            fontFamily,
-            ...computeFontSizeAndLineHeight(theme, size),
-            textAlign: align,
-            fontWeight: bold ? theme.text.bold : 'normal',
-            textDecoration: decoration,
-            fontStyle: italic ? 'italic' : 'normal',
-            ...(lineHeight != null ? { lineHeight } : null),
-            ...props.style,
-          };
-
-          // Enforce inheritance in a browser. All props are inherited by default.
-          // https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
-          if (hasParentEsteText) {
-            if (this.props.color == null) delete style.color;
-            if (this.props.fontFamily == null) delete style.fontFamily;
-            if (this.props.size == null) delete style.fontSize;
-            if (this.props.lineHeight == null) delete style.lineHeight;
-            if (this.props.align == null) delete style.textAlign;
-            if (this.props.bold == null) delete style.fontWeight;
-            if (this.props.decoration == null) delete style.textDecoration;
-            if (this.props.italic == null) delete style.fontStyle;
-          }
-
-          // flowlint sketchy-null:off
-          if (!props.isReactNative) {
-            style = emulateReactNative(theme, style, props.backgroundColor);
-          }
-
-          return <Box {...props} style={style} />;
-        }}
+        {theme => (
+          <NativeText
+            style={[
+              theme.styles.text.font,
+              align != null && alignStyles[align],
+              bold != null &&
+                (bold
+                  ? theme.styles.text.weightBold
+                  : theme.styles.text.weightNormal),
+              color != null && theme.styles.text[color],
+              decoration != null && decorationStyles[decoration],
+              italic != null &&
+                (italic ? italicStyles.italic : italicStyles.normal),
+              theme.typography.fontSizeWithLineHeight(size),
+              fixBrowserFontSmoothing === true &&
+                process.browser === true &&
+                browserStyles.fixFontSmoothing,
+              this.props.style,
+            ]}
+          >
+            {this.props.children}
+          </NativeText>
+        )}
       </Theme>
     );
   }

@@ -10,14 +10,16 @@ import Theme from './Theme';
 // For underline or the other effects, make a new component. Check TextInputBig.
 // TODO: Multiline and rows. Use content editable rather because of links?
 
-export type TextInputProps = {
-  disabled?: boolean,
-  error?: string | React.Element<any>,
-  label?: string | React.Element<any>,
-  maxLength?: number,
-  onChange?: (text: string) => void,
-  onSubmitEditing?: () => void,
-} & TextProps;
+export type TextInputProps = any;
+
+// export type TextInputProps = {
+//   disabled?: boolean,
+//   error?: string | React.Element<any>,
+//   label?: string | React.Element<any>,
+//   maxLength?: number,
+//   onChange?: (text: string) => void,
+//   onSubmitEditing?: () => void,
+// } & TextProps;
 
 const reactNativeEmulation = {
   backgroundColor: 'transparent',

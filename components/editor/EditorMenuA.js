@@ -8,15 +8,16 @@ class EditorMenuA extends React.PureComponent<AProps> {
   render() {
     return (
       <RovingTabIndex>
-        {(tabIndex, onFocus, onKeyDown) => (
-          <A
-            {...editorMenuItemProps}
-            tabIndex={tabIndex}
-            onFocus={onFocus}
-            onKeyDown={onKeyDown}
-            {...this.props}
-          />
-        )}
+        {(tabIndex, onFocus, onKeyDown) =>
+          null
+          // <A
+          //   {...editorMenuItemProps}
+          //   tabIndex={tabIndex}
+          //   onFocus={onFocus}
+          //   onKeyDown={onKeyDown}
+          //   {...this.props}
+          // />
+        }
       </RovingTabIndex>
     );
   }

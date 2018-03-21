@@ -7,9 +7,8 @@ import PageLoadingBar from './PageLoadingBar';
 import MainNav from '../MainNav';
 import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
-import Text from './Text';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import { ThemeProvider } from './Theme';
+import Theme, { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../../themes/browserTheme';
 import PageBackgroundColor from './PageBackgroundColor';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -17,6 +16,8 @@ import * as generated from './__generated__/Page.graphql';
 import Auth from './Auth';
 import withIntl from './withIntl';
 import PageContainer from './PageContainer';
+import Text from './Text';
+import { StyleSheet } from 'react-native';
 
 // https://bitsofco.de/ios-safari-and-shrink-to-fit
 export const MetaViewport = () => (
@@ -58,36 +59,37 @@ const Favicons = () => [
   />,
 ];
 
-const PageBody = ({ children }) => (
-  <View
-    style={{
-      // flex 1 to align Footer to bottom.
-      flex: 1,
-    }}
-  >
-    {children}
-  </View>
-);
+// Strutural styles.
+const styles = StyleSheet.create({
+  body: {
+    // flex 1 to align Footer to bottom.
+    flex: 1,
+  },
+  footer: {
+    flexDirection: 'row',
+  },
+});
+
+const PageBody = ({ children }) => <View style={styles.body}>{children}</View>;
 
 const PageFooter = () => (
-  <Text
-    borderColor="gray"
-    borderStyle="solid"
-    borderTopWidth={1}
-    flexDirection="row"
-    marginTop={2}
-    paddingVertical={1}
-    size={-1}
-  >
-    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-    <A href="https://twitter.com/steida">steida</A>
-    {', '}
-    <SwitchLocale />
-  </Text>
+  <Theme>
+    {theme => (
+      <View style={[styles.footer, theme.styles.page.footer]}>
+        <Text size={-1}>
+          <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
+          <A href="https://twitter.com/steida">steida</A>
+          {', '}
+          {/* <SwitchLocale /> */}
+        </Text>
+      </View>
+    )}
+  </Theme>
 );
 
 type Props = {|
   // Prop as function pattern.
+  // TODO: Fakt to potrebujeme?
   title: string | ((intl: IntlShape) => string),
   children: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
@@ -143,6 +145,11 @@ class Page extends React.PureComponent<Props> {
           <MainNav isAuthenticated={isAuthenticated} />
           <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
           <PageFooter />
+          <Text color="primary">
+            f
+            <Text>o</Text>
+            k
+          </Text>
         </PageContainer>
       </ThemeProvider>
     );

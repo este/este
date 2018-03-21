@@ -22,31 +22,32 @@ class SwitchLocale extends React.PureComponent<{}> {
   };
 
   render() {
-    return (
-      <Locale>
-        {({ locale, supportedLocales }) => (
-          <Text>
-            {supportedLocales
-              .filter(supportedLocale => supportedLocale !== locale)
-              .map((supportedLocale, index, locales) => (
-                // We can't use Next.js Link because we have to enforce full reload.
-                // Check server.js getAcceptedOrDefaultLocale.
-                <Text
-                  as="a"
-                  color="primary"
-                  href={SwitchLocale.getLocaleHref('/', supportedLocale)}
-                  key={supportedLocale}
-                >
-                  {SwitchLocale.localeToLanguageName(supportedLocale)}
-                  {supportedLocale.length > 1 &&
-                    index < locales.length - 1 &&
-                    ', '}
-                </Text>
-              ))}
-          </Text>
-        )}
-      </Locale>
-    );
+    return null;
+    // return (
+    //   <Locale>
+    //     {({ locale, supportedLocales }) => (
+    //       <Text>
+    //         {supportedLocales
+    //           .filter(supportedLocale => supportedLocale !== locale)
+    //           .map((supportedLocale, index, locales) => (
+    //             // We can't use Next.js Link because we have to enforce full reload.
+    //             // Check server.js getAcceptedOrDefaultLocale.
+    //               <Text
+    //                 as="a"
+    //                 color="primary"
+    //                 href={SwitchLocale.getLocaleHref('/', supportedLocale)}
+    //                 key={supportedLocale}
+    //               >
+    //                 {SwitchLocale.localeToLanguageName(supportedLocale)}
+    //                 {supportedLocale.length > 1 &&
+    //                   index < locales.length - 1 &&
+    //                 ', '}
+    //               </Text>
+    //           ))}
+    //       </Text>
+    //     )}
+    //   </Locale>
+    // );
   }
 }
 

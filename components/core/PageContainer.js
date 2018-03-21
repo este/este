@@ -8,7 +8,7 @@ type Props = {|
   children?: React.Node,
 |};
 
-// Structural styles.
+// Structural styles. Will be merged with theme styles.
 const styles = StyleSheet.create({
   pageContainer: {
     margin: 'auto',
@@ -22,7 +22,7 @@ class PageContainer extends React.PureComponent<Props> {
     return (
       <Theme>
         {theme => (
-          <View style={[styles.pageContainer, theme.styles.pageContainer]}>
+          <View style={[styles.pageContainer, theme.styles.page.container]}>
             {this.props.children}
           </View>
         )}

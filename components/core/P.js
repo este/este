@@ -5,20 +5,21 @@ import Theme from './Theme';
 
 class P extends React.PureComponent<TextProps> {
   render() {
-    return (
-      <Theme>
-        {theme => {
-          const {
-            marginBottom = theme.p.marginBottom,
-            maxWidth = theme.p.maxWidth,
-            ...props
-          } = this.props;
-          return (
-            <Text marginBottom={marginBottom} maxWidth={maxWidth} {...props} />
-          );
-        }}
-      </Theme>
-    );
+    return null;
+    // return (
+    //   <Theme>
+    //     {theme => {
+    //       const {
+    //         marginBottom = theme.p.marginBottom,
+    //         maxWidth = theme.p.maxWidth,
+    //         ...props
+    //       } = this.props;
+    //       return (
+    //         <Text marginBottom={marginBottom} maxWidth={maxWidth} {...props} />
+    //       );
+    //     }}
+    //   </Theme>
+    // );
   }
 }
 

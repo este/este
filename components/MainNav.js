@@ -7,19 +7,19 @@ import { FormattedMessage } from 'react-intl';
 
 // TODO: margin bottom 2 lineHeight
 
-const MainNavA = ({ href, title }) => (
-  <A
-    backgroundColor="primary"
-    bold
-    color="white"
-    href={href}
-    paddingHorizontal={0.5}
-    paddingVertical={0.5}
-    prefetch
-  >
-    <FormattedMessage {...title} />
-  </A>
-);
+const MainNavA = ({ href, title }) =>
+  null;
+  // <A
+  //   backgroundColor="primary"
+  //   bold
+  //   color="white"
+  //   href={href}
+  //   paddingHorizontal={0.5}
+  //   paddingVertical={0.5}
+  //   prefetch
+  // >
+  //   <FormattedMessage {...title} />
+  // </A>
 
 type MainNavProps = {|
   isAuthenticated: boolean,
