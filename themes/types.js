@@ -53,24 +53,10 @@ export type Theme = {
     rhythm: number => number,
     fontSizeWithLineHeight: number => StyleSheetStyle,
   |},
-  styles: Styles,
   colors: Colors,
+  styles: Styles,
+  pageBackgroundColor: ColorName,
   // TODO: Probably remove all.
-  text: {|
-    bold: Bold,
-    color: ColorName,
-    fontFamily: string,
-  |},
-  page: {|
-    backgroundColor: ColorName,
-  |},
-  pageContainer: { maxWidth: number },
-
-  heading: {|
-    bold: Bold,
-    fontFamily: string,
-    marginBottom: number,
-  |},
   p: {|
     marginBottom: number,
     maxWidth: number,

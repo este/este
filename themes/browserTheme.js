@@ -85,25 +85,8 @@ export const browserTheme: Theme = {
   typography,
   colors,
   styles,
-  // TODO: Remove. Merge styles to root? Remove typography and colors?
-  text: {
-    bold: '600',
-    color: 'black',
-    // https://css-tricks.com/snippets/css/system-font-stack
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-  },
+  pageBackgroundColor: 'white',
   // TODO: Remove
-  page: {
-    backgroundColor: 'white',
-  },
-  pageContainer: { maxWidth: 960 },
-  heading: {
-    bold: 'bold',
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    marginBottom: 1,
-  },
   p: {
     marginBottom: 1,
     maxWidth: 28,
@@ -169,12 +152,12 @@ export const browserThemeDark: Theme = {
     white: openColor.white,
     gray: openColor.gray[5],
   },
-  page: {
-    ...browserTheme.page,
-    backgroundColor: 'black',
-  },
-  text: {
-    ...browserTheme.text,
-    color: 'white',
-  },
+  // page: {
+  //   // ...browserTheme.page,
+  //   backgroundColor: 'black',
+  // },
+  // text: {
+  //   ...browserTheme.text,
+  //   color: 'white',
+  // },
 };
