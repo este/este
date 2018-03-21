@@ -57,10 +57,6 @@ export type Theme = {
   styles: Styles,
   pageBackgroundColor: ColorName,
   // TODO: Probably remove all.
-  p: {|
-    marginBottom: number,
-    maxWidth: number,
-  |},
   set: {|
     marginBottom: number,
     horizontalSpaceBetween: number,

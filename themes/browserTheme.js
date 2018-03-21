@@ -50,6 +50,13 @@ const styles = {
     },
   }),
 
+  p: StyleSheet.create({
+    text: {
+      marginBottom: rhythm(1),
+      maxWidth: rhythm(28),
+    },
+  }),
+
   page: StyleSheet.create({
     container: {
       width: 960,
@@ -87,10 +94,6 @@ export const browserTheme: Theme = {
   styles,
   pageBackgroundColor: 'white',
   // TODO: Remove
-  p: {
-    marginBottom: 1,
-    maxWidth: 28,
-  },
   set: {
     marginBottom: 1,
     horizontalSpaceBetween: 0.5,
