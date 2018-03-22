@@ -57,10 +57,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
           const placeholderTextColor = colorLib(
             theme.colors[theme.textColor],
           ).fade(0.5);
-          const showHeader = label != null && error != null;
-
-          // if (Boolean(autoFocus))
-          // return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
+          const showHeader = label != null || error != null;
 
           return (
             <View>

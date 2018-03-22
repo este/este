@@ -21,9 +21,7 @@ export const ToggleTheme = () => (
           const themeName = theme === browserTheme ? 'dark' : 'light';
           return (
             <Button
-              primary
-              outline
-              size={-1}
+              color="primary"
               onPress={() =>
                 mutate(UpdateUserMutation.commit, { input: { themeName } })
               }

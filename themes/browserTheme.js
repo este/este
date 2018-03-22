@@ -1,5 +1,4 @@
 // @flow
-import * as React from 'react';
 import type { Theme } from './types';
 import createTypography from './createTypography';
 import openColor from 'open-color';
@@ -124,6 +123,8 @@ const styles = {
   button: StyleSheet.create({
     text: {
       color: colors.black,
+    },
+    spaced: {
       borderRadius: 2,
       borderWidth: 1,
       marginVertical: rhythm(0.3),
@@ -186,23 +187,38 @@ export const browserTheme: Theme = {
   pageBackgroundColor: 'white',
 };
 
+const darkColors = {
+  primary: openColor.blue[6],
+  success: openColor.green[5],
+  warning: openColor.orange[6],
+  danger: openColor.red[6],
+  black: openColor.gray[8],
+  white: openColor.white,
+  gray: openColor.gray[5],
+};
+
+const darkTextColor = 'white';
+
 export const browserThemeDark: Theme = {
   ...browserTheme,
-  colors: {
-    primary: openColor.blue[6],
-    success: openColor.green[5],
-    warning: openColor.orange[6],
-    danger: openColor.red[6],
-    black: openColor.gray[8],
-    white: openColor.white,
-    gray: openColor.gray[5],
-  },
-  // page: {
-  //   // ...browserTheme.page,
-  //   backgroundColor: 'black',
-  // },
-  // text: {
-  //   ...browserTheme.text,
-  //   color: 'white',
-  // },
+  text: StyleSheet.create({
+    // https://css-tricks.com/snippets/css/system-font-stack
+    font: {
+      color: colors[darkTextColor],
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    },
+    weightNormal: { fontWeight: 'normal' },
+    weightBold: { fontWeight: bold },
+    primary: { color: darkColors.primary },
+    success: { color: darkColors.success },
+    warning: { color: darkColors.warning },
+    danger: { color: darkColors.danger },
+    black: { color: darkColors.black },
+    white: { color: darkColors.white },
+    gray: { color: darkColors.gray },
+  }),
+  colors: darkColors,
+  textColor: darkTextColor,
+  pageBackgroundColor: 'black',
 };

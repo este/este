@@ -10,6 +10,7 @@ import type { Errors } from '../server/error';
 import Mutation, { clientMutationId } from './core/Mutation';
 import Error from './core/Error';
 import * as validation from '../server/validation';
+import Row from './core/Row';
 
 type Fields = {|
   name: string,
@@ -75,15 +76,17 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
               autoFocus={this.state.errors.name}
               disabled={pending}
               error={<Error>{this.state.errors.name}</Error>}
-              onChange={name => this.setState({ name })}
+              onChangeText={name => this.setState({ name })}
               type="text"
               value={this.state.name}
             />
-            <CreateButton
-              primary
-              disabled={pending}
-              onPress={this.createWeb(mutate)}
-            />
+            <Row>
+              <CreateButton
+                color="primary"
+                disabled={pending}
+                onPress={this.createWeb(mutate)}
+              />
+            </Row>
           </Form>
         )}
       </Mutation>

@@ -1,5 +1,4 @@
 // @flow
-import Box, { type BoxProps } from './Box';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
