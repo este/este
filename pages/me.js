@@ -48,12 +48,8 @@ const Me = props => {
           <P bold>{me.email}</P>
         </Box>
       )}
-      {/* <Set>
-        <SignOutButton danger onPress={signOut} />
-        </Set>
-        <Set>
-        <ToggleTheme />
-      </Set> */}
+      <SignOutButton color="danger" onPress={signOut} />
+      {/* <ToggleTheme /> */}
     </Page>
   );
 };

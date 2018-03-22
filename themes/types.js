@@ -1,27 +1,6 @@
 // @flow
-import type { Element } from 'react';
-import type { Styles } from './browserTheme';
 import type { StyleSheetStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-
-export type ColorName =
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'black'
-  | 'white'
-  | 'gray';
-
-// TODO: Tohle imho nebudu potrebovat, pac to bude taky color. Yop.
-export type ColorProps = {|
-  primary?: boolean,
-  success?: boolean,
-  warning?: boolean,
-  danger?: boolean,
-  black?: boolean,
-  white?: boolean,
-  gray?: boolean,
-|};
+import type { Styles } from './browserTheme';
 
 type Colors = {|
   primary: string,
@@ -33,18 +12,7 @@ type Colors = {|
   gray: string,
 |};
 
-export type Bold =
-  | 'normal'
-  | 'bold'
-  | '100'
-  | '200'
-  | '300'
-  | '400'
-  | '500'
-  | '600'
-  | '700'
-  | '800'
-  | '900';
+export type ColorName = $Keys<Colors>;
 
 export type Theme = {
   typography: {|
@@ -55,14 +23,6 @@ export type Theme = {
   |},
   colors: Colors,
   styles: Styles,
-  textColor: string,
-  pageBackgroundColor: string,
-  // TODO: Probably remove all.
-  button: {|
-    borderRadius: number,
-    borderWidth: number,
-    marginVertical: number,
-    paddingVertical: number,
-    disabledOpacity: number,
-  |},
+  textColor: ColorName,
+  pageBackgroundColor: ColorName,
 };

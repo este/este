@@ -5,7 +5,7 @@ import Form from './Form';
 import TextInput from './TextInput';
 import TextInputBig from './TextInputBig';
 import Error from './Error';
-// import { SignInButton, SignUpButton } from './buttons';
+import { SignInButton, SignUpButton } from './buttons';
 import SigninMutation from '../../mutations/SigninMutation';
 import SignupMutation from '../../mutations/SignupMutation';
 import Router from 'next/router';
@@ -16,7 +16,8 @@ import type { Errors } from '../../server/error';
 import { defineMessages, type IntlShape } from 'react-intl';
 import type { Href } from '../app/sitemap';
 import withIntl from './withIntl';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Row from './Row';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -129,7 +130,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             <Form onSubmit={this.auth(mutate)}>
               <TextInputBig
                 autoComplete="email"
-                autoFocus={this.state.errors.email}
+                // autoFocus={this.state.errors.email}
                 disabled={pending}
                 error={<Error>{this.state.errors.email}</Error>}
                 keyboardType="email-address"
@@ -139,7 +140,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 value={this.state.email}
               />
               <TextInputBig
-                autoFocus={this.state.errors.password}
+                // autoFocus={this.state.errors.password}
                 disabled={pending}
                 error={<Error>{this.state.errors.password}</Error>}
                 name="password"
@@ -148,18 +149,17 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 secureTextEntry
                 value={this.state.password}
               />
-              {/*
+              <Row>
                 <SignInButton
-                disabled={pending}
-                onPress={this.auth(mutate)}
-                primary
+                  disabled={pending}
+                  onPress={this.auth(mutate)}
+                  color="primary"
                 />
                 <SignUpButton
-                disabled={pending}
-                onPress={this.auth(mutate, true)}
+                  disabled={pending}
+                  onPress={this.auth(mutate, true)}
                 />
-                </Set>
-              */}
+              </Row>
             </Form>
           </View>
         )}

@@ -14,7 +14,7 @@ export type TextProps = {
   decoration?: 'none' | 'underline' | 'line-through' | 'underline line-through',
   italic?: boolean,
   size?: number,
-  fixWebFontSmoothing?: true,
+  fixWebFontSmoothing?: boolean,
   style?: StyleObj,
   children?: React.Node,
 };

@@ -133,7 +133,7 @@ class Page extends React.PureComponent<Props> {
           <MetaViewport />
           <Favicons />
         </Head>
-        <PageBackgroundColor color={theme.pageBackgroundColor} />
+        <PageBackgroundColor color={theme.colors[theme.pageBackgroundColor]} />
         <PageLoadingBar color={theme.colors.primary} />
         <ErrorPopup />
         <PageContainer>

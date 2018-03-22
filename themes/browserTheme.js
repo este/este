@@ -21,7 +21,9 @@ const colors = {
   gray: openColor.gray[5],
 };
 
-const textColor = colors.black;
+const textColor = 'black';
+
+const bold = '600';
 
 // Namespaced styles ftw.
 
@@ -31,12 +33,12 @@ const styles = {
   text: StyleSheet.create({
     // https://css-tricks.com/snippets/css/system-font-stack
     font: {
-      color: textColor,
+      color: colors[textColor],
       fontFamily:
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     },
     weightNormal: { fontWeight: 'normal' },
-    weightBold: { fontWeight: '600' },
+    weightBold: { fontWeight: bold },
     primary: { color: colors.primary },
     success: { color: colors.success },
     warning: { color: colors.warning },
@@ -48,7 +50,7 @@ const styles = {
 
   heading: StyleSheet.create({
     text: {
-      fontWeight: '600',
+      fontWeight: bold,
       marginBottom: rhythm(1),
     },
   }),
@@ -118,6 +120,60 @@ const styles = {
       minHeight: rhythm(1),
     },
   }),
+
+  button: StyleSheet.create({
+    text: {
+      color: colors.black,
+      borderRadius: 2,
+      borderWidth: 1,
+      marginVertical: rhythm(0.3),
+      marginHorizontal: rhythm(0.5),
+      paddingVertical: rhythm(0.2),
+      paddingHorizontal: rhythm(1),
+    },
+    primary: {
+      backgroundColor: colors.primary,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    success: {
+      backgroundColor: colors.success,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    warning: {
+      backgroundColor: colors.warning,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    danger: {
+      backgroundColor: colors.danger,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    black: {
+      backgroundColor: colors.black,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    white: {
+      backgroundColor: colors.white,
+      color: colors.white,
+      fontWeight: bold,
+    },
+    gray: {
+      backgroundColor: colors.gray,
+      color: colors.white,
+      fontWeight: bold,
+    },
+  }),
+
+  row: StyleSheet.create({
+    view: {
+      marginTop: rhythm(1),
+      flexDirection: 'row',
+    },
+  }),
 };
 
 export type Styles = typeof styles;
@@ -127,15 +183,7 @@ export const browserTheme: Theme = {
   colors,
   styles,
   textColor,
-  pageBackgroundColor: colors.white,
-  // TODO: Remove
-  button: {
-    borderRadius: 2,
-    borderWidth: 1,
-    marginVertical: 0.3,
-    paddingVertical: 0.2,
-    disabledOpacity: 0.5,
-  },
+  pageBackgroundColor: 'white',
 };
 
 export const browserThemeDark: Theme = {

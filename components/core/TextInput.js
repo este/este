@@ -44,7 +44,9 @@ class TextInput extends React.PureComponent<TextInputProps> {
     return (
       <Theme>
         {theme => {
-          const placeholderTextColor = colorLib(theme.textColor).fade(0.5);
+          const placeholderTextColor = colorLib(
+            theme.colors[theme.textColor],
+          ).fade(0.5);
           const showHeader = label != null && error != null;
 
           return (
