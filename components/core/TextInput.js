@@ -5,8 +5,10 @@ import Theme from './Theme';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import colorLib from 'color';
 import Text from './Text';
+import AutoFocus from './AutoFocus';
 
 export type TextInputProps = {
+  autoFocus?: any,
   disabled?: boolean,
   label?: string | React.Element<any>,
   error?: string | React.Element<any>,
@@ -40,7 +42,15 @@ const TextInputError = ({ error, size }) =>
 
 class TextInput extends React.PureComponent<TextInputProps> {
   render() {
-    const { disabled, label, error, size = 0, style, ...props } = this.props;
+    const {
+      autoFocus,
+      disabled,
+      label,
+      error,
+      size = 0,
+      style,
+      ...props
+    } = this.props;
     return (
       <Theme>
         {theme => {
@@ -48,6 +58,9 @@ class TextInput extends React.PureComponent<TextInputProps> {
             theme.colors[theme.textColor],
           ).fade(0.5);
           const showHeader = label != null && error != null;
+
+          // if (Boolean(autoFocus))
+          // return <AutoFocus autoFocus={autoFocus}>{element}</AutoFocus>;
 
           return (
             <View>
@@ -64,16 +77,18 @@ class TextInput extends React.PureComponent<TextInputProps> {
                   )}
                 </View>
               )}
-              <TextInputNative
-                placeholderTextColor={placeholderTextColor.toString()}
-                style={[
-                  theme.styles.textInput.input,
-                  theme.typography.fontSizeWithLineHeight(size),
-                  disabled === true && theme.styles.textInput.disabled,
-                  style,
-                ]}
-                {...props}
-              />
+              <AutoFocus autoFocus={autoFocus}>
+                <TextInputNative
+                  placeholderTextColor={placeholderTextColor.toString()}
+                  style={[
+                    theme.styles.textInput.input,
+                    theme.typography.fontSizeWithLineHeight(size),
+                    disabled === true && theme.styles.textInput.disabled,
+                    style,
+                  ]}
+                  {...props}
+                />
+              </AutoFocus>
             </View>
           );
         }}

@@ -130,7 +130,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             <Form onSubmit={this.auth(mutate)}>
               <TextInputBig
                 autoComplete="email"
-                // autoFocus={this.state.errors.email}
+                autoFocus={this.state.errors.email}
                 disabled={pending}
                 error={<Error>{this.state.errors.email}</Error>}
                 keyboardType="email-address"
@@ -140,7 +140,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 value={this.state.email}
               />
               <TextInputBig
-                // autoFocus={this.state.errors.password}
+                autoFocus={this.state.errors.password}
                 disabled={pending}
                 error={<Error>{this.state.errors.password}</Error>}
                 name="password"
