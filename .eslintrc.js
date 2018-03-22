@@ -31,6 +31,7 @@ module.exports = {
     'react/no-unused-prop-types': 0, // Flow.
     'react/prop-types': 0, // Flow.
     'react/require-default-props': 0, // Flow.
+    'react/self-closing-comp': 0, // Prettier.
     'spaced-comment': 0, // We don't care.
     'react/no-multi-comp': 0, // Control freaky.
     'react/prefer-stateless-function': 0, // PureComponents ftw.

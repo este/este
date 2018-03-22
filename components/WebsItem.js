@@ -6,7 +6,6 @@ import Box from './core/Box';
 import * as generated from './__generated__/WebsItem.graphql';
 import { DeleteButton } from './core/buttons';
 import Text from './core/Text';
-import Set from './core/Set';
 import A from './core/A';
 import { FormattedRelative } from 'react-intl';
 import Mutation, { clientMutationId } from './core/Mutation';
@@ -46,19 +45,17 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
     return (
       <Box>
         <Text>{data.name}</Text>
-        <Set>
-          <Text color="gray" size={-1}>
-            <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
-              {data.domain}
-            </A>
+        <Text color="gray" size={-1}>
+          <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
+            {data.domain}
+          </A>
+          {', '}
+          <FormattedRelative value={data.updatedAt} />
+          <Text>
             {', '}
-            <FormattedRelative value={data.updatedAt} />
-            <Text>
-              {', '}
-              <DeleteWeb id={data.id} />
-            </Text>
+            <DeleteWeb id={data.id} />
           </Text>
-        </Set>
+        </Text>
       </Box>
     );
   }

@@ -96,9 +96,26 @@ const styles = {
   }),
 
   textInput: StyleSheet.create({
-    view: {
-      // marginBottom: rhythm(1),
-      // disabledOpacity: 0.5,
+    input: {
+      color: textColor,
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      marginBottom: rhythm(1),
+    },
+    disabled: {
+      opacity: 0.5,
+    },
+  }),
+
+  textInputBig: StyleSheet.create({
+    input: {
+      borderBottomWidth: 1,
+      borderColor: colors.gray,
+      paddingVertical: rhythm(0.5),
+      marginBottom: 0,
+    },
+    error: {
+      minHeight: rhythm(1),
     },
   }),
 };

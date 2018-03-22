@@ -5,7 +5,6 @@ import { CreateButton } from './core/buttons';
 import TextInputBig from './core/TextInputBig';
 import { FormattedMessage } from 'react-intl';
 import Text from './core/Text';
-import Set from './core/Set';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import type { Errors } from '../server/error';
 import Mutation, { clientMutationId } from './core/Mutation';
@@ -80,13 +79,11 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
               type="text"
               value={this.state.name}
             />
-            <Set>
-              <CreateButton
-                primary
-                disabled={pending}
-                onPress={this.createWeb(mutate)}
-              />
-            </Set>
+            <CreateButton
+              primary
+              disabled={pending}
+              onPress={this.createWeb(mutate)}
+            />
           </Form>
         )}
       </Mutation>

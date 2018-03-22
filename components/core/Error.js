@@ -105,12 +105,11 @@ class Error extends React.PureComponent<ErrorProps> {
       ...props
     } = this.props;
     if (!error) return null;
-    return null;
-    // return (
-    //   <Text bold={bold} color={color} {...props}>
-    //     {errorToMessage(error)}
-    //   </Text>
-    // );
+    return (
+      <Text bold={bold} color={color} {...props}>
+        {errorToMessage(error)}
+      </Text>
+    );
   }
 }
 

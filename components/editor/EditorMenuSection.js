@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-import Set, { type SetProps } from '../core/Set';
-
-class EditorMenuSection extends React.PureComponent<SetProps> {
+class EditorMenuSection extends React.PureComponent<{}> {
   render() {
-    const { marginBottom = 0, ...props } = this.props;
-    return <Set marginBottom={marginBottom} {...props} />;
+    return null;
+    // const { marginBottom = 0, ...props } = this.props;
+    // return <Set marginBottom={marginBottom} {...props} />;
   }
 }
 

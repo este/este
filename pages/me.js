@@ -3,7 +3,6 @@ import * as React from 'react';
 import Image from '../components/core/Image';
 import P from '../components/core/P';
 import Page from '../components/core/Page';
-import Set from '../components/core/Set';
 import { ToggleTheme } from '../components/core/Theme';
 import app from '../components/app';
 import gravatar from 'gravatar';
@@ -49,12 +48,12 @@ const Me = props => {
           <P bold>{me.email}</P>
         </Box>
       )}
-      <Set>
+      {/* <Set>
         <SignOutButton danger onPress={signOut} />
-      </Set>
-      <Set>
+        </Set>
+        <Set>
         <ToggleTheme />
-      </Set>
+      </Set> */}
     </Page>
   );
 };
