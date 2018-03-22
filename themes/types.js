@@ -55,33 +55,14 @@ export type Theme = {
   |},
   colors: Colors,
   styles: Styles,
-  pageBackgroundColor: ColorName,
+  textColor: string,
+  pageBackgroundColor: string,
   // TODO: Probably remove all.
-  set: {|
-    marginBottom: number,
-    horizontalSpaceBetween: number,
-    verticalSpaceBetween: number,
-  |},
   button: {|
     borderRadius: number,
     borderWidth: number,
     marginVertical: number,
     paddingVertical: number,
     disabledOpacity: number,
-  |},
-  form: {|
-    marginBottom: number,
-    maxWidth: number,
-  |},
-  textInput: {|
-    disabledOpacity: number,
-  |},
-  checkbox: {|
-    checkedIcon: Element<'svg'>,
-    uncheckedIcon: Element<'svg'>,
-  |},
-  radio: {|
-    checkedIcon: Element<'svg'>,
-    uncheckedIcon: Element<'svg'>,
   |},
 };
