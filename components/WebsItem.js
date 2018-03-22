@@ -2,15 +2,15 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import AreYouSureConfirm from './core/AreYouSureConfirm';
-import Box from './core/Box';
 import * as generated from './__generated__/WebsItem.graphql';
 import { DeleteButton } from './core/buttons';
 import Text from './core/Text';
-import Set from './core/Set';
 import A from './core/A';
+import P from './core/P';
 import { FormattedRelative } from 'react-intl';
 import Mutation, { clientMutationId } from './core/Mutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
+import { View } from 'react-native';
 
 const DeleteWeb = ({ id }) => (
   <Mutation>
@@ -18,7 +18,7 @@ const DeleteWeb = ({ id }) => (
       <AreYouSureConfirm>
         {confirm => (
           <DeleteButton
-            color="warning"
+            inline
             disabled={pending}
             onPress={() => {
               if (!confirm()) return;
@@ -27,7 +27,6 @@ const DeleteWeb = ({ id }) => (
               };
               mutate(DeleteWebMutation.commit, variables);
             }}
-            paddingHorizontal={0}
             size={-1}
           />
         )}
@@ -44,9 +43,9 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
     return (
-      <Box>
+      <View>
         <Text>{data.name}</Text>
-        <Set>
+        <P>
           <Text color="gray" size={-1}>
             <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
               {data.domain}
@@ -58,8 +57,8 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
               <DeleteWeb id={data.id} />
             </Text>
           </Text>
-        </Set>
-      </Box>
+        </P>
+      </View>
     );
   }
 }

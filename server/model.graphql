@@ -6,7 +6,7 @@
 # http://graphql.org/learn/best-practices/#nullability
 # https://medium.com/@calebmer/when-to-use-graphql-non-null-fields-4059337f6fc8
 # http://graphql.org/learn/schema/
-# tldr; Use non-nullable only when you are sure API will never change.
+# tl;dr Use non-nullable only when you are sure API will never change.
 
 # TODO: Remove clientMutationId.
 # clientMutationId is FBISM which will be removed from Relay soon.

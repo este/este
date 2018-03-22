@@ -79,7 +79,8 @@ class ErrorPopup extends React.PureComponent<{}> {
               margin="auto"
               paddingHorizontal={1}
               paddingVertical={0.25}
-              style={{ position: 'fixed', transform: 'translateX(-50%)' }}
+              // style={{ position: 'absolute' }}
+              // style={{ position: 'fixed', transform: 'translateX(-50%)' }}
               top={0}
               zIndex={1}
             >

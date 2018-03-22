@@ -1,5 +1,5 @@
 // @flow
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Head from 'next/head';
@@ -7,9 +7,8 @@ import PageLoadingBar from './PageLoadingBar';
 import MainNav from '../MainNav';
 import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
-import Text from './Text';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import { ThemeProvider } from './Theme';
+import Theme, { ThemeProvider } from './Theme';
 import { browserTheme, browserThemeDark } from '../../themes/browserTheme';
 import PageBackgroundColor from './PageBackgroundColor';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -17,6 +16,7 @@ import * as generated from './__generated__/Page.graphql';
 import Auth from './Auth';
 import withIntl from './withIntl';
 import PageContainer from './PageContainer';
+import Text from './Text';
 
 // https://bitsofco.de/ios-safari-and-shrink-to-fit
 export const MetaViewport = () => (
@@ -58,32 +58,30 @@ const Favicons = () => [
   />,
 ];
 
-const PageBody = ({ children }) => (
-  <View
-    style={{
-      // flex 1 to align Footer to bottom.
-      flex: 1,
-    }}
-  >
-    {children}
-  </View>
-);
+// Strutural styles.
+const styles = StyleSheet.create({
+  body: {
+    // flex 1 to align Footer to bottom.
+    flex: 1,
+  },
+  footer: {
+    flexDirection: 'row',
+  },
+});
 
 const PageFooter = () => (
-  <Text
-    borderColor="gray"
-    borderStyle="solid"
-    borderTopWidth={1}
-    flexDirection="row"
-    marginTop={2}
-    paddingVertical={1}
-    size={-1}
-  >
-    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-    <A href="https://twitter.com/steida">steida</A>
-    {', '}
-    <SwitchLocale />
-  </Text>
+  <Theme>
+    {theme => (
+      <View style={[styles.footer, theme.styles.page.footer]}>
+        <Text size={-1}>
+          <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
+          <A href="https://twitter.com/steida">steida</A>
+          {', '}
+          <SwitchLocale />
+        </Text>
+      </View>
+    )}
+  </Theme>
 );
 
 type Props = {|
@@ -107,7 +105,7 @@ class Page extends React.PureComponent<Props> {
     }
   };
 
-  renderChildren(isAuthenticated) {
+  renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
     if (!authRequired)
       return typeof this.props.children === 'function'
@@ -123,7 +121,6 @@ class Page extends React.PureComponent<Props> {
       // That's how we gradually check nullable types.
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
-    const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
 
     return (
       <ThemeProvider value={theme}>
@@ -136,12 +133,14 @@ class Page extends React.PureComponent<Props> {
           <MetaViewport />
           <Favicons />
         </Head>
-        <PageBackgroundColor color={pageBackgroundColor} />
+        <PageBackgroundColor color={theme.colors[theme.pageBackgroundColor]} />
         <PageLoadingBar color={theme.colors.primary} />
         <ErrorPopup />
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody>{this.renderChildren(isAuthenticated)}</PageBody>
+          <View style={[styles.body, theme.styles.page.body]}>
+            {this.renderChildrenOrAuth(isAuthenticated)}
+          </View>
           <PageFooter />
         </PageContainer>
       </ThemeProvider>

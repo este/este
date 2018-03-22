@@ -5,17 +5,11 @@ import Theme from './Theme';
 
 class P extends React.PureComponent<TextProps> {
   render() {
+    const { style, ...props } = this.props;
     return (
       <Theme>
         {theme => {
-          const {
-            marginBottom = theme.p.marginBottom,
-            maxWidth = theme.p.maxWidth,
-            ...props
-          } = this.props;
-          return (
-            <Text marginBottom={marginBottom} maxWidth={maxWidth} {...props} />
-          );
+          return <Text style={[theme.styles.p.text, style]} {...props} />;
         }}
       </Theme>
     );

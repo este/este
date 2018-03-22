@@ -8,10 +8,10 @@ import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 
 type LinkProps = LocaleLinkBaseProps & { children: React.Node };
 
-const Link = ({ children, href, prefetch, replace }: LinkProps) => (
-  <LocaleLink href={href} prefetch={prefetch} replace={replace}>
-    <a>{children}</a>
-  </LocaleLink>
-);
+const Link = ({ children, href, prefetch, replace }: LinkProps) =>
+  null;
+  // <LocaleLink href={href} prefetch={prefetch} replace={replace}>
+  //   <a>{children}</a>
+  // </LocaleLink>
 
 export default Link;

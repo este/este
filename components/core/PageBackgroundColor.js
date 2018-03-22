@@ -6,6 +6,7 @@ type Props = {|
   color: string,
 |};
 
+// TODO: Should be PageBackgroundColor.web.js
 class PageBackgroundColor extends React.PureComponent<Props> {
   render() {
     const { color } = this.props;

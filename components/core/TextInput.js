@@ -1,103 +1,92 @@
 // @flow
 import * as React from 'react';
-import Box from './Box';
-import Set from './Set';
-import Text, { type TextProps } from './Text';
-import colorLib from 'color';
+import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
 import Theme from './Theme';
-
-// Universal text input component. By default, it looks like editable text.
-// For underline or the other effects, make a new component. Check TextInputBig.
-// TODO: Multiline and rows. Use content editable rather because of links?
+import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import colorLib from 'color';
+import Text from './Text';
+import AutoFocus from './AutoFocus';
 
 export type TextInputProps = {
+  autoFocus?: any,
   disabled?: boolean,
-  error?: string | React.Element<any>,
   label?: string | React.Element<any>,
-  maxLength?: number,
-  onChange?: (text: string) => void,
-  onSubmitEditing?: () => void,
-} & TextProps;
-
-const reactNativeEmulation = {
-  backgroundColor: 'transparent',
-  outline: 'none',
+  error?: string | React.Element<any>,
+  size?: number,
+  style?: StyleObj,
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+  },
+});
+
+const TextInputLabel = ({ label, size }) =>
+  typeof label === 'string' ? (
+    <Text bold size={size}>
+      {label}
+    </Text>
+  ) : (
+    label
+  );
+
+const TextInputError = ({ error, size }) =>
+  typeof error === 'string' ? (
+    <Text bold color="danger" size={size}>
+      {error}
+    </Text>
+  ) : (
+    error
+  );
 
 class TextInput extends React.PureComponent<TextInputProps> {
   render() {
+    const {
+      autoFocus,
+      disabled,
+      label,
+      error,
+      size = 0,
+      style,
+      ...props
+    } = this.props;
     return (
       <Theme>
         {theme => {
-          const {
-            color = theme.text.color,
-            error,
-            label,
-            onChange,
-            onSubmitEditing,
-            size = 0,
-            style,
-            ...props
-          } = this.props;
-          const placeholderColor = colorLib(theme.colors[color]).fade(0.5);
-          const placeholderClassName = `placeholderColor${placeholderColor.rgbNumber()}`;
+          const placeholderTextColor = colorLib(
+            theme.colors[theme.textColor],
+          ).fade(0.5);
+          const showHeader = label != null || error != null;
 
           return (
-            <Box>
-              <style jsx global>{`
-                :global(.${placeholderClassName})::placeholder {
-                  color: ${placeholderColor.toString()};
-                }
-              `}</style>
-              <Set marginBottom={0}>
-                {label != null &&
-                  (typeof label === 'string' ? (
-                    <Text bold size={size}>
-                      {label}
-                    </Text>
-                  ) : (
-                    label
-                  ))}
-                {error != null &&
-                  (typeof error === 'string' ? (
-                    <Text bold color="danger" size={size}>
-                      {error}
-                    </Text>
-                  ) : (
-                    error
-                  ))}
-              </Set>
-              <Text
-                as="input"
-                className={placeholderClassName}
-                color={color}
-                size={size}
-                {...(onChange
-                  ? {
-                      onChange: (e: { currentTarget: HTMLInputElement }) => {
-                        if (!onChange) return;
-                        onChange(e.currentTarget.value);
-                      },
-                    }
-                  : null)}
-                {...(onSubmitEditing
-                  ? {
-                      onKeyDown: (e: SyntheticKeyboardEvent<>) => {
-                        if (e.key !== 'Enter' || !onSubmitEditing) return;
-                        onSubmitEditing();
-                      },
-                    }
-                  : null)}
-                {...(props.disabled === true
-                  ? { opacity: theme.textInput.disabledOpacity }
-                  : null)}
-                {...props}
-                style={{
-                  ...reactNativeEmulation,
-                  ...style,
-                }}
-              />
-            </Box>
+            <View>
+              {showHeader && (
+                <View style={styles.header}>
+                  {label != null && (
+                    <TextInputLabel label={label} size={size} />
+                  )}
+                  {error != null && (
+                    <React.Fragment>
+                      <Text> </Text>
+                      <TextInputError error={error} size={size} />
+                    </React.Fragment>
+                  )}
+                </View>
+              )}
+              <AutoFocus autoFocus={autoFocus}>
+                <TextInputNative
+                  placeholderTextColor={placeholderTextColor.toString()}
+                  style={[
+                    theme.styles.textInput.input,
+                    theme.typography.fontSizeWithLineHeight(size),
+                    disabled === true && theme.styles.textInput.disabled,
+                    style,
+                  ]}
+                  {...props}
+                />
+              </AutoFocus>
+            </View>
           );
         }}
       </Theme>

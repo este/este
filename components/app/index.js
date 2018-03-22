@@ -57,7 +57,7 @@ type AppProps = {|
 |};
 
 const app = (
-  // Stateless, because state belongs elsewhere.
+  // The page is stateless because the state belongs to GraphQL or a component.
   Page: React.StatelessFunctionalComponent<PageProps>,
   options?: {|
     query?: GraphQLTaggedNode,

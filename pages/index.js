@@ -8,10 +8,10 @@ import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
 import P from '../components/core/P';
-import Box from '../components/core/Box';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
+import { View } from 'react-native';
 
 // That's how message are reused.
 export const ManageYourWebsMessage = () => (
@@ -22,15 +22,15 @@ export const ManageYourWebsMessage = () => (
 );
 
 const Authenticated = ({ data }) => (
-  <Box>
+  <View style={{ flex: 1 }}>
     <Heading size={1}>{<ManageYourWebsMessage />}</Heading>
     <Webs data={data} />
     <CreateWeb />
-  </Box>
+  </View>
 );
 
 const NotAuthenticated = () => (
-  <Box>
+  <View>
     <P>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
@@ -43,24 +43,22 @@ const NotAuthenticated = () => (
       The curious task of economics is to demonstrate to men how little they
       really know about what they imagine they can design.
     </Blockquote>
-  </Box>
+  </View>
 );
 
 const Index = props => {
   return (
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
-      {isAuthenticated => {
-        return (
-          <React.Fragment>
-            <Heading size={3}>Este</Heading>
-            {isAuthenticated ? (
-              <Authenticated data={props.data} />
-            ) : (
-              <NotAuthenticated />
-            )}
-          </React.Fragment>
-        );
-      }}
+      {isAuthenticated => (
+        <React.Fragment>
+          <Heading size={3}>Este</Heading>
+          {isAuthenticated ? (
+            <Authenticated data={props.data} />
+          ) : (
+            <NotAuthenticated />
+          )}
+        </React.Fragment>
+      )}
     </Page>
   );
 };

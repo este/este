@@ -6,12 +6,11 @@ import { withRouter } from 'next/router';
 
 export type AProps = LocaleLinkBaseProps & TextProps;
 
-type AState = {
+type AState = {|
   hover: boolean,
-};
+|};
 
-// Not pure, because I am not sure how withRouter works.
-class A extends React.Component<AProps & { router: Object }, AState> {
+class A extends React.PureComponent<AProps & { router: Object }, AState> {
   state = { hover: false };
 
   handleMouseEnter = () => {
@@ -38,7 +37,7 @@ class A extends React.Component<AProps & { router: Object }, AState> {
     return (
       <LocaleLink href={href} prefetch={prefetch} replace={replace}>
         <Text
-          as="a"
+          accessibilityRole="link"
           color={color}
           decoration={decoration}
           onMouseEnter={this.handleMouseEnter}

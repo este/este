@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
-import Image from '../components/core/Image';
 import P from '../components/core/P';
 import Page from '../components/core/Page';
-import Set from '../components/core/Set';
 import { ToggleTheme } from '../components/core/Theme';
 import app from '../components/app';
 import gravatar from 'gravatar';
@@ -11,8 +9,9 @@ import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
 import { deleteCookie } from '../components/app/cookie';
-import Box from '../components/core/Box';
 import * as generated from './__generated__/meQuery.graphql';
+import { Image } from 'react-native';
+import Row from '../components/core/Row';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -39,22 +38,25 @@ const Me = props => {
       data={props.data}
     >
       {me != null && (
-        <Box>
-          <Image
-            marginBottom={1}
-            size={{ height: 100, width: 100 }}
-            src={getGravatarUrl(me.email)}
-            title={me.email}
-          />
+        <React.Fragment>
+          <P>
+            <Image
+              source={getGravatarUrl(me.email)}
+              style={{
+                height: 100,
+                width: 100,
+              }}
+              title={me.email}
+            />
+          </P>
+
           <P bold>{me.email}</P>
-        </Box>
+        </React.Fragment>
       )}
-      <Set>
-        <SignOutButton danger onPress={signOut} />
-      </Set>
-      <Set>
+      <Row>
+        <SignOutButton color="danger" onPress={signOut} />
         <ToggleTheme />
-      </Set>
+      </Row>
     </Page>
   );
 };

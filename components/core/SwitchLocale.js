@@ -29,10 +29,11 @@ class SwitchLocale extends React.PureComponent<{}> {
             {supportedLocales
               .filter(supportedLocale => supportedLocale !== locale)
               .map((supportedLocale, index, locales) => (
-                // We can't use Next.js Link because we have to enforce full reload.
+                // We can't use Next.js Link via core/A because we have to
+                // enforce full reload.
                 // Check server.js getAcceptedOrDefaultLocale.
                 <Text
-                  as="a"
+                  accessibilityRole="link"
                   color="primary"
                   href={SwitchLocale.getLocaleHref('/', supportedLocale)}
                   key={supportedLocale}

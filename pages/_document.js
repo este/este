@@ -11,10 +11,14 @@ let index = 0;
 // Force Next-generated DOM elements to fill their parent's height.
 // Not required for using of react-native-web, but helps normalize
 // layout for top-level wrapping elements.
+// Disable input, textarea outline because blinking caret is enough.
 const normalizeNextElements = `
   body > div:first-child,
   #__next {
     height: 100%;
+  }
+  input, textarea {
+    outline: none;
   }
 `;
 

@@ -5,24 +5,11 @@ import Theme from './Theme';
 
 class Heading extends React.PureComponent<TextProps> {
   render() {
+    const { style, ...props } = this.props;
     return (
       <Theme>
         {theme => {
-          const {
-            bold = true,
-            fontFamily = theme.heading.fontFamily,
-            marginBottom = theme.heading.marginBottom,
-            ...props
-          } = this.props;
-
-          return (
-            <Text
-              bold={bold}
-              fontFamily={fontFamily}
-              marginBottom={marginBottom}
-              {...props}
-            />
-          );
+          return <Text style={[theme.styles.heading.text, style]} {...props} />;
         }}
       </Theme>
     );
