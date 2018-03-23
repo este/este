@@ -4,6 +4,24 @@ import createTypography from './createTypography';
 import openColor from 'open-color';
 import { StyleSheet } from 'react-native';
 
+// Please, make a Flow libdef and send pull request to
+// https://github.com/flowtype/flow-typed. I don't have a time.
+// white: string,
+// black: string,
+// gray: Array<string>,
+// red: Array<string>,
+// pink: Array<string>,
+// grape: Array<string>,
+// violet: Array<string>,
+// indigo: Array<string>,
+// blue: Array<string>,
+// cyan: Array<string>,
+// teal: Array<string>,
+// green: Array<string>,
+// lime: Array<string>,
+// yellow: Array<string>,
+// orange: Array<string>,
+
 const typography = createTypography({
   fontSize: 16,
   fontSizeScale: 'step5', // perfect fourth, modularscale.com
