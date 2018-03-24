@@ -1,5 +1,5 @@
 // @flow
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Head from 'next/head';
@@ -15,7 +15,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import Auth from './Auth';
 import withIntl from './withIntl';
-import PageContainer from './PageContainer';
 import Text from './Text';
 
 // https://bitsofco.de/ios-safari-and-shrink-to-fit
@@ -58,16 +57,43 @@ const Favicons = () => [
   />,
 ];
 
-// Strutural styles.
 const styles = StyleSheet.create({
-  body: {
-    // flex 1 to align Footer to bottom.
+  scrollView: {
+    minHeight: '100%',
+  },
+  container: {
     flex: 1,
+    margin: 'auto',
+  },
+  body: {
+    flex: 1, // make footer sticky
   },
   footer: {
     flexDirection: 'row',
   },
 });
+
+const PageContainer = ({ children }) => (
+  <Theme>
+    {theme => (
+      // Why ScrollView https://github.com/necolas/react-native-web/issues/829
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={[styles.container, theme.styles.page.container]}
+      >
+        {children}
+      </ScrollView>
+    )}
+  </Theme>
+);
+
+const PageBody = ({ children }) => (
+  <Theme>
+    {theme => (
+      <View style={[styles.body, theme.styles.page.body]}>{children}</View>
+    )}
+  </Theme>
+);
 
 const PageFooter = () => (
   <Theme>
@@ -138,9 +164,7 @@ class Page extends React.PureComponent<Props> {
         <ErrorPopup />
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
-          <View style={[styles.body, theme.styles.page.body]}>
-            {this.renderChildrenOrAuth(isAuthenticated)}
-          </View>
+          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           <PageFooter />
         </PageContainer>
       </ThemeProvider>

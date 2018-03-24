@@ -5,6 +5,7 @@ import { AppRegistry } from 'react-native-web';
 
 // https://github.com/zeit/next.js/tree/master/examples/with-react-native-web
 // https://github.com/zeit/next.js/tree/master/examples/with-react-intl
+// https://github.com/zeit/next.js/tree/canary/examples/with-react-native-web
 
 let index = 0;
 
