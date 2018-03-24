@@ -13,8 +13,7 @@ import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 import { View } from 'react-native';
 
-// That's how message are reused.
-export const ManageYourWebsMessage = () => (
+const ManageYourWebsMessage = () => (
   <FormattedMessage
     defaultMessage="Manage your webs"
     id="index.manageYourWebs"
