@@ -19,6 +19,7 @@ const DeleteWeb = ({ id }) => (
         {confirm => (
           <DeleteButton
             inline
+            color="warning"
             disabled={pending}
             onPress={() => {
               if (!confirm()) return;

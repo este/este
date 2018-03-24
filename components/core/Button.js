@@ -9,17 +9,21 @@ export type ButtonProps = TextProps & { inline?: boolean };
 class Button extends React.PureComponent<ButtonProps> {
   render() {
     const { inline, color, style, ...props } = this.props;
+    // Fix font smoothing only for buttons with background.
+    const fixWebFontSmoothing = inline !== true && color != null;
+
     return (
       <Theme>
         {theme => (
           <TouchableOpacity>
             <Text
-              fixWebFontSmoothing={!!color}
+              fixWebFontSmoothing={fixWebFontSmoothing}
+              {...(inline != null ? { color } : {})}
               style={[
                 theme.styles.button.text,
-                inline == null && theme.styles.button.spaced,
                 style,
-                color != null && theme.styles.button[color],
+                inline == null && theme.styles.button.spaced,
+                inline == null && color != null && theme.styles.button[color],
               ]}
               {...props}
             />

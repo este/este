@@ -141,6 +141,7 @@ const styles = {
   button: StyleSheet.create({
     text: {
       color: colors.black,
+      fontWeight: bold,
     },
     spaced: {
       borderRadius: 2,
@@ -153,37 +154,30 @@ const styles = {
     primary: {
       backgroundColor: colors.primary,
       color: colors.white,
-      fontWeight: bold,
     },
     success: {
       backgroundColor: colors.success,
       color: colors.white,
-      fontWeight: bold,
     },
     warning: {
       backgroundColor: colors.warning,
       color: colors.white,
-      fontWeight: bold,
     },
     danger: {
       backgroundColor: colors.danger,
       color: colors.white,
-      fontWeight: bold,
     },
     black: {
       backgroundColor: colors.black,
       color: colors.white,
-      fontWeight: bold,
     },
     white: {
       backgroundColor: colors.white,
       color: colors.white,
-      fontWeight: bold,
     },
     gray: {
       backgroundColor: colors.gray,
       color: colors.white,
-      fontWeight: bold,
     },
   }),
 };
@@ -198,7 +192,7 @@ export const lightTheme: Theme = {
   pageBackgroundColor: 'white',
 };
 
-// Dark
+// Dark theme
 
 const darkColors = {
   primary: openColor.blue[6],
@@ -243,6 +237,49 @@ export const darkTheme: Theme = {
       },
       disabled: {
         opacity: 0.5,
+      },
+    }),
+
+    button: StyleSheet.create({
+      text: {
+        color: colors.white,
+        fontWeight: bold,
+      },
+      spaced: {
+        borderRadius: 2,
+        borderWidth: 1,
+        marginVertical: rhythm(0.3),
+        marginHorizontal: rhythm(0.5),
+        paddingVertical: rhythm(0.2),
+        paddingHorizontal: rhythm(1),
+      },
+      primary: {
+        backgroundColor: colors.primary,
+        color: colors.white,
+      },
+      success: {
+        backgroundColor: colors.success,
+        color: colors.white,
+      },
+      warning: {
+        backgroundColor: colors.warning,
+        color: colors.white,
+      },
+      danger: {
+        backgroundColor: colors.danger,
+        color: colors.white,
+      },
+      black: {
+        backgroundColor: colors.black,
+        color: colors.white,
+      },
+      white: {
+        backgroundColor: colors.white,
+        color: colors.white,
+      },
+      gray: {
+        backgroundColor: colors.gray,
+        color: colors.white,
       },
     }),
   },

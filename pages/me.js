@@ -49,7 +49,6 @@ const Me = props => {
               title={me.email}
             />
           </P>
-
           <P bold>{me.email}</P>
         </React.Fragment>
       )}
