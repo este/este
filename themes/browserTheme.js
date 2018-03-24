@@ -186,13 +186,6 @@ const styles = {
       fontWeight: bold,
     },
   }),
-
-  row: StyleSheet.create({
-    view: {
-      marginTop: rhythm(1),
-      flexDirection: 'row',
-    },
-  }),
 };
 
 export type Styles = typeof styles;

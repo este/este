@@ -1,21 +1,20 @@
 // @flow
 import * as React from 'react';
-import { View } from 'react-native';
-import Theme from './Theme';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {|
   children: React.Node,
 |};
 
+const styles = StyleSheet.create({
+  view: {
+    flexDirection: 'row',
+  },
+});
+
 class Row extends React.PureComponent<Props> {
   render() {
-    return (
-      <Theme>
-        {theme => (
-          <View style={theme.styles.row.view}>{this.props.children}</View>
-        )}
-      </Theme>
-    );
+    return <View style={styles.view}>{this.props.children}</View>;
   }
 }
 
