@@ -1,6 +1,6 @@
 // @flow
 import type { StyleSheetStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-import type { Styles } from './browserTheme';
+import type { Styles } from './theme';
 
 type Colors = {|
   primary: string,

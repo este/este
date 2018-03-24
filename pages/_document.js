@@ -54,6 +54,11 @@ export default class MyDocument extends Document {
     return (
       <html lang={locale} style={{ height: '100%', width: '100%' }}>
         <Head>
+          <meta
+            // https://bitsofco.de/ios-safari-and-shrink-to-fit
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           {/* {supportedLocales.map(() => {
             // TODO: https://github.com/este/este/issues/1399
             return (

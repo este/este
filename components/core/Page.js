@@ -9,21 +9,12 @@ import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import Theme, { ThemeProvider } from './Theme';
-import { browserTheme, browserThemeDark } from '../../themes/browserTheme';
-import PageBackgroundColor from './PageBackgroundColor';
+import { lightTheme, darkTheme } from '../../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import Auth from './Auth';
 import withIntl from './withIntl';
 import Text from './Text';
-
-// https://bitsofco.de/ios-safari-and-shrink-to-fit
-export const MetaViewport = () => (
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
-);
 
 // yarn favicon
 const Favicons = () => [
@@ -123,11 +114,11 @@ class Page extends React.PureComponent<Props> {
   static getTheme = themeName => {
     switch (themeName) {
       case 'light':
-        return browserTheme;
+        return lightTheme;
       case 'dark':
-        return browserThemeDark;
+        return darkTheme;
       default:
-        return browserTheme;
+        return lightTheme;
     }
   };
 
@@ -147,6 +138,7 @@ class Page extends React.PureComponent<Props> {
       // That's how we gradually check nullable types.
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
+    const color = theme.colors[theme.pageBackgroundColor];
 
     return (
       <ThemeProvider value={theme}>
@@ -156,10 +148,10 @@ class Page extends React.PureComponent<Props> {
               ? this.props.title(this.props.intl)
               : this.props.title}
           </title>
-          <MetaViewport />
+          <meta name="theme-color" content={color} />
+          <style>{` html { background-color: ${color} } `}</style>
           <Favicons />
         </Head>
-        <PageBackgroundColor color={theme.colors[theme.pageBackgroundColor]} />
         <PageLoadingBar color={theme.colors.primary} />
         <ErrorPopup />
         <PageContainer>

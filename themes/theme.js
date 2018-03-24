@@ -190,13 +190,15 @@ const styles = {
 
 export type Styles = typeof styles;
 
-export const browserTheme: Theme = {
+export const lightTheme: Theme = {
   typography,
   colors,
   styles,
   textColor,
   pageBackgroundColor: 'white',
 };
+
+// Dark
 
 const darkColors = {
   primary: openColor.blue[6],
@@ -210,25 +212,40 @@ const darkColors = {
 
 const darkTextColor = 'white';
 
-export const browserThemeDark: Theme = {
-  ...browserTheme,
-  text: StyleSheet.create({
-    // https://css-tricks.com/snippets/css/system-font-stack
-    font: {
-      color: colors[darkTextColor],
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    },
-    weightNormal: { fontWeight: 'normal' },
-    weightBold: { fontWeight: bold },
-    primary: { color: darkColors.primary },
-    success: { color: darkColors.success },
-    warning: { color: darkColors.warning },
-    danger: { color: darkColors.danger },
-    black: { color: darkColors.black },
-    white: { color: darkColors.white },
-    gray: { color: darkColors.gray },
-  }),
+export const darkTheme: Theme = {
+  ...lightTheme,
+  styles: {
+    ...lightTheme.styles,
+    text: StyleSheet.create({
+      // https://css-tricks.com/snippets/css/system-font-stack
+      font: {
+        color: colors[darkTextColor],
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      },
+      weightNormal: { fontWeight: 'normal' },
+      weightBold: { fontWeight: bold },
+      primary: { color: darkColors.primary },
+      success: { color: darkColors.success },
+      warning: { color: darkColors.warning },
+      danger: { color: darkColors.danger },
+      black: { color: darkColors.black },
+      white: { color: darkColors.white },
+      gray: { color: darkColors.gray },
+    }),
+
+    textInput: StyleSheet.create({
+      input: {
+        color: darkTextColor,
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+        marginBottom: rhythm(1),
+      },
+      disabled: {
+        opacity: 0.5,
+      },
+    }),
+  },
   colors: darkColors,
   textColor: darkTextColor,
   pageBackgroundColor: 'black',

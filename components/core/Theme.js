@@ -3,13 +3,13 @@ import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import type { Theme } from '../../themes/types';
 import Button from './Button';
-import { browserTheme } from '../../themes/browserTheme';
+import { lightTheme } from '../../themes/theme';
 import Mutation from './Mutation';
 import UpdateUserMutation from '../../mutations/UpdateUserMutation';
 
 type Value = Theme;
 
-const ThemeContext: Context<Value> = createReactContext(browserTheme);
+const ThemeContext: Context<Value> = createReactContext(lightTheme);
 
 export const ThemeProvider = ThemeContext.Provider;
 
@@ -18,7 +18,7 @@ export const ToggleTheme = () => (
     {({ mutate, pending }) => (
       <ThemeContext.Consumer>
         {theme => {
-          const themeName = theme === browserTheme ? 'dark' : 'light';
+          const themeName = theme === lightTheme ? 'dark' : 'light';
           return (
             <Button
               color="primary"
