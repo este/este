@@ -54,14 +54,14 @@ class TextInput extends React.PureComponent<TextInputProps> {
     return (
       <Theme>
         {theme => {
+          const renderHeader = label != null || error != null;
           const placeholderTextColor = colorLib(
             theme.colors[theme.textColor],
           ).fade(0.5);
-          const showHeader = label != null || error != null;
 
           return (
             <View>
-              {showHeader && (
+              {renderHeader && (
                 <View style={styles.header}>
                   {label != null && (
                     <TextInputLabel label={label} size={size} />
