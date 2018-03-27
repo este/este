@@ -4,18 +4,40 @@ import Text, { type TextProps } from './Text';
 import Theme from './Theme';
 import { TouchableOpacity } from 'react-native';
 
-export type ButtonProps = TextProps & { inline?: boolean };
+export type ButtonProps = TextProps & {
+  inline?: boolean,
+  accessibilityLabel?: string,
+  disabled?: boolean,
+  onPress: () => void,
+  testID?: string,
+};
 
 class Button extends React.PureComponent<ButtonProps> {
   render() {
-    const { inline, color, style, ...props } = this.props;
+    const {
+      inline,
+      accessibilityLabel,
+      disabled,
+      onPress,
+      testID,
+      color,
+      style,
+      ...props
+    } = this.props;
     // Fix font smoothing only for buttons with background.
     const fixWebFontSmoothing = inline !== true && color != null;
 
     return (
       <Theme>
         {theme => (
-          <TouchableOpacity>
+          <TouchableOpacity
+            accessibilityLabel={accessibilityLabel}
+            accessibilityRole="button"
+            disabled={disabled}
+            onPress={onPress}
+            testID={testID}
+            style={[disabled === true && theme.styles.states.disabled]}
+          >
             <Text
               fixWebFontSmoothing={fixWebFontSmoothing}
               {...(inline != null ? { color } : {})}

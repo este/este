@@ -46,13 +46,15 @@ const bold = '600';
 
 const { rhythm } = typography;
 
+const fontFamily =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+
 const styles = {
   text: StyleSheet.create({
     // https://css-tricks.com/snippets/css/system-font-stack
     font: {
       color: colors[textColor],
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      fontFamily,
     },
     weightNormal: { fontWeight: 'normal' },
     weightBold: { fontWeight: bold },
@@ -114,15 +116,17 @@ const styles = {
     },
   }),
 
+  states: StyleSheet.create({
+    disabled: {
+      opacity: 0.5,
+    },
+  }),
+
   textInput: StyleSheet.create({
     input: {
       color: textColor,
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      fontFamily,
       marginBottom: rhythm(1),
-    },
-    disabled: {
-      opacity: 0.5,
     },
   }),
 
@@ -234,9 +238,6 @@ export const darkTheme: Theme = {
         fontFamily:
           '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
         marginBottom: rhythm(1),
-      },
-      disabled: {
-        opacity: 0.5,
       },
     }),
 
