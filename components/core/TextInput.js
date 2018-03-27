@@ -76,11 +76,11 @@ class TextInput extends React.PureComponent<TextInputProps> {
               )}
               <AutoFocus autoFocus={autoFocus}>
                 <TextInputNative
+                  disabled={disabled}
                   placeholderTextColor={placeholderTextColor.toString()}
                   style={[
                     theme.styles.textInput.input,
                     theme.typography.fontSizeWithLineHeight(size),
-                    disabled === true && theme.styles.textInput.disabled,
                     style,
                   ]}
                   {...props}
