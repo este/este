@@ -36,7 +36,6 @@ class Button extends React.PureComponent<ButtonProps> {
             disabled={disabled}
             onPress={onPress}
             testID={testID}
-            style={[disabled === true && theme.styles.states.disabled]}
           >
             <Text
               fixWebFontSmoothing={fixWebFontSmoothing}
@@ -44,6 +43,7 @@ class Button extends React.PureComponent<ButtonProps> {
               style={[
                 theme.styles.button.text,
                 style,
+                disabled === true && theme.styles.states.disabled,
                 inline == null && theme.styles.button.spaced,
                 inline == null && color != null && theme.styles.button[color],
               ]}

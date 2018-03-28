@@ -12,7 +12,6 @@ import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 import { View } from 'react-native';
-import Text from '../components/core/Text';
 
 const ManageYourWebsMessage = () => (
   <FormattedMessage
