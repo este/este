@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Theme from './Theme';
-import { intersperse } from 'ramda';
 
 type Props = {|
   noSpacer?: boolean,
@@ -20,14 +19,29 @@ class Row extends React.PureComponent<Props> {
     return (
       <Theme>
         {theme => {
-          let { children } = this.props;
-          if (this.props.noSpacer !== true) {
-            children = intersperse(
-              <View style={theme.styles.row.spacer} key="spacer" />,
-              React.Children.toArray(this.props.children),
-            );
+          const { noSpacer, children } = this.props;
+          if (noSpacer === true) {
+            return <View style={styles.view}>{children}</View>;
           }
-          return <View style={styles.view}>{children}</View>;
+
+          const count = React.Children.count(children);
+          return (
+            <View style={styles.view}>
+              {React.Children.map(children, (child, index) => {
+                return (
+                  <React.Fragment>
+                    {child}
+                    {index !== count - 1 && (
+                      <View
+                        style={theme.styles.row.spacer}
+                        key={`spacer-${index}`}
+                      />
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </View>
+          );
         }}
       </Theme>
     );
