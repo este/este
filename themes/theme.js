@@ -81,6 +81,12 @@ const styles = {
     },
   }),
 
+  row: StyleSheet.create({
+    spacer: {
+      width: rhythm(0.5),
+    },
+  }),
+
   page: StyleSheet.create({
     container: {
       width: 960,
