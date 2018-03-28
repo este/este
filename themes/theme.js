@@ -124,7 +124,7 @@ const styles = {
 
   textInput: StyleSheet.create({
     input: {
-      color: textColor,
+      color: colors[textColor],
       fontFamily,
       marginBottom: rhythm(1),
     },
@@ -150,8 +150,6 @@ const styles = {
     spaced: {
       borderRadius: 2,
       borderWidth: 1,
-      marginVertical: rhythm(0.3),
-      marginHorizontal: rhythm(0.5),
       paddingVertical: rhythm(0.2),
       paddingHorizontal: rhythm(1),
     },
@@ -249,8 +247,6 @@ export const darkTheme: Theme = {
       spaced: {
         borderRadius: 2,
         borderWidth: 1,
-        marginVertical: rhythm(0.3),
-        marginHorizontal: rhythm(0.5),
         paddingVertical: rhythm(0.2),
         paddingHorizontal: rhythm(1),
       },
