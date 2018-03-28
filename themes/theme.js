@@ -74,8 +74,8 @@ const styles = {
     },
   }),
 
-  p: StyleSheet.create({
-    text: {
+  block: StyleSheet.create({
+    view: {
       marginBottom: rhythm(1),
       maxWidth: rhythm(28),
     },
@@ -180,6 +180,13 @@ const styles = {
     gray: {
       backgroundColor: colors.gray,
       color: colors.white,
+    },
+  }),
+
+  picker: StyleSheet.create({
+    style: {
+      fontFamily,
+      color: colors[textColor],
     },
   }),
 };

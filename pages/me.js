@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import P from '../components/core/P';
+import Block from '../components/core/Block';
+import Text from '../components/core/Text';
 import Page from '../components/core/Page';
 import { ToggleTheme } from '../components/core/Theme';
 import app from '../components/app';
@@ -39,7 +40,7 @@ const Me = props => {
     >
       {me != null && (
         <React.Fragment>
-          <P>
+          <Block>
             <Image
               source={getGravatarUrl(me.email)}
               style={{
@@ -48,8 +49,10 @@ const Me = props => {
               }}
               title={me.email}
             />
-          </P>
-          <P bold>{me.email}</P>
+          </Block>
+          <Block>
+            <Text bold>{me.email}</Text>
+          </Block>
         </React.Fragment>
       )}
       <Row>

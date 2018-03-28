@@ -7,11 +7,12 @@ import app from '../components/app';
 import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
-import P from '../components/core/P';
+import Block from '../components/core/Block';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 import { View } from 'react-native';
+import Text from '../components/core/Text';
 
 const ManageYourWebsMessage = () => (
   <FormattedMessage
@@ -30,11 +31,11 @@ const Authenticated = ({ data }) => (
 
 const NotAuthenticated = () => (
   <View>
-    <P>
+    <Block>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
       </A>
-    </P>
+    </Block>
     <Blockquote
       source="Friedrich Hayek"
       href="https://en.wikipedia.org/wiki/Friedrich_Hayek"

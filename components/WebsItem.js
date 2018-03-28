@@ -6,7 +6,7 @@ import * as generated from './__generated__/WebsItem.graphql';
 import { DeleteButton } from './core/buttons';
 import Text from './core/Text';
 import A from './core/A';
-import P from './core/P';
+import Block from './core/Block';
 import { FormattedRelative } from 'react-intl';
 import Mutation, { clientMutationId } from './core/Mutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
@@ -46,7 +46,7 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
     return (
       <View>
         <Text>{data.name}</Text>
-        <P>
+        <Block>
           <Text color="gray" size={-1}>
             <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
               {data.domain}
@@ -58,7 +58,7 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
               <DeleteWeb id={data.id} />
             </Text>
           </Text>
-        </P>
+        </Block>
       </View>
     );
   }
