@@ -138,7 +138,7 @@ class Page extends React.PureComponent<Props> {
       // That's how we gradually check nullable types.
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
-    const color = theme.colors[theme.pageBackgroundColor];
+    const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
 
     return (
       <ThemeProvider value={theme}>
@@ -148,8 +148,8 @@ class Page extends React.PureComponent<Props> {
               ? this.props.title(this.props.intl)
               : this.props.title}
           </title>
-          <meta name="theme-color" content={color} />
-          <style>{` html { background-color: ${color} } `}</style>
+          <meta name="theme-color" content={pageBackgroundColor} />
+          <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
           <Favicons />
         </Head>
         <PageLoadingBar color={theme.colors.primary} />

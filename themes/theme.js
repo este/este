@@ -1,26 +1,16 @@
 // @flow
-import type { Theme } from './types';
+import type { Theme, OpenColor } from './types';
 import createTypography from './createTypography';
 import openColor from 'open-color';
-import { StyleSheet } from 'react-native';
 
-// Please, make a Flow libdef and send pull request to
-// https://github.com/flowtype/flow-typed. I don't have a time.
-// white: string,
-// black: string,
-// gray: Array<string>,
-// red: Array<string>,
-// pink: Array<string>,
-// grape: Array<string>,
-// violet: Array<string>,
-// indigo: Array<string>,
-// blue: Array<string>,
-// cyan: Array<string>,
-// teal: Array<string>,
-// green: Array<string>,
-// lime: Array<string>,
-// yellow: Array<string>,
-// orange: Array<string>,
+// Theme styles are plain JSON because:
+//  1) Theme can be loaded from DB.
+//  2) RNW fontFamily sucks https://github.com/necolas/react-native-web/issues/881
+//  3) React Native styles can be rendered as browser inline styles safely.
+// Flow type checking is still enforced.
+// TextInput and Picker are system font by default.
+
+const openColorTyped: OpenColor = openColor;
 
 const typography = createTypography({
   fontSize: 16,
@@ -29,35 +19,25 @@ const typography = createTypography({
 });
 
 const colors = {
-  primary: openColor.blue[6],
-  success: openColor.green[5],
-  warning: openColor.orange[6],
-  danger: openColor.red[6],
-  black: openColor.gray[8],
-  white: openColor.white,
-  gray: openColor.gray[5],
+  primary: openColorTyped.blue[6],
+  success: openColorTyped.green[5],
+  warning: openColorTyped.orange[6],
+  danger: openColorTyped.red[6],
+  black: openColorTyped.gray[8],
+  white: openColorTyped.white,
+  gray: openColorTyped.gray[5],
 };
 
-const textColor = 'black';
-
-const bold = '600';
-
-// Namespaced styles ftw.
-
-const { rhythm } = typography;
-
-const fontFamily =
-  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
-
 const styles = {
-  text: StyleSheet.create({
-    // https://css-tricks.com/snippets/css/system-font-stack
+  text: {
     font: {
-      color: colors[textColor],
-      fontFamily,
+      color: colors.black,
+      // https://css-tricks.com/snippets/css/system-font-stack
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     },
     weightNormal: { fontWeight: 'normal' },
-    weightBold: { fontWeight: bold },
+    weightBold: { fontWeight: '600' },
     primary: { color: colors.primary },
     success: { color: colors.success },
     warning: { color: colors.warning },
@@ -65,99 +45,98 @@ const styles = {
     black: { color: colors.black },
     white: { color: colors.white },
     gray: { color: colors.gray },
-  }),
+  },
 
-  heading: StyleSheet.create({
+  heading: {
     text: {
-      fontWeight: bold,
-      marginBottom: rhythm(1),
+      fontWeight: '600',
+      marginBottom: typography.rhythm(1),
     },
-  }),
+  },
 
-  block: StyleSheet.create({
+  block: {
     view: {
-      marginBottom: rhythm(1),
-      maxWidth: rhythm(28),
+      marginBottom: typography.rhythm(1),
+      maxWidth: typography.rhythm(28),
     },
-  }),
+  },
 
-  row: StyleSheet.create({
+  row: {
     spacer: {
-      width: rhythm(0.5),
+      width: typography.rhythm(0.5),
     },
-  }),
+  },
 
-  page: StyleSheet.create({
+  page: {
     container: {
       width: 960,
     },
     body: {
-      paddingTop: rhythm(2),
+      paddingTop: typography.rhythm(2),
     },
     footer: {
       borderColor: colors.gray,
       borderTopWidth: 1,
       borderStyle: 'solid',
-      marginTop: rhythm(2),
-      paddingVertical: rhythm(1),
+      marginTop: typography.rhythm(2),
+      paddingVertical: typography.rhythm(1),
     },
-  }),
+  },
 
-  mainNav: StyleSheet.create({
+  mainNav: {
     view: {
       backgroundColor: colors.primary,
-      marginVertical: rhythm(0.5),
-      paddingHorizontal: rhythm(0.5),
+      marginVertical: typography.rhythm(0.5),
+      paddingHorizontal: typography.rhythm(0.5),
     },
     a: {
-      paddingHorizontal: rhythm(0.5),
-      paddingVertical: rhythm(0.5),
+      paddingHorizontal: typography.rhythm(0.5),
+      paddingVertical: typography.rhythm(0.5),
     },
-  }),
+  },
 
-  form: StyleSheet.create({
+  form: {
     view: {
-      marginBottom: rhythm(1),
-      maxWidth: rhythm(21),
+      marginBottom: typography.rhythm(1),
+      maxWidth: typography.rhythm(21),
     },
-  }),
+  },
 
-  states: StyleSheet.create({
+  states: {
     disabled: {
       opacity: 0.5,
     },
-  }),
+  },
 
-  textInput: StyleSheet.create({
+  textInput: {
     input: {
-      color: colors[textColor],
-      fontFamily,
-      marginBottom: rhythm(1),
+      color: colors.black,
+      marginBottom: typography.rhythm(1),
     },
-  }),
+  },
 
-  textInputBig: StyleSheet.create({
+  textInputBig: {
     input: {
       borderBottomWidth: 1,
       borderColor: colors.gray,
-      paddingVertical: rhythm(0.5),
+      paddingVertical: typography.rhythm(0.5),
       marginBottom: 0,
     },
     error: {
-      minHeight: rhythm(1),
+      minHeight: typography.rhythm(1),
     },
-  }),
+  },
 
-  button: StyleSheet.create({
+  button: {
     text: {
       color: colors.black,
-      fontWeight: bold,
+      fontWeight: '600',
     },
     spaced: {
       borderRadius: 2,
       borderWidth: 1,
-      paddingVertical: rhythm(0.2),
-      paddingHorizontal: rhythm(1),
+      paddingVertical: typography.rhythm(0.2),
+      paddingHorizontal: typography.rhythm(1),
     },
     primary: {
       backgroundColor: colors.primary,
@@ -187,14 +166,14 @@ const styles = {
       backgroundColor: colors.gray,
       color: colors.white,
     },
-  }),
+  },
 
-  picker: StyleSheet.create({
-    style: {
-      fontFamily,
-      color: colors[textColor],
+  picker: {
+    style: {},
+    itemStyle: {
+      color: colors.black,
     },
-  }),
+  },
 };
 
 export type Styles = typeof styles;
@@ -202,98 +181,40 @@ export type Styles = typeof styles;
 export const lightTheme: Theme = {
   typography,
   colors,
-  styles,
-  textColor,
+  textColor: 'black',
   pageBackgroundColor: 'white',
+  styles,
 };
 
 // Dark theme
 
-const darkColors = {
-  primary: openColor.blue[6],
-  success: openColor.green[5],
-  warning: openColor.orange[6],
-  danger: openColor.red[6],
-  black: openColor.gray[8],
-  white: openColor.white,
-  gray: openColor.gray[5],
-};
-
-const darkTextColor = 'white';
-
 export const darkTheme: Theme = {
   ...lightTheme,
-  styles: {
-    ...lightTheme.styles,
-    text: StyleSheet.create({
-      // https://css-tricks.com/snippets/css/system-font-stack
-      font: {
-        color: colors[darkTextColor],
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-      },
-      weightNormal: { fontWeight: 'normal' },
-      weightBold: { fontWeight: bold },
-      primary: { color: darkColors.primary },
-      success: { color: darkColors.success },
-      warning: { color: darkColors.warning },
-      danger: { color: darkColors.danger },
-      black: { color: darkColors.black },
-      white: { color: darkColors.white },
-      gray: { color: darkColors.gray },
-    }),
-
-    textInput: StyleSheet.create({
-      input: {
-        color: darkTextColor,
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-        marginBottom: rhythm(1),
-      },
-    }),
-
-    button: StyleSheet.create({
-      text: {
-        color: colors.white,
-        fontWeight: bold,
-      },
-      spaced: {
-        borderRadius: 2,
-        borderWidth: 1,
-        paddingVertical: rhythm(0.2),
-        paddingHorizontal: rhythm(1),
-      },
-      primary: {
-        backgroundColor: colors.primary,
-        color: colors.white,
-      },
-      success: {
-        backgroundColor: colors.success,
-        color: colors.white,
-      },
-      warning: {
-        backgroundColor: colors.warning,
-        color: colors.white,
-      },
-      danger: {
-        backgroundColor: colors.danger,
-        color: colors.white,
-      },
-      black: {
-        backgroundColor: colors.black,
-        color: colors.white,
-      },
-      white: {
-        backgroundColor: colors.white,
-        color: colors.white,
-      },
-      gray: {
-        backgroundColor: colors.gray,
-        color: colors.white,
-      },
-    }),
-  },
-  colors: darkColors,
-  textColor: darkTextColor,
+  textColor: 'white',
   pageBackgroundColor: 'black',
+  styles: {
+    ...styles,
+    text: {
+      ...styles.text,
+      font: {
+        ...styles.text.font,
+        color: colors.white,
+      },
+    },
+
+    textInput: {
+      input: {
+        ...styles.textInput.input,
+        color: colors.white,
+      },
+    },
+
+    button: {
+      ...styles.button,
+      text: {
+        ...styles.button.text,
+        color: colors.white,
+      },
+    },
+  },
 };
