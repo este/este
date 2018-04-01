@@ -2,13 +2,8 @@
 import type { Theme, OpenColor } from './types';
 import createTypography from './createTypography';
 import openColor from 'open-color';
-
-// Theme styles are plain JSON because:
-//  1) Theme can be loaded from DB.
-//  2) RNW fontFamily sucks https://github.com/necolas/react-native-web/issues/881
-//  3) React Native styles can be rendered as browser inline styles safely.
-// Flow type checking is still enforced.
-// TextInput and Picker are system font by default.
+import { StyleSheet } from 'react-native';
+import type { StyleSheet as StyleSheetType } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 const openColorTyped: OpenColor = openColor;
 
@@ -176,14 +171,37 @@ const styles = {
   },
 };
 
-export type Styles = typeof styles;
+// We write styles as JSON because we can spread them, load from DB, etc.
+// But we convert them to styleSheets for better performance.
+// For now, we export inferred Styles type so we have autocomplete etc.
+// For truly dynamic styles, we would have to write types manually.
+
+// Don't know why StyleSheetType<V> does not work.
+// type ExtractReturnType = <V>(V) => StyleSheetType<V>;
+type ExtractReturnType = <V>(V) => StyleSheetType<{ [$Keys<V>]: any }>;
+
+function toStyleSheets<Styles: { [name: string]: Object }>(
+  styles: Styles,
+): $ObjMap<Styles, ExtractReturnType> {
+  return Object.keys(styles).reduce(
+    (prev, current) => ({
+      ...prev,
+      [current]: StyleSheet.create(styles[current]),
+    }),
+    {},
+  );
+}
+
+const styleSheets = toStyleSheets(styles);
+
+export type Styles = typeof styleSheets;
 
 export const lightTheme: Theme = {
   typography,
   colors,
   textColor: 'black',
   pageBackgroundColor: 'white',
-  styles,
+  styles: styleSheets,
 };
 
 // Dark theme
@@ -192,7 +210,7 @@ export const darkTheme: Theme = {
   ...lightTheme,
   textColor: 'white',
   pageBackgroundColor: 'black',
-  styles: {
+  styles: toStyleSheets({
     ...styles,
     text: {
       ...styles.text,
@@ -216,5 +234,5 @@ export const darkTheme: Theme = {
         color: colors.white,
       },
     },
-  },
+  }),
 };
