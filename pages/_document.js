@@ -4,8 +4,8 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { AppRegistry } from 'react-native-web';
 
 // https://github.com/zeit/next.js/tree/master/examples/with-react-native-web
+// https://github.com/necolas/react-native-web/blob/master/website/guides/getting-started.md#server-side-rendering
 // https://github.com/zeit/next.js/tree/master/examples/with-react-intl
-// https://github.com/zeit/next.js/tree/canary/examples/with-react-native-web
 
 let index = 0;
 
@@ -54,11 +54,7 @@ export default class MyDocument extends Document {
     return (
       <html lang={locale} style={{ height: '100%', width: '100%' }}>
         <Head>
-          <meta
-            // https://bitsofco.de/ios-safari-and-shrink-to-fit
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           {/* {supportedLocales.map(() => {
             // TODO: https://github.com/este/este/issues/1399
             return (
