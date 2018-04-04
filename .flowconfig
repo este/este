@@ -1,5 +1,4 @@
 [ignore]
-.*/node_modules/iterall/.*
 .*/node_modules/bcryptjs/.*
 .*/node_modules/config-chain/.*
 
@@ -28,16 +27,7 @@
 .*/node_modules/react-native-web/.*
 
 [untyped]
-; TODO: Recheck
-; https://github.com/facebook/draft-js/issues/1496#issuecomment-353895318
-.*/node_modules/draft-js/lib/DraftEditor.react.js.flow
-; https://github.com/facebook/draft-js/issues/1621
-.*/node_modules/draft-js/lib/ContentBlock.js.flow
-.*/node_modules/draft-js/lib/ContentBlockNode.js.flow
-; RN
-.*/node_modules/react-native/Libraries/Lists/SectionList.js
-.*/node_modules/react-native/Libraries/Lists/FlatList.js
-.*/node_modules/react-native/Libraries/CameraRoll/CameraRoll.js
+; Who knows.
 
 [include]
 

@@ -33,7 +33,7 @@ class Row extends React.PureComponent<Props> {
                     {child}
                     {index !== count - 1 && (
                       <View
-                        style={theme.styles.row.spacer}
+                        style={theme.styles.rowSpacer}
                         key={`spacer-${index}`}
                       />
                     )}

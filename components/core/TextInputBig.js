@@ -15,10 +15,10 @@ class TextInputBig extends React.PureComponent<TextInputProps> {
           <View>
             <TextInput
               size={size}
-              style={theme.styles.textInputBig.input}
+              style={theme.styles.textInputBig}
               {...props}
             />
-            <View style={theme.styles.textInputBig.error}>
+            <View style={theme.styles.textInputBigError}>
               {typeof error === 'string' ? (
                 <Text color="danger" size={size - 1}>
                   {error}

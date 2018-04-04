@@ -9,7 +9,7 @@ class Heading extends React.PureComponent<TextProps> {
     return (
       <Theme>
         {theme => {
-          return <Text style={[theme.styles.heading.text, style]} {...props} />;
+          return <Text style={[theme.styles.heading, style]} {...props} />;
         }}
       </Theme>
     );

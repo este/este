@@ -1,7 +1,10 @@
 // @flow
 import * as React from 'react';
 import { Picker as NativePicker } from 'react-native';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Theme from './Theme';
 
 // https://github.com/necolas/react-native-web/issues/879
@@ -10,8 +13,8 @@ NativePicker.propTypes = null;
 type PickerProps = {
   disabled?: boolean,
   size?: number,
-  style?: StyleObj,
-  itemStyle?: StyleObj,
+  style?: ViewStyleProp,
+  itemStyle?: TextStyleProp,
 };
 
 class Picker extends React.PureComponent<PickerProps> {
@@ -27,11 +30,11 @@ class Picker extends React.PureComponent<PickerProps> {
             style={[
               // TODO: Use itemStyle props once supported.
               // https://github.com/necolas/react-native-web/issues/882
-              theme.styles.picker.style,
-              theme.styles.picker.itemStyle,
+              theme.styles.picker,
+              theme.styles.pickerItem,
               style,
               itemStyle,
-              disabled === true && theme.styles.states.disabled,
+              disabled === true && theme.styles.stateDisabled,
               theme.typography.fontSizeWithLineHeight(size),
             ]}
             {...props}

@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { ColorName } from '../../themes/types';
 import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 export type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify',
@@ -14,7 +14,7 @@ export type TextProps = {
   italic?: boolean,
   size?: number,
   fixWebFontSmoothing?: boolean,
-  style?: StyleObj,
+  style?: TextStyleProp,
   children?: React.Node,
 };
 
@@ -57,6 +57,29 @@ class Text extends React.PureComponent<TextProps> {
     isInAParentText: PropTypes.bool,
   };
 
+  static getColorStyle = (styles: *, color: *) => {
+    switch (color) {
+      case 'primary':
+        return styles.textPrimary;
+      case 'success':
+        return styles.textSuccess;
+      case 'warning':
+        return styles.textWarning;
+      case 'danger':
+        return styles.textDanger;
+      case 'black':
+        return styles.textBlack;
+      case 'white':
+        return styles.textWhite;
+      case 'gray':
+        return styles.textGray;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (color: empty);
+        return null;
+    }
+  };
+
   context: {
     isInAParentText: ?true,
   };
@@ -81,14 +104,14 @@ class Text extends React.PureComponent<TextProps> {
           return (
             <NativeText
               style={[
-                !isInAParentText && theme.styles.text.font,
+                !isInAParentText && theme.styles.text,
                 style,
                 align != null && alignStyles[align],
                 bold != null &&
                   (bold
-                    ? theme.styles.text.weightBold
-                    : theme.styles.text.weightNormal),
-                color != null && theme.styles.text[color],
+                    ? theme.styles.textWeightBold
+                    : theme.styles.textWeightNormal),
+                color != null && Text.getColorStyle(theme.styles, color),
                 decoration != null && decorationStyles[decoration],
                 italic != null &&
                   (italic ? italicStyles.italic : italicStyles.normal),

@@ -1,6 +1,5 @@
 // @flow
 import { StyleSheet } from 'react-native';
-import type { StyleSheetStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 // inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 // 24ways.org/2011/composing-the-new-canon
@@ -51,7 +50,7 @@ const createTypography = ({
     typeof fontSizeScale === 'string' ? scale[fontSizeScale] : fontSizeScale;
   const computeFontSize = (level: number) => fontSize * scaleRatio ** level;
   // Cached dynamic styles FTW.
-  const fontSizeLineHeightCache: { [level: number]: StyleSheetStyle } = {};
+  const fontSizeLineHeightCache = {};
 
   return {
     fontSize: computeFontSize,

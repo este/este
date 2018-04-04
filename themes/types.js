@@ -1,5 +1,5 @@
 // @flow
-import type { StyleSheetStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import type { Styles } from './theme';
 
 type C = string;
@@ -40,7 +40,7 @@ export type Theme = {
     fontSize: number => number,
     lineHeight: number,
     rhythm: number => number,
-    fontSizeWithLineHeight: number => StyleSheetStyle,
+    fontSizeWithLineHeight: number => TextStyleProp,
   |},
   colors: Colors,
   textColor: ColorName,

@@ -29,7 +29,7 @@ class Form extends React.PureComponent<FormProps> {
         {theme => (
           <View
             accessibilityRole="form"
-            style={theme.styles.form.view}
+            style={theme.styles.form}
             onSubmit={Form.handleSubmit}
             onKeyPress={this.handleKeyPress}
           >

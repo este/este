@@ -70,7 +70,7 @@ const PageContainer = ({ children }) => (
       // Why ScrollView https://github.com/necolas/react-native-web/issues/829
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[styles.container, theme.styles.page.container]}
+        contentContainerStyle={[styles.container, theme.styles.pageContainer]}
       >
         {children}
       </ScrollView>
@@ -81,7 +81,7 @@ const PageContainer = ({ children }) => (
 const PageBody = ({ children }) => (
   <Theme>
     {theme => (
-      <View style={[styles.body, theme.styles.page.body]}>{children}</View>
+      <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
     )}
   </Theme>
 );
@@ -89,7 +89,7 @@ const PageBody = ({ children }) => (
 const PageFooter = () => (
   <Theme>
     {theme => (
-      <View style={[styles.footer, theme.styles.page.footer]}>
+      <View style={[styles.footer, theme.styles.pageFooter]}>
         <Text size={-1}>
           <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
           <A href="https://twitter.com/steida">steida</A>

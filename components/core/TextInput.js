@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
 import Theme from './Theme';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import colorLib from 'color';
 import Text from './Text';
 import AutoFocus from './AutoFocus';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 export type TextInputProps = {
   autoFocus?: any,
@@ -13,7 +13,7 @@ export type TextInputProps = {
   label?: string | React.Element<any>,
   error?: string | React.Element<any>,
   size?: number,
-  style?: StyleObj,
+  style?: TextStyleProp,
 };
 
 const styles = StyleSheet.create({
@@ -79,7 +79,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
                   disabled={disabled}
                   placeholderTextColor={placeholderTextColor.toString()}
                   style={[
-                    theme.styles.textInput.input,
+                    theme.styles.textInput,
                     theme.typography.fontSizeWithLineHeight(size),
                     style,
                   ]}

@@ -13,6 +13,29 @@ export type ButtonProps = TextProps & {
 };
 
 class Button extends React.PureComponent<ButtonProps> {
+  static getColorStyle = (styles: *, color: *) => {
+    switch (color) {
+      case 'primary':
+        return styles.buttonPrimary;
+      case 'success':
+        return styles.buttonSuccess;
+      case 'warning':
+        return styles.buttonWarning;
+      case 'danger':
+        return styles.buttonDanger;
+      case 'black':
+        return styles.buttonBlack;
+      case 'white':
+        return styles.buttonWhite;
+      case 'gray':
+        return styles.buttonGray;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (color: empty);
+        return null;
+    }
+  };
+
   render() {
     const {
       inline,
@@ -41,11 +64,13 @@ class Button extends React.PureComponent<ButtonProps> {
               fixWebFontSmoothing={fixWebFontSmoothing}
               {...(inline != null ? { color } : {})}
               style={[
-                theme.styles.button.text,
+                theme.styles.button,
                 style,
-                disabled === true && theme.styles.states.disabled,
-                inline == null && theme.styles.button.spaced,
-                inline == null && color != null && theme.styles.button[color],
+                disabled === true && theme.styles.stateDisabled,
+                inline == null && theme.styles.buttonSpaced,
+                inline == null &&
+                  color != null &&
+                  Button.getColorStyle(theme.styles, color),
               ]}
               {...props}
             />

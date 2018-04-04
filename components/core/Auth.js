@@ -17,6 +17,7 @@ import type { Href } from '../app/sitemap';
 import withIntl from './withIntl';
 import { View } from 'react-native';
 import Row from './Row';
+import Block from './Block';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -127,27 +128,29 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             <DisableWebkitAutofillColor />
             <Heading size={3}>Auth</Heading>
             <Form onSubmit={this.auth(mutate)}>
-              <TextInputBig
-                autoComplete="email"
-                autoFocus={this.state.errors.email}
-                disabled={pending}
-                error={<Error>{this.state.errors.email}</Error>}
-                keyboardType="email-address"
-                name="email"
-                onChangeText={email => this.setState({ email })}
-                placeholder={intl.formatMessage(messages.emailPlaceholder)}
-                value={this.state.email}
-              />
-              <TextInputBig
-                autoFocus={this.state.errors.password}
-                disabled={pending}
-                error={<Error>{this.state.errors.password}</Error>}
-                name="password"
-                onChangeText={password => this.setState({ password })}
-                placeholder={intl.formatMessage(messages.passwordPlaceholder)}
-                secureTextEntry
-                value={this.state.password}
-              />
+              <Block>
+                <TextInputBig
+                  autoComplete="email"
+                  autoFocus={this.state.errors.email}
+                  disabled={pending}
+                  error={<Error>{this.state.errors.email}</Error>}
+                  keyboardType="email-address"
+                  name="email"
+                  onChangeText={email => this.setState({ email })}
+                  placeholder={intl.formatMessage(messages.emailPlaceholder)}
+                  value={this.state.email}
+                />
+                <TextInputBig
+                  autoFocus={this.state.errors.password}
+                  disabled={pending}
+                  error={<Error>{this.state.errors.password}</Error>}
+                  name="password"
+                  onChangeText={password => this.setState({ password })}
+                  placeholder={intl.formatMessage(messages.passwordPlaceholder)}
+                  secureTextEntry
+                  value={this.state.password}
+                />
+              </Block>
               <Row>
                 <SignInButton
                   disabled={pending}

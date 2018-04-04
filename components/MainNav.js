@@ -22,7 +22,7 @@ const MainNavA = ({ href, title }) => (
         href={href}
         fixWebFontSmoothing
         prefetch
-        style={theme.styles.mainNav.a}
+        style={theme.styles.mainNavA}
       >
         <FormattedMessage {...title} />
       </A>
@@ -37,7 +37,7 @@ type MainNavProps = {|
 const MainNav = ({ isAuthenticated }: MainNavProps) => (
   <Theme>
     {theme => (
-      <View style={[styles.view, theme.styles.mainNav.view]}>
+      <View style={[styles.view, theme.styles.mainNav]}>
         <MainNavA href={{ pathname: '/' }} title={titles.index} />
         {isAuthenticated ? (
           <MainNavA href={{ pathname: '/me' }} title={titles.me} />
