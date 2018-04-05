@@ -4,16 +4,23 @@ import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
 import Theme from './Theme';
 import colorLib from 'color';
 import Text from './Text';
-import AutoFocus from './AutoFocus';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
+// This is just a stub for inputRef type.
+class ReactNativeWebTextInputElementStub extends React.Component<{}> {
+  // eslint-disable-next-line class-methods-use-this
+  blur() {}
+  // eslint-disable-next-line class-methods-use-this
+  focus() {}
+}
+
 export type TextInputProps = {
-  autoFocus?: any,
   disabled?: boolean,
   label?: string | React.Element<any>,
   error?: string | React.Element<any>,
   size?: number,
   style?: TextStyleProp,
+  inputRef?: React.Ref<typeof ReactNativeWebTextInputElementStub>,
 };
 
 const styles = StyleSheet.create({
@@ -43,12 +50,12 @@ const TextInputError = ({ error, size }) =>
 class TextInput extends React.PureComponent<TextInputProps> {
   render() {
     const {
-      autoFocus,
       disabled,
       label,
       error,
       size = 0,
       style,
+      inputRef,
       ...props
     } = this.props;
     return (
@@ -74,18 +81,17 @@ class TextInput extends React.PureComponent<TextInputProps> {
                   )}
                 </View>
               )}
-              <AutoFocus autoFocus={autoFocus}>
-                <TextInputNative
-                  disabled={disabled}
-                  placeholderTextColor={placeholderTextColor.toString()}
-                  style={[
-                    theme.styles.textInput,
-                    theme.typography.fontSizeWithLineHeight(size),
-                    style,
-                  ]}
-                  {...props}
-                />
-              </AutoFocus>
+              <TextInputNative
+                disabled={disabled}
+                placeholderTextColor={placeholderTextColor.toString()}
+                style={[
+                  theme.styles.textInput,
+                  theme.typography.fontSizeWithLineHeight(size),
+                  style,
+                ]}
+                ref={inputRef}
+                {...props}
+              />
             </View>
           );
         }}

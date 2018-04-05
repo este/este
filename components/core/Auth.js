@@ -67,6 +67,32 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
   state = Auth.initialState;
 
+  setEmail = email => this.setState({ email });
+  setPassword = password => this.setState({ password });
+
+  setFocusOnError(errors: Errors<Fields>) {
+    const field = Object.keys(errors)[0];
+    if (!field) return;
+    let current;
+    switch (field) {
+      case 'email':
+        current = this.emailRef.current;
+        break;
+      case 'password':
+        current = this.passwordRef.current;
+        break;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (field: empty);
+    }
+    if (current) current.focus();
+  }
+
+  setErrors(errors: Errors<Fields>) {
+    this.setState({ errors });
+    this.setFocusOnError(errors);
+  }
+
   handleCompleted = (response: *) => {
     // http://graphql.org/learn/best-practices/#nullability
     const payload = response.signin || response.signup || null;
@@ -87,7 +113,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   };
 
   handleError = (errors: *) => {
-    this.setState({ errors });
+    this.setErrors(errors);
   };
 
   auth = (mutate: *, isSignUp?: boolean) => () => {
@@ -98,7 +124,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
     const errors = validation.validateEmailPassword(variables);
     if (errors) {
-      this.setState({ errors });
+      this.setErrors(errors);
       return;
     }
 
@@ -119,6 +145,12 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     }
   };
 
+  // $FlowFixMe
+  emailRef = React.createRef();
+
+  // $FlowFixMe
+  passwordRef = React.createRef();
+
   render() {
     const { intl } = this.props;
     return (
@@ -131,24 +163,24 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
               <Block>
                 <TextInputBig
                   autoComplete="email"
-                  autoFocus={this.state.errors.email}
                   disabled={pending}
                   error={<Error>{this.state.errors.email}</Error>}
                   keyboardType="email-address"
                   name="email"
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={this.setEmail}
                   placeholder={intl.formatMessage(messages.emailPlaceholder)}
                   value={this.state.email}
+                  inputRef={this.emailRef}
                 />
                 <TextInputBig
-                  autoFocus={this.state.errors.password}
                   disabled={pending}
                   error={<Error>{this.state.errors.password}</Error>}
                   name="password"
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={this.setPassword}
                   placeholder={intl.formatMessage(messages.passwordPlaceholder)}
                   secureTextEntry
                   value={this.state.password}
+                  inputRef={this.passwordRef}
                 />
               </Block>
               <Row>
