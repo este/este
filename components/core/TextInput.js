@@ -5,6 +5,8 @@ import Theme from './Theme';
 import colorLib from 'color';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import type { Error as ErrorType } from '../../server/error';
+import Error from './Error';
 
 // This is just a stub for inputRef type.
 class ReactNativeWebTextInputElementStub extends React.Component<{}> {
@@ -17,7 +19,7 @@ class ReactNativeWebTextInputElementStub extends React.Component<{}> {
 export type TextInputProps = {
   disabled?: boolean,
   label?: string | React.Element<any>,
-  error?: string | React.Element<any>,
+  error?: ?ErrorType,
   size?: number,
   style?: TextStyleProp,
   inputRef?: React.Ref<typeof ReactNativeWebTextInputElementStub>,
@@ -36,15 +38,6 @@ const TextInputLabel = ({ label, size }) =>
     </Text>
   ) : (
     label
-  );
-
-const TextInputError = ({ error, size }) =>
-  typeof error === 'string' ? (
-    <Text bold color="danger" size={size}>
-      {error}
-    </Text>
-  ) : (
-    error
   );
 
 class TextInput extends React.PureComponent<TextInputProps> {
@@ -76,7 +69,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
                   {error != null && (
                     <React.Fragment>
                       <Text> </Text>
-                      <TextInputError error={error} size={size} />
+                      <Error size={size}>{error}</Error>
                     </React.Fragment>
                   )}
                 </View>

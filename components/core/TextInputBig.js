@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Text from './Text';
+import Error from './Error';
 import TextInput, { type TextInputProps } from './TextInput';
 import { View } from 'react-native';
 import Theme from './Theme';
@@ -19,13 +19,7 @@ class TextInputBig extends React.PureComponent<TextInputProps> {
               {...props}
             />
             <View style={theme.styles.textInputBigError}>
-              {typeof error === 'string' ? (
-                <Text color="danger" size={size - 1}>
-                  {error}
-                </Text>
-              ) : (
-                error
-              )}
+              <Error size={size - 1}>{error}</Error>
             </View>
           </View>
         )}

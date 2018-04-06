@@ -3,7 +3,6 @@ import * as React from 'react';
 import Heading from './Heading';
 import Form from './Form';
 import TextInputBig from './TextInputBig';
-import Error from './Error';
 import { SignInButton, SignUpButton } from './buttons';
 import SigninMutation from '../../mutations/SigninMutation';
 import SignupMutation from '../../mutations/SignupMutation';
@@ -54,8 +53,9 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
   state = Auth.initialState;
 
-  setEmail = email => this.setState({ email });
-  setPassword = password => this.setState({ password });
+  setEmail = (email: string) => this.setState({ email });
+
+  setPassword = (password: string) => this.setState({ password });
 
   setFocusOnError(errors: Errors<Fields>) {
     const field = Object.keys(errors)[0];
@@ -150,7 +150,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 <TextInputBig
                   autoComplete="email"
                   disabled={pending}
-                  error={<Error>{this.state.errors.email}</Error>}
+                  error={this.state.errors.email}
                   keyboardType="email-address"
                   name="email"
                   onChangeText={this.setEmail}
@@ -160,7 +160,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 />
                 <TextInputBig
                   disabled={pending}
-                  error={<Error>{this.state.errors.password}</Error>}
+                  error={this.state.errors.password}
                   name="password"
                   onChangeText={this.setPassword}
                   placeholder={intl.formatMessage(messages.passwordPlaceholder)}

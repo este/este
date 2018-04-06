@@ -98,16 +98,11 @@ type ErrorProps = {
 
 class Error extends React.PureComponent<ErrorProps> {
   render() {
-    const {
-      bold = true,
-      color = 'danger',
-      children: error,
-      ...props
-    } = this.props;
-    if (!error) return null;
+    const { bold = true, color = 'danger', children, ...props } = this.props;
+    if (!children) return null;
     return (
       <Text bold={bold} color={color} {...props}>
-        {errorToMessage(error)}
+        {errorToMessage(children)}
       </Text>
     );
   }
