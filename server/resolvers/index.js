@@ -81,15 +81,15 @@ const resolvers /*: Resolvers */ = {
       return createAuthPayload(user);
     },
 
-    async createWeb(parent, { input }, ctx, info) {
+    async createWeb(parent, args, ctx, info) {
       // Only an authorized user can create a web.
       const userId = getUserId(ctx);
 
       // The same logic as on clients.
-      const validationErrors = validation.validateNewWeb(input);
+      const validationErrors = validation.validateNewWeb(args);
       if (validationErrors) throwError(validationErrors);
 
-      const domainName = input.name
+      const domainName = args.name
         .toLowerCase()
         .split('')
         .map(char => diacriticsMap[char] || char)
@@ -100,7 +100,7 @@ const resolvers /*: Resolvers */ = {
 
       const web = await ctx.db.mutation.createWeb({
         data: {
-          name: input.name,
+          name: args.name,
           domain,
           owner: { connect: { id: userId } },
         },
@@ -113,7 +113,7 @@ const resolvers /*: Resolvers */ = {
       };
     },
 
-    async deleteWeb(parent, { input: { id } }, ctx, info) {
+    async deleteWeb(parent, { id }, ctx, info) {
       const userId = getUserId(ctx);
       const webExists = await ctx.db.exists.Web({
         id,
@@ -124,7 +124,7 @@ const resolvers /*: Resolvers */ = {
       return { id };
     },
 
-    async updateUser(parent, { input: { themeName } }, ctx, info) {
+    async updateUser(parent, { themeName }, ctx, info) {
       const userId = getUserId(ctx);
       const user = await ctx.db.mutation.updateUser({
         data: { themeName },

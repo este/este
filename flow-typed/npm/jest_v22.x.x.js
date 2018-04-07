@@ -1,5 +1,5 @@
-// flow-typed signature: 159e15f694a5e3ba2a989dea756a6e22
-// flow-typed version: 0215e23590/jest_v22.x.x/flow_>=v0.39.x
+// flow-typed signature: ce84f78f95836afb1ef53040f4906859
+// flow-typed version: ab9a73e70c/jest_v22.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -55,6 +55,11 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   mockImplementationOnce(
     fn: (...args: TArguments) => TReturn
   ): JestMockFn<TArguments, TReturn>,
+  /**
+   * Accepts a string to use in test result output in place of "jest.fn()" to
+   * indicate which mock function is being referenced.
+   */
+  mockName(name: string): JestMockFn<TArguments, TReturn>,
   /**
    * Just a simple sugar function for returning `this`
    */

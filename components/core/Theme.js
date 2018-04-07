@@ -22,9 +22,7 @@ export const ToggleTheme = () => (
           return (
             <Button
               color="primary"
-              onPress={() =>
-                mutate(UpdateUserMutation.commit, { input: { themeName } })
-              }
+              onPress={() => mutate(UpdateUserMutation.commit, { themeName })}
               disabled={pending}
             >
               {`${themeName} theme`}

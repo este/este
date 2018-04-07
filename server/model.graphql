@@ -8,11 +8,6 @@
 # http://graphql.org/learn/schema/
 # tl;dr Use non-nullable only when you are sure API will never change.
 
-# TODO: Remove clientMutationId.
-# clientMutationId is FBISM which will be removed from Relay soon.
-# Unfortunately, Relay needs it for all mutations.
-# TODO: https://github.com/facebook/relay/issues/2077
-
 # Workflow:
 #   - update model.graphql
 #   - add resolver
@@ -28,42 +23,22 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
-  # nullable, because it will be changed to Theme later
   themeName: String
 }
+
+# Note Payloads are nullable, because mutation can fail.
 
 type AuthPayload {
   token: String!
   user: User!
 }
 
-# Note FooInput and FooPayload pattern.
-# Objects are good for further scheme updates aka versioning.
-# Inputs are non-nullable, because the server has to support obsolete clients.
-# Payloads are nullable, because mutation can fail or be removed.
-# clientMutationId is nullable, because it will be removed.
-
-input CreateWebInput {
-  name: String!
-  clientMutationId: String
-}
-
 type CreateWebPayload {
   edge: WebEdge
 }
 
-input DeleteWebInput {
-  id: ID!
-  clientMutationId: String
-}
-
 type DeleteWebPayload {
   id: ID
-}
-
-input UpdateUserInput {
-  themeName: String!
-  clientMutationId: String
 }
 
 type UpdateUserPayload {
@@ -73,9 +48,9 @@ type UpdateUserPayload {
 type Mutation {
   signup(email: String!, password: String!): AuthPayload
   signin(email: String!, password: String!): AuthPayload
-  createWeb(input: CreateWebInput!): CreateWebPayload
-  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
-  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  createWeb(name: String!): CreateWebPayload
+  deleteWeb(id: ID!): DeleteWebPayload
+  updateUser(themeName: String!): UpdateUserPayload
 }
 
 type Query {

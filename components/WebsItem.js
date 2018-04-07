@@ -8,7 +8,7 @@ import Text from './core/Text';
 import A from './core/A';
 import Block from './core/Block';
 import { FormattedRelative } from 'react-intl';
-import Mutation, { clientMutationId } from './core/Mutation';
+import Mutation from './core/Mutation';
 import DeleteWebMutation from '../mutations/DeleteWebMutation';
 import { View } from 'react-native';
 
@@ -23,9 +23,7 @@ const DeleteWeb = ({ id }) => (
             disabled={pending}
             onPress={() => {
               if (!confirm()) return;
-              const variables = {
-                input: { id, clientMutationId: clientMutationId() },
-              };
+              const variables = { id };
               mutate(DeleteWebMutation.commit, variables);
             }}
             size={-1}

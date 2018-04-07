@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eba463b01b54cb09c78a2777e513aa76
+ * @relayHash a5744f467f01215e30fad21c9a5121b7
  */
 
 /* eslint-disable */
@@ -11,10 +11,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type WebsItem$ref = any;
 export type CreateWebMutationVariables = {|
-  input: {
-    name: string,
-    clientMutationId?: ?string,
-  },
+  name: string,
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
@@ -30,9 +27,9 @@ export type CreateWebMutationResponse = {|
 
 /*
 mutation CreateWebMutation(
-  $input: CreateWebInput!
+  $name: String!
 ) {
-  createWeb(input: $input) {
+  createWeb(name: $name) {
     edge {
       node {
         ...WebsItem
@@ -54,17 +51,17 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "CreateWebInput!",
+    "name": "name",
+    "type": "String!",
     "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "input",
-    "variableName": "input",
-    "type": "CreateWebInput!"
+    "name": "name",
+    "variableName": "name",
+    "type": "String!"
   }
 ];
 return {
@@ -72,7 +69,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "mutation CreateWebMutation(\n  $name: String!\n) {\n  createWeb(name: $name) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -191,5 +188,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '865f52f79821b920823ab4e455c92e46';
+(node/*: any*/).hash = '3868392819f73fafd1e4ce1ff657ffac';
 module.exports = node;

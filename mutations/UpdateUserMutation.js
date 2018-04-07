@@ -7,8 +7,8 @@ import type {
 } from './__generated__/UpdateUserMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateUserMutation($input: UpdateUserInput!) {
-    updateUser(input: $input) {
+  mutation UpdateUserMutation($themeName: String!) {
+    updateUser(themeName: $themeName) {
       user {
         themeName
       }

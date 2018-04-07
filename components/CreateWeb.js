@@ -7,10 +7,10 @@ import { FormattedMessage } from 'react-intl';
 import Text from './core/Text';
 import CreateWebMutation from '../mutations/CreateWebMutation';
 import type { Errors } from '../server/error';
-import Mutation, { clientMutationId } from './core/Mutation';
-import Error from './core/Error';
+import Mutation from './core/Mutation';
 import * as validation from '../server/validation';
 import Row from './core/Row';
+import Block from './core/Block';
 
 type Fields = {|
   name: string,
@@ -29,25 +29,44 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
 
   state = CreateWeb.initialState;
 
+  setName = (name: string) => this.setState({ name });
+
+  setFocusOnError(errors: Errors<Fields>) {
+    const field = Object.keys(errors)[0];
+    if (!field) return;
+    let current;
+    switch (field) {
+      case 'name':
+        current = this.nameRef.current;
+        break;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (field: empty);
+    }
+    if (current) current.focus();
+  }
+
+  setErrors(errors: Errors<Fields>) {
+    this.setState({ errors });
+    this.setFocusOnError(errors);
+  }
+
   handleCompleted = () => {
     this.setState(CreateWeb.initialState);
   };
 
   handleError = (errors: *) => {
-    this.setState({ errors });
+    this.setErrors(errors);
   };
 
   createWeb = (mutate: *) => () => {
     const variables = {
-      input: {
-        name: this.state.name,
-        clientMutationId: clientMutationId(),
-      },
+      name: this.state.name,
     };
 
-    const errors = validation.validateNewWeb(variables.input);
+    const errors = validation.validateNewWeb(variables);
     if (errors) {
-      this.setState({ errors });
+      this.setErrors(errors);
       return;
     }
 
@@ -59,27 +78,32 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
     );
   };
 
+  // $FlowFixMe
+  nameRef = React.createRef();
+
   render() {
     return (
       <Mutation>
         {({ mutate, pending }) => (
           <Form onSubmit={this.createWeb(mutate)}>
-            <TextInputBig
-              label={
-                <Text>
-                  <FormattedMessage
-                    defaultMessage="Web Name"
-                    id="createWeb.name.label"
-                  />
-                </Text>
-              }
-              autoFocus={this.state.errors.name}
-              disabled={pending}
-              error={<Error>{this.state.errors.name}</Error>}
-              onChangeText={name => this.setState({ name })}
-              type="text"
-              value={this.state.name}
-            />
+            <Block>
+              <TextInputBig
+                label={
+                  <Text>
+                    <FormattedMessage
+                      defaultMessage="Web Name"
+                      id="createWeb.name.label"
+                    />
+                  </Text>
+                }
+                disabled={pending}
+                error={this.state.errors.name}
+                onChangeText={this.setName}
+                type="text"
+                value={this.state.name}
+                inputRef={this.nameRef}
+              />
+            </Block>
             <Row>
               <CreateButton
                 color="primary"

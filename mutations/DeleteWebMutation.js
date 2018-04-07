@@ -9,8 +9,8 @@ import { ConnectionHandler } from 'relay-runtime';
 import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
-  mutation DeleteWebMutation($input: DeleteWebInput!) {
-    deleteWeb(input: $input) {
+  mutation DeleteWebMutation($id: ID!) {
+    deleteWeb(id: $id) {
       id
     }
   }
@@ -39,6 +39,7 @@ const commit: Commit<DeleteWebMutationVariables, DeleteWebMutationResponse> = (
     onError,
     updater: store => {
       const payload = store.getRootField('deleteWeb');
+      if (!payload) return;
       const id = payload.getValue('id');
       sharedUpdater(store, id);
     },

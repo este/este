@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9f23533eabe78f6dad38a015092a92bd
+ * @relayHash 8a998e7d2b20d93f421587873952c40e
  */
 
 /* eslint-disable */
@@ -10,10 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteWebMutationVariables = {|
-  input: {
-    id: string,
-    clientMutationId?: ?string,
-  },
+  id: string,
 |};
 export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
@@ -25,9 +22,9 @@ export type DeleteWebMutationResponse = {|
 
 /*
 mutation DeleteWebMutation(
-  $input: DeleteWebInput!
+  $id: ID!
 ) {
-  deleteWeb(input: $input) {
+  deleteWeb(id: $id) {
     id
   }
 }
@@ -37,8 +34,8 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "DeleteWebInput!",
+    "name": "id",
+    "type": "ID!",
     "defaultValue": null
   }
 ],
@@ -51,9 +48,9 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "input",
-        "variableName": "input",
-        "type": "DeleteWebInput!"
+        "name": "id",
+        "variableName": "id",
+        "type": "ID!"
       }
     ],
     "concreteType": "DeleteWebPayload",
@@ -74,7 +71,7 @@ return {
   "operationKind": "mutation",
   "name": "DeleteWebMutation",
   "id": null,
-  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    id\n  }\n}\n",
+  "text": "mutation DeleteWebMutation(\n  $id: ID!\n) {\n  deleteWeb(id: $id) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -92,5 +89,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '581a9fdd6e54b1f4a95543d5616cf309';
+(node/*: any*/).hash = '91f459254d3f67817a2c0aff9d274c5e';
 module.exports = node;

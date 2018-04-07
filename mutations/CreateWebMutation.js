@@ -9,8 +9,8 @@ import { ConnectionHandler } from 'relay-runtime';
 import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
-  mutation CreateWebMutation($input: CreateWebInput!) {
-    createWeb(input: $input) {
+  mutation CreateWebMutation($name: String!) {
+    createWeb(name: $name) {
       edge {
         node {
           ...WebsItem
@@ -43,6 +43,7 @@ const commit: Commit<CreateWebMutationVariables, CreateWebMutationResponse> = (
     onError,
     updater: store => {
       const payload = store.getRootField('createWeb');
+      if (!payload) return;
       const recordEdge = payload.getLinkedRecord('edge');
       sharedUpdater(store, recordEdge);
     },
