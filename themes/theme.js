@@ -81,7 +81,8 @@ const stylesJson = {
   },
 
   pageContainer: {
-    width: 960,
+    paddingHorizontal: typography.rhythm(0.5),
+    maxWidth: 960,
   },
 
   pageBody: {

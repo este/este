@@ -49,12 +49,12 @@ const Favicons = () => [
 ];
 
 const styles = StyleSheet.create({
-  scrollView: {
-    minHeight: '100%',
-  },
   container: {
-    flex: 1,
-    margin: 'auto',
+    marginHorizontal: 'auto',
+    minHeight: '100%', // make footer sticky
+  },
+  containerContent: {
+    flex: 1, // make footer sticky
   },
   body: {
     flex: 1, // make footer sticky
@@ -69,8 +69,8 @@ const PageContainer = ({ children }) => (
     {theme => (
       // Why ScrollView https://github.com/necolas/react-native-web/issues/829
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={[styles.container, theme.styles.pageContainer]}
+        style={[styles.container, theme.styles.pageContainer]}
+        contentContainerStyle={[styles.containerContent]}
       >
         {children}
       </ScrollView>
