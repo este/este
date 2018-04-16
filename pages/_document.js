@@ -7,8 +7,6 @@ import { AppRegistry } from 'react-native-web';
 // https://github.com/necolas/react-native-web/blob/master/website/guides/getting-started.md#server-side-rendering
 // https://github.com/zeit/next.js/tree/master/examples/with-react-intl
 
-let index = 0;
-
 // Force Next-generated DOM elements to fill their parent's height.
 // Not required for using of react-native-web, but helps normalize
 // layout for top-level wrapping elements.
@@ -28,22 +26,17 @@ export default class MyDocument extends Document {
     AppRegistry.registerComponent('Main', () => Main);
     const { getStyleElement } = AppRegistry.getApplication('Main', {});
     const props = await super.getInitialProps(context);
-    const {
-      req: { locale, localeDataScript /*, supportedLocales */ },
-    } = context;
-    const styles = [
-      <style
-        key={index++}
-        dangerouslySetInnerHTML={{ __html: normalizeNextElements }}
-      />,
-      ...React.Children.toArray(getStyleElement()),
-    ];
+    const styles = React.Children.toArray([
+      props.styles,
+      <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
+      getStyleElement(),
+    ]);
 
     return {
       ...props,
-      locale,
-      localeDataScript,
-      // supportedLocales,
+      locale: context.req.locale,
+      localeDataScript: context.req.localeDataScript,
+      // supportedLocales: context.req.supportedLocales,
       styles,
     };
   }
