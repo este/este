@@ -907,7 +907,7 @@ arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-art@^0.10.0, art@^0.10.1:
+art@^0.10.0:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/art/-/art-0.10.2.tgz#55c3738d82a3a07e0623943f070ebe86297253d9"
 
@@ -1245,9 +1245,9 @@ babel-plugin-react-intl@^2.3.1:
     intl-messageformat-parser "^1.2.0"
     mkdirp "^0.5.1"
 
-babel-plugin-react-native-web@^0.5.1:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.5.4.tgz#6f1ec0232d8d7a18923297399781f448c9a7927e"
+babel-plugin-react-native-web@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.6.0.tgz#6708ad482e0133b3594246f14feabfaf451f7ba8"
 
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
@@ -8341,17 +8341,6 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-art@^16.2.0:
-  version "16.3.2"
-  resolved "https://registry.yarnpkg.com/react-art/-/react-art-16.3.2.tgz#3bdf3d9962eedc93c5a7145e4554240c8d2cf3b3"
-  dependencies:
-    art "^0.10.1"
-    create-react-class "^15.6.2"
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-
 react-clone-referenced-element@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.0.1.tgz#2bba8c69404c5e4a944398600bcc4c941f860682"
@@ -8399,9 +8388,9 @@ react-is@^16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.2.tgz#f4d3d0e2f5fbb6ac46450641eb2e25bf05d36b22"
 
-react-native-web@^0.5.1:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.5.4.tgz#a1146548e95df241f3eba9666745ea8948404e78"
+react-native-web@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.6.0.tgz#46c843ab83c569246dc43ba745033c1bb4d22930"
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
@@ -8412,7 +8401,6 @@ react-native-web@^0.5.1:
     inline-style-prefixer "^4.0.0"
     normalize-css-color "^1.0.2"
     prop-types "^15.6.0"
-    react-art "^16.2.0"
     react-timer-mixin "^0.13.3"
 
 react-native@^0.55.0:

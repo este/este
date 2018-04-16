@@ -26,7 +26,7 @@ const normalizeNextElements = `
 export default class MyDocument extends Document {
   static async getInitialProps(context: Object) {
     AppRegistry.registerComponent('Main', () => Main);
-    const { getStyleElement } = AppRegistry.getApplication('Main');
+    const { getStyleElement } = AppRegistry.getApplication('Main', {});
     const props = await super.getInitialProps(context);
     const {
       req: { locale, localeDataScript /*, supportedLocales */ },
