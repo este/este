@@ -1,5 +1,5 @@
-// flow-typed signature: c689b02543ddc5f06241babda8a7ed4d
-// flow-typed version: 1fdf926e70/react-relay_v1.x.x/flow_>=v0.47.x
+// flow-typed signature: 809a8a23ed790a6069fbd9e9c47f850b
+// flow-typed version: a80240470a/react-relay_v1.x.x/flow_>=v0.47.x
 
 import * as React from 'react';
 
@@ -1351,5 +1351,701 @@ declare module "react-relay" {
 }
 
 declare module "react-relay/compat" {
+  declare module.exports: any;
+}
+
+declare module "react-relay/classic" {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/assertFragmentMap' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/buildReactRelayContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/buildRQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/callsFromGraphQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/callsToGraphQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/checkRelayQueryData' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ConcreteQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/containsRelayQueryRootCall' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/createRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/dedent' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/deepFreeze' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/diffRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/directivesToGraphQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/filterExclusiveKeys' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/filterRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/findRelayQueryLeaves' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/flattenRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/flattenSplitRelayQueries' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ForceRelayClassicContext' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/forEachRootCallArg' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/formatStorageKey' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/fromGraphQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/generateClientEdgeID' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/generateClientID' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/generateConcreteFragmentID' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/generateForceIndex' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/generateRQLFieldAlias' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/getRangeBehavior' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/getRelayHandleKey' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/getRelayQueries' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLMutatorConstants' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLQueryRunner' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLRange' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLSegment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLStoreChangeEmitter' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLStoreQueryResolver' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/GraphQLStoreRangeUtils' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/intersectRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isClassicRelayContext' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isClassicRelayEnvironment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isCompatibleRelayFragmentType' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isRelayContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isRelayContext' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isRelayEnvironment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isRelayModernContext' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isRelayVariables' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/isScalarAndEqual' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/prettyStringify' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/printRelayOSSQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/printRelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/QueryBuilder' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/rangeOperationToMetadataKey' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayClassicExports' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayCompatContainerBuilder' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayCompatPublic' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayContainerProfiler' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayFragmentContainer-flowtest' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayFragmentContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayFragmentMockRenderer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayPaginationContainer-flowtest' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayPaginationContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayPropTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayPublic' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayQueryRenderer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayRefetchContainer-flowtest' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayRefetchContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/ReactRelayTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/readRelayQueryData' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/recycleNodesInto' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCacheProcessor' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayChangeTracker' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayClassicCore' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayClassicRecordState' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCombinedEnvironmentTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatEnvironment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatMutations' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatPaginationContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatRefetchContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayCompatTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayConcreteNode' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayConnectionInterface' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayContainerComparators' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayContainerProxy' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayContainerUtils' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayDefaultHandleKey' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayDefaultNetworkLayer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayEnvironment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayEnvironmentSerializer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayEnvironmentTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayError' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayEventStatus' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayFetchMode' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayFragmentPointer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayFragmentReference' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayFragmentSpecResolver' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayGarbageCollection' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayGarbageCollector' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayGraphQLMutation' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayGraphQLTag' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayInternals' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayInternalTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMetaRoute' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMetricsRecorder' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMockRenderer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutation' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationDebugPrinter' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationQueue' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationRequest' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationTracker' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationTransaction' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationTransactionStatus' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayMutationType' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayNetworkDebug' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayNetworkLayer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayNodeInterface' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayOperationSelector' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayOptimisticMutationUtils' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayOSSConnectionInterface' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayPendingQueryTracker' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayProfiler' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayPropTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayPublic' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQL_GENERATED' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryCaching' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryConfig' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryPath' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryRequest' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryResultObservable' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryTracker' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryTransform' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryVisitor' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayQueryWriter' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayReadyState' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayReadyStateRenderer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRecord' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRecordStatusMap' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRecordStore' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRecordWriter' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRefQueryDescriptor' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRenderer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRootContainer' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRoute' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayRouteFragment' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelaySelector' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayShallowMock' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayStore' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayStoreConstants' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayStoreData' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayTaskQueue' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayTypes' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/relayUnstableBatchedUpdates' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/relayUnstableBatchedUpdates.native' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayVariable' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/RelayVariables' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/restoreRelayCacheData' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/serializeRelayQueryCall' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/simpleClone' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/splitDeferredRelayQueries' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/stableJSONStringify' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/stableStringify' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/testEditDistance' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/throwFailedPromise' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/toGraphQL' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/transformRelayQueryPayload' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/validateMutationConfig' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/validateRelayReadQuery' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/writeRelayQueryPayload' {
+  declare module.exports: any;
+}
+
+declare module 'react-relay/lib/writeRelayUpdatePayload' {
   declare module.exports: any;
 }

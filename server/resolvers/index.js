@@ -45,34 +45,38 @@ const getUserId = ctx => {
 
 /*::
 // Will be generated one day.
+type Parent = Object;
+type Args = Object;
+type Context = Object;
+type Info = Object;
 type Resolvers = {
   ['Mutation' | 'Query']: {
-    [string]: (Object, Object, Object, Object) => Object,
+    [string]: (Parent, Args, Context, Info) => mixed,
   },
 };
 */
 
 const resolvers /*: Resolvers */ = {
   Mutation: {
-    async signup(parent, args, ctx, info) {
+    async signup(parent, args, { db }) {
       const validationErrors = validation.validateEmailPassword(args);
       if (validationErrors) throwError(validationErrors);
 
-      const userExists = await ctx.db.exists.User({ email: args.email });
+      const userExists = await db.exists.User({ email: args.email });
       if (userExists) throwError({ email: { type: 'alreadyExists' } });
 
       const password = await bcrypt.hash(args.password, 10);
-      const user = await ctx.db.mutation.createUser({
+      const user = await db.mutation.createUser({
         data: { email: args.email, password },
       });
       return createAuthPayload(user);
     },
 
-    async signin(parent, args, ctx, info) {
+    async signin(parent, args, { db }) {
       const validationErrors = validation.validateEmailPassword(args);
       if (validationErrors) throwError(validationErrors);
 
-      const user = await ctx.db.query.user({ where: { email: args.email } });
+      const user = await db.query.user({ where: { email: args.email } });
       // I don't know how to easily type email prop. Switch to ReasonML asap.
       if (!user) throwError({ email: { type: 'notExists' } });
 
@@ -81,7 +85,7 @@ const resolvers /*: Resolvers */ = {
       return createAuthPayload(user);
     },
 
-    async createWeb(parent, args, ctx, info) {
+    async createWeb(parent, args, ctx) {
       // Only an authorized user can create a web.
       const userId = getUserId(ctx);
 
@@ -113,7 +117,7 @@ const resolvers /*: Resolvers */ = {
       };
     },
 
-    async deleteWeb(parent, { id }, ctx, info) {
+    async deleteWeb(parent, { id }, ctx) {
       const userId = getUserId(ctx);
       const webExists = await ctx.db.exists.Web({
         id,
@@ -124,7 +128,7 @@ const resolvers /*: Resolvers */ = {
       return { id };
     },
 
-    async updateUser(parent, { themeName }, ctx, info) {
+    async updateUser(parent, { themeName }, ctx) {
       const userId = getUserId(ctx);
       const user = await ctx.db.mutation.updateUser({
         data: { themeName },
