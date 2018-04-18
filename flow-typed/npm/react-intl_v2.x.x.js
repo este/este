@@ -1,5 +1,5 @@
-// flow-typed signature: 8358abfe36b0dfd8b1cf96f6fea03f72
-// flow-typed version: 8d18f671e6/react-intl_v2.x.x/flow_>=v0.57.x
+// flow-typed signature: e68caa23426dedefced5662fb92b4638
+// flow-typed version: d13a175635/react-intl_v2.x.x/flow_>=v0.57.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -137,7 +137,7 @@ declare module "react-intl" {
     | React$StatelessFunctionalComponent<Props>
     | ChildrenArray<void | null | boolean | string | number | Element<any>>;
 
-  declare type InjectIntlOtions = {
+  declare type InjectIntlOptions = {
     intlPropName?: string,
     withRef?: boolean
   }
@@ -155,14 +155,14 @@ declare module "react-intl" {
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps, DefaultProps: {}>
   (
     component: ComponentWithDefaultProps<DefaultProps, OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
 
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>>;
 

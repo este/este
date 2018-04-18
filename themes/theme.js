@@ -119,14 +119,12 @@ const stylesJson = {
 
   textInput: {
     color: colors.black,
-    marginBottom: typography.rhythm(1),
   },
 
   textInputBig: {
     borderBottomWidth: 1,
     borderColor: colors.gray,
     paddingVertical: typography.rhythm(0.5),
-    marginBottom: 0,
   },
 
   textInputBigError: {
