@@ -34,7 +34,6 @@ class Picker extends React.PureComponent<PickerProps> {
               theme.styles.pickerItem,
               style,
               itemStyle,
-              disabled === true && theme.styles.stateDisabled,
               theme.typography.fontSizeWithLineHeight(size),
             ]}
             {...props}

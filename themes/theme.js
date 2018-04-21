@@ -22,6 +22,10 @@ const colors = {
   gray: openColorTyped.gray[5],
 };
 
+// Is having all themed styles in one file right?
+// I think it is. That's because, when we see a lot of duplicates, it indicates
+// that we should create a reusable component.
+
 const stylesJson = {
   text: {
     color: colors.black,
