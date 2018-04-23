@@ -85,7 +85,6 @@ export const errorToMessage = (error: ErrorType) => {
       );
 
     default:
-      // eslint-disable-next-line no-unused-expressions
       (error: empty);
       return null;
   }

@@ -74,7 +74,6 @@ class Text extends React.PureComponent<TextProps> {
       case 'gray':
         return styles.textGray;
       default:
-        // eslint-disable-next-line no-unused-expressions
         (color: empty);
         return null;
     }

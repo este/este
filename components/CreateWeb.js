@@ -40,7 +40,6 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
         current = this.nameRef.current;
         break;
       default:
-        // eslint-disable-next-line no-unused-expressions
         (field: empty);
     }
     if (current) current.focus();

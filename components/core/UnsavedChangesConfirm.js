@@ -11,12 +11,7 @@ const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) => (
     defaultMessage="You have unsaved changes. Are you sure?"
     id="confirm.unsavedChanges"
   >
-    {message =>
-      render(() =>
-        // eslint-disable-next-line no-alert, no-undef
-        confirm((message: any)),
-      )
-    }
+    {message => render(() => confirm((message: any)))}
   </FormattedMessage>
 );
 

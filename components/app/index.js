@@ -16,13 +16,10 @@ import RelayProvider from '../core/RelayProvider';
 
 // Polyfill browser stuff.
 if (process.browser === true) {
-  // eslint-disable-next-line global-require
   require('smoothscroll-polyfill').polyfill();
 
   // Add locale data injected in pages/_document.js
-  // eslint-disable-next-line no-undef
   Object.keys(window.ReactIntlLocaleData).forEach(lang => {
-    // eslint-disable-next-line no-undef
     addLocaleData(window.ReactIntlLocaleData[lang]);
   });
 }
@@ -131,7 +128,6 @@ const app = (
     }
 
     const { locale, messages, supportedLocales } =
-      // eslint-disable-next-line no-undef
       context.req || window.__NEXT_DATA__.props;
 
     return ({
