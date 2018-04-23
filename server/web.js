@@ -8,7 +8,6 @@ const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
 const { readFileSync } = require('fs');
-const { maybeReqUrl } = require('./prettyUrl');
 
 // Polyfill Node with `Intl` that has data for all locales.
 // See: https://formatjs.io/guides/runtime-environments/#server
@@ -70,11 +69,6 @@ const intlReq = req => {
 app.prepare().then(() => {
   createServer((req, res) => {
     intlReq(req);
-    const reqUrl = maybeReqUrl(req.url);
-    if (reqUrl) {
-      app.render(req, res, reqUrl.pathname, reqUrl.query);
-      return;
-    }
     handle(req, res);
   }).listen('3000', err => {
     if (err) throw err;

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import NextLink from 'next/link';
-import { maybeLinkHref } from '../../server/prettyUrl';
 import type { Href } from '../app/sitemap';
 import { format } from 'url';
 import Locale from './Locale';
@@ -34,13 +33,11 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
     };
   };
 
-  getAsAndHref(locale: string) {
+  getHref(locale: string) {
     const { href } = this.props;
     // We don't process string URLs. They are considered as constants.
-    if (typeof href === 'string') return [null, href];
-    const localeHref = LocaleLink.maybeAddLocaleToHref(href, locale);
-    const as = maybeLinkHref(href);
-    return [as, localeHref];
+    if (typeof href === 'string') return href;
+    return LocaleLink.maybeAddLocaleToHref(href, locale);
   }
 
   render() {
@@ -49,18 +46,13 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
     return (
       <Locale>
         {({ locale }) => {
-          const [as, href] = this.getAsAndHref(locale);
+          const href = this.getHref(locale);
           return (
-            <NextLink
-              {...(as ? { as } : null)}
-              href={href}
-              prefetch={prefetch}
-              replace={replace}
-            >
+            <NextLink href={href} prefetch={prefetch} replace={replace}>
               {/* Add href manually because Next.js does it only for browser anchor. */}
               {/* Ensure href is string because custom components. */}
               {React.cloneElement(children, {
-                href: as || (typeof href === 'object' ? format(href) : href),
+                href: typeof href === 'object' ? format(href) : href,
               })}
             </NextLink>
           );
