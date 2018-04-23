@@ -182,9 +182,7 @@ const stylesJson = {
     color: colors.white,
   },
 
-  picker: {},
-
-  pickerItem: {
+  picker: {
     color: colors.black,
   },
 };
