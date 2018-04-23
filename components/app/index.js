@@ -16,8 +16,6 @@ import RelayProvider from '../core/RelayProvider';
 
 // Polyfill browser stuff.
 if (process.browser === true) {
-  require('smoothscroll-polyfill').polyfill();
-
   // Add locale data injected in pages/_document.js
   Object.keys(window.ReactIntlLocaleData).forEach(lang => {
     addLocaleData(window.ReactIntlLocaleData[lang]);
