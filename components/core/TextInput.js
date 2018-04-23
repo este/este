@@ -10,9 +10,7 @@ import Error from './Error';
 
 // This is just a stub for inputRef type.
 class ReactNativeWebTextInputElementStub extends React.Component<{}> {
-  // eslint-disable-next-line class-methods-use-this
   blur() {}
-  // eslint-disable-next-line class-methods-use-this
   focus() {}
 }
 

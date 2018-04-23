@@ -30,7 +30,6 @@ class Button extends React.PureComponent<ButtonProps> {
       case 'gray':
         return styles.buttonGray;
       default:
-        // eslint-disable-next-line no-unused-expressions
         (color: empty);
         return null;
     }

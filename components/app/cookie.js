@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable no-undef */
 import { serialize, parse } from 'cookie';
 
 // Do not add another values to cookie until it's absolutely necessary.

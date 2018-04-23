@@ -69,7 +69,6 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
         current = this.passwordRef.current;
         break;
       default:
-        // eslint-disable-next-line no-unused-expressions
         (field: empty);
     }
     if (current) current.focus();
