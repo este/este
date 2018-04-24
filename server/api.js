@@ -3,7 +3,7 @@ const { GraphQLServer } = require('graphql-yoga');
 const { Prisma } = require('prisma-binding');
 const resolvers = require('./resolvers');
 
-const dev = process.env.NODE_ENV !== 'production';
+// const dev = process.env.NODE_ENV !== 'production';
 
 const server = new GraphQLServer({
   typeDefs: 'server/model.graphql',
@@ -20,5 +20,6 @@ const server = new GraphQLServer({
 });
 
 server.start(() =>
+  // eslint-disable-next-line no-console
   console.log(`API is running on ${process.env.APP_GRAPHQL_ENDPOINT || ''}`),
 );

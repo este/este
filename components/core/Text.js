@@ -57,22 +57,22 @@ class Text extends React.PureComponent<TextProps> {
     isInAParentText: PropTypes.bool,
   };
 
-  static getColorStyle = (styles: *, color: *) => {
+  static getColorStyle = (themeStyles: *, color: *) => {
     switch (color) {
       case 'primary':
-        return styles.textPrimary;
+        return themeStyles.textPrimary;
       case 'success':
-        return styles.textSuccess;
+        return themeStyles.textSuccess;
       case 'warning':
-        return styles.textWarning;
+        return themeStyles.textWarning;
       case 'danger':
-        return styles.textDanger;
+        return themeStyles.textDanger;
       case 'black':
-        return styles.textBlack;
+        return themeStyles.textBlack;
       case 'white':
-        return styles.textWhite;
+        return themeStyles.textWhite;
       case 'gray':
-        return styles.textGray;
+        return themeStyles.textGray;
       default:
         (color: empty);
         return null;

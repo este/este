@@ -1,4 +1,5 @@
 // @flow
+/* eslint-env browser */
 import { serialize, parse } from 'cookie';
 
 // Do not add another values to cookie until it's absolutely necessary.
@@ -14,7 +15,7 @@ export const setCookie = (cookie: Cookie) => {
     maxAge: 30 * 24 * 60 * 60,
     path: '/',
   };
-  document.cookie = serialize(name, cookie.token, options);
+  window.document.cookie = serialize(name, cookie.token, options);
 };
 
 export const deleteCookie = () => {
@@ -22,14 +23,14 @@ export const deleteCookie = () => {
     maxAge: -1, // Expire the cookie immediately.
     path: '/',
   };
-  document.cookie = serialize(name, '', options);
+  window.document.cookie = serialize(name, '', options);
 };
 
 export const getCookie = (serverReq: ?Object): ?Cookie => {
   const cookie = parse(
     serverReq
       ? (serverReq.headers && serverReq.headers.cookie) || ''
-      : document.cookie,
+      : window.document.cookie,
   );
   if (!cookie || !cookie[name]) return null;
   return { token: cookie[name] };

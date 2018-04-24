@@ -9,8 +9,8 @@ type Validate<Variables> = (variables: Variables) => ?Errors<Variables>;
 // TODO: optional(emailValidator)
 
 const failOnFirst = (...validators) => value => {
-  for (const validator of validators) {
-    const error = validator(value);
+  for (let i = 0; i < validators.length; i++) {
+    const error = validators[i](value);
     if (error != null) return error;
   }
 };

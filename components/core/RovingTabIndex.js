@@ -58,7 +58,9 @@ class RovingTabIndex extends React.PureComponent<
   };
 
   getFocusable(): ?Element {
+    // eslint-disable-next-line react/no-find-dom-node
     const element = ReactDOM.findDOMNode(this);
+    // eslint-disable-next-line no-undef
     if (!(element instanceof HTMLElement)) return null;
     const tabIndex = element.getAttribute('tabindex');
     if (tabIndex === '-1' || tabIndex === '0') return element;
@@ -137,7 +139,9 @@ export class RovingTabIndexProvider extends React.PureComponent<
 
   // We have to query DOM to get all focusables in the right order.
   getFocusables(): Array<Element> {
+    // eslint-disable-next-line react/no-find-dom-node
     const element = ReactDOM.findDOMNode(this);
+    // eslint-disable-next-line no-undef
     if (element instanceof HTMLElement) {
       return Array.from(element.querySelectorAll(RovingTabIndex.selector));
     }
@@ -191,6 +195,7 @@ export class RovingTabIndexProvider extends React.PureComponent<
     let lineRect = currentRect;
     let nextLine = false;
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       const nextIndex = moveIndex + (up ? -1 : 1);
       const isInRange = nextIndex >= 0 && nextIndex <= focusables.length - 1;
@@ -213,6 +218,7 @@ export class RovingTabIndexProvider extends React.PureComponent<
     const getCenterX = rect => rect.left + rect.width / 2;
     const centerX = getCenterX(currentRect);
     const byHorizontalCenter = nextLineFocusables
+      // eslint-disable-next-line no-shadow
       .map(index => ({ index, rect: focusablesRects[index] }))
       .sort((a, b) => {
         const d1 = Math.abs(centerX - getCenterX(a.rect));
@@ -229,7 +235,7 @@ export class RovingTabIndexProvider extends React.PureComponent<
     const focusables = this.getFocusables();
     if (!focusable) return;
     const index = focusables.indexOf(focusable);
-    if (index === -1) return null;
+    if (index === -1) return;
 
     const isHorizontal = direction === 'left' || direction === 'right';
     if (isHorizontal) {

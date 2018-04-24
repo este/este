@@ -37,6 +37,7 @@ const getLocaleDataScript = locale => {
 };
 
 const getMessages = locale => {
+  /* eslint-disable global-require, import/no-dynamic-require */
   // $FlowFixMe This is fine.
   return require(`../lang/${locale}.json`);
 };
@@ -72,6 +73,7 @@ app.prepare().then(() => {
     handle(req, res);
   }).listen('3000', err => {
     if (err) throw err;
+    // eslint-disable-next-line no-console
     console.log('> Read on http://localhost:3000');
   });
 });

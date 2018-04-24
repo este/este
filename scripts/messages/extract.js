@@ -16,9 +16,11 @@ const defaultMessages = glob
   )
   .sort((a, b) => a.id.localeCompare(b.id))
   .reduce((messages, descriptor) => {
+    // eslint-disable-next-line no-prototype-builtins
     if (messages.hasOwnProperty(descriptor.id)) {
       throw new Error(`Duplicate message id: ${descriptor.id}`);
     }
+    // eslint-disable-next-line no-param-reassign
     messages[descriptor.id] = descriptor.defaultMessage;
     return messages;
   }, {});
@@ -28,6 +30,7 @@ fs.writeFileSync(
   JSON.stringify(defaultMessages, null, 2),
 );
 
+// eslint-disable-next-line no-console
 console.log(
   `Wrote default messages to: "${resolve(`./lang/${defaultLocale}.json`)}"`,
 );

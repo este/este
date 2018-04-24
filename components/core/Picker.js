@@ -1,10 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Picker as NativePicker } from 'react-native';
-import type {
-  ViewStyleProp,
-  TextStyleProp,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Theme from './Theme';
 
 // https://github.com/necolas/react-native-web/issues/879

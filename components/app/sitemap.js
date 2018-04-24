@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable import/prefer-default-export */
+
 import { defineMessages } from 'react-intl';
 
 // With Href type, we can ensure all app links are correct at build time.

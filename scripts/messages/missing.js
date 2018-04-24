@@ -14,6 +14,7 @@ glob
     const json = readJson(path);
     const missing = [];
     defaultLocaleKeys.forEach(key => {
+      // eslint-disable-next-line no-prototype-builtins
       if (json.hasOwnProperty(key)) return;
       missing.push(key);
     });
@@ -21,4 +22,5 @@ glob
     throw new Error(`Missing messages in ${path}: ${missing.join(', ')}`);
   });
 
+// eslint-disable-next-line no-console
 console.log('No messages are missing');

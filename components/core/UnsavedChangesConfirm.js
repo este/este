@@ -1,4 +1,5 @@
 // @flow
+/* eslint-env browser */
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -11,7 +12,7 @@ const UnsavedChangesConfirm = ({ render }: UnsavedChangesConfirmProps) => (
     defaultMessage="You have unsaved changes. Are you sure?"
     id="confirm.unsavedChanges"
   >
-    {message => render(() => confirm((message: any)))}
+    {message => render(() => window.confirm((message: any)))}
   </FormattedMessage>
 );
 

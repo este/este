@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable import/prefer-default-export */
 
 // So here is a thing. We have only one Error type in the app.
 // Note, it overrides JavaScript Error when imported. That's fine.

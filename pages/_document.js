@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
     const props = await super.getInitialProps(context);
     const styles = React.Children.toArray([
       props.styles,
+      // eslint-disable-next-line react/no-danger
       <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
       getStyleElement(),
     ]);
@@ -62,6 +63,7 @@ export default class MyDocument extends Document {
         </Head>
         <body style={{ height: '100%', width: '100%', overflowY: 'scroll' }}>
           <Main />
+          {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
           <NextScript />
         </body>

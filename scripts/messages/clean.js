@@ -20,4 +20,5 @@ glob
     fs.writeFileSync(path, JSON.stringify(cleaned, null, 2));
   });
 
+// eslint-disable-next-line no-console
 console.log('Messages cleaned');

@@ -1,4 +1,5 @@
 // @flow
+/* eslint-env browser */
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -126,6 +127,7 @@ const app = (
     }
 
     const { locale, messages, supportedLocales } =
+      // eslint-disable-next-line no-underscore-dangle
       context.req || window.__NEXT_DATA__.props;
 
     return ({

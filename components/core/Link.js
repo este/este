@@ -9,7 +9,9 @@ import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 type LinkProps = LocaleLinkBaseProps & { children: React.Node };
 
 const Link = ({ children, href, prefetch, replace }: LinkProps) => (
+  // eslint-disable-next-line jsx-a11y/anchor-is-valid
   <LocaleLink href={href} prefetch={prefetch} replace={replace}>
+    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
     <a>{children}</a>
   </LocaleLink>
 );

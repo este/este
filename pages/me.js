@@ -1,4 +1,5 @@
 // @flow
+/* eslint-env browser */
 import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';

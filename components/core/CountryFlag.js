@@ -1,6 +1,4 @@
 // @flow
-import * as React from 'react';
-
 const CountryFlag = ({ code }: { code: string }) =>
   code
     .toUpperCase()
