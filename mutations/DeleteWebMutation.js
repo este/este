@@ -38,6 +38,9 @@ const commit: Commit<DeleteWebMutationVariables, DeleteWebMutationResponse> = (
     onCompleted,
     onError,
     updater: store => {
+      // How we can get clientRoot:
+      // const clientRoot = store.get('client:root');
+      // clientRoot.setLinkedRecords(attendance, 'attendance', args);
       const payload = store.getRootField('deleteWeb');
       if (!payload) return;
       const id = payload.getValue('id');

@@ -39,7 +39,6 @@
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
     "test": "run-s messages:missing relay:ci eslint flow jest build",
     "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
-    "analyze": "cross-env ANALYZE=1 next build",
     "prisma-local-upgrade": "yarn prisma local upgrade && yarn deploy:db",
     "schema-relay": "yarn schema && yarn relay",
     "eslint": "eslint components mutations pages screens scripts server test themes index.js"
