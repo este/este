@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 57535266522befae03e5820d9e4c39d1
+ * @relayHash 7b7912d4bbe88a66fe3255ec2802fe3c
  */
 
 /* eslint-disable */
@@ -10,9 +10,9 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Page$ref = any;
-export type signInQueryVariables = {| |};
+export type signInQueryVariables = {||};
 export type signInQueryResponse = {|
-  +$fragmentRefs: Page$ref,
+  +$fragmentRefs: Page$ref
 |};
 */
 
@@ -84,5 +84,6 @@ const node/*: ConcreteRequest*/ = {
     ]
   }
 };
+// prettier-ignore
 (node/*: any*/).hash = '27b8c2f4d973b7c447f8c510f9253bc8';
 module.exports = node;

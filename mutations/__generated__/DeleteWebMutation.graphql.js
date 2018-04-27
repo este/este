@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8a998e7d2b20d93f421587873952c40e
+ * @relayHash e050342414a40a80baa7fa4368b4e017
  */
 
 /* eslint-disable */
@@ -10,12 +10,12 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteWebMutationVariables = {|
-  id: string,
+  id: string
 |};
 export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
-    +id: ?string,
-  |},
+    +id: ?string
+  |}
 |};
 */
 
@@ -89,5 +89,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '91f459254d3f67817a2c0aff9d274c5e';
 module.exports = node;

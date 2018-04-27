@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dd90af67e91d2b7564aad74e46a78f37
+ * @relayHash 3b22d2d32ac969548bfd2595d52d51f9
  */
 
 /* eslint-disable */
@@ -10,12 +10,12 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type editQueryVariables = {|
-  domain: string,
+  domain: string
 |};
 export type editQueryResponse = {|
   +web: ?{|
-    +name: string,
-  |},
+    +name: string
+  |}
 |};
 */
 
@@ -111,5 +111,6 @@ return {
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '93da25a514396eb252c01bab272f5920';
 module.exports = node;

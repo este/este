@@ -1,5 +1,5 @@
-// flow-typed signature: 8bfc0e33f86ebe32d86c99cffd432404
-// flow-typed version: fa010af930/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: d3449f8ea25c35ca1946ee2466812df8
+// flow-typed version: 8817b601c3/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -893,6 +893,9 @@ declare module ramda {
     fns: Array<(a: V, b: V) => number>,
     ...rest: Array<void>
   ): (xs: T) => T;
+
+  declare function descend<A, B>(A => B): (A => A) => number
+  declare function ascend<A, B>(A => B): (A => A) => number
 
   declare function times<T>(fn: (i: number) => T, n: number): Array<T>;
   declare function times<T>(
