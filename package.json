@@ -2,7 +2,7 @@
   "name": "este",
   "private": true,
   "engines": {
-    "node": "9.x.x"
+    "node": "10.x.x"
   },
   "license": "MIT",
   "scripts": {
