@@ -2,6 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import type { Environment } from 'react-relay';
+import { withRouter } from 'next/router';
 
 // RelayProvider sets Relay context manually for SSR and pending navigations.
 // Check App.getInitialProps, note "await fetchQuery". It replaces QueryRenderer.
@@ -9,8 +10,10 @@ import type { Environment } from 'react-relay';
 
 type RelayProviderProps = {
   environment: Environment,
-  variables: Object,
   children: React.Node,
+  router: {
+    query: Object,
+  },
 };
 
 class RelayProvider extends React.PureComponent<RelayProviderProps> {
@@ -22,7 +25,7 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
     return {
       relay: {
         environment: this.props.environment,
-        variables: this.props.variables,
+        variables: this.props.router.query,
       },
     };
   }
@@ -32,4 +35,4 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
   }
 }
 
-export default RelayProvider;
+export default withRouter(RelayProvider);

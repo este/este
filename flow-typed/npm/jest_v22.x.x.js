@@ -1,5 +1,5 @@
-// flow-typed signature: 17c6ca97e1e560b9bc0d3400f8b2882f
-// flow-typed version: a5bbe16c29/jest_v22.x.x/flow_>=v0.39.x
+// flow-typed signature: 069387a9f0aaed26ad0eb69da26f3e03
+// flow-typed version: 2c21d4538f/jest_v22.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -451,7 +451,7 @@ type JestObjectType = {
    * Creates a mock function similar to jest.fn but also tracks calls to
    * object[methodName].
    */
-  spyOn(object: Object, methodName: string): JestMockFn<any, any>,
+  spyOn(object: Object, methodName: string, accessType?: "get" | "set"): JestMockFn<any, any>,
   /**
    * Set the default timeout interval for tests and before/after hooks in milliseconds.
    * Note: The default timeout interval is 5 seconds if this method is not called.

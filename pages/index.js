@@ -20,28 +20,28 @@ const ManageYourWebsMessage = () => (
 );
 
 const Authenticated = ({ data }) => (
-  <React.Fragment>
+  <>
     <Heading size={1}>{<ManageYourWebsMessage />}</Heading>
     <Webs data={data} />
     <CreateWeb />
-  </React.Fragment>
+  </>
 );
 
 // import { Platform } from 'react-native';
 // const WebOnlyComponentWithStyledJSX = () =>
 //   Platform.OS === 'web' && (
-//     <React.Fragment>
+//     <>
 //       <h1>fok</h1>
 //       <style jsx>{`
 //         h1 {
 //           color: red;
 //         }
 //       `}</style>
-//     </React.Fragment>
+//     </>
 //   );
 
 const NotAuthenticated = () => (
-  <React.Fragment>
+  <>
     <Block>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
@@ -54,21 +54,21 @@ const NotAuthenticated = () => (
       The curious task of economics is to demonstrate to men how little they
       really know about what they imagine they can design.
     </Blockquote>
-  </React.Fragment>
+  </>
 );
 
 const Index = props => {
   return (
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
       {isAuthenticated => (
-        <React.Fragment>
+        <>
           <Heading size={3}>Este</Heading>
           {isAuthenticated ? (
             <Authenticated data={props.data} />
           ) : (
             <NotAuthenticated />
           )}
-        </React.Fragment>
+        </>
       )}
     </Page>
   );
