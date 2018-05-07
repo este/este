@@ -34,7 +34,7 @@
     "messages": "run-s messages:extract messages:clean messages:missing",
     "favicon": "node ./scripts/favicon",
     "flow": "flow",
-    "jest": "yarn babel web && jest",
+    "jest": "jest",
     "jest:watch": "jest --watch",
     "format": "prettier --write '**/*.js'",
     "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
