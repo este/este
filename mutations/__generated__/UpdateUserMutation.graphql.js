@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3a1d401a9522099abe6eb6174630abbe
+ * @relayHash 24199fa24bd275f943f70ca6b59bd863
  */
 
 /* eslint-disable */
@@ -9,8 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type UpdateUserMutationVariables = {|
+export type UpdateUserInput = {
   themeName: string
+};
+export type UpdateUserMutationVariables = {|
+  input: UpdateUserInput
 |};
 export type UpdateUserMutationResponse = {|
   +updateUser: ?{|
@@ -24,9 +27,9 @@ export type UpdateUserMutationResponse = {|
 
 /*
 mutation UpdateUserMutation(
-  $themeName: String!
+  $input: UpdateUserInput!
 ) {
-  updateUser(themeName: $themeName) {
+  updateUser(input: $input) {
     user {
       themeName
       id
@@ -39,17 +42,17 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "themeName",
-    "type": "String!",
+    "name": "input",
+    "type": "UpdateUserInput!",
     "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "themeName",
-    "variableName": "themeName",
-    "type": "String!"
+    "name": "input",
+    "variableName": "input",
+    "type": "UpdateUserInput!"
   }
 ],
 v2 = {
@@ -64,7 +67,7 @@ return {
   "operationKind": "mutation",
   "name": "UpdateUserMutation",
   "id": null,
-  "text": "mutation UpdateUserMutation(\n  $themeName: String!\n) {\n  updateUser(themeName: $themeName) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
+  "text": "mutation UpdateUserMutation(\n  $input: UpdateUserInput!\n) {\n  updateUser(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -138,5 +141,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'efde396ba06a030259a65b8897585684';
+(node/*: any*/).hash = '360a1c19edae0ad5872dd7f05792f605';
 module.exports = node;

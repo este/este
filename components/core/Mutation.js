@@ -16,9 +16,9 @@ const MutationContext: Context<Value> = createReactContext({
 
 export const MutationProvider = MutationContext.Provider;
 
-export type Commit<Variables, Response> = (
+export type Commit<Input, Response> = (
   environment: Environment,
-  variables: Variables,
+  input: Input,
   onCompleted: (
     response: Response,
     payloadErrors: ?Array<PayloadError>,

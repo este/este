@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 247769f2c080f9283b2b519429b318a8
+ * @relayHash 3d56ead39c484b6e78658f65872f9fcf
  */
 
 /* eslint-disable */
@@ -10,8 +10,11 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type WebsItem$ref = any;
-export type CreateWebMutationVariables = {|
+export type CreateWebInput = {
   name: string
+};
+export type CreateWebMutationVariables = {|
+  input: CreateWebInput
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
@@ -27,9 +30,9 @@ export type CreateWebMutationResponse = {|
 
 /*
 mutation CreateWebMutation(
-  $name: String!
+  $input: CreateWebInput!
 ) {
-  createWeb(name: $name) {
+  createWeb(input: $input) {
     edge {
       node {
         ...WebsItem
@@ -51,17 +54,17 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "name",
-    "type": "String!",
+    "name": "input",
+    "type": "CreateWebInput!",
     "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
-    "type": "String!"
+    "name": "input",
+    "variableName": "input",
+    "type": "CreateWebInput!"
   }
 ];
 return {
@@ -69,7 +72,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $name: String!\n) {\n  createWeb(name: $name) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -189,5 +192,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '3868392819f73fafd1e4ce1ff657ffac';
+(node/*: any*/).hash = '865f52f79821b920823ab4e455c92e46';
 module.exports = node;

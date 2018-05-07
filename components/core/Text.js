@@ -17,6 +17,7 @@ export type TextProps = {|
   style?: TextStyleProp,
   children?: React.Node,
   // React Native does not export Text props Flow types yet, so add them as-go.
+  // Feel free to add any used prop.
   accessibilityRole?: *,
   onMouseEnter?: *,
   onMouseLeave?: *,

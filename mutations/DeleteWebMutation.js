@@ -2,15 +2,15 @@
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
 import type {
-  DeleteWebMutationVariables,
+  DeleteWebInput,
   DeleteWebMutationResponse,
 } from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
 import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
-  mutation DeleteWebMutation($id: ID!) {
-    deleteWeb(id: $id) {
+  mutation DeleteWebMutation($input: DeleteWebInput!) {
+    deleteWeb(input: $input) {
       id
     }
   }
@@ -25,16 +25,16 @@ const sharedUpdater = (store, id) => {
   ConnectionHandler.deleteNode(connection, id);
 };
 
-const commit: Commit<DeleteWebMutationVariables, DeleteWebMutationResponse> = (
+const commit: Commit<DeleteWebInput, DeleteWebMutationResponse> = (
   environment,
-  variables,
+  input,
   onCompleted,
   onError,
 ) =>
   commitMutation(environment, {
     mutation,
     // $FlowFixMe Wrong libdef.
-    variables,
+    variables: { input },
     onCompleted,
     onError,
     updater: store => {

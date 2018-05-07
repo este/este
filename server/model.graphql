@@ -2,10 +2,7 @@
 # import WebEdge from "../database/schema.graphql"
 # import WebConnection from "../database/schema.graphql"
 
-# http://graphql.org/learn/best-practices/#versioning
-# http://graphql.org/learn/best-practices/#nullability
-# https://medium.com/@calebmer/when-to-use-graphql-non-null-fields-4059337f6fc8
-# http://graphql.org/learn/schema/
+# https://github.com/este/este/wiki/GraphQL
 # tl;dr Use non-nullable for inputs and nullable for payloads.
 
 # Workflow:
@@ -14,6 +11,7 @@
 #   - test it in playground
 #   - run `yarn schema-relay` in another terminal window
 #   - restart `yarn dev` in first terminal window
+
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
@@ -26,19 +24,34 @@ type User {
   themeName: String
 }
 
-# Note Payloads are nullable, because mutation can fail.
+input AuthInput {
+  email: String!
+  password: String!
+}
 
 type AuthPayload {
   token: String!
   user: User!
 }
 
+input CreateWebInput {
+  name: String!
+}
+
 type CreateWebPayload {
   edge: WebEdge
 }
 
+input DeleteWebInput {
+  id: ID!
+}
+
 type DeleteWebPayload {
   id: ID
+}
+
+input UpdateUserInput {
+  themeName: String!
 }
 
 type UpdateUserPayload {
@@ -46,11 +59,11 @@ type UpdateUserPayload {
 }
 
 type Mutation {
-  signup(email: String!, password: String!): AuthPayload
-  signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): CreateWebPayload
-  deleteWeb(id: ID!): DeleteWebPayload
-  updateUser(themeName: String!): UpdateUserPayload
+  signup(input: AuthInput!): AuthPayload
+  signin(input: AuthInput!): AuthPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 type Query {

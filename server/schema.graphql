@@ -1,13 +1,22 @@
 # source: http://localhost:4000
-# timestamp: Fri Apr 06 2018 03:18:00 GMT+0200 (CEST)
+# timestamp: Tue May 08 2018 00:41:04 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
 }
 
+input AuthInput {
+  email: String!
+  password: String!
+}
+
 type AuthPayload {
   token: String!
   user: User!
+}
+
+input CreateWebInput {
+  name: String!
 }
 
 type CreateWebPayload {
@@ -16,16 +25,20 @@ type CreateWebPayload {
 
 scalar DateTime
 
+input DeleteWebInput {
+  id: ID!
+}
+
 type DeleteWebPayload {
   id: ID
 }
 
 type Mutation {
-  signup(email: String!, password: String!): AuthPayload
-  signin(email: String!, password: String!): AuthPayload
-  createWeb(name: String!): CreateWebPayload
-  deleteWeb(id: ID!): DeleteWebPayload
-  updateUser(themeName: String!): UpdateUserPayload
+  signup(input: AuthInput!): AuthPayload
+  signin(input: AuthInput!): AuthPayload
+  createWeb(input: CreateWebInput!): CreateWebPayload
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 """An object with an ID"""
@@ -55,6 +68,10 @@ type Query {
   web(domain: String!): Web
 }
 
+input UpdateUserInput {
+  themeName: String!
+}
+
 type UpdateUserPayload {
   user: User
 }
@@ -73,6 +90,9 @@ input UserWhereInput {
 
   """Logical OR on all given filters."""
   OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -317,6 +337,9 @@ input WebWhereInput {
 
   """Logical OR on all given filters."""
   OR: [WebWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WebWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""

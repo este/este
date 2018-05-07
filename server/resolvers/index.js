@@ -58,42 +58,42 @@ type Resolvers = {
 
 const resolvers /*: Resolvers */ = {
   Mutation: {
-    async signup(parent, args, { db }) {
-      const validationErrors = validation.validateEmailPassword(args);
+    async signup(parent, { input }, { db }) {
+      const validationErrors = validation.validateEmailPassword(input);
       if (validationErrors) throwError(validationErrors);
 
-      const userExists = await db.exists.User({ email: args.email });
+      const userExists = await db.exists.User({ email: input.email });
       if (userExists) throwError({ email: { type: 'alreadyExists' } });
 
-      const password = await bcrypt.hash(args.password, 10);
+      const password = await bcrypt.hash(input.password, 10);
       const user = await db.mutation.createUser({
-        data: { email: args.email, password },
+        data: { email: input.email, password },
       });
       return createAuthPayload(user);
     },
 
-    async signin(parent, args, { db }) {
-      const validationErrors = validation.validateEmailPassword(args);
+    async signin(parent, { input }, { db }) {
+      const validationErrors = validation.validateEmailPassword(input);
       if (validationErrors) throwError(validationErrors);
 
-      const user = await db.query.user({ where: { email: args.email } });
+      const user = await db.query.user({ where: { email: input.email } });
       // I don't know how to easily type email prop. Switch to ReasonML asap.
       if (!user) throwError({ email: { type: 'notExists' } });
 
-      const valid = await bcrypt.compare(args.password, user.password);
+      const valid = await bcrypt.compare(input.password, user.password);
       if (!valid) throwError({ password: { type: 'wrongPassword' } });
       return createAuthPayload(user);
     },
 
-    async createWeb(parent, args, ctx) {
+    async createWeb(parent, { input }, ctx) {
       // Only an authorized user can create a web.
       const userId = getUserId(ctx);
 
       // The same logic as on clients.
-      const validationErrors = validation.validateNewWeb(args);
+      const validationErrors = validation.validateNewWeb(input);
       if (validationErrors) throwError(validationErrors);
 
-      const domainName = args.name
+      const domainName = input.name
         .toLowerCase()
         .split('')
         .map(char => diacriticsMap[char] || char)
@@ -104,7 +104,7 @@ const resolvers /*: Resolvers */ = {
 
       const web = await ctx.db.mutation.createWeb({
         data: {
-          name: args.name,
+          name: input.name,
           domain,
           owner: { connect: { id: userId } },
         },
@@ -117,21 +117,21 @@ const resolvers /*: Resolvers */ = {
       };
     },
 
-    async deleteWeb(parent, { id }, ctx) {
+    async deleteWeb(parent, { input }, ctx) {
       const userId = getUserId(ctx);
       const webExists = await ctx.db.exists.Web({
-        id,
+        id: input.id,
         owner: { id: userId },
       });
       if (!webExists) throwNotAuthorizedError();
-      await ctx.db.mutation.deleteWeb({ where: { id } });
-      return { id };
+      await ctx.db.mutation.deleteWeb({ where: { id: input.id } });
+      return { id: input.id };
     },
 
-    async updateUser(parent, { themeName }, ctx) {
+    async updateUser(parent, { input }, ctx) {
       const userId = getUserId(ctx);
       const user = await ctx.db.mutation.updateUser({
-        data: { themeName },
+        data: { themeName: input.themeName },
         where: { id: userId },
       });
       return { user };

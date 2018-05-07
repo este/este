@@ -9,7 +9,7 @@ export type ButtonProps = {|
   inline?: boolean,
   accessibilityLabel?: string,
   disabled?: boolean,
-  onPress: () => void,
+  onPress?: () => void,
   testID?: string,
 |};
 

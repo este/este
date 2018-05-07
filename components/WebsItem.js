@@ -23,8 +23,8 @@ const DeleteWeb = ({ id }) => (
             disabled={pending}
             onPress={() => {
               if (!confirm()) return;
-              const variables = { id };
-              mutate(DeleteWebMutation.commit, variables);
+              const input = { id };
+              mutate(DeleteWebMutation.commit, input);
             }}
             size={-1}
           />

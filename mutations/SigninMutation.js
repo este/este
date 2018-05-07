@@ -2,28 +2,28 @@
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
 import type {
+  AuthInput,
   SigninMutationResponse,
-  SigninMutationVariables,
 } from './__generated__/SigninMutation.graphql';
 
 const mutation = graphql`
-  mutation SigninMutation($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
+  mutation SigninMutation($input: AuthInput!) {
+    signin(input: $input) {
       token
     }
   }
 `;
 
-const commit: Commit<SigninMutationVariables, SigninMutationResponse> = (
+const commit: Commit<AuthInput, SigninMutationResponse> = (
   environment,
-  variables,
+  input,
   onCompleted,
   onError,
 ) =>
   commitMutation(environment, {
     mutation,
     // $FlowFixMe Wrong libdef.
-    variables,
+    variables: { input },
     onCompleted,
     onError,
   });

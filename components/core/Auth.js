@@ -6,6 +6,7 @@ import TextInputBig from './TextInputBig';
 import { SignInButton, SignUpButton } from './buttons';
 import SigninMutation from '../../mutations/SigninMutation';
 import SignupMutation from '../../mutations/SignupMutation';
+import type { AuthInput } from '../../mutations/__generated__/SigninMutation.graphql';
 import Router from 'next/router';
 import Mutation from './Mutation';
 import * as validation from '../../server/validation';
@@ -34,34 +35,30 @@ type AuthProps = {|
   intl: IntlShape,
 |};
 
-type Fields = {|
+type AuthState = {|
+  inputErrors: Errors<AuthInput>,
   email: string,
   password: string,
 |};
 
-type AuthState = {|
-  ...Fields,
-  errors: Errors<Fields>,
-|};
-
 class Auth extends React.PureComponent<AuthProps, AuthState> {
   static initialState = {
+    inputErrors: {},
     email: '',
     password: '',
-    errors: {},
   };
 
   state = Auth.initialState;
 
-  setEmail = (email: string) => this.setState({ email });
+  // That's how we define event handlers.
+  setEmail = email => this.setState({ email });
+  setPassword = password => this.setState({ password });
 
-  setPassword = (password: string) => this.setState({ password });
-
-  setFocusOnError(errors: Errors<Fields>) {
-    const field = Object.keys(errors)[0];
-    if (!field) return;
+  setFocusOnError(inputErrors: Errors<AuthInput>) {
+    const error = Object.keys(inputErrors)[0];
+    if (!error) return;
     let current;
-    switch (field) {
+    switch (error) {
       case 'email':
         current = this.emailRef.current;
         break;
@@ -69,14 +66,14 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
         current = this.passwordRef.current;
         break;
       default:
-        (field: empty);
+        (error: empty);
     }
     if (current) current.focus();
   }
 
-  setErrors(errors: Errors<Fields>) {
-    this.setState({ errors });
-    this.setFocusOnError(errors);
+  setErrors(inputErrors: Errors<AuthInput>) {
+    this.setState({ inputErrors });
+    this.setFocusOnError(inputErrors);
   }
 
   handleCompleted = (response: *) => {
@@ -98,33 +95,33 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     }
   };
 
-  handleError = (errors: *) => {
-    this.setErrors(errors);
+  handleError = (inputErrors: *) => {
+    this.setErrors(inputErrors);
   };
 
   auth = (mutate: *, isSignUp?: boolean) => () => {
-    const variables = {
+    const input = {
       email: this.state.email,
       password: this.state.password,
     };
 
-    const errors = validation.validateEmailPassword(variables);
-    if (errors) {
-      this.setErrors(errors);
+    const inputErrors = validation.validateEmailPassword(input);
+    if (inputErrors) {
+      this.setErrors(inputErrors);
       return;
     }
 
     if (isSignUp === true) {
       mutate(
         SignupMutation.commit,
-        variables,
+        input,
         this.handleCompleted,
         this.handleError,
       );
     } else {
       mutate(
         SigninMutation.commit,
-        variables,
+        input,
         this.handleCompleted,
         this.handleError,
       );
@@ -132,7 +129,6 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   };
 
   emailRef = React.createRef();
-
   passwordRef = React.createRef();
 
   render() {
@@ -147,7 +143,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 <TextInputBig
                   autoComplete="email"
                   disabled={pending}
-                  error={this.state.errors.email}
+                  error={this.state.inputErrors.email}
                   keyboardType="email-address"
                   name="email"
                   onChangeText={this.setEmail}
@@ -157,7 +153,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 />
                 <TextInputBig
                   disabled={pending}
-                  error={this.state.errors.password}
+                  error={this.state.inputErrors.password}
                   name="password"
                   onChangeText={this.setPassword}
                   placeholder={intl.formatMessage(messages.passwordPlaceholder)}
