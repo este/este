@@ -16,6 +16,7 @@ import RelayProvider from '../core/RelayProvider';
 // installRelayDevTools();
 
 // Polyfill browser stuff.
+// $FlowFixMe It's fine.
 if (process.browser === true) {
   // Add locale data injected in pages/_document.js
   Object.keys(window.ReactIntlLocaleData).forEach(lang => {

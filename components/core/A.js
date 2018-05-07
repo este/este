@@ -4,7 +4,10 @@ import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 import Text, { type TextProps } from './Text';
 import { withRouter } from 'next/router';
 
-export type AProps = LocaleLinkBaseProps & TextProps;
+export type AProps = {|
+  ...TextProps,
+  ...LocaleLinkBaseProps,
+|};
 
 type AState = {|
   hover: boolean,

@@ -4,9 +4,10 @@ import Theme from './Theme';
 import { View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
-type BlockProps = {
+type BlockProps = {|
   style?: ViewStyleProp,
-};
+  children?: React.Node,
+|};
 
 class Block extends React.PureComponent<BlockProps> {
   render() {

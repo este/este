@@ -71,18 +71,18 @@ class ErrorPopup extends React.PureComponent<{}> {
           if (!error) return null;
           return (
             <ErrorComponent
-              backgroundColor="warning"
-              bold
-              color="white"
-              display="inline"
-              left="50%"
-              margin="auto"
-              paddingHorizontal={1}
-              paddingVertical={0.25}
-              // style={{ position: 'absolute' }}
-              // style={{ position: 'fixed', transform: 'translateX(-50%)' }}
-              top={0}
-              zIndex={1}
+            // backgroundColor="warning"
+            // bold
+            // color="white"
+            // display="inline"
+            // left="50%"
+            // margin="auto"
+            // paddingHorizontal={1}
+            // paddingVertical={0.25}
+            // style={{ position: 'absolute' }}
+            // style={{ position: 'fixed', transform: 'translateX(-50%)' }}
+            // top={0}
+            // zIndex={1}
             >
               {error}
             </ErrorComponent>

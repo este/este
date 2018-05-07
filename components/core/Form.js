@@ -15,8 +15,9 @@ class Form extends React.PureComponent<FormProps> {
     e.preventDefault();
   };
 
+  // Submit on any input key enter.
   handleKeyPress = (e: KeyboardEvent) => {
-    // Submit on any input key enter.
+    // $FlowFixMe It's fine.
     if (e.target.tagName !== 'INPUT') return;
     if (e.key !== 'Enter') return;
     if (typeof this.props.onSubmit !== 'function') return;

@@ -90,10 +90,10 @@ export const errorToMessage = (error: ErrorType) => {
   }
 };
 
-type ErrorProps = {
+type ErrorProps = {|
   ...TextProps,
   children: ?ErrorType,
-};
+|};
 
 class Error extends React.PureComponent<ErrorProps> {
   render() {

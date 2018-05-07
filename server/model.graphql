@@ -6,7 +6,7 @@
 # http://graphql.org/learn/best-practices/#nullability
 # https://medium.com/@calebmer/when-to-use-graphql-non-null-fields-4059337f6fc8
 # http://graphql.org/learn/schema/
-# tl;dr Use non-nullable only when you are sure API will never change.
+# tl;dr Use non-nullable for inputs and nullable for payloads.
 
 # Workflow:
 #   - update model.graphql

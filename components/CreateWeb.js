@@ -77,7 +77,6 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
     );
   };
 
-  // $FlowFixMe
   nameRef = React.createRef();
 
   render() {
@@ -98,7 +97,6 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
                 disabled={pending}
                 error={this.state.errors.name}
                 onChangeText={this.setName}
-                type="text"
                 value={this.state.name}
                 inputRef={this.nameRef}
               />

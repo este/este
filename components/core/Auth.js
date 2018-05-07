@@ -131,10 +131,8 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     }
   };
 
-  // $FlowFixMe
   emailRef = React.createRef();
 
-  // $FlowFixMe
   passwordRef = React.createRef();
 
   render() {

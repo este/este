@@ -6,7 +6,7 @@ import Theme from './Theme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
-export type TextProps = {
+export type TextProps = {|
   align?: 'left' | 'right' | 'center' | 'justify',
   bold?: boolean,
   color?: ColorName,
@@ -16,7 +16,12 @@ export type TextProps = {
   fixWebFontSmoothing?: boolean,
   style?: TextStyleProp,
   children?: React.Node,
-};
+  // React Native does not export Text props Flow types yet, so add them as-go.
+  accessibilityRole?: *,
+  onMouseEnter?: *,
+  onMouseLeave?: *,
+  href?: *,
+|};
 
 // Strutural aka non-themeable styles.
 

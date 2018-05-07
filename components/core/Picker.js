@@ -7,11 +7,11 @@ import Theme from './Theme';
 // https://github.com/necolas/react-native-web/issues/879
 NativePicker.propTypes = null;
 
-type PickerProps = {
+type PickerProps = {|
   disabled?: boolean,
   size?: number,
   style?: ViewStyleProp,
-};
+|};
 
 class Picker extends React.PureComponent<PickerProps> {
   static Item = NativePicker.Item;

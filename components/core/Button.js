@@ -4,13 +4,14 @@ import Text, { type TextProps } from './Text';
 import Theme from './Theme';
 import { TouchableOpacity } from 'react-native';
 
-export type ButtonProps = TextProps & {
+export type ButtonProps = {|
+  ...TextProps,
   inline?: boolean,
   accessibilityLabel?: string,
   disabled?: boolean,
   onPress: () => void,
   testID?: string,
-};
+|};
 
 class Button extends React.PureComponent<ButtonProps> {
   static getColorStyle = (styles: *, color: *) => {

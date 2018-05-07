@@ -16,14 +16,21 @@ class ReactNativeWebTextInputElementStub extends React.Component<{}> {
   focus() {}
 }
 
-export type TextInputProps = {
+export type TextInputProps = {|
   disabled?: boolean,
   label?: string | React.Element<any>,
   error?: ?ErrorType,
   size?: number,
   style?: TextStyleProp,
   inputRef?: React.Ref<typeof ReactNativeWebTextInputElementStub>,
-};
+  value?: string,
+  secureTextEntry?: boolean,
+  placeholder?: string,
+  onChangeText: string => void,
+  name?: string,
+  keyboardType?: string,
+  autoComplete?: string,
+|};
 
 const styles = StyleSheet.create({
   header: {
