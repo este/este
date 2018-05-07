@@ -23,16 +23,11 @@ if (process.browser === true) {
   });
 }
 
-type UrlQuery = Object;
-
-type NextProps = {|
-  url: {
-    pathname: string,
-    query: UrlQuery,
-  },
+type PageProps = {|
+  data: Object,
 |};
 
-type InitialAppProps = {|
+type AppProps = {|
   token: ?string,
   data: Object,
   initialNow: number,
@@ -42,18 +37,8 @@ type InitialAppProps = {|
   supportedLocales: Array<string>,
 |};
 
-type PageProps = {|
-  ...NextProps,
-  data: Object,
-|};
-
-type AppProps = {|
-  ...NextProps,
-  ...InitialAppProps,
-|};
-
 const app = (
-  // The page is stateless because the state belongs to GraphQL or a component.
+  // The page is stateless because the state belongs to GraphQL or into another component.
   Page: React.StatelessFunctionalComponent<PageProps>,
   options?: {|
     query?: GraphQLTaggedNode,
@@ -70,7 +55,6 @@ const app = (
       messages,
       records,
       supportedLocales,
-      url,
     } = props;
 
     const environment = createRelayEnvironment(token, records);
@@ -86,8 +70,8 @@ const app = (
         <LocaleProvider value={{ locale, supportedLocales }}>
           <MutationProvider value={{ environment }}>
             <ErrorPopupProvider>
-              <RelayProvider environment={environment} variables={url.query}>
-                <Page data={data} url={url} />
+              <RelayProvider environment={environment}>
+                <Page data={data} />
               </RelayProvider>
             </ErrorPopupProvider>
           </MutationProvider>
@@ -98,7 +82,7 @@ const app = (
 
   App.getInitialProps = async (context: {
     pathname: string,
-    query: UrlQuery,
+    query: Object,
     asPath: string,
     req: ?{
       ...http$IncomingMessage,
@@ -117,6 +101,7 @@ const app = (
 
     let data = {};
     let records = {};
+
     if (query) {
       const environment = createRelayEnvironment(token);
       data = await fetchQuery(environment, query, context.query);
@@ -128,7 +113,7 @@ const app = (
 
     const { locale, messages, supportedLocales } =
       // eslint-disable-next-line no-underscore-dangle
-      context.req || window.__NEXT_DATA__.props;
+      context.req || window.__NEXT_DATA__.props.pageProps;
 
     return ({
       token,
@@ -138,7 +123,7 @@ const app = (
       messages,
       records,
       supportedLocales,
-    }: InitialAppProps);
+    }: AppProps);
   };
 
   return App;

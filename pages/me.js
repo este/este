@@ -39,7 +39,7 @@ const Me = props => {
       data={props.data}
     >
       {me != null && (
-        <React.Fragment>
+        <>
           <Block>
             <Image
               source={getGravatarUrl(me.email)}
@@ -53,7 +53,7 @@ const Me = props => {
           <Block>
             <Text bold>{me.email}</Text>
           </Block>
-        </React.Fragment>
+        </>
       )}
       <Row>
         <SignOutButton color="danger" onPress={signOut} />

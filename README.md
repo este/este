@@ -5,29 +5,24 @@ Universal React. React + React Native March 2018.
 
 ## Prerequisites
 
-* [node.js](http://nodejs.org/) Node 8+
+* [node.js](http://nodejs.org/) Node 10+
 * [yarn](https://yarnpkg.com/)
 
-## Create project
+## Setup project
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
 * `yarn`
 
-## Create Prisma DB
+## Create Prisma
 
-* `yarn prisma init appName` choose node-advanced boilerplate and docker
-* set `database/prisma.yml` service to appName
-* merge `appName/.env` to `.env.dev` (without quotes)
-* delete `/appName`
-* `yarn prisma deploy`
+* `yarn prisma init YourAppName` choose hosted sandbox
+* set `.env.dev` PRISMA_ENDPOINT by `YourAppName/prisma.yml` endpoint
+* delete `YourAppName` directory
 * `yarn env dev`
-
-## Deploy
-
-* `yarn deploy:db`, TODO: Deploy docker, wait for Prisma Cloud.
-* `yarn deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
-* `yarn deploy:web`
+* `yarn deploy:db`
+* `yarn prisma token` generate token
+* `yarn playground` Set database HTTP HEADERS to { "Authorization": "Bearer token" }
 
 ## Dev tasks
 
@@ -38,13 +33,18 @@ Universal React. React + React Native March 2018.
 * `yarn env production` - copy `.env.production` to `.env`
 * `yarn production` - test production build locally
 * `yarn test`
-* `yarn prisma-local-upgrade`
 * `yarn schema-relay` - when `yarn dev` is running to update schema and Relay
 * `yarn deploy:db`
 * `yarn deploy:api`
 * `yarn deploy:web`
 * `yarn messages`
 * `yarn prisma --help`
+
+## Deploy
+
+* `yarn deploy:db`,
+* `yarn deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
+* `yarn deploy:web`
 
 ## Links
 

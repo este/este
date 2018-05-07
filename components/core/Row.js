@@ -29,7 +29,7 @@ class Row extends React.PureComponent<Props> {
             <View style={styles.view}>
               {React.Children.map(children, (child, index) => {
                 return (
-                  <React.Fragment>
+                  <>
                     {child}
                     {index !== count - 1 && (
                       <View
@@ -37,7 +37,7 @@ class Row extends React.PureComponent<Props> {
                         key={`spacer-${index}`}
                       />
                     )}
-                  </React.Fragment>
+                  </>
                 );
               })}
             </View>

@@ -67,10 +67,10 @@ class TextInput extends React.PureComponent<TextInputProps> {
                     <TextInputLabel label={label} size={size} />
                   )}
                   {error != null && (
-                    <React.Fragment>
+                    <>
                       <Text> </Text>
                       <Error size={size}>{error}</Error>
-                    </React.Fragment>
+                    </>
                   )}
                 </View>
               )}
