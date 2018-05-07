@@ -1,4 +1,4 @@
-// flow-typed signature: 050be6cf2c6c2cbb5ba2c6d23d6b7fa7
+// flow-typed signature: 5e7863ea98859d2a1cec88a4bcad43b1
 // flow-typed version: <<STUB>>/nodemon_v^1.15.0/flow_v0.67.1
 
 /**
@@ -23,6 +23,10 @@ declare module 'nodemon' {
  * needed.
  */
 declare module 'nodemon/bin/nodemon' {
+  declare module.exports: any;
+}
+
+declare module 'nodemon/bin/postinstall' {
   declare module.exports: any;
 }
 
@@ -137,6 +141,9 @@ declare module 'nodemon/lib/version' {
 // Filename aliases
 declare module 'nodemon/bin/nodemon.js' {
   declare module.exports: $Exports<'nodemon/bin/nodemon'>;
+}
+declare module 'nodemon/bin/postinstall.js' {
+  declare module.exports: $Exports<'nodemon/bin/postinstall'>;
 }
 declare module 'nodemon/commitlint.config.js' {
   declare module.exports: $Exports<'nodemon/commitlint.config'>;

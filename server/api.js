@@ -12,8 +12,8 @@ const server = new GraphQLServer({
     ...req,
     db: new Prisma({
       typeDefs: 'database/schema.graphql',
-      endpoint: process.env.PRISMA_ENDPOINT, // the endpoint of the Prisma DB service (value is set in .env)
-      secret: process.env.PRISMA_SECRET, // taken from database/prisma.yml (value is set in .env)
+      endpoint: process.env.PRISMA_ENDPOINT,
+      secret: process.env.PRISMA_SECRET,
       debug: false, // dev, // log all GraphQL queries & mutations
     }),
   }),

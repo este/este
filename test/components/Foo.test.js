@@ -1,5 +1,7 @@
 // @flow
+import * as React from 'react';
 /* eslint-env jest */
 test('foo', () => {
-  expect(true).toBeTruthy();
+  const Fok = <div>fok</div>;
+  expect(Fok).toBeTruthy();
 });
