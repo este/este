@@ -3,6 +3,7 @@ import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import type { Error } from '../../server/error';
 import ErrorComponent from './Error';
+import Theme from './Theme';
 
 type Value = {|
   error: ?Error,
@@ -49,7 +50,7 @@ export class ErrorPopupProvider extends React.PureComponent<
     this.clearTimeout();
     this.timeoutID = setTimeout(() => {
       this.setState({ error: null });
-    }, 5000);
+    }, 10000);
   };
 
   render() {
@@ -70,22 +71,20 @@ class ErrorPopup extends React.PureComponent<{}> {
         {({ error }) => {
           if (!error) return null;
           return (
-            <ErrorComponent
-            // backgroundColor="warning"
-            // bold
-            // color="white"
-            // display="inline"
-            // left="50%"
-            // margin="auto"
-            // paddingHorizontal={1}
-            // paddingVertical={0.25}
-            // style={{ position: 'absolute' }}
-            // style={{ position: 'fixed', transform: 'translateX(-50%)' }}
-            // top={0}
-            // zIndex={1}
-            >
-              {error}
-            </ErrorComponent>
+            <Theme>
+              {theme => {
+                return (
+                  <ErrorComponent
+                    align="center"
+                    color="white"
+                    fixWebFontSmoothing
+                    style={theme.styles.errorPopup}
+                  >
+                    {error}
+                  </ErrorComponent>
+                );
+              }}
+            </Theme>
           );
         }}
       </ErrorPopupContext.Consumer>

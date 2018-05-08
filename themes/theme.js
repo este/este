@@ -26,6 +26,8 @@ const colors = {
 // I think it is. That's because, when we see a lot of duplicates, it indicates
 // that we should create a reusable component.
 
+const bold = '600';
+
 const stylesJson = {
   text: {
     color: colors.black,
@@ -39,7 +41,7 @@ const stylesJson = {
   },
 
   textWeightBold: {
-    fontWeight: '600',
+    fontWeight: bold,
   },
 
   textPrimary: {
@@ -71,7 +73,7 @@ const stylesJson = {
   },
 
   heading: {
-    fontWeight: '600',
+    fontWeight: bold,
     marginBottom: typography.rhythm(1),
   },
 
@@ -137,7 +139,7 @@ const stylesJson = {
 
   button: {
     color: colors.black,
-    fontWeight: '600',
+    fontWeight: bold,
   },
 
   buttonSpaced: {
@@ -184,6 +186,17 @@ const stylesJson = {
 
   picker: {
     color: colors.black,
+  },
+
+  errorPopup: {
+    backgroundColor: colors.warning,
+    position: 'absolute',
+    zIndex: 1,
+    left: 0,
+    right: 0,
+    top: 0,
+    paddingHorizontal: typography.rhythm(1),
+    paddingVertical: typography.rhythm(0.5),
   },
 };
 
