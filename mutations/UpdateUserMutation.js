@@ -1,10 +1,7 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
-import type {
-  UpdateUserInput,
-  UpdateUserMutationResponse,
-} from './__generated__/UpdateUserMutation.graphql';
+import * as generated from './__generated__/UpdateUserMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateUserMutation($input: UpdateUserInput!) {
@@ -16,12 +13,10 @@ const mutation = graphql`
   }
 `;
 
-const commit: Commit<UpdateUserInput, UpdateUserMutationResponse> = (
-  environment,
-  input,
-  onCompleted,
-  onError,
-) =>
+const commit: Commit<
+  generated.UpdateUserInput,
+  generated.UpdateUserMutationResponse,
+> = (environment, input, onCompleted, onError) =>
   commitMutation(environment, {
     mutation,
     // $FlowFixMe Wrong libdef.

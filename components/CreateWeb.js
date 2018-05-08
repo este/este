@@ -6,7 +6,7 @@ import TextInputBig from './core/TextInputBig';
 import { FormattedMessage } from 'react-intl';
 import Text from './core/Text';
 import CreateWebMutation from '../mutations/CreateWebMutation';
-import type { CreateWebInput } from '../mutations/__generated__/CreateWebMutation.graphql';
+import * as generated from '../mutations/__generated__/CreateWebMutation.graphql';
 import type { Errors } from '../server/error';
 import Mutation from './core/Mutation';
 import * as validation from '../server/validation';
@@ -14,7 +14,7 @@ import Row from './core/Row';
 import Block from './core/Block';
 
 type CreateWebState = {|
-  inputErrors: Errors<CreateWebInput>,
+  inputErrors: Errors<generated.CreateWebInput>,
   name: string,
 |};
 
@@ -29,7 +29,7 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
   // That's how we define event handlers.
   setName = (name: string) => this.setState({ name });
 
-  setFocusOnError(inputErrors: Errors<CreateWebInput>) {
+  setFocusOnError(inputErrors: Errors<generated.CreateWebInput>) {
     const error = Object.keys(inputErrors)[0];
     if (!error) return;
     let current;
@@ -43,7 +43,7 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
     if (current) current.focus();
   }
 
-  setErrors(inputErrors: Errors<CreateWebInput>) {
+  setErrors(inputErrors: Errors<generated.CreateWebInput>) {
     this.setState({ inputErrors });
     this.setFocusOnError(inputErrors);
   }
@@ -52,7 +52,7 @@ class CreateWeb extends React.PureComponent<{}, CreateWebState> {
     this.setState(CreateWeb.initialState);
   };
 
-  handleError = (inputErrors: Errors<CreateWebInput>) => {
+  handleError = (inputErrors: Errors<generated.CreateWebInput>) => {
     this.setErrors(inputErrors);
   };
 

@@ -1,10 +1,7 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
-import type {
-  AuthInput,
-  SignupMutationResponse,
-} from './__generated__/SignupMutation.graphql';
+import * as generated from './__generated__/SignupMutation.graphql';
 
 const mutation = graphql`
   mutation SignupMutation($input: AuthInput!) {
@@ -14,7 +11,7 @@ const mutation = graphql`
   }
 `;
 
-const commit: Commit<AuthInput, SignupMutationResponse> = (
+const commit: Commit<generated.AuthInput, generated.SignupMutationResponse> = (
   environment,
   input,
   onCompleted,

@@ -1,10 +1,7 @@
 // @flow
 import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
-import type {
-  CreateWebInput,
-  CreateWebMutationResponse,
-} from './__generated__/CreateWebMutation.graphql';
+import * as generated from './__generated__/CreateWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
 import { clientRoot, ensureConnection } from './utils';
 
@@ -29,12 +26,10 @@ const sharedUpdater = (store, recordEdge) => {
   ConnectionHandler.insertEdgeAfter(connection, recordEdge);
 };
 
-const commit: Commit<CreateWebInput, CreateWebMutationResponse> = (
-  environment,
-  input,
-  onCompleted,
-  onError,
-) =>
+const commit: Commit<
+  generated.CreateWebInput,
+  generated.CreateWebMutationResponse,
+> = (environment, input, onCompleted, onError) =>
   commitMutation(environment, {
     mutation,
     // $FlowFixMe Wrong libdef.

@@ -6,7 +6,7 @@ import TextInputBig from './TextInputBig';
 import { SignInButton, SignUpButton } from './buttons';
 import SigninMutation from '../../mutations/SigninMutation';
 import SignupMutation from '../../mutations/SignupMutation';
-import type { AuthInput } from '../../mutations/__generated__/SigninMutation.graphql';
+import * as generated from '../../mutations/__generated__/SigninMutation.graphql';
 import Router from 'next/router';
 import Mutation from './Mutation';
 import * as validation from '../../server/validation';
@@ -36,7 +36,7 @@ type AuthProps = {|
 |};
 
 type AuthState = {|
-  inputErrors: Errors<AuthInput>,
+  inputErrors: Errors<generated.AuthInput>,
   email: string,
   password: string,
 |};
@@ -54,7 +54,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   setEmail = email => this.setState({ email });
   setPassword = password => this.setState({ password });
 
-  setFocusOnError(inputErrors: Errors<AuthInput>) {
+  setFocusOnError(inputErrors: Errors<generated.AuthInput>) {
     const error = Object.keys(inputErrors)[0];
     if (!error) return;
     let current;
@@ -71,7 +71,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     if (current) current.focus();
   }
 
-  setErrors(inputErrors: Errors<AuthInput>) {
+  setErrors(inputErrors: Errors<generated.AuthInput>) {
     this.setState({ inputErrors });
     this.setFocusOnError(inputErrors);
   }
