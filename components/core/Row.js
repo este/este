@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 
 type Props = {|
   noSpacer?: boolean,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 class Row extends React.PureComponent<Props> {
   render() {
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => {
           const { noSpacer, children } = this.props;
           if (noSpacer === true) {
@@ -43,7 +43,7 @@ class Row extends React.PureComponent<Props> {
             </View>
           );
         }}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

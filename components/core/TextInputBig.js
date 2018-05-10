@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
-import Error from './Error';
+import ErrorMessage from './ErrorMessage';
 import TextInput, { type TextInputProps } from './TextInput';
 import { View } from 'react-native';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 
 class TextInputBig extends React.PureComponent<TextInputProps> {
   render() {
     const { error, size = 1, ...props } = this.props;
 
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => (
           <View>
             <TextInput
@@ -19,11 +19,11 @@ class TextInputBig extends React.PureComponent<TextInputProps> {
               {...props}
             />
             <View style={theme.styles.textInputBigError}>
-              <Error size={size - 1}>{error}</Error>
+              <ErrorMessage size={size - 1}>{error}</ErrorMessage>
             </View>
           </View>
         )}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

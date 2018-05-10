@@ -4,7 +4,7 @@ import A from './core/A';
 import { titles } from '../components/app/sitemap';
 import { FormattedMessage } from 'react-intl';
 import { StyleSheet, View } from 'react-native';
-import Theme from './core/Theme';
+import ThemeContext from './core/ThemeContext';
 
 const styles = StyleSheet.create({
   view: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 });
 
 const MainNavA = ({ href, title }) => (
-  <Theme>
+  <ThemeContext.Consumer>
     {theme => (
       <A
         bold
@@ -27,7 +27,7 @@ const MainNavA = ({ href, title }) => (
         <FormattedMessage {...title} />
       </A>
     )}
-  </Theme>
+  </ThemeContext.Consumer>
 );
 
 type MainNavProps = {|
@@ -35,7 +35,7 @@ type MainNavProps = {|
 |};
 
 const MainNav = ({ isAuthenticated }: MainNavProps) => (
-  <Theme>
+  <ThemeContext.Consumer>
     {theme => (
       <View style={[styles.view, theme.styles.mainNav]}>
         <MainNavA href={{ pathname: '/' }} title={titles.index} />
@@ -46,7 +46,7 @@ const MainNav = ({ isAuthenticated }: MainNavProps) => (
         )}
       </View>
     )}
-  </Theme>
+  </ThemeContext.Consumer>
 );
 
 export default MainNav;

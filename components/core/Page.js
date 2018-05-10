@@ -8,7 +8,7 @@ import MainNav from '../MainNav';
 import * as React from 'react';
 import SwitchLocale from './SwitchLocale';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import Theme, { ThemeProvider } from './Theme';
+import ThemeContext from './ThemeContext';
 import { lightTheme, darkTheme } from '../../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 });
 
 const PageContainer = ({ children }) => (
-  <Theme>
+  <ThemeContext.Consumer>
     {theme => (
       // Why ScrollView https://github.com/necolas/react-native-web/issues/829
       <ScrollView
@@ -75,19 +75,19 @@ const PageContainer = ({ children }) => (
         {children}
       </ScrollView>
     )}
-  </Theme>
+  </ThemeContext.Consumer>
 );
 
 const PageBody = ({ children }) => (
-  <Theme>
+  <ThemeContext.Consumer>
     {theme => (
       <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
     )}
-  </Theme>
+  </ThemeContext.Consumer>
 );
 
 const PageFooter = () => (
-  <Theme>
+  <ThemeContext.Consumer>
     {theme => (
       <View style={[styles.footer, theme.styles.pageFooter]}>
         <Text size={-1}>
@@ -98,7 +98,7 @@ const PageFooter = () => (
         </Text>
       </View>
     )}
-  </Theme>
+  </ThemeContext.Consumer>
 );
 
 type Props = {|
@@ -136,12 +136,13 @@ class Page extends React.PureComponent<Props> {
     const isAuthenticated = me != null;
     const themeName =
       // That's how we gradually check nullable types.
+      // TODO: Use Optional Chaining.
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
 
     return (
-      <ThemeProvider value={theme}>
+      <ThemeContext.Provider value={theme}>
         <Head>
           <title>
             {typeof this.props.title === 'function'
@@ -159,7 +160,7 @@ class Page extends React.PureComponent<Props> {
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           <PageFooter />
         </PageContainer>
-      </ThemeProvider>
+      </ThemeContext.Provider>
     );
   }
 }

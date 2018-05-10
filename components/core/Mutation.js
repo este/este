@@ -2,17 +2,15 @@
 import * as React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import type { Disposable, Environment, PayloadError } from 'react-relay';
-import { ErrorPopupConsumer } from './ErrorPopup';
+import ErrorContext from './ErrorContext';
 import createRelayEnvironment from '../app/createRelayEnvironment';
 import { parsePayloadErrors, type Errors } from '../../server/error';
 
-type Value = {|
-  environment: Environment,
-|};
+type Value = Environment;
 
-const MutationContext: Context<Value> = createReactContext({
-  environment: createRelayEnvironment(),
-});
+const MutationContext: Context<Value> = createReactContext(
+  createRelayEnvironment(),
+);
 
 export const MutationProvider = MutationContext.Provider;
 
@@ -45,17 +43,17 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
 
   disposables: Array<Disposable> = [];
 
-  mutate = (environment: *, showError: *) => <Variables, Response>(
-    commit: Commit<Variables, Response>,
-    variables: Variables,
+  mutate = (environment: *, showError: *) => <Input, Response>(
+    commit: Commit<Input, Response>,
+    input: Input,
     onCompleted?: (response: Response) => void,
-    onError?: (errors: Errors<Variables>) => void,
+    onError?: (errors: Errors<Input>) => void,
   ) => {
     this.setState({ pending: true });
 
     const disposable = commit(
       environment,
-      variables,
+      input,
       (response, payloadErrors) => {
         this.setState({ pending: false });
         if (!payloadErrors) {
@@ -78,15 +76,15 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
   render() {
     return (
       <MutationContext.Consumer>
-        {({ environment }) => (
-          <ErrorPopupConsumer>
+        {environment => (
+          <ErrorContext.Consumer>
             {({ showError }) =>
               this.props.children({
                 mutate: this.mutate(environment, showError),
                 pending: this.state.pending,
               })
             }
-          </ErrorPopupConsumer>
+          </ErrorContext.Consumer>
         )}
       </MutationContext.Consumer>
     );

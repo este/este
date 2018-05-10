@@ -3,12 +3,17 @@
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
-// $FlowFixMe Wrong libdef.
-import { fetchQuery, type GraphQLTaggedNode } from 'react-relay';
+import {
+  // $FlowFixMe Wrong libdef.
+  fetchQuery,
+  type GraphQLTaggedNode,
+  type Environment,
+} from 'react-relay';
 import { getCookie } from './cookie';
-import { LocaleProvider } from '../core/Locale';
+import LocaleContext from '../core/LocaleContext';
+import SupportedLocalesContext from '../core/SupportedLocalesContext';
 import { MutationProvider } from '../core/Mutation';
-import { ErrorPopupProvider } from '../core/ErrorPopup';
+import ErrorContext from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
 
 // https://github.com/facebook/relay/issues/2347
@@ -38,6 +43,11 @@ type AppProps = {|
   supportedLocales: Array<string>,
 |};
 
+type AppState = {|
+  environment: Environment,
+|};
+
+// TODO: https://github.com/este/este/issues/1524
 const app = (
   // The page is stateless because the state belongs to GraphQL or into another component.
   Page: React.StatelessFunctionalComponent<PageProps>,
@@ -47,85 +57,97 @@ const app = (
 ) => {
   const { query } = options || {};
 
-  const App = (props: AppProps) => {
-    const {
-      token,
-      data,
-      initialNow,
-      locale,
-      messages,
-      records,
-      supportedLocales,
-    } = props;
+  class App extends React.PureComponent<AppProps, AppState> {
+    static async getInitialProps(context: {
+      pathname: string,
+      query: Object,
+      asPath: string,
+      req: ?{
+        ...http$IncomingMessage,
+        locale: string,
+        localeDataScript: string,
+        messages: Object,
+        supportedLocales: Array<string>,
+      },
+      res: ?http$ServerResponse,
+      jsonPageRes: Object,
+      err: Object,
+    }) {
+      const cookie = getCookie(context.req);
+      const token = cookie && cookie.token;
+      const initialNow = Date.now();
 
-    const environment = createRelayEnvironment(token, records);
+      let data = {};
+      let records = {};
 
-    return (
-      <IntlProvider
-        locale={locale}
-        messages={messages}
-        initialNow={initialNow}
-        // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
-        textComponent={({ children }) => children}
-      >
-        <LocaleProvider value={{ locale, supportedLocales }}>
-          <MutationProvider value={{ environment }}>
-            <ErrorPopupProvider>
-              <RelayProvider environment={environment}>
-                <Page data={data} />
-              </RelayProvider>
-            </ErrorPopupProvider>
-          </MutationProvider>
-        </LocaleProvider>
-      </IntlProvider>
-    );
-  };
+      if (query) {
+        const environment = createRelayEnvironment(token);
+        data = await fetchQuery(environment, query, context.query);
+        records = environment
+          .getStore()
+          .getSource()
+          .toJSON();
+      }
 
-  App.getInitialProps = async (context: {
-    pathname: string,
-    query: Object,
-    asPath: string,
-    req: ?{
-      ...http$IncomingMessage,
-      locale: string,
-      localeDataScript: string,
-      messages: Object,
-      supportedLocales: Array<string>,
-    },
-    res: ?http$ServerResponse,
-    jsonPageRes: Object,
-    err: Object,
-  }) => {
-    const cookie = getCookie(context.req);
-    const token = cookie && cookie.token;
-    const initialNow = Date.now();
+      const { locale, messages, supportedLocales } =
+        // eslint-disable-next-line no-underscore-dangle
+        context.req || window.__NEXT_DATA__.props.pageProps;
 
-    let data = {};
-    let records = {};
-
-    if (query) {
-      const environment = createRelayEnvironment(token);
-      data = await fetchQuery(environment, query, context.query);
-      records = environment
-        .getStore()
-        .getSource()
-        .toJSON();
+      return ({
+        token,
+        data,
+        initialNow,
+        locale,
+        messages,
+        records,
+        supportedLocales,
+      }: AppProps);
     }
 
-    const { locale, messages, supportedLocales } =
-      // eslint-disable-next-line no-underscore-dangle
-      context.req || window.__NEXT_DATA__.props.pageProps;
+    state = {
+      environment: createRelayEnvironment(this.props.token, this.props.records),
+    };
 
-    return ({
-      token,
-      data,
-      initialNow,
-      locale,
-      messages,
-      records,
-      supportedLocales,
-    }: AppProps);
-  };
+    static getDerivedStateFromProps(nextProps: AppProps, prevState: AppState) {
+      return ({
+        environment: createRelayEnvironment(nextProps.token, nextProps.records),
+      }: AppState);
+    }
+
+    render() {
+      const {
+        token,
+        data,
+        initialNow,
+        locale,
+        messages,
+        records,
+        supportedLocales,
+      } = this.props;
+
+      return (
+        <IntlProvider
+          locale={locale}
+          messages={messages}
+          initialNow={initialNow}
+          // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
+          textComponent={React.Fragment}
+        >
+          {/* <ErrorContext.Provider value={this.state.error}> */}
+          <LocaleContext.Provider value={locale}>
+            <SupportedLocalesContext.Provider value={supportedLocales}>
+              <MutationProvider value={this.state.environment}>
+                <RelayProvider environment={this.state.environment}>
+                  <Page data={data} />
+                </RelayProvider>
+              </MutationProvider>
+            </SupportedLocalesContext.Provider>
+          </LocaleContext.Provider>
+          {/* </ErrorContext.Provider> */}
+        </IntlProvider>
+      );
+    }
+  }
 
   return App;
 };

@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -104,7 +104,7 @@ class Text extends React.PureComponent<TextProps> {
     const { isInAParentText } = this.context;
 
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => {
           return (
             <NativeText
@@ -130,7 +130,7 @@ class Text extends React.PureComponent<TextProps> {
             />
           );
         }}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

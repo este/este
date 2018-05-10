@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import type { Error as ErrorType } from '../../server/error';
+import type { Error } from '../../server/error';
 import Text, { type TextProps } from './Text';
 
-export const errorToMessage = (error: ErrorType) => {
+const errorToMessage = (error: Error) => {
   switch (error.type) {
     case 'required':
       return (
@@ -90,12 +90,12 @@ export const errorToMessage = (error: ErrorType) => {
   }
 };
 
-type ErrorProps = {|
+type ErrorMessageProps = {|
   ...TextProps,
-  children: ?ErrorType,
+  children: ?Error,
 |};
 
-class Error extends React.PureComponent<ErrorProps> {
+class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
   render() {
     const { bold = true, color = 'danger', children, ...props } = this.props;
     if (!children) return null;
@@ -107,4 +107,4 @@ class Error extends React.PureComponent<ErrorProps> {
   }
 }
 
-export default Error;
+export default ErrorMessage;
