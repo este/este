@@ -1,18 +1,9 @@
 // @flow
 import * as React from 'react';
-import createReactContext, { type Context } from 'create-react-context';
 import type { Disposable, Environment, PayloadError } from 'react-relay';
 import ErrorContext from './ErrorContext';
-import createRelayEnvironment from '../app/createRelayEnvironment';
+import MutationContext from './MutationContext';
 import { parsePayloadErrors, type Errors } from '../../server/error';
-
-type Value = Environment;
-
-const MutationContext: Context<Value> = createReactContext(
-  createRelayEnvironment(),
-);
-
-export const MutationProvider = MutationContext.Provider;
 
 export type Commit<Input, Response> = (
   environment: Environment,
@@ -43,7 +34,7 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
 
   disposables: Array<Disposable> = [];
 
-  mutate = (environment: *, showError: *) => <Input, Response>(
+  mutate = (environment: *, dispatchError: *) => <Input, Response>(
     commit: Commit<Input, Response>,
     input: Input,
     onCompleted?: (response: Response) => void,
@@ -62,12 +53,12 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
         }
         const { errors, error } = parsePayloadErrors(payloadErrors);
         if (onError) onError(errors);
-        if (error) showError(error);
+        if (error) dispatchError(error);
       },
       error => {
         this.setState({ pending: false });
         if (onError) onError({});
-        showError({ type: 'unknown', message: error.message });
+        dispatchError({ type: 'unknown', message: error.message });
       },
     );
     this.disposables.push(disposable);
@@ -78,9 +69,9 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
       <MutationContext.Consumer>
         {environment => (
           <ErrorContext.Consumer>
-            {({ showError }) =>
+            {({ dispatchError }) =>
               this.props.children({
-                mutate: this.mutate(environment, showError),
+                mutate: this.mutate(environment, dispatchError),
                 pending: this.state.pending,
               })
             }

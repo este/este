@@ -48,8 +48,8 @@ class LocaleLink extends React.PureComponent<LocaleLinkProps> {
 
     return (
       <LocaleContext.Consumer>
-        {locale => {
-          const href = this.getHref(locale);
+        {({ current }) => {
+          const href = this.getHref(current);
           return (
             <NextLink href={href} prefetch={prefetch} replace={replace}>
               {/* Add href manually because Next.js does it only for browser anchor. */}

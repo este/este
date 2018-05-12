@@ -11,10 +11,10 @@ import {
 } from 'react-relay';
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
-import SupportedLocalesContext from '../core/SupportedLocalesContext';
-import { MutationProvider } from '../core/Mutation';
+import MutationContext from '../core/MutationContext';
 import ErrorContext from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
+import type { Error } from '../../server/error';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');
@@ -29,10 +29,6 @@ if (process.browser === true) {
   });
 }
 
-type PageProps = {|
-  data: Object,
-|};
-
 type AppProps = {|
   token: ?string,
   data: Object,
@@ -44,13 +40,32 @@ type AppProps = {|
 |};
 
 type AppState = {|
-  environment: Environment,
+  errorContext: {
+    error: ?Error,
+    dispatchError: Error => void,
+  },
+|};
+
+type AppContext = {|
+  pathname: string,
+  query: Object,
+  asPath: string,
+  req: ?{
+    ...http$IncomingMessage,
+    locale: string,
+    localeDataScript: string,
+    messages: Object,
+    supportedLocales: Array<string>,
+  },
+  res: ?http$ServerResponse,
+  jsonPageRes: Object,
+  err: Object,
 |};
 
 // TODO: https://github.com/este/este/issues/1524
 const app = (
   // The page is stateless because the state belongs to GraphQL or into another component.
-  Page: React.StatelessFunctionalComponent<PageProps>,
+  Page: React.StatelessFunctionalComponent<{| data: Object |}>,
   options?: {|
     query?: GraphQLTaggedNode,
   |},
@@ -58,21 +73,7 @@ const app = (
   const { query } = options || {};
 
   class App extends React.PureComponent<AppProps, AppState> {
-    static async getInitialProps(context: {
-      pathname: string,
-      query: Object,
-      asPath: string,
-      req: ?{
-        ...http$IncomingMessage,
-        locale: string,
-        localeDataScript: string,
-        messages: Object,
-        supportedLocales: Array<string>,
-      },
-      res: ?http$ServerResponse,
-      jsonPageRes: Object,
-      err: Object,
-    }) {
+    static async getInitialProps(context: AppContext) {
       const cookie = getCookie(context.req);
       const token = cookie && cookie.token;
       const initialNow = Date.now();
@@ -104,46 +105,64 @@ const app = (
       }: AppProps);
     }
 
-    state = {
-      environment: createRelayEnvironment(this.props.token, this.props.records),
-    };
-
-    static getDerivedStateFromProps(nextProps: AppProps, prevState: AppState) {
-      return ({
-        environment: createRelayEnvironment(nextProps.token, nextProps.records),
-      }: AppState);
+    constructor(props: AppProps) {
+      super(props);
+      this.environment = createRelayEnvironment(props.token, props.records);
+      this.localeContext = {
+        current: props.locale,
+        supported: props.supportedLocales,
+      };
     }
 
-    render() {
-      const {
-        token,
-        data,
-        initialNow,
-        locale,
-        messages,
-        records,
-        supportedLocales,
-      } = this.props;
+    state = {
+      errorContext: { error: null, dispatchError: this.dispatchError },
+    };
 
+    componentWillUnmount() {
+      this.clearErrorShowTimeout();
+    }
+
+    clearErrorShowTimeout() {
+      if (this.errorShowTimeoutID) clearTimeout(this.errorShowTimeoutID);
+    }
+
+    errorShowTimeoutID: ?TimeoutID;
+
+    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    dispatchError = (error: Error) => {
+      const { dispatchError } = this;
+      this.setState({ errorContext: { error, dispatchError } }, () => {
+        this.clearErrorShowTimeout();
+        this.errorShowTimeoutID = setTimeout(() => {
+          this.setState({ errorContext: { error: null, dispatchError } });
+        }, 5000);
+      });
+    };
+
+    environment: Environment;
+
+    localeContext: { current: string, supported: Array<string> };
+
+    render() {
       return (
         <IntlProvider
-          locale={locale}
-          messages={messages}
-          initialNow={initialNow}
+          locale={this.props.locale}
+          messages={this.props.messages}
+          initialNow={this.props.initialNow}
           // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
           textComponent={React.Fragment}
         >
-          {/* <ErrorContext.Provider value={this.state.error}> */}
-          <LocaleContext.Provider value={locale}>
-            <SupportedLocalesContext.Provider value={supportedLocales}>
-              <MutationProvider value={this.state.environment}>
-                <RelayProvider environment={this.state.environment}>
-                  <Page data={data} />
+          {/* To keep context re-rendering fast, React needs to make each
+              context consumer a separate node in the tree. */}
+          <ErrorContext.Provider value={this.state.errorContext}>
+            <LocaleContext.Provider value={this.localeContext}>
+              <MutationContext.Provider value={this.environment}>
+                <RelayProvider environment={this.environment}>
+                  <Page data={this.props.data} />
                 </RelayProvider>
-              </MutationProvider>
-            </SupportedLocalesContext.Provider>
-          </LocaleContext.Provider>
-          {/* </ErrorContext.Provider> */}
+              </MutationContext.Provider>
+            </LocaleContext.Provider>
+          </ErrorContext.Provider>
         </IntlProvider>
       );
     }

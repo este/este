@@ -1,4 +1,4 @@
-// flow-typed signature: 64181ea367d9ca0a32fcba6f2908a2cf
+// flow-typed signature: 7ac17fbb408a85eccfc814116123f9b2
 // flow-typed version: <<STUB>>/next_v^6.0.0/flow_v0.71.0
 
 /**
@@ -234,6 +234,10 @@ declare module 'next/dist/server/index' {
   declare module.exports: any;
 }
 
+declare module 'next/dist/server/lib/is-async-supported' {
+  declare module.exports: any;
+}
+
 declare module 'next/dist/server/lib/path-match' {
   declare module.exports: any;
 }
@@ -457,6 +461,9 @@ declare module 'next/dist/server/hot-reloader.js' {
 }
 declare module 'next/dist/server/index.js' {
   declare module.exports: $Exports<'next/dist/server/index'>;
+}
+declare module 'next/dist/server/lib/is-async-supported.js' {
+  declare module.exports: $Exports<'next/dist/server/lib/is-async-supported'>;
 }
 declare module 'next/dist/server/lib/path-match.js' {
   declare module.exports: $Exports<'next/dist/server/lib/path-match'>;

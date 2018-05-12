@@ -153,8 +153,19 @@ class Page extends React.PureComponent<Props> {
           <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
           <Favicons />
         </Head>
-        <PageLoadingBar color={theme.colors.primary} />
-        <ErrorPopup />
+        <div>
+          <PageLoadingBar color={theme.colors.primary} />
+          <ErrorPopup />
+          <style jsx>{`
+            div {
+              position: fixed;
+              top: 0;
+              left: 0;
+              right: 0;
+              z-index: 9999;
+            }
+          `}</style>
+        </div>
         <PageContainer>
           <MainNav isAuthenticated={isAuthenticated} />
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Text from './Text';
 import LocaleContext from './LocaleContext';
-import SupportedLocalesContext from './SupportedLocalesContext';
 import { defaultLocale } from '../../server/constants';
 
 class SwitchLocale extends React.PureComponent<{}> {
@@ -24,34 +23,28 @@ class SwitchLocale extends React.PureComponent<{}> {
 
   render() {
     return (
-      <SupportedLocalesContext.Consumer>
-        {supportedLocales => (
-          <LocaleContext.Consumer>
-            {locale => (
-              <Text>
-                {supportedLocales
-                  .filter(supportedLocale => supportedLocale !== locale)
-                  .map((supportedLocale, index, locales) => (
-                    // We can't use Next.js Link via core/A because we have to
-                    // enforce full reload.
-                    // Check server.js getAcceptedOrDefaultLocale.
-                    <Text
-                      accessibilityRole="link"
-                      color="primary"
-                      href={SwitchLocale.getLocaleHref('/', supportedLocale)}
-                      key={supportedLocale}
-                    >
-                      {SwitchLocale.localeToLanguageName(supportedLocale)}
-                      {supportedLocale.length > 1 &&
-                        index < locales.length - 1 &&
-                        ', '}
-                    </Text>
-                  ))}
-              </Text>
-            )}
-          </LocaleContext.Consumer>
+      <LocaleContext.Consumer>
+        {({ current, supported }) => (
+          <Text>
+            {supported
+              .filter(locale => locale !== current)
+              .map((locale, index, locales) => (
+                // We can't use Next.js Link via core/A because we have to
+                // enforce full reload.
+                // Check server.js getAcceptedOrDefaultLocale.
+                <Text
+                  accessibilityRole="link"
+                  color="primary"
+                  href={SwitchLocale.getLocaleHref('/', locale)}
+                  key={locale}
+                >
+                  {SwitchLocale.localeToLanguageName(locale)}
+                  {locale.length > 1 && index < locales.length - 1 && ', '}
+                </Text>
+              ))}
+          </Text>
         )}
-      </SupportedLocalesContext.Consumer>
+      </LocaleContext.Consumer>
     );
   }
 }

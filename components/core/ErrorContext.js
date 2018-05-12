@@ -4,7 +4,8 @@ import type { Error } from '../../server/error';
 
 const ErrorContext = React.createContext({
   error: (null: ?Error),
-  showError: (error: Error) => {},
+  // eslint-disable-next-line no-unused-vars
+  dispatchError: (error: Error) => {},
 });
 
 export default ErrorContext;

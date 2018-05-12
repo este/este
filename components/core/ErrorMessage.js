@@ -83,7 +83,6 @@ const errorToMessage = (error: Error) => {
           id="error.requestFailed"
         />
       );
-
     default:
       (error: empty);
       return null;
