@@ -62,7 +62,7 @@
     "next": "^6.0.0",
     "nprogress": "^0.2.0",
     "open-color": "^1.6.3",
-    "prisma-binding": "^1.5.12",
+    "prisma-binding": "^2.0.0",
     "prop-types": "^15.6.0",
     "raf": "^3.4.0",
     "ramda": "^0.25.0",
