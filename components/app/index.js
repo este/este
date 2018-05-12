@@ -3,13 +3,18 @@
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
-// $FlowFixMe Wrong libdef.
-import { fetchQuery, type GraphQLTaggedNode } from 'react-relay';
+import {
+  // $FlowFixMe Wrong libdef.
+  fetchQuery,
+  type GraphQLTaggedNode,
+  type Environment,
+} from 'react-relay';
 import { getCookie } from './cookie';
-import { LocaleProvider } from '../core/Locale';
-import { MutationProvider } from '../core/Mutation';
-import { ErrorPopupProvider } from '../core/ErrorPopup';
+import LocaleContext from '../core/LocaleContext';
+import MutationContext from '../core/MutationContext';
+import ErrorContext from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
+import type { Error } from '../../server/error';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');
@@ -24,10 +29,6 @@ if (process.browser === true) {
   });
 }
 
-type PageProps = {|
-  data: Object,
-|};
-
 type AppProps = {|
   token: ?string,
   data: Object,
@@ -38,94 +39,134 @@ type AppProps = {|
   supportedLocales: Array<string>,
 |};
 
+type AppState = {|
+  errorContext: {
+    error: ?Error,
+    dispatchError: Error => void,
+  },
+|};
+
+type AppContext = {|
+  pathname: string,
+  query: Object,
+  asPath: string,
+  req: ?{
+    ...http$IncomingMessage,
+    locale: string,
+    localeDataScript: string,
+    messages: Object,
+    supportedLocales: Array<string>,
+  },
+  res: ?http$ServerResponse,
+  jsonPageRes: Object,
+  err: Object,
+|};
+
+// TODO: https://github.com/este/este/issues/1524
 const app = (
   // The page is stateless because the state belongs to GraphQL or into another component.
-  Page: React.StatelessFunctionalComponent<PageProps>,
+  Page: React.StatelessFunctionalComponent<{| data: Object |}>,
   options?: {|
     query?: GraphQLTaggedNode,
   |},
 ) => {
   const { query } = options || {};
 
-  const App = (props: AppProps) => {
-    const {
-      token,
-      data,
-      initialNow,
-      locale,
-      messages,
-      records,
-      supportedLocales,
-    } = props;
+  class App extends React.PureComponent<AppProps, AppState> {
+    static async getInitialProps(context: AppContext) {
+      const cookie = getCookie(context.req);
+      const token = cookie && cookie.token;
+      const initialNow = Date.now();
 
-    const environment = createRelayEnvironment(token, records);
+      let data = {};
+      let records = {};
 
-    return (
-      <IntlProvider
-        locale={locale}
-        messages={messages}
-        initialNow={initialNow}
-        // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
-        textComponent={({ children }) => children}
-      >
-        <LocaleProvider value={{ locale, supportedLocales }}>
-          <MutationProvider value={{ environment }}>
-            <ErrorPopupProvider>
-              <RelayProvider environment={environment}>
-                <Page data={data} />
-              </RelayProvider>
-            </ErrorPopupProvider>
-          </MutationProvider>
-        </LocaleProvider>
-      </IntlProvider>
-    );
-  };
+      if (query) {
+        const environment = createRelayEnvironment(token);
+        data = await fetchQuery(environment, query, context.query);
+        records = environment
+          .getStore()
+          .getSource()
+          .toJSON();
+      }
 
-  App.getInitialProps = async (context: {
-    pathname: string,
-    query: Object,
-    asPath: string,
-    req: ?{
-      ...http$IncomingMessage,
-      locale: string,
-      localeDataScript: string,
-      messages: Object,
-      supportedLocales: Array<string>,
-    },
-    res: ?http$ServerResponse,
-    jsonPageRes: Object,
-    err: Object,
-  }) => {
-    const cookie = getCookie(context.req);
-    const token = cookie && cookie.token;
-    const initialNow = Date.now();
+      const { locale, messages, supportedLocales } =
+        // eslint-disable-next-line no-underscore-dangle
+        context.req || window.__NEXT_DATA__.props.pageProps;
 
-    let data = {};
-    let records = {};
-
-    if (query) {
-      const environment = createRelayEnvironment(token);
-      data = await fetchQuery(environment, query, context.query);
-      records = environment
-        .getStore()
-        .getSource()
-        .toJSON();
+      return ({
+        token,
+        data,
+        initialNow,
+        locale,
+        messages,
+        records,
+        supportedLocales,
+      }: AppProps);
     }
 
-    const { locale, messages, supportedLocales } =
-      // eslint-disable-next-line no-underscore-dangle
-      context.req || window.__NEXT_DATA__.props.pageProps;
+    constructor(props: AppProps) {
+      super(props);
+      this.environment = createRelayEnvironment(props.token, props.records);
+      this.localeContext = {
+        current: props.locale,
+        supported: props.supportedLocales,
+      };
+    }
 
-    return ({
-      token,
-      data,
-      initialNow,
-      locale,
-      messages,
-      records,
-      supportedLocales,
-    }: AppProps);
-  };
+    state = {
+      errorContext: { error: null, dispatchError: this.dispatchError },
+    };
+
+    componentWillUnmount() {
+      this.clearErrorShowTimeout();
+    }
+
+    clearErrorShowTimeout() {
+      if (this.errorShowTimeoutID) clearTimeout(this.errorShowTimeoutID);
+    }
+
+    errorShowTimeoutID: ?TimeoutID;
+
+    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    dispatchError = (error: Error) => {
+      const { dispatchError } = this;
+      this.setState({ errorContext: { error, dispatchError } }, () => {
+        this.clearErrorShowTimeout();
+        this.errorShowTimeoutID = setTimeout(() => {
+          this.setState({ errorContext: { error: null, dispatchError } });
+        }, 5000);
+      });
+    };
+
+    environment: Environment;
+
+    localeContext: { current: string, supported: Array<string> };
+
+    render() {
+      return (
+        <IntlProvider
+          locale={this.props.locale}
+          messages={this.props.messages}
+          initialNow={this.props.initialNow}
+          // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
+          textComponent={React.Fragment}
+        >
+          {/* To keep context re-rendering fast, React needs to make each
+              context consumer a separate node in the tree. */}
+          <ErrorContext.Provider value={this.state.errorContext}>
+            <LocaleContext.Provider value={this.localeContext}>
+              <MutationContext.Provider value={this.environment}>
+                <RelayProvider environment={this.environment}>
+                  <Page data={this.props.data} />
+                </RelayProvider>
+              </MutationContext.Provider>
+            </LocaleContext.Provider>
+          </ErrorContext.Provider>
+        </IntlProvider>
+      );
+    }
+  }
 
   return App;
 };

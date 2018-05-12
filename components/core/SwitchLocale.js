@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Text from './Text';
-import Locale from './Locale';
+import LocaleContext from './LocaleContext';
 import { defaultLocale } from '../../server/constants';
 
 class SwitchLocale extends React.PureComponent<{}> {
@@ -23,30 +23,28 @@ class SwitchLocale extends React.PureComponent<{}> {
 
   render() {
     return (
-      <Locale>
-        {({ locale, supportedLocales }) => (
+      <LocaleContext.Consumer>
+        {({ current, supported }) => (
           <Text>
-            {supportedLocales
-              .filter(supportedLocale => supportedLocale !== locale)
-              .map((supportedLocale, index, locales) => (
+            {supported
+              .filter(locale => locale !== current)
+              .map((locale, index, locales) => (
                 // We can't use Next.js Link via core/A because we have to
                 // enforce full reload.
                 // Check server.js getAcceptedOrDefaultLocale.
                 <Text
                   accessibilityRole="link"
                   color="primary"
-                  href={SwitchLocale.getLocaleHref('/', supportedLocale)}
-                  key={supportedLocale}
+                  href={SwitchLocale.getLocaleHref('/', locale)}
+                  key={locale}
                 >
-                  {SwitchLocale.localeToLanguageName(supportedLocale)}
-                  {supportedLocale.length > 1 &&
-                    index < locales.length - 1 &&
-                    ', '}
+                  {SwitchLocale.localeToLanguageName(locale)}
+                  {locale.length > 1 && index < locales.length - 1 && ', '}
                 </Text>
               ))}
           </Text>
         )}
-      </Locale>
+      </LocaleContext.Consumer>
     );
   }
 }

@@ -54,6 +54,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   setEmail = email => this.setState({ email });
   setPassword = password => this.setState({ password });
 
+  // TODO: User error on Input!!!
   setFocusOnError(inputErrors: Errors<generated.AuthInput>) {
     const error = Object.keys(inputErrors)[0];
     if (!error) return;

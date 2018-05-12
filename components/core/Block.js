@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 import { View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -13,11 +13,11 @@ class Block extends React.PureComponent<BlockProps> {
   render() {
     const { style, ...props } = this.props;
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => {
           return <View style={[theme.styles.block, style]} {...props} />;
         }}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

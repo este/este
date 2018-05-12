@@ -4,7 +4,7 @@ import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
 import Page from '../components/core/Page';
-import { ToggleTheme } from '../components/core/Theme';
+import ToggleTheme from '../components/core/ToggleTheme';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';

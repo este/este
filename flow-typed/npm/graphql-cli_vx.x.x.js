@@ -1,4 +1,4 @@
-// flow-typed signature: e2933deeddd9904988d54d48d6607bd1
+// flow-typed signature: 31e64cb93683c49da718faa74671bd59
 // flow-typed version: <<STUB>>/graphql-cli_v^2.13.0/flow_v0.71.0
 
 /**
@@ -31,6 +31,26 @@ declare module 'graphql-cli/dist/cmds/add-endpoint' {
 }
 
 declare module 'graphql-cli/dist/cmds/add-project' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/codegen/codegen' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/codegen/getApolloCodegenBin' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/codegen/getBin' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/codegen/index' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-cli/dist/cmds/codegen/spawn' {
   declare module.exports: any;
 }
 
@@ -107,6 +127,21 @@ declare module 'graphql-cli/dist/cmds/add-endpoint.js' {
 }
 declare module 'graphql-cli/dist/cmds/add-project.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/add-project'>;
+}
+declare module 'graphql-cli/dist/cmds/codegen/codegen.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/codegen/codegen'>;
+}
+declare module 'graphql-cli/dist/cmds/codegen/getApolloCodegenBin.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/codegen/getApolloCodegenBin'>;
+}
+declare module 'graphql-cli/dist/cmds/codegen/getBin.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/codegen/getBin'>;
+}
+declare module 'graphql-cli/dist/cmds/codegen/index.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/codegen/index'>;
+}
+declare module 'graphql-cli/dist/cmds/codegen/spawn.js' {
+  declare module.exports: $Exports<'graphql-cli/dist/cmds/codegen/spawn'>;
 }
 declare module 'graphql-cli/dist/cmds/create/boilerplates.js' {
   declare module.exports: $Exports<'graphql-cli/dist/cmds/create/boilerplates'>;

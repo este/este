@@ -23,6 +23,7 @@ module.exports = {
     'prefer-destructuring': 0, // Flow casting can need it.
     'import/extensions': 0, // Flow checks it.
     'no-alert': 0, // // Too strict.
-    'no-unused-expressions': 0, // Flow needs it for casting: (field: empty);
+    'no-unused-expressions': 0, // For Flow casting, e.g. (field: empty);
+    'react/require-default-props': 0, // WTF? Not needed when we pass props.
   },
 };

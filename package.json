@@ -37,9 +37,9 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "format": "prettier --write '**/*.js'",
-    "clean-babel-cache": "rimraf node_modules/.cache/babel-loader",
+    "clean-babel-cache": "rimraf 'node_modules/.cache/babel-loader'",
     "test": "run-s messages:missing relay:ci eslint flow jest build",
-    "deps": "rimraf node_modules yarn.lock flow-typed && yarn && flow-typed install",
+    "deps": "rimraf 'node_modules' 'yarn.lock' 'flow-typed' && yarn && flow-typed install",
     "eslint": "eslint components mutations pages screens scripts server test themes index.js"
   },
   "dependencies": {
@@ -50,7 +50,6 @@
     "bcryptjs": "^2.4.3",
     "color": "^3.0.0",
     "cookie": "^0.3.1",
-    "create-react-context": "^0.2.1",
     "cross-env": "^5.0.1",
     "diacritics-map": "^0.1.0",
     "glob": "^7.1.2",

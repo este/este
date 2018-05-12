@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Picker as NativePicker } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 
 // https://github.com/necolas/react-native-web/issues/879
 NativePicker.propTypes = null;
@@ -19,7 +19,7 @@ class Picker extends React.PureComponent<PickerProps> {
   render() {
     const { disabled, size = 0, style, ...props } = this.props;
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => (
           <NativePicker
             enabled={!disabled}
@@ -31,7 +31,7 @@ class Picker extends React.PureComponent<PickerProps> {
             {...props}
           />
         )}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 import { View } from 'react-native';
 
 // TODO: Rename to Form.web.js, add native Form.js.
@@ -26,7 +26,7 @@ class Form extends React.PureComponent<FormProps> {
 
   render() {
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => (
           <View
             accessibilityRole="form"
@@ -37,7 +37,7 @@ class Form extends React.PureComponent<FormProps> {
             {this.props.children}
           </View>
         )}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

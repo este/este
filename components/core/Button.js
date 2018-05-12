@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 import { TouchableOpacity } from 'react-native';
 
 export type ButtonProps = {|
@@ -51,7 +51,7 @@ class Button extends React.PureComponent<ButtonProps> {
     const fixWebFontSmoothing = inline !== true && color != null;
 
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => (
           <TouchableOpacity
             accessibilityLabel={accessibilityLabel}
@@ -76,7 +76,7 @@ class Button extends React.PureComponent<ButtonProps> {
             />
           </TouchableOpacity>
         )}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }

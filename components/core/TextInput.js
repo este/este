@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
-import Theme from './Theme';
+import ThemeContext from './ThemeContext';
 import colorLib from 'color';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import type { Error as ErrorType } from '../../server/error';
-import Error from './Error';
+import ErrorMessage from './ErrorMessage';
 
 // This is just a stub for inputRef type.
 class ReactNativeWebTextInputElementStub extends React.Component<{}> {
@@ -59,7 +59,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
       ...props
     } = this.props;
     return (
-      <Theme>
+      <ThemeContext.Consumer>
         {theme => {
           const renderHeader = label != null || error != null;
           const placeholderTextColor = colorLib(
@@ -76,7 +76,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
                   {error != null && (
                     <>
                       <Text> </Text>
-                      <Error size={size}>{error}</Error>
+                      <ErrorMessage size={size}>{error}</ErrorMessage>
                     </>
                   )}
                 </View>
@@ -95,7 +95,7 @@ class TextInput extends React.PureComponent<TextInputProps> {
             </View>
           );
         }}
-      </Theme>
+      </ThemeContext.Consumer>
     );
   }
 }
