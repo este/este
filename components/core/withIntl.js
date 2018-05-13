@@ -2,22 +2,15 @@
 import * as React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 
-// This is fixed version of react-intl injectIntl HOC.
-// Maybe someone someday will fix flow-typed libdef.
-// This example does not work with functional stateless components:
+// Fixed version of react-intl injectIntl.
+// Btw, Flow example does not work with functional stateless components:
 // https://flow.org/en/docs/react/hoc/#toc-injecting-props-with-a-higher-order-component
-// This works:
-// https://github.com/facebook/flow/issues/5908#issuecomment-370246840
-// Why HOC? Ideally, all side-effects should be HOC.
-
-const withIntl = <C: React.ComponentType<*>>(
-  Component: C,
-): React.ComponentType<
-  $Diff<React.ElementProps<C>, { intl: IntlShape | void }>,
-> => {
-  const WrapperComponent = (props: React.ElementProps<C>) => (
-    <Component {...props} />
-  );
+// https://github.com/facebook/flow/issues/5908#issuecomment-370188580
+const withIntl = <Props: {}>(
+  Component: React.ComponentType<Props>,
+): React.ComponentType<$Diff<Props, { intl: IntlShape | void }>> => {
+  const WrapperComponent = (props: Props) => <Component {...props} />;
+  // $FlowFixMe A bug in react-intl flow-typed libdef.
   return injectIntl(WrapperComponent);
 };
 

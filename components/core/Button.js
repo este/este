@@ -13,29 +13,29 @@ export type ButtonProps = {|
   testID?: string,
 |};
 
-class Button extends React.PureComponent<ButtonProps> {
-  static getColorStyle = (styles: *, color: *) => {
-    switch (color) {
-      case 'primary':
-        return styles.buttonPrimary;
-      case 'success':
-        return styles.buttonSuccess;
-      case 'warning':
-        return styles.buttonWarning;
-      case 'danger':
-        return styles.buttonDanger;
-      case 'black':
-        return styles.buttonBlack;
-      case 'white':
-        return styles.buttonWhite;
-      case 'gray':
-        return styles.buttonGray;
-      default:
-        (color: empty);
-        return null;
-    }
-  };
+const getColorStyle = (styles, color) => {
+  switch (color) {
+    case 'primary':
+      return styles.buttonPrimary;
+    case 'success':
+      return styles.buttonSuccess;
+    case 'warning':
+      return styles.buttonWarning;
+    case 'danger':
+      return styles.buttonDanger;
+    case 'black':
+      return styles.buttonBlack;
+    case 'white':
+      return styles.buttonWhite;
+    case 'gray':
+      return styles.buttonGray;
+    default:
+      (color: empty);
+      return null;
+  }
+};
 
+class Button extends React.PureComponent<ButtonProps> {
   render() {
     const {
       inline,
@@ -70,7 +70,7 @@ class Button extends React.PureComponent<ButtonProps> {
                 inline == null && theme.styles.buttonSpaced,
                 inline == null &&
                   color != null &&
-                  Button.getColorStyle(theme.styles, color),
+                  getColorStyle(theme.styles, color),
               ]}
               {...props}
             />

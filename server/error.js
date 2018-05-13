@@ -33,7 +33,7 @@ export type Errors<T> = {
 // { type: 'notAuthorized' }; // when user has no rights
 // { type: { type: 'alreadyExists' } }; // when type prop value already exists
 // Note we can safely distinguish them via type === 'string'.
-export type ServerError = Error | Errors<*>;
+export type ServerError = Error | Errors<Object>;
 
 */
 

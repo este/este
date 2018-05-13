@@ -18,10 +18,10 @@ export type TextProps = {|
   children?: React.Node,
   // React Native does not export Text props Flow types yet, so add them as-go.
   // Feel free to add any used prop.
-  accessibilityRole?: *,
-  onMouseEnter?: *,
-  onMouseLeave?: *,
-  href?: *,
+  accessibilityRole?: any,
+  onMouseEnter?: any,
+  onMouseLeave?: any,
+  href?: any,
 |};
 
 // Strutural aka non-themeable styles.
@@ -58,31 +58,31 @@ const italicStyles = StyleSheet.create({
   italic: { fontStyle: 'italic' },
 });
 
+const getColorStyle = (themeStyles, color) => {
+  switch (color) {
+    case 'primary':
+      return themeStyles.textPrimary;
+    case 'success':
+      return themeStyles.textSuccess;
+    case 'warning':
+      return themeStyles.textWarning;
+    case 'danger':
+      return themeStyles.textDanger;
+    case 'black':
+      return themeStyles.textBlack;
+    case 'white':
+      return themeStyles.textWhite;
+    case 'gray':
+      return themeStyles.textGray;
+    default:
+      (color: empty);
+      return null;
+  }
+};
+
 class Text extends React.PureComponent<TextProps> {
   static contextTypes = {
     isInAParentText: PropTypes.bool,
-  };
-
-  static getColorStyle = (themeStyles: *, color: *) => {
-    switch (color) {
-      case 'primary':
-        return themeStyles.textPrimary;
-      case 'success':
-        return themeStyles.textSuccess;
-      case 'warning':
-        return themeStyles.textWarning;
-      case 'danger':
-        return themeStyles.textDanger;
-      case 'black':
-        return themeStyles.textBlack;
-      case 'white':
-        return themeStyles.textWhite;
-      case 'gray':
-        return themeStyles.textGray;
-      default:
-        (color: empty);
-        return null;
-    }
   };
 
   context: {
@@ -116,7 +116,7 @@ class Text extends React.PureComponent<TextProps> {
                   (bold
                     ? theme.styles.textWeightBold
                     : theme.styles.textWeightNormal),
-                color != null && Text.getColorStyle(theme.styles, color),
+                color != null && getColorStyle(theme.styles, color),
                 decoration != null && decorationStyles[decoration],
                 italic != null &&
                   (italic ? italicStyles.italic : italicStyles.normal),
