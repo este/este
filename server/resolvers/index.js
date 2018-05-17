@@ -1,7 +1,6 @@
 // @flow
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
-const diacriticsMap = require('diacritics-map');
 const validation = require('../validation');
 
 const web = require('./web');

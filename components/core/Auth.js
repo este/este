@@ -144,7 +144,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 <TextInputBig
                   autoComplete="email"
                   disabled={pending}
-                  error={this.state.inputErrors.email}
+                  // error={this.state.inputErrors.email}
                   keyboardType="email-address"
                   name="email"
                   onChangeText={this.setEmail}
@@ -154,7 +154,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
                 />
                 <TextInputBig
                   disabled={pending}
-                  error={this.state.inputErrors.password}
+                  // error={this.state.inputErrors.password}
                   name="password"
                   onChangeText={this.setPassword}
                   placeholder={intl.formatMessage(messages.passwordPlaceholder)}

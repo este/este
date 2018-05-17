@@ -1,93 +1,42 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import type { Error } from '../../server/error';
 import Text, { type TextProps } from './Text';
+import { FormattedMessage } from 'react-intl';
+import type { ShortRequiredStringError } from '../__generated__/CreateWebMutation.graphql';
 
-const errorToMessage = (error: Error) => {
-  switch (error.type) {
-    case 'required':
-      return (
-        <FormattedMessage
-          defaultMessage="Please fill out this field."
-          id="error.required"
-        />
-      );
-    case 'minLength':
-      return (
-        <FormattedMessage
-          defaultMessage="{minLength} characters minimum."
-          id="error.minLength"
-          values={{ minLength: error.minLength }}
-        />
-      );
-    case 'maxLength':
-      return (
-        <FormattedMessage
-          defaultMessage="{maxLength} characters maximum."
-          id="error.maxLength"
-          values={{ maxLength: error.maxLength }}
-        />
-      );
-    case 'email':
-      return (
-        <FormattedMessage
-          defaultMessage="Email address is not valid."
-          id="error.email"
-        />
-      );
-    case 'alreadyExists':
-      return (
-        <FormattedMessage
-          defaultMessage="Already exists."
-          id="error.alreadyExists"
-        />
-      );
-    case 'notExists':
-      return (
-        <FormattedMessage defaultMessage="Not exists." id="error.notExists" />
-      );
-    case 'wrongPassword':
-      return (
-        <FormattedMessage
-          defaultMessage="Wrong password."
-          id="error.wrongPassword"
-        />
-      );
-    case 'notAuthorized':
-      return (
-        <FormattedMessage
-          defaultMessage="Not authorized."
-          id="error.notAuthorized"
-        />
-      );
-    case 'unknown':
-      return (
-        <FormattedMessage
-          defaultMessage="Unknown error: {message}"
-          id="error.unknown"
-          values={{ message: error.message }}
-        />
-      );
-    case 'trim':
-      return (
-        <FormattedMessage
-          defaultMessage="Please remove trailing whitespaces."
-          id="error.trim"
-        />
-      );
-    case 'requestFailed':
-      return (
-        <FormattedMessage
-          defaultMessage="Network error. Please try it later."
-          id="error.requestFailed"
-        />
-      );
-    default:
-      (error: empty);
-      return null;
-  }
-};
+export type Error = ShortRequiredStringError;
+
+//       <FormattedMessage
+//         defaultMessage="{minLength} characters minimum."
+//         id="error.minLength"
+//         values={{ minLength: error.minLength }}
+//       />
+//       <FormattedMessage
+//         defaultMessage="Email address is not valid."
+//         id="error.email"
+//       />
+//       <FormattedMessage
+//         defaultMessage="Already exists."
+//         id="error.alreadyExists"
+//       />
+//       <FormattedMessage defaultMessage="Not exists." id="error.notExists" />
+//       <FormattedMessage
+//         defaultMessage="Wrong password."
+//         id="error.wrongPassword"
+//       />
+//       <FormattedMessage
+//         defaultMessage="Not authorized."
+//         id="error.notAuthorized"
+//       />
+//       <FormattedMessage
+//         defaultMessage="Unknown error: {message}"
+//         id="error.unknown"
+//         values={{ message: error.message }}
+//       />
+//       <FormattedMessage
+//         defaultMessage="Network error. Please try it later."
+//         id="error.requestFailed"
+//       />
 
 type ErrorMessageProps = {|
   ...TextProps,
@@ -95,12 +44,47 @@ type ErrorMessageProps = {|
 |};
 
 class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
+  static errorToMessage(error: Error) {
+    switch (error) {
+      case 'NO_TRAILING_SPACES':
+        return (
+          <FormattedMessage
+            defaultMessage="Please remove trailing whitespaces."
+            id="error.trim"
+          />
+        );
+      case 'REQUIRED':
+        return (
+          <FormattedMessage
+            defaultMessage="Please fill out this field."
+            id="error.required"
+          />
+        );
+      case 'MAX_140_CHARS':
+        return (
+          <FormattedMessage
+            defaultMessage="{maxLength} characters maximum."
+            id="error.maxLength"
+            values={{ maxLength: 140 }}
+          />
+        );
+      default:
+        (error: empty);
+        return error;
+    }
+  }
+
   render() {
-    const { bold = true, color = 'danger', children, ...props } = this.props;
-    if (!children) return null;
+    const {
+      bold = true,
+      color = 'danger',
+      children: error,
+      ...props
+    } = this.props;
+    if (!error) return null;
     return (
       <Text bold={bold} color={color} {...props}>
-        {errorToMessage(children)}
+        {ErrorMessage.errorToMessage(error)}
       </Text>
     );
   }

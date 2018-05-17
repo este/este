@@ -53,24 +53,13 @@ const withMutation = <Props: Object, Input: Object, Response>(
           mutation,
           variables: { input },
           onCompleted(response, errors) {
-            if (errors) errors.forEach(error => dispatchError(error));
-            // response do onCompleted
-            // pending vypnout
-            // error taky pending vypnout
-            // a to je imho cele
-            // co ten error?
-
-            // nacist nejak?
-            console.log('onCompleted');
-            // // null, a pole locations a message
-            console.log(response);
-            console.log(errors);
             // TODO: Set pending to false.
-            // if (onCompleted) onCompleted(response);
-            // TODO: Errors.
-            // if (errors)
+            if (errors) errors.forEach(error => dispatchError(error));
+            if (onCompleted) onCompleted(response);
           },
           onError(error) {
+            // TODO: Set pending to false.
+            // dispatchError(error)
             // console.log('onError');
             // console.log(error);
           },

@@ -6,7 +6,7 @@ import TextInputBig from './core/TextInputBig';
 import { FormattedMessage } from 'react-intl';
 import Text from './core/Text';
 import * as generated from './__generated__/CreateWebMutation.graphql';
-import * as validation from '../server/validation';
+// import { validateCreateWebInput } from '../server/resolvers/web';
 import Row from './core/Row';
 import Block from './core/Block';
 import { graphql, commitMutation } from 'react-relay';
@@ -31,7 +31,8 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   state = CreateWeb.initialState;
 
-  // That's how we define event handlers.
+  // That's how we bind event handlers.
+  // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
   setName = (name: string) => this.setState({ name });
 
   handleCompleted = ({ createWeb }) => {
@@ -51,21 +52,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       name: this.state.name,
     };
 
-    // const errors = validation.validateCreateWeb(input);
-
-    // const validateCreateWebInput = input => {
-    //   // { name: null, age: null }
-    // };
-    //
-    // const errors = {
-    //   // name: validateShortRequiredText(input.name),
-    //   name: null,
-    // };
-    //
-    // this.setState({ errors });
-
-    // // Validate it. The same validation is called on the server.
-    // const errors = validation.validateNewWeb(input);
+    // const errors = validateCreateWebInput(input);
     // if (errors) {
     //   this.setState({ errors });
     //   return;
@@ -75,14 +62,12 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   };
 
   render() {
-    // TODO: Use chaining. https://github.com/este/este/issues/1527
+    // TODO: Use optional chaining.
     const { errors } = this.state;
-    // const fok = errors && errors.name;
 
     return (
       <Form onSubmit={this.createWeb}>
         <Block>
-          <Text>{errors && errors.name}</Text>
           <TextInputBig
             label={
               <Text>
@@ -93,7 +78,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
               </Text>
             }
             disabled={this.props.pending}
-            // error={this.state.errors.name}
+            error={errors && errors.name}
             onChangeText={this.setName}
             value={this.state.name}
           />
@@ -137,7 +122,7 @@ export default withMutation(
   {
     updater: (store, foo) => {
       const payload = store.getRootField('createWeb');
-      // 401 on server returns empty payload.
+      // Check, because the server can return an empty payload, e.g. for 401.
       if (!payload) return;
       const recordEdge = payload.getLinkedRecord('edge');
       sharedUpdater(store, recordEdge);

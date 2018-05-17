@@ -4,19 +4,17 @@ const { Prisma } = require('prisma-binding');
 const resolvers = require('./resolvers');
 const jsonwebtoken = require('jsonwebtoken');
 
-// const dev = process.env.NODE_ENV !== 'production';
-
 /*::
-
 // Controlled means with custom message or behavior.
 // https://stackoverflow.com/a/6937030/233902
 export type ControlledHttpStatus = 401 | 403 | 404;
 
 type Context = {
   db: {
-    query: { [string]: (Object, Object) => any },
-    mutation: { [string]: (Object, Object) => any },
-    exists: { [string]: (Object) => any },
+    // https://github.com/prismagraphql/prisma-binding#api
+    query: { [string]: (any) => any },
+    mutation: { [string]: (any) => any },
+    exists: { [string]: (any) => any },
   },
   throwHttpStatus: ControlledHttpStatus => void,
   getUserId: () => string,
@@ -26,13 +24,15 @@ export type Resolver<Variables, Response, Name: string> = (
   parent: Object,
   variables: Variables,
   context: Context,
-  info: Object, 
+  info: Object,
 ) => Promise<$ElementType<Response, Name>>;
 */
 
 const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
   throw new Error(status.toString());
 };
+
+// const dev = process.env.NODE_ENV !== 'production';
 
 const createContext = context => ({
   ...context,

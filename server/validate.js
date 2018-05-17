@@ -1,17 +1,23 @@
 // @flow
 const isEmail = require('validator/lib/isEmail');
 
-const validateNoTrailingSpaces = (value /*: string */) =>
-  value !== value.trim() && 'NO_TRAILING_SPACES';
+const noTrailingSpaces = value =>
+  value !== value.trim() ? 'NO_TRAILING_SPACES' : null;
 
-const validateRequired = (value /*: string */) =>
-  validateNoTrailingSpaces(value) || (value.length === 0 && 'REQUIRED');
+const required = value =>
+  noTrailingSpaces(value) || (value.length === 0 ? 'REQUIRED' : null);
 
-const validateMax140Chars = (value /*: string */) =>
-  validateRequired(value) || (value.length > 140 && 'MAX_140_CHARS');
+// const min5chars = value =>
+//   required(value) || (value.length < 3 ? 'MIN_5_CHARS' : null);
 
-const validateShortRequiredString = (value /*: string */) => {
-  return validateMax140Chars(value) || null;
+// Export only strict enough validations.
+
+const shortRequiredString = (value /*: string */) =>
+  required(value) || (value.length > 140 ? 'MAX_140_CHARS' : null);
+
+// const shortRequiredStringMin3Chars = (value /*: string */) =>
+//   shortRequiredString(value) || min5chars(value);
+
+module.exports = {
+  shortRequiredString,
 };
-
-module.exports = {};
