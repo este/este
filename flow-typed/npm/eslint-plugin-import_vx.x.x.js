@@ -1,4 +1,4 @@
-// flow-typed signature: 49929c2e6208e8fa48ffddbb6eeb9854
+// flow-typed signature: 7d8d07e3a04708923dfa8c69e555331f
 // flow-typed version: <<STUB>>/eslint-plugin-import_v^2.11.0/flow_v0.72.0
 
 /**
@@ -75,6 +75,10 @@ declare module 'eslint-plugin-import/lib/index' {
 }
 
 declare module 'eslint-plugin-import/lib/rules/default' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-import/lib/rules/dynamic-import-chunkname' {
   declare module.exports: any;
 }
 
@@ -268,6 +272,9 @@ declare module 'eslint-plugin-import/lib/index.js' {
 }
 declare module 'eslint-plugin-import/lib/rules/default.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/default'>;
+}
+declare module 'eslint-plugin-import/lib/rules/dynamic-import-chunkname.js' {
+  declare module.exports: $Exports<'eslint-plugin-import/lib/rules/dynamic-import-chunkname'>;
 }
 declare module 'eslint-plugin-import/lib/rules/export.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/export'>;

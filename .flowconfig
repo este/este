@@ -50,6 +50,8 @@ unclear-type=off
 
 [options]
 include_warnings=true
+; Not yet. https://github.com/este/este/issues/1527
+; esproposal.optional_chaining=enable
 
 ; RN
 emoji=true

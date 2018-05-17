@@ -2,7 +2,11 @@
   "env": {
     "development": {
       "presets": ["next/babel", "@babel/preset-flow"],
-      "plugins": ["inline-dotenv", "relay", "react-native-web"]
+      "plugins": [
+        "inline-dotenv",
+        "relay",
+        "react-native-web"
+      ]
     },
     "production": {
       "presets": ["next/babel", "@babel/preset-flow"],
@@ -14,8 +18,15 @@
       ]
     },
     "test": {
-      "presets": [["env", { "modules": "commonjs" }], "next/babel", "@babel/preset-flow"],
-      "plugins": ["relay", "react-native-web"]
+      "presets": [
+        ["env", { "modules": "commonjs" }],
+        "next/babel",
+        "@babel/preset-flow"
+      ],
+      "plugins": [
+        "relay",
+        "react-native-web"
+      ]
     }
   }
 }

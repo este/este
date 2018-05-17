@@ -2,14 +2,14 @@
   "name": "este",
   "private": true,
   "engines": {
-    "node": "10.x.x"
+    "node": "8.11.1"
   },
   "license": "MIT",
   "scripts": {
     "api": "nodemon --config nodemon.api.json",
     "web": "nodemon --config nodemon.web.json",
-    "schema": "yarn graphql get-schema -p app -o server/schema.graphql",
-    "relay": "relay-compiler --src . --include 'components/**' 'mutations/**' 'pages/**' --schema server/schema.graphql",
+    "schema": "yarn graphql get-schema -p app -o server/schema.graphql --all false",
+    "relay": "relay-compiler --src . --include 'components/**' 'mutations/**' 'pages/**' --schema server/schema.graphql --noFutureProofEnums true",
     "schema-relay": "yarn schema && yarn relay",
     "relay:watch": "yarn relay --watch",
     "relay:ci": "yarn relay --watchman false",
@@ -77,7 +77,7 @@
     "validator": "^10.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.47",
     "@babel/preset-flow": "^7.0.0-beta.44",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.3",

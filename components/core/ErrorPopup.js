@@ -11,17 +11,31 @@ class ErrorPopup extends React.PureComponent<{}> {
         {({ error }) => (
           <ThemeContext.Consumer>
             {theme => {
-              return (
-                <ErrorMessage
-                  size={1}
-                  align="center"
-                  color="white"
-                  fixWebFontSmoothing
-                  style={theme.styles.errorPopup}
-                >
-                  {error}
-                </ErrorMessage>
-              );
+              if (!error) return null;
+              // window.alert(JSON.stringify(error));
+              // {message: "401", locations: Array(1), path: Array(1)}
+              //   locations
+              //   :
+              //   [{…}]
+              //   message
+              //   :
+              //   "401"
+              //   path
+              //   :
+              //   ["createWeb"]
+              // console.log(error);
+              return null;
+              // return (
+              //   <ErrorMessage
+              //     size={1}
+              //     align="center"
+              //     color="white"
+              //     fixWebFontSmoothing
+              //     style={theme.styles.errorPopup}
+              //   >
+              //     {/* {error} */}
+              //   </ErrorMessage>
+              // );
             }}
           </ThemeContext.Consumer>
         )}

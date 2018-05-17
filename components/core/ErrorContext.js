@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
-import type { Error } from '../../server/error';
+import type { PayloadError } from 'react-relay';
+
+export type AppError = PayloadError | Error;
 
 const ErrorContext = React.createContext({
-  error: (null: ?Error),
+  error: (null: ?AppError),
   // eslint-disable-next-line no-unused-vars
-  dispatchError: (error: Error) => {},
+  dispatchError: (error: AppError) => {},
 });
 
 export default ErrorContext;

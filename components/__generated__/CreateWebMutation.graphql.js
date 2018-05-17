@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3d56ead39c484b6e78658f65872f9fcf
+ * @relayHash ccd2feadb4d7b9490aada54a504d3458
  */
 
 /* eslint-disable */
@@ -10,6 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type WebsItem$ref = any;
+export type ShortRequiredStringError = "MAX_140_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED";
 export type CreateWebInput = {
   name: string
 };
@@ -22,7 +23,10 @@ export type CreateWebMutationResponse = {|
       +node: {|
         +$fragmentRefs: WebsItem$ref
       |}
-    |}
+    |},
+    +errors: ?{|
+      +name: ?ShortRequiredStringError
+    |},
   |}
 |};
 */
@@ -38,6 +42,9 @@ mutation CreateWebMutation(
         ...WebsItem
         id
       }
+    }
+    errors {
+      name
     }
   }
 }
@@ -66,13 +73,32 @@ v1 = [
     "variableName": "input",
     "type": "CreateWebInput!"
   }
-];
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "errors",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "CreateWebErrors",
+  "plural": false,
+  "selections": [
+    v2
+  ]
+};
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n    errors {\n      name\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -116,7 +142,8 @@ return {
                 ]
               }
             ]
-          }
+          },
+          v3
         ]
       }
     ]
@@ -160,13 +187,7 @@ return {
                     "args": null,
                     "storageKey": null
                   },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "name",
-                    "args": null,
-                    "storageKey": null
-                  },
+                  v2,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -184,7 +205,8 @@ return {
                 ]
               }
             ]
-          }
+          },
+          v3
         ]
       }
     ]
@@ -192,5 +214,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '865f52f79821b920823ab4e455c92e46';
+(node/*: any*/).hash = '18da0cb28544895732b00b2e119458e8';
 module.exports = node;

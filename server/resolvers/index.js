@@ -3,9 +3,8 @@ const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
 const diacriticsMap = require('diacritics-map');
 const validation = require('../validation');
-/*::
-import type { ServerError } from '../error';
-*/
+
+const web = require('./web');
 
 // Workflow
 // - update database/model.graphql
@@ -23,16 +22,20 @@ const createAuthPayload = user => ({
   user,
 });
 
-// TODO: https://github.com/este/este/issues/1488
-const throwError = (error /*: ServerError */) => {
-  throw new Error(JSON.stringify(error));
+// For general API errors HTTP statuses are fine. Controlled means we can
+// enforce a custom message or behavior, e.g. 401 should request auth etc.
+// https://stackoverflow.com/a/6937030/233902
+/*::
+export type ControlledHttpStatus = 401 | 403 | 404;
+*/
+
+const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
+  throw new Error(status.toString());
 };
 
-const throwNotAuthorizedError = () => throwError({ type: 'notAuthorized' });
-
-const getUserId = ctx => {
-  const authorization = ctx.request.get('authorization');
-  if (!authorization) throwNotAuthorizedError();
+const getUserId = context => {
+  const authorization = context.request.get('authorization');
+  if (!authorization) throwHttpStatus(401);
   const token = authorization.replace('Bearer ', '');
   const decoded = jsonwebtoken.verify(token, process.env.APP_SECRET || '');
   // https://flow.org/en/docs/lang/refinements
@@ -40,97 +43,51 @@ const getUserId = ctx => {
   if (decoded != null && typeof decoded.userId === 'string') {
     return decoded.userId;
   }
-  throwNotAuthorizedError();
+  throwHttpStatus(401);
 };
 
-/*::
-// Will be generated one day.
-type Parent = Object;
-type Args = Object;
-type Context = Object;
-type Info = Object;
-type Resolvers = {
-  ['Mutation' | 'Query']: {
-    [string]: (Parent, Args, Context, Info) => mixed,
-  },
-};
-*/
+// enum ShortRequiredTextError {
+//   TRIM
+//   REQUIRED
+//   MIN_3_CHARS
+//   MAX_140_CHARS
+// }
 
-const resolvers /*: Resolvers */ = {
+const resolvers = {
   Mutation: {
     async signup(parent, { input }, { db }) {
-      const validationErrors = validation.validateEmailPassword(input);
-      if (validationErrors) throwError(validationErrors);
-
-      const userExists = await db.exists.User({ email: input.email });
-      if (userExists) throwError({ email: { type: 'alreadyExists' } });
-
-      const password = await bcrypt.hash(input.password, 10);
-      const user = await db.mutation.createUser({
-        data: { email: input.email, password },
-      });
-      return createAuthPayload(user);
+      // const validationErrors = validation.validateEmailPassword(input);
+      // if (validationErrors) throwError(validationErrors);
+      //
+      // const userExists = await db.exists.User({ email: input.email });
+      // if (userExists) throwError({ email: { type: 'alreadyExists' } });
+      //
+      // const password = await bcrypt.hash(input.password, 10);
+      // const user = await db.mutation.createUser({
+      //   data: { email: input.email, password },
+      // });
+      // return createAuthPayload(user);
     },
 
     async signin(parent, { input }, { db }) {
-      const validationErrors = validation.validateEmailPassword(input);
-      if (validationErrors) throwError(validationErrors);
-
-      const user = await db.query.user({ where: { email: input.email } });
-      // I don't know how to easily type email prop. Switch to ReasonML asap.
-      if (!user) throwError({ email: { type: 'notExists' } });
-
-      const valid = await bcrypt.compare(input.password, user.password);
-      if (!valid) throwError({ password: { type: 'wrongPassword' } });
-      return createAuthPayload(user);
+      // const validationErrors = validation.validateEmailPassword(input);
+      // if (validationErrors) throwError(validationErrors);
+      //
+      // const user = await db.query.user({ where: { email: input.email } });
+      // // I don't know how to easily type email prop. Switch to ReasonML asap.
+      // // TODO: Hmm, a co mit to fakt ve schematu?
+      // if (!user) throwError({ email: { type: 'notExists' } });
+      //
+      // const valid = await bcrypt.compare(input.password, user.password);
+      // if (!valid) throwError({ password: { type: 'wrongPassword' } });
+      // return createAuthPayload(user);
     },
 
-    async createWeb(parent, { input }, ctx) {
-      // Only an authorized user can create a web.
-      const userId = getUserId(ctx);
+    ...web.mutations,
 
-      // The same logic as on clients.
-      const validationErrors = validation.validateNewWeb(input);
-      if (validationErrors) throwError(validationErrors);
-
-      const domainName = input.name
-        .toLowerCase()
-        .split('')
-        .map(char => diacriticsMap[char] || char)
-        .join('')
-        .replace(/[^a-z0-9]/g, '');
-      const timestamp = Date.now().toString(36);
-      const domain = `${domainName}-${timestamp}`;
-
-      const web = await ctx.db.mutation.createWeb({
-        data: {
-          name: input.name,
-          domain,
-          owner: { connect: { id: userId } },
-        },
-      });
-
-      return {
-        edge: {
-          node: web,
-        },
-      };
-    },
-
-    async deleteWeb(parent, { input }, ctx) {
-      const userId = getUserId(ctx);
-      const webExists = await ctx.db.exists.Web({
-        id: input.id,
-        owner: { id: userId },
-      });
-      if (!webExists) throwNotAuthorizedError();
-      await ctx.db.mutation.deleteWeb({ where: { id: input.id } });
-      return { id: input.id };
-    },
-
-    async updateUser(parent, { input }, ctx) {
-      const userId = getUserId(ctx);
-      const user = await ctx.db.mutation.updateUser({
+    async updateUser(parent, { input }, context) {
+      const userId = getUserId(context);
+      const user = await context.db.mutation.updateUser({
         data: { themeName: input.themeName },
         where: { id: userId },
       });
@@ -139,15 +96,17 @@ const resolvers /*: Resolvers */ = {
   },
 
   Query: {
-    async me(parent, args, ctx, info) {
-      const userId = getUserId(ctx);
-      const user = await ctx.db.query.user({ where: { id: userId } }, info);
+    // $FlowFixMe
+    async me(parent, args, context, info) {
+      const userId = getUserId(context);
+      const user = await context.db.query.user({ where: { id: userId } }, info);
       return user;
     },
 
-    async webs(parent, args, ctx, info) {
-      const userId = getUserId(ctx);
-      const webs = await ctx.db.query.websConnection(
+    // $FlowFixMe
+    async webs(parent, args, context, info) {
+      const userId = getUserId(context);
+      const webs = await context.db.query.websConnection(
         {
           where: { owner: { id: userId } },
           orderBy: 'updatedAt_ASC',
@@ -158,14 +117,15 @@ const resolvers /*: Resolvers */ = {
       return webs;
     },
 
-    async web(parent, { domain }, ctx, info) {
-      const userId = getUserId(ctx);
-      const requestingUserIsOwner = await ctx.db.exists.Web({
+    // $FlowFixMe
+    async web(parent, { domain }, context, info) {
+      const userId = getUserId(context);
+      const requestingUserIsOwner = await context.db.exists.Web({
         domain,
         owner: { id: userId },
       });
-      if (!requestingUserIsOwner) throwNotAuthorizedError();
-      return ctx.db.query.web({ where: { domain } }, info);
+      if (!requestingUserIsOwner) throwHttpStatus(403);
+      return context.db.query.web({ where: { domain } }, info);
     },
   },
 };

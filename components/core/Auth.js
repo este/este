@@ -77,7 +77,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     this.setFocusOnError(inputErrors);
   }
 
-  handleCompleted = (response: *) => {
+  handleCompleted = (response: any) => {
     // http://graphql.org/learn/best-practices/#nullability
     const payload = response.signin || response.signup || null;
     // https://flow.org/en/docs/lang/refinements
@@ -96,37 +96,37 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     }
   };
 
-  handleError = (inputErrors: *) => {
+  handleError = (inputErrors: any) => {
     this.setErrors(inputErrors);
   };
 
-  auth = (mutate: *, isSignUp?: boolean) => () => {
+  auth = (mutate: any, isSignUp?: boolean) => () => {
     const input = {
       email: this.state.email,
       password: this.state.password,
     };
 
-    const inputErrors = validation.validateEmailPassword(input);
-    if (inputErrors) {
-      this.setErrors(inputErrors);
-      return;
-    }
-
-    if (isSignUp === true) {
-      mutate(
-        SignupMutation.commit,
-        input,
-        this.handleCompleted,
-        this.handleError,
-      );
-    } else {
-      mutate(
-        SigninMutation.commit,
-        input,
-        this.handleCompleted,
-        this.handleError,
-      );
-    }
+    // const inputErrors = validation.validateEmailPassword(input);
+    // if (inputErrors) {
+    //   this.setErrors(inputErrors);
+    //   return;
+    // }
+    //
+    // if (isSignUp === true) {
+    //   mutate(
+    //     SignupMutation.commit,
+    //     input,
+    //     this.handleCompleted,
+    //     this.handleError,
+    //   );
+    // } else {
+    //   mutate(
+    //     SigninMutation.commit,
+    //     input,
+    //     this.handleCompleted,
+    //     this.handleError,
+    //   );
+    // }
   };
 
   emailRef = React.createRef();

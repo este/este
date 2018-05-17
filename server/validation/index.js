@@ -1,7 +1,41 @@
 // @flow
 const isEmail = require('validator/lib/isEmail');
+
 /*::
-import type { Error, Errors } from './error';
+import type { CreateWebInput } from '../../components/__generated__/CreateWebMutation.graphql'
+*/
+
+// TODO: Optional via higher order function probably.
+
+// type? nebo prejmenovat?
+
+const validateNoTrailingSpaces = (value /*: string */) =>
+  value !== value.trim() && 'NO_TRAILING_SPACES';
+
+const validateRequired = (value /*: string */) =>
+  validateNoTrailingSpaces(value) || (value.length === 0 && 'REQUIRED');
+
+const validateMax140Chars = (value /*: string */) =>
+  validateRequired(value) || (value.length > 140 && 'MAX_140_CHARS');
+
+const validateShortRequiredString = (value /*: string */) => {
+  return validateMax140Chars(value) || null;
+};
+
+// validateRequired(value) || (value.length > 140 && 'MAX_140_CHARS');
+
+module.exports = {
+  // jinak pojmenovat? noTrailingSpacesValidator?
+  // validateNoTrailingSpaces,
+  // validateRequired,
+  validateShortRequiredString,
+  // validateCreateWeb,
+};
+
+// TODO: Remove.
+
+/*::
+import type { Error, Errors } from '../error';
 type Validate<Variables> = (variables: Variables) => ?Errors<Variables>;
 */
 
@@ -65,14 +99,10 @@ const validateEmailPassword /*: Validate<{
   if (password) return { password };
 };
 
+// TODO: It should use generated types.
 const validateNewWeb /*: Validate<{
   name: string,
 }> */ = variables => {
   const name = shortTextValidator(variables.name);
   if (name) return { name };
-};
-
-module.exports = {
-  validateEmailPassword,
-  validateNewWeb,
 };

@@ -11,10 +11,10 @@ import {
 } from 'react-relay';
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
-import MutationContext from '../core/MutationContext';
-import ErrorContext from '../core/ErrorContext';
+import EnvironmentContext from '../core/EnvironmentContext';
+import ErrorContext, { type AppError } from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
-import type { Error } from '../../server/error';
+// import type { Error } from '../../server/error';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');
@@ -41,8 +41,8 @@ type AppProps = {|
 
 type AppState = {|
   errorContext: {
-    error: ?Error,
-    dispatchError: Error => void,
+    error: ?AppError,
+    dispatchError: AppError => void,
   },
 |};
 
@@ -114,6 +114,18 @@ const app = (
       };
     }
 
+    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    dispatchError = (error: AppError) => {
+      const { dispatchError } = this;
+      this.setState({ errorContext: { error, dispatchError } }, () => {
+        this.clearErrorShowTimeout();
+        // TODO: Move it to display component.
+        this.errorShowTimeoutID = setTimeout(() => {
+          this.setState({ errorContext: { error: null, dispatchError } });
+        }, 5000);
+      });
+    };
+
     state = {
       errorContext: { error: null, dispatchError: this.dispatchError },
     };
@@ -127,17 +139,6 @@ const app = (
     }
 
     errorShowTimeoutID: ?TimeoutID;
-
-    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
-    dispatchError = (error: Error) => {
-      const { dispatchError } = this;
-      this.setState({ errorContext: { error, dispatchError } }, () => {
-        this.clearErrorShowTimeout();
-        this.errorShowTimeoutID = setTimeout(() => {
-          this.setState({ errorContext: { error: null, dispatchError } });
-        }, 5000);
-      });
-    };
 
     environment: Environment;
 
@@ -156,11 +157,11 @@ const app = (
               context consumer a separate node in the tree. */}
           <ErrorContext.Provider value={this.state.errorContext}>
             <LocaleContext.Provider value={this.localeContext}>
-              <MutationContext.Provider value={this.environment}>
+              <EnvironmentContext.Provider value={this.environment}>
                 <RelayProvider environment={this.environment}>
                   <Page data={this.props.data} />
                 </RelayProvider>
-              </MutationContext.Provider>
+              </EnvironmentContext.Provider>
             </LocaleContext.Provider>
           </ErrorContext.Provider>
         </IntlProvider>

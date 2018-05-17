@@ -3,7 +3,6 @@
 # import WebConnection from "../database/schema.graphql"
 
 # https://github.com/este/este/wiki/GraphQL
-# tl;dr Use non-nullable for inputs and nullable for payloads.
 
 # Workflow:
 #   - update model.graphql
@@ -14,6 +13,12 @@
 
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
+
+enum ShortRequiredStringError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  MAX_140_CHARS
+}
 
 # Like database/model User, but without password, webs, and directives.
 type User {
@@ -38,8 +43,13 @@ input CreateWebInput {
   name: String!
 }
 
+type CreateWebErrors {
+  name: ShortRequiredStringError
+}
+
 type CreateWebPayload {
   edge: WebEdge
+  errors: CreateWebErrors
 }
 
 input DeleteWebInput {

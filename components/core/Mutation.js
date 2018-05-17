@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { Disposable, Environment, PayloadError } from 'react-relay';
 import ErrorContext from './ErrorContext';
-import MutationContext from './MutationContext';
+import EnvironmentContext from './EnvironmentContext';
 import { parsePayloadErrors, type Errors } from '../../server/error';
 
 export type Commit<Input, Response> = (
@@ -16,7 +16,7 @@ export type Commit<Input, Response> = (
 ) => Disposable;
 
 type MutationProps = {|
-  children: (*) => React.Node,
+  children: any => React.Node,
 |};
 
 type MutationState = {|
@@ -34,7 +34,7 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
 
   disposables: Array<Disposable> = [];
 
-  mutate = (environment: *, dispatchError: *) => <Input, Response>(
+  mutate = (environment: any, dispatchError: any) => <Input, Response>(
     commit: Commit<Input, Response>,
     input: Input,
     onCompleted?: (response: Response) => void,
@@ -65,20 +65,21 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
   };
 
   render() {
-    return (
-      <MutationContext.Consumer>
-        {environment => (
-          <ErrorContext.Consumer>
-            {({ dispatchError }) =>
-              this.props.children({
-                mutate: this.mutate(environment, dispatchError),
-                pending: this.state.pending,
-              })
-            }
-          </ErrorContext.Consumer>
-        )}
-      </MutationContext.Consumer>
-    );
+    return null;
+    // return (
+    //   <EnvironmentContext.Consumer>
+    //     {environment => (
+    //       <ErrorContext.Consumer>
+    //         {({ dispatchError }) =>
+    //           this.props.children({
+    //             mutate: this.mutate(environment, dispatchError),
+    //             pending: this.state.pending,
+    //           })
+    //         }
+    //       </ErrorContext.Consumer>
+    //     )}
+    //   </EnvironmentContext.Consumer>
+    // );
   }
 }
 

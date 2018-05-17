@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 
+// TODO: Tohle je komplet spatne. Zrusit
+
 // So here is a thing. We have only one Error type in the app.
 // Note, it overrides JavaScript Error when imported. That's fine.
 // https://github.com/facebook/flow/blob/v0.64.0/lib/core.js#L439
@@ -8,6 +10,7 @@
 /*::
 import type { PayloadError } from 'react-relay'
 
+// TODO: To rozdeleni je imho blbost, ok
 type DomainError =
   | { type: 'alreadyExists' }
   | { type: 'notExists' }
@@ -31,7 +34,7 @@ export type Errors<T> = {
 
 // Server can return one or many errors. For example:
 // { type: 'notAuthorized' }; // when user has no rights
-// { type: { type: 'alreadyExists' } }; // when type prop value already exists
+// { email: { type: 'alreadyExists' } }; // when type prop value already exists
 // Note we can safely distinguish them via type === 'string'.
 export type ServerError = Error | Errors<Object>;
 
