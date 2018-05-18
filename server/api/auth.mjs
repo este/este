@@ -4,14 +4,22 @@ import jsonwebtoken from 'jsonwebtoken';
 import * as validate from './validate.mjs';
 
 /*::
-import type { Resolver } from './index'
-import * as generated from '../../components/core/__generated__/AuthMutation.graphql';
+import type { Resolver } from './index';
+import type {
+  AuthMutationVariables,
+  AuthMutationResponse,
+  AuthInput,
+} from '../../components/core/__generated__/AuthMutation.graphql';
+import type {
+  meQueryVariables,
+  meQueryResponse,
+} from '../../pages/__generated__/meQuery.graphql';
 */
 
-export const validateAuthInput = (input /*: generated.AuthInput */) => {
+export const validateAuth = (input /*: AuthInput */) => {
   // Props must be defined in case of error.
   const errors = { email: null, password: null };
-  // Validate one by one, or all at once, as you wish.
+  // Validate one by one or all, as you wish.
   const email = validate.email(input.email);
   if (email) return { ...errors, email };
   const password = validate.longStringMin5Chars(input.password);
@@ -19,92 +27,77 @@ export const validateAuthInput = (input /*: generated.AuthInput */) => {
 };
 
 const auth /*: Resolver<
-  generated.AuthMutationVariables,
-  generated.AuthMutationResponse,
+  AuthMutationVariables,
+  AuthMutationResponse,
   'auth',
 > */ = async (
   parent,
   { input },
   context,
 ) => {
-  const errors = validateAuthInput(input);
+  const errors = validateAuth(input);
   if (errors) return { token: null, errors };
-  // return { edge: { node: web }, errors: null };
-  return null;
+
+  const createAuthPayload = user => ({
+    token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET || ''),
+    errors: null,
+  });
+
+  if (input.isSignUp) {
+    const exists = await context.db.exists.User({ email: input.email });
+    if (exists)
+      return {
+        token: null,
+        errors: {
+          email: 'ALREADY_EXISTS',
+          password: null,
+        },
+      };
+    const password = await bcrypt.hash(input.password, 10);
+    const user = await context.db.mutation.createUser({
+      data: { email: input.email, password },
+    });
+    return createAuthPayload(user);
+  } else {
+    const user = await context.db.query.user({ where: { email: input.email } });
+    const valid = await bcrypt.compare(input.password, user.password);
+    if (!valid)
+      return {
+        token: null,
+        errors: {
+          email: null,
+          password: 'WRONG_PASSWORD',
+        },
+      };
+    return createAuthPayload(user);
+  }
+};
+
+const me /*: Resolver<
+  meQueryVariables,
+  meQueryResponse,
+  'me',
+> */ = async (
+  parent,
+  args,
+  context,
+) => {
+  const userId = context.getUserId();
+  const user = await context.db.query.user({ where: { id: userId } });
+  return user;
 };
 
 export default {
-  mutations: { auth },
+  mutations: {
+    auth,
+  },
+  queries: {
+    me,
+  },
 };
 
-// const createAuthPayload = user => ({
-//   token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET || ''),
-//   user,
-// });
-//
-// // For general API errors HTTP statuses are fine. Controlled means we can
-// // enforce a custom message or behavior, e.g. 401 should request auth etc.
-// // https://stackoverflow.com/a/6937030/233902
-// /*::
-// export type ControlledHttpStatus = 401 | 403 | 404;
-// */
-//
-// const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
-//   throw new Error(status.toString());
-// };
-//
-// const getUserId = context => {
-//   const authorization = context.request.get('authorization');
-//   if (!authorization) throwHttpStatus(401);
-//   const token = authorization.replace('Bearer ', '');
-//   const decoded = jsonwebtoken.verify(token, process.env.APP_SECRET || '');
-//   // https://flow.org/en/docs/lang/refinements
-//   // Note refinement must be gradual within if statement because of Flow.
-//   if (decoded != null && typeof decoded.userId === 'string') {
-//     return decoded.userId;
-//   }
-//   throwHttpStatus(401);
-// };
-//
-// // enum ShortRequiredTextError {
-// //   TRIM
-// //   REQUIRED
-// //   MIN_3_CHARS
-// //   MAX_140_CHARS
-// // }
 //
 // const resolvers = {
-//   Mutation: {
-//     async signup(parent, { input }, { db }) {
-//       // const validationErrors = validation.validateEmailPassword(input);
-//       // if (validationErrors) throwError(validationErrors);
-//       //
-//       // const userExists = await db.exists.User({ email: input.email });
-//       // if (userExists) throwError({ email: { type: 'alreadyExists' } });
-//       //
-//       // const password = await bcrypt.hash(input.password, 10);
-//       // const user = await db.mutation.createUser({
-//       //   data: { email: input.email, password },
-//       // });
-//       // return createAuthPayload(user);
-//     },
-//
-//     async signin(parent, { input }, { db }) {
-//       // const validationErrors = validation.validateEmailPassword(input);
-//       // if (validationErrors) throwError(validationErrors);
-//       //
-//       // const user = await db.query.user({ where: { email: input.email } });
-//       // // I don't know how to easily type email prop. Switch to ReasonML asap.
-//       // // TODO: Hmm, a co mit to fakt ve schematu?
-//       // if (!user) throwError({ email: { type: 'notExists' } });
-//       //
-//       // const valid = await bcrypt.compare(input.password, user.password);
-//       // if (!valid) throwError({ password: { type: 'wrongPassword' } });
-//       // return createAuthPayload(user);
-//     },
-//
-//     ...web.mutations,
-//
 //     async updateUser(parent, { input }, context) {
 //       const userId = getUserId(context);
 //       const user = await context.db.mutation.updateUser({

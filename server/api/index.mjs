@@ -22,7 +22,9 @@ const resolvers = {
     ...auth.mutations,
     ...web.mutations,
   },
-  Query: {},
+  Query: {
+    ...auth.queries,
+  },
 };
 
 /*::

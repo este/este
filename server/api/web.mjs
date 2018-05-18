@@ -7,9 +7,7 @@ import type { Resolver } from './index'
 import * as generated from '../../components/__generated__/CreateWebMutation.graphql';
 */
 
-export const validateCreateWebInput = (
-  input /*: generated.CreateWebInput */,
-) => {
+export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
   const name = validate.shortString(input.name);
   if (name) return { name };
 };
@@ -25,7 +23,7 @@ const createWeb /*: Resolver<
 ) => {
   const userId = context.getUserId();
 
-  const errors = validateCreateWebInput(input);
+  const errors = validateCreateWeb(input);
   if (errors) return { edge: null, errors };
 
   const domainName = input.name
@@ -59,10 +57,28 @@ const createWeb /*: Resolver<
 //   return { id: input.id };
 // },
 
-// const fok = {
-//   validateCreateWebInput: validateCreateWebInput,
-//   mutations: { createWeb },
-// };
+// async webs(parent, args, ctx, info) {
+//       const userId = getUserId(ctx);
+//       const webs = await ctx.db.query.websConnection(
+//         {
+//           where: { owner: { id: userId } },
+//           orderBy: 'updatedAt_ASC',
+//           first: args.first,
+//         },
+//         info,
+//       );
+//       return webs;
+//     },
+//
+//     async web(parent, { domain }, ctx, info) {
+//       const userId = getUserId(ctx);
+//       const requestingUserIsOwner = await ctx.db.exists.Web({
+//         domain,
+//         owner: { id: userId },
+//       });
+//       if (!requestingUserIsOwner) throwNotAuthorizedError();
+//       return ctx.db.query.web({ where: { domain } }, info);
+//     },
 
 export default {
   mutations: { createWeb },

@@ -27,7 +27,6 @@ enum EmailError {
   REQUIRED
   EMAIL
   ALREADY_EXISTS
-  NOT_EXISTS
 }
 
 enum PasswordError {
