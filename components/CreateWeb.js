@@ -11,6 +11,7 @@ import Block from './core/Block';
 import { graphql, commitMutation } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
 import { ConnectionHandler } from 'relay-runtime';
+import { validateCreateWeb } from '../server/api/web.mjs';
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
@@ -51,11 +52,11 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       name: this.state.name,
     };
 
-    // const errors = web.validateCreateWebInput(input);
-    // if (errors) {
-    //   this.setState({ errors });
-    //   return;
-    // }
+    const errors = validateCreateWeb(input);
+    if (errors) {
+      this.setState({ errors });
+      return;
+    }
 
     this.props.commit(input, this.handleCompleted);
   };
