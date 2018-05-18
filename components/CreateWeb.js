@@ -6,7 +6,6 @@ import TextInputBig from './core/TextInputBig';
 import { FormattedMessage } from 'react-intl';
 import Text from './core/Text';
 import * as generated from './__generated__/CreateWebMutation.graphql';
-// import { validateCreateWebInput } from '../server/resolvers/web';
 import Row from './core/Row';
 import Block from './core/Block';
 import { graphql, commitMutation } from 'react-relay';
@@ -52,7 +51,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       name: this.state.name,
     };
 
-    // const errors = validateCreateWebInput(input);
+    // const errors = web.validateCreateWebInput(input);
     // if (errors) {
     //   this.setState({ errors });
     //   return;

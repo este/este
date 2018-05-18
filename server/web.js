@@ -1,13 +1,15 @@
 // @flow
+// TODO: Use .mjs. Investigate how to update require.resolve. Wait for Node 10?
+
 const IntlPolyfill = require('intl');
 const accepts = require('accepts');
 const glob = require('glob');
 const next = require('next');
-const { defaultLocale } = require('./constants');
 const { basename } = require('path');
 const { createServer } = require('http');
 const { parse } = require('url');
 const { readFileSync } = require('fs');
+const { defaultLocale } = require('./constants');
 
 // Polyfill Node with `Intl` that has data for all locales.
 // See: https://formatjs.io/guides/runtime-environments/#server

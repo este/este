@@ -1,14 +1,16 @@
 // @flow
-const validate = require('../validate');
-const diacriticsMap = require('diacritics-map');
+import * as validate from './validate.mjs';
+import diacriticsMap from 'diacritics-map';
 
 /*::
-import type { Resolver } from '../api'
+import type { Resolver } from './index'
 import * as generated from '../../components/__generated__/CreateWebMutation.graphql';
 */
 
-const validateCreateWebInput = (input /*: generated.CreateWebInput */) => {
-  const name = validate.shortRequiredString(input.name);
+export const validateCreateWebInput = (
+  input /*: generated.CreateWebInput */,
+) => {
+  const name = validate.shortString(input.name);
   if (name) return { name };
 };
 
@@ -22,6 +24,7 @@ const createWeb /*: Resolver<
   context,
 ) => {
   const userId = context.getUserId();
+
   const errors = validateCreateWebInput(input);
   if (errors) return { edge: null, errors };
 
@@ -56,7 +59,11 @@ const createWeb /*: Resolver<
 //   return { id: input.id };
 // },
 
-module.exports = {
-  validateCreateWebInput,
+// const fok = {
+//   validateCreateWebInput: validateCreateWebInput,
+//   mutations: { createWeb },
+// };
+
+export default {
   mutations: { createWeb },
 };

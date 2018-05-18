@@ -1,8 +1,29 @@
 // @flow
-const { GraphQLServer } = require('graphql-yoga');
-const { Prisma } = require('prisma-binding');
-const resolvers = require('./resolvers');
-const jsonwebtoken = require('jsonwebtoken');
+import yoga from 'graphql-yoga';
+import prisma from 'prisma-binding';
+import jsonwebtoken from 'jsonwebtoken';
+
+// Workflow
+// - update database/model.graphql
+// - yarn deploy:db
+// - test it in playground
+// - update server/model.graphql
+// - add resolver here
+// - test it in playground
+// - yarn schema-relay
+// - restart `yarn dev`
+// - now we can use it in client code
+
+import auth from './auth';
+import web from './web';
+
+const resolvers = {
+  Mutation: {
+    ...auth.mutations,
+    ...web.mutations,
+  },
+  Query: {},
+};
 
 /*::
 // Controlled means with custom message or behavior.
@@ -36,7 +57,7 @@ const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
 
 const createContext = context => ({
   ...context,
-  db: new Prisma({
+  db: new prisma.Prisma({
     typeDefs: 'database/schema.graphql',
     endpoint: process.env.PRISMA_ENDPOINT,
     secret: process.env.PRISMA_SECRET,
@@ -57,7 +78,7 @@ const createContext = context => ({
   },
 });
 
-const server = new GraphQLServer({
+const server = new yoga.GraphQLServer({
   typeDefs: 'server/model.graphql',
   resolvers,
   context: createContext,

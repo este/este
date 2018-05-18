@@ -3,7 +3,9 @@ import * as React from 'react';
 import type { Disposable, Environment, PayloadError } from 'react-relay';
 import ErrorContext from './ErrorContext';
 import EnvironmentContext from './EnvironmentContext';
-import { parsePayloadErrors, type Errors } from '../../server/error';
+// import { parsePayloadErrors, type Errors } from '../../server/error';
+
+type Errors<T> = any;
 
 export type Commit<Input, Response> = (
   environment: Environment,
@@ -51,9 +53,9 @@ class Mutation extends React.PureComponent<MutationProps, MutationState> {
           if (onCompleted) onCompleted(response);
           return;
         }
-        const { errors, error } = parsePayloadErrors(payloadErrors);
-        if (onError) onError(errors);
-        if (error) dispatchError(error);
+        // const { errors, error } = parsePayloadErrors(payloadErrors);
+        // if (onError) onError(errors);
+        // if (error) dispatchError(error);
       },
       error => {
         this.setState({ pending: false });

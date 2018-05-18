@@ -14,10 +14,28 @@
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-enum ShortRequiredStringError {
+# Business / UI / model errors belong to scheme.
+
+enum ShortStringError {
   NO_TRAILING_SPACES
   REQUIRED
   MAX_140_CHARS
+}
+
+enum EmailError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  EMAIL
+  ALREADY_EXISTS
+  NOT_EXISTS
+}
+
+enum PasswordError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  MIN_5_CHARS
+  MAX_1024_CHARS
+  WRONG_PASSWORD
 }
 
 # Like database/model User, but without password, webs, and directives.
@@ -32,11 +50,18 @@ type User {
 input AuthInput {
   email: String!
   password: String!
+  isSignUp: Boolean!
+}
+
+type AuthErrors {
+  email: EmailError
+  password: PasswordError
 }
 
 type AuthPayload {
-  token: String!
-  user: User!
+  token: String
+  user: User
+  errors: AuthErrors
 }
 
 input CreateWebInput {
@@ -44,7 +69,7 @@ input CreateWebInput {
 }
 
 type CreateWebErrors {
-  name: ShortRequiredStringError
+  name: ShortStringError
 }
 
 type CreateWebPayload {
@@ -69,8 +94,7 @@ type UpdateUserPayload {
 }
 
 type Mutation {
-  signup(input: AuthInput!): AuthPayload
-  signin(input: AuthInput!): AuthPayload
+  auth(input: AuthInput!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
