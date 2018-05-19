@@ -6,46 +6,46 @@ Universal React. React + React Native.
 ## Prerequisites
 
 * [node.js](http://nodejs.org/) Node 10+
-* [yarn](https://yarnpkg.com/)
+* `npm i -g npm@latest`
 
 ## Setup project
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
-* `yarn`
+* `npm i`
 
 ## Create Prisma
 
-* `yarn prisma init YourAppName` choose hosted sandbox
+* `npm run prisma init YourAppName` choose hosted sandbox
 * set `.env.dev` PRISMA_ENDPOINT by `YourAppName/prisma.yml` endpoint
 * delete `YourAppName` directory
-* `yarn env dev`
-* `yarn deploy:db`
-* `yarn prisma token` generate token
-* `yarn playground` Set database HTTP HEADERS to { "Authorization": "Bearer token" }
+* `npm run env dev`
+* `npm run deploy:db`
+* `npm run prisma token` generate token
+* `npm run playground` Set database HTTP HEADERS to { "Authorization": "Bearer token" }
 
 ## Dev tasks
 
-* `yarn dev` - start web development
-* `yarn dev playground` - start web development with GraphQL playground
-* `yarn dev:ios`
-* `yarn dev:android`
-* `yarn env dev` - copy `.env.dev` to `.env`
-* `yarn env production` - copy `.env.production` to `.env`
-* `yarn production` - test production build locally
-* `yarn test`
-* `yarn schema-relay` - when `yarn dev` is running to update schema and Relay
-* `yarn deploy:db`
-* `yarn deploy:api`
-* `yarn deploy:web`
-* `yarn messages`
-* `yarn prisma --help`
+* `npm run dev` - start web development
+* `npm run dev playground` - start web development with GraphQL playground
+* `npm run dev:ios`
+* `npm run dev:android`
+* `npm run env dev` - copy `.env.dev` to `.env`
+* `npm run env production` - copy `.env.production` to `.env`
+* `npm run production` - test production build locally
+* `npm run test`
+* `npm run schema-relay` - when `npm run dev` is running to update schema and Relay
+* `npm run deploy:db`
+* `npm run deploy:api`
+* `npm run deploy:web`
+* `npm run messages`
+* `npm run prisma --help`
 
 ## Deploy
 
-* `yarn deploy:db`,
-* `yarn deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
-* `yarn deploy:web`
+* `npm run deploy:db`,
+* `npm run deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
+* `npm run deploy:web`
 
 ## Links
 
