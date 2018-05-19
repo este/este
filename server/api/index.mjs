@@ -14,16 +14,17 @@ import jsonwebtoken from 'jsonwebtoken';
 // - restart `yarn dev`
 // - now we can use it in client code
 
-import auth from './auth';
-import web from './web';
+import users from './users';
+import webs from './webs';
 
 const resolvers = {
   Mutation: {
-    ...auth.mutations,
-    ...web.mutations,
+    ...users.mutations,
+    ...webs.mutations,
   },
   Query: {
-    ...auth.queries,
+    ...users.queries,
+    ...webs.queries,
   },
 };
 
@@ -35,7 +36,7 @@ export type ControlledHttpStatus = 401 | 403 | 404;
 type Context = {
   db: {
     // https://github.com/prismagraphql/prisma-binding#api
-    query: { [string]: (any) => any },
+    query: { [string]: (any, any) => any },
     mutation: { [string]: (any) => any },
     exists: { [string]: (any) => any },
   },

@@ -2,7 +2,7 @@
 import isEmail from 'validator/lib/isEmail';
 
 // The most simple and universal validation ever. Note STRING_CONSTANTS are not
-// magic. Flow checks their usage.
+// magic, Flow checks their usage.
 
 const noTrailingSpaces = value =>
   value !== value.trim() ? 'NO_TRAILING_SPACES' : null;

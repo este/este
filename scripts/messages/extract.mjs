@@ -1,8 +1,7 @@
 // @flow
-const glob = require('glob');
-const fs = require('fs');
-const { defaultLocale } = require('../../server/constants');
-const { resolve } = require('path');
+import glob from 'glob';
+import fs from 'fs';
+import { defaultLocale } from '../../server/constants';
 
 const defaultMessages = glob
   // Remember babel plugin generates only required / imported components.
@@ -31,6 +30,4 @@ fs.writeFileSync(
 );
 
 // eslint-disable-next-line no-console
-console.log(
-  `Wrote default messages to: "${resolve(`./lang/${defaultLocale}.json`)}"`,
-);
+console.log(`Wrote default messages to: "${`./lang/${defaultLocale}.json`}"`);

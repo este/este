@@ -99,9 +99,10 @@ type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
+# Queries do not need inputs and payloads. They are pretty explicit.
 type Query {
   me: User
-  # Expose only API we need, webs of logged-in user for now.
+  # Expose only API you need, webs of logged-in user for now.
   # Later, we can extend API for any user.
   # webs(first: Int!, ownerId: ID!): WebConnection
   webs(first: Int!): WebConnection

@@ -1,7 +1,7 @@
 // @flow
-const { defaultLocale } = require('../../server/constants');
-const fs = require('fs');
-const glob = require('glob');
+import { defaultLocale } from '../../server/constants';
+import fs from 'fs';
+import glob from 'glob';
 
 const readJson = path => JSON.parse(fs.readFileSync(path, 'utf8'));
 

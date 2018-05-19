@@ -2,18 +2,16 @@
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import * as validate from './validate.mjs';
-
 /*::
 import type { Resolver } from './index';
+*/
+
+/*::
 import type {
   AuthMutationVariables,
   AuthMutationResponse,
   AuthInput,
 } from '../../components/core/__generated__/AuthMutation.graphql';
-import type {
-  meQueryVariables,
-  meQueryResponse,
-} from '../../pages/__generated__/meQuery.graphql';
 */
 
 export const validateAuth = (input /*: AuthInput */) => {
@@ -73,6 +71,13 @@ const auth /*: Resolver<
   }
 };
 
+/*::
+import type {
+  meQueryVariables,
+  meQueryResponse,
+} from '../../pages/__generated__/meQuery.graphql';
+*/
+
 const me /*: Resolver<
   meQueryVariables,
   meQueryResponse,
@@ -96,8 +101,6 @@ export default {
   },
 };
 
-//
-// const resolvers = {
 //     async updateUser(parent, { input }, context) {
 //       const userId = getUserId(context);
 //       const user = await context.db.mutation.updateUser({
@@ -106,42 +109,3 @@ export default {
 //       });
 //       return { user };
 //     },
-//   },
-//
-//   Query: {
-//     // $ FlowFixMe
-//     async me(parent, args, context, info) {
-//       const userId = getUserId(context);
-//       const user = await context.db.query.user({ where: { id: userId } }, info);
-//       return user;
-//     },
-//
-//     // $ FlowFixMe
-//     async webs(parent, args, context, info) {
-//       const userId = getUserId(context);
-//       const webs = await context.db.query.websConnection(
-//         {
-//           where: { owner: { id: userId } },
-//           orderBy: 'updatedAt_ASC',
-//           first: args.first,
-//         },
-//         info,
-//       );
-//       return webs;
-//     },
-//
-//     // $ FlowFixMe
-//     async web(parent, { domain }, context, info) {
-//       const userId = getUserId(context);
-//       const requestingUserIsOwner = await context.db.exists.Web({
-//         domain,
-//         owner: { id: userId },
-//       });
-//       if (!requestingUserIsOwner) throwHttpStatus(403);
-//       return context.db.query.web({ where: { domain } }, info);
-//     },
-//   },
-// };
-//
-// module.exports = resolvers;
-//

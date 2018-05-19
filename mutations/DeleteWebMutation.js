@@ -3,7 +3,6 @@ import { graphql, commitMutation } from 'react-relay';
 import type { Commit } from '../components/core/Mutation';
 import * as generated from './__generated__/DeleteWebMutation.graphql';
 import { ConnectionHandler } from 'relay-runtime';
-import { clientRoot, ensureConnection } from './utils';
 
 const mutation = graphql`
   mutation DeleteWebMutation($input: DeleteWebInput!) {
@@ -15,10 +14,9 @@ const mutation = graphql`
 
 const sharedUpdater = (store, id) => {
   const connection = ConnectionHandler.getConnection(
-    store.get(clientRoot),
+    store.get('client:root'),
     'Webs_webs',
   );
-  ensureConnection(connection);
   ConnectionHandler.deleteNode(connection, id);
 };
 

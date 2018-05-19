@@ -1,20 +1,26 @@
 // @flow
 import * as validate from './validate.mjs';
 import diacriticsMap from 'diacritics-map';
-
 /*::
-import type { Resolver } from './index'
-import * as generated from '../../components/__generated__/CreateWebMutation.graphql';
+import type { Resolver } from './index';
 */
 
-export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
+/*::
+import type {
+  CreateWebMutationVariables,
+  CreateWebMutationResponse,
+  CreateWebInput,
+} from '../../components/__generated__/CreateWebMutation.graphql';
+*/
+
+export const validateCreateWeb = (input /*: CreateWebInput */) => {
   const name = validate.shortString(input.name);
   if (name) return { name };
 };
 
 const createWeb /*: Resolver<
-  generated.CreateWebMutationVariables,
-  generated.CreateWebMutationResponse,
+  CreateWebMutationVariables,
+  CreateWebMutationResponse,
   'createWeb',
 > */ = async (
   parent,
@@ -57,19 +63,29 @@ const createWeb /*: Resolver<
 //   return { id: input.id };
 // },
 
-// async webs(parent, args, ctx, info) {
-//       const userId = getUserId(ctx);
-//       const webs = await ctx.db.query.websConnection(
-//         {
-//           where: { owner: { id: userId } },
-//           orderBy: 'updatedAt_ASC',
-//           first: args.first,
-//         },
-//         info,
-//       );
-//       return webs;
-//     },
-//
+// components/__generated__/Webs.graphql.js
+const webs /*: Resolver<
+  any, // relay-compiler does not support Relay Connection it seems.
+  any,
+  any,
+> */ = async (
+  parent,
+  args,
+  context,
+  info,
+) => {
+  const userId = context.getUserId();
+  const webs = await context.db.query.websConnection(
+    {
+      where: { owner: { id: userId } },
+      orderBy: 'updatedAt_ASC',
+      first: args.first,
+    },
+    info,
+  );
+  return webs;
+};
+
 //     async web(parent, { domain }, ctx, info) {
 //       const userId = getUserId(ctx);
 //       const requestingUserIsOwner = await ctx.db.exists.Web({
@@ -82,4 +98,5 @@ const createWeb /*: Resolver<
 
 export default {
   mutations: { createWeb },
+  queries: { webs },
 };

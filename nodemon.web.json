@@ -1,5 +1,5 @@
 {
   "watch": ["server"],
-  "exec": "node --require dotenv/config server/web.js",
-  "ext": "js"
+  "exec": "node --experimental-modules --require dotenv/config server/web.mjs",
+  "ext": "js mjs"
 }

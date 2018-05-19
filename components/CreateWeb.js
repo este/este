@@ -11,7 +11,7 @@ import Block from './core/Block';
 import { graphql, commitMutation } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
 import { ConnectionHandler } from 'relay-runtime';
-import { validateCreateWeb } from '../server/api/web.mjs';
+import { validateCreateWeb } from '../server/api/webs.mjs';
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
@@ -52,6 +52,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       name: this.state.name,
     };
 
+    // Use server validation for client validation.
     const errors = validateCreateWeb(input);
     if (errors) {
       this.setState({ errors });
@@ -62,7 +63,6 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   };
 
   render() {
-    // TODO: Use optional chaining.
     const { errors } = this.state;
 
     return (
@@ -78,6 +78,8 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
               </Text>
             }
             disabled={this.props.pending}
+            // We can't use optional chaining yet.
+            // https://github.com/facebook/flow/issues/4303#issuecomment-385102833
             error={errors && errors.name}
             onChangeText={this.setName}
             value={this.state.name}
@@ -122,9 +124,11 @@ export default withMutation(
   {
     updater: (store, foo) => {
       const payload = store.getRootField('createWeb');
-      // Check, because the server can return an empty payload, e.g. for 401.
+      // Because the server can return an empty payload, e.g. for 401.
       if (!payload) return;
       const recordEdge = payload.getLinkedRecord('edge');
+      // Because anything can fail anyway.
+      if (!recordEdge) return;
       sharedUpdater(store, recordEdge);
     },
   },
