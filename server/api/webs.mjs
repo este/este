@@ -52,20 +52,36 @@ const createWeb /*: Resolver<
   return { edge: { node: web }, errors: null };
 };
 
-// async deleteWeb(parent, { input }, context) {
-//   const userId = getUserId(context);
-//   const webExists = await context.db.exists.Web({
-//     id: input.id,
-//     owner: { id: userId },
-//   });
-//   if (!webExists) throwHttpStatus(404);
-//   await context.db.mutation.deleteWeb({ where: { id: input.id } });
-//   return { id: input.id };
-// },
+/*::
+import type {
+  WebsItemDeleteMutationVariables,
+  WebsItemDeleteMutationResponse,
+} from '../../components/__generated__/WebsItemDeleteMutation.graphql';
+*/
 
+const deleteWeb /*: Resolver<
+  WebsItemDeleteMutationVariables,
+  WebsItemDeleteMutationResponse,
+  'deleteWeb',
+> */ = async (
+  parent,
+  { input },
+  context,
+) => {
+  const userId = context.getUserId();
+  const webExists = await context.db.exists.Web({
+    id: input.id,
+    owner: { id: userId },
+  });
+  if (!webExists) context.throwHttpStatus(404);
+  await context.db.mutation.deleteWeb({ where: { id: input.id } });
+  return { id: input.id };
+};
+
+// relay-compiler does not generate input type for Connection it seems.
 // components/__generated__/Webs.graphql.js
 const webs /*: Resolver<
-  any, // relay-compiler does not support Relay Connection it seems.
+  any,
   any,
   any,
 > */ = async (
@@ -86,17 +102,33 @@ const webs /*: Resolver<
   return webs;
 };
 
-//     async web(parent, { domain }, ctx, info) {
-//       const userId = getUserId(ctx);
-//       const requestingUserIsOwner = await ctx.db.exists.Web({
-//         domain,
-//         owner: { id: userId },
-//       });
-//       if (!requestingUserIsOwner) throwNotAuthorizedError();
-//       return ctx.db.query.web({ where: { domain } }, info);
-//     },
+/*::
+import type {
+  editQueryVariables,
+  editQueryResponse,
+} from '../../pages/__generated__/editQuery.graphql.js';
+*/
+
+const web /*: Resolver<
+  editQueryVariables,
+  editQueryResponse,
+  'web',
+> */ = async (
+  parent,
+  { domain },
+  context,
+  info,
+) => {
+  const userId = context.getUserId();
+  const webExists = await context.db.exists.Web({
+    domain,
+    owner: { id: userId },
+  });
+  if (!webExists) context.throwHttpStatus(403);
+  return context.db.query.web({ where: { domain } }, info);
+};
 
 export default {
-  mutations: { createWeb },
-  queries: { webs },
+  mutations: { createWeb, deleteWeb },
+  queries: { webs, web },
 };
