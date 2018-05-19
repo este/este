@@ -50,13 +50,12 @@ unclear-type=off
 
 [options]
 include_warnings=true
-; Not yet. https://github.com/este/este/issues/1527
-; esproposal.optional_chaining=enable
-; esproposal.nullish_coalescing=enable
+; Uncomment and use once 1) New Relay will be released. 2) Flow fix edge cases.
+;esproposal.optional_chaining=enable
+;esproposal.nullish_coalescing=enable
 module.file_ext=.js
 module.file_ext=.jsx
 module.file_ext=.json
-; Soon mjs will be default.
 module.file_ext=.mjs
 
 ; RN

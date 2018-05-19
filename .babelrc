@@ -3,6 +3,7 @@
     "development": {
       "presets": ["next/babel", "@babel/preset-flow"],
       "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
         "inline-dotenv",
         "relay",
         "react-native-web"
@@ -11,6 +12,7 @@
     "production": {
       "presets": ["next/babel", "@babel/preset-flow"],
       "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
         "transform-inline-environment-variables",
         "relay",
         "react-native-web",
@@ -24,6 +26,7 @@
         "@babel/preset-flow"
       ],
       "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
         "relay",
         "react-native-web"
       ]
