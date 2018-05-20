@@ -8,12 +8,12 @@ import withConfirm, { type Confirm } from './core/withConfirm';
 import * as generated from './__generated__/WebsItemDeleteMutation.graphql';
 
 type DeleteProps = {|
+  id: string,
+  confirm: Confirm,
   commit: Commit<
     generated.DeleteWebInput,
     generated.WebsItemDeleteMutationResponse,
   >,
-  confirm: Confirm,
-  id: string,
   pending: boolean,
 |};
 

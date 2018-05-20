@@ -2,6 +2,7 @@
 import * as React from 'react';
 import {
   commitMutation,
+  type Disposable,
   type Environment,
   type GraphQLTaggedNode,
   type RecordSourceSelectorProxy,
@@ -48,37 +49,61 @@ const withMutation = <Props: {}, Input: Object, Response>(
     environment: Environment,
   };
 
-  class Mutation extends React.PureComponent<MutationProps> {
+  type MutationState = {|
+    pending: boolean,
+  |};
+
+  class Mutation extends React.PureComponent<MutationProps, MutationState> {
+    state = {
+      pending: false,
+    };
+
+    componentWillUnmount() {
+      this.disposables.forEach(disposable => disposable.dispose());
+    }
+
+    disposables: Array<Disposable> = [];
+
     commit: Commit<Input, Response> = (input, onCompleted) => {
-      // TODO: Set pending to true.
+      // Note, we can't read from this.state.pending because setState is async.
+      // Therefore, "if (this.state.pending) return" can't help.
+      // Using pending for disabled state is good enough.
+      this.setState({ pending: true });
       // https://facebook.github.io/relay/docs/en/mutations.html#commitmutation
       const disposable = commitMutation(this.props.environment, {
         ...config,
         mutation,
         variables: { input },
         onCompleted: (response, errors) => {
-          // TODO: Set pending to false.
+          this.setState({ pending: false });
           if (errors) errors.forEach(error => this.props.dispatchError(error));
           if (onCompleted) onCompleted(response);
         },
         onError: error => {
-          // TODO: Set pending to false.
+          this.setState({ pending: false });
           // dispatchError(error)
           // console.log('onError');
           // console.log(error);
         },
       });
+      this.disposables.push(disposable);
     };
 
     render() {
-      // Filter Mutation props.
+      // Filter Mutation props, they do not belong to Component.
       const { dispatchError, environment, ...props } = this.props;
-      return <Component {...props} commit={this.commit} pending={false} />;
+      return (
+        <Component
+          {...props}
+          commit={this.commit}
+          pending={this.state.pending}
+        />
+      );
     }
   }
 
   // Inject dispatchError and environment as props so this.commit can get them.
-  // Previous pattern commit={this.createCommit(...)} considered harmfull.
+  // https://twitter.com/estejs/status/997984391392526341
   // https://reactjs.org/docs/context.html#accessing-context-in-lifecycle-methods
   return props => (
     <ErrorContext.Consumer>
