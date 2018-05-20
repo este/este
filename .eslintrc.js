@@ -13,6 +13,7 @@ module.exports = {
     'consistent-return': 0, // Flow.
     'import/first': 0, // Too strict.
     'no-plusplus': 0, // Prettier ensures it can't happen.
+    'no-shadow': 0, // Shadow is very nice language feature.
     'react/jsx-filename-extension': 0, // Too strict.
     'react/prop-types': 0, // Flow.
     'react/self-closing-comp': 0, // <Text> </Text> is fine.

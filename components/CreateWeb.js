@@ -8,7 +8,7 @@ import Text from './core/Text';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from './core/Row';
 import Block from './core/Block';
-import { graphql, commitMutation } from 'react-relay';
+import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
 import { ConnectionHandler } from 'relay-runtime';
 import { validateCreateWeb } from '../server/api/webs.mjs';
@@ -122,7 +122,7 @@ export default withMutation(
     }
   `,
   {
-    updater: (store, foo) => {
+    updater: store => {
       const payload = store.getRootField('createWeb');
       // Because the server can return an empty payload, e.g. for 401.
       if (!payload) return;

@@ -6,7 +6,6 @@ import {
   type Environment,
   type GraphQLTaggedNode,
   type RecordSourceSelectorProxy,
-  type SelectorData,
   type RelayMutationConfig,
 } from 'react-relay';
 import ErrorContext, { type DispatchError } from './ErrorContext';

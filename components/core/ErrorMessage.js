@@ -3,7 +3,6 @@ import * as React from 'react';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
 import type { ShortStringError } from '../__generated__/CreateWebMutation.graphql';
-import * as createWeb from '../__generated__/CreateWebMutation.graphql';
 import type {
   EmailError,
   PasswordError,

@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { graphql, commitMutation } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import { DeleteButton } from './core/buttons';
-import withMutation, { type Commit, type Errors } from './core/withMutation';
+import withMutation, { type Commit } from './core/withMutation';
 import withConfirm, { type Confirm } from './core/withConfirm';
 import * as generated from './__generated__/WebsItemDeleteMutation.graphql';
 
