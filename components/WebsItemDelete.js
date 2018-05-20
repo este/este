@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql, commitMutation } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
-import AreYouSureConfirm from './core/AreYouSureConfirm';
 import { DeleteButton } from './core/buttons';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
+import withConfirm, { type Confirm } from './core/withConfirm';
 import * as generated from './__generated__/WebsItemDeleteMutation.graphql';
 
 type DeleteProps = {|
@@ -12,28 +12,27 @@ type DeleteProps = {|
     generated.DeleteWebInput,
     generated.WebsItemDeleteMutationResponse,
   >,
+  confirm: Confirm,
   id: string,
   pending: boolean,
 |};
 
 class Delete extends React.PureComponent<DeleteProps> {
+  handleOnPress = () => {
+    if (!this.props.confirm()) return;
+    const input = { id: this.props.id };
+    this.props.commit(input);
+  };
+
   render() {
     return (
-      <AreYouSureConfirm>
-        {confirm => (
-          <DeleteButton
-            inline
-            color="warning"
-            // disabled={pending}
-            onPress={() => {
-              if (!confirm()) return;
-              const input = { id: this.props.id };
-              this.props.commit(input);
-            }}
-            size={-1}
-          />
-        )}
-      </AreYouSureConfirm>
+      <DeleteButton
+        inline
+        color="warning"
+        disabled={this.props.pending}
+        onPress={this.handleOnPress}
+        size={-1}
+      />
     );
   }
 }
@@ -47,7 +46,7 @@ const sharedUpdater = (store, id) => {
 };
 
 export default withMutation(
-  Delete,
+  withConfirm(Delete),
   graphql`
     mutation WebsItemDeleteMutation($input: DeleteWebInput!) {
       deleteWeb(input: $input) {

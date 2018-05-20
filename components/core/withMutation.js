@@ -2,30 +2,29 @@
 import * as React from 'react';
 import {
   commitMutation,
+  type Environment,
   type GraphQLTaggedNode,
   type RecordSourceSelectorProxy,
   type SelectorData,
   type RelayMutationConfig,
 } from 'react-relay';
-// import { type Errors } from '../../server/error';
-import ErrorContext from './ErrorContext';
+import ErrorContext, { type DispatchError } from './ErrorContext';
 import EnvironmentContext from '../core/EnvironmentContext';
 
-export type Commit<Input: Object, Response> = (
+export type Commit<Input, Response> = (
   input: Input,
-  onCompleted?: (response: Response) => void,
+  onCompleted?: (Response) => void,
 ) => void;
 
 export type Errors<Response, Name: string> = $ElementType<
-  // Mutation payload must be nullable, because resolver can throw Error.
+  // Mutation payload must be nullable, because resolver can fail.
   // Therefore, Relay compiler generates maybe type. That's correct.
   // But for Commit and Errors generic types we need non maybe type.
-  // $NonMaybeType saved my day.
   $NonMaybeType<$ElementType<Response, Name>>,
   'errors',
 >;
 
-const withMutation = <Props: Object, Input: Object, Response>(
+const withMutation = <Props: {}, Input: Object, Response>(
   Component: React.ComponentType<Props>,
   mutation: GraphQLTaggedNode,
   config?: {
@@ -43,51 +42,59 @@ const withMutation = <Props: Object, Input: Object, Response>(
     },
   >,
 > => {
-  class Mutation extends React.PureComponent<Props> {
-    createCommit = (dispatchError, environment) => {
-      const commit: Commit<Input, Response> = (input, onCompleted) => {
-        // TODO: Set pending to true.
-        // https://facebook.github.io/relay/docs/en/mutations.html#commitmutation
-        const disposable = commitMutation(environment, {
-          ...config,
-          mutation,
-          variables: { input },
-          onCompleted(response, errors) {
-            // TODO: Set pending to false.
-            if (errors) errors.forEach(error => dispatchError(error));
-            if (onCompleted) onCompleted(response);
-          },
-          onError(error) {
-            // TODO: Set pending to false.
-            // dispatchError(error)
-            // console.log('onError');
-            // console.log(error);
-          },
-        });
-      };
-      return commit;
+  type MutationProps = {
+    ...Props,
+    dispatchError: DispatchError,
+    environment: Environment,
+  };
+
+  class Mutation extends React.PureComponent<MutationProps> {
+    commit: Commit<Input, Response> = (input, onCompleted) => {
+      // TODO: Set pending to true.
+      // https://facebook.github.io/relay/docs/en/mutations.html#commitmutation
+      const disposable = commitMutation(this.props.environment, {
+        ...config,
+        mutation,
+        variables: { input },
+        onCompleted: (response, errors) => {
+          // TODO: Set pending to false.
+          if (errors) errors.forEach(error => this.props.dispatchError(error));
+          if (onCompleted) onCompleted(response);
+        },
+        onError: error => {
+          // TODO: Set pending to false.
+          // dispatchError(error)
+          // console.log('onError');
+          // console.log(error);
+        },
+      });
     };
 
     render() {
-      return (
-        <ErrorContext.Consumer>
-          {({ dispatchError }) => (
-            <EnvironmentContext.Consumer>
-              {environment => (
-                <Component
-                  {...this.props}
-                  commit={this.createCommit(dispatchError, environment)}
-                  pending={false}
-                />
-              )}
-            </EnvironmentContext.Consumer>
-          )}
-        </ErrorContext.Consumer>
-      );
+      // Filter Mutation props.
+      const { dispatchError, environment, ...props } = this.props;
+      return <Component {...props} commit={this.commit} pending={false} />;
     }
   }
 
-  return Mutation;
+  // Inject dispatchError and environment as props so this.commit can get them.
+  // Previous pattern commit={this.createCommit(...)} considered harmfull.
+  // https://reactjs.org/docs/context.html#accessing-context-in-lifecycle-methods
+  return props => (
+    <ErrorContext.Consumer>
+      {({ dispatchError }) => (
+        <EnvironmentContext.Consumer>
+          {environment => (
+            <Mutation
+              {...props}
+              dispatchError={dispatchError}
+              environment={environment}
+            />
+          )}
+        </EnvironmentContext.Consumer>
+      )}
+    </ErrorContext.Consumer>
+  );
 };
 
 export default withMutation;
