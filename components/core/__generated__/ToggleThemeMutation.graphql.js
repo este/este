@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 24199fa24bd275f943f70ca6b59bd863
+ * @relayHash 36360ab50cf4310a504582aac7cef746
  */
 
 /* eslint-disable */
@@ -12,10 +12,10 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type UpdateUserInput = {
   themeName: string
 };
-export type UpdateUserMutationVariables = {|
+export type ToggleThemeMutationVariables = {|
   input: UpdateUserInput
 |};
-export type UpdateUserMutationResponse = {|
+export type ToggleThemeMutationResponse = {|
   +updateUser: ?{|
     +user: ?{|
       +themeName: ?string
@@ -26,7 +26,7 @@ export type UpdateUserMutationResponse = {|
 
 
 /*
-mutation UpdateUserMutation(
+mutation ToggleThemeMutation(
   $input: UpdateUserInput!
 ) {
   updateUser(input: $input) {
@@ -65,13 +65,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "UpdateUserMutation",
+  "name": "ToggleThemeMutation",
   "id": null,
-  "text": "mutation UpdateUserMutation(\n  $input: UpdateUserInput!\n) {\n  updateUser(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
+  "text": "mutation ToggleThemeMutation(\n  $input: UpdateUserInput!\n) {\n  updateUser(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "UpdateUserMutation",
+    "name": "ToggleThemeMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -103,7 +103,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "UpdateUserMutation",
+    "name": "ToggleThemeMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -141,5 +141,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '360a1c19edae0ad5872dd7f05792f605';
+(node/*: any*/).hash = '3a1a18a484aeb6c153d819cedca52ae8';
 module.exports = node;

@@ -2,35 +2,53 @@
 import * as React from 'react';
 import Button from './Button';
 import { lightTheme } from '../../themes/theme';
-import Mutation from './Mutation';
-import UpdateUserMutation from '../../mutations/UpdateUserMutation';
 import ThemeContext from './ThemeContext';
+import { graphql } from 'react-relay';
+import withMutation, { type Commit } from './withMutation';
+import * as generated from './__generated__/ToggleThemeMutation.graphql';
 
-class ToggleTheme extends React.PureComponent<{}> {
+type ToggleThemeProps = {|
+  commit: Commit<
+    generated.UpdateUserInput,
+    generated.ToggleThemeMutationResponse,
+  >,
+  pending: boolean,
+|};
+
+// TODO: We should have UpdateUser component imho.
+
+class ToggleTheme extends React.PureComponent<ToggleThemeProps> {
   render() {
     return (
-      <Mutation>
-        {({ mutate, pending }) => (
-          <ThemeContext.Consumer>
-            {theme => {
-              const themeName = theme === lightTheme ? 'dark' : 'light';
-              return (
-                <Button
-                  color="primary"
-                  onPress={() =>
-                    mutate(UpdateUserMutation.commit, { themeName })
-                  }
-                  disabled={pending}
-                >
-                  {`${themeName} theme`}
-                </Button>
-              );
-            }}
-          </ThemeContext.Consumer>
-        )}
-      </Mutation>
+      <ThemeContext.Consumer>
+        {theme => {
+          const themeName = theme === lightTheme ? 'dark' : 'light';
+          return (
+            <Button
+              color="primary"
+              onPress={() => {
+                this.props.commit({ themeName });
+              }}
+              disabled={this.props.pending}
+            >
+              {`${themeName} theme`}
+            </Button>
+          );
+        }}
+      </ThemeContext.Consumer>
     );
   }
 }
 
-export default ToggleTheme;
+export default withMutation(
+  ToggleTheme,
+  graphql`
+    mutation ToggleThemeMutation($input: UpdateUserInput!) {
+      updateUser(input: $input) {
+        user {
+          themeName
+        }
+      }
+    }
+  `,
+);

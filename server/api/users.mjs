@@ -73,6 +73,30 @@ const auth /*: Resolver<
 
 /*::
 import type {
+  ToggleThemeMutationVariables,
+  ToggleThemeMutationResponse,
+} from '../../components/core/__generated__/ToggleThemeMutation.graphql';
+*/
+
+const updateUser /*: Resolver<
+  ToggleThemeMutationVariables,
+  ToggleThemeMutationResponse,
+  'updateUser',
+> */ = async (
+  parent,
+  { input },
+  context,
+) => {
+  const userId = context.getUserId();
+  const user = await context.db.mutation.updateUser({
+    data: { themeName: input.themeName },
+    where: { id: userId },
+  });
+  return { user };
+};
+
+/*::
+import type {
   meQueryVariables,
   meQueryResponse,
 } from '../../pages/__generated__/meQuery.graphql';
@@ -95,17 +119,9 @@ const me /*: Resolver<
 export default {
   mutations: {
     auth,
+    updateUser,
   },
   queries: {
     me,
   },
 };
-
-//     async updateUser(parent, { input }, context) {
-//       const userId = getUserId(context);
-//       const user = await context.db.mutation.updateUser({
-//         data: { themeName: input.themeName },
-//         where: { id: userId },
-//       });
-//       return { user };
-//     },
