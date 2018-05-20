@@ -41,7 +41,8 @@
     "clean-babel-cache": "rimraf 'node_modules/.cache/babel-loader'",
     "test": "run-s messages:missing relay:ci eslint flow jest build",
     "deps": "rimraf 'node_modules' 'package-lock.json' 'flow-typed' && npm i && flow-typed install",
-    "eslint": "eslint components pages screens scripts server test themes index.js"
+    "eslint": "eslint components pages screens scripts server test themes index.js",
+    "analyze": "cross-env ANALYZE=1 next build"
   },
   "dependencies": {
     "accepts": "^1.3.3",
@@ -75,7 +76,8 @@
     "react-relay": "^1.6.0",
     "relay-runtime": "^1.6.0",
     "url": "^0.11.0",
-    "validator": "^10.1.0"
+    "validator": "^10.1.0",
+    "webpack-bundle-analyzer": "^2.12.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.0.0-beta.47",
