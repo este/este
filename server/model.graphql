@@ -16,12 +16,6 @@
 
 # Business / UI / model errors belong to scheme.
 
-enum ShortStringError {
-  NO_TRAILING_SPACES
-  REQUIRED
-  MAX_140_CHARS
-}
-
 enum EmailError {
   NO_TRAILING_SPACES
   REQUIRED
@@ -35,6 +29,12 @@ enum PasswordError {
   MIN_5_CHARS
   MAX_1024_CHARS
   WRONG_PASSWORD
+}
+
+enum max140CharsError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  MAX_140_CHARS
 }
 
 # Like database/model User, but without password, webs, and directives.
@@ -68,7 +68,7 @@ input CreateWebInput {
 }
 
 type CreateWebErrors {
-  name: ShortStringError
+  name: max140CharsError
 }
 
 type CreateWebPayload {

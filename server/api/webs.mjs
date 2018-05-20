@@ -14,7 +14,7 @@ import type {
 */
 
 export const validateCreateWeb = (input /*: CreateWebInput */) => {
-  const name = validate.shortString(input.name);
+  const name = validate.max140Chars(input.name);
   if (name) return { name };
 };
 

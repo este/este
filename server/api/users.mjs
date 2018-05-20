@@ -15,13 +15,14 @@ import type {
 */
 
 export const validateAuth = (input /*: AuthInput */) => {
-  // Props must be defined in case of error.
-  const errors = { email: null, password: null };
-  // Validate one by one or all, as you wish.
+  // I prefer one by one validation. Validations can be complex.
   const email = validate.email(input.email);
-  if (email) return { ...errors, email };
-  const password = validate.longStringMin5Chars(input.password);
-  if (password) return { ...errors, password };
+  // For some reason, webpack can't use spread syntax "{ ...errors, email }"
+  // Probably .mjs issue fixed in Webpack 4.
+  // I tried to add .mjs extension, but without success.
+  if (email) return { email, password: null };
+  const password = validate.max1024Min5Chars(input.password);
+  if (password) return { password, email: null };
 };
 
 const auth /*: Resolver<
@@ -78,22 +79,22 @@ import type {
 } from '../../components/core/__generated__/ToggleThemeMutation.graphql';
 */
 
-const updateUser /*: Resolver<
-  ToggleThemeMutationVariables,
-  ToggleThemeMutationResponse,
-  'updateUser',
-> */ = async (
-  parent,
-  { input },
-  context,
-) => {
-  const userId = context.getUserId();
-  const user = await context.db.mutation.updateUser({
-    data: { themeName: input.themeName },
-    where: { id: userId },
-  });
-  return { user };
-};
+// const updateUser /*: Resolver<
+//   ToggleThemeMutationVariables,
+//   ToggleThemeMutationResponse,
+//   'updateUser',
+// > */ = async (
+//   parent,
+//   { input },
+//   context,
+// ) => {
+//   const userId = context.getUserId();
+//   const user = await context.db.mutation.updateUser({
+//     data: { themeName: input.themeName },
+//     where: { id: userId },
+//   });
+//   return { user };
+// };
 
 /*::
 import type {
@@ -119,7 +120,7 @@ const me /*: Resolver<
 export default {
   mutations: {
     auth,
-    updateUser,
+    // updateUser,
   },
   queries: {
     me,
