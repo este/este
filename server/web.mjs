@@ -42,8 +42,9 @@ const messagesDataCache = new Map();
 
 const getMessages = locale => {
   if (!messagesDataCache.has(locale)) {
-    const localeDataScript = fs.readFileSync(`./lang/${locale}.json`, 'utf8');
-    messagesDataCache.set(locale, localeDataScript);
+    const json = fs.readFileSync(`./lang/${locale}.json`, 'utf8');
+    const messages = JSON.parse(json);
+    messagesDataCache.set(locale, messages);
   }
   return messagesDataCache.get(locale);
 };
