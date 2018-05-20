@@ -17,7 +17,7 @@
     "babel": "node --experimental-modules ./scripts/babel",
     "dev:android": "npm run clean-babel-cache && npm run babel native && START_SCRIPT=start:native && npm run react-native run-android",
     "dev:ios": "npm run clean-babel-cache && npm run babel native && START_SCRIPT=start:native && npm run react-native run-ios",
-    "dev": "npm run clean-babel-cache && npm run babel web && run-p api web relay:watch",
+    "dev": "npm run clean-babel-cache && npm run babel web && run-p api web relay:watch playground",
     "env": "node --experimental-modules ./scripts/env",
     "build": "next build",
     "production:api": "cross-env NODE_ENV=production node --experimental-modules server/api/index",

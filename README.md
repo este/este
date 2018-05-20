@@ -27,7 +27,6 @@ Universal React. React + React Native.
 ## Dev tasks
 
 * `npm run dev` - start web development
-* `npm run dev playground` - start web development with GraphQL playground
 * `npm run dev:ios`
 * `npm run dev:android`
 * `npm run env dev` - copy `.env.dev` to `.env`
