@@ -5,19 +5,14 @@ import { lightTheme } from '../../themes/theme';
 import ThemeContext from './ThemeContext';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit } from './withMutation';
-import * as generated from './__generated__/ToggleThemeMutation.graphql';
+import * as generated from './__generated__/SetThemeMutation.graphql';
 
-type ToggleThemeProps = {|
-  commit: Commit<
-    generated.UpdateUserInput,
-    generated.ToggleThemeMutationResponse,
-  >,
+type SetThemeProps = {|
+  commit: Commit<generated.SetThemeInput, generated.SetThemeMutationResponse>,
   pending: boolean,
 |};
 
-// TODO: We should have UpdateUser component imho.
-
-class ToggleTheme extends React.PureComponent<ToggleThemeProps> {
+class SetTheme extends React.PureComponent<SetThemeProps> {
   render() {
     return (
       <ThemeContext.Consumer>
@@ -41,10 +36,10 @@ class ToggleTheme extends React.PureComponent<ToggleThemeProps> {
 }
 
 export default withMutation(
-  ToggleTheme,
+  SetTheme,
   graphql`
-    mutation ToggleThemeMutation($input: UpdateUserInput!) {
-      updateUser(input: $input) {
+    mutation SetThemeMutation($input: SetThemeInput!) {
+      setTheme(input: $input) {
         user {
           themeName
         }

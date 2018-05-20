@@ -82,15 +82,15 @@ const auth /*: Resolver<
 
 /*::
 import type {
-  ToggleThemeMutationVariables,
-  ToggleThemeMutationResponse,
-} from '../../components/core/__generated__/ToggleThemeMutation.graphql';
+  SetThemeMutationVariables,
+  SetThemeMutationResponse,
+} from '../../components/core/__generated__/SetThemeMutation.graphql';
 */
 
-const updateUser /*: Resolver<
-  ToggleThemeMutationVariables,
-  ToggleThemeMutationResponse,
-  'updateUser',
+const setTheme /*: Resolver<
+  SetThemeMutationVariables,
+  SetThemeMutationResponse,
+  'setTheme',
 > */ = async (
   parent,
   { input },
@@ -128,7 +128,7 @@ const me /*: Resolver<
 export default {
   mutations: {
     auth,
-    updateUser,
+    setTheme,
   },
   queries: {
     me,

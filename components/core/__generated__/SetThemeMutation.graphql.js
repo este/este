@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 36360ab50cf4310a504582aac7cef746
+ * @relayHash 73552ea16c0c397c164510b738e9c155
  */
 
 /* eslint-disable */
@@ -9,14 +9,14 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type UpdateUserInput = {
+export type SetThemeInput = {
   themeName: string
 };
-export type ToggleThemeMutationVariables = {|
-  input: UpdateUserInput
+export type SetThemeMutationVariables = {|
+  input: SetThemeInput
 |};
-export type ToggleThemeMutationResponse = {|
-  +updateUser: ?{|
+export type SetThemeMutationResponse = {|
+  +setTheme: ?{|
     +user: ?{|
       +themeName: ?string
     |}
@@ -26,10 +26,10 @@ export type ToggleThemeMutationResponse = {|
 
 
 /*
-mutation ToggleThemeMutation(
-  $input: UpdateUserInput!
+mutation SetThemeMutation(
+  $input: SetThemeInput!
 ) {
-  updateUser(input: $input) {
+  setTheme(input: $input) {
     user {
       themeName
       id
@@ -43,7 +43,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "UpdateUserInput!",
+    "type": "SetThemeInput!",
     "defaultValue": null
   }
 ],
@@ -52,7 +52,7 @@ v1 = [
     "kind": "Variable",
     "name": "input",
     "variableName": "input",
-    "type": "UpdateUserInput!"
+    "type": "SetThemeInput!"
   }
 ],
 v2 = {
@@ -65,13 +65,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "ToggleThemeMutation",
+  "name": "SetThemeMutation",
   "id": null,
-  "text": "mutation ToggleThemeMutation(\n  $input: UpdateUserInput!\n) {\n  updateUser(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
+  "text": "mutation SetThemeMutation(\n  $input: SetThemeInput!\n) {\n  setTheme(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "ToggleThemeMutation",
+    "name": "SetThemeMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -79,10 +79,10 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "updateUser",
+        "name": "setTheme",
         "storageKey": null,
         "args": v1,
-        "concreteType": "UpdateUserPayload",
+        "concreteType": "SetThemePayload",
         "plural": false,
         "selections": [
           {
@@ -103,16 +103,16 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "ToggleThemeMutation",
+    "name": "SetThemeMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "updateUser",
+        "name": "setTheme",
         "storageKey": null,
         "args": v1,
-        "concreteType": "UpdateUserPayload",
+        "concreteType": "SetThemePayload",
         "plural": false,
         "selections": [
           {
@@ -141,5 +141,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '3a1a18a484aeb6c153d819cedca52ae8';
+(node/*: any*/).hash = '99cf94b94b9f7c5834ac56a10462e946';
 module.exports = node;

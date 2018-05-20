@@ -4,7 +4,7 @@ import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
 import Page from '../components/core/Page';
-import ToggleTheme from '../components/core/ToggleTheme';
+import SetTheme from '../components/core/SetTheme';
 import app from '../components/app';
 import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';
@@ -57,7 +57,7 @@ const Me = props => {
       )}
       <Row>
         <SignOutButton color="danger" onPress={signOut} />
-        <ToggleTheme />
+        <SetTheme />
       </Row>
     </Page>
   );
