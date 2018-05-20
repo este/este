@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2ad9adf933eb776779281ff305f802f8
+ * @relayHash e1f31ceedd5435049f64829512c1ad0c
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type EmailError = "ALREADY_EXISTS" | "EMAIL" | "NO_TRAILING_SPACES" | "REQUIRED";
+export type EmailError = "ALREADY_EXISTS" | "EMAIL" | "NOT_EXISTS" | "NO_TRAILING_SPACES" | "REQUIRED";
 export type PasswordError = "MAX_1024_CHARS" | "MIN_5_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED" | "WRONG_PASSWORD";
 export type AuthInput = {
   email: string,

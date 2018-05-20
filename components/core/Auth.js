@@ -12,8 +12,9 @@ import type { Href } from '../app/sitemap';
 import withIntl from './withIntl';
 import Row from './Row';
 import Block from './Block';
-import { graphql, commitMutation } from 'react-relay';
+import { graphql } from 'react-relay';
 import * as generated from './__generated__/AuthMutation.graphql';
+import { validateAuth } from '../../server/api/users.mjs';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -52,25 +53,24 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   setPassword = password => this.setState({ password });
 
   handleCompleted = ({ auth }) => {
-    console.log(auth);
     if (!auth) return;
     if (auth.errors) {
       this.setState({ errors: auth.errors });
       return;
     }
-    // this.setState(CreateWeb.initialState);
-    // const { token } = payload;
-    // setCookie({ token });
-    // if (Router.query.redirectUrl) {
-    //   Router.replace(Router.query.redirectUrl);
-    // } else if (this.props.redirectUrl) {
-    //   Router.replace(this.props.redirectUrl);
-    // } else {
-    //   Router.replace({
-    //     pathname: Router.pathname,
-    //     query: Router.query,
-    //   });
-    // }
+    const { token } = auth;
+    if (token == null) return;
+    setCookie({ token });
+    if (Router.query.redirectUrl) {
+      Router.replace(Router.query.redirectUrl);
+    } else if (this.props.redirectUrl) {
+      Router.replace(this.props.redirectUrl);
+    } else {
+      Router.replace({
+        pathname: Router.pathname,
+        query: Router.query,
+      });
+    }
   };
 
   auth(isSignUp: boolean) {
@@ -80,12 +80,11 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
       isSignUp,
     };
 
-    // const inputErrors = validation.validateEmailPassword(input);
-    // if (inputErrors) {
-    //   this.setErrors(inputErrors);
-    //   return;
-    // }
-    //
+    const errors = validateAuth(input);
+    if (errors) {
+      this.setState({ errors });
+      return;
+    }
 
     this.props.commit(input, this.handleCompleted);
   }
@@ -103,7 +102,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
           <Block>
             <TextInputBig
               autoComplete="email"
-              // disabled={pending}
+              disabled={this.props.pending}
               error={errors && errors.email}
               keyboardType="email-address"
               name="email"
@@ -112,7 +111,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
               value={this.state.email}
             />
             <TextInputBig
-              // disabled={pending}
+              disabled={this.props.pending}
               error={errors && errors.password}
               name="password"
               onChangeText={this.setPassword}
@@ -123,14 +122,11 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
           </Block>
           <Row>
             <SignInButton
-              // disabled={pending}
+              disabled={this.props.pending}
               onPress={this.signIn}
               color="primary"
             />
-            <SignUpButton
-              // disabled={pending}
-              onPress={this.signUp}
-            />
+            <SignUpButton disabled={this.props.pending} onPress={this.signUp} />
           </Row>
         </Form>
       </>

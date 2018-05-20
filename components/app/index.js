@@ -114,15 +114,9 @@ const app = (
       };
     }
 
-    state = {
-      errorContext: { error: null, dispatchError: this.dispatchError },
-    };
-
-    componentWillUnmount() {
-      this.clearErrorShowTimeout();
-    }
-
     // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    // dispatchError must be defined before state because of this.dispatchError
+    // eslint-disable-next-line react/sort-comp
     dispatchError = (error: AppError) => {
       const { dispatchError } = this;
       this.setState({ errorContext: { error, dispatchError } }, () => {
@@ -133,6 +127,14 @@ const app = (
         }, 5000);
       });
     };
+
+    state = {
+      errorContext: { error: null, dispatchError: this.dispatchError },
+    };
+
+    componentWillUnmount() {
+      this.clearErrorShowTimeout();
+    }
 
     clearErrorShowTimeout() {
       if (this.errorShowTimeoutID) clearTimeout(this.errorShowTimeoutID);

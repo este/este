@@ -59,6 +59,14 @@ const auth /*: Resolver<
     return createAuthPayload(user);
   } else {
     const user = await context.db.query.user({ where: { email: input.email } });
+    if (!user)
+      return {
+        token: null,
+        errors: {
+          email: 'NOT_EXISTS',
+          password: null,
+        },
+      };
     const valid = await bcrypt.compare(input.password, user.password);
     if (!valid)
       return {
@@ -79,22 +87,22 @@ import type {
 } from '../../components/core/__generated__/ToggleThemeMutation.graphql';
 */
 
-// const updateUser /*: Resolver<
-//   ToggleThemeMutationVariables,
-//   ToggleThemeMutationResponse,
-//   'updateUser',
-// > */ = async (
-//   parent,
-//   { input },
-//   context,
-// ) => {
-//   const userId = context.getUserId();
-//   const user = await context.db.mutation.updateUser({
-//     data: { themeName: input.themeName },
-//     where: { id: userId },
-//   });
-//   return { user };
-// };
+const updateUser /*: Resolver<
+  ToggleThemeMutationVariables,
+  ToggleThemeMutationResponse,
+  'updateUser',
+> */ = async (
+  parent,
+  { input },
+  context,
+) => {
+  const userId = context.getUserId();
+  const user = await context.db.mutation.updateUser({
+    data: { themeName: input.themeName },
+    where: { id: userId },
+  });
+  return { user };
+};
 
 /*::
 import type {
@@ -120,7 +128,7 @@ const me /*: Resolver<
 export default {
   mutations: {
     auth,
-    // updateUser,
+    updateUser,
   },
   queries: {
     me,
