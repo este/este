@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b3df4d50eb074d5a16be9edbaf9c2df0
+ * @relayHash ee7aff5e6fe57f538597b4e263856ca8
  */
 
 /* eslint-disable */
@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type WebsItem$ref = any;
-export type max140CharsError = "MAX_140_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED";
+export type Max140CharsError = "MAX_140_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED";
 export type CreateWebInput = {
   name: string
 };
@@ -25,7 +25,7 @@ export type CreateWebMutationResponse = {|
       |}
     |},
     +errors: ?{|
-      +name: ?max140CharsError
+      +name: ?Max140CharsError
     |},
   |}
 |};

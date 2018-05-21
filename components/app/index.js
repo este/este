@@ -12,9 +12,8 @@ import {
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
 import EnvironmentContext from '../core/EnvironmentContext';
-import ErrorContext, { type AppError } from '../core/ErrorContext';
+import ErrorContext, { type ContextError } from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
-// import type { Error } from '../../server/error';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');
@@ -41,8 +40,8 @@ type AppProps = {|
 
 type AppState = {|
   errorContext: {
-    error: ?AppError,
-    dispatchError: AppError => void,
+    error: ?ContextError,
+    dispatchError: ContextError => void,
   },
 |};
 
@@ -117,30 +116,14 @@ const app = (
     // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
     // dispatchError must be defined before state because of this.dispatchError
     // eslint-disable-next-line react/sort-comp
-    dispatchError = (error: AppError) => {
+    dispatchError = (error: ContextError) => {
       const { dispatchError } = this;
-      this.setState({ errorContext: { error, dispatchError } }, () => {
-        this.clearErrorShowTimeout();
-        // TODO: Move it to display component.
-        this.errorShowTimeoutID = setTimeout(() => {
-          this.setState({ errorContext: { error: null, dispatchError } });
-        }, 5000);
-      });
+      this.setState({ errorContext: { error, dispatchError } });
     };
 
     state = {
       errorContext: { error: null, dispatchError: this.dispatchError },
     };
-
-    componentWillUnmount() {
-      this.clearErrorShowTimeout();
-    }
-
-    clearErrorShowTimeout() {
-      if (this.errorShowTimeoutID) clearTimeout(this.errorShowTimeoutID);
-    }
-
-    errorShowTimeoutID: ?TimeoutID;
 
     environment: Environment;
 

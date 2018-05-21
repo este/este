@@ -2,36 +2,59 @@
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
-import type { ShortStringError } from '../__generated__/CreateWebMutation.graphql';
+import type { Max140CharsError } from '../__generated__/CreateWebMutation.graphql';
 import type {
   EmailError,
   PasswordError,
 } from './__generated__/AuthMutation.graphql';
 
-export type Error = ShortStringError | EmailError | PasswordError;
-
-//       <FormattedMessage
-//         defaultMessage="Not authorized."
-//         id="error.notAuthorized"
-//       />
-//       <FormattedMessage
-//         defaultMessage="Unknown error: {message}"
-//         id="error.unknown"
-//         values={{ message: error.message }}
-//       />
-//       <FormattedMessage
-//         defaultMessage="Network error. Please try it later."
-//         id="error.requestFailed"
-//       />
+export type MessageError =
+  | '401'
+  | '403'
+  | '404'
+  | 'NET_ERROR'
+  | 'UNKNOWN'
+  | Max140CharsError
+  | EmailError
+  | PasswordError;
 
 type ErrorMessageProps = {|
   ...TextProps,
-  children: ?Error,
+  error: ?MessageError,
 |};
 
 class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
-  static errorToMessage(error: Error) {
+  static errorToMessage(error: MessageError) {
     switch (error) {
+      case '401':
+        return (
+          <FormattedMessage
+            defaultMessage="Unauthorized."
+            id="error.unauthorized"
+          />
+        );
+      case '403':
+        return (
+          <FormattedMessage defaultMessage="Forbidden." id="error.forbidden" />
+        );
+      case '404':
+        return (
+          <FormattedMessage defaultMessage="Not found." id="error.notFound" />
+        );
+      case 'NET_ERROR':
+        return (
+          <FormattedMessage
+            defaultMessage="Network error. Please try it later."
+            id="error.netError"
+          />
+        );
+      case 'UNKNOWN':
+        return (
+          <FormattedMessage
+            defaultMessage="Unknown error."
+            id="error.unknown"
+          />
+        );
       case 'NO_TRAILING_SPACES':
         return (
           <FormattedMessage
@@ -95,16 +118,12 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
   }
 
   render() {
-    const {
-      bold = true,
-      color = 'danger',
-      children: error,
-      ...props
-    } = this.props;
+    const { bold = true, color = 'warning', error, ...props } = this.props;
     if (!error) return null;
+    const message = ErrorMessage.errorToMessage(error);
     return (
       <Text bold={bold} color={color} {...props}>
-        {ErrorMessage.errorToMessage(error)}
+        {message}
       </Text>
     );
   }

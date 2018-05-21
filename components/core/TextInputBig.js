@@ -19,7 +19,7 @@ class TextInputBig extends React.PureComponent<TextInputProps> {
               {...props}
             />
             <View style={theme.styles.textInputBigError}>
-              <ErrorMessage size={size - 1}>{error}</ErrorMessage>
+              <ErrorMessage size={size - 1} error={error} />
             </View>
           </View>
         )}

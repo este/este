@@ -2,14 +2,14 @@
 import * as React from 'react';
 import type { PayloadError } from 'react-relay';
 
-export type AppError = PayloadError | Error;
-export type DispatchError = (error: AppError) => void;
+export type ContextError = PayloadError | Error;
+export type DispatchError = (error: ContextError) => void;
 
 const ErrorContext = React.createContext({
   // Note explicitly added types, so createContext can infer them.
-  error: (null: ?AppError),
+  error: (null: ?ContextError),
   // eslint-disable-next-line no-unused-vars
-  dispatchError: (error: AppError) => {},
+  dispatchError: (error: ContextError) => {},
 });
 
 export default ErrorContext;

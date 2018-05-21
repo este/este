@@ -80,16 +80,14 @@ const withMutation = <Props: {}, Input: Object, Response>(
         },
         onError: error => {
           this.setState({ pending: false });
-          // dispatchError(error)
-          // console.log('onError');
-          // console.log(error);
+          this.props.dispatchError(error);
         },
       });
       this.disposables.push(disposable);
     };
 
     render() {
-      // Filter Mutation props, they do not belong to Component.
+      // Do not pass Mutation props to Component.
       const { dispatchError, environment, ...props } = this.props;
       return (
         <Component
