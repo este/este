@@ -131,6 +131,8 @@ const app = (
 
     render() {
       return (
+        // Many issues by third-party components.
+        // <React.StrictMode>
         <IntlProvider
           locale={this.props.locale}
           messages={this.props.messages}
@@ -150,6 +152,7 @@ const app = (
             </LocaleContext.Provider>
           </ErrorContext.Provider>
         </IntlProvider>
+        // </React.StrictMode>
       );
     }
   }
