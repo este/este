@@ -24,6 +24,8 @@ const withConfirm = <Props: {}>(
     }
   }
 
+  // Note pattern, inject message to WithConfirm component, so this.confirm is
+  // binded, not created on every render.
   return props => (
     <FormattedMessage defaultMessage="Are you sure?" id="confirm.areYouSure">
       {// $FlowFixMe Wrong libdef.
