@@ -7,28 +7,22 @@ import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ErrorMessage, { type MessageError } from './ErrorMessage';
 
-// This is just a stub for inputRef type.
-class ReactNativeWebTextInputElementStub extends React.Component<{}> {
-  // eslint-disable-next-line class-methods-use-this
-  blur() {}
-  // eslint-disable-next-line class-methods-use-this
-  focus() {}
-}
-
 export type TextInputProps = {|
   disabled?: boolean,
   label?: string | React.Element<any>,
   error?: ?MessageError,
   size?: number,
   style?: TextStyleProp,
-  inputRef?: React.Ref<typeof ReactNativeWebTextInputElementStub>,
   value?: string,
+  doNotRenderError?: boolean,
+  focusOnError?: ?Object,
   secureTextEntry?: boolean,
   placeholder?: string,
   onChangeText: string => void,
   name?: string,
   keyboardType?: string,
   autoComplete?: string,
+  // Feel free to add any missing prop.
 |};
 
 const styles = StyleSheet.create({
@@ -46,19 +40,41 @@ const TextInputLabel = ({ label, size }) =>
     label
   );
 
-class TextInput extends React.PureComponent<{|
+// That's because TextInputProps is exported to reuse.
+type TextInputPropsWithTheme = {|
   ...TextInputProps,
   theme: Theme,
-|}> {
+|};
+
+class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
+  componentDidUpdate(prevProps) {
+    this.maybeFocusOnError(prevProps);
+  }
+
+  maybeFocusOnError(prevProps) {
+    const doFocus =
+      this.props.error != null &&
+      // Simple trick not trick. Validation creates a new object, which we can
+      // use to detect whether validation happen, therefore, focus this input.
+      // Otherwise, we would have to expose input ref and maintain list of
+      // focusable fields in form with switch with manual mapping... omg.
+      this.props.focusOnError !== prevProps.focusOnError;
+    if (!doFocus || !this.inputRef.current) return;
+    this.inputRef.current.focus();
+  }
+
+  inputRef = React.createRef();
+
   render() {
     const {
+      doNotRenderError,
       disabled,
       label,
       error,
       size = 0,
       style,
-      inputRef,
       theme,
+      focusOnError,
       ...props
     } = this.props;
 
@@ -72,12 +88,13 @@ class TextInput extends React.PureComponent<{|
         {renderHeader && (
           <View style={styles.header}>
             {label != null && <TextInputLabel label={label} size={size} />}
-            {error != null && (
-              <>
-                <Text> </Text>
-                <ErrorMessage size={size} error={error} />
-              </>
-            )}
+            {doNotRenderError !== true &&
+              error != null && (
+                <>
+                  <Text> </Text>
+                  <ErrorMessage size={size} error={error} />
+                </>
+              )}
           </View>
         )}
         <TextInputNative
@@ -88,7 +105,7 @@ class TextInput extends React.PureComponent<{|
             theme.typography.fontSizeWithLineHeight(size),
             style,
           ]}
-          ref={inputRef}
+          ref={this.inputRef}
           {...props}
         />
       </View>

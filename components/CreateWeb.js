@@ -78,9 +78,8 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
               </Text>
             }
             disabled={this.props.pending}
-            // We can't use optional chaining yet.
-            // https://github.com/facebook/flow/issues/4303#issuecomment-385102833
             error={errors && errors.name}
+            focusOnError={errors}
             onChangeText={this.setName}
             value={this.state.name}
           />

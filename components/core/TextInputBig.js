@@ -10,13 +10,18 @@ class TextInputBig extends React.PureComponent<{|
   theme: Theme,
 |}> {
   render() {
-    const { error, size = 1, theme, ...props } = this.props;
+    const { size = 1, theme, ...props } = this.props;
 
     return (
       <View>
-        <TextInput size={size} style={theme.styles.textInputBig} {...props} />
+        <TextInput
+          size={size}
+          style={theme.styles.textInputBig}
+          doNotRenderError
+          {...props}
+        />
         <View style={theme.styles.textInputBigError}>
-          <ErrorMessage size={size - 1} error={error} />
+          <ErrorMessage size={size - 1} error={this.props.error} />
         </View>
       </View>
     );
