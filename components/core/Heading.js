@@ -1,19 +1,18 @@
 // @flow
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 
-class Heading extends React.PureComponent<TextProps> {
+type HeadingProps = {|
+  ...TextProps,
+  theme: Theme,
+|};
+
+class Heading extends React.PureComponent<HeadingProps> {
   render() {
-    const { style, ...props } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {theme => {
-          return <Text style={[theme.styles.heading, style]} {...props} />;
-        }}
-      </ThemeContext.Consumer>
-    );
+    const { style, theme, ...props } = this.props;
+    return <Text style={[theme.styles.heading, style]} {...props} />;
   }
 }
 
-export default Heading;
+export default withTheme(Heading);

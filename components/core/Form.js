@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 import { View } from 'react-native';
 
 // TODO: Rename to Form.web.js, add native Form.js.
@@ -8,6 +8,7 @@ import { View } from 'react-native';
 type FormProps = {|
   children?: React.Node,
   onSubmit?: () => void,
+  theme: Theme,
 |};
 
 class Form extends React.PureComponent<FormProps> {
@@ -26,20 +27,16 @@ class Form extends React.PureComponent<FormProps> {
 
   render() {
     return (
-      <ThemeContext.Consumer>
-        {theme => (
-          <View
-            accessibilityRole="form"
-            style={theme.styles.form}
-            onSubmit={Form.handleSubmit}
-            onKeyPress={this.handleKeyPress}
-          >
-            {this.props.children}
-          </View>
-        )}
-      </ThemeContext.Consumer>
+      <View
+        accessibilityRole="form"
+        style={this.props.theme.styles.form}
+        onSubmit={Form.handleSubmit}
+        onKeyPress={this.handleKeyPress}
+      >
+        {this.props.children}
+      </View>
     );
   }
 }
 
-export default Form;
+export default withTheme(Form);

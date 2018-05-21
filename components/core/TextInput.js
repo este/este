@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 import colorLib from 'color';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
@@ -46,7 +46,10 @@ const TextInputLabel = ({ label, size }) =>
     label
   );
 
-class TextInput extends React.PureComponent<TextInputProps> {
+class TextInput extends React.PureComponent<{|
+  ...TextInputProps,
+  theme: Theme,
+|}> {
   render() {
     const {
       disabled,
@@ -55,48 +58,42 @@ class TextInput extends React.PureComponent<TextInputProps> {
       size = 0,
       style,
       inputRef,
+      theme,
       ...props
     } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {theme => {
-          const renderHeader = label != null || error != null;
-          const placeholderTextColor = colorLib(
-            theme.colors[theme.textColor],
-          ).fade(0.5);
 
-          return (
-            <View>
-              {renderHeader && (
-                <View style={styles.header}>
-                  {label != null && (
-                    <TextInputLabel label={label} size={size} />
-                  )}
-                  {error != null && (
-                    <>
-                      <Text> </Text>
-                      <ErrorMessage size={size} error={error} />
-                    </>
-                  )}
-                </View>
-              )}
-              <TextInputNative
-                disabled={disabled}
-                placeholderTextColor={placeholderTextColor.toString()}
-                style={[
-                  theme.styles.textInput,
-                  theme.typography.fontSizeWithLineHeight(size),
-                  style,
-                ]}
-                ref={inputRef}
-                {...props}
-              />
-            </View>
-          );
-        }}
-      </ThemeContext.Consumer>
+    const renderHeader = label != null || error != null;
+    const placeholderTextColor = colorLib(theme.colors[theme.textColor]).fade(
+      0.5,
+    );
+
+    return (
+      <View>
+        {renderHeader && (
+          <View style={styles.header}>
+            {label != null && <TextInputLabel label={label} size={size} />}
+            {error != null && (
+              <>
+                <Text> </Text>
+                <ErrorMessage size={size} error={error} />
+              </>
+            )}
+          </View>
+        )}
+        <TextInputNative
+          disabled={disabled}
+          placeholderTextColor={placeholderTextColor.toString()}
+          style={[
+            theme.styles.textInput,
+            theme.typography.fontSizeWithLineHeight(size),
+            style,
+          ]}
+          ref={inputRef}
+          {...props}
+        />
+      </View>
     );
   }
 }
 
-export default TextInput;
+export default withTheme(TextInput);

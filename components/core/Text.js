@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -80,7 +80,7 @@ const getColorStyle = (themeStyles, color) => {
   }
 };
 
-class Text extends React.PureComponent<TextProps> {
+class Text extends React.PureComponent<{| ...TextProps, theme: Theme |}> {
   static contextTypes = {
     isInAParentText: PropTypes.bool,
   };
@@ -99,40 +99,34 @@ class Text extends React.PureComponent<TextProps> {
       size,
       fixWebFontSmoothing,
       style,
+      theme,
       ...props
     } = this.props;
     const { isInAParentText } = this.context;
 
     return (
-      <ThemeContext.Consumer>
-        {theme => {
-          return (
-            <NativeText
-              style={[
-                !isInAParentText && theme.styles.text,
-                style,
-                align != null && alignStyles[align],
-                bold != null &&
-                  (bold
-                    ? theme.styles.textWeightBold
-                    : theme.styles.textWeightNormal),
-                color != null && getColorStyle(theme.styles, color),
-                decoration != null && decorationStyles[decoration],
-                italic != null &&
-                  (italic ? italicStyles.italic : italicStyles.normal),
-                size != null
-                  ? theme.typography.fontSizeWithLineHeight(size)
-                  : !isInAParentText &&
-                    theme.typography.fontSizeWithLineHeight(0),
-                fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
-              ]}
-              {...props}
-            />
-          );
-        }}
-      </ThemeContext.Consumer>
+      <NativeText
+        style={[
+          !isInAParentText && theme.styles.text,
+          style,
+          align != null && alignStyles[align],
+          bold != null &&
+            (bold
+              ? theme.styles.textWeightBold
+              : theme.styles.textWeightNormal),
+          color != null && getColorStyle(theme.styles, color),
+          decoration != null && decorationStyles[decoration],
+          italic != null &&
+            (italic ? italicStyles.italic : italicStyles.normal),
+          size != null
+            ? theme.typography.fontSizeWithLineHeight(size)
+            : !isInAParentText && theme.typography.fontSizeWithLineHeight(0),
+          fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
+        ]}
+        {...props}
+      />
     );
   }
 }
 
-export default Text;
+export default withTheme(Text);

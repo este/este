@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import ErrorMessage from './ErrorMessage';
-import ThemeContext, { type Theme } from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 import ErrorContext, { type ContextError } from './ErrorContext';
 
 type ErrorPopupProps = {|
@@ -71,13 +71,11 @@ class ErrorPopup extends React.PureComponent<ErrorPopupProps, ErrorPopupState> {
   }
 }
 
+const ErrorPopupWithTheme = withTheme(ErrorPopup);
+
 // https://reactjs.org/docs/context.html#accessing-context-in-lifecycle-methods
 export default () => (
   <ErrorContext.Consumer>
-    {({ error }) => (
-      <ThemeContext.Consumer>
-        {theme => <ErrorPopup error={error} theme={theme} />}
-      </ThemeContext.Consumer>
-    )}
+    {({ error }) => <ErrorPopupWithTheme error={error} />}
   </ErrorContext.Consumer>
 );
