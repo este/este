@@ -118,7 +118,7 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
   }
 
   render() {
-    const { bold = true, color = 'warning', error, ...props } = this.props;
+    const { bold = true, color = 'danger', error, ...props } = this.props;
     if (!error) return null;
     const message = ErrorMessage.errorToMessage(error);
     return (
