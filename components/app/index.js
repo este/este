@@ -11,10 +11,9 @@ import {
 } from 'react-relay';
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
-import MutationContext from '../core/MutationContext';
-import ErrorContext from '../core/ErrorContext';
+import EnvironmentContext from '../core/EnvironmentContext';
+import ErrorContext, { type ContextError } from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
-import type { Error } from '../../server/error';
 
 // https://github.com/facebook/relay/issues/2347
 // const { installRelayDevTools } = require('relay-devtools');
@@ -41,8 +40,8 @@ type AppProps = {|
 
 type AppState = {|
   errorContext: {
-    error: ?Error,
-    dispatchError: Error => void,
+    error: ?ContextError,
+    dispatchError: ContextError => void,
   },
 |};
 
@@ -114,29 +113,16 @@ const app = (
       };
     }
 
-    state = {
-      errorContext: { error: null, dispatchError: this.dispatchError },
+    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    // dispatchError must be defined before state because of this.dispatchError
+    // eslint-disable-next-line react/sort-comp
+    dispatchError = (error: ContextError) => {
+      const { dispatchError } = this;
+      this.setState({ errorContext: { error, dispatchError } });
     };
 
-    componentWillUnmount() {
-      this.clearErrorShowTimeout();
-    }
-
-    clearErrorShowTimeout() {
-      if (this.errorShowTimeoutID) clearTimeout(this.errorShowTimeoutID);
-    }
-
-    errorShowTimeoutID: ?TimeoutID;
-
-    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
-    dispatchError = (error: Error) => {
-      const { dispatchError } = this;
-      this.setState({ errorContext: { error, dispatchError } }, () => {
-        this.clearErrorShowTimeout();
-        this.errorShowTimeoutID = setTimeout(() => {
-          this.setState({ errorContext: { error: null, dispatchError } });
-        }, 5000);
-      });
+    state = {
+      errorContext: { error: null, dispatchError: this.dispatchError },
     };
 
     environment: Environment;
@@ -145,6 +131,8 @@ const app = (
 
     render() {
       return (
+        // Many issues by third-party components.
+        // <React.StrictMode>
         <IntlProvider
           locale={this.props.locale}
           messages={this.props.messages}
@@ -156,14 +144,15 @@ const app = (
               context consumer a separate node in the tree. */}
           <ErrorContext.Provider value={this.state.errorContext}>
             <LocaleContext.Provider value={this.localeContext}>
-              <MutationContext.Provider value={this.environment}>
+              <EnvironmentContext.Provider value={this.environment}>
                 <RelayProvider environment={this.environment}>
                   <Page data={this.props.data} />
                 </RelayProvider>
-              </MutationContext.Provider>
+              </EnvironmentContext.Provider>
             </LocaleContext.Provider>
           </ErrorContext.Provider>
         </IntlProvider>
+        // </React.StrictMode>
       );
     }
   }

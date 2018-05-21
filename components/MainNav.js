@@ -4,7 +4,7 @@ import A from './core/A';
 import { titles } from '../components/app/sitemap';
 import { FormattedMessage } from 'react-intl';
 import { StyleSheet, View } from 'react-native';
-import ThemeContext from './core/ThemeContext';
+import withTheme, { type Theme } from './core/withTheme';
 
 const styles = StyleSheet.create({
   view: {
@@ -13,40 +13,46 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainNavA = ({ href, title }) => (
-  <ThemeContext.Consumer>
-    {theme => (
-      <A
-        bold
-        color="white"
-        href={href}
-        fixWebFontSmoothing
-        prefetch
-        style={theme.styles.mainNavA}
-      >
-        <FormattedMessage {...title} />
-      </A>
-    )}
-  </ThemeContext.Consumer>
+const MainNavA = ({ href, title, theme }) => (
+  <A
+    bold
+    color="white"
+    href={href}
+    fixWebFontSmoothing
+    prefetch
+    style={theme.styles.mainNavA}
+  >
+    <FormattedMessage {...title} />
+  </A>
 );
 
 type MainNavProps = {|
   isAuthenticated: boolean,
+  theme: Theme,
 |};
 
-const MainNav = ({ isAuthenticated }: MainNavProps) => (
-  <ThemeContext.Consumer>
-    {theme => (
+class MainNav extends React.PureComponent<MainNavProps> {
+  render() {
+    const { theme, isAuthenticated } = this.props;
+    return (
       <View style={[styles.view, theme.styles.mainNav]}>
-        <MainNavA href={{ pathname: '/' }} title={titles.index} />
+        <MainNavA href={{ pathname: '/' }} title={titles.index} theme={theme} />
         {isAuthenticated ? (
-          <MainNavA href={{ pathname: '/me' }} title={titles.me} />
+          <MainNavA
+            href={{ pathname: '/me' }}
+            title={titles.me}
+            theme={theme}
+          />
         ) : (
-          <MainNavA href={{ pathname: '/sign-in' }} title={titles.signIn} />
+          <MainNavA
+            href={{ pathname: '/sign-in' }}
+            title={titles.signIn}
+            theme={theme}
+          />
         )}
       </View>
-    )}
-  </ThemeContext.Consumer>
-);
+    );
+  }
+}
 
-export default MainNav;
+export default withTheme(MainNav);

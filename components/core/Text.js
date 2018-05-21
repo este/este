@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 import { Platform, StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -18,10 +18,10 @@ export type TextProps = {|
   children?: React.Node,
   // React Native does not export Text props Flow types yet, so add them as-go.
   // Feel free to add any used prop.
-  accessibilityRole?: *,
-  onMouseEnter?: *,
-  onMouseLeave?: *,
-  href?: *,
+  accessibilityRole?: any,
+  onMouseEnter?: any,
+  onMouseLeave?: any,
+  href?: any,
 |};
 
 // Strutural aka non-themeable styles.
@@ -58,31 +58,31 @@ const italicStyles = StyleSheet.create({
   italic: { fontStyle: 'italic' },
 });
 
-class Text extends React.PureComponent<TextProps> {
+const getColorStyle = (themeStyles, color) => {
+  switch (color) {
+    case 'primary':
+      return themeStyles.textPrimary;
+    case 'success':
+      return themeStyles.textSuccess;
+    case 'warning':
+      return themeStyles.textWarning;
+    case 'danger':
+      return themeStyles.textDanger;
+    case 'black':
+      return themeStyles.textBlack;
+    case 'white':
+      return themeStyles.textWhite;
+    case 'gray':
+      return themeStyles.textGray;
+    default:
+      (color: empty);
+      return null;
+  }
+};
+
+class Text extends React.PureComponent<{| ...TextProps, theme: Theme |}> {
   static contextTypes = {
     isInAParentText: PropTypes.bool,
-  };
-
-  static getColorStyle = (themeStyles: *, color: *) => {
-    switch (color) {
-      case 'primary':
-        return themeStyles.textPrimary;
-      case 'success':
-        return themeStyles.textSuccess;
-      case 'warning':
-        return themeStyles.textWarning;
-      case 'danger':
-        return themeStyles.textDanger;
-      case 'black':
-        return themeStyles.textBlack;
-      case 'white':
-        return themeStyles.textWhite;
-      case 'gray':
-        return themeStyles.textGray;
-      default:
-        (color: empty);
-        return null;
-    }
   };
 
   context: {
@@ -99,40 +99,34 @@ class Text extends React.PureComponent<TextProps> {
       size,
       fixWebFontSmoothing,
       style,
+      theme,
       ...props
     } = this.props;
     const { isInAParentText } = this.context;
 
     return (
-      <ThemeContext.Consumer>
-        {theme => {
-          return (
-            <NativeText
-              style={[
-                !isInAParentText && theme.styles.text,
-                style,
-                align != null && alignStyles[align],
-                bold != null &&
-                  (bold
-                    ? theme.styles.textWeightBold
-                    : theme.styles.textWeightNormal),
-                color != null && Text.getColorStyle(theme.styles, color),
-                decoration != null && decorationStyles[decoration],
-                italic != null &&
-                  (italic ? italicStyles.italic : italicStyles.normal),
-                size != null
-                  ? theme.typography.fontSizeWithLineHeight(size)
-                  : !isInAParentText &&
-                    theme.typography.fontSizeWithLineHeight(0),
-                fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
-              ]}
-              {...props}
-            />
-          );
-        }}
-      </ThemeContext.Consumer>
+      <NativeText
+        style={[
+          !isInAParentText && theme.styles.text,
+          style,
+          align != null && alignStyles[align],
+          bold != null &&
+            (bold
+              ? theme.styles.textWeightBold
+              : theme.styles.textWeightNormal),
+          color != null && getColorStyle(theme.styles, color),
+          decoration != null && decorationStyles[decoration],
+          italic != null &&
+            (italic ? italicStyles.italic : italicStyles.normal),
+          size != null
+            ? theme.typography.fontSizeWithLineHeight(size)
+            : !isInAParentText && theme.typography.fontSizeWithLineHeight(0),
+          fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
+        ]}
+        {...props}
+      />
     );
   }
 }
 
-export default Text;
+export default withTheme(Text);

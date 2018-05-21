@@ -64,41 +64,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const PageContainer = ({ children }) => (
-  <ThemeContext.Consumer>
-    {theme => (
-      // Why ScrollView https://github.com/necolas/react-native-web/issues/829
-      <ScrollView
-        style={[styles.container, theme.styles.pageContainer]}
-        contentContainerStyle={[styles.containerContent]}
-      >
-        {children}
-      </ScrollView>
-    )}
-  </ThemeContext.Consumer>
+const PageContainer = ({ children, theme }) => (
+  <ScrollView
+    // Why ScrollView https://github.com/necolas/react-native-web/issues/829
+    style={[styles.container, theme.styles.pageContainer]}
+    contentContainerStyle={[styles.containerContent]}
+  >
+    {children}
+  </ScrollView>
 );
 
-const PageBody = ({ children }) => (
-  <ThemeContext.Consumer>
-    {theme => (
-      <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
-    )}
-  </ThemeContext.Consumer>
+const PageBody = ({ children, theme }) => (
+  <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
 );
 
-const PageFooter = () => (
-  <ThemeContext.Consumer>
-    {theme => (
-      <View style={[styles.footer, theme.styles.pageFooter]}>
-        <Text size={-1}>
-          <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-          <A href="https://twitter.com/steida">steida</A>
-          {', '}
-          <SwitchLocale />
-        </Text>
-      </View>
-    )}
-  </ThemeContext.Consumer>
+const PageFooter = ({ theme }) => (
+  <View style={[styles.footer, theme.styles.pageFooter]}>
+    <Text size={-1}>
+      <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
+      <A href="https://twitter.com/steida">steida</A>
+      {', '}
+      <SwitchLocale />
+    </Text>
+  </View>
 );
 
 type Props = {|
@@ -166,10 +154,12 @@ class Page extends React.PureComponent<Props> {
             }
           `}</style>
         </div>
-        <PageContainer>
+        <PageContainer theme={theme}>
           <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
-          <PageFooter />
+          <PageBody theme={theme}>
+            {this.renderChildrenOrAuth(isAuthenticated)}
+          </PageBody>
+          <PageFooter theme={theme} />
         </PageContainer>
       </ThemeContext.Provider>
     );

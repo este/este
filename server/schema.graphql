@@ -1,18 +1,29 @@
 # source: http://localhost:4000
-# timestamp: Tue May 08 2018 00:41:04 GMT+0200 (CEST)
+# timestamp: Mon May 21 2018 00:42:04 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
 }
 
+type AuthErrors {
+  email: EmailError
+  password: PasswordError
+}
+
 input AuthInput {
   email: String!
   password: String!
+  isSignUp: Boolean!
 }
 
 type AuthPayload {
-  token: String!
-  user: User!
+  token: String
+  user: User
+  errors: AuthErrors
+}
+
+type CreateWebErrors {
+  name: Max140CharsError
 }
 
 input CreateWebInput {
@@ -21,6 +32,7 @@ input CreateWebInput {
 
 type CreateWebPayload {
   edge: WebEdge
+  errors: CreateWebErrors
 }
 
 scalar DateTime
@@ -33,12 +45,25 @@ type DeleteWebPayload {
   id: ID
 }
 
+enum EmailError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  EMAIL
+  ALREADY_EXISTS
+  NOT_EXISTS
+}
+
+enum Max140CharsError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  MAX_140_CHARS
+}
+
 type Mutation {
-  signup(input: AuthInput!): AuthPayload
-  signin(input: AuthInput!): AuthPayload
+  auth(input: AuthInput!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
-  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  setTheme(input: SetThemeInput!): SetThemePayload
 }
 
 """An object with an ID"""
@@ -62,17 +87,25 @@ type PageInfo {
   endCursor: String
 }
 
+enum PasswordError {
+  NO_TRAILING_SPACES
+  REQUIRED
+  MIN_5_CHARS
+  MAX_1024_CHARS
+  WRONG_PASSWORD
+}
+
 type Query {
   me: User
   webs(first: Int!): WebConnection
   web(domain: String!): Web
 }
 
-input UpdateUserInput {
+input SetThemeInput {
   themeName: String!
 }
 
-type UpdateUserPayload {
+type SetThemePayload {
   user: User
 }
 

@@ -1,38 +1,12 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import AreYouSureConfirm from './core/AreYouSureConfirm';
 import * as generated from './__generated__/WebsItem.graphql';
-import { DeleteButton } from './core/buttons';
 import Text from './core/Text';
 import A from './core/A';
 import Block from './core/Block';
 import { FormattedRelative } from 'react-intl';
-import Mutation from './core/Mutation';
-import DeleteWebMutation from '../mutations/DeleteWebMutation';
-import { View } from 'react-native';
-
-const DeleteWeb = ({ id }) => (
-  <Mutation>
-    {({ mutate, pending }) => (
-      <AreYouSureConfirm>
-        {confirm => (
-          <DeleteButton
-            inline
-            color="warning"
-            disabled={pending}
-            onPress={() => {
-              if (!confirm()) return;
-              const input = { id };
-              mutate(DeleteWebMutation.commit, input);
-            }}
-            size={-1}
-          />
-        )}
-      </AreYouSureConfirm>
-    )}
-  </Mutation>
-);
+import WebsItemDelete from './WebsItemDelete';
 
 type WebsItemProps = {|
   data: generated.WebsItem,
@@ -42,22 +16,20 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
     return (
-      <View>
+      <Block>
         <Text>{data.name}</Text>
-        <Block>
-          <Text color="gray" size={-1}>
-            <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
-              {data.domain}
-            </A>
+        <Text color="gray" size={-1}>
+          <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
+            {data.domain}
+          </A>
+          {', '}
+          <FormattedRelative value={data.updatedAt} />
+          <Text>
             {', '}
-            <FormattedRelative value={data.updatedAt} />
-            <Text>
-              {', '}
-              <DeleteWeb id={data.id} />
-            </Text>
+            <WebsItemDelete id={data.id} />
           </Text>
-        </Block>
-      </View>
+        </Text>
+      </Block>
     );
   }
 }

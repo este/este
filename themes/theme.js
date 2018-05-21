@@ -189,7 +189,7 @@ const stylesJson = {
   },
 
   errorPopup: {
-    backgroundColor: colors.warning,
+    backgroundColor: colors.danger,
     position: 'absolute',
     zIndex: 1,
     left: 0,

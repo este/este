@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import type { Href } from '../app/sitemap';
 import { format } from 'url';
 import LocaleContext from './LocaleContext';
-import { defaultLocale } from '../../server/constants';
+import { defaultLocale } from '../../server/constants.mjs';
 
 // Link with current locale in query.
 // This component is used by A and Link, no need to use it directly.

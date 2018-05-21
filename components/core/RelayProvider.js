@@ -7,6 +7,7 @@ import { withRouter } from 'next/router';
 // RelayProvider sets Relay context manually for SSR and pending navigations.
 // Check App.getInitialProps, note "await fetchQuery". It replaces QueryRenderer.
 // https://github.com/robrichard/relay-context-provider
+// TODO: This is temp hack. Can't be updated for a new React context.
 
 type RelayProviderProps = {
   environment: Environment,

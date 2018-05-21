@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ThemeContext from './ThemeContext';
+import withTheme, { type Theme } from './withTheme';
 
 type Props = {|
   noSpacer?: boolean,
   children: React.Node,
+  theme: Theme,
 |};
 
 const styles = StyleSheet.create({
@@ -16,36 +17,27 @@ const styles = StyleSheet.create({
 
 class Row extends React.PureComponent<Props> {
   render() {
-    return (
-      <ThemeContext.Consumer>
-        {theme => {
-          const { noSpacer, children } = this.props;
-          if (noSpacer === true) {
-            return <View style={styles.view}>{children}</View>;
-          }
+    const { noSpacer, children, theme } = this.props;
+    if (noSpacer === true) {
+      return <View style={styles.view}>{children}</View>;
+    }
 
-          const count = React.Children.count(children);
+    const count = React.Children.count(children);
+    return (
+      <View style={styles.view}>
+        {React.Children.map(children, (child, index) => {
           return (
-            <View style={styles.view}>
-              {React.Children.map(children, (child, index) => {
-                return (
-                  <>
-                    {child}
-                    {index !== count - 1 && (
-                      <View
-                        style={theme.styles.rowSpacer}
-                        key={`spacer-${index}`}
-                      />
-                    )}
-                  </>
-                );
-              })}
-            </View>
+            <>
+              {child}
+              {index !== count - 1 && (
+                <View style={theme.styles.rowSpacer} key={`spacer-${index}`} />
+              )}
+            </>
           );
-        }}
-      </ThemeContext.Consumer>
+        })}
+      </View>
     );
   }
 }
 
-export default Row;
+export default withTheme(Row);

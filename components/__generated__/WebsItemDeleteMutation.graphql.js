@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d6d9b6b408f5a4b551d05c8606d57b22
+ * @relayHash fe38e462944b6ff6ad11f3c5488170e2
  */
 
 /* eslint-disable */
@@ -9,27 +9,26 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AuthInput = {
-  email: string,
-  password: string,
+export type DeleteWebInput = {
+  id: string
 };
-export type SigninMutationVariables = {|
-  input: AuthInput
+export type WebsItemDeleteMutationVariables = {|
+  input: DeleteWebInput
 |};
-export type SigninMutationResponse = {|
-  +signin: ?{|
-    +token: string
+export type WebsItemDeleteMutationResponse = {|
+  +deleteWeb: ?{|
+    +id: ?string
   |}
 |};
 */
 
 
 /*
-mutation SigninMutation(
-  $input: AuthInput!
+mutation WebsItemDeleteMutation(
+  $input: DeleteWebInput!
 ) {
-  signin(input: $input) {
-    token
+  deleteWeb(input: $input) {
+    id
   }
 }
 */
@@ -39,7 +38,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "AuthInput!",
+    "type": "DeleteWebInput!",
     "defaultValue": null
   }
 ],
@@ -47,23 +46,23 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "signin",
+    "name": "deleteWeb",
     "storageKey": null,
     "args": [
       {
         "kind": "Variable",
         "name": "input",
         "variableName": "input",
-        "type": "AuthInput!"
+        "type": "DeleteWebInput!"
       }
     ],
-    "concreteType": "AuthPayload",
+    "concreteType": "DeleteWebPayload",
     "plural": false,
     "selections": [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "token",
+        "name": "id",
         "args": null,
         "storageKey": null
       }
@@ -73,13 +72,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "SigninMutation",
+  "name": "WebsItemDeleteMutation",
   "id": null,
-  "text": "mutation SigninMutation(\n  $input: AuthInput!\n) {\n  signin(input: $input) {\n    token\n  }\n}\n",
+  "text": "mutation WebsItemDeleteMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "SigninMutation",
+    "name": "WebsItemDeleteMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -87,12 +86,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "SigninMutation",
+    "name": "WebsItemDeleteMutation",
     "argumentDefinitions": v0,
     "selections": v1
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0cef6962a37d4105cbc8b20fb12c5a2e';
+(node/*: any*/).hash = '54a0af1ba663899cd9ff2964f7f7dd84';
 module.exports = node;
