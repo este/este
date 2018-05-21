@@ -52,7 +52,7 @@ const withMutation = <Props: {}, Input: Object, Response>(
     pending: boolean,
   |};
 
-  class Mutation extends React.PureComponent<MutationProps, MutationState> {
+  class WithMutation extends React.PureComponent<MutationProps, MutationState> {
     state = {
       pending: false,
     };
@@ -87,7 +87,7 @@ const withMutation = <Props: {}, Input: Object, Response>(
     };
 
     render() {
-      // Do not pass Mutation props to Component.
+      // Do not pass WithMutation props to Component.
       const { dispatchError, environment, ...props } = this.props;
       return (
         <Component
@@ -107,7 +107,7 @@ const withMutation = <Props: {}, Input: Object, Response>(
       {({ dispatchError }) => (
         <EnvironmentContext.Consumer>
           {environment => (
-            <Mutation
+            <WithMutation
               {...props}
               dispatchError={dispatchError}
               environment={environment}

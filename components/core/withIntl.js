@@ -9,9 +9,9 @@ import { injectIntl, type IntlShape } from 'react-intl';
 const withIntl = <Props: {}>(
   Component: React.ComponentType<Props>,
 ): React.ComponentType<$Diff<Props, { intl: IntlShape | void }>> => {
-  const WrapperComponent = (props: Props) => <Component {...props} />;
+  const WithIntl = (props: Props) => <Component {...props} />;
   // $FlowFixMe A bug in react-intl flow-typed libdef.
-  return injectIntl(WrapperComponent);
+  return injectIntl(WithIntl);
 };
 
 export default withIntl;

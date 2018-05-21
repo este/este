@@ -13,7 +13,7 @@ const withConfirm = <Props: {}>(
     message: string,
   };
 
-  class Confirm extends React.PureComponent<ConfirmProps> {
+  class WithConfirm extends React.PureComponent<ConfirmProps> {
     confirm = () => {
       return window.confirm(this.props.message);
     };
@@ -27,7 +27,7 @@ const withConfirm = <Props: {}>(
   return props => (
     <FormattedMessage defaultMessage="Are you sure?" id="confirm.areYouSure">
       {// $FlowFixMe Wrong libdef.
-      message => <Confirm {...props} message={message} />}
+      message => <WithConfirm {...props} message={message} />}
     </FormattedMessage>
   );
 };
