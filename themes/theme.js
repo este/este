@@ -125,15 +125,12 @@ const stylesJson = {
 
   textInput: {
     color: colors.black,
-  },
-
-  textInputBig: {
     borderBottomWidth: 1,
     borderColor: colors.gray,
     paddingVertical: typography.rhythm(0.5),
   },
 
-  textInputBigError: {
+  textInputError: {
     minHeight: typography.rhythm(1),
   },
 

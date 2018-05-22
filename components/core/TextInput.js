@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, View, TextInput as TextInputNative } from 'react-native';
+import { View, TextInput as TextInputNative } from 'react-native';
 import withTheme, { type Theme } from './withTheme';
 import colorLib from 'color';
 import Text from './Text';
@@ -14,7 +14,6 @@ export type TextInputProps = {|
   size?: number,
   style?: TextStyleProp,
   value?: string,
-  doNotRenderError?: boolean,
   focusOnError?: ?Object,
   secureTextEntry?: boolean,
   placeholder?: string,
@@ -24,21 +23,6 @@ export type TextInputProps = {|
   autoComplete?: string,
   // Feel free to add any missing prop.
 |};
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-  },
-});
-
-const TextInputLabel = ({ label, size }) =>
-  typeof label === 'string' ? (
-    <Text bold size={size}>
-      {label}
-    </Text>
-  ) : (
-    label
-  );
 
 // That's because TextInputProps is exported to reuse.
 type TextInputPropsWithTheme = {|
@@ -67,7 +51,6 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
 
   render() {
     const {
-      doNotRenderError,
       disabled,
       label,
       error,
@@ -78,24 +61,16 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
       ...props
     } = this.props;
 
-    const renderHeader = label != null || error != null;
     const placeholderTextColor = colorLib(theme.colors[theme.textColor]).fade(
       0.5,
     );
 
     return (
       <View>
-        {renderHeader && (
-          <View style={styles.header}>
-            {label != null && <TextInputLabel label={label} size={size} />}
-            {doNotRenderError !== true &&
-              error != null && (
-                <>
-                  <Text> </Text>
-                  <ErrorMessage size={size} error={error} />
-                </>
-              )}
-          </View>
+        {label != null && (
+          <Text bold size={size}>
+            {label}
+          </Text>
         )}
         <TextInputNative
           disabled={disabled}
@@ -108,6 +83,9 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
           ref={this.inputRef}
           {...props}
         />
+        <View style={theme.styles.textInputError}>
+          <ErrorMessage size={size - 1} error={error} />
+        </View>
       </View>
     );
   }

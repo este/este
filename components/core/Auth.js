@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Heading from './Heading';
 import Form from './Form';
-import TextInputBig from './TextInputBig';
+import TextInput from './TextInput';
 import { SignInButton, SignUpButton } from './buttons';
 import Router from 'next/router';
 import withMutation, { type Commit, type Errors } from './withMutation';
@@ -15,6 +15,7 @@ import Block from './Block';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/AuthMutation.graphql';
 import { validateAuth } from '../../server/api/users.mjs';
+import { View } from 'react-native';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -96,11 +97,11 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     const { intl } = this.props;
     const { errors } = this.state;
     return (
-      <>
-        <Heading size={3}>Auth</Heading>
+      <View>
+        <Heading size={2}>Auth</Heading>
         <Form onSubmit={this.signIn}>
           <Block>
-            <TextInputBig
+            <TextInput
               autoComplete="email"
               disabled={this.props.pending}
               error={errors && errors.email}
@@ -111,7 +112,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
               placeholder={intl.formatMessage(messages.emailPlaceholder)}
               value={this.state.email}
             />
-            <TextInputBig
+            <TextInput
               disabled={this.props.pending}
               error={errors && errors.password}
               focusOnError={errors}
@@ -131,7 +132,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             <SignUpButton disabled={this.props.pending} onPress={this.signUp} />
           </Row>
         </Form>
-      </>
+      </View>
     );
   }
 }

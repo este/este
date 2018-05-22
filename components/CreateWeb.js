@@ -2,9 +2,8 @@
 import * as React from 'react';
 import Form from './core/Form';
 import { CreateButton } from './core/buttons';
-import TextInputBig from './core/TextInputBig';
+import TextInput from './core/TextInput';
 import { FormattedMessage } from 'react-intl';
-import Text from './core/Text';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from './core/Row';
 import Block from './core/Block';
@@ -68,14 +67,12 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     return (
       <Form onSubmit={this.createWeb}>
         <Block>
-          <TextInputBig
+          <TextInput
             label={
-              <Text>
-                <FormattedMessage
-                  defaultMessage="Web Name"
-                  id="createWeb.name.label"
-                />
-              </Text>
+              <FormattedMessage
+                defaultMessage="Web Name"
+                id="createWeb.name.label"
+              />
             }
             disabled={this.props.pending}
             error={errors && errors.name}

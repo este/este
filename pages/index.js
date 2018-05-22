@@ -47,7 +47,7 @@ const Index = props => {
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
       {isAuthenticated => (
         <>
-          <Heading size={3}>Este</Heading>
+          <Heading size={2}>Este</Heading>
           {isAuthenticated ? (
             <Authenticated data={props.data} />
           ) : (
