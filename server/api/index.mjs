@@ -85,6 +85,10 @@ const server = new yoga.GraphQLServer({
   typeDefs: 'server/model.graphql',
   resolvers,
   context: createContext,
+  resolverValidationOptions: {
+    // https://github.com/prismagraphql/prisma/issues/2225#issuecomment-384697669
+    requireResolversForResolveType: false,
+  },
 });
 
 server.start(() =>
