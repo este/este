@@ -1,3 +1,7 @@
+# import Web from "../database/schema.graphql"
+# import WebEdge from "../database/schema.graphql"
+# import WebConnection from "../database/schema.graphql"
+
 # https://github.com/este/este/wiki/GraphQL
 
 # Workflow:
@@ -9,10 +13,6 @@
 
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
-
-# import Web from "../database/schema.graphql"
-# import WebEdge from "../database/schema.graphql"
-# import WebConnection from "../database/schema.graphql"
 
 # Business / UI / model errors belong to scheme.
 

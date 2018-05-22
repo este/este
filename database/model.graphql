@@ -1,4 +1,7 @@
-# https://github.com/este/este/wiki/GraphQL
+# http://graphql.org/learn/best-practices/#versioning
+# http://graphql.org/learn/best-practices/#nullability
+# https://medium.com/@calebmer/when-to-use-graphql-non-null-fields-4059337f6fc8
+# http://graphql.org/learn/schema/
 
 type User {
   # non-nullable, because it will never be changed

@@ -13,16 +13,6 @@ module.exports = {
       );
     }
 
-    config.resolve = {
-      ...config.resolve,
-      // .web.js is for React Native Web.
-      extensions: ['.web.js', '.mjs', '.js', '.json'],
-      alias: {
-        ...config.resolve.alias,
-        'react-native': 'react-native-web',
-      },
-    };
-
     return config;
   },
 };

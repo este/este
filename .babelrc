@@ -5,7 +5,8 @@
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
         "inline-dotenv",
-        "relay"
+        "relay",
+        "react-native-web"
       ]
     },
     "production": {
@@ -14,6 +15,7 @@
         "@babel/plugin-proposal-optional-chaining",
         "transform-inline-environment-variables",
         "relay",
+        "react-native-web",
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
@@ -25,7 +27,8 @@
       ],
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
-        "relay"
+        "relay",
+        "react-native-web"
       ]
     }
   }

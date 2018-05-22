@@ -9,6 +9,7 @@
       "plugins": [
         "transform-inline-environment-variables",
         "relay",
+        "react-native-web",
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
