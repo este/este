@@ -75,6 +75,7 @@ const getColorStyle = (themeStyles, color) => {
     case 'gray':
       return themeStyles.textGray;
     default:
+      // eslint-disable-next-line no-unused-expressions
       (color: empty);
       return null;
   }

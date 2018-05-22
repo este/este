@@ -112,6 +112,7 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
           <FormattedMessage defaultMessage="Not exists." id="error.notExists" />
         );
       default:
+        // eslint-disable-next-line no-unused-expressions
         (error: empty);
         return error;
     }

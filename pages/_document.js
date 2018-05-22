@@ -43,7 +43,7 @@ export default class MyDocument extends Document {
   }
 
   render() {
-    const { locale, localeDataScript /*, supportedLocales */ } = this.props;
+    const { locale, localeDataScript /* , supportedLocales */ } = this.props;
 
     return (
       <html lang={locale} style={{ height: '100%', width: '100%' }}>
