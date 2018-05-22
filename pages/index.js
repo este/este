@@ -12,33 +12,18 @@ import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 
-const ManageYourWebsMessage = () => (
-  <FormattedMessage
-    defaultMessage="Manage your webs"
-    id="index.manageYourWebs"
-  />
-);
-
 const Authenticated = ({ data }) => (
   <>
-    <Heading size={1}>{<ManageYourWebsMessage />}</Heading>
+    <Heading size={1}>
+      <FormattedMessage
+        defaultMessage="Manage your webs"
+        id="index.manageYourWebs"
+      />
+    </Heading>
     <Webs data={data} />
     <CreateWeb />
   </>
 );
-
-// import { Platform } from 'react-native';
-// const WebOnlyComponentWithStyledJSX = () =>
-//   Platform.OS === 'web' && (
-//     <>
-//       <h1>fok</h1>
-//       <style jsx>{`
-//         h1 {
-//           color: red;
-//         }
-//       `}</style>
-//     </>
-//   );
 
 const NotAuthenticated = () => (
   <>
