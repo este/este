@@ -1,5 +1,5 @@
-// flow-typed signature: d3449f8ea25c35ca1946ee2466812df8
-// flow-typed version: 8817b601c3/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 317c65c8360a78699afe3d7085835c5a
+// flow-typed version: 6a8644af64/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -503,16 +503,19 @@ declare module ramda {
   >;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
-  declare var startsWith: CurriedFunction2<
-    string | Array<string>,
-    string | Array<string>,
-    boolean
-  >;
-  declare var endsWith: CurriedFunction2<
-    string | Array<string>,
-    string | Array<string>,
-    boolean
-  >;
+  // startsWith and endsWith use the same signature:
+  declare type EdgeWith<A> =
+    & (
+        & ((Array<A>) => (Array<A>) => boolean)
+        & (Array<A>, Array<A>) => boolean
+    )
+    & (
+        & ((string) => (string) => boolean)
+        & (string, string) => boolean
+    )
+  ;
+  declare var startsWith: EdgeWith<*>;
+  declare var endsWith: EdgeWith<*>;
   declare function toLower(a: string): string;
   declare function toString(x: any): string;
   declare function toUpper(a: string): string;

@@ -11,7 +11,7 @@
           {
             "root": ["./"],
             "alias": {
-              "react-native": "react-native-web"
+              "^react-native$": "react-native-web"
             }
           }
         ]
@@ -23,6 +23,15 @@
         "@babel/plugin-proposal-optional-chaining",
         "transform-inline-environment-variables",
         "relay",
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "^react-native$": "react-native-web"
+            }
+          }
+        ],
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
@@ -32,7 +41,19 @@
         "next/babel",
         "@babel/preset-flow"
       ],
-      "plugins": ["@babel/plugin-proposal-optional-chaining", "relay"]
+      "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
+        "relay",
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "^react-native$": "react-native-web"
+            }
+          }
+        ]
+      ]
     }
   }
 }

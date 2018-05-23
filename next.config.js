@@ -19,11 +19,6 @@ module.exports = {
       ...config.resolve,
       // .web.js is for React Native Web.
       extensions: ['.web.js', '.mjs', '.js', '.json'],
-      // Error: Cannot find module 'StyleSheet, code: 'MODULE_NOT_FOUND
-      alias: {
-        ...config.resolve.alias,
-        'react-native': 'react-native-web',
-      },
     };
 
     return config;
