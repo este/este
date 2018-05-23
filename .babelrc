@@ -6,7 +6,15 @@
         "@babel/plugin-proposal-optional-chaining",
         "inline-dotenv",
         "relay",
-        "react-native-web"
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "^react-native$": "react-native-web"
+            }
+          }
+        ]
       ]
     },
     "production": {
@@ -15,7 +23,15 @@
         "@babel/plugin-proposal-optional-chaining",
         "transform-inline-environment-variables",
         "relay",
-        "react-native-web",
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "^react-native$": "react-native-web"
+            }
+          }
+        ],
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
@@ -28,7 +44,15 @@
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
         "relay",
-        "react-native-web"
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "^react-native$": "react-native-web"
+            }
+          }
+        ]
       ]
     }
   }
