@@ -5,16 +5,7 @@
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
         "inline-dotenv",
-        "relay",
-        [
-          "module-resolver",
-          {
-            "root": ["./"],
-            "alias": {
-              "react-native": "react-native-web"
-            }
-          }
-        ]
+        "relay"
       ]
     },
     "production": {
@@ -32,7 +23,10 @@
         "next/babel",
         "@babel/preset-flow"
       ],
-      "plugins": ["@babel/plugin-proposal-optional-chaining", "relay"]
+      "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
+        "relay"
+      ]
     }
   }
 }
