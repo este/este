@@ -6,39 +6,39 @@ Universal React. React + React Native.
 ## Prerequisites
 
 * [node.js](http://nodejs.org/) Node 10+
-* `npm i -g npm@latest`
+* [yarn](https://yarnpkg.com/en/)
 
 ## Setup project
 
 * `git clone https://github.com/este/este.git este`
 * `cd este`
-* `npm i`
+* `yarn`
 
 ## Create Prisma
 
-* `npm run prisma init YourAppName` choose hosted sandbox
+* `yarn prisma init YourAppName` choose hosted sandbox
 * set `.env.dev` PRISMA_ENDPOINT by `YourAppName/prisma.yml` endpoint
 * delete `YourAppName` directory
-* `npm run env dev`
-* `npm run deploy:db`
-* `npm run prisma token` generate token
-* `npm run playground` Set database HTTP HEADERS to { "Authorization": "Bearer token" }
+* `yarn env dev`
+* `yarn deploy:db`
+* `yarn prisma token` generate token
+* `yarn playground` Set database HTTP HEADERS to { "Authorization": "Bearer token" }
 
 ## Dev tasks
 
-* `npm run dev` - start web development
-* `npm run dev:ios`
-* `npm run dev:android`
-* `npm run env dev` - copy `.env.dev` to `.env`
-* `npm run env production` - copy `.env.production` to `.env`
-* `npm run production` - test production build locally
-* `npm run test`
-* `npm run schema-relay` - when `npm run dev` is running to update schema and Relay
-* `npm run deploy:db`
-* `npm run deploy:api`
-* `npm run deploy:web`
-* `npm run messages`
-* `npm run prisma --help`
+* `yarn dev` - start web development
+* `yarn dev:ios`
+* `yarn dev:android`
+* `yarn env dev` - copy `.env.dev` to `.env`
+* `yarn env production` - copy `.env.production` to `.env`
+* `yarn production` - test production build locally
+* `yarn test`
+* `yarn schema-relay` - when `yarn dev` is running to update schema and Relay
+* `yarn deploy:db`
+* `yarn deploy:api`
+* `yarn deploy:web`
+* `yarn messages`
+* `yarn prisma --help`
 
 ## Deploy
 
