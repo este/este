@@ -27,6 +27,7 @@ const Authenticated = ({ data }) => (
 
 const NotAuthenticated = () => (
   <>
+    <Heading size={2}>Este</Heading>
     <Block>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
         <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
@@ -47,7 +48,6 @@ const Index = props => {
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
       {isAuthenticated => (
         <>
-          <Heading size={2}>Este</Heading>
           {isAuthenticated ? (
             <Authenticated data={props.data} />
           ) : (

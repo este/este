@@ -98,7 +98,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     const { errors } = this.state;
     return (
       <View>
-        <Heading size={2}>Auth</Heading>
+        <Heading size={1}>Auth</Heading>
         <Form onSubmit={this.signIn}>
           <Block>
             <TextInput
