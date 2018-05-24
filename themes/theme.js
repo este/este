@@ -92,26 +92,23 @@ const stylesJson = {
   },
 
   pageBody: {
-    paddingTop: typography.rhythm(2),
+    marginBottom: typography.rhythm(2),
   },
 
   pageFooter: {
     borderColor: colors.gray,
     borderTopWidth: 1,
     borderStyle: 'solid',
-    marginTop: typography.rhythm(2),
     paddingVertical: typography.rhythm(1),
   },
 
   mainNav: {
-    backgroundColor: colors.primary,
-    marginVertical: typography.rhythm(0.5),
-    paddingHorizontal: typography.rhythm(0.5),
+    marginTop: typography.rhythm(1),
+    marginBottom: typography.rhythm(2),
   },
 
-  mainNavA: {
-    paddingHorizontal: typography.rhythm(0.5),
-    paddingVertical: typography.rhythm(0.5),
+  mainNavSpacer: {
+    width: typography.rhythm(1),
   },
 
   form: {

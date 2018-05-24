@@ -13,42 +13,30 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainNavA = ({ href, title, theme }) => (
-  <A
-    bold
-    color="white"
-    href={href}
-    fixWebFontSmoothing
-    prefetch
-    style={theme.styles.mainNavA}
-  >
-    <FormattedMessage {...title} />
-  </A>
-);
-
 type MainNavProps = {|
   isAuthenticated: boolean,
   theme: Theme,
 |};
 
 class MainNav extends React.PureComponent<MainNavProps> {
+  static Spacer = ({ theme }) => <View style={theme.styles.mainNavSpacer} />;
+
   render() {
     const { theme, isAuthenticated } = this.props;
     return (
       <View style={[styles.view, theme.styles.mainNav]}>
-        <MainNavA href={{ pathname: '/' }} title={titles.index} theme={theme} />
+        <A href={{ pathname: '/' }} prefetch>
+          <FormattedMessage {...titles.index} />
+        </A>
+        <MainNav.Spacer theme={theme} />
         {isAuthenticated ? (
-          <MainNavA
-            href={{ pathname: '/me' }}
-            title={titles.me}
-            theme={theme}
-          />
+          <A href={{ pathname: '/me' }} prefetch>
+            <FormattedMessage {...titles.me} />
+          </A>
         ) : (
-          <MainNavA
-            href={{ pathname: '/sign-in' }}
-            title={titles.signIn}
-            theme={theme}
-          />
+          <A href={{ pathname: '/sign-in' }} prefetch>
+            <FormattedMessage {...titles.signIn} />
+          </A>
         )}
       </View>
     );
