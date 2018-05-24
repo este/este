@@ -75,6 +75,7 @@ const stylesJson = {
   heading: {
     fontWeight: bold,
     marginBottom: typography.rhythm(1),
+    color: colors.gray,
   },
 
   block: {
