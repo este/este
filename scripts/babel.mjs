@@ -9,5 +9,4 @@ if (fs.existsSync('.env') === false) {
 // `npm run babel web` will copy `.babelrc.web` file to `.babelrc` file.
 const name = process.argv[process.argv.length - 1];
 
-// $FlowFixMe Missing libdefs.
 fs.copyFileSync(`.babelrc.${name}`, '.babelrc');

@@ -53,9 +53,7 @@ include_warnings=true
 ; Uncomment and use once 1) New Relay will be released. 2) Flow fix edge cases.
 ;esproposal.optional_chaining=enable
 ;esproposal.nullish_coalescing=enable
-module.file_ext=.js
-module.file_ext=.jsx
-module.file_ext=.json
+; It's already default, but RN overrides it, so it must be specified here.
 module.file_ext=.mjs
 
 ; RN
