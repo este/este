@@ -1,42 +1,15 @@
-# import Web from "../database/schema.graphql"
-# import WebEdge from "../database/schema.graphql"
-# import WebConnection from "../database/schema.graphql"
-
 # https://github.com/este/este/wiki/GraphQL
-
 # Workflow:
 #   - update model.graphql
 #   - add resolver
 #   - test it in playground
 #   - run `yarn schema-relay` in another terminal window
 #   - restart `yarn dev` in first terminal window
-
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-# Business / UI / model errors belong to scheme.
-
-enum EmailError {
-  NO_TRAILING_SPACES
-  REQUIRED
-  EMAIL
-  ALREADY_EXISTS
-  NOT_EXISTS
-}
-
-enum PasswordError {
-  NO_TRAILING_SPACES
-  REQUIRED
-  MIN_5_CHARS
-  MAX_1024_CHARS
-  WRONG_PASSWORD
-}
-
-enum Max140CharsError {
-  NO_TRAILING_SPACES
-  REQUIRED
-  MAX_140_CHARS
-}
+# import Web, WebEdge, WebConnection from "../database/schema.graphql"
+# import * from "./errors.graphql"
 
 # Like database/model User, but without password, webs, and directives.
 type User {
