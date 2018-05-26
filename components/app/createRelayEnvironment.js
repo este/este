@@ -6,7 +6,7 @@ import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 const createRelayEnvironment = (token: ?string, records: Object = {}) => {
   const store = new Store(new RecordSource(records));
   const network = Network.create((operation, variables) =>
-    fetch(process.env.APP_GRAPHQL_ENDPOINT || '', {
+    fetch(process.env.API_ENDPOINT || '', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

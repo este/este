@@ -38,7 +38,7 @@ const auth /*: Resolver<
   if (errors) return { token: null, errors };
 
   const createAuthPayload = user => ({
-    token: jsonwebtoken.sign({ userId: user.id }, process.env.APP_SECRET || ''),
+    token: jsonwebtoken.sign({ userId: user.id }, process.env.API_SECRET || ''),
     errors: null,
   });
 

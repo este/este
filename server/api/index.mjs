@@ -71,7 +71,7 @@ const createContext = context => ({
     const authorization = context.request.get('authorization');
     if (!authorization) throwHttpStatus(401);
     const token = authorization.replace('Bearer ', '');
-    const decoded = jsonwebtoken.verify(token, process.env.APP_SECRET || '');
+    const decoded = jsonwebtoken.verify(token, process.env.API_SECRET || '');
     // https://flow.org/en/docs/lang/refinements
     // Note refinement must be gradual within if statement because of Flow.
     if (decoded != null && typeof decoded.userId === 'string') {
@@ -93,5 +93,5 @@ const server = new yoga.GraphQLServer({
 
 server.start(() =>
   // eslint-disable-next-line no-console
-  console.log(`API is running on ${process.env.APP_GRAPHQL_ENDPOINT || ''}`),
+  console.log(`API is running on ${process.env.API_ENDPOINT || ''}`),
 );

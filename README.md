@@ -14,9 +14,9 @@ Universal React. React + React Native.
 * `cd este`
 * `yarn`
 
-## Create Prisma
+## Create dev Prisma
 
-* `yarn prisma init YourAppName` choose hosted sandbox
+* `yarn prisma init YourAppName` choose `Demo server`
 * set `.env.dev` PRISMA_ENDPOINT by `YourAppName/prisma.yml` endpoint
 * delete `YourAppName` directory
 * `yarn env dev`
@@ -40,11 +40,15 @@ Universal React. React + React Native.
 * `yarn messages`
 * `yarn prisma --help`
 
+## Add production Prisma
+
+* The same as Create Prisma, but use `production` name, .env.production file, and `yarn env production`.
+
 ## Deploy
 
-* `npm run deploy:db`,
-* `npm run deploy:api`, use URL for APP_GRAPHQL_ENDPOINT in .env.production
-* `npm run deploy:web`
+* `yarn deploy:db`,
+* `yarn deploy:api`, use now generated URL for API_ENDPOINT in .env.production
+* `yarn deploy:web`
 
 ## Links
 
