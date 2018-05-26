@@ -9,7 +9,7 @@ import Row from './core/Row';
 import Block from './core/Block';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
-import { ConnectionHandler } from 'relay-runtime';
+import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
 import { validateCreateWeb } from '../server/api/webs.mjs';
 
 type CreateWebProps = {|
@@ -95,7 +95,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
 const sharedUpdater = (store, recordEdge) => {
   const connection = ConnectionHandler.getConnection(
-    store.get('client:root'),
+    store.get(ROOT_ID),
     'Webs_webs',
   );
   ConnectionHandler.insertEdgeAfter(connection, recordEdge);

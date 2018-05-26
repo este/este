@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql } from 'react-relay';
-import { ConnectionHandler } from 'relay-runtime';
+import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
 import { DeleteButton } from './core/buttons';
 import withMutation, { type Commit } from './core/withMutation';
 import withConfirm, { type Confirm } from './core/withConfirm';
@@ -39,7 +39,7 @@ class Delete extends React.PureComponent<DeleteProps> {
 
 const sharedUpdater = (store, id) => {
   const connection = ConnectionHandler.getConnection(
-    store.get('client:root'),
+    store.get(ROOT_ID),
     'Webs_webs',
   );
   ConnectionHandler.deleteNode(connection, id);
