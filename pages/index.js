@@ -46,15 +46,13 @@ const NotAuthenticated = () => (
 const Index = props => {
   return (
     <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
-      {isAuthenticated => (
-        <>
-          {isAuthenticated ? (
-            <Authenticated data={props.data} />
-          ) : (
-            <NotAuthenticated />
-          )}
-        </>
-      )}
+      {isAuthenticated =>
+        isAuthenticated ? (
+          <Authenticated data={props.data} />
+        ) : (
+          <NotAuthenticated />
+        )
+      }
     </Page>
   );
 };

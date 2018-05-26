@@ -112,11 +112,10 @@ class Page extends React.PureComponent<Props> {
 
   renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
-    if (!authRequired)
-      return typeof this.props.children === 'function'
-        ? this.props.children(isAuthenticated)
-        : this.props.children;
-    return <Auth />;
+    if (authRequired) return <Auth />;
+    return typeof this.props.children === 'function'
+      ? this.props.children(isAuthenticated)
+      : this.props.children;
   }
 
   render() {
