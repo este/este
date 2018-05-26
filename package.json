@@ -110,7 +110,6 @@
     "prisma": "^1.2.4",
     "react-test-renderer": "^16.4.0",
     "relay-compiler": "^1.6.0",
-    "relay-devtools": "^1.4.0",
     "rimraf": "^2.4.5",
     "webpack-bundle-analyzer": "^2.13.0",
     "webpack-bundle-size-analyzer": "^2.7.0"

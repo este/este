@@ -15,10 +15,6 @@ import EnvironmentContext from '../core/EnvironmentContext';
 import ErrorContext, { type ContextError } from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
 
-// https://github.com/facebook/relay/issues/2347
-// const { installRelayDevTools } = require('relay-devtools');
-// installRelayDevTools();
-
 // Polyfill browser stuff.
 // $FlowFixMe It's fine.
 if (process.browser === true) {
