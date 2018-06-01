@@ -1,24 +1,105 @@
 # https://github.com/este/este/wiki/GraphQL
+# https://www.prisma.io/features/data-modeling/
+
+# The ordering and consistent relations names is probably a pattern.
+# Type keys are sorted by id, *At, *ed, values, one relations, many relations.
+# Any "!]!" should have a named relation, imho.
 
 type User {
-  # non-nullable, because it will never be changed
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  # TODO: Refactor to auth providers. Email, Facebook, etc.
   email: String! @unique
   password: String!
-  webs: [Web!]!
-  # nullable, because it can be changed
-  # Just string for now, KISS. We can change it to theme: Theme later.
+  # Optional, because it will be replaced with Theme soon. Evolving ftw.
   themeName: String
+  webs: [Web!]! @relation(name: "UserWebsWebCreator")
+  pages: [Page!]! @relation(name: "UserPagesPageCreator")
+  blocks: [Block!]! @relation(name: "UserBlocksBlockCreator")
+  images: [Image!]! @relation(name: "UserImagesImageCreator")
 }
 
 type Web {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  published: Boolean! @default(value: "false")
   name: String!
-  domain: String! @unique
-  isPublished: Boolean! @default(value: "false")
-  owner: User!
+  domain: String!
+  creator: User! @relation(name: "UserWebsWebCreator")
+  pages: [Page!]! @relation(name: "WebPagesPageWebs")
+  blocks: [Block!]! @relation(name: "WebBlocksBlockWebs")
+}
+
+type Page {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  published: Boolean! @default(value: "false")
+  title: String!
+  block: Block!
+  creator: User! @relation(name: "UserPagesPageCreator")
+  webs: [Web!]! @relation(name: "WebPagesPageWebs")
+}
+
+type Block {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator: User! @relation(name: "UserBlocksBlockCreator")
+  name: Name
+  # Text is rendered before images, images are rendered before children, etc.
+  text: Text
+  images: [Image!]! @relation(name: "BlockImagesImageBlock")
+  children: [Child!]! @relation(name: "BlockChildrenChildBlock")
+  web: [Web!]! @relation(name: "WebBlocksBlockWebs")
+}
+
+# For semantic, look, and behavior. For example: Header, MainNav, etc.
+type Name {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  value: String!
+  creator: User!
+  block: Block!
+}
+
+enum TextFormat {
+  # http://commonmark.org/
+  COMMONMARK_0_28
+  # When a new format is added, the old not yet updated client code has to
+  # handle it. Rendering slightly broken text is better than rendering nothing,
+  # and we can transform text if needed, because we have an explicit version.
+}
+
+type Text {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  format: TextFormat!
+  value: String!
+  creator: User!
+  block: Block!
+}
+
+type Image {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  src: String!
+  width: Int!
+  height: Int!
+  creator: User! @relation(name: "UserImagesImageCreator")
+  block: Block! @relation(name: "BlockImagesImageBlock")
+}
+
+type Child {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  index: Int!
+  creator: User!
+  block: Block! @relation(name: "BlockChildrenChildBlock")
 }
