@@ -62,7 +62,7 @@
     "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.1.1",
-    "next": "6.0.4-canary.1",
+    "next": "6.0.4-canary.3",
     "nprogress": "^0.2.0",
     "open-color": "^1.6.3",
     "prisma-binding": "^2.0.2",
