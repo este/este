@@ -2,7 +2,7 @@
 # https://www.prisma.io/features/data-modeling/
 
 # The ordering and consistent relations names is probably a pattern.
-# Type keys are sorted by id, *At, *ed, values, one relations, many relations.
+# Type keys are sorted by id, *At, *ed, values, one / many relations.
 # Any "!]!" should have a named relation, imho.
 
 type User {
@@ -17,6 +17,7 @@ type User {
   webs: [Web!]! @relation(name: "UserWebsWebCreator")
   pages: [Page!]! @relation(name: "UserPagesPageCreator")
   blocks: [Block!]! @relation(name: "UserBlocksBlockCreator")
+  texts: [Text!]! @relation(name: "UserTextsTextCreator")
   images: [Image!]! @relation(name: "UserImagesImageCreator")
 }
 
@@ -49,11 +50,13 @@ type Block {
   updatedAt: DateTime!
   creator: User! @relation(name: "UserBlocksBlockCreator")
   name: Name
-  # Text is rendered before images, images are rendered before children, etc.
-  text: Text
-  images: [Image!]! @relation(name: "BlockImagesImageBlock")
-  children: [Child!]! @relation(name: "BlockChildrenChildBlock")
   web: [Web!]! @relation(name: "WebBlocksBlockWebs")
+  # Prisma does not support interfaces nor union types yet.
+  # https://github.com/prismagraphql/prisma/issues/165
+  # This is a workaround. Only one content is allowed.
+  content_Text: Text @relation(name: "BlockContentTextTextBlocks")
+  content_Image: Image @relation(name: "BlockContentImageImageBlocks")
+  content_Children: [Child!]! @relation(name: "BlockContentChildrenChildBlock")
 }
 
 # For semantic, look, and behavior. For example: Header, MainNav, etc.
@@ -72,6 +75,7 @@ enum TextFormat {
   # When a new format is added, the old not yet updated client code has to
   # handle it. Rendering slightly broken text is better than rendering nothing,
   # and we can transform text if needed, because we have an explicit version.
+  # Also, client can demand an update if unsupported format is returned.
 }
 
 type Text {
@@ -80,8 +84,8 @@ type Text {
   updatedAt: DateTime!
   format: TextFormat!
   value: String!
-  creator: User!
-  block: Block!
+  creator: User! @relation(name: "UserTextsTextCreator")
+  block: [Block!]! @relation(name: "BlockContentTextTextBlocks")
 }
 
 type Image {
@@ -92,7 +96,7 @@ type Image {
   width: Int!
   height: Int!
   creator: User! @relation(name: "UserImagesImageCreator")
-  block: Block! @relation(name: "BlockImagesImageBlock")
+  block: [Block!]! @relation(name: "BlockContentImageImageBlocks")
 }
 
 type Child {
@@ -101,5 +105,5 @@ type Child {
   updatedAt: DateTime!
   index: Int!
   creator: User!
-  block: Block! @relation(name: "BlockChildrenChildBlock")
+  block: Block! @relation(name: "BlockContentChildrenChildBlock")
 }

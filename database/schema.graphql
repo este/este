@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
-# timestamp: Sat Jun 02 2018 01:37:34 GMT+0200 (CEST)
+# timestamp: Sun Jun 03 2018 01:06:41 GMT+0200 (CEST)
 
 type AggregateBlock {
   count: Int!
@@ -44,10 +44,10 @@ type Block implements Node {
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
   name(where: NameWhereInput): Name
-  text(where: TextWhereInput): Text
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
   web(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  content_Text(where: TextWhereInput): Text
+  content_Image(where: ImageWhereInput): Image
+  content_Children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
 }
 
 """A connection to a list of items."""
@@ -63,10 +63,20 @@ type BlockConnection {
 input BlockCreateInput {
   creator: UserCreateOneWithoutBlocksInput!
   name: NameCreateOneWithoutBlockInput
-  text: TextCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
   web: WebCreateManyWithoutBlocksInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Image: ImageCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
+}
+
+input BlockCreateManyWithoutContent_ImageInput {
+  create: [BlockCreateWithoutContent_ImageInput!]
+  connect: [BlockWhereUniqueInput!]
+}
+
+input BlockCreateManyWithoutContent_TextInput {
+  create: [BlockCreateWithoutContent_TextInput!]
+  connect: [BlockWhereUniqueInput!]
 }
 
 input BlockCreateManyWithoutCreatorInput {
@@ -84,13 +94,8 @@ input BlockCreateOneInput {
   connect: BlockWhereUniqueInput
 }
 
-input BlockCreateOneWithoutChildrenInput {
-  create: BlockCreateWithoutChildrenInput
-  connect: BlockWhereUniqueInput
-}
-
-input BlockCreateOneWithoutImagesInput {
-  create: BlockCreateWithoutImagesInput
+input BlockCreateOneWithoutContent_ChildrenInput {
+  create: BlockCreateWithoutContent_ChildrenInput
   connect: BlockWhereUniqueInput
 }
 
@@ -99,57 +104,52 @@ input BlockCreateOneWithoutNameInput {
   connect: BlockWhereUniqueInput
 }
 
-input BlockCreateOneWithoutTextInput {
-  create: BlockCreateWithoutTextInput
-  connect: BlockWhereUniqueInput
-}
-
-input BlockCreateWithoutChildrenInput {
+input BlockCreateWithoutContent_ChildrenInput {
   creator: UserCreateOneWithoutBlocksInput!
   name: NameCreateOneWithoutBlockInput
-  text: TextCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
   web: WebCreateManyWithoutBlocksInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Image: ImageCreateOneWithoutBlockInput
+}
+
+input BlockCreateWithoutContent_ImageInput {
+  creator: UserCreateOneWithoutBlocksInput!
+  name: NameCreateOneWithoutBlockInput
+  web: WebCreateManyWithoutBlocksInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
+}
+
+input BlockCreateWithoutContent_TextInput {
+  creator: UserCreateOneWithoutBlocksInput!
+  name: NameCreateOneWithoutBlockInput
+  web: WebCreateManyWithoutBlocksInput
+  content_Image: ImageCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
 }
 
 input BlockCreateWithoutCreatorInput {
   name: NameCreateOneWithoutBlockInput
-  text: TextCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
   web: WebCreateManyWithoutBlocksInput
-}
-
-input BlockCreateWithoutImagesInput {
-  creator: UserCreateOneWithoutBlocksInput!
-  name: NameCreateOneWithoutBlockInput
-  text: TextCreateOneWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
-  web: WebCreateManyWithoutBlocksInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Image: ImageCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
 }
 
 input BlockCreateWithoutNameInput {
   creator: UserCreateOneWithoutBlocksInput!
-  text: TextCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
   web: WebCreateManyWithoutBlocksInput
-}
-
-input BlockCreateWithoutTextInput {
-  creator: UserCreateOneWithoutBlocksInput!
-  name: NameCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
-  web: WebCreateManyWithoutBlocksInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Image: ImageCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
 }
 
 input BlockCreateWithoutWebInput {
   creator: UserCreateOneWithoutBlocksInput!
   name: NameCreateOneWithoutBlockInput
-  text: TextCreateOneWithoutBlockInput
-  images: ImageCreateManyWithoutBlockInput
-  children: ChildCreateManyWithoutBlockInput
+  content_Text: TextCreateOneWithoutBlockInput
+  content_Image: ImageCreateOneWithoutBlockInput
+  content_Children: ChildCreateManyWithoutBlockInput
 }
 
 """An edge in a connection."""
@@ -218,19 +218,37 @@ input BlockSubscriptionWhereInput {
 input BlockUpdateDataInput {
   creator: UserUpdateOneWithoutBlocksInput
   name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
   web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
 }
 
 input BlockUpdateInput {
   creator: UserUpdateOneWithoutBlocksInput
   name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
   web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
+}
+
+input BlockUpdateManyWithoutContent_ImageInput {
+  create: [BlockCreateWithoutContent_ImageInput!]
+  connect: [BlockWhereUniqueInput!]
+  disconnect: [BlockWhereUniqueInput!]
+  delete: [BlockWhereUniqueInput!]
+  update: [BlockUpdateWithWhereUniqueWithoutContent_ImageInput!]
+  upsert: [BlockUpsertWithWhereUniqueWithoutContent_ImageInput!]
+}
+
+input BlockUpdateManyWithoutContent_TextInput {
+  create: [BlockCreateWithoutContent_TextInput!]
+  connect: [BlockWhereUniqueInput!]
+  disconnect: [BlockWhereUniqueInput!]
+  delete: [BlockWhereUniqueInput!]
+  update: [BlockUpdateWithWhereUniqueWithoutContent_TextInput!]
+  upsert: [BlockUpsertWithWhereUniqueWithoutContent_TextInput!]
 }
 
 input BlockUpdateManyWithoutCreatorInput {
@@ -259,20 +277,12 @@ input BlockUpdateOneInput {
   upsert: BlockUpsertNestedInput
 }
 
-input BlockUpdateOneWithoutChildrenInput {
-  create: BlockCreateWithoutChildrenInput
+input BlockUpdateOneWithoutContent_ChildrenInput {
+  create: BlockCreateWithoutContent_ChildrenInput
   connect: BlockWhereUniqueInput
   delete: Boolean
-  update: BlockUpdateWithoutChildrenDataInput
-  upsert: BlockUpsertWithoutChildrenInput
-}
-
-input BlockUpdateOneWithoutImagesInput {
-  create: BlockCreateWithoutImagesInput
-  connect: BlockWhereUniqueInput
-  delete: Boolean
-  update: BlockUpdateWithoutImagesDataInput
-  upsert: BlockUpsertWithoutImagesInput
+  update: BlockUpdateWithoutContent_ChildrenDataInput
+  upsert: BlockUpsertWithoutContent_ChildrenInput
 }
 
 input BlockUpdateOneWithoutNameInput {
@@ -283,60 +293,62 @@ input BlockUpdateOneWithoutNameInput {
   upsert: BlockUpsertWithoutNameInput
 }
 
-input BlockUpdateOneWithoutTextInput {
-  create: BlockCreateWithoutTextInput
-  connect: BlockWhereUniqueInput
-  delete: Boolean
-  update: BlockUpdateWithoutTextDataInput
-  upsert: BlockUpsertWithoutTextInput
-}
-
-input BlockUpdateWithoutChildrenDataInput {
+input BlockUpdateWithoutContent_ChildrenDataInput {
   creator: UserUpdateOneWithoutBlocksInput
   name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
   web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+}
+
+input BlockUpdateWithoutContent_ImageDataInput {
+  creator: UserUpdateOneWithoutBlocksInput
+  name: NameUpdateOneWithoutBlockInput
+  web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
+}
+
+input BlockUpdateWithoutContent_TextDataInput {
+  creator: UserUpdateOneWithoutBlocksInput
+  name: NameUpdateOneWithoutBlockInput
+  web: WebUpdateManyWithoutBlocksInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
 }
 
 input BlockUpdateWithoutCreatorDataInput {
   name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
   web: WebUpdateManyWithoutBlocksInput
-}
-
-input BlockUpdateWithoutImagesDataInput {
-  creator: UserUpdateOneWithoutBlocksInput
-  name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
-  web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
 }
 
 input BlockUpdateWithoutNameDataInput {
   creator: UserUpdateOneWithoutBlocksInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
   web: WebUpdateManyWithoutBlocksInput
-}
-
-input BlockUpdateWithoutTextDataInput {
-  creator: UserUpdateOneWithoutBlocksInput
-  name: NameUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
-  web: WebUpdateManyWithoutBlocksInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
 }
 
 input BlockUpdateWithoutWebDataInput {
   creator: UserUpdateOneWithoutBlocksInput
   name: NameUpdateOneWithoutBlockInput
-  text: TextUpdateOneWithoutBlockInput
-  images: ImageUpdateManyWithoutBlockInput
-  children: ChildUpdateManyWithoutBlockInput
+  content_Text: TextUpdateOneWithoutBlockInput
+  content_Image: ImageUpdateOneWithoutBlockInput
+  content_Children: ChildUpdateManyWithoutBlockInput
+}
+
+input BlockUpdateWithWhereUniqueWithoutContent_ImageInput {
+  where: BlockWhereUniqueInput!
+  data: BlockUpdateWithoutContent_ImageDataInput!
+}
+
+input BlockUpdateWithWhereUniqueWithoutContent_TextInput {
+  where: BlockWhereUniqueInput!
+  data: BlockUpdateWithoutContent_TextDataInput!
 }
 
 input BlockUpdateWithWhereUniqueWithoutCreatorInput {
@@ -354,14 +366,9 @@ input BlockUpsertNestedInput {
   create: BlockCreateInput!
 }
 
-input BlockUpsertWithoutChildrenInput {
-  update: BlockUpdateWithoutChildrenDataInput!
-  create: BlockCreateWithoutChildrenInput!
-}
-
-input BlockUpsertWithoutImagesInput {
-  update: BlockUpdateWithoutImagesDataInput!
-  create: BlockCreateWithoutImagesInput!
+input BlockUpsertWithoutContent_ChildrenInput {
+  update: BlockUpdateWithoutContent_ChildrenDataInput!
+  create: BlockCreateWithoutContent_ChildrenInput!
 }
 
 input BlockUpsertWithoutNameInput {
@@ -369,9 +376,16 @@ input BlockUpsertWithoutNameInput {
   create: BlockCreateWithoutNameInput!
 }
 
-input BlockUpsertWithoutTextInput {
-  update: BlockUpdateWithoutTextDataInput!
-  create: BlockCreateWithoutTextInput!
+input BlockUpsertWithWhereUniqueWithoutContent_ImageInput {
+  where: BlockWhereUniqueInput!
+  update: BlockUpdateWithoutContent_ImageDataInput!
+  create: BlockCreateWithoutContent_ImageInput!
+}
+
+input BlockUpsertWithWhereUniqueWithoutContent_TextInput {
+  where: BlockWhereUniqueInput!
+  update: BlockUpdateWithoutContent_TextDataInput!
+  create: BlockCreateWithoutContent_TextInput!
 }
 
 input BlockUpsertWithWhereUniqueWithoutCreatorInput {
@@ -481,16 +495,14 @@ input BlockWhereInput {
   updatedAt_gte: DateTime
   creator: UserWhereInput
   name: NameWhereInput
-  text: TextWhereInput
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
-  children_every: ChildWhereInput
-  children_some: ChildWhereInput
-  children_none: ChildWhereInput
   web_every: WebWhereInput
   web_some: WebWhereInput
   web_none: WebWhereInput
+  content_Text: TextWhereInput
+  content_Image: ImageWhereInput
+  content_Children_every: ChildWhereInput
+  content_Children_some: ChildWhereInput
+  content_Children_none: ChildWhereInput
 }
 
 input BlockWhereUniqueInput {
@@ -519,7 +531,7 @@ type ChildConnection {
 input ChildCreateInput {
   index: Int!
   creator: UserCreateOneInput!
-  block: BlockCreateOneWithoutChildrenInput!
+  block: BlockCreateOneWithoutContent_ChildrenInput!
 }
 
 input ChildCreateManyWithoutBlockInput {
@@ -601,7 +613,7 @@ input ChildSubscriptionWhereInput {
 input ChildUpdateInput {
   index: Int
   creator: UserUpdateOneInput
-  block: BlockUpdateOneWithoutChildrenInput
+  block: BlockUpdateOneWithoutContent_ChildrenInput
 }
 
 input ChildUpdateManyWithoutBlockInput {
@@ -762,7 +774,7 @@ type Image implements Node {
   width: Int!
   height: Int!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
+  block(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block!]
 }
 
 """A connection to a list of items."""
@@ -780,17 +792,17 @@ input ImageCreateInput {
   width: Int!
   height: Int!
   creator: UserCreateOneWithoutImagesInput!
-  block: BlockCreateOneWithoutImagesInput!
-}
-
-input ImageCreateManyWithoutBlockInput {
-  create: [ImageCreateWithoutBlockInput!]
-  connect: [ImageWhereUniqueInput!]
+  block: BlockCreateManyWithoutContent_ImageInput
 }
 
 input ImageCreateManyWithoutCreatorInput {
   create: [ImageCreateWithoutCreatorInput!]
   connect: [ImageWhereUniqueInput!]
+}
+
+input ImageCreateOneWithoutBlockInput {
+  create: ImageCreateWithoutBlockInput
+  connect: ImageWhereUniqueInput
 }
 
 input ImageCreateWithoutBlockInput {
@@ -804,7 +816,7 @@ input ImageCreateWithoutCreatorInput {
   src: String!
   width: Int!
   height: Int!
-  block: BlockCreateOneWithoutImagesInput!
+  block: BlockCreateManyWithoutContent_ImageInput
 }
 
 """An edge in a connection."""
@@ -884,16 +896,7 @@ input ImageUpdateInput {
   width: Int
   height: Int
   creator: UserUpdateOneWithoutImagesInput
-  block: BlockUpdateOneWithoutImagesInput
-}
-
-input ImageUpdateManyWithoutBlockInput {
-  create: [ImageCreateWithoutBlockInput!]
-  connect: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  delete: [ImageWhereUniqueInput!]
-  update: [ImageUpdateWithWhereUniqueWithoutBlockInput!]
-  upsert: [ImageUpsertWithWhereUniqueWithoutBlockInput!]
+  block: BlockUpdateManyWithoutContent_ImageInput
 }
 
 input ImageUpdateManyWithoutCreatorInput {
@@ -903,6 +906,15 @@ input ImageUpdateManyWithoutCreatorInput {
   delete: [ImageWhereUniqueInput!]
   update: [ImageUpdateWithWhereUniqueWithoutCreatorInput!]
   upsert: [ImageUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ImageUpdateOneWithoutBlockInput {
+  create: ImageCreateWithoutBlockInput
+  connect: ImageWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ImageUpdateWithoutBlockDataInput
+  upsert: ImageUpsertWithoutBlockInput
 }
 
 input ImageUpdateWithoutBlockDataInput {
@@ -916,12 +928,7 @@ input ImageUpdateWithoutCreatorDataInput {
   src: String
   width: Int
   height: Int
-  block: BlockUpdateOneWithoutImagesInput
-}
-
-input ImageUpdateWithWhereUniqueWithoutBlockInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateWithoutBlockDataInput!
+  block: BlockUpdateManyWithoutContent_ImageInput
 }
 
 input ImageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -929,8 +936,7 @@ input ImageUpdateWithWhereUniqueWithoutCreatorInput {
   data: ImageUpdateWithoutCreatorDataInput!
 }
 
-input ImageUpsertWithWhereUniqueWithoutBlockInput {
-  where: ImageWhereUniqueInput!
+input ImageUpsertWithoutBlockInput {
   update: ImageUpdateWithoutBlockDataInput!
   create: ImageCreateWithoutBlockInput!
 }
@@ -1119,7 +1125,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  block: BlockWhereInput
+  block_every: BlockWhereInput
+  block_some: BlockWhereInput
+  block_none: BlockWhereInput
 }
 
 input ImageWhereUniqueInput {
@@ -1860,7 +1868,7 @@ type Text implements Node {
   format: TextFormat!
   value: String!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
+  block(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block!]
 }
 
 """A connection to a list of items."""
@@ -1876,8 +1884,13 @@ type TextConnection {
 input TextCreateInput {
   format: TextFormat!
   value: String!
-  creator: UserCreateOneInput!
-  block: BlockCreateOneWithoutTextInput!
+  creator: UserCreateOneWithoutTextsInput!
+  block: BlockCreateManyWithoutContent_TextInput
+}
+
+input TextCreateManyWithoutCreatorInput {
+  create: [TextCreateWithoutCreatorInput!]
+  connect: [TextWhereUniqueInput!]
 }
 
 input TextCreateOneWithoutBlockInput {
@@ -1888,7 +1901,13 @@ input TextCreateOneWithoutBlockInput {
 input TextCreateWithoutBlockInput {
   format: TextFormat!
   value: String!
-  creator: UserCreateOneInput!
+  creator: UserCreateOneWithoutTextsInput!
+}
+
+input TextCreateWithoutCreatorInput {
+  format: TextFormat!
+  value: String!
+  block: BlockCreateManyWithoutContent_TextInput
 }
 
 """An edge in a connection."""
@@ -1967,8 +1986,17 @@ input TextSubscriptionWhereInput {
 input TextUpdateInput {
   format: TextFormat
   value: String
-  creator: UserUpdateOneInput
-  block: BlockUpdateOneWithoutTextInput
+  creator: UserUpdateOneWithoutTextsInput
+  block: BlockUpdateManyWithoutContent_TextInput
+}
+
+input TextUpdateManyWithoutCreatorInput {
+  create: [TextCreateWithoutCreatorInput!]
+  connect: [TextWhereUniqueInput!]
+  disconnect: [TextWhereUniqueInput!]
+  delete: [TextWhereUniqueInput!]
+  update: [TextUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [TextUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
 input TextUpdateOneWithoutBlockInput {
@@ -1983,12 +2011,29 @@ input TextUpdateOneWithoutBlockInput {
 input TextUpdateWithoutBlockDataInput {
   format: TextFormat
   value: String
-  creator: UserUpdateOneInput
+  creator: UserUpdateOneWithoutTextsInput
+}
+
+input TextUpdateWithoutCreatorDataInput {
+  format: TextFormat
+  value: String
+  block: BlockUpdateManyWithoutContent_TextInput
+}
+
+input TextUpdateWithWhereUniqueWithoutCreatorInput {
+  where: TextWhereUniqueInput!
+  data: TextUpdateWithoutCreatorDataInput!
 }
 
 input TextUpsertWithoutBlockInput {
   update: TextUpdateWithoutBlockDataInput!
   create: TextCreateWithoutBlockInput!
+}
+
+input TextUpsertWithWhereUniqueWithoutCreatorInput {
+  where: TextWhereUniqueInput!
+  update: TextUpdateWithoutCreatorDataInput!
+  create: TextCreateWithoutCreatorInput!
 }
 
 input TextWhereInput {
@@ -2135,7 +2180,9 @@ input TextWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   creator: UserWhereInput
-  block: BlockWhereInput
+  block_every: BlockWhereInput
+  block_some: BlockWhereInput
+  block_none: BlockWhereInput
 }
 
 input TextWhereUniqueInput {
@@ -2152,6 +2199,7 @@ type User implements Node {
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
   blocks(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block!]
+  texts(where: TextWhereInput, orderBy: TextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Text!]
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
@@ -2172,6 +2220,7 @@ input UserCreateInput {
   webs: WebCreateManyWithoutCreatorInput
   pages: PageCreateManyWithoutCreatorInput
   blocks: BlockCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
 
@@ -2195,6 +2244,11 @@ input UserCreateOneWithoutPagesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutTextsInput {
+  create: UserCreateWithoutTextsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutWebsInput {
   create: UserCreateWithoutWebsInput
   connect: UserWhereUniqueInput
@@ -2206,6 +2260,7 @@ input UserCreateWithoutBlocksInput {
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
   pages: PageCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
 
@@ -2216,6 +2271,7 @@ input UserCreateWithoutImagesInput {
   webs: WebCreateManyWithoutCreatorInput
   pages: PageCreateManyWithoutCreatorInput
   blocks: BlockCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
 }
 
 input UserCreateWithoutPagesInput {
@@ -2223,6 +2279,17 @@ input UserCreateWithoutPagesInput {
   password: String!
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
+  blocks: BlockCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
+}
+
+input UserCreateWithoutTextsInput {
+  email: String!
+  password: String!
+  themeName: String
+  webs: WebCreateManyWithoutCreatorInput
+  pages: PageCreateManyWithoutCreatorInput
   blocks: BlockCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
@@ -2233,6 +2300,7 @@ input UserCreateWithoutWebsInput {
   themeName: String
   pages: PageCreateManyWithoutCreatorInput
   blocks: BlockCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
 
@@ -2315,6 +2383,7 @@ input UserUpdateDataInput {
   webs: WebUpdateManyWithoutCreatorInput
   pages: PageUpdateManyWithoutCreatorInput
   blocks: BlockUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
 
@@ -2325,6 +2394,7 @@ input UserUpdateInput {
   webs: WebUpdateManyWithoutCreatorInput
   pages: PageUpdateManyWithoutCreatorInput
   blocks: BlockUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
 
@@ -2360,6 +2430,14 @@ input UserUpdateOneWithoutPagesInput {
   upsert: UserUpsertWithoutPagesInput
 }
 
+input UserUpdateOneWithoutTextsInput {
+  create: UserCreateWithoutTextsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutTextsDataInput
+  upsert: UserUpsertWithoutTextsInput
+}
+
 input UserUpdateOneWithoutWebsInput {
   create: UserCreateWithoutWebsInput
   connect: UserWhereUniqueInput
@@ -2374,6 +2452,7 @@ input UserUpdateWithoutBlocksDataInput {
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
   pages: PageUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
 
@@ -2384,6 +2463,7 @@ input UserUpdateWithoutImagesDataInput {
   webs: WebUpdateManyWithoutCreatorInput
   pages: PageUpdateManyWithoutCreatorInput
   blocks: BlockUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
 }
 
 input UserUpdateWithoutPagesDataInput {
@@ -2391,6 +2471,17 @@ input UserUpdateWithoutPagesDataInput {
   password: String
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
+  blocks: BlockUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
+input UserUpdateWithoutTextsDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
   blocks: BlockUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
@@ -2401,6 +2492,7 @@ input UserUpdateWithoutWebsDataInput {
   themeName: String
   pages: PageUpdateManyWithoutCreatorInput
   blocks: BlockUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
 
@@ -2422,6 +2514,11 @@ input UserUpsertWithoutImagesInput {
 input UserUpsertWithoutPagesInput {
   update: UserUpdateWithoutPagesDataInput!
   create: UserCreateWithoutPagesInput!
+}
+
+input UserUpsertWithoutTextsInput {
+  update: UserUpdateWithoutTextsDataInput!
+  create: UserCreateWithoutTextsInput!
 }
 
 input UserUpsertWithoutWebsInput {
@@ -2651,6 +2748,9 @@ input UserWhereInput {
   blocks_every: BlockWhereInput
   blocks_some: BlockWhereInput
   blocks_none: BlockWhereInput
+  texts_every: TextWhereInput
+  texts_some: TextWhereInput
+  texts_none: TextWhereInput
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
