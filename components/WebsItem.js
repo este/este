@@ -17,12 +17,12 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
     const { data } = this.props;
     return (
       <Block>
-        <Text>{data.name}</Text>
-        <Text color="gray" size={-1}>
+        <Text>
           <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
-            {data.domain}
+            {data.name}
           </A>
-          {', '}
+        </Text>
+        <Text color="gray" size={-1}>
           <FormattedRelative value={data.updatedAt} />
           <Text>
             {', '}
