@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
-# timestamp: Mon Jun 04 2018 00:31:08 GMT+0200 (CEST)
+# timestamp: Mon Jun 04 2018 21:48:42 GMT+0200 (CEST)
 
 type AggregateChild {
   count: Int!
@@ -3239,4 +3239,5 @@ input WebWhereInput {
 
 input WebWhereUniqueInput {
   id: ID
+  domain: String
 }
