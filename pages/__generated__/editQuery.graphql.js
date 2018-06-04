@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3b22d2d32ac969548bfd2595d52d51f9
+ * @relayHash df976d841e2adaec10f8d7953eef0400
  */
 
 /* eslint-disable */
@@ -9,13 +9,15 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type Page$ref = any;
 export type editQueryVariables = {|
   domain: string
 |};
 export type editQueryResponse = {|
   +web: ?{|
     +name: string
-  |}
+  |},
+  +$fragmentRefs: Page$ref,
 |};
 */
 
@@ -27,6 +29,14 @@ query editQuery(
   web(domain: $domain) {
     name
     id
+  }
+  ...Page
+}
+
+fragment Page on Query {
+  me {
+    id
+    themeName
   }
 }
 */
@@ -54,13 +64,20 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n}\n",
+  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -80,6 +97,11 @@ return {
         "selections": [
           v2
         ]
+      },
+      {
+        "kind": "FragmentSpread",
+        "name": "Page",
+        "args": null
       }
     ]
   },
@@ -98,10 +120,23 @@ return {
         "plural": false,
         "selections": [
           v2,
+          v3
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "me",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          v3,
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "id",
+            "name": "themeName",
             "args": null,
             "storageKey": null
           }
@@ -112,5 +147,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '93da25a514396eb252c01bab272f5920';
+(node/*: any*/).hash = '2101a63e202f11e833ff887b16aca204';
 module.exports = node;
