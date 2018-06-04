@@ -7,7 +7,7 @@ import jsonwebtoken from 'jsonwebtoken';
 // - update database/model.graphql
 // - yarn deploy:db
 // - test it in playground
-// - update server/model.graphql
+// - update server/api/model.graphql
 // - add resolver here
 // - test it in playground
 // - yarn schema-relay
@@ -82,7 +82,7 @@ const createContext = context => ({
 });
 
 const server = new yoga.GraphQLServer({
-  typeDefs: 'server/model.graphql',
+  typeDefs: 'server/api/model.graphql',
   resolvers,
   context: createContext,
   resolverValidationOptions: {

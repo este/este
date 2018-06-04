@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Jun 02 2018 02:25:10 GMT+0200 (CEST)
+# timestamp: Mon Jun 04 2018 03:04:51 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
@@ -22,141 +22,13 @@ type AuthPayload {
   errors: AuthErrors
 }
 
-type Block implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  creator(where: UserWhereInput): User!
-  name(where: NameWhereInput): Name
-  text(where: TextWhereInput): Text
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
-  web(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-}
-
-enum BlockOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-input BlockWhereInput {
-  """Logical AND on all given filters."""
-  AND: [BlockWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [BlockWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [BlockWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  creator: UserWhereInput
-  name: NameWhereInput
-  text: TextWhereInput
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
-  children_every: ChildWhereInput
-  children_some: ChildWhereInput
-  children_none: ChildWhereInput
-  web_every: WebWhereInput
-  web_some: WebWhereInput
-  web_none: WebWhereInput
-}
-
 type Child implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   index: Int!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
+  element(where: ElementWhereInput): Element!
 }
 
 enum ChildOrderByInput {
@@ -286,7 +158,7 @@ input ChildWhereInput {
   """All values greater than or equal the given value."""
   index_gte: Int
   creator: UserWhereInput
-  block: BlockWhereInput
+  element: ElementWhereInput
 }
 
 type CreateWebErrors {
@@ -312,6 +184,130 @@ type DeleteWebPayload {
   id: ID
 }
 
+type Element implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name(where: NameWhereInput): Name
+  creator(where: UserWhereInput): User!
+  web(where: WebWhereInput): Web!
+  content_Children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
+  content_Text(where: TextWhereInput): Text
+  content_Image(where: ImageWhereInput): Image
+}
+
+enum ElementOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input ElementWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  name: NameWhereInput
+  creator: UserWhereInput
+  web: WebWhereInput
+  content_Children_every: ChildWhereInput
+  content_Children_some: ChildWhereInput
+  content_Children_none: ChildWhereInput
+  content_Text: TextWhereInput
+  content_Image: ImageWhereInput
+}
+
 enum EmailError {
   NO_TRAILING_SPACES
   REQUIRED
@@ -328,22 +324,7 @@ type Image implements Node {
   width: Int!
   height: Int!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
-}
-
-enum ImageOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  src_ASC
-  src_DESC
-  width_ASC
-  width_DESC
-  height_ASC
-  height_DESC
+  element(where: ElementWhereInput): Element!
 }
 
 input ImageWhereInput {
@@ -524,7 +505,7 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  block: BlockWhereInput
+  element: ElementWhereInput
 }
 
 enum Max140CharsError {
@@ -546,7 +527,19 @@ type Name implements Node {
   updatedAt: DateTime!
   value: String!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
+  element(where: ElementWhereInput): Element!
+  web(where: WebWhereInput): Web!
+}
+
+enum NameOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  value_ASC
+  value_DESC
 }
 
 input NameWhereInput {
@@ -683,7 +676,8 @@ input NameWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   creator: UserWhereInput
-  block: BlockWhereInput
+  element: ElementWhereInput
+  web: WebWhereInput
 }
 
 """An object with an ID"""
@@ -698,9 +692,9 @@ type Page implements Node {
   updatedAt: DateTime!
   published: Boolean!
   title: String!
-  block(where: BlockWhereInput): Block!
   creator(where: UserWhereInput): User!
-  webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  element(where: ElementWhereInput): Element!
+  web(where: WebWhereInput): Web!
 }
 
 """Information about pagination in a connection."""
@@ -868,11 +862,9 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  block: BlockWhereInput
   creator: UserWhereInput
-  webs_every: WebWhereInput
-  webs_some: WebWhereInput
-  webs_none: WebWhereInput
+  element: ElementWhereInput
+  web: WebWhereInput
 }
 
 enum PasswordError {
@@ -904,7 +896,7 @@ type Text implements Node {
   format: TextFormat!
   value: String!
   creator(where: UserWhereInput): User!
-  block(where: BlockWhereInput): Block!
+  element(where: ElementWhereInput): Element!
 }
 
 enum TextFormat {
@@ -1055,7 +1047,7 @@ input TextWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   creator: UserWhereInput
-  block: BlockWhereInput
+  element: ElementWhereInput
 }
 
 type User {
@@ -1285,9 +1277,12 @@ input UserWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  blocks_every: BlockWhereInput
-  blocks_some: BlockWhereInput
-  blocks_none: BlockWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  texts_every: TextWhereInput
+  texts_some: TextWhereInput
+  texts_none: TextWhereInput
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -1302,7 +1297,8 @@ type Web implements Node {
   domain: String!
   creator(where: UserWhereInput): User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  blocks(where: BlockWhereInput, orderBy: BlockOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Block!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  names(where: NameWhereInput, orderBy: NameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Name!]
 }
 
 """A connection to a list of items."""
@@ -1322,21 +1318,6 @@ type WebEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
-}
-
-enum WebOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  published_ASC
-  published_DESC
-  name_ASC
-  name_DESC
-  domain_ASC
-  domain_DESC
 }
 
 input WebWhereInput {
@@ -1520,7 +1501,10 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  blocks_every: BlockWhereInput
-  blocks_some: BlockWhereInput
-  blocks_none: BlockWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  names_every: NameWhereInput
+  names_some: NameWhereInput
+  names_none: NameWhereInput
 }

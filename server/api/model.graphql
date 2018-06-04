@@ -8,7 +8,7 @@
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-# import Web, WebEdge, WebConnection from "../database/schema.graphql"
+# import Web, WebEdge, WebConnection from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 # Like database/model User, but without password, webs, and directives.
