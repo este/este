@@ -18,6 +18,17 @@ export const validateCreateWeb = (input /*: CreateWebInput */) => {
   if (name) return { name };
 };
 
+const createWebDomainWithTimestamp = name => {
+  const domainName = name
+    .toLowerCase()
+    .split('')
+    .map(char => diacriticsMap[char] || char)
+    .join('')
+    .replace(/[^a-z0-9]/g, '');
+  const timestamp = Date.now().toString(36);
+  return `${domainName}-${timestamp}`;
+};
+
 const createWeb /*: Resolver<
   CreateWebMutationVariables,
   CreateWebMutationResponse,
@@ -32,14 +43,7 @@ const createWeb /*: Resolver<
   const errors = validateCreateWeb(input);
   if (errors) return { edge: null, errors };
 
-  const domainName = input.name
-    .toLowerCase()
-    .split('')
-    .map(char => diacriticsMap[char] || char)
-    .join('')
-    .replace(/[^a-z0-9]/g, '');
-  const timestamp = Date.now().toString(36);
-  const domain = `${domainName}-${timestamp}`;
+  const domain = createWebDomainWithTimestamp(input.name);
 
   const web = await context.db.mutation.createWeb({
     data: {
