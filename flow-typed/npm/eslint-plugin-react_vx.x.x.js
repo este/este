@@ -1,4 +1,4 @@
-// flow-typed signature: feaafadb04cdadc428484b785aaad9e3
+// flow-typed signature: f632e730f3f417b3aa82e131ad31aab1
 // flow-typed version: <<STUB>>/eslint-plugin-react_v^7.7.0/flow_v0.73.0
 
 /**
@@ -151,6 +151,10 @@ declare module 'eslint-plugin-react/lib/rules/jsx-one-expression-per-line' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/jsx-pascal-case' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces' {
   declare module.exports: any;
 }
 
@@ -467,6 +471,9 @@ declare module 'eslint-plugin-react/lib/rules/jsx-one-expression-per-line.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-pascal-case.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-pascal-case'>;
+}
+declare module 'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces'>;
 }
 declare module 'eslint-plugin-react/lib/rules/jsx-sort-default-props.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-sort-default-props'>;
