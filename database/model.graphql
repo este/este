@@ -1,9 +1,8 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
 
-# The ordering and consistent relations names is probably a pattern.
 # Type keys are sorted by id, *At, *ed, values, one / many relations.
-# Any "!]!" should have a named relation, imho.
+# TIP: To wipeout DB, comment everything then `yarn deploy:db --force`
 
 type User {
   id: ID! @unique
@@ -14,11 +13,11 @@ type User {
   password: String!
   # Optional, because it will be replaced with Theme soon. Evolving ftw.
   themeName: String
-  webs: [Web!]! @relation(name: "UserWebsWebCreator")
-  pages: [Page!]! @relation(name: "UserPagesPageCreator")
-  blocks: [Block!]! @relation(name: "UserBlocksBlockCreator")
-  texts: [Text!]! @relation(name: "UserTextsTextCreator")
-  images: [Image!]! @relation(name: "UserImagesImageCreator")
+  webs: [Web!]!
+  pages: [Page!]!
+  elements: [Element!]!
+  texts: [Text!]!
+  images: [Image!]!
 }
 
 type Web {
@@ -28,9 +27,10 @@ type Web {
   published: Boolean! @default(value: "false")
   name: String!
   domain: String!
-  creator: User! @relation(name: "UserWebsWebCreator")
-  pages: [Page!]! @relation(name: "WebPagesPageWebs")
-  blocks: [Block!]! @relation(name: "WebBlocksBlockWebs")
+  creator: User!
+  pages: [Page!]!
+  elements: [Element!]!
+  names: [Name!]!
 }
 
 type Page {
@@ -39,24 +39,24 @@ type Page {
   updatedAt: DateTime!
   published: Boolean! @default(value: "false")
   title: String!
-  block: Block!
-  creator: User! @relation(name: "UserPagesPageCreator")
-  webs: [Web!]! @relation(name: "WebPagesPageWebs")
+  creator: User!
+  element: Element!
+  web: Web!
 }
 
-type Block {
+type Element {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  creator: User! @relation(name: "UserBlocksBlockCreator")
   name: Name
-  web: [Web!]! @relation(name: "WebBlocksBlockWebs")
+  creator: User!
+  web: Web!
   # Prisma does not support interfaces nor union types yet.
   # https://github.com/prismagraphql/prisma/issues/165
   # This is a workaround. Only one content is allowed.
-  content_Text: Text @relation(name: "BlockContentTextTextBlocks")
-  content_Image: Image @relation(name: "BlockContentImageImageBlocks")
-  content_Children: [Child!]! @relation(name: "BlockContentChildrenChildBlock")
+  content_Children: [Child!]!
+  content_Text: Text
+  content_Image: Image
 }
 
 # For semantic, look, and behavior. For example: Header, MainNav, etc.
@@ -66,7 +66,17 @@ type Name {
   updatedAt: DateTime!
   value: String!
   creator: User!
-  block: Block!
+  element: Element!
+  web: Web!
+}
+
+type Child {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  index: Int!
+  creator: User!
+  element: Element!
 }
 
 enum TextFormat {
@@ -84,10 +94,11 @@ type Text {
   updatedAt: DateTime!
   format: TextFormat!
   value: String!
-  creator: User! @relation(name: "UserTextsTextCreator")
-  block: [Block!]! @relation(name: "BlockContentTextTextBlocks")
+  creator: User!
+  element: Element!
 }
 
+# TODO: AWS asset type probably.
 type Image {
   id: ID! @unique
   createdAt: DateTime!
@@ -95,15 +106,6 @@ type Image {
   src: String!
   width: Int!
   height: Int!
-  creator: User! @relation(name: "UserImagesImageCreator")
-  block: [Block!]! @relation(name: "BlockContentImageImageBlocks")
-}
-
-type Child {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
   creator: User!
-  block: Block! @relation(name: "BlockContentChildrenChildBlock")
+  element: Element!
 }
