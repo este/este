@@ -6,9 +6,5 @@ jobs:
       - image: circleci/node:10.1.0
     steps:
       - checkout
-      - run: 'sudo npm install -g npm@latest'
-      - run: npm install
-      - run: npm test
-
-      # TODO: Doesn't work, investigate why.
-      # http://macklin.underdown.me/2017/07/27/deploy-to-now-from-circleci
+      - run: yarn
+      - run: yarn test

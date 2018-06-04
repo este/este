@@ -5,11 +5,6 @@ import LocaleContext from './LocaleContext';
 import { defaultLocale } from '../../server/constants.mjs';
 
 class SwitchLocale extends React.PureComponent<{}> {
-  static getLocaleHref = (pathname: string, locale: string) => {
-    if (defaultLocale === locale) return pathname;
-    return `${pathname}?locale=${locale}`;
-  };
-
   static localeToLanguageName = (locale: string) => {
     switch (locale) {
       case 'cs':
@@ -19,6 +14,11 @@ class SwitchLocale extends React.PureComponent<{}> {
       default:
         return locale;
     }
+  };
+
+  static getLocaleHref = (pathname: string, locale: string) => {
+    if (defaultLocale === locale) return pathname;
+    return `${pathname}?locale=${locale}`;
   };
 
   render() {

@@ -68,6 +68,19 @@ const app = (
   const { query } = options || {};
 
   class App extends React.PureComponent<AppProps, AppState> {
+    constructor(props: AppProps) {
+      super(props);
+      this.environment = createRelayEnvironment(props.token, props.records);
+      this.localeContext = {
+        current: props.locale,
+        supported: props.supportedLocales,
+      };
+    }
+
+    state = {
+      errorContext: { error: null, dispatchError: this.dispatchError },
+    };
+
     static async getInitialProps(context: AppContext) {
       const cookie = getCookie(context.req);
       const token = cookie && cookie.token;
@@ -100,25 +113,12 @@ const app = (
       }: AppProps);
     }
 
-    constructor(props: AppProps) {
-      super(props);
-      this.environment = createRelayEnvironment(props.token, props.records);
-      this.localeContext = {
-        current: props.locale,
-        supported: props.supportedLocales,
-      };
-    }
-
     // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
     // dispatchError must be defined before state because of this.dispatchError
     // eslint-disable-next-line react/sort-comp
     dispatchError = (error: ContextError) => {
       const { dispatchError } = this;
       this.setState({ errorContext: { error, dispatchError } });
-    };
-
-    state = {
-      errorContext: { error: null, dispatchError: this.dispatchError },
     };
 
     environment: Environment;

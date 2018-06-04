@@ -1,24 +1,111 @@
 # https://github.com/este/este/wiki/GraphQL
+# https://www.prisma.io/features/data-modeling/
+
+# Type keys are sorted by id, *At, *ed, values, one / many relations.
+# TIP: To wipeout DB, comment everything then `yarn deploy:db --force`
 
 type User {
-  # non-nullable, because it will never be changed
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  # TODO: Refactor to auth providers. Email, Facebook, etc.
   email: String! @unique
   password: String!
-  webs: [Web!]!
-  # nullable, because it can be changed
-  # Just string for now, KISS. We can change it to theme: Theme later.
+  # Optional, because it will be replaced with Theme soon. Evolving ftw.
   themeName: String
+  webs: [Web!]!
+  pages: [Page!]!
+  elements: [Element!]!
+  texts: [Text!]!
+  images: [Image!]!
 }
 
 type Web {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  published: Boolean! @default(value: "false")
   name: String!
-  domain: String! @unique
-  isPublished: Boolean! @default(value: "false")
-  owner: User!
+  domain: String!
+  creator: User!
+  pages: [Page!]!
+  elements: [Element!]!
+  names: [Name!]!
+}
+
+type Page {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  published: Boolean! @default(value: "false")
+  title: String!
+  creator: User!
+  element: Element!
+  web: Web!
+}
+
+type Element {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: Name
+  creator: User!
+  web: Web!
+  # Prisma does not support interfaces nor union types yet.
+  # https://github.com/prismagraphql/prisma/issues/165
+  # This is a workaround. Only one content is allowed.
+  content_Children: [Child!]!
+  content_Text: Text
+  content_Image: Image
+}
+
+# For semantic, look, and behavior. For example: Header, MainNav, etc.
+type Name {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  value: String!
+  creator: User!
+  element: Element!
+  web: Web!
+}
+
+type Child {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  index: Int!
+  creator: User!
+  element: Element!
+}
+
+enum TextFormat {
+  # http://commonmark.org/
+  COMMONMARK_0_28
+  # When a new format is added, the old not yet updated client code has to
+  # handle it. Rendering slightly broken text is better than rendering nothing,
+  # and we can transform text if needed, because we have an explicit version.
+  # Also, client can demand an update if unsupported format is returned.
+}
+
+type Text {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  format: TextFormat!
+  value: String!
+  creator: User!
+  element: Element!
+}
+
+# TODO: AWS asset type probably.
+type Image {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  src: String!
+  width: Int!
+  height: Int!
+  creator: User!
+  element: Element!
 }

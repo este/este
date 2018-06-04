@@ -1,5 +1,29 @@
-# source: https://eu1.prisma.sh/public-rhinestonesinger-244/Este/dev
-# timestamp: Mon May 07 2018 01:12:04 GMT+0200 (CEST)
+# source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
+# timestamp: Mon Jun 04 2018 00:31:08 GMT+0200 (CEST)
+
+type AggregateChild {
+  count: Int!
+}
+
+type AggregateElement {
+  count: Int!
+}
+
+type AggregateImage {
+  count: Int!
+}
+
+type AggregateName {
+  count: Int!
+}
+
+type AggregatePage {
+  count: Int!
+}
+
+type AggregateText {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -14,7 +38,1083 @@ type BatchPayload {
   count: Long!
 }
 
+type Child implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  index: Int!
+  creator(where: UserWhereInput): User!
+  element(where: ElementWhereInput): Element!
+}
+
+"""A connection to a list of items."""
+type ChildConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ChildEdge]!
+  aggregate: AggregateChild!
+}
+
+input ChildCreateInput {
+  index: Int!
+  creator: UserCreateOneInput!
+  element: ElementCreateOneWithoutContent_ChildrenInput!
+}
+
+input ChildCreateManyWithoutElementInput {
+  create: [ChildCreateWithoutElementInput!]
+  connect: [ChildWhereUniqueInput!]
+}
+
+input ChildCreateWithoutElementInput {
+  index: Int!
+  creator: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type ChildEdge {
+  """The item at the end of the edge."""
+  node: Child!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ChildOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  index_ASC
+  index_DESC
+}
+
+type ChildPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  index: Int!
+}
+
+type ChildSubscriptionPayload {
+  mutation: MutationType!
+  node: Child
+  updatedFields: [String!]
+  previousValues: ChildPreviousValues
+}
+
+input ChildSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ChildSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ChildSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ChildSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ChildWhereInput
+}
+
+input ChildUpdateInput {
+  index: Int
+  creator: UserUpdateOneInput
+  element: ElementUpdateOneWithoutContent_ChildrenInput
+}
+
+input ChildUpdateManyWithoutElementInput {
+  create: [ChildCreateWithoutElementInput!]
+  connect: [ChildWhereUniqueInput!]
+  disconnect: [ChildWhereUniqueInput!]
+  delete: [ChildWhereUniqueInput!]
+  update: [ChildUpdateWithWhereUniqueWithoutElementInput!]
+  upsert: [ChildUpsertWithWhereUniqueWithoutElementInput!]
+}
+
+input ChildUpdateWithoutElementDataInput {
+  index: Int
+  creator: UserUpdateOneInput
+}
+
+input ChildUpdateWithWhereUniqueWithoutElementInput {
+  where: ChildWhereUniqueInput!
+  data: ChildUpdateWithoutElementDataInput!
+}
+
+input ChildUpsertWithWhereUniqueWithoutElementInput {
+  where: ChildWhereUniqueInput!
+  update: ChildUpdateWithoutElementDataInput!
+  create: ChildCreateWithoutElementInput!
+}
+
+input ChildWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ChildWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ChildWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ChildWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+  creator: UserWhereInput
+  element: ElementWhereInput
+}
+
+input ChildWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
+
+type Element implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name(where: NameWhereInput): Name
+  creator(where: UserWhereInput): User!
+  web(where: WebWhereInput): Web!
+  content_Children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
+  content_Text(where: TextWhereInput): Text
+  content_Image(where: ImageWhereInput): Image
+}
+
+"""A connection to a list of items."""
+type ElementConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ElementEdge]!
+  aggregate: AggregateElement!
+}
+
+input ElementCreateInput {
+  name: NameCreateOneWithoutElementInput
+  creator: UserCreateOneWithoutElementsInput!
+  web: WebCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Text: TextCreateOneWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+input ElementCreateManyWithoutCreatorInput {
+  create: [ElementCreateWithoutCreatorInput!]
+  connect: [ElementWhereUniqueInput!]
+}
+
+input ElementCreateManyWithoutWebInput {
+  create: [ElementCreateWithoutWebInput!]
+  connect: [ElementWhereUniqueInput!]
+}
+
+input ElementCreateOneInput {
+  create: ElementCreateInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateOneWithoutContent_ChildrenInput {
+  create: ElementCreateWithoutContent_ChildrenInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateOneWithoutContent_ImageInput {
+  create: ElementCreateWithoutContent_ImageInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateOneWithoutContent_TextInput {
+  create: ElementCreateWithoutContent_TextInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateOneWithoutNameInput {
+  create: ElementCreateWithoutNameInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateWithoutContent_ChildrenInput {
+  name: NameCreateOneWithoutElementInput
+  creator: UserCreateOneWithoutElementsInput!
+  web: WebCreateOneWithoutElementsInput!
+  content_Text: TextCreateOneWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+input ElementCreateWithoutContent_ImageInput {
+  name: NameCreateOneWithoutElementInput
+  creator: UserCreateOneWithoutElementsInput!
+  web: WebCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Text: TextCreateOneWithoutElementInput
+}
+
+input ElementCreateWithoutContent_TextInput {
+  name: NameCreateOneWithoutElementInput
+  creator: UserCreateOneWithoutElementsInput!
+  web: WebCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+input ElementCreateWithoutCreatorInput {
+  name: NameCreateOneWithoutElementInput
+  web: WebCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Text: TextCreateOneWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+input ElementCreateWithoutNameInput {
+  creator: UserCreateOneWithoutElementsInput!
+  web: WebCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Text: TextCreateOneWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+input ElementCreateWithoutWebInput {
+  name: NameCreateOneWithoutElementInput
+  creator: UserCreateOneWithoutElementsInput!
+  content_Children: ChildCreateManyWithoutElementInput
+  content_Text: TextCreateOneWithoutElementInput
+  content_Image: ImageCreateOneWithoutElementInput
+}
+
+"""An edge in a connection."""
+type ElementEdge {
+  """The item at the end of the edge."""
+  node: Element!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ElementOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ElementPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ElementSubscriptionPayload {
+  mutation: MutationType!
+  node: Element
+  updatedFields: [String!]
+  previousValues: ElementPreviousValues
+}
+
+input ElementSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ElementWhereInput
+}
+
+input ElementUpdateDataInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateManyWithoutCreatorInput {
+  create: [ElementCreateWithoutCreatorInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ElementUpdateManyWithoutWebInput {
+  create: [ElementCreateWithoutWebInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ElementUpdateOneInput {
+  create: ElementCreateInput
+  connect: ElementWhereUniqueInput
+  delete: Boolean
+  update: ElementUpdateDataInput
+  upsert: ElementUpsertNestedInput
+}
+
+input ElementUpdateOneWithoutContent_ChildrenInput {
+  create: ElementCreateWithoutContent_ChildrenInput
+  connect: ElementWhereUniqueInput
+  delete: Boolean
+  update: ElementUpdateWithoutContent_ChildrenDataInput
+  upsert: ElementUpsertWithoutContent_ChildrenInput
+}
+
+input ElementUpdateOneWithoutContent_ImageInput {
+  create: ElementCreateWithoutContent_ImageInput
+  connect: ElementWhereUniqueInput
+  delete: Boolean
+  update: ElementUpdateWithoutContent_ImageDataInput
+  upsert: ElementUpsertWithoutContent_ImageInput
+}
+
+input ElementUpdateOneWithoutContent_TextInput {
+  create: ElementCreateWithoutContent_TextInput
+  connect: ElementWhereUniqueInput
+  delete: Boolean
+  update: ElementUpdateWithoutContent_TextDataInput
+  upsert: ElementUpsertWithoutContent_TextInput
+}
+
+input ElementUpdateOneWithoutNameInput {
+  create: ElementCreateWithoutNameInput
+  connect: ElementWhereUniqueInput
+  delete: Boolean
+  update: ElementUpdateWithoutNameDataInput
+  upsert: ElementUpsertWithoutNameInput
+}
+
+input ElementUpdateWithoutContent_ChildrenDataInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithoutContent_ImageDataInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithoutContent_TextDataInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithoutCreatorDataInput {
+  name: NameUpdateOneWithoutElementInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithoutNameDataInput {
+  creator: UserUpdateOneWithoutElementsInput
+  web: WebUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithoutWebDataInput {
+  name: NameUpdateOneWithoutElementInput
+  creator: UserUpdateOneWithoutElementsInput
+  content_Children: ChildUpdateManyWithoutElementInput
+  content_Text: TextUpdateOneWithoutElementInput
+  content_Image: ImageUpdateOneWithoutElementInput
+}
+
+input ElementUpdateWithWhereUniqueWithoutCreatorInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutCreatorDataInput!
+}
+
+input ElementUpdateWithWhereUniqueWithoutWebInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutWebDataInput!
+}
+
+input ElementUpsertNestedInput {
+  update: ElementUpdateDataInput!
+  create: ElementCreateInput!
+}
+
+input ElementUpsertWithoutContent_ChildrenInput {
+  update: ElementUpdateWithoutContent_ChildrenDataInput!
+  create: ElementCreateWithoutContent_ChildrenInput!
+}
+
+input ElementUpsertWithoutContent_ImageInput {
+  update: ElementUpdateWithoutContent_ImageDataInput!
+  create: ElementCreateWithoutContent_ImageInput!
+}
+
+input ElementUpsertWithoutContent_TextInput {
+  update: ElementUpdateWithoutContent_TextDataInput!
+  create: ElementCreateWithoutContent_TextInput!
+}
+
+input ElementUpsertWithoutNameInput {
+  update: ElementUpdateWithoutNameDataInput!
+  create: ElementCreateWithoutNameInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutCreatorInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutCreatorDataInput!
+  create: ElementCreateWithoutCreatorInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutWebInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutWebDataInput!
+  create: ElementCreateWithoutWebInput!
+}
+
+input ElementWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  name: NameWhereInput
+  creator: UserWhereInput
+  web: WebWhereInput
+  content_Children_every: ChildWhereInput
+  content_Children_some: ChildWhereInput
+  content_Children_none: ChildWhereInput
+  content_Text: TextWhereInput
+  content_Image: ImageWhereInput
+}
+
+input ElementWhereUniqueInput {
+  id: ID
+}
+
+type Image implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  src: String!
+  width: Int!
+  height: Int!
+  creator(where: UserWhereInput): User!
+  element(where: ElementWhereInput): Element!
+}
+
+"""A connection to a list of items."""
+type ImageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  src: String!
+  width: Int!
+  height: Int!
+  creator: UserCreateOneWithoutImagesInput!
+  element: ElementCreateOneWithoutContent_ImageInput!
+}
+
+input ImageCreateManyWithoutCreatorInput {
+  create: [ImageCreateWithoutCreatorInput!]
+  connect: [ImageWhereUniqueInput!]
+}
+
+input ImageCreateOneWithoutElementInput {
+  create: ImageCreateWithoutElementInput
+  connect: ImageWhereUniqueInput
+}
+
+input ImageCreateWithoutCreatorInput {
+  src: String!
+  width: Int!
+  height: Int!
+  element: ElementCreateOneWithoutContent_ImageInput!
+}
+
+input ImageCreateWithoutElementInput {
+  src: String!
+  width: Int!
+  height: Int!
+  creator: UserCreateOneWithoutImagesInput!
+}
+
+"""An edge in a connection."""
+type ImageEdge {
+  """The item at the end of the edge."""
+  node: Image!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  src_ASC
+  src_DESC
+  width_ASC
+  width_DESC
+  height_ASC
+  height_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  src: String!
+  width: Int!
+  height: Int!
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+}
+
+input ImageUpdateInput {
+  src: String
+  width: Int
+  height: Int
+  creator: UserUpdateOneWithoutImagesInput
+  element: ElementUpdateOneWithoutContent_ImageInput
+}
+
+input ImageUpdateManyWithoutCreatorInput {
+  create: [ImageCreateWithoutCreatorInput!]
+  connect: [ImageWhereUniqueInput!]
+  disconnect: [ImageWhereUniqueInput!]
+  delete: [ImageWhereUniqueInput!]
+  update: [ImageUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [ImageUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ImageUpdateOneWithoutElementInput {
+  create: ImageCreateWithoutElementInput
+  connect: ImageWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ImageUpdateWithoutElementDataInput
+  upsert: ImageUpsertWithoutElementInput
+}
+
+input ImageUpdateWithoutCreatorDataInput {
+  src: String
+  width: Int
+  height: Int
+  element: ElementUpdateOneWithoutContent_ImageInput
+}
+
+input ImageUpdateWithoutElementDataInput {
+  src: String
+  width: Int
+  height: Int
+  creator: UserUpdateOneWithoutImagesInput
+}
+
+input ImageUpdateWithWhereUniqueWithoutCreatorInput {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateWithoutCreatorDataInput!
+}
+
+input ImageUpsertWithoutElementInput {
+  update: ImageUpdateWithoutElementDataInput!
+  create: ImageCreateWithoutElementInput!
+}
+
+input ImageUpsertWithWhereUniqueWithoutCreatorInput {
+  where: ImageWhereUniqueInput!
+  update: ImageUpdateWithoutCreatorDataInput!
+  create: ImageCreateWithoutCreatorInput!
+}
+
+input ImageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  src: String
+
+  """All values that are not equal to given value."""
+  src_not: String
+
+  """All values that are contained in given list."""
+  src_in: [String!]
+
+  """All values that are not contained in given list."""
+  src_not_in: [String!]
+
+  """All values less than the given value."""
+  src_lt: String
+
+  """All values less than or equal the given value."""
+  src_lte: String
+
+  """All values greater than the given value."""
+  src_gt: String
+
+  """All values greater than or equal the given value."""
+  src_gte: String
+
+  """All values containing the given string."""
+  src_contains: String
+
+  """All values not containing the given string."""
+  src_not_contains: String
+
+  """All values starting with the given string."""
+  src_starts_with: String
+
+  """All values not starting with the given string."""
+  src_not_starts_with: String
+
+  """All values ending with the given string."""
+  src_ends_with: String
+
+  """All values not ending with the given string."""
+  src_not_ends_with: String
+  width: Int
+
+  """All values that are not equal to given value."""
+  width_not: Int
+
+  """All values that are contained in given list."""
+  width_in: [Int!]
+
+  """All values that are not contained in given list."""
+  width_not_in: [Int!]
+
+  """All values less than the given value."""
+  width_lt: Int
+
+  """All values less than or equal the given value."""
+  width_lte: Int
+
+  """All values greater than the given value."""
+  width_gt: Int
+
+  """All values greater than or equal the given value."""
+  width_gte: Int
+  height: Int
+
+  """All values that are not equal to given value."""
+  height_not: Int
+
+  """All values that are contained in given list."""
+  height_in: [Int!]
+
+  """All values that are not contained in given list."""
+  height_not_in: [Int!]
+
+  """All values less than the given value."""
+  height_lt: Int
+
+  """All values less than or equal the given value."""
+  height_lte: Int
+
+  """All values greater than the given value."""
+  height_gt: Int
+
+  """All values greater than or equal the given value."""
+  height_gte: Int
+  creator: UserWhereInput
+  element: ElementWhereInput
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
 
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
@@ -25,16 +1125,52 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
+  createPage(data: PageCreateInput!): Page!
+  createElement(data: ElementCreateInput!): Element!
+  createName(data: NameCreateInput!): Name!
+  createChild(data: ChildCreateInput!): Child!
+  createText(data: TextCreateInput!): Text!
+  createImage(data: ImageCreateInput!): Image!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
+  updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
+  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
+  updateName(data: NameUpdateInput!, where: NameWhereUniqueInput!): Name
+  updateChild(data: ChildUpdateInput!, where: ChildWhereUniqueInput!): Child
+  updateText(data: TextUpdateInput!, where: TextWhereUniqueInput!): Text
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
+  deletePage(where: PageWhereUniqueInput!): Page
+  deleteElement(where: ElementWhereUniqueInput!): Element
+  deleteName(where: NameWhereUniqueInput!): Name
+  deleteChild(where: ChildWhereUniqueInput!): Child
+  deleteText(where: TextWhereUniqueInput!): Text
+  deleteImage(where: ImageWhereUniqueInput!): Image
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
+  upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
+  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
+  upsertName(where: NameWhereUniqueInput!, create: NameCreateInput!, update: NameUpdateInput!): Name!
+  upsertChild(where: ChildWhereUniqueInput!, create: ChildCreateInput!, update: ChildUpdateInput!): Child!
+  upsertText(where: TextWhereUniqueInput!, create: TextCreateInput!, update: TextUpdateInput!): Text!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
+  updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
+  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
+  updateManyNames(data: NameUpdateInput!, where: NameWhereInput): BatchPayload!
+  updateManyChildren(data: ChildUpdateInput!, where: ChildWhereInput): BatchPayload!
+  updateManyTexts(data: TextUpdateInput!, where: TextWhereInput): BatchPayload!
+  updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
+  deleteManyPages(where: PageWhereInput): BatchPayload!
+  deleteManyElements(where: ElementWhereInput): BatchPayload!
+  deleteManyNames(where: NameWhereInput): BatchPayload!
+  deleteManyChildren(where: ChildWhereInput): BatchPayload!
+  deleteManyTexts(where: TextWhereInput): BatchPayload!
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -43,10 +1179,382 @@ enum MutationType {
   DELETED
 }
 
+type Name implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  value: String!
+  creator(where: UserWhereInput): User!
+  element(where: ElementWhereInput): Element!
+  web(where: WebWhereInput): Web!
+}
+
+"""A connection to a list of items."""
+type NameConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [NameEdge]!
+  aggregate: AggregateName!
+}
+
+input NameCreateInput {
+  value: String!
+  creator: UserCreateOneInput!
+  element: ElementCreateOneWithoutNameInput!
+  web: WebCreateOneWithoutNamesInput!
+}
+
+input NameCreateManyWithoutWebInput {
+  create: [NameCreateWithoutWebInput!]
+  connect: [NameWhereUniqueInput!]
+}
+
+input NameCreateOneWithoutElementInput {
+  create: NameCreateWithoutElementInput
+  connect: NameWhereUniqueInput
+}
+
+input NameCreateWithoutElementInput {
+  value: String!
+  creator: UserCreateOneInput!
+  web: WebCreateOneWithoutNamesInput!
+}
+
+input NameCreateWithoutWebInput {
+  value: String!
+  creator: UserCreateOneInput!
+  element: ElementCreateOneWithoutNameInput!
+}
+
+"""An edge in a connection."""
+type NameEdge {
+  """The item at the end of the edge."""
+  node: Name!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum NameOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  value_ASC
+  value_DESC
+}
+
+type NamePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  value: String!
+}
+
+type NameSubscriptionPayload {
+  mutation: MutationType!
+  node: Name
+  updatedFields: [String!]
+  previousValues: NamePreviousValues
+}
+
+input NameSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NameSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NameSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NameSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: NameWhereInput
+}
+
+input NameUpdateInput {
+  value: String
+  creator: UserUpdateOneInput
+  element: ElementUpdateOneWithoutNameInput
+  web: WebUpdateOneWithoutNamesInput
+}
+
+input NameUpdateManyWithoutWebInput {
+  create: [NameCreateWithoutWebInput!]
+  connect: [NameWhereUniqueInput!]
+  disconnect: [NameWhereUniqueInput!]
+  delete: [NameWhereUniqueInput!]
+  update: [NameUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [NameUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input NameUpdateOneWithoutElementInput {
+  create: NameCreateWithoutElementInput
+  connect: NameWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: NameUpdateWithoutElementDataInput
+  upsert: NameUpsertWithoutElementInput
+}
+
+input NameUpdateWithoutElementDataInput {
+  value: String
+  creator: UserUpdateOneInput
+  web: WebUpdateOneWithoutNamesInput
+}
+
+input NameUpdateWithoutWebDataInput {
+  value: String
+  creator: UserUpdateOneInput
+  element: ElementUpdateOneWithoutNameInput
+}
+
+input NameUpdateWithWhereUniqueWithoutWebInput {
+  where: NameWhereUniqueInput!
+  data: NameUpdateWithoutWebDataInput!
+}
+
+input NameUpsertWithoutElementInput {
+  update: NameUpdateWithoutElementDataInput!
+  create: NameCreateWithoutElementInput!
+}
+
+input NameUpsertWithWhereUniqueWithoutWebInput {
+  where: NameWhereUniqueInput!
+  update: NameUpdateWithoutWebDataInput!
+  create: NameCreateWithoutWebInput!
+}
+
+input NameWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NameWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NameWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NameWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  creator: UserWhereInput
+  element: ElementWhereInput
+  web: WebWhereInput
+}
+
+input NameWhereUniqueInput {
+  id: ID
+}
+
 """An object with an ID"""
 interface Node {
   """The id of the object."""
   id: ID!
+}
+
+type Page implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  published: Boolean!
+  title: String!
+  creator(where: UserWhereInput): User!
+  element(where: ElementWhereInput): Element!
+  web(where: WebWhereInput): Web!
+}
+
+"""A connection to a list of items."""
+type PageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PageEdge]!
+  aggregate: AggregatePage!
+}
+
+input PageCreateInput {
+  published: Boolean
+  title: String!
+  creator: UserCreateOneWithoutPagesInput!
+  element: ElementCreateOneInput!
+  web: WebCreateOneWithoutPagesInput!
+}
+
+input PageCreateManyWithoutCreatorInput {
+  create: [PageCreateWithoutCreatorInput!]
+  connect: [PageWhereUniqueInput!]
+}
+
+input PageCreateManyWithoutWebInput {
+  create: [PageCreateWithoutWebInput!]
+  connect: [PageWhereUniqueInput!]
+}
+
+input PageCreateWithoutCreatorInput {
+  published: Boolean
+  title: String!
+  element: ElementCreateOneInput!
+  web: WebCreateOneWithoutPagesInput!
+}
+
+input PageCreateWithoutWebInput {
+  published: Boolean
+  title: String!
+  creator: UserCreateOneWithoutPagesInput!
+  element: ElementCreateOneInput!
+}
+
+"""An edge in a connection."""
+type PageEdge {
+  """The item at the end of the edge."""
+  node: Page!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Information about pagination in a connection."""
@@ -64,13 +1572,299 @@ type PageInfo {
   endCursor: String
 }
 
+enum PageOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  published_ASC
+  published_DESC
+  title_ASC
+  title_DESC
+}
+
+type PagePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  published: Boolean!
+  title: String!
+}
+
+type PageSubscriptionPayload {
+  mutation: MutationType!
+  node: Page
+  updatedFields: [String!]
+  previousValues: PagePreviousValues
+}
+
+input PageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PageWhereInput
+}
+
+input PageUpdateInput {
+  published: Boolean
+  title: String
+  creator: UserUpdateOneWithoutPagesInput
+  element: ElementUpdateOneInput
+  web: WebUpdateOneWithoutPagesInput
+}
+
+input PageUpdateManyWithoutCreatorInput {
+  create: [PageCreateWithoutCreatorInput!]
+  connect: [PageWhereUniqueInput!]
+  disconnect: [PageWhereUniqueInput!]
+  delete: [PageWhereUniqueInput!]
+  update: [PageUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [PageUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input PageUpdateManyWithoutWebInput {
+  create: [PageCreateWithoutWebInput!]
+  connect: [PageWhereUniqueInput!]
+  disconnect: [PageWhereUniqueInput!]
+  delete: [PageWhereUniqueInput!]
+  update: [PageUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input PageUpdateWithoutCreatorDataInput {
+  published: Boolean
+  title: String
+  element: ElementUpdateOneInput
+  web: WebUpdateOneWithoutPagesInput
+}
+
+input PageUpdateWithoutWebDataInput {
+  published: Boolean
+  title: String
+  creator: UserUpdateOneWithoutPagesInput
+  element: ElementUpdateOneInput
+}
+
+input PageUpdateWithWhereUniqueWithoutCreatorInput {
+  where: PageWhereUniqueInput!
+  data: PageUpdateWithoutCreatorDataInput!
+}
+
+input PageUpdateWithWhereUniqueWithoutWebInput {
+  where: PageWhereUniqueInput!
+  data: PageUpdateWithoutWebDataInput!
+}
+
+input PageUpsertWithWhereUniqueWithoutCreatorInput {
+  where: PageWhereUniqueInput!
+  update: PageUpdateWithoutCreatorDataInput!
+  create: PageCreateWithoutCreatorInput!
+}
+
+input PageUpsertWithWhereUniqueWithoutWebInput {
+  where: PageWhereUniqueInput!
+  update: PageUpdateWithoutWebDataInput!
+  create: PageCreateWithoutWebInput!
+}
+
+input PageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  published: Boolean
+
+  """All values that are not equal to given value."""
+  published_not: Boolean
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  creator: UserWhereInput
+  element: ElementWhereInput
+  web: WebWhereInput
+}
+
+input PageWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
+  names(where: NameWhereInput, orderBy: NameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Name]!
+  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child]!
+  texts(where: TextWhereInput, orderBy: TextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Text]!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
+  page(where: PageWhereUniqueInput!): Page
+  element(where: ElementWhereUniqueInput!): Element
+  name(where: NameWhereUniqueInput!): Name
+  child(where: ChildWhereUniqueInput!): Child
+  text(where: TextWhereUniqueInput!): Text
+  image(where: ImageWhereUniqueInput!): Image
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
+  pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
+  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
+  namesConnection(where: NameWhereInput, orderBy: NameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NameConnection!
+  childrenConnection(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChildConnection!
+  textsConnection(where: TextWhereInput, orderBy: TextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TextConnection!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -82,6 +1876,338 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
+  page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
+  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
+  name(where: NameSubscriptionWhereInput): NameSubscriptionPayload
+  child(where: ChildSubscriptionWhereInput): ChildSubscriptionPayload
+  text(where: TextSubscriptionWhereInput): TextSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
+}
+
+type Text implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  format: TextFormat!
+  value: String!
+  creator(where: UserWhereInput): User!
+  element(where: ElementWhereInput): Element!
+}
+
+"""A connection to a list of items."""
+type TextConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TextEdge]!
+  aggregate: AggregateText!
+}
+
+input TextCreateInput {
+  format: TextFormat!
+  value: String!
+  creator: UserCreateOneWithoutTextsInput!
+  element: ElementCreateOneWithoutContent_TextInput!
+}
+
+input TextCreateManyWithoutCreatorInput {
+  create: [TextCreateWithoutCreatorInput!]
+  connect: [TextWhereUniqueInput!]
+}
+
+input TextCreateOneWithoutElementInput {
+  create: TextCreateWithoutElementInput
+  connect: TextWhereUniqueInput
+}
+
+input TextCreateWithoutCreatorInput {
+  format: TextFormat!
+  value: String!
+  element: ElementCreateOneWithoutContent_TextInput!
+}
+
+input TextCreateWithoutElementInput {
+  format: TextFormat!
+  value: String!
+  creator: UserCreateOneWithoutTextsInput!
+}
+
+"""An edge in a connection."""
+type TextEdge {
+  """The item at the end of the edge."""
+  node: Text!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TextFormat {
+  COMMONMARK_0_28
+}
+
+enum TextOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  format_ASC
+  format_DESC
+  value_ASC
+  value_DESC
+}
+
+type TextPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  format: TextFormat!
+  value: String!
+}
+
+type TextSubscriptionPayload {
+  mutation: MutationType!
+  node: Text
+  updatedFields: [String!]
+  previousValues: TextPreviousValues
+}
+
+input TextSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TextSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TextSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TextSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TextWhereInput
+}
+
+input TextUpdateInput {
+  format: TextFormat
+  value: String
+  creator: UserUpdateOneWithoutTextsInput
+  element: ElementUpdateOneWithoutContent_TextInput
+}
+
+input TextUpdateManyWithoutCreatorInput {
+  create: [TextCreateWithoutCreatorInput!]
+  connect: [TextWhereUniqueInput!]
+  disconnect: [TextWhereUniqueInput!]
+  delete: [TextWhereUniqueInput!]
+  update: [TextUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [TextUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input TextUpdateOneWithoutElementInput {
+  create: TextCreateWithoutElementInput
+  connect: TextWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: TextUpdateWithoutElementDataInput
+  upsert: TextUpsertWithoutElementInput
+}
+
+input TextUpdateWithoutCreatorDataInput {
+  format: TextFormat
+  value: String
+  element: ElementUpdateOneWithoutContent_TextInput
+}
+
+input TextUpdateWithoutElementDataInput {
+  format: TextFormat
+  value: String
+  creator: UserUpdateOneWithoutTextsInput
+}
+
+input TextUpdateWithWhereUniqueWithoutCreatorInput {
+  where: TextWhereUniqueInput!
+  data: TextUpdateWithoutCreatorDataInput!
+}
+
+input TextUpsertWithoutElementInput {
+  update: TextUpdateWithoutElementDataInput!
+  create: TextCreateWithoutElementInput!
+}
+
+input TextUpsertWithWhereUniqueWithoutCreatorInput {
+  where: TextWhereUniqueInput!
+  update: TextUpdateWithoutCreatorDataInput!
+  create: TextCreateWithoutCreatorInput!
+}
+
+input TextWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TextWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TextWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TextWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  format: TextFormat
+
+  """All values that are not equal to given value."""
+  format_not: TextFormat
+
+  """All values that are contained in given list."""
+  format_in: [TextFormat!]
+
+  """All values that are not contained in given list."""
+  format_not_in: [TextFormat!]
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  creator: UserWhereInput
+  element: ElementWhereInput
+}
+
+input TextWhereUniqueInput {
+  id: ID
 }
 
 type User implements Node {
@@ -90,8 +2216,12 @@ type User implements Node {
   updatedAt: DateTime!
   email: String!
   password: String!
-  webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
   themeName: String
+  webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  texts(where: TextWhereInput, orderBy: TextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Text!]
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
 """A connection to a list of items."""
@@ -108,7 +2238,36 @@ input UserCreateInput {
   email: String!
   password: String!
   themeName: String
-  webs: WebCreateManyWithoutOwnerInput
+  webs: WebCreateManyWithoutCreatorInput
+  pages: PageCreateManyWithoutCreatorInput
+  elements: ElementCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutElementsInput {
+  create: UserCreateWithoutElementsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutImagesInput {
+  create: UserCreateWithoutImagesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutPagesInput {
+  create: UserCreateWithoutPagesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutTextsInput {
+  create: UserCreateWithoutTextsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutWebsInput {
@@ -116,10 +2275,54 @@ input UserCreateOneWithoutWebsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutElementsInput {
+  email: String!
+  password: String!
+  themeName: String
+  webs: WebCreateManyWithoutCreatorInput
+  pages: PageCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
+}
+
+input UserCreateWithoutImagesInput {
+  email: String!
+  password: String!
+  themeName: String
+  webs: WebCreateManyWithoutCreatorInput
+  pages: PageCreateManyWithoutCreatorInput
+  elements: ElementCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+}
+
+input UserCreateWithoutPagesInput {
+  email: String!
+  password: String!
+  themeName: String
+  webs: WebCreateManyWithoutCreatorInput
+  elements: ElementCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
+}
+
+input UserCreateWithoutTextsInput {
+  email: String!
+  password: String!
+  themeName: String
+  webs: WebCreateManyWithoutCreatorInput
+  pages: PageCreateManyWithoutCreatorInput
+  elements: ElementCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
+}
+
 input UserCreateWithoutWebsInput {
   email: String!
   password: String!
   themeName: String
+  pages: PageCreateManyWithoutCreatorInput
+  elements: ElementCreateManyWithoutCreatorInput
+  texts: TextCreateManyWithoutCreatorInput
+  images: ImageCreateManyWithoutCreatorInput
 }
 
 """An edge in a connection."""
@@ -194,11 +2397,66 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
 input UserUpdateInput {
   email: String
   password: String
   themeName: String
-  webs: WebUpdateManyWithoutOwnerInput
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneWithoutElementsInput {
+  create: UserCreateWithoutElementsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutElementsDataInput
+  upsert: UserUpsertWithoutElementsInput
+}
+
+input UserUpdateOneWithoutImagesInput {
+  create: UserCreateWithoutImagesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutImagesDataInput
+  upsert: UserUpsertWithoutImagesInput
+}
+
+input UserUpdateOneWithoutPagesInput {
+  create: UserCreateWithoutPagesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutPagesDataInput
+  upsert: UserUpsertWithoutPagesInput
+}
+
+input UserUpdateOneWithoutTextsInput {
+  create: UserCreateWithoutTextsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutTextsDataInput
+  upsert: UserUpsertWithoutTextsInput
 }
 
 input UserUpdateOneWithoutWebsInput {
@@ -209,10 +2467,79 @@ input UserUpdateOneWithoutWebsInput {
   upsert: UserUpsertWithoutWebsInput
 }
 
+input UserUpdateWithoutElementsDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
+input UserUpdateWithoutImagesDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+}
+
+input UserUpdateWithoutPagesDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
+input UserUpdateWithoutTextsDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+  pages: PageUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
 input UserUpdateWithoutWebsDataInput {
   email: String
   password: String
   themeName: String
+  pages: PageUpdateManyWithoutCreatorInput
+  elements: ElementUpdateManyWithoutCreatorInput
+  texts: TextUpdateManyWithoutCreatorInput
+  images: ImageUpdateManyWithoutCreatorInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutElementsInput {
+  update: UserUpdateWithoutElementsDataInput!
+  create: UserCreateWithoutElementsInput!
+}
+
+input UserUpsertWithoutImagesInput {
+  update: UserUpdateWithoutImagesDataInput!
+  create: UserCreateWithoutImagesInput!
+}
+
+input UserUpsertWithoutPagesInput {
+  update: UserUpdateWithoutPagesDataInput!
+  create: UserCreateWithoutPagesInput!
+}
+
+input UserUpsertWithoutTextsInput {
+  update: UserUpdateWithoutTextsDataInput!
+  create: UserCreateWithoutTextsInput!
 }
 
 input UserUpsertWithoutWebsInput {
@@ -436,6 +2763,18 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
+  pages_every: PageWhereInput
+  pages_some: PageWhereInput
+  pages_none: PageWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  texts_every: TextWhereInput
+  texts_some: TextWhereInput
+  texts_none: TextWhereInput
+  images_every: ImageWhereInput
+  images_some: ImageWhereInput
+  images_none: ImageWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -447,10 +2786,13 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
+  published: Boolean!
   name: String!
   domain: String!
-  isPublished: Boolean!
-  owner(where: UserWhereInput): User!
+  creator(where: UserWhereInput): User!
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  names(where: NameWhereInput, orderBy: NameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Name!]
 }
 
 """A connection to a list of items."""
@@ -464,21 +2806,69 @@ type WebConnection {
 }
 
 input WebCreateInput {
+  published: Boolean
   name: String!
   domain: String!
-  isPublished: Boolean
-  owner: UserCreateOneWithoutWebsInput!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
+  names: NameCreateManyWithoutWebInput
 }
 
-input WebCreateManyWithoutOwnerInput {
-  create: [WebCreateWithoutOwnerInput!]
+input WebCreateManyWithoutCreatorInput {
+  create: [WebCreateWithoutCreatorInput!]
   connect: [WebWhereUniqueInput!]
 }
 
-input WebCreateWithoutOwnerInput {
+input WebCreateOneWithoutElementsInput {
+  create: WebCreateWithoutElementsInput
+  connect: WebWhereUniqueInput
+}
+
+input WebCreateOneWithoutNamesInput {
+  create: WebCreateWithoutNamesInput
+  connect: WebWhereUniqueInput
+}
+
+input WebCreateOneWithoutPagesInput {
+  create: WebCreateWithoutPagesInput
+  connect: WebWhereUniqueInput
+}
+
+input WebCreateWithoutCreatorInput {
+  published: Boolean
   name: String!
   domain: String!
-  isPublished: Boolean
+  pages: PageCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
+  names: NameCreateManyWithoutWebInput
+}
+
+input WebCreateWithoutElementsInput {
+  published: Boolean
+  name: String!
+  domain: String!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+  names: NameCreateManyWithoutWebInput
+}
+
+input WebCreateWithoutNamesInput {
+  published: Boolean
+  name: String!
+  domain: String!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
+}
+
+input WebCreateWithoutPagesInput {
+  published: Boolean
+  name: String!
+  domain: String!
+  creator: UserCreateOneWithoutWebsInput!
+  elements: ElementCreateManyWithoutWebInput
+  names: NameCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -497,21 +2887,21 @@ enum WebOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  published_ASC
+  published_DESC
   name_ASC
   name_DESC
   domain_ASC
   domain_DESC
-  isPublished_ASC
-  isPublished_DESC
 }
 
 type WebPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
+  published: Boolean!
   name: String!
   domain: String!
-  isPublished: Boolean!
 }
 
 type WebSubscriptionPayload {
@@ -554,36 +2944,108 @@ input WebSubscriptionWhereInput {
 }
 
 input WebUpdateInput {
+  published: Boolean
   name: String
   domain: String
-  isPublished: Boolean
-  owner: UserUpdateOneWithoutWebsInput
+  creator: UserUpdateOneWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
+  names: NameUpdateManyWithoutWebInput
 }
 
-input WebUpdateManyWithoutOwnerInput {
-  create: [WebCreateWithoutOwnerInput!]
+input WebUpdateManyWithoutCreatorInput {
+  create: [WebCreateWithoutCreatorInput!]
   connect: [WebWhereUniqueInput!]
   disconnect: [WebWhereUniqueInput!]
   delete: [WebWhereUniqueInput!]
-  update: [WebUpdateWithWhereUniqueWithoutOwnerInput!]
-  upsert: [WebUpsertWithWhereUniqueWithoutOwnerInput!]
+  update: [WebUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input WebUpdateWithoutOwnerDataInput {
+input WebUpdateOneWithoutElementsInput {
+  create: WebCreateWithoutElementsInput
+  connect: WebWhereUniqueInput
+  delete: Boolean
+  update: WebUpdateWithoutElementsDataInput
+  upsert: WebUpsertWithoutElementsInput
+}
+
+input WebUpdateOneWithoutNamesInput {
+  create: WebCreateWithoutNamesInput
+  connect: WebWhereUniqueInput
+  delete: Boolean
+  update: WebUpdateWithoutNamesDataInput
+  upsert: WebUpsertWithoutNamesInput
+}
+
+input WebUpdateOneWithoutPagesInput {
+  create: WebCreateWithoutPagesInput
+  connect: WebWhereUniqueInput
+  delete: Boolean
+  update: WebUpdateWithoutPagesDataInput
+  upsert: WebUpsertWithoutPagesInput
+}
+
+input WebUpdateWithoutCreatorDataInput {
+  published: Boolean
   name: String
   domain: String
-  isPublished: Boolean
+  pages: PageUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
+  names: NameUpdateManyWithoutWebInput
 }
 
-input WebUpdateWithWhereUniqueWithoutOwnerInput {
-  where: WebWhereUniqueInput!
-  data: WebUpdateWithoutOwnerDataInput!
+input WebUpdateWithoutElementsDataInput {
+  published: Boolean
+  name: String
+  domain: String
+  creator: UserUpdateOneWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+  names: NameUpdateManyWithoutWebInput
 }
 
-input WebUpsertWithWhereUniqueWithoutOwnerInput {
+input WebUpdateWithoutNamesDataInput {
+  published: Boolean
+  name: String
+  domain: String
+  creator: UserUpdateOneWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
+}
+
+input WebUpdateWithoutPagesDataInput {
+  published: Boolean
+  name: String
+  domain: String
+  creator: UserUpdateOneWithoutWebsInput
+  elements: ElementUpdateManyWithoutWebInput
+  names: NameUpdateManyWithoutWebInput
+}
+
+input WebUpdateWithWhereUniqueWithoutCreatorInput {
   where: WebWhereUniqueInput!
-  update: WebUpdateWithoutOwnerDataInput!
-  create: WebCreateWithoutOwnerInput!
+  data: WebUpdateWithoutCreatorDataInput!
+}
+
+input WebUpsertWithoutElementsInput {
+  update: WebUpdateWithoutElementsDataInput!
+  create: WebCreateWithoutElementsInput!
+}
+
+input WebUpsertWithoutNamesInput {
+  update: WebUpdateWithoutNamesDataInput!
+  create: WebCreateWithoutNamesInput!
+}
+
+input WebUpsertWithoutPagesInput {
+  update: WebUpdateWithoutPagesDataInput!
+  create: WebCreateWithoutPagesInput!
+}
+
+input WebUpsertWithWhereUniqueWithoutCreatorInput {
+  where: WebWhereUniqueInput!
+  update: WebUpdateWithoutCreatorDataInput!
+  create: WebCreateWithoutCreatorInput!
 }
 
 input WebWhereInput {
@@ -679,6 +3141,10 @@ input WebWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  published: Boolean
+
+  """All values that are not equal to given value."""
+  published_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -759,14 +3225,18 @@ input WebWhereInput {
 
   """All values not ending with the given string."""
   domain_not_ends_with: String
-  isPublished: Boolean
-
-  """All values that are not equal to given value."""
-  isPublished_not: Boolean
-  owner: UserWhereInput
+  creator: UserWhereInput
+  pages_every: PageWhereInput
+  pages_some: PageWhereInput
+  pages_none: PageWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  names_every: NameWhereInput
+  names_some: NameWhereInput
+  names_none: NameWhereInput
 }
 
 input WebWhereUniqueInput {
   id: ID
-  domain: String
 }

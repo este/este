@@ -1,5 +1,5 @@
-// flow-typed signature: 317c65c8360a78699afe3d7085835c5a
-// flow-typed version: 6a8644af64/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: e0b6c6deace3df87aec05eda5b4c96de
+// flow-typed version: 55566022a3/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1854,14 +1854,13 @@ declare module ramda {
 
   declare function memoize<A, B, T: (...args: Array<A>) => B>(fn: T): T;
 
-  declare function memoizeWith<A, B>(
-    keyFn: (x: A) => string,
-    ...rest: Array<void>
-  ): (fn: (x: B) => B) => A;
-  declare function memoizeWith<A, B>(
-    keyFn: (x: A) => string,
-    fn: (x: B) => B
-  ): A;
+  declare function memoizeWith<A, B, C>(
+    keyFn: (...args: Array<A>) => C
+  ): (...args: Array<A>) => (...args: Array<A>) => B;
+  declare function memoizeWith<A, B, C>(
+    keyFn: (...args: Array<A>) => C,
+    fn: (...args: Array<A>) => B
+  ): (...args: Array<A>) => B;
 
   declare function nAry<T>(
     arity: number,

@@ -45,7 +45,7 @@ const createWeb /*: Resolver<
     data: {
       name: input.name,
       domain,
-      owner: { connect: { id: userId } },
+      creator: { connect: { id: userId } },
     },
   });
 
@@ -71,7 +71,7 @@ const deleteWeb /*: Resolver<
   const userId = context.getUserId();
   const webExists = await context.db.exists.Web({
     id: input.id,
-    owner: { id: userId },
+    creator: { id: userId },
   });
   if (!webExists) context.throwHttpStatus(404);
   await context.db.mutation.deleteWeb({ where: { id: input.id } });
@@ -93,7 +93,7 @@ const webs /*: Resolver<
   const userId = context.getUserId();
   const webs = await context.db.query.websConnection(
     {
-      where: { owner: { id: userId } },
+      where: { creator: { id: userId } },
       orderBy: 'updatedAt_ASC',
       first: args.first,
     },
@@ -122,7 +122,7 @@ const web /*: Resolver<
   const userId = context.getUserId();
   const webExists = await context.db.exists.Web({
     domain,
-    owner: { id: userId },
+    creator: { id: userId },
   });
   if (!webExists) context.throwHttpStatus(403);
   return context.db.query.web({ where: { domain } }, info);
