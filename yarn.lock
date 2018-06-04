@@ -1778,8 +1778,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.250.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.250.1.tgz#0cc04edfc41fa0a6a5eccbc56888832f59270141"
+  version "2.251.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.251.1.tgz#0f7e44b45c227ab7d5c63188c42c6ac913f25bf3"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -9169,9 +9169,9 @@ react-lifecycles-compat@3.0.4, react-lifecycles-compat@^3.0.2:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
-react-native-web@^0.7.2:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.7.3.tgz#a970b8a618d14d4e4a9e42c8e9a591e5d7cf1bae"
+react-native-web@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.8.0.tgz#9c4b287f1e3e66aa8c018e1c96882b41bc1e7234"
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
