@@ -89,7 +89,7 @@ const stylesJson = {
 
   pageContainer: {
     paddingHorizontal: typography.rhythm(0.5),
-    maxWidth: 960,
+    maxWidth: 768,
   },
 
   pageBody: {
@@ -125,7 +125,7 @@ const stylesJson = {
     color: colors.black,
     borderBottomWidth: 1,
     borderColor: colors.gray,
-    paddingVertical: typography.rhythm(0.5),
+    paddingVertical: typography.rhythm(0.25),
   },
 
   textInputError: {
