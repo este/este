@@ -49,7 +49,6 @@ class Editor extends React.PureComponent<EditorProps> {
     const size = 0;
     return (
       <TextInput
-        autoFocus
         multiline
         // onChange={this.handleChange}
         placeholderTextColor={placeholderTextColor}
