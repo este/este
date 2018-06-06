@@ -100,7 +100,7 @@ const stylesJson = {
     borderColor: colors.gray,
     borderTopWidth: 1,
     borderStyle: 'solid',
-    paddingVertical: typography.rhythm(1),
+    paddingVertical: typography.rhythm(0.5),
   },
 
   mainNav: {
@@ -193,6 +193,11 @@ const stylesJson = {
     paddingHorizontal: typography.rhythm(1),
     paddingVertical: typography.rhythm(0.5),
   },
+
+  editorTextInput: {
+    color: colors.black,
+    flex: 1,
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);
@@ -227,6 +232,11 @@ export const darkTheme: Theme = {
 
     button: {
       ...stylesJson.button,
+      color: colors.white,
+    },
+
+    editorTextInput: {
+      ...stylesJson.editorTextInput,
       color: colors.white,
     },
   }),
