@@ -21,6 +21,7 @@ export type TextInputProps = {|
   name?: string,
   keyboardType?: string,
   autoComplete?: string,
+  onSubmitEditing?: () => void,
   // Feel free to add any missing prop.
 |};
 

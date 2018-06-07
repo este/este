@@ -65,7 +65,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     const { errors } = this.state;
 
     return (
-      <Form onSubmit={this.createWeb}>
+      <Form>
         <Block>
           <TextInput
             label={
@@ -79,6 +79,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
             focusOnError={errors}
             onChangeText={this.setName}
             value={this.state.name}
+            onSubmitEditing={this.createWeb}
           />
         </Block>
         <Row>

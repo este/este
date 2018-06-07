@@ -1253,12 +1253,12 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
 "@types/node@*":
-  version "8.10.19"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.19.tgz#66b5b6325c048cbf4512b7a88b0e79c2ee99d3d2"
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.2.tgz#3840ec6c12556fdda6e0e6d036df853101d732a4"
 
 "@types/node@^9.4.6":
-  version "9.6.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.20.tgz#b59a1bd357ae2df7d44d5ac98e9b64eb96ea1fef"
+  version "9.6.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.21.tgz#4563c26a53531c5aca943065fcdf2dd562f63cd4"
 
 "@types/range-parser@*":
   version "1.2.2"
@@ -1783,8 +1783,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.252.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.252.1.tgz#4ce45b16dc408883e20a564bd86270c67f25bb60"
+  version "2.253.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.253.1.tgz#5ca10d7115562fc40adedc35c4d99703f8fe5f9c"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
