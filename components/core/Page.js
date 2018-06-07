@@ -74,8 +74,8 @@ const PageContainer = ({ children, theme }) => (
   </ScrollView>
 );
 
-const PageBody = ({ children, theme }) => (
-  <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
+const PageBody = ({ children }) => (
+  <View style={[styles.body]}>{children}</View>
 );
 
 const PageFooter = ({ theme }) => (
@@ -96,6 +96,8 @@ type Props = {|
   data: generated.Page,
   requireAuth?: boolean,
   intl: IntlShape,
+  header?: React.Node,
+  footer?: React.Node,
 |};
 
 class Page extends React.PureComponent<Props> {
@@ -127,6 +129,7 @@ class Page extends React.PureComponent<Props> {
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
+    const { header, footer } = this.props;
 
     return (
       <ThemeContext.Provider value={theme}>
@@ -154,11 +157,13 @@ class Page extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody theme={theme}>
-            {this.renderChildrenOrAuth(isAuthenticated)}
-          </PageBody>
-          <PageFooter theme={theme} />
+          {header != null ? (
+            header
+          ) : (
+            <MainNav isAuthenticated={isAuthenticated} />
+          )}
+          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
+          {footer != null ? footer : <PageFooter theme={theme} />}
         </PageContainer>
       </ThemeContext.Provider>
     );

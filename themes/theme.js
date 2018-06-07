@@ -92,10 +92,6 @@ const stylesJson = {
     maxWidth: 768,
   },
 
-  pageBody: {
-    marginBottom: typography.rhythm(2),
-  },
-
   pageFooter: {
     borderColor: colors.gray,
     borderTopWidth: 1,

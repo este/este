@@ -55,10 +55,12 @@ const Me = props => {
           </Block>
         </>
       )}
-      <Row>
-        <SignOutButton color="danger" onPress={signOut} />
-        <SetTheme />
-      </Row>
+      <Block>
+        <Row>
+          <SignOutButton color="danger" onPress={signOut} />
+          <SetTheme />
+        </Row>
+      </Block>
     </Page>
   );
 };
