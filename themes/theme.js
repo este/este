@@ -190,9 +190,13 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  editorTextInput: {
-    color: colors.black,
+  editor: {
     flex: 1,
+    paddingVertical: typography.rhythm(1),
+  },
+
+  editorMarkdown: {
+    color: colors.black,
   },
 };
 
@@ -231,8 +235,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    editorTextInput: {
-      ...stylesJson.editorTextInput,
+    editorMarkdown: {
+      ...stylesJson.editorMarkdown,
       color: colors.white,
     },
   }),
