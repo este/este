@@ -1,5 +1,5 @@
 // @flow
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Head from 'next/head';
@@ -53,9 +53,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     minHeight: '100%', // make footer sticky
   },
-  containerContent: {
-    flex: 1, // make footer sticky
-  },
   body: {
     flex: 1, // make footer sticky
   },
@@ -65,13 +62,7 @@ const styles = StyleSheet.create({
 });
 
 const PageContainer = ({ children, theme }) => (
-  <ScrollView
-    // Why ScrollView https://github.com/necolas/react-native-web/issues/829
-    style={[styles.container, theme.styles.pageContainer]}
-    contentContainerStyle={[styles.containerContent]}
-  >
-    {children}
-  </ScrollView>
+  <View style={[styles.container, theme.styles.pageContainer]}>{children}</View>
 );
 
 const PageBody = ({ children }) => (
