@@ -3,6 +3,7 @@ import type { Theme, OpenColor } from './types';
 import createTypography from './createTypography';
 import openColor from 'open-color';
 import { StyleSheet } from 'react-native';
+import colorLib from 'color';
 
 const openColorTyped: OpenColor = openColor;
 
@@ -204,10 +205,15 @@ const styles = StyleSheet.create(stylesJson);
 
 export type Styles = typeof styles;
 
+const placeholderTextColor = color =>
+  colorLib(color)
+    .fade(0.5)
+    .toString();
+
 export const lightTheme: Theme = {
   typography,
   colors,
-  textColor: 'black',
+  placeholderTextColor: placeholderTextColor(colors.black),
   pageBackgroundColor: 'white',
   styles,
 };
@@ -216,7 +222,7 @@ export const lightTheme: Theme = {
 
 export const darkTheme: Theme = {
   ...lightTheme,
-  textColor: 'white',
+  placeholderTextColor: placeholderTextColor(colors.white),
   pageBackgroundColor: 'black',
   styles: StyleSheet.create({
     ...stylesJson,

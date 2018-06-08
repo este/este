@@ -43,7 +43,7 @@ export type Theme = {
     fontSizeWithLineHeight: number => TextStyleProp,
   |},
   colors: Colors,
-  textColor: ColorName,
+  placeholderTextColor: string,
   pageBackgroundColor: ColorName,
   styles: Styles,
 };

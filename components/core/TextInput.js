@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { View, TextInput as TextInputNative } from 'react-native';
 import withTheme, { type Theme } from './withTheme';
-import colorLib from 'color';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ErrorMessage, { type MessageError } from './ErrorMessage';
@@ -62,10 +61,6 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
       ...props
     } = this.props;
 
-    const placeholderTextColor = colorLib(theme.colors[theme.textColor])
-      .fade(0.5)
-      .toString();
-
     return (
       <View>
         {label != null && (
@@ -75,7 +70,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
         )}
         <TextInputNative
           disabled={disabled}
-          placeholderTextColor={placeholderTextColor}
+          placeholderTextColor={theme.placeholderTextColor}
           style={[
             theme.styles.textInput,
             theme.typography.fontSizeWithLineHeight(size),
