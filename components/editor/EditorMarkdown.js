@@ -73,8 +73,6 @@ class EditorMarkdown extends React.PureComponent<EditorMarkdownProps> {
       .toString();
     return (
       <TextInput
-        // accessible={false}
-        // tabIndex={0}
         multiline
         // value={value}
         defaultValue={value}

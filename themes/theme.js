@@ -192,7 +192,7 @@ const stylesJson = {
 
   editor: {
     flex: 1,
-    paddingVertical: typography.rhythm(1),
+    // paddingVertical: typography.rhythm(1),
   },
 
   editorMarkdown: {

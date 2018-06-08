@@ -12,13 +12,13 @@ const Edit = props => {
   if (!web) return <Error statusCode={404} />;
   return (
     <Page
-      header={false}
+      // header={false}
       footer={false}
       requireAuth
       title={web.name}
       data={props.data}
     >
-      <Editor />
+      <Editor data={props.data} />
     </Page>
   );
 };
@@ -30,6 +30,7 @@ export default app(Edit, {
         name
       }
       ...Page
+      ...Editor @arguments(domain: $domain)
     }
   `,
 });

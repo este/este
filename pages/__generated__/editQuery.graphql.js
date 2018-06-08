@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash df976d841e2adaec10f8d7953eef0400
+ * @relayHash d1cddec53065fac3267ac2e9262a0dd6
  */
 
 /* eslint-disable */
@@ -9,6 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type Editor$ref = any;
 type Page$ref = any;
 export type editQueryVariables = {|
   domain: string
@@ -17,7 +18,7 @@ export type editQueryResponse = {|
   +web: ?{|
     +name: string
   |},
-  +$fragmentRefs: Page$ref,
+  +$fragmentRefs: Page$ref & Editor$ref,
 |};
 */
 
@@ -31,12 +32,20 @@ query editQuery(
     id
   }
   ...Page
+  ...Editor_3gZ8OL
 }
 
 fragment Page on Query {
   me {
     id
     themeName
+  }
+}
+
+fragment Editor_3gZ8OL on Query {
+  web(domain: $domain) {
+    name
+    id
   }
 }
 */
@@ -77,7 +86,7 @@ return {
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
+  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n  ...Page\n  ...Editor_3gZ8OL\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3gZ8OL on Query {\n  web(domain: $domain) {\n    name\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -102,6 +111,18 @@ return {
         "kind": "FragmentSpread",
         "name": "Page",
         "args": null
+      },
+      {
+        "kind": "FragmentSpread",
+        "name": "Editor",
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "domain",
+            "variableName": "domain",
+            "type": null
+          }
+        ]
       }
     ]
   },
@@ -147,5 +168,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2101a63e202f11e833ff887b16aca204';
+(node/*: any*/).hash = '31eef8e11192bc0693449659d31a753f';
 module.exports = node;
