@@ -62,9 +62,9 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
       ...props
     } = this.props;
 
-    const placeholderTextColor = colorLib(theme.colors[theme.textColor]).fade(
-      0.5,
-    );
+    const placeholderTextColor = colorLib(theme.colors[theme.textColor])
+      .fade(0.5)
+      .toString();
 
     return (
       <View>
@@ -75,7 +75,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
         )}
         <TextInputNative
           disabled={disabled}
-          placeholderTextColor={placeholderTextColor.toString()}
+          placeholderTextColor={placeholderTextColor}
           style={[
             theme.styles.textInput,
             theme.typography.fontSizeWithLineHeight(size),
