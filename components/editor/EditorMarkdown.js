@@ -2,22 +2,21 @@
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
-import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
+import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import Button from '../core/Button';
-import Row from '../core/Row';
+import EditorMarkdownButtons from './EditorMarkdownButtons';
 
 const messages = defineMessages({
   placeholder: {
+    defaultMessage: 'write...',
+    id: 'editorMarkdown.textInput.placeholder',
+  },
+  example: {
     defaultMessage: `# Heading 1
 
-Markdown is a simple way to format text that looks great on any device.
+[Markdown](http://commonmark.org/) is a **simple** way to *format* text that looks great on any device.
 
-## Examples
-
-A paragraph with *italic*, **bold**, and [link](https://a.com).
-
-![Image](https://a.com/a.png)
+![Image](https://example.com/example.png)
 
 > Blockquote
 
@@ -27,37 +26,9 @@ A paragraph with *italic*, **bold**, and [link](https://a.com).
 1. One
 2. Two
 `,
-    id: 'editor.placeholder',
+    id: 'editorMarkdown.textInput.example',
   },
 });
-
-type ButtonsProps = {|
-  theme: Theme,
-  selectionIsCollapsed: boolean,
-  onReusePress: () => void,
-|};
-
-class Buttons extends React.PureComponent<ButtonsProps> {
-  render() {
-    return (
-      <View style={this.props.theme.styles.editorMarkdownButtons}>
-        <Row>
-          <Button
-            disabled={this.props.selectionIsCollapsed}
-            inline
-            color="primary"
-            onPress={this.props.onReusePress}
-          >
-            <FormattedMessage
-              defaultMessage="reuse"
-              id="editorMarkdown.button.reuse"
-            />
-          </Button>
-        </Row>
-      </View>
-    );
-  }
-}
 
 type EditorMarkdownProps = {|
   theme: Theme,
@@ -140,8 +111,7 @@ class EditorMarkdown extends React.PureComponent<
           ]}
           selection={selection}
         />
-        <Buttons
-          theme={theme}
+        <EditorMarkdownButtons
           selectionIsCollapsed={this.selectionIsCollapsed()}
           onReusePress={this.handleReusePress}
         />
