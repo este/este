@@ -21,5 +21,6 @@ module.exports = {
     'import/extensions': 0, // Flow checks it.
     'no-alert': 0, // Too strict.
     'react/require-default-props': 0, // Not needed with Flow.
+    'react/no-multi-comp': 0, // It's fine.
   },
 };

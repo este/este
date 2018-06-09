@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
-import colorLib from 'color';
-import { defineMessages, type IntlShape } from 'react-intl';
+import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
+import Button from '../core/Button';
+import Row from '../core/Row';
 
 const messages = defineMessages({
   placeholder: {
@@ -30,13 +31,51 @@ A paragraph with *italic*, **bold**, and [link](https://a.com).
   },
 });
 
+type ButtonsProps = {|
+  theme: Theme,
+  selectionIsCollapsed: boolean,
+  onReusePress: () => void,
+|};
+
+class Buttons extends React.PureComponent<ButtonsProps> {
+  render() {
+    return (
+      <View style={this.props.theme.styles.editorMarkdownButtons}>
+        <Row>
+          <Button
+            disabled={this.props.selectionIsCollapsed}
+            inline
+            color="primary"
+            onPress={this.props.onReusePress}
+          >
+            <FormattedMessage
+              defaultMessage="reuse"
+              id="editorMarkdown.button.reuse"
+            />
+          </Button>
+        </Row>
+      </View>
+    );
+  }
+}
+
 type EditorMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
   value: string,
 |};
 
-class EditorMarkdown extends React.PureComponent<EditorMarkdownProps> {
+type EditorMarkdownState = {|
+  selection: { start: number, end: number },
+|};
+
+class EditorMarkdown extends React.PureComponent<
+  EditorMarkdownProps,
+  EditorMarkdownState,
+> {
+  state = {
+    selection: { start: 0, end: 0 },
+  };
   componentDidMount() {
     this.adjustHeight();
   }
@@ -63,31 +102,50 @@ class EditorMarkdown extends React.PureComponent<EditorMarkdownProps> {
     this.adjustHeight();
   };
 
+  handleSelection = ({ nativeEvent: { selection } }) => {
+    this.setState({ selection });
+  };
+
+  handleReusePress = () => {
+    // console.log(this.state.selection);
+  };
+
   inputRef = React.createRef();
+
+  selectionIsCollapsed() {
+    const { selection } = this.state;
+    return selection.start === selection.end;
+  }
 
   render() {
     const { theme, intl, value } = this.props;
-    // TODO: Move to derived state.
-    const placeholderTextColor = colorLib(theme.colors[theme.textColor])
-      .fade(0.5)
-      .toString();
+    const { selection } = this.state;
     return (
-      <TextInput
-        multiline
-        // value={value}
-        defaultValue={value}
-        onChange={this.handleChange}
-        placeholderTextColor={placeholderTextColor}
-        placeholder={intl.formatMessage(messages.placeholder)}
-        ref={this.inputRef}
-        // https://github.com/facebook/draft-js/issues/616#issuecomment-343596615
-        // It breaks tab navigation.
-        data-enable-grammarly="false"
-        style={[
-          theme.styles.editorMarkdown,
-          theme.typography.fontSizeWithLineHeight(0),
-        ]}
-      />
+      <View>
+        <TextInput
+          multiline
+          // value={value}
+          defaultValue={value}
+          onChange={this.handleChange}
+          onSelectionChange={this.handleSelection}
+          placeholderTextColor={theme.placeholderTextColor}
+          placeholder={intl.formatMessage(messages.placeholder)}
+          ref={this.inputRef}
+          // https://github.com/facebook/draft-js/issues/616#issuecomment-343596615
+          // It breaks tab navigation.
+          data-enable-grammarly="false"
+          style={[
+            theme.styles.editorMarkdownTextInput,
+            theme.typography.fontSizeWithLineHeight(0),
+          ]}
+          selection={selection}
+        />
+        <Buttons
+          theme={theme}
+          selectionIsCollapsed={this.selectionIsCollapsed()}
+          onReusePress={this.handleReusePress}
+        />
+      </View>
     );
   }
 }

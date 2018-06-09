@@ -18,6 +18,7 @@ const colors = {
   success: openColorTyped.green[5],
   warning: openColorTyped.orange[6],
   danger: openColorTyped.red[6],
+  // TODO: Rename to foreground and background to remove all colors[white / black]?
   black: openColorTyped.gray[8],
   white: openColorTyped.white,
   gray: openColorTyped.gray[5],
@@ -196,8 +197,14 @@ const stylesJson = {
     // paddingVertical: typography.rhythm(1),
   },
 
-  editorMarkdown: {
+  editorMarkdownTextInput: {
     color: colors.black,
+  },
+
+  editorMarkdownButtons: {
+    paddingHorizontal: typography.rhythm(0.5),
+    paddingTop: typography.rhythm(0.25),
+    paddingBottom: typography.rhythm(0.75),
   },
 };
 
@@ -241,8 +248,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    editorMarkdown: {
-      ...stylesJson.editorMarkdown,
+    editorMarkdownTextInput: {
+      ...stylesJson.editorMarkdownTextInput,
       color: colors.white,
     },
   }),
