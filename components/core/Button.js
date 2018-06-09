@@ -3,14 +3,20 @@ import * as React from 'react';
 import withTheme, { type Theme } from './withTheme';
 import Text, { type TextProps } from './Text';
 import { TouchableOpacity } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 export type ButtonProps = {|
   ...TextProps,
   inline?: boolean,
+  accessible?: boolean,
   accessibilityLabel?: string,
   disabled?: boolean,
   onPress?: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
   testID?: string,
+  touchableStyle?: ViewStyleProp,
+  activeOpacity?: number,
 |};
 
 const getColorStyle = (styles, color) => {
@@ -40,6 +46,7 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
   render() {
     const {
       inline,
+      accessible,
       accessibilityLabel,
       disabled,
       onPress,
@@ -47,6 +54,10 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
       color,
       style,
       theme,
+      touchableStyle,
+      onFocus,
+      onBlur,
+      activeOpacity,
       ...props
     } = this.props;
     // Fix font smoothing only for buttons with background.
@@ -54,11 +65,16 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
 
     return (
       <TouchableOpacity
+        accessible={accessible}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
         disabled={disabled}
         onPress={onPress}
         testID={testID}
+        style={touchableStyle}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        activeOpacity={activeOpacity}
       >
         <Text
           fixWebFontSmoothing={fixWebFontSmoothing}

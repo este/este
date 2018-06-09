@@ -4,7 +4,7 @@ import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import EditorMarkdownButtons from './EditorMarkdownButtons';
+import EditorMarkdownActions from './EditorMarkdownActions';
 
 const messages = defineMessages({
   placeholder: {
@@ -12,9 +12,13 @@ const messages = defineMessages({
     id: 'editorMarkdown.textInput.placeholder',
   },
   example: {
-    defaultMessage: `# Heading 1
+    defaultMessage: `[Home](/)
+
+# Heading 1
 
 [Markdown](http://commonmark.org/) is a **simple** way to *format* text that looks great on any device.
+
+## Heading 2
 
 ![Image](https://example.com/example.png)
 
@@ -25,6 +29,8 @@ const messages = defineMessages({
 
 1. One
 2. Two
+
+made by [steida](https://twitter.com/steida)
 `,
     id: 'editorMarkdown.textInput.example',
   },
@@ -33,11 +39,12 @@ const messages = defineMessages({
 type EditorMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
-  value: string,
+  // value: string,
 |};
 
 type EditorMarkdownState = {|
   selection: { start: number, end: number },
+  actionsAreExpanded: boolean,
 |};
 
 class EditorMarkdown extends React.PureComponent<
@@ -46,16 +53,17 @@ class EditorMarkdown extends React.PureComponent<
 > {
   state = {
     selection: { start: 0, end: 0 },
+    actionsAreExpanded: false,
   };
   componentDidMount() {
     this.adjustHeight();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.value !== this.props.value) {
-      this.adjustHeight();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.value !== this.props.value) {
+  //     this.adjustHeight();
+  //   }
+  // }
 
   adjustHeight() {
     const { current } = this.inputRef;
@@ -69,19 +77,39 @@ class EditorMarkdown extends React.PureComponent<
     });
   }
 
-  handleChange = () => {
+  handleTextInputChange = () => {
     this.adjustHeight();
   };
 
-  handleSelection = ({ nativeEvent: { selection } }) => {
+  handleTextInputSelection = ({ nativeEvent: { selection } }) => {
     this.setState({ selection });
   };
 
-  handleReusePress = () => {
-    // console.log(this.state.selection);
+  handleTextInputFocus = () => {
+    this.setState({ actionsAreExpanded: false });
   };
 
+  handleActionsToggle = () => {
+    this.setState(
+      prevState => ({
+        actionsAreExpanded: !prevState.actionsAreExpanded,
+      }),
+      () => {
+        // This is the right approach.
+        const { current } = this.actionsRef;
+        if (!current) return;
+        current.focusFirstIfExpanded();
+      },
+    );
+  };
+
+  handleActionsExample = () => {};
+
+  handleActionsReuse = () => {};
+
   inputRef = React.createRef();
+
+  actionsRef = React.createRef();
 
   selectionIsCollapsed() {
     const { selection } = this.state;
@@ -89,16 +117,20 @@ class EditorMarkdown extends React.PureComponent<
   }
 
   render() {
-    const { theme, intl, value } = this.props;
+    const { theme, intl } = this.props;
     const { selection } = this.state;
+
     return (
-      <View>
+      <View style={theme.styles.editorMarkdown}>
         <TextInput
+          // I suppose this is the special case where autoFocus is useful.
+          autoFocus
           multiline
           // value={value}
-          defaultValue={value}
-          onChange={this.handleChange}
-          onSelectionChange={this.handleSelection}
+          // defaultValue={value}
+          onChange={this.handleTextInputChange}
+          onSelectionChange={this.handleTextInputSelection}
+          onFocus={this.handleTextInputFocus}
           placeholderTextColor={theme.placeholderTextColor}
           placeholder={intl.formatMessage(messages.placeholder)}
           ref={this.inputRef}
@@ -111,9 +143,13 @@ class EditorMarkdown extends React.PureComponent<
           ]}
           selection={selection}
         />
-        <EditorMarkdownButtons
-          selectionIsCollapsed={this.selectionIsCollapsed()}
-          onReusePress={this.handleReusePress}
+        <EditorMarkdownActions
+          expanded={this.state.actionsAreExpanded}
+          // selectionIsCollapsed={this.selectionIsCollapsed()}
+          ref={this.actionsRef}
+          onToggle={this.handleActionsToggle}
+          onExample={this.handleActionsExample}
+          onReuse={this.handleActionsReuse}
         />
       </View>
     );

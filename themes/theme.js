@@ -194,17 +194,23 @@ const stylesJson = {
 
   editor: {
     flex: 1,
-    // paddingVertical: typography.rhythm(1),
+  },
+
+  editorMarkdown: {
+    paddingVertical: typography.rhythm(0.5),
   },
 
   editorMarkdownTextInput: {
     color: colors.black,
+    // It's the initial height. Client overrides it via inline styles.
+    height: typography.rhythm(1),
   },
 
   editorMarkdownButtons: {
-    paddingHorizontal: typography.rhythm(0.5),
-    paddingTop: typography.rhythm(0.25),
-    paddingBottom: typography.rhythm(0.75),
+    paddingVertical: typography.rhythm(1),
+    minHeight: typography.rhythm(1),
+    // paddingTop: typography.rhythm(0.25),
+    // paddingBottom: typography.rhythm(0.75),
   },
 };
 

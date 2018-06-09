@@ -7,23 +7,12 @@ import Heading from '../core/Heading';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Editor.graphql';
 
-const testValue = `[Home](/home) | [About](/about)
-
-# Titulek
-
-Odstavec.
-
-Made by steida`;
-
 type EditorProps = {|
   theme: Theme,
   data: generated.Editor,
 |};
 
 class Editor extends React.PureComponent<EditorProps> {
-  // handleChange = () => {
-  // };
-
   render() {
     const { web } = this.props.data;
     if (web == null) return null;
@@ -31,7 +20,7 @@ class Editor extends React.PureComponent<EditorProps> {
     return (
       <View style={theme.styles.editor}>
         <Heading size={1}>{web.name}</Heading>
-        <EditorMarkdown value={testValue} />
+        <EditorMarkdown />
       </View>
     );
   }

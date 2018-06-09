@@ -8,15 +8,21 @@ export type Theme = ThemeType;
 const withTheme = <Props: {}>(
   Component: React.ComponentType<Props>,
 ): React.ComponentType<$Diff<Props, { theme: Theme | void }>> => {
-  return class WithTheme extends React.PureComponent<Props> {
+  class WithTheme extends React.PureComponent<Props> {
     render() {
+      // $FlowFixMe
+      const { forwardedRef, ...rest } = this.props;
       return (
         <ThemeContext.Consumer>
-          {theme => <Component {...this.props} theme={theme} />}
+          {theme => <Component {...rest} theme={theme} ref={forwardedRef} />}
         </ThemeContext.Consumer>
       );
     }
-  };
+  }
+  // $FlowFixMe;
+  return React.forwardRef((props, ref) => {
+    return <WithTheme {...props} forwardedRef={ref} />;
+  });
 };
 
 export default withTheme;
