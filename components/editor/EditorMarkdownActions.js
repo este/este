@@ -20,7 +20,7 @@ class EditorMarkdownActions extends React.PureComponent<
 > {
   buttonsRef = React.createRef();
 
-  // DOM side effect can be called from parent component via ref.
+  // DOM side effect can be called from parent component via ref. That's fine.
   // https://github.com/necolas/react-native-web/blob/master/packages/website/guides/accessibility.md#spatial-navigation
   focusFirstIfExpanded() {
     if (!this.props.expanded) return;
@@ -40,9 +40,11 @@ class EditorMarkdownActions extends React.PureComponent<
     return (
       <View style={this.props.theme.styles.editorMarkdownButtons}>
         {!this.props.expanded ? (
-          <EditorMarkdownActionsButton onPress={this.props.onToggle}>
-            ■
-          </EditorMarkdownActionsButton>
+          <Row>
+            <EditorMarkdownActionsButton onPress={this.props.onToggle}>
+              ■
+            </EditorMarkdownActionsButton>
+          </Row>
         ) : (
           <Row ref={this.buttonsRef}>
             {!this.props.selectionIsCollapsed && (
