@@ -39,12 +39,12 @@ made by [steida](https://twitter.com/steida)
 type EditorMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
-  // value: string,
 |};
 
 type EditorMarkdownState = {|
   selection: { start: number, end: number },
   actionsAreExpanded: boolean,
+  value: string,
 |};
 
 class EditorMarkdown extends React.PureComponent<
@@ -54,13 +54,15 @@ class EditorMarkdown extends React.PureComponent<
   state = {
     selection: { start: 0, end: 0 },
     actionsAreExpanded: false,
+    value: '',
   };
+
   componentDidMount() {
     this.adjustHeight();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.value !== this.props.value) {
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.value !== this.state.value) {
   //     this.adjustHeight();
   //   }
   // }
@@ -77,11 +79,13 @@ class EditorMarkdown extends React.PureComponent<
     });
   }
 
-  handleTextInputChange = () => {
-    this.adjustHeight();
+  handleTextInputChangeText = text => {
+    this.setState({ value: text }, () => {
+      this.adjustHeight();
+    });
   };
 
-  handleTextInputSelection = ({ nativeEvent: { selection } }) => {
+  handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
     this.setState({ selection });
   };
 
@@ -103,7 +107,10 @@ class EditorMarkdown extends React.PureComponent<
     );
   };
 
-  handleActionsExample = () => {};
+  handleActionsExample = () => {
+    // jak ziskam cistej string?
+    // console.log('f');
+  };
 
   handleActionsReuse = () => {};
 
@@ -118,18 +125,16 @@ class EditorMarkdown extends React.PureComponent<
 
   render() {
     const { theme, intl } = this.props;
-    const { selection } = this.state;
 
     return (
       <View style={theme.styles.editorMarkdown}>
         <TextInput
-          // I suppose this is the special case where autoFocus is useful.
-          autoFocus
+          // https://github.com/necolas/react-native-web/issues/988
+          // autoFocus
           multiline
-          // value={value}
-          // defaultValue={value}
-          onChange={this.handleTextInputChange}
-          onSelectionChange={this.handleTextInputSelection}
+          value={this.state.value}
+          onChangeText={this.handleTextInputChangeText}
+          onSelectionChange={this.handleTextInputSelectionChange}
           onFocus={this.handleTextInputFocus}
           placeholderTextColor={theme.placeholderTextColor}
           placeholder={intl.formatMessage(messages.placeholder)}
@@ -141,7 +146,8 @@ class EditorMarkdown extends React.PureComponent<
             theme.styles.editorMarkdownTextInput,
             theme.typography.fontSizeWithLineHeight(0),
           ]}
-          selection={selection}
+          // https://github.com/necolas/react-native-web/issues/988
+          // selection={this.state.selection}
         />
         <EditorMarkdownActions
           expanded={this.state.actionsAreExpanded}
