@@ -207,10 +207,8 @@ const stylesJson = {
   },
 
   editorMarkdownButtons: {
-    paddingVertical: typography.rhythm(1),
     minHeight: typography.rhythm(1),
-    // paddingTop: typography.rhythm(0.25),
-    // paddingBottom: typography.rhythm(0.75),
+    paddingVertical: typography.rhythm(1),
   },
 };
 

@@ -145,7 +145,7 @@ class EditorMarkdown extends React.PureComponent<
         />
         <EditorMarkdownActions
           expanded={this.state.actionsAreExpanded}
-          // selectionIsCollapsed={this.selectionIsCollapsed()}
+          selectionIsCollapsed={this.selectionIsCollapsed()}
           ref={this.actionsRef}
           onToggle={this.handleActionsToggle}
           onExample={this.handleActionsExample}

@@ -9,7 +9,7 @@ import EditorMarkdownActionsButton from './EditorMarkdownActionsButton';
 type EditorMarkdownActionsProps = {|
   expanded: boolean,
   theme: Theme,
-  // selectionIsCollapsed: boolean,
+  selectionIsCollapsed: boolean,
   onToggle: () => void,
   onExample: () => void,
   onReuse: () => void,
@@ -37,32 +37,30 @@ class EditorMarkdownActions extends React.PureComponent<
   }
 
   render() {
-    const { styles } = this.props.theme;
-
     return (
-      <View style={styles.editorMarkdownButtons}>
-        <Row ref={this.buttonsRef}>
-          {!this.props.expanded ? (
-            <EditorMarkdownActionsButton onPress={this.props.onToggle}>
-              ■
-            </EditorMarkdownActionsButton>
-          ) : (
-            <>
-              <EditorMarkdownActionsButton onPress={this.props.onExample}>
-                <FormattedMessage
-                  defaultMessage="Example"
-                  id="editorMarkdown.buttons.example"
-                />
-              </EditorMarkdownActionsButton>
+      <View style={this.props.theme.styles.editorMarkdownButtons}>
+        {!this.props.expanded ? (
+          <EditorMarkdownActionsButton onPress={this.props.onToggle}>
+            ■
+          </EditorMarkdownActionsButton>
+        ) : (
+          <Row ref={this.buttonsRef}>
+            {!this.props.selectionIsCollapsed && (
               <EditorMarkdownActionsButton onPress={this.props.onReuse}>
                 <FormattedMessage
                   defaultMessage="Reuse"
                   id="editorMarkdown.buttons.reuse"
                 />
               </EditorMarkdownActionsButton>
-            </>
-          )}
-        </Row>
+            )}
+            <EditorMarkdownActionsButton onPress={this.props.onExample}>
+              <FormattedMessage
+                defaultMessage="Example"
+                id="editorMarkdown.buttons.example"
+              />
+            </EditorMarkdownActionsButton>
+          </Row>
+        )}
       </View>
     );
   }
