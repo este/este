@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { View, findNodeHandle } from 'react-native';
+import { View } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
 import EditorMarkdownActionsButton from './EditorMarkdownActionsButton';
+import { getFocusableNodes } from './Editor';
 
 type EditorMarkdownActionsProps = {|
   expanded: boolean,
@@ -26,14 +27,8 @@ class EditorMarkdownActions extends React.PureComponent<
     if (!this.props.expanded) return;
     const { current } = this.buttonsRef;
     if (!current) return;
-    const node = findNodeHandle(current);
-    // React Native
-    if (node == null || typeof node === 'number') return;
-    if (typeof node.querySelectorAll !== 'function') return;
-    const elements = node.querySelectorAll('[data-focusable="true"]');
-    const first = elements[0];
-    if (!first || typeof first.focus !== 'function') return;
-    first.focus();
+    const first = getFocusableNodes(current)[0];
+    if (first) first.focus();
   }
 
   render() {
