@@ -5,7 +5,7 @@ import withTheme, { type Theme } from '../core/withTheme';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
 import EditorMarkdownActions from './EditorMarkdownActions';
-import withConfirm, { type Confirm } from '../core/withConfirm';
+// import withConfirm, { type Confirm } from '../core/withConfirm';
 
 const messages = defineMessages({
   placeholder: {
@@ -13,17 +13,12 @@ const messages = defineMessages({
     id: 'editorMarkdown.textInput.placeholder',
   },
   example: {
-    defaultMessage: `[Home](/)
-
+    defaultMessage: `
 # Heading 1
 
-[Markdown](http://commonmark.org/) is a **simple** way to *format* text that looks great on any device.
+Markdown is a simple way to *format* text that looks **great** on any device.
 
 ## Heading 2
-
-![Image](https://example.com/example.png)
-
-> Blockquote
 
 * List
 * List
@@ -31,7 +26,12 @@ const messages = defineMessages({
 1. One
 2. Two
 
-made by [steida](https://twitter.com/steida)`,
+> Blockquote
+
+[Home](/) [About](/about) etc.
+
+made by [steida](https://twitter.com/steida)
+`,
     id: 'editorMarkdown.textInput.example',
   },
 });
@@ -39,7 +39,7 @@ made by [steida](https://twitter.com/steida)`,
 type EditorMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
-  confirm: Confirm,
+  // confirm: Confirm,
 |};
 
 type EditorMarkdownState = {|
@@ -108,13 +108,22 @@ class EditorMarkdown extends React.PureComponent<
   };
 
   handleActionsExample = () => {
-    if (!this.props.confirm()) return;
-    const value = this.props.intl.formatMessage(messages.example);
-    this.setState({ value }, () => {
-      const { current } = this.inputRef;
-      if (!current || typeof current.focus !== 'function') return;
-      current.focus();
-    });
+    this.setState(
+      prevState => {
+        // trim and \n for normalized lines.
+        const example = this.props.intl.formatMessage(messages.example).trim();
+        const value =
+          prevState.value.length === 0
+            ? example
+            : `${prevState.value}\n${example}`;
+        return { value: `${value}\n` };
+      },
+      () => {
+        const { current } = this.inputRef;
+        if (!current || typeof current.focus !== 'function') return;
+        current.focus();
+      },
+    );
   };
 
   handleActionsReuse = () => {};
@@ -167,4 +176,5 @@ class EditorMarkdown extends React.PureComponent<
   }
 }
 
-export default withConfirm(withIntl(withTheme(EditorMarkdown)));
+// export default withConfirm(withIntl(withTheme(EditorMarkdown)));
+export default withIntl(withTheme(EditorMarkdown));
