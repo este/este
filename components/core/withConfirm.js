@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+// TODO: Make it universal.
+
 export type Confirm = () => boolean;
 
 const withConfirm = <Props: {}>(

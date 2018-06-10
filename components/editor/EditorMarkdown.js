@@ -5,6 +5,7 @@ import withTheme, { type Theme } from '../core/withTheme';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
 import EditorMarkdownActions from './EditorMarkdownActions';
+import withConfirm, { type Confirm } from '../core/withConfirm';
 
 const messages = defineMessages({
   placeholder: {
@@ -30,8 +31,7 @@ const messages = defineMessages({
 1. One
 2. Two
 
-made by [steida](https://twitter.com/steida)
-`,
+made by [steida](https://twitter.com/steida)`,
     id: 'editorMarkdown.textInput.example',
   },
 });
@@ -39,6 +39,7 @@ made by [steida](https://twitter.com/steida)
 type EditorMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
+  confirm: Confirm,
 |};
 
 type EditorMarkdownState = {|
@@ -61,11 +62,11 @@ class EditorMarkdown extends React.PureComponent<
     this.adjustHeight();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.value !== this.state.value) {
-  //     this.adjustHeight();
-  //   }
-  // }
+  componentDidUpdate(_, prevState) {
+    if (prevState.value !== this.state.value) {
+      this.adjustHeight();
+    }
+  }
 
   adjustHeight() {
     const { current } = this.inputRef;
@@ -99,7 +100,6 @@ class EditorMarkdown extends React.PureComponent<
         actionsAreExpanded: !prevState.actionsAreExpanded,
       }),
       () => {
-        // This is the right approach.
         const { current } = this.actionsRef;
         if (!current) return;
         current.focusFirstIfExpanded();
@@ -108,8 +108,13 @@ class EditorMarkdown extends React.PureComponent<
   };
 
   handleActionsExample = () => {
-    // jak ziskam cistej string?
-    // console.log('f');
+    if (!this.props.confirm()) return;
+    const value = this.props.intl.formatMessage(messages.example);
+    this.setState({ value }, () => {
+      const { current } = this.inputRef;
+      if (!current || typeof current.focus !== 'function') return;
+      current.focus();
+    });
   };
 
   handleActionsReuse = () => {};
@@ -162,4 +167,4 @@ class EditorMarkdown extends React.PureComponent<
   }
 }
 
-export default withIntl(withTheme(EditorMarkdown));
+export default withConfirm(withIntl(withTheme(EditorMarkdown)));
