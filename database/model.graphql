@@ -1,22 +1,26 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
 
-# Type keys are sorted by id, *At, *ed, values, one / many relations.
+# Type keys are sorted by id, *At, *ed, values, relations.
 # TIP: To wipeout DB, comment everything then `yarn deploy:db --force`
+
+# Prisma does not support interfaces nor union types yet.
+# https://github.com/prismagraphql/prisma/issues/165
+# TODO: Use it when available.
 
 type User {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  # TODO: Refactor to auth providers. Email, Facebook, etc.
+  # TODO: Refactor to auth providers. Email, Facebook, Twitter, etc.
   email: String! @unique
   password: String!
-  # Optional, because it will be replaced with Theme soon. Evolving ftw.
+  # TODO: Refactor to Theme.
   themeName: String
+  # Created by a user.
   webs: [Web!]!
   pages: [Page!]!
   elements: [Element!]!
-  texts: [Text!]!
   images: [Image!]!
 }
 
@@ -26,11 +30,10 @@ type Web {
   updatedAt: DateTime!
   published: Boolean! @default(value: "false")
   name: String!
+  # Unique, because it's timestamped and used in URL.
   domain: String! @unique
   creator: User!
   pages: [Page!]!
-  elements: [Element!]!
-  names: [Name!]!
 }
 
 type Page {
@@ -40,34 +43,34 @@ type Page {
   published: Boolean! @default(value: "false")
   title: String!
   creator: User!
-  element: Element!
   web: Web!
+  element: Element!
+}
+
+# Prisma does not support interfaces nor union types yet.
+# https://github.com/prismagraphql/prisma/issues/165
+# This is a workaround. Otherwise we could use the union:
+# Example: union ElementValue = Text | Image | Children
+# This enum ensures a good enough consistency.
+enum ElementType {
+  TEXT
+  IMAGE
+  CHILDREN
 }
 
 type Element {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: Name
+  name: String
+  type: ElementType!
+  # Text, image, and children. Will be merged to value union type someday.
+  text: String
+  textFormat: String! @default(value: "CommonMark")
+  image: Image
+  children: [Child!]! @relation(name: "ElementChildren")
   creator: User!
-  web: Web!
-  # Prisma does not support interfaces nor union types yet.
-  # https://github.com/prismagraphql/prisma/issues/165
-  # This is a workaround. Only one content is allowed.
-  content_Children: [Child!]!
-  content_Text: Text
-  content_Image: Image
-}
-
-# For semantic, look, and behavior. For example: Header, MainNav, etc.
-type Name {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  value: String!
-  creator: User!
-  element: Element!
-  web: Web!
+  parent: [Child!]! @relation(name: "ChildElement")
 }
 
 type Child {
@@ -75,30 +78,10 @@ type Child {
   createdAt: DateTime!
   updatedAt: DateTime!
   index: Int!
-  creator: User!
-  element: Element!
+  parent: Element! @relation(name: "ElementChildren")
+  element: Element! @relation(name: "ChildElement")
 }
 
-enum TextFormat {
-  # http://commonmark.org/
-  COMMONMARK_0_28
-  # When a new format is added, the old not yet updated client code has to
-  # handle it. Rendering slightly broken text is better than rendering nothing,
-  # and we can transform text if needed, because we have an explicit version.
-  # Also, client can demand an update if unsupported format is returned.
-}
-
-type Text {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  format: TextFormat!
-  value: String!
-  creator: User!
-  element: Element!
-}
-
-# TODO: AWS asset type probably.
 type Image {
   id: ID! @unique
   createdAt: DateTime!
@@ -107,5 +90,4 @@ type Image {
   width: Int!
   height: Int!
   creator: User!
-  element: Element!
 }
