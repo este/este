@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ee7aff5e6fe57f538597b4e263856ca8
+ * @relayHash c5be9cc53173e5c79afcc430032e6893
  */
 
 /* eslint-disable */
@@ -21,7 +21,8 @@ export type CreateWebMutationResponse = {|
   +createWeb: ?{|
     +edge: ?{|
       +node: {|
-        +$fragmentRefs: WebsItem$ref
+        +domain: string,
+        +$fragmentRefs: WebsItem$ref,
       |}
     |},
     +errors: ?{|
@@ -39,6 +40,7 @@ mutation CreateWebMutation(
   createWeb(input: $input) {
     edge {
       node {
+        domain
         ...WebsItem
         id
       }
@@ -77,11 +79,18 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "name",
+  "name": "domain",
   "args": null,
   "storageKey": null
 },
 v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v4 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "errors",
@@ -90,7 +99,7 @@ v3 = {
   "concreteType": "CreateWebErrors",
   "plural": false,
   "selections": [
-    v2
+    v3
   ]
 };
 return {
@@ -98,7 +107,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        ...WebsItem\n        id\n      }\n    }\n    errors {\n      name\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    edge {\n      node {\n        domain\n        ...WebsItem\n        id\n      }\n    }\n    errors {\n      name\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -134,6 +143,7 @@ return {
                 "concreteType": "Web",
                 "plural": false,
                 "selections": [
+                  v2,
                   {
                     "kind": "FragmentSpread",
                     "name": "WebsItem",
@@ -143,7 +153,7 @@ return {
               }
             ]
           },
-          v3
+          v4
         ]
       }
     ]
@@ -180,6 +190,7 @@ return {
                 "concreteType": "Web",
                 "plural": false,
                 "selections": [
+                  v2,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -187,14 +198,7 @@ return {
                     "args": null,
                     "storageKey": null
                   },
-                  v2,
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "domain",
-                    "args": null,
-                    "storageKey": null
-                  },
+                  v3,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -206,7 +210,7 @@ return {
               }
             ]
           },
-          v3
+          v4
         ]
       }
     ]
@@ -214,5 +218,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '18da0cb28544895732b00b2e119458e8';
+(node/*: any*/).hash = 'b9207999bf28264029af2034543a521c';
 module.exports = node;

@@ -53,6 +53,7 @@ const createWeb /*: Resolver<
     },
   });
 
+  // Return shape for ConnectionHandler in CreateWeb.js
   return { edge: { node: web }, errors: null };
 };
 

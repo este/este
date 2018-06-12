@@ -11,6 +11,8 @@ import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
 import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
 import { validateCreateWeb } from '../server/api/webs.mjs';
+import Router from 'next/router';
+import type { Href } from './app/sitemap';
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
@@ -28,6 +30,14 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     name: '',
   };
 
+  static redirectToEdit(domain) {
+    const href: Href = {
+      pathname: '/edit',
+      query: { domain },
+    };
+    Router.replace(href);
+  }
+
   state = CreateWeb.initialState;
 
   // That's how we bind event handlers.
@@ -36,13 +46,15 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   handleCompleted = ({ createWeb }) => {
     // Payload can be null, because resolver can throw or be deprecated or
-    // whatever. Serious errors are handled globally. Nothing to do anyway.
+    // whatever. Serious errors are handled globally. Nothing to do here anyway.
     if (!createWeb) return;
     if (createWeb.errors) {
       this.setState({ errors: createWeb.errors });
       return;
     }
     this.setState(CreateWeb.initialState);
+    if (!createWeb.edge) return;
+    CreateWeb.redirectToEdit(createWeb.edge.node.domain);
   };
 
   createWeb = () => {
@@ -109,6 +121,7 @@ export default withMutation(
       createWeb(input: $input) {
         edge {
           node {
+            domain
             ...WebsItem
           }
         }

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Jun 08 2018 03:19:36 GMT+0200 (CEST)
+# timestamp: Tue Jun 12 2018 21:47:45 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
@@ -27,7 +27,7 @@ type Child implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   index: Int!
-  creator(where: UserWhereInput): User!
+  parent(where: ElementWhereInput): Element!
   element(where: ElementWhereInput): Element!
 }
 
@@ -157,7 +157,7 @@ input ChildWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
-  creator: UserWhereInput
+  parent: ElementWhereInput
   element: ElementWhereInput
 }
 
@@ -188,21 +188,20 @@ type Element implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name(where: NameWhereInput): Name
+  name: String
+  type: ElementType!
+  text: String
+  textFormat: String!
+  image(where: ImageWhereInput): Image
+  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
   creator(where: UserWhereInput): User!
-  web(where: WebWhereInput): Web!
-  content_Children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
-  content_Text(where: TextWhereInput): Text
-  content_Image(where: ImageWhereInput): Image
+  parent(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
 }
 
-enum ElementOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
+enum ElementType {
+  TEXT
+  IMAGE
+  CHILDREN
 }
 
 input ElementWhereInput {
@@ -298,14 +297,144 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  name: NameWhereInput
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  textFormat: String
+
+  """All values that are not equal to given value."""
+  textFormat_not: String
+
+  """All values that are contained in given list."""
+  textFormat_in: [String!]
+
+  """All values that are not contained in given list."""
+  textFormat_not_in: [String!]
+
+  """All values less than the given value."""
+  textFormat_lt: String
+
+  """All values less than or equal the given value."""
+  textFormat_lte: String
+
+  """All values greater than the given value."""
+  textFormat_gt: String
+
+  """All values greater than or equal the given value."""
+  textFormat_gte: String
+
+  """All values containing the given string."""
+  textFormat_contains: String
+
+  """All values not containing the given string."""
+  textFormat_not_contains: String
+
+  """All values starting with the given string."""
+  textFormat_starts_with: String
+
+  """All values not starting with the given string."""
+  textFormat_not_starts_with: String
+
+  """All values ending with the given string."""
+  textFormat_ends_with: String
+
+  """All values not ending with the given string."""
+  textFormat_not_ends_with: String
+  image: ImageWhereInput
+  children_every: ChildWhereInput
+  children_some: ChildWhereInput
+  children_none: ChildWhereInput
   creator: UserWhereInput
-  web: WebWhereInput
-  content_Children_every: ChildWhereInput
-  content_Children_some: ChildWhereInput
-  content_Children_none: ChildWhereInput
-  content_Text: TextWhereInput
-  content_Image: ImageWhereInput
+  parent_every: ChildWhereInput
+  parent_some: ChildWhereInput
+  parent_none: ChildWhereInput
 }
 
 enum EmailError {
@@ -324,7 +453,6 @@ type Image implements Node {
   width: Int!
   height: Int!
   creator(where: UserWhereInput): User!
-  element(where: ElementWhereInput): Element!
 }
 
 input ImageWhereInput {
@@ -505,7 +633,6 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  element: ElementWhereInput
 }
 
 enum Max140CharsError {
@@ -521,165 +648,6 @@ type Mutation {
   setTheme(input: SetThemeInput!): SetThemePayload
 }
 
-type Name implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  value: String!
-  creator(where: UserWhereInput): User!
-  element(where: ElementWhereInput): Element!
-  web(where: WebWhereInput): Web!
-}
-
-enum NameOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  value_ASC
-  value_DESC
-}
-
-input NameWhereInput {
-  """Logical AND on all given filters."""
-  AND: [NameWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [NameWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [NameWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  value: String
-
-  """All values that are not equal to given value."""
-  value_not: String
-
-  """All values that are contained in given list."""
-  value_in: [String!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [String!]
-
-  """All values less than the given value."""
-  value_lt: String
-
-  """All values less than or equal the given value."""
-  value_lte: String
-
-  """All values greater than the given value."""
-  value_gt: String
-
-  """All values greater than or equal the given value."""
-  value_gte: String
-
-  """All values containing the given string."""
-  value_contains: String
-
-  """All values not containing the given string."""
-  value_not_contains: String
-
-  """All values starting with the given string."""
-  value_starts_with: String
-
-  """All values not starting with the given string."""
-  value_not_starts_with: String
-
-  """All values ending with the given string."""
-  value_ends_with: String
-
-  """All values not ending with the given string."""
-  value_not_ends_with: String
-  creator: UserWhereInput
-  element: ElementWhereInput
-  web: WebWhereInput
-}
-
 """An object with an ID"""
 interface Node {
   """The id of the object."""
@@ -693,8 +661,8 @@ type Page implements Node {
   published: Boolean!
   title: String!
   creator(where: UserWhereInput): User!
-  element(where: ElementWhereInput): Element!
   web(where: WebWhereInput): Web!
+  element(where: ElementWhereInput): Element!
 }
 
 """Information about pagination in a connection."""
@@ -863,8 +831,8 @@ input PageWhereInput {
   """All values not ending with the given string."""
   title_not_ends_with: String
   creator: UserWhereInput
-  element: ElementWhereInput
   web: WebWhereInput
+  element: ElementWhereInput
 }
 
 enum PasswordError {
@@ -887,167 +855,6 @@ input SetThemeInput {
 
 type SetThemePayload {
   user: User
-}
-
-type Text implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  format: TextFormat!
-  value: String!
-  creator(where: UserWhereInput): User!
-  element(where: ElementWhereInput): Element!
-}
-
-enum TextFormat {
-  COMMONMARK_0_28
-}
-
-input TextWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TextWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TextWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TextWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  format: TextFormat
-
-  """All values that are not equal to given value."""
-  format_not: TextFormat
-
-  """All values that are contained in given list."""
-  format_in: [TextFormat!]
-
-  """All values that are not contained in given list."""
-  format_not_in: [TextFormat!]
-  value: String
-
-  """All values that are not equal to given value."""
-  value_not: String
-
-  """All values that are contained in given list."""
-  value_in: [String!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [String!]
-
-  """All values less than the given value."""
-  value_lt: String
-
-  """All values less than or equal the given value."""
-  value_lte: String
-
-  """All values greater than the given value."""
-  value_gt: String
-
-  """All values greater than or equal the given value."""
-  value_gte: String
-
-  """All values containing the given string."""
-  value_contains: String
-
-  """All values not containing the given string."""
-  value_not_contains: String
-
-  """All values starting with the given string."""
-  value_starts_with: String
-
-  """All values not starting with the given string."""
-  value_not_starts_with: String
-
-  """All values ending with the given string."""
-  value_ends_with: String
-
-  """All values not ending with the given string."""
-  value_not_ends_with: String
-  creator: UserWhereInput
-  element: ElementWhereInput
 }
 
 type User {
@@ -1280,9 +1087,6 @@ input UserWhereInput {
   elements_every: ElementWhereInput
   elements_some: ElementWhereInput
   elements_none: ElementWhereInput
-  texts_every: TextWhereInput
-  texts_some: TextWhereInput
-  texts_none: TextWhereInput
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -1297,8 +1101,6 @@ type Web implements Node {
   domain: String!
   creator(where: UserWhereInput): User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
-  names(where: NameWhereInput, orderBy: NameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Name!]
 }
 
 """A connection to a list of items."""
@@ -1501,10 +1303,4 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
-  names_every: NameWhereInput
-  names_some: NameWhereInput
-  names_none: NameWhereInput
 }

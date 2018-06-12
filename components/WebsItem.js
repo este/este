@@ -18,7 +18,10 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
     return (
       <Block>
         <Text>
-          <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
+          <A
+            href={{ pathname: '/edit', query: { domain: data.domain } }}
+            prefetch
+          >
             {data.name}
           </A>
         </Text>
