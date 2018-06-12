@@ -1,5 +1,5 @@
-// flow-typed signature: 82fb70c15e3aa0c1468144425703425e
-// flow-typed version: bf845eee3a/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: bc9e644ba43fa1c4d1fccc5fd47f65e9
+// flow-typed version: d37e775f89/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -483,7 +483,7 @@ type JestExtendedMatchersType = {
     toIncludeMultiple(substring: string[]): void;
 };
 
-type JestExpectType = {
+interface JestExpectType {
   not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
@@ -637,9 +637,13 @@ type JestExpectType = {
    */
   toMatchObject(object: Object | Array<Object>): void,
   /**
-   * This ensures that a React component matches the most recent snapshot.
+   * This ensures that an Object matches the most recent snapshot.
    */
   toMatchSnapshot(propertyMatchers?: {[key: string]: JestAsymmetricEqualityType}, name?: string): void,
+  /**
+   * This ensures that an Object matches the most recent snapshot.
+   */
+  toMatchSnapshot(name: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
    * If you want to test that a specific error gets thrown, you can provide an
@@ -655,7 +659,7 @@ type JestExpectType = {
    * matching the most recent snapshot when it is called.
    */
   toThrowErrorMatchingSnapshot(): void
-};
+}
 
 type JestObjectType = {
   /**
