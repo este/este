@@ -12,13 +12,12 @@ const messages = defineMessages({
     defaultMessage: 'write...',
     id: 'editorMarkdown.textInput.placeholder',
   },
+  // TODO: [Home](/) | [About](/)
   example: {
     defaultMessage: `
-# Heading 1
+# Example
 
 Markdown is a simple way to *format* text that looks **great** on any device.
-
-## Heading 2
 
 * List
 * List
@@ -27,8 +26,6 @@ Markdown is a simple way to *format* text that looks **great** on any device.
 2. Two
 
 > Blockquote
-
-[Home](/) [About](/about) etc.
 
 made by [steida](https://twitter.com/steida)
 `,
@@ -110,7 +107,7 @@ class EditorMarkdown extends React.PureComponent<
   handleActionsExample = () => {
     this.setState(
       prevState => {
-        // trim and \n for normalized lines.
+        // Trim and \n for normalized lines.
         const example = this.props.intl.formatMessage(messages.example).trim();
         const value =
           prevState.value.length === 0

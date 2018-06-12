@@ -45,6 +45,7 @@ class EditorMarkdownActionsButton extends React.PureComponent<
     return (
       <Button
         inline
+        bold={false}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         touchableStyle={styles.button}
