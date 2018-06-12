@@ -102,8 +102,7 @@ const stylesJson = {
   },
 
   mainNav: {
-    marginTop: typography.rhythm(1),
-    marginBottom: typography.rhythm(2),
+    marginVertical: typography.rhythm(2),
   },
 
   mainNavSpacer: {
