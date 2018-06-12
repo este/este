@@ -139,7 +139,7 @@ const stylesJson = {
     borderRadius: 5,
     borderWidth: 1,
     paddingVertical: typography.rhythm(0.1),
-    paddingHorizontal: typography.rhythm(0.5),
+    paddingHorizontal: typography.rhythm(0.75),
   },
 
   buttonPrimary: {

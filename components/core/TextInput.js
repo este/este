@@ -63,11 +63,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
 
     return (
       <View>
-        {label != null && (
-          <Text bold size={size}>
-            {label}
-          </Text>
-        )}
+        {label != null && <Text size={size - 1}>{label}</Text>}
         <TextInputNative
           disabled={disabled}
           placeholderTextColor={theme.placeholderTextColor}

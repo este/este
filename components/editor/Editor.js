@@ -7,11 +7,6 @@ import Heading from '../core/Heading';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Editor.graphql';
 
-type EditorProps = {|
-  theme: Theme,
-  data: generated.Editor,
-|};
-
 export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
   const node = findNodeHandle(instance);
   // TODO: React Native
@@ -19,6 +14,11 @@ export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
   if (typeof node.querySelectorAll !== 'function') return [];
   return [...node.querySelectorAll('[data-focusable="true"]')];
 };
+
+type EditorProps = {|
+  theme: Theme,
+  data: generated.Editor,
+|};
 
 class Editor extends React.PureComponent<EditorProps> {
   componentDidMount() {
