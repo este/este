@@ -104,26 +104,29 @@ class EditorMarkdown extends React.PureComponent<
     );
   };
 
+  focusTextInput = () => {
+    const { current } = this.inputRef;
+    if (!current || typeof current.focus !== 'function') return;
+    current.focus();
+  };
+
   handleActionsExample = () => {
-    this.setState(
-      prevState => {
-        // Trim and \n for normalized lines.
-        const example = this.props.intl.formatMessage(messages.example).trim();
-        const value =
-          prevState.value.length === 0
-            ? example
-            : `${prevState.value}\n${example}`;
-        return { value: `${value}\n` };
-      },
-      () => {
-        const { current } = this.inputRef;
-        if (!current || typeof current.focus !== 'function') return;
-        current.focus();
-      },
-    );
+    this.setState(prevState => {
+      // Trim and \n for normalized lines.
+      const example = this.props.intl.formatMessage(messages.example).trim();
+      const value =
+        prevState.value.length === 0
+          ? example
+          : `${prevState.value}\n${example}`;
+      return { value: `${value}\n` };
+    }, this.focusTextInput);
   };
 
   handleActionsReuse = () => {};
+
+  handleActionsEscape = () => {
+    this.focusTextInput();
+  };
 
   inputRef = React.createRef();
 
@@ -167,6 +170,7 @@ class EditorMarkdown extends React.PureComponent<
           onToggle={this.handleActionsToggle}
           onExample={this.handleActionsExample}
           onReuse={this.handleActionsReuse}
+          onEscape={this.handleActionsEscape}
         />
       </View>
     );

@@ -14,6 +14,7 @@ type EditorMarkdownActionsProps = {|
   onToggle: () => void,
   onExample: () => void,
   onReuse: () => void,
+  onEscape: () => void,
 |};
 
 class EditorMarkdownActions extends React.PureComponent<
@@ -31,9 +32,18 @@ class EditorMarkdownActions extends React.PureComponent<
     if (first) first.focus();
   }
 
+  handleViewKeyDown = event => {
+    if (event.key === 'Escape') {
+      this.props.onEscape();
+    }
+  };
+
   render() {
     return (
-      <View style={this.props.theme.styles.editorMarkdownButtons}>
+      <View
+        style={this.props.theme.styles.editorMarkdownButtons}
+        onKeyDown={this.handleViewKeyDown}
+      >
         {!this.props.expanded ? (
           <Row>
             <EditorMarkdownActionsButton onPress={this.props.onToggle}>
