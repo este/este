@@ -77,6 +77,14 @@ const app = (
       };
     }
 
+    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+    // dispatchError must be defined before state because of this.dispatchError
+    // eslint-disable-next-line react/sort-comp
+    dispatchError = (error: ContextError) => {
+      const { dispatchError } = this;
+      this.setState({ errorContext: { error, dispatchError } });
+    };
+
     state = {
       errorContext: { error: null, dispatchError: this.dispatchError },
     };
@@ -112,14 +120,6 @@ const app = (
         supportedLocales,
       }: AppProps);
     }
-
-    // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
-    // dispatchError must be defined before state because of this.dispatchError
-    // eslint-disable-next-line react/sort-comp
-    dispatchError = (error: ContextError) => {
-      const { dispatchError } = this;
-      this.setState({ errorContext: { error, dispatchError } });
-    };
 
     environment: Environment;
 
