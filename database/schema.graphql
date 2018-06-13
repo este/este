@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
-# timestamp: Tue Jun 12 2018 02:33:43 GMT+0200 (CEST)
+# timestamp: Wed Jun 13 2018 17:38:45 GMT+0200 (CEST)
 
 type AggregateChild {
   count: Int!
@@ -1250,7 +1250,6 @@ type Page implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   title: String!
   creator(where: UserWhereInput): User!
   web(where: WebWhereInput): Web!
@@ -1268,7 +1267,6 @@ type PageConnection {
 }
 
 input PageCreateInput {
-  published: Boolean
   title: String!
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
@@ -1286,14 +1284,12 @@ input PageCreateManyWithoutWebInput {
 }
 
 input PageCreateWithoutCreatorInput {
-  published: Boolean
   title: String!
   web: WebCreateOneWithoutPagesInput!
   element: ElementCreateOneInput!
 }
 
 input PageCreateWithoutWebInput {
-  published: Boolean
   title: String!
   creator: UserCreateOneWithoutPagesInput!
   element: ElementCreateOneInput!
@@ -1330,8 +1326,6 @@ enum PageOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  published_ASC
-  published_DESC
   title_ASC
   title_DESC
 }
@@ -1340,7 +1334,6 @@ type PagePreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   title: String!
 }
 
@@ -1384,7 +1377,6 @@ input PageSubscriptionWhereInput {
 }
 
 input PageUpdateInput {
-  published: Boolean
   title: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
@@ -1410,14 +1402,12 @@ input PageUpdateManyWithoutWebInput {
 }
 
 input PageUpdateWithoutCreatorDataInput {
-  published: Boolean
   title: String
   web: WebUpdateOneWithoutPagesInput
   element: ElementUpdateOneInput
 }
 
 input PageUpdateWithoutWebDataInput {
-  published: Boolean
   title: String
   creator: UserUpdateOneWithoutPagesInput
   element: ElementUpdateOneInput
@@ -1538,10 +1528,6 @@ input PageWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  published: Boolean
-
-  """All values that are not equal to given value."""
-  published_not: Boolean
   title: String
 
   """All values that are not equal to given value."""
@@ -2122,9 +2108,7 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   name: String!
-  domain: String!
   creator(where: UserWhereInput): User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
@@ -2140,9 +2124,7 @@ type WebConnection {
 }
 
 input WebCreateInput {
-  published: Boolean
   name: String!
-  domain: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
 }
@@ -2158,16 +2140,12 @@ input WebCreateOneWithoutPagesInput {
 }
 
 input WebCreateWithoutCreatorInput {
-  published: Boolean
   name: String!
-  domain: String!
   pages: PageCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
-  published: Boolean
   name: String!
-  domain: String!
   creator: UserCreateOneWithoutWebsInput!
 }
 
@@ -2187,21 +2165,15 @@ enum WebOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  published_ASC
-  published_DESC
   name_ASC
   name_DESC
-  domain_ASC
-  domain_DESC
 }
 
 type WebPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   name: String!
-  domain: String!
 }
 
 type WebSubscriptionPayload {
@@ -2244,9 +2216,7 @@ input WebSubscriptionWhereInput {
 }
 
 input WebUpdateInput {
-  published: Boolean
   name: String
-  domain: String
   creator: UserUpdateOneWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
 }
@@ -2269,16 +2239,12 @@ input WebUpdateOneWithoutPagesInput {
 }
 
 input WebUpdateWithoutCreatorDataInput {
-  published: Boolean
   name: String
-  domain: String
   pages: PageUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
-  published: Boolean
   name: String
-  domain: String
   creator: UserUpdateOneWithoutWebsInput
 }
 
@@ -2391,10 +2357,6 @@ input WebWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  published: Boolean
-
-  """All values that are not equal to given value."""
-  published_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -2435,46 +2397,6 @@ input WebWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  domain: String
-
-  """All values that are not equal to given value."""
-  domain_not: String
-
-  """All values that are contained in given list."""
-  domain_in: [String!]
-
-  """All values that are not contained in given list."""
-  domain_not_in: [String!]
-
-  """All values less than the given value."""
-  domain_lt: String
-
-  """All values less than or equal the given value."""
-  domain_lte: String
-
-  """All values greater than the given value."""
-  domain_gt: String
-
-  """All values greater than or equal the given value."""
-  domain_gte: String
-
-  """All values containing the given string."""
-  domain_contains: String
-
-  """All values not containing the given string."""
-  domain_not_contains: String
-
-  """All values starting with the given string."""
-  domain_starts_with: String
-
-  """All values not starting with the given string."""
-  domain_not_starts_with: String
-
-  """All values ending with the given string."""
-  domain_ends_with: String
-
-  """All values not ending with the given string."""
-  domain_not_ends_with: String
   creator: UserWhereInput
   pages_every: PageWhereInput
   pages_some: PageWhereInput
@@ -2483,5 +2405,4 @@ input WebWhereInput {
 
 input WebWhereUniqueInput {
   id: ID
-  domain: String
 }

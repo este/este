@@ -3,40 +3,43 @@ import * as React from 'react';
 import Form from './core/Form';
 import { CreateButton } from './core/buttons';
 import TextInput from './core/TextInput';
+// import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from './core/Row';
 import Block from './core/Block';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
-import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
 import { validateCreateWeb } from '../server/api/webs.mjs';
 import Router from 'next/router';
 import type { Href } from './app/sitemap';
+// import withIntl from './core/withIntl';
+
+// export const messages = defineMessages({
+//   pageTitle: {
+//     defaultMessage: 'Home',
+//     id: 'createWeb.pageTitle',
+//   },
+// });
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
   pending: boolean,
+  // intl: IntlShape,
 |};
 
 type CreateWebState = {|
   errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
   name: string,
+  // pageTitle: string,
 |};
 
 class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   static initialState = {
     errors: null,
     name: '',
+    // pageTitle: '',
   };
-
-  static redirectToEdit(domain) {
-    const href: Href = {
-      pathname: '/edit',
-      query: { domain },
-    };
-    Router.replace(href);
-  }
 
   state = CreateWeb.initialState;
 
@@ -48,19 +51,29 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     // Payload can be null, because resolver can throw or be deprecated or
     // whatever. Serious errors are handled globally. Nothing to do here anyway.
     if (!createWeb) return;
-    if (createWeb.errors) {
-      this.setState({ errors: createWeb.errors });
+    const { errors, pageId } = createWeb;
+    if (errors) {
+      this.setState({ errors });
       return;
     }
+    // No errors, we can reset the form.
     this.setState(CreateWeb.initialState);
-    if (!createWeb.edge) return;
-    CreateWeb.redirectToEdit(createWeb.edge.node.domain);
+    // And maybe redirect to edit.
+    if (pageId == null) return;
+    const href: Href = {
+      pathname: '/edit',
+      query: { pageId },
+    };
+    Router.replace(href);
   };
 
   createWeb = () => {
+    // const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
+
     // Create input object from state, props, whatever.
     const input = {
       name: this.state.name,
+      // pageTitle,
     };
 
     // Use server validation for client validation.
@@ -106,40 +119,17 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   }
 }
 
-const sharedUpdater = (store, recordEdge) => {
-  const connection = ConnectionHandler.getConnection(
-    store.get(ROOT_ID),
-    'Webs_webs',
-  );
-  ConnectionHandler.insertEdgeAfter(connection, recordEdge);
-};
-
 export default withMutation(
+  // withIntl(CreateWeb),
   CreateWeb,
   graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {
-        edge {
-          node {
-            domain
-            ...WebsItem
-          }
-        }
+        pageId
         errors {
           name
         }
       }
     }
   `,
-  {
-    updater: store => {
-      const payload = store.getRootField('createWeb');
-      // Because the server can return an empty payload, e.g. for 401.
-      if (!payload) return;
-      const recordEdge = payload.getLinkedRecord('edge');
-      // Because anything can fail anyway.
-      if (!recordEdge) return;
-      sharedUpdater(store, recordEdge);
-    },
-  },
 );

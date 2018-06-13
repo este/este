@@ -83,7 +83,7 @@ const PageFooter = ({ theme }) => (
 type Props = {|
   // Prop as function pattern.
   title: string | ((intl: IntlShape) => string),
-  children: React.Node | ((isAuthenticated: boolean) => React.Node),
+  children?: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
   requireAuth?: boolean,
   intl: IntlShape,

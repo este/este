@@ -1,6 +1,6 @@
 // @flow
 import * as validate from './validate.mjs';
-import diacriticsMap from 'diacritics-map';
+// import diacriticsMap from 'diacritics-map';
 /*::
 import type { Resolver } from './index';
 */
@@ -16,18 +16,24 @@ import type {
 export const validateCreateWeb = (input /*: CreateWebInput */) => {
   const name = validate.max140Chars(input.name);
   if (name) return { name };
+  // const pageTitle = validate.max140Chars(input.pageTitle);
+  // if (pageTitle) return { pageTitle };
 };
 
-const createWebDomainWithTimestamp = name => {
-  const domainName = name
-    .toLowerCase()
-    .split('')
-    .map(char => diacriticsMap[char] || char)
-    .join('')
-    .replace(/[^a-z0-9]/g, '');
-  const timestamp = Date.now().toString(36);
-  return `${domainName}-${timestamp}`;
-};
+// TODO: Use only for published webs and pages.
+// // node-slug has a security issue
+// // https://github.com/dodo/node-slug/pull/91
+// const slug = value =>
+//   value
+//     .trim()
+//     .toLowerCase()
+//     .split('')
+//     .map(char => diacriticsMap[char] || char)
+//     .join('')
+//     .replace(/[^a-z0-9]/g, '');
+//
+// const createWebDomainWithTimestamp = name =>
+//   `${slug(name)}-${Date.now().toString(36)}`;
 
 const createWeb /*: Resolver<
   CreateWebMutationVariables,
@@ -41,20 +47,41 @@ const createWeb /*: Resolver<
   const userId = context.getUserId();
 
   const errors = validateCreateWeb(input);
-  if (errors) return { edge: null, errors };
+  if (errors) return { pageId: null, errors };
 
-  const domain = createWebDomainWithTimestamp(input.name);
-
-  const web = await context.db.mutation.createWeb({
-    data: {
-      name: input.name,
-      domain,
-      creator: { connect: { id: userId } },
+  const web = await context.db.mutation.createWeb(
+    {
+      data: {
+        name: input.name,
+        creator: { connect: { id: userId } },
+        pages: {
+          create: {
+            // TODO: Must be defined from client.
+            title: 'Home',
+            creator: { connect: { id: userId } },
+            element: {
+              create: {
+                type: 'TEXT',
+                creator: { connect: { id: userId } },
+              },
+            },
+          },
+        },
+      },
     },
-  });
+    `
+      {
+        id
+        pages {
+          id
+        }
+      }
+    `,
+  );
 
-  // Return shape for ConnectionHandler in CreateWeb.js
-  return { edge: { node: web }, errors: null };
+  const pageId = web.pages[0].id;
+
+  return { pageId, errors: null };
 };
 
 /*::
@@ -114,26 +141,27 @@ import type {
 } from '../../pages/__generated__/editQuery.graphql.js';
 */
 
-const web /*: Resolver<
-  editQueryVariables,
-  editQueryResponse,
-  'web',
-> */ = async (
-  parent,
-  { domain },
-  context,
-  info,
-) => {
-  const userId = context.getUserId();
-  const webExists = await context.db.exists.Web({
-    domain,
-    creator: { id: userId },
-  });
-  if (!webExists) context.throwHttpStatus(403);
-  return context.db.query.web({ where: { domain } }, info);
-};
+// const web /*: Resolver<
+//   editQueryVariables,
+//   editQueryResponse,
+//   'web',
+// > */ = async (
+//   parent,
+//   { domain },
+//   context,
+//   info,
+// ) => {
+//   const userId = context.getUserId();
+//   context.throwHttpStatus(403);
+//   // const webExists = await context.db.exists.Web({
+//   //   domain,
+//   //   creator: { id: userId },
+//   // });
+//   // if (!webExists) context.throwHttpStatus(403);
+//   // return context.db.query.web({ where: { domain } }, info);
+// };
 
 export default {
   mutations: { createWeb, deleteWeb },
-  queries: { webs, web },
+  queries: { webs },
 };

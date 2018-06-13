@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6c62b8f539f88f3225737b74ea5fe5ee
+ * @relayHash 9fe240050097fa1e0f0c83d099443cbf
  */
 
 /* eslint-disable */
@@ -51,8 +51,10 @@ fragment Webs on Query {
 fragment WebsItem on Web {
   updatedAt
   name
-  domain
   id
+  pages(first: 1, orderBy: updatedAt_ASC) {
+    id
+  }
 }
 */
 
@@ -69,7 +71,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  domain\n  id\n}\n",
+  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_ASC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -164,11 +166,29 @@ return {
                     "storageKey": null
                   },
                   {
-                    "kind": "ScalarField",
+                    "kind": "LinkedField",
                     "alias": null,
-                    "name": "domain",
-                    "args": null,
-                    "storageKey": null
+                    "name": "pages",
+                    "storageKey": "pages(first:1,orderBy:\"updatedAt_ASC\")",
+                    "args": [
+                      {
+                        "kind": "Literal",
+                        "name": "first",
+                        "value": 1,
+                        "type": "Int"
+                      },
+                      {
+                        "kind": "Literal",
+                        "name": "orderBy",
+                        "value": "updatedAt_ASC",
+                        "type": "PageOrderByInput"
+                      }
+                    ],
+                    "concreteType": "Page",
+                    "plural": true,
+                    "selections": [
+                      v0
+                    ]
                   },
                   {
                     "kind": "ScalarField",

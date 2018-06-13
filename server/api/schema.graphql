@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Tue Jun 12 2018 21:47:45 GMT+0200 (CEST)
+# timestamp: Wed Jun 13 2018 20:17:42 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
@@ -170,7 +170,7 @@ input CreateWebInput {
 }
 
 type CreateWebPayload {
-  edge: WebEdge
+  pageId: ID
   errors: CreateWebErrors
 }
 
@@ -658,7 +658,6 @@ type Page implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   title: String!
   creator(where: UserWhereInput): User!
   web(where: WebWhereInput): Web!
@@ -687,8 +686,6 @@ enum PageOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  published_ASC
-  published_DESC
   title_ASC
   title_DESC
 }
@@ -786,10 +783,6 @@ input PageWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  published: Boolean
-
-  """All values that are not equal to given value."""
-  published_not: Boolean
   title: String
 
   """All values that are not equal to given value."""
@@ -1096,9 +1089,7 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   name: String!
-  domain: String!
   creator(where: UserWhereInput): User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
@@ -1215,10 +1206,6 @@ input WebWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  published: Boolean
-
-  """All values that are not equal to given value."""
-  published_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -1259,46 +1246,6 @@ input WebWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  domain: String
-
-  """All values that are not equal to given value."""
-  domain_not: String
-
-  """All values that are contained in given list."""
-  domain_in: [String!]
-
-  """All values that are not contained in given list."""
-  domain_not_in: [String!]
-
-  """All values less than the given value."""
-  domain_lt: String
-
-  """All values less than or equal the given value."""
-  domain_lte: String
-
-  """All values greater than the given value."""
-  domain_gt: String
-
-  """All values greater than or equal the given value."""
-  domain_gte: String
-
-  """All values containing the given string."""
-  domain_contains: String
-
-  """All values not containing the given string."""
-  domain_not_contains: String
-
-  """All values starting with the given string."""
-  domain_starts_with: String
-
-  """All values not starting with the given string."""
-  domain_not_starts_with: String
-
-  """All values ending with the given string."""
-  domain_ends_with: String
-
-  """All values not ending with the given string."""
-  domain_not_ends_with: String
   creator: UserWhereInput
   pages_every: PageWhereInput
   pages_some: PageWhereInput

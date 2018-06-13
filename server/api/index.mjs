@@ -34,10 +34,11 @@ const resolvers = {
 export type ControlledHttpStatus = 401 | 403 | 404;
 
 type Context = {
+  // Flow type generation is already in the master!
   db: {
     // https://github.com/prismagraphql/prisma-binding#api
     query: { [string]: (any, any) => any },
-    mutation: { [string]: (any) => any },
+    mutation: { [string]: (any, any) => any },
     exists: { [string]: (any) => any },
   },
   throwHttpStatus: ControlledHttpStatus => void,

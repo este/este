@@ -17,7 +17,7 @@ export type Href =
     |}
   | {|
       pathname: '/edit',
-      query: {| domain: string |},
+      query: {| pageId: string |},
     |};
 
 // Must be separated from pages because pages are lazily loaded and MainNav

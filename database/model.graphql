@@ -1,12 +1,8 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
 
-# Type keys are sorted by id, *At, *ed, values, relations.
-# TIP: To wipeout DB, comment everything then `yarn deploy:db --force`
-
-# Prisma does not support interfaces nor union types yet.
+# Note Prisma does not support interfaces nor union types yet.
 # https://github.com/prismagraphql/prisma/issues/165
-# TODO: Use it when available.
 
 type User {
   id: ID! @unique
@@ -28,10 +24,7 @@ type Web {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean! @default(value: "false")
   name: String!
-  # Unique, because it's timestamped and used in URL.
-  domain: String! @unique
   creator: User!
   pages: [Page!]!
 }
@@ -40,7 +33,6 @@ type Page {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean! @default(value: "false")
   title: String!
   creator: User!
   web: Web!

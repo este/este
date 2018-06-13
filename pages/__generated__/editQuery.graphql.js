@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d1cddec53065fac3267ac2e9262a0dd6
+ * @relayHash 02c4b1edf1da3bb882809e84d4a33a7b
  */
 
 /* eslint-disable */
@@ -9,30 +9,17 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Editor$ref = any;
 type Page$ref = any;
-export type editQueryVariables = {|
-  domain: string
-|};
+export type editQueryVariables = {||};
 export type editQueryResponse = {|
-  +web: ?{|
-    +name: string
-  |},
-  +$fragmentRefs: Page$ref & Editor$ref,
+  +$fragmentRefs: Page$ref
 |};
 */
 
 
 /*
-query editQuery(
-  $domain: String!
-) {
-  web(domain: $domain) {
-    name
-    id
-  }
+query editQuery {
   ...Page
-  ...Editor_3gZ8OL
 }
 
 fragment Page on Query {
@@ -41,109 +28,34 @@ fragment Page on Query {
     themeName
   }
 }
-
-fragment Editor_3gZ8OL on Query {
-  web(domain: $domain) {
-    name
-    id
-  }
-}
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "domain",
-    "type": "String!",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "domain",
-    "variableName": "domain",
-    "type": "String!"
-  }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery(\n  $domain: String!\n) {\n  web(domain: $domain) {\n    name\n    id\n  }\n  ...Page\n  ...Editor_3gZ8OL\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3gZ8OL on Query {\n  web(domain: $domain) {\n    name\n    id\n  }\n}\n",
+  "text": "query editQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "editQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": v0,
+    "argumentDefinitions": [],
     "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "web",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "Web",
-        "plural": false,
-        "selections": [
-          v2
-        ]
-      },
       {
         "kind": "FragmentSpread",
         "name": "Page",
         "args": null
-      },
-      {
-        "kind": "FragmentSpread",
-        "name": "Editor",
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "domain",
-            "variableName": "domain",
-            "type": null
-          }
-        ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
     "name": "editQuery",
-    "argumentDefinitions": v0,
+    "argumentDefinitions": [],
     "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "web",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "Web",
-        "plural": false,
-        "selections": [
-          v2,
-          v3
-        ]
-      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -153,7 +65,13 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v3,
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          },
           {
             "kind": "ScalarField",
             "alias": null,
@@ -166,7 +84,6 @@ return {
     ]
   }
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '31eef8e11192bc0693449659d31a753f';
+(node/*: any*/).hash = '98f3db8546b05aad7db73722c4ae0dec';
 module.exports = node;
