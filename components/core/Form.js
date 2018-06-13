@@ -23,6 +23,7 @@ class Form extends React.PureComponent<FormProps> {
     if (e.key !== 'Enter') return;
     if (typeof this.props.onSubmit !== 'function') return;
     this.props.onSubmit();
+    e.preventDefault();
   };
 
   render() {
