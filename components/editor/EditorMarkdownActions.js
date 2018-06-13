@@ -5,7 +5,7 @@ import withTheme, { type Theme } from '../core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
 import EditorMarkdownActionsButton from './EditorMarkdownActionsButton';
-// import { getFocusableNodes } from './Editor';
+import { getFocusableNodes } from './Editor';
 
 type EditorMarkdownActionsProps = {|
   expanded: boolean,
@@ -28,8 +28,8 @@ class EditorMarkdownActions extends React.PureComponent<
     if (!this.props.expanded) return;
     const { current } = this.buttonsRef;
     if (!current) return;
-    // const first = getFocusableNodes(current)[0];
-    // if (first) first.focus();
+    const first = getFocusableNodes(current)[0];
+    if (first) first.focus();
   }
 
   handleViewKeyDown = event => {

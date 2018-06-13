@@ -5,35 +5,35 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/editQuery.graphql';
 import Error from 'next/error';
 import Page from '../components/core/Page';
-// import Editor from '../components/editor/Editor';
+import Editor from '../components/editor/Editor';
 
 const Edit = props => {
-  return null;
-  // const { web }: generated.editQueryResponse = props.data;
-  // if (!web) return <Error statusCode={404} />;
-  // return (
-  //   <Page
-  //     // header={false}
-  //     footer={false}
-  //     requireAuth
-  //     // title={web.name}
-  //     title="todo"
-  //     data={props.data}
-  //   >
-  //     {/* <Editor data={props.data} /> */}
-  //   </Page>
-  // );
+  const { page }: generated.editQueryResponse = props.data;
+  if (!page) return <Error statusCode={404} />;
+  return (
+    <Page
+      // header={false}
+      footer={false}
+      requireAuth
+      title={page.web.name}
+      data={props.data}
+    >
+      <Editor data={props.data} />
+    </Page>
+  );
 };
 
 export default app(Edit, {
   query: graphql`
-    # query editQuery($pageId: String!) {
-    query editQuery {
-      # web(pageId: $pageId) {
-      #   name
-      # }
+    query editQuery($pageId: ID!) {
+      page(pageId: $pageId) {
+        id
+        web {
+          name
+        }
+      }
       ...Page
-      # ...Editor @arguments(pageId: $pageId)
+      ...Editor @arguments(pageId: $pageId)
     }
   `,
 });

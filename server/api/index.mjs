@@ -16,6 +16,7 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import users from './users';
 import webs from './webs';
+import pages from './pages';
 
 const resolvers = {
   Mutation: {
@@ -25,6 +26,7 @@ const resolvers = {
   Query: {
     ...users.queries,
     ...webs.queries,
+    ...pages.queries,
   },
 };
 

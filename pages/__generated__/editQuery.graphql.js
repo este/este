@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 02c4b1edf1da3bb882809e84d4a33a7b
+ * @relayHash 70ef1dc97b15e2d7fbf958fe0b799756
  */
 
 /* eslint-disable */
@@ -9,17 +9,36 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type Editor$ref = any;
 type Page$ref = any;
-export type editQueryVariables = {||};
+export type editQueryVariables = {|
+  pageId: string
+|};
 export type editQueryResponse = {|
-  +$fragmentRefs: Page$ref
+  +page: ?{|
+    +id: string,
+    +web: {|
+      +name: string
+    |},
+  |},
+  +$fragmentRefs: Page$ref & Editor$ref,
 |};
 */
 
 
 /*
-query editQuery {
+query editQuery(
+  $pageId: ID!
+) {
+  page(pageId: $pageId) {
+    id
+    web {
+      name
+      id
+    }
+  }
   ...Page
+  ...Editor_3AnMiB
 }
 
 fragment Page on Query {
@@ -28,34 +47,140 @@ fragment Page on Query {
     themeName
   }
 }
+
+fragment Editor_3AnMiB on Query {
+  page(pageId: $pageId) {
+    title
+    id
+  }
+}
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "pageId",
+    "type": "ID!",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "pageId",
+    "variableName": "pageId",
+    "type": "ID!"
+  }
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Request",
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
+  "text": "query editQuery(\n  $pageId: ID!\n) {\n  page(pageId: $pageId) {\n    id\n    web {\n      name\n      id\n    }\n  }\n  ...Page\n  ...Editor_3AnMiB\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3AnMiB on Query {\n  page(pageId: $pageId) {\n    title\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "editQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "page",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "Page",
+        "plural": false,
+        "selections": [
+          v2,
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "web",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Web",
+            "plural": false,
+            "selections": [
+              v3
+            ]
+          }
+        ]
+      },
       {
         "kind": "FragmentSpread",
         "name": "Page",
         "args": null
+      },
+      {
+        "kind": "FragmentSpread",
+        "name": "Editor",
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "pageId",
+            "variableName": "pageId",
+            "type": null
+          }
+        ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
     "name": "editQuery",
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "page",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "Page",
+        "plural": false,
+        "selections": [
+          v2,
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "web",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Web",
+            "plural": false,
+            "selections": [
+              v3,
+              v2
+            ]
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "title",
+            "args": null,
+            "storageKey": null
+          }
+        ]
+      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -65,13 +190,7 @@ const node/*: ConcreteRequest*/ = {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          },
+          v2,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -84,6 +203,7 @@ const node/*: ConcreteRequest*/ = {
     ]
   }
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '98f3db8546b05aad7db73722c4ae0dec';
+(node/*: any*/).hash = 'dd392122f010d625c0dc88cd9fee8010';
 module.exports = node;

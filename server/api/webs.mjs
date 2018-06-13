@@ -141,26 +141,6 @@ import type {
 } from '../../pages/__generated__/editQuery.graphql.js';
 */
 
-// const web /*: Resolver<
-//   editQueryVariables,
-//   editQueryResponse,
-//   'web',
-// > */ = async (
-//   parent,
-//   { domain },
-//   context,
-//   info,
-// ) => {
-//   const userId = context.getUserId();
-//   context.throwHttpStatus(403);
-//   // const webExists = await context.db.exists.Web({
-//   //   domain,
-//   //   creator: { id: userId },
-//   // });
-//   // if (!webExists) context.throwHttpStatus(403);
-//   // return context.db.query.web({ where: { domain } }, info);
-// };
-
 export default {
   mutations: { createWeb, deleteWeb },
   queries: { webs },
