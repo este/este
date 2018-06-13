@@ -39,12 +39,12 @@ type AuthPayload {
 
 input CreateWebInput {
   name: String!
-  # pageTitle: String!
+  pageTitle: String!
 }
 
 type CreateWebErrors {
   name: Max140CharsError
-  # pageTitle: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 type CreateWebPayload {

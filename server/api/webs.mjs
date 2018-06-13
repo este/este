@@ -14,10 +14,11 @@ import type {
 */
 
 export const validateCreateWeb = (input /*: CreateWebInput */) => {
+  // TODO: It's not ideal passing null everywhere, try ... spread.
   const name = validate.max140Chars(input.name);
-  if (name) return { name };
-  // const pageTitle = validate.max140Chars(input.pageTitle);
-  // if (pageTitle) return { pageTitle };
+  if (name) return { name, pageTitle: null };
+  const pageTitle = validate.max140Chars(input.pageTitle);
+  if (pageTitle) return { pageTitle, name: null };
 };
 
 // TODO: Use only for published webs and pages.
@@ -56,8 +57,7 @@ const createWeb /*: Resolver<
         creator: { connect: { id: userId } },
         pages: {
           create: {
-            // TODO: Must be defined from client.
-            title: 'Home',
+            title: input.pageTitle,
             creator: { connect: { id: userId } },
             element: {
               create: {

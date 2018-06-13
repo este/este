@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Jun 13 2018 20:17:42 GMT+0200 (CEST)
+# timestamp: Wed Jun 13 2018 20:26:56 GMT+0200 (CEST)
 
 type AggregateWeb {
   count: Int!
@@ -163,10 +163,12 @@ input ChildWhereInput {
 
 type CreateWebErrors {
   name: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 input CreateWebInput {
   name: String!
+  pageTitle: String!
 }
 
 type CreateWebPayload {

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 990a54f975364f48a222cf4722b5e1d5
+ * @relayHash 17d0a3c4b85279189f4bfacbd4e2f9e8
  */
 
 /* eslint-disable */
@@ -11,7 +11,8 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type Max140CharsError = "MAX_140_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED";
 export type CreateWebInput = {
-  name: string
+  name: string,
+  pageTitle: string,
 };
 export type CreateWebMutationVariables = {|
   input: CreateWebInput
@@ -20,7 +21,8 @@ export type CreateWebMutationResponse = {|
   +createWeb: ?{|
     +pageId: ?string,
     +errors: ?{|
-      +name: ?Max140CharsError
+      +name: ?Max140CharsError,
+      +pageTitle: ?Max140CharsError,
     |},
   |}
 |};
@@ -35,6 +37,7 @@ mutation CreateWebMutation(
     pageId
     errors {
       name
+      pageTitle
     }
   }
 }
@@ -88,6 +91,13 @@ v1 = [
             "name": "name",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "pageTitle",
+            "args": null,
+            "storageKey": null
           }
         ]
       }
@@ -99,7 +109,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    pageId\n    errors {\n      name\n    }\n  }\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    pageId\n    errors {\n      name\n      pageTitle\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -118,5 +128,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '68d85a3007f4f7c88834e4b85684816e';
+(node/*: any*/).hash = '8549878ca48c75dd14f0da3a6c332350';
 module.exports = node;

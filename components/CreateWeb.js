@@ -3,8 +3,7 @@ import * as React from 'react';
 import Form from './core/Form';
 import { CreateButton } from './core/buttons';
 import TextInput from './core/TextInput';
-// import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
-import { FormattedMessage } from 'react-intl';
+import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from './core/Row';
 import Block from './core/Block';
@@ -13,32 +12,32 @@ import withMutation, { type Commit, type Errors } from './core/withMutation';
 import { validateCreateWeb } from '../server/api/webs.mjs';
 import Router from 'next/router';
 import type { Href } from './app/sitemap';
-// import withIntl from './core/withIntl';
+import withIntl from './core/withIntl';
 
-// export const messages = defineMessages({
-//   pageTitle: {
-//     defaultMessage: 'Home',
-//     id: 'createWeb.pageTitle',
-//   },
-// });
+export const messages = defineMessages({
+  pageTitle: {
+    defaultMessage: 'Home',
+    id: 'createWeb.pageTitle',
+  },
+});
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
   pending: boolean,
-  // intl: IntlShape,
+  intl: IntlShape,
 |};
 
 type CreateWebState = {|
   errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
   name: string,
-  // pageTitle: string,
+  pageTitle: string,
 |};
 
 class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   static initialState = {
     errors: null,
     name: '',
-    // pageTitle: '',
+    pageTitle: '',
   };
 
   state = CreateWeb.initialState;
@@ -68,12 +67,12 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   };
 
   createWeb = () => {
-    // const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
+    const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
 
     // Create input object from state, props, whatever.
     const input = {
       name: this.state.name,
-      // pageTitle,
+      pageTitle,
     };
 
     // Use server validation for client validation.
@@ -120,14 +119,14 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 }
 
 export default withMutation(
-  // withIntl(CreateWeb),
-  CreateWeb,
+  withIntl(CreateWeb),
   graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {
         pageId
         errors {
           name
+          pageTitle
         }
       }
     }
