@@ -13,7 +13,7 @@
     "dev:api": "nodemon --config nodemon.api.json",
     "dev:web": "nodemon --config nodemon.web.json",
     "dev:relay:watch": "yarn relay --watch",
-    "dev:playground": "graphql playground --port 5000",
+    "dev:playground": "graphql playground --port 5000 --server-only",
     "dev": "yarn clean-babel-cache && yarn babel web && run-p dev:api dev:web dev:relay:watch dev:playground",
     "build": "next build",
     "production:api": "cross-env NODE_ENV=production node --experimental-modules server/api/index",
