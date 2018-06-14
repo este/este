@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9fe240050097fa1e0f0c83d099443cbf
+ * @relayHash 8115ad3439be64e9b0097fd9e94cf8c9
  */
 
 /* eslint-disable */
@@ -52,7 +52,7 @@ fragment WebsItem on Web {
   updatedAt
   name
   id
-  pages(first: 1, orderBy: updatedAt_ASC) {
+  pages(first: 1, orderBy: updatedAt_DESC) {
     id
   }
 }
@@ -71,7 +71,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_ASC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -169,7 +169,7 @@ return {
                     "kind": "LinkedField",
                     "alias": null,
                     "name": "pages",
-                    "storageKey": "pages(first:1,orderBy:\"updatedAt_ASC\")",
+                    "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
                     "args": [
                       {
                         "kind": "Literal",
@@ -180,7 +180,7 @@ return {
                       {
                         "kind": "Literal",
                         "name": "orderBy",
-                        "value": "updatedAt_ASC",
+                        "value": "updatedAt_DESC",
                         "type": "PageOrderByInput"
                       }
                     ],

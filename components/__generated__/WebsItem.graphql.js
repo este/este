@@ -56,7 +56,7 @@ return {
       "kind": "LinkedField",
       "alias": null,
       "name": "pages",
-      "storageKey": "pages(first:1,orderBy:\"updatedAt_ASC\")",
+      "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
       "args": [
         {
           "kind": "Literal",
@@ -67,7 +67,7 @@ return {
         {
           "kind": "Literal",
           "name": "orderBy",
-          "value": "updatedAt_ASC",
+          "value": "updatedAt_DESC",
           "type": "PageOrderByInput"
         }
       ],
@@ -81,5 +81,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '3e2da0a62dfb4d18791f5f3cd084ec04';
+(node/*: any*/).hash = '9180962ac47543a60bd2823651b4492b';
 module.exports = node;

@@ -42,7 +42,7 @@ export default createFragmentContainer(
       updatedAt
       name
       id
-      pages(first: 1, orderBy: updatedAt_ASC) {
+      pages(first: 1, orderBy: updatedAt_DESC) {
         id
       }
     }
