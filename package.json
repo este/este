@@ -2,7 +2,7 @@
   "name": "este",
   "private": true,
   "engines": {
-    "node": "10.1.0"
+    "node": "10.x.x"
   },
   "license": "MIT",
   "scripts": {
@@ -43,7 +43,8 @@
     "deps": "rimraf 'node_modules' 'yarn.lock' 'flow-typed' && yarn && flow-typed install",
     "env": "node --experimental-modules ./scripts/env",
     "analyze:bundles": "cross-env ANALYZE=BUNDLES next build",
-    "analyze:size": "cross-env ANALYZE=SIZE next build && cat '.next/stats.txt'"
+    "analyze:size": "cross-env ANALYZE=SIZE next build && cat '.next/stats.txt'",
+    "fix:codegen": "node --experimental-modules ./scripts/fixCodegen.mjs"
   },
   "dependencies": {
     "accepts": "^1.3.3",

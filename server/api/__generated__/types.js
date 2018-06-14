@@ -1,7 +1,7 @@
 /**
  * @flow
  */
- // $FlowFixMe
+// $FlowFixMe
 import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
 // $FlowFixMe
 import { IResolvers } from 'graphql-tools/dist/Interfaces'
