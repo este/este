@@ -89,6 +89,9 @@ const deleteWeb /*: Resolver<
     creator: { id: userId },
   });
   if (!webExists) context.throwHttpStatus(404);
+  await context.db.mutation.deleteManyPages({
+    where: { web: { id: args.input.id } },
+  });
   await context.db.mutation.deleteWeb({ where: { id: args.input.id } });
   return {
     // https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397134939
