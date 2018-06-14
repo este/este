@@ -1,36 +1,31 @@
 // @flow
 import * as validate from './validate.mjs';
-
 /*::
-import type { Resolver } from './index';
+import * as generated from './__generated__/types'
+import type { Resolver } from './index'
 */
 
-// /*::
-// import type {
-//   editQueryVariables,
-//   editQueryResponse,
-// } from '../../pages/__generated__/editQuery.graphql.js';
-// */
-
 const page /*: Resolver<
-  any,
-  any,
-  // editQueryVariables,
-  // editQueryResponse,
-  'page',
+  { pageId: generated.ID_Output },
+  generated.Page,
 > */ = async (
   parent,
-  { pageId },
+  args,
   context,
   info,
 ) => {
   const userId = context.getUserId();
   const pageExists = await context.db.exists.Page({
-    id: pageId,
+    id: args.pageId,
     creator: { id: userId },
   });
   if (!pageExists) context.throwHttpStatus(403);
-  return context.db.query.page({ where: { id: pageId } }, info);
+  const page = await context.db.query.page(
+    { where: { id: args.pageId } },
+    info,
+  );
+  // $FlowFixMe I don't know yet.
+  return page;
 };
 
 export default {

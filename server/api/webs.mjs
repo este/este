@@ -1,27 +1,12 @@
 // @flow
 import * as validate from './validate.mjs';
+/*::
+import * as generated from './__generated__/types'
+import type { Resolver } from './index'
+*/
+
+// TODO: Use it for published webs and pages only I guess.
 // import diacriticsMap from 'diacritics-map';
-/*::
-import type { Resolver } from './index';
-*/
-
-/*::
-import type {
-  CreateWebMutationVariables,
-  CreateWebMutationResponse,
-  CreateWebInput,
-} from '../../components/__generated__/CreateWebMutation.graphql';
-*/
-
-export const validateCreateWeb = (input /*: CreateWebInput */) => {
-  // TODO: It's not ideal passing null everywhere, try ... spread.
-  const name = validate.max140Chars(input.name);
-  if (name) return { name, pageTitle: null };
-  const pageTitle = validate.max140Chars(input.pageTitle);
-  if (pageTitle) return { pageTitle, name: null };
-};
-
-// TODO: Use only for published webs and pages.
 // // node-slug has a security issue
 // // https://github.com/dodo/node-slug/pull/91
 // const slug = value =>
@@ -36,28 +21,34 @@ export const validateCreateWeb = (input /*: CreateWebInput */) => {
 // const createWebDomainWithTimestamp = name =>
 //   `${slug(name)}-${Date.now().toString(36)}`;
 
+export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
+  const name = validate.max140Chars(input.name);
+  if (name) return { name };
+  const pageTitle = validate.max140Chars(input.pageTitle);
+  if (pageTitle) return { pageTitle };
+};
+
 const createWeb /*: Resolver<
-  CreateWebMutationVariables,
-  CreateWebMutationResponse,
-  'createWeb',
+  { input: generated.CreateWebInput },
+  generated.CreateWebPayload,
 > */ = async (
   parent,
-  { input },
+  args,
   context,
 ) => {
   const userId = context.getUserId();
 
-  const errors = validateCreateWeb(input);
-  if (errors) return { pageId: null, errors };
+  const errors = validateCreateWeb(args.input);
+  if (errors) return { errors };
 
   const web = await context.db.mutation.createWeb(
     {
       data: {
-        name: input.name,
+        name: args.input.name,
         creator: { connect: { id: userId } },
         pages: {
           create: {
-            title: input.pageTitle,
+            title: args.input.pageTitle,
             creator: { connect: { id: userId } },
             element: {
               create: {
@@ -79,43 +70,35 @@ const createWeb /*: Resolver<
     `,
   );
 
-  const pageId = web.pages[0].id;
-
-  return { pageId, errors: null };
+  return {
+    pageId: web.pages && web.pages[0].id,
+  };
 };
 
-/*::
-import type {
-  WebsItemDeleteMutationVariables,
-  WebsItemDeleteMutationResponse,
-} from '../../components/__generated__/WebsItemDeleteMutation.graphql';
-*/
-
 const deleteWeb /*: Resolver<
-  WebsItemDeleteMutationVariables,
-  WebsItemDeleteMutationResponse,
-  'deleteWeb',
+  { input: generated.DeleteWebInput },
+  generated.DeleteWebPayload,
 > */ = async (
   parent,
-  { input },
+  args,
   context,
 ) => {
   const userId = context.getUserId();
   const webExists = await context.db.exists.Web({
-    id: input.id,
+    id: args.input.id,
     creator: { id: userId },
   });
   if (!webExists) context.throwHttpStatus(404);
-  await context.db.mutation.deleteWeb({ where: { id: input.id } });
-  return { id: input.id };
+  await context.db.mutation.deleteWeb({ where: { id: args.input.id } });
+  return {
+    // https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397134939
+    id: args.input.id.toString(),
+  };
 };
 
-// relay-compiler does not generate input type for Connection it seems.
-// components/__generated__/Webs.graphql.js
 const webs /*: Resolver<
-  any,
-  any,
-  any,
+  { first: generated.Int },
+  generated.WebConnection,
 > */ = async (
   parent,
   args,
@@ -131,15 +114,9 @@ const webs /*: Resolver<
     },
     info,
   );
+  // $FlowFixMe I don't know yet.
   return webs;
 };
-
-/*::
-import type {
-  editQueryVariables,
-  editQueryResponse,
-} from '../../pages/__generated__/editQuery.graphql.js';
-*/
 
 export default {
   mutations: { createWeb, deleteWeb },

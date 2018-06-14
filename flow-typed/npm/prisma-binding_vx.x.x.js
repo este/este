@@ -1,4 +1,4 @@
-// flow-typed signature: 66741a75dead1302667aca1330cb45e7
+// flow-typed signature: 8957c3b6ca15f9d6d972abcc3e01db5a
 // flow-typed version: <<STUB>>/prisma-binding_v^2.0.2/flow_v0.74.0
 
 /**
@@ -54,6 +54,14 @@ declare module 'prisma-binding/dist/Prisma.test' {
   declare module.exports: any;
 }
 
+declare module 'prisma-binding/dist/PrismaFlowGenerator' {
+  declare module.exports: any;
+}
+
+declare module 'prisma-binding/dist/PrismaFlowGenerator.test' {
+  declare module.exports: any;
+}
+
 declare module 'prisma-binding/dist/PrismaGenerator' {
   declare module.exports: any;
 }
@@ -106,6 +114,12 @@ declare module 'prisma-binding/dist/Prisma.js' {
 }
 declare module 'prisma-binding/dist/Prisma.test.js' {
   declare module.exports: $Exports<'prisma-binding/dist/Prisma.test'>;
+}
+declare module 'prisma-binding/dist/PrismaFlowGenerator.js' {
+  declare module.exports: $Exports<'prisma-binding/dist/PrismaFlowGenerator'>;
+}
+declare module 'prisma-binding/dist/PrismaFlowGenerator.test.js' {
+  declare module.exports: $Exports<'prisma-binding/dist/PrismaFlowGenerator.test'>;
 }
 declare module 'prisma-binding/dist/PrismaGenerator.js' {
   declare module.exports: $Exports<'prisma-binding/dist/PrismaGenerator'>;

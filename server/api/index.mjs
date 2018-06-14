@@ -18,6 +18,7 @@ import users from './users';
 import webs from './webs';
 import pages from './pages';
 
+// TODO: This should be typed as well, probably via updated interface Prisma.
 const resolvers = {
   Mutation: {
     ...users.mutations,
@@ -33,26 +34,23 @@ const resolvers = {
 /*::
 // Controlled means with custom message or behavior.
 // https://stackoverflow.com/a/6937030/233902
-export type ControlledHttpStatus = 401 | 403 | 404;
+type ControlledHttpStatus = 401 | 403 | 404;
+import type { Prisma } from '../../database/__generated__/types'
 
 type Context = {
-  // Flow type generation is already in the master!
-  db: {
-    // https://github.com/prismagraphql/prisma-binding#api
-    query: { [string]: (any, any) => any },
-    mutation: { [string]: (any, any) => any },
-    exists: { [string]: (any) => any },
-  },
+  db: Prisma,
   throwHttpStatus: ControlledHttpStatus => void,
   getUserId: () => string,
 };
 
-export type Resolver<Variables, Response, Name: string> = (
+export type Resolver<Args, Response> = (
+  // TODO: Better type for the parent if possible.
   parent: Object,
-  variables: Variables,
+  args: Args,
   context: Context,
+  // TODO: GraphQLResolveInfo | string
   info: Object,
-) => Promise<$ElementType<Response, Name>>;
+) => Promise<?Response>;
 */
 
 const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
