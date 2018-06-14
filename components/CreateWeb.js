@@ -31,39 +31,43 @@ type CreateWebState = {|
   errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
   name: string,
   pageTitle: string,
+  disabled: boolean,
 |};
 
 class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
-  static initialState = {
+  state = {
     errors: null,
     name: '',
     pageTitle: '',
+    disabled: false,
   };
-
-  state = CreateWeb.initialState;
 
   // That's how we bind event handlers.
   // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
   setName = (name: string) => this.setState({ name });
 
+  redirectToEdit = pageId => () => {
+    const href: Href = {
+      pathname: '/edit',
+      query: { pageId },
+    };
+    Router.replace(href);
+  };
+
   handleCompleted = ({ createWeb }) => {
-    // Payload can be null, because resolver can throw or be deprecated or
-    // whatever. Serious errors are handled globally. Nothing to do here anyway.
+    // Payload can be a null, because resolver can throw or be deprecated or
+    // whatever. Serious errors are handled globally, so nothing to do here.
     if (!createWeb) return;
     const { errors, pageId } = createWeb;
     if (errors) {
       this.setState({ errors });
       return;
     }
-    // No errors, we can reset the form.
-    this.setState(CreateWeb.initialState);
-    // And maybe redirect to edit.
+    // We can only redirect if we have pageId. Remember, anything can fail if
+    // network and a server is involved. Handle it gradually.
     if (pageId == null) return;
-    const href: Href = {
-      pathname: '/edit',
-      query: { pageId },
-    };
-    Router.replace(href);
+    // Disable form before the redirect so it's not confusing for a user.
+    this.setState({ disabled: true }, this.redirectToEdit(pageId));
   };
 
   createWeb = () => {
@@ -87,6 +91,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   render() {
     const { errors } = this.state;
+    const disabled = this.props.pending || this.state.disabled;
 
     return (
       <Form>
@@ -98,7 +103,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
                 id="createWeb.name.label"
               />
             }
-            disabled={this.props.pending}
+            disabled={disabled}
             error={errors && errors.name}
             focusOnError={errors}
             onChangeText={this.setName}
@@ -109,7 +114,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
         <Row>
           <CreateButton
             color="primary"
-            disabled={this.props.pending}
+            disabled={disabled}
             onPress={this.createWeb}
           />
         </Row>
