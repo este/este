@@ -30,7 +30,6 @@ type CreateWebProps = {|
 type CreateWebState = {|
   errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
   name: string,
-  pageTitle: string,
   disabled: boolean,
 |};
 
@@ -38,7 +37,6 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   state = {
     errors: null,
     name: '',
-    pageTitle: '',
     disabled: false,
   };
 
