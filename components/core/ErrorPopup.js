@@ -41,7 +41,7 @@ class ErrorPopup extends React.PureComponent<ErrorPopupProps, ErrorPopupState> {
     this.clearTimeout();
     this.timeoutID = setTimeout(() => {
       this.setState({ shown: false });
-    }, 5000);
+    }, 10000);
   }
 
   componentWillUnmount() {
@@ -66,6 +66,7 @@ class ErrorPopup extends React.PureComponent<ErrorPopupProps, ErrorPopupState> {
         fixWebFontSmoothing
         style={theme.styles.errorPopup}
         error={messageError}
+        originalErrorMessage={error.message}
       />
     );
   }

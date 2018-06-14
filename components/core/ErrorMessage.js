@@ -21,6 +21,7 @@ export type MessageError =
 type ErrorMessageProps = {|
   ...TextProps,
   error: ?MessageError,
+  originalErrorMessage?: string,
 |};
 
 class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
@@ -44,14 +45,14 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
       case 'NET_ERROR':
         return (
           <FormattedMessage
-            defaultMessage="Network error. Please try it later."
+            defaultMessage="Network error. Please try it again."
             id="error.netError"
           />
         );
       case 'UNKNOWN':
         return (
           <FormattedMessage
-            defaultMessage="Unknown error."
+            defaultMessage="An unknown error occurred. We will fix it as quickly as possible."
             id="error.unknown"
           />
         );
@@ -119,12 +120,20 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
   }
 
   render() {
-    const { bold = true, color = 'danger', error, ...props } = this.props;
+    const {
+      bold = true,
+      color = 'danger',
+      error,
+      originalErrorMessage,
+      ...props
+    } = this.props;
     if (!error) return null;
     const message = ErrorMessage.errorToMessage(error);
+    const dev = process.env.NODE_ENV !== 'production';
     return (
       <Text bold={bold} color={color} {...props}>
         {message}
+        {dev && originalErrorMessage != null && `\n${originalErrorMessage}`}
       </Text>
     );
   }
