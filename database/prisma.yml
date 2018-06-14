@@ -7,3 +7,5 @@ secret: ${env:PRISMA_SECRET}
 hooks:
   post-deploy:
     - graphql get-schema --project database
+    - graphql codegen
+    - yarn fix:codegen

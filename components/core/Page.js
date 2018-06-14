@@ -1,5 +1,5 @@
 // @flow
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import A from './A';
 import ErrorPopup from './ErrorPopup';
 import Head from 'next/head';
@@ -53,9 +53,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     minHeight: '100%', // make footer sticky
   },
-  containerContent: {
-    flex: 1, // make footer sticky
-  },
   body: {
     flex: 1, // make footer sticky
   },
@@ -65,17 +62,11 @@ const styles = StyleSheet.create({
 });
 
 const PageContainer = ({ children, theme }) => (
-  <ScrollView
-    // Why ScrollView https://github.com/necolas/react-native-web/issues/829
-    style={[styles.container, theme.styles.pageContainer]}
-    contentContainerStyle={[styles.containerContent]}
-  >
-    {children}
-  </ScrollView>
+  <View style={[styles.container, theme.styles.pageContainer]}>{children}</View>
 );
 
-const PageBody = ({ children, theme }) => (
-  <View style={[styles.body, theme.styles.pageBody]}>{children}</View>
+const PageBody = ({ children }) => (
+  <View style={[styles.body]}>{children}</View>
 );
 
 const PageFooter = ({ theme }) => (
@@ -92,10 +83,12 @@ const PageFooter = ({ theme }) => (
 type Props = {|
   // Prop as function pattern.
   title: string | ((intl: IntlShape) => string),
-  children: React.Node | ((isAuthenticated: boolean) => React.Node),
+  children?: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
   requireAuth?: boolean,
   intl: IntlShape,
+  header?: React.Node,
+  footer?: React.Node,
 |};
 
 class Page extends React.PureComponent<Props> {
@@ -127,6 +120,7 @@ class Page extends React.PureComponent<Props> {
       (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = Page.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
+    const { header, footer } = this.props;
 
     return (
       <ThemeContext.Provider value={theme}>
@@ -154,11 +148,13 @@ class Page extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          <MainNav isAuthenticated={isAuthenticated} />
-          <PageBody theme={theme}>
-            {this.renderChildrenOrAuth(isAuthenticated)}
-          </PageBody>
-          <PageFooter theme={theme} />
+          {header != null ? (
+            header
+          ) : (
+            <MainNav isAuthenticated={isAuthenticated} />
+          )}
+          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
+          {footer != null ? footer : <PageFooter theme={theme} />}
         </PageContainer>
       </ThemeContext.Provider>
     );

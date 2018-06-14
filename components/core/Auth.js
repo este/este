@@ -99,7 +99,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     return (
       <View>
         <Heading size={1}>Auth</Heading>
-        <Form onSubmit={this.signIn}>
+        <Form>
           <Block>
             <TextInput
               autoComplete="email"
@@ -111,6 +111,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
               onChangeText={this.setEmail}
               placeholder={intl.formatMessage(messages.emailPlaceholder)}
               value={this.state.email}
+              onSubmitEditing={this.signIn}
             />
             <TextInput
               disabled={this.props.pending}
@@ -121,6 +122,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
               placeholder={intl.formatMessage(messages.passwordPlaceholder)}
               secureTextEntry
               value={this.state.password}
+              onSubmitEditing={this.signIn}
             />
           </Block>
           <Row>

@@ -3,6 +3,7 @@ import type { Theme, OpenColor } from './types';
 import createTypography from './createTypography';
 import openColor from 'open-color';
 import { StyleSheet } from 'react-native';
+import colorLib from 'color';
 
 const openColorTyped: OpenColor = openColor;
 
@@ -17,6 +18,7 @@ const colors = {
   success: openColorTyped.green[5],
   warning: openColorTyped.orange[6],
   danger: openColorTyped.red[6],
+  // TODO: Rename to foreground and background to remove all colors[white / black]?
   black: openColorTyped.gray[8],
   white: openColorTyped.white,
   gray: openColorTyped.gray[5],
@@ -89,11 +91,7 @@ const stylesJson = {
 
   pageContainer: {
     paddingHorizontal: typography.rhythm(0.5),
-    maxWidth: 960,
-  },
-
-  pageBody: {
-    marginBottom: typography.rhythm(2),
+    maxWidth: 768,
   },
 
   pageFooter: {
@@ -104,8 +102,7 @@ const stylesJson = {
   },
 
   mainNav: {
-    marginTop: typography.rhythm(1),
-    marginBottom: typography.rhythm(2),
+    marginVertical: typography.rhythm(2),
   },
 
   mainNavSpacer: {
@@ -125,7 +122,7 @@ const stylesJson = {
     color: colors.black,
     borderBottomWidth: 1,
     borderColor: colors.gray,
-    paddingVertical: typography.rhythm(0.5),
+    paddingVertical: typography.rhythm(0.25),
   },
 
   textInputError: {
@@ -141,7 +138,7 @@ const stylesJson = {
     borderRadius: 5,
     borderWidth: 1,
     paddingVertical: typography.rhythm(0.1),
-    paddingHorizontal: typography.rhythm(0.5),
+    paddingHorizontal: typography.rhythm(0.75),
   },
 
   buttonPrimary: {
@@ -194,9 +191,23 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  editorTextInput: {
-    color: colors.black,
+  editor: {
     flex: 1,
+  },
+
+  editorMarkdown: {
+    paddingVertical: typography.rhythm(0.5),
+  },
+
+  editorMarkdownTextInput: {
+    color: colors.black,
+    // It's the initial height. Client overrides it via inline styles.
+    height: typography.rhythm(1),
+  },
+
+  editorMarkdownButtons: {
+    minHeight: typography.rhythm(1),
+    paddingVertical: typography.rhythm(1),
   },
 };
 
@@ -204,10 +215,15 @@ const styles = StyleSheet.create(stylesJson);
 
 export type Styles = typeof styles;
 
+const placeholderTextColor = color =>
+  colorLib(color)
+    .fade(0.5)
+    .toString();
+
 export const lightTheme: Theme = {
   typography,
   colors,
-  textColor: 'black',
+  placeholderTextColor: placeholderTextColor(colors.black),
   pageBackgroundColor: 'white',
   styles,
 };
@@ -216,7 +232,7 @@ export const lightTheme: Theme = {
 
 export const darkTheme: Theme = {
   ...lightTheme,
-  textColor: 'white',
+  placeholderTextColor: placeholderTextColor(colors.white),
   pageBackgroundColor: 'black',
   styles: StyleSheet.create({
     ...stylesJson,
@@ -235,8 +251,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    editorTextInput: {
-      ...stylesJson.editorTextInput,
+    editorMarkdownTextInput: {
+      ...stylesJson.editorMarkdownTextInput,
       color: colors.white,
     },
   }),

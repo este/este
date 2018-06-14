@@ -3,12 +3,12 @@
 #   - update model.graphql
 #   - add resolver
 #   - test it in playground
-#   - run `yarn schema-relay` in another terminal window
 #   - restart `yarn dev` in first terminal window
+#   - run `yarn schema-relay` in another terminal window
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-# import Web, WebEdge, WebConnection from "../../database/schema.graphql"
+# import Web, WebEdge, WebConnection, Page from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 # Like database/model User, but without password, webs, and directives.
@@ -39,14 +39,16 @@ type AuthPayload {
 
 input CreateWebInput {
   name: String!
+  pageTitle: String!
 }
 
 type CreateWebErrors {
   name: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 type CreateWebPayload {
-  edge: WebEdge
+  pageId: ID
   errors: CreateWebErrors
 }
 
@@ -80,5 +82,5 @@ type Query {
   # Later, we can extend API for any user.
   # webs(first: Int!, creatorId: ID!): WebConnection
   webs(first: Int!): WebConnection
-  web(domain: String!): Web
+  page(pageId: ID!): Page
 }

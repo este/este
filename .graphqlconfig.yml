@@ -4,7 +4,17 @@ projects:
     extensions:
       endpoints:
         default: "http://localhost:4000"
+      codegen:
+        - generator: prisma-binding
+          language: flow
+          output:
+            binding: server/api/__generated__/types.js
   database:
     schemaPath: "database/schema.graphql"
     extensions:
       prisma: database/prisma.yml
+      codegen:
+        - generator: prisma-binding
+          language: flow
+          output:
+            binding: database/__generated__/types.js

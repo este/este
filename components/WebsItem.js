@@ -15,13 +15,14 @@ type WebsItemProps = {|
 class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
+    const pageId = data.pages && data.pages[0].id;
+    // No page nothing to edit.
+    if (pageId == null) return null;
     return (
       <Block>
-        <Text>
-          <A href={{ pathname: '/edit', query: { domain: data.domain } }}>
-            {data.name}
-          </A>
-        </Text>
+        <A href={{ pathname: '/edit', query: { pageId } }} prefetch>
+          {data.name}
+        </A>
         <Text color="gray" size={-1}>
           <FormattedRelative value={data.updatedAt} />
           <Text>
@@ -40,8 +41,10 @@ export default createFragmentContainer(
     fragment WebsItem on Web {
       updatedAt
       name
-      domain
       id
+      pages(first: 1, orderBy: updatedAt_ASC) {
+        id
+      }
     }
   `,
 );

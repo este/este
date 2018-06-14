@@ -22,21 +22,23 @@ class Row extends React.PureComponent<Props> {
       return <View style={styles.view}>{children}</View>;
     }
 
-    const count = React.Children.count(children);
-    return (
-      <View style={styles.view}>
-        {React.Children.map(children, (child, index) => {
-          return (
-            <>
-              {child}
-              {index !== count - 1 && (
-                <View style={theme.styles.rowSpacer} key={`spacer-${index}`} />
-              )}
-            </>
-          );
-        })}
-      </View>
-    );
+    // https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored
+    const isIgnored = value => value == null || typeof value === 'boolean';
+
+    const visibleChildren = React.Children.toArray(children)
+      .filter(child => !isIgnored(child))
+      .map((child, index, array) => {
+        const hasNextSibling = index !== array.length - 1;
+        return (
+          // eslint-disable-next-line react/no-array-index-key
+          <React.Fragment key={index}>
+            {child}
+            {hasNextSibling && <View style={theme.styles.rowSpacer} />}
+          </React.Fragment>
+        );
+      });
+
+    return <View style={styles.view}>{visibleChildren}</View>;
   }
 }
 

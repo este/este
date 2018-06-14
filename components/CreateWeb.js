@@ -3,52 +3,78 @@ import * as React from 'react';
 import Form from './core/Form';
 import { CreateButton } from './core/buttons';
 import TextInput from './core/TextInput';
-import { FormattedMessage } from 'react-intl';
+import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from './core/Row';
 import Block from './core/Block';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from './core/withMutation';
-import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
 import { validateCreateWeb } from '../server/api/webs.mjs';
+import Router from 'next/router';
+import type { Href } from './app/sitemap';
+import withIntl from './core/withIntl';
+
+export const messages = defineMessages({
+  pageTitle: {
+    defaultMessage: 'Home',
+    id: 'createWeb.pageTitle',
+  },
+});
 
 type CreateWebProps = {|
   commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
   pending: boolean,
+  intl: IntlShape,
 |};
 
 type CreateWebState = {|
   errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
   name: string,
+  disabled: boolean,
 |};
 
 class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
-  static initialState = {
+  state = {
     errors: null,
     name: '',
+    disabled: false,
   };
-
-  state = CreateWeb.initialState;
 
   // That's how we bind event handlers.
   // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
   setName = (name: string) => this.setState({ name });
 
+  redirectToEdit = pageId => () => {
+    const href: Href = {
+      pathname: '/edit',
+      query: { pageId },
+    };
+    Router.replace(href);
+  };
+
   handleCompleted = ({ createWeb }) => {
-    // Payload can be null, because resolver can throw or be deprecated or
-    // whatever. Serious errors are handled globally. Nothing to do anyway.
+    // Payload can be a null, because resolver can throw or be deprecated or
+    // whatever. Serious errors are handled globally, so nothing to do here.
     if (!createWeb) return;
-    if (createWeb.errors) {
-      this.setState({ errors: createWeb.errors });
+    const { errors, pageId } = createWeb;
+    if (errors) {
+      this.setState({ errors });
       return;
     }
-    this.setState(CreateWeb.initialState);
+    // We can only redirect if we have pageId. Remember, anything can fail if
+    // network and a server is involved. Handle it gradually.
+    if (pageId == null) return;
+    // Disable form before the redirect so it's not confusing for a user.
+    this.setState({ disabled: true }, this.redirectToEdit(pageId));
   };
 
   createWeb = () => {
+    const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
+
     // Create input object from state, props, whatever.
     const input = {
       name: this.state.name,
+      pageTitle,
     };
 
     // Use server validation for client validation.
@@ -63,9 +89,10 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   render() {
     const { errors } = this.state;
+    const disabled = this.props.pending || this.state.disabled;
 
     return (
-      <Form onSubmit={this.createWeb}>
+      <Form>
         <Block>
           <TextInput
             label={
@@ -74,17 +101,18 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
                 id="createWeb.name.label"
               />
             }
-            disabled={this.props.pending}
+            disabled={disabled}
             error={errors && errors.name}
             focusOnError={errors}
             onChangeText={this.setName}
             value={this.state.name}
+            onSubmitEditing={this.createWeb}
           />
         </Block>
         <Row>
           <CreateButton
             color="primary"
-            disabled={this.props.pending}
+            disabled={disabled}
             onPress={this.createWeb}
           />
         </Row>
@@ -93,39 +121,17 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   }
 }
 
-const sharedUpdater = (store, recordEdge) => {
-  const connection = ConnectionHandler.getConnection(
-    store.get(ROOT_ID),
-    'Webs_webs',
-  );
-  ConnectionHandler.insertEdgeAfter(connection, recordEdge);
-};
-
 export default withMutation(
-  CreateWeb,
+  withIntl(CreateWeb),
   graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {
-        edge {
-          node {
-            ...WebsItem
-          }
-        }
+        pageId
         errors {
           name
+          pageTitle
         }
       }
     }
   `,
-  {
-    updater: store => {
-      const payload = store.getRootField('createWeb');
-      // Because the server can return an empty payload, e.g. for 401.
-      if (!payload) return;
-      const recordEdge = payload.getLinkedRecord('edge');
-      // Because anything can fail anyway.
-      if (!recordEdge) return;
-      sharedUpdater(store, recordEdge);
-    },
-  },
 );
