@@ -15,10 +15,7 @@ import { graphql } from 'react-relay';
 const Authenticated = ({ data }) => (
   <>
     <Heading size={1}>
-      <FormattedMessage
-        defaultMessage="Manage your webs"
-        id="index.manageYourWebs"
-      />
+      <FormattedMessage defaultMessage="Your webs" id="yourWebs.heading" />
     </Heading>
     <Webs data={data} />
     <CreateWeb />
@@ -30,7 +27,7 @@ const NotAuthenticated = () => (
     <Heading size={2}>Este</Heading>
     <Block>
       <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
-        <FormattedMessage defaultMessage="Create web" id="index.createWeb" />
+        <FormattedMessage defaultMessage="Create web" id="yourWebs.createWeb" />
       </A>
     </Block>
     <Blockquote

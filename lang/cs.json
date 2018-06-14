@@ -17,8 +17,7 @@
   "createWeb.pageTitle": "Home",
   "editorMarkdown.buttons.example": "Example",
   "editorMarkdown.buttons.reuse": "Reuse",
-  "editorMarkdown.textInput.example":
-    "# Example\n\nMarkdown is a simple way to *format* text that looks **great** on any device.\n\n* List\n* List\n\n1. One\n2. Two\n\n> Blockquote\n\nmade by [steida](https://twitter.com/steida)",
+  "editorMarkdown.textInput.example": "# Example\n\nMarkdown is a simple way to *format* text that looks **great** on any device.\n\n* List\n* List\n\n1. One\n2. Two\n\n> Blockquote\n\nmade by [steida](https://twitter.com/steida)",
   "editorMarkdown.textInput.placeholder": "write...",
   "error.alreadyExists": "Již existuje.",
   "error.email": "Emailová adresa není validní.",
@@ -34,10 +33,10 @@
   "error.unknown": "Neznámá chyba. Opravíme jak nejrychleji to půjde.",
   "error.wrongPassword": "Špatné heslo.",
   "footer.madeBy": "vytvořil",
-  "index.createWeb": "Vytvořit web",
-  "index.manageYourWebs": "Správa webů",
   "sitemap.title.edit": "Edit",
   "sitemap.title.index": "Domů",
   "sitemap.title.me": "Já",
-  "sitemap.title.signIn": "Přihlášení"
+  "sitemap.title.signIn": "Přihlášení",
+  "yourWebs.createWeb": "Vytvořit web",
+  "yourWebs.heading": "Tvoje weby"
 }

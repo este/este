@@ -33,10 +33,10 @@
   "error.unknown": "An unknown error occurred. We will fix it as quickly as possible.",
   "error.wrongPassword": "Wrong password.",
   "footer.madeBy": "made by",
-  "index.createWeb": "Create web",
-  "index.manageYourWebs": "Manage your webs",
   "sitemap.title.edit": "Edit",
   "sitemap.title.index": "Home",
   "sitemap.title.me": "Me",
-  "sitemap.title.signIn": "Sign In"
+  "sitemap.title.signIn": "Sign In",
+  "yourWebs.createWeb": "Create web",
+  "yourWebs.heading": "Your webs"
 }
