@@ -8,16 +8,18 @@ import type { Resolver } from './index'
 */
 
 export const validateAuth = (input /*: generated.AuthInput */) => {
+  // We have to return all props.
+  const shape = { email: null, password: null };
   const email = validate.email(input.email);
-  if (email) return { email };
+  // We can't use object spread, because some Webpack bug.
+  // TODO: Recheck it with Webpack 4.
+  // if (email) return { ...shape, email };
+  if (email) return Object.assign({}, shape, { email });
   const password = validate.max1024Min5Chars(input.password);
-  if (password) return { password };
+  if (password) return Object.assign({}, shape, { password });
 };
 
-const auth /*: Resolver<
-  { input: generated.AuthInput },
-  generated.AuthPayload,
-> */ = async (
+const auth /*: Resolver<{ input: generated.AuthInput }> */ = async (
   parent,
   { input },
   context,
@@ -57,10 +59,7 @@ const auth /*: Resolver<
   }
 };
 
-const setTheme /*: Resolver<
-  { input: generated.SetThemeInput },
-  generated.SetThemePayload,
-> */ = async (
+const setTheme /*: Resolver<{ input: generated.SetThemeInput }> */ = async (
   parent,
   args,
   context,
@@ -70,21 +69,12 @@ const setTheme /*: Resolver<
     data: { themeName: args.input.themeName },
     where: { id: userId },
   });
-  // $FlowFixMe I don't know yet.
   return { user };
 };
 
-const me /*: Resolver<
-  {},
-  generated.User,
-> */ = async (
-  parent,
-  args,
-  context,
-) => {
+const me /*: Resolver<{}> */ = async (parent, args, context) => {
   const userId = context.getUserId();
   const user = await context.db.query.user({ where: { id: userId } });
-  // $FlowFixMe I don't know yet.
   return user;
 };
 

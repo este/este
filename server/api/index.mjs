@@ -43,14 +43,17 @@ type Context = {
   getUserId: () => string,
 };
 
-export type Resolver<Args, Response> = (
+// TODO: Interfaces will be removed, this is temp workaround.
+// Response is any type because generated type are not complete.
+// https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397334033
+export type Resolver<Args> = (
   // TODO: Better type for the parent if possible.
   parent: Object,
   args: Args,
   context: Context,
   // TODO: GraphQLResolveInfo | string
   info: Object,
-) => Promise<?Response>;
+) => Promise<any>;
 */
 
 const throwHttpStatus = (status /*: ControlledHttpStatus */) => {

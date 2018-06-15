@@ -22,16 +22,14 @@ import type { Resolver } from './index'
 //   `${slug(name)}-${Date.now().toString(36)}`;
 
 export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
+  const shape = { name: null, pageTitle: null };
   const name = validate.max140Chars(input.name);
-  if (name) return { name };
+  if (name) return Object.assign({}, shape, { name });
   const pageTitle = validate.max140Chars(input.pageTitle);
-  if (pageTitle) return { pageTitle };
+  if (pageTitle) return Object.assign({}, shape, { pageTitle });
 };
 
-const createWeb /*: Resolver<
-  { input: generated.CreateWebInput },
-  generated.CreateWebPayload,
-> */ = async (
+const createWeb /*: Resolver<{ input: generated.CreateWebInput }> */ = async (
   parent,
   args,
   context,
@@ -75,10 +73,7 @@ const createWeb /*: Resolver<
   };
 };
 
-const deleteWeb /*: Resolver<
-  { input: generated.DeleteWebInput },
-  generated.DeleteWebPayload,
-> */ = async (
+const deleteWeb /*: Resolver<{ input: generated.DeleteWebInput }> */ = async (
   parent,
   args,
   context,
@@ -99,10 +94,7 @@ const deleteWeb /*: Resolver<
   };
 };
 
-const webs /*: Resolver<
-  { first: generated.Int },
-  generated.WebConnection,
-> */ = async (
+const webs /*: Resolver<{ first: generated.Int }> */ = async (
   parent,
   args,
   context,
@@ -117,7 +109,6 @@ const webs /*: Resolver<
     },
     info,
   );
-  // $FlowFixMe I don't know yet.
   return webs;
 };
 
