@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 70ef1dc97b15e2d7fbf958fe0b799756
+ * @relayHash c29da3e187fc47264a5d9ad3d976f645
  */
 
 /* eslint-disable */
@@ -16,7 +16,7 @@ export type editQueryVariables = {|
 |};
 export type editQueryResponse = {|
   +page: ?{|
-    +id: string,
+    +title: string,
     +web: {|
       +name: string
     |},
@@ -31,11 +31,12 @@ query editQuery(
   $pageId: ID!
 ) {
   page(pageId: $pageId) {
-    id
+    title
     web {
       name
       id
     }
+    id
   }
   ...Page
   ...Editor_3AnMiB
@@ -76,7 +77,7 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "id",
+  "name": "title",
   "args": null,
   "storageKey": null
 },
@@ -86,13 +87,20 @@ v3 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v4 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "editQuery",
   "id": null,
-  "text": "query editQuery(\n  $pageId: ID!\n) {\n  page(pageId: $pageId) {\n    id\n    web {\n      name\n      id\n    }\n  }\n  ...Page\n  ...Editor_3AnMiB\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3AnMiB on Query {\n  page(pageId: $pageId) {\n    title\n    id\n  }\n}\n",
+  "text": "query editQuery(\n  $pageId: ID!\n) {\n  page(pageId: $pageId) {\n    title\n    web {\n      name\n      id\n    }\n    id\n  }\n  ...Page\n  ...Editor_3AnMiB\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3AnMiB on Query {\n  page(pageId: $pageId) {\n    title\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -169,16 +177,10 @@ return {
             "plural": false,
             "selections": [
               v3,
-              v2
+              v4
             ]
           },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "title",
-            "args": null,
-            "storageKey": null
-          }
+          v4
         ]
       },
       {
@@ -190,7 +192,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v2,
+          v4,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -205,5 +207,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'dd392122f010d625c0dc88cd9fee8010';
+(node/*: any*/).hash = '8b4d79403375fbb89274ea5abcc7492b';
 module.exports = node;

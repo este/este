@@ -15,7 +15,7 @@ const Edit = props => {
       // header={false}
       footer={false}
       requireAuth
-      title={page.web.name}
+      title={`${page.title} | ${page.web.name}`}
       data={props.data}
     >
       <Editor data={props.data} />
@@ -27,7 +27,7 @@ export default app(Edit, {
   query: graphql`
     query editQuery($pageId: ID!) {
       page(pageId: $pageId) {
-        id
+        title
         web {
           name
         }
