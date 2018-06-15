@@ -42,7 +42,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   // That's how we bind event handlers.
   // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
-  setName = (name: string) => this.setState({ name });
+  setName = name => this.setState({ name });
 
   redirectToEdit = pageId => () => {
     const href: Href = {
