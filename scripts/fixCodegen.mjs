@@ -4,8 +4,8 @@ import fs from 'fs';
 // https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397375066
 
 const paths = [
-  'database/__generated__/types.js',
-  'server/api/__generated__/types.js',
+  'database/__generated__/database.graphql.js',
+  'server/api/__generated__/api.graphql.js',
 ];
 
 paths.forEach(path => {

@@ -8,7 +8,7 @@ projects:
         - generator: prisma-binding
           language: flow
           output:
-            binding: server/api/__generated__/types.js
+            binding: server/api/__generated__/api.graphql.js
   database:
     schemaPath: "database/schema.graphql"
     extensions:
@@ -17,4 +17,4 @@ projects:
         - generator: prisma-binding
           language: flow
           output:
-            binding: database/__generated__/types.js
+            binding: database/__generated__/database.graphql.js

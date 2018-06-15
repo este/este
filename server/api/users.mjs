@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import * as validate from './validate.mjs';
 /*::
-import * as generated from './__generated__/types'
+import * as generated from './__generated__/api.graphql'
 import type { Resolver } from './index'
 */
 

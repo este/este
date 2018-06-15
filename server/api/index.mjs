@@ -35,7 +35,7 @@ const resolvers = {
 // Controlled means with custom message or behavior.
 // https://stackoverflow.com/a/6937030/233902
 type ControlledHttpStatus = 401 | 403 | 404;
-import type { Prisma } from '../../database/__generated__/types'
+import type { Prisma } from '../../database/__generated__/database.graphql'
 
 type Context = {
   db: Prisma,
