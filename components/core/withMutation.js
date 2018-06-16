@@ -11,6 +11,7 @@ import {
 import ErrorContext, { type DispatchError } from './ErrorContext';
 import EnvironmentContext from '../core/EnvironmentContext';
 
+// Note Input instead of Variables. It keeps withMutation component simple.
 export type Commit<Input, Response> = (
   input: Input,
   onCompleted?: (Response) => void,
