@@ -39,7 +39,7 @@
     "format": "prettier --write '**/*.js'",
     "relay:ci": "yarn relay --watchman false",
     "eslint": "eslint components pages screens scripts server test themes index.js",
-    "test": "run-s messages:missing relay:ci eslint flow jest build",
+    "test": "run-s relay:ci eslint flow messages jest build",
     "deps": "rimraf 'node_modules' 'yarn.lock' 'flow-typed' && yarn && flow-typed install",
     "env": "node --experimental-modules ./scripts/env",
     "analyze:bundles": "cross-env ANALYZE=BUNDLES next build",
