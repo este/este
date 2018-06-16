@@ -28,14 +28,16 @@ const colors = {
 // I think it is. That's because, when we see a lot of duplicates, it indicates
 // that we should create a reusable component.
 
+// https://css-tricks.com/snippets/css/system-font-stack
+const fontFamily =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+
 const bold = '600';
 
 const stylesJson = {
   text: {
     color: colors.black,
-    // https://css-tricks.com/snippets/css/system-font-stack
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    fontFamily,
   },
 
   textWeightNormal: {
@@ -76,6 +78,7 @@ const stylesJson = {
 
   heading: {
     fontWeight: bold,
+    fontFamily,
     marginBottom: typography.rhythm(1),
     color: colors.gray,
   },
@@ -201,6 +204,7 @@ const stylesJson = {
 
   editorMarkdownTextInput: {
     color: colors.black,
+    fontFamily,
     // It's the initial height. Client overrides it via inline styles.
     height: typography.rhythm(1),
   },
