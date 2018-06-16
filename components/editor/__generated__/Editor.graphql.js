@@ -12,7 +12,8 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type Editor$ref: FragmentReference;
 export type Editor = {|
   +page: ?{|
-    +title: string
+    +id: string,
+    +title: string,
   |},
   +$refType: Editor$ref,
 |};
@@ -52,6 +53,13 @@ const node/*: ConcreteFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
+          "name": "id",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
           "name": "title",
           "args": null,
           "storageKey": null
@@ -61,5 +69,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'eb08989459f9aa1bf9c250e019800a34';
+(node/*: any*/).hash = '5945dc086aea29a2e42e24ea243ca2f1';
 module.exports = node;

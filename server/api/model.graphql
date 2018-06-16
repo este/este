@@ -68,11 +68,21 @@ type SetThemePayload {
   user: User
 }
 
+input SetPageTitleInput {
+  id: ID!
+  title: String!
+}
+
+type SetPageTitlePayload {
+  page: Page
+}
+
 type Mutation {
   auth(input: AuthInput!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
+  setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
 }
 
 # Queries do not need inputs and payloads. They are pretty explicit.

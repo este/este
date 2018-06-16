@@ -139,8 +139,8 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   }
 }
 
-const AuthWithMutation = withMutation(
-  Auth,
+export default withMutation(
+  withIntl(Auth),
   graphql`
     mutation AuthMutation($input: AuthInput!) {
       auth(input: $input) {
@@ -153,5 +153,3 @@ const AuthWithMutation = withMutation(
     }
   `,
 );
-
-export default withIntl(AuthWithMutation);

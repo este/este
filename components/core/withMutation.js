@@ -27,12 +27,12 @@ export type Errors<Response, Name: string> = $ElementType<
 const withMutation = <Props: {}, Input: Object, Response>(
   Component: React.ComponentType<Props>,
   mutation: GraphQLTaggedNode,
-  config?: {
+  config?: {|
     optimisticResponse?: Object,
     optimisticUpdater?: ?(store: RecordSourceSelectorProxy) => void,
     updater?: ?(store: RecordSourceSelectorProxy) => void,
     configs?: Array<RelayMutationConfig>,
-  },
+  |},
 ): React.ComponentType<
   $Diff<
     Props,

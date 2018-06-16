@@ -23,6 +23,7 @@ const resolvers = {
   Mutation: {
     ...users.mutations,
     ...webs.mutations,
+    ...pages.mutations,
   },
   Query: {
     ...users.queries,

@@ -24,33 +24,25 @@ const page /*: Resolver<{ pageId: generated.ID_Output }> */ = async (
   return page;
 };
 
-// const setPageTitle /*: Resolver<
-//   generated.SetPageTitleInput,
-//   any
-//   // Promise<{page: generated.SetPageTitlePayload}>,
-// > */ = async (
-//   parent,
-//   args,
-//   context,
-//   info,
-// ) => {
-//   const userId = context.getUserId();
-//   const pageExists = await context.db.exists.Page({
-//     id: args.id,
-//     creator: { id: userId },
-//   });
-//   if (!pageExists) context.throwHttpStatus(403);
-//   const page = await context.db.mutation.updatePage(
-//     { where: { id: args.id }, data: { title: args.title } },
-//     info,
-//   );
-//   return page;
-//   // type SetPageTitlePayload {
-//   //   page: Page
-//   // }
-// };
+const setPageTitle /*: Resolver<{ input: generated.SetPageTitleInput }> */ = async (
+  parent,
+  args,
+  context,
+) => {
+  const userId = context.getUserId();
+  const pageExists = await context.db.exists.Page({
+    id: args.input.id,
+    creator: { id: userId },
+  });
+  if (!pageExists) context.throwHttpStatus(403);
+  const page = await context.db.mutation.updatePage({
+    where: { id: args.input.id },
+    data: { title: args.input.title },
+  });
+  return { page };
+};
 
 export default {
-  // mutations: { setPageTitle },
   queries: { page },
+  mutations: { setPageTitle },
 };
