@@ -5,10 +5,13 @@ import withTheme, { type Theme } from '../core/withTheme';
 import withMutation, { type Commit } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/EditorPageTitleMutation.graphql';
+import throttle from 'lodash/throttle';
 
 type EditorPageTitleProps = {|
   theme: Theme,
   pageId: string,
+  // defaultValue because component is uncontrolled. This is fine for now.
+  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
   defaultValue: string,
   commit: Commit<
     generated.SetPageTitleInput,
@@ -17,14 +20,13 @@ type EditorPageTitleProps = {|
 |};
 
 class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
-  handleTextInputChangeText = value => {
+  handleTextInputChangeText = throttle(value => {
     const input = {
       id: this.props.pageId,
       title: value,
     };
-    // TODO: rate-limit
     this.props.commit(input);
-  };
+  }, 1000);
 
   render() {
     const { theme } = this.props;

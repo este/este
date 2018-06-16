@@ -34,10 +34,6 @@ class Editor extends React.PureComponent<EditorProps> {
     if (page == null) return null;
     return (
       <View style={theme.styles.editor}>
-        {/*
-          defaultValue because component is uncontrolled. This is fine for now.
-          https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-        */}
         <EditorPageTitle pageId={page.id} defaultValue={page.title} />
         <EditorMarkdown />
       </View>
