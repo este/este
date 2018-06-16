@@ -6,6 +6,15 @@ import withMutation, { type Commit } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/EditorPageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
+import { defineMessages, type IntlShape } from 'react-intl';
+import withIntl from '../core/withIntl';
+
+const messages = defineMessages({
+  placeholder: {
+    defaultMessage: 'page title…',
+    id: 'editorPageTitle.textInput.placeholder',
+  },
+});
 
 type EditorPageTitleProps = {|
   theme: Theme,
@@ -17,6 +26,7 @@ type EditorPageTitleProps = {|
     generated.SetPageTitleInput,
     generated.EditorPageTitleMutationResponse,
   >,
+  intl: IntlShape,
 |};
 
 class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
@@ -29,7 +39,7 @@ class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
   }, 1000);
 
   render() {
-    const { theme } = this.props;
+    const { theme, intl } = this.props;
 
     return (
       <View>
@@ -40,8 +50,8 @@ class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
           ]}
           onChangeText={this.handleTextInputChangeText}
           defaultValue={this.props.defaultValue}
-          // placeholderTextColor={theme.placeholderTextColor}
-          // placeholder={intl.formatMessage(messages.placeholder)}
+          placeholderTextColor={theme.placeholderTextColor}
+          placeholder={intl.formatMessage(messages.placeholder)}
         />
       </View>
     );
@@ -49,7 +59,7 @@ class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
 }
 
 export default withMutation(
-  withTheme(EditorPageTitle),
+  withIntl(withTheme(EditorPageTitle)),
   graphql`
     mutation EditorPageTitleMutation($input: SetPageTitleInput!) {
       setPageTitle(input: $input) {

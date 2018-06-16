@@ -9,7 +9,7 @@ import EditorMarkdownActions from './EditorMarkdownActions';
 
 const messages = defineMessages({
   placeholder: {
-    defaultMessage: 'write...',
+    defaultMessage: '…',
     id: 'editorMarkdown.textInput.placeholder',
   },
   // TODO: [Home](/) | [About](/)
