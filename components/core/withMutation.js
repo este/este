@@ -59,11 +59,14 @@ const withMutation = <Props: {}, Input: Object, Response>(
 
     componentWillUnmount() {
       this.disposables.forEach(disposable => disposable.dispose());
+      this.disposed = true;
     }
 
     disposables: Array<Disposable> = [];
+    disposed = false;
 
     commit: Commit<Input, Response> = (input, onCompleted) => {
+      if (this.disposed) return;
       // Note, we can't read from this.state.pending because setState is async.
       // Therefore, "if (this.state.pending) return" can't help.
       // Using pending for disabled state is good enough.
