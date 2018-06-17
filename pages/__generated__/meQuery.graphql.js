@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ddc0f856ccbf9f4ccbaacb3a60d603a8
+ * @relayHash b9328e32a9cda734fdec30c3cc0a7982
  */
 
 /* eslint-disable */
@@ -9,27 +9,27 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Page$ref = any;
+type AppPage$ref = any;
 export type meQueryVariables = {||};
 export type meQueryResponse = {|
   +me: ?{|
     +email: string
   |},
-  +$fragmentRefs: Page$ref,
+  +$fragmentRefs: AppPage$ref,
 |};
 */
 
 
 /*
 query meQuery {
-  ...Page
+  ...AppPage
   me {
     email
     id
   }
 }
 
-fragment Page on Query {
+fragment AppPage on Query {
   me {
     id
     themeName
@@ -50,7 +50,7 @@ return {
   "operationKind": "query",
   "name": "meQuery",
   "id": null,
-  "text": "query meQuery {\n  ...Page\n  me {\n    email\n    id\n  }\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
+  "text": "query meQuery {\n  ...AppPage\n  me {\n    email\n    id\n  }\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -61,7 +61,7 @@ return {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "AppPage",
         "args": null
       },
       {
@@ -114,5 +114,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '1497b4f763901f71af0634a46a6e18c4';
+(node/*: any*/).hash = '8167af7cefa7da02d41a88ee2b420d55';
 module.exports = node;

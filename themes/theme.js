@@ -92,23 +92,23 @@ const stylesJson = {
     width: typography.rhythm(0.5),
   },
 
-  pageContainer: {
+  appPageContainer: {
     paddingHorizontal: typography.rhythm(0.5),
     maxWidth: 768,
   },
 
-  pageFooter: {
+  appPageFooter: {
     borderColor: colors.gray,
     borderTopWidth: 1,
     borderStyle: 'solid',
     paddingVertical: typography.rhythm(0.5),
   },
 
-  mainNav: {
+  appPageMainNav: {
     marginVertical: typography.rhythm(2),
   },
 
-  mainNavSpacer: {
+  appPageMainNavSpacer: {
     width: typography.rhythm(1),
   },
 
@@ -194,22 +194,22 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  editor: {
+  page: {
     flex: 1,
   },
 
-  editorMarkdown: {
+  pageMarkdown: {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  editorMarkdownTextInput: {
+  pageMarkdownTextInput: {
     color: colors.black,
     fontFamily,
     // It's the initial height. Client overrides it via inline styles.
     height: typography.rhythm(1),
   },
 
-  editorMarkdownButtons: {
+  pageMarkdownButtons: {
     minHeight: typography.rhythm(1),
     paddingVertical: typography.rhythm(1),
   },
@@ -255,8 +255,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    editorMarkdownTextInput: {
-      ...stylesJson.editorMarkdownTextInput,
+    pageMarkdownTextInput: {
+      ...stylesJson.pageMarkdownTextInput,
       color: colors.white,
     },
   }),

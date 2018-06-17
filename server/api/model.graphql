@@ -92,5 +92,6 @@ type Query {
   # Later, we can extend API for any user.
   # webs(first: Int!, creatorId: ID!): WebConnection
   webs(first: Int!): WebConnection
-  page(pageId: ID!): Page
+  page(id: ID!): Page
+  web(id: ID!): Web
 }

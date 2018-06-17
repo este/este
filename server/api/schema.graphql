@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Jun 17 2018 04:13:51 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Jun 17 2018 22:17:50 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!
@@ -842,7 +842,8 @@ enum PasswordError {
 type Query {
   me: User
   webs(first: Int!): WebConnection
-  page(pageId: ID!): Page
+  page(id: ID!): Page
+  web(id: ID!): Web
 }
 
 input SetPageTitleInput {

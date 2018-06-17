@@ -44,10 +44,10 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
   setName = name => this.setState({ name });
 
-  redirectToEdit = pageId => () => {
+  redirectToPage = id => () => {
     const href: Href = {
-      pathname: '/edit',
-      query: { pageId },
+      pathname: '/page',
+      query: { id },
     };
     Router.replace(href);
   };
@@ -65,7 +65,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     // network and a server is involved. Handle it gradually.
     if (pageId == null) return;
     // Disable form before the redirect so it's not confusing for a user.
-    this.setState({ disabled: true }, this.redirectToEdit(pageId));
+    this.setState({ disabled: true }, this.redirectToPage(pageId));
   };
 
   createWeb = () => {

@@ -4,13 +4,13 @@ import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import EditorMarkdownActions from './EditorMarkdownActions';
+import PageMarkdownActions from './PageMarkdownActions';
 // import withConfirm, { type Confirm } from '../core/withConfirm';
 
 const messages = defineMessages({
   placeholder: {
     defaultMessage: '…',
-    id: 'editorMarkdown.textInput.placeholder',
+    id: 'pageMarkdown.textInput.placeholder',
   },
   // TODO: [Home](/) | [About](/)
   example: {
@@ -29,25 +29,25 @@ Markdown is a simple way to *format* text that looks **great** on any device.
 
 made by [steida](https://twitter.com/steida)
 `,
-    id: 'editorMarkdown.textInput.example',
+    id: 'pageMarkdown.textInput.example',
   },
 });
 
-type EditorMarkdownProps = {|
+type PageMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
   // confirm: Confirm,
 |};
 
-type EditorMarkdownState = {|
+type PageMarkdownState = {|
   selection: { start: number, end: number },
   actionsAreExpanded: boolean,
   value: string,
 |};
 
-class EditorMarkdown extends React.PureComponent<
-  EditorMarkdownProps,
-  EditorMarkdownState,
+class PageMarkdown extends React.PureComponent<
+  PageMarkdownProps,
+  PageMarkdownState,
 > {
   state = {
     selection: { start: 0, end: 0 },
@@ -141,7 +141,7 @@ class EditorMarkdown extends React.PureComponent<
     const { theme, intl } = this.props;
 
     return (
-      <View style={theme.styles.editorMarkdown}>
+      <View style={theme.styles.pageMarkdown}>
         <TextInput
           // https://github.com/necolas/react-native-web/issues/988
           // autoFocus
@@ -157,13 +157,13 @@ class EditorMarkdown extends React.PureComponent<
           // It breaks tab navigation.
           data-enable-grammarly="false"
           style={[
-            theme.styles.editorMarkdownTextInput,
+            theme.styles.pageMarkdownTextInput,
             theme.typography.fontSizeWithLineHeight(0),
           ]}
           // https://github.com/necolas/react-native-web/issues/988
           // selection={this.state.selection}
         />
-        <EditorMarkdownActions
+        <PageMarkdownActions
           expanded={this.state.actionsAreExpanded}
           selectionIsCollapsed={this.selectionIsCollapsed()}
           ref={this.actionsRef}
@@ -177,5 +177,5 @@ class EditorMarkdown extends React.PureComponent<
   }
 }
 
-// export default withConfirm(withIntl(withTheme(EditorMarkdown)));
-export default withIntl(withTheme(EditorMarkdown));
+// export default withConfirm(withIntl(withTheme(PageMarkdown)));
+export default withIntl(withTheme(PageMarkdown));

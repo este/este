@@ -12,7 +12,8 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     me(args?: {}, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     webs(args: { first: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<WebConnection | null>; 
-    page(args: { pageId: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
+    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
+    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
   }
 
 export interface Mutation {
@@ -892,7 +893,8 @@ enum PasswordError {
 type Query {
   me: User
   webs(first: Int!): WebConnection
-  page(pageId: ID!): Page
+  page(id: ID!): Page
+  web(id: ID!): Web
 }
 
 input SetPageTitleInput {

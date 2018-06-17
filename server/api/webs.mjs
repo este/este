@@ -112,7 +112,23 @@ const webs /*: Resolver<{ first: generated.Int }> */ = async (
   return webs;
 };
 
+const web /*: Resolver<{ id: generated.ID_Output }> */ = async (
+  parent,
+  args,
+  context,
+  info,
+) => {
+  const userId = context.getUserId();
+  const webExists = await context.db.exists.Web({
+    id: args.id,
+    creator: { id: userId },
+  });
+  if (!webExists) context.throwHttpStatus(403);
+  const web = await context.db.query.web({ where: { id: args.id } }, info);
+  return web;
+};
+
 export default {
   mutations: { createWeb, deleteWeb },
-  queries: { webs },
+  queries: { webs, web },
 };

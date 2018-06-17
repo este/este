@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8115ad3439be64e9b0097fd9e94cf8c9
+ * @relayHash c288898e291f24e2a70d8de9e780a001
  */
 
 /* eslint-disable */
@@ -9,22 +9,22 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Page$ref = any;
+type AppPage$ref = any;
 type Webs$ref = any;
 export type pagesQueryVariables = {||};
 export type pagesQueryResponse = {|
-  +$fragmentRefs: Page$ref & Webs$ref
+  +$fragmentRefs: AppPage$ref & Webs$ref
 |};
 */
 
 
 /*
 query pagesQuery {
-  ...Page
+  ...AppPage
   ...Webs
 }
 
-fragment Page on Query {
+fragment AppPage on Query {
   me {
     id
     themeName
@@ -71,7 +71,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...Page\n  ...Webs\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -82,7 +82,7 @@ return {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "AppPage",
         "args": null
       },
       {
@@ -256,5 +256,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b3695dd719fc73db35d893b56bed95cd';
+(node/*: any*/).hash = 'e8c77c475ac94b334fb2722d32d50b37';
 module.exports = node;

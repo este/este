@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b885dc6e63386fc1dd66248107263be7
+ * @relayHash 37c018d9ba5acc27a94dee6da06ebb48
  */
 
 /* eslint-disable */
@@ -13,10 +13,10 @@ export type SetPageTitleInput = {
   id: string,
   title: string,
 };
-export type EditorPageTitleMutationVariables = {|
+export type PageTitleMutationVariables = {|
   input: SetPageTitleInput
 |};
-export type EditorPageTitleMutationResponse = {|
+export type PageTitleMutationResponse = {|
   +setPageTitle: ?{|
     +page: ?{|
       +title: string
@@ -27,7 +27,7 @@ export type EditorPageTitleMutationResponse = {|
 
 
 /*
-mutation EditorPageTitleMutation(
+mutation PageTitleMutation(
   $input: SetPageTitleInput!
 ) {
   setPageTitle(input: $input) {
@@ -66,13 +66,13 @@ v2 = {
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "EditorPageTitleMutation",
+  "name": "PageTitleMutation",
   "id": null,
-  "text": "mutation EditorPageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      title\n      id\n    }\n  }\n}\n",
+  "text": "mutation PageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      title\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "EditorPageTitleMutation",
+    "name": "PageTitleMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -104,7 +104,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "EditorPageTitleMutation",
+    "name": "PageTitleMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -142,5 +142,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '662058140c50f948a00d2b5c49c0001b';
+(node/*: any*/).hash = '9e1a95fe5c999bb9ec5cba9061e34749';
 module.exports = node;

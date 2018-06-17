@@ -1,4 +1,5 @@
 .next
 flow-typed/npm
 __generated__
+lang/*.json
 package.json

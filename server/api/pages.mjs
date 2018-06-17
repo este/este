@@ -5,7 +5,7 @@ import * as generated from './__generated__/api.graphql'
 import type { Resolver } from './index'
 */
 
-const page /*: Resolver<{ pageId: generated.ID_Output }> */ = async (
+const page /*: Resolver<{ id: generated.ID_Output }> */ = async (
   parent,
   args,
   context,
@@ -13,14 +13,11 @@ const page /*: Resolver<{ pageId: generated.ID_Output }> */ = async (
 ) => {
   const userId = context.getUserId();
   const pageExists = await context.db.exists.Page({
-    id: args.pageId,
+    id: args.id,
     creator: { id: userId },
   });
   if (!pageExists) context.throwHttpStatus(403);
-  const page = await context.db.query.page(
-    { where: { id: args.pageId } },
-    info,
-  );
+  const page = await context.db.query.page({ where: { id: args.id } }, info);
   return page;
 };
 

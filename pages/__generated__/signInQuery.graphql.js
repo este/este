@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7b7912d4bbe88a66fe3255ec2802fe3c
+ * @relayHash 8087d7209d93493d016a4e4d4ea0fb0d
  */
 
 /* eslint-disable */
@@ -9,20 +9,20 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Page$ref = any;
+type AppPage$ref = any;
 export type signInQueryVariables = {||};
 export type signInQueryResponse = {|
-  +$fragmentRefs: Page$ref
+  +$fragmentRefs: AppPage$ref
 |};
 */
 
 
 /*
 query signInQuery {
-  ...Page
+  ...AppPage
 }
 
-fragment Page on Query {
+fragment AppPage on Query {
   me {
     id
     themeName
@@ -35,7 +35,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "signInQuery",
   "id": null,
-  "text": "query signInQuery {\n  ...Page\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
+  "text": "query signInQuery {\n  ...AppPage\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -46,7 +46,7 @@ const node/*: ConcreteRequest*/ = {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "AppPage",
         "args": null
       }
     ]
@@ -85,5 +85,5 @@ const node/*: ConcreteRequest*/ = {
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = '27b8c2f4d973b7c447f8c510f9253bc8';
+(node/*: any*/).hash = 'bfd23836e585294d993b9d8f7677c8f7';
 module.exports = node;

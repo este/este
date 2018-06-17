@@ -9,20 +9,20 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type Page$ref: FragmentReference;
-export type Page = {|
+declare export opaque type AppPage$ref: FragmentReference;
+export type AppPage = {|
   +me: ?{|
     +id: string,
     +themeName: ?string,
   |},
-  +$refType: Page$ref,
+  +$refType: AppPage$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "Page",
+  "name": "AppPage",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [],
@@ -55,5 +55,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '877a861ff5fa3b82682eabd6f55db7d2';
+(node/*: any*/).hash = '12be9fd8ae6c2e4bd6f1d8735cec9c96';
 module.exports = node;

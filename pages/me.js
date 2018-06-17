@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
-import Page from '../components/core/Page';
+import AppPage from '../components/AppPage';
 import SetTheme from '../components/core/SetTheme';
 import app from '../components/app';
 import gravatar from 'gravatar';
@@ -33,7 +33,7 @@ const signOut = () => {
 const Me = props => {
   const { me }: generated.meQueryResponse = props.data;
   return (
-    <Page
+    <AppPage
       requireAuth
       title={intl => intl.formatMessage(titles.me)}
       data={props.data}
@@ -61,14 +61,14 @@ const Me = props => {
           <SetTheme />
         </Row>
       </Block>
-    </Page>
+    </AppPage>
   );
 };
 
 export default app(Me, {
   query: graphql`
     query meQuery {
-      ...Page
+      ...AppPage
       me {
         email
       }

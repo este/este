@@ -9,26 +9,26 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type Editor$ref: FragmentReference;
-export type Editor = {|
+declare export opaque type Page$ref: FragmentReference;
+export type Page = {|
   +page: ?{|
     +id: string,
     +title: string,
   |},
-  +$refType: Editor$ref,
+  +$refType: Page$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "Editor",
+  "name": "Page",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [
     {
       "kind": "LocalArgument",
-      "name": "pageId",
+      "name": "id",
       "type": "ID!",
       "defaultValue": null
     }
@@ -42,8 +42,8 @@ const node/*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Variable",
-          "name": "pageId",
-          "variableName": "pageId",
+          "name": "id",
+          "variableName": "id",
           "type": "ID!"
         }
       ],
@@ -69,5 +69,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '5945dc086aea29a2e42e24ea243ca2f1';
+(node/*: any*/).hash = '223b1f81ea9be4343ca2f38d919e89bb';
 module.exports = node;

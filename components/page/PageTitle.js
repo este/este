@@ -4,20 +4,20 @@ import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import withMutation, { type Commit } from '../core/withMutation';
 import { graphql } from 'react-relay';
-import * as generated from './__generated__/EditorPageTitleMutation.graphql';
+import * as generated from './__generated__/PageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { editThrottle } from './Editor';
+import { editThrottle } from './Page';
 
 const messages = defineMessages({
   placeholder: {
     defaultMessage: 'page title…',
-    id: 'editorPageTitle.textInput.placeholder',
+    id: 'pageTitle.textInput.placeholder',
   },
 });
 
-type EditorPageTitleProps = {|
+type PageTitleProps = {|
   theme: Theme,
   pageId: string,
   // defaultValue because component is uncontrolled. This is fine for now.
@@ -25,12 +25,12 @@ type EditorPageTitleProps = {|
   defaultValue: string,
   commit: Commit<
     generated.SetPageTitleInput,
-    generated.EditorPageTitleMutationResponse,
+    generated.PageTitleMutationResponse,
   >,
   intl: IntlShape,
 |};
 
-class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
+class PageTitle extends React.PureComponent<PageTitleProps> {
   handleTextInputChangeText = throttle(value => {
     const input = {
       id: this.props.pageId,
@@ -60,9 +60,9 @@ class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
 }
 
 export default withMutation(
-  withIntl(withTheme(EditorPageTitle)),
+  withIntl(withTheme(PageTitle)),
   graphql`
-    mutation EditorPageTitleMutation($input: SetPageTitleInput!) {
+    mutation PageTitleMutation($input: SetPageTitleInput!) {
       setPageTitle(input: $input) {
         # Payload "page { title }" updates fragments with page title. Perfect.
         page {

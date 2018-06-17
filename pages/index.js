@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { titles } from '../components/app/sitemap';
-import Page from '../components/core/Page';
+import AppPage from '../components/AppPage';
 import Heading from '../components/core/Heading';
 import app from '../components/app';
 import A from '../components/core/A';
@@ -42,7 +42,7 @@ const NotAuthenticated = () => (
 
 const Index = props => {
   return (
-    <Page title={intl => intl.formatMessage(titles.index)} data={props.data}>
+    <AppPage title={intl => intl.formatMessage(titles.index)} data={props.data}>
       {isAuthenticated =>
         isAuthenticated ? (
           <Authenticated data={props.data} />
@@ -50,14 +50,14 @@ const Index = props => {
           <NotAuthenticated />
         )
       }
-    </Page>
+    </AppPage>
   );
 };
 
 export default app(Index, {
   query: graphql`
     query pagesQuery {
-      ...Page
+      ...AppPage
       ...Webs
     }
   `,

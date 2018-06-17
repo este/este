@@ -16,8 +16,12 @@ export type Href =
       pathname: '/me',
     |}
   | {|
-      pathname: '/edit',
-      query: {| pageId: string |},
+      pathname: '/page',
+      query: {| id: string |},
+    |}
+  | {|
+      pathname: '/web',
+      query: {| id: string |},
     |};
 
 // Must be separated from pages because pages are lazily loaded and MainNav
@@ -34,9 +38,5 @@ export const titles = defineMessages({
   me: {
     defaultMessage: 'Me',
     id: 'sitemap.title.me',
-  },
-  edit: {
-    defaultMessage: 'Edit',
-    id: 'sitemap.title.edit',
   },
 });

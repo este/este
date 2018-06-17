@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f8287738344947a33c064f1a9782c2c5
+ * @relayHash 2085995630fce857e5a0ced05bb20c32
  */
 
 /* eslint-disable */
@@ -9,41 +9,49 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Editor$ref = any;
+type AppPage$ref = any;
 type Page$ref = any;
-export type editQueryVariables = {|
-  pageId: string
+export type pageQueryVariables = {|
+  id: string
 |};
-export type editQueryResponse = {|
+export type pageQueryResponse = {|
   +page: ?{|
-    +title: string
+    +title: string,
+    +web: {|
+      +id: string,
+      +name: string,
+    |},
   |},
-  +$fragmentRefs: Page$ref & Editor$ref,
+  +$fragmentRefs: AppPage$ref & Page$ref,
 |};
 */
 
 
 /*
-query editQuery(
-  $pageId: ID!
+query pageQuery(
+  $id: ID!
 ) {
-  page(pageId: $pageId) {
+  page(id: $id) {
     title
+    web {
+      id
+      name
+    }
     id
   }
-  ...Page
-  ...Editor_3AnMiB
+  ...AppPage
+  ...Page_1Bmzm5
 }
 
-fragment Page on Query {
+fragment AppPage on Query {
   me {
     id
     themeName
   }
 }
 
-fragment Editor_3AnMiB on Query {
-  page(pageId: $pageId) {
+fragment Page_1Bmzm5 on Query {
+  page(id: $id) {
     id
     title
   }
@@ -54,7 +62,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "pageId",
+    "name": "id",
     "type": "ID!",
     "defaultValue": null
   }
@@ -62,8 +70,8 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "pageId",
-    "variableName": "pageId",
+    "name": "id",
+    "variableName": "id",
     "type": "ID!"
   }
 ],
@@ -80,17 +88,36 @@ v3 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v4 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "web",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Web",
+  "plural": false,
+  "selections": [
+    v3,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "name",
+      "args": null,
+      "storageKey": null
+    }
+  ]
 };
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "editQuery",
+  "name": "pageQuery",
   "id": null,
-  "text": "query editQuery(\n  $pageId: ID!\n) {\n  page(pageId: $pageId) {\n    title\n    id\n  }\n  ...Page\n  ...Editor_3AnMiB\n}\n\nfragment Page on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Editor_3AnMiB on Query {\n  page(pageId: $pageId) {\n    id\n    title\n  }\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    title\n    web {\n      id\n      name\n    }\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "editQuery",
+    "name": "pageQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -104,22 +131,23 @@ return {
         "concreteType": "Page",
         "plural": false,
         "selections": [
-          v2
+          v2,
+          v4
         ]
       },
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "AppPage",
         "args": null
       },
       {
         "kind": "FragmentSpread",
-        "name": "Editor",
+        "name": "Page",
         "args": [
           {
             "kind": "Variable",
-            "name": "pageId",
-            "variableName": "pageId",
+            "name": "id",
+            "variableName": "id",
             "type": null
           }
         ]
@@ -128,7 +156,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "editQuery",
+    "name": "pageQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -141,6 +169,7 @@ return {
         "plural": false,
         "selections": [
           v2,
+          v4,
           v3
         ]
       },
@@ -168,5 +197,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '33d9f6dd0bf2e28b7d1fe55976d9abba';
+(node/*: any*/).hash = 'ecf3e90aafed3a0b977d0ced6b65e358';
 module.exports = node;

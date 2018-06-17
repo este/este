@@ -4,10 +4,10 @@ import { View } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
-import EditorMarkdownActionsButton from './EditorMarkdownActionsButton';
-import { getFocusableNodes } from './Editor';
+import PageMarkdownActionsButton from './PageMarkdownActionsButton';
+import { getFocusableNodes } from './Page';
 
-type EditorMarkdownActionsProps = {|
+type PageMarkdownActionsProps = {|
   expanded: boolean,
   theme: Theme,
   selectionIsCollapsed: boolean,
@@ -17,8 +17,8 @@ type EditorMarkdownActionsProps = {|
   onEscape: () => void,
 |};
 
-class EditorMarkdownActions extends React.PureComponent<
-  EditorMarkdownActionsProps,
+class PageMarkdownActions extends React.PureComponent<
+  PageMarkdownActionsProps,
 > {
   buttonsRef = React.createRef();
 
@@ -41,31 +41,31 @@ class EditorMarkdownActions extends React.PureComponent<
   render() {
     return (
       <View
-        style={this.props.theme.styles.editorMarkdownButtons}
+        style={this.props.theme.styles.pageMarkdownButtons}
         onKeyDown={this.handleViewKeyDown}
       >
         {!this.props.expanded ? (
           <Row>
-            <EditorMarkdownActionsButton onPress={this.props.onToggle}>
+            <PageMarkdownActionsButton onPress={this.props.onToggle}>
               —
-            </EditorMarkdownActionsButton>
+            </PageMarkdownActionsButton>
           </Row>
         ) : (
           <Row ref={this.buttonsRef}>
             {!this.props.selectionIsCollapsed && (
-              <EditorMarkdownActionsButton onPress={this.props.onReuse}>
+              <PageMarkdownActionsButton onPress={this.props.onReuse}>
                 <FormattedMessage
                   defaultMessage="Reuse"
-                  id="editorMarkdown.buttons.reuse"
+                  id="pageMarkdown.buttons.reuse"
                 />
-              </EditorMarkdownActionsButton>
+              </PageMarkdownActionsButton>
             )}
-            <EditorMarkdownActionsButton onPress={this.props.onExample}>
+            <PageMarkdownActionsButton onPress={this.props.onExample}>
               <FormattedMessage
                 defaultMessage="Example"
-                id="editorMarkdown.buttons.example"
+                id="pageMarkdown.buttons.example"
               />
-            </EditorMarkdownActionsButton>
+            </PageMarkdownActionsButton>
           </Row>
         )}
       </View>
@@ -73,4 +73,4 @@ class EditorMarkdownActions extends React.PureComponent<
   }
 }
 
-export default withTheme(EditorMarkdownActions);
+export default withTheme(PageMarkdownActions);

@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { View, findNodeHandle } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
-import EditorMarkdown from './EditorMarkdown';
+import PageMarkdown from './PageMarkdown';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/Editor.graphql';
-import EditorPageTitle from './EditorPageTitle';
+import * as generated from './__generated__/Page.graphql';
+import PageTitle from './PageTitle';
 import Head from 'next/head';
 
 export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
@@ -18,12 +18,12 @@ export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
 
 export const editThrottle = 1000;
 
-type EditorProps = {|
+type PageProps = {|
   theme: Theme,
-  data: generated.Editor,
+  data: generated.Page,
 |};
 
-class Editor extends React.PureComponent<EditorProps> {
+class Page extends React.PureComponent<PageProps> {
   componentDidMount() {
     const node = getFocusableNodes(this)[1];
     if (node) node.focus();
@@ -40,9 +40,9 @@ class Editor extends React.PureComponent<EditorProps> {
         <Head>
           <title>{page.title}</title>
         </Head>
-        <View style={theme.styles.editor}>
-          <EditorPageTitle pageId={page.id} defaultValue={page.title} />
-          <EditorMarkdown />
+        <View style={theme.styles.page}>
+          <PageTitle pageId={page.id} defaultValue={page.title} />
+          <PageMarkdown />
         </View>
       </>
     );
@@ -50,10 +50,10 @@ class Editor extends React.PureComponent<EditorProps> {
 }
 
 export default createFragmentContainer(
-  withTheme(Editor),
+  withTheme(Page),
   graphql`
-    fragment Editor on Query @argumentDefinitions(pageId: { type: "ID!" }) {
-      page(pageId: $pageId) {
+    fragment Page on Query @argumentDefinitions(id: { type: "ID!" }) {
+      page(id: $id) {
         id
         title
       }

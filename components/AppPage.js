@@ -1,20 +1,20 @@
 // @flow
 import { View, StyleSheet } from 'react-native';
-import A from './A';
-import ErrorPopup from './ErrorPopup';
+import A from './core/A';
+import ErrorPopup from './core/ErrorPopup';
 import Head from 'next/head';
-import PageLoadingBar from './PageLoadingBar';
-import MainNav from '../MainNav';
+import PageLoadingBar from './core/PageLoadingBar';
 import * as React from 'react';
-import SwitchLocale from './SwitchLocale';
+import SwitchLocale from './core/SwitchLocale';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import ThemeContext from './ThemeContext';
-import { lightTheme, darkTheme } from '../../themes/theme';
+import ThemeContext from './core/ThemeContext';
+import { lightTheme, darkTheme } from '../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/Page.graphql';
-import Auth from './Auth';
-import withIntl from './withIntl';
-import Text from './Text';
+import * as generated from './__generated__/AppPage.graphql';
+import Auth from './core/Auth';
+import withIntl from './core/withIntl';
+import Text from './core/Text';
+import { titles } from './app/sitemap';
 
 // yarn favicon
 const Favicons = () => [
@@ -56,21 +56,55 @@ const styles = StyleSheet.create({
   body: {
     flex: 1, // make footer sticky
   },
+  mainNav: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   footer: {
     flexDirection: 'row',
   },
 });
 
 const PageContainer = ({ children, theme }) => (
-  <View style={[styles.container, theme.styles.pageContainer]}>{children}</View>
+  <View style={[styles.container, theme.styles.appPageContainer]}>
+    {children}
+  </View>
 );
 
 const PageBody = ({ children }) => (
   <View style={[styles.body]}>{children}</View>
 );
 
+const PageMainNavSpacer = ({ theme }) => (
+  <View style={theme.styles.appPageMainNavSpacer} />
+);
+
+const PageMainNav = ({ isAuthenticated, theme, mainNavOptional }) => (
+  <View style={[styles.mainNav, theme.styles.appPageMainNav]}>
+    <A href={{ pathname: '/' }} prefetch>
+      <FormattedMessage {...titles.index} />
+    </A>
+    <PageMainNavSpacer theme={theme} />
+    {isAuthenticated ? (
+      <A href={{ pathname: '/me' }} prefetch>
+        <FormattedMessage {...titles.me} />
+      </A>
+    ) : (
+      <A href={{ pathname: '/sign-in' }} prefetch>
+        <FormattedMessage {...titles.signIn} />
+      </A>
+    )}
+    {mainNavOptional != null && (
+      <>
+        <PageMainNavSpacer theme={theme} />
+        {mainNavOptional}
+      </>
+    )}
+  </View>
+);
+
 const PageFooter = ({ theme }) => (
-  <View style={[styles.footer, theme.styles.pageFooter]}>
+  <View style={[styles.footer, theme.styles.appPageFooter]}>
     <Text size={-1}>
       <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
       <A href="https://twitter.com/steida">steida</A>
@@ -83,14 +117,14 @@ const PageFooter = ({ theme }) => (
 type Props = {|
   title: string | ((intl: IntlShape) => string),
   children?: React.Node | ((isAuthenticated: boolean) => React.Node),
-  data: generated.Page,
+  data: generated.AppPage,
   requireAuth?: boolean,
   intl: IntlShape,
-  header?: React.Node,
-  footer?: React.Node,
+  mainNavOptional?: React.Element<typeof A>,
+  hideFooter?: boolean,
 |};
 
-class Page extends React.PureComponent<Props> {
+class AppPage extends React.PureComponent<Props> {
   static getTheme = themeName => {
     switch (themeName) {
       case 'light':
@@ -111,14 +145,14 @@ class Page extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, header, footer, title, intl } = this.props;
+    const { data, mainNavOptional, hideFooter, title, intl } = this.props;
     const isAuthenticated = data.me != null;
     const themeName =
       // That's how we gradually check nullable types.
       // TODO: Use Optional Chaining.
       (data.me != null && data.me.themeName != null && data.me.themeName) ||
       'light';
-    const theme = Page.getTheme(themeName);
+    const theme = AppPage.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
 
     return (
@@ -143,26 +177,26 @@ class Page extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          {header != null ? (
-            header
-          ) : (
-            <MainNav isAuthenticated={isAuthenticated} />
-          )}
+          <PageMainNav
+            isAuthenticated={isAuthenticated}
+            theme={theme}
+            mainNavOptional={mainNavOptional}
+          />
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
-          {footer != null ? footer : <PageFooter theme={theme} />}
+          {hideFooter !== true && <PageFooter theme={theme} />}
         </PageContainer>
       </ThemeContext.Provider>
     );
   }
 }
 
-const PageWithIntl = withIntl(Page);
+const PageWithIntl = withIntl(AppPage);
 
 // https://github.com/este/este/issues/1484
 export default createFragmentContainer(
   PageWithIntl,
   graphql`
-    fragment Page on Query {
+    fragment AppPage on Query {
       me {
         id
         themeName

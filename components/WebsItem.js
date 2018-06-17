@@ -15,12 +15,12 @@ type WebsItemProps = {|
 class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
-    const pageId = data.pages && data.pages[0].id;
+    const id = data.pages && data.pages[0].id;
     // No page nothing to edit.
-    if (pageId == null) return null;
+    if (id == null) return null;
     return (
       <Block>
-        <A href={{ pathname: '/edit', query: { pageId } }} prefetch>
+        <A href={{ pathname: '/page', query: { id } }} prefetch>
           {data.name}
         </A>
         <Text color="gray" size={-1}>
