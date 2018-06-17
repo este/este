@@ -118,7 +118,7 @@ class EditorMarkdown extends React.PureComponent<
         prevState.value.length === 0
           ? example
           : `${prevState.value}\n${example}`;
-      return { value: `${value}\n` };
+      return { value: `${value}` };
     }, this.focusTextInput);
   };
 

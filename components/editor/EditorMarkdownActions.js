@@ -47,7 +47,7 @@ class EditorMarkdownActions extends React.PureComponent<
         {!this.props.expanded ? (
           <Row>
             <EditorMarkdownActionsButton onPress={this.props.onToggle}>
-              ■
+              —
             </EditorMarkdownActionsButton>
           </Row>
         ) : (
