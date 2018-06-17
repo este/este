@@ -12,10 +12,10 @@ const Edit = props => {
   if (!page) return <Error statusCode={404} />;
   return (
     <Page
+      requireAuth
+      title={page.title}
       // header={false}
       footer={false}
-      requireAuth
-      title={`${page.title} | ${page.web.name}`}
       data={props.data}
     >
       <Editor data={props.data} />
@@ -28,9 +28,6 @@ export default app(Edit, {
     query editQuery($pageId: ID!) {
       page(pageId: $pageId) {
         title
-        web {
-          name
-        }
       }
       ...Page
       ...Editor @arguments(pageId: $pageId)

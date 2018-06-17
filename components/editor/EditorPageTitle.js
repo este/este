@@ -64,8 +64,9 @@ export default withMutation(
   graphql`
     mutation EditorPageTitleMutation($input: SetPageTitleInput!) {
       setPageTitle(input: $input) {
+        # Payload "page { title }" updates fragments with page title. Perfect.
         page {
-          id
+          title
         }
       }
     }

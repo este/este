@@ -6,6 +6,7 @@ import EditorMarkdown from './EditorMarkdown';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Editor.graphql';
 import EditorPageTitle from './EditorPageTitle';
+import Head from 'next/head';
 
 export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
   const node = findNodeHandle(instance);
@@ -35,10 +36,15 @@ class Editor extends React.PureComponent<EditorProps> {
     } = this.props;
     if (page == null) return null;
     return (
-      <View style={theme.styles.editor}>
-        <EditorPageTitle pageId={page.id} defaultValue={page.title} />
-        <EditorMarkdown />
-      </View>
+      <>
+        <Head>
+          <title>{page.title}</title>
+        </Head>
+        <View style={theme.styles.editor}>
+          <EditorPageTitle pageId={page.id} defaultValue={page.title} />
+          <EditorMarkdown />
+        </View>
+      </>
     );
   }
 }

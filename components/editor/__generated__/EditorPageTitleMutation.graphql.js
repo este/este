@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 83470a1ed03b33777fa8ada5652b378c
+ * @relayHash b885dc6e63386fc1dd66248107263be7
  */
 
 /* eslint-disable */
@@ -19,7 +19,7 @@ export type EditorPageTitleMutationVariables = {|
 export type EditorPageTitleMutationResponse = {|
   +setPageTitle: ?{|
     +page: ?{|
-      +id: string
+      +title: string
     |}
   |}
 |};
@@ -32,6 +32,7 @@ mutation EditorPageTitleMutation(
 ) {
   setPageTitle(input: $input) {
     page {
+      title
       id
     }
   }
@@ -49,48 +50,25 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "setPageTitle",
-    "storageKey": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input",
-        "type": "SetPageTitleInput!"
-      }
-    ],
-    "concreteType": "SetPageTitlePayload",
-    "plural": false,
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "page",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Page",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "kind": "Variable",
+    "name": "input",
+    "variableName": "input",
+    "type": "SetPageTitleInput!"
   }
-];
+],
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "title",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "EditorPageTitleMutation",
   "id": null,
-  "text": "mutation EditorPageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      id\n    }\n  }\n}\n",
+  "text": "mutation EditorPageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      title\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -98,16 +76,71 @@ return {
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "setPageTitle",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "SetPageTitlePayload",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "page",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Page",
+            "plural": false,
+            "selections": [
+              v2
+            ]
+          }
+        ]
+      }
+    ]
   },
   "operation": {
     "kind": "Operation",
     "name": "EditorPageTitleMutation",
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "setPageTitle",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "SetPageTitlePayload",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "page",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Page",
+            "plural": false,
+            "selections": [
+              v2,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "id",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c958b7fe9ae223d592dd9feb98e8d590';
+(node/*: any*/).hash = '662058140c50f948a00d2b5c49c0001b';
 module.exports = node;

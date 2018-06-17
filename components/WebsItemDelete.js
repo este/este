@@ -55,7 +55,7 @@ export default withMutation(
     }
   `,
   {
-    updater: store => {
+    updater(store) {
       const payload = store.getRootField('deleteWeb');
       if (!payload) return;
       const id = payload.getValue('id');

@@ -81,7 +81,6 @@ const PageFooter = ({ theme }) => (
 );
 
 type Props = {|
-  // Prop as function pattern.
   title: string | ((intl: IntlShape) => string),
   children?: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.Page,
@@ -112,24 +111,20 @@ class Page extends React.PureComponent<Props> {
   }
 
   render() {
-    const { me } = this.props.data;
-    const isAuthenticated = me != null;
+    const { data, header, footer, title, intl } = this.props;
+    const isAuthenticated = data.me != null;
     const themeName =
       // That's how we gradually check nullable types.
       // TODO: Use Optional Chaining.
-      (me != null && me.themeName != null && me.themeName) || 'light';
+      (data.me != null && data.me.themeName != null && data.me.themeName) ||
+      'light';
     const theme = Page.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
-    const { header, footer } = this.props;
 
     return (
       <ThemeContext.Provider value={theme}>
         <Head>
-          <title>
-            {typeof this.props.title === 'function'
-              ? this.props.title(this.props.intl)
-              : this.props.title}
-          </title>
+          <title>{typeof title === 'function' ? title(intl) : title}</title>
           <meta name="theme-color" content={pageBackgroundColor} />
           <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
           <Favicons />
