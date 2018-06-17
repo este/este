@@ -5,7 +5,7 @@ import withTheme, { type Theme } from '../core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
 import PageMarkdownActionsButton from './PageMarkdownActionsButton';
-import { getFocusableNodes } from './Page';
+import getFocusableNodes from '../../lib/getFocusableNodes';
 
 type PageMarkdownActionsProps = {|
   expanded: boolean,

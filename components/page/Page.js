@@ -1,20 +1,13 @@
 // @flow
 import * as React from 'react';
-import { View, findNodeHandle } from 'react-native';
+import { View } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import PageMarkdown from './PageMarkdown';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import PageTitle from './PageTitle';
 import Head from 'next/head';
-
-export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
-  const node = findNodeHandle(instance);
-  // TODO: React Native
-  if (node == null || typeof node === 'number') return [];
-  if (typeof node.querySelectorAll !== 'function') return [];
-  return [...node.querySelectorAll('[data-focusable="true"]')];
-};
+import getFocusableNodes from '../../lib/getFocusableNodes';
 
 export const editThrottle = 1000;
 
