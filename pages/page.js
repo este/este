@@ -15,7 +15,6 @@ const Page = props => {
     <AppPage
       requireAuth
       hideFooter
-      title={page.title}
       data={props.data}
       mainNavOptional={
         <A href={{ pathname: '/web', query: { id: page.web.id } }} prefetch>
@@ -32,7 +31,6 @@ export default app(Page, {
   query: graphql`
     query pageQuery($id: ID!) {
       page(id: $id) {
-        title
         web {
           id
           name

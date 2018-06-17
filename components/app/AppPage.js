@@ -115,7 +115,7 @@ const PageFooter = ({ theme }) => (
 );
 
 type Props = {|
-  title: string | ((intl: IntlShape) => string),
+  title?: string | ((intl: IntlShape) => string),
   children?: React.Node | ((isAuthenticated: boolean) => React.Node),
   data: generated.AppPage,
   requireAuth?: boolean,
@@ -158,7 +158,9 @@ class AppPage extends React.PureComponent<Props> {
     return (
       <ThemeContext.Provider value={theme}>
         <Head>
-          <title>{typeof title === 'function' ? title(intl) : title}</title>
+          {title != null && (
+            <title>{typeof title === 'function' ? title(intl) : title}</title>
+          )}
           <meta name="theme-color" content={pageBackgroundColor} />
           <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
           <Favicons />

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2085995630fce857e5a0ced05bb20c32
+ * @relayHash afb6b75d5f65689a23fe1f83ad1c1ade
  */
 
 /* eslint-disable */
@@ -16,11 +16,10 @@ export type pageQueryVariables = {|
 |};
 export type pageQueryResponse = {|
   +page: ?{|
-    +title: string,
     +web: {|
       +id: string,
       +name: string,
-    |},
+    |}
   |},
   +$fragmentRefs: AppPage$ref & Page$ref,
 |};
@@ -32,7 +31,6 @@ query pageQuery(
   $id: ID!
 ) {
   page(id: $id) {
-    title
     web {
       id
       name
@@ -78,18 +76,11 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "title",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v3 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "web",
@@ -98,7 +89,7 @@ v4 = {
   "concreteType": "Web",
   "plural": false,
   "selections": [
-    v3,
+    v2,
     {
       "kind": "ScalarField",
       "alias": null,
@@ -113,7 +104,7 @@ return {
   "operationKind": "query",
   "name": "pageQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    title\n    web {\n      id\n      name\n    }\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n  }\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    web {\n      id\n      name\n    }\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -131,8 +122,7 @@ return {
         "concreteType": "Page",
         "plural": false,
         "selections": [
-          v2,
-          v4
+          v3
         ]
       },
       {
@@ -168,9 +158,15 @@ return {
         "concreteType": "Page",
         "plural": false,
         "selections": [
+          v3,
           v2,
-          v4,
-          v3
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "title",
+            "args": null,
+            "storageKey": null
+          }
         ]
       },
       {
@@ -182,7 +178,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v3,
+          v2,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -197,5 +193,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ecf3e90aafed3a0b977d0ced6b65e358';
+(node/*: any*/).hash = '5b674b1c86d30474dae3a773ee93e6ed';
 module.exports = node;
