@@ -15,6 +15,8 @@ export const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
   return [...node.querySelectorAll('[data-focusable="true"]')];
 };
 
+export const editThrottle = 1000;
+
 type EditorProps = {|
   theme: Theme,
   data: generated.Editor,

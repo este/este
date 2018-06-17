@@ -8,6 +8,7 @@ import * as generated from './__generated__/EditorPageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
+import { editThrottle } from './Editor';
 
 const messages = defineMessages({
   placeholder: {
@@ -36,7 +37,7 @@ class EditorPageTitle extends React.PureComponent<EditorPageTitleProps> {
       title: value,
     };
     this.props.commit(input);
-  }, 1000);
+  }, editThrottle);
 
   render() {
     const { theme, intl } = this.props;
