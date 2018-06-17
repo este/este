@@ -19,7 +19,8 @@ type EditorMarkdownActionsButtonProps = {|
 |};
 
 type EditorMarkdownActionsButtonState = {
-  hasFocus: boolean,
+  focused: boolean,
+  hovered: boolean,
 };
 
 class EditorMarkdownActionsButton extends React.PureComponent<
@@ -27,29 +28,39 @@ class EditorMarkdownActionsButton extends React.PureComponent<
   EditorMarkdownActionsButtonState,
 > {
   state = {
-    hasFocus: false,
+    focused: false,
+    hovered: false,
   };
 
   handleFocus = () => {
-    this.setState({ hasFocus: true });
+    this.setState({ focused: true });
   };
 
   handleBlur = () => {
-    this.setState({ hasFocus: false });
+    this.setState({ focused: false });
+  };
+
+  handleMouseEnter = () => {
+    this.setState({ hovered: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ hovered: false });
   };
 
   render() {
-    const maybeColor = this.state.hasFocus
-      ? { color: 'primary' }
-      : { color: 'gray' };
+    const { focused, hovered } = this.state;
+    const color = focused || hovered ? 'primary' : 'gray';
     return (
       <Button
         inline
         bold={false}
+        color={color}
+        touchableStyle={styles.button}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        touchableStyle={styles.button}
-        {...maybeColor}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         {...this.props}
       />
     );
