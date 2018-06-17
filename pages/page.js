@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
-import app from '../components/app';
+import app from '../components/app/app';
 import A from '../components/core/A';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/pageQuery.graphql';
 import Error from 'next/error';
-import AppPage from '../components/AppPage';
+import AppPage from '../components/app/AppPage';
 import PageComponent from '../components/page/Page';
 
 const Page = props => {

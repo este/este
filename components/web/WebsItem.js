@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/WebsItem.graphql';
-import Text from './core/Text';
-import A from './core/A';
-import Block from './core/Block';
+import Text from '../core/Text';
+import A from '../core/A';
+import Block from '../core/Block';
 import { FormattedRelative } from 'react-intl';
 import WebsItemDelete from './WebsItemDelete';
 

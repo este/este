@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql } from 'react-relay';
 import { ConnectionHandler, ROOT_ID } from 'relay-runtime';
-import { DeleteButton } from './core/buttons';
-import withMutation, { type Commit } from './core/withMutation';
-import withConfirm, { type Confirm } from './core/withConfirm';
+import { DeleteButton } from '../core/buttons';
+import withMutation, { type Commit } from '../core/withMutation';
+import withConfirm, { type Confirm } from '../core/withConfirm';
 import * as generated from './__generated__/WebsItemDeleteMutation.graphql';
 
 type DeleteProps = {|

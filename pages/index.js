@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
 import { titles } from '../components/app/sitemap';
-import AppPage from '../components/AppPage';
+import AppPage from '../components/app/AppPage';
 import Heading from '../components/core/Heading';
-import app from '../components/app';
+import app from '../components/app/app';
 import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
 import Block from '../components/core/Block';
-import CreateWeb from '../components/CreateWeb';
-import Webs from '../components/Webs';
+import CreateWeb from '../components/web/CreateWeb';
+import Webs from '../components/web/Webs';
 import { graphql } from 'react-relay';
 
 const Authenticated = ({ data }) => (

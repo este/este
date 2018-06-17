@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
-import type { Max140CharsError } from '../__generated__/CreateWebMutation.graphql';
+import type { Max140CharsError } from '../web/__generated__/CreateWebMutation.graphql';
 import type {
   EmailError,
   PasswordError,

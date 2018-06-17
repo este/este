@@ -1,20 +1,20 @@
 // @flow
 import { View, StyleSheet } from 'react-native';
-import A from './core/A';
-import ErrorPopup from './core/ErrorPopup';
+import A from '../core/A';
+import ErrorPopup from '../core/ErrorPopup';
 import Head from 'next/head';
-import PageLoadingBar from './core/PageLoadingBar';
+import PageLoadingBar from '../core/PageLoadingBar';
 import * as React from 'react';
-import SwitchLocale from './core/SwitchLocale';
+import SwitchLocale from '../core/SwitchLocale';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import ThemeContext from './core/ThemeContext';
-import { lightTheme, darkTheme } from '../themes/theme';
+import ThemeContext from '../core/ThemeContext';
+import { lightTheme, darkTheme } from '../../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/AppPage.graphql';
-import Auth from './core/Auth';
-import withIntl from './core/withIntl';
-import Text from './core/Text';
-import { titles } from './app/sitemap';
+import Auth from '../core/Auth';
+import withIntl from '../core/withIntl';
+import Text from '../core/Text';
+import { titles } from './sitemap';
 
 // yarn favicon
 const Favicons = () => [

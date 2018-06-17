@@ -3,9 +3,9 @@
 import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
-import AppPage from '../components/AppPage';
+import AppPage from '../components/app/AppPage';
 import SetTheme from '../components/core/SetTheme';
-import app from '../components/app';
+import app from '../components/app/app';
 import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/core/buttons';

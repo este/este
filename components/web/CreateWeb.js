@@ -1,18 +1,18 @@
 // @flow
 import * as React from 'react';
-import Form from './core/Form';
-import { CreateButton } from './core/buttons';
-import TextInput from './core/TextInput';
+import Form from '../core/Form';
+import { CreateButton } from '../core/buttons';
+import TextInput from '../core/TextInput';
 import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
-import Row from './core/Row';
-import Block from './core/Block';
+import Row from '../core/Row';
+import Block from '../core/Block';
 import { graphql } from 'react-relay';
-import withMutation, { type Commit, type Errors } from './core/withMutation';
-import { validateCreateWeb } from '../server/api/webs.mjs';
+import withMutation, { type Commit, type Errors } from '../core/withMutation';
+import { validateCreateWeb } from '../../server/api/webs.mjs';
 import Router from 'next/router';
-import type { Href } from './app/sitemap';
-import withIntl from './core/withIntl';
+import type { Href } from '../app/sitemap';
+import withIntl from '../core/withIntl';
 
 export const messages = defineMessages({
   pageTitle: {

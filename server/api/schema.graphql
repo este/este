@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Jun 17 2018 22:17:50 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Jun 17 2018 23:28:01 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!

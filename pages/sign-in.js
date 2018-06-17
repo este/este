@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import Auth from '../components/core/Auth';
-import AppPage from '../components/AppPage';
-import app from '../components/app';
+import AppPage from '../components/app/AppPage';
+import app from '../components/app/app';
 import { graphql } from 'react-relay';
 import { titles } from '../components/app/sitemap';
 
