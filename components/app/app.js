@@ -3,12 +3,8 @@
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import {
-  // $FlowFixMe Wrong libdef.
-  fetchQuery,
-  type GraphQLTaggedNode,
-  type Environment,
-} from 'react-relay';
+import { type GraphQLTaggedNode, type Environment } from 'react-relay';
+import { fetchQuery } from 'relay-runtime';
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
 import EnvironmentContext from '../core/EnvironmentContext';
