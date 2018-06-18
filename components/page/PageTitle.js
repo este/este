@@ -8,7 +8,7 @@ import * as generated from './__generated__/PageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { editThrottle } from './Page';
+import { changeTextThrottle } from '../../lib/constants.mjs';
 
 const messages = defineMessages({
   placeholder: {
@@ -37,7 +37,7 @@ class PageTitle extends React.PureComponent<PageTitleProps> {
       title: value,
     };
     this.props.commit(input);
-  }, editThrottle);
+  }, changeTextThrottle);
 
   render() {
     const { theme, intl } = this.props;

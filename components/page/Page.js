@@ -9,8 +9,6 @@ import PageTitle from './PageTitle';
 import Head from 'next/head';
 import getFocusableNodes from '../../lib/getFocusableNodes';
 
-export const editThrottle = 1000;
-
 type PageProps = {|
   theme: Theme,
   data: generated.Page,

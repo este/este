@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { defaultLocale } from '../../server/constants.mjs';
+import { defaultLocale } from '../../lib/constants.mjs';
 
 const LocaleContext = React.createContext({
   current: defaultLocale,
