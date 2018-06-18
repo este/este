@@ -9,7 +9,7 @@ import AppPage from '../components/app/AppPage';
 import PageComponent from '../components/page/Page';
 
 const Page = props => {
-  const { page }: generated.editQueryResponse = props.data;
+  const { page }: generated.pageQueryResponse = props.data;
   if (!page) return <Error statusCode={404} />;
   return (
     <AppPage
