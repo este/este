@@ -53,6 +53,7 @@ class PageTitle extends React.PureComponent<PageTitleProps> {
           defaultValue={this.props.defaultValue}
           placeholderTextColor={theme.placeholderTextColor}
           placeholder={intl.formatMessage(messages.placeholder)}
+          blurOnSubmit={false}
         />
       </View>
     );
