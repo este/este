@@ -7,7 +7,6 @@ const Query /*: generated.Query */ = {
   me: async (args, info, context) => {
     const userId = context.getUserId();
     const user = await context.db.query.user({ where: { id: userId } });
-    // $FlowFixMe Probably wrong type generation. I don't know.
     return user;
   },
 
