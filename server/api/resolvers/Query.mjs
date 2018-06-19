@@ -1,5 +1,5 @@
 // @flow
-import * as validate from '../validations/validate.mjs';
+import * as validate from '../validations/validate';
 /*::
 import * as generated from '../__generated__/api.graphql'
 */
