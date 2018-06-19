@@ -1,7 +1,6 @@
 // @flow
 import Mutation from './Mutation';
 import Query from './Query';
-// import { Viewer } from './Viewer';
 
 // This is fix for codegen.
 const mapSignatures = Resolvers => {
@@ -18,5 +17,4 @@ const mapSignatures = Resolvers => {
 export default {
   Mutation: mapSignatures(Mutation),
   Query: mapSignatures(Query),
-  // Viewer,
 };
