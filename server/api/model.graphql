@@ -12,6 +12,7 @@
 # import * from "./errors.graphql"
 
 # Like database/model User, but without password, webs, and directives.
+# TODO: Do we really need it?
 type User {
   id: ID!
   createdAt: DateTime!
@@ -57,6 +58,7 @@ input DeleteWebInput {
 }
 
 type DeleteWebPayload {
+  # TODO: Return web: Web
   id: ID
 }
 
@@ -77,12 +79,22 @@ type SetPageTitlePayload {
   page: Page
 }
 
+# type SetWebNameInput {
+#   id: ID!
+#   name: String!
+# }
+#
+# type SetWebNamePayload {
+#   web: Web
+# }
+
 type Mutation {
   auth(input: AuthInput!): AuthPayload
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
   setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
+  # setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
 # Queries do not need inputs and payloads. They are pretty explicit.

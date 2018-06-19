@@ -14,7 +14,7 @@ import Row from './Row';
 import Block from './Block';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/AuthMutation.graphql';
-import { validateAuth } from '../../server/api/users.mjs';
+import { validateAuth } from '../../server/api/resolvers/Mutation.mjs';
 import { View } from 'react-native';
 
 const messages = defineMessages({

@@ -1,6 +1,7 @@
 // @flow
 import fs from 'fs';
 
+// This fixed generated code.
 // https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397375066
 
 const paths = [
@@ -10,6 +11,7 @@ const paths = [
 
 paths.forEach(path => {
   let text = fs.readFileSync(path, 'utf8');
+  const isServerApi = path.indexOf('server/api') !== -1;
   text = text
     .replace(
       'export const Prisma: BindingConstructor<Prisma>',
@@ -24,12 +26,22 @@ import { GraphQLResolveInfo, GraphQLSchema }`,
       'import { IResolvers }',
       `// $FlowFixMe
 import { IResolvers }`,
-    )
-    .replace(
+    );
+  if (isServerApi) {
+    text = text
+      .replace(
+        `import { Options } from 'graphql-binding'`,
+        `import type { Context } from '../index'`,
+      )
+      .replace(/options\?\: Options/g, 'context: Context');
+  } else {
+    text = text.replace(
       'import { Options }',
       `// $FlowFixMe
 import { Options }`,
     );
+  }
+
   fs.writeFileSync(path, text);
 });
 

@@ -5,23 +5,22 @@
 import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
 // $FlowFixMe
 import { IResolvers } from 'graphql-tools/dist/Interfaces'
-// $FlowFixMe
-import { Options } from 'graphql-binding'
+import type { Context } from '../index'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    me(args?: {}, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
-    webs(args: { first: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<WebConnection | null>; 
-    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
+    me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>; 
+    webs(args: { first: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<WebConnection | null>; 
+    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>; 
+    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>; 
   }
 
 export interface Mutation {
-    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AuthPayload | null>; 
-    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<CreateWebPayload | null>; 
-    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<DeleteWebPayload | null>; 
-    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<SetThemePayload | null>; 
-    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<SetPageTitlePayload | null>; 
+    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<AuthPayload | null>; 
+    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>; 
+    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>; 
+    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
+    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>; 
   }
 
 export interface Subscription {}
@@ -38,10 +37,10 @@ export interface Prisma {
   request(query: string, variables?: {[key: string]: any}): Promise<any>;
   delegate(operation: 'query' | 'mutation', fieldName: string, args: {
     [key: string]: any;
-}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<any>;
+}, infoOrQuery?: GraphQLResolveInfo | string, context: Context): Promise<any>;
 delegateSubscription(fieldName: string, args?: {
     [key: string]: any;
-}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<any>>;
+}, infoOrQuery?: GraphQLResolveInfo | string, context: Context): Promise<AsyncIterator<any>>;
 getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers;
 }
 

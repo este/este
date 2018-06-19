@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2ea6ebadd510048e177462ac0ff711d0
+ * @relayHash 48ac1e81832f260902ca88ccde11edde
  */
 
 /* eslint-disable */
@@ -10,6 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
+type Web$ref = any;
 export type webQueryVariables = {|
   id: string
 |};
@@ -18,7 +19,7 @@ export type webQueryResponse = {|
     +id: string,
     +name: string,
   |},
-  +$fragmentRefs: AppPage$ref,
+  +$fragmentRefs: AppPage$ref & Web$ref,
 |};
 */
 
@@ -32,12 +33,20 @@ query webQuery(
     name
   }
   ...AppPage
+  ...Web_1Bmzm5
 }
 
 fragment AppPage on Query {
   me {
     id
     themeName
+  }
+}
+
+fragment Web_1Bmzm5 on Query {
+  web(id: $id) {
+    id
+    name
   }
 }
 */
@@ -89,7 +98,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n    name\n  }\n  ...AppPage\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n    name\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -103,6 +112,18 @@ return {
         "kind": "FragmentSpread",
         "name": "AppPage",
         "args": null
+      },
+      {
+        "kind": "FragmentSpread",
+        "name": "Web",
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "id",
+            "variableName": "id",
+            "type": null
+          }
+        ]
       }
     ]
   },
@@ -136,5 +157,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8ac35bd5d1a63de1a1c5f21dd382dfb9';
+(node/*: any*/).hash = '18390ffc5d9d7407ed94d1bf764bf2d2';
 module.exports = node;

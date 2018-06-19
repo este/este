@@ -6,7 +6,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/webQuery.graphql';
 import Error from 'next/error';
 import AppPage from '../components/app/AppPage';
-// import PageComponent from '../components/page/Page';
+import WebComponent from '../components/web/Web';
 
 const Web = props => {
   const { web }: generated.webQueryResponse = props.data;
@@ -15,7 +15,6 @@ const Web = props => {
     <AppPage
       requireAuth
       hideFooter
-      title={web.name}
       data={props.data}
       mainNavOptional={
         <A href={{ pathname: '/web', query: { id: web.id } }} prefetch>
@@ -23,7 +22,7 @@ const Web = props => {
         </A>
       }
     >
-      {/* <PageComponent data={props.data} /> */}
+      <WebComponent data={props.data} />
     </AppPage>
   );
 };
@@ -36,7 +35,7 @@ export default app(Web, {
         name
       }
       ...AppPage
-      # ...Page @arguments(id: $id)
+      ...Web @arguments(id: $id)
     }
   `,
 });

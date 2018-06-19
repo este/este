@@ -2,59 +2,19 @@
 import yoga from 'graphql-yoga';
 import prisma from 'prisma-binding';
 import jsonwebtoken from 'jsonwebtoken';
-
-// Workflow
-// - update database/model.graphql
-// - yarn deploy:db
-// - test it in playground
-// - update server/api/model.graphql
-// - add resolver here
-// - test it in playground
-// - yarn schema-relay
-// - restart `yarn dev`
-// - now we can use it in client code
-
-import users from './users';
-import webs from './webs';
-import pages from './pages';
-
-// TODO: This should be typed as well, probably via updated interface Prisma.
-const resolvers = {
-  Mutation: {
-    ...users.mutations,
-    ...webs.mutations,
-    ...pages.mutations,
-  },
-  Query: {
-    ...users.queries,
-    ...webs.queries,
-    ...pages.queries,
-  },
-};
+import resolvers from './resolvers';
 
 /*::
 // Controlled means with custom message or behavior.
 // https://stackoverflow.com/a/6937030/233902
 type ControlledHttpStatus = 401 | 403 | 404;
-import type { Prisma } from '../../database/__generated__/database.graphql'
+import type { Prisma as DB } from '../../database/__generated__/database.graphql'
 
-type Context = {
-  db: Prisma,
+export type Context = {
+  db: DB,
   throwHttpStatus: ControlledHttpStatus => void,
   getUserId: () => string,
 };
-
-// TODO: Interfaces will be removed, this is temp workaround.
-// Response is any type because generated type are not complete.
-// https://github.com/prismagraphql/prisma-binding/issues/187#issuecomment-397334033
-export type Resolver<Args> = (
-  // TODO: Better type for the parent if possible.
-  parent: Object,
-  args: Args,
-  context: Context,
-  // TODO: GraphQLResolveInfo | string
-  info: Object,
-) => Promise<any>;
 */
 
 const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
