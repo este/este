@@ -8,18 +8,8 @@
 # TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
 # invoked by model.graphql change. PR anyone?
 
-# import Web, WebEdge, WebConnection, Page from "../../database/schema.graphql"
+# import User, Web, WebEdge, WebConnection, Page from "../../database/schema.graphql"
 # import * from "./errors.graphql"
-
-# Like database/model User, but without password, webs, and directives.
-# TODO: Do we really need it?
-type User {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  email: String!
-  themeName: String
-}
 
 input AuthInput {
   email: String!

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Mon Jun 18 2018 02:52:46 GMT+0200 (Central European Summer Time)
+# timestamp: Tue Jun 19 2018 02:22:22 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!
@@ -198,6 +198,23 @@ type Element implements Node {
   children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
   creator(where: UserWhereInput): User!
   parent(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
+}
+
+enum ElementOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  text_ASC
+  text_DESC
+  textFormat_ASC
+  textFormat_DESC
 }
 
 enum ElementType {
@@ -455,6 +472,21 @@ type Image implements Node {
   width: Int!
   height: Int!
   creator(where: UserWhereInput): User!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  src_ASC
+  src_DESC
+  width_ASC
+  width_DESC
+  height_ASC
+  height_DESC
 }
 
 input ImageWhereInput {
@@ -863,12 +895,17 @@ type SetThemePayload {
   user: User
 }
 
-type User {
+type User implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
+  password: String!
   themeName: String
+  webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
 input UserWhereInput {
@@ -1124,6 +1161,17 @@ type WebEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+enum WebOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
 }
 
 input WebWhereInput {
