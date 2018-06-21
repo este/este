@@ -26,7 +26,7 @@ type Web {
   updatedAt: DateTime!
   name: String!
   creator: User!
-  pages: [Page!]!
+  pages: [Page!]! @relation(name: "WebPage", onDelete: CASCADE)
 }
 
 type Page {
@@ -35,7 +35,7 @@ type Page {
   updatedAt: DateTime!
   title: String!
   creator: User!
-  web: Web!
+  web: Web! @relation(name: "WebPage", onDelete: SET_NULL)
   element: Element!
 }
 
