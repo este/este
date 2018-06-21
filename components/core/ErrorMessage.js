@@ -9,9 +9,7 @@ import type {
 } from './__generated__/AuthMutation.graphql';
 
 export type MessageError =
-  | '401'
-  | '403'
-  | '404'
+  | 'NOT_AUTHORIZED'
   | 'NET_ERROR'
   | 'UNKNOWN'
   | Max140CharsError
@@ -27,20 +25,12 @@ type ErrorMessageProps = {|
 class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
   static errorToMessage(error: MessageError) {
     switch (error) {
-      case '401':
+      case 'NOT_AUTHORIZED':
         return (
           <FormattedMessage
             defaultMessage="Unauthorized."
             id="error.unauthorized"
           />
-        );
-      case '403':
-        return (
-          <FormattedMessage defaultMessage="Forbidden." id="error.forbidden" />
-        );
-      case '404':
-        return (
-          <FormattedMessage defaultMessage="Not found." id="error.notFound" />
         );
       case 'NET_ERROR':
         return (

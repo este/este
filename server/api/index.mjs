@@ -3,57 +3,48 @@ import yoga from 'graphql-yoga';
 import prisma from 'prisma-binding';
 import jsonwebtoken from 'jsonwebtoken';
 import resolvers from './resolvers';
-
+import permissions from './permissions';
 /*::
-// Controlled means with custom message or behavior.
-// https://stackoverflow.com/a/6937030/233902
-type ControlledHttpStatus = 401 | 403 | 404;
 import type { Prisma as DB } from '../../database/__generated__/database.graphql'
-
-export type Context = {
+// Used in server/api/__generated__/api.graphql.js Check scripts/fixCodegen
+export type Context = {|
+  request: any,
+  response: any,
   db: DB,
-  throwHttpStatus: ControlledHttpStatus => void,
-  getUserId: () => string,
-};
+  userId: ?string
+|};
 */
 
-const throwHttpStatus = (status /*: ControlledHttpStatus */) => {
-  throw new Error(status.toString());
+const maybeGetUserId = (request) /*: ?string */ => {
+  const authorization = request.get('authorization');
+  if (!authorization) return null;
+  const token = authorization.replace('Bearer ', '');
+  const decoded = jsonwebtoken.verify(token, process.env.API_SECRET || '');
+  // https://flow.org/en/docs/lang/refinements
+  if (decoded == null || typeof decoded.userId !== 'string') return null;
+  return decoded.userId;
 };
-
-// const dev = process.env.NODE_ENV !== 'production';
-
-const createContext = context => ({
-  ...context,
-  db: new prisma.Prisma({
-    typeDefs: 'database/schema.graphql',
-    endpoint: process.env.PRISMA_ENDPOINT,
-    secret: process.env.PRISMA_SECRET,
-    debug: false, // dev, // log all GraphQL queries & mutations
-  }),
-  throwHttpStatus,
-  getUserId() {
-    const authorization = context.request.get('authorization');
-    if (!authorization) throwHttpStatus(401);
-    const token = authorization.replace('Bearer ', '');
-    const decoded = jsonwebtoken.verify(token, process.env.API_SECRET || '');
-    // https://flow.org/en/docs/lang/refinements
-    // Note refinement must be gradual within if statement because of Flow.
-    if (decoded != null && typeof decoded.userId === 'string') {
-      return decoded.userId;
-    }
-    throwHttpStatus(401);
-  },
-});
 
 const server = new yoga.GraphQLServer({
   typeDefs: 'server/api/model.graphql',
   resolvers,
-  context: createContext,
+  middlewares: [permissions],
   resolverValidationOptions: {
     // https://github.com/prismagraphql/prisma/issues/2225#issuecomment-384697669
     requireResolversForResolveType: false,
   },
+  context: context => ({
+    ...context,
+    db: new prisma.Prisma({
+      typeDefs: 'database/schema.graphql',
+      endpoint: process.env.PRISMA_ENDPOINT,
+      secret: process.env.PRISMA_SECRET,
+      // log all GraphQL queries & mutations
+      // process.env.NODE_ENV !== 'production'
+      debug: false,
+    }),
+    userId: maybeGetUserId(context.request),
+  }),
 });
 
 server.start(() =>

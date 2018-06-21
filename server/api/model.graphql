@@ -90,9 +90,6 @@ type Mutation {
 # Queries do not need inputs and payloads. They are pretty explicit.
 type Query {
   me: User
-  # Expose only API you need, webs of logged-in user for now.
-  # Later, we can extend API for any user.
-  # webs(first: Int!, creatorId: ID!): WebConnection
   webs(first: Int!): WebConnection
   page(id: ID!): Page
   web(id: ID!): Web

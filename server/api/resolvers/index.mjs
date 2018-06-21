@@ -14,7 +14,9 @@ const mapSignatures = Resolvers => {
   return mapped;
 };
 
-export default {
+const resolvers = {
   Mutation: mapSignatures(Mutation),
   Query: mapSignatures(Query),
 };
+
+export default resolvers;

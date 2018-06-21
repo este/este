@@ -16,12 +16,8 @@ type ErrorPopupState = {|
 class ErrorPopup extends React.PureComponent<ErrorPopupProps, ErrorPopupState> {
   static runtimeErrorToMessageError(message: string) {
     switch (message) {
-      case '401':
-        return '401';
-      case '403':
-        return '403';
-      case '404':
-        return '404';
+      case 'NOT_AUTHORIZED':
+        return 'NOT_AUTHORIZED';
       case 'Failed to fetch':
         return 'NET_ERROR';
       default:

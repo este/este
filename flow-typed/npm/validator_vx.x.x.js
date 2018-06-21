@@ -1,4 +1,4 @@
-// flow-typed signature: dac8a38331cd46616ce74160a22608d1
+// flow-typed signature: f593dd03c27f8ed0361f3d87bb764882
 // flow-typed version: <<STUB>>/validator_v^10.1.0/flow_v0.74.0
 
 /**
@@ -139,6 +139,10 @@ declare module 'validator/lib/isInt' {
 }
 
 declare module 'validator/lib/isIP' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isIPRange' {
   declare module.exports: any;
 }
 
@@ -414,6 +418,9 @@ declare module 'validator/lib/isInt.js' {
 }
 declare module 'validator/lib/isIP.js' {
   declare module.exports: $Exports<'validator/lib/isIP'>;
+}
+declare module 'validator/lib/isIPRange.js' {
+  declare module.exports: $Exports<'validator/lib/isIPRange'>;
 }
 declare module 'validator/lib/isISBN.js' {
   declare module.exports: $Exports<'validator/lib/isISBN'>;

@@ -1559,8 +1559,8 @@ apollo-upload-server@^5.0.0:
     object-path "^0.11.4"
 
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.15.tgz#8f1ba6e4ed9b92cb0de2ce7c032315a768860aae"
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.16.tgz#787310df4c3900a68c0beb3d351c59725a588cdb"
   dependencies:
     fast-json-stable-stringify "^2.0.0"
 
@@ -5227,8 +5227,8 @@ global@^4.3.0:
     process "~0.5.1"
 
 globals@^11.0.1, globals@^11.1.0:
-  version "11.5.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-11.5.0.tgz#6bc840de6771173b191f13d3a9c94d441ee92642"
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-11.7.0.tgz#a583faa43055b1aca771914bf68258e2fc125673"
 
 globals@^9.18.0:
   version "9.18.0"
@@ -5502,15 +5502,9 @@ graphql-import@^0.6.0:
   dependencies:
     lodash "^4.17.4"
 
-graphql-middleware@1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-1.2.5.tgz#f68c0c399cf573a6334d1d9e04cddfec038ffd4a"
-  dependencies:
-    graphql-tools "^3.0.2"
-
-graphql-middleware@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-1.3.0.tgz#751377d7754206e9e43826251ac11d22a44c6e9e"
+graphql-middleware@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-1.3.1.tgz#a5a17a2c28e24fbbf67873595ad2bec4f9a3f2e3"
   dependencies:
     graphql-tools "^3.0.2"
 
@@ -5570,10 +5564,10 @@ graphql-schema-linter@0.1.1:
     lodash "^4.17.4"
 
 graphql-shield@^2.1.5:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/graphql-shield/-/graphql-shield-2.2.2.tgz#90ccd9f3e2014c7f0e7804fe9ce19928c5423eb8"
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/graphql-shield/-/graphql-shield-2.2.3.tgz#a85471bcc8f176a4ad694938cbb29c5186466061"
   dependencies:
-    graphql-middleware "1.3.0"
+    graphql-middleware "1.3.1"
     object-hash "^1.3.0"
     opencollective "1.0.3"
 
@@ -5620,8 +5614,8 @@ graphql-tools@^3.0.2:
     uuid "^3.1.0"
 
 graphql-yoga@^1.14.5:
-  version "1.14.8"
-  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.14.8.tgz#0ef9630e309c05014ee6d2afcdfe889e7edea9f6"
+  version "1.14.10"
+  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.14.10.tgz#cf88863fb15aa30fda06d906e9b4490307e94d60"
   dependencies:
     "@types/cors" "^2.8.4"
     "@types/express" "^4.11.1"
@@ -5638,7 +5632,7 @@ graphql-yoga@^1.14.5:
     graphql "^0.11.0 || ^0.12.0 || ^0.13.0"
     graphql-deduplicator "^2.0.1"
     graphql-import "^0.6.0"
-    graphql-middleware "1.2.5"
+    graphql-middleware "1.3.1"
     graphql-playground-middleware-express "1.6.3"
     graphql-playground-middleware-lambda "1.6.1"
     graphql-subscriptions "^0.5.8"
@@ -8186,8 +8180,8 @@ object-keys@^1.0.11, object-keys@^1.0.8:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.12.tgz#09c53855377575310cca62f55bb334abff7b3ed2"
 
 object-path-immutable@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/object-path-immutable/-/object-path-immutable-1.0.2.tgz#e1e37ebca42b48b429cdc30b25c7a8fb658b0067"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/object-path-immutable/-/object-path-immutable-1.0.3.tgz#bae558dbd8c4107985d82d05dfc1dea1fb1c3208"
 
 object-path@^0.11.4:
   version "0.11.4"
@@ -8795,9 +8789,9 @@ prisma-binding@^2.0.2:
     jsonwebtoken "8.2.1"
     subscriptions-transport-ws "0.9.8"
 
-prisma-cli-core@1.0.46:
-  version "1.0.46"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.46.tgz#b7e69c34399c6047255acc840271332f095f8ab7"
+prisma-cli-core@1.0.51:
+  version "1.0.51"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.51.tgz#6e69681cecaf79f9f372c5681969e16bc5ca3173"
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -8830,9 +8824,9 @@ prisma-cli-core@1.0.46:
     opn "^5.1.0"
     pause "^0.1.0"
     portfinder "^1.0.13"
-    prisma-db-introspection "0.0.14"
+    prisma-db-introspection "0.0.20"
     prisma-json-schema "0.0.4"
-    prisma-yml "1.0.59"
+    prisma-yml "1.0.65"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -8841,9 +8835,9 @@ prisma-cli-core@1.0.46:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.0.48:
-  version "1.0.48"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.48.tgz#67319279ecc00fb5d340ddd7acffa11258f160d5"
+prisma-cli-engine@1.0.54:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.54.tgz#7cfbcc9ce9bc4f54ab64155c4a21c765c8a41b04"
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -8885,7 +8879,7 @@ prisma-cli-engine@1.0.48:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "0.0.4"
-    prisma-yml "1.0.59"
+    prisma-yml "1.0.65"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -8900,9 +8894,9 @@ prisma-cli-engine@1.0.48:
     update-notifier "^2.3.0"
     validator "^8.2.0"
 
-prisma-db-introspection@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-0.0.14.tgz#22332e82e928fef9b4ef8ff3f09d3138939fe066"
+prisma-db-introspection@0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-0.0.20.tgz#dac608b91569246fad334141f82a4b4830a14754"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -8953,9 +8947,9 @@ prisma-yml@1.0.50:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma-yml@1.0.59:
-  version "1.0.59"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.59.tgz#92c9386d4c8402e14efc9835ac62bf11b6e8c444"
+prisma-yml@1.0.65:
+  version "1.0.65"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.65.tgz#f8c6a90f4c957d08628a0f3b941411e50aad06c3"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -8977,12 +8971,12 @@ prisma-yml@1.0.59:
     yaml-ast-parser "^0.0.40"
 
 prisma@^1.2.4:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.9.0.tgz#d7ae48c891f0ea2918afd973c03b1530eed71213"
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.10.1.tgz#b7c09fc4f1c397afb4ae4b36d4f4a62af2b20fd7"
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.0.46"
-    prisma-cli-engine "1.0.48"
+    prisma-cli-core "1.0.51"
+    prisma-cli-engine "1.0.54"
     semver "^5.4.1"
     source-map-support "^0.4.18"
 
@@ -9036,10 +9030,9 @@ prop-types@15.6.0:
     object-assign "^4.1.1"
 
 prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
-    fbjs "^0.8.16"
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
@@ -10894,8 +10887,8 @@ unique-string@^1.0.0:
     crypto-random-string "^1.0.0"
 
 universalify@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
@@ -11063,8 +11056,8 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 validator@^10.0.0, validator@^10.1.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.3.0.tgz#157a8c0981858cff381f59aabcdb8f83b57317cc"
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-10.4.0.tgz#ee99a44afb3bb5ed350a159f056ca72a204cfc3c"
 
 validator@^8.2.0:
   version "8.2.0"

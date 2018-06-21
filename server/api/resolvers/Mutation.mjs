@@ -21,7 +21,7 @@ export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
 };
 
 const Mutation /*: generated.Mutation */ = {
-  auth: async (args, info, context) => {
+  auth: async (args, info, { db }) => {
     const errors = validateAuth(args.input);
     if (errors) return { errors };
 
@@ -33,7 +33,7 @@ const Mutation /*: generated.Mutation */ = {
     });
 
     if (args.input.isSignUp) {
-      const exists = await context.db.exists.User({ email: args.input.email });
+      const exists = await db.exists.User({ email: args.input.email });
       if (exists)
         return {
           errors: {
@@ -41,12 +41,12 @@ const Mutation /*: generated.Mutation */ = {
           },
         };
       const password = await bcrypt.hash(args.input.password, 10);
-      const user = await context.db.mutation.createUser({
+      const user = await db.mutation.createUser({
         data: { email: args.input.email, password },
       });
       return createAuthPayload(user);
     } else {
-      const user = await context.db.query.user({
+      const user = await db.query.user({
         where: { email: args.input.email },
       });
       if (!user)
@@ -62,12 +62,16 @@ const Mutation /*: generated.Mutation */ = {
     }
   },
 
-  createWeb: async (args, info, context) => {
-    const userId = context.getUserId();
+  // Note the resolver is as minimal as possible. No userId? Return null. Easy.
+  // Permissions are defined in server/api/permissions/index.mjs with
+  // graphql-shield, so clients can handle errors properly.
+  createWeb: async (args, info, { userId, db }) => {
+    if (userId == null) return null;
+
     const errors = validateCreateWeb(args.input);
     if (errors) return { errors };
 
-    const web = await context.db.mutation.createWeb(
+    const web = await db.mutation.createWeb(
       {
         data: {
           name: args.input.name,
@@ -101,32 +105,30 @@ const Mutation /*: generated.Mutation */ = {
     };
   },
 
-  deleteWeb: async (args, info, context) => {
-    const web = await context.db.mutation.deleteWeb({
+  deleteWeb: async (args, info, { db }) => {
+    const web = await db.mutation.deleteWeb({
       where: { id: args.input.id },
     });
     // TODO: Return web.
     return { id: args.input.id.toString() };
   },
 
-  setTheme: async (args, info, context) => {
-    const userId = context.getUserId();
-    const user = await context.db.mutation.updateUser({
+  setTheme: async (args, info, { userId, db }) => {
+    if (userId == null) return null;
+    const user = await db.mutation.updateUser({
       data: { themeName: args.input.themeName },
       where: { id: userId },
     });
-    // Cannot call await with `context.db.mutation.updateUser(...)` bound to `p` because:
-    // - Either cannot assign object literal to `Mutation` because inexact `Promise` [1] is incompatible with exact `User` [2] in property `user` of type argument `R` [3] of the return value of property `setTheme`.
-    // $FlowFixMe Probably wrong type generation. I don't know.
+    // $FlowFixMe
     return { user };
   },
 
-  setPageTitle: async (args, info, context) => {
-    const page = await context.db.mutation.updatePage({
+  setPageTitle: async (args, info, { db }) => {
+    const page = await db.mutation.updatePage({
       where: { id: args.input.id },
       data: { title: args.input.title },
     });
-    // $FlowFixMe Probably wrong type generation. I don't know.
+    // $FlowFixMe
     return { page };
   },
 };
