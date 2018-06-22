@@ -9,7 +9,7 @@ import {
   type RelayMutationConfig,
 } from 'react-relay';
 import ErrorContext, { type DispatchError } from './ErrorContext';
-import EnvironmentContext from "./EnvironmentContext";
+import EnvironmentContext from './EnvironmentContext';
 
 // Note Input instead of Variables. It keeps withMutation component simple.
 export type Commit<Input, Response> = (

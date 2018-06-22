@@ -48,7 +48,6 @@ input DeleteWebInput {
 }
 
 type DeleteWebPayload {
-  # TODO: Return web: Web
   id: ID
 }
 

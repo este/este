@@ -109,8 +109,8 @@ const Mutation /*: generated.Mutation */ = {
     const web = await db.mutation.deleteWeb({
       where: { id: args.input.id },
     });
-    // TODO: Return web.
-    return { id: args.input.id.toString() };
+    if (web == null) return null;
+    return { id: web.id };
   },
 
   setTheme: async (args, info, { userId, db }) => {
@@ -119,7 +119,7 @@ const Mutation /*: generated.Mutation */ = {
       data: { themeName: args.input.themeName },
       where: { id: userId },
     });
-    // $FlowFixMe
+    if (user == null) return null;
     return { user };
   },
 
@@ -128,7 +128,7 @@ const Mutation /*: generated.Mutation */ = {
       where: { id: args.input.id },
       data: { title: args.input.title },
     });
-    // $FlowFixMe
+    if (page == null) return null;
     return { page };
   },
 };
