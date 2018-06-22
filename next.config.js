@@ -2,10 +2,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const {
   WebpackBundleSizeAnalyzerPlugin,
 } = require('webpack-bundle-size-analyzer');
+
 const { ANALYZE } = process.env;
 
 module.exports = {
-  webpack: function(config, { isServer }) {
+  webpack(config, { isServer }) {
     switch (ANALYZE) {
       case 'BUNDLES':
         config.plugins.push(
@@ -21,6 +22,7 @@ module.exports = {
         break;
     }
 
+    // eslint-disable-next-line no-param-reassign
     config.resolve = {
       ...config.resolve,
       // .web.js is for React Native Web.

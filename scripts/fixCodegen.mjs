@@ -33,7 +33,7 @@ import { IResolvers }`,
         `import { Options } from 'graphql-binding'`,
         `import type { Context } from '../index'`,
       )
-      .replace(/options\?\: Options/g, 'context: Context');
+      .replace(/options\?: Options/g, 'context: Context');
   } else {
     text = text.replace(
       'import { Options }',
@@ -45,4 +45,5 @@ import { Options }`,
   fs.writeFileSync(path, text);
 });
 
+// eslint-disable-next-line no-console
 console.log('Codegen fixed.');

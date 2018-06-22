@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import PageTitle from './PageTitle';
 import Head from 'next/head';
-import getFocusableNodes from '../../lib/getFocusableNodes';
+import getFocusableNodes from '../../client/getFocusableNodes';
 
 type PageProps = {|
   theme: Theme,

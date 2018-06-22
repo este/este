@@ -6,6 +6,8 @@ import * as validate from '../validations/validate';
 import * as generated from '../__generated__/api.graphql'
 */
 
+// TODO: How info argument should be used in mutations?
+
 export const validateAuth = (input /*: generated.AuthInput */) => {
   const email = validate.email(input.email);
   if (email) return { email };
@@ -45,25 +47,25 @@ const Mutation /*: generated.Mutation */ = {
         data: { email: args.input.email, password },
       });
       return createAuthPayload(user);
-    } else {
-      const user = await db.query.user({
-        where: { email: args.input.email },
-      });
-      if (!user)
-        return {
-          errors: { email: 'NOT_EXISTS' },
-        };
-      const valid = await bcrypt.compare(args.input.password, user.password);
-      if (!valid)
-        return {
-          errors: { password: 'WRONG_PASSWORD' },
-        };
-      return createAuthPayload(user);
     }
+
+    const user = await db.query.user({
+      where: { email: args.input.email },
+    });
+    if (!user)
+      return {
+        errors: { email: 'NOT_EXISTS' },
+      };
+    const valid = await bcrypt.compare(args.input.password, user.password);
+    if (!valid)
+      return {
+        errors: { password: 'WRONG_PASSWORD' },
+      };
+    return createAuthPayload(user);
   },
 
   // Note the resolver is as minimal as possible. No userId? Return null. Easy.
-  // Permissions are defined in server/api/permissions/index.mjs with
+  // Permissions are defined in server/api/permissions/index with
   // graphql-shield, so clients can handle errors properly.
   createWeb: async (args, info, { userId, db }) => {
     if (userId == null) return null;

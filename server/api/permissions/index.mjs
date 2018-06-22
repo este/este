@@ -4,7 +4,8 @@ import graphqlShield from 'graphql-shield';
 import * as generated from '../__generated__/api.graphql'
 import type { Context } from '../index'
 */
-const { rule, shield, and, or, not } = graphqlShield;
+// We can use also: or, not.
+const { rule, shield, and } = graphqlShield;
 
 const isAuthenticated = rule()(async (
   parent,
@@ -15,7 +16,7 @@ const isAuthenticated = rule()(async (
 });
 
 const isWebCreator = getId =>
-  rule()(async (parent, args, { userId, db } /*: Context */, info) => {
+  rule()(async (parent, args, { userId, db } /*: Context */) => {
     if (userId == null) return false;
     return db.exists.Web({
       id: getId(args),
@@ -26,7 +27,7 @@ const isWebCreator = getId =>
   });
 
 const isPageCreator = getId =>
-  rule()(async (parent, args, { userId, db } /*: Context */, info) => {
+  rule()(async (parent, args, { userId, db } /*: Context */) => {
     if (userId == null) return false;
     return db.exists.Page({
       id: getId(args),
@@ -62,6 +63,6 @@ const rules /*: Rules */ = {
   },
 };
 
-const permissions = graphqlShield.shield(rules);
+const permissions = shield(rules);
 
 export default permissions;

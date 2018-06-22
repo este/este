@@ -7,7 +7,7 @@ import path from 'path';
 import http from 'http';
 import url from 'url';
 import fs from 'fs';
-import { defaultLocale } from '../../lib/constants';
+import { defaultLocale } from '../../constants';
 
 // Polyfill Node with `Intl` that has data for all locales.
 // https://formatjs.io/guides/runtime-environments/#server

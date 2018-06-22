@@ -9,7 +9,7 @@ import Row from '../core/Row';
 import Block from '../core/Block';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
-import { validateCreateWeb } from '../../server/api/resolvers/Mutation.mjs';
+import { validateCreateWeb } from '../../server/api/resolvers/Mutation';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
 import withIntl from '../core/withIntl';

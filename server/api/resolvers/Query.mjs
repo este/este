@@ -3,16 +3,18 @@
 import * as generated from '../__generated__/api.graphql'
 */
 
+// Note info argument enables subqueries.
+// https://www.prisma.io/blog/graphql-server-basics-demystifying-the-info-argument-in-graphql-resolvers-6f26249f613a/
+
 const Query /*: generated.Query */ = {
   me: async (args, info, { userId, db }) => {
     if (userId == null) return null;
-    const user = await db.query.user({ where: { id: userId } });
-    return user;
+    return db.query.user({ where: { id: userId } }, info);
   },
 
   webs: async (args, info, { userId, db }) => {
     if (userId == null) return null;
-    return await db.query.websConnection(
+    return db.query.websConnection(
       {
         where: { creator: { id: userId } },
         orderBy: 'updatedAt_ASC',
@@ -23,11 +25,11 @@ const Query /*: generated.Query */ = {
   },
 
   page: async (args, info, { db }) => {
-    return await db.query.page({ where: { id: args.id } }, info);
+    return db.query.page({ where: { id: args.id } }, info);
   },
 
-  web: async (args, info, { userId, db }) => {
-    return await db.query.web({ where: { id: args.id } }, info);
+  web: async (args, info, { db }) => {
+    return db.query.web({ where: { id: args.id } }, info);
   },
 };
 

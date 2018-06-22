@@ -8,7 +8,10 @@ import * as generated from './__generated__/PageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { changeTextThrottle } from '../../lib/constants.mjs';
+import { changeTextThrottle } from '../../constants';
+// import { commitLocalUpdate } from 'react-relay';
+
+// console.log(commitLocalUpdate);
 
 const messages = defineMessages({
   placeholder: {
