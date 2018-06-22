@@ -504,6 +504,9 @@ input ElementWhereInput {
   parent_every: ChildWhereInput
   parent_some: ChildWhereInput
   parent_none: ChildWhereInput
+  _MagicalBackRelation_ElementToPage_every: PageWhereInput
+  _MagicalBackRelation_ElementToPage_some: PageWhereInput
+  _MagicalBackRelation_ElementToPage_none: PageWhereInput
 }
 
 enum EmailError {
@@ -717,6 +720,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
+  _MagicalBackRelation_ElementToImage_every: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_some: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_none: ElementWhereInput
 }
 
 enum Max140CharsError {
@@ -1803,7 +1809,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   creator?: UserWhereInput,
   parent_every?: ChildWhereInput,
   parent_some?: ChildWhereInput,
-  parent_none?: ChildWhereInput
+  parent_none?: ChildWhereInput,
+  _MagicalBackRelation_ElementToPage_every?: PageWhereInput,
+  _MagicalBackRelation_ElementToPage_some?: PageWhereInput,
+  _MagicalBackRelation_ElementToPage_none?: PageWhereInput
 |}
 
  export type ImageWhereInput = {| 
@@ -1870,7 +1879,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   height_lte?: Int,
   height_gt?: Int,
   height_gte?: Int,
-  creator?: UserWhereInput
+  creator?: UserWhereInput,
+  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
 |}
 
  export type CreateWebInput = {| 

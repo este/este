@@ -13,20 +13,20 @@ export interface Query {
     users(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User[]>; 
     webs(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web[]>; 
     pages(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page[]>; 
-    elements(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element[]>; 
     children(args: { where?: ChildWhereInput, orderBy?: ChildOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child[]>; 
+    elements(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element[]>; 
     images(args: { where?: ImageWhereInput, orderBy?: ImageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image[]>; 
     user(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     web(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     page(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    element(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     child(args: { where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
+    element(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     image(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     usersConnection(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<UserConnection>; 
     websConnection(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<WebConnection>; 
     pagesConnection(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<PageConnection>; 
-    elementsConnection(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ElementConnection>; 
     childrenConnection(args: { where?: ChildWhereInput, orderBy?: ChildOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ChildConnection>; 
+    elementsConnection(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ElementConnection>; 
     imagesConnection(args: { where?: ImageWhereInput, orderBy?: ImageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ImageConnection>; 
     node(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Node | null>; 
   }
@@ -35,38 +35,38 @@ export interface Mutation {
     createUser(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     createWeb(args: { data: WebCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
     createPage(args: { data: PageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    createElement(args: { data: ElementCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     createChild(args: { data: ChildCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child>; 
+    createElement(args: { data: ElementCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     createImage(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image>; 
     updateUser(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     updateWeb(args: { data: WebUpdateInput, where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     updatePage(args: { data: PageUpdateInput, where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    updateElement(args: { data: ElementUpdateInput, where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     updateChild(args: { data: ChildUpdateInput, where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
+    updateElement(args: { data: ElementUpdateInput, where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     updateImage(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     deleteUser(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     deleteWeb(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     deletePage(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    deleteElement(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     deleteChild(args: { where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
+    deleteElement(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     deleteImage(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     upsertUser(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     upsertWeb(args: { where: WebWhereUniqueInput, create: WebCreateInput, update: WebUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
     upsertPage(args: { where: PageWhereUniqueInput, create: PageCreateInput, update: PageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    upsertElement(args: { where: ElementWhereUniqueInput, create: ElementCreateInput, update: ElementUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     upsertChild(args: { where: ChildWhereUniqueInput, create: ChildCreateInput, update: ChildUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child>; 
+    upsertElement(args: { where: ElementWhereUniqueInput, create: ElementCreateInput, update: ElementUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     upsertImage(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image>; 
     updateManyUsers(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyWebs(args: { data: WebUpdateInput, where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyPages(args: { data: PageUpdateInput, where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    updateManyElements(args: { data: ElementUpdateInput, where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyChildren(args: { data: ChildUpdateInput, where?: ChildWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    updateManyElements(args: { data: ElementUpdateInput, where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyImages(args: { data: ImageUpdateInput, where?: ImageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyUsers(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyWebs(args: { where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyPages(args: { where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    deleteManyElements(args: { where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyChildren(args: { where?: ChildWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    deleteManyElements(args: { where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyImages(args: { where?: ImageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
   }
 
@@ -74,8 +74,8 @@ export interface Subscription {
     user(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<UserSubscriptionPayload | null>>; 
     web(args: { where?: WebSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<WebSubscriptionPayload | null>>; 
     page(args: { where?: PageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<PageSubscriptionPayload | null>>; 
-    element(args: { where?: ElementSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ElementSubscriptionPayload | null>>; 
     child(args: { where?: ChildSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ChildSubscriptionPayload | null>>; 
+    element(args: { where?: ElementSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ElementSubscriptionPayload | null>>; 
     image(args: { where?: ImageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ImageSubscriptionPayload | null>>; 
   }
 
@@ -83,8 +83,8 @@ export interface Exists {
 User(where?: UserWhereInput): Promise<boolean>;
 Web(where?: WebWhereInput): Promise<boolean>;
 Page(where?: PageWhereInput): Promise<boolean>;
-Element(where?: ElementWhereInput): Promise<boolean>;
 Child(where?: ChildWhereInput): Promise<boolean>;
+Element(where?: ElementWhereInput): Promise<boolean>;
 Image(where?: ImageWhereInput): Promise<boolean>;
 }
 
@@ -939,6 +939,9 @@ input ElementWhereInput {
   parent_every: ChildWhereInput
   parent_some: ChildWhereInput
   parent_none: ChildWhereInput
+  _MagicalBackRelation_ElementToPage_every: PageWhereInput
+  _MagicalBackRelation_ElementToPage_some: PageWhereInput
+  _MagicalBackRelation_ElementToPage_none: PageWhereInput
 }
 
 input ElementWhereUniqueInput {
@@ -1292,6 +1295,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
+  _MagicalBackRelation_ElementToImage_every: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_some: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_none: ElementWhereInput
 }
 
 input ImageWhereUniqueInput {
@@ -1308,38 +1314,38 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
-  createElement(data: ElementCreateInput!): Element!
   createChild(data: ChildCreateInput!): Child!
+  createElement(data: ElementCreateInput!): Element!
   createImage(data: ImageCreateInput!): Image!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
   updateChild(data: ChildUpdateInput!, where: ChildWhereUniqueInput!): Child
+  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
-  deleteElement(where: ElementWhereUniqueInput!): Element
   deleteChild(where: ChildWhereUniqueInput!): Child
+  deleteElement(where: ElementWhereUniqueInput!): Element
   deleteImage(where: ImageWhereUniqueInput!): Image
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   upsertChild(where: ChildWhereUniqueInput!, create: ChildCreateInput!, update: ChildUpdateInput!): Child!
+  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   updateManyChildren(data: ChildUpdateInput!, where: ChildWhereInput): BatchPayload!
+  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyElements(where: ElementWhereInput): BatchPayload!
   deleteManyChildren(where: ChildWhereInput): BatchPayload!
+  deleteManyElements(where: ElementWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
 }
 
@@ -1690,20 +1696,20 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child]!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
-  element(where: ElementWhereUniqueInput!): Element
   child(where: ChildWhereUniqueInput!): Child
+  element(where: ElementWhereUniqueInput!): Element
   image(where: ImageWhereUniqueInput!): Image
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
   childrenConnection(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChildConnection!
+  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
 
   """Fetches an object given its ID"""
@@ -1717,8 +1723,8 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
   child(where: ChildSubscriptionWhereInput): ChildSubscriptionPayload
+  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
 }
 
@@ -2815,15 +2821,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   parent?: ChildCreateManyWithoutElementInput
 |}
 
- export type ChildSubscriptionWhereInput = {| 
-  AND?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
-  OR?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
-  NOT?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
+ export type ElementSubscriptionWhereInput = {| 
+  AND?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
+  OR?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
+  NOT?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
   mutation_in?: Array< MutationType > | MutationType,
   updatedFields_contains?: String,
   updatedFields_contains_every?: Array< String > | String,
   updatedFields_contains_some?: Array< String > | String,
-  node?: ChildWhereInput
+  node?: ElementWhereInput
 |}
 
  export type ChildCreateManyWithoutParentInput = {| 
@@ -2893,7 +2899,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   connect?: UserWhereUniqueInput
 |}
 
- export type ElementWhereUniqueInput = {| 
+ export type ChildWhereUniqueInput = {| 
   id?: ID_Input
 |}
 
@@ -2915,10 +2921,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   connect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput
 |}
 
- export type ChildUpdateInput = {| 
-  index?: Int,
-  parent?: ElementUpdateOneWithoutChildrenInput,
-  element?: ElementUpdateOneWithoutParentInput
+ export type ElementUpdateInput = {| 
+  name?: String,
+  type?: ElementType,
+  text?: String,
+  textFormat?: String,
+  image?: ImageUpdateOneInput,
+  children?: ChildUpdateManyWithoutParentInput,
+  creator?: UserUpdateOneWithoutElementsInput,
+  parent?: ChildUpdateManyWithoutElementInput
 |}
 
  export type ChildCreateWithoutElementInput = {| 
@@ -3208,7 +3219,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   height_lte?: Int,
   height_gt?: Int,
   height_gte?: Int,
-  creator?: UserWhereInput
+  creator?: UserWhereInput,
+  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
 |}
 
  export type ImageUpdateOneInput = {| 
@@ -3220,15 +3234,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   upsert?: ImageUpsertNestedInput
 |}
 
- export type ElementSubscriptionWhereInput = {| 
-  AND?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
-  OR?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
-  NOT?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
+ export type ChildSubscriptionWhereInput = {| 
+  AND?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
+  OR?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
+  NOT?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
   mutation_in?: Array< MutationType > | MutationType,
   updatedFields_contains?: String,
   updatedFields_contains_every?: Array< String > | String,
   updatedFields_contains_some?: Array< String > | String,
-  node?: ElementWhereInput
+  node?: ChildWhereInput
 |}
 
  export type ImageUpdateDataInput = {| 
@@ -3542,7 +3556,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   creator?: UserWhereInput,
   parent_every?: ChildWhereInput,
   parent_some?: ChildWhereInput,
-  parent_none?: ChildWhereInput
+  parent_none?: ChildWhereInput,
+  _MagicalBackRelation_ElementToPage_every?: PageWhereInput,
+  _MagicalBackRelation_ElementToPage_some?: PageWhereInput,
+  _MagicalBackRelation_ElementToPage_none?: PageWhereInput
 |}
 
  export type ImageUpsertWithWhereUniqueWithoutCreatorInput = {| 
@@ -3561,15 +3578,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   create: UserCreateWithoutWebsInput
 |}
 
- export type ElementUpdateInput = {| 
-  name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  children?: ChildUpdateManyWithoutParentInput,
-  creator?: UserUpdateOneWithoutElementsInput,
-  parent?: ChildUpdateManyWithoutElementInput
+ export type ChildUpdateInput = {| 
+  index?: Int,
+  parent?: ElementUpdateOneWithoutChildrenInput,
+  element?: ElementUpdateOneWithoutParentInput
 |}
 
  export type WebUpsertWithoutPagesInput = {| 
@@ -3739,7 +3751,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   create: ElementCreateWithoutChildrenInput
 |}
 
- export type ChildWhereUniqueInput = {| 
+ export type ElementWhereUniqueInput = {| 
   id?: ID_Input
 |}
 
@@ -3853,7 +3865,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    aggregate: AggregateImage,
 |}
 
- export type AggregateChild = {| 
+ export type AggregateElement = {| 
    count: Int,
 |}
 
@@ -3861,33 +3873,36 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * A connection to a list of items.
 
 */
- export type ChildConnection = {| 
+ export type ElementConnection = {| 
    pageInfo: PageInfo,
-   edges: ChildEdge[],
-   aggregate: AggregateChild,
+   edges: ElementEdge[],
+   aggregate: AggregateElement,
 |}
 
- export type ChildPreviousValues = {| 
+ export type ElementPreviousValues = {| 
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   index: Int,
+   name?: String,
+   type: ElementType,
+   text?: String,
+   textFormat: String,
 |}
 
 /*
  * An edge in a connection.
 
 */
- export type ElementEdge = {| 
-   node: Element,
+ export type ChildEdge = {| 
+   node: Child,
    cursor: String,
 |}
 
- export type ChildSubscriptionPayload = {| 
+ export type ElementSubscriptionPayload = {| 
    mutation: MutationType,
-   node?: Child,
+   node?: Element,
    updatedFields?: String[],
-   previousValues?: ChildPreviousValues,
+   previousValues?: ElementPreviousValues,
 |}
 
  export type AggregatePage = {| 
@@ -3968,8 +3983,8 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * An edge in a connection.
 
 */
- export type ChildEdge = {| 
-   node: Child,
+ export type ElementEdge = {| 
+   node: Element,
    cursor: String,
 |}
 
@@ -3988,10 +4003,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * A connection to a list of items.
 
 */
- export type ElementConnection = {| 
+ export type ChildConnection = {| 
    pageInfo: PageInfo,
-   edges: ElementEdge[],
-   aggregate: AggregateElement,
+   edges: ChildEdge[],
+   aggregate: AggregateChild,
 |}
 
  export type PageSubscriptionPayload = {| 
@@ -4014,21 +4029,18 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    cursor: String,
 |}
 
- export type ElementPreviousValues = {| 
+ export type ChildPreviousValues = {| 
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   name?: String,
-   type: ElementType,
-   text?: String,
-   textFormat: String,
+   index: Int,
 |}
 
- export type ElementSubscriptionPayload = {| 
+ export type ChildSubscriptionPayload = {| 
    mutation: MutationType,
-   node?: Element,
+   node?: Child,
    updatedFields?: String[],
-   previousValues?: ElementPreviousValues,
+   previousValues?: ChildPreviousValues,
 |}
 
  export type Element = {| ...Node,
@@ -4083,7 +4095,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    cursor: String,
 |}
 
- export type AggregateElement = {| 
+ export type AggregateChild = {| 
    count: Int,
 |}
 
