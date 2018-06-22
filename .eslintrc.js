@@ -21,5 +21,10 @@ module.exports = {
     'import/extensions': 0, // Flow checks it.
     'no-alert': 0, // Too strict.
     'react/require-default-props': 0, // Not needed with Flow.
+    'react/destructuring-assignment': 0, // Too strict.
+    'import/order': 0, // Too strict.
+    'lines-between-class-members': 0, // Too strict.
+    'react/sort-comp': 0, // Too strict.
+    'import/no-cycle': 0, // Too strict.
   },
 };

@@ -19,6 +19,7 @@ type RelayProviderProps = {
 
 class RelayProvider extends React.PureComponent<RelayProviderProps> {
   static childContextTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
     relay: PropTypes.object.isRequired,
   };
 
