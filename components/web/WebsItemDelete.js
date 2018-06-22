@@ -50,7 +50,9 @@ export default withMutation(
   graphql`
     mutation WebsItemDeleteMutation($input: DeleteWebInput!) {
       deleteWeb(input: $input) {
-        id
+        web {
+          id
+        }
       }
     }
   `,
@@ -58,7 +60,8 @@ export default withMutation(
     updater(store) {
       const payload = store.getRootField('deleteWeb');
       if (!payload) return;
-      const id = payload.getValue('id');
+      const record = payload.getLinkedRecord('web');
+      const id = record.getValue('id');
       sharedUpdater(store, id);
     },
   },

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fe38e462944b6ff6ad11f3c5488170e2
+ * @relayHash 4f5d02a21bee1866da6231860151c65d
  */
 
 /* eslint-disable */
@@ -17,7 +17,9 @@ export type WebsItemDeleteMutationVariables = {|
 |};
 export type WebsItemDeleteMutationResponse = {|
   +deleteWeb: ?{|
-    +id: ?string
+    +web: ?{|
+      +id: string
+    |}
   |}
 |};
 */
@@ -28,7 +30,9 @@ mutation WebsItemDeleteMutation(
   $input: DeleteWebInput!
 ) {
   deleteWeb(input: $input) {
-    id
+    web {
+      id
+    }
   }
 }
 */
@@ -60,11 +64,22 @@ v1 = [
     "plural": false,
     "selections": [
       {
-        "kind": "ScalarField",
+        "kind": "LinkedField",
         "alias": null,
-        "name": "id",
+        "name": "web",
+        "storageKey": null,
         "args": null,
-        "storageKey": null
+        "concreteType": "Web",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
+        ]
       }
     ]
   }
@@ -74,7 +89,7 @@ return {
   "operationKind": "mutation",
   "name": "WebsItemDeleteMutation",
   "id": null,
-  "text": "mutation WebsItemDeleteMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    id\n  }\n}\n",
+  "text": "mutation WebsItemDeleteMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -93,5 +108,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '54a0af1ba663899cd9ff2964f7f7dd84';
+(node/*: any*/).hash = '67415f8d3917647632634e6f046ca989';
 module.exports = node;

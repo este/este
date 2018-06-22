@@ -110,7 +110,7 @@ const Mutation /*: generated.Mutation */ = {
       where: { id: args.input.id },
     });
     if (web == null) return null;
-    return { id: web.id };
+    return { web };
   },
 
   setTheme: async (args, info, { userId, db }) => {

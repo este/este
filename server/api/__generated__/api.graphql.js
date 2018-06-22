@@ -233,7 +233,7 @@ input DeleteWebInput {
 }
 
 type DeleteWebPayload {
-  id: ID
+  web: Web
 }
 
 type Element implements Node {
@@ -2003,7 +2003,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 |}
 
  export type DeleteWebPayload = {| 
-   id?: ID_Output,
+   web?: Web,
 |}
 
  export type SetThemePayload = {| 

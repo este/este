@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Jun 21 2018 03:35:35 GMT+0200 (Central European Summer Time)
+# timestamp: Fri Jun 22 2018 21:57:26 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!
@@ -183,7 +183,7 @@ input DeleteWebInput {
 }
 
 type DeleteWebPayload {
-  id: ID
+  web: Web
 }
 
 type Element implements Node {
@@ -454,6 +454,9 @@ input ElementWhereInput {
   parent_every: ChildWhereInput
   parent_some: ChildWhereInput
   parent_none: ChildWhereInput
+  _MagicalBackRelation_ElementToPage_every: PageWhereInput
+  _MagicalBackRelation_ElementToPage_some: PageWhereInput
+  _MagicalBackRelation_ElementToPage_none: PageWhereInput
 }
 
 enum EmailError {
@@ -667,6 +670,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
+  _MagicalBackRelation_ElementToImage_every: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_some: ElementWhereInput
+  _MagicalBackRelation_ElementToImage_none: ElementWhereInput
 }
 
 enum Max140CharsError {

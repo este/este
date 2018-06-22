@@ -48,7 +48,7 @@ input DeleteWebInput {
 }
 
 type DeleteWebPayload {
-  id: ID
+  web: Web
 }
 
 input SetThemeInput {
