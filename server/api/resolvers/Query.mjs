@@ -12,6 +12,7 @@ const Query /*: generated.Query */ = {
     return db.query.user({ where: { id: userId } }, info);
   },
 
+  // It returns Relay connection, which should be general, imho.
   webs: async (args, info, { userId, db }) => {
     if (userId == null) return null;
     return db.query.websConnection(

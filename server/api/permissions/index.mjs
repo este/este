@@ -5,7 +5,7 @@ import * as generated from '../__generated__/api.graphql'
 import type { Context } from '../index'
 */
 // We can use also: or, not.
-const { rule, shield, and } = graphqlShield;
+const { rule, shield, and, allow } = graphqlShield;
 
 const isAuthenticated = rule()(async (
   parent,
@@ -56,8 +56,8 @@ const rules /*: Rules */ = {
     setPageTitle: and(isAuthenticated, isPageCreator(args => args.input.id)),
   },
   Query: {
-    me: isAuthenticated,
-    webs: isAuthenticated,
+    me: allow,
+    webs: allow,
     page: and(isAuthenticated, isPageCreator(args => args.id)),
     web: and(isAuthenticated, isWebCreator(args => args.id)),
   },
