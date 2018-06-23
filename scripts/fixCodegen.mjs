@@ -26,7 +26,12 @@ import { GraphQLResolveInfo, GraphQLSchema }`,
       'import { IResolvers }',
       `// $FlowFixMe
 import { IResolvers }`,
+    )
+    .replace(
+      'export type ID_Input = string | number',
+      'export type ID_Input = string',
     );
+
   if (isServerApi) {
     text = text
       .replace(
