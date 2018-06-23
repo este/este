@@ -1,5 +1,4 @@
 enum EmailError {
-  NO_TRAILING_SPACES
   REQUIRED
   EMAIL
   ALREADY_EXISTS
@@ -7,7 +6,6 @@ enum EmailError {
 }
 
 enum PasswordError {
-  NO_TRAILING_SPACES
   REQUIRED
   MIN_5_CHARS
   MAX_1024_CHARS
@@ -15,7 +13,6 @@ enum PasswordError {
 }
 
 enum Max140CharsError {
-  NO_TRAILING_SPACES
   REQUIRED
   MAX_140_CHARS
 }

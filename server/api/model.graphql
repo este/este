@@ -64,8 +64,13 @@ input SetPageTitleInput {
   title: String!
 }
 
+type SetPageTitleErrors {
+  title: Max140CharsError
+}
+
 type SetPageTitlePayload {
   page: Page
+  errors: SetPageTitleErrors
 }
 
 # type SetWebNameInput {

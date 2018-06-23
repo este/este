@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 17d0a3c4b85279189f4bfacbd4e2f9e8
+ * @relayHash 4e684616959e93cc7a0cacbafea65813
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Max140CharsError = "MAX_140_CHARS" | "NO_TRAILING_SPACES" | "REQUIRED";
+export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
 export type CreateWebInput = {
   name: string,
   pageTitle: string,

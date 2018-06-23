@@ -2,13 +2,14 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import TextInput from '../core/TextInput';
-import withMutation, { type Commit } from '../core/withMutation';
+import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PageTitleMutation.graphql';
 import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
 import { changeTextThrottle } from '../../constants';
+import { validateSetPageTitle } from '../../server/api/resolvers/Mutation';
 
 const messages = defineMessages({
   placeholder: {
@@ -29,21 +30,33 @@ type PageTitleProps = {|
   intl: IntlShape,
 |};
 
-class PageTitle extends React.PureComponent<PageTitleProps> {
+type PageTitleState = {|
+  errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
+|};
+
+class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
+  state = {
+    errors: null,
+  };
+
   handleTextInputChangeText = throttle(value => {
     const input = {
       id: this.props.pageId,
       title: value,
     };
-    this.props.commit(input);
+    const errors = validateSetPageTitle(input);
+    this.setState({ errors });
+    if (errors == null) this.props.commit(input);
   }, changeTextThrottle);
 
   render() {
     const { intl } = this.props;
+    const { errors } = this.state;
 
     return (
       <View>
         <TextInput
+          error={errors && errors.title}
           size={1}
           onChangeText={this.handleTextInputChangeText}
           defaultValue={this.props.defaultValue}

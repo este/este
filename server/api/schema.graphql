@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Jun 22 2018 21:57:26 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Jun 24 2018 00:12:27 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!
@@ -460,7 +460,6 @@ input ElementWhereInput {
 }
 
 enum EmailError {
-  NO_TRAILING_SPACES
   REQUIRED
   EMAIL
   ALREADY_EXISTS
@@ -676,7 +675,6 @@ input ImageWhereInput {
 }
 
 enum Max140CharsError {
-  NO_TRAILING_SPACES
   REQUIRED
   MAX_140_CHARS
 }
@@ -870,7 +868,6 @@ input PageWhereInput {
 }
 
 enum PasswordError {
-  NO_TRAILING_SPACES
   REQUIRED
   MIN_5_CHARS
   MAX_1024_CHARS
@@ -884,6 +881,10 @@ type Query {
   web(id: ID!): Web
 }
 
+type SetPageTitleErrors {
+  title: Max140CharsError
+}
+
 input SetPageTitleInput {
   id: ID!
   title: String!
@@ -891,6 +892,7 @@ input SetPageTitleInput {
 
 type SetPageTitlePayload {
   page: Page
+  errors: SetPageTitleErrors
 }
 
 input SetThemeInput {

@@ -46,13 +46,6 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
             id="error.unknown"
           />
         );
-      case 'NO_TRAILING_SPACES':
-        return (
-          <FormattedMessage
-            defaultMessage="Please remove trailing whitespaces."
-            id="error.trim"
-          />
-        );
       case 'REQUIRED':
         return (
           <FormattedMessage

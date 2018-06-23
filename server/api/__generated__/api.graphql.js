@@ -510,7 +510,6 @@ input ElementWhereInput {
 }
 
 enum EmailError {
-  NO_TRAILING_SPACES
   REQUIRED
   EMAIL
   ALREADY_EXISTS
@@ -726,7 +725,6 @@ input ImageWhereInput {
 }
 
 enum Max140CharsError {
-  NO_TRAILING_SPACES
   REQUIRED
   MAX_140_CHARS
 }
@@ -920,7 +918,6 @@ input PageWhereInput {
 }
 
 enum PasswordError {
-  NO_TRAILING_SPACES
   REQUIRED
   MIN_5_CHARS
   MAX_1024_CHARS
@@ -934,6 +931,10 @@ type Query {
   web(id: ID!): Web
 }
 
+type SetPageTitleErrors {
+  title: Max140CharsError
+}
+
 input SetPageTitleInput {
   id: ID!
   title: String!
@@ -941,6 +942,7 @@ input SetPageTitleInput {
 
 type SetPageTitlePayload {
   page: Page
+  errors: SetPageTitleErrors
 }
 
 input SetThemeInput {
@@ -1377,7 +1379,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 */
 
  export type Max140CharsError =
-    | 'NO_TRAILING_SPACES'
     | 'REQUIRED'
     | 'MAX_140_CHARS'
   
@@ -1410,6 +1411,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'name_DESC'
   
 
+ export type ElementType =
+    | 'TEXT'
+    | 'IMAGE'
+    | 'CHILDREN'
+  
+
  export type PageOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
@@ -1421,14 +1428,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'title_DESC'
   
 
- export type ElementType =
-    | 'TEXT'
-    | 'IMAGE'
-    | 'CHILDREN'
-  
-
  export type PasswordError =
-    | 'NO_TRAILING_SPACES'
     | 'REQUIRED'
     | 'MIN_5_CHARS'
     | 'MAX_1024_CHARS'
@@ -1436,7 +1436,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   
 
  export type EmailError =
-    | 'NO_TRAILING_SPACES'
     | 'REQUIRED'
     | 'EMAIL'
     | 'ALREADY_EXISTS'
@@ -1515,8 +1514,66 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   element?: ElementWhereInput
 |}
 
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  element?: ElementWhereInput
+|}
+
  export type SetThemeInput = {| 
   themeName: String
+|}
+
+ export type SetPageTitleInput = {| 
+  id: ID_Input,
+  title: String
 |}
 
  export type WebWhereInput = {| 
@@ -1571,6 +1628,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   pages_every?: PageWhereInput,
   pages_some?: PageWhereInput,
   pages_none?: PageWhereInput
+|}
+
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
  export type UserWhereInput = {| 
@@ -1663,63 +1726,8 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   images_none?: ImageWhereInput
 |}
 
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
-|}
-
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput,
-  element?: ElementWhereInput
+ export type DeleteWebInput = {| 
+  id: ID_Input
 |}
 
  export type ElementWhereInput = {| 
@@ -1815,6 +1823,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   _MagicalBackRelation_ElementToPage_none?: PageWhereInput
 |}
 
+ export type CreateWebInput = {| 
+  name: String,
+  pageTitle: String
+|}
+
  export type ImageWhereInput = {| 
   AND?: Array< ImageWhereInput > | ImageWhereInput,
   OR?: Array< ImageWhereInput > | ImageWhereInput,
@@ -1885,20 +1898,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
 |}
 
- export type CreateWebInput = {| 
-  name: String,
-  pageTitle: String
-|}
-
- export type SetPageTitleInput = {| 
-  id: ID_Input,
-  title: String
-|}
-
- export type DeleteWebInput = {| 
-  id: ID_Input
-|}
-
 /*
  * An object with an ID
 
@@ -1907,19 +1906,18 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
 |}
 
- export type SetPageTitlePayload = {| 
-   page?: Page,
+ export type SetPageTitleErrors = {| 
+   title?: Max140CharsError,
 |}
 
- export type Page = {| ...Node,
+ export type Web = {| ...Node,
  
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   title: String,
+   name: String,
    creator: User,
-   web: Web,
-   element: Element,
+   pages?: Page[],
 |}
 
  export type User = {| ...Node,
@@ -1936,14 +1934,9 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    images?: Image[],
 |}
 
- export type Web = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-   creator: User,
-   pages?: Page[],
+ export type CreateWebPayload = {| 
+   pageId?: ID_Output,
+   errors?: CreateWebErrors,
 |}
 
  export type Child = {| ...Node,
@@ -1956,9 +1949,9 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    element: Element,
 |}
 
- export type CreateWebPayload = {| 
-   pageId?: ID_Output,
-   errors?: CreateWebErrors,
+ export type CreateWebErrors = {| 
+   name?: Max140CharsError,
+   pageTitle?: Max140CharsError,
 |}
 
 /*
@@ -1970,11 +1963,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    hasPreviousPage: Boolean,
    startCursor?: String,
    endCursor?: String,
-|}
-
- export type CreateWebErrors = {| 
-   name?: Max140CharsError,
-   pageTitle?: Max140CharsError,
 |}
 
 /*
@@ -1997,17 +1985,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    creator: User,
 |}
 
- export type AuthErrors = {| 
-   email?: EmailError,
-   password?: PasswordError,
+ export type SetThemePayload = {| 
+   user?: User,
 |}
 
  export type DeleteWebPayload = {| 
    web?: Web,
-|}
-
- export type SetThemePayload = {| 
-   user?: User,
 |}
 
  export type Element = {| ...Node,
@@ -2035,6 +2018,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    count: Int,
 |}
 
+ export type SetPageTitlePayload = {| 
+   page?: Page,
+   errors?: SetPageTitleErrors,
+|}
+
 /*
  * A connection to a list of items.
 
@@ -2043,6 +2031,22 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    pageInfo: PageInfo,
    edges: WebEdge[],
    aggregate: AggregateWeb,
+|}
+
+ export type Page = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   title: String,
+   creator: User,
+   web: Web,
+   element: Element,
+|}
+
+ export type AuthErrors = {| 
+   email?: EmailError,
+   password?: PasswordError,
 |}
 
 /*
@@ -2056,14 +2060,14 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
  export type Int = number 
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
- export type ID_Input = string | number
-export type ID_Output = string
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
  export type Boolean = boolean 
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+ export type ID_Input = string
+export type ID_Output = string
 
  export type DateTime = Date | string 

@@ -22,7 +22,6 @@
   "error.netError": "Chyba sítě, zkuste to později prosím.",
   "error.notExists": "Neexistuje.",
   "error.required": "Prosím vyplňte.",
-  "error.trim": "Prosím odstraňte mezery.",
   "error.unauthorized": "Nemáte oprávnění.",
   "error.unknown": "Neznámá chyba. Opravíme jak nejrychleji to půjde.",
   "error.wrongPassword": "Špatné heslo.",

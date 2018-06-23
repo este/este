@@ -4,13 +4,7 @@ import isEmail from 'validator/lib/isEmail';
 // The most simple and universal validation ever.
 // Note STRING_CONSTANTS are not magic, Flow checks their usage.
 
-const noTrailingSpaces = value =>
-  value !== value.trim() ? 'NO_TRAILING_SPACES' : null;
-
-// Note we check trailing spaces before length check.
-// IMHO the best approach. Teach user, or remove them on NO_TRAILING_SPACES.
-const required = value =>
-  noTrailingSpaces(value) || (value.length === 0 ? 'REQUIRED' : null);
+const required = value => (value.length === 0 ? 'REQUIRED' : null);
 
 const min5Chars = value =>
   required(value) || (value.length < 5 ? 'MIN_5_CHARS' : null);

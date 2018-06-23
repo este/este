@@ -22,41 +22,53 @@ export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
   if (pageTitle) return { pageTitle };
 };
 
+export const validateSetPageTitle = (
+  input /*: generated.SetPageTitleInput */,
+) => {
+  const title = validate.max140Chars(input.title);
+  if (title) return { title };
+};
+
 const Mutation /*: generated.Mutation */ = {
   auth: async (args, info, { db }) => {
-    const errors = validateAuth(args.input);
+    // Email and password must be trimmed before the validation.
+    // This is the pattern. Trim what must be stored trimmed.
+    const input = {
+      // Note we can't use object spread because of Webpack 3
+      isSignUp: args.input.isSignUp,
+      email: args.input.email.trim(),
+      password: args.input.password.trim(),
+    };
+    const errors = validateAuth(input);
     if (errors) return { errors };
-
     const createAuthPayload = user => ({
       token: jsonwebtoken.sign(
         { userId: user.id },
         process.env.API_SECRET || '',
       ),
     });
-
-    if (args.input.isSignUp) {
-      const exists = await db.exists.User({ email: args.input.email });
+    if (input.isSignUp) {
+      const exists = await db.exists.User({ email: input.email });
       if (exists)
         return {
           errors: {
             email: 'ALREADY_EXISTS',
           },
         };
-      const password = await bcrypt.hash(args.input.password, 10);
+      const password = await bcrypt.hash(input.password, 10);
       const user = await db.mutation.createUser({
-        data: { email: args.input.email, password },
+        data: { email: input.email, password },
       });
       return createAuthPayload(user);
     }
-
     const user = await db.query.user({
-      where: { email: args.input.email },
+      where: { email: input.email },
     });
     if (!user)
       return {
         errors: { email: 'NOT_EXISTS' },
       };
-    const valid = await bcrypt.compare(args.input.password, user.password);
+    const valid = await bcrypt.compare(input.password, user.password);
     if (!valid)
       return {
         errors: { password: 'WRONG_PASSWORD' },
@@ -69,10 +81,8 @@ const Mutation /*: generated.Mutation */ = {
   // graphql-shield, so clients can handle errors properly.
   createWeb: async (args, info, { userId, db }) => {
     if (userId == null) return null;
-
     const errors = validateCreateWeb(args.input);
     if (errors) return { errors };
-
     const web = await db.mutation.createWeb(
       {
         data: {
@@ -101,7 +111,6 @@ const Mutation /*: generated.Mutation */ = {
         }
       `,
     );
-
     return {
       pageId: web.pages && web.pages[0].id,
     };
@@ -126,6 +135,8 @@ const Mutation /*: generated.Mutation */ = {
   },
 
   setPageTitle: async (args, info, { db }) => {
+    const errors = validateSetPageTitle(args.input);
+    if (errors) return { errors };
     const page = await db.mutation.updatePage({
       where: { id: args.input.id },
       data: { title: args.input.title },
