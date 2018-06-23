@@ -99,7 +99,7 @@
     "babel-preset-react-native": "^4.0.0",
     "dotenv": "^6.0.0",
     "env-cmd": "^8.0.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.46.3",
