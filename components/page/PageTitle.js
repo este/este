@@ -5,10 +5,8 @@ import TextInput from '../core/TextInput';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PageTitleMutation.graphql';
-import throttle from 'lodash/throttle';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { changeTextThrottle } from '../../constants';
 import { validateSetPageTitle } from '../../server/api/resolvers/Mutation';
 
 const messages = defineMessages({
@@ -39,7 +37,7 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
     errors: null,
   };
 
-  handleTextInputChangeText = throttle(value => {
+  handleTextInputChangeTextThrottled = value => {
     const input = {
       id: this.props.pageId,
       title: value,
@@ -47,7 +45,7 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
     const errors = validateSetPageTitle(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
-  }, changeTextThrottle);
+  };
 
   render() {
     const { intl } = this.props;
@@ -58,7 +56,7 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
         <TextInput
           error={errors && errors.title}
           size={1}
-          onChangeText={this.handleTextInputChangeText}
+          onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
           defaultValue={this.props.defaultValue}
           placeholder={intl.formatMessage(messages.placeholder)}
         />

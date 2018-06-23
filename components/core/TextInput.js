@@ -5,6 +5,7 @@ import withTheme, { type Theme } from './withTheme';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ErrorMessage, { type MessageError } from './ErrorMessage';
+import throttle from 'lodash/throttle';
 
 export type TextInputProps = {|
   disabled?: boolean,
@@ -16,13 +17,15 @@ export type TextInputProps = {|
   focusOnError?: ?Object,
   secureTextEntry?: boolean,
   placeholder: string,
-  onChangeText: string => void,
+  onChangeText?: string => void,
+  onChangeTextThrottled?: string => void,
   name?: string,
   keyboardType?: string,
   autoComplete?: string,
   onSubmitEditing?: () => void,
   defaultValue?: string,
   // Feel free to add any missing prop.
+  // https://github.com/este/este/issues/1557
 |};
 
 // That's because TextInputProps is exported to reuse.
@@ -50,6 +53,17 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
 
   inputRef = React.createRef();
 
+  handleOnChangeTextThrottled = throttle(value => {
+    const { onChangeTextThrottled } = this.props;
+    if (onChangeTextThrottled) onChangeTextThrottled(value);
+  }, 1000);
+
+  handleOnChangeText = value => {
+    const { onChangeText } = this.props;
+    if (onChangeText) onChangeText(value);
+    this.handleOnChangeTextThrottled(value);
+  };
+
   render() {
     const {
       disabled,
@@ -60,6 +74,8 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
       theme,
       focusOnError,
       placeholder,
+      onChangeText,
+      onChangeTextThrottled,
       ...props
     } = this.props;
 
@@ -81,6 +97,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
           ref={this.inputRef}
           placeholder={`${placeholder}…`}
           blurOnSubmit={false}
+          onChangeText={this.handleOnChangeText}
           {...props}
         />
         <View style={theme.styles.textInputError}>
