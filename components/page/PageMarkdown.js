@@ -9,7 +9,7 @@ import PageMarkdownActions from './PageMarkdownActions';
 
 const messages = defineMessages({
   placeholder: {
-    defaultMessage: '…',
+    defaultMessage: 'write',
     id: 'pageMarkdown.textInput.placeholder',
   },
   // TODO: [Home](/) | [About](/)

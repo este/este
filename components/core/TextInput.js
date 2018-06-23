@@ -15,12 +15,13 @@ export type TextInputProps = {|
   value?: string,
   focusOnError?: ?Object,
   secureTextEntry?: boolean,
-  placeholder?: string,
+  placeholder: string,
   onChangeText: string => void,
   name?: string,
   keyboardType?: string,
   autoComplete?: string,
   onSubmitEditing?: () => void,
+  defaultValue?: string,
   // Feel free to add any missing prop.
 |};
 
@@ -58,6 +59,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
       style,
       theme,
       focusOnError,
+      placeholder,
       ...props
     } = this.props;
 
@@ -77,6 +79,8 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
             style,
           ]}
           ref={this.inputRef}
+          placeholder={`${placeholder}…`}
+          blurOnSubmit={false}
           {...props}
         />
         <View style={theme.styles.textInputError}>
