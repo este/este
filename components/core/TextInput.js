@@ -82,7 +82,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
     return (
       <View>
         {label != null && (
-          <Text bold color="gray" size={size - 1}>
+          <Text color="gray" size={size}>
             {label}
           </Text>
         )}

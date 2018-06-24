@@ -121,6 +121,7 @@ const stylesJson = {
 
   textInput: {
     color: colors.black,
+    paddingVertical: typography.rhythm(0.25),
     fontFamily,
   },
 
