@@ -15,6 +15,7 @@ import Auth from '../core/Auth';
 import withIntl from '../core/withIntl';
 import Text from '../core/Text';
 import { titles } from './sitemap';
+import Spacer from '../core/Spacer';
 
 // yarn favicon
 const Favicons = () => [
@@ -56,10 +57,6 @@ const styles = StyleSheet.create({
   body: {
     flex: 1, // make footer sticky
   },
-  mainNav: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
   footer: {
     flexDirection: 'row',
   },
@@ -75,31 +72,22 @@ const PageBody = ({ children }) => (
   <View style={[styles.body]}>{children}</View>
 );
 
-const PageMainNavSpacer = ({ theme }) => (
-  <View style={theme.styles.appPageMainNavSpacer} />
-);
-
-const PageMainNav = ({ isAuthenticated, theme, mainNavOptional }) => (
-  <View style={[styles.mainNav, theme.styles.appPageMainNav]}>
-    <A href={{ pathname: '/' }} prefetch>
-      <FormattedMessage {...titles.index} />
-    </A>
-    <PageMainNavSpacer theme={theme} />
-    {isAuthenticated ? (
-      <A href={{ pathname: '/me' }} prefetch>
-        <FormattedMessage {...titles.me} />
+const PageMainNav = ({ isAuthenticated, theme }) => (
+  <View style={theme.styles.appPageMainNav}>
+    <Spacer>
+      <A href={{ pathname: '/' }} prefetch>
+        <FormattedMessage {...titles.index} />
       </A>
-    ) : (
-      <A href={{ pathname: '/sign-in' }} prefetch>
-        <FormattedMessage {...titles.signIn} />
-      </A>
-    )}
-    {mainNavOptional != null && (
-      <>
-        <PageMainNavSpacer theme={theme} />
-        {mainNavOptional}
-      </>
-    )}
+      {isAuthenticated ? (
+        <A href={{ pathname: '/me' }} prefetch>
+          <FormattedMessage {...titles.me} />
+        </A>
+      ) : (
+        <A href={{ pathname: '/sign-in' }} prefetch>
+          <FormattedMessage {...titles.signIn} />
+        </A>
+      )}
+    </Spacer>
   </View>
 );
 
@@ -120,7 +108,7 @@ type Props = {|
   data: generated.AppPage,
   requireAuth?: boolean,
   intl: IntlShape,
-  mainNavOptional?: React.Element<typeof A>,
+  hideHeader?: boolean,
   hideFooter?: boolean,
 |};
 
@@ -145,7 +133,7 @@ class AppPage extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, mainNavOptional, hideFooter, title, intl } = this.props;
+    const { data, hideHeader, hideFooter, title, intl } = this.props;
     const isAuthenticated = data.me != null;
     const themeName =
       // That's how we gradually check nullable types.
@@ -179,11 +167,9 @@ class AppPage extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          <PageMainNav
-            isAuthenticated={isAuthenticated}
-            theme={theme}
-            mainNavOptional={mainNavOptional}
-          />
+          {hideHeader !== true && (
+            <PageMainNav isAuthenticated={isAuthenticated} theme={theme} />
+          )}
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           {hideFooter !== true && <PageFooter theme={theme} />}
         </PageContainer>

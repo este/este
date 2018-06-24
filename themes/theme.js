@@ -105,11 +105,9 @@ const stylesJson = {
   },
 
   appPageMainNav: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginVertical: typography.rhythm(2),
-  },
-
-  appPageMainNavSpacer: {
-    width: typography.rhythm(1),
   },
 
   form: {
