@@ -6,7 +6,6 @@ import Text from '../core/Text';
 import A from '../core/A';
 import Block from '../core/Block';
 import { FormattedRelative } from 'react-intl';
-import WebsItemDelete from './WebsItemDelete';
 
 type WebsItemProps = {|
   data: generated.WebsItem,
@@ -16,7 +15,7 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
     const id = data.pages && data.pages[0].id;
-    // No page nothing to edit.
+    // Without a page, there is nothing to edit.
     if (id == null) return null;
     return (
       <Block>
@@ -25,10 +24,6 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
         </A>
         <Text color="gray" size={-1}>
           <FormattedRelative value={data.updatedAt} />
-          <Text>
-            {', '}
-            <WebsItemDelete id={data.id} />
-          </Text>
         </Text>
       </Block>
     );
@@ -39,9 +34,8 @@ export default createFragmentContainer(
   WebsItem,
   graphql`
     fragment WebsItem on Web {
-      updatedAt
       name
-      id
+      updatedAt
       pages(first: 1, orderBy: updatedAt_DESC) {
         id
       }

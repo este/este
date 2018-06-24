@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c288898e291f24e2a70d8de9e780a001
+ * @relayHash 668e775587dd964005fb5e4c8fece269
  */
 
 /* eslint-disable */
@@ -49,9 +49,8 @@ fragment Webs on Query {
 }
 
 fragment WebsItem on Web {
-  updatedAt
   name
-  id
+  updatedAt
   pages(first: 1, orderBy: updatedAt_DESC) {
     id
   }
@@ -71,7 +70,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  updatedAt\n  name\n  id\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -154,14 +153,14 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "updatedAt",
+                    "name": "name",
                     "args": null,
                     "storageKey": null
                   },
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "name",
+                    "name": "updatedAt",
                     "args": null,
                     "storageKey": null
                   },

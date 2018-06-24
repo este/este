@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4f5d02a21bee1866da6231860151c65d
+ * @relayHash 79ab098ac760510096e30a5bc4eb88b6
  */
 
 /* eslint-disable */
@@ -12,10 +12,10 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type DeleteWebInput = {
   id: string
 };
-export type WebsItemDeleteMutationVariables = {|
+export type DeleteWebMutationVariables = {|
   input: DeleteWebInput
 |};
-export type WebsItemDeleteMutationResponse = {|
+export type DeleteWebMutationResponse = {|
   +deleteWeb: ?{|
     +web: ?{|
       +id: string
@@ -26,7 +26,7 @@ export type WebsItemDeleteMutationResponse = {|
 
 
 /*
-mutation WebsItemDeleteMutation(
+mutation DeleteWebMutation(
   $input: DeleteWebInput!
 ) {
   deleteWeb(input: $input) {
@@ -87,13 +87,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "WebsItemDeleteMutation",
+  "name": "DeleteWebMutation",
   "id": null,
-  "text": "mutation WebsItemDeleteMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n",
+  "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "WebsItemDeleteMutation",
+    "name": "DeleteWebMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -101,12 +101,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "WebsItemDeleteMutation",
+    "name": "DeleteWebMutation",
     "argumentDefinitions": v0,
     "selections": v1
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '67415f8d3917647632634e6f046ca989';
+(node/*: any*/).hash = 'bc857af0266cf71d7ed7fce0e84c9c27';
 module.exports = node;

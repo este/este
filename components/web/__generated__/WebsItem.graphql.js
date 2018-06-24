@@ -11,9 +11,8 @@ import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type WebsItem$ref: FragmentReference;
 export type WebsItem = {|
-  +updatedAt: any,
   +name: string,
-  +id: string,
+  +updatedAt: any,
   +pages: ?$ReadOnlyArray<{|
     +id: string
   |}>,
@@ -22,15 +21,7 @@ export type WebsItem = {|
 */
 
 
-const node/*: ConcreteFragment*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
   "name": "WebsItem",
   "type": "Web",
@@ -40,18 +31,17 @@ return {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "updatedAt",
+      "name": "name",
       "args": null,
       "storageKey": null
     },
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "name",
+      "name": "updatedAt",
       "args": null,
       "storageKey": null
     },
-    v0,
     {
       "kind": "LinkedField",
       "alias": null,
@@ -74,12 +64,17 @@ return {
       "concreteType": "Page",
       "plural": true,
       "selections": [
-        v0
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "id",
+          "args": null,
+          "storageKey": null
+        }
       ]
     }
   ]
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '9180962ac47543a60bd2823651b4492b';
+(node/*: any*/).hash = '5f03fecac2218b953ad96549a88010bd';
 module.exports = node;

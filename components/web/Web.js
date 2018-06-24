@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
-import { View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Web.graphql';
 import Head from 'next/head';
 import WebName from './WebName';
 import EditMainNav from '../EditMainNav';
+import Block from '../core/Block';
+import Row from '../core/Row';
+import DeleteWeb from './DeleteWeb';
 
 type WebProps = {|
   data: generated.Web,
@@ -23,9 +25,14 @@ class Web extends React.PureComponent<WebProps> {
           <title>{web.name}</title>
         </Head>
         <EditMainNav webId={web.id} webName={web.name} />
-        <View>
+        <Block>
           <WebName webId={web.id} defaultValue={web.name} />
-        </View>
+        </Block>
+        <Block>
+          <Row>
+            <DeleteWeb id={web.id} />
+          </Row>
+        </Block>
       </>
     );
   }

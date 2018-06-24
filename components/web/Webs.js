@@ -14,7 +14,7 @@ class Webs extends React.PureComponent<WebsProps> {
     // https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
     if (!webs) return null;
     return webs.edges.map(
-      // $FlowFixMe Relay known bug.
+      // $FlowFixMe Relay known haste related bug. Will be fixed soon.
       edge => edge && <WebsItem data={edge.node} key={edge.node.id} />,
     );
   }
