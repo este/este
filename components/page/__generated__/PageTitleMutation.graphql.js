@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 37c018d9ba5acc27a94dee6da06ebb48
+ * @relayHash ac5a8efd3707ef97e893b2fde370304a
  */
 
 /* eslint-disable */
@@ -9,6 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
 export type SetPageTitleInput = {
   id: string,
   title: string,
@@ -20,7 +21,10 @@ export type PageTitleMutationResponse = {|
   +setPageTitle: ?{|
     +page: ?{|
       +title: string
-    |}
+    |},
+    +errors: ?{|
+      +title: ?Max140CharsError
+    |},
   |}
 |};
 */
@@ -34,6 +38,9 @@ mutation PageTitleMutation(
     page {
       title
       id
+    }
+    errors {
+      title
     }
   }
 }
@@ -62,13 +69,26 @@ v2 = {
   "name": "title",
   "args": null,
   "storageKey": null
+},
+v3 = [
+  v2
+],
+v4 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "errors",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "SetPageTitleErrors",
+  "plural": false,
+  "selections": v3
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
   "name": "PageTitleMutation",
   "id": null,
-  "text": "mutation PageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      title\n      id\n    }\n  }\n}\n",
+  "text": "mutation PageTitleMutation(\n  $input: SetPageTitleInput!\n) {\n  setPageTitle(input: $input) {\n    page {\n      title\n      id\n    }\n    errors {\n      title\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -94,10 +114,9 @@ return {
             "args": null,
             "concreteType": "Page",
             "plural": false,
-            "selections": [
-              v2
-            ]
-          }
+            "selections": v3
+          },
+          v4
         ]
       }
     ]
@@ -134,7 +153,8 @@ return {
                 "storageKey": null
               }
             ]
-          }
+          },
+          v4
         ]
       }
     ]
@@ -142,5 +162,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9e1a95fe5c999bb9ec5cba9061e34749';
+(node/*: any*/).hash = 'bc2514aa2585fe595eca3b4fc8f2cd77';
 module.exports = node;

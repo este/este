@@ -14,13 +14,25 @@ export type Page = {|
   +page: ?{|
     +id: string,
     +title: string,
+    +web: {|
+      +id: string,
+      +name: string,
+    |},
   |},
   +$refType: Page$ref,
 |};
 */
 
 
-const node/*: ConcreteFragment*/ = {
+const node/*: ConcreteFragment*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Fragment",
   "name": "Page",
   "type": "Query",
@@ -50,24 +62,38 @@ const node/*: ConcreteFragment*/ = {
       "concreteType": "Page",
       "plural": false,
       "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "id",
-          "args": null,
-          "storageKey": null
-        },
+        v0,
         {
           "kind": "ScalarField",
           "alias": null,
           "name": "title",
           "args": null,
           "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "web",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "Web",
+          "plural": false,
+          "selections": [
+            v0,
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "name",
+              "args": null,
+              "storageKey": null
+            }
+          ]
         }
       ]
     }
   ]
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '223b1f81ea9be4343ca2f38d919e89bb';
+(node/*: any*/).hash = '357100d31e02305ff7f659d59791447a';
 module.exports = node;

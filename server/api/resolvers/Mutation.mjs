@@ -6,8 +6,6 @@ import * as validate from '../validations/validate';
 import * as generated from '../__generated__/api.graphql'
 */
 
-// TODO: How info argument should be used in mutations?
-
 export const validateAuth = (input /*: generated.AuthInput */) => {
   const email = validate.email(input.email);
   if (email) return { email };
@@ -27,6 +25,11 @@ export const validateSetPageTitle = (
 ) => {
   const title = validate.max140Chars(input.title);
   if (title) return { title };
+};
+
+export const validateSetWebName = (input /*: generated.SetWebNameInput */) => {
+  const name = validate.max140Chars(input.name);
+  if (name) return { name };
 };
 
 const Mutation /*: generated.Mutation */ = {
@@ -143,6 +146,17 @@ const Mutation /*: generated.Mutation */ = {
     });
     if (page == null) return null;
     return { page };
+  },
+
+  setWebName: async (args, info, { db }) => {
+    const errors = validateSetWebName(args.input);
+    if (errors) return { errors };
+    const web = await db.mutation.updateWeb({
+      where: { id: args.input.id },
+      data: { name: args.input.name },
+    });
+    if (web == null) return null;
+    return { web };
   },
 };
 

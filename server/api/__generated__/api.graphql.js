@@ -21,6 +21,7 @@ export interface Mutation {
     deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>; 
     setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
     setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>; 
+    setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>; 
   }
 
 export interface Subscription {}
@@ -67,9 +68,9 @@ input AuthInput {
 }
 
 type AuthPayload {
+  errors: AuthErrors
   token: String
   user: User
-  errors: AuthErrors
 }
 
 type Child implements Node {
@@ -222,8 +223,8 @@ input CreateWebInput {
 }
 
 type CreateWebPayload {
-  pageId: ID
   errors: CreateWebErrors
+  pageId: ID
 }
 
 scalar DateTime
@@ -735,6 +736,7 @@ type Mutation {
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
   setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
+  setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
 """An object with an ID"""
@@ -941,8 +943,8 @@ input SetPageTitleInput {
 }
 
 type SetPageTitlePayload {
-  page: Page
   errors: SetPageTitleErrors
+  page: Page
 }
 
 input SetThemeInput {
@@ -951,6 +953,20 @@ input SetThemeInput {
 
 type SetThemePayload {
   user: User
+}
+
+type SetWebNameErrors {
+  name: Max140CharsError
+}
+
+input SetWebNameInput {
+  id: ID!
+  name: String!
+}
+
+type SetWebNamePayload {
+  errors: SetWebNameErrors
+  web: Web
 }
 
 type User implements Node {
@@ -1378,28 +1394,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * Types
 */
 
- export type Max140CharsError =
-    | 'REQUIRED'
-    | 'MAX_140_CHARS'
-  
-
- export type ElementOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'text_ASC'
-    | 'text_DESC'
-    | 'textFormat_ASC'
-    | 'textFormat_DESC'
-  
-
  export type WebOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
@@ -1409,6 +1403,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
+  
+
+ export type Max140CharsError =
+    | 'REQUIRED'
+    | 'MAX_140_CHARS'
   
 
  export type ElementType =
@@ -1453,6 +1452,23 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'index_DESC'
   
 
+ export type ElementOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'text_ASC'
+    | 'text_DESC'
+    | 'textFormat_ASC'
+    | 'textFormat_DESC'
+  
+
  export type ImageOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
@@ -1468,50 +1484,9 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'height_DESC'
   
 
- export type ChildWhereInput = {| 
-  AND?: Array< ChildWhereInput > | ChildWhereInput,
-  OR?: Array< ChildWhereInput > | ChildWhereInput,
-  NOT?: Array< ChildWhereInput > | ChildWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  index?: Int,
-  index_not?: Int,
-  index_in?: Array< Int > | Int,
-  index_not_in?: Array< Int > | Int,
-  index_lt?: Int,
-  index_lte?: Int,
-  index_gt?: Int,
-  index_gte?: Int,
-  parent?: ElementWhereInput,
-  element?: ElementWhereInput
+ export type SetWebNameInput = {| 
+  id: ID_Input,
+  name: String
 |}
 
  export type PageWhereInput = {| 
@@ -1567,13 +1542,65 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   element?: ElementWhereInput
 |}
 
- export type SetThemeInput = {| 
-  themeName: String
+ export type ChildWhereInput = {| 
+  AND?: Array< ChildWhereInput > | ChildWhereInput,
+  OR?: Array< ChildWhereInput > | ChildWhereInput,
+  NOT?: Array< ChildWhereInput > | ChildWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  index?: Int,
+  index_not?: Int,
+  index_in?: Array< Int > | Int,
+  index_not_in?: Array< Int > | Int,
+  index_lt?: Int,
+  index_lte?: Int,
+  index_gt?: Int,
+  index_gte?: Int,
+  parent?: ElementWhereInput,
+  element?: ElementWhereInput
 |}
 
  export type SetPageTitleInput = {| 
   id: ID_Input,
   title: String
+|}
+
+ export type SetThemeInput = {| 
+  themeName: String
+|}
+
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
  export type WebWhereInput = {| 
@@ -1628,12 +1655,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   pages_every?: PageWhereInput,
   pages_some?: PageWhereInput,
   pages_none?: PageWhereInput
-|}
-
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
 |}
 
  export type UserWhereInput = {| 
@@ -1730,6 +1751,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   id: ID_Input
 |}
 
+ export type CreateWebInput = {| 
+  name: String,
+  pageTitle: String
+|}
+
  export type ElementWhereInput = {| 
   AND?: Array< ElementWhereInput > | ElementWhereInput,
   OR?: Array< ElementWhereInput > | ElementWhereInput,
@@ -1823,11 +1849,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   _MagicalBackRelation_ElementToPage_none?: PageWhereInput
 |}
 
- export type CreateWebInput = {| 
-  name: String,
-  pageTitle: String
-|}
-
  export type ImageWhereInput = {| 
   AND?: Array< ImageWhereInput > | ImageWhereInput,
   OR?: Array< ImageWhereInput > | ImageWhereInput,
@@ -1906,18 +1927,23 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
 |}
 
- export type SetPageTitleErrors = {| 
-   title?: Max140CharsError,
+/*
+ * A connection to a list of items.
+
+*/
+ export type WebConnection = {| 
+   pageInfo: PageInfo,
+   edges: WebEdge[],
+   aggregate: AggregateWeb,
 |}
 
- export type Web = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-   creator: User,
-   pages?: Page[],
+ export type SetWebNameErrors = {| 
+   name?: Max140CharsError,
+|}
+
+ export type CreateWebErrors = {| 
+   name?: Max140CharsError,
+   pageTitle?: Max140CharsError,
 |}
 
  export type User = {| ...Node,
@@ -1934,24 +1960,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    images?: Image[],
 |}
 
- export type CreateWebPayload = {| 
-   pageId?: ID_Output,
-   errors?: CreateWebErrors,
-|}
-
- export type Child = {| ...Node,
+ export type Web = {| ...Node,
  
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   index: Int,
-   parent: Element,
-   element: Element,
-|}
-
- export type CreateWebErrors = {| 
-   name?: Max140CharsError,
-   pageTitle?: Max140CharsError,
+   name: String,
+   creator: User,
+   pages?: Page[],
 |}
 
 /*
@@ -1974,6 +1990,49 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    cursor: String,
 |}
 
+ export type Child = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   index: Int,
+   parent: Element,
+   element: Element,
+|}
+
+ export type DeleteWebPayload = {| 
+   web?: Web,
+|}
+
+ export type AuthErrors = {| 
+   email?: EmailError,
+   password?: PasswordError,
+|}
+
+ export type SetPageTitlePayload = {| 
+   errors?: SetPageTitleErrors,
+   page?: Page,
+|}
+
+ export type SetPageTitleErrors = {| 
+   title?: Max140CharsError,
+|}
+
+ export type SetThemePayload = {| 
+   user?: User,
+|}
+
+ export type Page = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   title: String,
+   creator: User,
+   web: Web,
+   element: Element,
+|}
+
  export type Image = {| ...Node,
  
    id: ID_Output,
@@ -1985,12 +2044,24 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    creator: User,
 |}
 
- export type SetThemePayload = {| 
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
    user?: User,
 |}
 
- export type DeleteWebPayload = {| 
+ export type AggregateWeb = {| 
+   count: Int,
+|}
+
+ export type SetWebNamePayload = {| 
+   errors?: SetWebNameErrors,
    web?: Web,
+|}
+
+ export type CreateWebPayload = {| 
+   errors?: CreateWebErrors,
+   pageId?: ID_Output,
 |}
 
  export type Element = {| ...Node,
@@ -2006,47 +2077,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    children?: Child[],
    creator: User,
    parent?: Child[],
-|}
-
- export type AuthPayload = {| 
-   token?: String,
-   user?: User,
-   errors?: AuthErrors,
-|}
-
- export type AggregateWeb = {| 
-   count: Int,
-|}
-
- export type SetPageTitlePayload = {| 
-   page?: Page,
-   errors?: SetPageTitleErrors,
-|}
-
-/*
- * A connection to a list of items.
-
-*/
- export type WebConnection = {| 
-   pageInfo: PageInfo,
-   edges: WebEdge[],
-   aggregate: AggregateWeb,
-|}
-
- export type Page = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   title: String,
-   creator: User,
-   web: Web,
-   element: Element,
-|}
-
- export type AuthErrors = {| 
-   email?: EmailError,
-   password?: PasswordError,
 |}
 
 /*

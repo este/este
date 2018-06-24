@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash afb6b75d5f65689a23fe1f83ad1c1ade
+ * @relayHash 790ef1d6c01319cdf7a2a0beb1d1a481
  */
 
 /* eslint-disable */
@@ -16,10 +16,7 @@ export type pageQueryVariables = {|
 |};
 export type pageQueryResponse = {|
   +page: ?{|
-    +web: {|
-      +id: string,
-      +name: string,
-    |}
+    +id: string
   |},
   +$fragmentRefs: AppPage$ref & Page$ref,
 |};
@@ -31,10 +28,6 @@ query pageQuery(
   $id: ID!
 ) {
   page(id: $id) {
-    web {
-      id
-      name
-    }
     id
   }
   ...AppPage
@@ -52,6 +45,10 @@ fragment Page_1Bmzm5 on Query {
   page(id: $id) {
     id
     title
+    web {
+      id
+      name
+    }
   }
 }
 */
@@ -79,32 +76,13 @@ v2 = {
   "name": "id",
   "args": null,
   "storageKey": null
-},
-v3 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "web",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "Web",
-  "plural": false,
-  "selections": [
-    v2,
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "name",
-      "args": null,
-      "storageKey": null
-    }
-  ]
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "pageQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    web {\n      id\n      name\n    }\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n  }\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -122,7 +100,7 @@ return {
         "concreteType": "Page",
         "plural": false,
         "selections": [
-          v3
+          v2
         ]
       },
       {
@@ -158,7 +136,6 @@ return {
         "concreteType": "Page",
         "plural": false,
         "selections": [
-          v3,
           v2,
           {
             "kind": "ScalarField",
@@ -166,6 +143,25 @@ return {
             "name": "title",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "web",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Web",
+            "plural": false,
+            "selections": [
+              v2,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "name",
+                "args": null,
+                "storageKey": null
+              }
+            ]
           }
         ]
       },
@@ -193,5 +189,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5b674b1c86d30474dae3a773ee93e6ed';
+(node/*: any*/).hash = 'aeddaae291555da5d3e7238f16c52b5f';
 module.exports = node;

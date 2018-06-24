@@ -34,6 +34,7 @@
   "sitemap.title.index": "Home",
   "sitemap.title.me": "Me",
   "sitemap.title.signIn": "Sign In",
+  "webName.textInput.placeholder": "web name",
   "yourWebs.createWeb": "Create web",
   "yourWebs.heading": "Your webs"
 }

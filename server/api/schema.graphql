@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Jun 24 2018 00:12:27 GMT+0200 (Central European Summer Time)
+# timestamp: Mon Jun 25 2018 00:02:33 GMT+0200 (Central European Summer Time)
 
 type AggregateWeb {
   count: Int!
@@ -17,9 +17,9 @@ input AuthInput {
 }
 
 type AuthPayload {
+  errors: AuthErrors
   token: String
   user: User
-  errors: AuthErrors
 }
 
 type Child implements Node {
@@ -172,8 +172,8 @@ input CreateWebInput {
 }
 
 type CreateWebPayload {
-  pageId: ID
   errors: CreateWebErrors
+  pageId: ID
 }
 
 scalar DateTime
@@ -685,6 +685,7 @@ type Mutation {
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
   setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
+  setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
 """An object with an ID"""
@@ -891,8 +892,8 @@ input SetPageTitleInput {
 }
 
 type SetPageTitlePayload {
-  page: Page
   errors: SetPageTitleErrors
+  page: Page
 }
 
 input SetThemeInput {
@@ -901,6 +902,20 @@ input SetThemeInput {
 
 type SetThemePayload {
   user: User
+}
+
+type SetWebNameErrors {
+  name: Max140CharsError
+}
+
+input SetWebNameInput {
+  id: ID!
+  name: String!
+}
+
+type SetWebNamePayload {
+  errors: SetWebNameErrors
+  web: Web
 }
 
 type User implements Node {

@@ -23,9 +23,9 @@ type AuthErrors {
 }
 
 type AuthPayload {
+  errors: AuthErrors
   token: String
   user: User
-  errors: AuthErrors
 }
 
 input CreateWebInput {
@@ -39,8 +39,8 @@ type CreateWebErrors {
 }
 
 type CreateWebPayload {
-  pageId: ID
   errors: CreateWebErrors
+  pageId: ID
 }
 
 input DeleteWebInput {
@@ -69,18 +69,23 @@ type SetPageTitleErrors {
 }
 
 type SetPageTitlePayload {
-  page: Page
   errors: SetPageTitleErrors
+  page: Page
 }
 
-# type SetWebNameInput {
-#   id: ID!
-#   name: String!
-# }
-#
-# type SetWebNamePayload {
-#   web: Web
-# }
+input SetWebNameInput {
+  id: ID!
+  name: String!
+}
+
+type SetWebNameErrors {
+  name: Max140CharsError
+}
+
+type SetWebNamePayload {
+  errors: SetWebNameErrors
+  web: Web
+}
 
 type Mutation {
   auth(input: AuthInput!): AuthPayload
@@ -88,7 +93,7 @@ type Mutation {
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
   setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
-  # setWebName(input: SetWebNameInput!): SetWebNamePayload
+  setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
 # Queries do not need inputs and payloads. They are pretty explicit.

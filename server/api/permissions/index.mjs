@@ -54,6 +54,7 @@ const rules /*: Rules */ = {
     deleteWeb: and(isAuthenticated, isWebCreator(args => args.input.id)),
     setTheme: isAuthenticated,
     setPageTitle: and(isAuthenticated, isPageCreator(args => args.input.id)),
+    setWebName: and(isAuthenticated, isWebCreator(args => args.input.id)),
   },
   Query: {
     me: allow,

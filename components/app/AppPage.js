@@ -108,8 +108,8 @@ type Props = {|
   data: generated.AppPage,
   requireAuth?: boolean,
   intl: IntlShape,
-  hideHeader?: boolean,
-  hideFooter?: boolean,
+  withoutHeader?: boolean,
+  withoutFooter?: boolean,
 |};
 
 class AppPage extends React.PureComponent<Props> {
@@ -133,7 +133,7 @@ class AppPage extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, hideHeader, hideFooter, title, intl } = this.props;
+    const { data, withoutHeader, withoutFooter, title, intl } = this.props;
     const isAuthenticated = data.me != null;
     const themeName =
       // That's how we gradually check nullable types.
@@ -167,11 +167,11 @@ class AppPage extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          {hideHeader !== true && (
+          {withoutHeader !== true && (
             <PageMainNav isAuthenticated={isAuthenticated} theme={theme} />
           )}
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
-          {hideFooter !== true && <PageFooter theme={theme} />}
+          {withoutFooter !== true && <PageFooter theme={theme} />}
         </PageContainer>
       </ThemeContext.Provider>
     );

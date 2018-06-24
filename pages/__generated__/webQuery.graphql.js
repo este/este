@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 48ac1e81832f260902ca88ccde11edde
+ * @relayHash de629c13696494a6bcc991a2cf2acae6
  */
 
 /* eslint-disable */
@@ -16,8 +16,7 @@ export type webQueryVariables = {|
 |};
 export type webQueryResponse = {|
   +web: ?{|
-    +id: string,
-    +name: string,
+    +id: string
   |},
   +$fragmentRefs: AppPage$ref & Web$ref,
 |};
@@ -30,7 +29,6 @@ query webQuery(
 ) {
   web(id: $id) {
     id
-    name
   }
   ...AppPage
   ...Web_1Bmzm5
@@ -60,45 +58,27 @@ var v0 = [
     "defaultValue": null
   }
 ],
-v1 = {
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id",
+    "type": "ID!"
+  }
+],
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
-},
-v2 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "web",
-  "storageKey": null,
-  "args": [
-    {
-      "kind": "Variable",
-      "name": "id",
-      "variableName": "id",
-      "type": "ID!"
-    }
-  ],
-  "concreteType": "Web",
-  "plural": false,
-  "selections": [
-    v1,
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "name",
-      "args": null,
-      "storageKey": null
-    }
-  ]
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n    name\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n  }\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -107,7 +87,18 @@ return {
     "metadata": null,
     "argumentDefinitions": v0,
     "selections": [
-      v2,
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "web",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "Web",
+        "plural": false,
+        "selections": [
+          v2
+        ]
+      },
       {
         "kind": "FragmentSpread",
         "name": "AppPage",
@@ -132,7 +123,25 @@ return {
     "name": "webQuery",
     "argumentDefinitions": v0,
     "selections": [
-      v2,
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "web",
+        "storageKey": null,
+        "args": v1,
+        "concreteType": "Web",
+        "plural": false,
+        "selections": [
+          v2,
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "name",
+            "args": null,
+            "storageKey": null
+          }
+        ]
+      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -142,7 +151,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          v1,
+          v2,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -157,5 +166,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '18390ffc5d9d7407ed94d1bf764bf2d2';
+(node/*: any*/).hash = '224772394398e63482d492bfac9a4ee2';
 module.exports = node;

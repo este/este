@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Page.graphql';
 import PageTitle from './PageTitle';
 import Head from 'next/head';
-import getFocusableNodes from '../../client/getFocusableNodes';
+import EditMainNav from '../EditMainNav';
 
 type PageProps = {|
   theme: Theme,
@@ -15,22 +15,19 @@ type PageProps = {|
 |};
 
 class Page extends React.PureComponent<PageProps> {
-  componentDidMount() {
-    const node = getFocusableNodes(this)[1];
-    if (node) node.focus();
-  }
-
   render() {
     const {
       theme,
       data: { page },
     } = this.props;
     if (page == null) return null;
+    const { web } = page;
     return (
       <>
         <Head>
           <title>{page.title}</title>
         </Head>
+        <EditMainNav webId={web.id} webName={web.name} />
         <View style={theme.styles.page}>
           <PageTitle pageId={page.id} defaultValue={page.title} />
           <PageMarkdown />
@@ -47,6 +44,10 @@ export default createFragmentContainer(
       page(id: $id) {
         id
         title
+        web {
+          id
+          name
+        }
       }
     }
   `,

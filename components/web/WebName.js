@@ -3,45 +3,42 @@ import * as React from 'react';
 import TextInput from '../core/TextInput';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import { graphql } from 'react-relay';
-import * as generated from './__generated__/PageTitleMutation.graphql';
+import * as generated from './__generated__/WebNameMutation.graphql';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { validateSetPageTitle } from '../../server/api/resolvers/Mutation';
+import { validateSetWebName } from '../../server/api/resolvers/Mutation';
 
 const messages = defineMessages({
   placeholder: {
-    defaultMessage: 'page title',
-    id: 'pageTitle.textInput.placeholder',
+    defaultMessage: 'web name',
+    id: 'webName.textInput.placeholder',
   },
 });
 
-type PageTitleProps = {|
-  pageId: string,
+type WebNameProps = {|
+  webId: string,
   // defaultValue because component is uncontrolled. This is fine for now.
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
   defaultValue: string,
-  commit: Commit<
-    generated.SetPageTitleInput,
-    generated.PageTitleMutationResponse,
-  >,
+  commit: Commit<generated.SetWebNameInput, generated.WebNameMutationResponse>,
   intl: IntlShape,
 |};
 
-type PageTitleState = {|
-  errors: Errors<generated.PageTitleMutationResponse, 'setPageTitle'>,
+type WebNameState = {|
+  errors: Errors<generated.WebNameMutationResponse, 'setWebName'>,
 |};
 
-class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
+class WebName extends React.PureComponent<WebNameProps, WebNameState> {
   state = {
     errors: null,
   };
 
   handleTextInputChangeTextThrottled = value => {
     const input = {
-      id: this.props.pageId,
-      title: value,
+      id: this.props.webId,
+      name: value,
     };
-    const errors = validateSetPageTitle(input);
+    const errors = validateSetWebName(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
   };
@@ -49,9 +46,10 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
   render() {
     const { intl } = this.props;
     const { errors } = this.state;
+
     return (
       <TextInput
-        error={errors && errors.title}
+        error={errors && errors.name}
         size={1}
         onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
         defaultValue={this.props.defaultValue}
@@ -62,16 +60,16 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
 }
 
 export default withMutation(
-  withIntl(PageTitle),
+  withIntl(WebName),
   graphql`
-    mutation PageTitleMutation($input: SetPageTitleInput!) {
-      setPageTitle(input: $input) {
-        # Payload "page { title }" updates fragments with page title. Perfect.
-        page {
-          title
+    mutation WebNameMutation($input: SetWebNameInput!) {
+      setWebName(input: $input) {
+        web {
+          name
+          id
         }
         errors {
-          title
+          name
         }
       }
     }
