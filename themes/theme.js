@@ -137,8 +137,7 @@ const stylesJson = {
   buttonSpaced: {
     borderRadius: 5,
     borderWidth: 1,
-    paddingVertical: typography.rhythm(0.1),
-    paddingHorizontal: typography.rhythm(0.75),
+    paddingHorizontal: typography.rhythm(0.5),
   },
 
   buttonPrimary: {
