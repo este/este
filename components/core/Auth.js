@@ -14,7 +14,7 @@ import Row from './Row';
 import Block from './Block';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/AuthMutation.graphql';
-import { validateAuth } from '../../server/api/resolvers/Mutation';
+import * as validations from '../../validations';
 import { View } from 'react-native';
 
 const messages = defineMessages({
@@ -81,7 +81,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
       isSignUp,
     };
 
-    const errors = validateAuth(input);
+    const errors = validations.validateAuth(input);
     if (errors) {
       this.setState({ errors });
       return;

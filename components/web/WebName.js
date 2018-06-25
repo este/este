@@ -6,7 +6,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/WebNameMutation.graphql';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { validateSetWebName } from '../../server/api/resolvers/Mutation';
+import * as validations from '../../validations';
 
 const messages = defineMessages({
   placeholder: {
@@ -38,7 +38,7 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
       id: this.props.webId,
       name: value,
     };
-    const errors = validateSetWebName(input);
+    const errors = validations.validateSetWebName(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
   };

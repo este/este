@@ -1,4 +1,4 @@
-// flow-typed signature: 03cda0f6305ad7b7fb6256332909cf96
+// flow-typed signature: 888c1f886e1d6b6f42797b0ae9f5c811
 // flow-typed version: <<STUB>>/eslint-plugin-react_v^7.7.0/flow_v0.75.0
 
 /**
@@ -263,6 +263,10 @@ declare module 'eslint-plugin-react/lib/rules/no-unescaped-entities' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/no-unknown-property' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/no-unsafe' {
   declare module.exports: any;
 }
 
@@ -555,6 +559,9 @@ declare module 'eslint-plugin-react/lib/rules/no-unescaped-entities.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/no-unknown-property.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unknown-property'>;
+}
+declare module 'eslint-plugin-react/lib/rules/no-unsafe.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unsafe'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-unused-prop-types.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-prop-types'>;

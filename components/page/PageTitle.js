@@ -6,7 +6,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/PageTitleMutation.graphql';
 import { defineMessages, type IntlShape } from 'react-intl';
 import withIntl from '../core/withIntl';
-import { validateSetPageTitle } from '../../server/api/resolvers/Mutation';
+import * as validations from '../../validations';
 
 const messages = defineMessages({
   placeholder: {
@@ -41,7 +41,7 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
       id: this.props.pageId,
       title: value,
     };
-    const errors = validateSetPageTitle(input);
+    const errors = validations.validateSetPageTitle(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
   };

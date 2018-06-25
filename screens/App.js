@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-// import { validateEmailPassword } from '../server/validation';
 
 const styles = StyleSheet.create({
   container: {

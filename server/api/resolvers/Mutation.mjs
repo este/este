@@ -1,36 +1,10 @@
 // @flow
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
-import * as validate from '../validations/validate';
+import * as validations from '../../../validations';
 /*::
 import * as generated from '../__generated__/api.graphql'
 */
-
-export const validateAuth = (input /*: generated.AuthInput */) => {
-  const email = validate.email(input.email);
-  if (email) return { email };
-  const password = validate.max1024Min5Chars(input.password);
-  if (password) return { password };
-};
-
-export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
-  const name = validate.max140Chars(input.name);
-  if (name) return { name };
-  const pageTitle = validate.max140Chars(input.pageTitle);
-  if (pageTitle) return { pageTitle };
-};
-
-export const validateSetPageTitle = (
-  input /*: generated.SetPageTitleInput */,
-) => {
-  const title = validate.max140Chars(input.title);
-  if (title) return { title };
-};
-
-export const validateSetWebName = (input /*: generated.SetWebNameInput */) => {
-  const name = validate.max140Chars(input.name);
-  if (name) return { name };
-};
 
 const Mutation /*: generated.Mutation */ = {
   auth: async (args, info, { db }) => {
@@ -42,7 +16,7 @@ const Mutation /*: generated.Mutation */ = {
       email: args.input.email.trim(),
       password: args.input.password.trim(),
     };
-    const errors = validateAuth(input);
+    const errors = validations.validateAuth(input);
     if (errors) return { errors };
     const createAuthPayload = user => ({
       token: jsonwebtoken.sign(
@@ -84,7 +58,7 @@ const Mutation /*: generated.Mutation */ = {
   // graphql-shield, so clients can handle errors properly.
   createWeb: async (args, info, { userId, db }) => {
     if (userId == null) return null;
-    const errors = validateCreateWeb(args.input);
+    const errors = validations.validateCreateWeb(args.input);
     if (errors) return { errors };
     const web = await db.mutation.createWeb(
       {
@@ -138,7 +112,7 @@ const Mutation /*: generated.Mutation */ = {
   },
 
   setPageTitle: async (args, info, { db }) => {
-    const errors = validateSetPageTitle(args.input);
+    const errors = validations.validateSetPageTitle(args.input);
     if (errors) return { errors };
     const page = await db.mutation.updatePage({
       where: { id: args.input.id },
@@ -149,7 +123,7 @@ const Mutation /*: generated.Mutation */ = {
   },
 
   setWebName: async (args, info, { db }) => {
-    const errors = validateSetWebName(args.input);
+    const errors = validations.validateSetWebName(args.input);
     if (errors) return { errors };
     const web = await db.mutation.updateWeb({
       where: { id: args.input.id },
