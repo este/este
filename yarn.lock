@@ -7863,9 +7863,9 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-next@6.0.4-canary.8:
-  version "6.0.4-canary.8"
-  resolved "https://registry.yarnpkg.com/next/-/next-6.0.4-canary.8.tgz#ac3de8e0ded4f800e18ce98f8b6be07c846d6c9b"
+next@6.0.4-canary.9:
+  version "6.0.4-canary.9"
+  resolved "https://registry.yarnpkg.com/next/-/next-6.0.4-canary.9.tgz#cab190eb3f7cc2a5180d3a378663a236e14ae32d"
   dependencies:
     "@babel/core" "7.0.0-beta.42"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.42"
@@ -10726,8 +10726,8 @@ touch@3.1.0, touch@^3.1.0:
     nopt "~1.0.10"
 
 tough-cookie@>=2.3.3, tough-cookie@^2.3.3:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.4.2.tgz#aa9133154518b494efab98a58247bfc38818c00c"
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.4.3.tgz#53f36da3f47783b0925afa06ff9f3b165280f781"
   dependencies:
     psl "^1.1.24"
     punycode "^1.4.1"
