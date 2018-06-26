@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash de629c13696494a6bcc991a2cf2acae6
+ * @relayHash 52d1b24a0f1fafa2a0301985271382f2
  */
 
 /* eslint-disable */
@@ -45,7 +45,21 @@ fragment Web_1Bmzm5 on Query {
   web(id: $id) {
     id
     name
+    ...WebPages
   }
+}
+
+fragment WebPages on Web {
+  pages(orderBy: updatedAt_DESC) {
+    id
+    ...WebPagesItem
+  }
+}
+
+fragment WebPagesItem on Page {
+  id
+  title
+  updatedAt
 }
 */
 
@@ -78,7 +92,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n  }\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n    ...WebPages\n  }\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -139,6 +153,39 @@ return {
             "name": "name",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "pages",
+            "storageKey": "pages(orderBy:\"updatedAt_DESC\")",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "orderBy",
+                "value": "updatedAt_DESC",
+                "type": "PageOrderByInput"
+              }
+            ],
+            "concreteType": "Page",
+            "plural": true,
+            "selections": [
+              v2,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "title",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "updatedAt",
+                "args": null,
+                "storageKey": null
+              }
+            ]
           }
         ]
       },

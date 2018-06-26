@@ -8,6 +8,7 @@ import EditMainNav from '../EditMainNav';
 import Block from '../core/Block';
 import Row from '../core/Row';
 import DeleteWeb from './DeleteWeb';
+import WebPages from './WebPages';
 
 type WebProps = {|
   data: generated.Web,
@@ -27,6 +28,8 @@ class Web extends React.PureComponent<WebProps> {
         <EditMainNav webId={web.id} webName={web.name} />
         <Block>
           <WebName webId={web.id} defaultValue={web.name} />
+          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+          <WebPages data={web} />
           <Row>
             <DeleteWeb id={web.id} />
           </Row>
@@ -43,6 +46,7 @@ export default createFragmentContainer(
       web(id: $id) {
         id
         name
+        ...WebPages
       }
     }
   `,
