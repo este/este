@@ -1,9 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Mon Jun 25 2018 01:16:18 GMT+0200 (Central European Summer Time)
-
-type AggregateWeb {
-  count: Int!
-}
+# timestamp: Tue Jun 26 2018 02:55:09 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -704,21 +700,6 @@ type Page implements Node {
   element(where: ElementWhereInput): Element!
 }
 
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-}
-
 enum PageOrderByInput {
   id_ASC
   id_DESC
@@ -877,7 +858,6 @@ enum PasswordError {
 
 type Query {
   me: User
-  webs(first: Int!): WebConnection
   page(id: ID!): Page
   web(id: ID!): Web
 }
@@ -1165,25 +1145,6 @@ type Web implements Node {
   name: String!
   creator(where: UserWhereInput): User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-}
-
-"""A connection to a list of items."""
-type WebConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [WebEdge]!
-  aggregate: AggregateWeb!
-}
-
-"""An edge in a connection."""
-type WebEdge {
-  """The item at the end of the edge."""
-  node: Web!
-
-  """A cursor for use in pagination."""
-  cursor: String!
 }
 
 enum WebOrderByInput {

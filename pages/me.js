@@ -13,7 +13,6 @@ import { graphql } from 'react-relay';
 import { deleteCookie } from '../components/app/cookie';
 import * as generated from './__generated__/meQuery.graphql';
 import { Image } from 'react-native';
-import Row from '../components/core/Row';
 
 const getGravatarUrl = email =>
   gravatar.url(email, {
@@ -56,10 +55,10 @@ const Me = props => {
         </>
       )}
       <Block>
-        <Row>
-          <SignOutButton color="danger" onPress={signOut} />
-          <SetTheme />
-        </Row>
+        <SetTheme />
+      </Block>
+      <Block>
+        <SignOutButton color="danger" onPress={signOut} />
       </Block>
     </AppPage>
   );

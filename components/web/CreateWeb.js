@@ -1,12 +1,10 @@
 // @flow
 import * as React from 'react';
-import Form from '../core/Form';
 import { CreateButton } from '../core/buttons';
 import TextInput from '../core/TextInput';
 import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from '../core/Row';
-import Block from '../core/Block';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import * as validations from '../../validations';
@@ -49,7 +47,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       pathname: '/page',
       query: { id },
     };
-    Router.replace(href);
+    Router.push(href);
   };
 
   handleCompleted = ({ createWeb }) => {
@@ -91,24 +89,22 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     const disabled = this.props.pending || this.state.disabled;
 
     return (
-      <Form>
-        <Block>
-          <TextInput
-            label={
-              <FormattedMessage
-                defaultMessage="Web Name"
-                id="createWeb.name.label"
-              />
-            }
-            disabled={disabled}
-            error={errors && errors.name}
-            focusOnError={errors}
-            onChangeText={this.setName}
-            value={this.state.name}
-            onSubmitEditing={this.createWeb}
-            placeholder=""
-          />
-        </Block>
+      <>
+        <TextInput
+          label={
+            <FormattedMessage
+              defaultMessage="Web Name"
+              id="createWeb.name.label"
+            />
+          }
+          disabled={disabled}
+          error={errors && errors.name}
+          focusOnError={errors}
+          onChangeText={this.setName}
+          value={this.state.name}
+          onSubmitEditing={this.createWeb}
+          placeholder=""
+        />
         <Row>
           <CreateButton
             color="primary"
@@ -116,7 +112,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
             onPress={this.createWeb}
           />
         </Row>
-      </Form>
+      </>
     );
   }
 }

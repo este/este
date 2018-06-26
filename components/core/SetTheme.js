@@ -15,11 +15,11 @@ type SetThemeProps = {|
 
 class SetTheme extends React.PureComponent<SetThemeProps> {
   getThemeToogleName() {
-    return this.props.theme === lightTheme ? 'dark' : 'light';
+    return this.props.theme === lightTheme ? 'Dark' : 'Light';
   }
 
   handleButtonPress = () => {
-    const themeName = this.getThemeToogleName();
+    const themeName = this.getThemeToogleName().toLowerCase();
     this.props.commit({ themeName });
   };
 
@@ -31,7 +31,7 @@ class SetTheme extends React.PureComponent<SetThemeProps> {
         onPress={this.handleButtonPress}
         disabled={this.props.pending}
       >
-        {`${themeName} theme`}
+        {`${themeName} Theme`}
       </Button>
     );
   }

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import Heading from './Heading';
-import Form from './Form';
 import TextInput from './TextInput';
 import { SignInButton, SignUpButton } from './buttons';
 import Router from 'next/router';
@@ -99,41 +98,43 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     return (
       <View>
         <Heading size={1}>Auth</Heading>
-        <Form>
-          <Block>
-            <TextInput
-              autoComplete="email"
-              disabled={this.props.pending}
-              error={errors && errors.email}
-              focusOnError={errors}
-              keyboardType="email-address"
-              name="email"
-              onChangeText={this.setEmail}
-              placeholder={intl.formatMessage(messages.emailPlaceholder)}
-              value={this.state.email}
-              onSubmitEditing={this.signIn}
-            />
-            <TextInput
-              disabled={this.props.pending}
-              error={errors && errors.password}
-              focusOnError={errors}
-              name="password"
-              onChangeText={this.setPassword}
-              placeholder={intl.formatMessage(messages.passwordPlaceholder)}
-              secureTextEntry
-              value={this.state.password}
-              onSubmitEditing={this.signIn}
-            />
-          </Block>
+        <Block>
+          <TextInput
+            autoComplete="email"
+            disabled={this.props.pending}
+            error={errors && errors.email}
+            focusOnError={errors}
+            keyboardType="email-address"
+            name="email"
+            onChangeText={this.setEmail}
+            placeholder={intl.formatMessage(messages.emailPlaceholder)}
+            value={this.state.email}
+            onSubmitEditing={this.signIn}
+          />
+          <TextInput
+            disabled={this.props.pending}
+            error={errors && errors.password}
+            focusOnError={errors}
+            name="password"
+            onChangeText={this.setPassword}
+            placeholder={intl.formatMessage(messages.passwordPlaceholder)}
+            secureTextEntry
+            value={this.state.password}
+            onSubmitEditing={this.signIn}
+          />
           <Row>
             <SignInButton
               disabled={this.props.pending}
               onPress={this.signIn}
               color="primary"
             />
-            <SignUpButton disabled={this.props.pending} onPress={this.signUp} />
+            <SignUpButton
+              disabled={this.props.pending}
+              onPress={this.signUp}
+              color="primary"
+            />
           </Row>
-        </Form>
+        </Block>
       </View>
     );
   }

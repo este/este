@@ -10,27 +10,24 @@ type WebsProps = {|
 
 class Webs extends React.PureComponent<WebsProps> {
   render() {
-    const { webs } = this.props.data;
-    // https://medium.com/@steida/always-design-graphql-schema-for-further-changes-efc9dee5ceb9
+    const { me } = this.props.data;
+    // https://graphql.org/learn/best-practices/#nullability
+    if (!me) return null;
+    const { webs } = me;
     if (!webs) return null;
-    return webs.edges.map(
-      // $FlowFixMe Relay known haste related bug. Will be fixed soon.
-      edge => edge && <WebsItem data={edge.node} key={edge.node.id} />,
-    );
+    // $FlowFixMe https://github.com/facebook/relay/issues/2316
+    return webs.map(web => <WebsItem data={web} key={web.id} />);
   }
 }
 
 export default createFragmentContainer(
   Webs,
   graphql`
-    fragment Webs on Query
-      @argumentDefinitions(first: { type: "Int!", defaultValue: 100 }) {
-      webs(first: $first) @connection(key: "Webs_webs") {
-        edges {
-          node {
-            id
-            ...WebsItem
-          }
+    fragment Webs on Query {
+      me {
+        webs(orderBy: updatedAt_ASC) {
+          id
+          ...WebsItem
         }
       }
     }

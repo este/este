@@ -27,8 +27,6 @@ class Web extends React.PureComponent<WebProps> {
         <EditMainNav webId={web.id} webName={web.name} />
         <Block>
           <WebName webId={web.id} defaultValue={web.name} />
-        </Block>
-        <Block>
           <Row>
             <DeleteWeb id={web.id} />
           </Row>

@@ -5,9 +5,9 @@ import Text, { type TextProps } from './Text';
 import { TouchableOpacity } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
+// TODO: React Native soon will have typed props.
 export type ButtonProps = {|
   ...TextProps,
-  inline?: boolean,
   accessible?: boolean,
   accessibilityLabel?: string,
   disabled?: boolean,
@@ -19,39 +19,14 @@ export type ButtonProps = {|
   activeOpacity?: number,
 |};
 
-const getColorStyle = (styles, color) => {
-  switch (color) {
-    case 'primary':
-      return styles.buttonPrimary;
-    case 'success':
-      return styles.buttonSuccess;
-    case 'warning':
-      return styles.buttonWarning;
-    case 'danger':
-      return styles.buttonDanger;
-    case 'black':
-      return styles.buttonBlack;
-    case 'white':
-      return styles.buttonWhite;
-    case 'gray':
-      return styles.buttonGray;
-    default:
-      // eslint-disable-next-line no-unused-expressions
-      (color: empty);
-      return null;
-  }
-};
-
 class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
   render() {
     const {
-      inline,
       accessible,
       accessibilityLabel,
       disabled,
       onPress,
       testID,
-      color,
       style,
       theme,
       touchableStyle,
@@ -60,8 +35,6 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
       activeOpacity,
       ...props
     } = this.props;
-    // Fix font smoothing only for buttons with background.
-    const fixWebFontSmoothing = inline !== true && color != null;
 
     return (
       <TouchableOpacity
@@ -77,17 +50,7 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
         activeOpacity={activeOpacity}
       >
         <Text
-          fixWebFontSmoothing={fixWebFontSmoothing}
-          {...(inline != null ? { color } : {})}
-          style={[
-            theme.styles.button,
-            style,
-            disabled === true && theme.styles.stateDisabled,
-            inline == null && theme.styles.buttonSpaced,
-            inline == null &&
-              color != null &&
-              getColorStyle(theme.styles, color),
-          ]}
+          style={[style, disabled === true && theme.styles.stateDisabled]}
           {...props}
         />
       </TouchableOpacity>

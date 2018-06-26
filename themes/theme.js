@@ -110,69 +110,17 @@ const stylesJson = {
     marginVertical: typography.rhythm(2),
   },
 
-  form: {
-    marginBottom: typography.rhythm(1),
-    maxWidth: typography.rhythm(21),
-  },
-
   stateDisabled: {
     opacity: 0.5,
   },
 
   textInput: {
     color: colors.black,
-    paddingVertical: typography.rhythm(0.25),
     fontFamily,
   },
 
   textInputError: {
     minHeight: typography.rhythm(1),
-  },
-
-  button: {
-    color: colors.black,
-    fontWeight: bold,
-  },
-
-  buttonSpaced: {
-    borderRadius: 5,
-    borderWidth: 1,
-    paddingHorizontal: typography.rhythm(0.5),
-  },
-
-  buttonPrimary: {
-    backgroundColor: colors.primary,
-    color: colors.white,
-  },
-
-  buttonSuccess: {
-    backgroundColor: colors.success,
-    color: colors.white,
-  },
-
-  buttonWarning: {
-    backgroundColor: colors.warning,
-    color: colors.white,
-  },
-
-  buttonDanger: {
-    backgroundColor: colors.danger,
-    color: colors.white,
-  },
-
-  buttonBlack: {
-    backgroundColor: colors.black,
-    color: colors.white,
-  },
-
-  buttonWhite: {
-    backgroundColor: colors.white,
-    color: colors.white,
-  },
-
-  buttonGray: {
-    backgroundColor: colors.gray,
-    color: colors.white,
   },
 
   picker: {
@@ -243,11 +191,6 @@ export const darkTheme: Theme = {
 
     textInput: {
       ...stylesJson.textInput,
-      color: colors.white,
-    },
-
-    button: {
-      ...stylesJson.button,
       color: colors.white,
     },
 

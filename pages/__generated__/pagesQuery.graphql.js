@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 668e775587dd964005fb5e4c8fece269
+ * @relayHash 64b401b79b8ded954d69d34e5f4556e0
  */
 
 /* eslint-disable */
@@ -32,19 +32,12 @@ fragment AppPage on Query {
 }
 
 fragment Webs on Query {
-  webs(first: 100) {
-    edges {
-      node {
-        id
-        ...WebsItem
-        __typename
-      }
-      cursor
+  me {
+    webs(orderBy: updatedAt_ASC) {
+      id
+      ...WebsItem
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
+    id
   }
 }
 
@@ -70,7 +63,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  webs(first: 100) {\n    edges {\n      node {\n        id\n        ...WebsItem\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -112,143 +105,66 @@ return {
             "name": "themeName",
             "args": null,
             "storageKey": null
-          }
-        ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "webs",
-        "storageKey": "webs(first:100)",
-        "args": [
-          {
-            "kind": "Literal",
-            "name": "first",
-            "value": 100,
-            "type": "Int!"
-          }
-        ],
-        "concreteType": "WebConnection",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "edges",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "WebEdge",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "node",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Web",
-                "plural": false,
-                "selections": [
-                  v0,
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "name",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "updatedAt",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "pages",
-                    "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
-                    "args": [
-                      {
-                        "kind": "Literal",
-                        "name": "first",
-                        "value": 1,
-                        "type": "Int"
-                      },
-                      {
-                        "kind": "Literal",
-                        "name": "orderBy",
-                        "value": "updatedAt_DESC",
-                        "type": "PageOrderByInput"
-                      }
-                    ],
-                    "concreteType": "Page",
-                    "plural": true,
-                    "selections": [
-                      v0
-                    ]
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "__typename",
-                    "args": null,
-                    "storageKey": null
-                  }
-                ]
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "cursor",
-                "args": null,
-                "storageKey": null
-              }
-            ]
           },
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "pageInfo",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "PageInfo",
-            "plural": false,
+            "name": "webs",
+            "storageKey": "webs(orderBy:\"updatedAt_ASC\")",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "orderBy",
+                "value": "updatedAt_ASC",
+                "type": "WebOrderByInput"
+              }
+            ],
+            "concreteType": "Web",
+            "plural": true,
             "selections": [
+              v0,
               {
                 "kind": "ScalarField",
                 "alias": null,
-                "name": "endCursor",
+                "name": "name",
                 "args": null,
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
-                "name": "hasNextPage",
+                "name": "updatedAt",
                 "args": null,
                 "storageKey": null
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "pages",
+                "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 1,
+                    "type": "Int"
+                  },
+                  {
+                    "kind": "Literal",
+                    "name": "orderBy",
+                    "value": "updatedAt_DESC",
+                    "type": "PageOrderByInput"
+                  }
+                ],
+                "concreteType": "Page",
+                "plural": true,
+                "selections": [
+                  v0
+                ]
               }
             ]
           }
         ]
-      },
-      {
-        "kind": "LinkedHandle",
-        "alias": null,
-        "name": "webs",
-        "args": [
-          {
-            "kind": "Literal",
-            "name": "first",
-            "value": 100,
-            "type": "Int!"
-          }
-        ],
-        "handle": "connection",
-        "key": "Webs_webs",
-        "filters": null
       }
     ]
   }

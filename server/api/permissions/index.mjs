@@ -58,7 +58,6 @@ const rules /*: Rules */ = {
   },
   Query: {
     me: allow,
-    webs: allow,
     page: and(isAuthenticated, isPageCreator(args => args.id)),
     web: and(isAuthenticated, isWebCreator(args => args.id)),
   },

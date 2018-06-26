@@ -53,7 +53,6 @@ class PageMarkdownActionsButton extends React.PureComponent<
     const color = focused || hovered ? 'primary' : 'gray';
     return (
       <Button
-        inline
         bold={false}
         color={color}
         touchableStyle={styles.button}

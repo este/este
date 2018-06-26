@@ -4,11 +4,11 @@
 #   - add resolver
 #   - test it in playground
 #   - restart `yarn dev` in first terminal window
-#   - run `yarn schema-relay` in another terminal window
-# TODO: Ideally, run `yarn schema-relay` after nodemon.api.json restart
-# invoked by model.graphql change. PR anyone?
+#   - run `yarn codegen` in another terminal window
+# TODO: Ideally, run `yarn codegen` after nodemon.api.json restart invoked by
+# model.graphql change. PR anyone?
 
-# import User, Web, WebEdge, WebConnection, Page from "../../database/schema.graphql"
+# import User, Web, Page from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -96,10 +96,9 @@ type Mutation {
   setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
-# Queries do not need inputs and payloads. They are pretty explicit.
+# Queries do not need inputs nor payloads. They are pretty explicit.
 type Query {
   me: User
-  webs(first: Int!): WebConnection
   page(id: ID!): Page
   web(id: ID!): Web
 }
