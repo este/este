@@ -4,8 +4,7 @@ import TextInput from '../core/TextInput';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/WebNameMutation.graphql';
-import { defineMessages, type IntlShape } from 'react-intl';
-import withIntl from '../core/withIntl';
+import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
 
 const messages = defineMessages({
@@ -60,7 +59,7 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
 }
 
 export default withMutation(
-  withIntl(WebName),
+  injectIntl(WebName),
   graphql`
     mutation WebNameMutation($input: SetWebNameInput!) {
       setWebName(input: $input) {

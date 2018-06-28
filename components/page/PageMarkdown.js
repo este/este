@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
-import { defineMessages, type IntlShape } from 'react-intl';
-import withIntl from '../core/withIntl';
+import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import PageMarkdownActions from './PageMarkdownActions';
 // import withConfirm, { type Confirm } from '../core/withConfirm';
 
@@ -177,5 +176,5 @@ class PageMarkdown extends React.PureComponent<
   }
 }
 
-// export default withConfirm(withIntl(withTheme(PageMarkdown)));
-export default withIntl(withTheme(PageMarkdown));
+// export default withConfirm(injectIntl(withTheme(PageMarkdown)));
+export default withTheme(injectIntl(PageMarkdown));

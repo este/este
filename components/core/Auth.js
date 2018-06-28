@@ -6,9 +6,8 @@ import { SignInButton, SignUpButton } from './buttons';
 import Router from 'next/router';
 import withMutation, { type Commit, type Errors } from './withMutation';
 import { setCookie } from '../app/cookie';
-import { defineMessages, type IntlShape } from 'react-intl';
+import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import type { Href } from '../app/sitemap';
-import withIntl from './withIntl';
 import Row from './Row';
 import Block from './Block';
 import { graphql } from 'react-relay';
@@ -141,7 +140,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 }
 
 export default withMutation(
-  withIntl(Auth),
+  injectIntl(Auth),
   graphql`
     mutation AuthMutation($input: AuthInput!) {
       auth(input: $input) {

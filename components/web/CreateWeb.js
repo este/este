@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { CreateButton } from '../core/buttons';
 import TextInput from '../core/TextInput';
-import { defineMessages, FormattedMessage, type IntlShape } from 'react-intl';
+import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from '../core/Row';
 import { graphql } from 'react-relay';
@@ -10,12 +10,15 @@ import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import * as validations from '../../validations';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
-import withIntl from '../core/withIntl';
 
 export const messages = defineMessages({
   pageTitle: {
     defaultMessage: 'Home',
     id: 'createWeb.pageTitle',
+  },
+  label: {
+    defaultMessage: 'Web Name',
+    id: 'createWeb.name.label',
   },
 });
 
@@ -91,12 +94,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     return (
       <>
         <TextInput
-          label={
-            <FormattedMessage
-              defaultMessage="Web Name"
-              id="createWeb.name.label"
-            />
-          }
+          label={this.props.intl.formatMessage(messages.label)}
           disabled={disabled}
           error={errors && errors.name}
           focusOnError={errors}
@@ -118,7 +116,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 }
 
 export default withMutation(
-  withIntl(CreateWeb),
+  injectIntl(CreateWeb),
   graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {

@@ -4,8 +4,7 @@ import TextInput from '../core/TextInput';
 import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PageTitleMutation.graphql';
-import { defineMessages, type IntlShape } from 'react-intl';
-import withIntl from '../core/withIntl';
+import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
 
 const messages = defineMessages({
@@ -62,7 +61,7 @@ class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
 }
 
 export default withMutation(
-  withIntl(PageTitle),
+  injectIntl(PageTitle),
   graphql`
     mutation PageTitleMutation($input: SetPageTitleInput!) {
       setPageTitle(input: $input) {

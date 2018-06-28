@@ -6,13 +6,12 @@ import Head from 'next/head';
 import PageLoadingBar from '../core/PageLoadingBar';
 import * as React from 'react';
 import SwitchLocale from '../core/SwitchLocale';
-import { FormattedMessage, type IntlShape } from 'react-intl';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import ThemeContext from '../core/ThemeContext';
 import { lightTheme, darkTheme } from '../../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/AppPage.graphql';
 import Auth from '../core/Auth';
-import withIntl from '../core/withIntl';
 import Text from '../core/Text';
 import { titles } from './sitemap';
 import Spacer from '../core/Spacer';
@@ -178,11 +177,9 @@ class AppPage extends React.PureComponent<Props> {
   }
 }
 
-const PageWithIntl = withIntl(AppPage);
-
 // https://github.com/este/este/issues/1484
 export default createFragmentContainer(
-  PageWithIntl,
+  injectIntl(AppPage),
   graphql`
     fragment AppPage on Query {
       me {
