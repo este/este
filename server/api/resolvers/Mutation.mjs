@@ -69,10 +69,13 @@ const Mutation /*: generated.Mutation */ = {
             create: {
               title: args.input.pageTitle,
               creator: { connect: { id: userId } },
-              element: {
+              children: {
                 create: {
-                  type: 'TEXT',
-                  creator: { connect: { id: userId } },
+                  elements: {
+                    create: {
+                      creator: { connect: { id: userId } },
+                    },
+                  },
                 },
               },
             },

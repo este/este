@@ -68,143 +68,26 @@ type AuthPayload {
   user: User
 }
 
-type Child implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
-  parent(where: ElementWhereInput): Element!
-  element(where: ElementWhereInput): Element!
+type Children {
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  order: [ID!]!
 }
 
-enum ChildOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  index_ASC
-  index_DESC
-}
-
-input ChildWhereInput {
+input ChildrenWhereInput {
   """Logical AND on all given filters."""
-  AND: [ChildWhereInput!]
+  AND: [ChildrenWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ChildWhereInput!]
+  OR: [ChildrenWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  index: Int
-
-  """All values that are not equal to given value."""
-  index_not: Int
-
-  """All values that are contained in given list."""
-  index_in: [Int!]
-
-  """All values that are not contained in given list."""
-  index_not_in: [Int!]
-
-  """All values less than the given value."""
-  index_lt: Int
-
-  """All values less than or equal the given value."""
-  index_lte: Int
-
-  """All values greater than the given value."""
-  index_gt: Int
-
-  """All values greater than or equal the given value."""
-  index_gte: Int
-  parent: ElementWhereInput
-  element: ElementWhereInput
+  NOT: [ChildrenWhereInput!]
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  _MagicalBackRelation_ChildrenToPage_every: PageWhereInput
+  _MagicalBackRelation_ChildrenToPage_some: PageWhereInput
+  _MagicalBackRelation_ChildrenToPage_none: PageWhereInput
 }
 
 type CreateWebErrors {
@@ -236,14 +119,12 @@ type Element implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String!
-  image(where: ImageWhereInput): Image
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
   creator(where: UserWhereInput): User!
-  parent(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
+  name: String
+  contentText: String
+  contentTextFormat: String!
+  contentImage(where: ImageWhereInput): Image
+  contentChildren(where: ChildrenWhereInput): Children
 }
 
 enum ElementOrderByInput {
@@ -255,18 +136,10 @@ enum ElementOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
-  type_ASC
-  type_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
-}
-
-enum ElementType {
-  TEXT
-  IMAGE
-  CHILDREN
+  contentText_ASC
+  contentText_DESC
+  contentTextFormat_ASC
+  contentTextFormat_DESC
 }
 
 input ElementWhereInput {
@@ -402,107 +275,89 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  type: ElementType
+  contentText: String
 
   """All values that are not equal to given value."""
-  type_not: ElementType
+  contentText_not: String
 
   """All values that are contained in given list."""
-  type_in: [ElementType!]
+  contentText_in: [String!]
 
   """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
+  contentText_not_in: [String!]
 
   """All values less than the given value."""
-  text_lt: String
+  contentText_lt: String
 
   """All values less than or equal the given value."""
-  text_lte: String
+  contentText_lte: String
 
   """All values greater than the given value."""
-  text_gt: String
+  contentText_gt: String
 
   """All values greater than or equal the given value."""
-  text_gte: String
+  contentText_gte: String
 
   """All values containing the given string."""
-  text_contains: String
+  contentText_contains: String
 
   """All values not containing the given string."""
-  text_not_contains: String
+  contentText_not_contains: String
 
   """All values starting with the given string."""
-  text_starts_with: String
+  contentText_starts_with: String
 
   """All values not starting with the given string."""
-  text_not_starts_with: String
+  contentText_not_starts_with: String
 
   """All values ending with the given string."""
-  text_ends_with: String
+  contentText_ends_with: String
 
   """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
+  contentText_not_ends_with: String
+  contentTextFormat: String
 
   """All values that are not equal to given value."""
-  textFormat_not: String
+  contentTextFormat_not: String
 
   """All values that are contained in given list."""
-  textFormat_in: [String!]
+  contentTextFormat_in: [String!]
 
   """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
+  contentTextFormat_not_in: [String!]
 
   """All values less than the given value."""
-  textFormat_lt: String
+  contentTextFormat_lt: String
 
   """All values less than or equal the given value."""
-  textFormat_lte: String
+  contentTextFormat_lte: String
 
   """All values greater than the given value."""
-  textFormat_gt: String
+  contentTextFormat_gt: String
 
   """All values greater than or equal the given value."""
-  textFormat_gte: String
+  contentTextFormat_gte: String
 
   """All values containing the given string."""
-  textFormat_contains: String
+  contentTextFormat_contains: String
 
   """All values not containing the given string."""
-  textFormat_not_contains: String
+  contentTextFormat_not_contains: String
 
   """All values starting with the given string."""
-  textFormat_starts_with: String
+  contentTextFormat_starts_with: String
 
   """All values not starting with the given string."""
-  textFormat_not_starts_with: String
+  contentTextFormat_not_starts_with: String
 
   """All values ending with the given string."""
-  textFormat_ends_with: String
+  contentTextFormat_ends_with: String
 
   """All values not ending with the given string."""
-  textFormat_not_ends_with: String
-  image: ImageWhereInput
-  children_every: ChildWhereInput
-  children_some: ChildWhereInput
-  children_none: ChildWhereInput
+  contentTextFormat_not_ends_with: String
   creator: UserWhereInput
-  parent_every: ChildWhereInput
-  parent_some: ChildWhereInput
-  parent_none: ChildWhereInput
-  _MagicalBackRelation_ElementToPage_every: PageWhereInput
-  _MagicalBackRelation_ElementToPage_some: PageWhereInput
-  _MagicalBackRelation_ElementToPage_none: PageWhereInput
+  contentImage: ImageWhereInput
+  contentChildren: ChildrenWhereInput
 }
 
 enum EmailError {
@@ -744,10 +599,10 @@ type Page implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  title: String!
   creator(where: UserWhereInput): User!
+  title: String!
   web(where: WebWhereInput): Web!
-  element(where: ElementWhereInput): Element!
+  children(where: ChildrenWhereInput): Children!
 }
 
 enum PageOrderByInput {
@@ -896,7 +751,7 @@ input PageWhereInput {
   title_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  element: ElementWhereInput
+  children: ChildrenWhereInput
 }
 
 enum PasswordError {
@@ -1192,8 +1047,8 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String!
   creator(where: UserWhereInput): User!
+  name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
 
@@ -1354,22 +1209,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * Types
 */
 
- export type ImageOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'src_ASC'
-    | 'src_DESC'
-    | 'width_ASC'
-    | 'width_DESC'
-    | 'height_ASC'
-    | 'height_DESC'
-  
-
- export type ElementOrderByInput =
+ export type WebOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
     | 'createdAt_ASC'
@@ -1378,23 +1218,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'text_ASC'
-    | 'text_DESC'
-    | 'textFormat_ASC'
-    | 'textFormat_DESC'
   
 
  export type Max140CharsError =
     | 'REQUIRED'
     | 'MAX_140_CHARS'
-  
-
- export type ElementType =
-    | 'TEXT'
-    | 'IMAGE'
-    | 'CHILDREN'
   
 
  export type PageOrderByInput =
@@ -1415,25 +1243,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'WRONG_PASSWORD'
   
 
- export type EmailError =
-    | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
-  
-
- export type ChildOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'index_ASC'
-    | 'index_DESC'
-  
-
- export type WebOrderByInput =
+ export type ElementOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
     | 'createdAt_ASC'
@@ -1442,58 +1252,47 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
+    | 'contentText_ASC'
+    | 'contentText_DESC'
+    | 'contentTextFormat_ASC'
+    | 'contentTextFormat_DESC'
   
 
- export type ChildWhereInput = {| 
-  AND?: Array< ChildWhereInput > | ChildWhereInput,
-  OR?: Array< ChildWhereInput > | ChildWhereInput,
-  NOT?: Array< ChildWhereInput > | ChildWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  index?: Int,
-  index_not?: Int,
-  index_in?: Array< Int > | Int,
-  index_not_in?: Array< Int > | Int,
-  index_lt?: Int,
-  index_lte?: Int,
-  index_gt?: Int,
-  index_gte?: Int,
-  parent?: ElementWhereInput,
-  element?: ElementWhereInput
+ export type EmailError =
+    | 'REQUIRED'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
+  
+
+ export type ImageOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'src_ASC'
+    | 'src_DESC'
+    | 'width_ASC'
+    | 'width_DESC'
+    | 'height_ASC'
+    | 'height_DESC'
+  
+
+ export type DeleteWebInput = {| 
+  id: ID_Input
 |}
 
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
+ export type CreateWebInput = {| 
+  name: String,
+  pageTitle: String
+|}
+
+ export type ElementWhereInput = {| 
+  AND?: Array< ElementWhereInput > | ElementWhereInput,
+  OR?: Array< ElementWhereInput > | ElementWhereInput,
+  NOT?: Array< ElementWhereInput > | ElementWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -1524,23 +1323,57 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   updatedAt_lte?: DateTime,
   updatedAt_gt?: DateTime,
   updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  contentText?: String,
+  contentText_not?: String,
+  contentText_in?: Array< String > | String,
+  contentText_not_in?: Array< String > | String,
+  contentText_lt?: String,
+  contentText_lte?: String,
+  contentText_gt?: String,
+  contentText_gte?: String,
+  contentText_contains?: String,
+  contentText_not_contains?: String,
+  contentText_starts_with?: String,
+  contentText_not_starts_with?: String,
+  contentText_ends_with?: String,
+  contentText_not_ends_with?: String,
+  contentTextFormat?: String,
+  contentTextFormat_not?: String,
+  contentTextFormat_in?: Array< String > | String,
+  contentTextFormat_not_in?: Array< String > | String,
+  contentTextFormat_lt?: String,
+  contentTextFormat_lte?: String,
+  contentTextFormat_gt?: String,
+  contentTextFormat_gte?: String,
+  contentTextFormat_contains?: String,
+  contentTextFormat_not_contains?: String,
+  contentTextFormat_starts_with?: String,
+  contentTextFormat_not_starts_with?: String,
+  contentTextFormat_ends_with?: String,
+  contentTextFormat_not_ends_with?: String,
   creator?: UserWhereInput,
-  web?: WebWhereInput,
-  element?: ElementWhereInput
+  contentImage?: ImageWhereInput,
+  contentChildren?: ChildrenWhereInput
+|}
+
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
  export type SetPageTitleInput = {| 
@@ -1548,14 +1381,8 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   title: String
 |}
 
- export type DeleteWebInput = {| 
-  id: ID_Input
-|}
-
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
+ export type SetThemeInput = {| 
+  themeName: String
 |}
 
  export type WebWhereInput = {| 
@@ -1610,6 +1437,76 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   pages_every?: PageWhereInput,
   pages_some?: PageWhereInput,
   pages_none?: PageWhereInput
+|}
+
+ export type ImageWhereInput = {| 
+  AND?: Array< ImageWhereInput > | ImageWhereInput,
+  OR?: Array< ImageWhereInput > | ImageWhereInput,
+  NOT?: Array< ImageWhereInput > | ImageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  src?: String,
+  src_not?: String,
+  src_in?: Array< String > | String,
+  src_not_in?: Array< String > | String,
+  src_lt?: String,
+  src_lte?: String,
+  src_gt?: String,
+  src_gte?: String,
+  src_contains?: String,
+  src_not_contains?: String,
+  src_starts_with?: String,
+  src_not_starts_with?: String,
+  src_ends_with?: String,
+  src_not_ends_with?: String,
+  width?: Int,
+  width_not?: Int,
+  width_in?: Array< Int > | Int,
+  width_not_in?: Array< Int > | Int,
+  width_lt?: Int,
+  width_lte?: Int,
+  width_gt?: Int,
+  width_gte?: Int,
+  height?: Int,
+  height_not?: Int,
+  height_in?: Array< Int > | Int,
+  height_not_in?: Array< Int > | Int,
+  height_lt?: Int,
+  height_lte?: Int,
+  height_gt?: Int,
+  height_gte?: Int,
+  creator?: UserWhereInput,
+  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
+  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
 |}
 
  export type UserWhereInput = {| 
@@ -1702,181 +1599,74 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   images_none?: ImageWhereInput
 |}
 
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  children?: ChildrenWhereInput
+|}
+
+ export type ChildrenWhereInput = {| 
+  AND?: Array< ChildrenWhereInput > | ChildrenWhereInput,
+  OR?: Array< ChildrenWhereInput > | ChildrenWhereInput,
+  NOT?: Array< ChildrenWhereInput > | ChildrenWhereInput,
+  elements_every?: ElementWhereInput,
+  elements_some?: ElementWhereInput,
+  elements_none?: ElementWhereInput,
+  _MagicalBackRelation_ChildrenToPage_every?: PageWhereInput,
+  _MagicalBackRelation_ChildrenToPage_some?: PageWhereInput,
+  _MagicalBackRelation_ChildrenToPage_none?: PageWhereInput
+|}
+
  export type SetWebNameInput = {| 
   id: ID_Input,
   name: String
-|}
-
- export type CreateWebInput = {| 
-  name: String,
-  pageTitle: String
-|}
-
- export type ElementWhereInput = {| 
-  AND?: Array< ElementWhereInput > | ElementWhereInput,
-  OR?: Array< ElementWhereInput > | ElementWhereInput,
-  NOT?: Array< ElementWhereInput > | ElementWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
-  text?: String,
-  text_not?: String,
-  text_in?: Array< String > | String,
-  text_not_in?: Array< String > | String,
-  text_lt?: String,
-  text_lte?: String,
-  text_gt?: String,
-  text_gte?: String,
-  text_contains?: String,
-  text_not_contains?: String,
-  text_starts_with?: String,
-  text_not_starts_with?: String,
-  text_ends_with?: String,
-  text_not_ends_with?: String,
-  textFormat?: String,
-  textFormat_not?: String,
-  textFormat_in?: Array< String > | String,
-  textFormat_not_in?: Array< String > | String,
-  textFormat_lt?: String,
-  textFormat_lte?: String,
-  textFormat_gt?: String,
-  textFormat_gte?: String,
-  textFormat_contains?: String,
-  textFormat_not_contains?: String,
-  textFormat_starts_with?: String,
-  textFormat_not_starts_with?: String,
-  textFormat_ends_with?: String,
-  textFormat_not_ends_with?: String,
-  image?: ImageWhereInput,
-  children_every?: ChildWhereInput,
-  children_some?: ChildWhereInput,
-  children_none?: ChildWhereInput,
-  creator?: UserWhereInput,
-  parent_every?: ChildWhereInput,
-  parent_some?: ChildWhereInput,
-  parent_none?: ChildWhereInput,
-  _MagicalBackRelation_ElementToPage_every?: PageWhereInput,
-  _MagicalBackRelation_ElementToPage_some?: PageWhereInput,
-  _MagicalBackRelation_ElementToPage_none?: PageWhereInput
-|}
-
- export type ImageWhereInput = {| 
-  AND?: Array< ImageWhereInput > | ImageWhereInput,
-  OR?: Array< ImageWhereInput > | ImageWhereInput,
-  NOT?: Array< ImageWhereInput > | ImageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  src?: String,
-  src_not?: String,
-  src_in?: Array< String > | String,
-  src_not_in?: Array< String > | String,
-  src_lt?: String,
-  src_lte?: String,
-  src_gt?: String,
-  src_gte?: String,
-  src_contains?: String,
-  src_not_contains?: String,
-  src_starts_with?: String,
-  src_not_starts_with?: String,
-  src_ends_with?: String,
-  src_not_ends_with?: String,
-  width?: Int,
-  width_not?: Int,
-  width_in?: Array< Int > | Int,
-  width_not_in?: Array< Int > | Int,
-  width_lt?: Int,
-  width_lte?: Int,
-  width_gt?: Int,
-  width_gte?: Int,
-  height?: Int,
-  height_not?: Int,
-  height_in?: Array< Int > | Int,
-  height_not_in?: Array< Int > | Int,
-  height_lt?: Int,
-  height_lte?: Int,
-  height_gt?: Int,
-  height_gte?: Int,
-  creator?: UserWhereInput,
-  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
-|}
-
- export type SetThemeInput = {| 
-  themeName: String
 |}
 
 /*
@@ -1905,14 +1695,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    images?: Image[],
 |}
 
- export type Child = {| ...Node,
+ export type Image = {| ...Node,
  
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   index: Int,
-   parent: Element,
-   element: Element,
+   src: String,
+   width: Int,
+   height: Int,
+   creator: User,
 |}
 
  export type DeleteWebPayload = {| 
@@ -1935,15 +1726,17 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    page?: Page,
 |}
 
- export type Image = {| ...Node,
+ export type Element = {| ...Node,
  
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   src: String,
-   width: Int,
-   height: Int,
    creator: User,
+   name?: String,
+   contentText?: String,
+   contentTextFormat: String,
+   contentImage?: Image,
+   contentChildren?: Children,
 |}
 
  export type SetPageTitleErrors = {| 
@@ -1954,19 +1747,9 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    user?: User,
 |}
 
- export type Element = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name?: String,
-   type: ElementType,
-   text?: String,
-   textFormat: String,
-   image?: Image,
-   children?: Child[],
-   creator: User,
-   parent?: Child[],
+ export type Children = {| 
+   elements?: Element[],
+   order: ID_Output[],
 |}
 
  export type AuthErrors = {| 
@@ -1979,10 +1762,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   title: String,
    creator: User,
+   title: String,
    web: Web,
-   element: Element,
+   children: Children,
 |}
 
  export type Web = {| ...Node,
@@ -1990,8 +1773,8 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
-   name: String,
    creator: User,
+   name: String,
    pages?: Page[],
 |}
 

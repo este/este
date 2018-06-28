@@ -1,7 +1,7 @@
 # source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
-# timestamp: Fri Jun 22 2018 15:33:31 GMT+0200 (Central European Summer Time)
+# timestamp: Thu Jun 28 2018 21:35:24 GMT+0200 (Central European Summer Time)
 
-type AggregateChild {
+type AggregateChildren {
   count: Int!
 }
 
@@ -30,94 +30,80 @@ type BatchPayload {
   count: Long!
 }
 
-type Child implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
-  parent(where: ElementWhereInput): Element!
-  element(where: ElementWhereInput): Element!
+type Children {
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  order: [ID!]!
 }
 
 """A connection to a list of items."""
-type ChildConnection {
+type ChildrenConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ChildEdge]!
-  aggregate: AggregateChild!
+  edges: [ChildrenEdge]!
+  aggregate: AggregateChildren!
 }
 
-input ChildCreateInput {
-  index: Int!
-  parent: ElementCreateOneWithoutChildrenInput!
-  element: ElementCreateOneWithoutParentInput!
+input ChildrenCreateInput {
+  order: ChildrenCreateorderInput
+  elements: ElementCreateManyWithoutContentChildrenInput
 }
 
-input ChildCreateManyWithoutElementInput {
-  create: [ChildCreateWithoutElementInput!]
-  connect: [ChildWhereUniqueInput!]
+input ChildrenCreateOneInput {
+  create: ChildrenCreateInput
 }
 
-input ChildCreateManyWithoutParentInput {
-  create: [ChildCreateWithoutParentInput!]
-  connect: [ChildWhereUniqueInput!]
+input ChildrenCreateOneWithoutElementsInput {
+  create: ChildrenCreateWithoutElementsInput
 }
 
-input ChildCreateWithoutElementInput {
-  index: Int!
-  parent: ElementCreateOneWithoutChildrenInput!
+input ChildrenCreateorderInput {
+  set: [ID!]
 }
 
-input ChildCreateWithoutParentInput {
-  index: Int!
-  element: ElementCreateOneWithoutParentInput!
+input ChildrenCreateWithoutElementsInput {
+  order: ChildrenCreateorderInput
 }
 
 """An edge in a connection."""
-type ChildEdge {
+type ChildrenEdge {
   """The item at the end of the edge."""
-  node: Child!
+  node: Children!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ChildOrderByInput {
+enum ChildrenOrderByInput {
   id_ASC
   id_DESC
-  createdAt_ASC
-  createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  index_ASC
-  index_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
-type ChildPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
+type ChildrenPreviousValues {
+  order: [ID!]!
 }
 
-type ChildSubscriptionPayload {
+type ChildrenSubscriptionPayload {
   mutation: MutationType!
-  node: Child
+  node: Children
   updatedFields: [String!]
-  previousValues: ChildPreviousValues
+  previousValues: ChildrenPreviousValues
 }
 
-input ChildSubscriptionWhereInput {
+input ChildrenSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ChildSubscriptionWhereInput!]
+  AND: [ChildrenSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ChildSubscriptionWhereInput!]
+  OR: [ChildrenSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildSubscriptionWhereInput!]
+  NOT: [ChildrenSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -138,186 +124,67 @@ input ChildSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ChildWhereInput
+  node: ChildrenWhereInput
 }
 
-input ChildUpdateInput {
-  index: Int
-  parent: ElementUpdateOneWithoutChildrenInput
-  element: ElementUpdateOneWithoutParentInput
+input ChildrenUpdateDataInput {
+  order: ChildrenUpdateorderInput
+  elements: ElementUpdateManyWithoutContentChildrenInput
 }
 
-input ChildUpdateManyWithoutElementInput {
-  create: [ChildCreateWithoutElementInput!]
-  connect: [ChildWhereUniqueInput!]
-  disconnect: [ChildWhereUniqueInput!]
-  delete: [ChildWhereUniqueInput!]
-  update: [ChildUpdateWithWhereUniqueWithoutElementInput!]
-  upsert: [ChildUpsertWithWhereUniqueWithoutElementInput!]
+input ChildrenUpdateInput {
+  order: ChildrenUpdateorderInput
+  elements: ElementUpdateManyWithoutContentChildrenInput
 }
 
-input ChildUpdateManyWithoutParentInput {
-  create: [ChildCreateWithoutParentInput!]
-  connect: [ChildWhereUniqueInput!]
-  disconnect: [ChildWhereUniqueInput!]
-  delete: [ChildWhereUniqueInput!]
-  update: [ChildUpdateWithWhereUniqueWithoutParentInput!]
-  upsert: [ChildUpsertWithWhereUniqueWithoutParentInput!]
+input ChildrenUpdateOneInput {
+  create: ChildrenCreateInput
+  delete: Boolean
+  update: ChildrenUpdateDataInput
+  upsert: ChildrenUpsertNestedInput
 }
 
-input ChildUpdateWithoutElementDataInput {
-  index: Int
-  parent: ElementUpdateOneWithoutChildrenInput
+input ChildrenUpdateOneWithoutElementsInput {
+  create: ChildrenCreateWithoutElementsInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ChildrenUpdateWithoutElementsDataInput
+  upsert: ChildrenUpsertWithoutElementsInput
 }
 
-input ChildUpdateWithoutParentDataInput {
-  index: Int
-  element: ElementUpdateOneWithoutParentInput
+input ChildrenUpdateorderInput {
+  set: [ID!]
 }
 
-input ChildUpdateWithWhereUniqueWithoutElementInput {
-  where: ChildWhereUniqueInput!
-  data: ChildUpdateWithoutElementDataInput!
+input ChildrenUpdateWithoutElementsDataInput {
+  order: ChildrenUpdateorderInput
 }
 
-input ChildUpdateWithWhereUniqueWithoutParentInput {
-  where: ChildWhereUniqueInput!
-  data: ChildUpdateWithoutParentDataInput!
+input ChildrenUpsertNestedInput {
+  update: ChildrenUpdateDataInput!
+  create: ChildrenCreateInput!
 }
 
-input ChildUpsertWithWhereUniqueWithoutElementInput {
-  where: ChildWhereUniqueInput!
-  update: ChildUpdateWithoutElementDataInput!
-  create: ChildCreateWithoutElementInput!
+input ChildrenUpsertWithoutElementsInput {
+  update: ChildrenUpdateWithoutElementsDataInput!
+  create: ChildrenCreateWithoutElementsInput!
 }
 
-input ChildUpsertWithWhereUniqueWithoutParentInput {
-  where: ChildWhereUniqueInput!
-  update: ChildUpdateWithoutParentDataInput!
-  create: ChildCreateWithoutParentInput!
-}
-
-input ChildWhereInput {
+input ChildrenWhereInput {
   """Logical AND on all given filters."""
-  AND: [ChildWhereInput!]
+  AND: [ChildrenWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ChildWhereInput!]
+  OR: [ChildrenWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  index: Int
-
-  """All values that are not equal to given value."""
-  index_not: Int
-
-  """All values that are contained in given list."""
-  index_in: [Int!]
-
-  """All values that are not contained in given list."""
-  index_not_in: [Int!]
-
-  """All values less than the given value."""
-  index_lt: Int
-
-  """All values less than or equal the given value."""
-  index_lte: Int
-
-  """All values greater than the given value."""
-  index_gt: Int
-
-  """All values greater than or equal the given value."""
-  index_gte: Int
-  parent: ElementWhereInput
-  element: ElementWhereInput
-}
-
-input ChildWhereUniqueInput {
-  id: ID
+  NOT: [ChildrenWhereInput!]
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+  _MagicalBackRelation_ChildrenToPage_every: PageWhereInput
+  _MagicalBackRelation_ChildrenToPage_some: PageWhereInput
+  _MagicalBackRelation_ChildrenToPage_none: PageWhereInput
 }
 
 scalar DateTime
@@ -326,14 +193,12 @@ type Element implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String!
-  image(where: ImageWhereInput): Image
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
   creator(where: UserWhereInput): User!
-  parent(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
+  name: String
+  contentText: String
+  contentTextFormat: String!
+  contentImage(where: ImageWhereInput): Image
+  contentChildren(where: ChildrenWhereInput): Children
 }
 
 """A connection to a list of items."""
@@ -348,13 +213,16 @@ type ElementConnection {
 
 input ElementCreateInput {
   name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
+  contentText: String
+  contentTextFormat: String
   creator: UserCreateOneWithoutElementsInput!
-  parent: ChildCreateManyWithoutElementInput
+  contentImage: ImageCreateOneInput
+  contentChildren: ChildrenCreateOneWithoutElementsInput
+}
+
+input ElementCreateManyWithoutContentChildrenInput {
+  create: [ElementCreateWithoutContentChildrenInput!]
+  connect: [ElementWhereUniqueInput!]
 }
 
 input ElementCreateManyWithoutCreatorInput {
@@ -362,49 +230,20 @@ input ElementCreateManyWithoutCreatorInput {
   connect: [ElementWhereUniqueInput!]
 }
 
-input ElementCreateOneInput {
-  create: ElementCreateInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateOneWithoutChildrenInput {
-  create: ElementCreateWithoutChildrenInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateOneWithoutParentInput {
-  create: ElementCreateWithoutParentInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateWithoutChildrenInput {
+input ElementCreateWithoutContentChildrenInput {
   name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
+  contentText: String
+  contentTextFormat: String
   creator: UserCreateOneWithoutElementsInput!
-  parent: ChildCreateManyWithoutElementInput
+  contentImage: ImageCreateOneInput
 }
 
 input ElementCreateWithoutCreatorInput {
   name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
-  parent: ChildCreateManyWithoutElementInput
-}
-
-input ElementCreateWithoutParentInput {
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
-  creator: UserCreateOneWithoutElementsInput!
+  contentText: String
+  contentTextFormat: String
+  contentImage: ImageCreateOneInput
+  contentChildren: ChildrenCreateOneWithoutElementsInput
 }
 
 """An edge in a connection."""
@@ -425,12 +264,10 @@ enum ElementOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
-  type_ASC
-  type_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
+  contentText_ASC
+  contentText_DESC
+  contentTextFormat_ASC
+  contentTextFormat_DESC
 }
 
 type ElementPreviousValues {
@@ -438,9 +275,8 @@ type ElementPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  type: ElementType!
-  text: String
-  textFormat: String!
+  contentText: String
+  contentTextFormat: String!
 }
 
 type ElementSubscriptionPayload {
@@ -482,32 +318,22 @@ input ElementSubscriptionWhereInput {
   node: ElementWhereInput
 }
 
-enum ElementType {
-  TEXT
-  IMAGE
-  CHILDREN
-}
-
-input ElementUpdateDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
-}
-
 input ElementUpdateInput {
   name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
+  contentText: String
+  contentTextFormat: String
   creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
+  contentImage: ImageUpdateOneInput
+  contentChildren: ChildrenUpdateOneWithoutElementsInput
+}
+
+input ElementUpdateManyWithoutContentChildrenInput {
+  create: [ElementCreateWithoutContentChildrenInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutContentChildrenInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutContentChildrenInput!]
 }
 
 input ElementUpdateManyWithoutCreatorInput {
@@ -519,58 +345,25 @@ input ElementUpdateManyWithoutCreatorInput {
   upsert: [ElementUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input ElementUpdateOneInput {
-  create: ElementCreateInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateDataInput
-  upsert: ElementUpsertNestedInput
-}
-
-input ElementUpdateOneWithoutChildrenInput {
-  create: ElementCreateWithoutChildrenInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateWithoutChildrenDataInput
-  upsert: ElementUpsertWithoutChildrenInput
-}
-
-input ElementUpdateOneWithoutParentInput {
-  create: ElementCreateWithoutParentInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateWithoutParentDataInput
-  upsert: ElementUpsertWithoutParentInput
-}
-
-input ElementUpdateWithoutChildrenDataInput {
+input ElementUpdateWithoutContentChildrenDataInput {
   name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
+  contentText: String
+  contentTextFormat: String
   creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
+  contentImage: ImageUpdateOneInput
 }
 
 input ElementUpdateWithoutCreatorDataInput {
   name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  parent: ChildUpdateManyWithoutElementInput
+  contentText: String
+  contentTextFormat: String
+  contentImage: ImageUpdateOneInput
+  contentChildren: ChildrenUpdateOneWithoutElementsInput
 }
 
-input ElementUpdateWithoutParentDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  creator: UserUpdateOneWithoutElementsInput
+input ElementUpdateWithWhereUniqueWithoutContentChildrenInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutContentChildrenDataInput!
 }
 
 input ElementUpdateWithWhereUniqueWithoutCreatorInput {
@@ -578,19 +371,10 @@ input ElementUpdateWithWhereUniqueWithoutCreatorInput {
   data: ElementUpdateWithoutCreatorDataInput!
 }
 
-input ElementUpsertNestedInput {
-  update: ElementUpdateDataInput!
-  create: ElementCreateInput!
-}
-
-input ElementUpsertWithoutChildrenInput {
-  update: ElementUpdateWithoutChildrenDataInput!
-  create: ElementCreateWithoutChildrenInput!
-}
-
-input ElementUpsertWithoutParentInput {
-  update: ElementUpdateWithoutParentDataInput!
-  create: ElementCreateWithoutParentInput!
+input ElementUpsertWithWhereUniqueWithoutContentChildrenInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutContentChildrenDataInput!
+  create: ElementCreateWithoutContentChildrenInput!
 }
 
 input ElementUpsertWithWhereUniqueWithoutCreatorInput {
@@ -732,107 +516,89 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  type: ElementType
+  contentText: String
 
   """All values that are not equal to given value."""
-  type_not: ElementType
+  contentText_not: String
 
   """All values that are contained in given list."""
-  type_in: [ElementType!]
+  contentText_in: [String!]
 
   """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
+  contentText_not_in: [String!]
 
   """All values less than the given value."""
-  text_lt: String
+  contentText_lt: String
 
   """All values less than or equal the given value."""
-  text_lte: String
+  contentText_lte: String
 
   """All values greater than the given value."""
-  text_gt: String
+  contentText_gt: String
 
   """All values greater than or equal the given value."""
-  text_gte: String
+  contentText_gte: String
 
   """All values containing the given string."""
-  text_contains: String
+  contentText_contains: String
 
   """All values not containing the given string."""
-  text_not_contains: String
+  contentText_not_contains: String
 
   """All values starting with the given string."""
-  text_starts_with: String
+  contentText_starts_with: String
 
   """All values not starting with the given string."""
-  text_not_starts_with: String
+  contentText_not_starts_with: String
 
   """All values ending with the given string."""
-  text_ends_with: String
+  contentText_ends_with: String
 
   """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
+  contentText_not_ends_with: String
+  contentTextFormat: String
 
   """All values that are not equal to given value."""
-  textFormat_not: String
+  contentTextFormat_not: String
 
   """All values that are contained in given list."""
-  textFormat_in: [String!]
+  contentTextFormat_in: [String!]
 
   """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
+  contentTextFormat_not_in: [String!]
 
   """All values less than the given value."""
-  textFormat_lt: String
+  contentTextFormat_lt: String
 
   """All values less than or equal the given value."""
-  textFormat_lte: String
+  contentTextFormat_lte: String
 
   """All values greater than the given value."""
-  textFormat_gt: String
+  contentTextFormat_gt: String
 
   """All values greater than or equal the given value."""
-  textFormat_gte: String
+  contentTextFormat_gte: String
 
   """All values containing the given string."""
-  textFormat_contains: String
+  contentTextFormat_contains: String
 
   """All values not containing the given string."""
-  textFormat_not_contains: String
+  contentTextFormat_not_contains: String
 
   """All values starting with the given string."""
-  textFormat_starts_with: String
+  contentTextFormat_starts_with: String
 
   """All values not starting with the given string."""
-  textFormat_not_starts_with: String
+  contentTextFormat_not_starts_with: String
 
   """All values ending with the given string."""
-  textFormat_ends_with: String
+  contentTextFormat_ends_with: String
 
   """All values not ending with the given string."""
-  textFormat_not_ends_with: String
-  image: ImageWhereInput
-  children_every: ChildWhereInput
-  children_some: ChildWhereInput
-  children_none: ChildWhereInput
+  contentTextFormat_not_ends_with: String
   creator: UserWhereInput
-  parent_every: ChildWhereInput
-  parent_some: ChildWhereInput
-  parent_none: ChildWhereInput
-  _MagicalBackRelation_ElementToPage_every: PageWhereInput
-  _MagicalBackRelation_ElementToPage_some: PageWhereInput
-  _MagicalBackRelation_ElementToPage_none: PageWhereInput
+  contentImage: ImageWhereInput
+  contentChildren: ChildrenWhereInput
 }
 
 input ElementWhereUniqueInput {
@@ -1205,38 +971,35 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
-  createChild(data: ChildCreateInput!): Child!
   createElement(data: ElementCreateInput!): Element!
+  createChildren(data: ChildrenCreateInput!): Children!
   createImage(data: ImageCreateInput!): Image!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateChild(data: ChildUpdateInput!, where: ChildWhereUniqueInput!): Child
   updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
-  deleteChild(where: ChildWhereUniqueInput!): Child
   deleteElement(where: ElementWhereUniqueInput!): Element
   deleteImage(where: ImageWhereUniqueInput!): Image
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertChild(where: ChildWhereUniqueInput!, create: ChildCreateInput!, update: ChildUpdateInput!): Child!
   upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyChildren(data: ChildUpdateInput!, where: ChildWhereInput): BatchPayload!
   updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
+  updateManyChildrens(data: ChildrenUpdateInput!, where: ChildrenWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyChildren(where: ChildWhereInput): BatchPayload!
   deleteManyElements(where: ElementWhereInput): BatchPayload!
+  deleteManyChildrens(where: ChildrenWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
 }
 
@@ -1256,10 +1019,10 @@ type Page implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  title: String!
   creator(where: UserWhereInput): User!
+  title: String!
   web(where: WebWhereInput): Web!
-  element(where: ElementWhereInput): Element!
+  children(where: ChildrenWhereInput): Children!
 }
 
 """A connection to a list of items."""
@@ -1276,7 +1039,7 @@ input PageCreateInput {
   title: String!
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
+  children: ChildrenCreateOneInput!
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -1292,13 +1055,13 @@ input PageCreateManyWithoutWebInput {
 input PageCreateWithoutCreatorInput {
   title: String!
   web: WebCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
+  children: ChildrenCreateOneInput!
 }
 
 input PageCreateWithoutWebInput {
   title: String!
   creator: UserCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
+  children: ChildrenCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -1386,7 +1149,7 @@ input PageUpdateInput {
   title: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+  children: ChildrenUpdateOneInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -1410,13 +1173,13 @@ input PageUpdateManyWithoutWebInput {
 input PageUpdateWithoutCreatorDataInput {
   title: String
   web: WebUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+  children: ChildrenUpdateOneInput
 }
 
 input PageUpdateWithoutWebDataInput {
   title: String
   creator: UserUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+  children: ChildrenUpdateOneInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -1576,7 +1339,7 @@ input PageWhereInput {
   title_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  element: ElementWhereInput
+  children: ChildrenWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -1587,20 +1350,19 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child]!
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
+  childrens(where: ChildrenWhereInput, orderBy: ChildrenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Children]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
-  child(where: ChildWhereUniqueInput!): Child
   element(where: ElementWhereUniqueInput!): Element
   image(where: ImageWhereUniqueInput!): Image
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  childrenConnection(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChildConnection!
   elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
+  childrensConnection(where: ChildrenWhereInput, orderBy: ChildrenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChildrenConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
 
   """Fetches an object given its ID"""
@@ -1614,8 +1376,8 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  child(where: ChildSubscriptionWhereInput): ChildSubscriptionPayload
   element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
+  children(where: ChildrenSubscriptionWhereInput): ChildrenSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
 }
 
@@ -2114,8 +1876,8 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String!
   creator(where: UserWhereInput): User!
+  name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
 
