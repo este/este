@@ -138,22 +138,22 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  page: {
+  post: {
     flex: 1,
   },
 
-  pageMarkdown: {
+  postMarkdown: {
     paddingVertical: typography.rhythm(0.5),
   },
 
-  pageMarkdownTextInput: {
+  postMarkdownTextInput: {
     color: colors.black,
     fontFamily,
     // It's the initial height. Client overrides it via inline styles.
     height: typography.rhythm(1),
   },
 
-  pageMarkdownButtons: {
+  postMarkdownButtons: {
     minHeight: typography.rhythm(1),
     paddingVertical: typography.rhythm(1),
   },
@@ -194,8 +194,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    pageMarkdownTextInput: {
-      ...stylesJson.pageMarkdownTextInput,
+    postMarkdownTextInput: {
+      ...stylesJson.postMarkdownTextInput,
       color: colors.white,
     },
   }),

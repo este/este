@@ -9,17 +9,17 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type Page$ref: FragmentReference;
-export type Page = {|
-  +page: ?{|
+declare export opaque type Post$ref: FragmentReference;
+export type Post = {|
+  +post: ?{|
     +id: string,
-    +title: string,
+    +name: ?string,
     +web: {|
       +id: string,
       +name: string,
     |},
   |},
-  +$refType: Page$ref,
+  +$refType: Post$ref,
 |};
 */
 
@@ -31,10 +31,17 @@ var v0 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Fragment",
-  "name": "Page",
+  "name": "Post",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [
@@ -49,7 +56,7 @@ return {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "page",
+      "name": "post",
       "storageKey": null,
       "args": [
         {
@@ -59,17 +66,11 @@ return {
           "type": "ID!"
         }
       ],
-      "concreteType": "Page",
+      "concreteType": "Post",
       "plural": false,
       "selections": [
         v0,
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "title",
-          "args": null,
-          "storageKey": null
-        },
+        v1,
         {
           "kind": "LinkedField",
           "alias": null,
@@ -80,13 +81,7 @@ return {
           "plural": false,
           "selections": [
             v0,
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "name",
-              "args": null,
-              "storageKey": null
-            }
+            v1
           ]
         }
       ]
@@ -95,5 +90,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '357100d31e02305ff7f659d59791447a';
+(node/*: any*/).hash = 'fcb1c834a6008a883b7523df61ae0edc';
 module.exports = node;

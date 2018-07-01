@@ -35,6 +35,7 @@
 .*/node_modules/react-native/Libraries/Components/Switch/Switch.js
 .*/node_modules/react-native/Libraries/Animated/src/nodes/AnimatedValue.js
 .*/node_modules/react-native/Libraries/Animated/src/nodes/AnimatedInterpolation.js
+.*/node_modules/react-native/Libraries/Experimental/SwipeableRow/SwipeableListView.js
 
 [include]
 

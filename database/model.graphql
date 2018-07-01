@@ -1,9 +1,6 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
 
-# Note Prisma does not support interfaces nor union types yet.
-# https://github.com/prismagraphql/prisma/issues/165
-
 type User {
   id: ID! @unique
   createdAt: DateTime!
@@ -15,8 +12,7 @@ type User {
   themeName: String
   # Created by a user.
   webs: [Web!]!
-  pages: [Page!]!
-  elements: [Element!]!
+  posts: [Post!]!
   images: [Image!]!
 }
 
@@ -24,54 +20,37 @@ type Web {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  creator: User!
   name: String!
-  creator: User!
-  pages: [Page!]! @relation(name: "WebPage", onDelete: CASCADE)
+  posts: [Post!]! @relation(name: "WebPosts", onDelete: CASCADE)
 }
 
-type Page {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  creator: User!
-  web: Web! @relation(name: "WebPage", onDelete: SET_NULL)
-  element: Element!
-}
-
-# Prisma does not support interfaces nor union types yet.
+# Prisma does not support interface nor union types yet.
 # https://github.com/prismagraphql/prisma/issues/165
-# This is a workaround. Otherwise we could use the union:
-# Example: union ElementValue = Text | Image | Children
-# This enum ensures a good enough consistency.
-enum ElementType {
+enum PostContentType {
+  CHILDREN
   TEXT
   IMAGE
-  CHILDREN
 }
 
-type Element {
+type Post {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String
-  type: ElementType!
-  # Text, image, and children. Will be merged to value union type someday.
-  text: String
-  textFormat: String! @default(value: "CommonMark")
-  image: Image
-  children: [Child!]! @relation(name: "ElementChildren")
   creator: User!
-  parent: [Child!]! @relation(name: "ChildElement")
-}
-
-type Child {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
-  parent: Element! @relation(name: "ElementChildren")
-  element: Element! @relation(name: "ChildElement")
+  # If name is null, use content or ID I suppose. Let's see.
+  name: String
+  web: Web! @relation(name: "WebPosts", onDelete: SET_NULL)
+  # Parents, so we can reuse elements in a tree.
+  parents: [Post!]! @relation(name: "PostParentsChildren")
+  contentType: PostContentType @default(value: "CHILDREN")
+  contentChildren: [Post!]! @relation(name: "PostParentsChildren")
+  # It's scalar list aka value object. I suppose it's good enough.
+  # I would rather enforce referential integrity, but I don't know how yet.
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String! @default(value: "CommonMark")
+  contentImage: Image
 }
 
 type Image {

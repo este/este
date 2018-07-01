@@ -1,5 +1,5 @@
-// flow-typed signature: f0e581ed69ec0f82743b20e4f0fd698c
-// flow-typed version: 193e9883a0/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: 4cacceffd326bb118e4a3c1b4d629e98
+// flow-typed version: e737b9832f/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -1012,7 +1012,13 @@ declare var expect: {
   objectContaining(value: Object): Object,
   /** Matches any received string that contains the exact expected string. */
   stringContaining(value: string): string,
-  stringMatching(value: string | RegExp): string
+  stringMatching(value: string | RegExp): string,
+  not: {
+    arrayContaining: (value: $ReadOnlyArray<mixed>) => Array<mixed>,
+    objectContaining: (value: {}) => Object,
+    stringContaining: (value: string) => string,
+    stringMatching: (value: string | RegExp) => string,
+  },
 };
 
 // TODO handle return type

@@ -14,18 +14,18 @@ const styles = StyleSheet.create({
       : {},
 });
 
-type PageMarkdownActionsButtonProps = {|
+type PostMarkdownActionsButtonProps = {|
   ...ButtonProps,
 |};
 
-type PageMarkdownActionsButtonState = {
+type PostMarkdownActionsButtonState = {
   focused: boolean,
   hovered: boolean,
 };
 
-class PageMarkdownActionsButton extends React.PureComponent<
-  PageMarkdownActionsButtonProps,
-  PageMarkdownActionsButtonState,
+class PostMarkdownActionsButton extends React.PureComponent<
+  PostMarkdownActionsButtonProps,
+  PostMarkdownActionsButtonState,
 > {
   state = {
     focused: false,
@@ -66,4 +66,4 @@ class PageMarkdownActionsButton extends React.PureComponent<
   }
 }
 
-export default PageMarkdownActionsButton;
+export default PostMarkdownActionsButton;

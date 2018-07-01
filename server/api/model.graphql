@@ -8,7 +8,7 @@
 # TODO: Ideally, run `yarn codegen` after nodemon.api.json restart invoked by
 # model.graphql change. PR anyone?
 
-# import User, Web, Page from "../../database/schema.graphql"
+# import User, Web, Post from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -30,17 +30,17 @@ type AuthPayload {
 
 input CreateWebInput {
   name: String!
-  pageTitle: String!
+  postName: String!
 }
 
 type CreateWebErrors {
   name: Max140CharsError
-  pageTitle: Max140CharsError
+  postName: Max140CharsError
 }
 
 type CreateWebPayload {
   errors: CreateWebErrors
-  pageId: ID
+  postId: ID
 }
 
 input DeleteWebInput {
@@ -59,18 +59,18 @@ type SetThemePayload {
   user: User
 }
 
-input SetPageTitleInput {
+input SetPostNameInput {
   id: ID!
-  title: String!
+  name: String!
 }
 
-type SetPageTitleErrors {
-  title: Max140CharsError
+type SetPostNameErrors {
+  name: Max140CharsError
 }
 
-type SetPageTitlePayload {
-  errors: SetPageTitleErrors
-  page: Page
+type SetPostNamePayload {
+  errors: SetPostNameErrors
+  post: Post
 }
 
 input SetWebNameInput {
@@ -92,13 +92,13 @@ type Mutation {
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
-  setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
+  setPostName(input: SetPostNameInput!): SetPostNamePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
 # Queries do not need inputs nor payloads. They are pretty explicit.
 type Query {
   me: User
-  page(id: ID!): Page
+  post(id: ID!): Post
   web(id: ID!): Web
 }

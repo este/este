@@ -7,7 +7,7 @@ module.exports = {
     'prettier/react',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype'],
+  plugins: ['flowtype', 'relay'],
   settings: {
     'import/resolver': {
       node: { extensions: ['.js', '.mjs'] },
@@ -34,5 +34,12 @@ module.exports = {
     'spaced-comment': ['error', 'always', { markers: ['::', ':'] }], // Flow comments.
     'consistent-return': 0, // Flow checks it.
     'default-case': 0, // Flow checks it.
+    // Must be explicitly enabled.
+    'relay/graphql-syntax': 'error',
+    'relay/compat-uses-vars': 'error',
+    'relay/graphql-naming': 'error',
+    'relay/generated-flow-types': 'error',
+    // TODO: Will be released soon.
+    // 'relay/unused-fields': 'error',
   },
 };

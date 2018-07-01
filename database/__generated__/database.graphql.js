@@ -12,21 +12,15 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     users(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User[]>; 
     webs(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web[]>; 
-    pages(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page[]>; 
-    children(args: { where?: ChildWhereInput, orderBy?: ChildOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child[]>; 
-    elements(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element[]>; 
+    posts(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post[]>; 
     images(args: { where?: ImageWhereInput, orderBy?: ImageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image[]>; 
     user(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     web(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
-    page(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    child(args: { where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
-    element(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
+    post(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post | null>; 
     image(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     usersConnection(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<UserConnection>; 
     websConnection(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<WebConnection>; 
-    pagesConnection(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<PageConnection>; 
-    childrenConnection(args: { where?: ChildWhereInput, orderBy?: ChildOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ChildConnection>; 
-    elementsConnection(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ElementConnection>; 
+    postsConnection(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<PostConnection>; 
     imagesConnection(args: { where?: ImageWhereInput, orderBy?: ImageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ImageConnection>; 
     node(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Node | null>; 
   }
@@ -34,57 +28,41 @@ export interface Query {
 export interface Mutation {
     createUser(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     createWeb(args: { data: WebCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
-    createPage(args: { data: PageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    createChild(args: { data: ChildCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child>; 
-    createElement(args: { data: ElementCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
+    createPost(args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post>; 
     createImage(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image>; 
     updateUser(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     updateWeb(args: { data: WebUpdateInput, where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
-    updatePage(args: { data: PageUpdateInput, where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    updateChild(args: { data: ChildUpdateInput, where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
-    updateElement(args: { data: ElementUpdateInput, where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
+    updatePost(args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post | null>; 
     updateImage(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     deleteUser(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     deleteWeb(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
-    deletePage(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    deleteChild(args: { where: ChildWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child | null>; 
-    deleteElement(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
+    deletePost(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post | null>; 
     deleteImage(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image | null>; 
     upsertUser(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     upsertWeb(args: { where: WebWhereUniqueInput, create: WebCreateInput, update: WebUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
-    upsertPage(args: { where: PageWhereUniqueInput, create: PageCreateInput, update: PageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    upsertChild(args: { where: ChildWhereUniqueInput, create: ChildCreateInput, update: ChildUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Child>; 
-    upsertElement(args: { where: ElementWhereUniqueInput, create: ElementCreateInput, update: ElementUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
+    upsertPost(args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Post>; 
     upsertImage(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Image>; 
     updateManyUsers(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyWebs(args: { data: WebUpdateInput, where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    updateManyPages(args: { data: PageUpdateInput, where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    updateManyChildren(args: { data: ChildUpdateInput, where?: ChildWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    updateManyElements(args: { data: ElementUpdateInput, where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    updateManyPosts(args: { data: PostUpdateInput, where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyImages(args: { data: ImageUpdateInput, where?: ImageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyUsers(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyWebs(args: { where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    deleteManyPages(args: { where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    deleteManyChildren(args: { where?: ChildWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    deleteManyElements(args: { where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    deleteManyPosts(args: { where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyImages(args: { where?: ImageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
   }
 
 export interface Subscription {
     user(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<UserSubscriptionPayload | null>>; 
     web(args: { where?: WebSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<WebSubscriptionPayload | null>>; 
-    page(args: { where?: PageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<PageSubscriptionPayload | null>>; 
-    child(args: { where?: ChildSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ChildSubscriptionPayload | null>>; 
-    element(args: { where?: ElementSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ElementSubscriptionPayload | null>>; 
+    post(args: { where?: PostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<PostSubscriptionPayload | null>>; 
     image(args: { where?: ImageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ImageSubscriptionPayload | null>>; 
   }
 
 export interface Exists {
 User(where?: UserWhereInput): Promise<boolean>;
 Web(where?: WebWhereInput): Promise<boolean>;
-Page(where?: PageWhereInput): Promise<boolean>;
-Child(where?: ChildWhereInput): Promise<boolean>;
-Element(where?: ElementWhereInput): Promise<boolean>;
+Post(where?: PostWhereInput): Promise<boolean>;
 Image(where?: ImageWhereInput): Promise<boolean>;
 }
 
@@ -110,19 +88,11 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateChild {
+const typeDefs = `type AggregateImage {
   count: Int!
 }
 
-type AggregateElement {
-  count: Int!
-}
-
-type AggregateImage {
-  count: Int!
-}
-
-type AggregatePage {
+type AggregatePost {
   count: Int!
 }
 
@@ -139,814 +109,7 @@ type BatchPayload {
   count: Long!
 }
 
-type Child implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
-  parent(where: ElementWhereInput): Element!
-  element(where: ElementWhereInput): Element!
-}
-
-"""A connection to a list of items."""
-type ChildConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ChildEdge]!
-  aggregate: AggregateChild!
-}
-
-input ChildCreateInput {
-  index: Int!
-  parent: ElementCreateOneWithoutChildrenInput!
-  element: ElementCreateOneWithoutParentInput!
-}
-
-input ChildCreateManyWithoutElementInput {
-  create: [ChildCreateWithoutElementInput!]
-  connect: [ChildWhereUniqueInput!]
-}
-
-input ChildCreateManyWithoutParentInput {
-  create: [ChildCreateWithoutParentInput!]
-  connect: [ChildWhereUniqueInput!]
-}
-
-input ChildCreateWithoutElementInput {
-  index: Int!
-  parent: ElementCreateOneWithoutChildrenInput!
-}
-
-input ChildCreateWithoutParentInput {
-  index: Int!
-  element: ElementCreateOneWithoutParentInput!
-}
-
-"""An edge in a connection."""
-type ChildEdge {
-  """The item at the end of the edge."""
-  node: Child!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ChildOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  index_ASC
-  index_DESC
-}
-
-type ChildPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  index: Int!
-}
-
-type ChildSubscriptionPayload {
-  mutation: MutationType!
-  node: Child
-  updatedFields: [String!]
-  previousValues: ChildPreviousValues
-}
-
-input ChildSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChildSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChildSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ChildWhereInput
-}
-
-input ChildUpdateInput {
-  index: Int
-  parent: ElementUpdateOneWithoutChildrenInput
-  element: ElementUpdateOneWithoutParentInput
-}
-
-input ChildUpdateManyWithoutElementInput {
-  create: [ChildCreateWithoutElementInput!]
-  connect: [ChildWhereUniqueInput!]
-  disconnect: [ChildWhereUniqueInput!]
-  delete: [ChildWhereUniqueInput!]
-  update: [ChildUpdateWithWhereUniqueWithoutElementInput!]
-  upsert: [ChildUpsertWithWhereUniqueWithoutElementInput!]
-}
-
-input ChildUpdateManyWithoutParentInput {
-  create: [ChildCreateWithoutParentInput!]
-  connect: [ChildWhereUniqueInput!]
-  disconnect: [ChildWhereUniqueInput!]
-  delete: [ChildWhereUniqueInput!]
-  update: [ChildUpdateWithWhereUniqueWithoutParentInput!]
-  upsert: [ChildUpsertWithWhereUniqueWithoutParentInput!]
-}
-
-input ChildUpdateWithoutElementDataInput {
-  index: Int
-  parent: ElementUpdateOneWithoutChildrenInput
-}
-
-input ChildUpdateWithoutParentDataInput {
-  index: Int
-  element: ElementUpdateOneWithoutParentInput
-}
-
-input ChildUpdateWithWhereUniqueWithoutElementInput {
-  where: ChildWhereUniqueInput!
-  data: ChildUpdateWithoutElementDataInput!
-}
-
-input ChildUpdateWithWhereUniqueWithoutParentInput {
-  where: ChildWhereUniqueInput!
-  data: ChildUpdateWithoutParentDataInput!
-}
-
-input ChildUpsertWithWhereUniqueWithoutElementInput {
-  where: ChildWhereUniqueInput!
-  update: ChildUpdateWithoutElementDataInput!
-  create: ChildCreateWithoutElementInput!
-}
-
-input ChildUpsertWithWhereUniqueWithoutParentInput {
-  where: ChildWhereUniqueInput!
-  update: ChildUpdateWithoutParentDataInput!
-  create: ChildCreateWithoutParentInput!
-}
-
-input ChildWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChildWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChildWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  index: Int
-
-  """All values that are not equal to given value."""
-  index_not: Int
-
-  """All values that are contained in given list."""
-  index_in: [Int!]
-
-  """All values that are not contained in given list."""
-  index_not_in: [Int!]
-
-  """All values less than the given value."""
-  index_lt: Int
-
-  """All values less than or equal the given value."""
-  index_lte: Int
-
-  """All values greater than the given value."""
-  index_gt: Int
-
-  """All values greater than or equal the given value."""
-  index_gte: Int
-  parent: ElementWhereInput
-  element: ElementWhereInput
-}
-
-input ChildWhereUniqueInput {
-  id: ID
-}
-
 scalar DateTime
-
-type Element implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String!
-  image(where: ImageWhereInput): Image
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
-  creator(where: UserWhereInput): User!
-  parent(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child!]
-}
-
-"""A connection to a list of items."""
-type ElementConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ElementEdge]!
-  aggregate: AggregateElement!
-}
-
-input ElementCreateInput {
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
-  creator: UserCreateOneWithoutElementsInput!
-  parent: ChildCreateManyWithoutElementInput
-}
-
-input ElementCreateManyWithoutCreatorInput {
-  create: [ElementCreateWithoutCreatorInput!]
-  connect: [ElementWhereUniqueInput!]
-}
-
-input ElementCreateOneInput {
-  create: ElementCreateInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateOneWithoutChildrenInput {
-  create: ElementCreateWithoutChildrenInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateOneWithoutParentInput {
-  create: ElementCreateWithoutParentInput
-  connect: ElementWhereUniqueInput
-}
-
-input ElementCreateWithoutChildrenInput {
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  creator: UserCreateOneWithoutElementsInput!
-  parent: ChildCreateManyWithoutElementInput
-}
-
-input ElementCreateWithoutCreatorInput {
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
-  parent: ChildCreateManyWithoutElementInput
-}
-
-input ElementCreateWithoutParentInput {
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String
-  image: ImageCreateOneInput
-  children: ChildCreateManyWithoutParentInput
-  creator: UserCreateOneWithoutElementsInput!
-}
-
-"""An edge in a connection."""
-type ElementEdge {
-  """The item at the end of the edge."""
-  node: Element!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ElementOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  name_ASC
-  name_DESC
-  type_ASC
-  type_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
-}
-
-type ElementPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String
-  type: ElementType!
-  text: String
-  textFormat: String!
-}
-
-type ElementSubscriptionPayload {
-  mutation: MutationType!
-  node: Element
-  updatedFields: [String!]
-  previousValues: ElementPreviousValues
-}
-
-input ElementSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ElementSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ElementSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ElementSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ElementWhereInput
-}
-
-enum ElementType {
-  TEXT
-  IMAGE
-  CHILDREN
-}
-
-input ElementUpdateDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
-}
-
-input ElementUpdateInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
-}
-
-input ElementUpdateManyWithoutCreatorInput {
-  create: [ElementCreateWithoutCreatorInput!]
-  connect: [ElementWhereUniqueInput!]
-  disconnect: [ElementWhereUniqueInput!]
-  delete: [ElementWhereUniqueInput!]
-  update: [ElementUpdateWithWhereUniqueWithoutCreatorInput!]
-  upsert: [ElementUpsertWithWhereUniqueWithoutCreatorInput!]
-}
-
-input ElementUpdateOneInput {
-  create: ElementCreateInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateDataInput
-  upsert: ElementUpsertNestedInput
-}
-
-input ElementUpdateOneWithoutChildrenInput {
-  create: ElementCreateWithoutChildrenInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateWithoutChildrenDataInput
-  upsert: ElementUpsertWithoutChildrenInput
-}
-
-input ElementUpdateOneWithoutParentInput {
-  create: ElementCreateWithoutParentInput
-  connect: ElementWhereUniqueInput
-  delete: Boolean
-  update: ElementUpdateWithoutParentDataInput
-  upsert: ElementUpsertWithoutParentInput
-}
-
-input ElementUpdateWithoutChildrenDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  creator: UserUpdateOneWithoutElementsInput
-  parent: ChildUpdateManyWithoutElementInput
-}
-
-input ElementUpdateWithoutCreatorDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  parent: ChildUpdateManyWithoutElementInput
-}
-
-input ElementUpdateWithoutParentDataInput {
-  name: String
-  type: ElementType
-  text: String
-  textFormat: String
-  image: ImageUpdateOneInput
-  children: ChildUpdateManyWithoutParentInput
-  creator: UserUpdateOneWithoutElementsInput
-}
-
-input ElementUpdateWithWhereUniqueWithoutCreatorInput {
-  where: ElementWhereUniqueInput!
-  data: ElementUpdateWithoutCreatorDataInput!
-}
-
-input ElementUpsertNestedInput {
-  update: ElementUpdateDataInput!
-  create: ElementCreateInput!
-}
-
-input ElementUpsertWithoutChildrenInput {
-  update: ElementUpdateWithoutChildrenDataInput!
-  create: ElementCreateWithoutChildrenInput!
-}
-
-input ElementUpsertWithoutParentInput {
-  update: ElementUpdateWithoutParentDataInput!
-  create: ElementCreateWithoutParentInput!
-}
-
-input ElementUpsertWithWhereUniqueWithoutCreatorInput {
-  where: ElementWhereUniqueInput!
-  update: ElementUpdateWithoutCreatorDataInput!
-  create: ElementCreateWithoutCreatorInput!
-}
-
-input ElementWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ElementWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ElementWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ElementWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
-
-  """All values that are not equal to given value."""
-  textFormat_not: String
-
-  """All values that are contained in given list."""
-  textFormat_in: [String!]
-
-  """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
-
-  """All values less than the given value."""
-  textFormat_lt: String
-
-  """All values less than or equal the given value."""
-  textFormat_lte: String
-
-  """All values greater than the given value."""
-  textFormat_gt: String
-
-  """All values greater than or equal the given value."""
-  textFormat_gte: String
-
-  """All values containing the given string."""
-  textFormat_contains: String
-
-  """All values not containing the given string."""
-  textFormat_not_contains: String
-
-  """All values starting with the given string."""
-  textFormat_starts_with: String
-
-  """All values not starting with the given string."""
-  textFormat_not_starts_with: String
-
-  """All values ending with the given string."""
-  textFormat_ends_with: String
-
-  """All values not ending with the given string."""
-  textFormat_not_ends_with: String
-  image: ImageWhereInput
-  children_every: ChildWhereInput
-  children_some: ChildWhereInput
-  children_none: ChildWhereInput
-  creator: UserWhereInput
-  parent_every: ChildWhereInput
-  parent_some: ChildWhereInput
-  parent_none: ChildWhereInput
-  _MagicalBackRelation_ElementToPage_every: PageWhereInput
-  _MagicalBackRelation_ElementToPage_some: PageWhereInput
-  _MagicalBackRelation_ElementToPage_none: PageWhereInput
-}
-
-input ElementWhereUniqueInput {
-  id: ID
-}
 
 type Image implements Node {
   id: ID!
@@ -1295,9 +458,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  _MagicalBackRelation_ElementToImage_every: ElementWhereInput
-  _MagicalBackRelation_ElementToImage_some: ElementWhereInput
-  _MagicalBackRelation_ElementToImage_none: ElementWhereInput
+  _MagicalBackRelation_ImageToPost_every: PostWhereInput
+  _MagicalBackRelation_ImageToPost_some: PostWhereInput
+  _MagicalBackRelation_ImageToPost_none: PostWhereInput
 }
 
 input ImageWhereUniqueInput {
@@ -1313,39 +476,27 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
-  createPage(data: PageCreateInput!): Page!
-  createChild(data: ChildCreateInput!): Child!
-  createElement(data: ElementCreateInput!): Element!
+  createPost(data: PostCreateInput!): Post!
   createImage(data: ImageCreateInput!): Image!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
-  updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateChild(data: ChildUpdateInput!, where: ChildWhereUniqueInput!): Child
-  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
-  deletePage(where: PageWhereUniqueInput!): Page
-  deleteChild(where: ChildWhereUniqueInput!): Child
-  deleteElement(where: ElementWhereUniqueInput!): Element
+  deletePost(where: PostWhereUniqueInput!): Post
   deleteImage(where: ImageWhereUniqueInput!): Image
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
-  upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertChild(where: ChildWhereUniqueInput!, create: ChildCreateInput!, update: ChildUpdateInput!): Child!
-  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
+  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
-  updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyChildren(data: ChildUpdateInput!, where: ChildWhereInput): BatchPayload!
-  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
+  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
-  deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyChildren(where: ChildWhereInput): BatchPayload!
-  deleteManyElements(where: ElementWhereInput): BatchPayload!
+  deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
 }
 
@@ -1359,64 +510,6 @@ enum MutationType {
 interface Node {
   """The id of the object."""
   id: ID!
-}
-
-type Page implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  creator(where: UserWhereInput): User!
-  web(where: WebWhereInput): Web!
-  element(where: ElementWhereInput): Element!
-}
-
-"""A connection to a list of items."""
-type PageConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [PageEdge]!
-  aggregate: AggregatePage!
-}
-
-input PageCreateInput {
-  title: String!
-  creator: UserCreateOneWithoutPagesInput!
-  web: WebCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
-}
-
-input PageCreateManyWithoutCreatorInput {
-  create: [PageCreateWithoutCreatorInput!]
-  connect: [PageWhereUniqueInput!]
-}
-
-input PageCreateManyWithoutWebInput {
-  create: [PageCreateWithoutWebInput!]
-  connect: [PageWhereUniqueInput!]
-}
-
-input PageCreateWithoutCreatorInput {
-  title: String!
-  web: WebCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
-}
-
-input PageCreateWithoutWebInput {
-  title: String!
-  creator: UserCreateOneWithoutPagesInput!
-  element: ElementCreateOneInput!
-}
-
-"""An edge in a connection."""
-type PageEdge {
-  """The item at the end of the edge."""
-  node: Page!
-
-  """A cursor for use in pagination."""
-  cursor: String!
 }
 
 """Information about pagination in a connection."""
@@ -1434,40 +527,176 @@ type PageInfo {
   endCursor: String
 }
 
-enum PageOrderByInput {
+type Post implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator(where: UserWhereInput): User!
+  name: String
+  web(where: WebWhereInput): Web!
+  parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  contentType: PostContentType
+  contentChildren(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String!
+  contentImage(where: ImageWhereInput): Image
+}
+
+"""A connection to a list of items."""
+type PostConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PostEdge]!
+  aggregate: AggregatePost!
+}
+
+enum PostContentType {
+  CHILDREN
+  TEXT
+  IMAGE
+}
+
+input PostCreatecontentChildrenOrderInput {
+  set: [ID!]
+}
+
+input PostCreateInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  creator: UserCreateOneWithoutPostsInput!
+  web: WebCreateOneWithoutPostsInput!
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
+}
+
+input PostCreateManyWithoutContentChildrenInput {
+  create: [PostCreateWithoutContentChildrenInput!]
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateManyWithoutCreatorInput {
+  create: [PostCreateWithoutCreatorInput!]
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateManyWithoutParentsInput {
+  create: [PostCreateWithoutParentsInput!]
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateManyWithoutWebInput {
+  create: [PostCreateWithoutWebInput!]
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateWithoutContentChildrenInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  creator: UserCreateOneWithoutPostsInput!
+  web: WebCreateOneWithoutPostsInput!
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentImage: ImageCreateOneInput
+}
+
+input PostCreateWithoutCreatorInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  web: WebCreateOneWithoutPostsInput!
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
+}
+
+input PostCreateWithoutParentsInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  creator: UserCreateOneWithoutPostsInput!
+  web: WebCreateOneWithoutPostsInput!
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
+}
+
+input PostCreateWithoutWebInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  creator: UserCreateOneWithoutPostsInput!
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
+}
+
+"""An edge in a connection."""
+type PostEdge {
+  """The item at the end of the edge."""
+  node: Post!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PostOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  title_ASC
-  title_DESC
+  name_ASC
+  name_DESC
+  contentType_ASC
+  contentType_DESC
+  contentText_ASC
+  contentText_DESC
+  contentTextFormat_ASC
+  contentTextFormat_DESC
 }
 
-type PagePreviousValues {
+type PostPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  title: String!
+  name: String
+  contentType: PostContentType
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String!
 }
 
-type PageSubscriptionPayload {
+type PostSubscriptionPayload {
   mutation: MutationType!
-  node: Page
+  node: Post
   updatedFields: [String!]
-  previousValues: PagePreviousValues
+  previousValues: PostPreviousValues
 }
 
-input PageSubscriptionWhereInput {
+input PostSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [PageSubscriptionWhereInput!]
+  AND: [PostSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PageSubscriptionWhereInput!]
+  OR: [PostSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PageSubscriptionWhereInput!]
+  NOT: [PostSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1488,77 +717,163 @@ input PageSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: PageWhereInput
+  node: PostWhereInput
 }
 
-input PageUpdateInput {
-  title: String
-  creator: UserUpdateOneWithoutPagesInput
-  web: WebUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+input PostUpdatecontentChildrenOrderInput {
+  set: [ID!]
 }
 
-input PageUpdateManyWithoutCreatorInput {
-  create: [PageCreateWithoutCreatorInput!]
-  connect: [PageWhereUniqueInput!]
-  disconnect: [PageWhereUniqueInput!]
-  delete: [PageWhereUniqueInput!]
-  update: [PageUpdateWithWhereUniqueWithoutCreatorInput!]
-  upsert: [PageUpsertWithWhereUniqueWithoutCreatorInput!]
+input PostUpdateInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  creator: UserUpdateOneWithoutPostsInput
+  web: WebUpdateOneWithoutPostsInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PageUpdateManyWithoutWebInput {
-  create: [PageCreateWithoutWebInput!]
-  connect: [PageWhereUniqueInput!]
-  disconnect: [PageWhereUniqueInput!]
-  delete: [PageWhereUniqueInput!]
-  update: [PageUpdateWithWhereUniqueWithoutWebInput!]
-  upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
+input PostUpdateManyWithoutContentChildrenInput {
+  create: [PostCreateWithoutContentChildrenInput!]
+  connect: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutContentChildrenInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutContentChildrenInput!]
 }
 
-input PageUpdateWithoutCreatorDataInput {
-  title: String
-  web: WebUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+input PostUpdateManyWithoutCreatorInput {
+  create: [PostCreateWithoutCreatorInput!]
+  connect: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input PageUpdateWithoutWebDataInput {
-  title: String
-  creator: UserUpdateOneWithoutPagesInput
-  element: ElementUpdateOneInput
+input PostUpdateManyWithoutParentsInput {
+  create: [PostCreateWithoutParentsInput!]
+  connect: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutParentsInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutParentsInput!]
 }
 
-input PageUpdateWithWhereUniqueWithoutCreatorInput {
-  where: PageWhereUniqueInput!
-  data: PageUpdateWithoutCreatorDataInput!
+input PostUpdateManyWithoutWebInput {
+  create: [PostCreateWithoutWebInput!]
+  connect: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input PageUpdateWithWhereUniqueWithoutWebInput {
-  where: PageWhereUniqueInput!
-  data: PageUpdateWithoutWebDataInput!
+input PostUpdateWithoutContentChildrenDataInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  creator: UserUpdateOneWithoutPostsInput
+  web: WebUpdateOneWithoutPostsInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PageUpsertWithWhereUniqueWithoutCreatorInput {
-  where: PageWhereUniqueInput!
-  update: PageUpdateWithoutCreatorDataInput!
-  create: PageCreateWithoutCreatorInput!
+input PostUpdateWithoutCreatorDataInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  web: WebUpdateOneWithoutPostsInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PageUpsertWithWhereUniqueWithoutWebInput {
-  where: PageWhereUniqueInput!
-  update: PageUpdateWithoutWebDataInput!
-  create: PageCreateWithoutWebInput!
+input PostUpdateWithoutParentsDataInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  creator: UserUpdateOneWithoutPostsInput
+  web: WebUpdateOneWithoutPostsInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PageWhereInput {
+input PostUpdateWithoutWebDataInput {
+  name: String
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  creator: UserUpdateOneWithoutPostsInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
+}
+
+input PostUpdateWithWhereUniqueWithoutContentChildrenInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutContentChildrenDataInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutCreatorInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutCreatorDataInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutParentsInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutParentsDataInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutWebInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutWebDataInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutContentChildrenInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutContentChildrenDataInput!
+  create: PostCreateWithoutContentChildrenInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutCreatorInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutCreatorDataInput!
+  create: PostCreateWithoutCreatorInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutParentsInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutParentsDataInput!
+  create: PostCreateWithoutParentsInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutWebInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutWebDataInput!
+  create: PostCreateWithoutWebInput!
+}
+
+input PostWhereInput {
   """Logical AND on all given filters."""
-  AND: [PageWhereInput!]
+  AND: [PostWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PageWhereInput!]
+  OR: [PostWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PageWhereInput!]
+  NOT: [PostWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1643,73 +958,163 @@ input PageWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  title: String
+  name: String
 
   """All values that are not equal to given value."""
-  title_not: String
+  name_not: String
 
   """All values that are contained in given list."""
-  title_in: [String!]
+  name_in: [String!]
 
   """All values that are not contained in given list."""
-  title_not_in: [String!]
+  name_not_in: [String!]
 
   """All values less than the given value."""
-  title_lt: String
+  name_lt: String
 
   """All values less than or equal the given value."""
-  title_lte: String
+  name_lte: String
 
   """All values greater than the given value."""
-  title_gt: String
+  name_gt: String
 
   """All values greater than or equal the given value."""
-  title_gte: String
+  name_gte: String
 
   """All values containing the given string."""
-  title_contains: String
+  name_contains: String
 
   """All values not containing the given string."""
-  title_not_contains: String
+  name_not_contains: String
 
   """All values starting with the given string."""
-  title_starts_with: String
+  name_starts_with: String
 
   """All values not starting with the given string."""
-  title_not_starts_with: String
+  name_not_starts_with: String
 
   """All values ending with the given string."""
-  title_ends_with: String
+  name_ends_with: String
 
   """All values not ending with the given string."""
-  title_not_ends_with: String
+  name_not_ends_with: String
+  contentType: PostContentType
+
+  """All values that are not equal to given value."""
+  contentType_not: PostContentType
+
+  """All values that are contained in given list."""
+  contentType_in: [PostContentType!]
+
+  """All values that are not contained in given list."""
+  contentType_not_in: [PostContentType!]
+  contentText: String
+
+  """All values that are not equal to given value."""
+  contentText_not: String
+
+  """All values that are contained in given list."""
+  contentText_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentText_not_in: [String!]
+
+  """All values less than the given value."""
+  contentText_lt: String
+
+  """All values less than or equal the given value."""
+  contentText_lte: String
+
+  """All values greater than the given value."""
+  contentText_gt: String
+
+  """All values greater than or equal the given value."""
+  contentText_gte: String
+
+  """All values containing the given string."""
+  contentText_contains: String
+
+  """All values not containing the given string."""
+  contentText_not_contains: String
+
+  """All values starting with the given string."""
+  contentText_starts_with: String
+
+  """All values not starting with the given string."""
+  contentText_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentText_ends_with: String
+
+  """All values not ending with the given string."""
+  contentText_not_ends_with: String
+  contentTextFormat: String
+
+  """All values that are not equal to given value."""
+  contentTextFormat_not: String
+
+  """All values that are contained in given list."""
+  contentTextFormat_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentTextFormat_not_in: [String!]
+
+  """All values less than the given value."""
+  contentTextFormat_lt: String
+
+  """All values less than or equal the given value."""
+  contentTextFormat_lte: String
+
+  """All values greater than the given value."""
+  contentTextFormat_gt: String
+
+  """All values greater than or equal the given value."""
+  contentTextFormat_gte: String
+
+  """All values containing the given string."""
+  contentTextFormat_contains: String
+
+  """All values not containing the given string."""
+  contentTextFormat_not_contains: String
+
+  """All values starting with the given string."""
+  contentTextFormat_starts_with: String
+
+  """All values not starting with the given string."""
+  contentTextFormat_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentTextFormat_ends_with: String
+
+  """All values not ending with the given string."""
+  contentTextFormat_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  element: ElementWhereInput
+  parents_every: PostWhereInput
+  parents_some: PostWhereInput
+  parents_none: PostWhereInput
+  contentChildren_every: PostWhereInput
+  contentChildren_some: PostWhereInput
+  contentChildren_none: PostWhereInput
+  contentImage: ImageWhereInput
 }
 
-input PageWhereUniqueInput {
+input PostWhereUniqueInput {
   id: ID
 }
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  children(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Child]!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
-  page(where: PageWhereUniqueInput!): Page
-  child(where: ChildWhereUniqueInput!): Child
-  element(where: ElementWhereUniqueInput!): Element
+  post(where: PostWhereUniqueInput!): Post
   image(where: ImageWhereUniqueInput!): Image
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
-  pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  childrenConnection(where: ChildWhereInput, orderBy: ChildOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChildConnection!
-  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
+  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
 
   """Fetches an object given its ID"""
@@ -1722,9 +1127,7 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
-  page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  child(where: ChildSubscriptionWhereInput): ChildSubscriptionPayload
-  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
+  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
 }
 
@@ -1736,8 +1139,7 @@ type User implements Node {
   password: String!
   themeName: String
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
@@ -1756,14 +1158,8 @@ input UserCreateInput {
   password: String!
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
-  pages: PageCreateManyWithoutCreatorInput
-  elements: ElementCreateManyWithoutCreatorInput
+  posts: PostCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
-}
-
-input UserCreateOneWithoutElementsInput {
-  create: UserCreateWithoutElementsInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutImagesInput {
@@ -1771,8 +1167,8 @@ input UserCreateOneWithoutImagesInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutPagesInput {
-  create: UserCreateWithoutPagesInput
+input UserCreateOneWithoutPostsInput {
+  create: UserCreateWithoutPostsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1781,30 +1177,19 @@ input UserCreateOneWithoutWebsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutElementsInput {
-  email: String!
-  password: String!
-  themeName: String
-  webs: WebCreateManyWithoutCreatorInput
-  pages: PageCreateManyWithoutCreatorInput
-  images: ImageCreateManyWithoutCreatorInput
-}
-
 input UserCreateWithoutImagesInput {
   email: String!
   password: String!
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
-  pages: PageCreateManyWithoutCreatorInput
-  elements: ElementCreateManyWithoutCreatorInput
+  posts: PostCreateManyWithoutCreatorInput
 }
 
-input UserCreateWithoutPagesInput {
+input UserCreateWithoutPostsInput {
   email: String!
   password: String!
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
-  elements: ElementCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
 
@@ -1812,8 +1197,7 @@ input UserCreateWithoutWebsInput {
   email: String!
   password: String!
   themeName: String
-  pages: PageCreateManyWithoutCreatorInput
-  elements: ElementCreateManyWithoutCreatorInput
+  posts: PostCreateManyWithoutCreatorInput
   images: ImageCreateManyWithoutCreatorInput
 }
 
@@ -1894,17 +1278,8 @@ input UserUpdateInput {
   password: String
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
-  pages: PageUpdateManyWithoutCreatorInput
-  elements: ElementUpdateManyWithoutCreatorInput
+  posts: PostUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
-}
-
-input UserUpdateOneWithoutElementsInput {
-  create: UserCreateWithoutElementsInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateWithoutElementsDataInput
-  upsert: UserUpsertWithoutElementsInput
 }
 
 input UserUpdateOneWithoutImagesInput {
@@ -1915,12 +1290,12 @@ input UserUpdateOneWithoutImagesInput {
   upsert: UserUpsertWithoutImagesInput
 }
 
-input UserUpdateOneWithoutPagesInput {
-  create: UserCreateWithoutPagesInput
+input UserUpdateOneWithoutPostsInput {
+  create: UserCreateWithoutPostsInput
   connect: UserWhereUniqueInput
   delete: Boolean
-  update: UserUpdateWithoutPagesDataInput
-  upsert: UserUpsertWithoutPagesInput
+  update: UserUpdateWithoutPostsDataInput
+  upsert: UserUpsertWithoutPostsInput
 }
 
 input UserUpdateOneWithoutWebsInput {
@@ -1931,30 +1306,19 @@ input UserUpdateOneWithoutWebsInput {
   upsert: UserUpsertWithoutWebsInput
 }
 
-input UserUpdateWithoutElementsDataInput {
-  email: String
-  password: String
-  themeName: String
-  webs: WebUpdateManyWithoutCreatorInput
-  pages: PageUpdateManyWithoutCreatorInput
-  images: ImageUpdateManyWithoutCreatorInput
-}
-
 input UserUpdateWithoutImagesDataInput {
   email: String
   password: String
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
-  pages: PageUpdateManyWithoutCreatorInput
-  elements: ElementUpdateManyWithoutCreatorInput
+  posts: PostUpdateManyWithoutCreatorInput
 }
 
-input UserUpdateWithoutPagesDataInput {
+input UserUpdateWithoutPostsDataInput {
   email: String
   password: String
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
-  elements: ElementUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
 }
 
@@ -1962,14 +1326,8 @@ input UserUpdateWithoutWebsDataInput {
   email: String
   password: String
   themeName: String
-  pages: PageUpdateManyWithoutCreatorInput
-  elements: ElementUpdateManyWithoutCreatorInput
+  posts: PostUpdateManyWithoutCreatorInput
   images: ImageUpdateManyWithoutCreatorInput
-}
-
-input UserUpsertWithoutElementsInput {
-  update: UserUpdateWithoutElementsDataInput!
-  create: UserCreateWithoutElementsInput!
 }
 
 input UserUpsertWithoutImagesInput {
@@ -1977,9 +1335,9 @@ input UserUpsertWithoutImagesInput {
   create: UserCreateWithoutImagesInput!
 }
 
-input UserUpsertWithoutPagesInput {
-  update: UserUpdateWithoutPagesDataInput!
-  create: UserCreateWithoutPagesInput!
+input UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput!
+  create: UserCreateWithoutPostsInput!
 }
 
 input UserUpsertWithoutWebsInput {
@@ -2203,12 +1561,9 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  posts_every: PostWhereInput
+  posts_some: PostWhereInput
+  posts_none: PostWhereInput
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -2223,9 +1578,9 @@ type Web implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String!
   creator(where: UserWhereInput): User!
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  name: String!
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
 """A connection to a list of items."""
@@ -2241,7 +1596,7 @@ type WebConnection {
 input WebCreateInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
-  pages: PageCreateManyWithoutWebInput
+  posts: PostCreateManyWithoutWebInput
 }
 
 input WebCreateManyWithoutCreatorInput {
@@ -2249,17 +1604,17 @@ input WebCreateManyWithoutCreatorInput {
   connect: [WebWhereUniqueInput!]
 }
 
-input WebCreateOneWithoutPagesInput {
-  create: WebCreateWithoutPagesInput
+input WebCreateOneWithoutPostsInput {
+  create: WebCreateWithoutPostsInput
   connect: WebWhereUniqueInput
 }
 
 input WebCreateWithoutCreatorInput {
   name: String!
-  pages: PageCreateManyWithoutWebInput
+  posts: PostCreateManyWithoutWebInput
 }
 
-input WebCreateWithoutPagesInput {
+input WebCreateWithoutPostsInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
 }
@@ -2333,7 +1688,7 @@ input WebSubscriptionWhereInput {
 input WebUpdateInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
-  pages: PageUpdateManyWithoutWebInput
+  posts: PostUpdateManyWithoutWebInput
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -2345,20 +1700,20 @@ input WebUpdateManyWithoutCreatorInput {
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input WebUpdateOneWithoutPagesInput {
-  create: WebCreateWithoutPagesInput
+input WebUpdateOneWithoutPostsInput {
+  create: WebCreateWithoutPostsInput
   connect: WebWhereUniqueInput
   delete: Boolean
-  update: WebUpdateWithoutPagesDataInput
-  upsert: WebUpsertWithoutPagesInput
+  update: WebUpdateWithoutPostsDataInput
+  upsert: WebUpsertWithoutPostsInput
 }
 
 input WebUpdateWithoutCreatorDataInput {
   name: String
-  pages: PageUpdateManyWithoutWebInput
+  posts: PostUpdateManyWithoutWebInput
 }
 
-input WebUpdateWithoutPagesDataInput {
+input WebUpdateWithoutPostsDataInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
 }
@@ -2368,9 +1723,9 @@ input WebUpdateWithWhereUniqueWithoutCreatorInput {
   data: WebUpdateWithoutCreatorDataInput!
 }
 
-input WebUpsertWithoutPagesInput {
-  update: WebUpdateWithoutPagesDataInput!
-  create: WebCreateWithoutPagesInput!
+input WebUpsertWithoutPostsInput {
+  update: WebUpdateWithoutPostsDataInput!
+  create: WebCreateWithoutPostsInput!
 }
 
 input WebUpsertWithWhereUniqueWithoutCreatorInput {
@@ -2513,9 +1868,9 @@ input WebWhereInput {
   """All values not ending with the given string."""
   name_not_ends_with: String
   creator: UserWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
+  posts_every: PostWhereInput
+  posts_some: PostWhereInput
+  posts_none: PostWhereInput
 }
 
 input WebWhereUniqueInput {
@@ -2544,6 +1899,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'themeName_DESC'
   
 
+ export type PostContentType =
+    | 'CHILDREN'
+    | 'TEXT'
+    | 'IMAGE'
+  
+
  export type WebOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
@@ -2555,35 +1916,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'name_DESC'
   
 
- export type ElementType =
-    | 'TEXT'
-    | 'IMAGE'
-    | 'CHILDREN'
-  
-
- export type PageOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'title_ASC'
-    | 'title_DESC'
-  
-
- export type ChildOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'index_ASC'
-    | 'index_DESC'
-  
-
- export type ElementOrderByInput =
+ export type PostOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
     | 'createdAt_ASC'
@@ -2592,12 +1925,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'text_ASC'
-    | 'text_DESC'
-    | 'textFormat_ASC'
-    | 'textFormat_DESC'
+    | 'contentType_ASC'
+    | 'contentType_DESC'
+    | 'contentText_ASC'
+    | 'contentText_DESC'
+    | 'contentTextFormat_ASC'
+    | 'contentTextFormat_DESC'
   
 
  export type ImageOrderByInput =
@@ -2621,11 +1954,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'DELETED'
   
 
- export type PageCreateInput = {| 
-  title: String,
-  creator: UserCreateOneWithoutPagesInput,
-  web: WebCreateOneWithoutPagesInput,
-  element: ElementCreateOneInput
+ export type WebCreateInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  posts?: PostCreateManyWithoutWebInput
 |}
 
  export type UserWhereInput = {| 
@@ -2707,150 +2039,63 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   webs_every?: WebWhereInput,
   webs_some?: WebWhereInput,
   webs_none?: WebWhereInput,
-  pages_every?: PageWhereInput,
-  pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput,
+  posts_every?: PostWhereInput,
+  posts_some?: PostWhereInput,
+  posts_none?: PostWhereInput,
   images_every?: ImageWhereInput,
   images_some?: ImageWhereInput,
   images_none?: ImageWhereInput
 |}
 
- export type WebUpdateWithoutCreatorDataInput = {| 
+ export type WebCreateWithoutPostsInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput
+|}
+
+ export type PostUpdateWithoutParentsDataInput = {| 
   name?: String,
-  pages?: PageUpdateManyWithoutWebInput
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  creator?: UserUpdateOneWithoutPostsInput,
+  web?: WebUpdateOneWithoutPostsInput,
+  contentChildren?: PostUpdateManyWithoutParentsInput,
+  contentImage?: ImageUpdateOneInput
 |}
 
- export type ChildWhereInput = {| 
-  AND?: Array< ChildWhereInput > | ChildWhereInput,
-  OR?: Array< ChildWhereInput > | ChildWhereInput,
-  NOT?: Array< ChildWhereInput > | ChildWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  index?: Int,
-  index_not?: Int,
-  index_in?: Array< Int > | Int,
-  index_not_in?: Array< Int > | Int,
-  index_lt?: Int,
-  index_lte?: Int,
-  index_gt?: Int,
-  index_gte?: Int,
-  parent?: ElementWhereInput,
-  element?: ElementWhereInput
+ export type UserCreateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type ImageCreateManyWithoutCreatorInput = {| 
-  create?: Array< ImageCreateWithoutCreatorInput > | ImageCreateWithoutCreatorInput,
-  connect?: Array< ImageWhereUniqueInput > | ImageWhereUniqueInput
+ export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: WebWhereUniqueInput,
+  data: WebUpdateWithoutCreatorDataInput
 |}
 
- export type UserUpsertWithoutElementsInput = {| 
-  update: UserUpdateWithoutElementsDataInput,
-  create: UserCreateWithoutElementsInput
+ export type UserCreateWithoutWebsInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  posts?: PostCreateManyWithoutCreatorInput,
+  images?: ImageCreateManyWithoutCreatorInput
 |}
 
- export type ImageCreateWithoutCreatorInput = {| 
-  src: String,
-  width: Int,
-  height: Int
-|}
-
- export type PageUpdateManyWithoutWebInput = {| 
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  update?: Array< PageUpdateWithWhereUniqueWithoutWebInput > | PageUpdateWithWhereUniqueWithoutWebInput,
-  upsert?: Array< PageUpsertWithWhereUniqueWithoutWebInput > | PageUpsertWithWhereUniqueWithoutWebInput
-|}
-
- export type ElementCreateOneInput = {| 
-  create?: ElementCreateInput,
-  connect?: ElementWhereUniqueInput
-|}
-
- export type ImageSubscriptionWhereInput = {| 
-  AND?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
-  OR?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
-  NOT?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
+ export type PostSubscriptionWhereInput = {| 
+  AND?: Array< PostSubscriptionWhereInput > | PostSubscriptionWhereInput,
+  OR?: Array< PostSubscriptionWhereInput > | PostSubscriptionWhereInput,
+  NOT?: Array< PostSubscriptionWhereInput > | PostSubscriptionWhereInput,
   mutation_in?: Array< MutationType > | MutationType,
   updatedFields_contains?: String,
   updatedFields_contains_every?: Array< String > | String,
   updatedFields_contains_some?: Array< String > | String,
-  node?: ImageWhereInput
+  node?: PostWhereInput
 |}
 
- export type ElementCreateInput = {| 
-  name?: String,
-  type: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageCreateOneInput,
-  children?: ChildCreateManyWithoutParentInput,
-  creator: UserCreateOneWithoutElementsInput,
-  parent?: ChildCreateManyWithoutElementInput
-|}
-
- export type ElementSubscriptionWhereInput = {| 
-  AND?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
-  OR?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
-  NOT?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
-  mutation_in?: Array< MutationType > | MutationType,
-  updatedFields_contains?: String,
-  updatedFields_contains_every?: Array< String > | String,
-  updatedFields_contains_some?: Array< String > | String,
-  node?: ElementWhereInput
-|}
-
- export type ChildCreateManyWithoutParentInput = {| 
-  create?: Array< ChildCreateWithoutParentInput > | ChildCreateWithoutParentInput,
-  connect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput
-|}
-
- export type PageSubscriptionWhereInput = {| 
-  AND?: Array< PageSubscriptionWhereInput > | PageSubscriptionWhereInput,
-  OR?: Array< PageSubscriptionWhereInput > | PageSubscriptionWhereInput,
-  NOT?: Array< PageSubscriptionWhereInput > | PageSubscriptionWhereInput,
-  mutation_in?: Array< MutationType > | MutationType,
-  updatedFields_contains?: String,
-  updatedFields_contains_every?: Array< String > | String,
-  updatedFields_contains_some?: Array< String > | String,
-  node?: PageWhereInput
-|}
-
- export type ChildCreateWithoutParentInput = {| 
-  index: Int,
-  element: ElementCreateOneWithoutParentInput
+ export type PostCreateManyWithoutCreatorInput = {| 
+  create?: Array< PostCreateWithoutCreatorInput > | PostCreateWithoutCreatorInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput
 |}
 
  export type WebSubscriptionWhereInput = {| 
@@ -2864,116 +2109,105 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   node?: WebWhereInput
 |}
 
- export type ElementCreateOneWithoutParentInput = {| 
-  create?: ElementCreateWithoutParentInput,
-  connect?: ElementWhereUniqueInput
-|}
-
- export type UserSubscriptionWhereInput = {| 
-  AND?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
-  OR?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
-  NOT?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
-  mutation_in?: Array< MutationType > | MutationType,
-  updatedFields_contains?: String,
-  updatedFields_contains_every?: Array< String > | String,
-  updatedFields_contains_some?: Array< String > | String,
-  node?: UserWhereInput
-|}
-
- export type ElementCreateWithoutParentInput = {| 
+ export type PostCreateWithoutCreatorInput = {| 
   name?: String,
-  type: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageCreateOneInput,
-  children?: ChildCreateManyWithoutParentInput,
-  creator: UserCreateOneWithoutElementsInput
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  web: WebCreateOneWithoutPostsInput,
+  parents?: PostCreateManyWithoutContentChildrenInput,
+  contentChildren?: PostCreateManyWithoutParentsInput,
+  contentImage?: ImageCreateOneInput
+|}
+
+ export type ImageUpdateInput = {| 
+  src?: String,
+  width?: Int,
+  height?: Int,
+  creator?: UserUpdateOneWithoutImagesInput
+|}
+
+ export type PostCreateManyWithoutParentsInput = {| 
+  create?: Array< PostCreateWithoutParentsInput > | PostCreateWithoutParentsInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput
 |}
 
  export type WebWhereUniqueInput = {| 
   id?: ID_Input
 |}
 
- export type UserCreateOneWithoutElementsInput = {| 
-  create?: UserCreateWithoutElementsInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type ChildWhereUniqueInput = {| 
-  id?: ID_Input
-|}
-
- export type UserCreateWithoutElementsInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput,
-  pages?: PageCreateManyWithoutCreatorInput,
-  images?: ImageCreateManyWithoutCreatorInput
+ export type PostCreateWithoutParentsInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  creator: UserCreateOneWithoutPostsInput,
+  web: WebCreateOneWithoutPostsInput,
+  contentChildren?: PostCreateManyWithoutParentsInput,
+  contentImage?: ImageCreateOneInput
 |}
 
  export type ImageWhereUniqueInput = {| 
   id?: ID_Input
 |}
 
- export type ChildCreateManyWithoutElementInput = {| 
-  create?: Array< ChildCreateWithoutElementInput > | ChildCreateWithoutElementInput,
-  connect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput
+ export type ImageCreateOneInput = {| 
+  create?: ImageCreateInput,
+  connect?: ImageWhereUniqueInput
 |}
 
- export type ElementUpdateInput = {| 
+ export type WebUpdateInput = {| 
   name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  children?: ChildUpdateManyWithoutParentInput,
-  creator?: UserUpdateOneWithoutElementsInput,
-  parent?: ChildUpdateManyWithoutElementInput
+  creator?: UserUpdateOneWithoutWebsInput,
+  posts?: PostUpdateManyWithoutWebInput
 |}
 
- export type ChildCreateWithoutElementInput = {| 
-  index: Int,
-  parent: ElementCreateOneWithoutChildrenInput
+ export type ImageCreateInput = {| 
+  src: String,
+  width: Int,
+  height: Int,
+  creator: UserCreateOneWithoutImagesInput
 |}
 
- export type PageUpdateInput = {| 
-  title?: String,
-  creator?: UserUpdateOneWithoutPagesInput,
-  web?: WebUpdateOneWithoutPagesInput,
-  element?: ElementUpdateOneInput
+ export type PostUpsertWithWhereUniqueWithoutWebInput = {| 
+  where: PostWhereUniqueInput,
+  update: PostUpdateWithoutWebDataInput,
+  create: PostCreateWithoutWebInput
 |}
 
- export type ElementCreateOneWithoutChildrenInput = {| 
-  create?: ElementCreateWithoutChildrenInput,
-  connect?: ElementWhereUniqueInput
+ export type UserCreateOneWithoutImagesInput = {| 
+  create?: UserCreateWithoutImagesInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type WebUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: WebWhereUniqueInput,
-  update: WebUpdateWithoutCreatorDataInput,
-  create: WebCreateWithoutCreatorInput
+ export type WebUpsertWithoutPostsInput = {| 
+  update: WebUpdateWithoutPostsDataInput,
+  create: WebCreateWithoutPostsInput
 |}
 
- export type ElementCreateWithoutChildrenInput = {| 
-  name?: String,
-  type: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageCreateOneInput,
-  creator: UserCreateOneWithoutElementsInput,
-  parent?: ChildCreateManyWithoutElementInput
+ export type UserCreateWithoutImagesInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput,
+  posts?: PostCreateManyWithoutCreatorInput
 |}
 
- export type UserUpsertWithoutPagesInput = {| 
-  update: UserUpdateWithoutPagesDataInput,
-  create: UserCreateWithoutPagesInput
+ export type PostUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: PostWhereUniqueInput,
+  update: PostUpdateWithoutCreatorDataInput,
+  create: PostCreateWithoutCreatorInput
 |}
 
- export type WebCreateInput = {| 
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput
+ export type ImageUpdateOneInput = {| 
+  create?: ImageCreateInput,
+  connect?: ImageWhereUniqueInput,
+  disconnect?: Boolean,
+  delete?: Boolean,
+  update?: ImageUpdateDataInput,
+  upsert?: ImageUpsertNestedInput
 |}
 
  export type ImageUpsertNestedInput = {| 
@@ -2981,28 +2215,25 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   create: ImageCreateInput
 |}
 
- export type ChildUpsertWithWhereUniqueWithoutParentInput = {| 
-  where: ChildWhereUniqueInput,
-  update: ChildUpdateWithoutParentDataInput,
-  create: ChildCreateWithoutParentInput
+ export type PostCreateInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  creator: UserCreateOneWithoutPostsInput,
+  web: WebCreateOneWithoutPostsInput,
+  parents?: PostCreateManyWithoutContentChildrenInput,
+  contentChildren?: PostCreateManyWithoutParentsInput,
+  contentImage?: ImageCreateOneInput
 |}
 
- export type PageUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutCreatorDataInput,
-  create: PageCreateWithoutCreatorInput
-|}
-
- export type ChildCreateInput = {| 
-  index: Int,
-  parent: ElementCreateOneWithoutChildrenInput,
-  element: ElementCreateOneWithoutParentInput
-|}
-
- export type ChildUpsertWithWhereUniqueWithoutElementInput = {| 
-  where: ChildWhereUniqueInput,
-  update: ChildUpdateWithoutElementDataInput,
-  create: ChildCreateWithoutElementInput
+ export type UserUpdateWithoutImagesDataInput = {| 
+  email?: String,
+  password?: String,
+  themeName?: String,
+  webs?: WebUpdateManyWithoutCreatorInput,
+  posts?: PostUpdateManyWithoutCreatorInput
 |}
 
  export type UserUpdateInput = {| 
@@ -3010,19 +2241,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   password?: String,
   themeName?: String,
   webs?: WebUpdateManyWithoutCreatorInput,
-  pages?: PageUpdateManyWithoutCreatorInput,
-  elements?: ElementUpdateManyWithoutCreatorInput,
+  posts?: PostUpdateManyWithoutCreatorInput,
   images?: ImageUpdateManyWithoutCreatorInput
 |}
 
- export type ElementUpdateWithoutChildrenDataInput = {| 
-  name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  creator?: UserUpdateOneWithoutElementsInput,
-  parent?: ChildUpdateManyWithoutElementInput
+ export type ImageUpdateDataInput = {| 
+  src?: String,
+  width?: Int,
+  height?: Int,
+  creator?: UserUpdateOneWithoutImagesInput
 |}
 
  export type WebUpdateManyWithoutCreatorInput = {| 
@@ -3034,125 +2261,9 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
 |}
 
- export type ChildUpdateWithoutElementDataInput = {| 
-  index?: Int,
-  parent?: ElementUpdateOneWithoutChildrenInput
-|}
-
- export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: WebWhereUniqueInput,
-  data: WebUpdateWithoutCreatorDataInput
-|}
-
- export type ChildUpdateManyWithoutElementInput = {| 
-  create?: Array< ChildCreateWithoutElementInput > | ChildCreateWithoutElementInput,
-  connect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  disconnect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  delete?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  update?: Array< ChildUpdateWithWhereUniqueWithoutElementInput > | ChildUpdateWithWhereUniqueWithoutElementInput,
-  upsert?: Array< ChildUpsertWithWhereUniqueWithoutElementInput > | ChildUpsertWithWhereUniqueWithoutElementInput
-|}
-
- export type ElementUpsertWithoutParentInput = {| 
-  update: ElementUpdateWithoutParentDataInput,
-  create: ElementCreateWithoutParentInput
-|}
-
  export type WebCreateManyWithoutCreatorInput = {| 
   create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
   connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
-|}
-
- export type PageCreateManyWithoutWebInput = {| 
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
-|}
-
- export type UserCreateOneWithoutPagesInput = {| 
-  create?: UserCreateWithoutPagesInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type PageUpdateWithWhereUniqueWithoutWebInput = {| 
-  where: PageWhereUniqueInput,
-  data: PageUpdateWithoutWebDataInput
-|}
-
- export type ElementCreateManyWithoutCreatorInput = {| 
-  create?: Array< ElementCreateWithoutCreatorInput > | ElementCreateWithoutCreatorInput,
-  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
-|}
-
- export type PageUpdateWithoutWebDataInput = {| 
-  title?: String,
-  creator?: UserUpdateOneWithoutPagesInput,
-  element?: ElementUpdateOneInput
-|}
-
- export type ImageCreateOneInput = {| 
-  create?: ImageCreateInput,
-  connect?: ImageWhereUniqueInput
-|}
-
- export type UserUpdateOneWithoutPagesInput = {| 
-  create?: UserCreateWithoutPagesInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutPagesDataInput,
-  upsert?: UserUpsertWithoutPagesInput
-|}
-
- export type UserCreateOneWithoutImagesInput = {| 
-  create?: UserCreateWithoutImagesInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type UserUpdateWithoutPagesDataInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  webs?: WebUpdateManyWithoutCreatorInput,
-  elements?: ElementUpdateManyWithoutCreatorInput,
-  images?: ImageUpdateManyWithoutCreatorInput
-|}
-
- export type PageCreateManyWithoutCreatorInput = {| 
-  create?: Array< PageCreateWithoutCreatorInput > | PageCreateWithoutCreatorInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
-|}
-
- export type ElementUpdateManyWithoutCreatorInput = {| 
-  create?: Array< ElementCreateWithoutCreatorInput > | ElementCreateWithoutCreatorInput,
-  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
-  disconnect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
-  delete?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
-  update?: Array< ElementUpdateWithWhereUniqueWithoutCreatorInput > | ElementUpdateWithWhereUniqueWithoutCreatorInput,
-  upsert?: Array< ElementUpsertWithWhereUniqueWithoutCreatorInput > | ElementUpsertWithWhereUniqueWithoutCreatorInput
-|}
-
- export type WebCreateOneWithoutPagesInput = {| 
-  create?: WebCreateWithoutPagesInput,
-  connect?: WebWhereUniqueInput
-|}
-
- export type ElementUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: ElementWhereUniqueInput,
-  data: ElementUpdateWithoutCreatorDataInput
-|}
-
- export type UserCreateOneWithoutWebsInput = {| 
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type ElementUpdateWithoutCreatorDataInput = {| 
-  name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  children?: ChildUpdateManyWithoutParentInput,
-  parent?: ChildUpdateManyWithoutElementInput
 |}
 
  export type ImageWhereInput = {| 
@@ -3220,36 +2331,98 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   height_gt?: Int,
   height_gte?: Int,
   creator?: UserWhereInput,
-  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
+  _MagicalBackRelation_ImageToPost_every?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_some?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_none?: PostWhereInput
 |}
 
- export type ImageUpdateOneInput = {| 
-  create?: ImageCreateInput,
-  connect?: ImageWhereUniqueInput,
-  disconnect?: Boolean,
-  delete?: Boolean,
-  update?: ImageUpdateDataInput,
-  upsert?: ImageUpsertNestedInput
+ export type PostCreateManyWithoutWebInput = {| 
+  create?: Array< PostCreateWithoutWebInput > | PostCreateWithoutWebInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput
 |}
 
- export type ChildSubscriptionWhereInput = {| 
-  AND?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
-  OR?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
-  NOT?: Array< ChildSubscriptionWhereInput > | ChildSubscriptionWhereInput,
+ export type WebUpdateWithoutCreatorDataInput = {| 
+  name?: String,
+  posts?: PostUpdateManyWithoutWebInput
+|}
+
+ export type PostCreatecontentChildrenOrderInput = {| 
+  set?: Array< ID_Input > | ID_Input
+|}
+
+ export type PostUpdateManyWithoutWebInput = {| 
+  create?: Array< PostCreateWithoutWebInput > | PostCreateWithoutWebInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  disconnect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  delete?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  update?: Array< PostUpdateWithWhereUniqueWithoutWebInput > | PostUpdateWithWhereUniqueWithoutWebInput,
+  upsert?: Array< PostUpsertWithWhereUniqueWithoutWebInput > | PostUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type UserCreateWithoutPostsInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput,
+  images?: ImageCreateManyWithoutCreatorInput
+|}
+
+ export type PostUpdateWithWhereUniqueWithoutWebInput = {| 
+  where: PostWhereUniqueInput,
+  data: PostUpdateWithoutWebDataInput
+|}
+
+ export type ImageCreateWithoutCreatorInput = {| 
+  src: String,
+  width: Int,
+  height: Int
+|}
+
+ export type PostUpdateWithoutWebDataInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  creator?: UserUpdateOneWithoutPostsInput,
+  parents?: PostUpdateManyWithoutContentChildrenInput,
+  contentChildren?: PostUpdateManyWithoutParentsInput,
+  contentImage?: ImageUpdateOneInput
+|}
+
+ export type PostCreateWithoutContentChildrenInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  creator: UserCreateOneWithoutPostsInput,
+  web: WebCreateOneWithoutPostsInput,
+  parents?: PostCreateManyWithoutContentChildrenInput,
+  contentImage?: ImageCreateOneInput
+|}
+
+ export type PostUpdatecontentChildrenOrderInput = {| 
+  set?: Array< ID_Input > | ID_Input
+|}
+
+ export type ImageSubscriptionWhereInput = {| 
+  AND?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
+  OR?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
+  NOT?: Array< ImageSubscriptionWhereInput > | ImageSubscriptionWhereInput,
   mutation_in?: Array< MutationType > | MutationType,
   updatedFields_contains?: String,
   updatedFields_contains_every?: Array< String > | String,
   updatedFields_contains_some?: Array< String > | String,
-  node?: ChildWhereInput
+  node?: ImageWhereInput
 |}
 
- export type ImageUpdateDataInput = {| 
-  src?: String,
-  width?: Int,
-  height?: Int,
-  creator?: UserUpdateOneWithoutImagesInput
+ export type UserUpdateOneWithoutPostsInput = {| 
+  create?: UserCreateWithoutPostsInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutPostsDataInput,
+  upsert?: UserUpsertWithoutPostsInput
 |}
 
  export type WebWhereInput = {| 
@@ -3301,138 +2474,22 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   name_ends_with?: String,
   name_not_ends_with?: String,
   creator?: UserWhereInput,
-  pages_every?: PageWhereInput,
-  pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput
+  posts_every?: PostWhereInput,
+  posts_some?: PostWhereInput,
+  posts_none?: PostWhereInput
 |}
 
- export type UserUpdateOneWithoutImagesInput = {| 
-  create?: UserCreateWithoutImagesInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutImagesDataInput,
-  upsert?: UserUpsertWithoutImagesInput
-|}
-
- export type PageWhereUniqueInput = {| 
-  id?: ID_Input
-|}
-
- export type UserUpdateWithoutImagesDataInput = {| 
+ export type UserUpdateWithoutPostsDataInput = {| 
   email?: String,
   password?: String,
   themeName?: String,
   webs?: WebUpdateManyWithoutCreatorInput,
-  pages?: PageUpdateManyWithoutCreatorInput,
-  elements?: ElementUpdateManyWithoutCreatorInput
-|}
-
- export type ImageUpdateInput = {| 
-  src?: String,
-  width?: Int,
-  height?: Int,
-  creator?: UserUpdateOneWithoutImagesInput
-|}
-
- export type PageUpdateManyWithoutCreatorInput = {| 
-  create?: Array< PageCreateWithoutCreatorInput > | PageCreateWithoutCreatorInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  update?: Array< PageUpdateWithWhereUniqueWithoutCreatorInput > | PageUpdateWithWhereUniqueWithoutCreatorInput,
-  upsert?: Array< PageUpsertWithWhereUniqueWithoutCreatorInput > | PageUpsertWithWhereUniqueWithoutCreatorInput
-|}
-
- export type WebUpdateInput = {| 
-  name?: String,
-  creator?: UserUpdateOneWithoutWebsInput,
-  pages?: PageUpdateManyWithoutWebInput
-|}
-
- export type PageUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  data: PageUpdateWithoutCreatorDataInput
-|}
-
- export type ElementUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: ElementWhereUniqueInput,
-  update: ElementUpdateWithoutCreatorDataInput,
-  create: ElementCreateWithoutCreatorInput
-|}
-
- export type PageUpdateWithoutCreatorDataInput = {| 
-  title?: String,
-  web?: WebUpdateOneWithoutPagesInput,
-  element?: ElementUpdateOneInput
-|}
-
- export type ElementUpsertNestedInput = {| 
-  update: ElementUpdateDataInput,
-  create: ElementCreateInput
-|}
-
- export type WebUpdateOneWithoutPagesInput = {| 
-  create?: WebCreateWithoutPagesInput,
-  connect?: WebWhereUniqueInput,
-  delete?: Boolean,
-  update?: WebUpdateWithoutPagesDataInput,
-  upsert?: WebUpsertWithoutPagesInput
-|}
-
- export type ElementUpdateOneWithoutChildrenInput = {| 
-  create?: ElementCreateWithoutChildrenInput,
-  connect?: ElementWhereUniqueInput,
-  delete?: Boolean,
-  update?: ElementUpdateWithoutChildrenDataInput,
-  upsert?: ElementUpsertWithoutChildrenInput
-|}
-
- export type WebUpdateWithoutPagesDataInput = {| 
-  name?: String,
-  creator?: UserUpdateOneWithoutWebsInput
-|}
-
- export type UserCreateInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput,
-  pages?: PageCreateManyWithoutCreatorInput,
-  elements?: ElementCreateManyWithoutCreatorInput,
-  images?: ImageCreateManyWithoutCreatorInput
-|}
-
- export type UserUpdateOneWithoutWebsInput = {| 
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutWebsDataInput,
-  upsert?: UserUpsertWithoutWebsInput
-|}
-
- export type PageCreateWithoutWebInput = {| 
-  title: String,
-  creator: UserCreateOneWithoutPagesInput,
-  element: ElementCreateOneInput
-|}
-
- export type UserUpdateWithoutWebsDataInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  pages?: PageUpdateManyWithoutCreatorInput,
-  elements?: ElementUpdateManyWithoutCreatorInput,
   images?: ImageUpdateManyWithoutCreatorInput
 |}
 
- export type ElementCreateWithoutCreatorInput = {| 
-  name?: String,
-  type: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageCreateOneInput,
-  children?: ChildCreateManyWithoutParentInput,
-  parent?: ChildCreateManyWithoutElementInput
+ export type UserWhereUniqueInput = {| 
+  id?: ID_Input,
+  email?: String
 |}
 
  export type ImageUpdateManyWithoutCreatorInput = {| 
@@ -3444,13 +2501,17 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   upsert?: Array< ImageUpsertWithWhereUniqueWithoutCreatorInput > | ImageUpsertWithWhereUniqueWithoutCreatorInput
 |}
 
- export type UserCreateWithoutImagesInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput,
-  pages?: PageCreateManyWithoutCreatorInput,
-  elements?: ElementCreateManyWithoutCreatorInput
+ export type PostUpdateInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  creator?: UserUpdateOneWithoutPostsInput,
+  web?: WebUpdateOneWithoutPostsInput,
+  parents?: PostUpdateManyWithoutContentChildrenInput,
+  contentChildren?: PostUpdateManyWithoutParentsInput,
+  contentImage?: ImageUpdateOneInput
 |}
 
  export type ImageUpdateWithWhereUniqueWithoutCreatorInput = {| 
@@ -3458,9 +2519,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   data: ImageUpdateWithoutCreatorDataInput
 |}
 
- export type WebCreateWithoutPagesInput = {| 
-  name: String,
-  creator: UserCreateOneWithoutWebsInput
+ export type PostUpsertWithWhereUniqueWithoutContentChildrenInput = {| 
+  where: PostWhereUniqueInput,
+  update: PostUpdateWithoutContentChildrenDataInput,
+  create: PostCreateWithoutContentChildrenInput
 |}
 
  export type ImageUpdateWithoutCreatorDataInput = {| 
@@ -3469,10 +2531,76 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   height?: Int
 |}
 
- export type ElementWhereInput = {| 
-  AND?: Array< ElementWhereInput > | ElementWhereInput,
-  OR?: Array< ElementWhereInput > | ElementWhereInput,
-  NOT?: Array< ElementWhereInput > | ElementWhereInput,
+ export type PostUpsertWithWhereUniqueWithoutParentsInput = {| 
+  where: PostWhereUniqueInput,
+  update: PostUpdateWithoutParentsDataInput,
+  create: PostCreateWithoutParentsInput
+|}
+
+ export type ImageUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: ImageWhereUniqueInput,
+  update: ImageUpdateWithoutCreatorDataInput,
+  create: ImageCreateWithoutCreatorInput
+|}
+
+ export type UserUpdateOneWithoutImagesInput = {| 
+  create?: UserCreateWithoutImagesInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutImagesDataInput,
+  upsert?: UserUpsertWithoutImagesInput
+|}
+
+ export type UserUpsertWithoutPostsInput = {| 
+  update: UserUpdateWithoutPostsDataInput,
+  create: UserCreateWithoutPostsInput
+|}
+
+ export type WebCreateWithoutCreatorInput = {| 
+  name: String,
+  posts?: PostCreateManyWithoutWebInput
+|}
+
+ export type PostUpdateManyWithoutContentChildrenInput = {| 
+  create?: Array< PostCreateWithoutContentChildrenInput > | PostCreateWithoutContentChildrenInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  disconnect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  delete?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  update?: Array< PostUpdateWithWhereUniqueWithoutContentChildrenInput > | PostUpdateWithWhereUniqueWithoutContentChildrenInput,
+  upsert?: Array< PostUpsertWithWhereUniqueWithoutContentChildrenInput > | PostUpsertWithWhereUniqueWithoutContentChildrenInput
+|}
+
+ export type UserCreateOneWithoutPostsInput = {| 
+  create?: UserCreateWithoutPostsInput,
+  connect?: UserWhereUniqueInput
+|}
+
+ export type PostUpdateWithWhereUniqueWithoutContentChildrenInput = {| 
+  where: PostWhereUniqueInput,
+  data: PostUpdateWithoutContentChildrenDataInput
+|}
+
+ export type PostCreateManyWithoutContentChildrenInput = {| 
+  create?: Array< PostCreateWithoutContentChildrenInput > | PostCreateWithoutContentChildrenInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput
+|}
+
+ export type PostUpdateWithoutContentChildrenDataInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  creator?: UserUpdateOneWithoutPostsInput,
+  web?: WebUpdateOneWithoutPostsInput,
+  parents?: PostUpdateManyWithoutContentChildrenInput,
+  contentImage?: ImageUpdateOneInput
+|}
+
+ export type PostWhereInput = {| 
+  AND?: Array< PostWhereInput > | PostWhereInput,
+  OR?: Array< PostWhereInput > | PostWhereInput,
+  NOT?: Array< PostWhereInput > | PostWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -3517,60 +2645,64 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   name_not_starts_with?: String,
   name_ends_with?: String,
   name_not_ends_with?: String,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
-  text?: String,
-  text_not?: String,
-  text_in?: Array< String > | String,
-  text_not_in?: Array< String > | String,
-  text_lt?: String,
-  text_lte?: String,
-  text_gt?: String,
-  text_gte?: String,
-  text_contains?: String,
-  text_not_contains?: String,
-  text_starts_with?: String,
-  text_not_starts_with?: String,
-  text_ends_with?: String,
-  text_not_ends_with?: String,
-  textFormat?: String,
-  textFormat_not?: String,
-  textFormat_in?: Array< String > | String,
-  textFormat_not_in?: Array< String > | String,
-  textFormat_lt?: String,
-  textFormat_lte?: String,
-  textFormat_gt?: String,
-  textFormat_gte?: String,
-  textFormat_contains?: String,
-  textFormat_not_contains?: String,
-  textFormat_starts_with?: String,
-  textFormat_not_starts_with?: String,
-  textFormat_ends_with?: String,
-  textFormat_not_ends_with?: String,
-  image?: ImageWhereInput,
-  children_every?: ChildWhereInput,
-  children_some?: ChildWhereInput,
-  children_none?: ChildWhereInput,
+  contentType?: PostContentType,
+  contentType_not?: PostContentType,
+  contentType_in?: Array< PostContentType > | PostContentType,
+  contentType_not_in?: Array< PostContentType > | PostContentType,
+  contentText?: String,
+  contentText_not?: String,
+  contentText_in?: Array< String > | String,
+  contentText_not_in?: Array< String > | String,
+  contentText_lt?: String,
+  contentText_lte?: String,
+  contentText_gt?: String,
+  contentText_gte?: String,
+  contentText_contains?: String,
+  contentText_not_contains?: String,
+  contentText_starts_with?: String,
+  contentText_not_starts_with?: String,
+  contentText_ends_with?: String,
+  contentText_not_ends_with?: String,
+  contentTextFormat?: String,
+  contentTextFormat_not?: String,
+  contentTextFormat_in?: Array< String > | String,
+  contentTextFormat_not_in?: Array< String > | String,
+  contentTextFormat_lt?: String,
+  contentTextFormat_lte?: String,
+  contentTextFormat_gt?: String,
+  contentTextFormat_gte?: String,
+  contentTextFormat_contains?: String,
+  contentTextFormat_not_contains?: String,
+  contentTextFormat_starts_with?: String,
+  contentTextFormat_not_starts_with?: String,
+  contentTextFormat_ends_with?: String,
+  contentTextFormat_not_ends_with?: String,
   creator?: UserWhereInput,
-  parent_every?: ChildWhereInput,
-  parent_some?: ChildWhereInput,
-  parent_none?: ChildWhereInput,
-  _MagicalBackRelation_ElementToPage_every?: PageWhereInput,
-  _MagicalBackRelation_ElementToPage_some?: PageWhereInput,
-  _MagicalBackRelation_ElementToPage_none?: PageWhereInput
+  web?: WebWhereInput,
+  parents_every?: PostWhereInput,
+  parents_some?: PostWhereInput,
+  parents_none?: PostWhereInput,
+  contentChildren_every?: PostWhereInput,
+  contentChildren_some?: PostWhereInput,
+  contentChildren_none?: PostWhereInput,
+  contentImage?: ImageWhereInput
 |}
 
- export type ImageUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: ImageWhereUniqueInput,
-  update: ImageUpdateWithoutCreatorDataInput,
-  create: ImageCreateWithoutCreatorInput
+ export type WebUpdateOneWithoutPostsInput = {| 
+  create?: WebCreateWithoutPostsInput,
+  connect?: WebWhereUniqueInput,
+  delete?: Boolean,
+  update?: WebUpdateWithoutPostsDataInput,
+  upsert?: WebUpsertWithoutPostsInput
 |}
 
- export type UserWhereUniqueInput = {| 
-  id?: ID_Input,
-  email?: String
+ export type PostWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type WebUpdateWithoutPostsDataInput = {| 
+  name?: String,
+  creator?: UserUpdateOneWithoutWebsInput
 |}
 
  export type UserUpsertWithoutWebsInput = {| 
@@ -3578,202 +2710,113 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   create: UserCreateWithoutWebsInput
 |}
 
- export type ChildUpdateInput = {| 
-  index?: Int,
-  parent?: ElementUpdateOneWithoutChildrenInput,
-  element?: ElementUpdateOneWithoutParentInput
+ export type UserUpdateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutWebsDataInput,
+  upsert?: UserUpsertWithoutWebsInput
 |}
 
- export type WebUpsertWithoutPagesInput = {| 
-  update: WebUpdateWithoutPagesDataInput,
-  create: WebCreateWithoutPagesInput
+ export type UserCreateInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput,
+  posts?: PostCreateManyWithoutCreatorInput,
+  images?: ImageCreateManyWithoutCreatorInput
+|}
+
+ export type UserUpdateWithoutWebsDataInput = {| 
+  email?: String,
+  password?: String,
+  themeName?: String,
+  posts?: PostUpdateManyWithoutCreatorInput,
+  images?: ImageUpdateManyWithoutCreatorInput
+|}
+
+ export type ImageCreateManyWithoutCreatorInput = {| 
+  create?: Array< ImageCreateWithoutCreatorInput > | ImageCreateWithoutCreatorInput,
+  connect?: Array< ImageWhereUniqueInput > | ImageWhereUniqueInput
+|}
+
+ export type PostUpdateManyWithoutCreatorInput = {| 
+  create?: Array< PostCreateWithoutCreatorInput > | PostCreateWithoutCreatorInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  disconnect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  delete?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  update?: Array< PostUpdateWithWhereUniqueWithoutCreatorInput > | PostUpdateWithWhereUniqueWithoutCreatorInput,
+  upsert?: Array< PostUpsertWithWhereUniqueWithoutCreatorInput > | PostUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type UserSubscriptionWhereInput = {| 
+  AND?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
+  OR?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
+  NOT?: Array< UserSubscriptionWhereInput > | UserSubscriptionWhereInput,
+  mutation_in?: Array< MutationType > | MutationType,
+  updatedFields_contains?: String,
+  updatedFields_contains_every?: Array< String > | String,
+  updatedFields_contains_some?: Array< String > | String,
+  node?: UserWhereInput
+|}
+
+ export type PostUpdateWithWhereUniqueWithoutParentsInput = {| 
+  where: PostWhereUniqueInput,
+  data: PostUpdateWithoutParentsDataInput
+|}
+
+ export type PostUpdateManyWithoutParentsInput = {| 
+  create?: Array< PostCreateWithoutParentsInput > | PostCreateWithoutParentsInput,
+  connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  disconnect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  delete?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
+  update?: Array< PostUpdateWithWhereUniqueWithoutParentsInput > | PostUpdateWithWhereUniqueWithoutParentsInput,
+  upsert?: Array< PostUpsertWithWhereUniqueWithoutParentsInput > | PostUpsertWithWhereUniqueWithoutParentsInput
+|}
+
+ export type PostUpdateWithoutCreatorDataInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  web?: WebUpdateOneWithoutPostsInput,
+  parents?: PostUpdateManyWithoutContentChildrenInput,
+  contentChildren?: PostUpdateManyWithoutParentsInput,
+  contentImage?: ImageUpdateOneInput
+|}
+
+ export type PostUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: PostWhereUniqueInput,
+  data: PostUpdateWithoutCreatorDataInput
+|}
+
+ export type WebUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: WebWhereUniqueInput,
+  update: WebUpdateWithoutCreatorDataInput,
+  create: WebCreateWithoutCreatorInput
+|}
+
+ export type WebCreateOneWithoutPostsInput = {| 
+  create?: WebCreateWithoutPostsInput,
+  connect?: WebWhereUniqueInput
+|}
+
+ export type PostCreateWithoutWebInput = {| 
+  name?: String,
+  contentType?: PostContentType,
+  contentText?: String,
+  contentTextFormat?: String,
+  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  creator: UserCreateOneWithoutPostsInput,
+  parents?: PostCreateManyWithoutContentChildrenInput,
+  contentChildren?: PostCreateManyWithoutParentsInput,
+  contentImage?: ImageCreateOneInput
 |}
 
  export type UserUpsertWithoutImagesInput = {| 
   update: UserUpdateWithoutImagesDataInput,
   create: UserCreateWithoutImagesInput
-|}
-
- export type ElementUpdateOneInput = {| 
-  create?: ElementCreateInput,
-  connect?: ElementWhereUniqueInput,
-  delete?: Boolean,
-  update?: ElementUpdateDataInput,
-  upsert?: ElementUpsertNestedInput
-|}
-
- export type ChildUpdateWithWhereUniqueWithoutElementInput = {| 
-  where: ChildWhereUniqueInput,
-  data: ChildUpdateWithoutElementDataInput
-|}
-
- export type ElementUpdateDataInput = {| 
-  name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  children?: ChildUpdateManyWithoutParentInput,
-  creator?: UserUpdateOneWithoutElementsInput,
-  parent?: ChildUpdateManyWithoutElementInput
-|}
-
- export type UserCreateWithoutPagesInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput,
-  elements?: ElementCreateManyWithoutCreatorInput,
-  images?: ImageCreateManyWithoutCreatorInput
-|}
-
- export type ChildUpdateManyWithoutParentInput = {| 
-  create?: Array< ChildCreateWithoutParentInput > | ChildCreateWithoutParentInput,
-  connect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  disconnect?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  delete?: Array< ChildWhereUniqueInput > | ChildWhereUniqueInput,
-  update?: Array< ChildUpdateWithWhereUniqueWithoutParentInput > | ChildUpdateWithWhereUniqueWithoutParentInput,
-  upsert?: Array< ChildUpsertWithWhereUniqueWithoutParentInput > | ChildUpsertWithWhereUniqueWithoutParentInput
-|}
-
- export type PageCreateWithoutCreatorInput = {| 
-  title: String,
-  web: WebCreateOneWithoutPagesInput,
-  element: ElementCreateOneInput
-|}
-
- export type ChildUpdateWithWhereUniqueWithoutParentInput = {| 
-  where: ChildWhereUniqueInput,
-  data: ChildUpdateWithoutParentDataInput
-|}
-
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput,
-  element?: ElementWhereInput
-|}
-
- export type ChildUpdateWithoutParentDataInput = {| 
-  index?: Int,
-  element?: ElementUpdateOneWithoutParentInput
-|}
-
- export type PageUpsertWithWhereUniqueWithoutWebInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutWebDataInput,
-  create: PageCreateWithoutWebInput
-|}
-
- export type UserUpdateWithoutElementsDataInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  webs?: WebUpdateManyWithoutCreatorInput,
-  pages?: PageUpdateManyWithoutCreatorInput,
-  images?: ImageUpdateManyWithoutCreatorInput
-|}
-
- export type UserUpdateOneWithoutElementsInput = {| 
-  create?: UserCreateWithoutElementsInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutElementsDataInput,
-  upsert?: UserUpsertWithoutElementsInput
-|}
-
- export type ElementUpdateWithoutParentDataInput = {| 
-  name?: String,
-  type?: ElementType,
-  text?: String,
-  textFormat?: String,
-  image?: ImageUpdateOneInput,
-  children?: ChildUpdateManyWithoutParentInput,
-  creator?: UserUpdateOneWithoutElementsInput
-|}
-
- export type ElementUpdateOneWithoutParentInput = {| 
-  create?: ElementCreateWithoutParentInput,
-  connect?: ElementWhereUniqueInput,
-  delete?: Boolean,
-  update?: ElementUpdateWithoutParentDataInput,
-  upsert?: ElementUpsertWithoutParentInput
-|}
-
- export type ElementUpsertWithoutChildrenInput = {| 
-  update: ElementUpdateWithoutChildrenDataInput,
-  create: ElementCreateWithoutChildrenInput
-|}
-
- export type ElementWhereUniqueInput = {| 
-  id?: ID_Input
-|}
-
- export type UserCreateWithoutWebsInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  pages?: PageCreateManyWithoutCreatorInput,
-  elements?: ElementCreateManyWithoutCreatorInput,
-  images?: ImageCreateManyWithoutCreatorInput
-|}
-
- export type ImageCreateInput = {| 
-  src: String,
-  width: Int,
-  height: Int,
-  creator: UserCreateOneWithoutImagesInput
-|}
-
- export type WebCreateWithoutCreatorInput = {| 
-  name: String,
-  pages?: PageCreateManyWithoutWebInput
 |}
 
 /*
@@ -3803,56 +2846,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    aggregate: AggregateUser,
 |}
 
- export type User = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   email: String,
-   password: String,
-   themeName?: String,
-   webs?: Web[],
-   pages?: Page[],
-   elements?: Element[],
-   images?: Image[],
-|}
-
- export type BatchPayload = {| 
-   count: Long,
+ export type PostSubscriptionPayload = {| 
+   mutation: MutationType,
+   node?: Post,
+   updatedFields?: String[],
+   previousValues?: PostPreviousValues,
 |}
 
  export type AggregateImage = {| 
    count: Int,
-|}
-
- export type Web = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-   creator: User,
-   pages?: Page[],
-|}
-
- export type Page = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   title: String,
-   creator: User,
-   web: Web,
-   element: Element,
-|}
-
-/*
- * An edge in a connection.
-
-*/
- export type ImageEdge = {| 
-   node: Image,
-   cursor: String,
 |}
 
 /*
@@ -3865,127 +2867,34 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    aggregate: AggregateImage,
 |}
 
- export type AggregateElement = {| 
-   count: Int,
-|}
-
-/*
- * A connection to a list of items.
-
-*/
- export type ElementConnection = {| 
-   pageInfo: PageInfo,
-   edges: ElementEdge[],
-   aggregate: AggregateElement,
-|}
-
- export type ElementPreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name?: String,
-   type: ElementType,
-   text?: String,
-   textFormat: String,
+ export type BatchPayload = {| 
+   count: Long,
 |}
 
 /*
  * An edge in a connection.
 
 */
- export type ChildEdge = {| 
-   node: Child,
+ export type PostEdge = {| 
+   node: Post,
    cursor: String,
 |}
 
- export type ElementSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: Element,
-   updatedFields?: String[],
-   previousValues?: ElementPreviousValues,
-|}
-
- export type AggregatePage = {| 
-   count: Int,
-|}
-
- export type UserSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: User,
-   updatedFields?: String[],
-   previousValues?: UserPreviousValues,
-|}
-
-/*
- * A connection to a list of items.
-
-*/
- export type PageConnection = {| 
-   pageInfo: PageInfo,
-   edges: PageEdge[],
-   aggregate: AggregatePage,
-|}
-
- export type UserPreviousValues = {| 
+ export type User = {| ...Node,
+ 
    id: ID_Output,
    createdAt: DateTime,
    updatedAt: DateTime,
    email: String,
    password: String,
    themeName?: String,
+   webs?: Web[],
+   posts?: Post[],
+   images?: Image[],
 |}
 
-/*
- * An edge in a connection.
-
-*/
- export type WebEdge = {| 
-   node: Web,
-   cursor: String,
-|}
-
- export type Child = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   index: Int,
-   parent: Element,
-   element: Element,
-|}
-
- export type AggregateUser = {| 
+ export type AggregateWeb = {| 
    count: Int,
-|}
-
- export type WebSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: Web,
-   updatedFields?: String[],
-   previousValues?: WebPreviousValues,
-|}
-
- export type ImageSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: Image,
-   updatedFields?: String[],
-   previousValues?: ImagePreviousValues,
-|}
-
- export type WebPreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-|}
-
-/*
- * An edge in a connection.
-
-*/
- export type ElementEdge = {| 
-   node: Element,
-   cursor: String,
 |}
 
  export type Image = {| ...Node,
@@ -4003,21 +2912,21 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * A connection to a list of items.
 
 */
- export type ChildConnection = {| 
+ export type WebConnection = {| 
    pageInfo: PageInfo,
-   edges: ChildEdge[],
-   aggregate: AggregateChild,
+   edges: WebEdge[],
+   aggregate: AggregateWeb,
 |}
 
- export type PageSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: Page,
-   updatedFields?: String[],
-   previousValues?: PagePreviousValues,
-|}
-
- export type AggregateWeb = {| 
-   count: Int,
+ export type PostPreviousValues = {| 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   name?: String,
+   contentType?: PostContentType,
+   contentChildrenOrder: ID_Output[],
+   contentText?: String,
+   contentTextFormat: String,
 |}
 
 /*
@@ -4029,40 +2938,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    cursor: String,
 |}
 
- export type ChildPreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   index: Int,
-|}
-
- export type ChildSubscriptionPayload = {| 
+ export type UserSubscriptionPayload = {| 
    mutation: MutationType,
-   node?: Child,
+   node?: User,
    updatedFields?: String[],
-   previousValues?: ChildPreviousValues,
-|}
-
- export type Element = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name?: String,
-   type: ElementType,
-   text?: String,
-   textFormat: String,
-   image?: Image,
-   children?: Child[],
-   creator: User,
-   parent?: Child[],
-|}
-
- export type PagePreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   title: String,
+   previousValues?: UserPreviousValues,
 |}
 
 /*
@@ -4076,44 +2956,108 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    endCursor?: String,
 |}
 
+ export type UserPreviousValues = {| 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   email: String,
+   password: String,
+   themeName?: String,
+|}
+
+ export type AggregatePost = {| 
+   count: Int,
+|}
+
+ export type Web = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   creator: User,
+   name: String,
+   posts?: Post[],
+|}
+
+ export type WebPreviousValues = {| 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   name: String,
+|}
+
+ export type WebSubscriptionPayload = {| 
+   mutation: MutationType,
+   node?: Web,
+   updatedFields?: String[],
+   previousValues?: WebPreviousValues,
+|}
+
+ export type Post = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   creator: User,
+   name?: String,
+   web: Web,
+   parents?: Post[],
+   contentType?: PostContentType,
+   contentChildren?: Post[],
+   contentChildrenOrder: ID_Output[],
+   contentText?: String,
+   contentTextFormat: String,
+   contentImage?: Image,
+|}
+
 /*
  * A connection to a list of items.
 
 */
- export type WebConnection = {| 
+ export type PostConnection = {| 
    pageInfo: PageInfo,
-   edges: WebEdge[],
-   aggregate: AggregateWeb,
+   edges: PostEdge[],
+   aggregate: AggregatePost,
 |}
 
 /*
  * An edge in a connection.
 
 */
- export type PageEdge = {| 
-   node: Page,
+ export type ImageEdge = {| 
+   node: Image,
    cursor: String,
 |}
 
- export type AggregateChild = {| 
+ export type ImageSubscriptionPayload = {| 
+   mutation: MutationType,
+   node?: Image,
+   updatedFields?: String[],
+   previousValues?: ImagePreviousValues,
+|}
+
+ export type AggregateUser = {| 
    count: Int,
 |}
 
 /*
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
+ * An edge in a connection.
+
 */
- export type Long = string 
+ export type WebEdge = {| 
+   node: Web,
+   cursor: String,
+|}
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+ export type String = string 
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
  export type Int = number 
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
- export type Boolean = boolean 
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -4122,8 +3066,14 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Output = string
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `Boolean` scalar type represents `true` or `false`.
 */
- export type String = string 
+ export type Boolean = boolean 
+
+/*
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+*/
+ export type Long = string 
 
  export type DateTime = Date | string 

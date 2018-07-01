@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 790ef1d6c01319cdf7a2a0beb1d1a481
+ * @relayHash 4810d4593482ac5a13f5aaf40f991a1b
  */
 
 /* eslint-disable */
@@ -10,28 +10,28 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
-type Page$ref = any;
-export type pageQueryVariables = {|
+type Post$ref = any;
+export type postQueryVariables = {|
   id: string
 |};
-export type pageQueryResponse = {|
-  +page: ?{|
+export type postQueryResponse = {|
+  +post: ?{|
     +id: string
   |},
-  +$fragmentRefs: AppPage$ref & Page$ref,
+  +$fragmentRefs: AppPage$ref & Post$ref,
 |};
 */
 
 
 /*
-query pageQuery(
+query postQuery(
   $id: ID!
 ) {
-  page(id: $id) {
+  post(id: $id) {
     id
   }
   ...AppPage
-  ...Page_1Bmzm5
+  ...Post_1Bmzm5
 }
 
 fragment AppPage on Query {
@@ -41,10 +41,10 @@ fragment AppPage on Query {
   }
 }
 
-fragment Page_1Bmzm5 on Query {
-  page(id: $id) {
+fragment Post_1Bmzm5 on Query {
+  post(id: $id) {
     id
-    title
+    name
     web {
       id
       name
@@ -76,17 +76,24 @@ v2 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "pageQuery",
+  "name": "postQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n) {\n  page(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Page_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    web {\n      id\n      name\n    }\n  }\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "pageQuery",
+    "name": "postQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -94,10 +101,10 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "page",
+        "name": "post",
         "storageKey": null,
         "args": v1,
-        "concreteType": "Page",
+        "concreteType": "Post",
         "plural": false,
         "selections": [
           v2
@@ -110,7 +117,7 @@ return {
       },
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "Post",
         "args": [
           {
             "kind": "Variable",
@@ -124,26 +131,20 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "pageQuery",
+    "name": "postQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "page",
+        "name": "post",
         "storageKey": null,
         "args": v1,
-        "concreteType": "Page",
+        "concreteType": "Post",
         "plural": false,
         "selections": [
           v2,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "title",
-            "args": null,
-            "storageKey": null
-          },
+          v3,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -154,13 +155,7 @@ return {
             "plural": false,
             "selections": [
               v2,
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "name",
-                "args": null,
-                "storageKey": null
-              }
+              v3
             ]
           }
         ]
@@ -189,5 +184,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'aeddaae291555da5d3e7238f16c52b5f';
+(node/*: any*/).hash = '573c1eb5d8acff006802b81cc6ef7bd9';
 module.exports = node;

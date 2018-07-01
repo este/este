@@ -12,8 +12,8 @@ const Query /*: generated.Query */ = {
     return db.query.user({ where: { id: userId } }, info);
   },
 
-  page: async (args, info, { db }) => {
-    return db.query.page({ where: { id: args.id } }, info);
+  post: async (args, info, { db }) => {
+    return db.query.post({ where: { id: args.id } }, info);
   },
 
   web: async (args, info, { db }) => {

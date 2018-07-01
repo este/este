@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 64b401b79b8ded954d69d34e5f4556e0
+ * @relayHash f8a0347040e5a3a397e9952b8833650b
  */
 
 /* eslint-disable */
@@ -44,7 +44,7 @@ fragment Webs on Query {
 fragment WebsItem on Web {
   name
   updatedAt
-  pages(first: 1, orderBy: updatedAt_DESC) {
+  posts(first: 1, orderBy: updatedAt_DESC) {
     id
   }
 }
@@ -63,7 +63,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  pages(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  posts(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -140,8 +140,8 @@ return {
               {
                 "kind": "LinkedField",
                 "alias": null,
-                "name": "pages",
-                "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
+                "name": "posts",
+                "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\")",
                 "args": [
                   {
                     "kind": "Literal",
@@ -153,10 +153,10 @@ return {
                     "kind": "Literal",
                     "name": "orderBy",
                     "value": "updatedAt_DESC",
-                    "type": "PageOrderByInput"
+                    "type": "PostOrderByInput"
                   }
                 ],
-                "concreteType": "Page",
+                "concreteType": "Post",
                 "plural": true,
                 "selections": [
                   v0

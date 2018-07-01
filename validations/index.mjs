@@ -38,15 +38,15 @@ export const validateAuth = (input /*: generated.AuthInput */) => {
 export const validateCreateWeb = (input /*: generated.CreateWebInput */) => {
   const name = max140Chars(input.name);
   if (name) return { name };
-  const pageTitle = max140Chars(input.pageTitle);
-  if (pageTitle) return { pageTitle };
+  const postName = max140Chars(input.postName);
+  if (postName) return { postName };
 };
 
-export const validateSetPageTitle = (
-  input /*: generated.SetPageTitleInput */,
+export const validateSetPostName = (
+  input /*: generated.SetPostNameInput */,
 ) => {
-  const title = max140Chars(input.title);
-  if (title) return { title };
+  const name = max140Chars(input.name);
+  if (name) return { name };
 };
 
 export const validateSetWebName = (input /*: generated.SetWebNameInput */) => {

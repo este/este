@@ -4,10 +4,10 @@ import { View } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
-import PageMarkdownActionsButton from './PageMarkdownActionsButton';
+import PostMarkdownActionsButton from './PostMarkdownActionsButton';
 import getFocusableNodes from '../../client/getFocusableNodes';
 
-type PageMarkdownActionsProps = {|
+type PostMarkdownActionsProps = {|
   expanded: boolean,
   theme: Theme,
   selectionIsCollapsed: boolean,
@@ -17,8 +17,8 @@ type PageMarkdownActionsProps = {|
   onEscape: () => void,
 |};
 
-class PageMarkdownActions extends React.PureComponent<
-  PageMarkdownActionsProps,
+class PostMarkdownActions extends React.PureComponent<
+  PostMarkdownActionsProps,
 > {
   buttonsRef = React.createRef();
 
@@ -41,31 +41,31 @@ class PageMarkdownActions extends React.PureComponent<
   render() {
     return (
       <View
-        style={this.props.theme.styles.pageMarkdownButtons}
+        style={this.props.theme.styles.postMarkdownButtons}
         onKeyDown={this.handleViewKeyDown}
       >
         {!this.props.expanded ? (
           <Row>
-            <PageMarkdownActionsButton onPress={this.props.onToggle}>
+            <PostMarkdownActionsButton onPress={this.props.onToggle}>
               —
-            </PageMarkdownActionsButton>
+            </PostMarkdownActionsButton>
           </Row>
         ) : (
           <Row ref={this.buttonsRef}>
             {!this.props.selectionIsCollapsed && (
-              <PageMarkdownActionsButton onPress={this.props.onReuse}>
+              <PostMarkdownActionsButton onPress={this.props.onReuse}>
                 <FormattedMessage
                   defaultMessage="Reuse"
-                  id="pageMarkdown.buttons.reuse"
+                  id="postMarkdown.buttons.reuse"
                 />
-              </PageMarkdownActionsButton>
+              </PostMarkdownActionsButton>
             )}
-            <PageMarkdownActionsButton onPress={this.props.onExample}>
+            <PostMarkdownActionsButton onPress={this.props.onExample}>
               <FormattedMessage
                 defaultMessage="Example"
-                id="pageMarkdown.buttons.example"
+                id="postMarkdown.buttons.example"
               />
-            </PageMarkdownActionsButton>
+            </PostMarkdownActionsButton>
           </Row>
         )}
       </View>
@@ -73,4 +73,4 @@ class PageMarkdownActions extends React.PureComponent<
   }
 }
 
-export default withTheme(PageMarkdownActions);
+export default withTheme(PostMarkdownActions);

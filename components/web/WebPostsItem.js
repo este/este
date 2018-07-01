@@ -1,25 +1,25 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/WebPagesItem.graphql';
+import * as generated from './__generated__/WebPostsItem.graphql';
 import Text from '../core/Text';
 import A from '../core/A';
 import Block from '../core/Block';
 import { FormattedRelative } from 'react-intl';
 
-type WebPagesItemProps = {|
-  data: generated.WebPagesItem,
+type WebPostsItemProps = {|
+  data: generated.WebPostsItem,
 |};
 
-class WebPagesItem extends React.PureComponent<WebPagesItemProps> {
+class WebPostsItem extends React.PureComponent<WebPostsItemProps> {
   render() {
     const {
-      data: { id, title, updatedAt },
+      data: { id, name, updatedAt },
     } = this.props;
     return (
       <Block>
-        <A href={{ pathname: '/page', query: { id } }} prefetch>
-          {title}
+        <A href={{ pathname: '/post', query: { id } }} prefetch>
+          {name}
         </A>
         <Text color="gray" size={-1}>
           <FormattedRelative value={updatedAt} />
@@ -30,11 +30,11 @@ class WebPagesItem extends React.PureComponent<WebPagesItemProps> {
 }
 
 export default createFragmentContainer(
-  WebPagesItem,
+  WebPostsItem,
   graphql`
-    fragment WebPagesItem on Page {
+    fragment WebPostsItem on Post {
       id
-      title
+      name
       updatedAt
     }
   `,

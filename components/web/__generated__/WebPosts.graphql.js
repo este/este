@@ -8,22 +8,22 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-type WebPagesItem$ref = any;
+type WebPostsItem$ref = any;
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type WebPages$ref: FragmentReference;
-export type WebPages = {|
-  +pages: ?$ReadOnlyArray<{|
+declare export opaque type WebPosts$ref: FragmentReference;
+export type WebPosts = {|
+  +posts: ?$ReadOnlyArray<{|
     +id: string,
-    +$fragmentRefs: WebPagesItem$ref,
+    +$fragmentRefs: WebPostsItem$ref,
   |}>,
-  +$refType: WebPages$ref,
+  +$refType: WebPosts$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "WebPages",
+  "name": "WebPosts",
   "type": "Web",
   "metadata": null,
   "argumentDefinitions": [],
@@ -31,17 +31,17 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "pages",
-      "storageKey": "pages(orderBy:\"updatedAt_DESC\")",
+      "name": "posts",
+      "storageKey": "posts(orderBy:\"updatedAt_DESC\")",
       "args": [
         {
           "kind": "Literal",
           "name": "orderBy",
           "value": "updatedAt_DESC",
-          "type": "PageOrderByInput"
+          "type": "PostOrderByInput"
         }
       ],
-      "concreteType": "Page",
+      "concreteType": "Post",
       "plural": true,
       "selections": [
         {
@@ -53,7 +53,7 @@ const node/*: ConcreteFragment*/ = {
         },
         {
           "kind": "FragmentSpread",
-          "name": "WebPagesItem",
+          "name": "WebPostsItem",
           "args": null
         }
       ]
@@ -61,5 +61,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '671341ff00f27d521e93ad0ee8827841';
+(node/*: any*/).hash = '4f928cc662fd3a062e6a5c0bc22b359d';
 module.exports = node;

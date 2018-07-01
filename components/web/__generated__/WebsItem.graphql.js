@@ -13,7 +13,7 @@ declare export opaque type WebsItem$ref: FragmentReference;
 export type WebsItem = {|
   +name: string,
   +updatedAt: any,
-  +pages: ?$ReadOnlyArray<{|
+  +posts: ?$ReadOnlyArray<{|
     +id: string
   |}>,
   +$refType: WebsItem$ref,
@@ -45,8 +45,8 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "pages",
-      "storageKey": "pages(first:1,orderBy:\"updatedAt_DESC\")",
+      "name": "posts",
+      "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\")",
       "args": [
         {
           "kind": "Literal",
@@ -58,10 +58,10 @@ const node/*: ConcreteFragment*/ = {
           "kind": "Literal",
           "name": "orderBy",
           "value": "updatedAt_DESC",
-          "type": "PageOrderByInput"
+          "type": "PostOrderByInput"
         }
       ],
-      "concreteType": "Page",
+      "concreteType": "Post",
       "plural": true,
       "selections": [
         {
@@ -76,5 +76,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '5f03fecac2218b953ad96549a88010bd';
+(node/*: any*/).hash = '0b3753a42614d46c9f570a14d3478347';
 module.exports = node;
