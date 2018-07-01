@@ -1,7 +1,5 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
-# Prisma does not support interface nor union types yet.
-# https://github.com/prismagraphql/prisma/issues/165
 
 type User {
   id: ID! @unique
@@ -27,31 +25,32 @@ type Web {
   posts: [Post!]! @relation(name: "WebPosts", onDelete: CASCADE)
 }
 
-# # Do we need that? I am not sure. Maybe it isn't union type, but complex type.
-# enum PostType {
-#   PAGE
-#   TEXT
-#   IMAGE
-# }
-# type: PostType @default(value: "PAGE")
+# Prisma does not support interface nor union types yet.
+# https://github.com/prismagraphql/prisma/issues/165
+enum PostContentType {
+  CHILDREN
+  TEXT
+  IMAGE
+}
 
 type Post {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   creator: User!
+  # If name is null, use content or ID I suppose. Let's see.
+  name: String
   web: Web! @relation(name: "WebPosts", onDelete: SET_NULL)
   # Parents, so we can reuse elements in a tree.
   parents: [Post!]! @relation(name: "PostParentsChildren")
-  children: [Post!]! @relation(name: "PostParentsChildren")
+  contentType: PostContentType @default(value: "CHILDREN")
+  contentChildren: [Post!]! @relation(name: "PostParentsChildren")
   # It's scalar list aka value object. I suppose it's good enough.
-  # I would rather enforce referential integrity, but I don't know how.
-  childrenOrder: [ID!]!
-  # If name is null, use text or ID I suppose. Let's see.
-  name: String
-  text: String
-  textFormat: String! @default(value: "CommonMark")
-  images: [Image!]!
+  # I would rather enforce referential integrity, but I don't know how yet.
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String! @default(value: "CommonMark")
+  contentImage: Image
 }
 
 type Image {

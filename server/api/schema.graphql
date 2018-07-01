@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Jul 01 2018 03:11:15 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Jul 01 2018 23:34:00 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -290,14 +290,21 @@ type Post implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
+  name: String
   web(where: WebWhereInput): Web!
   parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  childrenOrder: [ID!]!
-  name: String
-  text: String
-  textFormat: String!
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+  contentType: PostContentType
+  contentChildren(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String!
+  contentImage(where: ImageWhereInput): Image
+}
+
+enum PostContentType {
+  CHILDREN
+  TEXT
+  IMAGE
 }
 
 enum PostOrderByInput {
@@ -309,10 +316,12 @@ enum PostOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
+  contentType_ASC
+  contentType_DESC
+  contentText_ASC
+  contentText_DESC
+  contentTextFormat_ASC
+  contentTextFormat_DESC
 }
 
 input PostWhereInput {
@@ -448,97 +457,105 @@ input PostWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  text: String
+  contentType: PostContentType
 
   """All values that are not equal to given value."""
-  text_not: String
+  contentType_not: PostContentType
 
   """All values that are contained in given list."""
-  text_in: [String!]
+  contentType_in: [PostContentType!]
 
   """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
+  contentType_not_in: [PostContentType!]
+  contentText: String
 
   """All values that are not equal to given value."""
-  textFormat_not: String
+  contentText_not: String
 
   """All values that are contained in given list."""
-  textFormat_in: [String!]
+  contentText_in: [String!]
 
   """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
+  contentText_not_in: [String!]
 
   """All values less than the given value."""
-  textFormat_lt: String
+  contentText_lt: String
 
   """All values less than or equal the given value."""
-  textFormat_lte: String
+  contentText_lte: String
 
   """All values greater than the given value."""
-  textFormat_gt: String
+  contentText_gt: String
 
   """All values greater than or equal the given value."""
-  textFormat_gte: String
+  contentText_gte: String
 
   """All values containing the given string."""
-  textFormat_contains: String
+  contentText_contains: String
 
   """All values not containing the given string."""
-  textFormat_not_contains: String
+  contentText_not_contains: String
 
   """All values starting with the given string."""
-  textFormat_starts_with: String
+  contentText_starts_with: String
 
   """All values not starting with the given string."""
-  textFormat_not_starts_with: String
+  contentText_not_starts_with: String
 
   """All values ending with the given string."""
-  textFormat_ends_with: String
+  contentText_ends_with: String
 
   """All values not ending with the given string."""
-  textFormat_not_ends_with: String
+  contentText_not_ends_with: String
+  contentTextFormat: String
+
+  """All values that are not equal to given value."""
+  contentTextFormat_not: String
+
+  """All values that are contained in given list."""
+  contentTextFormat_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentTextFormat_not_in: [String!]
+
+  """All values less than the given value."""
+  contentTextFormat_lt: String
+
+  """All values less than or equal the given value."""
+  contentTextFormat_lte: String
+
+  """All values greater than the given value."""
+  contentTextFormat_gt: String
+
+  """All values greater than or equal the given value."""
+  contentTextFormat_gte: String
+
+  """All values containing the given string."""
+  contentTextFormat_contains: String
+
+  """All values not containing the given string."""
+  contentTextFormat_not_contains: String
+
+  """All values starting with the given string."""
+  contentTextFormat_starts_with: String
+
+  """All values not starting with the given string."""
+  contentTextFormat_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentTextFormat_ends_with: String
+
+  """All values not ending with the given string."""
+  contentTextFormat_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
   parents_every: PostWhereInput
   parents_some: PostWhereInput
   parents_none: PostWhereInput
-  children_every: PostWhereInput
-  children_some: PostWhereInput
-  children_none: PostWhereInput
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
+  contentChildren_every: PostWhereInput
+  contentChildren_some: PostWhereInput
+  contentChildren_none: PostWhereInput
+  contentImage: ImageWhereInput
 }
 
 type Query {

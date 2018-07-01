@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/daniel-steigerwald/Este/dev
-# timestamp: Sun Jul 01 2018 02:32:43 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Jul 01 2018 23:24:51 GMT+0200 (Central European Summer Time)
 
 type AggregateImage {
   count: Int!
@@ -51,14 +51,14 @@ input ImageCreateInput {
   creator: UserCreateOneWithoutImagesInput!
 }
 
-input ImageCreateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-}
-
 input ImageCreateManyWithoutCreatorInput {
   create: [ImageCreateWithoutCreatorInput!]
   connect: [ImageWhereUniqueInput!]
+}
+
+input ImageCreateOneInput {
+  create: ImageCreateInput
+  connect: ImageWhereUniqueInput
 }
 
 input ImageCreateWithoutCreatorInput {
@@ -153,15 +153,6 @@ input ImageUpdateInput {
   creator: UserUpdateOneWithoutImagesInput
 }
 
-input ImageUpdateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  delete: [ImageWhereUniqueInput!]
-  update: [ImageUpdateWithWhereUniqueNestedInput!]
-  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
-}
-
 input ImageUpdateManyWithoutCreatorInput {
   create: [ImageCreateWithoutCreatorInput!]
   connect: [ImageWhereUniqueInput!]
@@ -171,15 +162,19 @@ input ImageUpdateManyWithoutCreatorInput {
   upsert: [ImageUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
+input ImageUpdateOneInput {
+  create: ImageCreateInput
+  connect: ImageWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ImageUpdateDataInput
+  upsert: ImageUpsertNestedInput
+}
+
 input ImageUpdateWithoutCreatorDataInput {
   src: String
   width: Int
   height: Int
-}
-
-input ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateDataInput!
 }
 
 input ImageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -187,8 +182,7 @@ input ImageUpdateWithWhereUniqueWithoutCreatorInput {
   data: ImageUpdateWithoutCreatorDataInput!
 }
 
-input ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
+input ImageUpsertNestedInput {
   update: ImageUpdateDataInput!
   create: ImageCreateInput!
 }
@@ -451,14 +445,15 @@ type Post implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
+  name: String
   web(where: WebWhereInput): Web!
   parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  childrenOrder: [ID!]!
-  name: String
-  text: String
-  textFormat: String!
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+  contentType: PostContentType
+  contentChildren(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String!
+  contentImage(where: ImageWhereInput): Image
 }
 
 """A connection to a list of items."""
@@ -471,24 +466,31 @@ type PostConnection {
   aggregate: AggregatePost!
 }
 
-input PostCreatechildrenOrderInput {
+enum PostContentType {
+  CHILDREN
+  TEXT
+  IMAGE
+}
+
+input PostCreatecontentChildrenOrderInput {
   set: [ID!]
 }
 
 input PostCreateInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostCreatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutChildrenInput
-  children: PostCreateManyWithoutParentsInput
-  images: ImageCreateManyInput
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
 }
 
-input PostCreateManyWithoutChildrenInput {
-  create: [PostCreateWithoutChildrenInput!]
+input PostCreateManyWithoutContentChildrenInput {
+  create: [PostCreateWithoutContentChildrenInput!]
   connect: [PostWhereUniqueInput!]
 }
 
@@ -507,48 +509,52 @@ input PostCreateManyWithoutWebInput {
   connect: [PostWhereUniqueInput!]
 }
 
-input PostCreateWithoutChildrenInput {
+input PostCreateWithoutContentChildrenInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostCreatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutChildrenInput
-  images: ImageCreateManyInput
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentImage: ImageCreateOneInput
 }
 
 input PostCreateWithoutCreatorInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostCreatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutChildrenInput
-  children: PostCreateManyWithoutParentsInput
-  images: ImageCreateManyInput
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
 }
 
 input PostCreateWithoutParentsInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostCreatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  children: PostCreateManyWithoutParentsInput
-  images: ImageCreateManyInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
 }
 
 input PostCreateWithoutWebInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostCreatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostCreatecontentChildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutChildrenInput
-  children: PostCreateManyWithoutParentsInput
-  images: ImageCreateManyInput
+  parents: PostCreateManyWithoutContentChildrenInput
+  contentChildren: PostCreateManyWithoutParentsInput
+  contentImage: ImageCreateOneInput
 }
 
 """An edge in a connection."""
@@ -569,20 +575,23 @@ enum PostOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
+  contentType_ASC
+  contentType_DESC
+  contentText_ASC
+  contentText_DESC
+  contentTextFormat_ASC
+  contentTextFormat_DESC
 }
 
 type PostPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  childrenOrder: [ID!]!
   name: String
-  text: String
-  textFormat: String!
+  contentType: PostContentType
+  contentChildrenOrder: [ID!]!
+  contentText: String
+  contentTextFormat: String!
 }
 
 type PostSubscriptionPayload {
@@ -624,29 +633,30 @@ input PostSubscriptionWhereInput {
   node: PostWhereInput
 }
 
-input PostUpdatechildrenOrderInput {
+input PostUpdatecontentChildrenOrderInput {
   set: [ID!]
 }
 
 input PostUpdateInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostUpdatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutChildrenInput
-  children: PostUpdateManyWithoutParentsInput
-  images: ImageUpdateManyInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PostUpdateManyWithoutChildrenInput {
-  create: [PostCreateWithoutChildrenInput!]
+input PostUpdateManyWithoutContentChildrenInput {
+  create: [PostCreateWithoutContentChildrenInput!]
   connect: [PostWhereUniqueInput!]
   disconnect: [PostWhereUniqueInput!]
   delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutChildrenInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutChildrenInput!]
+  update: [PostUpdateWithWhereUniqueWithoutContentChildrenInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutContentChildrenInput!]
 }
 
 input PostUpdateManyWithoutCreatorInput {
@@ -676,53 +686,57 @@ input PostUpdateManyWithoutWebInput {
   upsert: [PostUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input PostUpdateWithoutChildrenDataInput {
+input PostUpdateWithoutContentChildrenDataInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostUpdatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutChildrenInput
-  images: ImageUpdateManyInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentImage: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutCreatorDataInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostUpdatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutChildrenInput
-  children: PostUpdateManyWithoutParentsInput
-  images: ImageUpdateManyInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutParentsDataInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostUpdatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  children: PostUpdateManyWithoutParentsInput
-  images: ImageUpdateManyInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutWebDataInput {
   name: String
-  text: String
-  textFormat: String
-  childrenOrder: PostUpdatechildrenOrderInput
+  contentType: PostContentType
+  contentText: String
+  contentTextFormat: String
+  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutChildrenInput
-  children: PostUpdateManyWithoutParentsInput
-  images: ImageUpdateManyInput
+  parents: PostUpdateManyWithoutContentChildrenInput
+  contentChildren: PostUpdateManyWithoutParentsInput
+  contentImage: ImageUpdateOneInput
 }
 
-input PostUpdateWithWhereUniqueWithoutChildrenInput {
+input PostUpdateWithWhereUniqueWithoutContentChildrenInput {
   where: PostWhereUniqueInput!
-  data: PostUpdateWithoutChildrenDataInput!
+  data: PostUpdateWithoutContentChildrenDataInput!
 }
 
 input PostUpdateWithWhereUniqueWithoutCreatorInput {
@@ -740,10 +754,10 @@ input PostUpdateWithWhereUniqueWithoutWebInput {
   data: PostUpdateWithoutWebDataInput!
 }
 
-input PostUpsertWithWhereUniqueWithoutChildrenInput {
+input PostUpsertWithWhereUniqueWithoutContentChildrenInput {
   where: PostWhereUniqueInput!
-  update: PostUpdateWithoutChildrenDataInput!
-  create: PostCreateWithoutChildrenInput!
+  update: PostUpdateWithoutContentChildrenDataInput!
+  create: PostCreateWithoutContentChildrenInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutCreatorInput {
@@ -897,97 +911,105 @@ input PostWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  text: String
+  contentType: PostContentType
 
   """All values that are not equal to given value."""
-  text_not: String
+  contentType_not: PostContentType
 
   """All values that are contained in given list."""
-  text_in: [String!]
+  contentType_in: [PostContentType!]
 
   """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
+  contentType_not_in: [PostContentType!]
+  contentText: String
 
   """All values that are not equal to given value."""
-  textFormat_not: String
+  contentText_not: String
 
   """All values that are contained in given list."""
-  textFormat_in: [String!]
+  contentText_in: [String!]
 
   """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
+  contentText_not_in: [String!]
 
   """All values less than the given value."""
-  textFormat_lt: String
+  contentText_lt: String
 
   """All values less than or equal the given value."""
-  textFormat_lte: String
+  contentText_lte: String
 
   """All values greater than the given value."""
-  textFormat_gt: String
+  contentText_gt: String
 
   """All values greater than or equal the given value."""
-  textFormat_gte: String
+  contentText_gte: String
 
   """All values containing the given string."""
-  textFormat_contains: String
+  contentText_contains: String
 
   """All values not containing the given string."""
-  textFormat_not_contains: String
+  contentText_not_contains: String
 
   """All values starting with the given string."""
-  textFormat_starts_with: String
+  contentText_starts_with: String
 
   """All values not starting with the given string."""
-  textFormat_not_starts_with: String
+  contentText_not_starts_with: String
 
   """All values ending with the given string."""
-  textFormat_ends_with: String
+  contentText_ends_with: String
 
   """All values not ending with the given string."""
-  textFormat_not_ends_with: String
+  contentText_not_ends_with: String
+  contentTextFormat: String
+
+  """All values that are not equal to given value."""
+  contentTextFormat_not: String
+
+  """All values that are contained in given list."""
+  contentTextFormat_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentTextFormat_not_in: [String!]
+
+  """All values less than the given value."""
+  contentTextFormat_lt: String
+
+  """All values less than or equal the given value."""
+  contentTextFormat_lte: String
+
+  """All values greater than the given value."""
+  contentTextFormat_gt: String
+
+  """All values greater than or equal the given value."""
+  contentTextFormat_gte: String
+
+  """All values containing the given string."""
+  contentTextFormat_contains: String
+
+  """All values not containing the given string."""
+  contentTextFormat_not_contains: String
+
+  """All values starting with the given string."""
+  contentTextFormat_starts_with: String
+
+  """All values not starting with the given string."""
+  contentTextFormat_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentTextFormat_ends_with: String
+
+  """All values not ending with the given string."""
+  contentTextFormat_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
   parents_every: PostWhereInput
   parents_some: PostWhereInput
   parents_none: PostWhereInput
-  children_every: PostWhereInput
-  children_some: PostWhereInput
-  children_none: PostWhereInput
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
+  contentChildren_every: PostWhereInput
+  contentChildren_some: PostWhereInput
+  contentChildren_none: PostWhereInput
+  contentImage: ImageWhereInput
 }
 
 input PostWhereUniqueInput {

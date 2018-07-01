@@ -82,6 +82,23 @@ const Mutation /*: generated.Mutation */ = {
         }
       `,
     );
+    const postId = web.posts && web.posts[0].id;
+    if (postId != null) {
+      await db.mutation.updatePost({
+        data: {
+          contentChildren: {
+            create: {
+              creator: { connect: { id: userId } },
+              web: { connect: { id: web.id } },
+              contentType: 'TEXT',
+            },
+          },
+        },
+        where: {
+          id: postId,
+        },
+      });
+    }
     return {
       postId: web.posts && web.posts[0].id,
     };
