@@ -65,19 +65,10 @@ const Mutation /*: generated.Mutation */ = {
         data: {
           name: args.input.name,
           creator: { connect: { id: userId } },
-          pages: {
+          posts: {
             create: {
-              title: args.input.pageTitle,
+              name: args.input.postName,
               creator: { connect: { id: userId } },
-              children: {
-                create: {
-                  elements: {
-                    create: {
-                      creator: { connect: { id: userId } },
-                    },
-                  },
-                },
-              },
             },
           },
         },
@@ -85,14 +76,14 @@ const Mutation /*: generated.Mutation */ = {
       `
         {
           id
-          pages {
+          posts {
             id
           }
         }
       `,
     );
     return {
-      pageId: web.pages && web.pages[0].id,
+      postId: web.posts && web.posts[0].id,
     };
   },
 
@@ -114,15 +105,15 @@ const Mutation /*: generated.Mutation */ = {
     return { user };
   },
 
-  setPageTitle: async (args, info, { db }) => {
-    const errors = validations.validateSetPageTitle(args.input);
+  setPostName: async (args, info, { db }) => {
+    const errors = validations.validateSetPostName(args.input);
     if (errors) return { errors };
-    const page = await db.mutation.updatePage({
+    const post = await db.mutation.updatePost({
       where: { id: args.input.id },
-      data: { title: args.input.title },
+      data: { name: args.input.name },
     });
-    if (page == null) return null;
-    return { page };
+    if (post == null) return null;
+    return { post };
   },
 
   setWebName: async (args, info, { db }) => {

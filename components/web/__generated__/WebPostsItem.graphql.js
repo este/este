@@ -9,20 +9,20 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type WebPagesItem$ref: FragmentReference;
-export type WebPagesItem = {|
+declare export opaque type WebPostsItem$ref: FragmentReference;
+export type WebPostsItem = {|
   +id: string,
-  +title: string,
+  +name: ?string,
   +updatedAt: any,
-  +$refType: WebPagesItem$ref,
+  +$refType: WebPostsItem$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "WebPagesItem",
-  "type": "Page",
+  "name": "WebPostsItem",
+  "type": "Post",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
@@ -36,7 +36,7 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "title",
+      "name": "name",
       "args": null,
       "storageKey": null
     },
@@ -50,5 +50,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f49d36efb195a27102241016a0d3eb98';
+(node/*: any*/).hash = '0ff4a200a700f894e3e5ba433f1558fb';
 module.exports = node;

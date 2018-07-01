@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 52d1b24a0f1fafa2a0301985271382f2
+ * @relayHash 0832b056e139c2f7510b001719b7b847
  */
 
 /* eslint-disable */
@@ -45,20 +45,20 @@ fragment Web_1Bmzm5 on Query {
   web(id: $id) {
     id
     name
-    ...WebPages
+    ...WebPosts
   }
 }
 
-fragment WebPages on Web {
-  pages(orderBy: updatedAt_DESC) {
+fragment WebPosts on Web {
+  posts(orderBy: updatedAt_DESC) {
     id
-    ...WebPagesItem
+    ...WebPostsItem
   }
 }
 
-fragment WebPagesItem on Page {
+fragment WebPostsItem on Post {
   id
-  title
+  name
   updatedAt
 }
 */
@@ -86,13 +86,20 @@ v2 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n    ...WebPages\n  }\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  web(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    name\n    ...WebPosts\n  }\n}\n\nfragment WebPosts on Web {\n  posts(orderBy: updatedAt_DESC) {\n    id\n    ...WebPostsItem\n  }\n}\n\nfragment WebPostsItem on Post {\n  id\n  name\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -147,37 +154,25 @@ return {
         "plural": false,
         "selections": [
           v2,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "name",
-            "args": null,
-            "storageKey": null
-          },
+          v3,
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "pages",
-            "storageKey": "pages(orderBy:\"updatedAt_DESC\")",
+            "name": "posts",
+            "storageKey": "posts(orderBy:\"updatedAt_DESC\")",
             "args": [
               {
                 "kind": "Literal",
                 "name": "orderBy",
                 "value": "updatedAt_DESC",
-                "type": "PageOrderByInput"
+                "type": "PostOrderByInput"
               }
             ],
-            "concreteType": "Page",
+            "concreteType": "Post",
             "plural": true,
             "selections": [
               v2,
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "title",
-                "args": null,
-                "storageKey": null
-              },
+              v3,
               {
                 "kind": "ScalarField",
                 "alias": null,

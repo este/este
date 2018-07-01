@@ -3,13 +3,13 @@ import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import PageMarkdownActions from './PageMarkdownActions';
+import PostMarkdownActions from './PostMarkdownActions';
 // import withConfirm, { type Confirm } from '../core/withConfirm';
 
 const messages = defineMessages({
   placeholder: {
     defaultMessage: 'write',
-    id: 'pageMarkdown.textInput.placeholder',
+    id: 'postMarkdown.textInput.placeholder',
   },
   // TODO: [Home](/) | [About](/)
   example: {
@@ -28,25 +28,25 @@ Markdown is a simple way to *format* text that looks **great** on any device.
 
 made by [steida](https://twitter.com/steida)
 `,
-    id: 'pageMarkdown.textInput.example',
+    id: 'postMarkdown.textInput.example',
   },
 });
 
-type PageMarkdownProps = {|
+type PostMarkdownProps = {|
   theme: Theme,
   intl: IntlShape,
   // confirm: Confirm,
 |};
 
-type PageMarkdownState = {|
+type PostMarkdownState = {|
   selection: { start: number, end: number },
   actionsAreExpanded: boolean,
   value: string,
 |};
 
-class PageMarkdown extends React.PureComponent<
-  PageMarkdownProps,
-  PageMarkdownState,
+class PostMarkdown extends React.PureComponent<
+  PostMarkdownProps,
+  PostMarkdownState,
 > {
   state = {
     selection: { start: 0, end: 0 },
@@ -140,7 +140,7 @@ class PageMarkdown extends React.PureComponent<
     const { theme, intl } = this.props;
 
     return (
-      <View style={theme.styles.pageMarkdown}>
+      <View style={theme.styles.postMarkdown}>
         <TextInput
           // https://github.com/necolas/react-native-web/issues/988
           // autoFocus
@@ -156,13 +156,13 @@ class PageMarkdown extends React.PureComponent<
           // It breaks tab navigation.
           data-enable-grammarly="false"
           style={[
-            theme.styles.pageMarkdownTextInput,
+            theme.styles.postMarkdownTextInput,
             theme.typography.fontSizeWithLineHeight(0),
           ]}
           // https://github.com/necolas/react-native-web/issues/988
           // selection={this.state.selection}
         />
-        <PageMarkdownActions
+        <PostMarkdownActions
           expanded={this.state.actionsAreExpanded}
           selectionIsCollapsed={this.selectionIsCollapsed()}
           ref={this.actionsRef}
@@ -176,5 +176,5 @@ class PageMarkdown extends React.PureComponent<
   }
 }
 
-// export default withConfirm(injectIntl(withTheme(PageMarkdown)));
-export default withTheme(injectIntl(PageMarkdown));
+// export default withConfirm(injectIntl(withTheme(PostMarkdown)));
+export default withTheme(injectIntl(PostMarkdown));

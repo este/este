@@ -26,10 +26,10 @@ const isWebCreator = getId =>
     });
   });
 
-const isPageCreator = getId =>
+const isPostCreator = getId =>
   rule()(async (parent, args, { userId, db } /*: Context */) => {
     if (userId == null) return false;
-    return db.exists.Page({
+    return db.exists.Post({
       id: getId(args),
       creator: {
         id: userId,
@@ -53,12 +53,12 @@ const rules /*: Rules */ = {
     createWeb: isAuthenticated,
     deleteWeb: and(isAuthenticated, isWebCreator(args => args.input.id)),
     setTheme: isAuthenticated,
-    setPageTitle: and(isAuthenticated, isPageCreator(args => args.input.id)),
+    setPostName: and(isAuthenticated, isPostCreator(args => args.input.id)),
     setWebName: and(isAuthenticated, isWebCreator(args => args.input.id)),
   },
   Query: {
     me: allow,
-    page: and(isAuthenticated, isPageCreator(args => args.id)),
+    post: and(isAuthenticated, isPostCreator(args => args.id)),
     web: and(isAuthenticated, isWebCreator(args => args.id)),
   },
 };

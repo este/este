@@ -1,5 +1,7 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
+# Prisma does not support interface nor union types yet.
+# https://github.com/prismagraphql/prisma/issues/165
 
 type User {
   id: ID! @unique
@@ -12,8 +14,7 @@ type User {
   themeName: String
   # Created by a user.
   webs: [Web!]!
-  pages: [Page!]!
-  elements: [Element!]!
+  posts: [Post!]!
   images: [Image!]!
 }
 
@@ -23,41 +24,34 @@ type Web {
   updatedAt: DateTime!
   creator: User!
   name: String!
-  pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
+  posts: [Post!]! @relation(name: "WebPosts", onDelete: CASCADE)
 }
 
-type Page {
+# # Do we need that? I am not sure. Maybe it isn't union type, but complex type.
+# enum PostType {
+#   PAGE
+#   TEXT
+#   IMAGE
+# }
+# type: PostType @default(value: "PAGE")
+
+type Post {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   creator: User!
-  title: String!
-  web: Web! @relation(name: "WebPages", onDelete: SET_NULL)
-  children: Children!
-}
-
-# Document. It has no ID.
-# https://www.prisma.io/features/data-modeling/
-type Children {
-  # I don't know how to enforce referential integrity. It's up the API.
-  # We can update model later, because 1) Make it work. 2) Make it right...
-  elements: [Element!]!
-  order: [ID!]!
-}
-
-type Element {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  creator: User!
-  # Name is optional, because it can be derived by content.
+  web: Web! @relation(name: "WebPosts", onDelete: SET_NULL)
+  # Parents, so we can reuse elements in a tree.
+  parents: [Post!]! @relation(name: "PostParentsChildren")
+  children: [Post!]! @relation(name: "PostParentsChildren")
+  # It's scalar list aka value object. I suppose it's good enough.
+  # I would rather enforce referential integrity, but I don't know how.
+  childrenOrder: [ID!]!
+  # If name is null, use text or ID I suppose. Let's see.
   name: String
-  # Prisma does not support interfaces nor union types yet.
-  # https://github.com/prismagraphql/prisma/issues/165
-  contentText: String
-  contentTextFormat: String! @default(value: "CommonMark")
-  contentImage: Image
-  contentChildren: Children
+  text: String
+  textFormat: String! @default(value: "CommonMark")
+  images: [Image!]!
 }
 
 type Image {

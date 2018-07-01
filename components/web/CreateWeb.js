@@ -12,9 +12,9 @@ import Router from 'next/router';
 import type { Href } from '../app/sitemap';
 
 export const messages = defineMessages({
-  pageTitle: {
+  postName: {
     defaultMessage: 'Home',
-    id: 'createWeb.pageTitle',
+    id: 'createWeb.postName',
   },
   label: {
     defaultMessage: 'Web Name',
@@ -47,7 +47,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   redirectToPage = id => () => {
     const href: Href = {
-      pathname: '/page',
+      pathname: '/post',
       query: { id },
     };
     Router.push(href);
@@ -57,25 +57,25 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     // Payload can be a null, because resolver can throw or be deprecated or
     // whatever. Serious errors are handled globally, so nothing to do here.
     if (!createWeb) return;
-    const { errors, pageId } = createWeb;
+    const { errors, postId } = createWeb;
     if (errors) {
       this.setState({ errors });
       return;
     }
-    // We can only redirect if we have pageId. Remember, anything can fail if
+    // We can only redirect if we have postId. Remember, anything can fail if
     // network and a server is involved. Handle it gradually.
-    if (pageId == null) return;
+    if (postId == null) return;
     // Disable form before the redirect so it's not confusing for a user.
-    this.setState({ disabled: true }, this.redirectToPage(pageId));
+    this.setState({ disabled: true }, this.redirectToPage(postId));
   };
 
   createWeb = () => {
-    const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
+    const postName = this.props.intl.formatMessage(messages.postName);
 
     // Create input object from state, props, whatever.
     const input = {
       name: this.state.name,
-      pageTitle,
+      postName,
     };
 
     const errors = validations.validateCreateWeb(input);
@@ -120,10 +120,10 @@ export default withMutation(
   graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {
-        pageId
+        postId
         errors {
           name
-          pageTitle
+          postName
         }
       }
     }

@@ -10,7 +10,7 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
     me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>; 
-    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>; 
+    post(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Post | null>; 
     web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>; 
   }
 
@@ -19,7 +19,7 @@ export interface Mutation {
     createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>; 
     deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>; 
     setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
-    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>; 
+    setPostName(args: { input: SetPostNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPostNamePayload | null>; 
     setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>; 
   }
 
@@ -68,41 +68,19 @@ type AuthPayload {
   user: User
 }
 
-type Children {
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
-  order: [ID!]!
-}
-
-input ChildrenWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChildrenWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChildrenWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChildrenWhereInput!]
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
-  _MagicalBackRelation_ChildrenToPage_every: PageWhereInput
-  _MagicalBackRelation_ChildrenToPage_some: PageWhereInput
-  _MagicalBackRelation_ChildrenToPage_none: PageWhereInput
-}
-
 type CreateWebErrors {
   name: Max140CharsError
-  pageTitle: Max140CharsError
+  postName: Max140CharsError
 }
 
 input CreateWebInput {
   name: String!
-  pageTitle: String!
+  postName: String!
 }
 
 type CreateWebPayload {
   errors: CreateWebErrors
-  pageId: ID
+  postId: ID
 }
 
 scalar DateTime
@@ -113,251 +91,6 @@ input DeleteWebInput {
 
 type DeleteWebPayload {
   web: Web
-}
-
-type Element implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  creator(where: UserWhereInput): User!
-  name: String
-  contentText: String
-  contentTextFormat: String!
-  contentImage(where: ImageWhereInput): Image
-  contentChildren(where: ChildrenWhereInput): Children
-}
-
-enum ElementOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  name_ASC
-  name_DESC
-  contentText_ASC
-  contentText_DESC
-  contentTextFormat_ASC
-  contentTextFormat_DESC
-}
-
-input ElementWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ElementWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ElementWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ElementWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  contentText: String
-
-  """All values that are not equal to given value."""
-  contentText_not: String
-
-  """All values that are contained in given list."""
-  contentText_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentText_not_in: [String!]
-
-  """All values less than the given value."""
-  contentText_lt: String
-
-  """All values less than or equal the given value."""
-  contentText_lte: String
-
-  """All values greater than the given value."""
-  contentText_gt: String
-
-  """All values greater than or equal the given value."""
-  contentText_gte: String
-
-  """All values containing the given string."""
-  contentText_contains: String
-
-  """All values not containing the given string."""
-  contentText_not_contains: String
-
-  """All values starting with the given string."""
-  contentText_starts_with: String
-
-  """All values not starting with the given string."""
-  contentText_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentText_ends_with: String
-
-  """All values not ending with the given string."""
-  contentText_not_ends_with: String
-  contentTextFormat: String
-
-  """All values that are not equal to given value."""
-  contentTextFormat_not: String
-
-  """All values that are contained in given list."""
-  contentTextFormat_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentTextFormat_not_in: [String!]
-
-  """All values less than the given value."""
-  contentTextFormat_lt: String
-
-  """All values less than or equal the given value."""
-  contentTextFormat_lte: String
-
-  """All values greater than the given value."""
-  contentTextFormat_gt: String
-
-  """All values greater than or equal the given value."""
-  contentTextFormat_gte: String
-
-  """All values containing the given string."""
-  contentTextFormat_contains: String
-
-  """All values not containing the given string."""
-  contentTextFormat_not_contains: String
-
-  """All values starting with the given string."""
-  contentTextFormat_starts_with: String
-
-  """All values not starting with the given string."""
-  contentTextFormat_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentTextFormat_ends_with: String
-
-  """All values not ending with the given string."""
-  contentTextFormat_not_ends_with: String
-  creator: UserWhereInput
-  contentImage: ImageWhereInput
-  contentChildren: ChildrenWhereInput
 }
 
 enum EmailError {
@@ -570,9 +303,9 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  _MagicalBackRelation_ElementToImage_every: ElementWhereInput
-  _MagicalBackRelation_ElementToImage_some: ElementWhereInput
-  _MagicalBackRelation_ElementToImage_none: ElementWhereInput
+  _MagicalBackRelation_ImageToPost_every: PostWhereInput
+  _MagicalBackRelation_ImageToPost_some: PostWhereInput
+  _MagicalBackRelation_ImageToPost_none: PostWhereInput
 }
 
 enum Max140CharsError {
@@ -585,7 +318,7 @@ type Mutation {
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
-  setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
+  setPostName(input: SetPostNameInput!): SetPostNamePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
 }
 
@@ -595,36 +328,52 @@ interface Node {
   id: ID!
 }
 
-type Page implements Node {
+enum PasswordError {
+  REQUIRED
+  MIN_5_CHARS
+  MAX_1024_CHARS
+  WRONG_PASSWORD
+}
+
+type Post implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
-  title: String!
   web(where: WebWhereInput): Web!
-  children(where: ChildrenWhereInput): Children!
+  parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  childrenOrder: [ID!]!
+  name: String
+  text: String
+  textFormat: String!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
-enum PageOrderByInput {
+enum PostOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  title_ASC
-  title_DESC
+  name_ASC
+  name_DESC
+  text_ASC
+  text_DESC
+  textFormat_ASC
+  textFormat_DESC
 }
 
-input PageWhereInput {
+input PostWhereInput {
   """Logical AND on all given filters."""
-  AND: [PageWhereInput!]
+  AND: [PostWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PageWhereInput!]
+  OR: [PostWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PageWhereInput!]
+  NOT: [PostWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -709,76 +458,157 @@ input PageWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  title: String
+  name: String
 
   """All values that are not equal to given value."""
-  title_not: String
+  name_not: String
 
   """All values that are contained in given list."""
-  title_in: [String!]
+  name_in: [String!]
 
   """All values that are not contained in given list."""
-  title_not_in: [String!]
+  name_not_in: [String!]
 
   """All values less than the given value."""
-  title_lt: String
+  name_lt: String
 
   """All values less than or equal the given value."""
-  title_lte: String
+  name_lte: String
 
   """All values greater than the given value."""
-  title_gt: String
+  name_gt: String
 
   """All values greater than or equal the given value."""
-  title_gte: String
+  name_gte: String
 
   """All values containing the given string."""
-  title_contains: String
+  name_contains: String
 
   """All values not containing the given string."""
-  title_not_contains: String
+  name_not_contains: String
 
   """All values starting with the given string."""
-  title_starts_with: String
+  name_starts_with: String
 
   """All values not starting with the given string."""
-  title_not_starts_with: String
+  name_not_starts_with: String
 
   """All values ending with the given string."""
-  title_ends_with: String
+  name_ends_with: String
 
   """All values not ending with the given string."""
-  title_not_ends_with: String
+  name_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  textFormat: String
+
+  """All values that are not equal to given value."""
+  textFormat_not: String
+
+  """All values that are contained in given list."""
+  textFormat_in: [String!]
+
+  """All values that are not contained in given list."""
+  textFormat_not_in: [String!]
+
+  """All values less than the given value."""
+  textFormat_lt: String
+
+  """All values less than or equal the given value."""
+  textFormat_lte: String
+
+  """All values greater than the given value."""
+  textFormat_gt: String
+
+  """All values greater than or equal the given value."""
+  textFormat_gte: String
+
+  """All values containing the given string."""
+  textFormat_contains: String
+
+  """All values not containing the given string."""
+  textFormat_not_contains: String
+
+  """All values starting with the given string."""
+  textFormat_starts_with: String
+
+  """All values not starting with the given string."""
+  textFormat_not_starts_with: String
+
+  """All values ending with the given string."""
+  textFormat_ends_with: String
+
+  """All values not ending with the given string."""
+  textFormat_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  children: ChildrenWhereInput
-}
-
-enum PasswordError {
-  REQUIRED
-  MIN_5_CHARS
-  MAX_1024_CHARS
-  WRONG_PASSWORD
+  parents_every: PostWhereInput
+  parents_some: PostWhereInput
+  parents_none: PostWhereInput
+  children_every: PostWhereInput
+  children_some: PostWhereInput
+  children_none: PostWhereInput
+  images_every: ImageWhereInput
+  images_some: ImageWhereInput
+  images_none: ImageWhereInput
 }
 
 type Query {
   me: User
-  page(id: ID!): Page
+  post(id: ID!): Post
   web(id: ID!): Web
 }
 
-type SetPageTitleErrors {
-  title: Max140CharsError
+type SetPostNameErrors {
+  name: Max140CharsError
 }
 
-input SetPageTitleInput {
+input SetPostNameInput {
   id: ID!
-  title: String!
+  name: String!
 }
 
-type SetPageTitlePayload {
-  errors: SetPageTitleErrors
-  page: Page
+type SetPostNamePayload {
+  errors: SetPostNameErrors
+  post: Post
 }
 
 input SetThemeInput {
@@ -811,8 +641,7 @@ type User implements Node {
   password: String!
   themeName: String
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
@@ -1032,12 +861,9 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  posts_every: PostWhereInput
+  posts_some: PostWhereInput
+  posts_none: PostWhereInput
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -1049,7 +875,7 @@ type Web implements Node {
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
   name: String!
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
 enum WebOrderByInput {
@@ -1197,9 +1023,9 @@ input WebWhereInput {
   """All values not ending with the given string."""
   name_not_ends_with: String
   creator: UserWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
+  posts_every: PostWhereInput
+  posts_some: PostWhereInput
+  posts_none: PostWhereInput
 }
 `
 
@@ -1208,6 +1034,13 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 /**
  * Types
 */
+
+ export type EmailError =
+    | 'REQUIRED'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
+  
 
  export type WebOrderByInput =
     | 'id_ASC'
@@ -1220,30 +1053,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'name_DESC'
   
 
- export type Max140CharsError =
-    | 'REQUIRED'
-    | 'MAX_140_CHARS'
-  
-
- export type PageOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'title_ASC'
-    | 'title_DESC'
-  
-
- export type PasswordError =
-    | 'REQUIRED'
-    | 'MIN_5_CHARS'
-    | 'MAX_1024_CHARS'
-    | 'WRONG_PASSWORD'
-  
-
- export type ElementOrderByInput =
+ export type PostOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
     | 'createdAt_ASC'
@@ -1252,17 +1062,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
-    | 'contentText_ASC'
-    | 'contentText_DESC'
-    | 'contentTextFormat_ASC'
-    | 'contentTextFormat_DESC'
-  
-
- export type EmailError =
-    | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
+    | 'text_ASC'
+    | 'text_DESC'
+    | 'textFormat_ASC'
+    | 'textFormat_DESC'
   
 
  export type ImageOrderByInput =
@@ -1280,233 +1083,31 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'height_DESC'
   
 
- export type DeleteWebInput = {| 
-  id: ID_Input
-|}
+ export type PasswordError =
+    | 'REQUIRED'
+    | 'MIN_5_CHARS'
+    | 'MAX_1024_CHARS'
+    | 'WRONG_PASSWORD'
+  
 
- export type CreateWebInput = {| 
-  name: String,
-  pageTitle: String
-|}
+ export type Max140CharsError =
+    | 'REQUIRED'
+    | 'MAX_140_CHARS'
+  
 
- export type ElementWhereInput = {| 
-  AND?: Array< ElementWhereInput > | ElementWhereInput,
-  OR?: Array< ElementWhereInput > | ElementWhereInput,
-  NOT?: Array< ElementWhereInput > | ElementWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  contentText?: String,
-  contentText_not?: String,
-  contentText_in?: Array< String > | String,
-  contentText_not_in?: Array< String > | String,
-  contentText_lt?: String,
-  contentText_lte?: String,
-  contentText_gt?: String,
-  contentText_gte?: String,
-  contentText_contains?: String,
-  contentText_not_contains?: String,
-  contentText_starts_with?: String,
-  contentText_not_starts_with?: String,
-  contentText_ends_with?: String,
-  contentText_not_ends_with?: String,
-  contentTextFormat?: String,
-  contentTextFormat_not?: String,
-  contentTextFormat_in?: Array< String > | String,
-  contentTextFormat_not_in?: Array< String > | String,
-  contentTextFormat_lt?: String,
-  contentTextFormat_lte?: String,
-  contentTextFormat_gt?: String,
-  contentTextFormat_gte?: String,
-  contentTextFormat_contains?: String,
-  contentTextFormat_not_contains?: String,
-  contentTextFormat_starts_with?: String,
-  contentTextFormat_not_starts_with?: String,
-  contentTextFormat_ends_with?: String,
-  contentTextFormat_not_ends_with?: String,
-  creator?: UserWhereInput,
-  contentImage?: ImageWhereInput,
-  contentChildren?: ChildrenWhereInput
-|}
-
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
-|}
-
- export type SetPageTitleInput = {| 
+ export type SetWebNameInput = {| 
   id: ID_Input,
-  title: String
+  name: String
 |}
 
  export type SetThemeInput = {| 
   themeName: String
 |}
 
- export type WebWhereInput = {| 
-  AND?: Array< WebWhereInput > | WebWhereInput,
-  OR?: Array< WebWhereInput > | WebWhereInput,
-  NOT?: Array< WebWhereInput > | WebWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  creator?: UserWhereInput,
-  pages_every?: PageWhereInput,
-  pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput
-|}
-
- export type ImageWhereInput = {| 
-  AND?: Array< ImageWhereInput > | ImageWhereInput,
-  OR?: Array< ImageWhereInput > | ImageWhereInput,
-  NOT?: Array< ImageWhereInput > | ImageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  src?: String,
-  src_not?: String,
-  src_in?: Array< String > | String,
-  src_not_in?: Array< String > | String,
-  src_lt?: String,
-  src_lte?: String,
-  src_gt?: String,
-  src_gte?: String,
-  src_contains?: String,
-  src_not_contains?: String,
-  src_starts_with?: String,
-  src_not_starts_with?: String,
-  src_ends_with?: String,
-  src_not_ends_with?: String,
-  width?: Int,
-  width_not?: Int,
-  width_in?: Array< Int > | Int,
-  width_not_in?: Array< Int > | Int,
-  width_lt?: Int,
-  width_lte?: Int,
-  width_gt?: Int,
-  width_gte?: Int,
-  height?: Int,
-  height_not?: Int,
-  height_in?: Array< Int > | Int,
-  height_not_in?: Array< Int > | Int,
-  height_lt?: Int,
-  height_lte?: Int,
-  height_gt?: Int,
-  height_gte?: Int,
-  creator?: UserWhereInput,
-  _MagicalBackRelation_ElementToImage_every?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_some?: ElementWhereInput,
-  _MagicalBackRelation_ElementToImage_none?: ElementWhereInput
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
  export type UserWhereInput = {| 
@@ -1588,21 +1189,18 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   webs_every?: WebWhereInput,
   webs_some?: WebWhereInput,
   webs_none?: WebWhereInput,
-  pages_every?: PageWhereInput,
-  pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput,
+  posts_every?: PostWhereInput,
+  posts_some?: PostWhereInput,
+  posts_none?: PostWhereInput,
   images_every?: ImageWhereInput,
   images_some?: ImageWhereInput,
   images_none?: ImageWhereInput
 |}
 
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
+ export type PostWhereInput = {| 
+  AND?: Array< PostWhereInput > | PostWhereInput,
+  OR?: Array< PostWhereInput > | PostWhereInput,
+  NOT?: Array< PostWhereInput > | PostWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -1633,40 +1231,197 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   updatedAt_lte?: DateTime,
   updatedAt_gt?: DateTime,
   updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  text?: String,
+  text_not?: String,
+  text_in?: Array< String > | String,
+  text_not_in?: Array< String > | String,
+  text_lt?: String,
+  text_lte?: String,
+  text_gt?: String,
+  text_gte?: String,
+  text_contains?: String,
+  text_not_contains?: String,
+  text_starts_with?: String,
+  text_not_starts_with?: String,
+  text_ends_with?: String,
+  text_not_ends_with?: String,
+  textFormat?: String,
+  textFormat_not?: String,
+  textFormat_in?: Array< String > | String,
+  textFormat_not_in?: Array< String > | String,
+  textFormat_lt?: String,
+  textFormat_lte?: String,
+  textFormat_gt?: String,
+  textFormat_gte?: String,
+  textFormat_contains?: String,
+  textFormat_not_contains?: String,
+  textFormat_starts_with?: String,
+  textFormat_not_starts_with?: String,
+  textFormat_ends_with?: String,
+  textFormat_not_ends_with?: String,
   creator?: UserWhereInput,
   web?: WebWhereInput,
-  children?: ChildrenWhereInput
+  parents_every?: PostWhereInput,
+  parents_some?: PostWhereInput,
+  parents_none?: PostWhereInput,
+  children_every?: PostWhereInput,
+  children_some?: PostWhereInput,
+  children_none?: PostWhereInput,
+  images_every?: ImageWhereInput,
+  images_some?: ImageWhereInput,
+  images_none?: ImageWhereInput
 |}
 
- export type ChildrenWhereInput = {| 
-  AND?: Array< ChildrenWhereInput > | ChildrenWhereInput,
-  OR?: Array< ChildrenWhereInput > | ChildrenWhereInput,
-  NOT?: Array< ChildrenWhereInput > | ChildrenWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput,
-  _MagicalBackRelation_ChildrenToPage_every?: PageWhereInput,
-  _MagicalBackRelation_ChildrenToPage_some?: PageWhereInput,
-  _MagicalBackRelation_ChildrenToPage_none?: PageWhereInput
+ export type CreateWebInput = {| 
+  name: String,
+  postName: String
 |}
 
- export type SetWebNameInput = {| 
+ export type ImageWhereInput = {| 
+  AND?: Array< ImageWhereInput > | ImageWhereInput,
+  OR?: Array< ImageWhereInput > | ImageWhereInput,
+  NOT?: Array< ImageWhereInput > | ImageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  src?: String,
+  src_not?: String,
+  src_in?: Array< String > | String,
+  src_not_in?: Array< String > | String,
+  src_lt?: String,
+  src_lte?: String,
+  src_gt?: String,
+  src_gte?: String,
+  src_contains?: String,
+  src_not_contains?: String,
+  src_starts_with?: String,
+  src_not_starts_with?: String,
+  src_ends_with?: String,
+  src_not_ends_with?: String,
+  width?: Int,
+  width_not?: Int,
+  width_in?: Array< Int > | Int,
+  width_not_in?: Array< Int > | Int,
+  width_lt?: Int,
+  width_lte?: Int,
+  width_gt?: Int,
+  width_gte?: Int,
+  height?: Int,
+  height_not?: Int,
+  height_in?: Array< Int > | Int,
+  height_not_in?: Array< Int > | Int,
+  height_lt?: Int,
+  height_lte?: Int,
+  height_gt?: Int,
+  height_gte?: Int,
+  creator?: UserWhereInput,
+  _MagicalBackRelation_ImageToPost_every?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_some?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_none?: PostWhereInput
+|}
+
+ export type WebWhereInput = {| 
+  AND?: Array< WebWhereInput > | WebWhereInput,
+  OR?: Array< WebWhereInput > | WebWhereInput,
+  NOT?: Array< WebWhereInput > | WebWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  creator?: UserWhereInput,
+  posts_every?: PostWhereInput,
+  posts_some?: PostWhereInput,
+  posts_none?: PostWhereInput
+|}
+
+ export type SetPostNameInput = {| 
   id: ID_Input,
   name: String
+|}
+
+ export type DeleteWebInput = {| 
+  id: ID_Input
 |}
 
 /*
@@ -1677,8 +1432,18 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
 |}
 
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
+   user?: User,
+|}
+
  export type SetWebNameErrors = {| 
    name?: Max140CharsError,
+|}
+
+ export type DeleteWebPayload = {| 
+   web?: Web,
 |}
 
  export type User = {| ...Node,
@@ -1690,9 +1455,13 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    password: String,
    themeName?: String,
    webs?: Web[],
-   pages?: Page[],
-   elements?: Element[],
+   posts?: Post[],
    images?: Image[],
+|}
+
+ export type AuthErrors = {| 
+   email?: EmailError,
+   password?: PasswordError,
 |}
 
  export type Image = {| ...Node,
@@ -1706,66 +1475,48 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    creator: User,
 |}
 
- export type DeleteWebPayload = {| 
-   web?: Web,
+ export type SetThemePayload = {| 
+   user?: User,
 |}
 
- export type AuthPayload = {| 
-   errors?: AuthErrors,
-   token?: String,
-   user?: User,
+ export type CreateWebPayload = {| 
+   errors?: CreateWebErrors,
+   postId?: ID_Output,
+|}
+
+ export type SetPostNamePayload = {| 
+   errors?: SetPostNameErrors,
+   post?: Post,
+|}
+
+ export type SetPostNameErrors = {| 
+   name?: Max140CharsError,
+|}
+
+ export type CreateWebErrors = {| 
+   name?: Max140CharsError,
+   postName?: Max140CharsError,
+|}
+
+ export type Post = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   creator: User,
+   web: Web,
+   parents?: Post[],
+   children?: Post[],
+   childrenOrder: ID_Output[],
+   name?: String,
+   text?: String,
+   textFormat: String,
+   images?: Image[],
 |}
 
  export type SetWebNamePayload = {| 
    errors?: SetWebNameErrors,
    web?: Web,
-|}
-
- export type SetPageTitlePayload = {| 
-   errors?: SetPageTitleErrors,
-   page?: Page,
-|}
-
- export type Element = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   creator: User,
-   name?: String,
-   contentText?: String,
-   contentTextFormat: String,
-   contentImage?: Image,
-   contentChildren?: Children,
-|}
-
- export type SetPageTitleErrors = {| 
-   title?: Max140CharsError,
-|}
-
- export type SetThemePayload = {| 
-   user?: User,
-|}
-
- export type Children = {| 
-   elements?: Element[],
-   order: ID_Output[],
-|}
-
- export type AuthErrors = {| 
-   email?: EmailError,
-   password?: PasswordError,
-|}
-
- export type Page = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   creator: User,
-   title: String,
-   web: Web,
-   children: Children,
 |}
 
  export type Web = {| ...Node,
@@ -1775,28 +1526,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    updatedAt: DateTime,
    creator: User,
    name: String,
-   pages?: Page[],
+   posts?: Post[],
 |}
 
- export type CreateWebErrors = {| 
-   name?: Max140CharsError,
-   pageTitle?: Max140CharsError,
-|}
-
- export type CreateWebPayload = {| 
-   errors?: CreateWebErrors,
-   pageId?: ID_Output,
-|}
+ export type DateTime = Date | string 
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
  export type String = string 
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
- export type Int = number 
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -1809,4 +1547,7 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
  export type ID_Input = string
 export type ID_Output = string
 
- export type DateTime = Date | string 
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+ export type Int = number 

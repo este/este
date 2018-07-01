@@ -8,14 +8,14 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-type WebPages$ref = any;
+type WebPosts$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Web$ref: FragmentReference;
 export type Web = {|
   +web: ?{|
     +id: string,
     +name: string,
-    +$fragmentRefs: WebPages$ref,
+    +$fragmentRefs: WebPosts$ref,
   |},
   +$refType: Web$ref,
 |};
@@ -68,7 +68,7 @@ const node/*: ConcreteFragment*/ = {
         },
         {
           "kind": "FragmentSpread",
-          "name": "WebPages",
+          "name": "WebPosts",
           "args": null
         }
       ]
@@ -76,5 +76,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ae9cfc676280bb0c1c240220fb87903c';
+(node/*: any*/).hash = '4eeb88cc38581d6c18e5018d40511a16';
 module.exports = node;

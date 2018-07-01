@@ -16,7 +16,7 @@ export type Href =
       pathname: '/me',
     |}
   | {|
-      pathname: '/page',
+      pathname: '/post',
       query: {| id: string |},
     |}
   | {|
