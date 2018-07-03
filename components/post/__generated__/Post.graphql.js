@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+export type PostContentType = "CHILDREN" | "IMAGE" | "TEXT";
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Post$ref: FragmentReference;
 export type Post = {|
@@ -17,6 +18,22 @@ export type Post = {|
     +web: {|
       +id: string,
       +name: string,
+    |},
+    +parents: ?$ReadOnlyArray<{|
+      +id: string,
+      +name: ?string,
+    |}>,
+    +contentType: ?PostContentType,
+    +contentChildren: ?$ReadOnlyArray<{|
+      +id: string,
+      +name: ?string,
+      +contentType: ?PostContentType,
+    |}>,
+    +contentChildrenOrder: $ReadOnlyArray<string>,
+    +contentText: ?string,
+    +contentTextFormat: string,
+    +contentImage: ?{|
+      +id: string
     |},
   |},
   +$refType: Post$ref,
@@ -36,6 +53,17 @@ v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
+  v0,
+  v1
+],
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "contentType",
   "args": null,
   "storageKey": null
 };
@@ -79,9 +107,64 @@ return {
           "args": null,
           "concreteType": "Web",
           "plural": false,
+          "selections": v2
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "parents",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "Post",
+          "plural": true,
+          "selections": v2
+        },
+        v3,
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "contentChildren",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "Post",
+          "plural": true,
           "selections": [
             v0,
-            v1
+            v1,
+            v3
+          ]
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "contentChildrenOrder",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "contentText",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "contentTextFormat",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "contentImage",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "Image",
+          "plural": false,
+          "selections": [
+            v0
           ]
         }
       ]
@@ -90,5 +173,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'fcb1c834a6008a883b7523df61ae0edc';
+(node/*: any*/).hash = 'c867540dd45433d959711188ab176325';
 module.exports = node;
