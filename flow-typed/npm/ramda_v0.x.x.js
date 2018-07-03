@@ -1,5 +1,5 @@
-// flow-typed signature: 3b5ecd2f8052ad4ea3dcf7c24c455278
-// flow-typed version: 0cf8ad7dea/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 1e77c62a23c66bfc730d2df8586dcf50
+// flow-typed version: 18ad538dcd/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -553,6 +553,9 @@ declare module ramda {
   declare function prepend<E>(
     x: E,
   ): (xs: Array<E>) => Array<E>;
+
+  declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
+  declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
 
   declare function concat<V, T: Array<V> | string>(x: T, y: T): T;
   declare function concat<V, T: Array<V> | string>(x: T): (y: T) => T;
