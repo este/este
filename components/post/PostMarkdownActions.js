@@ -22,6 +22,12 @@ class PostMarkdownActions extends React.PureComponent<
 > {
   buttonsRef = React.createRef();
 
+  handleViewKeyDown = event => {
+    if (event.key === 'Escape') {
+      this.props.onEscape();
+    }
+  };
+
   // DOM side effect can be called from parent current via ref. That's fine.
   // https://github.com/necolas/react-native-web/blob/master/packages/website/guides/accessibility.md#spatial-navigation
   focusFirstIfExpanded() {
@@ -31,12 +37,6 @@ class PostMarkdownActions extends React.PureComponent<
     const first = getFocusableNodes(current)[0];
     if (first) first.focus();
   }
-
-  handleViewKeyDown = event => {
-    if (event.key === 'Escape') {
-      this.props.onEscape();
-    }
-  };
 
   render() {
     return (

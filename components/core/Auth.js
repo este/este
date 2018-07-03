@@ -72,6 +72,14 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     }
   };
 
+  handleSignIn = () => {
+    this.auth(false);
+  };
+
+  handleSignUp = () => {
+    this.auth(true);
+  };
+
   auth(isSignUp: boolean) {
     const input = {
       email: this.state.email,
@@ -87,9 +95,6 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
     this.props.commit(input, this.handleCompleted);
   }
-
-  signIn = () => this.auth(false);
-  signUp = () => this.auth(true);
 
   render() {
     const { intl } = this.props;
@@ -108,7 +113,7 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             onChangeText={this.setEmail}
             placeholder={intl.formatMessage(messages.emailPlaceholder)}
             value={this.state.email}
-            onSubmitEditing={this.signIn}
+            onSubmitEditing={this.handleSignIn}
           />
           <TextInput
             disabled={this.props.pending}
@@ -119,17 +124,17 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
             placeholder={intl.formatMessage(messages.passwordPlaceholder)}
             secureTextEntry
             value={this.state.password}
-            onSubmitEditing={this.signIn}
+            onSubmitEditing={this.handleSignIn}
           />
           <Row>
             <SignInButton
               disabled={this.props.pending}
-              onPress={this.signIn}
+              onPress={this.handleSignIn}
               color="primary"
             />
             <SignUpButton
               disabled={this.props.pending}
-              onPress={this.signUp}
+              onPress={this.handleSignUp}
               color="primary"
             />
           </Row>

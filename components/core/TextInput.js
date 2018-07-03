@@ -35,9 +35,22 @@ type TextInputPropsWithTheme = {|
 |};
 
 class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
+  inputRef = React.createRef();
+
+  handleOnChangeTextThrottled = throttle(value => {
+    const { onChangeTextThrottled } = this.props;
+    if (onChangeTextThrottled) onChangeTextThrottled(value);
+  }, 1000);
+
   componentDidUpdate(prevProps) {
     this.maybeFocusOnError(prevProps);
   }
+
+  handleOnChangeText = value => {
+    const { onChangeText } = this.props;
+    if (onChangeText) onChangeText(value);
+    this.handleOnChangeTextThrottled(value);
+  };
 
   maybeFocusOnError(prevProps) {
     const doFocus =
@@ -50,19 +63,6 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
     if (!doFocus || !this.inputRef.current) return;
     this.inputRef.current.focus();
   }
-
-  inputRef = React.createRef();
-
-  handleOnChangeTextThrottled = throttle(value => {
-    const { onChangeTextThrottled } = this.props;
-    if (onChangeTextThrottled) onChangeTextThrottled(value);
-  }, 1000);
-
-  handleOnChangeText = value => {
-    const { onChangeText } = this.props;
-    if (onChangeText) onChangeText(value);
-    this.handleOnChangeTextThrottled(value);
-  };
 
   render() {
     const {

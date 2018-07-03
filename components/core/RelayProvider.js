@@ -31,11 +31,6 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
     };
   }
 
-  relayContext: {|
-    environment: Environment,
-    variables: Object,
-  |};
-
   getChildContext() {
     return {
       relay: this.relayContext,
@@ -49,6 +44,11 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
       variables: nextProps.router.query,
     });
   }
+
+  relayContext: {|
+    environment: Environment,
+    variables: Object,
+  |};
 
   render() {
     return this.props.children;

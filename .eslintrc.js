@@ -29,7 +29,6 @@ module.exports = {
     'react/destructuring-assignment': 0, // Too strict.
     'import/order': 0, // Too strict.
     'lines-between-class-members': 0, // Too strict.
-    'react/sort-comp': 0, // Too strict.
     'import/no-cycle': 0, // Too strict.
     'spaced-comment': ['error', 'always', { markers: ['::', ':'] }], // Flow comments.
     'consistent-return': 0, // Flow checks it.

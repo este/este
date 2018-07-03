@@ -48,6 +48,9 @@ class PostMarkdown extends React.PureComponent<
   PostMarkdownProps,
   PostMarkdownState,
 > {
+  inputRef = React.createRef();
+  actionsRef = React.createRef();
+
   state = {
     selection: { start: 0, end: 0 },
     actionsAreExpanded: false,
@@ -62,18 +65,6 @@ class PostMarkdown extends React.PureComponent<
     if (prevState.value !== this.state.value) {
       this.adjustHeight();
     }
-  }
-
-  adjustHeight() {
-    const { current } = this.inputRef;
-    if (!current) return;
-    current.setNativeProps({
-      style: { height: 0 },
-    });
-    current.setNativeProps({
-      // eslint-disable-next-line no-underscore-dangle
-      style: { height: current._node.scrollHeight },
-    });
   }
 
   handleTextInputChangeText = text => {
@@ -127,9 +118,17 @@ class PostMarkdown extends React.PureComponent<
     this.focusTextInput();
   };
 
-  inputRef = React.createRef();
-
-  actionsRef = React.createRef();
+  adjustHeight() {
+    const { current } = this.inputRef;
+    if (!current) return;
+    current.setNativeProps({
+      style: { height: 0 },
+    });
+    current.setNativeProps({
+      // eslint-disable-next-line no-underscore-dangle
+      style: { height: current._node.scrollHeight },
+    });
+  }
 
   selectionIsCollapsed() {
     const { selection } = this.state;

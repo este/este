@@ -54,6 +54,10 @@ const withMutation = <Props: {}, Input: Object, Response>(
   |};
 
   class WithMutation extends React.PureComponent<MutationProps, MutationState> {
+    disposables: Array<Disposable> = [];
+
+    disposed = false;
+
     state = {
       pending: false,
     };
@@ -62,9 +66,6 @@ const withMutation = <Props: {}, Input: Object, Response>(
       this.disposables.forEach(disposable => disposable.dispose());
       this.disposed = true;
     }
-
-    disposables: Array<Disposable> = [];
-    disposed = false;
 
     commit: Commit<Input, Response> = (input, onCompleted) => {
       if (this.disposed) return;
