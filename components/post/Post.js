@@ -8,6 +8,18 @@ import * as generated from './__generated__/Post.graphql';
 import PostName from './PostName';
 import Head from 'next/head';
 import EditMainNav from '../EditMainNav';
+import Row from '../core/Row';
+import A from '../core/A';
+
+const PostParents = ({ parents }) => (
+  <Row>
+    {parents.map(({ id, name }) => (
+      <A href={{ pathname: '/post', query: { id } }} prefetch key={id}>
+        {name}
+      </A>
+    ))}
+  </Row>
+);
 
 type PostProps = {|
   theme: Theme,
@@ -15,24 +27,31 @@ type PostProps = {|
 |};
 
 class Post extends React.PureComponent<PostProps> {
+  // Next.js Head title requires string.
+  static getTitle(post): string {
+    if (post.name != null) return post.name;
+    if (post.contentText != null) return post.contentText;
+    return post.id;
+  }
+
   render() {
     const {
       theme,
       data: { post },
     } = this.props;
     if (post == null) return null;
-    const { web } = post;
+    const title = Post.getTitle(post);
     return (
       <>
         <Head>
-          <title>{post.name}</title>
+          <title>{title}</title>
         </Head>
-        <EditMainNav webId={web.id} webName={web.name} />
+        <EditMainNav webId={post.web.id} webName={post.web.name} />
         <View style={theme.styles.post}>
           {post.name != null && (
             <PostName postId={post.id} defaultValue={post.name} />
           )}
-
+          {post.parents != null && <PostParents parents={post.parents} />}
           <PostMarkdown />
         </View>
       </>
@@ -50,6 +69,22 @@ export default createFragmentContainer(
         web {
           id
           name
+        }
+        parents {
+          id
+          name
+        }
+        contentType
+        contentChildren {
+          id
+          name
+          contentType
+        }
+        contentChildrenOrder
+        contentText
+        contentTextFormat
+        contentImage {
+          id
         }
       }
     }

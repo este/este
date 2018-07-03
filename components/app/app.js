@@ -3,7 +3,7 @@
 import * as React from 'react';
 import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { type GraphQLTaggedNode, type Environment } from 'react-relay';
+import { type GraphQLTaggedNode } from 'react-relay';
 import { fetchQuery } from 'relay-runtime';
 import { getCookie } from './cookie';
 import LocaleContext from '../core/LocaleContext';
@@ -66,7 +66,6 @@ const app = (
   class App extends React.PureComponent<AppProps, AppState> {
     constructor(props: AppProps) {
       super(props);
-      this.environment = createRelayEnvironment(props.token, props.records);
       this.localeContext = {
         current: props.locale,
         supported: props.supportedLocales,
@@ -117,11 +116,15 @@ const app = (
       }: AppProps);
     }
 
-    environment: Environment;
-
     localeContext: { current: string, supported: Array<string> };
 
     render() {
+      // Must be created in render to get updated records from getInitialProps
+      // on the same App instance. It happens when URL query is changed.
+      const environment = createRelayEnvironment(
+        this.props.token,
+        this.props.records,
+      );
       return (
         // Many issues by third-party components.
         // <React.StrictMode>
@@ -136,8 +139,8 @@ const app = (
               context consumer a separate node in the tree. */}
           <ErrorContext.Provider value={this.state.errorContext}>
             <LocaleContext.Provider value={this.localeContext}>
-              <EnvironmentContext.Provider value={this.environment}>
-                <RelayProvider environment={this.environment}>
+              <EnvironmentContext.Provider value={environment}>
+                <RelayProvider environment={environment}>
                   <Page data={this.props.data} />
                 </RelayProvider>
               </EnvironmentContext.Provider>
