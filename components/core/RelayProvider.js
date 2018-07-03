@@ -7,15 +7,15 @@ import { withRouter } from 'next/router';
 // RelayProvider sets Relay context manually for SSR and pending navigations.
 // Check App.getInitialProps, note "await fetchQuery". It replaces QueryRenderer.
 // https://github.com/robrichard/relay-context-provider
-// TODO: This is temp hack. Can't be updated for a new React context.
+// TODO: Recheck with every new Relay release.
 
-type RelayProviderProps = {
+type RelayProviderProps = {|
   environment: Environment,
   children: React.Node,
-  router: {
+  router: {|
     query: Object,
-  },
-};
+  |},
+|};
 
 class RelayProvider extends React.PureComponent<RelayProviderProps> {
   static childContextTypes = {
@@ -23,13 +23,31 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
     relay: PropTypes.object.isRequired,
   };
 
+  constructor(props, context) {
+    super(props, context);
+    this.relayContext = {
+      environment: this.props.environment,
+      variables: this.props.router.query,
+    };
+  }
+
+  relayContext: {|
+    environment: Environment,
+    variables: Object,
+  |};
+
   getChildContext() {
     return {
-      relay: {
-        environment: this.props.environment,
-        variables: this.props.router.query,
-      },
+      relay: this.relayContext,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // https://github.com/facebook/relay/issues/2429#issuecomment-391808755
+    Object.assign(this.relayContext, {
+      environment: nextProps.environment,
+      variables: nextProps.router.query,
+    });
   }
 
   render() {
