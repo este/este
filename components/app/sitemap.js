@@ -28,7 +28,7 @@ export type Href =
 // would require all pages just because of their titles.
 export const titles = defineMessages({
   index: {
-    defaultMessage: 'Home',
+    defaultMessage: 'Este',
     id: 'sitemap.title.index',
   },
   signIn: {

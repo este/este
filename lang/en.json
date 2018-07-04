@@ -31,7 +31,7 @@
   "postMarkdown.textInput.example": "# Example\n\nMarkdown is a simple way to *format* text that looks **great** on any device.\n\n* List\n* List\n\n1. One\n2. Two\n\n> Blockquote\n\nmade by [steida](https://twitter.com/steida)",
   "postMarkdown.textInput.placeholder": "write",
   "postName.textInput.placeholder": "post name",
-  "sitemap.title.index": "Home",
+  "sitemap.title.index": "Este",
   "sitemap.title.me": "Me",
   "sitemap.title.signIn": "Sign In",
   "webName.textInput.placeholder": "web name",

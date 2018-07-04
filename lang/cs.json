@@ -31,7 +31,7 @@
   "postMarkdown.textInput.example": "# Příklad\n\nMarkdown je jednoduchý způsob pro zápis *formátovaného* textu který vypadá **skvěle** všude.\n\n* Seznam\n* Seznam\n\n1. První\n2. Druhý\n\n> Citace\n\nvytvořil [steida](https://twitter.com/steida)",
   "postMarkdown.textInput.placeholder": "piš",
   "postName.textInput.placeholder": "název postu",
-  "sitemap.title.index": "Domů",
+  "sitemap.title.index": "Este",
   "sitemap.title.me": "Já",
   "sitemap.title.signIn": "Přihlášení",
   "webName.textInput.placeholder": "název webu",
