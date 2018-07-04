@@ -25,7 +25,7 @@ class Web extends React.PureComponent<WebProps> {
         <Head>
           <title>{web.name}</title>
         </Head>
-        <EditMainNav webId={web.id} webName={web.name} />
+        <EditMainNav web={web} />
         <Block>
           <WebName webId={web.id} defaultValue={web.name} />
           {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}

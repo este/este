@@ -8,18 +8,6 @@ import * as generated from './__generated__/Post.graphql';
 import PostName from './PostName';
 import Head from 'next/head';
 import EditMainNav from '../EditMainNav';
-import Row from '../core/Row';
-import A from '../core/A';
-
-const PostParents = ({ parents }) => (
-  <Row>
-    {parents.map(({ id, name }) => (
-      <A href={{ pathname: '/post', query: { id } }} prefetch key={id}>
-        {name}
-      </A>
-    ))}
-  </Row>
-);
 
 type PostProps = {|
   theme: Theme,
@@ -46,12 +34,11 @@ class Post extends React.PureComponent<PostProps> {
         <Head>
           <title>{title}</title>
         </Head>
-        <EditMainNav webId={post.web.id} webName={post.web.name} />
+        <EditMainNav web={post.web} postParents={post.parents} />
         <View style={theme.styles.post}>
           {post.name != null && (
             <PostName postId={post.id} defaultValue={post.name} />
           )}
-          {post.parents != null && <PostParents parents={post.parents} />}
           <PostMarkdown />
         </View>
       </>
