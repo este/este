@@ -41,6 +41,9 @@ const Me = props => {
       {me != null && (
         <>
           <Block>
+            <Text bold>{me.email}</Text>
+          </Block>
+          <Block>
             <Image
               source={getGravatarUrl(me.email)}
               style={{
@@ -49,9 +52,6 @@ const Me = props => {
               }}
               title={me.email}
             />
-          </Block>
-          <Block>
-            <Text bold>{me.email}</Text>
           </Block>
         </>
       )}

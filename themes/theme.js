@@ -88,10 +88,6 @@ const stylesJson = {
     maxWidth: typography.rhythm(28),
   },
 
-  rowSpacer: {
-    width: typography.rhythm(0.5),
-  },
-
   appPageContainer: {
     paddingHorizontal: typography.rhythm(0.5),
     maxWidth: 768,
@@ -107,7 +103,7 @@ const stylesJson = {
   appPageMainNav: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginVertical: typography.rhythm(2),
+    marginVertical: typography.rhythm(1),
   },
 
   stateDisabled: {
