@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/WebPostsItem.graphql';
 import Text from '../core/Text';
 import A from '../core/A';
+import Row from '../core/Row';
 import Block from '../core/Block';
 import { FormattedRelative } from 'react-intl';
 
@@ -18,9 +19,11 @@ class WebPostsItem extends React.PureComponent<WebPostsItemProps> {
     } = this.props;
     return (
       <Block>
-        <A href={{ pathname: '/post', query: { id } }} prefetch>
-          {name}
-        </A>
+        <Row>
+          <A href={{ pathname: '/post', query: { id } }} prefetch>
+            {name}
+          </A>
+        </Row>
         <Text color="gray" size={-1}>
           <FormattedRelative value={updatedAt} />
         </Text>

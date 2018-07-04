@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
+import Row from '../components/core/Row';
 import AppPage from '../components/app/AppPage';
 import SetTheme from '../components/core/SetTheme';
 import app from '../components/app/app';
@@ -55,10 +56,14 @@ const Me = props => {
         </>
       )}
       <Block>
-        <SetTheme />
+        <Row>
+          <SetTheme />
+        </Row>
       </Block>
       <Block>
-        <SignOutButton color="danger" onPress={signOut} />
+        <Row>
+          <SignOutButton color="danger" onPress={signOut} />
+        </Row>
       </Block>
     </AppPage>
   );

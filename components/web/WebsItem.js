@@ -5,6 +5,7 @@ import * as generated from './__generated__/WebsItem.graphql';
 import Text from '../core/Text';
 import A from '../core/A';
 import Block from '../core/Block';
+import Row from '../core/Row';
 import { FormattedRelative } from 'react-intl';
 
 type WebsItemProps = {|
@@ -19,9 +20,11 @@ class WebsItem extends React.PureComponent<WebsItemProps> {
     if (id == null) return null;
     return (
       <Block>
-        <A href={{ pathname: '/post', query: { id } }} prefetch>
-          {data.name}
-        </A>
+        <Row>
+          <A href={{ pathname: '/post', query: { id } }} prefetch>
+            {data.name}
+          </A>
+        </Row>
         <Text color="gray" size={-1}>
           <FormattedRelative value={data.updatedAt} />
         </Text>

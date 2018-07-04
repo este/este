@@ -8,6 +8,7 @@ import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
 import Block from '../components/core/Block';
+import Row from '../components/core/Row';
 import CreateWeb from '../components/web/CreateWeb';
 import Webs from '../components/web/Webs';
 import { graphql } from 'react-relay';
@@ -26,9 +27,14 @@ const NotAuthenticated = () => (
   <>
     <Heading size={2}>Este</Heading>
     <Block>
-      <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
-        <FormattedMessage defaultMessage="Create web" id="yourWebs.createWeb" />
-      </A>
+      <Row>
+        <A href={{ pathname: '/sign-in', query: { redirectUrl: '/' } }}>
+          <FormattedMessage
+            defaultMessage="Create web"
+            id="yourWebs.createWeb"
+          />
+        </A>
+      </Row>
     </Block>
     <Blockquote
       source="Friedrich Hayek"
