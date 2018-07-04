@@ -13,7 +13,20 @@ type AState = {|
   hover: boolean,
 |};
 
-class A extends React.PureComponent<AProps & { router: Object }, AState> {
+class A extends React.PureComponent<
+  AProps & { router: { pathname: string, query: Object } },
+  AState,
+> {
+  static isActive(href, router) {
+    if (typeof href !== 'object') return false;
+    if (typeof href.query !== 'object')
+      return href.pathname === router.pathname;
+    return (
+      href.pathname === router.pathname &&
+      JSON.stringify(href.query) === JSON.stringify(router.query)
+    );
+  }
+
   state = { hover: false };
 
   handleMouseEnter = () => {
@@ -33,8 +46,7 @@ class A extends React.PureComponent<AProps & { router: Object }, AState> {
       router,
       ...props
     } = this.props;
-    const isActive =
-      typeof href === 'object' && href.pathname === router.pathname;
+    const isActive = A.isActive(href, router);
     const decoration = this.state.hover || isActive ? 'underline' : 'none';
 
     return (
