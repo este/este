@@ -32,13 +32,21 @@ const node/*: ConcreteFragment*/ = {
       "kind": "LinkedField",
       "alias": null,
       "name": "posts",
-      "storageKey": "posts(orderBy:\"updatedAt_DESC\")",
+      "storageKey": "posts(orderBy:\"updatedAt_DESC\",where:{\"name_not\":null})",
       "args": [
         {
           "kind": "Literal",
           "name": "orderBy",
           "value": "updatedAt_DESC",
           "type": "PostOrderByInput"
+        },
+        {
+          "kind": "Literal",
+          "name": "where",
+          "value": {
+            "name_not": null
+          },
+          "type": "PostWhereInput"
         }
       ],
       "concreteType": "Post",
@@ -61,5 +69,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '4f928cc662fd3a062e6a5c0bc22b359d';
+(node/*: any*/).hash = '873622f8a7a2192bd100f0946a7e24cf';
 module.exports = node;

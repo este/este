@@ -23,7 +23,7 @@ export default createFragmentContainer(
   WebPosts,
   graphql`
     fragment WebPosts on Web {
-      posts(orderBy: updatedAt_DESC) {
+      posts(orderBy: updatedAt_DESC, where: { name_not: null }) {
         id
         ...WebPostsItem
       }
