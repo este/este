@@ -8,6 +8,7 @@ import * as generated from './__generated__/Post.graphql';
 import PostName from './PostName';
 import Head from 'next/head';
 import EditMainNav from '../EditMainNav';
+import Block from '../core/Block';
 
 type PostProps = {|
   theme: Theme,
@@ -20,6 +21,53 @@ class Post extends React.PureComponent<PostProps> {
     if (post.name != null) return post.name;
     if (post.contentText != null) return post.contentText;
     return post.id;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  renderPostChild({ id, contentType, contentText }) {
+    if (!contentType) return null;
+    switch (contentType) {
+      case 'TEXT':
+        return (
+          contentText != null && (
+            <Block key={id}>
+              <PostMarkdown defaultValue={contentText} />
+            </Block>
+          )
+        );
+      case 'IMAGE':
+        return null;
+      case 'CHILDREN':
+        // TODO: Just Name as link.
+        return null;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (contentType: empty);
+        return null;
+    }
+  }
+
+  renderPost({ contentType, contentText, contentChildren }) {
+    if (!contentType) return null;
+    switch (contentType) {
+      case 'TEXT':
+        return (
+          contentText != null && <PostMarkdown defaultValue={contentText} />
+        );
+      case 'IMAGE':
+        return null;
+      case 'CHILDREN':
+        return (
+          contentChildren != null &&
+          contentChildren.map(child => {
+            return this.renderPostChild(child);
+          })
+        );
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (contentType: empty);
+        return null;
+    }
   }
 
   render() {
@@ -39,7 +87,7 @@ class Post extends React.PureComponent<PostProps> {
           {post.name != null && (
             <PostName postId={post.id} defaultValue={post.name} />
           )}
-          <PostMarkdown />
+          {this.renderPost(post)}
         </View>
       </>
     );
@@ -66,13 +114,14 @@ export default createFragmentContainer(
           id
           name
           contentType
+          contentText
         }
-        contentChildrenOrder
+        # contentChildrenOrder
         contentText
-        contentTextFormat
-        contentImage {
-          id
-        }
+        # contentTextFormat
+        # contentImage {
+        #   id
+        # }
       }
     }
   `,

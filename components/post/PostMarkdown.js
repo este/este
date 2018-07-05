@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { View, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import PostMarkdownActions from './PostMarkdownActions';
@@ -33,6 +33,11 @@ made by [steida](https://twitter.com/steida)
 });
 
 type PostMarkdownProps = {|
+  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+  // tldr: For any piece of data, you need to pick a single component that owns
+  // it as the source of truth, and avoid duplicating it in other components.
+  // In the other words, it's the old "The single responsibility principle".
+  defaultValue: string,
   theme: Theme,
   intl: IntlShape,
   // confirm: Confirm,
@@ -54,7 +59,7 @@ class PostMarkdown extends React.PureComponent<
   state = {
     selection: { start: 0, end: 0 },
     actionsAreExpanded: false,
-    value: '',
+    value: this.props.defaultValue,
   };
 
   componentDidMount() {
@@ -139,7 +144,7 @@ class PostMarkdown extends React.PureComponent<
     const { theme, intl } = this.props;
 
     return (
-      <View style={theme.styles.postMarkdown}>
+      <>
         <TextInput
           // https://github.com/necolas/react-native-web/issues/988
           // autoFocus
@@ -170,7 +175,7 @@ class PostMarkdown extends React.PureComponent<
           onReuse={this.handleActionsReuse}
           onEscape={this.handleActionsEscape}
         />
-      </View>
+      </>
     );
   }
 }

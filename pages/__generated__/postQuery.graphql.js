@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3ecd4a8a160df2b485f7310aff671699
+ * @relayHash 6a41cf0c360d78e950ab152bdec55ffd
  */
 
 /* eslint-disable */
@@ -58,13 +58,9 @@ fragment Post_1Bmzm5 on Query {
       id
       name
       contentType
+      contentText
     }
-    contentChildrenOrder
     contentText
-    contentTextFormat
-    contentImage {
-      id
-    }
   }
 }
 */
@@ -93,24 +89,28 @@ v2 = {
   "args": null,
   "storageKey": null
 },
-v3 = [
-  v2
-],
-v4 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v5 = [
+v4 = [
   v2,
-  v4
+  v3
 ],
-v6 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "contentType",
+  "args": null,
+  "storageKey": null
+},
+v6 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "contentText",
   "args": null,
   "storageKey": null
 };
@@ -119,7 +119,7 @@ return {
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    contentType\n    contentChildren {\n      id\n      name\n      contentType\n    }\n    contentChildrenOrder\n    contentText\n    contentTextFormat\n    contentImage {\n      id\n    }\n  }\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    contentType\n    contentChildren {\n      id\n      name\n      contentType\n      contentText\n    }\n    contentText\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -136,7 +136,9 @@ return {
         "args": v1,
         "concreteType": "Post",
         "plural": false,
-        "selections": v3
+        "selections": [
+          v2
+        ]
       },
       {
         "kind": "FragmentSpread",
@@ -172,7 +174,7 @@ return {
         "plural": false,
         "selections": [
           v2,
-          v4,
+          v3,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -181,7 +183,7 @@ return {
             "args": null,
             "concreteType": "Web",
             "plural": false,
-            "selections": v5
+            "selections": v4
           },
           {
             "kind": "LinkedField",
@@ -191,9 +193,9 @@ return {
             "args": null,
             "concreteType": "Post",
             "plural": true,
-            "selections": v5
+            "selections": v4
           },
-          v6,
+          v5,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -204,41 +206,12 @@ return {
             "plural": true,
             "selections": [
               v2,
-              v4,
+              v3,
+              v5,
               v6
             ]
           },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "contentChildrenOrder",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "contentText",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "contentTextFormat",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "contentImage",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Image",
-            "plural": false,
-            "selections": v3
-          }
+          v6
         ]
       },
       {

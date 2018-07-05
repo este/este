@@ -28,13 +28,9 @@ export type Post = {|
       +id: string,
       +name: ?string,
       +contentType: ?PostContentType,
+      +contentText: ?string,
     |}>,
-    +contentChildrenOrder: $ReadOnlyArray<string>,
     +contentText: ?string,
-    +contentTextFormat: string,
-    +contentImage: ?{|
-      +id: string
-    |},
   |},
   +$refType: Post$ref,
 |};
@@ -64,6 +60,13 @@ v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "contentType",
+  "args": null,
+  "storageKey": null
+},
+v4 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "contentText",
   "args": null,
   "storageKey": null
 };
@@ -131,47 +134,16 @@ return {
           "selections": [
             v0,
             v1,
-            v3
+            v3,
+            v4
           ]
         },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "contentChildrenOrder",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "contentText",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "contentTextFormat",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "contentImage",
-          "storageKey": null,
-          "args": null,
-          "concreteType": "Image",
-          "plural": false,
-          "selections": [
-            v0
-          ]
-        }
+        v4
       ]
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c867540dd45433d959711188ab176325';
+(node/*: any*/).hash = '087db08bc00de485772ad2687cae56f6';
 module.exports = node;

@@ -138,10 +138,6 @@ const stylesJson = {
     flex: 1,
   },
 
-  postMarkdown: {
-    paddingVertical: typography.rhythm(0.5),
-  },
-
   postMarkdownTextInput: {
     color: colors.black,
     fontFamily,
@@ -151,7 +147,7 @@ const stylesJson = {
 
   postMarkdownButtons: {
     minHeight: typography.rhythm(1),
-    paddingVertical: typography.rhythm(1),
+    // paddingVertical: typography.rhythm(1),
   },
 };
 
