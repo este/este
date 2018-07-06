@@ -7,6 +7,8 @@ import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet
 import ErrorMessage, { type MessageError } from './ErrorMessage';
 import throttle from 'lodash/throttle';
 
+export const onChangeTextThrottle = 1000;
+
 export type TextInputProps = {|
   disabled?: boolean,
   label?: string | React.Element<any>,
@@ -40,7 +42,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
   handleOnChangeTextThrottled = throttle(value => {
     const { onChangeTextThrottled } = this.props;
     if (onChangeTextThrottled) onChangeTextThrottled(value);
-  }, 1000);
+  }, onChangeTextThrottle);
 
   componentDidUpdate(prevProps) {
     this.maybeFocusOnError(prevProps);
