@@ -1,5 +1,5 @@
-// flow-typed signature: 4cacceffd326bb118e4a3c1b4d629e98
-// flow-typed version: e737b9832f/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: f237a17e7f8ec5e8bf98a9a8ff4ef51a
+// flow-typed version: 9dd5475d13/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -65,7 +65,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    */
   mockReturnThis(): void,
   /**
-   * Deprecated: use jest.fn(() => value) instead
+   * Accepts a value that will be returned whenever the mock function is called.
    */
   mockReturnValue(value: TReturn): JestMockFn<TArguments, TReturn>,
   /**
