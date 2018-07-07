@@ -21,6 +21,7 @@ export interface Mutation {
     setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
     setPostName(args: { input: SetPostNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPostNamePayload | null>; 
     setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>; 
+    setPostContentText(args: { input: SetPostContentTextInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPostContentTextPayload | null>; 
   }
 
 export interface Subscription {}
@@ -320,6 +321,7 @@ type Mutation {
   setTheme(input: SetThemeInput!): SetThemePayload
   setPostName(input: SetPostNameInput!): SetPostNamePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
+  setPostContentText(input: SetPostContentTextInput!): SetPostContentTextPayload
 }
 
 """An object with an ID"""
@@ -612,6 +614,15 @@ type Query {
   me: User
   post(id: ID!): Post
   web(id: ID!): Web
+}
+
+input SetPostContentTextInput {
+  id: ID!
+  contentText: String!
+}
+
+type SetPostContentTextPayload {
+  post: Post
 }
 
 type SetPostNameErrors {
@@ -1052,12 +1063,6 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
  * Types
 */
 
- export type PostContentType =
-    | 'CHILDREN'
-    | 'TEXT'
-    | 'IMAGE'
-  
-
  export type WebOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
@@ -1069,9 +1074,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'name_DESC'
   
 
- export type Max140CharsError =
+ export type EmailError =
     | 'REQUIRED'
-    | 'MAX_140_CHARS'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
   
 
  export type PostOrderByInput =
@@ -1091,11 +1098,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'contentTextFormat_DESC'
   
 
- export type PasswordError =
+ export type PostContentType =
+    | 'CHILDREN'
+    | 'TEXT'
+    | 'IMAGE'
+  
+
+ export type Max140CharsError =
     | 'REQUIRED'
-    | 'MIN_5_CHARS'
-    | 'MAX_1024_CHARS'
-    | 'WRONG_PASSWORD'
+    | 'MAX_140_CHARS'
   
 
  export type ImageOrderByInput =
@@ -1113,15 +1124,20 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'height_DESC'
   
 
- export type EmailError =
+ export type PasswordError =
     | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
+    | 'MIN_5_CHARS'
+    | 'MAX_1024_CHARS'
+    | 'WRONG_PASSWORD'
   
 
  export type DeleteWebInput = {| 
   id: ID_Input
+|}
+
+ export type SetWebNameInput = {| 
+  id: ID_Input,
+  name: String
 |}
 
  export type CreateWebInput = {| 
@@ -1129,94 +1145,8 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   postName: String
 |}
 
- export type ImageWhereInput = {| 
-  AND?: Array< ImageWhereInput > | ImageWhereInput,
-  OR?: Array< ImageWhereInput > | ImageWhereInput,
-  NOT?: Array< ImageWhereInput > | ImageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  src?: String,
-  src_not?: String,
-  src_in?: Array< String > | String,
-  src_not_in?: Array< String > | String,
-  src_lt?: String,
-  src_lte?: String,
-  src_gt?: String,
-  src_gte?: String,
-  src_contains?: String,
-  src_not_contains?: String,
-  src_starts_with?: String,
-  src_not_starts_with?: String,
-  src_ends_with?: String,
-  src_not_ends_with?: String,
-  width?: Int,
-  width_not?: Int,
-  width_in?: Array< Int > | Int,
-  width_not_in?: Array< Int > | Int,
-  width_lt?: Int,
-  width_lte?: Int,
-  width_gt?: Int,
-  width_gte?: Int,
-  height?: Int,
-  height_not?: Int,
-  height_in?: Array< Int > | Int,
-  height_not_in?: Array< Int > | Int,
-  height_lt?: Int,
-  height_lte?: Int,
-  height_gt?: Int,
-  height_gte?: Int,
-  creator?: UserWhereInput,
-  _MagicalBackRelation_ImageToPost_every?: PostWhereInput,
-  _MagicalBackRelation_ImageToPost_some?: PostWhereInput,
-  _MagicalBackRelation_ImageToPost_none?: PostWhereInput
-|}
-
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
-|}
-
- export type SetPostNameInput = {| 
-  id: ID_Input,
-  name: String
-|}
-
  export type SetThemeInput = {| 
   themeName: String
-|}
-
- export type SetWebNameInput = {| 
-  id: ID_Input,
-  name: String
 |}
 
  export type WebWhereInput = {| 
@@ -1271,6 +1201,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   posts_every?: PostWhereInput,
   posts_some?: PostWhereInput,
   posts_none?: PostWhereInput
+|}
+
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
  export type UserWhereInput = {| 
@@ -1358,6 +1294,11 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   images_every?: ImageWhereInput,
   images_some?: ImageWhereInput,
   images_none?: ImageWhereInput
+|}
+
+ export type SetPostContentTextInput = {| 
+  id: ID_Input,
+  contentText: String
 |}
 
  export type PostWhereInput = {| 
@@ -1451,6 +1392,81 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   contentImage?: ImageWhereInput
 |}
 
+ export type ImageWhereInput = {| 
+  AND?: Array< ImageWhereInput > | ImageWhereInput,
+  OR?: Array< ImageWhereInput > | ImageWhereInput,
+  NOT?: Array< ImageWhereInput > | ImageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  src?: String,
+  src_not?: String,
+  src_in?: Array< String > | String,
+  src_not_in?: Array< String > | String,
+  src_lt?: String,
+  src_lte?: String,
+  src_gt?: String,
+  src_gte?: String,
+  src_contains?: String,
+  src_not_contains?: String,
+  src_starts_with?: String,
+  src_not_starts_with?: String,
+  src_ends_with?: String,
+  src_not_ends_with?: String,
+  width?: Int,
+  width_not?: Int,
+  width_in?: Array< Int > | Int,
+  width_not_in?: Array< Int > | Int,
+  width_lt?: Int,
+  width_lte?: Int,
+  width_gt?: Int,
+  width_gte?: Int,
+  height?: Int,
+  height_not?: Int,
+  height_in?: Array< Int > | Int,
+  height_not_in?: Array< Int > | Int,
+  height_lt?: Int,
+  height_lte?: Int,
+  height_gt?: Int,
+  height_gte?: Int,
+  creator?: UserWhereInput,
+  _MagicalBackRelation_ImageToPost_every?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_some?: PostWhereInput,
+  _MagicalBackRelation_ImageToPost_none?: PostWhereInput
+|}
+
+ export type SetPostNameInput = {| 
+  id: ID_Input,
+  name: String
+|}
+
 /*
  * An object with an ID
 
@@ -1459,8 +1475,18 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    id: ID_Output,
 |}
 
- export type SetWebNameErrors = {| 
-   name?: Max140CharsError,
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
+   user?: User,
+|}
+
+ export type SetPostContentTextPayload = {| 
+   post?: Post,
+|}
+
+ export type SetThemePayload = {| 
+   user?: User,
 |}
 
  export type User = {| ...Node,
@@ -1476,13 +1502,20 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    images?: Image[],
 |}
 
- export type DeleteWebPayload = {| 
-   web?: Web,
-|}
-
  export type AuthErrors = {| 
    email?: EmailError,
    password?: PasswordError,
+|}
+
+ export type Image = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   src: String,
+   width: Int,
+   height: Int,
+   creator: User,
 |}
 
  export type SetPostNamePayload = {| 
@@ -1490,12 +1523,36 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    post?: Post,
 |}
 
+ export type CreateWebErrors = {| 
+   name?: Max140CharsError,
+   postName?: Max140CharsError,
+|}
+
  export type SetPostNameErrors = {| 
    name?: Max140CharsError,
 |}
 
- export type SetThemePayload = {| 
-   user?: User,
+ export type Web = {| ...Node,
+ 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   creator: User,
+   name: String,
+   posts?: Post[],
+|}
+
+ export type SetWebNameErrors = {| 
+   name?: Max140CharsError,
+|}
+
+ export type SetWebNamePayload = {| 
+   errors?: SetWebNameErrors,
+   web?: Web,
+|}
+
+ export type DeleteWebPayload = {| 
+   web?: Web,
 |}
 
  export type Post = {| ...Node,
@@ -1515,52 +1572,23 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    contentImage?: Image,
 |}
 
- export type AuthPayload = {| 
-   errors?: AuthErrors,
-   token?: String,
-   user?: User,
-|}
-
- export type SetWebNamePayload = {| 
-   errors?: SetWebNameErrors,
-   web?: Web,
-|}
-
- export type Web = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   creator: User,
-   name: String,
-   posts?: Post[],
-|}
-
- export type CreateWebErrors = {| 
-   name?: Max140CharsError,
-   postName?: Max140CharsError,
-|}
-
  export type CreateWebPayload = {| 
    errors?: CreateWebErrors,
    postId?: ID_Output,
-|}
-
- export type Image = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   src: String,
-   width: Int,
-   height: Int,
-   creator: User,
 |}
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
  export type String = string 
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+ export type ID_Input = string
+export type ID_Output = string
+
+ export type DateTime = Date | string 
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -1571,11 +1599,3 @@ The `Boolean` scalar type represents `true` or `false`.
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
  export type Int = number 
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
- export type ID_Input = string
-export type ID_Output = string
-
- export type DateTime = Date | string 

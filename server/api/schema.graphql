@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sun Jul 01 2018 23:34:00 GMT+0200 (Central European Summer Time)
+# timestamp: Sat Jul 07 2018 01:58:29 GMT+0300 (Eastern European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -270,6 +270,7 @@ type Mutation {
   setTheme(input: SetThemeInput!): SetThemePayload
   setPostName(input: SetPostNameInput!): SetPostNamePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
+  setPostContentText(input: SetPostContentTextInput!): SetPostContentTextPayload
 }
 
 """An object with an ID"""
@@ -562,6 +563,15 @@ type Query {
   me: User
   post(id: ID!): Post
   web(id: ID!): Web
+}
+
+input SetPostContentTextInput {
+  id: ID!
+  contentText: String!
+}
+
+type SetPostContentTextPayload {
+  post: Post
 }
 
 type SetPostNameErrors {

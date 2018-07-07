@@ -143,6 +143,15 @@ const Mutation /*: generated.Mutation */ = {
     if (web == null) return null;
     return { web };
   },
+
+  setPostContentText: async (args, info, { db }) => {
+    const post = await db.mutation.updatePost({
+      where: { id: args.input.id },
+      data: { contentText: args.input.contentText },
+    });
+    if (post == null) return null;
+    return { post };
+  },
 };
 
 export default Mutation;

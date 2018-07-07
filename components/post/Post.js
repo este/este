@@ -31,7 +31,7 @@ class Post extends React.PureComponent<PostProps> {
         return (
           contentText != null && (
             <Block key={id}>
-              <PostMarkdown defaultValue={contentText} />
+              <PostMarkdown id={id} defaultValue={contentText} />
             </Block>
           )
         );
@@ -47,12 +47,14 @@ class Post extends React.PureComponent<PostProps> {
     }
   }
 
-  renderPost({ contentType, contentText, contentChildren }) {
+  renderPost({ id, contentType, contentText, contentChildren }) {
     if (!contentType) return null;
     switch (contentType) {
       case 'TEXT':
         return (
-          contentText != null && <PostMarkdown defaultValue={contentText} />
+          contentText != null && (
+            <PostMarkdown id={id} defaultValue={contentText} />
+          )
         );
       case 'IMAGE':
         return null;

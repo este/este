@@ -4,7 +4,11 @@ import { TextInput } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import PostMarkdownActions from './PostMarkdownActions';
-// import withConfirm, { type Confirm } from '../core/withConfirm';
+import throttle from 'lodash/throttle';
+import { onChangeTextThrottle } from '../core/TextInput';
+import withMutation, { type Commit } from '../core/withMutation';
+import { graphql } from 'react-relay';
+import * as generated from './__generated__/PostMarkdownMutation.graphql';
 
 const messages = defineMessages({
   placeholder: {
@@ -40,7 +44,11 @@ type PostMarkdownProps = {|
   defaultValue: string,
   theme: Theme,
   intl: IntlShape,
-  // confirm: Confirm,
+  id: string,
+  commit: Commit<
+    generated.SetPostContentTextInput,
+    generated.PostMarkdownMutationResponse,
+  >,
 |};
 
 type PostMarkdownState = {|
@@ -56,8 +64,19 @@ class PostMarkdown extends React.PureComponent<
   inputRef = React.createRef();
   actionsRef = React.createRef();
 
+  handleOnChangeTextThrottled = throttle(value => {
+    const input = {
+      id: this.props.id,
+      contentText: value,
+    };
+    this.props.commit(input);
+  }, onChangeTextThrottle);
+
   state = {
-    selection: { start: 0, end: 0 },
+    selection: {
+      start: this.props.defaultValue.length,
+      end: this.props.defaultValue.length,
+    },
     actionsAreExpanded: false,
     value: this.props.defaultValue,
   };
@@ -72,10 +91,11 @@ class PostMarkdown extends React.PureComponent<
     }
   }
 
-  handleTextInputChangeText = text => {
-    this.setState({ value: text }, () => {
+  handleTextInputChangeText = value => {
+    this.setState({ value }, () => {
       this.adjustHeight();
     });
+    this.handleOnChangeTextThrottled(value);
   };
 
   handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
@@ -146,8 +166,6 @@ class PostMarkdown extends React.PureComponent<
     return (
       <>
         <TextInput
-          // https://github.com/necolas/react-native-web/issues/988
-          // autoFocus
           multiline
           value={this.state.value}
           onChangeText={this.handleTextInputChangeText}
@@ -163,8 +181,7 @@ class PostMarkdown extends React.PureComponent<
             theme.styles.postMarkdownTextInput,
             theme.typography.fontSizeWithLineHeight(0),
           ]}
-          // https://github.com/necolas/react-native-web/issues/988
-          // selection={this.state.selection}
+          selection={this.state.selection}
         />
         <PostMarkdownActions
           expanded={this.state.actionsAreExpanded}
@@ -180,5 +197,16 @@ class PostMarkdown extends React.PureComponent<
   }
 }
 
-// export default withConfirm(injectIntl(withTheme(PostMarkdown)));
-export default withTheme(injectIntl(PostMarkdown));
+export default withMutation(
+  withTheme(injectIntl(PostMarkdown)),
+  graphql`
+    mutation PostMarkdownMutation($input: SetPostContentTextInput!) {
+      setPostContentText(input: $input) {
+        post {
+          id
+          contentText
+        }
+      }
+    }
+  `,
+);
