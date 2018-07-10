@@ -535,12 +535,12 @@ type Post implements Node {
   name: String
   web(where: WebWhereInput): Web!
   parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  contentType: PostContentType
-  contentChildren(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  contentChildrenOrder: [ID!]!
-  contentText: String
-  contentTextFormat: String!
-  contentImage(where: ImageWhereInput): Image
+  children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  childrenOrder: [ID!]!
+  text: String
+  textFormat: String!
+  image(where: ImageWhereInput): Image
+  type: PostType!
 }
 
 """A connection to a list of items."""
@@ -553,31 +553,25 @@ type PostConnection {
   aggregate: AggregatePost!
 }
 
-enum PostContentType {
-  CHILDREN
-  TEXT
-  IMAGE
-}
-
-input PostCreatecontentChildrenOrderInput {
+input PostCreatechildrenOrderInput {
   set: [ID!]
 }
 
 input PostCreateInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutContentChildrenInput
-  contentChildren: PostCreateManyWithoutParentsInput
-  contentImage: ImageCreateOneInput
+  parents: PostCreateManyWithoutChildrenInput
+  children: PostCreateManyWithoutParentsInput
+  image: ImageCreateOneInput
 }
 
-input PostCreateManyWithoutContentChildrenInput {
-  create: [PostCreateWithoutContentChildrenInput!]
+input PostCreateManyWithoutChildrenInput {
+  create: [PostCreateWithoutChildrenInput!]
   connect: [PostWhereUniqueInput!]
 }
 
@@ -596,52 +590,52 @@ input PostCreateManyWithoutWebInput {
   connect: [PostWhereUniqueInput!]
 }
 
-input PostCreateWithoutContentChildrenInput {
+input PostCreateWithoutChildrenInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutContentChildrenInput
-  contentImage: ImageCreateOneInput
+  parents: PostCreateManyWithoutChildrenInput
+  image: ImageCreateOneInput
 }
 
 input PostCreateWithoutCreatorInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostCreatechildrenOrderInput
   web: WebCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutContentChildrenInput
-  contentChildren: PostCreateManyWithoutParentsInput
-  contentImage: ImageCreateOneInput
+  parents: PostCreateManyWithoutChildrenInput
+  children: PostCreateManyWithoutParentsInput
+  image: ImageCreateOneInput
 }
 
 input PostCreateWithoutParentsInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
-  contentChildren: PostCreateManyWithoutParentsInput
-  contentImage: ImageCreateOneInput
+  children: PostCreateManyWithoutParentsInput
+  image: ImageCreateOneInput
 }
 
 input PostCreateWithoutWebInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostCreatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
-  parents: PostCreateManyWithoutContentChildrenInput
-  contentChildren: PostCreateManyWithoutParentsInput
-  contentImage: ImageCreateOneInput
+  parents: PostCreateManyWithoutChildrenInput
+  children: PostCreateManyWithoutParentsInput
+  image: ImageCreateOneInput
 }
 
 """An edge in a connection."""
@@ -662,12 +656,12 @@ enum PostOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
-  contentType_ASC
-  contentType_DESC
-  contentText_ASC
-  contentText_DESC
-  contentTextFormat_ASC
-  contentTextFormat_DESC
+  text_ASC
+  text_DESC
+  textFormat_ASC
+  textFormat_DESC
+  type_ASC
+  type_DESC
 }
 
 type PostPreviousValues {
@@ -675,10 +669,10 @@ type PostPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  contentType: PostContentType
-  contentChildrenOrder: [ID!]!
-  contentText: String
-  contentTextFormat: String!
+  childrenOrder: [ID!]!
+  text: String
+  textFormat: String!
+  type: PostType!
 }
 
 type PostSubscriptionPayload {
@@ -720,30 +714,36 @@ input PostSubscriptionWhereInput {
   node: PostWhereInput
 }
 
-input PostUpdatecontentChildrenOrderInput {
+enum PostType {
+  CHILDREN
+  TEXT
+  IMAGE
+}
+
+input PostUpdatechildrenOrderInput {
   set: [ID!]
 }
 
 input PostUpdateInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutContentChildrenInput
-  contentChildren: PostUpdateManyWithoutParentsInput
-  contentImage: ImageUpdateOneInput
+  parents: PostUpdateManyWithoutChildrenInput
+  children: PostUpdateManyWithoutParentsInput
+  image: ImageUpdateOneInput
 }
 
-input PostUpdateManyWithoutContentChildrenInput {
-  create: [PostCreateWithoutContentChildrenInput!]
+input PostUpdateManyWithoutChildrenInput {
+  create: [PostCreateWithoutChildrenInput!]
   connect: [PostWhereUniqueInput!]
   disconnect: [PostWhereUniqueInput!]
   delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutContentChildrenInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutContentChildrenInput!]
+  update: [PostUpdateWithWhereUniqueWithoutChildrenInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutChildrenInput!]
 }
 
 input PostUpdateManyWithoutCreatorInput {
@@ -773,57 +773,57 @@ input PostUpdateManyWithoutWebInput {
   upsert: [PostUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input PostUpdateWithoutContentChildrenDataInput {
+input PostUpdateWithoutChildrenDataInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutContentChildrenInput
-  contentImage: ImageUpdateOneInput
+  parents: PostUpdateManyWithoutChildrenInput
+  image: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutCreatorDataInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostUpdatechildrenOrderInput
   web: WebUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutContentChildrenInput
-  contentChildren: PostUpdateManyWithoutParentsInput
-  contentImage: ImageUpdateOneInput
+  parents: PostUpdateManyWithoutChildrenInput
+  children: PostUpdateManyWithoutParentsInput
+  image: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutParentsDataInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
-  contentChildren: PostUpdateManyWithoutParentsInput
-  contentImage: ImageUpdateOneInput
+  children: PostUpdateManyWithoutParentsInput
+  image: ImageUpdateOneInput
 }
 
 input PostUpdateWithoutWebDataInput {
   name: String
-  contentType: PostContentType
-  contentText: String
-  contentTextFormat: String
-  contentChildrenOrder: PostUpdatecontentChildrenOrderInput
+  text: String
+  textFormat: String
+  type: PostType
+  childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
-  parents: PostUpdateManyWithoutContentChildrenInput
-  contentChildren: PostUpdateManyWithoutParentsInput
-  contentImage: ImageUpdateOneInput
+  parents: PostUpdateManyWithoutChildrenInput
+  children: PostUpdateManyWithoutParentsInput
+  image: ImageUpdateOneInput
 }
 
-input PostUpdateWithWhereUniqueWithoutContentChildrenInput {
+input PostUpdateWithWhereUniqueWithoutChildrenInput {
   where: PostWhereUniqueInput!
-  data: PostUpdateWithoutContentChildrenDataInput!
+  data: PostUpdateWithoutChildrenDataInput!
 }
 
 input PostUpdateWithWhereUniqueWithoutCreatorInput {
@@ -841,10 +841,10 @@ input PostUpdateWithWhereUniqueWithoutWebInput {
   data: PostUpdateWithoutWebDataInput!
 }
 
-input PostUpsertWithWhereUniqueWithoutContentChildrenInput {
+input PostUpsertWithWhereUniqueWithoutChildrenInput {
   where: PostWhereUniqueInput!
-  update: PostUpdateWithoutContentChildrenDataInput!
-  create: PostCreateWithoutContentChildrenInput!
+  update: PostUpdateWithoutChildrenDataInput!
+  create: PostCreateWithoutChildrenInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutCreatorInput {
@@ -998,105 +998,105 @@ input PostWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  contentType: PostContentType
+  text: String
 
   """All values that are not equal to given value."""
-  contentType_not: PostContentType
+  text_not: String
 
   """All values that are contained in given list."""
-  contentType_in: [PostContentType!]
+  text_in: [String!]
 
   """All values that are not contained in given list."""
-  contentType_not_in: [PostContentType!]
-  contentText: String
-
-  """All values that are not equal to given value."""
-  contentText_not: String
-
-  """All values that are contained in given list."""
-  contentText_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentText_not_in: [String!]
+  text_not_in: [String!]
 
   """All values less than the given value."""
-  contentText_lt: String
+  text_lt: String
 
   """All values less than or equal the given value."""
-  contentText_lte: String
+  text_lte: String
 
   """All values greater than the given value."""
-  contentText_gt: String
+  text_gt: String
 
   """All values greater than or equal the given value."""
-  contentText_gte: String
+  text_gte: String
 
   """All values containing the given string."""
-  contentText_contains: String
+  text_contains: String
 
   """All values not containing the given string."""
-  contentText_not_contains: String
+  text_not_contains: String
 
   """All values starting with the given string."""
-  contentText_starts_with: String
+  text_starts_with: String
 
   """All values not starting with the given string."""
-  contentText_not_starts_with: String
+  text_not_starts_with: String
 
   """All values ending with the given string."""
-  contentText_ends_with: String
+  text_ends_with: String
 
   """All values not ending with the given string."""
-  contentText_not_ends_with: String
-  contentTextFormat: String
+  text_not_ends_with: String
+  textFormat: String
 
   """All values that are not equal to given value."""
-  contentTextFormat_not: String
+  textFormat_not: String
 
   """All values that are contained in given list."""
-  contentTextFormat_in: [String!]
+  textFormat_in: [String!]
 
   """All values that are not contained in given list."""
-  contentTextFormat_not_in: [String!]
+  textFormat_not_in: [String!]
 
   """All values less than the given value."""
-  contentTextFormat_lt: String
+  textFormat_lt: String
 
   """All values less than or equal the given value."""
-  contentTextFormat_lte: String
+  textFormat_lte: String
 
   """All values greater than the given value."""
-  contentTextFormat_gt: String
+  textFormat_gt: String
 
   """All values greater than or equal the given value."""
-  contentTextFormat_gte: String
+  textFormat_gte: String
 
   """All values containing the given string."""
-  contentTextFormat_contains: String
+  textFormat_contains: String
 
   """All values not containing the given string."""
-  contentTextFormat_not_contains: String
+  textFormat_not_contains: String
 
   """All values starting with the given string."""
-  contentTextFormat_starts_with: String
+  textFormat_starts_with: String
 
   """All values not starting with the given string."""
-  contentTextFormat_not_starts_with: String
+  textFormat_not_starts_with: String
 
   """All values ending with the given string."""
-  contentTextFormat_ends_with: String
+  textFormat_ends_with: String
 
   """All values not ending with the given string."""
-  contentTextFormat_not_ends_with: String
+  textFormat_not_ends_with: String
+  type: PostType
+
+  """All values that are not equal to given value."""
+  type_not: PostType
+
+  """All values that are contained in given list."""
+  type_in: [PostType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PostType!]
   creator: UserWhereInput
   web: WebWhereInput
   parents_every: PostWhereInput
   parents_some: PostWhereInput
   parents_none: PostWhereInput
-  contentChildren_every: PostWhereInput
-  contentChildren_some: PostWhereInput
-  contentChildren_none: PostWhereInput
-  contentImage: ImageWhereInput
+  children_every: PostWhereInput
+  children_some: PostWhereInput
+  children_none: PostWhereInput
+  image: ImageWhereInput
 }
 
 input PostWhereUniqueInput {
@@ -1899,7 +1899,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'themeName_DESC'
   
 
- export type PostContentType =
+ export type PostType =
     | 'CHILDREN'
     | 'TEXT'
     | 'IMAGE'
@@ -1925,12 +1925,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
-    | 'contentType_ASC'
-    | 'contentType_DESC'
-    | 'contentText_ASC'
-    | 'contentText_DESC'
-    | 'contentTextFormat_ASC'
-    | 'contentTextFormat_DESC'
+    | 'text_ASC'
+    | 'text_DESC'
+    | 'textFormat_ASC'
+    | 'textFormat_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
   
 
  export type ImageOrderByInput =
@@ -2054,14 +2054,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostUpdateWithoutParentsDataInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
-  contentChildren?: PostUpdateManyWithoutParentsInput,
-  contentImage?: ImageUpdateOneInput
+  children?: PostUpdateManyWithoutParentsInput,
+  image?: ImageUpdateOneInput
 |}
 
  export type UserCreateOneWithoutWebsInput = {| 
@@ -2111,14 +2111,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostCreateWithoutCreatorInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostCreatechildrenOrderInput,
   web: WebCreateOneWithoutPostsInput,
-  parents?: PostCreateManyWithoutContentChildrenInput,
-  contentChildren?: PostCreateManyWithoutParentsInput,
-  contentImage?: ImageCreateOneInput
+  parents?: PostCreateManyWithoutChildrenInput,
+  children?: PostCreateManyWithoutParentsInput,
+  image?: ImageCreateOneInput
 |}
 
  export type ImageUpdateInput = {| 
@@ -2139,14 +2139,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostCreateWithoutParentsInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
-  contentChildren?: PostCreateManyWithoutParentsInput,
-  contentImage?: ImageCreateOneInput
+  children?: PostCreateManyWithoutParentsInput,
+  image?: ImageCreateOneInput
 |}
 
  export type ImageWhereUniqueInput = {| 
@@ -2217,15 +2217,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostCreateInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
-  parents?: PostCreateManyWithoutContentChildrenInput,
-  contentChildren?: PostCreateManyWithoutParentsInput,
-  contentImage?: ImageCreateOneInput
+  parents?: PostCreateManyWithoutChildrenInput,
+  children?: PostCreateManyWithoutParentsInput,
+  image?: ImageCreateOneInput
 |}
 
  export type UserUpdateWithoutImagesDataInput = {| 
@@ -2346,7 +2346,7 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   posts?: PostUpdateManyWithoutWebInput
 |}
 
- export type PostCreatecontentChildrenOrderInput = {| 
+ export type PostCreatechildrenOrderInput = {| 
   set?: Array< ID_Input > | ID_Input
 |}
 
@@ -2380,29 +2380,29 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostUpdateWithoutWebDataInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
-  parents?: PostUpdateManyWithoutContentChildrenInput,
-  contentChildren?: PostUpdateManyWithoutParentsInput,
-  contentImage?: ImageUpdateOneInput
+  parents?: PostUpdateManyWithoutChildrenInput,
+  children?: PostUpdateManyWithoutParentsInput,
+  image?: ImageUpdateOneInput
 |}
 
- export type PostCreateWithoutContentChildrenInput = {| 
+ export type PostCreateWithoutChildrenInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
-  parents?: PostCreateManyWithoutContentChildrenInput,
-  contentImage?: ImageCreateOneInput
+  parents?: PostCreateManyWithoutChildrenInput,
+  image?: ImageCreateOneInput
 |}
 
- export type PostUpdatecontentChildrenOrderInput = {| 
+ export type PostUpdatechildrenOrderInput = {| 
   set?: Array< ID_Input > | ID_Input
 |}
 
@@ -2503,15 +2503,15 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostUpdateInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
-  parents?: PostUpdateManyWithoutContentChildrenInput,
-  contentChildren?: PostUpdateManyWithoutParentsInput,
-  contentImage?: ImageUpdateOneInput
+  parents?: PostUpdateManyWithoutChildrenInput,
+  children?: PostUpdateManyWithoutParentsInput,
+  image?: ImageUpdateOneInput
 |}
 
  export type ImageUpdateWithWhereUniqueWithoutCreatorInput = {| 
@@ -2519,10 +2519,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   data: ImageUpdateWithoutCreatorDataInput
 |}
 
- export type PostUpsertWithWhereUniqueWithoutContentChildrenInput = {| 
+ export type PostUpsertWithWhereUniqueWithoutChildrenInput = {| 
   where: PostWhereUniqueInput,
-  update: PostUpdateWithoutContentChildrenDataInput,
-  create: PostCreateWithoutContentChildrenInput
+  update: PostUpdateWithoutChildrenDataInput,
+  create: PostCreateWithoutChildrenInput
 |}
 
  export type ImageUpdateWithoutCreatorDataInput = {| 
@@ -2561,13 +2561,13 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   posts?: PostCreateManyWithoutWebInput
 |}
 
- export type PostUpdateManyWithoutContentChildrenInput = {| 
-  create?: Array< PostCreateWithoutContentChildrenInput > | PostCreateWithoutContentChildrenInput,
+ export type PostUpdateManyWithoutChildrenInput = {| 
+  create?: Array< PostCreateWithoutChildrenInput > | PostCreateWithoutChildrenInput,
   connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
   disconnect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
   delete?: Array< PostWhereUniqueInput > | PostWhereUniqueInput,
-  update?: Array< PostUpdateWithWhereUniqueWithoutContentChildrenInput > | PostUpdateWithWhereUniqueWithoutContentChildrenInput,
-  upsert?: Array< PostUpsertWithWhereUniqueWithoutContentChildrenInput > | PostUpsertWithWhereUniqueWithoutContentChildrenInput
+  update?: Array< PostUpdateWithWhereUniqueWithoutChildrenInput > | PostUpdateWithWhereUniqueWithoutChildrenInput,
+  upsert?: Array< PostUpsertWithWhereUniqueWithoutChildrenInput > | PostUpsertWithWhereUniqueWithoutChildrenInput
 |}
 
  export type UserCreateOneWithoutPostsInput = {| 
@@ -2575,26 +2575,26 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   connect?: UserWhereUniqueInput
 |}
 
- export type PostUpdateWithWhereUniqueWithoutContentChildrenInput = {| 
+ export type PostUpdateWithWhereUniqueWithoutChildrenInput = {| 
   where: PostWhereUniqueInput,
-  data: PostUpdateWithoutContentChildrenDataInput
+  data: PostUpdateWithoutChildrenDataInput
 |}
 
- export type PostCreateManyWithoutContentChildrenInput = {| 
-  create?: Array< PostCreateWithoutContentChildrenInput > | PostCreateWithoutContentChildrenInput,
+ export type PostCreateManyWithoutChildrenInput = {| 
+  create?: Array< PostCreateWithoutChildrenInput > | PostCreateWithoutChildrenInput,
   connect?: Array< PostWhereUniqueInput > | PostWhereUniqueInput
 |}
 
- export type PostUpdateWithoutContentChildrenDataInput = {| 
+ export type PostUpdateWithoutChildrenDataInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
-  parents?: PostUpdateManyWithoutContentChildrenInput,
-  contentImage?: ImageUpdateOneInput
+  parents?: PostUpdateManyWithoutChildrenInput,
+  image?: ImageUpdateOneInput
 |}
 
  export type PostWhereInput = {| 
@@ -2645,47 +2645,47 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
   name_not_starts_with?: String,
   name_ends_with?: String,
   name_not_ends_with?: String,
-  contentType?: PostContentType,
-  contentType_not?: PostContentType,
-  contentType_in?: Array< PostContentType > | PostContentType,
-  contentType_not_in?: Array< PostContentType > | PostContentType,
-  contentText?: String,
-  contentText_not?: String,
-  contentText_in?: Array< String > | String,
-  contentText_not_in?: Array< String > | String,
-  contentText_lt?: String,
-  contentText_lte?: String,
-  contentText_gt?: String,
-  contentText_gte?: String,
-  contentText_contains?: String,
-  contentText_not_contains?: String,
-  contentText_starts_with?: String,
-  contentText_not_starts_with?: String,
-  contentText_ends_with?: String,
-  contentText_not_ends_with?: String,
-  contentTextFormat?: String,
-  contentTextFormat_not?: String,
-  contentTextFormat_in?: Array< String > | String,
-  contentTextFormat_not_in?: Array< String > | String,
-  contentTextFormat_lt?: String,
-  contentTextFormat_lte?: String,
-  contentTextFormat_gt?: String,
-  contentTextFormat_gte?: String,
-  contentTextFormat_contains?: String,
-  contentTextFormat_not_contains?: String,
-  contentTextFormat_starts_with?: String,
-  contentTextFormat_not_starts_with?: String,
-  contentTextFormat_ends_with?: String,
-  contentTextFormat_not_ends_with?: String,
+  text?: String,
+  text_not?: String,
+  text_in?: Array< String > | String,
+  text_not_in?: Array< String > | String,
+  text_lt?: String,
+  text_lte?: String,
+  text_gt?: String,
+  text_gte?: String,
+  text_contains?: String,
+  text_not_contains?: String,
+  text_starts_with?: String,
+  text_not_starts_with?: String,
+  text_ends_with?: String,
+  text_not_ends_with?: String,
+  textFormat?: String,
+  textFormat_not?: String,
+  textFormat_in?: Array< String > | String,
+  textFormat_not_in?: Array< String > | String,
+  textFormat_lt?: String,
+  textFormat_lte?: String,
+  textFormat_gt?: String,
+  textFormat_gte?: String,
+  textFormat_contains?: String,
+  textFormat_not_contains?: String,
+  textFormat_starts_with?: String,
+  textFormat_not_starts_with?: String,
+  textFormat_ends_with?: String,
+  textFormat_not_ends_with?: String,
+  type?: PostType,
+  type_not?: PostType,
+  type_in?: Array< PostType > | PostType,
+  type_not_in?: Array< PostType > | PostType,
   creator?: UserWhereInput,
   web?: WebWhereInput,
   parents_every?: PostWhereInput,
   parents_some?: PostWhereInput,
   parents_none?: PostWhereInput,
-  contentChildren_every?: PostWhereInput,
-  contentChildren_some?: PostWhereInput,
-  contentChildren_none?: PostWhereInput,
-  contentImage?: ImageWhereInput
+  children_every?: PostWhereInput,
+  children_some?: PostWhereInput,
+  children_none?: PostWhereInput,
+  image?: ImageWhereInput
 |}
 
  export type WebUpdateOneWithoutPostsInput = {| 
@@ -2776,14 +2776,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostUpdateWithoutCreatorDataInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostUpdatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostUpdatechildrenOrderInput,
   web?: WebUpdateOneWithoutPostsInput,
-  parents?: PostUpdateManyWithoutContentChildrenInput,
-  contentChildren?: PostUpdateManyWithoutParentsInput,
-  contentImage?: ImageUpdateOneInput
+  parents?: PostUpdateManyWithoutChildrenInput,
+  children?: PostUpdateManyWithoutParentsInput,
+  image?: ImageUpdateOneInput
 |}
 
  export type PostUpdateWithWhereUniqueWithoutCreatorInput = {| 
@@ -2804,14 +2804,14 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
 
  export type PostCreateWithoutWebInput = {| 
   name?: String,
-  contentType?: PostContentType,
-  contentText?: String,
-  contentTextFormat?: String,
-  contentChildrenOrder?: PostCreatecontentChildrenOrderInput,
+  text?: String,
+  textFormat?: String,
+  type?: PostType,
+  childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
-  parents?: PostCreateManyWithoutContentChildrenInput,
-  contentChildren?: PostCreateManyWithoutParentsInput,
-  contentImage?: ImageCreateOneInput
+  parents?: PostCreateManyWithoutChildrenInput,
+  children?: PostCreateManyWithoutParentsInput,
+  image?: ImageCreateOneInput
 |}
 
  export type UserUpsertWithoutImagesInput = {| 
@@ -2923,10 +2923,10 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    createdAt: DateTime,
    updatedAt: DateTime,
    name?: String,
-   contentType?: PostContentType,
-   contentChildrenOrder: ID_Output[],
-   contentText?: String,
-   contentTextFormat: String,
+   childrenOrder: ID_Output[],
+   text?: String,
+   textFormat: String,
+   type: PostType,
 |}
 
 /*
@@ -3002,12 +3002,12 @@ export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDe
    name?: String,
    web: Web,
    parents?: Post[],
-   contentType?: PostContentType,
-   contentChildren?: Post[],
-   contentChildrenOrder: ID_Output[],
-   contentText?: String,
-   contentTextFormat: String,
-   contentImage?: Image,
+   children?: Post[],
+   childrenOrder: ID_Output[],
+   text?: String,
+   textFormat: String,
+   image?: Image,
+   type: PostType,
 |}
 
 /*

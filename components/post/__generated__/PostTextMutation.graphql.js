@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4e2010d847176f9755b6647ac6451786
+ * @relayHash 8092bf844fa232ad86701e90a596f683
  */
 
 /* eslint-disable */
@@ -9,18 +9,18 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type SetPostContentTextInput = {
+export type SetPostTextInput = {
   id: string,
-  contentText: string,
+  text: string,
 };
-export type PostMarkdownMutationVariables = {|
-  input: SetPostContentTextInput
+export type PostTextMutationVariables = {|
+  input: SetPostTextInput
 |};
-export type PostMarkdownMutationResponse = {|
-  +setPostContentText: ?{|
+export type PostTextMutationResponse = {|
+  +setPostText: ?{|
     +post: ?{|
       +id: string,
-      +contentText: ?string,
+      +text: ?string,
     |}
   |}
 |};
@@ -28,13 +28,13 @@ export type PostMarkdownMutationResponse = {|
 
 
 /*
-mutation PostMarkdownMutation(
-  $input: SetPostContentTextInput!
+mutation PostTextMutation(
+  $input: SetPostTextInput!
 ) {
-  setPostContentText(input: $input) {
+  setPostText(input: $input) {
     post {
       id
-      contentText
+      text
     }
   }
 }
@@ -45,7 +45,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "SetPostContentTextInput!",
+    "type": "SetPostTextInput!",
     "defaultValue": null
   }
 ],
@@ -53,17 +53,17 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "setPostContentText",
+    "name": "setPostText",
     "storageKey": null,
     "args": [
       {
         "kind": "Variable",
         "name": "input",
         "variableName": "input",
-        "type": "SetPostContentTextInput!"
+        "type": "SetPostTextInput!"
       }
     ],
-    "concreteType": "SetPostContentTextPayload",
+    "concreteType": "SetPostTextPayload",
     "plural": false,
     "selections": [
       {
@@ -85,7 +85,7 @@ v1 = [
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "contentText",
+            "name": "text",
             "args": null,
             "storageKey": null
           }
@@ -97,13 +97,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "PostMarkdownMutation",
+  "name": "PostTextMutation",
   "id": null,
-  "text": "mutation PostMarkdownMutation(\n  $input: SetPostContentTextInput!\n) {\n  setPostContentText(input: $input) {\n    post {\n      id\n      contentText\n    }\n  }\n}\n",
+  "text": "mutation PostTextMutation(\n  $input: SetPostTextInput!\n) {\n  setPostText(input: $input) {\n    post {\n      id\n      text\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "PostMarkdownMutation",
+    "name": "PostTextMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -111,12 +111,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "PostMarkdownMutation",
+    "name": "PostTextMutation",
     "argumentDefinitions": v0,
     "selections": v1
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '94eda349c2f34415b1240af26e5f735b';
+(node/*: any*/).hash = 'a8a387e6c55917099e695040e60959c9';
 module.exports = node;

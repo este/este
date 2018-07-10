@@ -87,12 +87,20 @@ type SetWebNamePayload {
   web: Web
 }
 
-input SetPostContentTextInput {
+input SetPostTextInput {
   id: ID!
-  contentText: String!
+  text: String!
 }
 
-type SetPostContentTextPayload {
+type SetPostTextPayload {
+  post: Post
+}
+
+input DeletePostInput {
+  id: ID!
+}
+
+type DeletePostPayload {
   post: Post
 }
 
@@ -103,7 +111,8 @@ type Mutation {
   setTheme(input: SetThemeInput!): SetThemePayload
   setPostName(input: SetPostNameInput!): SetPostNamePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
-  setPostContentText(input: SetPostContentTextInput!): SetPostContentTextPayload
+  setPostText(input: SetPostTextInput!): SetPostTextPayload
+  deletePost(input: DeletePostInput!): DeletePostPayload
 }
 
 # Queries do not need inputs nor payloads. They are pretty explicit.

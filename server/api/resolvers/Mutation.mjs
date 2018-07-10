@@ -86,11 +86,11 @@ const Mutation /*: generated.Mutation */ = {
     if (postId != null) {
       await db.mutation.updatePost({
         data: {
-          contentChildren: {
+          children: {
             create: {
               creator: { connect: { id: userId } },
               web: { connect: { id: web.id } },
-              contentType: 'TEXT',
+              type: 'TEXT',
             },
           },
         },
@@ -144,10 +144,18 @@ const Mutation /*: generated.Mutation */ = {
     return { web };
   },
 
-  setPostContentText: async (args, info, { db }) => {
+  setPostText: async (args, info, { db }) => {
     const post = await db.mutation.updatePost({
       where: { id: args.input.id },
-      data: { contentText: args.input.contentText },
+      data: { text: args.input.text },
+    });
+    if (post == null) return null;
+    return { post };
+  },
+
+  deletePost: async (args, info, { db }) => {
+    const post = await db.mutation.deletePost({
+      where: { id: args.input.id },
     });
     if (post == null) return null;
     return { post };

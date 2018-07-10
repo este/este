@@ -2,13 +2,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import withTheme, { type Theme } from '../core/withTheme';
-import PostMarkdown from './PostMarkdown';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Post.graphql';
 import PostName from './PostName';
 import Head from 'next/head';
 import EditMainNav from '../EditMainNav';
-import Block from '../core/Block';
+import PostChild from './PostChild';
+import PostText from './PostText';
 
 type PostProps = {|
   theme: Theme,
@@ -19,56 +19,26 @@ class Post extends React.PureComponent<PostProps> {
   // Next.js Head title requires string.
   static getTitle(post): string {
     if (post.name != null) return post.name;
-    if (post.contentText != null) return post.contentText;
+    if (post.text != null) return post.text;
     return post.id;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  renderPostChild({ id, contentType, contentText }) {
-    if (!contentType) return null;
-    switch (contentType) {
+  static renderByType(post) {
+    const { type } = post;
+    switch (type) {
       case 'TEXT':
-        return (
-          contentText != null && (
-            <Block key={id}>
-              <PostMarkdown id={id} defaultValue={contentText} />
-            </Block>
-          )
-        );
+        return <PostText id={post.id} defaultValue={post.text} />;
       case 'IMAGE':
         return null;
       case 'CHILDREN':
-        // TODO: Just Name as link.
-        return null;
+        if (post.children == null) return null;
+        return post.children.map(child => (
+          // $FlowFixMe https://github.com/facebook/relay/issues/2316
+          <PostChild data={child} key={child.id} />
+        ));
       default:
         // eslint-disable-next-line no-unused-expressions
-        (contentType: empty);
-        return null;
-    }
-  }
-
-  renderPost({ id, contentType, contentText, contentChildren }) {
-    if (!contentType) return null;
-    switch (contentType) {
-      case 'TEXT':
-        return (
-          contentText != null && (
-            <PostMarkdown id={id} defaultValue={contentText} />
-          )
-        );
-      case 'IMAGE':
-        return null;
-      case 'CHILDREN':
-        return (
-          contentChildren != null &&
-          contentChildren.map(child => {
-            return this.renderPostChild(child);
-          })
-        );
-      default:
-        // eslint-disable-next-line no-unused-expressions
-        (contentType: empty);
-        return null;
+        (type: empty);
     }
   }
 
@@ -89,7 +59,7 @@ class Post extends React.PureComponent<PostProps> {
           {post.name != null && (
             <PostName postId={post.id} defaultValue={post.name} />
           )}
-          {this.renderPost(post)}
+          {Post.renderByType(post)}
         </View>
       </>
     );
@@ -103,6 +73,9 @@ export default createFragmentContainer(
       post(id: $id) {
         id
         name
+        text
+        type
+        childrenOrder
         web {
           id
           name
@@ -111,19 +84,10 @@ export default createFragmentContainer(
           id
           name
         }
-        contentType
-        contentChildren {
+        children {
           id
-          name
-          contentType
-          contentText
+          ...PostChild
         }
-        # contentChildrenOrder
-        contentText
-        # contentTextFormat
-        # contentImage {
-        #   id
-        # }
       }
     }
   `,

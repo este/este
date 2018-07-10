@@ -1,5 +1,5 @@
-// flow-typed signature: f237a17e7f8ec5e8bf98a9a8ff4ef51a
-// flow-typed version: 9dd5475d13/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: f59c1824b014b60b0889728b4ca2b637
+// flow-typed version: ada8d1a1dd/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -72,7 +72,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    * Sugar for only returning a value once inside your mock
    */
   mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>,
-  /** 
+  /**
    * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
    */
   mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
@@ -898,6 +898,17 @@ declare var it: {
     timeout?: number
   ): void,
   /**
+   * each runs this test against array of argument arrays per each run
+   *
+   * @param {table} table of Test
+   */
+  each(
+    table: Array<Array<mixed>>
+  ): (
+    name: JestTestName,
+    fn?: (...args: Array<any>) => ?Promise<mixed>
+  ) => void,
+  /**
    * Only run this test
    *
    * @param {JestTestName} Name of Test
@@ -908,7 +919,14 @@ declare var it: {
     name: JestTestName,
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
-  ): void,
+  ): {
+    each(
+      table: Array<Array<mixed>>
+    ): (
+      name: JestTestName,
+      fn?: (...args: Array<any>) => ?Promise<mixed>
+    ) => void,
+  },
   /**
    * Skip running this test
    *

@@ -14,18 +14,18 @@ const styles = StyleSheet.create({
       : {},
 });
 
-type PostMarkdownActionsButtonProps = {|
+type PostActionsButtonProps = {|
   ...ButtonProps,
 |};
 
-type PostMarkdownActionsButtonState = {
+type PostActionsButtonState = {
   focused: boolean,
   hovered: boolean,
 };
 
-class PostMarkdownActionsButton extends React.PureComponent<
-  PostMarkdownActionsButtonProps,
-  PostMarkdownActionsButtonState,
+class PostActionsButton extends React.PureComponent<
+  PostActionsButtonProps,
+  PostActionsButtonState,
 > {
   state = {
     focused: false,
@@ -66,4 +66,4 @@ class PostMarkdownActionsButton extends React.PureComponent<
   }
 }
 
-export default PostMarkdownActionsButton;
+export default PostActionsButton;

@@ -27,7 +27,7 @@ type Web {
 
 # Prisma does not support interface nor union types yet.
 # https://github.com/prismagraphql/prisma/issues/165
-enum PostContentType {
+enum PostType {
   CHILDREN
   TEXT
   IMAGE
@@ -38,19 +38,18 @@ type Post {
   createdAt: DateTime!
   updatedAt: DateTime!
   creator: User!
-  # If name is null, use content or ID I suppose. Let's see.
   name: String
+  type: PostType! @default(value: "CHILDREN")
   web: Web! @relation(name: "WebPosts", onDelete: SET_NULL)
   # Parents, so we can reuse elements in a tree.
   parents: [Post!]! @relation(name: "PostParentsChildren")
-  contentType: PostContentType @default(value: "CHILDREN")
-  contentChildren: [Post!]! @relation(name: "PostParentsChildren")
+  children: [Post!]! @relation(name: "PostParentsChildren")
   # It's scalar list aka value object. I suppose it's good enough.
   # I would rather enforce referential integrity, but I don't know how yet.
-  contentChildrenOrder: [ID!]!
-  contentText: String
-  contentTextFormat: String! @default(value: "CommonMark")
-  contentImage: Image
+  childrenOrder: [ID!]!
+  text: String
+  textFormat: String! @default(value: "CommonMark")
+  image: Image
 }
 
 type Image {

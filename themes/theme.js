@@ -106,6 +106,7 @@ const stylesJson = {
     marginVertical: typography.rhythm(1),
   },
 
+  // TODO: Rename to disabled.
   stateDisabled: {
     opacity: 0.5,
   },
@@ -138,16 +139,16 @@ const stylesJson = {
     flex: 1,
   },
 
-  postMarkdownTextInput: {
+  postTextTextInput: {
     color: colors.black,
     fontFamily,
     // It's the initial height. Client overrides it via inline styles.
     height: typography.rhythm(1),
   },
 
-  postMarkdownButtons: {
+  postActions: {
     minHeight: typography.rhythm(1),
-    // paddingVertical: typography.rhythm(1),
+    paddingVertical: typography.rhythm(0.5),
   },
 };
 
@@ -186,8 +187,8 @@ export const darkTheme: Theme = {
       color: colors.white,
     },
 
-    postMarkdownTextInput: {
-      ...stylesJson.postMarkdownTextInput,
+    postTextTextInput: {
+      ...stylesJson.postTextTextInput,
       color: colors.white,
     },
   }),
