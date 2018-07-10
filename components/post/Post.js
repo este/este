@@ -75,7 +75,7 @@ export default createFragmentContainer(
         name
         text
         type
-        childrenOrder
+        # childrenOrder
         web {
           id
           name

@@ -183,7 +183,6 @@ export default createFragmentContainer(
   graphql`
     fragment AppPage on Query {
       me {
-        id
         themeName
       }
     }

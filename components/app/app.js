@@ -10,6 +10,7 @@ import LocaleContext from '../core/LocaleContext';
 import EnvironmentContext from '../core/EnvironmentContext';
 import ErrorContext, { type ContextError } from '../core/ErrorContext';
 import RelayProvider from '../core/RelayProvider';
+import Error from 'next/error';
 
 // Polyfill browser stuff.
 // $FlowFixMe It's fine.
@@ -28,6 +29,8 @@ type AppProps = {|
   messages: Object,
   records: Object,
   supportedLocales: Array<string>,
+  // That's all we support for now. It's good enough.
+  statusCode: null | 404,
 |};
 
 type AppState = {|
@@ -91,14 +94,27 @@ const app = (
 
       let data = {};
       let records = {};
+      let statusCode = null;
 
       if (query) {
-        const environment = createRelayEnvironment(token);
-        data = await fetchQuery(environment, query, context.query);
+        const rejectErrors = true;
+        const environment = createRelayEnvironment({ token, rejectErrors });
+        try {
+          data = await fetchQuery(environment, query, context.query);
+        } catch (errors) {
+          // We don't care about errors, just render Next.js Error 404 and set
+          // response status code. It's good enough for now.
+          statusCode = 404;
+        }
         records = environment
           .getStore()
           .getSource()
           .toJSON();
+      }
+
+      if (statusCode != null && context.res) {
+        // eslint-disable-next-line no-param-reassign
+        context.res.statusCode = statusCode;
       }
 
       const { locale, messages, supportedLocales } =
@@ -113,18 +129,21 @@ const app = (
         messages,
         records,
         supportedLocales,
+        statusCode,
       }: AppProps);
     }
 
     localeContext: { current: string, supported: Array<string> };
 
     render() {
+      if (this.props.statusCode) {
+        // https://github.com/este/este/issues/1485
+        return <Error statusCode={this.props.statusCode} />;
+      }
+      const { token, records } = this.props;
       // Must be created in render to get updated records from getInitialProps
       // on the same App instance. It happens when URL query is changed.
-      const environment = createRelayEnvironment(
-        this.props.token,
-        this.props.records,
-      );
+      const environment = createRelayEnvironment({ token, records });
       return (
         // Many issues by third-party components.
         // <React.StrictMode>

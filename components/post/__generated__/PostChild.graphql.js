@@ -13,7 +13,6 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type PostChild$ref: FragmentReference;
 export type PostChild = {|
   +id: string,
-  +name: ?string,
   +text: ?string,
   +type: PostType,
   +$refType: PostChild$ref,
@@ -38,13 +37,6 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "name",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
       "name": "text",
       "args": null,
       "storageKey": null
@@ -59,5 +51,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'b1edfb5dfb07b46634dda7ac688f93c0';
+(node/*: any*/).hash = 'f7213fd2bed8aa0afcca7314093047ec';
 module.exports = node;

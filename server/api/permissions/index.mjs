@@ -55,10 +55,7 @@ const rules /*: Rules */ = {
     setTheme: isAuthenticated,
     setPostName: and(isAuthenticated, isPostCreator(args => args.input.id)),
     setWebName: and(isAuthenticated, isWebCreator(args => args.input.id)),
-    setPostText: and(
-      isAuthenticated,
-      isPostCreator(args => args.input.id),
-    ),
+    setPostText: and(isAuthenticated, isPostCreator(args => args.input.id)),
     deletePost: and(isAuthenticated, isPostCreator(args => args.input.id)),
   },
   Query: {

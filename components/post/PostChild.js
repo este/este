@@ -127,7 +127,7 @@ export default createFragmentContainer(
   graphql`
     fragment PostChild on Post {
       id
-      name
+      # name
       text
       type
     }

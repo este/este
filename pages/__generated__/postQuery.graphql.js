@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 82f7416dd03bfc964412085f715c96ab
+ * @relayHash 87e15630a42e2a210c2966389d0df544
  */
 
 /* eslint-disable */
@@ -15,10 +15,7 @@ export type postQueryVariables = {|
   id: string
 |};
 export type postQueryResponse = {|
-  +post: ?{|
-    +id: string
-  |},
-  +$fragmentRefs: AppPage$ref & Post$ref,
+  +$fragmentRefs: AppPage$ref & Post$ref
 |};
 */
 
@@ -27,17 +24,14 @@ export type postQueryResponse = {|
 query postQuery(
   $id: ID!
 ) {
-  post(id: $id) {
-    id
-  }
   ...AppPage
   ...Post_1Bmzm5
 }
 
 fragment AppPage on Query {
   me {
-    id
     themeName
+    id
   }
 }
 
@@ -47,7 +41,6 @@ fragment Post_1Bmzm5 on Query {
     name
     text
     type
-    childrenOrder
     web {
       id
       name
@@ -65,7 +58,6 @@ fragment Post_1Bmzm5 on Query {
 
 fragment PostChild on Post {
   id
-  name
   text
   type
 }
@@ -80,52 +72,44 @@ var v0 = [
     "defaultValue": null
   }
 ],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id",
-    "type": "ID!"
-  }
-],
-v2 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "text",
   "args": null,
   "storageKey": null
 },
-v5 = {
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "type",
   "args": null,
   "storageKey": null
 },
-v6 = [
-  v2,
-  v3
+v5 = [
+  v1,
+  v2
 ];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  post(id: $id) {\n    id\n  }\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    id\n    themeName\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    text\n    type\n    childrenOrder\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostChild on Post {\n  id\n  name\n  text\n  type\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    text\n    type\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostChild on Post {\n  id\n  text\n  type\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -134,18 +118,6 @@ return {
     "metadata": null,
     "argumentDefinitions": v0,
     "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "post",
-        "storageKey": null,
-        "args": v1,
-        "concreteType": "Post",
-        "plural": false,
-        "selections": [
-          v2
-        ]
-      },
       {
         "kind": "FragmentSpread",
         "name": "AppPage",
@@ -173,23 +145,42 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "post",
+        "name": "me",
         "storageKey": null,
-        "args": v1,
-        "concreteType": "Post",
+        "args": null,
+        "concreteType": "User",
         "plural": false,
         "selections": [
-          v2,
-          v3,
-          v4,
-          v5,
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "childrenOrder",
+            "name": "themeName",
             "args": null,
             "storageKey": null
           },
+          v1
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "post",
+        "storageKey": null,
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "id",
+            "variableName": "id",
+            "type": "ID!"
+          }
+        ],
+        "concreteType": "Post",
+        "plural": false,
+        "selections": [
+          v1,
+          v2,
+          v3,
+          v4,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -198,7 +189,7 @@ return {
             "args": null,
             "concreteType": "Web",
             "plural": false,
-            "selections": v6
+            "selections": v5
           },
           {
             "kind": "LinkedField",
@@ -208,7 +199,7 @@ return {
             "args": null,
             "concreteType": "Post",
             "plural": true,
-            "selections": v6
+            "selections": v5
           },
           {
             "kind": "LinkedField",
@@ -219,30 +210,10 @@ return {
             "concreteType": "Post",
             "plural": true,
             "selections": [
-              v2,
+              v1,
               v3,
-              v4,
-              v5
+              v4
             ]
-          }
-        ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "me",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "User",
-        "plural": false,
-        "selections": [
-          v2,
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "themeName",
-            "args": null,
-            "storageKey": null
           }
         ]
       }
@@ -251,5 +222,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '573c1eb5d8acff006802b81cc6ef7bd9';
+(node/*: any*/).hash = '8ed9a43a51f458a65825a1eeb6b21a61';
 module.exports = node;

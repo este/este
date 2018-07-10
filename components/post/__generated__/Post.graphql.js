@@ -18,7 +18,6 @@ export type Post = {|
     +name: ?string,
     +text: ?string,
     +type: PostType,
-    +childrenOrder: $ReadOnlyArray<string>,
     +web: {|
       +id: string,
       +name: string,
@@ -103,13 +102,6 @@ return {
           "storageKey": null
         },
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "childrenOrder",
-          "args": null,
-          "storageKey": null
-        },
-        {
           "kind": "LinkedField",
           "alias": null,
           "name": "web",
@@ -152,5 +144,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '97945ad7285c55e6247561c38d93155a';
+(node/*: any*/).hash = '2f68bd89bbfb966ba1f55c06ea884217';
 module.exports = node;

@@ -4,9 +4,9 @@ import createRelayEnvironment from '../app/createRelayEnvironment';
 import type { Environment } from 'react-relay';
 
 const EnvironmentContext = React.createContext(
-  // Must cast because createRelayEnvironment does returns any because
-  // Environment type is not complete.
-  (createRelayEnvironment(): Environment),
+  // Cast to Environment, because createRelayEnvironment does not return it.
+  // Not sure why.
+  (createRelayEnvironment({ token: '' }): Environment),
 );
 
 export default EnvironmentContext;

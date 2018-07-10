@@ -12,8 +12,7 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type AppPage$ref: FragmentReference;
 export type AppPage = {|
   +me: ?{|
-    +id: string,
-    +themeName: ?string,
+    +themeName: ?string
   |},
   +$refType: AppPage$ref,
 |};
@@ -39,13 +38,6 @@ const node/*: ConcreteFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "id",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
           "name": "themeName",
           "args": null,
           "storageKey": null
@@ -55,5 +47,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '12be9fd8ae6c2e4bd6f1d8735cec9c96';
+(node/*: any*/).hash = 'a42517994acb3c80433306a1efdaa8ad';
 module.exports = node;

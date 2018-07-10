@@ -38,7 +38,6 @@ module.exports = {
     'relay/compat-uses-vars': 'error',
     'relay/graphql-naming': 'error',
     'relay/generated-flow-types': 'error',
-    // TODO: Will be released soon.
-    // 'relay/unused-fields': 'error',
+    'relay/unused-fields': 'error',
   },
 };

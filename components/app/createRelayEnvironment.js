@@ -3,7 +3,16 @@
 import 'isomorphic-fetch';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
-const createRelayEnvironment = (token: ?string, records: Object = {}) => {
+export type CreateRelayEnvironmentOptions = {
+  token: ?string,
+  records?: ?Object,
+  // We have to reject errors manually, because of fetchQuery design.
+  // https://github.com/facebook/relay/issues/1816#issuecomment-309760368
+  rejectErrors?: boolean,
+};
+
+const createRelayEnvironment = (options: CreateRelayEnvironmentOptions) => {
+  const { token, records, rejectErrors } = options;
   const store = new Store(new RecordSource(records));
   const network = Network.create((operation, variables) =>
     fetch(process.env.API_ENDPOINT || '', {
@@ -16,7 +25,15 @@ const createRelayEnvironment = (token: ?string, records: Object = {}) => {
         query: operation.text,
         variables,
       }),
-    }).then(response => response.json()),
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (rejectErrors === true && json.errors) {
+          // [{"message":"Not Authorised!" is returned by server/api/permissions
+          return Promise.reject(json.errors);
+        }
+        return json;
+      }),
   );
   return new Environment({ store, network });
 };
