@@ -132,6 +132,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
         // https://github.com/facebook/draft-js/issues/616#issuecomment-343596615
         // It breaks tab navigation.
         // TODO: Maybe we don't need it anymore. Grammarly is nice to have.
+        // Update1: Still required.
         data-enable-grammarly="false"
         style={[
           theme.styles.postTextTextInput,

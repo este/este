@@ -6,25 +6,40 @@ import { FormattedMessage } from 'react-intl';
 import Row from '../core/Row';
 import PostActionsButton from './PostActionsButton';
 
+type PostAction =
+  | {| type: 'EXPAND', value: boolean |}
+  | {| type: 'EXAMPLE' |}
+  | {| type: 'REUSE' |}
+  | {| type: 'MOVE' |};
+
 type PostActionsProps = {|
   theme: Theme,
   expanded: boolean,
   showReuse: boolean,
-  onExpand: (expand: boolean) => void,
-  onExample: () => void,
-  onReuse: () => void,
-  onMove: () => void,
+  onAction: (action: PostAction) => void,
 |};
 
 class PostActions extends React.PureComponent<PostActionsProps> {
   handleViewKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      this.props.onExpand(false);
+      this.props.onAction({ type: 'EXPAND', value: false });
     }
   };
 
   handleExpandButtonPress = () => {
-    this.props.onExpand(true);
+    this.props.onAction({ type: 'EXPAND', value: true });
+  };
+
+  handleReuseButtonPress = () => {
+    this.props.onAction({ type: 'REUSE' });
+  };
+
+  handleMoveButtonPress = () => {
+    this.props.onAction({ type: 'MOVE' });
+  };
+
+  handleExampleButtonPress = () => {
+    this.props.onAction({ type: 'EXAMPLE' });
   };
 
   render() {
@@ -42,20 +57,20 @@ class PostActions extends React.PureComponent<PostActionsProps> {
         ) : (
           <Row>
             {this.props.showReuse && (
-              <PostActionsButton onPress={this.props.onReuse}>
+              <PostActionsButton onPress={this.handleReuseButtonPress}>
                 <FormattedMessage
                   defaultMessage="Reuse"
                   id="postActions.buttons.reuse"
                 />
               </PostActionsButton>
             )}
-            <PostActionsButton onPress={this.props.onMove}>
+            <PostActionsButton onPress={this.handleMoveButtonPress}>
               <FormattedMessage
                 defaultMessage="Move"
                 id="postActions.buttons.move"
               />
             </PostActionsButton>
-            <PostActionsButton onPress={this.props.onExample}>
+            <PostActionsButton onPress={this.handleExampleButtonPress}>
               <FormattedMessage
                 defaultMessage="Example"
                 id="postActions.buttons.example"

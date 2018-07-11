@@ -13,27 +13,17 @@ type PostChildProps = {|
 
 type PostChildState = {|
   postActionsExpanded: boolean,
-  postActionsReuseButton: boolean,
+  postActionsShowReuse: boolean,
 |};
 
 class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
   postChildRef = React.createRef();
 
-  postChildActions = React.createRef();
+  postChildActionsRef = React.createRef();
 
   state = {
     postActionsExpanded: false,
-    postActionsReuseButton: false,
-  };
-
-  handlePostActionsExpand = (expand: boolean) => {
-    this.setState({ postActionsExpanded: expand }, () => {
-      if (expand) {
-        this.focusFirstPostChildActionsButton();
-      } else {
-        this.focusFirstPostChild();
-      }
-    });
+    postActionsShowReuse: false,
   };
 
   // onFocus bubbles in React
@@ -41,7 +31,34 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     this.setState({ postActionsExpanded: false });
   };
 
-  handlePostActionsExample = () => {
+  handlePostTextSelectionChange = selection => {
+    const selectionIsCollapsed = selection.start === selection.end;
+    this.setState({ postActionsShowReuse: !selectionIsCollapsed });
+  };
+
+  handlePostActionsAction = action => {
+    switch (action.type) {
+      case 'EXPAND':
+        this.handleExpandAction(action.value);
+        break;
+      case 'EXAMPLE':
+        this.handleExampleAction();
+        break;
+      case 'REUSE':
+        this.handleReuseAction();
+        break;
+      case 'MOVE':
+        this.handleMoveAction();
+        break;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (action.type: empty);
+    }
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  handleExampleAction() {
+    // console.log('example');
     // TODO: Need to decide whether it should be controlled component or not.
     //   this.setState(prevState => {
     //     // Trim and \n for normalized lines.
@@ -51,34 +68,29 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     //         ? example
     //         : `${prevState.value}\n${example}`;
     //     return { value: `${value}` };
-  };
-
-  handlePostActionsReuse = () => {};
-
-  handlePostActionsMove = () => {};
-
-  handlePostTextSelectionChange = selection => {
-    const selectionIsCollapsed = selection.start === selection.end;
-    this.setState({ postActionsReuseButton: !selectionIsCollapsed });
-  };
-
-  focusFirstPostChild() {
-    const { current } = this.postChildRef;
-    if (current == null) return;
-    const first = getFocusableNodes(current)[0];
-    if (first) first.focus();
   }
 
-  focusFirstPostChildActionsButton() {
-    const { current } = this.postChildActions;
-    if (current == null) return;
-    const first = getFocusableNodes(current)[0];
-    if (first) first.focus();
+  // eslint-disable-next-line class-methods-use-this
+  handleReuseAction() {
+    // console.log('reuse');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleMoveAction() {
+    // console.log('move');
+  }
+
+  handleExpandAction(expand) {
+    this.setState({ postActionsExpanded: expand }, () => {
+      const { current } = expand ? this.postChildActionsRef : this.postChildRef;
+      if (current == null) return;
+      const first = getFocusableNodes(current)[0];
+      if (first) first.focus();
+    });
   }
 
   renderByType(post) {
-    const { type } = post;
-    switch (type) {
+    switch (post.type) {
       case 'TEXT':
         return (
           <PostText
@@ -97,7 +109,7 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
       // );
       default:
         // eslint-disable-next-line no-unused-expressions
-        (type: empty);
+        (post.type: empty);
     }
   }
 
@@ -109,13 +121,10 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
           {this.renderByType(post)}
         </View>
         <PostActions
-          ref={this.postChildActions}
+          ref={this.postChildActionsRef}
           expanded={this.state.postActionsExpanded}
-          showReuse={this.state.postActionsReuseButton}
-          onExpand={this.handlePostActionsExpand}
-          onExample={this.handlePostActionsExample}
-          onReuse={this.handlePostActionsReuse}
-          onMove={this.handlePostActionsMove}
+          showReuse={this.state.postActionsShowReuse}
+          onAction={this.handlePostActionsAction}
         />
       </>
     );
