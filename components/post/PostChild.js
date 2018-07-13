@@ -42,7 +42,7 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         this.handleExpandAction(action.value);
         break;
       case 'EXAMPLE':
-        this.handleExampleAction();
+        // this.handleExampleAction();
         break;
       case 'REUSE':
         this.handleReuseAction();
@@ -56,19 +56,20 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     }
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  handleExampleAction() {
-    // console.log('example');
-    // TODO: Need to decide whether it should be controlled component or not.
-    //   this.setState(prevState => {
-    //     // Trim and \n for normalized lines.
-    //     const example = this.props.intl.formatMessage(messages.example).trim();
-    //     const value =
-    //       prevState.value.length === 0
-    //         ? example
-    //         : `${prevState.value}\n${example}`;
-    //     return { value: `${value}` };
-  }
+  // handleExampleAction() {
+  //   // commitLocalUpdate(this.props.relay.environment, store => {
+  //   //   store.get(this.props.data.id).setValue('example', 'clientText');
+  //   // });
+  //   // TODO: Need to decide whether it should be controlled component or not.
+  //   //   this.setState(prevState => {
+  //   //     // Trim and \n for normalized lines.
+  //   //     const example = this.props.intl.formatMessage(messages.example).trim();
+  //   //     const value =
+  //   //       prevState.value.length === 0
+  //   //         ? example
+  //   //         : `${prevState.value}\n${example}`;
+  //   //     return { value: `${value}` };
+  // }
 
   // eslint-disable-next-line class-methods-use-this
   handleReuseAction() {
@@ -95,7 +96,8 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         return (
           <PostText
             id={post.id}
-            defaultValue={post.text}
+            text={post.text}
+            clientText={post.clientText}
             onSelectionChange={this.handlePostTextSelectionChange}
           />
         );
@@ -138,6 +140,7 @@ export default createFragmentContainer(
       id
       # name
       text
+      clientText
       type
     }
   `,

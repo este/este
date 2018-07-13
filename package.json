@@ -27,7 +27,7 @@
     "deploy:web": "now -e START_SCRIPT=production:web --dotenv .env.production",
     "codegen:schema": "graphql get-schema -p api -o server/api/schema.graphql --all false",
     "codegen:relay:ci": "yarn codegen:relay --watchman false",
-    "codegen:relay": "relay-compiler --src . --include 'components/**' 'pages/**' --schema server/api/schema.graphql --noFutureProofEnums true",
+    "codegen:relay": "relay-compiler --src . --include 'client/**' 'components/**' 'pages/**' --schema server/api/schema.graphql --noFutureProofEnums true",
     "codegen:graphql:fix": "node --experimental-modules ./scripts/fixCodegen.mjs",
     "codegen:graphql": "graphql codegen && yarn codegen:graphql:fix",
     "codegen": "yarn codegen:schema && yarn codegen:relay && yarn codegen:graphql",

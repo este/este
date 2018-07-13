@@ -1,0 +1,7 @@
+# https://github.com/facebook/relay/issues/1656#issuecomment-382461183
+# Never use non-null fields. Client schema will be persisted in local storage.
+# https://graphql.org/learn/best-practices/#nullability
+
+extend type Post {
+  clientText: String
+}

@@ -33,6 +33,7 @@ module.exports = {
     'spaced-comment': ['error', 'always', { markers: ['::', ':'] }], // Flow comments.
     'consistent-return': 0, // Flow checks it.
     'default-case': 0, // Flow checks it.
+    'react/no-unused-prop-types': 0, // Too brittle.
     // Must be explicitly enabled.
     'relay/graphql-syntax': 'error',
     'relay/compat-uses-vars': 'error',

@@ -19,7 +19,7 @@ const withTheme = <Props: {}>(
       );
     }
   }
-  // $FlowFixMe;
+  // $FlowFixMe
   return React.forwardRef((props, ref) => {
     return <WithTheme {...props} forwardedRef={ref} />;
   });

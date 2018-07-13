@@ -6,6 +6,9 @@ import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from '../core/TextInput';
 import withMutation, { type Commit } from '../core/withMutation';
+import withClientMutation, {
+  type ClientCommit,
+} from '../core/withClientMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PostTextMutation.graphql';
 
@@ -38,11 +41,8 @@ made by [steida](https://twitter.com/steida)
 type Selection = { start: number, end: number };
 
 type PostTextProps = {|
-  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-  // tldr: For any piece of data, you need to pick a single component that owns
-  // it as the source of truth, and avoid duplicating it in other components.
-  // In the other words, it's the old "The single responsibility principle".
-  defaultValue: ?string,
+  text: ?string,
+  clientText: ?string,
   theme: Theme,
   intl: IntlShape,
   id: string,
@@ -50,53 +50,55 @@ type PostTextProps = {|
     generated.SetPostTextInput,
     generated.PostTextMutationResponse,
   >,
+  clientCommit: ClientCommit,
   disabled?: boolean,
   onSelectionChange?: (selection: Selection) => void,
 |};
 
 type PostTextState = {|
   selection: Selection,
-  value: string,
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
-  handleOnChangeTextThrottled = throttle(value => {
+  handleOnChangeTextThrottled = throttle(text => {
     const input = {
       id: this.props.id,
-      text: value,
+      text,
     };
     this.props.commit(input);
   }, onChangeTextThrottle);
 
   inputRef = React.createRef();
 
-  constructor(props) {
-    super(props);
-    const value = this.props.defaultValue || '';
-    this.state = {
-      selection: {
-        start: value.length,
-        end: value.length,
-      },
-      value,
-    };
-  }
+  state = {
+    selection: {
+      start: this.getDisplayText().length,
+      end: this.getDisplayText().length,
+    },
+  };
 
   componentDidMount() {
     this.adjustHeight();
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.value !== this.state.value) {
+  componentDidUpdate(prevProps) {
+    if (this.getDisplayText() !== this.getDisplayText(prevProps)) {
       this.adjustHeight();
     }
   }
 
-  handleTextInputChangeText = value => {
-    this.setState({ value }, () => {
-      this.adjustHeight();
+  getDisplayText(props = this.props) {
+    if (props.clientText != null) return props.clientText;
+    return props.text || '';
+  }
+
+  handleTextInputChangeText = (text: string) => {
+    this.props.clientCommit(store => {
+      const record = store.get(this.props.id);
+      if (!record) return;
+      record.setValue(text, 'clientText');
     });
-    this.handleOnChangeTextThrottled(value);
+    this.handleOnChangeTextThrottled(text);
   };
 
   handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
@@ -123,7 +125,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     return (
       <TextInput
         multiline
-        value={this.state.value}
+        value={this.getDisplayText()}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -146,7 +148,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 }
 
 export default withMutation(
-  withTheme(injectIntl(PostText)),
+  withClientMutation(withTheme(injectIntl(PostText))),
   graphql`
     mutation PostTextMutation($input: SetPostTextInput!) {
       setPostText(input: $input) {
