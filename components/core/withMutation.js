@@ -25,15 +25,19 @@ export type Errors<Response, Name: string> = $ElementType<
   'errors',
 >;
 
-const withMutation = <Props: {}, Input: Object, Response>(
+type Config = {|
+  optimisticResponse?: Object,
+  optimisticUpdater?: ?(store: RecordSourceSelectorProxy) => void,
+  updater?: ?(store: RecordSourceSelectorProxy) => void,
+  configs?: Array<RelayMutationConfig>,
+|};
+
+const withMutation = (mutation: GraphQLTaggedNode, config?: Config) => <
+  Props: {},
+  Input: Object,
+  Response,
+>(
   Component: React.ComponentType<Props>,
-  mutation: GraphQLTaggedNode,
-  config?: {|
-    optimisticResponse?: Object,
-    optimisticUpdater?: ?(store: RecordSourceSelectorProxy) => void,
-    updater?: ?(store: RecordSourceSelectorProxy) => void,
-    configs?: Array<RelayMutationConfig>,
-  |},
 ): React.ComponentType<
   $Diff<
     Props,
@@ -78,7 +82,7 @@ const withMutation = <Props: {}, Input: Object, Response>(
         ...config,
         mutation,
         variables: { input },
-        onCompleted: (response, errors) => {
+        onCompleted: (response: Response, errors) => {
           this.setState({ pending: false });
           if (errors) errors.forEach(error => this.props.dispatchError(error));
           if (onCompleted) onCompleted(response);

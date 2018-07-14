@@ -7,6 +7,7 @@ import withConfirm, { type Confirm } from '../core/withConfirm';
 import * as generated from './__generated__/DeleteWebMutation.graphql';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
+import { pipe } from 'ramda';
 
 type DeleteWebProps = {|
   id: string,
@@ -42,15 +43,17 @@ class DeleteWeb extends React.PureComponent<DeleteWebProps> {
   }
 }
 
-export default withMutation(
-  withConfirm(DeleteWeb),
-  graphql`
-    mutation DeleteWebMutation($input: DeleteWebInput!) {
-      deleteWeb(input: $input) {
-        web {
-          id
+export default pipe(
+  withConfirm,
+  withMutation(
+    graphql`
+      mutation DeleteWebMutation($input: DeleteWebInput!) {
+        deleteWeb(input: $input) {
+          web {
+            id
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(DeleteWeb);

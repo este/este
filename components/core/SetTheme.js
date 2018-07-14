@@ -6,6 +6,7 @@ import withTheme, { type Theme } from './withTheme';
 import { graphql } from 'react-relay';
 import withMutation, { type Commit } from './withMutation';
 import * as generated from './__generated__/SetThemeMutation.graphql';
+import { pipe } from 'ramda';
 
 type SetThemeProps = {|
   commit: Commit<generated.SetThemeInput, generated.SetThemeMutationResponse>,
@@ -37,15 +38,17 @@ class SetTheme extends React.PureComponent<SetThemeProps> {
   }
 }
 
-export default withMutation(
-  withTheme(SetTheme),
-  graphql`
-    mutation SetThemeMutation($input: SetThemeInput!) {
-      setTheme(input: $input) {
-        user {
-          themeName
+export default pipe(
+  withTheme,
+  withMutation(
+    graphql`
+      mutation SetThemeMutation($input: SetThemeInput!) {
+        setTheme(input: $input) {
+          user {
+            themeName
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(SetTheme);

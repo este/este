@@ -6,6 +6,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/PostNameMutation.graphql';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
+import { pipe } from 'ramda';
 
 const messages = defineMessages({
   placeholder: {
@@ -60,19 +61,21 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
   }
 }
 
-export default withMutation(
-  injectIntl(PostName),
-  graphql`
-    mutation PostNameMutation($input: SetPostNameInput!) {
-      setPostName(input: $input) {
-        # Payload "post { name }" updates fragments with post name. Perfect.
-        post {
-          name
-        }
-        errors {
-          name
+export default pipe(
+  injectIntl,
+  withMutation(
+    graphql`
+      mutation PostNameMutation($input: SetPostNameInput!) {
+        setPostName(input: $input) {
+          # Payload "post { name }" updates fragments with post name. Perfect.
+          post {
+            name
+          }
+          errors {
+            name
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(PostName);

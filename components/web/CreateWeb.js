@@ -10,6 +10,7 @@ import withMutation, { type Commit, type Errors } from '../core/withMutation';
 import * as validations from '../../validations';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
+import { pipe } from 'ramda';
 
 export const messages = defineMessages({
   postName: {
@@ -115,17 +116,19 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
   }
 }
 
-export default withMutation(
-  injectIntl(CreateWeb),
-  graphql`
-    mutation CreateWebMutation($input: CreateWebInput!) {
-      createWeb(input: $input) {
-        postId
-        errors {
-          name
-          postName
+export default pipe(
+  injectIntl,
+  withMutation(
+    graphql`
+      mutation CreateWebMutation($input: CreateWebInput!) {
+        createWeb(input: $input) {
+          postId
+          errors {
+            name
+            postName
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(CreateWeb);

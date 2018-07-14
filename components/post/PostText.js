@@ -11,6 +11,7 @@ import withClientMutation, {
 } from '../core/withClientMutation';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PostTextMutation.graphql';
+import { pipe } from 'ramda';
 
 const messages = defineMessages({
   placeholder: {
@@ -147,9 +148,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 }
 
-export default withMutation(
-  withClientMutation(withTheme(injectIntl(PostText))),
-  graphql`
+export default pipe(
+  injectIntl,
+  withTheme,
+  withClientMutation,
+  withMutation(graphql`
     mutation PostTextMutation($input: SetPostTextInput!) {
       setPostText(input: $input) {
         post {
@@ -158,5 +161,5 @@ export default withMutation(
         }
       }
     }
-  `,
-);
+  `),
+)(PostText);

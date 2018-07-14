@@ -14,6 +14,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/AuthMutation.graphql';
 import * as validations from '../../validations';
 import { View } from 'react-native';
+import { pipe } from 'ramda';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -144,17 +145,19 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
   }
 }
 
-export default withMutation(
-  injectIntl(Auth),
-  graphql`
-    mutation AuthMutation($input: AuthInput!) {
-      auth(input: $input) {
-        token
-        errors {
-          email
-          password
+export default pipe(
+  injectIntl,
+  withMutation(
+    graphql`
+      mutation AuthMutation($input: AuthInput!) {
+        auth(input: $input) {
+          token
+          errors {
+            email
+            password
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(Auth);

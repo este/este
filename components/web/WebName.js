@@ -6,6 +6,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/WebNameMutation.graphql';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
+import { pipe } from 'ramda';
 
 const messages = defineMessages({
   placeholder: {
@@ -58,19 +59,21 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
   }
 }
 
-export default withMutation(
-  injectIntl(WebName),
-  graphql`
-    mutation WebNameMutation($input: SetWebNameInput!) {
-      setWebName(input: $input) {
-        web {
-          name
-          id
-        }
-        errors {
-          name
+export default pipe(
+  injectIntl,
+  withMutation(
+    graphql`
+      mutation WebNameMutation($input: SetWebNameInput!) {
+        setWebName(input: $input) {
+          web {
+            name
+            id
+          }
+          errors {
+            name
+          }
         }
       }
-    }
-  `,
-);
+    `,
+  ),
+)(WebName);
