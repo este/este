@@ -145,14 +145,16 @@ export default pipe(
   injectIntl,
   withTheme,
   withStore,
-  withMutation(graphql`
-    mutation PostTextMutation($input: SetPostTextInput!) {
-      setPostText(input: $input) {
-        # By GraphQL design, every mutation has to return something.
-        post {
-          id
+  withMutation({
+    mutation: graphql`
+      mutation PostTextMutation($input: SetPostTextInput!) {
+        setPostText(input: $input) {
+          # By GraphQL design, every mutation has to return something.
+          post {
+            id
+          }
         }
       }
-    }
-  `),
+    `,
+  }),
 )(PostText);

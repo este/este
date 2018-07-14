@@ -63,8 +63,8 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
 
 export default pipe(
   injectIntl,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation PostNameMutation($input: SetPostNameInput!) {
         setPostName(input: $input) {
           # Payload "post { name }" updates fragments with post name. Perfect.
@@ -77,5 +77,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(PostName);

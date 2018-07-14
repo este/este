@@ -40,8 +40,8 @@ class SetTheme extends React.PureComponent<SetThemeProps> {
 
 export default pipe(
   withTheme,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation SetThemeMutation($input: SetThemeInput!) {
         setTheme(input: $input) {
           user {
@@ -50,5 +50,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(SetTheme);

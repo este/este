@@ -5,7 +5,7 @@ import {
   type Disposable,
   type Environment,
   type GraphQLTaggedNode,
-  type RecordSourceSelectorProxy,
+  type SelectorStoreUpdater,
   type RelayMutationConfig,
 } from 'react-relay';
 import ErrorContext, { type DispatchError } from './ErrorContext';
@@ -25,18 +25,16 @@ export type Errors<Response, Name: string> = $ElementType<
   'errors',
 >;
 
+// Note this is subset of flow-typed react-relay MutationConfig type.
 type Config = {|
-  optimisticResponse?: Object,
-  optimisticUpdater?: ?(store: RecordSourceSelectorProxy) => void,
-  updater?: ?(store: RecordSourceSelectorProxy) => void,
+  mutation: GraphQLTaggedNode,
   configs?: Array<RelayMutationConfig>,
+  optimisticUpdater?: ?SelectorStoreUpdater,
+  optimisticResponse?: Object,
+  updater?: ?SelectorStoreUpdater,
 |};
 
-const withMutation = (mutation: GraphQLTaggedNode, config?: Config) => <
-  Props: {},
-  Input: Object,
-  Response,
->(
+const withMutation = (config: Config) => <Props: {}, Input: Object, Response>(
   Component: React.ComponentType<Props>,
 ): React.ComponentType<
   $Diff<
@@ -80,7 +78,6 @@ const withMutation = (mutation: GraphQLTaggedNode, config?: Config) => <
       // https://facebook.github.io/relay/docs/en/mutations.html#commitmutation
       const disposable = commitMutation(this.props.environment, {
         ...config,
-        mutation,
         variables: { input },
         onCompleted: (response: Response, errors) => {
           this.setState({ pending: false });

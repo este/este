@@ -61,8 +61,8 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
 
 export default pipe(
   injectIntl,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation WebNameMutation($input: SetWebNameInput!) {
         setWebName(input: $input) {
           web {
@@ -75,5 +75,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(WebName);

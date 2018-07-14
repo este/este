@@ -45,8 +45,8 @@ class DeleteWeb extends React.PureComponent<DeleteWebProps> {
 
 export default pipe(
   withConfirm,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation DeleteWebMutation($input: DeleteWebInput!) {
         deleteWeb(input: $input) {
           web {
@@ -55,5 +55,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(DeleteWeb);

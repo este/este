@@ -118,8 +118,8 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
 export default pipe(
   injectIntl,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation CreateWebMutation($input: CreateWebInput!) {
         createWeb(input: $input) {
           postId
@@ -130,5 +130,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(CreateWeb);

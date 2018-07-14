@@ -147,8 +147,8 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
 export default pipe(
   injectIntl,
-  withMutation(
-    graphql`
+  withMutation({
+    mutation: graphql`
       mutation AuthMutation($input: AuthInput!) {
         auth(input: $input) {
           token
@@ -159,5 +159,5 @@ export default pipe(
         }
       }
     `,
-  ),
+  }),
 )(Auth);
