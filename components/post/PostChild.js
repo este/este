@@ -22,6 +22,12 @@ type PostChildState = {|
 |};
 
 class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
+  static focusFirst({ current }) {
+    if (current == null) return;
+    const first = getFocusableNodes(current)[0];
+    if (first) first.focus();
+  }
+
   postChildRef = React.createRef();
 
   postChildActionsRef = React.createRef();
@@ -78,6 +84,7 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         .trim();
       const newDraftText = `${draftText}${maybeNewLine}${example}`;
       record.setValue(newDraftText, 'draftText');
+      PostChild.focusFirst(this.postChildRef);
     });
   }
 
@@ -93,10 +100,9 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
 
   handleExpandAction(expand) {
     this.setState({ postActionsExpanded: expand }, () => {
-      const { current } = expand ? this.postChildActionsRef : this.postChildRef;
-      if (current == null) return;
-      const first = getFocusableNodes(current)[0];
-      if (first) first.focus();
+      PostChild.focusFirst(
+        expand ? this.postChildActionsRef : this.postChildRef,
+      );
     });
   }
 
