@@ -4,33 +4,25 @@ import { commitLocalUpdate } from 'relay-runtime';
 import type { Environment, StoreUpdater } from 'react-relay';
 import EnvironmentContext from './EnvironmentContext';
 
-export type ClientCommit = StoreUpdater => void;
+export type Store = StoreUpdater => void;
 
-const withClientMutation = <Props: {}>(
+const withStore = <Props: {}>(
   Component: React.ComponentType<Props>,
-): React.ComponentType<$Diff<Props, { clientCommit: ClientCommit | void }>> => {
-  type WithClientMutationProps = {
+): React.ComponentType<$Diff<Props, { store: Store | void }>> => {
+  type WithStoreProps = {
     ...Props,
     forwardedRef: Object,
     environment: Environment,
   };
 
-  class WithClientMutation extends React.PureComponent<
-    WithClientMutationProps,
-  > {
-    clientCommit = (storeUpdater: StoreUpdater) => {
+  class WithStore extends React.PureComponent<WithStoreProps> {
+    store = (storeUpdater: StoreUpdater) => {
       commitLocalUpdate(this.props.environment, storeUpdater);
     };
 
     render() {
       const { forwardedRef, environment, ...rest } = this.props;
-      return (
-        <Component
-          {...rest}
-          clientCommit={this.clientCommit}
-          ref={forwardedRef}
-        />
-      );
+      return <Component {...rest} store={this.store} ref={forwardedRef} />;
     }
   }
 
@@ -39,15 +31,11 @@ const withClientMutation = <Props: {}>(
     return (
       <EnvironmentContext.Consumer>
         {environment => (
-          <WithClientMutation
-            {...props}
-            forwardedRef={ref}
-            environment={environment}
-          />
+          <WithStore {...props} forwardedRef={ref} environment={environment} />
         )}
       </EnvironmentContext.Consumer>
     );
   });
 };
 
-export default withClientMutation;
+export default withStore;

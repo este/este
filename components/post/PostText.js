@@ -6,9 +6,7 @@ import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from '../core/TextInput';
 import withMutation, { type Commit } from '../core/withMutation';
-import withClientMutation, {
-  type ClientCommit,
-} from '../core/withClientMutation';
+import withStore, { type Store } from '../core/withStore';
 import { graphql } from 'react-relay';
 import * as generated from './__generated__/PostTextMutation.graphql';
 import { pipe } from 'ramda';
@@ -51,7 +49,7 @@ type PostTextProps = {|
     generated.SetPostTextInput,
     generated.PostTextMutationResponse,
   >,
-  clientCommit: ClientCommit,
+  store: Store,
   disabled?: boolean,
   onSelectionChange?: (selection: Selection) => void,
 |};
@@ -94,7 +92,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 
   handleTextInputChangeText = (text: string) => {
-    this.props.clientCommit(store => {
+    this.props.store(store => {
       const record = store.get(this.props.id);
       if (!record) return;
       record.setValue(text, 'clientText');
@@ -151,7 +149,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 export default pipe(
   injectIntl,
   withTheme,
-  withClientMutation,
+  withStore,
   withMutation(graphql`
     mutation PostTextMutation($input: SetPostTextInput!) {
       setPostText(input: $input) {
