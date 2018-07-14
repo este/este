@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 87e15630a42e2a210c2966389d0df544
+ * @relayHash 9f591026956a11529aa49e7f6c08d1ee
  */
 
 /* eslint-disable */
@@ -94,13 +94,22 @@ v3 = {
   "storageKey": null
 },
 v4 = {
+  "kind": "ScalarHandle",
+  "alias": null,
+  "name": "text",
+  "args": null,
+  "handle": "draftText",
+  "key": "",
+  "filters": null
+},
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "type",
   "args": null,
   "storageKey": null
 },
-v5 = [
+v6 = [
   v1,
   v2
 ];
@@ -181,6 +190,7 @@ return {
           v2,
           v3,
           v4,
+          v5,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -189,7 +199,7 @@ return {
             "args": null,
             "concreteType": "Web",
             "plural": false,
-            "selections": v5
+            "selections": v6
           },
           {
             "kind": "LinkedField",
@@ -199,7 +209,7 @@ return {
             "args": null,
             "concreteType": "Post",
             "plural": true,
-            "selections": v5
+            "selections": v6
           },
           {
             "kind": "LinkedField",
@@ -212,7 +222,8 @@ return {
             "selections": [
               v1,
               v3,
-              v4
+              v4,
+              v5
             ]
           }
         ]

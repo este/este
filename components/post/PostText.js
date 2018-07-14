@@ -11,7 +11,7 @@ import { graphql } from 'react-relay';
 import * as generated from './__generated__/PostTextMutation.graphql';
 import { pipe } from 'ramda';
 
-const messages = defineMessages({
+export const messages = defineMessages({
   placeholder: {
     defaultMessage: 'write',
     id: 'postText.textInput.placeholder',
@@ -41,7 +41,7 @@ type Selection = { start: number, end: number };
 
 type PostTextProps = {|
   text: ?string,
-  clientText: ?string,
+  draftText: string,
   theme: Theme,
   intl: IntlShape,
   id: string,
@@ -71,8 +71,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   state = {
     selection: {
-      start: this.getDisplayText().length,
-      end: this.getDisplayText().length,
+      start: this.props.draftText.length,
+      end: this.props.draftText.length,
     },
   };
 
@@ -81,21 +81,16 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.getDisplayText() !== this.getDisplayText(prevProps)) {
+    if (this.props.draftText !== prevProps.draftText) {
       this.adjustHeight();
     }
-  }
-
-  getDisplayText(props = this.props) {
-    if (props.clientText != null) return props.clientText;
-    return props.text || '';
   }
 
   handleTextInputChangeText = (text: string) => {
     this.props.store(store => {
       const record = store.get(this.props.id);
       if (!record) return;
-      record.setValue(text, 'clientText');
+      record.setValue(text, 'draftText');
     });
     this.handleOnChangeTextThrottled(text);
   };
@@ -124,7 +119,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     return (
       <TextInput
         multiline
-        value={this.getDisplayText()}
+        value={this.props.draftText}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -153,9 +148,9 @@ export default pipe(
   withMutation(graphql`
     mutation PostTextMutation($input: SetPostTextInput!) {
       setPostText(input: $input) {
+        # By GraphQL design, every mutation has to return something.
         post {
           id
-          text
         }
       }
     }

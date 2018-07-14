@@ -1,14 +1,19 @@
 // @flow
 import * as React from 'react';
-import PostText from './PostText';
+import PostText, { messages as postTextMessages } from './PostText';
 import PostActions from './PostActions';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostChild.graphql';
 import { View } from 'react-native';
 import getFocusableNodes from '../../client/getFocusableNodes';
+import withStore, { type Store } from '../core/withStore';
+import { injectIntl, type IntlShape } from 'react-intl';
+import { pipe } from 'ramda';
 
 type PostChildProps = {|
   data: generated.PostChild,
+  store: Store,
+  intl: IntlShape,
 |};
 
 type PostChildState = {|
@@ -42,7 +47,7 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         this.handleExpandAction(action.value);
         break;
       case 'EXAMPLE':
-        // this.handleExampleAction();
+        this.handleExampleAction();
         break;
       case 'REUSE':
         this.handleReuseAction();
@@ -56,20 +61,25 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     }
   };
 
-  // handleExampleAction() {
-  //   // commitLocalUpdate(this.props.relay.environment, store => {
-  //   //   store.get(this.props.data.id).setValue('example', 'clientText');
-  //   // });
-  //   // TODO: Need to decide whether it should be controlled component or not.
-  //   //   this.setState(prevState => {
-  //   //     // Trim and \n for normalized lines.
-  //   //     const example = this.props.intl.formatMessage(messages.example).trim();
-  //   //     const value =
-  //   //       prevState.value.length === 0
-  //   //         ? example
-  //   //         : `${prevState.value}\n${example}`;
-  //   //     return { value: `${value}` };
-  // }
+  handleExampleAction() {
+    this.props.store(store => {
+      const record = store.get(this.props.data.id);
+      if (!record) return;
+      // getValue returns mixed type.
+      // https://twitter.com/estejs/status/1018113850875564032
+      // It's string, because of createRelayEnvironment handlerProvider, but we
+      // people make mistakes, so we have to ensure it via Flow type refinement.
+      let draftText = record.getValue('draftText');
+      if (typeof draftText !== 'string') draftText = ''; // Now it's string.
+      const maybeNewLine = draftText.length > 0 ? '\n' : '';
+      const example = this.props.intl
+        .formatMessage(postTextMessages.example)
+        // Trim because of accidental `...` newlines in messages.
+        .trim();
+      const newDraftText = `${draftText}${maybeNewLine}${example}`;
+      record.setValue(newDraftText, 'draftText');
+    });
+  }
 
   // eslint-disable-next-line class-methods-use-this
   handleReuseAction() {
@@ -97,7 +107,7 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
           <PostText
             id={post.id}
             text={post.text}
-            clientText={post.clientText}
+            draftText={post.draftText}
             onSelectionChange={this.handlePostTextSelectionChange}
           />
         );
@@ -134,13 +144,15 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
 }
 
 export default createFragmentContainer(
-  PostChild,
+  pipe(
+    injectIntl,
+    withStore,
+  )(PostChild),
   graphql`
     fragment PostChild on Post {
       id
-      # name
-      text
-      clientText
+      text @__clientField(handle: "draftText")
+      draftText
       type
     }
   `,

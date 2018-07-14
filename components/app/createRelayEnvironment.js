@@ -1,7 +1,14 @@
 // @flow
 /* global fetch:false */
 import 'isomorphic-fetch';
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import {
+  Environment,
+  Network,
+  RecordSource,
+  Store,
+  ConnectionHandler,
+} from 'relay-runtime';
+import type { Handler } from 'react-relay';
 
 export type CreateRelayEnvironmentOptions = {
   token: ?string,
@@ -11,10 +18,8 @@ export type CreateRelayEnvironmentOptions = {
   rejectErrors?: boolean,
 };
 
-const createRelayEnvironment = (options: CreateRelayEnvironmentOptions) => {
-  const { token, records, rejectErrors } = options;
-  const store = new Store(new RecordSource(records));
-  const network = Network.create((operation, variables) =>
+const createNetwork = (token, rejectErrors) =>
+  Network.create((operation, variables) =>
     fetch(process.env.API_ENDPOINT || '', {
       method: 'POST',
       headers: {
@@ -35,7 +40,32 @@ const createRelayEnvironment = (options: CreateRelayEnvironmentOptions) => {
         return json;
       }),
   );
-  return new Environment({ store, network });
+
+const DraftTextHandler: Handler = {
+  update(store, payload) {
+    const record = store.get(payload.dataID);
+    if (!record) return;
+    let value = record.getValue(payload.fieldKey);
+    if (typeof value !== 'string') value = '';
+    record.setValue(value, 'draftText');
+  },
+};
+
+const handlerProvider = handle => {
+  switch (handle) {
+    case 'connection':
+      return ConnectionHandler;
+    case 'draftText':
+      return DraftTextHandler;
+  }
+  throw new Error(`handlerProvider: No handler provided for ${handle}`);
+};
+
+const createRelayEnvironment = (options: CreateRelayEnvironmentOptions) => {
+  const { token, records, rejectErrors } = options;
+  const store = new Store(new RecordSource(records));
+  const network = createNetwork(token, rejectErrors);
+  return new Environment({ store, network, handlerProvider });
 };
 
 export default createRelayEnvironment;

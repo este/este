@@ -28,11 +28,7 @@ class Post extends React.PureComponent<PostProps> {
     switch (type) {
       case 'TEXT':
         return (
-          <PostText
-            id={post.id}
-            text={post.text}
-            clientText={post.clientText}
-          />
+          <PostText id={post.id} text={post.text} draftText={post.draftText} />
         );
       case 'IMAGE':
         return null;
@@ -79,8 +75,8 @@ export default createFragmentContainer(
       post(id: $id) {
         id
         name
-        text
-        clientText
+        text @__clientField(handle: "draftText")
+        draftText
         type
         # childrenOrder
         web {

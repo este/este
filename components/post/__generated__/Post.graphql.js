@@ -17,7 +17,7 @@ export type Post = {|
     +id: string,
     +name: ?string,
     +text: ?string,
-    +clientText: ?string,
+    +draftText: string,
     +type: PostType,
     +web: {|
       +id: string,
@@ -90,15 +90,15 @@ return {
         v1,
         {
           "kind": "ScalarField",
-          "alias": null,
-          "name": "text",
+          "alias": "text",
+          "name": "__text_draftText",
           "args": null,
           "storageKey": null
         },
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "clientText",
+          "name": "draftText",
           "args": null,
           "storageKey": null
         },
@@ -152,5 +152,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f9d2d7d242a9f987bf34f1b6a4e3c255';
+(node/*: any*/).hash = '1df0948964684b6a4e232f687bc37203';
 module.exports = node;
