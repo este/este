@@ -19,7 +19,7 @@ class Post extends React.PureComponent<PostProps> {
   // Next.js Head title requires string.
   static getTitle(post): string {
     if (post.name != null) return post.name;
-    if (post.text != null) return post.text;
+    if (post.text != null) return post.text.slice(0, 256);
     return post.id;
   }
 
