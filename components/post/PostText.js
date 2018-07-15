@@ -149,6 +149,9 @@ export default createFragmentContainer(
   graphql`
     fragment PostText on Post {
       id
+      # Probably bug. text @__clientField correctly sets draftText, but it also
+      # makes text field unusable, because it sets it to undefined. Why?
+      # Possible workaround is to pass text field from parent explicitly.
       text @__clientField(handle: "draftText")
       draftText
     }
