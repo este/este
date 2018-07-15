@@ -17,10 +17,9 @@ type PostProps = {|
 
 class Post extends React.PureComponent<PostProps> {
   // Next.js Head title requires string.
-  // TODO: Taky draft?
   static getTitle(post): string {
     if (post.name != null) return post.name;
-    // if (post.text != null) return post.text;
+    if (post.text != null) return post.text;
     return post.id;
   }
 
@@ -75,6 +74,7 @@ export default createFragmentContainer(
       post(id: $id) {
         id
         name
+        text
         type
         web {
           id

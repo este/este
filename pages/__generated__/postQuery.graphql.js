@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 349d8befa6acafe116b71ba61ea4a760
+ * @relayHash d5b34885f4498783cd5a006523eb5e9a
  */
 
 /* eslint-disable */
@@ -39,6 +39,7 @@ fragment Post_1Bmzm5 on Query {
   post(id: $id) {
     id
     name
+    text
     type
     web {
       id
@@ -94,22 +95,11 @@ v2 = {
 v3 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "type",
-  "args": null,
-  "storageKey": null
-},
-v4 = [
-  v1,
-  v2
-],
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
   "name": "text",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v4 = {
   "kind": "ScalarHandle",
   "alias": null,
   "name": "text",
@@ -117,13 +107,24 @@ v6 = {
   "handle": "draftText",
   "key": "",
   "filters": null
-};
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "type",
+  "args": null,
+  "storageKey": null
+},
+v6 = [
+  v1,
+  v2
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    type\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    text\n    type\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -194,6 +195,8 @@ return {
           v1,
           v2,
           v3,
+          v4,
+          v5,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -202,7 +205,7 @@ return {
             "args": null,
             "concreteType": "Web",
             "plural": false,
-            "selections": v4
+            "selections": v6
           },
           {
             "kind": "LinkedField",
@@ -212,10 +215,8 @@ return {
             "args": null,
             "concreteType": "Post",
             "plural": true,
-            "selections": v4
+            "selections": v6
           },
-          v5,
-          v6,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -226,9 +227,9 @@ return {
             "plural": true,
             "selections": [
               v1,
-              v3,
               v5,
-              v6
+              v3,
+              v4
             ]
           }
         ]

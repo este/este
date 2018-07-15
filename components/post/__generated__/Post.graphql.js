@@ -17,6 +17,7 @@ export type Post = {|
   +post: ?{|
     +id: string,
     +name: ?string,
+    +text: ?string,
     +type: PostType,
     +web: {|
       +id: string,
@@ -91,6 +92,13 @@ return {
         {
           "kind": "ScalarField",
           "alias": null,
+          "name": "text",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
           "name": "type",
           "args": null,
           "storageKey": null
@@ -143,5 +151,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c024368be9791ff1e752f84804640a45';
+(node/*: any*/).hash = '12f2db60d8a858d78fc72de21f0ced87';
 module.exports = node;
