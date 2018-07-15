@@ -17,9 +17,10 @@ type PostProps = {|
 
 class Post extends React.PureComponent<PostProps> {
   // Next.js Head title requires string.
+  // TODO: Taky draft?
   static getTitle(post): string {
     if (post.name != null) return post.name;
-    if (post.text != null) return post.text;
+    // if (post.text != null) return post.text;
     return post.id;
   }
 
@@ -27,9 +28,8 @@ class Post extends React.PureComponent<PostProps> {
     const { type } = post;
     switch (type) {
       case 'TEXT':
-        return (
-          <PostText id={post.id} text={post.text} draftText={post.draftText} />
-        );
+        // $FlowFixMe https://github.com/facebook/relay/issues/2316
+        return <PostText data={post} />;
       case 'IMAGE':
         return null;
       case 'CHILDREN':
@@ -75,10 +75,7 @@ export default createFragmentContainer(
       post(id: $id) {
         id
         name
-        text @__clientField(handle: "draftText")
-        draftText
         type
-        # childrenOrder
         web {
           id
           name
@@ -87,6 +84,9 @@ export default createFragmentContainer(
           id
           name
         }
+        # Interesting, ...PostText must defined before ...PostChild, otherwise:
+        # Error: There can be only one fragment named "PostText".
+        ...PostText
         children {
           id
           ...PostChild

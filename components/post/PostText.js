@@ -11,6 +11,8 @@ import { pipe } from 'ramda';
 import SetPostTextMutation, {
   type SetPostTextCommit,
 } from '../../mutations/SetPostTextMutation';
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/PostText.graphql';
 
 export const messages = defineMessages({
   placeholder: {
@@ -41,11 +43,9 @@ made by [steida](https://twitter.com/steida)
 type Selection = { start: number, end: number };
 
 type PostTextProps = {|
-  text: ?string,
-  draftText: string,
+  data: generated.PostText,
   theme: Theme,
   intl: IntlShape,
-  id: string,
   commit: SetPostTextCommit,
   store: Store,
   disabled?: boolean,
@@ -59,7 +59,7 @@ type PostTextState = {|
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   handleOnChangeTextThrottled = throttle((text: string) => {
     const input = {
-      id: this.props.id,
+      id: this.props.data.id,
       text,
     };
     this.props.commit(input);
@@ -69,8 +69,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   state = {
     selection: {
-      start: this.props.draftText.length,
-      end: this.props.draftText.length,
+      start: this.props.data.draftText.length,
+      end: this.props.data.draftText.length,
     },
   };
 
@@ -79,14 +79,14 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.draftText !== prevProps.draftText) {
+    if (this.props.data.draftText !== prevProps.data.draftText) {
       this.adjustHeight();
     }
   }
 
   handleTextInputChangeText = (text: string) => {
     this.props.store(store => {
-      const record = store.get(this.props.id);
+      const record = store.get(this.props.data.id);
       if (!record) return;
       record.setValue(text, 'draftText');
     });
@@ -117,7 +117,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     return (
       <TextInput
         multiline
-        value={this.props.draftText}
+        value={this.props.data.draftText}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -139,9 +139,18 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 }
 
-export default pipe(
-  injectIntl,
-  withTheme,
-  withStore,
-  withMutation(SetPostTextMutation),
-)(PostText);
+export default createFragmentContainer(
+  pipe(
+    injectIntl,
+    withTheme,
+    withStore,
+    withMutation(SetPostTextMutation),
+  )(PostText),
+  graphql`
+    fragment PostText on Post {
+      id
+      text @__clientField(handle: "draftText")
+      draftText
+    }
+  `,
+);

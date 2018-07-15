@@ -9,6 +9,7 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 type PostChild$ref = any;
+type PostText$ref = any;
 export type PostType = "CHILDREN" | "IMAGE" | "TEXT";
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Post$ref: FragmentReference;
@@ -16,8 +17,6 @@ export type Post = {|
   +post: ?{|
     +id: string,
     +name: ?string,
-    +text: ?string,
-    +draftText: string,
     +type: PostType,
     +web: {|
       +id: string,
@@ -31,6 +30,7 @@ export type Post = {|
       +id: string,
       +$fragmentRefs: PostChild$ref,
     |}>,
+    +$fragmentRefs: PostText$ref,
   |},
   +$refType: Post$ref,
 |};
@@ -90,20 +90,6 @@ return {
         v1,
         {
           "kind": "ScalarField",
-          "alias": "text",
-          "name": "__text_draftText",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "draftText",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
           "alias": null,
           "name": "type",
           "args": null,
@@ -130,6 +116,11 @@ return {
           "selections": v2
         },
         {
+          "kind": "FragmentSpread",
+          "name": "PostText",
+          "args": null
+        },
+        {
           "kind": "LinkedField",
           "alias": null,
           "name": "children",
@@ -152,5 +143,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '1df0948964684b6a4e232f687bc37203';
+(node/*: any*/).hash = 'c024368be9791ff1e752f84804640a45';
 module.exports = node;

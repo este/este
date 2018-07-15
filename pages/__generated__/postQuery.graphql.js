@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9f591026956a11529aa49e7f6c08d1ee
+ * @relayHash 349d8befa6acafe116b71ba61ea4a760
  */
 
 /* eslint-disable */
@@ -39,7 +39,6 @@ fragment Post_1Bmzm5 on Query {
   post(id: $id) {
     id
     name
-    text
     type
     web {
       id
@@ -49,6 +48,7 @@ fragment Post_1Bmzm5 on Query {
       id
       name
     }
+    ...PostText
     children {
       id
       ...PostChild
@@ -56,10 +56,15 @@ fragment Post_1Bmzm5 on Query {
   }
 }
 
-fragment PostChild on Post {
+fragment PostText on Post {
   id
   text
+}
+
+fragment PostChild on Post {
+  id
   type
+  ...PostText
 }
 */
 
@@ -89,11 +94,22 @@ v2 = {
 v3 = {
   "kind": "ScalarField",
   "alias": null,
+  "name": "type",
+  "args": null,
+  "storageKey": null
+},
+v4 = [
+  v1,
+  v2
+],
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
   "name": "text",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v6 = {
   "kind": "ScalarHandle",
   "alias": null,
   "name": "text",
@@ -101,24 +117,13 @@ v4 = {
   "handle": "draftText",
   "key": "",
   "filters": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "type",
-  "args": null,
-  "storageKey": null
-},
-v6 = [
-  v1,
-  v2
-];
+};
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    text\n    type\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostChild on Post {\n  id\n  text\n  type\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    type\n    web {\n      id\n      name\n    }\n    parents {\n      id\n      name\n    }\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -189,8 +194,6 @@ return {
           v1,
           v2,
           v3,
-          v4,
-          v5,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -199,7 +202,7 @@ return {
             "args": null,
             "concreteType": "Web",
             "plural": false,
-            "selections": v6
+            "selections": v4
           },
           {
             "kind": "LinkedField",
@@ -209,8 +212,10 @@ return {
             "args": null,
             "concreteType": "Post",
             "plural": true,
-            "selections": v6
+            "selections": v4
           },
+          v5,
+          v6,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -222,8 +227,8 @@ return {
             "selections": [
               v1,
               v3,
-              v4,
-              v5
+              v5,
+              v6
             ]
           }
         ]

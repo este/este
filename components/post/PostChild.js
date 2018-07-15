@@ -110,10 +110,9 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     switch (post.type) {
       case 'TEXT':
         return (
+          // $FlowFixMe https://github.com/facebook/relay/issues/2316
           <PostText
-            id={post.id}
-            text={post.text}
-            draftText={post.draftText}
+            data={post}
             onSelectionChange={this.handlePostTextSelectionChange}
           />
         );
@@ -157,9 +156,8 @@ export default createFragmentContainer(
   graphql`
     fragment PostChild on Post {
       id
-      text @__clientField(handle: "draftText")
-      draftText
       type
+      ...PostText
     }
   `,
 );
