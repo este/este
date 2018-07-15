@@ -3,7 +3,7 @@ import * as React from 'react';
 import app from '../components/app/app';
 import { graphql } from 'react-relay';
 import AppPage from '../components/app/AppPage';
-import WebComponent from '../components/web/Web';
+import WebComponent from '../components/Web';
 
 const Web = props => {
   return (

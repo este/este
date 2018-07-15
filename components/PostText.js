@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
 import { TextInput } from 'react-native';
-import withTheme, { type Theme } from '../core/withTheme';
+import withTheme, { type Theme } from './core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
-import { onChangeTextThrottle } from '../core/TextInput';
-import withMutation from '../core/withMutation';
-import withStore, { type Store } from '../core/withStore';
+import { onChangeTextThrottle } from './core/TextInput';
+import withMutation from './core/withMutation';
+import withStore, { type Store } from './core/withStore';
 import { pipe } from 'ramda';
 import SetPostTextMutation, {
   type SetPostTextCommit,
-} from '../../mutations/SetPostTextMutation';
+} from '../mutations/SetPostTextMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostText.graphql';
 

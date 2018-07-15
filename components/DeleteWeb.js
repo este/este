@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
-import { DeleteButton } from '../core/buttons';
-import withMutation from '../core/withMutation';
-import withConfirm, { type Confirm } from '../core/withConfirm';
+import { DeleteButton } from './core/buttons';
+import withMutation from './core/withMutation';
+import withConfirm, { type Confirm } from './core/withConfirm';
 import Router from 'next/router';
-import type { Href } from '../app/sitemap';
+import type { Href } from './app/sitemap';
 import { pipe } from 'ramda';
 import DeleteWebMutation, {
   type DeleteWebCommit,
-} from '../../mutations/DeleteWebMutation';
+} from '../mutations/DeleteWebMutation';
 
 type DeleteWebProps = {|
   id: string,

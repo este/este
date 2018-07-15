@@ -1,18 +1,18 @@
 // @flow
 import * as React from 'react';
-import { CreateButton } from '../core/buttons';
-import TextInput from '../core/TextInput';
+import { CreateButton } from './core/buttons';
+import TextInput from './core/TextInput';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import Row from '../core/Row';
-import withMutation from '../core/withMutation';
-import * as validations from '../../validations';
+import Row from './core/Row';
+import withMutation from './core/withMutation';
+import * as validations from '../validations';
 import Router from 'next/router';
-import type { Href } from '../app/sitemap';
+import type { Href } from './app/sitemap';
 import { pipe } from 'ramda';
 import CreateWebMutation, {
   type CreateWebCommit,
   type CreateWebErrors,
-} from '../../mutations/CreateWebMutation';
+} from '../mutations/CreateWebMutation';
 
 export const messages = defineMessages({
   postName: {

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import Button, { type ButtonProps } from '../core/Button';
+import Button, { type ButtonProps } from './core/Button';
 
 const styles = StyleSheet.create({
   // outline is only for the web, React Native Web supports it.

@@ -5,8 +5,8 @@ import PostActions from './PostActions';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostChild.graphql';
 import { View } from 'react-native';
-import getFocusableNodes from '../../client/getFocusableNodes';
-import withStore, { type Store } from '../core/withStore';
+import getFocusableNodes from '../client/getFocusableNodes';
+import withStore, { type Store } from './core/withStore';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { pipe } from 'ramda';
 

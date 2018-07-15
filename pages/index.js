@@ -9,8 +9,8 @@ import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
 import Block from '../components/core/Block';
 import Row from '../components/core/Row';
-import CreateWeb from '../components/web/CreateWeb';
-import Webs from '../components/web/Webs';
+import CreateWeb from '../components/CreateWeb';
+import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
 
 const Authenticated = ({ data }) => (

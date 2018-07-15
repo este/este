@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import { View } from 'react-native';
-import withTheme, { type Theme } from '../core/withTheme';
+import withTheme, { type Theme } from './core/withTheme';
 import { FormattedMessage } from 'react-intl';
-import Row from '../core/Row';
+import Row from './core/Row';
 import PostActionsButton from './PostActionsButton';
 
 type PostAction =

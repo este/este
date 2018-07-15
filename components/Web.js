@@ -4,9 +4,9 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Web.graphql';
 import Head from 'next/head';
 import WebName from './WebName';
-import EditMainNav from '../EditMainNav';
-import Block from '../core/Block';
-import Row from '../core/Row';
+import EditMainNav from './EditMainNav';
+import Block from './core/Block';
+import Row from './core/Row';
 import DeleteWeb from './DeleteWeb';
 import WebPosts from './WebPosts';
 

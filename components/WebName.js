@@ -1,46 +1,46 @@
 // @flow
 import * as React from 'react';
-import TextInput from '../core/TextInput';
-import withMutation from '../core/withMutation';
+import TextInput from './core/TextInput';
+import withMutation from './core/withMutation';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import * as validations from '../../validations';
+import * as validations from '../validations';
 import { pipe } from 'ramda';
-import SetPostNameMutation, {
-  type SetPostNameCommit,
-  type SetPostNameErrors,
-} from '../../mutations/SetPostNameMutation';
+import SetWebNameMutation, {
+  type SetWebNameCommit,
+  type SetWebNameErrors,
+} from '../mutations/SetWebNameMutation';
 
 const messages = defineMessages({
   placeholder: {
-    defaultMessage: 'post name',
-    id: 'postName.textInput.placeholder',
+    defaultMessage: 'web name',
+    id: 'webName.textInput.placeholder',
   },
 });
 
-type PostNameProps = {|
-  postId: string,
+type WebNameProps = {|
+  webId: string,
   // defaultValue because component is uncontrolled. This is fine for now.
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
   defaultValue: string,
-  commit: SetPostNameCommit,
+  commit: SetWebNameCommit,
   intl: IntlShape,
 |};
 
-type PostNameState = {|
-  errors: SetPostNameErrors,
+type WebNameState = {|
+  errors: SetWebNameErrors,
 |};
 
-class PostName extends React.PureComponent<PostNameProps, PostNameState> {
+class WebName extends React.PureComponent<WebNameProps, WebNameState> {
   state = {
     errors: null,
   };
 
   handleTextInputChangeTextThrottled = value => {
     const input = {
-      id: this.props.postId,
+      id: this.props.webId,
       name: value,
     };
-    const errors = validations.validateSetPostName(input);
+    const errors = validations.validateSetWebName(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
   };
@@ -48,6 +48,7 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
   render() {
     const { intl } = this.props;
     const { errors } = this.state;
+
     return (
       <TextInput
         error={errors && errors.name}
@@ -62,5 +63,5 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
 
 export default pipe(
   injectIntl,
-  withMutation(SetPostNameMutation),
-)(PostName);
+  withMutation(SetWebNameMutation),
+)(WebName);

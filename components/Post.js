@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import { View } from 'react-native';
-import withTheme, { type Theme } from '../core/withTheme';
+import withTheme, { type Theme } from './core/withTheme';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Post.graphql';
 import PostName from './PostName';
 import Head from 'next/head';
-import EditMainNav from '../EditMainNav';
+import EditMainNav from './EditMainNav';
 import PostChild from './PostChild';
 import PostText from './PostText';
 
