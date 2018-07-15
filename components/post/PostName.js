@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
 import TextInput from '../core/TextInput';
-import withMutation, { type Commit, type Errors } from '../core/withMutation';
-import { graphql } from 'react-relay';
-import * as generated from './__generated__/PostNameMutation.graphql';
+import withMutation from '../core/withMutation';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
 import { pipe } from 'ramda';
+import SetPostNameMutation, {
+  type SetPostNameCommit,
+  type SetPostNameErrors,
+} from '../../mutations/SetPostNameMutation';
 
 const messages = defineMessages({
   placeholder: {
@@ -20,15 +22,12 @@ type PostNameProps = {|
   // defaultValue because component is uncontrolled. This is fine for now.
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
   defaultValue: string,
-  commit: Commit<
-    generated.SetPostNameInput,
-    generated.PostNameMutationResponse,
-  >,
+  commit: SetPostNameCommit,
   intl: IntlShape,
 |};
 
 type PostNameState = {|
-  errors: Errors<generated.PostNameMutationResponse, 'setPostName'>,
+  errors: SetPostNameErrors,
 |};
 
 class PostName extends React.PureComponent<PostNameProps, PostNameState> {
@@ -63,19 +62,5 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
 
 export default pipe(
   injectIntl,
-  withMutation({
-    mutation: graphql`
-      mutation PostNameMutation($input: SetPostNameInput!) {
-        setPostName(input: $input) {
-          # Payload "post { name }" updates fragments with post name. Perfect.
-          post {
-            name
-          }
-          errors {
-            name
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(SetPostNameMutation),
 )(PostName);

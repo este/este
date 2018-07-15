@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3216e7bc859412fca68932fce7504a46
+ * @relayHash 3227b89a56420152a5d2c57ed5371c83
  */
 
 /* eslint-disable */
@@ -13,10 +13,10 @@ export type SetPostTextInput = {
   id: string,
   text: string,
 };
-export type PostTextMutationVariables = {|
+export type SetPostTextMutationVariables = {|
   input: SetPostTextInput
 |};
-export type PostTextMutationResponse = {|
+export type SetPostTextMutationResponse = {|
   +setPostText: ?{|
     +post: ?{|
       +id: string
@@ -27,7 +27,7 @@ export type PostTextMutationResponse = {|
 
 
 /*
-mutation PostTextMutation(
+mutation SetPostTextMutation(
   $input: SetPostTextInput!
 ) {
   setPostText(input: $input) {
@@ -88,13 +88,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "PostTextMutation",
+  "name": "SetPostTextMutation",
   "id": null,
-  "text": "mutation PostTextMutation(\n  $input: SetPostTextInput!\n) {\n  setPostText(input: $input) {\n    post {\n      id\n    }\n  }\n}\n",
+  "text": "mutation SetPostTextMutation(\n  $input: SetPostTextInput!\n) {\n  setPostText(input: $input) {\n    post {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "PostTextMutation",
+    "name": "SetPostTextMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -102,12 +102,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "PostTextMutation",
+    "name": "SetPostTextMutation",
     "argumentDefinitions": v0,
     "selections": v1
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '23035a85285c6808aa3f98ae72ec379d';
+(node/*: any*/).hash = 'ce66d761f1497cb3c0c8bfe2ab61d7e2';
 module.exports = node;

@@ -3,14 +3,16 @@ import * as React from 'react';
 import { CreateButton } from '../core/buttons';
 import TextInput from '../core/TextInput';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import * as generated from './__generated__/CreateWebMutation.graphql';
 import Row from '../core/Row';
-import { graphql } from 'react-relay';
-import withMutation, { type Commit, type Errors } from '../core/withMutation';
+import withMutation from '../core/withMutation';
 import * as validations from '../../validations';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
 import { pipe } from 'ramda';
+import CreateWebMutation, {
+  type CreateWebCommit,
+  type CreateWebErrors,
+} from '../../mutations/CreateWebMutation';
 
 export const messages = defineMessages({
   postName: {
@@ -24,13 +26,13 @@ export const messages = defineMessages({
 });
 
 type CreateWebProps = {|
-  commit: Commit<generated.CreateWebInput, generated.CreateWebMutationResponse>,
+  commit: CreateWebCommit,
   pending: boolean,
   intl: IntlShape,
 |};
 
 type CreateWebState = {|
-  errors: Errors<generated.CreateWebMutationResponse, 'createWeb'>,
+  errors: CreateWebErrors,
   name: string,
   disabled: boolean,
 |};
@@ -118,17 +120,5 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
 export default pipe(
   injectIntl,
-  withMutation({
-    mutation: graphql`
-      mutation CreateWebMutation($input: CreateWebInput!) {
-        createWeb(input: $input) {
-          postId
-          errors {
-            name
-            postName
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(CreateWebMutation),
 )(CreateWeb);

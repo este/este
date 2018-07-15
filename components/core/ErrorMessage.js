@@ -2,11 +2,11 @@
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
 import { FormattedMessage } from 'react-intl';
-import type { Max140CharsError } from '../web/__generated__/CreateWebMutation.graphql';
+import type { Max140CharsError } from '../../mutations/__generated__/CreateWebMutation.graphql';
 import type {
   EmailError,
   PasswordError,
-} from './__generated__/AuthMutation.graphql';
+} from '../../mutations/__generated__/AuthMutation.graphql';
 
 export type MessageError =
   | 'NOT_AUTHORIZED'

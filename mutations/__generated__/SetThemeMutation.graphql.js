@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0b706934093d9c576684aeb2b58d3eb9
+ * @relayHash 73552ea16c0c397c164510b738e9c155
  */
 
 /* eslint-disable */
@@ -9,38 +9,30 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
-export type SetPostNameInput = {
-  id: string,
-  name: string,
+export type SetThemeInput = {
+  themeName: string
 };
-export type PostNameMutationVariables = {|
-  input: SetPostNameInput
+export type SetThemeMutationVariables = {|
+  input: SetThemeInput
 |};
-export type PostNameMutationResponse = {|
-  +setPostName: ?{|
-    +post: ?{|
-      +name: ?string
-    |},
-    +errors: ?{|
-      +name: ?Max140CharsError
-    |},
+export type SetThemeMutationResponse = {|
+  +setTheme: ?{|
+    +user: ?{|
+      +themeName: ?string
+    |}
   |}
 |};
 */
 
 
 /*
-mutation PostNameMutation(
-  $input: SetPostNameInput!
+mutation SetThemeMutation(
+  $input: SetThemeInput!
 ) {
-  setPostName(input: $input) {
-    post {
-      name
+  setTheme(input: $input) {
+    user {
+      themeName
       id
-    }
-    errors {
-      name
     }
   }
 }
@@ -51,7 +43,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "SetPostNameInput!",
+    "type": "SetThemeInput!",
     "defaultValue": null
   }
 ],
@@ -60,39 +52,26 @@ v1 = [
     "kind": "Variable",
     "name": "input",
     "variableName": "input",
-    "type": "SetPostNameInput!"
+    "type": "SetThemeInput!"
   }
 ],
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "name",
+  "name": "themeName",
   "args": null,
   "storageKey": null
-},
-v3 = [
-  v2
-],
-v4 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "errors",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "SetPostNameErrors",
-  "plural": false,
-  "selections": v3
 };
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "PostNameMutation",
+  "name": "SetThemeMutation",
   "id": null,
-  "text": "mutation PostNameMutation(\n  $input: SetPostNameInput!\n) {\n  setPostName(input: $input) {\n    post {\n      name\n      id\n    }\n    errors {\n      name\n    }\n  }\n}\n",
+  "text": "mutation SetThemeMutation(\n  $input: SetThemeInput!\n) {\n  setTheme(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "PostNameMutation",
+    "name": "SetThemeMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -100,48 +79,49 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "setPostName",
+        "name": "setTheme",
         "storageKey": null,
         "args": v1,
-        "concreteType": "SetPostNamePayload",
+        "concreteType": "SetThemePayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "post",
+            "name": "user",
             "storageKey": null,
             "args": null,
-            "concreteType": "Post",
+            "concreteType": "User",
             "plural": false,
-            "selections": v3
-          },
-          v4
+            "selections": [
+              v2
+            ]
+          }
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "PostNameMutation",
+    "name": "SetThemeMutation",
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "setPostName",
+        "name": "setTheme",
         "storageKey": null,
         "args": v1,
-        "concreteType": "SetPostNamePayload",
+        "concreteType": "SetThemePayload",
         "plural": false,
         "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "post",
+            "name": "user",
             "storageKey": null,
             "args": null,
-            "concreteType": "Post",
+            "concreteType": "User",
             "plural": false,
             "selections": [
               v2,
@@ -153,8 +133,7 @@ return {
                 "storageKey": null
               }
             ]
-          },
-          v4
+          }
         ]
       }
     ]
@@ -162,5 +141,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '24f097be16e5ee64ae235bc94c102f27';
+(node/*: any*/).hash = '99cf94b94b9f7c5834ac56a10462e946';
 module.exports = node;

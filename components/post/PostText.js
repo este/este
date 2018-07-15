@@ -5,11 +5,12 @@ import withTheme, { type Theme } from '../core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from '../core/TextInput';
-import withMutation, { type Commit } from '../core/withMutation';
+import withMutation from '../core/withMutation';
 import withStore, { type Store } from '../core/withStore';
-import { graphql } from 'react-relay';
-import * as generated from './__generated__/PostTextMutation.graphql';
 import { pipe } from 'ramda';
+import SetPostTextMutation, {
+  type SetPostTextCommit,
+} from '../../mutations/SetPostTextMutation';
 
 export const messages = defineMessages({
   placeholder: {
@@ -45,10 +46,7 @@ type PostTextProps = {|
   theme: Theme,
   intl: IntlShape,
   id: string,
-  commit: Commit<
-    generated.SetPostTextInput,
-    generated.PostTextMutationResponse,
-  >,
+  commit: SetPostTextCommit,
   store: Store,
   disabled?: boolean,
   onSelectionChange?: (selection: Selection) => void,
@@ -59,7 +57,7 @@ type PostTextState = {|
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
-  handleOnChangeTextThrottled = throttle(text => {
+  handleOnChangeTextThrottled = throttle((text: string) => {
     const input = {
       id: this.props.id,
       text,
@@ -145,16 +143,5 @@ export default pipe(
   injectIntl,
   withTheme,
   withStore,
-  withMutation({
-    mutation: graphql`
-      mutation PostTextMutation($input: SetPostTextInput!) {
-        setPostText(input: $input) {
-          # By GraphQL design, every mutation has to return something.
-          post {
-            id
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(SetPostTextMutation),
 )(PostText);

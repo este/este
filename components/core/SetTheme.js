@@ -3,13 +3,14 @@ import * as React from 'react';
 import Button from './Button';
 import { lightTheme } from '../../themes/theme';
 import withTheme, { type Theme } from './withTheme';
-import { graphql } from 'react-relay';
-import withMutation, { type Commit } from './withMutation';
-import * as generated from './__generated__/SetThemeMutation.graphql';
+import withMutation from './withMutation';
+import SetThemeMutation, {
+  type SetThemeCommit,
+} from '../../mutations/SetThemeMutation';
 import { pipe } from 'ramda';
 
 type SetThemeProps = {|
-  commit: Commit<generated.SetThemeInput, generated.SetThemeMutationResponse>,
+  commit: SetThemeCommit,
   pending: boolean,
   theme: Theme,
 |};
@@ -40,15 +41,5 @@ class SetTheme extends React.PureComponent<SetThemeProps> {
 
 export default pipe(
   withTheme,
-  withMutation({
-    mutation: graphql`
-      mutation SetThemeMutation($input: SetThemeInput!) {
-        setTheme(input: $input) {
-          user {
-            themeName
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(SetThemeMutation),
 )(SetTheme);

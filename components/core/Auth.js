@@ -4,17 +4,19 @@ import Heading from './Heading';
 import TextInput from './TextInput';
 import { SignInButton, SignUpButton } from './buttons';
 import Router from 'next/router';
-import withMutation, { type Commit, type Errors } from './withMutation';
+import withMutation from './withMutation';
 import { setCookie } from '../app/cookie';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import type { Href } from '../app/sitemap';
 import Row from './Row';
 import Block from './Block';
-import { graphql } from 'react-relay';
-import * as generated from './__generated__/AuthMutation.graphql';
 import * as validations from '../../validations';
 import { View } from 'react-native';
 import { pipe } from 'ramda';
+import AuthMutation, {
+  type AuthCommit,
+  type AuthErrors,
+} from '../../mutations/AuthMutation';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -30,12 +32,12 @@ const messages = defineMessages({
 type AuthProps = {|
   redirectUrl?: Href,
   intl: IntlShape,
-  commit: Commit<generated.AuthInput, generated.AuthMutationResponse>,
+  commit: AuthCommit,
   pending: boolean,
 |};
 
 type AuthState = {|
-  errors: Errors<generated.AuthMutationResponse, 'auth'>,
+  errors: AuthErrors,
   email: string,
   password: string,
 |};
@@ -147,17 +149,5 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
 
 export default pipe(
   injectIntl,
-  withMutation({
-    mutation: graphql`
-      mutation AuthMutation($input: AuthInput!) {
-        auth(input: $input) {
-          token
-          errors {
-            email
-            password
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(AuthMutation),
 )(Auth);

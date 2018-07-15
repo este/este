@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
 import TextInput from '../core/TextInput';
-import withMutation, { type Commit, type Errors } from '../core/withMutation';
-import { graphql } from 'react-relay';
-import * as generated from './__generated__/WebNameMutation.graphql';
+import withMutation from '../core/withMutation';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../../validations';
 import { pipe } from 'ramda';
+import SetWebNameMutation, {
+  type SetWebNameCommit,
+  type SetWebNameErrors,
+} from '../../mutations/SetWebNameMutation';
 
 const messages = defineMessages({
   placeholder: {
@@ -20,12 +22,12 @@ type WebNameProps = {|
   // defaultValue because component is uncontrolled. This is fine for now.
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
   defaultValue: string,
-  commit: Commit<generated.SetWebNameInput, generated.WebNameMutationResponse>,
+  commit: SetWebNameCommit,
   intl: IntlShape,
 |};
 
 type WebNameState = {|
-  errors: Errors<generated.WebNameMutationResponse, 'setWebName'>,
+  errors: SetWebNameErrors,
 |};
 
 class WebName extends React.PureComponent<WebNameProps, WebNameState> {
@@ -61,19 +63,5 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
 
 export default pipe(
   injectIntl,
-  withMutation({
-    mutation: graphql`
-      mutation WebNameMutation($input: SetWebNameInput!) {
-        setWebName(input: $input) {
-          web {
-            name
-            id
-          }
-          errors {
-            name
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(SetWebNameMutation),
 )(WebName);

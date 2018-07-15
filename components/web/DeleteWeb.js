@@ -1,18 +1,19 @@
 // @flow
 import * as React from 'react';
-import { graphql } from 'react-relay';
 import { DeleteButton } from '../core/buttons';
-import withMutation, { type Commit } from '../core/withMutation';
+import withMutation from '../core/withMutation';
 import withConfirm, { type Confirm } from '../core/withConfirm';
-import * as generated from './__generated__/DeleteWebMutation.graphql';
 import Router from 'next/router';
 import type { Href } from '../app/sitemap';
 import { pipe } from 'ramda';
+import DeleteWebMutation, {
+  type DeleteWebCommit,
+} from '../../mutations/DeleteWebMutation';
 
 type DeleteWebProps = {|
   id: string,
   confirm: Confirm,
-  commit: Commit<generated.DeleteWebInput, generated.DeleteWebMutationResponse>,
+  commit: DeleteWebCommit,
   pending: boolean,
 |};
 
@@ -45,15 +46,5 @@ class DeleteWeb extends React.PureComponent<DeleteWebProps> {
 
 export default pipe(
   withConfirm,
-  withMutation({
-    mutation: graphql`
-      mutation DeleteWebMutation($input: DeleteWebInput!) {
-        deleteWeb(input: $input) {
-          web {
-            id
-          }
-        }
-      }
-    `,
-  }),
+  withMutation(DeleteWebMutation),
 )(DeleteWeb);
