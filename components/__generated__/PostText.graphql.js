@@ -13,9 +13,9 @@ declare export opaque type PostText$ref: FragmentReference;
 export type PostText = {|
   +id: string,
   +text: ?string,
-  +draftText: string,
-  +selectionStart: number,
-  +selectionEnd: number,
+  +draftText: ?string,
+  +selectionStart: ?number,
+  +selectionEnd: ?number,
   +$refType: PostText$ref,
 |};
 */

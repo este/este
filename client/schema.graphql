@@ -1,15 +1,8 @@
-# One day, client schema will be persisted in local storage.
-# Not sure yet what is the best design pattern regarding nullability.
-# The thing is, what will happen when we remove draftText with its handler?
-# A new app will get the old local storage.
-# I suppose a new app will not use the old field at all.
-# So, it seems using non-null type is both fine and convenient for DX.
-# Non-null values are ensured in createRelayEnvironment handlerProvider.
 # https://graphql.org/learn/best-practices/#nullability
 # https://github.com/facebook/relay/issues/1656#issuecomment-382461183
 
 extend type Post {
-  draftText: String!
-  selectionStart: Int!
-  selectionEnd: Int!
+  draftText: String
+  selectionStart: Int
+  selectionEnd: Int
 }

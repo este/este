@@ -105,11 +105,17 @@ class PostText extends React.PureComponent<PostTextProps> {
 
   render() {
     const { data, theme, intl } = this.props;
+    // We will have typed TextInput soon.
+    const value: string = data.draftText || '';
+    const selection: { start: number, end: number } = {
+      start: data.selectionStart != null ? data.selectionStart : value.length,
+      end: data.selectionEnd != null ? data.selectionEnd : value.length,
+    };
 
     return (
       <TextInput
         multiline
-        value={data.draftText}
+        value={value}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -125,7 +131,7 @@ class PostText extends React.PureComponent<PostTextProps> {
           theme.typography.fontSizeWithLineHeight(0),
           this.props.disabled === true && theme.styles.stateDisabled,
         ]}
-        selection={{ start: data.selectionStart, end: data.selectionEnd }}
+        selection={selection}
       />
     );
   }

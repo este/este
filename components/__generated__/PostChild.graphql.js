@@ -15,8 +15,8 @@ declare export opaque type PostChild$ref: FragmentReference;
 export type PostChild = {|
   +id: string,
   +type: PostType,
-  +selectionStart: number,
-  +selectionEnd: number,
+  +selectionStart: ?number,
+  +selectionEnd: ?number,
   +$fragmentRefs: PostText$ref,
   +$refType: PostChild$ref,
 |};
