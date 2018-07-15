@@ -16,7 +16,8 @@ const config = {
         post {
           id
           # In this case, store is updated automatically on save.
-          text
+          # But we don't need it. This is just an example.
+          # text
         }
       }
     }
