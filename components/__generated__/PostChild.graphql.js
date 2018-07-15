@@ -15,6 +15,8 @@ declare export opaque type PostChild$ref: FragmentReference;
 export type PostChild = {|
   +id: string,
   +type: PostType,
+  +selectionStart: number,
+  +selectionEnd: number,
   +$fragmentRefs: PostText$ref,
   +$refType: PostChild$ref,
 |};
@@ -43,6 +45,20 @@ const node/*: ConcreteFragment*/ = {
       "storageKey": null
     },
     {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "selectionStart",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "selectionEnd",
+      "args": null,
+      "storageKey": null
+    },
+    {
       "kind": "FragmentSpread",
       "name": "PostText",
       "args": null
@@ -50,5 +66,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '6f44044be435697bc46f656cd2a8fdad';
+(node/*: any*/).hash = '4544a96e7ba6abaab0bf82e4748ba82f';
 module.exports = node;

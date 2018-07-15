@@ -18,7 +18,6 @@ type PostChildProps = {|
 
 type PostChildState = {|
   postActionsExpanded: boolean,
-  postActionsShowReuse: boolean,
 |};
 
 class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
@@ -34,17 +33,11 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
 
   state = {
     postActionsExpanded: false,
-    postActionsShowReuse: false,
   };
 
   // onFocus bubbles in React
   handlePostChildFocus = () => {
     this.setState({ postActionsExpanded: false });
-  };
-
-  handlePostTextSelectionChange = selection => {
-    const selectionIsCollapsed = selection.start === selection.end;
-    this.setState({ postActionsShowReuse: !selectionIsCollapsed });
   };
 
   handlePostActionsAction = action => {
@@ -106,15 +99,12 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     });
   }
 
-  renderByType(data) {
+  static renderByType(data) {
     switch (data.type) {
       case 'TEXT':
         return (
           // $FlowFixMe https://github.com/facebook/relay/issues/2316
-          <PostText
-            data={data}
-            onSelectionChange={this.handlePostTextSelectionChange}
-          />
+          <PostText data={data} />
         );
       case 'IMAGE':
         return null;
@@ -135,12 +125,12 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     return (
       <>
         <View ref={this.postChildRef} onFocus={this.handlePostChildFocus}>
-          {this.renderByType(data)}
+          {PostChild.renderByType(data)}
         </View>
         <PostActions
           ref={this.postChildActionsRef}
           expanded={this.state.postActionsExpanded}
-          showReuse={this.state.postActionsShowReuse}
+          showReuse={data.selectionStart !== data.selectionEnd}
           onAction={this.handlePostActionsAction}
         />
       </>
@@ -157,6 +147,8 @@ export default createFragmentContainer(
     fragment PostChild on Post {
       id
       type
+      selectionStart
+      selectionEnd
       ...PostText
     }
   `,

@@ -10,5 +10,6 @@
 
 extend type Post {
   draftText: String!
-  # TODO: Add selection!
+  selectionStart: Int!
+  selectionEnd: Int!
 }

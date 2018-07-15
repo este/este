@@ -40,8 +40,6 @@ made by [steida](https://twitter.com/steida)
   },
 });
 
-type Selection = { start: number, end: number };
-
 type PostTextProps = {|
   data: generated.PostText,
   theme: Theme,
@@ -49,14 +47,9 @@ type PostTextProps = {|
   commit: SetPostTextCommit,
   store: Store,
   disabled?: boolean,
-  onSelectionChange?: (selection: Selection) => void,
 |};
 
-type PostTextState = {|
-  selection: Selection,
-|};
-
-class PostText extends React.PureComponent<PostTextProps, PostTextState> {
+class PostText extends React.PureComponent<PostTextProps> {
   throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
@@ -66,13 +59,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }, onChangeTextThrottle);
 
   inputRef = React.createRef();
-
-  state = {
-    selection: {
-      start: this.props.data.draftText.length,
-      end: this.props.data.draftText.length,
-    },
-  };
 
   componentDidMount() {
     this.adjustHeight();
@@ -96,9 +82,13 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   };
 
   handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
-    this.setState({ selection });
-    const { onSelectionChange } = this.props;
-    if (onSelectionChange) onSelectionChange(selection);
+    this.props.store(store => {
+      const record = store.get(this.props.data.id);
+      if (!record) return;
+      record
+        .setValue(selection.start, 'selectionStart')
+        .setValue(selection.end, 'selectionEnd');
+    });
   };
 
   adjustHeight() {
@@ -114,12 +104,12 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }
 
   render() {
-    const { theme, intl } = this.props;
+    const { data, theme, intl } = this.props;
 
     return (
       <TextInput
         multiline
-        value={this.props.data.draftText}
+        value={data.draftText}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -135,7 +125,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           theme.typography.fontSizeWithLineHeight(0),
           this.props.disabled === true && theme.styles.stateDisabled,
         ]}
-        selection={this.state.selection}
+        selection={{ start: data.selectionStart, end: data.selectionEnd }}
       />
     );
   }
@@ -162,6 +152,8 @@ export default createFragmentContainer(
       # const unsaved = text_ !== draftText
       # text_: text
       draftText
+      selectionStart
+      selectionEnd
     }
   `,
 );

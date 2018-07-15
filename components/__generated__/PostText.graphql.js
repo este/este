@@ -14,6 +14,8 @@ export type PostText = {|
   +id: string,
   +text: ?string,
   +draftText: string,
+  +selectionStart: number,
+  +selectionEnd: number,
   +$refType: PostText$ref,
 |};
 */
@@ -46,9 +48,23 @@ const node/*: ConcreteFragment*/ = {
       "name": "draftText",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "selectionStart",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "selectionEnd",
+      "args": null,
+      "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '99a06e379c20f08a968b55928820a3ca';
+(node/*: any*/).hash = '7f4c46b70645328029027eff95910fe8';
 module.exports = node;

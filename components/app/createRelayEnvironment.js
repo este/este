@@ -41,13 +41,17 @@ const createNetwork = (token, rejectErrors) =>
       }),
   );
 
+// TODO: Figure out where handlers belong. Own file?
 const DraftTextHandler: Handler = {
   update(store, payload) {
     const record = store.get(payload.dataID);
     if (!record) return;
     let value = record.getValue(payload.fieldKey);
     if (typeof value !== 'string') value = '';
-    record.setValue(value, 'draftText');
+    record
+      .setValue(value, 'draftText')
+      .setValue(value.length, 'selectionStart')
+      .setValue(value.length, 'selectionEnd');
   },
 };
 
