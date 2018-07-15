@@ -84,8 +84,8 @@ export default createFragmentContainer(
           id
           name
         }
-        # Interesting, ...PostText must defined before ...PostChild, otherwise:
-        # Error: There can be only one fragment named "PostText".
+        # Interesting, ...PostText must be defined before ...PostChild,
+        # otherwise: Error: There can be only one fragment named "PostText".
         ...PostText
         children {
           id

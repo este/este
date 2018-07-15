@@ -15,6 +15,8 @@ const config = {
         # By GraphQL design, every mutation has to return something.
         post {
           id
+          # In this case, store is updated automatically on save.
+          text
         }
       }
     }

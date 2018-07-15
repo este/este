@@ -146,13 +146,19 @@ export default createFragmentContainer(
     withStore,
     withMutation(SetPostTextMutation),
   )(PostText),
+  // https://github.com/relayjs/eslint-plugin-relay/issues/35
+  // eslint-disable-next-line relay/unused-fields
   graphql`
     fragment PostText on Post {
       id
-      # Probably bug. text @__clientField correctly sets draftText, but it also
-      # makes text field unusable, because it sets it to undefined. Why?
-      # Possible workaround is to pass text field from parent explicitly.
+      # @__clientField works as expected, draftText is set, but text field is
+      # set to undefined for some reason.
+      # https://github.com/facebook/relay/issues/2488
       text @__clientField(handle: "draftText")
+      # With text_ alias, we can get the original value.
+      # We are not using it yet, but it's handy for saving state detection.
+      # const unsaved = text_ !== draftText
+      # text_: text
       draftText
     }
   `,

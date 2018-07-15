@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3227b89a56420152a5d2c57ed5371c83
+ * @relayHash 95bba7164918c55b26dea54d85876b73
  */
 
 /* eslint-disable */
@@ -19,7 +19,8 @@ export type SetPostTextMutationVariables = {|
 export type SetPostTextMutationResponse = {|
   +setPostText: ?{|
     +post: ?{|
-      +id: string
+      +id: string,
+      +text: ?string,
     |}
   |}
 |};
@@ -33,6 +34,7 @@ mutation SetPostTextMutation(
   setPostText(input: $input) {
     post {
       id
+      text
     }
   }
 }
@@ -79,6 +81,13 @@ v1 = [
             "name": "id",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "text",
+            "args": null,
+            "storageKey": null
           }
         ]
       }
@@ -90,7 +99,7 @@ return {
   "operationKind": "mutation",
   "name": "SetPostTextMutation",
   "id": null,
-  "text": "mutation SetPostTextMutation(\n  $input: SetPostTextInput!\n) {\n  setPostText(input: $input) {\n    post {\n      id\n    }\n  }\n}\n",
+  "text": "mutation SetPostTextMutation(\n  $input: SetPostTextInput!\n) {\n  setPostText(input: $input) {\n    post {\n      id\n      text\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -109,5 +118,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ce66d761f1497cb3c0c8bfe2ab61d7e2';
+(node/*: any*/).hash = 'acbe79f50139e77fc710570f67b5be10';
 module.exports = node;
