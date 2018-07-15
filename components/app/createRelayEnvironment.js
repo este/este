@@ -1,14 +1,8 @@
 // @flow
 /* global fetch:false */
 import 'isomorphic-fetch';
-import {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-  ConnectionHandler,
-} from 'relay-runtime';
-import type { Handler } from 'react-relay';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import handlerProvider from './handlerProvider';
 
 export type CreateRelayEnvironmentOptions = {
   token: ?string,
@@ -40,30 +34,6 @@ const createNetwork = (token, rejectErrors) =>
         return json;
       }),
   );
-
-// TODO: Figure out where handlers belong. Own file?
-const DraftTextHandler: Handler = {
-  update(store, payload) {
-    const record = store.get(payload.dataID);
-    if (!record) return;
-    let value = record.getValue(payload.fieldKey);
-    if (typeof value !== 'string') value = '';
-    record
-      .setValue(value, 'draftText')
-      .setValue(value.length, 'selectionStart')
-      .setValue(value.length, 'selectionEnd');
-  },
-};
-
-const handlerProvider = handle => {
-  switch (handle) {
-    case 'connection':
-      return ConnectionHandler;
-    case 'draftText':
-      return DraftTextHandler;
-  }
-  throw new Error(`handlerProvider: No handler provided for ${handle}`);
-};
 
 const createRelayEnvironment = (options: CreateRelayEnvironmentOptions) => {
   const { token, records, rejectErrors } = options;
