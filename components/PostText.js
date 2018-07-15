@@ -57,7 +57,7 @@ type PostTextState = {|
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
-  handleOnChangeTextThrottled = throttle((text: string) => {
+  throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
       text,
@@ -81,6 +81,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   componentDidUpdate(prevProps) {
     if (this.props.data.draftText !== prevProps.data.draftText) {
       this.adjustHeight();
+      // Commit belongs to componentDidUpdate because it's reliable.
+      // https://github.com/necolas/react-native-web/issues/1031
+      this.throttleCommit(this.props.data.draftText);
     }
   }
 
@@ -90,7 +93,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       if (!record) return;
       record.setValue(text, 'draftText');
     });
-    this.handleOnChangeTextThrottled(text);
   };
 
   handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
