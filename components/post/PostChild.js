@@ -106,13 +106,13 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
     });
   }
 
-  renderByType(post) {
-    switch (post.type) {
+  renderByType(data) {
+    switch (data.type) {
       case 'TEXT':
         return (
           // $FlowFixMe https://github.com/facebook/relay/issues/2316
           <PostText
-            data={post}
+            data={data}
             onSelectionChange={this.handlePostTextSelectionChange}
           />
         );
@@ -121,21 +121,21 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
       case 'CHILDREN':
         return null;
       // return (
-      //   post.children != null &&
-      //   post.children.map(child => <PostChild data={child} key={child.id} />)
+      //   data.children != null &&
+      //   data.children.map(child => <PostChild data={child} key={child.id} />)
       // );
       default:
         // eslint-disable-next-line no-unused-expressions
-        (post.type: empty);
+        (data.type: empty);
     }
   }
 
   render() {
-    const { data: post } = this.props;
+    const { data } = this.props;
     return (
       <>
         <View ref={this.postChildRef} onFocus={this.handlePostChildFocus}>
-          {this.renderByType(post)}
+          {this.renderByType(data)}
         </View>
         <PostActions
           ref={this.postChildActionsRef}
