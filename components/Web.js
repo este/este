@@ -23,11 +23,13 @@ class Web extends React.PureComponent<WebProps> {
     return (
       <>
         <Head>
-          <title>{web.name}</title>
+          <title>{web.draftName}</title>
         </Head>
-        <EditMainNav web={web} />
+        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+        <EditMainNav data={web} />
         <Block>
-          <WebName webId={web.id} defaultValue={web.name} />
+          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+          <WebName data={web} />
           {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
           <WebPosts data={web} />
           <Row>
@@ -45,7 +47,9 @@ export default createFragmentContainer(
     fragment Web on Query @argumentDefinitions(id: { type: "ID!" }) {
       web(id: $id) {
         id
-        name
+        draftName
+        ...EditMainNav
+        ...WebName
         ...WebPosts
       }
     }

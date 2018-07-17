@@ -18,9 +18,9 @@ const config = {
     mutation SetPostNameMutation($input: SetPostNameInput!) {
       setPostName(input: $input) {
         # Payload "post { name }" updates fragments with post name. Perfect.
-        post {
-          name
-        }
+        # post {
+        #   name
+        # }
         errors {
           name
         }

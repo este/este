@@ -9,6 +9,9 @@ import SetWebNameMutation, {
   type SetWebNameCommit,
   type SetWebNameErrors,
 } from '../mutations/SetWebNameMutation';
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/WebName.graphql';
+import withStore, { type Store } from './core/withStore';
 
 const messages = defineMessages({
   placeholder: {
@@ -18,12 +21,10 @@ const messages = defineMessages({
 });
 
 type WebNameProps = {|
-  webId: string,
-  // defaultValue because component is uncontrolled. This is fine for now.
-  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-  defaultValue: string,
+  data: generated.WebName,
   commit: SetWebNameCommit,
   intl: IntlShape,
+  store: Store,
 |};
 
 type WebNameState = {|
@@ -35,9 +36,17 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
     errors: null,
   };
 
+  handleTextInputChangeText = (text: string) => {
+    this.props.store(store => {
+      const record = store.get(this.props.data.id);
+      if (!record) return;
+      record.setValue(text, 'draftName');
+    });
+  };
+
   handleTextInputChangeTextThrottled = value => {
     const input = {
-      id: this.props.webId,
+      id: this.props.data.id,
       name: value,
     };
     const errors = validations.validateSetWebName(input);
@@ -46,22 +55,33 @@ class WebName extends React.PureComponent<WebNameProps, WebNameState> {
   };
 
   render() {
-    const { intl } = this.props;
+    const { data, intl } = this.props;
     const { errors } = this.state;
 
     return (
       <TextInput
         error={errors && errors.name}
         size={1}
+        value={data.draftName}
+        onChangeText={this.handleTextInputChangeText}
         onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
-        defaultValue={this.props.defaultValue}
         placeholder={intl.formatMessage(messages.placeholder)}
       />
     );
   }
 }
 
-export default pipe(
-  injectIntl,
-  withMutation(SetWebNameMutation),
-)(WebName);
+export default createFragmentContainer(
+  pipe(
+    injectIntl,
+    withStore,
+    withMutation(SetWebNameMutation),
+  )(WebName),
+  graphql`
+    fragment WebName on Web {
+      id
+      name @__clientField(handle: "draftName")
+      draftName
+    }
+  `,
+);

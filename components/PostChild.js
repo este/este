@@ -130,7 +130,9 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         <PostActions
           ref={this.postChildActionsRef}
           expanded={this.state.postActionsExpanded}
-          showReuse={data.selectionStart !== data.selectionEnd}
+          showReuse={
+            data.draftTextSelectionStart !== data.draftTextSelectionEnd
+          }
           onAction={this.handlePostActionsAction}
         />
       </>
@@ -147,8 +149,8 @@ export default createFragmentContainer(
     fragment PostChild on Post {
       id
       type
-      selectionStart
-      selectionEnd
+      draftTextSelectionStart
+      draftTextSelectionEnd
       ...PostText
     }
   `,

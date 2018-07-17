@@ -6,52 +6,42 @@ import A from './core/A';
 import { titles } from './app/sitemap';
 import { FormattedMessage } from 'react-intl';
 import withTheme, { type Theme } from './core/withTheme';
-
-const PostParents = ({ postParents }) => {
-  // Local mutation is fine. Also, type refinement works with forEach. Note it
-  // does not work with Array filter method.
-  // https://github.com/facebook/flow/issues/6516
-  const items = [];
-  postParents.forEach(({ id, name }) => {
-    if (name == null) return;
-    items.push(
-      <A href={{ pathname: '/post', query: { id } }} key={id}>
-        {name}
-      </A>,
-    );
-  });
-  return <Spacer>{items}</Spacer>;
-};
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/EditMainNav.graphql';
 
 type EditMainNavProps = {|
   theme: Theme,
-  web: {
-    +id: string,
-    +name: string,
-  },
-  postParents?: ?$ReadOnlyArray<{|
-    +id: string,
-    +name: ?string,
-  |}>,
+  data: generated.EditMainNav,
 |};
 
 class EditMainNav extends React.PureComponent<EditMainNavProps> {
   render() {
-    const { theme, web, postParents } = this.props;
+    const { theme, data } = this.props;
     return (
       <View style={theme.styles.appPageMainNav}>
         <Spacer>
           <A href={{ pathname: '/' }} prefetch>
             <FormattedMessage {...titles.index} />
           </A>
-          <A href={{ pathname: '/web', query: { id: web.id } }} prefetch>
-            {web.name.trim()}
+          <A href={{ pathname: '/web', query: { id: data.id } }} prefetch>
+            {data.draftName}
           </A>
-          {postParents && <PostParents postParents={postParents} />}
         </Spacer>
       </View>
     );
   }
 }
 
-export default withTheme(EditMainNav);
+export default createFragmentContainer(
+  withTheme(EditMainNav),
+  // https://github.com/relayjs/eslint-plugin-relay/issues/35
+  // eslint-disable-next-line relay/unused-fields
+  graphql`
+    fragment EditMainNav on Web {
+      id
+      # This is like lazy initialization. Actually, it is.
+      name @__clientField(handle: "draftName")
+      draftName
+    }
+  `,
+);

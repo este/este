@@ -9,6 +9,9 @@ import SetPostNameMutation, {
   type SetPostNameCommit,
   type SetPostNameErrors,
 } from '../mutations/SetPostNameMutation';
+import { createFragmentContainer, graphql } from 'react-relay';
+import * as generated from './__generated__/PostName.graphql';
+import withStore, { type Store } from './core/withStore';
 
 const messages = defineMessages({
   placeholder: {
@@ -18,12 +21,10 @@ const messages = defineMessages({
 });
 
 type PostNameProps = {|
-  postId: string,
-  // defaultValue because component is uncontrolled. This is fine for now.
-  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-  defaultValue: string,
+  data: generated.PostName,
   commit: SetPostNameCommit,
   intl: IntlShape,
+  store: Store,
 |};
 
 type PostNameState = {|
@@ -35,9 +36,17 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
     errors: null,
   };
 
+  handleTextInputChangeText = (text: string) => {
+    this.props.store(store => {
+      const record = store.get(this.props.data.id);
+      if (!record) return;
+      record.setValue(text, 'draftName');
+    });
+  };
+
   handleTextInputChangeTextThrottled = value => {
     const input = {
-      id: this.props.postId,
+      id: this.props.data.id,
       name: value,
     };
     const errors = validations.validateSetPostName(input);
@@ -46,21 +55,32 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
   };
 
   render() {
-    const { intl } = this.props;
+    const { data, intl } = this.props;
     const { errors } = this.state;
     return (
       <TextInput
         error={errors && errors.name}
         size={1}
+        value={data.draftName}
+        onChangeText={this.handleTextInputChangeText}
         onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
-        defaultValue={this.props.defaultValue}
         placeholder={intl.formatMessage(messages.placeholder)}
       />
     );
   }
 }
 
-export default pipe(
-  injectIntl,
-  withMutation(SetPostNameMutation),
-)(PostName);
+export default createFragmentContainer(
+  pipe(
+    injectIntl,
+    withStore,
+    withMutation(SetPostNameMutation),
+  )(PostName),
+  graphql`
+    fragment PostName on Post {
+      id
+      name @__clientField(handle: "draftName")
+      draftName
+    }
+  `,
+);

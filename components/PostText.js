@@ -86,8 +86,8 @@ class PostText extends React.PureComponent<PostTextProps> {
       const record = store.get(this.props.data.id);
       if (!record) return;
       record
-        .setValue(selection.start, 'selectionStart')
-        .setValue(selection.end, 'selectionEnd');
+        .setValue(selection.start, 'draftTextSelectionStart')
+        .setValue(selection.end, 'draftTextSelectionEnd');
     });
   };
 
@@ -105,17 +105,10 @@ class PostText extends React.PureComponent<PostTextProps> {
 
   render() {
     const { data, theme, intl } = this.props;
-    // We will have typed TextInput soon.
-    const value: string = data.draftText || '';
-    const selection: { start: number, end: number } = {
-      start: data.selectionStart != null ? data.selectionStart : value.length,
-      end: data.selectionEnd != null ? data.selectionEnd : value.length,
-    };
-
     return (
       <TextInput
         multiline
-        value={value}
+        value={data.draftText}
         onChangeText={this.handleTextInputChangeText}
         onSelectionChange={this.handleTextInputSelectionChange}
         placeholderTextColor={theme.placeholderTextColor}
@@ -131,7 +124,10 @@ class PostText extends React.PureComponent<PostTextProps> {
           theme.typography.fontSizeWithLineHeight(0),
           this.props.disabled === true && theme.styles.stateDisabled,
         ]}
-        selection={selection}
+        selection={{
+          start: data.draftTextSelectionStart,
+          end: data.draftTextSelectionEnd,
+        }}
       />
     );
   }
@@ -158,8 +154,8 @@ export default createFragmentContainer(
       # const unsaved = text_ !== draftText
       # text_: text
       draftText
-      selectionStart
-      selectionEnd
+      draftTextSelectionStart
+      draftTextSelectionEnd
     }
   `,
 );
