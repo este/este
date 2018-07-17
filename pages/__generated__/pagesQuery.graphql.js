@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 352273471c339a8b853b248e44b37291
+ * @relayHash ae196b566fce064561f9d88bf919dc94
  */
 
 /* eslint-disable */
@@ -44,7 +44,7 @@ fragment Webs on Query {
 fragment WebsItem on Web {
   name
   updatedAt
-  posts(first: 1, orderBy: updatedAt_DESC, where: {name_not: null}) {
+  posts(first: 1, orderBy: updatedAt_DESC) {
     id
   }
 }
@@ -63,7 +63,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  posts(first: 1, orderBy: updatedAt_DESC, where: {name_not: null}) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  posts(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -141,7 +141,7 @@ return {
                 "kind": "LinkedField",
                 "alias": null,
                 "name": "posts",
-                "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\",where:{\"name_not\":null})",
+                "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\")",
                 "args": [
                   {
                     "kind": "Literal",
@@ -154,14 +154,6 @@ return {
                     "name": "orderBy",
                     "value": "updatedAt_DESC",
                     "type": "PostOrderByInput"
-                  },
-                  {
-                    "kind": "Literal",
-                    "name": "where",
-                    "value": {
-                      "name_not": null
-                    },
-                    "type": "PostWhereInput"
                   }
                 ],
                 "concreteType": "Post",

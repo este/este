@@ -39,7 +39,7 @@ export default createFragmentContainer(
     fragment WebsItem on Web {
       name
       updatedAt
-      posts(first: 1, orderBy: updatedAt_DESC, where: { name_not: null }) {
+      posts(first: 1, orderBy: updatedAt_DESC) {
         id
       }
     }
