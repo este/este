@@ -2075,6 +2075,10 @@ babel-plugin-react-intl@^2.3.1:
     intl-messageformat-parser "^1.2.0"
     mkdirp "^0.5.1"
 
+babel-plugin-react-native-web@^0.8.8:
+  version "0.8.8"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.8.8.tgz#f896da73d3038f396d2181fc6779d061e52d32b8"
+
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-require/-/babel-plugin-react-require-3.0.0.tgz#2e4e7b4496b93a654a1c80042276de4e4eeb20e3"

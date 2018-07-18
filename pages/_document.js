@@ -3,16 +3,16 @@ import * as React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { AppRegistry } from 'react-native-web';
 
-// https://github.com/zeit/next.js/tree/master/examples/with-react-native-web
-// https://github.com/necolas/react-native-web/blob/master/website/guides/getting-started.md#server-side-rendering
+// https://github.com/zeit/next.js/tree/canary/examples/with-react-native-web
+// https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md
 // https://github.com/zeit/next.js/tree/master/examples/with-react-intl
 
-// Force Next-generated DOM elements to fill their parent's height.
-// Not required for using of react-native-web, but helps normalize
-// layout for top-level wrapping elements.
+// Force Next-generated DOM elements to fill their parent's height
+// Not sure why display flex is recommended in Next.js example. It breaks width.
+// display: flex;
+// flex-direction: column;
 // Disable input, textarea outline because blinking caret is enough.
 const normalizeNextElements = `
-  body > div:first-child,
   #__next {
     height: 100%;
   }
@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
     const { locale, localeDataScript /* , supportedLocales */ } = this.props;
 
     return (
-      <html lang={locale} style={{ height: '100%', width: '100%' }}>
+      <html lang={locale} style={{ height: '100%' }}>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           {/* {supportedLocales.map(() => {
@@ -61,7 +61,7 @@ export default class MyDocument extends Document {
             );
           })} */}
         </Head>
-        <body style={{ height: '100%', width: '100%', overflowY: 'scroll' }}>
+        <body style={{ height: '100%' }}>
           <Main />
           {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: localeDataScript }} />
