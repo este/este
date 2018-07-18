@@ -15,13 +15,10 @@ type WebsItemProps = {|
 class WebsItem extends React.PureComponent<WebsItemProps> {
   render() {
     const { data } = this.props;
-    const id = data.posts && data.posts[0].id;
-    // Without a page, there is nothing to edit.
-    if (id == null) return null;
     return (
       <Block>
         <Row>
-          <A href={{ pathname: '/post', query: { id } }} prefetch>
+          <A href={{ pathname: '/web', query: { id: data.id } }} prefetch>
             {data.name}
           </A>
         </Row>
@@ -39,9 +36,7 @@ export default createFragmentContainer(
     fragment WebsItem on Web {
       name
       updatedAt
-      posts(first: 1, orderBy: updatedAt_DESC) {
-        id
-      }
+      id
     }
   `,
 );

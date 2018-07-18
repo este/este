@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ae196b566fce064561f9d88bf919dc94
+ * @relayHash 40bd8170247ced28a27f589dbf6d335f
  */
 
 /* eslint-disable */
@@ -44,9 +44,7 @@ fragment Webs on Query {
 fragment WebsItem on Web {
   name
   updatedAt
-  posts(first: 1, orderBy: updatedAt_DESC) {
-    id
-  }
+  id
 }
 */
 
@@ -63,7 +61,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  posts(first: 1, orderBy: updatedAt_DESC) {\n    id\n  }\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -136,31 +134,6 @@ return {
                 "name": "updatedAt",
                 "args": null,
                 "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "posts",
-                "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\")",
-                "args": [
-                  {
-                    "kind": "Literal",
-                    "name": "first",
-                    "value": 1,
-                    "type": "Int"
-                  },
-                  {
-                    "kind": "Literal",
-                    "name": "orderBy",
-                    "value": "updatedAt_DESC",
-                    "type": "PostOrderByInput"
-                  }
-                ],
-                "concreteType": "Post",
-                "plural": true,
-                "selections": [
-                  v0
-                ]
               }
             ]
           }

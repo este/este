@@ -13,9 +13,7 @@ declare export opaque type WebsItem$ref: FragmentReference;
 export type WebsItem = {|
   +name: string,
   +updatedAt: any,
-  +posts: ?$ReadOnlyArray<{|
-    +id: string
-  |}>,
+  +id: string,
   +$refType: WebsItem$ref,
 |};
 */
@@ -43,38 +41,14 @@ const node/*: ConcreteFragment*/ = {
       "storageKey": null
     },
     {
-      "kind": "LinkedField",
+      "kind": "ScalarField",
       "alias": null,
-      "name": "posts",
-      "storageKey": "posts(first:1,orderBy:\"updatedAt_DESC\")",
-      "args": [
-        {
-          "kind": "Literal",
-          "name": "first",
-          "value": 1,
-          "type": "Int"
-        },
-        {
-          "kind": "Literal",
-          "name": "orderBy",
-          "value": "updatedAt_DESC",
-          "type": "PostOrderByInput"
-        }
-      ],
-      "concreteType": "Post",
-      "plural": true,
-      "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "id",
-          "args": null,
-          "storageKey": null
-        }
-      ]
+      "name": "id",
+      "args": null,
+      "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '0b3753a42614d46c9f570a14d3478347';
+(node/*: any*/).hash = '0a6f5e6bf17a5518484027f799cb28c7';
 module.exports = node;
