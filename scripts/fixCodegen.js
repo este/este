@@ -11,39 +11,35 @@ const paths = [
 
 paths.forEach(path => {
   let text = fs.readFileSync(path, 'utf8');
-  const isServerApi = path.indexOf('server/api') !== -1;
   text = text
+    // Fix Flow errors.
     .replace(
-      'export const Prisma: BindingConstructor<Prisma>',
-      'export const prisma: BindingConstructor<Prisma>',
-    )
-    .replace(
-      'import { GraphQLResolveInfo, GraphQLSchema }',
+      'import type { IResolvers } from',
       `// $FlowFixMe
-import { GraphQLResolveInfo, GraphQLSchema }`,
+import type { IResolvers } from`,
     )
-    .replace(
-      'import { IResolvers }',
-      `// $FlowFixMe
-import { IResolvers }`,
-    )
+    // Export Prisma interface instead of BindingConstructor shit which does
+    // not work for some foking damn reason.
+    .replace('interface Prisma {', 'export interface Prisma {')
+    .replace('export { prisma as Prisma }', '')
     .replace(
       'export type ID_Input = string | number',
       'export type ID_Input = string',
     );
 
+  const isServerApi = path.indexOf('server/api') !== -1;
   if (isServerApi) {
     text = text
       .replace(
-        `import { Options } from 'graphql-binding'`,
+        `import type { Options } from 'graphql-binding'`,
         `import type { Context } from '../index'`,
       )
       .replace(/options\?: Options/g, 'context: Context');
   } else {
     text = text.replace(
-      'import { Options }',
+      'import type { Options }',
       `// $FlowFixMe
-import { Options }`,
+import type { Options }`,
     );
   }
 

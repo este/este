@@ -1,11 +1,11 @@
 /**
  * @flow
  */
+import type { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
 // $FlowFixMe
-import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
-// $FlowFixMe
-import { IResolvers } from 'graphql-tools/dist/Interfaces'
+import type { IResolvers } from 'graphql-tools/dist/Interfaces'
 import type { Context } from '../index'
+import type { BasePrismaOptions as BPOType } from 'prisma-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
@@ -47,7 +47,7 @@ getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers;
 }
 
 export interface BindingConstructor<T> {
-  new(options: BasePrismaOptions): T
+  new(options: BPOType): T
 }
 /**
  * Type Defs
@@ -1067,7 +1067,9 @@ input WebWhereInput {
 }
 `
 
-export const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
+const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
+ 
+
 
 /**
  * Types

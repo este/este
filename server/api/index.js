@@ -6,7 +6,7 @@ import resolvers from './resolvers';
 import permissions from './permissions';
 import type { Prisma as DB } from '../../database/__generated__/database.graphql';
 
-// Used in server/api/__generated__/api.graphql.js Check scripts/fixCodegen
+// Used in server/api/__generated__/api.graphql.js Check scripts/fixCodegen.
 export type Context = {|
   request: any,
   response: any,
