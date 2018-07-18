@@ -1,21 +1,20 @@
 // @flow
-import yoga from 'graphql-yoga';
-import prisma from 'prisma-binding';
+import { GraphQLServer } from 'graphql-yoga';
+import { Prisma } from 'prisma-binding';
 import jsonwebtoken from 'jsonwebtoken';
 import resolvers from './resolvers';
 import permissions from './permissions';
-/*::
-import type { Prisma as DB } from '../../database/__generated__/database.graphql'
+import type { Prisma as DB } from '../../database/__generated__/database.graphql';
+
 // Used in server/api/__generated__/api.graphql.js Check scripts/fixCodegen
 export type Context = {|
   request: any,
   response: any,
   db: DB,
-  userId: ?string
+  userId: ?string,
 |};
-*/
 
-const maybeGetUserId = (request) /*: ?string */ => {
+const maybeGetUserId = (request): ?string => {
   const authorization = request.get('authorization');
   if (!authorization) return null;
   const token = authorization.replace('Bearer ', '');
@@ -25,7 +24,16 @@ const maybeGetUserId = (request) /*: ?string */ => {
   return decoded.userId;
 };
 
-const server = new yoga.GraphQLServer({
+const db = new Prisma({
+  typeDefs: 'database/schema.graphql',
+  endpoint: process.env.PRISMA_ENDPOINT,
+  secret: process.env.PRISMA_SECRET,
+  // log all GraphQL queries & mutations
+  // process.env.NODE_ENV !== 'production'
+  debug: false,
+});
+
+const server = new GraphQLServer({
   typeDefs: 'server/api/model.graphql',
   resolvers,
   middlewares: [permissions],
@@ -35,14 +43,7 @@ const server = new yoga.GraphQLServer({
   },
   context: context => ({
     ...context,
-    db: new prisma.Prisma({
-      typeDefs: 'database/schema.graphql',
-      endpoint: process.env.PRISMA_ENDPOINT,
-      secret: process.env.PRISMA_SECRET,
-      // log all GraphQL queries & mutations
-      // process.env.NODE_ENV !== 'production'
-      debug: false,
-    }),
+    db,
     userId: maybeGetUserId(context.request),
   }),
 });

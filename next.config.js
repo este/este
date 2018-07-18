@@ -26,7 +26,7 @@ module.exports = {
     config.resolve = {
       ...config.resolve,
       // .web.js is for React Native Web.
-      extensions: ['.web.js', '.mjs', '.js', '.json'],
+      extensions: ['.web.js', '.js', '.json'],
     };
 
     return config;

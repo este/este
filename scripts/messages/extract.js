@@ -1,7 +1,7 @@
 // @flow
 import glob from 'glob';
 import fs from 'fs';
-import { defaultLocale } from '../../constants';
+import { defaultLocale } from '../../server/constants';
 
 const defaultMessages = glob
   // Remember babel plugin generates only required / imported components.

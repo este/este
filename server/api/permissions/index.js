@@ -1,22 +1,16 @@
 // @flow
-import graphqlShield from 'graphql-shield';
-/*::
-import * as generated from '../__generated__/api.graphql'
-import type { Context } from '../index'
-*/
-// We can use also: or, not.
-const { rule, shield, and, allow } = graphqlShield;
+import { rule, shield, and, allow } from 'graphql-shield';
+import type { Mutation, Query } from '../__generated__/api.graphql';
+import type { Context } from '../index';
 
-const isAuthenticated = rule()(async (
-  parent,
-  args,
-  { userId, db } /*: Context */,
-) => {
-  return userId != null && db.exists.User({ id: userId });
-});
+const isAuthenticated = rule()(
+  async (parent, args, { userId, db }: Context) => {
+    return userId != null && db.exists.User({ id: userId });
+  },
+);
 
 const isWebCreator = getId =>
-  rule()(async (parent, args, { userId, db } /*: Context */) => {
+  rule()(async (parent, args, { userId, db }: Context) => {
     if (userId == null) return false;
     return db.exists.Web({
       id: getId(args),
@@ -27,7 +21,7 @@ const isWebCreator = getId =>
   });
 
 const isPostCreator = getId =>
-  rule()(async (parent, args, { userId, db } /*: Context */) => {
+  rule()(async (parent, args, { userId, db }: Context) => {
     if (userId == null) return false;
     return db.exists.Post({
       id: getId(args),
@@ -41,14 +35,12 @@ const isPostCreator = getId =>
 // Unfortunately, we can't use $ObjMap.
 // TODO: Update codegen somehow to generate exact types for 100% coverage.
 // The ideal DX: 1) add resolver 2) Flow warn about missing or wrong permission.
-/*::
 type Rules = {|
-  Mutation: { [$Keys<generated.Mutation>]: Function },
-  Query: { [$Keys<generated.Query>]: Function },
+  Mutation: { [$Keys<Mutation>]: Function },
+  Query: { [$Keys<Query>]: Function },
 |};
-*/
 
-const rules /*: Rules */ = {
+const rules: Rules = {
   Mutation: {
     createWeb: isAuthenticated,
     deleteWeb: and(isAuthenticated, isWebCreator(args => args.input.id)),

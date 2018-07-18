@@ -2,11 +2,9 @@
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import * as validations from '../../../validations';
-/*::
-import * as generated from '../__generated__/api.graphql'
-*/
+import type { Mutation as MutationType } from '../__generated__/api.graphql';
 
-const Mutation /*: generated.Mutation */ = {
+const Mutation: MutationType = {
   auth: async (args, info, { db }) => {
     // Email and password must be trimmed before the validation.
     // This is the pattern. Trim what must be stored trimmed.

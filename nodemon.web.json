@@ -1,6 +1,5 @@
 {
   "watch": ["server"],
-  "exec":
-    "node --experimental-modules --require dotenv/config server/web/index.mjs",
-  "ext": "js mjs"
+  "exec": "node -r esm -r dotenv/config -r @babel/register server/web/index.js",
+  "ext": "js"
 }

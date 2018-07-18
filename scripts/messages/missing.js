@@ -1,5 +1,5 @@
 // @flow
-import { defaultLocale } from '../../constants';
+import { defaultLocale } from '../../server/constants';
 import fs from 'fs';
 import glob from 'glob';
 

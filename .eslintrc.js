@@ -8,11 +8,6 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype', 'relay'],
-  settings: {
-    'import/resolver': {
-      node: { extensions: ['.js', '.mjs'] },
-    },
-  },
   // Some rules can be too strict. Feel free to relax them. Explain.
   rules: {
     'import/first': 0, // Too strict.
