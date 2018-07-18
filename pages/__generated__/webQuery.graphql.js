@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4b07be43068b60aaa265a77d2df77173
+ * @relayHash f46f6f63b020d9a57e5f0792cb016877
  */
 
 /* eslint-disable */
@@ -55,8 +55,11 @@ fragment WebName on Web {
 }
 
 fragment WebPosts on Web {
-  posts(orderBy: updatedAt_DESC, where: {name_not: null}) {
+  posts(orderBy: updatedAt_DESC) {
     id
+    parents {
+      id
+    }
     ...WebPostsItem
   }
 }
@@ -96,7 +99,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...EditMainNav\n    ...WebName\n    ...WebPosts\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPosts on Web {\n  posts(orderBy: updatedAt_DESC, where: {name_not: null}) {\n    id\n    ...WebPostsItem\n  }\n}\n\nfragment WebPostsItem on Post {\n  id\n  name\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...EditMainNav\n    ...WebName\n    ...WebPosts\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPosts on Web {\n  posts(orderBy: updatedAt_DESC) {\n    id\n    parents {\n      id\n    }\n    ...WebPostsItem\n  }\n}\n\nfragment WebPostsItem on Post {\n  id\n  name\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -179,27 +182,31 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "posts",
-            "storageKey": "posts(orderBy:\"updatedAt_DESC\",where:{\"name_not\":null})",
+            "storageKey": "posts(orderBy:\"updatedAt_DESC\")",
             "args": [
               {
                 "kind": "Literal",
                 "name": "orderBy",
                 "value": "updatedAt_DESC",
                 "type": "PostOrderByInput"
-              },
-              {
-                "kind": "Literal",
-                "name": "where",
-                "value": {
-                  "name_not": null
-                },
-                "type": "PostWhereInput"
               }
             ],
             "concreteType": "Post",
             "plural": true,
             "selections": [
               v1,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "parents",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Post",
+                "plural": true,
+                "selections": [
+                  v1
+                ]
+              },
               v2,
               {
                 "kind": "ScalarField",

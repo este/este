@@ -9,13 +9,17 @@ type WebPostsProps = {|
 |};
 
 class WebPosts extends React.PureComponent<WebPostsProps> {
+  static isPage = post => post.parents == null || post.parents.length === 0;
+
   render() {
     const {
       data: { posts },
     } = this.props;
     if (posts == null) return null;
+    const pages = posts.filter(WebPosts.isPage);
+    // TODO: Add list of reusable named components.
     // $FlowFixMe https://github.com/facebook/relay/issues/2316
-    return posts.map(page => <WebPostsItem data={page} key={page.id} />);
+    return pages.map(page => <WebPostsItem data={page} key={page.id} />);
   }
 }
 
@@ -23,8 +27,11 @@ export default createFragmentContainer(
   WebPosts,
   graphql`
     fragment WebPosts on Web {
-      posts(orderBy: updatedAt_DESC, where: { name_not: null }) {
+      posts(orderBy: updatedAt_DESC) {
         id
+        parents {
+          id
+        }
         ...WebPostsItem
       }
     }

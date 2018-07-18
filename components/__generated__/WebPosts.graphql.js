@@ -14,6 +14,9 @@ declare export opaque type WebPosts$ref: FragmentReference;
 export type WebPosts = {|
   +posts: ?$ReadOnlyArray<{|
     +id: string,
+    +parents: ?$ReadOnlyArray<{|
+      +id: string
+    |}>,
     +$fragmentRefs: WebPostsItem$ref,
   |}>,
   +$refType: WebPosts$ref,
@@ -21,7 +24,15 @@ export type WebPosts = {|
 */
 
 
-const node/*: ConcreteFragment*/ = {
+const node/*: ConcreteFragment*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Fragment",
   "name": "WebPosts",
   "type": "Web",
@@ -32,32 +43,30 @@ const node/*: ConcreteFragment*/ = {
       "kind": "LinkedField",
       "alias": null,
       "name": "posts",
-      "storageKey": "posts(orderBy:\"updatedAt_DESC\",where:{\"name_not\":null})",
+      "storageKey": "posts(orderBy:\"updatedAt_DESC\")",
       "args": [
         {
           "kind": "Literal",
           "name": "orderBy",
           "value": "updatedAt_DESC",
           "type": "PostOrderByInput"
-        },
-        {
-          "kind": "Literal",
-          "name": "where",
-          "value": {
-            "name_not": null
-          },
-          "type": "PostWhereInput"
         }
       ],
       "concreteType": "Post",
       "plural": true,
       "selections": [
+        v0,
         {
-          "kind": "ScalarField",
+          "kind": "LinkedField",
           "alias": null,
-          "name": "id",
+          "name": "parents",
+          "storageKey": null,
           "args": null,
-          "storageKey": null
+          "concreteType": "Post",
+          "plural": true,
+          "selections": [
+            v0
+          ]
         },
         {
           "kind": "FragmentSpread",
@@ -68,6 +77,7 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '873622f8a7a2192bd100f0946a7e24cf';
+(node/*: any*/).hash = 'f4326dfe67c4956cbae0bdb7e6ee965e';
 module.exports = node;
