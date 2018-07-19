@@ -91,6 +91,10 @@ class PostText extends React.PureComponent<PostTextProps> {
     });
   };
 
+  handleTextInputOnLayout = () => {
+    this.adjustHeight();
+  };
+
   adjustHeight() {
     const { current } = this.inputRef;
     if (!current) return;
@@ -128,6 +132,7 @@ class PostText extends React.PureComponent<PostTextProps> {
           start: data.draftTextSelectionStart,
           end: data.draftTextSelectionEnd,
         }}
+        onLayout={this.handleTextInputOnLayout}
       />
     );
   }
