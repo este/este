@@ -97,7 +97,7 @@ class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
             style,
           ]}
           ref={this.inputRef}
-          placeholder={`${placeholder}…`}
+          placeholder={placeholder}
           blurOnSubmit={false}
           onChangeText={this.handleOnChangeText}
           {...props}

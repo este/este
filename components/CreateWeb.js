@@ -104,7 +104,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
           onChangeText={this.setName}
           value={this.state.name}
           onSubmitEditing={this.createWeb}
-          placeholder=""
+          placeholder="…"
         />
         <Row>
           <CreateButton
