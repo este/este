@@ -61,7 +61,7 @@ class Post extends React.PureComponent<PostProps> {
           {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
           <PostParents data={post} />
           {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-          <PostName data={post} />
+          {post.nameAlias != null && <PostName data={post} />}
           {Post.renderByType(post)}
         </View>
       </>
@@ -78,6 +78,8 @@ export default createFragmentContainer(
       post(id: $id) {
         id
         name @__clientField(handle: "draft")
+        # https://github.com/facebook/relay/issues/2488
+        nameAlias: name
         draftName
         text
         type

@@ -10,6 +10,10 @@ import type {
 // The most simple and universal validation ever.
 // Note STRING_CONSTANTS are not magic, Flow checks their usage.
 
+// What about optional? I suppose optional fields is matter of UI.
+// If something is optional, user should explicitly tap to some button to
+// add such field, and then, the field should be required.
+
 const required = value => (value.length === 0 ? 'REQUIRED' : null);
 
 const min5Chars = value =>

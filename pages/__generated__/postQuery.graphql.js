@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 561296fde6dd57af6d88a4a79fdc5787
+ * @relayHash d5a6f05ba99fe14d9a76b7b966eee6f3
  */
 
 /* eslint-disable */
@@ -39,6 +39,7 @@ fragment Post_1Bmzm5 on Query {
   post(id: $id) {
     id
     name
+    nameAlias: name
     text
     type
     web {
@@ -144,7 +145,7 @@ return {
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    text\n    type\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PostParents\n    ...PostName\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PostParents on Post {\n  parents {\n    id\n    name\n  }\n}\n\nfragment PostName on Post {\n  id\n  name\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    nameAlias: name\n    text\n    type\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PostParents\n    ...PostName\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PostParents on Post {\n  parents {\n    id\n    name\n  }\n}\n\nfragment PostName on Post {\n  id\n  name\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -215,6 +216,13 @@ return {
           v1,
           v2,
           v3,
+          {
+            "kind": "ScalarField",
+            "alias": "nameAlias",
+            "name": "name",
+            "args": null,
+            "storageKey": null
+          },
           v4,
           v5,
           v6,
