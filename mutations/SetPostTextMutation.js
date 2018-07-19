@@ -15,7 +15,7 @@ const config = {
         # By GraphQL design, every mutation has to return something.
         post {
           id
-          # In this case, store is updated automatically on save.
+          # Returing text will update Relay store on save automatically.
           # But we don't need it. This is just an example.
           # text
         }
