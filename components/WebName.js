@@ -80,7 +80,7 @@ export default createFragmentContainer(
   graphql`
     fragment WebName on Web {
       id
-      name @__clientField(handle: "draftName")
+      name @__clientField(handle: "draft")
       draftName
     }
   `,

@@ -148,7 +148,7 @@ export default createFragmentContainer(
       # @__clientField works as expected, draftText is set, but text field is
       # set to undefined for some reason.
       # https://github.com/facebook/relay/issues/2488
-      text @__clientField(handle: "draftText")
+      text @__clientField(handle: "draft")
       # With text_ alias, we can get the original value.
       # We are not using it yet, but it's handy for saving state detection.
       # const unsaved = text_ !== draftText

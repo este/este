@@ -36,7 +36,7 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "ScalarField",
       "alias": "name",
-      "name": "__name_draftName",
+      "name": "__name_draft",
       "args": null,
       "storageKey": null
     },
@@ -50,5 +50,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'e13d4a56a105d9eba5048d7650f82674';
+(node/*: any*/).hash = '24c5b99c87b9d5a2d351180304766428';
 module.exports = node;

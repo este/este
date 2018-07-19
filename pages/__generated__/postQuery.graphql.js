@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8921e636be8dffc9a0692cd8500f86df
+ * @relayHash 561296fde6dd57af6d88a4a79fdc5787
  */
 
 /* eslint-disable */
@@ -112,7 +112,7 @@ v3 = {
   "alias": null,
   "name": "name",
   "args": null,
-  "handle": "draftName",
+  "handle": "draft",
   "key": "",
   "filters": null
 },
@@ -128,7 +128,7 @@ v5 = {
   "alias": null,
   "name": "text",
   "args": null,
-  "handle": "draftText",
+  "handle": "draft",
   "key": "",
   "filters": null
 },

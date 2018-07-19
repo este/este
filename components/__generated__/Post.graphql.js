@@ -79,7 +79,7 @@ return {
         {
           "kind": "ScalarField",
           "alias": "name",
-          "name": "__name_draftName",
+          "name": "__name_draft",
           "args": null,
           "storageKey": null
         },
@@ -158,5 +158,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'd6ab636bcf4685a685243d1b2e1f2671';
+(node/*: any*/).hash = '430bde0c36301e0fd9d6c80580a5d49d';
 module.exports = node;

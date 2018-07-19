@@ -13,7 +13,7 @@
 # forgets to add __clientField directive, app will not break. It will render
 # nonsense. For example, an empty string for Foo name.
 # Non-null can be enforced via Relay hander, but, if developer forgets to add
-# `name @__clientField(handle: "draftName")`, app will break during runtime.
+# `name @__clientField(handle: "draft")`, app will break during runtime.
 # Types will not help. The problem is, types can not ensure developer will not
 # forget to add __clientField. What should we do?
 # I believe in 1) not writing boilerplate code 2) Fail fast means fail cheap.

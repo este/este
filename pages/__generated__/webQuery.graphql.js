@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f46f6f63b020d9a57e5f0792cb016877
+ * @relayHash b96eb085627e3991d4e6da0a8978fe3a
  */
 
 /* eslint-disable */
@@ -174,7 +174,7 @@ return {
             "alias": null,
             "name": "name",
             "args": null,
-            "handle": "draftName",
+            "handle": "draft",
             "key": "",
             "filters": null
           },

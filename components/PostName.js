@@ -79,7 +79,7 @@ export default createFragmentContainer(
   graphql`
     fragment PostName on Post {
       id
-      name @__clientField(handle: "draftName")
+      name @__clientField(handle: "draft")
       draftName
     }
   `,

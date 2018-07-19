@@ -77,7 +77,7 @@ export default createFragmentContainer(
     fragment Post on Query @argumentDefinitions(id: { type: "ID!" }) {
       post(id: $id) {
         id
-        name @__clientField(handle: "draftName")
+        name @__clientField(handle: "draft")
         draftName
         text
         type

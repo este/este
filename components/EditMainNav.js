@@ -40,7 +40,7 @@ export default createFragmentContainer(
     fragment EditMainNav on Web {
       id
       # This is like lazy initialization. Actually, it is.
-      name @__clientField(handle: "draftName")
+      name @__clientField(handle: "draft")
       draftName
     }
   `,
