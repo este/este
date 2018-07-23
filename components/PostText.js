@@ -23,6 +23,17 @@ export const messages = defineMessages({
   },
 });
 
+const schema = {
+  document: {
+    nodes: [{ types: ['paragraph'] }],
+  },
+  blocks: {
+    paragraph: {
+      nodes: [{ objects: ['text'] }],
+    },
+  },
+};
+
 const emptyText = {
   document: {
     nodes: [
@@ -102,6 +113,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
         onChange={this.handleEditorChange}
         renderNode={this.renderNode}
         placeholder={intl.formatMessage(messages.placeholder)}
+        schema={schema}
       />
     );
   }
