@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Jul 18 2018 03:08:08 GMT+0200 (Central European Summer Time)
+# timestamp: Sat Jul 21 2018 15:15:31 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError

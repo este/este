@@ -48,7 +48,8 @@ type Post {
   # I would rather enforce referential integrity, but I don't know how yet.
   childrenOrder: [ID!]!
   text: String
-  textFormat: String! @default(value: "CommonMark")
+  # Like CommonMark, but in SlateModel. Let's see.
+  textFormat: String! @default(value: "SlateModel")
   image: Image
 }
 

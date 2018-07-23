@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d5a6f05ba99fe14d9a76b7b966eee6f3
+ * @relayHash 06aa06679a9d16f29525e54c49c9bb06
  */
 
 /* eslint-disable */
@@ -125,15 +125,6 @@ v4 = {
   "storageKey": null
 },
 v5 = {
-  "kind": "ScalarHandle",
-  "alias": null,
-  "name": "text",
-  "args": null,
-  "handle": "draft",
-  "key": "",
-  "filters": null
-},
-v6 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "type",
@@ -225,7 +216,6 @@ return {
           },
           v4,
           v5,
-          v6,
           {
             "kind": "LinkedField",
             "alias": null,
@@ -263,9 +253,8 @@ return {
             "plural": true,
             "selections": [
               v1,
-              v6,
-              v4,
-              v5
+              v5,
+              v4
             ]
           }
         ]

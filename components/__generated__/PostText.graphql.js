@@ -13,9 +13,6 @@ declare export opaque type PostText$ref: FragmentReference;
 export type PostText = {|
   +id: string,
   +text: ?string,
-  +draftText: string,
-  +draftTextSelectionStart: number,
-  +draftTextSelectionEnd: number,
   +$refType: PostText$ref,
 |};
 */
@@ -37,34 +34,13 @@ const node/*: ConcreteFragment*/ = {
     },
     {
       "kind": "ScalarField",
-      "alias": "text",
-      "name": "__text_draft",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
       "alias": null,
-      "name": "draftText",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "draftTextSelectionStart",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "draftTextSelectionEnd",
+      "name": "text",
       "args": null,
       "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'efa4c00f9903de2cab5b2bcf99a55165';
+(node/*: any*/).hash = '6310dd46adc51f27b24cf03dd1e485fd';
 module.exports = node;

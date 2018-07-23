@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { TextInput } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
@@ -13,6 +12,10 @@ import SetPostTextMutation, {
 } from '../mutations/SetPostTextMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostText.graphql';
+import { Editor } from 'slate-react';
+import { Value, resetKeyGenerator } from 'slate';
+import Block from './core/Block';
+import Text from './core/Text';
 
 export const messages = defineMessages({
   placeholder: {
@@ -40,6 +43,27 @@ made by [steida](https://twitter.com/steida)
   },
 });
 
+const emptyText = {
+  document: {
+    nodes: [
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: '',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+};
+
 type PostTextProps = {|
   data: generated.PostText,
   theme: Theme,
@@ -49,7 +73,11 @@ type PostTextProps = {|
   disabled?: boolean,
 |};
 
-class PostText extends React.PureComponent<PostTextProps> {
+type PostTextState = {|
+  value: Object,
+|};
+
+class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
@@ -58,81 +86,43 @@ class PostText extends React.PureComponent<PostTextProps> {
     this.props.commit(input);
   }, onChangeTextThrottle);
 
-  inputRef = React.createRef();
-
-  componentDidMount() {
-    this.adjustHeight();
+  constructor(props) {
+    super(props);
+    const { text } = this.props.data;
+    const json = text == null ? emptyText : JSON.parse(text);
+    // https://docs.slatejs.org/slate-core/utils-1#resetkeygenerator
+    resetKeyGenerator();
+    const value = Value.fromJSON(json);
+    this.state = { value };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.data.draftText !== prevProps.data.draftText) {
-      this.adjustHeight();
-      // Commit belongs to componentDidUpdate because it's reliable.
-      // https://github.com/necolas/react-native-web/issues/1031
-      this.throttleCommit(this.props.data.draftText);
+  handleEditorChange = ({ value }) => {
+    this.setState({ value });
+    if (value.document != this.state.value.document) {
+      const text = JSON.stringify(value.toJSON());
+      this.throttleCommit(text);
     }
-  }
-
-  handleTextInputChangeText = (text: string) => {
-    this.props.store(store => {
-      const record = store.get(this.props.data.id);
-      if (!record) return;
-      record.setValue(text, 'draftText');
-    });
   };
 
-  handleTextInputSelectionChange = ({ nativeEvent: { selection } }) => {
-    this.props.store(store => {
-      const record = store.get(this.props.data.id);
-      if (!record) return;
-      record
-        .setValue(selection.start, 'draftTextSelectionStart')
-        .setValue(selection.end, 'draftTextSelectionEnd');
-    });
+  renderNode = props => {
+    switch (props.node.type) {
+      case 'paragraph':
+        return (
+          <Block>
+            <Text {...props.attributes}>{props.children}</Text>
+          </Block>
+        );
+    }
   };
-
-  handleTextInputOnLayout = () => {
-    this.adjustHeight();
-  };
-
-  adjustHeight() {
-    const { current } = this.inputRef;
-    if (!current) return;
-    current.setNativeProps({
-      style: { height: 0 },
-    });
-    current.setNativeProps({
-      // eslint-disable-next-line no-underscore-dangle
-      style: { height: current._node.scrollHeight },
-    });
-  }
 
   render() {
     const { data, theme, intl } = this.props;
     return (
-      <TextInput
-        multiline
-        value={data.draftText}
-        onChangeText={this.handleTextInputChangeText}
-        onSelectionChange={this.handleTextInputSelectionChange}
-        placeholderTextColor={theme.placeholderTextColor}
+      <Editor
+        value={this.state.value}
+        onChange={this.handleEditorChange}
+        renderNode={this.renderNode}
         placeholder={intl.formatMessage(messages.placeholder)}
-        ref={this.inputRef}
-        // https://github.com/facebook/draft-js/issues/616#issuecomment-343596615
-        // It breaks tab navigation.
-        // TODO: Maybe we don't need it anymore. Grammarly is nice to have.
-        // Update1: Still required.
-        data-enable-grammarly="false"
-        style={[
-          theme.styles.postTextTextInput,
-          theme.typography.fontSizeWithLineHeight(0),
-          this.props.disabled === true && theme.styles.stateDisabled,
-        ]}
-        selection={{
-          start: data.draftTextSelectionStart,
-          end: data.draftTextSelectionEnd,
-        }}
-        onLayout={this.handleTextInputOnLayout}
       />
     );
   }
@@ -145,22 +135,10 @@ export default createFragmentContainer(
     withStore,
     withMutation(SetPostTextMutation),
   )(PostText),
-  // https://github.com/relayjs/eslint-plugin-relay/issues/35
-  // eslint-disable-next-line relay/unused-fields
   graphql`
     fragment PostText on Post {
       id
-      # @__clientField works as expected, draftText is set, but text field is
-      # set to undefined for some reason.
-      # https://github.com/facebook/relay/issues/2488
-      text @__clientField(handle: "draft")
-      # With text_ alias, we can get the original value.
-      # We are not using it yet, but it's handy for saving state detection.
-      # const unsaved = text_ !== draftText
-      # text_: text
-      draftText
-      draftTextSelectionStart
-      draftTextSelectionEnd
+      text
     }
   `,
 );

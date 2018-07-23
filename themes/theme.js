@@ -139,13 +139,6 @@ const stylesJson = {
     flex: 1,
   },
 
-  postTextTextInput: {
-    color: colors.black,
-    fontFamily,
-    // It's the initial height. Client overrides it via inline styles.
-    height: typography.rhythm(1),
-  },
-
   postActions: {
     minHeight: typography.rhythm(1),
     paddingVertical: typography.rhythm(0.5),
@@ -184,11 +177,6 @@ export const darkTheme: Theme = {
 
     textInput: {
       ...stylesJson.textInput,
-      color: colors.white,
-    },
-
-    postTextTextInput: {
-      ...stylesJson.postTextTextInput,
       color: colors.white,
     },
   }),

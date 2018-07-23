@@ -21,10 +21,9 @@
 # directive, app will fail immediately. It's not ideal, but good enough.
 # TODO: Generate Flow type for client schema and use it withStore. Somehow.
 
+# The beauty of client schema is draftName field etc. are reset on fetch.
+
 extend type Post {
-  draftText: String!
-  draftTextSelectionStart: Int!
-  draftTextSelectionEnd: Int!
   draftName: String!
 }
 
