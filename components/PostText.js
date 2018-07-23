@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import withTheme, { type Theme } from './core/withTheme';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from './core/TextInput';
@@ -66,7 +65,6 @@ const emptyText = {
 
 type PostTextProps = {|
   data: generated.PostText,
-  theme: Theme,
   intl: IntlShape,
   commit: SetPostTextCommit,
   store: Store,
@@ -98,7 +96,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   handleEditorChange = ({ value }) => {
     this.setState({ value });
-    if (value.document != this.state.value.document) {
+    if (value.document !== this.state.value.document) {
       const text = JSON.stringify(value.toJSON());
       this.throttleCommit(text);
     }
@@ -116,7 +114,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   };
 
   render() {
-    const { data, theme, intl } = this.props;
+    const { intl } = this.props;
     return (
       <Editor
         value={this.state.value}
@@ -131,7 +129,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 export default createFragmentContainer(
   pipe(
     injectIntl,
-    withTheme,
     withStore,
     withMutation(SetPostTextMutation),
   )(PostText),
