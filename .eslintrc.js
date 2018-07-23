@@ -35,5 +35,6 @@ module.exports = {
     'relay/graphql-naming': 'error',
     'relay/generated-flow-types': 'error',
     'relay/unused-fields': 'error',
+    'relay/no-future-added-value': 'error',
   },
 };
