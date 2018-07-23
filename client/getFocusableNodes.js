@@ -6,7 +6,11 @@ const getFocusableNodes = (instance: Object): Array<HTMLElement> => {
   const node = findNodeHandle(instance);
   if (node == null || typeof node === 'number') return [];
   if (typeof node.querySelectorAll !== 'function') return [];
-  return [...node.querySelectorAll('[data-focusable="true"]')];
+  return [
+    ...node.querySelectorAll(
+      '[data-slate-editor="true"], [data-focusable="true"]',
+    ),
+  ];
 };
 
 export default getFocusableNodes;

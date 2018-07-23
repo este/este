@@ -94,6 +94,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
+  handleEditorFocus = (event, change) => {
+    // https://github.com/ianstormtaylor/slate/issues/1989
+    change.focus();
+  };
+
   renderNode = props => {
     switch (props.node.type) {
       case 'paragraph':
@@ -109,11 +114,13 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     const { intl } = this.props;
     return (
       <Editor
+        // autoFocus
         value={this.state.value}
         onChange={this.handleEditorChange}
         renderNode={this.renderNode}
         placeholder={intl.formatMessage(messages.placeholder)}
         schema={schema}
+        onFocus={this.handleEditorFocus}
       />
     );
   }
