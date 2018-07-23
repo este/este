@@ -1,7 +1,0 @@
-{
-  "plugins": [
-    "@babel/plugin-transform-flow-strip-types",
-    /* This is probably required only for Babel 42 as far I remember. */
-    "@babel/plugin-proposal-object-rest-spread"
-  ]
-}
