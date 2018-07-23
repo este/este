@@ -21,25 +21,6 @@ export const messages = defineMessages({
     defaultMessage: 'write',
     id: 'postText.textInput.placeholder',
   },
-  // TODO: [Home](/) | [About](/)
-  example: {
-    defaultMessage: `
-# Example
-
-Markdown is a simple way to *format* text that looks **great** on any device.
-
-* List
-* List
-
-1. One
-2. Two
-
-> Blockquote
-
-made by [steida](https://twitter.com/steida)
-`,
-    id: 'postText.textInput.example',
-  },
 });
 
 const emptyText = {

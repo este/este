@@ -8,7 +8,6 @@ import PostActionsButton from './PostActionsButton';
 
 type PostAction =
   | {| type: 'EXPAND', value: boolean |}
-  | {| type: 'EXAMPLE' |}
   | {| type: 'REUSE' |}
   | {| type: 'MOVE' |};
 
@@ -38,10 +37,6 @@ class PostActions extends React.PureComponent<PostActionsProps> {
     this.props.onAction({ type: 'MOVE' });
   };
 
-  handleExampleButtonPress = () => {
-    this.props.onAction({ type: 'EXAMPLE' });
-  };
-
   render() {
     return (
       <View
@@ -68,12 +63,6 @@ class PostActions extends React.PureComponent<PostActionsProps> {
               <FormattedMessage
                 defaultMessage="Move"
                 id="postActions.buttons.move"
-              />
-            </PostActionsButton>
-            <PostActionsButton onPress={this.handleExampleButtonPress}>
-              <FormattedMessage
-                defaultMessage="Example"
-                id="postActions.buttons.example"
               />
             </PostActionsButton>
           </Row>

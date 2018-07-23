@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import PostText, { messages as postTextMessages } from './PostText';
+import PostText from './PostText';
 import PostActions from './PostActions';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostChild.graphql';
@@ -45,9 +45,6 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
       case 'EXPAND':
         this.handleExpandAction(action.value);
         break;
-      case 'EXAMPLE':
-        this.handleExampleAction();
-        break;
       case 'REUSE':
         this.handleReuseAction();
         break;
@@ -59,27 +56,6 @@ class PostChild extends React.PureComponent<PostChildProps, PostChildState> {
         (action.type: empty);
     }
   };
-
-  handleExampleAction() {
-    this.props.store(store => {
-      const record = store.get(this.props.data.id);
-      if (!record) return;
-      // getValue returns mixed type.
-      // https://twitter.com/estejs/status/1018113850875564032
-      // It's string, because of createRelayEnvironment handlerProvider, but we
-      // people make mistakes, so we have to ensure it via Flow type refinement.
-      let draftText = record.getValue('draftText');
-      if (typeof draftText !== 'string') draftText = ''; // Now it's string.
-      const maybeNewLine = draftText.length > 0 ? '\n' : '';
-      const example = this.props.intl
-        .formatMessage(postTextMessages.example)
-        // Trim because of accidental `...` newlines in messages.
-        .trim();
-      const newDraftText = `${draftText}${maybeNewLine}${example}`;
-      record.setValue(newDraftText, 'draftText');
-      PostChild.focusFirst(this.postChildRef);
-    });
-  }
 
   // eslint-disable-next-line class-methods-use-this
   handleReuseAction() {
@@ -148,10 +124,8 @@ export default createFragmentContainer(
   )(PostChild),
   graphql`
     fragment PostChild on Post {
-      id
+      # id
       type
-      # draftTextSelectionStart
-      # draftTextSelectionEnd
       ...PostText
     }
   `,

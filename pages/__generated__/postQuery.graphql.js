@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 06aa06679a9d16f29525e54c49c9bb06
+ * @relayHash f5261b1ad0e225d5b120f243407dbd3f
  */
 
 /* eslint-disable */
@@ -79,7 +79,6 @@ fragment PostText on Post {
 }
 
 fragment PostChild on Post {
-  id
   type
   ...PostText
 }
@@ -136,7 +135,7 @@ return {
   "operationKind": "query",
   "name": "postQuery",
   "id": null,
-  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    nameAlias: name\n    text\n    type\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PostParents\n    ...PostName\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PostParents on Post {\n  parents {\n    id\n    name\n  }\n}\n\nfragment PostName on Post {\n  id\n  name\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  id\n  type\n  ...PostText\n}\n",
+  "text": "query postQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Post_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Post_1Bmzm5 on Query {\n  post(id: $id) {\n    id\n    name\n    nameAlias: name\n    text\n    type\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PostParents\n    ...PostName\n    ...PostText\n    children {\n      id\n      ...PostChild\n    }\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PostParents on Post {\n  parents {\n    id\n    name\n  }\n}\n\nfragment PostName on Post {\n  id\n  name\n}\n\nfragment PostText on Post {\n  id\n  text\n}\n\nfragment PostChild on Post {\n  type\n  ...PostText\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
