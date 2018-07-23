@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from './core/Row';
-import PostActionsButton from './PostActionsButton';
+import Button from './core/Button';
 
 type PostAction =
   | {| type: 'EXPAND', value: boolean |}
@@ -45,26 +45,24 @@ class PostActions extends React.PureComponent<PostActionsProps> {
       >
         {!this.props.expanded ? (
           <Row>
-            <PostActionsButton onPress={this.handleExpandButtonPress}>
-              —
-            </PostActionsButton>
+            <Button onPress={this.handleExpandButtonPress}>—</Button>
           </Row>
         ) : (
           <Row>
             {this.props.showReuse && (
-              <PostActionsButton onPress={this.handleReuseButtonPress}>
+              <Button onPress={this.handleReuseButtonPress}>
                 <FormattedMessage
                   defaultMessage="Reuse"
                   id="postActions.buttons.reuse"
                 />
-              </PostActionsButton>
+              </Button>
             )}
-            <PostActionsButton onPress={this.handleMoveButtonPress}>
+            <Button color="primary" onPress={this.handleMoveButtonPress}>
               <FormattedMessage
                 defaultMessage="Move"
                 id="postActions.buttons.move"
               />
-            </PostActionsButton>
+            </Button>
           </Row>
         )}
       </View>
