@@ -1566,8 +1566,8 @@ apollo-upload-server@^5.0.0:
     object-path "^0.11.4"
 
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.16.tgz#787310df4c3900a68c0beb3d351c59725a588cdb"
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.17.tgz#04cd22db5c5dba8dbd349e28b0d9f9f525ab8e8a"
   dependencies:
     fast-json-stable-stringify "^2.0.0"
 
@@ -1796,8 +1796,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.279.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.279.1.tgz#3a4fd4167932e4361dbdcfcb174ce4840ffcbf20"
+  version "2.280.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.280.1.tgz#73a152ef68456c66d303b0938cb64479ee02de5b"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -4392,9 +4392,9 @@ eslint-plugin-react@^7.7.0:
     jsx-ast-utils "^2.0.1"
     prop-types "^15.6.2"
 
-eslint-plugin-relay@^0.0.25:
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-relay/-/eslint-plugin-relay-0.0.25.tgz#65dbb2e158508a739b2565f6821fe59bde4c3657"
+eslint-plugin-relay@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-relay/-/eslint-plugin-relay-0.0.26.tgz#41938b08877a55f15c49e6556be7c85f0397f386"
   dependencies:
     graphql "^0.13.0"
 
@@ -5438,8 +5438,8 @@ graphql-cli-prepare@1.4.19:
     lodash "4.17.5"
 
 graphql-cli@^2.13.0:
-  version "2.16.4"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.16.4.tgz#46699ce8021cf1dc1bd585ac507372de63a6046e"
+  version "2.16.5"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.16.5.tgz#0562dabe2249f933186821847f9242b5f9aabd4e"
   dependencies:
     adm-zip "0.4.7"
     apollo-codegen "^0.19.1"
@@ -5620,10 +5620,11 @@ graphql-playground-middleware-lambda@1.6.1:
     graphql-playground-html "1.5.5"
 
 graphql-request@^1.4.0, graphql-request@^1.5.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.6.0.tgz#afe87cf2a336acabb0cc2a875900202eda89f412"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.7.0.tgz#bb7c9e76fef3bf2ca4d42835f3df7df34bc9aa51"
   dependencies:
     cross-fetch "2.0.0"
+    graphql "^0.13.2"
 
 graphql-schema-linter@0.1.1:
   version "0.1.1"
@@ -5713,7 +5714,7 @@ graphql-yoga@^1.14.5:
     graphql-tools "^2.23.1"
     subscriptions-transport-ws "^0.9.8"
 
-"graphql@^0.11.0 || ^0.12.0 || ^0.13.0", graphql@^0.13.0, graphql@^0.13.1:
+"graphql@^0.11.0 || ^0.12.0 || ^0.13.0", graphql@^0.13.0, graphql@^0.13.1, graphql@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
@@ -8177,8 +8178,8 @@ npm-conf@^1.1.0:
     pify "^3.0.0"
 
 npm-packlist@^1.1.6:
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.1.10.tgz#1039db9e985727e464df066f4cf0ab6ef85c398a"
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.1.11.tgz#84e8c683cbe7867d34b1d357d893ce29e28a02de"
   dependencies:
     ignore-walk "^3.0.1"
     npm-bundled "^1.0.1"
@@ -10231,9 +10232,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.40:
-  version "0.2.40"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.40.tgz#5f8c7f654ff75eb8d669efff967388913662829e"
+slate-base64-serializer@^0.2.41:
+  version "0.2.41"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.41.tgz#cfeca103b5fdaddd9678e0025800dfc35ef84098"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10254,21 +10255,21 @@ slate-hotkeys@^0.1.2:
     is-hotkey "^0.1.1"
     slate-dev-environment "^0.1.2"
 
-slate-plain-serializer@^0.5.21:
-  version "0.5.21"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.21.tgz#c74bec957767b20d22a04b6e030f0fe42e27ec94"
+slate-plain-serializer@^0.5.22:
+  version "0.5.22"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.22.tgz#91c81b7438b4d8cd3746abbca00e574e514be9bc"
   dependencies:
     slate-dev-logger "^0.1.39"
 
-slate-prop-types@^0.4.38:
-  version "0.4.38"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.38.tgz#eab8948753611c32857dc4ac6a2a7b08b4ec52db"
+slate-prop-types@^0.4.39:
+  version "0.4.39"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.39.tgz#fad683ab257321ad4b3f836fae40e8a5f59cd09a"
   dependencies:
     slate-dev-logger "^0.1.39"
 
 slate-react@^0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.13.3.tgz#68ad0d13d40839b9ee9b6fb356be0f7dc6acbf1d"
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.13.4.tgz#2b79a701d654bc5aaa8f0da27230df24d9f50d54"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10279,20 +10280,20 @@ slate-react@^0.13.3:
     react-immutable-proptypes "^2.1.0"
     react-portal "^3.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.40"
+    slate-base64-serializer "^0.2.41"
     slate-dev-environment "^0.1.2"
     slate-dev-logger "^0.1.39"
     slate-hotkeys "^0.1.2"
-    slate-plain-serializer "^0.5.21"
-    slate-prop-types "^0.4.38"
+    slate-plain-serializer "^0.5.22"
+    slate-prop-types "^0.4.39"
 
-slate-schema-violations@^0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.19.tgz#58bd5d0cc3f6eec1fc2c5035dad065e7bb4d527c"
+slate-schema-violations@^0.1.20:
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.20.tgz#bf63b4fb295b90f4218939564adafcd1c2f21759"
 
 slate@^0.34.6:
-  version "0.34.6"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.34.6.tgz#aa2e1612ca78b2cad9d7ec49bfe206bee79414c6"
+  version "0.34.7"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.34.7.tgz#5908e1d0fc092a2212488beca65671f01e0eb80a"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -10301,7 +10302,7 @@ slate@^0.34.6:
     is-plain-object "^2.0.4"
     lodash "^4.17.4"
     slate-dev-logger "^0.1.39"
-    slate-schema-violations "^0.1.19"
+    slate-schema-violations "^0.1.20"
     type-of "^2.0.1"
 
 slice-ansi@1.0.0:
@@ -10696,8 +10697,8 @@ subscriptions-transport-ws@0.9.8:
     ws "^3.0.0"
 
 subscriptions-transport-ws@^0.9.8:
-  version "0.9.12"
-  resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.12.tgz#0deb945134890d8694a93a090bacc6459c4478cc"
+  version "0.9.13"
+  resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.13.tgz#3c09b8ad0c1492c902fca57186bbff48c393b0bf"
   dependencies:
     backo2 "^1.0.2"
     eventemitter3 "^3.1.0"
@@ -11875,8 +11876,8 @@ zen-observable-ts@^0.8.6, zen-observable-ts@^0.8.9:
     zen-observable "^0.8.0"
 
 zen-observable@^0.8.0:
-  version "0.8.8"
-  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.8.tgz#1ea93995bf098754a58215a1e0a7309e5749ec42"
+  version "0.8.9"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.9.tgz#0475c760ff0eda046bbdfa4dc3f95d392807ac53"
 
 zip-stream@^1.2.0:
   version "1.2.0"

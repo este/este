@@ -17,6 +17,9 @@ type EditMainNavProps = {|
 class EditMainNav extends React.PureComponent<EditMainNavProps> {
   render() {
     const { theme, data } = this.props;
+    // https://github.com/relayjs/eslint-plugin-relay/issues/35
+    // eslint-disable-next-line no-unused-expressions
+    data.name;
     return (
       <View style={theme.styles.appPageMainNav}>
         <Spacer>
@@ -34,12 +37,9 @@ class EditMainNav extends React.PureComponent<EditMainNavProps> {
 
 export default createFragmentContainer(
   withTheme(EditMainNav),
-  // https://github.com/relayjs/eslint-plugin-relay/issues/35
-  // eslint-disable-next-line relay/unused-fields
   graphql`
     fragment EditMainNav on Web {
       id
-      # This is like lazy initialization. Actually, it is.
       name @__clientField(handle: "draft")
       draftName
     }

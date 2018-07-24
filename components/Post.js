@@ -50,6 +50,9 @@ class Post extends React.PureComponent<PostProps> {
       data: { post },
     } = this.props;
     if (post == null) return null;
+    // https://github.com/relayjs/eslint-plugin-relay/issues/35
+    // eslint-disable-next-line no-unused-expressions
+    post.name;
     return (
       <>
         <Head>
