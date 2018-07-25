@@ -1,4 +1,5 @@
 // @flow
+/* eslint-env browser */
 import * as React from 'react';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import throttle from 'lodash/throttle';
@@ -15,6 +16,8 @@ import { Editor } from 'slate-react';
 import { Value, resetKeyGenerator } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
+import { View, findNodeHandle } from 'react-native';
+import PostTextMenu from './PostTextMenu';
 
 export const messages = defineMessages({
   placeholder: {
@@ -65,6 +68,7 @@ type PostTextProps = {|
 
 type PostTextState = {|
   value: Object,
+  menuPosition: ?[number, number],
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
@@ -76,6 +80,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     this.props.commit(input);
   }, onChangeTextThrottle);
 
+  viewRef = React.createRef();
+  editorRef = React.createRef();
+
   constructor(props) {
     super(props);
     const { text } = this.props.data;
@@ -83,8 +90,61 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     // https://docs.slatejs.org/slate-core/utils-1#resetkeygenerator
     resetKeyGenerator();
     const value = Value.fromJSON(json);
-    this.state = { value };
+    this.state = { value, menuPosition: null };
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.value !== this.state.value) {
+      // I suppose it's OK. It properly sets menuPosition on focus.
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState(state => {
+        const menuPosition = this.getMenuPosition(state.value);
+        if (!menuPosition) return;
+        return { menuPosition };
+      });
+    }
+  }
+
+  static getSelectionRect() {
+    return window
+      .getSelection()
+      .getRangeAt(0)
+      .getBoundingClientRect();
+  }
+
+  getMenuPosition(value) {
+    // isBlurred is must, otherwise getSelectionRect will fail.
+    const hideMenu = value.isBlurred || value.isEmpty;
+    if (hideMenu) return null;
+    const { current } = this.viewRef;
+    if (!current) return null;
+    const node = findNodeHandle(current);
+    if (
+      node == null ||
+      typeof node === 'number' ||
+      typeof node.getBoundingClientRect !== 'function'
+    ) {
+      return null;
+    }
+    const viewRect = node.getBoundingClientRect();
+    const selectionRect = PostText.getSelectionRect();
+    const left = selectionRect.left - viewRect.left;
+    const top = selectionRect.bottom - viewRect.top;
+    return [left, top];
+  }
+
+  handleViewKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      // It's ok imho. It's just a selection.
+      // https://docs.slatejs.org/guides/changes#4-from-outside-slate
+      this.setState(state => ({
+        value: state.value
+          .change()
+          .collapseToStart()
+          .focus().value,
+      }));
+    }
+  };
 
   handleEditorChange = ({ value }) => {
     this.setState({ value });
@@ -111,17 +171,25 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   };
 
   render() {
-    const { intl } = this.props;
     return (
-      <Editor
-        // autoFocus
-        value={this.state.value}
-        onChange={this.handleEditorChange}
-        renderNode={this.renderNode}
-        placeholder={intl.formatMessage(messages.placeholder)}
-        schema={schema}
-        onFocus={this.handleEditorFocus}
-      />
+      <View ref={this.viewRef} onKeyDown={this.handleViewKeyDown}>
+        <Editor
+          ref={this.editorRef}
+          // autoFocus
+          value={this.state.value}
+          onChange={this.handleEditorChange}
+          renderNode={this.renderNode}
+          placeholder={this.props.intl.formatMessage(messages.placeholder)}
+          schema={schema}
+          onFocus={this.handleEditorFocus}
+        />
+        {!this.state.value.isEmpty && (
+          <PostTextMenu
+            value={this.state.value}
+            position={this.state.menuPosition}
+          />
+        )}
+      </View>
     );
   }
 }
