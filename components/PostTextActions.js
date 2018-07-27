@@ -3,24 +3,34 @@ import * as React from 'react';
 import { View } from 'react-native';
 import Button from './core/Button';
 
+type PostTextAction = {| type: 'ESCAPE' |};
+
 type SlateObject = Object;
 
-type PostTextMenuProps = {|
+type PostTextActionsProps = {|
   value: SlateObject,
   position: ?[number, number],
+  onAction: (action: PostTextAction) => void,
 |};
 
-type PostTextMenuState = {|
+type PostTextActionsState = {|
   hasFocus: boolean,
 |};
 
-class PostTextMenu extends React.PureComponent<
-  PostTextMenuProps,
-  PostTextMenuState,
+class PostTextActions extends React.PureComponent<
+  PostTextActionsProps,
+  PostTextActionsState,
 > {
   state = {
     hasFocus: false,
   };
+
+  handleViewKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      this.props.onAction({ type: 'ESCAPE' });
+    }
+  };
+
   handleViewFocus = () => {
     this.setState({ hasFocus: true });
   };
@@ -37,6 +47,7 @@ class PostTextMenu extends React.PureComponent<
     const opacity = value.isBlurred && !this.state.hasFocus ? 0 : 1;
     return (
       <View
+        onKeyDown={this.handleViewKeyDown}
         style={{
           position: 'absolute',
           width: 100,
@@ -55,4 +66,4 @@ class PostTextMenu extends React.PureComponent<
   }
 }
 
-export default PostTextMenu;
+export default PostTextActions;

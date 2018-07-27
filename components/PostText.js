@@ -17,7 +17,7 @@ import { Value, resetKeyGenerator } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
 import { View, findNodeHandle } from 'react-native';
-import PostTextMenu from './PostTextMenu';
+import PostTextActions from './PostTextActions';
 
 export const messages = defineMessages({
   placeholder: {
@@ -56,6 +56,10 @@ const emptyText = {
       },
     ],
   },
+};
+
+const collapseToStartWithFocus = change => {
+  change.collapseToStart().focus();
 };
 
 type PostTextProps = {|
@@ -143,6 +147,27 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     change.focus();
   };
 
+  handleEditorKeyDown = event => {
+    const { current: editor } = this.editorRef;
+    if (!editor) return;
+    if (event.key === 'Escape') {
+      editor.change(collapseToStartWithFocus);
+    }
+  };
+
+  handlePostTextActionsAction = action => {
+    const { current: editor } = this.editorRef;
+    if (!editor) return;
+    switch (action.type) {
+      case 'ESCAPE':
+        editor.change(collapseToStartWithFocus);
+        break;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (action.type: empty);
+    }
+  };
+
   renderNode = props => {
     switch (props.node.type) {
       case 'paragraph':
@@ -166,10 +191,12 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
           schema={schema}
           onFocus={this.handleEditorFocus}
+          onKeyDown={this.handleEditorKeyDown}
         />
-        <PostTextMenu
+        <PostTextActions
           value={this.state.value}
           position={this.state.menuPosition}
+          onAction={this.handlePostTextActionsAction}
         />
       </View>
     );
