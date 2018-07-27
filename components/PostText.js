@@ -95,21 +95,15 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.value !== this.state.value) {
-      // I suppose it's OK. It properly sets menuPosition on focus.
-      // eslint-disable-next-line react/no-did-update-set-state
+      // setState in componentDidUpdate is valid for tooltips.
+      // https://reactjs.org/docs/react-component.html#componentdidmount
       this.setState(state => {
         const menuPosition = this.getMenuPosition(state.value);
+        // Tab key blurs, but we still need the last menuPosition.
         if (!menuPosition) return;
         return { menuPosition };
       });
     }
-  }
-
-  static getSelectionRect() {
-    return window
-      .getSelection()
-      .getRangeAt(0)
-      .getBoundingClientRect();
   }
 
   getMenuPosition(value) {
@@ -127,24 +121,14 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       return null;
     }
     const viewRect = node.getBoundingClientRect();
-    const selectionRect = PostText.getSelectionRect();
+    const selectionRect = window
+      .getSelection()
+      .getRangeAt(0)
+      .getBoundingClientRect();
     const left = selectionRect.left - viewRect.left;
     const top = selectionRect.bottom - viewRect.top;
     return [left, top];
   }
-
-  handleViewKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      // It's ok imho. It's just a selection.
-      // https://docs.slatejs.org/guides/changes#4-from-outside-slate
-      this.setState(state => ({
-        value: state.value
-          .change()
-          .collapseToStart()
-          .focus().value,
-      }));
-    }
-  };
 
   handleEditorChange = ({ value }) => {
     this.setState({ value });
@@ -172,7 +156,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   render() {
     return (
-      <View ref={this.viewRef} onKeyDown={this.handleViewKeyDown}>
+      <View ref={this.viewRef}>
         <Editor
           ref={this.editorRef}
           // autoFocus
@@ -183,12 +167,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           schema={schema}
           onFocus={this.handleEditorFocus}
         />
-        {!this.state.value.isEmpty && (
-          <PostTextMenu
-            value={this.state.value}
-            position={this.state.menuPosition}
-          />
-        )}
+        <PostTextMenu
+          value={this.state.value}
+          position={this.state.menuPosition}
+        />
       </View>
     );
   }

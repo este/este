@@ -10,11 +10,31 @@ type PostTextMenuProps = {|
   position: ?[number, number],
 |};
 
-class PostTextMenu extends React.PureComponent<PostTextMenuProps> {
+type PostTextMenuState = {|
+  hasFocus: boolean,
+|};
+
+class PostTextMenu extends React.PureComponent<
+  PostTextMenuProps,
+  PostTextMenuState,
+> {
+  state = {
+    hasFocus: false,
+  };
+  handleViewFocus = () => {
+    this.setState({ hasFocus: true });
+  };
+
+  handleViewBlur = () => {
+    this.setState({ hasFocus: false });
+  };
+
   render() {
-    const { position } = this.props;
-    if (!position) return null;
+    const { value, position } = this.props;
+    if (!position || value.isEmpty) return null;
     const [left, top] = position;
+    // Opacity 0, so element is still tabable.
+    const opacity = value.isBlurred && !this.state.hasFocus ? 0 : 1;
     return (
       <View
         style={{
@@ -24,7 +44,10 @@ class PostTextMenu extends React.PureComponent<PostTextMenuProps> {
           backgroundColor: 'red',
           left,
           top,
+          opacity,
         }}
+        onFocus={this.handleViewFocus}
+        onBlur={this.handleViewBlur}
       >
         <Button>—</Button>
       </View>

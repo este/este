@@ -36,5 +36,6 @@ module.exports = {
     'relay/generated-flow-types': 'error',
     'relay/unused-fields': 'error',
     'relay/no-future-added-value': 'error',
+    'react/no-did-update-set-state': 0, // Perfectly valid. https://github.com/yannickcr/eslint-plugin-react/issues/1754
   },
 };
