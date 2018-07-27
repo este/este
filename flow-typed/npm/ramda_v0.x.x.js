@@ -1,5 +1,5 @@
-// flow-typed signature: 1e77c62a23c66bfc730d2df8586dcf50
-// flow-typed version: 18ad538dcd/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: cb15389c9c78d6991320f86905218ebc
+// flow-typed version: 574965105d/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -410,13 +410,25 @@ declare module ramda {
     ) => UnaryFn<A, C>) &
     (<A, B>(ab: UnaryFn<A, B>) => UnaryFn<A, B>);
 
-  declare type Filter = (<K, V, T: Array<V> | { [key: K]: V }>(
-    fn: UnaryPredicateFn<V>,
-    xs: T
-  ) => T) &
-    (<K, V, T: Array<V> | { [key: K]: V }>(
-      fn: UnaryPredicateFn<V>
-    ) => (xs: T) => T);
+  // This kind of filter allows us to do type refinement on the result, but we
+  // still need Filter so that non-refining predicates still pass a type check.
+  declare type RefineFilter =
+    & (<K, V, P: $Pred<1>, T: Array<V> | { [key: K]: V }>(
+      fn: P,
+      xs: T
+    ) => Array<$Refine<V, P, 1>>)
+    & (<K, V, P: $Pred<1>, T: Array<V> | { [key: K]: V }>(
+      fn: P
+    ) => (xs: T) => Array<$Refine<V, P, 1>>)
+
+  declare type Filter =
+    & (<K, V, T: Array<V> | { [key: K]: V }>(
+      fn: UnaryPredicateFn<V>,
+      xs: T
+    ) => T)
+    & (<K, V, T: Array<V> | { [key: K]: V }>(
+      fn: UnaryPredicateFn<V>,
+    ) => (xs: T) => T)
 
   declare class Monad<T> {
     chain: Function;
@@ -474,7 +486,15 @@ declare module ramda {
   declare var sum: UnaryFn<Array<number>, number>;
 
   // Filter
-  declare var filter: Filter;
+  // To refine with filter, be sure to import the RefineFilter type, and cast
+  // filter to a RefineFilter.
+  // ex:
+  // import { type RefineFilter, filter } from 'ramda'
+  // const notNull = (x): bool %checks => x != null
+  // const ns: Array<number> = (filter: RefineFilter)(notNull, [1, 2, null])
+  declare var filter: RefineFilter & Filter;
+  // reject doesn't get RefineFilter since it performs the opposite work of
+  // filter, and we don't have a kind of $NotPred type.
   declare var reject: Filter;
 
   // *String
