@@ -13,11 +13,12 @@ import SetPostTextMutation, {
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/PostText.graphql';
 import { Editor } from 'slate-react';
-import { Value, resetKeyGenerator } from 'slate';
+import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
 import { View, findNodeHandle } from 'react-native';
 import PostTextActions from './PostTextActions';
+import isURL from 'validator/lib/isURL';
 
 export const messages = defineMessages({
   placeholder: {
@@ -28,11 +29,25 @@ export const messages = defineMessages({
 
 const schema = {
   document: {
-    nodes: [{ types: ['paragraph'] }],
+    nodes: [
+      {
+        match: [{ type: 'paragraph' }, { type: 'image' }],
+      },
+    ],
   },
   blocks: {
     paragraph: {
-      nodes: [{ objects: ['text'] }],
+      nodes: [
+        {
+          match: { object: 'text' },
+        },
+      ],
+    },
+    image: {
+      isVoid: true,
+      data: {
+        src: url => url && isURL(url),
+      },
     },
   },
 };
@@ -91,8 +106,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     super(props);
     const { text } = this.props.data;
     const json = text == null ? emptyText : JSON.parse(text);
-    // https://docs.slatejs.org/slate-core/utils-1#resetkeygenerator
-    resetKeyGenerator();
+    // Resets Slate's internal key generating function to its default state.
+    // This is useful for server-side rendering.
+    KeyUtils.resetGenerator();
     const value = Value.fromJSON(json);
     this.state = { value, menuPosition: null };
   }
