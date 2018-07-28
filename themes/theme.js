@@ -143,6 +143,16 @@ const stylesJson = {
     minHeight: typography.rhythm(1),
     paddingVertical: typography.rhythm(0.5),
   },
+
+  postTextActions: {
+    position: 'absolute',
+    backgroundColor: '#222',
+    borderRadius: typography.rhythm(0.25),
+    marginTop: typography.rhythm(0.2),
+    paddingVertical: typography.rhythm(0.2),
+    paddingHorizontal: typography.rhythm(0.5),
+    flexDirection: 'row',
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);

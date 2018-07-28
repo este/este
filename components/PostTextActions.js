@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Button from './core/Button';
+import Spacer from './core/Spacer';
+import withTheme, { type Theme } from './core/withTheme';
 
 type PostTextAction = {| type: 'ESCAPE' |};
 
@@ -11,11 +13,16 @@ type PostTextActionsProps = {|
   value: SlateObject,
   position: ?[number, number],
   onAction: (action: PostTextAction) => void,
+  theme: Theme,
 |};
 
 type PostTextActionsState = {|
   hasFocus: boolean,
 |};
+
+const ActionButton = props => {
+  return <Button color="gray" bold fixWebFontSmoothing {...props} />;
+};
 
 class PostTextActions extends React.PureComponent<
   PostTextActionsProps,
@@ -40,7 +47,7 @@ class PostTextActions extends React.PureComponent<
   };
 
   render() {
-    const { value, position } = this.props;
+    const { value, position, theme } = this.props;
     if (!position || value.isEmpty) return null;
     const [left, top] = position;
     // Opacity 0, so element is still tabable.
@@ -48,22 +55,18 @@ class PostTextActions extends React.PureComponent<
     return (
       <View
         onKeyDown={this.handleViewKeyDown}
-        style={{
-          position: 'absolute',
-          width: 100,
-          height: 20,
-          backgroundColor: 'red',
-          left,
-          top,
-          opacity,
-        }}
+        style={[theme.styles.postTextActions, { left, top, opacity }]}
         onFocus={this.handleViewFocus}
         onBlur={this.handleViewBlur}
       >
-        <Button>—</Button>
+        <Spacer rhythm={0.75}>
+          <ActionButton>b</ActionButton>
+          <ActionButton italic>i</ActionButton>
+          <ActionButton>reuse</ActionButton>
+        </Spacer>
       </View>
     );
   }
 }
 
-export default PostTextActions;
+export default withTheme(PostTextActions);
