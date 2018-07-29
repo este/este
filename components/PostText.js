@@ -17,8 +17,9 @@ import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
 import { View, findNodeHandle } from 'react-native';
-import PostTextActions from './PostTextActions';
+import PostTextActions, { type PostTextAction } from './PostTextActions';
 import isURL from 'validator/lib/isURL';
+import { isKeyHotkey } from 'is-hotkey';
 
 export const messages = defineMessages({
   placeholder: {
@@ -27,7 +28,17 @@ export const messages = defineMessages({
   },
 });
 
-const schema = {
+type BoldMark = { type: 'bold' };
+type ItalicMark = { type: 'italic' };
+export type Mark = BoldMark | ItalicMark;
+
+type Schema = {
+  document: Object,
+  blocks: Object,
+  marks: [BoldMark, ItalicMark],
+};
+
+const schema: Schema = {
   document: {
     nodes: [
       {
@@ -50,6 +61,7 @@ const schema = {
       },
     },
   },
+  marks: [{ type: 'bold' }, { type: 'italic' }],
 };
 
 const emptyText = {
@@ -76,6 +88,9 @@ const emptyText = {
 const collapseToStartWithFocus = change => {
   change.collapseToStart().focus();
 };
+
+const isBoldHotkey = isKeyHotkey('mod+b');
+const isItalicHotkey = isKeyHotkey('mod+i');
 
 type PostTextProps = {|
   data: generated.PostText,
@@ -128,7 +143,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   getMenuPosition(value) {
     // isBlurred is must, otherwise getSelectionRect will fail.
-    const hideMenu = value.isBlurred || value.isEmpty;
+    // isCollapsed is used instead of isEmpty as temp workaround.
+    // https://github.com/ianstormtaylor/slate/issues/2004
+    const hideMenu = value.isBlurred || value.isCollapsed;
     if (hideMenu) return null;
     const { current } = this.viewRef;
     if (!current) return null;
@@ -150,6 +167,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     return [left, top];
   }
 
+  handleEditorFocus = (event, change) => {
+    // https://github.com/ianstormtaylor/slate/issues/1989
+    change.focus();
+  };
+
   handleEditorChange = ({ value }) => {
     this.setState({ value });
     if (value.document !== this.state.value.document) {
@@ -158,39 +180,85 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
-  handleEditorFocus = (event, change) => {
-    // https://github.com/ianstormtaylor/slate/issues/1989
-    change.focus();
-  };
+  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow.
 
   handleEditorKeyDown = event => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
     if (event.key === 'Escape') {
       editor.change(collapseToStartWithFocus);
+      return;
+    }
+
+    let mark = null;
+    if (isBoldHotkey(event)) {
+      mark = 'bold';
+    } else if (isItalicHotkey(event)) {
+      mark = 'italic';
+    }
+    if (mark != null) {
+      // It seems that preventDefault and return true are useless, but it's
+      // used in examples. Wish it was described in docs.
+      // OK, let's comment it and see.
+      // event.preventDefault();
+      editor.change(change => {
+        change.toggleMark(mark);
+      });
+      // return true;
     }
   };
 
-  handlePostTextActionsAction = action => {
+  handlePostTextActionsAction = (action: PostTextAction) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
+    let mark = null;
     switch (action.type) {
       case 'ESCAPE':
         editor.change(collapseToStartWithFocus);
+        break;
+      case 'BOLD':
+        mark = action.type.toLowerCase();
+        break;
+      case 'ITALIC':
+        mark = action.type.toLowerCase();
         break;
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
     }
+    if (mark != null) {
+      editor.change(change => {
+        change.toggleMark(mark);
+      });
+    }
   };
 
   renderNode = props => {
+    const { children, attributes } = props;
     switch (props.node.type) {
       case 'paragraph':
         return (
           <Block>
-            <Text {...props.attributes}>{props.children}</Text>
+            <Text {...attributes}>{children}</Text>
           </Block>
+        );
+    }
+  };
+
+  renderMark = props => {
+    const { children, mark, attributes } = props;
+    switch (mark.type) {
+      case 'bold':
+        return (
+          <Text bold {...attributes}>
+            {children}
+          </Text>
+        );
+      case 'italic':
+        return (
+          <Text italic {...attributes}>
+            {children}
+          </Text>
         );
     }
   };
@@ -204,6 +272,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           value={this.state.value}
           onChange={this.handleEditorChange}
           renderNode={this.renderNode}
+          renderMark={this.renderMark}
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
           schema={schema}
           onFocus={this.handleEditorFocus}
