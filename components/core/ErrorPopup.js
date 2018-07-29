@@ -59,7 +59,6 @@ class ErrorPopup extends React.PureComponent<ErrorPopupProps, ErrorPopupState> {
         size={1}
         align="center"
         color="white"
-        fixWebFontSmoothing
         style={theme.styles.errorPopup}
         error={messageError}
         originalErrorMessage={error.message}

@@ -32,7 +32,14 @@ const colors = {
 const fontFamily =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
-const bold = '600';
+const fontWeight = '700';
+
+// http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
+// tl;dr Use it only for light text on dark background.
+const fontSmoothing = {
+  MozOsxFontSmoothing: 'grayscale',
+  WebkitFontSmoothing: 'antialiased',
+};
 
 const stylesJson = {
   text: {
@@ -45,7 +52,7 @@ const stylesJson = {
   },
 
   textWeightBold: {
-    fontWeight: bold,
+    fontWeight,
   },
 
   textPrimary: {
@@ -77,7 +84,7 @@ const stylesJson = {
   },
 
   heading: {
-    fontWeight: bold,
+    fontWeight,
     fontFamily,
     marginBottom: typography.rhythm(1),
     color: colors.gray,
@@ -180,14 +187,17 @@ export const darkTheme: Theme = {
   pageBackgroundColor: 'black',
   styles: StyleSheet.create({
     ...stylesJson,
+    // $FlowFixMe I don't know how to add type for fontSmoothing.
     text: {
       ...stylesJson.text,
       color: colors.white,
+      ...fontSmoothing,
     },
-
+    // $FlowFixMe I don't know how to add type for fontSmoothing.
     textInput: {
       ...stylesJson.textInput,
       color: colors.white,
+      ...fontSmoothing,
     },
   }),
 };

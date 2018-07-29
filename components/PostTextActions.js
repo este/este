@@ -21,7 +21,7 @@ type PostTextActionsState = {|
 |};
 
 const ActionButton = props => {
-  return <Button color="gray" bold fixWebFontSmoothing {...props} />;
+  return <Button color="gray" bold {...props} />;
 };
 
 class PostTextActions extends React.PureComponent<
@@ -62,7 +62,7 @@ class PostTextActions extends React.PureComponent<
         <Spacer rhythm={0.75}>
           <ActionButton>b</ActionButton>
           <ActionButton italic>i</ActionButton>
-          <ActionButton>reuse</ActionButton>
+          <ActionButton disabled>reuse</ActionButton>
         </Spacer>
       </View>
     );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import type { ColorName } from '../../themes/types';
 import withTheme, { type Theme } from './withTheme';
-import { Platform, StyleSheet, Text as NativeText } from 'react-native';
+import { StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 export type TextProps = {|
@@ -13,7 +13,6 @@ export type TextProps = {|
   decoration?: 'none' | 'underline' | 'line-through' | 'underline line-through',
   italic?: boolean,
   size?: number,
-  fixWebFontSmoothing?: boolean,
   style?: TextStyleProp,
   children?: React.Node,
   // React Native does not export Text props Flow types yet, so add them as-go.
@@ -25,19 +24,6 @@ export type TextProps = {|
 |};
 
 // Strutural aka non-themeable styles.
-
-const styles = StyleSheet.create({
-  // http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
-  // tl;dr Enable font smoothing only for the light text on the dark background.
-  fixWebFontSmoothing:
-    Platform.OS === 'web'
-      ? // $FlowFixMe Nothing to fix, it's only for the web.
-        {
-          MozOsxFontSmoothing: 'grayscale',
-          WebkitFontSmoothing: 'antialiased',
-        }
-      : {},
-});
 
 const alignStyles = StyleSheet.create({
   left: { textAlign: 'left' },
@@ -98,7 +84,6 @@ class Text extends React.PureComponent<{| ...TextProps, theme: Theme |}> {
       decoration,
       italic,
       size,
-      fixWebFontSmoothing,
       style,
       theme,
       ...props
@@ -122,7 +107,6 @@ class Text extends React.PureComponent<{| ...TextProps, theme: Theme |}> {
           size != null
             ? theme.typography.fontSizeWithLineHeight(size)
             : !isInAParentText && theme.typography.fontSizeWithLineHeight(0),
-          fixWebFontSmoothing === true && styles.fixWebFontSmoothing,
         ]}
         {...props}
       />
