@@ -3,14 +3,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Button from './core/Button';
-import Spacer from './core/Spacer';
 import withTheme, { type Theme } from './core/withTheme';
-import type { Mark } from './PostText';
 
 export type PostTextAction =
   | {| type: 'ESCAPE' |}
   | {| type: 'BOLD' |}
-  | {| type: 'ITALIC' |};
+  | {| type: 'ITALIC' |}
+  | {| type: 'HEADING-ONE' |}
+  | {| type: 'HEADING-TWO' |};
+// | {| type: 'LINK' |}
+// | {| type: 'QUOTE' |}
 
 type SlateObject = Object;
 
@@ -47,22 +49,31 @@ class PostTextActions extends React.PureComponent<
     this.setState({ hasFocus: false });
   };
 
-  handleBoldPress = () => {
-    this.props.onAction({ type: 'BOLD' });
-  };
+  handleBoldPress = () => this.props.onAction({ type: 'BOLD' });
+  handleItalicPress = () => this.props.onAction({ type: 'ITALIC' });
+  handleHeadingOnePress = () => this.props.onAction({ type: 'HEADING-ONE' });
+  handleHeadingTwoPress = () => this.props.onAction({ type: 'HEADING-TWO' });
 
-  handleItalicPress = () => {
-    this.props.onAction({ type: 'ITALIC' });
-  };
-
-  renderButton(markType: $ElementType<Mark, 'type'>, onPress, props) {
-    const hasMark = this.props.value.activeMarks.some(
-      mark => mark.type === markType,
-    );
-    const color = hasMark ? 'white' : 'gray';
+  renderButton(
+    actionType: $ElementType<PostTextAction, 'type'>,
+    icon,
+    onPress,
+  ) {
+    const isMark = actionType === 'BOLD' || actionType === 'ITALIC';
+    const isActive = isMark
+      ? this.props.value.activeMarks.some(
+          mark => mark.type === actionType.toLowerCase(),
+        )
+      : false;
+    const color = isActive ? 'success' : 'gray';
     return (
-      <Button onPress={onPress} color={color} bold {...props}>
-        {markType.charAt(0)}
+      <Button
+        onPress={onPress}
+        color={color}
+        bold
+        style={this.props.theme.styles.postTextActionsButton}
+      >
+        {icon}
       </Button>
     );
   }
@@ -104,12 +115,12 @@ class PostTextActions extends React.PureComponent<
           onFocus={this.handleViewFocus}
           onBlur={this.handleViewBlur}
         >
-          <Spacer rhythm={0.75}>
-            {this.renderButton('bold', this.handleBoldPress)}
-            {this.renderButton('italic', this.handleItalicPress, {
-              italic: true,
-            })}
-          </Spacer>
+          {this.renderButton('BOLD', 'B', this.handleBoldPress)}
+          {this.renderButton('ITALIC', 'i', this.handleItalicPress)}
+          {this.renderButton('HEADING-ONE', '1', this.handleHeadingOnePress)}
+          {this.renderButton('HEADING-TWO', '2', this.handleHeadingTwoPress)}
+          {/* {this.renderButton('bold', '↗')}
+          {this.renderButton('bold', '“')} */}
         </View>
       </div>
     );

@@ -28,12 +28,24 @@ export const messages = defineMessages({
   },
 });
 
+type ParagraphNode = { type: 'paragraph' };
+type ImageNode = { type: 'image' };
+type HeadingOneNode = { type: 'headingOne' };
+type HeadingTwoNode = { type: 'headingTwo' };
+type BlockNodes = ParagraphNode | HeadingOneNode | HeadingTwoNode;
+type BlockNodeType = $ElementType<BlockNodes, 'type'>;
+
 type BoldMark = { type: 'bold' };
 type ItalicMark = { type: 'italic' };
 export type Mark = BoldMark | ItalicMark;
+type MarkType = $ElementType<Mark, 'type'>;
 
 type Schema = {
-  document: Object,
+  document: {|
+    nodes: [
+      { match: [ParagraphNode, ImageNode, HeadingOneNode, HeadingTwoNode] },
+    ],
+  |},
   blocks: Object,
   marks: [BoldMark, ItalicMark],
 };
@@ -42,24 +54,21 @@ const schema: Schema = {
   document: {
     nodes: [
       {
-        match: [{ type: 'paragraph' }, { type: 'image' }],
+        match: [
+          { type: 'paragraph' },
+          { type: 'image' },
+          { type: 'headingOne' },
+          { type: 'headingTwo' },
+        ],
       },
     ],
   },
   blocks: {
-    paragraph: {
-      nodes: [
-        {
-          match: { object: 'text' },
-        },
-      ],
-    },
-    image: {
-      isVoid: true,
-      data: {
-        src: url => url && isURL(url),
-      },
-    },
+    paragraph: { nodes: [{ match: { object: 'text' } }] },
+    headingOne: { nodes: [{ match: { object: 'text' } }] },
+    headingTwo: { nodes: [{ match: { object: 'text' } }] },
+    paragraph: { nodes: [{ match: { object: 'text' } }] },
+    image: { isVoid: true, data: { src: url => url && isURL(url) } },
   },
   marks: [{ type: 'bold' }, { type: 'italic' }],
 };
@@ -87,6 +96,17 @@ const emptyText = {
 
 const collapseToStartWithFocus = change => {
   change.collapseToStart().focus();
+};
+
+const toggleMark = (mark: MarkType) => change => {
+  change.toggleMark(mark);
+};
+
+const DEFAULT_NODE = 'paragraph';
+
+const toggleBlocks = (blocks, type: BlockNodeType) => change => {
+  const isActive = blocks.some(node => node.type == type);
+  change.setBlocks(isActive ? DEFAULT_NODE : type);
 };
 
 const isBoldHotkey = isKeyHotkey('mod+b');
@@ -128,16 +148,20 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     this.state = { value, menuPosition: null };
   }
 
+  updateMenuPosition() {
+    this.setState(state => {
+      const menuPosition = this.getMenuPosition(state.value);
+      // Tab key blurs, but we still need the last menuPosition.
+      if (!menuPosition) return;
+      return { menuPosition };
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.value !== this.state.value) {
       // setState in componentDidUpdate is valid for tooltips.
       // https://reactjs.org/docs/react-component.html#componentdidmount
-      this.setState(state => {
-        const menuPosition = this.getMenuPosition(state.value);
-        // Tab key blurs, but we still need the last menuPosition.
-        if (!menuPosition) return;
-        return { menuPosition };
-      });
+      this.updateMenuPosition();
     }
   }
 
@@ -167,10 +191,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     return [left, top];
   }
 
-  handleEditorFocus = (event, change) => {
-    // https://github.com/ianstormtaylor/slate/issues/1989
-    change.focus();
-  };
+  // handleEditorFocus = (event, change) => {
+  //   // https://github.com/ianstormtaylor/slate/issues/1989
+  //   change.focus();
+  // };
 
   handleEditorChange = ({ value }) => {
     this.setState({ value });
@@ -180,7 +204,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
-  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow.
+  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow,
+  // if possible. But remember, duplication is cheaper than bad abstraction.
 
   handleEditorKeyDown = event => {
     const { current: editor } = this.editorRef;
@@ -189,64 +214,62 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       editor.change(collapseToStartWithFocus);
       return;
     }
-
-    let mark = null;
     if (isBoldHotkey(event)) {
-      mark = 'bold';
+      editor.change(toggleMark('bold'));
     } else if (isItalicHotkey(event)) {
-      mark = 'italic';
-    }
-    if (mark != null) {
-      // It seems that preventDefault and return true are useless, but it's
-      // used in examples. Wish it was described in docs.
-      // OK, let's comment it and see.
-      // event.preventDefault();
-      editor.change(change => {
-        change.toggleMark(mark);
-      });
-      // return true;
+      editor.change(toggleMark('italic'));
     }
   };
 
   handlePostTextActionsAction = (action: PostTextAction) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
-    let mark = null;
+    const { value } = this.state;
     switch (action.type) {
       case 'ESCAPE':
         editor.change(collapseToStartWithFocus);
         break;
       case 'BOLD':
-        mark = action.type.toLowerCase();
+        editor.change(toggleMark('bold'));
         break;
       case 'ITALIC':
-        mark = action.type.toLowerCase();
+        editor.change(toggleMark('italic'));
+        break;
+      case 'HEADING-ONE':
+        editor.change(toggleBlocks(value.blocks, 'headingOne'));
+        break;
+      case 'HEADING-TWO':
+        editor.change(toggleBlocks(value.blocks, 'headingTwo'));
         break;
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
     }
-    if (mark != null) {
-      editor.change(change => {
-        change.toggleMark(mark);
-      });
-    }
   };
 
   renderNode = props => {
-    const { children, attributes } = props;
-    switch (props.node.type) {
+    const { children, attributes, node } = props;
+    const { type } = node;
+    // TODO: Add default with Flow empty.
+    switch (type) {
       case 'paragraph':
+      case 'headingOne':
+      case 'headingTwo': {
+        const size = type === 'paragraph' ? 0 : type === 'headingTwo' ? 1 : 2;
         return (
           <Block>
-            <Text {...attributes}>{children}</Text>
+            <Text size={size} {...attributes}>
+              {children}
+            </Text>
           </Block>
         );
+      }
     }
   };
 
   renderMark = props => {
     const { children, mark, attributes } = props;
+    // TODO: Add default with Flow empty.
     switch (mark.type) {
       case 'bold':
         return (
@@ -275,7 +298,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           renderMark={this.renderMark}
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
           schema={schema}
-          onFocus={this.handleEditorFocus}
+          // onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />
         <PostTextActions

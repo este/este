@@ -155,10 +155,13 @@ const stylesJson = {
     position: 'absolute',
     backgroundColor: '#222',
     borderRadius: typography.rhythm(0.25),
-    marginTop: typography.rhythm(0.2),
-    paddingVertical: typography.rhythm(0.2),
-    paddingHorizontal: typography.rhythm(0.5),
+    marginTop: typography.rhythm(0.25),
     flexDirection: 'row',
+  },
+
+  postTextActionsButton: {
+    paddingVertical: typography.rhythm(0.2),
+    paddingHorizontal: typography.rhythm(0.4),
   },
 };
 
