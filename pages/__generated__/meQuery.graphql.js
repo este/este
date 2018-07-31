@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2a87b2f983dcb1b15dd6b416fc5da54d
+ * @relayHash e6008e22ca3c0c59dea388b17e02dcd2
  */
 
 /* eslint-disable */
@@ -16,10 +16,6 @@ export type meQueryResponse = {|
     +email: string
   |},
   +$fragmentRefs: AppPage$ref,
-|};
-export type meQuery = {|
-  variables: meQueryVariables,
-  response: meQueryResponse,
 |};
 */
 

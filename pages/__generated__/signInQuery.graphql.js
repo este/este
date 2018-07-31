@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash da3dbec99d92e08994cf2dca7a545ff4
+ * @relayHash dc3ca062ee64c6191ae2be21ed52fd67
  */
 
 /* eslint-disable */
@@ -13,10 +13,6 @@ type AppPage$ref = any;
 export type signInQueryVariables = {||};
 export type signInQueryResponse = {|
   +$fragmentRefs: AppPage$ref
-|};
-export type signInQuery = {|
-  variables: signInQueryVariables,
-  response: signInQueryResponse,
 |};
 */
 

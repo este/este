@@ -25,8 +25,8 @@ const email = (value: string) =>
 const max140Chars = (value: string) =>
   required(value) || (value.length > 140 ? 'MAX_140_CHARS' : null);
 
-const max140Min5Chars = (value: string) =>
-  max140Chars(value) || min5Chars(value);
+// const max140Min5Chars = (value: string) =>
+//   max140Chars(value) || min5Chars(value);
 
 const max1024Chars = (value: string) =>
   required(value) || (value.length > 1024 ? 'MAX_1024_CHARS' : null);
@@ -35,8 +35,8 @@ const max1024Min5Chars = (value: string) =>
   max1024Chars(value) || min5Chars(value);
 
 export const validateAuth = (input: AuthInput) => {
-  const email_ = email(input.email);
-  if (email_) return { email: email_ };
+  const emailError = email(input.email);
+  if (emailError) return { email: emailError };
   const password = max1024Min5Chars(input.password);
   if (password) return { password };
 };

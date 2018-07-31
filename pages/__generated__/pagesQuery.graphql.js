@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2bb56b1cafb94463e45a743077a16299
+ * @relayHash 40bd8170247ced28a27f589dbf6d335f
  */
 
 /* eslint-disable */
@@ -14,10 +14,6 @@ type Webs$ref = any;
 export type pagesQueryVariables = {||};
 export type pagesQueryResponse = {|
   +$fragmentRefs: AppPage$ref & Webs$ref
-|};
-export type pagesQuery = {|
-  variables: pagesQueryVariables,
-  response: pagesQueryResponse,
 |};
 */
 

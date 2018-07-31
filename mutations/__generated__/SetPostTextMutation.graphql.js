@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2a2feec1e1e07d0628127184308a09bb
+ * @relayHash 3227b89a56420152a5d2c57ed5371c83
  */
 
 /* eslint-disable */
@@ -22,10 +22,6 @@ export type SetPostTextMutationResponse = {|
       +id: string
     |}
   |}
-|};
-export type SetPostTextMutation = {|
-  variables: SetPostTextMutationVariables,
-  response: SetPostTextMutationResponse,
 |};
 */
 

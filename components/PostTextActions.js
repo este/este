@@ -175,22 +175,6 @@ class PostTextActions extends React.PureComponent<
     if (!el || left == null || top == null) return null;
     return ReactDOM.createPortal(
       <View style={[theme.styles.postTextActions, { left, top }]}>
-        <MarkButton
-          action="BOLD"
-          markType="bold"
-          value={value}
-          onAction={onAction}
-        >
-          B
-        </MarkButton>
-        <MarkButton
-          action="ITALIC"
-          markType="italic"
-          value={value}
-          onAction={onAction}
-        >
-          i
-        </MarkButton>
         <BlockButton
           action="HEADING-ONE"
           blockType="headingOne"
@@ -207,6 +191,23 @@ class PostTextActions extends React.PureComponent<
         >
           2
         </BlockButton>
+        <MarkButton
+          action="BOLD"
+          markType="bold"
+          value={value}
+          onAction={onAction}
+        >
+          B
+        </MarkButton>
+        <MarkButton
+          action="ITALIC"
+          markType="italic"
+          value={value}
+          onAction={onAction}
+        >
+          i
+        </MarkButton>
+
         {/* {this.renderButton('BOLD', '↗')} */}
         {/* {this.renderButton('BOLD', '“')} */}
       </View>,

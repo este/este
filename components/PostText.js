@@ -19,7 +19,7 @@ import Text from './core/Text';
 import { View } from 'react-native';
 import PostTextActions, { type PostTextAction } from './PostTextActions';
 import isURL from 'validator/lib/isURL';
-import { isKeyHotkey } from 'is-hotkey';
+import hotKey from '../browser/hotKey';
 
 export const messages = defineMessages({
   placeholder: {
@@ -115,12 +115,6 @@ type PostTextState = {|
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
-  static isBoldHotkey = isKeyHotkey('mod+b');
-  static isItalicHotkey = isKeyHotkey('mod+i');
-  // I don't know yet.
-  // static isHeadingOneHotkey = isKeyHotkey('mod+opt+1');
-  // static isHeadingTwoHotkey = isKeyHotkey('mod+opt+2');
-
   throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
@@ -156,22 +150,22 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
-  // TODO: Try to merge handleEditorKeyDown and handlePostTextActionsAction.
+  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow.
 
-  handleEditorKeyDown = event => {
+  handleEditorKeyDown = (event: KeyboardEvent) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
-    // const { value } = this.state;
-    if (PostText.isBoldHotkey(event)) {
+    const { value } = this.state;
+    const { mod, alt, key, code } = hotKey(event);
+    if (mod && key === 'b') {
       editor.change(toggleMark('bold'));
-    } else if (PostText.isItalicHotkey(event)) {
+    } else if (mod && key === 'i') {
       editor.change(toggleMark('italic'));
+    } else if (mod && alt && code === 49) {
+      editor.change(toggleBlocks(value.blocks, 'headingOne'));
+    } else if (mod && alt && code === 50) {
+      editor.change(toggleBlocks(value.blocks, 'headingTwo'));
     }
-    // else if (PostText.isHeadingOneHotkey(event)) {
-    //   editor.change(toggleBlocks(value.blocks, 'headingOne'));
-    // } else if (PostText.isHeadingTwoHotkey(event)) {
-    //   editor.change(toggleBlocks(value.blocks, 'headingTwo'));
-    // }
   };
 
   handlePostTextActionsAction = (action: PostTextAction) => {

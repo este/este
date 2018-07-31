@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dffb4c5f024116e2117236ab780500c7
+ * @relayHash 79ab098ac760510096e30a5bc4eb88b6
  */
 
 /* eslint-disable */
@@ -21,10 +21,6 @@ export type DeleteWebMutationResponse = {|
       +id: string
     |}
   |}
-|};
-export type DeleteWebMutation = {|
-  variables: DeleteWebMutationVariables,
-  response: DeleteWebMutationResponse,
 |};
 */
 
