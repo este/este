@@ -41,6 +41,11 @@ const fontSmoothing = {
   WebkitFontSmoothing: 'antialiased',
 };
 
+const zIndex = {
+  errorPopup: 1,
+  postTextActions: 10000,
+};
+
 const stylesJson = {
   text: {
     color: colors.black,
@@ -134,7 +139,7 @@ const stylesJson = {
   errorPopup: {
     backgroundColor: colors.danger,
     position: 'absolute',
-    zIndex: 1,
+    zIndex: zIndex.errorPopup,
     left: 0,
     right: 0,
     top: 0,
@@ -153,15 +158,17 @@ const stylesJson = {
 
   postTextActions: {
     position: 'absolute',
+    zIndex: zIndex.postTextActions,
     backgroundColor: '#222',
-    borderRadius: typography.rhythm(0.25),
+    borderRadius: typography.rhythm(0.2),
     marginTop: typography.rhythm(0.25),
+    paddingHorizontal: typography.rhythm(0.25),
     flexDirection: 'row',
   },
 
   postTextActionsButton: {
     paddingVertical: typography.rhythm(0.2),
-    paddingHorizontal: typography.rhythm(0.4),
+    paddingHorizontal: typography.rhythm(0.5),
   },
 };
 

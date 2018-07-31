@@ -12,6 +12,7 @@ export type ButtonProps = {|
   accessibilityLabel?: string,
   disabled?: boolean,
   onPress?: () => void,
+  onPressIn?: Event => void,
   onFocus?: () => void,
   onBlur?: () => void,
   testID?: string,
@@ -26,12 +27,13 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
       accessibilityLabel,
       disabled,
       onPress,
+      onPressIn,
+      onFocus,
+      onBlur,
       testID,
       style,
       theme,
       touchableStyle,
-      onFocus,
-      onBlur,
       activeOpacity,
       ...props
     } = this.props;
@@ -43,10 +45,11 @@ class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
         accessibilityRole="button"
         disabled={disabled}
         onPress={onPress}
-        testID={testID}
-        style={touchableStyle}
+        onPressIn={onPressIn}
         onFocus={onFocus}
         onBlur={onBlur}
+        testID={testID}
+        style={touchableStyle}
         activeOpacity={activeOpacity}
       >
         <Text

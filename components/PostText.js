@@ -16,7 +16,7 @@ import { Editor } from 'slate-react';
 import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
-import { View, findNodeHandle } from 'react-native';
+import { View } from 'react-native';
 import PostTextActions, { type PostTextAction } from './PostTextActions';
 import isURL from 'validator/lib/isURL';
 import { isKeyHotkey } from 'is-hotkey';
@@ -32,13 +32,13 @@ type ParagraphNode = { type: 'paragraph' };
 type ImageNode = { type: 'image' };
 type HeadingOneNode = { type: 'headingOne' };
 type HeadingTwoNode = { type: 'headingTwo' };
-type BlockNodes = ParagraphNode | HeadingOneNode | HeadingTwoNode;
-type BlockNodeType = $ElementType<BlockNodes, 'type'>;
+type BlockNode = ParagraphNode | HeadingOneNode | HeadingTwoNode;
+export type BlockNodeType = $ElementType<BlockNode, 'type'>;
 
 type BoldMark = { type: 'bold' };
 type ItalicMark = { type: 'italic' };
-export type Mark = BoldMark | ItalicMark;
-type MarkType = $ElementType<Mark, 'type'>;
+type Mark = BoldMark | ItalicMark;
+export type MarkType = $ElementType<Mark, 'type'>;
 
 type Schema = {
   document: {|
@@ -67,7 +67,6 @@ const schema: Schema = {
     paragraph: { nodes: [{ match: { object: 'text' } }] },
     headingOne: { nodes: [{ match: { object: 'text' } }] },
     headingTwo: { nodes: [{ match: { object: 'text' } }] },
-    paragraph: { nodes: [{ match: { object: 'text' } }] },
     image: { isVoid: true, data: { src: url => url && isURL(url) } },
   },
   marks: [{ type: 'bold' }, { type: 'italic' }],
@@ -94,23 +93,14 @@ const emptyText = {
   },
 };
 
-const collapseToStartWithFocus = change => {
-  change.collapseToStart().focus();
-};
-
 const toggleMark = (mark: MarkType) => change => {
   change.toggleMark(mark);
 };
 
-const DEFAULT_NODE = 'paragraph';
-
 const toggleBlocks = (blocks, type: BlockNodeType) => change => {
-  const isActive = blocks.some(node => node.type == type);
-  change.setBlocks(isActive ? DEFAULT_NODE : type);
+  const isActive = blocks.some(node => node.type === type);
+  change.setBlocks(isActive ? 'paragraph' : type);
 };
-
-const isBoldHotkey = isKeyHotkey('mod+b');
-const isItalicHotkey = isKeyHotkey('mod+i');
 
 type PostTextProps = {|
   data: generated.PostText,
@@ -122,10 +112,15 @@ type PostTextProps = {|
 
 type PostTextState = {|
   value: Object,
-  menuPosition: ?[number, number],
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
+  static isBoldHotkey = isKeyHotkey('mod+b');
+  static isItalicHotkey = isKeyHotkey('mod+i');
+  // I don't know yet.
+  // static isHeadingOneHotkey = isKeyHotkey('mod+opt+1');
+  // static isHeadingTwoHotkey = isKeyHotkey('mod+opt+2');
+
   throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
@@ -134,7 +129,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     this.props.commit(input);
   }, onChangeTextThrottle);
 
-  viewRef = React.createRef();
   editorRef = React.createRef();
 
   constructor(props) {
@@ -145,80 +139,39 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     // This is useful for server-side rendering.
     KeyUtils.resetGenerator();
     const value = Value.fromJSON(json);
-    this.state = { value, menuPosition: null };
+    this.state = { value };
   }
 
-  updateMenuPosition() {
-    this.setState(state => {
-      const menuPosition = this.getMenuPosition(state.value);
-      // Tab key blurs, but we still need the last menuPosition.
-      if (!menuPosition) return;
-      return { menuPosition };
-    });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.value !== this.state.value) {
-      // setState in componentDidUpdate is valid for tooltips.
-      // https://reactjs.org/docs/react-component.html#componentdidmount
-      this.updateMenuPosition();
-    }
-  }
-
-  getMenuPosition(value) {
-    // isBlurred is must, otherwise getSelectionRect will fail.
-    // isCollapsed is used instead of isEmpty as temp workaround.
-    // https://github.com/ianstormtaylor/slate/issues/2004
-    const hideMenu = value.isBlurred || value.isCollapsed;
-    if (hideMenu) return null;
-    const { current } = this.viewRef;
-    if (!current) return null;
-    const node = findNodeHandle(current);
-    if (
-      node == null ||
-      typeof node === 'number' ||
-      typeof node.getBoundingClientRect !== 'function'
-    ) {
-      return null;
-    }
-    const viewRect = node.getBoundingClientRect();
-    const selectionRect = window
-      .getSelection()
-      .getRangeAt(0)
-      .getBoundingClientRect();
-    const left = selectionRect.left - viewRect.left;
-    const top = selectionRect.bottom - viewRect.top;
-    return [left, top];
-  }
-
-  // handleEditorFocus = (event, change) => {
-  //   // https://github.com/ianstormtaylor/slate/issues/1989
-  //   change.focus();
-  // };
+  handleEditorFocus = (event, change) => {
+    // https://github.com/ianstormtaylor/slate/issues/1989
+    change.focus();
+  };
 
   handleEditorChange = ({ value }) => {
     this.setState({ value });
-    if (value.document !== this.state.value.document) {
+    const documentChanged = value.document !== this.state.value.document;
+    if (documentChanged) {
       const text = JSON.stringify(value.toJSON());
       this.throttleCommit(text);
     }
   };
 
-  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow,
-  // if possible. But remember, duplication is cheaper than bad abstraction.
+  // TODO: Try to merge handleEditorKeyDown and handlePostTextActionsAction.
 
   handleEditorKeyDown = event => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
-    if (event.key === 'Escape') {
-      editor.change(collapseToStartWithFocus);
-      return;
-    }
-    if (isBoldHotkey(event)) {
+    // const { value } = this.state;
+    if (PostText.isBoldHotkey(event)) {
       editor.change(toggleMark('bold'));
-    } else if (isItalicHotkey(event)) {
+    } else if (PostText.isItalicHotkey(event)) {
       editor.change(toggleMark('italic'));
     }
+    // else if (PostText.isHeadingOneHotkey(event)) {
+    //   editor.change(toggleBlocks(value.blocks, 'headingOne'));
+    // } else if (PostText.isHeadingTwoHotkey(event)) {
+    //   editor.change(toggleBlocks(value.blocks, 'headingTwo'));
+    // }
   };
 
   handlePostTextActionsAction = (action: PostTextAction) => {
@@ -226,9 +179,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (!editor) return;
     const { value } = this.state;
     switch (action.type) {
-      case 'ESCAPE':
-        editor.change(collapseToStartWithFocus);
-        break;
       case 'BOLD':
         editor.change(toggleMark('bold'));
         break;
@@ -288,7 +238,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   render() {
     return (
-      <View ref={this.viewRef}>
+      <View>
         <Editor
           ref={this.editorRef}
           // autoFocus
@@ -298,12 +248,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           renderMark={this.renderMark}
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
           schema={schema}
-          // onFocus={this.handleEditorFocus}
+          onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />
         <PostTextActions
           value={this.state.value}
-          position={this.state.menuPosition}
           onAction={this.handlePostTextActionsAction}
         />
       </View>

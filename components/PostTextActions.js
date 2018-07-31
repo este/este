@@ -1,12 +1,13 @@
 // @flow
 /* eslint-env browser */
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import { View } from 'react-native';
 import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
+import type { MarkType, BlockNodeType } from './PostText';
 
 export type PostTextAction =
-  | {| type: 'ESCAPE' |}
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
@@ -14,17 +15,110 @@ export type PostTextAction =
 // | {| type: 'LINK' |}
 // | {| type: 'QUOTE' |}
 
+type PostTextActionType = $ElementType<PostTextAction, 'type'>;
+
 type SlateObject = Object;
+
+type OnAction = (action: PostTextAction) => void;
+
+type ActionButtonProps = {|
+  value: SlateObject,
+  onAction: OnAction,
+  action: PostTextActionType,
+  isActive: boolean,
+  children: React.Node,
+  theme: Theme,
+|};
+
+class ActionButton extends React.PureComponent<ActionButtonProps> {
+  handleButtonOnPressIn = (event: Event) => {
+    event.preventDefault();
+    // $FlowFixMe Probably Flow bug.
+    this.props.onAction({ type: this.props.action });
+  };
+  render() {
+    const { theme, isActive, children } = this.props;
+    const color = isActive ? 'success' : 'gray';
+    return (
+      <Button
+        onPressIn={this.handleButtonOnPressIn}
+        color={color}
+        bold
+        style={theme.styles.postTextActionsButton}
+      >
+        {children}
+      </Button>
+    );
+  }
+}
+
+const ActionButtonWithTheme = withTheme(ActionButton);
+
+type MarkButtonProps = {
+  value: SlateObject,
+  onAction: OnAction,
+  action: PostTextActionType,
+  markType: MarkType,
+  children: React.Node,
+};
+
+const MarkButton = ({
+  value,
+  onAction,
+  action,
+  markType,
+  children,
+}: MarkButtonProps) => {
+  const isActive = value.activeMarks.some(mark => mark.type === markType);
+  return (
+    <ActionButtonWithTheme
+      value={value}
+      onAction={onAction}
+      action={action}
+      isActive={isActive}
+    >
+      {children}
+    </ActionButtonWithTheme>
+  );
+};
+
+type BlockButtonProps = {
+  value: SlateObject,
+  onAction: OnAction,
+  action: PostTextActionType,
+  blockType: BlockNodeType,
+  children: React.Node,
+};
+
+const BlockButton = ({
+  value,
+  onAction,
+  action,
+  blockType,
+  children,
+}: BlockButtonProps) => {
+  const isActive = value.blocks.some(node => node.type === blockType);
+  return (
+    <ActionButtonWithTheme
+      value={value}
+      onAction={onAction}
+      action={action}
+      isActive={isActive}
+    >
+      {children}
+    </ActionButtonWithTheme>
+  );
+};
 
 type PostTextActionsProps = {|
   value: SlateObject,
-  position: ?[number, number],
   onAction: (action: PostTextAction) => void,
   theme: Theme,
 |};
 
 type PostTextActionsState = {|
-  hasFocus: boolean,
+  left: ?number,
+  top: ?number,
 |};
 
 class PostTextActions extends React.PureComponent<
@@ -32,97 +126,91 @@ class PostTextActions extends React.PureComponent<
   PostTextActionsState,
 > {
   state = {
-    hasFocus: false,
+    left: null,
+    top: null,
   };
 
-  handleViewKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      this.props.onAction({ type: 'ESCAPE' });
-    }
-  };
-
-  handleViewFocus = () => {
-    this.setState({ hasFocus: true });
-  };
-
-  handleViewBlur = () => {
-    this.setState({ hasFocus: false });
-  };
-
-  handleBoldPress = () => this.props.onAction({ type: 'BOLD' });
-  handleItalicPress = () => this.props.onAction({ type: 'ITALIC' });
-  handleHeadingOnePress = () => this.props.onAction({ type: 'HEADING-ONE' });
-  handleHeadingTwoPress = () => this.props.onAction({ type: 'HEADING-TWO' });
-
-  renderButton(
-    actionType: $ElementType<PostTextAction, 'type'>,
-    icon,
-    onPress,
-  ) {
-    const isMark = actionType === 'BOLD' || actionType === 'ITALIC';
-    const isActive = isMark
-      ? this.props.value.activeMarks.some(
-          mark => mark.type === actionType.toLowerCase(),
-        )
-      : false;
-    const color = isActive ? 'success' : 'gray';
-    return (
-      <Button
-        onPress={onPress}
-        color={color}
-        bold
-        style={this.props.theme.styles.postTextActionsButton}
-      >
-        {icon}
-      </Button>
-    );
+  componentDidMount() {
+    this.el = window.document.createElement('div');
+    this.modalRoot = window.document.getElementById('__next');
+    this.modalRoot.appendChild(this.el);
+    this.setLeftTopState();
   }
 
-  render() {
-    const { value, position, theme } = this.props;
+  componentDidUpdate() {
+    // setState in componentDidUpdate is valid for tooltips.
+    // https://reactjs.org/docs/react-component.html#componentdidmount
+    this.setLeftTopState();
+  }
+
+  componentWillUnmount() {
+    if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
+  }
+
+  setLeftTopState() {
+    const { value } = this.props;
     // isCollapsed is used instead of isEmpty as temp workaround.
     // https://github.com/ianstormtaylor/slate/issues/2004
-    if (!position || value.isCollapsed) return null;
-    const [left, top] = position;
-    const hiddenStillFocusable = value.isBlurred && !this.state.hasFocus;
-    return (
-      <div className={hiddenStillFocusable && 'sr-only sr-only-focusable'}>
-        {/* http://getbootstrap.com/docs/4.1/utilities/screenreaders */}
-        <style jsx>{`
-          .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-          }
-          .sr-only-focusable:active,
-          .sr-only-focusable:focus {
-            position: static;
-            width: auto;
-            height: auto;
-            overflow: visible;
-            clip: auto;
-            white-space: normal;
-          }
-        `}</style>
-        <View
-          onKeyDown={this.handleViewKeyDown}
-          style={[theme.styles.postTextActions, { left, top }]}
-          onFocus={this.handleViewFocus}
-          onBlur={this.handleViewBlur}
+    if (value.isBlurred || value.isCollapsed) {
+      this.setState({ left: null, top: null });
+      return;
+    }
+    const selectionRect = window
+      .getSelection()
+      .getRangeAt(0)
+      .getBoundingClientRect();
+    this.setState({
+      left: selectionRect.left,
+      top: window.pageYOffset + selectionRect.bottom,
+    });
+  }
+
+  el: ?HTMLDivElement;
+  modalRoot: ?HTMLDivElement;
+
+  render() {
+    const el = this.el;
+    const { value, onAction, theme } = this.props;
+    const { left, top } = this.state;
+    if (!el || left == null || top == null) return null;
+    return ReactDOM.createPortal(
+      <View style={[theme.styles.postTextActions, { left, top }]}>
+        <MarkButton
+          action="BOLD"
+          markType="bold"
+          value={value}
+          onAction={onAction}
         >
-          {this.renderButton('BOLD', 'B', this.handleBoldPress)}
-          {this.renderButton('ITALIC', 'i', this.handleItalicPress)}
-          {this.renderButton('HEADING-ONE', '1', this.handleHeadingOnePress)}
-          {this.renderButton('HEADING-TWO', '2', this.handleHeadingTwoPress)}
-          {/* {this.renderButton('bold', '↗')}
-          {this.renderButton('bold', '“')} */}
-        </View>
-      </div>
+          B
+        </MarkButton>
+        <MarkButton
+          action="ITALIC"
+          markType="italic"
+          value={value}
+          onAction={onAction}
+        >
+          i
+        </MarkButton>
+        <BlockButton
+          action="HEADING-ONE"
+          blockType="headingOne"
+          value={value}
+          onAction={onAction}
+        >
+          1
+        </BlockButton>
+        <BlockButton
+          action="HEADING-TWO"
+          blockType="headingTwo"
+          value={value}
+          onAction={onAction}
+        >
+          2
+        </BlockButton>
+        {/* {this.renderButton('BOLD', '↗')} */}
+        {/* {this.renderButton('BOLD', '“')} */}
+      </View>,
+      el,
     );
   }
 }

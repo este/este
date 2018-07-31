@@ -37,5 +37,7 @@ module.exports = {
     'relay/unused-fields': 'error',
     'relay/no-future-added-value': 'error',
     'react/no-did-update-set-state': 0, // Perfectly valid. https://github.com/yannickcr/eslint-plugin-react/issues/1754
+    'no-nested-ternary': 0, // That's fine.
+    'react/no-multi-comp': 0, // That's fine.
   },
 };
