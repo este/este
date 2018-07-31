@@ -149,9 +149,7 @@ class PostTextActions extends React.PureComponent<
 
   setLeftTopState() {
     const { value } = this.props;
-    // isCollapsed is used instead of isEmpty as temp workaround.
-    // https://github.com/ianstormtaylor/slate/issues/2004
-    if (value.isBlurred || value.isCollapsed) {
+    if (value.isBlurred || value.isEmpty) {
       this.setState({ left: null, top: null });
       return;
     }
