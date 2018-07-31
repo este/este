@@ -1,5 +1,5 @@
-// flow-typed signature: cb15389c9c78d6991320f86905218ebc
-// flow-typed version: 574965105d/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 9c30343b8fb3064c13fd4eea81f3a964
+// flow-typed version: 063bd6273f/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -944,7 +944,7 @@ declare module ramda {
 
   declare function init<T, V: Array<T> | string>(xs: V): V;
 
-  declare function length<T>(xs: Array<T>): number;
+  declare function length<T>(xs: Array<T> | string | {length: number}): number;
 
   declare function reverse<T, V: Array<T> | string>(xs: V): V;
 

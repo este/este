@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 73552ea16c0c397c164510b738e9c155
+ * @relayHash 5e1050d701ca0121655d6cf3fff93466
  */
 
 /* eslint-disable */
@@ -21,6 +21,10 @@ export type SetThemeMutationResponse = {|
       +themeName: ?string
     |}
   |}
+|};
+export type SetThemeMutation = {|
+  variables: SetThemeMutationVariables,
+  response: SetThemeMutationResponse,
 |};
 */
 

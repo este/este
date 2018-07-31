@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e38e0869d0ca7c4a12790c745c5305aa
+ * @relayHash 8877ac2dab1922941b072249704f8628
  */
 
 /* eslint-disable */
@@ -27,6 +27,10 @@ export type SetWebNameMutationResponse = {|
       +name: ?Max140CharsError
     |},
   |}
+|};
+export type SetWebNameMutation = {|
+  variables: SetWebNameMutationVariables,
+  response: SetWebNameMutationResponse,
 |};
 */
 

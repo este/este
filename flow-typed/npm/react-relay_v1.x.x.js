@@ -1,5 +1,5 @@
-// flow-typed signature: 809a8a23ed790a6069fbd9e9c47f850b
-// flow-typed version: a80240470a/react-relay_v1.x.x/flow_>=v0.47.x
+// flow-typed signature: 311012da78555b97190c86fa4c196bf3
+// flow-typed version: 443dcee08c/react-relay_v1.x.x/flow_>=v0.47.x
 
 import * as React from 'react';
 
@@ -352,7 +352,7 @@ declare module "react-relay" {
     connectionConfig: ConnectionConfig
   ): TBase;
 
-  declare type Variable = string | null | boolean | number | Variables | void | Array<Variables>;
+  declare type Variable = string | null | boolean | number | Variables | void | Array<Variable>;
   declare export type Variables = ?{ [string]: Variable };
   declare export type DataID = string;
 

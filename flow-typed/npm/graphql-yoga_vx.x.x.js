@@ -1,4 +1,4 @@
-// flow-typed signature: bd9a8f24b6c763017247f1894db740af
+// flow-typed signature: d3720613104050bd0e825888c0153ed2
 // flow-typed version: <<STUB>>/graphql-yoga_v^1.14.5/flow_v0.77.0
 
 /**
@@ -22,10 +22,6 @@ declare module 'graphql-yoga' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'graphql-yoga/dist/customFieldResolver' {
-  declare module.exports: any;
-}
-
 declare module 'graphql-yoga/dist/defaultErrorFormatter' {
   declare module.exports: any;
 }
@@ -47,9 +43,6 @@ declare module 'graphql-yoga/dist/types' {
 }
 
 // Filename aliases
-declare module 'graphql-yoga/dist/customFieldResolver.js' {
-  declare module.exports: $Exports<'graphql-yoga/dist/customFieldResolver'>;
-}
 declare module 'graphql-yoga/dist/defaultErrorFormatter.js' {
   declare module.exports: $Exports<'graphql-yoga/dist/defaultErrorFormatter'>;
 }

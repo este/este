@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 062512961ccecf4895a91ef4a8274164
+ * @relayHash eaf1a13d29696a045b18ecacd00ebfe3
  */
 
 /* eslint-disable */
@@ -23,6 +23,10 @@ export type SetPostNameMutationResponse = {|
       +name: ?Max140CharsError
     |}
   |}
+|};
+export type SetPostNameMutation = {|
+  variables: SetPostNameMutationVariables,
+  response: SetPostNameMutationResponse,
 |};
 */
 
