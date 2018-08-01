@@ -1,4 +1,4 @@
-// flow-typed signature: 0e4fb8e589cb45effa6f9235d7307406
+// flow-typed signature: c20475743365541afefe06e395ee43b5
 // flow-typed version: <<STUB>>/relay-runtime_v^1.6.0/flow_v0.77.0
 
 /**
@@ -67,6 +67,10 @@ declare module 'relay-runtime/lib/getRelayHandleKey' {
 }
 
 declare module 'relay-runtime/lib/hasOverlappingIDs' {
+  declare module.exports: any;
+}
+
+declare module 'relay-runtime/lib/index' {
   declare module.exports: any;
 }
 
@@ -230,10 +234,6 @@ declare module 'relay-runtime/lib/RelayResponseNormalizer' {
   declare module.exports: any;
 }
 
-declare module 'relay-runtime/lib/RelayRuntime' {
-  declare module.exports: any;
-}
-
 declare module 'relay-runtime/lib/RelayRuntimeTypes' {
   declare module.exports: any;
 }
@@ -259,14 +259,6 @@ declare module 'relay-runtime/lib/simpleClone' {
 }
 
 declare module 'relay-runtime/lib/stableCopy' {
-  declare module.exports: any;
-}
-
-declare module 'relay-runtime/relay-runtime' {
-  declare module.exports: any;
-}
-
-declare module 'relay-runtime/relay-runtime.min' {
   declare module.exports: any;
 }
 
@@ -312,6 +304,9 @@ declare module 'relay-runtime/lib/getRelayHandleKey.js' {
 }
 declare module 'relay-runtime/lib/hasOverlappingIDs.js' {
   declare module.exports: $Exports<'relay-runtime/lib/hasOverlappingIDs'>;
+}
+declare module 'relay-runtime/lib/index.js' {
+  declare module.exports: $Exports<'relay-runtime/lib/index'>;
 }
 declare module 'relay-runtime/lib/isPromise.js' {
   declare module.exports: $Exports<'relay-runtime/lib/isPromise'>;
@@ -433,9 +428,6 @@ declare module 'relay-runtime/lib/RelayReferenceMarker.js' {
 declare module 'relay-runtime/lib/RelayResponseNormalizer.js' {
   declare module.exports: $Exports<'relay-runtime/lib/RelayResponseNormalizer'>;
 }
-declare module 'relay-runtime/lib/RelayRuntime.js' {
-  declare module.exports: $Exports<'relay-runtime/lib/RelayRuntime'>;
-}
 declare module 'relay-runtime/lib/RelayRuntimeTypes.js' {
   declare module.exports: $Exports<'relay-runtime/lib/RelayRuntimeTypes'>;
 }
@@ -456,10 +448,4 @@ declare module 'relay-runtime/lib/simpleClone.js' {
 }
 declare module 'relay-runtime/lib/stableCopy.js' {
   declare module.exports: $Exports<'relay-runtime/lib/stableCopy'>;
-}
-declare module 'relay-runtime/relay-runtime.js' {
-  declare module.exports: $Exports<'relay-runtime/relay-runtime'>;
-}
-declare module 'relay-runtime/relay-runtime.min.js' {
-  declare module.exports: $Exports<'relay-runtime/relay-runtime.min'>;
 }

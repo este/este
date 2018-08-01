@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b96eb085627e3991d4e6da0a8978fe3a
+ * @relayHash 099bdf66ad64e15467215c4149bd84b5
  */
 
 /* eslint-disable */
@@ -16,6 +16,10 @@ export type webQueryVariables = {|
 |};
 export type webQueryResponse = {|
   +$fragmentRefs: AppPage$ref & Web$ref
+|};
+export type webQuery = {|
+  variables: webQueryVariables,
+  response: webQueryResponse,
 |};
 */
 

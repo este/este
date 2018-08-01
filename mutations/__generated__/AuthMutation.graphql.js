@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4ad37a66982ea38d5ab60ce665f1509a
+ * @relayHash 70ab7abb12136bb47640c42d4e54c6c3
  */
 
 /* eslint-disable */
@@ -27,6 +27,10 @@ export type AuthMutationResponse = {|
       +password: ?PasswordError,
     |},
   |}
+|};
+export type AuthMutation = {|
+  variables: AuthMutationVariables,
+  response: AuthMutationResponse,
 |};
 */
 

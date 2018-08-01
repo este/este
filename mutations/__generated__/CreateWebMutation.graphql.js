@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 82dedd2c3505f7f0a6d929485e63d393
+ * @relayHash cdef0d223e53f2092cebe0c0ac27f34f
  */
 
 /* eslint-disable */
@@ -25,6 +25,10 @@ export type CreateWebMutationResponse = {|
       +postName: ?Max140CharsError,
     |},
   |}
+|};
+export type CreateWebMutation = {|
+  variables: CreateWebMutationVariables,
+  response: CreateWebMutationResponse,
 |};
 */
 
