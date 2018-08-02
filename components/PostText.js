@@ -22,8 +22,6 @@ import isURL from 'validator/lib/isURL';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 
-// Made from Slate examples. It's brilliant work. Thank you.
-
 export const messages = defineMessages({
   placeholder: {
     defaultMessage: 'write',
@@ -169,7 +167,35 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
-  // handleKeySpace = (event, change) => {};
+  // On space, if it was after an auto-markdown shortcut, convert the current
+  // node into the shortcut's corresponding type.
+  handleKeySpace = (event, change) => {
+    const { value } = change;
+    if (value.isExpanded) return;
+
+    const { startBlock, startOffset } = value;
+    const chars = startBlock.text.slice(0, startOffset).replace(/\s*/g, '');
+
+    // Get the block type for a series of auto-markdown shortcut `chars`.
+    const type = {
+      '>': 'blockquote',
+      '#': 'headingOne',
+      '##': 'headingTwo',
+    }[chars];
+
+    if (!type) return;
+    // if (type == 'list-item' && startBlock.type == 'list-item') return
+    event.preventDefault();
+
+    change.setBlocks(type);
+
+    // if (type == 'list-item') {
+    //   change.wrapBlock('bulleted-list')
+    // }
+
+    change.extendToStartOf(startBlock).delete();
+    return true;
+  };
 
   // On backspace, if at the start of a non-paragraph, convert it back into a
   // paragraph node.
@@ -222,8 +248,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (!editor) return;
     const { value } = this.state;
     switch (event.key) {
-      // case ' ':
-      //   return this.handleKeySpace(event, change);
+      case ' ':
+        return this.handleKeySpace(event, change);
       case 'Backspace':
         return this.handleKeyBackspace(event, change);
       case 'Enter':
