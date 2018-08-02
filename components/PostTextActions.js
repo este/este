@@ -11,7 +11,8 @@ export type PostTextAction =
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
-  | {| type: 'HEADING-TWO' |};
+  | {| type: 'HEADING-TWO' |}
+  | {| type: 'BLOCKQUOTE' |};
 // | {| type: 'LINK' |}
 // | {| type: 'QUOTE' |}
 
@@ -205,7 +206,14 @@ class PostTextActions extends React.PureComponent<
         >
           i
         </MarkButton>
-
+        <BlockButton
+          action="BLOCKQUOTE"
+          blockType="blockquote"
+          value={value}
+          onAction={onAction}
+        >
+          {'>'}
+        </BlockButton>
         {/* {this.renderButton('BOLD', '↗')} */}
         {/* {this.renderButton('BOLD', '“')} */}
       </View>,

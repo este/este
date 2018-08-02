@@ -28,7 +28,6 @@ class Post extends React.PureComponent<PostProps> {
     const { type } = post;
     switch (type) {
       case 'TEXT':
-        // $FlowFixMe https://github.com/facebook/relay/issues/2316
         return <PostText data={post} />;
       case 'IMAGE':
         return null;

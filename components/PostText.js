@@ -20,6 +20,9 @@ import { View } from 'react-native';
 import PostTextActions, { type PostTextAction } from './PostTextActions';
 import isURL from 'validator/lib/isURL';
 import hotKey from '../browser/hotKey';
+import withTheme, { type Theme } from './core/withTheme';
+
+// Made from Slate examples. It's brilliant work. Thank you.
 
 export const messages = defineMessages({
   placeholder: {
@@ -32,7 +35,12 @@ type ParagraphNode = { type: 'paragraph' };
 type ImageNode = { type: 'image' };
 type HeadingOneNode = { type: 'headingOne' };
 type HeadingTwoNode = { type: 'headingTwo' };
-type BlockNode = ParagraphNode | HeadingOneNode | HeadingTwoNode;
+type BlockquoteNode = { type: 'blockquote' };
+type BlockNode =
+  | ParagraphNode
+  | HeadingOneNode
+  | HeadingTwoNode
+  | BlockquoteNode;
 export type BlockNodeType = $ElementType<BlockNode, 'type'>;
 
 type BoldMark = { type: 'bold' };
@@ -43,7 +51,15 @@ export type MarkType = $ElementType<Mark, 'type'>;
 type Schema = {
   document: {|
     nodes: [
-      { match: [ParagraphNode, ImageNode, HeadingOneNode, HeadingTwoNode] },
+      {
+        match: [
+          ParagraphNode,
+          HeadingOneNode,
+          HeadingTwoNode,
+          BlockquoteNode,
+          ImageNode,
+        ],
+      },
     ],
   |},
   blocks: Object,
@@ -56,9 +72,10 @@ const schema: Schema = {
       {
         match: [
           { type: 'paragraph' },
-          { type: 'image' },
           { type: 'headingOne' },
           { type: 'headingTwo' },
+          { type: 'blockquote' },
+          { type: 'image' },
         ],
       },
     ],
@@ -67,6 +84,7 @@ const schema: Schema = {
     paragraph: { nodes: [{ match: { object: 'text' } }] },
     headingOne: { nodes: [{ match: { object: 'text' } }] },
     headingTwo: { nodes: [{ match: { object: 'text' } }] },
+    blockquote: { nodes: [{ match: { object: 'text' } }] },
     image: { isVoid: true, data: { src: url => url && isURL(url) } },
   },
   marks: [{ type: 'bold' }, { type: 'italic' }],
@@ -108,6 +126,7 @@ type PostTextProps = {|
   commit: SetPostTextCommit,
   store: Store,
   disabled?: boolean,
+  theme: Theme,
 |};
 
 type PostTextState = {|
@@ -150,12 +169,66 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
+  // handleKeySpace = (event, change) => {};
+
+  // On backspace, if at the start of a non-paragraph, convert it back into a
+  // paragraph node.
+  handleKeyBackspace = (event, change) => {
+    const { value } = change;
+    if (value.isExpanded) return;
+    if (value.startOffset !== 0) return;
+
+    const { startBlock } = value;
+    if (startBlock.type === 'paragraph') return;
+
+    event.preventDefault();
+    change.setBlocks('paragraph');
+
+    // if (startBlock.type == 'list-item') {
+    //   change.unwrapBlock('bulleted-list')
+    // }
+
+    return true;
+  };
+
+  // On return, if at the end of a node type that should not be extended,
+  // create a new paragraph below it.
+  hanleKeyEnter = (event, change) => {
+    const { value } = change;
+    if (value.isExpanded) return;
+
+    const { startBlock, startOffset, endOffset } = value;
+    if (startOffset === 0 && startBlock.text.length === 0)
+      return this.handleKeyBackspace(event, change);
+    if (endOffset !== startBlock.text.length) return;
+
+    if (
+      startBlock.type !== 'headingOne' &&
+      startBlock.type !== 'headingTwo' &&
+      startBlock.type !== 'blockquote'
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    change.splitBlock().setBlocks('paragraph');
+    return true;
+  };
+
   // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow.
 
-  handleEditorKeyDown = (event: KeyboardEvent) => {
+  handleEditorKeyDown = (event: KeyboardEvent, change) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
     const { value } = this.state;
+    switch (event.key) {
+      // case ' ':
+      //   return this.handleKeySpace(event, change);
+      case 'Backspace':
+        return this.handleKeyBackspace(event, change);
+      case 'Enter':
+        return this.hanleKeyEnter(event, change);
+    }
     const { mod, alt, key, code } = hotKey(event);
     if (mod && key === 'b') {
       editor.change(toggleMark('bold'));
@@ -185,6 +258,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       case 'HEADING-TWO':
         editor.change(toggleBlocks(value.blocks, 'headingTwo'));
         break;
+      case 'BLOCKQUOTE':
+        editor.change(toggleBlocks(value.blocks, 'blockquote'));
+        break;
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
@@ -203,6 +279,15 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
         return (
           <Block>
             <Text size={size} {...attributes}>
+              {children}
+            </Text>
+          </Block>
+        );
+      }
+      case 'blockquote': {
+        return (
+          <Block style={this.props.theme.styles.postTextBlockquote}>
+            <Text color="gray" {...attributes}>
               {children}
             </Text>
           </Block>
@@ -256,6 +341,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
 export default createFragmentContainer(
   pipe(
+    withTheme,
     injectIntl,
     withStore,
     withMutation(SetPostTextMutation),

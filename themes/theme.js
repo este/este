@@ -21,7 +21,7 @@ const colors = {
   // TODO: Rename to foreground and background to remove all colors[white / black]?
   black: openColorTyped.gray[8],
   white: openColorTyped.white,
-  gray: openColorTyped.gray[5],
+  gray: colorLib(openColorTyped.gray[5]).darken(0.1),
 };
 
 // Is having all themed styles in one file right?
@@ -170,6 +170,12 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.2),
     paddingHorizontal: typography.rhythm(0.5),
   },
+
+  postTextBlockquote: {
+    borderLeftWidth: 2,
+    borderColor: colorLib(colors.gray).lighten(0.1),
+    paddingLeft: typography.rhythm(0.4),
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);
@@ -208,6 +214,10 @@ export const darkTheme: Theme = {
       ...stylesJson.textInput,
       color: colors.white,
       ...fontSmoothing,
+    },
+    postTextBlockquote: {
+      ...stylesJson.postTextBlockquote,
+      borderColor: colorLib(colors.gray).darken(0.2),
     },
   }),
 };
