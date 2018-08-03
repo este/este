@@ -18,7 +18,7 @@ import Block from './core/Block';
 import Text from './core/Text';
 import { View } from 'react-native';
 import PostTextActions, { type PostTextAction } from './PostTextActions';
-import isURL from 'validator/lib/isURL';
+// import isURL from 'validator/lib/isURL';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 
@@ -30,15 +30,17 @@ export const messages = defineMessages({
 });
 
 type ParagraphNode = { type: 'paragraph' };
-type ImageNode = { type: 'image' };
+// type ImageNode = { type: 'image' };
 type HeadingOneNode = { type: 'headingOne' };
 type HeadingTwoNode = { type: 'headingTwo' };
 type BlockquoteNode = { type: 'blockquote' };
+type ListNode = { type: 'list' };
 type BlockNode =
   | ParagraphNode
   | HeadingOneNode
   | HeadingTwoNode
-  | BlockquoteNode;
+  | BlockquoteNode
+  | ListNode;
 export type BlockNodeType = $ElementType<BlockNode, 'type'>;
 
 type BoldMark = { type: 'bold' };
@@ -46,47 +48,51 @@ type ItalicMark = { type: 'italic' };
 type Mark = BoldMark | ItalicMark;
 export type MarkType = $ElementType<Mark, 'type'>;
 
-type Schema = {
-  document: {|
-    nodes: [
-      {
-        match: [
-          ParagraphNode,
-          HeadingOneNode,
-          HeadingTwoNode,
-          BlockquoteNode,
-          ImageNode,
-        ],
-      },
-    ],
-  |},
-  blocks: Object,
-  marks: [BoldMark, ItalicMark],
-};
+// type Schema = {
+//   document: {|
+//     nodes: [
+//       {
+//         match: [
+//           ParagraphNode,
+//           HeadingOneNode,
+//           HeadingTwoNode,
+//           BlockquoteNode,
+//           ListNode,
+//           ImageNode,
+//         ],
+//       },
+//     ],
+//   |},
+//   blocks: Object,
+//   marks: [BoldMark, ItalicMark],
+// };
 
-const schema: Schema = {
-  document: {
-    nodes: [
-      {
-        match: [
-          { type: 'paragraph' },
-          { type: 'headingOne' },
-          { type: 'headingTwo' },
-          { type: 'blockquote' },
-          { type: 'image' },
-        ],
-      },
-    ],
-  },
-  blocks: {
-    paragraph: { nodes: [{ match: { object: 'text' } }] },
-    headingOne: { nodes: [{ match: { object: 'text' } }] },
-    headingTwo: { nodes: [{ match: { object: 'text' } }] },
-    blockquote: { nodes: [{ match: { object: 'text' } }] },
-    image: { isVoid: true, data: { src: url => url && isURL(url) } },
-  },
-  marks: [{ type: 'bold' }, { type: 'italic' }],
-};
+// const schema: Schema = {
+//   document: {
+//     nodes: [
+//       {
+//         match: [
+//           { type: 'paragraph' },
+//           { type: 'headingOne' },
+//           { type: 'headingTwo' },
+//           { type: 'blockquote' },
+//           { type: 'list' },
+//           { type: 'image' },
+//         ],
+//       },
+//     ],
+//   },
+//   blocks: {
+//     paragraph: { nodes: [{ match: { object: 'text' } }] },
+//     headingOne: { nodes: [{ match: { object: 'text' } }] },
+//     headingTwo: { nodes: [{ match: { object: 'text' } }] },
+//     blockquote: { nodes: [{ match: { object: 'text' } }] },
+//     list: { nodes: [{ match: { object: 'text' } }] },
+//     listtem: { nodes: [{ match: { object: 'text' } }] },
+//     image: { isVoid: true, data: { src: url => url && isURL(url) } },
+//   },
+//   marks: [{ type: 'bold' }, { type: 'italic' }],
+// };
 
 const emptyText = {
   document: {
@@ -174,25 +180,24 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (value.isExpanded) return;
 
     const { startBlock, startOffset } = value;
+    const onlyInlines = startBlock.type === 'listItem';
+    if (onlyInlines) return;
     const chars = startBlock.text.slice(0, startOffset).replace(/\s*/g, '');
 
     // Get the block type for a series of auto-markdown shortcut `chars`.
     const type = {
+      '-': 'listItem',
       '>': 'blockquote',
       '#': 'headingOne',
       '##': 'headingTwo',
     }[chars];
 
     if (!type) return;
-    // if (type == 'list-item' && startBlock.type == 'list-item') return
     event.preventDefault();
-
     change.setBlocks(type);
-
-    // if (type == 'list-item') {
-    //   change.wrapBlock('bulleted-list')
-    // }
-
+    if (type === 'listItem') {
+      change.wrapBlock('list');
+    }
     change.extendToStartOf(startBlock).delete();
     return true;
   };
@@ -210,9 +215,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     event.preventDefault();
     change.setBlocks('paragraph');
 
-    // if (startBlock.type == 'list-item') {
-    //   change.unwrapBlock('bulleted-list')
-    // }
+    if (startBlock.type === 'listItem') {
+      change.unwrapBlock('list');
+    }
 
     return true;
   };
@@ -260,7 +265,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       editor.change(toggleMark('bold'));
     } else if (mod && key === 'i') {
       editor.change(toggleMark('italic'));
-    } else if (mod && alt && code === 49) {
+    }
+    const onlyInlines = value.startBlock.type === 'listItem';
+    if (onlyInlines) return;
+    if (mod && alt && code === 49) {
       editor.change(toggleBlocks(value.blocks, 'headingOne'));
     } else if (mod && alt && code === 50) {
       editor.change(toggleBlocks(value.blocks, 'headingTwo'));
@@ -295,6 +303,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
   renderNode = props => {
     const { children, attributes, node } = props;
+    const { styles } = this.props.theme;
     const { type } = node;
     // TODO: Add default with Flow empty.
     switch (type) {
@@ -312,11 +321,25 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       }
       case 'blockquote': {
         return (
-          <Block style={this.props.theme.styles.postTextBlockquote}>
+          <Block style={styles.postTextBlockquote}>
             <Text color="gray" {...attributes}>
               {children}
             </Text>
           </Block>
+        );
+      }
+      case 'list': {
+        return <Block {...attributes}>{children}</Block>;
+      }
+      // Only bullet list. We don't need numbers, they are superfluous.
+      case 'listItem': {
+        return (
+          <Text {...attributes}>
+            <Text style={styles.postTextListItem} contentEditable={false}>
+              •
+            </Text>
+            {children}
+          </Text>
         );
       }
     }
@@ -352,7 +375,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           renderNode={this.renderNode}
           renderMark={this.renderMark}
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
-          schema={schema}
+          // TODO: Update schema for the last specification.
+          // schema={schema}
           onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />

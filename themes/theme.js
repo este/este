@@ -176,6 +176,10 @@ const stylesJson = {
     borderColor: colorLib(colors.gray).lighten(0.1),
     paddingLeft: typography.rhythm(0.4),
   },
+
+  postTextListItem: {
+    paddingHorizontal: typography.rhythm(0.5),
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);

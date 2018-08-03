@@ -21,6 +21,7 @@ export type TextProps = {|
   onMouseEnter?: any,
   onMouseLeave?: any,
   href?: any,
+  contentEditable?: boolean,
 |};
 
 // Strutural aka non-themeable styles.

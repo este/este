@@ -172,24 +172,30 @@ class PostTextActions extends React.PureComponent<
     const { value, onAction, theme } = this.props;
     const { left, top } = this.state;
     if (!el || left == null || top == null) return null;
+    const onlyInlines = value.startBlock.type === 'listItem';
     return ReactDOM.createPortal(
       <View style={[theme.styles.postTextActions, { left, top }]}>
-        <BlockButton
-          action="HEADING-ONE"
-          blockType="headingOne"
-          value={value}
-          onAction={onAction}
-        >
-          1
-        </BlockButton>
-        <BlockButton
-          action="HEADING-TWO"
-          blockType="headingTwo"
-          value={value}
-          onAction={onAction}
-        >
-          2
-        </BlockButton>
+        {/* Ordered by usage */}
+        {!onlyInlines && (
+          <>
+            <BlockButton
+              action="HEADING-ONE"
+              blockType="headingOne"
+              value={value}
+              onAction={onAction}
+            >
+              1
+            </BlockButton>
+            <BlockButton
+              action="HEADING-TWO"
+              blockType="headingTwo"
+              value={value}
+              onAction={onAction}
+            >
+              2
+            </BlockButton>
+          </>
+        )}
         <MarkButton
           action="BOLD"
           markType="bold"
@@ -206,16 +212,19 @@ class PostTextActions extends React.PureComponent<
         >
           i
         </MarkButton>
-        <BlockButton
-          action="BLOCKQUOTE"
-          blockType="blockquote"
-          value={value}
-          onAction={onAction}
-        >
-          {'>'}
-        </BlockButton>
-        {/* {this.renderButton('BOLD', '↗')} */}
-        {/* {this.renderButton('BOLD', '“')} */}
+        {!onlyInlines && (
+          <>
+            <BlockButton
+              action="BLOCKQUOTE"
+              blockType="blockquote"
+              value={value}
+              onAction={onAction}
+            >
+              {'>'}
+            </BlockButton>
+            {/* {this.renderButton('BOLD', '↗')} */}
+          </>
+        )}
       </View>,
       el,
     );
