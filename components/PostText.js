@@ -177,12 +177,15 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   // node into the shortcut's corresponding type.
   handleKeySpace = (event, change) => {
     const { value } = change;
-    if (value.isExpanded) return;
+    const { selection } = value;
+    if (selection.isExpanded) return;
 
-    const { startBlock, startOffset } = value;
+    const { startBlock } = value;
+    const { start } = selection;
+
     const onlyInlines = startBlock.type === 'listItem';
     if (onlyInlines) return;
-    const chars = startBlock.text.slice(0, startOffset).replace(/\s*/g, '');
+    const chars = startBlock.text.slice(0, start.offset).replace(/\s*/g, '');
 
     // Get the block type for a series of auto-markdown shortcut `chars`.
     const type = {
@@ -198,7 +201,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (type === 'listItem') {
       change.wrapBlock('list');
     }
-    change.extendToStartOf(startBlock).delete();
+    change.moveFocusToStartOfNode(startBlock).delete();
     return true;
   };
 
@@ -206,8 +209,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   // paragraph node.
   handleKeyBackspace = (event, change) => {
     const { value } = change;
-    if (value.isExpanded) return;
-    if (value.startOffset !== 0) return;
+    const { selection } = value;
+    if (selection.isExpanded) return;
+    if (selection.start.offset !== 0) return;
 
     const { startBlock } = value;
     if (startBlock.type === 'paragraph') return;
@@ -226,12 +230,14 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   // create a new paragraph below it.
   hanleKeyEnter = (event, change) => {
     const { value } = change;
-    if (value.isExpanded) return;
+    const { selection } = value;
+    const { start, end, isExpanded } = selection;
+    if (isExpanded) return;
 
-    const { startBlock, startOffset, endOffset } = value;
-    if (startOffset === 0 && startBlock.text.length === 0)
+    const { startBlock } = value;
+    if (start.offset === 0 && startBlock.text.length === 0)
       return this.handleKeyBackspace(event, change);
-    if (endOffset !== startBlock.text.length) return;
+    if (end.offset !== startBlock.text.length) return;
 
     if (
       startBlock.type !== 'headingOne' &&

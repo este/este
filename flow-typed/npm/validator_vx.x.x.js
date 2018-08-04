@@ -1,4 +1,4 @@
-// flow-typed signature: 710f30ad0f4eb7b867fed48e9216a763
+// flow-typed signature: 3ad68f0860138dd13e3db845a73380bf
 // flow-typed version: <<STUB>>/validator_v^10.1.0/flow_v0.77.0
 
 /**
@@ -302,6 +302,10 @@ declare module 'validator/lib/util/assertString' {
   declare module.exports: any;
 }
 
+declare module 'validator/lib/util/includes' {
+  declare module.exports: any;
+}
+
 declare module 'validator/lib/util/merge' {
   declare module.exports: any;
 }
@@ -538,6 +542,9 @@ declare module 'validator/lib/unescape.js' {
 }
 declare module 'validator/lib/util/assertString.js' {
   declare module.exports: $Exports<'validator/lib/util/assertString'>;
+}
+declare module 'validator/lib/util/includes.js' {
+  declare module.exports: $Exports<'validator/lib/util/includes'>;
 }
 declare module 'validator/lib/util/merge.js' {
   declare module.exports: $Exports<'validator/lib/util/merge'>;
