@@ -145,6 +145,8 @@ const stylesJson = {
     top: 0,
     paddingHorizontal: typography.rhythm(1),
     paddingVertical: typography.rhythm(0.5),
+    // It's web only style.
+    ...(fontSmoothing: any),
   },
 
   post: {
@@ -169,6 +171,8 @@ const stylesJson = {
   postTextActionsButton: {
     paddingVertical: typography.rhythm(0.2),
     paddingHorizontal: typography.rhythm(0.5),
+    // It's web only style.
+    ...(fontSmoothing: any),
   },
 
   postTextBlockquote: {
@@ -207,17 +211,17 @@ export const darkTheme: Theme = {
   pageBackgroundColor: 'black',
   styles: StyleSheet.create({
     ...stylesJson,
-    // $FlowFixMe I don't know how to add type for fontSmoothing.
     text: {
       ...stylesJson.text,
       color: colors.white,
-      ...fontSmoothing,
+      // It's web only style.
+      ...(fontSmoothing: any),
     },
-    // $FlowFixMe I don't know how to add type for fontSmoothing.
     textInput: {
       ...stylesJson.textInput,
       color: colors.white,
-      ...fontSmoothing,
+      // It's web only style.
+      ...(fontSmoothing: any),
     },
     postTextBlockquote: {
       ...stylesJson.postTextBlockquote,
