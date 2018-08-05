@@ -19,12 +19,6 @@ type PostActionsProps = {|
 |};
 
 class PostActions extends React.PureComponent<PostActionsProps> {
-  handleViewKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      this.props.onAction({ type: 'EXPAND', value: false });
-    }
-  };
-
   handleExpandButtonPress = () => {
     this.props.onAction({ type: 'EXPAND', value: true });
   };
@@ -39,10 +33,7 @@ class PostActions extends React.PureComponent<PostActionsProps> {
 
   render() {
     return (
-      <View
-        style={this.props.theme.styles.postActions}
-        onKeyDown={this.handleViewKeyDown}
-      >
+      <View style={this.props.theme.styles.postActions}>
         {!this.props.expanded ? (
           <Row>
             <Button onPress={this.handleExpandButtonPress}>—</Button>
