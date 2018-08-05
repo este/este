@@ -175,6 +175,15 @@ const stylesJson = {
     ...(fontSmoothing: any),
   },
 
+  postTextActionsLink: {
+    color: colors.white,
+    fontFamily,
+    paddingVertical: typography.rhythm(0.2),
+    paddingHorizontal: typography.rhythm(0.2),
+    // It's web only style.
+    ...(fontSmoothing: any),
+  },
+
   postTextBlockquote: {
     borderLeftWidth: 2,
     borderColor: colorLib(colors.gray).lighten(0.1),

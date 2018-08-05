@@ -11,7 +11,7 @@ export type ButtonProps = {|
   accessible?: boolean,
   accessibilityLabel?: string,
   disabled?: boolean,
-  onPress?: () => void,
+  onPress?: Event => void,
   onPressIn?: Event => void,
   onFocus?: () => void,
   onBlur?: () => void,

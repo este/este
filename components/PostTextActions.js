@@ -6,43 +6,37 @@ import { View } from 'react-native';
 import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
 import type { MarkType, BlockNodeType } from './PostText';
+import PostTextActionsLink from './PostTextActionsLink';
 
 export type PostTextAction =
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
   | {| type: 'HEADING-TWO' |}
-  | {| type: 'BLOCKQUOTE' |};
-// | {| type: 'LINK' |}
-// | {| type: 'QUOTE' |}
+  | {| type: 'BLOCKQUOTE' |}
+  | {| type: 'LINK', href: string |}
+  | {| type: 'FOCUS' |};
 
-type PostTextActionType = $ElementType<PostTextAction, 'type'>;
+type PostTextActionsView = 'actions' | 'link';
 
 type SlateObject = Object;
 
-type OnAction = (action: PostTextAction) => void;
-
 type ActionButtonProps = {|
-  value: SlateObject,
-  onAction: OnAction,
-  action: PostTextActionType,
   isActive: boolean,
-  children: React.Node,
+  onPress: () => void,
   theme: Theme,
+  children: React.Node,
 |};
 
-class ActionButton extends React.PureComponent<ActionButtonProps> {
-  handleButtonOnPressIn = (event: Event) => {
-    event.preventDefault();
-    // $FlowFixMe Probably Flow bug.
-    this.props.onAction({ type: this.props.action });
-  };
-  render() {
-    const { theme, isActive, children } = this.props;
+const handlePreventDefault = event => event.preventDefault();
+
+const ActionButton = withTheme(
+  ({ isActive, onPress, theme, children }: ActionButtonProps) => {
     const color = isActive ? 'success' : 'gray';
     return (
       <Button
-        onPressIn={this.handleButtonOnPressIn}
+        onPressIn={handlePreventDefault}
+        onPress={onPress}
         color={color}
         bold
         style={theme.styles.postTextActionsButton}
@@ -50,66 +44,140 @@ class ActionButton extends React.PureComponent<ActionButtonProps> {
         {children}
       </Button>
     );
-  }
-}
+  },
+);
 
-const ActionButtonWithTheme = withTheme(ActionButton);
-
-type MarkButtonProps = {
-  value: SlateObject,
-  onAction: OnAction,
-  action: PostTextActionType,
+type MarkButtonProps = {|
+  activeMarks: Array<Object>,
+  onPress: () => void,
   markType: MarkType,
   children: React.Node,
-};
+|};
 
 const MarkButton = ({
-  value,
-  onAction,
-  action,
+  activeMarks,
+  onPress,
   markType,
   children,
 }: MarkButtonProps) => {
-  const isActive = value.activeMarks.some(mark => mark.type === markType);
+  const isActive = activeMarks.some(mark => mark.type === markType);
   return (
-    <ActionButtonWithTheme
-      value={value}
-      onAction={onAction}
-      action={action}
-      isActive={isActive}
-    >
+    <ActionButton onPress={onPress} isActive={isActive}>
       {children}
-    </ActionButtonWithTheme>
+    </ActionButton>
   );
 };
 
-type BlockButtonProps = {
-  value: SlateObject,
-  onAction: OnAction,
-  action: PostTextActionType,
+type BlockButtonProps = {|
+  blocks: Object,
+  onPress: () => void,
   blockType: BlockNodeType,
   children: React.Node,
-};
+|};
 
 const BlockButton = ({
-  value,
-  onAction,
-  action,
+  blocks,
+  onPress,
   blockType,
   children,
 }: BlockButtonProps) => {
-  const isActive = value.blocks.some(node => node.type === blockType);
+  const isActive = blocks.some(node => node.type === blockType);
   return (
-    <ActionButtonWithTheme
-      value={value}
-      onAction={onAction}
-      action={action}
-      isActive={isActive}
-    >
+    <ActionButton onPress={onPress} isActive={isActive}>
       {children}
-    </ActionButtonWithTheme>
+    </ActionButton>
   );
 };
+
+const LinkButton = ({ inlines, onPress }) => {
+  const isActive = inlines.some(inline => inline.type === 'link');
+  return (
+    <ActionButton isActive={isActive} onPress={onPress}>
+      →
+    </ActionButton>
+  );
+};
+
+type ActionsProps = {|
+  value: SlateObject,
+  onAction: PostTextAction => void,
+  onSelectView: PostTextActionsView => void,
+|};
+
+class Actions extends React.PureComponent<ActionsProps> {
+  handleHeadingOnePress = () => {
+    this.props.onAction({ type: 'HEADING-ONE' });
+  };
+
+  handleHeadingTwoPress = () => {
+    this.props.onAction({ type: 'HEADING-TWO' });
+  };
+
+  handleBlockquotePress = () => {
+    this.props.onAction({ type: 'BLOCKQUOTE' });
+  };
+
+  handleBoldPress = () => {
+    this.props.onAction({ type: 'BOLD' });
+  };
+
+  handleItalicPress = () => {
+    this.props.onAction({ type: 'ITALIC' });
+  };
+
+  handleLinkPress = () => {
+    this.props.onSelectView('link');
+  };
+
+  render() {
+    const { value } = this.props;
+    const noBlockEdit = value.startBlock.type === 'listItem';
+    return (
+      <>
+        {!noBlockEdit && (
+          <>
+            <BlockButton
+              onPress={this.handleHeadingOnePress}
+              blockType="headingOne"
+              blocks={value.blocks}
+            >
+              1
+            </BlockButton>
+            <BlockButton
+              onPress={this.handleHeadingTwoPress}
+              blockType="headingTwo"
+              blocks={value.blocks}
+            >
+              2
+            </BlockButton>
+            <BlockButton
+              onPress={this.handleBlockquotePress}
+              blockType="blockquote"
+              blocks={value.blocks}
+            >
+              {'"'}
+            </BlockButton>
+          </>
+        )}
+        <MarkButton
+          onPress={this.handleBoldPress}
+          markType="bold"
+          activeMarks={value.activeMarks}
+        >
+          b
+        </MarkButton>
+        <MarkButton
+          onPress={this.handleItalicPress}
+          markType="italic"
+          activeMarks={value.activeMarks}
+        >
+          i
+        </MarkButton>
+        <LinkButton onPress={this.handleLinkPress} inlines={value.inlines} />
+      </>
+    );
+  }
+}
 
 type PostTextActionsProps = {|
   value: SlateObject,
@@ -120,6 +188,7 @@ type PostTextActionsProps = {|
 type PostTextActionsState = {|
   left: ?number,
   top: ?number,
+  view: PostTextActionsView,
 |};
 
 class PostTextActions extends React.PureComponent<
@@ -129,31 +198,45 @@ class PostTextActions extends React.PureComponent<
   state = {
     left: null,
     top: null,
+    view: 'actions',
   };
 
   componentDidMount() {
     this.el = window.document.createElement('div');
     this.modalRoot = window.document.getElementById('__next');
     this.modalRoot.appendChild(this.el);
-    this.setLeftTopState();
+    this.maybeSetLeftTopState();
   }
 
   componentDidUpdate() {
     // setState in componentDidUpdate is valid for tooltips.
     // https://reactjs.org/docs/react-component.html#componentdidmount
-    this.setLeftTopState();
+    this.maybeSetLeftTopState();
   }
 
   componentWillUnmount() {
     if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
   }
 
-  setLeftTopState() {
-    const { value } = this.props;
-    if (value.isBlurred || value.isEmpty) {
-      this.setState({ left: null, top: null });
-      return;
-    }
+  setLinkView() {
+    this.setState({ view: 'link' });
+  }
+
+  handleActionsSelectView = (view: PostTextActionsView) => {
+    this.setState({ view });
+  };
+
+  handlePostTextActionsLinkCancel = focusEditor => {
+    this.setState({ view: 'actions' }, () => {
+      if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
+    });
+  };
+
+  modalRoot: ?HTMLDivElement;
+  el: ?HTMLDivElement;
+
+  maybeSetLeftTopState() {
+    if (!this.canReadLeftTop()) return;
     const selectionRect = window
       .getSelection()
       .getRangeAt(0)
@@ -164,71 +247,68 @@ class PostTextActions extends React.PureComponent<
     });
   }
 
-  el: ?HTMLDivElement;
-  modalRoot: ?HTMLDivElement;
+  canReadLeftTop() {
+    const { value } = this.props;
+    return this.state.view === 'actions' && !value.isEmpty && !value.isBlurred;
+  }
+
+  shouldRenderView() {
+    const { value } = this.props;
+    const { view } = this.state;
+    switch (view) {
+      case 'actions':
+        return !value.isEmpty && !value.isBlurred;
+      case 'link':
+        // Because TextInput steals the focus.
+        return !value.isEmpty;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (view: empty);
+    }
+  }
+
+  renderView() {
+    const { value, onAction } = this.props;
+    const { view } = this.state;
+    switch (view) {
+      case 'actions':
+        return (
+          <Actions
+            value={value}
+            onAction={onAction}
+            onSelectView={this.handleActionsSelectView}
+          />
+        );
+      case 'link':
+        return (
+          <PostTextActionsLink
+            onCancel={this.handlePostTextActionsLinkCancel}
+          />
+        );
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (view: empty);
+        return null;
+    }
+  }
 
   render() {
-    const el = this.el;
-    const { value, onAction, theme } = this.props;
+    const { theme } = this.props;
     const { left, top } = this.state;
+    const { el } = this;
     if (!el || left == null || top == null) return null;
-    const onlyInlines = value.startBlock.type === 'listItem';
+    if (!this.shouldRenderView()) return null;
+
     return ReactDOM.createPortal(
       <View style={[theme.styles.postTextActions, { left, top }]}>
-        {/* Ordered by usage */}
-        {!onlyInlines && (
-          <>
-            <BlockButton
-              action="HEADING-ONE"
-              blockType="headingOne"
-              value={value}
-              onAction={onAction}
-            >
-              1
-            </BlockButton>
-            <BlockButton
-              action="HEADING-TWO"
-              blockType="headingTwo"
-              value={value}
-              onAction={onAction}
-            >
-              2
-            </BlockButton>
-          </>
-        )}
-        <MarkButton
-          action="BOLD"
-          markType="bold"
-          value={value}
-          onAction={onAction}
-        >
-          B
-        </MarkButton>
-        <MarkButton
-          action="ITALIC"
-          markType="italic"
-          value={value}
-          onAction={onAction}
-        >
-          i
-        </MarkButton>
-        {!onlyInlines && (
-          <>
-            <BlockButton
-              action="BLOCKQUOTE"
-              blockType="blockquote"
-              value={value}
-              onAction={onAction}
-            >
-              {'>'}
-            </BlockButton>
-            {/* {this.renderButton('BOLD', '↗')} */}
-          </>
-        )}
+        {this.renderView()}
       </View>,
       el,
     );
   }
 }
+
+// This is workaround for https://github.com/este/este/issues/1571
+export type PostTextActionsType = typeof PostTextActions;
 
 export default withTheme(PostTextActions);

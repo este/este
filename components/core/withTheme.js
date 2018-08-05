@@ -10,7 +10,7 @@ const withTheme = <Props: {}>(
 ): React.ComponentType<$Diff<Props, { theme: Theme | void }>> => {
   class WithTheme extends React.PureComponent<Props> {
     render() {
-      // $FlowFixMe
+      // $FlowFixMe Should be added?
       const { forwardedRef, ...rest } = this.props;
       return (
         <ThemeContext.Consumer>
@@ -19,7 +19,7 @@ const withTheme = <Props: {}>(
       );
     }
   }
-  // $FlowFixMe
+  // $FlowFixMe Missing React.forwardRef definition in Flow.
   return React.forwardRef((props, ref) => {
     return <WithTheme {...props} forwardedRef={ref} />;
   });

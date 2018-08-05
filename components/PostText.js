@@ -17,7 +17,10 @@ import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
 import { View } from 'react-native';
-import PostTextActions, { type PostTextAction } from './PostTextActions';
+import PostTextActions, {
+  type PostTextAction,
+  type PostTextActionsType,
+} from './PostTextActions';
 // import isURL from 'validator/lib/isURL';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
@@ -48,6 +51,7 @@ type ItalicMark = { type: 'italic' };
 type Mark = BoldMark | ItalicMark;
 export type MarkType = $ElementType<Mark, 'type'>;
 
+// TODO: Update schema for current specification.
 // type Schema = {
 //   document: {|
 //     nodes: [
@@ -91,7 +95,7 @@ export type MarkType = $ElementType<Mark, 'type'>;
 //     listtem: { nodes: [{ match: { object: 'text' } }] },
 //     image: { isVoid: true, data: { src: url => url && isURL(url) } },
 //   },
-//   marks: [{ type: 'bold' }, { type: 'italic' }],
+//   marks: [{ type: 'bold' }, { type: 'italic' }, { type: 'link' }],
 // };
 
 const emptyText = {
@@ -147,6 +151,13 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   }, onChangeTextThrottle);
 
   editorRef = React.createRef();
+  // This would be ideal, but: https://github.com/este/este/issues/1571
+  // postTextActionsRef: {
+  //   current: null | React.ElementRef<typeof PostTextActions>,
+  // } = React.createRef();
+  postTextActionsRef: {
+    current: null | React.ElementRef<PostTextActionsType>,
+  } = React.createRef();
 
   constructor(props) {
     super(props);
@@ -202,7 +213,6 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       change.wrapBlock('list');
     }
     change.moveFocusToStartOfNode(startBlock).delete();
-    return true;
   };
 
   // On backspace, if at the start of a non-paragraph, convert it back into a
@@ -222,13 +232,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (startBlock.type === 'listItem') {
       change.unwrapBlock('list');
     }
-
-    return true;
   };
 
   // On return, if at the end of a node type that should not be extended,
   // create a new paragraph below it.
-  hanleKeyEnter = (event, change) => {
+  handleKeyEnter = (event, change) => {
     const { value } = change;
     const { selection } = value;
     const { start, end, isExpanded } = selection;
@@ -249,35 +257,53 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
     event.preventDefault();
     change.splitBlock().setBlocks('paragraph');
-    return true;
   };
-
-  // TODO: Merge handleEditorKeyDown and handlePostTextActionsAction somehow.
 
   handleEditorKeyDown = (event: KeyboardEvent, change) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
     const { value } = this.state;
-    switch (event.key) {
-      case ' ':
-        return this.handleKeySpace(event, change);
-      case 'Backspace':
-        return this.handleKeyBackspace(event, change);
-      case 'Enter':
-        return this.hanleKeyEnter(event, change);
-    }
     const { mod, alt, key, code } = hotKey(event);
-    if (mod && key === 'b') {
-      editor.change(toggleMark('bold'));
-    } else if (mod && key === 'i') {
-      editor.change(toggleMark('italic'));
+
+    switch (key) {
+      case ' ':
+        this.handleKeySpace(event, change);
+        return;
+      case 'Backspace':
+        this.handleKeyBackspace(event, change);
+        return;
+      case 'Enter':
+        this.handleKeyEnter(event, change);
+        return;
     }
+
+    if (!mod) return;
+    switch (key) {
+      case 'b':
+        editor.change(toggleMark('bold'));
+        return;
+      case 'i':
+        editor.change(toggleMark('italic'));
+        return;
+      case 'k': {
+        if (value.isEmpty) return;
+        const { current: postTextActions } = this.postTextActionsRef;
+        if (postTextActions == null) return;
+        postTextActions.setLinkView();
+        return;
+      }
+    }
+
+    if (!alt) return;
     const onlyInlines = value.startBlock.type === 'listItem';
     if (onlyInlines) return;
-    if (mod && alt && code === 49) {
-      editor.change(toggleBlocks(value.blocks, 'headingOne'));
-    } else if (mod && alt && code === 50) {
-      editor.change(toggleBlocks(value.blocks, 'headingTwo'));
+    switch (code) {
+      case 49:
+        editor.change(toggleBlocks(value.blocks, 'headingOne'));
+        break;
+      case 50:
+        editor.change(toggleBlocks(value.blocks, 'headingTwo'));
+        break;
     }
   };
 
@@ -292,6 +318,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       case 'ITALIC':
         editor.change(toggleMark('italic'));
         break;
+      case 'LINK':
+        // editor.change(toggleMark('italic'));
+        // console.log('link');
+        break;
       case 'HEADING-ONE':
         editor.change(toggleBlocks(value.blocks, 'headingOne'));
         break;
@@ -300,6 +330,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
         break;
       case 'BLOCKQUOTE':
         editor.change(toggleBlocks(value.blocks, 'blockquote'));
+        break;
+      case 'FOCUS':
+        editor.focus();
         break;
       default:
         // eslint-disable-next-line no-unused-expressions
@@ -381,12 +414,13 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           renderNode={this.renderNode}
           renderMark={this.renderMark}
           placeholder={this.props.intl.formatMessage(messages.placeholder)}
-          // TODO: Update schema for the last specification.
           // schema={schema}
           onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />
         <PostTextActions
+          // $FlowFixMe https://github.com/este/este/issues/1571
+          ref={this.postTextActionsRef}
           value={this.state.value}
           onAction={this.handlePostTextActionsAction}
         />
