@@ -3,11 +3,11 @@ import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { pipe } from 'ramda';
-// import isURL from 'validator/lib/isURL';
 
 type LinkProps = {|
   theme: Theme,
   onCancel: (focusEditor: ?boolean) => void,
+  onSubmit: (href: string) => void,
 |};
 
 type LinkState = {|
@@ -31,6 +31,8 @@ class Link extends React.PureComponent<LinkProps, LinkState> {
     const text = this.state.text.trim();
     if (text.length === 0) {
       this.props.onCancel(true);
+    } else {
+      this.props.onSubmit(text);
     }
   };
 

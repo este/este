@@ -14,7 +14,7 @@ export type PostTextAction =
   | {| type: 'HEADING-ONE' |}
   | {| type: 'HEADING-TWO' |}
   | {| type: 'BLOCKQUOTE' |}
-  | {| type: 'LINK', href: string |}
+  | {| type: 'LINK', href: ?string |}
   | {| type: 'FOCUS' |};
 
 type PostTextActionsView = 'actions' | 'link';
@@ -89,8 +89,7 @@ const BlockButton = ({
   );
 };
 
-const LinkButton = ({ inlines, onPress }) => {
-  const isActive = inlines.some(inline => inline.type === 'link');
+const LinkButton = ({ isActive, onPress }) => {
   return (
     <ActionButton isActive={isActive} onPress={onPress}>
       →
@@ -126,8 +125,17 @@ class Actions extends React.PureComponent<ActionsProps> {
   };
 
   handleLinkPress = () => {
-    this.props.onSelectView('link');
+    if (this.hasLinks()) {
+      this.props.onAction({ type: 'LINK', href: null });
+    } else {
+      this.props.onSelectView('link');
+    }
   };
+
+  hasLinks() {
+    const { value } = this.props;
+    return value.inlines.some(inline => inline.type === 'link');
+  }
 
   render() {
     const { value } = this.props;
@@ -173,7 +181,7 @@ class Actions extends React.PureComponent<ActionsProps> {
         >
           i
         </MarkButton>
-        <LinkButton onPress={this.handleLinkPress} inlines={value.inlines} />
+        <LinkButton onPress={this.handleLinkPress} isActive={this.hasLinks()} />
       </>
     );
   }
@@ -218,10 +226,6 @@ class PostTextActions extends React.PureComponent<
     if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
   }
 
-  setLinkView() {
-    this.setState({ view: 'link' });
-  }
-
   handleActionsSelectView = (view: PostTextActionsView) => {
     this.setState({ view });
   };
@@ -231,6 +235,22 @@ class PostTextActions extends React.PureComponent<
       if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
     });
   };
+
+  handlePostTextActionsLinkSubmit = href => {
+    this.setState({ view: 'actions' }, () => {
+      this.props.onAction({ type: 'LINK', href });
+    });
+  };
+
+  toggleLinks() {
+    const { value } = this.props;
+    const hasLinks = value.inlines.some(inline => inline.type === 'link');
+    if (hasLinks) {
+      this.props.onAction({ type: 'LINK', href: null });
+    } else {
+      this.setState({ view: 'link' });
+    }
+  }
 
   modalRoot: ?HTMLDivElement;
   el: ?HTMLDivElement;
@@ -283,6 +303,7 @@ class PostTextActions extends React.PureComponent<
         return (
           <PostTextActionsLink
             onCancel={this.handlePostTextActionsLinkCancel}
+            onSubmit={this.handlePostTextActionsLinkSubmit}
           />
         );
       default:

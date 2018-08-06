@@ -24,6 +24,8 @@ import PostTextActions, {
 // import isURL from 'validator/lib/isURL';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
+import A from './core/A';
+import { parse } from 'url';
 
 export const messages = defineMessages({
   placeholder: {
@@ -119,15 +121,6 @@ const emptyText = {
   },
 };
 
-const toggleMark = (mark: MarkType) => change => {
-  change.toggleMark(mark);
-};
-
-const toggleBlocks = (blocks, type: BlockNodeType) => change => {
-  const isActive = blocks.some(node => node.type === type);
-  change.setBlocks(isActive ? 'paragraph' : type);
-};
-
 type PostTextProps = {|
   data: generated.PostText,
   intl: IntlShape,
@@ -142,6 +135,28 @@ type PostTextState = {|
 |};
 
 class PostText extends React.PureComponent<PostTextProps, PostTextState> {
+  static toggleMark(editor, mark: MarkType) {
+    editor.change(change => {
+      change.toggleMark(mark);
+    });
+  }
+
+  static toggleLinks(editor, href) {
+    editor.change(change => {
+      if (href != null) {
+        const parsed = parse(href);
+        const isProtoless = !parsed.protocol && !!parsed.pathname;
+        const protocol = isProtoless ? 'https://' : '';
+        change
+          .wrapInline({ type: 'link', data: { href: `${protocol}${href}` } })
+          .moveToEnd()
+          .focus();
+      } else {
+        change.unwrapInline('link');
+      }
+    });
+  }
+
   throttleCommit = throttle(text => {
     const input = {
       id: this.props.data.id,
@@ -280,16 +295,16 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (!mod) return;
     switch (key) {
       case 'b':
-        editor.change(toggleMark('bold'));
+        PostText.toggleMark(editor, 'bold');
         return;
       case 'i':
-        editor.change(toggleMark('italic'));
+        PostText.toggleMark(editor, 'italic');
         return;
       case 'k': {
         if (value.isEmpty) return;
         const { current: postTextActions } = this.postTextActionsRef;
         if (postTextActions == null) return;
-        postTextActions.setLinkView();
+        postTextActions.toggleLinks();
         return;
       }
     }
@@ -299,10 +314,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (onlyInlines) return;
     switch (code) {
       case 49:
-        editor.change(toggleBlocks(value.blocks, 'headingOne'));
+        this.toggleBlocks(editor, 'headingOne');
         break;
       case 50:
-        editor.change(toggleBlocks(value.blocks, 'headingTwo'));
+        this.toggleBlocks(editor, 'headingTwo');
         break;
     }
   };
@@ -310,26 +325,24 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   handlePostTextActionsAction = (action: PostTextAction) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
-    const { value } = this.state;
     switch (action.type) {
       case 'BOLD':
-        editor.change(toggleMark('bold'));
+        PostText.toggleMark(editor, 'bold');
         break;
       case 'ITALIC':
-        editor.change(toggleMark('italic'));
+        PostText.toggleMark(editor, 'italic');
         break;
       case 'LINK':
-        // editor.change(toggleMark('italic'));
-        // console.log('link');
+        PostText.toggleLinks(editor, action.href);
         break;
       case 'HEADING-ONE':
-        editor.change(toggleBlocks(value.blocks, 'headingOne'));
+        this.toggleBlocks(editor, 'headingOne');
         break;
       case 'HEADING-TWO':
-        editor.change(toggleBlocks(value.blocks, 'headingTwo'));
+        this.toggleBlocks(editor, 'headingTwo');
         break;
       case 'BLOCKQUOTE':
-        editor.change(toggleBlocks(value.blocks, 'blockquote'));
+        this.toggleBlocks(editor, 'blockquote');
         break;
       case 'FOCUS':
         editor.focus();
@@ -340,8 +353,16 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
+  toggleBlocks(editor, type: BlockNodeType) {
+    const { value } = this.state;
+    editor.change(change => {
+      const isActive = value.blocks.some(node => node.type === type);
+      change.setBlocks(isActive ? 'paragraph' : type);
+    });
+  }
+
   renderNode = props => {
-    const { children, attributes, node } = props;
+    const { attributes, node, children } = props;
     const { styles } = this.props.theme;
     const { type } = node;
     // TODO: Add default with Flow empty.
@@ -379,6 +400,15 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
             </Text>
             {children}
           </Text>
+        );
+      }
+      case 'link': {
+        const { data } = node;
+        const href = data.get('href');
+        return (
+          <A {...attributes} href={href}>
+            {children}
+          </A>
         );
       }
     }

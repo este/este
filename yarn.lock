@@ -1805,8 +1805,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.286.2"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.286.2.tgz#0f35a1b3158049c015161ed83872a38305a7908a"
+  version "2.287.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.287.0.tgz#1f43b4feabde00d8d645fcdfd679c435763dc187"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -1823,8 +1823,8 @@ aws-sign2@~0.7.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
 
 aws4@^1.6.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
 axobject-query@^2.0.1:
   version "2.0.1"
@@ -8711,8 +8711,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
 
 path-to-regexp@0.1.7:
   version "0.1.7"
@@ -8893,8 +8893,8 @@ pn@^1.1.0:
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
 
 portfinder@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.15.tgz#28990f8a1d2794a5709010b25d9f6d90fcc2fa14"
   dependencies:
     async "^1.5.2"
     debug "^2.2.0"
@@ -8965,9 +8965,9 @@ prisma-binding@^2.0.2:
     subscriptions-transport-ws "0.9.8"
     yargs "12.0.1"
 
-prisma-cli-core@1.0.66:
-  version "1.0.66"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.66.tgz#b6553c23e2890b730b8d4b4df5507197a8f37251"
+prisma-cli-core@1.0.67:
+  version "1.0.67"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.0.67.tgz#6d261d6baf42ce270cd9b30f6e4c87ee1161e564"
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -9000,9 +9000,9 @@ prisma-cli-core@1.0.66:
     opn "^5.1.0"
     pause "^0.1.0"
     portfinder "^1.0.13"
-    prisma-db-introspection "0.0.36"
+    prisma-db-introspection "0.0.37"
     prisma-json-schema "0.0.4"
-    prisma-yml "1.0.81"
+    prisma-yml "1.0.82"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -9011,9 +9011,9 @@ prisma-cli-core@1.0.66:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.0.69:
-  version "1.0.69"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.69.tgz#a2508d6493e360023909f15224ff47b736e8aeee"
+prisma-cli-engine@1.0.70:
+  version "1.0.70"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.0.70.tgz#a15c4300473df61a32d73b644b7c611e3e4755fa"
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -9055,7 +9055,7 @@ prisma-cli-engine@1.0.69:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "0.0.4"
-    prisma-yml "1.0.81"
+    prisma-yml "1.0.82"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -9070,9 +9070,9 @@ prisma-cli-engine@1.0.69:
     update-notifier "^2.3.0"
     validator "^8.2.0"
 
-prisma-db-introspection@0.0.36:
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-0.0.36.tgz#2f34281cf1d4b66be1b95c2e5016e27443c1cad1"
+prisma-db-introspection@0.0.37:
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-0.0.37.tgz#5acf1d10f3d9834f6b51ed594134ea89e1eacd5a"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -9123,9 +9123,9 @@ prisma-yml@1.0.50:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma-yml@1.0.81:
-  version "1.0.81"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.81.tgz#10a08c247ad3e79acf854bceca301ff8b1a02a33"
+prisma-yml@1.0.82:
+  version "1.0.82"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.82.tgz#83bf473221854ca0b71a1b03cd4ba3df1b5a9a9a"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -9147,12 +9147,12 @@ prisma-yml@1.0.81:
     yaml-ast-parser "^0.0.40"
 
 prisma@^1.2.4:
-  version "1.13.5"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.13.5.tgz#b75d4e86688d2e2b3aafee891cd5a4377cc752ea"
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.13.6.tgz#0f0831558a86a1938895055ce9a296b6a6781f33"
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.0.66"
-    prisma-cli-engine "1.0.69"
+    prisma-cli-core "1.0.67"
+    prisma-cli-engine "1.0.70"
     semver "^5.4.1"
     source-map-support "^0.4.18"
 
@@ -10081,8 +10081,8 @@ sax@~1.1.1:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.1.6.tgz#5d616be8a5e607d54e114afae55b7eaf2fcc3240"
 
 schema-utils@^0.4.2:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.5.tgz#21836f0608aac17b78f9e3e24daff14a5ca13a3e"
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.6.tgz#dab4516a656310a964ca772bd3771819ba2b5cec"
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
@@ -10289,9 +10289,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.46:
-  version "0.2.46"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.46.tgz#51c059008ac6144b0ef90072b9c1209552c320bf"
+slate-base64-serializer@^0.2.47:
+  version "0.2.47"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.47.tgz#f7dbc62246d8eb0eef4f6a93a9f387575ab89554"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10312,21 +10312,21 @@ slate-hotkeys@^0.1.4:
     is-hotkey "^0.1.1"
     slate-dev-environment "^0.1.4"
 
-slate-plain-serializer@^0.5.27:
-  version "0.5.27"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.27.tgz#79627ed0e787805f9c594fa485abcac49d08e1e0"
+slate-plain-serializer@^0.5.28:
+  version "0.5.28"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.5.28.tgz#4c872a5044333229804c9140fc1a66792fdd2e99"
   dependencies:
     slate-dev-logger "^0.1.42"
 
-slate-prop-types@^0.4.44:
-  version "0.4.44"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.44.tgz#7098d849dbc0374544458d5a9d293213db70bd84"
+slate-prop-types@^0.4.45:
+  version "0.4.45"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.45.tgz#7110f3fbb7a4356182144d6f0579fd36694bae30"
   dependencies:
     slate-dev-logger "^0.1.42"
 
 slate-react@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.15.0.tgz#776a102cb5265fb3e5bf532854cae9dd799a3811"
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.15.1.tgz#2731f31be6b80fc3f0cdead8523562665433d0cb"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10337,20 +10337,20 @@ slate-react@^0.15.0:
     react-immutable-proptypes "^2.1.0"
     react-portal "^3.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.46"
+    slate-base64-serializer "^0.2.47"
     slate-dev-environment "^0.1.4"
     slate-dev-logger "^0.1.42"
     slate-hotkeys "^0.1.4"
-    slate-plain-serializer "^0.5.27"
-    slate-prop-types "^0.4.44"
+    slate-plain-serializer "^0.5.28"
+    slate-prop-types "^0.4.45"
 
-slate-schema-violations@^0.1.25:
-  version "0.1.25"
-  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.25.tgz#2fc6c599395b9120f9c0e21c8d020ff06dd4f02e"
+slate-schema-violations@^0.1.26:
+  version "0.1.26"
+  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.26.tgz#6613f98a62ed1516a6d517f6df4881850a15d987"
 
 slate@^0.37.0:
-  version "0.37.0"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.37.0.tgz#1e804e36fa09f6da8f187b39d9f6fcc38194d4ed"
+  version "0.37.1"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.37.1.tgz#47d39ad9d39beaed13d5ceb3c58845fa0c652677"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -10359,7 +10359,7 @@ slate@^0.37.0:
     is-plain-object "^2.0.4"
     lodash "^4.17.4"
     slate-dev-logger "^0.1.42"
-    slate-schema-violations "^0.1.25"
+    slate-schema-violations "^0.1.26"
     type-of "^2.0.1"
 
 slice-ansi@1.0.0:
