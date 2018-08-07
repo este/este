@@ -45,7 +45,9 @@
     "deps": "rimraf 'node_modules' 'yarn.lock' 'flow-typed' && yarn && flow-typed install",
     "env": "node -r esm -r flow-remove-types/register ./scripts/env",
     "analyze:bundles": "cross-env ANALYZE=BUNDLES next build",
-    "analyze:size": "cross-env ANALYZE=SIZE next build && cat '.next/stats.txt'"
+    "analyze:size": "cross-env ANALYZE=SIZE next build && cat '.next/stats.txt'",
+    "docker:up": "cd database && docker-compose up -d && cd ../",
+    "docker:down": "cd database && docker-compose down && cd ../"
   },
   "dependencies": {
     "accepts": "^1.3.3",
