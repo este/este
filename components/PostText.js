@@ -152,7 +152,10 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
           .moveToEnd()
           .focus();
       } else {
-        change.unwrapInline('link');
+        change
+          .unwrapInline('link')
+          .moveToEnd()
+          .focus();
       }
     });
   }

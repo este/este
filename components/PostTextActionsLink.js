@@ -1,20 +1,23 @@
 // @flow
 import * as React from 'react';
-import { View, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { pipe } from 'ramda';
 
-type LinkProps = {|
+type PostTextActionsLinkProps = {|
   theme: Theme,
   onCancel: (focusEditor: ?boolean) => void,
   onSubmit: (href: string) => void,
 |};
 
-type LinkState = {|
+type PostTextActionsLinkState = {|
   text: string,
 |};
 
-class Link extends React.PureComponent<LinkProps, LinkState> {
+class PostTextActionsLink extends React.PureComponent<
+  PostTextActionsLinkProps,
+  PostTextActionsLinkState,
+> {
   state = {
     text: '',
   };
@@ -40,24 +43,22 @@ class Link extends React.PureComponent<LinkProps, LinkState> {
     const { theme } = this.props;
     const { text } = this.state;
     return (
-      <View>
-        <TextInput
-          autoFocus
-          onBlur={this.handleTextInputBlur}
-          onChangeText={this.handleTextInputChangeText}
-          keyboardType="url"
-          value={text}
-          onSubmitEditing={this.handleTextInputSubmitEditing}
-          style={[
-            theme.styles.postTextActionsLink,
-            theme.typography.fontSizeWithLineHeight(-1),
-          ]}
-          blurOnSubmit={false}
-          placeholder="example.com"
-        />
-      </View>
+      <TextInput
+        autoFocus
+        onBlur={this.handleTextInputBlur}
+        onChangeText={this.handleTextInputChangeText}
+        keyboardType="url"
+        value={text}
+        onSubmitEditing={this.handleTextInputSubmitEditing}
+        style={[
+          theme.styles.postTextActionsLink,
+          theme.typography.fontSizeWithLineHeight(-1),
+        ]}
+        blurOnSubmit={false}
+        placeholder="example.com"
+      />
     );
   }
 }
 
-export default pipe(withTheme)(Link);
+export default pipe(withTheme)(PostTextActionsLink);

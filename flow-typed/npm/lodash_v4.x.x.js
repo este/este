@@ -1,5 +1,5 @@
-// flow-typed signature: e72b0630b0d5f59be7b98f3b7e446af1
-// flow-typed version: 88076bb9e6/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 68c8669a1e518a4cae4d42ebd449569e
+// flow-typed version: 6f07eebf2a/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
@@ -1212,8 +1212,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
-    omitBy<A, T: void | null>(
-      object: T,
+    omitBy<A, T>(
+      object: void | null,
       predicate?: ?OPredicate<A, T>
     ): {};
     pick(object?: ?Object, ...props: Array<string>): Object;
@@ -1222,8 +1222,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
-    pickBy<A, T: void | null>(
-      object: T,
+    pickBy<A, T>(
+      object: void | null,
       predicate?: ?OPredicate<A, T>
     ): {};
     result(

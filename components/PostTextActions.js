@@ -3,9 +3,8 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { View } from 'react-native';
-import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
-import type { MarkType, BlockNodeType } from './PostText';
+import PostTextActionsButtons from './PostTextActionsButtons';
 import PostTextActionsLink from './PostTextActionsLink';
 
 export type PostTextAction =
@@ -17,185 +16,17 @@ export type PostTextAction =
   | {| type: 'LINK', href: ?string |}
   | {| type: 'FOCUS' |};
 
-type PostTextActionsView = 'actions' | 'link';
-
-type SlateObject = Object;
-
-type ActionButtonProps = {|
-  isActive: boolean,
-  onPress: () => void,
-  theme: Theme,
-  children: React.Node,
-|};
-
-const handlePreventDefault = event => event.preventDefault();
-
-const ActionButton = withTheme(
-  ({ isActive, onPress, theme, children }: ActionButtonProps) => {
-    const color = isActive ? 'success' : 'gray';
-    return (
-      <Button
-        onPressIn={handlePreventDefault}
-        onPress={onPress}
-        color={color}
-        bold
-        style={theme.styles.postTextActionsButton}
-      >
-        {children}
-      </Button>
-    );
-  },
-);
-
-type MarkButtonProps = {|
-  activeMarks: Array<Object>,
-  onPress: () => void,
-  markType: MarkType,
-  children: React.Node,
-|};
-
-const MarkButton = ({
-  activeMarks,
-  onPress,
-  markType,
-  children,
-}: MarkButtonProps) => {
-  const isActive = activeMarks.some(mark => mark.type === markType);
-  return (
-    <ActionButton onPress={onPress} isActive={isActive}>
-      {children}
-    </ActionButton>
-  );
-};
-
-type BlockButtonProps = {|
-  blocks: Object,
-  onPress: () => void,
-  blockType: BlockNodeType,
-  children: React.Node,
-|};
-
-const BlockButton = ({
-  blocks,
-  onPress,
-  blockType,
-  children,
-}: BlockButtonProps) => {
-  const isActive = blocks.some(node => node.type === blockType);
-  return (
-    <ActionButton onPress={onPress} isActive={isActive}>
-      {children}
-    </ActionButton>
-  );
-};
-
-const LinkButton = ({ isActive, onPress }) => {
-  return (
-    <ActionButton isActive={isActive} onPress={onPress}>
-      →
-    </ActionButton>
-  );
-};
-
-type ActionsProps = {|
-  value: SlateObject,
-  onAction: PostTextAction => void,
-  onSelectView: PostTextActionsView => void,
-|};
-
-class Actions extends React.PureComponent<ActionsProps> {
-  handleHeadingOnePress = () => {
-    this.props.onAction({ type: 'HEADING-ONE' });
-  };
-
-  handleHeadingTwoPress = () => {
-    this.props.onAction({ type: 'HEADING-TWO' });
-  };
-
-  handleBlockquotePress = () => {
-    this.props.onAction({ type: 'BLOCKQUOTE' });
-  };
-
-  handleBoldPress = () => {
-    this.props.onAction({ type: 'BOLD' });
-  };
-
-  handleItalicPress = () => {
-    this.props.onAction({ type: 'ITALIC' });
-  };
-
-  handleLinkPress = () => {
-    if (this.hasLinks()) {
-      this.props.onAction({ type: 'LINK', href: null });
-    } else {
-      this.props.onSelectView('link');
-    }
-  };
-
-  hasLinks() {
-    const { value } = this.props;
-    return value.inlines.some(inline => inline.type === 'link');
-  }
-
-  render() {
-    const { value } = this.props;
-    const noBlockEdit = value.startBlock.type === 'listItem';
-    return (
-      <>
-        {!noBlockEdit && (
-          <>
-            <BlockButton
-              onPress={this.handleHeadingOnePress}
-              blockType="headingOne"
-              blocks={value.blocks}
-            >
-              1
-            </BlockButton>
-            <BlockButton
-              onPress={this.handleHeadingTwoPress}
-              blockType="headingTwo"
-              blocks={value.blocks}
-            >
-              2
-            </BlockButton>
-            <BlockButton
-              onPress={this.handleBlockquotePress}
-              blockType="blockquote"
-              blocks={value.blocks}
-            >
-              {'"'}
-            </BlockButton>
-          </>
-        )}
-        <MarkButton
-          onPress={this.handleBoldPress}
-          markType="bold"
-          activeMarks={value.activeMarks}
-        >
-          b
-        </MarkButton>
-        <MarkButton
-          onPress={this.handleItalicPress}
-          markType="italic"
-          activeMarks={value.activeMarks}
-        >
-          i
-        </MarkButton>
-        <LinkButton onPress={this.handleLinkPress} isActive={this.hasLinks()} />
-      </>
-    );
-  }
-}
+export type PostTextActionsView = 'buttons' | 'link';
 
 type PostTextActionsProps = {|
-  value: SlateObject,
+  value: Object,
   onAction: (action: PostTextAction) => void,
   theme: Theme,
 |};
 
 type PostTextActionsState = {|
-  left: ?number,
-  top: ?number,
+  left: number,
+  top: number,
   view: PostTextActionsView,
 |};
 
@@ -203,49 +34,75 @@ class PostTextActions extends React.PureComponent<
   PostTextActionsProps,
   PostTextActionsState,
 > {
-  state = {
-    left: null,
-    top: null,
-    view: 'actions',
-  };
+  // For some reason, probably Flow bug, the state defined as property
+  // initializer breaks type checking. Only in this file, so it's probably some
+  // race condition.
+  // state = {
+  //   left: 0,
+  //   top: 0,
+  //   view: 'buttons',
+  // }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      left: 0,
+      top: 0,
+      view: 'buttons',
+    };
+  }
 
   componentDidMount() {
     this.el = window.document.createElement('div');
     this.modalRoot = window.document.getElementById('__next');
-    this.modalRoot.appendChild(this.el);
-    this.maybeSetLeftTopState();
+    if (this.modalRoot && this.el) this.modalRoot.appendChild(this.el);
+    this.maybeUpdateLeftTopState();
   }
 
-  componentDidUpdate() {
-    // setState in componentDidUpdate is valid for tooltips.
+  componentDidUpdate(prevProps) {
     // https://reactjs.org/docs/react-component.html#componentdidmount
-    this.maybeSetLeftTopState();
+    // setState in componentDidUpdate is valid for tooltips, but we have to wrap
+    // it in a condition.
+    // Without PureComponent, it would cause a loop. With PureComponent, it
+    // would cause double measuring of selection rect.
+    // We can't use ref with setNativeProps, because:
+    // 1) if this.el is set in componentDidMount, we can't set position because
+    //    ref is not available yet.
+    // 2) if this.el is set in constructor, server and client HTML would be
+    //    different.
+    // Therefore, this is the only right approach.
+    if (this.props.value !== prevProps.value) {
+      this.maybeUpdateLeftTopState();
+    }
   }
 
   componentWillUnmount() {
     if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
   }
 
-  handleActionsSelectView = (view: PostTextActionsView) => {
+  handleActionsSelectView = view => {
     this.setState({ view });
   };
 
   handlePostTextActionsLinkCancel = focusEditor => {
-    this.setState({ view: 'actions' }, () => {
+    this.setState({ view: 'buttons' }, () => {
       if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
     });
   };
 
   handlePostTextActionsLinkSubmit = href => {
-    this.setState({ view: 'actions' }, () => {
+    this.setState({ view: 'buttons' }, () => {
       this.props.onAction({ type: 'LINK', href });
     });
   };
 
-  toggleLinks() {
+  hasLinks() {
     const { value } = this.props;
-    const hasLinks = value.inlines.some(inline => inline.type === 'link');
-    if (hasLinks) {
+    return value.inlines.some(inline => inline.type === 'link');
+  }
+
+  toggleLinks() {
+    if (this.hasLinks()) {
       this.props.onAction({ type: 'LINK', href: null });
     } else {
       this.setState({ view: 'link' });
@@ -255,35 +112,35 @@ class PostTextActions extends React.PureComponent<
   modalRoot: ?HTMLDivElement;
   el: ?HTMLDivElement;
 
-  maybeSetLeftTopState() {
-    if (!this.canReadLeftTop()) return;
-    const selectionRect = window
-      .getSelection()
-      .getRangeAt(0)
-      .getBoundingClientRect();
-    this.setState({
-      left: selectionRect.left,
-      top: window.pageYOffset + selectionRect.bottom,
-    });
+  shouldShowButtons() {
+    const { value } = this.props;
+    return !value.isEmpty && !value.isBlurred;
   }
 
-  canReadLeftTop() {
-    const { value } = this.props;
-    return this.state.view === 'actions' && !value.isEmpty && !value.isBlurred;
-  }
-
-  shouldRenderView() {
-    const { value } = this.props;
+  maybeUpdateLeftTopState() {
     const { view } = this.state;
     switch (view) {
-      case 'actions':
-        return !value.isEmpty && !value.isBlurred;
-      case 'link':
-        // Because TextInput steals the focus.
-        return !value.isEmpty;
+      case 'buttons': {
+        if (!this.shouldShowButtons()) return;
+        const rect = window
+          .getSelection()
+          .getRangeAt(0)
+          .getBoundingClientRect();
+        this.setState({
+          left: rect.left,
+          top: window.pageYOffset + rect.bottom,
+        });
+        break;
+      }
+      case 'link': {
+        // // console.log(this.hasLinks());
+        // return;
+        break;
+      }
       default:
         // eslint-disable-next-line no-unused-expressions
         (view: empty);
+        return null;
     }
   }
 
@@ -291,15 +148,18 @@ class PostTextActions extends React.PureComponent<
     const { value, onAction } = this.props;
     const { view } = this.state;
     switch (view) {
-      case 'actions':
-        return (
-          <Actions
+      case 'buttons': {
+        return this.shouldShowButtons() ? (
+          <PostTextActionsButtons
             value={value}
             onAction={onAction}
             onSelectView={this.handleActionsSelectView}
+            hasLinks={this.hasLinks()}
           />
-        );
+        ) : null;
+      }
       case 'link':
+        // It's closed on blur, so we don't have to check anything.
         return (
           <PostTextActionsLink
             onCancel={this.handlePostTextActionsLinkCancel}
@@ -314,15 +174,14 @@ class PostTextActions extends React.PureComponent<
   }
 
   render() {
-    const { theme } = this.props;
-    const { left, top } = this.state;
     const { el } = this;
-    if (!el || left == null || top == null) return null;
-    if (!this.shouldRenderView()) return null;
-
+    if (el == null) return null;
+    const view = this.renderView();
+    if (view == null) return null;
+    const { left, top } = this.state;
     return ReactDOM.createPortal(
-      <View style={[theme.styles.postTextActions, { left, top }]}>
-        {this.renderView()}
+      <View style={[this.props.theme.styles.postTextActions, { left, top }]}>
+        {view}
       </View>,
       el,
     );
