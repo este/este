@@ -458,9 +458,6 @@ input ImageWhereInput {
   """All values greater than or equal the given value."""
   height_gte: Int
   creator: UserWhereInput
-  _MagicalBackRelation_ImageToPost_every: PostWhereInput
-  _MagicalBackRelation_ImageToPost_some: PostWhereInput
-  _MagicalBackRelation_ImageToPost_none: PostWhereInput
 }
 
 input ImageWhereUniqueInput {
@@ -533,6 +530,7 @@ type Post implements Node {
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
   name: String
+  type: PostType!
   web(where: WebWhereInput): Web!
   parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
@@ -540,7 +538,6 @@ type Post implements Node {
   text: String
   textFormat: String!
   image(where: ImageWhereInput): Image
-  type: PostType!
 }
 
 """A connection to a list of items."""
@@ -559,9 +556,9 @@ input PostCreatechildrenOrderInput {
 
 input PostCreateInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
@@ -592,9 +589,9 @@ input PostCreateManyWithoutWebInput {
 
 input PostCreateWithoutChildrenInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
@@ -604,9 +601,9 @@ input PostCreateWithoutChildrenInput {
 
 input PostCreateWithoutCreatorInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostCreatechildrenOrderInput
   web: WebCreateOneWithoutPostsInput!
   parents: PostCreateManyWithoutChildrenInput
@@ -616,9 +613,9 @@ input PostCreateWithoutCreatorInput {
 
 input PostCreateWithoutParentsInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   web: WebCreateOneWithoutPostsInput!
@@ -628,9 +625,9 @@ input PostCreateWithoutParentsInput {
 
 input PostCreateWithoutWebInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostCreatechildrenOrderInput
   creator: UserCreateOneWithoutPostsInput!
   parents: PostCreateManyWithoutChildrenInput
@@ -656,12 +653,12 @@ enum PostOrderByInput {
   updatedAt_DESC
   name_ASC
   name_DESC
+  type_ASC
+  type_DESC
   text_ASC
   text_DESC
   textFormat_ASC
   textFormat_DESC
-  type_ASC
-  type_DESC
 }
 
 type PostPreviousValues {
@@ -669,10 +666,10 @@ type PostPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
+  type: PostType!
   childrenOrder: [ID!]!
   text: String
   textFormat: String!
-  type: PostType!
 }
 
 type PostSubscriptionPayload {
@@ -726,9 +723,9 @@ input PostUpdatechildrenOrderInput {
 
 input PostUpdateInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
@@ -775,9 +772,9 @@ input PostUpdateManyWithoutWebInput {
 
 input PostUpdateWithoutChildrenDataInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
@@ -787,9 +784,9 @@ input PostUpdateWithoutChildrenDataInput {
 
 input PostUpdateWithoutCreatorDataInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostUpdatechildrenOrderInput
   web: WebUpdateOneWithoutPostsInput
   parents: PostUpdateManyWithoutChildrenInput
@@ -799,9 +796,9 @@ input PostUpdateWithoutCreatorDataInput {
 
 input PostUpdateWithoutParentsDataInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   web: WebUpdateOneWithoutPostsInput
@@ -811,9 +808,9 @@ input PostUpdateWithoutParentsDataInput {
 
 input PostUpdateWithoutWebDataInput {
   name: String
+  type: PostType
   text: String
   textFormat: String
-  type: PostType
   childrenOrder: PostUpdatechildrenOrderInput
   creator: UserUpdateOneWithoutPostsInput
   parents: PostUpdateManyWithoutChildrenInput
@@ -998,6 +995,16 @@ input PostWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  type: PostType
+
+  """All values that are not equal to given value."""
+  type_not: PostType
+
+  """All values that are contained in given list."""
+  type_in: [PostType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PostType!]
   text: String
 
   """All values that are not equal to given value."""
@@ -1078,16 +1085,6 @@ input PostWhereInput {
 
   """All values not ending with the given string."""
   textFormat_not_ends_with: String
-  type: PostType
-
-  """All values that are not equal to given value."""
-  type_not: PostType
-
-  """All values that are contained in given list."""
-  type_in: [PostType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [PostType!]
   creator: UserWhereInput
   web: WebWhereInput
   parents_every: PostWhereInput
@@ -1927,12 +1924,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'text_ASC'
     | 'text_DESC'
     | 'textFormat_ASC'
     | 'textFormat_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
   
 
  export type ImageOrderByInput =
@@ -2056,9 +2053,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostUpdateWithoutParentsDataInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
@@ -2113,9 +2110,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostCreateWithoutCreatorInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostCreatechildrenOrderInput,
   web: WebCreateOneWithoutPostsInput,
   parents?: PostCreateManyWithoutChildrenInput,
@@ -2141,9 +2138,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostCreateWithoutParentsInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
@@ -2219,9 +2216,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostCreateInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
@@ -2332,10 +2329,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   height_lte?: Int,
   height_gt?: Int,
   height_gte?: Int,
-  creator?: UserWhereInput,
-  _MagicalBackRelation_ImageToPost_every?: PostWhereInput,
-  _MagicalBackRelation_ImageToPost_some?: PostWhereInput,
-  _MagicalBackRelation_ImageToPost_none?: PostWhereInput
+  creator?: UserWhereInput
 |}
 
  export type PostCreateManyWithoutWebInput = {| 
@@ -2382,9 +2376,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostUpdateWithoutWebDataInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   parents?: PostUpdateManyWithoutChildrenInput,
@@ -2394,9 +2388,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostCreateWithoutChildrenInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   web: WebCreateOneWithoutPostsInput,
@@ -2505,9 +2499,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostUpdateInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
@@ -2589,9 +2583,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostUpdateWithoutChildrenDataInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostUpdatechildrenOrderInput,
   creator?: UserUpdateOneWithoutPostsInput,
   web?: WebUpdateOneWithoutPostsInput,
@@ -2647,6 +2641,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   name_not_starts_with?: String,
   name_ends_with?: String,
   name_not_ends_with?: String,
+  type?: PostType,
+  type_not?: PostType,
+  type_in?: Array< PostType > | PostType,
+  type_not_in?: Array< PostType > | PostType,
   text?: String,
   text_not?: String,
   text_in?: Array< String > | String,
@@ -2675,10 +2673,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textFormat_not_starts_with?: String,
   textFormat_ends_with?: String,
   textFormat_not_ends_with?: String,
-  type?: PostType,
-  type_not?: PostType,
-  type_in?: Array< PostType > | PostType,
-  type_not_in?: Array< PostType > | PostType,
   creator?: UserWhereInput,
   web?: WebWhereInput,
   parents_every?: PostWhereInput,
@@ -2778,9 +2772,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostUpdateWithoutCreatorDataInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostUpdatechildrenOrderInput,
   web?: WebUpdateOneWithoutPostsInput,
   parents?: PostUpdateManyWithoutChildrenInput,
@@ -2806,9 +2800,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type PostCreateWithoutWebInput = {| 
   name?: String,
+  type?: PostType,
   text?: String,
   textFormat?: String,
-  type?: PostType,
   childrenOrder?: PostCreatechildrenOrderInput,
   creator: UserCreateOneWithoutPostsInput,
   parents?: PostCreateManyWithoutChildrenInput,
@@ -2925,10 +2919,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    createdAt: DateTime,
    updatedAt: DateTime,
    name?: String,
+   type: PostType,
    childrenOrder: ID_Output[],
    text?: String,
    textFormat: String,
-   type: PostType,
 |}
 
 /*
@@ -3002,6 +2996,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    updatedAt: DateTime,
    creator: User,
    name?: String,
+   type: PostType,
    web: Web,
    parents?: Post[],
    children?: Post[],
@@ -3009,7 +3004,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    text?: String,
    textFormat: String,
    image?: Image,
-   type: PostType,
 |}
 
 /*
