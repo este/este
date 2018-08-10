@@ -6,7 +6,7 @@ import { pipe } from 'ramda';
 
 type PostTextActionsLinkProps = {|
   theme: Theme,
-  onCancel: (focusEditor: ?boolean) => void,
+  onClose: (focusEditor: ?boolean) => void,
   onSubmit: (href: string) => void,
 |};
 
@@ -23,7 +23,7 @@ class PostTextActionsLink extends React.PureComponent<
   };
 
   handleTextInputBlur = () => {
-    this.props.onCancel();
+    this.props.onClose();
   };
 
   handleTextInputChangeText = (text: string) => {
@@ -33,7 +33,7 @@ class PostTextActionsLink extends React.PureComponent<
   handleTextInputSubmitEditing = () => {
     const text = this.state.text.trim();
     if (text.length === 0) {
-      this.props.onCancel(true);
+      this.props.onClose(true);
     } else {
       this.props.onSubmit(text);
     }

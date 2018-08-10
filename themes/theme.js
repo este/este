@@ -11,6 +11,8 @@ const typography = createTypography({
   fontSize: 16,
   fontSizeScale: 'step5', // perfect fourth, modularscale.com
   lineHeight: 24,
+  // fontSize: 20,
+  // lineHeight: 30,
 });
 
 const colors = {
@@ -178,6 +180,7 @@ const stylesJson = {
   postTextActionsLink: {
     color: colors.white,
     fontFamily,
+    fontWeight,
     paddingVertical: typography.rhythm(0.2),
     paddingHorizontal: typography.rhythm(0.2),
     // It's web only style.

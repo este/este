@@ -18,10 +18,12 @@ export type TextProps = {|
   // React Native does not export Text props Flow types yet, so add them as-go.
   // Feel free to add any used prop.
   accessibilityRole?: any,
+  onMouseDown?: any,
   onMouseEnter?: any,
   onMouseLeave?: any,
   href?: any,
   contentEditable?: boolean,
+  target?: string,
 |};
 
 // Strutural aka non-themeable styles.

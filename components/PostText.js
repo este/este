@@ -304,10 +304,9 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
         PostText.toggleMark(editor, 'italic');
         return;
       case 'k': {
-        if (value.isEmpty) return;
         const { current: postTextActions } = this.postTextActionsRef;
         if (postTextActions == null) return;
-        postTextActions.toggleLinks();
+        postTextActions.handleKeyModK();
         return;
       }
     }

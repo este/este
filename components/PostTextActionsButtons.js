@@ -25,6 +25,7 @@ const ActionButton = withTheme(
         color={color}
         bold
         style={theme.styles.postTextActionsButton}
+        size={-1}
       >
         {children}
       </Button>

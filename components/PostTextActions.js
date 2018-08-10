@@ -4,8 +4,10 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { View } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
+import { findDOMNode } from 'slate-react';
 import PostTextActionsButtons from './PostTextActionsButtons';
 import PostTextActionsLink from './PostTextActionsLink';
+import PostTextActionsLinkPreview from './PostTextActionsLinkPreview';
 
 export type PostTextAction =
   | {| type: 'BOLD' |}
@@ -16,7 +18,7 @@ export type PostTextAction =
   | {| type: 'LINK', href: ?string |}
   | {| type: 'FOCUS' |};
 
-export type PostTextActionsView = 'buttons' | 'link';
+export type PostTextActionsView = null | 'buttons' | 'link' | 'linkPreview';
 
 type PostTextActionsProps = {|
   value: Object,
@@ -28,27 +30,30 @@ type PostTextActionsState = {|
   left: number,
   top: number,
   view: PostTextActionsView,
+  hasLinks: boolean,
+  linkNode: ?Object,
 |};
 
 class PostTextActions extends React.PureComponent<
   PostTextActionsProps,
   PostTextActionsState,
 > {
-  // For some reason, probably Flow bug, the state defined as property
-  // initializer breaks type checking. Only in this file, so it's probably some
-  // race condition.
+  // Probably some Flow race condition bug. Switch not detected. TODO: Check later.
   // state = {
   //   left: 0,
   //   top: 0,
-  //   view: 'buttons',
-  // }
-
+  //   view: null,
+  //   hasLinks: false,
+  //   linkNode: null,
+  // };
   constructor(props) {
     super(props);
     this.state = {
       left: 0,
       top: 0,
-      view: 'buttons',
+      view: null,
+      hasLinks: false,
+      linkNode: null,
     };
   }
 
@@ -80,29 +85,54 @@ class PostTextActions extends React.PureComponent<
     if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
   }
 
+  static getDerivedStateFromProps(
+    props: PostTextActionsProps,
+    state: PostTextActionsState,
+  ): $Shape<PostTextActionsState> {
+    const ignoreViewWithFocus = state.view === 'link';
+    if (ignoreViewWithFocus) return null;
+    const { value } = props;
+    const hasLinks = value.inlines.some(inline => inline.type === 'link');
+    const linkNode = value.inlines.find(inline => inline.type === 'link');
+    const newState = { hasLinks, linkNode };
+    if (!value.isBlurred) {
+      if (value.selection.isCollapsed) {
+        const view = hasLinks ? 'linkPreview' : null;
+        return { ...newState, view };
+      }
+      if (!value.isEmpty) {
+        return { ...newState, view: 'buttons' };
+      }
+    }
+    return { ...newState, view: null };
+  }
+
   handleActionsSelectView = view => {
     this.setState({ view });
   };
 
-  handlePostTextActionsLinkCancel = focusEditor => {
+  handlePostTextActionsLinkClose = focusEditor => {
     this.setState({ view: 'buttons' }, () => {
       if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
     });
   };
 
   handlePostTextActionsLinkSubmit = href => {
-    this.setState({ view: 'buttons' }, () => {
-      this.props.onAction({ type: 'LINK', href });
-    });
+    this.props.onAction({ type: 'LINK', href });
   };
 
-  hasLinks() {
+  handleKeyModK() {
     const { value } = this.props;
-    return value.inlines.some(inline => inline.type === 'link');
-  }
-
-  toggleLinks() {
-    if (this.hasLinks()) {
+    if (value.selection.isCollapsed) {
+      const { linkNode } = this.state;
+      if (!linkNode) return;
+      const href = linkNode.data.get('href');
+      // TODO: Use router push for web links.
+      window.open(href);
+      return;
+    }
+    if (value.isEmpty) return;
+    if (this.state.hasLinks) {
       this.props.onAction({ type: 'LINK', href: null });
     } else {
       this.setState({ view: 'link' });
@@ -112,16 +142,9 @@ class PostTextActions extends React.PureComponent<
   modalRoot: ?HTMLDivElement;
   el: ?HTMLDivElement;
 
-  shouldShowButtons() {
-    const { value } = this.props;
-    return !value.isEmpty && !value.isBlurred;
-  }
-
   maybeUpdateLeftTopState() {
-    const { view } = this.state;
-    switch (view) {
+    switch (this.state.view) {
       case 'buttons': {
-        if (!this.shouldShowButtons()) return;
         const rect = window
           .getSelection()
           .getRangeAt(0)
@@ -133,43 +156,57 @@ class PostTextActions extends React.PureComponent<
         break;
       }
       case 'link': {
-        // // console.log(this.hasLinks());
-        // return;
         break;
       }
+      case 'linkPreview': {
+        const { linkNode } = this.state;
+        if (!linkNode) return;
+        // eslint-disable-next-line react/no-find-dom-node
+        const rect = findDOMNode(linkNode).getBoundingClientRect();
+        this.setState({
+          left: rect.left,
+          top: window.pageYOffset + rect.bottom,
+        });
+        break;
+      }
+      case null:
+        break;
       default:
         // eslint-disable-next-line no-unused-expressions
-        (view: empty);
-        return null;
+        (this.state.view: empty);
     }
   }
 
   renderView() {
     const { value, onAction } = this.props;
-    const { view } = this.state;
-    switch (view) {
-      case 'buttons': {
-        return this.shouldShowButtons() ? (
+    switch (this.state.view) {
+      case 'buttons':
+        return (
           <PostTextActionsButtons
             value={value}
             onAction={onAction}
             onSelectView={this.handleActionsSelectView}
-            hasLinks={this.hasLinks()}
+            hasLinks={this.state.hasLinks}
           />
-        ) : null;
-      }
+        );
       case 'link':
-        // It's closed on blur, so we don't have to check anything.
         return (
           <PostTextActionsLink
-            onCancel={this.handlePostTextActionsLinkCancel}
+            onClose={this.handlePostTextActionsLinkClose}
             onSubmit={this.handlePostTextActionsLinkSubmit}
           />
         );
+      case 'linkPreview': {
+        const { linkNode } = this.state;
+        if (!linkNode) return;
+        const href = linkNode.data.get('href');
+        return <PostTextActionsLinkPreview href={href} />;
+      }
+      case null:
+        return null;
       default:
         // eslint-disable-next-line no-unused-expressions
-        (view: empty);
-        return null;
+        (this.state.view: empty);
     }
   }
 
