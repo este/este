@@ -1,5 +1,5 @@
-// flow-typed signature: 9c30343b8fb3064c13fd4eea81f3a964
-// flow-typed version: 063bd6273f/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 6fd4e29e6b460431005b1a6d591b9d6e
+// flow-typed version: 199a0f315c/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -10,6 +10,8 @@ type Transformer<A, B> = {
 };
 
 declare type $npm$ramda$Placeholder = { "@@functional/placeholder": true };
+
+declare opaque type $npm$ramda$Reduced<T>;
 
 declare module ramda {
   declare type UnaryFn<A, R> = (a: A) => R;
@@ -815,6 +817,8 @@ declare module ramda {
 
   declare var range: CurriedFunction2<number, number, Array<number>>;
 
+  declare function reduced<T>(x: T | $npm$ramda$Reduced<T>): $npm$ramda$Reduced<T>;
+
   declare function remove<T>(
     from: number,
   ): ((to: number) => (src: Array<T>) => Array<T>) &
@@ -949,15 +953,15 @@ declare module ramda {
   declare function reverse<T, V: Array<T> | string>(xs: V): V;
 
   declare type Reduce = (<A, B>(
-    fn: (acc: A, elm: B) => A
+    fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A
   ) => ((init: A) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
     ((init: A, xs: Array<B> | $ReadOnlyArray<B>) => A)) &
     (<A, B>(
-      fn: (acc: A, elm: B) => A,
+      fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A,
       init: A
     ) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
     (<A, B>(
-      fn: (acc: A, elm: B) => A,
+      fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A,
       init: A,
       xs: Array<B> | $ReadOnlyArray<B>
     ) => A);
