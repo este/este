@@ -1,39 +1,32 @@
 // @flow
-/* eslint-env browser */
 import * as React from 'react';
-import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
+import * as generated from './__generated__/Editor.graphql';
+import Head from 'next/head';
+import EditMainNav from './EditMainNav';
+import PageTitle from './PageTitle';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from './core/TextInput';
 import withMutation from './core/withMutation';
 import withStore, { type Store } from './core/withStore';
 import { pipe } from 'ramda';
-import SetPostTextMutation, {
-  type SetPostTextCommit,
-} from '../mutations/SetPostTextMutation';
+import SetPageContentMutation, {
+  type SetPageContentCommit,
+} from '../mutations/SetPageContentMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/PostText.graphql';
-import { Editor } from 'slate-react';
+import { Editor as SlateEditor } from 'slate-react';
 import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
-import { View } from 'react-native';
-import PostTextActions, {
-  type PostTextAction,
-  type PostTextActionsType,
-} from './PostTextActions';
-// import isURL from 'validator/lib/isURL';
+import EditorMenu, {
+  type EditorMenuAction,
+  type EditorMenuType,
+} from './EditorMenu';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
 
-export const messages = defineMessages({
-  placeholder: {
-    defaultMessage: 'write',
-    id: 'postText.textInput.placeholder',
-  },
-});
-
+// TODO: Refactor types, maybe remove them entirely.
 type ParagraphNode = { type: 'paragraph' };
 // type ImageNode = { type: 'image' };
 type HeadingOneNode = { type: 'headingOne' };
@@ -121,20 +114,20 @@ const emptyText = {
   },
 };
 
-type PostTextProps = {|
-  data: generated.PostText,
-  intl: IntlShape,
-  commit: SetPostTextCommit,
+type EditorProps = {|
+  theme: Theme,
+  data: generated.Editor,
+  commit: SetPageContentCommit,
   store: Store,
   disabled?: boolean,
   theme: Theme,
 |};
 
-type PostTextState = {|
+type EditorState = {|
   value: Object,
 |};
 
-class PostText extends React.PureComponent<PostTextProps, PostTextState> {
+class Editor extends React.PureComponent<EditorProps, EditorState> {
   static toggleMark(editor, mark: MarkType) {
     editor.change(change => {
       change.toggleMark(mark);
@@ -145,8 +138,8 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     editor.change(change => {
       if (href != null) {
         const parsed = parse(href);
-        const isProtoless = !parsed.protocol && !!parsed.pathname;
-        const protocol = isProtoless ? 'https://' : '';
+        const addProtocol = !parsed.protocol && !!parsed.pathname;
+        const protocol = addProtocol ? 'https://' : '';
         change
           .wrapInline({ type: 'link', data: { href: `${protocol}${href}` } })
           .moveToEnd()
@@ -160,27 +153,27 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     });
   }
 
-  throttleCommit = throttle(text => {
+  throttleCommit = throttle(content => {
+    const { page } = this.props.data;
+    if (page == null) return;
     const input = {
-      id: this.props.data.id,
-      text,
+      id: page.id,
+      content,
     };
     this.props.commit(input);
   }, onChangeTextThrottle);
 
   editorRef = React.createRef();
-  // This would be ideal, but: https://github.com/este/este/issues/1571
-  // postTextActionsRef: {
-  //   current: null | React.ElementRef<typeof PostTextActions>,
-  // } = React.createRef();
-  postTextActionsRef: {
-    current: null | React.ElementRef<PostTextActionsType>,
+  editorMenuRef: {
+    current: null | React.ElementRef<EditorMenuType>,
   } = React.createRef();
 
-  constructor(props) {
+  constructor(props: EditorProps) {
     super(props);
-    const { text } = this.props.data;
-    const json = text == null ? emptyText : JSON.parse(text);
+    const { page } = this.props.data;
+    const content = page && page.content;
+    const json = content != null ? JSON.parse(content) : emptyText;
+    // console.log(json);
     // Resets Slate's internal key generating function to its default state.
     // This is useful for server-side rendering.
     KeyUtils.resetGenerator();
@@ -231,6 +224,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       change.wrapBlock('list');
     }
     change.moveFocusToStartOfNode(startBlock).delete();
+    return true;
   };
 
   // On backspace, if at the start of a non-paragraph, convert it back into a
@@ -250,6 +244,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (startBlock.type === 'listItem') {
       change.unwrapBlock('list');
     }
+    return true;
   };
 
   // On return, if at the end of a node type that should not be extended,
@@ -261,20 +256,21 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     if (isExpanded) return;
 
     const { startBlock } = value;
-    if (start.offset === 0 && startBlock.text.length === 0)
-      return this.handleKeyBackspace(event, change);
-    if (end.offset !== startBlock.text.length) return;
+    const caretOnEmptyText = start.offset === 0 && startBlock.text.length === 0;
+    if (caretOnEmptyText) return this.handleKeyBackspace(event, change);
+    const caretInsideBlockText = end.offset !== startBlock.text.length;
+    if (caretInsideBlockText) return;
 
-    if (
-      startBlock.type !== 'headingOne' &&
-      startBlock.type !== 'headingTwo' &&
-      startBlock.type !== 'blockquote'
-    ) {
-      return;
+    const putParagraphAfter =
+      startBlock.type === 'headingOne' ||
+      startBlock.type === 'headingTwo' ||
+      startBlock.type === 'blockquote';
+    if (putParagraphAfter) {
+      event.preventDefault();
+      change.splitBlock().setBlocks('paragraph');
+      // return true to prevent default behavior
+      return true;
     }
-
-    event.preventDefault();
-    change.splitBlock().setBlocks('paragraph');
   };
 
   handleEditorKeyDown = (event: KeyboardEvent, change) => {
@@ -285,28 +281,25 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 
     switch (key) {
       case ' ':
-        this.handleKeySpace(event, change);
-        return;
+        return this.handleKeySpace(event, change);
       case 'Backspace':
-        this.handleKeyBackspace(event, change);
-        return;
+        return this.handleKeyBackspace(event, change);
       case 'Enter':
-        this.handleKeyEnter(event, change);
-        return;
+        return this.handleKeyEnter(event, change);
     }
 
     if (!mod) return;
     switch (key) {
       case 'b':
-        PostText.toggleMark(editor, 'bold');
+        Editor.toggleMark(editor, 'bold');
         return;
       case 'i':
-        PostText.toggleMark(editor, 'italic');
+        Editor.toggleMark(editor, 'italic');
         return;
       case 'k': {
-        const { current: postTextActions } = this.postTextActionsRef;
-        if (postTextActions == null) return;
-        postTextActions.handleKeyModK();
+        const { current: editorMenu } = this.editorMenuRef;
+        if (editorMenu == null) return;
+        editorMenu.handleKeyModK();
         return;
       }
     }
@@ -324,18 +317,18 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
     }
   };
 
-  handlePostTextActionsAction = (action: PostTextAction) => {
+  handleEditorMenuAction = (action: EditorMenuAction) => {
     const { current: editor } = this.editorRef;
     if (!editor) return;
     switch (action.type) {
       case 'BOLD':
-        PostText.toggleMark(editor, 'bold');
+        Editor.toggleMark(editor, 'bold');
         break;
       case 'ITALIC':
-        PostText.toggleMark(editor, 'italic');
+        Editor.toggleMark(editor, 'italic');
         break;
       case 'LINK':
-        PostText.toggleLinks(editor, action.href);
+        Editor.toggleLinks(editor, action.href);
         break;
       case 'HEADING-ONE':
         this.toggleBlocks(editor, 'headingOne');
@@ -383,7 +376,7 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       }
       case 'blockquote': {
         return (
-          <Block style={styles.postTextBlockquote}>
+          <Block style={styles.editorBlockquote}>
             <Text color="gray" {...attributes}>
               {children}
             </Text>
@@ -393,11 +386,11 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
       case 'list': {
         return <Block {...attributes}>{children}</Block>;
       }
-      // Only bullet list. We don't need numbers, they are superfluous.
+      // Only bullet list for now.
       case 'listItem': {
         return (
           <Text {...attributes}>
-            <Text style={styles.postTextListItem} contentEditable={false}>
+            <Text style={styles.editorListItem} contentEditable={false}>
               •
             </Text>
             {children}
@@ -436,27 +429,38 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
   };
 
   render() {
+    const { page } = this.props.data;
+    if (page == null) return null;
+    // https://github.com/relayjs/eslint-plugin-relay/issues/35
+    // eslint-disable-next-line no-unused-expressions
+    page.title;
     return (
-      <View>
-        <Editor
+      <>
+        <Head>
+          <title>{page.draftTitle}</title>
+        </Head>
+        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+        <EditMainNav data={page.web} />
+        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+        <PageTitle data={page} />
+        <SlateEditor
           ref={this.editorRef}
-          // autoFocus
+          autoFocus
           value={this.state.value}
           onChange={this.handleEditorChange}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
-          placeholder={this.props.intl.formatMessage(messages.placeholder)}
           // schema={schema}
           onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />
-        <PostTextActions
+        <EditorMenu
           // $FlowFixMe https://github.com/este/este/issues/1571
-          ref={this.postTextActionsRef}
+          ref={this.editorMenuRef}
           value={this.state.value}
-          onAction={this.handlePostTextActionsAction}
+          onAction={this.handleEditorMenuAction}
         />
-      </View>
+      </>
     );
   }
 }
@@ -464,14 +468,21 @@ class PostText extends React.PureComponent<PostTextProps, PostTextState> {
 export default createFragmentContainer(
   pipe(
     withTheme,
-    injectIntl,
     withStore,
-    withMutation(SetPostTextMutation),
-  )(PostText),
+    withMutation(SetPageContentMutation),
+  )(Editor),
   graphql`
-    fragment PostText on Post {
-      id
-      text
+    fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
+      page(id: $id) {
+        id
+        title @__clientField(handle: "draft")
+        draftTitle
+        content
+        web {
+          ...EditMainNav
+        }
+        ...PageTitle
+      }
     }
   `,
 );

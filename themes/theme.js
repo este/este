@@ -151,16 +151,7 @@ const stylesJson = {
     ...(fontSmoothing: any),
   },
 
-  post: {
-    flex: 1,
-  },
-
-  postActions: {
-    minHeight: typography.rhythm(1),
-    paddingVertical: typography.rhythm(0.5),
-  },
-
-  postTextActions: {
+  editorMenu: {
     position: 'absolute',
     zIndex: zIndex.postTextActions,
     backgroundColor: '#222',
@@ -170,14 +161,14 @@ const stylesJson = {
     flexDirection: 'row',
   },
 
-  postTextActionsButton: {
+  editorMenuButton: {
     paddingVertical: typography.rhythm(0.2),
     paddingHorizontal: typography.rhythm(0.5),
     // It's web only style.
     ...(fontSmoothing: any),
   },
 
-  postTextActionsLink: {
+  editorMenuLink: {
     color: colors.white,
     fontFamily,
     fontWeight,
@@ -187,13 +178,13 @@ const stylesJson = {
     ...(fontSmoothing: any),
   },
 
-  postTextBlockquote: {
+  editorBlockquote: {
     borderLeftWidth: 2,
     borderColor: colorLib(colors.gray).lighten(0.1),
     paddingLeft: typography.rhythm(0.4),
   },
 
-  postTextListItem: {
+  editorListItem: {
     paddingHorizontal: typography.rhythm(0.5),
   },
 };
@@ -235,9 +226,9 @@ export const darkTheme: Theme = {
       // It's web only style.
       ...(fontSmoothing: any),
     },
-    postTextBlockquote: {
-      ...stylesJson.postTextBlockquote,
-      borderColor: colorLib(colors.gray).darken(0.2),
-    },
+    // postTextBlockquote: {
+    //   ...stylesJson.postTextBlockquote,
+    //   borderColor: colorLib(colors.gray).darken(0.2),
+    // },
   }),
 };

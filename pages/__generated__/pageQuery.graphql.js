@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash de07a1a9563f587201951682af56e3ed
+ * @relayHash 8e4f87d62cc2fc3ff10eaac749b05b4f
  */
 
 /* eslint-disable */
@@ -10,26 +10,26 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
-type Web$ref = any;
-export type webQueryVariables = {|
+type Editor$ref = any;
+export type pageQueryVariables = {|
   id: string
 |};
-export type webQueryResponse = {|
-  +$fragmentRefs: AppPage$ref & Web$ref
+export type pageQueryResponse = {|
+  +$fragmentRefs: AppPage$ref & Editor$ref
 |};
-export type webQuery = {|
-  variables: webQueryVariables,
-  response: webQueryResponse,
+export type pageQuery = {|
+  variables: pageQueryVariables,
+  response: pageQueryResponse,
 |};
 */
 
 
 /*
-query webQuery(
+query pageQuery(
   $id: ID!
 ) {
   ...AppPage
-  ...Web_1Bmzm5
+  ...Editor_1Bmzm5
 }
 
 fragment AppPage on Query {
@@ -39,12 +39,16 @@ fragment AppPage on Query {
   }
 }
 
-fragment Web_1Bmzm5 on Query {
-  web(id: $id) {
+fragment Editor_1Bmzm5 on Query {
+  page(id: $id) {
     id
-    ...EditMainNav
-    ...WebName
-    ...WebPages
+    title
+    content
+    web {
+      ...EditMainNav
+      id
+    }
+    ...PageTitle
   }
 }
 
@@ -53,22 +57,9 @@ fragment EditMainNav on Web {
   name
 }
 
-fragment WebName on Web {
-  id
-  name
-}
-
-fragment WebPages on Web {
-  pages(orderBy: updatedAt_DESC) {
-    id
-    ...WebPagesItem
-  }
-}
-
-fragment WebPagesItem on Page {
+fragment PageTitle on Page {
   id
   title
-  updatedAt
 }
 */
 
@@ -91,13 +82,13 @@ v1 = {
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "webQuery",
+  "name": "pageQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...EditMainNav\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PageTitle\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PageTitle on Page {\n  id\n  title\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "webQuery",
+    "name": "pageQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -109,7 +100,7 @@ return {
       },
       {
         "kind": "FragmentSpread",
-        "name": "Web",
+        "name": "Editor",
         "args": [
           {
             "kind": "Variable",
@@ -123,7 +114,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "webQuery",
+    "name": "pageQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -148,7 +139,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "web",
+        "name": "page",
         "storageKey": null,
         "args": [
           {
@@ -158,56 +149,58 @@ return {
             "type": "ID!"
           }
         ],
-        "concreteType": "Web",
+        "concreteType": "Page",
         "plural": false,
         "selections": [
           v1,
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "name",
+            "name": "title",
             "args": null,
             "storageKey": null
           },
           {
             "kind": "ScalarHandle",
             "alias": null,
-            "name": "name",
+            "name": "title",
             "args": null,
             "handle": "draft",
             "key": "",
             "filters": null
           },
           {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "content",
+            "args": null,
+            "storageKey": null
+          },
+          {
             "kind": "LinkedField",
             "alias": null,
-            "name": "pages",
-            "storageKey": "pages(orderBy:\"updatedAt_DESC\")",
-            "args": [
-              {
-                "kind": "Literal",
-                "name": "orderBy",
-                "value": "updatedAt_DESC",
-                "type": "PageOrderByInput"
-              }
-            ],
-            "concreteType": "Page",
-            "plural": true,
+            "name": "web",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Web",
+            "plural": false,
             "selections": [
               v1,
               {
                 "kind": "ScalarField",
                 "alias": null,
-                "name": "title",
+                "name": "name",
                 "args": null,
                 "storageKey": null
               },
               {
-                "kind": "ScalarField",
+                "kind": "ScalarHandle",
                 "alias": null,
-                "name": "updatedAt",
+                "name": "name",
                 "args": null,
-                "storageKey": null
+                "handle": "draft",
+                "key": "",
+                "filters": null
               }
             ]
           }
@@ -218,5 +211,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5ca8032c9d0808ae5d269c3e9d6bb6c6';
+(node/*: any*/).hash = 'ce05ca5a39bac507381f7ea2cd22c8b5';
 module.exports = node;

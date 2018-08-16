@@ -3,7 +3,7 @@ import isEmail from 'validator/lib/isEmail';
 import type {
   AuthInput,
   CreateWebInput,
-  SetPostNameInput,
+  SetPageTitleInput,
   SetWebNameInput,
 } from '../server/api/__generated__/api.graphql';
 
@@ -44,13 +44,13 @@ export const validateAuth = (input: AuthInput) => {
 export const validateCreateWeb = (input: CreateWebInput) => {
   const name = max140Chars(input.name);
   if (name) return { name };
-  const postName = max140Chars(input.postName);
-  if (postName) return { postName };
+  const pageTitle = max140Chars(input.pageTitle);
+  if (pageTitle) return { pageTitle };
 };
 
-export const validateSetPostName = (input: SetPostNameInput) => {
-  const name = max140Chars(input.name);
-  if (name) return { name };
+export const validateSetPageTitle = (input: SetPageTitleInput) => {
+  const title = max140Chars(input.title);
+  if (title) return { title };
 };
 
 export const validateSetWebName = (input: SetWebNameInput) => {

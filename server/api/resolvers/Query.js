@@ -10,8 +10,8 @@ const Query: QueryType = {
     return db.query.user({ where: { id: userId } }, info);
   },
 
-  post: async (args, info, { db }) => {
-    return db.query.post({ where: { id: args.id } }, info);
+  page: async (args, info, { db }) => {
+    return db.query.page({ where: { id: args.id } }, info);
   },
 
   web: async (args, info, { db }) => {

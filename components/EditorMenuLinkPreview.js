@@ -2,26 +2,25 @@
 import * as React from 'react';
 import A from './core/A';
 import withTheme, { type Theme } from './core/withTheme';
-import { pipe } from 'ramda';
 
-const preventDefault = event => {
+const preventDefault = (event: Event) => {
   event.preventDefault();
 };
 
-type PostTextActionsLinkPreviewProps = {|
+type EditorMenuLinkPreviewProps = {|
   href: string,
   theme: Theme,
 |};
 
-class PostTextActionsLinkPreview extends React.PureComponent<
-  PostTextActionsLinkPreviewProps,
+class EditorMenuLinkPreview extends React.PureComponent<
+  EditorMenuLinkPreviewProps,
 > {
   render() {
     const { href, theme } = this.props;
     return (
       <A
         href={href}
-        style={theme.styles.postTextActionsLink}
+        style={theme.styles.editorMenuLink}
         size={-1}
         color="white"
         onMouseDown={preventDefault}
@@ -33,4 +32,4 @@ class PostTextActionsLinkPreview extends React.PureComponent<
   }
 }
 
-export default pipe(withTheme)(PostTextActionsLinkPreview);
+export default withTheme(EditorMenuLinkPreview);

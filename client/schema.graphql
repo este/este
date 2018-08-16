@@ -20,11 +20,11 @@
 # Therefore, I prefer non-null types. If developer forget to add __clientField
 # directive, app will fail immediately. It's not ideal, but good enough.
 # TODO: Generate Flow type for client schema and use it withStore. Somehow.
-
 # The beauty of client schema is draftName field etc. are reset on fetch.
+# Feel free to discuss.
 
-extend type Post {
-  draftName: String!
+extend type Page {
+  draftTitle: String!
 }
 
 extend type Web {

@@ -15,9 +15,9 @@ import CreateWebMutation, {
 } from '../mutations/CreateWebMutation';
 
 export const messages = defineMessages({
-  postName: {
+  pageTitle: {
     defaultMessage: 'Home',
-    id: 'createWeb.postName',
+    id: 'createWeb.pageTitle',
   },
   label: {
     defaultMessage: 'Web Name',
@@ -50,7 +50,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
 
   redirectToPage = id => () => {
     const href: Href = {
-      pathname: '/post',
+      pathname: '/page',
       query: { id },
     };
     Router.push(href);
@@ -60,25 +60,25 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
     // Payload can be a null, because resolver can throw or be deprecated or
     // whatever. Serious errors are handled globally, so nothing to do here.
     if (!createWeb) return;
-    const { errors, postId } = createWeb;
+    const { errors, pageId } = createWeb;
     if (errors) {
       this.setState({ errors });
       return;
     }
-    // We can only redirect if we have postId. Remember, anything can fail if
+    // We can only redirect if we have pageId. Remember, anything can fail if
     // network and a server is involved. Handle it gradually.
-    if (postId == null) return;
+    if (pageId == null) return;
     // Disable form before the redirect so it's not confusing for a user.
-    this.setState({ disabled: true }, this.redirectToPage(postId));
+    this.setState({ disabled: true }, this.redirectToPage(pageId));
   };
 
   createWeb = () => {
-    const postName = this.props.intl.formatMessage(messages.postName);
+    const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
 
     // Create input object from state, props, whatever.
     const input = {
       name: this.state.name,
-      postName,
+      pageTitle,
     };
 
     const errors = validations.validateCreateWeb(input);

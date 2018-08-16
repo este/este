@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Aug 10 2018 00:43:25 GMT+0200 (Central European Summer Time)
+# timestamp: Wed Aug 15 2018 01:10:07 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -20,27 +20,27 @@ type AuthPayload {
 
 type CreateWebErrors {
   name: Max140CharsError
-  postName: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 input CreateWebInput {
   name: String!
-  postName: String!
+  pageTitle: String!
 }
 
 type CreateWebPayload {
   errors: CreateWebErrors
-  postId: ID
+  pageId: ID
 }
 
 scalar DateTime
 
-input DeletePostInput {
+input DeletePageInput {
   id: ID!
 }
 
-type DeletePostPayload {
-  post: Post
+type DeletePagePayload {
+  page: Page
 }
 
 input DeleteWebInput {
@@ -58,211 +58,6 @@ enum EmailError {
   NOT_EXISTS
 }
 
-type Image implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  src: String!
-  width: Int!
-  height: Int!
-  creator(where: UserWhereInput): User!
-}
-
-enum ImageOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  src_ASC
-  src_DESC
-  width_ASC
-  width_DESC
-  height_ASC
-  height_DESC
-}
-
-input ImageWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ImageWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ImageWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ImageWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  src: String
-
-  """All values that are not equal to given value."""
-  src_not: String
-
-  """All values that are contained in given list."""
-  src_in: [String!]
-
-  """All values that are not contained in given list."""
-  src_not_in: [String!]
-
-  """All values less than the given value."""
-  src_lt: String
-
-  """All values less than or equal the given value."""
-  src_lte: String
-
-  """All values greater than the given value."""
-  src_gt: String
-
-  """All values greater than or equal the given value."""
-  src_gte: String
-
-  """All values containing the given string."""
-  src_contains: String
-
-  """All values not containing the given string."""
-  src_not_contains: String
-
-  """All values starting with the given string."""
-  src_starts_with: String
-
-  """All values not starting with the given string."""
-  src_not_starts_with: String
-
-  """All values ending with the given string."""
-  src_ends_with: String
-
-  """All values not ending with the given string."""
-  src_not_ends_with: String
-  width: Int
-
-  """All values that are not equal to given value."""
-  width_not: Int
-
-  """All values that are contained in given list."""
-  width_in: [Int!]
-
-  """All values that are not contained in given list."""
-  width_not_in: [Int!]
-
-  """All values less than the given value."""
-  width_lt: Int
-
-  """All values less than or equal the given value."""
-  width_lte: Int
-
-  """All values greater than the given value."""
-  width_gt: Int
-
-  """All values greater than or equal the given value."""
-  width_gte: Int
-  height: Int
-
-  """All values that are not equal to given value."""
-  height_not: Int
-
-  """All values that are contained in given list."""
-  height_in: [Int!]
-
-  """All values that are not contained in given list."""
-  height_not_in: [Int!]
-
-  """All values less than the given value."""
-  height_lt: Int
-
-  """All values less than or equal the given value."""
-  height_lte: Int
-
-  """All values greater than the given value."""
-  height_gt: Int
-
-  """All values greater than or equal the given value."""
-  height_gte: Int
-  creator: UserWhereInput
-}
-
 enum Max140CharsError {
   REQUIRED
   MAX_140_CHARS
@@ -273,10 +68,10 @@ type Mutation {
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
-  setPostName(input: SetPostNameInput!): SetPostNamePayload
+  setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
-  setPostText(input: SetPostTextInput!): SetPostTextPayload
-  deletePost(input: DeletePostInput!): DeletePostPayload
+  setPageContent(input: SetPageContentInput!): SetPageContentPayload
+  deletePage(input: DeletePageInput!): DeletePagePayload
 }
 
 """An object with an ID"""
@@ -285,61 +80,41 @@ interface Node {
   id: ID!
 }
 
-enum PasswordError {
-  REQUIRED
-  MIN_5_CHARS
-  MAX_1024_CHARS
-  WRONG_PASSWORD
-}
-
-type Post implements Node {
+type Page implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
-  name: String
-  type: PostType!
+  title: String!
   web(where: WebWhereInput): Web!
-  parents(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  children(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  childrenOrder: [ID!]!
-  text: String
-  textFormat: String!
-  image(where: ImageWhereInput): Image
+  content: String
+  contentType: String!
 }
 
-enum PostOrderByInput {
+enum PageOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  name_ASC
-  name_DESC
-  type_ASC
-  type_DESC
-  text_ASC
-  text_DESC
-  textFormat_ASC
-  textFormat_DESC
+  title_ASC
+  title_DESC
+  content_ASC
+  content_DESC
+  contentType_ASC
+  contentType_DESC
 }
 
-enum PostType {
-  CHILDREN
-  TEXT
-  IMAGE
-}
-
-input PostWhereInput {
+input PageWhereInput {
   """Logical AND on all given filters."""
-  AND: [PostWhereInput!]
+  AND: [PageWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PostWhereInput!]
+  OR: [PageWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PostWhereInput!]
+  NOT: [PageWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -424,174 +199,164 @@ input PostWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  name: String
+  title: String
 
   """All values that are not equal to given value."""
-  name_not: String
+  title_not: String
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  title_in: [String!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
+  title_not_in: [String!]
 
   """All values less than the given value."""
-  name_lt: String
+  title_lt: String
 
   """All values less than or equal the given value."""
-  name_lte: String
+  title_lte: String
 
   """All values greater than the given value."""
-  name_gt: String
+  title_gt: String
 
   """All values greater than or equal the given value."""
-  name_gte: String
+  title_gte: String
 
   """All values containing the given string."""
-  name_contains: String
+  title_contains: String
 
   """All values not containing the given string."""
-  name_not_contains: String
+  title_not_contains: String
 
   """All values starting with the given string."""
-  name_starts_with: String
+  title_starts_with: String
 
   """All values not starting with the given string."""
-  name_not_starts_with: String
+  title_not_starts_with: String
 
   """All values ending with the given string."""
-  name_ends_with: String
+  title_ends_with: String
 
   """All values not ending with the given string."""
-  name_not_ends_with: String
-  type: PostType
+  title_not_ends_with: String
+  content: String
 
   """All values that are not equal to given value."""
-  type_not: PostType
+  content_not: String
 
   """All values that are contained in given list."""
-  type_in: [PostType!]
+  content_in: [String!]
 
   """All values that are not contained in given list."""
-  type_not_in: [PostType!]
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
+  content_not_in: [String!]
 
   """All values less than the given value."""
-  text_lt: String
+  content_lt: String
 
   """All values less than or equal the given value."""
-  text_lte: String
+  content_lte: String
 
   """All values greater than the given value."""
-  text_gt: String
+  content_gt: String
 
   """All values greater than or equal the given value."""
-  text_gte: String
+  content_gte: String
 
   """All values containing the given string."""
-  text_contains: String
+  content_contains: String
 
   """All values not containing the given string."""
-  text_not_contains: String
+  content_not_contains: String
 
   """All values starting with the given string."""
-  text_starts_with: String
+  content_starts_with: String
 
   """All values not starting with the given string."""
-  text_not_starts_with: String
+  content_not_starts_with: String
 
   """All values ending with the given string."""
-  text_ends_with: String
+  content_ends_with: String
 
   """All values not ending with the given string."""
-  text_not_ends_with: String
-  textFormat: String
+  content_not_ends_with: String
+  contentType: String
 
   """All values that are not equal to given value."""
-  textFormat_not: String
+  contentType_not: String
 
   """All values that are contained in given list."""
-  textFormat_in: [String!]
+  contentType_in: [String!]
 
   """All values that are not contained in given list."""
-  textFormat_not_in: [String!]
+  contentType_not_in: [String!]
 
   """All values less than the given value."""
-  textFormat_lt: String
+  contentType_lt: String
 
   """All values less than or equal the given value."""
-  textFormat_lte: String
+  contentType_lte: String
 
   """All values greater than the given value."""
-  textFormat_gt: String
+  contentType_gt: String
 
   """All values greater than or equal the given value."""
-  textFormat_gte: String
+  contentType_gte: String
 
   """All values containing the given string."""
-  textFormat_contains: String
+  contentType_contains: String
 
   """All values not containing the given string."""
-  textFormat_not_contains: String
+  contentType_not_contains: String
 
   """All values starting with the given string."""
-  textFormat_starts_with: String
+  contentType_starts_with: String
 
   """All values not starting with the given string."""
-  textFormat_not_starts_with: String
+  contentType_not_starts_with: String
 
   """All values ending with the given string."""
-  textFormat_ends_with: String
+  contentType_ends_with: String
 
   """All values not ending with the given string."""
-  textFormat_not_ends_with: String
+  contentType_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  parents_every: PostWhereInput
-  parents_some: PostWhereInput
-  parents_none: PostWhereInput
-  children_every: PostWhereInput
-  children_some: PostWhereInput
-  children_none: PostWhereInput
-  image: ImageWhereInput
+}
+
+enum PasswordError {
+  REQUIRED
+  MIN_5_CHARS
+  MAX_1024_CHARS
+  WRONG_PASSWORD
 }
 
 type Query {
   me: User
-  post(id: ID!): Post
+  page(id: ID!): Page
   web(id: ID!): Web
 }
 
-type SetPostNameErrors {
-  name: Max140CharsError
-}
-
-input SetPostNameInput {
+input SetPageContentInput {
   id: ID!
-  name: String!
+  content: String!
 }
 
-type SetPostNamePayload {
-  errors: SetPostNameErrors
-  post: Post
+type SetPageContentPayload {
+  page: Page
 }
 
-input SetPostTextInput {
+type SetPageTitleErrors {
+  title: Max140CharsError
+}
+
+input SetPageTitleInput {
   id: ID!
-  text: String!
+  title: String!
 }
 
-type SetPostTextPayload {
-  post: Post
+type SetPageTitlePayload {
+  errors: SetPageTitleErrors
+  page: Page
 }
 
 input SetThemeInput {
@@ -624,8 +389,7 @@ type User implements Node {
   password: String!
   themeName: String
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
 
 input UserWhereInput {
@@ -844,12 +608,9 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
+  pages_every: PageWhereInput
+  pages_some: PageWhereInput
+  pages_none: PageWhereInput
 }
 
 type Web implements Node {
@@ -858,7 +619,7 @@ type Web implements Node {
   updatedAt: DateTime!
   creator(where: UserWhereInput): User!
   name: String!
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
 }
 
 enum WebOrderByInput {
@@ -1006,7 +767,7 @@ input WebWhereInput {
   """All values not ending with the given string."""
   name_not_ends_with: String
   creator: UserWhereInput
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
+  pages_every: PageWhereInput
+  pages_some: PageWhereInput
+  pages_none: PageWhereInput
 }

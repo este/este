@@ -52,53 +52,27 @@ const Mutation: MutationType = {
   },
 
   // Note the resolver is as minimal as possible. No userId? Return null. Easy.
-  // Permissions are defined in server/api/permissions/index with
-  // graphql-shield, so clients can handle errors properly.
+  // Permissions are defined in server/api/permissions by graphql-shield.
   createWeb: async (args, info, { userId, db }) => {
     if (userId == null) return null;
     const errors = validations.validateCreateWeb(args.input);
     if (errors) return { errors };
-    const web = await db.mutation.createWeb(
-      {
-        data: {
-          name: args.input.name,
-          creator: { connect: { id: userId } },
-          posts: {
-            create: {
-              name: args.input.postName,
-              creator: { connect: { id: userId } },
-            },
+
+    const page = await db.mutation.createPage({
+      data: {
+        title: args.input.pageTitle,
+        creator: { connect: { id: userId } },
+        web: {
+          create: {
+            name: args.input.name,
+            creator: { connect: { id: userId } },
           },
         },
       },
-      `
-        {
-          id
-          posts {
-            id
-          }
-        }
-      `,
-    );
-    const postId = web.posts && web.posts[0].id;
-    if (postId != null) {
-      await db.mutation.updatePost({
-        data: {
-          children: {
-            create: {
-              creator: { connect: { id: userId } },
-              web: { connect: { id: web.id } },
-              type: 'TEXT',
-            },
-          },
-        },
-        where: {
-          id: postId,
-        },
-      });
-    }
+    });
+
     return {
-      postId: web.posts && web.posts[0].id,
+      pageId: page.id,
     };
   },
 
@@ -120,15 +94,15 @@ const Mutation: MutationType = {
     return { user };
   },
 
-  setPostName: async (args, info, { db }) => {
-    const errors = validations.validateSetPostName(args.input);
+  setPageTitle: async (args, info, { db }) => {
+    const errors = validations.validateSetPageTitle(args.input);
     if (errors) return { errors };
-    const post = await db.mutation.updatePost({
+    const page = await db.mutation.updatePage({
       where: { id: args.input.id },
-      data: { name: args.input.name },
+      data: { title: args.input.title },
     });
-    if (post == null) return null;
-    return { post };
+    if (page == null) return null;
+    return { page };
   },
 
   setWebName: async (args, info, { db }) => {
@@ -142,21 +116,23 @@ const Mutation: MutationType = {
     return { web };
   },
 
-  setPostText: async (args, info, { db }) => {
-    const post = await db.mutation.updatePost({
+  setPageContent: async (args, info, { db }) => {
+    // TODO: Add validateSetPageContent. Prisma allows 256kB and we should
+    // return error for that.
+    const page = await db.mutation.updatePage({
       where: { id: args.input.id },
-      data: { text: args.input.text },
+      data: { content: args.input.content },
     });
-    if (post == null) return null;
-    return { post };
+    if (page == null) return null;
+    return { page };
   },
 
-  deletePost: async (args, info, { db }) => {
-    const post = await db.mutation.deletePost({
+  deletePage: async (args, info, { db }) => {
+    const page = await db.mutation.deletePage({
       where: { id: args.input.id },
     });
-    if (post == null) return null;
-    return { post };
+    if (page == null) return null;
+    return { page };
   },
 };
 

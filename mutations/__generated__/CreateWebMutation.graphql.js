@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash cdef0d223e53f2092cebe0c0ac27f34f
+ * @relayHash 44a5c304a43da78ba9c69229deef4612
  */
 
 /* eslint-disable */
@@ -12,17 +12,17 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
 export type CreateWebInput = {
   name: string,
-  postName: string,
+  pageTitle: string,
 };
 export type CreateWebMutationVariables = {|
   input: CreateWebInput
 |};
 export type CreateWebMutationResponse = {|
   +createWeb: ?{|
-    +postId: ?string,
+    +pageId: ?string,
     +errors: ?{|
       +name: ?Max140CharsError,
-      +postName: ?Max140CharsError,
+      +pageTitle: ?Max140CharsError,
     |},
   |}
 |};
@@ -38,10 +38,10 @@ mutation CreateWebMutation(
   $input: CreateWebInput!
 ) {
   createWeb(input: $input) {
-    postId
+    pageId
     errors {
       name
-      postName
+      pageTitle
     }
   }
 }
@@ -76,7 +76,7 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "postId",
+        "name": "pageId",
         "args": null,
         "storageKey": null
       },
@@ -99,7 +99,7 @@ v1 = [
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "postName",
+            "name": "pageTitle",
             "args": null,
             "storageKey": null
           }
@@ -113,7 +113,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateWebMutation",
   "id": null,
-  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    postId\n    errors {\n      name\n      postName\n    }\n  }\n}\n",
+  "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    pageId\n    errors {\n      name\n      pageTitle\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -132,5 +132,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'd4048444e587e5616b1e3e3d06ac9888';
+(node/*: any*/).hash = '8549878ca48c75dd14f0da3a6c332350';
 module.exports = node;

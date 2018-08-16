@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 import { View } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { findDOMNode } from 'slate-react';
-import PostTextActionsButtons from './PostTextActionsButtons';
-import PostTextActionsLink from './PostTextActionsLink';
-import PostTextActionsLinkPreview from './PostTextActionsLinkPreview';
+import EditorMenuButtons from './EditorMenuButtons';
+import EditorMenuLink from './EditorMenuLink';
+import EditorMenuLinkPreview from './EditorMenuLinkPreview';
 
-export type PostTextAction =
+export type EditorMenuAction =
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
@@ -18,44 +18,30 @@ export type PostTextAction =
   | {| type: 'LINK', href: ?string |}
   | {| type: 'FOCUS' |};
 
-export type PostTextActionsView = null | 'buttons' | 'link' | 'linkPreview';
+export type EditorMenuView = null | 'buttons' | 'link' | 'linkPreview';
 
-type PostTextActionsProps = {|
+type EditorMenuProps = {|
   value: Object,
-  onAction: (action: PostTextAction) => void,
+  onAction: (action: EditorMenuAction) => void,
   theme: Theme,
 |};
 
-type PostTextActionsState = {|
+type EditorMenuState = {|
   left: number,
   top: number,
-  view: PostTextActionsView,
+  view: EditorMenuView,
   hasLinks: boolean,
   linkNode: ?Object,
 |};
 
-class PostTextActions extends React.PureComponent<
-  PostTextActionsProps,
-  PostTextActionsState,
-> {
-  // Probably some Flow race condition bug. Switch not detected. TODO: Check later.
-  // state = {
-  //   left: 0,
-  //   top: 0,
-  //   view: null,
-  //   hasLinks: false,
-  //   linkNode: null,
-  // };
-  constructor(props) {
-    super(props);
-    this.state = {
-      left: 0,
-      top: 0,
-      view: null,
-      hasLinks: false,
-      linkNode: null,
-    };
-  }
+class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
+  state = {
+    left: 0,
+    top: 0,
+    view: null,
+    hasLinks: false,
+    linkNode: null,
+  };
 
   componentDidMount() {
     this.el = window.document.createElement('div');
@@ -86,9 +72,9 @@ class PostTextActions extends React.PureComponent<
   }
 
   static getDerivedStateFromProps(
-    props: PostTextActionsProps,
-    state: PostTextActionsState,
-  ): $Shape<PostTextActionsState> {
+    props: EditorMenuProps,
+    state: EditorMenuState,
+  ): $Shape<EditorMenuState> {
     const ignoreViewWithFocus = state.view === 'link';
     if (ignoreViewWithFocus) return null;
     const { value } = props;
@@ -111,13 +97,13 @@ class PostTextActions extends React.PureComponent<
     this.setState({ view });
   };
 
-  handlePostTextActionsLinkClose = focusEditor => {
+  handleEditorMenuLinkClose = focusEditor => {
     this.setState({ view: 'buttons' }, () => {
       if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
     });
   };
 
-  handlePostTextActionsLinkSubmit = href => {
+  handleEditorMenuLinkSubmit = href => {
     this.props.onAction({ type: 'LINK', href });
   };
 
@@ -182,7 +168,7 @@ class PostTextActions extends React.PureComponent<
     switch (this.state.view) {
       case 'buttons':
         return (
-          <PostTextActionsButtons
+          <EditorMenuButtons
             value={value}
             onAction={onAction}
             onSelectView={this.handleActionsSelectView}
@@ -191,16 +177,16 @@ class PostTextActions extends React.PureComponent<
         );
       case 'link':
         return (
-          <PostTextActionsLink
-            onClose={this.handlePostTextActionsLinkClose}
-            onSubmit={this.handlePostTextActionsLinkSubmit}
+          <EditorMenuLink
+            onClose={this.handleEditorMenuLinkClose}
+            onSubmit={this.handleEditorMenuLinkSubmit}
           />
         );
       case 'linkPreview': {
         const { linkNode } = this.state;
         if (!linkNode) return;
         const href = linkNode.data.get('href');
-        return <PostTextActionsLinkPreview href={href} />;
+        return <EditorMenuLinkPreview href={href} />;
       }
       case null:
         return null;
@@ -217,7 +203,7 @@ class PostTextActions extends React.PureComponent<
     if (view == null) return null;
     const { left, top } = this.state;
     return ReactDOM.createPortal(
-      <View style={[this.props.theme.styles.postTextActions, { left, top }]}>
+      <View style={[this.props.theme.styles.editorMenu, { left, top }]}>
         {view}
       </View>,
       el,
@@ -226,6 +212,6 @@ class PostTextActions extends React.PureComponent<
 }
 
 // This is workaround for https://github.com/este/este/issues/1571
-export type PostTextActionsType = typeof PostTextActions;
+export type EditorMenuType = typeof EditorMenu;
 
-export default withTheme(PostTextActions);
+export default withTheme(EditorMenu);

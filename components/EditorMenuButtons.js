@@ -3,10 +3,10 @@
 import * as React from 'react';
 import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
-import type { MarkType, BlockNodeType } from './PostText';
-import type { PostTextAction, PostTextActionsView } from './PostTextActions';
+import type { MarkType, BlockNodeType } from './Editor';
+import type { EditorMenuAction, EditorMenuView } from './EditorMenu';
 
-type ActionButtonProps = {|
+type MenuButtonProps = {|
   isActive: boolean,
   onPress: () => void,
   theme: Theme,
@@ -15,8 +15,8 @@ type ActionButtonProps = {|
 
 const handlePreventDefault = event => event.preventDefault();
 
-const ActionButton = withTheme(
-  ({ isActive, onPress, theme, children }: ActionButtonProps) => {
+const MenuButton = withTheme(
+  ({ isActive, onPress, theme, children }: MenuButtonProps) => {
     const color = isActive ? 'success' : 'gray';
     return (
       <Button
@@ -24,7 +24,7 @@ const ActionButton = withTheme(
         onPress={onPress}
         color={color}
         bold
-        style={theme.styles.postTextActionsButton}
+        style={theme.styles.editorMenuButton}
         size={-1}
       >
         {children}
@@ -48,9 +48,9 @@ const MarkButton = ({
 }: MarkButtonProps) => {
   const isActive = activeMarks.some(mark => mark.type === markType);
   return (
-    <ActionButton onPress={onPress} isActive={isActive}>
+    <MenuButton onPress={onPress} isActive={isActive}>
       {children}
-    </ActionButton>
+    </MenuButton>
   );
 };
 
@@ -69,30 +69,28 @@ const BlockButton = ({
 }: BlockButtonProps) => {
   const isActive = blocks.some(node => node.type === blockType);
   return (
-    <ActionButton onPress={onPress} isActive={isActive}>
+    <MenuButton onPress={onPress} isActive={isActive}>
       {children}
-    </ActionButton>
+    </MenuButton>
   );
 };
 
 const LinkButton = ({ isActive, onPress }) => {
   return (
-    <ActionButton isActive={isActive} onPress={onPress}>
+    <MenuButton isActive={isActive} onPress={onPress}>
       →
-    </ActionButton>
+    </MenuButton>
   );
 };
 
-type PostTextActionsButtonsProps = {|
+type EditorMenuButtonsProps = {|
   value: Object,
   hasLinks: boolean,
-  onAction: PostTextAction => void,
-  onSelectView: PostTextActionsView => void,
+  onAction: EditorMenuAction => void,
+  onSelectView: EditorMenuView => void,
 |};
 
-class PostTextActionsButtons extends React.PureComponent<
-  PostTextActionsButtonsProps,
-> {
+class EditorMenuButtons extends React.PureComponent<EditorMenuButtonsProps> {
   handleHeadingOnePress = () => {
     this.props.onAction({ type: 'HEADING-ONE' });
   };
@@ -174,4 +172,4 @@ class PostTextActionsButtons extends React.PureComponent<
   }
 }
 
-export default PostTextActionsButtons;
+export default EditorMenuButtons;

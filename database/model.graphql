@@ -5,15 +5,13 @@ type User {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  # TODO: Refactor to auth providers. Email, Facebook, Twitter, etc.
+  # TODO: Refactor to auth providers. Email passwordless, Facebook, Twitter...
   email: String! @unique
   password: String!
-  # TODO: Refactor to Theme.
   themeName: String
-  # Created by a user.
   webs: [Web!]!
-  posts: [Post!]!
-  images: [Image!]!
+  pages: [Page!]!
+  # images: [Image!]!
 }
 
 type Web {
@@ -22,43 +20,35 @@ type Web {
   updatedAt: DateTime!
   creator: User!
   name: String!
-  posts: [Post!]! @relation(name: "WebPosts", onDelete: CASCADE)
+  pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
 }
 
-# Prisma does not support interface nor union types yet.
-# https://github.com/prismagraphql/prisma/issues/165
-enum PostType {
-  CHILDREN
-  TEXT
-  IMAGE
-}
-
-type Post {
+type Page {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   creator: User!
-  name: String
-  type: PostType! @default(value: "CHILDREN")
-  web: Web! @relation(name: "WebPosts", onDelete: SET_NULL)
-  # Parents, so we can reuse elements in a tree.
-  parents: [Post!]! @relation(name: "PostParentsChildren")
-  children: [Post!]! @relation(name: "PostParentsChildren")
-  # It's scalar list aka value object. I suppose it's good enough.
-  # I would rather enforce referential integrity, but I don't know how yet.
-  childrenOrder: [ID!]!
-  text: String
-  # Like CommonMark, but in SlateModel. Let's see.
-  textFormat: String! @default(value: "SlateModel")
-  image: Image
+  title: String!
+  web: Web! @relation(name: "WebPages", onDelete: SET_NULL)
+  # Some Slate JSON stringified model for now. It's too dynamic to be defined
+  # as GraphQL schema for now I guess. Stringified, because:
+  # https://github.com/facebook/relay/issues/2049
+  # TODO: Investigate Json with Relay.
+  # https://docs-beta.prisma.io/1.13/develop-prisma-service/service-configuration/data-model-knul/#json
+  content: String
+  contentType: String! @default(value: "EsteSlate1")
 }
 
-type Image {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  src: String!
-  width: Int!
-  height: Int!
-  creator: User!
-}
+# type FragmentOrComponentOrElementIDontKnowYet {
+#
+# }
+
+# type Image {
+#   id: ID! @unique
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+#   src: String!
+#   width: Int!
+#   height: Int!
+#   creator: User!
+# }

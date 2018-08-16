@@ -8,7 +8,7 @@
 # TODO: Ideally, run `yarn codegen` after nodemon.api.json restart invoked by
 # model.graphql change. PR anyone?
 
-# import User, Web, Post from "../../database/schema.graphql"
+# import User, Web, Page from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -30,17 +30,17 @@ type AuthPayload {
 
 input CreateWebInput {
   name: String!
-  postName: String!
+  pageTitle: String!
 }
 
 type CreateWebErrors {
   name: Max140CharsError
-  postName: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 type CreateWebPayload {
   errors: CreateWebErrors
-  postId: ID
+  pageId: ID
 }
 
 input DeleteWebInput {
@@ -59,18 +59,18 @@ type SetThemePayload {
   user: User
 }
 
-input SetPostNameInput {
+input SetPageTitleInput {
   id: ID!
-  name: String!
+  title: String!
 }
 
-type SetPostNameErrors {
-  name: Max140CharsError
+type SetPageTitleErrors {
+  title: Max140CharsError
 }
 
-type SetPostNamePayload {
-  errors: SetPostNameErrors
-  post: Post
+type SetPageTitlePayload {
+  errors: SetPageTitleErrors
+  page: Page
 }
 
 input SetWebNameInput {
@@ -87,21 +87,21 @@ type SetWebNamePayload {
   web: Web
 }
 
-input SetPostTextInput {
+input SetPageContentInput {
   id: ID!
-  text: String!
+  content: String!
 }
 
-type SetPostTextPayload {
-  post: Post
+type SetPageContentPayload {
+  page: Page
 }
 
-input DeletePostInput {
+input DeletePageInput {
   id: ID!
 }
 
-type DeletePostPayload {
-  post: Post
+type DeletePagePayload {
+  page: Page
 }
 
 type Mutation {
@@ -109,15 +109,15 @@ type Mutation {
   createWeb(input: CreateWebInput!): CreateWebPayload
   deleteWeb(input: DeleteWebInput!): DeleteWebPayload
   setTheme(input: SetThemeInput!): SetThemePayload
-  setPostName(input: SetPostNameInput!): SetPostNamePayload
+  setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
-  setPostText(input: SetPostTextInput!): SetPostTextPayload
-  deletePost(input: DeletePostInput!): DeletePostPayload
+  setPageContent(input: SetPageContentInput!): SetPageContentPayload
+  deletePage(input: DeletePageInput!): DeletePagePayload
 }
 
 # Queries do not need inputs nor payloads. They are pretty explicit.
 type Query {
   me: User
-  post(id: ID!): Post
+  page(id: ID!): Page
   web(id: ID!): Web
 }

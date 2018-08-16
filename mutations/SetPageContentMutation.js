@@ -1,19 +1,19 @@
 // @flow
 import { graphql } from 'react-relay';
 import type { Commit } from '../components/core/withMutation';
-import * as generated from './__generated__/SetPostTextMutation.graphql';
+import * as generated from './__generated__/SetPageContentMutation.graphql';
 
-export type SetPostTextCommit = Commit<
-  generated.SetPostTextInput,
-  generated.SetPostTextMutationResponse,
+export type SetPageContentCommit = Commit<
+  generated.SetPageContentInput,
+  generated.SetPageContentMutationResponse,
 >;
 
 const config = {
   mutation: graphql`
-    mutation SetPostTextMutation($input: SetPostTextInput!) {
-      setPostText(input: $input) {
+    mutation SetPageContentMutation($input: SetPageContentInput!) {
+      setPageContent(input: $input) {
         # By GraphQL design, every mutation has to return something.
-        post {
+        page {
           id
           # Returing text will update Relay store on save automatically.
           # But we don't need it. This is just an example.

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eaf1a13d29696a045b18ecacd00ebfe3
+ * @relayHash 9d30234cbfbed2b32dfb0827e564bd6d
  */
 
 /* eslint-disable */
@@ -9,35 +9,34 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
-export type SetPostNameInput = {
+export type SetPageContentInput = {
   id: string,
-  name: string,
+  content: string,
 };
-export type SetPostNameMutationVariables = {|
-  input: SetPostNameInput
+export type SetPageContentMutationVariables = {|
+  input: SetPageContentInput
 |};
-export type SetPostNameMutationResponse = {|
-  +setPostName: ?{|
-    +errors: ?{|
-      +name: ?Max140CharsError
+export type SetPageContentMutationResponse = {|
+  +setPageContent: ?{|
+    +page: ?{|
+      +id: string
     |}
   |}
 |};
-export type SetPostNameMutation = {|
-  variables: SetPostNameMutationVariables,
-  response: SetPostNameMutationResponse,
+export type SetPageContentMutation = {|
+  variables: SetPageContentMutationVariables,
+  response: SetPageContentMutationResponse,
 |};
 */
 
 
 /*
-mutation SetPostNameMutation(
-  $input: SetPostNameInput!
+mutation SetPageContentMutation(
+  $input: SetPageContentInput!
 ) {
-  setPostName(input: $input) {
-    errors {
-      name
+  setPageContent(input: $input) {
+    page {
+      id
     }
   }
 }
@@ -48,7 +47,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "SetPostNameInput!",
+    "type": "SetPageContentInput!",
     "defaultValue": null
   }
 ],
@@ -56,32 +55,32 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "setPostName",
+    "name": "setPageContent",
     "storageKey": null,
     "args": [
       {
         "kind": "Variable",
         "name": "input",
         "variableName": "input",
-        "type": "SetPostNameInput!"
+        "type": "SetPageContentInput!"
       }
     ],
-    "concreteType": "SetPostNamePayload",
+    "concreteType": "SetPageContentPayload",
     "plural": false,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "errors",
+        "name": "page",
         "storageKey": null,
         "args": null,
-        "concreteType": "SetPostNameErrors",
+        "concreteType": "Page",
         "plural": false,
         "selections": [
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "name",
+            "name": "id",
             "args": null,
             "storageKey": null
           }
@@ -93,13 +92,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "SetPostNameMutation",
+  "name": "SetPageContentMutation",
   "id": null,
-  "text": "mutation SetPostNameMutation(\n  $input: SetPostNameInput!\n) {\n  setPostName(input: $input) {\n    errors {\n      name\n    }\n  }\n}\n",
+  "text": "mutation SetPageContentMutation(\n  $input: SetPageContentInput!\n) {\n  setPageContent(input: $input) {\n    page {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "SetPostNameMutation",
+    "name": "SetPageContentMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -107,12 +106,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "SetPostNameMutation",
+    "name": "SetPageContentMutation",
     "argumentDefinitions": v0,
     "selections": v1
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '69c12ea86fffc63f0ab8b4afa6ed1177';
+(node/*: any*/).hash = 'deb3417afb8296f812a332eed7ca9f0b';
 module.exports = node;

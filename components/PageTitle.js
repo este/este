@@ -5,33 +5,33 @@ import withMutation from './core/withMutation';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import * as validations from '../validations';
 import { pipe } from 'ramda';
-import SetPostNameMutation, {
-  type SetPostNameCommit,
-  type SetPostNameErrors,
-} from '../mutations/SetPostNameMutation';
+import SetPageTitleMutation, {
+  type SetPageTitleCommit,
+  type SetPageTitleErrors,
+} from '../mutations/SetPageTitleMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/PostName.graphql';
+import * as generated from './__generated__/PageTitle.graphql';
 import withStore, { type Store } from './core/withStore';
 
 const messages = defineMessages({
   placeholder: {
-    defaultMessage: 'post name',
-    id: 'postName.textInput.placeholder',
+    defaultMessage: 'page title',
+    id: 'pageTitle.textInput.placeholder',
   },
 });
 
-type PostNameProps = {|
-  data: generated.PostName,
-  commit: SetPostNameCommit,
+type PageTitleProps = {|
+  data: generated.PageTitle,
+  commit: SetPageTitleCommit,
   intl: IntlShape,
   store: Store,
 |};
 
-type PostNameState = {|
-  errors: SetPostNameErrors,
+type PageTitleState = {|
+  errors: SetPageTitleErrors,
 |};
 
-class PostName extends React.PureComponent<PostNameProps, PostNameState> {
+class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
   state = {
     errors: null,
   };
@@ -40,16 +40,16 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
     this.props.store(store => {
       const record = store.get(this.props.data.id);
       if (!record) return;
-      record.setValue(text, 'draftName');
+      record.setValue(text, 'draftTitle');
     });
   };
 
   handleTextInputChangeTextThrottled = value => {
     const input = {
       id: this.props.data.id,
-      name: value,
+      title: value,
     };
-    const errors = validations.validateSetPostName(input);
+    const errors = validations.validateSetPageTitle(input);
     this.setState({ errors });
     if (errors == null) this.props.commit(input);
   };
@@ -59,9 +59,9 @@ class PostName extends React.PureComponent<PostNameProps, PostNameState> {
     const { errors } = this.state;
     return (
       <TextInput
-        error={errors && errors.name}
+        error={errors && errors.title}
         size={1}
-        value={data.draftName}
+        value={data.draftTitle}
         onChangeText={this.handleTextInputChangeText}
         onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
         placeholder={intl.formatMessage(messages.placeholder)}
@@ -74,13 +74,13 @@ export default createFragmentContainer(
   pipe(
     injectIntl,
     withStore,
-    withMutation(SetPostNameMutation),
-  )(PostName),
+    withMutation(SetPageTitleMutation),
+  )(PageTitle),
   graphql`
-    fragment PostName on Post {
+    fragment PageTitle on Page {
       id
-      name @__clientField(handle: "draft")
-      draftName
+      title @__clientField(handle: "draft")
+      draftTitle
     }
   `,
 );

@@ -2,21 +2,20 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
-import { pipe } from 'ramda';
 
-type PostTextActionsLinkProps = {|
+type EditorMenuLinkProps = {|
   theme: Theme,
   onClose: (focusEditor: ?boolean) => void,
   onSubmit: (href: string) => void,
 |};
 
-type PostTextActionsLinkState = {|
+type EditorMenuLinkState = {|
   text: string,
 |};
 
-class PostTextActionsLink extends React.PureComponent<
-  PostTextActionsLinkProps,
-  PostTextActionsLinkState,
+class EditorMenuLink extends React.PureComponent<
+  EditorMenuLinkProps,
+  EditorMenuLinkState,
 > {
   state = {
     text: '',
@@ -51,7 +50,7 @@ class PostTextActionsLink extends React.PureComponent<
         value={text}
         onSubmitEditing={this.handleTextInputSubmitEditing}
         style={[
-          theme.styles.postTextActionsLink,
+          theme.styles.editorMenuLink,
           theme.typography.fontSizeWithLineHeight(-1),
         ]}
         blurOnSubmit={false}
@@ -61,4 +60,4 @@ class PostTextActionsLink extends React.PureComponent<
   }
 }
 
-export default pipe(withTheme)(PostTextActionsLink);
+export default withTheme(EditorMenuLink);

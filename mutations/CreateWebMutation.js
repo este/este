@@ -17,10 +17,10 @@ const config = {
   mutation: graphql`
     mutation CreateWebMutation($input: CreateWebInput!) {
       createWeb(input: $input) {
-        postId
+        pageId
         errors {
           name
-          postName
+          pageTitle
         }
       }
     }

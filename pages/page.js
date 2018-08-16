@@ -3,21 +3,21 @@ import * as React from 'react';
 import app from '../components/app/app';
 import { graphql } from 'react-relay';
 import AppPage from '../components/app/AppPage';
-import PostComponent from '../components/Post';
+import Editor from '../components/Editor';
 
-const Post = props => {
+const Page = props => {
   return (
     <AppPage requireAuth withoutHeader withoutFooter data={props.data}>
-      <PostComponent data={props.data} />
+      <Editor data={props.data} />
     </AppPage>
   );
 };
 
-export default app(Post, {
+export default app(Page, {
   query: graphql`
-    query postQuery($id: ID!) {
+    query pageQuery($id: ID!) {
       ...AppPage
-      ...Post @arguments(id: $id)
+      ...Editor @arguments(id: $id)
     }
   `,
 });
