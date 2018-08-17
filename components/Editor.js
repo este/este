@@ -403,7 +403,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           onChange={this.handleEditorChange}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
-          // schema={schema}
           onFocus={this.handleEditorFocus}
           onKeyDown={this.handleEditorKeyDown}
         />
