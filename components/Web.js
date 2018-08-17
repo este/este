@@ -4,7 +4,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/Web.graphql';
 import Head from 'next/head';
 import WebName from './WebName';
-import EditMainNav from './EditMainNav';
 import Block from './core/Block';
 import Row from './core/Row';
 import DeleteWeb from './DeleteWeb';
@@ -21,22 +20,18 @@ class Web extends React.PureComponent<WebProps> {
     } = this.props;
     if (web == null) return null;
     return (
-      <>
+      <Block>
         <Head>
           <title>{web.draftName}</title>
         </Head>
         {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-        <EditMainNav data={web} />
-        <Block>
-          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-          <WebName data={web} />
-          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-          <WebPages data={web} />
-          <Row>
-            <DeleteWeb id={web.id} />
-          </Row>
-        </Block>
-      </>
+        <WebName data={web} />
+        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+        <WebPages data={web} />
+        <Row>
+          <DeleteWeb id={web.id} />
+        </Row>
+      </Block>
     );
   }
 }
@@ -48,7 +43,6 @@ export default createFragmentContainer(
       web(id: $id) {
         id
         draftName
-        ...EditMainNav
         ...WebName
         ...WebPages
       }

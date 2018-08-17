@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash de07a1a9563f587201951682af56e3ed
+ * @relayHash 3858042bf51cc5bf9890f973e298f0f2
  */
 
 /* eslint-disable */
@@ -42,15 +42,9 @@ fragment AppPage on Query {
 fragment Web_1Bmzm5 on Query {
   web(id: $id) {
     id
-    ...EditMainNav
     ...WebName
     ...WebPages
   }
-}
-
-fragment EditMainNav on Web {
-  id
-  name
 }
 
 fragment WebName on Web {
@@ -93,7 +87,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...EditMainNav\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",

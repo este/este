@@ -7,7 +7,7 @@ import WebComponent from '../components/Web';
 
 const Web = props => {
   return (
-    <AppPage requireAuth withoutHeader withoutFooter data={props.data}>
+    <AppPage requireAuth data={props.data}>
       <WebComponent data={props.data} />
     </AppPage>
   );
