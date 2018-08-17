@@ -8,7 +8,7 @@ import type { EditorMenuAction, EditorMenuView } from './EditorMenu';
 
 type MenuButtonProps = {|
   isActive: boolean,
-  onPress: () => void,
+  onPress: Event => void,
   theme: Theme,
   children: React.Node,
 |};
@@ -21,6 +21,8 @@ const MenuButton = withTheme(
     return (
       <Button
         onPressIn={handlePreventDefault}
+        // We have to use onPress fow now.
+        // https://github.com/necolas/react-native-web/issues/1074
         onPress={onPress}
         color={color}
         bold
@@ -35,7 +37,7 @@ const MenuButton = withTheme(
 
 type MarkButtonProps = {|
   activeMarks: Array<Object>,
-  onPress: () => void,
+  onPress: Event => void,
   markType: MarkType,
   children: React.Node,
 |};
@@ -56,7 +58,7 @@ const MarkButton = ({
 
 type BlockButtonProps = {|
   blocks: Object,
-  onPress: () => void,
+  onPress: Event => void,
   blockType: BlockNodeType,
   children: React.Node,
 |};

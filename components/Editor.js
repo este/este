@@ -26,72 +26,14 @@ import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
 
-// TODO: Refactor types, maybe remove them entirely.
-type ParagraphNode = { type: 'paragraph' };
-// type ImageNode = { type: 'image' };
-type HeadingOneNode = { type: 'headingOne' };
-type HeadingTwoNode = { type: 'headingTwo' };
-type BlockquoteNode = { type: 'blockquote' };
-type ListNode = { type: 'list' };
-type BlockNode =
-  | ParagraphNode
-  | HeadingOneNode
-  | HeadingTwoNode
-  | BlockquoteNode
-  | ListNode;
-export type BlockNodeType = $ElementType<BlockNode, 'type'>;
+export type BlockNodeType =
+  | 'paragraph'
+  | 'headingOne'
+  | 'headingTwo'
+  | 'blockquote'
+  | 'list';
 
-type BoldMark = { type: 'bold' };
-type ItalicMark = { type: 'italic' };
-type Mark = BoldMark | ItalicMark;
-export type MarkType = $ElementType<Mark, 'type'>;
-
-// TODO: Update schema for current specification.
-// type Schema = {
-//   document: {|
-//     nodes: [
-//       {
-//         match: [
-//           ParagraphNode,
-//           HeadingOneNode,
-//           HeadingTwoNode,
-//           BlockquoteNode,
-//           ListNode,
-//           ImageNode,
-//         ],
-//       },
-//     ],
-//   |},
-//   blocks: Object,
-//   marks: [BoldMark, ItalicMark],
-// };
-
-// const schema: Schema = {
-//   document: {
-//     nodes: [
-//       {
-//         match: [
-//           { type: 'paragraph' },
-//           { type: 'headingOne' },
-//           { type: 'headingTwo' },
-//           { type: 'blockquote' },
-//           { type: 'list' },
-//           { type: 'image' },
-//         ],
-//       },
-//     ],
-//   },
-//   blocks: {
-//     paragraph: { nodes: [{ match: { object: 'text' } }] },
-//     headingOne: { nodes: [{ match: { object: 'text' } }] },
-//     headingTwo: { nodes: [{ match: { object: 'text' } }] },
-//     blockquote: { nodes: [{ match: { object: 'text' } }] },
-//     list: { nodes: [{ match: { object: 'text' } }] },
-//     listtem: { nodes: [{ match: { object: 'text' } }] },
-//     image: { isVoid: true, data: { src: url => url && isURL(url) } },
-//   },
-//   marks: [{ type: 'bold' }, { type: 'italic' }, { type: 'link' }],
-// };
+export type MarkType = 'bold' | 'italic';
 
 const emptyText = {
   document: {
@@ -128,31 +70,6 @@ type EditorState = {|
 |};
 
 class Editor extends React.PureComponent<EditorProps, EditorState> {
-  static toggleMark(editor, mark: MarkType) {
-    editor.change(change => {
-      change.toggleMark(mark);
-    });
-  }
-
-  static toggleLinks(editor, href) {
-    editor.change(change => {
-      if (href != null) {
-        const parsed = parse(href);
-        const addProtocol = !parsed.protocol && !!parsed.pathname;
-        const protocol = addProtocol ? 'https://' : '';
-        change
-          .wrapInline({ type: 'link', data: { href: `${protocol}${href}` } })
-          .moveToEnd()
-          .focus();
-      } else {
-        change
-          .unwrapInline('link')
-          .moveToEnd()
-          .focus();
-      }
-    });
-  }
-
   throttleCommit = throttle(content => {
     const { page } = this.props.data;
     if (page == null) return;
@@ -274,8 +191,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   };
 
   handleEditorKeyDown = (event: KeyboardEvent, change) => {
-    const { current: editor } = this.editorRef;
-    if (!editor) return;
     const { value } = this.state;
     const { mod, alt, key, code } = hotKey(event);
 
@@ -291,15 +206,15 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (!mod) return;
     switch (key) {
       case 'b':
-        Editor.toggleMark(editor, 'bold');
+        this.toggleMark('bold', change);
         return;
       case 'i':
-        Editor.toggleMark(editor, 'italic');
+        this.toggleMark('italic', change);
         return;
       case 'k': {
         const { current: editorMenu } = this.editorMenuRef;
         if (editorMenu == null) return;
-        editorMenu.handleKeyModK();
+        editorMenu.handleKeyModK(change);
         return;
       }
     }
@@ -309,51 +224,89 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (onlyInlines) return;
     switch (code) {
       case 49:
-        this.toggleBlocks(editor, 'headingOne');
+        this.toggleBlocks('headingOne', change);
         break;
       case 50:
-        this.toggleBlocks(editor, 'headingTwo');
+        this.toggleBlocks('headingTwo', change);
         break;
     }
   };
 
   handleEditorMenuAction = (action: EditorMenuAction) => {
-    const { current: editor } = this.editorRef;
-    if (!editor) return;
     switch (action.type) {
       case 'BOLD':
-        Editor.toggleMark(editor, 'bold');
+        this.toggleMark('bold');
         break;
       case 'ITALIC':
-        Editor.toggleMark(editor, 'italic');
+        this.toggleMark('italic');
         break;
       case 'LINK':
-        Editor.toggleLinks(editor, action.href);
+        this.toggleLinks(action.href, action.change);
         break;
       case 'HEADING-ONE':
-        this.toggleBlocks(editor, 'headingOne');
+        this.toggleBlocks('headingOne');
         break;
       case 'HEADING-TWO':
-        this.toggleBlocks(editor, 'headingTwo');
+        this.toggleBlocks('headingTwo');
         break;
       case 'BLOCKQUOTE':
-        this.toggleBlocks(editor, 'blockquote');
+        this.toggleBlocks('blockquote');
         break;
-      case 'FOCUS':
-        editor.focus();
+      case 'FOCUS': {
+        const { current: editor } = this.editorRef;
+        if (editor) editor.focus();
         break;
+      }
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
     }
   };
 
-  toggleBlocks(editor, type: BlockNodeType) {
-    const { value } = this.state;
+  change(callback: (change: Object) => void, change: ?Object) {
+    // For Editor onKeyDown, passed change object has to be used.
+    if (change) {
+      callback(change);
+      return;
+    }
+    const { current: editor } = this.editorRef;
+    if (!editor) return;
     editor.change(change => {
+      callback(change);
+    });
+  }
+
+  toggleMark(mark: MarkType, change: ?Object) {
+    this.change(change => {
+      change.toggleMark(mark);
+    }, change);
+  }
+
+  toggleLinks(href, change) {
+    this.change(change => {
+      if (href != null) {
+        const parsed = parse(href);
+        const addProtocol = !parsed.protocol && !!parsed.pathname;
+        const protocol = addProtocol ? 'https://' : '';
+        change
+          .wrapInline({ type: 'link', data: { href: `${protocol}${href}` } })
+          .moveToEnd()
+          .focus();
+      } else {
+        change
+          .unwrapInline('link')
+          .moveToEnd()
+          .focus();
+      }
+    }, change);
+  }
+
+  toggleBlocks(type: BlockNodeType, change: ?Object) {
+    const { value } = this.state;
+    this.change(change => {
       const isActive = value.blocks.some(node => node.type === type);
       change.setBlocks(isActive ? 'paragraph' : type);
-    });
+    }, change);
   }
 
   renderNode = props => {

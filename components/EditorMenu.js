@@ -9,13 +9,14 @@ import EditorMenuButtons from './EditorMenuButtons';
 import EditorMenuLink from './EditorMenuLink';
 import EditorMenuLinkPreview from './EditorMenuLinkPreview';
 
-export type EditorMenuAction =
+export type EditorMenuAction = 
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
   | {| type: 'HEADING-TWO' |}
   | {| type: 'BLOCKQUOTE' |}
-  | {| type: 'LINK', href: ?string |}
+  // It's must to use passed change, if any. Slate requires it in onKeyDown.
+  | {| type: 'LINK', href: ?string, change?: Object |}
   | {| type: 'FOCUS' |};
 
 export type EditorMenuView = null | 'buttons' | 'link' | 'linkPreview';
@@ -107,7 +108,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
     this.props.onAction({ type: 'LINK', href });
   };
 
-  handleKeyModK() {
+  handleKeyModK(change: Object) {
     const { value } = this.props;
     if (value.selection.isCollapsed) {
       const { linkNode } = this.state;
@@ -119,7 +120,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
     }
     if (value.isEmpty) return;
     if (this.state.hasLinks) {
-      this.props.onAction({ type: 'LINK', href: null });
+      this.props.onAction({ type: 'LINK', href: null, change });
     } else {
       this.setState({ view: 'link' });
     }
