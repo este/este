@@ -31,10 +31,8 @@ type Page {
   title: String!
   web: Web! @relation(name: "WebPages", onDelete: SET_NULL)
   # Some Slate JSON stringified model for now. It's too dynamic to be defined
-  # as GraphQL schema for now I guess. Stringified, because:
-  # https://github.com/facebook/relay/issues/2049
-  # TODO: Investigate Json with Relay.
-  # https://docs-beta.prisma.io/1.13/develop-prisma-service/service-configuration/data-model-knul/#json
+  # as GraphQL schema for now I guess. Also, Relay needs guids.
+  # Stringified JSON, because of https://github.com/este/este/issues/1580
   content: String
   contentType: String! @default(value: "EsteSlate1")
 }
