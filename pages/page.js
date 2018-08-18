@@ -2,22 +2,22 @@
 import * as React from 'react';
 import app from '../components/app/app';
 import { graphql } from 'react-relay';
-import Editor from '../components/Editor';
+import PageComponent from '../components/Page';
 import AppPage from '../components/app/AppPage';
 
-const EditorPage = props => {
+const Page = props => {
   return (
     <AppPage requireAuth withoutFooter data={props.data}>
-      <Editor data={props.data} />
+      <PageComponent data={props.data} />
     </AppPage>
   );
 };
 
-export default app(EditorPage, {
+export default app(Page, {
   query: graphql`
-    query editorQuery($id: ID!, $isPage: Boolean!) {
+    query pageQuery($id: ID!, $isPage: Boolean!) {
       ...AppPage @arguments(isPage: $isPage)
-      ...Editor @arguments(id: $id)
+      ...Page @arguments(id: $id)
     }
   `,
   mapQueryVariables: variables => ({ ...variables, isPage: true }),

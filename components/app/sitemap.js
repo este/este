@@ -20,6 +20,10 @@ export type Href =
       query: {| id: string |},
     |}
   | {|
+      pathname: '/page',
+      query: {| id: string |},
+    |}
+  | {|
       pathname: '/web',
       query: {| id: string |},
     |};

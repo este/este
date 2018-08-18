@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9084e539c307e7a27fb0e59190e40ee0
+ * @relayHash 81b02827f76d64676a1055d5d90c2555
  */
 
 /* eslint-disable */
@@ -10,28 +10,28 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
-type Page$ref = any;
-export type pageQueryVariables = {|
+type Editor$ref = any;
+export type editorQueryVariables = {|
   id: string,
   isPage: boolean,
 |};
-export type pageQueryResponse = {|
-  +$fragmentRefs: AppPage$ref & Page$ref
+export type editorQueryResponse = {|
+  +$fragmentRefs: AppPage$ref & Editor$ref
 |};
-export type pageQuery = {|
-  variables: pageQueryVariables,
-  response: pageQueryResponse,
+export type editorQuery = {|
+  variables: editorQueryVariables,
+  response: editorQueryResponse,
 |};
 */
 
 
 /*
-query pageQuery(
+query editorQuery(
   $id: ID!
   $isPage: Boolean!
 ) {
   ...AppPage_16EYnK
-  ...Page_1Bmzm5
+  ...Editor_1Bmzm5
 }
 
 fragment AppPage_16EYnK on Query {
@@ -42,17 +42,12 @@ fragment AppPage_16EYnK on Query {
   ...MainNav_1ppZvl
 }
 
-fragment Page_1Bmzm5 on Query {
+fragment Editor_1Bmzm5 on Query {
   page(id: $id) {
     id
     title
-    ...PageTitle
+    content
   }
-}
-
-fragment PageTitle on Page {
-  id
-  title
 }
 
 fragment MainNav_1ppZvl on Query {
@@ -103,13 +98,13 @@ v2 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "pageQuery",
+  "name": "editorQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Page_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Page_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    ...PageTitle\n  }\n}\n\nfragment PageTitle on Page {\n  id\n  title\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
+  "text": "query editorQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "pageQuery",
+    "name": "editorQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -128,7 +123,7 @@ return {
       },
       {
         "kind": "FragmentSpread",
-        "name": "Page",
+        "name": "Editor",
         "args": [
           {
             "kind": "Variable",
@@ -142,7 +137,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "pageQuery",
+    "name": "editorQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -196,6 +191,13 @@ return {
             "handle": "draft",
             "key": "",
             "filters": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "content",
+            "args": null,
+            "storageKey": null
           }
         ]
       },
@@ -241,5 +243,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f393f41382ea748b637564d5204b4242';
+(node/*: any*/).hash = '84af631e1cdd8ad21ea806bd147e3ad6';
 module.exports = node;
