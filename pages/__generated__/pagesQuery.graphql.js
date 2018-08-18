@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0f9d24d1bd17c83621ccbe5fff054b02
+ * @relayHash 987edad8e7d3d7d27d03260a40d9090b
  */
 
 /* eslint-disable */
@@ -31,9 +31,9 @@ query pagesQuery {
 fragment AppPage on Query {
   me {
     themeName
-    email
     id
   }
+  ...MainNav_4bqd3q
 }
 
 fragment Webs on Query {
@@ -51,6 +51,13 @@ fragment WebsItem on Web {
   updatedAt
   id
 }
+
+fragment MainNav_4bqd3q on Query {
+  me {
+    email
+    id
+  }
+}
 */
 
 const node/*: ConcreteRequest*/ = (function(){
@@ -66,7 +73,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    email\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: createdAt_DESC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_4bqd3q\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: createdAt_DESC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n\nfragment MainNav_4bqd3q on Query {\n  me {\n    email\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -108,6 +115,7 @@ return {
             "args": null,
             "storageKey": null
           },
+          v0,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -115,7 +123,6 @@ return {
             "args": null,
             "storageKey": null
           },
-          v0,
           {
             "kind": "LinkedField",
             "alias": null,

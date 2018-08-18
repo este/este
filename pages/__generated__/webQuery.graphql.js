@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash de226106209c1eda421fee02d1ba2a8e
+ * @relayHash 8018e5128b2b025fdf13c8ff3ebadfc3
  */
 
 /* eslint-disable */
@@ -37,12 +37,9 @@ query webQuery(
 fragment AppPage_2atqod on Query {
   me {
     themeName
-    email
     id
   }
-  web(id: $id) @include(if: $isWeb) {
-    id
-  }
+  ...MainNav_ITgtT
 }
 
 fragment Web_1Bmzm5 on Query {
@@ -69,6 +66,16 @@ fragment WebPagesItem on Page {
   id
   title
   updatedAt
+}
+
+fragment MainNav_ITgtT on Query {
+  me {
+    email
+    id
+  }
+  web(id: $id) @include(if: $isWeb) {
+    id
+  }
 }
 */
 
@@ -99,7 +106,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n  $isWeb: Boolean!\n) {\n  ...AppPage_2atqod\n  ...Web_1Bmzm5\n}\n\nfragment AppPage_2atqod on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  web(id: $id) @include(if: $isWeb) {\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n  $isWeb: Boolean!\n) {\n  ...AppPage_2atqod\n  ...Web_1Bmzm5\n}\n\nfragment AppPage_2atqod on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_ITgtT\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n\nfragment MainNav_ITgtT on Query {\n  me {\n    email\n    id\n  }\n  web(id: $id) @include(if: $isWeb) {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -155,14 +162,14 @@ return {
             "args": null,
             "storageKey": null
           },
+          v1,
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "email",
             "args": null,
             "storageKey": null
-          },
-          v1
+          }
         ]
       },
       {

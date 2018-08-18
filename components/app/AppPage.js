@@ -13,9 +13,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/AppPage.graphql';
 import Auth from '../core/Auth';
 import Text from '../core/Text';
-import { titles } from './sitemap';
-import Spacer from '../core/Spacer';
-import Gravatar from '../core/Gravatar';
+import MainNav from '../MainNav';
 
 // yarn favicon
 const Favicons = () => [
@@ -72,42 +70,6 @@ const PageBody = ({ children }) => (
   <View style={[styles.body]}>{children}</View>
 );
 
-const PageMainNav = ({ email, theme, web, page }) => (
-  <View style={theme.styles.appPageMainNav}>
-    <Spacer>
-      <A href={{ pathname: '/' }} prefetch>
-        <FormattedMessage {...titles.index} />
-      </A>
-      {web && (
-        <A href={{ pathname: '/web', query: { id: web.id } }} prefetch>
-          {web.draftName}
-        </A>
-      )}
-      {page && (
-        <A href={{ pathname: '/web', query: { id: page.web.id } }} prefetch>
-          {page.web.name}
-        </A>
-      )}
-      {page && (
-        <A href={{ pathname: '/page', query: { id: page.id } }} prefetch>
-          {page.draftTitle}
-        </A>
-      )}
-      <View style={{ marginLeft: 'auto' }}>
-        {email != null ? (
-          <A href={{ pathname: '/me' }} prefetch>
-            <Gravatar email={email} size={theme.typography.rhythm(1)} rounded />
-          </A>
-        ) : (
-          <A href={{ pathname: '/sign-in' }} prefetch>
-            <FormattedMessage {...titles.signIn} />
-          </A>
-        )}
-      </View>
-    </Spacer>
-  </View>
-);
-
 const PageFooter = ({ theme }) => (
   <View style={[styles.footer, theme.styles.appPageFooter]}>
     <Text size={-1}>
@@ -150,7 +112,7 @@ class AppPage extends React.PureComponent<Props> {
 
   render() {
     const { data, withoutFooter, title, intl } = this.props;
-    const { me, web, page } = data;
+    const { me } = data;
     const themeName =
       // That's how we gradually check nullable types.
       // TODO: Use Optional Chaining.
@@ -158,7 +120,6 @@ class AppPage extends React.PureComponent<Props> {
     const theme = AppPage.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
     const isAuthenticated = me != null;
-    const email = me != null ? me.email : null;
 
     return (
       <ThemeContext.Provider value={theme}>
@@ -184,7 +145,8 @@ class AppPage extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          <PageMainNav theme={theme} email={email} web={web} page={page} />
+          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+          <MainNav data={data} />
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           {withoutFooter !== true && <PageFooter theme={theme} />}
         </PageContainer>
@@ -193,7 +155,6 @@ class AppPage extends React.PureComponent<Props> {
   }
 }
 
-// https://github.com/este/este/issues/1484
 export default createFragmentContainer(
   injectIntl(AppPage),
   graphql`
@@ -204,20 +165,8 @@ export default createFragmentContainer(
       ) {
       me {
         themeName
-        email
       }
-      web(id: $id) @include(if: $isWeb) {
-        id
-        draftName
-      }
-      page(id: $id) @include(if: $isPage) {
-        id
-        draftTitle
-        web {
-          id
-          name
-        }
-      }
+      ...MainNav @arguments(isPage: $isPage, isWeb: $isWeb)
     }
   `,
 );

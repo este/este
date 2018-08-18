@@ -8,47 +8,20 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type MainNav$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type AppPage$ref: FragmentReference;
 export type AppPage = {|
   +me: ?{|
-    +themeName: ?string,
-    +email: string,
+    +themeName: ?string
   |},
-  +web?: ?{|
-    +id: string,
-    +draftName: string,
-  |},
-  +page?: ?{|
-    +id: string,
-    +draftTitle: string,
-    +web: {|
-      +id: string,
-      +name: string,
-    |},
-  |},
+  +$fragmentRefs: MainNav$ref,
   +$refType: AppPage$ref,
 |};
 */
 
 
-const node/*: ConcreteFragment*/ = (function(){
-var v0 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id",
-    "type": "ID!"
-  }
-],
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
   "name": "AppPage",
   "type": "Query",
@@ -65,11 +38,6 @@ return {
       "name": "isWeb",
       "type": "Boolean",
       "defaultValue": false
-    },
-    {
-      "kind": "RootArgument",
-      "name": "id",
-      "type": "ID!"
     }
   ],
   "selections": [
@@ -88,90 +56,29 @@ return {
           "name": "themeName",
           "args": null,
           "storageKey": null
+        }
+      ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "MainNav",
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "isPage",
+          "variableName": "isPage",
+          "type": null
         },
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "email",
-          "args": null,
-          "storageKey": null
-        }
-      ]
-    },
-    {
-      "kind": "Condition",
-      "passingValue": true,
-      "condition": "isPage",
-      "selections": [
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "page",
-          "storageKey": null,
-          "args": v0,
-          "concreteType": "Page",
-          "plural": false,
-          "selections": [
-            v1,
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "draftTitle",
-              "args": null,
-              "storageKey": null
-            },
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "name": "web",
-              "storageKey": null,
-              "args": null,
-              "concreteType": "Web",
-              "plural": false,
-              "selections": [
-                v1,
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "name": "name",
-                  "args": null,
-                  "storageKey": null
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "kind": "Condition",
-      "passingValue": true,
-      "condition": "isWeb",
-      "selections": [
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "web",
-          "storageKey": null,
-          "args": v0,
-          "concreteType": "Web",
-          "plural": false,
-          "selections": [
-            v1,
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "draftName",
-              "args": null,
-              "storageKey": null
-            }
-          ]
+          "kind": "Variable",
+          "name": "isWeb",
+          "variableName": "isWeb",
+          "type": null
         }
       ]
     }
   ]
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = 'cec41cb9790731350f2035ecb01dd636';
+(node/*: any*/).hash = '16a2e0d255326332b259677817c73599';
 module.exports = node;

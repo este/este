@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2f9a4a20945bd0f26b3b4a2cd57753ac
+ * @relayHash 5a2d9ec0e789f36709d53813b743e896
  */
 
 /* eslint-disable */
@@ -37,6 +37,21 @@ query pageQuery(
 fragment AppPage_16EYnK on Query {
   me {
     themeName
+    id
+  }
+  ...MainNav_1ppZvl
+}
+
+fragment Editor_1Bmzm5 on Query {
+  page(id: $id) {
+    id
+    title
+    content
+  }
+}
+
+fragment MainNav_1ppZvl on Query {
+  me {
     email
     id
   }
@@ -46,14 +61,6 @@ fragment AppPage_16EYnK on Query {
       id
       name
     }
-  }
-}
-
-fragment Editor_1Bmzm5 on Query {
-  page(id: $id) {
-    id
-    title
-    content
   }
 }
 */
@@ -93,7 +100,7 @@ return {
   "operationKind": "query",
   "name": "pageQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -149,14 +156,14 @@ return {
             "args": null,
             "storageKey": null
           },
+          v1,
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "email",
             "args": null,
             "storageKey": null
-          },
-          v1
+          }
         ]
       },
       {
