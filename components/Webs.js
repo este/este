@@ -25,7 +25,8 @@ export default createFragmentContainer(
   graphql`
     fragment Webs on Query {
       me {
-        webs(orderBy: updatedAt_ASC) {
+        # updatedAt is not updated for the whole web content, so use createAt.
+        webs(orderBy: createdAt_DESC) {
           id
           ...WebsItem
         }

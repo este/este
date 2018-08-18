@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3bdcefcb901e8252e3e5d3eff5663e8d
+ * @relayHash 0f9d24d1bd17c83621ccbe5fff054b02
  */
 
 /* eslint-disable */
@@ -38,7 +38,7 @@ fragment AppPage on Query {
 
 fragment Webs on Query {
   me {
-    webs(orderBy: updatedAt_ASC) {
+    webs(orderBy: createdAt_DESC) {
       id
       ...WebsItem
     }
@@ -66,7 +66,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    email\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    email\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: createdAt_DESC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -120,12 +120,12 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "webs",
-            "storageKey": "webs(orderBy:\"updatedAt_ASC\")",
+            "storageKey": "webs(orderBy:\"createdAt_DESC\")",
             "args": [
               {
                 "kind": "Literal",
                 "name": "orderBy",
-                "value": "updatedAt_ASC",
+                "value": "createdAt_DESC",
                 "type": "WebOrderByInput"
               }
             ],
