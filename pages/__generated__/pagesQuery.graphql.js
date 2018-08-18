@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2bb56b1cafb94463e45a743077a16299
+ * @relayHash 3bdcefcb901e8252e3e5d3eff5663e8d
  */
 
 /* eslint-disable */
@@ -31,6 +31,7 @@ query pagesQuery {
 fragment AppPage on Query {
   me {
     themeName
+    email
     id
   }
 }
@@ -65,7 +66,7 @@ return {
   "operationKind": "query",
   "name": "pagesQuery",
   "id": null,
-  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
+  "text": "query pagesQuery {\n  ...AppPage\n  ...Webs\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    email\n    id\n  }\n}\n\nfragment Webs on Query {\n  me {\n    webs(orderBy: updatedAt_ASC) {\n      id\n      ...WebsItem\n    }\n    id\n  }\n}\n\nfragment WebsItem on Web {\n  name\n  updatedAt\n  id\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -104,6 +105,13 @@ return {
             "kind": "ScalarField",
             "alias": null,
             "name": "themeName",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "email",
             "args": null,
             "storageKey": null
           },

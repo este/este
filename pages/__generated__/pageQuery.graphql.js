@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8e4f87d62cc2fc3ff10eaac749b05b4f
+ * @relayHash 8dc7813d2d228b28b16d1666cd9f0461
  */
 
 /* eslint-disable */
@@ -12,7 +12,8 @@ import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
 type Editor$ref = any;
 export type pageQueryVariables = {|
-  id: string
+  id: string,
+  isPage: boolean,
 |};
 export type pageQueryResponse = {|
   +$fragmentRefs: AppPage$ref & Editor$ref
@@ -27,15 +28,25 @@ export type pageQuery = {|
 /*
 query pageQuery(
   $id: ID!
+  $isPage: Boolean!
 ) {
-  ...AppPage
+  ...AppPage_16EYnK
   ...Editor_1Bmzm5
 }
 
-fragment AppPage on Query {
+fragment AppPage_16EYnK on Query {
   me {
     themeName
+    email
     id
+  }
+  page(id: $id) @include(if: $isPage) {
+    id
+    title
+    web {
+      id
+      name
+    }
   }
 }
 
@@ -44,22 +55,7 @@ fragment Editor_1Bmzm5 on Query {
     id
     title
     content
-    web {
-      ...EditMainNav
-      id
-    }
-    ...PageTitle
   }
-}
-
-fragment EditMainNav on Web {
-  id
-  name
-}
-
-fragment PageTitle on Page {
-  id
-  title
 }
 */
 
@@ -70,6 +66,12 @@ var v0 = [
     "name": "id",
     "type": "ID!",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "isPage",
+    "type": "Boolean!",
+    "defaultValue": null
   }
 ],
 v1 = {
@@ -78,13 +80,21 @@ v1 = {
   "name": "id",
   "args": null,
   "storageKey": null
-};
+},
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id",
+    "type": "ID!"
+  }
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "pageQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n    web {\n      ...EditMainNav\n      id\n    }\n    ...PageTitle\n  }\n}\n\nfragment EditMainNav on Web {\n  id\n  name\n}\n\nfragment PageTitle on Page {\n  id\n  title\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    title\n    web {\n      id\n      name\n    }\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -96,7 +106,14 @@ return {
       {
         "kind": "FragmentSpread",
         "name": "AppPage",
-        "args": null
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "isPage",
+            "variableName": "isPage",
+            "type": null
+          }
+        ]
       },
       {
         "kind": "FragmentSpread",
@@ -133,6 +150,13 @@ return {
             "args": null,
             "storageKey": null
           },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "email",
+            "args": null,
+            "storageKey": null
+          },
           v1
         ]
       },
@@ -141,14 +165,7 @@ return {
         "alias": null,
         "name": "page",
         "storageKey": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id",
-            "type": "ID!"
-          }
-        ],
+        "args": v2,
         "concreteType": "Page",
         "plural": false,
         "selections": [
@@ -175,32 +192,41 @@ return {
             "name": "content",
             "args": null,
             "storageKey": null
-          },
+          }
+        ]
+      },
+      {
+        "kind": "Condition",
+        "passingValue": true,
+        "condition": "isPage",
+        "selections": [
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "web",
+            "name": "page",
             "storageKey": null,
-            "args": null,
-            "concreteType": "Web",
+            "args": v2,
+            "concreteType": "Page",
             "plural": false,
             "selections": [
-              v1,
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
-                "name": "name",
+                "name": "web",
+                "storageKey": null,
                 "args": null,
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarHandle",
-                "alias": null,
-                "name": "name",
-                "args": null,
-                "handle": "draft",
-                "key": "",
-                "filters": null
+                "concreteType": "Web",
+                "plural": false,
+                "selections": [
+                  v1,
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "name",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
               }
             ]
           }
@@ -211,5 +237,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ce05ca5a39bac507381f7ea2cd22c8b5';
+(node/*: any*/).hash = '9b193b7f5a3d80f131c29fe4db7fbf18';
 module.exports = node;

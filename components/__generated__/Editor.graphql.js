@@ -8,8 +8,6 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-type EditMainNav$ref = any;
-type PageTitle$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Editor$ref: FragmentReference;
 export type Editor = {|
@@ -18,10 +16,6 @@ export type Editor = {|
     +title: string,
     +draftTitle: string,
     +content: ?string,
-    +web: {|
-      +$fragmentRefs: EditMainNav$ref
-    |},
-    +$fragmentRefs: PageTitle$ref,
   |},
   +$refType: Editor$ref,
 |};
@@ -85,32 +79,11 @@ const node/*: ConcreteFragment*/ = {
           "name": "content",
           "args": null,
           "storageKey": null
-        },
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "web",
-          "storageKey": null,
-          "args": null,
-          "concreteType": "Web",
-          "plural": false,
-          "selections": [
-            {
-              "kind": "FragmentSpread",
-              "name": "EditMainNav",
-              "args": null
-            }
-          ]
-        },
-        {
-          "kind": "FragmentSpread",
-          "name": "PageTitle",
-          "args": null
         }
       ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '1abfd009d13a5968d0117862e2108b65';
+(node/*: any*/).hash = '82829b0cf724000749738a3d8d849c9a';
 module.exports = node;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3858042bf51cc5bf9890f973e298f0f2
+ * @relayHash 181072a0bc1c5c3b79f4a08080d00da0
  */
 
 /* eslint-disable */
@@ -12,7 +12,8 @@ import type { ConcreteRequest } from 'relay-runtime';
 type AppPage$ref = any;
 type Web$ref = any;
 export type webQueryVariables = {|
-  id: string
+  id: string,
+  isWeb: boolean,
 |};
 export type webQueryResponse = {|
   +$fragmentRefs: AppPage$ref & Web$ref
@@ -27,15 +28,21 @@ export type webQuery = {|
 /*
 query webQuery(
   $id: ID!
+  $isWeb: Boolean!
 ) {
-  ...AppPage
+  ...AppPage_2atqod
   ...Web_1Bmzm5
 }
 
-fragment AppPage on Query {
+fragment AppPage_2atqod on Query {
   me {
     themeName
+    email
     id
+  }
+  web(id: $id) @include(if: $isWeb) {
+    id
+    name
   }
 }
 
@@ -73,6 +80,12 @@ var v0 = [
     "name": "id",
     "type": "ID!",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "isWeb",
+    "type": "Boolean!",
+    "defaultValue": null
   }
 ],
 v1 = {
@@ -87,7 +100,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n) {\n  ...AppPage\n  ...Web_1Bmzm5\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n  $isWeb: Boolean!\n) {\n  ...AppPage_2atqod\n  ...Web_1Bmzm5\n}\n\nfragment AppPage_2atqod on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  web(id: $id) @include(if: $isWeb) {\n    id\n    name\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -99,7 +112,14 @@ return {
       {
         "kind": "FragmentSpread",
         "name": "AppPage",
-        "args": null
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "isWeb",
+            "variableName": "isWeb",
+            "type": null
+          }
+        ]
       },
       {
         "kind": "FragmentSpread",
@@ -133,6 +153,13 @@ return {
             "kind": "ScalarField",
             "alias": null,
             "name": "themeName",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "email",
             "args": null,
             "storageKey": null
           },
@@ -212,5 +239,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5ca8032c9d0808ae5d269c3e9d6bb6c6';
+(node/*: any*/).hash = '6a63e8059cf63c8a8143336af3fa1579';
 module.exports = node;

@@ -7,21 +7,12 @@ import Row from '../components/core/Row';
 import AppPage from '../components/app/AppPage';
 import SetTheme from '../components/core/SetTheme';
 import app from '../components/app/app';
-import gravatar from 'gravatar';
 import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
 import { deleteCookie } from '../components/app/cookie';
 import * as generated from './__generated__/meQuery.graphql';
-import { Image } from 'react-native';
-
-const getGravatarUrl = email =>
-  gravatar.url(email, {
-    d: 'retro',
-    protocol: 'https',
-    r: 'x',
-    s: '100',
-  });
+import Gravatar from '../components/core/Gravatar';
 
 const signOut = () => {
   deleteCookie();
@@ -44,14 +35,7 @@ const Me = props => {
             <Text bold>{me.email}</Text>
           </Block>
           <Block>
-            <Image
-              source={getGravatarUrl(me.email)}
-              style={{
-                height: 100,
-                width: 100,
-              }}
-              title={me.email}
-            />
+            <Gravatar email={me.email} />
           </Block>
         </>
       )}

@@ -15,6 +15,7 @@ import Auth from '../core/Auth';
 import Text from '../core/Text';
 import { titles } from './sitemap';
 import Spacer from '../core/Spacer';
+import Gravatar from '../core/Gravatar';
 
 // yarn favicon
 const Favicons = () => [
@@ -71,21 +72,38 @@ const PageBody = ({ children }) => (
   <View style={[styles.body]}>{children}</View>
 );
 
-const PageMainNav = ({ isAuthenticated, theme }) => (
+const PageMainNav = ({ email, theme, web, page }) => (
   <View style={theme.styles.appPageMainNav}>
     <Spacer>
       <A href={{ pathname: '/' }} prefetch>
         <FormattedMessage {...titles.index} />
       </A>
-      {isAuthenticated ? (
-        <A href={{ pathname: '/me' }} prefetch>
-          <FormattedMessage {...titles.me} />
-        </A>
-      ) : (
-        <A href={{ pathname: '/sign-in' }} prefetch>
-          <FormattedMessage {...titles.signIn} />
+      {web && (
+        <A href={{ pathname: '/web', query: { id: web.id } }} prefetch>
+          {web.name}
         </A>
       )}
+      {page && (
+        <A href={{ pathname: '/web', query: { id: page.web.id } }} prefetch>
+          {page.web.name}
+        </A>
+      )}
+      {page && (
+        <A href={{ pathname: '/page', query: { id: page.id } }} prefetch>
+          {page.title}
+        </A>
+      )}
+      <View style={{ marginLeft: 'auto' }}>
+        {email != null ? (
+          <A href={{ pathname: '/me' }} prefetch>
+            <Gravatar email={email} size={theme.typography.rhythm(1)} rounded />
+          </A>
+        ) : (
+          <A href={{ pathname: '/sign-in' }} prefetch>
+            <FormattedMessage {...titles.signIn} />
+          </A>
+        )}
+      </View>
     </Spacer>
   </View>
 );
@@ -107,7 +125,6 @@ type Props = {|
   data: generated.AppPage,
   requireAuth?: boolean,
   intl: IntlShape,
-  withoutHeader?: boolean,
   withoutFooter?: boolean,
 |};
 
@@ -132,15 +149,16 @@ class AppPage extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, withoutHeader, withoutFooter, title, intl } = this.props;
-    const isAuthenticated = data.me != null;
+    const { data, withoutFooter, title, intl } = this.props;
+    const { me, web, page } = data;
     const themeName =
       // That's how we gradually check nullable types.
       // TODO: Use Optional Chaining.
-      (data.me != null && data.me.themeName != null && data.me.themeName) ||
-      'light';
+      (me != null && me.themeName != null && me.themeName) || 'light';
     const theme = AppPage.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
+    const isAuthenticated = me != null;
+    const email = me != null ? me.email : null;
 
     return (
       <ThemeContext.Provider value={theme}>
@@ -166,9 +184,7 @@ class AppPage extends React.PureComponent<Props> {
           `}</style>
         </div>
         <PageContainer theme={theme}>
-          {withoutHeader !== true && (
-            <PageMainNav isAuthenticated={isAuthenticated} theme={theme} />
-          )}
+          <PageMainNav theme={theme} email={email} web={web} page={page} />
           <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
           {withoutFooter !== true && <PageFooter theme={theme} />}
         </PageContainer>
@@ -181,9 +197,26 @@ class AppPage extends React.PureComponent<Props> {
 export default createFragmentContainer(
   injectIntl(AppPage),
   graphql`
-    fragment AppPage on Query {
+    fragment AppPage on Query
+      @argumentDefinitions(
+        isPage: { type: "Boolean", defaultValue: false }
+        isWeb: { type: "Boolean", defaultValue: false }
+      ) {
       me {
         themeName
+        email
+      }
+      web(id: $id) @include(if: $isWeb) {
+        id
+        name
+      }
+      page(id: $id) @include(if: $isPage) {
+        id
+        title
+        web {
+          id
+          name
+        }
       }
     }
   `,

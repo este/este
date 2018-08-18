@@ -2,8 +2,7 @@
 import * as React from 'react';
 import * as generated from './__generated__/Editor.graphql';
 import Head from 'next/head';
-import EditMainNav from './EditMainNav';
-import PageTitle from './PageTitle';
+// import PageTitle from './PageTitle';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from './core/TextInput';
 import withMutation from './core/withMutation';
@@ -25,6 +24,7 @@ import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
+import { View } from 'react-native';
 
 export type BlockNodeType =
   | 'paragraph'
@@ -388,15 +388,19 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     // eslint-disable-next-line no-unused-expressions
     page.title;
     return (
-      <>
+      <View
+      // style={{
+      //   borderTopColor: '#47315a',
+      //   borderTopWidth: 1,
+      // }}
+      >
         <Head>
           <title>{page.draftTitle}</title>
         </Head>
-        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-        <EditMainNav data={page.web} />
-        {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-        <PageTitle data={page} />
+        {/* <PageTitle data={page} /> */}
         <SlateEditor
+          autoCorrect={false}
+          spellCheck={false}
           ref={this.editorRef}
           autoFocus
           value={this.state.value}
@@ -412,7 +416,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           value={this.state.value}
           onAction={this.handleEditorMenuAction}
         />
-      </>
+      </View>
     );
   }
 }
@@ -430,10 +434,7 @@ export default createFragmentContainer(
         title @__clientField(handle: "draft")
         draftTitle
         content
-        web {
-          ...EditMainNav
-        }
-        ...PageTitle
+        # ...PageTitle
       }
     }
   `,

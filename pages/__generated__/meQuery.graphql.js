@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2a87b2f983dcb1b15dd6b416fc5da54d
+ * @relayHash 3b904ed13cea265673391ec75799e9ad
  */
 
 /* eslint-disable */
@@ -36,6 +36,7 @@ query meQuery {
 fragment AppPage on Query {
   me {
     themeName
+    email
     id
   }
 }
@@ -54,7 +55,7 @@ return {
   "operationKind": "query",
   "name": "meQuery",
   "id": null,
-  "text": "query meQuery {\n  ...AppPage\n  me {\n    email\n    id\n  }\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    id\n  }\n}\n",
+  "text": "query meQuery {\n  ...AppPage\n  me {\n    email\n    id\n  }\n}\n\nfragment AppPage on Query {\n  me {\n    themeName\n    email\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -103,14 +104,14 @@ return {
             "args": null,
             "storageKey": null
           },
+          v0,
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "id",
             "args": null,
             "storageKey": null
-          },
-          v0
+          }
         ]
       }
     ]

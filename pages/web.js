@@ -15,9 +15,10 @@ const Web = props => {
 
 export default app(Web, {
   query: graphql`
-    query webQuery($id: ID!) {
-      ...AppPage
+    query webQuery($id: ID!, $isWeb: Boolean!) {
+      ...AppPage @arguments(isWeb: $isWeb)
       ...Web @arguments(id: $id)
     }
   `,
+  mapQueryVariables: variables => ({ ...variables, isWeb: true }),
 });

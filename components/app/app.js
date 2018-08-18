@@ -62,9 +62,10 @@ const app = (
   Page: React.StatelessFunctionalComponent<{| data: Object |}>,
   options?: {|
     query?: GraphQLTaggedNode,
+    mapQueryVariables?: Object => Object,
   |},
 ) => {
-  const { query } = options || {};
+  const { query, mapQueryVariables } = options || {};
 
   class App extends React.PureComponent<AppProps, AppState> {
     constructor(props: AppProps) {
@@ -99,8 +100,12 @@ const app = (
       if (query) {
         const rejectErrors = true;
         const environment = createRelayEnvironment({ token, rejectErrors });
+        const queryVariables =
+          mapQueryVariables != null
+            ? mapQueryVariables(context.query)
+            : context.query;
         try {
-          data = await fetchQuery(environment, query, context.query);
+          data = await fetchQuery(environment, query, queryVariables);
         } catch (errors) {
           // We don't care about errors, just render Next.js Error 404 and set
           // response status code. It's good enough for now.
