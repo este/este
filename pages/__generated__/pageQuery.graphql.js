@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8dc7813d2d228b28b16d1666cd9f0461
+ * @relayHash 2f9a4a20945bd0f26b3b4a2cd57753ac
  */
 
 /* eslint-disable */
@@ -42,7 +42,6 @@ fragment AppPage_16EYnK on Query {
   }
   page(id: $id) @include(if: $isPage) {
     id
-    title
     web {
       id
       name
@@ -94,7 +93,7 @@ return {
   "operationKind": "query",
   "name": "pageQuery",
   "id": null,
-  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    title\n    web {\n      id\n      name\n    }\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n",
+  "text": "query pageQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",

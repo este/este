@@ -17,11 +17,11 @@ export type AppPage = {|
   |},
   +web?: ?{|
     +id: string,
-    +name: string,
+    +draftName: string,
   |},
   +page?: ?{|
     +id: string,
-    +title: string,
+    +draftTitle: string,
     +web: {|
       +id: string,
       +name: string,
@@ -47,17 +47,7 @@ v1 = {
   "name": "id",
   "args": null,
   "storageKey": null
-},
-v2 = [
-  v1,
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "name",
-    "args": null,
-    "storageKey": null
-  }
-];
+};
 return {
   "kind": "Fragment",
   "name": "AppPage",
@@ -126,7 +116,7 @@ return {
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "title",
+              "name": "draftTitle",
               "args": null,
               "storageKey": null
             },
@@ -138,7 +128,16 @@ return {
               "args": null,
               "concreteType": "Web",
               "plural": false,
-              "selections": v2
+              "selections": [
+                v1,
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "name",
+                  "args": null,
+                  "storageKey": null
+                }
+              ]
             }
           ]
         }
@@ -157,7 +156,16 @@ return {
           "args": v0,
           "concreteType": "Web",
           "plural": false,
-          "selections": v2
+          "selections": [
+            v1,
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "draftName",
+              "args": null,
+              "storageKey": null
+            }
+          ]
         }
       ]
     }
@@ -165,5 +173,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f627a5c93974614fce6d9ed37ab01b5d';
+(node/*: any*/).hash = 'cec41cb9790731350f2035ecb01dd636';
 module.exports = node;

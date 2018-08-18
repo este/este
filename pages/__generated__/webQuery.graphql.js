@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 181072a0bc1c5c3b79f4a08080d00da0
+ * @relayHash de226106209c1eda421fee02d1ba2a8e
  */
 
 /* eslint-disable */
@@ -42,7 +42,6 @@ fragment AppPage_2atqod on Query {
   }
   web(id: $id) @include(if: $isWeb) {
     id
-    name
   }
 }
 
@@ -100,7 +99,7 @@ return {
   "operationKind": "query",
   "name": "webQuery",
   "id": null,
-  "text": "query webQuery(\n  $id: ID!\n  $isWeb: Boolean!\n) {\n  ...AppPage_2atqod\n  ...Web_1Bmzm5\n}\n\nfragment AppPage_2atqod on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  web(id: $id) @include(if: $isWeb) {\n    id\n    name\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
+  "text": "query webQuery(\n  $id: ID!\n  $isWeb: Boolean!\n) {\n  ...AppPage_2atqod\n  ...Web_1Bmzm5\n}\n\nfragment AppPage_2atqod on Query {\n  me {\n    themeName\n    email\n    id\n  }\n  web(id: $id) @include(if: $isWeb) {\n    id\n  }\n}\n\nfragment Web_1Bmzm5 on Query {\n  web(id: $id) {\n    id\n    ...WebName\n    ...WebPages\n  }\n}\n\nfragment WebName on Web {\n  id\n  name\n}\n\nfragment WebPages on Web {\n  pages(orderBy: updatedAt_DESC) {\n    id\n    ...WebPagesItem\n  }\n}\n\nfragment WebPagesItem on Page {\n  id\n  title\n  updatedAt\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",

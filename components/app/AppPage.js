@@ -80,7 +80,7 @@ const PageMainNav = ({ email, theme, web, page }) => (
       </A>
       {web && (
         <A href={{ pathname: '/web', query: { id: web.id } }} prefetch>
-          {web.name}
+          {web.draftName}
         </A>
       )}
       {page && (
@@ -90,7 +90,7 @@ const PageMainNav = ({ email, theme, web, page }) => (
       )}
       {page && (
         <A href={{ pathname: '/page', query: { id: page.id } }} prefetch>
-          {page.title}
+          {page.draftTitle}
         </A>
       )}
       <View style={{ marginLeft: 'auto' }}>
@@ -208,11 +208,11 @@ export default createFragmentContainer(
       }
       web(id: $id) @include(if: $isWeb) {
         id
-        name
+        draftName
       }
       page(id: $id) @include(if: $isPage) {
         id
-        title
+        draftTitle
         web {
           id
           name
