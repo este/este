@@ -5,7 +5,7 @@ import { graphql } from 'react-relay';
 import Editor from '../components/Editor';
 import AppPage from '../components/app/AppPage';
 
-const Page = props => {
+const EditorPage = props => {
   return (
     <AppPage requireAuth withoutFooter data={props.data}>
       <Editor data={props.data} />
@@ -13,7 +13,7 @@ const Page = props => {
   );
 };
 
-export default app(Page, {
+export default app(EditorPage, {
   query: graphql`
     query pageQuery($id: ID!, $isPage: Boolean!) {
       ...AppPage @arguments(isPage: $isPage)

@@ -38,7 +38,7 @@ class MainNav extends React.PureComponent<MainNavProps> {
             </A>
           )}
           {page && (
-            <A href={{ pathname: '/page', query: { id: page.id } }} prefetch>
+            <A href={{ pathname: '/editor', query: { id: page.id } }} prefetch>
               {page.draftTitle}
             </A>
           )}

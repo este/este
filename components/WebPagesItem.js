@@ -20,7 +20,7 @@ class WebPagesItem extends React.PureComponent<WebPagesItemProps> {
     return (
       <Block>
         <Row>
-          <A href={{ pathname: '/page', query: { id } }} prefetch>
+          <A href={{ pathname: '/editor', query: { id } }} prefetch>
             {title}
           </A>
         </Row>
