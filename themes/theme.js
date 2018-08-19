@@ -103,8 +103,29 @@ const stylesJson = {
   },
 
   appPageContainer: {
-    paddingHorizontal: typography.rhythm(0.5),
+    // Only minHeight to make footer sticky.
+    // No width or anything else to allow editor have any styles there.
+    minHeight: '100%',
+  },
+
+  appPageContainerChild: {
     maxWidth: 768,
+    // Width 100% is must otherwise width will be defined by actual content.
+    // It's caused by marginHorizontal here but also by alignItems: 'center'
+    // on the parent.
+    width: '100%',
+    marginHorizontal: 'auto',
+    paddingHorizontal: typography.rhythm(0.5),
+  },
+
+  appPageMainNav: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginVertical: typography.rhythm(1),
+  },
+
+  appPageBody: {
+    flex: 1, // make footer sticky
   },
 
   appPageFooter: {
@@ -112,12 +133,7 @@ const stylesJson = {
     borderTopWidth: 1,
     borderStyle: 'solid',
     paddingVertical: typography.rhythm(0.5),
-  },
-
-  appPageMainNav: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginVertical: typography.rhythm(1),
   },
 
   // TODO: Rename to disabled.

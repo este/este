@@ -7,7 +7,7 @@ import AppPage from '../components/app/AppPage';
 
 const Page = props => {
   return (
-    <AppPage requireAuth withoutFooter data={props.data}>
+    <AppPage requireAuth data={props.data}>
       <PageComponent data={props.data} />
     </AppPage>
   );

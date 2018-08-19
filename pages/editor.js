@@ -7,7 +7,7 @@ import AppPage from '../components/app/AppPage';
 
 const EditorPage = props => {
   return (
-    <AppPage requireAuth withoutFooter data={props.data}>
+    <AppPage requireAuth isEditor data={props.data}>
       <Editor data={props.data} />
     </AppPage>
   );

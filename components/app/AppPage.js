@@ -1,10 +1,10 @@
 // @flow
-import { View, StyleSheet } from 'react-native';
+import * as React from 'react';
+import { View } from 'react-native';
 import A from '../core/A';
 import ErrorPopup from '../core/ErrorPopup';
 import Head from 'next/head';
 import PageLoadingBar from '../core/PageLoadingBar';
-import * as React from 'react';
 import SwitchLocale from '../core/SwitchLocale';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import ThemeContext from '../core/ThemeContext';
@@ -47,31 +47,8 @@ const Favicons = () => [
   />,
 ];
 
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 'auto',
-    minHeight: '100%', // make footer sticky
-  },
-  body: {
-    flex: 1, // make footer sticky
-  },
-  footer: {
-    flexDirection: 'row',
-  },
-});
-
-const PageContainer = ({ children, theme }) => (
-  <View style={[styles.container, theme.styles.appPageContainer]}>
-    {children}
-  </View>
-);
-
-const PageBody = ({ children }) => (
-  <View style={[styles.body]}>{children}</View>
-);
-
 const PageFooter = ({ theme }) => (
-  <View style={[styles.footer, theme.styles.appPageFooter]}>
+  <View style={theme.styles.appPageFooter}>
     <Text size={-1}>
       <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
       <A href="https://twitter.com/steida">steida</A>
@@ -87,7 +64,7 @@ type Props = {|
   data: generated.AppPage,
   requireAuth?: boolean,
   intl: IntlShape,
-  withoutFooter?: boolean,
+  isEditor?: boolean,
 |};
 
 class AppPage extends React.PureComponent<Props> {
@@ -111,7 +88,7 @@ class AppPage extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, withoutFooter, title, intl } = this.props;
+    const { data, isEditor = false, title, intl } = this.props;
     const { me } = data;
     const themeName =
       // That's how we gradually check nullable types.
@@ -144,12 +121,25 @@ class AppPage extends React.PureComponent<Props> {
             }
           `}</style>
         </div>
-        <PageContainer theme={theme}>
-          {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-          <MainNav data={data} />
-          <PageBody>{this.renderChildrenOrAuth(isAuthenticated)}</PageBody>
-          {withoutFooter !== true && <PageFooter theme={theme} />}
-        </PageContainer>
+        <View style={theme.styles.appPageContainer}>
+          <View style={theme.styles.appPageContainerChild}>
+            {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+            <MainNav data={data} />
+          </View>
+          <View
+            style={[
+              !isEditor && theme.styles.appPageContainerChild,
+              theme.styles.appPageBody,
+            ]}
+          >
+            {this.renderChildrenOrAuth(isAuthenticated)}
+          </View>
+          {isEditor !== true && (
+            <View style={theme.styles.appPageContainerChild}>
+              <PageFooter theme={theme} />
+            </View>
+          )}
+        </View>
       </ThemeContext.Provider>
     );
   }
