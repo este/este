@@ -2,7 +2,6 @@
 import * as React from 'react';
 import * as generated from './__generated__/Editor.graphql';
 import Head from 'next/head';
-// import PageTitle from './PageTitle';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from './core/TextInput';
 import withMutation from './core/withMutation';
@@ -388,35 +387,46 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     // eslint-disable-next-line no-unused-expressions
     page.title;
     return (
-      <View
-      // style={{
-      //   borderTopColor: '#47315a',
-      //   borderTopWidth: 1,
-      // }}
-      >
+      <>
         <Head>
           <title>{page.draftTitle}</title>
         </Head>
-        {/* <PageTitle data={page} /> */}
-        <SlateEditor
-          autoCorrect={false}
-          spellCheck={false}
-          ref={this.editorRef}
-          autoFocus
-          value={this.state.value}
-          onChange={this.handleEditorChange}
-          renderNode={this.renderNode}
-          renderMark={this.renderMark}
-          onFocus={this.handleEditorFocus}
-          onKeyDown={this.handleEditorKeyDown}
-        />
+        <View
+          // Document
+          style={{
+            backgroundColor: '#fff',
+          }}
+        >
+          <View
+            // Container
+            style={{
+              maxWidth: 768,
+              width: '100%',
+              marginHorizontal: 'auto',
+              paddingHorizontal: 12,
+            }}
+          >
+            <SlateEditor
+              autoCorrect={false}
+              spellCheck={false}
+              ref={this.editorRef}
+              autoFocus
+              value={this.state.value}
+              onChange={this.handleEditorChange}
+              renderNode={this.renderNode}
+              renderMark={this.renderMark}
+              onFocus={this.handleEditorFocus}
+              onKeyDown={this.handleEditorKeyDown}
+            />
+          </View>
+        </View>
         <EditorMenu
           // $FlowFixMe https://github.com/este/este/issues/1571
           ref={this.editorMenuRef}
           value={this.state.value}
           onAction={this.handleEditorMenuAction}
         />
-      </View>
+      </>
     );
   }
 }
