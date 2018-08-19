@@ -48,6 +48,7 @@ class MainNav extends React.PureComponent<MainNavProps> {
                 <Gravatar
                   email={me.email}
                   size={theme.typography.rhythm(1)}
+                  inline
                   rounded
                 />
               </A>

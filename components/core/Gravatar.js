@@ -7,6 +7,7 @@ type GravatarProps = {|
   email: string,
   size?: number,
   rounded?: boolean,
+  inline?: boolean,
 |};
 
 class Gravatar extends React.PureComponent<GravatarProps> {
@@ -20,8 +21,11 @@ class Gravatar extends React.PureComponent<GravatarProps> {
   }
 
   render() {
-    const { email, size = 100, rounded } = this.props;
+    const { email, size = 100, rounded, inline } = this.props;
     const roundedStyle = rounded === true ? { borderRadius: size / 2 } : null;
+    // This is fix for image in anchor where browsers add some bottom padding.
+    // http://doctype.com/anchor-tag-containing-only-img-extends-below-bottom-image
+    const inlineStyle = inline === true ? { display: 'block' } : null;
     return (
       <Image
         source={Gravatar.url(email, size)}
@@ -29,6 +33,7 @@ class Gravatar extends React.PureComponent<GravatarProps> {
           height: size,
           width: size,
           ...roundedStyle,
+          ...inlineStyle,
         }}
         title={email}
       />
