@@ -386,19 +386,24 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     // https://github.com/relayjs/eslint-plugin-relay/issues/35
     // eslint-disable-next-line no-unused-expressions
     page.title;
+    const { backgroundColor } = page;
+    const pageBackgroundColor =
+      backgroundColor != null ? backgroundColor.value : '#fff';
     return (
       <>
         <Head>
           <title>{page.draftTitle}</title>
         </Head>
         <View
-          // Document
           style={{
-            backgroundColor: '#fff',
+            backgroundColor: pageBackgroundColor,
+            // Flex 1 is must for max height. From DB?
+            flex: 1,
           }}
         >
           <View
-            // Container
+            // TODO: Container from DB as well. Not sure yet how.
+            // Component? Web? Page? Or?
             style={{
               maxWidth: 768,
               width: '100%',
@@ -444,7 +449,9 @@ export default createFragmentContainer(
         title @__clientField(handle: "draft")
         draftTitle
         content
-        # ...PageTitle
+        backgroundColor {
+          value
+        }
       }
     }
   `,

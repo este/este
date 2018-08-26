@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Aug 15 2018 01:10:07 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Aug 26 2018 23:00:46 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -16,6 +16,158 @@ type AuthPayload {
   errors: AuthErrors
   token: String
   user: User
+}
+
+type Color implements Node {
+  id: ID!
+  web(where: WebWhereInput): Web!
+  name: String!
+  value: String!
+}
+
+enum ColorOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ColorWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  web: WebWhereInput
 }
 
 type CreateWebErrors {
@@ -89,6 +241,7 @@ type Page implements Node {
   web(where: WebWhereInput): Web!
   content: String
   contentType: String!
+  backgroundColor(where: ColorWhereInput): Color
 }
 
 enum PageOrderByInput {
@@ -321,6 +474,7 @@ input PageWhereInput {
   contentType_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  backgroundColor: ColorWhereInput
 }
 
 enum PasswordError {
@@ -620,6 +774,7 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 enum WebOrderByInput {
@@ -770,4 +925,7 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
+  colors_every: ColorWhereInput
+  colors_some: ColorWhereInput
+  colors_none: ColorWhereInput
 }

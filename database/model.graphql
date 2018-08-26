@@ -21,6 +21,7 @@ type Web {
   creator: User!
   name: String!
   pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
+  colors: [Color!]! @relation(name: "WebColors", onDelete: CASCADE)
 }
 
 type Page {
@@ -35,6 +36,15 @@ type Page {
   # Stringified JSON, because of https://github.com/este/este/issues/1580
   content: String
   contentType: String! @default(value: "EsteSlate1")
+  backgroundColor: Color
+}
+
+type Color {
+  id: ID! @unique
+  web: Web! @relation(name: "WebColors", onDelete: SET_NULL)
+  name: String!
+  # css value
+  value: String!
 }
 
 # type FragmentOrComponentOrElementIDontKnowYet {

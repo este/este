@@ -1,5 +1,9 @@
 # source: http://localhost:4466
-# timestamp: Tue Aug 14 2018 22:40:00 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Aug 26 2018 22:59:17 GMT+0200 (Central European Summer Time)
+
+type AggregateColor {
+  count: Int!
+}
 
 type AggregatePage {
   count: Int!
@@ -18,6 +22,298 @@ type BatchPayload {
   count: Long!
 }
 
+type Color implements Node {
+  id: ID!
+  web(where: WebWhereInput): Web!
+  name: String!
+  value: String!
+}
+
+"""A connection to a list of items."""
+type ColorConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ColorEdge]!
+  aggregate: AggregateColor!
+}
+
+input ColorCreateInput {
+  name: String!
+  value: String!
+  web: WebCreateOneWithoutColorsInput!
+}
+
+input ColorCreateManyWithoutWebInput {
+  create: [ColorCreateWithoutWebInput!]
+  connect: [ColorWhereUniqueInput!]
+}
+
+input ColorCreateOneInput {
+  create: ColorCreateInput
+  connect: ColorWhereUniqueInput
+}
+
+input ColorCreateWithoutWebInput {
+  name: String!
+  value: String!
+}
+
+"""An edge in a connection."""
+type ColorEdge {
+  """The item at the end of the edge."""
+  node: Color!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ColorOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ColorPreviousValues {
+  id: ID!
+  name: String!
+  value: String!
+}
+
+type ColorSubscriptionPayload {
+  mutation: MutationType!
+  node: Color
+  updatedFields: [String!]
+  previousValues: ColorPreviousValues
+}
+
+input ColorSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ColorWhereInput
+}
+
+input ColorUpdateDataInput {
+  name: String
+  value: String
+  web: WebUpdateOneWithoutColorsInput
+}
+
+input ColorUpdateInput {
+  name: String
+  value: String
+  web: WebUpdateOneWithoutColorsInput
+}
+
+input ColorUpdateManyWithoutWebInput {
+  create: [ColorCreateWithoutWebInput!]
+  connect: [ColorWhereUniqueInput!]
+  disconnect: [ColorWhereUniqueInput!]
+  delete: [ColorWhereUniqueInput!]
+  update: [ColorUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [ColorUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ColorUpdateOneInput {
+  create: ColorCreateInput
+  connect: ColorWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ColorUpdateDataInput
+  upsert: ColorUpsertNestedInput
+}
+
+input ColorUpdateWithoutWebDataInput {
+  name: String
+  value: String
+}
+
+input ColorUpdateWithWhereUniqueWithoutWebInput {
+  where: ColorWhereUniqueInput!
+  data: ColorUpdateWithoutWebDataInput!
+}
+
+input ColorUpsertNestedInput {
+  update: ColorUpdateDataInput!
+  create: ColorCreateInput!
+}
+
+input ColorUpsertWithWhereUniqueWithoutWebInput {
+  where: ColorWhereUniqueInput!
+  update: ColorUpdateWithoutWebDataInput!
+  create: ColorCreateWithoutWebInput!
+}
+
+input ColorWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  web: WebWhereInput
+}
+
+input ColorWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 """
@@ -30,21 +326,27 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
+  createColor(data: ColorCreateInput!): Color!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
+  updateColor(data: ColorUpdateInput!, where: ColorWhereUniqueInput!): Color
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
+  deleteColor(where: ColorWhereUniqueInput!): Color
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
+  upsertColor(where: ColorWhereUniqueInput!, create: ColorCreateInput!, update: ColorUpdateInput!): Color!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
+  updateManyColors(data: ColorUpdateInput!, where: ColorWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
+  deleteManyColors(where: ColorWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -68,6 +370,7 @@ type Page implements Node {
   web(where: WebWhereInput): Web!
   content: String
   contentType: String!
+  backgroundColor(where: ColorWhereInput): Color
 }
 
 """A connection to a list of items."""
@@ -86,6 +389,7 @@ input PageCreateInput {
   contentType: String
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
+  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -103,6 +407,7 @@ input PageCreateWithoutCreatorInput {
   content: String
   contentType: String
   web: WebCreateOneWithoutPagesInput!
+  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateWithoutWebInput {
@@ -110,6 +415,7 @@ input PageCreateWithoutWebInput {
   content: String
   contentType: String
   creator: UserCreateOneWithoutPagesInput!
+  backgroundColor: ColorCreateOneInput
 }
 
 """An edge in a connection."""
@@ -205,6 +511,7 @@ input PageUpdateInput {
   contentType: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
+  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -230,6 +537,7 @@ input PageUpdateWithoutCreatorDataInput {
   content: String
   contentType: String
   web: WebUpdateOneWithoutPagesInput
+  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithoutWebDataInput {
@@ -237,6 +545,7 @@ input PageUpdateWithoutWebDataInput {
   content: String
   contentType: String
   creator: UserUpdateOneWithoutPagesInput
+  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -476,6 +785,7 @@ input PageWhereInput {
   contentType_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  backgroundColor: ColorWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -486,12 +796,15 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
+  color(where: ColorWhereUniqueInput!): Color
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
+  colorsConnection(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ColorConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -504,6 +817,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
+  color(where: ColorSubscriptionWhereInput): ColorSubscriptionPayload
 }
 
 type User implements Node {
@@ -912,6 +1226,7 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 """A connection to a list of items."""
@@ -928,6 +1243,7 @@ input WebCreateInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
+  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateManyWithoutCreatorInput {
@@ -935,19 +1251,32 @@ input WebCreateManyWithoutCreatorInput {
   connect: [WebWhereUniqueInput!]
 }
 
+input WebCreateOneWithoutColorsInput {
+  create: WebCreateWithoutColorsInput
+  connect: WebWhereUniqueInput
+}
+
 input WebCreateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
 }
 
+input WebCreateWithoutColorsInput {
+  name: String!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+}
+
 input WebCreateWithoutCreatorInput {
   name: String!
   pages: PageCreateManyWithoutWebInput
+  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
+  colors: ColorCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -1020,6 +1349,7 @@ input WebUpdateInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
+  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -1031,6 +1361,14 @@ input WebUpdateManyWithoutCreatorInput {
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
+input WebUpdateOneWithoutColorsInput {
+  create: WebCreateWithoutColorsInput
+  connect: WebWhereUniqueInput
+  delete: Boolean
+  update: WebUpdateWithoutColorsDataInput
+  upsert: WebUpsertWithoutColorsInput
+}
+
 input WebUpdateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
@@ -1039,19 +1377,32 @@ input WebUpdateOneWithoutPagesInput {
   upsert: WebUpsertWithoutPagesInput
 }
 
+input WebUpdateWithoutColorsDataInput {
+  name: String
+  creator: UserUpdateOneWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+}
+
 input WebUpdateWithoutCreatorDataInput {
   name: String
   pages: PageUpdateManyWithoutWebInput
+  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
+  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithWhereUniqueWithoutCreatorInput {
   where: WebWhereUniqueInput!
   data: WebUpdateWithoutCreatorDataInput!
+}
+
+input WebUpsertWithoutColorsInput {
+  update: WebUpdateWithoutColorsDataInput!
+  create: WebCreateWithoutColorsInput!
 }
 
 input WebUpsertWithoutPagesInput {
@@ -1202,6 +1553,9 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
+  colors_every: ColorWhereInput
+  colors_some: ColorWhereInput
+  colors_none: ColorWhereInput
 }
 
 input WebWhereUniqueInput {

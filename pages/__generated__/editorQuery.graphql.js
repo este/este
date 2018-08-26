@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 81b02827f76d64676a1055d5d90c2555
+ * @relayHash feeec176bf7b92dca833551986913e52
  */
 
 /* eslint-disable */
@@ -47,6 +47,10 @@ fragment Editor_1Bmzm5 on Query {
     id
     title
     content
+    backgroundColor {
+      value
+      id
+    }
   }
 }
 
@@ -100,7 +104,7 @@ return {
   "operationKind": "query",
   "name": "editorQuery",
   "id": null,
-  "text": "query editorQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
+  "text": "query editorQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    content\n    backgroundColor {\n      value\n      id\n    }\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -198,6 +202,25 @@ return {
             "name": "content",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "backgroundColor",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Color",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "value",
+                "args": null,
+                "storageKey": null
+              },
+              v1
+            ]
           }
         ]
       },

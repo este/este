@@ -70,6 +70,158 @@ type AuthPayload {
   user: User
 }
 
+type Color implements Node {
+  id: ID!
+  web(where: WebWhereInput): Web!
+  name: String!
+  value: String!
+}
+
+enum ColorOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ColorWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  web: WebWhereInput
+}
+
 type CreateWebErrors {
   name: Max140CharsError
   pageTitle: Max140CharsError
@@ -141,6 +293,7 @@ type Page implements Node {
   web(where: WebWhereInput): Web!
   content: String
   contentType: String!
+  backgroundColor(where: ColorWhereInput): Color
 }
 
 enum PageOrderByInput {
@@ -373,6 +526,7 @@ input PageWhereInput {
   contentType_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  backgroundColor: ColorWhereInput
 }
 
 enum PasswordError {
@@ -672,6 +826,7 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 enum WebOrderByInput {
@@ -822,6 +977,9 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
+  colors_every: ColorWhereInput
+  colors_some: ColorWhereInput
+  colors_none: ColorWhereInput
 }
 `
 
@@ -832,20 +990,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 /**
  * Types
 */
-
- export type EmailError =
-    | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
-  
-
- export type PasswordError =
-    | 'REQUIRED'
-    | 'MIN_5_CHARS'
-    | 'MAX_1024_CHARS'
-    | 'WRONG_PASSWORD'
-  
 
  export type WebOrderByInput =
     | 'id_ASC'
@@ -878,23 +1022,36 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'MAX_140_CHARS'
   
 
- export type SetThemeInput = {| 
-  themeName: String
-|}
+ export type ColorOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'value_ASC'
+    | 'value_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
+
+ export type PasswordError =
+    | 'REQUIRED'
+    | 'MIN_5_CHARS'
+    | 'MAX_1024_CHARS'
+    | 'WRONG_PASSWORD'
+  
+
+ export type EmailError =
+    | 'REQUIRED'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
+  
 
  export type SetPageTitleInput = {| 
   id: ID_Input,
   title: String
-|}
-
- export type SetPageContentInput = {| 
-  id: ID_Input,
-  content: String
-|}
-
- export type CreateWebInput = {| 
-  name: String,
-  pageTitle: String
 |}
 
  export type WebWhereInput = {| 
@@ -948,13 +1105,161 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   creator?: UserWhereInput,
   pages_every?: PageWhereInput,
   pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput
+  pages_none?: PageWhereInput,
+  colors_every?: ColorWhereInput,
+  colors_some?: ColorWhereInput,
+  colors_none?: ColorWhereInput
+|}
+
+ export type ColorWhereInput = {| 
+  AND?: Array< ColorWhereInput > | ColorWhereInput,
+  OR?: Array< ColorWhereInput > | ColorWhereInput,
+  NOT?: Array< ColorWhereInput > | ColorWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  value?: String,
+  value_not?: String,
+  value_in?: Array< String > | String,
+  value_not_in?: Array< String > | String,
+  value_lt?: String,
+  value_lte?: String,
+  value_gt?: String,
+  value_gte?: String,
+  value_contains?: String,
+  value_not_contains?: String,
+  value_starts_with?: String,
+  value_not_starts_with?: String,
+  value_ends_with?: String,
+  value_not_ends_with?: String,
+  web?: WebWhereInput
+|}
+
+ export type SetPageContentInput = {| 
+  id: ID_Input,
+  content: String
+|}
+
+ export type CreateWebInput = {| 
+  name: String,
+  pageTitle: String
 |}
 
  export type AuthInput = {| 
   email: String,
   password: String,
   isSignUp: Boolean
+|}
+
+ export type SetWebNameInput = {| 
+  id: ID_Input,
+  name: String
+|}
+
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  content?: String,
+  content_not?: String,
+  content_in?: Array< String > | String,
+  content_not_in?: Array< String > | String,
+  content_lt?: String,
+  content_lte?: String,
+  content_gt?: String,
+  content_gte?: String,
+  content_contains?: String,
+  content_not_contains?: String,
+  content_starts_with?: String,
+  content_not_starts_with?: String,
+  content_ends_with?: String,
+  content_not_ends_with?: String,
+  contentType?: String,
+  contentType_not?: String,
+  contentType_in?: Array< String > | String,
+  contentType_not_in?: Array< String > | String,
+  contentType_lt?: String,
+  contentType_lte?: String,
+  contentType_gt?: String,
+  contentType_gte?: String,
+  contentType_contains?: String,
+  contentType_not_contains?: String,
+  contentType_starts_with?: String,
+  contentType_not_starts_with?: String,
+  contentType_ends_with?: String,
+  contentType_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  backgroundColor?: ColorWhereInput
 |}
 
  export type DeleteWebInput = {| 
@@ -1045,93 +1350,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   pages_none?: PageWhereInput
 |}
 
- export type SetWebNameInput = {| 
-  id: ID_Input,
-  name: String
+ export type SetThemeInput = {| 
+  themeName: String
 |}
 
  export type DeletePageInput = {| 
   id: ID_Input
-|}
-
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  content?: String,
-  content_not?: String,
-  content_in?: Array< String > | String,
-  content_not_in?: Array< String > | String,
-  content_lt?: String,
-  content_lte?: String,
-  content_gt?: String,
-  content_gte?: String,
-  content_contains?: String,
-  content_not_contains?: String,
-  content_starts_with?: String,
-  content_not_starts_with?: String,
-  content_ends_with?: String,
-  content_not_ends_with?: String,
-  contentType?: String,
-  contentType_not?: String,
-  contentType_in?: Array< String > | String,
-  contentType_not_in?: Array< String > | String,
-  contentType_lt?: String,
-  contentType_lte?: String,
-  contentType_gt?: String,
-  contentType_gte?: String,
-  contentType_contains?: String,
-  contentType_not_contains?: String,
-  contentType_starts_with?: String,
-  contentType_not_starts_with?: String,
-  contentType_ends_with?: String,
-  contentType_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput
 |}
 
 /*
@@ -1163,18 +1387,31 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    password?: PasswordError,
 |}
 
+ export type SetThemePayload = {| 
+   user?: User,
+|}
+
+ export type SetWebNameErrors = {| 
+   name?: Max140CharsError,
+|}
+
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
+   user?: User,
+|}
+
  export type SetPageTitlePayload = {| 
    errors?: SetPageTitleErrors,
    page?: Page,
 |}
 
- export type CreateWebPayload = {| 
-   errors?: CreateWebErrors,
-   pageId?: ID_Output,
-|}
-
- export type SetWebNameErrors = {| 
-   name?: Max140CharsError,
+ export type Color = {| ...Node,
+ 
+   id: ID_Output,
+   web: Web,
+   name: String,
+   value: String,
 |}
 
  export type SetWebNamePayload = {| 
@@ -1184,6 +1421,15 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type SetPageContentPayload = {| 
    page?: Page,
+|}
+
+ export type SetPageTitleErrors = {| 
+   title?: Max140CharsError,
+|}
+
+ export type CreateWebPayload = {| 
+   errors?: CreateWebErrors,
+   pageId?: ID_Output,
 |}
 
  export type Page = {| ...Node,
@@ -1196,21 +1442,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    web: Web,
    content?: String,
    contentType: String,
+   backgroundColor?: Color,
 |}
 
  export type CreateWebErrors = {| 
    name?: Max140CharsError,
    pageTitle?: Max140CharsError,
-|}
-
- export type AuthPayload = {| 
-   errors?: AuthErrors,
-   token?: String,
-   user?: User,
-|}
-
- export type SetThemePayload = {| 
-   user?: User,
 |}
 
  export type Web = {| ...Node,
@@ -1221,14 +1458,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    creator: User,
    name: String,
    pages?: Page[],
+   colors?: Color[],
 |}
 
  export type DeleteWebPayload = {| 
    web?: Web,
-|}
-
- export type SetPageTitleErrors = {| 
-   title?: Max140CharsError,
 |}
 
 /*
