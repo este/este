@@ -9,7 +9,7 @@ import EditorMenuButtons from './EditorMenuButtons';
 import EditorMenuLink from './EditorMenuLink';
 import EditorMenuLinkPreview from './EditorMenuLinkPreview';
 
-export type EditorMenuAction = 
+export type EditorMenuAction =
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
   | {| type: 'HEADING-ONE' |}
@@ -79,15 +79,16 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
     const ignoreViewWithFocus = state.view === 'link';
     if (ignoreViewWithFocus) return null;
     const { value } = props;
+    const { fragment, selection } = value;
     const hasLinks = value.inlines.some(inline => inline.type === 'link');
     const linkNode = value.inlines.find(inline => inline.type === 'link');
     const newState = { hasLinks, linkNode };
-    if (!value.isBlurred) {
-      if (value.selection.isCollapsed) {
+    if (selection.isFocused) {
+      if (selection.isCollapsed) {
         const view = hasLinks ? 'linkPreview' : null;
         return { ...newState, view };
       }
-      if (!value.isEmpty) {
+      if (fragment.text !== '') {
         return { ...newState, view: 'buttons' };
       }
     }
@@ -110,7 +111,8 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
 
   handleKeyModK(change: Object) {
     const { value } = this.props;
-    if (value.selection.isCollapsed) {
+    const { fragment, selection } = value;
+    if (selection.isCollapsed) {
       const { linkNode } = this.state;
       if (!linkNode) return;
       const href = linkNode.data.get('href');
@@ -118,7 +120,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
       window.open(href);
       return;
     }
-    if (value.isEmpty) return;
+    if (fragment.text === '') return;
     if (this.state.hasLinks) {
       this.props.onAction({ type: 'LINK', href: null, change });
     } else {
