@@ -1,4 +1,4 @@
-// flow-typed signature: 2c05adb4c7f852e869e75bdab007d204
+// flow-typed signature: 56f22b1ff5f9a5054f628c95c33bd49d
 // flow-typed version: <<STUB>>/validator_v^10.1.0/flow_v0.79.0
 
 /**
@@ -178,6 +178,10 @@ declare module 'validator/lib/isJSON' {
   declare module.exports: any;
 }
 
+declare module 'validator/lib/isJWT' {
+  declare module.exports: any;
+}
+
 declare module 'validator/lib/isLatLong' {
   declare module.exports: any;
 }
@@ -191,6 +195,10 @@ declare module 'validator/lib/isLowercase' {
 }
 
 declare module 'validator/lib/isMACAddress' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isMagnetURI' {
   declare module.exports: any;
 }
 
@@ -450,6 +458,9 @@ declare module 'validator/lib/isISSN.js' {
 declare module 'validator/lib/isJSON.js' {
   declare module.exports: $Exports<'validator/lib/isJSON'>;
 }
+declare module 'validator/lib/isJWT.js' {
+  declare module.exports: $Exports<'validator/lib/isJWT'>;
+}
 declare module 'validator/lib/isLatLong.js' {
   declare module.exports: $Exports<'validator/lib/isLatLong'>;
 }
@@ -461,6 +472,9 @@ declare module 'validator/lib/isLowercase.js' {
 }
 declare module 'validator/lib/isMACAddress.js' {
   declare module.exports: $Exports<'validator/lib/isMACAddress'>;
+}
+declare module 'validator/lib/isMagnetURI.js' {
+  declare module.exports: $Exports<'validator/lib/isMagnetURI'>;
 }
 declare module 'validator/lib/isMD5.js' {
   declare module.exports: $Exports<'validator/lib/isMD5'>;

@@ -1,5 +1,5 @@
-// flow-typed signature: ad251f3a3446f6ab4e6691a94e701cad
-// flow-typed version: caa120caaa/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: f5a484315a3dea13d273645306e4076a
+// flow-typed version: 7c5d14b3d4/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -694,6 +694,9 @@ interface JestExpectType {
    * This ensures that an Object matches the most recent snapshot.
    */
   toMatchSnapshot(name: string): void,
+
+  toMatchInlineSnapshot(snapshot?: string): void,
+  toMatchInlineSnapshot(propertyMatchers?: {[key: string]: JestAsymmetricEqualityType}, snapshot?: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
    * If you want to test that a specific error gets thrown, you can provide an
@@ -708,7 +711,8 @@ interface JestExpectType {
    * Use .toThrowErrorMatchingSnapshot to test that a function throws a error
    * matching the most recent snapshot when it is called.
    */
-  toThrowErrorMatchingSnapshot(): void
+  toThrowErrorMatchingSnapshot(): void,
+  toThrowErrorMatchingInlineSnapshot(snapshot?: string): void,
 }
 
 type JestObjectType = {
