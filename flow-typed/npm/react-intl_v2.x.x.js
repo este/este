@@ -1,5 +1,5 @@
-// flow-typed signature: 64c4a99e632b3fb8d0a4fb57ab6d9ebb
-// flow-typed version: e9421afdb2/react-intl_v2.x.x/flow_>=v0.63.x
+// flow-typed signature: c3aa29455eb7f759ba4d433975a4ec02
+// flow-typed version: b14d5b4826/react-intl_v2.x.x/flow_>=v0.63.x
 
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
@@ -197,7 +197,9 @@ declare module "react-intl" {
     $npm$ReactIntl$MessageDescriptor & {
       values?: Object,
       tagName?: string,
-      children?: (...formattedMessage: Array<React$Node>) => React$Node
+      children?: 
+        | ((...formattedMessage: Array<React$Node>) => React$Node)
+        | (string => React$Node)
     }
   > {}
   declare class FormattedHTMLMessage extends React$Component<

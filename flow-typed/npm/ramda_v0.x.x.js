@@ -1,5 +1,5 @@
-// flow-typed signature: 6fd4e29e6b460431005b1a6d591b9d6e
-// flow-typed version: 199a0f315c/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 232efb7994303d907e83e2540d3ca6c0
+// flow-typed version: 3c52a8844f/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1368,7 +1368,7 @@ declare module ramda {
   declare function invert(o: Object): { [k: string]: Array<string> };
   declare function invertObj(o: Object): { [k: string]: string };
 
-  declare function keys(o: Object): Array<string>;
+  declare function keys(o: ?Object): Array<string>;
 
   declare type Lens = <T, V>(x: T) => V;
 
