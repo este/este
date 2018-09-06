@@ -1,4 +1,4 @@
-// flow-typed signature: 2a0122b36358e470d270d0f73d1896e6
+// flow-typed signature: 2f352d060e32bc50f12529d11497b3a4
 // flow-typed version: <<STUB>>/graphql-shield_v^3.1.2/flow_v0.80.0
 
 /**
@@ -30,6 +30,10 @@ declare module 'graphql-shield/dist/generator' {
   declare module.exports: any;
 }
 
+declare module 'graphql-shield/dist/graphiql' {
+  declare module.exports: any;
+}
+
 declare module 'graphql-shield/dist/index' {
   declare module.exports: any;
 }
@@ -55,6 +59,10 @@ declare module 'graphql-shield/dist/test/fragments.test' {
 }
 
 declare module 'graphql-shield/dist/test/generator.test' {
+  declare module.exports: any;
+}
+
+declare module 'graphql-shield/dist/test/graphiql.test' {
   declare module.exports: any;
 }
 
@@ -93,6 +101,9 @@ declare module 'graphql-shield/dist/constructors.js' {
 declare module 'graphql-shield/dist/generator.js' {
   declare module.exports: $Exports<'graphql-shield/dist/generator'>;
 }
+declare module 'graphql-shield/dist/graphiql.js' {
+  declare module.exports: $Exports<'graphql-shield/dist/graphiql'>;
+}
 declare module 'graphql-shield/dist/index.js' {
   declare module.exports: $Exports<'graphql-shield/dist/index'>;
 }
@@ -113,6 +124,9 @@ declare module 'graphql-shield/dist/test/fragments.test.js' {
 }
 declare module 'graphql-shield/dist/test/generator.test.js' {
   declare module.exports: $Exports<'graphql-shield/dist/test/generator.test'>;
+}
+declare module 'graphql-shield/dist/test/graphiql.test.js' {
+  declare module.exports: $Exports<'graphql-shield/dist/test/graphiql.test'>;
 }
 declare module 'graphql-shield/dist/test/index.test.js' {
   declare module.exports: $Exports<'graphql-shield/dist/test/index.test'>;
