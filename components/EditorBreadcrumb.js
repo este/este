@@ -18,16 +18,11 @@ type BreadcrumbButtonProps = {|
   node: Node,
   index: number,
   onFocus: (index: number) => void,
+  onPress: (index: number) => void,
+  isActive: boolean,
 |};
 
-type BreadcrumbButtonState = {|
-  active: boolean,
-|};
-
-class BreadcrumbButton extends React.PureComponent<
-  BreadcrumbButtonProps,
-  BreadcrumbButtonState,
-> {
+class BreadcrumbButton extends React.PureComponent<BreadcrumbButtonProps> {
   // TODO: Localize
   static renderLabel(node) {
     if (node.object === 'document') {
@@ -55,21 +50,20 @@ class BreadcrumbButton extends React.PureComponent<
     }
   }
 
-  // handlePress = event => {
-  //   // console.log(event.key);
-  //   // console.log('f');
-  // };
+  handlePress = () => {
+    this.props.onPress(this.props.index);
+  };
 
   handleFocus = () => {
     this.props.onFocus(this.props.index);
   };
 
   render() {
-    const { node } = this.props;
+    const { node, isActive } = this.props;
     return (
       <Button
-        color="gray"
-        // onPress={this.handlePress}
+        color={isActive ? 'primary' : 'gray'}
+        onPressIn={this.handlePress}
         onFocus={this.handleFocus}
       >
         {BreadcrumbButton.renderLabel(node)}
@@ -88,6 +82,7 @@ type EditorBreadcrumbProps = {|
 
 type EditorBreadcrumbState = {|
   focusIndex: number,
+  activeIndex: ?number,
 |};
 
 class EditorBreadcrumb extends React.PureComponent<
@@ -96,6 +91,7 @@ class EditorBreadcrumb extends React.PureComponent<
 > {
   state = {
     focusIndex: 0,
+    activeIndex: null,
   };
 
   componentDidMount() {
@@ -106,11 +102,19 @@ class EditorBreadcrumb extends React.PureComponent<
     this.updateTabIndexesDirectly();
   }
 
-  handleButtonFocus = index => {
-    this.setState({ focusIndex: index });
+  handleButtonPress = activeIndex => {
+    this.setState(state => {
+      return {
+        activeIndex: state.activeIndex === activeIndex ? null : activeIndex,
+      };
+    });
   };
 
-  handleViewKeyDown = event => {
+  handleButtonFocus = focusIndex => {
+    this.setState({ focusIndex });
+  };
+
+  handleViewKeyDown = (event: KeyboardEvent) => {
     const isLeftRightArrow =
       event.key === 'ArrowLeft' || event.key === 'ArrowRight';
     if (!isLeftRightArrow) return;
@@ -146,7 +150,9 @@ class EditorBreadcrumb extends React.PureComponent<
               node={node}
               index={index}
               key={node.key}
+              onPress={this.handleButtonPress}
               onFocus={this.handleButtonFocus}
+              isActive={this.state.activeIndex === index}
             />
           ))}
         </Spacer>
