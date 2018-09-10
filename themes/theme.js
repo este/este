@@ -44,8 +44,9 @@ const fontSmoothing = {
 };
 
 const zIndex = {
-  errorPopup: 1,
-  postTextActions: 10000,
+  appPageFixedHeader: 10000,
+  errorPopup: 10001,
+  postTextActions: 10002,
 };
 
 const stylesJson = {
@@ -100,6 +101,16 @@ const stylesJson = {
   block: {
     marginBottom: typography.rhythm(1),
     maxWidth: typography.rhythm(28),
+  },
+
+  appPageFixedHeader: {
+    // As inline style, because it's a workaround.
+    // https://github.com/este/este/issues/1584
+    // position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: zIndex.appPageFixedHeader,
   },
 
   appPageContainer: {
@@ -205,7 +216,9 @@ const stylesJson = {
   },
 
   editorBreadcrumb: {
-    position: 'absolute',
+    // As inline style, because it's a workaround.
+    // https://github.com/este/este/issues/1584
+    // position: 'fixed',
     left: 0,
     bottom: 0,
     backgroundColor: '#fff',

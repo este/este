@@ -79,6 +79,8 @@ class AppPage extends React.PureComponent<Props> {
     }
   };
 
+  static fixedPositionStyle = { position: 'fixed' };
+
   renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
     if (authRequired) return <Auth />;
@@ -108,19 +110,16 @@ class AppPage extends React.PureComponent<Props> {
           <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
           <Favicons />
         </Head>
-        <div>
+        {/*
+          TODO: Use ScrollView https://github.com/este/este/issues/1584
+          Meanwhile, we have to use position fixed.
+        */}
+        <View
+          style={[theme.styles.appPageFixedHeader, AppPage.fixedPositionStyle]}
+        >
           <PageLoadingBar color={theme.colors.primary} />
           <ErrorPopup />
-          <style jsx>{`
-            div {
-              position: fixed;
-              top: 0;
-              left: 0;
-              right: 0;
-              z-index: 9999;
-            }
-          `}</style>
-        </div>
+        </View>
         <View style={theme.styles.appPageContainer}>
           <View style={theme.styles.appPageContainerChild}>
             {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
