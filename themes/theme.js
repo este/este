@@ -203,6 +203,16 @@ const stylesJson = {
   editorListItem: {
     paddingHorizontal: typography.rhythm(0.5),
   },
+
+  editorBreadcrumb: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    paddingVertical: typography.rhythm(0.1),
+    paddingHorizontal: typography.rhythm(0.5),
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);

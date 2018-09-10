@@ -24,6 +24,7 @@ import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
 import { View } from 'react-native';
+import EditorBreadcrumb from './EditorBreadcrumb';
 
 export type BlockNodeType =
   | 'paragraph'
@@ -31,6 +32,10 @@ export type BlockNodeType =
   | 'headingTwo'
   | 'blockquote'
   | 'list';
+
+export type InlineNodeType = 'listItem' | 'link';
+
+export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
@@ -54,6 +59,20 @@ const emptyText = {
     ],
   },
 };
+
+type EditorHeadProps = {|
+  title: string,
+|};
+
+class EditorHead extends React.PureComponent<EditorHeadProps> {
+  render() {
+    return (
+      <Head>
+        <title>{this.props.title}</title>
+      </Head>
+    );
+  }
+}
 
 type EditorProps = {|
   theme: Theme,
@@ -311,8 +330,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   renderNode = props => {
     const { attributes, node, children } = props;
     const { styles } = this.props.theme;
-    const { type } = node;
-    // TODO: Add default with Flow empty.
+    const type: NodeType = node.type;
     switch (type) {
       case 'paragraph':
       case 'headingOne':
@@ -338,7 +356,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
       case 'list': {
         return <Block {...attributes}>{children}</Block>;
       }
-      // Only bullet list for now.
       case 'listItem': {
         return (
           <Text {...attributes}>
@@ -358,13 +375,16 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           </A>
         );
       }
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (type: empty);
     }
   };
 
   renderMark = props => {
     const { children, mark, attributes } = props;
-    // TODO: Add default with Flow empty.
-    switch (mark.type) {
+    const type: MarkType = mark.type;
+    switch (type) {
       case 'bold':
         return (
           <Text bold {...attributes}>
@@ -377,38 +397,37 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
             {children}
           </Text>
         );
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (type: empty);
     }
   };
 
   render() {
     const { page } = this.props.data;
+    const { value } = this.state;
     if (page == null) return null;
     // https://github.com/relayjs/eslint-plugin-relay/issues/35
     // eslint-disable-next-line no-unused-expressions
     page.title;
-    const { backgroundColor } = page;
-    const pageBackgroundColor =
-      backgroundColor != null ? backgroundColor.value : '#fff';
     return (
       <>
-        <Head>
-          <title>{page.draftTitle}</title>
-        </Head>
+        <EditorHead title={page.draftTitle} />
         <View
           style={{
-            backgroundColor: pageBackgroundColor,
-            // Flex 1 is must for max height. From DB?
+            backgroundColor:
+              (page.backgroundColor && page.backgroundColor.value) || '#fff',
             flex: 1,
           }}
         >
           <View
-            // TODO: Container from DB as well. Not sure yet how.
-            // Component? Web? Page? Or?
             style={{
               maxWidth: 768,
               width: '100%',
               marginHorizontal: 'auto',
               paddingHorizontal: 12,
+              // backgroundColor: 'blue',
+              flex: 1,
             }}
           >
             <SlateEditor
@@ -416,7 +435,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
               spellCheck={false}
               ref={this.editorRef}
               autoFocus
-              value={this.state.value}
+              value={value}
               onChange={this.handleEditorChange}
               renderNode={this.renderNode}
               renderMark={this.renderMark}
@@ -428,8 +447,12 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         <EditorMenu
           // $FlowFixMe https://github.com/este/este/issues/1571
           ref={this.editorMenuRef}
-          value={this.state.value}
+          value={value}
           onAction={this.handleEditorMenuAction}
+        />
+        <EditorBreadcrumb
+          document={value.document}
+          focusPathString={value.selection.focus.path.join(',')}
         />
       </>
     );
