@@ -14,22 +14,26 @@ type MenuButtonProps = {|
 |};
 
 const MenuButton = withTheme(
-  ({ isActive, onPress, theme, children }: MenuButtonProps) => {
-    const color = isActive ? 'success' : 'gray';
-    return (
-      <Button
-        onPressIn={event => {
-          event.preventDefault();
-          onPress(event);
-        }}
-        color={color}
-        bold
-        style={theme.styles.editorMenuButton}
-        size={-1}
-      >
-        {children}
-      </Button>
-    );
+  class extends React.PureComponent<MenuButtonProps> {
+    handlePressIn = event => {
+      event.preventDefault();
+      this.props.onPress(event);
+    };
+    render() {
+      const { isActive, theme, children } = this.props;
+      const color = isActive ? 'success' : 'gray';
+      return (
+        <Button
+          onPressIn={this.handlePressIn}
+          color={color}
+          bold
+          style={theme.styles.editorMenuButton}
+          size={-1}
+        >
+          {children}
+        </Button>
+      );
+    }
   },
 );
 
