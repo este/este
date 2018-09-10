@@ -1,4 +1,4 @@
-// flow-typed signature: ee2e5fee8442a21b084555ba02eb459f
+// flow-typed signature: 81998bdc43811aa64de23bc32964dc16
 // flow-typed version: <<STUB>>/babel-preset-react-native_v^4.0.0/flow_v0.80.0
 
 /**
@@ -38,10 +38,6 @@ declare module 'babel-preset-react-native/plugins' {
   declare module.exports: any;
 }
 
-declare module 'babel-preset-react-native/transforms/transform-dynamic-import' {
-  declare module.exports: any;
-}
-
 declare module 'babel-preset-react-native/transforms/transform-symbol-member' {
   declare module.exports: any;
 }
@@ -64,9 +60,6 @@ declare module 'babel-preset-react-native/lib/resolvePlugins.js' {
 }
 declare module 'babel-preset-react-native/plugins.js' {
   declare module.exports: $Exports<'babel-preset-react-native/plugins'>;
-}
-declare module 'babel-preset-react-native/transforms/transform-dynamic-import.js' {
-  declare module.exports: $Exports<'babel-preset-react-native/transforms/transform-dynamic-import'>;
 }
 declare module 'babel-preset-react-native/transforms/transform-symbol-member.js' {
   declare module.exports: $Exports<'babel-preset-react-native/transforms/transform-symbol-member'>;

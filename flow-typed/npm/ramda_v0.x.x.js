@@ -1,5 +1,5 @@
-// flow-typed signature: 232efb7994303d907e83e2540d3ca6c0
-// flow-typed version: 3c52a8844f/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 5488916cf6615b5e047646204ddb2d5f
+// flow-typed version: 6ec0f07f88/ramda_v0.x.x/flow_>=v0.62.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -432,8 +432,8 @@ declare module ramda {
       fn: UnaryPredicateFn<V>,
     ) => (xs: T) => T)
 
-  declare class Monad<T> {
-    chain: Function;
+  declare interface Monad<A> {
+    chain<B>(f: A => Monad<B>): Monad<B>;
   }
 
   declare class Semigroup<T> {}
@@ -465,6 +465,7 @@ declare module ramda {
 
   declare var compose: Compose;
   declare var pipe: Pipe;
+  declare var pipeK: PipeK;
   declare var pipeP: PipeP;
   declare var curry: Curry;
   declare function curryN(
@@ -1752,7 +1753,83 @@ declare module ramda {
 
   declare var partial: Partial;
   // TODO partialRight
-  // TODO pipeK
+
+  declare type UnaryMonadFn<A, R> = UnaryFn<A, Monad<R>>;
+  declare type PipeK = (<A, B, C, D, E, F, G, H, I, J, K, L: Monad<K>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: UnaryMonadFn<E, F>,
+        fg: UnaryMonadFn<F, G>,
+        gh: UnaryMonadFn<G, H>,
+        hi: UnaryMonadFn<H, I>,
+        ij: UnaryMonadFn<I, J>,
+        jk: J => L,
+    ) => A => L) &
+    (<A, B, C, D, E, F, G, H, I, J, K: Monad<J>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: UnaryMonadFn<E, F>,
+        fg: UnaryMonadFn<F, G>,
+        gh: UnaryMonadFn<G, H>,
+        hi: UnaryMonadFn<H, I>,
+        ij: I => K,
+    ) => A => K) &
+    (<A, B, C, D, E, F, G, H, I, J: Monad<I>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: UnaryMonadFn<E, F>,
+        fg: UnaryMonadFn<F, G>,
+        gh: UnaryMonadFn<G, H>,
+        hi: H => J,
+    ) => A => J) &
+    (<A, B, C, D, E, F, G, H, I: Monad<H>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: UnaryMonadFn<E, F>,
+        fg: UnaryMonadFn<F, G>,
+        gh: G => I,
+    ) => A => I) &
+    (<A, B, C, D, E, F, G, H: Monad<G>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: UnaryMonadFn<E, F>,
+        fg: F => H,
+    ) => A => H) &
+    (<A, B, C, D, E, F, G: Monad<F>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: UnaryMonadFn<D, E>,
+        ef: E => G,
+    ) => A => G) &
+    (<A, B, C, D, E, F: Monad<E>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: UnaryMonadFn<C, D>,
+        de: D => F,
+    ) => A => F) &
+    (<A, B, C, D, E: Monad<D>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: UnaryMonadFn<B, C>,
+        cd: C => E,
+    ) => A => E) &
+    (<A, B, C, D: Monad<C>>(
+        ab: UnaryMonadFn<A, B>,
+        bc: B => D,
+    ) => A => D) &
+    (<A, B, C: Monad<B>>(
+        ab: A => C
+    ) => A => C);
 
   declare function tap<T>(fn: (x: T) => any): (x: T) => T;
   declare function tap<T>(fn: (x: T) => any, x: T): T;

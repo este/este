@@ -13,17 +13,15 @@ type MenuButtonProps = {|
   children: React.Node,
 |};
 
-const handlePreventDefault = event => event.preventDefault();
-
 const MenuButton = withTheme(
   ({ isActive, onPress, theme, children }: MenuButtonProps) => {
     const color = isActive ? 'success' : 'gray';
     return (
       <Button
-        onPressIn={handlePreventDefault}
-        // We have to use onPress fow now.
-        // https://github.com/necolas/react-native-web/issues/1074
-        onPress={onPress}
+        onPressIn={event => {
+          event.preventDefault();
+          onPress(event);
+        }}
         color={color}
         bold
         style={theme.styles.editorMenuButton}
