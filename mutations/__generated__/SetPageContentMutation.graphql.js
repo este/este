@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9d30234cbfbed2b32dfb0827e564bd6d
+ * @relayHash b025f3f50cff62ae0e6f5ba4653f9f5c
  */
 
 /* eslint-disable */
@@ -11,7 +11,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type SetPageContentInput = {
   id: string,
-  content: string,
+  content: any,
 };
 export type SetPageContentMutationVariables = {|
   input: SetPageContentInput

@@ -89,7 +89,7 @@ type SetWebNamePayload {
 
 input SetPageContentInput {
   id: ID!
-  content: String!
+  content: Json!
 }
 
 type SetPageContentPayload {

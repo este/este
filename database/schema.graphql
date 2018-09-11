@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Aug 26 2018 22:59:17 GMT+0200 (Central European Summer Time)
+# timestamp: Tue Sep 11 2018 14:02:48 GMT+0200 (Central European Summer Time)
 
 type AggregateColor {
   count: Int!
@@ -48,11 +48,6 @@ input ColorCreateInput {
 input ColorCreateManyWithoutWebInput {
   create: [ColorCreateWithoutWebInput!]
   connect: [ColorWhereUniqueInput!]
-}
-
-input ColorCreateOneInput {
-  create: ColorCreateInput
-  connect: ColorWhereUniqueInput
 }
 
 input ColorCreateWithoutWebInput {
@@ -127,12 +122,6 @@ input ColorSubscriptionWhereInput {
   node: ColorWhereInput
 }
 
-input ColorUpdateDataInput {
-  name: String
-  value: String
-  web: WebUpdateOneWithoutColorsInput
-}
-
 input ColorUpdateInput {
   name: String
   value: String
@@ -148,15 +137,6 @@ input ColorUpdateManyWithoutWebInput {
   upsert: [ColorUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input ColorUpdateOneInput {
-  create: ColorCreateInput
-  connect: ColorWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: ColorUpdateDataInput
-  upsert: ColorUpsertNestedInput
-}
-
 input ColorUpdateWithoutWebDataInput {
   name: String
   value: String
@@ -165,11 +145,6 @@ input ColorUpdateWithoutWebDataInput {
 input ColorUpdateWithWhereUniqueWithoutWebInput {
   where: ColorWhereUniqueInput!
   data: ColorUpdateWithoutWebDataInput!
-}
-
-input ColorUpsertNestedInput {
-  update: ColorUpdateDataInput!
-  create: ColorCreateInput!
 }
 
 input ColorUpsertWithWhereUniqueWithoutWebInput {
@@ -316,6 +291,9 @@ input ColorWhereUniqueInput {
 
 scalar DateTime
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -368,9 +346,8 @@ type Page implements Node {
   creator(where: UserWhereInput): User!
   title: String!
   web(where: WebWhereInput): Web!
-  content: String
-  contentType: String!
-  backgroundColor(where: ColorWhereInput): Color
+  content: Json
+  contentSchema: String
 }
 
 """A connection to a list of items."""
@@ -385,11 +362,10 @@ type PageConnection {
 
 input PageCreateInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -404,18 +380,16 @@ input PageCreateManyWithoutWebInput {
 
 input PageCreateWithoutCreatorInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   web: WebCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateWithoutWebInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 """An edge in a connection."""
@@ -453,8 +427,8 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentType_ASC
-  contentType_DESC
+  contentSchema_ASC
+  contentSchema_DESC
 }
 
 type PagePreviousValues {
@@ -462,8 +436,8 @@ type PagePreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  content: String
-  contentType: String!
+  content: Json
+  contentSchema: String
 }
 
 type PageSubscriptionPayload {
@@ -507,11 +481,10 @@ input PageSubscriptionWhereInput {
 
 input PageUpdateInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -534,18 +507,16 @@ input PageUpdateManyWithoutWebInput {
 
 input PageUpdateWithoutCreatorDataInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   web: WebUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithoutWebDataInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -703,89 +674,48 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  content: String
+  contentSchema: String
 
   """All values that are not equal to given value."""
-  content_not: String
+  contentSchema_not: String
 
   """All values that are contained in given list."""
-  content_in: [String!]
+  contentSchema_in: [String!]
 
   """All values that are not contained in given list."""
-  content_not_in: [String!]
+  contentSchema_not_in: [String!]
 
   """All values less than the given value."""
-  content_lt: String
+  contentSchema_lt: String
 
   """All values less than or equal the given value."""
-  content_lte: String
+  contentSchema_lte: String
 
   """All values greater than the given value."""
-  content_gt: String
+  contentSchema_gt: String
 
   """All values greater than or equal the given value."""
-  content_gte: String
+  contentSchema_gte: String
 
   """All values containing the given string."""
-  content_contains: String
+  contentSchema_contains: String
 
   """All values not containing the given string."""
-  content_not_contains: String
+  contentSchema_not_contains: String
 
   """All values starting with the given string."""
-  content_starts_with: String
+  contentSchema_starts_with: String
 
   """All values not starting with the given string."""
-  content_not_starts_with: String
+  contentSchema_not_starts_with: String
 
   """All values ending with the given string."""
-  content_ends_with: String
+  contentSchema_ends_with: String
 
   """All values not ending with the given string."""
-  content_not_ends_with: String
-  contentType: String
-
-  """All values that are not equal to given value."""
-  contentType_not: String
-
-  """All values that are contained in given list."""
-  contentType_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentType_not_in: [String!]
-
-  """All values less than the given value."""
-  contentType_lt: String
-
-  """All values less than or equal the given value."""
-  contentType_lte: String
-
-  """All values greater than the given value."""
-  contentType_gt: String
-
-  """All values greater than or equal the given value."""
-  contentType_gte: String
-
-  """All values containing the given string."""
-  contentType_contains: String
-
-  """All values not containing the given string."""
-  contentType_not_contains: String
-
-  """All values starting with the given string."""
-  contentType_starts_with: String
-
-  """All values not starting with the given string."""
-  contentType_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentType_ends_with: String
-
-  """All values not ending with the given string."""
-  contentType_not_ends_with: String
+  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  backgroundColor: ColorWhereInput
 }
 
 input PageWhereUniqueInput {

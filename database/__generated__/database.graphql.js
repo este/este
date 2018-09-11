@@ -137,11 +137,6 @@ input ColorCreateManyWithoutWebInput {
   connect: [ColorWhereUniqueInput!]
 }
 
-input ColorCreateOneInput {
-  create: ColorCreateInput
-  connect: ColorWhereUniqueInput
-}
-
 input ColorCreateWithoutWebInput {
   name: String!
   value: String!
@@ -214,12 +209,6 @@ input ColorSubscriptionWhereInput {
   node: ColorWhereInput
 }
 
-input ColorUpdateDataInput {
-  name: String
-  value: String
-  web: WebUpdateOneWithoutColorsInput
-}
-
 input ColorUpdateInput {
   name: String
   value: String
@@ -235,15 +224,6 @@ input ColorUpdateManyWithoutWebInput {
   upsert: [ColorUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input ColorUpdateOneInput {
-  create: ColorCreateInput
-  connect: ColorWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: ColorUpdateDataInput
-  upsert: ColorUpsertNestedInput
-}
-
 input ColorUpdateWithoutWebDataInput {
   name: String
   value: String
@@ -252,11 +232,6 @@ input ColorUpdateWithoutWebDataInput {
 input ColorUpdateWithWhereUniqueWithoutWebInput {
   where: ColorWhereUniqueInput!
   data: ColorUpdateWithoutWebDataInput!
-}
-
-input ColorUpsertNestedInput {
-  update: ColorUpdateDataInput!
-  create: ColorCreateInput!
 }
 
 input ColorUpsertWithWhereUniqueWithoutWebInput {
@@ -403,6 +378,9 @@ input ColorWhereUniqueInput {
 
 scalar DateTime
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The \`Long\` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -455,9 +433,8 @@ type Page implements Node {
   creator(where: UserWhereInput): User!
   title: String!
   web(where: WebWhereInput): Web!
-  content: String
-  contentType: String!
-  backgroundColor(where: ColorWhereInput): Color
+  content: Json
+  contentSchema: String
 }
 
 """A connection to a list of items."""
@@ -472,11 +449,10 @@ type PageConnection {
 
 input PageCreateInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -491,18 +467,16 @@ input PageCreateManyWithoutWebInput {
 
 input PageCreateWithoutCreatorInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   web: WebCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 input PageCreateWithoutWebInput {
   title: String!
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
-  backgroundColor: ColorCreateOneInput
 }
 
 """An edge in a connection."""
@@ -540,8 +514,8 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentType_ASC
-  contentType_DESC
+  contentSchema_ASC
+  contentSchema_DESC
 }
 
 type PagePreviousValues {
@@ -549,8 +523,8 @@ type PagePreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  content: String
-  contentType: String!
+  content: Json
+  contentSchema: String
 }
 
 type PageSubscriptionPayload {
@@ -594,11 +568,10 @@ input PageSubscriptionWhereInput {
 
 input PageUpdateInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -621,18 +594,16 @@ input PageUpdateManyWithoutWebInput {
 
 input PageUpdateWithoutCreatorDataInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   web: WebUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithoutWebDataInput {
   title: String
-  content: String
-  contentType: String
+  content: Json
+  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
-  backgroundColor: ColorUpdateOneInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -790,89 +761,48 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  content: String
+  contentSchema: String
 
   """All values that are not equal to given value."""
-  content_not: String
+  contentSchema_not: String
 
   """All values that are contained in given list."""
-  content_in: [String!]
+  contentSchema_in: [String!]
 
   """All values that are not contained in given list."""
-  content_not_in: [String!]
+  contentSchema_not_in: [String!]
 
   """All values less than the given value."""
-  content_lt: String
+  contentSchema_lt: String
 
   """All values less than or equal the given value."""
-  content_lte: String
+  contentSchema_lte: String
 
   """All values greater than the given value."""
-  content_gt: String
+  contentSchema_gt: String
 
   """All values greater than or equal the given value."""
-  content_gte: String
+  contentSchema_gte: String
 
   """All values containing the given string."""
-  content_contains: String
+  contentSchema_contains: String
 
   """All values not containing the given string."""
-  content_not_contains: String
+  contentSchema_not_contains: String
 
   """All values starting with the given string."""
-  content_starts_with: String
+  contentSchema_starts_with: String
 
   """All values not starting with the given string."""
-  content_not_starts_with: String
+  contentSchema_not_starts_with: String
 
   """All values ending with the given string."""
-  content_ends_with: String
+  contentSchema_ends_with: String
 
   """All values not ending with the given string."""
-  content_not_ends_with: String
-  contentType: String
-
-  """All values that are not equal to given value."""
-  contentType_not: String
-
-  """All values that are contained in given list."""
-  contentType_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentType_not_in: [String!]
-
-  """All values less than the given value."""
-  contentType_lt: String
-
-  """All values less than or equal the given value."""
-  contentType_lte: String
-
-  """All values greater than the given value."""
-  contentType_gt: String
-
-  """All values greater than or equal the given value."""
-  contentType_gte: String
-
-  """All values containing the given string."""
-  contentType_contains: String
-
-  """All values not containing the given string."""
-  contentType_not_contains: String
-
-  """All values starting with the given string."""
-  contentType_starts_with: String
-
-  """All values not starting with the given string."""
-  contentType_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentType_ends_with: String
-
-  """All values not ending with the given string."""
-  contentType_not_ends_with: String
+  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  backgroundColor: ColorWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -1695,8 +1625,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'title_DESC'
     | 'content_ASC'
     | 'content_DESC'
-    | 'contentType_ASC'
-    | 'contentType_DESC'
+    | 'contentSchema_ASC'
+    | 'contentSchema_DESC'
   
 
  export type ColorOrderByInput =
@@ -1718,9 +1648,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'DELETED'
   
 
- export type ColorCreateWithoutWebInput = {| 
+ export type WebCreateInput = {| 
   name: String,
-  value: String
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  colors?: ColorCreateManyWithoutWebInput
 |}
 
  export type UserWhereInput = {| 
@@ -1807,12 +1739,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   pages_none?: PageWhereInput
 |}
 
- export type UserUpdateInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  webs?: WebUpdateManyWithoutCreatorInput,
-  pages?: PageUpdateManyWithoutCreatorInput
+ export type WebCreateWithoutColorsInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput
 |}
 
  export type ColorWhereInput = {| 
@@ -1864,37 +1794,37 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type ColorCreateOneInput = {| 
-  create?: ColorCreateInput,
-  connect?: ColorWhereUniqueInput
+ export type PageCreateWithoutWebInput = {| 
+  title: String,
+  content?: Json,
+  contentSchema?: String,
+  creator: UserCreateOneWithoutPagesInput
 |}
 
- export type PageUpdateWithoutCreatorDataInput = {| 
-  title?: String,
-  content?: String,
-  contentType?: String,
-  web?: WebUpdateOneWithoutPagesInput,
-  backgroundColor?: ColorUpdateOneInput
+ export type ColorUpsertWithWhereUniqueWithoutWebInput = {| 
+  where: ColorWhereUniqueInput,
+  update: ColorUpdateWithoutWebDataInput,
+  create: ColorCreateWithoutWebInput
 |}
 
- export type ColorCreateInput = {| 
-  name: String,
-  value: String,
-  web: WebCreateOneWithoutColorsInput
+ export type UserCreateOneWithoutPagesInput = {| 
+  create?: UserCreateWithoutPagesInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type WebUpdateManyWithoutCreatorInput = {| 
-  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
-  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  disconnect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  delete?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  update?: Array< WebUpdateWithWhereUniqueWithoutCreatorInput > | WebUpdateWithWhereUniqueWithoutCreatorInput,
-  upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
+ export type UserUpdateInput = {| 
+  email?: String,
+  password?: String,
+  themeName?: String,
+  webs?: WebUpdateManyWithoutCreatorInput,
+  pages?: PageUpdateManyWithoutCreatorInput
 |}
 
- export type WebCreateOneWithoutColorsInput = {| 
-  create?: WebCreateWithoutColorsInput,
-  connect?: WebWhereUniqueInput
+ export type UserCreateWithoutPagesInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput
 |}
 
  export type ColorSubscriptionWhereInput = {| 
@@ -1908,10 +1838,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   node?: ColorWhereInput
 |}
 
- export type WebCreateWithoutColorsInput = {| 
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput
+ export type ColorCreateManyWithoutWebInput = {| 
+  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
+  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput
 |}
 
  export type PageSubscriptionWhereInput = {| 
@@ -1925,9 +1854,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   node?: PageWhereInput
 |}
 
- export type UserCreateOneWithoutWebsInput = {| 
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput
+ export type ColorCreateWithoutWebInput = {| 
+  name: String,
+  value: String
 |}
 
  export type UserSubscriptionWhereInput = {| 
@@ -1941,41 +1870,25 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   node?: UserWhereInput
 |}
 
- export type UserCreateWithoutWebsInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  pages?: PageCreateManyWithoutCreatorInput
-|}
-
- export type WebWhereUniqueInput = {| 
-  id?: ID_Input
-|}
-
  export type PageCreateManyWithoutCreatorInput = {| 
   create?: Array< PageCreateWithoutCreatorInput > | PageCreateWithoutCreatorInput,
   connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
 |}
 
- export type ColorWhereUniqueInput = {| 
-  id?: ID_Input
+ export type UserWhereUniqueInput = {| 
+  id?: ID_Input,
+  email?: String
 |}
 
  export type PageCreateWithoutCreatorInput = {| 
   title: String,
-  content?: String,
-  contentType?: String,
-  web: WebCreateOneWithoutPagesInput,
-  backgroundColor?: ColorCreateOneInput
+  content?: Json,
+  contentSchema?: String,
+  web: WebCreateOneWithoutPagesInput
 |}
 
- export type PageUpdateInput = {| 
-  title?: String,
-  content?: String,
-  contentType?: String,
-  creator?: UserUpdateOneWithoutPagesInput,
-  web?: WebUpdateOneWithoutPagesInput,
-  backgroundColor?: ColorUpdateOneInput
+ export type PageWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
  export type WebCreateOneWithoutPagesInput = {| 
@@ -1983,10 +1896,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   connect?: WebWhereUniqueInput
 |}
 
- export type WebUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: WebWhereUniqueInput,
-  update: WebUpdateWithoutCreatorDataInput,
-  create: WebCreateWithoutCreatorInput
+ export type WebUpdateWithoutColorsDataInput = {| 
+  name?: String,
+  creator?: UserUpdateOneWithoutWebsInput,
+  pages?: PageUpdateManyWithoutWebInput
 |}
 
  export type WebCreateWithoutPagesInput = {| 
@@ -1995,19 +1908,58 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   colors?: ColorCreateManyWithoutWebInput
 |}
 
- export type ColorUpsertNestedInput = {| 
-  update: ColorUpdateDataInput,
-  create: ColorCreateInput
+ export type ColorUpdateInput = {| 
+  name?: String,
+  value?: String,
+  web?: WebUpdateOneWithoutColorsInput
 |}
 
- export type ColorCreateManyWithoutWebInput = {| 
-  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
-  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput
+ export type UserCreateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type UserUpsertWithoutWebsInput = {| 
-  update: UserUpdateWithoutWebsDataInput,
-  create: UserCreateWithoutWebsInput
+ export type WebUpdateInput = {| 
+  name?: String,
+  creator?: UserUpdateOneWithoutWebsInput,
+  pages?: PageUpdateManyWithoutWebInput,
+  colors?: ColorUpdateManyWithoutWebInput
+|}
+
+ export type UserCreateWithoutWebsInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  pages?: PageCreateManyWithoutCreatorInput
+|}
+
+ export type WebUpsertWithoutPagesInput = {| 
+  update: WebUpdateWithoutPagesDataInput,
+  create: WebCreateWithoutPagesInput
+|}
+
+ export type PageUpdateManyWithoutCreatorInput = {| 
+  create?: Array< PageCreateWithoutCreatorInput > | PageCreateWithoutCreatorInput,
+  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  update?: Array< PageUpdateWithWhereUniqueWithoutCreatorInput > | PageUpdateWithWhereUniqueWithoutCreatorInput,
+  upsert?: Array< PageUpsertWithWhereUniqueWithoutCreatorInput > | PageUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type UserUpdateWithoutWebsDataInput = {| 
+  email?: String,
+  password?: String,
+  themeName?: String,
+  pages?: PageUpdateManyWithoutCreatorInput
+|}
+
+ export type PageCreateInput = {| 
+  title: String,
+  content?: Json,
+  contentSchema?: String,
+  creator: UserCreateOneWithoutPagesInput,
+  web: WebCreateOneWithoutPagesInput
 |}
 
  export type WebUpdateWithoutPagesDataInput = {| 
@@ -2016,67 +1968,42 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   colors?: ColorUpdateManyWithoutWebInput
 |}
 
- export type WebUpsertWithoutPagesInput = {| 
-  update: WebUpdateWithoutPagesDataInput,
-  create: WebCreateWithoutPagesInput
+ export type ColorCreateInput = {| 
+  name: String,
+  value: String,
+  web: WebCreateOneWithoutColorsInput
 |}
 
- export type WebCreateInput = {| 
+ export type PageUpdateWithoutCreatorDataInput = {| 
+  title?: String,
+  content?: Json,
+  contentSchema?: String,
+  web?: WebUpdateOneWithoutPagesInput
+|}
+
+ export type WebCreateOneWithoutColorsInput = {| 
+  create?: WebCreateWithoutColorsInput,
+  connect?: WebWhereUniqueInput
+|}
+
+ export type UserCreateInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput,
+  pages?: PageCreateManyWithoutCreatorInput
+|}
+
+ export type WebUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: WebWhereUniqueInput,
+  update: WebUpdateWithoutCreatorDataInput,
+  create: WebCreateWithoutCreatorInput
+|}
+
+ export type WebCreateWithoutCreatorInput = {| 
   name: String,
-  creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
   colors?: ColorCreateManyWithoutWebInput
-|}
-
- export type ColorUpdateWithoutWebDataInput = {| 
-  name?: String,
-  value?: String
-|}
-
- export type PageCreateInput = {| 
-  title: String,
-  content?: String,
-  contentType?: String,
-  creator: UserCreateOneWithoutPagesInput,
-  web: WebCreateOneWithoutPagesInput,
-  backgroundColor?: ColorCreateOneInput
-|}
-
- export type ColorUpdateManyWithoutWebInput = {| 
-  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
-  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  disconnect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  delete?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  update?: Array< ColorUpdateWithWhereUniqueWithoutWebInput > | ColorUpdateWithWhereUniqueWithoutWebInput,
-  upsert?: Array< ColorUpsertWithWhereUniqueWithoutWebInput > | ColorUpsertWithWhereUniqueWithoutWebInput
-|}
-
- export type WebUpdateOneWithoutPagesInput = {| 
-  create?: WebCreateWithoutPagesInput,
-  connect?: WebWhereUniqueInput,
-  delete?: Boolean,
-  update?: WebUpdateWithoutPagesDataInput,
-  upsert?: WebUpsertWithoutPagesInput
-|}
-
- export type WebCreateManyWithoutCreatorInput = {| 
-  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
-  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
-|}
-
- export type PageCreateManyWithoutWebInput = {| 
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
-|}
-
- export type UserCreateOneWithoutPagesInput = {| 
-  create?: UserCreateWithoutPagesInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: WebWhereUniqueInput,
-  data: WebUpdateWithoutCreatorDataInput
 |}
 
  export type PageWhereInput = {| 
@@ -2127,43 +2054,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   title_not_starts_with?: String,
   title_ends_with?: String,
   title_not_ends_with?: String,
-  content?: String,
-  content_not?: String,
-  content_in?: Array< String > | String,
-  content_not_in?: Array< String > | String,
-  content_lt?: String,
-  content_lte?: String,
-  content_gt?: String,
-  content_gte?: String,
-  content_contains?: String,
-  content_not_contains?: String,
-  content_starts_with?: String,
-  content_not_starts_with?: String,
-  content_ends_with?: String,
-  content_not_ends_with?: String,
-  contentType?: String,
-  contentType_not?: String,
-  contentType_in?: Array< String > | String,
-  contentType_not_in?: Array< String > | String,
-  contentType_lt?: String,
-  contentType_lte?: String,
-  contentType_gt?: String,
-  contentType_gte?: String,
-  contentType_contains?: String,
-  contentType_not_contains?: String,
-  contentType_starts_with?: String,
-  contentType_not_starts_with?: String,
-  contentType_ends_with?: String,
-  contentType_not_ends_with?: String,
+  contentSchema?: String,
+  contentSchema_not?: String,
+  contentSchema_in?: Array< String > | String,
+  contentSchema_not_in?: Array< String > | String,
+  contentSchema_lt?: String,
+  contentSchema_lte?: String,
+  contentSchema_gt?: String,
+  contentSchema_gte?: String,
+  contentSchema_contains?: String,
+  contentSchema_not_contains?: String,
+  contentSchema_starts_with?: String,
+  contentSchema_not_starts_with?: String,
+  contentSchema_ends_with?: String,
+  contentSchema_not_ends_with?: String,
   creator?: UserWhereInput,
-  web?: WebWhereInput,
-  backgroundColor?: ColorWhereInput
-|}
-
- export type WebUpdateWithoutCreatorDataInput = {| 
-  name?: String,
-  pages?: PageUpdateManyWithoutWebInput,
-  colors?: ColorUpdateManyWithoutWebInput
+  web?: WebWhereInput
 |}
 
  export type WebSubscriptionWhereInput = {| 
@@ -2177,6 +2083,44 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   node?: WebWhereInput
 |}
 
+ export type WebUpdateManyWithoutCreatorInput = {| 
+  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
+  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  disconnect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  delete?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  update?: Array< WebUpdateWithWhereUniqueWithoutCreatorInput > | WebUpdateWithWhereUniqueWithoutCreatorInput,
+  upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type WebWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: WebWhereUniqueInput,
+  data: WebUpdateWithoutCreatorDataInput
+|}
+
+ export type WebUpdateOneWithoutColorsInput = {| 
+  create?: WebCreateWithoutColorsInput,
+  connect?: WebWhereUniqueInput,
+  delete?: Boolean,
+  update?: WebUpdateWithoutColorsDataInput,
+  upsert?: WebUpsertWithoutColorsInput
+|}
+
+ export type WebUpdateWithoutCreatorDataInput = {| 
+  name?: String,
+  pages?: PageUpdateManyWithoutWebInput,
+  colors?: ColorUpdateManyWithoutWebInput
+|}
+
+ export type PageUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: PageWhereUniqueInput,
+  update: PageUpdateWithoutCreatorDataInput,
+  create: PageCreateWithoutCreatorInput
+|}
+
  export type PageUpdateManyWithoutWebInput = {| 
   create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
   connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
@@ -2186,8 +2130,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   upsert?: Array< PageUpsertWithWhereUniqueWithoutWebInput > | PageUpsertWithWhereUniqueWithoutWebInput
 |}
 
- export type PageWhereUniqueInput = {| 
-  id?: ID_Input
+ export type UserUpdateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutWebsDataInput,
+  upsert?: UserUpsertWithoutWebsInput
 |}
 
  export type PageUpdateWithWhereUniqueWithoutWebInput = {| 
@@ -2195,24 +2143,21 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   data: PageUpdateWithoutWebDataInput
 |}
 
- export type WebUpdateInput = {| 
-  name?: String,
-  creator?: UserUpdateOneWithoutWebsInput,
-  pages?: PageUpdateManyWithoutWebInput,
-  colors?: ColorUpdateManyWithoutWebInput
+ export type PageUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: PageWhereUniqueInput,
+  data: PageUpdateWithoutCreatorDataInput
 |}
 
  export type PageUpdateWithoutWebDataInput = {| 
   title?: String,
-  content?: String,
-  contentType?: String,
-  creator?: UserUpdateOneWithoutPagesInput,
-  backgroundColor?: ColorUpdateOneInput
+  content?: Json,
+  contentSchema?: String,
+  creator?: UserUpdateOneWithoutPagesInput
 |}
 
- export type WebUpsertWithoutColorsInput = {| 
-  update: WebUpdateWithoutColorsDataInput,
-  create: WebCreateWithoutColorsInput
+ export type PageCreateManyWithoutWebInput = {| 
+  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
+  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
 |}
 
  export type UserUpdateOneWithoutPagesInput = {| 
@@ -2223,10 +2168,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   upsert?: UserUpsertWithoutPagesInput
 |}
 
- export type ColorUpsertWithWhereUniqueWithoutWebInput = {| 
-  where: ColorWhereUniqueInput,
-  update: ColorUpdateWithoutWebDataInput,
-  create: ColorCreateWithoutWebInput
+ export type WebUpsertWithoutColorsInput = {| 
+  update: WebUpdateWithoutColorsDataInput,
+  create: WebCreateWithoutColorsInput
 |}
 
  export type UserUpdateWithoutPagesDataInput = {| 
@@ -2236,12 +2180,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   webs?: WebUpdateManyWithoutCreatorInput
 |}
 
- export type UserCreateInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput,
-  pages?: PageCreateManyWithoutCreatorInput
+ export type PageUpdateInput = {| 
+  title?: String,
+  content?: Json,
+  contentSchema?: String,
+  creator?: UserUpdateOneWithoutPagesInput,
+  web?: WebUpdateOneWithoutPagesInput
 |}
 
  export type UserUpsertWithoutPagesInput = {| 
@@ -2249,21 +2193,51 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   create: UserCreateWithoutPagesInput
 |}
 
- export type PageCreateWithoutWebInput = {| 
-  title: String,
-  content?: String,
-  contentType?: String,
-  creator: UserCreateOneWithoutPagesInput,
-  backgroundColor?: ColorCreateOneInput
+ export type WebUpdateOneWithoutPagesInput = {| 
+  create?: WebCreateWithoutPagesInput,
+  connect?: WebWhereUniqueInput,
+  delete?: Boolean,
+  update?: WebUpdateWithoutPagesDataInput,
+  upsert?: WebUpsertWithoutPagesInput
 |}
 
- export type ColorUpdateOneInput = {| 
-  create?: ColorCreateInput,
-  connect?: ColorWhereUniqueInput,
-  disconnect?: Boolean,
-  delete?: Boolean,
-  update?: ColorUpdateDataInput,
-  upsert?: ColorUpsertNestedInput
+ export type ColorUpdateWithoutWebDataInput = {| 
+  name?: String,
+  value?: String
+|}
+
+ export type ColorUpdateWithWhereUniqueWithoutWebInput = {| 
+  where: ColorWhereUniqueInput,
+  data: ColorUpdateWithoutWebDataInput
+|}
+
+ export type ColorUpdateManyWithoutWebInput = {| 
+  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
+  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
+  disconnect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
+  delete?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
+  update?: Array< ColorUpdateWithWhereUniqueWithoutWebInput > | ColorUpdateWithWhereUniqueWithoutWebInput,
+  upsert?: Array< ColorUpsertWithWhereUniqueWithoutWebInput > | ColorUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type PageUpsertWithWhereUniqueWithoutWebInput = {| 
+  where: PageWhereUniqueInput,
+  update: PageUpdateWithoutWebDataInput,
+  create: PageCreateWithoutWebInput
+|}
+
+ export type WebCreateManyWithoutCreatorInput = {| 
+  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
+  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
+|}
+
+ export type UserUpsertWithoutWebsInput = {| 
+  update: UserUpdateWithoutWebsDataInput,
+  create: UserCreateWithoutWebsInput
+|}
+
+ export type ColorWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
  export type WebWhereInput = {| 
@@ -2323,96 +2297,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   colors_none?: ColorWhereInput
 |}
 
- export type ColorUpdateDataInput = {| 
-  name?: String,
-  value?: String,
-  web?: WebUpdateOneWithoutColorsInput
-|}
-
- export type ColorUpdateInput = {| 
-  name?: String,
-  value?: String,
-  web?: WebUpdateOneWithoutColorsInput
-|}
-
- export type WebUpdateOneWithoutColorsInput = {| 
-  create?: WebCreateWithoutColorsInput,
-  connect?: WebWhereUniqueInput,
-  delete?: Boolean,
-  update?: WebUpdateWithoutColorsDataInput,
-  upsert?: WebUpsertWithoutColorsInput
-|}
-
- export type PageUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutCreatorDataInput,
-  create: PageCreateWithoutCreatorInput
-|}
-
- export type WebUpdateWithoutColorsDataInput = {| 
-  name?: String,
-  creator?: UserUpdateOneWithoutWebsInput,
-  pages?: PageUpdateManyWithoutWebInput
-|}
-
- export type WebCreateWithoutCreatorInput = {| 
-  name: String,
-  pages?: PageCreateManyWithoutWebInput,
-  colors?: ColorCreateManyWithoutWebInput
-|}
-
- export type PageUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  data: PageUpdateWithoutCreatorDataInput
-|}
-
- export type PageUpdateManyWithoutCreatorInput = {| 
-  create?: Array< PageCreateWithoutCreatorInput > | PageCreateWithoutCreatorInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  update?: Array< PageUpdateWithWhereUniqueWithoutCreatorInput > | PageUpdateWithWhereUniqueWithoutCreatorInput,
-  upsert?: Array< PageUpsertWithWhereUniqueWithoutCreatorInput > | PageUpsertWithWhereUniqueWithoutCreatorInput
-|}
-
- export type UserUpdateWithoutWebsDataInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  pages?: PageUpdateManyWithoutCreatorInput
-|}
-
- export type UserUpdateOneWithoutWebsInput = {| 
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutWebsDataInput,
-  upsert?: UserUpsertWithoutWebsInput
-|}
-
- export type UserCreateWithoutPagesInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput
-|}
-
- export type ColorUpdateWithWhereUniqueWithoutWebInput = {| 
-  where: ColorWhereUniqueInput,
-  data: ColorUpdateWithoutWebDataInput
-|}
-
- export type PageUpsertWithWhereUniqueWithoutWebInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutWebDataInput,
-  create: PageCreateWithoutWebInput
-|}
-
- export type UserWhereUniqueInput = {| 
-  id?: ID_Input,
-  email?: String
-|}
-
 /*
  * An object with an ID
 
@@ -2427,14 +2311,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    value: String,
 |}
 
-/*
- * A connection to a list of items.
-
-*/
- export type UserConnection = {| 
-   pageInfo: PageInfo,
-   edges: UserEdge[],
-   aggregate: AggregateUser,
+ export type Color = {| ...Node,
+ 
+   id: ID_Output,
+   web: Web,
+   name: String,
+   value: String,
 |}
 
  export type User = {| ...Node,
@@ -2457,6 +2339,23 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    count: Int,
 |}
 
+/*
+ * A connection to a list of items.
+
+*/
+ export type UserConnection = {| 
+   pageInfo: PageInfo,
+   edges: UserEdge[],
+   aggregate: AggregateUser,
+|}
+
+ export type WebPreviousValues = {| 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   name: String,
+|}
+
  export type Web = {| ...Node,
  
    id: ID_Output,
@@ -2468,17 +2367,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    colors?: Color[],
 |}
 
- export type Page = {| ...Node,
- 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   creator: User,
-   title: String,
-   web: Web,
-   content?: String,
-   contentType: String,
-   backgroundColor?: Color,
+/*
+ * A connection to a list of items.
+
+*/
+ export type ColorConnection = {| 
+   pageInfo: PageInfo,
+   edges: ColorEdge[],
+   aggregate: AggregateColor,
 |}
 
 /*
@@ -2494,33 +2390,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  * A connection to a list of items.
 
 */
- export type ColorConnection = {| 
-   pageInfo: PageInfo,
-   edges: ColorEdge[],
-   aggregate: AggregateColor,
-|}
-
- export type AggregatePage = {| 
-   count: Int,
-|}
-
-/*
- * A connection to a list of items.
-
-*/
  export type PageConnection = {| 
    pageInfo: PageInfo,
    edges: PageEdge[],
    aggregate: AggregatePage,
 |}
 
- export type PagePreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   title: String,
-   content?: String,
-   contentType: String,
+ export type AggregatePage = {| 
+   count: Int,
 |}
 
 /*
@@ -2532,22 +2409,24 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    cursor: String,
 |}
 
- export type PageSubscriptionPayload = {| 
-   mutation: MutationType,
-   node?: Page,
-   updatedFields?: String[],
-   previousValues?: PagePreviousValues,
+ export type PagePreviousValues = {| 
+   id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   title: String,
+   content?: Json,
+   contentSchema?: String,
 |}
 
  export type AggregateUser = {| 
    count: Int,
 |}
 
- export type UserSubscriptionPayload = {| 
+ export type PageSubscriptionPayload = {| 
    mutation: MutationType,
-   node?: User,
+   node?: Page,
    updatedFields?: String[],
-   previousValues?: UserPreviousValues,
+   previousValues?: PagePreviousValues,
 |}
 
  export type ColorSubscriptionPayload = {| 
@@ -2566,13 +2445,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    cursor: String,
 |}
 
- export type WebPreviousValues = {| 
-   id: ID_Output,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-|}
-
  export type WebSubscriptionPayload = {| 
    mutation: MutationType,
    node?: Web,
@@ -2580,12 +2452,16 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    previousValues?: WebPreviousValues,
 |}
 
- export type Color = {| ...Node,
+ export type Page = {| ...Node,
  
    id: ID_Output,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   creator: User,
+   title: String,
    web: Web,
-   name: String,
-   value: String,
+   content?: Json,
+   contentSchema?: String,
 |}
 
  export type UserPreviousValues = {| 
@@ -2595,6 +2471,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    email: String,
    password: String,
    themeName?: String,
+|}
+
+ export type UserSubscriptionPayload = {| 
+   mutation: MutationType,
+   node?: User,
+   updatedFields?: String[],
+   previousValues?: UserPreviousValues,
 |}
 
  export type AggregateWeb = {| 
@@ -2659,3 +2542,8 @@ The `String` scalar type represents textual data, represented as UTF-8 character
  export type String = string 
 
  export type DateTime = Date | string 
+
+/*
+Raw JSON value
+*/
+ export type Json = string 

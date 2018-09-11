@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Sep 06 2018 14:09:08 GMT+0200 (Central European Summer Time)
+# timestamp: Tue Sep 11 2018 14:22:34 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -210,6 +210,9 @@ enum EmailError {
   NOT_EXISTS
 }
 
+"""Raw JSON value"""
+scalar Json
+
 enum Max140CharsError {
   REQUIRED
   MAX_140_CHARS
@@ -239,9 +242,8 @@ type Page implements Node {
   creator(where: UserWhereInput): User!
   title: String!
   web(where: WebWhereInput): Web!
-  content: String
-  contentType: String!
-  backgroundColor(where: ColorWhereInput): Color
+  content: Json
+  contentSchema: String
 }
 
 enum PageOrderByInput {
@@ -255,8 +257,8 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentType_ASC
-  contentType_DESC
+  contentSchema_ASC
+  contentSchema_DESC
 }
 
 input PageWhereInput {
@@ -392,89 +394,48 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  content: String
+  contentSchema: String
 
   """All values that are not equal to given value."""
-  content_not: String
+  contentSchema_not: String
 
   """All values that are contained in given list."""
-  content_in: [String!]
+  contentSchema_in: [String!]
 
   """All values that are not contained in given list."""
-  content_not_in: [String!]
+  contentSchema_not_in: [String!]
 
   """All values less than the given value."""
-  content_lt: String
+  contentSchema_lt: String
 
   """All values less than or equal the given value."""
-  content_lte: String
+  contentSchema_lte: String
 
   """All values greater than the given value."""
-  content_gt: String
+  contentSchema_gt: String
 
   """All values greater than or equal the given value."""
-  content_gte: String
+  contentSchema_gte: String
 
   """All values containing the given string."""
-  content_contains: String
+  contentSchema_contains: String
 
   """All values not containing the given string."""
-  content_not_contains: String
+  contentSchema_not_contains: String
 
   """All values starting with the given string."""
-  content_starts_with: String
+  contentSchema_starts_with: String
 
   """All values not starting with the given string."""
-  content_not_starts_with: String
+  contentSchema_not_starts_with: String
 
   """All values ending with the given string."""
-  content_ends_with: String
+  contentSchema_ends_with: String
 
   """All values not ending with the given string."""
-  content_not_ends_with: String
-  contentType: String
-
-  """All values that are not equal to given value."""
-  contentType_not: String
-
-  """All values that are contained in given list."""
-  contentType_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentType_not_in: [String!]
-
-  """All values less than the given value."""
-  contentType_lt: String
-
-  """All values less than or equal the given value."""
-  contentType_lte: String
-
-  """All values greater than the given value."""
-  contentType_gt: String
-
-  """All values greater than or equal the given value."""
-  contentType_gte: String
-
-  """All values containing the given string."""
-  contentType_contains: String
-
-  """All values not containing the given string."""
-  contentType_not_contains: String
-
-  """All values starting with the given string."""
-  contentType_starts_with: String
-
-  """All values not starting with the given string."""
-  contentType_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentType_ends_with: String
-
-  """All values not ending with the given string."""
-  contentType_not_ends_with: String
+  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  backgroundColor: ColorWhereInput
 }
 
 enum PasswordError {
@@ -492,7 +453,7 @@ type Query {
 
 input SetPageContentInput {
   id: ID!
-  content: String!
+  content: Json!
 }
 
 type SetPageContentPayload {

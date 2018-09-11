@@ -39,7 +39,7 @@ export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
-const emptyText = {
+const defaultEmptyDocumentWithBasicLayout = {
   document: {
     nodes: [
       {
@@ -106,8 +106,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   constructor(props: EditorProps) {
     super(props);
     const { page } = this.props.data;
-    const content = page && page.content;
-    const json = content != null ? JSON.parse(content) : emptyText;
+    const json = (page && page.content) || defaultEmptyDocumentWithBasicLayout;
     // console.log(json);
     // Resets Slate's internal key generating function to its default state.
     // This is useful for server-side rendering.
@@ -125,8 +124,9 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     this.setState({ value });
     const documentChanged = value.document !== this.state.value.document;
     if (documentChanged) {
-      const text = JSON.stringify(value.toJSON());
-      this.throttleCommit(text);
+      // const content = JSON.stringify(value.toJSON());
+      const content = value.toJSON();
+      this.throttleCommit(content);
     }
   };
 
@@ -415,8 +415,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         <EditorHead title={page.draftTitle} />
         <View
           style={{
-            backgroundColor:
-              (page.backgroundColor && page.backgroundColor.value) || '#fff',
+            backgroundColor: '#fff',
             flex: 1,
           }}
         >
@@ -472,9 +471,6 @@ export default createFragmentContainer(
         title @__clientField(handle: "draft")
         draftTitle
         content
-        backgroundColor {
-          value
-        }
       }
     }
   `,

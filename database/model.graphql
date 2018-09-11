@@ -31,12 +31,8 @@ type Page {
   creator: User!
   title: String!
   web: Web! @relation(name: "WebPages", onDelete: SET_NULL)
-  # Some Slate JSON stringified model for now. It's too dynamic to be defined
-  # as GraphQL schema for now I guess. Also, Relay needs guids.
-  # Stringified JSON, because of https://github.com/este/este/issues/1580
-  content: String
-  contentType: String! @default(value: "EsteSlate1")
-  backgroundColor: Color
+  content: Json
+  contentSchema: String
 }
 
 type Color {
