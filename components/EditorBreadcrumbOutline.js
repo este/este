@@ -34,6 +34,8 @@ class EditorBreadcrumbOutline extends React.PureComponent<
     // component is pure aka rerendered only when prop node is changed.
     // Can't use findDOMNode because it throws when node does not exists.
     // import { findDOMNode } from 'slate-react';
+    // It's possible to use componentDidMount with setState, but this is fine
+    // I guess.
     const { node } = this.props;
     const nodeElement: Element = window.document.querySelector(
       `[data-key="${node.key}"]`,

@@ -40,6 +40,8 @@ class EditorBreadcrumbButton extends React.PureComponent<
         return 'item';
       case 'link':
         return 'link';
+      case 'view':
+        return 'view';
       default:
         // eslint-disable-next-line no-unused-expressions
         (type: empty);

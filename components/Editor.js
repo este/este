@@ -23,10 +23,11 @@ import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
-import { View } from 'react-native';
 import EditorBreadcrumb from './EditorBreadcrumb';
+import { View } from 'react-native';
 
 export type BlockNodeType =
+  | 'view'
   | 'paragraph'
   | 'headingOne'
   | 'headingTwo'
@@ -39,24 +40,46 @@ export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
-const defaultEmptyDocumentWithBasicLayout = {
+const defaultEmptyDocument = {
+  object: 'value',
   document: {
     nodes: [
       {
         object: 'block',
-        type: 'paragraph',
+        type: 'view',
         nodes: [
           {
-            object: 'text',
-            leaves: [
+            object: 'block',
+            type: 'paragraph',
+            nodes: [
               {
-                text: '',
+                object: 'text',
+                leaves: [
+                  {
+                    text: '',
+                  },
+                ],
               },
             ],
           },
         ],
+        data: {
+          style: {
+            // https://css-tricks.com/tale-width-max-width/
+            maxWidth: 768,
+            width: '100%',
+            marginHorizontal: 'auto',
+            paddingHorizontal: 12,
+          },
+        },
       },
     ],
+    data: {
+      style: {
+        backgroundColor: '#fafafa',
+        flex: 1,
+      },
+    },
   },
 };
 
@@ -106,7 +129,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   constructor(props: EditorProps) {
     super(props);
     const { page } = this.props.data;
-    const json = (page && page.content) || defaultEmptyDocumentWithBasicLayout;
+    const json = (page && page.content) || defaultEmptyDocument;
     // console.log(json);
     // Resets Slate's internal key generating function to its default state.
     // This is useful for server-side rendering.
@@ -327,11 +350,29 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     }, change);
   }
 
+  renderEditor = props => {
+    const documentStyle = props.value.document.data.get('style');
+    return (
+      // No ...attributes in API, a data-key must be defined for the outliner.
+      <View data-key={props.value.document.key} style={documentStyle}>
+        {props.children}
+      </View>
+    );
+  };
+
   renderNode = props => {
     const { attributes, node, children } = props;
     const { styles } = this.props.theme;
     const type: NodeType = node.type;
     switch (type) {
+      case 'view': {
+        const style = node.data.get('style');
+        return (
+          <View {...attributes} style={style}>
+            {children}
+          </View>
+        );
+      }
       case 'paragraph':
       case 'headingOne':
       case 'headingTwo': {
@@ -405,44 +446,28 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   render() {
     const { page } = this.props.data;
-    const { value } = this.state;
     if (page == null) return null;
     // https://github.com/relayjs/eslint-plugin-relay/issues/35
     // eslint-disable-next-line no-unused-expressions
     page.title;
+
+    const { value } = this.state;
     return (
       <>
         <EditorHead title={page.draftTitle} />
-        <View
-          style={{
-            backgroundColor: '#fff',
-            flex: 1,
-          }}
-        >
-          <View
-            style={{
-              maxWidth: 768,
-              width: '100%',
-              marginHorizontal: 'auto',
-              paddingHorizontal: 12,
-              // backgroundColor: 'blue',
-              flex: 1,
-            }}
-          >
-            <SlateEditor
-              autoCorrect={false}
-              spellCheck={false}
-              ref={this.editorRef}
-              autoFocus
-              value={value}
-              onChange={this.handleEditorChange}
-              renderNode={this.renderNode}
-              renderMark={this.renderMark}
-              onFocus={this.handleEditorFocus}
-              onKeyDown={this.handleEditorKeyDown}
-            />
-          </View>
-        </View>
+        <SlateEditor
+          autoCorrect={false}
+          spellCheck={false}
+          ref={this.editorRef}
+          autoFocus
+          value={value}
+          onChange={this.handleEditorChange}
+          renderEditor={this.renderEditor}
+          renderNode={this.renderNode}
+          renderMark={this.renderMark}
+          onFocus={this.handleEditorFocus}
+          onKeyDown={this.handleEditorKeyDown}
+        />
         <EditorMenu
           // $FlowFixMe https://github.com/este/este/issues/1571
           ref={this.editorMenuRef}
