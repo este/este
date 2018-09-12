@@ -40,7 +40,25 @@ export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
-const defaultEmptyDocument = {
+// Flow type does not replace a schema. It's for DX.
+type Data = {| style: { [string]: string | number }, name?: string |};
+type TextNode = {|
+  leaves: Array<{| text: string |}>,
+  object: 'text',
+|};
+export type BlockNode = {|
+  data?: Data,
+  nodes: Array<BlockNode | TextNode>,
+  object: 'block',
+  type: BlockNodeType,
+|};
+export type DocumentNode = {|
+  nodes: Array<BlockNode>,
+  data?: Data,
+|};
+type DefaultValue = {| object: 'value', document: DocumentNode |};
+
+const defaultValue: DefaultValue = {
   object: 'value',
   document: {
     nodes: [
@@ -64,12 +82,15 @@ const defaultEmptyDocument = {
           },
         ],
         data: {
+          name: 'container',
           style: {
             // https://css-tricks.com/tale-width-max-width/
             maxWidth: 768,
             width: '100%',
             marginHorizontal: 'auto',
             paddingHorizontal: 12,
+            // TODO: Should work.
+            // flex: 1,
           },
         },
       },
@@ -129,7 +150,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   constructor(props: EditorProps) {
     super(props);
     const { page } = this.props.data;
-    const json = (page && page.content) || defaultEmptyDocument;
+    const json = (page && page.content) || defaultValue;
     // console.log(json);
     // Resets Slate's internal key generating function to its default state.
     // This is useful for server-side rendering.

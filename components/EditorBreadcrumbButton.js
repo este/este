@@ -6,6 +6,8 @@ import type { NodeType } from './Editor';
 type Node = {|
   object: string,
   type: NodeType,
+  // TODO: Immutable Map.
+  data: { get: string => string },
 |};
 
 type EditorBreadcrumbButtonProps = {|
@@ -24,8 +26,7 @@ class EditorBreadcrumbButton extends React.PureComponent<
     if (node.object === 'document') {
       return 'document';
     }
-    const type: NodeType = node.type;
-    switch (type) {
+    switch (node.type) {
       case 'paragraph':
         return 'paragraph';
       case 'headingOne':
@@ -41,10 +42,10 @@ class EditorBreadcrumbButton extends React.PureComponent<
       case 'link':
         return 'link';
       case 'view':
-        return 'view';
+        return (node.data != null && node.data.get('name')) || 'view';
       default:
         // eslint-disable-next-line no-unused-expressions
-        (type: empty);
+        (node.type: empty);
     }
   }
 
