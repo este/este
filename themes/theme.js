@@ -226,6 +226,12 @@ const stylesJson = {
     paddingVertical: typography.rhythm(0.1),
     paddingHorizontal: typography.rhythm(0.5),
   },
+
+  editorBreadcrumbOutline: {
+    position: 'absolute',
+    backgroundColor: colors.primary,
+    opacity: 0.5,
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);

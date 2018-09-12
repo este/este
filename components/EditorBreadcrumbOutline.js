@@ -1,12 +1,13 @@
 // @flow
 /* eslint-env browser */
 import * as React from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View } from 'react-native';
 import ReactDOM from 'react-dom';
+import withTheme, { type Theme } from './core/withTheme';
 
 type EditorBreadcrumbOutlineProps = {|
   node: Object,
-  onPress: () => void,
+  theme: Theme,
 |};
 
 type EditorBreadcrumbOutlineState = {|
@@ -36,29 +37,65 @@ class EditorBreadcrumbOutline extends React.PureComponent<
     // import { findDOMNode } from 'slate-react';
     // It's possible to use componentDidMount with setState, but this is fine
     // I guess.
-    const { node } = this.props;
+    const {
+      node,
+      theme: { styles },
+    } = this.props;
     const nodeElement: Element = window.document.querySelector(
       `[data-key="${node.key}"]`,
     );
     if (nodeElement == null) return null;
     const rect = nodeElement.getBoundingClientRect();
     return ReactDOM.createPortal(
-      <TouchableWithoutFeedback onPress={this.props.onPress}>
+      <>
         <View
-          style={{
-            width: rect.width,
-            height: rect.height,
-            backgroundColor: 'red',
-            opacity: 0.2,
-            position: 'absolute',
-            left: rect.left + window.pageXOffset,
-            top: rect.top + window.pageYOffset,
-          }}
+          style={[
+            styles.editorBreadcrumbOutline,
+            {
+              width: 1,
+              height: rect.height,
+              left: rect.left + window.pageXOffset,
+              top: rect.top + window.pageYOffset,
+            },
+          ]}
         />
-      </TouchableWithoutFeedback>,
+        <View
+          style={[
+            styles.editorBreadcrumbOutline,
+            {
+              width: 1,
+              height: rect.height,
+              left: rect.right - 1 + window.pageXOffset,
+              top: rect.top + window.pageYOffset,
+            },
+          ]}
+        />
+        <View
+          style={[
+            styles.editorBreadcrumbOutline,
+            {
+              width: rect.width,
+              height: 1,
+              left: rect.left + window.pageXOffset,
+              top: rect.top + window.pageYOffset,
+            },
+          ]}
+        />
+        <View
+          style={[
+            styles.editorBreadcrumbOutline,
+            {
+              width: rect.width,
+              height: 1,
+              left: rect.left + window.pageXOffset,
+              top: rect.bottom - 1 + window.pageYOffset,
+            },
+          ]}
+        />
+      </>,
       el,
     );
   }
 }
 
-export default EditorBreadcrumbOutline;
+export default withTheme(EditorBreadcrumbOutline);

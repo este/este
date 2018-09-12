@@ -64,10 +64,6 @@ class EditorBreadcrumb extends React.PureComponent<
     el.focus();
   };
 
-  handleOutlinePress = () => {
-    this.setState({ activeIndex: null });
-  };
-
   // Handle tabIndex and focus directly without React. It's easier to implement.
   updateTabIndexesDirectly() {
     const els = getFocusableNodes(this);
@@ -103,12 +99,7 @@ class EditorBreadcrumb extends React.PureComponent<
             />
           ))}
         </Spacer>
-        {activeNode != null && (
-          <EditorBreadcrumbOutline
-            node={activeNode}
-            onPress={this.handleOutlinePress}
-          />
-        )}
+        {activeNode != null && <EditorBreadcrumbOutline node={activeNode} />}
       </View>
     );
   }
