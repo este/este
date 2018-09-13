@@ -26,6 +26,8 @@ import { parse } from 'url';
 import EditorBreadcrumb from './EditorBreadcrumb';
 import { View } from 'react-native';
 
+// Note Flow types does not replace Slate schema.
+
 export type BlockNodeType =
   | 'view'
   | 'paragraph'
@@ -40,22 +42,25 @@ export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
-// Flow type does not replace a schema. It's for DX.
 type Data = {| style: { [string]: string | number }, name?: string |};
+
 type TextNode = {|
   leaves: Array<{| text: string |}>,
   object: 'text',
 |};
+
 export type BlockNode = {|
   data?: Data,
   nodes: Array<BlockNode | TextNode>,
   object: 'block',
   type: BlockNodeType,
 |};
+
 export type DocumentNode = {|
   nodes: Array<BlockNode>,
   data?: Data,
 |};
+
 type DefaultValue = {| object: 'value', document: DocumentNode |};
 
 const defaultValue: DefaultValue = {
@@ -168,7 +173,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     this.setState({ value });
     const documentChanged = value.document !== this.state.value.document;
     if (documentChanged) {
-      // const content = JSON.stringify(value.toJSON());
       const content = value.toJSON();
       this.throttleCommit(content);
     }
