@@ -5,6 +5,7 @@ import Spacer from './Spacer';
 
 type Props = {|
   children: React.Node,
+  rhythm?: number,
 |};
 
 const styles = StyleSheet.create({
@@ -15,10 +16,10 @@ const styles = StyleSheet.create({
 
 class Row extends React.PureComponent<Props> {
   render() {
-    const { children } = this.props;
+    const { children, rhythm } = this.props;
     return (
       <View style={styles.view}>
-        <Spacer>{children}</Spacer>
+        <Spacer rhythm={rhythm}>{children}</Spacer>
       </View>
     );
   }
