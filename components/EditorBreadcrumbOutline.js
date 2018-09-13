@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import ReactDOM from 'react-dom';
+import { findDOMNode } from 'slate-react';
 import withTheme, { type Theme } from './core/withTheme';
 
 type EditorBreadcrumbOutlineProps = {|
@@ -12,6 +13,7 @@ type EditorBreadcrumbOutlineProps = {|
 
 type EditorBreadcrumbOutlineState = {|
   el: ?HTMLDivElement,
+  rect: ?ClientRect,
 |};
 
 class EditorBreadcrumbOutline extends React.PureComponent<
@@ -20,37 +22,38 @@ class EditorBreadcrumbOutline extends React.PureComponent<
 > {
   state = {
     el: null,
+    rect: null,
   };
 
   componentDidMount() {
     // Can't be in constructor because of SSR where window does not exists.
     const el = window.document.getElementById('__next');
-    this.setState({ el });
+    const rect = this.getRect();
+    this.setState({ el, rect });
+  }
+
+  componentDidUpdate(prevProps) {
+    // Because of state.rect, always compare values.
+    if (this.props.node !== prevProps.node) {
+      const rect = this.getRect();
+      this.setState({ rect });
+    }
+  }
+
+  getRect() {
+    // eslint-disable-next-line react/no-find-dom-node
+    return findDOMNode(this.props.node.key).getBoundingClientRect();
   }
 
   render() {
-    const { el } = this.state;
-    if (el == null) return null;
-    // findDOMNode and getBoundingClientRect in render are ok because
-    // component is pure aka rerendered only when prop node is changed.
-    // Can't use findDOMNode because it throws when node does not exists.
-    // import { findDOMNode } from 'slate-react';
-    // It's possible to use componentDidMount with setState, but this is fine
-    // I guess.
-    const {
-      node,
-      theme: { styles },
-    } = this.props;
-    const nodeElement: Element = window.document.querySelector(
-      `[data-key="${node.key}"]`,
-    );
-    if (nodeElement == null) return null;
-    const rect = nodeElement.getBoundingClientRect();
+    const { el, rect } = this.state;
+    if (el == null || rect == null) return null;
+    const { theme } = this.props;
     return ReactDOM.createPortal(
       <>
         <View
           style={[
-            styles.editorBreadcrumbOutline,
+            theme.styles.editorBreadcrumbOutline,
             {
               width: 1,
               height: rect.height,
@@ -61,7 +64,7 @@ class EditorBreadcrumbOutline extends React.PureComponent<
         />
         <View
           style={[
-            styles.editorBreadcrumbOutline,
+            theme.styles.editorBreadcrumbOutline,
             {
               width: 1,
               height: rect.height,
@@ -72,7 +75,7 @@ class EditorBreadcrumbOutline extends React.PureComponent<
         />
         <View
           style={[
-            styles.editorBreadcrumbOutline,
+            theme.styles.editorBreadcrumbOutline,
             {
               width: rect.width,
               height: 1,
@@ -83,7 +86,7 @@ class EditorBreadcrumbOutline extends React.PureComponent<
         />
         <View
           style={[
-            styles.editorBreadcrumbOutline,
+            theme.styles.editorBreadcrumbOutline,
             {
               width: rect.width,
               height: 1,
