@@ -36,6 +36,8 @@
 .*/node_modules/react-native/Libraries/Animated/src/nodes/AnimatedValue.js
 .*/node_modules/react-native/Libraries/Animated/src/nodes/AnimatedInterpolation.js
 .*/node_modules/react-native/Libraries/Experimental/SwipeableRow/SwipeableListView.js
+.*/node_modules/react-native/Libraries/StyleSheet/EdgeInsetsPropType.js:21
+.*/node_modules/react-native/Libraries/Text/Text.js
 
 [include]
 
