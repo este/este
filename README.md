@@ -1,4 +1,4 @@
-[![Circle CI](https://img.shields.io/circleci/project/este/este/master.svg)](https://circleci.com/gh/este/este)
+[![CircleCI](https://circleci.com/gh/este/este/tree/master.svg?style=svg)](https://circleci.com/gh/este/este/tree/master)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
 
 Universal React. React + React Native.
