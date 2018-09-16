@@ -56,7 +56,7 @@ class EditorBreadcrumbOutline extends React.PureComponent<
       clearTimeout(this.timeoutID);
       this.timeoutID = setTimeout(() => {
         this.setState({ shown: false });
-      }, 1000);
+      }, 2000);
     });
   };
 

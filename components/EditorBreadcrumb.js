@@ -7,9 +7,9 @@ import Row from './core/Row';
 // import clamp from 'lodash/clamp';
 // import getFocusableNodes from '../client/getFocusableNodes';
 import EditorBreadcrumbButton from './EditorBreadcrumbButton';
+import EditorBreadcrumbItem from './EditorBreadcrumbItem';
 import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
 import EditorBreadcrumbDetail from './EditorBreadcrumbDetail';
-import Button from './core/Button';
 
 type EditorBreadcrumbProps = {|
   // value: Object,
@@ -79,7 +79,7 @@ class EditorBreadcrumb extends React.PureComponent<
   //   el.focus();
   // };
 
-  handleOnToggleVerticalPosition = (event: Event) => {
+  handleToggleVerticalPosition = (event: Event) => {
     event.preventDefault();
     this.setState(state => {
       return {
@@ -89,8 +89,7 @@ class EditorBreadcrumb extends React.PureComponent<
     });
   };
 
-  handleKebabPressIn = (event: Event) => {
-    event.preventDefault();
+  handleKebabPress = () => {
     this.setState(state => {
       return { kebabMenuShown: !state.kebabMenuShown };
     });
@@ -112,11 +111,6 @@ class EditorBreadcrumb extends React.PureComponent<
     const { activeIndex, verticalPosition, kebabMenuShown } = this.state;
     const ancestors = document.getAncestors(focusPathString.split(','));
     const activeNode = ancestors.get(activeIndex);
-    // if (activeNode) {
-    //   // const style = node.data.get('style');
-    //   console.log(activeNode.data.get('name'));
-    //   console.log(activeNode.data.get('style'));
-    // }
     return (
       <View
         style={[
@@ -127,24 +121,20 @@ class EditorBreadcrumb extends React.PureComponent<
         // TODO: Rethink for detail view.
         // onKeyDown={this.handleViewKeyDown}
       >
-        {activeNode != null && <EditorBreadcrumbDetail node={activeNode} />}
         <Row rhythm={0.5}>
-          <Button
+          <EditorBreadcrumbButton
             color={kebabMenuShown ? 'primary' : 'gray'}
-            onPressIn={this.handleKebabPressIn}
+            onPress={this.handleKebabPress}
           >
             ⋮
-          </Button>
+          </EditorBreadcrumbButton>
           {this.state.kebabMenuShown ? (
-            <Button
-              color="gray"
-              onPressIn={this.handleOnToggleVerticalPosition}
-            >
+            <EditorBreadcrumbButton onPress={this.handleToggleVerticalPosition}>
               {verticalPosition === 'bottom' ? '↑' : '↓'}
-            </Button>
+            </EditorBreadcrumbButton>
           ) : (
             ancestors.map((node, index) => (
-              <EditorBreadcrumbButton
+              <EditorBreadcrumbItem
                 node={node}
                 index={index}
                 key={node.key}
@@ -155,7 +145,12 @@ class EditorBreadcrumb extends React.PureComponent<
             ))
           )}
         </Row>
-        {activeNode != null && <EditorBreadcrumbOutline node={activeNode} />}
+        {activeNode != null && (
+          <>
+            <EditorBreadcrumbDetail node={activeNode} />
+            <EditorBreadcrumbOutline node={activeNode} />
+          </>
+        )}
       </View>
     );
   }

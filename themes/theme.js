@@ -230,6 +230,11 @@ const stylesJson = {
     backgroundColor: colors.primary,
     opacity: 0.5,
   },
+
+  editorBreadcrumbDetail: {
+    flexDirection: 'row',
+    marginVertical: typography.rhythm(0.25),
+  },
 };
 
 const styles = StyleSheet.create(stylesJson);
