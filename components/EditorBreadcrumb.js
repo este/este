@@ -121,7 +121,7 @@ class EditorBreadcrumb extends React.PureComponent<
         // TODO: Rethink for detail view.
         // onKeyDown={this.handleViewKeyDown}
       >
-        <Row rhythm={0.5}>
+        <Row rhythm={0.5} wrap>
           <EditorBreadcrumbButton
             color={kebabMenuShown ? 'primary' : 'gray'}
             onPress={this.handleKebabPress}

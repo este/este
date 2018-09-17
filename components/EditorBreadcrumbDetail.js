@@ -1,11 +1,11 @@
 // @flow
-/* eslint-env browser */
 import * as React from 'react';
 import { View } from 'react-native';
 import withTheme, { type Theme } from './core/withTheme';
 import { FormattedMessage } from 'react-intl';
 import Row from './core/Row';
 import EditorBreadcrumbButton from './EditorBreadcrumbButton';
+import EditorData from './EditorData';
 
 type EditorBreadcrumbDetailProps = {|
   node: Object,
@@ -42,16 +42,31 @@ class EditorBreadcrumbDetail extends React.PureComponent<
     this.setState({ detail: null });
   };
 
+  renderDetail(detail) {
+    switch (detail) {
+      case 'styles': {
+        const { data } = this.props.node;
+        const style = data.get('style');
+        return <EditorData data={style} />;
+      }
+      case 'props':
+        return null;
+      case 'move':
+        return null;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (detail: empty);
+    }
+  }
+
   render() {
-    // const { node, theme } = this.props;
     const { theme } = this.props;
-    // const style = node.data.get('style');
-    // if (style == null) return null;
+    const { detail } = this.state;
 
     return (
       <View style={theme.styles.editorBreadcrumbDetail}>
-        {this.state.detail == null ? (
-          <Row rhythm={0.5}>
+        {detail == null ? (
+          <Row rhythm={0.5} wrap>
             <EditorBreadcrumbButton onPress={this.handleStylesPress}>
               <FormattedMessage defaultMessage="styles" id="button.styles" />
             </EditorBreadcrumbButton>
@@ -63,9 +78,12 @@ class EditorBreadcrumbDetail extends React.PureComponent<
             </EditorBreadcrumbButton>
           </Row>
         ) : (
-          <EditorBreadcrumbButton onPress={this.handleCloseDetailPress}>
-            ‥
-          </EditorBreadcrumbButton>
+          <Row rhythm={0.5} wrap>
+            <EditorBreadcrumbButton onPress={this.handleCloseDetailPress}>
+              ‥
+            </EditorBreadcrumbButton>
+            {this.renderDetail(detail)}
+          </Row>
         )}
       </View>
     );

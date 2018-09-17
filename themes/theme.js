@@ -232,7 +232,6 @@ const stylesJson = {
   },
 
   editorBreadcrumbDetail: {
-    flexDirection: 'row',
     marginVertical: typography.rhythm(0.25),
   },
 };
