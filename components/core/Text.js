@@ -24,6 +24,7 @@ export type TextProps = {|
   href?: any,
   contentEditable?: boolean,
   target?: string,
+  onPress?: (event: Event) => void,
 |};
 
 // Strutural aka non-themeable styles.
