@@ -6,10 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import Row from './core/Row';
 import EditorBreadcrumbButton from './EditorBreadcrumbButton';
 import EditorData from './EditorData';
+import type { OnEditorAction } from './Editor';
 
 type EditorBreadcrumbDetailProps = {|
   node: Object,
   theme: Theme,
+  onEditorAction: OnEditorAction,
 |};
 
 type Detail = 'styles' | 'props' | 'move';
@@ -42,12 +44,29 @@ class EditorBreadcrumbDetail extends React.PureComponent<
     this.setState({ detail: null });
   };
 
+  handleEditorDataStyleChange = style => {
+    this.props.onEditorAction({
+      type: 'STYLE',
+      nodeKey: this.props.node.key,
+      style,
+    });
+  };
+
   renderDetail(detail) {
     switch (detail) {
       case 'styles': {
-        const { data } = this.props.node;
-        const style = data.get('style');
-        return <EditorData data={style} />;
+        const { node } = this.props;
+        const style = node.data.get('style');
+        return (
+          <EditorData
+            data={style}
+            // Not controlled. Editor children have own state for fast typing.
+            // Therefore, we have to reset component manually via key.
+            // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+            key={node.key}
+            onChange={this.handleEditorDataStyleChange}
+          />
+        );
       }
       case 'props':
         return null;

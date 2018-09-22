@@ -15,16 +15,26 @@ import { Editor as SlateEditor } from 'slate-react';
 import { Value, KeyUtils } from 'slate';
 import Block from './core/Block';
 import Text from './core/Text';
-import EditorMenu, {
-  type EditorMenuAction,
-  type EditorMenuType,
-} from './EditorMenu';
+import EditorMenu, { type EditorMenuType } from './EditorMenu';
 import hotKey from '../browser/hotKey';
 import withTheme, { type Theme } from './core/withTheme';
 import A from './core/A';
 import { parse } from 'url';
 import EditorBreadcrumb from './EditorBreadcrumb';
 import { View } from 'react-native';
+
+export type EditorAction =
+  | {| type: 'BOLD' |}
+  | {| type: 'ITALIC' |}
+  | {| type: 'HEADING-ONE' |}
+  | {| type: 'HEADING-TWO' |}
+  | {| type: 'BLOCKQUOTE' |}
+  // It's must to use passed change, if any. Slate requires it in onKeyDown.
+  | {| type: 'LINK', href: ?string, change?: Object |}
+  | {| type: 'FOCUS' |}
+  | {| type: 'STYLE', nodeKey: string, style: Object |};
+
+export type OnEditorAction = (action: EditorAction) => void;
 
 // Note Flow types does not replace Slate schema.
 
@@ -298,7 +308,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     }
   };
 
-  handleEditorMenuAction = (action: EditorMenuAction) => {
+  handleEditorAction = (action: EditorAction) => {
     switch (action.type) {
       case 'BOLD':
         this.toggleMark('bold');
@@ -321,6 +331,13 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
       case 'FOCUS': {
         const { current: editor } = this.editorRef;
         if (editor) editor.focus();
+        break;
+      }
+      case 'STYLE': {
+        const { nodeKey, style } = action;
+        this.change(change => {
+          change.setNodeByKey(nodeKey, { data: { style } });
+        });
         break;
       }
       default:
@@ -497,11 +514,12 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           // $FlowFixMe https://github.com/este/este/issues/1571
           ref={this.editorMenuRef}
           value={value}
-          onAction={this.handleEditorMenuAction}
+          onEditorAction={this.handleEditorAction}
         />
         <EditorBreadcrumb
           document={value.document}
           focusPathString={value.selection.focus.path.join(',')}
+          onEditorAction={this.handleEditorAction}
         />
       </>
     );

@@ -10,6 +10,7 @@ import EditorBreadcrumbButton from './EditorBreadcrumbButton';
 import EditorBreadcrumbItem from './EditorBreadcrumbItem';
 import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
 import EditorBreadcrumbDetail from './EditorBreadcrumbDetail';
+import type { OnEditorAction } from './Editor';
 
 type EditorBreadcrumbProps = {|
   // value: Object,
@@ -17,6 +18,7 @@ type EditorBreadcrumbProps = {|
   // String, to leverage pure shouldComponentUpdate.
   focusPathString: string,
   theme: Theme,
+  onEditorAction: OnEditorAction,
 |};
 
 export type VerticalPosition = 'bottom' | 'top';
@@ -147,7 +149,10 @@ class EditorBreadcrumb extends React.PureComponent<
         </Row>
         {activeNode != null && (
           <>
-            <EditorBreadcrumbDetail node={activeNode} />
+            <EditorBreadcrumbDetail
+              node={activeNode}
+              onEditorAction={this.props.onEditorAction}
+            />
             <EditorBreadcrumbOutline node={activeNode} />
           </>
         )}

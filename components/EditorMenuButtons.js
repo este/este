@@ -3,8 +3,8 @@
 import * as React from 'react';
 import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
-import type { MarkType, BlockNodeType } from './Editor';
-import type { EditorMenuAction, EditorMenuView } from './EditorMenu';
+import type { MarkType, BlockNodeType, OnEditorAction } from './Editor';
+import type { EditorMenuView } from './EditorMenu';
 
 type MenuButtonProps = {|
   isActive: boolean,
@@ -90,34 +90,34 @@ const LinkButton = ({ isActive, onPress }) => {
 type EditorMenuButtonsProps = {|
   value: Object,
   hasLinks: boolean,
-  onAction: EditorMenuAction => void,
+  onEditorAction: OnEditorAction,
   onSelectView: EditorMenuView => void,
 |};
 
 class EditorMenuButtons extends React.PureComponent<EditorMenuButtonsProps> {
   handleHeadingOnePress = () => {
-    this.props.onAction({ type: 'HEADING-ONE' });
+    this.props.onEditorAction({ type: 'HEADING-ONE' });
   };
 
   handleHeadingTwoPress = () => {
-    this.props.onAction({ type: 'HEADING-TWO' });
+    this.props.onEditorAction({ type: 'HEADING-TWO' });
   };
 
   handleBlockquotePress = () => {
-    this.props.onAction({ type: 'BLOCKQUOTE' });
+    this.props.onEditorAction({ type: 'BLOCKQUOTE' });
   };
 
   handleBoldPress = () => {
-    this.props.onAction({ type: 'BOLD' });
+    this.props.onEditorAction({ type: 'BOLD' });
   };
 
   handleItalicPress = () => {
-    this.props.onAction({ type: 'ITALIC' });
+    this.props.onEditorAction({ type: 'ITALIC' });
   };
 
   handleLinkPress = () => {
     if (this.props.hasLinks) {
-      this.props.onAction({ type: 'LINK', href: null });
+      this.props.onEditorAction({ type: 'LINK', href: null });
     } else {
       this.props.onSelectView('link');
     }

@@ -8,22 +8,13 @@ import { findDOMNode } from 'slate-react';
 import EditorMenuButtons from './EditorMenuButtons';
 import EditorMenuLink from './EditorMenuLink';
 import EditorMenuLinkPreview from './EditorMenuLinkPreview';
-
-export type EditorMenuAction =
-  | {| type: 'BOLD' |}
-  | {| type: 'ITALIC' |}
-  | {| type: 'HEADING-ONE' |}
-  | {| type: 'HEADING-TWO' |}
-  | {| type: 'BLOCKQUOTE' |}
-  // It's must to use passed change, if any. Slate requires it in onKeyDown.
-  | {| type: 'LINK', href: ?string, change?: Object |}
-  | {| type: 'FOCUS' |};
+import type { OnEditorAction } from './Editor';
 
 export type EditorMenuView = null | 'buttons' | 'link' | 'linkPreview';
 
 type EditorMenuProps = {|
   value: Object,
-  onAction: (action: EditorMenuAction) => void,
+  onEditorAction: OnEditorAction,
   theme: Theme,
 |};
 
@@ -101,12 +92,12 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
 
   handleEditorMenuLinkClose = focusEditor => {
     this.setState({ view: 'buttons' }, () => {
-      if (focusEditor === true) this.props.onAction({ type: 'FOCUS' });
+      if (focusEditor === true) this.props.onEditorAction({ type: 'FOCUS' });
     });
   };
 
   handleEditorMenuLinkSubmit = href => {
-    this.props.onAction({ type: 'LINK', href });
+    this.props.onEditorAction({ type: 'LINK', href });
   };
 
   handleKeyModK(change: Object) {
@@ -122,7 +113,7 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
     }
     if (fragment.text === '') return;
     if (this.state.hasLinks) {
-      this.props.onAction({ type: 'LINK', href: null, change });
+      this.props.onEditorAction({ type: 'LINK', href: null, change });
     } else {
       this.setState({ view: 'link' });
     }
@@ -167,13 +158,13 @@ class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
   }
 
   renderView() {
-    const { value, onAction } = this.props;
+    const { value, onEditorAction } = this.props;
     switch (this.state.view) {
       case 'buttons':
         return (
           <EditorMenuButtons
             value={value}
-            onAction={onAction}
+            onEditorAction={onEditorAction}
             onSelectView={this.handleActionsSelectView}
             hasLinks={this.state.hasLinks}
           />
