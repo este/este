@@ -100,9 +100,6 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
   render() {
     return (
       <Editor
-        // autoFocus is must, because placeholder is not clickable and we need
-        // to indicate editable content somehow.
-        autoFocus
         autoCorrect={false}
         spellCheck={false}
         value={this.state.editorValue}
