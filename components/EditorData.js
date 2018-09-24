@@ -5,6 +5,7 @@ import { Value } from 'slate';
 import Text from './core/Text';
 import SlatePlainSerializer from 'slate-plain-serializer';
 import isNumeric from 'validator/lib/isNumeric';
+import hotKey from '../browser/hotKey';
 
 type EditorDataProps = {|
   defaultData: ?Object,
@@ -47,10 +48,15 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
   };
 
   handleEditorKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    const { mod, key } = hotKey(event);
+    if (key === 'Enter') {
       // Do nothing on enter. It's line.
       event.preventDefault();
       return true;
+    }
+    if (mod && (key === 'y' || key === 'z')) {
+      // Prevent default browser behavior.
+      event.preventDefault();
     }
   };
 
