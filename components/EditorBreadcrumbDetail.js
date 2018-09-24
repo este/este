@@ -59,12 +59,11 @@ class EditorBreadcrumbDetail extends React.PureComponent<
         const style = node.data.get('style');
         return (
           <EditorData
-            data={style}
-            // Not controlled. Editor children have own state for fast typing.
-            // Therefore, we have to reset component manually via key.
+            defaultData={style}
+            onChange={this.handleEditorDataStyleChange}
+            // Not controlled, because we need fast typing.
             // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
             key={node.key}
-            onChange={this.handleEditorDataStyleChange}
           />
         );
       }
