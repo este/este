@@ -15,7 +15,7 @@
             }
           }
         ],
-        ["react-native-web", { commonjs: true }]
+        ["react-native-web", { "commonjs": true }]
       ]
     },
     "production": {
@@ -33,13 +33,13 @@
             }
           }
         ],
-        ["react-native-web", { commonjs: true }],
+        ["react-native-web", { "commonjs": true }],
         ["react-intl", { "messagesDir": "lang/.messages/" }]
       ]
     },
     "test": {
       "presets": [
-        ["env", { "modules": "commonjs" }],
+        ["@babel/preset-env", { "modules": "commonjs" }],
         "next/babel",
         "@babel/preset-flow"
       ],
@@ -55,7 +55,7 @@
             }
           }
         ],
-        ["react-native-web", { commonjs: true }]
+        ["react-native-web", { "commonjs": true }]
       ]
     }
   }

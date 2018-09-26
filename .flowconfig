@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/bcryptjs/.*
 .*/node_modules/config-chain/.*
+.*/node_modules/jsonlint/.*
 
 ; RN
 ; We fork some components by platform

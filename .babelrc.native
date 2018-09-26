@@ -14,7 +14,10 @@
       ]
     },
     "test": {
-      "presets": [["env", { "modules": "commonjs" }], "react-native"],
+      "presets": [
+        ["@babel/preset-env", { "modules": "commonjs" }],
+        "react-native"
+      ],
       "plugins": ["relay"]
     }
   }
