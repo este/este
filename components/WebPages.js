@@ -10,13 +10,12 @@ type WebPagesProps = {|
 
 class WebPages extends React.PureComponent<WebPagesProps> {
   render() {
-    const {
-      data: { pages },
-    } = this.props;
-    if (pages == null) return null;
-    // TODO: Add list of reusable named components.
-    // $FlowFixMe https://github.com/facebook/relay/issues/2316
-    return pages.map(page => <WebPagesItem data={page} key={page.id} />);
+    const { data } = this.props;
+    if (data.pages == null) return null;
+    return data.pages.map(page => {
+      // $FlowFixMe https://github.com/facebook/relay/issues/2316
+      return <WebPagesItem data={page} key={page.id} />;
+    });
   }
 }
 

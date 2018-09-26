@@ -10,13 +10,13 @@ type WebsProps = {|
 
 class Webs extends React.PureComponent<WebsProps> {
   render() {
-    const { me } = this.props.data;
-    // https://graphql.org/learn/best-practices/#nullability
-    if (!me) return null;
-    const { webs } = me;
-    if (!webs) return null;
-    // $FlowFixMe https://github.com/facebook/relay/issues/2316
-    return webs.map(web => <WebsItem data={web} key={web.id} />);
+    const { data } = this.props;
+    const webs = data.me?.webs;
+    if (webs == null) return null;
+    return webs.map(web => {
+      // $FlowFixMe https://github.com/facebook/relay/issues/2316
+      return <WebsItem data={web} key={web.id} />;
+    });
   }
 }
 

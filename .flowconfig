@@ -54,9 +54,8 @@ unclear-type=off
 
 [options]
 include_warnings=true
-; Uncomment and use once 1) New Relay will be released. 2) Flow fix edge cases.
-;esproposal.optional_chaining=enable
-;esproposal.nullish_coalescing=enable
+esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
 
 ; RN
 emoji=true

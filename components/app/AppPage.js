@@ -91,14 +91,11 @@ class AppPage extends React.PureComponent<Props> {
 
   render() {
     const { data, isEditor = false, title, intl } = this.props;
-    const { me } = data;
-    const themeName =
-      // That's how we gradually check nullable types.
-      // TODO: Use Optional Chaining.
-      (me != null && me.themeName != null && me.themeName) || 'light';
+    // optional-chaining with nullish-coalescing-operator rocks
+    const themeName = data.me?.themeName ?? 'light';
     const theme = AppPage.getTheme(themeName);
     const pageBackgroundColor = theme.colors[theme.pageBackgroundColor];
-    const isAuthenticated = me != null;
+    const isAuthenticated = data.me != null;
 
     return (
       <ThemeContext.Provider value={theme}>

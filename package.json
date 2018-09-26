@@ -50,7 +50,6 @@
     "docker:down": "cd database && docker-compose down && cd ../"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0",
     "accepts": "^1.3.3",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "babel-plugin-react-intl": "^3.0.1",
@@ -98,6 +97,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-flow": "^7.0.0",

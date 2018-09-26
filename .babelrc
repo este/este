@@ -4,6 +4,7 @@
       "presets": ["next/babel", "@babel/preset-flow"],
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-proposal-nullish-coalescing-operator",
         "inline-dotenv",
         "relay",
         [
@@ -22,6 +23,7 @@
       "presets": ["next/babel", "@babel/preset-flow"],
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-proposal-nullish-coalescing-operator",
         "transform-inline-environment-variables",
         "relay",
         [
@@ -45,6 +47,7 @@
       ],
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-proposal-nullish-coalescing-operator",
         "relay",
         [
           "module-resolver",
