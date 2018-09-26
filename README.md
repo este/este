@@ -14,17 +14,9 @@ Universal React. React + React Native.
 - `cd este`
 - `yarn`
 
-## Create Prisma Service
+## Setup Prisma server with Docker Compose _[requires docker-compose]_
 
-### Option A - Prisma Server on Prisma.io
-
-- `yarn prisma init YourAppName` choose `Demo server`
-- set `.env.dev` PRISMA_ENDPOINT by `YourAppName/prisma.yml` endpoint
-- delete `YourAppName` directory
-
-### Option B - Prisma Server with Docker Compose *[requires docker-compose]*
-
-- `yarn docker:up` -- this will spin up a docker instance of Postgres and prisma server at http://localhost:4466
+- `yarn docker:up` -- this will spin up a docker instance of Postgres and Prisma server at http://localhost:4466
 - `yarn docker:down` -- stop docker-compose servers
 
 ## Deploy dev Prisma

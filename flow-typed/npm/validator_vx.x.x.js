@@ -1,4 +1,4 @@
-// flow-typed signature: 03cc5e117146d5477390495e914e69e9
+// flow-typed signature: eabf20dcb803d098abc55305a0b273d2
 // flow-typed version: <<STUB>>/validator_v^10.1.0/flow_v0.81.0
 
 /**
@@ -127,6 +127,10 @@ declare module 'validator/lib/isHexadecimal' {
 }
 
 declare module 'validator/lib/isHexColor' {
+  declare module.exports: any;
+}
+
+declare module 'validator/lib/isIdentityCard' {
   declare module.exports: any;
 }
 
@@ -421,6 +425,9 @@ declare module 'validator/lib/isHexadecimal.js' {
 }
 declare module 'validator/lib/isHexColor.js' {
   declare module.exports: $Exports<'validator/lib/isHexColor'>;
+}
+declare module 'validator/lib/isIdentityCard.js' {
+  declare module.exports: $Exports<'validator/lib/isIdentityCard'>;
 }
 declare module 'validator/lib/isIn.js' {
   declare module.exports: $Exports<'validator/lib/isIn'>;
