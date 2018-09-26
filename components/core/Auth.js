@@ -5,7 +5,7 @@ import TextInput from './TextInput';
 import { SignInButton, SignUpButton } from './buttons';
 import Router from 'next/router';
 import withMutation from './withMutation';
-import { setCookie } from '../app/cookie';
+import { setCookie } from '../../browser/cookie';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import type { Href } from '../app/sitemap';
 import Row from './Row';

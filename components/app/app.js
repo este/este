@@ -5,7 +5,7 @@ import createRelayEnvironment from './createRelayEnvironment';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { type GraphQLTaggedNode } from 'react-relay';
 import { fetchQuery } from 'relay-runtime';
-import { getCookie } from './cookie';
+import { getCookie } from '../../browser/cookie';
 import LocaleContext from '../core/LocaleContext';
 import EnvironmentContext from '../core/EnvironmentContext';
 import ErrorContext, { type ContextError } from '../core/ErrorContext';

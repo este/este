@@ -10,7 +10,7 @@ import app from '../components/app/app';
 import { titles } from '../components/app/sitemap';
 import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
-import { deleteCookie } from '../components/app/cookie';
+import { deleteCookie } from '../browser/cookie';
 import * as generated from './__generated__/meQuery.graphql';
 import Gravatar from '../components/core/Gravatar';
 
