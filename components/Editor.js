@@ -392,16 +392,6 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     }, change);
   }
 
-  renderEditor = props => {
-    const documentStyle = props.value.document.data.get('style');
-    return (
-      // No ...attributes in API, a data-key must be defined for the outliner.
-      <View data-key={props.value.document.key} style={documentStyle}>
-        {props.children}
-      </View>
-    );
-  };
-
   renderNode = props => {
     const { attributes, node, children } = props;
     const { styles } = this.props.theme;
@@ -494,6 +484,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     page.title;
 
     const { value } = this.state;
+    const documentStyle = value.document.data.get('style');
     return (
       <>
         <EditorHead title={page.draftTitle} />
@@ -504,7 +495,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           autoFocus
           value={value}
           onChange={this.handleEditorChange}
-          renderEditor={this.renderEditor}
+          style={documentStyle}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
           onFocus={this.handleEditorFocus}
