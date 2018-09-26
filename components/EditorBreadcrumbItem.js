@@ -13,7 +13,6 @@ type Node = {|
 type EditorBreadcrumbItemProps = {|
   node: Node,
   index: number,
-  onFocus: (index: number) => void,
   onPress: (index: number) => void,
   isActive: boolean,
 |};
@@ -53,17 +52,12 @@ class EditorBreadcrumbItem extends React.PureComponent<
     this.props.onPress(this.props.index);
   };
 
-  handleFocus = () => {
-    this.props.onFocus(this.props.index);
-  };
-
   render() {
     const { node, isActive } = this.props;
     return (
       <EditorBreadcrumbButton
         color={isActive ? 'primary' : 'gray'}
         onPress={this.handlePress}
-        onFocus={this.handleFocus}
       >
         {EditorBreadcrumbItem.renderLabel(node)}
       </EditorBreadcrumbButton>

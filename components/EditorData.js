@@ -42,6 +42,14 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
     editorValue: EditorData.mapDataToEditorValue(this.props.defaultData || {}),
   };
 
+  getCaretPosition(): string {
+    const { editorValue: value } = this.state;
+    if (!value.selection.isCollapsed) return '';
+    if (value.selection.focus.isAtStartOfNode(value.document)) return 'start';
+    if (value.selection.focus.isAtEndOfNode(value.document)) return 'end';
+    return '';
+  }
+
   handleEditorFocus = (event: any, change: Object) => {
     // https://github.com/ianstormtaylor/slate/issues/1989
     change.focus();
@@ -54,9 +62,14 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
       event.preventDefault();
       return true;
     }
-    if (mod && (key === 'y' || key === 'z')) {
-      // Prevent default browser behavior.
+    if (!mod) return;
+    if (key === 'y' || key === 'z') {
+      // Prevent default browser history action.
       event.preventDefault();
+    }
+    if (key === 'ArrowLeft' || key === 'ArrowRight') {
+      // Prevent default browser history action.
+      event.stopPropagation();
     }
   };
 
@@ -104,6 +117,7 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
   };
 
   render() {
+    const caretPosition = this.getCaretPosition();
     return (
       <Editor
         autoCorrect={false}
@@ -113,6 +127,7 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
         onKeyDown={this.handleEditorKeyDown}
         onChange={this.handleEditorChange}
         renderNode={this.handleRenderNode}
+        className={`caret-position caret-position-${caretPosition}`}
       />
     );
   }
