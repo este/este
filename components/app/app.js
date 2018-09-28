@@ -50,6 +50,7 @@ type AppContext = {|
 const app = (
   // The page is stateless because the state belongs to GraphQL or into another component.
   Page: React.StatelessFunctionalComponent<{| data: Object |}>,
+  // Page: any,
   options?: {|
     query?: GraphQLTaggedNode,
     mapQueryVariables?: Object => Object,

@@ -1,8 +1,9 @@
 // @flow
 /* eslint-env browser */
-import React from 'react';
+import * as React from 'react';
 import App, { Container } from 'next/app';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import { type GraphQLTaggedNode } from 'react-relay';
 
 // Register React Intl's locale data for the user's locale in the browser. This
 // locale data was added to the page by `pages/_document.js`. This only happens
@@ -13,10 +14,40 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
   });
 }
 
-export default class MyApp extends App {
-  static async getInitialProps({ Component, /* router,*/ ctx }: Object) {
+type NextContext = {|
+  req: ?Object,
+|};
+
+type AppContext<GraphQLQuery, URLQuery> = {|
+  ...NextContext,
+  fetch: (
+    query: GraphQLTaggedNode,
+    ?(urlQuery: URLQuery) => $ElementType<GraphQLQuery, 'variables'>,
+  ) => Promise<$ElementType<GraphQLQuery, 'response'>>,
+|};
+
+// Because state belongs to own component or Relay.
+// https://flow.org/en/docs/react/types/#toc-react-statelessfunctionalcomponent
+export type PageWithQuery<GraphQLQuery, URLQuery: ?Object = {}> = {
+  <Props: {| data: $ElementType<GraphQLQuery, 'response'> |}>(
+    props: Props,
+  ): React.Node,
+  getInitialProps?: (
+    AppContext<GraphQLQuery, URLQuery>,
+  ) => Promise<{| data: $ElementType<GraphQLQuery, 'response'> |}>,
+};
+
+type InitialProps = {|
+  Component: React.ComponentType<Object>,
+  router: Object,
+  ctx: AppContext<Object, Object>,
+|};
+
+class MyApp extends App {
+  static async getInitialProps({ Component, router, ctx }: InitialProps) {
     let pageProps = {};
 
+    // $FlowFixMe Idk how to type component static method.
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
@@ -50,9 +81,13 @@ export default class MyApp extends App {
           // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
           textComponent={React.Fragment}
         >
+          {/* <Co> */}
           <Component {...pageProps} />
+          {/* </Co> */}
         </IntlProvider>
       </Container>
     );
   }
 }
+
+export default MyApp;
