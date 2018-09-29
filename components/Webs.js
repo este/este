@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/Webs.graphql';
+import type { Webs as Data } from './__generated__/Webs.graphql';
 import WebsItem from './WebsItem';
 
 type WebsProps = {|
-  data: generated.Webs,
+  data: Data,
 |};
 
 class Webs extends React.PureComponent<WebsProps> {

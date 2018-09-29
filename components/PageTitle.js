@@ -10,7 +10,7 @@ import SetPageTitleMutation, {
   type SetPageTitleErrors,
 } from '../mutations/SetPageTitleMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/PageTitle.graphql';
+import type { PageTitle as Data } from './__generated__/PageTitle.graphql';
 import withStore, { type Store } from './core/withStore';
 
 const messages = defineMessages({
@@ -21,7 +21,7 @@ const messages = defineMessages({
 });
 
 type PageTitleProps = {|
-  data: generated.PageTitle,
+  data: Data,
   commit: SetPageTitleCommit,
   intl: IntlShape,
   store: Store,

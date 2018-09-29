@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import A from './core/A';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/MainNav.graphql';
+import type { MainNav as Data } from './__generated__/MainNav.graphql';
 import { titles } from '../browser/sitemap';
 import Spacer from './core/Spacer';
 import { FormattedMessage } from 'react-intl';
@@ -11,7 +11,7 @@ import withTheme, { type Theme } from './core/withTheme';
 import Gravatar from './core/Gravatar';
 
 type MainNavProps = {|
-  data: generated.MainNav,
+  data: Data,
   theme: Theme,
 |};
 

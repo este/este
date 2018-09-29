@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/Web.graphql';
+import type { Web as Data } from './__generated__/Web.graphql';
 import Head from 'next/head';
 import WebName from './WebName';
 import Block from './core/Block';
@@ -10,7 +10,7 @@ import DeleteWeb from './DeleteWeb';
 import WebPages from './WebPages';
 
 type WebProps = {|
-  data: generated.Web,
+  data: Data,
 |};
 
 class Web extends React.PureComponent<WebProps> {

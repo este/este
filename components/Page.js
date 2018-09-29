@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { FormattedMessage } from 'react-intl';
-import * as generated from './__generated__/Page.graphql';
+import type { Page as Data } from './__generated__/Page.graphql';
 import { createFragmentContainer, graphql } from 'react-relay';
 import PageTitle from './PageTitle';
 import A from './core/A';
@@ -10,7 +10,7 @@ import Block from './core/Block';
 import Row from './core/Row';
 
 type PageProps = {|
-  data: generated.Page,
+  data: Data,
 |};
 
 class Page extends React.PureComponent<PageProps> {

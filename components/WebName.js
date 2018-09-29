@@ -10,7 +10,7 @@ import SetWebNameMutation, {
   type SetWebNameErrors,
 } from '../mutations/SetWebNameMutation';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/WebName.graphql';
+import type { WebName as Data } from './__generated__/WebName.graphql';
 import withStore, { type Store } from './core/withStore';
 
 const messages = defineMessages({
@@ -21,7 +21,7 @@ const messages = defineMessages({
 });
 
 type WebNameProps = {|
-  data: generated.WebName,
+  data: Data,
   commit: SetWebNameCommit,
   intl: IntlShape,
   store: Store,

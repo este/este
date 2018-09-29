@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/WebsItem.graphql';
+import type { WebsItem as Data } from './__generated__/WebsItem.graphql';
 import Text from './core/Text';
 import A from './core/A';
 import Block from './core/Block';
@@ -9,7 +9,7 @@ import Row from './core/Row';
 import { FormattedRelative } from 'react-intl';
 
 type WebsItemProps = {|
-  data: generated.WebsItem,
+  data: Data,
 |};
 
 class WebsItem extends React.PureComponent<WebsItemProps> {

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as generated from './__generated__/Editor.graphql';
+import type { Editor as Data } from './__generated__/Editor.graphql';
 import Head from 'next/head';
 import throttle from 'lodash/throttle';
 import { onChangeTextThrottle } from './core/TextInput';
@@ -52,7 +52,7 @@ export type NodeType = BlockNodeType | InlineNodeType;
 
 export type MarkType = 'bold' | 'italic';
 
-type Data = {| style: { [string]: string | number }, name?: string |};
+type BlockNodeData = {| style: { [string]: string | number }, name?: string |};
 
 type TextNode = {|
   leaves: Array<{| text: string |}>,
@@ -60,7 +60,7 @@ type TextNode = {|
 |};
 
 export type BlockNode = {|
-  data?: Data,
+  data?: BlockNodeData,
   nodes: Array<BlockNode | TextNode>,
   object: 'block',
   type: BlockNodeType,
@@ -68,7 +68,7 @@ export type BlockNode = {|
 
 export type DocumentNode = {|
   nodes: Array<BlockNode>,
-  data?: Data,
+  data?: BlockNodeData,
 |};
 
 type DefaultValue = {| object: 'value', document: DocumentNode |};
@@ -135,7 +135,7 @@ class EditorHead extends React.PureComponent<EditorHeadProps> {
 
 type EditorProps = {|
   theme: Theme,
-  data: generated.Editor,
+  data: Data,
   commit: SetPageContentCommit,
   store: Store,
   disabled?: boolean,

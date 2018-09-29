@@ -10,7 +10,7 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import ThemeContext from './core/ThemeContext';
 import { lightTheme, darkTheme } from '../themes/theme';
 import { createFragmentContainer, graphql } from 'react-relay';
-import * as generated from './__generated__/AppPage.graphql';
+import type { AppPage as Data } from './__generated__/AppPage.graphql';
 import Auth from './core/Auth';
 import Text from './core/Text';
 import MainNav from './MainNav';
@@ -61,7 +61,7 @@ const PageFooter = ({ theme }) => (
 type Props = {|
   title?: string | ((intl: IntlShape) => string),
   children?: React.Node | ((isAuthenticated: boolean) => React.Node),
-  data: generated.AppPage,
+  data: Data,
   requireAuth?: boolean,
   intl: IntlShape,
   isEditor?: boolean,

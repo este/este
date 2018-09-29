@@ -8460,8 +8460,8 @@ onetime@^2.0.0:
     mimic-fn "^1.0.0"
 
 ono@^4.0.2:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/ono/-/ono-4.0.8.tgz#d1b12e048cd8a9fe5d2fbf69d3ad42bf7b0feb5e"
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/ono/-/ono-4.0.9.tgz#46a51bf9ff2ed0ab98cd15755ccb425ac598ee4f"
   dependencies:
     format-util "^1.0.3"
 
