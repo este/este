@@ -1,4 +1,4 @@
-// flow-typed signature: bf264c1a4413656b9770980453b941d6
+// flow-typed signature: be2073a16e1ad4352f53ce365bbe2dc4
 // flow-typed version: <<STUB>>/next_v^7.0.0/flow_v0.81.0
 
 /**
@@ -218,10 +218,6 @@ declare module 'next/dist/lib/page-loader' {
   declare module.exports: any;
 }
 
-declare module 'next/dist/lib/prefetch' {
-  declare module.exports: any;
-}
-
 declare module 'next/dist/lib/promisify' {
   declare module.exports: any;
 }
@@ -278,15 +274,27 @@ declare module 'next/dist/server/hot-reloader' {
   declare module.exports: any;
 }
 
-declare module 'next/dist/server/index' {
-  declare module.exports: any;
-}
-
 declare module 'next/dist/server/lib/error-overlay-middleware' {
   declare module.exports: any;
 }
 
 declare module 'next/dist/server/lib/path-match' {
+  declare module.exports: any;
+}
+
+declare module 'next/dist/server/lib/start-server' {
+  declare module.exports: any;
+}
+
+declare module 'next/dist/server/lib/utils' {
+  declare module.exports: any;
+}
+
+declare module 'next/dist/server/next-dev-server' {
+  declare module.exports: any;
+}
+
+declare module 'next/dist/server/next-server' {
   declare module.exports: any;
 }
 
@@ -490,9 +498,6 @@ declare module 'next/dist/lib/p-queue.js' {
 declare module 'next/dist/lib/page-loader.js' {
   declare module.exports: $Exports<'next/dist/lib/page-loader'>;
 }
-declare module 'next/dist/lib/prefetch.js' {
-  declare module.exports: $Exports<'next/dist/lib/prefetch'>;
-}
 declare module 'next/dist/lib/promisify.js' {
   declare module.exports: $Exports<'next/dist/lib/promisify'>;
 }
@@ -535,14 +540,23 @@ declare module 'next/dist/server/document.js' {
 declare module 'next/dist/server/hot-reloader.js' {
   declare module.exports: $Exports<'next/dist/server/hot-reloader'>;
 }
-declare module 'next/dist/server/index.js' {
-  declare module.exports: $Exports<'next/dist/server/index'>;
-}
 declare module 'next/dist/server/lib/error-overlay-middleware.js' {
   declare module.exports: $Exports<'next/dist/server/lib/error-overlay-middleware'>;
 }
 declare module 'next/dist/server/lib/path-match.js' {
   declare module.exports: $Exports<'next/dist/server/lib/path-match'>;
+}
+declare module 'next/dist/server/lib/start-server.js' {
+  declare module.exports: $Exports<'next/dist/server/lib/start-server'>;
+}
+declare module 'next/dist/server/lib/utils.js' {
+  declare module.exports: $Exports<'next/dist/server/lib/utils'>;
+}
+declare module 'next/dist/server/next-dev-server.js' {
+  declare module.exports: $Exports<'next/dist/server/next-dev-server'>;
+}
+declare module 'next/dist/server/next-server.js' {
+  declare module.exports: $Exports<'next/dist/server/next-server'>;
 }
 declare module 'next/dist/server/next.js' {
   declare module.exports: $Exports<'next/dist/server/next'>;

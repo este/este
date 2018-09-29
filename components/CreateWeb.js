@@ -7,7 +7,7 @@ import Row from './core/Row';
 import withMutation from './core/withMutation';
 import * as validations from '../validations';
 import Router from 'next/router';
-import type { Href } from './app/sitemap';
+import type { Href } from '../browser/sitemap';
 import { pipe } from 'ramda';
 import CreateWebMutation, {
   type CreateWebCommit,

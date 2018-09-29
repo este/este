@@ -9,6 +9,19 @@ import url from 'url';
 import fs from 'fs';
 import { defaultLocale } from '../constants';
 
+export type ServerProps = {|
+  locale: string,
+  supportedLocales: Array<string>,
+  messages: Object,
+  localeDataScript: string,
+|};
+
+// Can't be exact type because of http$IncomingMessage.
+export type AppReq = {
+  ...http$IncomingMessage,
+  ...ServerProps,
+};
+
 // Polyfill Node with `Intl` that has data for all locales.
 // https://formatjs.io/guides/runtime-environments/#server
 Intl.NumberFormat = IntlPolyfill.NumberFormat;
@@ -58,26 +71,31 @@ const getAcceptedOrDefaultLocale = (req, locale) => {
   return accepts(req).language(supportedLocales) || defaultLocale;
 };
 
-const intlReq = req => {
+const addIntlProps = (req: http$IncomingMessage) => {
   const { query = {} } = url.parse(req.url, true);
   // TODO: https://github.com/este/este/issues/1399
   const locale = getAcceptedOrDefaultLocale(req, query.locale);
   // Use messages defined in code for dev with default locale.
-  const messages = dev && locale === defaultLocale ? {} : getMessages(locale);
-  // $FlowFixMe This is fine.
-  req.locale = locale;
-  // $FlowFixMe This is fine.
-  req.supportedLocales = supportedLocales;
-  // $FlowFixMe This is fine.
-  req.localeDataScript = getLocaleDataScript(locale);
-  // $FlowFixMe This is fine.
-  req.messages = messages;
+  const messages =
+    dev && locale === defaultLocale ? {} : getMessages(locale) || {};
+  const localeDataScript = getLocaleDataScript(locale) || '';
+  const props: ServerProps = {
+    locale,
+    supportedLocales,
+    messages,
+    localeDataScript,
+  };
+  // Must be explicitly added to req object for some reason. No shallow copy.
+  Object.keys(props).forEach(prop => {
+    // $FlowFixMe This is fine.
+    req[prop] = props[prop];
+  });
 };
 
 app.prepare().then(() => {
   http
     .createServer((req, res) => {
-      intlReq(req);
+      addIntlProps(req);
       handle(req, res);
     })
     .listen('3000', err => {

@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
-import { titles } from '../components/app/sitemap';
-import AppPage from '../components/app/AppPage';
+import { titles } from '../browser/sitemap';
+import AppPage from '../components/AppPage';
 import Heading from '../components/core/Heading';
-import app from '../components/app/app';
 import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';
 import Blockquote from '../components/core/Blockquote';
@@ -12,12 +11,15 @@ import Row from '../components/core/Row';
 import CreateWeb from '../components/CreateWeb';
 import Webs from '../components/Webs';
 import { graphql } from 'react-relay';
+import type { PageWithQuery } from './_app';
+import type { pagesQuery } from './__generated__/pagesQuery.graphql';
 
 const Authenticated = ({ data }) => (
   <>
     <Heading size={1}>
       <FormattedMessage defaultMessage="Your webs" id="yourWebs.heading" />
     </Heading>
+    {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
     <Webs data={data} />
     <CreateWeb />
   </>
@@ -46,9 +48,13 @@ const NotAuthenticated = () => (
   </>
 );
 
-const Index = props => {
+const Index: PageWithQuery<pagesQuery> = props => {
   return (
-    <AppPage title={intl => intl.formatMessage(titles.index)} data={props.data}>
+    <AppPage
+      title={intl => intl.formatMessage(titles.index)}
+      // $FlowFixMe https://github.com/facebook/relay/issues/2316
+      data={props.data}
+    >
       {isAuthenticated =>
         isAuthenticated ? (
           <Authenticated data={props.data} />
@@ -60,11 +66,16 @@ const Index = props => {
   );
 };
 
-export default app(Index, {
-  query: graphql`
-    query pagesQuery {
-      ...AppPage
-      ...Webs
-    }
-  `,
-});
+Index.getInitialProps = async context => {
+  const data = await context.fetch(
+    graphql`
+      query pagesQuery {
+        ...AppPage
+        ...Webs
+      }
+    `,
+  );
+  return { data };
+};
+
+export default Index;

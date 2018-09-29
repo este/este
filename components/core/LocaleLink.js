@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import NextLink from 'next/link';
-import type { Href } from '../app/sitemap';
+import type { Href } from '../../browser/sitemap';
 import { format } from 'url';
 import LocaleContext from './LocaleContext';
 import { defaultLocale } from '../../server/constants';

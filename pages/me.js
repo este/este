@@ -4,15 +4,15 @@ import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
 import Row from '../components/core/Row';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import SetTheme from '../components/core/SetTheme';
-import app from '../components/app/app';
-import { titles } from '../components/app/sitemap';
+import { titles } from '../browser/sitemap';
 import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
-import { deleteCookie } from '../components/app/cookie';
-import * as generated from './__generated__/meQuery.graphql';
+import { deleteCookie } from '../browser/cookie';
 import Gravatar from '../components/core/Gravatar';
+import type { PageWithQuery } from './_app';
+import type { meQuery } from './__generated__/meQuery.graphql';
 
 const signOut = () => {
   deleteCookie();
@@ -21,21 +21,21 @@ const signOut = () => {
   window.location.href = '/';
 };
 
-const Me = props => {
-  const { me }: generated.meQueryResponse = props.data;
+const Me: PageWithQuery<meQuery> = props => {
   return (
     <AppPage
       requireAuth
       title={intl => intl.formatMessage(titles.me)}
+      // $FlowFixMe https://github.com/facebook/relay/issues/2316
       data={props.data}
     >
-      {me != null && (
+      {props.data.me != null && (
         <>
           <Block>
-            <Text bold>{me.email}</Text>
+            <Text bold>{props.data.me.email}</Text>
           </Block>
           <Block>
-            <Gravatar email={me.email} />
+            <Gravatar email={props.data.me.email} />
           </Block>
         </>
       )}
@@ -53,13 +53,18 @@ const Me = props => {
   );
 };
 
-export default app(Me, {
-  query: graphql`
-    query meQuery {
-      ...AppPage
-      me {
-        email
+Me.getInitialProps = async context => {
+  const data = await context.fetch(
+    graphql`
+      query meQuery {
+        ...AppPage
+        me {
+          email
+        }
       }
-    }
-  `,
-});
+    `,
+  );
+  return { data };
+};
+
+export default Me;
