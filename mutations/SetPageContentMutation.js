@@ -1,12 +1,9 @@
 // @flow
 import { graphql } from 'react-relay';
 import type { Commit } from '../components/core/withMutation';
-import * as generated from './__generated__/SetPageContentMutation.graphql';
+import type { SetPageContentMutation } from './__generated__/SetPageContentMutation.graphql';
 
-export type SetPageContentCommit = Commit<
-  generated.SetPageContentInput,
-  generated.SetPageContentMutationResponse,
->;
+export type SetPageContentCommit = Commit<SetPageContentMutation>;
 
 const config = {
   mutation: graphql`

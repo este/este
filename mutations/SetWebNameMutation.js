@@ -1,17 +1,10 @@
 // @flow
 import { graphql } from 'react-relay';
 import type { Commit, Errors } from '../components/core/withMutation';
-import * as generated from './__generated__/SetWebNameMutation.graphql';
+import type { SetWebNameMutation } from './__generated__/SetWebNameMutation.graphql';
 
-export type SetWebNameCommit = Commit<
-  generated.SetWebNameInput,
-  generated.SetWebNameMutationResponse,
->;
-
-export type SetWebNameErrors = Errors<
-  generated.SetWebNameMutationResponse,
-  'setWebName',
->;
+export type SetWebNameCommit = Commit<SetWebNameMutation>;
+export type SetWebNameErrors = Errors<SetWebNameMutation, 'setWebName'>;
 
 const config = {
   mutation: graphql`

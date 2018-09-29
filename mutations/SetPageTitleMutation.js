@@ -1,17 +1,10 @@
 // @flow
 import { graphql } from 'react-relay';
 import type { Commit, Errors } from '../components/core/withMutation';
-import * as generated from './__generated__/SetPageTitleMutation.graphql';
+import type { SetPageTitleMutation } from './__generated__/SetPageTitleMutation.graphql';
 
-export type SetPageTitleCommit = Commit<
-  generated.SetPageTitleInput,
-  generated.SetPageTitleMutationResponse,
->;
-
-export type SetPageTitleErrors = Errors<
-  generated.SetPageTitleMutationResponse,
-  'setPageTitle',
->;
+export type SetPageTitleCommit = Commit<SetPageTitleMutation>;
+export type SetPageTitleErrors = Errors<SetPageTitleMutation, 'setPageTitle'>;
 
 const config = {
   mutation: graphql`

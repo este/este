@@ -11,17 +11,21 @@ import {
 import ErrorContext, { type DispatchError } from './ErrorContext';
 import EnvironmentContext from './EnvironmentContext';
 
-// Note Input instead of Variables. It keeps withMutation component simple.
-export type Commit<Input, Response> = (
-  input: Input,
-  onCompleted?: (Response) => void,
+type Input<Mutation> = $ElementType<
+  $ElementType<Mutation, 'variables'>,
+  'input',
+>;
+
+type Response<Mutation> = $ElementType<Mutation, 'response'>;
+
+export type Commit<Mutation> = (
+  input: Input<Mutation>,
+  onCompleted?: (response: Response<Mutation>) => void,
 ) => void;
 
-export type Errors<Response, Name: string> = $ElementType<
-  // Mutation payload must be nullable, because resolver can fail.
-  // Therefore, Relay compiler generates maybe type. That's correct.
-  // But for Commit and Errors generic types we need non maybe type.
-  $NonMaybeType<$ElementType<Response, Name>>,
+export type Errors<Mutation, Name: string> = $ElementType<
+  // $NonMaybeType, to get 'errors' on by default nullable name type.
+  $NonMaybeType<$ElementType<Response<Mutation>, Name>>,
   'errors',
 >;
 
@@ -34,28 +38,37 @@ type Config = {|
   updater?: ?SelectorStoreUpdater,
 |};
 
-const withMutation = (config: Config) => <Props: {}, Input: Object, Response>(
+const withMutation = (config: Config) => <
+  Props: {},
+  Mutation: {|
+    variables: {| input: Object |},
+    response: Object,
+  |},
+>(
   Component: React.ComponentType<Props>,
 ): React.ComponentType<
   $Diff<
     Props,
     {
-      commit: Commit<Input, Response> | void,
+      commit: Commit<Mutation> | void,
       pending: boolean | void,
     },
   >,
 > => {
-  type MutationProps = {
+  type WithMutationProps = {
     ...Props,
     dispatchError: DispatchError,
     environment: Environment,
   };
 
-  type MutationState = {|
+  type WithMutationState = {|
     pending: boolean,
   |};
 
-  class WithMutation extends React.PureComponent<MutationProps, MutationState> {
+  class WithMutation extends React.PureComponent<
+    WithMutationProps,
+    WithMutationState,
+  > {
     disposables: Array<Disposable> = [];
 
     disposed = false;
@@ -69,7 +82,7 @@ const withMutation = (config: Config) => <Props: {}, Input: Object, Response>(
       this.disposed = true;
     }
 
-    commit: Commit<Input, Response> = (input, onCompleted) => {
+    commit: Commit<Mutation> = (input, onCompleted) => {
       if (this.disposed) return;
       // Note, we can't read from this.state.pending because setState is async.
       // Therefore, "if (this.state.pending) return" can't help.
@@ -79,7 +92,7 @@ const withMutation = (config: Config) => <Props: {}, Input: Object, Response>(
       const disposable = commitMutation(this.props.environment, {
         ...config,
         variables: { input },
-        onCompleted: (response: Response, errors) => {
+        onCompleted: (response: Response<Mutation>, errors) => {
           this.setState({ pending: false });
           if (errors) errors.forEach(error => this.props.dispatchError(error));
           if (onCompleted) onCompleted(response);
