@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { AppRegistry } from 'react-native-web';
+import type { AppReq } from '../server/web';
 
 // https://github.com/zeit/next.js/tree/canary/examples/with-react-native-web
 // https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md
@@ -21,8 +22,19 @@ const normalizeNextElements = `
   }
 `;
 
+type DocumentContext = {|
+  req: AppReq,
+|};
+
+type DocumentProps = {
+  locale: string,
+  localeDataScript: string,
+};
+
 export default class MyDocument extends Document {
-  static async getInitialProps(context: Object) {
+  static async getInitialProps(
+    context: DocumentContext,
+  ): Promise<DocumentProps> {
     AppRegistry.registerComponent('Main', () => Main);
     const { getStyleElement } = AppRegistry.getApplication('Main', {});
     const props = await super.getInitialProps(context);
@@ -41,6 +53,8 @@ export default class MyDocument extends Document {
       styles,
     };
   }
+
+  props: DocumentProps;
 
   render() {
     const { locale, localeDataScript /* , supportedLocales */ } = this.props;

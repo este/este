@@ -1,6 +1,7 @@
 // @flow
 /* eslint-env browser */
 import { serialize, parse } from 'cookie';
+import type { AppReq } from '../server/web';
 
 // Do not add another values to cookie until it's absolutely necessary.
 // Use user settings instead.
@@ -26,7 +27,7 @@ export const deleteCookie = () => {
   window.document.cookie = serialize(name, '', options);
 };
 
-export const getCookie = (serverReq: ?Object): ?Cookie => {
+export const getCookie = (serverReq: ?AppReq): ?Cookie => {
   const cookie = parse(
     serverReq
       ? (serverReq.headers && serverReq.headers.cookie) || ''
