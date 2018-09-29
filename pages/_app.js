@@ -213,6 +213,8 @@ class MyApp extends App {
 
     return (
       <Container>
+        {/* Still blocked by: FormattedRelative, RelayProvider, TouchableOpacity */}
+        {/* <React.StrictMode> */}
         <IntlProvider
           locale={locale}
           messages={messages}
@@ -230,6 +232,7 @@ class MyApp extends App {
             </LocaleContext.Provider>
           </ErrorContext.Provider>
         </IntlProvider>
+        {/* </React.StrictMode> */}
       </Container>
     );
   }
