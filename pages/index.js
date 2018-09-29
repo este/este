@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { titles } from '../components/app/sitemap';
+import { titles } from '../browser/sitemap';
 import AppPage from '../components/app/AppPage';
 import Heading from '../components/core/Heading';
 import A from '../components/core/A';

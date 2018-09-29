@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import A from './core/A';
 import { createFragmentContainer, graphql } from 'react-relay';
 import * as generated from './__generated__/MainNav.graphql';
-import { titles } from './app/sitemap';
+import { titles } from '../browser/sitemap';
 import Spacer from './core/Spacer';
 import { FormattedMessage } from 'react-intl';
 import withTheme, { type Theme } from './core/withTheme';

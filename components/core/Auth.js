@@ -7,7 +7,7 @@ import Router from 'next/router';
 import withMutation from './withMutation';
 import { setCookie } from '../../browser/cookie';
 import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import type { Href } from '../app/sitemap';
+import type { Href } from '../../browser/sitemap';
 import Row from './Row';
 import Block from './Block';
 import * as validations from '../../validations';

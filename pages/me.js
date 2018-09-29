@@ -6,7 +6,7 @@ import Text from '../components/core/Text';
 import Row from '../components/core/Row';
 import AppPage from '../components/app/AppPage';
 import SetTheme from '../components/core/SetTheme';
-import { titles } from '../components/app/sitemap';
+import { titles } from '../browser/sitemap';
 import { SignOutButton } from '../components/core/buttons';
 import { graphql } from 'react-relay';
 import { deleteCookie } from '../browser/cookie';

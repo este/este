@@ -4,7 +4,7 @@ import { DeleteButton } from './core/buttons';
 import withMutation from './core/withMutation';
 import withConfirm, { type Confirm } from './core/withConfirm';
 import Router from 'next/router';
-import type { Href } from './app/sitemap';
+import type { Href } from '../browser/sitemap';
 import { pipe } from 'ramda';
 import DeleteWebMutation, {
   type DeleteWebCommit,
