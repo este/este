@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Auth from '../components/core/Auth';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import { graphql } from 'react-relay';
 import { titles } from '../browser/sitemap';
 import type { PageWithQuery } from './_app';

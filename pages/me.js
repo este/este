@@ -4,7 +4,7 @@ import * as React from 'react';
 import Block from '../components/core/Block';
 import Text from '../components/core/Text';
 import Row from '../components/core/Row';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import SetTheme from '../components/core/SetTheme';
 import { titles } from '../browser/sitemap';
 import { SignOutButton } from '../components/core/buttons';

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { titles } from '../browser/sitemap';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import Heading from '../components/core/Heading';
 import A from '../components/core/A';
 import { FormattedMessage } from 'react-intl';

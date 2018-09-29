@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql } from 'react-relay';
 import PageComponent from '../components/Page';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import type { PageWithQuery } from './_app';
 import type { pageQuery } from './__generated__/pageQuery.graphql';
 

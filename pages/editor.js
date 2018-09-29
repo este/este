@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql } from 'react-relay';
 import Editor from '../components/Editor';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import type { PageWithQuery } from './_app';
 import type { editorQuery } from './__generated__/editorQuery.graphql';
 

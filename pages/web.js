@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql } from 'react-relay';
-import AppPage from '../components/app/AppPage';
+import AppPage from '../components/AppPage';
 import WebComponent from '../components/Web';
 import type { PageWithQuery } from './_app';
 import type { webQuery } from './__generated__/webQuery.graphql';
