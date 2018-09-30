@@ -51,7 +51,6 @@ class EditorBreadcrumb extends React.PureComponent<
     event.preventDefault();
     this.setState(state => {
       return {
-        kebabMenuShown: false,
         verticalPosition: state.verticalPosition === 'top' ? 'bottom' : 'top',
       };
     });
