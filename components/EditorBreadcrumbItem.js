@@ -26,8 +26,8 @@ class EditorBreadcrumbItem extends React.PureComponent<
       return 'document';
     }
     switch (node.type) {
-      case 'paragraph':
-        return 'paragraph';
+      case 'text':
+        return 'text';
       case 'headingOne':
         return 'heading 1';
       case 'headingTwo':

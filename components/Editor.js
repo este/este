@@ -40,7 +40,7 @@ export type OnEditorAction = (action: EditorAction) => void;
 
 export type BlockNodeType =
   | 'view'
-  | 'paragraph'
+  | 'text'
   | 'headingOne'
   | 'headingTwo'
   | 'blockquote'
@@ -83,7 +83,7 @@ const defaultValue: DefaultValue = {
         nodes: [
           {
             object: 'block',
-            type: 'paragraph',
+            type: 'text',
             nodes: [
               {
                 object: 'text',
@@ -220,8 +220,8 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     return true;
   };
 
-  // On backspace, if at the start of a non-paragraph, convert it back into a
-  // paragraph node.
+  // On backspace, if at the start of a non-text, convert it back into a
+  // text node.
   handleKeyBackspace = (event, change) => {
     const { value } = change;
     const { selection } = value;
@@ -229,10 +229,10 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (selection.start.offset !== 0) return;
 
     const { startBlock } = value;
-    if (startBlock.type === 'paragraph') return;
+    if (startBlock.type === 'text') return;
 
     event.preventDefault();
-    change.setBlocks('paragraph');
+    change.setBlocks('text');
 
     if (startBlock.type === 'listItem') {
       change.unwrapBlock('list');
@@ -241,7 +241,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   };
 
   // On return, if at the end of a node type that should not be extended,
-  // create a new paragraph below it.
+  // create a new text below it.
   handleKeyEnter = (event, change) => {
     const { value } = change;
     const { selection } = value;
@@ -260,7 +260,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
       startBlock.type === 'blockquote';
     if (putParagraphAfter) {
       event.preventDefault();
-      change.splitBlock().setBlocks('paragraph');
+      change.splitBlock().setBlocks('text');
       // return true to prevent default behavior
       return true;
     }
@@ -388,7 +388,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     const { value } = this.state;
     this.change(change => {
       const isActive = value.blocks.some(node => node.type === type);
-      change.setBlocks(isActive ? 'paragraph' : type);
+      change.setBlocks(isActive ? 'text' : type);
     }, change);
   }
 
@@ -405,10 +405,10 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           </View>
         );
       }
-      case 'paragraph':
+      case 'text':
       case 'headingOne':
       case 'headingTwo': {
-        const size = type === 'paragraph' ? 0 : type === 'headingTwo' ? 1 : 2;
+        const size = type === 'text' ? 0 : type === 'headingTwo' ? 1 : 2;
         return (
           <Block>
             <Text size={size} {...attributes}>
