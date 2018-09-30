@@ -1,6 +1,7 @@
 // @flow
+/* eslint-env browser */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, findNodeHandle } from 'react-native';
 import A from './core/A';
 import ErrorPopup from './core/ErrorPopup';
 import Head from 'next/head';
@@ -14,7 +15,6 @@ import type { AppPage as Data } from './__generated__/AppPage.graphql';
 import Auth from './core/Auth';
 import Text from './core/Text';
 import MainNav from './MainNav';
-import FocusOnMount from './core/FocusOnMount';
 
 // yarn favicon
 const Favicons = () => [
@@ -80,7 +80,40 @@ class AppPage extends React.PureComponent<Props> {
     }
   };
 
+  static initialRender = true;
+
   static fixedPositionStyle = { position: 'fixed' };
+
+  pageBodyRef = React.createRef();
+
+  componentDidMount() {
+    this.maybeFocusPageBody();
+  }
+
+  // https://medium.com/@robdel12/single-page-apps-routers-are-broken-255daa310cf
+  // This is useful for accessibility and key navigation.
+  maybeFocusPageBody() {
+    const { current } = this.pageBodyRef;
+    if (!current) return;
+
+    // Don't focus on initial render.
+    if (AppPage.initialRender === true) {
+      AppPage.initialRender = false;
+      return;
+    }
+
+    // Don't focus if something is already focused.
+    const node = ((findNodeHandle(current): any): Node);
+    if (node.contains(document.activeElement)) return;
+
+    // Set tabIndex -1 and focus.
+    // https://github.com/necolas/react-native-web/issues/1099
+    current.setNativeProps({
+      tabIndex: -1,
+      style: { outline: 'none' },
+    });
+    current.focus();
+  }
 
   renderChildrenOrAuth(isAuthenticated) {
     const authRequired = this.props.requireAuth === true && !isAuthenticated;
@@ -124,14 +157,13 @@ class AppPage extends React.PureComponent<Props> {
             <MainNav data={data} />
           </View>
           <View
+            ref={this.pageBodyRef}
             style={[
               !isEditor && theme.styles.appPageContainerChild,
               theme.styles.appPageBody,
             ]}
           >
-            <FocusOnMount>
-              {this.renderChildrenOrAuth(isAuthenticated)}
-            </FocusOnMount>
+            {this.renderChildrenOrAuth(isAuthenticated)}
           </View>
           {isEditor !== true && (
             <View style={theme.styles.appPageContainerChild}>
