@@ -16,6 +16,8 @@ type EditorDataState = {|
   editorValue: Object,
 |};
 
+const separator = ';';
+
 class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
   static mapDataToEditorValue(data: Object) {
     const text = Object.keys(data)
@@ -23,7 +25,7 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
         const value = data[key];
         return `${key}: ${value}`;
       })
-      .join(', ');
+      .join(`${separator} `);
     // TODO: Consider keys and values model. Plain text is ok for now.
     return Value.fromJSON({
       document: {
@@ -80,7 +82,7 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
       const data = SlatePlainSerializer.serialize(value)
         // Because SlatePlainSerializer adds \n
         .replace(/\n/g, '')
-        .split(',')
+        .split(separator)
         .map(keyValue => {
           const [key, value] = keyValue.split(':').map(s => s.trim());
           const isEmpty = v => v == null || v === '';
