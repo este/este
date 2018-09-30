@@ -14,6 +14,7 @@ import type { AppPage as Data } from './__generated__/AppPage.graphql';
 import Auth from './core/Auth';
 import Text from './core/Text';
 import MainNav from './MainNav';
+import FocusOnMount from './core/FocusOnMount';
 
 // yarn favicon
 const Favicons = () => [
@@ -128,7 +129,9 @@ class AppPage extends React.PureComponent<Props> {
               theme.styles.appPageBody,
             ]}
           >
-            {this.renderChildrenOrAuth(isAuthenticated)}
+            <FocusOnMount>
+              {this.renderChildrenOrAuth(isAuthenticated)}
+            </FocusOnMount>
           </View>
           {isEditor !== true && (
             <View style={theme.styles.appPageContainerChild}>
