@@ -1,7 +1,7 @@
 # source: http://localhost:4466
-# timestamp: Tue Sep 11 2018 14:02:48 GMT+0200 (Central European Summer Time)
+# timestamp: Thu Oct 04 2018 02:19:00 GMT+0200 (Central European Summer Time)
 
-type AggregateColor {
+type AggregateElement {
   count: Int!
 }
 
@@ -22,83 +22,87 @@ type BatchPayload {
   count: Long!
 }
 
-type Color implements Node {
+scalar DateTime
+
+type Element implements Node {
   id: ID!
-  web(where: WebWhereInput): Web!
-  name: String!
-  value: String!
+  type: ElementType!
+  page(where: PageWhereInput): Page!
+  path: [Int!]!
 }
 
 """A connection to a list of items."""
-type ColorConnection {
+type ElementConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ColorEdge]!
-  aggregate: AggregateColor!
+  edges: [ElementEdge]!
+  aggregate: AggregateElement!
 }
 
-input ColorCreateInput {
-  name: String!
-  value: String!
-  web: WebCreateOneWithoutColorsInput!
+input ElementCreateInput {
+  type: ElementType
+  path: ElementCreatepathInput
+  page: PageCreateOneWithoutElementsInput!
 }
 
-input ColorCreateManyWithoutWebInput {
-  create: [ColorCreateWithoutWebInput!]
-  connect: [ColorWhereUniqueInput!]
+input ElementCreateManyWithoutPageInput {
+  create: [ElementCreateWithoutPageInput!]
+  connect: [ElementWhereUniqueInput!]
 }
 
-input ColorCreateWithoutWebInput {
-  name: String!
-  value: String!
+input ElementCreatepathInput {
+  set: [Int!]
+}
+
+input ElementCreateWithoutPageInput {
+  type: ElementType
+  path: ElementCreatepathInput
 }
 
 """An edge in a connection."""
-type ColorEdge {
+type ElementEdge {
   """The item at the end of the edge."""
-  node: Color!
+  node: Element!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ColorOrderByInput {
+enum ElementOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  value_ASC
-  value_DESC
+  type_ASC
+  type_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type ColorPreviousValues {
+type ElementPreviousValues {
   id: ID!
-  name: String!
-  value: String!
+  type: ElementType!
+  path: [Int!]!
 }
 
-type ColorSubscriptionPayload {
+type ElementSubscriptionPayload {
   mutation: MutationType!
-  node: Color
+  node: Element
   updatedFields: [String!]
-  previousValues: ColorPreviousValues
+  previousValues: ElementPreviousValues
 }
 
-input ColorSubscriptionWhereInput {
+input ElementSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ColorSubscriptionWhereInput!]
+  AND: [ElementSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ColorSubscriptionWhereInput!]
+  OR: [ElementSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ColorSubscriptionWhereInput!]
+  NOT: [ElementSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -119,49 +123,59 @@ input ColorSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ColorWhereInput
+  node: ElementWhereInput
 }
 
-input ColorUpdateInput {
-  name: String
-  value: String
-  web: WebUpdateOneWithoutColorsInput
+enum ElementType {
+  DOCUMENT
+  BLOCK
+  TEXT
 }
 
-input ColorUpdateManyWithoutWebInput {
-  create: [ColorCreateWithoutWebInput!]
-  connect: [ColorWhereUniqueInput!]
-  disconnect: [ColorWhereUniqueInput!]
-  delete: [ColorWhereUniqueInput!]
-  update: [ColorUpdateWithWhereUniqueWithoutWebInput!]
-  upsert: [ColorUpsertWithWhereUniqueWithoutWebInput!]
+input ElementUpdateInput {
+  type: ElementType
+  path: ElementUpdatepathInput
+  page: PageUpdateOneWithoutElementsInput
 }
 
-input ColorUpdateWithoutWebDataInput {
-  name: String
-  value: String
+input ElementUpdateManyWithoutPageInput {
+  create: [ElementCreateWithoutPageInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutPageInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutPageInput!]
 }
 
-input ColorUpdateWithWhereUniqueWithoutWebInput {
-  where: ColorWhereUniqueInput!
-  data: ColorUpdateWithoutWebDataInput!
+input ElementUpdatepathInput {
+  set: [Int!]
 }
 
-input ColorUpsertWithWhereUniqueWithoutWebInput {
-  where: ColorWhereUniqueInput!
-  update: ColorUpdateWithoutWebDataInput!
-  create: ColorCreateWithoutWebInput!
+input ElementUpdateWithoutPageDataInput {
+  type: ElementType
+  path: ElementUpdatepathInput
 }
 
-input ColorWhereInput {
+input ElementUpdateWithWhereUniqueWithoutPageInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutPageDataInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutPageInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutPageDataInput!
+  create: ElementCreateWithoutPageInput!
+}
+
+input ElementWhereInput {
   """Logical AND on all given filters."""
-  AND: [ColorWhereInput!]
+  AND: [ElementWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ColorWhereInput!]
+  OR: [ElementWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ColorWhereInput!]
+  NOT: [ElementWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -202,94 +216,22 @@ input ColorWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  name: String
+  type: ElementType
 
   """All values that are not equal to given value."""
-  name_not: String
+  type_not: ElementType
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  type_in: [ElementType!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  value: String
-
-  """All values that are not equal to given value."""
-  value_not: String
-
-  """All values that are contained in given list."""
-  value_in: [String!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [String!]
-
-  """All values less than the given value."""
-  value_lt: String
-
-  """All values less than or equal the given value."""
-  value_lte: String
-
-  """All values greater than the given value."""
-  value_gt: String
-
-  """All values greater than or equal the given value."""
-  value_gte: String
-
-  """All values containing the given string."""
-  value_contains: String
-
-  """All values not containing the given string."""
-  value_not_contains: String
-
-  """All values starting with the given string."""
-  value_starts_with: String
-
-  """All values not starting with the given string."""
-  value_not_starts_with: String
-
-  """All values ending with the given string."""
-  value_ends_with: String
-
-  """All values not ending with the given string."""
-  value_not_ends_with: String
-  web: WebWhereInput
+  type_not_in: [ElementType!]
+  page: PageWhereInput
 }
 
-input ColorWhereUniqueInput {
+input ElementWhereUniqueInput {
   id: ID
 }
-
-scalar DateTime
 
 """Raw JSON value"""
 scalar Json
@@ -304,27 +246,27 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
-  createColor(data: ColorCreateInput!): Color!
+  createElement(data: ElementCreateInput!): Element!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateColor(data: ColorUpdateInput!, where: ColorWhereUniqueInput!): Color
+  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
-  deleteColor(where: ColorWhereUniqueInput!): Color
+  deleteElement(where: ElementWhereUniqueInput!): Element
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertColor(where: ColorWhereUniqueInput!, create: ColorCreateInput!, update: ColorUpdateInput!): Color!
+  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyColors(data: ColorUpdateInput!, where: ColorWhereInput): BatchPayload!
+  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyColors(where: ColorWhereInput): BatchPayload!
+  deleteManyElements(where: ElementWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -347,7 +289,7 @@ type Page implements Node {
   title: String!
   web(where: WebWhereInput): Web!
   content: Json
-  contentSchema: String
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
 }
 
 """A connection to a list of items."""
@@ -363,9 +305,9 @@ type PageConnection {
 input PageCreateInput {
   title: String!
   content: Json
-  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -378,18 +320,30 @@ input PageCreateManyWithoutWebInput {
   connect: [PageWhereUniqueInput!]
 }
 
+input PageCreateOneWithoutElementsInput {
+  create: PageCreateWithoutElementsInput
+  connect: PageWhereUniqueInput
+}
+
 input PageCreateWithoutCreatorInput {
   title: String!
   content: Json
-  contentSchema: String
+  web: WebCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
+}
+
+input PageCreateWithoutElementsInput {
+  title: String!
+  content: Json
+  creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
 }
 
 input PageCreateWithoutWebInput {
   title: String!
   content: Json
-  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
 }
 
 """An edge in a connection."""
@@ -427,8 +381,6 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentSchema_ASC
-  contentSchema_DESC
 }
 
 type PagePreviousValues {
@@ -437,7 +389,6 @@ type PagePreviousValues {
   updatedAt: DateTime!
   title: String!
   content: Json
-  contentSchema: String
 }
 
 type PageSubscriptionPayload {
@@ -482,9 +433,9 @@ input PageSubscriptionWhereInput {
 input PageUpdateInput {
   title: String
   content: Json
-  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -505,18 +456,33 @@ input PageUpdateManyWithoutWebInput {
   upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
 }
 
+input PageUpdateOneWithoutElementsInput {
+  create: PageCreateWithoutElementsInput
+  connect: PageWhereUniqueInput
+  delete: Boolean
+  update: PageUpdateWithoutElementsDataInput
+  upsert: PageUpsertWithoutElementsInput
+}
+
 input PageUpdateWithoutCreatorDataInput {
   title: String
   content: Json
-  contentSchema: String
+  web: WebUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
+}
+
+input PageUpdateWithoutElementsDataInput {
+  title: String
+  content: Json
+  creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
 }
 
 input PageUpdateWithoutWebDataInput {
   title: String
   content: Json
-  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -527,6 +493,11 @@ input PageUpdateWithWhereUniqueWithoutCreatorInput {
 input PageUpdateWithWhereUniqueWithoutWebInput {
   where: PageWhereUniqueInput!
   data: PageUpdateWithoutWebDataInput!
+}
+
+input PageUpsertWithoutElementsInput {
+  update: PageUpdateWithoutElementsDataInput!
+  create: PageCreateWithoutElementsInput!
 }
 
 input PageUpsertWithWhereUniqueWithoutCreatorInput {
@@ -674,48 +645,11 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  contentSchema: String
-
-  """All values that are not equal to given value."""
-  contentSchema_not: String
-
-  """All values that are contained in given list."""
-  contentSchema_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentSchema_not_in: [String!]
-
-  """All values less than the given value."""
-  contentSchema_lt: String
-
-  """All values less than or equal the given value."""
-  contentSchema_lte: String
-
-  """All values greater than the given value."""
-  contentSchema_gt: String
-
-  """All values greater than or equal the given value."""
-  contentSchema_gte: String
-
-  """All values containing the given string."""
-  contentSchema_contains: String
-
-  """All values not containing the given string."""
-  contentSchema_not_contains: String
-
-  """All values starting with the given string."""
-  contentSchema_starts_with: String
-
-  """All values not starting with the given string."""
-  contentSchema_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentSchema_ends_with: String
-
-  """All values not ending with the given string."""
-  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -726,15 +660,15 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color]!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
-  color(where: ColorWhereUniqueInput!): Color
+  element(where: ElementWhereUniqueInput!): Element
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  colorsConnection(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ColorConnection!
+  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -747,7 +681,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  color(where: ColorSubscriptionWhereInput): ColorSubscriptionPayload
+  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
 }
 
 type User implements Node {
@@ -1156,7 +1090,6 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 """A connection to a list of items."""
@@ -1173,7 +1106,6 @@ input WebCreateInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateManyWithoutCreatorInput {
@@ -1181,32 +1113,19 @@ input WebCreateManyWithoutCreatorInput {
   connect: [WebWhereUniqueInput!]
 }
 
-input WebCreateOneWithoutColorsInput {
-  create: WebCreateWithoutColorsInput
-  connect: WebWhereUniqueInput
-}
-
 input WebCreateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
 }
 
-input WebCreateWithoutColorsInput {
-  name: String!
-  creator: UserCreateOneWithoutWebsInput!
-  pages: PageCreateManyWithoutWebInput
-}
-
 input WebCreateWithoutCreatorInput {
   name: String!
   pages: PageCreateManyWithoutWebInput
-  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
-  colors: ColorCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -1279,7 +1198,6 @@ input WebUpdateInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -1291,14 +1209,6 @@ input WebUpdateManyWithoutCreatorInput {
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input WebUpdateOneWithoutColorsInput {
-  create: WebCreateWithoutColorsInput
-  connect: WebWhereUniqueInput
-  delete: Boolean
-  update: WebUpdateWithoutColorsDataInput
-  upsert: WebUpsertWithoutColorsInput
-}
-
 input WebUpdateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
@@ -1307,32 +1217,19 @@ input WebUpdateOneWithoutPagesInput {
   upsert: WebUpsertWithoutPagesInput
 }
 
-input WebUpdateWithoutColorsDataInput {
-  name: String
-  creator: UserUpdateOneWithoutWebsInput
-  pages: PageUpdateManyWithoutWebInput
-}
-
 input WebUpdateWithoutCreatorDataInput {
   name: String
   pages: PageUpdateManyWithoutWebInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithWhereUniqueWithoutCreatorInput {
   where: WebWhereUniqueInput!
   data: WebUpdateWithoutCreatorDataInput!
-}
-
-input WebUpsertWithoutColorsInput {
-  update: WebUpdateWithoutColorsDataInput!
-  create: WebCreateWithoutColorsInput!
 }
 
 input WebUpsertWithoutPagesInput {
@@ -1483,9 +1380,6 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  colors_every: ColorWhereInput
-  colors_some: ColorWhereInput
-  colors_none: ColorWhereInput
 }
 
 input WebWhereUniqueInput {

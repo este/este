@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Sep 29 2018 20:25:46 GMT+0200 (Central European Summer Time)
+# timestamp: Thu Oct 04 2018 02:19:08 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -18,35 +18,72 @@ type AuthPayload {
   user: User
 }
 
-type Color implements Node {
-  id: ID!
-  web(where: WebWhereInput): Web!
-  name: String!
-  value: String!
+type CreateWebErrors {
+  name: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
-enum ColorOrderByInput {
+input CreateWebInput {
+  name: String!
+  pageTitle: String!
+}
+
+type CreateWebPayload {
+  errors: CreateWebErrors
+  pageId: ID
+}
+
+scalar DateTime
+
+input DeletePageInput {
+  id: ID!
+}
+
+type DeletePagePayload {
+  page: Page
+}
+
+input DeleteWebInput {
+  id: ID!
+}
+
+type DeleteWebPayload {
+  web: Web
+}
+
+type Element implements Node {
+  id: ID!
+  type: ElementType!
+  page(where: PageWhereInput): Page!
+  path: [Int!]!
+}
+
+enum ElementOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  value_ASC
-  value_DESC
+  type_ASC
+  type_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-input ColorWhereInput {
+enum ElementType {
+  DOCUMENT
+  BLOCK
+  TEXT
+}
+
+input ElementWhereInput {
   """Logical AND on all given filters."""
-  AND: [ColorWhereInput!]
+  AND: [ElementWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ColorWhereInput!]
+  OR: [ElementWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ColorWhereInput!]
+  NOT: [ElementWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -87,120 +124,17 @@ input ColorWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  name: String
+  type: ElementType
 
   """All values that are not equal to given value."""
-  name_not: String
+  type_not: ElementType
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  type_in: [ElementType!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  value: String
-
-  """All values that are not equal to given value."""
-  value_not: String
-
-  """All values that are contained in given list."""
-  value_in: [String!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [String!]
-
-  """All values less than the given value."""
-  value_lt: String
-
-  """All values less than or equal the given value."""
-  value_lte: String
-
-  """All values greater than the given value."""
-  value_gt: String
-
-  """All values greater than or equal the given value."""
-  value_gte: String
-
-  """All values containing the given string."""
-  value_contains: String
-
-  """All values not containing the given string."""
-  value_not_contains: String
-
-  """All values starting with the given string."""
-  value_starts_with: String
-
-  """All values not starting with the given string."""
-  value_not_starts_with: String
-
-  """All values ending with the given string."""
-  value_ends_with: String
-
-  """All values not ending with the given string."""
-  value_not_ends_with: String
-  web: WebWhereInput
-}
-
-type CreateWebErrors {
-  name: Max140CharsError
-  pageTitle: Max140CharsError
-}
-
-input CreateWebInput {
-  name: String!
-  pageTitle: String!
-}
-
-type CreateWebPayload {
-  errors: CreateWebErrors
-  pageId: ID
-}
-
-scalar DateTime
-
-input DeletePageInput {
-  id: ID!
-}
-
-type DeletePagePayload {
-  page: Page
-}
-
-input DeleteWebInput {
-  id: ID!
-}
-
-type DeleteWebPayload {
-  web: Web
+  type_not_in: [ElementType!]
+  page: PageWhereInput
 }
 
 enum EmailError {
@@ -243,7 +177,7 @@ type Page implements Node {
   title: String!
   web(where: WebWhereInput): Web!
   content: Json
-  contentSchema: String
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
 }
 
 enum PageOrderByInput {
@@ -257,8 +191,6 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentSchema_ASC
-  contentSchema_DESC
 }
 
 input PageWhereInput {
@@ -394,48 +326,11 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  contentSchema: String
-
-  """All values that are not equal to given value."""
-  contentSchema_not: String
-
-  """All values that are contained in given list."""
-  contentSchema_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentSchema_not_in: [String!]
-
-  """All values less than the given value."""
-  contentSchema_lt: String
-
-  """All values less than or equal the given value."""
-  contentSchema_lte: String
-
-  """All values greater than the given value."""
-  contentSchema_gt: String
-
-  """All values greater than or equal the given value."""
-  contentSchema_gte: String
-
-  """All values containing the given string."""
-  contentSchema_contains: String
-
-  """All values not containing the given string."""
-  contentSchema_not_contains: String
-
-  """All values starting with the given string."""
-  contentSchema_starts_with: String
-
-  """All values not starting with the given string."""
-  contentSchema_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentSchema_ends_with: String
-
-  """All values not ending with the given string."""
-  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
 }
 
 enum PasswordError {
@@ -735,7 +630,6 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 enum WebOrderByInput {
@@ -886,7 +780,4 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  colors_every: ColorWhereInput
-  colors_some: ColorWhereInput
-  colors_none: ColorWhereInput
 }

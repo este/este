@@ -21,7 +21,7 @@ type Web {
   creator: User!
   name: String!
   pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
-  colors: [Color!]! @relation(name: "WebColors", onDelete: CASCADE)
+  # colors: [Color!]! @relation(name: "WebColors", onDelete: CASCADE)
 }
 
 type Page {
@@ -30,23 +30,62 @@ type Page {
   updatedAt: DateTime!
   creator: User!
   title: String!
-  web: Web! @relation(name: "WebPages", onDelete: SET_NULL)
+  web: Web! @relation(name: "WebPages")
   content: Json
-  contentSchema: String
+  elements: [Element!]! @relation(name: "PageElements", onDelete: CASCADE)
 }
 
-type Color {
+# Element is value object representing Slate node.
+# Prisma does not support interfaces nor unions yet, so we emulate it.
+# Tree structure is defined with path prop as a scalar list, because
+# Parent/children relation is hard to implement fast and easy to manipulate.
+# Path prop is non-relational but that's fine, because it's nondestructive.
+# https://itnext.io/graphql-interfaces-and-union-types-with-prisma-and-yoga-7224f9e1d9ad
+# https://medium.com/@dan_abramov/react-components-elements-and-instances-90800811f8ca
+# http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
+# https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
+type Element {
   id: ID! @unique
-  web: Web! @relation(name: "WebColors", onDelete: SET_NULL)
-  name: String!
-  # css value
-  value: String!
+  type: ElementType! @default(value: "BLOCK")
+  # Every element belong to one page.
+  page: Page! @relation(name: "PageElements")
+  # Instead of scalar list path, we could have index and parent/children
+  # relations, but that's hard to implement fast and easy to manipulate.
+  # https://gist.github.com/steida/1711f61399ca98c230916d5b0a3a256f
+  # index: Int!
+  # parent: Element @relation(name: "ElementParentChildren", onDelete: CASCADE)
+  # children: [Element!]! @relation(name: "ElementParentChildren")
+  path: [Int!]!
+
+  # TODO: slate props, props, style, component.
+  # leaves: [{ object: 'leaf', text: '', marks: [] }],
 }
 
-# type FragmentOrComponentOrElementIDontKnowYet {
-#
-# }
+enum ElementType {
+  DOCUMENT
+  BLOCK
+  TEXT
+}
 
+# How granular we want to go?
+# type NodeStyleValue {
+#   value: string
+#   units: NodeStyleUnit
+# }
+#
+# type NodeStyle {
+#   backgroundColor: NodeStyleValue
+#   flex: Number
+# }
+#
+# type Color {
+#   id: ID! @unique
+#   web: Web! @relation(name: "WebColors", )
+#   name: String!
+#   # css value
+#   value: String!
+# }
+#
 # type Image {
 #   id: ID! @unique
 #   createdAt: DateTime!

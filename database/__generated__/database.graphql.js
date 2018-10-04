@@ -13,15 +13,15 @@ export interface Query {
     users(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User[]>; 
     webs(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web[]>; 
     pages(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page[]>; 
-    colors(args: { where?: ColorWhereInput, orderBy?: ColorOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color[]>; 
+    elements(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element[]>; 
     user(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     web(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     page(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    color(args: { where: ColorWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color | null>; 
+    element(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     usersConnection(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<UserConnection>; 
     websConnection(args: { where?: WebWhereInput, orderBy?: WebOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<WebConnection>; 
     pagesConnection(args: { where?: PageWhereInput, orderBy?: PageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<PageConnection>; 
-    colorsConnection(args: { where?: ColorWhereInput, orderBy?: ColorOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ColorConnection>; 
+    elementsConnection(args: { where?: ElementWhereInput, orderBy?: ElementOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options): Promise<ElementConnection>; 
     node(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Node | null>; 
   }
 
@@ -29,41 +29,41 @@ export interface Mutation {
     createUser(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     createWeb(args: { data: WebCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
     createPage(args: { data: PageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    createColor(args: { data: ColorCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color>; 
+    createElement(args: { data: ElementCreateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     updateUser(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     updateWeb(args: { data: WebUpdateInput, where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     updatePage(args: { data: PageUpdateInput, where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    updateColor(args: { data: ColorUpdateInput, where: ColorWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color | null>; 
+    updateElement(args: { data: ElementUpdateInput, where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     deleteUser(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User | null>; 
     deleteWeb(args: { where: WebWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web | null>; 
     deletePage(args: { where: PageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page | null>; 
-    deleteColor(args: { where: ColorWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color | null>; 
+    deleteElement(args: { where: ElementWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element | null>; 
     upsertUser(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<User>; 
     upsertWeb(args: { where: WebWhereUniqueInput, create: WebCreateInput, update: WebUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Web>; 
     upsertPage(args: { where: PageWhereUniqueInput, create: PageCreateInput, update: PageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Page>; 
-    upsertColor(args: { where: ColorWhereUniqueInput, create: ColorCreateInput, update: ColorUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Color>; 
+    upsertElement(args: { where: ElementWhereUniqueInput, create: ElementCreateInput, update: ElementUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<Element>; 
     updateManyUsers(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyWebs(args: { data: WebUpdateInput, where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     updateManyPages(args: { data: PageUpdateInput, where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    updateManyColors(args: { data: ColorUpdateInput, where?: ColorWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    updateManyElements(args: { data: ElementUpdateInput, where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyUsers(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyWebs(args: { where?: WebWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
     deleteManyPages(args: { where?: PageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
-    deleteManyColors(args: { where?: ColorWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
+    deleteManyElements(args: { where?: ElementWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<BatchPayload>; 
   }
 
 export interface Subscription {
     user(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<UserSubscriptionPayload | null>>; 
     web(args: { where?: WebSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<WebSubscriptionPayload | null>>; 
     page(args: { where?: PageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<PageSubscriptionPayload | null>>; 
-    color(args: { where?: ColorSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ColorSubscriptionPayload | null>>; 
+    element(args: { where?: ElementSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<ElementSubscriptionPayload | null>>; 
   }
 
 export interface Exists {
 User(where?: UserWhereInput): Promise<boolean>;
 Web(where?: WebWhereInput): Promise<boolean>;
 Page(where?: PageWhereInput): Promise<boolean>;
-Color(where?: ColorWhereInput): Promise<boolean>;
+Element(where?: ElementWhereInput): Promise<boolean>;
 }
 
 export interface Prisma {
@@ -88,7 +88,7 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateColor {
+const typeDefs = `type AggregateElement {
   count: Int!
 }
 
@@ -109,83 +109,87 @@ type BatchPayload {
   count: Long!
 }
 
-type Color implements Node {
+scalar DateTime
+
+type Element implements Node {
   id: ID!
-  web(where: WebWhereInput): Web!
-  name: String!
-  value: String!
+  type: ElementType!
+  page(where: PageWhereInput): Page!
+  path: [Int!]!
 }
 
 """A connection to a list of items."""
-type ColorConnection {
+type ElementConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ColorEdge]!
-  aggregate: AggregateColor!
+  edges: [ElementEdge]!
+  aggregate: AggregateElement!
 }
 
-input ColorCreateInput {
-  name: String!
-  value: String!
-  web: WebCreateOneWithoutColorsInput!
+input ElementCreateInput {
+  type: ElementType
+  path: ElementCreatepathInput
+  page: PageCreateOneWithoutElementsInput!
 }
 
-input ColorCreateManyWithoutWebInput {
-  create: [ColorCreateWithoutWebInput!]
-  connect: [ColorWhereUniqueInput!]
+input ElementCreateManyWithoutPageInput {
+  create: [ElementCreateWithoutPageInput!]
+  connect: [ElementWhereUniqueInput!]
 }
 
-input ColorCreateWithoutWebInput {
-  name: String!
-  value: String!
+input ElementCreatepathInput {
+  set: [Int!]
+}
+
+input ElementCreateWithoutPageInput {
+  type: ElementType
+  path: ElementCreatepathInput
 }
 
 """An edge in a connection."""
-type ColorEdge {
+type ElementEdge {
   """The item at the end of the edge."""
-  node: Color!
+  node: Element!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ColorOrderByInput {
+enum ElementOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  value_ASC
-  value_DESC
+  type_ASC
+  type_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type ColorPreviousValues {
+type ElementPreviousValues {
   id: ID!
-  name: String!
-  value: String!
+  type: ElementType!
+  path: [Int!]!
 }
 
-type ColorSubscriptionPayload {
+type ElementSubscriptionPayload {
   mutation: MutationType!
-  node: Color
+  node: Element
   updatedFields: [String!]
-  previousValues: ColorPreviousValues
+  previousValues: ElementPreviousValues
 }
 
-input ColorSubscriptionWhereInput {
+input ElementSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ColorSubscriptionWhereInput!]
+  AND: [ElementSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ColorSubscriptionWhereInput!]
+  OR: [ElementSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ColorSubscriptionWhereInput!]
+  NOT: [ElementSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -206,49 +210,59 @@ input ColorSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ColorWhereInput
+  node: ElementWhereInput
 }
 
-input ColorUpdateInput {
-  name: String
-  value: String
-  web: WebUpdateOneWithoutColorsInput
+enum ElementType {
+  DOCUMENT
+  BLOCK
+  TEXT
 }
 
-input ColorUpdateManyWithoutWebInput {
-  create: [ColorCreateWithoutWebInput!]
-  connect: [ColorWhereUniqueInput!]
-  disconnect: [ColorWhereUniqueInput!]
-  delete: [ColorWhereUniqueInput!]
-  update: [ColorUpdateWithWhereUniqueWithoutWebInput!]
-  upsert: [ColorUpsertWithWhereUniqueWithoutWebInput!]
+input ElementUpdateInput {
+  type: ElementType
+  path: ElementUpdatepathInput
+  page: PageUpdateOneWithoutElementsInput
 }
 
-input ColorUpdateWithoutWebDataInput {
-  name: String
-  value: String
+input ElementUpdateManyWithoutPageInput {
+  create: [ElementCreateWithoutPageInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutPageInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutPageInput!]
 }
 
-input ColorUpdateWithWhereUniqueWithoutWebInput {
-  where: ColorWhereUniqueInput!
-  data: ColorUpdateWithoutWebDataInput!
+input ElementUpdatepathInput {
+  set: [Int!]
 }
 
-input ColorUpsertWithWhereUniqueWithoutWebInput {
-  where: ColorWhereUniqueInput!
-  update: ColorUpdateWithoutWebDataInput!
-  create: ColorCreateWithoutWebInput!
+input ElementUpdateWithoutPageDataInput {
+  type: ElementType
+  path: ElementUpdatepathInput
 }
 
-input ColorWhereInput {
+input ElementUpdateWithWhereUniqueWithoutPageInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutPageDataInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutPageInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutPageDataInput!
+  create: ElementCreateWithoutPageInput!
+}
+
+input ElementWhereInput {
   """Logical AND on all given filters."""
-  AND: [ColorWhereInput!]
+  AND: [ElementWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ColorWhereInput!]
+  OR: [ElementWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ColorWhereInput!]
+  NOT: [ElementWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -289,94 +303,22 @@ input ColorWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  name: String
+  type: ElementType
 
   """All values that are not equal to given value."""
-  name_not: String
+  type_not: ElementType
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  type_in: [ElementType!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  value: String
-
-  """All values that are not equal to given value."""
-  value_not: String
-
-  """All values that are contained in given list."""
-  value_in: [String!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [String!]
-
-  """All values less than the given value."""
-  value_lt: String
-
-  """All values less than or equal the given value."""
-  value_lte: String
-
-  """All values greater than the given value."""
-  value_gt: String
-
-  """All values greater than or equal the given value."""
-  value_gte: String
-
-  """All values containing the given string."""
-  value_contains: String
-
-  """All values not containing the given string."""
-  value_not_contains: String
-
-  """All values starting with the given string."""
-  value_starts_with: String
-
-  """All values not starting with the given string."""
-  value_not_starts_with: String
-
-  """All values ending with the given string."""
-  value_ends_with: String
-
-  """All values not ending with the given string."""
-  value_not_ends_with: String
-  web: WebWhereInput
+  type_not_in: [ElementType!]
+  page: PageWhereInput
 }
 
-input ColorWhereUniqueInput {
+input ElementWhereUniqueInput {
   id: ID
 }
-
-scalar DateTime
 
 """Raw JSON value"""
 scalar Json
@@ -391,27 +333,27 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
-  createColor(data: ColorCreateInput!): Color!
+  createElement(data: ElementCreateInput!): Element!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateColor(data: ColorUpdateInput!, where: ColorWhereUniqueInput!): Color
+  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
   deleteUser(where: UserWhereUniqueInput!): User
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
-  deleteColor(where: ColorWhereUniqueInput!): Color
+  deleteElement(where: ElementWhereUniqueInput!): Element
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertColor(where: ColorWhereUniqueInput!, create: ColorCreateInput!, update: ColorUpdateInput!): Color!
+  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyColors(data: ColorUpdateInput!, where: ColorWhereInput): BatchPayload!
+  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyColors(where: ColorWhereInput): BatchPayload!
+  deleteManyElements(where: ElementWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -434,7 +376,7 @@ type Page implements Node {
   title: String!
   web(where: WebWhereInput): Web!
   content: Json
-  contentSchema: String
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
 }
 
 """A connection to a list of items."""
@@ -450,9 +392,9 @@ type PageConnection {
 input PageCreateInput {
   title: String!
   content: Json
-  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
 }
 
 input PageCreateManyWithoutCreatorInput {
@@ -465,18 +407,30 @@ input PageCreateManyWithoutWebInput {
   connect: [PageWhereUniqueInput!]
 }
 
+input PageCreateOneWithoutElementsInput {
+  create: PageCreateWithoutElementsInput
+  connect: PageWhereUniqueInput
+}
+
 input PageCreateWithoutCreatorInput {
   title: String!
   content: Json
-  contentSchema: String
+  web: WebCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
+}
+
+input PageCreateWithoutElementsInput {
+  title: String!
+  content: Json
+  creator: UserCreateOneWithoutPagesInput!
   web: WebCreateOneWithoutPagesInput!
 }
 
 input PageCreateWithoutWebInput {
   title: String!
   content: Json
-  contentSchema: String
   creator: UserCreateOneWithoutPagesInput!
+  elements: ElementCreateManyWithoutPageInput
 }
 
 """An edge in a connection."""
@@ -514,8 +468,6 @@ enum PageOrderByInput {
   title_DESC
   content_ASC
   content_DESC
-  contentSchema_ASC
-  contentSchema_DESC
 }
 
 type PagePreviousValues {
@@ -524,7 +476,6 @@ type PagePreviousValues {
   updatedAt: DateTime!
   title: String!
   content: Json
-  contentSchema: String
 }
 
 type PageSubscriptionPayload {
@@ -569,9 +520,9 @@ input PageSubscriptionWhereInput {
 input PageUpdateInput {
   title: String
   content: Json
-  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
 }
 
 input PageUpdateManyWithoutCreatorInput {
@@ -592,18 +543,33 @@ input PageUpdateManyWithoutWebInput {
   upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
 }
 
+input PageUpdateOneWithoutElementsInput {
+  create: PageCreateWithoutElementsInput
+  connect: PageWhereUniqueInput
+  delete: Boolean
+  update: PageUpdateWithoutElementsDataInput
+  upsert: PageUpsertWithoutElementsInput
+}
+
 input PageUpdateWithoutCreatorDataInput {
   title: String
   content: Json
-  contentSchema: String
+  web: WebUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
+}
+
+input PageUpdateWithoutElementsDataInput {
+  title: String
+  content: Json
+  creator: UserUpdateOneWithoutPagesInput
   web: WebUpdateOneWithoutPagesInput
 }
 
 input PageUpdateWithoutWebDataInput {
   title: String
   content: Json
-  contentSchema: String
   creator: UserUpdateOneWithoutPagesInput
+  elements: ElementUpdateManyWithoutPageInput
 }
 
 input PageUpdateWithWhereUniqueWithoutCreatorInput {
@@ -614,6 +580,11 @@ input PageUpdateWithWhereUniqueWithoutCreatorInput {
 input PageUpdateWithWhereUniqueWithoutWebInput {
   where: PageWhereUniqueInput!
   data: PageUpdateWithoutWebDataInput!
+}
+
+input PageUpsertWithoutElementsInput {
+  update: PageUpdateWithoutElementsDataInput!
+  create: PageCreateWithoutElementsInput!
 }
 
 input PageUpsertWithWhereUniqueWithoutCreatorInput {
@@ -761,48 +732,11 @@ input PageWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  contentSchema: String
-
-  """All values that are not equal to given value."""
-  contentSchema_not: String
-
-  """All values that are contained in given list."""
-  contentSchema_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentSchema_not_in: [String!]
-
-  """All values less than the given value."""
-  contentSchema_lt: String
-
-  """All values less than or equal the given value."""
-  contentSchema_lte: String
-
-  """All values greater than the given value."""
-  contentSchema_gt: String
-
-  """All values greater than or equal the given value."""
-  contentSchema_gte: String
-
-  """All values containing the given string."""
-  contentSchema_contains: String
-
-  """All values not containing the given string."""
-  contentSchema_not_contains: String
-
-  """All values starting with the given string."""
-  contentSchema_starts_with: String
-
-  """All values not starting with the given string."""
-  contentSchema_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentSchema_ends_with: String
-
-  """All values not ending with the given string."""
-  contentSchema_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -813,15 +747,15 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color]!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   user(where: UserWhereUniqueInput!): User
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
-  color(where: ColorWhereUniqueInput!): Color
+  element(where: ElementWhereUniqueInput!): Element
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  colorsConnection(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ColorConnection!
+  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -834,7 +768,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  color(where: ColorSubscriptionWhereInput): ColorSubscriptionPayload
+  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
 }
 
 type User implements Node {
@@ -1243,7 +1177,6 @@ type Web implements Node {
   creator(where: UserWhereInput): User!
   name: String!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color!]
 }
 
 """A connection to a list of items."""
@@ -1260,7 +1193,6 @@ input WebCreateInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateManyWithoutCreatorInput {
@@ -1268,32 +1200,19 @@ input WebCreateManyWithoutCreatorInput {
   connect: [WebWhereUniqueInput!]
 }
 
-input WebCreateOneWithoutColorsInput {
-  create: WebCreateWithoutColorsInput
-  connect: WebWhereUniqueInput
-}
-
 input WebCreateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
 }
 
-input WebCreateWithoutColorsInput {
-  name: String!
-  creator: UserCreateOneWithoutWebsInput!
-  pages: PageCreateManyWithoutWebInput
-}
-
 input WebCreateWithoutCreatorInput {
   name: String!
   pages: PageCreateManyWithoutWebInput
-  colors: ColorCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
-  colors: ColorCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -1366,7 +1285,6 @@ input WebUpdateInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -1378,14 +1296,6 @@ input WebUpdateManyWithoutCreatorInput {
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
-input WebUpdateOneWithoutColorsInput {
-  create: WebCreateWithoutColorsInput
-  connect: WebWhereUniqueInput
-  delete: Boolean
-  update: WebUpdateWithoutColorsDataInput
-  upsert: WebUpsertWithoutColorsInput
-}
-
 input WebUpdateOneWithoutPagesInput {
   create: WebCreateWithoutPagesInput
   connect: WebWhereUniqueInput
@@ -1394,32 +1304,19 @@ input WebUpdateOneWithoutPagesInput {
   upsert: WebUpsertWithoutPagesInput
 }
 
-input WebUpdateWithoutColorsDataInput {
-  name: String
-  creator: UserUpdateOneWithoutWebsInput
-  pages: PageUpdateManyWithoutWebInput
-}
-
 input WebUpdateWithoutCreatorDataInput {
   name: String
   pages: PageUpdateManyWithoutWebInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
   name: String
   creator: UserUpdateOneWithoutWebsInput
-  colors: ColorUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithWhereUniqueWithoutCreatorInput {
   where: WebWhereUniqueInput!
   data: WebUpdateWithoutCreatorDataInput!
-}
-
-input WebUpsertWithoutColorsInput {
-  update: WebUpdateWithoutColorsDataInput!
-  create: WebCreateWithoutColorsInput!
 }
 
 input WebUpsertWithoutPagesInput {
@@ -1570,9 +1467,6 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  colors_every: ColorWhereInput
-  colors_some: ColorWhereInput
-  colors_none: ColorWhereInput
 }
 
 input WebWhereUniqueInput {
@@ -1587,6 +1481,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 /**
  * Types
 */
+
+ export type ElementType =
+    | 'DOCUMENT'
+    | 'BLOCK'
+    | 'TEXT'
+  
 
  export type UserOrderByInput =
     | 'id_ASC'
@@ -1625,17 +1525,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'title_DESC'
     | 'content_ASC'
     | 'content_DESC'
-    | 'contentSchema_ASC'
-    | 'contentSchema_DESC'
   
 
- export type ColorOrderByInput =
+ export type ElementOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'value_ASC'
-    | 'value_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'updatedAt_ASC'
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
@@ -1651,8 +1547,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type WebCreateInput = {| 
   name: String,
   creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  colors?: ColorCreateManyWithoutWebInput
+  pages?: PageCreateManyWithoutWebInput
 |}
 
  export type UserWhereInput = {| 
@@ -1739,16 +1634,17 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   pages_none?: PageWhereInput
 |}
 
- export type WebCreateWithoutColorsInput = {| 
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput
+ export type PageCreateWithoutElementsInput = {| 
+  title: String,
+  content?: Json,
+  creator: UserCreateOneWithoutPagesInput,
+  web: WebCreateOneWithoutPagesInput
 |}
 
- export type ColorWhereInput = {| 
-  AND?: Array< ColorWhereInput > | ColorWhereInput,
-  OR?: Array< ColorWhereInput > | ColorWhereInput,
-  NOT?: Array< ColorWhereInput > | ColorWhereInput,
+ export type ElementWhereInput = {| 
+  AND?: Array< ElementWhereInput > | ElementWhereInput,
+  OR?: Array< ElementWhereInput > | ElementWhereInput,
+  NOT?: Array< ElementWhereInput > | ElementWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -1763,53 +1659,29 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  value?: String,
-  value_not?: String,
-  value_in?: Array< String > | String,
-  value_not_in?: Array< String > | String,
-  value_lt?: String,
-  value_lte?: String,
-  value_gt?: String,
-  value_gte?: String,
-  value_contains?: String,
-  value_not_contains?: String,
-  value_starts_with?: String,
-  value_not_starts_with?: String,
-  value_ends_with?: String,
-  value_not_ends_with?: String,
-  web?: WebWhereInput
-|}
-
- export type PageCreateWithoutWebInput = {| 
-  title: String,
-  content?: Json,
-  contentSchema?: String,
-  creator: UserCreateOneWithoutPagesInput
-|}
-
- export type ColorUpsertWithWhereUniqueWithoutWebInput = {| 
-  where: ColorWhereUniqueInput,
-  update: ColorUpdateWithoutWebDataInput,
-  create: ColorCreateWithoutWebInput
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType,
+  page?: PageWhereInput
 |}
 
  export type UserCreateOneWithoutPagesInput = {| 
   create?: UserCreateWithoutPagesInput,
   connect?: UserWhereUniqueInput
+|}
+
+ export type PageUpsertWithWhereUniqueWithoutWebInput = {| 
+  where: PageWhereUniqueInput,
+  update: PageUpdateWithoutWebDataInput,
+  create: PageCreateWithoutWebInput
+|}
+
+ export type UserCreateWithoutPagesInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  webs?: WebCreateManyWithoutCreatorInput
 |}
 
  export type UserUpdateInput = {| 
@@ -1820,27 +1692,25 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   pages?: PageUpdateManyWithoutCreatorInput
 |}
 
- export type UserCreateWithoutPagesInput = {| 
-  email: String,
-  password: String,
-  themeName?: String,
-  webs?: WebCreateManyWithoutCreatorInput
+ export type ElementCreateManyWithoutPageInput = {| 
+  create?: Array< ElementCreateWithoutPageInput > | ElementCreateWithoutPageInput,
+  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
 |}
 
- export type ColorSubscriptionWhereInput = {| 
-  AND?: Array< ColorSubscriptionWhereInput > | ColorSubscriptionWhereInput,
-  OR?: Array< ColorSubscriptionWhereInput > | ColorSubscriptionWhereInput,
-  NOT?: Array< ColorSubscriptionWhereInput > | ColorSubscriptionWhereInput,
+ export type ElementSubscriptionWhereInput = {| 
+  AND?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
+  OR?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
+  NOT?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
   mutation_in?: Array< MutationType > | MutationType,
   updatedFields_contains?: String,
   updatedFields_contains_every?: Array< String > | String,
   updatedFields_contains_some?: Array< String > | String,
-  node?: ColorWhereInput
+  node?: ElementWhereInput
 |}
 
- export type ColorCreateManyWithoutWebInput = {| 
-  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
-  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput
+ export type ElementCreateWithoutPageInput = {| 
+  type?: ElementType,
+  path?: ElementCreatepathInput
 |}
 
  export type PageSubscriptionWhereInput = {| 
@@ -1854,9 +1724,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   node?: PageWhereInput
 |}
 
- export type ColorCreateWithoutWebInput = {| 
-  name: String,
-  value: String
+ export type ElementCreatepathInput = {| 
+  set?: Array< Int > | Int
 |}
 
  export type UserSubscriptionWhereInput = {| 
@@ -1883,8 +1752,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type PageCreateWithoutCreatorInput = {| 
   title: String,
   content?: Json,
-  contentSchema?: String,
-  web: WebCreateOneWithoutPagesInput
+  web: WebCreateOneWithoutPagesInput,
+  elements?: ElementCreateManyWithoutPageInput
 |}
 
  export type PageWhereUniqueInput = {| 
@@ -1896,22 +1765,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   connect?: WebWhereUniqueInput
 |}
 
- export type WebUpdateWithoutColorsDataInput = {| 
-  name?: String,
-  creator?: UserUpdateOneWithoutWebsInput,
-  pages?: PageUpdateManyWithoutWebInput
+ export type PageUpdateWithoutElementsDataInput = {| 
+  title?: String,
+  content?: Json,
+  creator?: UserUpdateOneWithoutPagesInput,
+  web?: WebUpdateOneWithoutPagesInput
 |}
 
  export type WebCreateWithoutPagesInput = {| 
   name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  colors?: ColorCreateManyWithoutWebInput
+  creator: UserCreateOneWithoutWebsInput
 |}
 
- export type ColorUpdateInput = {| 
-  name?: String,
-  value?: String,
-  web?: WebUpdateOneWithoutColorsInput
+ export type ElementUpdateInput = {| 
+  type?: ElementType,
+  path?: ElementUpdatepathInput,
+  page?: PageUpdateOneWithoutElementsInput
 |}
 
  export type UserCreateOneWithoutWebsInput = {| 
@@ -1922,8 +1791,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type WebUpdateInput = {| 
   name?: String,
   creator?: UserUpdateOneWithoutWebsInput,
-  pages?: PageUpdateManyWithoutWebInput,
-  colors?: ColorUpdateManyWithoutWebInput
+  pages?: PageUpdateManyWithoutWebInput
 |}
 
  export type UserCreateWithoutWebsInput = {| 
@@ -1957,33 +1825,32 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type PageCreateInput = {| 
   title: String,
   content?: Json,
-  contentSchema?: String,
   creator: UserCreateOneWithoutPagesInput,
-  web: WebCreateOneWithoutPagesInput
+  web: WebCreateOneWithoutPagesInput,
+  elements?: ElementCreateManyWithoutPageInput
 |}
 
  export type WebUpdateWithoutPagesDataInput = {| 
   name?: String,
-  creator?: UserUpdateOneWithoutWebsInput,
-  colors?: ColorUpdateManyWithoutWebInput
+  creator?: UserUpdateOneWithoutWebsInput
 |}
 
- export type ColorCreateInput = {| 
-  name: String,
-  value: String,
-  web: WebCreateOneWithoutColorsInput
+ export type ElementCreateInput = {| 
+  type?: ElementType,
+  path?: ElementCreatepathInput,
+  page: PageCreateOneWithoutElementsInput
 |}
 
  export type PageUpdateWithoutCreatorDataInput = {| 
   title?: String,
   content?: Json,
-  contentSchema?: String,
-  web?: WebUpdateOneWithoutPagesInput
+  web?: WebUpdateOneWithoutPagesInput,
+  elements?: ElementUpdateManyWithoutPageInput
 |}
 
- export type WebCreateOneWithoutColorsInput = {| 
-  create?: WebCreateWithoutColorsInput,
-  connect?: WebWhereUniqueInput
+ export type PageCreateOneWithoutElementsInput = {| 
+  create?: PageCreateWithoutElementsInput,
+  connect?: PageWhereUniqueInput
 |}
 
  export type UserCreateInput = {| 
@@ -2002,242 +1869,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type WebCreateWithoutCreatorInput = {| 
   name: String,
-  pages?: PageCreateManyWithoutWebInput,
-  colors?: ColorCreateManyWithoutWebInput
+  pages?: PageCreateManyWithoutWebInput
 |}
 
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  contentSchema?: String,
-  contentSchema_not?: String,
-  contentSchema_in?: Array< String > | String,
-  contentSchema_not_in?: Array< String > | String,
-  contentSchema_lt?: String,
-  contentSchema_lte?: String,
-  contentSchema_gt?: String,
-  contentSchema_gte?: String,
-  contentSchema_contains?: String,
-  contentSchema_not_contains?: String,
-  contentSchema_starts_with?: String,
-  contentSchema_not_starts_with?: String,
-  contentSchema_ends_with?: String,
-  contentSchema_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput
-|}
-
- export type WebSubscriptionWhereInput = {| 
-  AND?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
-  OR?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
-  NOT?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
-  mutation_in?: Array< MutationType > | MutationType,
-  updatedFields_contains?: String,
-  updatedFields_contains_every?: Array< String > | String,
-  updatedFields_contains_some?: Array< String > | String,
-  node?: WebWhereInput
-|}
-
- export type WebUpdateManyWithoutCreatorInput = {| 
-  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
-  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  disconnect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  delete?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
-  update?: Array< WebUpdateWithWhereUniqueWithoutCreatorInput > | WebUpdateWithWhereUniqueWithoutCreatorInput,
-  upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
-|}
-
- export type WebWhereUniqueInput = {| 
-  id?: ID_Input
-|}
-
- export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: WebWhereUniqueInput,
-  data: WebUpdateWithoutCreatorDataInput
-|}
-
- export type WebUpdateOneWithoutColorsInput = {| 
-  create?: WebCreateWithoutColorsInput,
-  connect?: WebWhereUniqueInput,
-  delete?: Boolean,
-  update?: WebUpdateWithoutColorsDataInput,
-  upsert?: WebUpsertWithoutColorsInput
-|}
-
- export type WebUpdateWithoutCreatorDataInput = {| 
-  name?: String,
-  pages?: PageUpdateManyWithoutWebInput,
-  colors?: ColorUpdateManyWithoutWebInput
-|}
-
- export type PageUpsertWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutCreatorDataInput,
-  create: PageCreateWithoutCreatorInput
-|}
-
- export type PageUpdateManyWithoutWebInput = {| 
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
-  update?: Array< PageUpdateWithWhereUniqueWithoutWebInput > | PageUpdateWithWhereUniqueWithoutWebInput,
-  upsert?: Array< PageUpsertWithWhereUniqueWithoutWebInput > | PageUpsertWithWhereUniqueWithoutWebInput
-|}
-
- export type UserUpdateOneWithoutWebsInput = {| 
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutWebsDataInput,
-  upsert?: UserUpsertWithoutWebsInput
-|}
-
- export type PageUpdateWithWhereUniqueWithoutWebInput = {| 
-  where: PageWhereUniqueInput,
-  data: PageUpdateWithoutWebDataInput
-|}
-
- export type PageUpdateWithWhereUniqueWithoutCreatorInput = {| 
-  where: PageWhereUniqueInput,
-  data: PageUpdateWithoutCreatorDataInput
-|}
-
- export type PageUpdateWithoutWebDataInput = {| 
-  title?: String,
+ export type PageCreateWithoutWebInput = {| 
+  title: String,
   content?: Json,
-  contentSchema?: String,
-  creator?: UserUpdateOneWithoutPagesInput
-|}
-
- export type PageCreateManyWithoutWebInput = {| 
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
-|}
-
- export type UserUpdateOneWithoutPagesInput = {| 
-  create?: UserCreateWithoutPagesInput,
-  connect?: UserWhereUniqueInput,
-  delete?: Boolean,
-  update?: UserUpdateWithoutPagesDataInput,
-  upsert?: UserUpsertWithoutPagesInput
-|}
-
- export type WebUpsertWithoutColorsInput = {| 
-  update: WebUpdateWithoutColorsDataInput,
-  create: WebCreateWithoutColorsInput
-|}
-
- export type UserUpdateWithoutPagesDataInput = {| 
-  email?: String,
-  password?: String,
-  themeName?: String,
-  webs?: WebUpdateManyWithoutCreatorInput
-|}
-
- export type PageUpdateInput = {| 
-  title?: String,
-  content?: Json,
-  contentSchema?: String,
-  creator?: UserUpdateOneWithoutPagesInput,
-  web?: WebUpdateOneWithoutPagesInput
-|}
-
- export type UserUpsertWithoutPagesInput = {| 
-  update: UserUpdateWithoutPagesDataInput,
-  create: UserCreateWithoutPagesInput
-|}
-
- export type WebUpdateOneWithoutPagesInput = {| 
-  create?: WebCreateWithoutPagesInput,
-  connect?: WebWhereUniqueInput,
-  delete?: Boolean,
-  update?: WebUpdateWithoutPagesDataInput,
-  upsert?: WebUpsertWithoutPagesInput
-|}
-
- export type ColorUpdateWithoutWebDataInput = {| 
-  name?: String,
-  value?: String
-|}
-
- export type ColorUpdateWithWhereUniqueWithoutWebInput = {| 
-  where: ColorWhereUniqueInput,
-  data: ColorUpdateWithoutWebDataInput
-|}
-
- export type ColorUpdateManyWithoutWebInput = {| 
-  create?: Array< ColorCreateWithoutWebInput > | ColorCreateWithoutWebInput,
-  connect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  disconnect?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  delete?: Array< ColorWhereUniqueInput > | ColorWhereUniqueInput,
-  update?: Array< ColorUpdateWithWhereUniqueWithoutWebInput > | ColorUpdateWithWhereUniqueWithoutWebInput,
-  upsert?: Array< ColorUpsertWithWhereUniqueWithoutWebInput > | ColorUpsertWithWhereUniqueWithoutWebInput
-|}
-
- export type PageUpsertWithWhereUniqueWithoutWebInput = {| 
-  where: PageWhereUniqueInput,
-  update: PageUpdateWithoutWebDataInput,
-  create: PageCreateWithoutWebInput
-|}
-
- export type WebCreateManyWithoutCreatorInput = {| 
-  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
-  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
-|}
-
- export type UserUpsertWithoutWebsInput = {| 
-  update: UserUpdateWithoutWebsDataInput,
-  create: UserCreateWithoutWebsInput
-|}
-
- export type ColorWhereUniqueInput = {| 
-  id?: ID_Input
+  creator: UserCreateOneWithoutPagesInput,
+  elements?: ElementCreateManyWithoutPageInput
 |}
 
  export type WebWhereInput = {| 
@@ -2291,10 +1930,233 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   creator?: UserWhereInput,
   pages_every?: PageWhereInput,
   pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput,
-  colors_every?: ColorWhereInput,
-  colors_some?: ColorWhereInput,
-  colors_none?: ColorWhereInput
+  pages_none?: PageWhereInput
+|}
+
+ export type WebUpdateManyWithoutCreatorInput = {| 
+  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
+  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  disconnect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  delete?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
+  update?: Array< WebUpdateWithWhereUniqueWithoutCreatorInput > | WebUpdateWithWhereUniqueWithoutCreatorInput,
+  upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type PageUpsertWithoutElementsInput = {| 
+  update: PageUpdateWithoutElementsDataInput,
+  create: PageCreateWithoutElementsInput
+|}
+
+ export type WebUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: WebWhereUniqueInput,
+  data: WebUpdateWithoutCreatorDataInput
+|}
+
+ export type ElementWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type WebUpdateWithoutCreatorDataInput = {| 
+  name?: String,
+  pages?: PageUpdateManyWithoutWebInput
+|}
+
+ export type PageUpdateInput = {| 
+  title?: String,
+  content?: Json,
+  creator?: UserUpdateOneWithoutPagesInput,
+  web?: WebUpdateOneWithoutPagesInput,
+  elements?: ElementUpdateManyWithoutPageInput
+|}
+
+ export type PageUpdateManyWithoutWebInput = {| 
+  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
+  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
+  update?: Array< PageUpdateWithWhereUniqueWithoutWebInput > | PageUpdateWithWhereUniqueWithoutWebInput,
+  upsert?: Array< PageUpsertWithWhereUniqueWithoutWebInput > | PageUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type UserUpsertWithoutWebsInput = {| 
+  update: UserUpdateWithoutWebsDataInput,
+  create: UserCreateWithoutWebsInput
+|}
+
+ export type PageUpdateWithWhereUniqueWithoutWebInput = {| 
+  where: PageWhereUniqueInput,
+  data: PageUpdateWithoutWebDataInput
+|}
+
+ export type WebUpdateOneWithoutPagesInput = {| 
+  create?: WebCreateWithoutPagesInput,
+  connect?: WebWhereUniqueInput,
+  delete?: Boolean,
+  update?: WebUpdateWithoutPagesDataInput,
+  upsert?: WebUpsertWithoutPagesInput
+|}
+
+ export type PageUpdateWithoutWebDataInput = {| 
+  title?: String,
+  content?: Json,
+  creator?: UserUpdateOneWithoutPagesInput,
+  elements?: ElementUpdateManyWithoutPageInput
+|}
+
+ export type WebCreateManyWithoutCreatorInput = {| 
+  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
+  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
+|}
+
+ export type UserUpdateOneWithoutPagesInput = {| 
+  create?: UserCreateWithoutPagesInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutPagesDataInput,
+  upsert?: UserUpsertWithoutPagesInput
+|}
+
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  elements_every?: ElementWhereInput,
+  elements_some?: ElementWhereInput,
+  elements_none?: ElementWhereInput
+|}
+
+ export type UserUpdateWithoutPagesDataInput = {| 
+  email?: String,
+  password?: String,
+  themeName?: String,
+  webs?: WebUpdateManyWithoutCreatorInput
+|}
+
+ export type WebWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type UserUpsertWithoutPagesInput = {| 
+  update: UserUpdateWithoutPagesDataInput,
+  create: UserCreateWithoutPagesInput
+|}
+
+ export type PageUpsertWithWhereUniqueWithoutCreatorInput = {| 
+  where: PageWhereUniqueInput,
+  update: PageUpdateWithoutCreatorDataInput,
+  create: PageCreateWithoutCreatorInput
+|}
+
+ export type ElementUpdateManyWithoutPageInput = {| 
+  create?: Array< ElementCreateWithoutPageInput > | ElementCreateWithoutPageInput,
+  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
+  disconnect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
+  delete?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
+  update?: Array< ElementUpdateWithWhereUniqueWithoutPageInput > | ElementUpdateWithWhereUniqueWithoutPageInput,
+  upsert?: Array< ElementUpsertWithWhereUniqueWithoutPageInput > | ElementUpsertWithWhereUniqueWithoutPageInput
+|}
+
+ export type PageUpdateWithWhereUniqueWithoutCreatorInput = {| 
+  where: PageWhereUniqueInput,
+  data: PageUpdateWithoutCreatorDataInput
+|}
+
+ export type ElementUpsertWithWhereUniqueWithoutPageInput = {| 
+  where: ElementWhereUniqueInput,
+  update: ElementUpdateWithoutPageDataInput,
+  create: ElementCreateWithoutPageInput
+|}
+
+ export type ElementUpdatepathInput = {| 
+  set?: Array< Int > | Int
+|}
+
+ export type ElementUpdateWithoutPageDataInput = {| 
+  type?: ElementType,
+  path?: ElementUpdatepathInput
+|}
+
+ export type ElementUpdateWithWhereUniqueWithoutPageInput = {| 
+  where: ElementWhereUniqueInput,
+  data: ElementUpdateWithoutPageDataInput
+|}
+
+ export type PageCreateManyWithoutWebInput = {| 
+  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
+  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
+|}
+
+ export type UserUpdateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput,
+  delete?: Boolean,
+  update?: UserUpdateWithoutWebsDataInput,
+  upsert?: UserUpsertWithoutWebsInput
+|}
+
+ export type PageUpdateOneWithoutElementsInput = {| 
+  create?: PageCreateWithoutElementsInput,
+  connect?: PageWhereUniqueInput,
+  delete?: Boolean,
+  update?: PageUpdateWithoutElementsDataInput,
+  upsert?: PageUpsertWithoutElementsInput
+|}
+
+ export type WebSubscriptionWhereInput = {| 
+  AND?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
+  OR?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
+  NOT?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
+  mutation_in?: Array< MutationType > | MutationType,
+  updatedFields_contains?: String,
+  updatedFields_contains_every?: Array< String > | String,
+  updatedFields_contains_some?: Array< String > | String,
+  node?: WebWhereInput
 |}
 
 /*
@@ -2305,18 +2167,18 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    id: ID_Output,
 |}
 
- export type ColorPreviousValues = {| 
+ export type ElementPreviousValues = {| 
    id: ID_Output,
-   name: String,
-   value: String,
+   type: ElementType,
+   path: Int[],
 |}
 
- export type Color = {| ...Node,
+ export type Element = {| ...Node,
  
    id: ID_Output,
-   web: Web,
-   name: String,
-   value: String,
+   type: ElementType,
+   page: Page,
+   path: Int[],
 |}
 
  export type User = {| ...Node,
@@ -2335,7 +2197,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    count: Long,
 |}
 
- export type AggregateColor = {| 
+ export type AggregateElement = {| 
    count: Int,
 |}
 
@@ -2364,25 +2226,24 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    creator: User,
    name: String,
    pages?: Page[],
-   colors?: Color[],
 |}
 
 /*
  * A connection to a list of items.
 
 */
- export type ColorConnection = {| 
+ export type ElementConnection = {| 
    pageInfo: PageInfo,
-   edges: ColorEdge[],
-   aggregate: AggregateColor,
+   edges: ElementEdge[],
+   aggregate: AggregateElement,
 |}
 
 /*
  * An edge in a connection.
 
 */
- export type ColorEdge = {| 
-   node: Color,
+ export type ElementEdge = {| 
+   node: Element,
    cursor: String,
 |}
 
@@ -2415,7 +2276,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    updatedAt: DateTime,
    title: String,
    content?: Json,
-   contentSchema?: String,
 |}
 
  export type AggregateUser = {| 
@@ -2429,11 +2289,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    previousValues?: PagePreviousValues,
 |}
 
- export type ColorSubscriptionPayload = {| 
+ export type ElementSubscriptionPayload = {| 
    mutation: MutationType,
-   node?: Color,
+   node?: Element,
    updatedFields?: String[],
-   previousValues?: ColorPreviousValues,
+   previousValues?: ElementPreviousValues,
 |}
 
 /*
@@ -2461,7 +2321,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    title: String,
    web: Web,
    content?: Json,
-   contentSchema?: String,
+   elements?: Element[],
 |}
 
  export type UserPreviousValues = {| 
