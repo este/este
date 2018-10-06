@@ -23,6 +23,161 @@ import { parse } from 'url';
 import EditorBreadcrumb from './EditorBreadcrumb';
 import { View } from 'react-native';
 
+// Test data.
+// const slateValue = {
+//   object: 'value',
+//   document: {
+//     object: 'document',
+//     data: { style: { backgroundColor: '#fafafa', flex: 1 } },
+//     nodes: [
+//       {
+//         object: 'block',
+//         type: 'view',
+//         data: {
+//           name: 'container',
+//           style: {
+//             maxWidth: 768,
+//             width: '100%',
+//             marginHorizontal: 'auto',
+//             paddingHorizontal: 12,
+//           },
+//         },
+//         nodes: [
+//           {
+//             object: 'block',
+//             type: 'headingOne',
+//             data: {},
+//             nodes: [
+//               {
+//                 object: 'text',
+//                 leaves: [{ object: 'leaf', text: 'Title', marks: [] }],
+//               },
+//             ],
+//           },
+//           {
+//             object: 'block',
+//             type: 'headingTwo',
+//             data: {},
+//             nodes: [
+//               {
+//                 object: 'text',
+//                 leaves: [{ object: 'leaf', text: 'Subtitle', marks: [] }],
+//               },
+//             ],
+//           },
+//           {
+//             object: 'block',
+//             type: 'text',
+//             data: {},
+//             nodes: [
+//               {
+//                 object: 'text',
+//                 leaves: [
+//                   { object: 'leaf', text: 'Odstavec s ', marks: [] },
+//                   {
+//                     object: 'leaf',
+//                     text: 'bold',
+//                     marks: [{ object: 'mark', type: 'bold', data: {} }],
+//                   },
+//                   { object: 'leaf', text: ' a ', marks: [] },
+//                   {
+//                     object: 'leaf',
+//                     text: 'italic',
+//                     marks: [{ object: 'mark', type: 'italic', data: {} }],
+//                   },
+//                   { object: 'leaf', text: ' a ', marks: [] },
+//                   {
+//                     object: 'leaf',
+//                     text: 'oboje',
+//                     marks: [
+//                       { object: 'mark', type: 'bold', data: {} },
+//                       { object: 'mark', type: 'italic', data: {} },
+//                     ],
+//                   },
+//                   { object: 'leaf', text: '. ', marks: [] },
+//                 ],
+//               },
+//               {
+//                 object: 'inline',
+//                 type: 'link',
+//                 data: { href: 'https://google.com' },
+//                 nodes: [
+//                   {
+//                     object: 'text',
+//                     leaves: [{ object: 'leaf', text: 'Link', marks: [] }],
+//                   },
+//                 ],
+//               },
+//               {
+//                 object: 'text',
+//                 leaves: [{ object: 'leaf', text: '.', marks: [] }],
+//               },
+//             ],
+//           },
+//           {
+//             object: 'block',
+//             type: 'list',
+//             data: {},
+//             nodes: [
+//               {
+//                 object: 'block',
+//                 type: 'listItem',
+//                 data: {},
+//                 nodes: [
+//                   {
+//                     object: 'text',
+//                     leaves: [{ object: 'leaf', text: 'jedna', marks: [] }],
+//                   },
+//                 ],
+//               },
+//               {
+//                 object: 'block',
+//                 type: 'listItem',
+//                 data: {},
+//                 nodes: [
+//                   {
+//                     object: 'text',
+//                     leaves: [{ object: 'leaf', text: 'dve', marks: [] }],
+//                   },
+//                 ],
+//               },
+//             ],
+//           },
+//           {
+//             object: 'block',
+//             type: 'text',
+//             data: {},
+//             nodes: [
+//               {
+//                 object: 'text',
+//                 leaves: [{ object: 'leaf', text: 'Footer', marks: [] }],
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// };
+//
+// const flat = [];
+//
+// const walk = (object: Object, path: Array<number>) => {
+//   const { nodes, leaves, ...rest } = object;
+//   flat.push({
+//     ...rest,
+//     path: path.join(''),
+//   });
+//   const children: ?Array<Object> = nodes || leaves;
+//   if (!Array.isArray(children)) return;
+//   children.forEach((child, index) => {
+//     walk(child, path.concat(index));
+//   });
+// };
+//
+// walk(slateValue.document, [1]);
+// console.log(JSON.stringify(flat, null, 2));
+
 export type EditorAction =
   | {| type: 'BOLD' |}
   | {| type: 'ITALIC' |}
@@ -166,6 +321,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     super(props);
     const { page } = this.props.data;
     const json = (page && page.content) || defaultValue;
+    // console.log(JSON.stringify(json));
     // console.log(json);
     // Resets Slate's internal key generating function to its default state.
     // This is useful for server-side rendering.
