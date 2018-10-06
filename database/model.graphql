@@ -1,64 +1,66 @@
 # https://github.com/este/este/wiki/GraphQL
 # https://www.prisma.io/features/data-modeling/
 
+# Prisma does not support interfaces nor union types yet, so we emulate it via
+# storing all data with optional type-specific fields under one type.
+# https://itnext.io/graphql-interfaces-and-union-types-with-prisma-and-yoga-7224f9e1d9ad
+# Sort: id, key, foreign keys, props.
+# TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
+# As for responsive stuff, probably via fontSizeResponsive etc. props. Idk yet.
+
 type User {
   id: ID! @unique
+  webs: [Web!]!
+  pages: [Page!]!
   createdAt: DateTime!
   updatedAt: DateTime!
-  # TODO: Refactor to auth providers. Email passwordless, Facebook, Twitter...
   email: String! @unique
   password: String!
   themeName: String
-  webs: [Web!]!
-  pages: [Page!]!
-  # images: [Image!]!
 }
 
 type Web {
   id: ID! @unique
+  creator: User!
+  pages: [Page!]! @relation(name: "WebPages")
+  styles: [Style!]! @relation(name: "WebStyles")
+  dimensionValues: [DimensionValue!]! @relation(name: "WebDimensionValues")
+  colorValues: [ColorValue!]! @relation(name: "WebColorValues")
   createdAt: DateTime!
   updatedAt: DateTime!
-  creator: User!
   name: String!
-  pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
-  # colors: [Color!]! @relation(name: "WebColors", onDelete: CASCADE)
 }
 
 type Page {
   id: ID! @unique
+  creator: User!
+  web: Web! @relation(name: "WebPages")
+  elements: [Element!]! @relation(name: "PageElements")
   createdAt: DateTime!
   updatedAt: DateTime!
-  creator: User!
   title: String!
-  web: Web! @relation(name: "WebPages")
   content: Json
-  elements: [Element!]! @relation(name: "PageElements", onDelete: CASCADE)
 }
 
-# Element is value object representing Slate node.
-# Prisma does not support interfaces nor unions yet, so we emulate it.
+# The sane DOM. Slate.js DOM.
 # Tree structure is defined with path prop as a scalar list, because
 # Parent/children relation is hard to implement fast and easy to manipulate.
 # Path prop is non-relational but that's fine, because it's nondestructive.
-# https://itnext.io/graphql-interfaces-and-union-types-with-prisma-and-yoga-7224f9e1d9ad
+# Server API must ensure:
+#   - correct paths
+#   - Slate model https://docs.slatejs.org/guides/data-model#documents-and-nodes
 # https://medium.com/@dan_abramov/react-components-elements-and-instances-90800811f8ca
 # http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
 # https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
 type Element {
   id: ID! @unique
-  type: ElementType! @default(value: "BLOCK")
-  # Every element belong to one page.
   page: Page! @relation(name: "PageElements")
-  # Instead of scalar list path, we could have index and parent/children
-  # relations, but that's hard to implement fast and easy to manipulate.
-  # https://gist.github.com/steida/1711f61399ca98c230916d5b0a3a256f
-  # index: Int!
-  # parent: Element @relation(name: "ElementParentChildren", onDelete: CASCADE)
-  # children: [Element!]! @relation(name: "ElementParentChildren")
+  type: ElementType
   path: [Int!]!
-
-  # TODO: slate props, props, style, component.
-  # leaves: [{ object: 'leaf', text: '', marks: [] }],
+  # TODO:
+  #   object: document | block | inline | text | leaf
+  #   type: view | headingOne |
+  #   data: { style }
 }
 
 enum ElementType {
@@ -67,31 +69,307 @@ enum ElementType {
   TEXT
 }
 
-# How granular we want to go?
-# type NodeStyleValue {
-#   value: string
-#   units: NodeStyleUnit
-# }
-#
-# type NodeStyle {
-#   backgroundColor: NodeStyleValue
-#   flex: Number
-# }
-#
-# type Color {
-#   id: ID! @unique
-#   web: Web! @relation(name: "WebColors", )
-#   name: String!
-#   # css value
-#   value: String!
-# }
-#
-# type Image {
-#   id: ID! @unique
-#   createdAt: DateTime!
-#   updatedAt: DateTime!
-#   src: String!
-#   width: Int!
-#   height: Int!
-#   creator: User!
-# }
+# The sane CSS. React Native CSS.
+# TODO: Add browser only stuff.
+# https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
+# Server API must ensure:
+#   - type view not having text styles
+type Style {
+  id: ID! @unique
+  web: Web! @relation(name: "WebStyles")
+  type: StyleType!
+  name: String
+  # View
+  display: StyleDisplay
+  width: DimensionValue @relation(name: "StyleWidth")
+  height: DimensionValue @relation(name: "StyleHeight")
+  bottom: DimensionValue @relation(name: "StyleBottom")
+  end: DimensionValue @relation(name: "StyleEnd")
+  left: DimensionValue @relation(name: "StyleLeft")
+  right: DimensionValue @relation(name: "StyleRight")
+  start: DimensionValue @relation(name: "StyleStart")
+  top: DimensionValue @relation(name: "StyleTop")
+  minWidth: DimensionValue @relation(name: "StyleMinWidth")
+  maxWidth: DimensionValue @relation(name: "StyleMaxWidth")
+  minHeight: DimensionValue @relation(name: "StyleMinHeight")
+  maxHeight: DimensionValue @relation(name: "StyleMaxHeight")
+  margin: DimensionValue @relation(name: "StyleMargin")
+  marginBottom: DimensionValue @relation(name: "StyleMarginBottom")
+  marginEnd: DimensionValue @relation(name: "StyleMarginEnd")
+  marginHorizontal: DimensionValue @relation(name: "StyleMarginHorizontal")
+  marginLeft: DimensionValue @relation(name: "StyleMarginLeft")
+  marginRight: DimensionValue @relation(name: "StyleMarginRight")
+  marginStart: DimensionValue @relation(name: "StyleMarginStart")
+  marginTop: DimensionValue @relation(name: "StyleMarginTop")
+  marginVertical: DimensionValue @relation(name: "StyleMarginVertical")
+  padding: DimensionValue @relation(name: "StylePadding")
+  paddingBottom: DimensionValue @relation(name: "StylePaddingBottom")
+  paddingEnd: DimensionValue @relation(name: "StylePaddingEnd")
+  paddingHorizontal: DimensionValue @relation(name: "StylePaddingHorizontal")
+  paddingLeft: DimensionValue @relation(name: "StylePaddingLeft")
+  paddingRight: DimensionValue @relation(name: "StylePaddingRight")
+  paddingStart: DimensionValue @relation(name: "StylePaddingStart")
+  paddingTop: DimensionValue @relation(name: "StylePaddingTop")
+  paddingVertical: DimensionValue @relation(name: "StylePaddingVertical")
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  # flexBasis can be number or 'auto', but Prisma doesn't support union types
+  # yet. Therefore, -1 is considered to be 'auto'.
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  # TODO: Probably one object instead of array.
+  # transform: []
+  shadowColor: ColorValue @relation(name: "StyleShadowColor")
+  shadowOffset: StyleShadowOffset
+    @relation(name: "StyleShadowOffset", onDelete: CASCADE)
+  shadowOpacity: Int
+  shadowRadius: Int
+  backgroundColor: ColorValue @relation(name: "StyleBackgroundColor")
+  borderColor: ColorValue @relation(name: "StyleBorderColor")
+  borderBottomColor: ColorValue @relation(name: "StyleBorderBottomColor")
+  borderEndColor: ColorValue @relation(name: "StyleBorderEndColor")
+  borderLeftColor: ColorValue @relation(name: "StyleBorderLeftColor")
+  borderRightColor: ColorValue @relation(name: "StyleBorderRightColor")
+  borderStartColor: ColorValue @relation(name: "StyleBorderStartColor")
+  borderTopColor: ColorValue @relation(name: "StyleBorderTopColor")
+  # Value objects (without ID so it can't be reused) can be CASCADE deleted.
+  borderRadius: BorderValue
+    @relation(name: "StyleBorderRadius", onDelete: CASCADE)
+  borderBottomEndRadius: BorderValue
+    @relation(name: "StyleBorderBottomEndRadius", onDelete: CASCADE)
+  borderBottomLeftRadius: BorderValue
+    @relation(name: "StyleBorderBottomLeftRadius", onDelete: CASCADE)
+  borderBottomRightRadius: BorderValue
+    @relation(name: "StyleBorderBottomRightRadius", onDelete: CASCADE)
+  borderBottomStartRadius: BorderValue
+    @relation(name: "StyleBorderBottomStartRadius", onDelete: CASCADE)
+  borderTopEndRadius: BorderValue
+    @relation(name: "StyleBorderTopEndRadius", onDelete: CASCADE)
+  borderTopLeftRadius: BorderValue
+    @relation(name: "StyleBorderTopLeftRadius", onDelete: CASCADE)
+  borderTopRightRadius: BorderValue
+    @relation(name: "StyleBorderTopRightRadius", onDelete: CASCADE)
+  borderTopStartRadius: BorderValue
+    @relation(name: "StyleBorderTopStartRadius", onDelete: CASCADE)
+  borderStyle: StyleBorderStyle
+  borderWidth: BorderValue
+    @relation(name: "StyleBorderWidth", onDelete: CASCADE)
+  borderBottomWidth: BorderValue
+    @relation(name: "StyleBorderBottomWidth", onDelete: CASCADE)
+  borderEndWidth: BorderValue
+    @relation(name: "StyleBorderEndWidth", onDelete: CASCADE)
+  borderLeftWidth: BorderValue
+    @relation(name: "StyleBorderLeftWidth", onDelete: CASCADE)
+  borderRightWidth: BorderValue
+    @relation(name: "StyleBorderRightWidth", onDelete: CASCADE)
+  borderStartWidth: BorderValue
+    @relation(name: "StyleBorderStartWidth", onDelete: CASCADE)
+  borderTopWidth: BorderValue
+    @relation(name: "StyleBorderTopWidth", onDelete: CASCADE)
+  opacity: Int
+  # Text
+  color: ColorValue @relation(name: "StyleColor")
+  # String, because fontFamily belongs to component style I suppose.
+  fontFamily: String
+  # Int, because fontFamily belongs to component style I suppose.
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  # TODO: Rethink if we need it and how.
+  # textShadowOffset?: $ReadOnly<{|
+  #   width: number,
+  #   height: number,
+  # |}>,
+  # textShadowRadius?: number,
+  # textShadowColor?: ColorValue,
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+}
+
+enum StyleType {
+  VIEW
+  TEXT
+}
+
+enum StyleDisplay {
+  NONE
+  FLEX
+}
+
+type DimensionValue {
+  id: ID! @unique
+  web: Web! @relation(name: "WebDimensionValues")
+  name: String
+  unit: DimensionValueUnit!
+  value: Int!
+}
+
+enum DimensionValueUnit {
+  POINT
+  PERCENTAGE
+}
+
+enum StylePosition {
+  ABSOLUTE
+  RELATIVE
+}
+
+enum StyleFlexDirection {
+  ROW
+  ROW_REVERSE
+  COLUMN
+  COLUMN_REVERSE
+}
+
+enum StyleFlexWrap {
+  WRAP
+  NOWRAP
+  WRAP_REVERSE
+}
+
+enum StyleJustifyContent {
+  FLEX_START
+  FLEX_END
+  CENTER
+  SPACE_BETWEEN
+  SPACE_AROUND
+  SPACE_EVENLY
+}
+
+enum StyleAlignItems {
+  FLEX_START
+  FLEX_END
+  CENTER
+  STRETCH
+  BASELINE
+}
+
+enum StyleAlignSelf {
+  AUTO
+  FLEX_START
+  FLEX_END
+  CENTER
+  STRETCH
+  BASELINE
+}
+
+enum StyleAlignContent {
+  FLEX_START
+  FLEX_END
+  CENTER
+  STRETCH
+  SPACE_BETWEEN
+  SPACE_AROUND
+}
+
+enum StyleOverflow {
+  VISIBLE
+  HIDDEN
+  SCROLL
+}
+
+enum StyleDirection {
+  INHERIT
+  LTR
+  RTL
+}
+
+type ColorValue {
+  id: ID! @unique
+  web: Web! @relation(name: "WebColorValues")
+  name: String
+  r: Int!
+  g: Int!
+  b: Int!
+  a: Float
+}
+
+# Value object.
+type StyleShadowOffset {
+  width: Int!
+  height: Int!
+}
+
+enum StyleBorderStyle {
+  SOLID
+  DOTTED
+  DASHED
+}
+
+# Value object.
+type BorderValue {
+  unit: BorderValueUnit!
+  value: Int!
+}
+
+enum BorderValueUnit {
+  POINT
+}
+
+enum StyleFontStyle {
+  NORMAL
+  ITALIC
+}
+
+enum StyleFontWeight {
+  NORMAL
+  BOLD
+  # Integers must be prefixed.
+  INT_100
+  INT_200
+  INT_300
+  INT_400
+  INT_500
+  INT_600
+  INT_700
+  INT_800
+  INT_900
+}
+
+enum StyleFontVariant {
+  SMALL_CAPS
+}
+
+enum StyleTextAlign {
+  AUTO
+  LEFT
+  RIGHT
+  CENTER
+  JUSTIFY
+}
+
+enum StyleTextAlignVertical {
+  AUTO
+  TOP
+  BOTTOM
+  CENTER
+}
+
+enum StyleTextDecorationLine {
+  NONE
+  UNDERLINE
+  LINE_THROUGH
+  UNDERLINE_LINE_THROUGH
+}
+
+enum StyleTextTransform {
+  NONE
+  CAPITALIZE
+  UPPERCASE
+  LOWERCASE
+}
