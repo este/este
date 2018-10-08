@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Oct 06 2018 23:20:56 GMT+0200 (Central European Summer Time)
+# timestamp: Tue Oct 09 2018 00:44:37 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -466,20 +466,23 @@ input DimensionValueWhereInput {
 
 type Element implements Node {
   id: ID!
+  creator(where: UserWhereInput): User!
   page(where: PageWhereInput): Page!
-  type: ElementType
+  createdAt: DateTime!
   path: [Int!]!
+  type: ElementType
+  style(where: StyleWhereInput): Style
 }
 
 enum ElementOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
   type_ASC
   type_DESC
   updatedAt_ASC
   updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 enum ElementType {
@@ -537,6 +540,28 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   type: ElementType
 
   """All values that are not equal to given value."""
@@ -547,7 +572,9 @@ input ElementWhereInput {
 
   """All values that are not contained in given list."""
   type_not_in: [ElementType!]
+  creator: UserWhereInput
   page: PageWhereInput
+  style: StyleWhereInput
 }
 
 enum EmailError {

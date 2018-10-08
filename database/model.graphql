@@ -1,17 +1,13 @@
-# https://github.com/este/este/wiki/GraphQL
-# https://www.prisma.io/features/data-modeling/
-
-# Prisma does not support interfaces nor union types yet, so we emulate it via
-# storing all data with optional type-specific fields under one type.
-# https://itnext.io/graphql-interfaces-and-union-types-with-prisma-and-yoga-7224f9e1d9ad
-# Sort: id, key, foreign keys, props.
+# Prisma does not support interfaces nor union types yet, so we emulate it.
 # TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
-# As for responsive stuff, probably via fontSizeResponsive etc. props. Idk yet.
 
 type User {
   id: ID! @unique
   webs: [Web!]!
   pages: [Page!]!
+  # TODO:
+  # components:
+  # styles:
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String! @unique
@@ -23,6 +19,7 @@ type Web {
   id: ID! @unique
   creator: User!
   pages: [Page!]! @relation(name: "WebPages")
+  # components: [Component!]! @relation(name: "WebComponents")
   styles: [Style!]! @relation(name: "WebStyles")
   dimensionValues: [DimensionValue!]! @relation(name: "WebDimensionValues")
   colorValues: [ColorValue!]! @relation(name: "WebColorValues")
@@ -35,28 +32,39 @@ type Page {
   id: ID! @unique
   creator: User!
   web: Web! @relation(name: "WebPages")
-  elements: [Element!]! @relation(name: "PageElements")
+  document: Document
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
+  # TODO: Replace with document.
   content: Json
 }
 
 # The sane DOM. Slate.js DOM.
-# Tree structure is defined with path prop as a scalar list, because
-# Parent/children relation is hard to implement fast and easy to manipulate.
-# Path prop is non-relational but that's fine, because it's nondestructive.
 # Server API must ensure:
-#   - correct paths
+#   - path
 #   - Slate model https://docs.slatejs.org/guides/data-model#documents-and-nodes
-# https://medium.com/@dan_abramov/react-components-elements-and-instances-90800811f8ca
-# http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
-# https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
+
+# TODO: Add creator, createdAt, updatedAt
+type Document {
+  id: ID! @unique
+  elements: [Element!]! @relation(name: "DocumentElements")
+}
+
+# TODO: Add creator, createdAt, updatedAt
 type Element {
   id: ID! @unique
-  page: Page! @relation(name: "PageElements")
-  type: ElementType
+  document: Document! @relation(name: "DocumentElements")
+  component: Component @relation(name: "ElementComponent")
+  # Parent/children/order is leaky abstraction and hard to use anyway.
+  # https://social.msdn.microsoft.com/Forums/sqlserver/en-US/f686ccb9-e936-4cfd-af6a-a52a0ed56b26/does-a-nested-set-model-defy-normalization?forum=databasedesign
+  # https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
+  # https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
+  # http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
+  # Materialized path seems to be the most efficient for now.
   path: [Int!]!
+  type: ElementType
+  style: Style @relation(name: "ElementStyle", onDelete: CASCADE)
   # TODO:
   #   object: document | block | inline | text | leaf
   #   type: view | headingOne |
@@ -69,6 +77,16 @@ enum ElementType {
   TEXT
 }
 
+# TODO: Add creator, createdAt, updatedAt
+type Component {
+  id: ID! @unique
+  web: Web! @relation(name: "WebComponents")
+  document: Document
+  # # 'view' 'text' 'headingOne' 'headingTwo' 'blockquote' 'list'
+  name: String!
+  style: Style
+}
+
 # The sane CSS. React Native CSS.
 # TODO: Add browser only stuff.
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
@@ -77,6 +95,7 @@ enum ElementType {
 type Style {
   id: ID! @unique
   web: Web! @relation(name: "WebStyles")
+  # element: Element @relation(name: "ElementStyle")
   type: StyleType!
   name: String
   # View
@@ -183,6 +202,7 @@ type Style {
   fontFamily: String
   # Int, because fontFamily belongs to component style I suppose.
   fontSize: Int
+  # As for responsive stuff, probably via fontSizeResponsive etc. props. Idk yet.
   fontStyle: StyleFontStyle
   fontWeight: StyleFontWeight
   fontVariant: StyleFontVariant
@@ -329,7 +349,7 @@ enum StyleFontStyle {
 enum StyleFontWeight {
   NORMAL
   BOLD
-  # Integers must be prefixed.
+  # Integers must be prefixed to be valid GraphQL enum value.
   INT_100
   INT_200
   INT_300
