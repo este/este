@@ -1,5 +1,5 @@
-// flow-typed signature: 5488916cf6615b5e047646204ddb2d5f
-// flow-typed version: 6ec0f07f88/ramda_v0.x.x/flow_>=v0.62.x
+// flow-typed signature: 86952096cac7ff183a1f53d103b5b6d2
+// flow-typed version: 806305bf5c/ramda_v0.x.x/flow_>=v0.82.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -1410,7 +1410,7 @@ declare module ramda {
   declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
     (<A, B>(a: A) => (b: B) => B & A);
 
-  declare type MergeWith = (<A: { [k: string]: T }, B: { [k: string]: T }, T>(
+  declare type MergeWith = (<A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
     fn: (a: T, b: T) => T,
     a: A,
     b: B
@@ -1428,21 +1428,21 @@ declare module ramda {
 
   declare type MergeWithKey = (<
     S: string,
-    A: { [k: string]: T },
-    B: { [k: string]: T },
+    A: { [k: string]: mixed },
+    B: { [k: string]: mixed },
     T
   >(
     fn: (s: S, a: T, b: T) => T,
     a: A,
     b: B
   ) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A, b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A) => (b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
       fn: (s: S, a: T, b: T) => T,
       a: A,
     ) => (b: B) => A & B);
