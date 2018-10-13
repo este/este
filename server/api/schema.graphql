@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Tue Oct 09 2018 00:44:37 GMT+0200 (Central European Summer Time)
+# timestamp: Sat Oct 13 2018 23:24:15 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -72,7 +72,7 @@ input BorderValueWhereInput {
 
 type ColorValue implements Node {
   id: ID!
-  web(where: WebWhereInput): Web!
+  web: Web!
   name: String
   r: Int!
   g: Int!
@@ -314,7 +314,7 @@ type DeleteWebPayload {
 
 type DimensionValue implements Node {
   id: ID!
-  web(where: WebWhereInput): Web!
+  web: Web!
   name: String
   unit: DimensionValueUnit!
   value: Int!
@@ -464,42 +464,19 @@ input DimensionValueWhereInput {
   web: WebWhereInput
 }
 
-type Element implements Node {
+type Document implements Node {
   id: ID!
-  creator(where: UserWhereInput): User!
-  page(where: PageWhereInput): Page!
-  createdAt: DateTime!
-  path: [Int!]!
-  type: ElementType
-  style(where: StyleWhereInput): Style
 }
 
-enum ElementOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  type_ASC
-  type_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-enum ElementType {
-  DOCUMENT
-  BLOCK
-  TEXT
-}
-
-input ElementWhereInput {
+input DocumentWhereInput {
   """Logical AND on all given filters."""
-  AND: [ElementWhereInput!]
+  AND: [DocumentWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ElementWhereInput!]
+  OR: [DocumentWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ElementWhereInput!]
+  NOT: [DocumentWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -540,41 +517,6 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
-  creator: UserWhereInput
-  page: PageWhereInput
-  style: StyleWhereInput
 }
 
 enum EmailError {
@@ -611,13 +553,13 @@ interface Node {
 
 type Page implements Node {
   id: ID!
-  creator(where: UserWhereInput): User!
-  web(where: WebWhereInput): Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  creator: User!
+  web: Web!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
   content: Json
+  document: Document
 }
 
 enum PageOrderByInput {
@@ -768,9 +710,7 @@ input PageWhereInput {
   title_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  document: DocumentWhereInput
 }
 
 enum PasswordError {
@@ -833,40 +773,40 @@ type SetWebNamePayload {
 
 type Style implements Node {
   id: ID!
-  web(where: WebWhereInput): Web!
+  web: Web!
   type: StyleType!
   name: String
   display: StyleDisplay
-  width(where: DimensionValueWhereInput): DimensionValue
-  height(where: DimensionValueWhereInput): DimensionValue
-  bottom(where: DimensionValueWhereInput): DimensionValue
-  end(where: DimensionValueWhereInput): DimensionValue
-  left(where: DimensionValueWhereInput): DimensionValue
-  right(where: DimensionValueWhereInput): DimensionValue
-  start(where: DimensionValueWhereInput): DimensionValue
-  top(where: DimensionValueWhereInput): DimensionValue
-  minWidth(where: DimensionValueWhereInput): DimensionValue
-  maxWidth(where: DimensionValueWhereInput): DimensionValue
-  minHeight(where: DimensionValueWhereInput): DimensionValue
-  maxHeight(where: DimensionValueWhereInput): DimensionValue
-  margin(where: DimensionValueWhereInput): DimensionValue
-  marginBottom(where: DimensionValueWhereInput): DimensionValue
-  marginEnd(where: DimensionValueWhereInput): DimensionValue
-  marginHorizontal(where: DimensionValueWhereInput): DimensionValue
-  marginLeft(where: DimensionValueWhereInput): DimensionValue
-  marginRight(where: DimensionValueWhereInput): DimensionValue
-  marginStart(where: DimensionValueWhereInput): DimensionValue
-  marginTop(where: DimensionValueWhereInput): DimensionValue
-  marginVertical(where: DimensionValueWhereInput): DimensionValue
-  padding(where: DimensionValueWhereInput): DimensionValue
-  paddingBottom(where: DimensionValueWhereInput): DimensionValue
-  paddingEnd(where: DimensionValueWhereInput): DimensionValue
-  paddingHorizontal(where: DimensionValueWhereInput): DimensionValue
-  paddingLeft(where: DimensionValueWhereInput): DimensionValue
-  paddingRight(where: DimensionValueWhereInput): DimensionValue
-  paddingStart(where: DimensionValueWhereInput): DimensionValue
-  paddingTop(where: DimensionValueWhereInput): DimensionValue
-  paddingVertical(where: DimensionValueWhereInput): DimensionValue
+  width: DimensionValue
+  height: DimensionValue
+  bottom: DimensionValue
+  end: DimensionValue
+  left: DimensionValue
+  right: DimensionValue
+  start: DimensionValue
+  top: DimensionValue
+  minWidth: DimensionValue
+  maxWidth: DimensionValue
+  minHeight: DimensionValue
+  maxHeight: DimensionValue
+  margin: DimensionValue
+  marginBottom: DimensionValue
+  marginEnd: DimensionValue
+  marginHorizontal: DimensionValue
+  marginLeft: DimensionValue
+  marginRight: DimensionValue
+  marginStart: DimensionValue
+  marginTop: DimensionValue
+  marginVertical: DimensionValue
+  padding: DimensionValue
+  paddingBottom: DimensionValue
+  paddingEnd: DimensionValue
+  paddingHorizontal: DimensionValue
+  paddingLeft: DimensionValue
+  paddingRight: DimensionValue
+  paddingStart: DimensionValue
+  paddingTop: DimensionValue
+  paddingVertical: DimensionValue
   position: StylePosition
   flexDirection: StyleFlexDirection
   flexWrap: StyleFlexWrap
@@ -881,37 +821,37 @@ type Style implements Node {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowColor(where: ColorValueWhereInput): ColorValue
-  shadowOffset(where: StyleShadowOffsetWhereInput): StyleShadowOffset
+  shadowColor: ColorValue
+  shadowOffset: StyleShadowOffset
   shadowOpacity: Int
   shadowRadius: Int
-  backgroundColor(where: ColorValueWhereInput): ColorValue
-  borderColor(where: ColorValueWhereInput): ColorValue
-  borderBottomColor(where: ColorValueWhereInput): ColorValue
-  borderEndColor(where: ColorValueWhereInput): ColorValue
-  borderLeftColor(where: ColorValueWhereInput): ColorValue
-  borderRightColor(where: ColorValueWhereInput): ColorValue
-  borderStartColor(where: ColorValueWhereInput): ColorValue
-  borderTopColor(where: ColorValueWhereInput): ColorValue
-  borderRadius(where: BorderValueWhereInput): BorderValue
-  borderBottomEndRadius(where: BorderValueWhereInput): BorderValue
-  borderBottomLeftRadius(where: BorderValueWhereInput): BorderValue
-  borderBottomRightRadius(where: BorderValueWhereInput): BorderValue
-  borderBottomStartRadius(where: BorderValueWhereInput): BorderValue
-  borderTopEndRadius(where: BorderValueWhereInput): BorderValue
-  borderTopLeftRadius(where: BorderValueWhereInput): BorderValue
-  borderTopRightRadius(where: BorderValueWhereInput): BorderValue
-  borderTopStartRadius(where: BorderValueWhereInput): BorderValue
+  backgroundColor: ColorValue
+  borderColor: ColorValue
+  borderBottomColor: ColorValue
+  borderEndColor: ColorValue
+  borderLeftColor: ColorValue
+  borderRightColor: ColorValue
+  borderStartColor: ColorValue
+  borderTopColor: ColorValue
+  borderRadius: BorderValue
+  borderBottomEndRadius: BorderValue
+  borderBottomLeftRadius: BorderValue
+  borderBottomRightRadius: BorderValue
+  borderBottomStartRadius: BorderValue
+  borderTopEndRadius: BorderValue
+  borderTopLeftRadius: BorderValue
+  borderTopRightRadius: BorderValue
+  borderTopStartRadius: BorderValue
   borderStyle: StyleBorderStyle
-  borderWidth(where: BorderValueWhereInput): BorderValue
-  borderBottomWidth(where: BorderValueWhereInput): BorderValue
-  borderEndWidth(where: BorderValueWhereInput): BorderValue
-  borderLeftWidth(where: BorderValueWhereInput): BorderValue
-  borderRightWidth(where: BorderValueWhereInput): BorderValue
-  borderStartWidth(where: BorderValueWhereInput): BorderValue
-  borderTopWidth(where: BorderValueWhereInput): BorderValue
+  borderWidth: BorderValue
+  borderBottomWidth: BorderValue
+  borderEndWidth: BorderValue
+  borderLeftWidth: BorderValue
+  borderRightWidth: BorderValue
+  borderStartWidth: BorderValue
+  borderTopWidth: BorderValue
   opacity: Int
-  color(where: ColorValueWhereInput): ColorValue
+  color: ColorValue
   fontFamily: String
   fontSize: Int
   fontStyle: StyleFontStyle
@@ -2046,7 +1986,7 @@ input UserWhereInput {
 
 type Web implements Node {
   id: ID!
-  creator(where: UserWhereInput): User!
+  creator: User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue!]

@@ -5,9 +5,6 @@ type User {
   id: ID! @unique
   webs: [Web!]!
   pages: [Page!]!
-  # TODO:
-  # components:
-  # styles:
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String! @unique
@@ -19,7 +16,8 @@ type Web {
   id: ID! @unique
   creator: User!
   pages: [Page!]! @relation(name: "WebPages")
-  # components: [Component!]! @relation(name: "WebComponents")
+  documents: [Document!]! @relation(name: "WebDocuments")
+  components: [Component!]! @relation(name: "WebComponents")
   styles: [Style!]! @relation(name: "WebStyles")
   dimensionValues: [DimensionValue!]! @relation(name: "WebDimensionValues")
   colorValues: [ColorValue!]! @relation(name: "WebColorValues")
@@ -32,62 +30,59 @@ type Page {
   id: ID! @unique
   creator: User!
   web: Web! @relation(name: "WebPages")
-  document: Document
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  # TODO: Replace with document.
+  # TODO: Remove content, make document required.
   content: Json
+  document: Document @relation(name: "PageDocument")
 }
 
-# The sane DOM. Slate.js DOM.
-# Server API must ensure:
-#   - path
-#   - Slate model https://docs.slatejs.org/guides/data-model#documents-and-nodes
-
-# TODO: Add creator, createdAt, updatedAt
+# Server has to ensure Slate-like model and paths.
 type Document {
   id: ID! @unique
-  elements: [Element!]! @relation(name: "DocumentElements")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  web: Web! @relation(name: "WebDocuments")
+  # We can't name it Node because it's reserved word. Element as React Element.
+  # https://facebook.github.io/relay/graphql/objectidentification.htm#sec-Node-Interface
+  # https://reactjs.org/docs/glossary.html#elements
+  elements: [Element!]! @relation(name: "DocumentElements", onDelete: CASCADE)
 }
 
-# TODO: Add creator, createdAt, updatedAt
 type Element {
   id: ID! @unique
+  type: ElementType!
   document: Document! @relation(name: "DocumentElements")
-  component: Component @relation(name: "ElementComponent")
-  # Parent/children/order is leaky abstraction and hard to use anyway.
+  # Materialized path seems to have the best trade-off.
+  # https://docs.slatejs.org/guides/data-model#documents-and-nodes
+  # https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
   # https://social.msdn.microsoft.com/Forums/sqlserver/en-US/f686ccb9-e936-4cfd-af6a-a52a0ed56b26/does-a-nested-set-model-defy-normalization?forum=databasedesign
   # https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
-  # https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
   # http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
-  # Materialized path seems to be the most efficient for now.
   path: [Int!]!
-  type: ElementType
-  style: Style @relation(name: "ElementStyle", onDelete: CASCADE)
-  # TODO:
-  #   object: document | block | inline | text | leaf
-  #   type: view | headingOne |
-  #   data: { style }
+  component: Component
+  style: Style
 }
 
 enum ElementType {
   DOCUMENT
   BLOCK
+  # INLINE
   TEXT
+  # LEAF
+  # document | block | inline | text | leaf
 }
 
-# TODO: Add creator, createdAt, updatedAt
 type Component {
   id: ID! @unique
   web: Web! @relation(name: "WebComponents")
-  document: Document
-  # # 'view' 'text' 'headingOne' 'headingTwo' 'blockquote' 'list'
   name: String!
-  style: Style
+  document: Document @relation(name: "ComponentDocument")
 }
 
-# The sane CSS. React Native CSS.
+# React Native CSS. We render it with React Native Web. It defines better
+# defaults and is more strict than browser CSS.
 # TODO: Add browser only stuff.
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
 # Server API must ensure:
@@ -95,9 +90,8 @@ type Component {
 type Style {
   id: ID! @unique
   web: Web! @relation(name: "WebStyles")
-  # element: Element @relation(name: "ElementStyle")
   type: StyleType!
-  name: String
+  name: String!
   # View
   display: StyleDisplay
   width: DimensionValue @relation(name: "StyleWidth")
