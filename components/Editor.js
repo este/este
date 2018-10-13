@@ -346,16 +346,16 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
 
   // On space, if it was after an auto-markdown shortcut, convert the current
   // node into the shortcut's corresponding type.
-  handleKeySpace = (event, change) => {
+  handleKeySpace = (event, change, next) => {
     const { value } = change;
     const { selection } = value;
-    if (selection.isExpanded) return;
+    if (selection.isExpanded) return next();
 
     const { startBlock } = value;
     const { start } = selection;
 
     const onlyInlines = startBlock.type === 'listItem';
-    if (onlyInlines) return;
+    if (onlyInlines) return next();
     const chars = startBlock.text.slice(0, start.offset).replace(/\s*/g, '');
 
     // Get the block type for a series of auto-markdown shortcut `chars`.
@@ -366,26 +366,25 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
       '##': 'headingTwo',
     }[chars];
 
-    if (!type) return;
+    if (!type) return next();
     event.preventDefault();
     change.setBlocks(type);
     if (type === 'listItem') {
       change.wrapBlock('list');
     }
     change.moveFocusToStartOfNode(startBlock).delete();
-    return true;
   };
 
   // On backspace, if at the start of a non-text, convert it back into a
   // text node.
-  handleKeyBackspace = (event, change) => {
+  handleKeyBackspace = (event, change, next) => {
     const { value } = change;
     const { selection } = value;
-    if (selection.isExpanded) return;
-    if (selection.start.offset !== 0) return;
+    if (selection.isExpanded) return next();
+    if (selection.start.offset !== 0) return next();
 
     const { startBlock } = value;
-    if (startBlock.type === 'text') return;
+    if (startBlock.type === 'text') return next();
 
     event.preventDefault();
     change.setBlocks('text');
@@ -393,22 +392,19 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (startBlock.type === 'listItem') {
       change.unwrapBlock('list');
     }
-    return true;
   };
 
-  // On return, if at the end of a node type that should not be extended,
-  // create a new text below it.
-  handleKeyEnter = (event, change) => {
+  handleKeyEnter = (event, change, next) => {
     const { value } = change;
     const { selection } = value;
     const { start, end, isExpanded } = selection;
-    if (isExpanded) return;
+    if (isExpanded) return next();
 
     const { startBlock } = value;
     const caretOnEmptyText = start.offset === 0 && startBlock.text.length === 0;
-    if (caretOnEmptyText) return this.handleKeyBackspace(event, change);
+    if (caretOnEmptyText) return this.handleKeyBackspace(event, change, next);
     const caretInsideBlockText = end.offset !== startBlock.text.length;
-    if (caretInsideBlockText) return;
+    if (caretInsideBlockText) return next();
 
     const putParagraphAfter =
       startBlock.type === 'headingOne' ||
@@ -417,25 +413,25 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     if (putParagraphAfter) {
       event.preventDefault();
       change.splitBlock().setBlocks('text');
-      // return true to prevent default behavior
-      return true;
+      return;
     }
+    return next();
   };
 
-  handleEditorKeyDown = (event: KeyboardEvent, change) => {
+  handleEditorKeyDown = (event: KeyboardEvent, change, next) => {
     const { value } = this.state;
     const { mod, alt, key, code } = hotKey(event);
 
     switch (key) {
       case ' ':
-        return this.handleKeySpace(event, change);
+        return this.handleKeySpace(event, change, next);
       case 'Backspace':
-        return this.handleKeyBackspace(event, change);
+        return this.handleKeyBackspace(event, change, next);
       case 'Enter':
-        return this.handleKeyEnter(event, change);
+        return this.handleKeyEnter(event, change, next);
     }
 
-    if (!mod) return;
+    if (!mod) return next();
     switch (key) {
       case 'b':
         this.toggleMark('bold', change);
@@ -445,15 +441,15 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         return;
       case 'k': {
         const { current: editorMenu } = this.editorMenuRef;
-        if (editorMenu == null) return;
-        editorMenu.handleKeyModK(change);
+        if (editorMenu != null) editorMenu.handleKeyModK(change);
         return;
       }
     }
 
-    if (!alt) return;
+    if (!alt) return next();
     const onlyInlines = value.startBlock.type === 'listItem';
-    if (onlyInlines) return;
+    if (onlyInlines) return next();
+
     switch (code) {
       case 49:
         this.toggleBlocks('headingOne', change);
@@ -461,6 +457,8 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
       case 50:
         this.toggleBlocks('headingTwo', change);
         break;
+      default:
+        return next();
     }
   };
 
@@ -548,10 +546,10 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
     }, change);
   }
 
-  renderNode = props => {
+  renderNode = (props, next) => {
     const { attributes, node, children } = props;
     const { styles } = this.props.theme;
-    const type: NodeType = node.type;
+    const type = node.type;
     switch (type) {
       case 'view': {
         const style = node.data.get('style');
@@ -605,15 +603,13 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
         );
       }
       default:
-        // eslint-disable-next-line no-unused-expressions
-        (type: empty);
+        return next();
     }
   };
 
-  renderMark = props => {
+  renderMark = (props, next) => {
     const { children, mark, attributes } = props;
-    const type: MarkType = mark.type;
-    switch (type) {
+    switch (mark.type) {
       case 'bold':
         return (
           <Text bold {...attributes}>
@@ -627,8 +623,7 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
           </Text>
         );
       default:
-        // eslint-disable-next-line no-unused-expressions
-        (type: empty);
+        return next();
     }
   };
 

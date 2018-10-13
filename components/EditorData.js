@@ -52,27 +52,28 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
     return '';
   }
 
-  handleEditorFocus = (event: any, change: Object) => {
+  handleEditorFocus = (event: any, change: any) => {
     // https://github.com/ianstormtaylor/slate/issues/1989
     change.focus();
   };
 
-  handleEditorKeyDown = (event: KeyboardEvent) => {
+  handleEditorKeyDown = (event: KeyboardEvent, change: any, next: any) => {
     const { mod, key } = hotKey(event);
     if (key === 'Enter') {
-      // Do nothing on enter. It's line.
-      event.preventDefault();
-      return true;
+      // Just return. No need to call preventDefault for Slate anymore.
+      return;
     }
-    if (!mod) return;
-    if (key === 'y' || key === 'z') {
-      // Prevent default browser history action.
-      event.preventDefault();
+    if (mod) {
+      if (key === 'y' || key === 'z') {
+        // Prevent default browser history action.
+        event.preventDefault();
+      } else if (key === 'ArrowLeft' || key === 'ArrowRight') {
+        // Prevent default browser history navigation action.
+        event.stopPropagation();
+      }
     }
-    if (key === 'ArrowLeft' || key === 'ArrowRight') {
-      // Prevent default browser history action.
-      event.stopPropagation();
-    }
+    // But we have to call next() to process key.
+    return next();
   };
 
   handleEditorChange = ({ value }: { value: Object }) => {
@@ -105,7 +106,7 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
     }
   };
 
-  handleRenderNode = (props: Object) => {
+  handleRenderNode = (props: Object, next: any) => {
     const { node, attributes, children } = props;
     switch (node.type) {
       case 'line': {
@@ -115,6 +116,8 @@ class EditorData extends React.PureComponent<EditorDataProps, EditorDataState> {
           </Text>
         );
       }
+      default:
+        return next();
     }
   };
 
