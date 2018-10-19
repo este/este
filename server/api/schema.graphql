@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Oct 13 2018 23:24:15 GMT+0200 (Central European Summer Time)
+# timestamp: Fri Oct 19 2018 13:49:37 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -16,58 +16,6 @@ type AuthPayload {
   errors: AuthErrors
   token: String
   user: User
-}
-
-type BorderValue {
-  unit: BorderValueUnit!
-  value: Int!
-}
-
-enum BorderValueUnit {
-  POINT
-}
-
-input BorderValueWhereInput {
-  """Logical AND on all given filters."""
-  AND: [BorderValueWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [BorderValueWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [BorderValueWhereInput!]
-  unit: BorderValueUnit
-
-  """All values that are not equal to given value."""
-  unit_not: BorderValueUnit
-
-  """All values that are contained in given list."""
-  unit_in: [BorderValueUnit!]
-
-  """All values that are not contained in given list."""
-  unit_not_in: [BorderValueUnit!]
-  value: Int
-
-  """All values that are not equal to given value."""
-  value_not: Int
-
-  """All values that are contained in given list."""
-  value_in: [Int!]
-
-  """All values that are not contained in given list."""
-  value_not_in: [Int!]
-
-  """All values less than the given value."""
-  value_lt: Int
-
-  """All values less than or equal the given value."""
-  value_lte: Int
-
-  """All values greater than the given value."""
-  value_gt: Int
-
-  """All values greater than or equal the given value."""
-  value_gte: Int
 }
 
 type ColorValue implements Node {
@@ -279,6 +227,119 @@ input ColorValueWhereInput {
   web: WebWhereInput
 }
 
+type Component implements Node {
+  id: ID!
+  web(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
+  name: String!
+  document: Document
+}
+
+enum ComponentOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ComponentWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  web_every: WebWhereInput
+  web_some: WebWhereInput
+  web_none: WebWhereInput
+  document: DocumentWhereInput
+}
+
 type CreateWebErrors {
   name: Max140CharsError
   pageTitle: Max140CharsError
@@ -466,6 +527,19 @@ input DimensionValueWhereInput {
 
 type Document implements Node {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  web: Web!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+}
+
+enum DocumentOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 input DocumentWhereInput {
@@ -517,6 +591,144 @@ input DocumentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+}
+
+type Element implements Node {
+  id: ID!
+  type: ElementType!
+  document: Document!
+  path: [Int!]!
+  component: Component
+  style: Style
+}
+
+enum ElementOrderByInput {
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum ElementType {
+  DOCUMENT
+  BLOCK
+  TEXT
+}
+
+input ElementWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
+  document: DocumentWhereInput
+  component: ComponentWhereInput
+  style: StyleWhereInput
 }
 
 enum EmailError {
@@ -774,8 +986,10 @@ type SetWebNamePayload {
 type Style implements Node {
   id: ID!
   web: Web!
-  type: StyleType!
-  name: String
+  name: String!
+  children(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
+  parent: Style
+  nextStyle: Style
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -821,10 +1035,6 @@ type Style implements Node {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowColor: ColorValue
-  shadowOffset: StyleShadowOffset
-  shadowOpacity: Int
-  shadowRadius: Int
   backgroundColor: ColorValue
   borderColor: ColorValue
   borderBottomColor: ColorValue
@@ -833,23 +1043,23 @@ type Style implements Node {
   borderRightColor: ColorValue
   borderStartColor: ColorValue
   borderTopColor: ColorValue
-  borderRadius: BorderValue
-  borderBottomEndRadius: BorderValue
-  borderBottomLeftRadius: BorderValue
-  borderBottomRightRadius: BorderValue
-  borderBottomStartRadius: BorderValue
-  borderTopEndRadius: BorderValue
-  borderTopLeftRadius: BorderValue
-  borderTopRightRadius: BorderValue
-  borderTopStartRadius: BorderValue
+  borderRadius: Int
+  borderBottomEndRadius: Int
+  borderBottomLeftRadius: Int
+  borderBottomRightRadius: Int
+  borderBottomStartRadius: Int
+  borderTopEndRadius: Int
+  borderTopLeftRadius: Int
+  borderTopRightRadius: Int
+  borderTopStartRadius: Int
   borderStyle: StyleBorderStyle
-  borderWidth: BorderValue
-  borderBottomWidth: BorderValue
-  borderEndWidth: BorderValue
-  borderLeftWidth: BorderValue
-  borderRightWidth: BorderValue
-  borderStartWidth: BorderValue
-  borderTopWidth: BorderValue
+  borderWidth: Int
+  borderBottomWidth: Int
+  borderEndWidth: Int
+  borderLeftWidth: Int
+  borderRightWidth: Int
+  borderStartWidth: Int
+  borderTopWidth: Int
   opacity: Int
   color: ColorValue
   fontFamily: String
@@ -956,8 +1166,6 @@ enum StyleJustifyContent {
 enum StyleOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   name_ASC
   name_DESC
   display_ASC
@@ -990,12 +1198,40 @@ enum StyleOrderByInput {
   zIndex_DESC
   direction_ASC
   direction_DESC
-  shadowOpacity_ASC
-  shadowOpacity_DESC
-  shadowRadius_ASC
-  shadowRadius_DESC
+  borderRadius_ASC
+  borderRadius_DESC
+  borderBottomEndRadius_ASC
+  borderBottomEndRadius_DESC
+  borderBottomLeftRadius_ASC
+  borderBottomLeftRadius_DESC
+  borderBottomRightRadius_ASC
+  borderBottomRightRadius_DESC
+  borderBottomStartRadius_ASC
+  borderBottomStartRadius_DESC
+  borderTopEndRadius_ASC
+  borderTopEndRadius_DESC
+  borderTopLeftRadius_ASC
+  borderTopLeftRadius_DESC
+  borderTopRightRadius_ASC
+  borderTopRightRadius_DESC
+  borderTopStartRadius_ASC
+  borderTopStartRadius_DESC
   borderStyle_ASC
   borderStyle_DESC
+  borderWidth_ASC
+  borderWidth_DESC
+  borderBottomWidth_ASC
+  borderBottomWidth_DESC
+  borderEndWidth_ASC
+  borderEndWidth_DESC
+  borderLeftWidth_ASC
+  borderLeftWidth_DESC
+  borderRightWidth_ASC
+  borderRightWidth_DESC
+  borderStartWidth_ASC
+  borderStartWidth_DESC
+  borderTopWidth_ASC
+  borderTopWidth_DESC
   opacity_ASC
   opacity_DESC
   fontFamily_ASC
@@ -1037,66 +1273,6 @@ enum StylePosition {
   RELATIVE
 }
 
-type StyleShadowOffset {
-  width: Int!
-  height: Int!
-}
-
-input StyleShadowOffsetWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetWhereInput!]
-  width: Int
-
-  """All values that are not equal to given value."""
-  width_not: Int
-
-  """All values that are contained in given list."""
-  width_in: [Int!]
-
-  """All values that are not contained in given list."""
-  width_not_in: [Int!]
-
-  """All values less than the given value."""
-  width_lt: Int
-
-  """All values less than or equal the given value."""
-  width_lte: Int
-
-  """All values greater than the given value."""
-  width_gt: Int
-
-  """All values greater than or equal the given value."""
-  width_gte: Int
-  height: Int
-
-  """All values that are not equal to given value."""
-  height_not: Int
-
-  """All values that are contained in given list."""
-  height_in: [Int!]
-
-  """All values that are not contained in given list."""
-  height_not_in: [Int!]
-
-  """All values less than the given value."""
-  height_lt: Int
-
-  """All values less than or equal the given value."""
-  height_lte: Int
-
-  """All values greater than the given value."""
-  height_gt: Int
-
-  """All values greater than or equal the given value."""
-  height_gte: Int
-}
-
 enum StyleTextAlign {
   AUTO
   LEFT
@@ -1124,11 +1300,6 @@ enum StyleTextTransform {
   CAPITALIZE
   UPPERCASE
   LOWERCASE
-}
-
-enum StyleType {
-  VIEW
-  TEXT
 }
 
 input StyleWhereInput {
@@ -1180,16 +1351,6 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: StyleType
-
-  """All values that are not equal to given value."""
-  type_not: StyleType
-
-  """All values that are contained in given list."""
-  type_in: [StyleType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [StyleType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -1440,50 +1601,204 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   direction_not_in: [StyleDirection!]
-  shadowOpacity: Int
+  borderRadius: Int
 
   """All values that are not equal to given value."""
-  shadowOpacity_not: Int
+  borderRadius_not: Int
 
   """All values that are contained in given list."""
-  shadowOpacity_in: [Int!]
+  borderRadius_in: [Int!]
 
   """All values that are not contained in given list."""
-  shadowOpacity_not_in: [Int!]
+  borderRadius_not_in: [Int!]
 
   """All values less than the given value."""
-  shadowOpacity_lt: Int
+  borderRadius_lt: Int
 
   """All values less than or equal the given value."""
-  shadowOpacity_lte: Int
+  borderRadius_lte: Int
 
   """All values greater than the given value."""
-  shadowOpacity_gt: Int
+  borderRadius_gt: Int
 
   """All values greater than or equal the given value."""
-  shadowOpacity_gte: Int
-  shadowRadius: Int
+  borderRadius_gte: Int
+  borderBottomEndRadius: Int
 
   """All values that are not equal to given value."""
-  shadowRadius_not: Int
+  borderBottomEndRadius_not: Int
 
   """All values that are contained in given list."""
-  shadowRadius_in: [Int!]
+  borderBottomEndRadius_in: [Int!]
 
   """All values that are not contained in given list."""
-  shadowRadius_not_in: [Int!]
+  borderBottomEndRadius_not_in: [Int!]
 
   """All values less than the given value."""
-  shadowRadius_lt: Int
+  borderBottomEndRadius_lt: Int
 
   """All values less than or equal the given value."""
-  shadowRadius_lte: Int
+  borderBottomEndRadius_lte: Int
 
   """All values greater than the given value."""
-  shadowRadius_gt: Int
+  borderBottomEndRadius_gt: Int
 
   """All values greater than or equal the given value."""
-  shadowRadius_gte: Int
+  borderBottomEndRadius_gte: Int
+  borderBottomLeftRadius: Int
+
+  """All values that are not equal to given value."""
+  borderBottomLeftRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderBottomLeftRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderBottomLeftRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderBottomLeftRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderBottomLeftRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderBottomLeftRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderBottomLeftRadius_gte: Int
+  borderBottomRightRadius: Int
+
+  """All values that are not equal to given value."""
+  borderBottomRightRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderBottomRightRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderBottomRightRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderBottomRightRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderBottomRightRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderBottomRightRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderBottomRightRadius_gte: Int
+  borderBottomStartRadius: Int
+
+  """All values that are not equal to given value."""
+  borderBottomStartRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderBottomStartRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderBottomStartRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderBottomStartRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderBottomStartRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderBottomStartRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderBottomStartRadius_gte: Int
+  borderTopEndRadius: Int
+
+  """All values that are not equal to given value."""
+  borderTopEndRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderTopEndRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderTopEndRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderTopEndRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderTopEndRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderTopEndRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderTopEndRadius_gte: Int
+  borderTopLeftRadius: Int
+
+  """All values that are not equal to given value."""
+  borderTopLeftRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderTopLeftRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderTopLeftRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderTopLeftRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderTopLeftRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderTopLeftRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderTopLeftRadius_gte: Int
+  borderTopRightRadius: Int
+
+  """All values that are not equal to given value."""
+  borderTopRightRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderTopRightRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderTopRightRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderTopRightRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderTopRightRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderTopRightRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderTopRightRadius_gte: Int
+  borderTopStartRadius: Int
+
+  """All values that are not equal to given value."""
+  borderTopStartRadius_not: Int
+
+  """All values that are contained in given list."""
+  borderTopStartRadius_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderTopStartRadius_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderTopStartRadius_lt: Int
+
+  """All values less than or equal the given value."""
+  borderTopStartRadius_lte: Int
+
+  """All values greater than the given value."""
+  borderTopStartRadius_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderTopStartRadius_gte: Int
   borderStyle: StyleBorderStyle
 
   """All values that are not equal to given value."""
@@ -1494,6 +1809,160 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   borderStyle_not_in: [StyleBorderStyle!]
+  borderWidth: Int
+
+  """All values that are not equal to given value."""
+  borderWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderWidth_gte: Int
+  borderBottomWidth: Int
+
+  """All values that are not equal to given value."""
+  borderBottomWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderBottomWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderBottomWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderBottomWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderBottomWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderBottomWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderBottomWidth_gte: Int
+  borderEndWidth: Int
+
+  """All values that are not equal to given value."""
+  borderEndWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderEndWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderEndWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderEndWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderEndWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderEndWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderEndWidth_gte: Int
+  borderLeftWidth: Int
+
+  """All values that are not equal to given value."""
+  borderLeftWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderLeftWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderLeftWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderLeftWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderLeftWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderLeftWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderLeftWidth_gte: Int
+  borderRightWidth: Int
+
+  """All values that are not equal to given value."""
+  borderRightWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderRightWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderRightWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderRightWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderRightWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderRightWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderRightWidth_gte: Int
+  borderStartWidth: Int
+
+  """All values that are not equal to given value."""
+  borderStartWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderStartWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderStartWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderStartWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderStartWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderStartWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderStartWidth_gte: Int
+  borderTopWidth: Int
+
+  """All values that are not equal to given value."""
+  borderTopWidth_not: Int
+
+  """All values that are contained in given list."""
+  borderTopWidth_in: [Int!]
+
+  """All values that are not contained in given list."""
+  borderTopWidth_not_in: [Int!]
+
+  """All values less than the given value."""
+  borderTopWidth_lt: Int
+
+  """All values less than or equal the given value."""
+  borderTopWidth_lte: Int
+
+  """All values greater than the given value."""
+  borderTopWidth_gt: Int
+
+  """All values greater than or equal the given value."""
+  borderTopWidth_gte: Int
   opacity: Int
 
   """All values that are not equal to given value."""
@@ -1693,6 +2162,11 @@ input StyleWhereInput {
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
   web: WebWhereInput
+  children_every: StyleWhereInput
+  children_some: StyleWhereInput
+  children_none: StyleWhereInput
+  parent: StyleWhereInput
+  nextStyle: StyleWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput
@@ -1723,8 +2197,6 @@ input StyleWhereInput {
   paddingStart: DimensionValueWhereInput
   paddingTop: DimensionValueWhereInput
   paddingVertical: DimensionValueWhereInput
-  shadowColor: ColorValueWhereInput
-  shadowOffset: StyleShadowOffsetWhereInput
   backgroundColor: ColorValueWhereInput
   borderColor: ColorValueWhereInput
   borderBottomColor: ColorValueWhereInput
@@ -1733,22 +2205,6 @@ input StyleWhereInput {
   borderRightColor: ColorValueWhereInput
   borderStartColor: ColorValueWhereInput
   borderTopColor: ColorValueWhereInput
-  borderRadius: BorderValueWhereInput
-  borderBottomEndRadius: BorderValueWhereInput
-  borderBottomLeftRadius: BorderValueWhereInput
-  borderBottomRightRadius: BorderValueWhereInput
-  borderBottomStartRadius: BorderValueWhereInput
-  borderTopEndRadius: BorderValueWhereInput
-  borderTopLeftRadius: BorderValueWhereInput
-  borderTopRightRadius: BorderValueWhereInput
-  borderTopStartRadius: BorderValueWhereInput
-  borderWidth: BorderValueWhereInput
-  borderBottomWidth: BorderValueWhereInput
-  borderEndWidth: BorderValueWhereInput
-  borderLeftWidth: BorderValueWhereInput
-  borderRightWidth: BorderValueWhereInput
-  borderStartWidth: BorderValueWhereInput
-  borderTopWidth: BorderValueWhereInput
   color: ColorValueWhereInput
 }
 
@@ -1988,6 +2444,8 @@ type Web implements Node {
   id: ID!
   creator: User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  documents(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Document!]
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue!]
   colorValues(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ColorValue!]
@@ -2144,6 +2602,12 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
+  documents_every: DocumentWhereInput
+  documents_some: DocumentWhereInput
+  documents_none: DocumentWhereInput
+  components_every: ComponentWhereInput
+  components_some: ComponentWhereInput
+  components_none: ComponentWhereInput
   styles_every: StyleWhereInput
   styles_some: StyleWhereInput
   styles_none: StyleWhereInput

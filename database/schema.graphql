@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Oct 13 2018 23:24:07 GMT+0200 (Central European Summer Time)
+# timestamp: Fri Oct 19 2018 13:49:27 GMT+0200 (Central European Summer Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -33,10 +33,6 @@ type AggregateStyle {
   count: Int!
 }
 
-type AggregateStyleShadowOffset {
-  count: Int!
-}
-
 type AggregateUser {
   count: Int!
 }
@@ -50,7 +46,10 @@ type BatchPayload {
   count: Long!
 }
 
-type BorderValue {
+type BorderValue implements Node {
+  id: ID!
+  web: Web!
+  name: String
   unit: BorderValueUnit!
   value: Int!
 }
@@ -66,12 +65,26 @@ type BorderValueConnection {
 }
 
 input BorderValueCreateInput {
+  name: String
   unit: BorderValueUnit!
   value: Int!
+  web: WebCreateOneWithoutBorderValuesInput!
+}
+
+input BorderValueCreateManyWithoutWebInput {
+  create: [BorderValueCreateWithoutWebInput!]
+  connect: [BorderValueWhereUniqueInput!]
 }
 
 input BorderValueCreateOneInput {
   create: BorderValueCreateInput
+  connect: BorderValueWhereUniqueInput
+}
+
+input BorderValueCreateWithoutWebInput {
+  name: String
+  unit: BorderValueUnit!
+  value: Int!
 }
 
 """An edge in a connection."""
@@ -84,12 +97,14 @@ type BorderValueEdge {
 }
 
 enum BorderValueOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
   unit_ASC
   unit_DESC
   value_ASC
   value_DESC
-  id_ASC
-  id_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -97,6 +112,8 @@ enum BorderValueOrderByInput {
 }
 
 type BorderValuePreviousValues {
+  id: ID!
+  name: String
   unit: BorderValueUnit!
   value: Int!
 }
@@ -145,26 +162,57 @@ enum BorderValueUnit {
 }
 
 input BorderValueUpdateDataInput {
+  name: String
   unit: BorderValueUnit
   value: Int
+  web: WebUpdateOneRequiredWithoutBorderValuesInput
 }
 
 input BorderValueUpdateInput {
+  name: String
   unit: BorderValueUnit
   value: Int
+  web: WebUpdateOneRequiredWithoutBorderValuesInput
+}
+
+input BorderValueUpdateManyWithoutWebInput {
+  create: [BorderValueCreateWithoutWebInput!]
+  connect: [BorderValueWhereUniqueInput!]
+  disconnect: [BorderValueWhereUniqueInput!]
+  delete: [BorderValueWhereUniqueInput!]
+  update: [BorderValueUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [BorderValueUpsertWithWhereUniqueWithoutWebInput!]
 }
 
 input BorderValueUpdateOneInput {
   create: BorderValueCreateInput
+  connect: BorderValueWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
   update: BorderValueUpdateDataInput
   upsert: BorderValueUpsertNestedInput
 }
 
+input BorderValueUpdateWithoutWebDataInput {
+  name: String
+  unit: BorderValueUnit
+  value: Int
+}
+
+input BorderValueUpdateWithWhereUniqueWithoutWebInput {
+  where: BorderValueWhereUniqueInput!
+  data: BorderValueUpdateWithoutWebDataInput!
+}
+
 input BorderValueUpsertNestedInput {
   update: BorderValueUpdateDataInput!
   create: BorderValueCreateInput!
+}
+
+input BorderValueUpsertWithWhereUniqueWithoutWebInput {
+  where: BorderValueWhereUniqueInput!
+  update: BorderValueUpdateWithoutWebDataInput!
+  create: BorderValueCreateWithoutWebInput!
 }
 
 input BorderValueWhereInput {
@@ -176,6 +224,86 @@ input BorderValueWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [BorderValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
   unit: BorderValueUnit
 
   """All values that are not equal to given value."""
@@ -208,6 +336,11 @@ input BorderValueWhereInput {
 
   """All values greater than or equal the given value."""
   value_gte: Int
+  web: WebWhereInput
+}
+
+input BorderValueWhereUniqueInput {
+  id: ID
 }
 
 type ColorValue implements Node {
@@ -579,7 +712,7 @@ input ColorValueWhereUniqueInput {
 
 type Component implements Node {
   id: ID!
-  web: Web!
+  web(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
   name: String!
   document: Document
 }
@@ -596,7 +729,7 @@ type ComponentConnection {
 
 input ComponentCreateInput {
   name: String!
-  web: WebCreateOneWithoutComponentsInput!
+  web: WebCreateManyWithoutComponentsInput
   document: DocumentCreateOneInput
 }
 
@@ -681,13 +814,13 @@ input ComponentSubscriptionWhereInput {
 
 input ComponentUpdateDataInput {
   name: String
-  web: WebUpdateOneRequiredWithoutComponentsInput
+  web: WebUpdateManyWithoutComponentsInput
   document: DocumentUpdateOneInput
 }
 
 input ComponentUpdateInput {
   name: String
-  web: WebUpdateOneRequiredWithoutComponentsInput
+  web: WebUpdateManyWithoutComponentsInput
   document: DocumentUpdateOneInput
 }
 
@@ -819,7 +952,9 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  web: WebWhereInput
+  web_every: WebWhereInput
+  web_some: WebWhereInput
+  web_none: WebWhereInput
   document: DocumentWhereInput
 }
 
@@ -1640,7 +1775,6 @@ type Mutation {
   createElement(data: ElementCreateInput!): Element!
   createComponent(data: ComponentCreateInput!): Component!
   createStyle(data: StyleCreateInput!): Style!
-  createStyleShadowOffset(data: StyleShadowOffsetCreateInput!): StyleShadowOffset!
   createDocument(data: DocumentCreateInput!): Document!
   createBorderValue(data: BorderValueCreateInput!): BorderValue!
   createDimensionValue(data: DimensionValueCreateInput!): DimensionValue!
@@ -1652,6 +1786,7 @@ type Mutation {
   updateComponent(data: ComponentUpdateInput!, where: ComponentWhereUniqueInput!): Component
   updateStyle(data: StyleUpdateInput!, where: StyleWhereUniqueInput!): Style
   updateDocument(data: DocumentUpdateInput!, where: DocumentWhereUniqueInput!): Document
+  updateBorderValue(data: BorderValueUpdateInput!, where: BorderValueWhereUniqueInput!): BorderValue
   updateDimensionValue(data: DimensionValueUpdateInput!, where: DimensionValueWhereUniqueInput!): DimensionValue
   updateColorValue(data: ColorValueUpdateInput!, where: ColorValueWhereUniqueInput!): ColorValue
   deleteUser(where: UserWhereUniqueInput!): User
@@ -1661,6 +1796,7 @@ type Mutation {
   deleteComponent(where: ComponentWhereUniqueInput!): Component
   deleteStyle(where: StyleWhereUniqueInput!): Style
   deleteDocument(where: DocumentWhereUniqueInput!): Document
+  deleteBorderValue(where: BorderValueWhereUniqueInput!): BorderValue
   deleteDimensionValue(where: DimensionValueWhereUniqueInput!): DimensionValue
   deleteColorValue(where: ColorValueWhereUniqueInput!): ColorValue
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
@@ -1670,6 +1806,7 @@ type Mutation {
   upsertComponent(where: ComponentWhereUniqueInput!, create: ComponentCreateInput!, update: ComponentUpdateInput!): Component!
   upsertStyle(where: StyleWhereUniqueInput!, create: StyleCreateInput!, update: StyleUpdateInput!): Style!
   upsertDocument(where: DocumentWhereUniqueInput!, create: DocumentCreateInput!, update: DocumentUpdateInput!): Document!
+  upsertBorderValue(where: BorderValueWhereUniqueInput!, create: BorderValueCreateInput!, update: BorderValueUpdateInput!): BorderValue!
   upsertDimensionValue(where: DimensionValueWhereUniqueInput!, create: DimensionValueCreateInput!, update: DimensionValueUpdateInput!): DimensionValue!
   upsertColorValue(where: ColorValueWhereUniqueInput!, create: ColorValueCreateInput!, update: ColorValueUpdateInput!): ColorValue!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
@@ -1678,7 +1815,6 @@ type Mutation {
   updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   updateManyComponents(data: ComponentUpdateInput!, where: ComponentWhereInput): BatchPayload!
   updateManyStyles(data: StyleUpdateInput!, where: StyleWhereInput): BatchPayload!
-  updateManyStyleShadowOffsets(data: StyleShadowOffsetUpdateInput!, where: StyleShadowOffsetWhereInput): BatchPayload!
   updateManyDocuments(data: DocumentUpdateInput!, where: DocumentWhereInput): BatchPayload!
   updateManyBorderValues(data: BorderValueUpdateInput!, where: BorderValueWhereInput): BatchPayload!
   updateManyDimensionValues(data: DimensionValueUpdateInput!, where: DimensionValueWhereInput): BatchPayload!
@@ -1689,7 +1825,6 @@ type Mutation {
   deleteManyElements(where: ElementWhereInput): BatchPayload!
   deleteManyComponents(where: ComponentWhereInput): BatchPayload!
   deleteManyStyles(where: StyleWhereInput): BatchPayload!
-  deleteManyStyleShadowOffsets(where: StyleShadowOffsetWhereInput): BatchPayload!
   deleteManyDocuments(where: DocumentWhereInput): BatchPayload!
   deleteManyBorderValues(where: BorderValueWhereInput): BatchPayload!
   deleteManyDimensionValues(where: DimensionValueWhereInput): BatchPayload!
@@ -2061,7 +2196,6 @@ type Query {
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component]!
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style]!
-  styleShadowOffsets(where: StyleShadowOffsetWhereInput, orderBy: StyleShadowOffsetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleShadowOffset]!
   documents(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Document]!
   borderValues(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BorderValue]!
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue]!
@@ -2073,6 +2207,7 @@ type Query {
   component(where: ComponentWhereUniqueInput!): Component
   style(where: StyleWhereUniqueInput!): Style
   document(where: DocumentWhereUniqueInput!): Document
+  borderValue(where: BorderValueWhereUniqueInput!): BorderValue
   dimensionValue(where: DimensionValueWhereUniqueInput!): DimensionValue
   colorValue(where: ColorValueWhereUniqueInput!): ColorValue
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -2081,7 +2216,6 @@ type Query {
   elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
   componentsConnection(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ComponentConnection!
   stylesConnection(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleConnection!
-  styleShadowOffsetsConnection(where: StyleShadowOffsetWhereInput, orderBy: StyleShadowOffsetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleShadowOffsetConnection!
   documentsConnection(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DocumentConnection!
   borderValuesConnection(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BorderValueConnection!
   dimensionValuesConnection(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DimensionValueConnection!
@@ -2097,8 +2231,10 @@ type Query {
 type Style implements Node {
   id: ID!
   web: Web!
-  type: StyleType!
   name: String!
+  children(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
+  parent: Style
+  nextStyle: Style
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -2144,10 +2280,6 @@ type Style implements Node {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowColor: ColorValue
-  shadowOffset: StyleShadowOffset
-  shadowOpacity: Int
-  shadowRadius: Int
   backgroundColor: ColorValue
   borderColor: ColorValue
   borderBottomColor: ColorValue
@@ -2231,7 +2363,6 @@ type StyleConnection {
 }
 
 input StyleCreateInput {
-  type: StyleType!
   name: String!
   display: StyleDisplay
   position: StylePosition
@@ -2248,8 +2379,6 @@ input StyleCreateInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2264,6 +2393,9 @@ input StyleCreateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebCreateOneWithoutStylesInput!
+  children: StyleCreateManyWithoutParentInput
+  parent: StyleCreateOneWithoutChildrenInput
+  nextStyle: StyleCreateOneInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2294,8 +2426,6 @@ input StyleCreateInput {
   paddingStart: DimensionValueCreateOneInput
   paddingTop: DimensionValueCreateOneInput
   paddingVertical: DimensionValueCreateOneInput
-  shadowColor: ColorValueCreateOneInput
-  shadowOffset: StyleShadowOffsetCreateOneInput
   backgroundColor: ColorValueCreateOneInput
   borderColor: ColorValueCreateOneInput
   borderBottomColor: ColorValueCreateOneInput
@@ -2323,6 +2453,11 @@ input StyleCreateInput {
   color: ColorValueCreateOneInput
 }
 
+input StyleCreateManyWithoutParentInput {
+  create: [StyleCreateWithoutParentInput!]
+  connect: [StyleWhereUniqueInput!]
+}
+
 input StyleCreateManyWithoutWebInput {
   create: [StyleCreateWithoutWebInput!]
   connect: [StyleWhereUniqueInput!]
@@ -2333,8 +2468,12 @@ input StyleCreateOneInput {
   connect: StyleWhereUniqueInput
 }
 
-input StyleCreateWithoutWebInput {
-  type: StyleType!
+input StyleCreateOneWithoutChildrenInput {
+  create: StyleCreateWithoutChildrenInput
+  connect: StyleWhereUniqueInput
+}
+
+input StyleCreateWithoutChildrenInput {
   name: String!
   display: StyleDisplay
   position: StylePosition
@@ -2351,8 +2490,6 @@ input StyleCreateWithoutWebInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2366,6 +2503,9 @@ input StyleCreateWithoutWebInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  web: WebCreateOneWithoutStylesInput!
+  parent: StyleCreateOneWithoutChildrenInput
+  nextStyle: StyleCreateOneInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2396,8 +2536,186 @@ input StyleCreateWithoutWebInput {
   paddingStart: DimensionValueCreateOneInput
   paddingTop: DimensionValueCreateOneInput
   paddingVertical: DimensionValueCreateOneInput
-  shadowColor: ColorValueCreateOneInput
-  shadowOffset: StyleShadowOffsetCreateOneInput
+  backgroundColor: ColorValueCreateOneInput
+  borderColor: ColorValueCreateOneInput
+  borderBottomColor: ColorValueCreateOneInput
+  borderEndColor: ColorValueCreateOneInput
+  borderLeftColor: ColorValueCreateOneInput
+  borderRightColor: ColorValueCreateOneInput
+  borderStartColor: ColorValueCreateOneInput
+  borderTopColor: ColorValueCreateOneInput
+  borderRadius: BorderValueCreateOneInput
+  borderBottomEndRadius: BorderValueCreateOneInput
+  borderBottomLeftRadius: BorderValueCreateOneInput
+  borderBottomRightRadius: BorderValueCreateOneInput
+  borderBottomStartRadius: BorderValueCreateOneInput
+  borderTopEndRadius: BorderValueCreateOneInput
+  borderTopLeftRadius: BorderValueCreateOneInput
+  borderTopRightRadius: BorderValueCreateOneInput
+  borderTopStartRadius: BorderValueCreateOneInput
+  borderWidth: BorderValueCreateOneInput
+  borderBottomWidth: BorderValueCreateOneInput
+  borderEndWidth: BorderValueCreateOneInput
+  borderLeftWidth: BorderValueCreateOneInput
+  borderRightWidth: BorderValueCreateOneInput
+  borderStartWidth: BorderValueCreateOneInput
+  borderTopWidth: BorderValueCreateOneInput
+  color: ColorValueCreateOneInput
+}
+
+input StyleCreateWithoutParentInput {
+  name: String!
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  web: WebCreateOneWithoutStylesInput!
+  children: StyleCreateManyWithoutParentInput
+  nextStyle: StyleCreateOneInput
+  width: DimensionValueCreateOneInput
+  height: DimensionValueCreateOneInput
+  bottom: DimensionValueCreateOneInput
+  end: DimensionValueCreateOneInput
+  left: DimensionValueCreateOneInput
+  right: DimensionValueCreateOneInput
+  start: DimensionValueCreateOneInput
+  top: DimensionValueCreateOneInput
+  minWidth: DimensionValueCreateOneInput
+  maxWidth: DimensionValueCreateOneInput
+  minHeight: DimensionValueCreateOneInput
+  maxHeight: DimensionValueCreateOneInput
+  margin: DimensionValueCreateOneInput
+  marginBottom: DimensionValueCreateOneInput
+  marginEnd: DimensionValueCreateOneInput
+  marginHorizontal: DimensionValueCreateOneInput
+  marginLeft: DimensionValueCreateOneInput
+  marginRight: DimensionValueCreateOneInput
+  marginStart: DimensionValueCreateOneInput
+  marginTop: DimensionValueCreateOneInput
+  marginVertical: DimensionValueCreateOneInput
+  padding: DimensionValueCreateOneInput
+  paddingBottom: DimensionValueCreateOneInput
+  paddingEnd: DimensionValueCreateOneInput
+  paddingHorizontal: DimensionValueCreateOneInput
+  paddingLeft: DimensionValueCreateOneInput
+  paddingRight: DimensionValueCreateOneInput
+  paddingStart: DimensionValueCreateOneInput
+  paddingTop: DimensionValueCreateOneInput
+  paddingVertical: DimensionValueCreateOneInput
+  backgroundColor: ColorValueCreateOneInput
+  borderColor: ColorValueCreateOneInput
+  borderBottomColor: ColorValueCreateOneInput
+  borderEndColor: ColorValueCreateOneInput
+  borderLeftColor: ColorValueCreateOneInput
+  borderRightColor: ColorValueCreateOneInput
+  borderStartColor: ColorValueCreateOneInput
+  borderTopColor: ColorValueCreateOneInput
+  borderRadius: BorderValueCreateOneInput
+  borderBottomEndRadius: BorderValueCreateOneInput
+  borderBottomLeftRadius: BorderValueCreateOneInput
+  borderBottomRightRadius: BorderValueCreateOneInput
+  borderBottomStartRadius: BorderValueCreateOneInput
+  borderTopEndRadius: BorderValueCreateOneInput
+  borderTopLeftRadius: BorderValueCreateOneInput
+  borderTopRightRadius: BorderValueCreateOneInput
+  borderTopStartRadius: BorderValueCreateOneInput
+  borderWidth: BorderValueCreateOneInput
+  borderBottomWidth: BorderValueCreateOneInput
+  borderEndWidth: BorderValueCreateOneInput
+  borderLeftWidth: BorderValueCreateOneInput
+  borderRightWidth: BorderValueCreateOneInput
+  borderStartWidth: BorderValueCreateOneInput
+  borderTopWidth: BorderValueCreateOneInput
+  color: ColorValueCreateOneInput
+}
+
+input StyleCreateWithoutWebInput {
+  name: String!
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  children: StyleCreateManyWithoutParentInput
+  parent: StyleCreateOneWithoutChildrenInput
+  nextStyle: StyleCreateOneInput
+  width: DimensionValueCreateOneInput
+  height: DimensionValueCreateOneInput
+  bottom: DimensionValueCreateOneInput
+  end: DimensionValueCreateOneInput
+  left: DimensionValueCreateOneInput
+  right: DimensionValueCreateOneInput
+  start: DimensionValueCreateOneInput
+  top: DimensionValueCreateOneInput
+  minWidth: DimensionValueCreateOneInput
+  maxWidth: DimensionValueCreateOneInput
+  minHeight: DimensionValueCreateOneInput
+  maxHeight: DimensionValueCreateOneInput
+  margin: DimensionValueCreateOneInput
+  marginBottom: DimensionValueCreateOneInput
+  marginEnd: DimensionValueCreateOneInput
+  marginHorizontal: DimensionValueCreateOneInput
+  marginLeft: DimensionValueCreateOneInput
+  marginRight: DimensionValueCreateOneInput
+  marginStart: DimensionValueCreateOneInput
+  marginTop: DimensionValueCreateOneInput
+  marginVertical: DimensionValueCreateOneInput
+  padding: DimensionValueCreateOneInput
+  paddingBottom: DimensionValueCreateOneInput
+  paddingEnd: DimensionValueCreateOneInput
+  paddingHorizontal: DimensionValueCreateOneInput
+  paddingLeft: DimensionValueCreateOneInput
+  paddingRight: DimensionValueCreateOneInput
+  paddingStart: DimensionValueCreateOneInput
+  paddingTop: DimensionValueCreateOneInput
+  paddingVertical: DimensionValueCreateOneInput
   backgroundColor: ColorValueCreateOneInput
   borderColor: ColorValueCreateOneInput
   borderBottomColor: ColorValueCreateOneInput
@@ -2493,8 +2811,6 @@ enum StyleJustifyContent {
 enum StyleOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   name_ASC
   name_DESC
   display_ASC
@@ -2527,10 +2843,6 @@ enum StyleOrderByInput {
   zIndex_DESC
   direction_ASC
   direction_DESC
-  shadowOpacity_ASC
-  shadowOpacity_DESC
-  shadowRadius_ASC
-  shadowRadius_DESC
   borderStyle_ASC
   borderStyle_DESC
   opacity_ASC
@@ -2576,7 +2888,6 @@ enum StylePosition {
 
 type StylePreviousValues {
   id: ID!
-  type: StyleType!
   name: String!
   display: StyleDisplay
   position: StylePosition
@@ -2593,8 +2904,6 @@ type StylePreviousValues {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2608,174 +2917,6 @@ type StylePreviousValues {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-}
-
-type StyleShadowOffset {
-  width: Int!
-  height: Int!
-}
-
-"""A connection to a list of items."""
-type StyleShadowOffsetConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [StyleShadowOffsetEdge]!
-  aggregate: AggregateStyleShadowOffset!
-}
-
-input StyleShadowOffsetCreateInput {
-  width: Int!
-  height: Int!
-}
-
-input StyleShadowOffsetCreateOneInput {
-  create: StyleShadowOffsetCreateInput
-}
-
-"""An edge in a connection."""
-type StyleShadowOffsetEdge {
-  """The item at the end of the edge."""
-  node: StyleShadowOffset!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum StyleShadowOffsetOrderByInput {
-  width_ASC
-  width_DESC
-  height_ASC
-  height_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type StyleShadowOffsetPreviousValues {
-  width: Int!
-  height: Int!
-}
-
-type StyleShadowOffsetSubscriptionPayload {
-  mutation: MutationType!
-  node: StyleShadowOffset
-  updatedFields: [String!]
-  previousValues: StyleShadowOffsetPreviousValues
-}
-
-input StyleShadowOffsetSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: StyleShadowOffsetWhereInput
-}
-
-input StyleShadowOffsetUpdateDataInput {
-  width: Int
-  height: Int
-}
-
-input StyleShadowOffsetUpdateInput {
-  width: Int
-  height: Int
-}
-
-input StyleShadowOffsetUpdateOneInput {
-  create: StyleShadowOffsetCreateInput
-  disconnect: Boolean
-  delete: Boolean
-  update: StyleShadowOffsetUpdateDataInput
-  upsert: StyleShadowOffsetUpsertNestedInput
-}
-
-input StyleShadowOffsetUpsertNestedInput {
-  update: StyleShadowOffsetUpdateDataInput!
-  create: StyleShadowOffsetCreateInput!
-}
-
-input StyleShadowOffsetWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetWhereInput!]
-  width: Int
-
-  """All values that are not equal to given value."""
-  width_not: Int
-
-  """All values that are contained in given list."""
-  width_in: [Int!]
-
-  """All values that are not contained in given list."""
-  width_not_in: [Int!]
-
-  """All values less than the given value."""
-  width_lt: Int
-
-  """All values less than or equal the given value."""
-  width_lte: Int
-
-  """All values greater than the given value."""
-  width_gt: Int
-
-  """All values greater than or equal the given value."""
-  width_gte: Int
-  height: Int
-
-  """All values that are not equal to given value."""
-  height_not: Int
-
-  """All values that are contained in given list."""
-  height_in: [Int!]
-
-  """All values that are not contained in given list."""
-  height_not_in: [Int!]
-
-  """All values less than the given value."""
-  height_lt: Int
-
-  """All values less than or equal the given value."""
-  height_lte: Int
-
-  """All values greater than the given value."""
-  height_gt: Int
-
-  """All values greater than or equal the given value."""
-  height_gte: Int
 }
 
 type StyleSubscriptionPayload {
@@ -2846,13 +2987,7 @@ enum StyleTextTransform {
   LOWERCASE
 }
 
-enum StyleType {
-  VIEW
-  TEXT
-}
-
 input StyleUpdateDataInput {
-  type: StyleType
   name: String
   display: StyleDisplay
   position: StylePosition
@@ -2869,8 +3004,6 @@ input StyleUpdateDataInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2885,6 +3018,9 @@ input StyleUpdateDataInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
+  children: StyleUpdateManyWithoutParentInput
+  parent: StyleUpdateOneWithoutChildrenInput
+  nextStyle: StyleUpdateOneInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -2915,8 +3051,6 @@ input StyleUpdateDataInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -2945,7 +3079,6 @@ input StyleUpdateDataInput {
 }
 
 input StyleUpdateInput {
-  type: StyleType
   name: String
   display: StyleDisplay
   position: StylePosition
@@ -2962,8 +3095,6 @@ input StyleUpdateInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2978,6 +3109,9 @@ input StyleUpdateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
+  children: StyleUpdateManyWithoutParentInput
+  parent: StyleUpdateOneWithoutChildrenInput
+  nextStyle: StyleUpdateOneInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3008,8 +3142,6 @@ input StyleUpdateInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -3035,6 +3167,15 @@ input StyleUpdateInput {
   borderStartWidth: BorderValueUpdateOneInput
   borderTopWidth: BorderValueUpdateOneInput
   color: ColorValueUpdateOneInput
+}
+
+input StyleUpdateManyWithoutParentInput {
+  create: [StyleCreateWithoutParentInput!]
+  connect: [StyleWhereUniqueInput!]
+  disconnect: [StyleWhereUniqueInput!]
+  delete: [StyleWhereUniqueInput!]
+  update: [StyleUpdateWithWhereUniqueWithoutParentInput!]
+  upsert: [StyleUpsertWithWhereUniqueWithoutParentInput!]
 }
 
 input StyleUpdateManyWithoutWebInput {
@@ -3055,8 +3196,16 @@ input StyleUpdateOneInput {
   upsert: StyleUpsertNestedInput
 }
 
-input StyleUpdateWithoutWebDataInput {
-  type: StyleType
+input StyleUpdateOneWithoutChildrenInput {
+  create: StyleCreateWithoutChildrenInput
+  connect: StyleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: StyleUpdateWithoutChildrenDataInput
+  upsert: StyleUpsertWithoutChildrenInput
+}
+
+input StyleUpdateWithoutChildrenDataInput {
   name: String
   display: StyleDisplay
   position: StylePosition
@@ -3073,8 +3222,6 @@ input StyleUpdateWithoutWebDataInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -3088,6 +3235,9 @@ input StyleUpdateWithoutWebDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  web: WebUpdateOneRequiredWithoutStylesInput
+  parent: StyleUpdateOneWithoutChildrenInput
+  nextStyle: StyleUpdateOneInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3118,8 +3268,6 @@ input StyleUpdateWithoutWebDataInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -3147,6 +3295,191 @@ input StyleUpdateWithoutWebDataInput {
   color: ColorValueUpdateOneInput
 }
 
+input StyleUpdateWithoutParentDataInput {
+  name: String
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  web: WebUpdateOneRequiredWithoutStylesInput
+  children: StyleUpdateManyWithoutParentInput
+  nextStyle: StyleUpdateOneInput
+  width: DimensionValueUpdateOneInput
+  height: DimensionValueUpdateOneInput
+  bottom: DimensionValueUpdateOneInput
+  end: DimensionValueUpdateOneInput
+  left: DimensionValueUpdateOneInput
+  right: DimensionValueUpdateOneInput
+  start: DimensionValueUpdateOneInput
+  top: DimensionValueUpdateOneInput
+  minWidth: DimensionValueUpdateOneInput
+  maxWidth: DimensionValueUpdateOneInput
+  minHeight: DimensionValueUpdateOneInput
+  maxHeight: DimensionValueUpdateOneInput
+  margin: DimensionValueUpdateOneInput
+  marginBottom: DimensionValueUpdateOneInput
+  marginEnd: DimensionValueUpdateOneInput
+  marginHorizontal: DimensionValueUpdateOneInput
+  marginLeft: DimensionValueUpdateOneInput
+  marginRight: DimensionValueUpdateOneInput
+  marginStart: DimensionValueUpdateOneInput
+  marginTop: DimensionValueUpdateOneInput
+  marginVertical: DimensionValueUpdateOneInput
+  padding: DimensionValueUpdateOneInput
+  paddingBottom: DimensionValueUpdateOneInput
+  paddingEnd: DimensionValueUpdateOneInput
+  paddingHorizontal: DimensionValueUpdateOneInput
+  paddingLeft: DimensionValueUpdateOneInput
+  paddingRight: DimensionValueUpdateOneInput
+  paddingStart: DimensionValueUpdateOneInput
+  paddingTop: DimensionValueUpdateOneInput
+  paddingVertical: DimensionValueUpdateOneInput
+  backgroundColor: ColorValueUpdateOneInput
+  borderColor: ColorValueUpdateOneInput
+  borderBottomColor: ColorValueUpdateOneInput
+  borderEndColor: ColorValueUpdateOneInput
+  borderLeftColor: ColorValueUpdateOneInput
+  borderRightColor: ColorValueUpdateOneInput
+  borderStartColor: ColorValueUpdateOneInput
+  borderTopColor: ColorValueUpdateOneInput
+  borderRadius: BorderValueUpdateOneInput
+  borderBottomEndRadius: BorderValueUpdateOneInput
+  borderBottomLeftRadius: BorderValueUpdateOneInput
+  borderBottomRightRadius: BorderValueUpdateOneInput
+  borderBottomStartRadius: BorderValueUpdateOneInput
+  borderTopEndRadius: BorderValueUpdateOneInput
+  borderTopLeftRadius: BorderValueUpdateOneInput
+  borderTopRightRadius: BorderValueUpdateOneInput
+  borderTopStartRadius: BorderValueUpdateOneInput
+  borderWidth: BorderValueUpdateOneInput
+  borderBottomWidth: BorderValueUpdateOneInput
+  borderEndWidth: BorderValueUpdateOneInput
+  borderLeftWidth: BorderValueUpdateOneInput
+  borderRightWidth: BorderValueUpdateOneInput
+  borderStartWidth: BorderValueUpdateOneInput
+  borderTopWidth: BorderValueUpdateOneInput
+  color: ColorValueUpdateOneInput
+}
+
+input StyleUpdateWithoutWebDataInput {
+  name: String
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  children: StyleUpdateManyWithoutParentInput
+  parent: StyleUpdateOneWithoutChildrenInput
+  nextStyle: StyleUpdateOneInput
+  width: DimensionValueUpdateOneInput
+  height: DimensionValueUpdateOneInput
+  bottom: DimensionValueUpdateOneInput
+  end: DimensionValueUpdateOneInput
+  left: DimensionValueUpdateOneInput
+  right: DimensionValueUpdateOneInput
+  start: DimensionValueUpdateOneInput
+  top: DimensionValueUpdateOneInput
+  minWidth: DimensionValueUpdateOneInput
+  maxWidth: DimensionValueUpdateOneInput
+  minHeight: DimensionValueUpdateOneInput
+  maxHeight: DimensionValueUpdateOneInput
+  margin: DimensionValueUpdateOneInput
+  marginBottom: DimensionValueUpdateOneInput
+  marginEnd: DimensionValueUpdateOneInput
+  marginHorizontal: DimensionValueUpdateOneInput
+  marginLeft: DimensionValueUpdateOneInput
+  marginRight: DimensionValueUpdateOneInput
+  marginStart: DimensionValueUpdateOneInput
+  marginTop: DimensionValueUpdateOneInput
+  marginVertical: DimensionValueUpdateOneInput
+  padding: DimensionValueUpdateOneInput
+  paddingBottom: DimensionValueUpdateOneInput
+  paddingEnd: DimensionValueUpdateOneInput
+  paddingHorizontal: DimensionValueUpdateOneInput
+  paddingLeft: DimensionValueUpdateOneInput
+  paddingRight: DimensionValueUpdateOneInput
+  paddingStart: DimensionValueUpdateOneInput
+  paddingTop: DimensionValueUpdateOneInput
+  paddingVertical: DimensionValueUpdateOneInput
+  backgroundColor: ColorValueUpdateOneInput
+  borderColor: ColorValueUpdateOneInput
+  borderBottomColor: ColorValueUpdateOneInput
+  borderEndColor: ColorValueUpdateOneInput
+  borderLeftColor: ColorValueUpdateOneInput
+  borderRightColor: ColorValueUpdateOneInput
+  borderStartColor: ColorValueUpdateOneInput
+  borderTopColor: ColorValueUpdateOneInput
+  borderRadius: BorderValueUpdateOneInput
+  borderBottomEndRadius: BorderValueUpdateOneInput
+  borderBottomLeftRadius: BorderValueUpdateOneInput
+  borderBottomRightRadius: BorderValueUpdateOneInput
+  borderBottomStartRadius: BorderValueUpdateOneInput
+  borderTopEndRadius: BorderValueUpdateOneInput
+  borderTopLeftRadius: BorderValueUpdateOneInput
+  borderTopRightRadius: BorderValueUpdateOneInput
+  borderTopStartRadius: BorderValueUpdateOneInput
+  borderWidth: BorderValueUpdateOneInput
+  borderBottomWidth: BorderValueUpdateOneInput
+  borderEndWidth: BorderValueUpdateOneInput
+  borderLeftWidth: BorderValueUpdateOneInput
+  borderRightWidth: BorderValueUpdateOneInput
+  borderStartWidth: BorderValueUpdateOneInput
+  borderTopWidth: BorderValueUpdateOneInput
+  color: ColorValueUpdateOneInput
+}
+
+input StyleUpdateWithWhereUniqueWithoutParentInput {
+  where: StyleWhereUniqueInput!
+  data: StyleUpdateWithoutParentDataInput!
+}
+
 input StyleUpdateWithWhereUniqueWithoutWebInput {
   where: StyleWhereUniqueInput!
   data: StyleUpdateWithoutWebDataInput!
@@ -3155,6 +3488,17 @@ input StyleUpdateWithWhereUniqueWithoutWebInput {
 input StyleUpsertNestedInput {
   update: StyleUpdateDataInput!
   create: StyleCreateInput!
+}
+
+input StyleUpsertWithoutChildrenInput {
+  update: StyleUpdateWithoutChildrenDataInput!
+  create: StyleCreateWithoutChildrenInput!
+}
+
+input StyleUpsertWithWhereUniqueWithoutParentInput {
+  where: StyleWhereUniqueInput!
+  update: StyleUpdateWithoutParentDataInput!
+  create: StyleCreateWithoutParentInput!
 }
 
 input StyleUpsertWithWhereUniqueWithoutWebInput {
@@ -3212,16 +3556,6 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: StyleType
-
-  """All values that are not equal to given value."""
-  type_not: StyleType
-
-  """All values that are contained in given list."""
-  type_in: [StyleType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [StyleType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -3472,50 +3806,6 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   direction_not_in: [StyleDirection!]
-  shadowOpacity: Int
-
-  """All values that are not equal to given value."""
-  shadowOpacity_not: Int
-
-  """All values that are contained in given list."""
-  shadowOpacity_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowOpacity_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowOpacity_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowOpacity_lte: Int
-
-  """All values greater than the given value."""
-  shadowOpacity_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowOpacity_gte: Int
-  shadowRadius: Int
-
-  """All values that are not equal to given value."""
-  shadowRadius_not: Int
-
-  """All values that are contained in given list."""
-  shadowRadius_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowRadius_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowRadius_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowRadius_lte: Int
-
-  """All values greater than the given value."""
-  shadowRadius_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowRadius_gte: Int
   borderStyle: StyleBorderStyle
 
   """All values that are not equal to given value."""
@@ -3725,6 +4015,11 @@ input StyleWhereInput {
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
   web: WebWhereInput
+  children_every: StyleWhereInput
+  children_some: StyleWhereInput
+  children_none: StyleWhereInput
+  parent: StyleWhereInput
+  nextStyle: StyleWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput
@@ -3755,8 +4050,6 @@ input StyleWhereInput {
   paddingStart: DimensionValueWhereInput
   paddingTop: DimensionValueWhereInput
   paddingVertical: DimensionValueWhereInput
-  shadowColor: ColorValueWhereInput
-  shadowOffset: StyleShadowOffsetWhereInput
   backgroundColor: ColorValueWhereInput
   borderColor: ColorValueWhereInput
   borderBottomColor: ColorValueWhereInput
@@ -3795,7 +4088,6 @@ type Subscription {
   element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
   component(where: ComponentSubscriptionWhereInput): ComponentSubscriptionPayload
   style(where: StyleSubscriptionWhereInput): StyleSubscriptionPayload
-  styleShadowOffset(where: StyleShadowOffsetSubscriptionWhereInput): StyleShadowOffsetSubscriptionPayload
   document(where: DocumentSubscriptionWhereInput): DocumentSubscriptionPayload
   borderValue(where: BorderValueSubscriptionWhereInput): BorderValueSubscriptionPayload
   dimensionValue(where: DimensionValueSubscriptionWhereInput): DimensionValueSubscriptionPayload
@@ -4208,6 +4500,7 @@ type Web implements Node {
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue!]
   colorValues(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ColorValue!]
+  borderValues(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BorderValue!]
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
@@ -4232,6 +4525,12 @@ input WebCreateInput {
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+}
+
+input WebCreateManyWithoutComponentsInput {
+  create: [WebCreateWithoutComponentsInput!]
+  connect: [WebWhereUniqueInput!]
 }
 
 input WebCreateManyWithoutCreatorInput {
@@ -4239,13 +4538,13 @@ input WebCreateManyWithoutCreatorInput {
   connect: [WebWhereUniqueInput!]
 }
 
-input WebCreateOneWithoutColorValuesInput {
-  create: WebCreateWithoutColorValuesInput
+input WebCreateOneWithoutBorderValuesInput {
+  create: WebCreateWithoutBorderValuesInput
   connect: WebWhereUniqueInput
 }
 
-input WebCreateOneWithoutComponentsInput {
-  create: WebCreateWithoutComponentsInput
+input WebCreateOneWithoutColorValuesInput {
+  create: WebCreateWithoutColorValuesInput
   connect: WebWhereUniqueInput
 }
 
@@ -4269,6 +4568,17 @@ input WebCreateOneWithoutStylesInput {
   connect: WebWhereUniqueInput
 }
 
+input WebCreateWithoutBorderValuesInput {
+  name: String!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+  documents: DocumentCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
+  styles: StyleCreateManyWithoutWebInput
+  dimensionValues: DimensionValueCreateManyWithoutWebInput
+  colorValues: ColorValueCreateManyWithoutWebInput
+}
+
 input WebCreateWithoutColorValuesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
@@ -4277,6 +4587,7 @@ input WebCreateWithoutColorValuesInput {
   components: ComponentCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutComponentsInput {
@@ -4287,6 +4598,7 @@ input WebCreateWithoutComponentsInput {
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutCreatorInput {
@@ -4297,6 +4609,7 @@ input WebCreateWithoutCreatorInput {
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutDimensionValuesInput {
@@ -4307,6 +4620,7 @@ input WebCreateWithoutDimensionValuesInput {
   components: ComponentCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutDocumentsInput {
@@ -4317,6 +4631,7 @@ input WebCreateWithoutDocumentsInput {
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
@@ -4327,6 +4642,7 @@ input WebCreateWithoutPagesInput {
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutStylesInput {
@@ -4337,6 +4653,7 @@ input WebCreateWithoutStylesInput {
   components: ComponentCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -4414,6 +4731,16 @@ input WebUpdateInput {
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+}
+
+input WebUpdateManyWithoutComponentsInput {
+  create: [WebCreateWithoutComponentsInput!]
+  connect: [WebWhereUniqueInput!]
+  disconnect: [WebWhereUniqueInput!]
+  delete: [WebWhereUniqueInput!]
+  update: [WebUpdateWithWhereUniqueWithoutComponentsInput!]
+  upsert: [WebUpsertWithWhereUniqueWithoutComponentsInput!]
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -4425,18 +4752,18 @@ input WebUpdateManyWithoutCreatorInput {
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
 }
 
+input WebUpdateOneRequiredWithoutBorderValuesInput {
+  create: WebCreateWithoutBorderValuesInput
+  connect: WebWhereUniqueInput
+  update: WebUpdateWithoutBorderValuesDataInput
+  upsert: WebUpsertWithoutBorderValuesInput
+}
+
 input WebUpdateOneRequiredWithoutColorValuesInput {
   create: WebCreateWithoutColorValuesInput
   connect: WebWhereUniqueInput
   update: WebUpdateWithoutColorValuesDataInput
   upsert: WebUpsertWithoutColorValuesInput
-}
-
-input WebUpdateOneRequiredWithoutComponentsInput {
-  create: WebCreateWithoutComponentsInput
-  connect: WebWhereUniqueInput
-  update: WebUpdateWithoutComponentsDataInput
-  upsert: WebUpsertWithoutComponentsInput
 }
 
 input WebUpdateOneRequiredWithoutDimensionValuesInput {
@@ -4467,6 +4794,17 @@ input WebUpdateOneRequiredWithoutStylesInput {
   upsert: WebUpsertWithoutStylesInput
 }
 
+input WebUpdateWithoutBorderValuesDataInput {
+  name: String
+  creator: UserUpdateOneRequiredWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+  documents: DocumentUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
+  styles: StyleUpdateManyWithoutWebInput
+  dimensionValues: DimensionValueUpdateManyWithoutWebInput
+  colorValues: ColorValueUpdateManyWithoutWebInput
+}
+
 input WebUpdateWithoutColorValuesDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
@@ -4475,6 +4813,7 @@ input WebUpdateWithoutColorValuesDataInput {
   components: ComponentUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutComponentsDataInput {
@@ -4485,6 +4824,7 @@ input WebUpdateWithoutComponentsDataInput {
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutCreatorDataInput {
@@ -4495,6 +4835,7 @@ input WebUpdateWithoutCreatorDataInput {
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutDimensionValuesDataInput {
@@ -4505,6 +4846,7 @@ input WebUpdateWithoutDimensionValuesDataInput {
   components: ComponentUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutDocumentsDataInput {
@@ -4515,6 +4857,7 @@ input WebUpdateWithoutDocumentsDataInput {
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
@@ -4525,6 +4868,7 @@ input WebUpdateWithoutPagesDataInput {
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutStylesDataInput {
@@ -4535,6 +4879,12 @@ input WebUpdateWithoutStylesDataInput {
   components: ComponentUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+}
+
+input WebUpdateWithWhereUniqueWithoutComponentsInput {
+  where: WebWhereUniqueInput!
+  data: WebUpdateWithoutComponentsDataInput!
 }
 
 input WebUpdateWithWhereUniqueWithoutCreatorInput {
@@ -4542,14 +4892,14 @@ input WebUpdateWithWhereUniqueWithoutCreatorInput {
   data: WebUpdateWithoutCreatorDataInput!
 }
 
+input WebUpsertWithoutBorderValuesInput {
+  update: WebUpdateWithoutBorderValuesDataInput!
+  create: WebCreateWithoutBorderValuesInput!
+}
+
 input WebUpsertWithoutColorValuesInput {
   update: WebUpdateWithoutColorValuesDataInput!
   create: WebCreateWithoutColorValuesInput!
-}
-
-input WebUpsertWithoutComponentsInput {
-  update: WebUpdateWithoutComponentsDataInput!
-  create: WebCreateWithoutComponentsInput!
 }
 
 input WebUpsertWithoutDimensionValuesInput {
@@ -4570,6 +4920,12 @@ input WebUpsertWithoutPagesInput {
 input WebUpsertWithoutStylesInput {
   update: WebUpdateWithoutStylesDataInput!
   create: WebCreateWithoutStylesInput!
+}
+
+input WebUpsertWithWhereUniqueWithoutComponentsInput {
+  where: WebWhereUniqueInput!
+  update: WebUpdateWithoutComponentsDataInput!
+  create: WebCreateWithoutComponentsInput!
 }
 
 input WebUpsertWithWhereUniqueWithoutCreatorInput {
@@ -4730,6 +5086,9 @@ input WebWhereInput {
   colorValues_every: ColorValueWhereInput
   colorValues_some: ColorValueWhereInput
   colorValues_none: ColorValueWhereInput
+  borderValues_every: BorderValueWhereInput
+  borderValues_some: BorderValueWhereInput
+  borderValues_none: BorderValueWhereInput
 }
 
 input WebWhereUniqueInput {
