@@ -31,6 +31,7 @@ type DocumentProps = {
   localeDataScript: string,
 };
 
+// $FlowFixMe Wrong libdef.
 export default class MyDocument extends Document {
   static async getInitialProps(
     context: DocumentContext,

@@ -66,8 +66,10 @@ class Auth extends React.PureComponent<AuthProps, AuthState> {
     if (Router.query.redirectUrl) {
       Router.replace(Router.query.redirectUrl);
     } else if (this.props.redirectUrl) {
+      // $FlowFixMe Wrong libdef.
       Router.replace(this.props.redirectUrl);
     } else {
+      // $FlowFixMe Wrong libdef.
       Router.replace({
         pathname: Router.pathname,
         query: Router.query,

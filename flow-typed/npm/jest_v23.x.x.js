@@ -1,5 +1,5 @@
-// flow-typed signature: 691597c4a5aab83a3b2e6d9ccd01a97d
-// flow-typed version: 71534a866d/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: 0f67472200deae3d6dc3a941ed8a54b6
+// flow-typed version: 393032fc51/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -199,9 +199,11 @@ type EnzymeMatchersType = {
   toIncludeText(text: string): void,
   toMatchElement(
     element: React$Element<any>,
-    options?: {| ignoreProps?: boolean |},
+    options?: {| ignoreProps?: boolean, verbose?: boolean |},
   ): void,
-  toMatchSelector(selector: string): void
+  toMatchSelector(selector: string): void,
+  // 7.x
+  toHaveDisplayName(name: string): void,
 };
 
 // DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
@@ -937,10 +939,11 @@ declare var describe: {
    * @param {table} table of Test
    */
   each(
-    table: Array<Array<mixed> | mixed>
+    ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
   ): (
     name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
+    fn?: (...args: Array<any>) => ?Promise<mixed>,
+    timeout?: number
   ) => void,
 };
 
@@ -958,17 +961,7 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
-  /**
-   * each runs this test against array of argument arrays per each run
-   *
-   * @param {table} table of Test
-   */
-  each(
-    table: Array<Array<mixed> | mixed>
-  ): (
-    name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
-  ) => void,
+
   /**
    * Only run this test
    *
@@ -982,12 +975,14 @@ declare var it: {
     timeout?: number
   ): {
     each(
-      table: Array<Array<mixed> | mixed>
+      ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
     ): (
       name: JestTestName,
-      fn?: (...args: Array<any>) => ?Promise<mixed>
+      fn?: (...args: Array<any>) => ?Promise<mixed>,
+      timeout?: number
     ) => void,
   },
+
   /**
    * Skip running this test
    *
@@ -1000,6 +995,7 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
+
   /**
    * Run the test concurrently
    *
@@ -1012,18 +1008,21 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
+
   /**
    * each runs this test against array of argument arrays per each run
    *
    * @param {table} table of Test
    */
   each(
-    table: Array<Array<mixed> | mixed>
+    ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
   ): (
     name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
+    fn?: (...args: Array<any>) => ?Promise<mixed>,
+    timeout?: number
   ) => void,
 };
+
 declare function fit(
   name: JestTestName,
   fn: (done: () => void) => ?Promise<mixed>,

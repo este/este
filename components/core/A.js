@@ -2,7 +2,7 @@
 import * as React from 'react';
 import LocaleLink, { type LocaleLinkBaseProps } from './LocaleLink';
 import Text, { type TextProps } from './Text';
-import { withRouter } from 'next/router';
+import { withRouter, type Router } from 'next/router';
 
 export type AProps = {|
   ...TextProps,
@@ -13,10 +13,7 @@ type AState = {|
   hover: boolean,
 |};
 
-class A extends React.PureComponent<
-  AProps & { router: { pathname: string, query: Object } },
-  AState,
-> {
+class A extends React.PureComponent<AProps & { router: Router }, AState> {
   static isActive(href, router) {
     if (typeof href !== 'object') return false;
     if (typeof href.query !== 'object')

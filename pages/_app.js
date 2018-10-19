@@ -14,6 +14,7 @@ import ErrorContext, {
   type ContextError,
 } from '../components/core/ErrorContext';
 import RelayProvider from '../components/core/RelayProvider';
+// $FlowFixMe Wrong libdef.
 import Error from 'next/error';
 
 type RelayRecords = Object;
@@ -225,6 +226,7 @@ class MyApp extends App {
           <ErrorContext.Provider value={this.state.errorContext}>
             <LocaleContext.Provider value={this.localeContext}>
               <EnvironmentContext.Provider value={environment}>
+                {/* $FlowFixMe Wrong libdef. */}
                 <RelayProvider environment={environment}>
                   <Component data={pageProps.data} />
                 </RelayProvider>

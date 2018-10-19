@@ -1,5 +1,5 @@
-// flow-typed signature: 86952096cac7ff183a1f53d103b5b6d2
-// flow-typed version: 806305bf5c/ramda_v0.x.x/flow_>=v0.82.x
+// flow-typed signature: b7746e34ce08fb368820c628cf462560
+// flow-typed version: 0b401d1dd6/ramda_v0.x.x/flow_>=v0.82.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -755,13 +755,13 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => number;
 
-  declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
-  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
-  declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
   declare function map<T, R>(
     fn: (x: T) => R,
   ): ((xs: { [key: string]: T }) => { [key: string]: R }) &
     ((xs: Array<T>) => Array<R>);
+  declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
+  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
+  declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
   declare function map<T, R, S: { map: Function }>(
     fn: (x: T) => R,
   ): ((xs: S) => S) & ((xs: S) => S);
