@@ -3,7 +3,11 @@
 import * as React from 'react';
 import Button from './core/Button';
 import withTheme, { type Theme } from './core/withTheme';
-import type { MarkType, BlockNodeType, OnEditorAction } from './Editor';
+// import type { MarkType, BlockNodeType, OnEditorAction } from './Editor';
+type MarkType = any;
+type BlockNodeType = any;
+type OnEditorAction = any;
+
 import type { EditorMenuView } from './EditorMenu';
 
 type MenuButtonProps = {|

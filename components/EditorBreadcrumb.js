@@ -7,9 +7,10 @@ import EditorBreadcrumbButton from './EditorBreadcrumbButton';
 import EditorBreadcrumbItem from './EditorBreadcrumbItem';
 import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
 import EditorBreadcrumbDetail from './EditorBreadcrumbDetail';
-import type { OnEditorAction } from './Editor';
 import { pipe } from 'ramda';
 import withRovingTabIndex from './core/withRovingTabIndex';
+// import type { OnEditorAction } from './Editor';
+type OnEditorAction = any;
 
 type EditorBreadcrumbProps = {|
   document: Object,

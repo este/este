@@ -15,7 +15,6 @@ export type Editor = {|
     +id: string,
     +title: string,
     +draftTitle: string,
-    +content: ?any,
   |},
   +$refType: Editor$ref,
 |};
@@ -72,18 +71,11 @@ const node/*: ConcreteFragment*/ = {
           "name": "draftTitle",
           "args": null,
           "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "content",
-          "args": null,
-          "storageKey": null
         }
       ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '82829b0cf724000749738a3d8d849c9a';
+(node/*: any*/).hash = 'a168ad482c43b5cb8d8dd6e32ff6f1c5';
 module.exports = node;

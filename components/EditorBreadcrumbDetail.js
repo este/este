@@ -6,7 +6,8 @@ import { FormattedMessage } from 'react-intl';
 import Row from './core/Row';
 import EditorBreadcrumbButton from './EditorBreadcrumbButton';
 import EditorData from './EditorData';
-import type { OnEditorAction } from './Editor';
+// import type { OnEditorAction } from './Editor';
+type OnEditorAction = any;
 
 type EditorBreadcrumbDetailProps = {|
   node: Object,

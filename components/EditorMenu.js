@@ -8,7 +8,8 @@ import { findDOMNode } from 'slate-react';
 import EditorMenuButtons from './EditorMenuButtons';
 import EditorMenuLink from './EditorMenuLink';
 import EditorMenuLinkPreview from './EditorMenuLinkPreview';
-import type { OnEditorAction } from './Editor';
+// import type { OnEditorAction } from './Editor';
+type OnEditorAction = any;
 
 export type EditorMenuView = null | 'buttons' | 'link' | 'linkPreview';
 
