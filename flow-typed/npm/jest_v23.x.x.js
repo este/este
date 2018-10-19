@@ -1,5 +1,5 @@
-// flow-typed signature: 0f67472200deae3d6dc3a941ed8a54b6
-// flow-typed version: 393032fc51/jest_v23.x.x/flow_>=v0.39.x
+// flow-typed signature: 78c200acffbcc16bba9478f5396c3a00
+// flow-typed version: b2980740dd/jest_v23.x.x/flow_>=v0.39.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -208,9 +208,19 @@ type EnzymeMatchersType = {
 
 // DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
 type DomTestingLibraryType = {
+  toBeDisabled(): void,
+  toBeEmpty(): void,
+  toBeInTheDocument(): void,
+  toBeVisible(): void,
+  toContainElement(element: HTMLElement | null): void,
+  toContainHTML(htmlText: string): void,
+  toHaveAttribute(name: string, expectedValue?: string): void,
+  toHaveClass(...classNames: string[]): void,
+  toHaveFocus(): void,
+  toHaveFormValues(expectedValues: { [name: string]: any }): void,
+  toHaveStyle(css: string): void,
+  toHaveTextContent(content: string | RegExp, options?: { normalizeWhitespace: boolean }): void,
   toBeInTheDOM(): void,
-  toHaveTextContent(content: string): void,
-  toHaveAttribute(name: string, expectedValue?: string): void
 };
 
 // Jest JQuery Matchers: https://github.com/unindented/custom-jquery-matchers
