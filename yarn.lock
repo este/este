@@ -1119,21 +1119,19 @@ acorn-globals@^4.1.0:
     acorn "^6.0.1"
     acorn-walk "^6.0.1"
 
-acorn-jsx@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-4.1.1.tgz#e8e41e48ea2fe0c896740610ab6a4ffd8add225e"
-  dependencies:
-    acorn "^5.0.3"
+acorn-jsx@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.0.0.tgz#958584ddb60990c02c97c1bd9d521fce433bb101"
 
 acorn-walk@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.1.0.tgz#c957f4a1460da46af4a0388ce28b4c99355b0cbc"
 
-acorn@^5.0.0, acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0, acorn@^5.6.2, acorn@^5.7.3:
+acorn@^5.0.0, acorn@^5.5.3, acorn@^5.6.2, acorn@^5.7.3:
   version "5.7.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
 
-acorn@^6.0.1:
+acorn@^6.0.1, acorn@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.0.2.tgz#6a459041c320ab17592c6317abbfdf4bbaa98ca4"
 
@@ -1315,7 +1313,7 @@ apollo-link@1.2.2:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.9"
 
-apollo-link@^1.2.1, apollo-link@^1.2.2:
+apollo-link@^1.2.2, apollo-link@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.3.tgz#9bd8d5fe1d88d31dc91dae9ecc22474d451fb70d"
   dependencies:
@@ -1610,8 +1608,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.341.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.341.0.tgz#56fcbd8d6bbade746c9c781f71df0a99ff0de407"
+  version "2.342.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.342.0.tgz#87566a054db0373221de1c958e1d34db1dcb0818"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -2805,8 +2803,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000898:
-  version "1.0.30000898"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000898.tgz#651306e690ca83caca5814da5afa3eb4de0f86c2"
+  version "1.0.30000899"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000899.tgz#6febdbbc388a7982f620ee0e3d09aab0c061389e"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -3891,8 +3889,8 @@ ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
 electron-to-chromium@^1.3.81:
-  version "1.3.81"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.81.tgz#32af69206ef78973b6a6771b0c8450c2ce253913"
+  version "1.3.82"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.82.tgz#7d13ae4437d2a783de3f4efba96b186c540b67b1"
 
 elliptic@^6.0.0:
   version "6.4.1"
@@ -4204,11 +4202,12 @@ esm@^3.0.71:
   resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.84.tgz#bb108989f4673b32d4f62406869c28eed3815a63"
 
 espree@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-4.0.0.tgz#253998f20a0f82db5d866385799d912a83a36634"
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-4.1.0.tgz#728d5451e0fd156c04384a7ad89ed51ff54eb25f"
   dependencies:
-    acorn "^5.6.0"
-    acorn-jsx "^4.1.1"
+    acorn "^6.0.2"
+    acorn-jsx "^5.0.0"
+    eslint-visitor-keys "^1.0.0"
 
 esprima@^3.1.3:
   version "3.1.3"
@@ -4738,9 +4737,9 @@ flatmap-stream@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/flatmap-stream/-/flatmap-stream-0.1.1.tgz#d34f39ef3b9aa5a2fc225016bd3adf28ac5ae6ea"
 
-flow-bin@^0.83.0:
-  version "0.83.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.83.0.tgz#fd26f5f95758d7701264b3f9a1e1a3d4cbcab1a9"
+flow-bin@^0.84.0:
+  version "0.84.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.84.0.tgz#4cb2364c750fb37a7840524fa62456b53f64cdcb"
 
 flow-remove-types@^1.2.3:
   version "1.2.3"
@@ -5711,10 +5710,10 @@ http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
     statuses ">= 1.4.0 < 2"
 
 http-link-dataloader@^0.1.2, http-link-dataloader@^0.1.4:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/http-link-dataloader/-/http-link-dataloader-0.1.5.tgz#3dca3341e449bf26a44b57222fbb1df986958f7d"
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/http-link-dataloader/-/http-link-dataloader-0.1.6.tgz#ad87d6b5cb6c2745b14b21ffd9cf476c13976c4f"
   dependencies:
-    apollo-link "^1.2.1"
+    apollo-link "^1.2.3"
     cross-fetch "2.2.2"
     dataloader "^1.4.0"
 
@@ -6136,9 +6135,9 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
-is-hotkey@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.3.tgz#8a129eec16f3941bd4f37191e02b9c3e91950549"
+is-hotkey@0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.4.tgz#c34d2c85d6ec8d09a871dcf71931c8067a824c7d"
 
 is-in-browser@^1.1.3:
   version "1.1.3"
@@ -10186,9 +10185,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.73:
-  version "0.2.73"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.73.tgz#5dbcc74978c4c348940df1e1052b75bf84e07cc6"
+slate-base64-serializer@^0.2.74:
+  version "0.2.74"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.74.tgz#292918e6594fc9b1163de5185cc6ed213fb26b57"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10198,24 +10197,24 @@ slate-dev-environment@^0.2.0:
   dependencies:
     is-in-browser "^1.1.3"
 
-slate-hotkeys@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/slate-hotkeys/-/slate-hotkeys-0.2.6.tgz#4ec98d0fc58636ce204c065ddac786e6f944ec68"
+slate-hotkeys@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/slate-hotkeys/-/slate-hotkeys-0.2.7.tgz#a5b613ced4af931b2d74a206f985ee2c63f3b0f9"
   dependencies:
-    is-hotkey "^0.1.3"
+    is-hotkey "0.1.4"
     slate-dev-environment "^0.2.0"
 
-slate-plain-serializer@^0.6.12, slate-plain-serializer@^0.6.2:
-  version "0.6.12"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.12.tgz#cfca849e6fac09d48e61a9d3876e71b9f5a557b1"
+slate-plain-serializer@^0.6.13, slate-plain-serializer@^0.6.2:
+  version "0.6.13"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.13.tgz#2f47760f4b3553116088f0bcf5c8a5ba444c9428"
 
-slate-prop-types@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.3.tgz#f551f8982abe3f9d268b3239d2c49fb289c69035"
+slate-prop-types@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.4.tgz#673b38d723a8a27fa3c42d4d60a57a42683e1b10"
 
 slate-react@^0.19.3:
-  version "0.19.4"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.19.4.tgz#994052e7e0d87e8806b0f66c739e586cd874f270"
+  version "0.19.6"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.19.6.tgz#15161aa9566d0be85ddaf196a18b7e24c5dd298c"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10225,17 +10224,17 @@ slate-react@^0.19.3:
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.73"
+    slate-base64-serializer "^0.2.74"
     slate-dev-environment "^0.2.0"
-    slate-hotkeys "^0.2.6"
-    slate-plain-serializer "^0.6.12"
-    slate-prop-types "^0.5.3"
+    slate-hotkeys "^0.2.7"
+    slate-plain-serializer "^0.6.13"
+    slate-prop-types "^0.5.4"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
 slate@^0.42.2:
-  version "0.42.3"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.42.3.tgz#5f74d4156f58121ca44b782cfa8cb24d4a2e763a"
+  version "0.42.4"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.42.4.tgz#9a8bff08fee94bd156d6f2305dfd675b98dce4bf"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
