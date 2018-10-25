@@ -148,14 +148,22 @@ class Editor extends React.PureComponent<EditorProps, EditorState> {
   render() {
     const { page } = this.props.data;
     if (page == null) return null;
-    // https://github.com/relayjs/eslint-plugin-relay/issues/35
-    // eslint-disable-next-line no-unused-expressions
-    page.title;
+    // tohle nejak do state, ne?
+    // if (
+    //   page == null ||
+    //   page.web.borderValues == null ||
+    //   page.web.colorValues == null ||
+    //   page.web.dimensionValues == null ||
+    //   page.web.elements == null ||
+    //   page.web.styles == null
+    // ) {
+    //   return null;
+    // }
     const { value } = this.state;
 
     return (
       <>
-        <EditorHead title={page.draftTitle} />
+        <EditorHead title={page.title} />
         <SlateEditor
           autoFocus
           autoCorrect={false}
@@ -182,12 +190,248 @@ export default createFragmentContainer(
     fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
       page(id: $id) {
         id
-        title @__clientField(handle: "draft")
-        draftTitle
-        # content
-        # document {
-        #   elements
-        # }
+        title
+        element {
+          id
+        }
+        web {
+          borderValues {
+            id
+            name
+            unit
+            value
+          }
+          colorValues {
+            id
+            name
+            r
+            g
+            b
+            a
+          }
+          dimensionValues {
+            id
+            name
+            unit
+            value
+          }
+          styles {
+            id
+            spreadStyles {
+              id
+              index
+            }
+            nextStyle {
+              id
+            }
+            name
+            display
+            width {
+              id
+            }
+            height {
+              id
+            }
+            bottom {
+              id
+            }
+            end {
+              id
+            }
+            left {
+              id
+            }
+            right {
+              id
+            }
+            start {
+              id
+            }
+            top {
+              id
+            }
+            minWidth {
+              id
+            }
+            maxWidth {
+              id
+            }
+            minHeight {
+              id
+            }
+            maxHeight {
+              id
+            }
+            margin {
+              id
+            }
+            marginBottom {
+              id
+            }
+            marginEnd {
+              id
+            }
+            marginHorizontal {
+              id
+            }
+            marginLeft {
+              id
+            }
+            marginRight {
+              id
+            }
+            marginStart {
+              id
+            }
+            marginTop {
+              id
+            }
+            marginVertical {
+              id
+            }
+            padding {
+              id
+            }
+            paddingBottom {
+              id
+            }
+            paddingEnd {
+              id
+            }
+            paddingHorizontal {
+              id
+            }
+            paddingLeft {
+              id
+            }
+            paddingRight {
+              id
+            }
+            paddingStart {
+              id
+            }
+            paddingTop {
+              id
+            }
+            paddingVertical {
+              id
+            }
+            position
+            flexDirection
+            flexWrap
+            justifyContent
+            alignItems
+            alignSelf
+            alignContent
+            overflow
+            flex
+            flexGrow
+            flexShrink
+            flexBasis
+            zIndex
+            direction
+            backgroundColor {
+              id
+            }
+            borderColor {
+              id
+            }
+            borderBottomColor {
+              id
+            }
+            borderEndColor {
+              id
+            }
+            borderLeftColor {
+              id
+            }
+            borderRightColor {
+              id
+            }
+            borderStartColor {
+              id
+            }
+            borderTopColor {
+              id
+            }
+            borderRadius {
+              id
+            }
+            borderBottomEndRadius {
+              id
+            }
+            borderBottomLeftRadius {
+              id
+            }
+            borderBottomRightRadius {
+              id
+            }
+            borderBottomStartRadius {
+              id
+            }
+            borderTopEndRadius {
+              id
+            }
+            borderTopLeftRadius {
+              id
+            }
+            borderTopRightRadius {
+              id
+            }
+            borderTopStartRadius {
+              id
+            }
+            borderStyle
+            borderWidth {
+              id
+            }
+            borderBottomWidth {
+              id
+            }
+            borderEndWidth {
+              id
+            }
+            borderLeftWidth {
+              id
+            }
+            borderRightWidth {
+              id
+            }
+            borderStartWidth {
+              id
+            }
+            borderTopWidth {
+              id
+            }
+            opacity
+            color {
+              id
+            }
+            fontFamily
+            fontSize
+            fontStyle
+            fontWeight
+            fontVariant
+            letterSpacing
+            lineHeight
+            textAlign
+            textAlignVertical
+            textDecorationLine
+            textTransform
+          }
+          elements {
+            id
+            parent {
+              id
+            }
+            style {
+              id
+            }
+            index
+            type
+            textLeaves
+          }
+        }
       }
     }
   `,
