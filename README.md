@@ -41,7 +41,8 @@ Universal React. React + React Native.
 - `yarn deploy:web`
 - `yarn messages`
 - `yarn prisma --help`
-- `yarn prisma reset` to reset DB
+- `yarn prisma reset` wipes the data and keeps the schema
+- `yarn prisma delete` get rid of the whole service
 
 ## Add production Prisma
 
