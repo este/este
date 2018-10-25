@@ -1,15 +1,20 @@
 # Prisma does not support interfaces nor union types yet, so we emulate it.
 # TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
-# https://docs.slatejs.org/guides/data-model#documents-and-nodes
+
+# As for tree structure, we use parent/children because it's the most
+# straightforward approach for now. We don't need recursive queries because we
+# can fetch all related objects from App and resolve them in the client.
+# Parents and children are enforced with referential integrity. In the future,
+# I'd like to try closure tables, but Prisma doesn't support composite keys yet.
+# So, it can be improved ofc but it's good enough for now.
+# TODO: Detect parent/child circular references. Maybe closure tables prevent them.
 # https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
-# https://social.msdn.microsoft.com/Forums/sqlserver/en-US/f686ccb9-e936-4cfd-af6a-a52a0ed56b26/does-a-nested-set-model-defy-normalization?forum=databasedesign
-# https://bojanz.wordpress.com/2014/04/25/storing-hierarchical-data-materialized-path/
-# http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
+# https://coderwall.com/p/lixing/closure-tables-for-browsing-trees-in-sql
 
 type User {
+  # Props order: ID, own IDs, foreign IDs, scalars.
   id: ID! @unique
   webs: [Web!]!
-  pages: [Page!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String! @unique
@@ -21,8 +26,7 @@ type Web {
   id: ID! @unique
   creator: User!
   pages: [Page!]! @relation(name: "WebPages")
-  documents: [Document!]! @relation(name: "WebDocuments")
-  components: [Component!]! @relation(name: "WebsComponents")
+  elements: [Element!]! @relation(name: "WebElements")
   styles: [Style!]! @relation(name: "WebStyles")
   dimensionValues: [DimensionValue!]! @relation(name: "WebDimensionValues")
   colorValues: [ColorValue!]! @relation(name: "WebColorValues")
@@ -30,68 +34,67 @@ type Web {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
+  components: [Component!]! @relation(name: "WebComponents")
 }
 
 type Page {
   id: ID! @unique
   creator: User!
   web: Web! @relation(name: "WebPages")
+  element: Element!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  # TODO: Remove content, make document required.
-  content: Json
-  document: Document @relation(name: "PageDocument")
 }
 
-type Document {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  # Document must belong to a web. No orphans.
-  web: Web! @relation(name: "WebDocuments")
-  elements: [Element!]! @relation(name: "DocumentElements", onDelete: CASCADE)
-}
-
+# Should be called Node, but that's reserved word in Relay. Element is fine.
+# https://docs.slatejs.org/guides/data-model#documents-and-nodes
 type Element {
   id: ID! @unique
+  # https://github.com/prisma/prisma/issues/2034#issuecomment-421850503
+  children: [Element!]! @relation(name: "ElementTree")
+  parent: Element @relation(name: "ElementTree")
+  web: Web! @relation(name: "WebElements")
+  style: Style @relation(name: "ElementStyle")
+  component: Component @relation(name: "ElementComponent")
+  index: Int!
   type: ElementType!
-  # Element must belong to a document. No orphans.
-  document: Document! @relation(name: "DocumentElements")
-  path: [Int!]!
-  component: Component
-  style: Style
+  # Block or inline element can have children, style, and component, so we need
+  # referential integrity, but text element is value object only with marks.
+  # To simplify things, we consider marks as constants, only bold and italic
+  # are allowed for now.
+  # {
+  #   object: 'text',
+  #   leaves: [
+  #     { object: 'leaf', text: ' and ', marks: [] },
+  #     {
+  #       object: 'leaf',
+  #       text: 'bold',
+  #       marks: [{ object: 'mark', type: 'bold', data: {} }],
+  #     },
+  #     { object: 'leaf', text: '.', marks: [] },
+  #   ],
+  # },
+  textLeaves: Json
 }
 
 enum ElementType {
-  DOCUMENT
   BLOCK
-  # INLINE
+  INLINE
   TEXT
-  # LEAF
-  # document | block | inline | text | leaf
-}
-
-type Component {
-  id: ID! @unique
-  # Component must belong to one on more web. No orphans.
-  web: [Web!]! @relation(name: "WebsComponents")
-  name: String!
-  document: Document @relation(name: "ComponentDocument")
 }
 
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
 type Style {
   id: ID! @unique
-  web: Web! @relation(name: "WebStyles")
-  name: String!
-  # https://github.com/prisma/prisma/issues/2034#issuecomment-421850503
-  children: [Style!]! @relation(name: "StyleCascade")
-  parent: Style @relation(name: "StyleCascade")
+  spreadStyles: [StyleSpread!]! @relation(name: "StyleSpreadStyles")
+
   # When the user presses the enter key on the end of a text.
   # Example: heading 1 -> paragraph
   nextStyle: Style @relation(name: "StyleNextStyle")
-
+  web: Web! @relation(name: "WebStyles")
+  elements: [Element!]! @relation(name: "ElementStyle")
+  name: String!
   # View
   display: StyleDisplay
   width: DimensionValue @relation(name: "StyleWidth")
@@ -170,7 +173,6 @@ type Style {
   borderStartWidth: BorderValue @relation(name: "StyleBorderStartWidth")
   borderTopWidth: BorderValue @relation(name: "StyleBorderTopWidth")
   opacity: Int
-
   # Text
   color: ColorValue @relation(name: "StyleColor")
   fontFamily: String
@@ -188,12 +190,43 @@ type Style {
   # TODO: Add missing props.
 }
 
+# Spread styles like in JS (it is JS). Make bigger styles from smaller.
+# Or override. Style composition over inheritance. Reactive CSS ftw.
+# text -> heading, button => active button
+# The point is, we can extends more styles.
+# Classical inheritance: paragraph = { ...text, marginBottom: 24 }
+# But what if we want to reuse marginBottom: 24 or something else?
+# for marginBottom, we can use marginBottom: defaultBlockBottom constant.
+# But what if we want to reuse more props? Then we are doomed. Or we can spread.
+# paragraph = { ...text, marginBottom: 24 }
+# Spread is useful for "utility classes" like .center, .whatever etc.
+# https://adamwathan.me/css-utility-classes-and-separation-of-concerns/
+# https://frontstuff.io/in-defense-of-utility-first-css
+type StyleSpread {
+  id: ID! @unique
+  spreadStyle: Style! @relation(name: "StyleSpreadStyles")
+  index: Int!
+  style: Style! @relation(name: "SpreadStyle")
+}
+
 type DimensionValue {
   id: ID! @unique
   web: Web! @relation(name: "WebDimensionValues")
   name: String
   unit: DimensionValueUnit!
   value: Int!
+}
+
+enum DimensionValueUnit {
+  POINT
+  PERCENTAGE
+  # Prisma doesn't support union types yet.
+  # value = 1: 'auto', 2: '...'
+  KEYWORD
+}
+
+enum DimensionValueKeyword {
+  AUTO
 }
 
 type ColorValue {
@@ -221,11 +254,6 @@ enum BorderValueUnit {
 enum StyleDisplay {
   NONE
   FLEX
-}
-
-enum DimensionValueUnit {
-  POINT
-  PERCENTAGE
 }
 
 enum StylePosition {
@@ -350,4 +378,11 @@ enum StyleTextTransform {
   CAPITALIZE
   UPPERCASE
   LOWERCASE
+}
+
+type Component {
+  id: ID! @unique
+  web: Web! @relation(name: "WebComponents")
+  elements: [Element!]! @relation(name: "ElementComponent")
+  name: String!
 }
