@@ -1,4 +1,4 @@
-// flow-typed signature: c3140a426f1b0274392958700404e9f4
+// flow-typed signature: dbccbb06144819a35d07ba2496c3814c
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^3.0.0/flow_v0.84.0
 
 /**
@@ -103,6 +103,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/noWeakTypes' {
 }
 
 declare module 'eslint-plugin-flowtype/dist/rules/objectTypeDelimiter' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/rules/requireCompoundTypeAlias' {
   declare module.exports: any;
 }
 
@@ -313,6 +317,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/noWeakTypes.js' {
 }
 declare module 'eslint-plugin-flowtype/dist/rules/objectTypeDelimiter.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/objectTypeDelimiter'>;
+}
+declare module 'eslint-plugin-flowtype/dist/rules/requireCompoundTypeAlias.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/requireCompoundTypeAlias'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/requireExactType.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/requireExactType'>;

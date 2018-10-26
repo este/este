@@ -1361,8 +1361,8 @@ apollo-upload-server@^5.0.0:
     object-path "^0.11.4"
 
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.23.tgz#9416e5da31cc8d9d46502de6f90aa1447cd368c6"
+  version "1.0.24"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.24.tgz#77d2d3008bb9ee52aa76b799ce7a8d6cb6cf8a1c"
   dependencies:
     fast-json-stable-stringify "^2.0.0"
 
@@ -1608,8 +1608,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.342.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.342.0.tgz#87566a054db0373221de1c958e1d34db1dcb0818"
+  version "2.343.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.343.0.tgz#4277b6f5a2fe359f38978c1d8170947138af45d9"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -2939,7 +2939,7 @@ chokidar@^1.7.0:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.2:
+chokidar@^2.0.2, chokidar@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   dependencies:
@@ -3297,7 +3297,7 @@ copy-paste@^1.3.0:
 
 core-js@^1.0.0:
   version "1.2.7"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
+  resolved "http://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
 core-js@^2.2.2, core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.3, core-js@^2.5.7:
   version "2.5.7"
@@ -3484,11 +3484,11 @@ dashdash@^1.12.0:
     assert-plus "^1.0.0"
 
 data-urls@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/data-urls/-/data-urls-1.0.1.tgz#d416ac3896918f29ca84d81085bc3705834da579"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/data-urls/-/data-urls-1.1.0.tgz#15ee0582baa5e22bb59c77140da8f9c76963bbfe"
   dependencies:
     abab "^2.0.0"
-    whatwg-mimetype "^2.1.0"
+    whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
 dataloader@^1.4.0:
@@ -4069,8 +4069,8 @@ eslint-module-utils@^2.2.0:
     pkg-dir "^1.0.0"
 
 eslint-plugin-flowtype@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.0.0.tgz#4b72588d8a5a5c836439752fe52e8e0f4b9954df"
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.1.1.tgz#1b96559b8015c06e6b7a3c5ba9c73d8e652e69d8"
   dependencies:
     lodash "^4.17.10"
 
@@ -4101,6 +4101,10 @@ eslint-plugin-jsx-a11y@^6.0.3:
     emoji-regex "^6.5.1"
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
+
+eslint-plugin-react-hooks@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-0.0.0.tgz#9988f14082a159931c3dfa9ba699130457da927a"
 
 eslint-plugin-react-native-globals@^0.1.1:
   version "0.1.2"
@@ -4155,8 +4159,8 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
 eslint@^5.0.0:
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.7.0.tgz#55c326d6fb2ad45fcbd0ce17c3846f025d1d819c"
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.8.0.tgz#91fbf24f6e0471e8fdf681a4d9dd1b2c9f28309b"
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.5.3"
@@ -4509,7 +4513,7 @@ fancy-log@^1.3.2:
 
 fast-deep-equal@^1.0.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
+  resolved "http://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
@@ -7984,10 +7988,10 @@ node-request-by-swagger@^1.0.6:
   resolved "https://registry.yarnpkg.com/node-request-by-swagger/-/node-request-by-swagger-1.1.3.tgz#d49bb9adc74eff1ce8c70d075e4d8f2e4b365805"
 
 nodemon@^1.15.0:
-  version "1.18.4"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.4.tgz#873f65fdb53220eb166180cf106b1354ac5d714d"
+  version "1.18.5"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.5.tgz#3d3924df23d06806952e8b6d3de052f2a3351807"
   dependencies:
-    chokidar "^2.0.2"
+    chokidar "^2.0.4"
     debug "^3.1.0"
     ignore-by-default "^1.0.1"
     minimatch "^3.0.4"
@@ -8622,8 +8626,8 @@ pg-types@~1.12.1:
     postgres-interval "^1.1.0"
 
 pg@^7.4.1:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-7.5.0.tgz#c2853bef2fcb91424ba2f649fd951ce866a84760"
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.6.0.tgz#0c9ecaf0ce6f3c7e3c68ce8f621df79e741a89e3"
   dependencies:
     buffer-writer "1.0.1"
     packet-reader "0.3.1"
@@ -9304,14 +9308,14 @@ react-devtools-core@3.1.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-dom@^16.5.1:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.0.tgz#6375b8391e019a632a89a0988bce85f0cc87a92f"
+react-dom@^16.7.0-alpha.0:
+  version "16.7.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.7.0-alpha.0.tgz#8379158d4c76d63c989f325f45dfa5762582584f"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0-alpha.0"
 
 react-error-overlay@4.0.0:
   version "4.0.0"
@@ -9450,14 +9454,14 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@^16.5.1:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.6.0.tgz#b34761cfaf3e30f5508bc732fb4736730b7da246"
+react@^16.7.0-alpha.0:
+  version "16.7.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.7.0-alpha.0.tgz#e2ed4abe6f268c9b092a1d1e572953684d1783a9"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0-alpha.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -9930,7 +9934,7 @@ safe-buffer@~5.0.1:
 
 safe-regex@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
+  resolved "http://registry.npmjs.org/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
   dependencies:
     ret "~0.1.10"
 
@@ -9968,6 +9972,13 @@ sax@~1.1.1:
 scheduler@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.10.0.tgz#7988de90fe7edccc774ea175a783e69c40c521e1"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+scheduler@^0.11.0-alpha.0:
+  version "0.11.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.0-alpha.0.tgz#7b132c726608993471db07866f2d59a52b9e190b"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -10185,9 +10196,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.74:
-  version "0.2.74"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.74.tgz#292918e6594fc9b1163de5185cc6ed213fb26b57"
+slate-base64-serializer@^0.2.76:
+  version "0.2.76"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.76.tgz#633be7344e9a3745e54a9b126a907282aa34162a"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10204,17 +10215,17 @@ slate-hotkeys@^0.2.7:
     is-hotkey "0.1.4"
     slate-dev-environment "^0.2.0"
 
-slate-plain-serializer@^0.6.13, slate-plain-serializer@^0.6.2:
-  version "0.6.13"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.13.tgz#2f47760f4b3553116088f0bcf5c8a5ba444c9428"
+slate-plain-serializer@^0.6.15, slate-plain-serializer@^0.6.2:
+  version "0.6.15"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.15.tgz#2284008b246b71be8be1718b464f54a72417581f"
 
-slate-prop-types@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.4.tgz#673b38d723a8a27fa3c42d4d60a57a42683e1b10"
+slate-prop-types@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.6.tgz#2f0ba99fc234f0a8f75230e216b044adff5265b7"
 
 slate-react@^0.19.3:
-  version "0.19.6"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.19.6.tgz#15161aa9566d0be85ddaf196a18b7e24c5dd298c"
+  version "0.19.8"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.19.8.tgz#2e2e48858d6ee17ef67a1236dcc93bf9468169df"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10224,17 +10235,17 @@ slate-react@^0.19.3:
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.74"
+    slate-base64-serializer "^0.2.76"
     slate-dev-environment "^0.2.0"
     slate-hotkeys "^0.2.7"
-    slate-plain-serializer "^0.6.13"
-    slate-prop-types "^0.5.4"
+    slate-plain-serializer "^0.6.15"
+    slate-prop-types "^0.5.6"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
 slate@^0.42.2:
-  version "0.42.4"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.42.4.tgz#9a8bff08fee94bd156d6f2305dfd675b98dce4bf"
+  version "0.42.6"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.42.6.tgz#b597a8414a27dac378e56a7da24faf4ae5f35be6"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -10759,8 +10770,8 @@ terser-webpack-plugin@1.0.2:
     worker-farm "^1.5.2"
 
 terser@^3.8.1:
-  version "3.10.2"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.2.tgz#a61d2c97065f9fdc8c49a18655e2a80ca7298a94"
+  version "3.10.3"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.3.tgz#4085f9e62171ca746c5759fe955d921291703ee6"
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
@@ -10992,8 +11003,8 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 ua-parser-js@^0.7.18:
-  version "0.7.18"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.18.tgz#a7bfd92f56edfb117083b69e31d2aa8882d4b1ed"
+  version "0.7.19"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.19.tgz#94151be4c0a7fb1d001af7022fdaca4642659e4b"
 
 uglify-es@^3.1.9, uglify-es@^3.3.4:
   version "3.3.9"
@@ -11468,7 +11479,7 @@ whatwg-fetch@^1.0.0:
   version "1.1.1"
   resolved "http://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-1.1.1.tgz#ac3c9d39f320c6dce5339969d054ef43dd333319"
 
-whatwg-mimetype@^2.1.0:
+whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/whatwg-mimetype/-/whatwg-mimetype-2.2.0.tgz#a3d58ef10b76009b042d03e25591ece89b88d171"
 
