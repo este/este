@@ -1608,8 +1608,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.343.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.343.0.tgz#4277b6f5a2fe359f38978c1d8170947138af45d9"
+  version "2.344.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.344.0.tgz#950516888e9e8a85c006f3eb6b7fda28646f5c01"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -2608,12 +2608,12 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^4.1.0:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.3.tgz#88a7d9ce2e5db561e160ab660bc59cb406a0c41d"
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.4.tgz#4477b737db6a1b07077275b24791e680d4300425"
   dependencies:
-    caniuse-lite "^1.0.30000898"
-    electron-to-chromium "^1.3.81"
-    node-releases "^1.0.0-alpha.15"
+    caniuse-lite "^1.0.30000899"
+    electron-to-chromium "^1.3.82"
+    node-releases "^1.0.1"
 
 bser@^2.0.0:
   version "2.0.0"
@@ -2802,7 +2802,7 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-caniuse-lite@^1.0.30000898:
+caniuse-lite@^1.0.30000899:
   version "1.0.30000899"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000899.tgz#6febdbbc388a7982f620ee0e3d09aab0c061389e"
 
@@ -3888,7 +3888,7 @@ ejs@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
-electron-to-chromium@^1.3.81:
+electron-to-chromium@^1.3.82:
   version "1.3.82"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.82.tgz#7d13ae4437d2a783de3f4efba96b186c540b67b1"
 
@@ -5318,8 +5318,8 @@ graphql-config@^1.1.1:
     minimatch "^3.0.4"
 
 graphql-deduplicator@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/graphql-deduplicator/-/graphql-deduplicator-2.0.1.tgz#20c6b39e3a6f096b46dfc8491432818739c0ee37"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-deduplicator/-/graphql-deduplicator-2.0.2.tgz#d8608161cf6be97725e178df0c41f6a1f9f778f3"
 
 graphql-extensions@^0.0.x, graphql-extensions@~0.0.9:
   version "0.0.10"
@@ -7412,8 +7412,8 @@ merge2@^1.2.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
 
 merge@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.0.tgz#7531e39d4949c281a66b8c5a6e0265e8b05894da"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
 
 mersenne-twister@^1.0.1:
   version "1.1.0"
@@ -7977,9 +7977,9 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.0.0-alpha.15:
-  version "1.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.0-alpha.15.tgz#bdb08730287cc50ddbfa3c1a358366a4a2f5d397"
+node-releases@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.1.tgz#957a2735d2ca737d7005588f8e85e6c27032555b"
   dependencies:
     semver "^5.3.0"
 
@@ -9660,7 +9660,7 @@ registry-url@^3.0.3:
 
 regjsgen@^0.2.0:
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/regjsgen/-/regjsgen-0.2.0.tgz#6c016adeac554f75823fe37ac05b92d5a4edb1f7"
+  resolved "http://registry.npmjs.org/regjsgen/-/regjsgen-0.2.0.tgz#6c016adeac554f75823fe37ac05b92d5a4edb1f7"
 
 regjsgen@^0.4.0:
   version "0.4.0"
@@ -10196,9 +10196,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.76:
-  version "0.2.76"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.76.tgz#633be7344e9a3745e54a9b126a907282aa34162a"
+slate-base64-serializer@^0.2.77:
+  version "0.2.77"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.77.tgz#03b4d447c00a888f167f61e624e5767c609f75e6"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10215,17 +10215,17 @@ slate-hotkeys@^0.2.7:
     is-hotkey "0.1.4"
     slate-dev-environment "^0.2.0"
 
-slate-plain-serializer@^0.6.15, slate-plain-serializer@^0.6.2:
-  version "0.6.15"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.15.tgz#2284008b246b71be8be1718b464f54a72417581f"
+slate-plain-serializer@^0.6.16, slate-plain-serializer@^0.6.2:
+  version "0.6.16"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.16.tgz#096f48f51f93fd1fa5db0206a160129f9798f07a"
 
-slate-prop-types@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.6.tgz#2f0ba99fc234f0a8f75230e216b044adff5265b7"
+slate-prop-types@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.7.tgz#29d89d95196cf0ffe3b7eb4aa2f795ab8871090c"
 
-slate-react@^0.19.3:
-  version "0.19.8"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.19.8.tgz#2e2e48858d6ee17ef67a1236dcc93bf9468169df"
+slate-react@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.0.tgz#97d1e077cf79fc5d2b6c3098577ba0f863284be3"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10235,17 +10235,17 @@ slate-react@^0.19.3:
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.76"
+    slate-base64-serializer "^0.2.77"
     slate-dev-environment "^0.2.0"
     slate-hotkeys "^0.2.7"
-    slate-plain-serializer "^0.6.15"
-    slate-prop-types "^0.5.6"
+    slate-plain-serializer "^0.6.16"
+    slate-prop-types "^0.5.7"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
-slate@^0.42.2:
-  version "0.42.6"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.42.6.tgz#b597a8414a27dac378e56a7da24faf4ae5f35be6"
+slate@^0.43.0:
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.43.0.tgz#f5bf8b94efc0c3f65262d9bbdbfcaba404c861d7"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -10594,7 +10594,7 @@ strip-dirs@^2.0.0:
 
 strip-eof@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
+  resolved "http://registry.npmjs.org/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
 
 strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   version "2.0.1"
