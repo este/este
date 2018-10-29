@@ -928,8 +928,8 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
 "@types/node@*", "@types/node@^10.12.0":
-  version "10.12.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
+  version "10.12.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.1.tgz#da61b64a2930a80fa708e57c45cd5441eb379d5b"
 
 "@types/prettier@^1.13.2":
   version "1.13.2"
@@ -2803,8 +2803,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000899:
-  version "1.0.30000899"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000899.tgz#6febdbbc388a7982f620ee0e3d09aab0c061389e"
+  version "1.0.30000900"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000900.tgz#015cfe37897a3386a3075a914498800c29afe77e"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -4069,8 +4069,8 @@ eslint-module-utils@^2.2.0:
     pkg-dir "^1.0.0"
 
 eslint-plugin-flowtype@^3.0.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.1.1.tgz#1b96559b8015c06e6b7a3c5ba9c73d8e652e69d8"
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.1.4.tgz#c6c9c514b8c01579e6621b51d83549d5db802cac"
   dependencies:
     lodash "^4.17.10"
 
@@ -8816,9 +8816,9 @@ prisma-binding@^2.0.2:
     subscriptions-transport-ws "0.9.8"
     yargs "12.0.1"
 
-prisma-cli-core@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.19.0.tgz#0714ae13d1cd5b1c4b03699535311ba28c32a4e1"
+prisma-cli-core@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.19.1.tgz#0851ea13fe0042f11d3f4873992bc558cf6f7b10"
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -8851,11 +8851,11 @@ prisma-cli-core@1.19.0:
     opn "^5.1.0"
     pause "^0.1.0"
     portfinder "^1.0.13"
-    prisma-client-lib "1.19.0"
-    prisma-db-introspection "1.19.0"
-    prisma-generate-schema "1.19.0"
+    prisma-client-lib "1.19.1"
+    prisma-db-introspection "1.19.1"
+    prisma-generate-schema "1.19.1"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.0"
+    prisma-yml "1.19.1"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -8864,9 +8864,9 @@ prisma-cli-core@1.19.0:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.19.0.tgz#dd5be8740b0387829c204f9bfaf8412c4266606e"
+prisma-cli-engine@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.19.1.tgz#1c079ca6a0e30e3babed6cc71c5f0ad7dcc4bfeb"
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -8908,7 +8908,7 @@ prisma-cli-engine@1.19.0:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.0"
+    prisma-yml "1.19.1"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -8923,9 +8923,9 @@ prisma-cli-engine@1.19.0:
     update-notifier "^2.3.0"
     validator "^8.2.0"
 
-prisma-client-lib@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-client-lib/-/prisma-client-lib-1.19.0.tgz#879a0f30e05e37af0161f62b15a29d0e020d89f5"
+prisma-client-lib@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-client-lib/-/prisma-client-lib-1.19.1.tgz#e4f6b1c1791280f86c60e006b4b8664687218b1b"
   dependencies:
     "@types/node" "^10.12.0"
     "@types/prettier" "^1.13.2"
@@ -8940,9 +8940,9 @@ prisma-client-lib@1.19.0:
     ws "^6.1.0"
     zen-observable "^0.8.10"
 
-prisma-db-introspection@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-1.19.0.tgz#65f26e886e4aacbe15bc015967d86f3daf6c1396"
+prisma-db-introspection@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-1.19.1.tgz#7c2f05a11cc4160bf7be84fdb4ba0671a3df61fa"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -8959,15 +8959,15 @@ prisma-db-introspection@1.19.0:
     pg "^7.4.1"
     pluralize "^7.0.0"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.0"
+    prisma-yml "1.19.1"
     replaceall "^0.1.6"
     scuid "^1.0.2"
     uppercamelcase "^3.0.0"
     yaml-ast-parser "^0.0.40"
 
-prisma-generate-schema@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-generate-schema/-/prisma-generate-schema-1.19.0.tgz#ab4c24a772affab1145e31accd258cc8ede89424"
+prisma-generate-schema@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-generate-schema/-/prisma-generate-schema-1.19.1.tgz#ee13c1148787d50e3eefcab96844c8eab474d272"
   dependencies:
     graphql "^14.0.2"
     pluralize "^7.0.0"
@@ -9033,9 +9033,9 @@ prisma-yml@1.0.97:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-prisma-yml@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.19.0.tgz#0d04502f55951422e8e27763608563c07433e27e"
+prisma-yml@1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.19.1.tgz#a9e5e0b838eb1995ffdf8f8318b5480f05a20544"
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -9057,12 +9057,12 @@ prisma-yml@1.19.0:
     yaml-ast-parser "^0.0.40"
 
 prisma@^1.2.4:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.19.0.tgz#c174e95f520a494f3947f75252d082d79a50ddae"
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.19.1.tgz#031b8a6e6e8adadb14b5d7d4be53d0efeff3fd1e"
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.19.0"
-    prisma-cli-engine "1.19.0"
+    prisma-cli-core "1.19.1"
+    prisma-cli-engine "1.19.1"
     require-onct "^0.0.2"
     semver "^5.4.1"
     source-map-support "^0.4.18"
@@ -10224,8 +10224,8 @@ slate-prop-types@^0.5.7:
   resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.7.tgz#29d89d95196cf0ffe3b7eb4aa2f795ab8871090c"
 
 slate-react@^0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.0.tgz#97d1e077cf79fc5d2b6c3098577ba0f863284be3"
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.1.tgz#d576b988df521f8f668f7a80bca56436fa42ceba"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10770,8 +10770,8 @@ terser-webpack-plugin@1.0.2:
     worker-farm "^1.5.2"
 
 terser@^3.8.1:
-  version "3.10.3"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.3.tgz#4085f9e62171ca746c5759fe955d921291703ee6"
+  version "3.10.4"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.4.tgz#63ed0b5266d39cbdcb9c2bf6506f6444b70184a3"
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"

@@ -1,4 +1,4 @@
-// flow-typed signature: dbccbb06144819a35d07ba2496c3814c
+// flow-typed signature: bab2326b47414e763a92b2c1ecebaca1
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^3.0.0/flow_v0.84.0
 
 /**
@@ -22,7 +22,19 @@ declare module 'eslint-plugin-flowtype' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'eslint-plugin-flowtype/bin/readmeAssertions' {
+declare module 'eslint-plugin-flowtype/dist/bin/addAssertions' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/bin/checkDocs' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/bin/checkTests' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/bin/utilities' {
   declare module.exports: any;
 }
 
@@ -255,8 +267,17 @@ declare module 'eslint-plugin-flowtype/dist/utilities/spacingFixers' {
 }
 
 // Filename aliases
-declare module 'eslint-plugin-flowtype/bin/readmeAssertions.js' {
-  declare module.exports: $Exports<'eslint-plugin-flowtype/bin/readmeAssertions'>;
+declare module 'eslint-plugin-flowtype/dist/bin/addAssertions.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/bin/addAssertions'>;
+}
+declare module 'eslint-plugin-flowtype/dist/bin/checkDocs.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/bin/checkDocs'>;
+}
+declare module 'eslint-plugin-flowtype/dist/bin/checkTests.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/bin/checkTests'>;
+}
+declare module 'eslint-plugin-flowtype/dist/bin/utilities.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/bin/utilities'>;
 }
 declare module 'eslint-plugin-flowtype/dist/index.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/index'>;
