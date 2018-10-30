@@ -53,4 +53,5 @@ class RelayProvider extends React.PureComponent<RelayProviderProps> {
   }
 }
 
+// $FlowFixMe
 export default withRouter(RelayProvider);

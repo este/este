@@ -265,9 +265,9 @@ export type Editor = {|
       |}>,
       +elements: ?$ReadOnlyArray<{|
         +id: string,
-        +parent: ?{|
+        +children: ?$ReadOnlyArray<{|
           +id: string
-        |},
+        |}>,
         +style: ?{|
           +id: string
         |},
@@ -1238,11 +1238,11 @@ return {
                 {
                   "kind": "LinkedField",
                   "alias": null,
-                  "name": "parent",
+                  "name": "children",
                   "storageKey": null,
                   "args": null,
                   "concreteType": "Element",
-                  "plural": false,
+                  "plural": true,
                   "selections": v1
                 },
                 {
@@ -1280,5 +1280,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '60419d8d0cbbff789d8a4292f5186603';
+(node/*: any*/).hash = '7f2f0909f67e2e2f0315c4e270792d4f';
 module.exports = node;

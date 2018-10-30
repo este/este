@@ -1,191 +1,163 @@
 // @flow
-import * as React from 'react';
+// $FlowFixMe
+import React, { useState, memo } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { pipe } from 'ramda';
-// import withStore, { type Store } from './core/withStore';
-import withStore from './core/withStore';
-import withMutation from './core/withMutation';
-import SetPageContentMutation, {
-  type SetPageContentCommit,
-} from '../mutations/SetPageContentMutation';
 import type { Editor as Data } from './__generated__/Editor.graphql';
-import slate from 'slate';
+import { Value, KeyUtils } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
-import Head from 'next/head';
 import { View, Text } from 'react-native';
-import invariant from 'invariant';
 
-type EditorHeadProps = {|
-  title: string,
+// Map array to object for faster access by Id.
+function mapArrayOfObjectsWithIdToObject(array) {
+  return array.reduce((obj, item) => {
+    return { ...obj, [item.id]: item };
+  }, {});
+}
+
+function dbModelToSlateModel(pageElementId, elements) {
+  function walk(id) {
+    const element = elements[id];
+    const { type } = element;
+    const slateNode = {
+      object: type.toLowerCase(),
+      type: 'style',
+      data: {
+        style: {
+          id: element.style?.id,
+        },
+      },
+    };
+    if (type === 'TEXT')
+      return {
+        ...slateNode,
+        leaves: element.textLeaves,
+      };
+    return {
+      ...slateNode,
+      nodes: element.children
+        .map(child => elements[child.id])
+        .sort((a, b) => a.index - b.index)
+        .map(child => walk(child.id)),
+    };
+  }
+
+  const node = walk(pageElementId);
+
+  return {
+    document: {
+      nodes: [node],
+    },
+  };
+}
+
+type Page = $NonMaybeType<$ElementType<Data, 'page'>>;
+type Web = $ElementType<Page, 'web'>;
+
+type EditorWithDataProps = {|
+  page: Page,
+  borderValues: $NonMaybeType<$ElementType<Web, 'borderValues'>>,
+  colorValues: $NonMaybeType<$ElementType<Web, 'colorValues'>>,
+  dimensionValues: $NonMaybeType<$ElementType<Web, 'dimensionValues'>>,
+  elements: $NonMaybeType<$ElementType<Web, 'elements'>>,
+  styles: $NonMaybeType<$ElementType<Web, 'styles'>>,
 |};
 
-class EditorHead extends React.PureComponent<EditorHeadProps> {
-  render() {
+function EditorWithData({
+  page,
+  borderValues,
+  colorValues,
+  dimensionValues,
+  elements,
+  styles,
+}: EditorWithDataProps) {
+  const [editorValue, setEditorValue] = useState(() => {
+    const elementsById = mapArrayOfObjectsWithIdToObject(elements);
+    const model = dbModelToSlateModel(page.element.id, elementsById);
+    // For SSR.
+    KeyUtils.resetGenerator();
+    return Value.fromJSON(model);
+  });
+
+  // console.log(colorValues);
+  // console.log(styles.map(s => s.spreadStyles));
+
+  function handleEditorChange({ value }) {
+    setEditorValue(value);
+  }
+
+  function resolveStyle(styleId) {
+    // const style = styles.find(style => style.id === styleId);
+    // console.log(style.spreadStyles);
+    // najdi styl, najdi vsechny predchozi, transformuj props, jakmile ma neco
+    // isText, tak je to isText, kdyz odeberu styl s isText, tak co?
+    // to nesmi jit odebrat, ledaze bych odebral children nebo detekovat, jestli
+    // tam neni text.
+    // console.log(styleId);
+
+    return {
+      style: {},
+      isText: false,
+    };
+  }
+
+  function renderNode(props) {
+    const { node, attributes, children } = props;
+    const data = node.data.get(node.type);
+    const { style, isText } = resolveStyle(data.id);
+    const Component = isText ? Text : View;
     return (
-      <Head>
-        <title>{this.props.title}</title>
-      </Head>
+      <Component {...attributes} style={style}>
+        {children}
+      </Component>
     );
   }
+
+  return (
+    <SlateEditor
+      autoCorrect={false}
+      spellCheck={false}
+      autoFocus
+      value={editorValue}
+      onChange={handleEditorChange}
+      renderNode={renderNode}
+      // renderMark={this.renderMark}
+      // onKeyDown={this.handleEditorKeyDown}
+    />
+  );
 }
 
 type EditorProps = {|
   data: Data,
-  commit: SetPageContentCommit,
 |};
 
-type EditorState = {|
-  value: Object,
-  // styles:
-|};
-
-class Editor extends React.PureComponent<EditorProps, EditorState> {
-  static initialJSONValue = {
-    document: {
-      nodes: [
-        {
-          object: 'block',
-          type: 'style',
-          data: {
-            style: { id: '1' },
-          },
-          nodes: [
-            {
-              object: 'text',
-              leaves: [{ text: 'Ahoj svete' }],
-            },
-          ],
-        },
-      ],
-    },
-  };
-
-  editorRef = React.createRef();
-
-  constructor(props: EditorProps) {
-    super(props);
-    // const { page } = this.props.data;
-    // const json = page?.content || Editor.initialJSONValue;
-    const json = Editor.initialJSONValue;
-    // console.log(JSON.stringify(json));
-    // console.log(json);
-    // Resets Slate's internal key generating for SSR.
-    slate.KeyUtils.resetGenerator();
-    const value = slate.Value.fromJSON(json);
-    this.state = {
-      value,
-    };
+// Looks like a pattern.
+function Editor({ data: { page } }: EditorProps) {
+  if (
+    page == null ||
+    page.web.borderValues == null ||
+    page.web.colorValues == null ||
+    page.web.dimensionValues == null ||
+    page.web.elements == null ||
+    page.web.styles == null
+  ) {
+    // TODO: Return error page and log missing data.
+    return null;
   }
-
-  getRenderStyle(style) {
-    // nabrat view styly
-    // nabrat text styly? pokud aspon jeden, ok // ma non null prop
-
-    // jak? vsechny props do objektu, a moznat trans, ok
-    // const {
-    //   color,
-    //   fontFamily,
-    //   fontSize,
-    //   fontStyle,
-    //   fontWeight,
-    //   fontVariant,
-    //   letterSpacing,
-    //   lineHeight,
-    //   textAlign,
-    //   textAlignVertical,
-    //   textDecorationLine,
-    //   textTransform,
-    // } = style;
-
-    // const isText = true;
-    return {
-      style: {
-        color: 'red',
-      },
-      isText: true,
-    };
-  }
-
-  handleEditorChange = change => {
-    this.setState({ value: change.value });
-    // const documentChanged = value.document !== this.state.value.document;
-    // if (documentChanged) {
-    //   const content = value.toJSON();
-    //   this.throttleCommit(content);
-    // }
-  };
-
-  handleEditorRenderNode = (props, next) => {
-    const { node, attributes, children } = props;
-    const typeData = node.data.get(node.type);
-    // Remove invariant from production code, use it for dev only.
-    if (process.env.NODE_ENV !== 'production')
-      invariant(typeData != null, 'typeData must not be null');
-
-    switch (node.type) {
-      case 'style': {
-        const { style, isText } = this.getRenderStyle(typeData);
-        const StyleComponent = isText ? Text : View;
-        return (
-          <StyleComponent {...attributes} style={style}>
-            {children}
-          </StyleComponent>
-        );
-      }
-      default:
-        return next();
-    }
-  };
-
-  change(callback: (change: Object) => void) {
-    const { current: editor } = this.editorRef;
-    if (!editor) return;
-    editor.change(change => {
-      callback(change);
-    });
-  }
-
-  render() {
-    const { page } = this.props.data;
-    if (page == null) return null;
-    // tohle nejak do state, ne?
-    // if (
-    //   page == null ||
-    //   page.web.borderValues == null ||
-    //   page.web.colorValues == null ||
-    //   page.web.dimensionValues == null ||
-    //   page.web.elements == null ||
-    //   page.web.styles == null
-    // ) {
-    //   return null;
-    // }
-    const { value } = this.state;
-
-    return (
-      <>
-        <EditorHead title={page.title} />
-        <SlateEditor
-          autoFocus
-          autoCorrect={false}
-          spellCheck={false}
-          value={value}
-          onChange={this.handleEditorChange}
-          renderNode={this.handleEditorRenderNode}
-          ref={this.editorRef}
-          // renderMark={this.renderMark}
-          // onFocus={this.handleEditorFocus}
-          // onKeyDown={this.handleEditorKeyDown}
-        />
-      </>
-    );
-  }
+  return (
+    <EditorWithData
+      page={page}
+      borderValues={page.web.borderValues}
+      colorValues={page.web.colorValues}
+      dimensionValues={page.web.dimensionValues}
+      elements={page.web.elements}
+      styles={page.web.styles}
+    />
+  );
 }
 
+// TODO: Replace with useRelayFragmentContainer when available.
 export default createFragmentContainer(
-  pipe(
-    withStore,
-    withMutation(SetPageContentMutation),
-  )(Editor),
+  Editor,
   graphql`
     fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
       page(id: $id) {
@@ -421,7 +393,7 @@ export default createFragmentContainer(
           }
           elements {
             id
-            parent {
+            children {
               id
             }
             style {

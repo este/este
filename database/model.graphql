@@ -1,4 +1,5 @@
 # Prisma does not support interfaces nor union types yet, so we emulate it.
+# https://www.prisma.io/docs/data-model-and-migrations/data-model-knul/#more-sdl-features
 # TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
 
 # As for tree structure, we use parent/children because it's the most
@@ -47,7 +48,8 @@ type Page {
   title: String!
 }
 
-# Should be called Node, but that's reserved word in Relay. Element is fine.
+# Should be called Node, but that's reserved word in Relay.
+# Element is good enough abstraction for View Text Component.
 # https://docs.slatejs.org/guides/data-model#documents-and-nodes
 type Element {
   id: ID! @unique
@@ -59,7 +61,7 @@ type Element {
   component: Component @relation(name: "ElementComponent")
   index: Int!
   type: ElementType!
-  # Block or inline element can have children, style, and component, so we need
+  # Block or inline element can have children, style, or component, so we need
   # referential integrity, but text element is value object only with marks.
   # To simplify things, we consider marks as constants, only bold and italic
   # are allowed for now.
@@ -95,6 +97,8 @@ type Style {
   web: Web! @relation(name: "WebStyles")
   elements: [Element!]! @relation(name: "ElementStyle")
   name: String!
+  isText: Boolean @default(value: "false")
+
   # View
   display: StyleDisplay
   width: DimensionValue @relation(name: "StyleWidth")

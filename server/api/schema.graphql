@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Oct 25 2018 14:38:54 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Oct 28 2018 01:19:29 GMT+0200 (Central European Summer Time)
 
 type AuthErrors {
   email: EmailError
@@ -1056,6 +1056,7 @@ type Style implements Node {
   web: Web!
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
+  isText: Boolean
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -1234,6 +1235,8 @@ enum StyleOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  isText_ASC
+  isText_DESC
   display_ASC
   display_DESC
   position_ASC
@@ -1518,6 +1521,10 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  isText: Boolean
+
+  """All values that are not equal to given value."""
+  isText_not: Boolean
   display: StyleDisplay
 
   """All values that are not equal to given value."""

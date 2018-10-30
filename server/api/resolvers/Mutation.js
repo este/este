@@ -69,20 +69,20 @@ const Mutation: MutationType = {
       },
     });
 
-    const colorForeground = await db.mutation.createColorValue({
+    const colorBackground = await db.mutation.createColorValue({
       data: {
         web: { connect: { id: web.id } },
-        name: 'foreground',
+        name: 'background',
         r: 250,
         g: 250,
         b: 250,
       },
     });
 
-    const colorBackground = await db.mutation.createColorValue({
+    const colorForeground = await db.mutation.createColorValue({
       data: {
         web: { connect: { id: web.id } },
-        name: 'background',
+        name: 'foreground',
         r: 51,
         g: 51,
         b: 51,
@@ -113,7 +113,7 @@ const Mutation: MutationType = {
         web: { connect: { id: web.id } },
         name: 'page',
         flex: 1,
-        backgroundColor: { connect: { id: colorForeground.id } },
+        backgroundColor: { connect: { id: colorBackground.id } },
       },
     });
 
@@ -148,23 +148,26 @@ const Mutation: MutationType = {
       },
     });
 
-    // const textStyle =
-    await db.mutation.createStyle({
+    const textStyle = await db.mutation.createStyle({
       data: {
         web: { connect: { id: web.id } },
         name: 'text',
+        isText: true,
         // $font-family-sans-serif
         // https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
         fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
         fontSize: 16,
         lineHeight: 24,
-        color: { connect: { id: colorBackground.id } },
+        color: { connect: { id: colorForeground.id } },
       },
     });
 
     const paragraphStyle = await db.mutation.createStyle({
       data: {
         web: { connect: { id: web.id } },
+        spreadStyles: {
+          create: { index: 0, style: { connect: { id: textStyle.id } } },
+        },
         name: 'paragraph',
         marginBottom: { connect: { id: spaceMedium.id } },
       },
@@ -230,7 +233,24 @@ const Mutation: MutationType = {
                               index: 0,
                               type: 'TEXT',
                               // $FlowFixMe Weird. It should allow JSON instead of string.
-                              textLeaves: [{ text: 1 }],
+                              textLeaves: [{ text: 'Ahoj' }],
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        web: { connect: { id: web.id } },
+                        style: { connect: { id: paragraphStyle.id } },
+                        index: 1,
+                        type: 'BLOCK',
+                        children: {
+                          create: [
+                            {
+                              web: { connect: { id: web.id } },
+                              index: 0,
+                              type: 'TEXT',
+                              // $FlowFixMe Weird. It should allow JSON instead of string.
+                              textLeaves: [{ text: 'Svete' }],
                             },
                           ],
                         },

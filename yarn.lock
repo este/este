@@ -1361,8 +1361,8 @@ apollo-upload-server@^5.0.0:
     object-path "^0.11.4"
 
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.24.tgz#77d2d3008bb9ee52aa76b799ce7a8d6cb6cf8a1c"
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.25.tgz#899b00f5f990fb451675adf84cb3de82eb6372ea"
   dependencies:
     fast-json-stable-stringify "^2.0.0"
 
@@ -1876,8 +1876,8 @@ babel-plugin-react-intl@^3.0.1:
     mkdirp "^0.5.1"
 
 babel-plugin-react-native-web@^0.9.0:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.4.tgz#3618d93470821cd47afac14b3f955a8ffc78c61b"
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.5.tgz#eeaa17c6e57e170cca46a77396bdc55f88bedde3"
 
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
@@ -2803,8 +2803,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000899:
-  version "1.0.30000900"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000900.tgz#015cfe37897a3386a3075a914498800c29afe77e"
+  version "1.0.30000902"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000902.tgz#74eaf6ed7f1d31e5148725081c9df60051c5e2b3"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -4741,9 +4741,9 @@ flatmap-stream@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/flatmap-stream/-/flatmap-stream-0.1.1.tgz#d34f39ef3b9aa5a2fc225016bd3adf28ac5ae6ea"
 
-flow-bin@^0.84.0:
-  version "0.84.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.84.0.tgz#4cb2364c750fb37a7840524fa62456b53f64cdcb"
+flow-bin@^0.85.0:
+  version "0.85.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.85.0.tgz#a3ca80748a35a071d5bbb2fcd61d64d977fc53a6"
 
 flow-remove-types@^1.2.3:
   version "1.2.3"
@@ -7978,8 +7978,8 @@ node-pre-gyp@^0.10.0:
     tar "^4"
 
 node-releases@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.1.tgz#957a2735d2ca737d7005588f8e85e6c27032555b"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.2.tgz#27c296d9fca3b659c64f7d43ea47a31ad2a90e4b"
   dependencies:
     semver "^5.3.0"
 
@@ -9340,8 +9340,8 @@ react-is@^16.6.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
 
 react-native-web@^0.9.0:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.4.tgz#8909504cc80a1efcea54997b7516c384ced4eedd"
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.5.tgz#3ecc28a2cd508608802230d2b6a243c78d2e66d1"
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
@@ -10224,8 +10224,8 @@ slate-prop-types@^0.5.7:
   resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.7.tgz#29d89d95196cf0ffe3b7eb4aa2f795ab8871090c"
 
 slate-react@^0.20.0:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.1.tgz#d576b988df521f8f668f7a80bca56436fa42ceba"
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.2.tgz#974eada54a846f0a71532070ef9c26992495f9e6"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10393,8 +10393,8 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.15.1.tgz#b79a089a732e346c6e0714830f36285cd38191a2"
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.15.2.tgz#c946d6bd9b1a39d0e8635763f5242d6ed6dcb629"
   dependencies:
     asn1 "~0.2.3"
     assert-plus "^1.0.0"
@@ -10770,8 +10770,8 @@ terser-webpack-plugin@1.0.2:
     worker-farm "^1.5.2"
 
 terser@^3.8.1:
-  version "3.10.4"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.4.tgz#63ed0b5266d39cbdcb9c2bf6506f6444b70184a3"
+  version "3.10.7"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.7.tgz#8b48f25f959eeef7ae48407c1b21149052535973"
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
@@ -10821,8 +10821,8 @@ timers-browserify@^2.0.4:
     setimmediate "^1.0.4"
 
 tiny-invariant@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.1.tgz#54700d039a0384ef2e83afd0e81af84c6d67b140"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.2.tgz#8d343bf86acce627a2e0857d48a46a297fda2cc3"
 
 tiny-warning@^0.0.3:
   version "0.0.3"

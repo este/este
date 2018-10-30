@@ -13,6 +13,7 @@ class Webs extends React.PureComponent<WebsProps> {
     const { data } = this.props;
     const webs = data.me?.webs;
     if (webs == null) return null;
+    // $FlowFixMe No idea. data.pages.map<what?> or render(): what? or?
     return webs.map(web => {
       // $FlowFixMe https://github.com/facebook/relay/issues/2316
       return <WebsItem data={web} key={web.id} />;
