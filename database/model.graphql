@@ -224,13 +224,6 @@ type DimensionValue {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
-  # Prisma doesn't support union types yet.
-  # value = 1: 'auto', 2: '...'
-  KEYWORD
-}
-
-enum DimensionValueKeyword {
-  AUTO
 }
 
 type ColorValue {
