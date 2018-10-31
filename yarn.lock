@@ -56,13 +56,13 @@
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
-"@babel/generator@7.0.0-beta.54":
-  version "7.0.0-beta.54"
-  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.0.0-beta.54.tgz#c043c7eebeebfd7e665d95c281a4aafc83d4e1c9"
+"@babel/generator@7.0.0-beta.56":
+  version "7.0.0-beta.56"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.0.0-beta.56.tgz#07d9c2f45990c453130e080eddcd252a9cbd8d66"
   dependencies:
-    "@babel/types" "7.0.0-beta.54"
+    "@babel/types" "7.0.0-beta.56"
     jsesc "^2.5.1"
-    lodash "^4.17.5"
+    lodash "^4.17.10"
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
@@ -235,9 +235,9 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/parser@7.0.0-beta.54":
-  version "7.0.0-beta.54"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0-beta.54.tgz#c01aa63b57c9c8dce8744796c81d9df121f20db4"
+"@babel/parser@7.0.0-beta.56":
+  version "7.0.0-beta.56"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0-beta.56.tgz#8638aa02e0130cd10b2ba4128e2b804112073ed3"
 
 "@babel/parser@^7.0.0", "@babel/parser@^7.1.2", "@babel/parser@^7.1.3":
   version "7.1.3"
@@ -797,12 +797,12 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@babel/types@7.0.0-beta.54":
-  version "7.0.0-beta.54"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.54.tgz#025ad68492fed542c13f14c579a44c848e531063"
+"@babel/types@7.0.0-beta.56":
+  version "7.0.0-beta.56"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.56.tgz#df456947a82510ec30361971e566110d89489056"
   dependencies:
     esutils "^2.0.2"
-    lodash "^4.17.5"
+    lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
 "@babel/types@^7.0.0", "@babel/types@^7.0.0-beta", "@babel/types@^7.1.2", "@babel/types@^7.1.3":
@@ -1608,8 +1608,8 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.344.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.344.0.tgz#950516888e9e8a85c006f3eb6b7fda28646f5c01"
+  version "2.345.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.345.0.tgz#857cecf0ed1cc0a3969d3d2239da237993db4b87"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -1857,6 +1857,13 @@ babel-plugin-jest-hoist@^23.2.0:
   version "23.2.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.2.0.tgz#e61fae05a1ca8801aadee57a6d66b8cefaf44167"
 
+babel-plugin-macros@^2.0.0:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.4.2.tgz#21b1a2e82e2130403c5ff785cba6548e9b644b28"
+  dependencies:
+    cosmiconfig "^5.0.5"
+    resolve "^1.8.1"
+
 babel-plugin-module-resolver@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.1.1.tgz#881cf67e3d4b8400d5eaaefc1be44d2dc1fe404f"
@@ -1890,9 +1897,10 @@ babel-plugin-react-transform@^3.0.0:
     lodash "^4.6.1"
 
 babel-plugin-relay@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-relay/-/babel-plugin-relay-1.6.2.tgz#f47f534ecbb04ac167b139b54d50c5d39d7e520c"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-relay/-/babel-plugin-relay-1.7.0.tgz#d1665aad931e2f44c1e652819414edd2b1aafb3c"
   dependencies:
+    babel-plugin-macros "^2.0.0"
     babel-runtime "^6.23.0"
     babel-types "^6.24.1"
 
@@ -2803,8 +2811,8 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000899:
-  version "1.0.30000902"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000902.tgz#74eaf6ed7f1d31e5148725081c9df60051c5e2b3"
+  version "1.0.30000903"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000903.tgz#86d46227759279b3db345ddbe778335dbba9e858"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -3322,6 +3330,14 @@ cosmiconfig@^3.1.0:
     js-yaml "^3.9.0"
     parse-json "^3.0.0"
     require-from-string "^2.0.1"
+
+cosmiconfig@^5.0.5:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
+  dependencies:
+    is-directory "^0.3.1"
+    js-yaml "^3.9.0"
+    parse-json "^4.0.0"
 
 crc32-stream@^2.0.0:
   version "2.0.0"
@@ -4874,6 +4890,14 @@ fs-extra@^4.0.3:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-minipass@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
@@ -5203,8 +5227,8 @@ graphql-cli-prepare@1.4.19:
     lodash "4.17.5"
 
 graphql-cli@^2.13.0:
-  version "2.16.7"
-  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.16.7.tgz#47da92cba15db8bf1900e2fc97787a9a359b91c7"
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/graphql-cli/-/graphql-cli-2.17.0.tgz#915260d09975b9a371f374989873b91ee6e4200d"
   dependencies:
     adm-zip "0.4.7"
     apollo-codegen "^0.19.1"
@@ -5217,11 +5241,10 @@ graphql-cli@^2.13.0:
     express-request-proxy "^2.0.0"
     graphql "^0.11.0 || ^0.12.0 || ^0.13.0"
     graphql-cli-prepare "1.4.19"
-    graphql-config "2.0.1"
-    graphql-config-extension-graphcool "1.0.8"
-    graphql-config-extension-openapi "1.0.6"
-    graphql-config-extension-prisma "0.2.1"
-    graphql-playground-middleware-express "1.6.2"
+    graphql-config "2.2.1"
+    graphql-config-extension-graphcool "1.0.11"
+    graphql-config-extension-prisma "0.2.5"
+    graphql-playground-middleware-express "1.7.6"
     graphql-schema-linter "0.1.1"
     inquirer "5.1.0"
     is-url-superb "2.0.0"
@@ -5237,44 +5260,31 @@ graphql-cli@^2.13.0:
     request "^2.83.0"
     rimraf "2.6.2"
     source-map-support "^0.5.3"
+    tmp-graphql-config-extension-openapi "^1.0.7"
     update-notifier "^2.3.0"
     yargs "11.0.0"
 
-graphql-compiler@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/graphql-compiler/-/graphql-compiler-1.6.2.tgz#45dfd1095f8af087e0c963d028831abde07dc605"
+graphql-compiler@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/graphql-compiler/-/graphql-compiler-1.7.0.tgz#19942b47325cd41f6f4f79e67ef0d75c379b6ba1"
   dependencies:
     chalk "^1.1.1"
     fb-watchman "^2.0.0"
     immutable "~3.7.6"
 
-graphql-config-extension-graphcool@1.0.8:
-  version "1.0.8"
-  resolved "http://registry.npmjs.org/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-1.0.8.tgz#320bf4572b207183fb069d155f4102fdf61b7f63"
+graphql-config-extension-graphcool@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/graphql-config-extension-graphcool/-/graphql-config-extension-graphcool-1.0.11.tgz#749c156573d8956694a41c28461755b4592973f0"
   dependencies:
     graphcool-yml "0.4.15"
-    graphql-config "^2.0.1"
+    graphql-config "2.2.1"
 
-graphql-config-extension-openapi@1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-openapi/-/graphql-config-extension-openapi-1.0.6.tgz#d18cfc9d0905c2fa95dce15de316cd2bee166be1"
-  dependencies:
-    "@kbrandwijk/swagger-to-graphql" "2.4.3"
-    graphql-config "2.0.1"
-
-graphql-config-extension-prisma@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-prisma/-/graphql-config-extension-prisma-0.2.1.tgz#95a27191e777cbfb4cba6ae220933dc909fbd5e8"
-  dependencies:
-    graphql-config "^2.0.1"
-    prisma-yml "1.0.93"
-
-graphql-config-extension-prisma@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/graphql-config-extension-prisma/-/graphql-config-extension-prisma-0.2.4.tgz#bb56d4d11a19563b84794f47f554661336e55d0c"
+graphql-config-extension-prisma@0.2.5, graphql-config-extension-prisma@^0.2.3:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/graphql-config-extension-prisma/-/graphql-config-extension-prisma-0.2.5.tgz#f67db5b6f882ac76096fb2e68a18ec81c7d51fd2"
   dependencies:
     graphql-config "2.2.1"
-    prisma-yml "1.0.97"
+    prisma-yml "1.20.0-beta.18"
 
 graphql-config@2.0.0:
   version "2.0.0"
@@ -5286,17 +5296,7 @@ graphql-config@2.0.0:
     lodash "^4.17.4"
     minimatch "^3.0.4"
 
-graphql-config@2.0.1:
-  version "2.0.1"
-  resolved "http://registry.npmjs.org/graphql-config/-/graphql-config-2.0.1.tgz#d34a9bdf1d7360af7b01db9b20260a342ddc7390"
-  dependencies:
-    graphql-import "^0.4.4"
-    graphql-request "^1.5.0"
-    js-yaml "^3.10.0"
-    lodash "^4.17.4"
-    minimatch "^3.0.4"
-
-graphql-config@2.2.1, graphql-config@^2.0.1, graphql-config@^2.2.0:
+graphql-config@2.2.1, graphql-config@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-2.2.1.tgz#5fd0ec77ac7428ca5fb2026cf131be10151a0cb2"
   dependencies:
@@ -5328,7 +5328,7 @@ graphql-extensions@^0.0.x, graphql-extensions@~0.0.9:
     core-js "^2.5.3"
     source-map-support "^0.5.1"
 
-graphql-import@0.4.5, graphql-import@^0.4.0, graphql-import@^0.4.4:
+graphql-import@0.4.5, graphql-import@^0.4.0:
   version "0.4.5"
   resolved "http://registry.npmjs.org/graphql-import/-/graphql-import-0.4.5.tgz#e2f18c28d335733f46df8e0733d8deb1c6e2a645"
   dependencies:
@@ -5383,19 +5383,13 @@ graphql-playground-html@1.6.4:
   dependencies:
     graphql-config "2.2.1"
 
-graphql-playground-middleware-express@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.6.2.tgz#3efe103cd222d6cf39e71f70c48be550c47b7a9b"
-  dependencies:
-    graphql-playground-html "1.5.5"
-
 graphql-playground-middleware-express@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.7.2.tgz#5f7bf3683494fe17893d1b54bbecee5e222c2e78"
   dependencies:
     graphql-playground-html "1.6.0"
 
-graphql-playground-middleware-express@^1.6.2:
+graphql-playground-middleware-express@1.7.6, graphql-playground-middleware-express@^1.6.2:
   version "1.7.6"
   resolved "https://registry.yarnpkg.com/graphql-playground-middleware-express/-/graphql-playground-middleware-express-1.7.6.tgz#aca38d2b8e5147914fc8fa613d151edd4ed0bc44"
   dependencies:
@@ -8975,63 +8969,13 @@ prisma-generate-schema@1.19.1:
     tslint-config-prettier "^1.15.0"
     tslint-eslint-rules "^5.4.0"
 
-prisma-json-schema@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/prisma-json-schema/-/prisma-json-schema-0.0.4.tgz#4ecee29c351e382fb833dad83a38c62961380458"
-
-prisma-json-schema@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/prisma-json-schema/-/prisma-json-schema-0.1.1.tgz#d8fd35848cab1d3e7b567b34b3e27c11a5f817b2"
-
 prisma-json-schema@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/prisma-json-schema/-/prisma-json-schema-0.1.2.tgz#2ad1cad7858d42bb8b32d3a31e9d3d9a7318d2e0"
 
-prisma-yml@1.0.93:
-  version "1.0.93"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.93.tgz#32b27e40fdca901b620d4d09262a00e74ed45df0"
-  dependencies:
-    ajv "5"
-    bluebird "^3.5.1"
-    chalk "^2.3.0"
-    debug "^3.1.0"
-    dotenv "^4.0.0"
-    fs-extra "^5.0.0"
-    graphql-request "^1.5.0"
-    http-proxy-agent "^2.1.0"
-    https-proxy-agent "^2.2.1"
-    isomorphic-fetch "^2.2.1"
-    js-yaml "^3.10.0"
-    json-stable-stringify "^1.0.1"
-    jsonwebtoken "^8.1.0"
-    lodash "^4.17.4"
-    prisma-json-schema "0.1.1"
-    replaceall "^0.1.6"
-    scuid "^1.0.2"
-    yaml-ast-parser "^0.0.40"
-
-prisma-yml@1.0.97:
-  version "1.0.97"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.0.97.tgz#ac5154bd64d3dfa078b9e67760eda3dee1e3391b"
-  dependencies:
-    ajv "5"
-    bluebird "^3.5.1"
-    chalk "^2.3.0"
-    debug "^3.1.0"
-    dotenv "^4.0.0"
-    fs-extra "^5.0.0"
-    graphql-request "^1.5.0"
-    http-proxy-agent "^2.1.0"
-    https-proxy-agent "^2.2.1"
-    isomorphic-fetch "^2.2.1"
-    js-yaml "^3.10.0"
-    json-stable-stringify "^1.0.1"
-    jsonwebtoken "^8.1.0"
-    lodash "^4.17.4"
-    prisma-json-schema "0.0.4"
-    replaceall "^0.1.6"
-    scuid "^1.0.2"
-    yaml-ast-parser "^0.0.40"
+prisma-json-schema@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/prisma-json-schema/-/prisma-json-schema-0.1.3.tgz#6c302db8f464f8b92e8694d3f7dd3f41ac9afcbe"
 
 prisma-yml@1.19.1:
   version "1.19.1"
@@ -9052,6 +8996,29 @@ prisma-yml@1.19.1:
     jsonwebtoken "^8.1.0"
     lodash "^4.17.4"
     prisma-json-schema "0.1.2"
+    replaceall "^0.1.6"
+    scuid "^1.0.2"
+    yaml-ast-parser "^0.0.40"
+
+prisma-yml@1.20.0-beta.18:
+  version "1.20.0-beta.18"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.20.0-beta.18.tgz#fc5f3d2b14f12110e4c64c00305088c5118adb3d"
+  dependencies:
+    ajv "5"
+    bluebird "^3.5.1"
+    chalk "^2.3.0"
+    debug "^3.1.0"
+    dotenv "^4.0.0"
+    fs-extra "^7.0.0"
+    graphql-request "^1.5.0"
+    http-proxy-agent "^2.1.0"
+    https-proxy-agent "^2.2.1"
+    isomorphic-fetch "^2.2.1"
+    js-yaml "^3.10.0"
+    json-stable-stringify "^1.0.1"
+    jsonwebtoken "^8.1.0"
+    lodash "^4.17.4"
+    prisma-json-schema "0.1.3"
     replaceall "^0.1.6"
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
@@ -9426,13 +9393,13 @@ react-proxy@^1.1.7:
     react-deep-force-update "^1.0.0"
 
 react-relay@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.6.2.tgz#2e48480390b327dbf28cb0d97420db64fae4bda6"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.7.0.tgz#6a21df4e6bb52c7a02374ad288ccbeb0172f095d"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "0.8.17"
     prop-types "^15.5.8"
-    relay-runtime "1.6.2"
+    relay-runtime "1.7.0"
 
 react-test-renderer@^16.5.1:
   version "16.6.0"
@@ -9679,12 +9646,12 @@ regjsparser@^0.3.0:
     jsesc "~0.5.0"
 
 relay-compiler@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-1.6.2.tgz#845e27bb446e993524d176b0ef4593c9757ed662"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-1.7.0.tgz#a78e629f2156f31fc6d42b5dbcfa9ad33eefd6f6"
   dependencies:
-    "@babel/generator" "7.0.0-beta.54"
-    "@babel/parser" "7.0.0-beta.54"
-    "@babel/types" "7.0.0-beta.54"
+    "@babel/generator" "7.0.0-beta.56"
+    "@babel/parser" "7.0.0-beta.56"
+    "@babel/types" "7.0.0-beta.56"
     babel-polyfill "^6.20.0"
     babel-preset-fbjs "2.2.0"
     babel-runtime "^6.23.0"
@@ -9693,15 +9660,15 @@ relay-compiler@^1.6.0:
     fast-glob "^2.2.2"
     fb-watchman "^2.0.0"
     fbjs "0.8.17"
-    graphql-compiler "1.6.2"
+    graphql-compiler "1.7.0"
     immutable "~3.7.6"
-    relay-runtime "1.6.2"
+    relay-runtime "1.7.0"
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-relay-runtime@1.6.2, relay-runtime@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.6.2.tgz#5ecd43d92799e761454200b455dd1c0cb0259659"
+relay-runtime@1.7.0, relay-runtime@^1.6.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.7.0.tgz#59cfb5cab361ef630099464e1b364342466cd212"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "0.8.17"
@@ -10196,9 +10163,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.77:
-  version "0.2.77"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.77.tgz#03b4d447c00a888f167f61e624e5767c609f75e6"
+slate-base64-serializer@^0.2.79:
+  version "0.2.79"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.79.tgz#e8736ed8f63ea80d781726f4879950bf57411e69"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -10215,17 +10182,17 @@ slate-hotkeys@^0.2.7:
     is-hotkey "0.1.4"
     slate-dev-environment "^0.2.0"
 
-slate-plain-serializer@^0.6.16, slate-plain-serializer@^0.6.2:
-  version "0.6.16"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.16.tgz#096f48f51f93fd1fa5db0206a160129f9798f07a"
+slate-plain-serializer@^0.6.18, slate-plain-serializer@^0.6.2:
+  version "0.6.18"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.18.tgz#cd99be51f3d1ca4ecfe72d930a1d058ae912aeb6"
 
-slate-prop-types@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.7.tgz#29d89d95196cf0ffe3b7eb4aa2f795ab8871090c"
+slate-prop-types@^0.5.9:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.9.tgz#05084714bc9634614aa2210f07f99ad760ea57c0"
 
 slate-react@^0.20.0:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.2.tgz#974eada54a846f0a71532070ef9c26992495f9e6"
+  version "0.20.4"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.20.4.tgz#4130683a2260b6b2ab0773c33d6a3a92038e2a32"
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -10235,17 +10202,17 @@ slate-react@^0.20.0:
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.77"
+    slate-base64-serializer "^0.2.79"
     slate-dev-environment "^0.2.0"
     slate-hotkeys "^0.2.7"
-    slate-plain-serializer "^0.6.16"
-    slate-prop-types "^0.5.7"
+    slate-plain-serializer "^0.6.18"
+    slate-prop-types "^0.5.9"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
 slate@^0.43.0:
-  version "0.43.0"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.43.0.tgz#f5bf8b94efc0c3f65262d9bbdbfcaba404c861d7"
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.43.2.tgz#61c8026a0686f67f9327ec9d153dd56f9496e23a"
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
@@ -10373,8 +10340,8 @@ spdx-expression-parse@^3.0.0:
     spdx-license-ids "^3.0.0"
 
 spdx-license-ids@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.1.tgz#e2a303236cac54b04031fa7a5a79c7e701df852f"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.2.tgz#a59efc09784c2a5bada13cfeaf5c75dd214044d2"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
@@ -10770,8 +10737,8 @@ terser-webpack-plugin@1.0.2:
     worker-farm "^1.5.2"
 
 terser@^3.8.1:
-  version "3.10.7"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.7.tgz#8b48f25f959eeef7ae48407c1b21149052535973"
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.8.tgz#2fe3967396a10cdc3d575074fe857efd30a2895a"
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
@@ -10834,6 +10801,13 @@ title-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
     upper-case "^1.0.3"
+
+tmp-graphql-config-extension-openapi@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/tmp-graphql-config-extension-openapi/-/tmp-graphql-config-extension-openapi-1.0.7.tgz#e651552bf6c57e473b088434940aba2b757c2b4c"
+  dependencies:
+    "@kbrandwijk/swagger-to-graphql" "2.4.3"
+    graphql-config "2.2.1"
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -11920,8 +11894,8 @@ zen-observable-ts@^0.8.10, zen-observable-ts@^0.8.9:
     zen-observable "^0.8.0"
 
 zen-observable@^0.8.0, zen-observable@^0.8.10:
-  version "0.8.10"
-  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.10.tgz#85ad75d41fed82e5b4651bd64ca117b2af960182"
+  version "0.8.11"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.11.tgz#d3415885eeeb42ee5abb9821c95bb518fcd6d199"
 
 zip-stream@^1.2.0:
   version "1.2.0"

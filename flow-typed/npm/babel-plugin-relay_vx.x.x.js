@@ -1,4 +1,4 @@
-// flow-typed signature: b999cc2c7ddea456249a6f757ecca63f
+// flow-typed signature: db8133774c2e8a846fec480249936d0a
 // flow-typed version: <<STUB>>/babel-plugin-relay_v^1.6.0/flow_v0.85.0
 
 /**
@@ -31,6 +31,10 @@ declare module 'babel-plugin-relay/babel-plugin-relay.min' {
 }
 
 declare module 'babel-plugin-relay/lib/BabelPluginRelay' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-relay/lib/BabelPluginRelay.macro' {
   declare module.exports: any;
 }
 
@@ -114,6 +118,10 @@ declare module 'babel-plugin-relay/lib/RelayTransformError' {
   declare module.exports: any;
 }
 
+declare module 'babel-plugin-relay/macro' {
+  declare module.exports: any;
+}
+
 // Filename aliases
 declare module 'babel-plugin-relay/babel-plugin-relay.js' {
   declare module.exports: $Exports<'babel-plugin-relay/babel-plugin-relay'>;
@@ -129,6 +137,9 @@ declare module 'babel-plugin-relay/index.js' {
 }
 declare module 'babel-plugin-relay/lib/BabelPluginRelay.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/BabelPluginRelay'>;
+}
+declare module 'babel-plugin-relay/lib/BabelPluginRelay.macro.js' {
+  declare module.exports: $Exports<'babel-plugin-relay/lib/BabelPluginRelay.macro'>;
 }
 declare module 'babel-plugin-relay/lib/compileGraphQLTag.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/compileGraphQLTag'>;
@@ -189,4 +200,7 @@ declare module 'babel-plugin-relay/lib/RelayQLTransformer.js' {
 }
 declare module 'babel-plugin-relay/lib/RelayTransformError.js' {
   declare module.exports: $Exports<'babel-plugin-relay/lib/RelayTransformError'>;
+}
+declare module 'babel-plugin-relay/macro.js' {
+  declare module.exports: $Exports<'babel-plugin-relay/macro'>;
 }
