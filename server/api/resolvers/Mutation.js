@@ -135,13 +135,13 @@ const Mutation: MutationType = {
             value: 100,
           },
         },
-        marginHorizontal: {
-          create: {
-            web: { connect: { id: web.id } },
-            unit: 'KEYWORD',
-            value: 1,
-          },
-        },
+        // marginHorizontal: {
+        //   create: {
+        //     web: { connect: { id: web.id } },
+        //     unit: 'KEYWORD',
+        //     value: 1,
+        //   },
+        // },
         paddingHorizontal: {
           connect: { id: spaceSmall.id },
         },

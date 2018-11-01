@@ -333,15 +333,15 @@ enum StyleFontWeight {
   NORMAL
   BOLD
   # Integers must be prefixed to be valid GraphQL enum value.
-  INT_100
-  INT_200
-  INT_300
-  INT_400
-  INT_500
-  INT_600
-  INT_700
-  INT_800
-  INT_900
+  _100
+  _200
+  _300
+  _400
+  _500
+  _600
+  _700
+  _800
+  _900
 }
 
 enum StyleFontVariant {

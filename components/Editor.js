@@ -1,20 +1,21 @@
 // @flow
 // $FlowFixMe
-import React, { useState, memo } from 'react';
+import React, { useState, useMemo, type Node } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
 import { Value, KeyUtils } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-// Map array to object for faster access by Id.
-function mapArrayOfObjectsWithIdToObject(array) {
+function arrayOfItemsWithIdToObject(array) {
   return array.reduce((obj, item) => {
     return { ...obj, [item.id]: item };
   }, {});
 }
 
-function dbModelToSlateModel(pageElementId, elements) {
+function elementsToSlateValue(pageElementId, elementsArray) {
+  const elements = arrayOfItemsWithIdToObject(elementsArray);
+
   function walk(id) {
     const element = elements[id];
     const { type } = element;
@@ -32,6 +33,7 @@ function dbModelToSlateModel(pageElementId, elements) {
         ...slateNode,
         leaves: element.textLeaves,
       };
+
     return {
       ...slateNode,
       nodes: element.children
@@ -50,66 +52,278 @@ function dbModelToSlateModel(pageElementId, elements) {
   };
 }
 
-type Page = $NonMaybeType<$ElementType<Data, 'page'>>;
-type Web = $ElementType<Page, 'web'>;
-
-type EditorWithDataProps = {|
-  page: Page,
-  borderValues: $NonMaybeType<$ElementType<Web, 'borderValues'>>,
-  colorValues: $NonMaybeType<$ElementType<Web, 'colorValues'>>,
-  dimensionValues: $NonMaybeType<$ElementType<Web, 'dimensionValues'>>,
-  elements: $NonMaybeType<$ElementType<Web, 'elements'>>,
-  styles: $NonMaybeType<$ElementType<Web, 'styles'>>,
-|};
-
-function EditorWithData({
-  page,
+// Eager approach is simple. TODO: Consider lazy resolving with a cache.
+function stylesToStyleSheets(
+  styles,
   borderValues,
   colorValues,
   dimensionValues,
+) {
+  const borders = borderValues.reduce((borders, borderValue) => {
+    const { unit, id, value } = borderValue;
+    switch (unit) {
+      case 'POINT': {
+        return { ...borders, [id]: value };
+      }
+      default: {
+        // eslint-disable-next-line no-unused-expressions
+        (unit: empty);
+        return borders;
+      }
+    }
+  }, {});
+
+  const colors = colorValues.reduce((colors, colorValue) => {
+    const { r, g, b, a } = colorValue;
+    const value =
+      a == null ? `rgb(${r}, ${g}, ${b})` : `rgb(${r}, ${g}, ${b}, ${a})`;
+    return { ...colors, [colorValue.id]: value };
+  }, {});
+
+  const dimensions = dimensionValues.reduce((dimensions, dimensionValue) => {
+    const { unit, id, value } = dimensionValue;
+    switch (unit) {
+      case 'POINT': {
+        return { ...dimensions, [id]: value };
+      }
+      case 'PERCENTAGE': {
+        return { ...dimensions, [id]: `${value}%` };
+      }
+      default: {
+        // eslint-disable-next-line no-unused-expressions
+        (unit: empty);
+        return dimensions;
+      }
+    }
+  }, {});
+
+  const sheets = styles.reduce((sheets, value) => {
+    const json = {};
+    // Manually, because relay/unused-fields eslint check.
+    // flat
+    if (value.display != null) json.display = value.display.toLowerCase();
+    if (value.position != null) json.position = value.position.toLowerCase();
+    if (value.flexDirection != null)
+      json.flexDirection = value.flexDirection.toLowerCase().replace('_', '-');
+    if (value.flexWrap != null)
+      json.flexWrap = value.flexWrap.toLowerCase().replace('_', '-');
+    if (value.justifyContent != null)
+      json.justifyContent = value.justifyContent
+        .toLowerCase()
+        .replace('_', '-');
+    if (value.alignItems != null)
+      json.alignItems = value.alignItems.toLowerCase().replace('_', '-');
+    if (value.alignSelf != null)
+      json.alignSelf = value.alignSelf.toLowerCase().replace('_', '-');
+    if (value.alignContent != null)
+      json.alignContent = value.alignContent.toLowerCase().replace('_', '-');
+    if (value.overflow != null) json.overflow = value.overflow.toLowerCase();
+    if (value.flex != null) json.flex = value.flex;
+    if (value.flexGrow != null) json.flexGrow = value.flexGrow;
+    if (value.flexShrink != null) json.flexShrink = value.flexShrink;
+    // flexBasis can be number or 'auto', but Prisma doesn't support union types
+    // yet. Therefore, -1 is considered to be 'auto'.
+    if (value.flexBasis != null)
+      json.flexBasis = value.flexBasis === -1 ? 'auto' : value.flexBasis;
+    if (value.zIndex != null) json.zIndex = value.zIndex;
+    if (value.direction != null) json.direction = value.direction.toLowerCase();
+    if (value.opacity != null) json.opacity = value.opacity;
+    if (value.fontFamily != null) json.fontFamily = value.fontFamily;
+    if (value.fontSize != null) json.fontSize = value.fontSize;
+    if (value.fontStyle != null) json.fontStyle = value.fontStyle.toLowerCase();
+    if (value.fontWeight != null)
+      json.fontWeight = value.fontWeight.toLowerCase().replace('_', '');
+    if (value.fontVariant != null)
+      json.fontVariant = value.fontVariant.toLowerCase().replace('_', '-');
+    if (value.letterSpacing != null) json.letterSpacing = value.letterSpacing;
+    if (value.lineHeight != null) json.lineHeight = value.lineHeight;
+    if (value.textAlign != null) json.textAlign = value.textAlign.toLowerCase();
+    if (value.textAlignVertical != null)
+      json.textAlignVertical = value.textAlignVertical.toLowerCase();
+    if (value.textDecorationLine != null)
+      json.textDecorationLine = value.textDecorationLine
+        .toLowerCase()
+        .replace('_', '-');
+    if (value.textTransform != null)
+      json.textTransform = value.textTransform.toLowerCase();
+    if (value.borderStyle != null)
+      json.borderStyle = value.borderStyle.toLowerCase();
+    // borders
+    if (value.borderRadius != null)
+      json.borderRadius = borders[value.borderRadius.id];
+    if (value.borderBottomEndRadius != null)
+      json.borderBottomEndRadius = borders[value.borderBottomEndRadius.id];
+    if (value.borderBottomLeftRadius != null)
+      json.borderBottomLeftRadius = borders[value.borderBottomLeftRadius.id];
+    if (value.borderBottomRightRadius != null)
+      json.borderBottomRightRadius = borders[value.borderBottomRightRadius.id];
+    if (value.borderBottomStartRadius != null)
+      json.borderBottomStartRadius = borders[value.borderBottomStartRadius.id];
+    if (value.borderTopEndRadius != null)
+      json.borderTopEndRadius = borders[value.borderTopEndRadius.id];
+    if (value.borderTopLeftRadius != null)
+      json.borderTopLeftRadius = borders[value.borderTopLeftRadius.id];
+    if (value.borderTopRightRadius != null)
+      json.borderTopRightRadius = borders[value.borderTopRightRadius.id];
+    if (value.borderTopStartRadius != null)
+      json.borderTopStartRadius = borders[value.borderTopStartRadius.id];
+    if (value.borderWidth != null)
+      json.borderWidth = borders[value.borderWidth.id];
+    if (value.borderBottomWidth != null)
+      json.borderBottomWidth = borders[value.borderBottomWidth.id];
+    if (value.borderEndWidth != null)
+      json.borderEndWidth = borders[value.borderEndWidth.id];
+    if (value.borderLeftWidth != null)
+      json.borderLeftWidth = borders[value.borderLeftWidth.id];
+    if (value.borderRightWidth != null)
+      json.borderRightWidth = borders[value.borderRightWidth.id];
+    if (value.borderStartWidth != null)
+      json.borderStartWidth = borders[value.borderStartWidth.id];
+    if (value.borderTopWidth != null)
+      json.borderTopWidth = borders[value.borderTopWidth.id];
+    // colors
+    if (value.color != null) json.color = colors[value.color.id];
+    if (value.backgroundColor != null)
+      json.backgroundColor = colors[value.backgroundColor.id];
+    if (value.borderColor != null)
+      json.borderColor = colors[value.borderColor.id];
+    if (value.borderBottomColor != null)
+      json.borderBottomColor = colors[value.borderBottomColor.id];
+    if (value.borderEndColor != null)
+      json.borderEndColor = colors[value.borderEndColor.id];
+    if (value.borderLeftColor != null)
+      json.borderLeftColor = colors[value.borderLeftColor.id];
+    if (value.borderRightColor != null)
+      json.borderRightColor = colors[value.borderRightColor.id];
+    if (value.borderStartColor != null)
+      json.borderStartColor = colors[value.borderStartColor.id];
+    if (value.borderTopColor != null)
+      json.borderTopColor = colors[value.borderTopColor.id];
+    // dimensions
+    if (value.width != null) json.width = dimensions[value.width.id];
+    if (value.height != null) json.height = dimensions[value.height.id];
+    if (value.bottom != null) json.bottom = dimensions[value.bottom.id];
+    if (value.end != null) json.end = dimensions[value.end.id];
+    if (value.left != null) json.left = dimensions[value.left.id];
+    if (value.right != null) json.right = dimensions[value.right.id];
+    if (value.start != null) json.start = dimensions[value.start.id];
+    if (value.top != null) json.top = dimensions[value.top.id];
+    if (value.minWidth != null) json.minWidth = dimensions[value.minWidth.id];
+    if (value.maxWidth != null) json.maxWidth = dimensions[value.maxWidth.id];
+    if (value.minHeight != null)
+      json.minHeight = dimensions[value.minHeight.id];
+    if (value.maxHeight != null)
+      json.maxHeight = dimensions[value.maxHeight.id];
+    if (value.margin != null) json.margin = dimensions[value.margin.id];
+    if (value.marginBottom != null)
+      json.marginBottom = dimensions[value.marginBottom.id];
+    if (value.marginEnd != null)
+      json.marginEnd = dimensions[value.marginEnd.id];
+    if (value.marginHorizontal != null)
+      json.marginHorizontal = dimensions[value.marginHorizontal.id];
+    if (value.marginLeft != null)
+      json.marginLeft = dimensions[value.marginLeft.id];
+    if (value.marginRight != null)
+      json.marginRight = dimensions[value.marginRight.id];
+    if (value.marginStart != null)
+      json.marginStart = dimensions[value.marginStart.id];
+    if (value.marginTop != null)
+      json.marginTop = dimensions[value.marginTop.id];
+    if (value.marginVertical != null)
+      json.marginVertical = dimensions[value.marginVertical.id];
+    if (value.padding != null) json.padding = dimensions[value.padding.id];
+    if (value.paddingBottom != null)
+      json.paddingBottom = dimensions[value.paddingBottom.id];
+    if (value.paddingEnd != null)
+      json.paddingEnd = dimensions[value.paddingEnd.id];
+    if (value.paddingHorizontal != null)
+      json.paddingHorizontal = dimensions[value.paddingHorizontal.id];
+    if (value.paddingLeft != null)
+      json.paddingLeft = dimensions[value.paddingLeft.id];
+    if (value.paddingRight != null)
+      json.paddingRight = dimensions[value.paddingRight.id];
+    if (value.paddingStart != null)
+      json.paddingStart = dimensions[value.paddingStart.id];
+    if (value.paddingTop != null)
+      json.paddingTop = dimensions[value.paddingTop.id];
+    if (value.paddingVertical != null)
+      json.paddingVertical = dimensions[value.paddingVertical.id];
+    const sheet = StyleSheet.create({ json }).json;
+    return { ...sheets, [value.id]: sheet };
+  }, {});
+
+  const stylesById = styles.reduce((stylesById, style) => {
+    return { ...stylesById, [style.id]: style };
+  }, {});
+
+  // No circular check. It's the server and UI responsibility.
+  function resolveStyle(styleId) {
+    const style = stylesById[styleId];
+    let { isText } = style;
+    let spreadStyles = [];
+    style.spreadStyles
+      // Clone first, because sort mutates array.
+      .slice()
+      .sort((a, b) => a.index - b.index)
+      .forEach(item => {
+        const resolved = resolveStyle(item.style.id);
+        if (resolved.isText) isText = true;
+        spreadStyles = [...resolved.style, ...spreadStyles];
+      });
+    return { isText, style: [...spreadStyles, sheets[styleId]] };
+  }
+
+  const styleSheets = styles.reduce((styleSheets, { id, name, nextStyle }) => {
+    const { isText, style } = resolveStyle(id);
+    return { ...styleSheets, [id]: { name, isText, style, nextStyle } };
+  }, {});
+
+  return styleSheets;
+}
+
+function EditorWithData({
+  page,
   elements,
   styles,
-}: EditorWithDataProps) {
+  borderValues,
+  colorValues,
+  dimensionValues,
+}) {
   const [editorValue, setEditorValue] = useState(() => {
-    const elementsById = mapArrayOfObjectsWithIdToObject(elements);
-    const model = dbModelToSlateModel(page.element.id, elementsById);
+    const model = elementsToSlateValue(page.element.id, elements);
     // For SSR.
     KeyUtils.resetGenerator();
     return Value.fromJSON(model);
   });
 
-  // console.log(colorValues);
-  // console.log(styles.map(s => s.spreadStyles));
+  const styleSheets = useMemo(
+    () =>
+      stylesToStyleSheets(styles, borderValues, colorValues, dimensionValues),
+    [styles, borderValues, colorValues, dimensionValues],
+  );
 
   function handleEditorChange({ value }) {
     setEditorValue(value);
   }
 
-  function resolveStyle(styleId) {
-    // const style = styles.find(style => style.id === styleId);
-    // console.log(style.spreadStyles);
-    // najdi styl, najdi vsechny predchozi, transformuj props, jakmile ma neco
-    // isText, tak je to isText, kdyz odeberu styl s isText, tak co?
-    // to nesmi jit odebrat, ledaze bych odebral children nebo detekovat, jestli
-    // tam neni text.
-    // console.log(styleId);
-
-    return {
-      style: {},
-      isText: false,
-    };
-  }
-
-  function renderNode(props) {
+  function renderNode(props, editor, next) {
     const { node, attributes, children } = props;
     const data = node.data.get(node.type);
-    const { style, isText } = resolveStyle(data.id);
-    const Component = isText ? Text : View;
-    return (
-      <Component {...attributes} style={style}>
-        {children}
-      </Component>
-    );
+    switch (node.type) {
+      case 'style': {
+        const { style, isText } = styleSheets[data.id];
+        const Component = isText ? Text : View;
+        return (
+          <Component {...attributes} style={style}>
+            {children}
+          </Component>
+        );
+      }
+      // case 'component':
+      //   return <blockquote {...attributes}>{children}</blockquote>;
+      default:
+        return next();
+    }
   }
 
   return (
@@ -126,12 +340,9 @@ function EditorWithData({
   );
 }
 
-type EditorProps = {|
-  data: Data,
-|};
-
-// Looks like a pattern.
-function Editor({ data: { page } }: EditorProps) {
+// Because of Flow 0.85, funcional component must type return, otherwise
+// EditorWithData type inference does not work.
+function Editor({ data: { page } }: {| data: Data |}): Node {
   if (
     page == null ||
     page.web.borderValues == null ||
@@ -140,7 +351,7 @@ function Editor({ data: { page } }: EditorProps) {
     page.web.elements == null ||
     page.web.styles == null
   ) {
-    // TODO: Return error page and log missing data.
+    // No data? Just render nothing. Maybe a schema was updated.
     return null;
   }
   return (
@@ -162,7 +373,6 @@ export default createFragmentContainer(
     fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
       page(id: $id) {
         id
-        title
         element {
           id
         }
@@ -190,12 +400,15 @@ export default createFragmentContainer(
           styles {
             id
             spreadStyles {
-              id
               index
+              style {
+                id
+              }
             }
             nextStyle {
               id
             }
+            isText
             name
             display
             width {

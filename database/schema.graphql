@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Oct 28 2018 01:19:20 GMT+0200 (Central European Summer Time)
+# timestamp: Wed Oct 31 2018 23:11:51 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -1082,7 +1082,6 @@ input DimensionValueSubscriptionWhereInput {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
-  KEYWORD
 }
 
 input DimensionValueUpdateDataInput {

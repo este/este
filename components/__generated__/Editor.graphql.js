@@ -9,7 +9,7 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 export type BorderValueUnit = "POINT";
-export type DimensionValueUnit = "KEYWORD" | "PERCENTAGE" | "POINT";
+export type DimensionValueUnit = "PERCENTAGE" | "POINT";
 export type ElementType = "BLOCK" | "INLINE" | "TEXT";
 export type StyleAlignContent = "CENTER" | "FLEX_END" | "FLEX_START" | "SPACE_AROUND" | "SPACE_BETWEEN" | "STRETCH";
 export type StyleAlignItems = "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";
@@ -34,7 +34,6 @@ declare export opaque type Editor$ref: FragmentReference;
 export type Editor = {|
   +page: ?{|
     +id: string,
-    +title: string,
     +element: {|
       +id: string
     |},
@@ -62,12 +61,15 @@ export type Editor = {|
       +styles: ?$ReadOnlyArray<{|
         +id: string,
         +spreadStyles: ?$ReadOnlyArray<{|
-          +id: string,
           +index: number,
+          +style: {|
+            +id: string
+          |},
         |}>,
         +nextStyle: ?{|
           +id: string
         |},
+        +isText: ?boolean,
         +name: string,
         +display: ?StyleDisplay,
         +width: ?{|
@@ -324,6 +326,16 @@ v4 = {
   "name": "index",
   "args": null,
   "storageKey": null
+},
+v5 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "style",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Style",
+  "plural": false,
+  "selections": v1
 };
 return {
   "kind": "Fragment",
@@ -356,13 +368,6 @@ return {
       "plural": false,
       "selections": [
         v0,
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "title",
-          "args": null,
-          "storageKey": null
-        },
         {
           "kind": "LinkedField",
           "alias": null,
@@ -469,6 +474,13 @@ return {
                   "concreteType": "Style",
                   "plural": false,
                   "selections": v1
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "isText",
+                  "args": null,
+                  "storageKey": null
                 },
                 v2,
                 {
@@ -843,8 +855,8 @@ return {
                   "concreteType": "StyleSpread",
                   "plural": true,
                   "selections": [
-                    v0,
-                    v4
+                    v4,
+                    v5
                   ]
                 },
                 {
@@ -1245,16 +1257,7 @@ return {
                   "plural": true,
                   "selections": v1
                 },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "name": "style",
-                  "storageKey": null,
-                  "args": null,
-                  "concreteType": "Style",
-                  "plural": false,
-                  "selections": v1
-                },
+                v5,
                 v4,
                 {
                   "kind": "ScalarField",
@@ -1280,5 +1283,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '7f2f0909f67e2e2f0315c4e270792d4f';
+(node/*: any*/).hash = '95aa6cfd62a773afbe34e4daba4c3f2d';
 module.exports = node;

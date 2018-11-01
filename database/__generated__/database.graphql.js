@@ -1236,7 +1236,6 @@ input DimensionValueSubscriptionWhereInput {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
-  KEYWORD
 }
 
 input DimensionValueUpdateDataInput {
@@ -5606,7 +5605,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type DimensionValueUnit =
     | 'POINT'
     | 'PERCENTAGE'
-    | 'KEYWORD'
   
 
  export type ElementOrderByInput =
