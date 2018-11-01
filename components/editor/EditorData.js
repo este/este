@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
-import Text from './core/Text';
+import Text from '../core/Text';
 import SlatePlainSerializer from 'slate-plain-serializer';
 import isNumeric from 'validator/lib/isNumeric';
-import hotKey from '../browser/hotKey';
+import hotKey from '../../browser/hotKey';
 
 type EditorDataProps = {|
   defaultData: ?Object,

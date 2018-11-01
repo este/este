@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { TextInput } from 'react-native';
-import withTheme, { type Theme } from './core/withTheme';
+import withTheme, { type Theme } from '../core/withTheme';
 
 type EditorMenuLinkProps = {|
   theme: Theme,

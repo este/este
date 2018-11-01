@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import ReactDOM from 'react-dom';
 import { findDOMNode } from 'slate-react';
-import withTheme, { type Theme } from './core/withTheme';
+import withTheme, { type Theme } from '../core/withTheme';
 
 type EditorBreadcrumbOutlineProps = {|
   node: Object,

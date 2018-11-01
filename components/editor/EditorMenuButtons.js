@@ -1,8 +1,8 @@
 // @flow
 /* eslint-env browser */
 import * as React from 'react';
-import Button from './core/Button';
-import withTheme, { type Theme } from './core/withTheme';
+import Button from '../core/Button';
+import withTheme, { type Theme } from '../core/withTheme';
 // import type { MarkType, BlockNodeType, OnEditorAction } from './Editor';
 type MarkType = any;
 type BlockNodeType = any;

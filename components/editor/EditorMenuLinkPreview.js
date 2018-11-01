@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import A from './core/A';
-import withTheme, { type Theme } from './core/withTheme';
+import A from '../core/A';
+import withTheme, { type Theme } from '../core/withTheme';
 
 const preventDefault = (event: Event) => {
   event.preventDefault();

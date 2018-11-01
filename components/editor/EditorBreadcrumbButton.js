@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Button, { type ButtonProps } from './core/Button';
+import Button, { type ButtonProps } from '../core/Button';
 
 class EditorBreadcrumbButton extends React.PureComponent<ButtonProps> {
   handlePressIn = (event: Event) => {

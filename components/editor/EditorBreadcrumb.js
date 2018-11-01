@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
 import { View } from 'react-native';
-import withTheme, { type Theme } from './core/withTheme';
-import Row from './core/Row';
+import withTheme, { type Theme } from '../core/withTheme';
+import Row from '../core/Row';
 import EditorBreadcrumbButton from './EditorBreadcrumbButton';
 import EditorBreadcrumbItem from './EditorBreadcrumbItem';
 import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
 import EditorBreadcrumbDetail from './EditorBreadcrumbDetail';
 import { pipe } from 'ramda';
-import withRovingTabIndex from './core/withRovingTabIndex';
+import withRovingTabIndex from '../core/withRovingTabIndex';
 // import type { OnEditorAction } from './Editor';
 type OnEditorAction = any;
 

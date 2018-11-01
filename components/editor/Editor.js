@@ -285,6 +285,7 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
+// Emulate View.
 const slateEditorStyles = {
   display: 'flex',
   flex: 1,

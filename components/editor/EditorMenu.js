@@ -3,7 +3,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { View } from 'react-native';
-import withTheme, { type Theme } from './core/withTheme';
+import withTheme, { type Theme } from '../core/withTheme';
 import { findDOMNode } from 'slate-react';
 import EditorMenuButtons from './EditorMenuButtons';
 import EditorMenuLink from './EditorMenuLink';
