@@ -9,7 +9,7 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 export type BorderValueUnit = "POINT";
-export type DimensionValueUnit = "PERCENTAGE" | "POINT";
+export type DimensionValueUnit = "KEYWORD" | "PERCENTAGE" | "POINT";
 export type ElementType = "BLOCK" | "INLINE" | "TEXT";
 export type StyleAlignContent = "CENTER" | "FLEX_END" | "FLEX_START" | "SPACE_AROUND" | "SPACE_BETWEEN" | "STRETCH";
 export type StyleAlignItems = "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";

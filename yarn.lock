@@ -1044,9 +1044,9 @@
   integrity sha512-A2TAGbTFdBw9azHbpVd+/FkdW2T6msN1uct1O9bH3vTerEHKZhTXJUQXy+hNq1B0RagfU8U+KBdqiZpxjhOUQA==
 
 "@types/node@*", "@types/node@^10.12.0":
-  version "10.12.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.1.tgz#da61b64a2930a80fa708e57c45cd5441eb379d5b"
-  integrity sha512-i1sl+WCX2OCHeUi9oi7PiCNUtYFrpWhpcx878vpeq/tlZTKzcFdHePlyFHVbWqeuKN0SRPl/9ZFDSTsfv9h7VQ==
+  version "10.12.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.2.tgz#d77f9faa027cadad9c912cd47f4f8b07b0fb0864"
+  integrity sha512-53ElVDSnZeFUUFIYzI8WLQ25IhWzb6vbddNp8UHlXQyU0ET2RhV5zg0NfubzU7iNMh5bBXb0htCzfvrSVNgzaQ==
 
 "@types/prettier@^1.13.2":
   version "1.13.2"
@@ -1067,9 +1067,9 @@
     "@types/mime" "*"
 
 "@types/tough-cookie@^2.3.0":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.3.tgz#7f226d67d654ec9070e755f46daebf014628e9d9"
-  integrity sha512-MDQLxNFRLasqS4UlkWMSACMKeSm1x4Q3TxzUC7KQUsh6RK1ZrQ0VEyE3yzXcBu+K8ejVj4wuX32eUG02yNp+YQ==
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.4.tgz#821878b81bfab971b93a265a561d54ea61f9059f"
+  integrity sha512-Set5ZdrAaKI/qHdFlVMgm/GsAv/wkXhSTuZFkJ+JI7HK+wIkIlOaUXSXieIvJ0+OvGIqtREFoE+NHJtEq0gtEw==
 
 "@types/zen-observable@^0.5.3":
   version "0.5.4"
@@ -2152,9 +2152,9 @@ babel-plugin-react-intl@^3.0.1:
     mkdirp "^0.5.1"
 
 babel-plugin-react-native-web@^0.9.0:
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.5.tgz#eeaa17c6e57e170cca46a77396bdc55f88bedde3"
-  integrity sha512-wMomSv51/GYIOxhJrPBZ1GRro2kSpe48pW3NstVsKSHsiiXsJPOw8+Fqth96rJTsKPtpBuJBJu2L57dtxnoZ2A==
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.6.tgz#21ca8c097d4d475f5b8cd435fa461d1342fcb103"
+  integrity sha512-toyQWuiwwpVFDtlUtpKuf01Qjxk/f3kUi6TvT8kJ9HT59xjchUflhFYrBvQeESS6Mi+psHRWUxhDjX01m2IeUQ==
 
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
@@ -10115,10 +10115,10 @@ prisma-binding@^2.0.2:
     subscriptions-transport-ws "0.9.8"
     yargs "12.0.1"
 
-prisma-cli-core@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.19.2.tgz#28adaadc4f79782dc2fde32f8dd9f3e46224134c"
-  integrity sha512-gVv/pX3sb12S5teeLa9v9DxY0GfesU6uZNV/J3Ao0JILyehovAA2tnhbK8JpBQu9kPHpjirnR7vrkcqbHb1uNw==
+prisma-cli-core@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-cli-core/-/prisma-cli-core-1.19.3.tgz#098af825d11d0d69fde3c13975cb2ee54901472e"
+  integrity sha512-T3OUUQu3U1MilmLAhIaiCqMhM2TVQZ1cW9CQKYYwmKs2olCjAl5jhZDIammLv7BtvJy4yN6cLQIiexECIDPi7Q==
   dependencies:
     adm-zip "^0.4.7"
     archiver "^2.0.3"
@@ -10151,11 +10151,11 @@ prisma-cli-core@1.19.2:
     opn "^5.1.0"
     pause "^0.1.0"
     portfinder "^1.0.13"
-    prisma-client-lib "1.19.2"
-    prisma-db-introspection "1.19.2"
-    prisma-generate-schema "1.19.2"
+    prisma-client-lib "1.19.3"
+    prisma-db-introspection "1.19.3"
+    prisma-generate-schema "1.19.3"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.2"
+    prisma-yml "1.19.3"
     scuid "^1.0.2"
     semver "^5.4.1"
     sillyname "^0.1.0"
@@ -10164,10 +10164,10 @@ prisma-cli-core@1.19.2:
     util.promisify "^1.0.0"
     validator "^8.2.0"
 
-prisma-cli-engine@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.19.2.tgz#de3514271e03592ef9d490d7c7fdee957481350d"
-  integrity sha512-deRx8OAYNJ/7njEUnKn6C/aX43qVrGMoHJCWWI/H0lgdsIlt6Iaj2EZ3ADZYjy0wcHtJ1bvrN0Jy5cVfS5r03g==
+prisma-cli-engine@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-cli-engine/-/prisma-cli-engine-1.19.3.tgz#e0c355820b3d04437dd4cd3370739ef07e10c6c0"
+  integrity sha512-ey5v81EY55LYIfmkbJehq5e4qKIh8zvbbN7UAoJsIaRQjMKD2f2IjSelyGLT+IjoKTTO4/FXXFb/z6zvNMx0Fw==
   dependencies:
     "@heroku/linewrap" "^1.0.0"
     ajv "5"
@@ -10209,7 +10209,7 @@ prisma-cli-engine@1.19.2:
     memfs "^2.5.3"
     opn "^5.1.0"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.2"
+    prisma-yml "1.19.3"
     raven "2.3.0"
     replaceall "^0.1.6"
     rwlockfile "^1.4.8"
@@ -10224,10 +10224,10 @@ prisma-cli-engine@1.19.2:
     update-notifier "^2.3.0"
     validator "^8.2.0"
 
-prisma-client-lib@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-client-lib/-/prisma-client-lib-1.19.2.tgz#67c96386efa28c865fc111db71214941256bfbc5"
-  integrity sha512-wlkzr49iDlDWHOMdG/UEP0PU0HZwmGZSOFU5SkeveE0OBExWdqQSRmT0K7dK/IkojDCbUTZs1B9vBRiY4cWF0Q==
+prisma-client-lib@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-client-lib/-/prisma-client-lib-1.19.3.tgz#34af4a9eee653ba2407cfc3c84f1385423cff2ed"
+  integrity sha512-t2b1JgzdAKPC/gOtmgDbcILmnPa9+nciJI45OR1MVJuTWcIAIL5ogn5sfAjwtI7OlDM/eKNuPtlsnopCr0da/A==
   dependencies:
     "@types/node" "^10.12.0"
     "@types/prettier" "^1.13.2"
@@ -10242,10 +10242,10 @@ prisma-client-lib@1.19.2:
     ws "^6.1.0"
     zen-observable "^0.8.10"
 
-prisma-db-introspection@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-1.19.2.tgz#1cf96747cb5b16ca14edc10be27c9ba3ebb07ac8"
-  integrity sha512-qiSn3AHYrxOXV3K0c9U9rp0XP4oTTRm3+eAdNhlJBnX+IEvTzPK/A+QQCTNdH5YApG6NFndKUvCgtvEgpRIH4A==
+prisma-db-introspection@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-db-introspection/-/prisma-db-introspection-1.19.3.tgz#885f0756302dbab5928bff715c3e69bb7fe5edcd"
+  integrity sha512-o4syTFmQZGfaqYLc3xUKrUgL3TVzfZrnFbzsgB5N18SkkTtvE1DXg+SPmNnyG04pOmpI/L68J4ZC33nmCmuv2g==
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -10262,16 +10262,16 @@ prisma-db-introspection@1.19.2:
     pg "^7.4.1"
     pluralize "^7.0.0"
     prisma-json-schema "0.1.2"
-    prisma-yml "1.19.2"
+    prisma-yml "1.19.3"
     replaceall "^0.1.6"
     scuid "^1.0.2"
     uppercamelcase "^3.0.0"
     yaml-ast-parser "^0.0.40"
 
-prisma-generate-schema@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-generate-schema/-/prisma-generate-schema-1.19.2.tgz#2794852b93f569bb1768c322d29e047d9c902717"
-  integrity sha512-HfCcK+BoG9D114XiEj53PFlEhTRBJ5jBMSuBkz6oV1t/CPoEL6ARVw6XMInDmmMxmMPzzHxtXteQyNMX7ekwIw==
+prisma-generate-schema@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-generate-schema/-/prisma-generate-schema-1.19.3.tgz#78b3cf7ccb000bc594dbf17ff226e6d549d0c8a9"
+  integrity sha512-2UiaeYK0kQf41SF7jxMLZ3N963VnWJPCfCJOf3lY5WFWXGQiBv+wGJpONiiJ0eCp/oKPnJwr1CVBfgd/8hwsoA==
   dependencies:
     graphql "^14.0.2"
     pluralize "^7.0.0"
@@ -10289,10 +10289,10 @@ prisma-json-schema@0.1.3:
   resolved "https://registry.yarnpkg.com/prisma-json-schema/-/prisma-json-schema-0.1.3.tgz#6c302db8f464f8b92e8694d3f7dd3f41ac9afcbe"
   integrity sha512-XZrf2080oR81mY8/OC8al68HiwBm0nXlFE727JIia0ZbNqwuV4MyRYk6E0+OIa6/9KEYxZrcAmoBs3EW1cCvnA==
 
-prisma-yml@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.19.2.tgz#ae4821a9aa51a5c103757b6d25a4813247ce916c"
-  integrity sha512-RNnD/lT/paHO2TXaIWKeJxcVDtGU+0XWx+KlKw5b05ukLMwsDMphIcTJkACzv42QKvRfuL24nClDIs/cJLBI8A==
+prisma-yml@1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma-yml/-/prisma-yml-1.19.3.tgz#5743bc45fdc784b459b902ed2696500636f02eb6"
+  integrity sha512-chJn8YWliGbodWTnGXcV//09kn96LBJzP1PDCwhG76OKM3/UfYsoWtOatcLiGZ+8MoaI5y9BLxOHevlLrf3ilg==
   dependencies:
     ajv "5"
     bluebird "^3.5.1"
@@ -10338,13 +10338,13 @@ prisma-yml@1.20.0-beta.18:
     yaml-ast-parser "^0.0.40"
 
 prisma@^1.2.4:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.19.2.tgz#3d787cc37cee7bbd27efc3c2af1d3c0a47a812ac"
-  integrity sha512-q1HT2UZrPri7/EENQwWYFYMsg871HJwmDIOgtgicLJyZpsPnkLk2csrVjQLbVuuc2pCxQrS2mGDrBrnqmqHYqQ==
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-1.19.3.tgz#30ecb5bbe2bebabba2b35e2246e4f45d3847ee24"
+  integrity sha512-5v7+x7JSnwlX24j3+LFmMDSreoPQA3/HmaXk7SKSbWRudA/Cv2n9j3CD0yhKNcIkS2Xe34626UAOhhAXPF0dKA==
   dependencies:
     fs-extra "^5.0.0"
-    prisma-cli-core "1.19.2"
-    prisma-cli-engine "1.19.2"
+    prisma-cli-core "1.19.3"
+    prisma-cli-engine "1.19.3"
     require-onct "^0.0.2"
     semver "^5.4.1"
     source-map-support "^0.4.18"
@@ -10669,9 +10669,9 @@ react-is@^16.6.0:
   integrity sha512-q8U7k0Fi7oxF1HvQgyBjPwDXeMplEsArnKt2iYhuIF86+GBbgLHdAmokL3XUFjTd7Q363OSNG55FOGUdONVn1g==
 
 react-native-web@^0.9.0:
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.5.tgz#3ecc28a2cd508608802230d2b6a243c78d2e66d1"
-  integrity sha512-3D0uzJGv15JWYcSgMS9H/g5oqKjitaulba4xKEuf3TXz2ikVfB6O2VhZQJYJmHM0LAZZhDDX8KgfNG0GIL3ZQg==
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.6.tgz#d51073963582b76775bcdff328aeee0fca807c99"
+  integrity sha512-i0tN/UCLNgsoFkoJOxCtW92L07A5XIJe6p2tlqF3/gdgBL4HK5m63fhc1Ywr1OoU/YJ59/Dnwz1VE/lak5ar3w==
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"

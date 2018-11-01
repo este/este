@@ -53,7 +53,7 @@ function elementsToSlateValue(pageElementId, elementsArray) {
 }
 
 // Eager approach is simple. TODO: Consider lazy resolving with a cache.
-function stylesToStyleSheets(
+function stylesToStyleSheet(
   styles,
   borderValues,
   colorValues,
@@ -88,6 +88,10 @@ function stylesToStyleSheets(
       }
       case 'PERCENTAGE': {
         return { ...dimensions, [id]: `${value}%` };
+      }
+      case 'KEYWORD': {
+        if (value !== 1) return dimensions;
+        return { ...dimensions, [id]: 'auto' };
       }
       default: {
         // eslint-disable-next-line no-unused-expressions
@@ -132,7 +136,7 @@ function stylesToStyleSheets(
     if (value.fontSize != null) json.fontSize = value.fontSize;
     if (value.fontStyle != null) json.fontStyle = value.fontStyle.toLowerCase();
     if (value.fontWeight != null)
-      json.fontWeight = value.fontWeight.toLowerCase().replace('_', '');
+      json.fontWeight = value.fontWeight.toLowerCase().replace('INT_', '');
     if (value.fontVariant != null)
       json.fontVariant = value.fontVariant.toLowerCase().replace('_', '-');
     if (value.letterSpacing != null) json.letterSpacing = value.letterSpacing;
@@ -273,13 +277,19 @@ function stylesToStyleSheets(
     return { isText, style: [...spreadStyles, sheets[styleId]] };
   }
 
-  const styleSheets = styles.reduce((styleSheets, { id, name, nextStyle }) => {
+  const styleSheet = styles.reduce((styleSheet, { id, name, nextStyle }) => {
     const { isText, style } = resolveStyle(id);
-    return { ...styleSheets, [id]: { name, isText, style, nextStyle } };
+    return { ...styleSheet, [id]: { name, isText, style, nextStyle } };
   }, {});
 
-  return styleSheets;
+  return styleSheet;
 }
+
+const slateEditorStyles = {
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
+};
 
 function EditorWithData({
   page,
@@ -296,9 +306,9 @@ function EditorWithData({
     return Value.fromJSON(model);
   });
 
-  const styleSheets = useMemo(
+  const styleSheet = useMemo(
     () =>
-      stylesToStyleSheets(styles, borderValues, colorValues, dimensionValues),
+      stylesToStyleSheet(styles, borderValues, colorValues, dimensionValues),
     [styles, borderValues, colorValues, dimensionValues],
   );
 
@@ -311,8 +321,9 @@ function EditorWithData({
     const data = node.data.get(node.type);
     switch (node.type) {
       case 'style': {
-        const { style, isText } = styleSheets[data.id];
+        const { style, isText } = styleSheet[data.id];
         const Component = isText ? Text : View;
+        // console.log(name, StyleSheet.flatten(style));
         return (
           <Component {...attributes} style={style}>
             {children}
@@ -327,16 +338,19 @@ function EditorWithData({
   }
 
   return (
-    <SlateEditor
-      autoCorrect={false}
-      spellCheck={false}
-      autoFocus
-      value={editorValue}
-      onChange={handleEditorChange}
-      renderNode={renderNode}
-      // renderMark={this.renderMark}
-      // onKeyDown={this.handleEditorKeyDown}
-    />
+    <>
+      <SlateEditor
+        autoCorrect={false}
+        spellCheck={false}
+        autoFocus
+        value={editorValue}
+        onChange={handleEditorChange}
+        renderNode={renderNode}
+        style={slateEditorStyles}
+        // renderMark={this.renderMark}
+        // onKeyDown={this.handleEditorKeyDown}
+      />
+    </>
   );
 }
 

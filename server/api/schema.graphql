@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Oct 31 2018 22:55:15 GMT+0100 (Central European Standard Time)
+# timestamp: Thu Nov 01 2018 22:32:14 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -550,6 +550,7 @@ enum DimensionValueOrderByInput {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
+  KEYWORD
 }
 
 input DimensionValueWhereInput {
