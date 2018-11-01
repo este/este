@@ -1,18 +1,9 @@
 // @flow
 import * as React from 'react';
 import Text, { type TextProps } from './Text';
-import withTheme, { type Theme } from './withTheme';
+import useTheme from './useTheme';
 
-type HeadingProps = {|
-  ...TextProps,
-  theme: Theme,
-|};
-
-class Heading extends React.PureComponent<HeadingProps> {
-  render() {
-    const { style, theme, ...props } = this.props;
-    return <Text style={[theme.styles.heading, style]} {...props} />;
-  }
+export default function Heading({ style, ...props }: TextProps) {
+  const theme = useTheme();
+  return <Text style={[theme.styles.heading, style]} {...props} />;
 }
-
-export default withTheme(Heading);
