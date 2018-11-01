@@ -226,7 +226,6 @@ class MyApp extends App {
           <ErrorContext.Provider value={this.state.errorContext}>
             <LocaleContext.Provider value={this.localeContext}>
               <EnvironmentContext.Provider value={environment}>
-                {/* $FlowFixMe Wrong libdef. */}
                 <RelayProvider environment={environment}>
                   <Component data={pageProps.data} />
                 </RelayProvider>
