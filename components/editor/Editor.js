@@ -1,12 +1,37 @@
 // @flow
+import React, {
 // $FlowFixMe
-import React, { useState, useMemo, type Node } from 'react';
+  useRef,
+  // $FlowFixMe
+  useState,
+  // $FlowFixMe
+  useMemo,
+  // $FlowFixMe
+  useCallback,
+  type Node,
+} from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
 import { Value, KeyUtils } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
 import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
+import { isKeyHotkey } from 'is-hotkey';
+
+type MarkType = 'bold' | 'italic';
+type NodeType = 'style';
+
+const isBoldHotkey = isKeyHotkey('mod+b');
+const isItalicHotkey = isKeyHotkey('mod+i');
+
+const markStyles = StyleSheet.create({
+  bold: {
+    fontWeight: 'bold',
+  },
+  italic: {
+    fontStyle: 'italic',
+  },
+});
 
 function arrayOfItemsWithIdToObject(array) {
   return array.reduce((obj, item) => {
@@ -287,7 +312,7 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
-// Emulate View.
+// Emulate React Native View. We need it for the full available height.
 const slateEditorStyles = {
   display: 'flex',
   flex: 1,
@@ -302,6 +327,8 @@ function EditorWithData({
   colorValues,
   dimensionValues,
 }) {
+  const editor = useRef(null);
+
   const [editorValue, setEditorValue] = useState(() => {
     const model = elementsToSlateValue(page.element.id, elements);
     // For SSR.
@@ -315,14 +342,38 @@ function EditorWithData({
     [styles, borderValues, colorValues, dimensionValues],
   );
 
-  function handleEditorChange({ value }) {
+  const handleEditorChange = useCallback(({ value }) => {
     setEditorValue(value);
+  }, []);
+
+  // https://github.com/ianstormtaylor/slate/issues/2352
+  const handleEditorFocus = useCallback((event, change) => {
+    change.focus();
+  }, []);
+
+  function toggleMark(event: Event, mark: MarkType) {
+    event.preventDefault();
+    if (!editor.current) return;
+    editor.current.toggleMark(mark);
   }
 
+  const handleEditorKeyDown = useCallback((event, _, next) => {
+    if (isBoldHotkey(event)) {
+      toggleMark(event, 'bold');
+    } else if (isItalicHotkey(event)) {
+      toggleMark(event, 'italic');
+    } else {
+      return next();
+    }
+  });
+
+  // We can't use useCallback.
+  // https://github.com/facebook/react/issues/14080
   function renderNode(props, editor, next) {
     const { node, attributes, children } = props;
-    const data = node.data.get(node.type);
-    switch (node.type) {
+    const type: NodeType = node.type;
+    const data = node.data.get(type);
+    switch (type) {
       case 'style': {
         const { style, isText } = styleSheet[data.id];
         const Component = isText ? Text : View;
@@ -335,8 +386,37 @@ function EditorWithData({
       }
       // case 'component':
       //   return <blockquote {...attributes}>{children}</blockquote>;
-      default:
+      default: {
+        // eslint-disable-next-line no-unused-expressions
+        (type: empty);
         return next();
+      }
+    }
+  }
+
+  // We can't use useCallback.
+  // https://github.com/facebook/react/issues/14080
+  function renderMark(props, editor, next) {
+    const { children, mark, attributes } = props;
+    const type: MarkType = mark.type;
+    switch (type) {
+      case 'bold':
+        return (
+          <Text {...attributes} style={markStyles.bold}>
+            {children}
+          </Text>
+        );
+      case 'italic':
+        return (
+          <Text {...attributes} style={markStyles.italic}>
+            {children}
+          </Text>
+        );
+      default: {
+        // eslint-disable-next-line no-unused-expressions
+        (type: empty);
+        return next();
+      }
     }
   }
 
@@ -346,12 +426,14 @@ function EditorWithData({
         autoCorrect={false}
         spellCheck={false}
         autoFocus
+        ref={editor}
         value={editorValue}
-        onChange={handleEditorChange}
-        renderNode={renderNode}
         style={slateEditorStyles}
-        // renderMark={this.renderMark}
-        // onKeyDown={this.handleEditorKeyDown}
+        onChange={handleEditorChange}
+        onFocus={handleEditorFocus}
+        onKeyDown={handleEditorKeyDown}
+        renderNode={renderNode}
+        renderMark={renderMark}
       />
       <EditorMenu value={editorValue} />
     </>
