@@ -6,6 +6,7 @@ import type { Editor as Data } from './__generated__/Editor.graphql';
 import { Value, KeyUtils } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
 import { View, Text, StyleSheet } from 'react-native';
+import EditorMenu from './EditorMenu';
 
 function arrayOfItemsWithIdToObject(array) {
   return array.reduce((obj, item) => {
@@ -252,6 +253,7 @@ function stylesToStyleSheet(
       json.paddingTop = dimensions[value.paddingTop.id];
     if (value.paddingVertical != null)
       json.paddingVertical = dimensions[value.paddingVertical.id];
+    // $FlowFixMe
     const sheet = StyleSheet.create({ json }).json;
     return { ...sheets, [value.id]: sheet };
   }, {});
@@ -351,13 +353,18 @@ function EditorWithData({
         // renderMark={this.renderMark}
         // onKeyDown={this.handleEditorKeyDown}
       />
+      <EditorMenu value={editorValue} />
     </>
   );
 }
 
+type EditorProps = {|
+  data: Data,
+|};
+
 // Because of Flow 0.85, funcional component must type return, otherwise
 // EditorWithData type inference does not work.
-function Editor({ data: { page } }: {| data: Data |}): Node {
+function Editor({ data: { page } }: EditorProps): Node {
   if (
     page == null ||
     page.web.borderValues == null ||
