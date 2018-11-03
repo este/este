@@ -1,6 +1,7 @@
 // @flow
+/* eslint-env browser */
 // $FlowFixMe
-import React, { useState, useEffect, type Node } from 'react';
+import { useState, useEffect, type Node } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function usePortal() {

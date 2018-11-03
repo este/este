@@ -2,7 +2,7 @@
 /* eslint-env browser */
 // $FlowFixMe
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
